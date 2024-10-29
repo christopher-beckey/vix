@@ -1,0 +1,704 @@
+KIDS Distribution saved on Jul 25, 2012@16:31:38
+Split from blank VI database - last patch SEQ81_P120
+**KIDS**:MAG*3.0*350_DD*2005.81^
+
+**INSTALL NAME**
+MAG*3.0*350_DD*2005.81
+"BLD",7724,0)
+MAG*3.0*350_DD*2005.81^IMAGING^0^3120725^n
+"BLD",7724,4,0)
+^9.64PA^2005.81^1
+"BLD",7724,4,2005.81,0)
+2005.81
+"BLD",7724,4,2005.81,222)
+y^y^f^^^^y
+"BLD",7724,4,"B",2005.81,2005.81)
+
+"BLD",7724,6.3)
+2
+"BLD",7724,"KRN",0)
+^9.67PA^779.2^20
+"BLD",7724,"KRN",.4,0)
+.4
+"BLD",7724,"KRN",.401,0)
+.401
+"BLD",7724,"KRN",.402,0)
+.402
+"BLD",7724,"KRN",.403,0)
+.403
+"BLD",7724,"KRN",.5,0)
+.5
+"BLD",7724,"KRN",.84,0)
+.84
+"BLD",7724,"KRN",3.6,0)
+3.6
+"BLD",7724,"KRN",3.8,0)
+3.8
+"BLD",7724,"KRN",9.2,0)
+9.2
+"BLD",7724,"KRN",9.8,0)
+9.8
+"BLD",7724,"KRN",19,0)
+19
+"BLD",7724,"KRN",19.1,0)
+19.1
+"BLD",7724,"KRN",101,0)
+101
+"BLD",7724,"KRN",409.61,0)
+409.61
+"BLD",7724,"KRN",771,0)
+771
+"BLD",7724,"KRN",779.2,0)
+779.2
+"BLD",7724,"KRN",870,0)
+870
+"BLD",7724,"KRN",8989.51,0)
+8989.51
+"BLD",7724,"KRN",8989.52,0)
+8989.52
+"BLD",7724,"KRN",8994,0)
+8994
+"BLD",7724,"KRN","B",.4,.4)
+
+"BLD",7724,"KRN","B",.401,.401)
+
+"BLD",7724,"KRN","B",.402,.402)
+
+"BLD",7724,"KRN","B",.403,.403)
+
+"BLD",7724,"KRN","B",.5,.5)
+
+"BLD",7724,"KRN","B",.84,.84)
+
+"BLD",7724,"KRN","B",3.6,3.6)
+
+"BLD",7724,"KRN","B",3.8,3.8)
+
+"BLD",7724,"KRN","B",9.2,9.2)
+
+"BLD",7724,"KRN","B",9.8,9.8)
+
+"BLD",7724,"KRN","B",19,19)
+
+"BLD",7724,"KRN","B",19.1,19.1)
+
+"BLD",7724,"KRN","B",101,101)
+
+"BLD",7724,"KRN","B",409.61,409.61)
+
+"BLD",7724,"KRN","B",771,771)
+
+"BLD",7724,"KRN","B",779.2,779.2)
+
+"BLD",7724,"KRN","B",870,870)
+
+"BLD",7724,"KRN","B",8989.51,8989.51)
+
+"BLD",7724,"KRN","B",8989.52,8989.52)
+
+"BLD",7724,"KRN","B",8994,8994)
+
+"DATA",2005.81,1,0)
+ANATOMIC DIAGRAM^CLIN
+"DATA",2005.81,1,2)
+NONE^1^76
+"DATA",2005.81,4,0)
+CONSULT FORM^CLIN
+"DATA",2005.81,4,2)
+NONE^1^80
+"DATA",2005.81,6,0)
+INSURANCE FORM^ADMIN
+"DATA",2005.81,6,2)
+NONE^8^6
+"DATA",2005.81,10,0)
+ENCOUNTER FORM^CLIN
+"DATA",2005.81,10,2)
+NONE^1^73
+"DATA",2005.81,12,0)
+OTHER-MEDICAL^CLIN
+"DATA",2005.81,12,2)
+NONE^1
+"DATA",2005.81,13,0)
+OTHER-NON-MEDICAL^OLD
+"DATA",2005.81,13,2)
+NONE^8^45
+"DATA",2005.81,15,0)
+ADMIN^OLD
+"DATA",2005.81,15,2)
+NONE^8
+"DATA",2005.81,16,0)
+VAS^CLIN
+"DATA",2005.81,16,2)
+NONE^1^^117^21
+"DATA",2005.81,17,0)
+DRM^CLIN
+"DATA",2005.81,17,2)
+NONE^1^^^19
+"DATA",2005.81,18,0)
+ABG^CLIN
+"DATA",2005.81,18,2)
+NONE^1^^110
+"DATA",2005.81,19,0)
+ENDOC^CLIN
+"DATA",2005.81,19,2)
+NONE^1^^^12
+"DATA",2005.81,20,0)
+BMA^CLIN
+"DATA",2005.81,20,2)
+NONE^1^^118^4
+"DATA",2005.81,21,0)
+NEU^CLIN
+"DATA",2005.81,21,2)
+NONE^1^^^27
+"DATA",2005.81,22,0)
+Wound assessment^CLIN
+"DATA",2005.81,22,2)
+NONE^1^^119
+"DATA",2005.81,23,0)
+POD^CLIN
+"DATA",2005.81,23,2)
+NONE^1^^^23
+"DATA",2005.81,24,0)
+DENTAL^CLIN
+"DATA",2005.81,24,2)
+NONE^1^^^53
+"DATA",2005.81,25,0)
+ANGIO^CLIN
+"DATA",2005.81,25,2)
+NONE^1^^109
+"DATA",2005.81,26,0)
+OPH^CLIN
+"DATA",2005.81,26,2)
+NONE^1^^^17
+"DATA",2005.81,27,0)
+ECG^CLIN
+"DATA",2005.81,27,2)
+NONE^1^^3^2
+"DATA",2005.81,28,0)
+AUD^CLIN
+"DATA",2005.81,28,2)
+NONE^1^^^58
+"DATA",2005.81,29,0)
+LHC^CLIN
+"DATA",2005.81,29,2)
+NONE^1^^^30
+"DATA",2005.81,30,0)
+GEN^CLIN
+"DATA",2005.81,30,2)
+NONE^1^^^47
+"DATA",2005.81,31,0)
+ERC^CLIN
+"DATA",2005.81,31,2)
+NONE^1^^79^3
+"DATA",2005.81,32,0)
+ORTH^CLIN
+"DATA",2005.81,32,2)
+NONE^1^^^16
+"DATA",2005.81,33,0)
+RHEUM^CLIN
+"DATA",2005.81,33,2)
+NONE^1^^^9
+"DATA",2005.81,34,0)
+ULTSND^CLIN
+"DATA",2005.81,34,2)
+NONE^1^^108
+"DATA",2005.81,35,0)
+DERM^CLIN
+"DATA",2005.81,35,2)
+NONE^1^^^19
+"DATA",2005.81,36,0)
+ENT^CLIN
+"DATA",2005.81,36,2)
+NONE^1^^^24
+"DATA",2005.81,37,0)
+IMM^CLIN
+"DATA",2005.81,37,2)
+NONE^1^^^34
+"DATA",2005.81,38,0)
+Hematology^CLIN
+"DATA",2005.81,38,2)
+NONE^1^^^4
+"DATA",2005.81,39,0)
+BSW^CLIN
+"DATA",2005.81,39,2)
+NONE^1^^^58
+"DATA",2005.81,40,0)
+SPEECH TH.^CLIN
+"DATA",2005.81,40,2)
+NONE^1^^^58
+"DATA",2005.81,41,0)
+EEG^CLIN
+"DATA",2005.81,41,2)
+NONE^1^^120^27
+"DATA",2005.81,42,0)
+Clinical Picture^CLIN
+"DATA",2005.81,42,2)
+NONE^1^75
+"DATA",2005.81,43,0)
+ARTH^CLIN
+"DATA",2005.81,43,2)
+NONE^1^^7^16
+"DATA",2005.81,44,0)
+UNASSIGNED^CLIN
+"DATA",2005.81,44,2)
+NONE^9
+"DATA",2005.81,45,0)
+MISCELLANEOUS^ADMIN
+"DATA",2005.81,45,2)
+NONE^8^77
+"DATA",2005.81,46,0)
+MEANS TEST (10-10EZ)^ADMIN
+"DATA",2005.81,46,1)
+0^Copy this image to the HEC Server^HEC^MAGGSPP
+"DATA",2005.81,46,2)
+NONE^8^46
+"DATA",2005.81,47,0)
+MEANS TEST (10-10F)^ADMIN
+"DATA",2005.81,47,1)
+0^Copy this image to the HEC Server^HEC^MAGGSPP
+"DATA",2005.81,47,2)
+NONE^8^47
+"DATA",2005.81,48,0)
+ALLIED VETERAN^ADMIN
+"DATA",2005.81,48,2)
+NONE^8^48
+"DATA",2005.81,49,0)
+APPT OF VSO AS CLAIMANT'S REP^ADMIN
+"DATA",2005.81,49,2)
+NONE^8^49
+"DATA",2005.81,50,0)
+CORRESPONDENCE^ADMIN
+"DATA",2005.81,50,2)
+NONE^8^50
+"DATA",2005.81,51,0)
+DD214 ENLISTED RECORD & RPT OF SEP^ADMIN
+"DATA",2005.81,51,2)
+NONE^8^51
+"DATA",2005.81,52,0)
+DEATH CERTIFICATE^ADMIN
+"DATA",2005.81,52,2)
+NONE^9^52
+"DATA",2005.81,53,0)
+DENIAL LETTER^ADMIN
+"DATA",2005.81,53,2)
+NONE^8^53
+"DATA",2005.81,54,0)
+DISCHARGE AGAINST MEDICAL ADVICE^ADMIN
+"DATA",2005.81,54,2)
+NONE^9^54
+"DATA",2005.81,55,0)
+ELIGIBILITY (10-7131)^ADMIN
+"DATA",2005.81,55,2)
+NONE^8^7
+"DATA",2005.81,56,0)
+FINANCIAL WORKSHEET^ADMIN
+"DATA",2005.81,56,2)
+NONE^8^56
+"DATA",2005.81,57,0)
+INVENTORY OF FUNDS AND EFFECTS^ADMIN
+"DATA",2005.81,57,2)
+NONE^8^57
+"DATA",2005.81,58,0)
+MEDICAL CERTIFICATE^ADMIN
+"DATA",2005.81,58,2)
+NONE^8^58
+"DATA",2005.81,59,0)
+HEALTH INSURANCE CARDS^ADMIN
+"DATA",2005.81,59,2)
+NONE^8^59
+"DATA",2005.81,60,0)
+PLENARY GUARDIANSHIP^ADMIN
+"DATA",2005.81,60,2)
+NONE^9^60
+"DATA",2005.81,61,0)
+POWER OF ATTORNEY^ADMIN
+"DATA",2005.81,61,2)
+NONE^9^61
+"DATA",2005.81,62,0)
+REPORT OF CONTACT^ADMIN
+"DATA",2005.81,62,2)
+NONE^8^62
+"DATA",2005.81,63,0)
+REQUEST FOR INFORMATION^ADMIN
+"DATA",2005.81,63,2)
+NONE^8^63
+"DATA",2005.81,64,0)
+VALUABLES / BELONGINGS CHECKLIST^ADMIN
+"DATA",2005.81,64,2)
+NONE^8^64
+"DATA",2005.81,65,0)
+DESIGNATION OF HEALTHCARE SURROGATE^ADMIN
+"DATA",2005.81,65,2)
+NONE^9^65
+"DATA",2005.81,66,0)
+LOCAL SITE ENTRY
+"DATA",2005.81,66,2)
+NONE^9^45
+"DATA",2005.81,67,0)
+REQUEST FOR AUTOPSY
+"DATA",2005.81,67,2)
+NONE^9^82
+"DATA",2005.81,68,0)
+ADVANCE DIRECTIVE
+"DATA",2005.81,68,2)
+^7^67
+"DATA",2005.81,69,0)
+RELEASE OF INFORMATION CONSENTS
+"DATA",2005.81,69,2)
+NONE^9^83
+"DATA",2005.81,70,0)
+COMMITMENT 1013
+"DATA",2005.81,70,2)
+NONE^9^81
+"DATA",2005.81,71,0)
+COMMITMENT 2013
+"DATA",2005.81,71,2)
+NONE^9^81
+"DATA",2005.81,72,0)
+PHOTO ID^CLIN
+"FIA",2005.81)
+MAG DESCRIPTIVE CATEGORIES
+"FIA",2005.81,0)
+^MAG(2005.81,
+"FIA",2005.81,0,0)
+2005.81
+"FIA",2005.81,0,1)
+y^y^f^^^^y
+"FIA",2005.81,0,10)
+
+"FIA",2005.81,0,11)
+
+"FIA",2005.81,0,"RLRO")
+
+"FIA",2005.81,0,"VR")
+3.0^MAG
+"FIA",2005.81,2005.81)
+0
+"MBREQ")
+0
+"PKG",454,-1)
+1^1
+"PKG",454,0)
+IMAGING^MAG^Imaging-V1 to release 
+"PKG",454,20,0)
+^9.402P^^
+"PKG",454,22,0)
+^9.49I^1^1
+"PKG",454,22,1,0)
+3.0^3020319^3120725^126
+"PKG",454,22,1,"PAH",1,0)
+350_DD^3120725
+"QUES","XPF1",0)
+Y
+"QUES","XPF1","??")
+^D REP^XPDH
+"QUES","XPF1","A")
+Shall I write over your |FLAG| File
+"QUES","XPF1","B")
+YES
+"QUES","XPF1","M")
+D XPF1^XPDIQ
+"QUES","XPF2",0)
+Y
+"QUES","XPF2","??")
+^D DTA^XPDH
+"QUES","XPF2","A")
+Want my data |FLAG| yours
+"QUES","XPF2","B")
+YES
+"QUES","XPF2","M")
+D XPF2^XPDIQ
+"QUES","XPI1",0)
+YO
+"QUES","XPI1","??")
+^D INHIBIT^XPDH
+"QUES","XPI1","A")
+Want KIDS to INHIBIT LOGONs during the install
+"QUES","XPI1","B")
+NO
+"QUES","XPI1","M")
+D XPI1^XPDIQ
+"QUES","XPM1",0)
+PO^VA(200,:EM
+"QUES","XPM1","??")
+^D MG^XPDH
+"QUES","XPM1","A")
+Enter the Coordinator for Mail Group '|FLAG|'
+"QUES","XPM1","B")
+
+"QUES","XPM1","M")
+D XPM1^XPDIQ
+"QUES","XPO1",0)
+Y
+"QUES","XPO1","??")
+^D MENU^XPDH
+"QUES","XPO1","A")
+Want KIDS to Rebuild Menu Trees Upon Completion of Install
+"QUES","XPO1","B")
+NO
+"QUES","XPO1","M")
+D XPO1^XPDIQ
+"QUES","XPZ1",0)
+Y
+"QUES","XPZ1","??")
+^D OPT^XPDH
+"QUES","XPZ1","A")
+Want to DISABLE Scheduled Options, Menu Options, and Protocols
+"QUES","XPZ1","B")
+NO
+"QUES","XPZ1","M")
+D XPZ1^XPDIQ
+"QUES","XPZ2",0)
+Y
+"QUES","XPZ2","??")
+^D RTN^XPDH
+"QUES","XPZ2","A")
+Want to MOVE routines to other CPUs
+"QUES","XPZ2","B")
+NO
+"QUES","XPZ2","M")
+D XPZ2^XPDIQ
+"SEC","^DIC",2005.81,2005.81,0,"AUDIT")
+
+"SEC","^DIC",2005.81,2005.81,0,"DD")
+@
+"SEC","^DIC",2005.81,2005.81,0,"DEL")
+@
+"SEC","^DIC",2005.81,2005.81,0,"LAYGO")
+@
+"SEC","^DIC",2005.81,2005.81,0,"RD")
+@
+"SEC","^DIC",2005.81,2005.81,0,"WR")
+@
+"VER")
+8.0^22.0
+"^DD",2005.81,2005.81,0)
+FIELD^^45^12
+"^DD",2005.81,2005.81,0,"DDA")
+N
+"^DD",2005.81,2005.81,0,"DT")
+3030814
+"^DD",2005.81,2005.81,0,"IX","B",2005.81,.01)
+
+"^DD",2005.81,2005.81,0,"NM","MAG DESCRIPTIVE CATEGORIES")
+
+"^DD",2005.81,2005.81,0,"PT",2005,100)
+
+"^DD",2005.81,2005.81,0,"PT",2005.1,100)
+
+"^DD",2005.81,2005.81,0,"VRPK")
+MAG
+"^DD",2005.81,2005.81,.01,0)
+NAME^RF^^0;1^K:$L(X)>40!($L(X)<3)!'(X'?1P.E) X
+"^DD",2005.81,2005.81,.01,1,0)
+^.1
+"^DD",2005.81,2005.81,.01,1,1,0)
+2005.81^B
+"^DD",2005.81,2005.81,.01,1,1,1)
+S ^MAG(2005.81,"B",$E(X,1,30),DA)=""
+"^DD",2005.81,2005.81,.01,1,1,2)
+K ^MAG(2005.81,"B",$E(X,1,30),DA)
+"^DD",2005.81,2005.81,.01,3)
+Answer must be 3-40 characters in length.
+"^DD",2005.81,2005.81,.01,21,0)
+^.001^4^4^3011206^^^^
+"^DD",2005.81,2005.81,.01,21,1,0)
+Descriptive name of the category or document type.  
+"^DD",2005.81,2005.81,.01,21,2,0)
+The list of categories is presented to the VistA Imaging Capture user
+"^DD",2005.81,2005.81,.01,21,3,0)
+when they select 'User defined Specialty/Category' or 'ADMIN'. 
+"^DD",2005.81,2005.81,.01,21,4,0)
+can be entered.
+"^DD",2005.81,2005.81,.01,23,0)
+^.001^2^2^3011206^^^^
+"^DD",2005.81,2005.81,.01,23,1,0)
+This file is pointed to by the IMAGE (2005) and IMAGE AUDIT (2005.1) Files.
+"^DD",2005.81,2005.81,.01,23,2,0)
+
+"^DD",2005.81,2005.81,.01,"DT")
+3011206
+"^DD",2005.81,2005.81,1,0)
+CLASS^S^ADMIN:ADMIN;CLIN:CLIN;OLD:OLD;^0;2^Q
+"^DD",2005.81,2005.81,1,21,0)
+^^4^4^3011218^
+"^DD",2005.81,2005.81,1,21,1,0)
+This field indicates the class of document/image being captured.  Defined 
+"^DD",2005.81,2005.81,1,21,2,0)
+classes include Adminstrative (A) for scanned documents, Clinical (C) for 
+"^DD",2005.81,2005.81,1,21,3,0)
+images not associated with a VistA package report, or Old (O) for 
+"^DD",2005.81,2005.81,1,21,4,0)
+categories that are no longer used.
+"^DD",2005.81,2005.81,1,"DT")
+3011205
+"^DD",2005.81,2005.81,10,0)
+ACTION IS ACTIVE^S^1:YES;0:NO;^1;1^Q
+"^DD",2005.81,2005.81,10,3)
+The Action is performed on a successful save of an Image if this field is '1'
+"^DD",2005.81,2005.81,10,21,0)
+^^1^1^3011210^
+"^DD",2005.81,2005.81,10,21,1,0)
+The action associated with this type of Document is performed when the image is first successfully saved.  This flag can turn On/Off the processing of the Action.
+"^DD",2005.81,2005.81,10,"DT")
+3011210
+"^DD",2005.81,2005.81,11,0)
+ACTION DESC^F^^1;2^K:$L(X)>60!($L(X)<3) X
+"^DD",2005.81,2005.81,11,3)
+A short description of this action
+"^DD",2005.81,2005.81,11,21,0)
+^.001^3^3^3011218^^
+"^DD",2005.81,2005.81,11,21,1,0)
+This field indicates whether some software action will be taken when this 
+"^DD",2005.81,2005.81,11,21,2,0)
+type of image is captured.  For example, scanned MEANS TESTS will be 
+"^DD",2005.81,2005.81,11,21,3,0)
+automatically copied to a subdirectory at the HEC.
+"^DD",2005.81,2005.81,11,"DT")
+3011210
+"^DD",2005.81,2005.81,12,0)
+ACTION TAG^F^^1;3^K:$L(X)>8!($L(X)<2) X
+"^DD",2005.81,2005.81,12,3)
+Answer must be 2-8 characters in length.
+"^DD",2005.81,2005.81,12,9)
+@
+"^DD",2005.81,2005.81,12,21,0)
+^.001^1^1^3011218^^
+"^DD",2005.81,2005.81,12,21,1,0)
+The TAG of the Routine that will be called to perform the action.
+"^DD",2005.81,2005.81,12,"DT")
+3011210
+"^DD",2005.81,2005.81,13,0)
+ACTION ROUTINE^F^^1;4^K:$L(X)>8!($L(X)<2) X
+"^DD",2005.81,2005.81,13,3)
+Answer must be 2-8 characters in length.
+"^DD",2005.81,2005.81,13,9)
+@
+"^DD",2005.81,2005.81,13,21,0)
+^.001^1^1^3011218^^^
+"^DD",2005.81,2005.81,13,21,1,0)
+The routine to call to perform the action.
+"^DD",2005.81,2005.81,13,"DT")
+3011210
+"^DD",2005.81,2005.81,40,0)
+PACKAGE INDEX^S^RAD:RAD;LAB:LAB;MED:MED;NOTE:NOTE;CP:CP;SUR:SUR;CONS:CONS;PHOTOID:PHOTOID;NONE:NONE;^2;1^Q
+"^DD",2005.81,2005.81,40,3)
+The package associated with the image.
+"^DD",2005.81,2005.81,40,21,0)
+^^1^1^3020819^
+"^DD",2005.81,2005.81,40,21,1,0)
+This is an abbreviation of the package that the image is attached to.
+"^DD",2005.81,2005.81,40,"DT")
+3030203
+"^DD",2005.81,2005.81,41,0)
+CLASS INDEX^P2005.82'^MAG(2005.82,^2;2^Q
+"^DD",2005.81,2005.81,41,21,0)
+^^2^2^3020819^
+"^DD",2005.81,2005.81,41,21,1,0)
+The Classification of the images.  CLASS is an index field used for 
+"^DD",2005.81,2005.81,41,21,2,0)
+sorting and searching.
+"^DD",2005.81,2005.81,41,"DT")
+3030203
+"^DD",2005.81,2005.81,42,0)
+TYPE INDEX^P2005.83'^MAG(2005.83,^2;3^Q
+"^DD",2005.81,2005.81,42,21,0)
+^^1^1^3020819^
+"^DD",2005.81,2005.81,42,21,1,0)
+The TYPE of image.  TYPE is an index field used for sorting and searching.
+"^DD",2005.81,2005.81,42,"DT")
+3030203
+"^DD",2005.81,2005.81,43,0)
+PROC/EVENT INDEX^P2005.85'^MAG(2005.85,^2;4^Q
+"^DD",2005.81,2005.81,43,21,0)
+^^2^2^3020819^
+"^DD",2005.81,2005.81,43,21,1,0)
+The PROCEDURE/EVENT of the image.  PROCEDURE/EVENT is an index field used
+"^DD",2005.81,2005.81,43,21,2,0)
+for sorting and searching.
+"^DD",2005.81,2005.81,43,"DT")
+3030203
+"^DD",2005.81,2005.81,44,0)
+SPEC/SUBSPEC INDEX^P2005.84'^MAG(2005.84,^2;5^Q
+"^DD",2005.81,2005.81,44,21,0)
+^^2^2^3020819^
+"^DD",2005.81,2005.81,44,21,1,0)
+The SPECIALTY/SUBSPECIALTY of the image.  SPECIALTY/SUBSPECIALTY is an
+"^DD",2005.81,2005.81,44,21,2,0)
+index field used for sorting and searching.
+"^DD",2005.81,2005.81,44,"DT")
+3030203
+"^DD",2005.81,2005.81,45,0)
+ORIGIN INDEX^S^V:VA;N:NON-VA;^2;6^Q
+"^DD",2005.81,2005.81,45,21,0)
+^^2^2^3030814^
+"^DD",2005.81,2005.81,45,21,1,0)
+This field is used to indicate whether the image or document originated 
+"^DD",2005.81,2005.81,45,21,2,0)
+inside or outside VA.
+"^DD",2005.81,2005.81,45,"DT")
+3030814
+"^DIC",2005.81,2005.81,0)
+MAG DESCRIPTIVE CATEGORIES^2005.81
+"^DIC",2005.81,2005.81,0,"GL")
+^MAG(2005.81,
+"^DIC",2005.81,2005.81,"%",0)
+^1.005^1^1
+"^DIC",2005.81,2005.81,"%",1,0)
+MAG
+"^DIC",2005.81,2005.81,"%","B","MAG",1)
+
+"^DIC",2005.81,2005.81,"%D",0)
+^1.001^24^24^3011217^^^
+"^DIC",2005.81,2005.81,"%D",1,0)
+ +---------------------------------------------------------------+
+"^DIC",2005.81,2005.81,"%D",2,0)
+ |                                                               |
+"^DIC",2005.81,2005.81,"%D",3,0)
+ | Property of the US Government.                                |
+"^DIC",2005.81,2005.81,"%D",4,0)
+ | No permission to copy or redistribute this software is given. |
+"^DIC",2005.81,2005.81,"%D",5,0)
+ | Use of unreleased versions of this software requires the user |
+"^DIC",2005.81,2005.81,"%D",6,0)
+ | to execute a written test agreement with the VistA Imaging    |
+"^DIC",2005.81,2005.81,"%D",7,0)
+ | Development Office of the Department of Veterans Affairs,     |
+"^DIC",2005.81,2005.81,"%D",8,0)
+ | telephone (301) 734-0100.                                     |
+"^DIC",2005.81,2005.81,"%D",9,0)
+ |                                                               |
+"^DIC",2005.81,2005.81,"%D",10,0)
+ | The Food and Drug Administration classifies this software as  |
+"^DIC",2005.81,2005.81,"%D",11,0)
+ | a  medical device.  As such, it may not be changed            |
+"^DIC",2005.81,2005.81,"%D",12,0)
+ | in any way.  Modifications to this software may result in an  |
+"^DIC",2005.81,2005.81,"%D",13,0)
+ | adulterated medical device under 21CFR820, the use of which   |
+"^DIC",2005.81,2005.81,"%D",14,0)
+ | is considered to be a violation of US Federal Statutes.       |
+"^DIC",2005.81,2005.81,"%D",15,0)
+ |                                                               |
+"^DIC",2005.81,2005.81,"%D",16,0)
+ +---------------------------------------------------------------+
+"^DIC",2005.81,2005.81,"%D",17,0)
+ 
+"^DIC",2005.81,2005.81,"%D",18,0)
+ The purpose of this file is to present a standard list of Image 
+"^DIC",2005.81,2005.81,"%D",19,0)
+Categories to the user.
+"^DIC",2005.81,2005.81,"%D",20,0)
+ The user of the VistA Imaging Capture application is able to 
+"^DIC",2005.81,2005.81,"%D",21,0)
+select from this list during the capturing of images that are not
+"^DIC",2005.81,2005.81,"%D",22,0)
+associated with a specific VistA Package.
+"^DIC",2005.81,2005.81,"%D",23,0)
+This file is pointed to by the Image file (2005) and the Image
+"^DIC",2005.81,2005.81,"%D",24,0)
+Audit file (2005.1).
+"^DIC",2005.81,"B","MAG DESCRIPTIVE CATEGORIES",2005.81)
+
+**END**
+**END**

@@ -1,0 +1,103 @@
+@inherits Nancy.ViewEngines.Razor.NancyRazorViewBase<ViewerModel>
+    @using Hydra.Web
+    <!DOCTYPE html>
+    <html>
+
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+        <meta content="utf-8" http-equiv="encoding">
+        <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+
+        <title>VIX Viewer Image Manager</title>
+
+        <!-- CSS files -->
+        @Html.HydraCss("../js/jquery-ui-1.8.23.custom/css/custom-theme/jquery-ui-1.8.23.custom.css")
+        @Html.HydraCss("../bootstrap/css/bootstrap.css")
+        @Html.HydraCss("../style/css/style.css")
+        @Html.HydraCss("../style/kendo/kendo.common.min.css")
+        @Html.HydraCss("../style/kendo/kendo.rtl.min.css")
+        @Html.HydraCss("../style/kendo/kendo.default.min.css")
+        @Html.HydraCss("../style/kendo/kendo.dataviz.min.css")
+        @Html.HydraCss("../style/kendo/kendo.dataviz.default.min.css")
+        @Html.HydraCss("../style/kendo/kendo.mobile.all.min.css")
+        @Html.HydraCss("../style/css/buttonDesigns.css")
+        @Html.HydraCss("../style/css/viewportView.css")
+        @Html.HydraCss("../style/css/toolbarRegion.css")
+        @Html.HydraCss("../style/css/imageThumbnailView.css")
+        @Html.HydraCss("../style/css/manage.css")
+        @Html.HydraCss("../style/datepicker.min.css")
+
+        <script>
+            //vvvvvvvvvvv TODO VAI-919: Change var to const vvvvvvvvvv
+            var rootURL = "@Model.BaseUrl"; //VAI-915
+            var baseURL = "@Model.BaseApiUrl";
+            var baseViewerURL = "@Model.BaseViewerUrl";
+            var baseSignalrURL = "@Model.BaseSignalrUrl";
+            //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        </script>
+
+        <!-- Javascript files -->
+        @Html.HydraScript("../js/basic.min.js")
+        @Html.HydraScript("../js/layouts/jquery-latest.js")
+        @Html.HydraScript("../js/layouts/jquery-ui-latest.js")
+        @Html.HydraScript("../js/layouts/jquery.layout-latest.js")
+        @Html.HydraScript("../js/spin.js")
+        @Html.HydraScript("../bootstrap/js/bootstrap.js")
+        @Html.HydraScript("../bootstrap/js/dropdowns-enhancement.js")
+
+        @Html.HydraScript("../js/cache/manage.cache.min.js")
+        @Html.HydraScript("../js/viewer/renderer/manage.core.min.js")
+        @Html.HydraScript("../js/kendo/kendo.all.min.js")
+        @Html.HydraScript("../js/manage/manage.toolbar.min.js")
+        @Html.HydraScript("../js/manage/manage.render.min.js")
+        @Html.HydraScript("../js/imageProgressManager.js")
+        @Html.HydraScript("../js/urlConfig.min.js")
+        @Html.HydraScript("../js/manage/manage.worker.min.js")
+        @Html.HydraScript("../js/datepicker.min.js")
+
+    </head>
+
+    <body id="dicomViewer" oncontextmenu="return false;">
+
+        <div id="northlayout" class="ui-layout-north">
+            <!-- Series View -->
+            <div class="form-group row">
+                <div class="col-xs-10" id="patient_Info">
+                    <div id="pName"></div>
+                    <div id="dob"></div>
+                </div>
+            </div>
+            <div id="manage_toolbar" style="margin-left: -5px;margin-top: -15px;"></div>
+            <div id="manage_img" class="ui-layout-center white ui-layout-pane" style="margin-top: 18px;">
+                <div id="manage_ImageThumbnail_View" class="disableSelection"></div>
+            </div>
+        </div>
+
+        <!-- Image Viewer -->=
+        <div id="manage_viewer" class="ui-layout-west">
+            <div id="manage_thumbnail_View" style="height: 100%; width: 100%; display:none"></div>
+        </div>
+
+        <!-- Image Information -->
+        <div class="ui-layout-center white-space-pre white">
+            <div id="imageInfo"></div>
+        </div>
+
+        <!-- Image Thumbnail Context Menu -->
+        <ul id="imageThumbnailContextMenu" oncontextmenu="return false;" style="background: #363636;display:none">
+            <li><a href="#" id="context-MarkDelete" style="color:white; display:none" onclick="doMarkDelete()">Mark Delete</a></li>
+            <li><a href="#" id="context-MarkSensitive" style="color:white; display:none" onclick="doMarkSensitive()">Mark Sensitive</a></li>
+        </ul>
+
+        <!--splash - window - delete - sensitive server call -->
+        <div id="splash-window" class="absoluteCenter">
+            <div id="splash-content">
+            </div>
+        </div>
+        <script>
+            $(window).on('load', function () { });
+        </script>
+    </body>
+
+    </html>

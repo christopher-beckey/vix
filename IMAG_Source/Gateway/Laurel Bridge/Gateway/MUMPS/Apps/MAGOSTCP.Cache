@@ -1,0 +1,154 @@
+01/16/2007 07:19
+Saved from DICOM
+MAGOSTCP
+MAGOSTCP ;WOIFO/PMK/EdM - Host Operating System Utilities ; 01/16/2007 07:19
+ ;;3.0;IMAGING;;1-May-2003
+ ;; +---------------------------------------------------------------+
+ ;; | Property of the US Government.                                |
+ ;; | No permission to copy or redistribute this software is given. |
+ ;; | Use of unreleased versions of this software requires the user |
+ ;; | to execute a written test agreement with the VistA Imaging    |
+ ;; | Development Office of the Department of Veterans Affairs,     |
+ ;; | telephone (301) 734-0100.                                     |
+ ;; |                                                               |
+ ;; | The Food and Drug Administration classifies this software as  |
+ ;; | a medical device.  As such, it may not be changed in any way. |
+ ;; | Modifications to this software may result in an adulterated   |
+ ;; | medical device under 21CFR820, the use of which is considered |
+ ;; | to be a violation of US Federal Statutes.                     |
+ ;; +---------------------------------------------------------------+
+ ;;
+ ; Callable entries are:
+ ;
+ ; TCP/IP communication
+ ;  Set STATUS=$$TCPOPEN^MAGOSTCP(IP,PORT,TERM,TIMEOUT)
+ ;  Set STATUS=$$TCPUSE^MAGOSTCP(IP,PORT
+ ;  Set STATUS=$$TCPCLOSE^MAGOSTCP(IP,PORT)
+ ;  Set STATUS=$$TCPFLUSH^MAGOSTCP(IP,PORT)
+ ;  Set STATUS=$$TCPLOST^MAGOSTCP(IP,PORT,TYPE)
+ ;  Set STATUS=$$TCPGET^MAGOSTCP(.IP,.PORT)
+ ;  Set STATUS=$$TCPINHRT^MAGOSTCP(PORT)
+ ;  Set STRING=$$TCPSTAR^MAGOSTCP(IP,PORT,NUMBER,.TIMEOUT)
+ ;  Set STATUS=$$REINIT^MAGOSTCP()
+ ;
+REINIT() ;
+ ;  -- Close any open sockets
+ N DEV,ENV,I,LIST,V
+ S LIST="",V=$TR($ZV," ",".")
+ D:V[".5.1."
+ . S ENV=$ZU(5)
+ . ZN "%SYS"
+ . S LIST=##class(SYS.Process).%OpenId($JOB).OpenDevices
+ . ZN ENV
+ . Q
+ D:V[".5.0."
+ . N SW10,X
+ . S SW10=$V(0,-2,$ZU(40,0,1))\1024#2
+ . D JobInfo^%SS($J,.X)
+ . S LIST=$G(X("D"))
+ . Q
+ F I=1:1:$L(LIST,",") D
+ . S DEV=$P(LIST,",",I) Q:$E(DEV,$L(DEV))="*"  Q:DEV'["|TCP|"
+ . C DEV
+ . Q
+ Q 0
+TCPCLOSE(IP,PORT) N ID
+ ;  -- Close a TCP/IP socket connection
+ S IP=$G(IP),PORT=$G(PORT),ID=" "_IP_" "_PORT
+ I PORT="" Q "-3, Port not specified"
+ I $TR(ID," ")="" Q "-1, Both IP-address and Port missing"
+ I '$D(MAGOS("TCP",ID)) Q "-2, Socket for "_IP_", port "_PORT_" not opened through $$TCPOPEN^"_$T(+0)
+ C MAGOS("TCP",ID)
+ K MAGOS("TCP",ID)
+ K MAGOS("TCPM",ID)
+ Q 0
+TCPFLUSH(IP,PORT) N ID
+ ;  -- Flush buffers on a TCP/IP socket connection
+ S IP=$G(IP),PORT=$G(PORT),ID=" "_IP_" "_PORT
+ I PORT="" Q "-3, Port not specified"
+ I $TR(ID," ")="" Q "-1, Both IP-address and Port missing"
+ I '$D(MAGOS("TCP",ID)) Q "-2, Socket for "_IP_", port "_PORT_" not opened through $$TCPOPEN^"_$T(+0)
+ U MAGOS("TCP",ID) W *(-3)
+ Q 0
+TCPGET(IP,PORT) ;
+ ;  -- Determine the IP address and port of a client
+ N CLIENT,R
+ S (IP,PORT)="?",R=1 D
+ . N $ET
+ . S $ET="S $EC="""" Q:$Q 1 Q"
+ . S CLIENT=$ZU(111,0)
+ . S IP=$A(CLIENT,1)_"."_$A(CLIENT,2)_"."_$A(CLIENT,3)_"."_$A(CLIENT,4)
+ . S PORT=$A(CLIENT,5)*256+$A(CLIENT,6),R=0
+ . I $P($P,"|",2)="TCP",$P($P,"|",4)=$J S PORT=$P($P,"|",3)
+ . Q
+ Q R
+TCPINHRT(PORT) ;
+ ;  -- Inherit Socket Information from operating platform
+ S MAGOS("TCP","  "_PORT)="|TCP|"_PORT_"|"_$J
+ S MAGOS("TCPM","  "_PORT)="S"
+ Q 0
+TCPLOST(IP,PORT,TYPE) N $ET,ID,OK
+ ;  -- Determine whether a socket is still connected
+ S IP=$G(IP),PORT=$G(PORT),ID=" "_IP_" "_PORT
+ I PORT="" Q "-3, Port not specified"
+ I $TR(ID," ")="" Q "-1, Both IP-address and Port missing"
+ I '$D(MAGOS("TCP",ID)) Q "-2, Socket for "_IP_", port "_PORT_" not opened through $$TCPOPEN^"_$T(+0)
+ S $ET="S $EC="""",OK=""-3,Can't use socket"" K MAGOS(""TCP"",ID)",OK=""
+ D
+ . U MAGOS("TCP",ID)
+ . Q
+ Q:OK'="" OK
+ I TYPE=1,$ZA#512 Q 1
+ I TYPE=2 Q $ZA\8192#2
+ Q 0
+TCPOPEN(IP,PORT,TERM,TIMEOUT) N ID,PREV,UID
+ ;  -- Open a TCP/IP socket connection
+ S IP=$G(IP),PORT=$G(PORT),ID=" "_IP_" "_PORT,PREV=$I
+ I PORT="" Q "-3, Port not specified"
+ I $TR(ID," ")="" Q "-1, Both IP-address and Port missing"
+ I $D(MAGOS("TCP",ID)) Q "-2, Socket for "_$S(IP="":"server on",1:IP_",")_" port "_PORT_" already open"
+ S (MAGOS("TCP"),UID)=$G(MAGOS("TCP"))+1
+ N MODE,NIX,OK,OUT,X
+ S MODE="S" S:$G(TERM) MODE=MODE_"T" S:IP="" MODE="A"_MODE
+ S MAGOS("TCP",ID)="|TCP|"_PORT,MAGOS("TCPM",ID)=$TR(MODE,"A")
+ C MAGOS("TCP",ID)
+ I IP="" D  Q OUT
+ . O MAGOS("TCP",ID):(:PORT:MODE) U MAGOS("TCP",ID)
+ . I '$G(TIMEOUT) R NIX S OK=1
+ . E  R NIX:TIMEOUT S OK=$T
+ . I 'OK D  Q
+ . . S OUT="-5,Attempt to Open socket timed out"
+ . . C MAGOS("TCP",ID)
+ . . K MAGOS("TCP",ID)
+ . . K MAGOS("TCPM",ID)
+ . . Q
+ . S X=$ZU(111,0)
+ . S OUT=$A(X,1)_"."_$A(X,2)_"."_$A(X,3)_"."_$A(X,4)
+ . Q
+ S:'$G(TIMEOUT) TIMEOUT=10
+ O MAGOS("TCP",ID):(IP:PORT:MODE):TIMEOUT S OK=$T
+ I 'OK Q "-4,Could not connect to "_IP_", port "_PORT
+ U MAGOS("TCP",ID) S X=$ZU(111,0)
+ Q $A(X,1)_"."_$A(X,2)_"."_$A(X,3)_"."_$A(X,4)
+TCPSTAR(IP,PORT,NUMBER,TIMEOUT) N ASCII,I,ID,OUT
+ ;  -- Read character (one by one) from a socket
+ S IP=$G(IP),PORT=$G(PORT),ID=" "_IP_" "_PORT
+ I PORT="" Q "-3, Port not specified"
+ I $TR(ID," ")="" Q "-1, Both IP-address and Port missing"
+ I '$D(MAGOS("TCP",ID)) Q "-2, Socket for "_IP_", port "_PORT_" not opened through $$TCPOPEN^"_$T(+0)
+ U MAGOS("TCP",ID):(::$G(MAGOS("TCPM",ID),"S"))
+ S OUT="" S:$G(NUMBER)<1 NUMBER=1
+ ; Note: timeout may be 0 seconds...
+ I $G(TIMEOUT)="" F I=1:1:NUMBER R *ASCII S OUT=OUT_$C(ASCII)
+ E  F I=1:1:NUMBER R *ASCII:TIMEOUT S:'$T TIMEOUT=-1 Q:'$T  S OUT=OUT_$C(ASCII)
+ Q OUT
+TCPUSE(IP,PORT) N ID
+ ;  -- Use a TCP/IP socket connection
+ S IP=$G(IP),PORT=$G(PORT),ID=" "_IP_" "_PORT
+ I PORT="" Q "-3, Port not specified"
+ I $TR(ID," ")="" Q "-1, Both IP-address and Port missing"
+ I '$D(MAGOS("TCP",ID)) Q "-2, Socket for "_IP_", port "_PORT_" not opened through $$TCPOPEN^"_$T(+0)
+ U MAGOS("TCP",ID):(::$G(MAGOS("TCPM",ID),"S"))
+ Q 0
+
+

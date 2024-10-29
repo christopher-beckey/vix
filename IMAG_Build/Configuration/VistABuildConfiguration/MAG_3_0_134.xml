@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<build xmlns="http://va.gov/VistA/kids/manifest" name="MAG*3.0*134" patchName="NHIN Opt In" patch="134">
+  <components>
+    <securityKeys />
+    <parameterDefinitions />
+    <printTemplates />
+    <hl7s />
+    <menuOptions />
+    <sorts />
+    <rpcs />
+    <dataDictionaries />
+    <routines />
+    <protocols />
+  </components>
+</build>

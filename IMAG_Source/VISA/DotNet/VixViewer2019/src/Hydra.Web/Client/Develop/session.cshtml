@@ -1,0 +1,96 @@
+@using Hydra.Web
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=11">
+    <title>VIX Viewer Session</title>
+    <!--TODO: script src="@Model.BaseUrl/js/jquery-1.12.4.min.js" --><!-- /script> -->
+    @Html.HydraScript("../js/sessionscript/jquery-1.6.4.min.js")
+    @Html.HydraScript("../js/sessionscript/jquery.signalR-2.2.0.min.js")
+</head>
+
+<body>
+
+    <div class="container">
+        <ul id="messagelist"></ul>
+    </div>
+    <script src="~/signalr/hubs"></script>
+    <script type="text/javascript">
+        function getUrlVars() {
+            var vars = {};
+            var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi,
+                function(m, key, value) {
+                    vars[key] = value;
+                });
+            return vars;
+        }
+
+        $(window).on('load', function () {
+            Array.prototype.unique = function () {
+                var n = {},
+                    r = [];
+                for (var i = 0; i < this.length; i++) {
+                    if (!n[this[i]]) {
+                        n[this[i]] = true;
+                        r.push(this[i]);
+                    }
+                }
+                return r;
+            }
+
+            var myHub = $.connection.sessionHub;
+            var currentDisplayContextList = [];
+            var currentSessionId = getUrlVars()["sessionId"];
+
+            // add new display context to the viewer
+            myHub.client.addDisplayContext = function (sessionId, displayContextList) {
+
+                if (sessionId != currentSessionId) return;
+
+                var encodedSessionId = $('<div />').text(sessionId).html();
+                var i;
+                for (i = 0; i < displayContextList.length; i++) {
+                    var encodedDisplayContext = $('<div />').text(displayContextList[i]).html();
+                    $('#messagelist').append('<li><strong>' + encodedSessionId +
+                        '</strong>:&nbsp;&nbsp;' + encodedDisplayContext + '---ADDED' + '</li>');
+                }
+
+                // add to global list
+                currentDisplayContextList = currentDisplayContextList.concat(displayContextList);
+                currentDisplayContextList = currentDisplayContextList.unique();
+            };
+
+            myHub.client.removeDisplayContext = function (sessionId, displayContextList) {
+
+                if (sessionId != currentSessionId) return;
+
+                var encodedSessionId = $('<div />').text(sessionId).html();
+                var i;
+                for (i = 0; i < displayContextList.length; i++) {
+                    var encodedDisplayContext = $('<div />').text(displayContextList[i]).html();
+                    $('#messagelist').append('<li><strong>' + encodedSessionId +
+                        '</strong>:&nbsp;&nbsp;' + encodedDisplayContext + '---REMOVED' + '</li>');
+                }
+
+                // remove from global list
+                currentDisplayContextList = currentDisplayContextList.filter(function (el) {
+                    return displayContextList.indexOf(el) < 0;
+                });
+                currentDisplayContextList = currentDisplayContextList.unique();
+            };
+
+            myHub.client.getDisplayContext = function (sessionId) {
+
+                if (sessionId != currentSessionId) return null;
+
+                return currentDisplayContextList;
+            };
+
+            $.connection.hub.start();
+        });
+
+    </script>
+</body>
+
+</html>

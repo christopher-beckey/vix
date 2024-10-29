@@ -1,0 +1,339 @@
+#==============================================================================
+# static information common to all instances of DCS component
+#==============================================================================
+[ component_info ]
+name = DCS
+type = java_lib
+category = application_support_libs
+description = DICOM Core Services java library
+package_prefix = com.lbs
+slnreldir = .\jsrc\com\lbs\DCS
+
+[ required_components ]
+component = idl_lib/DDCS
+component = java_lib/LOG
+component = java_lib/CDS
+component = java_lib/APC
+[ debug_controls ]
+debug_flag = df_SHOW_CONSTRUCTORS, 0x0001, show object constructors
+debug_flag = df_SHOW_DESTRUCTORS, 0x0002, show object destructors
+debug_flag = df_SHOW_GENERAL_FLOW, 0x0004, show general flow
+debug_flag = df_SIMULATE_HARDWARE, 0x0008, simulate external devices
+debug_flag = df_SHOW_CFG_INFO, 0x0010, show configuration information
+debug_flag = df_SHOW_EXC_THROW, 0x0020, show exceptions before throwing
+debug_flag = df_DUMP_ACSE,			0x020000, show ACSE pdu data
+debug_flag = df_DUMP_PDATA,			0x040000, show PDATA pdu summary
+debug_flag = df_DUMP_PDATA_VERBOSE,	0x080000, show PDATA pdu data (can be very verbose)
+debug_flag = df_SHOW_DIMSE_READ,	0x100000, show DIMSE message reads
+debug_flag = df_SHOW_DIMSE_WRITE,	0x200000, show DIMSE message writes
+debug_flag = df_TCP_NETWORK,		0x400000, show tcp/ip network related debugging
+debug_flag = df_COMPRESSION,		0x800000, show compression transfer syntax codec debugging
+debug_flag = df_VERBOSE,			0x1000000, show various verbose debug messages
+debug_flag = df_IDLE_TIMERS,       	0x2000000, trace association idle timeout logic
+debug_flag = df_FILTER_SUMMARY,    	0x4000000, show summary of filters applied
+debug_flag = df_FILTERS,   			0x8000000, trace data-set/dimse-message filtering
+debug_flag = df_VERBOSE_DICOM_IO,  	0x10000000, show detailed information while reading or writing data sets
+debug_flag = df_REJECT_TRANSIENT, 	0x20000000, Force association rejection with transient status for testing
+debug_flag = df_REJECT_PERMANENT, 	0x40000000, Force association rejection with permanent status for testing
+
+#==============================================================================
+# per-instance information for the DCS component
+#==============================================================================
+[ DCS ]
+debug_flags = 0x00000
+# default name of extended data dictionary configuration group
+extended_data_dictionary = /dicom/ext_data_dictionary
+# if true, DicomDataDictionary will LOG a warning if private dictionary
+# conflicts with the standard dictionary.
+check_dictionary_overrides = true
+# Reports if an element tries to be added out-of-order
+# 0 - report an error only, throw the element away
+# 1 - report an error but still insert the element (may overwrite existing one)
+# 2 - report an error and throw an exception
+# 3 - do not report an error, throw element away
+element_out_of_order_option = 0
+# directory to keep temp files for very large element data
+large_element_data_file_dir = C:\DCF\DCF-3.3.22c\tmp
+# size above which OB,OW,OF,UN data will be streamed to/from
+# temp files rather than fully buffered.
+# The value 0 disables special handling for large elements.
+large_element_threshold = 1000000000
+# set to true for PresentationContext and subclasses to check uids
+validate_pres_ctx_uids = false
+
+
+[ DCS/AssociationManager ]
+server_host_address = 0.0.0.0
+server_tcp_port = 2000
+max_concurrent_associations = 32
+max_total_associations = -1
+#
+# If true, AssociationManager will get notified if this group is
+# changed in its process configuration while it is running.
+# This is useful if you want to change the listen port
+# without stopping and restarting AssociationManager or other settings.
+#
+listen_cfg_group = false;
+first_pdu_read_timeout = 15
+default_session_config_name = 
+select_timeout = 1
+receive_buffer_size = 0
+send_buffer_size = 0
+call_app_ready_in_run = true
+set_reuse_addr_on_windows = false
+set_reuse_addr_on_unix = true
+
+[ DCS/IOStatisticsManager ]
+enable_statistics = NO
+seconds_between_updates = 0
+save_stats_in_proc_cfg = YES
+statistics_cfg_group_name = 
+
+
+[ DCS/default_session_cfg ]
+debug_flags = 0
+max_read_pdu_size = 32768
+max_write_pdu_size = 32768
+decode_un_seqs_in_ile = YES
+ignore_max_length_negotiation = NO
+favor_proposed_syntax_order = YES
+pdu_read_timeout_seconds = -1
+pdu_write_timeout_seconds = -1
+send_dimse_timeout_seconds = -1
+receive_dimse_timeout_seconds = -1
+enable_streaming_mode = YES
+stream_mode_buffer_size = 16384
+enable_compression_pass_through_mode = YES
+pdu_write_delay_seconds = 0
+pdu_read_delay_seconds = 0
+association_idle_timeout_seconds = -1
+pre_association_script = 
+post_association_script = 
+disable_multi_pdv_pdus = YES
+input_filter_cfg_name = 
+output_filter_cfg_name = 
+remove_incoming_role_selection_items = NO
+remove_outgoing_role_selection_items = NO
+# if set, private tags in a dataset with VR UN that are in the data dictionary (via the extended
+# data dictionary) with a different VR will be fixed to have the VR from the dictionary.
+# if not set, a warning will be logged if the VRs are not the same
+fix_private_tags_with_vr_UN = NO
+# if set, standard tags in a dataset with VR UN that are in the data dictionary
+# (via the default data dictionary) with a different VR will be fixed to have
+# the VR from the dictionary.  If not set, a warning will be logged if the VRs are not the same
+fix_standard_tags_with_vr_UN = NO
+scu_socket_receive_buffer_size = 0
+scu_socket_send_buffer_size = 0
+
+[ DCS/default_session_cfg/input_filters ]
+
+[ DCS/default_session_cfg/output_filters ]
+
+[ DCS/default_session_cfg/supported_transfer_syntaxes ]
+# explicit-little-endian
+transfer_syntax = 1.2.840.10008.1.2.1
+# implicit-little-endian
+transfer_syntax = 1.2.840.10008.1.2
+# explicit-big-endian
+transfer_syntax = 1.2.840.10008.1.2.2
+# JPEG lossless prediction selector = 1
+transfer_syntax = 1.2.840.10008.1.2.4.70
+# JPEG2000 lossless
+transfer_syntax = 1.2.840.10008.1.2.4.90
+# JPEG2000 lossy
+transfer_syntax = 1.2.840.10008.1.2.4.91
+# JPEG lossless
+transfer_syntax = 1.2.840.10008.1.2.4.57
+# JPEG lossy 8 bit 
+transfer_syntax = 1.2.840.10008.1.2.4.50
+# JPEG lossy 12 bit
+transfer_syntax = 1.2.840.10008.1.2.4.51
+
+[ DCS/default_session_cfg/DicomEncapsulatedCodec ]
+# force number_of_frames in bad files with non-zero pixel data length from 0 to 1
+override_n_frames = true
+
+[ DCS/default_session_cfg/DicomRLECodec ]
+# if false convert RLE segments to Big Endian
+# if true leave RLE segments in machine byte order
+RLE_legacy_mode = false
+
+[ DCS/default_session_cfg/DicomTSCWCodec ]
+# If pin_buffers is true, an attempt will be made to
+# avoid buffer copies during JNI calls to compression
+# code. Some JVM's may not support pinning well, or
+# may suspend GC during compression operations which
+# could cause potential problems.
+pin_buffers = true
+[ DCS/default_session_cfg/DicomTSCWCodec/jpeg_lossy ]
+# lossy compression quality : 0 to 100
+compression_quality = 75
+# If true, then 12 bit operations will use the 16 bit IJG library
+no_12bit_lib = false
+# If true, derived image elements are added to data sets
+# as they are written. This includes changing Image-Type,
+# and adding Source-Image-Sequence and Derivation-Code-Sequence.
+# A new sop-instance-uid will be created for the output data set.
+add_derived_image_fields = true
+# If true, signed pixel data (pixel-representation = 1 ) will
+# be allowed.
+allow_signed_data = false
+# For codecs that support creating multiple threads for a single
+# compress or decompress operation.
+max_threads = 1
+
+[ DCS/default_session_cfg/DicomTSCWCodec/jpeg_lossless ]
+# If true, then 12 bit operations will use the 16 bit IJG library
+no_12bit_lib = true
+# Set the jpeg predictor selection value for the .57 syntax.
+# If the transfer syntax is 1.2.840.10008.1.2.4.70,
+# this attribute is ignored and predictor selection value
+# is set to 1.
+jpeg_predictor_selection_value = 6
+# If true, then derived image fields are added for monochrome
+# images. (Some implementations add derived fields, create
+# a new sop-instance-uid, etc. even for lossless compressed
+# images.)
+add_derived_image_fields_for_mono = false
+# If true, then derived image fields are added for color 
+# images. (Some implementations add derived fields, create
+# a new sop-instance-uid, etc. even for lossless compressed
+# images.)
+add_derived_image_fields_for_color = false
+# If true, signed pixel data (pixel-representation = 1 ) will
+# be allowed.
+allow_signed_data = false
+# If true, color pixel data will be allowed. Some implementations
+# don't implement lossless jpeg for color, since the RGB to YBR
+# color space conversion may result in some information loss.
+allow_color = true
+# For codecs that support creating multiple threads for a single
+# compress or decompress operation.
+max_threads = 1
+
+[ DCS/default_session_cfg/DicomTSCWCodec/jpeg2000_lossy ]
+# override all jasper options by using this attribute
+# use back-slash to end lines for a multi-lined attribute value.
+# Do not use with Aware plugin
+jpeg2000_codec_options = 
+# Specify the compression ratio
+compression_ratio = 2
+# Specify the number of jpeg2000 compression levels
+compression_levels = 4
+# If true, derived image elements are added to data sets
+# as they are written. This includes changing Image-Type,
+# and adding Source-Image-Sequence and Derivation-Code-Sequence.
+# A new sop-instance-uid will be created for the output data set.
+add_derived_image_fields = true
+#
+# set max tile width: 0 means full frame size
+#
+max_tile_width = 0
+#
+# set max tile height: 0 means full frame size
+max_tile_height = 1024
+# For codecs that support creating multiple threads for a single
+# compress or decompress operation.
+max_threads = 1
+
+[ DCS/default_session_cfg/DicomTSCWCodec/jpeg2000_lossless ]
+# override all jasper options by using this attribute
+# use back-slash to end lines for a multi-lined attribute value.
+# Do not use with Aware plugin
+jpeg2000_codec_options = 
+# If true, then derived image fields are added for monochrome
+# images. (Some implementations add derived fields, create
+# a new sop-instance-uid, etc. even for lossless compressed
+# images.)
+add_derived_image_fields_for_mono = false
+# If true, then derived image fields are added for color 
+# images. (Some implementations add derived fields, create
+# a new sop-instance-uid, etc. even for lossless compressed
+# images.)
+add_derived_image_fields_for_color = false
+#
+# set max tile width: 0 means full frame size
+#
+max_tile_width = 0
+#
+# set max tile height: 0 means full frame size
+max_tile_height = 1024
+# For codecs that support creating multiple threads for a single
+# compress or decompress operation.
+max_threads = 1
+
+[ DCS/DicomFileInput ]
+#Always scan for transfer syntax/chapter 10
+#whether a DicomFileInput is constructed with a
+#transfer syntax or not
+force_autodetect = TRUE
+
+
+[ DCS/DicomFileOutput ]
+# This attribute is deprecated
+create_chapter_10_format = true
+# This attribute is deprecated
+invent_group_2_data = true
+
+# Uncomment this and set to appropriate value if needed (tag: 0002,0012)
+# implementation_class_uid = 1.2.840.114089.1.1.0.3.3.2
+
+# Uncomment this and set to appropriate value if needed (tag: 0002,0013)
+# implementation_version_name = DCF 3.3.2c
+
+# The default Source AE title to use when writing a file
+default_source_ae_title = DCF
+
+# Use the (incorrect) legacy mode of using existing values from Group 2 in the File
+# Meta Information, instead of updating them to reflect the current implementation
+preserve_fmi_legacy_mode = false
+
+[ DCS/DicomDeviceInput ]
+enforce_sq_delim_check = true
+
+[ DCS/VerificationSCP ]
+[ DCS/VerificationSCP/default_session_cfg ]
+[ DCS/VerificationSCP/default_session_cfg/supported_sop_classes ]
+#SOPCLASSVERIFICATION
+sop_class = 1.2.840.10008.1.1
+
+[ DCS/DicomTSCWCodec ]
+[ DCS/DicomTSCWCodec/plugins ]
+
+[ DCS/DicomTSCWCodec/plugins/TSCWJasper ]
+win_dll_base_name = DCF_tscwjasper
+unix_dll_base_name = DCF_tscwjasper
+[ DCS/DicomTSCWCodec/plugins/TSCWJasper/plugin_cfg ]
+
+[ DCS/DicomTSCWCodec/plugins/TSCWIJG ]
+win_dll_base_name = DCF_TSCWIJG
+unix_dll_base_name = DCF_tscwijg
+[ DCS/DicomTSCWCodec/plugins/TSCWIJG/plugin_cfg ]
+
+[ DCS/DicomTSCWCodec/plugins/TSCWAware ]
+win_dll_base_name = DCF_TSCWAware
+unix_dll_base_name = DCF_tscwaware
+[ DCS/DicomTSCWCodec/plugins/TSCWAware/plugin_cfg ]
+
+
+[ DCS/DicomTSCWCodec/plugin_mappings ]
+# use TSCWIJG or TSCWAware for .50
+[ DCS/DicomTSCWCodec/plugin_mappings/1.2.840.10008.1.2.4.50 ]
+plugin_name = TSCWIJG
+# use TSCWIJG or TSCWAware for .51
+[ DCS/DicomTSCWCodec/plugin_mappings/1.2.840.10008.1.2.4.51 ]
+plugin_name = TSCWIJG
+# use TSCWIJG for .57
+# TSCWAware does not support .57 transfer syntax
+[ DCS/DicomTSCWCodec/plugin_mappings/1.2.840.10008.1.2.4.57 ]
+plugin_name = TSCWIJG
+# use TSCWIJG or TSCWAware for .70
+[ DCS/DicomTSCWCodec/plugin_mappings/1.2.840.10008.1.2.4.70 ]
+plugin_name = TSCWIJG
+# use TSCWJasper or TSCWAware for .90
+[ DCS/DicomTSCWCodec/plugin_mappings/1.2.840.10008.1.2.4.90 ]
+plugin_name = TSCWJasper
+#plugin_name = TSCWAware
+# use TSCWJasper or TSCWAware for .91
+[ DCS/DicomTSCWCodec/plugin_mappings/1.2.840.10008.1.2.4.91 ]
+plugin_name = TSCWJasper

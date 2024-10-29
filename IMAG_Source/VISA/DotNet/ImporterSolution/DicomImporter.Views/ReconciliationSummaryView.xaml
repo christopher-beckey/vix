@@ -1,0 +1,19 @@
+﻿<Views:BaseImagingView x:Class="DicomImporter.Views.ReconciliationSummaryView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="300" xmlns:my="clr-namespace:DicomImporter.Views" xmlns:Views="clr-namespace:ImagingClient.Infrastructure.Views;assembly=ImagingClient.Infrastructure">
+    <Grid>
+        <StackPanel>
+            <Label Content="Reconciliation Summary" Style="{DynamicResource ResourceKey=SectionTitle}" />
+            <my:ReconciliationDetailsView DataContext="{Binding Path=ReconciliationDetailsViewModel}" />
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <Button Content="&lt; Back" Command="{Binding NavigateBack}"/>
+                <Button Content="Return to Study List &gt;" Command="{Binding NavigateForward}"/>
+                <Button Content="Cancel" Command="{Binding CancelReconciliationCommand}" />
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</Views:BaseImagingView>

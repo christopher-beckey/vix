@@ -1,0 +1,29 @@
+:Base telnet.hlp
+:Title Telnet Help
+:Index Telnet Help=telnet.hlp
+1 Make a Connection
+2 Connecting to a Remote Computer=crc_how_wintel
+2 Disconnecting from a Remote Computer=drc_how_wintel
+2 Quitting Telnet=qt_how_wintel
+1 Work with Text in the Telnet Window
+2 Selecting All Text=sat_how_wintel
+1 Specify Preferences
+2 Selecting a Font=utfo_how_wintel
+2 Setting Terminal Emulation=ste_how_wintel
+2 Setting Terminal Options=sto_how_wintel
+2 Setting the Buffer Lines=ublo_how_wintel
+1 Capture Telnet Activity to a Log File
+2 Creating a Telnet Log=logfile_wintel
+1 Menu Commands
+2 Connect Menu Commands
+3 Remote System=IDM_CONNECT
+3 Disconnect=IDM_HANGUP
+3 Exit=IDM_EXIT
+2 Edit Menu Commands
+3 Copy=IDM_COPY
+3 Paste=IDM_PASTE
+3 Select All=IDM_SELECTALL
+2 Terminal Menu Commands
+3 Preferences=IDM_TERMPREF
+3 Start Logging=IDM_TERMStartLog
+3 Stop Logging=IDM_TERMStopLog

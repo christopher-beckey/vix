@@ -1,0 +1,2295 @@
+//3.0;IMAGING;**110**;JUL 28, 2011
+// +---------------------------------------------------------------+
+// | Property of the US Government.                                |
+// | No permission to copy or redistribute this software is given. |
+// | Use of unreleased versions of this software requires the user |
+// | to execute a written test agreement with the VistA Imaging    |
+// | Development Office of the Department of Veterans Affairs,     |
+// | telephone (301) 734-0100.                                     |
+// |                                                               |
+// | The Food and Drug Administration classifies this software as  |
+// | a medical device.  As such, it may not be changed in any way. |
+// | Modifications to this software may result in an adulterated   |
+// | medical device under 21CFR820, the use of which is considered |
+// | to be a violation of US Federal Statutes.                     |
+// +---------------------------------------------------------------+
+
+// Include Ifx.h for built-in InstallScript function prototypes, for Windows
+// Installer API function prototypes and constants, and to declare code for
+// the OnBegin and OnEnd events.
+#include "ifx.h"
+
+
+export prototype LONG   AskNData (HWND);
+export prototype LONG   AskReInit (HWND);
+export prototype        CheckDestinations (HWND);
+       prototype        FormatDate (BYREF STRING, BYREF STRING, STRING, STRING);
+       prototype STRING GetInstallFlags (HWND, STRING, INT,
+                               BYREF INT, BYREF INT, BYREF INT, BYREF INT,
+                               BYREF INT, BYREF INT);
+       prototype STRING MagTempFolder ();
+export prototype LONG   InitDriveLetters (HWND);
+export prototype LONG   InitPrimaryInstallDrive (HWND); 
+export prototype LONG	InitINSTALLDIRDisk (HWND);
+export prototype LONG   InstallCache (HWND);
+	   prototype 		MAGRegDBDeleteValue (STRING, STRING);
+       prototype BOOL   MAGDeleteFile (STRING);
+       prototype LONG   MagGetCacheVersion (STRING);
+       prototype BOOL 	UninstallCache();
+       prototype BOOL   MagMoveShortCuts (STRING, STRING, STRING, INT);
+       prototype LONG   MAGNow ();
+       prototype STRING ReSequence (STRING);
+       prototype LONG   ShowStatus (STRING, HWND, INT);
+       prototype BOOL   UpdateHostsFile ();
+export prototype 		CreateCacheShortcut(HWND);
+	   BOOL shortcutreminder;
+// Caché version is something like 5.0.20
+// Internal value is (1st piece * 1000 + 2nd piece) * 1000 + 3rd piece
+#define CURRENTCACHE 5000020        // 5.0.20
+// #define CURRENTCACHE 5001000     // 5.1.0
+
+// If it just so happens that patch 66 is released AFTER patch 69
+// this switch must be set to -1, so that the files and icons created
+// for patch 66 will be removed.
+// Set this value to 1 when the files for patch 66 are intended to be delivered.
+#define INCLUDE_PATCH_66 1
+
+#define HWND_BROADCAST 0xffff
+#define WM_SETTINGCHANGE 0x001a
+
+///////////////////////////////////////////////////////////////////////////////
+function LONG InstallCache (hWindow)
+BOOL    bBusy;          // TRUE while waiting for Caché installation to complete
+BOOL    bContinue;      // False once a fatal error has occurred
+BOOL    bDebug;         // True when debugging output is requested
+BOOL    bInitialCache;  // True when initial installation of Caché, FALSE when updating
+BOOL    bInitialDB;     // True when application database is to be (re)initialized
+BOOL    bMasterOK;      // Indicates whether Master File Update completed successfully
+BOOL    bOK;            // Temporary variable, used to determine bInitialCache
+BOOL    bTempLicense;   // True when a temporary Caché license is used
+BOOL 	CacheKeyInstalled;
+HWND    hActual;        // Handle to actual dialog window during installation
+INT     iDataDir;       // Number of x:\DICOM\Data_i directories
+INT     iDictionary;    // Indicates whether "dictionary data" feature is to be installed
+INT     iImage;         // Indicates whether "image data" feature is to be installed
+INT     iLevel;         // Used while reading installation log, indicates section of log file
+INT     iLoop;          // Loop-counter, used in several loops
+INT     iMain;          // Indicates whether "main" feature is to be installed
+INT     iMakeAbs;       // Indicates whether "Abstract Maker" feature is to be installed
+INT     iText;          // Indicates whether "text data" feature is to be installed
+INT     iTimeOut;       // Number of seconds to wait for external application to finish
+INT     iViewer;        // Indicates whether "DICOM Viewer" feature is to be installed
+LIST    ListMachine;    // String List Pointer for List of Keys (Machine/Uninstall)
+LIST    ListName;       // List of product names to be deleted
+LIST    ListUser;       // String List Pointer for List of Keys (User/Installed Products)
+LIST    listZSTU;       // List of utilities to include in start-up
+LONG    lDict;          // Number of characters in name of Dictionary installation directory
+LONG    lImage;         // Number of characters in name of Image Data installation directory
+LONG    lJava;          // Number of characters in name of Java root direcotry
+LONG    lMakeAbs;       // Number of characters in name of "Make Abstract" installation directory
+LONG    lMin;           // Number of minutes (waiting for Caché silent installation)
+LONG    lResult;        // Number of characters in result string (various uses)
+LONG    lSec;           // Number of seconds (waiting for Caché silent installation)
+LONG    lSeconds;       // Total number of seconds (lMin * 60 + lSec) while waiting
+LONG    lStart;         // Timestamp: when wait for Caché installation started
+LONG    lTemp;          // Scratch
+LONG    lText;          // Number of characters in name of Text Data installation directory
+LONG    lVersion;       // Version identification of Caché system (prior installation)
+LONG    lViewer;        // Number of characters in name of "DICOM Viewer" installation directory
+NUMBER  nvFileHandle;   // Handle to currently open file (various uses)
+NUMBER  nLocation;      // Location in string where substring is found
+NUMBER  nResult;        // Loop counter for looping through List of Keys
+NUMBER  msiGetResult;	// Return value of MsiGetProperty function
+NUMBER  nvSize;         // Length of Registry value
+NUMBER nVersionNumber;
+INT     nvType;         // "Type" indicator for entries in Windows Registry
+NUMBER  nZSTU;          // Number of extras to include in start-up on test system
+STRING  svAll;          // Actual value of environment variable ALLUSERSPROFILE
+STRING  svApp;          // Name of external application to be executed (various uses)
+STRING  svVersion;
+STRING  svActualDistri; // Actual directory with Caché distribution
+STRING  svBackDir;      // Name of root directory for Back-Up
+STRING  svBatFile;      // Name of batch file (various uses)
+STRING  svCache;        // Drive letter for disk where Caché is installed
+STRING  svCacheLicense; // Full path+file name of Caché license key file
+STRING  svCurrent;      // Name of current product
+STRING  svDate;         // Date-part of timestamp for installation (human-readable form)
+STRING  svDictDrive;    // Name of Disk-Share for dictionary data (x:\ or \\machine\share\)
+STRING  svDictionary;   // Full name of installation directory for dictionary data
+STRING  svDriveLetter;  // Drive-letter of disk drive for installation of main feature
+STRING  svEnv;          // Registry key for environment variables
+STRING  svFlagFile;     // Name of file containing flag that indicates that a process is ready
+STRING  svImage;        // Full name of installation directory for image data
+STRING  svImageDrive;   // Name of Disk-Share for text data (x:\ or \\machine\share\)
+STRING  svInstallEnv;   // Install evn IHS or VA.
+STRING  svISSFile;      // Name of .ISS file to use for silent Caché installation
+STRING  svJava;         // Name of Java root directory
+STRING  svKey;          // Name of key in Registry that is the root-key for this application
+STRING  svKeyLog;       // Message about Registry Keys
+STRING  svLib;			// Name of directory for Accusoft Library Files
+STRING  svLine;         // Scratch (line read from or written to file)
+STRING  svMakeAbs;      // Full name of installation directory for MAG_MakeAbs.exe
+STRING  svMsg;          // Scratch (used for the composition of various messages)
+STRING  svName;         // Name in list of products to be deleted
+STRING  svPackage;      // Pacakge Code for current product
+STRING  svParam;        // Value of parameter(s) to be passed to external application (various uses)
+STRING  svProduct;      // Bucket for Installed Product keys in Registry
+STRING  svReminder;     // String in which all reminder messages are collected
+STRING  svResult;       // Scratch (string result returned by various functions)
+STRING  svStart;        // Scratch (typically the first few characters of a string)
+STRING  svStatusMaster; // Name of log-file for Update Master File activity
+STRING  svTemp;         // Scratch (tempory variable for intermediate data)
+STRING  svTempDir;      // Full path+name of %TEMP% directory
+STRING  svTestDir;      // Name of directory for ZSTU files
+STRING  svTestSTU;      // Name of file with ZSTU extras
+STRING  svText;         // Full name of installation directory for text data
+STRING  svTextDrive;    // Name of Disk-Share for text data (x:\ or \\machine\share\)
+STRING  svTime;         // Time-part of timestamp for installation (human-readable form)
+STRING  svUninstall;    // Bucket for Uninstall Keys in Registry
+STRING  svUser;         // Actual value of environment variable USERPROFILE
+STRING  svValue;        // Value of Registry key
+STRING  svViewer;       // Full name of installation directory for MAG_DCMView.exe
+STRING  szActISS;       // Actual name of .ISS file for silent Caché installation
+STRING  szDrive;        // Full name of installation directory for main feature
+STRING  szGlobFile;     // Name of file with data to be imported for global variables
+STRING  szLogFile;      // Name of log-file
+STRING  szZSTUFile;     // Name of file containing the code of the ZSTU program.
+
+// Installation flags:
+//     iMain            Main Feature (Caché, DICOM Gateway Application, etc)
+//     iText            Text Data Information
+//     iImage           Image Data Information
+//     iDictionary      DICOM Dictionary Data Information
+//     iViewer          DICOM Viewer
+//     iMakeAbs         Abstract Maker
+//  -1 = UnInstall this feature
+//   0 = Don't know what to do with this feature
+//  +1 = Install this feature
+
+begin
+  hActual = FindWindow ("MsiDialogCloseClass", "");
+  ShowStatus ("Start Custom Processing", hActual, 1);
+  bDebug = (FindFile ("C:\\DICOM", "Debug.tmp", svResult) >= 0);
+
+  iMain = 0;          // 0: Initial value is "don't know what to do"
+  iText = 0;
+  iImage = 0;
+  iDictionary = 0;
+  iViewer = 0;
+  iMakeAbs = 0;
+  svReminder = "";
+  lVersion = 0;
+  svMsg = "ReInstall = " + GetInstallFlags (hWindow, "REINSTALL", 1, // 1 = Install
+                   iMain, iText, iImage, iDictionary,
+                   iViewer, iMakeAbs);
+  svMsg = svMsg + "\nRemove = " + GetInstallFlags (hWindow, "REMOVE", -1, // -1 = Un-Install
+                   iMain, iText, iImage, iDictionary,
+                   iViewer, iMakeAbs);
+  svMsg = svMsg + "\nAddDefault = " + GetInstallFlags (hWindow, "ADDDEFAULT", 1, // 1 = Install
+                   iMain, iText, iImage, iDictionary,
+                   iViewer, iMakeAbs);
+  svMsg = svMsg + "\nAddSource = " + GetInstallFlags (hWindow, "ADDSOURCE", 1, // 1 = Install
+                   iMain, iText, iImage, iDictionary,
+                   iViewer, iMakeAbs);
+  svMsg = svMsg + "\nAddLocal = " + GetInstallFlags (hWindow, "ADDLOCAL", 1, // 1 = Install
+                   iMain, iText, iImage, iDictionary,
+                   iViewer, iMakeAbs);
+  if (bDebug) then
+    NumToStr (svText, iMain);
+    svMsg = svMsg + "\n" + svText + " = Cache";
+    NumToStr (svText, iText);
+    svMsg = svMsg + "\n" + svText + " = Text_Data";
+    NumToStr (svText, iImage);
+    svMsg = svMsg + "\n" + svText + " = Image_Data";
+    NumToStr (svText, iDictionary);
+    svMsg = svMsg + "\n" + svText + " = DICOM_Dictionary";
+    NumToStr (svText, iViewer);
+    svMsg = svMsg + "\n" + svText + " = DICOM_Viewer";
+    NumToStr (svText, iMakeAbs);
+    svMsg = svMsg + "\n" + svText + " = Abstract_Maker";
+    MessageBox (svMsg, INFORMATION);
+  endif;
+  GetSystemInfo (DATE, lResult, svParam);
+  GetSystemInfo (TIME, lResult, svTime);
+  FormatDate (svDate, svBackDir, svParam, svTime);
+  bContinue = TRUE;
+  ListMachine = ListCreate (STRINGLIST);
+  if (ListMachine < 0) then
+    MessageBox ("Cannot create list of Registry Keys", SEVERE);
+    bContinue = FALSE;
+  endif;
+  ListName = ListCreate (STRINGLIST);
+  if (ListName < 0) then
+    MessageBox ("Cannot create list of Registry Keys", SEVERE);
+    bContinue = FALSE;
+  endif;
+  ListUser = ListCreate (STRINGLIST);
+  if (ListUser < 0) then
+    MessageBox ("Cannot create list of Registry Keys", SEVERE);
+    bContinue = FALSE;
+  endif;
+  msiGetResult=MsiGetProperty(hWindow, "NDATADIR", svText, lText);
+  if (ERROR_MORE_DATA == msiGetResult) then
+	lText = lText + 1; //increment buffer size for terminating null
+        //Retrieve the property value
+    MsiGetProperty (hWindow, "NDATADIR", svText, lText); 
+  endif;
+  StrToNum (iDataDir, svText);  // Number of Data Directories
+  szLogFile = "install.log";
+  szActISS = "CacheISS.iss";
+  szZSTUFile = "mag_zstu.rtn";
+  szGlobFile = "mag_global.gof";
+  svEnv = "SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Environment";
+  szDrive = INSTALLDIR;
+  msiGetResult=MsiGetProperty(hWindow, "DICOM2", svText, lText); //Retrieve the property value
+  if (ERROR_MORE_DATA == msiGetResult) then 
+	lText = lText + 1;  //increment buffer size for terminating null
+    MsiGetProperty (hWindow, "DICOM2", svText, lText); 
+  endif;  
+  msiGetResult = MsiGetProperty(hWindow, "DICOM3", svImage, lImage);
+  if (ERROR_MORE_DATA == msiGetResult) then
+	lImage = lImage + 1; 
+    MsiGetProperty (hWindow, "DICOM3", svImage, lImage); 
+  endif;  
+  msiGetResult = MsiGetProperty(hWindow, "DICOM4", svDictionary, lDict);
+  if (ERROR_MORE_DATA == msiGetResult) then
+	lDict = lDict + 1;  
+    MsiGetProperty (hWindow, "DICOM4", svDictionary, lDict); 
+  endif;  
+  msiGetResult = MsiGetProperty(hWindow, "JAVA4", svJava, lJava);
+  if (ERROR_MORE_DATA == msiGetResult) then
+	lJava = lJava + 1; 
+    MsiGetProperty (hWindow, "JAVA4", svJava, lJava); 
+  endif;  
+  msiGetResult = MsiGetProperty(hWindow, "DCMVIEW", svViewer, lViewer);
+  if (ERROR_MORE_DATA == msiGetResult) then
+	lViewer = lViewer + 1; 
+    MsiGetProperty (hWindow, "DCMVIEW", svViewer, lViewer); 
+  endif; 
+  msiGetResult = MsiGetProperty(hWindow, "MAG_MAKEABS", svMakeAbs, lMakeAbs);
+  if (ERROR_MORE_DATA == msiGetResult) then
+	lMakeAbs = lMakeAbs + 1; 
+    MsiGetProperty (hWindow, "MAG_MAKEABS", svMakeAbs, lMakeAbs); 
+  endif; 
+  if (bDebug) then
+    svMsg = "Caché Drive:      " + INSTALLDIR + "\n";
+    svMsg = svMsg + "Text Drive:       " + svText + "\n";
+    svMsg = svMsg + "Image Drive:      " + svImage + "\n";
+    svMsg = svMsg + "Dictionary Drive: " + svDictionary + "\n";
+    svMsg = svMsg + "DICOM Viewer:     " + svViewer + "\n";
+    svMsg = svMsg + "Abstract Maker:   " + svMakeAbs + "\n";
+    svMsg = svMsg + "Java:             " + svJava;
+    MessageBox (svMsg, INFORMATION);
+  endif;
+  svTempDir = MagTempFolder ();
+  StrSub (svStart, svTempDir, StrLengthChars (svTempDir) - 1, 1);
+  if (StrCompare ("\\", svStart) != 0) then
+    svTempDir = svTempDir + "\\";
+  endif;
+  if (bDebug) then
+    MessageBox ("Drive = \"" + szDrive + "\",\ntemp = \"" + svTempDir + "\".", INFORMATION);
+  endif;
+  
+  //svISSFile = svTempDir + "FirstCache";
+  
+  StrSub (svDriveLetter, szDrive,      0, 1);
+  StrSub (svTextDrive,   svText,       0, StrLengthChars (svText) - 7);
+  StrSub (svImageDrive,  svImage,      0, StrLengthChars (svImage) - 7);
+  StrSub (svDictDrive,   svDictionary, 0, StrLengthChars (svDictionary) - 7);
+  if (bDebug) then
+    MessageBox ("Starting with Text=" + svTextDrive + ", Image=" + svImageDrive +
+       ", Dictionary=" + svDictDrive + "\nDate=" + svDate +
+       ",\nBackUp=" + svTempDir + svBackDir, INFORMATION);
+  endif;
+
+  if (iMain > 0) then
+    svActualDistri = svDriveLetter + "\\CacheDist";
+    if (FindFile (svActualDistri, "MAG_Replace.exe", svResult) < 0) then
+      // Sometimes InstallShield puts some of the files on a wrong diskshare...
+      svActualDistri = "";
+      if (StrLengthChars (svActualDistri) < 1) then
+        svTemp = svTextDrive + "\\CacheDist";
+        if (FindFile (svTemp, "MAG_Replace.exe", svResult) >= 0) then
+          svActualDistri = svTemp;
+        endif;
+      endif;
+      if (StrLengthChars (svActualDistri) < 1) then
+        svTemp = svImageDrive + "\\CacheDist";
+        if (FindFile (svTemp, "MAG_Replace.exe", svResult) >= 0) then
+          svActualDistri = svTemp;
+        endif;
+      endif;
+      if (StrLengthChars (svActualDistri) < 1) then
+        svTemp = svDictDrive + "\\CacheDist";
+        if (FindFile (svTemp, "MAG_Replace.exe", svResult) >= 0) then
+          svActualDistri = svTemp;
+        endif;
+      endif;
+      if (StrLengthChars (svActualDistri) < 1) then
+        svTemp = "C:\\CacheDist";
+        if (FindFile (svTemp, "MAG_Replace.exe", svResult) >= 0) then
+          svActualDistri = svTemp;
+        endif;
+      endif;
+      if (StrLengthChars (svActualDistri) < 1) then
+        svTemp = "D:\\CacheDist";
+        if (FindFile (svTemp, "MAG_Replace.exe", svResult) >= 0) then
+          svActualDistri = svTemp;
+        endif;
+      endif;
+      if (StrLengthChars (svActualDistri) < 1) then
+        svTemp = "E:\\CacheDist";
+        if (FindFile (svTemp, "MAG_Replace.exe", svResult) >= 0) then
+          svActualDistri = svTemp;
+        endif;
+      endif;
+      if (StrLengthChars (svActualDistri) < 1) then
+        MessageBox ("Cannot locate Caché Distribution Directory", SEVERE);
+        bContinue = FALSE;
+      else
+        CreateDir (svDriveLetter + ":\\CacheSys");
+        CreateDir (svDriveLetter + ":\\CacheSys\\bin");
+        CreateDir (svDriveLetter + ":\\CacheSys\\mgr");
+        CreateDir (svDriveLetter + ":\\DICOM");
+        CreateDir (svDriveLetter + ":\\DICOM\\Cache");
+        CreateDir (svDriveLetter + ":\\DICOM\\Icons (Letters)");
+        CreateDir (svDriveLetter + ":\\DICOM\\Icons (VA Logo)");
+        StrSub (svTemp, svActualDistri, 0, StrLengthChars (svActualDistri) - 9);
+        CopyFile (svTemp + "\\DICOM\\Cache\\*.*", svDriveLetter + ":\\DICOM\\Cache\\*.*");
+        CopyFile (svTemp + "\\DICOM\\Icons (Letters)\\*.*", svDriveLetter + ":\\DICOM\\Icons (Letters)\\*.*");
+        CopyFile (svTemp + "\\DICOM\\Icons (VA Logo)\\*.*", svDriveLetter + ":\\DICOM\\Icons (VA Logo)\\*.*");
+      endif;
+    endif;
+  endif;
+
+  ShowStatus ("Remove Bogus Files", hActual, 5);
+  StrSub (svCache, INSTALLDIR, 0, 1);
+  MAGDeleteFile (svImage + "Image_In\\Bogus.txt");
+  MAGDeleteFile (svImage + "Image_Out\\Bogus.txt");
+
+  // Copy short-cuts from Installer directory
+  // to All-Users directory
+  ShowStatus ("Copy Short-Cuts", hActual, 7);
+  GetEnvVar ("USERPROFILE", svUser);
+  GetEnvVar ("ALLUSERSPROFILE", svAll);
+  StrSub (svTemp, svUser, StrLengthChars (svUser) - 1, 1);
+  if (StrCompare (svTemp, "//") != 0) then
+    svUser = svUser + "\\";
+  endif;
+  StrSub (svTemp, svAll, StrLengthChars (svAll) - 1, 1);
+  if (StrCompare (svTemp, "//") != 0) then
+    svAll = svAll + "\\";
+  endif;
+  bContinue = bContinue && MagMoveShortCuts (svUser, svAll, "Text Gateway\\Process Text Messages.lnk", iText);
+  bContinue = bContinue && MagMoveShortCuts (svUser, svAll, "Text Gateway\\PACS Status.lnk", iText);
+  bContinue = bContinue && MagMoveShortCuts (svUser, svAll, "Text Gateway\\Modality WorkList Status.lnk", iText);
+  bContinue = bContinue && MagMoveShortCuts (svUser, svAll, "Image Gateway\\Exam Complete.lnk", iImage);
+  bContinue = bContinue && MagMoveShortCuts (svUser, svAll, "Image Gateway\\Request Images.lnk", iImage);
+  bContinue = bContinue && MagMoveShortCuts (svUser, svAll, "Image Gateway\\Process DICOM Images.lnk", iImage);
+  bContinue = bContinue && MagMoveShortCuts (svUser, svAll, "Image Gateway\\Image Status.lnk", iImage);
+  bContinue = bContinue && MagMoveShortCuts (svUser, svAll, "Image Gateway\\Abstract Maker.lnk", -1);
+  bContinue = bContinue && MagMoveShortCuts (svUser, svAll, "Image Gateway\\DICOM Viewer.lnk", iViewer);
+  bContinue = bContinue && MagMoveShortCuts (svUser, svAll, "QueryRetrieve\\Start QueryRetrieve Listener.lnk", -1);
+  bContinue = bContinue && MagMoveShortCuts (svUser, svAll, "QueryRetrieve\\Install RunTime License.lnk", -1);
+  bContinue = bContinue && MagMoveShortCuts (svUser, svAll, "Laurel Bridge\\Install RunTime License.lnk", -1);
+  bContinue = bContinue && MagMoveShortCuts (svUser, svAll, "Routing Gateway\\Start Rule Evaluator.lnk", iMain);
+  bContinue = bContinue && MagMoveShortCuts (svUser, svAll, "Routing Gateway\\Start Transmitter.lnk", iMain);
+  bContinue = bContinue && MagMoveShortCuts (svUser, svAll, "Instruments\\Default.lnk", -1);
+  bContinue = bContinue && MagMoveShortCuts (svUser, svAll, "Telnet Session.lnk", iMain);
+  bContinue = bContinue && MagMoveShortCuts (svUser, svAll, "Command Prompt.lnk", iMain);
+  bContinue = bContinue && MagMoveShortCuts (svUser, svAll, "Caché Terminal.lnk", iMain);
+
+  // Register or Un-Register the libary files
+  if (bContinue) then
+    ShowStatus ("Process OCX files for VistA Imaging", hActual, 10);
+    StrSub (svLib, svMakeAbs, 0, StrLengthChars (svMakeAbs) - 12);
+    svLib = svLib + "\Lib\\";
+    svBatFile = "mag_bat_01.bat";
+    bContinue = bContinue && MAGDeleteFile (svTempDir + svBatFile);
+    OpenFileMode (FILE_MODE_NORMAL);
+    if (CreateFile (nvFileHandle, svTempDir, svBatFile) < 0) then
+      MessageBox ("Unable to create batch file for (un)registering OCX files.", SEVERE);
+      bContinue = FALSE;
+    endif;
+  endif;
+  if (bContinue) then
+    svApp = "";
+    if (iMakeAbs > 0) then
+      svApp = WINSYSDIR + "REGSVR32 /s ";
+    endif;
+    if (iMakeAbs < 0) then
+      svApp = WINSYSDIR + "REGSVR32 /u /s ";
+    endif;
+    if (StrLengthChars (svApp) > 0) then
+      WriteLine (nvFileHandle, "cd " + svLib);
+      WriteLine (nvFileHandle, 'for /R %%I in (*.ocx) do call :reg "%%I"');
+  	  WriteLine (nvFileHandle, 'for /R %%I in (*.dll) do call :reg "%%I"');
+      WriteLine (nvFileHandle, "goto :end");
+      WriteLine (nvFileHandle, ":reg");
+      WriteLine (nvFileHandle, "set file=%1");
+      WriteLine (nvFileHandle, svApp + "%file%");
+      WriteLine (nvFileHandle, ":end");
+    endif;
+    svApp = "";
+
+    if (CloseFile (nvFileHandle) < 0) then
+      MessageBox ("Could not close batch file (for processing OCX files).", SEVERE);
+      bContinue = FALSE;
+    endif;
+  endif;
+  if (bContinue) then
+    svApp = svTempDir + svBatFile;
+    svParam = "";
+    if (bDebug) then
+      MessageBox ("Batch file for OCX processing\n" + svApp + "\n" + svParam, INFORMATION);
+    endif;
+    if (LaunchAppAndWait (svApp, svParam, LAAW_OPTION_WAIT | LAAW_OPTION_HIDDEN) < 0) then
+      MessageBox ("Unable to process OCX files.", SEVERE);
+      bContinue = FALSE;
+    endif;
+  endif;
+
+  if (bContinue) then
+  //  ShowStatus ("Prepare to run Caché Silent Installation", hActual, 15);
+    bOK = TRUE;
+    if (FindFile (svDriveLetter + ":\\CacheSys\\bin", "css.exe", svResult) < 0) then
+      bOK = FALSE;
+    endif;
+    bInitialCache = TRUE;
+    if (iMain > 0) then // Install or Update Caché
+      if (bOK) then
+        //svISSFile = svTempDir + "UpdateCache";
+        bInitialCache = FALSE;
+        //ShowStatus ("Determine current Caché version", hActual, 16);
+        //lVersion = MagGetCacheVersion ("CACHE");
+     else
+        //svISSFile = svTempDir + "FirstCache";
+        bInitialCache = TRUE;
+        //lVersion = 0;
+      endif;
+    endif;
+  endif;
+  
+  if (bContinue) then
+    if (iMain < 0) then // Un-Install or Remove Caché
+        // Remove must be done through Microsoft Windows Control Panel...
+        // svISSFile = ""; // svTempDir + "RemoveCache.iss";
+        bInitialCache = FALSE;
+        if (StrLengthChars (svReminder) > 0) then
+          svReminder = svReminder + "\n\n";
+        endif;
+        svReminder = svReminder + "Don't forget to uninstall Caché using the\n";
+        svReminder = svReminder + "Microsoft Windows Control Panel.";
+    endif;
+    bInitialDB = bInitialCache;
+    if (FindFile (svDriveLetter + ":\\DICOM\\Cache", "Cache.dat", svResult) >= 0) then
+      bInitialDB = FALSE;
+    endif;
+  endif;
+  
+    svApp = "";
+    svBatFile = "MAGInstall.bat";
+    bContinue = bContinue && MAGDeleteFile (svTempDir + svBatFile);
+    bContinue = bContinue && MAGDeleteFile (svTempDir + szLogFile);
+    if (bContinue) then
+      OpenFileMode (FILE_MODE_NORMAL);
+      if (CreateFile (nvFileHandle, svTempDir, svBatFile) < 0) then
+        MessageBox ("Unable to create batch file.", SEVERE);
+        bContinue = FALSE;
+      endif;
+    endif;
+
+	msiGetResult = MsiGetProperty(hWindow, "INSTALLENV", svInstallEnv, lTemp);
+	if (ERROR_MORE_DATA == msiGetResult) then
+		lTemp = lTemp + 1; 
+		MsiGetProperty (hWindow, "INSTALLENV", svInstallEnv, lTemp); 
+	endif; 	
+    if (bContinue) then
+		RegDBSetDefaultRoot (HKEY_LOCAL_MACHINE);
+		WriteLine(nvFileHandle, "@ECHO off");		
+		WriteLine(nvFileHandle, "echo Begin Cache 2010 install and configuration.");
+		WriteLine(nvFileHandle, "echo This may take some time, please wait.");
+	//	if (RegDBGetKeyValueEx("SOFTWARE\\InterSystems\\Cache\\Configurations\\CACHE", "Version", nvType, svVersion, nvSize)< 0) then //Cache is not installed.
+	//		if (StrCompare (svInstallEnv, "IHS") == 0) then  
+	//			WriteLine(nvFileHandle, "copy " + svDriveLetter + ":\\CacheDist\\2009cache.key.Ensemble1000 " + svDriveLetter + ":\\Cachesys\\mgr\\cache.key");
+	//			MAGDeleteFile(svDriveLetter + ":\\CacheDist\\cache_x32.key");
+	//			MAGDeleteFile(svDriveLetter + ":\\CacheDist\\cache_x64.key");
+	//		endif;
+	//	endif;
+
+		if (SYSINFO.bIsWow64) then //if  64 bit OS check the 32 bit application section of the registry.
+			REGDB_OPTIONS = REGDB_OPTIONS | REGDB_OPTION_WOW64_64KEY;
+		endif;
+
+		if (RegDBGetKeyValueEx("SOFTWARE\\InterSystems\\Cache\\Configurations\\CACHE", "Version", nvType, svVersion, nvSize)>= 0) then 
+			StrToNum(nVersionNumber,svVersion);
+			WriteLine(nvFileHandle, "echo Current installed Cache version is " + svVersion);
+		endif;
+		
+		//condition that Cache is not installed or the current version is 2005
+		if (RegDBGetKeyValueEx("SOFTWARE\\InterSystems\\Cache\\Configurations\\CACHE", "Version", nvType, svVersion, nvSize)< 0) ||((nVersionNumber<2010))then
+				
+			//If installing in the VA environment
+			if (StrCompare (svInstallEnv, "VA") == 0) then 
+				//rename cache.key to old5.key if Cache key is installed
+				if (FindFile (svDriveLetter + ":\\CacheSys\\mgr", "cache.key", svResult) == 0) then 
+					WriteLine(nvFileHandle, "IF errorlevel 0" + " " + "( "); //back up key
+					WriteLine(nvFileHandle, "IF EXIST " + svDriveLetter + ":\\CacheSys\\mgr\\cache.key" + " " + "(");
+					WriteLine(nvFileHandle, "attrib -r " + svDriveLetter + ":\\CacheSys\\mgr\\cache.key");
+					WriteLine(nvFileHandle, "rename " + svDriveLetter + ":\\CacheSys\\mgr\\cache.key old5.key" + ")" + ")");
+					if (SYSINFO.bIsWow64) then //copy 2010 key 
+						WriteLine(nvFileHandle, "copy " + svDriveLetter + ":\\CacheDist\\cache_x64.key " + svDriveLetter + ":\\Cachesys\\mgr\\cache.key");
+						MAGDeleteFile(svDriveLetter + ":\\CacheDist\\cache_x32.key");
+					else
+						WriteLine(nvFileHandle, "copy " + svDriveLetter + ":\\CacheDist\\cache_x32.key " + svDriveLetter + ":\\Cachesys\\mgr\\cache.key");
+						MAGDeleteFile(svDriveLetter + ":\\CacheDist\\cache_x64.key");
+					endif;
+				endif;
+			endif; //end VA environment condition check
+				
+			//For IHS, copy the key if Cache is not installed or previous version is 2005
+			if (StrCompare (svInstallEnv, "IHS") == 0) then  
+				WriteLine(nvFileHandle, "copy " + svDriveLetter + ":\\CacheDist\\2009cache.key.Ensemble1000 " + svDriveLetter + ":\\Cachesys\\mgr\\cache.key");
+				MAGDeleteFile(svDriveLetter + ":\\CacheDist\\cache_x32.key");
+				MAGDeleteFile(svDriveLetter + ":\\CacheDist\\cache_x64.key");
+			endif;
+		endif;	
+		
+		if ((nVersionNumber>=2010)&&(nVersionNumber<2011))then 
+			WriteLine(nvFileHandle, "IF EXIST " + svDriveLetter + ":\\CacheSys\\mgr\\old5.key" + " " + "(");
+			WriteLine(nvFileHandle, "attrib -r " + svDriveLetter + ":\\CacheSys\\mgr\\old5.key");
+			WriteLine(nvFileHandle, "rename " + svDriveLetter + ":\\CacheSys\\mgr\\old5.key Cache5.key" + ")");
+		endif;	
+		
+	endif;
+	RegDBSetDefaultRoot (HKEY_LOCAL_MACHINE);
+	if (SYSINFO.bIsWow64) then
+			if (RegDBGetKeyValueEx("SOFTWARE\\InterSystems\\Cache\\Configurations\\CACHE", "Version", nvType, svVersion, nvSize)>= 0) then 
+				StrToNum(nVersionNumber,svVersion);
+			endif;
+			if ((nVersionNumber>=2010)&&(nVersionNumber<2011))then 
+				svParam ="\"msiexec.exe /i " + svDriveLetter + ":\\CacheDist\\cache_x64.msi /qn REINSTALL=ALL INSTALLERMANIFEST=" + svDriveLetter + ":\\CacheDist\\DefaultInstallerClass.xml /l " + svTempDir + szLogFile + "\"";
+			else
+				svParam ="\"msiexec.exe /i " + svDriveLetter + ":\\CacheDist\\cache_x64.msi /qn INSTALLDIR=" + svDriveLetter + ":\\CacheSys INSTANCENAME=CACHE /l " + svTempDir + szLogFile + "\"";
+			endif;
+	else
+			if (RegDBGetKeyValueEx("SOFTWARE\\InterSystems\\Cache\\Configurations\\CACHE", "Version", nvType, svVersion, nvSize)>= 0) then 
+				StrToNum(nVersionNumber,svVersion);
+			endif;
+			if ((nVersionNumber>=2010)&&(nVersionNumber<2011))then 
+				svParam ="\"msiexec.exe /i " + svDriveLetter + ":\\CacheDist\\cache_x86.msi /qn REINSTALL=ALL INSTALLERMANIFEST=" + svDriveLetter + ":\\CacheDist\\DefaultInstallerClass.xml /l " + svTempDir + szLogFile + "\"";
+			else
+				svParam ="\"msiexec.exe /i " + svDriveLetter + ":\\CacheDist\\cache_x86.msi /qn INSTALLDIR=" + svDriveLetter + ":\\CacheSys INSTANCENAME=CACHE /l " + svTempDir + szLogFile + "\"";
+			endif;
+	endif;
+	if (SYSINFO.bIsWow64) then
+		REGDB_OPTIONS = REGDB_OPTION_USE_DEFAULT_OPTIONS;
+	endif;
+     svApp = "CMD /C";
+     WriteLine(nvFileHandle, "echo Installing Cache 2010...");
+     WriteLine(nvFileHandle, svApp + " " + svParam);
+     WriteLine(nvFileHandle, "echo Performing final cleanup...");     
+     WriteLine(nvFileHandle, "del /F /Q " + "\"" + svUser + "Desktop\\Install_Cache_2010.lnk" + "\"");
+	  WriteLine(nvFileHandle, "IF EXIST " + svDriveLetter + ":\\CacheSys\\mgr\\cache.key" + " " + "(");
+      WriteLine(nvFileHandle, svApp + " " + svDriveLetter + ":\\CacheSys\\bin\\css.exe stopstart CACHE");
+      WriteLine(nvFileHandle, svApp + " " + svDriveLetter + ":\\CacheSys\\bin\\cstart.exe CACHE"+ ")" + " " +"ELSE" + " " + "(");
+	  WriteLine(nvFileHandle, "Echo ************************************&echo.");
+	  WriteLine(nvFileHandle, "Echo ** No Cache license key detected! **&echo.");
+	  WriteLine(nvFileHandle, "Echo ************************************&echo.");
+	  WriteLine(nvFileHandle, ")");
+      WriteLine(nvFileHandle, "rmdir /S /Q " + svDriveLetter + ":\\CacheDist\\");
+	  WriteLine(nvFileHandle, "Echo Install Complete.&echo.");
+	  WriteLine(nvFileHandle, "Echo Don't forget to run menu-options:");
+	  WriteLine(nvFileHandle, "Echo  4-2-2 (Update Gateway Configuration Parameters)");
+  	  WriteLine(nvFileHandle, "Echo and");
+ 	  WriteLine(nvFileHandle, "Echo  4-2-9 (Reinitialize All the DICOM Master Files)");
+	  WriteLine(nvFileHandle, "Echo before starting any applications on the DICOM Gateway."); 
+	  WriteLine(nvFileHandle, "PAUSE");
+      WriteLine(nvFileHandle, "@ECHO on");
+        
+      //if (CURRENTCACHE > 5000999) then
+      //  WriteLine(nvFileHandle, "rename \"" + svTempDir + svFlagFile + "\" " + szLogFile);
+      //endif;
+      if (CloseFile (nvFileHandle) < 0) then
+        MessageBox ("Could not close batch file (Install Caché).", SEVERE);
+        bContinue = FALSE;
+      endif;
+    
+  
+	msiGetResult = MsiGetProperty(hWindow, "REINITDCMDB", svMsg, lTemp);
+	if (ERROR_MORE_DATA == msiGetResult) then
+		lTemp = lTemp + 1; 
+		MsiGetProperty (hWindow, "REINITDCMDB", svMsg, lTemp); 
+	endif; 	  
+  if (StrCompare (svMsg, "YES") == 0) then
+    bInitialDB = TRUE;
+  endif;
+  
+  if (FindFile (svDriveLetter + ":\\DICOM\\Cache", "Cache.dat", svResult) < 0) then
+    bInitialDB = TRUE;
+  endif;
+  
+  svParam = "Do Re-Init = " + svMsg;
+  if (bInitialDB) then
+    svParam = svParam + ", bInitialDB = TRUE";
+  else
+    svParam = svParam + ", bInitialDB = FALSE";
+  endif;
+  if (bDebug) then
+    MessageBox (svParam, INFORMATION);
+  endif;
+  
+  //
+  if ((iMain > 0) && bContinue && bInitialDB) then
+    ShowStatus ("Copy Initial Caché Database for DICOM", hActual, 65);
+    svParam = svDriveLetter + ":\\DICOM\\Cache\\Cache.dat";
+    bContinue = bContinue && MAGDeleteFile (svParam);
+    RenameFile (svDriveLetter + ":\\DICOM\\Cache\\Cache.template",
+                svDriveLetter + ":\\DICOM\\Cache\\Cache.dat");
+    if (bDebug) then
+      MessageBox ("renamed " + svDriveLetter + ":\\DICOM\\Cache\\Cache.template to\n" +
+                  svDriveLetter + ":\\DICOM\\Cache\\cache.dat", INFORMATION);
+    endif;
+  else
+    svParam = svDriveLetter + ":\\DICOM\\Cache\\Cache.Template";
+    bContinue = bContinue && MAGDeleteFile (svParam);
+  endif;
+  if ((iMain < 0) && bContinue) then
+    ShowStatus ("Remove Caché Database for DICOM", hActual, 65);
+    bContinue = bContinue && MAGDeleteFile (svDriveLetter + ":\\DICOM\\Cache\\Cache.dat");
+    bContinue = bContinue && MAGDeleteFile (svDriveLetter + ":\\DICOM\\Cache\\Cache.Template");
+  endif;
+  
+  if ((iMain > 0) && bContinue) then
+    ShowStatus ("Verify Caché License Key", hActual, 67);
+    svParam = svDriveLetter + ":\\Cachesys\\mgr";
+    svCacheLicense = svParam + "\\Cache.key";
+    if (FindFile (svParam, "Cache.key", svResult) < 0) then
+      bTempLicense = TRUE;
+    else
+      bTempLicense = FALSE;
+    endif;
+    
+  endif;
+    
+  if ((iMain > 0) && bContinue) then
+    ShowStatus ("Create ZSTU Routine", hActual, 72);
+    nZSTU = 0;
+    bContinue = bContinue && MAGDeleteFile (svDriveLetter + ":\\CacheDist\\" + szZSTUFile);
+    OpenFileMode (FILE_MODE_NORMAL);
+    if (CreateFile (nvFileHandle, svDriveLetter + ":\\CacheDist\\", szZSTUFile) < 0) then
+      MessageBox ("Unable to create ZSTU routine file.", SEVERE);
+      bContinue = FALSE;
+    else
+      svParam = svDriveLetter + ":\\DICOM\\Cache";
+	  WriteLine (nvFileHandle, "Cache for Windows NT^INT^Auto Generated by DICOM Install^~Format=Cache.S~");
+      WriteLine (nvFileHandle, "%RO on 01/04/2011  10:21");
+      WriteLine (nvFileHandle, "ZSTU^INT^1^62095,31062^0");
+      WriteLine (nvFileHandle, "ZSTU ;Generated by Installation Software");
+      WriteLine (nvFileHandle, " ;;3.0;IMAGING;;" + svDate);
+      WriteLine (nvFileHandle, " N D1,PORT");
+      WriteLine (nvFileHandle, " J CSTORE^ZSTU:(:::\"" + svParam + "\\CStore.out\")");
+      WriteLine (nvFileHandle, " W !,\"C-Store daemon running as process \",$ZCHILD,\".\"");
+      WriteLine (nvFileHandle, " S D1=0 F  S D1=$O(^[\"DICOM\"]MAGDICOM(2006.563,1,\"WORKLIST PORT\",D1)) Q:'D1  D");
+      WriteLine (nvFileHandle, " . S PORT=$G(^[\"DICOM\"]MAGDICOM(2006.563,1,\"WORKLIST PORT\",D1,0)) Q:'PORT");
+      WriteLine (nvFileHandle, " . J WORKLIST^ZSTU(PORT):(:::\"" + svParam + "\\WorkList_\"_PORT_\".out\")");
+      WriteLine (nvFileHandle, " . W !,\"WorkList daemon for port \"_PORT_\" running as process \",$ZCHILD,\".\"");
+      WriteLine (nvFileHandle, " . Q");
+      WriteLine (nvFileHandle, " ZN \"DICOM\"");
+      WriteLine (nvFileHandle, " J CSTORE^MAGVCSTR ; P34 listener");
+      WriteLine (nvFileHandle, " Q");
+      WriteLine (nvFileHandle, " ;");
+      WriteLine (nvFileHandle, "CSTORE N ACCEPT,SOCKET,STATUS");
+      WriteLine (nvFileHandle, " ZN \"DICOM\"");
+      WriteLine (nvFileHandle, " W !!!!,\"C-Store Processor\"");
+      WriteLine (nvFileHandle, " S $ET=\"D ^%ET\"");
+      WriteLine (nvFileHandle, " S SOCKET=\"|TCP|60000\"");
+      WriteLine (nvFileHandle, " O SOCKET:(:60000:\"AS\")");
+      WriteLine (nvFileHandle, " U $P W !,\"Socket is \",SOCKET");
+      WriteLine (nvFileHandle, " F  D  ; Not supposed to Quit until the system is shut down");
+      WriteLine (nvFileHandle, " . U SOCKET R ACCEPT");
+      WriteLine (nvFileHandle, " . J BACKGND^MAGDCST1:(:5:SOCKET:SOCKET)");
+      WriteLine (nvFileHandle, " . U $P W !,\"C-Store server running as process \",$ZCHILD");
+      WriteLine (nvFileHandle, " . Q");
+      WriteLine (nvFileHandle, " Q");
+      WriteLine (nvFileHandle, " ;");
+      WriteLine (nvFileHandle, "WORKLIST(PORT) N ACCEPT,SOCKET,STATUS");
+      WriteLine (nvFileHandle, " ZN \"DICOM\"");
+      WriteLine (nvFileHandle, " W !!!!,\"Modality WorkList Processor\"");
+      WriteLine (nvFileHandle, " S $ET=\"D ^%ET\"");
+      WriteLine (nvFileHandle, " S SOCKET=\"|TCP|\"_PORT");
+      WriteLine (nvFileHandle, " O SOCKET:(:PORT:\"AS\")");
+      WriteLine (nvFileHandle, " U $P W !,\"Socket is \",SOCKET");
+      WriteLine (nvFileHandle, " F  D  ; Not supposed to Quit until the system is shut down");
+      WriteLine (nvFileHandle, " . U SOCKET R ACCEPT");
+      WriteLine (nvFileHandle, " . J BACKGND^MAGDACP1:(:5:SOCKET:SOCKET)");
+      WriteLine (nvFileHandle, " . U $P W !,\"Modality WorkList server running as process \",$ZCHILD");
+      WriteLine (nvFileHandle, " . Q");
+      WriteLine (nvFileHandle, " Q");
+      WriteLine (nvFileHandle, " ;");
+      WriteLine (nvFileHandle, "");
+      WriteLine (nvFileHandle, "");
+      WriteLine (nvFileHandle, "");
+      if (CloseFile (nvFileHandle) < 0) then
+        MessageBox ("Could not close file \"" + szZSTUFile + "\".", SEVERE);
+        bContinue = FALSE;
+      endif;
+    endif;
+  endif;
+      
+  if ((iMain > 0) && bContinue) then
+    ShowStatus ("Create DICOM Global Variables", hActual, 80);
+    OpenFileMode (FILE_MODE_NORMAL);
+    if (CreateFile (nvFileHandle, svDriveLetter + ":\\CacheDist\\Install", szGlobFile) < 0) then
+      MessageBox ("Unable to create DICOM Global Variable Save file.", SEVERE);
+      bContinue = FALSE;
+    else
+      // Make sure that there is enough of ^%ZOSF to get normal work done
+      //WriteLine (nvFileHandle, "Update Settings");
+      WriteLine (nvFileHandle, "~Format=5.S~");
+      WriteLine (nvFileHandle, "28 Jul 2011   5:00 PM   Cache");
+      if (bInitialDB) then
+        //WriteLine (nvFileHandle, "Init 1");
+        WriteLine(nvFileHandle, "^MAGDICOM(2006.563,0)");
+        WriteLine(nvFileHandle, "DICOM GATEWAY PARAMETER^2006.563^1^1");
+        WriteLine(nvFileHandle, "^MAGDICOM(2006.563,1,\"WORKLIST PORT\",0)");
+        WriteLine(nvFileHandle, "^2006.5632^1^1");
+        WriteLine(nvFileHandle, "^MAGDICOM(2006.563,1,\"WORKLIST PORT\",1,0)");
+        WriteLine(nvFileHandle, "60010");
+        WriteLine(nvFileHandle, "^MAGDICOM(2006.563,1,\"CURRENT IMAGE DESTINATION\")");
+        WriteLine(nvFileHandle, "");
+        WriteLine(nvFileHandle, "^MAGDICOM(2006.563,1,\"LOCATION\")");
+        WriteLine(nvFileHandle, "");
+        WriteLine(nvFileHandle, "^MAGDICOM(2006.563,1,\"LOCATION NAME\")");
+        WriteLine(nvFileHandle, "");        
+        WriteLine(nvFileHandle, "^MAGDICOM(2006.563,1,\"M-to-M BROKER ADDR\")");
+        WriteLine(nvFileHandle, "");
+        WriteLine(nvFileHandle, "^MAGDICOM(2006.563,1,\"M-to-M BROKER ACCESS\")");
+        WriteLine(nvFileHandle, "");
+        WriteLine(nvFileHandle, "^MAGDICOM(2006.563,1,\"M-to-M BROKER VERIFY\")");
+        WriteLine(nvFileHandle, "");
+        WriteLine(nvFileHandle, "^MAGDICOM(2006.563,1,\"M-to-M BROKER PORT\")");
+        WriteLine(nvFileHandle, "");
+        WriteLine(nvFileHandle, "^MAGDICOM(2006.563,1,\"M-to-M BROKER BGND ACCESS\")");
+        WriteLine(nvFileHandle, "");
+        WriteLine(nvFileHandle, "^MAGDICOM(2006.563,1,\"M-to-M BROKER BGND VERIFY\")");
+        WriteLine(nvFileHandle, "");
+        WriteLine(nvFileHandle, "^MAGDICOM(2006.563,1,\"IMAGE GATEWAY\")");
+        WriteLine(nvFileHandle, "");
+        WriteLine(nvFileHandle, "^MAGDICOM(2006.563,1,\"MACHINE ID\")");
+        WriteLine(nvFileHandle, "");
+        WriteLine(nvFileHandle, "^MAGDICOM(2006.563,1,\"MAILGROUP\")");
+        WriteLine(nvFileHandle, "");        
+        WriteLine(nvFileHandle, "^MAGDICOM(2006.563,1,\"COMMERCIAL PACS\")");
+        WriteLine(nvFileHandle, "");
+        WriteLine(nvFileHandle, "^MAGDICOM(2006.563,1,\"MODALITY WORKLIST\")");
+        WriteLine(nvFileHandle, "");        
+        WriteLine(nvFileHandle, "^MAGDICOM(2006.563,1,\"PACS EXAM COMPLETE\")");
+        WriteLine(nvFileHandle, "");
+        WriteLine(nvFileHandle, "^MAGDICOM(2006.563,1,\"ROUTING PROCESSOR\")");
+        WriteLine(nvFileHandle, "");
+        WriteLine(nvFileHandle, "^MAGDICOM(2006.563,1,\"SYSTEM TITLE\")");
+        WriteLine(nvFileHandle, "");
+        WriteLine(nvFileHandle, "^MAGDICOM(2006.563,1,\"SEND CPT MODIFIERS\")");
+        WriteLine(nvFileHandle, "");
+        WriteLine(nvFileHandle, "^MAGDICOM(2006.563,1,\"SEND PACS TEXT\")");
+        WriteLine(nvFileHandle, "");
+        WriteLine(nvFileHandle, "^MAGDICOM(2006.563,1,\"SHOW PATIENT NAME & ID\")");
+        WriteLine(nvFileHandle, "");
+        WriteLine(nvFileHandle, "^MAGDICOM(2006.563,1,\"SSN DASHES FOR PACS\")");
+        WriteLine(nvFileHandle, "");
+        WriteLine(nvFileHandle, "^MAGDICOM(2006.563,1,\"TEXT GATEWAY\")");
+        WriteLine(nvFileHandle, "");
+        WriteLine(nvFileHandle, "^MAGDICOM(2006.563,1,\"CONSOLIDATED\")");
+        WriteLine(nvFileHandle, "");
+        WriteLine(nvFileHandle, "^MAGDICOM(2006.563,1,\"TEXT GATEWAY SERVICE\")");
+        WriteLine(nvFileHandle, "");
+        WriteLine(nvFileHandle, "^MAGDICOM(2006.563,1,\"CONSOLIDATED\")");
+        WriteLine(nvFileHandle, "");
+        WriteLine(nvFileHandle, "^MAGDICOM(2006.563,1,\"DOMAIN\")");
+        WriteLine(nvFileHandle, "");
+        WriteLine(nvFileHandle, "^MAGDICOM(2006.563,1,\"ASCII DICOM TEXT\")");
+        WriteLine(nvFileHandle, "");
+        WriteLine(nvFileHandle, "^MAGDICOM(2006.563,1,\"ASCII DICOM TEXT\")");
+        WriteLine(nvFileHandle, "");
+      else
+        //WriteLine (nvFileHandle, "Init 0");
+      endif;
+      WriteLine (nvFileHandle, "^%ZOSF(\"MGR\")");
+      WriteLine (nvFileHandle, "DICOM");
+      WriteLine (nvFileHandle, "^%ZOSF(\"VOL\")");
+      WriteLine (nvFileHandle, "DICOM");
+      WriteLine (nvFileHandle, "^%ZOSF(\"BRK\")");
+      WriteLine (nvFileHandle, "B 1");
+      WriteLine (nvFileHandle, "^%ZOSF(\"EOFF\")");
+      WriteLine (nvFileHandle, "U $I:(:\"S\")");
+      WriteLine (nvFileHandle, "^%ZOSF(\"EON\")");
+      WriteLine (nvFileHandle, "U $I:(:\"\")");
+      WriteLine (nvFileHandle, "^%ZOSF(\"ERRTN\")");
+      WriteLine (nvFileHandle, "BACK^%ETN");
+      WriteLine (nvFileHandle, "^%ZOSF(\"ETRP\")");
+      WriteLine (nvFileHandle, "Q");
+      WriteLine (nvFileHandle, "^%ZOSF(\"OS\")");
+      WriteLine (nvFileHandle, "OpenM-NT^18");
+      WriteLine (nvFileHandle, "^%ZOSF(\"TEST\")");
+      WriteLine (nvFileHandle, "I X?1(1\"%\",1A).7AN,$D(^$ROUTINE(X))");
+      WriteLine (nvFileHandle, "^%ZOSF(\"TRAP\")");
+      WriteLine (nvFileHandle, "$ZT=X");
+      WriteLine (nvFileHandle, "^%ZOSF(\"UPPERCASE\")");
+      WriteLine (nvFileHandle, "S Y=$TR(X,\"abcdefghijklmnopqrstuvwxyz\",\"ABCDEFGHIJKLMNOPQRSTUVWXYZ\")");
+      StrSub (svParam, svTempDir, 0, StrLengthChars (svTempDir) - 1);
+      WriteLine (nvFileHandle, "^MAGDICOM(2006.563,1,\"SCRATCH\")");
+      WriteLine (nvFileHandle, svParam );
+      // Dictionary
+      WriteLine (nvFileHandle, "^MAGDICOM(2006.563,1,\"DICT PATH\")");
+      WriteLine (nvFileHandle, svDictDrive + "\\DICOM\\DICT");
+      // Image
+      WriteLine (nvFileHandle, "^MAGDICOM(2006.563,1,\"IMAGE INPUT PATH\")");
+      WriteLine (nvFileHandle, "" + svImageDrive + "\\DICOM\\IMAGE_IN");
+      WriteLine (nvFileHandle, "^MAGDICOM(2006.563,1,\"IMAGE OUTPUT PATH\")");
+      WriteLine (nvFileHandle, svImageDrive + "\\DICOM\\IMAGE_OUT");
+      // Text
+      NumToStr (svParam, iDataDir);
+      WriteLine (nvFileHandle, "^MAGDICOM(2006.563,1,\"DATA PATH\",0)");
+      WriteLine (nvFileHandle, "^2006.5631^" + svParam + "^" + svParam);
+      for iLoop = 1 to iDataDir
+        NumToStr (svParam, iLoop);
+        WriteLine (nvFileHandle, "^MAGDICOM(2006.563,1,\"DATA PATH\"," + svParam + ",0)");
+        WriteLine (nvFileHandle, svTextDrive + "\\DICOM\\DATA" + svParam);
+      endfor;
+      WriteLine (nvFileHandle, "^MAGDICOM(2006.563,1,\"INSTRUMENT PATH\")");
+      WriteLine (nvFileHandle, svTextDrive + "\\DICOM\\INSTRUMENT");
+      WriteLine (nvFileHandle, "^MAGDICOM(2006.563,1,\"UID ROOT\")");
+      WriteLine (nvFileHandle, "1.2.840.113754");
+      WriteLine (nvFileHandle, "^MAGDICOM(2006.563,1,\"LOGIN PROGRAMMER ACCESS\")");
+      WriteLine (nvFileHandle, "5007061268");
+      // trailer
+      WriteLine (nvFileHandle, "");
+      WriteLine (nvFileHandle, "");
+      WriteLine (nvFileHandle, "");
+      if (CloseFile (nvFileHandle) < 0) then
+        MessageBox ("Could not close file \"" + szGlobFile + "\".", SEVERE);
+        bContinue = FALSE;
+      endif;
+    endif;
+  endif;
+    
+  if ((iText > 0) && bContinue) then
+    ShowStatus ("Initialize Text Data Directories", hActual, 86);
+    svBatFile = "mag_bat_07.bat";
+    bContinue = bContinue && MAGDeleteFile (svTempDir + svBatFile);
+    OpenFileMode (FILE_MODE_NORMAL);
+    if (CreateFile (nvFileHandle, svTempDir, svBatFile) < 0) then
+      MessageBox ("Unable to create batch file to load DICOM Global Variables.", SEVERE);
+      bContinue = FALSE;
+    else
+      WriteLine (nvFileHandle, svTextDrive);
+      for iLoop = 1 to 9
+        NumToStr (svParam, iLoop);
+        if (iLoop <= iDataDir) then
+          WriteLine (nvFileHandle, "cd " + svTextDrive + "\\DICOM\\Data" + svParam);
+          WriteLine (nvFileHandle, "call " + svTextDrive + "\\DICOM\\Data" + svParam + "\\init_dicom.bat 1");
+        else
+          WriteLine (nvFileHandle, "rmdir /s /q " + svTextDrive + "\\DICOM\\Data" + svParam);
+        endif;
+      endfor;
+      if (CloseFile (nvFileHandle) < 0) then
+        MessageBox ("Could not close file \"" + svBatFile + "\".", SEVERE);
+        bContinue = FALSE;
+      endif;
+    endif;
+  endif;
+  if ((iText > 0) && bContinue) then
+    svApp = svTempDir + svBatFile;
+    svParam = "";
+    if (bDebug) then
+      MessageBox ("Batch file for Data(i) Text Directories\n" + svApp + "\n" + svParam, INFORMATION);
+    endif;
+    if (LaunchAppAndWait (svApp, svParam, LAAW_OPTION_WAIT | LAAW_OPTION_HIDDEN) < 0) then
+      MessageBox ("Unable (re)initialize Text Data Directories.", SEVERE);
+      bContinue = FALSE;
+    endif;
+  endif;
+  if ((iDictionary > 0) && bContinue) then
+    if (bDebug) then
+      MessageBox ("Rename Sample Files", INFORMATION);
+    endif;
+    svTemp = "";
+    ShowStatus ("Rename Sample Files", hActual, 88);
+    if (FindFile (svDictionary, "\\Dict\\AE_TITLE.dic", svResult) < 0) then
+      svParam = svDictionary + "\\Dict\\AE_TITLE.dic";
+      svApp =   svDictionary + "\\Dict\\AE_TITLE.Sample";
+      svTemp = svTemp + "\nAE_TITLE.dic";
+      RenameFile (svApp, svParam);
+    endif;
+    if (FindFile (svDictionary, "\\Dict\\Instrument.dic", svResult) < 0) then
+      svParam = svDictionary + "\\Dict\\Instrument.dic";
+      svApp =   svDictionary + "\\Dict\\Instrument.Sample";
+      svTemp = svTemp + "\nInstrument.dic";
+      RenameFile (svApp, svParam);
+    endif;
+    if (FindFile (svDictionary, "\\Dict\\Modality.dic", svResult) < 0) then
+      svParam = svDictionary + "\\Dict\\Modality.dic";
+      svApp =   svDictionary + "\\Dict\\Modality.Sample";
+      svTemp = svTemp + "\nModality.dic";
+      RenameFile (svApp, svParam);
+    endif;
+    if (FindFile (svDictionary, "\\Dict\\PortList.dic", svResult) < 0) then
+      svParam = svDictionary + "\\Dict\\PortList.dic";
+      svApp =   svDictionary + "\\Dict\\PortList.Sample";
+      svTemp = svTemp + "\nPortList.dic";
+      RenameFile (svApp, svParam);
+    endif;
+    if (FindFile (svDictionary, "\\Dict\\Route.dic", svResult) < 0) then
+      svParam = svDictionary + "\\Dict\\Route.dic";
+      svApp =   svDictionary + "\\Dict\\Route.Sample";
+      svTemp = svTemp + "\nRoute.dic";
+      RenameFile (svApp, svParam);
+    endif;
+    if (FindFile (svDictionary, "\\Dict\\SCU_List.dic", svResult) < 0) then
+      svParam = svDictionary + "\\Dict\\SCU_List.dic";
+      svApp =   svDictionary + "\\Dict\\SCU_List.Sample";
+      svTemp = svTemp + "\nSCU_List.dic";
+     RenameFile (svApp, svParam);
+    endif;
+    if (FindFile (svDictionary, "\\Dict\\WorkList.dic", svResult) < 0) then
+      svParam = svDictionary + "\\Dict\\WorkList.dic";
+      svApp =   svDictionary + "\\Dict\\WorkList.Sample";
+      svTemp = svTemp + "\nWorkList.dic";
+      RenameFile (svApp, svParam);
+    endif;
+    if (bDebug) then
+      if (StrLengthChars (svTemp) > 0) then
+        MessageBox ("Renaming:" + svTemp, INFORMATION);
+      endif;
+    endif;
+    svParam = svDictionary + "\\Dict\\AE_TITLE.dic";
+    GetFileInfo (svParam, FILE_ATTRIBUTE, lResult, svMsg);
+    if (lResult & FILE_ATTR_READONLY != 0) then
+      SetFileInfo (svParam, FILE_ATTRIBUTE, lResult - FILE_ATTR_READONLY, "");
+    endif;
+    svParam = svDictionary + "\\Dict\\Instrument.dic";
+    GetFileInfo (svParam, FILE_ATTRIBUTE, lResult, svMsg);
+    if (lResult & FILE_ATTR_READONLY != 0) then
+      SetFileInfo (svParam, FILE_ATTRIBUTE, lResult - FILE_ATTR_READONLY, "");
+    endif;
+    svParam = svDictionary + "\\Dict\\Modality.dic";
+    GetFileInfo (svParam, FILE_ATTRIBUTE, lResult, svMsg);
+    if (lResult & FILE_ATTR_READONLY != 0) then
+      SetFileInfo (svParam, FILE_ATTRIBUTE, lResult - FILE_ATTR_READONLY, "");
+    endif;
+    svParam = svDictionary + "\\Dict\\PortList.dic";
+    GetFileInfo (svParam, FILE_ATTRIBUTE, lResult, svMsg);
+    if (lResult & FILE_ATTR_READONLY != 0) then
+      SetFileInfo (svParam, FILE_ATTRIBUTE, lResult - FILE_ATTR_READONLY, "");
+    endif;
+    svParam = svDictionary + "\\Dict\\Route.dic";
+    GetFileInfo (svParam, FILE_ATTRIBUTE, lResult, svMsg);
+    if (lResult & FILE_ATTR_READONLY != 0) then
+      SetFileInfo (svParam, FILE_ATTRIBUTE, lResult - FILE_ATTR_READONLY, "");
+    endif;
+    svParam = svDictionary + "\\Dict\\SCU_List.dic";
+    GetFileInfo (svParam, FILE_ATTRIBUTE, lResult, svMsg);
+    if (lResult & FILE_ATTR_READONLY != 0) then
+      SetFileInfo (svParam, FILE_ATTRIBUTE, lResult - FILE_ATTR_READONLY, "");
+    endif;
+    svParam = svDictionary + "\\Dict\\WorkList.dic";
+    GetFileInfo (svParam, FILE_ATTRIBUTE, lResult, svMsg);
+    if (lResult & FILE_ATTR_READONLY != 0) then
+      SetFileInfo (svParam, FILE_ATTRIBUTE, lResult - FILE_ATTR_READONLY, "");
+    endif;
+  endif;
+  
+  if ((iMain > 0) && bContinue) then
+    ShowStatus ("Update Hosts File.", hActual, 90);
+    bContinue = bContinue && UpdateHostsFile ();
+  endif;
+
+  if (bContinue) then
+    ShowStatus ("Scan Registry for Obsolete Uninstall Entries.", hActual, 93);
+    nvType = REGDB_STRING;
+    RegDBSetDefaultRoot (HKEY_LOCAL_MACHINE);
+    svUninstall = "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Uninstall";
+    RegDBQueryKey (svUninstall, REGDB_KEYS, ListMachine);
+    nResult = ListGetFirstString (ListMachine, svKey);
+    svKeyLog = "Keys are:\n(This is " + PRODUCT_GUID + ")";
+    while (nResult != END_OF_LIST)
+      RegDBGetKeyValueEx (svUninstall + "\\" + svKey, "DisplayName", nvType, svValue, nvSize);
+      bOK = FALSE;
+      StrSub (svTemp, svValue, 0, 19);
+      if (StrCompare (svTemp, "VistA DICOM Gateway") == 0) then
+        bOK = TRUE;
+      endif;
+      StrSub (svTemp, svValue, 0, 22);
+      if (StrCompare (svTemp, "VistA Imaging - DICOM ") == 0) then
+        bOK = TRUE;
+      endif;
+      StrSub (svTemp, svValue, 0, 18);
+      if (StrCompare (svTemp, "VistA DICOM Patch ") == 0) then
+        bOK = TRUE;
+      endif;
+      if (bOK) then
+        svKeyLog = svKeyLog + "\n" + svValue + " from " + svKey;
+        if (StrCompare (PRODUCT_GUID, svKey) != 0) then
+          StrSub (svTemp, svKey, 0, 1);
+          if (StrCompare (svTemp, "{") == 0) then
+            svKeyLog = svKeyLog + " -- delete";
+            RegDBDeleteKey (svUninstall + "\\" + svKey);
+            ListAddString (ListName, svValue, AFTER);
+          endif;
+        else
+          svCurrent = svValue;
+        endif;
+      endif;
+      nResult = ListGetNextString (ListMachine, svKey);
+    endwhile;
+    RegDBSetDefaultRoot (HKEY_CURRENT_USER);
+    svProduct = "Software\\Microsoft\\Installer\\Products";
+    msiGetResult=MsiGetProperty (hWindow, "PackageCode", svValue, nvSize);
+	if (ERROR_MORE_DATA == msiGetResult) then
+		nvSize = nvSize + 1; 
+		MsiGetProperty (hWindow, "PackageCode", svValue, nvSize); 
+	endif; 		
+    svPackage = ReSequence (svValue);
+    RegDBQueryKey (svProduct, REGDB_KEYS, ListUser);
+    nResult = ListGetFirstString (ListUser, svKey);
+    svKeyLog = svKeyLog + "\nProducts are:\n(This is " + svCurrent + ")";
+    while (nResult != END_OF_LIST)
+      RegDBGetKeyValueEx (svProduct + "\\" + svKey, "ProductName", nvType, svValue, nvSize);
+      if (StrCompare (svCurrent, svValue) != 0) then
+        nResult = ListGetFirstString (ListName, svName);
+        while (nResult != END_OF_LIST)
+          if (StrCompare (svName, svValue) == 0) then
+            svKeyLog = svKeyLog + "\n" + svValue;
+            ListDeleteString (ListName);
+            RegDBDeleteKey (svProduct + "\\" + svKey);
+          endif;
+          nResult = ListGetNextString (ListName, svName);
+        endwhile;
+      else
+        RegDBGetKeyValueEx (svProduct + "\\" + svKey, "PackageCode", nvType, svValue, nvSize);
+        if (StrCompare (svValue, svPackage) != 0) then
+          svKeyLog = svKeyLog + "\n" + svKey + " = package " + svValue;
+          RegDBDeleteKey (svProduct + "\\" + svKey);
+        endif;
+      endif;
+      nResult = ListGetNextString (ListUser, svKey);
+    endwhile;
+    if (bDebug) then
+      MessageBox (svKeyLog, INFORMATION);
+    endif;
+    RegDBSetDefaultRoot (HKEY_CLASSES_ROOT);
+  endif;
+
+  if (bContinue) then
+    ShowStatus ("Save Parameters in Registry.", hActual, 95);
+    nvType = REGDB_STRING;
+    RegDBSetDefaultRoot (HKEY_LOCAL_MACHINE);
+    svKey = "SOFTWARE\\VistA\\Imaging\\DICOM";
+    if (iMain > 0) then
+      if (RegDBSetKeyValueEx (svKey, "DICOM_Look_Here", nvType, "LookHere", 8) < 0) then
+        MessageBox ("Unable to save DICOM_Look_Here in Registry.", SEVERE);
+        bContinue = FALSE;
+      endif;
+      if (RegDBSetKeyValueEx (svKey, "DICOM_Cache_Drive", nvType, svDriveLetter, 1) < 0) then
+        MessageBox ("Unable to save DICOM_Cache_Drive in Registry.", SEVERE);
+        bContinue = FALSE;
+      endif;
+    else
+      if (iMain < 0) then
+        MAGRegDBDeleteValue (svKey, "DICOM_Look_Here");
+        MAGRegDBDeleteValue (svKey, "DICOM_Cache_Drive");
+      endif;
+    endif;
+    if (iText > 0) then
+      if (RegDBSetKeyValueEx (svKey, "DICOM_Text_Drive", nvType, svTextDrive, 1) < 0) then
+        MessageBox ("Unable to save DICOM_Text_Drive in Registry.", SEVERE);
+        bContinue = FALSE;
+      endif;
+    else
+      if (iText < 0) then
+        MAGRegDBDeleteValue (svKey, "DICOM_Text_Drive");
+      endif;
+    endif;
+    if (iImage > 0) then
+      if (RegDBSetKeyValueEx (svKey, "DICOM_Image_Drive", nvType, svImageDrive, 1) < 0) then
+        MessageBox ("Unable to save DICOM_Image_Drive in Registry.", SEVERE);
+        bContinue = FALSE;
+      endif;
+    else
+      if (iImage < 0) then
+        MAGRegDBDeleteValue (svKey, "DICOM_Image_Drive");
+      endif;
+    endif;
+    if (iDictionary > 0) then
+      if (RegDBSetKeyValueEx (svKey, "DICOM_Dictionary_Drive", nvType, svDictDrive, 1) < 0) then
+        MessageBox ("Unable to save DICOM_Dictionary_Drive in Registry.", SEVERE);
+        bContinue = FALSE;
+      endif;
+    else
+      if (iDictionary < 0) then
+        MAGRegDBDeleteValue (svKey, "DICOM_Dictionary_Drive");
+      endif;
+    endif;
+    nvType = REGDB_NUMBER;
+    NumToStr (svParam, iDataDir);
+    iLoop = StrLength (svParam);
+    if (iText > 0) then
+      if (RegDBSetKeyValueEx (svKey, "DICOM_Data_Dir", nvType, svParam, iLoop) < 0) then
+        MessageBox ("Unable to save DICOM_Text_Drive in Registry.", SEVERE);
+        bContinue = FALSE;
+      endif;
+    else
+      if (iText < 0) then
+        MAGRegDBDeleteValue (svKey, "DICOM_Data_Dir");
+      endif;
+    endif;
+    
+      if (RegDBDeleteValue (svEnv, "MAG_QR_DRIVE") < 0) then
+        //MessageBox ("Unable to remove MAG_QR_DRIVE from Registry.", SEVERE);
+        //bContinue = FALSE;
+      else
+        svParam = "Environment";
+        USER.SendMessageA (HWND_BROADCAST, WM_SETTINGCHANGE, 0, svParam);
+      endif;
+    //endif;
+    
+    RegDBSetDefaultRoot (HKEY_CLASSES_ROOT);
+  endif;
+
+        
+    // remove the DCF directory
+    svTemp = "Start Menu\\Programs\\Vista Imaging Programs\\DICOM\\";
+    MAGDeleteFile (INSTALLDIR + "QR.bat");
+    svBatFile = "mag_bat_09.bat";
+    MAGDeleteFile (svTempDir + svBatFile);
+    OpenFileMode (FILE_MODE_NORMAL);
+    if (CreateFile (nvFileHandle, svTempDir, svBatFile) >= 0) then
+      WriteLine (nvFileHandle, "rmdir /s /q \"" + svUser + svTemp + "QueryRetrieve\"");
+      WriteLine (nvFileHandle, "rmdir /s /q \"" + svAll + svTemp + "QueryRetrieve\"");
+      WriteLine (nvFileHandle, "rmdir /s /q \"" + svUser + svTemp + "Laurel Bridge\"");
+      WriteLine (nvFileHandle, "rmdir /s /q \"" + svAll + svTemp + "Laurel Bridge\"");      
+      if (CloseFile (nvFileHandle) < 0) then
+        MessageBox ("Could not close file \"" + svBatFile + "\".", SEVERE);
+        bContinue = FALSE;
+      endif;
+    endif;
+    svApp = svTempDir + svBatFile;
+    svParam = "";
+    LaunchAppAndWait (svApp, svParam, LAAW_OPTION_WAIT | LAAW_OPTION_HIDDEN);
+
+  //if ((iMain < 0) && bContinue) then
+    MAGDeleteFile (svAll + "Desktop\\JavaInstallEngines.bat");
+    MAGDeleteFile (svAll + "Desktop\\Start DICOM.lnk");
+  //endif;
+
+  ShowStatus ("Final Clean Up", hActual, 100);
+  svBatFile = "mag_bat_10.bat";
+  MAGDeleteFile (svTempDir + svBatFile);
+  GetDisk (svTempDir, svParam);
+  OpenFileMode (FILE_MODE_NORMAL);
+  lTemp = 0;
+  if (CreateFile (nvFileHandle, svTempDir, svBatFile) >= 0) then
+    WriteLine (nvFileHandle, "rem Final clean up");
+    lTemp = 1;
+  endif;
+  if ((iMain > 0) && (lTemp > 0) && bContinue) then
+    WriteLine (nvFileHandle, "rmdir /s /q \"" + svTempDir + "\Java\"");
+    WriteLine (nvFileHandle, "rmdir /s /q \"" + svTempDir + "\DCF_RunTime\"");
+    WriteLine (nvFileHandle, "rmdir /s /q \"" + svMakeAbs + "\"");
+    WriteLine (nvFileHandle, "rmdir /s /q \"" + svDriveLetter + ":\\DICOM\\Icons (Letters)\"");
+    WriteLine (nvFileHandle, "rmdir /s /q \"" + svDriveLetter + ":\\DICOM\\Icons (VA Logo)\"");
+    WriteLine (nvFileHandle, "rmdir /s /q \"" + svDriveLetter + ":\\DICOM\\Instrument\"");
+    WriteLine (nvFileHandle, "attrib -r " + INSTALLDIR + "\MAG_AbstrTGA.exe");
+    WriteLine (nvFileHandle, "del " + INSTALLDIR + "\MAG_AbstrTGA.exe");
+    WriteLine (nvFileHandle, "rmdir /s /q \"" + svUser + "\Start Menu\\Programs\\Vista Imaging Programs\\DICOM\\Instruments\"");
+    WriteLine (nvFileHandle, "rmdir /s /q \"" + svAll + "\Start Menu\\Programs\\Vista Imaging Programs\\DICOM\\Instruments\"");
+  endif;
+  if ((iMain < 0) && (lTemp > 0) && bContinue) then
+    WriteLine (nvFileHandle, svDriveLetter + ":\\CacheSys\\bin\\css.exe stopstart CACHE");
+    WriteLine (nvFileHandle, "attrib -r " + svDriveLetter + ":\\DICOM\\*.ico");
+    WriteLine (nvFileHandle, "attrib -r " + svDriveLetter + ":\\DICOM\\*.bat");
+    WriteLine (nvFileHandle, "attrib -r \"" + svTempDir + "\Java*.exe\"");
+    WriteLine (nvFileHandle, "del /q " + svDriveLetter + ":\\DICOM\\*.ico");
+    WriteLine (nvFileHandle, "del /q " + svDriveLetter + ":\\DICOM\\*.bat");
+    WriteLine (nvFileHandle, "del /q \"" + svTempDir + "\Java*.exe\"");
+    WriteLine (nvFileHandle, "rmdir /s /q " + svDriveLetter + ":\\DICOM\\Cache");
+    WriteLine (nvFileHandle, "rmdir /s /q " + svDriveLetter + ":\\DICOM\\web");
+    WriteLine (nvFileHandle, "rmdir /s /q " + svDriveLetter + ":\\DICOM\\Java");
+    WriteLine (nvFileHandle, "rmdir /s /q " + svDriveLetter + ":\\DICOM\\Abstract");
+    WriteLine (nvFileHandle, "rmdir /s /q \"" + svViewer + "\"");
+    WriteLine (nvFileHandle, "rmdir /s /q \"" + INSTALLDIR + "\"");
+    WriteLine (nvFileHandle, "rmdir /s /q \"" + svMakeAbs + "\"");
+    WriteLine (nvFileHandle, "rmdir /s /q \"" + svTempDir + "\DCF_RunTime\"");
+    WriteLine (nvFileHandle, "rmdir /s /q \"" + svTempDir + "\Java\"");
+    WriteLine (nvFileHandle, "rmdir /s /q \"" + svUser + "\Start Menu\\Programs\\Vista Imaging Programs\\DICOM\"");
+    WriteLine (nvFileHandle, "rmdir /s /q \"" + svAll + "\Start Menu\\Programs\\Vista Imaging Programs\\DICOM\"");
+    WriteLine (nvFileHandle, "del /q " + svUser + "\Start Menu\\Programs\\Vista Imaging Programs\\DICOM Viewer.lnk\"");
+    WriteLine (nvFileHandle, "del /q " + svAll + "\Start Menu\\Programs\\Vista Imaging Programs\\DICOM Viewer.lnk\"");
+  endif;
+  if ((iText < 0) && (lTemp > 0) && bContinue) then
+    WriteLine (nvFileHandle, "rmdir /s /q " + svText + "Data1");
+    WriteLine (nvFileHandle, "rmdir /s /q " + svText + "Data2");
+    WriteLine (nvFileHandle, "rmdir /s /q " + svText + "Data3");
+    WriteLine (nvFileHandle, "rmdir /s /q " + svText + "Data4");
+    WriteLine (nvFileHandle, "rmdir /s /q " + svText + "Data5");
+    WriteLine (nvFileHandle, "rmdir /s /q " + svText + "Data6");
+    WriteLine (nvFileHandle, "rmdir /s /q " + svText + "Data7");
+    WriteLine (nvFileHandle, "rmdir /s /q " + svText + "Data8");
+    WriteLine (nvFileHandle, "rmdir /s /q " + svText + "Data9");
+  endif;
+  if ((iDictionary < 0) && (lTemp > 0) && bContinue) then
+    WriteLine (nvFileHandle, "attrib -r " + svDictionary + "Dict\\*.dir");
+    WriteLine (nvFileHandle, "attrib -r " + svDictionary + "Dict\\*.Sample");
+    WriteLine (nvFileHandle, "del " + svDictionary + "Dict\\CT_PARAM.dic");
+    WriteLine (nvFileHandle, "del " + svDictionary + "Dict\\DATAGECT.DIC");
+    WriteLine (nvFileHandle, "del " + svDictionary + "Dict\\DATAMISC.DIC");
+    WriteLine (nvFileHandle, "del " + svDictionary + "Dict\\DATA_CR.DIC");
+    WriteLine (nvFileHandle, "del " + svDictionary + "Dict\\DATA_MRI.DIC");
+    WriteLine (nvFileHandle, "del " + svDictionary + "Dict\\ELEMENT.DIC");
+    WriteLine (nvFileHandle, "del " + svDictionary + "Dict\\HL7.DIC");
+    WriteLine (nvFileHandle, "del " + svDictionary + "Dict\\AE_TITLE.Sample");
+    WriteLine (nvFileHandle, "del " + svDictionary + "Dict\\Instrument.Sample");
+    WriteLine (nvFileHandle, "del " + svDictionary + "Dict\\Modality.Sample");
+    WriteLine (nvFileHandle, "del " + svDictionary + "Dict\\PortList.Sample");
+    WriteLine (nvFileHandle, "del " + svDictionary + "Dict\\Route.Sample");
+    WriteLine (nvFileHandle, "del " + svDictionary + "Dict\\SCP_LIST.DIC");
+    WriteLine (nvFileHandle, "del " + svDictionary + "Dict\\SCU_List.Sample");
+    WriteLine (nvFileHandle, "del " + svDictionary + "Dict\\TEMPLATE.DIC");
+    WriteLine (nvFileHandle, "del " + svDictionary + "Dict\\TEMPLATE.TMP");
+    WriteLine (nvFileHandle, "del " + svDictionary + "Dict\\UID.DIC");
+    WriteLine (nvFileHandle, "del " + svDictionary + "Dict\\WorkList.Sample");
+  endif;
+  
+    WriteLine (nvFileHandle, "attrib -r " + svJava + "Java\\*.*");
+    WriteLine (nvFileHandle, "del /f /s /q " + svJava + "\*.*");
+  
+  if ((lTemp > 0) && (CloseFile (nvFileHandle) < 0)) then
+    MessageBox ("Could not close file \"" + svBatFile + "\".", SEVERE);
+    bContinue = FALSE;
+  endif;
+  if (bDebug && bContinue) then
+    MessageBox ("Batch file for Final Clean Up\n" + svTempDir + svBatFile, INFORMATION);
+  endif;
+  if ((lTemp > 0) && bContinue) then
+    svApp = svTempDir + svBatFile;
+    svParam = "";
+    if (LaunchAppAndWait (svApp, svParam, LAAW_OPTION_WAIT | LAAW_OPTION_HIDDEN) < 0) then
+      MessageBox ("Unable to Perform Final Clean Up.", SEVERE);
+      bContinue = FALSE;
+    endif;
+  endif;
+  ShowStatus ("", hActual, 100);
+
+ // if (bContinue && (!bMasterOK) && (iMain > 0)) then
+  //  if (StrLengthChars (svReminder) > 0) then
+ //     svReminder = svReminder + "\n\n";
+ //   endif;
+  //  svReminder = svReminder + "Don't forget to run 'Install_Cache_2010'\n";
+  //  svReminder = svReminder + "  located on your desktop.\n";
+
+//  endif;
+ // if (StrLengthChars (svReminder) > 0) then
+  //  MessageBox (svReminder, INFORMATION);
+ // endif;
+  lResult = -13;
+  if (bContinue) then
+    lResult = 0;
+  endif;
+  return lResult;
+end;
+
+///////////////////////////////////////////////////////////////////////////////
+//  Function FormatDate accepts a Date String and a Time String
+//  in standard format, and returns a two strings:
+//    - the date represented as day-Month-year
+//    - the date and time represented as yyyymmddhhmmss
+//  The former is intended to be used as the external
+//  representation of the date, the latter is intended
+//  to be used in the name of the BackUp directory.
+///////////////////////////////////////////////////////////////////////////////
+
+function FormatDate (svOutDat, svBackDir, svDate, svTime)
+INT  day, month, year, hour, minute, second;
+INT  code, i, letter, part;
+STRING  svLet, svDay, svMonth, svYear, svHour, svMin, svSec;
+STRING Months (12);
+
+
+
+begin
+  day = 0;
+  month = 0;
+  year = 0;
+  hour = 0;
+  minute = 0;
+  second = 0;
+  part = 1;
+  Months ( 0) = "January";
+  Months ( 1) = "February";
+  Months ( 2) = "March";
+  Months ( 3) = "April";
+  Months ( 4) = "May";
+  Months ( 5) = "June";
+  Months ( 6) = "July";
+  Months ( 7) = "August";
+  Months ( 8) = "September";
+  Months ( 9) = "October";
+  Months (10) = "November";
+  Months (11) = "December";
+  for letter = 1 to StrLengthChars (svDate)
+    StrSub (svLet, svDate, letter - 1, 1);
+    code = STRTOCHAR (svLet);
+    if ((code < 48) || (code > 57)) then
+      code = -1;
+    else
+      code = code - 48;
+    endif;
+    if (code < 0) then
+      part++;
+    else
+      if (part = 1) then
+        month = month * 10 + code;
+      endif;
+      if (part = 2) then
+        day = day * 10 + code;
+      endif;
+      if (part = 3) then
+        year = year * 10 + code;
+      endif;
+    endif;
+  endfor;
+  part = 1;
+  for letter = 1 to StrLengthChars (svTime)
+    StrSub (svLet, svTime, letter - 1, 1);
+    code = STRTOCHAR (svLet);
+    if ((code < 48) || (code > 57)) then
+      code = -1;
+    else
+      code = code - 48;
+    endif;
+    if (code < 0) then
+      part++;
+    else
+      if (part = 1) then
+        hour = hour * 10 + code;
+      endif;
+      if (part = 2) then
+        minute = minute * 10 + code;
+      endif;
+      if (part = 3) then
+        second = second * 10 + code;
+      endif;
+    endif;
+  endfor;
+  NumToStr (svDay,  day);
+  NumToStr (svYear, year);
+  NumToStr (svHour, hour);
+  NumToStr (svMin,  minute);
+  NumToStr (svSec,  second);
+  if (month > 0) && (month < 13) then
+    svMonth = Months (month - 1);
+  endif;
+  svOutDat = svDay + "-" + svMonth + "-" + svYear;
+  NumToStr (svMonth, month);
+  for i = 1 to 3
+    if (StrLengthChars (svYear) < 4) then
+      svYear = "0" + svYear;
+    endif;
+  endfor;
+  if (StrLengthChars (svDay) < 2) then
+    svDay = "0" + svDay;
+  endif;
+  if (StrLengthChars (svMonth) < 2) then
+    svMonth = "0" + svMonth;
+  endif;
+  if (StrLengthChars (svHour) < 2) then
+    svHour = "0" + svHour;
+  endif;
+  if (StrLengthChars (svMin) < 2) then
+    svMin = "0" + svMin;
+  endif;
+  if (StrLengthChars (svSec) < 2) then
+    svSec = "0" + svSec;
+  endif;
+  svBackDir = svYear + svMonth + svDay + svHour + svMin + svSec;
+end;
+
+/////////////////////////////////////////////////////////////////////////////
+function LONG CheckDestinations (hWindow)
+STRING  svList, svTemp, svMsg;
+STRING  svText, svImage, svDictionary, svViewer, svMakeAbs, svJava;
+LONG    lText, lImage, lDict, lViewer, lMakeAbs, lJava;
+LONG    lReturn;
+BOOL    bDebug;
+NUMBER  msiGetResult;	
+
+begin
+  lReturn = 0;
+  bDebug = (FindFile ("C:\\DICOM", "Debug.tmp", svMsg) >= 0);
+  msiGetResult=MsiGetProperty(hWindow, "DICOM2", svText, lText);
+  if (ERROR_MORE_DATA == msiGetResult) then
+	lText = lText + 1; 
+    MsiGetProperty (hWindow, "DICOM2", svText, lText); 
+  endif;  
+  msiGetResult = MsiGetProperty(hWindow, "DICOM3", svImage, lImage);
+  if (ERROR_MORE_DATA == msiGetResult) then
+	lImage = lImage + 1; //increment buffer size for terminating null
+       //Retrieve the property value
+    MsiGetProperty (hWindow, "DICOM3", svImage, lImage); 
+  endif;  
+  msiGetResult = MsiGetProperty(hWindow, "DICOM4", svDictionary, lDict);
+  if (ERROR_MORE_DATA == msiGetResult) then
+	lDict = lDict + 1;  
+    MsiGetProperty (hWindow, "DICOM4", svDictionary, lDict); 
+  endif;  
+  msiGetResult = MsiGetProperty(hWindow, "JAVA4", svJava, lJava);
+  if (ERROR_MORE_DATA == msiGetResult) then
+	lJava = lJava + 1; 
+    MsiGetProperty (hWindow, "JAVA4", svJava, lJava); 
+  endif;  
+  msiGetResult = MsiGetProperty(hWindow, "DCMVIEW", svViewer, lViewer);
+  if (ERROR_MORE_DATA == msiGetResult) then
+	lViewer = lViewer + 1; 
+    MsiGetProperty (hWindow, "DCMVIEW", svViewer, lViewer); 
+  endif; 
+  msiGetResult = MsiGetProperty(hWindow, "MAG_MAKEABS", svMakeAbs, lMakeAbs);
+  if (ERROR_MORE_DATA == msiGetResult) then
+	lMakeAbs = lMakeAbs + 1; 
+    MsiGetProperty (hWindow, "MAG_MAKEABS", svMakeAbs, lMakeAbs); 
+  endif;   
+  
+  if (bDebug) then
+    svList = "Caché Drive:      " + INSTALLDIR + "\n";
+    svList = svList + "Text Drive:       " + svText + "\n";
+    svList = svList + "Image Drive:      " + svImage + "\n";
+    svList = svList + "Dictionary Drive: " + svDictionary + "\n";
+    svList = svList + "DICOM Viewer:     " + svViewer + "\n";
+    svList = svList + "Abstract Maker:   " + svMakeAbs + "\n";
+    svList = svList + "Java:             " + svJava;
+    MessageBox (svList, INFORMATION);
+  endif;
+  svMsg = "Error in Set Up:";
+  StrSub (svTemp, svText, StrLengthChars (svText) - 7, 7);
+  if (StrCompare (svTemp, "\\DICOM\\") != 0) then
+    svMsg = svMsg + "\nDestination for Text Data is invalid.\n";
+    svMsg = svMsg + "Selected destination is \"" + svText + "\";";
+    svMsg = svMsg + "\n(Does not end in \"\\DICOM\\\".)";
+  endif;
+  StrSub (svTemp, svImage, StrLengthChars (svImage) - 7, 7);
+  if (StrCompare (svTemp, "\\DICOM\\") != 0) then
+    svMsg = svMsg + "\nDestination for Image Data is invalid;\n";
+    svMsg = svMsg + "Selected destination is \"" + svImage + "\";";
+    svMsg = svMsg + "\n(Does not end in \"\\DICOM\\\".)";
+  endif;
+  StrSub (svTemp, svDictionary, StrLengthChars (svDictionary) - 7, 7);
+    if (StrCompare (svTemp, "\\DICOM\\") != 0) then
+    svMsg = svMsg + "\nDestination for DICOM Dictionary Data is invalid;\n";
+    svMsg = svMsg + "Selected destination is \"" + svDictionary + "\";";
+    svMsg = svMsg + "\n(Does not end in \"\\DICOM\\\".)";
+  endif;
+  if (StrLengthChars (svMsg) > 20) then
+    svMsg = svMsg + "\nAborting installation...";
+    MessageBox (svMsg, SEVERE);
+    lReturn = -13;
+  endif;
+  // Value for environment variable MAG_QR_DRIVE
+
+  return lReturn;
+end;
+
+/////////////////////////////////////////////////////////////////////////////
+function STRING ReSequence (szIn)
+INT nPos;
+INT iCnt;
+STRING svOut;
+STRING svDigit;
+STRING szPos;
+
+begin
+  svOut = "";
+  szPos = "HGFEDCBAMLKJRQPOUTWVZY\\[^]`_badc";
+  for iCnt = 0 to 31
+    StrSub (svDigit, szPos, iCnt, 1);
+    nPos = STRTOCHAR (svDigit) - 64;
+    StrSub (svDigit, szIn, nPos, 1);
+    svOut = svOut + svDigit;
+  endfor;
+  return svOut;
+end;
+
+/////////////////////////////////////////////////////////////////////////////
+function LONG ShowStatus (szText, hActual, iPercent)
+
+begin
+
+  SdShowMsg ("", FALSE);
+  if (StrLengthChars (szText) > 0) then
+    // SetStatusWindow (iPercent, szText);
+    SdShowMsg (szText, TRUE);
+    SendMessage (hActual, WM_SYSCOMMAND, SC_MINIMIZE, 0);
+    // CtrlSetText (szDialogName, 31, szText);
+  else
+    //SetStatusWindow (iPercent, "--");
+    SendMessage (hActual, WM_SYSCOMMAND, SC_RESTORE, 0);
+  endif;
+  return 0;
+end;
+
+/////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////
+function BOOL MAGDeleteFile (szFileName)
+LONG    lResult;
+LONG    lExist;
+BOOL    bContinue;
+STRING  svMsg;
+
+begin
+  bContinue = TRUE;
+  lExist = GetFileInfo (szFileName, FILE_ATTRIBUTE, lResult, svMsg);
+  if ((lExist = 0) && (lResult & FILE_ATTR_READONLY != 0)) then
+    SetFileInfo (szFileName, FILE_ATTRIBUTE, lResult - FILE_ATTR_READONLY, "");
+  endif;
+  lResult = DeleteFile (szFileName);
+  if (lResult = ISERR_PATH_NOT_FOUND) then
+    lResult = 0;
+  endif;
+  if (lResult = ISERR_FILE_NOT_FOUND) then
+    lResult = 0;
+  endif;
+  if (lResult < 0) then
+    NumToStr (svMsg, lResult);
+    MessageBox ("Cannot delete file \"" + szFileName +
+        "\"\nStatus code is " + svMsg + " = " + FormatMessage (lResult), SEVERE);
+    bContinue = FALSE;
+  endif;
+  return bContinue;
+end;
+
+/////////////////////////////////////////////////////////////////////////////
+function LONG MAGNow ()
+LONG    hour, minute, second, part, letter, code;
+STRING  svLet, svTime;
+
+begin
+  GetSystemInfo (TIME, code, svTime);
+  part = 1;
+  hour = 0;
+  minute = 0;
+  second = 0;
+  for letter = 1 to StrLengthChars (svTime)
+    StrSub (svLet, svTime, letter - 1, 1);
+    code = STRTOCHAR (svLet);
+    if ((code < 48) || (code > 57)) then
+      code = -1;
+    else
+      code = code - 48;
+    endif;
+    if (code < 0) then
+      part++;
+    else
+      if (part = 1) then
+        hour = hour * 10 + code;
+      endif;
+      if (part = 2) then
+        minute = minute * 10 + code;
+      endif;
+      if (part = 3) then
+        second = second * 10 + code;
+      endif;
+    endif;
+  endfor;
+  return (hour * 60 + minute) * 60 + second;
+end;
+
+
+///////////////////////////////////////////////////////////////////////////////
+function LONG AskNData (hWindow)
+BOOL    bRadio1, bRadio2, bRadio3, bRadio4, bRadio5;
+STRING  svText, svKey;
+LONG    lNum, lText, nvType, lReturn;
+BOOL    bDebug;
+NUMBER  msiGetResult;	
+
+begin
+  bDebug = (FindFile ("C:\\DICOM", "Debug.tmp", svText) >= 0);
+  msiGetResult=MsiGetProperty(hWindow, "NDATADIR", svText, lText); // Default value
+   if (ERROR_MORE_DATA == msiGetResult) then
+	lText = lText + 1; 
+    MsiGetProperty (hWindow, "NDATADIR", svText, lText); 
+  endif; 
+  StrToNum (lNum, svText);
+  nvType = REGDB_NUMBER;
+  svKey = "SOFTWARE\\VistA\\Imaging\\DICOM";
+  RegDBSetDefaultRoot (HKEY_LOCAL_MACHINE);
+  if (RegDBGetKeyValueEx (svKey, "DICOM_Data_Dir", nvType, svText, lText) >= 0) then
+    StrToNum (lNum, svText); // Use registry value of there is one
+  endif;
+  RegDBSetDefaultRoot (HKEY_CLASSES_ROOT);
+  bRadio1 = (lNum = 1);
+  bRadio2 = (lNum = 2);
+  bRadio3 = (lNum = 3);
+  bRadio4 = (lNum = 4);
+  bRadio5 = (lNum = 5);
+  SetDialogTitle (DLG_ASK_OPTIONS, "Number of Data Directories\nSelect the number of PACSs to which text messages are to be sent.");
+  Disable (BACKBUTTON);
+  Disable (CANCELBUTTON);
+  lReturn = AskOptions (EXCLUSIVE, "Indicate the number of Text Data Directories for Sending Text Messages to PACSs.",
+             "1 (One)",         bRadio1,
+             "2 (Two)",         bRadio2,
+             "3 (Three)",       bRadio3,
+             "4 (Four)",        bRadio4,
+             "5 (Five)",        bRadio5);
+  EndDialog("AskOptions");
+  ReleaseDialog("AskOptions");
+  // One would expect that either EndDialog or ReleaseDialog
+  // would have the effect that the dialog window would be closed.
+  // Well neither does...
+  // Also, enabling the StatusBar does not have the effect that
+  // the status bar becomes enabled, but it does have the side-effect
+  // that the dialog window for Ask Options is closed...
+  // Pure Serendipity!
+  Enable (STATUSBAR);
+
+  Enable (BACKBUTTON);
+  Enable (CANCELBUTTON);
+  svText = "Result is: ";
+  if (bRadio1) then
+    svText = svText + "One";
+    MsiSetProperty(hWindow, "NDATADIR", "1");
+  endif;
+  if (bRadio2) then
+    svText = svText + "Two";
+    MsiSetProperty(hWindow, "NDATADIR", "2");
+  endif;
+  if (bRadio3) then
+    svText = svText + "Three";
+    MsiSetProperty(hWindow, "NDATADIR", "3");
+  endif;
+  if (bRadio4) then
+    svText = svText + "Four";
+    MsiSetProperty(hWindow, "NDATADIR", "4");
+  endif;
+  if (bRadio5) then
+    svText = svText + "Five";
+    MsiSetProperty(hWindow, "NDATADIR", "5");
+  endif;
+  if (bDebug) then
+    MessageBox (svText, INFORMATION);
+  endif;
+  return 0;
+end;
+
+///////////////////////////////////////////////////////////////////////////////
+function LONG InitDriveLetters (hWindow)
+STRING  svReg, svCache, svText, svImage, svDictionary, svKey, svStart;
+LONG    lReg, nvType;
+BOOL    bDebug;
+STRING  svTempDir;      // Full path+name of %TEMP% directory
+
+begin
+  // ALLUSERS = TRUE;
+  bDebug = (FindFile ("C:\\DICOM", "Debug.tmp", svReg) >= 0);
+  svCache = "C";
+  if (StrLengthChars (PROGRAMFILES) > 1) then
+    StrSub (svCache, PROGRAMFILES, 0, 1);
+  endif;
+  svCache = "C:";
+  svText = "C:";
+  svImage = "C:";
+  svDictionary = "C:";
+  nvType = REGDB_STRING;
+  RegDBSetDefaultRoot (HKEY_LOCAL_MACHINE);
+  svKey = "SOFTWARE\\VistA\\Imaging\\DICOM";
+  //if (RegDBGetKeyValueEx (svKey, "DICOM_Cache_Drive", nvType, svReg, lReg) >= 0) then
+  //  svCache = svReg;
+  //  if (StrLengthChars (svCache) = 1) then
+  //    svCache = svCache + ":";
+  //  endif;
+  //endif;
+  //if (RegDBGetKeyValueEx (svKey, "DICOM_Text_Drive", nvType, svReg, lReg) >= 0) then
+  //  svText = svReg;
+  //  if (StrLengthChars (svText) = 1) then
+  //    svText = svText + ":";
+  //  endif;
+  //endif;
+  if (RegDBGetKeyValueEx (svKey, "DICOM_Image_Drive", nvType, svReg, lReg) >= 0) then
+    svImage = svReg;
+    if (StrLengthChars (svImage) = 1) then
+      svImage = svImage + ":";
+    endif;
+  endif;
+  if (RegDBGetKeyValueEx (svKey, "DICOM_Dictionary_Drive", nvType, svReg, lReg) >= 0) then
+    svDictionary = svReg;
+    if (StrLengthChars (svDictionary) = 1) then
+      svDictionary = svDictionary + ":";
+    endif;
+  endif;
+  RegDBSetDefaultRoot (HKEY_CLASSES_ROOT);
+  INSTALLDIR = svCache + "\\Program Files\\VistA\\Imaging\\DICOM\\";
+  MsiSetProperty(hWindow, "DICOM1", svCache + "\\");
+  MsiSetProperty(hWindow, "DICOM2", svText + "\\DICOM\\");
+  MsiSetProperty(hWindow, "DICOM3", svImage + "\\DICOM\\");
+  MsiSetProperty(hWindow, "DICOM4", svDictionary + "\\DICOM\\");
+  MsiSetProperty(hWindow, "DICOM5", svCache + "\\DICOM\\");
+  MsiSetProperty(hWindow, "JAVA4", svCache + "\\DICOM\\Java\\");
+  if (bDebug) then
+    svReg = "Init: Cache=" + svCache;
+    svReg = svReg + ",\nText=" + svText;
+    svReg = svReg + ",\nImage=" + svImage;
+    svReg = svReg + ",\nDictionary=" + svDictionary + ".";
+    MessageBox (svReg, INFORMATION);
+  endif;
+  svTempDir = MagTempFolder ();
+  StrSub (svStart, svTempDir, StrLengthChars (svTempDir) - 1, 1);
+  if (StrCompare ("\\", svStart) != 0) then
+    svTempDir = svTempDir + "\\";
+  endif;
+  MAGDeleteFile (svTempDir + "JavaEngine.exe");
+  MAGDeleteFile (svTempDir + "JavaAILib.exe");
+  MAGDeleteFile (svTempDir + "JavaAIIOLib.exe");  
+end;
+
+
+///////////////////////////////////////////////////////////////////////////////
+function LONG InitPrimaryInstallDrive (hWindow)
+STRING  svReg, svCache, svKey;
+LONG    lReg, nvType;
+BOOL    bDebug;
+
+begin
+  // ALLUSERS = TRUE;
+  bDebug = (FindFile ("C:\\DICOM", "Debug.tmp", svReg) >= 0);
+  svCache = "C:";
+  nvType = REGDB_STRING;
+  RegDBSetDefaultRoot (HKEY_LOCAL_MACHINE);
+  svKey = "SOFTWARE\\VistA\\Imaging\\DICOM";
+  if (RegDBGetKeyValueEx (svKey, "DICOM_Cache_Drive", nvType, svReg, lReg) >= 0) then
+  	MsiSetProperty(hWindow, "DrivesInRegistry", "TRUE");
+    svCache = svReg;
+    if (StrLengthChars (svCache) = 1) then
+      svCache = svCache + ":";
+    endif;
+  endif;
+  RegDBSetDefaultRoot (HKEY_CLASSES_ROOT);
+  INSTALLDIR = svCache + "\\Program Files\\VistA\\Imaging\\DICOM\\";
+  if (bDebug) then
+    svReg = "Init: Cache=" + svCache;
+    MessageBox (svReg, INFORMATION);
+  endif;
+end;
+       
+///////////////////////////////////////////////////////////////////////////////
+function LONG InitINSTALLDIRDisk (hWindow)
+STRING svInsDisk;
+
+begin
+	if(ParsePath(svInsDisk, INSTALLDIR, DISK) >= 0) then
+		svInsDisk = svInsDisk + "\\";
+		MsiSetProperty(hWindow, "InstallDirDisk", svInsDisk);
+	endif;
+end;
+       
+
+///////////////////////////////////////////////////////////////////////////////
+function LONG AskReInit (hWindow)
+BOOL    bRadio1, bRadio2, bOK;
+STRING  svText, svResult, svDriveLetter;
+LONG    lReturn;
+BOOL    bDebug;
+
+begin
+  bDebug = (FindFile ("C:\\DICOM", "Debug.tmp", svText) >= 0);
+  MsiSetProperty(hWindow, "REINITDCMDB", "N/A");
+  bRadio1 = TRUE;
+  bRadio2 = FALSE;
+  bOK = TRUE;
+  svText = "No current application database...";
+  StrSub (svDriveLetter, INSTALLDIR,      0, 1);
+  if (FindFile (svDriveLetter + ":\\CacheSys\\bin", "css.exe", svResult) < 0) then
+    bOK = FALSE;
+  endif;
+  if (FindFile (svDriveLetter + ":\\DICOM\\Cache", "cache.dat", svResult) < 0) then
+    bOK = FALSE;
+  endif;
+  if (bOK) then
+    SetDialogTitle (DLG_ASK_OPTIONS, "Re-Initialize Database?\nKeep existing application database, or re-initialize it.");
+    Disable (BACKBUTTON);
+    Disable (CANCELBUTTON);
+    lReturn = AskOptions (EXCLUSIVE, "Indicate whether or not the existing application database is to be retained.",
+               "Keep Existing Database (typical selection)",   bRadio1,
+               "Re-Initialize Database (only in emergencies)", bRadio2);
+    EndDialog("AskOptions");
+    ReleaseDialog("AskOptions");
+    // One would expect that either EndDialog or ReleaseDialog
+    // would have the effect that the dialog window would be closed.
+    // Well neither does...
+    // Also, enabling the StatusBar does not have the effect that
+    // the status bar becomes enabled, but it does have the side-effect
+    // that the dialog window for Ask Options is closed...
+    // Pure Serendipity!
+    Enable (STATUSBAR);
+
+    Enable (BACKBUTTON);
+    Enable (CANCELBUTTON);
+    svText = "Result is: ";
+    if (bRadio1) then
+      svText = svText + "Keep Database";
+      MsiSetProperty(hWindow, "REINITDCMDB", "NO");
+    endif;
+    if (bRadio2) then
+      svText = svText + "Re-Initialize";
+      MsiSetProperty(hWindow, "REINITDCMDB", "YES");
+    endif;
+  endif;
+  if (bDebug) then
+    MessageBox (svText, INFORMATION);
+  endif;
+  return 0;
+end;
+
+/////////////////////////////////////////////////////////////////////////////
+function BOOL UpdateHostsFile ()
+BOOL    bContinue;
+BOOL    bDebug;
+NUMBER  nvHandleIn;
+NUMBER  nvHandleOut;
+STRING  svNameOut;
+STRING  svSysDir;
+STRING  svDir;
+STRING  svFileIn;
+STRING  svFileOut;
+STRING  svTemp;
+STRING  svNickName(20);
+STRING  svComment(20);
+BOOL    bNewName(20);
+BOOL    bRead;
+INT     nNames;
+INT     iName;
+LONG    EndOfFile;
+BOOL    bAny;
+INT     lLine;
+INT     iLetter;
+STRING  svLine;
+STRING  svName1;
+STRING  svName2;
+INT     iCol;
+
+begin
+  bContinue = TRUE;
+  bDebug = (FindFile ("C:\\DICOM", "Debug.tmp", svTemp) >= 0);
+  nNames = 0;
+  svNickName (nNames) = "TEXT_GATEWAY_1_1";
+  svComment  (nNames) = "HIS to DICOM Text Gateway";
+  nNames++;
+  svNickName (nNames) = "PACS_Interface_1_2_1";
+  svComment  (nNames) = "VistA PACS Interface, dummy entry";
+  nNames++;
+  svNickName (nNames) = "PACS_Exam_Complete_1_2_2";
+  svComment  (nNames) = "VistA PACS Interface, dummy entry";
+  nNames++;
+  svNickName (nNames) = "PACS_COMMUNICATIONS_STATUS_1_3";
+  svComment  (nNames) = "Status Window";
+  nNames++;
+  svNickName (nNames) = "MODALITY_WORKLIST_STATUS_1_4";
+  svComment  (nNames) = "Status Window";
+  nNames++;
+  svNickName (nNames) = "PACS_EXAM_COMPLETE_2_1";
+  svComment  (nNames) = "Receiver for Exam Complete";
+  nNames++;
+  svNickName (nNames) = "PACS_REQUEST_IMAGE_TRANSFER_2_2";
+  svComment  (nNames) = "Request Image Transfer from PACS";
+  nNames++;
+  svNickName (nNames) = "PROCESS_DICOM_IMAGES_2_3";
+  svComment  (nNames) = "Process DICOM Images";
+  nNames++;
+  svNickName (nNames) = "IMAGE_STATUS_2_4";
+  svComment  (nNames) = "Status of Image Transfer and Processing";
+  nNames++;
+  svNickName (nNames) = "IMAGE_STATUS_2_5";
+  svComment  (nNames) = "Status of Image Transfer and Processing";
+  nNames++;
+  svNickName (nNames) = "START_TRANSMITTER_3_1";
+  svComment  (nNames) = "Transmit auto-routed files";
+  nNames++;
+  svNickName (nNames) = "START_EVALUATOR_3_3";
+  svComment  (nNames) = "Evaluate newly acquired Images for Auto-Routing";
+  for iName = 0 to nNames
+    bNewName (iName) = TRUE;
+  endfor;
+  //svSysDir = WINSYSDIR;
+  svSysDir = WINDIR + "\\System32";
+  StrSub (svTemp, svSysDir, StrLengthChars (svSysDir) - 1, 1);
+  if (StrCompare ("\\", svTemp) != 0) then
+    svSysDir = svSysDir + "\\";
+  endif;
+  svDir = svSysDir + "drivers\\etc\\";
+  svFileIn = "Hosts";
+  svFileOut = "Hosts.tmp";
+  if (bDebug) then
+    MessageBox ("Updating Hosts file \"" + svDir + svFileIn + "\".", INFORMATION);
+  endif;
+  OpenFileMode (FILE_MODE_NORMAL);
+  bRead = TRUE;
+  if (OpenFile (nvHandleIn, svDir, svFileIn) < 0) then
+    if (bDebug) then
+      MessageBox ("Cannot Find Host File\nCreating New one.", INFORMATION);
+    endif;
+    if (CreateFile (nvHandleOut, svDir, svFileIn) < 0) then
+      MessageBox ("Cannot Create New Host File\n" +
+                  svDir + "\\" + svFileIn, SEVERE);
+      bContinue = FALSE;
+    endif;
+    bRead = FALSE;
+  else
+    bContinue = bContinue && MAGDeleteFile (svDir + "\\" + svFileOut);
+    if (CreateFile (nvHandleOut, svDir, svFileOut) < 0) then
+      MessageBox ("Cannot Create New Host File\n" +
+                  svDir + "\\" + svFileOut, SEVERE);
+      bContinue = FALSE;
+    endif;
+  endif;
+  if (bContinue) then
+    if (bRead) then
+      EndOfFile = 0;
+      while ((EndOfFile >= 0) && bContinue)
+        EndOfFile = GetLine (nvHandleIn, svLine);
+        bAny = TRUE;
+        WriteLine (nvHandleOut, svLine);
+        svName1 = "";
+        svName2 = "";
+        iCol = 1;
+        for iLetter = 1 to StrLengthChars (svLine)
+          StrSub (svTemp, svLine, iLetter - 1, 1);
+          if (StrCompare (svTemp, "#") == 0) then
+            bAny = FALSE;
+          endif;
+          if (bAny) then
+            if ((StrCompare (svTemp, " ") == 0) &&
+                (StrLengthChars (svName1) > 0) &&
+                (iCol = 1)) then
+              iCol = 2;
+            endif;
+            if ((StrCompare (svTemp, "\t") == 0) &&
+                (StrLengthChars (svName1) > 0) &&
+                (iCol = 1)) then
+              iCol = 2;
+              svTemp = " ";
+            endif;
+            if ((StrCompare (svTemp, " ") == 0) &&
+                (StrLengthChars (svName2) > 0) &&
+                (iCol = 2)) then
+              iCol = 3;
+            endif;
+            if ((StrCompare (svTemp, "\t") == 0) &&
+                (StrLengthChars (svName2) > 0) &&
+                (iCol = 2)) then
+              iCol = 3;
+              svTemp = " ";
+            endif;
+            if (StrCompare (svTemp, " ") != 0) then
+              if (iCol = 1) then
+                svName1 = svName1 + svTemp;
+              endif;
+              if (iCol = 2) then
+                svName2 = svName2 + svTemp;
+              endif;
+            endif;
+          endif;
+        endfor;
+        if (StrLengthChars (svName2) > 0) then
+          for iName = 0 to nNames
+            if (StrCompare (svName2, svNickName (iName)) == 0) then
+              bNewName (iName) = FALSE;
+            endif;
+          endfor;
+        endif;
+      endwhile;
+    endif;
+    bAny = FALSE;
+    for iName = 0 to nNames
+      if (bNewName (iName)) then
+        if (!bAny) then
+          WriteLine (nvHandleOut, "#");
+          WriteLine (nvHandleOut, "### Added by VistA DICOM Gateway Installer:");
+          bAny = TRUE;
+        endif;
+        WriteLine (nvHandleOut, "127.0.0.1\t" + svNickName (iName) + "\t# " + svComment (iName));
+      endif;
+    endfor;
+    if (bAny) then
+      WriteLine (nvHandleOut, "### End of addition");
+      WriteLine (nvHandleOut, "#");
+    endif;
+  endif;
+  if (bRead) then
+    CloseFile (nvHandleIn);
+    if (bAny) then
+      bContinue = bContinue && MAGDeleteFile (svDir + "\\" + svFileIn);
+    endif;
+  endif;
+  CloseFile (nvHandleOut);
+  if (bAny && bRead) then
+    RenameFile (svDir + svFileOut, svDir + svFileIn);
+  endif;
+  return bContinue;
+end;
+
+/////////////////////////////////////////////////////////////////////////////
+function STRING GetInstallFlags (hWindow, szProperty, iVal,
+                               iMain, iText, iImage, iDictionary,
+                               iViewer, iMakeAbs)
+STRING svProp;
+LONG   lText;
+NUMBER  msiGetResult;	
+
+begin
+ 
+    msiGetResult=MsiGetProperty(hWindow, szProperty, svProp, lText);
+	if (ERROR_MORE_DATA == msiGetResult) then
+		lText = lText + 1; 
+		MsiGetProperty (hWindow, szProperty, svProp, lText); 
+	endif; 	 
+  svProp = "," + svProp + ",";
+  if (StrCompare (svProp, ",ALL,") == 0) then
+    iMain = iVal;          // -1 = Un-Install this feature
+    iText = iVal;          //  0 = Don't know what to do
+    iImage = iVal;         // +1 = Install this feature
+    iDictionary = iVal;
+    iViewer = iVal;
+    iMakeAbs = iVal;
+  else
+    if (StrFind (svProp, ",Main_Part,") >= 0) then
+      iMain = iVal;
+    endif;
+    if (StrFind (svProp, ",Image_Data,") >= 0) then
+      iImage = iVal;
+    endif;
+    if (StrFind (svProp, ",DICOM_Dictionary,") >= 0) then
+      iDictionary = iVal;
+    endif;
+    if (StrFind (svProp, ",DICOM_Viewer,") >= 0) then
+      iViewer = iVal;
+    endif;
+    if (StrFind (svProp, ",Abstract_Maker,") >= 0) then
+      iMakeAbs = iVal;
+    endif;
+    if (StrFind (svProp, ",Text_Data,") >= 0) then
+      iText = iVal;
+    endif;
+  endif;
+  return svProp;
+end;
+
+/////////////////////////////////////////////////////////////////////////////
+function BOOL MagMoveShortCuts (svUser, svAll, svShortcut, iAction)
+STRING szDir;
+STRING svTemp;
+BOOL   bContinue;
+LONG   lResult;
+
+begin
+  bContinue = TRUE;
+  szDir = "Start Menu\\Programs\\Vista Imaging Programs\\DICOM\\";
+  if (iAction < 0) then
+    bContinue = bContinue && MAGDeleteFile (svUser + szDir + svShortcut);
+    bContinue = bContinue && MAGDeleteFile (svAll + szDir + svShortcut);
+    if (StrCompare (svShortcut, "Image Gateway\\DICOM Viewer.lnk") == 0) then
+      bContinue = bContinue && MAGDeleteFile (svUser + "Start Menu\\Programs\\Vista Imaging Programs\\" + svShortcut);
+      bContinue = bContinue && MAGDeleteFile (svAll + "Start Menu\\Programs\\Vista Imaging Programs\\" + svShortcut);  
+    endif;
+  endif;
+  if (iAction > 0) then
+    // MessageBox (svUser + szDir + svShortcut + "\n" + svAll + szDir + svShortcut, INFORMATION);
+    lResult = CopyFile (svUser + szDir + svShortcut, svAll + szDir + svShortcut);
+    if (lResult < 0) then
+      NumToStr (svTemp, lResult);
+      MessageBox ("Cannot copy shortcut for\n" + svShortcut + "\n" + svTemp + " = " + FormatMessage (lResult), SEVERE);
+      bContinue = FALSE;
+    endif;
+  endif;
+  return bContinue;
+end;
+
+/////////////////////////////////////////////////////////////////////////////
+function LONG MagGetCacheVersion (szConfig)
+STRING szLog;
+STRING svLine;
+STRING svStart;
+LONG   lVersion;
+STRING svKey;
+STRING svVer;
+LONG   lVer;
+INT    letter;
+LONG   nvType;
+STRING svLet;
+INT    code;
+LONG   part;
+BOOL   bDebug;
+INT    sub;
+
+begin
+  RegDBSetDefaultRoot (HKEY_LOCAL_MACHINE);
+  svKey = "SOFTWARE\\InterSystems\\Cache\\Configurations\\" + szConfig;
+  svVer = "0.";
+  nvType = REGDB_STRING;
+  if (RegDBGetKeyValueEx (svKey, "Version", nvType, svLine, lVer) >= 0) then
+    svVer = svLine;
+  endif;
+  RegDBSetDefaultRoot (HKEY_CLASSES_ROOT);
+  lVersion = 0;
+  sub = 0;
+  bDebug = (FindFile ("C:\\DICOM", "Debug.tmp", svLine) >= 0);
+  svVer = svVer + ".";
+  for letter = 1 to StrLengthChars (svVer)
+    StrSub (svLet, svVer, letter - 1, 1);
+    code = STRTOCHAR (svLet);
+    if (code = 46) then
+      sub = sub + 1;
+      if (sub < 4) then
+         lVersion = lVersion * 1000 + part;
+      endif;
+      part = 0;
+    endif;
+    if ((code > 47) && (code < 58)) then
+      part = part * 10 + code - 48;
+    endif;
+  endfor;
+  if (bDebug) then
+    NumToStr (svLine, lVersion);
+    MessageBox ("Version of Caché found for Configuration " + szConfig + " is \"" + svVer + "\" = " + svLine, INFORMATION);
+  endif;
+  return lVersion;
+end;
+
+/////////////////////////////////////////////////////////////////////////////
+function STRING MagTempFolder ()
+STRING svTempDir;
+STRING svRoot;
+STRING svLet;
+STRING svText;
+INT    code;
+INT    letter;
+INT    last;
+INT    part;
+BOOL   bRadio1;
+BOOL   bRadio2;
+NUMBER nResult;
+LONG   lReturn;
+BOOL   bDebug;
+
+begin
+  bDebug = (FindFile ("C:\\DICOM", "Debug.tmp", svText) >= 0);
+  svTempDir = TempFolder;
+  
+  //part = 0;
+  //for letter = StrLengthChars (svTempDir) downto 1
+  //  StrSub (svLet, svTempDir, letter - 1, 1);
+  //  code = STRTOCHAR (svLet);
+  //  if (code = 92) then
+  //    part = part + 1;
+  //    if (part = 2) then
+  //      last = letter;
+  //    endif;
+  //  else
+  //    if (part = 1) then
+  //      if ((code < 48) || (code > 57)) then
+  //        part = StrLengthChars (svTempDir) + 13;
+  //      endif;
+  //    endif;
+  //  endif;
+  //endfor;
+  //if (part < StrLengthChars (svTempDir)) then
+  //  bRadio1 = TRUE;
+  //  bRadio2 = FALSE;
+  //  SetDialogTitle (DLG_ASK_OPTIONS, "Unexpected location for TEMP folder\nAre you using Microsoft Remote Desktop?");
+  //  Disable (BACKBUTTON);
+  //  Disable (CANCELBUTTON);
+  //  lReturn = AskOptions (EXCLUSIVE, "Indicate whether or not Microsoft Remote Desktop is being used",
+  //           "Yes, Microsoft Remote Desktop is in use",   bRadio1,
+  //           "No, normal connection to target computer",  bRadio2);
+  //  EndDialog("AskOptions");
+  //  ReleaseDialog("AskOptions");
+  
+    // One would expect that either EndDialog or ReleaseDialog
+    // would have the effect that the dialog window would be closed.
+    // Well neither does...
+    // Also, enabling the StatusBar does not have the effect that
+    // the status bar becomes enabled, but it does have the side-effect
+    // that the dialog window for Ask Options is closed...
+    // Pure Serendipity!
+  //  Enable (STATUSBAR);
+  //  Enable (BACKBUTTON);
+  //  Enable (CANCELBUTTON);
+  //  svText = "Result is ";
+  //  if (bRadio1) then
+  //    svText = svText + "Yes, truncate \n" + svTempDir;
+  //    StrSub (svRoot, svTempDir, 0, last);
+  //    svTempDir = svRoot;
+  //    svText = svText + "\nto   " + svRoot;
+  //  endif;
+  //  if (bRadio2) then
+  //    svText = svText + "No";
+  //  endif;
+  //  if (bDebug) then
+  //    MessageBox (svText, INFORMATION);
+  //  endif;
+  //endif;
+  return svTempDir;
+end;
+
+/////////////////////////////////////////////////////////////////////////////
+function MAGRegDBDeleteValue(szSubKey, szValue)
+    NUMBER nReturn;
+    //BOOL	bContinue;
+begin
+    //bContinue = TRUE;
+    // Set the root key.
+    RegDBSetDefaultRoot (HKEY_LOCAL_MACHINE);
+    // Delete the subkey.
+    nReturn = RegDBDeleteValue (szSubKey, szValue);
+    //if (nReturn < 0) then
+    //  bContinue = FALSE;
+    //else
+    //  bContinue = TRUE;
+    //endif;
+    //return bContinue;
+end;
+
+function CreateCacheShortcut(hMSI)
+	STRING szProgramFolder,szIconName,szExeName,szSubFolder,szShortCutKey,szItemName,szCommandLine,szWorkingDir,szIconPath;
+	STRING szDrive,svDriveLetter,svDisk,svReminder;
+	NUMBER nIcon,nFlag;
+	HWND    hActual;
+
+begin
+	ShowStatus ("Creating Install_Cache_2010 shortcut.", hActual, 95);
+	svReminder = svReminder + "Don't forget to run 'Install_Cache_2010'\n";
+	svReminder = svReminder + "  located on your desktop.\n";
+	GetDisk(INSTALLDIR, svDisk);
+	szProgramFolder=FOLDER_DESKTOP;
+	szItemName="Install_Cache_2010";
+	szIconName="MAGVistA.ico";
+	szSubFolder="DICOM";
+	szExeName="MagInstall.bat";
+	szCommandLine=FOLDER_TEMP ^ szExeName;
+	LongPathToQuote(szCommandLine, TRUE);
+	szWorkingDir=FOLDER_TEMP;
+	szIconPath=svDisk ^ szSubFolder ^ szIconName;
+	LongPathToQuote(szIconPath, TRUE); //
+	nIcon=0;
+	szShortCutKey="";
+	nFlag=REPLACE|RUN_MINIMIZED;
+	if (AddFolderIcon (szProgramFolder,szItemName,szCommandLine,szWorkingDir,szIconPath,nIcon,szShortCutKey,nFlag) < 0) then
+		MessageBox ("AddFolderIcon failed.", SEVERE); 
+	else 
+	//	if (StrLengthChars (svReminder) > 0) then
+	//		svReminder = svReminder + "\n\n";
+	//	endif;	
+	//	if (shortcutreminder==TRUE) then
+			MessageBox (svReminder, INFORMATION);
+	//	endif;
+	endif;
+end;
+
+

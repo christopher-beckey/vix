@@ -1,0 +1,208 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\..\..\packages\EntityFramework.6.4.4\build\EntityFramework.props" Condition="Exists('..\..\..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{21FDBB6E-4F37-492A-B02B-A7D0E22311EA}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Hydra.IX.Core</RootNamespace>
+    <AssemblyName>Hydra.IX.Core</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\..\</SolutionDir>
+    <RestorePackages>false</RestorePackages>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Nancy.ViewEngines.Razor, Version=1.4.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Nancy.Viewengines.Razor.1.4.3\lib\net40\Nancy.ViewEngines.Razor.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Newtonsoft.Json.10.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.Linq" />
+    <Reference Include="System.Data.SQLite">
+      <HintPath>..\..\..\packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.117.0\lib\net46\System.Data.SQLite.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data.SQLite.EF6">
+      <HintPath>..\..\..\packages\System.Data.SQLite.EF6.1.0.117.0\lib\net46\System.Data.SQLite.EF6.dll</HintPath>
+    </Reference>
+    <Reference Include="System.DirectoryServices" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.IO.Compression" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Z.EntityFramework.Plus.BatchDelete.EF6, Version=1.8.6.0, Culture=neutral, PublicKeyToken=59b66d028979105b, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Z.EntityFramework.Plus.BatchDelete.EF6.1.8.6\lib\net45\Z.EntityFramework.Plus.BatchDelete.EF6.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\..\..\SharedAssemblyInfo.cs">
+      <Link>Properties\SharedAssemblyInfo.cs</Link>
+    </Compile>
+    <Compile Include="CoreService.cs" />
+    <Compile Include="ICoreService.cs" />
+    <Compile Include="IHixService.cs" />
+    <Compile Include="IImageManager.cs" />
+    <Compile Include="ImageManager.cs" />
+    <Compile Include="IPurgeHandler.cs" />
+    <Compile Include="IPurgeScheduler.cs" />
+    <Compile Include="JsonUtil.cs" />
+    <Compile Include="DicomDirBuilder.cs" />
+    <Compile Include="Extensions.cs" />
+    <Compile Include="HipaaUtil.cs" />
+    <Compile Include="HixService.cs" />
+    <Compile Include="ImageGroupUtil.cs" />
+    <Compile Include="ImageWorkflow.cs" />
+    <Compile Include="Modules\DefaultHixRequestHandler.cs" />
+    <Compile Include="Modules\ModuleExtensions.cs" />
+    <Compile Include="ProcessLock.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="PurgeHandler.cs" />
+    <Compile Include="PurgeScheduler.cs" />
+    <Compile Include="Referencer.cs" />
+    <Compile Include="Modules\ReponseHelper.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Remote\HixWorker.cs" />
+    <Compile Include="Remote\HixWorkerPool.cs" />
+    <Compile Include="Remote\HixWorkerProxy.cs" />
+    <Compile Include="Remote\HixWorkerUri.cs" />
+    <Compile Include="Remote\IHixWorker.cs" />
+    <Compile Include="Remote\IHixWorkerPool.cs" />
+    <Compile Include="ServiceStatus.cs" />
+    <Compile Include="StudyBuilder.cs" />
+    <Compile Include="TagUtil.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="web.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\src3rdParty\Nancy\Nancy.csproj">
+      <Project>{34576216-0dca-4b0f-a0dc-9075e75a676f}</Project>
+      <Name>Nancy</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Hydra.Common\Hydra.Common.csproj">
+      <Project>{46ae373d-b654-4209-88f0-3e416c9f7267}</Project>
+      <Name>Hydra.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Hydra.Security\Hydra.Security.csproj">
+      <Project>{46ae373d-b654-4209-88f0-3e416c9f7268}</Project>
+      <Name>Hydra.Security</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Hydra.Dicom\Hydra.Dicom.csproj">
+      <Project>{b4d5e28a-3cb7-46fa-8245-4891b44387b7}</Project>
+      <Name>Hydra.Dicom</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Hydra.IX.Common\Hydra.IX.Common.csproj">
+      <Project>{b59efbc2-574a-4c10-a2f3-16203bc4f109}</Project>
+      <Name>Hydra.IX.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Hydra.IX.Configuration\Hydra.IX.Configuration.csproj">
+      <Project>{4b6022f2-39b9-4a37-a008-4de5852bf941}</Project>
+      <Name>Hydra.IX.Configuration</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Hydra.IX.Database.Common\Hydra.IX.Database.Common.csproj">
+      <Project>{a1e65bd2-3697-4b64-940f-12ac54652c2d}</Project>
+      <Name>Hydra.IX.Database.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Hydra.IX.Database\Hydra.IX.Database.csproj">
+      <Project>{8cbe3ff4-db3b-42db-82c1-d6b51ff2b760}</Project>
+      <Name>Hydra.IX.Database</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Hydra.IX.Storage\Hydra.IX.Storage.csproj">
+      <Project>{da6dae5d-99e2-4d57-af84-de8c87223d79}</Project>
+      <Name>Hydra.IX.Storage</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Hydra.Log\Hydra.Log.csproj">
+      <Project>{39a30969-59a3-48b1-be80-975d6d833ec8}</Project>
+      <Name>Hydra.Log</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>
+    </PostBuildEvent>
+  </PropertyGroup>
+  <Import Project="..\..\..\packages\Nancy.Viewengines.Razor.1.4.3\build\Nancy.ViewEngines.Razor.targets" Condition="Exists('..\..\..\packages\Nancy.Viewengines.Razor.1.4.3\build\Nancy.ViewEngines.Razor.targets')" />
+  <Import Project="..\..\..\packages\EntityFramework.6.4.4\build\EntityFramework.targets" Condition="Exists('..\..\..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,185 @@
+////////////////////////////////////////////////////////////////////////////////
+//
+//  File Name:	 InstallationLog.rul
+//
+//  Description: InstallShield script used to log entries (strings) during
+//               an installation setup.
+//
+//  Comments:    This script is used to create a log file in the system drive
+//               root directory (WINSYSDISK + "\\"). (Typically c:\windows\system or c:\winnt\system32)
+//
+//  Author :     Danny Turrin
+//
+//  Version :    1.0
+//
+//  IMPORTANT:   To use the Installation Log, follow these instructions...
+//
+//    -------------------------------------------------------------
+//    1. Import this file to your list of InstallScript files.
+//
+//    2. Change the value of the LOG_FILE_NAME constant ("_nnn.log" will
+//       be appended to this name, where "nnn" is a number ranging from
+//       000 to 999).
+//
+//              #define LOG_FILE_NAME "LogFileName"
+//
+//    3. Include this file at the beginning of Setup.rul.
+//
+//              #include "InstallationLog.rul"
+//
+//    4. Call function RecordInLogFile() anytime you want to add a
+//       new log entry.
+//
+//              RecordInLogFile("Log entry example.");
+//
+//    5. You can use the gsLogEntry global string variable to format
+//       a string before recording it in the log file.
+//
+//              Sprintf(gsLogEntry, "Product name: %s", IFX_PRODUCT_NAME);
+//              RecordInLogFile(gsLogEntry);
+//    -------------------------------------------------------------
+//
+////////////////////////////////////////////////////////////////////////////////
+
+#define LOG_FILE_PATH	"C:\\"
+#define LOG_FILE_NAME	"Mag_P158_Installation"
+
+prototype RecordInLogFile(STRING);
+prototype ResetLogFile();
+
+STRING	gsLogEntry; 		// Global string buffer used to store log file entries.
+STRING	gsLogFilePath;		// Full path of the installation log file.
+
+NUMBER	gnLogFileLastLine;	// Last line number of the current log file.
+
+//---------------------------------------------------------------------------
+// RecordInLogFile
+//
+// Appends a new Entry at the end of the SSM log file.
+//
+// An entry line cannot be more than 1024 characters long.
+// Entry lines must be separated by the new line character ('\n').
+//
+// NOTE:
+//
+//		gnLogFileLastLine is reset to 0 by the ResetLogFile() function.
+//
+//---------------------------------------------------------------------------
+function RecordInLogFile ( szLogEntry )
+	STRING	svLine, svTruncatedLine;
+	NUMBER	nPos, nLength;
+begin
+
+	if ( StrLength(gsLogFilePath) = 0 ) then
+		ResetLogFile();
+	endif;
+
+	// Check if there are multiple lines in the log entry
+	nPos = 0;
+	nLength = StrFindEx(szLogEntry, "\n", 0);
+
+	// If more than one line, append log entry line by line.
+	while ( nLength >= 0 )
+
+		// Get all the characters before '\n'.
+		if ( nLength > 0 ) then
+			StrSub(svLine, szLogEntry, nPos, nLength - nPos);
+		else
+			svLine = " ";
+		endif;
+
+		// Validate line format.
+		if ( StrLength(svLine) > 1024 ) then
+			// Truncate line to less than 1024 characters
+			StrSub(svTruncatedLine, svLine, 0, 1015);
+			svLine = svTruncatedLine + "(...)";
+		endif;
+
+		// Write current log entry line to log file.
+		FileInsertLine(gsLogFilePath, svLine, gnLogFileLastLine, AFTER);
+		gnLogFileLastLine++;
+
+		// Look for next line.
+		nPos = nLength + 1;
+		nLength = StrFindEx(szLogEntry, "\n", nPos);
+
+	endwhile;
+
+	// Get all remaining characters.
+	nLength = StrLength(szLogEntry) - nPos;
+	StrSub(svLine, szLogEntry, nPos, nLength);
+
+	// Validate line format.
+	if ( StrLength(svLine) > 1024 ) then
+		// Truncate line to less than 1024 characters
+		StrSub(svTruncatedLine, svLine, 0, 1015);
+		svLine = svTruncatedLine + "(...)";
+	elseif ( StrLength(svLine) = 0 ) then
+		svLine = " ";
+	endif;
+
+	// Write last log entry line to log file.
+	FileInsertLine(gsLogFilePath, svLine, gnLogFileLastLine, AFTER);
+	gnLogFileLastLine++;
+
+end; // RecordInLogFile()
+
+
+//---------------------------------------------------------------------------
+// ResetLogFile
+//
+// Creates a log file.
+//
+// If the log file already exists, a new file is created with a sequential
+// number (_#) incremented by 1 at the end of the name.
+//
+//---------------------------------------------------------------------------
+function ResetLogFile()
+	STRING	szLogFileName;
+	STRING	svSysDate, svSysTime;
+	NUMBER	nvFileHandle, nvNotUsed;
+	NUMBER	nLogFileNumber;
+begin
+
+	nLogFileNumber = 0;
+	szLogFileName = LOG_FILE_NAME + "_000.log";
+	//gsLogFilePath = WINSYSDISK ^ szLogFileName;
+	gsLogFilePath = LOG_FILE_PATH ^ szLogFileName;
+
+	while ( Is(FILE_EXISTS, gsLogFilePath) = TRUE )
+
+		nLogFileNumber++;
+		Sprintf(szLogFileName, "%s_%03d.log", LOG_FILE_NAME, nLogFileNumber);
+		//gsLogFilePath = WINSYSDISK ^ szLogFileName;		
+		gsLogFilePath = LOG_FILE_PATH ^ szLogFileName;		
+
+	endwhile;
+
+	OpenFileMode(FILE_MODE_APPEND);
+	//CreateFile(nvFileHandle, WINSYSDISK + "\\", szLogFileName);
+	CreateFile(nvFileHandle, LOG_FILE_PATH + "\\", szLogFileName);
+	CloseFile(nvFileHandle);
+
+	gnLogFileLastLine = 0;
+
+	// Record timestamp
+	if ( GetSystemInfo(DATE, nvNotUsed, svSysDate) = 0 ) then
+		if ( GetSystemInfo(TIME, nvNotUsed, svSysTime) = 0 ) then
+			Sprintf(gsLogEntry, "File created on %s at %s", svSysDate, svSysTime);
+		else
+			Sprintf(gsLogEntry, "File created on %s", svSysDate);
+		endif;
+		FileInsertLine(gsLogFilePath, gsLogEntry, gnLogFileLastLine, REPLACE);
+		FileInsertLine(gsLogFilePath, " ", gnLogFileLastLine, AFTER);
+		gnLogFileLastLine++;
+	endif;
+
+	// Record product information
+	Sprintf(gsLogEntry, "Product : %s version %s", IFX_PRODUCT_NAME, IFX_PRODUCT_VERSION);
+	FileInsertLine(gsLogFilePath, gsLogEntry, gnLogFileLastLine, AFTER);
+	gnLogFileLastLine++;
+	FileInsertLine(gsLogFilePath, " ", gnLogFileLastLine, AFTER);
+	gnLogFileLastLine++;
+
+end; // ResetLogFile()
+

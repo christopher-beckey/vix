@@ -1,0 +1,199 @@
+MAGDMENU ;WOIFO/EdM,PMK, RRB - VistA DICOM Gateway Menu ; 08 Jun 2010 2:22 PM
+ ;;3.0;IMAGING;**9,21,11,30,51,69,54,53,118**;Mar 19, 2002;Build 4525;May 01, 2013
+ ;; Per VHA Directive 2004-038, this routine should not be modified.
+ ;; +---------------------------------------------------------------+
+ ;; | Property of the US Government.                                |
+ ;; | No permission to copy or redistribute this software is given. |
+ ;; | Use of unreleased versions of this software requires the user |
+ ;; | to execute a written test agreement with the VistA Imaging    |
+ ;; | Development Office of the Department of Veterans Affairs,     |
+ ;; | telephone (301) 734-0100.                                     |
+ ;; | The Food and Drug Administration classifies this software as  |
+ ;; | a medical device.  As such, it may not be changed in any way. |
+ ;; | Modifications to this software may result in an adulterated   |
+ ;; | medical device under 21CFR820, the use of which is considered |
+ ;; | to be a violation of US Federal Statutes.                     |
+ ;; +---------------------------------------------------------------+
+ ;;
+ ; Entry point for main menu -- invoked by ^MAGDLOGN
+ N $ES,CASCADE
+ I $$USEPRIN^MAGOSFIL(1)  ; Can't do much after principal device is lost
+ S $EC="",$ET="D ERR1^"_$T(+0)
+ S ^TMP("MAG",$J,"DICOM MENU VIEW ONLY")=($G(MENU)=2)
+ S ^TMP("MAG",$J,"DICOM MENU OPTION")=0
+ G LOOP
+ ;
+ERR1 ; main error trap
+ N ECODE,MUMPS
+ S ECODE=$EC,$EC="" ; clear $ECODE before calling BACK^%ETN
+ S $ET="D ERR2^"_$T(+0)
+ D CLOSEM2M ; Close dangling connection, if needed
+ ; Halt if principal device is lost
+ I $$USEPRIN^MAGOSFIL(1) ; no argument
+ S $ET="H" R MUMPS:1
+ S $ET="D ERR2^"_$T(+0)
+ I ECODE'[",ZINTERRUPT," D
+ . W !!,"*** Error: ",$ZERROR," ***",!
+ . W !!,"Please examine error log for details on most recent error(s)."
+ . D BACK^%ETN
+ . Q
+ W !!,"Press <Enter> to continue..." R X:1E9
+ S $EC=$G(ECODE,",U13-Lost Error,")
+ Q:$Q "" Q
+ ;
+ERR2 ; error trap to unwind the call stack
+ I $ES<2 S $EC="",$ET="D ERR1^"_$T(+0) D LOOP
+ Q:$Q "" Q
+ ;
+PUSH(MENU) S ^TMP("MAG",$J,"DICOM MENU OPTION")=MENU_" "_^TMP("MAG",$J,"DICOM MENU OPTION")
+ G LOOP
+ ;
+SETUP ; Set up terminal handling control strings
+ S IOF="#,$C(27,91,72,27,91,74,8,8,8,8)"
+ S NORMAL=$C(27)_"[0;37;44m" ; normal blue
+ S REVERSE=$C(27)_"[0;1;34;43m" ; reverse video blue
+ S BOLD=$C(27)_"[0;1;37;44m" ; bold blue
+ Q
+ ;
+LOOP ; local loop back point
+ N BOLD,CONFIG,NORMAL,OLDET,OPTION,REVERSE,VIEW
+ I $$USEPRIN^MAGOSFIL(1)  ; Can't do much after principal device is lost
+ ;
+ S OLDET=$ET,$ET="HALT"
+ ; It happens that the next line causes a <DSCON> error
+ ; When that happens, the principal device is no longer usable.
+ D SETUP W @IOF
+ S $ET=OLDET
+ ;
+ W BOLD
+ S DTIME=1E5
+ S X=$$CLOSE^MAGM2VC()
+ D INIT^MAGOSFIL
+ L  ; Release any LOCKs that weren't cleared by the previous application
+ S $EC="" ; clear the error code system variable
+ S MENU=$P($G(^TMP("MAG",$J,"DICOM MENU OPTION"))," ",1)
+ G:MENU="" QUITMENU ; quit from menu
+ S CONFIG="||"
+ K X
+ S X("PACS EXAM COMPLETE")="PACS"
+ S X("IMAGE GATEWAY")="IMAGE"
+ S X("TEXT GATEWAY")="TEXT"
+ S X("ROUTING PROCESSOR")="ROUTE"
+ S X("SEND PACS TEXT")="SENDPACS"
+ S X("MODALITY WORKLIST")="WORKLIST"
+ S X("IMPORTER")="IMPORTER"
+ S X("IMPORT VA STUDIES")="IMPORTVA"
+ S X="" F  S X=$O(X(X)) Q:X=""  D
+ . S:$G(^MAGDICOM(2006.563,1,X))="YES" CONFIG=CONFIG_"|"_X(X)_"|"
+ . Q
+ K X
+ W !!,$P($T(@MENU^MAGDMENO),";",3)
+ W " -- ",$G(^MAGDICOM(2006.563,1,"SYSTEM TITLE"))
+ W !
+ ;
+ ; build a list of permissible options, both by number and by name
+ K OPTLIST,MSG
+ S VIEW=^TMP("MAG",$J,"DICOM MENU VIEW ONLY")
+ S MSG("R")=$D(^TMP("MAG",$J,"DICOM RPC USER"))
+ S N=0 F I=1:1 S X=$P($T(@MENU+I^MAGDMENO),";",3,999) Q:X=""  D  ; list options
+ . N OK,T
+ . I $P(X,";")="" Q
+ . I $P(X,";",4)["C",$$CURDEV^MAGOSFIL()'=1 Q
+ . S N=N+1,OK=CONFIG[("|"_$P(X,";",3)_"|") ; CONFIG matches or is empty
+ . W !
+ . S T=$G(^MAGDICOM(2006.563,1,"DOMAIN"))
+ . S:$TR(T,"UNKOW","unkow")["unknown" T=""
+ . I $P(X,";",4)["L",T="" S OK=0,MSG("L")=1
+ . I $P(X,";",4)["L",'$G(^MAGDICOM(2006.563,1,"LOCATION")) S OK=0,MSG("L")=1
+ . I $P(X,";",4)["E",$G(^MAGDICOM(2006.563,1,"MAILGROUP"))="" S OK=0,MSG("E")=1
+ . I VIEW,$P(X,";",4)["V" S OK=0
+ . I OK W BOLD,$J(N,4),"  ",$P(X,";") ; output menu option line normally
+ . E  W NORMAL,$J(N,4),"  (",$P(X,";"),")" ; shade and (hide) option
+ . S:OK OPTLIST(N)=I,OPTLIST($$TRIM($P(X,";",1)))=I
+ . Q
+ W BOLD
+ ;
+ W:$D(MSG) !
+ I '$G(MSG("R")) W !,"Currently not authorized to invoke RPCs on VistA."
+ I $G(MSG("E")) W !,"You must first use option 4-2-2 to specify E-mail information."
+ I $G(MSG("L")) W !,"You must first use option 4-2-2 to obtain Location information."
+ D BGNDSTAT
+ ;
+ ; obtain the selected option
+ W !!?2,"OPTION: " R " ",OPTION:$G(DTIME,1E5) ; Buffer flush is intentional
+ I (OPTION["^")!(OPTION="") D  G LOOP
+ . N INPUT
+ . S INPUT=OPTION
+ . S OPTION=$G(^TMP("MAG",$J,"DICOM MENU OPTION"))
+ . Q:OPTION=""  ; used for programmer mode
+ . S OPTION=$P(OPTION," ",2,$L(OPTION)+2)
+ . I OPTION="",INPUT'["^" D  Q
+ . . W !!,"Choose the option ""Quit"" to exit from this menu."
+ . . D RETURN
+ . . Q
+ . S ^TMP("MAG",$J,"DICOM MENU OPTION")=OPTION
+ . Q
+ ;
+ ; option selection can be either by number or by character string match
+ S N=$G(OPTLIST(+OPTION))
+ I N="" D  ; lookup the option by its name and try to get its number
+ . N C,O,X
+ . S X=$$TRIM(OPTION) Q:X=""
+ . I $D(OPTLIST(X)) S N=OPTLIST(X) Q
+ . S C=0,O=X F  S O=$O(OPTLIST(O)) Q:$E(O,1,$L(X))'=X  S C=C+1
+ . Q:C'=1
+ . S O=$O(OPTLIST(X)),N=OPTLIST(O)
+ . Q
+ I N D  ; option selected by number
+ . S X=$P($T(@MENU+N^MAGDMENO),";",3,999)
+ . I CONFIG'[("|"_$P(X,";",3)_"|") D  ; piece-3 restricts option
+ . . W " -- Sorry, this option is not supported in this configuration"
+ . . Q
+ . E  D  ; perform the selected menu option
+ . . N DO
+ . . S DO=$P(X,";",2)
+ . . S ^MAGDICOM("MENU",DO,+$H)=$G(^MAGDICOM("MENU",DO,+$H))+1
+ . . K OPTLIST
+ . . I $P(X,";",4)["S" D  Q:DO=""
+ . . . L +^MAGDICOM("Menu",MENU,N):0 Q:$T
+ . . . W !!,"*** ",$P(X,";",1)," is already running. ***"
+ . . . S DO=""
+ . . . Q
+ . . Q:'$$CHECK^MAGDMENL(MENU_","_N)
+ . . W ! D @DO ; invoke the option via indirection
+ . . D CLOSEM2M ; Close dangling connection, if needed
+ . . S X=$$USEPRIN^MAGOSFIL(1)
+ . . Q
+ . Q
+ E  W "  ??? -- Invalid selection.  Try again."
+ D RETURN
+ G LOOP
+ ;
+BGNDSTAT ; check background process credemtials
+ I $G(^MAGDICOM(2006.563,1,"M-to-M BROKER BGND STATUS"))<1 D
+ . W !,"Credentials for Background Processes need to be set up."
+ . W !,"First use menu option 4-2-2 to set up these credentials,"
+ . W !,"then use menu option 4-2-11 to verify them."
+ . Q
+ Q
+ ;
+RETURN ; entry point from some routines after exiting, ^MAGDTCP for example
+ I $G(^TMP("MAG",$J,"DICOM MENU OPTION"))="" Q  ; quiting menu
+ R !!,"Press <Enter> to continue...",X:$G(DTIME,1E5)
+ Q
+ ;
+TRIM(X) N F,I
+ S F="" F I=0:1:255 S:$C(I)?1CP F=F_$C(I)
+ Q $TR($$UPPER^MAGOSMSC(X),F,"")
+ ;
+QUITMENU ; exit the menu
+ K ^TMP("MAG",$J)
+ K ^TMP("MAGM2V",$J)
+ Q
+ ;
+CLOSEM2M N IP,PORT
+ S IP=$G(^MAGDICOM(2006.563,1,"M-to-M BROKER ADDR")) Q:IP=""
+ S PORT=$G(^MAGDICOM(2006.563,1,"M-to-M BROKER PORT")) Q:PORT=""
+ S:$$ISCONT^MAGM2VCU(IP,PORT) IP=$$CLOSE^MAGM2VC()
+ Q
+ ;

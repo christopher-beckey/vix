@@ -1,0 +1,442 @@
+KIDS Distribution saved on Jul 26, 2012@08:58:39
+Split from GOLD - last patch SEQ81_P120
+**KIDS**:MAG*3.0*350_DD*2006.5733^
+
+**INSTALL NAME**
+MAG*3.0*350_DD*2006.5733
+"BLD",7773,0)
+MAG*3.0*350_DD*2006.5733^IMAGING^0^3120726^n
+"BLD",7773,4,0)
+^9.64PA^2006.5733^1
+"BLD",7773,4,2006.5733,0)
+2006.5733
+"BLD",7773,4,2006.5733,222)
+y^y^f^^^^y
+"BLD",7773,4,"B",2006.5733,2006.5733)
+
+"BLD",7773,6.3)
+1
+"BLD",7773,"KRN",0)
+^9.67PA^779.2^20
+"BLD",7773,"KRN",.4,0)
+.4
+"BLD",7773,"KRN",.401,0)
+.401
+"BLD",7773,"KRN",.402,0)
+.402
+"BLD",7773,"KRN",.403,0)
+.403
+"BLD",7773,"KRN",.5,0)
+.5
+"BLD",7773,"KRN",.84,0)
+.84
+"BLD",7773,"KRN",3.6,0)
+3.6
+"BLD",7773,"KRN",3.8,0)
+3.8
+"BLD",7773,"KRN",9.2,0)
+9.2
+"BLD",7773,"KRN",9.8,0)
+9.8
+"BLD",7773,"KRN",19,0)
+19
+"BLD",7773,"KRN",19.1,0)
+19.1
+"BLD",7773,"KRN",101,0)
+101
+"BLD",7773,"KRN",409.61,0)
+409.61
+"BLD",7773,"KRN",771,0)
+771
+"BLD",7773,"KRN",779.2,0)
+779.2
+"BLD",7773,"KRN",870,0)
+870
+"BLD",7773,"KRN",8989.51,0)
+8989.51
+"BLD",7773,"KRN",8989.52,0)
+8989.52
+"BLD",7773,"KRN",8994,0)
+8994
+"BLD",7773,"KRN","B",.4,.4)
+
+"BLD",7773,"KRN","B",.401,.401)
+
+"BLD",7773,"KRN","B",.402,.402)
+
+"BLD",7773,"KRN","B",.403,.403)
+
+"BLD",7773,"KRN","B",.5,.5)
+
+"BLD",7773,"KRN","B",.84,.84)
+
+"BLD",7773,"KRN","B",3.6,3.6)
+
+"BLD",7773,"KRN","B",3.8,3.8)
+
+"BLD",7773,"KRN","B",9.2,9.2)
+
+"BLD",7773,"KRN","B",9.8,9.8)
+
+"BLD",7773,"KRN","B",19,19)
+
+"BLD",7773,"KRN","B",19.1,19.1)
+
+"BLD",7773,"KRN","B",101,101)
+
+"BLD",7773,"KRN","B",409.61,409.61)
+
+"BLD",7773,"KRN","B",771,771)
+
+"BLD",7773,"KRN","B",779.2,779.2)
+
+"BLD",7773,"KRN","B",870,870)
+
+"BLD",7773,"KRN","B",8989.51,8989.51)
+
+"BLD",7773,"KRN","B",8989.52,8989.52)
+
+"BLD",7773,"KRN","B",8994,8994)
+
+"FIA",2006.5733)
+QUERY/RETRIEVE STATISTICS
+"FIA",2006.5733,0)
+^MAGDAUDT(2006.5733,
+"FIA",2006.5733,0,0)
+2006.5733
+"FIA",2006.5733,0,1)
+y^y^f^^^^y
+"FIA",2006.5733,0,10)
+
+"FIA",2006.5733,0,11)
+
+"FIA",2006.5733,0,"RLRO")
+
+"FIA",2006.5733,0,"VR")
+3.0^MAG
+"FIA",2006.5733,2006.5733)
+0
+"FIA",2006.5733,2006.57331)
+0
+"FIA",2006.5733,2006.57332)
+0
+"FIA",2006.5733,2006.57333)
+0
+"MBREQ")
+0
+"PKG",454,-1)
+1^1
+"PKG",454,0)
+IMAGING^MAG^Imaging-V1 to release 
+"PKG",454,20,0)
+^9.402P^^
+"PKG",454,22,0)
+^9.49I^1^1
+"PKG",454,22,1,0)
+3.0^3020319^3020517^126
+"PKG",454,22,1,"PAH",1,0)
+350_DD^3120726
+"QUES","XPF1",0)
+Y
+"QUES","XPF1","??")
+^D REP^XPDH
+"QUES","XPF1","A")
+Shall I write over your |FLAG| File
+"QUES","XPF1","B")
+YES
+"QUES","XPF1","M")
+D XPF1^XPDIQ
+"QUES","XPF2",0)
+Y
+"QUES","XPF2","??")
+^D DTA^XPDH
+"QUES","XPF2","A")
+Want my data |FLAG| yours
+"QUES","XPF2","B")
+YES
+"QUES","XPF2","M")
+D XPF2^XPDIQ
+"QUES","XPI1",0)
+YO
+"QUES","XPI1","??")
+^D INHIBIT^XPDH
+"QUES","XPI1","A")
+Want KIDS to INHIBIT LOGONs during the install
+"QUES","XPI1","B")
+NO
+"QUES","XPI1","M")
+D XPI1^XPDIQ
+"QUES","XPM1",0)
+PO^VA(200,:EM
+"QUES","XPM1","??")
+^D MG^XPDH
+"QUES","XPM1","A")
+Enter the Coordinator for Mail Group '|FLAG|'
+"QUES","XPM1","B")
+
+"QUES","XPM1","M")
+D XPM1^XPDIQ
+"QUES","XPO1",0)
+Y
+"QUES","XPO1","??")
+^D MENU^XPDH
+"QUES","XPO1","A")
+Want KIDS to Rebuild Menu Trees Upon Completion of Install
+"QUES","XPO1","B")
+NO
+"QUES","XPO1","M")
+D XPO1^XPDIQ
+"QUES","XPZ1",0)
+Y
+"QUES","XPZ1","??")
+^D OPT^XPDH
+"QUES","XPZ1","A")
+Want to DISABLE Scheduled Options, Menu Options, and Protocols
+"QUES","XPZ1","B")
+NO
+"QUES","XPZ1","M")
+D XPZ1^XPDIQ
+"QUES","XPZ2",0)
+Y
+"QUES","XPZ2","??")
+^D RTN^XPDH
+"QUES","XPZ2","A")
+Want to MOVE routines to other CPUs
+"QUES","XPZ2","B")
+NO
+"QUES","XPZ2","M")
+D XPZ2^XPDIQ
+"SEC","^DIC",2006.5733,2006.5733,0,"AUDIT")
+@
+"SEC","^DIC",2006.5733,2006.5733,0,"DD")
+@
+"SEC","^DIC",2006.5733,2006.5733,0,"DEL")
+@
+"SEC","^DIC",2006.5733,2006.5733,0,"LAYGO")
+@
+"SEC","^DIC",2006.5733,2006.5733,0,"RD")
+@
+"SEC","^DIC",2006.5733,2006.5733,0,"WR")
+@
+"VER")
+8.0^22.0
+"^DD",2006.5733,2006.5733,0)
+FIELD^^2^2
+"^DD",2006.5733,2006.5733,0,"DT")
+3050804
+"^DD",2006.5733,2006.5733,0,"IX","B",2006.5733,.01)
+
+"^DD",2006.5733,2006.5733,0,"NM","QUERY/RETRIEVE STATISTICS")
+
+"^DD",2006.5733,2006.5733,.01,0)
+DATE^RDX^^0;1^S %DT="EX" D ^%DT S X=Y K:Y<1 X S:$D(X) DINUM=X
+"^DD",2006.5733,2006.5733,.01,1,0)
+^.1
+"^DD",2006.5733,2006.5733,.01,1,1,0)
+2006.5733^B
+"^DD",2006.5733,2006.5733,.01,1,1,1)
+S ^MAGDAUDT(2006.5733,"B",$E(X,1,30),DA)=""
+"^DD",2006.5733,2006.5733,.01,1,1,2)
+K ^MAGDAUDT(2006.5733,"B",$E(X,1,30),DA)
+"^DD",2006.5733,2006.5733,.01,3)
+Enter the date for which statistics are being entered.
+"^DD",2006.5733,2006.5733,.01,21,0)
+^.001^3^3^3050804^^^
+"^DD",2006.5733,2006.5733,.01,21,1,0)
+The value of this field is a date.
+"^DD",2006.5733,2006.5733,.01,21,2,0)
+This date identifies the date for which statistics
+"^DD",2006.5733,2006.5733,.01,21,3,0)
+are being recorded.
+"^DD",2006.5733,2006.5733,.01,"DT")
+3050804
+"^DD",2006.5733,2006.5733,2,0)
+LOCATION^2006.57331PA^^1;0
+"^DD",2006.5733,2006.57331,0)
+LOCATION SUB-FIELD^^2^2
+"^DD",2006.5733,2006.57331,0,"DT")
+3050804
+"^DD",2006.5733,2006.57331,0,"IX","B",2006.57331,.01)
+
+"^DD",2006.5733,2006.57331,0,"NM","LOCATION")
+
+"^DD",2006.5733,2006.57331,0,"UP")
+2006.5733
+"^DD",2006.5733,2006.57331,.01,0)
+LOCATION^RP4'^DIC(4,^0;1^Q
+"^DD",2006.5733,2006.57331,.01,1,0)
+^.1
+"^DD",2006.5733,2006.57331,.01,1,1,0)
+2006.57331^B
+"^DD",2006.5733,2006.57331,.01,1,1,1)
+S ^MAGDAUDT(2006.5733,DA(1),1,"B",$E(X,1,30),DA)=""
+"^DD",2006.5733,2006.57331,.01,1,1,2)
+K ^MAGDAUDT(2006.5733,DA(1),1,"B",$E(X,1,30),DA)
+"^DD",2006.5733,2006.57331,.01,3)
+Enter the location for the DICOM Gateway that performs the queries.
+"^DD",2006.5733,2006.57331,.01,21,0)
+^^4^4^3050804^
+"^DD",2006.5733,2006.57331,.01,21,1,0)
+The value of this field is a pointer to the Institution File (#4).
+"^DD",2006.5733,2006.57331,.01,21,2,0)
+The institution that is identified by this pointer is the
+"^DD",2006.5733,2006.57331,.01,21,3,0)
+institution for the DICOM Gateway from which the Query requests
+"^DD",2006.5733,2006.57331,.01,21,4,0)
+are being posted.
+"^DD",2006.5733,2006.57331,.01,"DT")
+3050804
+"^DD",2006.5733,2006.57331,2,0)
+TYPE^2006.57332A^^1;0
+"^DD",2006.5733,2006.57332,0)
+TYPE SUB-FIELD^^3^3
+"^DD",2006.5733,2006.57332,0,"DT")
+3050804
+"^DD",2006.5733,2006.57332,0,"IX","B",2006.57332,.01)
+
+"^DD",2006.5733,2006.57332,0,"NM","TYPE")
+
+"^DD",2006.5733,2006.57332,0,"UP")
+2006.57331
+"^DD",2006.5733,2006.57332,.01,0)
+TYPE^RF^^0;1^K:$L(X)>30!($L(X)<1) X
+"^DD",2006.5733,2006.57332,.01,1,0)
+^.1
+"^DD",2006.5733,2006.57332,.01,1,1,0)
+2006.57332^B
+"^DD",2006.5733,2006.57332,.01,1,1,1)
+S ^MAGDAUDT(2006.5733,DA(2),1,DA(1),1,"B",$E(X,1,30),DA)=""
+"^DD",2006.5733,2006.57332,.01,1,1,2)
+K ^MAGDAUDT(2006.5733,DA(2),1,DA(1),1,"B",$E(X,1,30),DA)
+"^DD",2006.5733,2006.57332,.01,3)
+Identify the type of RPC call being processed.
+"^DD",2006.5733,2006.57332,.01,21,0)
+^^2^2^3050804^
+"^DD",2006.5733,2006.57332,.01,21,1,0)
+The value of this field is a string.
+"^DD",2006.5733,2006.57332,.01,21,2,0)
+This string identifies the kind of Remote Procedure call that was processed for a query.
+"^DD",2006.5733,2006.57332,.01,"DT")
+3050804
+"^DD",2006.5733,2006.57332,2,0)
+COUNT^RNJ15,0^^0;2^K:+X'=X!(X>999999999999999)!(X<0)!(X?.E1"."1N.N) X
+"^DD",2006.5733,2006.57332,2,3)
+Indicate how often a transaction of this type has taken place.
+"^DD",2006.5733,2006.57332,2,21,0)
+^^2^2^3050804^
+"^DD",2006.5733,2006.57332,2,21,1,0)
+The value of this field is a positive integer number.
+"^DD",2006.5733,2006.57332,2,21,2,0)
+This number indicates how often a certain type of RPC call has occurred.
+"^DD",2006.5733,2006.57332,2,"DT")
+3050804
+"^DD",2006.5733,2006.57332,3,0)
+DETAIL^2006.57333A^^1;0
+"^DD",2006.5733,2006.57333,0)
+DETAIL SUB-FIELD^^2^2
+"^DD",2006.5733,2006.57333,0,"DT")
+3050804
+"^DD",2006.5733,2006.57333,0,"IX","B",2006.57333,.01)
+
+"^DD",2006.5733,2006.57333,0,"NM","DETAIL")
+
+"^DD",2006.5733,2006.57333,0,"UP")
+2006.57332
+"^DD",2006.5733,2006.57333,.01,0)
+DETAIL^F^^0;1^K:$L(X)>30!($L(X)<1) X
+"^DD",2006.5733,2006.57333,.01,1,0)
+^.1
+"^DD",2006.5733,2006.57333,.01,1,1,0)
+2006.57333^B
+"^DD",2006.5733,2006.57333,.01,1,1,1)
+S ^MAGDAUDT(2006.5733,DA(3),1,DA(2),1,DA(1),1,"B",$E(X,1,30),DA)=""
+"^DD",2006.5733,2006.57333,.01,1,1,2)
+K ^MAGDAUDT(2006.5733,DA(3),1,DA(2),1,DA(1),1,"B",$E(X,1,30),DA)
+"^DD",2006.5733,2006.57333,.01,3)
+Indicate specifics about this RPC call.
+"^DD",2006.5733,2006.57333,.01,21,0)
+^^7^7^3050804^
+"^DD",2006.5733,2006.57333,.01,21,1,0)
+The value of this field is a string.
+"^DD",2006.5733,2006.57333,.01,21,2,0)
+This string identifies any detail about a transaction that is worth tallying 
+"^DD",2006.5733,2006.57333,.01,21,3,0)
+(e.g. in case a transaction has the type "Error",
+"^DD",2006.5733,2006.57333,.01,21,4,0)
+the value of this field would indicate the specific error and
+"^DD",2006.5733,2006.57333,.01,21,5,0)
+in case a transaction has the type "Done",
+"^DD",2006.5733,2006.57333,.01,21,6,0)
+he value of this field would indicate the number of rows in
+"^DD",2006.5733,2006.57333,.01,21,7,0)
+returned result.
+"^DD",2006.5733,2006.57333,.01,"DT")
+3050804
+"^DD",2006.5733,2006.57333,2,0)
+COUNT^NJ15,0^^0;2^K:+X'=X!(X>999999999999999)!(X<0)!(X?.E1"."1N.N) X
+"^DD",2006.5733,2006.57333,2,3)
+Indicate how often this specific transaction has taken place.
+"^DD",2006.5733,2006.57333,2,21,0)
+^^3^3^3050804^
+"^DD",2006.5733,2006.57333,2,21,1,0)
+The value of this field is a positive integer number.
+"^DD",2006.5733,2006.57333,2,21,2,0)
+This number indicates how often a transaction of the same
+"^DD",2006.5733,2006.57333,2,21,3,0)
+type and specifics has occurred.
+"^DD",2006.5733,2006.57333,2,"DT")
+3050804
+"^DIC",2006.5733,2006.5733,0)
+QUERY/RETRIEVE STATISTICS^2006.5733
+"^DIC",2006.5733,2006.5733,0,"GL")
+^MAGDAUDT(2006.5733,
+"^DIC",2006.5733,2006.5733,"%D",0)
+^^22^22^3050803^
+"^DIC",2006.5733,2006.5733,"%D",1,0)
+ +---------------------------------------------------------------+
+"^DIC",2006.5733,2006.5733,"%D",2,0)
+ |                                                               |
+"^DIC",2006.5733,2006.5733,"%D",3,0)
+ | Property of the US Government.                                |
+"^DIC",2006.5733,2006.5733,"%D",4,0)
+ | No permission to copy or redistribute this software is given. |
+"^DIC",2006.5733,2006.5733,"%D",5,0)
+ | Use of unreleased versions of this software requires the user |
+"^DIC",2006.5733,2006.5733,"%D",6,0)
+ | to execute a written test agreement with the VistA Imaging    |
+"^DIC",2006.5733,2006.5733,"%D",7,0)
+ | Development Office of the Department of Veterans Affairs,     |
+"^DIC",2006.5733,2006.5733,"%D",8,0)
+ | telephone (301) 734-0100.                                     |
+"^DIC",2006.5733,2006.5733,"%D",9,0)
+ |                                                               |
+"^DIC",2006.5733,2006.5733,"%D",10,0)
+ | The Food and Drug Administration classifies this software as  |
+"^DIC",2006.5733,2006.5733,"%D",11,0)
+ | a medical device.  As such, it may not be changed in any way. |
+"^DIC",2006.5733,2006.5733,"%D",12,0)
+ | Modifications to this software may result in an adulterated   |
+"^DIC",2006.5733,2006.5733,"%D",13,0)
+ | medical device under 21CFR820, the use of which is considered |
+"^DIC",2006.5733,2006.5733,"%D",14,0)
+ | to be a violation of US Federal Statutes.                     |
+"^DIC",2006.5733,2006.5733,"%D",15,0)
+ |                                                               |
+"^DIC",2006.5733,2006.5733,"%D",16,0)
+ +---------------------------------------------------------------+
+"^DIC",2006.5733,2006.5733,"%D",17,0)
+ 
+"^DIC",2006.5733,2006.5733,"%D",18,0)
+The entries in this table are statistics about the usage
+"^DIC",2006.5733,2006.5733,"%D",19,0)
+of the DICOM Query/Retrieve facility.
+"^DIC",2006.5733,2006.5733,"%D",20,0)
+Each entry in this table tallies how often a specific query occurred.
+"^DIC",2006.5733,2006.5733,"%D",21,0)
+Some entries in this table have sub-records that tally how often
+"^DIC",2006.5733,2006.5733,"%D",22,0)
+specific results occurred.
+"^DIC",2006.5733,"B","QUERY/RETRIEVE STATISTICS",2006.5733)
+
+**END**
+**END**

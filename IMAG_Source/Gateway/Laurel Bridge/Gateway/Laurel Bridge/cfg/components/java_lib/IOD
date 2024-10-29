@@ -1,0 +1,27 @@
+#==============================================================================
+# static information common to all instances of the IOD component
+#==============================================================================
+[ component_info ]
+name = IOD
+type = java_lib
+category = application_support_libs
+description = Information Object Description - auto-generated DICOM data set wrapper classes
+package_prefix = com.lbs
+slnreldir = .\jsrc\com\lbs\IOD
+
+[ required_components ]
+component = java_lib/DCF
+component = java_lib/DCS
+[ debug_controls ]
+debug_flag = df_SHOW_CONSTRUCTORS, 0x0001, show object constructors
+debug_flag = df_SHOW_DESTRUCTORS, 0x0002, show object destructors
+debug_flag = df_SHOW_GENERAL_FLOW, 0x0004, show general flow
+debug_flag = df_SIMULATE_HARDWARE, 0x0008, simulate external devices
+debug_flag = df_SHOW_CFG_INFO, 0x0010, show configuration information
+debug_flag = df_SHOW_EXC_THROW, 0x0020, show exceptions before throwing
+
+#==============================================================================
+# per-instance information for the IOD component
+#==============================================================================
+[ IOD ]
+debug_flags = 0

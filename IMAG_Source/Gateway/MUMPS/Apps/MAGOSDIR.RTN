@@ -1,0 +1,140 @@
+MAGOSDIR ;WOIFO/PMK/EdM - Host Operating System Utilities ; [ 01/26/2006  08:44 AM ]
+ ;;3.0;IMAGING;**10,51,69**;MAR 19, 2002;;NOV 7, 2007
+ ;; Per VHA Directive 2004-038, this routine should not be modified.
+ ;; +---------------------------------------------------------------+
+ ;; | Property of the US Government.                                |
+ ;; | No permission to copy or redistribute this software is given. |
+ ;; | Use of unreleased versions of this software requires the user |
+ ;; | to execute a written test agreement with the VistA Imaging    |
+ ;; | Development Office of the Department of Veterans Affairs,     |
+ ;; | telephone (301) 734-0100.                                     |
+ ;; | The Food and Drug Administration classifies this software as  |
+ ;; | a medical device.  As such, it may not be changed in any way. |
+ ;; | Modifications to this software may result in an adulterated   |
+ ;; | medical device under 21CFR820, the use of which is considered |
+ ;; | to be a violation of US Federal Statutes.                     |
+ ;; +---------------------------------------------------------------+
+ ;;
+ ; Callable entries are:
+ ;
+ ; Directory scan
+ ;  Set STATUS=$$GETFST^MAGOSDIR(WILDCARD,.SEED,CASE,.NAME,.SIZE,.TIME,.ATTRIB)
+ ;  Set STATUS=$$GETNXT^MAGOSDIR(.SEED,CASE,.NAME,.SIZE,.TIME,.ATTRIB)
+ ;  Set STATUS=$$GETDIR^MAGOSDIR(WILDCARD,TYPES,CASE)
+ ;  Set STATUS=$$DRIVES^MAGOSDIR()
+ ;
+ ; File manipulation
+ ;  Set STATUS=$$DEL^MAGOSDIR(FILENAME)
+ ;  Set STATUS=$$MKDIR^MAGOSDIR(DIRNAME)
+ ;  Set STATUS=$$RMDIR^MAGOSDIR(DIRNAME)
+ ;  Set STATUS=$$RENAME^MAGOSDIR(OLDNAME,NEWNAME)
+ ;  Set STATUS=$$MOVE^MAGOSDIR(FILENAME,NEWLOC)
+ ;  Set VALUE=$$ENVIRON^MAGOSDIR(NAME)
+ ;  Set TEMP=$$TEMPDIR^MAGOSDIR()
+ ;
+GETFILE(FILE,ARRAY) N I,S,X
+ K ARRAY
+ Q:'$$GETDIR^MAGOSDIR(FILE)
+ S S=$$OPEN^MAGOSFIL(FILE,"R")
+ I S<0 S $EC=",UOpen "_FILE_" for Read Failed," Q
+ S I=0 F  S S=$$READ^MAGOSFIL(FILE,.X) Q:S'=""  S:X'="" I=I+1,ARRAY(I)=X
+ S S=$$CLOSE^MAGOSFIL(FILE)
+ S ARRAY(0)=I
+ Q
+DEL(FILENAME) ;
+ ;  -- Deletes a file from a directory
+ Q $ZU(140,5,FILENAME)
+DRIVES() ;
+ ;  -- Returns list of active diskdrives
+ N N,R
+ S R="?"
+ I $ZV[" 5.0 " S T=$$drives^%Wpfiles(.R)
+ I $ZV[" 5.1 " S N=$ZU(5) ZN "%SYS" S T=$$drives^Wpfiles(.R) ZN N
+ Q $TR(R,$C(0,1,22,28,35,58))
+GETDIR(WILDCARD,TYPES,CASE) ;
+ ;  -- Searches for one or more files,
+ N ATTRIB,NAME,OK,R,SEED,SIZE,TIME,X
+ K ^TMP("MAG",$J,"DIR LIST")
+ S TYPES=$G(TYPES,"*") S:TYPES["*" TYPES="ACDHNRST"
+ F X=1:1:$L(TYPES) S OK($E(TYPES,X))=""
+ S OK("?")=""
+ S X=$$GETFST(WILDCARD,.SEED,$G(CASE),.NAME,.SIZE,.TIME,.ATTRIB)
+ Q:X<0 X Q:X="" 0
+ S R=0 F  D  S X=$$GETNXT(.SEED,$G(CASE),.NAME,.SIZE,.TIME,.ATTRIB) Q:NAME=""  I X<0 S R=X Q
+ . N D,H,M,T
+ . S OK=0 F X=1:1:$L(ATTRIB) I $D(OK($E(ATTRIB,X))) S OK=1 Q
+ . Q:'OK
+ . S R=R+1,D=TIME\1,T=TIME-D*10000\1
+ . S D=D#100_"-"_$P("JAN FEB MAR APR MAY JUN JUL AUG SEP OCT NOV DEC"," ",D\100#100)_"-"_(D\10000+1700)
+ . S H=T\100,M=T#100,T=H#12 S:'T T=12
+ . S T=H_":"_$TR($J(M,2)," ",0) ;_$S(H<12:" AM",1:" PM")
+ . S ^TMP("MAG",$J,"DIR LIST",NAME)=SIZE_";"_D_";"_T_";"_ATTRIB
+ . Q
+ Q R
+GETFST(WILDCARD,SEED,CASE,NAME,SIZE,TIME,ATTRIB) N X
+ ;  -- Starts a wild-card directory search
+ S NAME=$ZSEARCH(WILDCARD),SEED=""
+ G CCHWILD
+GETNXT(SEED,CASE,NAME,SIZE,TIME,ATTRIB) ;
+ ;  -- Continues a wild-card directory search
+ S NAME=$ZSEARCH("")
+ G CCHWILD
+DOSATT(A) N ATT,BIT
+ ; DOS/Windows attribute values:
+ ;
+ ;  1:     1 = Read-Only
+ ;  2:     2 = Hidden
+ ;  3:     4 = System
+ ;  4:     8 = Volume Label
+ ;  5:    16 = Directory
+ ;  6:    32 = Archive
+ ;  7:    64 = Device (reserved for future use)
+ ;  8:   128 = Normal
+ ;  9:   256 = Temporary
+ ; 10:   512 = Sparse
+ ; 11:  1024 = Re-Parse Point
+ ; 12:  2048 = Compressed
+ ; 13:  4096 = Off-Line
+ ; 14:  8192 = Not Context-Indexed
+ ; 15: 16384 = Encrypted
+ ;
+ S ATT="" F BIT=1:1:8 S:A#2 ATT=ATT_$E("RHSVDA-N",BIT) S A=A\2
+ I A,ATT'["N" S ATT=ATT_"N"
+ S:ATT="" ATT="N"
+ Q ATT
+CCHWILD ;
+ S:'$G(CASE) NAME=$$UPPER^MAGOSMSC(NAME)
+ Q:NAME="" ""
+ S SIZE=$ZU(140,1,NAME)
+ S TIME=$TR($ZDATETIME($ZU(140,2,NAME),8,1)," :",".")-17000000
+ S ATTRIB=$$DOSATT($ZU(140,7,NAME))
+ S NAME=$P(NAME,"\",$L(NAME,"\"))
+ Q 0
+ENVIRON(NAME) ;
+ ;  -- Returns the value of an environment variable
+ N OLD,PIPE,TEMP,X
+ S OLD=$ZUTIL(68,40,1),TEMP=""
+ S PIPE="set" O PIPE:"Q" U PIPE
+ F  R X Q:$ZEOF  I $P(X,"=",1)=NAME S TEMP=$P(X,"=",2,$L(X)+2) Q
+ C PIPE
+ S X=$ZUTIL(68,40,OLD)
+ Q TEMP
+MKDIR(DIRNAME) N D,I,V
+ ;  -- Creates a new directory
+ F I=$S($E(DIRNAME,1,2)="\\":5,1:2):1:$L(DIRNAME,"\") D  Q:V
+ . S D=$P(DIRNAME,"\",1,I),V=$ZU(140,9,D)
+ . S:V=-183 V=0
+ . Q
+ Q V
+MOVE(FILENAME,NEWLOC) ;
+ ;  -- Moves a file to a different location
+ Q $$HOSTCMD^MAGOSMSC("move "_FILENAME_" "_NEWLOC)
+RENAME(OLDNAME,NEWNAME) ;
+ ;  -- Renames a file
+ Q $ZU(140,6,OLDNAME,NEWNAME)
+RMDIR(DIRNAME) ;
+ ;  -- Deletes a directory
+ Q $ZU(140,10,DIRNAME)
+TEMPDIR() ;
+ ;  -- Returns the name of a writeable temporary directory
+ Q $$ENVIRON("TEMP")_"\"

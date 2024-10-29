@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<build xmlns="http://va.gov/VistA/kids/manifest" name="MAG*3.0*094" patchName="Clinical Capture Maintenance II" patch="094">
+  <components>
+    <securityKeys />
+    <parameterDefinitions />
+    <printTemplates />
+    <sortTemplates />
+    <menuOptions>
+      <menuOption export="OPT_MAG_CLIENT_VERSION_REPORT.KID" />
+    </menuOptions>
+    <rpcs />
+    <dataDictionaries>
+      <dataDictionary export="DD_2005_021.KID" />
+      <dataDictionary export="DD_2006_1.KID" />
+    </dataDictionaries>
+    <hl7s />
+    <routines>
+      <routine export="MAGGAII.RTN" />
+      <routine export="MAGGI12.RTN" />
+      <routine export="MAGGSFT.RTN" />
+      <routine export="MAGGTU4.RTN" />
+      <routine export="MAGGTU42.RTN" />
+      <routine export="MAGGTU4C.RTN" />
+      <routine export="MAGGTU4D.RTN" />
+      <routine export="MAGGTU4L.RTN" />
+      <routine export="MAGGTU4T.RTN" />
+      <routine export="MAGGTUP.RTN" />
+      <routine export="MAGIPS94.RTN" />
+    </routines>
+    <protocols />
+  </components>
+</build>

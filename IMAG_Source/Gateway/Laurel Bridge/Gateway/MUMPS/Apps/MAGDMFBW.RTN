@@ -1,0 +1,252 @@
+Cache for Windows NT^INT^Saved from DICOM,DICOM (ISW-KUZMAKP3-LT)^~Format=Cache.S~
+%RO on 06/11/2013  11:11
+MAGDMFBW^INT^1^62984,40290.41073^0
+MAGDMFBW ;WOIFO/PMK - Program to build DICOM Master File ; 11 Jun 2013 11:11 AM
+ ;;3.0;IMAGING;**9,10,11,30,69,110**;Mar 19, 2002;Build 61;Oct 10, 2012
+ ;; Per VHA Directive 2004-038, this routine should not be modified.
+ ;; +---------------------------------------------------------------+
+ ;; | Property of the US Government.                                |
+ ;; | No permission to copy or redistribute this software is given. |
+ ;; | Use of unreleased versions of this software requires the user |
+ ;; | to execute a written test agreement with the VistA Imaging    |
+ ;; | Development Office of the Department of Veterans Affairs,     |
+ ;; | telephone (301) 734-0100.                                     |
+ ;; | The Food and Drug Administration classifies this software as  |
+ ;; | a medical device.  As such, it may not be changed in any way. |
+ ;; | Modifications to this software may result in an adulterated   |
+ ;; | medical device under 21CFR820, the use of which is considered |
+ ;; | to be a violation of US Federal Statutes.                     |
+ ;; +---------------------------------------------------------------+
+ ;;
+ ; Station AE Title | Institution Name | Imaging Service | Imaging Type | Format Options | Description
+ ;
+ ; Format Options: Accession Number / SSN / Weight / Allergies
+ ;
+ ;   Accession Number: Long or Short (case number) - Default= LONG
+ ;   SSN: Dash or NoDash - Default DASHES
+ ;   Weight: Weight or NoWeight - Default WEIGHT
+ ;   Allergies: Output in Allergies (0010,2110) or Medical Alerts (0010,2000) or Both - default BOTH
+ ;
+WORKLIST ; Modality Worklist SCUs
+ N ACNFMT ;--- Specified format for accession number (Long or Short)
+ N AETITLE ;-- Specified AE Title for Worklist SCU
+ N ALLERGY ;-- Output allergies as Allergies (0010,2110), Medical Alerts (0010,2000), or both
+ N D0 ;------- Counter for Worklist records
+ N DESC ;----- Specified description
+ N ERR ;------ Error counter
+ N FILE ;----- Full name of master file
+ N FORMAT ;--- Format Options: Accession Number / SSN / Weight / Allergies
+ N TYPELIST ;- List of imaging types
+ N IMAGPROC ;- Imaging procedure (second part of Imaging Type for consults)
+ N IMAGTYPE ;- Specified Imaging Type
+ N IMAGSPEC ;- Imaging specialty (first part of Imaging Type for consults)
+ N IMGSVC ;--- Specified Imaging Service
+ N IMGSVC1 ;-- Imaging Service for one image type
+ N INFO ;----- Scratch array
+ N ISITE ;---- Index for site in list
+ N ITYPE ;---- Index for image type in list
+ N OK ;------- Current value matches validity check
+ N PATH ;----- Directory for master files
+ N REASON ;--- Output reason as Requested Procedure Comments (0040,1400) or Additional Patient History (0010,21B0)
+ N RECORD ;--- Data record as read from master file
+ N SITE ;----- Specified name or number for site
+ N SITELIST ;- List of sites
+ N SITEIEN ;-- IEN of SITE in ^DIC(4,...
+ N SSNFMT ;--- Specified format for SSN (w/wo dashes - Dash or NoDash)
+ N STATUS ;--- Result of last I/O operation
+ N VALTYPE ;-- Array with acceptable values for Imaging Type
+ N WEIGHT ;--- Output or not output weight
+ N D1,I,X,Z ;- Scratch variables
+ ;
+ S FILE=$$INIT^MAGDMFB(2006.583,"Modality WorkList","WorkList")
+ Q:FILE=""
+ ;
+ ; Lists of valid imaging types
+ K INFO
+ Q:$$CALLRPC^MAGM2VCU("MAG DICOM GET IMAGING TYPES","M",.INFO)<0
+ S I="" F  S I=$O(INFO(I)) Q:I=""  D
+ . S X=INFO(I) Q:X'["^"
+ . S VALTYPE($P(X,"^",1),$P(X,"^",2))=""
+ . Q
+ S VALTYPE("LAB","SP")="" ; for lab/surgical pathology P138
+ S VALTYPE("LAB","CY")="" ; for lab/cytopathology P138
+ S VALTYPE("LAB","EM")="" ; for lab/electron microscopy P138
+ K INFO
+ ;
+ K ^MAGDICOM(2006.583)
+ S ^MAGDICOM(2006.583,0)="MODALITY WORKLIST DICTIONARY^2006.583^^"
+ S D0=0
+ ;
+ S STATUS=$$OPEN^MAGOSFIL(FILE,"R")
+ I STATUS<0 D  Q
+ . D MESSAGE^MAGDMLOG(1,0,"Open Error: "_STATUS,"t")
+ . S FATAL=FATAL+1
+ . Q
+ F  D  Q:STATUS'=""
+ . S STATUS=$$READ^MAGOSFIL(FILE,.RECORD)
+ . I $$USEPRIN^MAGOSFIL(1)
+ . S ERR=0
+ . I STATUS<0 Q:+STATUS=-2  D  Q
+ . . D MESSAGE^MAGDMLOG(1,0,"Read Error: "_STATUS,"t")
+ . . S FATAL=FATAL+1
+ . . Q
+ . Q:$TR(RECORD,$C(12,32,9))=""
+ . S RECORD=$TR(RECORD,$C(145,146,147,148),$C(39,39,34,34))
+ . I RECORD?1"#".E D  Q
+ . . D:'SILENT MESSAGE^MAGDMLOG(1,0,"Comment: <<"_$P(RECORD,"#",2,999)_">>","t")
+ . . Q
+ . D:$L(RECORD,"|")'=6
+ . . D MESSAGE^MAGDMLOG(1,0,"*** Record should contain 6 fields (separated by |) ***","t")
+ . . D MESSAGE^MAGDMLOG(1,0,RECORD,"t")
+ . . S FATAL=FATAL+1,ERR=1
+ . . Q
+ . S SITELIST=$$PIECE^MAGDMFBI(RECORD,2) ; Site is CASE SENSITIVE
+ . S DESC=$$PIECE^MAGDMFBI(RECORD,6)
+ . S RECORD=$$UPPER^MAGOSMSC(RECORD)
+ . S AETITLE=$$PIECE^MAGDMFBI(RECORD,1)
+ . S IMGSVC=$$PIECE^MAGDMFBI(RECORD,3)
+ . S TYPELIST=$$PIECE^MAGDMFBI(RECORD,4)
+ . S FORMAT=$$PIECE^MAGDMFBI(RECORD,5)
+ . F ISITE=1:1:$L(SITELIST,"/") D
+ . . S SITE=$P(SITELIST,"/",ISITE)
+ . . S SITEIEN(ISITE)=$$SITEIEN^MAGDMFB8(SITE,0)
+ . . I SITEIEN(ISITE)<0 D
+ . . . D MESSAGE^MAGDMLOG(1,0,"*** Error: Site """_SITE_""" not recognized: "_SITEIEN(ISITE)_" ***","t")
+ . . . S SITEIEN(ISITE)="",FATAL=FATAL+1,ERR=1
+ . . . Q
+ . . Q
+ . S OK=$L(IMGSVC)
+ . I OK,'$D(VALTYPE(IMGSVC)) S OK=0
+ . I 'OK D
+ . . D MESSAGE^MAGDMLOG(1,0,"Unknown imaging service: "_IMGSVC,"t")
+ . . S X="Possible values are",S=": "
+ . . S T="" F  S T=$O(VALTYPE(T)) Q:T=""  D
+ . . . S:$O(VALTYPE(T))="" S=" and "
+ . . . S X=X_S
+ . . . I $X+$L(T)>72 D MESSAGE^MAGDMLOG(1,0,X,"t") S X=""
+ . . . S X=X_""""_T_"""",S=", "
+ . . . Q
+ . . D:X'="" MESSAGE^MAGDMLOG(1,0,X,"t")
+ . . S FATAL=FATAL+1,ERR=1,IMGSVC="?"
+ . . Q
+ . S OK=$L(TYPELIST)
+ . I OK F ITYPE=1:1:$L(TYPELIST,",") D  Q:'OK
+ . . S IMAGTYPE=$P(TYPELIST,",",ITYPE)
+ . . S OK=$L(IMAGTYPE) Q:'OK
+ . . S IMAGSPEC=$P(IMAGTYPE,"/",1),IMAGPROC=$P(IMAGTYPE,"/",2)
+ . . I IMAGSPEC[":" S IMGSVC1=$P(IMAGSPEC,":",1),IMAGSPEC=$P(IMAGSPEC,":",2)
+ . . E  S IMGSVC1=IMGSVC
+ . . I '$D(VALTYPE(IMGSVC1,IMAGSPEC)) S OK=0
+ . . I IMGSVC1="CON",$L(IMAGPROC),IMAGPROC'="*" I '$D(VALTYPE("CON PROC",IMAGPROC)) S OK=0
+ . . Q
+ . I 'OK D
+ . . N R,S,T
+ . . S FATAL=FATAL+1,ERR=1
+ . . D MESSAGE^MAGDMLOG(1,0,"Erroneous value specified for Imaging Type: """_TYPELIST_""".","t")
+ . . D DUMPLIST(IMGSVC,"Possible value")
+ . . Q:IMGSVC'="CON"
+ . . ; display consult procedures
+ . . D DUMPLIST("CON PROC","Possible consult procedures value")
+ . . Q
+ . ;
+ . ; long/short accession number format
+ . S ACNFMT=$P(FORMAT,"/",1),X=$E(ACNFMT,1)
+ . S X=$S(ACNFMT'="":$E(ACNFMT),1:"L")
+ . I X'="L",X'="S" D
+ . . D MESSAGE^MAGDMLOG(1,0,"*** Invalid Accession Number Format: """_ACNFMT_""" ('Long' or 'Short') ***","t")
+ . . S FATAL=FATAL+1,ERR=1
+ . . Q
+ . S ACNFMT=X
+ . ;
+ . ; social security number with or without dashes (with dashes is the default)
+ . S SSNFMT=$P(FORMAT,"/",2)
+ . S X=$S(SSNFMT'="":$E(SSNFMT),1:"D")
+ . I X'="D",X'="N" D
+ . . D MESSAGE^MAGDMLOG(1,0,"*** Invalid Social Security Number Format: """_SSNFMT_""" ('Dash' or 'NoDash') ***","t")
+ . . S FATAL=FATAL+1,ERR=1
+ . . Q
+ . S SSNFMT=X
+ . ;
+ . ; send weight or don't send weight (send weight is the default)
+ . S WEIGHT=$P(FORMAT,"/",3)
+ . S X=$S(WEIGHT'="":$E(WEIGHT),1:"W")
+ . I X'="W",X'="N" D
+ . . D MESSAGE^MAGDMLOG(1,0,"*** Invalid Weight Format: """_WEIGHT_""" ('Weight' or 'NoWeight') ***","t")
+ . . S FATAL=FATAL+1,ERR=1
+ . . Q
+ . S WEIGHT=X
+ . ;
+ . ; send allergies in Allergies (0010,2100) or as Medical Alerts (0010,2000) (send both is the default)
+ . S ALLERGY=$P(FORMAT,"/",4)
+ . S X=$E(ALLERGY)
+ . I "AM"'[X D
+ . . D MESSAGE^MAGDMLOG(1,0,"*** Invalid Allergy Format: """_ALLERGY_""" ('Allergies' or 'Medical Alerts') ***","t")
+ . . S FATAL=FATAL+1,ERR=1
+ . . Q
+ . S ALLERGY=X
+ . ;
+ . ; Output reason for request as Requested Procedure Comments (0040,1400)
+ . ; or Additional Patient History (0010,21B0) (send both is the default)
+ . S REASON=$P(FORMAT,"/",5)
+ . S X=$E(REASON)
+ . I "CH"'[X D
+ . . D MESSAGE^MAGDMLOG(1,0,"*** Invalid Reason Format: """_REASON_""" ('Comment' or 'History') ***","t")
+ . . S FATAL=FATAL+1,ERR=1
+ . . Q
+ . S REASON=X
+ . ;
+ . D:AETITLE=""
+ . . D MESSAGE^MAGDMLOG(1,0,"*** AE-Title must be specified. ***","t")
+ . . S FATAL=FATAL+1,ERR=1
+ . . Q
+ . ;
+ . D:'SILENT!ERR
+ . . S X=AETITLE_" -- "
+ . . F ISITE=1:1:$L(SITELIST,"/")  S:ISITE>1 X=X_"," S X=X_SITEIEN(ISITE)
+ . . S X=X_" -- "_IMGSVC_" -- "_TYPELIST_" -- "_ACNFMT_" -- "_SSNFMT_" -- "_WEIGHT
+ . . S X=X_" -- "_$S(ALLERGY'="":ALLERGY,1:" ")
+ . . S X=X_" -- "_$S(REASON'="":REASON,1:" ")
+ . . D MESSAGE^MAGDMLOG(1,0,X,"t")
+ . . Q
+ . I ERR,FBSWITCH="FOREGROUND" W !,"Press <Enter> to continue: " R Z:DTIME Q
+ . S X=AETITLE_"^^"_IMGSVC_"^"_TYPELIST_"^"_ACNFMT_"^"_DESC_"^"_SSNFMT_"^"_WEIGHT_"^"_ALLERGY_"^"_REASON
+ . S D0=D0+1
+ . S ^MAGDICOM(2006.583,D0,0)=X
+ . S ^MAGDICOM(2006.583,"B",AETITLE,D0)=""
+ . S $P(^MAGDICOM(2006.583,0),"^",3,4)=D0_"^"_D0
+ . S ^MAGDICOM(2006.583,D0,1,0)="^2006.5832PA^0^0"
+ . S D1=0 F ISITE=1:1:$L(SITELIST,"/") I SITEIEN(ISITE) D
+ . . S D1=D1+1
+ . . S ^MAGDICOM(2006.583,D0,1,D1,0)=SITEIEN(ISITE)
+ . . S ^MAGDICOM(2006.583,D0,1,"B",SITEIEN(ISITE),D1)=""
+ . . S $P(^MAGDICOM(2006.583,D0,1,0),"^",3,4)=D1_"^"_D1
+ . . Q
+ . ; output list of image types
+ . S ^MAGDICOM(2006.583,D0,2,0)="^2006.5833PA^0^0"
+ . S D1=0 F ITYPE=1:1:$L(TYPELIST,",") D
+ . . S D1=D1+1,IMAGTYPE=$P(TYPELIST,",",ITYPE)
+ . . I IMAGTYPE'[":" S IMAGTYPE=IMGSVC_":"_IMAGTYPE
+ . . S ^MAGDICOM(2006.583,D0,2,D1,0)=IMAGTYPE
+ . . S ^MAGDICOM(2006.583,D0,2,"B",IMAGTYPE,D1)=""
+ . . S $P(^MAGDICOM(2006.583,D0,2,0),"^",3,4)=D1_"^"_D1
+ . . Q
+ . Q
+ S STATUS=$$CLOSE^MAGOSFIL(FILE)
+ S X=D0_" entr"_$S(D0=1:"y",1:"ies")_" added to WorkList database."
+ D MESSAGE^MAGDMLOG(1,0,X,"t")
+ Q
+ ;
+DUMPLIST(IMGSVC,HEADER) ;
+ S X=HEADER,S="s are: "
+ S T="" F  S T=$O(VALTYPE(IMGSVC,T)) Q:T=""  D
+ . I $O(VALTYPE(IMGSVC,T))="" S S=$S(S=", ":" and ",1:" is: ")
+ . S X=X_S
+ . I $X+$L(T)>72 D MESSAGE^MAGDMLOG(1,0,X,"t") S X=""
+ . S X=X_""""_T_"""",S=", "
+ . Q
+ S:S="s are: " X=X_"s cannot be shown at this time."
+ D:X'="" MESSAGE^MAGDMLOG(1,0,X,"t")
+ Q
+
+
+

@@ -1,0 +1,11 @@
+#
+# The following is an example extended data dictionary file.
+# If this file is named "ext_data_dictionary", it will be
+# used whenever DCF libraries or applications look up information
+# for a dicom tag. The name of the extended data dictionary file
+# is contained in the [ DCS] configuration group of DICOM related
+# applications. 
+#
+[ elements ]
+0008,0010 = CS,1,Recognition Code
+0018,9445 = FD,1,Undefined Element

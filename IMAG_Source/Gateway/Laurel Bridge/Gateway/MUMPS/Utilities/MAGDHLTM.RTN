@@ -1,0 +1,71 @@
+MAGDHLTM ;WOIFO/MLH - IHE-based ADT interface for PACS - merges ; 02 Apr 2008 4:29 PM
+ ;;3.0;IMAGING;**49**;19-September-2006;;Build 942
+ ;; Per VHA Directive 2004-038, this routine should not be modified.
+ ;; +---------------------------------------------------------------+
+ ;; | Property of the US Government.                                |
+ ;; | No permission to copy or redistribute this software is given. |
+ ;; | Use of unreleased versions of this software requires the user |
+ ;; | to execute a written test agreement with the VistA Imaging    |
+ ;; | Development Office of the Department of Veterans Affairs,     |
+ ;; | telephone (301) 734-0100.                                     |
+ ;; | The Food and Drug Administration classifies this software as  |
+ ;; | a medical device.  As such, it may not be changed in any way. |
+ ;; | Modifications to this software may result in an adulterated   |
+ ;; | medical device under 21CFR820, the use of which is considered |
+ ;; | to be a violation of US Federal Statutes.                     |
+ ;; +---------------------------------------------------------------+
+ ;;
+ Q
+ ;
+A40 ; ENTRY POINT - Generate ADT^A40 messages for merges.
+ ; Called by SET logic of AMAGDHLM xref of MERGE STATUS Field (#.05) on DUPLICATE RECORD File (#15).
+ ; 
+ I $P($G(^MAG(2006.1,1,"IHE")),U,1)'="Y" Q  ; not running IHE-base interface
+ ;
+ N MRGDTA ; --- main merge data string from ^VA(15)
+ N HL ; ------- HL7 initialization function status return
+ N HLA ; ------ array of HL7 message segments
+ N MSGA40A ; -- A40 message array
+ N DFNFROM ; -- pt file IEN to merge from
+ N DFNTO ; ---- pt file IEN to merge to
+ N ICNIX ; ---- FM index of most recent historical ICN
+ N ICNHIST ; -- most recent historical ICN
+ N CURDT ; ---- current date/time
+ N MSG ; ------ message status
+ ;
+ S MRGDTA=$G(^VA(15,DA,0))
+ I X=2,$P($P(MRGDTA,U,1),";",2)="DPT("
+ E  Q  ; only do this for a patient merge set to COMPLETE status
+ ;
+ D INIT^HLFNC2("MAG CPACS A40",.HL)
+ I $G(HL) Q  ; error
+ S HLCS=$E(HLECH,1),HLRS=$E(HLECH,2),HLSS=$E(HLECH,4)
+ ;
+ ; build a dummy MSH segment for the $$MAKE^MAG7UM function
+ S MSGA40A(1,0)="MSH"
+ S MSGA40A(1,1,1,1,1)=HLFS
+ S MSGA40A(1,2,1,1,1)=HLECH
+ S MSGA40A(1,9,1,1,1)="ADT"
+ S MSGA40A(1,9,1,2,1)="A40"
+ ;
+ ; get patient being merged to - depending on direction selected for merge
+ S DFNTO=+$P(MRGDTA,U,$S($P(MRGDTA,U,4)=1:2,1:1))
+ ; get most recent historical ICN (= merge-from ICN)
+ S ICNIX=+$O(^DPT(DFNTO,"MPIFHIS"," "),-1)
+ I ICNIX S ICNFROM=$TR($P($G(^DPT(DFNTO,"MPIFHIS",ICNIX,0)),U,1,2),U,"V")
+ D ^XQDATE S CURDT=%
+ ; build message segments
+ S MSG=$$EVN^MAGDHLS("A40",CURDT,CURDT,"MSGA40A")
+ S MSG=$$PID^MAGDHLS(DFNTO,"MSGA40A")
+ S MSG=$$MRG^MAGDHLS(ICNFROM,"MSGA40A")
+ ;
+ ; assemble message into segments
+ S MSG=$$MAKE^MAG7UM("MSGA40A",$NA(HLA("HLS")))
+ K HLA("HLS",1) ; remove dummy MSH segment
+ ;
+ ; send message to receiver and gateway
+ D GENERATE^HLMA("MAG CPACS A40","LM",1,.RESULT) ; generate & send message
+ D LOGGW^MAGDHLL("ADT") ; log message to gateway
+ Q
+
+

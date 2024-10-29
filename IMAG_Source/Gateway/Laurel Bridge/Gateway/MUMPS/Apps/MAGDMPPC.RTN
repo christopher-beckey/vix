@@ -1,0 +1,69 @@
+MAGDMPPC ;WOIFO/EdM - MPPS N-Create ; [ 05/29/2001  14:57 ]
+ ;;3.0;IMAGING;;12-March-2002
+ ;; Per VHA Directive 2004-038, this routine should not be modified.
+ ;; +---------------------------------------------------------------+
+ ;; | Property of the US Government.                                |
+ ;; | No permission to copy or redistribute this software is given. |
+ ;; | Use of unreleased versions of this software requires the user |
+ ;; | to execute a written test agreement with the VistA Imaging    |
+ ;; | Development Office of the Department of Veterans Affairs,     |
+ ;; | telephone (301) 734-0100.                                     |
+ ;; | The Food and Drug Administration classifies this software as  |
+ ;; | a medical device.  As such, it may not be changed in any way. |
+ ;; | Modifications to this software may result in an adulterated   |
+ ;; | medical device under 21CFR820, the use of which is considered |
+ ;; | to be a violation of US Federal Statutes.                     |
+ ;; +---------------------------------------------------------------+
+ ;;
+ Q
+ ;
+CREATE N D0,FM,UID,X
+ S FM=666
+ ; Find UID
+ S UID=$G(^TMP("MAG",$J,"DICOM",INODE,"0040,0253"))
+ I $O(^MAGDICOM(FM,"B",UID,"")) D  Q
+ . ; Issue error message:
+ . ; Procedure step already exists... Cannot create second instance.
+ . Q
+ ;
+ L +^MAGDICOM(FM,0)
+ S X=$G(^MAGDICOM(FM,0))
+ S $P(X,"^",1)="MODALITY PERFORMED PROCEDURE STEP"
+ S $P(X,"^",2)=FM
+ S D0=$O(^MAGDICOM(FM," "),-1)+1,$P(X,"^",3)=D0
+ S $P(X,"^",4)=$P(X,"^",4)+1
+ S ^MAGDICOM(FM,0)=X
+ S ^MAGDICOM(FM,D0,0)=UID
+ S ^MAGDICOM(FM,"B",UID,D0)=""
+ L -^MAGDICOM(FM,0)
+ D STORE(D0,INODE)
+ Q
+ ;
+SET N D0,FM,UID,X
+ S FM=666
+ ; Find UID
+ S UID=$G(^TMP("MAG",$J,"DICOM",INODE,"0040,0253"))
+ S D0=$O(^MAGDICOM(FM,"B",UID,"")) D:'D0  Q
+ . ; Issue error message:
+ . ; Procedure step does not exist... Cannot set information into instance.
+ . Q
+ ;
+ D STORE(D0,INODE)
+ Q
+ ;
+STORE(D0,INODE) N FM,TAG,X
+ L +^MAGDICOM(FM,D0)
+ S TAG="" F  S TAG=$O(^TMP("MAG",$J,"DICOM",INODE,TAG)) Q:TAG=""  D
+ . S D1=$O(^MAGDICOM(FM,D0,1,"B",TAG,""))
+ . D:'D1
+ . . S D1=$O(^MAGDICOM(FM,D0,1," "),-1)+1
+ . . S ^MAGDICOM(FM,D0,1,0)="^^"_D1_"^"_D1
+ . . S ^MAGDICOM(FM,D0,1,D1,0)=""
+ . . S ^MAGDICOM(FM,D0,1,"B",TAG,D1)=""
+ . . Q
+ . S X=$P(^TMP("MAG",$J,"DICOM",INODE,TAG),"^",2)
+ . S ^MAGDICOM(FM,D0,1,D1,0)=TAG_"^"_X_"^"_$G(^TMP("MAG",$J,"DICOM",INODE,TAG,1,1))
+ . Q
+ L -^MAGDICOM(FM,D0)
+ Q
+ ;

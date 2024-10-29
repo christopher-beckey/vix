@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" 
+	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	targetNamespace="http://www.va.gov/imaging" 
+	xmlns="http://www.va.gov/imaging">
+  <xs:element name="services">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="65536" name="Service">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="ApplicationPath" type="xs:string" minOccurs="1" maxOccurs="1" />
+              <xs:element name="MetadataPath" type="xs:string" minOccurs="1" maxOccurs="1" />
+              <xs:element name="ImagePath" type="xs:string" minOccurs="1" maxOccurs="1" />
+            </xs:sequence>
+            <xs:attribute name="type" type="xs:string" use="required" />
+            <xs:attribute name="version" type="xs:double" use="required" />
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

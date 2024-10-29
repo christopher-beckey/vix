@@ -1,0 +1,126 @@
+﻿@inherits Nancy.ViewEngines.Razor.NancyRazorViewBase<List<EventLogItem>>
+    @using Hydra.IX.Common
+    <!DOCTYPE html>
+    <html>
+
+    <head>
+        <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+        <meta content="utf-8" http-equiv="encoding">
+
+        <title>VIX Viewer Event Log Viewer</title>
+
+        <!-- TODO: script type="text/javascript" src="@ViewBag.BaseUrl/js/jquery-1.12.4.min.js" --><!-- /script -->
+        <script type="text/javascript" src="@ViewBag.BaseUrl/js/jquery-1.11.1.js"></script>
+
+    </head>
+
+    <body>
+        <p>There are @Model.Count items</p>
+
+        <div>
+            <table id="t01">
+                @foreach (EventLogItem item in @Model)
+                {
+                var timespan = @item.TimeSpan + " ms";
+                var messageType = "";
+                if (@item.MessageType == 0)
+                messageType = "INFO";
+                else if (@item.MessageType == 1)
+                messageType = "WARN";
+                if (@item.MessageType == 2)
+                messageType = "ERROR";
+
+                var contextType = "";
+                if (@item.ContextType == 0)
+                contextType = "General";
+                else if (@item.ContextType == 1)
+                contextType = "Display Context";
+                else if (@item.ContextType == 2)
+                contextType = "Image Group";
+                else if (@item.ContextType == 3)
+                contextType = "Image";
+
+                <tr>
+                    <td>
+                        @item.Id
+                    </td>
+                    <td>
+                        @item.StartTime
+                    </td>
+                    <td>
+                        @item.EndTime
+                    </td>
+                    <td>
+                        @timespan
+                    </td>
+                    <td>
+                        @item.TransactionUid
+                    </td>
+                    <td>
+                        @contextType
+                    </td>
+                    <td>
+                        @item.Context
+                    </td>
+                    <td>
+                        @messageType
+                    </td>
+                    <td>
+                        @item.Message
+                    </td>
+                </tr>
+                }
+
+            </table>
+        </div>
+        <style>
+            table#t01 {
+                width: 100%;
+                background-color: #f1f1c1;
+            }
+
+            table#t01 tr:nth-child(even) {
+                background-color: #eee;
+            }
+
+            table#t01 tr:nth-child(odd) {
+                background-color: #fff;
+            }
+
+            table#t01 th {
+                color: white;
+                background-color: blue;
+            }
+
+            table,
+            th,
+            td {
+                border: 1px solid black;
+            }
+
+            table,
+            th,
+            td {
+                border: 1px solid black;
+                border-collapse: collapse;
+            }
+
+            table,
+            th,
+            td {
+                border: 1px solid black;
+                border-collapse: collapse;
+            }
+
+            th,
+            td {
+                padding: 15px;
+            }
+
+        </style>
+        <script>
+            $(window).on('load', function () { });
+        </script>
+    </body>
+
+    </html>

@@ -1,0 +1,182 @@
+09:50 AM 08/26/2005 
+DICOM Gateway MUMPS routines Build V3.0p51Build720_T22
+MAGICSCN
+MAGICSCN ;WOIFO/GEK/EdM ; Image Integrity Checker ; [ 08/28/2001  15:09 ]
+ ;;3.0;IMAGING;;12-March-2002
+ ;; +---------------------------------------------------------------+
+ ;; | Property of the US Government.                                |
+ ;; | No permission to copy or redistribute this software is given. |
+ ;; | Use of unreleased versions of this software requires the user |
+ ;; | to execute a written test agreement with the VistA Imaging    |
+ ;; | Development Office of the Department of Veterans Affairs,     |
+ ;; | telephone (301) 734-0100.                                     |
+ ;; |                                                               |
+ ;; | The Food and Drug Administration classifies this software as  |
+ ;; | a medical device.  As such, it may not be changed in any way. |
+ ;; | Modifications to this software may result in an adulterated   |
+ ;; | medical device under 21CFR820, the use of which is considered |
+ ;; | to be a violation of US Federal Statutes.                     |
+ ;; +---------------------------------------------------------------+
+ ;;
+ ; ^MAGTMP("IC",0) = hdr
+ ; ^MAGTMP("IC",d0,0) = message ^ CO-flag ^ QA-flag
+ ; ^MAGTMP("IC",d0,1,0) = hdr
+ ; ^MAGTMP("IC",d0,1,d1,0) = image ien ; d1 == ien
+ ;
+ ;
+SCAN(OUT,DTFROM,DTUNTIL) ; Run the check for the entries in Image file
+ ; that were created between DTFROM and DTUNTIL
+ ;
+ N ACTCT,D0,ERR,ERRCT,IFRM,IUNT,J,TYPECT
+ ; Initialize
+ K ^MAGTMP("IC")
+ S ^MAGTMP("IC",1,0)="Group of 0 images^-^-"
+ S ^MAGTMP("IC",2,0)="Image Category^-^-"
+ S ^MAGTMP("IC",3,0)="Image is both active and deleted^-^-"
+ S ^MAGTMP("IC",4,0)="Image of Group^-^-"
+ S ^MAGTMP("IC",5,0)="Image of Group has parent pointer^-^-"
+ S ^MAGTMP("IC",6,0)="Invalid Image pointer^-^-"
+ S ^MAGTMP("IC",7,0)="Invalid Parent File Pointer^N^Y"
+ S ^MAGTMP("IC",8,0)="Invalid Parent Image Pointer^-^-"
+ S ^MAGTMP("IC",9,0)="Invalid Parent Root Pointer^N^Y"
+ S ^MAGTMP("IC",10,0)="Lab image not checked^-^-"
+ S ^MAGTMP("IC",11,0)="Missing the Parent file pointer^-^-"
+ S ^MAGTMP("IC",12,0)="Missing the Parent image pointer^-^-"
+ S ^MAGTMP("IC",13,0)="Missing the Parent root pointer^-^-"
+ S ^MAGTMP("IC",14,0)="Patient Mismatch^Y^Y"
+ S ^MAGTMP("IC",15,0)="Patient Mismatch in Group^Y^Y"
+ S ^MAGTMP("IC",16,0)="Patient Photo^-^-"
+ S ^MAGTMP("IC",17,0)="Pointer Mismatch^Y^Y"
+ S ^MAGTMP("IC",18,0)="Rad Pointer Mismatch^-^-"
+ S ^MAGTMP("IC",19,0)="Pointer Mismatch in Group^N^Y"
+ S ^MAGTMP("IC",20,0)="Deleted image^-^-"
+ S ^MAGTMP("IC",21,0)="Pointer Missing in Group entries^-^-"
+ S ^MAGTMP("IC",22,0)="Images only point to Patient^-^-"
+ S ^MAGTMP("IC",0)="IMAGING INTEGRITY CHECK^2006.666^19^19"
+ ;
+ S DTFROM=$G(DTFROM,2000000),DTUNTIL=$G(DTUNTIL,DT+10000)
+ S IFRM=$$FNDDAT(DTFROM) S:IFRM<0 IFRM=0
+ S IUNT=$$FNDDAT(DTUNTIL) S:IUNT<0 IUNT=$O(^MAG(2005," "),-1)+1
+ S ERRCT=0,ACTCT=0
+ S D0=IFRM-1 F  S D0=$O(^MAG(2005,D0)) Q:'D0  Q:D0>IUNT  D
+ . S ACTCT=ACTCT+1 K ERR D
+ . . N D1,DEL,DFN,IMG,ISGRP,N0,N2,N100,PK,PKDA,PKDA1,PKIP
+ . . I 'D0 S ERR(6)="" Q
+ . . ;
+ . . S ISGRP=0
+ . . ;
+ . . S DEL=$D(^MAG(2005.1,D0))
+ . . S IMG=$D(^MAG(2005,D0))
+ . . I 'IMG,DEL S ERR(20)="" Q
+ . . I 'IMG,'DEL S ERR(6)="" Q
+ . . I IMG,DEL S ERR(3)=""
+ . . ;
+ . . S N0=$G(^MAG(2005,D0,0))
+ . . S N2=$G(^MAG(2005,D0,2))
+ . . S N100=$G(^MAG(2005,D0,100))
+ . . ;
+ . . I $O(^MAG(2005,D0,1,0))!($P(N0,U,6)=11) S ISGRP=1
+ . . I ISGRP,'$O(^MAG(2005,D0,1,0)) S ERR(1)="" Q
+ . . ;
+ . . S PK=$P(N2,U,6)     ; Parent File
+ . . S PKDA=$P(N2,U,7)   ; Parent D0
+ . . S PKIP=$P(N2,U,8)   ; Parent Image Pointer
+ . . S PKDA1=$P(N2,U,10) ; Lab D1
+ . . S DFN=$P(N0,U,7)
+ . . ;
+ . . ; If this image is a member of a group, compare some
+ . . ; fields against the Group entry.
+ . . I +$P(N0,U,10) S D1=$P(N0,U,10) D  Q
+ . . . ;   Check the DFNs Quit if they don't match
+ . . . I $P($G(^MAG(2005,D1,0)),U,7)'=DFN S ERR(15)="" Q
+ . . . ; if image has data in parent fields, Quit if not same as Group entry
+ . . . I +PK,($P(N2,U,6,7)'=$P($G(^MAG(2005,D1,2)),U,6,7)) S ERR(19)="" Q
+ . . . ; Have a check that assures that the Group has this image in its multiple
+ . . . ; ? Do we want to do this when we have the Grp entry, for each of its members. ?
+ . . . S (I,VALID)=0 F  S I=$O(^MAG(2005,D1,1,I)) Q:'I  D  Q:VALID
+ . . . . I +^MAG(2005,D1,1,I,0)=D0 S VALID=1
+ . . . . Q
+ . . . S:'VALID ERR(21)=""
+ . . . Q
+ . . ;
+ . . ; In current scheme of things, image points to Package or a Descriptive Categroy
+ . . ;  So we can make the following assumption, but maybe not for long.
+ . . I 'PK,+N100 S ERR(2)="" Q
+ . . I 'PK,($P(N0,U,6)=18) S ERR(16)="" Q
+ . . ;
+ . . ; Old images Didn't require Parent Pointer,Parent root, Parent Image Pointer
+ . . ;
+ . . ; Surgery reports
+ . . I (PK=130) D  Q
+ . . . I 'PKIP S ERR(12)="" Q
+ . . . I '$D(^SRF(PKDA,0)) S ERR(9)="" Q
+ . . . I '$D(^SRF(PKDA,2005,PKIP,0)) S ERR(8)="" Q
+ . . . I DFN'=$P(^SRF(PKDA,0),U,1) S ERR(14)="" Q
+ . . . I D0'=+$G(^SRF(PKDA,2005,PKIP,0)) S ERR(17)="" Q
+ . . . Q
+ . . ;
+ . . ; TIU documents
+ . . I PK=8925 D  Q
+ . . . I 'PKIP S ERR(12)="" Q
+ . . . I '$D(^TIU(8925,PKDA,0)) S ERR(9)="" Q
+ . . . I '$D(^TIU(8925.91,PKIP,0)) S ERR(8)="" Q
+ . . . I DFN'=$P($G(^TIU(8925,PKDA,0)),U,2) S ERR(14)="" Q
+ . . . S MAGZ=PKDA_"^"_D0
+ . . . I MAGZ'=$G(^TIU(8925.91,PKIP,0)) S ERR(17)="" Q
+ . . . Q
+ . . ;
+ . . ; Medicine reports
+ . . I ((PK>689.999)&(PK<703)) D  Q
+ . . . I '$D(^MCAR(PK,PKDA,0)) S ERR(9)="" Q
+ . . . I PKIP I '$D(^MCAR(PK,PKDA,2005,PKIP,0)) S ERR(8)="" Q
+ . . . I DFN'=$P($G(^MCAR(PK,PKDA,0)),U,2) S ERR(14)="" Q
+ . . . I '$D(^MCAR(PK,PKDA,2005,"B",D0)) S ERR(17)="" Q
+ . . . Q
+ . . . ;
+ . . ; Radiology reports
+ . . I PK=74 D  Q
+ . . . I '$D(^RARPT(PKDA,0)) S ERR(9)="" Q
+ . . . I PKIP I '$D(^RARPT(PKDA,2005,PKIP,0)) S ERR(8)="" Q
+ . . . ;
+ . . . I DFN'=$P($G(^RARPT(PKDA,0)),U,2) S ERR(14)="" Q
+ . . . I '$D(^RARPT(PKDA,2005,"B",D0)) S ERR(17)="" Q
+ . . . Q
+ . . ;
+ . . ; Laboratory reports
+ . . I (PK>62.999)&(PK<64) D  Q
+ . . . S ERR(10)=""
+ . . ;
+ . . S ERR(22)=""
+ . . Q
+ . S ERR="" F  S ERR=$O(ERR(ERR)) Q:ERR=""  D
+ . . S X=$G(^MAGTMP("IC",ERR,0)) Q:$P(X,"^",2,3)="-^-"
+ . . S ERRCT=ERRCT+1
+ . . S ^MAGTMP("IC",ERR,1,D0,0)=D0
+ . . S TYPECT(ERR)=$G(TYPECT(ERR))+1
+ . . Q
+ . Q
+ S OUT(0)=$S('ERRCT:"0^All Okay",1:ERRCT_"^Errors in "_ACTCT_" Images Checked.")
+ S ERR="" F  S I=$O(TYPECT(ERR)) Q:ERR=""  D
+ . S OUT(ERR)=TYPECT(ERR)_"^"_$P(^MAGTMP("IC",ERR,0),"^",1)
+ . Q
+ Q
+ ;
+FNDDAT(FMDT) ; Find first image after the specified date
+ N DP,FST,LST,NXT,R
+ S DP=1 ; 1 = Acquisition timestamp; 5 = procedure timestamp
+ S FST=$O(^MAG(2005,0)),LST=$O(^MAG(2005," "),-1)
+ S R=0 F  D  Q:R
+ . I FMDT<$P($G(^MAG(2005,FST,2)),"^",DP) S R=FST Q
+ . I FMDT>$P($G(^MAG(2005,LST,2)),"^",DP) S R=-1 Q
+ . S NXT=$O(^MAG(2005,FST+LST\2))
+ . I NXT=0 S R=FST Q
+ . I 'NXT S R=-1 Q
+ . I NXT=FST S R=FST Q
+ . I NXT=LST S R=LST Q
+ . I $P($G(^MAG(2005,NXT,2)),"^",DP)<FMDT S FST=NXT Q
+ . S LST=NXT
+ . Q
+ Q R
+ ;
+
+

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-module
+  type="WEB"
+  name="SiteServiceWebApp"
+  id="myeclipse.1219231003195"
+  context-root="/vistawebsvcs"
+  j2ee-spec="1.4"
+  archive="SiteServiceWebApp.war">
+  <attributes>
+    <attribute name="webrootdir" value="/WebRoot" />
+  </attributes>
+</project-module>
+

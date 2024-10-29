@@ -1,0 +1,541 @@
+Cache for Windows NT^INT^Saved from DICOM,DICOM (ISW-KUZMAKP3-LT)^~Format=Cache.S~
+%RO on 12/21/2012  12:55
+MAGDWLUY^INT^1^62664,22846^0
+MAGDWLUY ;WOIFO/PMK - Worklist information user ; 26 Jul 2012 6:21 AM
+ ;;3.0;IMAGING;**110**;MAR 19, 2002;;NOV 09, 2011
+ ;; +---------------------------------------------------------------+
+ ;; | Property of the US Government.                                |
+ ;; | No permission to copy or redistribute this software is given. |
+ ;; | Use of unreleased versions of this software requires the user |
+ ;; | to execute a written test agreement with the VistA Imaging    |
+ ;; | Development Office of the Department of Veterans Affairs,     |
+ ;; | telephone (301) 734-0100.                                     |
+ ;; |                                                               |
+ ;; | The Food and Drug Administration classifies this software as  |
+ ;; | a medical device.  As such, it may not be changed in any way. |
+ ;; | Modifications to this software may result in an adulterated   |
+ ;; | medical device under 21CFR820, the use of which is considered |
+ ;; | to be a violation of US Federal Statutes.                     |
+ ;; +---------------------------------------------------------------+
+ ;;
+ ; entry point from programmer mode to generate a Modality Worklist C-FIND-RQ
+ N DEMOMODE S DEMOMODE=0 G ENTRY
+ ;
+DEMO ; entry point to disable changing PID/ACN
+ N DEMOMODE S DEMOMODE=1
+ ;
+ENTRY ; entry point
+ N AETITLE,BOLD,DCFPATH,DONE,I,IOF,IMAGE,IMAGEDIR,INSTABBR,MFGR,MODEL,MSG,NAME,NORMAL,NTIMES
+ N REVERSE,SENDCOPY,SENDLIST,SEQUENCE,SEQNUMB,SCPIEN,STATUS,STOREIEN,STORESCP,X
+ S DCFPATH=$$ENVIRON^MAGOSDIR("DCF_USER_ROOT")
+ I DCFPATH="" W !,"No DCF_USER_ROOT environment variable" Q
+ S DTIME=$G(DTIME,300)
+ S DEMOMODE=$G(DEMOMODE,0)
+ D SETUP^MAGDMENU
+ D SEQINIT^MAGDFCNS
+ S MSG(1)=""
+ S MSG(2)="V i s t A   D I C O M   M o d a l i t y   S i m u l a t o r"
+ S MSG(3)="-----------------------------------------------------------"
+ S MSG(4)=""
+ S MSG(5)="This program is only to be used to generate dummy DICOM images"
+ S MSG(6)="for testing purposes.  It is not to be used to generate real"
+ S MSG(7)="patient data."
+ S MSG(8)=""
+ ;
+ S DONE=0 F  D  Q:DONE  ; big loop
+ . W BOLD W @IOF D WARNING^MAGDFCNS(.MSG)
+ . ;
+ . I $G(STORESCP)="" D  Q:DONE
+ . . W !!,"Please select the Storage SCP",!
+ . . S STORESCP=$G(^TMP("MAG","MOD SIMULATOR","STORAGE SCP"))
+ . . S STORESCP=$$PICKSCP^MAGDACU(STORESCP)
+ . . I STORESCP="" W !!,"No Storage SCP was selected" S DONE=1 Q
+ . . S STOREIEN=$O(^MAGDICOM(2006.585,"B",STORESCP,""))
+ . . I $$UP^MAGDFCNS($P(^MAGDICOM(2006.585,STOREIEN,0),"^",4))="LOCALHOST" D
+ . . . N DONE,PORT,X
+ . . . S PORT=$P(^MAGDICOM(2006.585,STOREIEN,0),"^",5)
+ . . . S DONE=0 I $G(SENDCOPY)="" F  D  Q:DONE
+ . . . . S SENDCOPY=$G(^TMP("MAG","MOD SIMULATOR","SEND/COPY IMAGES"),"s")  
+ . . . . W !!,"Send images or Copy them?  ",SENDCOPY,"// " R X:DTIME
+ . . . . I X="" S X=SENDCOPY W X
+ . . . . I "CcSs"'[$E(X) W "  ??? enter ""S"" or ""C""" Q
+ . . . . I "Ss"[$E(X) S SENDCOPY="SEND" ; send
+ . . . . E  D  ; copy
+ . . . . . N I
+ . . . . . ; find corresponding instrument "listening" in that PORT
+ . . . . . S I=0 F  S I=$O(^MAGDICOM(2006.581,I)) Q:'I  D  Q:I=""
+ . . . . . . S X=^MAGDICOM(2006.581,I,0)
+ . . . . . . I PORT=$P(X,"^",4) S INSTABBR=$P(X,"^",1),I=""
+ . . . . . . Q
+ . . . . . S SENDCOPY="COPY"
+ . . . . . Q
+ . . . . S ^TMP("MAG","MOD SIMULATOR","SEND/COPY IMAGES")=SENDCOPY
+ . . . . S DONE=1
+ . . . . Q
+ . . . Q
+ . . E  S SENDCOPY="SEND"
+ . . S ^TMP("MAG","MOD SIMULATOR","STORAGE SCP")=STORESCP
+ . . Q
+ . ;
+ . I $G(IMAGEDIR)="" D  Q:DONE
+ . . W !!,"Please enter image directory: "
+ . . S IMAGEDIR=$G(^TMP("MAG","MOD SIMULATOR","IMAGE DIR"))
+ . . I IMAGEDIR'="" W IMAGEDIR,"// "
+ . . R X:DTIME I X="" S X=IMAGEDIR
+ . . I "^"[X S DONE=1 Q
+ . . S (IMAGEDIR,^TMP("MAG","MOD SIMULATOR","IMAGE DIR"))=X
+ . . S X=$$GETDIR^MAGOSDIR(IMAGEDIR_"\*.DCM")
+ . . I 'X W "-- no images" S DONE=1 Q
+ . . Q
+ . ;
+ . D WORKLIST ; select item(s) from worklist
+ . W BOLD R !!,"Ready to run Modality Simulator again?  y// ",X:1000000
+ . I X="" S X="yes" W X
+ . S DONE=$S("Yy"[$E(X):0,1:1)
+ . Q
+ Q
+ ;
+WORKLIST ; select item(s) from worklist
+ N DONE,TIMETHRU
+ K ^TMP("MAG",$J)
+ S DONE=0 F TIMETHRU=1:1  D  Q:DONE  ; little loop
+ . I TIMETHRU=1 D
+ . . I $G(AETITLE)="" D
+ . . . D ^MAGDWLU ; do the modality worklist query
+ . . . Q
+ . . E  D
+ . . . I $$GETKEYS^MAGDWLU-1 Q
+ . . . ;
+ . . . W !,"Performing Query..."
+ . . . S USERAPP=^TMP("MAG","MOD WORK LIST","USER APPLICATIONS")
+ . . . D ^MAGDWLU2 ; bypass worklist SCP and AETitle questions
+ . . . W " completed!"
+ . . . D ^MAGDWLU3 ; pick study from worklist
+ . . . Q
+ . . Q
+ . E  D
+ . . D ^MAGDWLU3 ; pick study from worklist
+ . . Q
+ . ;
+ . I $D(GNODE) D
+ . . I 'DEMOMODE D CHANGEIT,DUPUID ; Change PID or Accession Number
+ . . D IMAGES("S")
+ . . W BOLD R !!,"Select another study from the original modality worklist?  y// ",X:1000000
+ . . I X="" S X="yes" W X
+ . . S DONE=$S("Yy"[$E(X):0,1:1)
+ . . K SENDLIST,^TMP("MAG",$J,"DCF_STORE_SCU")
+ . . Q
+ . E  I 'DEMOMODE D SENDMULT S DONE=1
+ . Q
+ K ^TMP("MAG",$J)
+ Q
+ ;
+SENDMULT ; allow sending of images to multiple studies
+ N DONE,N,X
+ S N=$G(^TMP("MAG",$J,"DICOM","MOD WORK LIST"))-1 Q:N<2
+ R !!,"Send images for multiple studies?  n// ",X:DTIME
+ I X="" S X="no" W X
+ I "Yy"'[$E(X) Q
+ S DONE=0 F  D  Q:DONE
+ . W !,"Select range of studies (enter first-last) 1-",N,"// " R X:DTIME
+ . I X="" S X="1-"_N W X
+ . S FIRST=$P(X,"-",1),LAST=$P(X,"-",2)
+ . I FIRST'?1N.N W " ???",!?3,"*** First must be numeric ***" Q
+ . I FIRST<1 W " ???",!?3,"*** First must be greater than or equal to one ***" Q
+ . I LAST'?1N.N W " ???",!?3,"*** Last must be numeric ***" Q
+ . I LAST'>FIRST W " ???",!?3,"*** Last must be greater than first ***" Q
+ . I LAST>N W " ???",!?3,"*** Last can not be greater than ",N," ***" Q
+ . S DONE=1
+ . Q
+ F ISTUDY=FIRST:1:LAST D
+ . S GNODE="MOD WORK LIST "_ISTUDY
+ . D IMAGES("M")
+ . Q
+ Q
+ ;
+CHANGEIT ; change MWL data to simulate an error for DICOM Correct
+ N GOUT,I,TAG,TAGLIST
+ R !!,"Change PID or Accession Number data to Simulate an Error?  n// ",X:DTIME
+ I X="" S X="no" W X
+ I "Yy"'[$E(X) Q
+ ;
+ ; move data to "OUT" node for functions in ^MAGDFCNS
+ K ^TMP("MAG",$J,"DICOM","OUT")
+ M ^TMP("MAG",$J,"DICOM","OUT")=^TMP("MAG",$J,"DICOM",GNODE)
+ S GNODE="OUT"
+ ;
+ S TAGLIST="0010,0010^0010,0020^0008,0050"
+ W !!
+ F I=1:1:3 S TAG=$P(TAGLIST,"^",I) D CHANGE0
+ W !! S CHANGES=0
+ F I=1:1:3 S TAG=$P(TAGLIST,"^",I) D CHANGE1 Q:I<0
+ I CHANGES D
+ . W !!
+ . F I=1:1:3 S TAG=$P(TAGLIST,"^",I) D CHANGE0
+ . Q
+ E  W "   (no changes)"
+ Q
+ ;
+CHANGE0 ; change the value of one DICOM element
+ N NAME,X
+ S NAME=$P(^TMP("MAG",$J,"DICOM",GNODE,TAG),"^",1)
+ S X=$$GETDATA^MAGDFCNS(GNODE,TAG)
+ W !,$J(NAME,24)," = ",X
+ Q
+ ;
+CHANGE1 ; change the value of one DICOM element
+ N DONE,X
+ S NAME=$P(^TMP("MAG",$J,"DICOM",GNODE,TAG),"^",1)
+ S X=$$GETDATA^MAGDFCNS(GNODE,TAG)
+ W !,"Change ",NAME,"?",?27,"n// " R X:DTIME
+ I X="" S X="no" w X Q
+ I X["^" S I=I-2 Q  ; go back to previous field
+ S (OLDVALUE,X)=$$GETDATA^MAGDFCNS(GNODE,TAG)
+ W !,X
+ S DONE=0 F  D  Q:DONE
+ . R !," Replace: ",OLD:DTIME
+ . I "^"[OLD S DONE=1 Q
+ . I OLD?1"?".E D  Q
+ . . W ?16,"Replace <old substring> with <new substring>, or use ""..."""
+ . . W !?16,"to completely replace the old value with the new value."
+ . . Q
+ . I OLD'="...",X'[OLD W " ???" Q
+ . R "   With: ",NEW:DTIME
+ . I OLD="..." S X=NEW
+ . E  S X=$P(X,OLD,1)_NEW_$P(X,OLD,2,999)
+ . W !,X
+ . Q
+ D KILL^MAGDFCNS(TAG)
+ D SAVE^MAGDFCNS(TAG,X)
+ S ^TMP("MAG",$J,"DICOM",GNODE,TAG)=NAME
+ D CHANGE0
+ R !," OK?  y// ",X:DTIME
+ I X="" S X="yes" W X
+ I "Yy"[$E(X) S CHANGES=CHANGES+1
+ E  D
+ . D KILL^MAGDFCNS(TAG)
+ . D SAVE^MAGDFCNS(TAG,OLDVALUE)
+ . S ^TMP("MAG",$J,"DICOM",GNODE,TAG)=NAME
+ . W "  (unchanged)" D CHANGE0 W !
+ . S I=I-1
+ . Q
+ Q
+ ;
+DUPUID ; use duplicate UIDs to simulate an error
+ N DONE,I,N,TAG,TAGNAME,TEXT,X
+ R !!,"Modify UIDs to Simulate an Error?  n// ",X:DTIME
+ I X="" S X="no" W X
+ I "Yy"'[$E(X) Q
+ F I=1:1 S TEXT=$P($T(ELEMENTS+I),";;",2) Q:TEXT="end"  D
+ . S TAGNAME($P(TEXT,";",1))=$P(TEXT,";",2)
+ . Q
+ S TAGLIST="0020,000D^0020,000E^0008,0018"
+ F I=1:1:3 D
+ . S TAG=$P(TAGLIST,"^",I)
+ . W !!,"Modify the ",TAGNAME(TAG),"? n// " R X:DTIME
+ . I X="" S X="no" W X
+ . I "Yy"'[$E(X) Q
+ . S DONE=0 F  D  Q:DONE
+ . . R !,"Use a different value or the original one?  d// ",X:DTIME
+ . . I X="" S X="different" W X
+ . . I "Oo"[$E(X) D  S DONE=1 Q
+ . . . S DUPUID(TAG)="Original"
+ . . . Q
+ . . I "Dd"[$E(X) D  S DONE=1 Q
+ . . . N DONE
+ . . . S DONE=0 F  D  Q:DONE
+ . . . . R !,"Enter UID value: ",UID
+ . . . . I UID="" W " ??? null values are not allowed" Q
+ . . . . S N=$L($TR(UID,"0123456789.","")) I N D  Q
+ . . . . . W "  ???",!,"Bad numeric",$S(N>1:"(s)",1:""),":" D
+ . . . . . F I=1:1:$L(UID) I $TR($E(UID,I),"0123456789.","")'="" W ?I+16,"^"
+ . . . . . Q
+ . . . . W !,"Use this value?  ",UID,"  y// " R X
+ . . . . I X="" S X="yes" W X
+ . . . . I "Yy"'[$E(X) Q
+ . . . . S DUPUID(TAG)="DIFFERENT",DUPUID(TAG,"UID")=UID
+ . . . . S DONE=1
+ . . . . Q
+ . . . Q
+ . . W " ???",!,"Enter ""o"" to use the original value, or ""d"" for a different one."
+ . . Q
+ . Q 
+ Q
+ ;
+IMAGES(MODE) ; select and send the images
+ N CALLED,CALLING,DONE,J,N,NEWVALUE,RETURN,X
+ S N=$$GETDIR^MAGOSDIR(IMAGEDIR_"\*.DCM")
+ I MODE="S" K IMAGE,SENDLIST ; single study mode
+ I '$D(IMAGE) D IMAGE ; get image list
+ D MFGR
+ I $D(SENDLIST) D
+ . ; set fields defined by the modality - GNODE defined in ^MAGDWLU3
+ . D GETDATA
+ . S SCPIEN=$O(^MAGDICOM(2006.585,"B",STORESCP,""))
+ . S X=^MAGDICOM(2006.585,SCPIEN,0)
+ . S CALLED=$P(X,"^",2),CALLING=$P(X,"^",3),IPADDR=$P(X,"^",4),PORT=$P(X,"^",5)
+ . ;
+ . I DEMOMODE S NTIMES=1
+ . E  I '$D(NTIMES) D  Q:DONE=-1
+ . . S DONE=0 F  D  Q:DONE
+ . . . R !!,"How many times do you want to send this set of images?  1// ",N
+ . . . I N="" S N=1 W N
+ . . . I "^"[N S DONE=-1 Q
+ . . . I N["?" D  Q
+ . . . . W !,"Sending the same set of images repeatedly is useful for simulating a CR or MRI"
+ . . . . W !,"A new SOP Instance UID will be created for each image that is sent."
+ . . . . Q
+ . . . S DONE=1,NTIMES=N
+ . . . Q
+ . . Q
+ . F J=1:1:NTIMES D
+ . . ; I J>1 W !!,"Sending Image Set #",J,!
+ . . S I="" F  S I=$O(SENDLIST(I)) Q:I=""  D ONEIMAGE(I)
+ . . Q
+ . I SENDCOPY="SEND" D
+ . . ; send the list of DICOM objects to be be transmited using C-Store
+ . . S RETURN=$$SEND^MAGDDCF1(STORESCP)
+ . . W:RETURN !!,"RETURN = """,RETURN,""""
+ . . Q
+ . Q
+ W !!,"Done!"
+ Q
+ ;
+IMAGE ; select the images to be sent
+ N DONE,DEFAULT,FILE,I,I2,I3,N3,X
+ S FILE=""
+ F I=1:1:N S FILE=$O(^TMP("MAG",$J,"DIR LIST",FILE)) Q:FILE=""  D
+ . S IMAGE(I)=FILE
+ . Q
+ W !!,"Select Image(s) to Send"
+ I N<20 D  ; single column
+ . F I=1:1:N W !,$J(I,2)," -- ",IMAGE(I)
+ . Q
+ E  D  ; three column mode
+ . S N3=(N+2)\3
+ . F I=1:1:N3 D
+ . . S I2=I+N3,I3=I+(2*N3)
+ . . W !,$J(I,2)," -- ",IMAGE(I)
+ . . I $D(IMAGE(I2)) W ?26,$J(I2,2)," -- ",IMAGE(I2)
+ . . I $D(IMAGE(I3)) W ?53,$J(I3,2)," -- ",IMAGE(I3)
+ . . Q
+ . Q
+ S DONE=0 F  D  Q:DONE
+ . W !!,"Enter 1:",N," (enter <null> to end): "  R X:DTIME
+ . I X="" D
+ . . W !
+ . . I '$D(SENDLIST) W "No images have been selected.  " S DEFAULT="n"
+ . . E  S DEFAULT="y"
+ . . W "Finished?  ",DEFAULT,"// " 
+ . . R X:DTIME I X="" S X=DEFAULT W X
+ . . I "Yy"[$E(X) S DONE=1
+ . . Q
+ . E  D
+ . . I X["?" W !,"Enter numbers separated by commas, n-m for range"
+ . . E  I X?.N D 
+ . . . D CHECK(X)
+ . . . Q
+ . . E  W ! F J=1:1:$L(X,",") S Y=$P(X,",",J) D
+ . . . S (BEG,END)=Y I Y["-" S BEG=$P(Y,"-",1),END=$P(Y,"-",2)
+ . . . F K=BEG:1:END D
+ . . . . W:$X>60 ! W K
+ . . . . D CHECK(K)
+ . . . . Q
+ . . . Q
+ . . Q
+ . Q
+ Q
+ ;
+MFGR ; get manufacturer / model for simulated modality
+ N DONE,I,N,X
+ I $G(MFGR)="" D  Q:DONE=-1
+ . F I=1:1 S X=$T(MFGRS+I),X=$P(X,";;",2) Q:X=""  D
+ . . S MFGR(I)=X
+ . . S MFGR("B",X,I)=""
+ . . Q
+ . S N=I-1,DONE=0 F  D  Q:DONE
+ . . W !!?6,"Manufacturers"
+ . . W !?6,"-------------"
+ . . F I=1:1:N D
+ . . . W !,$J(I,3),")  ",$P(MFGR(I),"|")
+ . . . W " (",$P(MFGR(I),"|",2),")"
+ . . . Q
+ . . W !!,"Please enter manufacturer 1-",N,": "
+ . . S MFGR=$G(^TMP("MAG","MOD SIMULATOR","MANUFACTURER"))
+ . . I MFGR'="" W MFGR,"// "
+ . . R X:DTIME I X="" S X=MFGR
+ . . I X="" W "  ??? you must select a manufacturer!"
+ . . E  I "^"[X S DONE=-1 Q
+ . . E  I X?.N,X>0,X<(N+1) D
+ . . . S (MFGR,^TMP("MAG","MOD SIMULATOR","MANUFACTURER"))=X
+ . . . S DONE=1
+ . . . Q
+ . . E  W " ??? you entered """,X,""" try again!"
+ . . Q
+ . I DONE=-1 Q
+ . S MODEL=$P(MFGR(MFGR),"|",2),MFGR=$P(MFGR(MFGR),"|",1)
+ . Q
+ Q
+ ;
+MFGRS ; table of manufacturers and models
+ ;;ACME, Inc.|Coyotes Rule
+ ;;Roadrunner, Inc.|Beep-Beep
+ ;;Canaries, Inc.|Tweety Bird
+ ;;Canaries, Inc.|Sylvester
+ ;;Original Manufacturer|Original Model
+ ;
+CHECK(I) ; check IMAGE(I) and store it into SENDLIST if it exits
+ I $D(IMAGE(I)) S SENDLIST(I)=IMAGE(I) W " -- ",IMAGE(I),"     "
+ E  W " ???"
+ Q
+ ;
+GETDATA ; get data from MWL query 
+ N SCHSDATE,SCHSTIME,STUDYUID,TAG,TEXT,VALUE,X
+ K NEWVALUE
+ F I=1:1 S TEXT=$P($T(ELEMENTS+I),";;",2,999) Q:TEXT="end"  D
+ . S TAG=$P(TEXT,";") Q:TAG=""
+ . S X=$O(^MAGDICOM(2006.51,"B",TAG,"")),X=^MAGDICOM(2006.51,X,0)
+ . S NAME=$P(X,"^",2)
+ . I NAME'=$P(TEXT,";",2) W !,TEXT," Name should be <<",NAME,">>"
+ . S VALUE=$$GETDATA^MAGDFCNS(GNODE,TAG) ; GNODE defined in ^MAGDWLU3
+ . S NEWVALUE(TAG)=VALUE
+ . Q
+ ; set fields defined by the modality
+ I MFGR="Original Manufacturer" K NEWVALUE("0008,0070") ; no change
+ E  S NEWVALUE("0008,0070")=MFGR ; manufacturer
+ S NEWVALUE("0008,0080")="VA Testing" ; institution name
+ I MODEL="Original Model" K NEWVALUE("0008,1090") ; no change
+ E  S NEWVALUE("0008,1090")=MODEL ; manufacturer's model name
+ ; get study start date & time - for file 2005, field 15
+ ; this does not change series, acquisition, or content date/time, however
+ D SEQPUSH^MAGDFCNS("0040,0100")
+ S SCHSDATE=$$GETDATA^MAGDFCNS(GNODE,"0040,0002")
+ S SCHSTIME=$$GETDATA^MAGDFCNS(GNODE,"0040,0003")
+ D SEQPOP^MAGDFCNS
+ S NEWVALUE("0008,0020")=SCHSDATE
+ S NEWVALUE("0008,0030")=SCHSTIME
+ S STUDYUID=$$GETDATA^MAGDFCNS(GNODE,"0020,000D")
+ ; set Series Instance UID = Study Instance UID _ ".1"
+ S NEWVALUE("0020,000E")=STUDYUID_".1"
+ Q
+ ;
+ELEMENTS ; list of elements to output
+ ;;0008,0018;SOP Instance UID
+ ;;0008,0020;Study Date
+ ;;0008,0030;Study Time
+ ;;0008,0050;Accession Number
+ ;;0008,0070;Manufacturer
+ ;;0008,0080;Institution Name
+ ;;0008,0090;Referring Physician's Name
+ ;;0008,1090;Manufacturer's Model Name
+ ;;0010,0010;Patient's Name
+ ;;0010,0020;Patient ID
+ ;;0010,0030;Patient's Birth Date
+ ;;0010,0040;Patient's Sex
+ ;;0020,000D;Study Instance UID
+ ;;0020,000E;Series Instance UID
+ ;;end
+ ;
+ONEIMAGE(I) ; process one image
+ N DCMIN,ITAG,TAG,TAGLIST
+ S NEWVALUE("0008,0018")=$$NEXTUID^MAGDUID1
+ ;
+ ; duplicate UID generation
+ S TAGLIST="0020,000D^0020,000E^0008,0018"
+ F ITAG=1:1:3 S TAG=$P(TAGLIST,"^",ITAG) I $D(DUPUID(TAG)) D
+ . I DUPUID(TAG)="DIFFERENT" S NEWVALUE(TAG)=DUPUID(TAG,"UID")
+ . E  I DUPUID(TAG)="ORIGINAL" K NEWVALUE(TAG)
+ . Q
+ ;
+ S DCMIN=IMAGEDIR_"\"_SENDLIST(I)
+ D @SENDCOPY ; SEND or COPY
+ Q
+ ;
+COPY ; copy the image to the image_in directory
+ N APPLICATION,CMD,DCMOUT,ERROR,ITAG,J,OUTPUT,TAG,TAGLIST,TEXT,TXTOUT
+ ;
+ ; call DCF_FILTER to modify the image
+ S TXTOUT=^MAGDICOM(2006.563,1,"IMAGE OUTPUT PATH")_"\MODSIMUL.TXT"
+ S DCMOUT=^MAGDICOM(2006.563,1,"IMAGE OUTPUT PATH")_"\MODSIMUL.DCM"
+ S STATUS=$$OPEN^MAGOSFIL(TXTOUT,"W")
+ S STATUS=$$USE^MAGOSFIL(TXTOUT)
+ ;
+ W "# Filters for DICOM Modality Simulator - ^MAGDWLUY",!
+ W !
+ W "[ filter_1 ]",!
+ W "filter_class_name = com.lbs.DCS.DicomElementFilter",!
+ W "filter_type = DICOM_ELEMENT_FILTER",!
+ W "create_original_attributes_seq = FALSE",!
+ W "modifying_system = VistA Imaging DICOM Gateway",!
+ W "reason_for_the_attribute_modification = COERCE",!
+ W "source_of_previous_values = VistA Modality Simulator",!
+ W !
+ W "[ filter_1/elements_to_replace ]",!
+ S TAG="" F  S TAG=$O(NEWVALUE(TAG)) Q:TAG=""  D
+ . W TAG," = ",NEWVALUE(TAG),!
+ . Q
+ ;
+ ; This filter is to fix a bug in DCF Version < 3.3.2c where
+ ; element 0400,0565 was output with the wrong "LO" VR.
+ ; This changes it to type "CS" (from the DCF dictionary).
+ ; This filer was provided by Elliot.Lord@bcs-inc.com. 
+ W !
+ W "[ filter_2 ]",!
+ W "filter_class_name = com.lbs.DCS.DicomElementFilter",!
+ W "filter_type = DICOM_ELEMENT_FILTER",!
+ W "create_original_attributes_seq = FALSE",!
+ W "[ filter_2/elements_to_modify ]",!
+ W !
+ W "[ filter_2/elements_to_modify/1 ]",!
+ W "tag = 0400,0561.#L.0400,0565",!
+ W "old_value = (.*)",!
+ W "new_value = $1",!
+ W "move_to = 0400,0561.#L.0400,0565",!
+ W !,"# end of file",!
+ S STATUS=$$CLOSE^MAGOSFIL(TXTOUT)
+ S STATUS=$$USE^MAGOSFIL($P)
+ ;
+ S CMD=DCFPATH_"\bin\DCF_FILTER" ; need to use a null ext_data_dictionary
+ S CMD=CMD_" -apc cpp_lib/DCS/extended_data_dictionary=/dicom/importer_ext_data_dictionary"
+ S CMD=CMD_" -S -s -i """_DCMIN_""" -o "_DCMOUT_" -f file:/"_TXTOUT
+ S VERBOSE='DEMOMODE,APPLICATION="DICOM IMAGE RECONSTRUCTION ERROR"
+ S X=$$HOSTCMD^MAGDOS(CMD,.OUTPUT,.ERROR,APPLICATION)
+ I 'X W !
+ ;
+ S IMGPATH=^MAGDICOM(2006.563,1,"IMAGE INPUT PATH")
+ L +^MAGDINPT(2006.571,0):1E9 ; serialize name generation code
+ S X=$G(^MAGDINPT(2006.571,0))
+ S $P(X,"^",1,2)="DICOM RAW IMAGE^2006.571"
+ S $P(X,"^",3)=$P(X,"^",3)+1,IMAGEIEN=$P(X,"^",3) ; get next IEN
+ S $P(X,"^",4)=$P(X,"^",4)+1 ; increment total count
+ S ^MAGDINPT(2006.571,0)=X
+ S PATH=IMGPATH_"\"_$$HOSTNAME^MAGOSMSC()_"_"_$TR($J(IMAGEIEN,7)," ",0)_".DCM"
+ S ^MAGDINPT(2006.571,IMAGEIEN,0)=PATH_"^"_INSTABBR_"^"_0 ; first entry
+ L -^MAGDINPT(2006.571,0) ; clear the serial name generation code
+ S CMD="MOVE "_DCMOUT_" "_PATH
+ S VERBOSE=1 D DOS^MAGDOS(CMD,.ERROR)
+ I ERROR(0) D  ; fatal error
+ . N I,MSG
+ . S MSG(1)="DICOM IMAGE MOVE ERROR"
+ . S MSG(2)="Unexpected error in """_CMD_""""
+ . F I=1:1:ERROR(0) S MSG(I+2)=$J(I,3)_") "_ERROR(I)
+ . D TRAPERR^MAGDSTRT(1,"Copy (Move)","DICOM IMAGE PROCESSING ERROR",.MSG)
+ . Q  ; Error trap does not return
+ S $P(^MAGDINPT(2006.571,IMAGEIEN,0),"^",3)=1 ; completed
+ Q
+ ;
+SEND ; 	add to list DICOM object to be transmitted using C-Store
+ N I,J,TAG
+ ;
+ S (I,^(0))=$G(^TMP("MAG",$J,"DCF_STORE_SCU",0))+1
+ S ^TMP("MAG",$J,"DCF_STORE_SCU",I,"FILE")=DCMIN
+ ; setup modify list
+ S TAG="" F  S TAG=$O(NEWVALUE(TAG)) Q:TAG=""  D
+ . S (J,^(0))=$G(^TMP("MAG",$J,"DCF_STORE_SCU",I,"REPLACE",0))+1
+ . S ^TMP("MAG",$J,"DCF_STORE_SCU",I,"REPLACE",J)=TAG_" = "_NEWVALUE(TAG)
+ . Q
+ S ^TMP("MAG",$J,"DCF_STORE_SCU",I,"REMOVE",0)=1,^(1)="tag = 0008,1048"
+ Q
+
+
+

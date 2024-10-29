@@ -1,0 +1,318 @@
+KIDS Distribution saved on Jul 26, 2012@08:58:40
+Split from GOLD - last patch SEQ81_P120
+**KIDS**:MAG*3.0*350_DD*2006.588^
+
+**INSTALL NAME**
+MAG*3.0*350_DD*2006.588
+"BLD",7801,0)
+MAG*3.0*350_DD*2006.588^IMAGING^0^3120726^n
+"BLD",7801,4,0)
+^9.64PA^2006.588^1
+"BLD",7801,4,2006.588,0)
+2006.588
+"BLD",7801,4,2006.588,222)
+y^y^f^^^^y
+"BLD",7801,4,"B",2006.588,2006.588)
+
+"BLD",7801,6.3)
+1
+"BLD",7801,"KRN",0)
+^9.67PA^779.2^20
+"BLD",7801,"KRN",.4,0)
+.4
+"BLD",7801,"KRN",.401,0)
+.401
+"BLD",7801,"KRN",.402,0)
+.402
+"BLD",7801,"KRN",.403,0)
+.403
+"BLD",7801,"KRN",.5,0)
+.5
+"BLD",7801,"KRN",.84,0)
+.84
+"BLD",7801,"KRN",3.6,0)
+3.6
+"BLD",7801,"KRN",3.8,0)
+3.8
+"BLD",7801,"KRN",9.2,0)
+9.2
+"BLD",7801,"KRN",9.8,0)
+9.8
+"BLD",7801,"KRN",19,0)
+19
+"BLD",7801,"KRN",19.1,0)
+19.1
+"BLD",7801,"KRN",101,0)
+101
+"BLD",7801,"KRN",409.61,0)
+409.61
+"BLD",7801,"KRN",771,0)
+771
+"BLD",7801,"KRN",779.2,0)
+779.2
+"BLD",7801,"KRN",870,0)
+870
+"BLD",7801,"KRN",8989.51,0)
+8989.51
+"BLD",7801,"KRN",8989.52,0)
+8989.52
+"BLD",7801,"KRN",8994,0)
+8994
+"BLD",7801,"KRN","B",.4,.4)
+
+"BLD",7801,"KRN","B",.401,.401)
+
+"BLD",7801,"KRN","B",.402,.402)
+
+"BLD",7801,"KRN","B",.403,.403)
+
+"BLD",7801,"KRN","B",.5,.5)
+
+"BLD",7801,"KRN","B",.84,.84)
+
+"BLD",7801,"KRN","B",3.6,3.6)
+
+"BLD",7801,"KRN","B",3.8,3.8)
+
+"BLD",7801,"KRN","B",9.2,9.2)
+
+"BLD",7801,"KRN","B",9.8,9.8)
+
+"BLD",7801,"KRN","B",19,19)
+
+"BLD",7801,"KRN","B",19.1,19.1)
+
+"BLD",7801,"KRN","B",101,101)
+
+"BLD",7801,"KRN","B",409.61,409.61)
+
+"BLD",7801,"KRN","B",771,771)
+
+"BLD",7801,"KRN","B",779.2,779.2)
+
+"BLD",7801,"KRN","B",870,870)
+
+"BLD",7801,"KRN","B",8989.51,8989.51)
+
+"BLD",7801,"KRN","B",8989.52,8989.52)
+
+"BLD",7801,"KRN","B",8994,8994)
+
+"FIA",2006.588)
+APPLICATION ENTITY TITLE
+"FIA",2006.588,0)
+^MAGDICOM(2006.588,
+"FIA",2006.588,0,0)
+2006.588
+"FIA",2006.588,0,1)
+y^y^f^^^^y
+"FIA",2006.588,0,10)
+
+"FIA",2006.588,0,11)
+
+"FIA",2006.588,0,"RLRO")
+
+"FIA",2006.588,0,"VR")
+3.0^MAG
+"FIA",2006.588,2006.588)
+0
+"MBREQ")
+0
+"PKG",454,-1)
+1^1
+"PKG",454,0)
+IMAGING^MAG^Imaging-V1 to release 
+"PKG",454,20,0)
+^9.402P^^
+"PKG",454,22,0)
+^9.49I^1^1
+"PKG",454,22,1,0)
+3.0^3020319^3020517^126
+"PKG",454,22,1,"PAH",1,0)
+350_DD^3120726
+"QUES","XPF1",0)
+Y
+"QUES","XPF1","??")
+^D REP^XPDH
+"QUES","XPF1","A")
+Shall I write over your |FLAG| File
+"QUES","XPF1","B")
+YES
+"QUES","XPF1","M")
+D XPF1^XPDIQ
+"QUES","XPF2",0)
+Y
+"QUES","XPF2","??")
+^D DTA^XPDH
+"QUES","XPF2","A")
+Want my data |FLAG| yours
+"QUES","XPF2","B")
+YES
+"QUES","XPF2","M")
+D XPF2^XPDIQ
+"QUES","XPI1",0)
+YO
+"QUES","XPI1","??")
+^D INHIBIT^XPDH
+"QUES","XPI1","A")
+Want KIDS to INHIBIT LOGONs during the install
+"QUES","XPI1","B")
+NO
+"QUES","XPI1","M")
+D XPI1^XPDIQ
+"QUES","XPM1",0)
+PO^VA(200,:EM
+"QUES","XPM1","??")
+^D MG^XPDH
+"QUES","XPM1","A")
+Enter the Coordinator for Mail Group '|FLAG|'
+"QUES","XPM1","B")
+
+"QUES","XPM1","M")
+D XPM1^XPDIQ
+"QUES","XPO1",0)
+Y
+"QUES","XPO1","??")
+^D MENU^XPDH
+"QUES","XPO1","A")
+Want KIDS to Rebuild Menu Trees Upon Completion of Install
+"QUES","XPO1","B")
+NO
+"QUES","XPO1","M")
+D XPO1^XPDIQ
+"QUES","XPZ1",0)
+Y
+"QUES","XPZ1","??")
+^D OPT^XPDH
+"QUES","XPZ1","A")
+Want to DISABLE Scheduled Options, Menu Options, and Protocols
+"QUES","XPZ1","B")
+NO
+"QUES","XPZ1","M")
+D XPZ1^XPDIQ
+"QUES","XPZ2",0)
+Y
+"QUES","XPZ2","??")
+^D RTN^XPDH
+"QUES","XPZ2","A")
+Want to MOVE routines to other CPUs
+"QUES","XPZ2","B")
+NO
+"QUES","XPZ2","M")
+D XPZ2^XPDIQ
+"SEC","^DIC",2006.588,2006.588,0,"AUDIT")
+@
+"SEC","^DIC",2006.588,2006.588,0,"DD")
+@
+"SEC","^DIC",2006.588,2006.588,0,"DEL")
+@
+"SEC","^DIC",2006.588,2006.588,0,"LAYGO")
+@
+"SEC","^DIC",2006.588,2006.588,0,"RD")
+@
+"SEC","^DIC",2006.588,2006.588,0,"WR")
+@
+"VER")
+8.0^22.0
+"^DD",2006.588,2006.588,0)
+FIELD^^3^3
+"^DD",2006.588,2006.588,0,"DDA")
+N
+"^DD",2006.588,2006.588,0,"DT")
+3080505
+"^DD",2006.588,2006.588,0,"IX","B",2006.588,.01)
+
+"^DD",2006.588,2006.588,0,"NM","APPLICATION ENTITY TITLE")
+
+"^DD",2006.588,2006.588,.01,0)
+APPLICATION ENTITY TITLE^RF^^0;1^K:$L(X)>30!($L(X)<1)!'(X'?1P.E) X
+"^DD",2006.588,2006.588,.01,1,0)
+^.1
+"^DD",2006.588,2006.588,.01,1,1,0)
+2006.588^B
+"^DD",2006.588,2006.588,.01,1,1,1)
+S ^MAGDICOM(2006.588,"B",$E(X,1,30),DA)=""
+"^DD",2006.588,2006.588,.01,1,1,2)
+K ^MAGDICOM(2006.588,"B",$E(X,1,30),DA)
+"^DD",2006.588,2006.588,.01,3)
+Enter the device's AE Title, answer must be 1-30 characters in length.
+"^DD",2006.588,2006.588,.01,21,0)
+^.001^9^9^3090506^^^^
+"^DD",2006.588,2006.588,.01,21,1,0)
+The value of this field will be used during the DICOM negotiation request.
+"^DD",2006.588,2006.588,.01,21,2,0)
+ 
+"^DD",2006.588,2006.588,.01,21,3,0)
+The AE_TITLE.DIC is used to map the Called Application Entity Title of a 
+"^DD",2006.588,2006.588,.01,21,4,0)
+DICOM negotiation request to the alias that identifies the VistA Application
+"^DD",2006.588,2006.588,.01,21,5,0)
+Entity Title name for the SCP.  This is used for looking up acceptable 
+"^DD",2006.588,2006.588,.01,21,6,0)
+presentation contexts in SCP_LIST.DIC.  The Called Application Entity Title
+"^DD",2006.588,2006.588,.01,21,7,0)
+for a DICOM request must either be the VistA Application Entity Title name
+"^DD",2006.588,2006.588,.01,21,8,0)
+in file SCP_LIST.DIC or else one defined in AE_Title.DIC as an alias for 
+"^DD",2006.588,2006.588,.01,21,9,0)
+the VistA one. Otherwise, the DICOM negotiation request will be rejected.
+"^DD",2006.588,2006.588,.01,"DT")
+3080505
+"^DD",2006.588,2006.588,2,0)
+ALIAS^F^^0;2^K:$L(X)>30!($L(X)<1) X
+"^DD",2006.588,2006.588,2,3)
+Enter an abbreviated name for the Application Entity Title; answer must be 1-30 characters in length.
+"^DD",2006.588,2006.588,2,21,0)
+^.001^1^1^3090423^^^^
+"^DD",2006.588,2006.588,2,21,1,0)
+This field is optional and it stores the alias for the Application Entity Title.
+"^DD",2006.588,2006.588,2,"DT")
+3080505
+"^DD",2006.588,2006.588,3,0)
+SITE NAME^F^^0;3^K:$L(X)>30!($L(X)<1) X
+"^DD",2006.588,2006.588,3,3)
+Enter the site for the device, answer must be 1-30 characters in length.
+"^DD",2006.588,2006.588,3,21,0)
+^.001^3^3^3090423^^^^
+"^DD",2006.588,2006.588,3,21,1,0)
+This field stores the site that has the device with the Application Entity Title.
+"^DD",2006.588,2006.588,3,21,2,0)
+For example: "Walter Reed AMC" could be the site name for the Application
+"^DD",2006.588,2006.588,3,21,3,0)
+Entity "OSXWRAMC".
+"^DD",2006.588,2006.588,3,"DT")
+3080505
+"^DIC",2006.588,2006.588,0)
+APPLICATION ENTITY TITLE^2006.588
+"^DIC",2006.588,2006.588,0,"GL")
+^MAGDICOM(2006.588,
+"^DIC",2006.588,2006.588,"%",0)
+^1.005^^0
+"^DIC",2006.588,2006.588,"%D",0)
+^^11^11^3090303^^
+"^DIC",2006.588,2006.588,"%D",1,0)
+The APPLICATION ENTITY TITLE file (2006.588) is used to map Application Entity Titles to aliases and descriptive names.  It is built from the entries in AETITLE.DIC.
+"^DIC",2006.588,2006.588,"%D",2,0)
+ 
+"^DIC",2006.588,2006.588,"%D",3,0)
+The APPLICATION ENTITY TITLE file is used for two purposes.  When a DICOM Service Class 
+"^DIC",2006.588,2006.588,"%D",4,0)
+User (SCU) negotiates an association with VistA, it may present a Called Application Entity Title that is 
+"^DIC",2006.588,2006.588,"%D",5,0)
+different than one defined in the SCP_LIST.DIC.  The APPLICATION ENTITY TITLE file may 
+"^DIC",2006.588,2006.588,"%D",6,0)
+contain an entry for the SCU's Called Application Entity Title that maps it to one that is defined in 
+"^DIC",2006.588,2006.588,"%D",7,0)
+SCP_LIST.DIC. This is required in order for the association to be accepted.
+"^DIC",2006.588,2006.588,"%D",8,0)
+ 
+"^DIC",2006.588,2006.588,"%D",9,0)
+The second purpose is to provide a mapping from the SCU's Calling Application Entity Title to a more 
+"^DIC",2006.588,2006.588,"%D",10,0)
+descriptive name, which help to identify it better.  In this case, if the SCU's Called Application Entity 
+"^DIC",2006.588,2006.588,"%D",11,0)
+Title is one that is defined in the SCP_LIST.DIC, the entry in the APPLICATION ENTITY TITLE file is optional.
+"^DIC",2006.588,"B","APPLICATION ENTITY TITLE",2006.588)
+
+**END**
+**END**

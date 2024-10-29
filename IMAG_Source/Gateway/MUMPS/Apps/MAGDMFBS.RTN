@@ -1,0 +1,178 @@
+Cache for Windows^INT^P156^~Format=Cache.S~
+%RO on 07 Jan 2015   6:17 AM
+MAGDMFBS^INT^1^63558,70453^0
+MAGDMFBS ;WOIFO/PMK,DAC - Program to build DICOM Master File ; 12/11/2006 14:54
+ ;;3.0;IMAGING;**9,10,11,30,51,50,69,54,156**;MAR 19, 2002;;OCT 28, 2009
+ ;; Per VHA Directive 2004-038, this routine should not be modified.
+ ;; +---------------------------------------------------------------+
+ ;; | Property of the US Government.                                |
+ ;; | No permission to copy or redistribute this software is given. |
+ ;; | Use of unreleased versions of this software requires the user |
+ ;; | to execute a written test agreement with the VistA Imaging    |
+ ;; | Development Office of the Department of Veterans Affairs,     |
+ ;; | telephone (301) 734-0100.                                     |
+ ;; | The Food and Drug Administration classifies this software as  |
+ ;; | a medical device.  As such, it may not be changed in any way. |
+ ;; | Modifications to this software may result in an adulterated   |
+ ;; | medical device under 21CFR820, the use of which is considered |
+ ;; | to be a violation of US Federal Statutes.                     |
+ ;; +---------------------------------------------------------------+
+ ;;
+USERAPPS ; User Application List (SCUs)
+ N APPNAM,D0,D1,D2,DIMSE,DIN,FILE,GWNAM,LOCATION,MSG,PACS,PATH,PRIOR
+ N RECORD,RPCERR,SHOW,STATUS,VISTA,X,SCPTYPE
+ ;
+ S FILE=$$INIT^MAGDMFB(2006.585,"User Application","SCU_List")
+ Q:FILE=""
+ ;
+ S GWNAM=$G(^MAGDICOM(2006.563,1,"SYSTEM TITLE"))
+ S LOCATION=$G(^MAGDICOM(2006.563,1,"LOCATION"))
+ S PATH=$G(^MAGDICOM(2006.563,1,"DICT PATH"))
+ I (GWNAM="")!('LOCATION) D  Q
+ . D MESSAGE^MAGDMLOG(1,0,"Run menu option 4-2-2 to specify essential parameters.","t")
+ . Q
+ ;
+ K ^MAGDICOM(2006.585)
+ S D0=0
+ F X="C-ECHO","C-FIND","C-GET","C-MOVE","C-STORE","N-EVENT-REPORT" S DIMSE(X)=1
+ F X="N-ACTION","N-CREATE","N-DELETE","N-GET","N-SET" S DIMSE(X)=1
+ ;
+ S STATUS=$$OPEN^MAGOSFIL(FILE,"R")
+ I STATUS<0 W !,"Open Error: ",STATUS S FATAL=FATAL+1 Q
+ ;
+ F  D  Q:STATUS'=""
+ . S STATUS=$$READ^MAGOSFIL(FILE,.RECORD),DIN=0 K MSG
+ . I $$USEPRIN^MAGOSFIL(1)
+ . I STATUS<0 Q:+STATUS=-2  D  Q
+ . . D MESSAGE^MAGDMLOG(1,0,"Read Error"_STATUS,"t")
+ . . S FATAL=FATAL+1
+ . . Q
+ . S (RECORD,SHOW)=$TR(RECORD,$C(145,146,147,148,9,10,12),$C(39,39,34,34,32))
+ . D:$TR(RECORD," ")'=""
+ . . I $E(RECORD,1)="#" D  Q  ; Comment
+ . . . S SHOW="Comment: <<"_$E(RECORD,2,$L(RECORD))_">>"
+ . . . Q
+ . . ; Data
+ . . I $$PIECE^MAGDMFBI($TR(RECORD,"~","|"),1)'="" D  Q
+ . . . ; Application
+ . . . S X=$L(RECORD,"|") I X>4,X<9 D  Q
+ . . . . N CALLED,CALLING,IPADDR,PORT,USERAPP
+ . . . . S USERAPP=$$UPPER^MAGOSMSC($$PIECE^MAGDMFBI(RECORD,1)) ; user application name
+ . . . . D:$D(APPNAM(USERAPP))
+ . . . . . S DIN=DIN+1,MSG(DIN)="Application name """_USERAPP_""" occurs multiple times."
+ . . . . . S FATAL=FATAL+1
+ . . . . . Q
+ . . . . S APPNAM(USERAPP)=""
+ . . . . S CALLED=$$PIECE^MAGDMFBI(RECORD,2)
+ . . . . S CALLING=$$PIECE^MAGDMFBI(RECORD,3)
+ . . . . S IPADDR=$$PIECE^MAGDMFBI(RECORD,4)
+ . . . . S PORT=$$PIECE^MAGDMFBI(RECORD,5)
+ . . . . S X=$$PIECE^MAGDMFBI(RECORD,6)
+ . . . . S X=$TR(X,"abcdefghijklmnopqrstuvwxyz ","ABCDEFGHIJKLMNOPQRSTUVWXYZ")
+ . . . . S PACS="" S:X="" X="GE" S:X="GE" PACS=X S:X="KODAK" PACS=X
+ . . . . D:PACS=""
+ . . . . . S DIN=DIN+1,MSG(DIN)="PACS-type """_X_""" not supported."
+ . . . . . S FATAL=FATAL+1
+ . . . . . Q
+ . . . . S X=$$PIECE^MAGDMFBI(RECORD,7),PRIOR="" S:'X X=500 S:X>0 PRIOR=X
+ . . . . S SCPTYPE=$$PIECE^MAGDMFBI(RECORD,8) ; P156 DAC - SCP Type 
+ . . . . S SCPTYPE=$TR(SCPTYPE,"abcdefghijklmnopqrstuvwxyz ","ABCDEFGHIJKLMNOPQRSTUVWXYZ")
+ . . . . D:PRIOR=""
+ . . . . . S DIN=DIN+1,MSG(DIN)="Priority of """_X_""" not accepted."
+ . . . . . S FATAL=FATAL+1
+ . . . . . Q
+ . . . . D:CALLED=""
+ . . . . . S DIN=DIN+1,MSG(DIN)="Called AE Title not specified."
+ . . . . . S FATAL=FATAL+1
+ . . . . . Q
+ . . . . D:CALLING=""
+ . . . . . S DIN=DIN+1,MSG(DIN)="Calling AE Title not specified."
+ . . . . . S FATAL=FATAL+1
+ . . . . . Q
+ . . . . D:IPADDR=""
+ . . . . . S DIN=DIN+1,MSG(DIN)="TCP/IP Address not specified."
+ . . . . . S FATAL=FATAL+1
+ . . . . . Q
+ . . . . D:PORT=""
+ . . . . . S DIN=DIN+1,MSG(DIN)="TCP/IP Port not specified."
+ . . . . . S FATAL=FATAL+1
+ . . . . . Q
+ . . . . Q:$O(MSG(""))
+ . . . . S X=USERAPP_"^"_CALLED_"^"_CALLING_"^"_IPADDR_"^"_PORT_"^"_PACS_"^"_PRIOR_"^^"_SCPTYPE ; P156 DAC - Added SCP Type
+ . . . . S D0=D0+1,D1=0 K D2
+ . . . . S ^MAGDICOM(2006.585,0)="USER APPLICATION^2006.585^"_D0_"^"_D0
+ . . . . S ^MAGDICOM(2006.585,D0,0)=X
+ . . . . S ^MAGDICOM(2006.585,"B",USERAPP,D0)=""
+ . . . . S VISTA(D0)=USERAPP_"^"_CALLED_"^"_IPADDR_"^"_PORT_"^"_GWNAM_"^"_CALLING_"^"_LOCATION_"^^"_SCPTYPE ; P156 DAC - Added SCP Type
+ . . . . Q
+ . . . S DIN=DIN+1,MSG(DIN)="Record does not contain between 5 and 7 values.",FATAL=FATAL+1
+ . . . Q
+ . . I $E(RECORD,1)="~" D  Q
+ . . . N SCU,SCP,X
+ . . . S X=$TR(RECORD,"~abcdefghijklmnopqrstuvwxyz","|ABCDEFGHIJKLMNOPQRSTUVWXYZ")
+ . . . S DIMSE=$$PIECE^MAGDMFBI(X,2)
+ . . . S SCU=$$PIECE^MAGDMFBI(X,3)
+ . . . S SCP=$$PIECE^MAGDMFBI(X,4)
+ . . . S SCU=$E(SCU_"N",1)="Y"
+ . . . S SCP=$E(SCP_"N",1)="Y"
+ . . . I DIMSE="" S DIN=DIN+1,MSG(DIN)="No DIMSE message name specified: "_RECORD Q
+ . . . I '$G(DIMSE(DIMSE)) S DIN=DIN+1,MSG(DIN)="No such DIMSE message: "_RECORD Q
+ . . . S VISTA(D0_"_"_DIMSE)=SCU_"^"_SCP
+ . . . Q
+ . . S X=$$PIECE^MAGDMFBI(RECORD,2),SHOW="" I X'="" D  Q:$O(MSG(""))
+ . . . ; Presentation Context SOP Class
+ . . . I $L(RECORD,"|")=3 D  Q
+ . . . . S SHOW="     "_X
+ . . . . I '$D(D1) D  Q
+ . . . . . S DIN=DIN+1,MSG(DIN)="Presentation Context Record before Application Record."
+ . . . . . S FATAL=FATAL+1
+ . . . . . Q
+ . . . . S D1=D1+1,D2=0
+ . . . . S ^MAGDICOM(2006.585,D0,1,D1,0)=X
+ . . . . S ^MAGDICOM(2006.585,D0,1,"B",X,D1)=""
+ . . . . S ^MAGDICOM(2006.585,D0,1,0)="^2006.5852A^"_D1_"^"_D1
+ . . . . Q
+ . . . S DIN=DIN+1,MSG(DIN)="SOP Class must have at least one transfer syntax.",FATAL=FATAL+1
+ . . . Q
+ . . ;
+ . . ; Transfer Syntax
+ . . I $L(RECORD,"|")=3 D  Q
+ . . . S X=$$PIECE^MAGDMFBI(RECORD,3)
+ . . . S:SHOW'="" SHOW=SHOW_$C(13,10) S SHOW=SHOW_"          "_X
+ . . . I '$D(D2) D  Q
+ . . . . S DIN=DIN+1,MSG(DIN)="Transfer Syntax before Presentation Context Record."
+ . . . . S FATAL=FATAL+1
+ . . . . Q
+ . . . S D2=D2+1
+ . . . S ^MAGDICOM(2006.585,D0,1,D1,1,D2,0)=X
+ . . . S ^MAGDICOM(2006.585,D0,1,D1,1,"B",X,D2)=""
+ . . . S ^MAGDICOM(2006.585,D0,1,D1,1,0)="^2006.58522A^"_D2_"^"_D2
+ . . . Q
+ . . S DIN=DIN+1,MSG(DIN)="Third value is not a Transfer Syntax.",FATAL=FATAL+1
+ . . Q
+ . I $G(SILENT),$O(MSG(""))="" Q
+ . S MSG="" F  S MSG=$O(MSG(MSG)) Q:MSG=""  D
+ . . D MESSAGE^MAGDMLOG(1,0,"*** "_MSG(MSG)_" ***","t")
+ . . Q
+ . D MESSAGE^MAGDMLOG(1,0,SHOW,"t")
+ . I $O(MSG("")),FBSWITCH="FOREGROUND" R X:DTIME
+ . Q
+ S STATUS=$$CLOSE^MAGOSFIL(FILE)
+ I 'D0 D MESSAGE^MAGDMLOG(1,0,"No valid entries found in "_FILE,"t") Q
+ ;
+ S RPCERR=$$CALLRPC^MAGM2VCU("MAG DICOM UPDATE SCU LIST","M",.STATUS,.VISTA)
+ I RPCERR<0 D
+ . D MESSAGE^MAGDMLOG(1,0,"Could not update the main VistA hospital system","t")
+ . D MESSAGE^MAGDMLOG(1,0,"please try again later.","t")
+ . D MESSAGE^MAGDMLOG(1,0,"Reason: "_$P(RPCERR,", ",2,999),"t")
+ . Q
+ S X=D0_" user application"_$S(D0=1:"",1:"s")_" added to database."
+ D MESSAGE^MAGDMLOG(1,0,X,"t")
+ S STATUS=$G(STATUS)
+ S X="On VistA System: "_$E(STATUS,3,$L(STATUS))
+ D:+STATUS=1 MESSAGE^MAGDMLOG(1,0,X,"t")
+ Q
+ ;
+
+
+

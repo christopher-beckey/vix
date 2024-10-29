@@ -1,0 +1,178 @@
+MAGOSFIL ;WOIFO/PMK/EdM - Host Operating System Utilities ; 16 Apr 2008 7:37 AM
+ ;;3.0;IMAGING;**11,69,54**;MAR 19, 2002;;OCT 28, 2009
+ ;; Per VHA Directive 2004-038, this routine should not be modified.
+ ;; +---------------------------------------------------------------+
+ ;; | Property of the US Government.                                |
+ ;; | No permission to copy or redistribute this software is given. |
+ ;; | Use of unreleased versions of this software requires the user |
+ ;; | to execute a written test agreement with the VistA Imaging    |
+ ;; | Development Office of the Department of Veterans Affairs,     |
+ ;; | telephone (301) 734-0100.                                     |
+ ;; | The Food and Drug Administration classifies this software as  |
+ ;; | a medical device.  As such, it may not be changed in any way. |
+ ;; | Modifications to this software may result in an adulterated   |
+ ;; | medical device under 21CFR820, the use of which is considered |
+ ;; | to be a violation of US Federal Statutes.                     |
+ ;; +---------------------------------------------------------------+
+ ;;
+ ; Callable entries are:
+ ;
+ ; Basic host file access
+ ;  Do INIT^MAGOSFIL
+ ;  Set STATUS=$$OPEN^MAGOSFIL(FILENAME,ACCESS)
+ ;  Set STATUS=$$USE^MAGOSFIL(FILENAME)
+ ;  Set STATUS=$$CLOSE^MAGOSFIL(FILENAME,DISPOSE)
+ ;  Set STATUS=$$READ^MAGOSFIL(FILENAME,.LINE,TIMEOUT,LENGTH)
+ ;  Set CODE=$$READSTAR^MAGOSFIL(FILENAME,TIMEOUT)
+ ;  Set STATUS=$$USEDEV^MAGOSFIL(DEVICE)
+ ;  Set STATUS=$$USEPRIN^MAGOSFIL()
+ ;  Set STATUS=$$CLODEV^MAGOSFIL(DEVICE)
+ ;  Set STATUS=$$CURDEV^MAGOSFIL()
+ ;
+ ; Extended file status information
+ ;  Set OFFSET=$$GETOFSET^MAGOSFIL(FILENAME)
+ ;  Set NEWPOS=$$SEEK^MAGOSFIL(FILENAME,OFFSET,MODE)
+ ;  Set STATUS=$$GETEOF^MAGOSFIL(FILENAME)
+ ;  Set STATUS=$$IOSTAT^MAGOSFIL(FILENAME)
+ ;
+CLODEV(DEVICE) ;
+ ;  -- Closes the device, if it's not the principal one
+ C:$P'=DEVICE DEVICE
+ Q 0
+CURDEV() ;
+ ;  -- Return identifier for current device
+ Q $I
+CLOSE(FILENAME,DISPOSE) N S,T
+ ;  -- Closes the device through which the file is accessible
+ I '$D(MAGOS("FIL",FILENAME)) Q "-2 File "_FILENAME_" not opened through $$OPEN^"_$T(+0)
+ S DISPOSE=$$UPPER^MAGOSMSC($G(DISPOSE)) S:DISPOSE="" DISPOSE=" "
+ S T(" ")=" ",T("D")="DELETE",T("?")="!"
+ I $E($G(T($E(DISPOSE,1)),"?"),1,$L(DISPOSE))'=DISPOSE Q "-1 Invalid file disposition: "_DISPOSE
+ S DISPOSE=$E(DISPOSE,1)
+ I DISPOSE="D" C FILENAME:"D"
+ I DISPOSE=" " C FILENAME
+ K MAGOS("FIL",FILENAME)
+ Q 0
+GETEOF(FILENAME) ;
+ ;  -- Reports on the end-of-file status of a file
+ I '$D(FILENAME) Q $ZEOF
+ I '$D(MAGOS("FIL",FILENAME)) Q "-1 File "_FILENAME_" not opened through $$OPEN^"_$T(+0)
+ U FILENAME Q $ZEOF
+GETOFSET(FILENAME) ;
+ ;  -- Reports the current "file position" (offset from start
+ I '$D(FILENAME) Q $ZSEEK()
+ I '$D(MAGOS("FIL",FILENAME)) Q "-1 File "_FILENAME_" not opened through $$OPEN^"_$T(+0)
+ U FILENAME Q $ZSEEK()
+INIT ;
+ ;  -- Initializes essential variables
+ N DEV,ENV,I,LIST,V
+ K MAGOS S LIST="",V=$TR($ZV," ",".")
+ D:V[".5.1."
+ . S ENV=$ZU(5)
+ . ZN "%SYS"
+ . S LIST=##class(SYS.Process).%OpenId($JOB).OpenDevices
+ . ZN ENV
+ . Q
+ D:V[".5.0."
+ . N SW10,X
+ . S SW10=$V(0,-2,$ZU(40,0,1))\1024#2
+ . D JobInfo^%SS($J,.X)
+ . S LIST=$G(X("D"))
+ . Q
+ F I=1:1:$L(LIST,",") D
+ . S DEV=$P(LIST,",",I) Q:$E(DEV,$L(DEV))="*"  Q:DEV=""
+ . C DEV
+ . Q
+ Q
+IOSTAT(FILENAME) ;
+ ;  -- Reports the current status of a file or device
+ Q "?"
+OPEN(FILENAME,ACCESS) N A,IO,S,T
+ ;  -- Opens a file
+ S A=$ZU(68,40,1)
+ S A=0
+ S ACCESS=$$UPPER^MAGOSMSC($G(ACCESS,"R")) S:ACCESS="" ACCESS="R"
+ S T("R")="READ",T("W")="WRITE",T("M")="MIXED",T("A")="APPEND",T("?")="!"
+ S T("S")="SEEK",T("B")="BINARY"
+ I $E($G(T($E(ACCESS,1)),"?"),1,$L(ACCESS))'=ACCESS Q "-1 Invalid file access: "_ACCESS
+ I $D(MAGOS("FIL",FILENAME)) Q "-2 File "_FILENAME_" already open, or not closed through $$CLOSE^"_$T(+0)
+ S ACCESS=$E(ACCESS,1)
+ N $ET
+ D
+ . S $ET="G CCOPNERR^"_$T(+0)
+ . I ACCESS="B" O FILENAME:("R"::$C(8)):0 E  S A="-4 Cannot open "_FILENAME_" as a read-only file." Q
+ . I ACCESS="R" O FILENAME:"R":0 E  S A="-4 Cannot open "_FILENAME_" as a read-only file." Q
+ . I ACCESS="W" O FILENAME:"WN"
+ . I ACCESS="A" O FILENAME:"WA"
+ . I ACCESS="M" O FILENAME:"RW"
+ . I ACCESS="S" O FILENAME:"RW"
+ . Q
+ S:A'<0 MAGOS("FIL",FILENAME)=FILENAME
+ Q A
+CCOPNERR ;
+ S A="-3 Couldn't open "_FILENAME_" for "_T(ACCESS)_" access; reason ("_$EC_")."
+ S $EC=""
+ Q:$Q A Q
+READ(FILENAME,LINE,TIMEOUT,LENGTH) ;
+ ;  -- Reads a single line from the input file
+ I '$D(MAGOS("FIL",FILENAME)) Q "-1 File "_FILENAME_" not opened through $$OPEN^"_$T(+0)
+ U MAGOS("FIL",FILENAME)
+ I $D(LENGTH) D
+ . I '$D(TIMEOUT) R LINE#LENGTH
+ . E  R LINE#LENGTH:TIMEOUT E  Q "-4 Timeout"
+ . Q
+ E  D
+ . I '$D(TIMEOUT) R LINE
+ . E  R LINE:TIMEOUT E  Q "-4 Timeout"
+ . Q
+ I $ZEOF=0 Q "" ; successful read, not end of file
+ I $ZEOF=-1 Q "-2 EOF" ; end of file
+ Q "-3 other error ("_$ZEOF_")" ; return error indicator
+READSTAR(FILENAME,TIMEOUT) N X
+ ;  -- Reads a single character from the input file
+ I '$D(MAGOS("FIL",FILENAME)) Q "-1 File "_FILENAME_" not opened through $$OPEN^"_$T(+0)
+ U MAGOS("FIL",FILENAME)
+ I '$D(TIMEOUT) R *X
+ E  R *X:TIMEOUT E  Q "-4 Timeout"
+ I $ZEOF=0 Q X ; successful read, not end of file
+ I $ZEOF=-1 Q "-2 EOF" ; end of file
+ Q "-3 other error ("_$ZEOF_")" ; return error indicator
+SEEK(FILENAME,OFFSET,MODE) ;
+ ;  -- Re-positions a file to the specified offset
+ I '$D(MAGOS("FIL",FILENAME)) Q "-1 File "_FILENAME_" not opened through $$OPEN^"_$T(+0)
+ I '$D(OFFSET) Q $$GETOFSET(FILENAME) ; Don't reposition; do USE file
+ U FILENAME
+ I $G(MODE) Q $ZSEEK(OFFSET,MODE)
+ Q $ZSEEK(OFFSET)
+USE(FILENAME) ;
+ ;  -- Uses the device through which the file is accessible
+ I '$D(MAGOS("FIL",FILENAME)) Q "-1 File "_FILENAME_" not opened through $$OPEN^"_$T(+0)
+ U FILENAME
+ Q 0
+USEDEV(DEVICE) ;
+ ;  -- Uses the device, if it's currently OPEN
+ N OK
+ S OK=-1 D
+ . ; If the requested device isn't open
+ . ; (e.g. $P in background job) we cannot use it...
+ . N $ET
+ . S $ET="D USERR^"_$T(+0)
+ . U DEVICE S OK=0
+ . Q
+ Q OK
+USERR S $EC="" Q
+USEPRIN(HALT) ;
+ ; -- Uses the principal device, if currently accessible
+ N $ET,R
+ S R=0,$ET="S:$EC[""<NOPEN>"" R=1,HALT=0 S $EC="""" H:HALT  Q"
+ D
+ . N I
+ . U $P
+ . S R=1 S:$P["|TNT|" R=0 S:$P["|TRM|" R=0 Q:R
+ . S R='($ZA\2048#2) ; Cache - bit goes on when disconnected
+ . ;                           only the bit doesn't go on until
+ . ;                           the output buffer is flushed...
+ . Q
+ I HALT,'R H
+ Q R
+ ;

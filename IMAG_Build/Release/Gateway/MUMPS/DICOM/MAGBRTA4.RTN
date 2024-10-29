@@ -1,0 +1,251 @@
+MAGBRTA4 ;WOIFO/EdM - Action Queue Processor ; 12/06/2004  10:31
+ ;;3.0;IMAGING;**11,30,51**;MAR 19, 2002;;JUN 16, 2006
+ ;; Per VHA Directive 2004-038, this routine should not be modified.
+ ;; +---------------------------------------------------------------+
+ ;; | Property of the US Government.                                |
+ ;; | No permission to copy or redistribute this software is given. |
+ ;; | Use of unreleased versions of this software requires the user |
+ ;; | to execute a written test agreement with the VistA Imaging    |
+ ;; | Development Office of the Department of Veterans Affairs,     |
+ ;; | telephone (301) 734-0100.                                     |
+ ;; | The Food and Drug Administration classifies this software as  |
+ ;; | a medical device.  As such, it may not be changed in any way. |
+ ;; | Modifications to this software may result in an adulterated   |
+ ;; | medical device under 21CFR820, the use of which is considered |
+ ;; | to be a violation of US Federal Statutes.                     |
+ ;; +---------------------------------------------------------------+
+ ;;
+ Q
+ ;
+SELECT N I,OUT,X
+ N CURDEST ;-- Destination to which we're currently transmitting
+ N DESTS ;---- List of selected destinations
+ N FATAL ;---- Switch: fatal error in RPC call
+ N IAQ ;------ Idle loop counter
+ N L ;-------- List of all destinations registered
+ N LOCATION ;- Origin of image files
+ N SHARE ;---- drive letter for remote share
+ ;
+ S FATAL=0
+ D  Q:X'>0
+ . S X=$$RECONCT^MAGDMENA() Q:X>0
+ . W !,"Cannot connect to VistA",!,X
+ . Q
+ ;
+ I $G(^MAGDICOM(2006.563,1,"CONSOLIDATED"))="YES" D
+ . N H,PROMPT,VALLOC,X
+ . ;
+ . I $$CALLRPC^MAGM2VCU("MAG DICOM VALID LOCATIONS","M",.VALLOC)<0 D  Q
+ . . W !!,"Cannot connect to VistA system at this time...",!
+ . . Q
+ . S H(1)="Enter the name of the institution from which the image files"
+ . S H(2)="are to be transmitted."
+ . S PROMPT="Transmit image files from:"
+ . S X=$$LOCATION^MAGDMFB(PROMPT,.H)
+ . S LOCATION=$S(X>0:X,1:0)
+ . Q
+ E  S LOCATION=$G(^MAGDICOM(2006.563,1,"LOCATION"))
+ I 'LOCATION D  Q
+ . W !,"Cannot establish identity of sending institution."
+ . Q
+ ;
+ K OUT
+ Q:$$CALLRPC^MAGM2VCU("MAG DICOM ROUTE LIST DESTI","M",.OUT,LOCATION)<0
+ S I="" F  S I=$O(OUT(I)) Q:I=""  D
+ . S X=OUT(I) I X["^",'$P(X,"^",2) S L(+$P(X,"^",1))=$P(X,"^",3,4)
+ . Q
+ ;
+ D
+ . N A ;---- Flag: indicates whether header text has been written
+ . N D0 ;--- Internal Entry Number in list of destinations
+ . N N ;---- List of destinations (left-over possible ones)
+ . N OK ;--- Flag: indicates whether step completed successfully
+ . N P ;---- Scratch variable (piece)
+ . N SEL ;-- Temporary list of selected destinations
+ . M N=L K L
+ . S OK=0 F  D  Q:OK
+ . . S (SEL,N)=0
+ . . S A=0,D0="" F  S D0=$O(SEL(D0)) Q:D0=""  D
+ . . . W:'A !!,"This process will transmit to:" S A=1
+ . . . W !?5,D0,": ",$P(SEL(D0),"^",1)," at ",$P(SEL(D0),"^",2)
+ . . . S SEL=SEL+1
+ . . . Q
+ . . S A=0,D0="" F  S D0=$O(N(D0)) Q:D0=""  D
+ . . . I 'A W !!,$S(SEL:"Other p",1:"P"),"ossible destinations are:" S A=1
+ . . . W !?5,D0,": ",$P(N(D0),"^",1)," at ",$P(N(D0),"^",2)
+ . . . Q
+ . . W !!,"Select " W:SEL "additional " W "destinations by:"
+ . . W !," ==> Entering their number(s), separated by commas"
+ . . W !," ==> Entering an asterisk (*) to select all possible destinations"
+ . . W !,"Prefixing an entry with a dash deselects the listed destinations"
+ . . W !,"Enter a period when the selection is complete."
+ . . W !,"---> " R X:$G(DTIME,300) E  S X="^"
+ . . I X="^" K SEL S OK=1 Q
+ . . S X=$TR(X,$C(9,32),",,") F  Q:X=""  D  Q:OK
+ . . . S P=$P(X,",",1),X=$P(X,",",2,$L(X)+2) Q:P=""
+ . . . I P["." S OK=1 Q
+ . . . S A=P["-",P=$TR(P,"-")
+ . . . I A D  Q
+ . . . . I P["*" M N=SEL K SEL Q
+ . . . . S P=+P I $D(SEL(P)) S N(P)=SEL(P) K SEL(P)
+ . . . . Q
+ . . . I P["*" M SEL=N K N Q
+ . . . S P=+P I $D(N(P)) S SEL(P)=N(P) K N(P)
+ . . . Q
+ . . Q
+ . K DESTS S N=0,D0="" F  S D0=$O(SEL(D0)) Q:D0=""  D
+ . . K OUT
+ . . Q:$$CALLRPC^MAGM2VCU("MAG DICOM ROUTE LOCK TRANSMIT","M",.OUT,D0,LOCATION,1)<0
+ . . I 'OUT D  Q
+ . . . W !,"Another Transmitter just became active for ",$P(L(D0),"^",1)
+ . . . Q
+ . . S N=N+1,DESTS(N)="1^"_D0
+ . . Q
+ . Q
+ ;
+ S SHARE=$$GETSHARE() I SHARE="" D  Q
+ . W !!,"Cannot allocate drive letter for destination."
+ . W !,"All drive letters used...",!
+ . Q
+ ;
+ S CURDEST=""
+ D
+ . N A ;------- Number of destinations
+ . N COMPR ;--- Compression (if any)
+ . N D0 ;------ Internal Entry Number of destination in Send Queue
+ . N DEST ;---- Internal Entry Number of destination
+ . N DSTUSR ;-- Login name for remote disk share
+ . N DSTPWD ;-- Password for remote disk share
+ . N FILDST ;-- File name at destination
+ . N FILSRC ;-- File name at source
+ . N MECH ;---- Transmission mechanism (1=copy, 2=DICOM)
+ . N NEWDEST ;- Next destination
+ . N NODE3 ;--- Node 3 of Network Location
+ . N PRIOR ;--- Priority of entry in queue
+ . ;
+ . K ^MAGDICOM(2006.563,1,"ROUTE AQ EXIT")
+ . S (A,D0)=0 F  S D0=$O(DESTS(D0)) Q:'D0  S A=A+1
+ . I 'A W !,"No Destinations Selected...",! Q
+ . ;
+ . S $ET="D TRANSERR^"_$T(+0)
+ . S FBSWITCH="FOREGROUND" D NEWLOG^MAGDMLOG("Transmission Processor")
+ . S (DEST,PRIOR,MECH)=""
+ . S IAQ=0 F  D  Q:$D(^MAGDICOM(2006.563,1,"ROUTE AQ EXIT"))
+ . . N I ;------- Loop-counter
+ . . N IMAGE ;--- Internal Entry Number of image
+ . . N Q0 ;------ Internal Entry Number of Send Queue in Action Queue File
+ . . N Q1 ;------ (Constant = 1) Internal Entry Number of Queue Status
+ . . N RETRY ;--- Counter: counts number of tries (on connect and transmit)
+ . . ;
+ . . D:$G(FATAL)
+ . . . D MESSAGE^MAGDMLOG(1,0,"VistA went off-line. Waiting 5 minutes to reconnect...","tB")
+ . . . H 300
+ . . . D MESSAGE^MAGDMLOG(1,0,"Attempting to reconnect...","tB")
+ . . . Q
+ . . S (STOP,FATAL)=0
+ . . ;
+ . . L +^MAGDICOM(2006.596)
+ . . S Q0=$O(^MAGDICOM(2006.596,"B","SEND","")) D:'Q0
+ . . . S X=$G(^MAGDICOM(2006.596,0))
+ . . . S $P(X,"^",1,2)="ACTION QUEUE STATUS^2006.596"
+ . . . S Q0=$O(^MAGDICOM(2006.596," "),-1)+1,^MAGDICOM(2006.596,Q0,0)="SEND"
+ . . . S ^MAGDICOM(2006.596,"B","SEND",Q0)=""
+ . . . S $P(X,"^",3)=Q0,$P(X,"^",4)=$P(X,"^",4)+1
+ . . . S ^MAGDICOM(2006.596,0)=X
+ . . . Q
+ . . S Q1=1,^MAGDICOM(2006.596,Q0,1,0)="^2006.5961^1^1"
+ . . S ^MAGDICOM(2006.596,Q0,1,Q1,0)=Q1_"^ACTIVE"
+ . . L -^MAGDICOM(2006.596)
+ . . ;
+ . . D  Q:FATAL
+ . . . N I,P
+ . . . K OUT
+ . . . S:$$CALLRPC^MAGM2VCU("MAG DICOM ROUTE NEXT FILE","M",.OUT,LOCATION,DEST,PRIOR,MECH,.DESTS)<0 FATAL=1
+ . . . Q:FATAL
+ . . . S I=$O(OUT("")) Q:I=""
+ . . . S X=OUT(I) Q:X=1
+ . . . I 'X D  Q  ; No more files to transmit
+ . . . . D:CURDEST'="" RELSHARE
+ . . . . S (CURDEST,DEST,PRIOR,MECH)=""
+ . . . . Q
+ . . . Q:X=2  ; No files to be transmitted for this queue entry
+ . . . I X<0 D  Q  ; Error code returned
+ . . . . W !!,"Error in RPC: ",X,!
+ . . . . Q
+ . . . W !!,"Unexpected return code from RPC:",!,"   """,X,"""",!
+ . . . Q
+ . . D:X=1
+ . . . S DEST=$G(OUT(2))
+ . . . S PRIOR=$G(OUT(3))
+ . . . S MECH=$G(OUT(4))
+ . . . S DSTUSR=$G(OUT(5))
+ . . . S DSTPWD=$G(OUT(6))
+ . . . S FILSRC=$G(OUT(7))
+ . . . S FILDST=$G(OUT(8))
+ . . . S D0=$G(OUT(9))
+ . . . S NEWDEST=$G(OUT(10))
+ . . . S NODE3=$G(OUT(11))
+ . . . S IMAGE=$G(OUT(12))
+ . . . S COMPR=$G(OUT(14)) S:COMPR="" COMPR="NONE"
+ . . . ;
+ . . . D:MECH=1 DOS^MAGBRTA5
+ . . . D:MECH=2 DICOM^MAGBRTA6
+ . . . Q
+ . . S ^MAGDICOM(2006.596,Q0,1,Q1,0)=Q1_"^"_$S(STOP:"SUSPENDED",1:"IDLE")
+ . . D IDLE^MAGDBB(.IAQ,1)
+ . . Q
+ . S D0="" F  S D0=$O(DESTS(D0)) Q:D0=""  D
+ . . N P
+ . . K OUT
+ . . S:$$CALLRPC^MAGM2VCU("MAG DICOM ROUTE LOCK TRANSMIT","M",.OUT,$P(DESTS(D0),"^",2),LOCATION,0)<0 FATAL=1
+ . . Q:FATAL
+ . . I 'OUT D  Q
+ . . . W !,"Could not unLOCK destination # ",$P(DESTS(D0),"^",2)
+ . . . Q
+ . . Q
+ . K ^MAGDICOM(2006.563,1,"ROUTE AQ EXIT")
+ . Q
+ D:CURDEST'="" RELSHARE
+ Q
+ ;
+TRANSERR N E ;--- Error code
+ I $$USEPRIN^MAGOSFIL(1)
+ S E=$EC W !!,"*** Error: ",E," ***",!
+ S $ET="G TRA2ERR^"_$T(+0)
+ ; MSM Specific codes:
+ S:E["<NOSYS>" E=""
+ S:E["<DSTDB>" E=""
+ S:E["<DDPER>" E=""
+ S:E["<DSCON>" E=""
+ S:E["<INRPT>" E=""
+ ; Cache Specific codes:
+ S:E["<INTERRUPT>" E=""
+ S:E["<WRITE>" E=""
+ I E'="" D INT^%ET
+ Q
+ ;
+TRA2ERR I $ST<2 S $EC="" W !,"Press <Enter> to continue: " R X:$G(DTIME,300) G ^MAGDMENU
+ Q
+ ;
+CHECK S:$P($G(^MAGDICOM(2006.596,Q0,1,Q1,0)),"^",2)="SUSPEND" STOP=1
+ Q
+ ;
+GETSHARE() N I,L,P,S,Z
+ S P="QRSTUVWXYZGHIJKLMNOP",S=""
+ F I=1:1:$L(P) D  Q:S'=""
+ . S L=$E(P,I),Z=$$DRIVES^MAGOSDIR()
+ . Q:Z[L
+ . L +^MAGDICOM("SHARE",L):0 E  Q
+ . S S=L_":"
+ . Q
+ Q S
+ ;
+RELSHARE N X
+ ; Release disk share
+ S X="net use "_SHARE_" /delete"
+ W !!,X,!
+ S X=$$HOSTCMD^MAGOSMSC(X)
+ L -^MAGDICOM("SHARE",$E(SHARE,1))
+ S SHARE=""
+ Q
+ ;

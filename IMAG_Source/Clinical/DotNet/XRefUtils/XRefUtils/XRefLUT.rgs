@@ -1,0 +1,26 @@
+HKCR
+{
+	VI.Display.Rad.XRefLUT.1 = s 'XRefLUT Class'
+	{
+		CLSID = s '{425DCE0C-58C7-4DC7-AE25-41A16AB96595}'
+	}
+	VI.Display.Rad.XRefLUT = s 'XRefLUT Class'
+	{		
+		CurVer = s 'VI.Display.Rad.XRefLUT.1'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {425DCE0C-58C7-4DC7-AE25-41A16AB96595} = s 'XRefLUT Class'
+		{
+			ProgID = s 'VI.Display.Rad.XRefLUT.1'
+			VersionIndependentProgID = s 'VI.Display.Rad.XRefLUT'
+			ForceRemove Programmable
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Apartment'
+			}
+			TypeLib = s '{E95A13F4-63AC-4C9F-9393-B00E3ED6D7E4}'
+			Version = s '1.0'
+		}
+	}
+}

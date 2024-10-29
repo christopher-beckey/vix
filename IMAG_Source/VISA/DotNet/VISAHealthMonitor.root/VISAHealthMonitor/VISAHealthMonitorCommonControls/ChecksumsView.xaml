@@ -1,0 +1,138 @@
+﻿<Window x:Class="VISAHealthMonitorCommonControls.ChecksumsView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        DataContext="{Binding Checksums, Source={StaticResource Locator}}" xmlns:my="clr-namespace:VISAHealthMonitorCommonControls"
+        d:DesignHeight="380" d:DesignWidth="700" 
+        Height="400"
+        Width="700"
+        Title="{Binding Path=Title, Mode=OneWay}" WindowStartupLocation="CenterOwner" 
+        Icon="{Binding Path=Icon, Mode=OneWay}" >
+
+    <DockPanel LastChildFill="True" VerticalAlignment="Stretch" >
+        <DockPanel.Resources>
+            <Style x:Key="LeftHeaderStyle" TargetType="{x:Type GridViewColumnHeader}">
+                <Setter Property="HorizontalContentAlignment" Value="Left"/>
+            </Style>
+        </DockPanel.Resources>
+        <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="2,2,2,0" DockPanel.Dock="Top">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="25"/>
+                <RowDefinition Height="25"/>
+                <RowDefinition Height="25"/>
+                <RowDefinition Height="25"/>
+
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="120" />
+                <ColumnDefinition Width="100*" />
+            </Grid.ColumnDefinitions>
+
+            <Label Grid.Row="0" Grid.Column="0" Content="Site" Height="23" HorizontalContentAlignment="Right" />
+            <TextBox Grid.Row="0" Grid.Column="1" Height="23" Margin="2,0,2,0"
+                             HorizontalAlignment="Stretch" Text="{Binding Path=SiteName}" IsReadOnly="True"/>
+
+            <Label Grid.Row="1" Grid.Column="0" Content="Version" Height="23" HorizontalContentAlignment="Right" />
+            <TextBox Grid.Row="1" Grid.Column="1" Height="23" Margin="2,0,2,0"
+                             HorizontalAlignment="Stretch" Text="{Binding Path=Version}" IsReadOnly="True"/>
+
+            <Label Grid.Row="2" Grid.Column="0" Content="OS Architecture" Height="23" HorizontalContentAlignment="Right" />
+            <TextBox Grid.Row="2" Grid.Column="1" Height="23" Margin="2,0,2,0"
+                             HorizontalAlignment="Stretch" Text="{Binding Path=OSArchitecture, Mode=OneWay}" IsReadOnly="True"/>
+
+            <Label Grid.Row="3" Grid.Column="0" Content="Library Type" Height="25" HorizontalContentAlignment="Right" />
+            <DockPanel Grid.Row="3" Grid.Column="1" LastChildFill="True" >
+                <Button Command="{Binding Path=RefreshCommand}" Content="Refresh" DockPanel.Dock="Right" Margin="1,0,2,0" />
+                <ComboBox Margin="2,1,2,1" HorizontalAlignment="Stretch"
+                                  ItemsSource="{Binding Path=LibraryTypes, Mode=OneWay}" 
+                                  SelectedItem="{Binding Path=SelectedLibraryType, Mode=TwoWay}" />
+            </DockPanel>
+
+
+        </Grid>
+        <Label Content="Java Libraries" DockPanel.Dock="Top" Height="23" 
+               HorizontalContentAlignment="Left" Margin="2,2,2,0" />
+
+        <StatusBar DockPanel.Dock="Bottom" Height="23" HorizontalAlignment="Stretch">
+            <StatusBarItem HorizontalAlignment="Stretch">
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="images/failed.ico" Visibility="{Binding Path=ErrorIconVisibility}" Stretch="None" Margin="0,0,2,0"/>
+                    <TextBlock Text="{Binding Path=StatusMessage}" />
+                </StackPanel>
+            </StatusBarItem>
+        </StatusBar>
+
+        <StackPanel Orientation="Horizontal" DockPanel.Dock="Bottom" HorizontalAlignment="Center">
+            <Button Content="Refresh" Command="{Binding Path=RefreshCommand}" Margin="2,1,2,1" />
+            <Button  Content="Close" Command="{Binding Path=CloseCommand}" Margin="2,1,2,1" />
+        </StackPanel>
+
+        <ListView  HorizontalAlignment="Stretch" DockPanel.Dock="Bottom"
+                       MinHeight="130" Margin="2,2,2,0" 
+                      VerticalAlignment="Stretch"
+                      ItemsSource="{Binding Path=Checksums.Sources.View}">
+
+            <ListView.View>
+                <GridView >
+                    <GridViewColumn Width="200" HeaderContainerStyle="{StaticResource LeftHeaderStyle}" >
+                        <GridViewColumnHeader Content="Name" 
+                                              Command="{Binding Path=SortFilesCommand}" CommandParameter="Filename"/>
+                        <GridViewColumn.CellTemplate>
+                            <HierarchicalDataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <Image Source="images/failed.ico" Visibility="{Binding Path=InvalidIconVisibility}" Stretch="None" Margin="0,0,2,0"/>
+                                    <Image Source="images/Passed.ico" Visibility="{Binding Path=ValidIconVisibility}" Stretch="None" Margin="0,0,2,0"/>
+                                    <TextBlock Text="{Binding Filename}"  />
+                                </StackPanel>
+                            </HierarchicalDataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Width="145" HeaderContainerStyle="{StaticResource LeftHeaderStyle}" >
+                        <GridViewColumnHeader Content="Checksum" Command="{Binding Path=SortFilesCommand}" CommandParameter="Checksum"/>
+                        <GridViewColumn.CellTemplate>
+                            <HierarchicalDataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="{Binding Checksum}"  />
+                                </StackPanel>
+                            </HierarchicalDataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Width="55" HeaderContainerStyle="{StaticResource LeftHeaderStyle}" >
+                        <GridViewColumnHeader Content="File Size" Command="{Binding Path=SortFilesCommand}" CommandParameter="FormattedSize" />
+                        <GridViewColumn.CellTemplate>
+                            <HierarchicalDataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="{Binding FormattedSize}"  />
+                                </StackPanel>
+                            </HierarchicalDataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+
+                    <GridViewColumn Width="145" HeaderContainerStyle="{StaticResource LeftHeaderStyle}" >
+                        <GridViewColumnHeader Content="Expected Checksum" Command="{Binding Path=SortFilesCommand}" CommandParameter="ExpectedChecksum"/>
+                        <GridViewColumn.CellTemplate>
+                            <HierarchicalDataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="{Binding ExpectedChecksum}"  />
+                                </StackPanel>
+                            </HierarchicalDataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Width="105" HeaderContainerStyle="{StaticResource LeftHeaderStyle}" >
+                        <GridViewColumnHeader Content="Expected File Size" Command="{Binding Path=SortFilesCommand}" CommandParameter="ExpectedSize"/>
+                        <GridViewColumn.CellTemplate>
+                            <HierarchicalDataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="{Binding ExpectedSize}"  />
+                                </StackPanel>
+                            </HierarchicalDataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                </GridView>
+            </ListView.View>
+        </ListView>
+
+    </DockPanel>
+</Window>

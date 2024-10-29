@@ -1,0 +1,531 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<VixManifest>
+  <Patch number="30.249.1.7703" clearCacheIfPreviousVersion="30.105.*.*" enable64BitInstall="true" log4jVersion="2">
+    <WelcomePageText>
+      This wizard will guide you through the installation of the Patch Ingest Centralized VistA Imaging Exchange (CVIX) service.
+
+      To continue, click Next.
+    </WelcomePageText>
+    <DeploymentConfigurations>
+      <DeploymentConfiguration name="EnterpriseGateway" shortDescription="Enterprise Gateway VIX">Deploy the VIX as a enterprise gateway at station 200.</DeploymentConfiguration>
+    </DeploymentConfigurations>
+    <CacheConfigurations>
+      <CacheConfiguration name="ExchangeTimeEvictionLocalFilesystem" shortDescription="Local Exchange Cache - Time Eviction">This VIX cache configuration uses a local disk with 2 VA and 2 DoD regions cache regions defined. An eviction strategy based on the last time since an item was accessed in the cache is used. No protection is provided for a disk space overflow condition.</CacheConfiguration>
+      <CacheConfiguration name="ExchangeTimeStorageEvictionLocalFilesystem" shortDescription="Local Exchange Cache - Time/Storage Eviction">This VIX cache configuration uses a local disk with 2 VA and 2 DoD regions cache regions defined. An eviction strategy based on the last time since an item was accessed in the cache is used in conjunction with a storage based eviction strategy to limit the size of the cache.</CacheConfiguration>
+    </CacheConfigurations>
+  </Patch>
+  <Prerequisites>
+    <!-- Tomcat -->
+    <Prerequisite name="Apache Tomcat" option="Active" version="8.0.53" native="x64">
+      <Tomcat serviceName="Tomcat8">
+        <InstallCommand payloadRelativeFolder="common/Apache Tomcat">apache-tomcat-8.0.53.exe</InstallCommand>
+        <UnregisterServiceCommand appRootFolderType="TomcatRoot" unregisterFilename="bin/Tomcat8.exe">//DS//Tomcat8</UnregisterServiceCommand>
+        <UninstallCommand appRootFolderType="TomcatRoot" uninstallerFilename="Uninstall.exe" tomcatRegistryKey="SOFTWARE\Apache Software Foundation\Tomcat\8.0" deleteUninstallerRegistryKey="SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\Apache Tomcat 8.0 Tomcat8">-ServiceName=Tomcat8 /S</UninstallCommand>
+      </Tomcat>
+    </Prerequisite>
+    <Prerequisite name="Apache Tomcat" option="Deprecated" version="8.0.52" native="x64">
+      <Tomcat serviceName="Tomcat8">
+        <InstallCommand payloadRelativeFolder="common/Apache Tomcat">apache-tomcat-8.0.52.exe</InstallCommand>
+        <UnregisterServiceCommand appRootFolderType="TomcatRoot" unregisterFilename="bin/Tomcat8.exe">//DS//Tomcat8</UnregisterServiceCommand>
+        <UninstallCommand appRootFolderType="TomcatRoot" uninstallerFilename="Uninstall.exe" tomcatRegistryKey="SOFTWARE\Apache Software Foundation\Tomcat\8.0" deleteUninstallerRegistryKey="SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\Apache Tomcat 8.0 Tomcat8">-ServiceName=Tomcat8 /S</UninstallCommand>
+      </Tomcat>
+    </Prerequisite>
+
+    <!-- Java -->
+    <!-- Each version of Java has a unique Product number. Use the correct product number in the uninstallCommand tag below -->
+    <Prerequisite name="Java" option="Active" version="8.0_202" native="x64">
+      <JRE appRootFolderType="JavaRoot" appRootRelativeFolder="\Program Files\Java\jre1.8.0_202">
+        <InstallCommand payloadRelativeFolder="common/java">jre-8u202-windows-x64.exe</InstallCommand>
+        <UninstallCommand appRootFolderType="NoRoot">/qn /x {26A24AE4-039D-4CA4-87B4-2F64180202F0}</UninstallCommand>
+      </JRE>
+      <JDK appRootFolderType="JavaRoot" appRootRelativeFolder="\Program Files\Java\jdk1.8.0_202\jre">
+        <InstallCommand>not currently used</InstallCommand>
+        <UninstallCommand appRootFolderType="NoRoot">not currently used</UninstallCommand>
+      </JDK>
+    </Prerequisite>
+    <Prerequisite name="Java" option="Deprecated" version="8.0_171" native="x64">
+      <JRE appRootFolderType="JavaRoot" appRootRelativeFolder="\Program Files\Java\jre1.8.0_171">
+        <InstallCommand payloadRelativeFolder="common/java">jre-8u171-windows-x64.exe</InstallCommand>
+        <UninstallCommand appRootFolderType="NoRoot">/qn /x {26A24AE4-039D-4CA4-87B4-2F64180171F0}</UninstallCommand>
+      </JRE>
+      <JDK appRootFolderType="JavaRoot" appRootRelativeFolder="\Program Files\Java\jdk1.8.0_171\jre">
+        <InstallCommand>not currently used</InstallCommand>
+        <UninstallCommand appRootFolderType="NoRoot">not currently used</UninstallCommand>
+      </JDK>
+    </Prerequisite>
+
+    <!-- Laurel Bridge Runtime -->
+    <Prerequisite name="Laurel Bridge" option="Active" version="3.3.40c" licenseType="Enterprise" native="x86">
+      <DCF payloadRelativeFolder="common/LaurelBridge" appRootRelativeFolder="\DCF_RunTime">DCF_RunTime_Install_3.3.40c.zip</DCF>
+    </Prerequisite>
+    <Prerequisite name="Laurel Bridge" option="Active" version="3.3.40c" licenseType="Enterprise" native="x64">
+      <DCF payloadRelativeFolder="common/LaurelBridge" appRootRelativeFolder="\DCF_RunTime_x64">DCF_RunTime_Install_3.3.40c_x64.zip</DCF>
+    </Prerequisite>
+	
+    <!-- ZF Viewer Render Services -->
+    <Prerequisite name="Viewer Services" option="Active" version="2.2.6968.19081" native="x64">
+      <ZFV payloadRelativeFolder="common/ZFViewerServices" appRootRelativeFolder="\Program Files\VistA\Imaging">ViewerRender-2.2.6968.19081.zip</ZFV>
+    </Prerequisite>
+    <Prerequisite name="Viewer Services" option="Deprecated" version="2.2.6968.19080" native="x64">
+      <ZFV payloadRelativeFolder="common/ZFViewerServices" appRootRelativeFolder="\Program Files\VistA\Imaging">ViewerRender-2.2.6968.19080.zip</ZFV>
+    </Prerequisite>
+	
+    <!-- MS SQL Server for VIX Render -->
+    <Prerequisite name="MSSQL Server" option="Active" version="14.0.1000.169" native="x64">
+      <SQL payloadRelativeFolder="ignore" appRootRelativeFolder="ignore">SQLExpress_x64-14_0_1000_169.zip</SQL>
+    </Prerequisite>
+    <Prerequisite name="MSSQL Server" option="Deprecated" version="12.0.2000.8" native="x64">
+      <SQL payloadRelativeFolder="ignore" appRootRelativeFolder="ignore">SQLExpress_x64-12_0_2000_8.zip</SQL>
+    </Prerequisite>
+
+    <!-- Listener Tool Services -->
+    <Prerequisite name="Listener" option="Active" version="1.0.0.0" native="x64">
+      <LST payloadRelativeFolder="common/Listener" appRootRelativeFolder="\Program Files\VistA\Imaging\Listener">Listener-1.0.0.0.zip</LST>
+    </Prerequisite>
+  </Prerequisites>
+  <ViX>
+    <DependencyFiles>
+      <!-- ViX java extensions-->
+      <File dependencyType="AppExtensionJar" appRootFolderType="JavaRoot" payloadRelativeFolder="server/jars" appRelativeFolder="lib/ext" >log4j-api-2.11.0.jar</File>
+      <File dependencyType="AppExtensionJar" appRootFolderType="JavaRoot" payloadRelativeFolder="server/jars" appRelativeFolder="lib/ext" >log4j-core-2.11.0.jar</File>
+	  <File dependencyType="AppExtensionJar" appRootFolderType="JavaRoot" payloadRelativeFolder="server/jars" appRelativeFolder="lib/ext" >log4j-slf4j-impl-2.11.0.jar</File>
+      <File dependencyType="AppExtensionJar" appRootFolderType="JavaRoot" payloadRelativeFolder="server/jars" appRelativeFolder="lib/ext" >slf4j-api-1.7.25.jar</File>
+      <File dependencyType="AppExtensionJar" appRootFolderType="JavaRoot" payloadRelativeFolder="server/jars" appRelativeFolder="lib/ext" >slf4j-log4j12-1.7.25.jar</File>
+      <File dependencyType="AppExtensionJar" appRootFolderType="JavaRoot" payloadRelativeFolder="server/trustedjars" appRelativeFolder="lib/ext" >ClinicalDisplayConnection-0.1.jar</File>
+      <File dependencyType="AppExtensionJar" appRootFolderType="JavaRoot" payloadRelativeFolder="server/trustedjars" appRelativeFolder="lib/ext" >ExchangeConnection-0.1.jar</File>
+      <File dependencyType="AppExtensionJar" appRootFolderType="JavaRoot" payloadRelativeFolder="server/trustedjars" appRelativeFolder="lib/ext" >FederationConnection-0.1.jar</File>
+      <File dependencyType="AppExtensionJar" appRootFolderType="JavaRoot" payloadRelativeFolder="server/trustedjars" appRelativeFolder="lib/ext" >VistaConnection-0.1.jar</File>
+      <File dependencyType="AppExtensionJar" appRootFolderType="JavaRoot" payloadRelativeFolder="server/trustedjars" appRelativeFolder="lib/ext" >VistaImagingConnection-0.1.jar</File>
+      <File dependencyType="AppExtensionJar" appRootFolderType="JavaRoot" payloadRelativeFolder="server/trustedjars" appRelativeFolder="lib/ext" >ImageGearConnection-0.1.jar</File>
+      <File dependencyType="AppExtensionJar" appRootFolderType="JavaRoot" payloadRelativeFolder="server/trustedjars" appRelativeFolder="lib/ext" >MIXConnection-0.1.jar</File>
+      <File dependencyType="AppExtensionJar" appRootFolderType="JavaRoot" payloadRelativeFolder="server/trustedjars" appRelativeFolder="lib/ext" >MIXsConnection-0.1.jar</File>
+      <File dependencyType="AppExtensionJar" appRootFolderType="JavaRoot" payloadRelativeFolder="server/trustedjars" appRelativeFolder="lib/ext" >DxConnection-0.1.jar</File>
+      <File dependencyType="AppExtensionJar" appRootFolderType="JavaRoot" payloadRelativeFolder="server/trustedjars" appRelativeFolder="lib/ext" >DxsConnection-0.1.jar</File>
+      <File dependencyType="AppExtensionJar" appRootFolderType="JavaRoot" payloadRelativeFolder="server/trustedjars" appRelativeFolder="lib/ext" >MuseConnection-0.1.jar</File>
+	  <File dependencyType="AppExtensionJar" appRootFolderType="JavaRoot" payloadRelativeFolder="server/trustedjars" appRelativeFolder="lib/ext" >DicomServicesConnection-0.1.jar</File>
+	  <File dependencyType="AppExtensionJar" appRootFolderType="JavaRoot" payloadRelativeFolder="server/trustedjars" appRelativeFolder="lib/ext" >ViewerServicesConnection-0.1.jar</File>
+
+	  <File dependencyType="AppExtensionJar" appRootFolderType="JavaRoot" payloadRelativeFolder="server/jars" appRelativeFolder="lib/ext" >jcifs-ng-2.0.6.jar</File>
+	  <File dependencyType="AppExtensionJar" appRootFolderType="JavaRoot" payloadRelativeFolder="server/jars" appRelativeFolder="lib/ext" >bcprov-jdk15on-1.60.jar</File>
+      
+	  <!-- server.xml shell which will be have web app contexts added by the ViX installer-->
+      <File dependencyType="XmlConfigFile" appRootFolderType="TomcatRoot" payloadRelativeFolder="common/Apache Tomcat" appRelativeFolder="conf" >server.xml</File>
+      <!-- context.xml which has resource links shared by all web applications -->
+      <File dependencyType="XmlConfigFile" appRootFolderType="TomcatRoot" payloadRelativeFolder="common/Apache Tomcat" appRelativeFolder="conf" >context.xml</File>
+	  <!-- catalina.properties customized to skip jar scan-->
+      <File dependencyType="XmlConfigFile" appRootFolderType="TomcatRoot" payloadRelativeFolder="common/Apache Tomcat" appRelativeFolder="conf" >catalina.properties</File>
+      <!-- tomcat manager context.xml which disable remote access to manager page -->
+     <File dependencyType="XmlConfigFile" appRootFolderType="TomcatRoot" payloadRelativeFolder="common/Apache Tomcat/manager" appRelativeFolder="webapps/manager/META-INF" >context.xml</File>
+	  
+	  <!-- aware and tomcat run time libraries-->
+      <File dependencyType="OpenSourceDll" appRootFolderType="TomcatRoot" payloadRelativeFolder="common/Apache Tomcat/x86" appRelativeFolder="bin" native="x86">tcnative-1.dll</File>
+      <File dependencyType="OpenSourceDll" appRootFolderType="TomcatRoot" payloadRelativeFolder="common/Apache Tomcat/x64" appRelativeFolder="bin" native="x64">tcnative-1.dll</File>
+      <File dependencyType="ModifiedOpenSourceDll" appRootFolderType="TomcatRoot" payloadRelativeFolder="common/Apache Tomcat/x64" appRelativeFolder="bin" native="x64">libapr-1.dll</File>
+      <File dependencyType="ModifiedOpenSourceDll" appRootFolderType="TomcatRoot" payloadRelativeFolder="common/Apache Tomcat/x64" appRelativeFolder="bin" native="x64">libeay32.dll</File>
+      <File dependencyType="ModifiedOpenSourceDll" appRootFolderType="TomcatRoot" payloadRelativeFolder="common/Apache Tomcat/x64" appRelativeFolder="bin" native="x64">libtcnative-1.dll</File>
+      <File dependencyType="ModifiedOpenSourceDll" appRootFolderType="TomcatRoot" payloadRelativeFolder="common/Apache Tomcat/x64" appRelativeFolder="bin" native="x64">ssleay32.dll</File>
+      <File dependencyType="CommercialDll" appRootFolderType="TomcatRoot" payloadRelativeFolder="common/Aware/x64" appRelativeFolder="bin" native="x64">awj2k.dll</File>
+      <File dependencyType="CommercialDll" appRootFolderType="TomcatRoot" payloadRelativeFolder="common/Aware/x64" appRelativeFolder="bin" native="x64">awj2k_interface.dll</File>
+      <!--external dependencies-->
+      <File dependencyType="OpenSourceJar" appRootFolderType="TomcatRoot" payloadRelativeFolder="server/jars" appRelativeFolder="lib" >spring-1.2.9.jar</File>
+      <File dependencyType="OpenSourceJar" appRootFolderType="TomcatRoot" payloadRelativeFolder="server/jars" appRelativeFolder="lib" >log4j-api-2.11.0.jar</File>
+      <File dependencyType="OpenSourceJar" appRootFolderType="TomcatRoot" payloadRelativeFolder="server/jars" appRelativeFolder="lib" >log4j-core-2.11.0.jar</File>
+	  <File dependencyType="OpenSourceJar" appRootFolderType="TomcatRoot" payloadRelativeFolder="server/jars" appRelativeFolder="lib" >log4j-slf4j-impl-2.11.0.jar</File>
+      <File dependencyType="OpenSourceJar" appRootFolderType="TomcatRoot" payloadRelativeFolder="server/jars" appRelativeFolder="lib" >slf4j-api-1.7.25.jar</File>
+      <File dependencyType="OpenSourceJar" appRootFolderType="TomcatRoot" payloadRelativeFolder="server/jars" appRelativeFolder="lib" >slf4j-log4j12-1.7.25.jar</File>
+      
+      <!-- sql lib -->
+      <File dependencyType="OpenSourceJar" appRootFolderType="TomcatRoot" payloadRelativeFolder="server/jars" appRelativeFolder="lib" >mssql-jdbc-6.2.2.jre8.jar</File>
+      <File dependencyType="OpenSourceJar" appRootFolderType="TomcatRoot" payloadRelativeFolder="server/jars" appRelativeFolder="lib" >javax.persistence-2.1.0.jar</File>
+      <File dependencyType="OpenSourceJar" appRootFolderType="TomcatRoot" payloadRelativeFolder="server/jars" appRelativeFolder="lib" >org.eclipse.persistence.antlr-2.6.1-RC1.jar</File>
+      <File dependencyType="OpenSourceJar" appRootFolderType="TomcatRoot" payloadRelativeFolder="server/jars" appRelativeFolder="lib" >org.eclipse.persistence.asm-2.6.1-RC1.jar</File>
+      <File dependencyType="OpenSourceJar" appRootFolderType="TomcatRoot" payloadRelativeFolder="server/jars" appRelativeFolder="lib" >org.eclipse.persistence.core-2.6.1-RC1.jar</File>
+      <File dependencyType="OpenSourceJar" appRootFolderType="TomcatRoot" payloadRelativeFolder="server/jars" appRelativeFolder="lib" >org.eclipse.persistence.jpa-2.6.1-RC1.jar</File>
+      <File dependencyType="OpenSourceJar" appRootFolderType="TomcatRoot" payloadRelativeFolder="server/jars" appRelativeFolder="lib" >org.eclipse.persistence.jpa.jpql-2.6.1-RC1.jar</File>
+
+      <File dependencyType="OpenSourceJar" appRootFolderType="TomcatRoot" payloadRelativeFolder="server/jars" appRelativeFolder="lib" >axis-1.4.jar</File>
+      <File dependencyType="OpenSourceJar" appRootFolderType="TomcatRoot" payloadRelativeFolder="server/jars" appRelativeFolder="lib" >jaxrpc-1.1.jar</File>
+      <File dependencyType="OpenSourceJar" appRootFolderType="TomcatRoot" payloadRelativeFolder="server/jars" appRelativeFolder="lib" >saaj-api-1.2.jar</File>
+      <File dependencyType="OpenSourceJar" appRootFolderType="TomcatRoot" payloadRelativeFolder="server/jars" appRelativeFolder="lib" >commons-codec-1.3.jar</File>
+      <File dependencyType="OpenSourceJar" appRootFolderType="TomcatRoot" payloadRelativeFolder="server/jars" appRelativeFolder="lib" >commons-lang-2.5.jar</File>
+      <File dependencyType="OpenSourceJar" appRootFolderType="TomcatRoot" payloadRelativeFolder="server/jars" appRelativeFolder="lib" >commons-configuration-1.10.jar</File>
+      <File dependencyType="OpenSourceJar" appRootFolderType="TomcatRoot" payloadRelativeFolder="server/jars" appRelativeFolder="lib" >commons-logging-1.2.jar</File>
+      <File dependencyType="OpenSourceJar" appRootFolderType="TomcatRoot" payloadRelativeFolder="server/jars" appRelativeFolder="lib" >commons-collections-3.2.1.jar</File>
+      <File dependencyType="OpenSourceJar" appRootFolderType="TomcatRoot" payloadRelativeFolder="server/jars" appRelativeFolder="lib" >commons-discovery-0.2.jar</File>
+      <File dependencyType="ModifiedOpenSourceJar" appRootFolderType="TomcatRoot" payloadRelativeFolder="server/jars" appRelativeFolder="lib" >commons-httpclient-custom-3.1.jar</File>
+      <File dependencyType="OpenSourceJar" appRootFolderType="TomcatRoot" payloadRelativeFolder="server/jars" appRelativeFolder="lib" >commons-modeler-2.0.jar</File>
+	  <File dependencyType="OpenSourceJar" appRootFolderType="TomcatRoot" payloadRelativeFolder="server/jars" appRelativeFolder="lib" >serialkiller-0.4.jar</File>
+      <File dependencyType="OpenSourceJar" appRootFolderType="TomcatRoot" payloadRelativeFolder="server/jars" appRelativeFolder="lib" >wsdl4j-1.6.2.jar</File>
+      <File dependencyType="OpenSourceJar" appRootFolderType="TomcatRoot" payloadRelativeFolder="server/jars" appRelativeFolder="lib" >commons-io-1.4.jar</File>
+	  <File dependencyType="OpenSourceJar" appRootFolderType="TomcatRoot" payloadRelativeFolder="server/jars" appRelativeFolder="lib" >je-5.0.73.jar</File>
+      <File dependencyType="OpenSourceJar" appRootFolderType="TomcatRoot" payloadRelativeFolder="server/jars" appRelativeFolder="lib" >jxl-2.0.0.jar</File>
+      <File dependencyType="OpenSourceJar" appRootFolderType="TomcatRoot" payloadRelativeFolder="server/jars" appRelativeFolder="lib" >javamail-1.4.jar</File>
+      <File dependencyType="OpenSourceJar" appRootFolderType="TomcatRoot" payloadRelativeFolder="server/jars" appRelativeFolder="lib" >httpcore-4.0.1.jar</File>
+      <File dependencyType="OpenSourceJar" appRootFolderType="TomcatRoot" payloadRelativeFolder="server/jars" appRelativeFolder="lib" >json-20090211.jar</File>
+      <File dependencyType="OpenSourceJar" appRootFolderType="TomcatRoot" payloadRelativeFolder="server/jars" appRelativeFolder="lib" >genson-1.0.jar</File>
+      <File dependencyType="OpenSourceJar" appRootFolderType="TomcatRoot" payloadRelativeFolder="server/jars" appRelativeFolder="lib" >xpp3_min-1.1.4c.jar</File>
+      <File dependencyType="OpenSourceJar" appRootFolderType="TomcatRoot" payloadRelativeFolder="server/jars" appRelativeFolder="lib" >xstream-1.3.1.jar</File>
+      <File dependencyType="OpenSourceJar" appRootFolderType="TomcatRoot" payloadRelativeFolder="server/jars" appRelativeFolder="lib" >jersey-servlet-1.19.4.jar</File>
+      <File dependencyType="OpenSourceJar" appRootFolderType="TomcatRoot" payloadRelativeFolder="server/jars" appRelativeFolder="lib" >jersey-server-1.19.4.jar</File>
+      <File dependencyType="OpenSourceJar" appRootFolderType="TomcatRoot" payloadRelativeFolder="server/jars" appRelativeFolder="lib" >jersey-core-1.19.4.jar</File>
+      <File dependencyType="OpenSourceJar" appRootFolderType="TomcatRoot" payloadRelativeFolder="server/jars" appRelativeFolder="lib" >jersey-client-1.19.4.jar</File>
+      <File dependencyType="OpenSourceJar" appRootFolderType="TomcatRoot" payloadRelativeFolder="server/jars" appRelativeFolder="lib" >jersey-apache-client-1.19.4.jar</File>
+      <File dependencyType="OpenSourceJar" appRootFolderType="TomcatRoot" payloadRelativeFolder="server/jars" appRelativeFolder="lib" >jersey-json-1.19.4.jar</File>
+      <File dependencyType="OpenSourceJar" appRootFolderType="TomcatRoot" payloadRelativeFolder="server/jars" appRelativeFolder="lib" >com.springsource.org.codehaus.jackson.mapper-1.4.2.jar</File>
+      <File dependencyType="OpenSourceJar" appRootFolderType="TomcatRoot" payloadRelativeFolder="server/jars" appRelativeFolder="lib" >com.springsource.org.codehaus.jackson-1.4.2.jar</File>
+  	  <File dependencyType="OpenSourceJar" appRootFolderType="TomcatRoot" payloadRelativeFolder="server/jars" appRelativeFolder="lib" >jsr311-api-1.1.1.jar</File>
+      <File dependencyType="OpenSourceJar" appRootFolderType="TomcatRoot" payloadRelativeFolder="server/jars" appRelativeFolder="lib" >asm-3.1.jar</File>
+      <File dependencyType="OpenSourceJar" appRootFolderType="TomcatRoot" payloadRelativeFolder="server/jars" appRelativeFolder="lib" >encoder-1.2.jar</File>
+      <File dependencyType="OpenSourceJar" appRootFolderType="TomcatRoot" payloadRelativeFolder="server/jars" appRelativeFolder="lib" >jstl-1.2.jar</File>
+      <File dependencyType="OpenSourceJar" appRootFolderType="TomcatRoot" payloadRelativeFolder="server/jars" appRelativeFolder="lib" >jettison-1.4.0.jar</File>
+
+      <!--external SQL dependencies-->
+      <File dependencyType="OpenSourceJar" appRootFolderType="TomcatRoot" payloadRelativeFolder="server/jars" appRelativeFolder="lib" >mssql-jdbc-6.2.2.jre8.jar</File>
+      <File dependencyType="OpenSourceJar" appRootFolderType="TomcatRoot" payloadRelativeFolder="server/jars" appRelativeFolder="lib" >javax.persistence-2.1.0.jar</File>
+      <File dependencyType="OpenSourceJar" appRootFolderType="TomcatRoot" payloadRelativeFolder="server/jars" appRelativeFolder="lib" >org.eclipse.persistence.antlr-2.6.1-RC1.jar</File>
+      <File dependencyType="OpenSourceJar" appRootFolderType="TomcatRoot" payloadRelativeFolder="server/jars" appRelativeFolder="lib" >org.eclipse.persistence.asm-2.6.1-RC1.jar</File>
+      <File dependencyType="OpenSourceJar" appRootFolderType="TomcatRoot" payloadRelativeFolder="server/jars" appRelativeFolder="lib" >org.eclipse.persistence.core-2.6.1-RC1.jar</File>
+      <File dependencyType="OpenSourceJar" appRootFolderType="TomcatRoot" payloadRelativeFolder="server/jars" appRelativeFolder="lib" >org.eclipse.persistence.jpa-2.6.1-RC1.jar</File>
+      <File dependencyType="OpenSourceJar" appRootFolderType="TomcatRoot" payloadRelativeFolder="server/jars" appRelativeFolder="lib" >org.eclipse.persistence.jpa.jpql-2.6.1-RC1.jar</File>
+
+	  <File dependencyType="OpenSourceJar" appRootFolderType="TomcatRoot" payloadRelativeFolder="server/jars" appRelativeFolder="lib" >mediautil-1.0.jar</File>
+	  
+	  	<!-- DO NOT USE - CAUSING CONFLICT
+	    <File dependencyType="OpenSourceJar" appRootFolderType="TomcatRoot" payloadRelativeFolder="server/jars" appRelativeFolder="lib" >jaxb-impl-2.1.12.jar</File>
+	    -->
+
+
+      <!-- external JNI dependencies -->
+      <File dependencyType="CommercialJar" appRootFolderType="TomcatRoot" payloadRelativeFolder="common/LaurelBridge" appRelativeFolder="lib" native="x86">LaurelBridge-3.3.40c.jar</File>
+      <File dependencyType="CommercialJar" appRootFolderType="TomcatRoot" payloadRelativeFolder="common/LaurelBridge" appRelativeFolder="lib" native="x64">LaurelBridge-3.3.40c.jar</File>
+      <File dependencyType="CommercialJar" appRootFolderType="TomcatRoot" payloadRelativeFolder="common/Aware/x86" appRelativeFolder="lib" native="x86">aware-j2k-2.3.jar</File>
+      <File dependencyType="CommercialJar" appRootFolderType="TomcatRoot" payloadRelativeFolder="common/Aware/x64" appRelativeFolder="lib" native="x64">aware-j2k-3.19.2.2.jar</File>
+      <!-- core interface components -->
+      <File dependencyType="AppJar" appRootFolderType="TomcatRoot" payloadRelativeFolder="server/jars" appRelativeFolder="lib" >CoreValueObjects-0.1.jar</File>
+      <File dependencyType="AppJar" appRootFolderType="TomcatRoot" payloadRelativeFolder="server/jars" appRelativeFolder="lib" >VixCommon-0.1.jar</File>
+      <File dependencyType="AppJar" appRootFolderType="TomcatRoot" payloadRelativeFolder="server/jars" appRelativeFolder="lib" >CacheAPI-0.1.jar</File>
+      <File dependencyType="AppJar" appRootFolderType="TomcatRoot" payloadRelativeFolder="server/jars" appRelativeFolder="lib" >ImagingCommon-0.1.jar</File>
+      <File dependencyType="AppJar" appRootFolderType="TomcatRoot" payloadRelativeFolder="server/jars" appRelativeFolder="lib" >FederationCommon-0.1.jar</File>
+      <File dependencyType="AppJar" appRootFolderType="TomcatRoot" payloadRelativeFolder="server/jars" appRelativeFolder="lib" >FederationWebAppCommon-0.1.jar</File>
+      <File dependencyType="AppJar" appRootFolderType="TomcatRoot" payloadRelativeFolder="server/jars" appRelativeFolder="lib" >ImagingVistaRealmClient-0.1.jar</File>
+      <File dependencyType="AppJar" appRootFolderType="TomcatRoot" payloadRelativeFolder="server/jars" appRelativeFolder="lib" >ExchangeCommon-0.1.jar</File>
+      <File dependencyType="AppJar" appRootFolderType="TomcatRoot" payloadRelativeFolder="server/jars" appRelativeFolder="lib" >MIXCommon-0.1.jar</File>
+      <File dependencyType="AppJar" appRootFolderType="TomcatRoot" payloadRelativeFolder="server/jars" appRelativeFolder="lib" >DxCommon-0.1.jar</File>
+      <File dependencyType="AppJar" appRootFolderType="TomcatRoot" payloadRelativeFolder="server/jars" appRelativeFolder="lib" >Log4JEncryption-0.1.jar</File>
+      <File dependencyType="AppJar" appRootFolderType="TomcatRoot" payloadRelativeFolder="server/jars" appRelativeFolder="lib" >TransactionContext-0.1.jar</File>
+      <File dependencyType="AppJar" appRootFolderType="TomcatRoot" payloadRelativeFolder="server/jars" appRelativeFolder="lib" >ImagingExchangeBaseWebProxy-0.1.jar</File>
+      <File dependencyType="AppJar" appRootFolderType="TomcatRoot" payloadRelativeFolder="server/jars" appRelativeFolder="lib" >ImageConversion-0.1.jar</File>
+      <File dependencyType="AppJar" appRootFolderType="TomcatRoot" payloadRelativeFolder="server/jars" appRelativeFolder="lib" >IHECommon-0.1.jar</File>
+      <!-- core server components -->
+      <File dependencyType="AppJar" appRootFolderType="TomcatRoot" payloadRelativeFolder="server/jars" appRelativeFolder="lib" >TomcatAdapter-0.1.jar</File>
+      <File dependencyType="AppJar" appRootFolderType="TomcatRoot" payloadRelativeFolder="server/jars" appRelativeFolder="lib" >CoreRouter-0.1.jar</File>
+      <File dependencyType="AppJar" appRootFolderType="TomcatRoot" payloadRelativeFolder="server/jars" appRelativeFolder="lib" >ImagingRouterCache-0.1.jar</File>
+      <File dependencyType="AppJar" appRootFolderType="TomcatRoot" payloadRelativeFolder="server/jars" appRelativeFolder="lib" >ImagingRouter-0.1.jar</File>
+	  <File dependencyType="AppJar" appRootFolderType="TomcatRoot" payloadRelativeFolder="server/jars" appRelativeFolder="lib" >ImagingDicomRouter-0.1.jar</File>
+      
+      <File dependencyType="AppJar" appRootFolderType="TomcatRoot" payloadRelativeFolder="server/jars" appRelativeFolder="lib" >CoreRouterSemantics-0.1.jar</File>
+      <File dependencyType="AppJar" appRootFolderType="TomcatRoot" payloadRelativeFolder="server/jars" appRelativeFolder="lib" >CoreRouterAnnotation-0.1.jar</File>
+      <File dependencyType="AppJar" appRootFolderType="TomcatRoot" payloadRelativeFolder="server/jars" appRelativeFolder="lib" >DataSourceServiceProvider-0.1.jar</File>
+      <File dependencyType="AppJar" appRootFolderType="TomcatRoot" payloadRelativeFolder="server/jars" appRelativeFolder="lib" >SqlImageLocation-0.1.jar</File>
+      <File dependencyType="AppJar" appRootFolderType="TomcatRoot" payloadRelativeFolder="server/jars" appRelativeFolder="lib" >CacheImpl-0.1.jar</File>
+      <File dependencyType="AppJar" appRootFolderType="TomcatRoot" payloadRelativeFolder="server/jars" appRelativeFolder="lib" >ImagingExchangeCache-0.1.jar</File>
+      <File dependencyType="AppJar" appRootFolderType="TomcatRoot" payloadRelativeFolder="server/jars" appRelativeFolder="lib" >ImagingVistaRealm-0.1.jar</File>
+      <File dependencyType="AppJar" appRootFolderType="TomcatRoot" payloadRelativeFolder="server/jars" appRelativeFolder="lib" >VixServerHealth-0.1.jar</File>
+      
+	  <!-- DICOM server components -->
+      <File dependencyType="AppJar" appRootFolderType="TomcatRoot" payloadRelativeFolder="server/jars" appRelativeFolder="lib" >ImagingDicomCommon-0.1.jar</File>
+      <File dependencyType="AppJar" appRootFolderType="TomcatRoot" payloadRelativeFolder="server/jars" appRelativeFolder="lib" >ImagingDicomDCFCommon-0.1.jar</File>
+      <File dependencyType="AppJar" appRootFolderType="TomcatRoot" payloadRelativeFolder="server/jars" appRelativeFolder="lib" >DicomServicesCommon-0.1.jar</File>
+      <File dependencyType="AppJar" appRootFolderType="TomcatRoot" payloadRelativeFolder="server/jars" appRelativeFolder="lib" >ImagingDicomDCFUtilities-0.1.jar</File>
+      <File dependencyType="AppJar" appRootFolderType="TomcatRoot" payloadRelativeFolder="server/jars" appRelativeFolder="lib" >ImagingDicomUtilities-0.1.jar</File>
+      <File dependencyType="AppJar" appRootFolderType="TomcatRoot" payloadRelativeFolder="server/jars" appRelativeFolder="lib" >ImagingDicomSCU-0.1.jar</File>
+      <File dependencyType="AppJar" appRootFolderType="TomcatRoot" payloadRelativeFolder="server/jars" appRelativeFolder="lib" >ImagingDicomDCFSCU-0.1.jar</File>   
+      <File dependencyType="AppJar" appRootFolderType="TomcatRoot" payloadRelativeFolder="server/jars" appRelativeFolder="lib" >ImagingExchangeImageConversion-0.1.jar</File>
+      
+	  <!--service providers-->
+      <File dependencyType="AppJar" appRootFolderType="TomcatRoot" payloadRelativeFolder="server/jars" appRelativeFolder="lib" >FederationDataSourceProvider-0.1.jar</File>
+      <File dependencyType="AppJar" appRootFolderType="TomcatRoot" payloadRelativeFolder="server/jars" appRelativeFolder="lib" >VistaStorage-0.1.jar</File>
+      <File dependencyType="AppJar" appRootFolderType="TomcatRoot" payloadRelativeFolder="server/jars" appRelativeFolder="lib" >VistaDataSource-0.1.jar</File>
+      <File dependencyType="AppJar" appRootFolderType="TomcatRoot" payloadRelativeFolder="server/jars" appRelativeFolder="lib" >SiteServiceDataSourceProvider-0.1.jar</File>
+      <File dependencyType="AppJar" appRootFolderType="TomcatRoot" payloadRelativeFolder="server/jars" appRelativeFolder="lib" >TransactionLoggerLocalDataSourceProvider-0.1.jar</File>
+      <File dependencyType="AppJar" appRootFolderType="TomcatRoot" payloadRelativeFolder="server/jars" appRelativeFolder="lib" >VistaImagingDataSourceProvider-0.1.jar</File>
+      <File dependencyType="AppJar" appRootFolderType="TomcatRoot" payloadRelativeFolder="server/jars" appRelativeFolder="lib" >VixVistaImagingDataSourceProvider-0.1.jar</File>
+      <File dependencyType="AppJar" appRootFolderType="TomcatRoot" payloadRelativeFolder="server/jars" appRelativeFolder="lib" >SiteServiceCommon-0.1.jar</File>
+      <File dependencyType="AppJar" appRootFolderType="TomcatRoot" payloadRelativeFolder="server/jars" appRelativeFolder="lib" >VistaDataSourceCommon-0.1.jar</File>
+      <File dependencyType="AppJar" appRootFolderType="TomcatRoot" payloadRelativeFolder="server/jars" appRelativeFolder="lib" >ExchangeCommonDataSource-0.1.jar</File>
+      <File dependencyType="AppJar" appRootFolderType="TomcatRoot" payloadRelativeFolder="server/jars" appRelativeFolder="lib" >ExchangeDataSource-0.1.jar</File>
+      <File dependencyType="AppJar" appRootFolderType="TomcatRoot" payloadRelativeFolder="server/jars" appRelativeFolder="lib" >MIXCommonDataSource-0.1.jar</File>
+      <File dependencyType="AppJar" appRootFolderType="TomcatRoot" payloadRelativeFolder="server/jars" appRelativeFolder="lib" >MIXDataSource-0.1.jar</File>
+      <File dependencyType="AppJar" appRootFolderType="TomcatRoot" payloadRelativeFolder="server/jars" appRelativeFolder="lib" >DxDataSourceProvider-0.1.jar</File>
+      <!-- shared web components -->
+      <File dependencyType="AppJar" appRootFolderType="TomcatRoot" payloadRelativeFolder="server/jars" appRelativeFolder="lib" >BaseWebFacade-0.1.jar</File>
+      <File dependencyType="AppJar" appRootFolderType="TomcatRoot" payloadRelativeFolder="server/jars" appRelativeFolder="lib" >ImagingBaseWebFacade-0.1.jar</File>
+      <File dependencyType="AppJar" appRootFolderType="TomcatRoot" payloadRelativeFolder="server/jars" appRelativeFolder="lib" >ExchangeSiteServiceSOAPServer-0.1.jar</File>
+      <File dependencyType="AppJar" appRootFolderType="TomcatRoot" payloadRelativeFolder="server/jars" appRelativeFolder="lib" >SiteServiceSOAPServer-0.1.jar</File>
+      <File dependencyType="AppJar" appRootFolderType="TomcatRoot" payloadRelativeFolder="server/jars" appRelativeFolder="lib" >SiteServiceSOAPClient-0.1.jar</File>
+      <!-- Pathology components -->
+      <File dependencyType="AppJar" appRootFolderType="TomcatRoot" payloadRelativeFolder="server/jars" appRelativeFolder="lib" >PathologyCommon-0.1.jar</File>
+      <File dependencyType="AppJar" appRootFolderType="TomcatRoot" payloadRelativeFolder="server/jars" appRelativeFolder="lib" >PathologyCommands-0.1.jar</File>
+      <File dependencyType="AppJar" appRootFolderType="TomcatRoot" payloadRelativeFolder="server/jars" appRelativeFolder="lib" >PathologyFederationCommon-0.1.jar</File>
+      <File dependencyType="AppJar" appRootFolderType="TomcatRoot" payloadRelativeFolder="server/jars" appRelativeFolder="lib" >PathologyFederationWebAppComponents-0.1.jar</File>
+      <File dependencyType="AppJar" appRootFolderType="TomcatRoot" payloadRelativeFolder="server/jars" appRelativeFolder="lib" >PathologyVistaImagingDataSourceProvider-0.1.jar</File>
+      <File dependencyType="AppJar" appRootFolderType="TomcatRoot" payloadRelativeFolder="server/jars" appRelativeFolder="lib" >HydraCommon-0.1.jar</File>
+      <!-- Viewer Imaging components -->
+      <File dependencyType="AppJar" appRootFolderType="TomcatRoot" payloadRelativeFolder="server/jars" appRelativeFolder="lib" >ViewerImagingCommon-0.1.jar</File>
+      <File dependencyType="AppJar" appRootFolderType="TomcatRoot" payloadRelativeFolder="server/jars" appRelativeFolder="lib" >ViewerImagingDataSourceProvider-0.1.jar</File>
+      <File dependencyType="AppJar" appRootFolderType="TomcatRoot" payloadRelativeFolder="server/jars" appRelativeFolder="lib" >ViewerImagingRouter-0.1.jar</File>
+      <!-- User Preference components -->
+      <File dependencyType="AppJar" appRootFolderType="TomcatRoot" payloadRelativeFolder="server/jars" appRelativeFolder="lib" >VistaUserPreferenceCommon-0.1.jar</File>
+      <File dependencyType="AppJar" appRootFolderType="TomcatRoot" payloadRelativeFolder="server/jars" appRelativeFolder="lib" >VistaUserPreferenceDataSourceProvider-0.1.jar</File>
+      <File dependencyType="AppJar" appRootFolderType="TomcatRoot" payloadRelativeFolder="server/jars" appRelativeFolder="lib" >VistaUserPreferenceRouter-0.1.jar</File>
+      <!-- Presentation State components -->
+      <File dependencyType="AppJar" appRootFolderType="TomcatRoot" payloadRelativeFolder="server/jars" appRelativeFolder="lib" >PresentationStateCommon-0.1.jar</File>
+      <File dependencyType="AppJar" appRootFolderType="TomcatRoot" payloadRelativeFolder="server/jars" appRelativeFolder="lib" >PresentationStateVistaImagingDataSourceProvider-0.1.jar</File>
+      <File dependencyType="AppJar" appRootFolderType="TomcatRoot" payloadRelativeFolder="server/jars" appRelativeFolder="lib" >PresentationStateRouter-0.1.jar</File>
+	  
+      <File dependencyType="AppJar" appRootFolderType="TomcatRoot" payloadRelativeFolder="server/jars" appRelativeFolder="lib" >IndexTermCommon-0.1.jar</File>
+      <File dependencyType="AppJar" appRootFolderType="TomcatRoot" payloadRelativeFolder="server/jars" appRelativeFolder="lib" >IndexTermVistaImagingDataSourceProvider-0.1.jar</File>
+      <File dependencyType="AppJar" appRootFolderType="TomcatRoot" payloadRelativeFolder="server/jars" appRelativeFolder="lib" >IndexTermRouter-0.1.jar</File>
+      <File dependencyType="AppJar" appRootFolderType="TomcatRoot" payloadRelativeFolder="server/jars" appRelativeFolder="lib" >IndexTermFederationDataSourceProvider-0.1.jar</File>
+	  <File dependencyType="AppJar" appRootFolderType="TomcatRoot" payloadRelativeFolder="server/jars" appRelativeFolder="lib" >IndexTermFederationWebAppComponents-0.1.jar</File>
+      
+      <File dependencyType="AppJar" appRootFolderType="TomcatRoot" payloadRelativeFolder="server/jars" appRelativeFolder="lib" >TIUCommon-0.1.jar</File>
+      <File dependencyType="AppJar" appRootFolderType="TomcatRoot" payloadRelativeFolder="server/jars" appRelativeFolder="lib" >TIUVistaImagingDataSourceProvider-0.1.jar</File>
+      <File dependencyType="AppJar" appRootFolderType="TomcatRoot" payloadRelativeFolder="server/jars" appRelativeFolder="lib" >TIURouter-0.1.jar</File>
+      <File dependencyType="AppJar" appRootFolderType="TomcatRoot" payloadRelativeFolder="server/jars" appRelativeFolder="lib" >TIUFederationDataSourceProvider-0.1.jar</File>
+	  <File dependencyType="AppJar" appRootFolderType="TomcatRoot" payloadRelativeFolder="server/jars" appRelativeFolder="lib" >TIUFederationWebAppComponents-0.1.jar</File>
+      
+      <File dependencyType="AppJar" appRootFolderType="TomcatRoot" payloadRelativeFolder="server/jars" appRelativeFolder="lib" >ConsultCommon-0.1.jar</File>
+      <File dependencyType="AppJar" appRootFolderType="TomcatRoot" payloadRelativeFolder="server/jars" appRelativeFolder="lib" >ConsultVistaImagingDataSourceProvider-0.1.jar</File>
+      <File dependencyType="AppJar" appRootFolderType="TomcatRoot" payloadRelativeFolder="server/jars" appRelativeFolder="lib" >ConsultRouter-0.1.jar</File>
+      <File dependencyType="AppJar" appRootFolderType="TomcatRoot" payloadRelativeFolder="server/jars" appRelativeFolder="lib" >ConsultFederationDataSourceProvider-0.1.jar</File>
+	  <File dependencyType="AppJar" appRootFolderType="TomcatRoot" payloadRelativeFolder="server/jars" appRelativeFolder="lib" >ConsultFederationWebAppComponents-0.1.jar</File>
+
+      <!-- web applications -->
+      <File dependencyType="AppWar" appRootFolderType="TomcatRoot" payloadRelativeFolder="server/wars" appRelativeFolder="webapps" >DefaultVISAWebApp-0.1.war</File>
+      <File dependencyType="AppWar" appRootFolderType="TomcatRoot" payloadRelativeFolder="server/wars" appRelativeFolder="webapps" >FederationWebApp-0.1.war</File>
+      <File dependencyType="AppWar" appRootFolderType="TomcatRoot" payloadRelativeFolder="server/wars" appRelativeFolder="webapps" >IDSWebApp-0.1.war</File>
+      <File dependencyType="AppWar" appRootFolderType="TomcatRoot" payloadRelativeFolder="server/wars" appRelativeFolder="webapps" >VixGuiWebApp-0.1.war</File>
+      <File dependencyType="AppWar" appRootFolderType="TomcatRoot" payloadRelativeFolder="server/wars" appRelativeFolder="webapps" >SiteServiceWebApp-0.1.war</File>
+      <File dependencyType="AppWar" appRootFolderType="TomcatRoot" payloadRelativeFolder="server/wars" appRelativeFolder="webapps" >VixServerHealthWebApp-0.1.war</File>
+      <File dependencyType="AppWar" appRootFolderType="TomcatRoot" payloadRelativeFolder="server/wars" appRelativeFolder="webapps" >AWIVWebApp-0.1.war</File>
+      <File dependencyType="AppWar" appRootFolderType="TomcatRoot" payloadRelativeFolder="server/wars" appRelativeFolder="webapps" >AxWebApp-0.1.war</File>
+      <File dependencyType="AppWar" appRootFolderType="TomcatRoot" payloadRelativeFolder="server/wars" appRelativeFolder="webapps" >ExchangeWebApp-0.1.war</File>
+      <File dependencyType="AppWar" appRootFolderType="TomcatRoot" payloadRelativeFolder="server/wars" appRelativeFolder="webapps" >MIXWebApp-0.1.war</File>
+      <File dependencyType="AppWar" appRootFolderType="TomcatRoot" payloadRelativeFolder="server/wars" appRelativeFolder="webapps" >VixCacheWebApp-0.1.war</File>
+      <File dependencyType="AppWar" appRootFolderType="TomcatRoot" payloadRelativeFolder="server/wars" appRelativeFolder="webapps" >AwivClientWebApp-0.1.war</File>
+      <File dependencyType="AppWar" appRootFolderType="TomcatRoot" payloadRelativeFolder="server/wars" appRelativeFolder="webapps" >JmxWebApp-0.1.war</File>
+      <File dependencyType="AppWar" appRootFolderType="TomcatRoot" payloadRelativeFolder="server/wars" appRelativeFolder="webapps" >PatientWebApp-0.1.war</File>
+      <File dependencyType="AppWar" appRootFolderType="TomcatRoot" payloadRelativeFolder="server/wars" appRelativeFolder="webapps" >StudyWebApp-0.1.war</File>
+      <File dependencyType="AppWar" appRootFolderType="TomcatRoot" payloadRelativeFolder="server/wars" appRelativeFolder="webapps" >ImageWebApp-0.1.war</File>
+      <File dependencyType="AppWar" appRootFolderType="TomcatRoot" payloadRelativeFolder="server/wars" appRelativeFolder="webapps" >PathologyWebApp-0.1.war</File>
+      <File dependencyType="AppWar" appRootFolderType="TomcatRoot" payloadRelativeFolder="server/wars" appRelativeFolder="webapps" >ViewerStudyWebApp-0.1.war</File>
+      <File dependencyType="AppWar" appRootFolderType="TomcatRoot" payloadRelativeFolder="server/wars" appRelativeFolder="webapps" >ImagingDataWebApp-0.1.war</File>
+      <File dependencyType="AppWar" appRootFolderType="TomcatRoot" payloadRelativeFolder="server/wars" appRelativeFolder="webapps" >ViewerImagingWebApp-0.1.war</File>
+      <File dependencyType="AppWar" appRootFolderType="TomcatRoot" payloadRelativeFolder="server/wars" appRelativeFolder="webapps" >VistaUserPreferenceWebApp-0.1.war</File>
+      <File dependencyType="AppWar" appRootFolderType="TomcatRoot" payloadRelativeFolder="server/wars" appRelativeFolder="webapps" >PresentationStateWebApp-0.1.war</File>
+	  <File dependencyType="AppWar" appRootFolderType="TomcatRoot" payloadRelativeFolder="server/wars" appRelativeFolder="webapps" >EditSiteServiceWebApp-0.1.war</File>
+	  <File dependencyType="AppWar" appRootFolderType="TomcatRoot" payloadRelativeFolder="server/wars" appRelativeFolder="webapps" >IndexTermWebApp-0.1.war</File>
+	  <File dependencyType="AppWar" appRootFolderType="TomcatRoot" payloadRelativeFolder="server/wars" appRelativeFolder="webapps" >TIUWebApp-0.1.war</File>
+	  <File dependencyType="AppWar" appRootFolderType="TomcatRoot" payloadRelativeFolder="server/wars" appRelativeFolder="webapps" >ConsultWebApp-0.1.war</File>
+
+      <!-- property files -->
+      <File dependencyType="JavaPropertyFile" appRootFolderType="VixConfigRoot" payloadRelativeFolder="server/properties" appRelativeFolder="" >jcifs.properties</File>
+      <File dependencyType="XmlConfigFile" appRootFolderType="VixConfigRoot" payloadRelativeFolder="server/properties" appRelativeFolder="" >client-config.wsdd</File>
+      <File dependencyType="TextFile" appRootFolderType="VixConfigRoot" payloadRelativeFolder="server/properties" appRelativeFolder="" >configureSiteResolutionProvider.commands</File>
+      <File dependencyType="TextFile" appRootFolderType="VixConfigRoot" payloadRelativeFolder="server/properties" appRelativeFolder="" >ExchangeModalityBlackList.txt</File>
+
+      <!-- Static files -->
+      <File dependencyType="XmlConfigFile" appRootFolderType="VixConfigRoot" payloadRelativeFolder="server/properties" appRelativeFolder="" >VistaConnectionConfiguration.Config</File>
+      <File dependencyType="XmlConfigFile" appRootFolderType="VixConfigRoot" payloadRelativeFolder="server/properties" appRelativeFolder="" >VistaSessionConfiguration.Config</File>
+      <File dependencyType="XmlConfigFile" appRootFolderType="VixConfigRoot" payloadRelativeFolder="server/properties" appRelativeFolder="" >JavaLogConfiguration.Config</File>
+      <File dependencyType="XmlConfigFile" appRootFolderType="VixConfigRoot" payloadRelativeFolder="server/properties" appRelativeFolder="" >TransactionLoggerLocalDataSource-1.0.Config</File>
+      <File dependencyType="XmlConfigFile" appRootFolderType="VixConfigRoot" payloadRelativeFolder="server/properties" appRelativeFolder="" >VixServerHealthWebAppConfiguration.Config</File>
+      <File dependencyType="XmlConfigFile" appRootFolderType="VixConfigRoot" payloadRelativeFolder="server/properties" appRelativeFolder="" >SerialKiller.Config</File>
+      <File dependencyType="XmlConfigFile" appRootFolderType="VixConfigRoot" payloadRelativeFolder="server/properties" appRelativeFolder="" >MuseDataSource-1.0.Config</File>
+      <File dependencyType="XmlConfigFile" appRootFolderType="VixConfigRoot" payloadRelativeFolder="server/properties" appRelativeFolder="" >DicomServicesDataSource-1.0.Config</File>
+
+      <!-- other -->
+      <File dependencyType="Certificate" appRootFolderType="CertificateRoot" payloadRelativeFolder="server" appRelativeFolder="" >LocalAdmin.jks</File>
+      <!-- canned images -->
+      <File dependencyType="ResourceFile" appRootFolderType="VixConfigRoot" payloadRelativeFolder="server/images" appRelativeFolder="images" >abscine.JPG</File>
+      <File dependencyType="ResourceFile" appRootFolderType="VixConfigRoot" payloadRelativeFolder="server/images" appRelativeFolder="images" >absekg.JPG</File>
+      <File dependencyType="ResourceFile" appRootFolderType="VixConfigRoot" payloadRelativeFolder="server/images" appRelativeFolder="images" >abspacg.JPG</File>
+      <File dependencyType="ResourceFile" appRootFolderType="VixConfigRoot" payloadRelativeFolder="server/images" appRelativeFolder="images" >abspaci.JPG</File>
+      <File dependencyType="ResourceFile" appRootFolderType="VixConfigRoot" payloadRelativeFolder="server/images" appRelativeFolder="images" >magavi.JPG</File>
+      <File dependencyType="ResourceFile" appRootFolderType="VixConfigRoot" payloadRelativeFolder="server/images" appRelativeFolder="images" >magdoc.JPG</File>
+      <File dependencyType="ResourceFile" appRootFolderType="VixConfigRoot" payloadRelativeFolder="server/images" appRelativeFolder="images" >maghtml.JPG</File>
+      <File dependencyType="ResourceFile" appRootFolderType="VixConfigRoot" payloadRelativeFolder="server/images" appRelativeFolder="images" >magpdf.JPG</File>
+      <File dependencyType="ResourceFile" appRootFolderType="VixConfigRoot" payloadRelativeFolder="server/images" appRelativeFolder="images" >magrtf.JPG</File>
+      <File dependencyType="ResourceFile" appRootFolderType="VixConfigRoot" payloadRelativeFolder="server/images" appRelativeFolder="images" >magtext.JPG</File>
+      <File dependencyType="ResourceFile" appRootFolderType="VixConfigRoot" payloadRelativeFolder="server/images" appRelativeFolder="images" >magwav.JPG</File>
+      <File dependencyType="ResourceFile" appRootFolderType="VixConfigRoot" payloadRelativeFolder="server/images" appRelativeFolder="images" >magsensitive.JPG</File>
+      <!-- customized java runtime -->
+    </DependencyFiles>
+    <WebAppDependencyFiles/>
+    <JvmEnvironmentVariables>
+      <JvmEnvironmentVariable option="AddUpdate" type="property" name="com.sun.management.jmxremote">true</JvmEnvironmentVariable>
+      <JvmEnvironmentVariable option="AddUpdate" type="property" name="com.sun.management.jmxremote.port">9090</JvmEnvironmentVariable>
+      <JvmEnvironmentVariable option="AddUpdate" type="property" name="com.sun.management.jmxremote.ssl">false</JvmEnvironmentVariable>
+      <JvmEnvironmentVariable option="AddUpdate" type="property" name="com.sun.management.jmxremote.authenticate">false</JvmEnvironmentVariable>
+      <JvmEnvironmentVariable option="AddUpdate" type="property" name="java.protocol.handler.pkgs">gov.va.med.imaging.url</JvmEnvironmentVariable>
+      <JvmEnvironmentVariable option="AddUpdate" type="property" name="nearline.retrycount">1</JvmEnvironmentVariable>
+      <JvmEnvironmentVariable option="AddUpdate" type="memory" name="PermSize">128m</JvmEnvironmentVariable>
+      <JvmEnvironmentVariable option="AddUpdate" type="memory" name="MaxPermSize">256m</JvmEnvironmentVariable>
+      <!-- garbage collection -->
+      <JvmEnvironmentVariable option="AddUpdate" type="memory" name="+UseG1GC"></JvmEnvironmentVariable>
+      <JvmEnvironmentVariable option="AddUpdate" type="memory" name="MaxGCPauseMillis">200</JvmEnvironmentVariable>
+      <JvmEnvironmentVariable option="AddUpdate" type="memory" name="G1HeapRegionSize">10</JvmEnvironmentVariable>
+      <!-- The following items will have the VixConfigRoot folder prepended -->
+      <JvmEnvironmentVariable appRootFolderType="VixConfigRoot" option="AddUpdate" type="property" name="jcifs.properties">jcifs.properties</JvmEnvironmentVariable>
+      <JvmEnvironmentVariable appRootFolderType="VixConfigRoot" option="Remove" type="property" name="log4j.configuration">log4j.properties</JvmEnvironmentVariable>
+      <JvmEnvironmentVariable appRootFolderType="VixConfigRoot" option="AddUpdate" type="property" name="log4j.configurationFile">log4j2.xml</JvmEnvironmentVariable>
+      <JvmEnvironmentVariable appRootFolderType="VixConfigRoot" option="AddUpdate" type="property" name="axis.ClientConfigFile">client-config.wsdd</JvmEnvironmentVariable>
+    </JvmEnvironmentVariables>
+    <ConfigurationFileUtilities>
+      <ConfigurationFileUtility configUtilityType="ViX" jar="CoreRouter-0.1.jar" package="gov.va.med.imaging.exchange.configuration.utility.AppConfigurationUtility"/>
+      <ConfigurationFileUtility configUtilityType="Cache" jar="ImagingCacheImpl-0.1.jar" package="gov.va.med.imaging.storage.cache.interactive.InteractiveCacheContainer"/>
+      <ConfigurationFileUtility configUtilityType="SiteResolutionProvider" jar="SiteServiceDataSourceProvider-0.1.jar" package="gov.va.med.siteservice.SiteResolutionProvider"/>
+      <ConfigurationFileUtility configUtilityType="ImageConversion" jar="ImageConversion-0.1.jar" package="gov.va.med.imaging.conversion.configuration.ImageConversionConfiguration"/>
+      <ConfigurationFileUtility configUtilityType="VistaDataSourceProvider" jar="VistaImagingDataSourceProvider-0.1.jar" package="gov.va.med.imaging.vistaimagingdatasource.VistaImagingDataSourceProvider"/>
+      <ConfigurationFileUtility configUtilityType="VistaOnlyDataSourceProvider" jar="VistaDataSource-0.1.jar" package="gov.va.med.imaging.vistadatasource.VistaDataSourceProvider"/>
+      <ConfigurationFileUtility configUtilityType="FederationDataSourceProvider" jar="FederationDataSourceProvider-0.1.jar" package="gov.va.med.imaging.federationdatasource.FederationDataSourceProvider"/>
+      <ConfigurationFileUtility configUtilityType="TransactionLoggerDataSourceProvider" jar="TransactionLoggerLocalDataSourceProvider-0.1.jar" package="gov.va.med.imaging.transactionlogger.datasource.TransactionLoggerLocalDataSourceProvider"/>
+      <ConfigurationFileUtility configUtilityType="VixHealthConfiguration" jar="VixServerHealth-0.1.jar" package="gov.va.med.imaging.health.configuration.VixHealthConfigurationLoader"/>
+      <ConfigurationFileUtility configUtilityType="NotificationConfiguration" jar="ImagingCommon-0.1.jar" package="gov.va.med.imaging.notifications.NotificationConfiguration"/>
+      <ConfigurationFileUtility configUtilityType="NotificationEmailConfiguration" jar="ImagingCommon-0.1.jar" package="gov.va.med.imaging.notifications.email.NotificationEmailConfiguration"/>
+      <ConfigurationFileUtility configUtilityType="VixLogConfiguration" jar="ImagingCommon-0.1.jar" package="gov.va.med.imaging.javalogs.JavaLogConfiguration"/>
+      <ConfigurationFileUtility configUtilityType="ByteBufferPoolConfiguration" jar="CoreValueObjects-0.1.jar" package="gov.va.med.imaging.exchange.storage.ByteBufferPoolConfiguration"/>
+      <ConfigurationFileUtility configUtilityType="VixLogConfiguration" jar="ImagingCommon-0.1.jar" package="gov.va.med.imaging.javalogs.JavaLogConfiguration"/>
+      <ConfigurationFileUtility configUtilityType="IdsProxyConfiguration" jar="ImagingExchangeBaseWebProxy-0.1.jar" package="gov.va.med.imaging.proxy.ids.configuration.IDSProxyConfiguration"/>
+      <ConfigurationFileUtility configUtilityType="VistaConnectionConfiguration" jar="vistaConnection-0.1.jar" package="gov.va.med.imaging.url.vista.configuration.VistaConnectionConfiguration"/>
+      <ConfigurationFileUtility configUtilityType="ExchangeDataSourceProvider" jar="ExchangeDataSource-0.1.jar" package="gov.va.med.imaging.exchangedatasource.ExchangeDataSourceProvider"/>
+      <ConfigurationFileUtility configUtilityType="MixDataSourceProvider" jar="MIXDataSource-0.1.jar" package="gov.va.med.imaging.mixdatasource.MixDataSourceProvider"/>
+      <ConfigurationFileUtility configUtilityType="DxDataSourceProvider" jar="DxDataSourceProvider-0.1.jar" package="gov.va.med.imaging.dx.datasource.DxDataSourceProvider"/>
+      <ConfigurationFileUtility configUtilityType="ExchangeProcedureFilterTermsConfiguration" jar="CoreValueObjects-0.1.jar" package="gov.va.med.imaging.exchange.configuration.DicomProcedureFilterTermsConfiguration"/>
+      <ConfigurationFileUtility configUtilityType="CommandConfiguration" jar="CoreRouter-0.1.jar" package="gov.va.med.imaging.core.router.commands.configuration.CommandConfiguration"/>
+      <ConfigurationFileUtility configUtilityType="ImagingFacadeConfiguration" jar="ImagingBaseWebFacade-0.1.jar" package="gov.va.med.imaging.exchange.business.configuration.ImagingFacadeConfiguration"/>
+      <ConfigurationFileUtility configUtilityType="FileSystemCacheConfigurator" jar="CacheImpl-0.1.jar" package="gov.va.med.imaging.storage.cache.impl.filesystem.configuration.FileSystemCacheConfigurator"/>
+      <!-- <ConfigurationFileUtility configUtilityType="MuseDataSourceProvider" jar="MuseDataSourceProvider-0.1.jar" package="gov.va.med.imaging.musedatasource.MuseDataSourceProvider"/> -->
+    </ConfigurationFileUtilities>
+    <WebApplications>
+      <WebApplication option="AddUpdate" path="/ROOT" useContextFile="true">DefaultVISAWebApp-0.1.war</WebApplication>
+      <WebApplication option="AddUpdate" path="/FederationWebApp" useContextFile="true">FederationWebApp-0.1.war</WebApplication>
+      <WebApplication option="AddUpdate" path="/IDSWebApp" useContextFile="true">IDSWebApp-0.1.war</WebApplication>
+      <WebApplication option="AddUpdate" path="/Vix" useContextFile="true">VixGuiWebApp-0.1.war</WebApplication>
+      <WebApplication option="AddUpdate" path="/siteservicewebapp" useContextFile="true">SiteServiceWebApp-0.1.war</WebApplication>
+      <WebApplication option="AddUpdate" path="/VixServerHealthWebApp" useContextFile="true">VixServerHealthWebApp-0.1.war</WebApplication>
+      <WebApplication option="AddUpdate" path="/AWIVWebApp" useContextFile="true">AWIVWebApp-0.1.war</WebApplication>
+      <WebApplication option="AddUpdate" path="/ImagingExchangeWebApp" useContextFile="false">ExchangeWebApp-0.1.war</WebApplication>
+      <WebApplication option="Remove" path="/CacheWeb" useContextFile="true">CacheWeb-0.1.war</WebApplication>
+      <WebApplication option="Remove" path="/AWIVWrapperWebApp" useContextFile="true">AWIVWrapperWebApp-0.1.war</WebApplication>
+      <WebApplication option="AddUpdate" path="/Awiv" useContextFile="true">AwivClientWebApp-0.1.war</WebApplication>
+      <WebApplication option="AddUpdate" path="/JmxWebApp" useContextFile="true">JmxWebApp-0.1.war</WebApplication>
+      <WebApplication option="AddUpdate" path="/VixCache" useContextFile="true">VixCacheWebApp-0.1.war</WebApplication>
+      <WebApplication option="AddUpdate" path="/PatientWebApp" useContextFile="true">PatientWebApp-0.1.war</WebApplication>
+      <WebApplication option="AddUpdate" path="/ImageWebApp" useContextFile="true">ImageWebApp-0.1.war</WebApplication>
+      <WebApplication option="AddUpdate" path="/Study" useContextFile="true">StudyWebApp-0.1.war</WebApplication>
+      <WebApplication option="AddUpdate" path="/PathologyWebApp" useContextFile="true">PathologyWebApp-0.1.war</WebApplication>
+      <WebApplication option="AddUpdate" path="/ViewerStudyWebApp" useContextFile="true">ViewerStudyWebApp-0.1.war</WebApplication>
+      <WebApplication option="AddUpdate" path="/ImagingDataWebApp" useContextFile="true">ImagingDataWebApp-0.1.war</WebApplication>
+      <WebApplication option="AddUpdate" path="/MIXWebApp" useContextFile="true">MIXWebApp-0.1.war</WebApplication>
+      <WebApplication option="AddUpdate" path="/AxWebApp" useContextFile="true">AxWebApp-0.1.war</WebApplication>
+      <WebApplication option="AddUpdate" path="/ViewerImagingWebApp" useContextFile="true">ViewerImagingWebApp-0.1.war</WebApplication>
+      <WebApplication option="AddUpdate" path="/VistaUserPreferenceWebApp" useContextFile="true">VistaUserPreferenceWebApp-0.1.war</WebApplication>
+      <WebApplication option="AddUpdate" path="/PresentationStateWebApp" useContextFile="true">PresentationStateWebApp-0.1.war</WebApplication>
+	  <WebApplication option="AddUpdate" path="/EditSiteServiceWebApp" useContextFile="true">EditSiteServiceWebApp-0.1.war</WebApplication>
+	  <WebApplication option="AddUpdate" path="/IndexTermWebApp" useContextFile="true">IndexTermWebApp-0.1.war</WebApplication>
+	  <WebApplication option="AddUpdate" path="/TIUWebApp" useContextFile="true">TIUWebApp-0.1.war</WebApplication>
+	  <WebApplication option="AddUpdate" path="/ConsultWebApp" useContextFile="true">ConsultWebApp-0.1.war</WebApplication>
+    </WebApplications>
+    <DeprecatedFiles>
+      <!-- these files get deleted by the installer if they exist then are recreated either by the installer or the VIX -->
+      <File deprecationType="recreate" appRootFolderType="VixConfigRoot" appRelativeFolder="" >ViXConfig.xml</File>
+      <File deprecationType="recreate" appRootFolderType="VixConfigRoot" appRelativeFolder="" >PeriodicCommandConfiguration.config</File>
+      <File deprecationType="recreate" appRootFolderType="VixConfigRoot" appRelativeFolder="" >ImageConversionConfig.xml</File>
+      <File deprecationType="recreate" appRootFolderType="VixConfigRoot" appRelativeFolder="" >ExchangeDataSource-1.0.config</File>
+      <File deprecationType="recreate" appRootFolderType="VixConfigRoot" appRelativeFolder="" >VistaImagingDataSource-1.0.config</File>
+      <File deprecationType="recreate" appRootFolderType="VixConfigRoot" appRelativeFolder="" >VistaDataSource-1.0.config</File>
+      <File deprecationType="recreate" appRootFolderType="VixConfigRoot" appRelativeFolder="" >NotificationConfiguration.config</File>
+      <File deprecationType="recreate" appRootFolderType="VixConfigRoot" appRelativeFolder="" >NotificationEmailConfiguration.config</File>
+      <File deprecationType="recreate" appRootFolderType="VixConfigRoot" appRelativeFolder="" >JavaLogConfiguration.config</File>
+      <File deprecationType="recreate" appRootFolderType="VixConfigRoot" appRelativeFolder="" >IDSProxyConfiguration.config</File>
+      <File deprecationType="recreate" appRootFolderType="VixConfigRoot" appRelativeFolder="" >FederationDataSource-1.0.config</File>
+      <File deprecationType="recreate" appRootFolderType="VixConfigRoot" appRelativeFolder="" >SiteServiceSiteResolution-1.0.config</File>
+      <File deprecationType="recreate" appRootFolderType="VixConfigRoot" appRelativeFolder="" >TransactionLoggerLocalDataSource-1.0.config</File>
+      <File deprecationType="recreate" appRootFolderType="VixConfigRoot" appRelativeFolder="" >VistaSessionConfiguration.config</File>
+      <File deprecationType="recreate" appRootFolderType="VixConfigRoot" appRelativeFolder="" >VistaConnectionConfiguration.config</File>
+      <File deprecationType="recreate" appRootFolderType="VixConfigRoot" appRelativeFolder="" >VixServerHealthWebAppConfiguration.config</File>
+      <File deprecationType="recreate" appRootFolderType="VixConfigRoot" appRelativeFolder="" >ByteBufferPoolConfiguration.config</File>
+      <File deprecationType="recreate" appRootFolderType="VixConfigRoot" appRelativeFolder="" >FederationWebAppConfiguration.config</File>
+      <File deprecationType="recreate" appRootFolderType="VixConfigRoot" appRelativeFolder="" >VIXHealthConfig.xml</File>
+      <File deprecationType="recreate" appRootFolderType="VixConfigRoot" appRelativeFolder="cache-config" >ImagingExchangeCache-cache.xml</File>
+      <File deprecationType="recreate" appRootFolderType="VixConfigRoot" appRelativeFolder="" >CommandConfiguration.config</File>
+      <File deprecationType="recreate" appRootFolderType="VixConfigRoot" appRelativeFolder="" >VistaStorageConfiguration.config</File>
+      <File deprecationType="recreate" appRootFolderType="VixConfigRoot" appRelativeFolder="" >VistaConnectionConfiguration.config</File>
+      <File deprecationType="recreate" appRootFolderType="VixConfigRoot" appRelativeFolder="" >configureSiteResolutionProvider.commands</File>
+      <File deprecationType="recreate" appRootFolderType="VixConfigRoot" appRelativeFolder="" >DicomProcedureFilterTermsConfiguration.config</File>
+      <File deprecationType="recreate" appRootFolderType="VixConfigRoot" appRelativeFolder="" >AwivClientConfiguration.config</File>
+      <File deprecationType="recreate" appRootFolderType="VixConfigRoot" appRelativeFolder="" >ImagingFacadeConfiguration.config</File>
+      <File deprecationType="recreate" appRootFolderType="VixConfigRoot" appRelativeFolder="" >StudyFacadeConfiguration.config</File>
+      <!-- gone for good - these can be removed later -->
+      <File deprecationType="permanent" appRootFolderType="VixConfigRoot" appRelativeFolder="" >MuseConfiguration.config</File>
+      <File deprecationType="permanent" appRootFolderType="TomcatRoot" appRelativeFolder="lib" >backport-util-concurrent-2.1.jar</File>
+      <File deprecationType="permanent" appRootFolderType="VixConfigRoot" appRelativeFolder="" >ExchangeInterfaceProcedureFilterTerms.xml</File>
+      <File deprecationType="permanent" appRootFolderType="VixConfigRoot" appRelativeFolder="" >SiteServiceCache.xml</File>
+      <File deprecationType="permanent" appRootFolderType="VixConfigRoot" appRelativeFolder="" >SiteServiceRegionCache.xml</File>
+      <!-- axis 2 update -->
+      <File deprecationType="permanent" appRootFolderType="TomcatRoot" appRelativeFolder="lib" >axiom-api-1.2.8.jar</File>
+      <File deprecationType="permanent" appRootFolderType="TomcatRoot" appRelativeFolder="lib" >axiom-dom-1.2.8.jar</File>
+      <File deprecationType="permanent" appRootFolderType="TomcatRoot" appRelativeFolder="lib" >axiom-impl-1.2.8.jar</File>
+      <File deprecationType="permanent" appRootFolderType="TomcatRoot" appRelativeFolder="lib" >axis2-adb-1.5.jar</File>
+      <File deprecationType="permanent" appRootFolderType="TomcatRoot" appRelativeFolder="lib" >axis2-kernel-1.5.jar</File>
+      <File deprecationType="permanent" appRootFolderType="TomcatRoot" appRelativeFolder="lib" >axis2-transport-http-1.5.jar</File>
+      <File deprecationType="permanent" appRootFolderType="TomcatRoot" appRelativeFolder="lib" >axis2-transport-local-1.5.jar</File>
+      <File deprecationType="permanent" appRootFolderType="TomcatRoot" appRelativeFolder="lib" >axis2-xmlbeans-1.5.jar</File>
+      <File deprecationType="permanent" appRootFolderType="TomcatRoot" appRelativeFolder="lib" >wsdl4j-1.5.2.jar</File>
+      <File deprecationType="permanent" appRootFolderType="TomcatRoot" appRelativeFolder="lib" >axis2-jaxws-1.5.jar</File>
+      <File deprecationType="permanent" appRootFolderType="TomcatRoot" appRelativeFolder="lib" >wstx-asl-3.2.4.jar</File>
+      <File deprecationType="permanent" appRootFolderType="TomcatRoot" appRelativeFolder="lib" >commons-httpclient-custom-3.0.1.jar</File>
+      <File deprecationType="permanent" appRootFolderType="TomcatRoot" appRelativeFolder="lib" >jcifs-1.2.17.jar</File>
+      <File deprecationType="permanent" appRootFolderType="JavaRoot" appRelativeFolder="lib/ext" >jcifs-1.2.17.jar</File>
+      <File deprecationType="permanent" appRootFolderType="JavaRoot" appRelativeFolder="lib/ext" >jcifs-1.3.15.jar</File>
+
+      <File deprecationType="permanent" appRootFolderType="TomcatRoot" appRelativeFolder="lib" >jersey-servlet-1.2.jar</File>
+      <File deprecationType="permanent" appRootFolderType="TomcatRoot" appRelativeFolder="lib" >jersey-server-1.2.jar</File>
+      <File deprecationType="permanent" appRootFolderType="TomcatRoot" appRelativeFolder="lib" >jersey-client-1.2.jar</File>
+      <File deprecationType="permanent" appRootFolderType="TomcatRoot" appRelativeFolder="lib" >jersey-core-1.2.jar</File>
+      <File deprecationType="permanent" appRootFolderType="TomcatRoot" appRelativeFolder="lib" >jersey-apache-client-1.2.jar</File>
+      <File deprecationType="permanent" appRootFolderType="TomcatRoot" appRelativeFolder="lib" >jersey-json-1.2.jar</File>
+
+
+      <File deprecationType="permanent" appRootFolderType="TomcatRoot" appRelativeFolder="lib" >je-3.2.76.jar</File>
+	  <File deprecationType="permanent" appRootFolderType="TomcatRoot" appRelativeFolder="lib" >je-4.1.6.jar</File>
+      <File deprecationType="permanent" appRootFolderType="TomcatRoot" appRelativeFolder="bin" >tcnative-1.dll</File>
+      <File deprecationType="permanent" appRootFolderType="TomcatRoot" appRelativeFolder="lib" >LaurelBridge-3.2.2c.jar</File>
+      <File deprecationType="permanent" appRootFolderType="TomcatRoot" appRelativeFolder="lib" >LaurelBridge-3.2.22c.jar</File>
+      <File deprecationType="permanent" appRootFolderType="TomcatRoot" appRelativeFolder="lib" >LaurelBridge-3.2.26c.jar</File>
+
+	  <File deprecationType="permanent" appRootFolderType="JavaRoot" appRelativeFolder="lib/ext" >log4j-api-2.9.0.jar</File>
+      <File deprecationType="permanent" appRootFolderType="JavaRoot" appRelativeFolder="lib/ext" >log4j-core-2.9.0.jar</File>
+      <File deprecationType="permanent" appRootFolderType="TomcatRoot" appRelativeFolder="lib" >log4j-api-2.9.0.jar</File>
+      <File deprecationType="permanent" appRootFolderType="TomcatRoot" appRelativeFolder="lib" >log4j-api-2.9.0.jar</File>
+      <File deprecationType="permanent" appRootFolderType="JavaRoot" appRelativeFolder="lib/ext" >log4j-1.2.14.jar</File>
+      <File deprecationType="permanent" appRootFolderType="TomcatRoot" appRelativeFolder="lib" >log4j-1.2.14.jar</File>
+      
+      <!-- Remove Axis2 1.5.3 -->
+      <File deprecationType="permanent" appRootFolderType="TomcatRoot" appRelativeFolder="lib" >axis2-adb-1.5.3.jar</File>
+      <File deprecationType="permanent" appRootFolderType="TomcatRoot" appRelativeFolder="lib" >axis2-kernel-1.5.3.jar</File>
+      <File deprecationType="permanent" appRootFolderType="TomcatRoot" appRelativeFolder="lib" >axis2-transport-http-1.5.3.jar</File>
+      <File deprecationType="permanent" appRootFolderType="TomcatRoot" appRelativeFolder="lib" >axis2-transport-local-1.5.3.jar</File>
+      <File deprecationType="permanent" appRootFolderType="TomcatRoot" appRelativeFolder="lib" >axis2-xmlbeans-1.5.3.jar</File>
+      <File deprecationType="permanent" appRootFolderType="TomcatRoot" appRelativeFolder="lib" >axis2-jaxws-1.5.3.jar</File>
+
+      <!-- Deprecated Cache -->
+      <File deprecationType="permanent" appRootFolderType="TomcatRoot" appRelativeFolder="lib" >ImagingCache-0.1.jar</File>
+      <File deprecationType="permanent" appRootFolderType="TomcatRoot" appRelativeFolder="lib" >ImagingCacheImpl-0.1.jar</File>
+    </DeprecatedFiles>
+    <DeprecatedDirectories>
+    </DeprecatedDirectories>
+  </ViX>
+</VixManifest>

@@ -1,0 +1,45 @@
+#playerLayout {
+    background: #343434;
+    border: black;
+    padding: 2px;
+}
+
+#playerTool {
+    background: #343434;
+    border-color: #343434;
+}
+
+#imageNavigationTool {
+    background: #343434;
+    border-color: #343434;
+}
+
+#pdfTool {
+    background: #343434;
+    border-color: #343434;
+}
+
+#tiffNavigationTool {
+    background: #343434;
+    border-color: #343434;
+}
+
+#pageNavigationTool {
+    background: #343434;
+    border-color: #343434;
+}
+
+#hydraVersionDiv {
+    color: white;
+    width: 100%;
+}
+
+#cacheIndicator {
+    background: #343434;
+    border-color: #343434;
+}
+
+#linkSeries {
+    background: #343434;
+    border-color: #343434;
+}

@@ -1,0 +1,1123 @@
+[ application_info ]
+name = dcf_store_scp
+description = DICOM Storage Service Class Provider.
+app_component_name = cpp_app/dcf_store_scp
+execution_state = STOPPED
+
+[ required_components ]
+component = cpp_lib_src/DCF_cl
+component = cpp_lib_src/DCF
+component = cpp_lib_src/LOG
+component = cpp_lib_src/CDS
+component = cpp_lib_src/APC
+component = cpp_lib/DCFUtil
+component = cpp_lib/LOG_a
+component = idl_lib/DLOG
+component = idl_lib/DCDS
+component = cpp_lib/CDS_a
+component = cpp_lib/APC_a
+component = idl_lib/DAPC
+component = cpp_lib/DDS_a
+component = cpp_lib/DDS
+component = cpp_lib/DCS
+component = cpp_lib/boost_regex
+component = cpp_lib/TSCW
+component = cpp_lib/DSS
+[ cpp_app ]
+
+
+#==============================================================================
+# per-instance information for the dcf_store_scp component
+#==============================================================================
+[ cpp_app/dcf_store_scp ]
+debug_flags = 0x00000
+[ cpp_lib_src ]
+
+
+#==============================================================================
+# per-instance information for the DCF_cl component
+#==============================================================================
+[ cpp_lib_src/DCF_cl ]
+debug_flags = 0x00000
+
+#==============================================================================
+# per-instance information for the DCF component
+#==============================================================================
+[ cpp_lib_src/DCF ]
+debug_flags = 0
+
+#==============================================================================
+# per-instance information for the LOG component
+#==============================================================================
+[ cpp_lib_src/LOG ]
+debug_flags = 0x00000
+
+#==============================================================================
+# per-instance information for the CDS component
+#==============================================================================
+[ cpp_lib_src/CDS ]
+debug_flags = 0x00000
+
+#==============================================================================
+# per-instance information for the APC component
+#==============================================================================
+[ cpp_lib_src/APC ]
+debug_flags = 0x00000
+[ cpp_lib ]
+
+
+#==============================================================================
+# per-instance information for the DCFUtil component
+#==============================================================================
+[ cpp_lib/DCFUtil ]
+debug_flags = 0
+
+#==============================================================================
+# per-instance information for the LOG_a component
+#==============================================================================
+[ cpp_lib/LOG_a ]
+debug_flags = 0
+
+[ cpp_lib/LOG_a/outputs ]
+[ cpp_lib/LOG_a/outputs/server_output_1 ]
+type = LOGSERVER
+use_log_server = TRUE
+
+[ cpp_lib/LOG_a/outputs/file_output_1 ]
+type = textfile
+message_types = *
+component_names = *
+# Note that changing the format of this name may affect the behavior of the web
+# utilities that manipulate log files (e.g., list_logs.pl, dcfrmlogs.pl).
+filename = C:/DCF_Runtime/tmp/log/${APPIBNAME}.${CNT}.log
+# Maximum size in kilobytes of each log file before rotating.
+max_size = 3000
+# Maximum number of log files before deleting older ones.
+max_files = 5
+
+#==============================================================================
+# per-instance information for the CDS_a component
+#==============================================================================
+[ cpp_lib/CDS_a ]
+debug_flags = 0
+
+#==============================================================================
+# per-instance information for the APC_a component
+#==============================================================================
+[ cpp_lib/APC_a ]
+debug_flags = 0
+save_proc_cfg_in_cds = yes
+save_exit_status_in_proc_cfg = no
+delete_proc_cfg = yes
+
+#==============================================================================
+# per-instance information for the DDS_a component
+#==============================================================================
+[ cpp_lib/DDS_a ]
+image_directory = C:/DCF/DCF-3.3.22c/tmp/scp_images
+image_reference_directory = C:/DCF/DCF-3.3.22c/tmp/job_images
+#
+# if true, storeObject will create a new unique identifier to use as the
+# filename. Currently, this will not change the sop instance uid in the
+# data set. This must be false for the automated store test to work.
+make_new_uids = NO
+debug_flags = 0
+enable_cds_instance_db = no
+
+# If true, then files are saved in the transfer syntax
+# that was used to send them.
+preserve_transfer_syntax = false
+
+# If true, then part 10 files are written
+save_as_chapter_10 = false
+
+# If true, then group 2 (File Meta Information) is invented
+create_group_2_data = true
+
+#
+# un-comment one of the following transfer syntax uids.
+# this will determine the format of files written to disk
+# by the DDS reference implementation adapter DDS_a
+#
+# implicit-little-endian
+#transfer_syntax_uid = 1.2.840.10008.1.2
+# explicit-little-endian
+transfer_syntax_uid = 1.2.840.10008.1.2.1
+# explicit-big-endian
+#transfer_syntax_uid = 1.2.840.10008.1.2.2
+
+#
+# The attribute "test_cfg_name" can be set to another CFGGroup that contains
+# sample image or other object information. The findObjects method will
+# return all objects listed in this group.
+# The format of this group is as follows:
+# [ object-1 ]
+# persistent_id = filename of dicom object 1
+# persistent_info = transfer syntax uid 
+# ...
+# [ object-n ]
+# persistent_id = filename of dicom object n
+# persistent_info = transfer syntax uid 
+#
+#test_cfg_name = file:/tmp/sample_images.cfg
+x = 1
+db_group_name = /dicom/image_db
+
+#==============================================================================
+# per-instance information for the DDS component
+#==============================================================================
+[ cpp_lib/DDS ]
+debug_flags = 0
+
+#==============================================================================
+# per-instance information for the DCS component
+#==============================================================================
+[ cpp_lib/DCS ]
+debug_flags = 0x00000000
+# set to true if pixel data is transferred using "streaming mode"
+enable_streaming_mode = no
+# size of pixel data blocks copied from source to destination in streaming mode transfers
+stream_mode_buffer_size = 32768
+enable_compression_pass_through_mode = no
+# debug support for forcing delays before sending out pdus
+pdu_write_delay_seconds = 0
+# debug support for forcing delays after reading pdus
+pdu_read_delay_seconds = 0
+# debug support for forcing delays between PDU fragments
+socket_write_delay_seconds = 0
+# debug support for breaking PDU writes into multiple fragments
+max_bytes_per_socket_write = 10000000
+# name of extended data dictionary config group
+extended_data_dictionary = /dicom/ext_data_dictionary
+
+# set flag to true if unknown VR's should be written as OB
+# if false, unknown VR's will cause an error
+write_unknown_vr_as_OB = true
+
+# if set, private tags in a dataset with VR UN that are in the data dictionary (via the extended
+# data dictionary) with a different VR will be fixed to have the VR from the dictionary.
+# if not set, a warning will be logged if the VRs are not the same
+fix_private_tags_with_vr_UN = false
+
+# if set, standard tags in a dataset with VR UN that are in the data dictionary (via the extended
+# data dictionary) with a different VR will be fixed to have the VR from the dictionary.
+# if not set, a warning will be logged if the VRs are not the same
+fix_standard_tags_with_vr_UN = false
+
+# set flag to true if sequences should always be output with undefined length
+always_write_undef_length_seqs = true
+
+# set flag to true if sequence items should always be output with undefined length
+always_write_undef_length_seq_items = true
+
+# set flag to true if end-of-item delimiters should be output even for defined length items
+always_write_seq_item_end_delims = false
+
+# set flag to true if end-of-sequence delimiters should be output even for defined length sequences
+always_write_seq_end_delims = false
+
+# true if writing data sets in lossy mode will change
+# image type to DERIVED, set lossy-compression=1, 
+# change uid, and add original-image-sequence.
+add_derived_image_info_for_lossy_tsc = true
+
+# Reports if an element tries to be added out-of-order
+# 0 - report an error only, throw the element away
+# 1 - report an error but still insert the element (may overwrite existing one)
+# 2 - report an error and throw an exception
+# 3 - do not report an error, throw element away
+element_out_of_order_option = 0
+
+# Set this to true if the bits_allocated should be guessed if it is missing
+guess_bits_allocated = false
+# if true, on unix platforms, SIGPIPE is blocked for socket-io threads.
+block_sig_pipe = true
+
+# Legacy mode - if pixel data is 8-bits allocated, then the VR is OB, not OW
+legacy_pixel_vr_is_OB_for_8bits = false
+
+#
+# per-association options. Multiple associations may exist in a 
+# single process. 
+# These items apply to both client (SCU) and server (SCP) associations
+#
+[ cpp_lib/DCS/association ]
+#
+# number of seconds to wait for ACSE PDU's - ( i.e., A-Associate-Request, A-Associate-Response,
+# A-Release-Response )
+# timeouts for PData PDU's are defined for servers by the association-idle-timeout,
+# and for clients by various job configurations
+#
+pdu_read_timeout = 30
+
+#
+# seconds of idle time before an association is automatically ended by a server;
+# The idle timer runs until a complete dimse message is received. The timer is
+# suspended when a client is waiting for the server, e.g. a print job is pending completion. 
+#
+association_idle_timeout_seconds = 180
+
+#
+# the largest pdu that the DCF wants to receive
+#
+max_pdu_receive_length = 32768
+
+#
+# the max pdu length written if no other length is negotiated by the remote 
+# or if the value sent by the remote is 0, or if ignore_max_length_negotiation is true.
+default_max_pdu_send_length = 32768
+
+#
+# if set, then default_max_write_pdu_length will define the max size pdu sent to remote
+ignore_max_length_negotiation = false
+
+# Proposed Asynchronous Operations Window max operations invoked.
+# Used by SCU's only.
+# If either of the requested params is -1, then an SCU will
+# not send the optional AOW negotiation information.
+# A value of zero means the SCU would like to send an
+# unlimited number of requests before being required to
+# wait for a response.
+requested_aow_max_invoked = -1
+
+# Accepted Asynchronous Operations Window max operations invoked.
+# Used by SCP's only.
+# If either of the requested params is -1, then an SCP will
+# not send the optional AOW negotiation information.
+# A value of zero means the SCP will support an
+# unlimited number of requests before the SCU is required to
+# wait for a response.
+accepted_aow_max_invoked = -1
+
+# Proposed Asynchronous Operations Window max operations performed.
+# Used by SCU's only.
+# If either of the requested params is -1, then an SCU will
+# not send the optional AOW negotiation information.
+# A value of zero means the SCU will support an 
+# unlimited number of requests before being required to
+# send a response.
+requested_aow_max_performed = -1
+
+# Accepted Asynchronous Operations Window max operations performed.
+# Used by SCP's only.
+# If either of the requested params is -1, then an SCP will
+# not send the optional AOW negotiation information.
+# A value of zero means the SCP may send an 
+# unlimited number of requests before the SCU is required to
+# send a response.
+accepted_aow_max_performed = -1
+
+#
+# cmd line of program to be run at start of association
+#
+# The following variables will be added to the environment
+# to be inherited by both the pre and post association scripts:
+#
+# DCF_CALLING_PRESENTATION_ADDRESS
+# DCF_CALLED_PRESENTATION_ADDRESS
+# DCF_CALLING_AE_TITLE
+# DCF_CALLED_AE_TITLE
+# DCF_APP_INSTANCE_NAME
+# DCF_ASSOCIATION_EXIT_STATUS	(only valid for post_association_script)
+#
+pre_association_script = 
+
+#
+# cmd line of program to be run at end of association
+#
+post_association_script = 
+
+#
+# if set, we will not send out multiple pdv's within a single pdu. Some implementations
+# can not handle pdu's containing multiple pdv's.
+#
+disable_multi_pdv_pdus = yes
+
+#
+# input and output filter cfg groups can contain either:
+# a) filter_set_name = <name in cfg db of group containing one sub group per filter>
+# or
+# b) one cfg sub group per filter (see the docs for various filters to setup cfg)
+#
+[ cpp_lib/DCS/association/input_filters ]
+
+[ cpp_lib/DCS/association/output_filters ]
+
+
+#
+# Configuration data for the Association Manager
+# This data is only applicable for servers or SCPs
+#
+[ cpp_lib/DCS/AssociationManager ]
+# ip address or hostname on which the AssociationManager will listen for dicom connections.
+# This is optional, and need only be specified for multi-homed hosts
+server_host_address = 0.0.0.0
+
+# port on which the AssociationManager will listen for dicom connections
+tcp_port = 2000
+
+# maximum number of associations that can be simultaneously active (1-1024) -
+# the practical maximum depends on system resource availability.
+max_concurrent_associations = 32
+#
+#	ARTIM timeout value
+#	i.e. time from socket accept until a-assoc-rq pdu is read
+#
+first_pdu_read_timeout = 30
+
+#
+# If true, AssociationManager will get notified if this group is
+# changed in its process configuration while it is running.
+# This is useful if you want to change the listen port
+# without stopping and restarting AssociationManager or other settings.
+#
+listen_cfg_group = false
+
+#
+# flag to enable counters for active and total association counts.
+#
+enable_association_statistics = n
+
+# cds group name for counters
+counter_group_name = /dicom/statistics/scp_counters
+
+# attempt to recreate the counter group if it is corrupt
+# (if statistics are enabled)
+recreate_counter_group = n
+
+# set to true if config data should be cached in SCP between associations
+cache_association_configurations = true
+
+# if true, AssociationManager calls AppControl::applicationReady
+# at the start of the run() method.
+call_app_ready_in_run = true
+#
+# set this to "1" instead of using the older "one_shot_mode = yes" setting.
+# -1 means accept associations forever.
+#
+max_total_associations = -1
+
+#
+# If no other AssociationConfigPolicyHandler is installed, this string
+# will be used to generate the configuration name for an incoming association.
+#
+# In addition to the DCF_VAR and DCF_FUNC text expansions that may occur during
+# the update_cds process, the following macros will be expanded after the
+# A-Associate-Request PDU is received from the SCU:
+#
+# MACRO            EXPANDS TO
+# ===============  =============================
+# ${CALLED_TITLE}  called ae title from pdu
+# ${CALLING_TITLE} calling ae title from pdu
+# ${CALLING_HOST}  remote device's host address
+# ${CALLED_HOST}   local host address for connected socket
+# ${CALLED_PORT}   local port number for connected socket
+#
+# If the string is empty or this parameter does not exist, then the
+# new association will use the configuration of the parent server.
+#
+default_association_config_name = /apps/StoreSCP/${CALLED_TITLE}
+
+#
+# Configuration data for the Verification Service Class SCP
+#
+[ cpp_lib/DCS/VerificationSCP ]
+# for debugging, the VerificationSCP will exit() on receipt of the second
+# C-Echo request. The SCU will not get a response.
+f_exit_after_one_request = no
+# for debugging, the VerificationSCP will return a dimse error in
+# every C-Echo response
+f_force_dimse_error = no
+# for debugging, the VerificationSCP will delay (sleep) before
+# returning the C-Echo response
+response_delay_seconds = 0
+
+#
+#	UID's of the transfer syntaxes that will be supported by the
+#	verification (echo) SCP, in order of preference.
+#
+[ cpp_lib/DCS/VerificationSCP/supported_transfer_syntaxes ]
+# implicit-little-endian
+transfer_syntax = 1.2.840.10008.1.2
+# explicit-little-endian
+#transfer_syntax = 1.2.840.10008.1.2.1
+# explicit-big-endian
+#transfer_syntax = 1.2.840.10008.1.2.2
+
+[ cpp_lib/DCS/DicomFileReader ]
+buffer_size = 32768
+
+[ cpp_lib/DCS/DicomFileWriter ]
+buffer_size = 32768
+
+[ cpp_lib/DCS/DicomFileOutput ]
+create_chapter_10_format = true
+invent_group_2_data = true
+
+# Uncomment this and set to appropriate value if needed (tag: 0002,0012)
+# implementation_class_uid = 1.2.840.114089.1.1.0.3.3.2
+
+# Uncomment this and set to appropriate value if needed (tag: 0002,0013)
+# implementation_version_name = DCF 3.3.2c
+
+# The default Source AE title to use when writing a file
+default_source_ae_title = DCF
+
+# Use the (incorrect) legacy mode of using existing values from Group 2 in the File
+# Meta Information, instead of updating them to reflect the current implementation
+preserve_fmi_legacy_mode = false
+
+[ cpp_lib/DCS/DicomEncapsulatedCodec ]
+write_compressed_data_to_raw_file = false
+read_compressed_data_from_raw_file = false
+test_data_file_name = 
+# force number_of_frames from 0 to 1 if compressed data is present
+override_n_frames = true
+# if true, always fix odd length sequence items by incrementing size,
+# and adding a pad byte.
+pad_odd_length_fragments = true
+
+[ cpp_lib/DCS/DicomRLECodec ]
+# if false convert RLE segments to Big Endian
+# if true leave RLE segments in machine byte order
+RLE_legacy_mode = false
+
+[ cpp_lib/DCS/DicomTSCWCodec ]
+[ cpp_lib/DCS/DicomTSCWCodec/jpeg_lossless ]
+# If true, then 12 bit operations will use the 16 bit IJG library
+no_12bit_lib = true
+# Set the jpeg predictor selection value for the .57 syntax.
+# If the transfer syntax is 1.2.840.10008.1.2.4.70,
+# this attribute is ignored and predictor selection value
+# is set to 1.
+jpeg_predictor_selection_value = 6
+# If true, then derived image fields are added for monochrome
+# images. (Some implementations add derived fields, create
+# a new sop-instance-uid, etc. even for lossless compressed
+# images.)
+add_derived_image_fields_for_mono = false
+# If true, then derived image fields are added for color 
+# images. (Some implementations add derived fields, create
+# a new sop-instance-uid, etc. even for lossless compressed
+# images.)
+add_derived_image_fields_for_color = false
+# If true, signed pixel data (pixel-representation = 1 ) will
+# be allowed.
+allow_signed_data = false
+# If true, color pixel data will be allowed. Some implementations
+# don't implement lossless jpeg for color, since the RGB to YBR
+# color space conversion may result in some information loss.
+allow_color = true
+# For codecs that support creating multiple threads for a single
+# compress or decompress operation.
+max_threads = 1
+
+[ cpp_lib/DCS/DicomTSCWCodec/jpeg_lossy ]
+# lossy compression quality : 0 to 100
+compression_quality = 75
+# If true, then 12 bit operations will use the 16 bit IJG library
+no_12bit_lib = false
+# If true, derived image elements are added to data sets
+# as they are written. This includes changing Image-Type,
+# and adding Source-Image-Sequence and Derivation-Code-Sequence.
+# A new sop-instance-uid will be created for the output data set.
+add_derived_image_fields = true
+# If true, signed pixel data (pixel-representation = 1) will
+# be allowed.
+allow_signed_data = false
+# For codecs that support creating multiple threads for a single
+# compress or decompress operation.
+max_threads = 1
+
+[ cpp_lib/DCS/DicomTSCWCodec/jpeg2000_lossless ]
+# override all options by using this attribute
+# use "\" to end lines for a multi-lined attribute value
+jpeg2000_codec_options = 
+# If true, then derived image fields are added for monochrome
+# images. (Some implementations add derived fields, create
+# a new sop-instance-uid, etc. even for lossless compressed
+# images.)
+add_derived_image_fields_for_mono = false
+# If true, then derived image fields are added for color 
+# images. (Some implementations add derived fields, create
+# a new sop-instance-uid, etc. even for lossless compressed
+# images.)
+add_derived_image_fields_for_color = false
+# For codecs that support creating multiple threads for a single
+# compress or decompress operation.
+max_threads = 1
+
+[ cpp_lib/DCS/DicomTSCWCodec/jpeg2000_lossy ]
+# override all options by using this attribute
+# use "\" to end lines for a multi-lined attribute value
+jpeg2000_codec_options = 
+# Specify the compression ratio
+compression_ratio = 2
+# Specify the number of jpeg2000 compression levels
+compression_levels = 4
+# If true, derived image elements are added to data sets
+# as they are written. This includes changing Image-Type,
+# and adding Source-Image-Sequence and Derivation-Code-Sequence.
+# A new sop-instance-uid will be created for the output data set.
+add_derived_image_fields = true
+# For codecs that support creating multiple threads for a single
+# compress or decompress operation.
+max_threads = 1
+
+[ cpp_lib/DCS/DicomTSCWCodec/plugins ]
+[ cpp_lib/DCS/DicomTSCWCodec/plugins/TSCWJasper ]
+win_dll_base_name = DCF_tscwjasper
+unix_dll_base_name = DCF_tscwjasper
+[ cpp_lib/DCS/DicomTSCWCodec/plugins/TSCWJasper/plugin_cfg ]
+
+[ cpp_lib/DCS/DicomTSCWCodec/plugins/TSCWIJG ]
+win_dll_base_name = DCF_TSCWIJG
+unix_dll_base_name = DCF_tscwijg
+[ cpp_lib/DCS/DicomTSCWCodec/plugins/TSCWIJG/plugin_cfg ]
+
+[ cpp_lib/DCS/DicomTSCWCodec/plugins/TSCWAware ]
+win_dll_base_name = DCF_TSCWAware
+unix_dll_base_name = DCF_tscwaware
+[ cpp_lib/DCS/DicomTSCWCodec/plugins/TSCWAware/plugin_cfg ]
+
+[ cpp_lib/DCS/DicomTSCWCodec/plugin_mappings ]
+# use TSCWIJG or TSCWAware for .50
+[ cpp_lib/DCS/DicomTSCWCodec/plugin_mappings/1.2.840.10008.1.2.4.50 ]
+plugin_name = TSCWIJG
+# use TSCWIJG or TSCWAware for .51
+[ cpp_lib/DCS/DicomTSCWCodec/plugin_mappings/1.2.840.10008.1.2.4.51 ]
+plugin_name = TSCWIJG
+# use TSCWIJG for .57
+# TSCWAware does not support .57
+[ cpp_lib/DCS/DicomTSCWCodec/plugin_mappings/1.2.840.10008.1.2.4.57 ]
+plugin_name = TSCWIJG
+# use TSCWIJG or TSCWAware for .70
+[ cpp_lib/DCS/DicomTSCWCodec/plugin_mappings/1.2.840.10008.1.2.4.70 ]
+plugin_name = TSCWIJG
+# use TSCWJasper or TSCWAware for .90
+[ cpp_lib/DCS/DicomTSCWCodec/plugin_mappings/1.2.840.10008.1.2.4.90 ]
+plugin_name = TSCWJasper
+#plugin_name = TSCWAware
+# use TSCWJasper or TSCWAware for .91
+[ cpp_lib/DCS/DicomTSCWCodec/plugin_mappings/1.2.840.10008.1.2.4.91 ]
+plugin_name = TSCWJasper
+
+#==============================================================================
+# per-instance information for the boost_regex component
+#==============================================================================
+[ cpp_lib/boost_regex ]
+#component = cpp_lib/DCFUtil
+
+#==============================================================================
+# per-instance information for the TSCW component
+#==============================================================================
+[ cpp_lib/TSCW ]
+debug_flags = 0
+
+#==============================================================================
+# per-instance information for the DSS component
+#==============================================================================
+[ cpp_lib/DSS ]
+debug_flags = 0x00000
+enable_statistics = yes
+images_in_counter_name = /dicom/store/scp_statistics/images_in
+images_out_counter_name = /dicom/store/scu_statistics/images_out
+
+[ cpp_lib/DSS/StoreClient ]
+
+[ cpp_lib/DSS/StoreJobDescription ]
+
+[ cpp_lib/DSS/StoreJobDescription/defaults ]
+# transfer syntaxes proposed by StoreClient for network communications
+# ELE
+association_ts_uid = 1.2.840.10008.1.2.1
+# EBE
+association_ts_uid = 1.2.840.10008.1.2.2
+# ILE
+association_ts_uid = 1.2.840.10008.1.2
+
+request_commit = false
+# The default number of seconds to wait for c-store responses. Any
+# value set using the StoreJobDescription.responseTimeoutSeconds() method 
+# will override this value
+response_timeout_seconds = 180
+continue_on_error = false
+#
+# Set this to true to force removal of file-meta information elements
+# in data sets sent to store SCPs
+#
+remove_group_2_elements = YES
+
+# Set this to true to propose the transfer syntax matching the files
+# encoding on disk for an association. Note that multiple files with
+# the same sop-class-uid will be sent on the transfer syntax
+# negotiated for the first file.
+preserve_file_transfer_syntax = NO
+
+# Set this to true if you want a separate presentation
+# context to be requested for each combination of sop-class
+# and supported-transfer-syntax.
+request_syntaxes_separately = NO
+
+[ cpp_lib/DSS/StoreCommitClient ]
+
+[ cpp_lib/DSS/StoreCommitJobDescription ]
+
+[ cpp_lib/DSS/StoreCommitJobDescription/defaults ]
+# transfer syntax used by StoreCommitClient for network communications (implicit little endian)
+association_ts_uid = 1.2.840.10008.1.2
+# The default number of seconds to wait for n-action responses. Any
+# value set using the StoreCommitJobDescription.responseTimeoutSeconds() method 
+# will override this value
+response_timeout_seconds = 180
+
+
+[ cpp_lib/DSS/StoreSCP ]
+dvs_enable = no
+dvs_configuration_group = /dicom/dvs/StoreSCP.dvs
+dvs_configuration_group = /dicom/dvs/DicomDefs.dvs
+
+#
+#	UID's of the sop classes that will be supported by the SCP, in order of
+#	preference.
+#
+[ cpp_lib/DSS/StoreSCP/supported_sop_classes ]
+# UID_SOPCLASSCOMPUTEDRADIOGRAPHY
+sop_class = 1.2.840.10008.5.1.4.1.1.1
+# UID_SOPCLASSXRAYPRESENTATION
+sop_class = 1.2.840.10008.5.1.4.1.1.1.1
+# UID_SOPCLASSXRAYPROCESSING 	
+sop_class = 1.2.840.10008.5.1.4.1.1.1.1.1
+# UID_SOPCLASSMAMMOXRAYPRESENTATION
+sop_class = 1.2.840.10008.5.1.4.1.1.1.2
+# UID_SOPCLASSMAMMOXRAYPROCESSING 
+sop_class = 1.2.840.10008.5.1.4.1.1.1.2.1
+# UID_SOPCLASSINTRAORALXRAYPRESENTATION
+sop_class = 1.2.840.10008.5.1.4.1.1.1.3
+# UID_SOPCLASSINTRAORALXRAYPROCESSING
+sop_class = 1.2.840.10008.5.1.4.1.1.1.3.1
+# UID_SOPCLASSCT
+sop_class = 1.2.840.10008.5.1.4.1.1.2
+# UID_SOPCLASSUSMULTIFRAMEIMAGE
+sop_class = 1.2.840.10008.5.1.4.1.1.3.1
+# UID_SOPCLASSMR
+sop_class = 1.2.840.10008.5.1.4.1.1.4
+# UID_SOPCLASSNM
+sop_class = 1.2.840.10008.5.1.4.1.1.20
+# UID_SOPCLASSUS
+sop_class = 1.2.840.10008.5.1.4.1.1.6.1
+# UID_SOPCLASSSECONDARYCAPTURE
+sop_class = 1.2.840.10008.5.1.4.1.1.7
+# UID_SOPCLASSSTANDALONEOVERLAY
+sop_class = 1.2.840.10008.5.1.4.1.1.8
+# UID_SOPCLASSSTANDALONECURVE
+sop_class = 1.2.840.10008.5.1.4.1.1.9
+# UID_SOPCLASSSTANDALONEMODALITYLUT
+sop_class = 1.2.840.10008.5.1.4.1.1.10
+# UID_SOPCLASSSTANDALONEVOILUT
+sop_class = 1.2.840.10008.5.1.4.1.1.11
+# UID_SOPCLASSXRAYANGIO
+sop_class = 1.2.840.10008.5.1.4.1.1.12.1
+# UID_SOPCLASSXRAYFLUORO
+sop_class = 1.2.840.10008.5.1.4.1.1.12.2
+
+#
+#	UID's of the transfer syntaxes that will be supported by the SCP, in order of
+#	preference.
+#
+[ cpp_lib/DSS/StoreSCP/supported_transfer_syntaxes ]
+# JPEG lossless prediction selector = 1
+transfer_syntax = 1.2.840.10008.1.2.4.70
+# JPEG2000 lossless
+transfer_syntax = 1.2.840.10008.1.2.4.90
+# JPEG2000 lossy
+transfer_syntax = 1.2.840.10008.1.2.4.91
+# JPEG lossless
+transfer_syntax = 1.2.840.10008.1.2.4.57
+# JPEG lossy 8 bit 
+transfer_syntax = 1.2.840.10008.1.2.4.50
+# JPEG lossy 12 bit
+transfer_syntax = 1.2.840.10008.1.2.4.51
+# explicit-little-endian
+transfer_syntax = 1.2.840.10008.1.2.1
+# implicit-little-endian
+transfer_syntax = 1.2.840.10008.1.2
+# explicit-big-endian
+transfer_syntax = 1.2.840.10008.1.2.2
+# RLE Lossless Transfer Syntax
+transfer_syntax = 1.2.840.10008.1.2.5
+# JPEG-LS Lossless Transfer Syntax
+transfer_syntax = 1.2.840.10008.1.2.4.80
+# JPEG-LS Lossy (Near-Lossless) Transfer Syntax
+transfer_syntax = 1.2.840.10008.1.2.4.81
+# MPEG2 Main Profile @ Main Level Transfer Syntax
+transfer_syntax = 1.2.840.10008.1.2.4.100	
+# MPEG2 Main Profile @ High Level Transfer Syntax
+transfer_syntax = 1.2.840.10008.1.2.4.101
+# JPEG 2000 Part 2 Multi-component (Lossless Only) Transfer Syntax
+transfer_syntax = 1.2.840.10008.1.2.4.92
+# JPEG 2000 Part 2 Multi-component Transfer Syntax
+transfer_syntax = 1.2.840.10008.1.2.4.93
+
+[ cpp_lib/DSS/StoreCommitSCU ]
+enforce_role_selection = false
+
+[ cpp_lib/DSS/StoreCommitSCU/supported_transfer_syntaxes ]
+# implicit-little-endian
+transfer_syntax = 1.2.840.10008.1.2
+# explicit-little-endian
+transfer_syntax = 1.2.840.10008.1.2.1
+
+[ cpp_lib/DSS/StoreSCU ]
+
+[ cpp_lib/DSS/QRSCU ]
+
+[ cpp_lib/DSS/QRSCP ]
+enable_relational_retrieval = yes
+enable_store_scp = yes
+enable_c_get = yes
+enable_c_move = yes
+filter_query_responses = yes
+send_pending_move_get_status = yes
+continue_after_subop_error = yes
+c_store_subop_timeout_seconds = 10
+
+[ cpp_lib/DSS/QRSCP/supported_sop_classes ]
+# UID_SOPPATIENTQUERY_FIND
+sop_class = 1.2.840.10008.5.1.4.1.2.1.1
+# UID_SOPPATIENTQUERY_MOVE
+sop_class = 1.2.840.10008.5.1.4.1.2.1.2
+# UID_SOPPATIENTQUERY_GET
+sop_class = 1.2.840.10008.5.1.4.1.2.1.3
+# UID_SOPSTUDYQUERY_FIND
+sop_class = 1.2.840.10008.5.1.4.1.2.2.1
+# UID_SOPSTUDYQUERY_MOVE
+sop_class = 1.2.840.10008.5.1.4.1.2.2.2
+# UID_SOPSTUDYQUERY_GET
+sop_class = 1.2.840.10008.5.1.4.1.2.2.3
+# UID_SOPPATIENTSTUDYQUERY_FIND
+sop_class = 1.2.840.10008.5.1.4.1.2.3.1
+# UID_SOPPATIENTSTUDYQUERY_MOVE
+sop_class = 1.2.840.10008.5.1.4.1.2.3.2
+# UID_SOPPATIENTSTUDYQUERY_GET
+sop_class = 1.2.840.10008.5.1.4.1.2.3.3
+
+[ cpp_lib/DSS/QRSCP/supported_store_sop_classes ]
+## UID_SOPCLASSCOMPUTEDRADIOGRAPHY
+#sop_class = 1.2.840.10008.5.1.4.1.1.1
+## UID_SOPCLASSCT
+#sop_class = 1.2.840.10008.5.1.4.1.1.2
+## UID_SOPCLASSUSMULTIFRAMEIMAGE
+#sop_class = 1.2.840.10008.5.1.4.1.1.3.1
+## UID_SOPCLASSMR
+#sop_class = 1.2.840.10008.5.1.4.1.1.4
+## UID_SOPCLASSNM
+#sop_class = 1.2.840.10008.5.1.4.1.1.20
+## UID_SOPCLASSUS
+#sop_class = 1.2.840.10008.5.1.4.1.1.6.1
+## UID_SOPCLASSSECONDARYCAPTURE
+#sop_class = 1.2.840.10008.5.1.4.1.1.7
+## UID_SOPCLASSSTANDALONEOVERLAY
+#sop_class = 1.2.840.10008.5.1.4.1.1.8
+## UID_SOPCLASSSTANDALONECURVE
+#sop_class = 1.2.840.10008.5.1.4.1.1.9
+## UID_SOPCLASSSTANDALONEMODALITYLUT
+#sop_class = 1.2.840.10008.5.1.4.1.1.10
+## UID_SOPCLASSSTANDALONEVOILUT
+#sop_class = 1.2.840.10008.5.1.4.1.1.11
+## UID_SOPCLASSXRAYANGIO
+#sop_class = 1.2.840.10008.5.1.4.1.1.12.1
+## UID_SOPCLASSXRAYFLUORO
+#sop_class = 1.2.840.10008.5.1.4.1.1.12.2
+
+[ cpp_lib/DSS/QRSCP/supported_transfer_syntaxes ]
+# implicit-little-endian
+transfer_syntax = 1.2.840.10008.1.2
+# explicit-little-endian
+#transfer_syntax = 1.2.840.10008.1.2.1
+# explicit-big-endian
+#transfer_syntax = 1.2.840.10008.1.2.2
+
+[ cpp_lib/DSS/DicomDir ]
+[ cpp_lib/DSS/DicomDirectoryRecord ]
+[ cpp_lib/DSS/DicomDirectoryRecord/PATIENT ]
+match_tag = 0010,0020
+match_tag = 0010,0010
+copy_tag = 0008,0005
+copy_tag = 0010,0010
+copy_tag = 0010,0020
+
+[ cpp_lib/DSS/DicomDirectoryRecord/STUDY ]
+match_tag = 0008,0020
+match_tag = 0008,0030
+match_tag = 0020,000D
+match_tag = 0020,0010
+copy_tag = 0008,0005
+copy_tag = 0008,0020
+copy_tag = 0008,0030
+copy_tag = 0008,1030
+copy_tag = 0020,000D
+copy_tag = 0020,0010
+copy_tag = 0008,0050
+
+[ cpp_lib/DSS/DicomDirectoryRecord/SERIES ]
+match_tag = 0008,0060
+match_tag = 0020,000E
+match_tag = 0020,0011
+copy_tag = 0008,0005
+#copy_tag = 0008,103E
+copy_tag = 0008,0021
+copy_tag = 0008,0031
+copy_tag = 0008,0060
+copy_tag = 0020,000E
+copy_tag = 0020,0011
+copy_tag = 0088,0200
+
+[ cpp_lib/DSS/DicomDirectoryRecord/IMAGE ]
+match_tag = 0008,0016
+match_tag = 0008,0018
+# match_tag = 0020,0013
+copy_tag = 0008,0005
+copy_tag = 0020,0013
+copy_tag = 0008,0016
+copy_tag = 0008,0018
+copy_tag = 0088,0200
+
+# RT DOSE tags required by Dicom Standard
+[ cpp_lib/DSS/DicomDirectoryRecord/RT DOSE ]
+match_tag = 0008,0016
+match_tag = 0008,0018
+copy_tag = 0008,0005
+copy_tag = 0008,0016
+copy_tag = 0008,0018
+copy_tag = 0020,0013
+copy_tag = 3004,000A
+copy_tag = 3004,0006
+copy_tag = 0088,0200
+
+# RT STRUCTURE SET tags required by Dicom Standard
+[ cpp_lib/DSS/DicomDirectoryRecord/RT STRUCTURE SET ]
+match_tag = 0008,0016
+match_tag = 0008,0018
+copy_tag = 0008,0005
+copy_tag = 0008,0016
+copy_tag = 0008,0018
+copy_tag = 0020,0013
+copy_tag = 3006,0002
+copy_tag = 3006,0008
+copy_tag = 3006,0009
+
+# RT PLAN tags required by Dicom Standard
+[ cpp_lib/DSS/DicomDirectoryRecord/RT PLAN ]
+match_tag = 0008,0016
+match_tag = 0008,0018
+copy_tag = 0008,0005
+copy_tag = 0008,0016
+copy_tag = 0008,0018
+copy_tag = 0020,0013
+copy_tag = 300A,0002
+copy_tag = 300A,0006
+copy_tag = 300A,0007
+
+# RT TREAT RECORD tags required by Dicom Standard
+[ cpp_lib/DSS/DicomDirectoryRecord/RT TREAT RECORD ]
+match_tag = 0008,0016
+match_tag = 0008,0018
+copy_tag = 0008,0005
+copy_tag = 0008,0016
+copy_tag = 0008,0018
+copy_tag = 0020,0013
+copy_tag = 3008,0250
+copy_tag = 3008,0251
+
+# PRESENTATION STATE tags required by Dicom Standard
+[ cpp_lib/DSS/DicomDirectoryRecord/PRESENTATION ]
+match_tag = 0008,0016
+match_tag = 0008,0018
+copy_tag = 0008,0005
+copy_tag = 0008,0016
+copy_tag = 0008,0018
+copy_tag = 0070,0082
+copy_tag = 0070,0083
+copy_tag = 0008,1115
+copy_tag = 0020,0013
+copy_tag = 0070,0080
+copy_tag = 0070,0081
+copy_tag = 0070,0084
+copy_tag = 0070,0086
+
+# WAVEFORM tags required by Dicom Standard
+[ cpp_lib/DSS/DicomDirectoryRecord/WAVEFORM ]
+match_tag = 0008,0016
+match_tag = 0008,0018
+copy_tag = 0008,0005
+copy_tag = 0008,0016
+copy_tag = 0008,0018
+copy_tag = 0020,0013
+copy_tag = 0008,0023
+copy_tag = 0008,0033
+
+# SR DOCUMENT tags required by Dicom Standard
+[ cpp_lib/DSS/DicomDirectoryRecord/SR DOCUMENT ]
+match_tag = 0008,0016
+match_tag = 0008,0018
+copy_tag = 0008,0005
+copy_tag = 0008,0016
+copy_tag = 0008,0018
+copy_tag = 0020,0013
+copy_tag = 0040,A491
+copy_tag = 0040,A493
+copy_tag = 0008,0023
+copy_tag = 0008,0033
+copy_tag = 0040,A030
+copy_tag = 0040,A043
+copy_tag = 0040,A730
+
+# KEY OBJECT DOCUMENT tags required by Dicom Standard
+[ cpp_lib/DSS/DicomDirectoryRecord/KEY OBJECT DOC ]
+match_tag = 0008,0016
+match_tag = 0008,0018
+copy_tag = 0008,0005
+copy_tag = 0008,0016
+copy_tag = 0008,0018
+copy_tag = 0020,0013
+copy_tag = 0008,0023
+copy_tag = 0008,0033
+copy_tag = 0040,A043
+copy_tag = 0040,A730
+
+# SPECTROSCOPY tags required by Dicom Standard
+[ cpp_lib/DSS/DicomDirectoryRecord/SPECTROSCOPY ]
+match_tag = 0008,0016
+match_tag = 0008,0018
+copy_tag = 0008,0005
+copy_tag = 0008,0016
+copy_tag = 0008,0018
+copy_tag = 0020,0013
+copy_tag = 0008,0008
+copy_tag = 0008,0023
+copy_tag = 0008,0033
+copy_tag = 0008,9092
+copy_tag = 0028,0008
+copy_tag = 0028,0010
+copy_tag = 0028,0011
+copy_tag = 0028,9001
+copy_tag = 0028,9002
+
+# RAW DATA tags required by Dicom Standard
+[ cpp_lib/DSS/DicomDirectoryRecord/RAW DATA ]
+match_tag = 0008,0016
+match_tag = 0008,0018
+copy_tag = 0008,0005
+copy_tag = 0008,0016
+copy_tag = 0008,0018
+copy_tag = 0020,0013
+copy_tag = 0008,0023
+copy_tag = 0008,0033
+#copy_tag = 0088,0200
+
+# REGISTRATION tags required by Dicom Standard
+[ cpp_lib/DSS/DicomDirectoryRecord/REGISTRATION ]
+match_tag = 0008,0016
+match_tag = 0008,0018
+copy_tag = 0008,0005
+copy_tag = 0008,0016
+copy_tag = 0008,0018
+copy_tag = 0008,0023
+copy_tag = 0008,0033
+copy_tag = 0020,0013
+copy_tag = 0070,0080
+copy_tag = 0070,0081
+copy_tag = 0070,0084
+copy_tag = 0070,0086
+
+# FIDUCIAL DIRECTORY RECORD tags required by Dicom Standard
+[ cpp_lib/DSS/DicomDirectoryRecord/FIDUCIAL ]
+match_tag = 0008,0016
+match_tag = 0008,0018
+copy_tag = 0008,0005
+copy_tag = 0008,0016
+copy_tag = 0008,0018
+copy_tag = 0008,0023
+copy_tag = 0008,0033
+copy_tag = 0020,0013
+copy_tag = 0070,0080
+copy_tag = 0070,0081
+copy_tag = 0070,0084
+copy_tag = 0070,0086
+
+# HANGING PROTOCOL tags required by Dicom Standard
+[ cpp_lib/DSS/DicomDirectoryRecord/HANGING PROTOCOL ]
+match_tag = 0008,0016
+match_tag = 0008,0018
+copy_tag = 0008,0005
+copy_tag = 0008,0016
+copy_tag = 0008,0018
+copy_tag = 0072,0002
+copy_tag = 0072,0004
+copy_tag = 0072,0006
+copy_tag = 0072,0008
+copy_tag = 0072,000A
+copy_tag = 0072,000C
+copy_tag = 0072,0014
+copy_tag = 0072,000E
+
+# ENCAPSULATED DOCUMENT tags required by Dicom Standard
+[ cpp_lib/DSS/DicomDirectoryRecord/ENCAP DOC ]
+match_tag = 0008,0016
+match_tag = 0008,0018
+copy_tag = 0008,0005
+copy_tag = 0008,0016
+copy_tag = 0008,0018
+copy_tag = 0008,0023
+copy_tag = 0008,0033
+copy_tag = 0020,0013
+copy_tag = 0042,0010
+copy_tag = 0040,E001
+copy_tag = 0040,A043
+copy_tag = 0042,0012
+
+
+# HL7 STRUCTURED DOCUMENT tags required by Dicom Standard
+[ cpp_lib/DSS/DicomDirectoryRecord/HL7 STRUC DOC ]
+match_tag = 0008,0016
+match_tag = 0008,0018
+copy_tag = 0008,0005
+copy_tag = 0008,0016
+copy_tag = 0008,0018
+copy_tag = 0040,E001
+copy_tag = 0040,E004
+copy_tag = 0040,E006
+copy_tag = 0042,0010
+
+# REAL WORLD VALUE MAPPING tags required by Dicom Standard
+[ cpp_lib/DSS/DicomDirectoryRecord/VALUE MAP ]
+match_tag = 0008,0016
+match_tag = 0008,0018
+copy_tag = 0008,0005
+copy_tag = 0008,0016
+copy_tag = 0008,0018
+copy_tag = 0008,0023
+copy_tag = 0008,0033
+
+# STEREOMETRIC RELATIONSHIP tags required by Dicom Standard
+[ cpp_lib/DSS/DicomDirectoryRecord/STEREOMETRIC ]
+match_tag = 0008,0016
+match_tag = 0008,0018
+copy_tag = 0008,0005
+copy_tag = 0008,0016
+copy_tag = 0008,0018
+
+# For record types not specified, use these match/copy tags.
+[ cpp_lib/DSS/DicomDirectoryRecord/DEFAULT ]
+match_tag = 0008,0016
+match_tag = 0008,0018
+copy_tag = 0008,0016
+copy_tag = 0008,0018
+[ idl_lib ]
+
+[ idl_lib/DLOG ]
+
+[ idl_lib/DCDS ]
+
+[ idl_lib/DAPC ]

@@ -1,0 +1,224 @@
+01:16 PM 09/19/2006 
+DICOM Gateway MUMPS routines Build V3.0p69Build939_T24
+MAGOSMSC
+MAGOSMSC ;WOIFO/PMK/EdM - Host Operating System Utilities ; [ 07/11/2006  06:47 AM ]
+ ;;3.0;IMAGING;**69**;19-September-2006;;Build 939
+ ;; Per VHA Directive 2004-038, this routine should not be modified.
+ ;; +---------------------------------------------------------------+
+ ;; | Property of the US Government.                                |
+ ;; | No permission to copy or redistribute this software is given. |
+ ;; | Use of unreleased versions of this software requires the user |
+ ;; | to execute a written test agreement with the VistA Imaging    |
+ ;; | Development Office of the Department of Veterans Affairs,     |
+ ;; | telephone (301) 734-0100.                                     |
+ ;; | The Food and Drug Administration classifies this software as  |
+ ;; | a medical device.  As such, it may not be changed in any way. |
+ ;; | Modifications to this software may result in an adulterated   |
+ ;; | medical device under 21CFR820, the use of which is considered |
+ ;; | to be a violation of US Federal Statutes.                     |
+ ;; +---------------------------------------------------------------+
+ ;;
+ ; Callable entries are:
+ ;
+ ; Other host system information
+ ;  Set STATUS=$$DISKFREE^MAGOSMSC(DRIVE)
+ ;  Set STATUS=$$DISKSIZE^MAGOSMSC(DRIVE)
+ ;  Set NAME=$$HOSTNAME^MAGOSMSC()
+ ; Miscellaneous other functions
+ ;  Set STATUS=$$HOSTCMD^MAGOSMSC(CMD,.OUT,.ERR,DONTWAIT,DEBUG)
+ ;  Set STATUS=$$ZLOAD^MAGOSMSC(ROUTINE)
+ ;  Set STATUS=$$ZSAVE^MAGOSMSC(ROUTINE)
+ ;  Set HEXA=$$DEC2HEX^MAGOSMSC(DECIMAL,LENGTH,BITS)
+ ;  Set DECIMAL=$$HEX2DEC^MAGOSMSC(HEXA,LENGTH,BITS)
+ ;  Set SHARE=LET2UNC^MAGOSMSC(DRIVE)
+ ;  Do LICENSE^MAGOSMSC()
+ ;  Set LO=$$LOWER^MAGOSMSC(TEXT)
+ ;  Set STATUS=$$MATCH^MAGOSMSC(WILDCARD,STRUCTUR,FOUND)
+ ;  Set STATUS=$$MATCHD^MAGOSMSC(WILDCARD,STRUCTUR,FOUND)
+ ;  Set MUMPSENV=$$MUMPS^MAGOSMSC()
+ ;  Set CANONIC=$$SHARNAM^MAGOSMSC(DRIVE)
+ ;  Set UCI=$$CURENV^MAGOSMSC()
+ ;  Set UP=$$UPPER^MAGOSMSC(TEXT)
+ ;
+CURENV() ;
+ ;  -- Returns name of current environment (UCI)
+ Q $ZUTIL(5)
+DEC2HEX(DECIMAL,LENGTH,BITS) ;
+ ;  -- Converts a value from decimal representation to
+ I $TR(DECIMAL,"9876543210-")'="" Q "-1 Not a decimal number"
+ N R,S,X
+ S X=DECIMAL,LENGTH=$G(LENGTH),BITS=$G(BITS),S=""
+ I BITS,(BITS<1)!(BITS[".") Q "-2 Not an integer number of bits"
+ I (LENGTH<0)!(LENGTH[".") Q "-3 Invalid length"
+ I X<0 S:BITS X=2**BITS+X S:'BITS X=-X,S="-"
+ S R="" F  S R=$E("0123456789ABCDEF",X#16+1)_R,X=X\16 Q:'X
+ D:LENGTH
+ . F  Q:$L(R)'<LENGTH  S R="0"_R
+ . I S="-",$E(R,1)="0" S R=$E(R,2,$L(R))
+ . Q
+ Q S_R
+DISKFREE(DRIVE) ;
+ ;  -- Finds the amount of free space on the specified drive
+ S DRIVE=$$SHARNAM(DRIVE)
+ N T
+ S T=$ZU(140,13,DRIVE)
+ I T<0 Q T_";Invalid disk drive "_DRIVE
+ Q $P(T,",",1)*$P(T,",",4)
+DISKSIZE(DRIVE) ;
+ ;  -- Finds the total amount of space on the specified drive
+ S DRIVE=$$SHARNAM(DRIVE)
+ N T
+ S T=$ZU(140,13,DRIVE)
+ I T<0 Q T_";Invalid disk drive "_DRIVE
+ Q $P(T,",",3)*$P(T,",",4)
+ENVLOAD() ;
+ Q "ZL"
+ENVSET(NAME) ;
+ Q "ZN """_NAME_""""
+ENVSAVE() ;
+ Q "ZS"
+ENVSHOW() ;
+ Q "ZP"
+HEX2DEC(HEXA,LENGTH,BITS) ;
+ ;  -- Converts a value from hexadecimal representation to
+ S HEXA=$TR(HEXA,"ABCDEFHX","abcdefhx"),LENGTH=$G(LENGTH),BITS=$G(BITS)
+ I BITS,(BITS<1)!(BITS[".") Q "-2 Not an integer number of bits"
+ I (LENGTH<0)!(LENGTH[".") Q "-3 Invalid length"
+ N B,R,S,X
+ S:$E(HEXA,1,2)="0x" HEXA=$E(HEXA,3,$L(HEXA))
+ S:$E(HEXA,1)="x" HEXA=$E(HEXA,2,$L(HEXA))
+ S:$E(HEXA,$L(HEXA))="h" HEXA=$E(HEXA,1,$L(HEXA)-1)
+ S X=HEXA
+ S S="" S:$E(X,1)="-" S="-",X=$E(X,2,$L(X))
+ I $TR(X,"fedcba9876543210")'="" Q "-1 Not a hexadecimal number"
+ S:BITS X=$E(X,$L(X)-(BITS\4)+1,$L(X))
+ S R=0 F  S R=R*16+$F("0123456789abcdef",$E(X,1))-2,X=$E(X,2,$L(X)) Q:X=""
+ I S="",BITS S B=2**(BITS-1) S:R>B R=$TR(R-B-B,"-"),S="-"
+ D:LENGTH
+ . F  Q:$L(R)'<LENGTH  S R="0"_R
+ . I S="-",$E(R,1)="0" S R=$E(R,2,$L(R))
+ . Q
+ Q S_R
+HOSTCMD(CMD,OUT,ERR,DONTWAIT,DEBUG) N CMDO,DIR,NAM,SERR,SOUT,X
+ S NAM="\d"_$J
+ S DIR=$G(^MAGDICOM(2006.563,1,"SCRATCH"),"c:\temp")
+ S SOUT=DIR_NAM_".out",SERR=DIR_NAM_".err"
+ S X=$$DEL^MAGOSDIR(SOUT) ; del DOS redirect output file
+ S X=$$DEL^MAGOSDIR(SERR) ; del DOS redirect error file
+ S CMDO=CMD_" 1>"_SOUT_" 2>"_SERR
+ K OUT,ERR
+ I $G(DONTWAIT) S X=$ZF(-2,CMD)
+ E  D
+ . S X=$ZF(-1,CMDO)
+ . D GETFILE^MAGOSDIR(SOUT,.OUT)
+ . D GETFILE^MAGOSDIR(SERR,.ERR)
+ Q X
+HOSTNAME() ;
+ Q $ZU(110)
+LET2UNC(DRIVE,LOCAL) ;
+ ;  -- Returns the UNC name of the disk-share identified by a drive-letter
+ N E,I,O,S,X
+ S S=$$SHARNAM(DRIVE) I $L(S)>2 Q S
+ S X=$$HOSTCMD("NET USE "_S,.O,.E)
+ S I=0 F  S I=$O(O(I)) Q:I=""  I $E(O(I),1,12)="Remote name " S S=$E(O(I),19,$L(O(I))) Q
+ D:$L(S)<3
+ . S X=$$DISKFREE(S) I X<0 S S="" Q
+ . Q:'$G(LOCAL)
+ . S S="\\"_$$HOSTNAME()_"\"_$E(S,1)_"$"
+ . Q
+ Q S
+LICENSE() ;
+ ;  -- Returns information about the system's license
+ Do $System.License.CKEY()
+ Q
+LOWER(TEXT) ;
+ ;  -- Returns the lower case only representation of TEXT
+ ;     LO = same text, with all upper case converted to lower case
+ Q $TR(TEXT,"ABCDEFGHIJKLMNOPQRSTUVWYXZ","abcdefghijklmnopqrstuvwyxz")
+MATCH(WILDCARD,STRUCTUR,FOUND) N ADD,C,LOOP,L1,L9,SEEK,X,Y
+ ;  -- Scans a structure,
+ ;     reports entries in @STRUCTUR that match WILDCARD;
+ ;     the result is reported in local array @FOUND
+ S ADD=1,WILDCARD=$TR(WILDCARD,"+"),C=0
+ I $E(WILDCARD,1)="-" S ADD=0,WILDCARD=$E(WILDCARD,2,$L(WILDCARD))
+ S X=$TR(WILDCARD,"?*"),L1=$P(X,"-",1),L9=$P(X,"-",2)
+ I WILDCARD["-",L1_"-"_L9'=WILDCARD Q "-1 Improper wildcard "_WILDCARD
+ S:WILDCARD'["-" L1=$P($P(WILDCARD,"?",1),"*",1),L9=L1_"~"
+ I L1=WILDCARD D  Q C
+ . S LOOP=L1
+ . I ADD,$D(@STRUCTUR) S @FOUND="" Q
+ . K @FOUND
+ . Q
+ S:WILDCARD["-" WILDCARD="*"
+ S LOOP=L1 F  D  S LOOP=$O(@STRUCTUR) Q:LOOP=""  Q:LOOP]]L9
+ . Q:LOOP=""  Q:'$D(@STRUCTUR)
+ . Q:'$$MATCH1(LOOP,WILDCARD)
+ . S C=C+1
+ . I ADD S @FOUND="" Q
+ . K @FOUND
+ . Q
+ Q C
+MATCH1(X,Y) N I,M
+ F  Q:X=""  Q:Y=""  D
+ . I $E(X,1)=$E(Y,1) S X=$E(X,2,$L(X)),Y=$E(Y,2,$L(Y)) Q
+ . I $E(Y,1)="?" S X=$E(X,2,$L(X)),Y=$E(Y,2,$L(Y)) Q
+ . I $E(Y,1)="*" D  Q:M
+ . . I Y="*" S (X,Y)="",M=1 Q
+ . . S Y=$E(Y,2,$L(Y)),M=0
+ . . F I=1:1:$L(X) I $$MATCH1($E(X,I,$L(X)),Y) S M=1,X=$E(X,I,$L(X)) Q
+ . . Q
+ . S X="!",Y=""
+ . Q
+ S:$TR(Y,"*")="" Y="" Q:X'="" 0 Q:Y'="" 0
+ Q 1
+MATCHD(WILDCARD,STRUCTUR,FOUND) N C,LOOP,L1,L9,SEEK,X,Y
+ ;  -- Scans a structure,
+ ;     reports entries in @STRUCTUR that match WILDCARD;
+ ;     the result is reported in local array @FOUND
+ S C=0
+ S L1=$P($P(WILDCARD,"?",1),"*",1),L9=L1_"~"
+ I L1=WILDCARD D  Q C
+ . S LOOP=L1
+ . I $D(@STRUCTUR) S @FOUND="" Q
+ . Q
+ S LOOP=L1 F  D  S LOOP=$O(@STRUCTUR) Q:LOOP=""  Q:LOOP]]L9
+ . Q:LOOP=""  Q:'$D(@STRUCTUR)
+ . Q:'$$MATCH1(LOOP,WILDCARD)
+ . S C=C+1
+ . S @FOUND=""
+ . Q
+ Q C
+MUMPS() N M,O,V1,V2
+ ; Returns information about the operating platform
+ S (M,V1,O,V2)="?"
+ N F,G,T
+ S M="Cache",O=$P($P($ZV,"for ",2,999)," (",1)
+ S V1=$P($ZV,O_" ",2),T=""
+ F  S F=$F(V1,"(") Q:F<1  D
+ . S G=$F(V1,")",F) I G<1 S $E(V1,F-1)=" " Q
+ . S T=T_" "_$E(V1,F-1,G-1),$E(V1,F-1,G-1)=""
+ . Q
+ F  Q:$E(V1,1)'=" "  S V1=$E(V1,2,$L(V1))
+ S V1=$P(V1," ",1)_T
+ Q M_"^"_V1_"^"_O_"^"_V2
+SHARNAM(DRIVE) ;
+ ;  -- Returns the "canonic" name of the disk-share
+ I DRIVE?1A Q $$UPPER(DRIVE)_":"
+ I $E(DRIVE,2)=":" Q $$UPPER($E(DRIVE,1)_":")
+ I $E(DRIVE,1,2)="\\" Q $P(DRIVE,"\",1,4)
+ Q DRIVE_"?"
+UPPER(TEXT) ;
+ ;  -- Returns the upper case only representation of TEXT
+ ;     UP = same text, with all lower case converted to upper case
+ Q $TR(TEXT,"abcdefghijklmnopqrstuvwyxz","ABCDEFGHIJKLMNOPQRSTUVWYXZ")
+ZLOAD(ROUTINE) ;
+ ;   -- Returns the code to display the text of the routine
+ ;      whose name is stored in local variable ROUTINE
+ Q "N I,T F I=1:1 S T=$T(+I^@ROUTINE) Q:T=""""  W T,!"
+ZSAVE(ROUTINE) ;
+ ;   -- Returns the code to read a program from the current device
+ ;      and store is as the routine whose name is stored in local
+ ;      variable ROUTINE
+ Q "N C,T S C=$T(+0) ZR  F  R T ZI:T'="""" $TR(T,$C(9),"" "") I T="""" ZS @ROUTINE ZL:C'="""" @C QUIT"
+
+

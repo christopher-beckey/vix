@@ -1,0 +1,24 @@
+ Volume in drive D is New Volume
+ Volume Serial Number is D4F4-B8A8
+
+ Directory of D:\usr\vitelnet\eclipse185\FederationDataSourceProvider\main\src\java\gov\va\med\imaging\federationdatasource\v8
+
+08/24/2017  11:29 AM    <DIR>          .
+08/24/2017  11:29 AM    <DIR>          ..
+08/24/2017  11:29 AM                 0 dir.txt
+08/22/2017  08:07 PM             3,189 FederationDocumentDataSourceServiceV8.java
+08/22/2017  08:20 PM             3,451 FederationDocumentSetDataSourceServiceV8.java
+08/22/2017  08:20 PM             3,431 FederationExternalPackageDataSourceServiceV8.java
+08/23/2017  12:46 PM             3,485 FederationExternalSystemOperationDataSourceServiceV8.java
+08/22/2017  08:00 PM             3,908 FederationImageAccessLoggingDataSourceServiceV8.java
+08/24/2017  02:40 AM            10,368 FederationImageAnnotationDataSourceServiceV8.java
+08/23/2017  10:58 PM             3,641 FederationImageDataSourceServiceV8.java
+08/22/2017  09:00 PM             3,458 FederationPassthroughDataSourceServiceV8.java
+08/22/2017  07:59 PM             3,164 FederationPatientArtifactDataSourceServiceV8.java
+08/23/2017  12:50 PM             3,287 FederationPatientDataSourceServiceV8.java
+08/22/2017  11:45 PM             3,179 FederationStudyGraphDataSourceServiceV8.java
+08/22/2017  11:52 PM             3,253 FederationUserDataSourceServiceV8.java
+08/22/2017  11:52 PM             3,346 FederationVistaRadDataSourceServiceV8.java
+08/23/2017  01:37 PM             3,384 FederationVistaRadImageDataSourceServiceV8.java
+              15 File(s)         54,544 bytes
+               2 Dir(s)   8,710,586,368 bytes free

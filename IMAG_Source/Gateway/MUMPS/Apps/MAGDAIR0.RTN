@@ -1,0 +1,174 @@
+MAGDAIR0 ;WOIFO/PMK - Automatic Import Reconciliation Workflow ; 19 Apr 2010 2:33 PM
+ ;;3.0;IMAGING;**53**;Mar 19, 2002;Build 1715;Apr 22, 2010
+ ;; Per VHA Directive 2004-038, this routine should not be modified.
+ ;; +---------------------------------------------------------------+
+ ;; | Property of the US Government.                                |
+ ;; | No permission to copy or redistribute this software is given. |
+ ;; | Use of unreleased versions of this software requires the user |
+ ;; | to execute a written test agreement with the VistA Imaging    |
+ ;; | Development Office of the Department of Veterans Affairs,     |
+ ;; | telephone (301) 734-0100.                                     |
+ ;; | The Food and Drug Administration classifies this software as  |
+ ;; | a medical device.  As such, it may not be changed in any way. |
+ ;; | Modifications to this software may result in an adulterated   |
+ ;; | medical device under 21CFR820, the use of which is considered |
+ ;; | to be a violation of US Federal Statutes.                     |
+ ;; +---------------------------------------------------------------+
+ ;;
+ ; Formatting subroutines
+ ;
+HIGHLITE(COLOR,TEXT) ; hi-light text to be output
+ N RETURN
+ S COLOR=$G(COLOR),TEXT=$G(TEXT)
+ I TEXT="" D
+ . I COLOR="" S RETURN=BOLD Q
+ . I COLOR="RED" S RETURN=$C(27)_"[0;1;31;44m" Q  ; bold red foreground, blue background
+ . I COLOR="GREEN" S RETURN=$C(27)_"[0;1;32;44m" Q  ; bold green foreground, blue background
+ . I COLOR="YELLOW" S RETURN=$C(27)_"[0;1;33;44m" Q  ; bold yellow foreground, blue background
+ . I COLOR="REVERSE" S RETURN=$C(27)_"[0;1;7m" Q  ; reverse video
+ . S RETURN="*** HIGHLITE Error - Color="""_COLOR_""" ***"
+ . Q
+ E  D
+ . I COLOR="" S RETURN=TEXT Q
+ . I COLOR="RED" S RETURN=$C(27)_"[0;1;31;44m"_TEXT_BOLD Q  ; bold red foreground, blue background
+ . I COLOR="GREEN" S RETURN=$C(27)_"[0;1;32;44m"_TEXT_BOLD Q  ; bold green foreground, blue background
+ . I COLOR="YELLOW" S RETURN=$C(27)_"[0;1;33;44m"_TEXT_BOLD Q  ; bold yellow foreground, blue background
+ . I COLOR="REVERSE" S RETURN=$C(27)_"[0;1;7m"_TEXT_BOLD Q  ; reverse video
+ . S RETURN="*** HIGHLITE Error - Color="""_COLOR_""", Text="""_TEXT_""" ***"
+ . Q
+ Q RETURN
+ ;
+ ;
+ ;
+NAME(NAME) ; convert person name from DICOM format to displayable one
+ N I
+ ; the first "^" becomes a comma, while the others become spaces
+ S I=$F(NAME,"^")
+ Q $S(I>0:$E(NAME,1,I-2)_","_$TR($E(NAME,I,$L(NAME)),"^"," "),1:NAME)
+ ;
+ ;
+ ;
+PNAMEDCM(PNAME) ; convert a VA person name to DICOM format: last^first^middle
+ N FIRSTNAM,LASTNAME,MIDNAME,PNAMEDCM,Z
+ S LASTNAME=$P(PNAME,","),Z=$P(PNAME,",",2,999)
+ S FIRSTNAM=$P(Z," ",1),MIDNAME=$TR($P(Z," ",2,999),".")
+ S PNAMEDCM=LASTNAME_"^"_FIRSTNAM
+ I $L(MIDNAME) S PNAMEDCM=PNAMEDCM_"^"_MIDNAME
+ Q PNAMEDCM
+ ;
+ ;
+ ;
+DATE(YYYYMMDD,FORMAT) ; convert date from DICOM format to displayable one
+ ; FORMAT: B for birthday mm/dd/yyyy, S for short mm/dd/yy, L for long
+ N M
+ S FORMAT=$G(FORMAT)
+ I FORMAT'="B",FORMAT'="S",FORMAT'="L" Q "Wrong format: "_FORMAT
+ I YYYYMMDD="" Q ""
+ I YYYYMMDD="<unknown>" Q YYYYMMDD
+ I FORMAT="B" Q $E(YYYYMMDD,5,6)_"/"_$E(YYYYMMDD,7,8)_"/"_$E(YYYYMMDD,1,4)
+ I FORMAT="S" Q $E(YYYYMMDD,5,6)_"/"_$E(YYYYMMDD,7,8)_"/"_$E(YYYYMMDD,3,4)
+ ; long format: Mmm [D]D, YYYY
+ S M=+$E(YYYYMMDD,5,6),M=(3*(M-1))+1
+ S M=$E("JanFebMarAprMayJunJulAugSepOctNovDec",M,M+2)
+ Q M_" "_(+$E(YYYYMMDD,7,8))_", "_$E(YYYYMMDD,1,4)
+ ;
+ ;
+ ;
+TIME(HHMMSS) ; convert time from DICOM format to displayable one
+ N AMPM,H,M,S
+ I HHMMSS="" Q ""
+ I HHMMSS="<unknown>" Q HHMMSS
+ S H=$E(HHMMSS,1,2),M=$E(HHMMSS,3,4),S=$E(HHMMSS,5,6)
+ I H=0 S H=12,AMPM="a"
+ E  I H<12 S AMPM="a"
+ E  I H<13 S AMPM="p"
+ E  S H=H-12,AMPM="p" S:H<10 H="0"_H
+ Q H_":"_M_":"_S_" "_AMPM_"m"
+ ;
+CONTINUE ; prompt
+ R !!,"Press <Enter> to continue...",X:$G(DTIME,1E5)
+ Q
+ ;
+YESNO(PROMPT,DEFAULT,CHOICE) ; generic YES/NO question driver
+ N OPTION
+ S OPTION(1)="YES"
+ S OPTION(2)="NO"
+ Q $$CHOOSE(PROMPT,DEFAULT,.CHOICE,.OPTION,0)
+ ;
+CHOOSE(PROMPT,DEFAULT,CHOICE,OPTION,ECHO) ; generic question driver
+ N I,J,OK,X
+ S ECHO=$G(ECHO,1) ; default is 1
+ S OK=0 F  D  Q:OK
+ . W !!,PROMPT," " I $L($G(DEFAULT)) W DEFAULT," // "
+ . R X:DTIME E  S OK=-1 Q
+ . I X="",$L($G(DEFAULT)) S X=DEFAULT W X
+ . I X="",'$L($G(DEFAULT)) S X="*" ; fails Y/N tests
+ . I X["^" S CHOICE="^",OK=-1 Q
+ . S X=$$UPPER^MAGOSMSC(X)
+ . S I=0 F  S I=$O(OPTION(I)) Q:'I  D  Q:OK
+ . . I $E($$UPPER^MAGOSMSC(OPTION(I)))=$E(X) D  Q
+ . . . I ECHO W $E(OPTION(I),$L(X)+1,999)
+ . . . S CHOICE=OPTION(I),OK=1
+ . . . Q
+ . . Q
+ . Q:OK
+ . W:X'["?" "   ???" W !,"Please enter "
+ . S I=0 F  S I=$O(OPTION(I)) Q:'I  D
+ . . I I>1 W ", " I '$O(OPTION(I)) W "or " ; last one
+ . . W """",OPTION(I)
+ . . I '$O(OPTION(I)) W """."
+ . . E  W """"
+ . . Q
+ . Q
+ Q OK
+ ;
+ERRORMSG(PAUSE,TEXT,INFO) ; display error message to user
+ N COMEFROM,I,J,MAXLEN,MSG,X
+ S COMEFROM=$P($STACK($STACK-1,"PLACE")," ",1)
+ S I=0,MAXLEN=36+$L(COMEFROM) ; max length of last line
+ I $L($G(TEXT)) S I=I+1,MSG(I)=TEXT
+ S I=I+1,MSG(I)=""
+ I $D(INFO)=1 D ERRMSG1(.MSG,.I,INFO)
+ E  F J=1:1 Q:'$D(INFO(J))  D ERRMSG1(.MSG,.I,INFO(J))
+ F J=1:1:I I $L(MSG(J))>MAXLEN S MAXLEN=$L(MSG(J))
+ S I=I+1,MSG(I)=""
+ S I=I+1,MSG(I)="Message generated at MUMPS line tag "_COMEFROM
+ W ! F J=1:1:MAXLEN+8 W "*"
+ F J=1:1:I W !,"*** ",MSG(J),?MAXLEN+4," ***"
+ W ! F J=1:1:MAXLEN+8 W "*"
+ I $G(PAUSE) D CONTINUE
+ Q
+ ;
+ERRMSG1(MSG,I,INFO) ; split long lines into shorter ones
+ N J,K,X
+ I $L(INFO)'>75 S I=I+1,MSG(I)=INFO Q
+ ; split the line up into shorter ones
+ S K=1,X=$P(INFO," ",1)
+ F J=2:1:$L(INFO," ") D
+ . I ($L(X)+$L($P(INFO," ",J)))>75 D  ; output short line
+ . . S I=I+1,MSG(I)=X,X="",K=0
+ . . Q
+ . S K=K+1,$P(X," ",K)=$P(INFO," ",J)
+ . Q
+ I X'="" S I=I+1,MSG(I)=X ; flush buffer
+ Q
+ ;
+LICENSE() ; check for Laurel Bridge license
+ N CMD,ERROR,DCFPATH,I,PROBLEM,VERBOSE
+ S DCFPATH=$$ENVIRON^MAGOSDIR("DCF_USER_ROOT")
+ I DCFPATH="" Q "-1,No DCF_USER_ROOT environment variable"
+ S CMD=DCFPATH_"\bin\DCF_INFO -C"
+ S VERBOSE=0 D DOS^MAGDOS(CMD,.ERROR)
+ I ERROR(0) D  Q "-2,Can't invoke DCF_INFO program"
+ . N J,MSG
+ . S I=0
+ . S I=I+1,MSG(I)="Error in checking for Laurel Bridge license"
+ . F J=1:1:ERROR(0) S I=I+1,MSG(I)=ERROR(J)
+ . S I=I+1,MSG(I)="Error occurred in LICENSE^"_$T(+0)
+ . D WARNING^MAGDFCNS(.MSG)
+ . Q
+ S PROBLEM="-3,No valid Laurel Bridge license found"
+ F I=1:1:$G(^TMP("MAG",$J,"DOS",0)) D
+ . I $$UPPER^MAGOSMSC($G(^TMP("MAG",$J,"DOS",I)))="VALID" S PROBLEM=0
+ . Q
+ Q PROBLEM

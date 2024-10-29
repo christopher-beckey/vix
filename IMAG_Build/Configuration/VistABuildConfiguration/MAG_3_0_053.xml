@@ -1,0 +1,61 @@
+<?xml version="1.0"?>
+<build xmlns="http://va.gov/VistA/kids/manifest" name="MAG*3.0*053" patchName="DICOM Import I" patch="053">
+  <components>
+    <securityKeys />
+    <parameterDefinitions />
+    <printTemplates />
+    <sortTemplates />
+    <menuOptions>
+      <menuOption export="OPT_1MAG_IMPORTER.KID" />
+      <menuOption export="OPT_2MAG_CHK_OUT_IMG_LOC.KID" />
+      <menuOption export="OPT_3MAG_BLD_OUT_LOC.KID" />
+      <menuOption export="OPT_4DISPLAY_STUDIES_TO_BE_IMPORTED.KID" />
+    </menuOptions>
+    <rpcs>
+      <rpc export="RCP_MAG_DICOM_IMPORTER_LOOKUP.KID" />
+      <rpc export="RPC_MAG_DICOM_ADD_CAMERA_EQUIP_RM.KID" />
+      <rpc export="RPC_MAG_DICOM_GET_DFN.KID" />
+      <rpc export="RPC_MAG_DICOM_GET_HOSP.KID" />
+      <rpc export="RPC_MAG_DICOM_GET_RADORDERS.KID" />
+      <rpc export="RPC_MAG_DICOM_GET_RAD_CAMERA.KID" />
+      <rpc export="RPC_MAG_DICOM_GET_RAD_CPT_MOD.KID" />
+      <rpc export="RPC_MAG_DICOM_GET_RAD_DX_CODE.KID" />
+      <rpc export="RPC_MAG_DICOM_GET_RAD_FILM.KID" />
+      <rpc export="RPC_MAG_DICOM_GET_RAD_INFO_BY_ACN.KID" />
+      <rpc export="RPC_MAG_DICOM_GET_RAD_PERSON.KID" />
+      <rpc export="RPC_MAG_DICOM_GET_USERNAME.KID" />
+      <rpc export="RPC_MAG_DICOM_IMPORTER_CHECK_UIDS.KID" />
+      <rpc export="RPC_MAG_DICOM_IMPORTER_DELETE.KID" />
+      <rpc export="RPC_MAG_DICOM_RADIOLOGY_MODIFIERS.KID" />
+      <rpc export="RPC_MAG_DICOM_RADIOLOGY_PROCEDURES.KID" />
+      <rpc export="RPC_MAG_DICOM_SET_IMGLOCATION.KID" />
+    </rpcs>
+    <dataDictionaries>
+      <dataDictionary export="Z_VSS_2006_55.KID" />
+      <dataDictionary export="Z_VSS_2006_563.KID" />
+      <dataDictionary export="Z_VSS_2006_571.KID" />
+      <dataDictionary export="Z_VSS_2006_5751.KID" />
+      <dataDictionary export="Z_VSS_2006_5752.KID" />
+      <dataDictionary export="Z_VSS_2006_5757.KID" />
+      <dataDictionary export="Z_VSS_2006_5758.KID" />
+      <dataDictionary export="Z_VSS_2006_5759.KID" />
+      <dataDictionary export="Z_VSS_2006_588.KID" />
+    </dataDictionaries>
+    <hl7s />
+    <routines>
+      <routine export="MAGBRTK.RTN" />
+      <routine export="MAGDAIRF.RTN" />
+      <routine export="MAGDAIRG.RTN" />
+      <routine export="MAGDIR81.RTN" />
+      <routine export="MAGDIR8R.RTN" />
+      <routine export="MAGDIR9A.RTN" />
+      <routine export="MAGDIR9B.RTN" />
+      <routine export="MAGDLBAA.RTN" />
+      <routine export="MAGDRPC9.RTN" />
+      <routine export="MAGDRPCA.RTN" />
+      <routine export="MAGDRPCB.RTN" />
+      <routine export="MAGIPS53.RTN" />
+    </routines>
+    <protocols />
+  </components>
+</build>

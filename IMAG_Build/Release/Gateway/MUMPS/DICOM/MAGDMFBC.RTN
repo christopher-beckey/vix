@@ -1,0 +1,132 @@
+MAGDMFBC ;WOIFO/EdM - Questions for MAGDMFB1 ; 10/20/2003  10:38
+ ;;3.0;IMAGING;**9,21,11**;MAR 19, 2002;;APR 14, 2004
+ ;; Per VHA Directive 2004-038, this routine should not be modified.
+ ;; +---------------------------------------------------------------+
+ ;; | Property of the US Government.                                |
+ ;; | No permission to copy or redistribute this software is given. |
+ ;; | Use of unreleased versions of this software requires the user |
+ ;; | to execute a written test agreement with the VistA Imaging    |
+ ;; | Development Office of the Department of Veterans Affairs,     |
+ ;; | telephone (301) 734-0100.                                     |
+ ;; | The Food and Drug Administration classifies this software as  |
+ ;; | a medical device.  As such, it may not be changed in any way. |
+ ;; | Modifications to this software may result in an adulterated   |
+ ;; | medical device under 21CFR820, the use of which is considered |
+ ;; | to be a violation of US Federal Statutes.                     |
+ ;; +---------------------------------------------------------------+
+ ;;
+ Q
+ ;
+Q9 K QUIT S OK=0 F  D  Q:OK  Q:$D(QUIT)
+ . W !!,"Will this computer be a DICOM Image Gateway? ",IMAGGATE,"// "
+ . R X:DTIME E  S X="^"
+ . I X="^" S QUIT=0 Q
+ . I X="^^" S QUIT=1 Q
+ . I X="" S X=IMAGGATE W X
+ . S X=$$YN^MAGDMFB1(X) I X'="" S IMAGGATE=X,OK=1 Q
+ . W !!,"Answering ""Yes"" to this question will have the effect that"
+ . W !,"settings will be enabled that allow this system to be used"
+ . W !,"as an image gateway."
+ . W !,"Answering ""No"" means that it will not be possible to use"
+ . W !,"this system as an image gateway."
+ . W !,"A system can be configured to be a text gateway as well as"
+ . W !,"an image gateway."
+ . Q
+ Q
+ ;
+Q10 K QUIT S OK=0 F  D  Q:OK  Q:$D(QUIT)
+ . W !!,"Will this computer be a DICOM Text Gateway? ",TEXTGATE,"// "
+ . R X:DTIME E  S X="^"
+ . I X="^" S QUIT=0 Q
+ . I X="^^" S QUIT=1 Q
+ . I X="" S X=TEXTGATE W X
+ . S X=$$YN^MAGDMFB1(X) I X'="" S TEXTGATE=X,OK=1 Q
+ . W !!,"Answering ""Yes"" this question will have the effect that"
+ . W !,"settings will be enabled that allow this system to be used"
+ . W !,"as a text gateway."
+ . W !,"Answering ""No"" means that it will not be possible to use"
+ . W !,"this system as a text gateway."
+ . W !,"A system can be configured to be an image gateway as well as"
+ . W !,"a text gateway."
+ . Q
+ Q
+ ;
+Q11 K QUIT S OK=0 F  D  Q:OK  Q:$D(QUIT)
+ . W !!,"Will this computer be a Routing Processor? ",ROUTER,"// "
+ . R X:DTIME E  S X="^"
+ . I X="^" S QUIT=0 Q
+ . I X="^^" S QUIT=1 Q
+ . I X="" S X=ROUTER W X
+ . S X=$$YN^MAGDMFB1(X) I X'="" S ROUTER=X,OK=1 Q
+ . W !!,"Answering ""Yes"" to this question will have the effect that"
+ . W !,"settings will be enabled that allow this system to be used"
+ . W !,"as a Routing Processor."
+ . W !,"Answering ""No"" means that it will not be possible to use"
+ . W !,"this system as a Routing Processor."
+ . W !,"Only answer ""Yes"" when 'auto-routing' is active."
+ . Q
+ Q
+ ;
+Q12 K QUIT S OK=0 F  D  Q:OK  Q:$D(QUIT)
+ . W !!,"Will this computer be part of a system"
+ . W !,"where 'autorouting' is active? ",EVALUATE,"// "
+ . R X:DTIME E  S X="^"
+ . I X="^" S QUIT=0 Q
+ . I X="^^" S QUIT=1 Q
+ . I X="" S X=EVALUATE W X
+ . S X=$$YN^MAGDMFB1(X) I X'="" S EVALUATE=X,OK=1 Q
+ . W !!,"Answering ""Yes"" to this question will have the effect that"
+ . W !,"queue entries will be generated for the evaluation of routing"
+ . W !,"rules when images are acquired."
+ . W !,"Answering ""No"" means that no such entries will be generated."
+ . W !,"Only answer ""Yes"" when 'auto-routing' is active."
+ . Q
+ Q
+ ;
+Q13 I TEXTGATE="NO" Q
+ K QUIT S X=$$Q13A("Radiology",$P(IMGSVC,",",1)) Q:$D(QUIT)
+ S $P(IMGSVC,",",1)=$S(X="YES":"RAD",1:"")
+ Q
+ ;
+Q14 I TEXTGATE="NO" Q
+ K QUIT S X=$$Q13A("Consults",$P(IMGSVC,",",2)) Q:$D(QUIT)
+ S $P(IMGSVC,",",2)=$S(X="YES":"CON",1:"")
+ Q
+ ;
+Q13A(SVCNAME,DEFAULT) ;
+ N VALUE
+ S VALUE=$S(DEFAULT="":"NO",1:"YES")
+ S OK=0 F  D  Q:OK  Q:$D(QUIT)
+ . W !!,"Will this Text Gateway be used for ",SVCNAME,"? ",VALUE,"// "
+ . R X:DTIME E  S X="^"
+ . I X="^" S QUIT=0 Q
+ . I X="^^" S QUIT=1 Q
+ . I X="" S X=VALUE W X
+ . S X=$$YN^MAGDMFB1(X) I X'="" S VALUE=X,OK=1 Q
+ . W !!,"This question allows two Text Gateways to be used, one for"
+ . W !,"RADIOLOGY and the other for CONSULTS.  If this is to be the"
+ . W !,"only Text Gateway and it is going to be used for both RADIOLOGY"
+ . W !,"and CONSULTS (the default configuration), answer ""Yes""."
+ . W !!,"Answering ""Yes"" to this question will have the effect that"
+ . W !,"this Text Gateway will process HL7 messages for ",SVCNAME,"."
+ . W !,"Answering ""No"" means that this Text Gateway will not process"
+ . W !,"HL7 messages for ",SVCNAME," and the other Text Gateway will"
+ . W !,"have to be used instead."
+ . Q
+ Q VALUE
+ ;
+Q15 I TEXTGATE="NO" S SENDPACS="NO" Q
+ K QUIT S OK=0 F  D  Q:OK  Q:$D(QUIT)
+ . W !!,"Send text to a commercial PACS, Mitra Broker, et cetera? ",SENDPACS,"// "
+ . R X:DTIME E  S X="^"
+ . I X="^" S QUIT=0 Q
+ . I X="^^" S QUIT=1 Q
+ . I X="" S X=SENDPACS W X
+ . S X=$$YN^MAGDMFB1(X) I X'="" S SENDPACS=X,OK=1 Q
+ . W !!,"Answering ""Yes"" to this question will have the effect that"
+ . W !,"settings will be enabled to use this system to send text"
+ . W !,"messages to external systems."
+ . W !,"Answering ""No"" means that it will not be possible to send"
+ . W !,"such messages."
+ . Q
+ Q

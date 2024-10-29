@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<build
+
+ name="MAG*3.0*185"
+
+ patch="185"
+
+ patchName="VistA Imaging V3.0 Patch 185 - VIX Viewer v1.6"
+
+ envCheckRoutine=""
+
+ deleteEnvCheckRoutine=""
+
+ preInstallRoutine=""
+
+ deletePreInstalltRoutine=""
+
+ postInstallRoutine="POS^MAGIP185"
+
+ deletePostInstallRoutine="Yes"
+
+ packageName="IMAGING"
+ 
+ packageNumber="454"
+ 
+ packageVersion="3.0"
+ 
+ packagePrefix="MAG"
+ 
+ packageDateDestributed="3020319"
+ 
+ alphaBetaTesting="YES"
+ 
+ installationMessage="YES"
+ 
+ addressForUsageReporting="G.IMAGING DEVELOPMENT TEAM@FORUM.VA.GOV"
+ 
+ xmlns="http://va.gov/VistA/kids/manifest">
+<requiredBuilds>
+<!-- action= 0:Warning only;1:Don't install, remove global;2:Don't install, leave global;
+ -->
+  <requiredBuild name="MAG*3.0*93" action="2"/>
+
+</requiredBuilds>
+<components>
+<dataDictionaries>
+<dataDictionary name="2005.003" export="DD_2005_003.KID"/>
+</dataDictionaries>
+<routines>
+  <routine name="MAGIP185" export="MAGIP185.RTN"/>
+  <routine name="MAGNAN01" export="MAGNAN01.RTN"/>
+  <routine name="MAGNAN02" export="MAGNAN02.RTN"/>
+  <routine name="MAGNAN03" export="MAGNAN03.RTN"/>
+  <routine name="MAGNAU03" export="MAGNAU03.RTN"/>
+  <routine name="MAGNID01" export="MAGNID01.RTN"/>
+  <routine name="MAGNISET" export="MAGNISET.RTN"/>
+  <routine name="MAGNPARM" export="MAGNPARM.RTN"/>
+  <routine name="MAGNU001" export="MAGNU001.RTN"/>
+  <routine name="MAGNU002" export="MAGNU002.RTN"/>
+</routines>
+<rpcs>
+<rpc name="MAGN ANNOT GET IMAGE ANNOT" export="RPC_MAGN ANNOT_GET_IMAGE_ANNOT.KID"/>
+<rpc name="MAGN ANNOT GET PSTATE" export="RPC_MAGN_ANNOT_GET_PSTATE.KID"/>
+<rpc name="MAGN ANNOT GET STUDY" export="RPC_MAGN_ANNOT_GET_STUDY.KID"/>
+<rpc name="MAGN ANNOT STORE STUDY" export="RPC_MAGN_ANNOT_STORE_STUDY.KID"/>
+<rpc name="MAGN DELETE IMAGES BY IEN" export="RPC_MAGN_DELETE_IMAGES_BY_IEN.KID"/>
+<rpc name="MAGN SET IMAGES PROPS BY IEN" export="RPC_MAGN_SET_IMAGES_PROPS_BY_IEN.KID"/>
+
+<!-- XPAR SET/GET -->
+<rpc name="MAGN PARAM GET LIST" export="RPC_MAGN_PARAM_GET_LIST.KID"/>
+<rpc name="MAGN PARAM GET VALUE" export="RPC_MAGN_PARAM_GET_VALUE.KID"/>
+<rpc name="MAGN PARAM SET LIST" export="RPC_MAGN_PARAM_SET_LIST.KID"/>
+</rpcs>
+<options>
+</options>
+<securityKeys>
+</securityKeys>
+<protocols>
+</protocols>
+<templateLists>
+</templateLists>
+<hl7Applications>
+</hl7Applications>
+<hl7LogicalLinks>
+</hl7LogicalLinks>
+<parameterDefinitions>
+    <parameterDefinition name="MAG USER PREF" export="PARAMDEF_MAG_USER_PREF.KID" />
+</parameterDefinitions>
+<parameterTemplates>
+</parameterTemplates>
+<printTemplates>
+</printTemplates>
+<sortTemplates>
+</sortTemplates>
+<inputTemplates>
+</inputTemplates>
+<forms>
+</forms>
+<functions>
+</functions>
+<dialogs>
+</dialogs>
+<bulletins>
+</bulletins>
+<mailGroups>
+</mailGroups>
+<helpFrames>
+</helpFrames>
+</components>
+</build>

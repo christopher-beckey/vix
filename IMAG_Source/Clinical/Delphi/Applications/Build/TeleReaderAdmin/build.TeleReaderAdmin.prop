@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">	
+	<PropertyGroup>
+		<Version>3.0</Version>
+		<RootDir>E:\Builds\</RootDir>
+		<ProjectName>TeleReaderAdmin\</ProjectName>
+		<PatchNumber>110</PatchNumber>
+		<BaseVersion>30.60.$(PatchNumber)</BaseVersion>
+		<TempDelete>false</TempDelete>
+		<TestNumber>11</TestNumber>
+		<PatchFolderName>V$(Version)p$(PatchNumber)Build$(BuildNumber)</PatchFolderName>
+		<FullBuildPath>$(RootDir)$(ProjectName)$(PatchFolderName)</FullBuildPath>
+		<TempFolder>\temp</TempFolder>
+		<ReleaseName>TeleReaderConfigurator</ReleaseName>		
+		<InstallShieldPath>C:\Program Files\InstallShield\2012Spring\System</InstallShieldPath>
+		<InstallShieldProject>$(FullBuildPath)$(TempFolder)\p$(PatchNumber)\MagTeleReaderConfig.ism</InstallShieldProject>
+		<BuildCompressed>true</BuildCompressed>
+		<ProductVersion Condition="'$(ProductVersionInclude)'!='False'">$(BaseVersion).$(TestNumber)</ProductVersion>
+	</PropertyGroup>
+	<!-- Itemgroups below are patch dependencies -->
+	<ItemGroup>
+		<PatchDepName Include="$(SourceDir)\**\*.*" >
+			<PatchDepNumber>110</PatchDepNumber>
+			<Folder></Folder>
+		</PatchDepName>		
+	</ItemGroup>
+	<!-- Itemgroups below are projects to compile -->
+	<ItemGroup>
+		<DelphiFiles Include="$(RootDir)$(ProjectName)$(PatchFolderName)$(TempFolder)\p$(PatchNumber)\TeleReaderAdmin\MAGTeleReaderConfig.dproj" >
+			<Options>Rebuild</Options>
+			<Configuration>Release</Configuration> 
+			<Compiler>MSBuild</Compiler>	
+			<ProjectOverride>true</ProjectOverride>	
+			<Sign>exe</Sign>
+			<DCC_DcuOutput>..\dcu</DCC_DcuOutput>
+			<DCC_ObjOutput>..\dcu</DCC_ObjOutput>
+			<DCC_HppOutput>..\dcu</DCC_HppOutput>
+			<DCC_UnitSearchPath>C:\Program Files\Vista\BDK32\Source;C:\Program Files\CodeGear\RAD Studio\5.0\Imports\VA508Access\dcu;..\shared;..\MagFMDc</DCC_UnitSearchPath>
+			<DCC_ResourcePath>C:\Program Files\Vista\BDK32\Source;C:\Program Files\CodeGear\RAD Studio\5.0\Imports\VA508Access\dcu;..\shared;..\MagFMDc;</DCC_ResourcePath>
+			<DCC_ObjPath>C:\Program Files\Vista\BDK32\Source..\shared;..\MagFMDc;</DCC_ObjPath>
+			<DCC_IncludePath>C:\Program Files\Vista\BDK32\Source;;C:\Program Files\CodeGear\RAD Studio\5.0\Imports\VA508Access\dcu;..\shared;..\MagFMDc;</DCC_IncludePath>
+		</DelphiFiles>	
+
+	</ItemGroup>
+<!-- Itemgroups below are for InstallShield -->
+	<ItemGroup Condition="'$(CreateMSI)'!='false'">
+		<InstallShieldReleaseConfiguration Include="MagInstall-msi">
+			<SetupExe>false</SetupExe>
+		</InstallShieldReleaseConfiguration>	
+	</ItemGroup>	
+	<ItemGroup Condition="'$(CreateExe)'!='false'">
+		<InstallShieldReleaseConfiguration Include="MagInstall-exe">
+			<SetupExe>true</SetupExe>
+		</InstallShieldReleaseConfiguration>	
+	</ItemGroup>
+	<ItemGroup>
+		<InstallShieldPathVariableOverrides Include="$(FullBuildPath)$(TempFolder)">
+			<PathVariable>PATH_TO_DEV_FILES</PathVariable>
+		</InstallShieldPathVariableOverrides>
+		<InstallShieldPathVariableOverrides Include="$(ReleaseDir)">
+			<PathVariable>PATH_TO_RELEASE_FILES</PathVariable>
+		</InstallShieldPathVariableOverrides>
+	</ItemGroup>
+</Project>

@@ -1,0 +1,135 @@
+MAGDBB2 ;WOIFO/EdM - ET Phone Home ; 19 Dec 2008 3:31 PM
+ ;;3.0;IMAGING;**69,54**;MAR 19, 2002;;OCT 28, 2009
+ ;; Per VHA Directive 2004-038, this routine should not be modified.
+ ;; +---------------------------------------------------------------+
+ ;; | Property of the US Government.                                |
+ ;; | No permission to copy or redistribute this software is given. |
+ ;; | Use of unreleased versions of this software requires the user |
+ ;; | to execute a written test agreement with the VistA Imaging    |
+ ;; | Development Office of the Department of Veterans Affairs,     |
+ ;; | telephone (301) 734-0100.                                     |
+ ;; | The Food and Drug Administration classifies this software as  |
+ ;; | a medical device.  As such, it may not be changed in any way. |
+ ;; | Modifications to this software may result in an adulterated   |
+ ;; | medical device under 21CFR820, the use of which is considered |
+ ;; | to be a violation of US Federal Statutes.                     |
+ ;; +---------------------------------------------------------------+
+ ;;
+ Q
+ ;
+ ; The entry-points in the routine are supposed to be
+ ; called only from routine ^MAGDBB
+ ;
+GETIP ;Get IP-address(es)
+ N I,IP,O
+ S X=$$HOSTCMD^MAGOSMSC("ipconfig /all",.O)
+ S STS=$$TCPUSE^MAGOSTCP(OFF,POSTPORT),STN=""
+ S I="" F  S I=$O(O(I)) Q:I=""  D
+ . I O(I)["IP Address" S IP=$TR($P(O(I),": ",2),NL) W "IP="_IP_NL
+ . S:O(I)["Host Name" STN=$TR($P(O(I),": ",2),NL)
+ . I O(I)["Physical Address" S PHY=$TR($P(O(I),": ",2),NL)
+ . Q
+ S:STN="" STN=IP
+ Q
+ ;
+ROUTE ; Routing Statistics were already collected, report them
+ N D0,I
+ S I=INFO F  S I=$O(INFO(I)) Q:I=""  Q:INFO(I)="Route"
+ Q:I=""
+ F  S I=$O(INFO(I)) Q:I=""  Q:INFO(I)="RouteEnd"  Q:INFO(I)="Audit"  D
+ . W INFO(I)_NL S INFO=I
+ . Q
+ ;
+ ; Routing Rules
+ ;
+ S D0=0 F  S D0=$O(^MAGDICOM(2006.59,D0)) Q:'D0  D
+ . S T="RTRU="
+ . S D1=0 F  S D1=$O(^MAGDICOM(2006.59,D0,1,D1)) Q:'D1  D
+ . . W T_$G(^MAGDICOM(2006.59,D0,1,D1,0))_NL
+ . . S T="RTRC="
+ . . Q
+ . Q
+ Q
+ ;
+MASTER ;
+ F F=1,2,3,4 D
+ . ;
+ . ; 1 ==> 2006.581 = Instruments
+ . ; 2 ==> 2006.582 = Modality
+ . ; 3 ==> 2006.583 = Modality Worklist
+ . ; 4 ==> 2006.584 = TCP/IP Provider Port
+ . ;
+ . N D0,FM
+ . S FM=2006.58_F,D0=0 F  S D0=$O(^MAGDICOM(FM,D0)) Q:'D0  D
+ . . S X=$G(^MAGDICOM(FM,D0,0)) W:X'="" "DIC"_F_"="_X_NL
+ . . Q
+ . Q
+ ;
+ D  ; User Applications
+ . N D0,D1,D2,FM
+ . S FM=2006.585,D0=0 F  S D0=$O(^MAGDICOM(FM,D0)) Q:'D0  D
+ . . S X=$G(^MAGDICOM(FM,D0,0)) Q:X=""
+ . . W "DIC5="_X_NL
+ . . S D1=0 F  S D1=$O(^MAGDICOM(FM,D0,1,D1)) Q:'D1  D
+ . . . S X=$G(^MAGDICOM(FM,D0,1,D1,0)) Q:X=""
+ . . . W "SOP="_X_NL
+ . . . S D2=0 F  S D2=$O(^MAGDICOM(FM,D0,1,D1,1,D2)) Q:'D2  D
+ . . . . S X=$G(^MAGDICOM(FM,D0,1,D1,1,D2,0)) Q:X=""
+ . . . . W "XFR="_X_NL
+ . . . . Q
+ . . . Q
+ . . W "DIC5.="_NL
+ . . Q
+ . Q
+ Q
+ ;
+MENU ; Menu Options
+ N ACTION,DTX
+ S ACTION="" F  S ACTION=$O(^MAGDICOM("MENU",ACTION)) Q:ACTION=""  D
+ . W "MENU="_ACTION_NL
+ . L +^MAGDICOM("MENU",ACTION):1E9 ; Background process MUST wait
+ . S DTX="" F  S DTX=$O(^MAGDICOM("MENU",ACTION,DTX)) Q:DTX=""  D
+ . . W "MCNT="_$$FM^MAGDBB(DTX)_"="_^MAGDICOM("MENU",ACTION,DTX)_NL
+ . . K ^MAGDICOM("MENU",ACTION,DTX)
+ . . Q
+ . L -^MAGDICOM("MENU",ACTION)
+ . Q
+ Q
+TEXT ; Text Gateway Statistics
+ N I
+ S I=INFO F  S I=$O(INFO(I)) Q:I=""  Q:INFO(I)="Audit"
+ Q:I=""
+ F  S I=$O(INFO(I)) Q:I=""  D
+ . W INFO(I)_NL S INFO=I
+ . Q
+ Q
+ ;
+MODALITY ; Modality Worklist Statistics
+ N DTX,N,S,X
+ S DTX="" F  S DTX=$O(^MAGDWLST("STAT",DTX)) Q:DTX=""  D
+ . S S="" F  S S=$O(^MAGDWLST("STAT",DTX,S)) Q:S=""  D
+ . . S X=$G(^MAGDWLST("STAT",DTX,S)),N=$P(X,"^",1) Q:'N
+ . . W "STWL="_DTX_"^"_S_"^"_N_"^"_$P(X,"^",3)_NL
+ . . Q
+ . Q
+ Q
+ ;
+IMGPROC ; Image Processing Statistics
+ N D0,DTX,INST,N,X
+ K ^TMP("MAG",$J,"DAILY")
+ S D0=0 F  S D0=$O(^MAGDICOM(2006.5764,D0)) Q:'D0  D
+ . S INST=$P($G(^MAGDICOM(2006.5764,D0,0)),"^",1) Q:INST=""
+ . S DTX=0 F  S DTX=$O(^MAGDICOM(2006.5764,D0,1,DTX)) Q:'DTX  D
+ . . S X=$G(^MAGDICOM(2006.5764,D0,1,DTX,0))
+ . . S N=$P(X,"^",2) S:N ^TMP("MAG",$J,"DAILY",DTX,INST,"A")=N
+ . . S N=$P(X,"^",3) S:N ^TMP("MAG",$J,"DAILY",DTX,INST,"I")=N
+ . . Q
+ . Q
+ S DTX="" F  S DTX=$O(^TMP("MAG",$J,"DAILY",DTX)) Q:DTX=""  D
+ . S INST="" F  S INST=$O(^TMP("MAG",$J,"DAILY",DTX,INST)) Q:INST=""  D
+ . . W "STIM="_DTX_"^"_INST_"^"_$G(^TMP("MAG",$J,"DAILY",DTX,INST,"A"))_"^"_$G(^TMP("MAG",$J,"DAILY",DTX,INST,"I"))_NL
+ . . Q
+ . Q
+ K ^TMP("MAG",$J,"DAILY")
+ Q
+ ;

@@ -1,0 +1,358 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="Current" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{B4D5E28A-3CB7-46FA-8245-4891B44387B7}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Hydra.Dicom</RootNamespace>
+    <AssemblyName>Hydra.Dicom</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <CodeContractsAssemblyMode>0</CodeContractsAssemblyMode>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\..\</SolutionDir>
+    <RestorePackages>false</RestorePackages>
+    <SccProjectName>
+    </SccProjectName>
+    <SccLocalPath>
+    </SccLocalPath>
+    <SccAuxPath>
+    </SccAuxPath>
+    <SccProvider>
+    </SccProvider>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <CodeContractsEnableRuntimeChecking>False</CodeContractsEnableRuntimeChecking>
+    <CodeContractsRuntimeOnlyPublicSurface>False</CodeContractsRuntimeOnlyPublicSurface>
+    <CodeContractsRuntimeThrowOnFailure>True</CodeContractsRuntimeThrowOnFailure>
+    <CodeContractsRuntimeCallSiteRequires>False</CodeContractsRuntimeCallSiteRequires>
+    <CodeContractsRuntimeSkipQuantifiers>False</CodeContractsRuntimeSkipQuantifiers>
+    <CodeContractsRunCodeAnalysis>False</CodeContractsRunCodeAnalysis>
+    <CodeContractsNonNullObligations>True</CodeContractsNonNullObligations>
+    <CodeContractsBoundsObligations>True</CodeContractsBoundsObligations>
+    <CodeContractsArithmeticObligations>True</CodeContractsArithmeticObligations>
+    <CodeContractsEnumObligations>True</CodeContractsEnumObligations>
+    <CodeContractsRedundantAssumptions>True</CodeContractsRedundantAssumptions>
+    <CodeContractsRedundantTests>True</CodeContractsRedundantTests>
+    <CodeContractsMissingPublicRequiresAsWarnings>True</CodeContractsMissingPublicRequiresAsWarnings>
+    <CodeContractsInferRequires>True</CodeContractsInferRequires>
+    <CodeContractsInferEnsures>False</CodeContractsInferEnsures>
+    <CodeContractsInferObjectInvariants>False</CodeContractsInferObjectInvariants>
+    <CodeContractsSuggestAssumptions>False</CodeContractsSuggestAssumptions>
+    <CodeContractsSuggestRequires>False</CodeContractsSuggestRequires>
+    <CodeContractsSuggestObjectInvariants>False</CodeContractsSuggestObjectInvariants>
+    <CodeContractsSuggestReadonly>True</CodeContractsSuggestReadonly>
+    <CodeContractsRunInBackground>True</CodeContractsRunInBackground>
+    <CodeContractsShowSquigglies>True</CodeContractsShowSquigglies>
+    <CodeContractsUseBaseLine>False</CodeContractsUseBaseLine>
+    <CodeContractsEmitXMLDocs>False</CodeContractsEmitXMLDocs>
+    <CodeContractsCustomRewriterAssembly />
+    <CodeContractsCustomRewriterClass />
+    <CodeContractsLibPaths />
+    <CodeContractsExtraRewriteOptions />
+    <CodeContractsExtraAnalysisOptions />
+    <CodeContractsSQLServerOption />
+    <CodeContractsBaseLineFile />
+    <CodeContractsCacheAnalysisResults>True</CodeContractsCacheAnalysisResults>
+    <CodeContractsFailBuildOnWarnings>False</CodeContractsFailBuildOnWarnings>
+    <CodeContractsBeingOptimisticOnExternal>True</CodeContractsBeingOptimisticOnExternal>
+    <CodeContractsRuntimeCheckingLevel>Full</CodeContractsRuntimeCheckingLevel>
+    <CodeContractsReferenceAssembly>DoNotBuild</CodeContractsReferenceAssembly>
+    <CodeContractsAnalysisWarningLevel>0</CodeContractsAnalysisWarningLevel>
+    <UseVSHostingProcess>true</UseVSHostingProcess>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DefineConstants>TRACE;EXPOSE_LIBTIFF</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="HtmlAgilityPack">
+      <HintPath>..\..\..\packages\HtmlAgilityPack.1.4.9\lib\Net45\HtmlAgilityPack.dll</HintPath>
+    </Reference>
+    <Reference Include="Hydra.ECGUtils, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\src3rdParty\Hydra.ECG\bin\$(Configuration)\Hydra.ECGUtils.dll</HintPath>
+    </Reference>
+    <Reference Include="ImageResizer, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\ImageResizer.4.2.5\lib\net45\ImageResizer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="log4net, Version=1.2.13.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\packages\log4net.2.0.3\lib\net40-full\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.VisualBasic" />
+    <Reference Include="NAudio">
+      <HintPath>..\..\..\packages\NAudio.1.7\lib\net35\NAudio.dll</HintPath>
+    </Reference>
+    <Reference Include="NAudio.Lame">
+      <HintPath>..\..\..\packages\NAudio.Lame.1.0.2\lib\net20\NAudio.Lame.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Newtonsoft.Json.10.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="NReco.VideoConverter">
+      <HintPath>..\..\..\packages\NReco.VideoConverter.1.0.8.0\lib\net20\NReco.VideoConverter.dll</HintPath>
+    </Reference>
+    <Reference Include="nunit.framework, Version=2.6.4.14350, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\packages\NUnit.2.6.4\lib\nunit.framework.dll</HintPath>
+    </Reference>
+    <Reference Include="PdfSharp-gdi">
+      <HintPath>..\..\..\src3rdParty\PDFSharp\PdfSharp-gdi\bin\$(Configuration)\PdfSharp-gdi.dll</HintPath>
+    </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.IO.Compression" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xaml" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
+    <Reference Include="zlibnet">
+      <HintPath>..\..\..\packages\zlibnet v1.3\zlibnet.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\..\..\SharedAssemblyInfo.cs">
+      <Link>Properties\SharedAssemblyInfo.cs</Link>
+    </Compile>
+    <Compile Include="AudioProcessor.cs" />
+    <Compile Include="ConversionResult.cs" />
+    <Compile Include="DicomDirBuilder.cs" />
+    <Compile Include="ImageProcessor.cs" />
+    <Compile Include="ImageProcessResultset.cs" />
+    <Compile Include="ImageUpdateResultset.cs" />
+    <Compile Include="IStudyBuilder.cs" />
+    <Compile Include="JpegWriter.cs" />
+    <Compile Include="JsonUtil.cs" />
+    <Compile Include="MeasurementReader.cs" />
+    <Compile Include="PngWriter.cs" />
+    <Compile Include="PresentationStateReader.cs" />
+    <Compile Include="CreatePresentationState.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Resource.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resource.resx</DependentUpon>
+    </Compile>
+    <Compile Include="SRDocument.cs" />
+    <Compile Include="SR\DSRBasicTextSRConstraintChecker.cs" />
+    <Compile Include="SR\DSRByReferenceTreeNode.cs" />
+    <Compile Include="SR\DSRChestCadSRConstraintChecker.cs" />
+    <Compile Include="SR\DSRCodedEntryValue.cs" />
+    <Compile Include="SR\DSRCodeTreeNode.cs" />
+    <Compile Include="SR\DSRCodingSchemeIdentificationList.cs" />
+    <Compile Include="SR\DSRColonCadSRConstraintChecker.cs" />
+    <Compile Include="SR\DSRCompositeReferenceValue.cs" />
+    <Compile Include="SR\DSRCompositeTreeNode.cs" />
+    <Compile Include="SR\DSRComprehensiveSRConstraintChecker.cs" />
+    <Compile Include="SR\DSRContainerTreeNode.cs" />
+    <Compile Include="SR\DSRContentItem.cs" />
+    <Compile Include="SR\DSRDateTimeTreeNode.cs" />
+    <Compile Include="SR\DSRDateTreeNode.cs" />
+    <Compile Include="SR\DSRDocument.cs" />
+    <Compile Include="SR\DSRDocumentTree.cs" />
+    <Compile Include="SR\DSRDocumentTreeNode.cs" />
+    <Compile Include="SR\DSREnhancedSRConstraintChecker.cs" />
+    <Compile Include="SR\DSRGraphicData3DList.cs" />
+    <Compile Include="SR\DSRGraphicDataList.cs" />
+    <Compile Include="SR\DSRImageFrameList.cs" />
+    <Compile Include="SR\DSRImageReferenceValue.cs" />
+    <Compile Include="SR\DSRImageTreeNode.cs" />
+    <Compile Include="SR\DSRImplantationPlanSRDocumentConstraintChecker.cs" />
+    <Compile Include="SR\DSRIODConstraintChecker.cs" />
+    <Compile Include="SR\DSRKeyObjectSelectionDocumentConstraintChecker.cs" />
+    <Compile Include="SR\DSRListOfItems.cs" />
+    <Compile Include="SR\DSRMacularGridThicknessAndVolumeReportConstraintChecker.cs" />
+    <Compile Include="SR\DSRMammographyCadSRConstraintChecker.cs" />
+    <Compile Include="SR\DSRNumericMeasurementValue.cs" />
+    <Compile Include="SR\DSRNumTreeNode.cs" />
+    <Compile Include="SR\DSRPNameTreeNode.cs" />
+    <Compile Include="SR\DSRProcedureLogConstraintChecker.cs" />
+    <Compile Include="SR\DSRReferencedDatetimeList.cs" />
+    <Compile Include="SR\DSRReferencedSamplePositionList.cs" />
+    <Compile Include="SR\DSRReferencedTimeOffsetList.cs" />
+    <Compile Include="SR\DSRSCoord3DTreeNode.cs" />
+    <Compile Include="SR\DSRSCoordTreeNode.cs" />
+    <Compile Include="SR\DSRSOPInstanceReferenceList.cs" />
+    <Compile Include="SR\DSRSpatialCoordinates3DValue.cs" />
+    <Compile Include="SR\DSRSpatialCoordinatesValue.cs" />
+    <Compile Include="SR\DSRSpectaclePrescriptionReportConstraintChecker.cs" />
+    <Compile Include="SR\DSRStringValue.cs" />
+    <Compile Include="SR\DSRTCoordTreeNode.cs" />
+    <Compile Include="SR\DSRTemporalCoordinatesValue.cs" />
+    <Compile Include="SR\DSRTextTreeNode.cs" />
+    <Compile Include="SR\DSRTimeTreeNode.cs" />
+    <Compile Include="SR\DSRTree.cs" />
+    <Compile Include="SR\DSRTreeNodeCursor.cs" />
+    <Compile Include="SR\DSRTypes.cs" />
+    <Compile Include="SR\DSRUIDRefTreeNode.cs" />
+    <Compile Include="SR\DSRUtils.cs" />
+    <Compile Include="SR\DSRWaveformChannelList.cs" />
+    <Compile Include="SR\DSRWaveformReferenceValue.cs" />
+    <Compile Include="SR\DSRWaveformTreeNode.cs" />
+    <Compile Include="SR\DSRXMLCursor.cs" />
+    <Compile Include="SR\DSRXMLDocument.cs" />
+    <Compile Include="SR\DSRXRayRadiationDoseSRConstraintChecker.cs" />
+    <Compile Include="StreamWrapper.cs" />
+    <Compile Include="StudyReader.cs" />
+    <Compile Include="TargaImage.cs" />
+    <Compile Include="TiffProcessor.cs" />
+    <Compile Include="Utility.cs" />
+    <Compile Include="VideoProcessor.cs" />
+    <Compile Include="XmlProcessor.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="..\..\..\packages\NAudio.Lame.1.0.2\content\libmp3lame.32.dll">
+      <Link>libmp3lame.32.dll</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\packages\NAudio.Lame.1.0.2\content\libmp3lame.64.dll">
+      <Link>libmp3lame.64.dll</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\src3rdParty\ClearCanvas\Dicom\Codec\Jpeg2000\x64\$(Configuration)\ClearCanvas.Dicom.Codec.Jpeg2000.dll">
+      <Link>Plugins\ClearCanvas.Dicom.Codec.Jpeg2000.dll</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\src3rdParty\ClearCanvas\Dicom\Codec\Jpeg\x64\$(Configuration)\ClearCanvas.Dicom.Codec.Jpeg.dll">
+      <Link>Plugins\ClearCanvas.Dicom.Codec.Jpeg.dll</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\src3rdParty\ClearCanvas\Dicom\Codec\Rle\bin\$(Configuration)\ClearCanvas.Dicom.Codec.Rle.dll">
+      <Link>Plugins\ClearCanvas.Dicom.Codec.Rle.dll</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <None Include="Resources\pdf.jpg" />
+    <None Include="Resources\ecg.jpg" />
+    <None Include="Resources\sr.jpg" />
+    <None Include="Resources\error.jpg" />
+    <None Include="Resources\audio.jpg" />
+    <None Include="Resources\video.jpg" />
+    <None Include="Resources\xml.jpg" />
+    <None Include="Resources\_readme.bmp" />
+    <None Include="Resources\rtf.jpg" />
+    <None Include="Resources\txt.jpg" />
+    <Content Include="..\..\..\src3rdParty\ClearCanvas\ImageViewer\Rendering\BilinearInterpolation\x64\$(Configuration)\BilinearInterpolation.dll">
+      <Link>BilinearInterpolation.dll</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="zlib32.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="zlib64.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\src3rdParty\ClearCanvas\Common\ClearCanvas.Common.csproj">
+      <Project>{f6ead428-e6cf-4df6-b2f3-d33d532c5343}</Project>
+      <Name>ClearCanvas.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\src3rdParty\ClearCanvas\Dicom\ClearCanvas.Dicom.csproj">
+      <Project>{ad9ece2b-8268-4115-8dc8-860fbd011fff}</Project>
+      <Name>ClearCanvas.Dicom</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\src3rdParty\ClearCanvas\ImageViewer\ClearCanvas.ImageViewer.csproj">
+      <Project>{85100d3e-471c-47c9-9687-abf25f617ed7}</Project>
+      <Name>ClearCanvas.ImageViewer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\src3rdParty\ClearCanvas\ImageViewer\StudyManagement\Core\ClearCanvas.ImageViewer.StudyManagement.Core.csproj">
+      <Project>{624bc225-49a8-4e92-942d-cdc976292eb9}</Project>
+      <Name>ClearCanvas.ImageViewer.StudyManagement.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Hydra.Common\Hydra.Common.csproj">
+      <Project>{46ae373d-b654-4209-88f0-3e416c9f7267}</Project>
+      <Name>Hydra.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Hydra.Log\Hydra.Log.csproj">
+      <Project>{39a30969-59a3-48b1-be80-975d6d833ec8}</Project>
+      <Name>Hydra.Log</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Hydra.Security\Hydra.Security.csproj">
+      <Project>{46ae373d-b654-4209-88f0-3e416c9f7268}</Project>
+      <Name>Hydra.Security</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resource.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resource.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PreBuildEvent>
+    </PreBuildEvent>
+  </PropertyGroup>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

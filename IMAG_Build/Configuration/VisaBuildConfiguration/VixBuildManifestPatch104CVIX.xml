@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Build>
+  	<Patch number="30.104.5.4" msiName="MAG3_0P104T5_CVIX_Setup.msi"/>
+  	<!-- Build projects are built in the order they are listed below -->
+  	<!-- Performing labeled builds should be done against the repository where projects were labeled -->
+	<BuildProjects branch="BranchP104P118" label="MAG3_0P104T5CVIX_081811" tfsPath="VistA_Imaging\Dev\BranchP104P118\Source\Production\VISA\Java" ccPath="">
+		<BuildProject dependencyType="Other">ImagingRoot</BuildProject>
+		<BuildProject dependencyType="AppExtensionJar">ClinicalDisplayConnection</BuildProject>
+		<BuildProject dependencyType="AppExtensionJar">ExchangeConnection</BuildProject>
+		<BuildProject dependencyType="AppExtensionJar">FederationConnection</BuildProject>
+		<BuildProject dependencyType="AppExtensionJar">VistaConnection</BuildProject>
+		<BuildProject dependencyType="AppExtensionJar">XCAConnection</BuildProject>
+		<BuildProject dependencyType="AppExtensionJar">XCASConnection</BuildProject>
+		<BuildProject dependencyType="AppExtensionJar">VistaImagingConnection</BuildProject>
+		<BuildProject dependencyType="AppExtensionJar">AwivConnection</BuildProject>
+		<BuildProject dependencyType="AppJar">ImagingCommon</BuildProject>
+		<BuildProject dependencyType="AppJar">ImagingVistaRealmClient</BuildProject>
+		<BuildProject dependencyType="AppJar">TomcatAdapter</BuildProject>		
+		<BuildProject dependencyType="AppJar">TransactionContext</BuildProject>
+		<BuildProject dependencyType="AppJar">CoreRouterSemantics</BuildProject>
+		<BuildProject dependencyType="AppJar">CoreRouterAnnotation</BuildProject>
+		<BuildProject dependencyType="AppJar">CoreValueObjects</BuildProject>
+		<BuildProject dependencyType="AppJar">ExchangeCommon</BuildProject>		
+		<BuildProject dependencyType="AppJar">CoreRouterAnnotationProcessor</BuildProject>
+		<BuildProject dependencyType="AppJar">DataSourceServiceProvider</BuildProject>
+		<BuildProject dependencyType="AppJar">SiteServiceSOAPClient</BuildProject>
+		<BuildProject dependencyType="AppJar">SiteServiceDataSourceProvider</BuildProject>
+		<BuildProject dependencyType="AppJar">VistaStorage</BuildProject>
+		<BuildProject dependencyType="AppJar">ImagingExchangeBaseWebProxy</BuildProject>
+		<BuildProject dependencyType="AppJar">ExchangeCommonDataSource</BuildProject>
+		<BuildProject dependencyType="AppJar">ImagingTestResources</BuildProject>
+		<BuildProject dependencyType="AppJar">ImagingCache</BuildProject>
+		<BuildProject dependencyType="AppJar">ImagingCacheImpl</BuildProject>
+		<BuildProject dependencyType="AppJar">ImagingExchangeCache</BuildProject>
+		<BuildProject dependencyType="AppJar">ImagingDicomCommon</BuildProject>
+		<BuildProject dependencyType="AppJar">ImagingDicomDCFCommon</BuildProject>
+		<BuildProject dependencyType="AppJar">ImagingDicomDCFUtilities</BuildProject>
+		<BuildProject dependencyType="AppJar">ImagingDicomUtilities</BuildProject>
+		<BuildProject dependencyType="AppJar">ImagingExchangeImageConversion</BuildProject>
+		<BuildProject dependencyType="AppJar">ImageConversion</BuildProject>
+		<BuildProject dependencyType="AppJar">FederationCommon</BuildProject>
+		<BuildProject dependencyType="AppJar">ExchangeDataSource</BuildProject>
+		<BuildProject dependencyType="AppJar">IHECommon</BuildProject>
+		<BuildProject dependencyType="AppJar">FederationDataSourceProvider</BuildProject>
+		<BuildProject dependencyType="AppJar">VistaDataSourceCommon</BuildProject>
+		<BuildProject dependencyType="AppJar">VistaDataSource</BuildProject>
+		<BuildProject dependencyType="AppJar">VistaImagingDataSourceProvider</BuildProject>
+		<BuildProject dependencyType="AppJar">VixServerHealth</BuildProject>
+		<BuildProject dependencyType="AppJar">ImagingVistaRealm</BuildProject>
+		<BuildProject dependencyType="AppJar">CoreRouter</BuildProject>
+		<BuildProject dependencyType="AppJar">ImagingRouter</BuildProject>
+		<BuildProject dependencyType="AppJar">BaseWebFacade</BuildProject>
+		<BuildProject dependencyType="AppJar">TransactionLoggerLocalDataSourceProvider</BuildProject>
+		<BuildProject dependencyType="AppJar">ExchangeSiteServiceSOAPServer</BuildProject>
+		<BuildProject dependencyType="AppJar">SiteServiceSOAPServer</BuildProject>
+		<BuildProject dependencyType="AppJar">XCAQueryCommon</BuildProject>
+		<BuildProject dependencyType="AppJar">XCAInitiatingGatewayDataSourceProvider</BuildProject>
+		<!--<BuildProject dependencyType="AppJar">XCAInitiatingGatewayClient</BuildProject>-->
+		<BuildProject dependencyType="AppWar">ExchangeWebApp</BuildProject>
+		<BuildProject dependencyType="AppWar">FederationWebApp</BuildProject>
+		<BuildProject dependencyType="AppWar">IDSWebApp</BuildProject>
+		<BuildProject dependencyType="AppWar">VixGuiWebApp</BuildProject>
+		<BuildProject dependencyType="AppWar">SiteServiceWebApp</BuildProject>
+		<BuildProject dependencyType="AppWar">VixServerHealthWebApp</BuildProject>
+		<BuildProject dependencyType="AppWar">AWIVWebApp</BuildProject>
+		<BuildProject dependencyType="AppWar">XCARespondingGatewayWebApp</BuildProject>
+	</BuildProjects>
+	<DeployProjects>
+		<DeployProject vssPath="ViX" tfsPath="VistA_Imaging\Dev\BranchP104P118\Source\Production\VISA\DotNet" ccPath="" type="installer" recurse="true">VixInstallerSolution2010.root</DeployProject>
+		<DeployProject vssPath="ViX\VixBuild\Patch104CVIX" tfsPath="VistA_Imaging\Configuration\VisaInstallerPayload\Patch104CVIX" ccPath="" type="payload" recurse="true"></DeployProject>
+	</DeployProjects>
+	<DeploymentArtifacts>
+		<!-- java extensions -->
+		<DeploymentArtifact dependencyType="AppExtensionJar" source="%mavenrepo%" dest="%payload%\%buildversion%\server\trustedjars" devDest="%jre%\lib\ext">Imaging\FederationConnection\0.1\FederationConnection-0.1.jar</DeploymentArtifact>
+		<DeploymentArtifact dependencyType="AppExtensionJar" source="%mavenrepo%" dest="%payload%\%buildversion%\server\trustedjars" devDest="%jre%\lib\ext">Imaging\vistaConnection\0.1\vistaConnection-0.1.jar</DeploymentArtifact>
+		<DeploymentArtifact dependencyType="AppExtensionJar" source="%mavenrepo%" dest="%payload%\%buildversion%\server\trustedjars" devDest="%jre%\lib\ext">Imaging\ExchangeConnection\0.1\ExchangeConnection-0.1.jar</DeploymentArtifact>
+		<DeploymentArtifact dependencyType="AppExtensionJar" source="%mavenrepo%" dest="%payload%\%buildversion%\server\trustedjars" devDest="%jre%\lib\ext">Imaging\XCAConnection\0.1\XCAConnection-0.1.jar</DeploymentArtifact>
+		<DeploymentArtifact dependencyType="AppExtensionJar" source="%mavenrepo%" dest="%payload%\%buildversion%\server\trustedjars" devDest="%jre%\lib\ext">Imaging\XCASConnection\0.1\XCASConnection-0.1.jar</DeploymentArtifact>
+		<DeploymentArtifact dependencyType="AppExtensionJar" source="%mavenrepo%" dest="%payload%\%buildversion%\server\trustedjars" devDest="%jre%\lib\ext">Imaging\VistaImagingConnection\0.1\VistaImagingConnection-0.1.jar</DeploymentArtifact>
+		<DeploymentArtifact dependencyType="AppExtensionJar" source="%mavenrepo%" dest="%payload%\%buildversion%\server\trustedjars" devDest="%jre%\lib\ext">Imaging\ClinicalDisplayConnection\0.1\ClinicalDisplayConnection-0.1.jar</DeploymentArtifact>
+		<DeploymentArtifact dependencyType="AppExtensionJar" source="%mavenrepo%" dest="%payload%\%buildversion%\server\trustedjars" devDest="%jre%\lib\ext">Imaging\AwivConnection\0.1\AwivConnection-0.1.jar</DeploymentArtifact>
+		<!-- app jars -->
+		<DeploymentArtifact dependencyType="AppJar" source="%mavenrepo%" dest="%payload%\%buildversion%\server\jars" devDest="%tomcat%\lib">Imaging\ImagingCommon\0.1\ImagingCommon-0.1.jar</DeploymentArtifact>
+		<DeploymentArtifact dependencyType="AppJar" source="%mavenrepo%" dest="%payload%\%buildversion%\server\jars" devDest="%tomcat%\lib">Imaging\TomcatAdapter\0.1\TomcatAdapter-0.1.jar</DeploymentArtifact>
+		<DeploymentArtifact dependencyType="AppJar" source="%mavenrepo%" dest="%payload%\%buildversion%\server\jars" devDest="%tomcat%\lib">Imaging\ImagingVistaRealmClient\0.1\ImagingVistaRealmClient-0.1.jar</DeploymentArtifact>
+		<DeploymentArtifact dependencyType="AppJar" source="%mavenrepo%" dest="%payload%\%buildversion%\server\jars" devDest="%tomcat%\lib">Imaging\ExchangeCommon\0.1\ExchangeCommon-0.1.jar</DeploymentArtifact>
+		<DeploymentArtifact dependencyType="AppJar" source="%mavenrepo%" dest="%payload%\%buildversion%\server\jars" devDest="%tomcat%\lib">Imaging\TransactionContext\0.1\TransactionContext-0.1.jar</DeploymentArtifact>
+		<DeploymentArtifact dependencyType="AppJar" source="%mavenrepo%" dest="%payload%\%buildversion%\server\jars" devDest="%tomcat%\lib">Imaging\CoreRouterSemantics\0.1\CoreRouterSemantics-0.1.jar</DeploymentArtifact>
+		<DeploymentArtifact dependencyType="AppJar" source="%mavenrepo%" dest="%payload%\%buildversion%\server\jars" devDest="%tomcat%\lib">Imaging\CoreRouterAnnotation\0.1\CoreRouterAnnotation-0.1.jar</DeploymentArtifact>
+		<DeploymentArtifact dependencyType="AppJar" source="%mavenrepo%" dest="%payload%\%buildversion%\server\jars" devDest="%tomcat%\lib">Imaging\CoreValueObjects\0.1\CoreValueObjects-0.1.jar</DeploymentArtifact>
+		<DeploymentArtifact dependencyType="AppJar" source="%mavenrepo%" dest="%payload%\%buildversion%\server\jars" devDest="%tomcat%\lib">Imaging\DataSourceServiceProvider\0.1\DataSourceServiceProvider-0.1.jar</DeploymentArtifact>
+		<DeploymentArtifact dependencyType="AppJar" source="%mavenrepo%" dest="%payload%\%buildversion%\server\jars" devDest="%tomcat%\lib">Imaging\SiteServiceSOAPClient\0.1\SiteServiceSOAPClient-0.1.jar</DeploymentArtifact>
+		<DeploymentArtifact dependencyType="AppJar" source="%mavenrepo%" dest="%payload%\%buildversion%\server\jars" devDest="%tomcat%\lib">Imaging\SiteServiceDataSourceProvider\0.1\SiteServiceDataSourceProvider-0.1.jar</DeploymentArtifact>
+		<DeploymentArtifact dependencyType="AppJar" source="%mavenrepo%" dest="%payload%\%buildversion%\server\jars" devDest="%tomcat%\lib">Imaging\ImagingExchangeBaseWebProxy\0.1\ImagingExchangeBaseWebProxy-0.1.jar</DeploymentArtifact>
+		<DeploymentArtifact dependencyType="AppJar" source="%mavenrepo%" dest="%payload%\%buildversion%\server\jars" devDest="%tomcat%\lib">Imaging\ExchangeCommonDataSource\0.1\ExchangeCommonDataSource-0.1.jar</DeploymentArtifact>
+		<DeploymentArtifact dependencyType="AppJar" source="%mavenrepo%" dest="%payload%\%buildversion%\server\jars" devDest="%tomcat%\lib">Imaging\ImagingCache\0.1\ImagingCache-0.1.jar</DeploymentArtifact>
+		<DeploymentArtifact dependencyType="AppJar" source="%mavenrepo%" dest="%payload%\%buildversion%\server\jars" devDest="%tomcat%\lib">Imaging\ImagingCacheImpl\0.1\ImagingCacheImpl-0.1.jar</DeploymentArtifact>
+		<DeploymentArtifact dependencyType="AppJar" source="%mavenrepo%" dest="%payload%\%buildversion%\server\jars" devDest="%tomcat%\lib">Imaging\ImagingExchangeCache\0.1\ImagingExchangeCache-0.1.jar</DeploymentArtifact>
+		<DeploymentArtifact dependencyType="AppJar" source="%mavenrepo%" dest="%payload%\%buildversion%\server\jars" devDest="%tomcat%\lib">Imaging\ImagingDicomCommon\0.1\ImagingDicomCommon-0.1.jar</DeploymentArtifact>
+		<DeploymentArtifact dependencyType="AppJar" source="%mavenrepo%" dest="%payload%\%buildversion%\server\jars" devDest="%tomcat%\lib">Imaging\ImagingDicomDCFCommon\0.1\ImagingDicomDCFCommon-0.1.jar</DeploymentArtifact>
+		<DeploymentArtifact dependencyType="AppJar" source="%mavenrepo%" dest="%payload%\%buildversion%\server\jars" devDest="%tomcat%\lib">Imaging\ImagingDicomDCFUtilities\0.1\ImagingDicomDCFUtilities-0.1.jar</DeploymentArtifact>
+		<DeploymentArtifact dependencyType="AppJar" source="%mavenrepo%" dest="%payload%\%buildversion%\server\jars" devDest="%tomcat%\lib">Imaging\ImagingDicomUtilities\0.1\ImagingDicomUtilities-0.1.jar</DeploymentArtifact>
+		<DeploymentArtifact dependencyType="AppJar" source="%mavenrepo%" dest="%payload%\%buildversion%\server\jars" devDest="%tomcat%\lib">Imaging\ImagingExchangeImageConversion\0.1\ImagingExchangeImageConversion-0.1.jar</DeploymentArtifact>
+		<DeploymentArtifact dependencyType="AppJar" source="%mavenrepo%" dest="%payload%\%buildversion%\server\jars" devDest="%tomcat%\lib">Imaging\ImageConversion\0.1\ImageConversion-0.1.jar</DeploymentArtifact>
+		<DeploymentArtifact dependencyType="AppJar" source="%mavenrepo%" dest="%payload%\%buildversion%\server\jars" devDest="%tomcat%\lib">Imaging\FederationCommon\0.1\FederationCommon-0.1.jar</DeploymentArtifact>
+		<DeploymentArtifact dependencyType="AppJar" source="%mavenrepo%" dest="%payload%\%buildversion%\server\jars" devDest="%tomcat%\lib">Imaging\ExchangeDataSource\0.1\ExchangeDataSource-0.1.jar</DeploymentArtifact>
+		<DeploymentArtifact dependencyType="AppJar" source="%mavenrepo%" dest="%payload%\%buildversion%\server\jars" devDest="%tomcat%\lib">Imaging\FederationDataSourceProvider\0.1\FederationDataSourceProvider-0.1.jar</DeploymentArtifact>
+		<DeploymentArtifact dependencyType="AppJar" source="%mavenrepo%" dest="%payload%\%buildversion%\server\jars" devDest="%tomcat%\lib">Imaging\VistaStorage\0.1\VistaStorage-0.1.jar</DeploymentArtifact>
+		<DeploymentArtifact dependencyType="AppJar" source="%mavenrepo%" dest="%payload%\%buildversion%\server\jars" devDest="%tomcat%\lib">Imaging\VistaDataSourceCommon\0.1\VistaDataSourceCommon-0.1.jar</DeploymentArtifact>
+		<DeploymentArtifact dependencyType="AppJar" source="%mavenrepo%" dest="%payload%\%buildversion%\server\jars" devDest="%tomcat%\lib">Imaging\VistaDataSource\0.1\VistaDataSource-0.1.jar</DeploymentArtifact>
+		<DeploymentArtifact dependencyType="AppJar" source="%mavenrepo%" dest="%payload%\%buildversion%\server\jars" devDest="%tomcat%\lib">Imaging\VistaImagingDataSourceProvider\0.1\VistaImagingDataSourceProvider-0.1.jar</DeploymentArtifact>
+		<DeploymentArtifact dependencyType="AppJar" source="%mavenrepo%" dest="%payload%\%buildversion%\server\jars" devDest="%tomcat%\lib">Imaging\VixServerHealth\0.1\VixServerHealth-0.1.jar</DeploymentArtifact>
+		<DeploymentArtifact dependencyType="AppJar" source="%mavenrepo%" dest="%payload%\%buildversion%\server\jars" devDest="%tomcat%\lib">Imaging\ImagingVistaRealm\0.1\ImagingVistaRealm-0.1.jar</DeploymentArtifact>
+		<DeploymentArtifact dependencyType="AppJar" source="%mavenrepo%" dest="%payload%\%buildversion%\server\jars" devDest="%tomcat%\lib">Imaging\CoreRouter\0.1\CoreRouter-0.1.jar</DeploymentArtifact>
+		<DeploymentArtifact dependencyType="AppJar" source="%mavenrepo%" dest="%payload%\%buildversion%\server\jars" devDest="%tomcat%\lib">Imaging\ImagingRouter\0.1\ImagingRouter-0.1.jar</DeploymentArtifact>
+		<DeploymentArtifact dependencyType="AppJar" source="%mavenrepo%" dest="%payload%\%buildversion%\server\jars" devDest="%tomcat%\lib">Imaging\BaseWebFacade\0.1\BaseWebFacade-0.1.jar</DeploymentArtifact>
+		<DeploymentArtifact dependencyType="AppJar" source="%mavenrepo%" dest="%payload%\%buildversion%\server\jars" devDest="%tomcat%\lib">Imaging\TransactionLoggerLocalDataSourceProvider\0.1\TransactionLoggerLocalDataSourceProvider-0.1.jar</DeploymentArtifact>
+		<DeploymentArtifact dependencyType="AppJar" source="%mavenrepo%" dest="%payload%\%buildversion%\server\jars" devDest="%tomcat%\lib">Imaging\ExchangeSiteServiceSOAPServer\0.1\ExchangeSiteServiceSOAPServer-0.1.jar</DeploymentArtifact>
+		<DeploymentArtifact dependencyType="AppJar" source="%mavenrepo%" dest="%payload%\%buildversion%\server\jars" devDest="%tomcat%\lib">Imaging\SiteServiceSOAPServer\0.1\SiteServiceSOAPServer-0.1.jar</DeploymentArtifact>
+		<DeploymentArtifact dependencyType="AppJar" source="%mavenrepo%" dest="%payload%\%buildversion%\server\jars" devDest="%tomcat%\lib">Imaging\IHECommon\0.1\IHECommon-0.1.jar</DeploymentArtifact>
+		<DeploymentArtifact dependencyType="AppJar" source="%mavenrepo%" dest="%payload%\%buildversion%\server\jars" devDest="%tomcat%\lib">Imaging\XCAQueryCommon\0.1\XCAQueryCommon-0.1.jar</DeploymentArtifact>
+		<DeploymentArtifact dependencyType="AppJar" source="%mavenrepo%" dest="%payload%\%buildversion%\server\jars" devDest="%tomcat%\lib">Imaging\XCAInitiatingGatewayDataSourceProvider\0.1\XCAInitiatingGatewayDataSourceProvider-0.1.jar</DeploymentArtifact>
+		<!--<DeploymentArtifact dependencyType="AppJar" source="%mavenrepo%" dest="%payload%\%buildversion%\server\jars" devDest="%tomcat%\lib">Imaging\XCAInitiatingGatewayClient\0.1\XCAInitiatingGatewayClient-0.1.jar</DeploymentArtifact>-->
+		<!-- app wars -->
+		<DeploymentArtifact dependencyType="AppWar" source="%mavenrepo%" dest="%payload%\%buildversion%\server\wars" devDest="%tomcat%\webapps">Imaging\ExchangeWebApp\0.1\ExchangeWebApp-0.1.war</DeploymentArtifact>
+		<DeploymentArtifact dependencyType="AppWar" source="%mavenrepo%" dest="%payload%\%buildversion%\server\wars" devDest="%tomcat%\webapps">Imaging\FederationWebApp\0.1\FederationWebApp-0.1.war</DeploymentArtifact>
+		<DeploymentArtifact dependencyType="AppWar" source="%mavenrepo%" dest="%payload%\%buildversion%\server\wars" devDest="%tomcat%\webapps">Imaging\IDSWebApp\0.1\IDSWebApp-0.1.war</DeploymentArtifact>
+		<DeploymentArtifact dependencyType="AppWar" source="%mavenrepo%" dest="%payload%\%buildversion%\server\wars" devDest="%tomcat%\webapps">Imaging\VixGuiWebApp\0.1\VixGuiWebApp-0.1.war</DeploymentArtifact>
+		<DeploymentArtifact dependencyType="AppWar" source="%mavenrepo%" dest="%payload%\%buildversion%\server\wars" devDest="%tomcat%\webapps">Imaging\SiteServiceWebApp\0.1\SiteServiceWebApp-0.1.war</DeploymentArtifact>
+		<DeploymentArtifact dependencyType="AppWar" source="%mavenrepo%" dest="%payload%\%buildversion%\server\wars" devDest="%tomcat%\webapps">Imaging\VixServerHealthWebApp\0.1\VixServerHealthWebApp-0.1.war</DeploymentArtifact>
+		<DeploymentArtifact dependencyType="AppWar" source="%mavenrepo%" dest="%payload%\%buildversion%\server\wars" devDest="%tomcat%\webapps">Imaging\AWIVWebApp\0.1\AWIVWebApp-0.1.war</DeploymentArtifact>
+		<DeploymentArtifact dependencyType="AppWar" source="%mavenrepo%" dest="%payload%\%buildversion%\server\wars" devDest="%tomcat%\webapps">Imaging\XCARespondingGatewayWebApp\0.1\XCARespondingGatewayWebApp-0.1.war</DeploymentArtifact>
+		<!-- open source jars -->
+		<DeploymentArtifact dependencyType="OpenSourceJar" source="%mavenrepo%" dest="%payload%\%buildversion%\server\jars" devDest="%tomcat%\lib">springframework\spring\1.2.9\spring-1.2.9.jar</DeploymentArtifact>
+		<DeploymentArtifact dependencyType="OpenSourceJar" source="%mavenrepo%" dest="%payload%\%buildversion%\server\jars" devDest="%tomcat%\lib">log4j\log4j\1.2.14\log4j-1.2.14.jar</DeploymentArtifact>
+		<DeploymentArtifact dependencyType="OpenSourceJar" source="%mavenrepo%" dest="%payload%\%buildversion%\server\jars" devDest="%tomcat%\lib">axis\axis\1.4\axis-1.4.jar</DeploymentArtifact>
+		<DeploymentArtifact dependencyType="OpenSourceJar" source="%mavenrepo%" dest="%payload%\%buildversion%\server\jars" devDest="%tomcat%\lib">jaxrpc\jaxrpc\1.1\jaxrpc-1.1.jar</DeploymentArtifact>
+		<DeploymentArtifact dependencyType="OpenSourceJar" source="%mavenrepo%" dest="%payload%\%buildversion%\server\jars" devDest="%tomcat%\lib">saaj\saaj-api\1.2\saaj-api-1.2.jar</DeploymentArtifact>
+		<DeploymentArtifact dependencyType="OpenSourceJar" source="%mavenrepo%" dest="%payload%\%buildversion%\server\jars" devDest="%tomcat%\lib">commons-codec\commons-codec\1.3\commons-codec-1.3.jar</DeploymentArtifact>
+		<DeploymentArtifact dependencyType="OpenSourceJar" source="%mavenrepo%" dest="%payload%\%buildversion%\server\jars" devDest="%tomcat%\lib">commons-logging\commons-logging\1.1\commons-logging-1.1.jar</DeploymentArtifact>
+		<DeploymentArtifact dependencyType="OpenSourceJar" source="%mavenrepo%" dest="%payload%\%buildversion%\server\jars" devDest="%tomcat%\lib">commons-discovery\commons-discovery\0.2\commons-discovery-0.2.jar</DeploymentArtifact>
+		<DeploymentArtifact dependencyType="OpenSourceJar" source="%mavenrepo%" dest="%payload%\%buildversion%\server\jars" devDest="%tomcat%\lib">commons-httpclient\commons-httpclient-custom\3.1\commons-httpclient-custom-3.1.jar</DeploymentArtifact>
+		<DeploymentArtifact dependencyType="OpenSourceJar" source="%mavenrepo%" dest="%payload%\%buildversion%\server\jars" devDest="%tomcat%\lib">commons-modeler\commons-modeler\2.0\commons-modeler-2.0.jar</DeploymentArtifact>
+		<DeploymentArtifact dependencyType="OpenSourceJar" source="%mavenrepo%" dest="%payload%\%buildversion%\server\jars" devDest="%tomcat%\lib">wsdl4j\wsdl4j\1.6.2\wsdl4j-1.6.2.jar</DeploymentArtifact>
+		<DeploymentArtifact dependencyType="OpenSourceJar" source="%mavenrepo%" dest="%payload%\%buildversion%\server\jars" devDest="%tomcat%\lib">commons-lang\commons-lang\2.5\commons-lang-2.5.jar</DeploymentArtifact>
+		<DeploymentArtifact dependencyType="OpenSourceJar" source="%mavenrepo%" dest="%payload%\%buildversion%\server\jars" devDest="%tomcat%\lib">commons-io\commons-io\1.4\commons-io-1.4.jar</DeploymentArtifact>
+		<DeploymentArtifact dependencyType="OpenSourceJar" source="%mavenrepo%" dest="%payload%\%buildversion%\server\jars" devDest="%tomcat%\lib">je\je\4.1.6\je-4.1.6.jar</DeploymentArtifact>
+		<DeploymentArtifact dependencyType="OpenSourceJar" source="%mavenrepo%" dest="%payload%\%buildversion%\server\jars" devDest="%tomcat%\lib">jxl\jxl\2.0.0\jxl-2.0.0.jar</DeploymentArtifact>
+		<DeploymentArtifact dependencyType="OpenSourceJar" source="%mavenrepo%" dest="%payload%\%buildversion%\server\jars" devDest="%tomcat%\lib">jcifs\jcifs\1.3.15\jcifs-1.3.15.jar</DeploymentArtifact>
+		<DeploymentArtifact dependencyType="OpenSourceJar" source="%mavenrepo%" dest="%payload%\%buildversion%\server\jars" devDest="%tomcat%\lib">javamail\javamail\1.4\javamail-1.4.jar</DeploymentArtifact>
+		<DeploymentArtifact dependencyType="OpenSourceJar" source="%mavenrepo%" dest="%payload%\%buildversion%\server\jars" devDest="%tomcat%\lib">org\apache\httpcomponents\httpcore\4.0.1\httpcore-4.0.1.jar</DeploymentArtifact>
+		<DeploymentArtifact dependencyType="OpenSourceJar" source="%mavenrepo%" dest="%payload%\%buildversion%\server\jars" devDest="%tomcat%\lib">xpp3\xpp3_min\1.1.4c\xpp3_min-1.1.4c.jar</DeploymentArtifact>
+		<DeploymentArtifact dependencyType="OpenSourceJar" source="%mavenrepo%" dest="%payload%\%buildversion%\server\jars" devDest="%tomcat%\lib">com\thoughtworks\xstream\xstream\1.3.1\xstream-1.3.1.jar</DeploymentArtifact>
+		<DeploymentArtifact dependencyType="OpenSourceJar" source="%mavenrepo%" dest="%payload%\%buildversion%\server\jars" devDest="%tomcat%\lib">com\sun\jersey\jersey-server\1.2\jersey-server-1.2.jar</DeploymentArtifact>
+		<DeploymentArtifact dependencyType="OpenSourceJar" source="%mavenrepo%" dest="%payload%\%buildversion%\server\jars" devDest="%tomcat%\lib">com\sun\jersey\jersey-core\1.2\jersey-core-1.2.jar</DeploymentArtifact>
+		<DeploymentArtifact dependencyType="OpenSourceJar" source="%mavenrepo%" dest="%payload%\%buildversion%\server\jars" devDest="%tomcat%\lib">com\sun\jersey\jersey-client\1.2\jersey-client-1.2.jar</DeploymentArtifact>
+		<DeploymentArtifact dependencyType="OpenSourceJar" source="%mavenrepo%" dest="%payload%\%buildversion%\server\jars" devDest="%tomcat%\lib">com\sun\jersey\contribs\jersey-apache-client\1.2\jersey-apache-client-1.2.jar</DeploymentArtifact>
+		<DeploymentArtifact dependencyType="OpenSourceJar" source="%mavenrepo%" dest="%payload%\%buildversion%\server\jars" devDest="%tomcat%\lib">javax\ws\rs\jsr311-api\1.1\jsr311-api-1.1.jar</DeploymentArtifact>
+		<DeploymentArtifact dependencyType="OpenSourceJar" source="%mavenrepo%" dest="%payload%\%buildversion%\server\jars" devDest="%tomcat%\lib">asm\asm\3.1\asm-3.1.jar</DeploymentArtifact>
+		<!-- XCA dependencies -->
+		<DeploymentArtifact dependencyType="OpenSourceJar" source="%mavenrepo%" dest="%payload%\%buildversion%\server\jars" devDest="%tomcat%\lib">org\apache\neethi\neethi\2.0.4\neethi-2.0.4.jar</DeploymentArtifact>                       
+		<DeploymentArtifact dependencyType="OpenSourceJar" source="%mavenrepo%" dest="%payload%\%buildversion%\server\jars" devDest="%tomcat%\lib">org\apache\axis2\axis2-adb\1.5.3\axis2-adb-1.5.3.jar</DeploymentArtifact>
+		<DeploymentArtifact dependencyType="OpenSourceJar" source="%mavenrepo%" dest="%payload%\%buildversion%\server\jars" devDest="%tomcat%\lib">org\apache\axis2\axis2-kernel\1.5.3\axis2-kernel-1.5.3.jar</DeploymentArtifact>
+		<DeploymentArtifact dependencyType="OpenSourceJar" source="%mavenrepo%" dest="%payload%\%buildversion%\server\jars" devDest="%tomcat%\lib">org\apache\axis2\axis2-transport-http\1.5.3\axis2-transport-http-1.5.3.jar</DeploymentArtifact>
+		<DeploymentArtifact dependencyType="OpenSourceJar" source="%mavenrepo%" dest="%payload%\%buildversion%\server\jars" devDest="%tomcat%\lib">org\apache\axis2\axis2-transport-local\1.5.3\axis2-transport-local-1.5.3.jar</DeploymentArtifact>
+		<DeploymentArtifact dependencyType="OpenSourceJar" source="%mavenrepo%" dest="%payload%\%buildversion%\server\jars" devDest="%tomcat%\lib">org\apache\ws\commons\axiom\axiom-api\1.2.10\axiom-api-1.2.10.jar</DeploymentArtifact>
+		<DeploymentArtifact dependencyType="OpenSourceJar" source="%mavenrepo%" dest="%payload%\%buildversion%\server\jars" devDest="%tomcat%\lib">org\apache\ws\commons\axiom\axiom-dom\1.2.10\axiom-dom-1.2.10.jar</DeploymentArtifact>
+		<DeploymentArtifact dependencyType="OpenSourceJar" source="%mavenrepo%" dest="%payload%\%buildversion%\server\jars" devDest="%tomcat%\lib">org\apache\ws\commons\axiom\axiom-impl\1.2.10\axiom-impl-1.2.10.jar</DeploymentArtifact>
+		<DeploymentArtifact dependencyType="OpenSourceJar" source="%mavenrepo%" dest="%payload%\%buildversion%\server\jars" devDest="%tomcat%\lib">org\apache\ws\commons\schema\XmlSchema\1.4.3\XmlSchema-1.4.3.jar</DeploymentArtifact>
+		<DeploymentArtifact dependencyType="OpenSourceJar" source="%mavenrepo%" dest="%payload%\%buildversion%\server\jars" devDest="%tomcat%\lib">org\apache\axis2\axis2-xmlbeans\1.5.3\axis2-xmlbeans-1.5.3.jar</DeploymentArtifact>
+		<DeploymentArtifact dependencyType="OpenSourceJar" source="%mavenrepo%" dest="%payload%\%buildversion%\server\jars" devDest="%tomcat%\lib">org\apache\ws\commons\schema\XmlSchema\1.4.3\XmlSchema-1.4.3.jar</DeploymentArtifact>
+		<DeploymentArtifact dependencyType="OpenSourceJar" source="%mavenrepo%" dest="%payload%\%buildversion%\server\jars" devDest="%tomcat%\lib">org\apache\xmlbeans\xmlbeans\2.3.0\xmlbeans-2.3.0.jar</DeploymentArtifact>
+		<DeploymentArtifact dependencyType="OpenSourceJar" source="%mavenrepo%" dest="%payload%\%buildversion%\server\jars" devDest="%tomcat%\lib">annogen\annogen\0.1.0\annogen-0.1.0.jar</DeploymentArtifact>
+		<!--<DeploymentArtifact dependencyType="OpenSourceJar" source="%mavenrepo%" dest="%payload%\%buildversion%\server\jars" devDest="%tomcat%\lib">backport-util-concurrent\backport-util-concurrent\2.1\backport-util-concurrent-2.1.jar</DeploymentArtifact>-->
+		<DeploymentArtifact dependencyType="OpenSourceJar" source="%mavenrepo%" dest="%payload%\%buildversion%\server\jars" devDest="%tomcat%\lib">commons-fileupload\commons-fileupload\1.2\commons-fileupload-1.2.jar</DeploymentArtifact>
+		<DeploymentArtifact dependencyType="OpenSourceJar" source="%mavenrepo%" dest="%payload%\%buildversion%\server\jars" devDest="%tomcat%\lib">freemarker\freemarker\2.3.14\freemarker-2.3.14.jar</DeploymentArtifact>
+		<DeploymentArtifact dependencyType="OpenSourceJar" source="%mavenrepo%" dest="%payload%\%buildversion%\server\jars" devDest="%tomcat%\lib">jaxen\jaxen\1.1.1\jaxen-1.1.1.jar</DeploymentArtifact>
+		<DeploymentArtifact dependencyType="OpenSourceJar" source="%mavenrepo%" dest="%payload%\%buildversion%\server\jars" devDest="%tomcat%\lib">org\apache\axis2\axis2-jaxws\1.5.3\axis2-jaxws-1.5.3.jar</DeploymentArtifact>
+		<DeploymentArtifact dependencyType="OpenSourceJar" source="%mavenrepo%" dest="%payload%\%buildversion%\server\jars" devDest="%tomcat%\lib">org\apache\woden\woden-api\1.0M8\woden-api-1.0M8.jar</DeploymentArtifact>
+		<DeploymentArtifact dependencyType="OpenSourceJar" source="%mavenrepo%" dest="%payload%\%buildversion%\server\jars" devDest="%tomcat%\lib">org\apache\woden\woden-impl-dom\1.0M8\woden-impl-dom-1.0M8.jar</DeploymentArtifact>
+		<DeploymentArtifact dependencyType="OpenSourceJar" source="%mavenrepo%" dest="%payload%\%buildversion%\server\jars" devDest="%tomcat%\lib">org\codehaus\woodstox\wstx-asl\3.2.9\wstx-asl-3.2.9.jar</DeploymentArtifact>
+		<DeploymentArtifact dependencyType="OpenSourceJar" source="%mavenrepo%" dest="%payload%\%buildversion%\server\jars" devDest="%tomcat%\lib">stax\stax-api\1.0\stax-api-1.0.jar</DeploymentArtifact>
+		<!-- dev only commercial jars -->
+		<DeploymentArtifact dependencyType="CommercialJar" source="%mavenrepo%" dest="" devDest="%tomcat%\lib">DCF\LaurelBridge\3.3.22c\LaurelBridge-3.3.22c.jar</DeploymentArtifact>
+		<DeploymentArtifact dependencyType="CommercialJar" source="%mavenrepo%" dest="" devDest="%tomcat%\lib">aware-j2k\2.3\aware-j2k-2.3.jar</DeploymentArtifact>
+	</DeploymentArtifacts>
+	<RepositoryDeploymentArtifacts>
+		<DeploymentArtifact dependencyType="JavaPropertyFile" devDest="%vixconfig%">
+			<Repository repositoryType="ConcurrentVersionsSystem" source="%cvs%" dest="">ImagingExchange\log4j.properties</Repository>
+			<Repository repositoryType="VisualSourceSafe" source="" dest="%payload%\%buildversion%\server\properties">log4j.properties</Repository>
+			<Repository repositoryType="TeamFoundationServer" source="%tfs%\VistA_Imaging\Configuration\VisaBuildConfiguration" dest="%payload%\%buildversion%\server\properties">log4j.properties</Repository>
+		</DeploymentArtifact>
+		<DeploymentArtifact dependencyType="JavaPropertyFile" devDest="%vixconfig%">
+			<Repository repositoryType="ConcurrentVersionsSystem" source="%cvs%" dest="">ImagingExchange\jcifs.properties</Repository>
+			<Repository repositoryType="VisualSourceSafe" source="" dest="%payload%\%buildversion%\server\properties">jcifs.properties</Repository>
+			<Repository repositoryType="TeamFoundationServer" source="%tfs%\VistA_Imaging\Configuration\VisaBuildConfiguration" dest="%payload%\%buildversion%\server\properties">jcifs.properties</Repository>
+		</DeploymentArtifact>
+		<DeploymentArtifact dependencyType="XmlConfigFile" devDest="%vixconfig%">
+			<Repository repositoryType="ConcurrentVersionsSystem" source="%cvs%" dest="">ImagingExchange\client-config.wsdd</Repository>
+			<Repository repositoryType="VisualSourceSafe" source="" dest="%payload%\%buildversion%\server\properties">client-config.wsdd</Repository>
+			<Repository repositoryType="TeamFoundationServer" source="%tfs%\VistA_Imaging\Configuration\VisaBuildConfiguration" dest="%payload%\%buildversion%\server\properties">client-config.wsdd</Repository>
+		</DeploymentArtifact>
+		<DeploymentArtifact dependencyType="XmlConfigFile" devDest="">
+			<Repository repositoryType="ConcurrentVersionsSystem" source="%cvs%" dest="">ImagingExchange\VixManifestPatch104CVIX.xml</Repository>
+			<Repository repositoryType="VisualSourceSafe" source="" dest="%vss%\ViX\VixInstallerSolution2010.root\VixInstallerSolution2010\VixInstaller\VixManifest.xml">VixManifestPatch104CVIX.xml</Repository>
+			<Repository repositoryType="TeamFoundationServer" source="%tfs%\VistA_Imaging\Configuration\VisaBuildConfiguration" dest="%tfs%\VistA_Imaging\Dev\BranchP104P118\Source\Production\VISA\DotNet\VixInstallerSolution2010.root\VixInstallerSolution2010\VixInstaller\VixManifest.xml">VixManifestPatch104CVIX.xml</Repository>
+		</DeploymentArtifact>
+		<DeploymentArtifact dependencyType="TextFile" devDest="%vixconfig%">
+			<Repository repositoryType="ConcurrentVersionsSystem" source="%cvs%" dest="">SiteServiceDataSourceProvider\main\src\resources\configureCVIX.commands</Repository>
+			<Repository repositoryType="VisualSourceSafe" source="" dest="%payload%\%buildversion%\server\properties\configureSiteResolutionProvider.commands">SiteServiceDataSourceProvider\main\src\resources\configureCVIX.commands</Repository>
+			<Repository repositoryType="TeamFoundationServer" source="%workspace%" dest="%payload%\%buildversion%\server\properties\configureSiteResolutionProvider.commands">SiteServiceDataSourceProvider\main\src\resources\configureCVIX.commands</Repository>
+		</DeploymentArtifact>
+		<DeploymentArtifact dependencyType="TextFile" devDest="%vixconfig%">
+			<Repository repositoryType="ConcurrentVersionsSystem" source="%cvs%" dest="">XCAInitiatingGatewayDataSourceProvider\main\src\resources\configureCVIX_XCA.commands</Repository>
+			<Repository repositoryType="VisualSourceSafe" source="" dest="%payload%\%buildversion%\server\properties">XCAInitiatingGatewayDataSourceProvider\main\src\resources\configureCVIX_XCA.commands</Repository>
+			<Repository repositoryType="TeamFoundationServer" source="%workspace%" dest="%payload%\%buildversion%\server\properties">XCAInitiatingGatewayDataSourceProvider\main\src\resources\configureCVIX_XCA.commands</Repository>
+		</DeploymentArtifact>
+		<DeploymentArtifact dependencyType="TextFile" devDest="%vixconfig%">
+			<Repository repositoryType="ConcurrentVersionsSystem" source="%cvs%" dest="%payload%\%buildversion%\server\properties">ImagingExchange\ExchangeModalityBlackList.txt</Repository>
+			<Repository repositoryType="VisualSourceSafe" source="" dest="%payload%\%buildversion%\server\properties">ExchangeModalityBlackList.txt</Repository>
+			<Repository repositoryType="TeamFoundationServer" source="%tfs%\VistA_Imaging\Configuration\VisaBuildConfiguration" dest="%payload%\%buildversion%\server\properties">ExchangeModalityBlackList.txt</Repository>
+		</DeploymentArtifact>
+	</RepositoryDeploymentArtifacts>
+</Build>

@@ -1,0 +1,52 @@
+09/22/2000  13:54
+Saved from DCM,DCE
+MAGDACPC
+MAGDACPC ;WOIFO/EdM - Cache Socket Server for SOP Class Provider ; [ 09/22/2000  13:54 ]
+ ;;2.5T;DICOM42;;1-Nov-2000
+ ;; +---------------------------------------------------------------+
+ ;; | Property of the US Government.                                |
+ ;; | No permission to copy or redistribute this software is given. |
+ ;; | Use of unreleased versions of this software requires the user |
+ ;; | to execute a written test agreement with the VistA Imaging    |
+ ;; | Development Office of the Department of Veterans Affairs,     |
+ ;; | telephone (301) 734-0100.                                     |
+ ;; |                                                               |
+ ;; | The Food and Drug Administration classifies this software as  |
+ ;; | a Class II medical device.  As such, it may not be changed    |
+ ;; | in any way.  Modifications to this software may result in an  |
+ ;; | adulterated medical device under 21CFR820, the use of which   |
+ ;; | is considered to be a violation of US Federal Statutes.       |
+ ;; +---------------------------------------------------------------+
+ ;;
+ ;
+START ;
+ S SOCKET="|TCP|"_PORT
+ F  D  ; Not supposed to Quit until the system is shut down
+ . S STATUS=$$USEDEV^MAGOSFIL(SOCKET) R ACCEPT
+ . J SERVE^MAGDACPC:(:5:SOCKET:SOCKET)
+ . S STATUS=$$USEDEV^MAGOSFIL($P)
+ . W !,"Socket server running as process ",$ZCHILD
+ . Q
+ Q
+ ;
+SERVE ;
+ N CHANNEL,DEBUG,DTIME,FBSWITCH,FILEMODE,LOGDIR,PORT,STATUS,%ZMAG
+ S STATUS=$$TCPGET^MAGOSTCP(.IPADDR,.PORT),PORT=60040
+ ;
+ ; When we get here, the socket is inherited from the operating
+ ; environment, and not opened through MAGOSTCP.
+ ; Define the essential variables:
+ ;
+ S STATUS=$$TCPINHRT^MAGOSTCP(PORT)
+ S CHANNEL=1,DEBUG=0,DTIME=5,FBSWITCH="BACKGROUND",FILEMODE="FIFO QUEUE"
+ S LOGDIR=^MAGDICOM(2006.561,1,"DATA PATH",CHANNEL)_"\LOGDCM."_$J
+ S STATUS=$$MKDIR^MAGOSDIR(LOGDIR)
+ D NEWLOG^MAGDMLOG("Background Server with "_IPADDR)
+ S $ET="ERR^"_$T(+0)
+ D STEP2^MAGDACP1
+ Q
+ ;
+ERR S $ET="Q:$Q """" Q"
+ Q
+
+

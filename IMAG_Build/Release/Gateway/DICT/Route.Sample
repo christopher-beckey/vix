@@ -1,0 +1,104 @@
+# Route.Sample, 14 November 2008
+# 3.0;IMAGING;**54**;03-July-2009;;Build 1424
+# Per VHA Directive 2004-038, this routine should not be modified.
+# +---------------------------------------------------------------+
+# | Property of the US Government.                                |
+# | No permission to copy or redistribute this software is given. |
+# | Use of unreleased versions of this software requires the user |
+# | to execute a written test agreement with the VistA Imaging    |
+# | Development Office of the Department of Veterans Affairs,     |
+# | telephone (301) 734-0100.                                     |
+# | The Food and Drug Administration classifies this software as  |
+# | a medical device.  As such, it may not be changed in any way. |
+# | Modifications to this software may result in an adulterated   |
+# | medical device under 21CFR820, the use of which is considered |
+# | to be a violation of US Federal Statutes.                     |
+# +---------------------------------------------------------------+
+#
+#
+# Sample File for Routing Rules
+#
+# Destinations that would be entered into the Network Location Table
+# (FileMan File # 2005.2):
+#       Archive
+#       Contractor1
+#       Contractor2
+#       Contractor3
+#       ContractingReader
+#       LocalJukeBox
+#       LogBook
+#
+# Destinations that would be entered into the DICOM Transmit Destination Table
+# (FileMan File # 2005.587) and SCU_List.dic:
+#       E-FilmApplication
+#       LaserShare
+#
+# ================================================================================
+#
+# Example #1:
+#   auto-route all images from a specific modality to a contractor
+#   who reads this type of images, using standard copy for transmission
+#
+#Send("ContractingReader")
+#     When MODALITY="CT"
+#
+# Example #2:
+#   auto-route all images to an archive, using standard copy for transmission
+#
+#Send("Archive")
+#     When MODALITY="*"
+#
+# Example #3:
+#   auto-route all images from a remote site back to local storage at that site,
+#   using standard copy for transmission
+#
+#Send("LocalJukeBox")
+#     When MODALITY="*"
+#          SOURCE="StElseWhere"
+#
+# Example #4:
+#   auto-route all important studies to an internal workstation, using
+#   standard copy for transmission
+#
+#Send("LogBook")
+#     When MODALITY="*"
+#          URGENCY="STAT"
+#
+# Example #5:
+#   auto-route all images from a specific modality to three contractors,
+#   balancing the load, so that each contract receives a pre-determined
+#   fraction of the studies and leaving a pre-determined fraction for
+#   interpretation by local staff, using standard copy for transmission
+#
+#Balance("Contractor1"=20%, "Contractor2"=40%, "Contractor3"=20%, <LOCAL>=20%)
+#    When MODALITY="XA"
+#
+# Example #6:
+#   auto-route all images from a specific modality to a contractor
+#   who reads this type of images, using standard copy for transmission
+#   and giving these transmissions a high priority
+#
+#Send("ContractingReader")
+#    When MODALITY="XA"
+#    Priority High
+#
+# Example #7:
+#   auto-route all images from a specific modality to a printer,
+#   using the DICOM protocol for transmission and giving these transmissions
+#   a low priority
+#
+#Send("LaserShare")
+#    When MODALITY="CT"
+#    Priority Low
+#
+# Example #8:
+#   auto-route all images from a specific modality to a DICOM repository,
+#   using the DICOM protocol for transmission and including images from
+#   prior studies
+#
+#Send("E-FilmApplication")
+#    When MODALITY="CT"
+#    PriorStudy Yes
+#
+
+

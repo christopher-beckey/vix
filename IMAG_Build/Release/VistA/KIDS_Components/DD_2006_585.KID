@@ -1,0 +1,486 @@
+KIDS Distribution saved on Jul 16, 2007@13:08:08
+Package for FILE named 2006.585
+**KIDS**:MAG*3.0*118^
+
+**INSTALL NAME**
+MAG*3.0*118
+"BLD",5930,0)
+MAG*3.0*118^^0^3070716^y
+"BLD",5930,1,0)
+^^4^4^3070716^
+"BLD",5930,1,1,0)
+This package contains a KIDS component
+"BLD",5930,1,2,0)
+for Running Baseline.
+"BLD",5930,1,3,0)
+ 
+"BLD",5930,1,4,0)
+This package transports the FileMan data dictionary named 2006.585.
+"BLD",5930,4,0)
+^9.64PA^2006.585^1
+"BLD",5930,4,2006.585,0)
+2006.585
+"BLD",5930,4,2006.585,222)
+y^y^f^^^^n
+"BLD",5930,4,"B",2006.585,2006.585)
+
+"BLD",5930,6.3)
+1
+"BLD",5930,"KRN",0)
+^9.67PA^8989.52^19
+"BLD",5930,"KRN",.4,0)
+.4
+"BLD",5930,"KRN",.401,0)
+.401
+"BLD",5930,"KRN",.402,0)
+.402
+"BLD",5930,"KRN",.403,0)
+.403
+"BLD",5930,"KRN",.5,0)
+.5
+"BLD",5930,"KRN",.84,0)
+.84
+"BLD",5930,"KRN",3.6,0)
+3.6
+"BLD",5930,"KRN",3.8,0)
+3.8
+"BLD",5930,"KRN",9.2,0)
+9.2
+"BLD",5930,"KRN",9.8,0)
+9.8
+"BLD",5930,"KRN",19,0)
+19
+"BLD",5930,"KRN",19.1,0)
+19.1
+"BLD",5930,"KRN",101,0)
+101
+"BLD",5930,"KRN",409.61,0)
+409.61
+"BLD",5930,"KRN",771,0)
+771
+"BLD",5930,"KRN",870,0)
+870
+"BLD",5930,"KRN",8989.51,0)
+8989.51
+"BLD",5930,"KRN",8989.52,0)
+8989.52
+"BLD",5930,"KRN",8994,0)
+8994
+"BLD",5930,"KRN","B",.4,.4)
+
+"BLD",5930,"KRN","B",.401,.401)
+
+"BLD",5930,"KRN","B",.402,.402)
+
+"BLD",5930,"KRN","B",.403,.403)
+
+"BLD",5930,"KRN","B",.5,.5)
+
+"BLD",5930,"KRN","B",.84,.84)
+
+"BLD",5930,"KRN","B",3.6,3.6)
+
+"BLD",5930,"KRN","B",3.8,3.8)
+
+"BLD",5930,"KRN","B",9.2,9.2)
+
+"BLD",5930,"KRN","B",9.8,9.8)
+
+"BLD",5930,"KRN","B",19,19)
+
+"BLD",5930,"KRN","B",19.1,19.1)
+
+"BLD",5930,"KRN","B",101,101)
+
+"BLD",5930,"KRN","B",409.61,409.61)
+
+"BLD",5930,"KRN","B",771,771)
+
+"BLD",5930,"KRN","B",870,870)
+
+"BLD",5930,"KRN","B",8989.51,8989.51)
+
+"BLD",5930,"KRN","B",8989.52,8989.52)
+
+"BLD",5930,"KRN","B",8994,8994)
+
+"FIA",2006.585)
+USER APPLICATION
+"FIA",2006.585,0)
+^MAGDICOM(2006.585,
+"FIA",2006.585,0,0)
+2006.585
+"FIA",2006.585,0,1)
+y^y^f^^^^n
+"FIA",2006.585,0,10)
+
+"FIA",2006.585,0,11)
+
+"FIA",2006.585,0,"RLRO")
+
+"FIA",2006.585,2006.585)
+0
+"FIA",2006.585,2006.5852)
+0
+"FIA",2006.585,2006.58522)
+0
+"MBREQ")
+0
+"QUES","XPF1",0)
+Y
+"QUES","XPF1","??")
+^D REP^XPDH
+"QUES","XPF1","A")
+Shall I write over your |FLAG| File
+"QUES","XPF1","B")
+YES
+"QUES","XPF1","M")
+D XPF1^XPDIQ
+"QUES","XPF2",0)
+Y
+"QUES","XPF2","??")
+^D DTA^XPDH
+"QUES","XPF2","A")
+Want my data |FLAG| yours
+"QUES","XPF2","B")
+YES
+"QUES","XPF2","M")
+D XPF2^XPDIQ
+"QUES","XPI1",0)
+YO
+"QUES","XPI1","??")
+^D INHIBIT^XPDH
+"QUES","XPI1","A")
+Want KIDS to INHIBIT LOGONs during the install
+"QUES","XPI1","B")
+YES
+"QUES","XPI1","M")
+D XPI1^XPDIQ
+"QUES","XPM1",0)
+PO^VA(200,:EM
+"QUES","XPM1","??")
+^D MG^XPDH
+"QUES","XPM1","A")
+Enter the Coordinator for Mail Group '|FLAG|'
+"QUES","XPM1","B")
+
+"QUES","XPM1","M")
+D XPM1^XPDIQ
+"QUES","XPO1",0)
+Y
+"QUES","XPO1","??")
+^D MENU^XPDH
+"QUES","XPO1","A")
+Want KIDS to Rebuild Menu Trees Upon Completion of Install
+"QUES","XPO1","B")
+YES
+"QUES","XPO1","M")
+D XPO1^XPDIQ
+"QUES","XPZ1",0)
+Y
+"QUES","XPZ1","??")
+^D OPT^XPDH
+"QUES","XPZ1","A")
+Want to DISABLE Scheduled Options, Menu Options, and Protocols
+"QUES","XPZ1","B")
+YES
+"QUES","XPZ1","M")
+D XPZ1^XPDIQ
+"QUES","XPZ2",0)
+Y
+"QUES","XPZ2","??")
+^D RTN^XPDH
+"QUES","XPZ2","A")
+Want to MOVE routines to other CPUs
+"QUES","XPZ2","B")
+NO
+"QUES","XPZ2","M")
+D XPZ2^XPDIQ
+"SEC","^DIC",2006.585,2006.585,0,"AUDIT")
+@
+"SEC","^DIC",2006.585,2006.585,0,"DD")
+@
+"SEC","^DIC",2006.585,2006.585,0,"DEL")
+@
+"SEC","^DIC",2006.585,2006.585,0,"LAYGO")
+@
+"SEC","^DIC",2006.585,2006.585,0,"RD")
+@
+"SEC","^DIC",2006.585,2006.585,0,"WR")
+@
+"VER")
+8.0^22.0
+"^DD",2006.585,2006.585,0)
+FIELD^^8^8
+"^DD",2006.585,2006.585,0,"DDA")
+N
+"^DD",2006.585,2006.585,0,"DT")
+3050603
+"^DD",2006.585,2006.585,0,"IX","B",2006.585,.01)
+
+"^DD",2006.585,2006.585,0,"NM","USER APPLICATION")
+
+"^DD",2006.585,2006.585,0,"PT",2006.035,1)
+
+"^DD",2006.585,2006.585,0,"PT",2006.563,94)
+
+"^DD",2006.585,2006.585,0,"PT",2006.565,2)
+
+"^DD",2006.585,2006.585,0,"VRPK")
+IMAGING
+"^DD",2006.585,2006.585,.01,0)
+SERVICE^RF^^0;1^K:$L(X)>30!($L(X)<3)!'(X'?1P.E) X
+"^DD",2006.585,2006.585,.01,1,0)
+^.1
+"^DD",2006.585,2006.585,.01,1,1,0)
+2006.585^B
+"^DD",2006.585,2006.585,.01,1,1,1)
+S ^MAGDICOM(2006.585,"B",$E(X,1,30),DA)=""
+"^DD",2006.585,2006.585,.01,1,1,2)
+K ^MAGDICOM(2006.585,"B",$E(X,1,30),DA)
+"^DD",2006.585,2006.585,.01,3)
+Enter the name of the service that is provided by this application.
+"^DD",2006.585,2006.585,.01,21,0)
+^^3^3^3000222^^
+"^DD",2006.585,2006.585,.01,21,1,0)
+The value of this field is a string that specifies
+"^DD",2006.585,2006.585,.01,21,2,0)
+the name of the service that is called for the application described in the
+"^DD",2006.585,2006.585,.01,21,3,0)
+current entry.
+"^DD",2006.585,2006.585,.01,"DT")
+2990830
+"^DD",2006.585,2006.585,2,0)
+SOP CLASS^2006.5852A^^1;0
+"^DD",2006.585,2006.585,3,0)
+CALLED AE^F^^0;2^K:$L(X)>30!($L(X)<1) X
+"^DD",2006.585,2006.585,3,.1)
+Called Application Entity
+"^DD",2006.585,2006.585,3,3)
+Enter the AE Title of the application being called.
+"^DD",2006.585,2006.585,3,21,0)
+^^3^3^3000302^^
+"^DD",2006.585,2006.585,3,21,1,0)
+The value of this field is a string that specifies
+"^DD",2006.585,2006.585,3,21,2,0)
+the Application Entity Title for the equipment being
+"^DD",2006.585,2006.585,3,21,3,0)
+called for the application that is described in the current entry.
+"^DD",2006.585,2006.585,3,"DT")
+2991118
+"^DD",2006.585,2006.585,4,0)
+CALLING AE^F^^0;3^K:$L(X)>30!($L(X)<1) X
+"^DD",2006.585,2006.585,4,3)
+Enter the AE Title of the entity that calls for the application.
+"^DD",2006.585,2006.585,4,21,0)
+^^3^3^3000222^^
+"^DD",2006.585,2006.585,4,21,1,0)
+The value of this field is a string that specifies
+"^DD",2006.585,2006.585,4,21,2,0)
+the Application Entity Title for the equipment from which
+"^DD",2006.585,2006.585,4,21,3,0)
+the application is called that is described in the current entry.
+"^DD",2006.585,2006.585,4,"DT")
+2991118
+"^DD",2006.585,2006.585,5,0)
+DESTINATION^F^^0;4^K:$L(X)>16!($L(X)<1) X
+"^DD",2006.585,2006.585,5,3)
+Enter the TCP/IP address of the called application entity.
+"^DD",2006.585,2006.585,5,21,0)
+^^2^2^3000222^^
+"^DD",2006.585,2006.585,5,21,1,0)
+The value of this field is a string that specifies the TCP/IP address
+"^DD",2006.585,2006.585,5,21,2,0)
+of the called application entity.
+"^DD",2006.585,2006.585,5,"DT")
+2991118
+"^DD",2006.585,2006.585,6,0)
+PORT^NJ5,0^^0;5^K:+X'=X!(X>65536)!(X<0)!(X?.E1"."1N.N) X
+"^DD",2006.585,2006.585,6,3)
+Enter the TCP/IP port number for the called application entity.
+"^DD",2006.585,2006.585,6,21,0)
+^^5^5^3000222^^
+"^DD",2006.585,2006.585,6,21,1,0)
+The value of this field is an integer number that
+"^DD",2006.585,2006.585,6,21,2,0)
+identifies the TCP/IP port number to which the
+"^DD",2006.585,2006.585,6,21,3,0)
+equipment connects calls the application that is described in this entry.
+"^DD",2006.585,2006.585,6,21,4,0)
+ 
+"^DD",2006.585,2006.585,6,21,5,0)
+TCP/IP port numbers are integers between 1 and 65535.
+"^DD",2006.585,2006.585,6,"DT")
+2991118
+"^DD",2006.585,2006.585,7,0)
+PACS^S^GE:General Electric;KODAK:Kodak;^0;6^Q
+"^DD",2006.585,2006.585,7,3)
+Enter the type of PACS.
+"^DD",2006.585,2006.585,7,21,0)
+^^6^6^3050603^
+"^DD",2006.585,2006.585,7,21,1,0)
+The value of this parameter is a string. This string can be
+"^DD",2006.585,2006.585,7,21,2,0)
+one of a limited number of values. This value identifies
+"^DD",2006.585,2006.585,7,21,3,0)
+the kind of PACS that hosts the current storage provider.
+"^DD",2006.585,2006.585,7,21,4,0)
+ 
+"^DD",2006.585,2006.585,7,21,5,0)
+Supported types are currently: GE (General Electric)
+"^DD",2006.585,2006.585,7,21,6,0)
+and KODAK.
+"^DD",2006.585,2006.585,7,"DT")
+3050603
+"^DD",2006.585,2006.585,8,0)
+PRIORITY^NJ10,0^^0;7^K:+X'=X!(X>9999999999)!(X<1)!(X?.E1"."1N.N) X
+"^DD",2006.585,2006.585,8,3)
+Enter the relative priority of transmissions to this SCP (default is 500).
+"^DD",2006.585,2006.585,8,21,0)
+^^6^6^3050603^
+"^DD",2006.585,2006.585,8,21,1,0)
+The value of this field is a positive integer number.
+"^DD",2006.585,2006.585,8,21,2,0)
+This number identifies the relative priority of transmissions
+"^DD",2006.585,2006.585,8,21,3,0)
+to the SCP that is described in this record.
+"^DD",2006.585,2006.585,8,21,4,0)
+ 
+"^DD",2006.585,2006.585,8,21,5,0)
+This field is optional. If no value is specified, a default value
+"^DD",2006.585,2006.585,8,21,6,0)
+of 500 will be used.
+"^DD",2006.585,2006.585,8,"DT")
+3050603
+"^DD",2006.585,2006.5852,0)
+SOP CLASS SUB-FIELD^^2^2
+"^DD",2006.585,2006.5852,0,"DT")
+3000222
+"^DD",2006.585,2006.5852,0,"NM","SOP CLASS")
+
+"^DD",2006.585,2006.5852,0,"UP")
+2006.585
+"^DD",2006.585,2006.5852,.01,0)
+SOP CLASS^F^^0;1^K:$L(X)>64!($L(X)<1) X
+"^DD",2006.585,2006.5852,.01,1,0)
+^.1^^0
+"^DD",2006.585,2006.5852,.01,3)
+Enter the name of the SOP Class.
+"^DD",2006.585,2006.5852,.01,21,0)
+^^4^4^3000222^^
+"^DD",2006.585,2006.5852,.01,21,1,0)
+The value of this field is a string that specifies
+"^DD",2006.585,2006.5852,.01,21,2,0)
+the name of the SOP class that is supported by the service
+"^DD",2006.585,2006.5852,.01,21,3,0)
+that is called for the application that is described
+"^DD",2006.585,2006.5852,.01,21,4,0)
+in the current entry.
+"^DD",2006.585,2006.5852,.01,"DT")
+3000222
+"^DD",2006.585,2006.5852,2,0)
+TRANSFER SYNTAX^2006.58522A^^1;0
+"^DD",2006.585,2006.58522,0)
+TRANSFER SYNTAX SUB-FIELD^^.01^1
+"^DD",2006.585,2006.58522,0,"DT")
+3000222
+"^DD",2006.585,2006.58522,0,"IX","B",2006.58522,.01)
+
+"^DD",2006.585,2006.58522,0,"NM","TRANSFER SYNTAX")
+
+"^DD",2006.585,2006.58522,0,"UP")
+2006.5852
+"^DD",2006.585,2006.58522,.01,0)
+TRANSFER SYNTAX^F^^0;1^K:$L(X)>50!($L(X)<1) X
+"^DD",2006.585,2006.58522,.01,1,0)
+^.1
+"^DD",2006.585,2006.58522,.01,1,1,0)
+2006.58522^B
+"^DD",2006.585,2006.58522,.01,1,1,1)
+S ^MAGDICOM(2006.585,DA(2),1,DA(1),1,"B",$E(X,1,30),DA)=""
+"^DD",2006.585,2006.58522,.01,1,1,2)
+K ^MAGDICOM(2006.585,DA(2),1,DA(1),1,"B",$E(X,1,30),DA)
+"^DD",2006.585,2006.58522,.01,1,2,0)
+2006.58522^B
+"^DD",2006.585,2006.58522,.01,1,2,1)
+S ^MAGDICOM(2006.585,DA(2),1,DA(1),1,"B",$E(X,1,30),DA)=""
+"^DD",2006.585,2006.58522,.01,1,2,2)
+K ^MAGDICOM(2006.585,DA(2),1,DA(1),1,"B",$E(X,1,30),DA)
+"^DD",2006.585,2006.58522,.01,1,2,"DT")
+3000222
+"^DD",2006.585,2006.58522,.01,3)
+Enter the name of the transfer syntax.
+"^DD",2006.585,2006.58522,.01,21,0)
+^^10^10^3000222^^
+"^DD",2006.585,2006.58522,.01,21,1,0)
+The value of this field is a string that specifies
+"^DD",2006.585,2006.58522,.01,21,2,0)
+a transfer syntax that may be used for the service
+"^DD",2006.585,2006.58522,.01,21,3,0)
+that is called for the application that is described
+"^DD",2006.585,2006.58522,.01,21,4,0)
+in the current entry.
+"^DD",2006.585,2006.58522,.01,21,5,0)
+ 
+"^DD",2006.585,2006.58522,.01,21,6,0)
+Possible values for this field are:
+"^DD",2006.585,2006.58522,.01,21,7,0)
+   Implicit VR Little Endian
+"^DD",2006.585,2006.58522,.01,21,8,0)
+   Implicit VR Big Endian
+"^DD",2006.585,2006.58522,.01,21,9,0)
+   Explicit VR Little Endian
+"^DD",2006.585,2006.58522,.01,21,10,0)
+   Explicit VR Big Endian
+"^DD",2006.585,2006.58522,.01,"DT")
+3000222
+"^DIC",2006.585,2006.585,0)
+USER APPLICATION^2006.585
+"^DIC",2006.585,2006.585,0,"GL")
+^MAGDICOM(2006.585,
+"^DIC",2006.585,2006.585,"%",0)
+^1.005^^0
+"^DIC",2006.585,2006.585,"%D",0)
+^^19^19^3010619^
+"^DIC",2006.585,2006.585,"%D",1,0)
+ +---------------------------------------------------------------+
+"^DIC",2006.585,2006.585,"%D",2,0)
+ |                                                               |
+"^DIC",2006.585,2006.585,"%D",3,0)
+ | Property of the US Government.                                |
+"^DIC",2006.585,2006.585,"%D",4,0)
+ | No permission to copy or redistribute this software is given. |
+"^DIC",2006.585,2006.585,"%D",5,0)
+ | Use of unreleased versions of this software requires the user |
+"^DIC",2006.585,2006.585,"%D",6,0)
+ | to execute a written test agreement with the VistA Imaging    |
+"^DIC",2006.585,2006.585,"%D",7,0)
+ | Development Office of the Department of Veterans Affairs,     |
+"^DIC",2006.585,2006.585,"%D",8,0)
+ | telephone (301) 734-0100.                                     |
+"^DIC",2006.585,2006.585,"%D",9,0)
+ |                                                               |
+"^DIC",2006.585,2006.585,"%D",10,0)
+ | The Food and Drug Administration classifies this software as  |
+"^DIC",2006.585,2006.585,"%D",11,0)
+ | a medical device.  As such, it may not be changed in any way. |
+"^DIC",2006.585,2006.585,"%D",12,0)
+ | Modifications to this software may result in an adulterated   |
+"^DIC",2006.585,2006.585,"%D",13,0)
+ | medical device under 21CFR820, the use of which is considered |
+"^DIC",2006.585,2006.585,"%D",14,0)
+ | to be a violation of US Federal Statutes.                     |
+"^DIC",2006.585,2006.585,"%D",15,0)
+ |                                                               |
+"^DIC",2006.585,2006.585,"%D",16,0)
+ +---------------------------------------------------------------+
+"^DIC",2006.585,2006.585,"%D",17,0)
+ 
+"^DIC",2006.585,2006.585,"%D",18,0)
+The entries in this table describe the various services that are
+"^DIC",2006.585,2006.585,"%D",19,0)
+being used by the DICOM Gateway as a DICOM Service User.
+"^DIC",2006.585,"B","USER APPLICATION",2006.585)
+
+**END**
+**END**

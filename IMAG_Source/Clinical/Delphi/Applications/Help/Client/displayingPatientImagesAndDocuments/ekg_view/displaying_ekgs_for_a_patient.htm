@@ -1,0 +1,403 @@
+<!doctype HTML public "-//W3C//DTD HTML 4.0 Frameset//EN">
+
+<html>
+
+<head>
+<title>Displaying EKGs for a Patient</title>
+<meta http-equiv="content-type" content="text/html; charset=windows-1252">
+<meta name="generator" content="RoboHelp by eHelp Corporation www.ehelp.com">
+<link rel="stylesheet" href="../../css/default_ns.css">
+<style type="text/css">
+<!--
+table.whs1 { x-cell-content-align:top; width:68.006%; border-spacing:0px; }
+col.whs2 { width:56.857%; }
+col.whs3 { width:43.143%; }
+tr.whs4 { x-cell-content-align:top; height:26px; }
+td.whs5 { width:56.857%; border-left-width:1px; border-left-color:#000000; border-left-style:Solid; border-top-style:Solid; border-top-color:#000000; border-top-width:1px; border-right-width:1px; border-right-color:#000000; border-right-style:Solid; border-bottom-style:Solid; border-bottom-color:#000000; border-bottom-width:1px; padding-right:10px; padding-left:10px; }
+td.whs6 { width:43.143%; border-top-style:Solid; border-top-color:#000000; border-top-width:1px; border-right-width:1px; border-right-color:#000000; border-right-style:Solid; border-bottom-style:Solid; border-bottom-color:#000000; border-bottom-width:1px; padding-right:10px; padding-left:10px; }
+tr.whs7 { x-cell-content-align:top; height:23px; }
+td.whs8 { width:56.857%; border-left-width:1px; border-left-color:#000000; border-left-style:Solid; border-right-width:1px; border-right-color:#000000; border-right-style:Solid; border-bottom-style:Solid; border-bottom-color:#000000; border-bottom-width:1px; padding-right:10px; padding-left:10px; }
+td.whs9 { width:43.143%; border-right-width:1px; border-right-color:#000000; border-right-style:Solid; border-bottom-style:Solid; border-bottom-color:#000000; border-bottom-width:1px; padding-right:10px; padding-left:10px; }
+p.whs10 { border-left-style:None; border-top-style:None; border-right-style:None; border-bottom-style:None; border-width:4px; }
+img_whs11 { border:none; width:600px; height:221px; float:none; }
+img_whs12 { border:none; width:764px; height:568px; border-style:none; }
+img_whs13 { border:none; width:18px; height:19px; border-style:none; }
+img_whs14 { border:none; width:436px; height:121px; float:none; border-style:none; }
+img_whs15 { border:none; width:19px; height:18px; border-style:none; }
+p.whs16 { border-left-style:none; border-top-style:none; border-right-style:none; border-bottom-style:none; border-width:4px; }
+img_whs17 { border:none; width:23px; height:20px; border-style:none; }
+img_whs18 { border:none; width:738px; height:356px; float:none; border-style:none; }
+img_whs19 { border:none; width:26px; height:18px; border-style:none; }
+img_whs20 { border:none; width:85px; height:18px; border-style:none; }
+img_whs21 { border:none; width:435px; height:120px; float:none; border-style:none; }
+img_whs22 { border:none; width:22px; height:18px; border-style:none; }
+img_whs23 { border:none; width:441px; height:122px; float:none; border-style:none; }
+img_whs24 { border:none; width:741px; height:310px; float:none; border-style:none; }
+img_whs25 { border:none; width:25px; height:17px; border-style:none; }
+img_whs26 { border:none; width:20px; height:17px; border-style:none; }
+img_whs27 { border:none; width:17px; height:18px; border-style:none; }
+img_whs28 { border:none; width:41px; height:17px; border-style:none; }
+img_whs29 { border:none; width:461px; height:309px; float:none; border-style:none; }
+img_whs30 { border:none; width:752px; height:357px; float:none; border-style:none; }
+img_whs31 { border:none; width:738px; height:355px; float:none; border-style:none; }
+img_whs32 { border:none; width:19px; height:20px; border-style:none; }
+img_whs33 { border:none; width:737px; height:354px; float:none; border-style:none; }
+img_whs34 { border:none; width:739px; height:355px; float:none; border-style:none; }
+img_whs35 { border:none; width:587px; height:210px; border-style:none; }
+img_whs36 { border:none; width:329px; height:244px; border-style:none; }
+img_whs37 { border:none; width:736px; height:354px; float:none; border-style:none; }
+img_whs38 { border:none; width:161px; height:111px; border-style:none; }
+img_whs39 { border:none; width:18px; height:17px; border-style:none; }
+img_whs40 { border:none; width:736px; height:355px; float:none; border-style:none; }
+-->
+</style>
+<style type="text/css">
+<!--
+div.WebHelpPopupMenu { position:absolute; left:0px; top:0px; z-index:4; visibility:hidden; }
+-->
+</style>
+</head>
+<body>
+<h4>vista imaging display</h4>
+
+<h1>Displaying EKGs for a Patient</h1>
+
+<p>The VistA Imaging team has developed an interface to the Marquette MUSE 
+ Database. The Interface uses an API (Application Programming Interface) 
+ developed by Marquette that allows Applications to access patient data 
+ from the MUSE Database.</p>
+
+<p>&nbsp;</p>
+
+<p><span style="font-weight: bold;"><B>Click</B></span> a 'link' in the table 
+ below to jump directly to that subject. </p>
+
+<table x-use-null-cells cellspacing="0" width="68.006%" class="whs1">
+
+<col class="whs2">
+<col class="whs3">
+
+<tr valign="top" class="whs4">
+<td width="56.857%" class="whs5">
+<p><a href="#Grid">Grid</a></td>
+<td width="43.143%" class="whs6">
+<p><a href="#Study_Controls">Study Controls</a></td></tr>
+
+<tr valign="top" class="whs7">
+<td width="56.857%" class="whs8">
+<p><a href="#Study_Text_Overlay">Study Text Overlay</a></td>
+<td width="43.143%" class="whs9">
+<p><a href="#Selecting_Studies">Selecting Studies</a></td></tr>
+
+<tr valign="top" class="whs7">
+<td width="56.857%" class="whs8">
+<p><a href="#Fit_Width_and_Height">Fit Width and Height</a></td>
+<td width="43.143%" class="whs9">
+<p><a href="#Sorting_Studies">Sorting Studies</a></td></tr>
+
+<tr valign="top" class="whs7">
+<td width="56.857%" class="whs8">
+<p><a href="#Zoom">Zoom</a></td>
+<td width="43.143%" class="whs9">
+<p><a href="#Unconfirmed_EKGs">Unconfirmed EKGs</a></td></tr>
+
+<tr valign="top" class="whs7">
+<td width="56.857%" class="whs8">
+<p><a href="#Resetting_to_the_Top_Left_Corner">Resetting to the Top Left 
+ Corner</a></td>
+<td width="43.143%" class="whs9">
+<p><a href="#Print_Settings">Print Settings</a></td></tr>
+
+<tr valign="top" class="whs7">
+<td width="56.857%" class="whs8">
+<p><a href="#Paging_Controls">Paging Controls</a></td>
+<td width="43.143%" class="whs9">
+<p><a href="#Printing">Printing</a></td></tr>
+
+<tr valign="top" class="whs7">
+<td width="56.857%" class="whs8">
+<p><a href="#Locked_Scrolling">Locked Scrolling</a></td>
+<td width="43.143%" class="whs9">
+<p><a href="#Refreshing_the_servers">Refreshing the Servers</a></td></tr>
+
+<tr valign="top" class="whs7">
+<td width="56.857%" class="whs8">
+<p><a href="#Viewing_Studies">Viewing Studies</a></td>
+<td width="43.143%" class="whs9">
+<p>&nbsp;</td></tr>
+
+</table>
+
+<p>&nbsp;</p>
+
+<p class="whs10">From the VistA Imaging Display 
+ application, choose a patient and view the MUSE EKG window.</p>
+
+<p class="whs10"><img src="../../images/image67a.jpg" x-maintain-ratio="TRUE" width="600px" height="221px" border="0" class="img_whs11"></p>
+
+<p class="whs10">&nbsp;</p>
+
+<p class="whs10">This will open the EKG Display 
+ window and load the list of studies available for the selected patient. 
+ On the right side of the screen, the list of studies should drop down. 
+ </p>
+
+<p class="whs10">&nbsp;</p>
+
+<p class="whs10"><img src="../../images/image70.jpg" width="764px" height="568px" border="0" class="img_whs12"></p>
+
+<p class="whs10">&nbsp;</p>
+
+<p class="whs10">The VistA Imaging Display application 
+ can also be configured to show the EKGs for a patient automatically whenever 
+ a patient is selected. &nbsp;This 
+ is done through the View Preferences menu item located in the Options 
+ menu. </p>
+
+<p class="whs10"><a href="displaying_ekgs_for_a_patient.htm">BACK</a></p>
+
+<h2><a name=Grid></a>Grid</h2>
+
+<p>The grid provides an easy way to measure and compare portions of the 
+ study. &nbsp;Studies 
+ can be displayed both with the grid on and off. &nbsp;To 
+ toggle the grid, click the Display/Hide Study Ttext Overlay button <img src="../../images/image529.gif" width="18px" height="19px" border="0" class="img_whs13">.</p>
+
+<p><img src="../../images/display-ekgGrid.jpg" x-maintain-ratio="TRUE" width="436px" height="121px" border="0" class="img_whs14"></p>
+
+<p><a href="displaying_ekgs_for_a_patient.htm">BACK</a></p>
+
+<h2><a name=Study_Text_Overlay></a>Study Text Overlay</h2>
+
+<p>Studies can have an overlay of text that contains differentiating data 
+ that is always on the screen. &nbsp;This 
+ can be used to prevent confusion over which study is which when viewing 
+ multiple studies concurrently. &nbsp;To 
+ toggle this text on/off, click the Display/Hide study text overlay button<img src="../../images/image532.gif" width="19px" height="18px" border="0" class="img_whs15">. </p>
+
+<p><a href="displaying_ekgs_for_a_patient.htm">BACK</a></p>
+
+<h2><a name=Fit_Width_and_Height></a>Fit Width and Height</h2>
+
+<p class="whs16">Click the <span style="font-weight: bold;"><B>Fit 
+ the Image Width</B></span> button <img src="../../images/image527.gif" width="23px" height="20px" border="0" class="img_whs17"> to make the studies as wide 
+ as the window. </p>
+
+<p><img src="../../images/display-ekg2.jpg" x-maintain-ratio="TRUE" width="738px" height="356px" border="0" class="img_whs18"></p>
+
+<p>&nbsp;</p>
+
+<p class="whs16">Use the <span style="font-weight: bold;"><B>Fit 
+ the Image Height</B></span> button <img src="../../images/image528.gif" width="26px" height="18px" border="0" class="img_whs19"> &nbsp;to 
+ make the first page of the studies as tall as the window area of the study 
+ display. </p>
+
+<p class="whs16">&nbsp;</p>
+
+<p class="whs16">The image will not become smaller 
+ than half the width of the window (Zoom of 50). </p>
+
+<p class="whs16"><a href="displaying_ekgs_for_a_patient.htm">BACK</a></p>
+
+<h2><a name=Zoom></a>Zoom</h2>
+
+<p>Use the Zoom track bar <img src="../../images/image533.gif" width="85px" height="18px" border="0" class="img_whs20"> &nbsp;to 
+ zoom in or out. A zoom of 100 will fill the width of the window.</p>
+
+<p><img src="../../images/display-ekgZoom.jpg" x-maintain-ratio="TRUE" width="435px" height="120px" border="0" class="img_whs21"></p>
+
+<p><a href="displaying_ekgs_for_a_patient.htm">BACK</a></p>
+
+<h2><a name=Resetting_to_the_Top_Left_Corner></a>Resetting to the Top Left 
+ Corner</h2>
+
+<p>The Resetting to the Top Left Corner button moves all studies to the 
+ top left corner if they have been scrolled away from that position<img src="../../images/image534.gif" width="22px" height="18px" border="0" class="img_whs22">. </p>
+
+<p><img src="../../images/display-top_left_corner.jpg" x-maintain-ratio="TRUE" width="441px" height="122px" border="0" class="img_whs23"></p>
+
+<p><a href="displaying_ekgs_for_a_patient.htm">BACK</a></p>
+
+<h2><a name=Paging_Controls></a>Paging Controls</h2>
+
+<p>Some studies contain multiple pages. &nbsp;There 
+ are several controls that allow you to go to certain pages. &nbsp;These 
+ paging controls are only enabled if only one study is visible and that 
+ study has multiple pages.</p>
+
+<p><img src="../../images/display-ekgPagingControls.jpg" x-maintain-ratio="TRUE" width="741px" height="310px" border="0" class="img_whs24"></p>
+
+<p>The First Page button <img src="../../images/image536.gif" width="25px" height="17px" border="0" class="img_whs25"> &nbsp;takes 
+ you to the top of the first page in the study. &nbsp;</p>
+
+<p>The Previous Page button <img src="../../images/image537.gif" width="20px" height="17px" border="0" class="img_whs26"> &nbsp;takes 
+ you to the page before the one that is currently visible. &nbsp;</p>
+
+<p>The Next Page button <img src="../../images/image538.gif" width="17px" height="18px" border="0" class="img_whs27"> takes you to the next page after 
+ the one that is currently visible. &nbsp;</p>
+
+<p>The Last Page button <img src="../../images/image539.gif" width="22px" height="18px" border="0" class="img_whs22"> takes you to the last page of the 
+ study.</p>
+
+<p>&nbsp;</p>
+
+<p>As you use the paging controls or the vertical scroll bar, the Current 
+ page text box <img src="../../images/image535.gif" width="41px" height="17px" border="0" class="img_whs28"> updates to show you were you are within the 
+ study. &nbsp;Changing 
+ that text box to another number will move the page to the page specified.</p>
+
+<p><a href="displaying_ekgs_for_a_patient.htm">BACK</a></p>
+
+<h2><a name=Locked_Scrolling></a>Locked Scrolling</h2>
+
+<p>Clicking the Lock Scrolling button <img src="../../images/image531.gif" width="18px" height="19px" border="0" class="img_whs13"> will lock multiple 
+ tests together. &nbsp;Scrolling 
+ one of the studies will also to scroll the others by the same amount.</p>
+
+<p><img src="../../images/display-lockedScrolling.jpg" x-maintain-ratio="TRUE" width="461px" height="309px" border="0" class="img_whs29"></p>
+
+<p><a href="displaying_ekgs_for_a_patient.htm">BACK</a></p>
+
+<h2><a name=Viewing_Studies></a>Viewing Studies</h2>
+
+<p>You can use the scroll bars around each study to view different areas 
+ of each study. &nbsp;If 
+ the study is small enough to fit within the study’s area, the corresponding 
+ scroll bar may not be visible.</p>
+
+<p><img src="../../images/display-ekgViewingStudies.jpg" x-maintain-ratio="TRUE" width="752px" height="357px" border="0" class="img_whs30"></p>
+
+<p><a href="displaying_ekgs_for_a_patient.htm">BACK</a></p>
+
+<h2><a name=Study_Controls></a>Study Controls</h2>
+
+<p>Using the study controls, you can move through the list of studies without 
+ opening the studies dropdown. &nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p>The First Page button<img src="../../images/image536.gif" width="25px" height="17px" border="0" class="img_whs25"> takes you to the top of the first 
+ study in the list. &nbsp;</p>
+
+<p>The Previous Page button <img src="../../images/image537.gif" width="20px" height="17px" border="0" class="img_whs26"> takes you to the study after 
+ the one you are currently viewing.</p>
+
+<p>The Next Page button <img src="../../images/image538.gif" width="17px" height="18px" border="0" class="img_whs27"> takes you to the study after the 
+ one you are currently viewing. &nbsp;&nbsp;</p>
+
+<p>The Last Page button <img src="../../images/image539.gif" width="22px" height="18px" border="0" class="img_whs22"> takes you to the last study in the 
+ list.</p>
+
+<p><img src="../../images/display-ekgStudyControls.jpg" x-maintain-ratio="TRUE" width="738px" height="355px" border="0" class="img_whs31"></p>
+
+<p><a href="displaying_ekgs_for_a_patient.htm">BACK</a></p>
+
+<h2><a name=Selecting_Studies></a>Selecting Studies</h2>
+
+<p>If the study dropdown is not open, click the Select Studies to Display 
+ button <img src="../../images/image540.gif" width="19px" height="20px" border="0" class="img_whs32"> .</p>
+
+<p><img src="../../images/display-selectingStudies.jpg" x-maintain-ratio="TRUE" width="737px" height="354px" border="0" class="img_whs33"></p>
+
+<p>&nbsp;</p>
+
+<p>Click on the study you would like to view. &nbsp;If 
+ you would like to view more than one study simultaneously, hold CTRL and 
+ select additional studies. &nbsp;To 
+ view more than one study that are in sequential order, select the first 
+ one, hold SHIFT, and select the bottom one. &nbsp;To 
+ close the study list dropdown, click the Select Studies to Display button 
+ <img src="../../images/image540.gif" width="19px" height="20px" border="0" class="img_whs32"> .</p>
+
+<p>&nbsp;</p>
+
+<p>If you want to only view a single study, you can double click on the 
+ study in the study list dropdown which will select that test and close 
+ the study list dropdown.</p>
+
+<p><a href="displaying_ekgs_for_a_patient.htm">BACK</a></p>
+
+<h2><a name=Sorting_Studies></a>Sorting Studies</h2>
+
+<p>Studies may be sorted by clicking on the head of the column in the study 
+ dropdown. &nbsp;Clicking 
+ the column again will resort that column in reverse order.</p>
+
+<p><img src="../../images/display-ekgDateTime.jpg" x-maintain-ratio="TRUE" width="739px" height="355px" border="0" class="img_whs34"></p>
+
+<p><a href="displaying_ekgs_for_a_patient.htm">BACK</a></p>
+
+<h2><a name=Unconfirmed_EKGs></a>Unconfirmed EKGs</h2>
+
+<p>EKGs that have been automatically interpreted by the MUSE server but 
+ have not been confirmed by a cardiologist have an UNCONFIRMED overlay 
+ at the top of the EKG report. </p>
+
+<p><img src="../../images/image72.jpg" width="587px" height="210px" border="0" class="img_whs35"></p>
+
+<p>&nbsp;</p>
+
+<p>The study list also contains a column indicating whether an EKG has 
+ been confirmed or not.</p>
+
+<p>&nbsp;</p>
+
+<p>In addition, the overlay text indicates when an EKG is unconfirmed.</p>
+
+<p><img src="../../images/image541.gif" width="329px" height="244px" border="0" class="img_whs36"></p>
+
+<p><a href="displaying_ekgs_for_a_patient.htm">BACK</a></p>
+
+<h2><a name=Print_Settings></a>Print Settings</h2>
+
+<p>Clicking on the Print Settings button &nbsp;&nbsp;brings 
+ up the settings window. &nbsp;This 
+ allows you to change the printing options. </p>
+
+<p><img src="../../images/display-ekgPrintSettings.jpg" x-maintain-ratio="TRUE" width="736px" height="354px" border="0" class="img_whs37"></p>
+
+<p>&nbsp;</p>
+
+<p>Some printers have trouble printing the grid accurately. &nbsp;Choosing 
+ Print grid with dotted lines should fix this problem. &nbsp;This 
+ setting is saved so the next time you launch the application it will remember 
+ this setting.</p>
+
+<p><img src="../../images/image542.gif" width="161px" height="111px" border="0" class="img_whs38"></p>
+
+<p><a href="displaying_ekgs_for_a_patient.htm">BACK</a></p>
+
+<h2>&nbsp;<a name=Printing></a>Printing</h2>
+
+<p>To print, click the Print button <img src="../../images/image543.gif" width="18px" height="17px" border="0" class="img_whs39"> . &nbsp;This 
+ will print all pages of all studies on the screen. &nbsp;If 
+ the grid is on, it will also print the grid. &nbsp;See 
+ Print Settings if the grid does not print correctly on your printer.</p>
+
+<p><img src="../../images/display-printing.jpg" x-maintain-ratio="TRUE" width="736px" height="355px" border="0" class="img_whs40"></p>
+
+<p><a href="displaying_ekgs_for_a_patient.htm">BACK</a></p>
+
+<h2><a name=Refreshing_the_servers></a>Refreshing the servers</h2>
+
+<p>The EKG Display client remembers if a MUSE server is unreachable and 
+ does not attempt to connect to it again during this session. &nbsp;This 
+ prevents a 30 second timeout wait.</p>
+
+<p><a href="displaying_ekgs_for_a_patient.htm">BACK</a> </p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+
+</body>
+</html>

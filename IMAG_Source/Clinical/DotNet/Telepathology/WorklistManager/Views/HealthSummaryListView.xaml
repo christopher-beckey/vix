@@ -1,0 +1,113 @@
+﻿<Window x:Class="VistA.Imaging.Telepathology.Worklist.Views.HealthSummaryListView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Health Summary List" ResizeMode="CanResizeWithGrip"
+        Background="{StaticResource {x:Static SystemColors.ControlBrushKey}}" 
+        Icon="/MagTPWorklist;component/Images/PathWLM48.ico" 
+        Loaded="Window_Loaded" Closing="Window_Closing" SizeToContent="WidthAndHeight">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        
+        <Grid Margin="5">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <Label Content="Patient:" />
+            <Label Content="{Binding PatientName}" Grid.Column="1"/>
+
+            <Label Content="Patient ID:" Grid.Row="1"/>
+            <Label Content="{Binding PatientID}" Grid.Row="1" Grid.Column="1"/>
+
+            <Label Content="Site:" Grid.Row="2"/>
+            <Label Content="{Binding SiteName}" Grid.Row="2" Grid.Column="1"/>
+        </Grid>
+        
+        <GroupBox Header="Selected Reports" Grid.Row="1" Margin="5">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <ListBox Margin="5" ItemsSource="{Binding Path=SelectedTypes}"
+                         DisplayMemberPath="DisplayName" Width="450" Height="200"
+                         SelectedItem="{Binding Path=SelectedSelType, Mode=TwoWay}" 
+                         ScrollViewer.VerticalScrollBarVisibility="Auto" />
+            
+                <Grid Grid.Column="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Button Content="_View Health Summary" Width="130"
+                        Command="{Binding ViewSelectedHealthSummaryCommand}" Margin="5"
+                        VerticalAlignment="Top"/>
+                    <Button Content="_Remove" Grid.Row="1" Width="130"
+                        Command="{Binding RemoveSelectedHealthSummaryCommand}" Margin="5"/>
+                    <Button Content="Set _Default" Grid.Row="2" Width="130"
+                        Command="{Binding SetDefaultHealthSummaryCommand}" Margin="5" />
+                    <Button Content="_Save"   Grid.Row="3" Width="130"
+                        Command="{Binding SaveCommand}" Margin="5" />
+                    <Button Content="_Close" Grid.Row="4" Width="130"
+                        Command="{Binding CloseCommand}" Margin="5" />
+                </Grid>
+            </Grid>
+        </GroupBox>
+
+        <GroupBox Header="Available Reports" Grid.Row="2" Margin="5">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <ListBox ItemsSource="{Binding Path=AvailableTypes}" Margin="5"
+                         DisplayMemberPath="DisplayName" Width="450" Height="200"
+                         SelectedItem="{Binding Path=SelectedAvlType, Mode=TwoWay}"
+                         ScrollViewer.VerticalScrollBarVisibility="Auto"/>
+
+                <Grid Grid.Column="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Button Content="View _Health Summary" Width="130"
+                            Command="{Binding ViewAvailableHealthSummaryCommand}" Margin="5"/>
+                    <Button Content="_Add" Width="130" Grid.Row="1"
+                            Command="{Binding AddAvailableHealthSummaryCommand}" Margin="5"/>
+                </Grid>
+            </Grid>
+        </GroupBox>
+    </Grid>
+</Window>

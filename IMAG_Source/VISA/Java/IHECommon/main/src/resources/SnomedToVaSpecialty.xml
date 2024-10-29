@@ -1,0 +1,149 @@
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+	<!-- 1-INTERNAL MEDICINE	419192003  -->
+	<entry key="419192003">1</entry>
+	<!-- 2-CARDIOLOGY	394579002  -->
+	<entry key="394579002">2</entry>
+	<!-- 3-GASTROENTEROLOGY	394584008 -->
+	<entry key="394584008">3</entry>
+	<!-- 4-HEMATOLOGY, MEDICAL	394803006  -->
+	<entry key="394803006">4</entry>
+	<!-- 5-INFECTIOUS DISEASE	394807007  -->
+	<entry key="394807007">5</entry>
+	<!-- 6-ONCOLOGY	394593009 -->
+	<entry key="394593009">6</entry>
+	<!-- 7-NEPHROLOGY	394589003  -->
+	<entry key="394589003">7</entry>
+	<!-- 8-PULMONARY	418112009 -->
+	<entry key="418112009">8</entry>
+	<!-- 9-RHEUMATOLOGY	394810000  -->
+	<entry key="394810000">9</entry>
+
+	<!-- 10-CRITICAL CARE, MED	408478003  -->
+	<entry key="408478003">10</entry>
+	<!-- 11-GERIATRICS	394811001 -->
+	<entry key="394811001">11</entry>
+	<!-- 12-ENDOCRINOLOGY, DIABETES, METAB	394583002 -->
+	<entry key="394583002">12</entry>
+	<!-- 14-THORACIC SURGERY	408456005 -->
+	<entry key="408456005">14</entry>
+	<!-- 15-UROLOGY	394612005 -->
+	<entry key="394612005">15</entry>
+	<!-- 16-ORTHOPEDICS	394801008 -->
+	<entry key="394801008">16</entry>
+	<!-- 17-OPHTHALMOLOGY	394594003 -->
+	<entry key="394594003">17</entry>
+	<!-- 18-NEUROLOGIC SURGERY	394610002 -->
+	<entry key="394610002">18</entry>
+	<!-- 19-DERMATOLOGY	394582007 -->
+	<entry key="394582007">19</entry>
+
+	<!-- 20-COLON & RECTAL SURGERY	408464004 -->
+	<entry key="408464004">20</entry>
+	<!-- 21-VASCULAR	408463005 -->
+	<entry key="408463005">21</entry>
+	<!-- 22-CRITICAL CARE, SURGERY	394732004  -->
+	<entry key="394732004">22</entry>
+	<!-- 23-PODIATRY	310087009,394733009 -->
+	<entry key="310087009">23</entry>
+	<entry key="394733009">23</entry>
+	<!-- 24-OTORHINOLARYNGOLOGY (ENT)	418960008 -->
+	<entry key="418960008">24</entry>
+	<!-- 25-REHABILITATIVE	394602003 -->
+	<entry key="394602003">25</entry>
+	<!-- 26-PSYCHIATRY	394587001 -->
+	<entry key="394587001">26</entry>
+	<!-- 27-NEUROLOGY	394591006 -->
+	<entry key="394591006">27</entry>
+	<!-- 28-NUCLEAR MEDICINE	394649004 -->
+	<entry key="394649004">28</entry>
+	<!-- 29-RADIOLOGY	394914008 -->
+	<entry key="394914008">29</entry>
+
+	<!-- 30-HEMATOLOGY, LAB	394916005 -->
+	<entry key="394916005">30</entry>
+	<!-- 31-BLOOD BANK	421661004 -->
+	<entry key="421661004">31</entry>
+	<!-- 32-MICROBIOLOGY	394820005, 408454008 -->
+	<entry key="394820005">32</entry>
+	<entry key="408454008">32</entry>
+	<!-- 33-CHEMISTRY	394596001 -->
+	<entry key="394596001">33</entry>
+	<!-- 34-IMMUNOLOGY	394598000 -->
+	<entry key="394598000">34</entry>
+	<!-- 39-EMERGENCY MEDICINE	"409971007 -->
+	<entry key="409971007">39</entry>
+	<entry key="394733009">39</entry>
+
+	<!-- 40-ANESTHESIOLOGY	394577000 -->
+	<entry key="394577000">40</entry>
+	<!-- 41-ALLERGY & IMMUNOLOGY	394805004 -->
+	<entry key="394805004">41</entry>
+	<!-- 42-PRIMARY CARE -->
+	<!-- <entry key="??????">42</entry>  -->
+	<!-- 43-OBSTETRICS & GYNECOLOGY	394585009 -->
+	<entry key="394585009">43</entry>
+	<!-- 44-PLASTIC SURGERY	394611003 -->
+	<entry key="394611003">44</entry>
+	<!-- 45-PREVENTIVE MEDICINE	409968004 -->
+	<entry key="409968004">45</entry>
+	<!-- 47-MEDICINE	394802001 -->
+	<entry key="394802001">47</entry>
+	<!-- 48-SURGERY	394609007 -->
+	<entry key="394609007">48</entry>
+	<!-- 49-LABORATORY	"394595002 -->
+	<entry key="394595002">49</entry>
+	<entry key="61246008">49</entry>
+
+	<!-- 50-PATHOLOGY	168393006 -->
+	<entry key="168393006">50</entry>
+	<!-- 51-NEURORADIOLOGY	394734003 -->
+	<entry key="394734003">51</entry>
+	<!-- 52-NURSING	106292003 -->
+	<entry key="106292003">52</entry>
+	<!-- 53-DENTISTRY	408444009 -->
+	<entry key="408444009">53</entry>
+	<!-- 54-TRIG PT INJ -->
+	<!-- <entry key="?????">54</entry> -->
+	<!-- 55-MENTAL HEALTH	394587001,394816006,394913002 -->
+	<!-- <entry key="394587001">55</entry> -->
+	<entry key="394816006">55</entry>
+	<entry key="394913002">55</entry>
+	<!-- 56-OPTOMETRY	310105000 -->
+	<entry key="310105000">56</entry>
+	<!-- 57-EYE CARE -->
+	<!-- <entry key="">57</entry> -->
+	<!-- 58-AUDIOLOGY & SPEECH PATHOLOGY	310101009 -->
+	<entry key="310101009">58</entry>
+
+	<!-- 60-PHARMACY	"310080006,394600006 -->
+	<entry key="310080006">60</entry>
+	<entry key="394600006">60</entry>
+	<!-- 65-RESPIRATORY THERAPY -->
+	<!-- <entry key="?????">65</entry> -->
+	<!-- 66-RESEARCH -->
+	<!-- <entry key="?????">66</entry> -->
+	<!-- 67-SPINAL CORD INJURY	394610002, 394591006 -->
+	<!-- <entry key="394610002">67</entry> -->
+	<!-- <entry key="394591006">67</entry> -->
+	<!-- 68-SOCIAL WORK	310134006 -->
+	<entry key="310134006">68</entry>
+	<!-- 69-DIETETICS	159033005 -->
+	<entry key="159033005">69</entry>
+
+	<!-- 70-PROSTHETICS -->
+	<!-- <entry key="?????">70</entry> -->
+	<!-- 71-RADIATION THERAPY	310125001 -->
+	<entry key="310125001">71</entry>
+	<!-- 72-PROCTOLOGY	408464004, 394584008 -->
+	<!-- <entry key="408464004">72</entry> -->
+	<!-- <entry key="394584008">72</entry>  -->
+	<!-- 73-ORAL SURGERY (DENTAL)	408465003 -->
+	<entry key="408465003">73</entry>
+	<!-- 74-CARDIAC SURGERY	408466002 -->
+	<entry key="408466002">74</entry>
+	<!-- 75-TRANSPLANTATION	408477008 -->
+	<entry key="408477008">75</entry>
+	<!-- 76-PSYCHOLOGY	310123008 -->
+	<entry key="310123008">76</entry>
+</properties>

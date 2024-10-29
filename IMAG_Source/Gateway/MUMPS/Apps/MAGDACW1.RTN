@@ -1,0 +1,176 @@
+MAGDACW1 ;WOIFO/PMK - DICOM Networking / Upper Layer Service / A-ASSOCIATE ; 12/19/2006 14:18
+ ;;3.0;IMAGING;**10,30,54**;MAR 19, 2002;;OCT 28, 2009
+ ;; Per VHA Directive 2004-038, this routine should not be modified.
+ ;; +---------------------------------------------------------------+
+ ;; | Property of the US Government.                                |
+ ;; | No permission to copy or redistribute this software is given. |
+ ;; | Use of unreleased versions of this software requires the user |
+ ;; | to execute a written test agreement with the VistA Imaging    |
+ ;; | Development Office of the Department of Veterans Affairs,     |
+ ;; | telephone (301) 734-0100.                                     |
+ ;; | The Food and Drug Administration classifies this software as  |
+ ;; | a medical device.  As such, it may not be changed in any way. |
+ ;; | Modifications to this software may result in an adulterated   |
+ ;; | medical device under 21CFR820, the use of which is considered |
+ ;; | to be a violation of US Federal Statutes.                     |
+ ;; +---------------------------------------------------------------+
+ ;;
+ Q
+ ; Refer to Part 8, Section 9.3 of the DICOM Standard
+ ;
+ ; Write an Association Control Service Element Protocol Data Unit (PDU)
+ ;
+ ; This routine is invoked by MAGDACU2 (request) and MAGDACP3 (accept)
+ ;
+HEADER(FILE,TYPE,CALLED,CALLING) ; entry point to generate an ASSOCIATE-RQ/AC header
+ ; Sections 9.3.2 (request) and 9.3.3 (accept)
+ N BYTEORDR,I,PAD,PAD0,STATUS
+ S BYTEORDR="B" ; Big Endian byte ordering is used for PDU encoding
+ S PAD="" F I=1:1:16 S PAD=PAD_" "
+ S PAD0="" F I=1:1:32 S PAD0=PAD0_$C(0)
+ S STATUS=$$USE^MAGOSFIL(FILE)
+ D PUTBYTE^MAGDDW0($$HEX2DEC^MAGOSMSC(TYPE)) ; PDU type (byte 1)
+ D PUTBYTE^MAGDDW0(0) ; reserved (byte 2)
+ D PUTULONG^MAGDDW0(0) ; PDU length (bytes 3-6)
+ D PUTUSHOR^MAGDDW0(1) ; protocol version (bytes 7-8)
+ D PUTUSHOR^MAGDDW0(0) ; reserved (byte 9-10)
+ S CALLED=$E(CALLED_PAD,1,16)
+ D PUTASCII^MAGDDW0(CALLED) ; Called Application title (bytes 11-26)
+ S CALLING=$E(CALLING_PAD,1,16)
+ D PUTASCII^MAGDDW0(CALLING) ; Calling Application title (bytes 27-42)
+ D PUTASCII^MAGDDW0(PAD0) ; 32-byte reserved field (bytes 43-74)
+ ; Variable items follow in bytes 75-xxx of the message
+ I $$USEPRIN^MAGOSFIL(1)
+ Q
+ ;
+CONTEXT(FILE) ; entry point to generate an Application Context Item
+ ; Sections 9.3.2.1 (request) and 9.3.3.1 (accept)
+ N BYTEORDR,STATUS,UID
+ S BYTEORDR="B" ; Big Endian byte ordering is used for PDU encoding
+ S STATUS=$$USE^MAGOSFIL(FILE)
+ S UID=$$GETUID^MAGDUID1("DICOM Application Context Name")
+ D ITEM("10H",UID)
+ I $$USEPRIN^MAGOSFIL(1)
+ Q
+ ;
+REQUEST(FILE) ; entry point to generate a REQUEST Presentation Context Item
+ ; Section 9.3.2.2
+ N TYPE S TYPE="REQUEST" G PRESENT
+ ;
+ACCEPT(FILE) ; entry point to generate an ACCEPT Presentation Context Item
+ ; Section 9.3.3.2
+ N TYPE S TYPE="ACCEPT" G PRESENT
+ ;
+REJECT(FILE,REASON) ;
+ ; Section 9.3.3.2
+ N TYPE S TYPE="REJECT" G PRESENT
+ ;
+PRESENT ; generate a Presentation Context Item
+ ; Sections 9.3.2.2 (request) and 9.3.3.2 (accept)
+ N BYTEORDR,UID,LENGTH,OFFSET,STATUS
+ S BYTEORDR="B" ; Big Endian byte ordering is used for PDU encoding
+ S STATUS=$$USE^MAGOSFIL(FILE)
+ I TYPE="REQUEST" D
+ . D PUTBYTE^MAGDDW0($$HEX2DEC^MAGOSMSC("20H")) ; Item type (byte 1)
+ . Q
+ E  D
+ . D PUTBYTE^MAGDDW0($$HEX2DEC^MAGOSMSC("21H")) ; Item type (byte 1)
+ . Q
+ D PUTBYTE^MAGDDW0(0) ; reserved (byte 2)
+ S OFFSET=$$GETOFSET^MAGOSFIL(FILE)
+ D PUTUSHOR^MAGDDW0(0) ; Item length (bytes 3-4)
+ D PUTBYTE^MAGDDW0(PCONTEXT) ; Presentation context ID (byte 5)
+ D PUTBYTE^MAGDDW0(0) ; reserved (byte 6)
+ I TYPE="REQUEST" D
+ . D PUTBYTE^MAGDDW0(0) ; reserved (byte 7)
+ . D PUTBYTE^MAGDDW0(0) ; reserved (byte 8)
+ . ; Abstract Syntax Sub-Item (Section 9.3.2.2.1 only)
+ . S UID=^TMP("MAG",$J,"DICOM","NEGOTIATE","REQUEST",PCONTEXT,"SOP CLASS UID")
+ . D ITEM("30H",UID) ; Application context
+ . Q
+ E  D
+ . I TYPE="ACCEPT" D PUTBYTE^MAGDDW0(0) ; reason/result (byte 7)
+ . I TYPE="REJECT" D PUTBYTE^MAGDDW0(REASON) ; reason/result (byte 7)
+ . D PUTBYTE^MAGDDW0(0) ; reserved (byte 8)
+ . ; NO Abstract Syntax Sub-Item (Section 9.3.2.2.1 only)
+ . Q
+ ;
+ ; Transfer Syntax Sub-Item(s) (Section 9.3.2.2.2)
+ I TYPE'="REJECT" D
+ . N COUNT,UID
+ . F COUNT=1:1:^TMP("MAG",$J,"DICOM","NEGOTIATE",TYPE,PCONTEXT,"TRANSFER UID") D
+ . . S UID=^TMP("MAG",$J,"DICOM","NEGOTIATE",TYPE,PCONTEXT,"TRANSFER UID",COUNT)
+ . . D ITEM("40H",UID) ; Transfer syntax
+ . . Q
+ . Q
+ ;
+ S LENGTH=$$GETOFSET^MAGOSFIL(FILE)-OFFSET-2
+ S OFFSET=$$SEEK^MAGOSFIL(FILE,OFFSET) ; reposition to update the length
+ D PUTUSHOR^MAGDDW0(LENGTH) ; update the length
+ S OFFSET=$$SEEK^MAGOSFIL(FILE,0,2) ; reposition to end of file
+ I $$USEPRIN^MAGOSFIL(1)
+ Q
+ ;
+USERINFO(FILE) ; entry point to output User Information Item
+ ; Sections 9.3.2.3 (request) and 9.3.3.3 (accept)
+ N BYTEORDR,LENGTH,OFFSET,STATUS,UID,VERSION
+ S BYTEORDR="B" ; Big Endian byte ordering is used for PDU encoding
+ S STATUS=$$USE^MAGOSFIL(FILE)
+ D PUTBYTE^MAGDDW0($$HEX2DEC^MAGOSMSC("50H")) ; Item type (byte 1)
+ D PUTBYTE^MAGDDW0(0) ; reserved (byte 2)
+ S OFFSET=$$GETOFSET^MAGOSFIL(FILE)
+ D PUTUSHOR^MAGDDW0(0) ; Item length (bytes 3-4)
+ ;
+ ; User Information Parameter (Part 8, Appendix D)
+ D PUTBYTE^MAGDDW0($$HEX2DEC^MAGOSMSC("51H")) ; Item type (byte 1)
+ D PUTBYTE^MAGDDW0(0) ; reserved (byte 2)
+ D PUTUSHOR^MAGDDW0(4) ; Item length (bytes 3-4)
+ D PUTULONG^MAGDDW0(32768) ; Maximum length received (bytes 5-8)
+ ;
+ ; Implementation Identification Notification
+ S VERSION=^MAGDICOM(2006.563,1,"VERSION"),UID=$$GETUID^MAGDUID1(VERSION)
+ I $L(VERSION)>16 D  ; maximum length for a VERSION is 16 bytes
+ . D MESSAGE^MAGDMLOG(2,0,"Version <<"_VERSION_">> too long, 16 characters maximum","BTV")
+ . S VERSION=$E(VERSION,1,16)
+ . Q
+ D ITEM("52H",UID)
+ ;
+ I $D(^TMP("MAG",$J,"DICOM","NEGOTIATE","REQUEST","MAX INVOKED")) D
+ . ; Asynchronous Operations Window Sub-Item
+ . D ITEM53H^MAGDACW2
+ . Q
+ ;
+ D ITEM("55H",VERSION)
+ ;
+ I $D(^TMP("MAG",$J,"DICOM","NEGOTIATE","REQUEST","EXTENDED")) D
+ . ; SOP Class Extended Negotiation Sub-Item
+ . D ITEM56H^MAGDACW2(PDUOUT)
+ . Q
+ ;
+ S LENGTH=$$GETOFSET^MAGOSFIL(FILE)-OFFSET-2
+ S OFFSET=$$SEEK^MAGOSFIL(FILE,OFFSET) ; reposition to update the length
+ D PUTUSHOR^MAGDDW0(LENGTH) ; update the length
+ S OFFSET=$$SEEK^MAGOSFIL(FILE,0,2) ; reposition to end of file
+ I $$USEPRIN^MAGOSFIL(1)
+ Q
+ ;
+CLOSE(FILE) ; entry point to update the PDU message length and close the file
+ N BYTEORDR,LENGTH,OFFSET
+ S BYTEORDR="B" ; Big Endian byte ordering is used for PDU encoding
+ S STATUS=$$USE^MAGOSFIL(FILE)
+ S LENGTH=$$GETOFSET^MAGOSFIL(FILE)-6
+ S OFFSET=$$SEEK^MAGOSFIL(FILE,2) ; reposition to update the length
+ D PUTULONG^MAGDDW0(LENGTH) ; update the length
+ S STATUS=$$CLOSE^MAGOSFIL(FILE) ; close the file
+ I $$USEPRIN^MAGOSFIL(1)
+ Q
+ ;
+ITEM(TYPE,STRING) ; Output an ITEM structure
+ N BYTEORDR
+ S BYTEORDR="B" ; Big Endian byte ordering is used for PDU encoding
+ D PUTBYTE^MAGDDW0($$HEX2DEC^MAGOSMSC(TYPE)) ; Item type (byte 1)
+ D PUTBYTE^MAGDDW0(0) ; reserved (byte 2)
+ D PUTUSHOR^MAGDDW0($L(STRING)) ; Item length (bytes 3-4)
+ D PUTASCII^MAGDDW0(STRING) ; STRING (bytes 5-xxx)
+ Q
+ ;

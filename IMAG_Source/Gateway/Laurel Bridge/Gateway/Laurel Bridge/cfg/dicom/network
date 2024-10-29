@@ -1,0 +1,9 @@
+#
+# map between an Application Entity Title and a full address
+# i.e. host:port:called-ae-title
+#
+[ ae_title_mappings ]
+EL_STORE_SCP1 = mars:3004:StoreSCP1
+SM_STORE_SCP1 = mars:3017:StoreSCP1
+MY_STORE_SCP = tittonc-lt:4000:StoreSCP1
+TestSCP = tittonc-lt:2000:TestSCP

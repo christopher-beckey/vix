@@ -1,0 +1,1160 @@
+<html><head><title>VistA Imaging DICOM Gateway Status</title>
+<!--
+ ;; +---------------------------------------------------------------+
+ ;; | Property of the US Government.                                |
+ ;; | No permission to copy or redistribute this software is given. |
+ ;; | Use of unreleased versions of this software requires the user |
+ ;; | to execute a written test agreement with the VistA Imaging    |
+ ;; | Development Office of the Department of Veterans Affairs,     |
+ ;; | telephone (301) 734-0100.                                     |
+ ;; |                                                               |
+ ;; | The Food and Drug Administration classifies this software as  |
+ ;; | a medical device.  As such, it may not be changed in any way. |
+ ;; | Modifications to this software may result in an adulterated   |
+ ;; | medical device under 21CFR820, the use of which is considered |
+ ;; | to be a violation of US Federal Statutes.                     |
+ ;; +---------------------------------------------------------------+
+-->
+<script language=CACHE runat=server>
+ New name,sep,time
+ Set time=%request.Get("Refresh") Quit:time="No"
+ Set time=+time Set:time<5 time=30
+ Write $Char(13,10),"<meta Http-equiv=""refresh"" Content="""
+ Write time,"; Url=MagDicomStatus.csp"
+ Set sep="?",name="" For  Set name=%request.Next(name) Quit:name=""  Do
+ . Quit:%request.Get(name)=""
+ . Write sep,name,"=",..HTMLkey(%request.Get(name))
+ . Set sep="&"
+ . Quit
+ Write """>"
+</script>
+<meta http-equiv=Content-Type content="text/html; charset=iso-8859-1">
+</head>
+<body background="vabkg.jpg">
+<csp:method name=OnPreHTTP arguments="" returntype=%Boolean>
+ Do %response.SetHeader("Expires","")
+ Do %response.SetHeader("Cache-Control","none")
+ Quit 1
+</csp:method>
+<table cellSpacing=0 cellPadding=0 border=0 summary="This table is for formatting purposes only.">
+  <tr>
+    <td vAlign=top><img alt="First part of VistA Imaging Logo" src="MAGLogo1.gif" border=0></td>
+    <td vAlign=top><img alt="Second part of VistA Imaging Logo" src="MAGLogo2.gif"><br>
+      <h2><font color=#0033ff>VistA Imaging DICOM Gateway Status</font></h2></td>
+  </tr>
+</table>
+
+<script language=CACHE runat=server>
+ Do ..Process()
+</script>
+ 
+</body>
+
+<csp:method name=Process arguments="">
+ New Err,M2MOK,TODAY,VALLOC,WebPage
+ ;
+ Set token="" Do
+ . New cmd,from,ip,util,x
+ . Set WebPage=$IO
+ . Set cmd="ipconfig",ip("127.0.0.1")=1
+ . Open cmd:"QR" Use cmd Set util=$ZUtil(68,40,1)
+ . For  Read x Quit:$ZEOF  Do
+ . . Quit:x'["IP Address. ."
+ . . Set x=$Extract(x,38,$Length(x))
+ . . Set:x'="" ip(x)=1
+ . . Quit
+ . Set x=$ZUtil(68,40,util)
+ . Close cmd Use WebPage
+ . ;
+ . Set id=""
+ . Set from=%request.GetCgiEnv("REMOTE_HOST")
+ . If from'="",$Get(ip(from)) Set id=from
+ . Quit:id=""
+ . Set token=id_"|"_..Now()_"|"_$Random(10000000)
+ . Set ^MAGtoken(token)=5*60+..Now()
+ . Quit
+ ;
+ Set:id="" token=%request.Get("SessionToken")
+ Do:token'=""
+ . New exp
+ . Set exp=$Get(^MAGtoken(token))
+ . If 'exp Set token="" Quit
+ . If exp<..Now() Set token="" Quit
+ . ; Extend expiration of token by 15 minutes
+ . Set ^MAGtoken(token)=15*60+..Now()
+ . Quit
+ Do:token=""
+ . New N1,N2,Pass,User
+ . Set User=%request.Get("UserName")
+ . Set Pass=%request.Get("PassWord")
+ . Set N1=%request.Get("PassN1")
+ . Set N2=%request.Get("PassN2")
+ . Set:User_Pass_N1_N2'="" token=..LogInVal("DICOMGateway",User,Pass,N1,N2)
+ . If token="" Do  Quit
+ . . Do ..LogInFrm("DICOMGateway","MAGDSET2.csp")
+ . . Quit
+ . ; Initial token lives 5 minutes
+ . Set ^MAGtoken(token)=5*60+..Now()
+ . Set ^MAGtoken(token,"DICOMGateway")=1
+ . Quit
+ Do:token'=""
+ . Do  ; Set up credentials to use MUMPS-to-MUMPS Broker
+ . . N A,V,X
+ . . Kill ^TMP("MAG",$Job)
+ . . Set ^TMP("MAG",$Job,"DICOM MENU OPTION")=0
+ . . Set ^TMP("MAG",$Job,"DICOM MENU VIEW ONLY")=0
+ . . S A=$G(^MAGDICOM(2006.563,1,"M-to-M BROKER BGND ACCESS"))
+ . . S V=$G(^MAGDICOM(2006.563,1,"M-to-M BROKER BGND VERIFY"))
+ . . S X=$$DECRYP^MAGM2VCU(A)_";"_$$DECRYP^MAGM2VCU(V)
+ . . S ^TMP("MAG",$Job,"DICOM RPC USER")="666^1^"_$$ENCRYPT^MAGM2VCU(X)
+ . . Q
+ . ;
+ . Set M2MOK=1,WebPage=$IO
+ . Do
+ . . New DOMAIN
+ . . If '$$ISCONT^MAGM2VCU() Do  Quit:'M2MOK
+ . . . Set X=$$RECONCT^MAGDMENA() Quit:X
+ . . . Write $Char(13,10),"<h3><font color=#ff0000>"
+ . . . Write "Cannot connect to VistA at this time"
+ . . . Write " - update capabilities limited.</font></h3>",$Char(13,10)
+ . . . Write "<p>",..HTML($P(X,",",2,$L(X)+2)),"</p>"
+ . . . Set M2MOK=0
+ . . . Quit
+ . . If $$CALLRPC^MAGM2VCU("MAG DICOM VALID LOCATIONS","",.VALLOC)<0 Set M2MOK=0
+ . . Else  If $$CALLRPC^MAGM2VCU("MAG DICOM GET DOMAIN","",.DOMAIN)<0 Set M2MOK=0
+ . . If $Get(DOMAIN)'="" Set ^MAGDICOM(2006.563,1,"DOMAIN")=DOMAIN
+ . . Quit
+ . ;
+ . Use WebPage
+ . Do
+ . . New %,%H,%I,X
+ . . Do NOW^%DTC Set TODAY=X
+ . . Write $Char(13,10),"<h3><font color=#0033ff>"
+ . . Write $Piece("Sunday Monday Tuesday Wednesday Thursday Friday Saturday"," ",$Horolog-3#7+1)
+ . . Write " ",..FileManStamp(%,1),"</font></h3>"
+ . . Quit
+ . Write $Char(13,10),"<form action=""MagDicomStatus.csp"" method=""POST"">"
+ . ;
+ . Do:%request.Get("TextChan")'="" ..ShowTextChannels()
+ . Do:%request.Get("TextHL7")'="" ..ShowTextHL7()
+ . Do:%request.Get("ModWL")'="" ..ShowModWL()
+ . Do:%request.Get("RTSto")'="" ..ShowRTSto()
+ . Do:%request.Get("CumSto")'="" ..ShowCumSto()
+ . Do:%request.Get("ImgProc")'="" ..ShowImgProc()
+ . Do:%request.Get("BatchEx")'="" ..ShowBatchEx()
+ . ;
+ . Write $Char(13,10),"<p>"
+ . Write "<input type=checkbox name=""TextChan"""
+ . Write:%request.Get("TextChan")'="" " checked" Write ">"
+ . Write " &nbsp; Display Text Gateway Statistics"
+ . ;
+ . Write "<br>",$Char(13,10)
+ . Write "<input type=checkbox name=""TextHL7"""
+ . Write:%request.Get("TextHL7")'="" " checked" Write ">"
+ . Write " &nbsp; Display Processed HL7 Messages from VistA System"
+ . ;
+ . Write "<br>",$Char(13,10)
+ . Write "<input type=checkbox name=""ModWL"""
+ . Write:%request.Get("ModWL")'="" " checked" Write ">"
+ . Write " &nbsp; Display Modality Worklist Statistics"
+ . ;
+ . Write "<br>",$Char(13,10)
+ . Write "<input type=checkbox name=""RTSto"""
+ . Write:%request.Get("RTSto")'="" " checked" Write ">"
+ . Write " &nbsp; Display Real-Time Storage Server Statistics"
+ . ;
+ . Write "<br>",$Char(13,10)
+ . Write "<input type=checkbox name=""CumSto"""
+ . Write:%request.Get("CumSto")'="" " checked" Write ">"
+ . Write " &nbsp; Display Cumulative Storage Server Statistics"
+ . ;
+ . Write "<br>",$Char(13,10)
+ . Write "<input type=checkbox name=""ImgProc"""
+ . Write:%request.Get("ImgProc")'="" " checked" Write ">"
+ . Write " &nbsp; Display Daily Image Processing Statistics"
+ . ;
+ . Write "<br>",$Char(13,10)
+ . Write "<input type=checkbox name=""BatchEx"""
+ . Write:%request.Get("BatchEx")'="" " checked" Write ">"
+ . Write " &nbsp; Display Batch Export Statistics"
+ . ;
+ . Write "<br>",$Char(13,10)
+ . Write "<input type=text name=""Refresh"" size=5 "
+ . Write "value=""",%request.Get("Refresh"),"""></p>"
+ . ;
+ . Write $Char(13,10),"<p><input type=submit value=""Refresh""></p>"
+ . Write $Char(13,10),"</form>"
+ . Quit
+ Quit
+</csp:method>
+
+<csp:method name=DiskName arguments="D:%String" returnvalue=%String>
+ New X
+ If $Get(D)="" Quit "C:"
+ If $Extract(D,1,2)="\\" Quit $Piece(D,"\",1,4)
+ Quit $Extract(D)_":"
+</csp:method>
+
+<csp:method name=DiskStat arguments="Name:%String" returnvalue=%String>
+ New FREE,PCT,TOTAL
+ ; determine the amount of free space on the disk drive
+ Set FREE=$$DISKFREE^MAGOSMSC(Name)
+ Set TOTAL=$$DISKSIZE^MAGOSMSC(Name)
+ Set PCT=FREE/TOTAL*100
+ Set FREE=..Unit(FREE,"Byte",1024)
+ Set TOTAL=..Unit(TOTAL,"Byte",1024)
+ Quit FREE_"^"_TOTAL_"^"_PCT
+</csp:method>
+
+<csp:method name=FileManStamp arguments="stamp:%String,long:%String" returnvalue=%String>
+ New %,%H,%I,mon,out,X
+ If '$Get(stamp) Quit ""
+ Set mon="January February March April May June July August September October November December"
+ Set:'$Get(long) mon="Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec"
+ Set out=(stamp#100\1)_" "_$Piece(mon," ",stamp\100#100)_" "_(stamp\10000+1700)
+ Quit:stamp'["." out
+ Set out=out_", "
+ Set X=stamp*1E6#1E6,%=X\10000
+ Set:%<10 %=0_% Set out=out_%_":" Set %=X\100#100
+ Set:%<10 %=0_% Set out=out_%_":" Set %=X#100
+ Set:%<10 %=0_% Set out=out_%
+ Quit out
+</csp:method>
+
+<csp:method name=StatDate arguments="date:%String,format:%String" returnvalue=%String>
+ New d,out,s,t
+ Set s=..FileManStamp(date),d=$Piece(s,", ",1),t=$Piece(s,", ",2)
+ Set out=$Piece(d,"-",1,2) Set:format["Y" out=d
+ Set:format["t" out=out_" "_$Piece(t,":",1,2)
+ Quit out
+</csp:method>
+
+<csp:method name=Queue arguments="PRIORITY:%String,CHANNEL:%String,FLOW:%String,SENDTYPE:%String" returnvalue=%String>
+ ; output queue value
+ New D1,TYPE,X
+ Set X=$Get(^MAGDICOM(2006.564,"X",FLOW,SENDTYPE,PRIORITY)) Quit:'X 0
+ Set X=$Get(^MAGDICOM(2006.564,X,0))
+ Set TYPE=$Select(CHANNEL=1:1,1:$Piece(X,"^",2)) If TYPE="*" Set TYPE=CHANNEL
+ Set D1=$Order(^MAGDICOM(2006.577,TYPE,1,"B",$Extract(X,1),""))
+ Quit $Piece(^MAGDICOM(2006.577,TYPE,1,D1,0),"^",2)
+</csp:method>
+
+<csp:method name=Unit arguments="V:%String,N:%String,K:%String" returnvalue=%String>
+ New O,U,X
+ Set K=+$Get(K) Set:'K K=1000
+ Set P=" Kilo Mega Giga Tera Peta Exa Zetta Yotta 27"
+ Set X=V For  Do  Quit:X=""
+ . Set U=$Piece(P," ",1),P=$Select(U:U+3,1:$Piece(P," ",2,$Length(P)+2))
+ . Set:U U="10**"_U_" "
+ . If X<1000 Set:X'=1 N=N_"s" Set O=X_" "_U_N,X="" Quit
+ . Set X=+$Justify(X/K,0,3)
+ . Quit
+ Quit O
+</csp:method>
+
+<csp:method name=ShowTextChannels arguments="">
+ New Channel,d0,d1,Diff,Free,Name,Queue,Port,Prior,x
+ Write $Char(13,10),"<h3>Real-Time DICOM Communications Statistics</h3>"
+ ;
+ Do  ; How far behind is the HL7 Queue?
+ . Set Diff("HL7")=0
+ . Quit:$$CALLRPC^MAGM2VCU("MAG DICOM GET HIGHEST HL7","",.x)<0
+ . . Set Diff("HL7")=x-$Get(^MAGDICOM(2006.563,1,"HL7_PTR"))
+ . . Quit
+ . Set:'Diff("HL7") Diff("HL7")="&lt;None&gt;"
+ . Quit
+ Use WebPage
+ ;
+ Set d0=0 For  Set d0=$o(^MAGDICOM(2006.564,d0)) Quit:'d0  Do
+ . New dir,letter,prior,typ
+ . Set x=$Get(^MAGDICOM(2006.564,d0,0))
+ . Set letter=$Piece(x,"^",1)
+ . Set dir=$Piece(x,"^",4) Quit:dir=""
+ . Set type=$Piece(x,"^",5) Quit:type=""
+ . Set prior=$Piece(x,"^",6) Quit:prior=""
+ . Set Queue(1,prior,dir,type)=letter
+ . Set Queue(2,letter)=prior_"^"_dir_"^"_type
+ . Quit
+ ;
+ Set Channel=0 For  Set Channel=$Order(^MAGDICOM(2006.563,1,"DATA PATH",Channel)) Quit:'Channel  Do
+ . New any,Count
+ . Set x=$Get(^MAGDICOM(2006.563,1,"DATA PATH",Channel,0)) Quit:x=""
+ . Set x=..DiskStat(..DiskName($Get(^MAGDICOM(2006.563,1,"DATA PATH",1,0))))
+ . Set Free=$Piece(x,"^",3)+.5\1
+ . ;
+ . Set d1=0 For  Set d1=$Order(^MAGDICOM(2006.577,Channel,1,d1)) Quit:'d1  Do
+ . . Set x=$Get(^MAGDICOM(2006.577,Channel,1,d1,0))
+ . . Set letter=$Piece(x,"^",1) Quit:letter=""
+ . . Set Queue(3,letter)=$Piece(x,"^",2)
+ . . Quit
+ . Quit:$Order(Queue(3,""))=""
+ . For Prior="IMMEDIATE","HIGH","MEDIUM","LOW" Do
+ . . New in,out
+ . . Set in=$Get(Queue(1,Prior,"INCOMING","RESPONSE")) Quit:in=""
+ . . Set out=$Get(Queue(1,Prior,"OUTGOING","REQUEST")) Quit:out=""
+ . . Set Diff(Prior)=$Get(Queue(3,out))-$Get(Queue(3,in))
+ . . Set:Diff(Prior)<0 Diff(Prior)=Diff(Prior)+1E7
+ . . Quit:'Diff(Prior)
+ . . Kill Queue(2,in),Queue(3,in),Queue(2,out),Queue(3,out)
+ . . Set in=$Get(Queue(1,Prior,"INCOMING","REQUEST")) Quit:in=""
+ . . Set out=$Get(Queue(1,Prior,"OUTGOING","RESPONSE")) Quit:out=""
+ . . Kill Queue(2,in),Queue(3,in),Queue(2,out),Queue(3,out)
+ . . Quit
+ . ;
+ . Set x=0
+ . Set Prior="" For  Set Prior=$Order(Diff(Prior)) Quit:Prior=""  Do
+ . . Quit:Diff(Prior)<6
+ . . Write:x "<br>" Write $Char(13,10) Write:'x "<p>" Set x=1
+ . . Write "<b><font color=#ff0000>"
+ . . Write "Warning: Processing of records in the ",Prior
+ . . Write " queue is ",Diff(Prior)," records behind.</font></b>"
+ . . Quit
+ . Write:x "</p>"
+ . ;
+ . Write $Char(13,10),"<h3>Channel ",Channel
+ . Write ", stored on ",^MAGDICOM(2006.563,1,"DATA PATH",Channel,0)
+ . ;
+ . Set any=0,d0=0 For  Set d0=$Order(^MAGDICOM(2006.584,d0)) Quit:'d0  Do
+ . . Set x=$Get(^MAGDICOM(2006.584,d0,0))
+ . . Quit:$Piece(x,"^",5)'=Channel
+ . . Write "<br>",$Char(13,10),$Piece(x,"^",1)," on port #",$Piece(x,"^",3)
+ . . Set any=any+1
+ . . Quit
+ . Write "</h3>"
+ . ;
+ . Do:'any
+ . . Write $Char(13,10),"<p><b><font color=#ff0000>Warning: this channel "
+ . . Write "is currently not used for any activity.</font></b></p>"
+ . . Quit
+ . ;
+ . Do:any>1
+ . . Write $Char(13,10),"<p><b><font color=#ff0000>Warning: this channel "
+ . . Write "is currently used for more than one activity.</font></b></p>"
+ . . Quit
+ . ;
+ . Do:Free<15
+ . . Write $Char(13,10),"<p><b><font color=#ff0000>Warning: Only ",Free,"% of "
+ . . Write "the total disk space is now available on this drive.</font></b></p>"
+ . . Quit
+ . ;
+ . Write $Char(13,10),"<table border=2 summary=""This table is for formatting purposes only."">"
+ . Write $Char(13,10),"<tr>"
+ . Write $Char(13,10),"<td align=center><b>PACS<br>Interface<br>HL7 Delay</b></td>"
+ . Write $Char(13,10),"<td align=center><b>Priority<br>Level<br>Name</b></td>"
+ . Write $Char(13,10),"<td align=center><b>PACS<br>Request<br>Queue</b></td>"
+ . Write $Char(13,10),"<td align=center><b>PACS<br>Response<br>Queue</b></td>"
+ . Write $Char(13,10),"<td align=center><b>VistA<br>Request<br>Queue</b></td>"
+ . Write $Char(13,10),"<td align=center><b>VistA<br>Response<br>Queue</b></td></tr>"
+ . Write $Char(13,10),"<tr><td rowspan=4 align=center valign=center>"
+ . Write Diff("HL7"),"<br>",$Char(13,10),"Space: ",Free,"%</td>"
+ . For Prior="IMMEDIATE","HIGH","MEDIUM","LOW" Do
+ . . Write:Prior'="IMMEDIATE" $Char(13,10),"<tr>"
+ . . Write $Char(13,10),"<td align=left>",Prior,"</td>"
+ . . Set letter=$Get(Queue(1,Prior,"INCOMING","REQUEST"))
+ . . Set x="&nbsp;"
+ . . Set:letter'="" x=$Get(Queue(3,letter)) Set:x="" x="&nbsp;"
+ . . Write $Char(13,10),"<td align=left>",letter,":",x,"</td>"
+ . . Set letter=$Get(Queue(1,Prior,"INCOMING","RESPONSE"))
+ . . Set x="&nbsp;"
+ . . Set:letter'="" x=$Get(Queue(3,letter)) Set:x="" x="&nbsp;"
+ . . Write $Char(13,10),"<td align=left>",letter,":",x,"</td>"
+ . . Set letter=$Get(Queue(1,Prior,"OUTGOING","REQUEST"))
+ . . Set x="&nbsp;"
+ . . Set:letter'="" x=$Get(Queue(3,letter)) Set:x="" x="&nbsp;"
+ . . Write $Char(13,10),"<td align=left>",letter,":",x,"</td>"
+ . . Set letter=$Get(Queue(1,Prior,"OUTGOING","RESPONSE"))
+ . . Set x="&nbsp;"
+ . . Set:letter'="" x=$Get(Queue(3,letter)) Set:x="" x="&nbsp;"
+ . . Write $Char(13,10),"<td align=left>",letter,":",x,"</td></tr>"
+ . . Quit
+ . Write $Char(13,10),"</table>"
+ . Quit
+ Quit
+</csp:method>
+
+<csp:method name=ShowTextHL7 arguments="">
+ New any,AUD,HL7,LOCATION,x
+ Write $Char(13,10),"<h3>Processed HL7 Messages from VistA System</h3>"
+ ;
+ Set LOCATION=$Get(^MAGDICOM(2006.563,1,"LOCATION"))
+ If 'LOCATION Do  Quit
+ . Write $Char(13,10),"<p><b><font color=#ff0000>Warning: "
+ . Write "This DICOM Gateway is not yet set up for operation.</font></b></p>"
+ . Quit
+ ;
+ Do  ; How far behind is the HL7 Queue?
+ . Set HL7=0
+ . Quit:$$CALLRPC^MAGM2VCU("MAG DICOM GET HIGHEST HL7","",.x)<0
+ . . Set HL7=x-$Get(^MAGDICOM(2006.563,1,"HL7_PTR"))
+ . . Quit
+ . Set:'HL7 HL7="&lt;None&gt;"
+ . Quit
+ Use WebPage
+ ;
+ Do:HL7>5
+ . Write $Char(13,10),"<p><b><font color=#ff0000>Warning: "
+ . Write "Processing of HL7 records is ",HL7," behind.</font></b></p>"
+ . Quit
+ ;
+ ; Parameter #2 = 1 to only show today's statistics
+ Set x=$$CALLRPC^MAGM2VCU("MAG DICOM TEXT AUDIT GET","",.AUD,LOCATION,1)
+ Use WebPage
+ If x<0 Do  Quit
+ . Write $Char(13,10),"<p><b><font color=#ff0000>Warning: "
+ . Write "Cannot call Remote Procedure...</font></b></p>"
+ . Quit
+ ;
+ Set any=0,I="" For  Set I=$Order(AUD(I)) Quit:I=""  Do
+ . Quit:'$Piece(AUD(I),"^",2)
+ . Do:'any
+ . . Write $Char(13,10),"<table border=2 summary=""This table is for formatting purposes only."">"
+ . . Write $Char(13,10),"<td align=center><b>Event</b></td>"
+ . . Write $Char(13,10),"<td align=center><b>Count</b></td>"
+ . . Write $Char(13,10),"<td align=center><b>Time</b></td></tr>"
+ . . Quit
+ . Write "<tr><td align=left>",$Piece(AUD(I),"^",3),"</td>"
+ . Write "<td align=right>",$Piece(AUD(I),"^",2),"</td>"
+ . Write "<td align=center>",..FileManStamp($Piece(AUD(I),"^",4),0),"</td></tr>"
+ . Set any=1
+ . Quit
+ Write:any $Char(13,10),"</table>"
+ ;
+ Do:'any
+ . Write $Char(13,10),"<p><b><font color=#ff0000>Warning: "
+ . Write "No statistics gathered for today.</font></b></p>"
+ . Quit
+ Quit
+</csp:method>
+
+<csp:method name=ShowModWL arguments="">
+ New ANY,Date,Div,INFO,Name,STATS,Type,USER,x
+ Set Div=0,USER=1
+ For  Set Div=$Order(^MAGDWLST(2006.55,Div)) Quit:'Div  Do
+ . Quit:$$CALLRPC^MAGM2VCU("MAG DICOM FILEMAN GET","",.INFO,4,Div,.01)<0
+ . Use WebPage
+ . Set Name=INFO Set:Name="" Name="*** Division #"_Div_" ***"
+ . Kill STATS Do
+ . . New Svc,Sched,Study
+ . . Set Svc="" For  Set Svc=$Order(^MAGDWLST(2006.56,Div,1,"E",Svc)) Quit:Svc=""  Do
+ . . . Set Type="" For  Set Type=$Order(^MAGDWLST(2006.56,Div,1,"E",Svc,Type)) Quit:Type=""  Do
+ . . . . Set Sched="" For  Set Sched=$Order(^MAGDWLST(2006.56,Div,1,"E",Svc,Type,Sched)) Quit:Sched=""  Do
+ . . . . . Set Study="" For  Set Study=$Order(^MAGDWLST(2006.56,Div,1,"E",Svc,Type,Sched,Study)) Quit:Study=""  Do
+ . . . . . . Set X=$Get(^MAGDWLST(2006.56,Div,1,Study,0))
+ . . . . . . If X="" Do  Quit
+ . . . . . . . ; kill dangling cross-reference
+ . . . . . . . Kill ^MAGDWLST(2006.56,Div,1,"E",Svc,Type,Sched,Study)
+ . . . . . . . Quit
+ . . . . . . Set DFN=$Piece(X,"^",2),ACNUMB=$Piece(X,"^",3),STUDYID=$Piece(X,"^",4)
+ . . . . . . Set Date=$Piece(Sched,".")
+ . . . . . . Set STATS("Date",Date)="",STATS("Type",Type)=""
+ . . . . . . Set STATS("COUNTS",Type,Date)=$Get(STATS("COUNTS",Type,Date))+1
+ . . . . . . Quit
+ . . . . . Quit
+ . . . . Quit
+ . . . Quit
+ . . Quit
+ . Set ANY=0
+ . Set Date="" For  Set Date=$Order(STATS("Date",Date),-1) Quit:Date=""  Do
+ . . Do:'ANY
+ . . . Write $Char(13,10),"<h3>Modality WorkList Statistics for ",Name,"</h3>"
+ . . . Write $Char(13,10),"<table border=2 summary=""This table is for formatting purposes only."">"
+ . . . Write $Char(13,10),"<tr><td align=center rowspan=2 valign=bottom>"
+ . . . Write "<b>Exam<br>Date</b></td>"
+ . . . Set Type="",x=0 For  Set Type=$Order(STATS("Type",Type)) Quit:Type=""  Set x=x+1
+ . . . Write $Char(13,10),"<td align=center colspan=",x,"><b>Imaging Type</b></td></tr>"
+ . . . Write $Char(13,10),"<tr>"
+ . . . Set Type="" For  Set Type=$Order(STATS("Type",Type)) Quit:Type=""  Do
+ . . . . Write "<td align=center><b>",Type,"</b></td>"
+ . . . . Quit
+ . . . Write "</tr>"
+ . . . Quit
+ . . Write $Char(13,10),"<tr><td align=center>",Date\1#100," "
+ . . Write $Piece("Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec"," ",Date\100#100)
+ . . Write " ",Date\10000+1700,"</td>"
+ . . Set ANY=1
+ . . Set Type="" For  Set Type=$Order(STATS("Type",Type)) Quit:Type=""  Do
+ . . . Set x=$Get(STATS("COUNTS",Type,Date)) Set:'x x="&nbsp;"
+ . . . Write "<td align=right>",x,"</td>"
+ . . . Quit
+ . . Quit
+ . Write:ANY $Char(13,10),"</table>"
+ . Quit
+ Use WebPage
+ Do
+ . New D0,DESC,MODLIST,STATION
+ . ;
+ . ; add all the defined modalities to the list
+ . Set STATION="",ANY=0
+ . For  Set STATION=$Order(^MAGDICOM(2006.583,"B",STATION)) Quit:STATION=""  Do
+ . . Set MODLIST(STATION)=""
+ . . Set D0=+$Order(^MAGDICOM(2006.583,"B",STATION,""))
+ . . Set DESC(STATION)=$Piece($Get(^MAGDICOM(2006.583,D0,0)),"^",6),ANY=1
+ . . Quit
+ . Quit:'ANY
+ . ;
+ . ; get statistics on each modality's activity
+ . Merge MODLIST=^MAGDWLST("STAT",TODAY)
+ . ;
+ . Write $Char(13,10),"<h3>Modality Worklist Activity</h3>"
+ . Write $Char(13,10),"<table border=2 summary=""This table is for formatting purposes only."">"
+ . Write $Char(13,10),"<tr><td align=center><b>Instrument Name</b></td>"
+ . Write $Char(13,10),"<td align=center><b>Queries</b></td>"
+ . Write $Char(13,10),"<td align=center><b>Time</b></td>"
+ . Write $Char(13,10),"<td align=center><b>Matches</b></td>"
+ . Write $Char(13,10),"<td align=center><b>Description</b></td></tr>"
+ . Set STATION=""
+ . For  Set STATION=$Order(MODLIST(STATION)) Quit:STATION=""  Do
+ . . New COUNT,MATCH,TIME
+ . . Set COUNT=MODLIST(STATION)
+ . . Set TIME=$Piece(COUNT,"^",2),MATCH=$Piece(COUNT,"^",3)
+ . . Set:TIME'="" TIME=$Extract(TIME,9,10)_":"_$Extract(TIME,11,12)_":"_$Extract(TIME,13,14)
+ . . Set:MATCH="" MATCH="Failed" Set:COUNT="" COUNT="",MATCH=""
+ . . If 'USER,COUNT="" Quit
+ . . Write $Char(13,10),"<tr><td align=left>",STATION,"</td>"
+ . . Set x=..HTML($Piece(COUNT,"^",1)) Set:x="" x="&nbsp;"
+ . . Write $Char(13,10),"<td align=right>",x,"</td>"
+ . . Set x=..HTML(TIME) Set:x="" x="&nbsp;"
+ . . Write $Char(13,10),"<td align=right>",x,"</td>"
+ . . Set x=..HTML(MATCH) Set:x="" x="&nbsp;"
+ . . Write $Char(13,10),"<td align=right>",x,"</td>"
+ . . Set x=..HTML(DESC(STATION)) Set:x="" x="&nbsp;"
+ . . Write $Char(13,10),"<td align=left>",x,"</td></tr>"
+ . . Quit
+ . Write $Char(13,10),"</table>"
+ . Quit
+ Quit
+</csp:method>
+
+<csp:method name=ShowRTSto arguments="">
+ New d0,p,x
+ Write $Char(13,10),"<h3>VistA DICOM Image Storage Server</h3>"
+ Write $Char(13,10),"<table border=2 summary=""This table is for formatting purposes only."">"
+ Write $Char(13,10),"<tr><td align=center><b>Instrument</b></td>"
+ Write $Char(13,10),"<td align=left><b>Description</b></td>"
+ Write $Char(13,10),"<td align=center><b>Port</b></td>"
+ Write $Char(13,10),"<td align=center><b>Service</b></td></tr>"
+ Set d0=0 For  Set d0=$Order(^MAGDICOM(2006.581,d0)) Quit:'d0  Do
+ . Set x=^MAGDICOM(2006.581,d0,0)
+ . Set p=..HTML($Piece(x,"^",1)) Set:p="" p="&nbsp;"
+ . Write $Char(13,10),"<tr><td align=center>",p,"</td>"
+ . Set p=..HTML($Piece(x,"^",2)) Set:p="" p="&nbsp;"
+ . Write $Char(13,10),"<td align=left>",p,"</td>"
+ . Set p=..HTML($Piece(x,"^",4)) Set:p="" p="&nbsp;"
+ . Write $Char(13,10),"<td align=right>",p,"</td>"
+ . Set p=..HTML($Piece(x,"^",3)) Set:p="" p="&nbsp;"
+ . Write $Char(13,10),"<td align=center>",p,"</td></tr>"
+ . Quit
+ Write $Char(13,10),"</table>"
+ ;
+ Write $Char(13,10),"<h3>VistA DICOM Image Storage Server Status</h3>"
+ Write $Char(13,10),"<table border=2 summary=""This table is for formatting purposes only."">"
+ Write $Char(13,10),"<tr><td align=center><b>Instrument</b></td>"
+ Write $Char(13,10),"<td align=center><b>Interface Status</b></td>"
+ Write $Char(13,10),"<td align=center><b>Associations</b></td>"
+ Write $Char(13,10),"<td align=center><b>Images (Time)</b></td></tr>"
+ ;
+ Set d0=0 For  Set d0=$Order(^MAGDICOM(2006.581,d0)) Quit:'d0  Do
+ . New i0,Instr,LOCK,NIMG,Y
+ . Set X=$Get(^MAGDICOM(2006.581,d0,0))
+ . Set Instr=$Piece(X,"^",1) Quit:Instr=""
+ . Set p=..HTML(Instr) Set:p="" p="&nbsp;"
+ . Write $Char(13,10),"<tr><td align=center>",p,"</td>"
+ . ; Display storage server interface statistics
+ . Lock +^MAGDINPT("INSTRUMENT",Instr):0 Set LOCK=$Test
+ . Lock:LOCK -^MAGDINPT("INSTRUMENT",Instr)
+ . Set i0=$Order(^MAGDICOM(2006.5764,"B",Instr,""))
+ . If 'i0 Do  Quit
+ . . Write $Char(13,10),"<td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>"
+ . . Quit
+ . Set Y=$Get(^MAGDICOM(2006.5764,i0,0))
+ . Write $Char(13,10),"<td align=center>" Do
+ . . Set X=..FileManStamp($Piece(Y,"^",3),0)
+ . . If '$Piece(Y,"^",2) Do  Quit
+ . . . Write "Down ",X
+ . . . Quit
+ . . If LOCK Write "Crashed!" Quit  ; Says is up, but lock is not set
+ . . Set:$Piece($Piece(Y,"^",3),".",1)=TODAY X=$Piece(X,", ",2)
+ . . Write "Up (since ",X,")"
+ . . Quit
+ . Write "</td>"
+ . ; display association statistics
+ . Set Y=$Get(^MAGDICOM(2006.5764,i0,1,TODAY,0))
+ . Set p=..HTML($Piece(Y,"^",3)) Set:p="" p="&nbsp;"
+ . Write $Char(13,10),"<td align=center>",p
+ . Write:$Piece(Y,"^",4) " (active)" Write "</td>"
+
+ . Set X=..FileManStamp($Piece(Y,"^",4),0)
+ . Set p=..HTML($Piece(Y,"^",3))
+ . Set:p'="" p=p_" ("_$Piece(X,", ",2)_")" Set:p="" p="&nbsp;"
+ . Write $Char(13,10),"<td align=center>",p,"</td></tr>"
+ . Quit
+ Write $Char(13,10),"</table>"
+ ;
+ Do
+ . New d,x
+ . Set d=$Get(^MAGDICOM(2006.563,1,"IMAGE INPUT PATH"))
+ . Set x=..DiskStat(..DiskName(d))
+ . Write $Char(13,10),"<p>",$Piece(x,"^",1)
+ . Write " (",$Justify($Piece(x,"^",3),3,1),"%) of free space on drive "
+ . Write "<br>",$Char(13,10),"(Total disk space is ",$Piece(x,"^",2),")</p>"
+ . Quit
+ ;
+ If $Get(^MAGDICOM(2006.563,1,"PACS EXAM COMPLETE"))="YES" Do
+ . ; output count of commercial PACS imaging transactions
+ . New AUD,I,LOCATION,LOCNAM
+ . ;
+ . Set LOCATION=^MAGDICOM(2006.563,1,"LOCATION")
+ . Quit:$$CALLRPC^MAGM2VCU("MAG DICOM FILEMAN GET","",.LOCNAM,4,LOCATION,.01)<0
+ . Quit:$$CALLRPC^MAGM2VCU("MAG DICOM TEXT AUDIT GET","",.AUD,LOCATION,1)<0
+ . ;
+ . Set I="" For  Set I=$Order(AUD(I)) Quit:I=""  Quit:AUD(I)
+ . Quit:I=""
+ . ;
+ . Use WebPage
+ . Write $Char(13,10),"<h3>",..HTML(LOCNAM),"</h3>"
+ . Write $Char(13,10),"<table border=2 summary=""This table is for formatting purposes only."">"
+ . Write $Char(13,10),"<tr><td align=center><b>xxx</b></td>"
+ . Write $Char(13,10),"<td align=center><b>Count</b></td>"
+ . Write $Char(13,10),"<td align=center><b>xxx</b></td></tr>"
+ . Kill X For  Set X($Piece(AUD(I),"^",3)_" ")=AUD(I),I=$Order(AUD(I)) Quit:I=""
+ . Set X="" For  Set X=$Order(X(X)) Quit:X=""  Do
+ . . New COUNT,LAST
+ . . Set COUNT=$Piece(X(X),"^",2),LAST=$Piece(X,"^",4) Set:'COUNT COUNT=""
+ . . Write $Char(13,10),"<tr><td align=right>",X,"</td>"
+ . . Write $Char(13,10),"<td align=right>",COUNT,"</td>"
+ . . Set I="&nbsp;"
+ . . Set:LAST I=$Extract(LAST,9,10)_":"_$Extract(LAST,11,12)
+ . . Write $Char(13,10),"<td align=left>",I,"</td></tr>"
+ . . Quit
+ . Write $Char(13,10),"</table>"
+ . Quit
+ Use WebPage
+ ;
+ Do
+ . New N
+ . ; check for images waiting to be processed
+ . Set N=$Piece($Get(^MAGDINPT(2006.571,0)),"^",3)-$Get(^MAGDINPT(2006.571,"ACOUNT"))
+ . If N>1 Write $Char(13,10),"<p>There are ",N," images to be processed.</p>"
+ . If N=1 Write $Char(13,10),"<p>There is one image yet to be processed.</p>"
+ . ;
+ . ; check for images that were only partially transmitted
+ . Set N=+$Piece($Get(^MAGDINPT(2006.5714,0)),"^",4)
+ . If N>1 Write $Char(13,10),"<p>There are ",N," incomplete images.</p>"
+ . If N=1 Write $Char(13,10),"<p>There is one incomplete image.</p>"
+ . Quit
+ ;
+ Do   ; check for undefined modalities
+ . New ANY,NUMBER,MFGR,MODEL,MODALITY
+ . Set MFGR="",ANY=0
+ . For  Set MFGR=$Order(^MAGDINPT(2006.5713,"D",MFGR)) Quit:MFGR=""  Do
+ . . Set MODEL=""
+ . . For  Set MODEL=$Order(^MAGDINPT(2006.5713,"D",MFGR,MODEL)) Quit:MODEL=""  Do
+ . . . Set MODALITY=""
+ . . . For  Set MODALITY=$Order(^MAGDINPT(2006.5713,"D",MFGR,MODEL,MODALITY)) Quit:MODALITY=""  Do
+ . . . . Set NUMBER=$Get(^MAGDINPT(2006.5713,"D",MFGR,MODEL,MODALITY))
+ . . . . If NUMBER>0 Do
+ . . . . . Do:'ANY
+ . . . . . . Write $Char(13,10),"<h3>The following undefined modalities have images</h3>"
+ . . . . . . Write $Char(13,10),"<table border=2 summary=""This table is for formatting purposes only."">"
+ . . . . . . Write $Char(13,10),"<tr><td align=center><b>Manufacturer</td>"
+ . . . . . . Write $Char(13,10),"<td align=center><b>Model</td>"
+ . . . . . . Write $Char(13,10),"<td align=center><b>Modality</td>"
+ . . . . . . Write $Char(13,10),"<td align=center><b># Images</td></tr>"
+ . . . . . . Set ANY=1
+ . . . . . . Quit
+ . . . . . Write $Char(13,10),"<tr><td>",..HTML(MFGR),"</td>"
+ . . . . . Write $Char(13,10),"<td>",..HTML(MODEL),"</td>"
+ . . . . . Write $Char(13,10),"<td>",..HTML(MODALITY),"</td>"
+ . . . . . Write $Char(13,10),"<td align=right>",..HTML(NUMBER),"</td></tr>"
+ . . . . . Quit
+ . . . . Quit
+ . . . Quit
+ . . Quit
+ . Write:ANY $Char(13,10),"</table>"
+ . Quit
+ ;
+ Do
+ . New COUNT,LOCATION,MACHID
+ . Set LOCATION=^MAGDICOM(2006.563,1,"LOCATION")
+ . Set MACHID=^MAGDICOM(2006.563,1,"MACHINE ID")
+ . Quit:$$CALLRPC^MAGM2VCU("MAG DICOM INCORRECT IMAGE CT","",.COUNT,LOCATION,MACHID)<0
+ . Use WebPage
+ . Quit:'COUNT
+ . ;
+ . Write $Char(13,10),"<p>There "
+ . Write $Select(COUNT=1:"is one",1:"are "_COUNT)," stud"
+ . Write $Select(COUNT=1:"y",1:"ies") Write " to be corrected.</p>"
+ . Quit
+ Use WebPage
+ Quit
+</csp:method>
+
+<csp:method name=ShowCumSto arguments="">
+ ; Cumulative image acquisition statistics
+ ;
+ New ANY,CNT,DATE,I,INFO,Instr,LOCATION,X
+ Set LOCATION=^MAGDICOM(2006.563,1,"LOCATION")
+ ;
+ Set ANY=0 Do
+ . Quit:$$CALLRPC^MAGM2VCU("MAG DICOM FILEMAN GET","",.LOCNAM,4,LOCATION,.01)<0
+ . Quit:$$CALLRPC^MAGM2VCU("MAG DICOM IMAGE AUDIT GET","",.INFO,LOCATION)<0
+ . Set ANY=1
+ Use WebPage
+ Quit:'ANY
+ ;
+ ; set the cardinality of each instrument in the list
+ Set I=$Order(INFO("")) If I="" Do  Quit
+ . Write $Char(13,10),"<p>No audit information available for cumulative statistiics.</p>"
+ . Quit
+ ;
+ For  Set I=$Order(INFO(I)) Quit:I=""  Quit:INFO(I)  Do
+ . Set Instr=$Piece(INFO(I),"^",3) Set:Instr'="" Instr(Instr)="&nbsp;"
+ . Quit
+ If $Order(Instr(""))="" Do  Quit
+ . Write $Char(13,10),"<p>No audit information available for cumulative statistiics.</p>"
+ . Quit
+ ;
+ Write $Char(13,10),"<h3>Image Capture Statistics by Instrument<br>"
+ Write "For ",..HTML(LOCNAM),"</h3>"
+ ;
+ Write $Char(13,10),"<table border= summary=""This table is for formatting purposes only.""2>"
+ Write $Char(13,10),"<tr><td align=center><b>Date</b></td>"
+ Set Instr="" For  Set Instr=$Order(Instr(Instr)) Quit:Instr=""  Do
+ . Write $Char(13,10),"<td align=center><b>",..HTML(Instr),"</b></td>"
+ . Quit
+ Write "</tr>"
+ ;
+ Set DATE="",I=I-1,ANY=0 For  Set I=$Order(INFO(I)) Quit:I=""  Do
+ . Set X=INFO(I) Do:DATE'=$Piece(X,"^",1)
+ . . Do:ANY
+ . . . Write $Char(13,10),"<tr><td align=center>",..FileManStamp(DATE,0),"</td>"
+ . . . Set Instr="" For  Set Instr=$Order(Instr(Instr)) Quit:Instr=""  Do
+ . . . . Write $Char(13,10),"<td align=right>",Instr(Instr),"</td>"
+ . . . . Set Instr(Instr)="&nbsp;"
+ . . . . Quit
+ . . . Write "</tr>"
+ . . . Quit
+ . . Set DATE=$Piece(X,"^",1),ANY=0
+ . . Quit
+ . Set Instr=$Piece(X,"^",3) Quit:Instr=""
+ . Set CNT=$Piece(X,"^",2) Set:$Piece(X,"^",5)>CNT CNT=$Piece(X,"^",5)
+ . Set:CNT="" CNT="&nbsp;" Set Instr(Instr)=CNT,ANY=1
+ . Quit
+ Do:ANY
+ . Write $Char(13,10),"<tr><td align=center>",..FileManStamp(DATE,0),"</td>"
+ . Set Instr="" For  Set Instr=$Order(Instr(Instr)) Quit:Instr=""  Do
+ . . Write $Char(13,10),"<td align=right>",Instr(Instr),"</td>"
+ . . Quit
+ . Write "</tr>"
+ . Quit
+ Write "</tr>",$Char(13,10),"</table>"
+ Quit
+ ;
+</csp:method>
+
+<csp:method name=ShowImgProc arguments="">
+ ; Statistics for each of the instruments
+ ;
+ New ANY,INFO,INSTR,LOCATION,LOCNAM,MAGDATE,START,STOP,T,X
+ Set LOCATION=$Get(^MAGDICOM(2006.563,1,"LOCATION"))
+ If 'LOCATION Do  Quit
+ . Write $Char(13,10),"<p><b><font color=#ff0000>Warning: "
+ . Write "This DICOM Gateway is not yet set up for operation.</font></b></p>"
+ . Quit
+ ;
+ Set ANY=0 Do
+ . Quit:$$CALLRPC^MAGM2VCU("MAG DICOM FILEMAN GET","",.LOCNAM,4,LOCATION,.01)<0
+ . Set ANY=1
+ . Quit
+ Use WebPage
+ Quit:'ANY
+ ;
+ Set START=..GetDate("StartDate","T")
+ Set STOP=..GetDate("EndDate","T")
+ Do DT^DICRW
+ Do
+ . Quit:START+1'=DT
+ . Quit:STOP+1'=DT
+ . Quit:%request.Get("Refresh")*2>$Piece($Horolog,",",2)
+ . ; Update settings to reflect passage of midnight
+ . Do %request.Set("StartDate","")
+ . Do %request.Set("EndDate","")
+ . Set START=..GetDate("StartDate","T")
+ . Set STOP=..GetDate("EndDate","T")
+ . Quit
+ ;
+ Write $Char(13,10),"<h3>VistA DICOM Image Storage Server Statistics</h3>"
+ ;
+ Write $Char(13,10),"<p>The report will include the period selected below:<br>"
+ Write $Char(13,10),"First Date: &nbsp; "
+ Write $Char(13,10),"<input type=text name=""StartDate"" "
+ Write "value=""",%request.Get("StartDate"),"""><br>"
+ Write $Char(13,10),"Last Date: &nbsp; "
+ Write $Char(13,10),"<input type=text name=""StartDate"" "
+ Write "value=""",%request.Get("EndDate"),"""></p>"
+ ;
+ Do:START'>STOP
+ . New DATE,STAT1,STAT2
+ . ;
+ . If $$CALLRPC^MAGM2VCU("MAG DICOM IMAGE AUDIT GET","",.INFO,LOCATION,+START,+STOP)<0 Quit
+ . Use WebPage
+ . ;
+ . Set I=$Order(INFO("")) If I="" Do  Quit
+ . . Write $Char(13,10),"<p>No data collected "
+ . . Write $Select(+START'=+STOP:"between ",1:"on ")
+ . . Write $Piece(START,"^",2)
+ . . Write:START'=STOP " and ",$Piece(STOP,"^",2)
+ . . Write "...</p>"
+ . . Quit
+ . ;
+ . For  Set I=$Order(INFO(I)) Quit:I=""  Quit:INFO(I)
+ . If I="" Do  Quit
+ . . Write $Char(13,10),"<p>No data collected "
+ . . Write $Select(+START'=+STOP:"between ",1:"on ")
+ . . Write $Piece(START,"^",2)
+ . . Write:START'=STOP " and ",$Piece(STOP,"^",2)
+ . . Write "...</p>"
+ . . Quit
+ . ;
+ . Set I=I-1,DATE="",ANY=0 For  Set I=$Order(INFO(I)) Quit:I=""  Do
+ . . Set X=INFO(I)
+ . . Do:$Piece(X,"^",1)'=DATE
+ . . . Write:ANY $Char(13,10),"</table>"
+ . . . Set DATE=$Piece(X,"^",1)
+ . . . Write $Char(13,10),"<h3>",..HTML(LOCNAM),"<br>"
+ . . . Write $Char(13,10),"VistA DICOM Image Storage Server Statistics for ",..FileManStamp(DATE,1),"</h3>"
+ . . . Write $Char(13,10),"<table border=2 summary=""This table is for formatting purposes only."">"
+ . . . Write $Char(13,10),"<tr><td align=center><b>Instrument</b></td>"
+ . . . Write $Char(13,10),"<td align=center><b>Images Acquired</b></td>"
+ . . . Write $Char(13,10),"<td align=center><b>Images Processed</b></td></tr>"
+ . . . Quit
+ . . Set INSTR=$Piece(X,"^",3),ANY=1
+ . . Write $Char(13,10),"<tr><td align=center>",..HTML(INSTR),"</td>"
+ . . Set (STAT1,STAT2)="*** N O N E ***"
+ . . Set:$Piece(X,"^",2) STAT1=$Piece(X,"^",2)_" ("_..HourMin($Piece(X,"^",4))_")"
+ . . Set:$Piece(X,"^",5) STAT2=$Piece(X,"^",5)_" ("_..HourMin($Piece(X,"^",6))_")"
+ . . Set:STAT1=STAT2 STAT2="--- same ---" Set:'$Piece(X,"^",5) STAT2="&nbsp;"
+ . . Write $Char(13,10),"<td align=center>",STAT1,"</td>"
+ . . Write $Char(13,10),"<td align=center>",STAT2,"</td></tr>"
+ . . Quit
+ . Write:ANY $Char(13,10),"</table>"
+ . Quit
+ Use WebPage
+ Quit
+</csp:method>
+
+<csp:method name=ShowBatchEx arguments="">
+ New BATCH,BEGDATE,DFN,SORTORDR,ENDDATE,HOURS,I,LASTDATE,NIMAGES,RUNDATE
+ New RUNNING,SCANMODE,STARTPTR,STOPDATE,STOPPTR,STORESCP,STUDIES,X
+ ;
+ Set RUNNING=0
+ Lock +^MAGDICOM("Menu",28,5):0 Set:'$Test RUNNING=1
+ Lock:'RUNNING -^MAGDICOM("Menu",28,5)
+ ;
+ Write $Char(13,10),"<h3>VistA DICOM Export Utility Statistics</h3>"
+ Write $Char(13,10),"<p>Current Status: Export Utility "
+ If $Get(^MAGDICOM(2006.563,1,"EXPORT ACTIVE"))="YES" Do
+ . Write $Select(RUNNING:"is currently running",1:"has aborted")
+ . Quit
+ Else  Write "is not running"
+ Write "</p>"
+ ;
+ Set I=0 For  Set I=$Order(^MAGDICOM(2006.565,I)) Quit:'I  Do
+ . Set X=$Get(^MAGDICOM(2006.565,I,0))
+ . Set RUNDATE=$Piece(X,"^",1)
+ . Set STORESCP=$Piece(X,"^",2)
+ . Set SORTORDR=$Piece(X,"^",3)
+ . Set STARTPTR=$Piece(X,"^",4)
+ . Set BATCH=$Piece(X,"^",5)
+ . Set HOURS=$Piece(X,"^",6)
+ . Set ENDDATE=$Piece(X,"^",7)
+ . Set STOPPTR=$Piece(X,"^",8)
+ . Set STUDIES=$Piece(X,"^",9)
+ . Set NIMAGES=$Piece(X,"^",10)
+ . Set SCANMODE=$Piece(X,"^",11)
+ . Set BEGDATE=$Piece(X,"^",12)
+ . Set STOPDATE=$Piece(X,"^",13)
+ . Set LASTDATE=$Piece(X,"^",14)
+ . Set DFN=$Piece(X,"^",15)
+ . ;
+ . Do
+ . . New c,d,h,y
+ . . Write $Char(13,10),"<p><b>Active hours of operation</b>:<br>"
+ . . Write "(M=midnight, N=noon)</p>"
+ . . Write $Char(13,10),"<table border=2 summary=""This table is for formatting purposes only."">",$Char(13,10),"<tr>"
+ . . Set d="M 1 2 3 4 5 6 7 8 9 10 11 N 1 2 3 4 5 6 7 8 9 10 11"
+ . . For h=1:1:24 Do
+ . . . Set y=$Extract(HOURS,h) Set:y="" y="Y"
+ . . . Set c=$Select(y="Y":"#00ff00",1:"#ff0000")
+ . . . Write "<td bgcolor=",c," align=center><b>",$Piece(d," ",h),"</b></td>"
+ . . . Quit
+ . . Write "</tr>",$Char(13,10),"<tr>"
+ . . For h=1:1:24 Do
+ . . . Set y=$Extract(HOURS,h) Set:y="" y="Y"
+ . . . Set c=$Select(y="Y":"#00ff00",1:"#ff0000")
+ . . . Write "<td bgcolor=",c," align=center><b>",y,"</b></td>"
+ . . . Quit
+ . . Write "</tr>",$Char(13,10),"</table>"
+ . . Quit
+ . ;
+ . Write "<p>DICOM storage provider: ",..HTML(STORESCP),"</p>"
+ . ;
+ . If SCANMODE="DATE" Do  Quit  ; date scan order
+ . . New p
+ . . Write $Char(13,10),"<p><b>*** Date/Time Scan Order ***</b></p>"
+ . . Write $Char(13,10),"<table border=2 summary=""This table is for formatting purposes only."">"
+ . . Write $Char(13,10),"<tr><td align=center><b>Run</b></td>"
+ . . Write $Char(13,10),"<td align=center><b>Started</b></td>"
+ . . Write $Char(13,10),"<td align=center><b>A/D</b></td>"
+ . . Write $Char(13,10),"<td align=center><b>Begin Date</b></td>"
+ . . Write $Char(13,10),"<td align=center><b>Stop Date</b></td>"
+ . . Write $Char(13,10),"<td align=center><b>Last Date</b></td>"
+ . . Write $Char(13,10),"<td align=center><b>Finished</b></td>"
+ . . Write $Char(13,10),"<td align=center><b># Images</b></td></tr>"
+ . . ;
+ . . Write $Char(13,10),"<tr><td align=right>",I,"</td>"
+ . . Write $Char(13,10),"<td align=center>",..StatDate(RUNDATE,"T"),"</td>"
+ . . Write $Char(13,10),"<td align=center>",$Extract(SORTORDR,1),"</td>"
+ . . Write $Char(13,10),"<td align=center>",..StatDate(BEGDATE,"Y"),"</td>"
+ . . Write $Char(13,10),"<td align=center>",..StatDate(STOPDATE,"Y"),"</td>"
+ . . Write $Char(13,10),"<td align=center>",..StatDate(LASTDATE,"Y"),"</td>"
+ . . Set p=$Select(ENDDATE="":"(incomplete)",1:..StatDate(ENDDATE,"T"))
+ . . Write $Char(13,10),"<td align=center>",p,"</td>"
+ . . Write $Char(13,10),"<td align=right>",NIMAGES,"</td></tr>"
+ . . Write $Char(13,10),"</table>"
+ . . Quit
+ . If SCANMODE="PATIENT" Do  Quit  ; patient scan order
+ . . New DOB,ok,p,show,VADM,VAICN,VAIN,VAINFO,VAPA,x
+ . . Set x="Patient Not Identified",ok=0 Do
+ . . . Quit:$$CALLRPC^MAGM2VCU("MAG DICOM GET PATIENT","",.VAINFO,DFN)<0
+ . . . Set ok=1
+ . . . Quit
+ . . Use WebPage
+ . . Do:ok
+ . . . Do VADPT^MAGDRPC0(.VAINFO)
+ . . . Set show=$Get(^MAGDICOM(2006.563,1,"SHOW PATIENT NAME & ID"))
+ . . . Set NAME=VADM(1),DOB=$Piece(VADM(3),"^",2),SSN=$Piece(VADM(2),"^",2)
+ . . . Set x=NAME_" "_SSN
+ . . . Set:show'="YES" x=$Translate(x,"abcdefghijklmnopqrstuvwxyz","**************************")
+ . . . Set:show'="YES" x=$Translate(x,"ABCDEFGHIJKLMNOPQRSTUVWXYZ","**************************")
+ . . . Set:show'="YES" x=$Translate(x,"1234567890","**********")
+ . . . Quit
+ . . Set x="Patient: "_x_" "_DOB
+ . . Write $Char(13,10),"<p><b>*** ",x," ***</b></p>"
+ . . Write $Char(13,10),"<table border=2 summary=""This table is for formatting purposes only."">"
+ . . Write $Char(13,10),"<tr><td align=center><b>Run</b></td>"
+ . . Write $Char(13,10),"<td align=center><b>Started</b></td>"
+ . . Write $Char(13,10),"<td align=center><b>A/D</b></td>"
+ . . Write $Char(13,10),"<td align=center><b>Begin Date</b></td>"
+ . . Write $Char(13,10),"<td align=center><b>Stop Date</b></td>"
+ . . Write $Char(13,10),"<td align=center><b>Finished</b></td>"
+ . . Write $Char(13,10),"<td align=center><b># Images</b></td></tr>"
+ . . ;
+ . . Write $Char(13,10),"<tr><td align=right>",I,"</td>"
+ . . Write $Char(13,10),"<td align=center>",..StatDate(RUNDATE,"T"),"</td>"
+ . . Write $Char(13,10),"<td align=center>",$Extract(SORTORDR,1),"</td>"
+ . . Write $Char(13,10),"<td align=center>",..StatDate(BEGDATE,"Y"),"</td>"
+ . . Write $Char(13,10),"<td align=center>",..StatDate(STOPDATE,"Y"),"</td>"
+ . . Set p=$Select(ENDDATE="":"(incomplete)",1:..StatDate(ENDDATE,"T"))
+ . . Write $Char(13,10),"<td align=center>",p,"</td>"
+ . . Write $Char(13,10),"<td align=right>",NIMAGES,"</td></tr>"
+ . . Write $Char(13,10),"</table>"
+ . . Quit
+ . . ;
+ . Do  ; numeric report order
+ . . New p
+ . . Write $Char(13,10),"<p><b>*** Report Number Scan Order ***</b></p>"
+ . . Write $Char(13,10),"<table border=2 summary=""This table is for formatting purposes only."">"
+ . . Write $Char(13,10),"<tr><td align=center><b>Run</b></td>"
+ . . Write $Char(13,10),"<td align=center><b>Started</b></td>"
+ . . Write $Char(13,10),"<td align=center><b>A/D</b></td>"
+ . . Write $Char(13,10),"<td align=center><b>First</b></td>"
+ . . Write $Char(13,10),"<td align=center><b>Batch</b></td>"
+ . . Write $Char(13,10),"<td align=center><b>Studies</b></td>"
+ . . Write $Char(13,10),"<td align=center><b>Finished</b></td>"
+ . . Write $Char(13,10),"<td align=center><b>Last</b></td>"
+ . . Write $Char(13,10),"<td align=center><b># Images</b></td></tr>"
+ . . ;
+ . . Write $Char(13,10),"<tr><td align=right>",I,"</td>"
+ . . Write $Char(13,10),"<td align=center>",..StatDate(RUNDATE,"T"),"</td>"
+ . . Write $Char(13,10),"<td align=center>",$Extract(SORTORDR,1),"</td>"
+ . . Write $Char(13,10),"<td align=center>",STARTPTR,"</td>"
+ . . Write $Char(13,10),"<td align=right>",BATCH,"</td>"
+ . . Write $Char(13,10),"<td align=right>",STUDIES,"</td>"
+ . . Set p=$Select(ENDDATE="":"(incomplete)",1:..StatDate(ENDDATE,"T"))
+ . . Write $Char(13,10),"<td align=center>",p,"</td>"
+ . . Write $Char(13,10),"<td align=center>",STOPPTR,"</td>"
+ . . Write $Char(13,10),"<td align=right>",NIMAGES,"</td></tr>"
+ . . Write $Char(13,10),"</table>"
+ . . Quit
+ . Quit
+ Quit
+</csp:method>
+
+<csp:method name=Drives arguments="name:%String,value:%String">
+ New e,i,list
+ Set i=$$drives^%Wpfiles(.list)
+ Set list=$Translate(list,$Char(58,22,35,1))
+ Write "<select name="""_name_""">"
+ For i=1:1:$Length(list) Do
+ . Set e=$Extract(list,i)
+ . Quit:e="A"  Quit:e="a"
+ . Quit:e="B"  Quit:e="b"
+ . Write "<option value="""_e_"""" Write:value=$Extract(list,i) " selected"
+ . Write ">",e,":","</option>",$Char(13,10)
+ . Quit
+ Write "</select>",$Char(13,10)
+ Quit
+</csp:method>
+
+<csp:method name=GetDate arguments="name:%String,dft:%String" returntype=%String>
+ New %,X,Y
+ Set X=%request.Get(name) Set:X="" X=dft
+ Do ^%DT
+ If Y<0 Do %request.Set(name,"") Quit ""
+ Set X=..FileManStamp(Y,0)
+ Do %request.Set(name,X)
+ Quit Y_"^"_X
+</csp:method>
+
+<csp:method name=HourMin arguments="in:%String" returntype=%String>
+ New T
+ Set T=$Extract($Piece(in,".",2)_"0000",1,4)
+ Quit $Extract(T,1,2)_":"_$Extract(T,3,4)
+</csp:method>
+
+<csp:method name=HTML arguments="in:%String" returntype=%String>
+ New A,I,out
+ Set out="" For I=1:1:$Length(in) D
+ . Set A=$Ascii(in,I)
+ . If $Char(A)="&" Set out=out_"&amp;" Quit
+ . If $Char(A)="<" Set out=out_"&lt;" Quit
+ . If $Char(A)=">" Set out=out_"&gt;" Quit
+ . If A<31 Set out=out_"&#"_A_";" Quit
+ . If A>126 Set out=out_"&#"_A_";" Quit
+ . Set out=out_$Char(A)
+ . Quit
+ Quit out
+</csp:method>
+
+<csp:method name=HTMLkey arguments="in:%String" returntype=%String>
+ New A,hex,I,out
+ Set hex="0123456789ABCDEF"
+ Set out="" For I=1:1:$Length(in) D
+ . Set A=$Ascii(in,I)
+ . If A>47,A<58 Set out=out_$Char(A) Quit
+ . If A>64,A<93 Set out=out_$Char(A) Quit
+ . If A>96,A<125 Set out=out_$Char(A) Quit
+ . Set out=out_"%"_$Extract(hex,A\16+1)_$Extract(hex,A#16+1)
+ . Quit
+ Quit out
+</csp:method>
+
+<csp:method name=Remove arguments="in:%String,del:%String,i:%String" returntype=%String>
+ New A,B,out,n,p
+ Set out=in,n=i
+ For p=1:1:$Length(del) D
+ . Set A=$Ascii(in,n) Set:A>96 A=A-32
+ . Set B=$Ascii(del,p) Set:B>96 B=B-32
+ . If A=B Set $Extract(out,n)=" ",n=n+1
+ . Quit
+ Quit out
+</csp:method>
+
+<csp:method name=LogInFrm arguments="app:%String,url:%String">
+ ;Present Log In form
+ ;
+ ; app = name of application
+ ; url = url to re-invoke application
+ ;
+ New any,var
+ Write $Char(13,10),"<form action=""",url,""" method=""POST"">"
+ Write $Char(13,10),"<input type=hidden name=""Application"" value=""",app,""">"
+ ;
+ Write $Char(13,10),"<h3>Access to this site is restricted."
+ Write $Char(13,10),"If you wish to request access to this site,"
+ Write $Char(13,10),"please send e-mail"
+ Write $Char(13,10),"to <a href=""",$Get(^MAGDICOM(2006.563,1,"MAILGROUP")),""">our system manager</a>.</h3>"
+ Write $Char(13,10),"<p>If you are a registered user, please login.</p>"
+ ;
+ Write $Char(13,10),"<table cellspacing=3 summary=""This table is for formatting purposes only."">"
+ Write $Char(13,10),"<tr><td align=right><font size=+2>User Name:</font></td>"
+ Write $Char(13,10),"<td align=left><input type=text name=""UserName""></td></tr>"
+ Write $Char(13,10),"<tr><td align=right><font size=+2>Current Password:</font></td>"
+ Write $Char(13,10),"<td align=left><input type=password name=""PassWord""></td></tr>"
+ Write $Char(13,10),"<tr><td align=right><b>New Password:</b></td>"
+ Write $Char(13,10),"<td align=left><input type=password name=""PassN1""></td></tr>"
+ Write $Char(13,10),"<tr><td align=right><b>Verify New Password:</b></td>"
+ Write $Char(13,10),"<td align=left><input type=password name=""PassN2""></td></tr>"
+ Write $Char(13,10),"<tr><td>&nbsp;</td>"
+ Write $Char(13,10),"<td><input type=submit value=""Login"" name=""LogIn""></td></tr>"
+ Write $Char(13,10),"</table></form>"
+ Quit
+</csp:method>
+
+<csp:method name=LogInVal arguments="App:%String,UserName:%String,PassWord:%String,New1:%String,New2:%String" returntype=%String>
+ ; Authenticate username and password
+ New d,id,lo,r1,r2,up
+ ;
+ Set r1="<h2><font color=#ff0000>",r2="</font></h2>"
+ Set lo="abcdefghijklmnopqrstuvwxyz"
+ Set up="ABCDEFGHIJKLMNOPQRSTUVWXYZ "
+ Set UserName=$tr(UserName,up,lo)
+ ;
+ If UserName="",PassWord="" Do   Quit ""
+ . Write $Char(13,10),r1,"Please enter a user name and/or a password.",r2
+ . Quit
+ ;
+ If New1'=New2 Do   Quit ""
+ . Write $Char(13,10),r1,"New Passwords do not match.",r2
+ . Quit
+ ;
+ Set id="" Do  Quit:id="" ""
+ . New ac,pp,ps,pv,pw,us,ve
+ . Set ac=$Get(^MAGDICOM(2006.563,1,"LOGIN ACCESS"))
+ . Set pv=$Get(^MAGDICOM(2006.563,1,"LOGIN PRINT/VIEW ONLY"))
+ . Set pp=$Get(^MAGDICOM(2006.563,1,"LOGIN PROGRAMMER ACCESS"))
+ . Set ps=$Get(^MAGDICOM(2006.563,1,"LOGIN SUPPORT"))
+ . Set ve=$Get(^MAGDICOM(2006.563,1,"LOGIN VERIFY"))
+ . Set pw=..Crypt(PassWord),us=..Crypt(UserName),New1=..Crypt(New1)
+ . Do:pw=pp
+ . . Set id="1_programmer"
+ . . If New1'="" Set ^MAGDICOM(2006.563,1,"LOGIN PROGRAMMER ACCESS")=New1
+ . . Quit
+ . Do:pw=ps
+ . . Set id="2_support"
+ . . If New1'="" Set ^MAGDICOM(2006.563,1,"LOGIN SUPPORT")=New1
+ . . Quit
+ . Do:pw=pv
+ . . Set id="3_viewonly"
+ . . If New1'="" Set ^MAGDICOM(2006.563,1,"LOGIN PRINZT/VIEW ONLY")=New1
+ . . Quit
+ . If us=ac,pw=ve Do
+ . . Set id="4_fulluser"
+ . . If New1'="" Set ^MAGDICOM(2006.563,1,"LOGIN VERIFY")=New1
+ . . Quit
+ . Quit
+ ;
+ Quit id_"|"_..Now()_"|"_$Random(10000000)
+</csp:method>
+
+<csp:method name=Now arguments="" returntype=%String>
+ New h
+ Set h=$Horolog
+ Quit $Piece(h,",",1)*86400+$Piece(h,",",2)
+</csp:method>
+
+<csp:method name=Crypt arguments="in:%String" returntype=%String>
+ ; return an encrypted value for a string
+ New I,S,X
+ Set S=$Translate(in,"abcdefghijklmnopqrstuvwxyz","ABCDEFGHIJKLMNOPQRSTUVWXYZ")
+ If $Length(S)<6 Quit ""
+ If S?.E1P.E Quit ""
+ If '((S?.E1A.E)&(S?.E1N.E)) Quit ""
+ ; compute a weighted sum of characters, return last 10 digits of sqrt
+ Set X=0 For I=1:1:$Length(S) Set X=$Ascii(S,I)+(128*X)
+ Set X=X**.5,X=$Extract(X,$Length(X)-9,999)
+ Quit X
+</csp:method>
+
+</body></html>

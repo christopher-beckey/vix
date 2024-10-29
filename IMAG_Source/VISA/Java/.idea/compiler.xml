@@ -1,0 +1,327 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="Log4JEncryption" />
+        <module name="ROICommon" />
+        <module name="XCAConnection" />
+        <module name="VistaImagingConnection" />
+        <module name="VixServerHealth" />
+        <module name="ConsultCommon" />
+        <module name="ROICommands" />
+        <module name="ImagingCommon" />
+        <module name="StorageWebApp" />
+        <module name="ViewerImagingDataSourceProvider" />
+        <module name="FederationConnection" />
+        <module name="ConsultFederationDataSourceProvider" />
+        <module name="ExchangeCommon" />
+        <module name="DxDataSourceProvider" />
+        <module name="ClinicalDisplayConnection" />
+        <module name="SiteServiceSOAPServer" />
+        <module name="DxsConnection" />
+        <module name="IngestCommon" />
+        <module name="VistaDataSourceCommon" />
+        <module name="IHECommon" />
+        <module name="BaseWebFacade" />
+        <module name="VistaImagingDataSourceProvider" />
+        <module name="DicomImporterWebApp" />
+        <module name="PathologyWebApp" />
+        <module name="ViewerServicesCommon" />
+        <module name="ImagingDataWebApp" />
+        <module name="VixCacheWebApp" />
+        <module name="ImagingVistaRealm" />
+        <module name="TomcatAdapter" />
+        <module name="AxWebApp" />
+        <module name="DataDictionaryCommon" />
+        <module name="ConsultFederationWebAppComponents" />
+        <module name="ImagingDicomECIASCU" />
+        <module name="TIUCommon" />
+        <module name="FederationCommon" />
+        <module name="TransactionContext" />
+        <module name="ExchangeDataSource" />
+        <module name="PatientWebApp" />
+        <module name="VixVistaImagingDataSourceProvider" />
+        <module name="ViewerServicesDataSourceProvider" />
+        <module name="CoreValueObjects" />
+        <module name="SiteServiceDataSourceProvider" />
+        <module name="ImageWebApp" />
+        <module name="XCASConnection" />
+        <module name="ImageConversion" />
+        <module name="IngestBaseWeb" />
+        <module name="ViewerServicesConnection" />
+        <module name="ConsultWebApp" />
+        <module name="DxConnection" />
+        <module name="ImagingRouter" />
+        <module name="ImagingBaseWebFacade" />
+        <module name="ImagingDicomUtilities" />
+        <module name="FederationWebAppCommon" />
+        <module name="PathologyCommon" />
+        <module name="ExchangeCommonDataSource" />
+        <module name="ImagingDicomCommon" />
+        <module name="VistaRadWebApp" />
+        <module name="VistaUserPreferenceDataSourceProvider" />
+        <module name="TIUFederationDataSourceProvider" />
+        <module name="UserWebApp" />
+        <module name="ConsultRouter" />
+        <module name="ExchangeSiteServiceSOAPServer" />
+        <module name="VistaUserPreferenceRouter" />
+        <module name="CacheAPI" />
+        <module name="MuseCommon" />
+        <module name="VistaImagingDataSourceProviderCodeGenerator" />
+        <module name="ImagingUtilities" />
+        <module name="SiteServiceWebApp" />
+        <module name="PathologyFederationDataSourceProvider" />
+        <module name="DataDictionaryVistaImagingDataSourceProvider" />
+        <module name="VistaConnection" />
+        <module name="SiteServiceCommon" />
+        <module name="ImagingExchangeBaseWebProxy" />
+        <module name="TIUVistaImagingDataSourceProvider" />
+        <module name="ImagingExchangeImageConversion" />
+        <module name="VistaUserPreferenceWebApp" />
+        <module name="ClinicalDisplayWebApp" />
+        <module name="FederationDataSourceProviderCodeGenerator" />
+        <module name="MIXConnection" />
+        <module name="SiteServiceSOAPClient" />
+        <module name="MIXsConnection" />
+        <module name="ImagingDicomSCU" />
+        <module name="EditSiteServiceWebApp" />
+        <module name="TIUWebApp" />
+        <module name="PresentationStateVistaImagingDataSourceProvider" />
+        <module name="ConsultVistaImagingDataSourceProvider" />
+        <module name="MixWebApp" />
+        <module name="PathologyCommands" />
+        <module name="ViewerImagingWebApp" />
+        <module name="ImagingDicomDCFCommon" />
+        <module name="ViewerImagingRouter" />
+        <module name="PathologyVistaImagingDataSourceProvider" />
+        <module name="ImagingDicomDCFSCU" />
+        <module name="CacheWeb" />
+        <module name="VistaUserPreferenceCommon" />
+        <module name="MIXDataSource" />
+        <module name="ImagingDicomRouter" />
+        <module name="StudyWebApp" />
+        <module name="ExchangeConnection" />
+        <module name="IndexTermVistaImagingDataSourceProvider" />
+        <module name="ImagingTestResources" />
+        <module name="PathologyFederationCommon" />
+        <module name="HydraCommon" />
+        <module name="CoreRouter" />
+        <module name="DataDictionaryRouter" />
+        <module name="IndexTermCommon" />
+        <module name="ImageGearConnection" />
+        <module name="MuseConnection" />
+        <module name="TransactionLoggerLocalDataSourceProvider" />
+        <module name="VixGuiWebApp" />
+        <module name="TIURouter" />
+        <module name="PresentationStateWebApp" />
+        <module name="MIXCommonDataSource" />
+        <module name="PathologyFederationWebAppComponents" />
+        <module name="ROIWebApp" />
+        <module name="VixCommon" />
+        <module name="ImagingRouterCache" />
+        <module name="MuseDataSourceProvider" />
+        <module name="TIUFederationWebAppComponents" />
+        <module name="CoreRouterSemantics" />
+        <module name="DefaultVISAWebApp" />
+        <module name="IndexTermFederationDataSourceProvider" />
+        <module name="ImagingVistaRealmClient" />
+        <module name="ImageGearDataSourceProvider" />
+        <module name="JmxWebApp" />
+        <module name="MockDataGenerationImpl" />
+        <module name="VISACommon" />
+        <module name="AWIVConnection" />
+        <module name="ImagingExchangeCache" />
+        <module name="CacheImpl" />
+        <module name="ViewerStudyWebApp" />
+        <module name="IDSWebApp" />
+        <module name="ImagingDicomDCFUtilities" />
+        <module name="DicomServicesCommon" />
+        <module name="MIXCommon" />
+        <module name="FederationWebApp" />
+        <module name="ROIVistaImagingDataSourceProvider" />
+        <module name="ViewerImagingCommon" />
+        <module name="IngestVistaImagingDataSourceProvider" />
+        <module name="IndexTermRouter" />
+        <module name="IngestRouter" />
+        <module name="DxCommon" />
+        <module name="IndexTermFederationWebAppComponents" />
+        <module name="PresentationStateRouter" />
+        <module name="DicomServicesConnection" />
+        <module name="CoreRouterAnnotationProcessor" />
+        <module name="IndexTermWebApp" />
+        <module name="PresentationStateCommon" />
+        <module name="VistaDataSource" />
+        <module name="CoreRouterAnnotation" />
+        <module name="FederationDataSourceProvider" />
+        <module name="IngestWebApp" />
+        <module name="DicomServicesDataSourceProvider" />
+        <module name="VixServerHealthWebApp" />
+        <module name="DataSourceServiceProvider" />
+        <module name="ExchangeWebApp" />
+        <module name="VistaStorage" />
+        <module name="DataDictionaryWebApp" />
+      </profile>
+    </annotationProcessing>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="AWIVConnection" options="-source 1.8 -target 1.8 -g -deprecation" />
+      <module name="AxWebApp" options="-source 1.8 -target 1.8 -g -deprecation -s C:\Users\OITCOBECKEC\Documents\GitHub\imag-code-p357-vix\IMAG_Source\VISA\Java\AxWebApp/main/generated/java" />
+      <module name="BaseWebFacade" options="-source 1.8 -target 1.8 -g -deprecation -s C:\Users\OITCOBECKEC\Documents\GitHub\imag-code-p357-vix\IMAG_Source\VISA\Java\BaseWebFacade/main/generated/java" />
+      <module name="CacheAPI" options="-source 1.8 -target 1.8 -g -deprecation" />
+      <module name="CacheImpl" options="-source 1.8 -target 1.8 -g -deprecation" />
+      <module name="CacheWeb" options="-source 1.8 -target 1.8 -g -deprecation" />
+      <module name="ClinicalDisplayConnection" options="-source 1.8 -target 1.8 -g -deprecation" />
+      <module name="ClinicalDisplayWebApp" options="-source 1.8 -target 1.8 -g -deprecation -s C:\Users\OITCOBECKEC\Documents\GitHub\imag-code-p357-vix\IMAG_Source\VISA\Java\ClinicalDisplayWebApp/main/generated/java" />
+      <module name="ConsultCommon" options="-source 1.8 -target 1.8 -g -deprecation" />
+      <module name="ConsultFederationDataSourceProvider" options="-source 1.8 -target 1.8 -g -deprecation" />
+      <module name="ConsultFederationWebAppComponents" options="-source 1.8 -target 1.8 -g -deprecation -s C:\Users\OITCOBECKEC\Documents\GitHub\imag-code-p357-vix\IMAG_Source\VISA\Java\ConsultFederationWebAppComponents/main/generated/java" />
+      <module name="ConsultRouter" options="-source 1.8 -target 1.8 -g -deprecation" />
+      <module name="ConsultVistaImagingDataSourceProvider" options="-source 1.8 -target 1.8 -g -deprecation" />
+      <module name="ConsultWebApp" options="-source 1.8 -target 1.8 -g -deprecation -s C:\Users\OITCOBECKEC\Documents\GitHub\imag-code-p357-vix\IMAG_Source\VISA\Java\ConsultWebApp/main/generated/java" />
+      <module name="CoreRouter" options="-source 1.8 -target 1.8 -g -deprecation -s C:\Users\OITCOBECKEC\Documents\GitHub\imag-code-p357-vix\IMAG_Source\VISA\Java\CoreRouter/main/generated/java" />
+      <module name="CoreRouterAnnotation" options="-source 1.8 -target 1.8 -g -deprecation" />
+      <module name="CoreRouterAnnotationProcessor" options="-source 1.8 -target 1.8 -g -deprecation" />
+      <module name="CoreRouterSemantics" options="-source 1.8 -target 1.8 -g -deprecation" />
+      <module name="CoreValueObjects" options="-source 1.8 -target 1.8 -g -deprecation" />
+      <module name="DataDictionaryCommon" options="-source 1.8 -target 1.8 -g -deprecation" />
+      <module name="DataDictionaryRouter" options="-source 1.8 -target 1.8 -g -deprecation" />
+      <module name="DataDictionaryVistaImagingDataSourceProvider" options="-source 1.8 -target 1.8 -g -deprecation" />
+      <module name="DataDictionaryWebApp" options="-source 1.8 -target 1.8 -g -deprecation -s C:\Users\OITCOBECKEC\Documents\GitHub\imag-code-p357-vix\IMAG_Source\VISA\Java\DataDictionaryWebApp/main/generated/java" />
+      <module name="DataSourceServiceProvider" options="-source 1.8 -target 1.8 -g -deprecation" />
+      <module name="DicomImporterWebApp" options="-source 1.8 -target 1.8 -g -deprecation -s C:\Users\OITCOBECKEC\Documents\GitHub\imag-code-p357-vix\IMAG_Source\VISA\Java\DicomImporterWebApp/main/generated/java" />
+      <module name="DicomServicesCommon" options="-source 1.8 -target 1.8 -g -deprecation" />
+      <module name="DicomServicesConnection" options="-source 1.8 -target 1.8 -g -deprecation" />
+      <module name="DicomServicesDataSourceProvider" options="-source 1.8 -target 1.8 -g -deprecation" />
+      <module name="DxCommon" options="-source 1.8 -target 1.8 -g -deprecation" />
+      <module name="DxConnection" options="-source 1.8 -target 1.8 -g -deprecation" />
+      <module name="DxDataSourceProvider" options="-source 1.8 -target 1.8 -g -deprecation" />
+      <module name="DxsConnection" options="-source 1.8 -target 1.8 -g -deprecation" />
+      <module name="EditSiteServiceWebApp" options="-source 1.8 -target 1.8 -g -deprecation -s C:\Users\OITCOBECKEC\Documents\GitHub\imag-code-p357-vix\IMAG_Source\VISA\Java\EditSiteServiceWebApp/src/main/generated/java" />
+      <module name="ExchangeCommon" options="-source 1.8 -target 1.8 -g -deprecation" />
+      <module name="ExchangeCommonDataSource" options="-source 1.8 -target 1.8 -g -deprecation" />
+      <module name="ExchangeConnection" options="-source 1.8 -target 1.8 -g -deprecation" />
+      <module name="ExchangeDataSource" options="-source 1.8 -target 1.8 -g -deprecation" />
+      <module name="ExchangeSiteServiceSOAPServer" options="-source 1.8 -target 1.8 -g -deprecation -s C:\Users\OITCOBECKEC\Documents\GitHub\imag-code-p357-vix\IMAG_Source\VISA\Java\ExchangeSiteServiceSOAPServer/main/generated/java" />
+      <module name="ExchangeWebApp" options="-source 1.8 -target 1.8 -g -deprecation -s C:\Users\OITCOBECKEC\Documents\GitHub\imag-code-p357-vix\IMAG_Source\VISA\Java\ExchangeWebApp/main/generated/java" />
+      <module name="FederationConnection" options="-source 1.8 -target 1.8 -g -deprecation" />
+      <module name="FederationDataSourceProvider" options="-source 1.8 -target 1.8 -g -deprecation" />
+      <module name="FederationDataSourceProviderCodeGenerator" options="-source 1.8 -target 1.8 -g -deprecation" />
+      <module name="FederationWebApp" options="-source 1.8 -target 1.8 -g -deprecation -s C:\Users\OITCOBECKEC\Documents\GitHub\imag-code-p357-vix\IMAG_Source\VISA\Java\FederationWebApp/main/generated/java" />
+      <module name="FederationWebAppCommon" options="-source 1.8 -target 1.8 -g -deprecation" />
+      <module name="IDSWebApp" options="-source 1.8 -target 1.8 -g -deprecation" />
+      <module name="IHECommon" options="-source 1.8 -target 1.8 -g -deprecation" />
+      <module name="ImageConversion" options="-source 1.8 -target 1.8 -g -deprecation" />
+      <module name="ImageGearConnection" options="-source 1.8 -target 1.8 -g -deprecation" />
+      <module name="ImageGearDataSourceProvider" options="-source 1.8 -target 1.8 -g -deprecation" />
+      <module name="ImageWebApp" options="-source 1.8 -target 1.8 -g -deprecation -s C:\Users\OITCOBECKEC\Documents\GitHub\imag-code-p357-vix\IMAG_Source\VISA\Java\ImageWebApp/main/generated/java" />
+      <module name="ImagingBaseWebFacade" options="-source 1.8 -target 1.8 -g -deprecation -s C:\Users\OITCOBECKEC\Documents\GitHub\imag-code-p357-vix\IMAG_Source\VISA\Java\ImagingBaseWebFacade/main/generated/java" />
+      <module name="ImagingCommon" options="-source 1.8 -target 1.8 -g -deprecation" />
+      <module name="ImagingDataWebApp" options="-g -deprecation -s C:\Users\OITCOBECKEC\Documents\GitHub\imag-code-p357-vix\IMAG_Source\VISA\Java\ImagingDataWebApp/main/generated/java" />
+      <module name="ImagingDicomCommon" options="-source 1.8 -target 1.8" />
+      <module name="ImagingDicomDCFCommon" options="-source 1.8 -target 1.8" />
+      <module name="ImagingDicomDCFSCU" options="-source 1.8 -target 1.8 -g -deprecation" />
+      <module name="ImagingDicomDCFUtilities" options="-source 1.8 -target 1.8 -g -deprecation" />
+      <module name="ImagingDicomECIASCU" options="-source 1.8 -target 1.8 -g -deprecation" />
+      <module name="ImagingDicomRouter" options="-source 1.8 -target 1.8 -g -deprecation -s C:\Users\OITCOBECKEC\Documents\GitHub\imag-code-p357-vix\IMAG_Source\VISA\Java\ImagingDicomRouter/main/generated/java" />
+      <module name="ImagingDicomSCU" options="-source 1.8 -target 1.8 -g -deprecation" />
+      <module name="ImagingDicomUtilities" options="-source 1.8 -target 1.8 -g -deprecation" />
+      <module name="ImagingExchangeBaseWebProxy" options="-source 1.8 -target 1.8 -g -deprecation" />
+      <module name="ImagingExchangeCache" options="-source 1.8 -target 1.8 -g -deprecation" />
+      <module name="ImagingExchangeImageConversion" options="-source 1.8 -target 1.8 -g -deprecation" />
+      <module name="ImagingRouter" options="-source 1.8 -target 1.8 -g -deprecation -s C:\Users\OITCOBECKEC\Documents\GitHub\imag-code-p357-vix\IMAG_Source\VISA\Java\ImagingRouter/main/generated/java" />
+      <module name="ImagingRouterCache" options="-source 1.8 -target 1.8 -g -deprecation" />
+      <module name="ImagingTestResources" options="-source 1.8 -target 1.8 -g -deprecation" />
+      <module name="ImagingUtilities" options="-source 1.8 -target 1.8 -g -deprecation" />
+      <module name="ImagingVistaRealm" options="-source 1.8 -target 1.8 -g -deprecation" />
+      <module name="ImagingVistaRealmClient" options="-source 1.8 -target 1.8 -g -deprecation" />
+      <module name="IndexTermCommon" options="-source 1.8 -target 1.8 -g -deprecation" />
+      <module name="IndexTermFederationDataSourceProvider" options="-source 1.8 -target 1.8 -g -deprecation" />
+      <module name="IndexTermFederationWebAppComponents" options="-source 1.8 -target 1.8 -g -deprecation -s C:\Users\OITCOBECKEC\Documents\GitHub\imag-code-p357-vix\IMAG_Source\VISA\Java\IndexTermFederationWebAppComponents/main/generated/java" />
+      <module name="IndexTermRouter" options="-source 1.8 -target 1.8 -g -deprecation" />
+      <module name="IndexTermVistaImagingDataSourceProvider" options="-source 1.8 -target 1.8 -g -deprecation" />
+      <module name="IndexTermWebApp" options="-source 1.8 -target 1.8 -g -deprecation -s C:\Users\OITCOBECKEC\Documents\GitHub\imag-code-p357-vix\IMAG_Source\VISA\Java\IndexTermWebApp/main/generated/java" />
+      <module name="IngestBaseWeb" options="-g -deprecation -s C:\Users\OITCOBECKEC\Documents\GitHub\imag-code-p357-vix\IMAG_Source\VISA\Java\IngestBaseWeb/main/generated/java" />
+      <module name="IngestRouter" options="-source 1.8 -target 1.8 -g -deprecation -s C:\Users\OITCOBECKEC\Documents\GitHub\imag-code-p357-vix\IMAG_Source\VISA\Java\IngestRouter/main/generated/java" />
+      <module name="IngestWebApp" options="-source 1.8 -target 1.8 -g -deprecation -s C:\Users\OITCOBECKEC\Documents\GitHub\imag-code-p357-vix\IMAG_Source\VISA\Java\IngestWebApp/main/generated/java" />
+      <module name="JmxWebApp" options="-source 1.8 -target 1.8 -g -deprecation" />
+      <module name="Log4JEncryption" options="-source 1.8 -target 1.8 -g -deprecation" />
+      <module name="MIXCommon" options="-source 1.8 -target 1.8 -g -deprecation" />
+      <module name="MIXCommonDataSource" options="-source 1.8 -target 1.8 -g -deprecation" />
+      <module name="MIXConnection" options="-source 1.8 -target 1.8 -g -deprecation" />
+      <module name="MIXDataSource" options="-source 1.8 -target 1.8 -g" />
+      <module name="MIXsConnection" options="-source 1.8 -target 1.8 -g -deprecation" />
+      <module name="MixWebApp" options="-source 1.8 -target 1.8 -g -deprecation -s C:\Users\OITCOBECKEC\Documents\GitHub\imag-code-p357-vix\IMAG_Source\VISA\Java\MIXWebApp/main/generated/java" />
+      <module name="MockDataGenerationImpl" options="-source 1.8 -target 1.8 -g -deprecation -s C:\Users\OITCOBECKEC\Documents\GitHub\imag-code-p357-vix\IMAG_Source\VISA\Java\MockDataGenerationImpl/main/src/resources" />
+      <module name="MuseCommon" options="-source 1.8 -target 1.8 -g -deprecation" />
+      <module name="MuseConnection" options="-source 1.8 -target 1.8 -g -deprecation" />
+      <module name="MuseDataSourceProvider" options="-source 1.8 -target 1.8 -g -deprecation" />
+      <module name="PathologyCommands" options="-source 1.8 -target 1.8 -g -deprecation -s C:\Users\OITCOBECKEC\Documents\GitHub\imag-code-p357-vix\IMAG_Source\VISA\Java\PathologyCommands/main/generated/java" />
+      <module name="PathologyCommon" options="-source 1.8 -target 1.8 -g -deprecation" />
+      <module name="PathologyFederationCommon" options="-source 1.8 -target 1.8 -g -deprecation" />
+      <module name="PathologyFederationDataSourceProvider" options="-source 1.8 -target 1.8 -g -deprecation -s C:\Users\OITCOBECKEC\Documents\GitHub\imag-code-p357-vix\IMAG_Source\VISA\Java\PathologyFederationDataSourceProvider/main/generated/java" />
+      <module name="PathologyFederationWebAppComponents" options="-source 1.8 -target 1.8 -g -deprecation -s C:\Users\OITCOBECKEC\Documents\GitHub\imag-code-p357-vix\IMAG_Source\VISA\Java\PathologyFederationWebAppComponents/main/generated/java" />
+      <module name="PathologyVistaImagingDataSourceProvider" options="-source 1.8 -target 1.8 -g -deprecation -s C:\Users\OITCOBECKEC\Documents\GitHub\imag-code-p357-vix\IMAG_Source\VISA\Java\PathologyVistaImagingDataSourceProvider/main/generated/java" />
+      <module name="PathologyWebApp" options="-source 1.8 -target 1.8 -g -deprecation -s C:\Users\OITCOBECKEC\Documents\GitHub\imag-code-p357-vix\IMAG_Source\VISA\Java\PathologyWebApp/main/generated/java" />
+      <module name="PatientWebApp" options="-source 1.8 -target 1.8 -g -deprecation -s C:\Users\OITCOBECKEC\Documents\GitHub\imag-code-p357-vix\IMAG_Source\VISA\Java\PatientWebApp/main/generated/java" />
+      <module name="PresentationStateCommon" options="-source 1.8 -target 1.8 -g -deprecation" />
+      <module name="PresentationStateRouter" options="-source 1.8 -target 1.8 -g -deprecation -s C:\Users\OITCOBECKEC\Documents\GitHub\imag-code-p357-vix\IMAG_Source\VISA\Java\PresentationStateRouter/main/generated/java" />
+      <module name="PresentationStateVistaImagingDataSourceProvider" options="-source 1.8 -target 1.8 -g -deprecation" />
+      <module name="PresentationStateWebApp" options="-source 1.8 -target 1.8 -g -deprecation -s C:\Users\OITCOBECKEC\Documents\GitHub\imag-code-p357-vix\IMAG_Source\VISA\Java\PresentationStateWebApp/main/generated/java" />
+      <module name="ROICommands" options="-source 1.8 -target 1.8 -g -deprecation -s C:\Users\OITCOBECKEC\Documents\GitHub\imag-code-p357-vix\IMAG_Source\VISA\Java\ROICommands/main/generated/java" />
+      <module name="ROICommon" options="-source 1.8 -target 1.8 -g -deprecation" />
+      <module name="ROIVistaImagingDataSourceProvider" options="-source 1.8 -target 1.8 -g -deprecation" />
+      <module name="ROIWebApp" options="-source 1.8 -target 1.8 -g -deprecation -s C:\Users\OITCOBECKEC\Documents\GitHub\imag-code-p357-vix\IMAG_Source\VISA\Java\ROIWebApp/main/generated/java" />
+      <module name="SiteServiceCommon" options="-source 1.8 -target 1.8 -g -deprecation" />
+      <module name="SiteServiceDataSourceProvider" options="-source 1.8 -target 1.8 -g -deprecation" />
+      <module name="SiteServiceSOAPClient" options="-source 1.8 -target 1.8 -g -deprecation" />
+      <module name="SiteServiceSOAPServer" options="-source 1.8 -target 1.8 -g -deprecation -s C:\Users\OITCOBECKEC\Documents\GitHub\imag-code-p357-vix\IMAG_Source\VISA\Java\SiteServiceSOAPServer/main/generated/java" />
+      <module name="SiteServiceWebApp" options="-source 1.8 -target 1.8 -g -deprecation" />
+      <module name="StorageWebApp" options="-source 1.8 -target 1.8 -g -deprecation -s C:\Users\OITCOBECKEC\Documents\GitHub\imag-code-p357-vix\IMAG_Source\VISA\Java\StorageWebApp/main/generated/java" />
+      <module name="StudyWebApp" options="-source 1.8 -target 1.8 -g -deprecation -s C:\Users\OITCOBECKEC\Documents\GitHub\imag-code-p357-vix\IMAG_Source\VISA\Java\StudyWebApp/main/generated/java" />
+      <module name="TIUCommon" options="-source 1.8 -target 1.8 -g -deprecation" />
+      <module name="TIUFederationDataSourceProvider" options="-source 1.8 -target 1.8 -g -deprecation" />
+      <module name="TIUFederationWebAppComponents" options="-source 1.8 -target 1.8 -g -deprecation" />
+      <module name="TIURouter" options="-source 1.8 -target 1.8 -g -deprecation -s C:\Users\OITCOBECKEC\Documents\GitHub\imag-code-p357-vix\IMAG_Source\VISA\Java\TIURouter/main/generated/java" />
+      <module name="TIUVistaImagingDataSourceProvider" options="-source 1.8 -target 1.8 -g -deprecation" />
+      <module name="TIUWebApp" options="-source 1.8 -target 1.8 -g -deprecation -s C:\Users\OITCOBECKEC\Documents\GitHub\imag-code-p357-vix\IMAG_Source\VISA\Java\TIUWebApp/main/generated/java" />
+      <module name="TomcatAdapter" options="-source 1.8 -target 1.8 -g -deprecation" />
+      <module name="TransactionContext" options="-source 1.8 -target 1.8 -g -deprecation" />
+      <module name="TransactionLoggerLocalDataSourceProvider" options="-source 1.8 -target 1.8 -g -deprecation" />
+      <module name="UserWebApp" options="-source 1.8 -target 1.8 -g -deprecation -s C:\Users\OITCOBECKEC\Documents\GitHub\imag-code-p357-vix\IMAG_Source\VISA\Java\UserWebApp/main/generated/java" />
+      <module name="VISACommon" options="-source 1.8 -target 1.8 -g -deprecation" />
+      <module name="ViewerImagingCommon" options="-g -deprecation" />
+      <module name="ViewerImagingDataSourceProvider" options="-g -deprecation" />
+      <module name="ViewerImagingRouter" options="-g -deprecation -s C:\Users\OITCOBECKEC\Documents\GitHub\imag-code-p357-vix\IMAG_Source\VISA\Java\ViewerImagingRouter/main/generated/java" />
+      <module name="ViewerImagingWebApp" options="-g -deprecation -s C:\Users\OITCOBECKEC\Documents\GitHub\imag-code-p357-vix\IMAG_Source\VISA\Java\ViewerImagingWebApp/main/generated/java" />
+      <module name="ViewerServicesCommon" options="-source 1.8 -target 1.8 -g -deprecation" />
+      <module name="ViewerServicesConnection" options="-source 1.8 -target 1.8 -g -deprecation" />
+      <module name="ViewerServicesDataSourceProvider" options="-source 1.8 -target 1.8 -g -deprecation" />
+      <module name="ViewerStudyWebApp" options="-source 1.8 -target 1.8 -g -deprecation -s C:\Users\OITCOBECKEC\Documents\GitHub\imag-code-p357-vix\IMAG_Source\VISA\Java\ViewerStudyWebApp/main/generated/java" />
+      <module name="VistaConnection" options="-source 1.8 -target 1.8 -g -deprecation" />
+      <module name="VistaDataSource" options="-source 1.8 -target 1.8 -g -deprecation" />
+      <module name="VistaDataSourceCommon" options="-source 1.8 -target 1.8 -g -deprecation" />
+      <module name="VistaImagingConnection" options="-source 1.8 -target 1.8 -g -deprecation" />
+      <module name="VistaImagingDataSourceProvider" options="-source 1.8 -target 1.8 -g -deprecation" />
+      <module name="VistaImagingDataSourceProviderCodeGenerator" options="-source 1.8 -target 1.8 -g -deprecation" />
+      <module name="VistaRadWebApp" options="-source 1.8 -target 1.8 -g -deprecation -s C:\Users\OITCOBECKEC\Documents\GitHub\imag-code-p357-vix\IMAG_Source\VISA\Java\VistaRadWebApp/main/generated/java" />
+      <module name="VistaStorage" options="-source 1.8 -target 1.8 -g -deprecation" />
+      <module name="VistaUserPreferenceCommon" options="-source 1.8 -target 1.8 -g -deprecation" />
+      <module name="VistaUserPreferenceDataSourceProvider" options="-source 1.8 -target 1.8 -g -deprecation" />
+      <module name="VistaUserPreferenceRouter" options="-source 1.8 -target 1.8 -g -deprecation -s C:\Users\OITCOBECKEC\Documents\GitHub\imag-code-p357-vix\IMAG_Source\VISA\Java\VistaUserPreferenceRouter/main/generated/java" />
+      <module name="VistaUserPreferenceWebApp" options="-source 1.8 -target 1.8 -g -deprecation -s C:\Users\OITCOBECKEC\Documents\GitHub\imag-code-p357-vix\IMAG_Source\VISA\Java\VistaUserPreferenceWebApp/main/generated/java" />
+      <module name="VixCacheWebApp" options="-source 1.8 -target 1.8 -g -deprecation -s C:\Users\OITCOBECKEC\Documents\GitHub\imag-code-p357-vix\IMAG_Source\VISA\Java\VixCacheWebApp/main/generated/java" />
+      <module name="VixCommon" options="-source 1.8 -target 1.8 -g -deprecation" />
+      <module name="VixGuiWebApp" options="-source 1.8 -target 1.8 -g -deprecation -s C:\Users\OITCOBECKEC\Documents\GitHub\imag-code-p357-vix\IMAG_Source\VISA\Java\VixGuiWebApp/main/generated/java" />
+      <module name="VixServerHealth" options="-source 1.8 -target 1.8 -g -deprecation" />
+      <module name="VixServerHealthWebApp" options="-source 1.8 -target 1.8 -g -deprecation -s C:\Users\OITCOBECKEC\Documents\GitHub\imag-code-p357-vix\IMAG_Source\VISA\Java\VixServerHealthWebApp/main/generated/java" />
+      <module name="VixVistaImagingDataSourceProvider" options="-source 1.8 -target 1.8 -g -deprecation" />
+      <module name="XCAConnection" options="-source 1.8 -target 1.8 -g -deprecation" />
+      <module name="XCASConnection" options="-source 1.8 -target 1.8 -g -deprecation" />
+    </option>
+  </component>
+</project>

@@ -1,0 +1,34 @@
+MAGDHRCU ;WOIFO/MLH - Read HL7 and generate DICOM - utilities ; 25 Jul 2008 3:03 PM
+ ;;3.0;IMAGING;**102**;MAR 19, 2002;;SEP 08, 2008
+ ;; Per VHA Directive 2004-038, this routine should not be modified.
+ ;; +---------------------------------------------------------------+
+ ;; | Property of the US Government.                                |
+ ;; | No permission to copy or redistribute this software is given. |
+ ;; | Use of unreleased versions of this software requires the user |
+ ;; | to execute a written test agreement with the VistA Imaging    |
+ ;; | Development Office of the Department of Veterans Affairs,     |
+ ;; | telephone (301) 734-0100.                                     |
+ ;; | The Food and Drug Administration classifies this software as  |
+ ;; | a medical device.  As such, it may not be changed in any way. |
+ ;; | Modifications to this software may result in an adulterated   |
+ ;; | medical device under 21CFR820, the use of which is considered |
+ ;; | to be a violation of US Federal Statutes.                     |
+ ;; +---------------------------------------------------------------+
+ ;;
+ Q
+ ;
+CVTDT(XDTIN,YDATE,YTIME) ; Convert HL7 date/time into DICOM date & time
+ ; input:    XDTIN      HL7 date/time (DTM data type)
+ ; output:   .YDATE     DICOM date
+ ;           .YTIME     DICOM time
+ ;
+ N DTTM ; -- date/time less fractional seconds
+ ;
+ S DTTM=$P(+XDTIN,".",1) ; plus to remove GMT offset, if present
+ S YDATE=$E(DTTM,1,8),YTIME=$E(DTTM,9,$L(DTTM))
+ S YDATE=$E(YDATE_"00000000",1,8)
+ S:$E(YDATE,5,6)="00" $E(YDATE,5,6)="01" ; DICOM month may not be 00
+ S:$E(YDATE,7,8)="00" $E(YDATE,7,8)="01" ; DICOM day may not be 00
+ S YTIME=$E(YTIME_"000000",1,6)
+ Q
+ ;

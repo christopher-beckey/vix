@@ -1,0 +1,49 @@
+﻿<DataNavigationViewModel x:Class="VistA.Imaging.DataNavigator.ViewModel.DataNavigationViewModel"
+        xmlns="clr-namespace:VistA.Imaging.DataNavigator.ViewModels"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:m="clr-namespace:VistA.Imaging.DataNavigator.Model">
+
+    <DataNavigationViewModel.SearchFiles>
+        <m:FilemanFile Name="IMAGE STUDY" Number="2005.62" />
+    </DataNavigationViewModel.SearchFiles>
+    
+    <DataNavigationViewModel.SearchFields>
+        <m:FilemanField Name="Accession Number" Number=".02">
+            <m:FilemanField.File>
+                <m:FilemanFile Name="IMAGE STUDY" Number="2005.62" />
+            </m:FilemanField.File>
+        </m:FilemanField>
+    </DataNavigationViewModel.SearchFields>
+
+    <DataNavigationViewModel.EntryViewModels>
+        <HierarchicalEntryViewModel IsExpanded="True" AreChildrenLoaded="True" IsSelected="False">
+            <HierarchicalEntryViewModel.File>
+                <m:FilemanFile Name="Patient" Number="1" />
+            </HierarchicalEntryViewModel.File>
+            <HierarchicalEntryViewModel.Children>
+                <HierarchicalEntryViewModel IsExpanded="True" AreChildrenLoaded="True" IsSelected="True">
+                    <HierarchicalEntryViewModel.File>
+                        <m:FilemanFile Name="Study" Number="2" />
+                    </HierarchicalEntryViewModel.File>
+                    <HierarchicalEntryViewModel.Entry>
+                        <m:FilemanEntry>
+                            <m:FilemanEntry.Ien>25</m:FilemanEntry.Ien>
+                            <m:FilemanEntry.Values>
+                                <m:FilemanFieldValue InternalValue="A9405602245">
+                                    <m:FilemanFieldValue.Field>
+                                        <m:FilemanField Name="Field .01" Number=".01" DataType="String" />
+                                    </m:FilemanFieldValue.Field>
+                                </m:FilemanFieldValue>
+                                <m:FilemanFieldValue InternalValue="Test Field 2">
+                                    <m:FilemanFieldValue.Field>
+                                        <m:FilemanField Name="Field 2" Number="2" DataType="String" />
+                                    </m:FilemanFieldValue.Field>
+                                </m:FilemanFieldValue>
+                            </m:FilemanEntry.Values>
+                        </m:FilemanEntry>
+                    </HierarchicalEntryViewModel.Entry>
+                </HierarchicalEntryViewModel>
+            </HierarchicalEntryViewModel.Children>
+        </HierarchicalEntryViewModel>
+    </DataNavigationViewModel.EntryViewModels>
+</DataNavigationViewModel>

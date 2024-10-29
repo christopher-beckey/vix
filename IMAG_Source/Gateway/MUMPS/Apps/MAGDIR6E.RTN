@@ -1,0 +1,121 @@
+MAGDIR6E ;WOIFO/PMK - Read a DICOM image file ; 05/04/2007 09:24
+ ;;3.0;IMAGING;**11,51,54**;MAR 19, 2002;;OCT 28, 2009
+ ;; Per VHA Directive 2004-038, this routine should not be modified.
+ ;; +---------------------------------------------------------------+
+ ;; | Property of the US Government.                                |
+ ;; | No permission to copy or redistribute this software is given. |
+ ;; | Use of unreleased versions of this software requires the user |
+ ;; | to execute a written test agreement with the VistA Imaging    |
+ ;; | Development Office of the Department of Veterans Affairs,     |
+ ;; | telephone (301) 734-0100.                                     |
+ ;; | The Food and Drug Administration classifies this software as  |
+ ;; | a medical device.  As such, it may not be changed in any way. |
+ ;; | Modifications to this software may result in an adulterated   |
+ ;; | medical device under 21CFR820, the use of which is considered |
+ ;; | to be a violation of US Federal Statutes.                     |
+ ;; +---------------------------------------------------------------+
+ ;;
+ Q
+ ; This routine handles images whose C-STORE failed to complete.
+ ; There are two entry points:
+ ;    1) NOTDONE - called by ^MAGDIR6A for any incomplete image.
+ ;    2) FIXIT - invoked periodically by ^MAGDIR6 (when idle) to
+ ;       attempt to process incomplete images.  If they are still
+ ;       not done after one hour, they are renamed as "*_INCOMPLETE".
+ ;
+NOTDONE ; record the incompleted DICOM file in ^MAGDINPT(2006.5714)
+ N D0,DH,NOW,NUMBER,X,WARNING
+ ;
+ S WARNING(1)="DICOM IMAGE PROCESSING WARNING"
+ S WARNING(2)="The following file is incomplete: "_FROMPATH
+ D WARNING^MAGDFCNS(.WARNING)
+ ;
+ S DH=$H,NOW=$$HTFM^XLFDT(DH,0)
+ L +^MAGDINPT(2006.5714,0):1E9
+ S X=$G(^MAGDINPT(2006.5714,0))
+ S $P(X,"^",1,2)="DICOM INCOMPLETE OBJECT^2006.5714"
+ S $P(X,"^",3)=$P(X,"^",3)+1,D0=$P(X,"^",3)
+ S $P(X,"^",4)=$P(X,"^",4)+1
+ S ^MAGDINPT(2006.5714,0)=X
+ S X=DH_"^"_NEXTIEN_"^"_FROMPATH_"^"_INSTNAME_"^"_NOW
+ S ^MAGDINPT(2006.5714,D0,0)=X
+ S ^MAGDINPT(2006.5714,"B",DH,D0)=""
+ L -^MAGDINPT(2006.5714,0)
+ Q
+ ;
+FIXIT ; check file if greater than one hour and file completed, process it.
+ N D0,HOROLOG,NOWTIME
+ S NOWTIME=$$TMFUNC($H)
+ S HOROLOG=""
+ F  S HOROLOG=$O(^MAGDINPT(2006.5714,"B",HOROLOG)) Q:'HOROLOG  D
+ . I (NOWTIME-$$TMFUNC(HOROLOG))>3600 D  ; hour-old incomplete file
+ . . S D0=""
+ . . F  S D0=$O(^MAGDINPT(2006.5714,"B",HOROLOG,D0)) Q:'D0  D FIXIT1
+ . Q
+ Q
+ ;
+FIXIT1 ; one incomplete file has timed out - either process it or discard it
+ N COMPLETE,FILE,FROMPATH,IEN571,INSTNAME,NENTRIES,X,Y
+ I $D(^MAGDINPT(2006.5714,D0,0)) D
+ . S X=^MAGDINPT(2006.5714,D0,0),IEN571=$P(X,"^",2)
+ . S FROMPATH=$P(X,"^",3),INSTNAME=$P(X,"^",4)
+ . S Y=$G(^MAGDINPT(2006.571,IEN571,0)),COMPLETE=0
+ . I Y'="" D
+ . . S COMPLETE=$P(Y,"^",3)
+ . . I COMPLETE D
+ . . . D RETRY^MAGDIR6D(FROMPATH,INSTNAME,COMPLETE)
+ . . . Q
+ . . ; delete old ^MAGDINPT(2006.571) entry
+ . . L +^MAGDINPT(2006.571,0):1E9
+ . . S NENTRIES=$P(^MAGDINPT(2006.571,0),"^",4) ; decrement entry count
+ . . S $P(^MAGDINPT(2006.571,0),"^",4)=$S(NENTRIES>1:NENTRIES-1,1:0)
+ . . L -^MAGDINPT(2006.571,0)
+ . . K ^MAGDINPT(2006.571,IEN571)
+ . . Q
+ . I 'COMPLETE  D
+ . . S FILE=FROMPATH_"_incomplete"
+ . . ; more than 1hr passed and entry never completed, log in error file
+ . . ; and rename file.  site will manually need to delete.
+ . . I $$RENAME^MAGOSDIR(FROMPATH,FILE)<0 D
+ . . . N MSG
+ . . . S MSG(1)="Renaming """_FROMPATH_""" to """_FILE_" failed."
+ . . . D WARNING^MAGDFCNS(.MSG)
+ . . . Q
+ . . D LOG^MAGDIR6F("Incomplete File")    ; log the incomplete file
+ . . Q
+ . L +^MAGDINPT(2006.5714,0):1E9
+ . S NENTRIES=$P(^MAGDINPT(2006.5714,0),"^",4) ; decrement entry count
+ . S $P(^MAGDINPT(2006.5714,0),"^",4)=$S(NENTRIES>1:NENTRIES-1,1:0)
+ . K ^MAGDINPT(2006.5714,D0,0) ; delete entry
+ . L -^MAGDINPT(2006.5714,0)
+ . Q
+ K ^MAGDINPT(2006.5714,"B",HOROLOG,D0)
+ Q
+ ;
+TMFUNC(H) ; Turn $horolog value into seconds
+ Q $P(H,",",1)*86400+$P(H,",",2) ; 86400 seconds = 24hrs
+ ;
+CLEANUP N D0,F,H,LST,N,OK,X
+ W !!,"Cleaning up information about incomplete images...",!
+ L +^MAGDINPT(2006.5714,0):1E9
+ S (N,D0)=0,LST="" F  S D0=$O(^MAGDINPT(2006.5714,D0)) Q:'D0  D
+ . S X=$G(^MAGDINPT(2006.5714,D0,0))
+ . S F=$P(X,"^",3),OK=0 D:F'=""
+ . . S OK=$$GETDIR^MAGOSDIR(F) Q:OK>0
+ . . S OK=$$GETDIR^MAGOSDIR(F_"_incomplete")
+ . . Q
+ . I OK>0 S N=N+1,LST=D0 Q
+ . K ^MAGDINPT(2006.5714,D0)
+ . Q
+ S ^MAGDINPT(2006.5714,0)="DICOM INCOMPLETE OBJECT^2006.5714^"_LST_"^"_N
+ I 'N K ^MAGDINPT(2006.5714,"B")
+ E  S H="" F  S H=$O(^MAGDINPT(2006.5714,"B",H)) Q:H=""  D
+ . S D0="" F  S D0=$O(^MAGDINPT(2006.5714,"B",H,D0)) Q:D0=""  D
+ . . K:'$D(^MAGDINPT(2006.5714,D0)) ^MAGDINPT(2006.5714,"B",H,D0)
+ . . Q
+ . Q
+ L -^MAGDINPT(2006.5714,0)
+ W !,"Done... "
+ I 'N W !,"No incomplete images currently registered.",! Q
+ W !,N," incomplete image" W:N>1 "s" W " currently in database.",!
+ Q

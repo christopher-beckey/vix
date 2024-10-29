@@ -1,0 +1,2 @@
+The log4j.properties file should be copied to the Tomcat common/classes directory.  
+In usual production circumstances, no other instances of log4j.properties should exist in the tomcat hierarchy or in the classpath used by tomcat.

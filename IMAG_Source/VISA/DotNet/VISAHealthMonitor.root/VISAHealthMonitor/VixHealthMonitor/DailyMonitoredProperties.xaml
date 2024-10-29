@@ -1,0 +1,95 @@
+﻿<UserControl x:Class="VixHealthMonitor.DailyMonitoredProperties"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="150" d:DesignWidth="700"
+             DataContext="{Binding DailyMonitoredProperties, Source={StaticResource Locator}}"
+             xmlns:b="clr-namespace:VISAHealthMonitorCommonControls;assembly=VISAHealthMonitorCommonControls"
+             xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+            xmlns:cmd="clr-namespace:GalaSoft.MvvmLight.Command;assembly=GalaSoft.MvvmLight.Extras.WPF4">
+    <Grid>
+        <Grid.Resources>
+            <Style x:Key="LeftHeaderStyle" TargetType="{x:Type GridViewColumnHeader}">
+                <Setter Property="HorizontalContentAlignment" Value="Left"/>
+            </Style>
+        </Grid.Resources>
+
+        <DockPanel LastChildFill="True" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+
+            <TextBlock HorizontalAlignment="Stretch" DockPanel.Dock="Top" TextWrapping="WrapWithOverflow" Margin="2,2,2,2">
+                This tab provides viewing of recording monitored properties for a selected day
+            </TextBlock>
+
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" DockPanel.Dock="Top">
+                <DatePicker SelectedDate="{Binding Path=SelectedDate}" />
+                <Button Content="View Date" Command="{Binding Path=RefreshDataCommand, Mode=OneWay}"  Margin="1,1,1,1"/>
+            </StackPanel>
+
+            <ListView HorizontalAlignment="Stretch"  VerticalAlignment="Stretch" ItemsSource="{Binding Path=DailyMonitoredProperties.Sources.View}"
+                    b:SelectorDoubleClickCommandBehavior.HandleDoubleClick="true"
+                    b:SelectorDoubleClickCommandBehavior.TheCommandToRun="{Binding Path=ListMouseDoubleClickCommand}"
+                    SelectedItem="{Binding Path=SelectedItem}">
+                <ListView.ContextMenu>
+                    <ContextMenu Name="RightClick">
+                        <MenuItem Header="View Site Details" Command="{Binding Path=ShowSiteDetailsCommand}" />
+                    </ContextMenu>
+                </ListView.ContextMenu>
+
+                <ListView.View>
+                    <GridView>
+
+                        <GridViewColumn Width="Auto" HeaderContainerStyle="{StaticResource LeftHeaderStyle}">
+                            <GridViewColumnHeader Content="Site Name" 
+                                                  Command="{Binding Path=SortDailyMonitoredPropertiesCommand}" CommandParameter="VisaSource.DisplayName" />
+                            <GridViewColumn.CellTemplate>
+                                <HierarchicalDataTemplate>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="{Binding VisaSource.DisplayName}"  />
+                                    </StackPanel>
+                                </HierarchicalDataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        
+                        
+                        
+                        <GridViewColumn Width="170"  HeaderContainerStyle="{StaticResource LeftHeaderStyle}">
+                            <GridViewColumnHeader Content="Property Name" 
+                                                  Command="{Binding Path=SortDailyMonitoredPropertiesCommand}" CommandParameter="Name" />
+                            <GridViewColumn.CellTemplate>
+                                <HierarchicalDataTemplate>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="{Binding Name}"  />
+                                    </StackPanel>
+                                </HierarchicalDataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Width="270" HeaderContainerStyle="{StaticResource LeftHeaderStyle}">
+                            <GridViewColumnHeader Content="Value" 
+                                                  Command="{Binding Path=SortDailyMonitoredPropertiesCommand}" CommandParameter="MostRecentHistory.Value" />
+                            <GridViewColumn.CellTemplate>
+                                <HierarchicalDataTemplate>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="{Binding MostRecentHistory.Value}" />
+                                    </StackPanel>
+                                </HierarchicalDataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Width="180" HeaderContainerStyle="{StaticResource LeftHeaderStyle}">
+                            <GridViewColumnHeader Content="Date Updated" 
+                                                  Command="{Binding Path=SortDailyMonitoredPropertiesCommand}" CommandParameter="MostRecentHistory.DateUpdated" />
+                            <GridViewColumn.CellTemplate>
+                                <HierarchicalDataTemplate>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="{Binding MostRecentHistory.DateUpdated}" />
+                                    </StackPanel>
+                                </HierarchicalDataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+        </DockPanel>
+    </Grid>
+</UserControl>

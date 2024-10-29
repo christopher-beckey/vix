@@ -1,0 +1,287 @@
+<html>
+<body>
+<pre>
+<h1>Build Log</h1>
+<h3>
+--------------------Configuration: Decompressor - Win32 Release--------------------
+</h3>
+<h3>Command Lines</h3>
+Creating temporary file "C:\DOCUME~1\VHAISW~1\LOCALS~1\Temp\RSP58.tmp" with contents
+[
+/nologo /MD /W4 /GX /O2 /D "NDEBUG" /D "WIN32" /D "_WINDOWS" /D "_AFXDLL" /D "_MBCS" /Fp"Release/Decompressor.pch" /YX /Fo"Release/" /Fd"Release/" /FD /c 
+"C:\edm\vss\MAG_Decompressor\App.cpp"
+"C:\edm\vss\MAG_Decompressor\common.cpp"
+"C:\edm\vss\MAG_Decompressor\Decompressor.cpp"
+"C:\edm\vss\MAG_Decompressor\DelayedDirectoryChangeHandler.cpp"
+"C:\edm\vss\MAG_Decompressor\DirectoryChanges.cpp"
+"C:\edm\vss\MAG_Decompressor\DWDecomp.cpp"
+"C:\edm\vss\MAG_Decompressor\imageIO.cpp"
+"C:\edm\vss\MAG_Decompressor\ntserv.cpp"
+"C:\edm\vss\MAG_Decompressor\StdAfx.cpp"
+]
+Creating command line "cl.exe @C:\DOCUME~1\VHAISW~1\LOCALS~1\Temp\RSP58.tmp" 
+Creating temporary file "C:\DOCUME~1\VHAISW~1\LOCALS~1\Temp\RSP59.tmp" with contents
+[
+awj2k.lib /nologo /subsystem:windows /incremental:no /pdb:"Release/MAG_Decompressor.pdb" /machine:I386 /out:"Release/MAG_Decompressor.exe" 
+.\Release\App.obj
+.\Release\common.obj
+.\Release\Decompressor.obj
+.\Release\DelayedDirectoryChangeHandler.obj
+.\Release\DirectoryChanges.obj
+.\Release\DWDecomp.obj
+.\Release\imageIO.obj
+.\Release\ntserv.obj
+.\Release\StdAfx.obj
+]
+Creating command line "link.exe @C:\DOCUME~1\VHAISW~1\LOCALS~1\Temp\RSP59.tmp"
+<h3>Output Window</h3>
+Compiling...
+App.cpp
+C:\edm\vss\MAG_Decompressor\App.cpp(173) : warning C4100: 'dwControl' : unreferenced formal parameter
+common.cpp
+C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\xmemory(39) : warning C4100: '_P' : unreferenced formal parameter
+C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\xmemory(41) : warning C4100: '_P' : unreferenced formal parameter
+C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\xlocale(296) : warning C4663: C++ language change: to explicitly specialize class template 'codecvt' use the following syntax:
+        template<> class codecvt<unsigned short,char,int> ...
+C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\xlocale(387) : warning C4018: '<' : signed/unsigned mismatch
+C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\xlocale(519) : warning C4663: C++ language change: to explicitly specialize class template 'ctype' use the following syntax:
+        template<> class ctype<char> ...
+C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\xlocale(552) : warning C4100: '_D' : unreferenced formal parameter
+C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\xlocale(554) : warning C4100: '_D' : unreferenced formal parameter
+C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\xlocale(277) : warning C4100: '_State' : unreferenced formal parameter
+        C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\xlocale(280) : while compiling class-template member function 'int __thiscall std::codecvt<char,char,int>::do_in(int &,const char *,const char *,const char *& ,char *,char *,char *& ) const'
+C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\xlocale(282) : warning C4100: '_State' : unreferenced formal parameter
+        C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\xlocale(285) : while compiling class-template member function 'int __thiscall std::codecvt<char,char,int>::do_out(int &,const char *,const char *,const char *& ,char *,char *,char *& ) const'
+C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\xlocale(289) : warning C4018: '<' : signed/unsigned mismatch
+        C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\xlocale(289) : while compiling class-template member function 'int __thiscall std::codecvt<char,char,int>::do_length(int &,const char *,const char *,unsigned int) const'
+C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\xlocale(287) : warning C4100: '_State' : unreferenced formal parameter
+        C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\xlocale(289) : while compiling class-template member function 'int __thiscall std::codecvt<char,char,int>::do_length(int &,const char *,const char *,unsigned int) const'
+C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\xlocnum(179) : warning C4146: unary minus operator applied to unsigned type, result still unsigned
+        C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\xlocnum(168) : while compiling class-template member function 'class std::istreambuf_iterator<char,struct std::char_traits<char> > __thiscall std::num_get<char,class std::istreambuf_iterator<char,struct std::char_traits<char> > >::do_get(class std::istreambuf_iterator<char,struct std::char_traits<char> >,class std::istreambuf_iterator<char,struct std::char_traits<char> >,class std::ios_base &,int &,unsigned short &) const'
+C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\xlocnum(194) : warning C4146: unary minus operator applied to unsigned type, result still unsigned
+        C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\xlocnum(183) : while compiling class-template member function 'class std::istreambuf_iterator<char,struct std::char_traits<char> > __thiscall std::num_get<char,class std::istreambuf_iterator<char,struct std::char_traits<char> > >::do_get(class std::istreambuf_iterator<char,struct std::char_traits<char> >,class std::istreambuf_iterator<char,struct std::char_traits<char> >,class std::ios_base &,int &,unsigned int &) const'
+C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\xlocnum(179) : warning C4146: unary minus operator applied to unsigned type, result still unsigned
+        C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\xlocnum(168) : while compiling class-template member function 'class std::istreambuf_iterator<unsigned short,struct std::char_traits<unsigned short> > __thiscall std::num_get<unsigned short,class std::istreambuf_iterator<unsigned short,struct std::char_traits<unsigned short> > >::do_get(class std::istreambuf_iterator<unsigned short,struct std::char_traits<unsigned short> >,class std::istreambuf_iterator<unsigned short,struct std::char_traits<unsigned short> >,class std::ios_base &,int &,unsigned short &) const'
+C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\xlocnum(194) : warning C4146: unary minus operator applied to unsigned type, result still unsigned
+        C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\xlocnum(183) : while compiling class-template member function 'class std::istreambuf_iterator<unsigned short,struct std::char_traits<unsigned short> > __thiscall std::num_get<unsigned short,class std::istreambuf_iterator<unsigned short,struct std::char_traits<unsigned short> > >::do_get(class std::istreambuf_iterator<unsigned short,struct std::char_traits<unsigned short> >,class std::istreambuf_iterator<unsigned short,struct std::char_traits<unsigned short> >,class std::ios_base &,int &,unsigned int &) const'
+C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\xlocnum(469) : warning C4018: '<=' : signed/unsigned mismatch
+        C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\xlocnum(460) : while compiling class-template member function 'class std::ostreambuf_iterator<char,struct std::char_traits<char> > __thiscall std::num_put<char,class std::ostreambuf_iterator<char,struct std::char_traits<char> > >::do_put(class std::ostreambuf_iterator<char,struct std::char_traits<char> >,class std::ios_base &,char,bool) const'
+C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\xlocnum(469) : warning C4018: '<=' : signed/unsigned mismatch
+        C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\xlocnum(460) : while compiling class-template member function 'class std::ostreambuf_iterator<unsigned short,struct std::char_traits<unsigned short> > __thiscall std::num_put<unsigned short,class std::ostreambuf_iterator<unsigned short,struct std::char_traits<unsigned short> > >::do_put(class std::ostreambuf_iterator<unsigned short,struct std::char_traits<unsigned short> >,class std::ios_base &,unsigned short,bool) const'
+C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\streambuf(181) : warning C4100: '_Loc' : unreferenced formal parameter
+        C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\streambuf(182) : while compiling class-template member function 'void __thiscall std::basic_streambuf<char,struct std::char_traits<char> >::imbue(const class std::locale &)'
+C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\streambuf(181) : warning C4100: '_Loc' : unreferenced formal parameter
+        C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\streambuf(182) : while compiling class-template member function 'void __thiscall std::basic_streambuf<unsigned short,struct std::char_traits<unsigned short> >::imbue(const class std::locale &)'
+C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\xlocnum(543) : warning C4018: '<=' : signed/unsigned mismatch
+        C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\xlocnum(542) : while compiling class-template member function 'class std::ostreambuf_iterator<char,struct std::char_traits<char> > __cdecl std::num_put<char,class std::ostreambuf_iterator<char,struct std::char_traits<char> > >::_Fput(class std::ostreambuf_iterator<char,struct std::char_traits<char> >,class std::ios_base &,char,const char *,unsigned int,unsigned int)'
+C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\xlocnum(599) : warning C4018: '<' : signed/unsigned mismatch
+        C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\xlocnum(588) : while compiling class-template member function 'class std::ostreambuf_iterator<char,struct std::char_traits<char> > __cdecl std::num_put<char,class std::ostreambuf_iterator<char,struct std::char_traits<char> > >::_Iput(class std::ostreambuf_iterator<char,struct std::char_traits<char> >,class std::ios_base &,char,char *,unsigned int)'
+C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\xlocnum(606) : warning C4018: '<=' : signed/unsigned mismatch
+        C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\xlocnum(588) : while compiling class-template member function 'class std::ostreambuf_iterator<char,struct std::char_traits<char> > __cdecl std::num_put<char,class std::ostreambuf_iterator<char,struct std::char_traits<char> > >::_Iput(class std::ostreambuf_iterator<char,struct std::char_traits<char> >,class std::ios_base &,char,char *,unsigned int)'
+C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\xlocnum(543) : warning C4018: '<=' : signed/unsigned mismatch
+        C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\xlocnum(542) : while compiling class-template member function 'class std::ostreambuf_iterator<unsigned short,struct std::char_traits<unsigned short> > __cdecl std::num_put<unsigned short,class std::ostreambuf_iterator<unsigned short,struct std::char_traits<unsigned short> > >::_Fput(class std::ostreambuf_iterator<unsigned short,struct std::char_traits<unsigned short> >,class std::ios_base &,unsigned short,const char *,unsigned int,unsigned int)'
+C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\xlocnum(599) : warning C4018: '<' : signed/unsigned mismatch
+        C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\xlocnum(588) : while compiling class-template member function 'class std::ostreambuf_iterator<unsigned short,struct std::char_traits<unsigned short> > __cdecl std::num_put<unsigned short,class std::ostreambuf_iterator<unsigned short,struct std::char_traits<unsigned short> > >::_Iput(class std::ostreambuf_iterator<unsigned short,struct std::char_traits<unsigned short> >,class std::ios_base &,unsigned short,char *,unsigned int)'
+C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\xlocnum(606) : warning C4018: '<=' : signed/unsigned mismatch
+        C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\xlocnum(588) : while compiling class-template member function 'class std::ostreambuf_iterator<unsigned short,struct std::char_traits<unsigned short> > __cdecl std::num_put<unsigned short,class std::ostreambuf_iterator<unsigned short,struct std::char_traits<unsigned short> > >::_Iput(class std::ostreambuf_iterator<unsigned short,struct std::char_traits<unsigned short> >,class std::ios_base &,unsigned short,char *,unsigned int)'
+C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\xlocale(204) : warning C4244: '=' : conversion from 'unsigned int' to 'char', possible loss of data
+        C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\xlocnum(151) : see reference to function template instantiation 'int __cdecl std::_Getloctxt(class std::istreambuf_iterator<char,struct std::char_traits<char> > &,class std::istreambuf_iterator<char,struct std::char_traits<char> > &,unsigned int,const char *)' being compiled
+C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\xlocale(207) : warning C4244: '=' : conversion from 'unsigned int' to 'char', possible loss of data
+        C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\xlocnum(151) : see reference to function template instantiation 'int __cdecl std::_Getloctxt(class std::istreambuf_iterator<char,struct std::char_traits<char> > &,class std::istreambuf_iterator<char,struct std::char_traits<char> > &,unsigned int,const char *)' being compiled
+C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\xlocale(204) : warning C4244: '=' : conversion from 'unsigned int' to 'char', possible loss of data
+        C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\xlocnum(151) : see reference to function template instantiation 'int __cdecl std::_Getloctxt(class std::istreambuf_iterator<unsigned short,struct std::char_traits<unsigned short> > &,class std::istreambuf_iterator<unsigned short,struct std::char_traits<unsigned short> > &,unsigned int,const unsigned short *)' being compiled
+C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\xlocale(207) : warning C4244: '=' : conversion from 'unsigned int' to 'char', possible loss of data
+        C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\xlocnum(151) : see reference to function template instantiation 'int __cdecl std::_Getloctxt(class std::istreambuf_iterator<unsigned short,struct std::char_traits<unsigned short> > &,class std::istreambuf_iterator<unsigned short,struct std::char_traits<unsigned short> > &,unsigned int,const unsigned short *)' being compiled
+Decompressor.cpp
+C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\xmemory(39) : warning C4100: '_P' : unreferenced formal parameter
+C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\xmemory(41) : warning C4100: '_P' : unreferenced formal parameter
+C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\xlocale(296) : warning C4663: C++ language change: to explicitly specialize class template 'codecvt' use the following syntax:
+        template<> class codecvt<unsigned short,char,int> ...
+C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\xlocale(387) : warning C4018: '<' : signed/unsigned mismatch
+C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\xlocale(519) : warning C4663: C++ language change: to explicitly specialize class template 'ctype' use the following syntax:
+        template<> class ctype<char> ...
+C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\xlocale(552) : warning C4100: '_D' : unreferenced formal parameter
+C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\xlocale(554) : warning C4100: '_D' : unreferenced formal parameter
+C:\edm\vss\MAG_Decompressor\Decompressor.cpp(116) : warning C4018: '<' : signed/unsigned mismatch
+C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\xlocale(277) : warning C4100: '_State' : unreferenced formal parameter
+        C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\xlocale(280) : while compiling class-template member function 'int __thiscall std::codecvt<char,char,int>::do_in(int &,const char *,const char *,const char *& ,char *,char *,char *& ) const'
+C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\xlocale(282) : warning C4100: '_State' : unreferenced formal parameter
+        C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\xlocale(285) : while compiling class-template member function 'int __thiscall std::codecvt<char,char,int>::do_out(int &,const char *,const char *,const char *& ,char *,char *,char *& ) const'
+C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\xlocale(289) : warning C4018: '<' : signed/unsigned mismatch
+        C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\xlocale(289) : while compiling class-template member function 'int __thiscall std::codecvt<char,char,int>::do_length(int &,const char *,const char *,unsigned int) const'
+C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\xlocale(287) : warning C4100: '_State' : unreferenced formal parameter
+        C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\xlocale(289) : while compiling class-template member function 'int __thiscall std::codecvt<char,char,int>::do_length(int &,const char *,const char *,unsigned int) const'
+C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\xlocnum(179) : warning C4146: unary minus operator applied to unsigned type, result still unsigned
+        C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\xlocnum(168) : while compiling class-template member function 'class std::istreambuf_iterator<char,struct std::char_traits<char> > __thiscall std::num_get<char,class std::istreambuf_iterator<char,struct std::char_traits<char> > >::do_get(class std::istreambuf_iterator<char,struct std::char_traits<char> >,class std::istreambuf_iterator<char,struct std::char_traits<char> >,class std::ios_base &,int &,unsigned short &) const'
+C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\xlocnum(194) : warning C4146: unary minus operator applied to unsigned type, result still unsigned
+        C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\xlocnum(183) : while compiling class-template member function 'class std::istreambuf_iterator<char,struct std::char_traits<char> > __thiscall std::num_get<char,class std::istreambuf_iterator<char,struct std::char_traits<char> > >::do_get(class std::istreambuf_iterator<char,struct std::char_traits<char> >,class std::istreambuf_iterator<char,struct std::char_traits<char> >,class std::ios_base &,int &,unsigned int &) const'
+C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\xlocnum(179) : warning C4146: unary minus operator applied to unsigned type, result still unsigned
+        C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\xlocnum(168) : while compiling class-template member function 'class std::istreambuf_iterator<unsigned short,struct std::char_traits<unsigned short> > __thiscall std::num_get<unsigned short,class std::istreambuf_iterator<unsigned short,struct std::char_traits<unsigned short> > >::do_get(class std::istreambuf_iterator<unsigned short,struct std::char_traits<unsigned short> >,class std::istreambuf_iterator<unsigned short,struct std::char_traits<unsigned short> >,class std::ios_base &,int &,unsigned short &) const'
+C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\xlocnum(194) : warning C4146: unary minus operator applied to unsigned type, result still unsigned
+        C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\xlocnum(183) : while compiling class-template member function 'class std::istreambuf_iterator<unsigned short,struct std::char_traits<unsigned short> > __thiscall std::num_get<unsigned short,class std::istreambuf_iterator<unsigned short,struct std::char_traits<unsigned short> > >::do_get(class std::istreambuf_iterator<unsigned short,struct std::char_traits<unsigned short> >,class std::istreambuf_iterator<unsigned short,struct std::char_traits<unsigned short> >,class std::ios_base &,int &,unsigned int &) const'
+C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\xlocnum(469) : warning C4018: '<=' : signed/unsigned mismatch
+        C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\xlocnum(460) : while compiling class-template member function 'class std::ostreambuf_iterator<char,struct std::char_traits<char> > __thiscall std::num_put<char,class std::ostreambuf_iterator<char,struct std::char_traits<char> > >::do_put(class std::ostreambuf_iterator<char,struct std::char_traits<char> >,class std::ios_base &,char,bool) const'
+C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\xlocnum(469) : warning C4018: '<=' : signed/unsigned mismatch
+        C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\xlocnum(460) : while compiling class-template member function 'class std::ostreambuf_iterator<unsigned short,struct std::char_traits<unsigned short> > __thiscall std::num_put<unsigned short,class std::ostreambuf_iterator<unsigned short,struct std::char_traits<unsigned short> > >::do_put(class std::ostreambuf_iterator<unsigned short,struct std::char_traits<unsigned short> >,class std::ios_base &,unsigned short,bool) const'
+C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\streambuf(181) : warning C4100: '_Loc' : unreferenced formal parameter
+        C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\streambuf(182) : while compiling class-template member function 'void __thiscall std::basic_streambuf<char,struct std::char_traits<char> >::imbue(const class std::locale &)'
+C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\streambuf(181) : warning C4100: '_Loc' : unreferenced formal parameter
+        C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\streambuf(182) : while compiling class-template member function 'void __thiscall std::basic_streambuf<unsigned short,struct std::char_traits<unsigned short> >::imbue(const class std::locale &)'
+C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\xlocnum(543) : warning C4018: '<=' : signed/unsigned mismatch
+        C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\xlocnum(542) : while compiling class-template member function 'class std::ostreambuf_iterator<char,struct std::char_traits<char> > __cdecl std::num_put<char,class std::ostreambuf_iterator<char,struct std::char_traits<char> > >::_Fput(class std::ostreambuf_iterator<char,struct std::char_traits<char> >,class std::ios_base &,char,const char *,unsigned int,unsigned int)'
+C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\xlocnum(599) : warning C4018: '<' : signed/unsigned mismatch
+        C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\xlocnum(588) : while compiling class-template member function 'class std::ostreambuf_iterator<char,struct std::char_traits<char> > __cdecl std::num_put<char,class std::ostreambuf_iterator<char,struct std::char_traits<char> > >::_Iput(class std::ostreambuf_iterator<char,struct std::char_traits<char> >,class std::ios_base &,char,char *,unsigned int)'
+C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\xlocnum(606) : warning C4018: '<=' : signed/unsigned mismatch
+        C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\xlocnum(588) : while compiling class-template member function 'class std::ostreambuf_iterator<char,struct std::char_traits<char> > __cdecl std::num_put<char,class std::ostreambuf_iterator<char,struct std::char_traits<char> > >::_Iput(class std::ostreambuf_iterator<char,struct std::char_traits<char> >,class std::ios_base &,char,char *,unsigned int)'
+C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\xlocnum(543) : warning C4018: '<=' : signed/unsigned mismatch
+        C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\xlocnum(542) : while compiling class-template member function 'class std::ostreambuf_iterator<unsigned short,struct std::char_traits<unsigned short> > __cdecl std::num_put<unsigned short,class std::ostreambuf_iterator<unsigned short,struct std::char_traits<unsigned short> > >::_Fput(class std::ostreambuf_iterator<unsigned short,struct std::char_traits<unsigned short> >,class std::ios_base &,unsigned short,const char *,unsigned int,unsigned int)'
+C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\xlocnum(599) : warning C4018: '<' : signed/unsigned mismatch
+        C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\xlocnum(588) : while compiling class-template member function 'class std::ostreambuf_iterator<unsigned short,struct std::char_traits<unsigned short> > __cdecl std::num_put<unsigned short,class std::ostreambuf_iterator<unsigned short,struct std::char_traits<unsigned short> > >::_Iput(class std::ostreambuf_iterator<unsigned short,struct std::char_traits<unsigned short> >,class std::ios_base &,unsigned short,char *,unsigned int)'
+C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\xlocnum(606) : warning C4018: '<=' : signed/unsigned mismatch
+        C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\xlocnum(588) : while compiling class-template member function 'class std::ostreambuf_iterator<unsigned short,struct std::char_traits<unsigned short> > __cdecl std::num_put<unsigned short,class std::ostreambuf_iterator<unsigned short,struct std::char_traits<unsigned short> > >::_Iput(class std::ostreambuf_iterator<unsigned short,struct std::char_traits<unsigned short> >,class std::ios_base &,unsigned short,char *,unsigned int)'
+C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\xlocale(204) : warning C4244: '=' : conversion from 'unsigned int' to 'char', possible loss of data
+        C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\xlocnum(151) : see reference to function template instantiation 'int __cdecl std::_Getloctxt(class std::istreambuf_iterator<char,struct std::char_traits<char> > &,class std::istreambuf_iterator<char,struct std::char_traits<char> > &,unsigned int,const char *)' being compiled
+C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\xlocale(207) : warning C4244: '=' : conversion from 'unsigned int' to 'char', possible loss of data
+        C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\xlocnum(151) : see reference to function template instantiation 'int __cdecl std::_Getloctxt(class std::istreambuf_iterator<char,struct std::char_traits<char> > &,class std::istreambuf_iterator<char,struct std::char_traits<char> > &,unsigned int,const char *)' being compiled
+C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\xlocale(204) : warning C4244: '=' : conversion from 'unsigned int' to 'char', possible loss of data
+        C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\xlocnum(151) : see reference to function template instantiation 'int __cdecl std::_Getloctxt(class std::istreambuf_iterator<unsigned short,struct std::char_traits<unsigned short> > &,class std::istreambuf_iterator<unsigned short,struct std::char_traits<unsigned short> > &,unsigned int,const unsigned short *)' being compiled
+C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\xlocale(207) : warning C4244: '=' : conversion from 'unsigned int' to 'char', possible loss of data
+        C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\xlocnum(151) : see reference to function template instantiation 'int __cdecl std::_Getloctxt(class std::istreambuf_iterator<unsigned short,struct std::char_traits<unsigned short> > &,class std::istreambuf_iterator<unsigned short,struct std::char_traits<unsigned short> > &,unsigned int,const unsigned short *)' being compiled
+DelayedDirectoryChangeHandler.cpp
+DirectoryChanges.cpp
+C:\edm\vss\MAG_Decompressor\DirectoryChanges.cpp(594) : warning C4100: 'pDirChangeWatcher' : unreferenced formal parameter
+DWDecomp.cpp
+C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\xmemory(39) : warning C4100: '_P' : unreferenced formal parameter
+C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\xmemory(41) : warning C4100: '_P' : unreferenced formal parameter
+C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\xlocale(296) : warning C4663: C++ language change: to explicitly specialize class template 'codecvt' use the following syntax:
+        template<> class codecvt<unsigned short,char,int> ...
+C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\xlocale(387) : warning C4018: '<' : signed/unsigned mismatch
+C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\xlocale(519) : warning C4663: C++ language change: to explicitly specialize class template 'ctype' use the following syntax:
+        template<> class ctype<char> ...
+C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\xlocale(552) : warning C4100: '_D' : unreferenced formal parameter
+C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\xlocale(554) : warning C4100: '_D' : unreferenced formal parameter
+C:\edm\vss\MAG_Decompressor\DWDecomp.cpp(89) : warning C4100: 'strOldFileName' : unreferenced formal parameter
+C:\edm\vss\MAG_Decompressor\DWDecomp.cpp(123) : warning C4100: 'szNewFileName' : unreferenced formal parameter
+C:\edm\vss\MAG_Decompressor\DWDecomp.cpp(123) : warning C4100: 'szFileName' : unreferenced formal parameter
+C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\xlocale(277) : warning C4100: '_State' : unreferenced formal parameter
+        C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\xlocale(280) : while compiling class-template member function 'int __thiscall std::codecvt<char,char,int>::do_in(int &,const char *,const char *,const char *& ,char *,char *,char *& ) const'
+C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\xlocale(282) : warning C4100: '_State' : unreferenced formal parameter
+        C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\xlocale(285) : while compiling class-template member function 'int __thiscall std::codecvt<char,char,int>::do_out(int &,const char *,const char *,const char *& ,char *,char *,char *& ) const'
+C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\xlocale(289) : warning C4018: '<' : signed/unsigned mismatch
+        C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\xlocale(289) : while compiling class-template member function 'int __thiscall std::codecvt<char,char,int>::do_length(int &,const char *,const char *,unsigned int) const'
+C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\xlocale(287) : warning C4100: '_State' : unreferenced formal parameter
+        C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\xlocale(289) : while compiling class-template member function 'int __thiscall std::codecvt<char,char,int>::do_length(int &,const char *,const char *,unsigned int) const'
+C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\xlocnum(179) : warning C4146: unary minus operator applied to unsigned type, result still unsigned
+        C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\xlocnum(168) : while compiling class-template member function 'class std::istreambuf_iterator<char,struct std::char_traits<char> > __thiscall std::num_get<char,class std::istreambuf_iterator<char,struct std::char_traits<char> > >::do_get(class std::istreambuf_iterator<char,struct std::char_traits<char> >,class std::istreambuf_iterator<char,struct std::char_traits<char> >,class std::ios_base &,int &,unsigned short &) const'
+C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\xlocnum(194) : warning C4146: unary minus operator applied to unsigned type, result still unsigned
+        C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\xlocnum(183) : while compiling class-template member function 'class std::istreambuf_iterator<char,struct std::char_traits<char> > __thiscall std::num_get<char,class std::istreambuf_iterator<char,struct std::char_traits<char> > >::do_get(class std::istreambuf_iterator<char,struct std::char_traits<char> >,class std::istreambuf_iterator<char,struct std::char_traits<char> >,class std::ios_base &,int &,unsigned int &) const'
+C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\xlocnum(179) : warning C4146: unary minus operator applied to unsigned type, result still unsigned
+        C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\xlocnum(168) : while compiling class-template member function 'class std::istreambuf_iterator<unsigned short,struct std::char_traits<unsigned short> > __thiscall std::num_get<unsigned short,class std::istreambuf_iterator<unsigned short,struct std::char_traits<unsigned short> > >::do_get(class std::istreambuf_iterator<unsigned short,struct std::char_traits<unsigned short> >,class std::istreambuf_iterator<unsigned short,struct std::char_traits<unsigned short> >,class std::ios_base &,int &,unsigned short &) const'
+C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\xlocnum(194) : warning C4146: unary minus operator applied to unsigned type, result still unsigned
+        C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\xlocnum(183) : while compiling class-template member function 'class std::istreambuf_iterator<unsigned short,struct std::char_traits<unsigned short> > __thiscall std::num_get<unsigned short,class std::istreambuf_iterator<unsigned short,struct std::char_traits<unsigned short> > >::do_get(class std::istreambuf_iterator<unsigned short,struct std::char_traits<unsigned short> >,class std::istreambuf_iterator<unsigned short,struct std::char_traits<unsigned short> >,class std::ios_base &,int &,unsigned int &) const'
+C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\xlocnum(469) : warning C4018: '<=' : signed/unsigned mismatch
+        C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\xlocnum(460) : while compiling class-template member function 'class std::ostreambuf_iterator<char,struct std::char_traits<char> > __thiscall std::num_put<char,class std::ostreambuf_iterator<char,struct std::char_traits<char> > >::do_put(class std::ostreambuf_iterator<char,struct std::char_traits<char> >,class std::ios_base &,char,bool) const'
+C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\xlocnum(469) : warning C4018: '<=' : signed/unsigned mismatch
+        C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\xlocnum(460) : while compiling class-template member function 'class std::ostreambuf_iterator<unsigned short,struct std::char_traits<unsigned short> > __thiscall std::num_put<unsigned short,class std::ostreambuf_iterator<unsigned short,struct std::char_traits<unsigned short> > >::do_put(class std::ostreambuf_iterator<unsigned short,struct std::char_traits<unsigned short> >,class std::ios_base &,unsigned short,bool) const'
+C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\streambuf(181) : warning C4100: '_Loc' : unreferenced formal parameter
+        C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\streambuf(182) : while compiling class-template member function 'void __thiscall std::basic_streambuf<char,struct std::char_traits<char> >::imbue(const class std::locale &)'
+C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\streambuf(181) : warning C4100: '_Loc' : unreferenced formal parameter
+        C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\streambuf(182) : while compiling class-template member function 'void __thiscall std::basic_streambuf<unsigned short,struct std::char_traits<unsigned short> >::imbue(const class std::locale &)'
+C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\xlocnum(543) : warning C4018: '<=' : signed/unsigned mismatch
+        C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\xlocnum(542) : while compiling class-template member function 'class std::ostreambuf_iterator<char,struct std::char_traits<char> > __cdecl std::num_put<char,class std::ostreambuf_iterator<char,struct std::char_traits<char> > >::_Fput(class std::ostreambuf_iterator<char,struct std::char_traits<char> >,class std::ios_base &,char,const char *,unsigned int,unsigned int)'
+C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\xlocnum(599) : warning C4018: '<' : signed/unsigned mismatch
+        C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\xlocnum(588) : while compiling class-template member function 'class std::ostreambuf_iterator<char,struct std::char_traits<char> > __cdecl std::num_put<char,class std::ostreambuf_iterator<char,struct std::char_traits<char> > >::_Iput(class std::ostreambuf_iterator<char,struct std::char_traits<char> >,class std::ios_base &,char,char *,unsigned int)'
+C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\xlocnum(606) : warning C4018: '<=' : signed/unsigned mismatch
+        C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\xlocnum(588) : while compiling class-template member function 'class std::ostreambuf_iterator<char,struct std::char_traits<char> > __cdecl std::num_put<char,class std::ostreambuf_iterator<char,struct std::char_traits<char> > >::_Iput(class std::ostreambuf_iterator<char,struct std::char_traits<char> >,class std::ios_base &,char,char *,unsigned int)'
+C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\xlocnum(543) : warning C4018: '<=' : signed/unsigned mismatch
+        C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\xlocnum(542) : while compiling class-template member function 'class std::ostreambuf_iterator<unsigned short,struct std::char_traits<unsigned short> > __cdecl std::num_put<unsigned short,class std::ostreambuf_iterator<unsigned short,struct std::char_traits<unsigned short> > >::_Fput(class std::ostreambuf_iterator<unsigned short,struct std::char_traits<unsigned short> >,class std::ios_base &,unsigned short,const char *,unsigned int,unsigned int)'
+C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\xlocnum(599) : warning C4018: '<' : signed/unsigned mismatch
+        C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\xlocnum(588) : while compiling class-template member function 'class std::ostreambuf_iterator<unsigned short,struct std::char_traits<unsigned short> > __cdecl std::num_put<unsigned short,class std::ostreambuf_iterator<unsigned short,struct std::char_traits<unsigned short> > >::_Iput(class std::ostreambuf_iterator<unsigned short,struct std::char_traits<unsigned short> >,class std::ios_base &,unsigned short,char *,unsigned int)'
+C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\xlocnum(606) : warning C4018: '<=' : signed/unsigned mismatch
+        C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\xlocnum(588) : while compiling class-template member function 'class std::ostreambuf_iterator<unsigned short,struct std::char_traits<unsigned short> > __cdecl std::num_put<unsigned short,class std::ostreambuf_iterator<unsigned short,struct std::char_traits<unsigned short> > >::_Iput(class std::ostreambuf_iterator<unsigned short,struct std::char_traits<unsigned short> >,class std::ios_base &,unsigned short,char *,unsigned int)'
+C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\fstream(71) : warning C4097: typedef-name '_Mysb' used as synonym for class-name 'basic_streambuf<char,struct std::char_traits<char> >'
+        C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\fstream(71) : while compiling class-template member function '__thiscall std::basic_filebuf<char,struct std::char_traits<char> >::std::basic_filebuf<char,struct std::char_traits<char> >(struct _iobuf *)'
+C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\fstream(219) : warning C4097: typedef-name '_Mysb' used as synonym for class-name 'basic_filebuf<char,struct std::char_traits<char> >::basic_streambuf<char,struct std::char_traits<char> >'
+        C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\fstream(213) : while compiling class-template member function 'void __thiscall std::basic_filebuf<char,struct std::char_traits<char> >::_Init(struct _iobuf *,enum std::basic_filebuf<char,struct std::char_traits<char> >::_Initfl)'
+C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\fstream(221) : warning C4097: typedef-name '_Mysb' used as synonym for class-name 'basic_filebuf<char,struct std::char_traits<char> >::basic_streambuf<char,struct std::char_traits<char> >'
+        C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\fstream(213) : while compiling class-template member function 'void __thiscall std::basic_filebuf<char,struct std::char_traits<char> >::_Init(struct _iobuf *,enum std::basic_filebuf<char,struct std::char_traits<char> >::_Initfl)'
+C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\fstream(219) : warning C4097: typedef-name '_Mysb' used as synonym for class-name 'basic_filebuf<unsigned short,struct std::char_traits<unsigned short> >::basic_streambuf<unsigned short,struct std::char_traits<unsigned short> >'
+        C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\fstream(213) : while compiling class-template member function 'void __thiscall std::basic_filebuf<unsigned short,struct std::char_traits<unsigned short> >::_Init(struct _iobuf *,enum std::basic_filebuf<unsigned short,struct std::char_traits<unsigned short> >::_Initfl)'
+C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\fstream(221) : warning C4097: typedef-name '_Mysb' used as synonym for class-name 'basic_filebuf<unsigned short,struct std::char_traits<unsigned short> >::basic_streambuf<unsigned short,struct std::char_traits<unsigned short> >'
+        C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\fstream(213) : while compiling class-template member function 'void __thiscall std::basic_filebuf<unsigned short,struct std::char_traits<unsigned short> >::_Init(struct _iobuf *,enum std::basic_filebuf<unsigned short,struct std::char_traits<unsigned short> >::_Initfl)'
+C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\xlocale(204) : warning C4244: '=' : conversion from 'unsigned int' to 'char', possible loss of data
+        C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\xlocnum(151) : see reference to function template instantiation 'int __cdecl std::_Getloctxt(class std::istreambuf_iterator<char,struct std::char_traits<char> > &,class std::istreambuf_iterator<char,struct std::char_traits<char> > &,unsigned int,const char *)' being compiled
+C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\xlocale(207) : warning C4244: '=' : conversion from 'unsigned int' to 'char', possible loss of data
+        C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\xlocnum(151) : see reference to function template instantiation 'int __cdecl std::_Getloctxt(class std::istreambuf_iterator<char,struct std::char_traits<char> > &,class std::istreambuf_iterator<char,struct std::char_traits<char> > &,unsigned int,const char *)' being compiled
+C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\xlocale(204) : warning C4244: '=' : conversion from 'unsigned int' to 'char', possible loss of data
+        C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\xlocnum(151) : see reference to function template instantiation 'int __cdecl std::_Getloctxt(class std::istreambuf_iterator<unsigned short,struct std::char_traits<unsigned short> > &,class std::istreambuf_iterator<unsigned short,struct std::char_traits<unsigned short> > &,unsigned int,const unsigned short *)' being compiled
+C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\xlocale(207) : warning C4244: '=' : conversion from 'unsigned int' to 'char', possible loss of data
+        C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\xlocnum(151) : see reference to function template instantiation 'int __cdecl std::_Getloctxt(class std::istreambuf_iterator<unsigned short,struct std::char_traits<unsigned short> > &,class std::istreambuf_iterator<unsigned short,struct std::char_traits<unsigned short> > &,unsigned int,const unsigned short *)' being compiled
+imageIO.cpp
+C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\xmemory(39) : warning C4100: '_P' : unreferenced formal parameter
+C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\xmemory(41) : warning C4100: '_P' : unreferenced formal parameter
+C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\xlocale(296) : warning C4663: C++ language change: to explicitly specialize class template 'codecvt' use the following syntax:
+        template<> class codecvt<unsigned short,char,int> ...
+C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\xlocale(387) : warning C4018: '<' : signed/unsigned mismatch
+C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\xlocale(519) : warning C4663: C++ language change: to explicitly specialize class template 'ctype' use the following syntax:
+        template<> class ctype<char> ...
+C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\xlocale(552) : warning C4100: '_D' : unreferenced formal parameter
+C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\xlocale(554) : warning C4100: '_D' : unreferenced formal parameter
+C:\edm\vss\MAG_Decompressor\imageIO.cpp(38) : warning C4018: '!=' : signed/unsigned mismatch
+C:\edm\vss\MAG_Decompressor\imageIO.cpp(47) : warning C4100: 'len' : unreferenced formal parameter
+C:\edm\vss\MAG_Decompressor\imageIO.cpp(47) : warning C4100: 'newBuffer' : unreferenced formal parameter
+C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\xlocale(277) : warning C4100: '_State' : unreferenced formal parameter
+        C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\xlocale(280) : while compiling class-template member function 'int __thiscall std::codecvt<char,char,int>::do_in(int &,const char *,const char *,const char *& ,char *,char *,char *& ) const'
+C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\xlocale(282) : warning C4100: '_State' : unreferenced formal parameter
+        C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\xlocale(285) : while compiling class-template member function 'int __thiscall std::codecvt<char,char,int>::do_out(int &,const char *,const char *,const char *& ,char *,char *,char *& ) const'
+C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\xlocale(289) : warning C4018: '<' : signed/unsigned mismatch
+        C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\xlocale(289) : while compiling class-template member function 'int __thiscall std::codecvt<char,char,int>::do_length(int &,const char *,const char *,unsigned int) const'
+C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\xlocale(287) : warning C4100: '_State' : unreferenced formal parameter
+        C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\xlocale(289) : while compiling class-template member function 'int __thiscall std::codecvt<char,char,int>::do_length(int &,const char *,const char *,unsigned int) const'
+C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\xlocnum(179) : warning C4146: unary minus operator applied to unsigned type, result still unsigned
+        C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\xlocnum(168) : while compiling class-template member function 'class std::istreambuf_iterator<char,struct std::char_traits<char> > __thiscall std::num_get<char,class std::istreambuf_iterator<char,struct std::char_traits<char> > >::do_get(class std::istreambuf_iterator<char,struct std::char_traits<char> >,class std::istreambuf_iterator<char,struct std::char_traits<char> >,class std::ios_base &,int &,unsigned short &) const'
+C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\xlocnum(194) : warning C4146: unary minus operator applied to unsigned type, result still unsigned
+        C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\xlocnum(183) : while compiling class-template member function 'class std::istreambuf_iterator<char,struct std::char_traits<char> > __thiscall std::num_get<char,class std::istreambuf_iterator<char,struct std::char_traits<char> > >::do_get(class std::istreambuf_iterator<char,struct std::char_traits<char> >,class std::istreambuf_iterator<char,struct std::char_traits<char> >,class std::ios_base &,int &,unsigned int &) const'
+C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\xlocnum(179) : warning C4146: unary minus operator applied to unsigned type, result still unsigned
+        C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\xlocnum(168) : while compiling class-template member function 'class std::istreambuf_iterator<unsigned short,struct std::char_traits<unsigned short> > __thiscall std::num_get<unsigned short,class std::istreambuf_iterator<unsigned short,struct std::char_traits<unsigned short> > >::do_get(class std::istreambuf_iterator<unsigned short,struct std::char_traits<unsigned short> >,class std::istreambuf_iterator<unsigned short,struct std::char_traits<unsigned short> >,class std::ios_base &,int &,unsigned short &) const'
+C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\xlocnum(194) : warning C4146: unary minus operator applied to unsigned type, result still unsigned
+        C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\xlocnum(183) : while compiling class-template member function 'class std::istreambuf_iterator<unsigned short,struct std::char_traits<unsigned short> > __thiscall std::num_get<unsigned short,class std::istreambuf_iterator<unsigned short,struct std::char_traits<unsigned short> > >::do_get(class std::istreambuf_iterator<unsigned short,struct std::char_traits<unsigned short> >,class std::istreambuf_iterator<unsigned short,struct std::char_traits<unsigned short> >,class std::ios_base &,int &,unsigned int &) const'
+C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\xlocnum(469) : warning C4018: '<=' : signed/unsigned mismatch
+        C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\xlocnum(460) : while compiling class-template member function 'class std::ostreambuf_iterator<char,struct std::char_traits<char> > __thiscall std::num_put<char,class std::ostreambuf_iterator<char,struct std::char_traits<char> > >::do_put(class std::ostreambuf_iterator<char,struct std::char_traits<char> >,class std::ios_base &,char,bool) const'
+C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\xlocnum(469) : warning C4018: '<=' : signed/unsigned mismatch
+        C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\xlocnum(460) : while compiling class-template member function 'class std::ostreambuf_iterator<unsigned short,struct std::char_traits<unsigned short> > __thiscall std::num_put<unsigned short,class std::ostreambuf_iterator<unsigned short,struct std::char_traits<unsigned short> > >::do_put(class std::ostreambuf_iterator<unsigned short,struct std::char_traits<unsigned short> >,class std::ios_base &,unsigned short,bool) const'
+C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\streambuf(181) : warning C4100: '_Loc' : unreferenced formal parameter
+        C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\streambuf(182) : while compiling class-template member function 'void __thiscall std::basic_streambuf<char,struct std::char_traits<char> >::imbue(const class std::locale &)'
+C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\streambuf(181) : warning C4100: '_Loc' : unreferenced formal parameter
+        C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\streambuf(182) : while compiling class-template member function 'void __thiscall std::basic_streambuf<unsigned short,struct std::char_traits<unsigned short> >::imbue(const class std::locale &)'
+C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\xlocnum(543) : warning C4018: '<=' : signed/unsigned mismatch
+        C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\xlocnum(542) : while compiling class-template member function 'class std::ostreambuf_iterator<char,struct std::char_traits<char> > __cdecl std::num_put<char,class std::ostreambuf_iterator<char,struct std::char_traits<char> > >::_Fput(class std::ostreambuf_iterator<char,struct std::char_traits<char> >,class std::ios_base &,char,const char *,unsigned int,unsigned int)'
+C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\xlocnum(599) : warning C4018: '<' : signed/unsigned mismatch
+        C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\xlocnum(588) : while compiling class-template member function 'class std::ostreambuf_iterator<char,struct std::char_traits<char> > __cdecl std::num_put<char,class std::ostreambuf_iterator<char,struct std::char_traits<char> > >::_Iput(class std::ostreambuf_iterator<char,struct std::char_traits<char> >,class std::ios_base &,char,char *,unsigned int)'
+C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\xlocnum(606) : warning C4018: '<=' : signed/unsigned mismatch
+        C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\xlocnum(588) : while compiling class-template member function 'class std::ostreambuf_iterator<char,struct std::char_traits<char> > __cdecl std::num_put<char,class std::ostreambuf_iterator<char,struct std::char_traits<char> > >::_Iput(class std::ostreambuf_iterator<char,struct std::char_traits<char> >,class std::ios_base &,char,char *,unsigned int)'
+C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\xlocnum(543) : warning C4018: '<=' : signed/unsigned mismatch
+        C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\xlocnum(542) : while compiling class-template member function 'class std::ostreambuf_iterator<unsigned short,struct std::char_traits<unsigned short> > __cdecl std::num_put<unsigned short,class std::ostreambuf_iterator<unsigned short,struct std::char_traits<unsigned short> > >::_Fput(class std::ostreambuf_iterator<unsigned short,struct std::char_traits<unsigned short> >,class std::ios_base &,unsigned short,const char *,unsigned int,unsigned int)'
+C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\xlocnum(599) : warning C4018: '<' : signed/unsigned mismatch
+        C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\xlocnum(588) : while compiling class-template member function 'class std::ostreambuf_iterator<unsigned short,struct std::char_traits<unsigned short> > __cdecl std::num_put<unsigned short,class std::ostreambuf_iterator<unsigned short,struct std::char_traits<unsigned short> > >::_Iput(class std::ostreambuf_iterator<unsigned short,struct std::char_traits<unsigned short> >,class std::ios_base &,unsigned short,char *,unsigned int)'
+C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\xlocnum(606) : warning C4018: '<=' : signed/unsigned mismatch
+        C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\xlocnum(588) : while compiling class-template member function 'class std::ostreambuf_iterator<unsigned short,struct std::char_traits<unsigned short> > __cdecl std::num_put<unsigned short,class std::ostreambuf_iterator<unsigned short,struct std::char_traits<unsigned short> > >::_Iput(class std::ostreambuf_iterator<unsigned short,struct std::char_traits<unsigned short> >,class std::ios_base &,unsigned short,char *,unsigned int)'
+C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\xlocale(204) : warning C4244: '=' : conversion from 'unsigned int' to 'char', possible loss of data
+        C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\xlocnum(151) : see reference to function template instantiation 'int __cdecl std::_Getloctxt(class std::istreambuf_iterator<char,struct std::char_traits<char> > &,class std::istreambuf_iterator<char,struct std::char_traits<char> > &,unsigned int,const char *)' being compiled
+C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\xlocale(207) : warning C4244: '=' : conversion from 'unsigned int' to 'char', possible loss of data
+        C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\xlocnum(151) : see reference to function template instantiation 'int __cdecl std::_Getloctxt(class std::istreambuf_iterator<char,struct std::char_traits<char> > &,class std::istreambuf_iterator<char,struct std::char_traits<char> > &,unsigned int,const char *)' being compiled
+C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\xlocale(204) : warning C4244: '=' : conversion from 'unsigned int' to 'char', possible loss of data
+        C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\xlocnum(151) : see reference to function template instantiation 'int __cdecl std::_Getloctxt(class std::istreambuf_iterator<unsigned short,struct std::char_traits<unsigned short> > &,class std::istreambuf_iterator<unsigned short,struct std::char_traits<unsigned short> > &,unsigned int,const unsigned short *)' being compiled
+C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\xlocale(207) : warning C4244: '=' : conversion from 'unsigned int' to 'char', possible loss of data
+        C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\xlocnum(151) : see reference to function template instantiation 'int __cdecl std::_Getloctxt(class std::istreambuf_iterator<unsigned short,struct std::char_traits<unsigned short> > &,class std::istreambuf_iterator<unsigned short,struct std::char_traits<unsigned short> > &,unsigned int,const unsigned short *)' being compiled
+ntserv.cpp
+StdAfx.cpp
+Linking...
+
+
+
+<h3>Results</h3>
+MAG_Decompressor.exe - 0 error(s), 130 warning(s)
+</pre>
+</body>
+</html>

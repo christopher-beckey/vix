@@ -1,0 +1,71 @@
+<studies>
+	<study>
+		<alternateExamNumber>05168404</alternateExamNumber>
+		<captureDate/>
+		<capturedBy/>
+		<description>CHEST (PA AND LAT) from Silver 1008689457V473963 200</description>
+		<dicomUid>1.2.840.113845.11.1000000001951524609.20100412022832.2188568</dicomUid>
+		<event/>
+		<firstImage>
+			<description>CHEST (PA AND LAT) from Silver 1008689457V473963 200</description>
+			<diagnosticImageUri>imageURN=urn:vaimage:660-26732Mock-SR.dcm-1008861107V475740-1606681530-SR&amp;imageQuality=90&amp;contentType=application/dicom/image/j2k,image/j2k,application/dicom,image/x-targa,*/*&amp;contentTypeWithSubType=application/dicom/image/j2k,image/j2k,application/dicom,image/x-targa,*/*</diagnosticImageUri>
+			<dicomImageNumber>1</dicomImageNumber>
+			<dicomSequenceNumber/>
+			<dicomUid>1.2.840.113845.11.5000000001951524609.20150125033414.1575135</dicomUid>
+			<imageId>urn:vaimage:660-26732Mock-SR.dcm-1008861107V475740-1606681530-SR</imageId>
+			<imageModality>SR</imageModality>
+			<imageNumber>1</imageNumber>
+			<imageStatus>Viewable (no status)</imageStatus>
+			<imageType>DICOM</imageType>
+			<imageViewStatus>Viewable (no status)</imageViewStatus>
+			<referenceImageUri>imageURN=urn:vaimage:660-26732Mock-SR.dcm-1008861107V475740-1606681530-SR&amp;imageQuality=70&amp;contentType=application/dicom/image/j2k,image/j2k,application/dicom,image/x-targa,*/*&amp;contentTypeWithSubType=application/dicom/image/j2k,image/j2k,application/dicom,image/x-targa,*/*</referenceImageUri>
+			<sensitive>false</sensitive>
+			<thumbnailImageUri>imageURN=urn:vaimage:660-26732Mock-SR.dcm-1008861107V475740-1606681530-SR&amp;imageQuality=20&amp;contentType=image/jpeg,image/x-targa,image/bmp,*/*</thumbnailImageUri>
+		</firstImage>
+		<firstImageId>urn:vaimage:660-26732Mock-SR.dcm-1008861107V475740-1606681530-SR</firstImageId>
+		<imageCount>1</imageCount>
+		<package/>
+		<type/>
+		<noteTitle/>
+		<origin>DOD</origin>
+		<patientId>icn(1606681530)</patientId>
+		<patientName>IPOACKIES QUENTIN W</patientName>
+		<procedureDate>2005-12-02T09:55:00-05:00</procedureDate>
+		<procedureDescription>SR</procedureDescription>
+		<sensitive>false</sensitive>
+		<serieses>
+			<series>
+				<images>
+					<image>
+						<description>CHEST (PA AND LAT)                             .</description>
+						<diagnosticImageUri>imageURN=urn:vaimage:660-26732Mock-SR.dcm-1008861107V475740-1606681530-SR&amp;imageQuality=90&amp;contentType=application/dicom/image/j2k,image/j2k,application/dicom,image/x-targa,*/*&amp;contentTypeWithSubType=application/dicom/image/j2k,image/j2k,application/dicom,image/x-targa,*/*</diagnosticImageUri>
+						<dicomImageNumber>1</dicomImageNumber>
+						<dicomSequenceNumber/>
+						<dicomUid>1.2.840.113845.11.5000000001951524609.20150125033414.1575135</dicomUid>
+						<imageId>urn:vaimage:660-26732Mock-SR.dcm-1008861107V475740-1606681530-SR</imageId>
+						<imageModality>SR</imageModality>
+						<imageNumber>1</imageNumber>
+						<imageStatus>Viewable (no status)</imageStatus>
+						<imageType>DICOM</imageType>
+						<imageViewStatus>Viewable (no status)</imageViewStatus>
+						<referenceImageUri>imageURN=urn:vaimage:660-26732Mock-SR.dcm-1008861107V475740-1606681530-SR&amp;imageQuality=70&amp;contentType=application/dicom/image/j2k,image/j2k,application/dicom,image/x-targa,*/*&amp;contentTypeWithSubType=application/dicom/image/j2k,image/j2k,application/dicom,image/x-targa,*/*</referenceImageUri>
+						<sensitive>false</sensitive>
+						<thumbnailImageUri>imageURN=urn:vaimage:660-26732Mock-SR.dcm-1008861107V475740-1606681530-SR&amp;imageQuality=20&amp;contentType=image/jpeg,image/x-targa,image/bmp,*/*</thumbnailImageUri>
+					</image>
+				</images>
+				<modality>SR</modality>
+				<seriesNumber/>
+				<seriesUid>1.2.840.113845.11.2000000001951524609.20150125033414.1595347</seriesUid>
+			</series>
+		</serieses>
+		<siteAbbreviation>DOD</siteAbbreviation>
+		<siteName/>
+		<siteNumber>200</siteNumber>
+		<specialtyDescription/>
+		<studyClass/>
+		<studyId>urn:vaimage:660-26732Mock-SR.dcm-1008861107V475740-1606681530-SR</studyId>
+		<studyModalities>SR</studyModalities>
+		<studyPackage/>
+		<studyType/>
+	</study>
+</studies>

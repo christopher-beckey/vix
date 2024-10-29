@@ -1,0 +1,247 @@
+MAGDFND2 ;WOIFO/PMK - DICOM FIND Handler ; 26 Jul 2010 10:34 AM
+ ;;3.0;IMAGING;**1,10,30,51,50,54,53,49**;Mar 19, 2002;Build 2201;Jun 29, 2011
+ ;; Per VHA Directive 2004-038, this routine should not be modified.
+ ;; +---------------------------------------------------------------+
+ ;; | Property of the US Government.                                |
+ ;; | No permission to copy or redistribute this software is given. |
+ ;; | Use of unreleased versions of this software requires the user |
+ ;; | to execute a written test agreement with the VistA Imaging    |
+ ;; | Development Office of the Department of Veterans Affairs,     |
+ ;; | telephone (301) 734-0100.                                     |
+ ;; | The Food and Drug Administration classifies this software as  |
+ ;; | a medical device.  As such, it may not be changed in any way. |
+ ;; | Modifications to this software may result in an adulterated   |
+ ;; | medical device under 21CFR820, the use of which is considered |
+ ;; | to be a violation of US Federal Statutes.                     |
+ ;; +---------------------------------------------------------------+
+ ;;
+ Q
+ ;
+ENTRY ; entry point to process a C-FIND request
+ N ACNFMT,CASENUMB,DIVISION,ERR,ERRMSG,IMAGTYPE,ISITE,ITYPE,KEY,MATCHES,MODALITY
+ N PID,PNAME,PNAMEZZZ,PROCSTEP,RECIPENT,REQPRPRI,SCHSDYDT,SEQUENCE,SERVICE,SPSLOC
+ N SSNFMT,STARTDT,STATION,STOPDT,STUDYIEN,WARD,WLSTIEN,Y,Z
+ D MESSAGE^MAGDMLOG(2,0,"MAGDFND2 called...","BV")
+ S ERR=0
+ D SEQINIT^MAGDFCNS
+ D KEY,CHECK
+ I ERR G FAILURE^MAGDFND9
+ K ^TMP("MAG",$J,"DICOM","MATCH") S MATCHES=0
+ S ISITE=0 F  S ISITE=$O(^MAGDICOM(2006.583,WLSTIEN,1,ISITE)) Q:'ISITE  D
+ . S DIVISION=^MAGDICOM(2006.583,WLSTIEN,1,ISITE,0)
+ . D SEARCH
+ . Q
+ I ERR G FAILURE^MAGDFND9
+ D COUNT^MAGDWLP3(STATION,MATCHES) ; record the number of matches
+ D ENTRY^MAGDFND3
+ Q
+ ;
+SEARCH ; do the appropriate search
+ S MODALITY=$G(KEY("MODALITY"))
+ I "<unknown>"'[$G(KEY("STUDY INSTANCE UID")) D  Q  ; study instance uid
+ . D STUDYUID
+ . Q
+ I "<unknown>"'[$G(KEY("ACCESSION NUMBER")) D  Q  ; accession #
+ . S CASENUMB=KEY("ACCESSION NUMBER")
+ . D ACNSRCH
+ . Q
+ I "<unknown>"'[$G(KEY("REQUESTED PROCEDURE ID")) D  Q  ; same as above
+ . S CASENUMB=KEY("REQUESTED PROCEDURE ID")
+ . D ACNSRCH
+ . Q
+ S PID=$TR($G(KEY("PATIENT ID")),"-") ; remove dashes from patient id (ssn)
+ I "<unknown>"'[PID D  Q
+ . ; search the worklist patient file by id (ssn)
+ . I PID?1A4N D  ; search by quick id (Annnn)
+ . . S X=PID X ^%ZOSF("UPPERCASE") S PID=Y
+ . . D PATSRCH3("E",PID)
+ . . Q
+ . E  D  ; search the worklist patient file by id
+ . . D PATSRCH3("D",PID)
+ . . Q
+ . Q
+ I "<unknown>"'[$G(KEY("PATIENT NAME")) D  Q
+ . N PATTERN
+ . S X=KEY("PATIENT NAME") X ^%ZOSF("UPPERCASE") S PNAME=Y
+ . I (PNAME?1A4N."^")!(PNAME?1A4N."^*") D  ; search by Short ID (Annnn)
+ . . D PATSRCH3("E",$E(PNAME,1,5))
+ . . Q
+ . E  D  ; search the worklist patient file by name
+ . . S X=$$PATTERN^MAGDFND0(PNAME_"*",.PATTERN,.PNAME,.PNAMEZZZ)
+ . . F  S PNAME=$O(^MAGDWLST(2006.55,DIVISION,1,"C",PNAME)) Q:PNAME=""  Q:PNAME]PNAMEZZZ  D
+ . . . I X,PNAME'?@PATTERN Q  R "  (miss)",Z:$G(DTIME,300) ; name does not match
+ . . . D PATSRCH3("C",PNAME)
+ . . . Q
+ . . Q
+ . Q
+ ; search the worklist study file for matches
+ D RANGE^MAGDFND0($G(KEY("DATE")),$G(KEY("TIME")),.STARTDT,.STOPDT)
+ ; search the worklist study file for one modality
+ I DIVISION="" Q
+ S SCHSDYDT=STARTDT
+ ; select the appropriate cross reference
+ ; queries with date range uses "G" (scheduled), otherwise uses "E" (time of last event)
+ S XREF=$S(STARTDT:"G",STOPDT<9999999:"G",1:"E")
+ F  S SCHSDYDT=$O(^MAGDWLST(2006.56,DIVISION,1,XREF,SERVICE,IMAGTYPE,SCHSDYDT)) Q:SCHSDYDT=""  Q:SCHSDYDT>STOPDT  D
+ . S STUDYIEN=""
+ . F  S STUDYIEN=$O(^MAGDWLST(2006.56,DIVISION,1,XREF,SERVICE,IMAGTYPE,SCHSDYDT,STUDYIEN)) Q:STUDYIEN=""  D FOUNDONE
+ . Q
+ Q
+ ;
+KEY ; get the key values to do the search
+ K KEY
+ D GETKEY("PATIENT NAME","0010,0010") ; required matching key
+ D GETKEY("PATIENT ID","0010,0020") ; required matching key
+ D GETKEY("ACCESSION NUMBER","0008,0050") ; optional matching key
+ D GETKEY("REQUESTED PROCEDURE ID","0040,1001") ; optional matching key
+ D GETKEY("STUDY INSTANCE UID","0020,000D") ; optional matching key
+ ;
+ ; is there a Scheduled Procedure Step Sequence?
+ S X=$O(^TMP("MAG",$J,"DICOM",INODE,"0040,0100"))
+ S PROCSTEP=($P(X,".")="0040,0100") ; 1=yes, 0=no
+ Q:'PROCSTEP  ; no Scheduled Procedure Step Sequence
+ ;
+ D SEQPUSH^MAGDFCNS("0040,0100") ; scheduled procedure step sequence
+ D GETKEY("MODALITY","0008,0060") ; required matching key
+ D GETKEY("STATION AE TITLE","0040,0001") ; required matching key
+ D GETKEY("DATE","0040,0002") ; required matching key
+ D GETKEY("TIME","0040,0003") ; required matching key
+ D GETKEY("PERFORMING PHYSICIAN","0040,0006") ; required matching key
+ D SEQPOP^MAGDFCNS
+ Q
+ ;
+CHECK ; check the key attributes for legitimate values
+ I "<unknown>"[$G(KEY("STATION AE TITLE")) D
+ . ; use the association's calling AE TITLE as the default value
+ . S KEY("STATION AE TITLE")=^TMP("MAG",$J,"DICOM","NEGOTIATE","REQUEST","CALLING AE")
+ . Q
+ ;
+ S X=KEY("STATION AE TITLE") X ^%ZOSF("UPPERCASE") S STATION=Y
+ D COUNT^MAGDWLP3(STATION) ; log the beginning of the query
+ S WLSTIEN=$O(^MAGDICOM(2006.583,"B",STATION,0))
+ I WLSTIEN="" D  Q
+ . S ERRMSG="Unknown STATION AE TITLE:"_KEY("STATION AE TITLE")
+ . D ERROR("0040,0001",ERRMSG,2002)
+ . Q
+ ;
+ S X=^MAGDICOM(2006.583,WLSTIEN,0),SERVICE=$P(X,"^",3)
+ S IMAGTYPE=$P(X,"^",4),ACNFMT=$P(X,"^",5),SSNFMT=$P(X,"^",7)
+ ;
+ I $G(KEY("ACCESSION NUMBER"))'=$TR($G(KEY("ACCESSION NUMBER")),"*?","") D  Q
+ . S ERRMSG="Wild Cards may not be used for ACCESSION NUMBER"
+ . D ERROR("0008,0050",ERRMSG,2003)
+ . Q
+ ;
+ I $G(KEY("REQUESTED PROCEDURE ID"))'=$TR($G(KEY("REQUESTED PROCEDURE ID")),"*?","") D  Q
+ . S ERRMSG="Wild Cards can't be used for REQUESTED PROCEDURE ID"
+ . D ERROR("0040,1001",ERRMSG,2004)
+ . Q
+ ;
+ I $G(KEY("STUDY INSTANCE UID"))'=$TR($G(KEY("STUDY INSTANCE UID")),"*?","") D  Q
+ . S ERRMSG="Wild Cards can't be used for STUDY INSTANCE UID"
+ . D ERROR("0040,1001",ERRMSG,2005)
+ . Q
+ ;
+ I $G(KEY("MODALITY"))'=$TR($G(KEY("MODALITY")),"*?","") D  Q
+ . S ERRMSG="Wild Cards may not be used for MODALITY"
+ . D ERROR("0008,0060",ERRMSG,2006)
+ . Q
+ ;
+ I $G(KEY("PATIENT ID"))'=$TR($G(KEY("PATIENT ID")),"*?","") D  Q
+ . S ERRMSG="Wild Cards may not be used for PATIENT ID"
+ . D ERROR("0010,0020",ERRMSG,2007)
+ . Q
+ ;
+ I KEY("STATION AE TITLE")'=$TR(KEY("STATION AE TITLE"),"*?","") D  Q
+ . S ERRMSG="Wild Cards may not be used for STATION AE TITLE"
+ . D ERROR("0040,0001",ERRMSG,2008)
+ . Q
+ ;
+ I "<unknown>"'[$G(KEY("PERFORMING PHYSICIAN")) D  Q
+ . S ERRMSG="Matching the PERFORMING PHYSICIAN key is not supported"
+ . D ERROR("0040,0006",ERRMSG,2009)
+ . Q
+ Q
+ ;
+GETKEY(NAME,TAG) ; get one key field of data, if present
+ N SS0
+ S SS0=$S(SEQUENCE="":TAG,1:SEQUENCE_"^"_TAG)
+ I $D(^TMP("MAG",$J,"DICOM",INODE,SS0,1,1)) D  ; get the data
+ . S KEY(NAME)=^TMP("MAG",$J,"DICOM",INODE,SS0,1,1)
+ . I KEY(NAME)="*" S KEY(NAME)="<unknown>" ; suppress lone wild cards
+ . I KEY(NAME)="**" S KEY(NAME)="<unknown>" ; suppress paired wild cards
+ . Q
+ Q
+ ;
+FOUNDONE ; found one study matching the criteria
+ N DFN
+ I '$$MODCHECK() Q
+ S DFN=$P($G(^MAGDWLST(2006.56,DIVISION,1,STUDYIEN,0)),"^",2) Q:'DFN
+ S MATCHES=MATCHES+1
+ S ^TMP("MAG",$J,"DICOM","MATCH",DIVISION,DFN,STUDYIEN)=""
+ Q
+ ;
+MODCHECK() ; check if the study's modality equals the instrument's modality
+ ; returns 1 if the instrument's modality is unknown
+ ; returns 2 if the procedure ^RAMIS(71,...) does not specify a modality
+ ; returns 3 if the modality is the same as that specified in ^RAMIS(71)
+ ; returns 0 if the some other modality is specified in ^RAMIS(71)
+ N X
+ I MODALITY="<unknown>" Q 1 ; instrument's modality is unknown
+ S X=$P($G(^MAGDWLST(2006.56,DIVISION,1,STUDYIEN,0)),"^",10)
+ I X="" Q 2 ; study's modality is unknown
+ I X[MODALITY Q 3 ; instrument and study modalities match
+ Q 0
+ ;
+STUDYUID ; study instance uid search
+ S STUDYIEN=$O(^MAGDWLST(2006.56,"F",KEY("STUDY INSTANCE UID"),DIVISION,""))
+ I STUDYIEN D FOUNDONE
+ Q
+ ;
+ACNSRCH ; Either accession number search  (mmddyy-CASE#)
+ ; or case number search (case#)
+ N ANY,C,M,S,SUID,XR
+ I CASENUMB?1N.N,$L(CASENUMB)>6 D  ; autogenerate "-" in date case numb
+ . ; Dr. Gale has a NM device that runs a test on a patient over several
+ . ; days.  He need to use MWL, date case number lookup, but can't enter
+ . ; the "-" in the case number.  This allows him to enter just numbers.
+ . S CASENUMB=$E(CASENUMB,1,6)_"-"_$E(CASENUMB,7,999)
+ . Q
+ S X=CASENUMB X ^%ZOSF("UPPERCASE") S CASENUMB=Y ; for "gmrc"
+ S XR=$S(CASENUMB["-":$S($L(CASENUMB,"-")=3:"H",1:"C"),1:"D"),ANY=0
+ S S="^MAGDWLST(2006.56,"_DIVISION_",1,"""_XR_""","""_SERVICE_""",LOOP)"
+ S M=$$MATCHD^MAGOSMSC(CASENUMB,S,"SUID(LOOP)")
+ S C="" F  S C=$O(SUID(C)) Q:C=""  D
+ . S STUDYIEN=$O(^MAGDWLST(2006.56,DIVISION,1,XR,SERVICE,C,""))
+ . D:STUDYIEN FOUNDONE S ANY=1
+ . Q
+ ; Lookup study on main hospital information system
+ ; only for full accession when there were no matches
+ I 'ANY,CASENUMB["-" S:'MATCHES MATCHES="VistA"
+ Q
+ ;
+PATSRCH3(XREF,KEY) ; add patient & study entries to the list
+ N DFN,S0
+ S DFN=""
+ F  S DFN=$O(^MAGDWLST(2006.55,DIVISION,1,XREF,KEY,DFN)) Q:DFN=""  D
+ . ; found one patient matching the criteria
+ . S STUDYIEN=""
+ . F  S STUDYIEN=$O(^MAGDWLST(2006.56,DIVISION,1,"S",DFN,STUDYIEN)) Q:STUDYIEN=""  D
+ . . S S0=$G(^MAGDWLST(2006.56,DIVISION,1,STUDYIEN,0))
+ . . I $P(S0,"^",1)=SERVICE,$P(S0,"^",11)=IMAGTYPE D
+ . . . ; found right imaging service and image type
+ . . . S MATCHES=MATCHES+1
+ . . . S ^TMP("MAG",$J,"DICOM","MATCH",DIVISION,DFN,STUDYIEN)=""
+ . . . Q
+ . . Q
+ . Q
+ Q
+ ;
+ERROR(ERRTAG,MSG,NUMBER) ; generate an error response
+ D SAVE^MAGDFCNS("0000,0900",$$HEX2DEC^MAGOSMSC("C000")) ; Status
+ D SAVE^MAGDFCNS("0000,0901",ERRTAG) ; Offending Element
+ D SAVE^MAGDFCNS("0000,0902","VistA Error: "_MSG) ; Error Comment
+ D SAVE^MAGDFCNS("0000,0903",NUMBER) ; Error ID
+ S ERR=1
+ Q
+ ;

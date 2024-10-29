@@ -1,0 +1,135 @@
+MAGDDR2 ;WOIFO/PMK - Program to read a DICOM file ; 02 Apr 2009 12:06 PM
+ ;;3.0;IMAGING;**10,11,30,54**;MAR 19, 2002;;OCT 28, 2009
+ ;; Per VHA Directive 2004-038, this routine should not be modified.
+ ;; +---------------------------------------------------------------+
+ ;; | Property of the US Government.                                |
+ ;; | No permission to copy or redistribute this software is given. |
+ ;; | Use of unreleased versions of this software requires the user |
+ ;; | to execute a written test agreement with the VistA Imaging    |
+ ;; | Development Office of the Department of Veterans Affairs,     |
+ ;; | telephone (301) 734-0100.                                     |
+ ;; | The Food and Drug Administration classifies this software as  |
+ ;; | a medical device.  As such, it may not be changed in any way. |
+ ;; | Modifications to this software may result in an adulterated   |
+ ;; | medical device under 21CFR820, the use of which is considered |
+ ;; | to be a violation of US Federal Statutes.                     |
+ ;; +---------------------------------------------------------------+
+ ;;
+ ; PACS Interface -- read DICOM files (routine #2)
+ ;
+ENTRY ; entry point to read the DICOM file
+ N BYTEORDR ;- byte order for message, always little endian
+ N DCMFILE ;-- Flag: file name ends in .DCM
+ N ELEMENT,EOF,EXPLICIT,GROUP,GROUP2,MSGNUMB,OFFSET,PREFIX,STATUS,STOP
+ N OWNERID ;- id number associated with the owner of a private group
+ N PIXBITS ;-- number of bits in a pixel
+ N PIXELREP ;- pixel representation, for determining signed or unsigned
+ N SEQEND ;--- Sequence end indicator array
+ N SEQIEND ;-- Sequence item end indicator array
+ N SEQNUMB ;-- nesting level of DICOM sequence; set in MSGINIT^MAGDFCNS
+ N SEQUENCE ;- DICOM nesting subscript sequence; set in MSGINIT^MAGDFCNS
+ N XFERUID ;-- transfer syntax UID
+ N XFERUIDN ;- transfer syntax UID name
+ N I
+ ;
+ S BYTEORDR="L" ; Little Endian
+ D SEQINIT^MAGDFCNS
+ D  ; check if it is a known DICOM file type
+ . N L
+ . S L=$L(QUEUEIN("FILE"))
+ . S DCMFILE=0
+ . I ($TR($E(QUEUEIN("FILE"),L-3,L),"DCM","dcm")=".dcm") S DCMFILE=1
+ . E  I $E(QUEUEIN("FILE"),L-8,L)="CSTORE.IN" S DCMFILE=1
+ . E  I $E(QUEUEIN("FILE"),L-11,L)="INCOMING.PDU" S DCMFILE=1
+ . Q
+ S EOF=0,MSGNUMB=0,STOP=0
+ K ^TMP("MAG",$J,"DICOM",INODE) ; target global
+ ; try OPEN three times - work around for a possible race condition
+ F I=1:1:3 S STATUS=$$OPEN^MAGOSFIL(QUEUEIN("FILE"),"B") Q:STATUS'<0  H 1
+ I STATUS<0 D
+ . N M
+ . S M="Could not open file """_QUEUEIN("FILE")_""" for Binary Read."
+ . W:$$USEPRIN^MAGOSFIL(1) !!!,M,!,STATUS
+ . S $EC=",U"_M_","
+ . Q  ; Error trap does not return
+ ; check for DICOM Part-10 header
+ S STATUS=$$USE^MAGOSFIL(QUEUEIN("FILE"))
+ S OFFSET=$$SEEK^MAGOSFIL(QUEUEIN("FILE"),128) ; skip file preamble
+ R PREFIX#4 ; read file prefix
+ I PREFIX="DICM" D  ; Part-10 DICOM file
+ . N DONE
+ . S EXPLICIT=1 ; explicit VR mode
+ . ; read Part 10 header and get transfer syntax for rest of message
+ . S DONE=0
+ . F GROUP2=1:1:11 D  Q:EOF!DONE!STOP  ; max of ten elements in Part 10
+ . . S STATUS=$$USE^MAGOSFIL(QUEUEIN("FILE"))
+ . . ; get byte offset to start of field
+ . . S OFFSET=$$GETOFSET^MAGOSFIL(QUEUEIN("FILE"))
+ . . I OFFSET'<FILESIZE S EOF=1,STATUS=$$USE^MAGDFCNS(ODEVTYPE,ODEVNAME) Q
+ . . D AT^MAGDDR0(.GROUP,.ELEMENT) ; read attribute tag
+ . . I GROUP'="0002" D  S DONE=1 Q
+ . . . S XFERUID=$$GETDATA^MAGDFCNS(INODE,"0002,0010",1,1)
+ . . . S XFERUIDN=$$GETNAME^MAGDUID2(XFERUID) ; get name
+ . . . I XFERUIDN="Implicit VR Little Endian" S EXPLICIT=0
+ . . . ; reset file pointer
+ . . . S OFFSET=$$SEEK^MAGOSFIL(QUEUEIN("FILE"),OFFSET)
+ . . . Q
+ . . D READGRP2^MAGDDR2A
+ . . Q
+ . Q
+ E  I 'DCMFILE D  Q
+ . S STATUS=$$CLOSE^MAGOSFIL(QUEUEIN("FILE"))
+ . I $$USEPRIN^MAGOSFIL(1)
+ . N MSG
+ . I '$D(FBSWITCH) N FBSWITCH S FBSWITCH="FOREGROUND" ; default
+ . S MSG(1)=""""_QUEUEIN("FILE")
+ . S MSG(1)=MSG(1)_""" is not a valid DICOM (Part-10) file."
+ . D MESSAGE^MAGDMLOG(2,0,.MSG,"B")
+ . Q
+ E  D  ; assume raw DICOM dataset, not Part-10 file
+ . N VR
+ . S STATUS=$$USE^MAGOSFIL(QUEUEIN("FILE"))
+ . S OFFSET=$$SEEK^MAGOSFIL(QUEUEIN("FILE"),4) ; check first VR field
+ . R VR#2 ; assume the file is explicit VR and read the VR field
+ . S EXPLICIT=VR?2A ; if alpha, then explicit, otherwise implicit
+ . S STATUS=$$USE^MAGOSFIL(QUEUEIN("FILE"))
+ . S OFFSET=$$SEEK^MAGOSFIL(QUEUEIN("FILE"),0) ; reset file pointer
+ . Q
+ I 'EOF F  D READITEM Q:EOF!STOP  ; read the rest of the message
+ S STATUS=$$CLOSE^MAGOSFIL(QUEUEIN("FILE"))
+ I $$USEPRIN^MAGOSFIL(1)
+ Q
+ ;
+READITEM ; read each item in the DICOM coded file
+ N DONE
+ I EXPLICIT S EXPLICIT=1 ; can be change to -1 for sequence items
+ S STATUS=$$USE^MAGOSFIL(QUEUEIN("FILE"))
+ ; get byte offset to start of field
+ S OFFSET=$$GETOFSET^MAGOSFIL(QUEUEIN("FILE"))
+ I OFFSET'<FILESIZE S EOF=1,STATUS=$$USE^MAGDFCNS(ODEVTYPE,ODEVNAME) Q
+ ;
+ ; pop explicit length sequence items and sequences off the stack
+ S DONE=0 F  D  Q:DONE!STOP  ; loop through nested sequences
+ . ; check for end of explicit length sequence item
+ . I $D(SEQIEND(SEQNUMB)),SEQIEND(SEQNUMB)'>OFFSET D SQIE^MAGDDR3
+ . ; check for end of explicit length sequence
+ . I $D(SEQEND(SEQNUMB)),SEQEND(SEQNUMB)'>OFFSET D SQE^MAGDDR3 Q
+ . S DONE=1 ; end the loop when all sequences have been popped off stack
+ . Q
+ ;
+ D AT^MAGDDR0(.GROUP,.ELEMENT) ; read attribute tag
+ D READGRP2^MAGDDR2A
+ Q
+ ;
+NEXTLINE ; format a new line of output
+ D NEWLINE Q:STOP
+ W $$HEX^MAGDDR0(OFFSET,6),":",GROUP,",",ELEMENT
+ Q
+ ;
+NEWLINE ; output a <carriage return> <line feed> with scrolling control
+ W ! Q:ODEVTYPE'="SCREEN"  Q:$Y<23
+ N I,X
+ W "more..." R X:DTIME F I=1:1:$X W $C(8,32,8)
+ S $Y=0 Q:X=""
+ S:$TR(X,"quitexnQUITEXN","^^^^^^^^^^^^^^")["^" STOP=1
+ Q

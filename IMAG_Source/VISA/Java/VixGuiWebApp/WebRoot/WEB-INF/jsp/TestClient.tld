@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!-- a tag library descriptor -->
+<taglib version="2.0" xmlns="http://java.sun.com/xml/ns/j2ee"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-jsptaglibrary_2_0.xsd">
+ <description>A tag handler library for displaying Study information in the Test Client</description>
+ <tlib-version>1.0</tlib-version>
+ <short-name>testClientTags</short-name>
+ <uri>http://imaging.med.va.gov/vix/testclient</uri>
+ <tag>
+  <description>A Study list parent element for studies acquired through the Clinical Display Interface</description>
+  <name>ClinicalDisplayStudyListTag</name>
+  <tag-class>gov.va.med.imaging.exchange.business.taglib.study.ClinicalDisplayStudyListTag</tag-class>
+  <body-content>JSP</body-content>
+  <attribute>
+   <description>The site number to send the request to, will default to the local site</description>
+   <name>targetSiteNumber</name>
+   <rtexprvalue>false</rtexprvalue>
+   <type>java.lang.String</type>
+  </attribute>
+  <attribute>
+   <description>The site number of the requested results</description>
+   <name>siteNumber</name>
+   <required>true</required>
+   <rtexprvalue>false</rtexprvalue>
+   <type>java.lang.String</type>
+  </attribute>
+  <attribute>
+   <description>The patient identifier</description>
+   <name>patientId</name>
+   <required>true</required>
+   <rtexprvalue>false</rtexprvalue>
+   <type>java.lang.String</type>
+  </attribute>
+  <attribute>
+   <name>fromDate</name>
+   <rtexprvalue>false</rtexprvalue>
+   <type>java.lang.String</type>
+  </attribute>
+  <attribute>
+   <name>toDate</name>
+   <rtexprvalue>false</rtexprvalue>
+   <type>java.lang.String</type>
+  </attribute>
+  <attribute>
+   <name>studyId</name>
+   <rtexprvalue>false</rtexprvalue>
+   <type>java.lang.String</type>
+  </attribute>
+  <attribute>
+   <name>studyPackage</name>
+   <rtexprvalue>false</rtexprvalue>
+   <type>java.lang.String</type>
+  </attribute>
+  <attribute>
+   <name>studyClass</name>
+   <rtexprvalue>false</rtexprvalue>
+   <type>java.lang.String</type>
+  </attribute>
+  <attribute>
+   <name>studyType</name>
+   <rtexprvalue>false</rtexprvalue>
+   <type>java.lang.String</type>
+  </attribute>
+  <attribute>
+   <name>studyEvent</name>
+   <rtexprvalue>false</rtexprvalue>
+   <type>java.lang.String</type>
+  </attribute>
+  <attribute>
+   <name>studySpecialty</name>
+   <rtexprvalue>false</rtexprvalue>
+   <type>java.lang.String</type>
+  </attribute>
+  <attribute>
+   <name>originId</name>
+   <rtexprvalue>false</rtexprvalue>
+   <type>java.lang.String</type>
+  </attribute>
+ </tag>
+ <tag>
+  <description>A Study list parent element for studies acquired through the Exchange Interface</description>
+  <name>ExchangeStudyListTag</name>
+  <tag-class>gov.va.med.imaging.exchange.business.taglib.study.ExchangeStudyListTag</tag-class>
+  <body-content>JSP</body-content>
+  <attribute>
+   <description>The site number to send the request to, will default to the local site</description>
+   <name>targetSiteNumber</name>
+   <rtexprvalue>false</rtexprvalue>
+   <type>java.lang.String</type>
+  </attribute>
+  <attribute>
+   <description>The site number of the requested results</description>
+   <name>siteNumber</name>
+   <required>true</required>
+   <rtexprvalue>false</rtexprvalue>
+   <type>java.lang.String</type>
+  </attribute>
+  <attribute>
+   <description>The patient identifier</description>
+   <name>patientId</name>
+   <required>true</required>
+   <rtexprvalue>false</rtexprvalue>
+   <type>java.lang.String</type>
+  </attribute>
+  <attribute>
+   <name>fromDate</name>
+   <rtexprvalue>false</rtexprvalue>
+   <type>java.lang.String</type>
+  </attribute>
+  <attribute>
+   <name>toDate</name>
+   <rtexprvalue>false</rtexprvalue>
+   <type>java.lang.String</type>
+  </attribute>
+  <attribute>
+   <name>studyId</name>
+   <rtexprvalue>false</rtexprvalue>
+   <type>java.lang.String</type>
+  </attribute>
+ </tag>
+ <tag>
+  <description>A Study list parent element for studies acquired through the Federation Interface</description>
+  <name>FederationStudyListTag</name>
+  <tag-class>gov.va.med.imaging.exchange.business.taglib.study.FederationStudyListTag</tag-class>
+  <body-content>JSP</body-content>
+  <attribute>
+   <description>The site number to send the request to, will default to the local site</description>
+   <name>targetSiteNumber</name>
+   <rtexprvalue>false</rtexprvalue>
+   <type>java.lang.String</type>
+  </attribute>
+  <attribute>
+   <description>The site number of the requested results</description>
+   <name>siteNumber</name>
+   <required>true</required>
+   <rtexprvalue>false</rtexprvalue>
+   <type>java.lang.String</type>
+  </attribute>
+  <attribute>
+   <description>The patient identifier</description>
+   <name>patientId</name>
+   <required>true</required>
+   <rtexprvalue>false</rtexprvalue>
+   <type>java.lang.String</type>
+  </attribute>
+  <attribute>
+   <name>fromDate</name>
+   <rtexprvalue>false</rtexprvalue>
+   <type>java.lang.String</type>
+  </attribute>
+  <attribute>
+   <name>toDate</name>
+   <rtexprvalue>false</rtexprvalue>
+   <type>java.lang.String</type>
+  </attribute>
+  <attribute>
+   <name>studyId</name>
+   <rtexprvalue>false</rtexprvalue>
+   <type>java.lang.String</type>
+  </attribute>
+ </tag>
+ <tag>
+  <name>AWIVDocumentSetListTag</name>
+  <tag-class>gov.va.med.imaging.exchange.business.taglib.study.AWIVDocumentSetListTag</tag-class>
+  <body-content>JSP</body-content>
+  <attribute>
+   <description>The patient identification</description>
+   <name>patientId</name>
+   <required>true</required>
+   <rtexprvalue>true</rtexprvalue>
+   <type>java.lang.String</type>
+  </attribute>
+  <attribute>
+   <description>The home community ID to direct the request to (defaults to HAIMS)</description>
+   <name>homeCommunityId</name>
+   <rtexprvalue>true</rtexprvalue>
+   <type>java.lang.String</type>
+  </attribute>
+  <attribute>
+   <description>The repository ID to direct the request to (defaults to all within the given community)</description>
+   <name>repositoryUniqueId</name>
+   <rtexprvalue>true</rtexprvalue>
+   <type>java.lang.String</type>
+  </attribute>
+  <attribute>
+   <description>The beginning of the date range that documents must fall within</description>
+   <name>creationTimeFrom</name>
+   <rtexprvalue>true</rtexprvalue>
+   <type>java.lang.String</type>
+  </attribute>
+  <attribute>
+   <description>The end of the date range that documents must fall within</description>
+   <name>creationTimeTo</name>
+   <rtexprvalue>true</rtexprvalue>
+   <type>java.lang.String</type>
+  </attribute>
+  <attribute>
+   <description>The class code that the requested documents must fall within</description>
+   <name>classCode</name>
+   <rtexprvalue>true</rtexprvalue>
+   <type>java.lang.String</type>
+  </attribute>
+ </tag>
+</taglib>

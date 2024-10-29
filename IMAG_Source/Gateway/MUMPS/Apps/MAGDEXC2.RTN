@@ -1,0 +1,164 @@
+MAGDEXC2 ;WOIFO/PMK - DICOM, Handler for Exam Complete request, part 2 ; 19 Dec 2008 3:33 PM
+ ;;3.0;IMAGING;**11,69,54**;MAR 19, 2002;;OCT 28, 2009
+ ;; Per VHA Directive 2004-038, this routine should not be modified.
+ ;; +---------------------------------------------------------------+
+ ;; | Property of the US Government.                                |
+ ;; | No permission to copy or redistribute this software is given. |
+ ;; | Use of unreleased versions of this software requires the user |
+ ;; | to execute a written test agreement with the VistA Imaging    |
+ ;; | Development Office of the Department of Veterans Affairs,     |
+ ;; | telephone (301) 734-0100.                                     |
+ ;; | The Food and Drug Administration classifies this software as  |
+ ;; | a medical device.  As such, it may not be changed in any way. |
+ ;; | Modifications to this software may result in an adulterated   |
+ ;; | medical device under 21CFR820, the use of which is considered |
+ ;; | to be a violation of US Federal Statutes.                     |
+ ;; +---------------------------------------------------------------+
+ ;;
+ Q
+ ;
+ENTRY ; entry point to process an EXAM COMPLETE request sent by PACS
+ S ENTRY="REENTRY^MAGDEXC2"
+ S PROMPT="Ready to issue PACS image transfer requests?"
+ G SETUP^MAGDSTRT
+ ;
+REENTRY ; Re-entry point from ^MAGDSTRT
+ N TICKER ;--- ticker counter for idle loop
+ ;
+ S FBSWITCH="FOREGROUND"
+ D NEWLOG^MAGDMLOG("Exam Complete Request Handler")
+ D MESSAGE^MAGDMLOG(1,0,"Exam Complete Request Handler (Job #"_$J_") Started","BV")
+ ;
+ ; big do forever loop!
+ ;
+ S WAIT=0
+ F  D
+ . N CHANNEL ;-- number "n" of the "\DICOM\DATAn" message directory
+ . N DONEFLAG ;- flag indicating that the transmission is completed
+ . N FILEMODE ;- either "FIFO QUEUE" (for PACS) or "DIRECT" (for MWL)
+ . N INCOMING ;- file path for the incoming DICOM request
+ . N OUTGOING ;- file path for the outgoing DICOM response
+ . N PDUIN ;---- the file path for the incoming Protocol Data Unit
+ . N PDUOUT ;--- the file path for the outgoing Protocol Data Unit
+ . N PORT ;----- TCP/IP port number for the destination AE
+ . N PRIORITY ;- may be either IMMEDIATE, HIGH, MEDIUM, or LOW
+ . N ROLE ;----- designated role, either SCP or SCU
+ . N MSGDATE ;-- message date (yyyymmdd format)
+ . N MSGTIME ;-- message time (24-hhmmss format)
+ . N MSGTYPE ;-- type of HL7 message (ADT, ORM, ORU, SCH, etc.)
+ . N MSGDT ;---- message date and time (scratch variable)
+ . N MSGHANDL ;- pointer in DICOM message to HL7 message number
+ . N SEQNUMB ;-- nesting level of DICOM sequence
+ . N SEQUENCE ;- DICOM nesting subscript sequence
+ . N SITE ;----- facility's three-digit identifier code
+ . N UID ;------ DICOM Unique IDentifier array
+ . N UIDTYPE ;-- type of UID (patient, visit, study, or interp)
+ . N PNAME ;---- patient name
+ . N STUDYDAT ;- study date from GE ACR-NEMA message
+ . N QUEUEIN ;-- input file array
+ . N QUEUEOUT ;- output file array
+ . N ACNUMB ;--- accession number ; must be null in GE C-MOVE Request
+ . N PID ;------ patient identifier ; must be null in GE C-MOVE Request
+ . N STUDYUID ;- Study Instance UID ; the key for the GE C-MOVE Request
+ . ;
+ . N COMPLETE,I,NEXTIEN,STATUS,TOTAL
+ . ;
+ . ; check for available space before proceeding
+ . I $$DISKFREE^MAGDACP3()<-1 D  Q  ; out of disk space
+ . . W !,"Insufficient disk space to store images.  Waiting 10 minutes."
+ . . ; wait 10 minutes for disk space to become available
+ . . F I=1:1:600 D IDLE^MAGDBB(.TICKER,1,1)
+ . . Q
+ . ;
+ . I $G(^MAGDICOM(2006.563,1,"COMMERCIAL PACS"))="EMED" D
+ . . D ACTIVATE^MAGDEXC1 ; for eMed PACS requiring a delay before C-MOVE
+ . . Q
+ . ;
+ . S NEXTIEN=+$G(^MAGDINPT(2006.572,"ACOUNT"))+1
+ . I NEXTIEN>$P($G(^MAGDINPT(2006.572,0)),"^",3) D  Q  ; nothing to do
+ . . D IDLE^MAGDBB(.TICKER,1,1)
+ . . Q
+ . S COMPLETE=$G(^MAGDINPT(2006.572,NEXTIEN,0))
+ . I 'COMPLETE D  Q
+ . . I WAIT D IDLE^MAGDBB(.TICKER,1,1)
+ . . E  W !,"Waiting for ^MAGDINPT(2006.572,",NEXTIEN,")" S WAIT=1 H 1
+ . . Q
+ . S WAIT=0
+ . S ACNUMB=$G(^MAGDINPT(2006.572,NEXTIEN,"A_ACNUMB"))
+ . S PNAME=$G(^MAGDINPT(2006.572,NEXTIEN,"A_PNAME"))
+ . S PID=$G(^MAGDINPT(2006.572,NEXTIEN,"A_PID"))
+ . S STUDYUID=$G(^MAGDINPT(2006.572,NEXTIEN,"A_STUDYUID"))
+ . ; *** STUDYUID should not be null  ;LB 9/25/98  ***
+ . S DONEFLAG=0 I STUDYUID'="" D  Q:'DONEFLAG
+ . . D BUILDMSG ; construct the C-MOVE Request
+ . . D SENDMSG ; send the C-MOVE Request to the PACS
+ . . I 'DONEFLAG D  Q
+ . . . D MESSAGE^MAGDMLOG(1,0,"C-MOVE Request not completed, trying again...","BTV")
+ . . . Q
+ . . Q
+ . I DONEFLAG<0 D  Q
+ . . D TRAPERR^MAGDSTRT(1,$T(+0),"FATAL ERROR IN SENDMSG","")
+ . . Q  ; Error trap does not return
+ . ; remove completed entry from ^MAGDINPT
+ . K ^MAGDINPT(2006.572,NEXTIEN)
+ . S ^MAGDINPT(2006.572,"ACOUNT")=NEXTIEN
+ . L +^MAGDINPT(2006.572,"COUNT"):1E9 ; serialize update counter
+ . S $P(^MAGDINPT(2006.572,0),"^",4)=$P(^MAGDINPT(2006.572,0),"^",4)-1
+ . L -^MAGDINPT(2006.572,"COUNT") ; clear the serialization
+ . Q
+ Q
+ ;
+BUILDMSG ; construct a C-MOVE Request message to send to the PACS
+ N CMOVEAET ;- C-MOVE Request destination Application Entity Title
+ N MESSAGE ;-- name of type of message being generated
+ N MULTIMSG ;- multiple message flag (null, "OPEN", or "CLOSE")
+ S CHANNEL=1
+ D INIT^MAGDTLOG ; initialize the message log
+ D INIT^MAGDQUE3 ; initialization for DIRECT FILEMODE
+ D INIT^MAGDQRU0 ; initialize variables for C-FIND/MOVE
+ S QUEUEIN("FILE")=INCOMING,QUEUEOUT("FILE")=OUTGOING
+ D MSTUDY^MAGDQRU0
+ S CMOVEAET=$G(^MAGDICOM(2006.563,1,"MOVE DESTINATION AE TITLE"))
+ S:CMOVEAET="" CMOVEAET="VISTA_STORAGE"
+ D SAVE^MAGDFCNS("0000,0600",CMOVEAET) ; move destination
+ D SAVE^MAGDFCNS("0008,0050",ACNUMB) ; accession number
+ D SAVE^MAGDFCNS("0010,0010",PNAME) ; patient's name
+ D SAVE^MAGDFCNS("0010,0020",PID) ; patient id
+ D SAVE^MAGDFCNS("0020,000D",STUDYUID) ; study instance uid
+ S FILEMODE="DIRECT",MULTIMSG="" D REQUEST^MAGDDW1
+ S MESSAGE="QUERY/RETRIEVE (C-MOVE)"
+ D COUNT^MAGDAUD2 ; update audit record
+ Q
+ ;
+SENDMSG ; send the C-MOVE Request message to the PACS
+ ; Initiate the connection with the SOP Class Provider
+ N USERAPP ; -- SCU_LIST.DIC name of service class user application
+ S USERAPP="PACS QUERY/RETRIEVE"
+ D ENTRY^MAGDACU1
+ Q
+ ;
+RESPONSE ; entry point from ^MAGDQUE4 when a C-MOVE Response is received
+ N COMPLETE ;- number of image transfers completed
+ N FAILED ;--- number of image transfers that failed (hopefully, none)
+ N REMAIN ;--- number of image transfers still remaining to be done
+ N STATUS ;--- status field in the message
+ N WARNING ;-- number of completed image transfers with warning
+ N SUID ;----- Study UID
+ N X
+ S STATUS=+$$GETDATA^MAGDFCNS(INODE,"0000,0900")
+ S STATUS=$$DEC2HEX^MAGOSMSC(STATUS)
+ S REMAIN=$$GETDATA^MAGDFCNS(INODE,"0000,1020")
+ S COMPLETE=$$GETDATA^MAGDFCNS(INODE,"0000,1021")
+ S FAILED=$$GETDATA^MAGDFCNS(INODE,"0000,1022")
+ S WARNING=$$GETDATA^MAGDFCNS(INODE,"0000,1023")
+ S X="C-MOVE Response Received   Status="_STATUS_"  R:"_REMAIN
+ S X=X_"  C:"_COMPLETE_"  F:"_FAILED_"  W:"_WARNING
+ I $G(MAGGEMIG) S SUID=$$GETDATA^MAGDFCNS(INODE,"0020,000D") D:SUID'=""
+ . Q:REMAIN  Q:FAILED  Q:WARNING
+ . K ^MAGDINPT(2006.572,"GE",SUID)
+ . D ADD^MAGDGEX1("GE CONV #IMG",COMPLETE)
+ . Q
+ D MESSAGE^MAGDMLOG(1,0,X,"BV")
+ I REMAIN Q  ; there is still more work to do
+ S DONEFLAG=1 ; indicate the all the work is completed
+ Q

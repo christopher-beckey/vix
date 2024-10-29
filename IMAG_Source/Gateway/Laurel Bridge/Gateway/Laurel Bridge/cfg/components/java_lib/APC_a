@@ -1,0 +1,54 @@
+#==============================================================================
+# static information common to all instances of APC_a component
+#==============================================================================
+[ component_info ]
+name = APC_a
+type = java_lib
+category = common_service_implementation_libs
+description = Application Control Adapter - java reference implementation of APC interface
+package_prefix = com.lbs
+slnreldir = .\jsrc\com\lbs\APC_a
+
+[ required_components ]
+component = java_lib/DCF
+component = java_lib/LOG
+component = java_lib/APC
+component = java_lib/CDS
+[ debug_controls ]
+debug_flag = df_SHOW_CONSTRUCTORS, 0x0001, show object constructors
+debug_flag = df_SHOW_DESTRUCTORS, 0x0002, show object destructors
+debug_flag = df_SHOW_GENERAL_FLOW, 0x0004, show general flow
+debug_flag = df_SIMULATE_HARDWARE, 0x0008, simulate external devices
+debug_flag = df_SHOW_CFG_INFO, 0x0010, show configuration information
+debug_flag = df_SHOW_EXC_THROW, 0x0020, show exceptions before throwing
+
+#==============================================================================
+# per-instance information for the APC_a component
+#==============================================================================
+[ APC_a ]
+debug_flags = 0x00000
+
+# If true, proc configuration will be saved in CDS CFGDB.
+save_proc_cfg_in_cds = true
+
+# If true, <proc_cfg>/application_info/execution_state attribute
+# will be monitored for a shutdown request 
+# (not supported if CFGDB is in FSys Mode)
+handle_external_shutdown_rq = true
+
+# If true, <proc_cfg> will be observed, and re-loaded if it changes
+# (not supported if CFGDB is in FSys Mode)
+observe_proc_cfg = false
+
+# If true, the value passed to AppControl.shutdown() will be saved in
+# the proc config - usually delete_proc_cfg is set to false with this.
+save_exit_status_in_proc_cfg = false
+
+# If true, the proc config object in CDS is deleted during shutdown
+delete_proc_cfg = true
+
+# Specify the TCP-IP host address that will identify CORBA server
+# objects hosted by this process. The value 0.0.0.0 will result
+# in the default address being used. This controls the value of
+# property com.sun.CORBA.ORBServerHost.
+orb_server_host = 0.0.0.0

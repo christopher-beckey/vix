@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<build xmlns="http://va.gov/VistA/kids/manifest" name="MAG*3.0*122" patchName="VistA Imaging V3.0 - Patch 122" patch="122">
+  <components>
+    <securityKeys>
+      <securityKey export="KEY_MAG_ANNOTATE_MGR.KID" />
+    </securityKeys>
+    <parameterDefinitions>
+      <parameterDefinition export="PARM_DEF_MAG_IMAGE_ALLOW_ANNOTATE.KID" />
+    </parameterDefinitions>
+    <printTemplates />
+    <sortTemplates />
+    <menuOptions />
+    <rpcs>
+      <rpc export="RPC_MAG_ANNOT_GET_IMAGE.KID" />
+      <rpc export="RPC_MAG_ANNOT_GET_IMAGE_DETAIL.KID" />
+      <rpc export="RPC_MAG_ANNOT_IMAGE_ALLOW.KID" />
+      <rpc export="RPC_MAG_ANNOT_STORE_IMAGE_DETAIL.KID" />
+      <rpc export="RPC_MAG_DICOM_GET_AGENCY.KID" />
+    </rpcs>
+    <dataDictionaries>
+      <dataDictionary export="DD_2005_002_P122.KID" />
+      <dataDictionary export="DD_2006_18_P122.KID" />
+    </dataDictionaries>
+    <hl7s />
+    <routines>
+      <routine export="MAGDRPC1.RTN" />
+      <routine export="MAGGA03Q.RTN" />
+      <routine export="MAGGAII.RTN" />
+      <routine export="MAGGI12.RTN" />
+      <routine export="MAGGI13.RTN" />
+      <routine export="MAGGNTI.RTN" />
+      <routine export="MAGGTPT1.RTN" />
+      <routine export="MAGGTRPT.RTN" />
+      <routine export="MAGGTU4C.RTN" />
+      <routine export="MAGGTU4D.RTN" />
+      <routine export="MAGGTU4L.RTN" />
+      <routine export="MAGGTU4T.RTN" />
+      <routine export="MAGGTUP.RTN" />
+      <routine export="MAGIP122.RTN" />
+      <routine export="MAGSANNO.RTN" />
+      <routine export="MAGSPID.RTN" />
+    </routines>
+    <protocols />
+  </components>
+</build>

@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<VixConfigurationParameters xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <ProductVersion>deprecated</ProductVersion>
+  <PreviousProductVersion>deprecated</PreviousProductVersion>
+  <RenamedDeprecatedDcfRoot>C:\DCF_RunTime_x64_3_3_40c</RenamedDeprecatedDcfRoot>
+  <VixRole>SiteVix</VixRole>
+  <ApacheTomcatPassword1>8AbjBLDaY75WqoF4eMcasUv_VVGtFr-kJU8QO5jJLpo=</ApacheTomcatPassword1>
+  <VixCacheSize>20</VixCacheSize>
+  <VixCacheOption>ExchangeTimeEvictionLocalFilesystem</VixCacheOption>
+  <VixDeploymentOption>SingleServer</VixDeploymentOption>
+  <VixServerName1>vac10cvxhie611.va.gov/VixServerName1>
+  <VixDeploymentOptionServer1>Deprecated</VixDeploymentOptionServer1>
+  <VixDeploymentOptionServer2>Deprecated</VixDeploymentOptionServer2>
+  <FederationKeystorePassword>_BfwDLTeUVbD5MN06Pg1UfjMpfeWkxg=</FederationKeystorePassword>
+  <FederationTruststorePassword>40ayE7raRv4u-_TOh9p_PsV1Cm-NTi-H</FederationTruststorePassword>
+  <SiteAbbreviation>CHY</SiteAbbreviation>
+  <SiteName>Cheyenne, WY (IPO1)</SiteName>
+  <SiteNumber>451</SiteNumber>
+  <SiteServiceUri>http://vac10cvxhie611.va.gov/VistaWebSvcs/ImagingExchangeSiteService.asmx</SiteServiceUri>
+  <BiaPassword>wxP1NbnLFOkNzeendIc0J8OsSAsWlSTW6yA=</BiaPassword>
+  <BiaUsername>xxf0DqCJFbwW6t5cPUSesrR4BMh42jnDvdZsZQ==</BiaUsername>
+  <ConfigDir>C:/VixConfig</ConfigDir>
+  <ConfigCheck>false</ConfigCheck>
+  <LocalCacheDir>C:/VixCache</LocalCacheDir>
+  <VixRenderCache>C:/VixRenderCache</VixRenderCache>
+  <VixCertStoreDir>C:/VixCertStore</VixCertStoreDir>
+  <TomcatArchiveDir>C:/ImagingArchivedLogs</TomcatArchiveDir>
+  <VixTxDbDir>C:/VixTxDb</VixTxDbDir>
+  <ProductVersion1>30.348.1.8903</ProductVersion1>
+  <PreviousProductVersion1>30.329.1.8911</PreviousProductVersion1>
+  <TomcatAdminPassword>40ayE7raRv4u-_TOh9p_PsV1Cm-NTi-H</TomcatAdminPassword>
+  <NotificationEmailAddresses>user1@va.gov</NotificationEmailAddresses>
+  <VistaAccessor>gkSyUpf9ex_P_YGEQPl_D_K6uMY6CuI=</VistaAccessor>
+  <VistaVerifier>g0aySb_QT-gPRFRsyczc6X2DGb9I14gf</VistaVerifier>
+  <IsLaurelBridgeRequired>true</IsLaurelBridgeRequired>
+  <VistaServerName>vaec.az1.che3.hie.va.gov</VistaServerName>
+  <VistaServerPort>9235</VistaServerPort>
+  <!--VIX support-->
+  <MuseEnabled>false</MuseEnabled>
+  <MuseSiteNum>***MUSE SITE NUMBER HERE***</MuseSiteNum>
+  <MuseHostname>***MUSE HOST HERE***</MuseHostname>
+  <MuseUsername>***MUSE USER HERE***</MuseUsername>
+  <MusePassword>***MUSE PWD HERE***</MusePassword>
+  <MusePort>8100</MusePort>
+  <MuseProtocol>http</MuseProtocol>   
+   <!--CVIX support-->
+  <DoDConnectorHost>das-sqa.va.gov</DoDConnectorHost>
+  <DoDConnectorPort>443</DoDConnectorPort>
+  <DoDConnectorLoinc>34794-8</DoDConnectorLoinc>
+  <DoDConnectorRequestSource>VADAS</DoDConnectorRequestSource>
+  <DoDConnectorProvider>123</DoDConnectorProvider>
+  <SitesFile>C:\SiteService\vhasites.xml</SitesFile> 
+  <Station200UserName>gkSyUpf9e7Ye-9AUPJ5b9XgFwETpBvgjyUpf7eJsA1-N_e0f5WQ=</Station200UserName>
+  <UseOpenSslForXCAConnector>true</UseOpenSslForXCAConnector>
+  <CvixHttpConnectorPort>80</CvixHttpConnectorPort>
+  <CvixHttpsConnectorPort>443</CvixHttpsConnectorPort>
+</VixConfigurationParameters>

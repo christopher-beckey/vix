@@ -1,0 +1,189 @@
+Cache for Windows NT^INT^Saved from DICOM (ISW-KUZMAKP3-LT)^~Format=Cache.S~
+%RO on 09/14/2012  16:24
+MAGDAIR6^INT^1^62714,59025^0
+MAGDAIR6 ;WOIFO/PMK - Automatic Import Reconciliation Workflow ; 14 Sep 2012 4:23 PM
+ ;;3.0;IMAGING;**53,123,110**;Mar 19, 2002;Build 48;Aug 23, 2012
+ ;; Per VHA Directive 2004-038, this routine should not be modified.
+ ;; +---------------------------------------------------------------+
+ ;; | Property of the US Government.                                |
+ ;; | No permission to copy or redistribute this software is given. |
+ ;; | Use of unreleased versions of this software requires the user |
+ ;; | to execute a written test agreement with the VistA Imaging    |
+ ;; | Development Office of the Department of Veterans Affairs,     |
+ ;; | telephone (301) 734-0100.                                     |
+ ;; | The Food and Drug Administration classifies this software as  |
+ ;; | a medical device.  As such, it may not be changed in any way. |
+ ;; | Modifications to this software may result in an adulterated   |
+ ;; | medical device under 21CFR820, the use of which is considered |
+ ;; | to be a violation of US Federal Statutes.                     |
+ ;; +---------------------------------------------------------------+
+ ;;
+NEWVALUE(NEWVALUE) ; get new data values for import reconciliation
+ N HOSTNAME,ISSUER,LITERAL,TAG,TEXT,USERDCM,VARIABLE
+ K NEWVALUE
+ S HOSTNAME=$$HOSTNAME^MAGOSMSC()
+ S USERDCM=$$PNAMEDCM^MAGDAIR0(USERNAME)
+ S ISSUER=$G(^MAGDICOM(2006.563,1,"ISSUER OF PATIENT ID"),$S($$ISIHS^MAGSPID():"USIHS",1:"USVHA"))  ;P123
+ F I=1:1 S TEXT=$P($T(ELEMENTS+I),";;",2,999) Q:TEXT="end"  D
+ . S TAG=$P(TEXT,";") Q:TAG=""
+ . S VARIABLE=$P(TEXT,";",3),LITERAL=$P(TEXT,";",4)
+ . I VARIABLE'="" S NEWVALUE(TAG)=@VARIABLE
+ . E  S NEWVALUE(TAG)=LITERAL
+ . Q
+ Q
+ ;
+ELEMENTS ; list of elements to output
+ ;;0008,0050;Accession Number;ACNUMB
+ ;;0010,0010;Patient's Name;PNAMEDCM
+ ;;0010,0020;Patient ID;PID
+ ;;0010,0021;Issuer of Patient ID;ISSUER
+ ;;0010,0030;Patient's Birth Date;DOB
+ ;;0010,0040;Patient's Sex;SEX
+ ;;0010,1000;Other Patient IDs;VAICN
+ ;;0018,A001#N.0008,0070;Manufacturer;;VistA Imaging
+ ;;0018,A001#N.0008,0080;Institution Name;^MAGDICOM(2006.563,1,"LOCATION NAME")
+ ;;0018,A001#N.0008,1010;Station Name;HOSTNAME
+ ;;0018,A001#N.0008,1070;Operators' Name;USERDCM
+ ;;0018,A001#N.0018,A002;Contribution DateTime;;${DATETIME}
+ ;;0018,A001#N.0040,A170#N.0008,0100;;;MEDIM
+ ;;0018,A001#N.0040,A170#N.0008,0102;;;DCM
+ ;;0018,A001#N.0040,A170#N.0008,0104;;;Portable Media Importer Equipment
+ ;;end
+ ;
+ ;
+ ;
+ONEIMAGE(IEN,NEWVALUE) ; process one image
+ N CMD ;------ shell command
+ N DCFPATH ;-- path to Laurel Bridge executable (for DCF_FILTER.EXE)
+ N DCMOUT ;--- path for reconciled DICOM file
+ N ERROR ;---- error return array for DOS^MAGDCMD
+ N FBSWITCH ;- foreground / midground / background flag for ^MAGDMLOG
+ N IMAGEIEN ;- ien of next entry in the image input queue for the reconciled object 
+ N IMGPATH ;-- image input path (typically C:DICOM\Image_In)
+ N INSTNAME ;- instrument name (in INSTRUMENT.DIC)
+ N PATH ;----- path to reconciled object in image input folder
+ N RECVFROM ;- Calling AE Title, if known
+ N TXTOUT ;--- path to DICOM attributes that will be changed
+ N VERBOSE ;-- flag that tells DOS^MAGDCMD to display commands on screen
+ N J,STATUS,X,Y
+ ; set SOP Instance UID to Study UID + date + time + UIDCOUNT
+ ;
+ S X=$$GETDATA^MAGDAIRD(IEN,"IEN",.DATA)
+ I DATA("PCONTEXT") Q  ; can't send this to VistA
+ ;
+ S X=$$FILECHK^MAGDAIR4(DATA("FROMPATH"))
+ I X<1 D  Q
+ . W !,$$HIGHLITE^MAGDAIR0("YELLOW","*** File cannot be imported due to error. ***")
+ . D CONTINUE^MAGDAIR0
+ . Q
+ ;
+ S FBSWITCH="FOREGROUND"
+ S VERBOSE=0
+ S DCFPATH=$$ENVIRON^MAGOSDIR("DCF_USER_ROOT")
+ S TXTOUT=^MAGDICOM(2006.563,1,"IMAGE OUTPUT PATH")_"\IMPORT_"_$J_".CFG"
+ S DCMOUT=^MAGDICOM(2006.563,1,"IMAGE OUTPUT PATH")_"\IMPORT_"_$J_".DCM"
+ S STATUS=$$OPEN^MAGOSFIL(TXTOUT,"W")
+ S STATUS=$$USE^MAGOSFIL(TXTOUT)
+ W "# Filters for Importer",!
+ W !
+ W "[ filter_1 ]",!
+ W "filter_class_name = com.lbs.DCS.DicomElementFilter",!
+ W "filter_type = DICOM_ELEMENT_FILTER",!
+ W "create_original_attributes_seq = TRUE",!
+ W "modifying_system = VistA Imaging DICOM Gateway",!
+ W "reason_for_the_attribute_modification = COERCE",!
+ I $L(DATA("CALLING")) D
+ . S Y="",X=$$UPPER^MAGOSMSC(DATA("CALLING"))
+ . S X=$O(^MAGDICOM(2006.588,"B",X,""))
+ . I X S Y=$P(^MAGDICOM(2006.588,X,0),"^",3)
+ . S RECVFROM=$S(Y'="":Y,1:DATA("CALLING"))
+ . Q
+ E  S RECVFROM="<unknown>"
+ W "source_of_previous_values = "_RECVFROM,!
+ W !
+ W "[ filter_1/elements_to_replace ]",!
+ S TAG="" F  S TAG=$O(NEWVALUE(TAG)) Q:TAG=""  D
+ . W TAG," = ",NEWVALUE(TAG),!
+ . Q
+ ;
+ ; This filter is to fix a bug in DCF Version < 3.3.2c where
+ ; element 0400,0565 was output with the wrong "LO" VR.
+ ; This changes it to type "CS" (from the DCF dictionary).
+ ; This filer was provided by Elliot.Lord@bcs-inc.com. 
+ W !
+ W "[ filter_2 ]",!
+ W "filter_class_name = com.lbs.DCS.DicomElementFilter",!
+ W "filter_type = DICOM_ELEMENT_FILTER",!
+ W "create_original_attributes_seq = FALSE",!
+ W "[ filter_2/elements_to_modify ]",!
+ W !
+ W "[ filter_2/elements_to_modify/1 ]",!
+ W "tag = 0400,0561.#L.0400,0565",!
+ W "old_value = (.*)",!
+ W "new_value = $1",!
+ W "move_to = 0400,0561.#L.0400,0565",!
+ W !,"# end of file",!
+ S STATUS=$$CLOSE^MAGOSFIL(TXTOUT)
+ S STATUS=$$USE^MAGOSFIL($P)
+ ;
+ S X=$$GETDATA^MAGDAIRD(IEN,"IEN",.DATA)
+ S DCMIN=DATA("FROMPATH")
+ S CMD=DCFPATH_"\bin\DCF_FILTER" ; need to use a null ext_data_dictionary
+ S CMD=CMD_" -apc cpp_lib/DCS/extended_data_dictionary=/dicom/importer_ext_data_dictionary"
+ S CMD=CMD_" -S -s -i """_DCMIN_""" -o "_DCMOUT_" -f file:/"_TXTOUT
+ D DOS^MAGDOS(CMD,.ERROR) ; dcf_filter outputs stuff to stderr
+ I ERROR(0) D  ; fatal error?
+ . N I,MSG,REALERROR,X
+ . ; real errors must have the word "ERROR" in them; ignore everything else
+ . S REALERROR=0
+ . F I=1:1:ERROR(0) D  Q:REALERROR
+ . . S X=$$UPPER^MAGOSMSC(ERROR(I)) ; ignore ERROR(-1) thought
+ . . I X["ERROR",X'["ERROR(-1)" S REALERROR=1
+ . . Q
+ . I 'REALERROR Q  ; ignore warnings, info, and debug messages
+ . S MSG(1)="DICOM IMAGE DCF_FILTER ERROR"
+ . S MSG(2)="Unexpected error in """_CMD_""""
+ . F I=1:1:ERROR(0) S MSG(I+2)=$J(I,3)_") "_ERROR(I)
+ . D TRAPERR^MAGDSTRT(1,$T(+0),"DICOM IMAGE PROCESSING ERROR",.MSG)
+ . Q  ; Error trap does not return
+ ;
+ S IMGPATH=^MAGDICOM(2006.563,1,"IMAGE INPUT PATH")
+ S INSTNAME=DATA("INSTNAME")
+ I INSTNAME="PORTABLE MEDIA" S INSTNAME=$S($$GMRCIEN^MAGDFCNS(ACNUMB):"CON_MEDIA",1:"RAD_MEDIA")
+ L +^MAGDINPT(2006.571,0):1E9 ; serialize name generation code
+ S X=$G(^MAGDINPT(2006.571,0))
+ S $P(X,"^",1,2)="DICOM RAW IMAGE^2006.571"
+ S $P(X,"^",3)=$P(X,"^",3)+1,IMAGEIEN=$P(X,"^",3) ; get next IEN
+ S $P(X,"^",4)=$P(X,"^",4)+1 ; increment total count
+ S ^MAGDINPT(2006.571,0)=X
+ S PATH=IMGPATH_"\"_$$HOSTNAME^MAGOSMSC()_"_"_$TR($J(IMAGEIEN,7)," ",0)_".DCM"
+ S ^MAGDINPT(2006.571,IMAGEIEN,0)=PATH_"^"_INSTNAME_"^"_0_"^"_ORIGINDX_"^"_MEDIA_"^"_DCMIN
+ L -^MAGDINPT(2006.571,0) ; clear the serial name generation code
+ S CMD="MOVE "_DCMOUT_" "_PATH
+ D DOS^MAGDOS(CMD,.ERROR)
+ I ERROR(0) D  ; fatal error
+ . N I,MSG
+ . S MSG(1)="DICOM IMAGE MOVE ERROR"
+ . S MSG(2)="Unexpected error in """_CMD_""""
+ . F I=1:1:ERROR(0) S MSG(I+2)=$J(I,3)_") "_ERROR(I)
+ . D TRAPERR^MAGDSTRT(1,$T(+0),"DICOM IMAGE PROCESSING ERROR",.MSG)
+ . Q  ; Error trap does not return
+ ; remove DCF_FILTER configuration file
+ D DELETE^MAGDIR71(TXTOUT,"IMPORT DCF_FILTER CONFIGURATION FILE",0,0)
+ S $P(^MAGDINPT(2006.571,IMAGEIEN,0),"^",3)=1 ; completed
+ D REMOVE(DATAFILE,MEDIA,IEN,DCMIN)
+ Q
+ ;
+REMOVE(DATAFILE,MEDIA,IEN,DCMIN) ; remove the processed image from the queue
+ L +@DATAFILE:1E9 ; process waits
+ S $P(^(0),"^",4)=$P(@DATAFILE@(0),"^",4)-1
+ K @DATAFILE@(IEN)
+ L -@DATAFILE
+ I MEDIA="T" D
+ . ; remove the original DICOM file from IMAGE_IN
+ . D DELETE^MAGDIR71(DCMIN,"ORIGINAL DICOM FILE",1,0)
+ . Q
+ Q
+
+
+

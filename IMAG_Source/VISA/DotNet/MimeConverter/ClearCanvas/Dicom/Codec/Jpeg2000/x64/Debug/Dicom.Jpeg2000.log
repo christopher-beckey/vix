@@ -1,0 +1,9 @@
+﻿C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild\Current\Bin\Microsoft.Common.CurrentVersion.targets(2123,5): warning MSB3245: Could not resolve this reference. Could not locate the assembly "nunit.framework, Version=2.6.3.13283, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77". Check to make sure the assembly exists on disk. If this reference is required by your code, you may get compilation errors.
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild\Current\Bin\Microsoft.Common.CurrentVersion.targets(2123,5): warning MSB3277: Found conflicts between different versions of "nunit.framework" that could not be resolved.  These reference conflicts are listed in the build log when log verbosity is set to detailed.
+  AssemblyInfo.cpp
+  DicomJpeg2000Codec.cpp
+  DicomJpeg2000CodecFactory.cpp
+  .NETFramework,Version=v4.5.AssemblyAttributes.cpp
+  Generating Code...
+  AssemblyInfo.obj : MSIL module encountered; incremental linking is disabled for MSIL; performing full link
+  Dicom.Jpeg2000.vcxproj -> C:\usr\Hydra4\ClearCanvas\Dicom\Codec\Jpeg2000\x64\Debug\ClearCanvas.Dicom.Codec.Jpeg2000.dll

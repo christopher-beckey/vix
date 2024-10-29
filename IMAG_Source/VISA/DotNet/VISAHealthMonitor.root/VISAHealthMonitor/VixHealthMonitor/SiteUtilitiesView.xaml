@@ -1,0 +1,104 @@
+﻿<UserControl x:Class="VixHealthMonitor.SiteUtilitiesView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="150" d:DesignWidth="700"
+             DataContext="{Binding SiteUtilities, Source={StaticResource Locator}}"
+             xmlns:b="clr-namespace:VISAHealthMonitorCommonControls;assembly=VISAHealthMonitorCommonControls"
+             xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+            xmlns:cmd="clr-namespace:GalaSoft.MvvmLight.Command;assembly=GalaSoft.MvvmLight.Extras.WPF4">
+    <Grid>
+        <Grid.Resources>
+            <Style x:Key="LeftHeaderStyle" TargetType="{x:Type GridViewColumnHeader}">
+                <Setter Property="HorizontalContentAlignment" Value="Left"/>
+            </Style>
+        </Grid.Resources>
+
+        <DockPanel LastChildFill="True" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+            
+            <TextBlock HorizontalAlignment="Stretch" DockPanel.Dock="Top" TextWrapping="WrapWithOverflow" Margin="2,2,2,2">
+                This tab provides utilities for applying to multiple sites at one time
+            </TextBlock>
+            
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" DockPanel.Dock="Top">
+                <Button Content="Check All" Command="{Binding Path=SelectSitesCommand}" CommandParameter="true" Margin="1,1,1,1" />
+                <Button Content="Uncheck All" Command="{Binding Path=SelectSitesCommand}" CommandParameter="false" Margin="1,1,1,1"/>
+            </StackPanel>
+            
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" DockPanel.Dock="Bottom">
+                <ComboBox ItemsSource="{Binding Path=SiteActions}" ToolTip="{Binding Path=SelectedActionToolTip}" MinWidth="200" Margin="2,2,2,2" SelectedItem="{Binding SelectedSiteAction, Mode=TwoWay}" />
+                <TextBox Text="{Binding Path=SiteActionText, Mode=TwoWay}" Visibility="{Binding SiteActionTextVisibility, Mode=OneWay}" MinWidth="200" Margin="2,2,2,2" />
+                <Button Content="Run Action on Checked Sites" Command="{Binding Path=RunSiteActionCommand}" />
+            </StackPanel>
+        
+            <ListView HorizontalAlignment="Stretch"  VerticalAlignment="Stretch" ItemsSource="{Binding Path=VisaSources.Sources.View}"
+                    b:SelectorDoubleClickCommandBehavior.HandleDoubleClick="true"
+                    b:SelectorDoubleClickCommandBehavior.TheCommandToRun="{Binding Path=ListMouseDoubleClickCommand}"
+                    SelectedItem="{Binding Path=SelectedItem}">
+                <ListView.ContextMenu>
+                    <ContextMenu Name="RightClick">
+                        <MenuItem Header="Refresh" Command="{Binding Path=RefreshCommand}" />
+                    </ContextMenu>
+                </ListView.ContextMenu>
+
+                <ListView.View>
+                    <GridView>
+                        <!--
+                        <GridViewColumn Width="160" HeaderContainerStyle="{StaticResource LeftHeaderStyle}">
+                        -->
+                        <GridViewColumn Width="Auto" HeaderContainerStyle="{StaticResource LeftHeaderStyle}">
+                            <GridViewColumnHeader Content="" 
+                                                  Command="{Binding Path=SortCommand}" CommandParameter="Checked" />
+                            <GridViewColumn.CellTemplate>
+                                <HierarchicalDataTemplate>
+                                    <StackPanel Orientation="Horizontal">
+                                        <CheckBox IsChecked="{Binding Path=Checked, Mode=TwoWay}" />
+                                    </StackPanel>
+                                </HierarchicalDataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                    
+                        <GridViewColumn Width="Auto" HeaderContainerStyle="{StaticResource LeftHeaderStyle}">
+                            <GridViewColumnHeader Content="Site Name" 
+                                                  Command="{Binding Path=SortCommand}" CommandParameter="VixHealthSource.VisaSource.DisplayName" />
+                            <GridViewColumn.CellTemplate>
+                                <HierarchicalDataTemplate>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Image Source="{Binding Path=VixHealthSource.VixHealth.HealthIcon}" />
+                                        <TextBlock Text="{Binding VixHealthSource.VisaSource.DisplayName}"  />
+                                    </StackPanel>
+                                </HierarchicalDataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Width="140"  HeaderContainerStyle="{StaticResource LeftHeaderStyle}">
+                            <GridViewColumnHeader Content="Version" 
+                                                  Command="{Binding Path=SortCommand}" CommandParameter="VixHealthSource.VixHealth.VisaHealth.VisaVersion" />
+                            <GridViewColumn.CellTemplate>
+                                <HierarchicalDataTemplate>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="{Binding VixHealthSource.VixHealth.VisaHealth.VisaVersion}"  />
+                                        <TextBlock Text="{Binding VixHealthSource.VixHealth.VisaHealth.ErrorMessage}" />
+                                    </StackPanel>
+                                </HierarchicalDataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Width="400" HeaderContainerStyle="{StaticResource LeftHeaderStyle}">
+                            <GridViewColumnHeader Content="Status" 
+                                                  Command="{Binding Path=SortCommand}" CommandParameter="Status" />
+                            <GridViewColumn.CellTemplate>
+                                <HierarchicalDataTemplate>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Image  Visibility="{Binding Path=StatusIconVisibility, Mode=OneWay}" Source="/VixHealthMonitor;component/images/failed.ico" />
+                                        <TextBlock Text="{Binding Status}" />
+                                    </StackPanel>
+                                </HierarchicalDataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+        </DockPanel>
+    </Grid>
+</UserControl>

@@ -1,0 +1,198 @@
+BODY { 
+      font-family:Arial; 
+      background-color:#ffffff;  }
+H1 { 
+    font-weight:bold; 
+    font-family:Verdana, sans-serif; 
+    color:#0000ff; 
+    line-height:Normal; 
+    letter-spacing:0.1pt; 
+    font-size:14pt;  }
+LI.kadov-H1 { 
+             font-weight:bold; 
+             font-family:Verdana, sans-serif; 
+             color:#0000ff; 
+             line-height:Normal; 
+             letter-spacing:0.1pt; 
+             font-size:14pt; 
+             font-weight:bold; 
+             font-family:Verdana, sans-serif; 
+             color:#0000ff; 
+             line-height:Normal; 
+             letter-spacing:0.1pt; 
+             font-size:14pt;  }
+H2 { 
+    font-weight:bold; 
+    font-size:11pt; 
+    font-family:Verdana, sans-serif;  }
+LI.kadov-H2 { 
+             font-weight:bold; 
+             font-size:11pt; 
+             font-family:Verdana, sans-serif; 
+             font-weight:bold; 
+             font-size:11pt; 
+             font-family:Verdana, sans-serif;  }
+H3 { 
+    font-weight:bold; 
+    font-size:14.0pt;  }
+LI.kadov-H3 { 
+             font-weight:bold; 
+             font-size:14.0pt; 
+             font-weight:bold; 
+             font-size:14.0pt;  }
+H4 { 
+    font-weight:normal; 
+    font-style:normal; 
+    font-family:Verdana, sans-serif; 
+    color:#0000ff; 
+    font-variant:small-caps; 
+    font-size:10pt;  }
+LI.kadov-H4 { 
+             font-weight:normal; 
+             font-style:normal; 
+             font-family:Verdana, sans-serif; 
+             color:#0000ff; 
+             font-variant:small-caps; 
+             font-size:10pt; 
+             font-weight:normal; 
+             font-style:normal; 
+             font-family:Verdana, sans-serif; 
+             color:#0000ff; 
+             font-variant:small-caps; 
+             font-size:10pt;  }
+H5 { 
+    font-weight:bold; 
+    font-size:10.0pt;  }
+LI.kadov-H5 { 
+             font-weight:bold; 
+             font-size:10.0pt; 
+             font-weight:bold; 
+             font-size:10.0pt;  }
+H6 { 
+    font-weight:bold; 
+    font-size:8.0pt;  }
+LI.kadov-H6 { 
+             font-weight:bold; 
+             font-size:8.0pt; 
+             font-weight:bold; 
+             font-size:8.0pt;  }
+P { 
+   margin-top:0pt; 
+   margin-bottom:0pt; 
+   font-family:Verdana, sans-serif; 
+   letter-spacing:0.5pt; 
+   line-height:150%; 
+   font-size:10pt; 
+   border-left-style:none; 
+   border-right-style:none; 
+   border-top-style:none; 
+   border-bottom-style:none;  }
+LI.kadov-P { 
+            font-family:Verdana, sans-serif; 
+            letter-spacing:0.5pt; 
+            line-height:150%; 
+            font-size:10pt; 
+            font-family:Verdana, sans-serif; 
+            letter-spacing:0.5pt; 
+            line-height:150%; 
+            font-size:10pt;  }
+A.expandspot { 
+              color:#008000; 
+              cursor:hand; 
+              font-style:italic; 
+              x-text-underline:off; 
+              x-text-overline:off; 
+              x-text-line-through:off; 
+              text-decoration:none none none none none none none none none none none none;  }
+SPAN.expandtext { 
+                 font-style:italic; 
+                 font-weight:normal; 
+                 color:#ff0000;  }
+A.dropspot { 
+            cursor:hand; 
+            color:#008000; 
+            font-style:italic; 
+            x-text-underline:off; 
+            x-text-overline:off; 
+            x-text-line-through:off; 
+            text-decoration:none none none none none none none none none none none none;  }
+A.glossterm { 
+             color:#800000; 
+             cursor:hand; 
+             font-style:italic; 
+             x-text-underline:off; 
+             x-text-overline:off; 
+             x-text-line-through:off; 
+             text-decoration:none none none none none none none none none none none none;  }
+SPAN.glosstext { 
+                font-style:italic; 
+                font-weight:normal; 
+                color:#0000ff;  }
+OL { 
+    margin-top:0px; 
+    margin-bottom:0px;  }
+UL { 
+    margin-top:0px; 
+    margin-bottom:0px;  }
+P.Style1 { 
+          font-size:11pt; 
+          font-weight:bold; 
+          font-style:normal;  }
+LI.kadov-P-CStyle1 { 
+                    font-size:11pt; 
+                    font-weight:bold; 
+                    font-style:normal; 
+                    font-size:11pt; 
+                    font-weight:bold; 
+                    font-style:normal;  }
+P.Style2 { 
+          font-style:normal; 
+          color:#000000; 
+          list-style:circle; 
+          margin-left:18pt; 
+          font-weight:normal;  }
+LI.kadov-P-CStyle2 { 
+                    font-style:normal; 
+                    color:#000000; 
+                    list-style:circle; 
+                    font-weight:normal; 
+                    font-style:normal; 
+                    color:#000000; 
+                    list-style:circle; 
+                    font-weight:normal;  }
+P.Style3 { 
+          list-style:square; 
+          margin-left:36pt;  }
+LI.kadov-P-CStyle3 { 
+                    list-style:square; 
+                    list-style:square;  }
+P.Style4 {  }
+LI.kadov-P-CStyle4 {  }
+P.Style5 { 
+          list-style:circle;  }
+LI.kadov-P-CStyle5 { 
+                    list-style:circle; 
+                    list-style:circle;  }
+P.Style3plus1 { 
+               list-style:disc; 
+               margin-left:90px;  }
+LI.kadov-P-CStyle3plus1 { 
+                         list-style:disc; 
+                         list-style:disc;  }
+P.NormalBold { 
+              font-size:11pt; 
+              font-weight:bold; 
+              font-style:normal; 
+              border-left-style:none; 
+              border-right-style:none; 
+              border-top-style:none; 
+              border-bottom-style:none; 
+              list-style:circle;  }
+LI.kadov-P-CNormalBold { 
+                        font-size:11pt; 
+                        font-weight:bold; 
+                        font-style:normal; 
+                        list-style:circle; 
+                        font-size:11pt; 
+                        font-weight:bold; 
+                        font-style:normal;  }

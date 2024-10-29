@@ -1,0 +1,68 @@
+edmrtn ; ; 10/06/2005  09:48
+ q
+unpack(file,dir,ext) n c1,c2,crea,r,x
+ ; Unpack a routine save file into individual routine files
+ ;
+ I '$$GETDIR^MAGOSDIR(file) w !!,"No such file: ",file,! q
+ s:$e(dir,$l(dir))'="\" dir=dir_"\"
+ s:$e(ext,1)'="." ext="."_ext
+ u $p w !,"Read ",file
+;.if $ZV["MSM"
+ o 51:(file:"r") u 51 r c1,c2
+ f  u 51 r r q:r=""  d
+ . o 52:(dir_r_ext:"w") u 52 w c1,!,c2,!,r,!
+ . f  u 51 r x q:x=""  u 52 w x,!
+ . u 52 w !! c 52
+ . q
+ c 51
+;.end
+;.if $ZV["Cache"
+ o file:"r" u file r c1,c2
+ f  u file r r q:r=""  d
+ . s crea=dir_r_ext
+ . o crea:"wn" u crea w c1,!,c2,!,r,!
+ . f  u file r x q:x=""  u crea w x,!
+ . u crea w !! c crea
+ . q
+ c file
+;.end
+ q
+ ;
+f(pat,bld,tst) n dirf,dirc
+ s dirf="m:\Builds\V3.0P"_pat_"Build"_bld
+ s:$g(tst)'="" dirf=dirf_"_T"_tst_"\"
+ s dirc="c:\edm\vss\p"_pat_"\"
+ s x=$$MKDIR^MAGOSDIR(dirc_"dp")
+ s x=$$MKDIR^MAGOSDIR(dirc_"da")
+ s x=$$MKDIR^MAGOSDIR(dirc_"vp")
+ s x=$$MKDIR^MAGOSDIR(dirc_"va")
+ s x=$$HOSTCMD^MAGOSMSC("del "_dirc_"dp\*.rtn")
+ s x=$$HOSTCMD^MAGOSMSC("del "_dirc_"vp\*.rtn")
+ s x=$$HOSTCMD^MAGOSMSC("del "_dirc_"da\*.rtn")
+ s x=$$HOSTCMD^MAGOSMSC("del "_dirc_"va\*.rtn")
+ d unpack(dirf_"patch_"_pat_"\magdcm.rtn",dirc_"dp",".rtn")
+ d unpack(dirf_"patch_"_pat_"\magvista.rtn",dirc_"vp",".rtn")
+ d unpack(dirf_"DICOM\MUMPS\magdcm.rtn",dirc_"da",".rtn")
+ d unpack(dirf_"DICOM\MUMPS\magvista.rtn",dirc_"va",".rtn")
+ q
+ ;
+space(pat) n d,f,i,l,x,z
+ f d="c:\edm\vss\p"_pat_"\da\","c:\edm\vss\p"_pat_"\va\" d
+ . s z=$zos(12,d_"*.rtn",63)
+ . f  s f=$p(z,"^",1) q:f=""  d  s z=$zos(13,z)
+ . . k l s i=0
+ . . o 51:(d_f:"r") u 51 f  r x q:$zc<0  d
+ . . . s i=i+1
+ . . . q:$e(x,$l(x))'=" "
+ . . . q:x?2n1":"2n1" ".e
+ . . . s l(i)=x
+ . . . q
+ . . c 51
+ . . q:'$o(l(""))
+ . . u $p w !,$s(d["\da\":"DICOM",1:"VistA")," -- ",$p(f,".",1),":",!
+ . . s x="" f  s x=$o(l(x)) q:x=""  w $j(x,4),": ",$tr(l(x)," ","~"),!
+ . . q
+ . q
+ q
+
+

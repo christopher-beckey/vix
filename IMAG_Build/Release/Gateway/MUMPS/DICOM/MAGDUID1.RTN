@@ -1,0 +1,111 @@
+MAGDUID1 ;WOIFO/PMK/JSL/SAF - DICOM UID Generator ; 21 Jun 2010 12:55 PM
+ ;;3.0;IMAGING;**21,10,11,50,54,49,123**;Mar 19, 2002;Build 60;Jul 16, 2012
+ ;; Per VHA Directive 2004-038, this routine should not be modified.
+ ;; +---------------------------------------------------------------+
+ ;; | Property of the US Government.                                |
+ ;; | No permission to copy or redistribute this software is given. |
+ ;; | Use of unreleased versions of this software requires the user |
+ ;; | to execute a written test agreement with the VistA Imaging    |
+ ;; | Development Office of the Department of Veterans Affairs,     |
+ ;; | telephone (301) 734-0100.                                     |
+ ;; | The Food and Drug Administration classifies this software as  |
+ ;; | a medical device.  As such, it may not be changed in any way. |
+ ;; | Modifications to this software may result in an adulterated   |
+ ;; | medical device under 21CFR820, the use of which is considered |
+ ;; | to be a violation of US Federal Statutes.                     |
+ ;; +---------------------------------------------------------------+
+ ;;
+ Q
+ ;
+GETUID(NAME) ; get the UID for the DICOM registered object
+ N IPTR,STATUS,UID
+ S IPTR=$O(^MAGDICOM(2006.53,"B",NAME,""))
+ I IPTR="" D
+ . N MSG
+ . S MSG(1)="The UID Dictionary is not properly setup!"
+ . S MSG(2)="There is no entry in the UID dictionary for """_NAME_""""
+ . D TRAPERR^MAGDSTRT(1,$T(+0),"ERROR IN DICOM UNIQUE IDENTIFIER DICTIONARY",.MSG)
+ . Q  ; Error trap does not return
+ E  S UID=$P(^MAGDICOM(2006.53,IPTR,0),"^",2)
+ Q UID
+ ;
+PATIENT(STATNUMB,DFN) ; generate a Patient uid
+ Q $$UID(1,STATNUMB,DFN)
+ ;
+VISITI(STATNUMB,DFN,ID) ; generate an inpatient Visit uid
+ Q $$UID(2,STATNUMB,DFN,ID)
+ ;
+VISITO(STATNUMB,DFN) ; generate an outpatient Visit uid
+ Q $$UID(3,STATNUMB,DFN)
+ ;
+STUDY(STATNUMB,ID) ; generate a Study uid
+ Q $$UID(4,STATNUMB,ID)
+ ;
+RESULTS(STATNUMB,ID) ; generate a Results uid
+ Q $$UID(5,STATNUMB,ID)
+ ;
+INTERP(STATNUMB,ID,STATUS) ; generate an Interpretation uid
+ N SUBTYPE
+ S SUBTYPE=$S(STATUS="REPORT":1,STATUS="AMENDMENT":2,1:0)
+ Q $$UID(6,STATNUMB,ID,SUBTYPE)
+ ;
+NEXTUID() ; generate the next UID using date/time and counter
+ N DATE,DH,FAIL,I,MACHID,NOW,LASTUID,NEXTUID,STATNUMB,TIME,X,Y
+ S STATNUMB=$$STATNUMB^MAGDFCNS() ; 3-digit station number, exclusive of any modifiers
+ S MACHID=^MAGDICOM(2006.563,1,"MACHINE ID")
+ L +^MAGDICOM(2006.563,1,"MACHINE ID"):1E9 ; Non-interactive process must wait
+ S LASTUID=$G(^MAGDICOM(2006.563,1,"LAST UID"))
+ ; can't use D NOW^XLFDT to set DH because it is incorrect at midnight
+ S DH=$H,X=$$HTFM^XLFDT(DH,1),DATE=X+17000000
+ S X=$P(DH,",",2) D
+ . N H,M,S
+ . S H=X\3600,M=X\60#60,S=X#60
+ . S TIME=H*100+M*100+S
+ . Q
+ S NOW=DATE_"."_TIME_".0"
+ S NEXTUID=$$UID(7,STATNUMB,MACHID,NOW)
+ I $P(NEXTUID,".",1,10)=$P(LASTUID,".",1,10) D
+ . S NEXTUID=LASTUID
+ . S $P(NEXTUID,".",11)=$P(NEXTUID,".",11)+1
+ . Q
+ S ^MAGDICOM(2006.563,1,"LAST UID")=NEXTUID
+ L -^MAGDICOM(2006.563,1,"MACHINE ID")
+ S FAIL=0 F I=9:1:11 D  Q:FAIL
+ . I $P(LASTUID,".",I)>$P(NEXTUID,".",I) S FAIL=1 ; error
+ . E  I $P(NEXTUID,".",I)>$P(LASTUID,".",I) S FAIL=-1 ; fine
+ . Q
+ I FAIL>0 D
+ . N MSG,TITLE
+ . S TITLE="ERROR IN DICOM UNIQUE IDENTIFIER GENERATION"
+ . S MSG(1)="The new UID is less than the old UID"
+ . S MSG(2)="Old UID="_LASTUID
+ . S MSG(3)="New UID="_NEXTUID
+ . D BADERROR^MAGDIRDE($T(+0),TITLE,.MSG)
+ . Q  ; Error trap does not return
+ Q NEXTUID
+ ;
+CREATION ; store the creation uid, date, and time
+ D SAVE^MAGDFCNS("0008,0012",MSGDATE)
+ D SAVE^MAGDFCNS("0008,0013",MSGTIME)
+ D SAVE^MAGDFCNS("0008,0014",$$UID(0,STATNUMB))
+ Q
+ ;
+UID(TYPE,STATNUMB,NUMBER,SUBTYPE) ; generate a UID
+ N X,I,UID
+ I '$$ISIHS^MAGSPID() S STATNUMB=$E(STATNUMB,1,3) ; all station numbers are 3 digits long, excluding any modifiers except in IHS
+ S X=""
+ F I=1:1:$L(STATNUMB) S X=X_$S($E(STATNUMB,I)?1N:$E(STATNUMB,I),1:$A(STATNUMB,I))
+ S UID=^MAGDICOM(2006.563,1,"UID ROOT")_".1."_TYPE_"."_X
+ I $D(NUMBER) S UID=UID_"."_NUMBER
+ I $D(SUBTYPE) S UID=UID_"."_SUBTYPE
+ ; Remove leading 0s from UID components
+ F I=1:1:$L(UID,".") S $P(UID,".",I)=+$P(UID,".",I)
+ I $L(UID)>64 D  ; fatal error
+ . N MSG,TITLE
+ . S TITLE="ERROR IN DICOM UNIQUE IDENTIFIER GENERATION"
+ . S MSG(1)="The following UID is longer than 64 characters!"
+ . S MSG(2)=UID
+ . D BADERROR^MAGDIRDE($T(+0),TITLE,.MSG)
+ . Q  ; Error trap does not return
+ Q UID
+ ;

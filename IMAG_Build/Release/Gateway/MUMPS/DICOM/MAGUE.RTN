@@ -1,0 +1,178 @@
+MAGUE ;WOIFO/MLH - Imaging - error code processing utility [ 08/19/2003  3:24 PM ] ; 03/08/2005  08:16
+ ;;3.0;IMAGING;**21,10,51**;MAR 19, 2002;;JUN 16, 2006
+ ;; Per VHA Directive 2004-038, this routine should not be modified.
+ ;; +---------------------------------------------------------------+
+ ;; | Property of the US Government.                                |
+ ;; | No permission to copy or redistribute this software is given. |
+ ;; | Use of unreleased versions of this software requires the user |
+ ;; | to execute a written test agreement with the VistA Imaging    |
+ ;; | Development Office of the Department of Veterans Affairs,     |
+ ;; | telephone (301) 734-0100.                                     |
+ ;; | The Food and Drug Administration classifies this software as  |
+ ;; | a medical device.  As such, it may not be changed in any way. |
+ ;; | Modifications to this software may result in an adulterated   |
+ ;; | medical device under 21CFR820, the use of which is considered |
+ ;; | to be a violation of US Federal Statutes.                     |
+ ;; +---------------------------------------------------------------+
+ ;;
+ Q
+ ;
+LASTERR() ; FUNCTION - return the most recent error information
+ ;
+ ; expects:  $EC Error code string set by system
+ ;
+ ; function return:     ~p1 = narrative explanation of error,
+ ;        or error code if no explanation exists
+ ;        ~p2 = location of error
+ ;        ~p3 = erroneous MUMPS code
+ ;
+ N ECODE ; --- error code from $STACK
+ N ETEXT ; --- text for error code
+ N R ; ------- error data to be returned by this function (see above)
+ N MCODE ; --- MUMPS code from $STACK
+ N PLACE ; --- the location of the last error in the stack
+ N I ; ------- scratch variable
+ ;
+ ; Get the location of the most recently executed code
+ ; Insert place and code into function-result
+ ;
+ S (ETEXT,MCODE,PLACE)="" F I=$STACK:-1:0 D  Q:ECODE'=""
+ . S ECODE=$STACK(I,"ECODE")
+ . I ECODE'="" D
+ . . S ETEXT=$$ERRTEXT(ECODE)
+ . . S PLACE=$STACK(I,"PLACE"),MCODE=$STACK(I,"MCODE")
+ . . Q
+ . Q
+ S R=ETEXT_"~"_PLACE_"~"_MCODE
+ Q R
+ ;
+ERRTEXT(ECODE) ; given the value of ECODE, return its text value
+ ; for each error, pull it out of ECODE and get the text for it
+ ; ECODE has the format ,code-1,code-2,...,code-n,
+ N I,P,TEXT,X
+ S TEXT=""
+ F I=2:1:$L(ECODE,",")-1 D
+ . S P=$P(ECODE,",",I)
+ . I P?1"M"1N.N D  ; ANSI MUMPS error codes are all formatted Mn...n
+ . . S X=$T(@P)
+ . . I X="" S:TEXT'="" TEXT=TEXT_", " S TEXT=TEXT_"<"_P_"-unknown>"
+ . . E  S:TEXT'="" TEXT=TEXT_", " S TEXT=TEXT_$P(X,";;",2)
+ . . Q
+ . E  S:TEXT'="" TEXT=TEXT_", " S TEXT=TEXT_"<"_$TR(P,"~")_"-unknown>"
+ . Q
+ I TEXT="" S TEXT="<"_$EC_">"
+ Q TEXT
+ ;
+M1 ;;Naked indicator undefined
+M2 ;;Invalid combination with P FNumber code atom
+M3 ;;$RANDOM seed less than 1
+M4 ;;No true condition in $SELECT
+M5 ;;Offset in line-reference less than zero
+M6 ;;Undefined local variable name
+M7 ;;Undefined global variable name
+M8 ;;Undefined special variable name
+M9 ;;Attempt to divide by zero
+M10 ;;Invalid pattern match range
+M11 ;;No parameters passed
+M12 ;;Invalid Offset in line-reference (negative offset)
+M13 ;;Invalid line-reference (label not found)
+M14 ;;Line level not 1
+M15 ;;Undefined index variable
+M16 ;;Argumented QUIT not allowed
+M17 ;;Argumented QUIT required
+M18 ;;Fixed length READ not greater than zero
+M19 ;;Cannot copy a tree or subtree into itself
+M20 ;;Line must have formal parameter list
+M21 ;;Algorithm specification invalid
+M22 ;;SET or KILL to ^$GLOBAL when data in global
+M23 ;;SET or KILL to ^$JOB for non-existent job number
+M24 ;;Change to collation algorithm while subscripted local variables defined
+M25 ;;Attempt to modify currently executing routine
+M26 ;;Non-existent environment
+M27 ;;Attempt to rollback a transaction that is not restartable
+M28 ;;Mathematical function, parameter out of range
+M29 ;;SET or KILL on structured system variable name not allowed by implementation
+M30 ;;Reference to global or local variable name with different collating sequence within a collating algorithm
+M31 ;;class function used for device without a class library selected
+M32 ;;class function used in user-defined class library which has no associated line
+M33 ;;SET or KILL to ^$ROUTINE when routine exists
+M34 ;;--- currently unassigned ---
+M35 ;;Device does not support class library
+M36 ;;Incompatible class libraries
+M37 ;;READ from device identified by the empty string
+M38 ;;Invalid structured system variable name subscript
+M39 ;;Invalid $NAME argument
+M40 ;;Call-by-reference in JOB actual parameter
+M41 ;;Invalid LOCK argument within a TRANSACTION
+M42 ;;Invalid QUIT within a TRANSACTION
+M43 ;;Invalid range ($X, $Y)
+M44 ;;Invalid command outside of a TRANSACTION
+M45 ;;Invalid GOTO reference
+M46 ;;Invalid attribute name
+M47 ;;Invalid attribute value
+M48 ;;Nonexistent window, element or choice
+M49 ;;Invalid attempt to set focus
+M50 ;;Attempt to reference a non M-Term window in an OPEN command
+M51 ;;Attempt to destroy M-Term window prior to CLOSE
+M52 ;;Required attribute missing
+M53 ;;Invalid argument for font function
+M54 ;;Attempt to create non-modal child of a modal parent
+M55 ;;Invalid nested ESTART command
+M56 ;;Name length exceeds implementation's limit
+M57 ;;More than one defining occurrence of label in routine
+M58 ;;Too few formal parameters
+M59 ;;Environment reference not permitted for this structured system variable name
+M60 ;;Undefined structured system variable name
+M61 ;;Attempt to OPEN file with conflicting ACCESS parameters
+M62 ;;Illegal value for ACCESS parameter while attempting to OPEN file
+M63 ;;Illegal value for DISPOSITION parameter while attempting to CLOSE file
+M64 ;;Illegal value for RENAME parameter while attempting to CLOSE file
+M65 ;;Illegal value for VOLUME label
+M66 ;;Illegal value for DENSITY parameter
+M67 ;;Illegal value for ACCESS parameter
+M68 ;;Illegal value for MOUNT parameter
+M69 ;;Attempted tape I/O while no tape mounted
+M70 ;;Illegal value for BLOCKSIZE parameter
+M71 ;;Attempt to read data block larger than buffer size
+M72 ;;Illegal value for recordsize parameter
+M73 ;;Invalid usage of device keyword NEWFILE
+M74 ;;Illegal value for TRANSLATION parameter
+M75 ;;String length exceeds implementation's limit
+M76 ;;TCP socket state incorrect for CONNECT or LISTEN
+M77 ;;TCP device attribute missing
+M78 ;;TCP device keyword missing
+M79 ;;TCP socket allocated to another device
+M80 ;;Network error not otherwise specified
+M81 ;;Unable to establish network connection
+M82 ;;Network connection suspended: wait to resume
+M83 ;;Network connection lost
+M84 ;;Network protocol error: invalid client message
+M85 ;;Network protocol error: invalid server message
+M86 ;;Cannot relinquish device with I/O pending
+M87 ;;Network buffer overflow
+M88 ;;Non-existent routine
+M89 ;;Specified pattern is not a subpattern
+M90 ;;Invalid name-value
+M91 ;;Routine source is not available
+M92 ;;Mathematical overflow
+M93 ;;Mathematical underflow
+M94 ;;Attempt to compute zero to the zero-th power
+M95 ;;Exponentiation returns complex number with non-zero imaginary part
+M96 ;;Attempt to assign value to already valued write-once structured system variable name
+M97 ;;Routine associated with user-defined structured system variable name does not exist
+M98 ;;Resource unavailable
+M99 ;;Invalid operation for context
+M100 ;;Output time-out expired
+M101 ;;Attempt to assign incorrect value to $ECODE
+M102 ;;Simultaneous synchronous and asynchronous event class
+M103 ;;Invalid event identifier
+M104 ;;IPC event identifier is not a valid job-number
+M105 ;;Object not currently accessible
+M106 ;;Object does not support requested method or property
+M107 ;;Object has no default value
+M108 ;;Value is not of data type OREF
+M109 ;;Undefined device keyword
+M110 ;;Event identifier not available
+M111 ;;Invalid number of days for date
+M112 ;;Invalid number of seconds for time
+ ;

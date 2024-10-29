@@ -1,0 +1,340 @@
+KIDS Distribution saved on Jul 26, 2012@08:58:39
+Split from GOLD - last patch SEQ81_P120
+**KIDS**:MAG*3.0*350_DD*2006.5714^
+
+**INSTALL NAME**
+MAG*3.0*350_DD*2006.5714
+"BLD",7767,0)
+MAG*3.0*350_DD*2006.5714^IMAGING^0^3120726^n
+"BLD",7767,4,0)
+^9.64PA^2006.5714^1
+"BLD",7767,4,2006.5714,0)
+2006.5714
+"BLD",7767,4,2006.5714,222)
+y^y^f^^^^y
+"BLD",7767,4,"B",2006.5714,2006.5714)
+
+"BLD",7767,6.3)
+1
+"BLD",7767,"KRN",0)
+^9.67PA^779.2^20
+"BLD",7767,"KRN",.4,0)
+.4
+"BLD",7767,"KRN",.401,0)
+.401
+"BLD",7767,"KRN",.402,0)
+.402
+"BLD",7767,"KRN",.403,0)
+.403
+"BLD",7767,"KRN",.5,0)
+.5
+"BLD",7767,"KRN",.84,0)
+.84
+"BLD",7767,"KRN",3.6,0)
+3.6
+"BLD",7767,"KRN",3.8,0)
+3.8
+"BLD",7767,"KRN",9.2,0)
+9.2
+"BLD",7767,"KRN",9.8,0)
+9.8
+"BLD",7767,"KRN",19,0)
+19
+"BLD",7767,"KRN",19.1,0)
+19.1
+"BLD",7767,"KRN",101,0)
+101
+"BLD",7767,"KRN",409.61,0)
+409.61
+"BLD",7767,"KRN",771,0)
+771
+"BLD",7767,"KRN",779.2,0)
+779.2
+"BLD",7767,"KRN",870,0)
+870
+"BLD",7767,"KRN",8989.51,0)
+8989.51
+"BLD",7767,"KRN",8989.52,0)
+8989.52
+"BLD",7767,"KRN",8994,0)
+8994
+"BLD",7767,"KRN","B",.4,.4)
+
+"BLD",7767,"KRN","B",.401,.401)
+
+"BLD",7767,"KRN","B",.402,.402)
+
+"BLD",7767,"KRN","B",.403,.403)
+
+"BLD",7767,"KRN","B",.5,.5)
+
+"BLD",7767,"KRN","B",.84,.84)
+
+"BLD",7767,"KRN","B",3.6,3.6)
+
+"BLD",7767,"KRN","B",3.8,3.8)
+
+"BLD",7767,"KRN","B",9.2,9.2)
+
+"BLD",7767,"KRN","B",9.8,9.8)
+
+"BLD",7767,"KRN","B",19,19)
+
+"BLD",7767,"KRN","B",19.1,19.1)
+
+"BLD",7767,"KRN","B",101,101)
+
+"BLD",7767,"KRN","B",409.61,409.61)
+
+"BLD",7767,"KRN","B",771,771)
+
+"BLD",7767,"KRN","B",779.2,779.2)
+
+"BLD",7767,"KRN","B",870,870)
+
+"BLD",7767,"KRN","B",8989.51,8989.51)
+
+"BLD",7767,"KRN","B",8989.52,8989.52)
+
+"BLD",7767,"KRN","B",8994,8994)
+
+"FIA",2006.5714)
+DICOM INCOMPLETE OBJECT
+"FIA",2006.5714,0)
+^MAGDINPT(2006.5714,
+"FIA",2006.5714,0,0)
+2006.5714
+"FIA",2006.5714,0,1)
+y^y^f^^^^y
+"FIA",2006.5714,0,10)
+
+"FIA",2006.5714,0,11)
+
+"FIA",2006.5714,0,"RLRO")
+
+"FIA",2006.5714,0,"VR")
+3.0^MAG
+"FIA",2006.5714,2006.5714)
+0
+"MBREQ")
+0
+"PKG",454,-1)
+1^1
+"PKG",454,0)
+IMAGING^MAG^Imaging-V1 to release 
+"PKG",454,20,0)
+^9.402P^^
+"PKG",454,22,0)
+^9.49I^1^1
+"PKG",454,22,1,0)
+3.0^3020319^3020517^126
+"PKG",454,22,1,"PAH",1,0)
+350_DD^3120726
+"QUES","XPF1",0)
+Y
+"QUES","XPF1","??")
+^D REP^XPDH
+"QUES","XPF1","A")
+Shall I write over your |FLAG| File
+"QUES","XPF1","B")
+YES
+"QUES","XPF1","M")
+D XPF1^XPDIQ
+"QUES","XPF2",0)
+Y
+"QUES","XPF2","??")
+^D DTA^XPDH
+"QUES","XPF2","A")
+Want my data |FLAG| yours
+"QUES","XPF2","B")
+YES
+"QUES","XPF2","M")
+D XPF2^XPDIQ
+"QUES","XPI1",0)
+YO
+"QUES","XPI1","??")
+^D INHIBIT^XPDH
+"QUES","XPI1","A")
+Want KIDS to INHIBIT LOGONs during the install
+"QUES","XPI1","B")
+NO
+"QUES","XPI1","M")
+D XPI1^XPDIQ
+"QUES","XPM1",0)
+PO^VA(200,:EM
+"QUES","XPM1","??")
+^D MG^XPDH
+"QUES","XPM1","A")
+Enter the Coordinator for Mail Group '|FLAG|'
+"QUES","XPM1","B")
+
+"QUES","XPM1","M")
+D XPM1^XPDIQ
+"QUES","XPO1",0)
+Y
+"QUES","XPO1","??")
+^D MENU^XPDH
+"QUES","XPO1","A")
+Want KIDS to Rebuild Menu Trees Upon Completion of Install
+"QUES","XPO1","B")
+NO
+"QUES","XPO1","M")
+D XPO1^XPDIQ
+"QUES","XPZ1",0)
+Y
+"QUES","XPZ1","??")
+^D OPT^XPDH
+"QUES","XPZ1","A")
+Want to DISABLE Scheduled Options, Menu Options, and Protocols
+"QUES","XPZ1","B")
+NO
+"QUES","XPZ1","M")
+D XPZ1^XPDIQ
+"QUES","XPZ2",0)
+Y
+"QUES","XPZ2","??")
+^D RTN^XPDH
+"QUES","XPZ2","A")
+Want to MOVE routines to other CPUs
+"QUES","XPZ2","B")
+NO
+"QUES","XPZ2","M")
+D XPZ2^XPDIQ
+"SEC","^DIC",2006.5714,2006.5714,0,"AUDIT")
+@
+"SEC","^DIC",2006.5714,2006.5714,0,"DD")
+@
+"SEC","^DIC",2006.5714,2006.5714,0,"DEL")
+@
+"SEC","^DIC",2006.5714,2006.5714,0,"LAYGO")
+@
+"SEC","^DIC",2006.5714,2006.5714,0,"RD")
+@
+"SEC","^DIC",2006.5714,2006.5714,0,"WR")
+@
+"VER")
+8.0^22.0
+"^DD",2006.5714,2006.5714,0)
+FIELD^^4^5
+"^DD",2006.5714,2006.5714,0,"DT")
+3080530
+"^DD",2006.5714,2006.5714,0,"IX","B",2006.5714,.01)
+
+"^DD",2006.5714,2006.5714,0,"NM","DICOM INCOMPLETE OBJECT")
+
+"^DD",2006.5714,2006.5714,.01,0)
+DATE/TIME ADDED ($H)^RF^^0;1^K:$L(X)>30!($L(X)<3)!'(X?1.N1","1.N) X
+"^DD",2006.5714,2006.5714,.01,1,0)
+^.1
+"^DD",2006.5714,2006.5714,.01,1,1,0)
+2006.5714^B
+"^DD",2006.5714,2006.5714,.01,1,1,1)
+S ^MAGDINPT(2006.5714,"B",$E(X,1,30),DA)=""
+"^DD",2006.5714,2006.5714,.01,1,1,2)
+K ^MAGDINPT(2006.5714,"B",$E(X,1,30),DA)
+"^DD",2006.5714,2006.5714,.01,3)
+Answer must be 3-30 characters in length.
+"^DD",2006.5714,2006.5714,.01,21,0)
+^.001^2^2^3080530^^
+"^DD",2006.5714,2006.5714,.01,21,1,0)
+This is the date and time that the incomplete file was recorded, in $H
+"^DD",2006.5714,2006.5714,.01,21,2,0)
+format.
+"^DD",2006.5714,2006.5714,.01,"DT")
+3080530
+"^DD",2006.5714,2006.5714,1,0)
+RAW IMAGE^RP2006.571'^MAGDINPT(2006.571,^0;2^Q
+"^DD",2006.5714,2006.5714,1,3)
+This is the number of the corresponding entry in the DICOM RAW IMAGE File (#2006.571).
+"^DD",2006.5714,2006.5714,1,21,0)
+^.001^2^2^3080602^^^
+"^DD",2006.5714,2006.5714,1,21,1,0)
+This is the ID of the raw image that is to be processed as an incomplete 
+"^DD",2006.5714,2006.5714,1,21,2,0)
+object.
+"^DD",2006.5714,2006.5714,1,"DT")
+3080530
+"^DD",2006.5714,2006.5714,2,0)
+FILE PATH^F^^0;3^K:$L(X)>30!($L(X)<3) X
+"^DD",2006.5714,2006.5714,2,3)
+Answer must be 3-30 characters in length.
+"^DD",2006.5714,2006.5714,2,21,0)
+^.001^2^2^3080530^^
+"^DD",2006.5714,2006.5714,2,21,1,0)
+This is the path for the DICOM file.  Usually, this will be 
+"^DD",2006.5714,2006.5714,2,21,2,0)
+C:\DICOM\Image_In.
+"^DD",2006.5714,2006.5714,2,"DT")
+3080530
+"^DD",2006.5714,2006.5714,3,0)
+INSTRUMENT^RF^^0;4^K:$L(X)>30!($L(X)<3) X
+"^DD",2006.5714,2006.5714,3,3)
+Answer must be 3-30 characters in length.
+"^DD",2006.5714,2006.5714,3,21,0)
+^^2^2^3080530^
+"^DD",2006.5714,2006.5714,3,21,1,0)
+This is the piece of imaging equipment that captured the file that is 
+"^DD",2006.5714,2006.5714,3,21,2,0)
+marked as incomplete.
+"^DD",2006.5714,2006.5714,3,"DT")
+3080530
+"^DD",2006.5714,2006.5714,4,0)
+DATE/TIME ADDED (FILEMAN)^D^^0;5^S %DT="ESTR" D ^%DT S X=Y K:Y<1 X
+"^DD",2006.5714,2006.5714,4,3)
+This is the date and time that the incomplete file was recorded, in Fileman format.
+"^DD",2006.5714,2006.5714,4,21,0)
+^.001^2^2^3080602^^
+"^DD",2006.5714,2006.5714,4,21,1,0)
+This is the date and time that the incomplete file was recorded, in 
+"^DD",2006.5714,2006.5714,4,21,2,0)
+Fileman format.
+"^DD",2006.5714,2006.5714,4,"DT")
+3080530
+"^DIC",2006.5714,2006.5714,0)
+DICOM INCOMPLETE OBJECT^2006.5714
+"^DIC",2006.5714,2006.5714,0,"GL")
+^MAGDINPT(2006.5714,
+"^DIC",2006.5714,2006.5714,"%D",0)
+^1.001^19^19^3080530^^
+"^DIC",2006.5714,2006.5714,"%D",1,0)
+ +---------------------------------------------------------------+
+"^DIC",2006.5714,2006.5714,"%D",2,0)
+ |                                                               |
+"^DIC",2006.5714,2006.5714,"%D",3,0)
+ | Property of the US Government.                                |
+"^DIC",2006.5714,2006.5714,"%D",4,0)
+ | No permission to copy or redistribute this software is given. |
+"^DIC",2006.5714,2006.5714,"%D",5,0)
+ | Use of unreleased versions of this software requires the user |
+"^DIC",2006.5714,2006.5714,"%D",6,0)
+ | to execute a written test agreement with the VistA Imaging    |
+"^DIC",2006.5714,2006.5714,"%D",7,0)
+ | Development Office of the Department of Veterans Affairs,     |
+"^DIC",2006.5714,2006.5714,"%D",8,0)
+ | telephone (301) 734-0100.                                     |
+"^DIC",2006.5714,2006.5714,"%D",9,0)
+ |                                                               |
+"^DIC",2006.5714,2006.5714,"%D",10,0)
+ | The Food and Drug Administration classifies this software as  |
+"^DIC",2006.5714,2006.5714,"%D",11,0)
+ | a medical device.  As such, it may not be changed in any way. |
+"^DIC",2006.5714,2006.5714,"%D",12,0)
+ | Modifications to this software may result in an adulterated   |
+"^DIC",2006.5714,2006.5714,"%D",13,0)
+ | medical device under 21CFR820, the use of which is considered |
+"^DIC",2006.5714,2006.5714,"%D",14,0)
+ | to be a violation of US Federal Statutes.                     |
+"^DIC",2006.5714,2006.5714,"%D",15,0)
+ |                                                               |
+"^DIC",2006.5714,2006.5714,"%D",16,0)
+ +---------------------------------------------------------------+
+"^DIC",2006.5714,2006.5714,"%D",17,0)
+ 
+"^DIC",2006.5714,2006.5714,"%D",18,0)
+The entries in this table describe images that could not be processed 
+"^DIC",2006.5714,2006.5714,"%D",19,0)
+because they were incompletely captured.
+"^DIC",2006.5714,"B","DICOM INCOMPLETE OBJECT",2006.5714)
+
+**END**
+**END**

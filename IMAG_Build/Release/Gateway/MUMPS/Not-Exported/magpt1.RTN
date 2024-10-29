@@ -1,0 +1,223 @@
+magpt1 ;WOIFO/MLH - individual PACS tests ; 15 Jun 2005  4:03 PM
+ ; *** CAUTION:  not for distribution beyond Silver Spring OIFO!
+ q
+ ;
+A101 ; non-exception flow - order only
+ ;
+ n result,stat,logent,msgseqa
+ k HLA
+ ;
+ d LOG^magpt($t(A101)_" ; begin")
+ ;
+ ; new order message
+ d ORM^magpt("NW") ;k ^tmp($j) m ^tmp($j)=HLA
+ s stat=$$SEND^magptm("ORM",.result)
+ s logent="A.1.1.1 ; "_result w !,logent,! d LOG^magpt(logent,$na(HLA("HLS")))
+ ; 
+ d LOG^magpt($t(A101)_" ; end")
+ q
+ ;
+A102 ; non-exception flow - order and examination
+ ;
+ n result,stat,logent
+ k HLA
+ ;
+ d LOG^magpt($t(A102)_" ; begin")
+ ;
+ ; new order message
+ d ORM^magpt("NW") ;k ^tmp($j) m ^tmp($j)=HLA
+ s stat=$$SEND^magptm("ORM",.result)
+ s logent="A.1.2.1 ; "_result w !,logent,! d LOG^magpt(logent,$na(HLA("HLS")))
+ ;
+ ; patient examined message
+ s $p(HLA("HLS",3),HLFS,2)="XO",$p(HLA("HLS",3),HLFS,6)="CM"
+ s stat=$$SEND^magptm("ORM",.result)
+ s logent="A.1.2.2 ; "_result w !,logent,! d LOG^magpt(logent,$na(HLA("HLS")))
+ ; 
+ d LOG^magpt($t(A102)_" ; end")
+ q
+ ;
+A103 ; non-exception flow - order for pregnant patient
+ ;
+ n result,stat,logent
+ k HLA
+ ;
+ d LOG^magpt($t(A103)_" ; begin")
+ ;
+ ; new order message
+ d ORM^magpt("NW")
+ s $p(HLA("HLS",1),HLFS,9)="F" ; make sure sex is female
+ s $p(HLA("HLS",2),HLFS,16)="B6" ; pregnancy flag
+ s stat=$$SEND^magptm("ORM",.result)
+ s logent="A.1.3.1 ; "_result w !,logent,! d LOG^magpt(logent,$na(HLA("HLS")))
+ ;
+ d LOG^magpt($t(A103)_" ; end")
+ q
+ ;
+A104 ; non-exception flow - order for sensitive patient
+ ;
+ n result,stat,logent
+ k HLA
+ ;
+ d LOG^magpt($t(A104)_" ; begin")
+ ;
+ ; new order message
+ d ORM^magpt("NW")
+ s $p(HLA("HLS",2),HLFS,17)="S"
+ s stat=$$SEND^magptm("ORM",.result)
+ s logent="A.1.4.1 ; "_result w !,logent,! d LOG^magpt(logent,$na(HLA("HLS")))
+ ;
+ d LOG^magpt($t(A104)_" ; end")
+ q
+ ;
+A105 ; non-exception flow - storage of CPT and VistA code
+ ;
+ n result,stat,logent
+ k HLA
+ ;
+ d LOG^magpt($t(A105)_" ; begin")
+ ;
+ ; new order message
+ d ORM^magpt("NW")
+ s stat=$$SEND^magptm("ORM",.result)
+ s logent="A.1.5.1 ; "_result w !,logent,! d LOG^magpt(logent,$na(HLA("HLS")))
+ ;
+ d LOG^magpt($t(A105)_" ; end")
+ q
+ ;
+A106 ; non-exception flow - long reason for study
+ ;
+ n result,stat,logent
+ k HLA
+ ;
+ d LOG^magpt($t(A106)_" ; begin")
+ ;
+ ; new order message
+ d ORM^magpt("NW","ORM") ; produces 10,260 characters
+ s stat=$$SEND^magptm("ORM",.result)
+ s logent="A.1.6.1 ; "_result w !,logent,! d LOG^magpt(logent,$na(HLA("HLS")))
+ ;
+ d LOG^magpt($t(A106)_" ; end")
+ q
+ ;
+A107 ; non-exception flow - long reason for study, MWL returns full DICOM element
+ ;
+ n result,stat,logent
+ k HLA
+ ;
+ d LOG^magpt($t(A107)_" ; skipped") g A107X
+ d LOG^magpt($t(A107)_" ; begin")
+ ;
+ ; new order message
+ d ORM^magpt("NW","ORM",171) ; produces 10,260 characters
+ s stat=$$SEND^magptm("ORM",.result)
+ s logent="A.1.7.1 ; "_result w !,logent,! d LOG^magpt(logent,$na(HLA("HLS")))
+ ;
+ d LOG^magpt($t(A107)_" ; end")
+A107X ;
+ q
+ ;
+A108 ; non-exception flow - order and demo update
+ ;
+ n result,stat,logent
+ k HLA
+ ;
+ d LOG^magpt($t(A108)_" ; begin")
+ ;
+ ; new order message
+ d ORM^magpt("NW")
+ s stat=$$SEND^magptm("ORM",.result)
+ s logent="A.1.8.1 ; "_result w !,logent,! d LOG^magpt(logent,$na(HLA("HLS")))
+ ;
+ ; ADT demographic update
+ d ADTUPD^magpt("addr")
+ s stat=$$SEND^magptm("A08",.result)
+ s logent="A.1.8.2 ; "_result w !,logent,! d LOG^magpt(logent,$na(HLA("HLS")))
+ ;
+ d LOG^magpt($t(A108)_" ; end")
+ q
+ ;
+A109 ; non-exception flow - order and ADT transfer
+ ;
+ n result,stat,logent
+ k HLA
+ ;
+ d LOG^magpt($t(A109)_" ; begin")
+ ;
+ ; new order message - force inpt
+ f  d ORM^magpt("NW") q:$p(HLA("HLS",2),"^",3)="I"
+ s stat=$$SEND^magptm("ORM",.result)
+ s logent="A.1.9.1 ; "_result w !,logent,! d LOG^magpt(logent,$na(HLA("HLS")))
+ ;
+ ; ADT transfer
+ d ADTXFR^magpt
+ s stat=$$SEND^magptm("A02",.result)
+ s logent="A.1.9.2 ; "_result w !,logent,! d LOG^magpt(logent,$na(HLA("HLS")))
+ ;
+ d LOG^magpt($t(A109)_" ; end")
+ q
+ ;
+A110 ; non-exception flow - order and ADT discharge
+ ;
+ n result,stat,logent
+ k HLA
+ ;
+ d LOG^magpt($t(A110)_" ; begin")
+ ;
+ ; new order message - force inpt
+ f  d ORM^magpt("NW") q:$p(HLA("HLS",2),"^",3)="I"
+ s stat=$$SEND^magptm("ORM",.result)
+ s logent="A.1.10.1 ; "_result w !,logent,! d LOG^magpt(logent,$na(HLA("HLS")))
+ ;
+ ; ADT transfer
+ d ADTDIS^magpt
+ s stat=$$SEND^magptm("A03",.result)
+ s logent="A.1.10.2 ; "_result w !,logent,! d LOG^magpt(logent,$na(HLA("HLS")))
+ ;
+ d LOG^magpt($t(A110)_" ; end")
+ q
+ ;
+A111 ; non-exception flow - order and cancellation
+ ;
+ n result,stat,logent
+ k HLA
+ ;
+ d LOG^magpt($t(A111)_" ; begin")
+ ;
+ ; new order message
+ d ORM^magpt("NW")
+ s stat=$$SEND^magptm("ORM",.result)
+ s logent="A.1.11.1 ; "_result w !,logent,! d LOG^magpt(logent,$na(HLA("HLS")))
+ ;
+ ; cancel same order
+ s $p(HLA("HLS",3),"^",2)="CA",$p(HLA("HLS",3),"^",6)="CA"
+ s stat=$$SEND^magptm("ORM",.result)
+ s logent="A.1.11.2 ; "_result w !,logent,! d LOG^magpt(logent,$na(HLA("HLS")))
+ ;
+ d LOG^magpt($t(A111)_" ; end")
+ q
+ ;
+A112 ; non-exception flow - order and 2nd order w/new modality/study instance UID
+ ;
+ n result,stat,logent,siuid,lsiuid
+ k HLA
+ ;
+ d LOG^magpt($t(A112)_" ; skipped") g A112X
+ d LOG^magpt($t(A112)_" ; begin")
+ ;
+ ; new order message
+ d ORM^magpt("NW")
+ s stat=$$SEND^magptm("ORM",.result)
+ s logent="A.1.12.1 ; "_result w !,logent,! d LOG^magpt(logent,$na(HLA("HLS")))
+ ;
+ ; 2nd order w/new modality/study instance UID
+ s $p(HLA("HLS",4),"^",25)=$S($p(HLA("HLS",4),"^",25)="RA":"OT",1:"RA")
+ s siuid=$p(HLA("HLS",5),"^",2),lsiuid=$l(siuid,".")
+ s $p(siuid,".",lsiuid)=$p(siuid,".",lsiuid)+1
+ s $p(HLA("HLS",5),"^",2)=siuid
+ s stat=$$SEND^magptm("ORM",.result)
+ s logent="A.1.12.2 ; "_result w !,logent,! d LOG^magpt(logent,$na(HLA("HLS")))
+ ;
+ d LOG^magpt($t(A112)_" ; end")
+A112X ;
+ q

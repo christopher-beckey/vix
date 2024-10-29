@@ -1,0 +1,78 @@
+05/31/2006 15:13
+Saved from CONSNON
+MAGC5TST
+MAGC5TST ;CIN539/kem; 05/31/2006 15:13
+ ;;1.0;IRM Cincinnati
+ ;
+ N %,ZTDESC,ZTDTH,ZTIO,ZTRTN,ZTSAVE,ZTSK
+ S %ZIS="Q" D ^%ZIS Q:POP
+ I '$D(IO("Q")) D REPORT Q
+ S ZTDESC="Scan for images with multiple parents"
+ S ZTIO=ION,ZTDTH=$H,ZTRTN="REPORT^"_$T(+0)
+ D ^%ZTLOAD
+ I '$G(ZTSK) W !!,"Request Rejected by TaskMan",! Q
+ W !!!!,"Request Queued as task #",ZTSK,!
+ Q
+ ;
+REPORT N CHILD,D1,DFC,DFP,ERR,FST,N,PARENT,TICK,X
+ K ^TMP("MAG",$J,"C5")
+ S TICK=0
+ S PARENT=0 F  S PARENT=$O(^MAG(2005,PARENT))  Q:PARENT=""  D
+ . S D1=0 F  S D1=$O(^MAG(2005,PARENT,1,D1))  Q:'D1  D
+ . . S CHILD=$P($G(^MAG(2005,PARENT,1,D1,0)),"^")
+ . . S:CHILD ^TMP("MAG",$J,"C5",CHILD,PARENT)=""
+ . . S TICK=TICK+1 Q:TICK#10000
+ . . W !,TICK," images traversed"
+ . . Q
+ . Q
+ S PARENT=0 F  S PARENT=$O(^MAG(2005.1,PARENT))  Q:PARENT=""  D
+ . S D1=0 F  S D1=$O(^MAG(2005.1,PARENT,1,D1))  Q:'D1  D
+ . . S CHILD=$P($G(^MAG(2005.1,PARENT,1,D1,0)),"^")
+ . . S:CHILD ^TMP("MAG",$J,"C5",CHILD,PARENT)=""
+ . . S TICK=TICK+1 Q:TICK#10000
+ . . W !,TICK," images traversed"
+ . . Q
+ . Q
+ W !!,TICK," images found.",!
+ U IO W "Total # of images is ",TICK,!
+ ;
+ S CHILD="" F  S CHILD=$O(^TMP("MAG",$J,"C5",CHILD)) Q:CHILD=""  D
+ . K ERR
+ . S DFC=$P($$GET(CHILD,0),"^",7),N=0,ERR=0
+ . S PARENT="" F  S PARENT=$O(^TMP("MAG",$J,"C5",CHILD,PARENT)) Q:PARENT=""  D
+ . . S N=N+1,DFP=$P($$GET(PARENT,0),"^",7)
+ . . S:DFP'=DFC ERR=ERR+1,ERR(ERR)="Child patient: "_CHILD_"="_DFC_", parent patient: "_PARENT_"="_DFP_"."
+ . . Q
+ . D:N>1
+ . . S PARENT="" F  S PARENT=$O(^TMP("MAG",$J,"C5",CHILD,PARENT)) Q:PARENT=""  D
+ . . . S X="Parent "_PARENT_" ("_$$FMD($P($$GET(PARENT,2),"^",1))_")"
+ . . . S:$D(^MAG(2005,CHILD)) X=X_", Active"
+ . . . S:$D(^MAG(2005.1,CHILD)) X=X_", Deleted"
+ . . . S ERR=ERR+1,ERR(ERR)=X
+ . . . Q
+ . . Q
+ . Q:'ERR
+ . W !!,"Image # ",CHILD," (",$$FMD($P($$GET(CHILD,2),"^",1)),")"
+ . W:$D(^MAG(2005,CHILD)) ", Active"
+ . W:$D(^MAG(2005.1,CHILD)) ", Deleted"
+ . S ERR="" F  S ERR=$O(ERR(ERR)) Q:ERR=""  W !?5,ERR(ERR)
+ . Q
+ W !!
+ D ^%ZISC
+ K ^TMP("MAG",$J,"C5")
+ Q
+ ;
+GET(IMAGE,NODE) N X
+ S X=$G(^MAG(2005,IMAGE,NODE)) Q:X'="" X
+ Q $G(^MAG(2005.1,IMAGE,NODE))
+ ;
+FMD(X) Q:'X "--no date--"
+ N D,H,M,O,S,Y
+ S D=X\1#100,M=X\100#100,Y=X\10000+1700
+ S O=D_" "_$P("Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec"," ",M)_" "_Y
+ I X'["." Q O
+ S X=$E($P(X,".",2)_"      ",1,6),H=$E(X,1,2),M=$E(X,3,4),S=$E(X,5,6)
+ S H=$TR(H," ",0),M=$TR(M," ",0)
+ S O=O_", "_H_":"_M S:S'="  " O=O_":"_S
+ Q O
+ ;

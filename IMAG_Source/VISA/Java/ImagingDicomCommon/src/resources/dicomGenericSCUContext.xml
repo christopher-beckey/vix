@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<!--- ========================= APPLICATION CONTEXT DEFINITIONS =====================-->
+<beans>
+	<bean id="DicomTransmitFacade" class="gov.va.med.imaging.dicom.scu.api.transmit.impl.DicomTransmitManager">
+		<property name="storeSCUControl"><ref bean="StoreSCUControl"/></property>	
+		<property name="storeCommitSCUControl"><ref bean="StoreCommitSCUControl"/></property>	
+		<property name="businessDicomDataSet"><ref bean="BusinessDicomDataSet"/></property>
+		<property name="dicomDataSet"><ref bean="DicomDataSet"/></property>			
+	</bean>
+		<bean id="StoreSCUControl" class="gov.va.med.imaging.dicom.scu.storagescu.impl.StoreSCUControlImpl">
+		<property name="dicomStoreSCU"><ref bean="DicomStoreSCU"/></property>		
+	</bean>
+		<bean id="DicomStoreSCU" class="gov.va.med.imaging.dicom.dcftoolkit.scu.storagescu.impl.DicomStoreSCUImpl">
+	</bean>
+		<bean id="StoreCommitSCUControl" class="gov.va.med.imaging.dicom.scu.storagescu.impl.StoreCommitSCUControlImpl">
+		<property name="dicomStoreCommitSCU"><ref bean="DicomStoreCommitSCU"/></property>		
+	</bean>
+		<bean id="DicomStoreCommitSCU" class="gov.va.med.imaging.dicom.dcftoolkit.scu.storagescu.impl.DicomStoreCommitSCUImpl">
+	</bean>
+		<bean id="BusinessDicomDataSet" class="gov.va.med.imaging.dicom.scu.impl.BusinessDataSetImpl">
+	</bean>
+		<bean id="DicomDataSet" class="gov.va.med.imaging.dicom.dcftoolkit.common.impl.DicomDataSetImpl" singleton="false">
+	</bean>
+		<bean id="DicomPart10File" class="gov.va.med.imaging.dicom.dcftoolkit.common.impl.DicomPart10FileImpl" singleton="false">
+	</bean>
+
+
+	<!-- ====================== BUSINESS OBJECT DEFINITIONS ========================= -->
+	
+</beans>
+

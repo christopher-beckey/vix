@@ -1,0 +1,111 @@
+[ application_info ]
+name = spawn_cgi
+description = Launch web CGI-BIN script without windows console.
+app_component_name = cpp_app/spawn_cgi
+execution_state = STOPPED
+
+[ required_components ]
+component = cpp_lib_src/DCF_cl
+component = cpp_lib_src/DCF
+component = cpp_lib_src/LOG
+component = cpp_lib_src/CDS
+component = cpp_lib_src/APC
+component = cpp_lib/DCFUtil
+component = cpp_lib/APC_a
+component = idl_lib/DAPC
+component = cpp_lib/LOG_a
+component = idl_lib/DLOG
+component = idl_lib/DCDS
+component = cpp_lib/CDS_a
+[ cpp_app ]
+
+#==============================================================================
+# per-instance information for the spawn_cgi component
+#==============================================================================
+[ cpp_app/spawn_cgi ]
+debug_flags = 0x00000
+[ cpp_lib_src ]
+
+
+#==============================================================================
+# per-instance information for the DCF_cl component
+#==============================================================================
+[ cpp_lib_src/DCF_cl ]
+debug_flags = 0x00000
+
+#==============================================================================
+# per-instance information for the DCF component
+#==============================================================================
+[ cpp_lib_src/DCF ]
+debug_flags = 0
+
+#==============================================================================
+# per-instance information for the LOG component
+#==============================================================================
+[ cpp_lib_src/LOG ]
+debug_flags = 0x00000
+
+#==============================================================================
+# per-instance information for the CDS component
+#==============================================================================
+[ cpp_lib_src/CDS ]
+debug_flags = 0x00000
+
+#==============================================================================
+# per-instance information for the APC component
+#==============================================================================
+[ cpp_lib_src/APC ]
+debug_flags = 0x00000
+[ cpp_lib ]
+
+
+#==============================================================================
+# per-instance information for the DCFUtil component
+#==============================================================================
+[ cpp_lib/DCFUtil ]
+debug_flags = 0
+
+#==============================================================================
+# per-instance information for the APC_a component
+#==============================================================================
+[ cpp_lib/APC_a ]
+debug_flags = 0
+save_proc_cfg_in_cds = yes
+save_exit_status_in_proc_cfg = no
+delete_proc_cfg = yes
+
+#==============================================================================
+# per-instance information for the LOG_a component
+#==============================================================================
+[ cpp_lib/LOG_a ]
+debug_flags = 0
+
+[ cpp_lib/LOG_a/outputs ]
+[ cpp_lib/LOG_a/outputs/server_output_1 ]
+type = LOGSERVER
+use_log_server = TRUE
+
+[ cpp_lib/LOG_a/outputs/file_output_1 ]
+type = textfile
+message_types = *
+component_names = *
+# Note that changing the format of this name may affect the behavior of the web
+# utilities that manipulate log files (e.g., list_logs.pl, dcfrmlogs.pl).
+filename = C:/DCF_Runtime/tmp/log/${APPIBNAME}.${CNT}.log
+# Maximum size in kilobytes of each log file before rotating.
+max_size = 3000
+# Maximum number of log files before deleting older ones.
+max_files = 5
+
+#==============================================================================
+# per-instance information for the CDS_a component
+#==============================================================================
+[ cpp_lib/CDS_a ]
+debug_flags = 0
+[ idl_lib ]
+
+[ idl_lib/DAPC ]
+
+[ idl_lib/DLOG ]
+
+[ idl_lib/DCDS ]

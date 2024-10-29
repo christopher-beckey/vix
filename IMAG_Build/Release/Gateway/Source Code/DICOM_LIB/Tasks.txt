@@ -1,0 +1,27 @@
+
+Release 1.0.0:
+
+Corrected Known Bugs in Release 0.9 Beta release:
+
+1. Did not properly create Part10 Files.
+
+2. Did not properly processed incoming Part10 file.
+
+3. Did not determine group length properly when converting from 
+DCM to VR.  Temporarily correct it for Group2.  Then correct it
+for the other groups.
+
+4. Fix problems with implementing User Information.  Did
+not send Class Implementation UID/SCUSCP Role Selection/SOP 
+Class Extended Negotaition.  Make it so it is configurable by the
+external program using the toolkit.
+
+
+Additions/Modifications for Release 1.0.0:
+
+__	1. Add missing information to User Information class.  It
+does not account for item 56H and 53H.  Both Sub-items are optional.
+
+XX	2. Add UT Encoding info.
+
+

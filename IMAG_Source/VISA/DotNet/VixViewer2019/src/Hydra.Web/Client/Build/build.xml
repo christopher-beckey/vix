@@ -1,0 +1,977 @@
+<?xml version="1.0"?>
+<project name="Hydra" basedir="." default="main">
+  
+    <property name="develop.js.cache" value="../Develop/js/cache"/>       
+    <property name="develop.js.dicom" value="../Develop/js/dicom"/>
+    <property name="develop.js.render" value="../Develop/js/viewer/renderer"/>
+    <property name="develop.js.tools" value="../Develop/js/viewer/tools"/>
+    <property name="develop.bootstrap" value="../Develop/bootstrap"/>
+    <property name="develop.images" value="../Develop/images"/>
+    <property name="develop.style" value="../Develop/style"/>
+    <property name="develop.html.views" value="../Develop"/>
+    <property name="develop.js.jquery" value="../Develop/js/jquery-ui-1.8.23.custom"/>
+    <property name="develop.js.layouts" value="../Develop/js/layouts"/>
+    <property name="develop.js.kendo" value="../Develop/js/kendo"/>
+    <property name="develop.js.openSource" value="../Develop/js"/>
+    <property name="develop.js.dnd" value="../Develop/js/dnd"/>
+    <property name="develop.js.pdf" value="../Develop/js/pdf"/>
+    <property name="develop.js.manage" value="../Develop/js/manage"/>
+    <property name="develop.js.renderer" value="../Develop/js/viewer/renderer"/>
+    <property name="develop.js.common" value="../Develop/js/common/"/>
+    <property name="develop.js.dataTable" value="../Develop/js/dataTable"/>
+    <property name="develop.js.preferences" value="../Develop/js/preferences"/>
+    <property name="develop.js.dash" value="../Develop/js/dash"/>
+    <property name="develop.js.qa" value="../Develop/js/qa"/>
+    <property name="develop.js.roi" value="../Develop/js/roi"/>
+
+    <!--Adding the path for Release Directory -->
+    <property name="release.js.cache" value="../Release/js/cache"/>
+    <property name="release.js.dicom" value="../Release/js/dicom"/>
+    <property name="release.js.render" value="../Release/js/viewer/renderer"/>
+    <property name="release.js.tools" value="../Release/js/viewer/tools"/>
+    <property name="release.bootstrap" value="../Release/bootstrap"/>
+    <property name="release.images" value="../Release/images"/>
+    <property name="release.style" value="../Release/style"/>
+    <property name="release.html.views" value="../Release"/>
+    <property name="release.js.jquery" value="../Release/js/jquery-ui-1.8.23.custom"/>
+    <property name="release.js.layouts" value="../Release/js/layouts"/>
+    <property name="release.js.kendo" value="../Release/js/kendo"/>
+    <property name="release.js.openSource" value="../Release/js"/>
+    <property name="release.js.dnd" value="../Release/js/dnd"/>
+    <property name="release.js.pdf" value="../Release/js/pdf"/>
+    <property name="release.js.manage" value="../Release/js/manage"/>
+    <property name="release.js.common" value="../Release/js/common/"/>
+    <property name="release.js.dataTable" value="../Release/js/dataTable"/>
+    <property name="release.js.preferences" value="../Release/js/preferences"/>
+    <property name="release.js.dash" value="../Release/js/dash"/>
+    <property name="release.js.qa" value="../Release/js/qa"/>
+    <property name="release.js.roi" value="../Release/js/roi"/>
+
+    <!--Add  yuicompressor-2.4.2.jar file for compressing javascript files-->
+    <property description="YUICompressor" name="YUICompressor" value="lib/yuicompressor-2.4.2.jar" />
+
+    <!--Path for merged files -->
+    <property name="js.merge.cache" value="${release.js.cache}/cache.js" />
+    <property name="js.merge.render" value="${release.js.render}/render.js" />
+    <property name="js.merge.dicom" value="${release.js.dicom}/dicom.js" />
+    <property name="js.merge.tools" value="${release.js.tools}/tools.js" />
+    <property name="js.merge.worker" value="${release.js.common}/worker.js" />
+    <property name="js.merge.preferences" value="${release.js.preferences}/preferences.js" />
+    <property name="js.merge.dash" value="${release.js.dash}/dash.js" />
+    <property name="js.merge.qa" value="${release.js.qa}/qa.js" />
+    <property name="js.merge.qaReport" value="${release.js.qa}/qaReport.js" />
+    <property name="js.merge.roiStatus" value="${release.js.roi}/roiStatus.js" />
+    <property name="js.merge.roiSubmission" value="${release.js.roi}/roiSubmission.js" />
+
+    <!--Path for merged manage files -->
+    <property name="js.merge.manage.renderer" value="${release.js.manage}/manage.renderer.js" />
+    <property name="js.merge.manage.toolbar" value="${release.js.manage}/manage.toolbar.js" />
+    <property name="js.merge.manage.cache" value="${release.js.cache}/manage.cache.js" />
+    <property name="js.merge.manage.core" value="${release.js.render}/manage.core.js" />
+
+    <!-- Get the current time of the build script started running-->
+    <tstamp>
+      <!--yyyyMMddHHmmss year month date hours minutes seconds -->
+      <format property="currentTime" pattern="yyyyMMddHHmmss" locale="en"/>
+    </tstamp>
+
+    <!--Merge all javascript files in the cache folder and create cache.js -->
+    <target name="merge-cache-js">
+        <!-- create the cache folder inside Release folder -->
+        <mkdir dir="${release.js.cache}"/>
+
+        <!--Concatenate to cache.js -->
+        <concat destfile="${js.merge.cache}">
+            <!--Adding the List of javascript files to merge with cache.js -->
+          <filelist dir="${develop.js.cache}">
+            <file name="imagecache.js" />
+            <file name="imageCacheHandler.js" />
+            <file name="imageDicomHeader.js" />
+            <file name="imageDirectionalMarker.js" />
+            <!--When adding file we need to add imageMeasurementManager.js before adding imageDrawMeasurements.js-->
+            <!--imageMeasurementManager.js contains dicomViewer.measurement.draw and imageDrawMesurements.js contain dicomViewer.measurement-->
+            <file name="imageMeasurementManager.js" />
+            <file name="imageDrawMeasurements.js" />
+            <file name="imageDrawUSRegions.js" />
+            <file name="imageLoader.js" />
+            <file name="imageMouseTools.js" />
+            <file name="imageovelayconfig.js" />
+            <file name="imageSecurityTokenHandler.js" />
+            <file name="imageStudyDetailsManager.js" />
+            <file name="imageThumbnail.js" />
+            <file name="imageTools.js" />
+            <file name="imageURLHandler.js" />
+            <file name="imageViewport.js" />
+            <file name="imageViewportManager.js" />
+            <file name="imageCacheNotificationMgr.js" />
+            <file name="imageDrawRefLines.js"/>
+            <file name="imageReferenceLineManager.js"/>
+            <file name="imageEcgCaliper.js"/>
+            <file name="Configurations.js"/>
+            <file name="imageLinkManager.js" />
+          </filelist>
+        </concat>
+    </target>
+    
+    <!--Merge all javascript files in the dash folder and create dash.js -->
+    <target name="merge-dash-js">
+        <!-- create the dash folder inside Release folder -->
+        <mkdir dir="${release.js.dash}"/>
+
+        <!--Concatenate to dash.js -->
+        <concat destfile="${js.merge.dash}">
+            <!--Adding the List of javascript files to merge with dash.js -->
+            <filelist id="ravSoftfiles" dir="${develop.js.dash}">
+                <file name="systemPreferences.js" />
+                <file name="dash.js" />
+            </filelist>
+        </concat>
+    </target>
+
+    <!--Merge all javascript files in the qa folder and create qa.js -->
+    <target name="merge-qa-js">
+        <!-- create the qa folder inside Release folder -->
+        <mkdir dir="${release.js.qa}"/>
+        <copy file="${develop.js.manage}/manageImage.js" tofile="${develop.js.qa}/manageImage.js"/>
+        <copy file="${develop.js.cache}/imageSecurityTokenHandler.js" tofile="${develop.js.qa}/imageSecurityTokenHandler.js"/>
+        <copy file="${develop.js.openSource}/urlConfig.js" tofile="${develop.js.qa}/urlConfig.js"/>
+
+        <!--Concatenate to qa.js -->
+        <concat destfile="${js.merge.qa}">
+            <!--Adding the List of javascript files to merge with qa.js -->
+            <filelist id="ravSoftfiles" dir="${develop.js.qa}">
+                <file name="qa.js" />
+                <file name="manageImage.js" />
+                <file name ="imageSecurityTokenHandler.js" />
+                <file name ="urlConfig.js" />
+            </filelist>
+        </concat>
+    <delete file="${develop.js.qa}/manageImage.js"/>
+    <delete file="${develop.js.qa}/imageSecurityTokenHandler.js"/>
+    <delete file="${develop.js.qa}/urlConfig.js"/>
+    </target>
+
+    <!--Merge all javascript files in the qa folder and create qareport.js -->
+    <target name="merge-qareport-js">
+        <!-- create the qa folder inside Release folder -->
+        <mkdir dir="${release.js.qa}"/>
+
+        <!--Concatenate to qa.js -->
+        <concat destfile="${js.merge.qaReport}">
+            <!--Adding the List of javascript files to merge with qa.js -->
+            <filelist id="ravSoftfiles" dir="${develop.js.qa}">
+                <file name="qaReport.js" />
+            </filelist>
+        </concat>
+    </target>
+
+    <!--Merge all javascript files in the preferences folder and create preferences.js -->
+    <target name="merge-preferences-js">
+        <!-- create the preferences folder inside Release folder -->
+        <mkdir dir="${release.js.preferences}"/>
+        <!--Concatenate to preferences.js -->
+        <concat destfile="${js.merge.preferences}">
+            <!--Adding the List of javascript files to merge with preferences.js -->
+            <filelist id="ravSoftfiles" dir="${develop.js.preferences}">
+                <file name="annotationPreferences.js" />
+                <file name="generalPreferences.js" />
+                <file name="easyResponsiveTabs.js" />
+            </filelist>
+        </concat>
+        <copy todir="${release.js.preferences}">
+            <fileset dir="${develop.js.preferences}">
+                <include name="jquery-1.9.1.min.js" />
+                <include name="jquery-1.6.3.min.js" />
+            </fileset>
+        </copy>
+    </target>
+
+    <!--Merge all javascript files in the dicom folder and create dicom.js -->
+    <target name="merge-dicom-js">
+        <!-- create the dicom folder inside Release folder -->
+        <mkdir dir="${release.js.dicom}"/>
+        <!--Concatenate to dicom.js -->
+        <concat destfile="${js.merge.dicom}">
+            <!--Adding the List of javascript files to merge with dicom.js -->
+            <filelist id="ravSoftfiles" dir="${develop.js.dicom}">
+                <file name="DicomInputStreamReader.js" />
+                <file name="LookupTable.js" />
+            </filelist>
+        </concat>
+        <copy todir="${release.js.dicom}">
+            <fileset dir="${develop.js.dicom}">
+                <include name="SliceCalculator.js" />
+            </fileset>
+            <globmapper from="*" to="SliceCalculator1.js"/>
+        </copy>
+    </target>
+
+
+    <!--Merge all javascript files in the render folder and create render.js -->
+    <target name="merge-render-js">
+        <!-- create the render folder inside Release folder -->
+        <mkdir dir="${release.js.render}"/>
+        <!--Concatenate to render.js -->
+        <concat destfile="${js.merge.render}">
+            <!--Adding the List of javascript files to merge with render.js -->
+            <filelist id="ravSoftfiles" dir="${develop.js.render}">
+                <file name="DicomMetaInfoReader.js" />
+                <file name="ImageInfoManager.js" />
+                <file name="EcgRender.js" />
+                <file name="ImageRenderer.js" />
+                <file name="PreferenceInfo.js" />
+                <file name="Presentation.js" />
+                <file name="SeriesLevelLayout.js" />
+                <file name="ThumbnailRenderer.js" />
+                <file name="ViewportProgressBar.js" />
+                <file name="SRreport.js" />
+                <file name="MediaPlayer.js" />
+                <file name="pdfRender.js" />
+            </filelist>
+        </concat>
+    </target>
+
+    <!--Merge all javascript files in the tools folder and create tools.js -->
+    <target name="merge-tools-js">
+        <mkdir dir="${release.js.tools}"/>
+        <concat destfile="${js.merge.tools}">
+            <!--Adding the List of javascript files to merge with tools.js -->
+            <filelist id="ravSoftfiles" dir="${develop.js.tools}">
+                <file name="LineMeasurement.js" />
+                <file name="TraceMeasurement.js" />
+                <file name="VolumeMeasurement.js" />
+                <file name="MouseTool.js" />
+                <file name="Pan.js" />
+                <file name="DefaultTool.js" />
+                <file name="PointMeasurement.js" />
+                <file name="ToolList.js" />
+                <file name="WindowLevel.js" />
+                <file name="ZoomTool.js" />
+                <file name="MitralMeanGradientMeasurement.js" />
+                <file name="AngleMeasurementTool.js" />
+                <file name="EllipseMeasurement.js" />
+                <file name="RectangleMeasurement.js" />
+                <file name="DefaultTool.js" />
+                <file name="Smooth.js" />
+                <file name="WindowLevelROI.js" />
+                <file name="XRefLineSelectionTool.js" /> 
+                <file name="LinkTool.js" />
+                <file name="SharpenTool.js" />
+                <file name="PenTool.js" />
+                <file name="BrightnessContrast.js" />
+                <file name="CopyAttributes.js" />
+            </filelist>
+        </concat>
+    </target>
+
+    <!--Merge all javascript files in the tools folder and create tools.js -->
+    <target name="merge-roiSubmission-js">
+        <mkdir dir="${release.js.roi}"/>
+        <concat destfile="${js.merge.roiSubmission}">
+            <!--Adding the List of javascript files to merge with tools.js -->
+            <filelist id="ravSoftfiles" dir="${develop.js.roi}">
+                <file name="roiSubmission.js" />
+                <file name="roiCommon.js" />
+            </filelist>
+        </concat>
+    </target>
+
+    <!--Merge all javascript files in the tools folder and create tools.js -->
+    <target name="merge-roiStatus-js">
+        <concat destfile="${js.merge.roiStatus}">
+            <!--Adding the List of javascript files to merge with tools.js -->
+            <filelist id="ravSoftfiles" dir="${develop.js.roi}">
+                <file name="roiStatus.js" />
+                <file name="roiCommon.js" />
+            </filelist>
+        </concat>
+    </target>
+
+    <!-- Compressing the cache.js and create cache.min.js  -->
+    <target name="compress-cache-js" description="Minimize cache.js JavaScript files to cache.min.js" depends="merge-cache-js">
+        <replace file="${release.js.cache}/cache.js" token="imageCacheWorker.js" value="imageCacheWorker.js?v=${currentTime}"/>
+        <echo message="Compressing cache.js to cache.min.js" />
+        <apply executable="java" parallel="false" verbose="true" dest="${release.js.cache}">
+            <!--Merged files from cache directory -->
+            <fileset dir="${release.js.cache}">
+                <include name="*.js" />
+            </fileset>
+            <arg line="-jar" />
+            <arg path="${YUICompressor}" />
+            <arg value="--charset" />
+            <arg value="ANSI" />
+            <arg value="-o" />
+
+            <mapper type="glob" from="cache.js" to="cache.min.js" />
+            <targetfile />
+        </apply>
+    </target>
+
+    <!-- Compressing the dicom.js and create dicom.min.js -->
+    <target name="compress-dicom-js" description="Minimize dicom.js JavaScript files to dicom.min.js" depends="merge-dicom-js">
+        <echo message="compressing dicom.js to dicom.min.js" />
+        <apply executable="java" parallel="false" verbose="true" dest="${release.js.dicom}">
+            <fileset dir="${release.js.dicom}">
+                <include name="*.js" />
+            </fileset>
+            <arg line="-jar" />
+            <arg path="${YUICompressor}" />
+            <arg value="--charset" />
+            <arg value="ANSI" />
+            <arg value="-o" />
+
+            <mapper type="glob" from="dicom.js" to="dicom.min.js" />
+            <targetfile />
+        </apply>
+    </target>
+
+    <!-- Compressing the render.js and create render.min.js -->
+    <target name="compress-render-js" description="Minimize render.js JavaScript files to render.min.js" depends="merge-render-js">
+        <echo message="compressing render.js to render.min.js" />
+        <apply executable="java" parallel="false" verbose="true" dest="${release.js.render}">
+            <fileset dir="${release.js.render}">
+                <include name="*.js" />
+            </fileset>
+            <arg line="-jar" />
+            <arg path="${YUICompressor}" />
+            <arg value="--charset" />
+            <arg value="ANSI" />
+            <arg value="-o" />
+
+            <mapper type="glob" from="render.js" to="render.min.js" />
+            <targetfile />
+        </apply>
+    </target>
+
+    <!-- Compressing the tools.js and create tools.min.js -->
+    <target name="compress-tools-js" description="Minimize tools.js JavaScript files to tools.min.js" depends="merge-tools-js">
+        <echo message="compressing tools.js to tools.min.js" />
+        <apply executable="java" parallel="false" verbose="true" dest="${release.js.tools}">
+            <fileset dir="${release.js.tools}">
+                <include name="*.js" />
+            </fileset>
+            <arg line="-jar" />
+            <arg path="${YUICompressor}" />
+            <arg value="--charset" />
+            <arg value="ANSI" />
+            <arg value="-o" />
+
+            <mapper type="glob" from="tools.js" to="tools.min.js" />
+            <targetfile />
+        </apply>
+    </target>
+
+    <!-- Compressing the roiStatus.js and create roiStatus.min.js -->
+    <target name="compress-roiStatus-js" description="Minimize roiStatus.js JavaScript files to roiStatus.min.js" depends="merge-roiStatus-js">
+        <echo message="compressing roiStatus.js to roiStatus.min.js" />
+        <apply executable="java" parallel="false" verbose="true" dest="${release.js.roi}">
+            <fileset dir="${release.js.roi}">
+                <include name="roiStatus.js" />
+            </fileset>
+            <arg line="-jar" />
+            <arg path="${YUICompressor}" />
+            <arg value="--charset" />
+            <arg value="ANSI" />
+            <arg value="-o" />
+
+            <mapper type="glob" from="roiStatus.js" to="roiStatus.min.js" />
+            <targetfile />
+        </apply>
+        <delete file="${release.js.roi}/roiStatus.js"/>
+        <delete file="${release.js.roi}/roiSubmission.js"/>
+    </target>
+
+    <!-- Compressing the roiSubmission.js and create roiSubmission.min.js -->
+    <target name="compress-roiSubmission-js" description="Minimize roiSubmission.js JavaScript files to roiSubmission.min.js" depends="merge-roiSubmission-js">
+        <echo message="compressing roiSubmission.js to roiSubmission.min.js" />
+        <apply executable="java" parallel="false" verbose="true" dest="${release.js.roi}">
+            <fileset dir="${release.js.roi}">
+                <include name="roiSubmission.js" />
+            </fileset>
+            <arg line="-jar" />
+            <arg path="${YUICompressor}" />
+            <arg value="--charset" />
+            <arg value="ANSI" />
+            <arg value="-o" />
+
+            <mapper type="glob" from="roiSubmission.js" to="roiSubmission.min.js" />
+            <targetfile />
+        </apply>
+    </target>
+
+    <!-- Compressing the imageCacheWorker.js and create imageCacheWorker.js(minified) -->
+    <target name="compress-webworker-js" description="Minimize imageCacheWorker.js JavaScript files to minified imageCacheWorker.js">
+        <echo message="compressing imageCacheWorker.js  to  minified imageCacheWorker.js" />
+
+        <!-- Copy file imageCacheWorker.js to release folder and create  rename imageCacheWorker1.js(temporary file)-->
+        <copy todir="${release.js.dicom}">
+            <fileset dir="${develop.js.dicom}">
+                <include name="imageCacheWorker.js" />
+            </fileset>
+            <globmapper from="*" to="imageCacheWorker1.js"/>
+        </copy>
+
+        <!--path for dicom inside Release folder -->
+        <apply executable="java" parallel="false" verbose="true" dest="${release.js.dicom}">
+            <fileset dir="${release.js.dicom}">
+                <include name="imageCacheWorker1.js"/>
+            </fileset>
+            <arg line="-jar" />
+            <arg path="${YUICompressor}" />
+            <arg value="--charset" />
+            <arg value="ANSI" />
+            <arg value="-o" />
+
+            <mapper type="glob" from="imageCacheWorker1.js" to="imageCacheWorker.js" />
+            <targetfile />
+        </apply>
+
+        <delete file="${release.js.dicom}/imageCacheWorker1.js"/>
+        <replace file="${release.js.dicom}/imageCacheWorker.js" token="DicomInputStreamReader.js" value="dicom.min.js?v=${currentTime}"/>
+        <replace file="${release.js.dicom}/imageCacheWorker.js" token="SliceCalculator.js" value="SliceCalculator.js?v=${currentTime}"/>
+    </target>
+    
+    <!-- Compressing the preferences.js and create preferences.min.js -->
+    <target name="compress-preferences-js" description="Minimize preferences.js JavaScript files to preferences.min.js" depends="merge-preferences-js">
+        <echo message="Compressing preferences.js to preferences.min.js" />
+        <apply executable="java" parallel="false" verbose="true" dest="${release.js.preferences}">
+            <!--Merged files from preferences directory -->
+            <fileset dir="${release.js.preferences}">
+                <include name="*.js" />
+            </fileset>
+            <arg line="-jar" />
+            <arg path="${YUICompressor}" />
+            <arg value="--charset" />
+            <arg value="ANSI" />
+            <arg value="-o" />
+
+            <mapper type="glob" from="preferences.js" to="preferences.min.js" />
+            <targetfile />
+        </apply>
+    </target>
+    
+    <!-- Compressing the dash.js and create dash.min.js -->
+    <target name="compress-dash-js" description="Minimize dash.js JavaScript files to dash.min.js" depends="merge-dash-js">
+        <echo message="Compressing dash.js to dash.min.js" />
+        <apply executable="java" parallel="false" verbose="true" dest="${release.js.dash}">
+            <!--Merged files from dash directory -->
+            <fileset dir="${release.js.dash}">
+                <include name="*.js" />
+            </fileset>
+            <arg line="-jar" />
+            <arg path="${YUICompressor}" />
+            <arg value="--charset" />
+            <arg value="ANSI" />
+            <arg value="-o" />
+
+            <mapper type="glob" from="dash.js" to="dash.min.js" />
+            <targetfile />
+        </apply>
+    </target>
+
+    <!--Compressing the qa.js and create qa.min.js -->
+    <target name="compress-qa-js" description="Minimize qa.js JavaScript files to qa.min.js" depends="merge-qa-js">
+        <echo message="Compressing qa.js to qa.min.js" />
+        <apply executable="java" parallel="false" verbose="true" dest="${release.js.qa}">
+            <!--Merged files from qa directory -->
+            <fileset dir="${release.js.qa}">
+                <include name="qa.js" />
+            </fileset>
+            <arg line="-jar" />
+            <arg path="${YUICompressor}" />
+            <arg value="--charset" />
+            <arg value="ANSI" />
+            <arg value="-o" />
+
+            <mapper type="glob" from="qa.js" to="qa.min.js" />
+            <targetfile />
+        </apply>
+    </target>
+
+    <!--Compressing the qa.js and create qa.min.js -->
+    <target name="compress-qareport-js" description="Minimize qaReport.js JavaScript files to qaReport.min.js" depends="merge-qareport-js">
+        <echo message="Compressing qaReport.js to qaReport.min.js" />
+        <apply executable="java" parallel="false" verbose="true" dest="${release.js.qa}">
+            <!--Merged files from qa directory -->
+            <fileset dir="${release.js.qa}">
+                <include name="qaReport.js" />
+            </fileset>
+            <arg line="-jar" />
+            <arg path="${YUICompressor}" />
+            <arg value="--charset" />
+            <arg value="ANSI" />
+            <arg value="-o" />
+
+            <mapper type="glob" from="qaReport.js" to="qaReport.min.js" />
+            <targetfile />
+        </apply>
+    </target>
+
+    <target name="viewer">
+        <!-- assets -->
+        <copy file="../Develop/assets/favicon.ico" todir="${release.html.views}"/>
+        <!-- cshtml files -->
+        <copy file="${develop.html.views}/viewer-release.cshtml" tofile="${release.html.views}/viewer.cshtml"/>
+        <copy file="${develop.html.views}/ROI-release.cshtml" tofile="${release.html.views}/ROI.cshtml"/>
+        <copy file="${develop.html.views}/ROISubmission-release.cshtml" tofile="${release.html.views}/ROISubmission.cshtml"/>
+        <copy file="${develop.html.views}/loader.cshtml" tofile="${release.html.views}/loader.cshtml"/>
+        <copy file="${develop.html.views}/EventLogView.cshtml" tofile="${release.html.views}/EventLogView.cshtml"/>
+        <copy file="${develop.html.views}/session.cshtml" todir="${release.html.views}"/>
+        <copy file="${develop.html.views}/manage-release.cshtml" tofile="${release.html.views}/manage.cshtml"/>
+        <copy file="${develop.html.views}/dash-release.cshtml" tofile="${release.html.views}/dash.cshtml"/>
+        <copy file="${develop.html.views}/qa-release.cshtml" tofile="${release.html.views}/qa.cshtml"/>
+        <copy file="${develop.html.views}/qareport-release.cshtml" tofile="${release.html.views}/qareport.cshtml"/>
+        <copy file="${develop.html.views}/login.cshtml" tofile="${release.html.views}/login.cshtml"/>
+        <copy file="${develop.html.views}/tools.cshtml" tofile="${release.html.views}/tools.cshtml"/>
+
+      <!-- JavaScript files -->
+        <copy file="${develop.js.dnd}/DragDropTouch.js" todir="${release.js.dnd}"/>
+
+        <copy todir="${release.bootstrap}">
+            <fileset dir="${develop.bootstrap}" />
+        </copy>
+        <copy todir="${release.js.dataTable}">
+            <fileset dir="${develop.js.dataTable}" />
+        </copy>
+        <copy todir="${release.images}">
+            <fileset dir="${develop.images}" />
+        </copy>
+        <copy todir="${release.style}">
+            <fileset dir="${develop.style}" />
+        </copy>
+        <copy todir="${release.js.jquery}">
+            <fileset dir="${develop.js.jquery}" />
+        </copy>
+        <copy todir="${release.js.layouts}">
+            <fileset dir="${develop.js.layouts}" />
+        </copy>
+        <copy todir="${release.js.kendo}">
+            <fileset dir="${develop.js.kendo}" />
+        </copy>
+        <copy todir="${release.js.pdf}">
+            <fileset dir="${develop.js.pdf}" />
+        </copy>
+
+        <!-- all files in js folder -->
+        <copy todir="${release.js.openSource}">
+            <fileset dir="${develop.js.openSource}">
+                <include name="*.js" />
+            </fileset>
+        </copy>
+
+        <!-- Get the current date and time -->
+        <!-- Replace All javascript files inside the viewer.html(release version) and add the version based on the current time used to load the latest chnages in the browser -->
+        <echo>the current date and time is ${currentTime}</echo>
+        <replace file="${release.html.views}/viewer.cshtml" token="dicom.min.js" value="dicom.min.js?v=${currentTime}"/>
+        <replace file="${release.html.views}/viewer.cshtml" token="render.min.js" value="render.min.js?v=${currentTime}"/>
+        <replace file="${release.html.views}/viewer.cshtml" token="tools.min.js" value="tools.min.js?v=${currentTime}"/>
+        <replace file="${release.html.views}/viewer.cshtml" token="cache.min.js" value="cache.min.js?v=${currentTime}"/>
+        <replace file="${release.html.views}/viewer.cshtml" token="toolbar.min.js" value="toolbar.min.js?v=${currentTime}"/>
+        <replace file="${release.html.views}/viewer.cshtml" token="common.min.js" value="common.min.js?v=${currentTime}"/>
+        <replace file="${release.html.views}/viewer.cshtml" token="urlConfig.min.js" value="urlConfig.min.js?v=${currentTime}"/>
+        <replace file="${release.html.views}/viewer.cshtml" token="jquery.signalR-2.2.0.min.js" value="jquery.signalR-2.2.0.min.js?v=${currentTime}"/>
+        <replace file="${release.html.views}/viewer.cshtml" token="DragDropTouch.js" value="DragDropTouch.js?v=${currentTime}"/>
+        <replace file="${release.html.views}/viewer.cshtml" token="preferences.min.js" value="preferences.min.js?v=${currentTime}"/>
+    </target>
+
+    <!-- Compressing the common.js and create common.min.js -->
+    <target name="compress-common-js" depends="setReleaseBuild" description="Minimize common.js JavaScript files to common.min.js">
+        <echo message="compressing common.js to common.min.js" />
+        <apply executable="java" parallel="false" verbose="true" dest="../Release/js">
+            <fileset dir="../Release/js">
+                <include name="common.js" />
+            </fileset>
+            <arg line="-jar" />
+            <arg path="${YUICompressor}" />
+            <arg value="--charset" />
+            <arg value="ANSI" />
+            <arg value="-o" />
+
+            <mapper type="glob" from="common.js" to="common.min.js" />
+            <targetfile />
+        </apply>
+    </target>
+    
+    <!-- Compressing the logUtility.js and create logUtility.min.js -->
+    <target name="compress-logUtility-js" depends="setReleaseBuild" description="Minimize logUtility.js JavaScript files to logUtility.min.js">
+        <echo message="compressing logUtility.js to logUtility.min.js" />
+        <apply executable="java" parallel="false" verbose="true" dest="../Release/js">
+            <fileset dir="../Release/js">
+                <include name="logUtility.js" />
+            </fileset>
+            <arg line="-jar" />
+            <arg path="${YUICompressor}" />
+            <arg value="--charset" />
+            <arg value="ANSI" />
+            <arg value="-o" />
+
+            <mapper type="glob" from="logUtility.js" to="logUtility.min.js" />
+            <targetfile />
+        </apply>
+
+    </target>
+
+        <!-- Compressing the grid.js and create grid.min.js -->
+    <target name="compress-grid-js" depends="setReleaseBuild" description="Minimize grid.js JavaScript files to grid.min.js">
+        <echo message="compressing grid.js to grid.min.js" />
+        <apply executable="java" parallel="false" verbose="true" dest="../Release/js">
+            <fileset dir="../Release/js">
+                <include name="grid.js" />
+            </fileset>
+            <arg line="-jar" />
+            <arg path="${YUICompressor}" />
+            <arg value="--charset" />
+            <arg value="ANSI" />
+            <arg value="-o" />
+
+            <mapper type="glob" from="grid.js" to="grid.min.js" />
+            <targetfile />
+        </apply>
+    </target>
+
+    <!-- set release build to true -->
+    <target name="setReleaseBuild" description="set the release build flag to true">
+        <echo message="set the release build flag to true" />
+        <sequential>    
+            <replaceregexp byline="true">
+                <regexp pattern="releaseBuild =.*"/>
+                <substitution expression="releaseBuild = true;"/>
+                <fileset dir="../Release">
+                    <include name="viewer.cshtml" />
+                    <include name="loader.cshtml" />
+                </fileset>
+            </replaceregexp>
+        </sequential>
+    </target>
+
+    <!-- Compressing the toolbar.js and create toolbar.min.js -->
+    <target name="compress-toolbar-js" description="Minimize common.js JavaScript files to toolbar.min.js">
+        <echo message="compressing toolbar.js to toolbar.min.js" />
+        <!--path for toolbar.js inside Release folder -->
+        <apply executable="java" parallel="false" verbose="true" dest="../Release/js">
+            <fileset dir="../Release/js">
+                <include name="toolbar.js" />
+            </fileset>
+            <arg line="-jar" />
+            <arg path="${YUICompressor}" />
+            <arg value="--charset" />
+            <arg value="ANSI" />
+            <arg value="-o" />
+
+            <mapper type="glob" from="toolbar.js" to="toolbar.min.js" />
+            <targetfile />
+        </apply>
+
+    </target>
+
+    <!-- Compressing the urlConfig.js and create urlConfig.min.js -->
+    <target name="compress-urlConfig-js" description="Minimize common.js JavaScript files to urlConfig.min.js">
+        <echo message="compressing urlConfig.js to urlConfig.min.js" />
+        <!--path for urlConfig.js inside Release folder -->
+        <apply executable="java" parallel="false" verbose="true" dest="../Release/js">
+            <fileset dir="../Release/js">
+                <include name="urlConfig.js" />
+            </fileset>
+            <arg line="-jar" />
+            <arg path="${YUICompressor}" />
+            <arg value="--charset" />
+            <arg value="ANSI" />
+            <arg value="-o" />
+
+            <mapper type="glob" from="urlConfig.js" to="urlConfig.min.js" />
+            <targetfile />
+        </apply>
+    </target>
+
+    <!-- Compressing the spin.js and create spin.min.js -->
+    <target name="compress-spin-js" description="Minimize spin.js JavaScript files to spin.min.js">
+        <echo message="compressing spin.js to spin.min.js" />
+        <apply executable="java" parallel="false" verbose="true" dest="../Release/js">
+            <fileset dir="../Release/js">
+                <include name="spin.js" />
+            </fileset>
+            <arg line="-jar" />
+            <arg path="${YUICompressor}" />
+            <arg value="--charset" />
+            <arg value="ANSI" />
+            <arg value="-o" />
+
+            <mapper type="glob" from="spin.js" to="spin.min.js" />
+            <targetfile />
+        </apply>
+    </target>
+    <!-- Compressing the imageProgressManager.js and create imageProgressManager.min.js -->
+    <target name="compress-imageProgressManager-js" description="Minimize imageProgressManager.js JavaScript files to imageProgressManager.min.js">
+        <echo message="compressing imageProgressManager.js to imageProgressManager.min.js" />
+        <apply executable="java" parallel="false" verbose="true" dest="../Release/js">
+            <fileset dir="../Release/js">
+                <include name="imageProgressManager.js" />
+            </fileset>
+            <arg line="-jar" />
+            <arg path="${YUICompressor}" />
+            <arg value="--charset" />
+            <arg value="ANSI" />
+            <arg value="-o" />
+
+            <mapper type="glob" from="imageProgressManager.js" to="imageProgressManager.min.js" />
+            <targetfile />
+        </apply>
+    </target>
+    
+    <!-- Compressing the html2canvas.js and create html2canvas.min.js -->
+    <target name="compress-html2canvas-js" description="Minimize html2canvas.js JavaScript files to html2canvas.min.js">
+        <echo message="compressing html2canvas.js to html2canvas.min.js" />
+        <apply executable="java" parallel="false" verbose="true" dest="../Release/js">
+            <fileset dir="../Release/js">
+                <include name="html2canvas.js" />
+            </fileset>
+            <arg line="-jar" />
+            <arg path="${YUICompressor}" />
+            <arg value="--charset" />
+            <arg value="ANSI" />
+            <arg value="-o" />
+
+            <mapper type="glob" from="html2canvas.js" to="html2canvas.min.js" />
+            <targetfile />
+        </apply>
+    </target>
+
+    <!--Compressing the slice calculator to  minified slice calculator-->
+    <target name="compress-SliceCalculator-js" description="Minimize SliceCalculator.js JavaScript files to minified SliceCalculator.js">
+        <echo message="compressing SliceCalculator.js  to  minified SliceCalculator.js" />
+        <apply executable="java" parallel="false" verbose="true" dest="${release.js.dicom}">
+            <fileset dir="${release.js.dicom}">
+                <include name="SliceCalculator1.js"/>
+            </fileset>
+            <arg line="-jar" />
+            <arg path="${YUICompressor}" />
+            <arg value="--charset" />
+            <arg value="ANSI" />
+            <arg value="-o" />
+
+            <mapper type="glob" from="SliceCalculator1.js" to="SliceCalculator.js" />
+            <targetfile />
+        </apply>
+
+        <!-- Delete the temporary file(SliceCalculator1.js)-->
+        <delete file="${release.js.dicom}/SliceCalculator1.js"/>
+    </target>
+
+    <!-- Build all the java scripts -->
+    <target name="build-all" description="Build the all javascript files." depends="compress-cache-js,compress-dicom-js,compress-render-js,compress-tools-js,compress-roiSubmission-js,compress-roiStatus-js,viewer,compress-webworker-js,compress-SliceCalculator-js,compress-logUtility-js,compress-common-js,compress-grid-js,compress-toolbar-js,compress-urlConfig-js,compress-spin-js,compress-imageProgressManager-js,compress-html2canvas-js,compress-worker-js,compress-preferences-js,compress-dash-js,compress-qa-js,compress-qareport-js,build-manage">
+    </target>
+
+    <!-- zip the viewer folder -->
+    <target name="zip-viewer">
+        <zip destfile="${SETUP_OUTPUT_NAME}" basedir="..\Release" />
+    </target>
+
+    <!-- build site -->
+    <target name="main" depends="build-all" />
+
+    <!-- check-svn-entries -->
+    <target name="check-svn-entries">
+        <available file=".svn/entries" property="Is.svn.entries.found"/>
+    </target>
+
+    <!-- update-build-revision -->
+    <target name="update-build-revision" depends="check-svn-entries" if="Is.svn.entries.found">
+        <loadfile srcfile=".svn/entries" property="revision">
+            <filterchain>
+                <headfilter lines="1" skip="3"/>
+            </filterchain>
+        </loadfile>
+        <propertyfile file="Versions.properties">
+            <entry key="version.build" default="0" type="int" value="${revision}" pattern="0000"/>
+        </propertyfile>
+    </target>
+
+    <!-- check-jenkins-build-number -->
+    <target name="check-jenkins-build-number">
+        <property name="JENKINS_NEXTBUILDNUMBER" location="..\..\..\jobs\Hydra-Viewer\nextBuildNumber"/>
+        <echo message="${JENKINS_NEXTBUILDNUMBER}" />
+        <available file="${JENKINS_NEXTBUILDNUMBER}" property="Is.jenkins.build.number.found"/>
+    </target>
+
+    <!-- update-build-service -->
+    <target name="update-build-service" depends="check-jenkins-build-number" if="Is.jenkins.build.number.found">
+        <loadfile srcfile="${JENKINS_NEXTBUILDNUMBER}" property="service">
+            <filterchain>
+                <headfilter lines="1"/>
+            </filterchain>
+        </loadfile>
+        <propertyfile file="Versions.properties">
+            <entry key="version.service" default="0" type="int" value="${service}" />
+            <entry key="version.service" default="0" type="int" operation="-"/>
+        </propertyfile>
+    </target>
+
+    <!-- update-build-version -->
+    <target name="update-build-version" depends="update-build-revision, update-build-service" />
+
+    <!-- build manage page -->
+    <target name="build-manage" description="Build the manage page" depends ="manage-renderer-min-js, manage-toolbar-min-js, manage-cache-min-js, manage-core-min-js, copy-manage-files" />
+
+    <!-- copy-manage-files -->
+    <target name="copy-manage-files" description="copy-manage-files">
+        <copy todir="${release.js.manage}">
+            <fileset dir="${develop.js.manage}">
+                <include name="manageCacheWorker.js"/>
+            </fileset>
+        </copy>
+        <copy file="${release.js.common}/worker.min.js" tofile="${release.js.manage}/manage.worker.min.js"/>
+    </target>
+
+    <!-- merge-manage-renderer-js -->
+    <target name="merge-manage-renderer-js">
+        <mkdir dir="${release.js.manage}"/>
+        <concat destfile="${js.merge.manage.renderer}">
+            <filelist dir="${develop.js.manage}">
+                <file name="manageCommon.js" />
+                <file name="manageThumbnail.js" />
+                <file name="manageThumbnailRenderer.js" />
+                <file name="manageViewport.js" />
+                <file name="manageImage.js" />
+            </filelist>
+        </concat>
+    </target>
+
+    <!-- manage-renderer-min-js -->
+    <target name="manage-renderer-min-js" depends="merge-manage-renderer-js">
+        <echo message="compressing manage.renderer.js to manage.renderer.min.js" />
+        <apply executable="java" parallel="false" verbose="true" dest="${release.js.manage}">
+            <fileset dir="${release.js.manage}">
+                <include name="manage.renderer.js" />
+            </fileset>
+            <arg line="-jar" />
+            <arg path="${YUICompressor}" />
+            <arg value="--charset" />
+            <arg value="ANSI" />
+            <arg value="-o" />
+
+            <mapper type="glob" from="manage.renderer.js" to="manage.render.min.js" />
+            <targetfile />
+        </apply>
+        <delete file="${release.js.manage}/manage.renderer.js"/>
+    </target>
+
+    <!-- merge-manage-toolbar-js -->
+    <target name="merge-manage-toolbar-js">
+        <mkdir dir="${release.js.manage}"/>
+        <concat destfile="${js.merge.manage.toolbar}">
+            <filelist dir="${develop.js.manage}">
+                <file name="manageToolbar.js" />
+                <file name="manageTools.js" />
+            </filelist>
+        </concat>
+    </target>
+
+    <!-- manage-toolbar-min-js -->
+    <target name="manage-toolbar-min-js" depends="merge-manage-toolbar-js">
+        <echo message="compressing manage.toolbar.js to manage.toolbar.min.js" />
+        <apply executable="java" parallel="false" verbose="true" dest="${release.js.manage}">
+            <fileset dir="${release.js.manage}">
+                <include name="manage.toolbar.js" />
+            </fileset>
+            <arg line="-jar" />
+            <arg path="${YUICompressor}" />
+            <arg value="--charset" />
+            <arg value="ANSI" />
+            <arg value="-o" />
+
+            <mapper type="glob" from="manage.toolbar.js" to="manage.toolbar.min.js" />
+            <targetfile />
+        </apply>
+        <delete file="${release.js.manage}/manage.toolbar.js"/>
+    </target>
+
+    <!-- merge-manage-cache-js -->
+    <target name="merge-manage-cache-js">
+        <mkdir dir="${release.js.cache}"/>
+        <concat destfile="${js.merge.manage.cache}">
+            <filelist dir="${develop.js.cache}">
+                <file name="imageSecurityTokenHandler.js" />
+                <file name="imageStudyDetailsManager.js" />
+                <file name="imageViewportManager.js" />
+            </filelist>
+        </concat>
+    </target>
+
+    <!-- manage-cache-min-js -->
+    <target name="manage-cache-min-js" depends="merge-manage-cache-js">
+        <echo message="compressing manage.cache.js to manage.cache.min.js" />
+        <apply executable="java" parallel="false" verbose="true" dest="${release.js.cache}">
+            <fileset dir="${release.js.cache}">
+                <include name="manage.cache.js" />
+            </fileset>
+            <arg line="-jar" />
+            <arg path="${YUICompressor}" />
+            <arg value="--charset" />
+            <arg value="ANSI" />
+            <arg value="-o" />
+
+            <mapper type="glob" from="manage.cache.js" to="manage.cache.min.js" />
+            <targetfile />
+        </apply>
+        <delete file="${release.js.cache}/manage.cache.js"/>
+    </target>
+
+    <!-- merge-manage-core-js -->
+    <target name="merge-manage-core-js">
+        <mkdir dir="${release.js.render}"/>
+        <concat destfile="${js.merge.manage.core}">
+            <filelist dir="${develop.js.render}">
+                <file name="SeriesLevelLayout.js" />
+            </filelist>
+        </concat>
+    </target>
+
+    <!-- manage-core-min-js -->
+    <target name="manage-core-min-js" depends="merge-manage-core-js">
+        <echo message="compressing manage.core.js to manage.core.min.js" />
+        <apply executable="java" parallel="false" verbose="true" dest="${release.js.render}">
+            <fileset dir="${release.js.render}">
+                <include name="manage.core.js" />
+            </fileset>
+            <arg line="-jar" />
+            <arg path="${YUICompressor}" />
+            <arg value="--charset" />
+            <arg value="ANSI" />
+            <arg value="-o" />
+
+            <mapper type="glob" from="manage.core.js" to="manage.core.min.js" />
+            <targetfile />
+        </apply>
+        <delete file="${release.js.render}/manage.core.js"/>
+    </target>
+
+    <!--Merge all javascript files in the common folder and create worker.js  -->
+    <target name="merge-worker-js">
+        <mkdir dir="${release.js.common}"/>
+        <concat destfile="${js.merge.worker}">
+            <filelist dir="${develop.js.common}">
+                <file name="WorkerThread.js" />
+                <file name="WorkerQueue.js" />
+            </filelist>
+        </concat>
+    </target>
+
+    <!-- Compressing the worker.js and create worker.min.js -->
+    <target name="compress-worker-js" depends="merge-worker-js">
+        <echo message="compressing worker.js to worker.min.js" />
+        <apply executable="java" parallel="false" verbose="true" dest="${release.js.common}">
+            <fileset dir="${release.js.common}">
+                <include name="*.js" />
+            </fileset>
+            <arg line="-jar" />
+            <arg path="${YUICompressor}" />
+            <arg value="--charset" />
+            <arg value="ANSI" />
+            <arg value="-o" />
+
+            <mapper type="glob" from="worker.js" to="worker.min.js" />
+            <targetfile />
+        </apply>
+        <delete file="${release.js.common}/worker.js"/>
+    </target>
+</project>

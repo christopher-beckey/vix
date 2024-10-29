@@ -1,0 +1,80 @@
+//3.0;IMAGING;**158**;February 12, 20135
+// +---------------------------------------------------------------+
+// | Property of the US Government.                                |
+// | No permission to copy or redistribute this software is given. |
+// | Use of unreleased versions of this software requires the user |
+// | to execute a written test agreement with the VistA Imaging    |
+// | Development Office of the Department of Veterans Affairs,     |
+// | telephone (301) 734-0100.                                     |
+// |                                                               |
+// | The Food and Drug Administration classifies this software as  |
+// | a medical device.  As such, it may not be changed in any way. |
+// | Modifications to this software may result in an adulterated   |
+// | medical device under 21CFR820, the use of which is considered |
+// | to be a violation of US Federal Statutes.                     |
+// +---------------------------------------------------------------+
+
+
+#include "ifx.h"
+#include "isrt.h"
+#include "iswi.h"
+#include "InstallationLog.rul"
+
+export prototype NotToRegisterOcx(HWND);
+export prototype RegisterOcx(HWND);
+
+function NotToRegisterOcx(hMSI) 
+
+	STRING libDir, ocxFile, cmdStr, cmdParam, ocxFilename;
+	NUMBER result;
+	
+	begin 
+	
+		RecordInLogFile("NotToRegisterOcx:");
+		
+		libDir = "C:\\Program Files\\Vista\\Imaging\\Lib";
+		ocxFilename = "MagImportXControl1.ocx";
+		
+		/*
+		cmd option: /s = silent /u = unregister 
+		*/
+		cmdStr = WINSYSDIR ^ "regsvr32.exe";
+		LongPathToQuote(cmdStr, TRUE);
+		cmdParam = "/s /u";
+		
+		ChangeDirectory(libDir);
+		result = LaunchAppAndWait(cmdStr, cmdParam + ocxFilename, LAAW_OPTION_WAIT);
+		if( result = 0 ) then
+			RecordInLogFile("Successfully UnRegister the "+ocxFilename);
+		else
+			RecordInLogFile("FAILED to UnRegister the "+ocxFilename);
+		endif;
+	end;	
+	
+function RegisterOcx(hMSI) 
+
+	STRING libDir, ocxFile, cmdStr, cmdParam, ocxFilename;
+	NUMBER result;
+	
+	begin 
+	
+		RecordInLogFile("RegisterOcx:");
+		
+		libDir = "C:\\Program Files\\Vista\\Imaging\\Lib";
+		ocxFilename = "MagImportXControl1.ocx";
+		
+		/*
+		cmd option: /s = silent
+		*/
+		cmdStr = WINSYSDIR ^ "regsvr32.exe";
+		LongPathToQuote(cmdStr, TRUE);
+		cmdParam = "/s";
+		
+		ChangeDirectory(libDir);
+		result = LaunchAppAndWait(cmdStr, cmdParam + ocxFilename, LAAW_OPTION_WAIT);
+		if( result = 0 ) then
+			RecordInLogFile("Successfully Register the "+ocxFilename);
+		else
+			RecordInLogFile("FAILED to Register the "+ocxFilename);
+		endif;
+	end;	

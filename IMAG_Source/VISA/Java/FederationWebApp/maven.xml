@@ -1,0 +1,20 @@
+<project default="Imaging-dist" xmlns:m="jelly:maven">
+	<goal name="Imaging-dist">
+		<attainGoal name="clean:clean" />
+		<attainGoal name="war:install"/>	
+	</goal>
+	
+	<goal name="CruiseControl-build">
+		<cvs command="up -d -P" />
+		<attainGoal name="Imaging-dist" />
+	</goal>
+	
+	<!--
+		Remove the context.xml from the output folder before building the WAR file.
+		This is necessary for WAR deployment where the context is defined in the server.xml
+	
+	<preGoal name="war:war" >
+		<delete file="${basedir}/target/${pom.artifactId}/META-INF/context.xml"/>
+	</preGoal>
+	-->
+</project>

@@ -1,0 +1,162 @@
+MAGDDW0 ;WOIFO/PMK - Extrinsic functions to write DICOM File Datatypes ; 12/20/2006 07:07
+ ;;3.0;IMAGING;**1,10,51,54**;MAR 19, 2002;;OCT 28, 2009
+ ;; Per VHA Directive 2004-038, this routine should not be modified.
+ ;; +---------------------------------------------------------------+
+ ;; | Property of the US Government.                                |
+ ;; | No permission to copy or redistribute this software is given. |
+ ;; | Use of unreleased versions of this software requires the user |
+ ;; | to execute a written test agreement with the VistA Imaging    |
+ ;; | Development Office of the Department of Veterans Affairs,     |
+ ;; | telephone (301) 734-0100.                                     |
+ ;; | The Food and Drug Administration classifies this software as  |
+ ;; | a medical device.  As such, it may not be changed in any way. |
+ ;; | Modifications to this software may result in an adulterated   |
+ ;; | medical device under 21CFR820, the use of which is considered |
+ ;; | to be a violation of US Federal Statutes.                     |
+ ;; +---------------------------------------------------------------+
+ ;;
+ Q
+ ; Set "BYTEORDR" to "L" for Little Endian and "B" for Big Endian
+ ;
+PUTBYTE(X) ; Write an 8-bit byte integer
+ W *X
+ Q
+ ;
+PUTSHORT(X) ; Write a 16-bit short integer
+ I X<0 S X=65536+X
+ D PUTUSHOR(X)
+ Q
+ ;
+PUTUSHOR(X) ; Write a 16-bit unsigned short integer
+ I $E(BYTEORDR)="B" W *(X\256),*(X#256) ; Big Endian
+ E  W *(X#256),*(X\256) ; Little Endian
+ Q
+ ;
+PUTLONG(X) ; Write a 32-bit long integer
+ I X<0 S X=4294967296+X
+ D PUTULONG(X)
+ Q
+ ;
+PUTULONG(X) ; Write a 32-bit unsigned long integer
+ N WORD0,WORD1
+ I $E(BYTEORDR)="B" D  ; Big Endian
+ . S WORD0=X\65536,WORD1=X#65536
+ . W *(WORD0\256),*(WORD0#256),*(WORD1\256),*(WORD1#256)
+ . Q
+ E  D  ; Little Endian
+ . S WORD1=X\65536,WORD0=X#65536
+ . W *(WORD0#256),*(WORD0\256),*(WORD1#256),*(WORD1\256)
+ . Q
+ Q
+ ;
+PUTFLOAT(X) ; Write an IEEE 754:1985 32-bit floating point number
+ N T1,T2,T3,T4
+ S T1=$A(X,1),T2=$A(X,2),T3=$A(X,3),T4=$A(X,4)
+ I BYTEORDR="B" W $C(T1,T2,T3,T4)
+ E  W $C(T4,T3,T2,T1)
+ Q
+ ;
+PUTDOUBL(X) ; Write an IEEE 754:1985 64-bit floating point number
+ N T1,T2,T3,T4,T5,T6,T7,T8
+ S T1=$A(X,1),T2=$A(X,2),T3=$A(X,3),T4=$A(X,4)
+ S T5=$A(X,5),T6=$A(X,6),T7=$A(X,7),T8=$A(X,8)
+ I BYTEORDR="B" W $C(T1,T2,T3,T4,T5,T6,T7,T8)
+ E  W $C(T8,T7,T6,T5,T4,T3,T2,T1)
+ Q
+ ;
+PUTASCII(X) ; Write an ascii character string
+ W X
+ Q
+ ;
+TENEXP(X) N I,S,T
+ S T=+$P(X,"E",2),X=$P(X,"E",1),S="" S:$E(X,1)="-" S="-"
+ I T>0 D
+ . N $ET
+ . S $ET="S X=S_""infinity"",$EC="""""
+ . F I=1:1:T S X=X*10
+ . Q
+ I T<0 F I=-1:-1:T S X=X*.1
+ Q X
+ ;
+MAKEFL(X) ; Create an IEEE 754:1985 32-bit floating point number
+ N E,K,M,NAN,S,T1,T2,T3,T4
+ ;
+ ; IEEE floating point format
+ ;
+ ; single: 4 bytes
+ ; 1 bit: sign
+ ; 8 bits: biased exponent +127
+ ; 23 bits: mantissa, normalized: highest bit is always 1 (not stored)
+ ;
+ S:X["E" X=$$TENEXP(X)
+ I $E(X)="-" S S=1,M=$TR(X,"-") ; Negative number (may be "-infinity")
+ E  S S=0,M=X ; Positive number
+ S (T1,T2,T3,T4,NAN)=0
+ ;
+ ; The next two lines exist only for "roundtrip compatibility"
+ ; with the formatting function.
+ ; Otherwise, this function expects to receive a numeric value.
+ ;
+ I X["infinity" S NAN=1,E=255,M=0
+ I X["Not A Number " S NAN=1,E=255,M=$P(X," ",4)
+ ;
+ D:'NAN
+ . I 'X S (E,M)=0 Q
+ . S E=127+23
+ . F  Q:2**24'<M  S E=E+1,M=M/2
+ . F  Q:2**23'>M  S E=E-1,M=M*2
+ . S M=$P(M,".",1)
+ . Q
+ S T4=M#256,M=M\256
+ S T3=M#256,M=M\256
+ S T2=M#128
+ I 'NAN,E<0 S (T1,T2,T3,T4)=0
+ I 'NAN,E>254 S E=255,(T1,T2,T3)=0,T4=1
+ ;
+ S T1=S*128+(E\2),T2=(E#2)*128+T2
+ ;
+ Q $C(T1,T2,T3,T4)
+ ;
+MAKEFD(X) ; Create an IEEE 754:1985 64-bit floating point number
+ N E,K,S,M,NAN,T1,T2,T3,T4,T5,T6,T7,T8
+ ;
+ ; IEEE floating point format
+ ;
+ ; double: 8 bytes
+ ; 1 bit: sign  1 = negative
+ ; 11 bits: biased exponent +1023
+ ; 52 bits: mantissa, normalized: highest bit is always 1 (not stored)
+ ;
+ S:X["E" X=$$TENEXP(X)
+ I $E(X)="-" S S=1,M=$TR(X,"-") ; Negative number (may be "-infinity")
+ E  S S=0,M=X ; Positive number
+ S (T1,T2,T3,T4,T5,T6,T7,T8,NAN)=0
+ ;
+ ; The next two lines exist only for "roundtrip compatibility"
+ ; with the formatting function.
+ ; Otherwise, this function expects to receive a numeric value.
+ ;
+ I X["infinity" S NAN=1,E=2047,M=0
+ I X["Not A Number " S NAN=1,E=2047,M=$P(X," ",4)
+ ;
+ D:'NAN
+ . S X=+X I 'X S (E,M)=0 Q
+ . S E=1023+52
+ . F  Q:2**53'<M  S E=E+1,M=M/2
+ . F  Q:2**52'>M  S E=E-1,M=M*2
+ . S M=$P(M,".",1)
+ . Q
+ S T8=M#256,M=M\256
+ S T7=M#256,M=M\256
+ S T6=M#256,M=M\256
+ S T5=M#256,M=M\256
+ S T4=M#256,M=M\256
+ S T3=M#256,M=M\256
+ S T2=M#256
+ I 'NAN,E<0 S (E,T1,T2,T3,T4,T5,T6,T7,T8)=0
+ I 'NAN,E>2047 S E=2047,(T1,T2,T3,T4,T5,T6,T7)=0,T8=1
+ ;
+ S T1=S*128+(E\16),T2=(E#16)*16+T2-16 S:T2<0 T2=0
+ ;
+ Q $C(T1,T2,T3,T4,T5,T6,T7,T8)
+ ;

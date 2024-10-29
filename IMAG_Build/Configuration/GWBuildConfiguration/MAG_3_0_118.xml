@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<build
+ name="MAG*3.0*118"
+ patch="118"
+ patchName="Version 3.0 Patch 118 - DICOM Importer II">
+	<routines>
+		<routine name="MAGDCST4" export="MAGDCST4.RTN" />
+		<routine name="MAGDMENO" export="MAGDMENO.RTN" />
+		<routine name="MAGDMENU" export="MAGDMENU.RTN" />
+		<routine name="MAGDMFB1" export="MAGDMFB1.RTN" />
+		<routine name="MAGDMFBB" export="MAGDMFBB.RTN" />
+		<routine name="MAGDMFBE" export="MAGDMFBE.RTN" />
+		<routine name="MAGDMFBI" export="MAGDMFBI.RTN" />
+		<routine name="MAGDMFBM" export="MAGDMFBM.RTN" />
+		<routine name="MAGDMFIC" export="MAGDMFIC.RTN" />
+		<routine name="MAGDVRSN" export="MAGDVRSN.RTN" />
+		<routine name="MAGVCSTR" export="MAGVCSTR.RTN" />
+		<routine name="MAGVDGW1" export="MAGVDGW1.RTN" />
+	</routines>
+
+  <PatchBuildInfo>
+	<BuildInfo BuildNumber="20" BuildDate="Nov 04, 2014"/>
+  </PatchBuildInfo>
+   
+	
+</build>
+

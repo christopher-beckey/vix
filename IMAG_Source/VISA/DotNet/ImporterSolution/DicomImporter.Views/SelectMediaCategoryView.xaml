@@ -1,0 +1,91 @@
+﻿<Views:BaseImagingView x:Class="DicomImporter.Views.SelectMediaCategoryView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:Converters="clr-namespace:ImagingClient.Infrastructure.Converters;assembly=ImagingClient.Infrastructure" 
+             xmlns:Views="clr-namespace:ImagingClient.Infrastructure.Views;assembly=ImagingClient.Infrastructure" 
+             xmlns:ImporterViews="clr-namespace:DicomImporter.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="498" d:DesignWidth="510">
+    <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="5" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="5" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <Label Content="{Binding Title}" 
+                   Style="{DynamicResource ResourceKey=SectionTitle}"
+                   Grid.Row="0" />
+        
+        <StackPanel Grid.Row="1">
+            <ImporterViews:ImporterMessagesView x:Name="ImporterMessages" 
+                                  DataContext="{Binding ImporterMessagesViewModel}" />
+        </StackPanel>
+
+        <Grid Grid.Row="3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <GroupBox Header="Media Category" 
+                  Grid.Column="0">
+                <StackPanel>
+                    <RadioButton Content="DICOM Only Media" 
+                                 IsChecked="{Binding DicomOnlyMediaSelected}" />
+
+                    <RadioButton Content="Mixed Media" 
+                                 IsChecked="{Binding MixedMediaSelected}" />
+
+                    <RadioButton Content="Non-DICOM Only Media" 
+                                 IsChecked="{Binding NonDicomMediaSelected}" />
+                </StackPanel>
+            </GroupBox>
+            <!--<GroupBox Header="Service" 
+                  Grid.Column="1">
+                <StackPanel>
+                    <RadioButton Content="Radiology" 
+                                 IsChecked="{Binding ServiceRadiologySelected}" />
+
+                    <RadioButton Content="Consult" 
+                                 IsChecked="{Binding ServiceConsultSelected}" />
+
+                    <RadioButton Content="Lab" 
+                                 IsChecked="{Binding ServiceLabSelected}" />
+
+                    <RadioButton Content="None" 
+                                 IsChecked="{Binding ServiceNoneSelected}" />
+                </StackPanel>
+            </GroupBox>-->
+        </Grid>
+
+        <GroupBox Header="Selected Media Category Details" 
+                  Grid.Row="5" >
+            <TextBox Margin="0,4,4,0" IsReadOnly="True" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" 
+                     Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" 
+                     Text="{Binding MediaCategoryDetails, Mode=OneWay}" ScrollViewer.HorizontalScrollBarVisibility="Auto" 
+                     ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.CanContentScroll="True" TextWrapping="WrapWithOverflow" />
+        </GroupBox>
+        
+        <StackPanel Orientation="Horizontal" 
+                    HorizontalAlignment="Right"
+                    Grid.Row="7">
+
+            <Button Content="Return to Importer Home" Command="{Binding NavigateToImporterHomeView}"/>
+            <Button Content="Stage Media" 
+                    Visibility="{Binding Path=IsForMediaStaging, Converter={StaticResource BooleanToVisibilityConverter}}" 
+                    Command="{Binding NavigateToMediaStagingView}"/>
+            <Button Content="Direct Import Media" Visibility="{Binding Path=IsForDirectImport, Converter={StaticResource BooleanToVisibilityConverter}}"
+                    Command="{Binding NavigateToDirectImportHomeView}"/>
+        </StackPanel>
+    </Grid>
+</Views:BaseImagingView>

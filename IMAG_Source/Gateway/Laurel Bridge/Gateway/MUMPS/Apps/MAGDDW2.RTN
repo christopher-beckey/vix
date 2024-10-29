@@ -1,0 +1,179 @@
+MAGDDW2 ;WOIFO/PMK - Generate a DICOM message ; 22 Apr 2010 7:17 AM
+ ;;3.0;IMAGING;**10,30,51,54,53**;Mar 19, 2002;Build 1715;Apr 22, 2010
+ ;; Per VHA Directive 2004-038, this routine should not be modified.
+ ;; +---------------------------------------------------------------+
+ ;; | Property of the US Government.                                |
+ ;; | No permission to copy or redistribute this software is given. |
+ ;; | Use of unreleased versions of this software requires the user |
+ ;; | to execute a written test agreement with the VistA Imaging    |
+ ;; | Development Office of the Department of Veterans Affairs,     |
+ ;; | telephone (301) 734-0100.                                     |
+ ;; | The Food and Drug Administration classifies this software as  |
+ ;; | a medical device.  As such, it may not be changed in any way. |
+ ;; | Modifications to this software may result in an adulterated   |
+ ;; | medical device under 21CFR820, the use of which is considered |
+ ;; | to be a violation of US Federal Statutes.                     |
+ ;; +---------------------------------------------------------------+
+ ;;
+ Q
+ ; PACS interface -- PACS DICOM data output routine #3
+ ;
+ ; Transfer the data from ^TMP to the DICOM file
+ ;
+OUTPUT ; entry point from ^MAGDDW1 to output the file
+ N DEFAULT ;-- default value for an element
+ N GBLREF
+ N IPTR ;----- pointer to message template
+ N PIXELREP ;- pixel representation, for determining signed or unsigned
+ N OLDGROUP ;- current group number for a sequence
+ N PRIVATE ;-- array of a private group of elements
+ N SCUSCP ;--- service class user/provider element type value
+ N SEQMARK ;-- end of sequence marker
+ N SEQNUMB ;-- nesting level of DICOM sequence; set in SEQINIT^MAGDFCNS
+ N SEQUENCE ;- DICOM nesting subscript sequence; set in SEQINIT^MAGDFCNS
+ N STATUS ;--- return code from MAGOSFIL, etc.
+ N TAG ;----- the group and element number
+ ;
+ S BYTEORDR="L" ; EXPLICIT is set by calling program
+ ;
+ ; write the data to the temporary *.tmp file
+ ;
+ I "OPEN"[MULTIMSG D
+ . ; open the file for a single message or the first multiple message
+ . ; open the file with *.tmp name
+ . S STATUS=$$OPEN^MAGOSFIL(QUEUEOUT("FILE"),"W")
+ . I STATUS<0 D
+ . . N M
+ . . S M="Could not open file """_QUEUEOUT("FILE")_""" for Write."
+ . . W:$$USEPRIN^MAGOSFIL(1) !!!,M,!,STATUS
+ . . S $EC=",U"_M_","
+ . . Q  ; Error trap does not return
+ . Q
+ ;
+ D SEQINIT^MAGDFCNS K GPOFFSET,OLDGROUP,PRIVATE
+ ;
+ ; use subscript indirection to pass the dynamic or dictionary template
+ I FILEMODE="IMAGE DATASET" D  ; dynamic to reconstruct an image header
+ . S GBLREF="^TMP(""MAG"",$J,""DICOM"",""TEMPLATE"")"
+ . Q
+ E  D  ; dictionary template for a regular text message
+ . S GBLREF="^MAGDICOM(2006.52,TEMPLATE,1)"
+ . Q
+ ;
+ S IPTR=0 F  S IPTR=$O(@GBLREF@(IPTR)) Q:IPTR=""  D
+ . S X=@GBLREF@(IPTR,0),TAG=$P(X,"^"),SCUSCP=$P(X,"^",3)
+ . S DEFAULT=$P(X,"^",4),SEQMARK=$P(X,"^",5)
+ . D ELEMENT
+ . Q
+ ;
+ S STATUS=$$USE^MAGOSFIL(QUEUEOUT("FILE"))
+ ; output length of last group, if not done so already
+ I $D(GPOFFSET(SEQNUMB)) D PUTGPLEN
+ I FILEMODE'["IMAGE" D
+ . ; output length to end of message for multiple text msgs in a file
+ . S SEQNUMB="LENGTH TO END" D PUTGPLEN ; output length to end of msg
+ . Q
+ I $$USEPRIN^MAGOSFIL(1)
+ I "CLOSE"[MULTIMSG D
+ . ; close the file for a single message or the last multiple message
+ . S STATUS=$$CLOSE^MAGOSFIL(QUEUEOUT("FILE"))
+ . Q
+ Q
+ ;
+ELEMENT ; setup processing to output one element
+ N ELEMENT,GROUP,LENGTH,OWNER,VALUE
+ ; save DEFAULT value for later use in ^MAGDDW3
+ I DEFAULT["H" S DEFAULT=$$HEX2DEC^MAGOSMSC(DEFAULT) ; hex default
+ S GROUP=$P(TAG,","),ELEMENT=$P(TAG,",",2),OWNER=$P(TAG,",",3)
+ I $G(OLDGROUP(SEQNUMB))'=GROUP D  ;
+ . I $G(DEBUG)>1,GROUP'="FFFE" D MESSAGE^MAGDMLOG(1,0,GROUP_": ","V")
+ . S STATUS=$$USE^MAGOSFIL(QUEUEOUT("FILE"))
+ . I $D(OLDGROUP(SEQNUMB)) D  ;
+ . . D PUTGPLEN ; output correct length of previous group
+ . . K OLDGROUP(SEQNUMB) ; remove knowledge of the old group
+ . . Q
+ . I (GROUP="0000")!(GROUP="0002") D  ;
+ . . ; output the group length element & fill in length later
+ . . ; save current offset
+ . . S GPOFFSET(SEQNUMB)=$$GETOFSET^MAGOSFIL(QUEUEOUT("FILE"))
+ . . D PUTUSHOR^MAGDDW0($$HEX2DEC^MAGOSMSC(GROUP)) ; output group length
+ . . D PUTUSHOR^MAGDDW0(0)
+ . . I EXPLICIT  D
+ . . . D PUTASCII^MAGDDW0("UL")
+ . . . D PUTUSHOR^MAGDDW0(4)
+ . . . Q
+ . . E  D PUTULONG^MAGDDW0(4) ; implicit VR
+ . . D PUTULONG^MAGDDW0(0) ; initially, length=0
+ . . S OLDGROUP(SEQNUMB)=GROUP
+ . . Q
+ . I FILEMODE'["IMAGE",'$G(GPOFFSET("LENGTH TO END")) D
+ . . ; add length to end of message
+ . . ; get current offset
+ . . S GPOFFSET("LENGTH TO END")=$$GETOFSET^MAGOSFIL(QUEUEOUT("FILE"))
+ . . D PUTUSHOR^MAGDDW0(0) ; output group length
+ . . D PUTUSHOR^MAGDDW0(1)
+ . . I EXPLICIT  D
+ . . . D PUTASCII^MAGDDW0("UL")
+ . . . D PUTUSHOR^MAGDDW0(4)
+ . . . Q
+ . . E  D PUTULONG^MAGDDW0(4) ; implicit VR
+ . . D PUTULONG^MAGDDW0(0) ; initially, length=0
+ . . Q
+ . I $$USEPRIN^MAGOSFIL(1)
+ . Q
+ I "Xx"[$E(ELEMENT) D  ; output Private Group owners
+ . N NEXTSS0 ;-- next subscript in ^TMP at SS0 level
+ . N SS0 ;------ element subscript in ^TMP composed of g, e, and sequence
+ . ;
+ . ; don't generate a Private Group Owner unless there is a data element
+ . S SS0=$S(SEQUENCE="":TAG,1:SEQUENCE_"^"_TAG)
+ . S NEXTSS0=$O(^TMP("MAG",$J,"DICOM","OUT",SS0))
+ . I '$D(^TMP("MAG",$J,"DICOM","OUT",SS0)),$E(NEXTSS0,1,$L(SS0))'=SS0 Q  ; the element is not there
+ . ;
+ . I '$D(PRIVATE(SEQNUMB,GROUP,OWNER)) D  ; get BLOCK for the group
+ . . N BLOCK
+ . . S:$D(PRIVATE(SEQNUMB,GROUP))'=11 PRIVATE(SEQNUMB,GROUP)=15
+ . . S BLOCK=PRIVATE(SEQNUMB,GROUP)+1 ; first block is "10ee"
+ . . S PRIVATE(SEQNUMB,GROUP)=BLOCK
+ . . S PRIVATE(SEQNUMB,GROUP,OWNER)=$$DEC2HEX^MAGOSMSC(BLOCK)
+ . . ; Output the Private Group Owner
+ . . S STATUS=$$USE^MAGOSFIL(QUEUEOUT("FILE"))
+ . . D PUTUSHOR^MAGDDW0($$HEX2DEC^MAGOSMSC(GROUP))
+ . . S X="00"_PRIVATE(SEQNUMB,GROUP,OWNER)
+ . . D PUTUSHOR^MAGDDW0($$HEX2DEC^MAGOSMSC(X))
+ . . S VALUE=OWNER,LENGTH=$L(VALUE)
+ . . I LENGTH#2 S LENGTH=LENGTH+1,VALUE=VALUE_" "
+ . . I EXPLICIT D
+ . . . D PUTASCII^MAGDDW0("LO")
+ . . . D PUTUSHOR^MAGDDW0(LENGTH)
+ . . . Q
+ . . E  D PUTULONG^MAGDDW0(LENGTH) ; implicit VR
+ . . D PUTASCII^MAGDDW0(VALUE)
+ . . I $$USEPRIN^MAGOSFIL(1)
+ . . Q
+ . S $E(ELEMENT,1,2)=PRIVATE(SEQNUMB,GROUP,OWNER)
+ . Q
+ ;
+ I $G(DEBUG)>1,GROUP'="FFFE" D MESSAGE^MAGDMLOG(0,0,ELEMENT_" ","V")
+ D OUTPUT1^MAGDDW3
+ Q
+ ;
+PUTGPLEN ; Update the Group Length
+ N GRPLEN,OFFSET,PTR,X
+ S OFFSET=$$GETOFSET^MAGOSFIL(QUEUEOUT("FILE")) ; save current offset
+ S PTR=GPOFFSET(SEQNUMB) ; start of last group
+ S GRPLEN=OFFSET-PTR-12
+ I GRPLEN D  ; output valid group length
+ . ; reposition to Group Length
+ . S X=$$SEEK^MAGOSFIL(QUEUEOUT("FILE"),PTR+8,0)
+ . D PUTULONG^MAGDDW0(OFFSET-PTR-12) ; output the group length
+ . ; reposition to end of group
+ . S X=$$SEEK^MAGOSFIL(QUEUEOUT("FILE"),OFFSET,0)
+ . Q
+ E  D  ; group length is zero -- backup offset and overwrite
+ . ; reposition to beginning of field
+ . S X=$$SEEK^MAGOSFIL(QUEUEOUT("FILE"),PTR,0)
+ . Q
+ K GPOFFSET(SEQNUMB) ; make sure that you only update it once
+ Q
+ ;

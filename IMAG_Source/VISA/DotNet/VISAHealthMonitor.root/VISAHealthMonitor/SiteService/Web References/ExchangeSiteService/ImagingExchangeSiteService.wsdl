@@ -1,0 +1,352 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://vistaweb.med.va.gov/webservices/ImagingExchangeSiteService" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" targetNamespace="http://vistaweb.med.va.gov/webservices/ImagingExchangeSiteService" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://vistaweb.med.va.gov/webservices/ImagingExchangeSiteService">
+      <s:element name="getVISN">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="regionID" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getVISNResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="getVISNResult" type="tns:ImagingExchangeRegionTO" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ImagingExchangeRegionTO">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="name" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ID" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="sites" type="tns:ArrayOfImagingExchangeSiteTO" />
+          <s:element minOccurs="0" maxOccurs="1" name="faultTO" type="tns:FaultTO" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfImagingExchangeSiteTO">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="ImagingExchangeSiteTO" nillable="true" type="tns:ImagingExchangeSiteTO" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ImagingExchangeSiteTO">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="siteNumber" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="siteName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="regionID" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="siteAbbr" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="vistaServer" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="vistaPort" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="acceleratorServer" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="acceleratorPort" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="faultTO" type="tns:FaultTO" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="FaultTO">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="type" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="message" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="stackTrace" type="tns:ArrayOfString" />
+          <s:element minOccurs="0" maxOccurs="1" name="suggestion" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfString">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="string" nillable="true" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="getSites">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="siteIDs" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getSitesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="getSitesResult" type="tns:ArrayOfImagingExchangeSiteTO" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getSite">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="siteID" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getSiteResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="getSiteResult" type="tns:ImagingExchangeSiteTO" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getImagingExchangeSites">
+        <s:complexType />
+      </s:element>
+      <s:element name="getImagingExchangeSitesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="getImagingExchangeSitesResult" type="tns:ArrayOfImagingExchangeSiteTO" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ImagingExchangeRegionTO" nillable="true" type="tns:ImagingExchangeRegionTO" />
+      <s:element name="ArrayOfImagingExchangeSiteTO" nillable="true" type="tns:ArrayOfImagingExchangeSiteTO" />
+      <s:element name="ImagingExchangeSiteTO" nillable="true" type="tns:ImagingExchangeSiteTO" />
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="getVISNSoapIn">
+    <wsdl:part name="parameters" element="tns:getVISN" />
+  </wsdl:message>
+  <wsdl:message name="getVISNSoapOut">
+    <wsdl:part name="parameters" element="tns:getVISNResponse" />
+  </wsdl:message>
+  <wsdl:message name="getSitesSoapIn">
+    <wsdl:part name="parameters" element="tns:getSites" />
+  </wsdl:message>
+  <wsdl:message name="getSitesSoapOut">
+    <wsdl:part name="parameters" element="tns:getSitesResponse" />
+  </wsdl:message>
+  <wsdl:message name="getSiteSoapIn">
+    <wsdl:part name="parameters" element="tns:getSite" />
+  </wsdl:message>
+  <wsdl:message name="getSiteSoapOut">
+    <wsdl:part name="parameters" element="tns:getSiteResponse" />
+  </wsdl:message>
+  <wsdl:message name="getImagingExchangeSitesSoapIn">
+    <wsdl:part name="parameters" element="tns:getImagingExchangeSites" />
+  </wsdl:message>
+  <wsdl:message name="getImagingExchangeSitesSoapOut">
+    <wsdl:part name="parameters" element="tns:getImagingExchangeSitesResponse" />
+  </wsdl:message>
+  <wsdl:message name="getVISNHttpGetIn">
+    <wsdl:part name="regionID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="getVISNHttpGetOut">
+    <wsdl:part name="Body" element="tns:ImagingExchangeRegionTO" />
+  </wsdl:message>
+  <wsdl:message name="getSitesHttpGetIn">
+    <wsdl:part name="siteIDs" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="getSitesHttpGetOut">
+    <wsdl:part name="Body" element="tns:ArrayOfImagingExchangeSiteTO" />
+  </wsdl:message>
+  <wsdl:message name="getSiteHttpGetIn">
+    <wsdl:part name="siteID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="getSiteHttpGetOut">
+    <wsdl:part name="Body" element="tns:ImagingExchangeSiteTO" />
+  </wsdl:message>
+  <wsdl:message name="getImagingExchangeSitesHttpGetIn" />
+  <wsdl:message name="getImagingExchangeSitesHttpGetOut">
+    <wsdl:part name="Body" element="tns:ArrayOfImagingExchangeSiteTO" />
+  </wsdl:message>
+  <wsdl:message name="getVISNHttpPostIn">
+    <wsdl:part name="regionID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="getVISNHttpPostOut">
+    <wsdl:part name="Body" element="tns:ImagingExchangeRegionTO" />
+  </wsdl:message>
+  <wsdl:message name="getSitesHttpPostIn">
+    <wsdl:part name="siteIDs" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="getSitesHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfImagingExchangeSiteTO" />
+  </wsdl:message>
+  <wsdl:message name="getSiteHttpPostIn">
+    <wsdl:part name="siteID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="getSiteHttpPostOut">
+    <wsdl:part name="Body" element="tns:ImagingExchangeSiteTO" />
+  </wsdl:message>
+  <wsdl:message name="getImagingExchangeSitesHttpPostIn" />
+  <wsdl:message name="getImagingExchangeSitesHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfImagingExchangeSiteTO" />
+  </wsdl:message>
+  <wsdl:portType name="ImagingExchangeSiteServiceSoap">
+    <wsdl:operation name="getVISN">
+      <wsdl:input message="tns:getVISNSoapIn" />
+      <wsdl:output message="tns:getVISNSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getSites">
+      <wsdl:input message="tns:getSitesSoapIn" />
+      <wsdl:output message="tns:getSitesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getSite">
+      <wsdl:input message="tns:getSiteSoapIn" />
+      <wsdl:output message="tns:getSiteSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getImagingExchangeSites">
+      <wsdl:input message="tns:getImagingExchangeSitesSoapIn" />
+      <wsdl:output message="tns:getImagingExchangeSitesSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="ImagingExchangeSiteServiceHttpGet">
+    <wsdl:operation name="getVISN">
+      <wsdl:input message="tns:getVISNHttpGetIn" />
+      <wsdl:output message="tns:getVISNHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getSites">
+      <wsdl:input message="tns:getSitesHttpGetIn" />
+      <wsdl:output message="tns:getSitesHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getSite">
+      <wsdl:input message="tns:getSiteHttpGetIn" />
+      <wsdl:output message="tns:getSiteHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getImagingExchangeSites">
+      <wsdl:input message="tns:getImagingExchangeSitesHttpGetIn" />
+      <wsdl:output message="tns:getImagingExchangeSitesHttpGetOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="ImagingExchangeSiteServiceHttpPost">
+    <wsdl:operation name="getVISN">
+      <wsdl:input message="tns:getVISNHttpPostIn" />
+      <wsdl:output message="tns:getVISNHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getSites">
+      <wsdl:input message="tns:getSitesHttpPostIn" />
+      <wsdl:output message="tns:getSitesHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getSite">
+      <wsdl:input message="tns:getSiteHttpPostIn" />
+      <wsdl:output message="tns:getSiteHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getImagingExchangeSites">
+      <wsdl:input message="tns:getImagingExchangeSitesHttpPostIn" />
+      <wsdl:output message="tns:getImagingExchangeSitesHttpPostOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="ImagingExchangeSiteServiceSoap" type="tns:ImagingExchangeSiteServiceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="getVISN">
+      <soap:operation soapAction="http://vistaweb.med.va.gov/webservices/ImagingExchangeSiteService/getVISN" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getSites">
+      <soap:operation soapAction="http://vistaweb.med.va.gov/webservices/ImagingExchangeSiteService/getSites" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getSite">
+      <soap:operation soapAction="http://vistaweb.med.va.gov/webservices/ImagingExchangeSiteService/getSite" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getImagingExchangeSites">
+      <soap:operation soapAction="http://vistaweb.med.va.gov/webservices/ImagingExchangeSiteService/getImagingExchangeSites" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="ImagingExchangeSiteServiceHttpGet" type="tns:ImagingExchangeSiteServiceHttpGet">
+    <http:binding verb="GET" />
+    <wsdl:operation name="getVISN">
+      <http:operation location="/getVISN" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getSites">
+      <http:operation location="/getSites" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getSite">
+      <http:operation location="/getSite" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getImagingExchangeSites">
+      <http:operation location="/getImagingExchangeSites" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="ImagingExchangeSiteServiceHttpPost" type="tns:ImagingExchangeSiteServiceHttpPost">
+    <http:binding verb="POST" />
+    <wsdl:operation name="getVISN">
+      <http:operation location="/getVISN" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getSites">
+      <http:operation location="/getSites" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getSite">
+      <http:operation location="/getSite" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getImagingExchangeSites">
+      <http:operation location="/getImagingExchangeSites" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="ImagingExchangeSiteService">
+    <documentation xmlns="http://schemas.xmlsoap.org/wsdl/">Returns VistA Imaging site information</documentation>
+    <wsdl:port name="ImagingExchangeSiteServiceSoap" binding="tns:ImagingExchangeSiteServiceSoap">
+      <soap:address location="http://siteserver.vista.med.va.gov/VistaWebSvcs/ImagingExchangeSiteService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="ImagingExchangeSiteServiceHttpGet" binding="tns:ImagingExchangeSiteServiceHttpGet">
+      <http:address location="http://siteserver.vista.med.va.gov/VistaWebSvcs/ImagingExchangeSiteService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="ImagingExchangeSiteServiceHttpPost" binding="tns:ImagingExchangeSiteServiceHttpPost">
+      <http:address location="http://siteserver.vista.med.va.gov/VistaWebSvcs/ImagingExchangeSiteService.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

@@ -1,0 +1,7 @@
+magptt ;WOIFO/MLH - PACS testing - tally results
+ Q
+ ;
+RECORD ; tally results
+ ; show most recent message
+ s ixlast=$o(^XTMP("MAGPACSTESTLOG"," "),-1)
+ q

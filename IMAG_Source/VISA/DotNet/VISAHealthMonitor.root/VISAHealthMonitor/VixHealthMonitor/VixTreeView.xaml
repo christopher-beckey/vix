@@ -1,0 +1,65 @@
+﻿<UserControl x:Class="VixHealthMonitor.VixTreeView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300"
+             xmlns:b="clr-namespace:VISAHealthMonitorCommonControls;assembly=VISAHealthMonitorCommonControls"
+             DataContext="{Binding VixTree, Source={StaticResource Locator}}" xmlns:my="clr-namespace:VixHealthMonitor"
+             xmlns:local="clr-namespace:VISACommon;assembly=VISACommon"
+             xmlns:vixcommon="clr-namespace:VixHealthMonitorCommon;assembly=VixHealthMonitorCommon">
+    <Grid>
+        <TreeView  
+                  VerticalAlignment="Stretch" HorizontalAlignment="Stretch" ItemsSource="{Binding Path=VisaSources}"
+                  b:MouseDoubleClickBehavior.MouseDoubleClick="{Binding Path=TreeMouseDoubleClickCommand}" 
+                  b:SelectedItemChangedBehavior.SelectedItemChanged="{Binding Path=TreeSelectedItemChangedCommand}">
+            <TreeView.ContextMenu>
+                <ContextMenu Name="RightClick">
+                    <MenuItem Header="Add Watch" Command="{Binding Path=AddWatchCommand}"/>
+                </ContextMenu>
+            </TreeView.ContextMenu>
+            
+            <TreeView.ItemContainerStyle>
+                <Style TargetType="TreeViewItem">
+                    <Setter Property="IsSelected"
+                        Value="{Binding Path=IsSelected, Mode=TwoWay}" />
+                </Style>
+            </TreeView.ItemContainerStyle>
+
+            <TreeView.Resources>
+                
+
+                <HierarchicalDataTemplate  DataType="{x:Type my:VixTreeHealthSource}" ItemsSource="{Binding VixHealth.Urls}" > 
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="{Binding Path=VixHealth.HealthIcon}" />
+                        <TextBlock Text="{Binding VisaSource.DisplayName}" >
+                            <TextBlock.ToolTip>
+                                <Label Content="{Binding Path=VixHealth.VisaHealth.ErrorMessage}"/>
+                            </TextBlock.ToolTip>
+                        </TextBlock>
+                    </StackPanel>
+                </HierarchicalDataTemplate>
+                <DataTemplate DataType="{x:Type vixcommon:VixServerUrl}">
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="{Binding Path=Icon}" />
+                        <TextBlock Text="{Binding Name}"/>
+                    </StackPanel>
+                </DataTemplate>
+            </TreeView.Resources>
+            
+            <!--
+            <TreeView.ItemTemplate>
+                <HierarchicalDataTemplate >
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="{Binding Path=VixHealth.HealthIcon}" />
+                        <TextBlock Text="{Binding VisaSource.DisplayName}"  />
+                    </StackPanel>                   
+                </HierarchicalDataTemplate>
+            </TreeView.ItemTemplate>
+            -->
+            
+            
+        </TreeView>
+    </Grid>
+</UserControl>

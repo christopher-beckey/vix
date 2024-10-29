@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<build xmlns="http://va.gov/VistA/kids/manifest" name="MAG*3.0*083" patchName="Display Enhancements VA" patch="083">
+  <components>
+    <securityKeys>
+      <securityKey export="Z_MAG_VIX_ADMIN_KEY.KID" />
+    </securityKeys>
+    <parameterDefinitions />
+    <printTemplates />
+    <sortTemplates />
+    <menuOptions />
+    <rpcs>
+      <rpc export="RPC_MAG_DOD_GET_STUDIES_IEN.KID" />
+      <rpc export="RPC_MAG_DOD_GET_STUDIES_UID.KID" />
+      <rpc export="RPC_MAG_IMAGE_CURRENT_INFO.KID" />
+    </rpcs>
+    <dataDictionaries>
+      <dataDictionary export="Z_VSS_2006_95P83.KID" />
+    </dataDictionaries>
+    <hl7s />
+    <routines>
+      <routine export="MAGDQR21.RTN" />
+      <routine export="MAGGTII.RTN" />
+      <routine export="MAGIPS83.RTN" />
+      <routine export="MAGLOG.RTN" />
+    </routines>
+    <protocols />
+  </components>
+</build>

@@ -1,0 +1,165 @@
+MAGDQUE4 ;WOIFO/PMK - DICOM Incoming Message Handler ; 31 Mar 2008 3:18 PM
+ ;;3.0;IMAGING;**30,51,54**;MAR 19, 2002;;OCT 28, 2009
+ ;; Per VHA Directive 2004-038, this routine should not be modified.
+ ;; +---------------------------------------------------------------+
+ ;; | Property of the US Government.                                |
+ ;; | No permission to copy or redistribute this software is given. |
+ ;; | Use of unreleased versions of this software requires the user |
+ ;; | to execute a written test agreement with the VistA Imaging    |
+ ;; | Development Office of the Department of Veterans Affairs,     |
+ ;; | telephone (301) 734-0100.                                     |
+ ;; | The Food and Drug Administration classifies this software as  |
+ ;; | a medical device.  As such, it may not be changed in any way. |
+ ;; | Modifications to this software may result in an adulterated   |
+ ;; | medical device under 21CFR820, the use of which is considered |
+ ;; | to be a violation of US Federal Statutes.                     |
+ ;; +---------------------------------------------------------------+
+ ;;
+ Q
+ ;
+ENTRY ; entry point to decode and parse a DICOM message
+ N COMMAND ;-- DICOM command element
+ N SEQNUMB ;-- nesting level of DICOM sequence; set in MSGINIT^MAGDFCNS
+ N SEQUENCE ;- DICOM nesting subscript sequence; set in MSGINIT^MAGDFCNS
+ N SOPCLASS ;- DICOM SOP Class
+ N LINETAG,OLDMSGID
+ ;
+ S SOPCLASS=$G(^TMP("MAG",$J,"DICOM",INODE,"0000,0002",1,1))
+ S SOPCLASS=$$GETNAME^MAGDUID2(SOPCLASS)
+ S COMMAND=$G(^TMP("MAG",$J,"DICOM",INODE,"0000,0100",1,1))
+ I COMMAND'?1N.N D
+ . N MSG
+ . S MSG(1)="Unexpected command value processing """_INODE_"""."
+ . S MSG(2)="Expected an integer numeric value, received """_COMMAND_"""."
+ . D TRAPERR^MAGDSTRT(1,$T(+0),"DICOM GATEWAY ERROR",.MSG)
+ . Q  ; Error trap does not return
+ S COMMAND=$$HEX^MAGDDR0(COMMAND,4)
+ S OLDMSGID=$G(^TMP("MAG",$J,"DICOM",INODE,"0000,0110",1,1))
+ ; Initialize the ^TMP global for the response message
+ I $E(COMMAND)="0" D MSGINIT^MAGDFCNS
+ S LINETAG="CMD"_COMMAND_"H"
+ I $T(@LINETAG)'="" D @LINETAG Q
+ N MSG
+ S MSG(1)="Unexpected command value processing """_INODE_"""."
+ S MSG(2)="Cannot find label """_LINETAG_""" in routine ^MAGDQUE4."
+ D TRAPERR^MAGDSTRT(1,$T(+0),"DICOM GATEWAY ERROR",.MSG)
+ Q  ; Error trap does not return
+ ;
+CMD0001H ; C-STORE-RQ
+ Q
+ ;
+CMD8001H ; C-STORE-RSP
+ Q
+ ;
+CMD0010H ; C-GET-RQ
+ Q
+ ;
+CMD8010H ; C-GET-RSP
+ Q
+ ;
+CMD0020H ; C-FIND-RQ
+ D MESSAGE^MAGDMLOG(1,0,"C-FIND Request Received","BV")
+ D ENTRY^MAGDFND1
+ Q
+ ;
+CMD8020H ; C-FIND-RSP
+ I SOPCLASS="Modality Worklist Information Model - FIND" D  Q
+ . D RESPONSE^MAGDWLU2
+ . Q
+ D  ; probably a C-FIND-RSP for a GE PACS Query Retrieve
+ . ; Note: two responses are expected, one with the data, the second
+ . ; with STATUS=0 indicating that the request has been satisfied
+ . N ACNUMB ;--- accession number ; must be null in GE C-MOVE Request
+ . N PID ;------ patient identifier ; must be null in GE C-MOVE Request
+ . N PNAME ;---- patient name ; must be null in GE C-MOVE Request
+ . N STATUS ;--- status field in the message
+ . N STUDYUID ;- Study Instance UID ; the key for the GE C-MOVE Request
+ . ;
+ . S STATUS=$$GETDATA^MAGDFCNS(INODE,"0000,0900") ; Status
+ . I 'STATUS S DONEFLAG=1 Q  ; indicate the all the work is completed
+ . S STUDYUID=$$GETDATA^MAGDFCNS(INODE,"0020,000D") ; Study Instance UID
+ . S PACS=$G(PACS,"GE")
+ . D:PACS="GE"
+ . . S (ACNUMB,PID,PNAME)="" ; must be null for GE PACS
+ . . Q
+ . D:PACS="KODAK"
+ . . S PID=$$GETDATA^MAGDFCNS(INODE,"0010,0020") ; Patient ID
+ . . S (ACNUMB,PNAME)="" ; must be null for Kodak PACS
+ . . Q
+ . D SAVEREQ^MAGDEXC1
+ . Q
+ Q
+ ;
+CMD0021H ; C-MOVE-RQ
+ D MESSAGE^MAGDMLOG(1,0,"C-MOVE Request Received","BV")
+ Q
+ ;
+CMD8021H ; C-MOVE-RSP
+ D RESPONSE^MAGDEXC2
+ Q
+ ;
+CMD0030H ; C-ECHO-RQ
+ D MESSAGE^MAGDMLOG(1,0,"Echo Request Received","BV")
+ D ENTRY^MAGDECHO
+ Q
+ ;
+CMD8030H ; C-ECHO-RSP
+ D MESSAGE^MAGDMLOG(1,0,"Echo Response Received","BV")
+ D ECHORESP^MAGDECHO
+ Q
+ ;
+CMD0100H ; N-EVENT-REPORT-RQ
+ I SOPCLASS="Modality Performed Procedure Step Notification SOP Class" D  Q
+ . Q
+ Q
+ ;
+CMD8100H ; N-EVENT-REPORT-RSP
+ ; output status
+ S STATUS=$G(^TMP("MAG",$J,"DICOM",INODE,"0000,0900",1,1))
+ I STATUS>0 W "    Status: ",STATUS
+ Q
+ ;
+CMD0110H ; N-GET-RQ
+ I SOPCLASS="Modality Performed Procedure Step Retrieve SOP Class" Q
+ Q
+ ;
+CMD8110H ; N-GET-RSP
+ Q
+ ;
+CMD0120H ; N-SET-RQ
+ I SOPCLASS="Modality Performed Procedure Step SOP Class" D  Q
+ . D SET^MAGDMPPC
+ . Q
+ Q
+ ;
+CMD8120H ; N-SET-RSP
+ Q
+ ;
+CMD0130H ; N-ACTION-RQ
+ Q
+ ;
+CMD8130H ; N-ACTION-RSP
+ Q
+ ;
+CMD0140H ; N-CREATE-RQ
+ I SOPCLASS="Modality Performed Procedure Step SOP Class" D  Q
+ . D CREATE^MAGDMPPC
+ . Q
+ D MESSAGE^MAGDMLOG(1,0,"N-CREATE Request Received","BV")
+ D ENTRY^MAGDEXC1 ; handle the EXAM COMPLETE
+ Q
+ ;
+CMD8140H ; N-CREATE-RSP
+ D MESSAGE^MAGDMLOG(1,0,"N-CREATE Response Received","BV")
+ S (DONEFLAG,SUCCESS)=1 ; completed
+ Q
+ ;
+CMD0150H ; N-DELETE-RQ
+ Q
+ ;
+CMD8150H ; N-DELETE-RSP
+ Q
+ ;
+CMD0FFFH ; C-CANCEL-RQ
+ Q
+ ;

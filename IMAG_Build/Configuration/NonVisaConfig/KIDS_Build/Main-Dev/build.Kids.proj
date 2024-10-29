@@ -1,0 +1,468 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="publish" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+	<Import Project="C:\Program Files\MSBuild\ExtensionPack\4.0\MSBuild.ExtensionPack.tasks"/> 
+	<PropertyGroup>
+		<NmakeHome>C:\Program Files\Microsoft Visual Studio 10.0\VC\bin\</NmakeHome>
+		<PatchNumber></PatchNumber>		
+		<SecLineOne>%20%3B%3B3.0%3BIMAGING%3B%2A%2A</SecLineOne>
+		<SecLineTwo>**%3B~date~</SecLineTwo>
+		<TempDelete>false</TempDelete>
+		<RootDir>E:\Builds\</RootDir>
+		<Version>3.0</Version>
+		<ProjectName>KIDS\</ProjectName>
+		<PatchFolderName>V$(Version)p$(PatchNumber)Build$(BuildNumber)</PatchFolderName>
+		<FullBuildPath>$(RootDir)$(ProjectName)$(PatchFolderName)</FullBuildPath>
+		<TF>"C:\Program Files\Microsoft Visual Studio 10.0\Common7\IDE\tf.exe"</TF>	
+		<TFSRootDir>$/VistA_Imaging</TFSRootDir>
+		<TFSWorkspaceDir>E:\TFS1\VistA_Imaging</TFSWorkspaceDir>		
+		<DiffUtilDir>C:\Program Files\GnuWin32\bin</DiffUtilDir>	
+		<CCSnapshotDir>E:\CC\P133\IMAG_main</CCSnapshotDir>
+		<TestNumber>31</TestNumber>
+		<TempFolder>\temp</TempFolder>
+		<IMAG_bldDir>E:\CC1\IMAG_bld</IMAG_bldDir>			
+		<ConfigurationDir>E:\CC1\IMAG_bld\Configuration</ConfigurationDir>	
+		<ReleaseDir>$(IMAG_bldDir)\Release</ReleaseDir>
+		<DevDir>$(IMAG_bldDir)\Dev</DevDir>
+		<ToolsDir>$(IMAG_bldDir)\Tools</ToolsDir>
+		<NetworkBuildDir>\\vhaiswclu4\common$\builds</NetworkBuildDir>		
+		<BuildManifestFilePath>$(IMAG_bldDir)\Configuration\VistABuildConfiguration\</BuildManifestFilePath>
+		<MumpsformatterHome>$(FullBuildPath)$(TempFolder)\Utilities\Compiled</MumpsformatterHome>
+		<DiffReportName>MAG3_0P$(PatchNumber)T$(TestNumber)Bld$(BuildNumber)Kids_Diff_Rpt.txt</DiffReportName>
+	</PropertyGroup>
+
+	<UsingTask TaskName="FormatPatchNumber" TaskFactory="CodeTaskFactory" AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.v4.0.dll" >
+		<ParameterGroup>
+			<UnformattedPatchNum ParameterType="System.String" Required="true" />
+			<FormattedPatchNumber ParameterType="System.String" Output="true" />
+		</ParameterGroup>
+		<Task>
+			<Code Type="Fragment" Language="cs">
+				<![CDATA[
+					int patchNum=Convert.ToInt32(UnformattedPatchNum);
+					if (patchNum<100)
+						FormattedPatchNumber="0" + UnformattedPatchNum;
+					else
+						FormattedPatchNumber=UnformattedPatchNum;
+				
+					]]>		 
+			</Code>
+		</Task>
+	</UsingTask>
+	
+ 	<UsingTask TaskName="GetPatchDepNumbers" TaskFactory="CodeTaskFactory" AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.v4.0.dll" >
+		<ParameterGroup>
+			<PatchNumber ParameterType="System.String" Required="true" />
+			<PatchSeqFile ParameterType="System.String" Required="true" />
+			<ItemList ParameterType="Microsoft.Build.Framework.ITaskItem[]" Output="true" />
+		</ParameterGroup>	
+		<Task>
+			<Reference Include="System.Xml" />	
+			<Using Namespace="System.Xml" />
+			<Code Type="Fragment" Language="cs">
+				<![CDATA[
+					string number,order;
+					var kidspatchlist = new List<ITaskItem>();
+					int patch= Convert.ToInt32(PatchNumber);
+					XmlDocument xml = new XmlDocument();
+					xml.Load(PatchSeqFile); 
+					foreach(XmlNode xn in xml.SelectNodes("//dev/patches/patch"))
+					{
+						number=xn.SelectSingleNode(".").InnerText.ToString();
+						if ((xn.SelectSingleNode("@status").Value)!="released"){
+							kidspatchlist.Add(new TaskItem(number));
+							if (number == PatchNumber)
+								break;
+						}
+					} //for
+					ItemList=kidspatchlist.ToArray();
+				]]>		 
+			</Code>
+		</Task>
+	</UsingTask>
+	
+	<UsingTask TaskName="CreateRoutines" TaskFactory="CodeTaskFactory" AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.v4.0.dll" >
+		  <ParameterGroup>
+			<PatchNumber ParameterType="System.String" Required="true" />
+			<BuildManifestFilePath ParameterType="System.String" Required="true" />
+			<BuildManifestFileNumber ParameterType="System.String" Required="true" />
+			<FolderPath ParameterType="System.String" Required="true" />
+			<RtnFileNames ParameterType="Microsoft.Build.Framework.ITaskItem[]" Output="true" />	
+		</ParameterGroup>
+		<Task>
+			<Reference Include="System.Xml" />	
+			<Using Namespace="System.Xml" />
+			<Code Type="Fragment" Language="cs">
+				<![CDATA[
+					var patchRtns = new List<ITaskItem>();
+					string number;
+					string buildManifest;
+					if (Convert.ToInt32(BuildManifestFileNumber)<100)
+						buildManifest=BuildManifestFilePath+"MAG_3_0_0" + BuildManifestFileNumber + ".xml";
+					else
+						buildManifest=BuildManifestFilePath+"MAG_3_0_" + BuildManifestFileNumber + ".xml";
+					string newPath;
+					XmlDocument xml = new XmlDocument();
+					xml.Load(buildManifest); 
+					XmlNodeList xnList = xml.GetElementsByTagName("routine");
+					for (int i=0; i < xnList.Count; i++){
+						number=xnList[i].Attributes["export"].Value;
+						newPath=System.IO.Path.Combine(FolderPath,number);
+						if((BuildManifestFileNumber)!=(PatchNumber)) //don't create dummy routines for the patch being built
+							System.IO.File.Create(newPath);		
+						else
+							patchRtns.Add(new TaskItem(number));
+						}
+					RtnFileNames=patchRtns.ToArray();
+				]]>
+			</Code>
+		</Task>
+	</UsingTask>
+ 
+  	<UsingTask TaskName="GetKidsFiles" TaskFactory="CodeTaskFactory" AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.v4.0.dll" >
+		  <ParameterGroup>
+			<PatchNumber ParameterType="System.String" Required="true" />
+			<BuildManifestFilePath ParameterType="System.String" Required="true" />
+			<TagName ParameterType="System.String" Required="true" />
+			<KidsFileNames ParameterType="System.String" Output="true" />	
+			<DDFileNames ParameterType="System.String" Output="true" />	
+			<BuildManifestName ParameterType="System.String" Output="true" />	
+		</ParameterGroup>
+		<Task>
+			<Reference Include="System.Xml" />	
+			<Using Namespace="System.Xml" />
+			<Code Type="Fragment" Language="cs">
+				<![CDATA[
+					string attrVal;
+					string patchDD="";
+					string buildManifest;
+					if (Convert.ToInt32(PatchNumber)<100){
+						buildManifest=BuildManifestFilePath+"MAG_3_0_0" + PatchNumber + ".xml";
+						BuildManifestName="MAG_3_0_0" + PatchNumber + ".xml";}
+					else{
+						buildManifest=BuildManifestFilePath+"MAG_3_0_" + PatchNumber + ".xml";
+						BuildManifestName="MAG_3_0_" + PatchNumber + ".xml";}
+					string patchKids="";
+					string newPath;
+					XmlDocument xml = new XmlDocument();
+					xml.Load(buildManifest); 
+					XmlNodeList xnList1 = xml.GetElementsByTagName(TagName);
+					for (int i=0; i < xnList1.Count; i++){							
+						attrVal=xnList1[i].Attributes["export"].Value;
+						if(TagName=="dataDictionary")
+							patchDD=attrVal+";"+patchDD;
+						else	
+							patchKids=attrVal+";"+patchKids;
+						}
+					DDFileNames=patchDD;				
+					KidsFileNames=patchKids;
+					
+				]]>
+			</Code>
+		</Task>
+	</UsingTask>
+ 
+ 	<UsingTask TaskName="ProcessSecondLine" TaskFactory="CodeTaskFactory" AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.v4.0.dll" >
+		  <ParameterGroup>
+			<Routine ParameterType="System.String" Required="true" />
+			<BaselineDir ParameterType="System.String" Required="true" />
+			<PatchNumber ParameterType="System.String" Required="true" />
+			<FilteredLine ParameterType="System.String" Output="true" />		
+		</ParameterGroup>
+		<Task>
+			<Using Namespace="System.Text.RegularExpressions" />
+			<Code Type="Fragment" Language="cs">
+				<![CDATA[
+					int posone; string p; int postwo; int substrlength; string line;
+					string comma=""; 
+					string routineloc=BaselineDir + Routine;
+					string trimmedp="";
+					if (Directory.GetFiles(BaselineDir,Routine).Length > 0){  //check that the rtn or dic is in the baseline
+						StreamReader sr = new StreamReader(routineloc);
+						line = sr.ReadLine();  //read second line of rtn.
+						line = sr.ReadLine();
+						if (line.IndexOf("**")!=-1){}
+						
+						else{       //after first run of mumpsformatter 'second line' is now on the fifth line.
+							line = sr.ReadLine();  
+							line = sr.ReadLine();
+							line = sr.ReadLine(); 
+							}
+						if (line.IndexOf("**")!=-1){	
+							posone = line.IndexOf("**") + 2;
+							postwo = line.LastIndexOf("**");
+							substrlength=postwo-posone;
+							p = line.Substring(posone, substrlength); //get the string between ** and **
+							Match m=Regex.Match(p,PatchNumber);
+							if (m.Success){
+								p=Regex.Replace(p,PatchNumber,"");} //Remove duplicate patch folder if it exists.
+								trimmedp= p.TrimEnd(','); //Remove extra comma if it exists.
+								comma=",";
+							if (string.IsNullOrEmpty(trimmedp)){
+								comma="";}
+							}	
+						sr.Close();	
+					}
+					string fullsecondline=" ;;3.0;IMAGING;**"+trimmedp+comma+PatchNumber+"**;~date~";
+					FilteredLine=fullsecondline; 
+				]]>
+			</Code>
+		</Task>
+	</UsingTask>
+
+	<Target Name="FormatPatchNumber" >
+		<!-- the task below takes the patch number and, if the patch number is less than 100, adds a 0 in front of the patch number -->
+		<FormatPatchNumber
+			UnformattedPatchNum="$(PatchNumber)" >
+			<Output PropertyName="FormattedPatchNumber" TaskParameter="FormattedPatchNumber" />
+		</FormatPatchNumber>	
+	</Target>
+
+	<!-- Update TFS to use in file comparison with CC -->
+ 	<Target Name="UpdateTFS" DependsOnTargets="FormatPatchNumber">	
+		<Exec Command="$(TF) get $(TFSSourceDir)/Source/Production/VistA/MUMPS /recursive /version:T /noprompt /login:harris-hc-lab\$(TFSusername),$(TFSPassword)" WorkingDirectory="$(TFSWorkspaceDir)" Condition="'$(UpdateTFS)'!='false'" />	
+		<Exec Command="$(TF) get $(TFSRootDir)/Configuration /recursive /version:T /noprompt /login:harris-hc-lab\$(TFSusername),$(TFSPassword)" WorkingDirectory="$(TFSWorkspaceDir)" Condition="'$(UpdateTFS)'!='false'" />	
+		<Exec Command="$(TF) get $(TFSRootDir)/Tools/Compiled /recursive /version:T /noprompt /login:harris-hc-lab\$(TFSusername),$(TFSPassword)" WorkingDirectory="$(TFSWorkspaceDir)" Condition="'$(UpdateTFS)'!='false'" />	
+		<Exec Command="$(TF) get $(TFSRootDir)/Release /recursive /version:T /noprompt /login:harris-hc-lab\$(TFSusername),$(TFSPassword)" WorkingDirectory="$(TFSWorkspaceDir)" Condition="'$(UpdateTFS)'!='false'" />	
+	</Target>	
+ 
+	<!-- Update CC to use in file comparison with TFS -->
+	<Target Name="UpdateClearCase" DependsOnTargets="UpdateTFS" >
+		<Exec Command='"ClearTool.exe" update -force $(IMAG_bldDir)\Configuration\NonVisaConfig' Condition="'$(UpdateClearCase)'!='false'" ContinueOnError="false" />
+		<Exec Command='"ClearTool.exe" update -force -overwrite $(IMAG_bldDir)\Configuration\VistABuildConfiguration' Condition="'$(UpdateClearCase)'!='false'" ContinueOnError="false" />
+		<Exec Command='"ClearTool.exe" update -force $(CCSnapshotDir)\$(BranchName)\Source\Production\VistA' Condition="'$(UpdateClearCase)'!='false'"  ContinueOnError="false" />
+		<Exec Command='"ClearTool.exe" update -force -overwrite $(IMAG_bldDir)\Release\VistA' Condition="'$(UpdateClearCase)'!='false'" ContinueOnError="false" />
+		<Exec Command='"ClearTool.exe" update -force -overwrite $(IMAG_bldDir)\Tools\Compiled' Condition="'$(UpdateClearCase)'!='false'" ContinueOnError="false" />
+	</Target>
+
+	<Target Name="CreateItemGroups" DependsOnTargets="UpdateClearCase">
+		<ItemGroup>
+			<Utilities Include="$(FullBuildPath)$(TempFolder)\Utilities\MagCheck\release\MagCheck.exe; $(FullBuildPath)$(TempFolder)\Utilities\MumpsFormatter\release\MumpsFormatter.exe"  /> 
+			<MumpsBaseline Include="$(ReleaseDir)\VistA\Apps\*.*" /> <!-- get mumps baseline from Release -->
+			<SecondLineFile Include="$(FullBuildPath)$(TempFolder)\MUMPS\Work\2nd_Line.txt" />
+			<GatewayProjectDirectory Include="$(MSBuildProjectDirectory)\..\..\.." />
+			<TagNames Include="securityKey;option;printTemplate;sortTemplate;menuOption;dataDictionary;rpc;hl7" />
+			<UtilitiesSource Include="$(ToolsDir)\MumpsFormatter\**\*.*" > <!--add from VSS1 -->
+				<ParentFolder>MumpsFormatter</ParentFolder>
+			</UtilitiesSource>	
+			<UtilitiesSource Include="$(ToolsDir)\MagCheck\**\*.*" >
+				<ParentFolder>MagCheck</ParentFolder>
+			</UtilitiesSource>
+			<UtilitiesSource Include="$(ToolsDir)\Compiled\KIDSAssembler\**\*.*" >
+				<ParentFolder>KIDSAssembler</ParentFolder>
+			</UtilitiesSource>
+		</ItemGroup>
+	</Target>	
+	
+ 	<!-- =============== Delete previous build (if build folder of the same name exists) ================== -->
+	<Target Name="CleanPreviousBuild" DependsOnTargets="CreateItemGroups" >
+		<RemoveDir Directories="$(FullBuildPath)" />
+	</Target> 
+
+	<!-- =============== Create build ouput directories ================================== -->
+	<Target Name="CreateDirectories" DependsOnTargets="CleanPreviousBuild">
+		<MakeDir directories="$(FullBuildPath)$(TempFolder)"  />
+		<MakeDir directories="$(FullBuildPath)$(TempFolder)\Mumps\Work"  />
+	</Target>
+	
+	<!-- ======  Compare TFS and CC code and write to a text file which files differ ===== --> 
+	<Target Name="TFS_CC_Diff" DependsOnTargets="CreateDirectories" >	
+		<WriteLinesToFile File="$(FullBuildPath)\$(DiffReportName)" Lines="Comparing ClearCase against TFS for the following folders and subfolders-> Source\Production\VistA, Configuration\VistABuildConfiguration, Tools\KIDSAssembler, and Release\VistA" />
+		<WriteLinesToFile File="$(FullBuildPath)\$(DiffReportName)" Lines="If there are no files listed there are no differences" Overwrite="false" />
+		<WriteLinesToFile File="$(FullBuildPath)\$(DiffReportName)" Lines="===================================================================================================================================" Overwrite="false" />
+		<Exec Command='"$(DiffUtilDir)\diff.exe" -i -w -r -q $(TFSWorkspaceSourceDir)\Production\VistA $(CCSnapshotDir)\$(BranchName)\Source\Production\VistA >> "$(FullBuildPath)\$(DiffReportName)"' IgnoreExitCode="true" Condition="'$(TFSCCDiff)'!='false'" />
+		<Exec Command='"$(DiffUtilDir)\diff.exe" -i -w -r -q $(TFSWorkspaceDir)\Configuration\VistABuildConfiguration $(IMAG_bldDir)\Configuration\VistABuildConfiguration >> "$(FullBuildPath)\$(DiffReportName)"' IgnoreExitCode="true"  Condition="'$(TFSCCDiff)'!='false'" />
+		<Exec Command='"$(DiffUtilDir)\diff.exe" -i -w -r -q $(TFSWorkspaceDir)\Release\VistA $(IMAG_bldDir)\Release\VistA >> "$(FullBuildPath)\$(DiffReportName)"' IgnoreExitCode="true" Condition="'$(TFSCCDiff)'!='false'"  />
+		<Exec Command='"$(DiffUtilDir)\diff.exe" -i -w -r -q $(TFSWorkspaceDir)\Tools\Compiled $(IMAG_bldDir)\Tools\Compiled >> "$(FullBuildPath)\$(DiffReportName)"' IgnoreExitCode="true" Condition="'$(TFSCCDiff)'!='false'"  />
+		<Exec Command='"$(DiffUtilDir)\diff.exe" -i -w -q $(TFSWorkspaceDir)\Configuration\NonVisaConfig\Builds $(IMAG_bldDir)\Configuration\NonVisaConfig\Builds >> "$(FullBuildPath)\$(DiffReportName)"' IgnoreExitCode="true" Condition="'$(TFSCCDiff)'!='false'"  />
+	</Target>		
+	
+ <!-- =============== Read Build_Sequence.xml and determine what patches to use for the second line process, and pre, post, etc of the routine ================== -->
+	<Target Name="GetPatchMumpsDepNumbers" DependsOnTargets="TFS_CC_Diff" >
+		<!-- use unformatted patch number to conform with build_sequence.xml -->
+		<GetPatchDepNumbers
+			PatchNumber="$(PatchNumber)" 
+			PatchSeqFile="$(ConfigurationDir)\NonVisaConfig\Builds\Build_Sequence.xml" >
+			<Output ItemName="SplitPatchDep" TaskParameter="ItemList" />
+		</GetPatchDepNumbers>	
+			<message text="Patch dependency numbers from build_sequence.xml are @(SplitPatchDep)" Importance="normal"/>
+		<MakeDir directories="$(FullBuildPath)$(TempFolder)\P%(SplitPatchDep.Identity)" />		
+	</Target> 
+	
+	<!-- ===========Create dummy .rtn files that will be used to determine if the patch number of the routine will be used in the second line process =========== -->
+	<Target Name="CreateMumpsFiles" DependsOnTargets="GetPatchMumpsDepNumbers"  >
+		<CreateRoutines
+			PatchNumber="$(PatchNumber)"
+			BuildManifestFileNumber="%(SplitPatchDep.Identity)" 
+			BuildManifestFilePath="$(BuildManifestFilePath)" 
+			FolderPath="$(FullBuildPath)$(TempFolder)\P%(SplitPatchDep.Identity)" >
+			<Output ItemName="SplitRtnFiles" TaskParameter="RtnFileNames" />
+		</CreateRoutines>	
+	
+		<message text="Reading manifest for patch $(PatchNumber), the routines listed are:" />
+		<message text="%(SplitRtnFiles.Identity)" Importance="normal" />	
+		
+		<!-- Copy if the patch is under the IMAG_bld\dev VOB -->
+		<Copy SourceFiles="$(DevDir)\Patch$(FormattedPatchNumber)\Source\Production\VistA\MUMPS\Apps\%(SplitRtnFiles.Identity)" DestinationFolder="$(FullBuildPath)$(TempFolder)\P$(PatchNumber)" ContinueOnError="true" Condition="'$(BranchName)' != 'Main'"/>
+		<Copy SourceFiles="$(DevDir)\Patch$(FormattedPatchNumber)\Source\Production\VistA\MUMPS\Apps\PrePostInstall\%(SplitRtnFiles.Identity)" DestinationFolder="$(FullBuildPath)$(TempFolder)\P$(PatchNumber)" ContinueOnError="true" Condition="'$(BranchName)' != 'Main'"/>
+		<!-- Copy if the patch is under the IMAG_Main VOB -->
+		<Copy SourceFiles="$(CCSnapshotDir)\Main\Source\Production\VistA\MUMPS\Apps\%(SplitRtnFiles.Identity)" DestinationFolder="$(FullBuildPath)$(TempFolder)\P$(PatchNumber)" ContinueOnError="true" Condition="'$(BranchName)' == 'Main'"/>
+		<Copy SourceFiles="$(CCSnapshotDir)\Main\Source\Production\VistA\MUMPS\Apps\PrePostInstall\%(SplitRtnFiles.Identity)" DestinationFolder="$(FullBuildPath)$(TempFolder)\P$(PatchNumber)" ContinueOnError="true" Condition="'$(BranchName)' == 'Main'"/>
+	</Target> 		
+	
+	<!-- ============== Create an Itemgroup out of the patch dependencies =========================== -->
+	<Target Name="SetDependencies" Outputs="%(SplitPatchDep.Identity)" DependsOnTargets="CreateMumpsFiles" >
+		<ItemGroup>	
+			<Dependency Include="$(FullBuildPath)$(TempFolder)\P%(SplitPatchDep.Identity)\*.RTN; $(FullBuildPath)$(TempFolder)\P%(SplitPatchDep.Identity)\*.cache" >
+				<FolderName>%(SplitPatchDep.Identity)</FolderName>
+			</Dependency>	
+		</ItemGroup>
+		<message text="Patch dependency is %(Dependency.FolderName), the routine name listed in the patch manifest is: %(Dependency.FileName)" Importance="normal" Condition="'%(Dependency.FileName)'!=''"/>		
+	</Target>	
+	
+	<!-- ================== Copy files from source control over to build output directory ====================================================== -->
+	<Target Name="CopyFiles"  DependsOnTargets="SetDependencies" >
+		<Copy SourceFiles="@(UtilitiesSource)" DestinationFiles="@(UtilitiesSource->'$(FullBuildPath)$(TempFolder)\Utilities\%(ParentFolder)\%(RecursiveDir)%(Filename)%(Extension)')" />
+		<Copy SourceFiles="@(MumpsBaseline)" DestinationFolder="$(FullBuildPath)$(TempFolder)\MUMPS\Baseline"/>
+		<Copy SourceFiles="$(BuildManifestFilePath)\MAG_3_0_0$(PatchNumber).xml" DestinationFolder="$(FullBuildPath)$(TempFolder)" Condition="'$(PatchNumber)' &lt; '100'"/>
+		<Copy SourceFiles="$(BuildManifestFilePath)\MAG_3_0_$(PatchNumber).xml" DestinationFolder="$(FullBuildPath)$(TempFolder)" Condition="'$(PatchNumber)' &gt; '99'"/>
+	</Target>
+
+ 	<!-- ================== Compile C Utility projects ====================================================== -->
+	<Target Name="Build_C_Utilites" DependsOnTargets="CopyFiles" >
+		<PropertyGroup>
+			<UtilitiesPath>%(GatewayProjectDirectory.FullPath)</UtilitiesPath>
+		</PropertyGroup>
+			<Exec Command='"$(NmakeHome)nmake.exe" "CFG=MumpsFormatter - Win32 Release" /f MumpsFormatter.mak' WorkingDirectory="$(FullBuildPath)\$(TempFolder)\utilities\MumpsFormatter\" /> 
+			<Exec Command='"$(NmakeHome)nmake.exe" "CFG=MagCheck - Win32 Release" /f MagCheck.mak' WorkingDirectory="$(FullBuildPath)\$(TempFolder)\utilities\MagCheck\" /> 
+	</Target>
+
+	<!-- ================== Copy build artifacts over to build output directory ====================================================== -->
+	<Target Name="CopyArtifacts"  DependsOnTargets="Build_C_Utilites" >
+		<Copy SourceFiles="@(Utilities)" DestinationFolder="$(FullBuildPath)\$(TempFolder)\Utilities\Compiled\"/>
+	</Target>	
+
+	<!-- ==================  Second Line processing on the Patch folder============================= -->
+	<Target Name="SecondLineFirstPass" DependsOnTargets="CopyArtifacts" >
+		<!-- Create 2nd_line.txt file and run Mumps Formatter on routines of patch folder being built -->
+		<WriteLinesToFile File="@(SecondLineFile)" />
+		<MSBuild.ExtensionPack.FileSystem.File TaskAction="WriteLines" Files="@(SecondLineFile)" Lines="$(SecLineOne)$(PatchNumber)$(SecLineTwo)" TextEncoding="ASCII"/>
+		<Copy SourceFiles="@(SecondLineFile)" DestinationFolder="$(FullBuildPath)$(TempFolder)\P$(PatchNumber)" />
+		<message text="Running Mumpsformatter against all the patch $(PatchNumber) routines" importance="normal" />
+		<Exec Command='"$(MumpsFormatterHome)\MumpsFormatter.exe" -s 2nd_Line.txt -b $(BuildNumber)' WorkingDirectory="$(FullBuildPath)$(TempFolder)\P$(PatchNumber)" />
+		<Delete Files="@(SecondLineFile)"	/>
+		<ItemGroup>
+			<NewMumpsFiles Include="$(FullBuildPath)$(TempFolder)\P$(PatchNumber)\*.new_RTN"  />
+		</ItemGroup>
+		
+		<!-- rename .new_rtn files to .rtn and move to mumps\distrib folder -->
+		<Copy SourceFiles="@(NewMumpsFiles)" DestinationFiles="@(NewMumpsFiles->'$(FullBuildPath)$(TempFolder)\MUMPS\Distrib\%(Filename).RTN')"  />
+	</Target>
+
+	<!-- ================== Update Second Line in Mumps file for patch and its dependencies ============================= -->
+	<Target Name="SecondLineSecondPass" DependsOnTargets="SecondLineFirstPass" Outputs="%(Dependency.FullPath)">
+		<!-- Extract second line by reading the version of the rtn (that is being processed in the work folder) from the baseline folder.  If the rtn	
+			 does not exist in the baseline folder skip the ProcessSecondLine (second line processing) task. -->	
+		<PropertyGroup>
+			<FileName>%(Dependency.FileName)</FileName>
+			<PatchDepNumber>%(Dependency.FolderName)</PatchDepNumber>
+		</PropertyGroup>
+		<message text="Generating second line for %(Dependency.FileName).rtn in patch %(Dependency.FolderName)" Importance="High"/>
+		<!--Check the names of the routines from each of the patch dependency folders.  If the routine exisits in the patch being built copy routine from the patches distrib folder to the temporary work directory -->
+		<Copy SourceFiles="$(FullBuildPath)$(TempFolder)\MUMPS\Distrib\$(Filename).RTN" DestinationFolder="$(FullBuildPath)$(TempFolder)\MUMPS\Work\" Condition="Exists('$(FullBuildPath)$(TempFolder)\P$(PatchNumber)\$(FileName).RTN')" ContinueOnError="True" />
+		<ItemGroup>
+			<WorkRoutines Include="$(FullBuildPath)$(TempFolder)\MUMPS\Work\*.RTN" />
+		</ItemGroup>
+
+		<!-- Call the ProcessSecondLine task passing in the patch number, routine name, and baseline directory.  The task returns the new second line -->
+		<message text="Reading work routine for second line processing: $(FullBuildPath)$(TempFolder)\MUMPS\Baseline\%(WorkRoutines.Filename)%(WorkRoutines.Extension)" />
+		<ProcessSecondLine 
+			Condition="Exists('$(FullBuildPath)$(TempFolder)\MUMPS\Work\$(FileName).RTN')"
+			Routine="%(WorkRoutines.Filename)%(WorkRoutines.Extension)" 
+			BaselineDir="$(FullBuildPath)$(TempFolder)\MUMPS\Baseline\"
+			PatchNumber="$(PatchDepNumber)">
+			<Output ItemName="ItemsFromFile" TaskParameter="FilteredLine" />
+		</ProcessSecondLine>
+
+		<message text="Running Mumpsformatter against %(Dependency.FileName).rtn in patch %(Dependency.FolderName)" Importance="High"/>
+		<!--Create a new 2nd_Line.txt file and write the returned second line (from the ReadSeconLine task) to 2nd_line.txt -->
+		<WriteLinesToFile File="@(SecondLineFile)" Condition="Exists('$(FullBuildPath)$(TempFolder)\P$(PatchDepNumber)\$(FileName).RTN')" />		
+		<MSBuild.ExtensionPack.FileSystem.File TaskAction="WriteLines" Files="@(SecondLineFile)" Lines="@(ItemsFromFile)" Condition="Exists('$(FullBuildPath)$(TempFolder)\MUMPS\Work\$(FileName).RTN')" TextEncoding="ASCII"/>
+		
+		<!-- Run Mumps Formatter on routines of patch folder(s) -->
+		<Exec Command='"$(MumpsFormatterHome)\MumpsFormatter.exe" -s 2nd_Line.txt -b $(BuildNumber)' Condition="Exists('$(FullBuildPath)$(TempFolder)\MUMPS\Work\$(FileName).RTN')" WorkingDirectory="$(FullBuildPath)$(TempFolder)\MUMPS\Work"  />
+
+		<ItemGroup>
+			<NewMumpsWorkFiles Include="$(FullBuildPath)$(TempFolder)\MUMPS\Work\*.new_RTN"  />
+		</ItemGroup>
+		
+		<!-- Rename .new_rtn files to .rtn and move to baseline for the next round of processing.  Move to mumps\rtn folders are each round of processing-->
+		<Copy SourceFiles="@(NewMumpsWorkFiles)" DestinationFiles="@(NewMumpsWorkFiles->'$(FullBuildPath)$(TempFolder)\MUMPS\Baseline\%(RecursiveDir)%(Filename).RTN')" />		
+		<Copy SourceFiles="@(NewMumpsWorkFiles)" DestinationFiles="@(NewMumpsWorkFiles->'$(ProjectDir)$(FullBuildPath)$(TempFolder)\MUMPS\Rtn\%(RecursiveDir)%(Filename).RTN')" />	
+		<RemoveDir Directories="$(FullBuildPath)$(TempFolder)\MUMPS\Work" /> 
+		<MakeDir directories="$(FullBuildPath)$(TempFolder)\MUMPS\Work"  />
+	</Target>
+	
+	<Target Name="RollUpMumps" DependsOnTargets="SecondLineSecondPass" >
+		<ItemGroup>
+			<NewRtn Include="$(FullBuildPath)$(TempFolder)\MUMPS\Rtn\*.*"  />
+		</ItemGroup>	
+		
+		<!-- move processed rtn files back to distrib folder and run mumps formatter against the folder -->
+		<Copy SourceFiles="@(NewRtn)" DestinationFolder="$(FullBuildPath)$(TempFolder)\MUMPS\Distrib" />
+		<Exec Command='"$(MumpsFormatterHome)\MumpsFormatter.exe" -x -l "$(PatchFolderName)"' WorkingDirectory="$(ProjectDir)$(FullBuildPath)$(TempFolder)\MUMPS\Distrib\" />
+	</Target>
+
+	<Target Name="MagCheck" DependsOnTargets="RollUpMumps" >
+		
+		<Exec Command='"$(FullBuildPath)$(TempFolder)\Utilities\Compiled\MagCheck.exe" %3CDICOMRtns.rtn%3E MAG_VistA_Check.txt'  WorkingDirectory="$(FullBuildPath)$(TempFolder)\MUMPS\Distrib" />	
+		<Copy SourceFiles="$(FullBuildPath)$(TempFolder)\MUMPS\Distrib\MAG_VistA_Check.txt" DestinationFolder="$(FullBuildPath)$(TempFolder)\MagCheck\" />
+		<Delete Files="$(FullBuildPath)$(TempFolder)\MUMPS\Distrib\MAG_VistA_Check.txt"	/>
+	</Target>	
+	
+	<Target Name="GetKIDS" Outputs="%(TagNames.Identity)" DependsOnTargets="MagCheck" >
+		<message text="Tag name from patch $(PatchNumber) manifest is: @(TagNames)" Importance="normal"/>
+		<GetKidsFiles
+			PatchNumber="$(PatchNumber)"
+			TagName="@(TagNames)"
+			BuildManifestFilePath="$(BuildManifestFilePath)" >
+			<Output PropertyName="KidsFiles" TaskParameter="KidsFileNames" />
+			<Output PropertyName="DDFiles" TaskParameter="DDFileNames" />
+			<Output PropertyName="BuildManifestName" TaskParameter="BuildManifestName" />
+		</GetKidsFiles>	
+		<ItemGroup>
+			<SplitKidsFiles Include="$(KidsFiles.Split(';'))" />
+			<SplitDDFiles Include="$(DDFiles.Split(';'))" />
+		</ItemGroup>
+		
+		<message text="@(TagNames) files are: @(SplitDDFiles)" Condition="'@(TagNames)'=='dataDictionary' AND '@(SplitDDFiles)'!=''" />
+		<message text="@(TagNames) files are: @(SplitKidsFiles)" Condition="'@(TagNames)'!='dataDictionary' AND '@(SplitKidsFiles)'!=''" />
+		<message text="@(TagNames) files are: There are no @(TagNames) files listed in the patch manifest." Condition="'@(TagNames)'!='dataDictionary' AND '@(SplitKidsFiles)'==''" />
+		<message text="@(TagNames) files are: There are no @(TagNames) files listed in the patch manifest." Condition="'@(TagNames)'=='dataDictionary' AND '@(SplitDDFiles)'==''" />
+
+		<Copy SourceFiles="$(DevDir)\Patch0$(PatchNumber)\Source\Production\VistA\MUMPS\KIDS_Components\%(SplitKidsFiles.Identity)" DestinationFolder="$(FullBuildPath)$(TempFolder)\P$(PatchNumber)\Kids_Components" ContinueOnError="true" Condition="'$(PatchNumber)' &lt; '100' AND '$(BranchName)' != 'Main'"/>
+		<Copy SourceFiles="$(DevDir)\Patch0$(PatchNumber)\Source\Production\VistA\MUMPS\KIDS_Components\DD Changes\%(SplitDDFiles.Identity)" DestinationFolder="$(FullBuildPath)$(TempFolder)\P$(PatchNumber)\Kids_Components" ContinueOnError="true" Condition="'$(PatchNumber)' &lt; '100' AND '$(BranchName)' != 'Main'"/>
+		<Copy SourceFiles="$(DevDir)\Patch$(PatchNumber)\Source\Production\VistA\MUMPS\KIDS_Components\%(SplitKidsFiles.Identity)" DestinationFolder="$(FullBuildPath)$(TempFolder)\P$(PatchNumber)\Kids_Components" ContinueOnError="true" Condition="'$(PatchNumber)' &gt; '99' AND '$(BranchName)' != 'Main'"/>
+		<Copy SourceFiles="$(DevDir)\Patch$(PatchNumber)\Source\Production\VistA\MUMPS\KIDS_Components\DD Changes\%(SplitDDFiles.Identity)" DestinationFolder="$(FullBuildPath)$(TempFolder)\P$(PatchNumber)\Kids_Components" ContinueOnError="true" Condition="'$(PatchNumber)' &gt; '99' AND '$(BranchName)' != 'Main'"/>
+		<Copy SourceFiles="$(CCSnapshotDir)\Main\Source\Production\VistA\MUMPS\KIDS_Components\%(SplitKidsFiles.Identity)" DestinationFolder="$(FullBuildPath)$(TempFolder)\P$(PatchNumber)\Kids_Components" ContinueOnError="true" Condition="'$(PatchNumber)' &gt; '99' AND '$(BranchName)' == 'Main'"/>
+		<Copy SourceFiles="$(CCSnapshotDir)\Main\Source\Production\VistA\MUMPS\KIDS_Components\DD Changes\%(SplitDDFiles.Identity)" DestinationFolder="$(FullBuildPath)$(TempFolder)\P$(PatchNumber)\Kids_Components" ContinueOnError="true" Condition="'$(PatchNumber)' &gt; '99' AND '$(BranchName)' == 'Main'"/>
+	</Target>
+	
+	<Target Name="CreateKIDS"  DependsOnTargets="GetKIDS" >	
+		<ItemGroup>			
+			<KidsAssembler Include="$(FullBuildPath)$(TempFolder)\utilities\KIDSAssembler\KIDSAssembler-1.0.jar" />
+		</ItemGroup>	
+		<PropertyGroup>
+			<KidFileName>MAG3_0P$(PatchNumber)T$(TestNumber).KID</KidFileName>
+		</PropertyGroup>
+		<Exec Command="java -jar %(KIDSAssembler.Identity) -l=V$(Version)p$(PatchNumber)Build$(BuildNumber)_T$(TestNumber) -t=$(TestNumber) -n=$(KidFileName) -m=$(FullBuildPath)$(TempFolder)\$(BuildManifestName) -Dva.gov.vista.kids.rootDirectory=$(FullBuildPath)$(TempFolder) -Dva.gov.vista.kids.searchDirectories=Mumps\Distrib,P$(PatchNumber)\Kids_Components -Dva.gov.vista.kids.outputDirectory=$(FullBuildPath) -Dva.gov.vista.kids.buildNumber=$(BuildNumber)"   ContinueOnError="true"  />
+	</Target>			
+	
+	<!-- ====== Create final build outuput. ======= -->
+	<Target Name="Publish" DependsOnTargets="CreateKIDS" Condition="'$(BuildKids)'!='false'" >
+		<ItemGroup>
+			<BuildArtifacts Include="$(FullBuildPath)\*.*" />
+		</ItemGroup>
+		<RemoveDir Directories="$(FullBuildPath)$(TempFolder)" Condition="'$(TempDelete)'=='true'"  ContinueOnError="true"/>
+		<Copy SourceFiles="@(BuildArtifacts)" Destinationfolder="$(NetworkBuildDir)\V$(Version)p$(PatchNumber)Build$(BuildNumber)_T$(TestNumber)" />
+	</Target>
+</Project>

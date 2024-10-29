@@ -1,0 +1,39 @@
+MAGDMFBN ;WOIFO/PMK - Program to build DICOM Master File ; 07/20/2007 06:40
+ ;;3.0;IMAGING;**54**;MAR 19, 2002;;OCT 28, 2009
+ ;; Per VHA Directive 2004-038, this routine should not be modified.
+ ;; +---------------------------------------------------------------+
+ ;; | Property of the US Government.                                |
+ ;; | No permission to copy or redistribute this software is given. |
+ ;; | Use of unreleased versions of this software requires the user |
+ ;; | to execute a written test agreement with the VistA Imaging    |
+ ;; | Development Office of the Department of Veterans Affairs,     |
+ ;; | telephone (301) 734-0100.                                     |
+ ;; | The Food and Drug Administration classifies this software as  |
+ ;; | a medical device.  As such, it may not be changed in any way. |
+ ;; | Modifications to this software may result in an adulterated   |
+ ;; | medical device under 21CFR820, the use of which is considered |
+ ;; | to be a violation of US Federal Statutes.                     |
+ ;; +---------------------------------------------------------------+
+ ;;
+ Q
+ ; Overflow from MAGDMFBM
+ ;
+ENTRYPT(E,B) ; Find out whether the value of E is a valid entry-point
+ N L,R,T
+ I E="" Q 1
+ I E'["^" Q "Name of routine missing in entry point """_E_"""."
+ S L=$P(E,"^",1),R=$P(E,"^",2,$L(E)+2)
+ S:$E(L,1)="%" $E(L,1)="X" S:$E(L,1)?1N $E(L,1)="X"
+ S:$E(R,1)="%" $E(R,1)="X" S:$E(R,1)?1N $E(R,1)="X"
+ S T=L_"^"_R
+ I T'?1.8AN1"^"1.8AN Q "Invalid syntax for entry point """_E_"""."
+ S @("T=$T("_E_")") Q:T="" "Entry point not found """_E_"""."
+ Q:$G(B)="" 1
+ S R=$P(E,"^",2) Q:R=B 1  Q:$E(R,1,2)="ZZ" 1
+ Q "Entry point is in invalid routine ("_R_")"
+ ;
+CONTINUE ;
+ I FBSWITCH="FOREGROUND" W !,"Press <Enter> to continue: " R Z:DTIME
+ S $Y=0
+ Q
+ ;

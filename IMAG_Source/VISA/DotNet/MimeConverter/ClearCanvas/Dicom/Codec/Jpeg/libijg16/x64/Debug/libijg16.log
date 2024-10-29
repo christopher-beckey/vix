@@ -1,0 +1,76 @@
+﻿  jaricom.c
+  jcapimin.c
+  jcapistd.c
+  jcarith.c
+  jccoefct.c
+  jccolor.c
+  jcdctmgr.c
+  jcdiffct.c
+  jchuff.c
+  jcinit.c
+  jclhuff.c
+  jclossls.c
+  jclossy.c
+  jcmainct.c
+  jcmarker.c
+  jcmaster.c
+  jcodec.c
+  jcomapi.c
+  jcparam.c
+  jcphuff.c
+  Generating Code...
+  Compiling...
+  jcpred.c
+  jcprepct.c
+  jcsample.c
+  jcscale.c
+  jcshuff.c
+  jctrans.c
+  jdapimin.c
+  jdapistd.c
+  jdarith.c
+  jdatadst.c
+  jdatasrc.c
+  jdcoefct.c
+  jdcolor.c
+  jddctmgr.c
+  jddiffct.c
+  jdhuff.c
+  jdinput.c
+  jdlhuff.c
+  jdlossls.c
+  jdlossy.c
+  Generating Code...
+  Compiling...
+  jdmainct.c
+  jdmarker.c
+  jdmaster.c
+  jdmerge.c
+  jdphuff.c
+  jdpostct.c
+  jdpred.c
+  jdsample.c
+  jdscale.c
+  jdshuff.c
+  jdtrans.c
+  jerror.c
+  jfdctflt.c
+  jfdctfst.c
+  jfdctint.c
+  jidctflt.c
+  jidctfst.c
+  jidctint.c
+  jidctred.c
+  jmemmgr.c
+C:\usr\Hydra4\ClearCanvas\Dicom\Codec\Jpeg\libijg16\jmemmgr.c(315,53): warning C4267: '+=': conversion from 'size_t' to 'long', possible loss of data
+C:\usr\Hydra4\ClearCanvas\Dicom\Codec\Jpeg\libijg16\jmemmgr.c(375,70): warning C4267: '+=': conversion from 'size_t' to 'long', possible loss of data
+C:\usr\Hydra4\ClearCanvas\Dicom\Codec\Jpeg\libijg16\jmemmgr.c(1037,46): warning C4267: '-=': conversion from 'size_t' to 'long', possible loss of data
+C:\usr\Hydra4\ClearCanvas\Dicom\Codec\Jpeg\libijg16\jmemmgr.c(1051,46): warning C4267: '-=': conversion from 'size_t' to 'long', possible loss of data
+  Generating Code...
+  Compiling...
+  jmemnobs.c
+  jquant1.c
+  jquant2.c
+  jutils.c
+  Generating Code...
+  libijg16.vcxproj -> C:\usr\Hydra4\ClearCanvas\Dicom\Codec\Jpeg\libijg16\x64\Debug\libijg16.lib

@@ -1,0 +1,25 @@
+#==============================================================================
+# static information common to all instances of DCFUtil component
+#==============================================================================
+[ component_info ]
+name = DCFUtil
+type = java_lib
+category = application_support_libs
+description = DCF java utilities
+package_prefix = com.lbs
+
+[ required_components ]
+[ debug_controls ]
+debug_flag = df_SHOW_CONSTRUCTORS, 0x0001, show object constructors
+debug_flag = df_SHOW_DESTRUCTORS, 0x0002, show object destructors
+debug_flag = df_SHOW_GENERAL_FLOW, 0x0004, show general flow
+debug_flag = df_SIMULATE_HARDWARE, 0x0008, simulate external devices
+debug_flag = df_SHOW_CFG_INFO, 0x0010, show configuration information
+debug_flag = df_SHOW_EXC_THROW, 0x0020, show exceptions before throwing
+debug_flag = df_LOG_CHILD_PROC_OUTPUT, 0x10000, "log output of processes started by CommandSpawner"
+
+#==============================================================================
+# per-instance information for the DCFUtil component
+#==============================================================================
+[ DCFUtil ]
+debug_flags = 0x00000

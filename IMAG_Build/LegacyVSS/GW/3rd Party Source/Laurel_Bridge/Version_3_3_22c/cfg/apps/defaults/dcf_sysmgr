@@ -1,0 +1,143 @@
+[ application_info ]
+name = dcf_sysmgr
+description = DCF System Manager.
+app_component_name = cpp_ipc_app/dcf_sysmgr
+execution_state = STOPPED
+
+[ required_components ]
+component = cpp_lib_src/DCF_cl
+component = cpp_lib_src/DCF
+component = cpp_lib_src/LOG
+component = cpp_lib_src/CDS
+component = cpp_lib_src/APC
+component = cpp_lib/DCFUtil
+component = idl_lib/DAPC
+component = cpp_lib/APC_a
+component = cpp_lib/CDS_a
+component = idl_lib/DCDS
+component = cpp_lib/LOG_a
+component = idl_lib/DLOG
+[ cpp_ipc_app ]
+
+#==============================================================================
+# per-instance information for the dcf_sysmgr component
+#==============================================================================
+[ cpp_ipc_app/dcf_sysmgr ]
+debug_flags = 0x00000
+
+#
+# If true, dcf_sysmgr will exit after system shutdown is complete.
+# Will also exit if the first startsystem request fails.
+# This means a call to "stopsystem" will behave the same as "shutdown"
+# If this is false, then "stopsystem" will shutdown child processes,
+# but dcf_sysmgr will remain running.
+#
+# If you are installing dcf_sysmgr to run as a Windows Service, this
+# would typically be set to NO.
+#
+exit_after_system_stopped = YES
+
+#
+# If true, dcf_sysmgr will exit with a non-zero status if an error
+# occurs, regardless of the setting exit_after_system_stopped.
+exit_after_system_error = YES
+
+#
+# Name of system configuration to auto-start
+# e.g. file:C:/Program Files/DCF_3.1.3a/cfg/systems/store_server_win32.cfg
+# or /systems/ndcds_server_win32.cfg
+# In the latter case, CFGDB will look under the directory indicated by the
+# DCF_CFG environment variable.
+#
+#auto_start_system_cfg = 
+
+#
+# If true, dcf_sysmgr will restart the system specified by auto_start_system_cfg
+# in the event of an error shutdown (i.e. one of the system processes failed
+# unexpectedly).
+#
+restart_after_system_error = NO
+
+#
+# Define the number of automatic restarts after a system failure. The
+# value of -1 means to restart indefinitely.
+#
+max_auto_restarts = 3
+[ cpp_lib_src ]
+
+
+#==============================================================================
+# per-instance information for the DCF_cl component
+#==============================================================================
+[ cpp_lib_src/DCF_cl ]
+debug_flags = 0x00000
+
+#==============================================================================
+# per-instance information for the DCF component
+#==============================================================================
+[ cpp_lib_src/DCF ]
+debug_flags = 0
+
+#==============================================================================
+# per-instance information for the LOG component
+#==============================================================================
+[ cpp_lib_src/LOG ]
+debug_flags = 0x00000
+
+#==============================================================================
+# per-instance information for the CDS component
+#==============================================================================
+[ cpp_lib_src/CDS ]
+debug_flags = 0x00000
+
+#==============================================================================
+# per-instance information for the APC component
+#==============================================================================
+[ cpp_lib_src/APC ]
+debug_flags = 0x00000
+[ cpp_lib ]
+
+
+#==============================================================================
+# per-instance information for the DCFUtil component
+#==============================================================================
+[ cpp_lib/DCFUtil ]
+debug_flags = 0
+
+#==============================================================================
+# per-instance information for the APC_a component
+#==============================================================================
+[ cpp_lib/APC_a ]
+debug_flags = 0
+handle_external_shutdown_rq = false
+observe_proc_cfg = false
+save_proc_cfg_in_cds = no
+save_exit_status_in_proc_cfg = no
+delete_proc_cfg = no
+
+#==============================================================================
+# per-instance information for the CDS_a component
+#==============================================================================
+[ cpp_lib/CDS_a ]
+debug_flags = 0
+
+[ cpp_lib/LOG_a ]
+[ cpp_lib/LOG_a/outputs ]
+[ cpp_lib/LOG_a/outputs/file_output_1 ]
+type = textfile
+message_types = *
+component_names = *
+# Note that changing the format of this name may affect the behavior of the web
+# utilities that manipulate log files (e.g., list_logs.pl, dcfrmlogs.pl).
+filename = C:/DCF/DCF-3.3.22c/tmp/log/dcf_sysmgr.${PID}.log
+# maximum number of log files
+max_files = 1
+# Maximum size in kilobytes of each log file before rotating.
+max_size = -1
+[ idl_lib ]
+
+[ idl_lib/DAPC ]
+
+[ idl_lib/DCDS ]
+
+[ idl_lib/DLOG ]

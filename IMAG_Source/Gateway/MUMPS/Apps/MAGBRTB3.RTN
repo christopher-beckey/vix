@@ -1,0 +1,107 @@
+MAGBRTB3 ;WOIFO/PMK - Routine to handle routing date/time functions ; 01/25/2007 09:53
+ ;;3.0;IMAGING;**9,11,54**;MAR 19, 2002;;OCT 28, 2009
+ ;; Per VHA Directive 2004-038, this routine should not be modified.
+ ;; +---------------------------------------------------------------+
+ ;; | Property of the US Government.                                |
+ ;; | No permission to copy or redistribute this software is given. |
+ ;; | Use of unreleased versions of this software requires the user |
+ ;; | to execute a written test agreement with the VistA Imaging    |
+ ;; | Development Office of the Department of Veterans Affairs,     |
+ ;; | telephone (301) 734-0100.                                     |
+ ;; | The Food and Drug Administration classifies this software as  |
+ ;; | a medical device.  As such, it may not be changed in any way. |
+ ;; | Modifications to this software may result in an adulterated   |
+ ;; | medical device under 21CFR820, the use of which is considered |
+ ;; | to be a violation of US Federal Statutes.                     |
+ ;; +---------------------------------------------------------------+
+ ;;
+ Q
+ ; Datetime comparisons are made using a value and a precision mask.
+ ; An internal datetime value/mask has the format "ddd cyymmdd.hhmmss"
+ ; The value contains the day of the week, the date, and the time.
+ ; The mask contains letters "ddd cyymmdd.hhmmss" in upper/lower case
+ ; The upper case mask letters indicate which characters to compare.
+ ;
+PARSE(DTIEXPR,VALUE1,VALUE2,MASK) ; parse a datetime interval expression
+ N BEGIN,END,ERR,I,MASK1,MASK2,T
+ ;
+ I DTIEXPR="HOLIDAY" S (VALUE1,VALUE2,MASK)="HOL cyymmdd.hhmmss" Q ""
+ ;
+ S MASK="" ; initialize value
+ ; check for a single date/time, not an interval
+ S I=$F(DTIEXPR," TO ") ; find the interval separator (begin TO end)
+ I 'I S I=$L(DTIEXPR)+5,DTIEXPR=DTIEXPR_" TO "_DTIEXPR ; make interval
+ S BEGIN=$E(DTIEXPR,1,I-5),END=$E(DTIEXPR,I,$L(DTIEXPR))
+ ; get the beginning and ending values and masks
+ S ERR=$$SET("beginning",BEGIN,.VALUE1,.MASK1) I ERR Q ERR
+ S ERR=$$SET("ending",END,.VALUE2,.MASK2) I ERR Q ERR
+ ; if end date isn't defined, use the begin date as the default
+ I $E(MASK2,5,11)="cyymmdd",$E(MASK1,5,11)'="cyymmdd",'$E(VALUE2,5,11) D
+ . S $E(MASK2,5,11)=$E(MASK1,5,11) ;   use begin date mask as default
+ . S $E(VALUE2,5,11)=$E(VALUE1,5,11) ; use begin date value as default
+ . Q
+ ; check that the begin date/time is not after the end date/time
+ I $E(MASK1,1,3)="ddd" D  I ERR Q ERR
+ . I $E(VALUE1,5,999)>$E(VALUE2,5,999) D
+ . . S ERR="-1002,Beginning date/time after end """_DTIEXPR_""""
+ . . Q
+ . Q
+ I $E(MASK1,1,3)="DDD" D  I ERR Q ERR ; set day offset
+ . N DAY1,DAY2,DIFF,IDAY1,IDAY2
+ . S DAY1=$E(VALUE1,1,3),DAY2=$E(VALUE2,1,3) D
+ . . ; count the number of days between DAY1 and DAY2
+ . . S IDAY1=$F("SUNMONTUEWEDTHUFRISATHOL",DAY1)
+ . . I 'IDAY1 S DIFF="-1201,Illegal day of week: """_DAY1_"""" Q
+ . . S IDAY2=$F("SUNMONTUEWEDTHUFRISATHOL",DAY2)
+ . . I 'IDAY2 S DIFF="-1202,Illegal day of week: """_DAY2_"""" Q
+ . . S IDAY1=IDAY1-1/3,IDAY2=IDAY2-1/3
+ . . S DIFF=(IDAY2-IDAY1)#7
+ . . Q
+ . Q:DIFF<0  S DIFF=""
+ . S ($E(MASK1,11),$E(MASK2,11))="D"
+ . I DIFF S $E(VALUE2,11)=DIFF ; different days of the week
+ . E  D  ; same day of week -- check for a week-long interval
+ . . I $E(VALUE1,5,999)>$E(VALUE2,5,999) S $E(VALUE2,11)=7 ; week-long
+ . . Q
+ . Q
+ S MASK=MASK1
+ Q ""
+ ;
+SET(TYPE,RDT,VALUE,MASK) ; set the value and mask for a given datetime expression
+ S ERR=""
+ S VALUE="    0000000.000000",MASK="ddd cyymmdd.hhmmss" ; initial values
+ ; check for an explicit day of the week
+ I "SUNMONTUEWEDTHUFRISATHOL"[$E(RDT,1,3) D  Q:ERR'="" ERR ; day of week
+ . S $E(MASK,1,3)="DDD" ; set day of week mask
+ . S $E(VALUE,1,3)=$E(RDT,1,3) ; set the day of week value
+ . S RDT=$E(RDT,4,$L(RDT)) F  Q:" @"'[$E(RDT_".",1)  S RDT=$E(RDT,2,$L(RDT))
+ . Q
+ D:RDT'=""  Q:ERR'="" ERR ; check for an explicit date
+ . ;  set the value
+ . N %DT,DTSAVE,V,Y
+ . S X=RDT,%DT="FT" D ^%DT S:Y>0 V=Y
+ . I Y<0 D  Q
+ . . S ERR="-1102,"_TYPE_" datetime """_RDT_""" not in FileMan Format"
+ . . Q
+ . S VALUE=$E(VALUE,1,4)_$S(V[".":$E(V_"00000",1,14),1:V_".000000")
+ . ; set the mask
+ . I RDT?1(1N,2N)1"-"3A1"-"1(2N,4N).E D  ; explicit [d]d-mmm-[yy]yy date
+ . . S $E(MASK,5,11)="CYYMMDD"
+ . . S T=$P(RDT,"@",2) I T'="" S $E(MASK,13,16)="HHMM" ; set the time
+ . . Q
+ . E  I RDT?3A1"-"1(2N,4N).E D  ; explicit mmm-[yy]yy date
+ . . S $E(MASK,5,9)="CYYMM"
+ . . S T=$P(RDT,"@",2) I T'="" S $E(MASK,13,16)="HHMM" ; set the time
+ . . Q
+ . E  I RDT?1(1N,2N)1"-"3A.E D  ; explicit floating [d]d-mmm date
+ . . S $E(MASK,8,11)="MMDD"
+ . . S $E(VALUE,5,7)="000" ; null year value
+ . . S T=$P(RDT,"@",2) I T'="" S $E(MASK,13,16)="HHMM" ; set the time
+ . . Q
+ . E  D  ; assume that RDT contains a time value
+ . . S $E(MASK,13,16)="HHMM"
+ . . S $E(VALUE,5,11)="0000000" ; null date value
+ . . Q
+ . Q
+ Q ""
+ ;

@@ -1,0 +1,106 @@
+MAGDMFBT ;WOIFO/PMK - Program to build DICOM Master File ; 19 Apr 2010 2:22 PM
+ ;;3.0;IMAGING;**53**;Mar 19, 2002;Build 1715;Apr 22, 2010
+ ;; Per VHA Directive 2004-038, this routine should not be modified.
+ ;; +---------------------------------------------------------------+
+ ;; | Property of the US Government.                                |
+ ;; | No permission to copy or redistribute this software is given. |
+ ;; | Use of unreleased versions of this software requires the user |
+ ;; | to execute a written test agreement with the VistA Imaging    |
+ ;; | Development Office of the Department of Veterans Affairs,     |
+ ;; | telephone (301) 734-0100.                                     |
+ ;; | The Food and Drug Administration classifies this software as  |
+ ;; | a medical device.  As such, it may not be changed in any way. |
+ ;; | Modifications to this software may result in an adulterated   |
+ ;; | medical device under 21CFR820, the use of which is considered |
+ ;; | to be a violation of US Federal Statutes.                     |
+ ;; +---------------------------------------------------------------+
+ ;;
+AETITLE ; Application Entity Title
+ N AETITLE,ALIAS,D0,DIN,FATAL,FBSWITCH,FILE,I,LEGAL,MSG,RECORD,SITE,SHOW,STATUS,X
+ ;
+ S FILE=$$INIT^MAGDMFB(2006.588,"Application Entity Title","AE_TITLE")
+ I FILE="" D  Q
+ . N MSG
+ . S MSG="Application Entity Title dictionary (AE_TITLE.DIC) not found."
+ . D MESSAGE^MAGDMLOG(1,0,"*** "_MSG_" ***","t")
+ . Q
+ ;
+ S LEGAL="" F I=32:1:126 S LEGAL=LEGAL_$C(I) ; legal characters in an AE Title
+ S LEGAL=$TR(LEGAL,"\^") ; remove illegal backslash and caret (delimiter)
+ ;
+ K ^MAGDICOM(2006.588) S D0=0
+ ;
+ S STATUS=$$OPEN^MAGOSFIL(FILE,"R")
+ I STATUS<0 W !,"Open Error: ",STATUS S FATAL=FATAL+1 Q
+ ;
+ F  D  Q:STATUS'=""
+ . S STATUS=$$READ^MAGOSFIL(FILE,.RECORD),DIN=0 K MSG
+ . I $$USEPRIN^MAGOSFIL(1)
+ . I STATUS<0 Q:+STATUS=-2  D  Q
+ . . D MESSAGE^MAGDMLOG(1,0,"Read Error"_STATUS,"t")
+ . . S FATAL=FATAL+1
+ . . Q
+ . S (RECORD,SHOW)=$TR(RECORD,$C(145,146,147,148,9,10,12),$C(39,39,34,34,32))
+ . I $TR(RECORD," ")'="" D
+ . . I $E(RECORD,1)="#" D  Q  ; Comment
+ . . . S SHOW="Comment: <<"_$E(RECORD,2,$L(RECORD))_">>"
+ . . . Q
+ . . ; Data
+ . . S X=$L(RECORD,"|")
+ . . I X<2,X>3 D  Q
+ . . . S DIN=DIN+1,MSG(DIN)="Format error - may be 2 or 3 pieces, with vertical bar (|) as the delimiter."
+ . . . S FATAL=FATAL+1
+ . . . Q
+ . . S AETITLE=$$PIECE^MAGDMFBI(RECORD,1)
+ . . S ALIAS=$$PIECE^MAGDMFBI(RECORD,2)
+ . . S SITE=$$PIECE^MAGDMFBI(RECORD,3)
+ . . ; check AETITLE
+ . . I AETITLE="" D
+ . . . S DIN=DIN+1,MSG(DIN)="Application Entity Title is required."
+ . . . S FATAL=FATAL+1
+ . . . Q
+ . . I $L(AETITLE)>16 D
+ . . . S DIN=DIN+1,MSG(DIN)="AE Title """_AETITLE_""" exceeds 16 characters."
+ . . . S FATAL=FATAL+1
+ . . . Q
+ . . S AETITLE=$$UP^MAGDFCNS(AETITLE)
+ . . S X=$TR(AETITLE,LEGAL,"")
+ . . I X'="" D
+ . . . S DIN=DIN+1,MSG(DIN)="AE Title contains illegal character(s): """_X_""""
+ . . . S FATAL=FATAL+1
+ . . . Q
+ . . ; check ALIAS
+ . . I $L(ALIAS)>16 D
+ . . . S DIN=DIN+1,MSG(DIN)="Alias AE Title """_ALIAS_""" exceeds 16 characters."
+ . . . S FATAL=FATAL+1
+ . . . Q
+ . . S ALIAS=$$UP^MAGDFCNS(ALIAS)
+ . . S X=$TR(ALIAS,LEGAL,"")
+ . . I X'="" D
+ . . . S DIN=DIN+1,MSG(DIN)="Alias AE Title contains illegal character(s): """_X_""""
+ . . . S FATAL=FATAL+1
+ . . . Q
+ . . I ALIAS="",SITE="" D
+ . . . S DIN=DIN+1,MSG(DIN)="Either ALIAS or SITE is required."
+ . . . S FATAL=FATAL+1
+ . . . Q
+ . . ;
+ . . Q:$O(MSG(""))
+ . . ;
+ . . S X=AETITLE_"^"_ALIAS_"^"_SITE
+ . . S D0=D0+1
+ . . S ^MAGDICOM(2006.588,0)="APPLICATION ENTITY TITLE^2006.588^"_D0_"^"_D0
+ . . S ^MAGDICOM(2006.588,D0,0)=X
+ . . S ^MAGDICOM(2006.588,"B",AETITLE,D0)=""
+ . . Q
+ . I $G(SILENT)!($O(MSG(""))="") Q
+ . S MSG="" F  S MSG=$O(MSG(MSG)) Q:MSG=""  D
+ . . D MESSAGE^MAGDMLOG(1,0,"*** "_MSG(MSG)_" ***","t")
+ . . Q
+ . D MESSAGE^MAGDMLOG(1,0,SHOW,"t")
+ . I $O(MSG("")),FBSWITCH="FOREGROUND" R X:DTIME
+ . Q
+ S STATUS=$$CLOSE^MAGOSFIL(FILE)
+ I 'D0 D MESSAGE^MAGDMLOG(1,0,"No valid entries found in "_FILE,"t") Q
+ ;
+ Q

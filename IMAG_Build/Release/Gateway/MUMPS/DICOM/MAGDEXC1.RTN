@@ -1,0 +1,182 @@
+MAGDEXC1 ;WOIFO/PMK - DICOM, Handler for Exam Complete request, part 1 ; 03/08/2005  08:06
+ ;;3.0;IMAGING;**1,11,30,51**;MAR 19, 2002;;JUN 16, 2006
+ ;; Per VHA Directive 2004-038, this routine should not be modified.
+ ;; +---------------------------------------------------------------+
+ ;; | Property of the US Government.                                |
+ ;; | No permission to copy or redistribute this software is given. |
+ ;; | Use of unreleased versions of this software requires the user |
+ ;; | to execute a written test agreement with the VistA Imaging    |
+ ;; | Development Office of the Department of Veterans Affairs,     |
+ ;; | telephone (301) 734-0100.                                     |
+ ;; | The Food and Drug Administration classifies this software as  |
+ ;; | a medical device.  As such, it may not be changed in any way. |
+ ;; | Modifications to this software may result in an adulterated   |
+ ;; | medical device under 21CFR820, the use of which is considered |
+ ;; | to be a violation of US Federal Statutes.                     |
+ ;; +---------------------------------------------------------------+
+ ;;
+ Q
+ ;     XXXXXXX  XX   XX  XXXXXXX  XXXXXX
+ ;      XX   X  XXX XXX   XX   X   XX  XX
+ ;      XX X    XXXXXXX   XX X     XX  XX
+ ;      XXXX    XX X XX   XXXX     XX  XX
+ ;      XX X    XX   XX   XX X     XX  XX
+ ;      XX   X  XX   XX   XX   X   XX  XX
+ ;     XXXXXXX  XX   XX  XXXXXXX  XXXXXX
+ ;
+ENTRY ; entry point to process an EXAM COMPLETE request sent by EMED PACS
+ D MSGINIT^MAGDFCNS ; Initialize the ^TMP global for this message
+ S MSGHANDL=$$GETDATA^MAGDFCNS("IN","FFFD,xx10,VA DHCP")
+ D COPYDATA("0000,1000") ; SOP Instance UID
+ D MESSAGE^MAGDMLOG(2,0,"MAGDEXC1 called for the """_SOPCLASS,"BV")
+ ;
+ ; check that the N-CREATE request is for the correct SOP class
+ I SOPCLASS'="VA Study Component Management SOP Class" D  Q
+ . D SAVE^MAGDFCNS("0000,0900",$$HEX2DEC^MAGOSMSC("0107")) ; status
+ . D SAVE^MAGDFCNS("0000,0901","0000,0002") ; offending element
+ . D SAVE^MAGDFCNS("0000,0902","SOP Class UID not recognized") ; comment
+ . D SAVE^MAGDFCNS("0000,0903",12345) ; error id
+ . D FAILURE
+ . Q
+ ;
+ ; get the variables needed for the C-MOVE request
+ S ACNUMB=$$GETDATA^MAGDFCNS("IN","0008,0050") ; accession number
+ D SEQPUSH^MAGDFCNS("0008,1110") ; referenced study sequence
+ S STUDYUID=$$GETDATA^MAGDFCNS("IN","0008,1155") ; SOP instance UID
+ D SEQPOP^MAGDFCNS
+ S PNAME=$$GETDATA^MAGDFCNS("IN","0010,0010") ; patient name
+ S PID=$$GETDATA^MAGDFCNS("IN","0010,0020") ; patient id
+ ;
+ ; check the input data
+ I STUDYUID="" D  Q
+ . D SAVE^MAGDFCNS("0000,0900",$$HEX2DEC^MAGOSMSC("0120")) ; status
+ . D SAVE^MAGDFCNS("0000,0901","0008,1155") ; offending element
+ . D SAVE^MAGDFCNS("0000,0902","Study SOP Instance UID not present") ; comment
+ . D SAVE^MAGDFCNS("0000,0903",54321) ; error id
+ . D FAILURE
+ . Q
+ ;
+ I PNAME="" D  Q
+ . D SAVE^MAGDFCNS("0000,0900",$$HEX2DEC^MAGOSMSC("0120")) ; status
+ . D SAVE^MAGDFCNS("0000,0901","0010,0010") ; offending element
+ . D SAVE^MAGDFCNS("0000,0902","Patient name not present") ; comment
+ . D SAVE^MAGDFCNS("0000,0903",54321) ; error id
+ . D FAILURE
+ . Q
+ ;
+ I PID="" D  Q
+ . D SAVE^MAGDFCNS("0000,0900",$$HEX2DEC^MAGOSMSC("0120")) ; status
+ . D SAVE^MAGDFCNS("0000,0901","0010,0020") ; offending element
+ . D SAVE^MAGDFCNS("0000,0902","Patient ID not present") ; comment
+ . D SAVE^MAGDFCNS("0000,0903",54321) ; error id
+ . D FAILURE
+ . Q
+ ;
+ I ACNUMB="" D  Q
+ . D SAVE^MAGDFCNS("0000,0900",$$HEX2DEC^MAGOSMSC("0120")) ; status
+ . D SAVE^MAGDFCNS("0000,0901","0008,0050") ; offending element
+ . D SAVE^MAGDFCNS("0000,0902","Accession Number not present") ; comment
+ . D SAVE^MAGDFCNS("0000,0903",54321) ; error id
+ . D FAILURE
+ . Q
+ ;
+ ; check for a GE PACS and set extra attributes to null
+ I $G(^MAGDICOM(2006.563,1,"COMMERCIAL PACS"))="GE-DICOM" D
+ . S (ACNUMB,PID,PNAME)="" ; must be null for GE PACS
+ . Q
+ ;
+ ; save the request in the ^MAGDINPT global
+ I $G(^MAGDICOM(2006.563,1,"COMMERCIAL PACS"))="EMED" D
+ . D DELAY
+ . Q
+ E  D SAVEREQ
+ ;
+ D SUCCESS
+ ;
+ Q
+ ;
+DELAY ; hold EXAM COMPLETE messages for some time before the C-MOVE request
+ N WHEN
+ ;
+ ; remove old entries, if any
+ S WHEN=""
+ F  S WHEN=$O(^MAGDINPT(2006.5721,"A",STUDYUID,WHEN)) Q:WHEN=""  D
+ . K ^MAGDINPT(2006.5721,WHEN,STUDYUID) ; remove one old entry
+ . K ^MAGDINPT(2006.5721,"A",STUDYUID,WHEN) ; remove one xref
+ . Q
+ ;
+ ; add single new entry
+ ; require an 8-minute (default) delay before requesting the C-MOVE
+ S WHEN=$$NOW()+$G(^MAGDICOM(2006.563,1,"EMED_C_MOVE_DELAY"),480)
+ S ^MAGDINPT(2006.5721,WHEN,STUDYUID,"A_ACNUMB")=ACNUMB
+ S ^MAGDINPT(2006.5721,WHEN,STUDYUID,"A_PID")=PID
+ S ^MAGDINPT(2006.5721,WHEN,STUDYUID,"A_PNAME")=PNAME
+ S ^MAGDINPT(2006.5721,"A",STUDYUID,WHEN)=""
+ Q
+ ;
+ACTIVATE ; issue a C-MOVE request for an EXAM COMPLETE message after the delay
+ N ACNUMB,PID,PNAME,NOW,STUDYUID,WHEN
+ ;
+ S NOW=$$NOW(),WHEN=""
+ F  S WHEN=$O(^MAGDINPT(2006.5721,WHEN)) Q:'+WHEN  Q:WHEN>NOW  D
+ . S STUDYUID=""
+ . F  S STUDYUID=$O(^MAGDINPT(2006.5721,WHEN,STUDYUID)) Q:STUDYUID=""  D
+ . . S ACNUMB=^MAGDINPT(2006.5721,WHEN,STUDYUID,"A_ACNUMB")
+ . . S PID=^MAGDINPT(2006.5721,WHEN,STUDYUID,"A_PID")
+ . . S PNAME=^MAGDINPT(2006.5721,WHEN,STUDYUID,"A_PNAME")
+ . . D SAVEREQ ; save the requisition data
+ . . K ^MAGDINPT(2006.5721,WHEN,STUDYUID) ; remove the old entry
+ . . K ^MAGDINPT(2006.5721,"A",STUDYUID,WHEN) ; remove the old xref
+ . . Q
+ . Q
+ Q
+ ;
+NOW() ; compute the exact time, to the second
+ Q (86400*$H)+$P($H,",",2)
+ ;
+SAVEREQ ; save the request's data in the ^MAGDINPT global for later processing
+ ;
+ ; ^MAGDINPT is a local global because it must be available when VistA
+ ; is down.  Unlike ^TMP, it must be persistent and be accessible
+ ; by different image storage jobs.
+ ;
+ I '$D(^MAGDINPT(2006.572,0)) D  ; create the local global
+ . S ^MAGDINPT(2006.572,0)="EXAM COMPLETE FILE^2006.572^^"
+ . Q
+ L +^MAGDINPT(2006.572,"COUNT") ; serialize IEN generation
+ S IEN=$P(^MAGDINPT(2006.572,0),"^",3)+1
+ S $P(^MAGDINPT(2006.572,0),"^",3)=IEN ; get next IEN
+ S $P(^MAGDINPT(2006.572,0),"^",4)=$P(^MAGDINPT(2006.572,0),"^",4)+1 ; increment total count
+ L -^MAGDINPT(2006.572,"COUNT") ; clear the serial name generation code
+ S ^MAGDINPT(2006.572,IEN,"A_ACNUMB")=ACNUMB
+ S ^MAGDINPT(2006.572,IEN,"A_PID")=PID
+ S ^MAGDINPT(2006.572,IEN,"A_PNAME")=PNAME
+ S ^MAGDINPT(2006.572,IEN,"A_STUDYUID")=STUDYUID
+ S ^MAGDINPT(2006.572,IEN,0)=1 ; Done!
+ I $G(MAGGEMIG),STUDYUID'="" S ^MAGDINPT(2006.572,"GE",STUDYUID,IEN)=""
+ Q
+ ;
+FAILURE ; generate an N-CREATE response with an error
+ ; it is assumed that (0000,0900-0903) are filled in already
+ S MESSAGE="EXAM COMPLETE RESPONSE - FAILURE"
+ S MULTIMSG=""
+ G RESPONSE
+ Q
+ ;
+SUCCESS ; generate a N-CREATE success response
+ D SAVE^MAGDFCNS("0000,0900",0) ; SUCCESS response status value
+ S MESSAGE="EXAM COMPLETE RESPONSE - SUCCESS"
+ S MULTIMSG=""
+ G RESPONSE
+ ;
+RESPONSE ; set last attributes and issue the response
+ D SAVE^MAGDFCNS("0000,0120",OLDMSGID) ; message id of original request
+ D RESPONSE^MAGDDW1
+ S MESSAGE="EXAM COMPLETE"
+ D COUNT^MAGDAUD2 ; update audit record
+ Q
+ ;
+COPYDATA(TAG) ;
+ D SAVE^MAGDFCNS(TAG,$$GETDATA^MAGDFCNS("IN",TAG))
+ Q
+ ;

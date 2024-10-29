@@ -1,0 +1,2972 @@
+KIDS Distribution saved on Jan 16, 2013@15:54:13
+Full DD Extract from GOLD - SEQ83_P123
+**KIDS**:MAG*3.0*999_DD*2006.563^
+
+**INSTALL NAME**
+MAG*3.0*999_DD*2006.563
+"BLD",7813,0)
+MAG*3.0*999_DD*2006.563^IMAGING^0^3130116^n
+"BLD",7813,4,0)
+^9.64PA^2006.563^1
+"BLD",7813,4,2006.563,0)
+2006.563
+"BLD",7813,4,2006.563,222)
+y^y^f^^^^n
+"BLD",7813,4,"B",2006.563,2006.563)
+
+"BLD",7813,6.3)
+1
+"BLD",7813,"KRN",0)
+^9.67PA^779.2^20
+"BLD",7813,"KRN",.4,0)
+.4
+"BLD",7813,"KRN",.401,0)
+.401
+"BLD",7813,"KRN",.402,0)
+.402
+"BLD",7813,"KRN",.403,0)
+.403
+"BLD",7813,"KRN",.5,0)
+.5
+"BLD",7813,"KRN",.84,0)
+.84
+"BLD",7813,"KRN",3.6,0)
+3.6
+"BLD",7813,"KRN",3.8,0)
+3.8
+"BLD",7813,"KRN",9.2,0)
+9.2
+"BLD",7813,"KRN",9.8,0)
+9.8
+"BLD",7813,"KRN",19,0)
+19
+"BLD",7813,"KRN",19.1,0)
+19.1
+"BLD",7813,"KRN",101,0)
+101
+"BLD",7813,"KRN",409.61,0)
+409.61
+"BLD",7813,"KRN",771,0)
+771
+"BLD",7813,"KRN",779.2,0)
+779.2
+"BLD",7813,"KRN",870,0)
+870
+"BLD",7813,"KRN",8989.51,0)
+8989.51
+"BLD",7813,"KRN",8989.52,0)
+8989.52
+"BLD",7813,"KRN",8994,0)
+8994
+"BLD",7813,"KRN","B",.4,.4)
+
+"BLD",7813,"KRN","B",.401,.401)
+
+"BLD",7813,"KRN","B",.402,.402)
+
+"BLD",7813,"KRN","B",.403,.403)
+
+"BLD",7813,"KRN","B",.5,.5)
+
+"BLD",7813,"KRN","B",.84,.84)
+
+"BLD",7813,"KRN","B",3.6,3.6)
+
+"BLD",7813,"KRN","B",3.8,3.8)
+
+"BLD",7813,"KRN","B",9.2,9.2)
+
+"BLD",7813,"KRN","B",9.8,9.8)
+
+"BLD",7813,"KRN","B",19,19)
+
+"BLD",7813,"KRN","B",19.1,19.1)
+
+"BLD",7813,"KRN","B",101,101)
+
+"BLD",7813,"KRN","B",409.61,409.61)
+
+"BLD",7813,"KRN","B",771,771)
+
+"BLD",7813,"KRN","B",779.2,779.2)
+
+"BLD",7813,"KRN","B",870,870)
+
+"BLD",7813,"KRN","B",8989.51,8989.51)
+
+"BLD",7813,"KRN","B",8989.52,8989.52)
+
+"BLD",7813,"KRN","B",8994,8994)
+
+"FIA",2006.563)
+DICOM GATEWAY PARAMETER
+"FIA",2006.563,0)
+^MAGDICOM(2006.563,
+"FIA",2006.563,0,0)
+2006.563
+"FIA",2006.563,0,1)
+y^y^f^^^^n
+"FIA",2006.563,0,10)
+
+"FIA",2006.563,0,11)
+
+"FIA",2006.563,0,"RLRO")
+
+"FIA",2006.563,0,"VR")
+3.0^MAG
+"FIA",2006.563,2006.563)
+0
+"FIA",2006.563,2006.5631)
+0
+"FIA",2006.563,2006.5632)
+0
+"FIA",2006.563,2006.5633)
+0
+"FIA",2006.563,2006.5634)
+0
+"FIA",2006.563,2006.5635)
+0
+"MBREQ")
+0
+"PKG",454,-1)
+1^1
+"PKG",454,0)
+IMAGING^MAG^Imaging-V1 to release 
+"PKG",454,20,0)
+^9.402P^^
+"PKG",454,22,0)
+^9.49I^1^1
+"PKG",454,22,1,0)
+3.0^3020319^3020517^126
+"PKG",454,22,1,"PAH",1,0)
+999_DD^3130116
+"QUES","XPF1",0)
+Y
+"QUES","XPF1","??")
+^D REP^XPDH
+"QUES","XPF1","A")
+Shall I write over your |FLAG| File
+"QUES","XPF1","B")
+YES
+"QUES","XPF1","M")
+D XPF1^XPDIQ
+"QUES","XPF2",0)
+Y
+"QUES","XPF2","??")
+^D DTA^XPDH
+"QUES","XPF2","A")
+Want my data |FLAG| yours
+"QUES","XPF2","B")
+YES
+"QUES","XPF2","M")
+D XPF2^XPDIQ
+"QUES","XPI1",0)
+YO
+"QUES","XPI1","??")
+^D INHIBIT^XPDH
+"QUES","XPI1","A")
+Want KIDS to INHIBIT LOGONs during the install
+"QUES","XPI1","B")
+NO
+"QUES","XPI1","M")
+D XPI1^XPDIQ
+"QUES","XPM1",0)
+PO^VA(200,:EM
+"QUES","XPM1","??")
+^D MG^XPDH
+"QUES","XPM1","A")
+Enter the Coordinator for Mail Group '|FLAG|'
+"QUES","XPM1","B")
+
+"QUES","XPM1","M")
+D XPM1^XPDIQ
+"QUES","XPO1",0)
+Y
+"QUES","XPO1","??")
+^D MENU^XPDH
+"QUES","XPO1","A")
+Want KIDS to Rebuild Menu Trees Upon Completion of Install
+"QUES","XPO1","B")
+NO
+"QUES","XPO1","M")
+D XPO1^XPDIQ
+"QUES","XPZ1",0)
+Y
+"QUES","XPZ1","??")
+^D OPT^XPDH
+"QUES","XPZ1","A")
+Want to DISABLE Scheduled Options, Menu Options, and Protocols
+"QUES","XPZ1","B")
+NO
+"QUES","XPZ1","M")
+D XPZ1^XPDIQ
+"QUES","XPZ2",0)
+Y
+"QUES","XPZ2","??")
+^D RTN^XPDH
+"QUES","XPZ2","A")
+Want to MOVE routines to other CPUs
+"QUES","XPZ2","B")
+NO
+"QUES","XPZ2","M")
+D XPZ2^XPDIQ
+"SEC","^DIC",2006.563,2006.563,0,"AUDIT")
+@
+"SEC","^DIC",2006.563,2006.563,0,"DD")
+@
+"SEC","^DIC",2006.563,2006.563,0,"DEL")
+@
+"SEC","^DIC",2006.563,2006.563,0,"LAYGO")
+@
+"SEC","^DIC",2006.563,2006.563,0,"RD")
+@
+"SEC","^DIC",2006.563,2006.563,0,"WR")
+@
+"VER")
+8.0^22.0
+"^DD",2006.563,2006.563,0)
+FIELD^^130^118
+"^DD",2006.563,2006.563,0,"DDA")
+N
+"^DD",2006.563,2006.563,0,"DT")
+3100702
+"^DD",2006.563,2006.563,0,"NM","DICOM GATEWAY PARAMETER")
+
+"^DD",2006.563,2006.563,0,"VRPK")
+IMAGING
+"^DD",2006.563,2006.563,.01,0)
+SYSTEM TITLE^RF^^SYSTEM TITLE;1^K:$L(X)>60!(X?.N)!($L(X)<3)!'(X'?1P.E) X
+"^DD",2006.563,2006.563,.01,1,0)
+^.1^^0
+"^DD",2006.563,2006.563,.01,3)
+Enter a descriptive text for this Gateway Station.
+"^DD",2006.563,2006.563,.01,21,0)
+^^6^6^3000218^^
+"^DD",2006.563,2006.563,.01,21,1,0)
+The value of this field is a text that identifies
+"^DD",2006.563,2006.563,.01,21,2,0)
+the computer on which this database is stored.
+"^DD",2006.563,2006.563,.01,21,3,0)
+ 
+"^DD",2006.563,2006.563,.01,21,4,0)
+Note that each VistA DICOM Gateway computer has its
+"^DD",2006.563,2006.563,.01,21,5,0)
+own copy of ^MAGDICOM, in which these site-parameters
+"^DD",2006.563,2006.563,.01,21,6,0)
+are stored.
+"^DD",2006.563,2006.563,2,0)
+ASCII DICOM TEXT^F^^ASCII DICOM TEXT;1^K:$L(X)>10!($L(X)<1) X
+"^DD",2006.563,2006.563,2,3)
+Indicate whether or not ASCII Text files are to be produced.
+"^DD",2006.563,2006.563,2,21,0)
+^^16^16^3000218^^
+"^DD",2006.563,2006.563,2,21,1,0)
+The value of this field is a code that indicates
+"^DD",2006.563,2006.563,2,21,2,0)
+whether or not files will be created that make the
+"^DD",2006.563,2006.563,2,21,3,0)
+data-streams that are exchanged according to the
+"^DD",2006.563,2006.563,2,21,4,0)
+DICOM protocol available in a human-readable form.
+"^DD",2006.563,2006.563,2,21,5,0)
+ 
+"^DD",2006.563,2006.563,2,21,6,0)
+Possible values for this code are 'YES' and 'NO'
+"^DD",2006.563,2006.563,2,21,7,0)
+(fully spelled, in capitals).
+"^DD",2006.563,2006.563,2,21,8,0)
+ 
+"^DD",2006.563,2006.563,2,21,9,0)
+The human-readable files will have a file name
+"^DD",2006.563,2006.563,2,21,10,0)
+extension of '.TXT'.
+"^DD",2006.563,2006.563,2,21,11,0)
+ 
+"^DD",2006.563,2006.563,2,21,12,0)
+This value is stored in this table (^MAGDICOM(2006.563,...
+"^DD",2006.563,2006.563,2,21,13,0)
+rather than in ^MAG(2006.1,...), because the VistA
+"^DD",2006.563,2006.563,2,21,14,0)
+DICOM Gateway will need to be able to access this
+"^DD",2006.563,2006.563,2,21,15,0)
+value whether or not the network link with the VistA
+"^DD",2006.563,2006.563,2,21,16,0)
+system (DDP) is available.
+"^DD",2006.563,2006.563,2,"DT")
+2991018
+"^DD",2006.563,2006.563,3,0)
+COMMERCIAL PACS^F^^COMMERCIAL PACS;1^K:$L(X)>10!($L(X)<1) X
+"^DD",2006.563,2006.563,3,3)
+Indicate whether or not a commercial PACS is present.
+"^DD",2006.563,2006.563,3,21,0)
+^^13^13^3000218^^
+"^DD",2006.563,2006.563,3,21,1,0)
+The value of this field is a code that indicates
+"^DD",2006.563,2006.563,3,21,2,0)
+if a PACS is present at the site, and, if so,
+"^DD",2006.563,2006.563,3,21,3,0)
+whether or not this PACS has a brand-name of
+"^DD",2006.563,2006.563,3,21,4,0)
+General Electric.
+"^DD",2006.563,2006.563,3,21,5,0)
+ 
+"^DD",2006.563,2006.563,3,21,6,0)
+Possible values for this code are 'N/A',
+"^DD",2006.563,2006.563,3,21,7,0)
+'GE' and 'NON-GE'.
+"^DD",2006.563,2006.563,3,21,8,0)
+ 
+"^DD",2006.563,2006.563,3,21,9,0)
+This value is stored in this table (^MAGDICOM(2006.563,...
+"^DD",2006.563,2006.563,3,21,10,0)
+rather than in ^MAG(2006.1,...), because the VistA
+"^DD",2006.563,2006.563,3,21,11,0)
+DICOM Gateway will need to be able to access this
+"^DD",2006.563,2006.563,3,21,12,0)
+value whether or not the network link with the VistA
+"^DD",2006.563,2006.563,3,21,13,0)
+system (DDP) is available.
+"^DD",2006.563,2006.563,3,"DT")
+2991018
+"^DD",2006.563,2006.563,4,0)
+DATA PATH^2006.5631A^^DATA PATH;0
+"^DD",2006.563,2006.563,4,3)
+Enter the directory path name for the location where data is to be stored.
+"^DD",2006.563,2006.563,4,"DT")
+2991018
+"^DD",2006.563,2006.563,5,0)
+DICT PATH^F^^DICT PATH;1^K:$L(X)>10!($L(X)<1) X
+"^DD",2006.563,2006.563,5,3)
+Enter the directory path name for the location where master files are stored.
+"^DD",2006.563,2006.563,5,21,0)
+^^6^6^3000218^^
+"^DD",2006.563,2006.563,5,21,1,0)
+The value of this field is the 'path-prefix'
+"^DD",2006.563,2006.563,5,21,2,0)
+that needs to be applied to gain access to the
+"^DD",2006.563,2006.563,5,21,3,0)
+'dictionary' files (also known as 'master files).
+"^DD",2006.563,2006.563,5,21,4,0)
+ 
+"^DD",2006.563,2006.563,5,21,5,0)
+These 'master files' contain the various tables
+"^DD",2006.563,2006.563,5,21,6,0)
+that drive the operation of the VistA DICOM Gateways.
+"^DD",2006.563,2006.563,5,"DT")
+2991018
+"^DD",2006.563,2006.563,6,0)
+HIS/RIS^F^^HIS/RIS;1^K:$L(X)>10!($L(X)<1) X
+"^DD",2006.563,2006.563,6,3)
+Enter the name of the HIS or RIS that is being used.
+"^DD",2006.563,2006.563,6,21,0)
+^^11^11^3000218^^
+"^DD",2006.563,2006.563,6,21,1,0)
+The value of this field is a code that identifies
+"^DD",2006.563,2006.563,6,21,2,0)
+the type of Hospital Information System that is being
+"^DD",2006.563,2006.563,6,21,3,0)
+used at the site.
+"^DD",2006.563,2006.563,6,21,4,0)
+ 
+"^DD",2006.563,2006.563,6,21,5,0)
+Currently, this value is always equal to 'VISTA'.
+"^DD",2006.563,2006.563,6,21,6,0)
+ 
+"^DD",2006.563,2006.563,6,21,7,0)
+This value is stored in this table (^MAGDICOM(2006.563,...
+"^DD",2006.563,2006.563,6,21,8,0)
+rather than in ^MAG(2006.1,...), because the VistA
+"^DD",2006.563,2006.563,6,21,9,0)
+DICOM Gateway will need to be able to access this
+"^DD",2006.563,2006.563,6,21,10,0)
+value whether or not the network link with the VistA
+"^DD",2006.563,2006.563,6,21,11,0)
+system (DDP) is available.
+"^DD",2006.563,2006.563,6,"DT")
+2991018
+"^DD",2006.563,2006.563,7,0)
+IMAGE INPUT PATH^F^^IMAGE INPUT PATH;1^K:$L(X)>50!($L(X)<1) X
+"^DD",2006.563,2006.563,7,3)
+Enter the name of the directory where incoming images are stored.
+"^DD",2006.563,2006.563,7,21,0)
+^^4^4^3000218^^
+"^DD",2006.563,2006.563,7,21,1,0)
+The value of this field is the 'path-prefix'
+"^DD",2006.563,2006.563,7,21,2,0)
+that needs to be applied to gain access to the
+"^DD",2006.563,2006.563,7,21,3,0)
+files that are being used by the VistA DICOM Image
+"^DD",2006.563,2006.563,7,21,4,0)
+Gateway for newly created image files.
+"^DD",2006.563,2006.563,7,"DT")
+2991018
+"^DD",2006.563,2006.563,8,0)
+IMAGE OUTPUT PATH^F^^IMAGE OUTPUT PATH;1^K:$L(X)>50!($L(X)<1) X
+"^DD",2006.563,2006.563,8,3)
+Enter the name of the directory where outgoing images are stored.
+"^DD",2006.563,2006.563,8,21,0)
+^^5^5^3000218^^
+"^DD",2006.563,2006.563,8,21,1,0)
+The value of this field is the 'path-prefix'
+"^DD",2006.563,2006.563,8,21,2,0)
+that needs to be applied to gain access to the
+"^DD",2006.563,2006.563,8,21,3,0)
+files that are being used by the VistA DICOM Image
+"^DD",2006.563,2006.563,8,21,4,0)
+Gateway for image files that need to be copied
+"^DD",2006.563,2006.563,8,21,5,0)
+to other destinations.
+"^DD",2006.563,2006.563,8,"DT")
+2991018
+"^DD",2006.563,2006.563,9,0)
+MACHINE ID^F^^MACHINE ID;1^K:$L(X)>1!($L(X)<1) X
+"^DD",2006.563,2006.563,9,.1)
+Machine ID
+"^DD",2006.563,2006.563,9,3)
+Enter the letter for the current processor.
+"^DD",2006.563,2006.563,9,21,0)
+^^7^7^3000229^^
+"^DD",2006.563,2006.563,9,21,1,0)
+The value of this field is a single-character
+"^DD",2006.563,2006.563,9,21,2,0)
+code that identifies the computer on which this
+"^DD",2006.563,2006.563,9,21,3,0)
+database is stored.
+"^DD",2006.563,2006.563,9,21,4,0)
+ 
+"^DD",2006.563,2006.563,9,21,5,0)
+This code will be used as a prefix for names
+"^DD",2006.563,2006.563,9,21,6,0)
+of image files that are created by the software
+"^DD",2006.563,2006.563,9,21,7,0)
+that runs on this computer.
+"^DD",2006.563,2006.563,9,"DT")
+2991018
+"^DD",2006.563,2006.563,10,0)
+MESSAGE LOG^S^YES:YES;NO:NO;^MESSAGE LOG;1^Q
+"^DD",2006.563,2006.563,10,3)
+Enter 'YES' or 'NO'.
+"^DD",2006.563,2006.563,10,21,0)
+^.001^15^15^3001004^^^
+"^DD",2006.563,2006.563,10,21,1,0)
+The value of this field is a code that indicates
+"^DD",2006.563,2006.563,10,21,2,0)
+whether or not diagnostic messages will be kept in
+"^DD",2006.563,2006.563,10,21,3,0)
+a global variable after they have been displayed on
+"^DD",2006.563,2006.563,10,21,4,0)
+a monitor.
+"^DD",2006.563,2006.563,10,21,5,0)
+ 
+"^DD",2006.563,2006.563,10,21,6,0)
+Possible values for this code are 'YES' and 'NO'
+"^DD",2006.563,2006.563,10,21,7,0)
+(fully spelled, in capitals).
+"^DD",2006.563,2006.563,10,21,8,0)
+ 
+"^DD",2006.563,2006.563,10,21,9,0)
+It is recommended that this value always be set to 'YES'.
+"^DD",2006.563,2006.563,10,21,10,0)
+ 
+"^DD",2006.563,2006.563,10,21,11,0)
+This value is stored in this table (^MAGDICOM(2006.563,...
+"^DD",2006.563,2006.563,10,21,12,0)
+rather than in ^MAG(2006.1,...), because the VistA
+"^DD",2006.563,2006.563,10,21,13,0)
+DICOM Gateway will need to be able to access this
+"^DD",2006.563,2006.563,10,21,14,0)
+value whether or not the network link with the VistA
+"^DD",2006.563,2006.563,10,21,15,0)
+system (DDP) is available.
+"^DD",2006.563,2006.563,10,"DT")
+3001004
+"^DD",2006.563,2006.563,11,0)
+INSTRUMENT PATH^F^^INSTRUMENT PATH;1^K:$L(X)>50!($L(X)<1) X
+"^DD",2006.563,2006.563,11,3)
+Enter the name of the directory where the ASCII Text files are stored.
+"^DD",2006.563,2006.563,11,21,0)
+^^5^5^3000218^^
+"^DD",2006.563,2006.563,11,21,1,0)
+The value of this field is the 'path-prefix'
+"^DD",2006.563,2006.563,11,21,2,0)
+that needs to be applied to gain access to the
+"^DD",2006.563,2006.563,11,21,3,0)
+files that are being used by the VistA DICOM Image
+"^DD",2006.563,2006.563,11,21,4,0)
+Gateway to store intermediate copies of image files
+"^DD",2006.563,2006.563,11,21,5,0)
+as they are received by the C-Store program.
+"^DD",2006.563,2006.563,11,"DT")
+3000218
+"^DD",2006.563,2006.563,12,0)
+MODALITY WORKLIST^S^YES:YES;NO:NO;^MODALITY WORKLIST;1^Q
+"^DD",2006.563,2006.563,12,3)
+Enter 'YES' or 'NO'.
+"^DD",2006.563,2006.563,12,21,0)
+^.001^7^7^3001004^^^^
+"^DD",2006.563,2006.563,12,21,1,0)
+The value of this field is a code that indicates
+"^DD",2006.563,2006.563,12,21,2,0)
+whether or not the machine on which this table is
+"^DD",2006.563,2006.563,12,21,3,0)
+stored will be executing the tasks of a Modality
+"^DD",2006.563,2006.563,12,21,4,0)
+Worklist Provider.
+"^DD",2006.563,2006.563,12,21,5,0)
+ 
+"^DD",2006.563,2006.563,12,21,6,0)
+Possible values for this code are 'YES' and 'NO'
+"^DD",2006.563,2006.563,12,21,7,0)
+(fully spelled, in capitals).
+"^DD",2006.563,2006.563,12,"DT")
+3001004
+"^DD",2006.563,2006.563,13,0)
+PACS IMAGES^S^YES:YES;NO:NO;^PACS IMAGES;1^Q
+"^DD",2006.563,2006.563,13,3)
+Enter 'YES' or 'NO'.
+"^DD",2006.563,2006.563,13,21,0)
+^.001^12^12^3001004^^^
+"^DD",2006.563,2006.563,13,21,1,0)
+The value of this field is a code that indicates
+"^DD",2006.563,2006.563,13,21,2,0)
+whether or not a PACS will be sending images to
+"^DD",2006.563,2006.563,13,21,3,0)
+the VistA Hospital Information System.
+"^DD",2006.563,2006.563,13,21,4,0)
+ 
+"^DD",2006.563,2006.563,13,21,5,0)
+Possible values for this code are 'YES' and 'NO'
+"^DD",2006.563,2006.563,13,21,6,0)
+(fully spelled, in capitals).
+"^DD",2006.563,2006.563,13,21,7,0)
+ 
+"^DD",2006.563,2006.563,13,21,8,0)
+This value is stored in this table (^MAGDICOM(2006.563,...
+"^DD",2006.563,2006.563,13,21,9,0)
+rather than in ^MAG(2006.1,...), because the VistA
+"^DD",2006.563,2006.563,13,21,10,0)
+DICOM Gateway will need to be able to access this
+"^DD",2006.563,2006.563,13,21,11,0)
+value whether or not the network link with the VistA
+"^DD",2006.563,2006.563,13,21,12,0)
+system (DDP) is available.
+"^DD",2006.563,2006.563,13,"DT")
+3001004
+"^DD",2006.563,2006.563,14,0)
+ROUTING RULES^S^YES:YES;NO:NO;^ROUTING RULES;1^Q
+"^DD",2006.563,2006.563,14,3)
+Enter 'YES' or 'NO'.
+"^DD",2006.563,2006.563,14,21,0)
+^.001^19^19^3021209^^^^
+"^DD",2006.563,2006.563,14,21,1,0)
+The value of this field is a code that indicates
+"^DD",2006.563,2006.563,14,21,2,0)
+whether or not the site where this table is stored
+"^DD",2006.563,2006.563,14,21,3,0)
+is using the automated routing facility that is part
+"^DD",2006.563,2006.563,14,21,4,0)
+of the VistA DICOM Gateway.
+"^DD",2006.563,2006.563,14,21,5,0)
+ 
+"^DD",2006.563,2006.563,14,21,6,0)
+Automated routing is not included in Version 2.5
+"^DD",2006.563,2006.563,14,21,7,0)
+of the VistA DICOM Gateway and only sites that are
+"^DD",2006.563,2006.563,14,21,8,0)
+executing an pre-alpha test of this functionality
+"^DD",2006.563,2006.563,14,21,9,0)
+should set this parameter to YES.
+"^DD",2006.563,2006.563,14,21,10,0)
+All other sites should set this parameter to NO.
+"^DD",2006.563,2006.563,14,21,11,0)
+ 
+"^DD",2006.563,2006.563,14,21,12,0)
+Possible values for this code are 'YES' and 'NO'
+"^DD",2006.563,2006.563,14,21,13,0)
+(fully spelled, in capitals).
+"^DD",2006.563,2006.563,14,21,14,0)
+ 
+"^DD",2006.563,2006.563,14,21,15,0)
+This value is stored in this table (^MAGDICOM(2006.563,...
+"^DD",2006.563,2006.563,14,21,16,0)
+rather than in ^MAG(2006.1,...), because the VistA
+"^DD",2006.563,2006.563,14,21,17,0)
+DICOM Gateway will need to be able to access this
+"^DD",2006.563,2006.563,14,21,18,0)
+value whether or not the network link with the VistA
+"^DD",2006.563,2006.563,14,21,19,0)
+system (DDP) is available.
+"^DD",2006.563,2006.563,14,"DT")
+3021209
+"^DD",2006.563,2006.563,15,0)
+SCRATCH^F^^SCRATCH;1^K:$L(X)>50!($L(X)<1) X
+"^DD",2006.563,2006.563,15,3)
+Enter the name of the directory where scratch files may be stored.
+"^DD",2006.563,2006.563,15,21,0)
+^^7^7^3000218^^
+"^DD",2006.563,2006.563,15,21,1,0)
+The value of this field is the 'path-prefix'
+"^DD",2006.563,2006.563,15,21,2,0)
+that needs to be applied to gain access to the
+"^DD",2006.563,2006.563,15,21,3,0)
+temporary files that are used by the VistA DICOM
+"^DD",2006.563,2006.563,15,21,4,0)
+Gateway.
+"^DD",2006.563,2006.563,15,21,5,0)
+ 
+"^DD",2006.563,2006.563,15,21,6,0)
+Typically, the value of this field will be equal to
+"^DD",2006.563,2006.563,15,21,7,0)
+c:\temp\
+"^DD",2006.563,2006.563,15,"DT")
+2991018
+"^DD",2006.563,2006.563,16,0)
+SEND PACS TEXT^S^YES:YES;NO:NO;^SEND PACS TEXT;1^Q
+"^DD",2006.563,2006.563,16,3)
+Enter 'YES' or 'NO'.
+"^DD",2006.563,2006.563,16,21,0)
+^.001^7^7^3001004^^^
+"^DD",2006.563,2006.563,16,21,1,0)
+The value of this field is a code that indicates
+"^DD",2006.563,2006.563,16,21,2,0)
+whether or not the VistA DICOM Gateway computer
+"^DD",2006.563,2006.563,16,21,3,0)
+on which this table is stored will be transmitting
+"^DD",2006.563,2006.563,16,21,4,0)
+text messages to a PACS.
+"^DD",2006.563,2006.563,16,21,5,0)
+ 
+"^DD",2006.563,2006.563,16,21,6,0)
+Possible values for this code are 'YES' and 'NO'
+"^DD",2006.563,2006.563,16,21,7,0)
+(fully spelled, in capitals).
+"^DD",2006.563,2006.563,16,"DT")
+3001004
+"^DD",2006.563,2006.563,17,0)
+LOCATION^P4'^DIC(4,^LOCATION;1^Q
+"^DD",2006.563,2006.563,17,3)
+Select the institution where this gateway resides.
+"^DD",2006.563,2006.563,17,21,0)
+^.001^2^2^3100702^^^^
+"^DD",2006.563,2006.563,17,21,1,0)
+This is the institution where this DICOM Gateway
+"^DD",2006.563,2006.563,17,21,2,0)
+computer resides.
+"^DD",2006.563,2006.563,17,"DT")
+3100702
+"^DD",2006.563,2006.563,18,0)
+UID ROOT^F^^UID ROOT;1^K:$L(X)>64!($L(X)<1) X
+"^DD",2006.563,2006.563,18,3)
+Enter the UID root for this installation.
+"^DD",2006.563,2006.563,18,21,0)
+^^14^14^3000218^^
+"^DD",2006.563,2006.563,18,21,1,0)
+The value of this field is a code that identifies
+"^DD",2006.563,2006.563,18,21,2,0)
+the 'root' for unique identifiers that are
+"^DD",2006.563,2006.563,18,21,3,0)
+created for the purpose of uniquely identifying
+"^DD",2006.563,2006.563,18,21,4,0)
+DICOM objects.
+"^DD",2006.563,2006.563,18,21,5,0)
+ 
+"^DD",2006.563,2006.563,18,21,6,0)
+This value has been assigned to the Veterans Administration
+"^DD",2006.563,2006.563,18,21,7,0)
+by the American National Standards Institute and
+"^DD",2006.563,2006.563,18,21,8,0)
+may not be changed by any site.
+"^DD",2006.563,2006.563,18,21,9,0)
+ 
+"^DD",2006.563,2006.563,18,21,10,0)
+This value is stored in this table (^MAGDICOM(2006.563,...
+"^DD",2006.563,2006.563,18,21,11,0)
+rather than in ^MAG(2006.1,...), because the VistA
+"^DD",2006.563,2006.563,18,21,12,0)
+DICOM Gateway will need to be able to access this
+"^DD",2006.563,2006.563,18,21,13,0)
+value whether or not the network link with the VistA
+"^DD",2006.563,2006.563,18,21,14,0)
+system (DDP) is available.
+"^DD",2006.563,2006.563,18,"DT")
+2991018
+"^DD",2006.563,2006.563,19,0)
+VERSION^F^^VERSION;1^K:$L(X)>64!($L(X)<1) X
+"^DD",2006.563,2006.563,19,3)
+Answer must be 1-64 characters in length.
+"^DD",2006.563,2006.563,19,21,0)
+^^11^11^3000218^^
+"^DD",2006.563,2006.563,19,21,1,0)
+The value of this field is a code that identifies
+"^DD",2006.563,2006.563,19,21,2,0)
+the version of the implementation of the VA DICOM
+"^DD",2006.563,2006.563,19,21,3,0)
+SOP Classes.
+"^DD",2006.563,2006.563,19,21,4,0)
+ 
+"^DD",2006.563,2006.563,19,21,5,0)
+This value should not be modified by any sites.
+"^DD",2006.563,2006.563,19,21,6,0)
+ 
+"^DD",2006.563,2006.563,19,21,7,0)
+This value is stored in this table (^MAGDICOM(2006.563,...
+"^DD",2006.563,2006.563,19,21,8,0)
+rather than in ^MAG(2006.1,...), because the VistA
+"^DD",2006.563,2006.563,19,21,9,0)
+DICOM Gateway will need to be able to access this
+"^DD",2006.563,2006.563,19,21,10,0)
+value whether or not the network link with the VistA
+"^DD",2006.563,2006.563,19,21,11,0)
+system (DDP) is available.
+"^DD",2006.563,2006.563,19,"DT")
+2991018
+"^DD",2006.563,2006.563,20,0)
+HL7 POINTER^P2006.5'^MAGDHL7(2006.5,^HL7_PTR;1^Q
+"^DD",2006.563,2006.563,20,3)
+Enter the internal entry number of a HL7 message.
+"^DD",2006.563,2006.563,20,21,0)
+^^11^11^3000218^^
+"^DD",2006.563,2006.563,20,21,1,0)
+The value of this field is a pointer to the table that
+"^DD",2006.563,2006.563,20,21,2,0)
+contains the HL7-messages that are to be processed by
+"^DD",2006.563,2006.563,20,21,3,0)
+a VistA DICOM Text Gateway.
+"^DD",2006.563,2006.563,20,21,4,0)
+This value corresponds to the internal entry number
+"^DD",2006.563,2006.563,20,21,5,0)
+of the last message that was processed.
+"^DD",2006.563,2006.563,20,21,6,0)
+ 
+"^DD",2006.563,2006.563,20,21,7,0)
+This value is stored in this table (^MAGDICOM(2006.563,...
+"^DD",2006.563,2006.563,20,21,8,0)
+rather than in ^MAG(2006.1,...), because the VistA
+"^DD",2006.563,2006.563,20,21,9,0)
+DICOM Gateway will need to be able to access this
+"^DD",2006.563,2006.563,20,21,10,0)
+value whether or not the network link with the VistA
+"^DD",2006.563,2006.563,20,21,11,0)
+system (DDP) is available.
+"^DD",2006.563,2006.563,20,"DT")
+3000222
+"^DD",2006.563,2006.563,21,0)
+FREE DISK SPACE^NJ3,0^^FREE DISK SPACE;1^K:+X'=X!(X>100)!(X<0)!(X?.E1"."1N.N) X
+"^DD",2006.563,2006.563,21,3)
+Enter the percentage of free disk space required to allow C-Store.
+"^DD",2006.563,2006.563,21,21,0)
+^^5^5^3000218^^
+"^DD",2006.563,2006.563,21,21,1,0)
+The value of this field is an integer number that
+"^DD",2006.563,2006.563,21,21,2,0)
+indicates the percentage of disk space that needs to
+"^DD",2006.563,2006.563,21,21,3,0)
+be left as free space. The acquisition of image files
+"^DD",2006.563,2006.563,21,21,4,0)
+will be suspended when the amount of free disk space
+"^DD",2006.563,2006.563,21,21,5,0)
+drops below this threshold.
+"^DD",2006.563,2006.563,21,"DT")
+2991020
+"^DD",2006.563,2006.563,22,0)
+TEXT GATEWAY^S^YES:YES;NO:NO;^TEXT GATEWAY;1^Q
+"^DD",2006.563,2006.563,22,3)
+Enter 'YES' or 'NO'.
+"^DD",2006.563,2006.563,22,21,0)
+^.001^6^6^3001004^^^
+"^DD",2006.563,2006.563,22,21,1,0)
+The value of this field is a code that indicates
+"^DD",2006.563,2006.563,22,21,2,0)
+whether or not the computer on which this table
+"^DD",2006.563,2006.563,22,21,3,0)
+is stored will operate as a Text Gateway.
+"^DD",2006.563,2006.563,22,21,4,0)
+ 
+"^DD",2006.563,2006.563,22,21,5,0)
+Possible values for this code are 'YES' and 'NO'
+"^DD",2006.563,2006.563,22,21,6,0)
+(fully spelled, in capitals).
+"^DD",2006.563,2006.563,22,"DT")
+3001004
+"^DD",2006.563,2006.563,23,0)
+LAST SYSTEM REPORT^NJ7,0^^DAILY REPORT;1^K:+X'=X!(X>9999999)!(X<1)!(X?.E1"."1N.N) X
+"^DD",2006.563,2006.563,23,3)
+Enter the $HOROLOG number of the date of the last site report.
+"^DD",2006.563,2006.563,23,21,0)
+^^7^7^3001004^^
+"^DD",2006.563,2006.563,23,21,1,0)
+The value of this field is a code for the date on which
+"^DD",2006.563,2006.563,23,21,2,0)
+the most recent system report was e-mailed to the VistA
+"^DD",2006.563,2006.563,23,21,3,0)
+central repository.
+"^DD",2006.563,2006.563,23,21,4,0)
+This value is encoded as a $HOROLOG date.
+"^DD",2006.563,2006.563,23,21,5,0)
+This value is calculated by the application as the
+"^DD",2006.563,2006.563,23,21,6,0)
+report in question is being produced, and never entered
+"^DD",2006.563,2006.563,23,21,7,0)
+by an end-user.
+"^DD",2006.563,2006.563,23,"DT")
+3000222
+"^DD",2006.563,2006.563,24,0)
+POST OFFICE^F^^POST OFFICE;1^K:$L(X)>64!($L(X)<1) X
+"^DD",2006.563,2006.563,24,3)
+Enter the IP address of the SMTP post office for this site.
+"^DD",2006.563,2006.563,24,21,0)
+^^9^9^3000218^^
+"^DD",2006.563,2006.563,24,21,1,0)
+The value of this field is the IP address of the
+"^DD",2006.563,2006.563,24,21,2,0)
+computer that will function as the SMTP post office
+"^DD",2006.563,2006.563,24,21,3,0)
+for sending e-mail from this site.
+"^DD",2006.563,2006.563,24,21,4,0)
+ 
+"^DD",2006.563,2006.563,24,21,5,0)
+This value is stored in this table (^MAGDICOM(2006.563,...
+"^DD",2006.563,2006.563,24,21,6,0)
+rather than in ^MAG(2006.1,...), because the VistA
+"^DD",2006.563,2006.563,24,21,7,0)
+DICOM Gateway will need to be able to access this
+"^DD",2006.563,2006.563,24,21,8,0)
+value whether or not the network link with the VistA
+"^DD",2006.563,2006.563,24,21,9,0)
+system (DDP) is available.
+"^DD",2006.563,2006.563,24,"DT")
+3000222
+"^DD",2006.563,2006.563,25,0)
+CONSOLIDATED IMAGING SOFTWARE^S^YES:Consolidated;NO:Non-Consolidated;^CONSOLIDATED;1^Q
+"^DD",2006.563,2006.563,25,3)
+Indicate whether or not this site is running the consolidated Imaging software.
+"^DD",2006.563,2006.563,25,21,0)
+^^6^6^3021212^
+"^DD",2006.563,2006.563,25,21,1,0)
+The value of this field is a code that indicates whether or not
+"^DD",2006.563,2006.563,25,21,2,0)
+the current site is running the consolidated version of the Imaging
+"^DD",2006.563,2006.563,25,21,3,0)
+software.
+"^DD",2006.563,2006.563,25,21,4,0)
+ 
+"^DD",2006.563,2006.563,25,21,5,0)
+A value of "YES" indicates that the consolidated software is in use.
+"^DD",2006.563,2006.563,25,21,6,0)
+A value of "NO" indicates that the non-consolidated software is in use.
+"^DD",2006.563,2006.563,25,"DT")
+3021212
+"^DD",2006.563,2006.563,26,0)
+CPT MODIFIER^S^YES:YES;NO:NO;^SEND CPT MODIFIERS;1^Q
+"^DD",2006.563,2006.563,26,3)
+Indicate whether or not this computer will include CPT modifier codes in messages.
+"^DD",2006.563,2006.563,26,21,0)
+^^7^7^3000218^^
+"^DD",2006.563,2006.563,26,21,1,0)
+The value of this field is a code that indicates
+"^DD",2006.563,2006.563,26,21,2,0)
+whether or not CPT modifier codes will be included in
+"^DD",2006.563,2006.563,26,21,3,0)
+messages that are transmitted by the computer on which
+"^DD",2006.563,2006.563,26,21,4,0)
+this table is stored.
+"^DD",2006.563,2006.563,26,21,5,0)
+ 
+"^DD",2006.563,2006.563,26,21,6,0)
+Possible values for this code are 'YES' and 'NO'
+"^DD",2006.563,2006.563,26,21,7,0)
+(fully spelled, in capitals).
+"^DD",2006.563,2006.563,26,"DT")
+3000222
+"^DD",2006.563,2006.563,27,0)
+TIME ZONE OFFSET^NJ4,0^^TIME ZONE;1^K:+X'=X!(X>2500)!(X<-2500)!(X?.E1"."1N.N) X
+"^DD",2006.563,2006.563,27,3)
+Enter the ISO code for the time zone offset for this computer.
+"^DD",2006.563,2006.563,27,21,0)
+^^17^17^3000218^^
+"^DD",2006.563,2006.563,27,21,1,0)
+The value of this field is an integer number that
+"^DD",2006.563,2006.563,27,21,2,0)
+indicates the time zone offset for the computer on
+"^DD",2006.563,2006.563,27,21,3,0)
+which this table is stored.
+"^DD",2006.563,2006.563,27,21,4,0)
+ 
+"^DD",2006.563,2006.563,27,21,5,0)
+The time zone offset is encoded as 100*hours+minutes,
+"^DD",2006.563,2006.563,27,21,6,0)
+and is a positive number when the time is later than
+"^DD",2006.563,2006.563,27,21,7,0)
+GMT (Greenwich Mean Time), or a negative number when
+"^DD",2006.563,2006.563,27,21,8,0)
+the time is earlier than GMT.
+"^DD",2006.563,2006.563,27,21,9,0)
+ 
+"^DD",2006.563,2006.563,27,21,10,0)
+E.g. EST in the USA corresponds to a time zone offset
+"^DD",2006.563,2006.563,27,21,11,0)
+of -500.
+"^DD",2006.563,2006.563,27,21,12,0)
+ 
+"^DD",2006.563,2006.563,27,21,13,0)
+This value is stored in this table (^MAGDICOM(2006.563,...
+"^DD",2006.563,2006.563,27,21,14,0)
+rather than in ^MAG(2006.1,...), because the VistA
+"^DD",2006.563,2006.563,27,21,15,0)
+DICOM Gateway will need to be able to access this
+"^DD",2006.563,2006.563,27,21,16,0)
+value whether or not the network link with the VistA
+"^DD",2006.563,2006.563,27,21,17,0)
+system (DDP) is available.
+"^DD",2006.563,2006.563,27,"DT")
+3000222
+"^DD",2006.563,2006.563,28,0)
+LOCATION NAME^F^^LOCATION NAME;1^K:$L(X)>30!($L(X)<1) X
+"^DD",2006.563,2006.563,28,3)
+Enter the name of the location to which this station belongs.
+"^DD",2006.563,2006.563,28,21,0)
+^.001^7^7^3100702^^
+"^DD",2006.563,2006.563,28,21,1,0)
+The value of this field is a string that represents the name
+"^DD",2006.563,2006.563,28,21,2,0)
+of a site. Its value is copied from the INSTITUTION file when
+"^DD",2006.563,2006.563,28,21,3,0)
+a value is assigned to the field LOCATION in this table.
+"^DD",2006.563,2006.563,28,21,4,0)
+ 
+"^DD",2006.563,2006.563,28,21,5,0)
+A DICOM Gateway stores a redundant copy of this name, so that
+"^DD",2006.563,2006.563,28,21,6,0)
+it will be able to display the name when DDP is not available,
+"^DD",2006.563,2006.563,28,21,7,0)
+and the value cannot be fetched from ^DIC.
+"^DD",2006.563,2006.563,28,"DT")
+3011016
+"^DD",2006.563,2006.563,29,0)
+ACCESS CODE^F^^LOGIN ACCESS;1^K:$L(X)>30!($L(X)<1) X
+"^DD",2006.563,2006.563,29,3)
+Enter the access code for this gateway.
+"^DD",2006.563,2006.563,29,21,0)
+^^2^2^3010226^
+"^DD",2006.563,2006.563,29,21,1,0)
+The value of this field is a string that represents the access code that will be used
+"^DD",2006.563,2006.563,29,21,2,0)
+to operate this DICOM Gateway.
+"^DD",2006.563,2006.563,29,"DT")
+3010226
+"^DD",2006.563,2006.563,30,0)
+VERIFY CODE^F^^LOGIN VERIFY;1^K:$L(X)>30!($L(X)<1) X
+"^DD",2006.563,2006.563,30,3)
+Enter the verify code for this gateway.
+"^DD",2006.563,2006.563,30,21,0)
+^^2^2^3010226^
+"^DD",2006.563,2006.563,30,21,1,0)
+The value of this field is a string that represents the verify
+"^DD",2006.563,2006.563,30,21,2,0)
+code that will be used to operate this DICOM Gateway.
+"^DD",2006.563,2006.563,30,"DT")
+3010226
+"^DD",2006.563,2006.563,31,0)
+READ ONLY ACCESS^F^^LOGIN PRINT/VIEW ONLY;1^K:$L(X)>30!($L(X)<1) X
+"^DD",2006.563,2006.563,31,3)
+Enter the read-only access code for this gateway.
+"^DD",2006.563,2006.563,31,21,0)
+^^2^2^3010226^
+"^DD",2006.563,2006.563,31,21,1,0)
+The value of this field is a string that represents the access
+"^DD",2006.563,2006.563,31,21,2,0)
+code that will be used to operate this gateway in "read only" mode.
+"^DD",2006.563,2006.563,31,"DT")
+3010226
+"^DD",2006.563,2006.563,32,0)
+PROGRAMMER ACCESS^F^^LOGIN PROGRAMMER ACCESS;1^K:$L(X)>30!($L(X)<1) X
+"^DD",2006.563,2006.563,32,3)
+Enter the programmer access code for this gateway.
+"^DD",2006.563,2006.563,32,21,0)
+^^2^2^3010226^
+"^DD",2006.563,2006.563,32,21,1,0)
+The value of this field is a string that represents the access
+"^DD",2006.563,2006.563,32,21,2,0)
+code that will be used to gain programmer access to this gateway.
+"^DD",2006.563,2006.563,32,"DT")
+3010226
+"^DD",2006.563,2006.563,33,0)
+EVALUATOR^S^0:No;1:Yes;^EVAL;1^Q
+"^DD",2006.563,2006.563,33,3)
+Indicate whether a Rule Evaluator may currently run on this computer.
+"^DD",2006.563,2006.563,33,21,0)
+^^7^7^3020809^
+"^DD",2006.563,2006.563,33,21,1,0)
+The value of this field is a code that indicates whether or not
+"^DD",2006.563,2006.563,33,21,2,0)
+a Rule Evaluator may currently run on this computer.
+"^DD",2006.563,2006.563,33,21,3,0)
+ 
+"^DD",2006.563,2006.563,33,21,4,0)
+This flag is automatically set to 1 (yes) when the menu option
+"^DD",2006.563,2006.563,33,21,5,0)
+is used to start a Rule Evaluator, and to 0 (no) when the
+"^DD",2006.563,2006.563,33,21,6,0)
+menu option is used to stop all Rule Evaluators.
+"^DD",2006.563,2006.563,33,21,7,0)
+ 
+"^DD",2006.563,2006.563,33,"DT")
+3020809
+"^DD",2006.563,2006.563,34,0)
+CSTORE CONTROL PORT^NJ5,0^^CSTORE CONTROL PORT;1^K:+X'=X!(X>65535)!(X<1)!(X?.E1"."1N.N) X
+"^DD",2006.563,2006.563,34,3)
+Enter a TCP/IP port number (between 1 and 65535).
+"^DD",2006.563,2006.563,34,21,0)
+^.001^6^6^3020828^^
+"^DD",2006.563,2006.563,34,21,1,0)
+The value of this field is an integer number that identifies
+"^DD",2006.563,2006.563,34,21,2,0)
+the TCP/IP port that will be used by each C-Store process to
+"^DD",2006.563,2006.563,34,21,3,0)
+obtain information from a DICOM Gateway.
+"^DD",2006.563,2006.563,34,21,4,0)
+ 
+"^DD",2006.563,2006.563,34,21,5,0)
+The information provided is limited to known "modalities" and
+"^DD",2006.563,2006.563,34,21,6,0)
+which port numbers are assigned to these modalities.
+"^DD",2006.563,2006.563,34,"DT")
+3020828
+"^DD",2006.563,2006.563,35,0)
+WORKLIST PORT^NJ5,0^^WORKLIST PORT;1^K:+X'=X!(X>65535)!(X<1)!(X?.E1"."1N.N) X
+"^DD",2006.563,2006.563,35,3)
+Enter a TCP/IP port number (between 1 and 65535).
+"^DD",2006.563,2006.563,35,21,0)
+^^3^3^3020828^
+"^DD",2006.563,2006.563,35,21,1,0)
+The value of this field is an integer number that identifies
+"^DD",2006.563,2006.563,35,21,2,0)
+the TCP/IP port that will be used by DICOM WorkList processes
+"^DD",2006.563,2006.563,35,21,3,0)
+to post their requests and obtain their results.
+"^DD",2006.563,2006.563,35,"DT")
+3020828
+"^DD",2006.563,2006.563,36,0)
+VISTA RPC PORT^NJ5,0^^M-to-M BROKER PORT;1^K:+X'=X!(X>65535)!(X<0)!(X?.E1"."1N.N) X
+"^DD",2006.563,2006.563,36,3)
+Enter the port number for the MUMPS-to-MUMPS broker on the VistA system
+"^DD",2006.563,2006.563,36,21,0)
+^.001^3^3^3021107^^
+"^DD",2006.563,2006.563,36,21,1,0)
+The value of this field is an integer number between 0 and
+"^DD",2006.563,2006.563,36,21,2,0)
+65,535 that identifies the port number on which a
+"^DD",2006.563,2006.563,36,21,3,0)
+(MUMPS-to-MUMPS) RPC broker is "listening" on the VistA system.
+"^DD",2006.563,2006.563,36,"DT")
+3021002
+"^DD",2006.563,2006.563,37,0)
+VISTA RPC IP ADDRESS^F^^M-to-M BROKER ADDR;1^K:$L(X)>63!($L(X)<1) X
+"^DD",2006.563,2006.563,37,3)
+Enter the IP address of the VistA system.
+"^DD",2006.563,2006.563,37,21,0)
+^^3^3^3021002^
+"^DD",2006.563,2006.563,37,21,1,0)
+The value of this field is a string that identifies the IP address
+"^DD",2006.563,2006.563,37,21,2,0)
+of the VistA system. This IP address is used to establish
+"^DD",2006.563,2006.563,37,21,3,0)
+a MUMPS-to-MUMPS RPC broker connection.
+"^DD",2006.563,2006.563,37,"DT")
+3021002
+"^DD",2006.563,2006.563,38,0)
+PROFILE^2006.5632A^^PROFILE;0
+"^DD",2006.563,2006.563,40,0)
+MAILGROUP^F^^MAILGROUP;1^K:$L(X)>240!($L(X)<5) X
+"^DD",2006.563,2006.563,40,3)
+Enter the name of a mailgroup for emergency messages.
+"^DD",2006.563,2006.563,40,21,0)
+^^6^6^3021118^
+"^DD",2006.563,2006.563,40,21,1,0)
+The value of this field is a string that identifies a (SMTP) mailgroup.
+"^DD",2006.563,2006.563,40,21,2,0)
+When emergencies arise, a DICOM Gateway will send an e-mail message
+"^DD",2006.563,2006.563,40,21,3,0)
+to this mailgroup.
+"^DD",2006.563,2006.563,40,21,4,0)
+Since the emergency might be that the connection with the VistA system
+"^DD",2006.563,2006.563,40,21,5,0)
+is temporarily not available, such messages are sent by SMTP mail,
+"^DD",2006.563,2006.563,40,21,6,0)
+not by FORUM mail.
+"^DD",2006.563,2006.563,40,"DT")
+3021118
+"^DD",2006.563,2006.563,46,0)
+DELAY FOR C-MOVE TO EMED^NJ5,0^^EMED_C_MOVE_DELAY;1^K:+X'=X!(X>36000)!(X<0)!(X?.E1"."1N.N) X
+"^DD",2006.563,2006.563,46,3)
+Enter the waiting time (seconds) before a C-Move to an E-Med may occur.
+"^DD",2006.563,2006.563,46,21,0)
+^^4^4^3021212^
+"^DD",2006.563,2006.563,46,21,1,0)
+The value of this field is an integer number. This number indicates
+"^DD",2006.563,2006.563,46,21,2,0)
+the waiting time (in seconds) that has to elapse between the
+"^DD",2006.563,2006.563,46,21,3,0)
+acquisition of an image and the time when this image may be
+"^DD",2006.563,2006.563,46,21,4,0)
+relayed on to an E-Med picture archival system.
+"^DD",2006.563,2006.563,46,"DT")
+3021212
+"^DD",2006.563,2006.563,47,0)
+LAST IMAGE POINTER^P2005'^MAG(2005,^LAST IMAGE POINTER;1^Q
+"^DD",2006.563,2006.563,47,3)
+Indicate the highest-numbered image processed.
+"^DD",2006.563,2006.563,47,21,0)
+^^10^10^3021212^^
+"^DD",2006.563,2006.563,47,21,1,0)
+The value of this field is a pointer to the Image File (#2005).
+"^DD",2006.563,2006.563,47,21,2,0)
+The pointed-to image is the one with the highest IEN that has
+"^DD",2006.563,2006.563,47,21,3,0)
+been processed by a DICOM Gateway.
+"^DD",2006.563,2006.563,47,21,4,0)
+ 
+"^DD",2006.563,2006.563,47,21,5,0)
+This value is being tracked for patient-safety reasons.
+"^DD",2006.563,2006.563,47,21,6,0)
+ 
+"^DD",2006.563,2006.563,47,21,7,0)
+At a number of sites it has happened that procedural mistakes during
+"^DD",2006.563,2006.563,47,21,8,0)
+normal maintenance caused part of the Image File to "disappear".
+"^DD",2006.563,2006.563,47,21,9,0)
+Keeping track of this highest IEN allows the imaging software to
+"^DD",2006.563,2006.563,47,21,10,0)
+cause a "controlled shut-down" when such a situation occurs.
+"^DD",2006.563,2006.563,47,"DT")
+3021212
+"^DD",2006.563,2006.563,48,0)
+LAST RAD REPORT POINTER^P74'^RARPT(^LAST RAD REPORT POINTER;1^Q
+"^DD",2006.563,2006.563,48,3)
+Indicate the highest numbered Radiology Report processed.
+"^DD",2006.563,2006.563,48,21,0)
+^^10^10^3021212^^
+"^DD",2006.563,2006.563,48,21,1,0)
+The value of this field is a pointer to the Rad/Nuc Report File (#74).
+"^DD",2006.563,2006.563,48,21,2,0)
+The pointed-to report is the one with the highest IEN that has
+"^DD",2006.563,2006.563,48,21,3,0)
+been processed by a DICOM Gateway.
+"^DD",2006.563,2006.563,48,21,4,0)
+ 
+"^DD",2006.563,2006.563,48,21,5,0)
+This value is being tracked for patient-safety reasons.
+"^DD",2006.563,2006.563,48,21,6,0)
+ 
+"^DD",2006.563,2006.563,48,21,7,0)
+At a number of sites it has happened that procedural mistakes during
+"^DD",2006.563,2006.563,48,21,8,0)
+normal maintenance caused part of the Rad/Nuc Report to "disappear".
+"^DD",2006.563,2006.563,48,21,9,0)
+Keeping track of this highest IEN allows the imaging software to
+"^DD",2006.563,2006.563,48,21,10,0)
+cause a "controlled shut-down" when such a situation occurs.
+"^DD",2006.563,2006.563,48,"DT")
+3021212
+"^DD",2006.563,2006.563,49,0)
+SUPPORT ACCESS^F^^LOGIN SUPPORT;1^K:$L(X)>30!($L(X)<1) X
+"^DD",2006.563,2006.563,49,3)
+Enter the code that allows support staff local access to a DICOM Gateway.
+"^DD",2006.563,2006.563,49,21,0)
+^^2^2^3021212^^
+"^DD",2006.563,2006.563,49,21,1,0)
+The value of this field is a string that represents the access
+"^DD",2006.563,2006.563,49,21,2,0)
+code that will be used to gain 'support staff' access to this gateway.
+"^DD",2006.563,2006.563,49,"DT")
+3021212
+"^DD",2006.563,2006.563,50,0)
+ET PHONES HOME^S^YES:Yes;NO:No;^MAGDBB;1^Q
+"^DD",2006.563,2006.563,50,3)
+Indicate whether or not the ET-Phone Home service will be active.
+"^DD",2006.563,2006.563,50,21,0)
+^^8^8^3021212^
+"^DD",2006.563,2006.563,50,21,1,0)
+The value of this field is a code that indicates whether or
+"^DD",2006.563,2006.563,50,21,2,0)
+not the "ET-Phone Home" feature will be enabled.
+"^DD",2006.563,2006.563,50,21,3,0)
+ 
+"^DD",2006.563,2006.563,50,21,4,0)
+When the value of this field is equal to "YES", the DICOM Gateway
+"^DD",2006.563,2006.563,50,21,5,0)
+will send a report to the support-organization in Silver Spring
+"^DD",2006.563,2006.563,50,21,6,0)
+each day. This report includes a summary of the entries in the
+"^DD",2006.563,2006.563,50,21,7,0)
+error trap, information of site-specific parameters and station-specific
+"^DD",2006.563,2006.563,50,21,8,0)
+parameters, checksums of routines, and usage statistics.
+"^DD",2006.563,2006.563,50,"DT")
+3021212
+"^DD",2006.563,2006.563,51,0)
+M-to-M BROKER MESSAGES^S^YES:Yes;NO:No;^M-to-M BROKER MSGS;1^Q
+"^DD",2006.563,2006.563,51,3)
+Indicate whether or not messages about the M-to-M broker will be logged.
+"^DD",2006.563,2006.563,51,21,0)
+^^6^6^3021212^
+"^DD",2006.563,2006.563,51,21,1,0)
+The value of this field is a code that indicates whether or not
+"^DD",2006.563,2006.563,51,21,2,0)
+messages will be logged that report on the usage of the MUMPS-to-MUMPS
+"^DD",2006.563,2006.563,51,21,3,0)
+RPC Broker.
+"^DD",2006.563,2006.563,51,21,4,0)
+ 
+"^DD",2006.563,2006.563,51,21,5,0)
+When the value of this field is equal to "YES", such
+"^DD",2006.563,2006.563,51,21,6,0)
+messages will be logged.
+"^DD",2006.563,2006.563,51,"DT")
+3021212
+"^DD",2006.563,2006.563,52,0)
+PACS EXAM COMPLETE^S^YES:Yes;NO:No;^PACS EXAM COMPLETE;1^Q
+"^DD",2006.563,2006.563,52,3)
+Indicate whether or not a PACS will be sending Exam Complete messages.
+"^DD",2006.563,2006.563,52,21,0)
+^^6^6^3021212^
+"^DD",2006.563,2006.563,52,21,1,0)
+The value of this field is a code that indicates whether or not
+"^DD",2006.563,2006.563,52,21,2,0)
+this DICOM Gateway will be receiving "Exam Complete" messages
+"^DD",2006.563,2006.563,52,21,3,0)
+from a PACS.
+"^DD",2006.563,2006.563,52,21,4,0)
+ 
+"^DD",2006.563,2006.563,52,21,5,0)
+When the value of this field is "YES", such messages will be
+"^DD",2006.563,2006.563,52,21,6,0)
+processed.
+"^DD",2006.563,2006.563,52,"DT")
+3021212
+"^DD",2006.563,2006.563,54,0)
+STOP ROUTING TRANSMITTER^S^1:Stop;0:Run;^ROUTE AQ EXIT;1^Q
+"^DD",2006.563,2006.563,54,3)
+Indicate whether routing transmitters may run.
+"^DD",2006.563,2006.563,54,21,0)
+^^13^13^3021212^
+"^DD",2006.563,2006.563,54,21,1,0)
+The value of this field is a code that indicates whether or not
+"^DD",2006.563,2006.563,54,21,2,0)
+routing transmitters are currently allowed to run on a suite
+"^DD",2006.563,2006.563,54,21,3,0)
+of DICOM Gateways.
+"^DD",2006.563,2006.563,54,21,4,0)
+ 
+"^DD",2006.563,2006.563,54,21,5,0)
+When a routing transmitter process is started, the value of this
+"^DD",2006.563,2006.563,54,21,6,0)
+field is set to 0 (run).
+"^DD",2006.563,2006.563,54,21,7,0)
+ 
+"^DD",2006.563,2006.563,54,21,8,0)
+When the menu option "Stop Transmission Processors" is executed,
+"^DD",2006.563,2006.563,54,21,9,0)
+the value of this field is set to 1 (Stop).
+"^DD",2006.563,2006.563,54,21,10,0)
+ 
+"^DD",2006.563,2006.563,54,21,11,0)
+The software of the transmission processor checks this value to
+"^DD",2006.563,2006.563,54,21,12,0)
+determine whether to stop gracefully, or to continue transmitting
+"^DD",2006.563,2006.563,54,21,13,0)
+the next file.
+"^DD",2006.563,2006.563,54,"DT")
+3021212
+"^DD",2006.563,2006.563,55,0)
+DASHES IN SSN FOR PACS^S^YES:Include dashes;NO:Omit dashes;^SSN DASHES FOR PACS;1^Q
+"^DD",2006.563,2006.563,55,3)
+Indicate whether or not the PACS wants dashes in SSNs.
+"^DD",2006.563,2006.563,55,21,0)
+^^8^8^3021212^
+"^DD",2006.563,2006.563,55,21,1,0)
+The value of this field is a code that indicates whether or not
+"^DD",2006.563,2006.563,55,21,2,0)
+the PACS (Picture Archival and Communication System) that
+"^DD",2006.563,2006.563,55,21,3,0)
+is connected to this DICOM Gateway requires that SSNs are
+"^DD",2006.563,2006.563,55,21,4,0)
+transmitted with dashes included or not.
+"^DD",2006.563,2006.563,55,21,5,0)
+ 
+"^DD",2006.563,2006.563,55,21,6,0)
+When the value of this field is equal to "YES", SSNs will be
+"^DD",2006.563,2006.563,55,21,7,0)
+transmitted to this PACS with dashed included; otherwise the
+"^DD",2006.563,2006.563,55,21,8,0)
+dashes will be omitted.
+"^DD",2006.563,2006.563,55,"DT")
+3021212
+"^DD",2006.563,2006.563,56,0)
+INSTALLATION^2006.5634A^^INSTALL;0
+"^DD",2006.563,2006.563,56,"DT")
+3021212
+"^DD",2006.563,2006.563,58,0)
+LAST CONFIGURATION CHANGE^D^^CONFIG DATE/TIME;1^S %DT="ESTXR" D ^%DT S X=Y K:Y<1 X
+"^DD",2006.563,2006.563,58,3)
+Enter the date and time the configuration was last changed.
+"^DD",2006.563,2006.563,58,21,0)
+^^3^3^3040303^
+"^DD",2006.563,2006.563,58,21,1,0)
+The value of this field is a timestamp (VA-FileMan format)
+"^DD",2006.563,2006.563,58,21,2,0)
+that indicates the date and time when the most recent configuration
+"^DD",2006.563,2006.563,58,21,3,0)
+update occurred on this DICOM Gateway.
+"^DD",2006.563,2006.563,58,"DT")
+3040303
+"^DD",2006.563,2006.563,59,0)
+DICOM TRANSMITTER ACTIVE^S^RUN:Running;STOP:Inactive;^DICOM XMIT;1^Q
+"^DD",2006.563,2006.563,59,3)
+Indicate whether a DICOM transmitter is running or not.
+"^DD",2006.563,2006.563,59,21,0)
+^^6^6^3040303^
+"^DD",2006.563,2006.563,59,21,1,0)
+The value of this field is a code that indicates whether or
+"^DD",2006.563,2006.563,59,21,2,0)
+not a DICOM Transmitter is currently running.
+"^DD",2006.563,2006.563,59,21,3,0)
+Possible values are "RUN" and "STOP".
+"^DD",2006.563,2006.563,59,21,4,0)
+Each active DICOM Transmitter will periodically check the value of
+"^DD",2006.563,2006.563,59,21,5,0)
+this field, and gracefully terminate if the value of this field
+"^DD",2006.563,2006.563,59,21,6,0)
+has been set to "STOP".
+"^DD",2006.563,2006.563,59,"DT")
+3040303
+"^DD",2006.563,2006.563,60,0)
+DOMAIN^F^^DOMAIN;1^K:$L(X)>63!($L(X)<1) X
+"^DD",2006.563,2006.563,60,3)
+Enter the site's domain name.
+"^DD",2006.563,2006.563,60,21,0)
+^^5^5^3040303^
+"^DD",2006.563,2006.563,60,21,1,0)
+The value of this field is a string that identifies the domain
+"^DD",2006.563,2006.563,60,21,2,0)
+to which the site belongs at which this DICOM Gateway is located.
+"^DD",2006.563,2006.563,60,21,3,0)
+This field is populated automatically, using an RPC to query
+"^DD",2006.563,2006.563,60,21,4,0)
+the VistA system for the current values of its Kernel Site Parameters
+"^DD",2006.563,2006.563,60,21,5,0)
+when the configuration of the DICOM Gateway is updated.
+"^DD",2006.563,2006.563,60,"DT")
+3040303
+"^DD",2006.563,2006.563,61,0)
+PACS QUERY^2006.5633A^^GE CONV #HRS;0
+"^DD",2006.563,2006.563,62,0)
+PACS QUERY ACTIVE^S^YES:Active;NO:Idle;STOP:Stop Requested;^GE CONV ACTIVE;1^Q
+"^DD",2006.563,2006.563,62,3)
+Indicate whether a PACS Query is currently running.
+"^DD",2006.563,2006.563,62,21,0)
+^^10^10^3040303^
+"^DD",2006.563,2006.563,62,21,1,0)
+The value of this field is a code that indicates whether
+"^DD",2006.563,2006.563,62,21,2,0)
+a PACS query process is currently active.
+"^DD",2006.563,2006.563,62,21,3,0)
+Possible values are "YES", "NO" and "STOP".
+"^DD",2006.563,2006.563,62,21,4,0)
+ 
+"^DD",2006.563,2006.563,62,21,5,0)
+Each PACS Query process will periodically check the value of
+"^DD",2006.563,2006.563,62,21,6,0)
+this field, and gracefully terminate if the value of this field
+"^DD",2006.563,2006.563,62,21,7,0)
+has been set to "STOP".
+"^DD",2006.563,2006.563,62,21,8,0)
+ 
+"^DD",2006.563,2006.563,62,21,9,0)
+When a PACS Query Process fully completed its activity, it
+"^DD",2006.563,2006.563,62,21,10,0)
+will set the value of this field to "NO".
+"^DD",2006.563,2006.563,62,"DT")
+3040303
+"^DD",2006.563,2006.563,63,0)
+PACS QUERY DIRECTION^S^ASCENDING:Ascending Order;DESCENDING:Descending Order;^GE CONV DIR;1^Q
+"^DD",2006.563,2006.563,63,3)
+Indicate the traversal direction.
+"^DD",2006.563,2006.563,63,21,0)
+^^3^3^3040303^
+"^DD",2006.563,2006.563,63,21,1,0)
+The value of this field is a code that indicates in which direction
+"^DD",2006.563,2006.563,63,21,2,0)
+the PACS QUery process will traverse the database.
+"^DD",2006.563,2006.563,63,21,3,0)
+Possible values are "ASCENDING" and "DESCENDING".
+"^DD",2006.563,2006.563,63,"DT")
+3040303
+"^DD",2006.563,2006.563,64,0)
+PACS QUERY ERA 1 START^D^^GE CONV ERA1;1^S %DT="E" D ^%DT S X=Y K:Y<1 X
+"^DD",2006.563,2006.563,64,3)
+Indicate the start of the ACR/NEMA era.
+"^DD",2006.563,2006.563,64,21,0)
+^^16^16^3040303^
+"^DD",2006.563,2006.563,64,21,1,0)
+The value of this field is a timestamp (VA FileMan format,
+"^DD",2006.563,2006.563,64,21,2,0)
+date only) that indicates the start of the time-period during
+"^DD",2006.563,2006.563,64,21,3,0)
+which communication with the PACS was conducted using the
+"^DD",2006.563,2006.563,64,21,4,0)
+ACR/NEMA protocol.
+"^DD",2006.563,2006.563,64,21,5,0)
+ 
+"^DD",2006.563,2006.563,64,21,6,0)
+When querying the PACS, the query process will issue its queries
+"^DD",2006.563,2006.563,64,21,7,0)
+according to this protocol for all studies that were conducted
+"^DD",2006.563,2006.563,64,21,8,0)
+between the start and end dates that are registered in this
+"^DD",2006.563,2006.563,64,21,9,0)
+field (and the next).
+"^DD",2006.563,2006.563,64,21,10,0)
+ 
+"^DD",2006.563,2006.563,64,21,11,0)
+Note that protocol-eras are allowed to overlap. The result
+"^DD",2006.563,2006.563,64,21,12,0)
+of registering overlapping protocol eras will be that the
+"^DD",2006.563,2006.563,64,21,13,0)
+query process will issues its requests according to all protocols
+"^DD",2006.563,2006.563,64,21,14,0)
+that could have been valid at the time. The PACS, on the other
+"^DD",2006.563,2006.563,64,21,15,0)
+hand, will only respond to requests that correspond to the
+"^DD",2006.563,2006.563,64,21,16,0)
+protocol that was actually active at the time.
+"^DD",2006.563,2006.563,64,"DT")
+3040303
+"^DD",2006.563,2006.563,65,0)
+PACS QUERY ERA 1 END^D^^GE CONV ERA1;2^S %DT="E" D ^%DT S X=Y K:Y<1 X
+"^DD",2006.563,2006.563,65,3)
+Indicate the end of the ACR/NEMA era.
+"^DD",2006.563,2006.563,65,21,0)
+^^16^16^3040303^
+"^DD",2006.563,2006.563,65,21,1,0)
+The value of this field is a timestamp (VA FileMan format,
+"^DD",2006.563,2006.563,65,21,2,0)
+date only) that indicates the end of the time-period during
+"^DD",2006.563,2006.563,65,21,3,0)
+which communication with the PACS was conducted using the
+"^DD",2006.563,2006.563,65,21,4,0)
+ACR/NEMA protocol.
+"^DD",2006.563,2006.563,65,21,5,0)
+ 
+"^DD",2006.563,2006.563,65,21,6,0)
+When querying the PACS, the query process will issue its queries
+"^DD",2006.563,2006.563,65,21,7,0)
+according to this protocol for all studies that were conducted
+"^DD",2006.563,2006.563,65,21,8,0)
+between the start and end dates that are registered in this
+"^DD",2006.563,2006.563,65,21,9,0)
+field (and the previous).
+"^DD",2006.563,2006.563,65,21,10,0)
+ 
+"^DD",2006.563,2006.563,65,21,11,0)
+Note that protocol-eras are allowed to overlap. The result
+"^DD",2006.563,2006.563,65,21,12,0)
+of registering overlapping protocol eras will be that the
+"^DD",2006.563,2006.563,65,21,13,0)
+query process will issues its requests according to all protocols
+"^DD",2006.563,2006.563,65,21,14,0)
+that could have been valid at the time. The PACS, on the other
+"^DD",2006.563,2006.563,65,21,15,0)
+hand, will only respond to requests that correspond to the
+"^DD",2006.563,2006.563,65,21,16,0)
+protocol that was actually active at the time.
+"^DD",2006.563,2006.563,65,"DT")
+3040303
+"^DD",2006.563,2006.563,66,0)
+PACS QUERY ERA 2 START^D^^GE CONV ERA2;1^S %DT="E" D ^%DT S X=Y K:Y<1 X
+"^DD",2006.563,2006.563,66,3)
+Indicate the start of the Pre 12.1 era.
+"^DD",2006.563,2006.563,66,21,0)
+^^16^16^3040303^
+"^DD",2006.563,2006.563,66,21,1,0)
+The value of this field is a timestamp (VA FileMan format,
+"^DD",2006.563,2006.563,66,21,2,0)
+date only) that indicates the start of the time-period during
+"^DD",2006.563,2006.563,66,21,3,0)
+which communication with the PACS was conducted using the
+"^DD",2006.563,2006.563,66,21,4,0)
+Pre Version 12.1 protocol.
+"^DD",2006.563,2006.563,66,21,5,0)
+ 
+"^DD",2006.563,2006.563,66,21,6,0)
+When querying the PACS, the query process will issue its queries
+"^DD",2006.563,2006.563,66,21,7,0)
+according to this protocol for all studies that were conducted
+"^DD",2006.563,2006.563,66,21,8,0)
+between the start and end dates that are registered in this
+"^DD",2006.563,2006.563,66,21,9,0)
+field (and the next).
+"^DD",2006.563,2006.563,66,21,10,0)
+ 
+"^DD",2006.563,2006.563,66,21,11,0)
+Note that protocol-eras are allowed to overlap. The result
+"^DD",2006.563,2006.563,66,21,12,0)
+of registering overlapping protocol eras will be that the
+"^DD",2006.563,2006.563,66,21,13,0)
+query process will issues its requests according to all protocols
+"^DD",2006.563,2006.563,66,21,14,0)
+that could have been valid at the time. The PACS, on the other
+"^DD",2006.563,2006.563,66,21,15,0)
+hand, will only respond to requests that correspond to the
+"^DD",2006.563,2006.563,66,21,16,0)
+protocol that was actually active at the time.
+"^DD",2006.563,2006.563,66,"DT")
+3040303
+"^DD",2006.563,2006.563,67,0)
+PACS QUERY ERA 2 END^D^^GE CONV ERA2;2^S %DT="E" D ^%DT S X=Y K:Y<1 X
+"^DD",2006.563,2006.563,67,3)
+Indicate the end of the Pre 12.1 era.
+"^DD",2006.563,2006.563,67,21,0)
+^^16^16^3040303^
+"^DD",2006.563,2006.563,67,21,1,0)
+The value of this field is a timestamp (VA FileMan format,
+"^DD",2006.563,2006.563,67,21,2,0)
+date only) that indicates the end of the time-period during
+"^DD",2006.563,2006.563,67,21,3,0)
+which communication with the PACS was conducted using the
+"^DD",2006.563,2006.563,67,21,4,0)
+Pre Version 12.1 protocol.
+"^DD",2006.563,2006.563,67,21,5,0)
+ 
+"^DD",2006.563,2006.563,67,21,6,0)
+When querying the PACS, the query process will issue its queries
+"^DD",2006.563,2006.563,67,21,7,0)
+according to this protocol for all studies that were conducted
+"^DD",2006.563,2006.563,67,21,8,0)
+between the start and end dates that are registered in this
+"^DD",2006.563,2006.563,67,21,9,0)
+field (and the previous).
+"^DD",2006.563,2006.563,67,21,10,0)
+ 
+"^DD",2006.563,2006.563,67,21,11,0)
+Note that protocol-eras are allowed to overlap. The result
+"^DD",2006.563,2006.563,67,21,12,0)
+of registering overlapping protocol eras will be that the
+"^DD",2006.563,2006.563,67,21,13,0)
+query process will issues its requests according to all protocols
+"^DD",2006.563,2006.563,67,21,14,0)
+that could have been valid at the time. The PACS, on the other
+"^DD",2006.563,2006.563,67,21,15,0)
+hand, will only respond to requests that correspond to the
+"^DD",2006.563,2006.563,67,21,16,0)
+protocol that was actually active at the time.
+"^DD",2006.563,2006.563,67,"DT")
+3040303
+"^DD",2006.563,2006.563,68,0)
+PACS QUERY ERA 3 START^D^^GE CONV ERA3;1^S %DT="E" D ^%DT S X=Y K:Y<1 X
+"^DD",2006.563,2006.563,68,3)
+Indicate the start of the Post 12.1 era.
+"^DD",2006.563,2006.563,68,21,0)
+^^16^16^3040303^
+"^DD",2006.563,2006.563,68,21,1,0)
+The value of this field is a timestamp (VA FileMan format,
+"^DD",2006.563,2006.563,68,21,2,0)
+date only) that indicates the start of the time-period during
+"^DD",2006.563,2006.563,68,21,3,0)
+which communication with the PACS was conducted using the
+"^DD",2006.563,2006.563,68,21,4,0)
+Post Version 12.1 protocol.
+"^DD",2006.563,2006.563,68,21,5,0)
+ 
+"^DD",2006.563,2006.563,68,21,6,0)
+When querying the PACS, the query process will issue its queries
+"^DD",2006.563,2006.563,68,21,7,0)
+according to this protocol for all studies that were conducted
+"^DD",2006.563,2006.563,68,21,8,0)
+between the start and end dates that are registered in this
+"^DD",2006.563,2006.563,68,21,9,0)
+field (and the next).
+"^DD",2006.563,2006.563,68,21,10,0)
+ 
+"^DD",2006.563,2006.563,68,21,11,0)
+Note that protocol-eras are allowed to overlap. The result
+"^DD",2006.563,2006.563,68,21,12,0)
+of registering overlapping protocol eras will be that the
+"^DD",2006.563,2006.563,68,21,13,0)
+query process will issues its requests according to all protocols
+"^DD",2006.563,2006.563,68,21,14,0)
+that could have been valid at the time. The PACS, on the other
+"^DD",2006.563,2006.563,68,21,15,0)
+hand, will only respond to requests that correspond to the
+"^DD",2006.563,2006.563,68,21,16,0)
+protocol that was actually active at the time.
+"^DD",2006.563,2006.563,68,"DT")
+3040303
+"^DD",2006.563,2006.563,69,0)
+PACS QUERY ERA 3 END^D^^GE CONV ERA3;2^S %DT="E" D ^%DT S X=Y K:Y<1 X
+"^DD",2006.563,2006.563,69,3)
+Indicate the end of the Post 12.1 era.
+"^DD",2006.563,2006.563,69,21,0)
+^^16^16^3040303^
+"^DD",2006.563,2006.563,69,21,1,0)
+The value of this field is a timestamp (VA FileMan format,
+"^DD",2006.563,2006.563,69,21,2,0)
+date only) that indicates the end of the time-period during
+"^DD",2006.563,2006.563,69,21,3,0)
+which communication with the PACS was conducted using the
+"^DD",2006.563,2006.563,69,21,4,0)
+Post Version 12.1 protocol.
+"^DD",2006.563,2006.563,69,21,5,0)
+ 
+"^DD",2006.563,2006.563,69,21,6,0)
+When querying the PACS, the query process will issue its queries
+"^DD",2006.563,2006.563,69,21,7,0)
+according to this protocol for all studies that were conducted
+"^DD",2006.563,2006.563,69,21,8,0)
+between the start and end dates that are registered in this
+"^DD",2006.563,2006.563,69,21,9,0)
+field (and the previous).
+"^DD",2006.563,2006.563,69,21,10,0)
+ 
+"^DD",2006.563,2006.563,69,21,11,0)
+Note that protocol-eras are allowed to overlap. The result
+"^DD",2006.563,2006.563,69,21,12,0)
+of registering overlapping protocol eras will be that the
+"^DD",2006.563,2006.563,69,21,13,0)
+query process will issues its requests according to all protocols
+"^DD",2006.563,2006.563,69,21,14,0)
+that could have been valid at the time. The PACS, on the other
+"^DD",2006.563,2006.563,69,21,15,0)
+hand, will only respond to requests that correspond to the
+"^DD",2006.563,2006.563,69,21,16,0)
+protocol that was actually active at the time.
+"^DD",2006.563,2006.563,69,"DT")
+3040303
+"^DD",2006.563,2006.563,70,0)
+PACS QUERY UPPER LIMIT^P74'^RARPT(^GE CONV HI;1^Q
+"^DD",2006.563,2006.563,70,3)
+Identify the most recent Radiology Report to be queried.
+"^DD",2006.563,2006.563,70,21,0)
+^^9^9^3040303^
+"^DD",2006.563,2006.563,70,21,1,0)
+The value of this field is a pointer to the Radiology Report Table
+"^DD",2006.563,2006.563,70,21,2,0)
+(#74). This pointer identifies the highest internal entry number of
+"^DD",2006.563,2006.563,70,21,3,0)
+a report that was scanned by the PACS Query Process.
+"^DD",2006.563,2006.563,70,21,4,0)
+ 
+"^DD",2006.563,2006.563,70,21,5,0)
+When the "highest" and "lowest" pointer values "pass" one another,
+"^DD",2006.563,2006.563,70,21,6,0)
+the scanning process is complete.
+"^DD",2006.563,2006.563,70,21,7,0)
+ 
+"^DD",2006.563,2006.563,70,21,8,0)
+Note that the end-user may decide to switch the scanning direction
+"^DD",2006.563,2006.563,70,21,9,0)
+from "ASCENDING" to "DESCENDING" (or the other way about) at any time.
+"^DD",2006.563,2006.563,70,"DT")
+3040303
+"^DD",2006.563,2006.563,71,0)
+PACS QUERY LOWER LIMIT^P74'^RARPT(^GE CONV LO;1^Q
+"^DD",2006.563,2006.563,71,3)
+Indicate the oldest Radiology Report to be queried.
+"^DD",2006.563,2006.563,71,21,0)
+^^9^9^3040303^
+"^DD",2006.563,2006.563,71,21,1,0)
+The value of this field is a pointer to the Radiology Report Table
+"^DD",2006.563,2006.563,71,21,2,0)
+(#74). This pointer identifies the lowest internal entry number of
+"^DD",2006.563,2006.563,71,21,3,0)
+a report that was scanned by the PACS Query Process.
+"^DD",2006.563,2006.563,71,21,4,0)
+ 
+"^DD",2006.563,2006.563,71,21,5,0)
+When the "highest" and "lowest" pointer values "pass" one another,
+"^DD",2006.563,2006.563,71,21,6,0)
+the scanning process is complete.
+"^DD",2006.563,2006.563,71,21,7,0)
+ 
+"^DD",2006.563,2006.563,71,21,8,0)
+Note that the end-user may decide to switch the scanning direction
+"^DD",2006.563,2006.563,71,21,9,0)
+from "ASCENDING" to "DESCENDING" (or the other way about) at any time.
+"^DD",2006.563,2006.563,71,"DT")
+3040303
+"^DD",2006.563,2006.563,72,0)
+PACS QUERY ALLOW ACTIVITY^F^^GE CONV HRS;1^K:$L(X)>24!($L(X)<24) X
+"^DD",2006.563,2006.563,72,3)
+Indicate when PACS Queries may be active.
+"^DD",2006.563,2006.563,72,21,0)
+^^10^10^3040303^
+"^DD",2006.563,2006.563,72,21,1,0)
+The value of this field is a string of exactly 24 characters.
+"^DD",2006.563,2006.563,72,21,2,0)
+Each of these characters is either a "Y" or an "N".
+"^DD",2006.563,2006.563,72,21,3,0)
+Each character in this string corresponds to an hour of the day,
+"^DD",2006.563,2006.563,72,21,4,0)
+and indicates whether or not a PACS Query Process is allowed to
+"^DD",2006.563,2006.563,72,21,5,0)
+be active during that hour of the day.
+"^DD",2006.563,2006.563,72,21,6,0)
+ 
+"^DD",2006.563,2006.563,72,21,7,0)
+The first character corresponds to the hour between midnight and 1am,
+"^DD",2006.563,2006.563,72,21,8,0)
+the last one corresponds to the hour between 11pm and midnight.
+"^DD",2006.563,2006.563,72,21,9,0)
+ 
+"^DD",2006.563,2006.563,72,21,10,0)
+The default value of this field is "YYYYYYYYYYYYYYYYYYYYYYYY".
+"^DD",2006.563,2006.563,72,"DT")
+3040303
+"^DD",2006.563,2006.563,73,0)
+CURRENT IMAGE POINTER^P2005'^MAG(2005,^CURRENT IMAGE POINTER;1^Q
+"^DD",2006.563,2006.563,73,3)
+Identify the image currently being processed.
+"^DD",2006.563,2006.563,73,21,0)
+^^3^3^3040303^
+"^DD",2006.563,2006.563,73,21,1,0)
+The value of this field is a pointer to the Image Table
+"^DD",2006.563,2006.563,73,21,2,0)
+(#2005). This value identifies the image that is currently
+"^DD",2006.563,2006.563,73,21,3,0)
+being processed.
+"^DD",2006.563,2006.563,73,"DT")
+3040303
+"^DD",2006.563,2006.563,74,0)
+CURRENT IMAGE DESTINATION^F^^CURRENT IMAGE DESTINATION;1^K:$L(X)>250!($L(X)<1) X
+"^DD",2006.563,2006.563,74,3)
+Identify the directory and file name where this image will be stored.
+"^DD",2006.563,2006.563,74,21,0)
+^^3^3^3040303^
+"^DD",2006.563,2006.563,74,21,1,0)
+The value of this field is a string that identifies the image file
+"^DD",2006.563,2006.563,74,21,2,0)
+(host system file name, including directory path) that is
+"^DD",2006.563,2006.563,74,21,3,0)
+currently being created.
+"^DD",2006.563,2006.563,74,"DT")
+3040303
+"^DD",2006.563,2006.563,75,0)
+CURRENT IMAGE FILE NAME^F^^CURRENT IMAGE FILE NAME;1^K:$L(X)>240!($L(X)<1) X
+"^DD",2006.563,2006.563,75,3)
+Identify the file (HSF) currently being processed.
+"^DD",2006.563,2006.563,75,21,0)
+^^3^3^3040303^
+"^DD",2006.563,2006.563,75,21,1,0)
+The value of this field is a string that identifies the image file
+"^DD",2006.563,2006.563,75,21,2,0)
+(host system file name, no directory path) that is
+"^DD",2006.563,2006.563,75,21,3,0)
+currently being processed.
+"^DD",2006.563,2006.563,75,"DT")
+3040303
+"^DD",2006.563,2006.563,76,0)
+CURRENT IMAGE SOURCE^F^^CURRENT IMAGE SOURCE;1^K:$L(X)>240!($L(X)<1) X
+"^DD",2006.563,2006.563,76,3)
+Identify the directory where the current file resides.
+"^DD",2006.563,2006.563,76,21,0)
+^^2^2^3040303^
+"^DD",2006.563,2006.563,76,21,1,0)
+The value of this field is a string that identifies the image file
+"^DD",2006.563,2006.563,76,21,2,0)
+(directory path, no file name) that is currently being processed.
+"^DD",2006.563,2006.563,76,"DT")
+3040303
+"^DD",2006.563,2006.563,77,0)
+LAST UID^F^^LAST UID;1^K:$L(X)>64!($L(X)<1) X
+"^DD",2006.563,2006.563,77,3)
+Record the most recently issued UID for a new object.
+"^DD",2006.563,2006.563,77,21,0)
+^^6^6^3040303^
+"^DD",2006.563,2006.563,77,21,1,0)
+The value of this field is a string that meets the format
+"^DD",2006.563,2006.563,77,21,2,0)
+of a Unique Object Identifier as specified in the DICOM Standard
+"^DD",2006.563,2006.563,77,21,3,0)
+(maximum 64 characters, only digits and periods, leading characters
+"^DD",2006.563,2006.563,77,21,4,0)
+are the root-numbers that are assigned by ANSI to the VA).
+"^DD",2006.563,2006.563,77,21,5,0)
+The value of this field is the UID that was most recently assigned
+"^DD",2006.563,2006.563,77,21,6,0)
+by the DICOM Gateway.
+"^DD",2006.563,2006.563,77,"DT")
+3040303
+"^DD",2006.563,2006.563,78,0)
+BACKGROUND PROCESS ACCESS^F^^M-to-M BROKER BGND ACCESS;1^K:$L(X)>63!($L(X)<1) X
+"^DD",2006.563,2006.563,78,3)
+Enter the access code for background processes.
+"^DD",2006.563,2006.563,78,21,0)
+^^8^8^3040303^
+"^DD",2006.563,2006.563,78,21,1,0)
+The value of this field is an (encrypted) string. This value will
+"^DD",2006.563,2006.563,78,21,2,0)
+be used as an access code by the DICOM Gateway when a "modality"
+"^DD",2006.563,2006.563,78,21,3,0)
+performs a Modality Worklist Query, in those special cases where
+"^DD",2006.563,2006.563,78,21,4,0)
+the DICOM Gateway needs to query the VistA system about details
+"^DD",2006.563,2006.563,78,21,5,0)
+about "old" Radiology studies. (Under normal circumstances, a
+"^DD",2006.563,2006.563,78,21,6,0)
+DICOM Gateway will be able to respond to a Modality Worklist
+"^DD",2006.563,2006.563,78,21,7,0)
+QUery using only information that is stored on the DICOM Gateway
+"^DD",2006.563,2006.563,78,21,8,0)
+itself.)
+"^DD",2006.563,2006.563,78,"DT")
+3040303
+"^DD",2006.563,2006.563,79,0)
+BACKGROUND PROCESS VERIFY^F^^M-to-M BROKER BGND VERIFY;1^K:$L(X)>63!($L(X)<1) X
+"^DD",2006.563,2006.563,79,3)
+Enter the verify code for background processes.
+"^DD",2006.563,2006.563,79,21,0)
+^.001^8^8^3090929^^
+"^DD",2006.563,2006.563,79,21,1,0)
+The value of this field is an (encrypted) string. This value will
+"^DD",2006.563,2006.563,79,21,2,0)
+be used as a verify code by the DICOM Gateway when a "modality"
+"^DD",2006.563,2006.563,79,21,3,0)
+performs a Modality Worklist Query, in those special cases where
+"^DD",2006.563,2006.563,79,21,4,0)
+the DICOM Gateway needs to query the VistA system about details
+"^DD",2006.563,2006.563,79,21,5,0)
+about "old" Radiology studies. (Under normal circumstances, a
+"^DD",2006.563,2006.563,79,21,6,0)
+DICOM Gateway will be able to respond to a Modality Worklist
+"^DD",2006.563,2006.563,79,21,7,0)
+Query using only information that is stored on the DICOM Gateway
+"^DD",2006.563,2006.563,79,21,8,0)
+itself.)
+"^DD",2006.563,2006.563,79,"DT")
+3040303
+"^DD",2006.563,2006.563,80,0)
+M2M BROKER DEBUG^S^1:Yes;0:No;^M2M DEBUG;1^Q
+"^DD",2006.563,2006.563,80,3)
+Indicate whether or not debugging is active for M2M Broker sessions.
+"^DD",2006.563,2006.563,80,21,0)
+^^13^13^3040303^
+"^DD",2006.563,2006.563,80,21,1,0)
+The value of this field is a code that indicates whether
+"^DD",2006.563,2006.563,80,21,2,0)
+or not the client for the MUMPS-to-MUMPS Broker should record
+"^DD",2006.563,2006.563,80,21,3,0)
+any debugging information. Possible values are 1 (do record
+"^DD",2006.563,2006.563,80,21,4,0)
+information) and 0 (do NOT record any information).
+"^DD",2006.563,2006.563,80,21,5,0)
+ 
+"^DD",2006.563,2006.563,80,21,6,0)
+When a DICOM Gateway is installed at a new site, the value of
+"^DD",2006.563,2006.563,80,21,7,0)
+this field is "false", and this field can only receive a "true"
+"^DD",2006.563,2006.563,80,21,8,0)
+value through a manual operation from "programmer mode".
+"^DD",2006.563,2006.563,80,21,9,0)
+ 
+"^DD",2006.563,2006.563,80,21,10,0)
+Since the information that is recorded when this switch is turned
+"^DD",2006.563,2006.563,80,21,11,0)
+"on" is quite voluminous, this switch should only be used by
+"^DD",2006.563,2006.563,80,21,12,0)
+support personnel to diagnose a problem, and turned off 
+"^DD",2006.563,2006.563,80,21,13,0)
+immediately after the problem is diagnosed.
+"^DD",2006.563,2006.563,80,"DT")
+3040303
+"^DD",2006.563,2006.563,81,0)
+MULTIFRAME COUNTER^NJ9,0^^MULTIFRAME COUNTER;1^K:+X'=X!(X>999999999)!(X<0)!(X?.E1"."1N.N) X
+"^DD",2006.563,2006.563,81,3)
+Record the sequence number of the last-processed frame.
+"^DD",2006.563,2006.563,81,21,0)
+^.001^13^13^3090929^^
+"^DD",2006.563,2006.563,81,21,1,0)
+The value of this field is an integer number that records the
+"^DD",2006.563,2006.563,81,21,2,0)
+progress through the various frames of a multi-frame image
+"^DD",2006.563,2006.563,81,21,3,0)
+as data for that image is being received.
+"^DD",2006.563,2006.563,81,21,4,0)
+ 
+"^DD",2006.563,2006.563,81,21,5,0)
+Under normal circumstances, the various "frames" are converted
+"^DD",2006.563,2006.563,81,21,6,0)
+to individual images, and there is no need to know the number of
+"^DD",2006.563,2006.563,81,21,7,0)
+frames processed to any process other than the one
+"^DD",2006.563,2006.563,81,21,8,0)
+receiving the image data.
+"^DD",2006.563,2006.563,81,21,9,0)
+ 
+"^DD",2006.563,2006.563,81,21,10,0)
+However, if that process is interrupted (user interrupt, network
+"^DD",2006.563,2006.563,81,21,11,0)
+outage, power failure), a subsequent process will need to know
+"^DD",2006.563,2006.563,81,21,12,0)
+which sub-images have already been created when it starts processing
+"^DD",2006.563,2006.563,81,21,13,0)
+the re-transmission of the image data.
+"^DD",2006.563,2006.563,81,"DT")
+3040303
+"^DD",2006.563,2006.563,82,0)
+SHOW PATIENT IDENTIFIERS^S^YES:Yes;NO:No;^SHOW PATIENT NAME & ID;1^Q
+"^DD",2006.563,2006.563,82,3)
+Indicate whether or not Patient Identifiers will be displayed.
+"^DD",2006.563,2006.563,82,21,0)
+^^11^11^3040303^
+"^DD",2006.563,2006.563,82,21,1,0)
+The value of this field is a code that indicates whether or not
+"^DD",2006.563,2006.563,82,21,2,0)
+an Image Gateway is to display patient identifying information
+"^DD",2006.563,2006.563,82,21,3,0)
+while processing images.
+"^DD",2006.563,2006.563,82,21,4,0)
+Possible values are "YES" and "NO".
+"^DD",2006.563,2006.563,82,21,5,0)
+ 
+"^DD",2006.563,2006.563,82,21,6,0)
+When a DICOM Gateway is located in a well-protected area, it is
+"^DD",2006.563,2006.563,82,21,7,0)
+permissible to leave the value of this field equal to "YES".
+"^DD",2006.563,2006.563,82,21,8,0)
+When a DICOM Gateway is located in a publicly accessible area,
+"^DD",2006.563,2006.563,82,21,9,0)
+the value of this field may only be set to "YES" while an
+"^DD",2006.563,2006.563,82,21,10,0)
+adequately privileged user is diagnosing a problem, and should
+"^DD",2006.563,2006.563,82,21,11,0)
+be set to "NO" at all other times.
+"^DD",2006.563,2006.563,82,"DT")
+3040303
+"^DD",2006.563,2006.563,83,0)
+TEXT GATEWAY SERVICE^S^RAD:Radiology;CON:Consults;^TEXT GATEWAY SERVICE;1^Q
+"^DD",2006.563,2006.563,83,3)
+Identify the kind of Imaging Service that is processed by this Gateway.
+"^DD",2006.563,2006.563,83,21,0)
+^^3^3^3040303^
+"^DD",2006.563,2006.563,83,21,1,0)
+The value of this field is a code that indicates which imaging
+"^DD",2006.563,2006.563,83,21,2,0)
+service is being performed by this Text Gateway.
+"^DD",2006.563,2006.563,83,21,3,0)
+Possible values are "RAD" (Radiology) and "CON" (Consults).
+"^DD",2006.563,2006.563,83,"DT")
+3040303
+"^DD",2006.563,2006.563,84,0)
+ET ADDRESS^F^^ET ADDRESS;1^K:$L(X)>100!($L(X)<3) X
+"^DD",2006.563,2006.563,84,3)
+Enter the e-mail address for the ET Phone Home mailgroup.
+"^DD",2006.563,2006.563,84,21,0)
+^^5^5^3050224^
+"^DD",2006.563,2006.563,84,21,1,0)
+The value of this field is a string. This string identifies
+"^DD",2006.563,2006.563,84,21,2,0)
+the mail-group that is used to process messages containing
+"^DD",2006.563,2006.563,84,21,3,0)
+routine checksum information.
+"^DD",2006.563,2006.563,84,21,4,0)
+ 
+"^DD",2006.563,2006.563,84,21,5,0)
+Typically, the value will look like: G.MAGDBB@LAVC-WASH.MED.VA.GOV
+"^DD",2006.563,2006.563,84,"DT")
+3050224
+"^DD",2006.563,2006.563,85,0)
+MAG VISTA CHECKSUMS^S^YES:Yes;NO:No;^MAG VISTA CHECKSUMS;1^Q
+"^DD",2006.563,2006.563,85,3)
+Indicate whether or not reports with VistA routine checksums are to be sent.
+"^DD",2006.563,2006.563,85,21,0)
+^^6^6^3050224^
+"^DD",2006.563,2006.563,85,21,1,0)
+The value of this field is a code that indicates whether or not
+"^DD",2006.563,2006.563,85,21,2,0)
+reports will be sent containing the checksums of all imaging
+"^DD",2006.563,2006.563,85,21,3,0)
+routines on the VistA system.
+"^DD",2006.563,2006.563,85,21,4,0)
+ 
+"^DD",2006.563,2006.563,85,21,5,0)
+A value of YES indicates that reports are to be sent.
+"^DD",2006.563,2006.563,85,21,6,0)
+A value of NO indicates that no reports are to be sent.
+"^DD",2006.563,2006.563,85,"DT")
+3050224
+"^DD",2006.563,2006.563,86,0)
+EXPORT ACTIVE^S^YES:Yes;NO:No;^EXPORT ACTIVE;1^Q
+"^DD",2006.563,2006.563,86,3)
+Indicate whether or not an export batch run is active.
+"^DD",2006.563,2006.563,86,21,0)
+^^3^3^3051006^
+"^DD",2006.563,2006.563,86,21,1,0)
+The value of this field is a code that indicates whether or
+"^DD",2006.563,2006.563,86,21,2,0)
+not a batch export run is currently active.
+"^DD",2006.563,2006.563,86,21,3,0)
+Possible values are "YES" and "NO".
+"^DD",2006.563,2006.563,86,"DT")
+3051006
+"^DD",2006.563,2006.563,87,0)
+EXPORT BATCH IMAGES^NJ12,0^^EXPORT BATCH #IMAGES;1^K:+X'=X!(X>999999999999)!(X<0)!(X?.E1"."1N.N) X
+"^DD",2006.563,2006.563,87,3)
+Indicate how many images are queued up for batch transmission.
+"^DD",2006.563,2006.563,87,21,0)
+^^3^3^3051006^
+"^DD",2006.563,2006.563,87,21,1,0)
+The value of this field is an integer number. This number
+"^DD",2006.563,2006.563,87,21,2,0)
+indicates the number of images that have been queued up for
+"^DD",2006.563,2006.563,87,21,3,0)
+batch transmission.
+"^DD",2006.563,2006.563,87,"DT")
+3051006
+"^DD",2006.563,2006.563,88,0)
+EXPORT BATCH GROUP COUNT^NJ12,0^^EXPORT BATCH COUNT;1^K:+X'=X!(X>999999999999)!(X<0)!(X?.E1"."1N.N) X
+"^DD",2006.563,2006.563,88,3)
+Indicate how many groups have been queued up for transmission.
+"^DD",2006.563,2006.563,88,21,0)
+^^3^3^3051006^
+"^DD",2006.563,2006.563,88,21,1,0)
+The value of this field is an integer number. This number
+"^DD",2006.563,2006.563,88,21,2,0)
+indicates the number of image groups that have been queued up for
+"^DD",2006.563,2006.563,88,21,3,0)
+batch transmission.
+"^DD",2006.563,2006.563,88,"DT")
+3051006
+"^DD",2006.563,2006.563,89,0)
+EXPORT BATCH MAX GROUP^NJ12,0^^EXPORT BATCH SIZE;1^K:+X'=X!(X>999999999999)!(X<0)!(X?.E1"."1N.N) X
+"^DD",2006.563,2006.563,89,3)
+Indicate the maximum number of image groups for a batch run.
+"^DD",2006.563,2006.563,89,21,0)
+^^2^2^3051006^
+"^DD",2006.563,2006.563,89,21,1,0)
+is the default value for the maximum number of image groups that may be
+"^DD",2006.563,2006.563,89,21,2,0)
+queued up in the next batch transmission.
+"^DD",2006.563,2006.563,89,"DT")
+3051006
+"^DD",2006.563,2006.563,90,0)
+EXPORT BEGIN DATE^D^^EXPORT BEGIN DATE;1^S %DT="EX" D ^%DT S X=Y K:Y<1 X
+"^DD",2006.563,2006.563,90,3)
+Indicate the first date to include in scans of Radiology reports.
+"^DD",2006.563,2006.563,90,21,0)
+^^3^3^3051006^
+"^DD",2006.563,2006.563,90,21,1,0)
+The value of this field is a (VA-FileMan formatted) date.
+"^DD",2006.563,2006.563,90,21,2,0)
+This date is the default value for the first day of the period that is
+"^DD",2006.563,2006.563,90,21,3,0)
+intended to be included in the next DICOM export batch.
+"^DD",2006.563,2006.563,90,"DT")
+3051006
+"^DD",2006.563,2006.563,91,0)
+EXPORT FIRST REPORT NUMBER^P74'^RARPT(^EXPORT RADIOLOGY REPORT # START;1^Q
+"^DD",2006.563,2006.563,91,3)
+Identify the first report to be included in the next batch scan.
+"^DD",2006.563,2006.563,91,21,0)
+^^4^4^3051006^
+"^DD",2006.563,2006.563,91,21,1,0)
+The value of this field is a pointer to the Radiology Report
+"^DD",2006.563,2006.563,91,21,2,0)
+table (FileMan file # 74).
+"^DD",2006.563,2006.563,91,21,3,0)
+This pointer is the default value for the first report for which images
+"^DD",2006.563,2006.563,91,21,4,0)
+will be included in the next DICOM batch transmission.
+"^DD",2006.563,2006.563,91,"DT")
+3051006
+"^DD",2006.563,2006.563,92,0)
+EXPORT LAST REPORT NUMBER^P74'^RARPT(^EXPORT RADIOLOGY REPORT # STOP;1^Q
+"^DD",2006.563,2006.563,92,3)
+Identify the last report to include in the next batch scan.
+"^DD",2006.563,2006.563,92,21,0)
+^^4^4^3051006^
+"^DD",2006.563,2006.563,92,21,1,0)
+The value of this field is a pointer to the Radiology Report
+"^DD",2006.563,2006.563,92,21,2,0)
+table (FileMan file # 74).
+"^DD",2006.563,2006.563,92,21,3,0)
+This pointer is the default value for the last report for which images
+"^DD",2006.563,2006.563,92,21,4,0)
+will be included in a DICOM batch transmission.
+"^DD",2006.563,2006.563,92,"DT")
+3051006
+"^DD",2006.563,2006.563,93,0)
+DICOM EXPORT RUN NUMBER^P2006.565'^MAGDICOM(2006.565,^EXPORT DICOM RUN NUMBER;1^Q
+"^DD",2006.563,2006.563,93,3)
+Identify the latest DICOM export batch run.
+"^DD",2006.563,2006.563,93,21,0)
+^.001^3^3^3090929^^
+"^DD",2006.563,2006.563,93,21,1,0)
+The value of this field is a pointer to the table that
+"^DD",2006.563,2006.563,93,21,2,0)
+keeps track of the various DICOM export batch runs (#2006.565).
+"^DD",2006.563,2006.563,93,21,3,0)
+This field identifies the most recently added entry to that table.
+"^DD",2006.563,2006.563,93,"DT")
+3051007
+"^DD",2006.563,2006.563,94,0)
+EXPORT DICOM STORAGE SCP^P2006.585'^MAGDICOM(2006.585,^EXPORT DICOM STORAGE SCP;1^Q
+"^DD",2006.563,2006.563,94,3)
+Identify the (default) destination of the next batch transmission.
+"^DD",2006.563,2006.563,94,21,0)
+^^4^4^3051006^
+"^DD",2006.563,2006.563,94,21,1,0)
+The value of this field is a pointer to the User Application table
+"^DD",2006.563,2006.563,94,21,2,0)
+(FileMan file # 2006.585). This pointer is the default value for
+"^DD",2006.563,2006.563,94,21,3,0)
+the Storage SCP to which the images are to be transmitted in
+"^DD",2006.563,2006.563,94,21,4,0)
+the next batch run.
+"^DD",2006.563,2006.563,94,"DT")
+3051006
+"^DD",2006.563,2006.563,95,0)
+EXPORT DIRECTION^S^ASCENDING:Ascending;DESCENDING:Descending;^EXPORT DIRECTION;1^Q
+"^DD",2006.563,2006.563,95,3)
+Indicate the (default) scanning direction for the next batch run.
+"^DD",2006.563,2006.563,95,21,0)
+^^4^4^3051006^
+"^DD",2006.563,2006.563,95,21,1,0)
+The value of this field is a code that indicates the direction
+"^DD",2006.563,2006.563,95,21,2,0)
+in which the Radiology Report table is to be scanned.
+"^DD",2006.563,2006.563,95,21,3,0)
+This value is the default code to be used in the next batch run.
+"^DD",2006.563,2006.563,95,21,4,0)
+Possible values are "ASCENDING" and "DESCENDING".
+"^DD",2006.563,2006.563,95,"DT")
+3051006
+"^DD",2006.563,2006.563,96,0)
+EXPORT HOURS OF OPERATION^F^^EXPORT HOURS OF OPERATION;1^K:$L(X)>24!($L(X)<24) X
+"^DD",2006.563,2006.563,96,3)
+Indicate when batch runs are allowed to be active.
+"^DD",2006.563,2006.563,96,21,0)
+^^12^12^3051006^
+"^DD",2006.563,2006.563,96,21,1,0)
+The value of this field is a string. This string consists of
+"^DD",2006.563,2006.563,96,21,2,0)
+the letters "Y" and "N". This value indicates during which hours
+"^DD",2006.563,2006.563,96,21,3,0)
+of the day this batch run may be active.
+"^DD",2006.563,2006.563,96,21,4,0)
+ 
+"^DD",2006.563,2006.563,96,21,5,0)
+A string of 24 letters "Y" denotes a batch run that may run all day long.
+"^DD",2006.563,2006.563,96,21,6,0)
+ 
+"^DD",2006.563,2006.563,96,21,7,0)
+A string like "YYYYYYYYNNNNNNNNNYYYYYYY" denotes a batch run
+"^DD",2006.563,2006.563,96,21,8,0)
+that may only run outside of regular office hours (midnight to 9am
+"^DD",2006.563,2006.563,96,21,9,0)
+and 6pm to midnight).
+"^DD",2006.563,2006.563,96,21,10,0)
+ 
+"^DD",2006.563,2006.563,96,21,11,0)
+This value is the default for the setting to be used in the
+"^DD",2006.563,2006.563,96,21,12,0)
+next batch run.
+"^DD",2006.563,2006.563,96,"DT")
+3051006
+"^DD",2006.563,2006.563,97,0)
+EXPORT PATIENT^P2'^DPT(^EXPORT PATIENT;1^Q
+"^DD",2006.563,2006.563,97,3)
+Identify the patient for whom to scan reports in the next batch run.
+"^DD",2006.563,2006.563,97,21,0)
+^^1^1^3051006^
+"^DD",2006.563,2006.563,97,21,1,0)
+---???---
+"^DD",2006.563,2006.563,97,"DT")
+3051006
+"^DD",2006.563,2006.563,98,0)
+EXPORT RADIOLOGY REPORT^P74'^RARPT(^EXPORT RADIOLOGY REPORT #;1^Q
+"^DD",2006.563,2006.563,98,3)
+Identify the Radiology Report that was processed most recently.
+"^DD",2006.563,2006.563,98,21,0)
+^^4^4^3051006^
+"^DD",2006.563,2006.563,98,21,1,0)
+The value of this field is a pointer to the Radiology Report
+"^DD",2006.563,2006.563,98,21,2,0)
+table (FileMan file # 74).
+"^DD",2006.563,2006.563,98,21,3,0)
+This pointer identifies the report that has been scanned most
+"^DD",2006.563,2006.563,98,21,4,0)
+recently in a batch run.
+"^DD",2006.563,2006.563,98,"DT")
+3051006
+"^DD",2006.563,2006.563,99,0)
+EXPORT SCAN MODE^S^DATE:Date;NUMBER:Report;PATIENT:Patient;^EXPORT SCAN MODE;1^Q
+"^DD",2006.563,2006.563,99,3)
+Identify the primary scanning criterion for the next batch run.
+"^DD",2006.563,2006.563,99,21,0)
+^.001^14^14^3090929^^^
+"^DD",2006.563,2006.563,99,21,1,0)
+Set of codes: DATE, NUMBER, PATIENT
+"^DD",2006.563,2006.563,99,21,2,0)
+The value of this field is a code that identifies the method
+"^DD",2006.563,2006.563,99,21,3,0)
+of scanning the Radiology Reports.
+"^DD",2006.563,2006.563,99,21,4,0)
+Possible values are "DATE", "NUMBER" and "PATIENT".
+"^DD",2006.563,2006.563,99,21,5,0)
+ 
+"^DD",2006.563,2006.563,99,21,6,0)
+A value of "DATE" indicates that the reports are scanned by date.
+"^DD",2006.563,2006.563,99,21,7,0)
+ 
+"^DD",2006.563,2006.563,99,21,8,0)
+A value of "PATIENT" indicates that the reports are scanned
+"^DD",2006.563,2006.563,99,21,9,0)
+by (internal entry number of) patient.
+"^DD",2006.563,2006.563,99,21,10,0)
+ 
+"^DD",2006.563,2006.563,99,21,11,0)
+A value of "NUMBER" indicates that the reports are scanned
+"^DD",2006.563,2006.563,99,21,12,0)
+by (internal entry number of) report.
+"^DD",2006.563,2006.563,99,21,13,0)
+ 
+"^DD",2006.563,2006.563,99,21,14,0)
+This value is the default to be used in the next batch run.
+"^DD",2006.563,2006.563,99,"DT")
+3051006
+"^DD",2006.563,2006.563,100,0)
+FUJI PACS START DATE^D^^GE CONV ERA4;1^S %DT="EX" D ^%DT S X=Y K:Y<1 X
+"^DD",2006.563,2006.563,100,3)
+Indicate when the Fuji PACS became active.
+"^DD",2006.563,2006.563,100,21,0)
+^^4^4^3051006^
+"^DD",2006.563,2006.563,100,21,1,0)
+The value of this field is a (VA-FileMan formatted) date
+"^DD",2006.563,2006.563,100,21,2,0)
+that indicates the first day of the period during which
+"^DD",2006.563,2006.563,100,21,3,0)
+information was stored according to the format for a
+"^DD",2006.563,2006.563,100,21,4,0)
+Fuji PACS.
+"^DD",2006.563,2006.563,100,"DT")
+3051006
+"^DD",2006.563,2006.563,101,0)
+FUJI PACS END DATE^D^^GE CONV ERA4;2^S %DT="EX" D ^%DT S X=Y K:Y<1 X
+"^DD",2006.563,2006.563,101,3)
+Indicate when the Fuji PACS ceased to be active.
+"^DD",2006.563,2006.563,101,21,0)
+^^4^4^3051006^
+"^DD",2006.563,2006.563,101,21,1,0)
+The value of this field is a (VA-FileMan formatted) date
+"^DD",2006.563,2006.563,101,21,2,0)
+that indicates the last day of the period during which
+"^DD",2006.563,2006.563,101,21,3,0)
+information was stored according to the format for a
+"^DD",2006.563,2006.563,101,21,4,0)
+Fuji PACS.
+"^DD",2006.563,2006.563,101,"DT")
+3051006
+"^DD",2006.563,2006.563,102,0)
+QUERY STUDY SELECTION^S^1:All Studies;2:Studies without images;3:Studies with images;^GE CONV IMGSTU;1^Q
+"^DD",2006.563,2006.563,102,3)
+Indicate for which studies queries should be issued.
+"^DD",2006.563,2006.563,102,21,0)
+^^5^5^3051006^
+"^DD",2006.563,2006.563,102,21,1,0)
+The value of this field is a code that indicates for
+"^DD",2006.563,2006.563,102,21,2,0)
+which studies queries will be issued:
+"^DD",2006.563,2006.563,102,21,3,0)
+  1 = for all studies
+"^DD",2006.563,2006.563,102,21,4,0)
+  2 = only for studies that don't currently have images
+"^DD",2006.563,2006.563,102,21,5,0)
+  3 = only for studies that already have images
+"^DD",2006.563,2006.563,102,"DT")
+3051006
+"^DD",2006.563,2006.563,103,0)
+DASHES FOR SSN IN PACS QUERY^S^YES:Yes;NO:No;^GE CONV SSNDASH;1^Q
+"^DD",2006.563,2006.563,103,3)
+Indicate whether or not to include dashes in SSNs for PACS queries.
+"^DD",2006.563,2006.563,103,21,0)
+^^4^4^3051006^
+"^DD",2006.563,2006.563,103,21,1,0)
+The value of this field is a code that indicates whether
+"^DD",2006.563,2006.563,103,21,2,0)
+or not dashes are to be included in values of SSNs that
+"^DD",2006.563,2006.563,103,21,3,0)
+are transmitted to the external PACS.
+"^DD",2006.563,2006.563,103,21,4,0)
+Possible values are "YES" and "NO".
+"^DD",2006.563,2006.563,103,"DT")
+3051006
+"^DD",2006.563,2006.563,104,0)
+EXPORT STOP DATE^D^^EXPORT STOP DATE;1^S %DT="EX" D ^%DT S X=Y K:Y<1 X
+"^DD",2006.563,2006.563,104,3)
+Indicate the last date to be scanned in the next batch run.
+"^DD",2006.563,2006.563,104,21,0)
+^^3^3^3051006^
+"^DD",2006.563,2006.563,104,21,1,0)
+The value of this field is a (VA-FileMan formatted) date.
+"^DD",2006.563,2006.563,104,21,2,0)
+This date is the default value for the last day of the period
+"^DD",2006.563,2006.563,104,21,3,0)
+that is intended to be included in the next DICOM export batch.
+"^DD",2006.563,2006.563,104,"DT")
+3051006
+"^DD",2006.563,2006.563,105,0)
+WORKLIST PORT^2006.5635A^^WORKLIST PORT;0
+"^DD",2006.563,2006.563,112,0)
+VISTA STORAGE^F^^MOVE DESTINATION AE TITLE;1^K:$L(X)>16!($L(X)<1) X
+"^DD",2006.563,2006.563,112,3)
+Enter the AE Title of the VistA system for DICOM C-Move Storage
+"^DD",2006.563,2006.563,112,21,0)
+^^10^10^3060405^
+"^DD",2006.563,2006.563,112,21,1,0)
+The value of this field is a string.
+"^DD",2006.563,2006.563,112,21,2,0)
+This string represents the Application Entity that a PACS system
+"^DD",2006.563,2006.563,112,21,3,0)
+would use when transmitting image files to VistA using the
+"^DD",2006.563,2006.563,112,21,4,0)
+DICOM C-Move protocol.
+"^DD",2006.563,2006.563,112,21,5,0)
+ 
+"^DD",2006.563,2006.563,112,21,6,0)
+(AE Title, C-Move and PACS are described in the DICOM Standard.)
+"^DD",2006.563,2006.563,112,21,7,0)
+ 
+"^DD",2006.563,2006.563,112,21,8,0)
+An AE-Title is a string of up to 16 characters.
+"^DD",2006.563,2006.563,112,21,9,0)
+Since some systems also use AE-Titles as host-names for computers,
+"^DD",2006.563,2006.563,112,21,10,0)
+it is recommended that no spaces be used in AE-Titles.
+"^DD",2006.563,2006.563,112,"DT")
+3060405
+"^DD",2006.563,2006.563,114,0)
+IMPORTER^S^YES:YES;NO:NO;^IMPORTER;1^Q
+"^DD",2006.563,2006.563,114,3)
+Use Importer?
+"^DD",2006.563,2006.563,114,21,0)
+^.001^1^1^3090422^^^^
+"^DD",2006.563,2006.563,114,21,1,0)
+Indicates whether or not the Importer is to be used on the DICOM Image Gateway.  
+"^DD",2006.563,2006.563,114,"DT")
+3080618
+"^DD",2006.563,2006.563,115,0)
+IMPORTER LOG^F^^IMPORTER LOG;1^K:$L(X)>200!($L(X)<1) X
+"^DD",2006.563,2006.563,115,3)
+Provide the Importer's directory path; answer must be 1-200 characters in length.
+"^DD",2006.563,2006.563,115,21,0)
+^.001^1^1^3090422^^^^
+"^DD",2006.563,2006.563,115,21,1,0)
+The value of this field is the directory where the summary importer reports are created.
+"^DD",2006.563,2006.563,115,"DT")
+3080618
+"^DD",2006.563,2006.563,116,0)
+IMPORTER DRIVE^F^^IMPORTER DRIVE;1^K:$L(X)>3!($L(X)<1) X
+"^DD",2006.563,2006.563,116,3)
+Enter the drive letter; answer must be 1-3 characters in length.
+"^DD",2006.563,2006.563,116,21,0)
+^.001^1^1^3090422^^^^
+"^DD",2006.563,2006.563,116,21,1,0)
+This is the CD/DVD drive letter that is used by the Importer application.
+"^DD",2006.563,2006.563,116,"DT")
+3080618
+"^DD",2006.563,2006.563,117,0)
+IMPORTER ORDER LOCATION^P44'^SC(^IMPORTER ORDER LOCATION;1^Q
+"^DD",2006.563,2006.563,117,3)
+Select the Hospital Location entry.
+"^DD",2006.563,2006.563,117,21,0)
+^.001^3^3^3090422^^^
+"^DD",2006.563,2006.563,117,21,1,0)
+This field records the last hospital location used when placing a study
+"^DD",2006.563,2006.563,117,21,2,0)
+order on the DICOM Gateway.  This location is used as a default for the
+"^DD",2006.563,2006.563,117,21,3,0)
+next case to facilitate the ordering process. 
+"^DD",2006.563,2006.563,117,"DT")
+3080618
+"^DD",2006.563,2006.563,118,0)
+IMPORTER ORDER LOCATION NAME^F^^IMPORTER ORDER LOCATION NAME;1^K:$L(X)>30!($L(X)<2) X
+"^DD",2006.563,2006.563,118,3)
+Enter the name of the last location used in the ordering process; answer must be 2-30 characters in length.
+"^DD",2006.563,2006.563,118,21,0)
+^.001^2^2^3091228^^
+"^DD",2006.563,2006.563,118,21,1,0)
+The actual Hospital Location name is copied to this field when IMPORTER 
+"^DD",2006.563,2006.563,118,21,2,0)
+ORDER LOCATION field (#117) is updated.
+"^DD",2006.563,2006.563,118,23,0)
+^^2^2^3091228^
+"^DD",2006.563,2006.563,118,23,1,0)
+DICOM Gateway stores a redundant copy of this location, so that it is 
+"^DD",2006.563,2006.563,118,23,2,0)
+available for display when a connection to VistA is not available.
+"^DD",2006.563,2006.563,118,"DT")
+3091228
+"^DD",2006.563,2006.563,119,0)
+IMPORTER ORDER PROVIDER^P200'^VA(200,^IMPORTER ORDER PROVIDER;1^Q
+"^DD",2006.563,2006.563,119,3)
+Select the provider for this order.
+"^DD",2006.563,2006.563,119,21,0)
+^^3^3^3091228^
+"^DD",2006.563,2006.563,119,21,1,0)
+This field records the last provider used when placing a study order on 
+"^DD",2006.563,2006.563,119,21,2,0)
+the DICOM Gateway.  This provider is used as a default to facilitate the 
+"^DD",2006.563,2006.563,119,21,3,0)
+next order process.
+"^DD",2006.563,2006.563,119,"DT")
+3091228
+"^DD",2006.563,2006.563,120,0)
+IMPORTER ORDER PROVIDER NAME^F^^IMPORTER ORDER PROVIDER NAME;1^K:$L(X)>35!($L(X)<1) X
+"^DD",2006.563,2006.563,120,3)
+Enter the name of the last ordering provider; answer must be 1-35 characters in length.
+"^DD",2006.563,2006.563,120,21,0)
+^.001^4^4^3090422^^^^
+"^DD",2006.563,2006.563,120,21,1,0)
+The actual Provider's name is copied to this field when IMPORTER ORDER
+"^DD",2006.563,2006.563,120,21,2,0)
+PROVIDER field (#119) is updated.
+"^DD",2006.563,2006.563,120,21,3,0)
+DICOM Gateway store a redundant copy of the provider name, so that it 
+"^DD",2006.563,2006.563,120,21,4,0)
+is available for display when a connection to VistA is not available.
+"^DD",2006.563,2006.563,120,"DT")
+3090408
+"^DD",2006.563,2006.563,121,0)
+IMPORTER RAD DICT DOWNLOAD^D^^IMPORTER RAD DICT DOWNLOAD;1^S %DT="ETXR" D ^%DT S X=Y K:Y<1 X
+"^DD",2006.563,2006.563,121,3)
+Enter the date and time when the Radiology dictionaries were last downloaded.
+"^DD",2006.563,2006.563,121,21,0)
+^.001^3^3^3090422^^^^
+"^DD",2006.563,2006.563,121,21,1,0)
+The value of this field is the date/time the Radiology Procedure and
+"^DD",2006.563,2006.563,121,21,2,0)
+Modifier dictionaries were last downloaded.  Downloading automatically occurs
+"^DD",2006.563,2006.563,121,21,3,0)
+the first time the Importer is used each day.
+"^DD",2006.563,2006.563,121,"DT")
+3080618
+"^DD",2006.563,2006.563,122,0)
+IMPORTER RAD CAMERA^P78.6^RA(78.6,^IMPORTER RAD CAMERA;1^Q
+"^DD",2006.563,2006.563,122,3)
+Select the camera/equip/rm for this order.
+"^DD",2006.563,2006.563,122,21,0)
+^^3^3^3091228^
+"^DD",2006.563,2006.563,122,21,1,0)
+This field records the last camera/equip/rm used when placing a study 
+"^DD",2006.563,2006.563,122,21,2,0)
+order on the DICOM Gateway.  The camera/equip/rm is used as a default for 
+"^DD",2006.563,2006.563,122,21,3,0)
+the next case to facilitate the ordering process.
+"^DD",2006.563,2006.563,122,"DT")
+3091228
+"^DD",2006.563,2006.563,123,0)
+IMPORTER RAD CAMERA NAME^F^^IMPORTER RAD CAMERA NAME;1^K:$L(X)>30!($L(X)<1) X
+"^DD",2006.563,2006.563,123,3)
+Enter the name of the last camera/equip/rm used by the Importer; answer must be 1-30 characters in length.
+"^DD",2006.563,2006.563,123,21,0)
+^.001^5^5^3090424^^^
+"^DD",2006.563,2006.563,123,21,1,0)
+The actual Camera/Equip/Rm name is copied to this field when IMPORTER RAD
+"^DD",2006.563,2006.563,123,21,2,0)
+CAMERA FIELD (#122) is updated.
+"^DD",2006.563,2006.563,123,21,3,0)
+ 
+"^DD",2006.563,2006.563,123,21,4,0)
+DICOM Gateway stores a redundant copy of the camera/equip/rm so that it is
+"^DD",2006.563,2006.563,123,21,5,0)
+available for display when a connection to VistA is not available.
+"^DD",2006.563,2006.563,123,"DT")
+3090424
+"^DD",2006.563,2006.563,124,0)
+IMPORTER RAD DX CODE^P78.3'^RA(78.3,^IMPORTER RAD DX CODE;1^Q
+"^DD",2006.563,2006.563,124,3)
+Select the diagnostic code for this order.
+"^DD",2006.563,2006.563,124,21,0)
+^.001^3^3^3090424^^^
+"^DD",2006.563,2006.563,124,21,1,0)
+This field records the last diagnostic code used when placing a study order
+"^DD",2006.563,2006.563,124,21,2,0)
+on the DICOM Gateway.  This location is used as a default for the next
+"^DD",2006.563,2006.563,124,21,3,0)
+case to facilitate the ordering process.
+"^DD",2006.563,2006.563,124,"DT")
+3090424
+"^DD",2006.563,2006.563,125,0)
+IMPORTER RAD DX CODE NAME^F^^IMPORTER RAD DX CODE NAME;1^K:$L(X)>60!($L(X)<1) X
+"^DD",2006.563,2006.563,125,3)
+Enter the name of the last diagnostic code used by the Importer; answer must be 1-60 characters in length.
+"^DD",2006.563,2006.563,125,21,0)
+^.001^6^6^3090424^^
+"^DD",2006.563,2006.563,125,21,1,0)
+The actual NAME OF THE DIAGNOSTIC CODE is copied to this field when
+"^DD",2006.563,2006.563,125,21,2,0)
+IMPORTER RAD DX CODE is updated.
+"^DD",2006.563,2006.563,125,21,3,0)
+ 
+"^DD",2006.563,2006.563,125,21,4,0)
+DICOM Gateway stores a redundant copy of the Radiology diagnostic code
+"^DD",2006.563,2006.563,125,21,5,0)
+so that it is available for display when a connection to VistA is not
+"^DD",2006.563,2006.563,125,21,6,0)
+available.
+"^DD",2006.563,2006.563,125,"DT")
+3090424
+"^DD",2006.563,2006.563,126,0)
+IMPORTER RAD FILM SIZE^P78.4'^RA(78.4,^IMPORTER RAD FILM SIZE;1^Q
+"^DD",2006.563,2006.563,126,3)
+Select the film size for this order.
+"^DD",2006.563,2006.563,126,21,0)
+^^3^3^3091228^
+"^DD",2006.563,2006.563,126,21,1,0)
+This field records the last film size used when placing a study order on 
+"^DD",2006.563,2006.563,126,21,2,0)
+the DICOM Gateway.  This film size will be used as a default for the next 
+"^DD",2006.563,2006.563,126,21,3,0)
+case to facilitate the ordering process.
+"^DD",2006.563,2006.563,126,"DT")
+3091228
+"^DD",2006.563,2006.563,127,0)
+IMPORTER RAD FILM SIZE NAME^F^^IMPORTER RAD FILM SIZE NAME;1^K:$L(X)>30!($L(X)<1) X
+"^DD",2006.563,2006.563,127,3)
+Enter the last film size used by the Importer; answer must be 1-30 characters in length.
+"^DD",2006.563,2006.563,127,21,0)
+^.001^5^5^3090506^^^^
+"^DD",2006.563,2006.563,127,21,1,0)
+The actual Film Size name is copied to this field when IMPORTER RAD FILM
+"^DD",2006.563,2006.563,127,21,2,0)
+SIZE field (#126) is updated.
+"^DD",2006.563,2006.563,127,21,3,0)
+ 
+"^DD",2006.563,2006.563,127,21,4,0)
+DICOM Gateway stores a redundant copy of this Film Size name so that it is
+"^DD",2006.563,2006.563,127,21,5,0)
+available for display when a connection to VistA is not available.
+"^DD",2006.563,2006.563,127,"DT")
+3090424
+"^DD",2006.563,2006.563,128,0)
+IMPORT RAD TECH^P200'^VA(200,^IMPORTER RAD TECH;1^Q
+"^DD",2006.563,2006.563,128,3)
+Select the Radiology technician for this order.
+"^DD",2006.563,2006.563,128,21,0)
+^.001^3^3^3090424^^
+"^DD",2006.563,2006.563,128,21,1,0)
+This field records the last Radiology technician used when placing a 
+"^DD",2006.563,2006.563,128,21,2,0)
+study order on the DICOM Gateway.  This technician will be used as the
+"^DD",2006.563,2006.563,128,21,3,0)
+default for the next case to facilitate the ordering process.
+"^DD",2006.563,2006.563,128,"DT")
+3090424
+"^DD",2006.563,2006.563,129,0)
+IMPORTER RAD TECH NAME^F^^IMPORTER RAD TECH NAME;1^K:$L(X)>35!($L(X)<1) X
+"^DD",2006.563,2006.563,129,3)
+Enter the last Radiology technician used by the Importer; answer must be 1-35 characters in length.
+"^DD",2006.563,2006.563,129,21,0)
+^.001^4^4^3090428^^
+"^DD",2006.563,2006.563,129,21,1,0)
+The actual Radiology technician name is copied to this field when the IMPORTER RAD TECH field (#128) is updated.
+"^DD",2006.563,2006.563,129,21,2,0)
+ 
+"^DD",2006.563,2006.563,129,21,3,0)
+DICOM Gateway stores a redundant copy of the technician name, so that it is
+"^DD",2006.563,2006.563,129,21,4,0)
+available for display when a connection to VistA is not available.
+"^DD",2006.563,2006.563,129,"DT")
+3090424
+"^DD",2006.563,2006.563,130,0)
+LOCATION STATION NUMBER^RF^^LOCATION STATION NUMBER;1^K:$L(X)>7!($L(X)<3)!'(X?3N.AN) X
+"^DD",2006.563,2006.563,130,3)
+Answer must be 3-7 characters in length.
+"^DD",2006.563,2006.563,130,21,0)
+^.001^4^4^3100820^^^^
+"^DD",2006.563,2006.563,130,21,1,0)
+This is the 3 digit station number plus any modifiers.
+"^DD",2006.563,2006.563,130,21,2,0)
+The value of this field is the same as the STATION NUMBER
+"^DD",2006.563,2006.563,130,21,3,0)
+field (#99) of the INSTITUTION file (#4), as pointed to by
+"^DD",2006.563,2006.563,130,21,4,0)
+the LOCATION field (#17) of this file.
+"^DD",2006.563,2006.563,130,"DT")
+3100702
+"^DD",2006.563,2006.563,200,0)
+LAST IMAGE SCANNED BY MAGKAT^P2005'I^MAG(2005,^SCAN;1^Q
+"^DD",2006.563,2006.563,200,3)
+
+"^DD",2006.563,2006.563,200,21,0)
+^.001^2^2^3100222^^
+"^DD",2006.563,2006.563,200,21,1,0)
+This is the last image scanned by the MAGKAT utility.  The MAGKAT utility 
+"^DD",2006.563,2006.563,200,21,2,0)
+will update this field as it processes images.
+"^DD",2006.563,2006.563,200,"DT")
+3100222
+"^DD",2006.563,2006.563,201,0)
+MAGKAT SCAN DIRECTION^SI^1:NEXT;-1:REVERSE;^SCAN;2^Q
+"^DD",2006.563,2006.563,201,3)
+
+"^DD",2006.563,2006.563,201,21,0)
+^.001^6^6^3100222^^
+"^DD",2006.563,2006.563,201,21,1,0)
+This field controls the scanning direction used by MAGKAT utility.  A
+"^DD",2006.563,2006.563,201,21,2,0)
+negative number (-1) will scan in reverse order and a '1' will scan for
+"^DD",2006.563,2006.563,201,21,3,0)
+the next image using the LAST IMAGE SCANNED BY MAGKAT (#200) field value.
+"^DD",2006.563,2006.563,201,21,4,0)
+ 
+"^DD",2006.563,2006.563,201,21,5,0)
+The MAGKAT utility will update this field as well as field #200 LAST 
+"^DD",2006.563,2006.563,201,21,6,0)
+IMAGE SCANNED BY MAGKAT.
+"^DD",2006.563,2006.563,201,"DT")
+3100222
+"^DD",2006.563,2006.563,202,0)
+AGENCY^S^V:VA;I:IHS;^AGENCY;1^Q
+"^DD",2006.563,2006.563,202,3)
+Which agency does the DICOM Gateway reside in?
+"^DD",2006.563,2006.563,202,21,0)
+^.001^1^1^3120608^^^
+"^DD",2006.563,2006.563,202,21,1,0)
+Identifies which agency the DICOM Gateway resides in. 
+"^DD",2006.563,2006.563,202,"DT")
+3120608
+"^DD",2006.563,2006.5631,0)
+DATA PATH SUB-FIELD^^2^3
+"^DD",2006.563,2006.5631,0,"DT")
+3010227
+"^DD",2006.563,2006.5631,0,"IX","B",2006.5631,.01)
+
+"^DD",2006.563,2006.5631,0,"NM","DATA PATH")
+
+"^DD",2006.563,2006.5631,0,"UP")
+2006.563
+"^DD",2006.563,2006.5631,.001,0)
+NUMBER^NJ3,0^^ ^K:+X'=X!(X>999)!(X<0)!(X?.E1"."1N.N) X
+"^DD",2006.563,2006.5631,.001,3)
+Enter the sequence number of this data channel.
+"^DD",2006.563,2006.5631,.001,21,0)
+^^2^2^3010227^^
+"^DD",2006.563,2006.5631,.001,21,1,0)
+The value of this field is an integer number that represents
+"^DD",2006.563,2006.5631,.001,21,2,0)
+the channel number of the data channel being described in this record.
+"^DD",2006.563,2006.5631,.001,"DT")
+3010227
+"^DD",2006.563,2006.5631,.01,0)
+CHANNEL^RNJ3,0X^^0;1^K:+X'=X!(X>999)!(X<0)!(X?.E1"."1N.N) X S:$D(X) DINUM=X
+"^DD",2006.563,2006.5631,.01,1,0)
+^.1
+"^DD",2006.563,2006.5631,.01,1,1,0)
+2006.5631^B
+"^DD",2006.563,2006.5631,.01,1,1,1)
+S ^MAGDICOM(2006.563,DA(1),"DATA PATH","B",$E(X,1,30),DA)=""
+"^DD",2006.563,2006.5631,.01,1,1,2)
+K ^MAGDICOM(2006.563,DA(1),"DATA PATH","B",$E(X,1,30),DA)
+"^DD",2006.563,2006.5631,.01,3)
+Enter the sequence number of this data channel.
+"^DD",2006.563,2006.5631,.01,21,0)
+^^2^2^3010227^^
+"^DD",2006.563,2006.5631,.01,21,1,0)
+The value of this field is an integer number that represents
+"^DD",2006.563,2006.5631,.01,21,2,0)
+the channel number of the data channel being described in this record.
+"^DD",2006.563,2006.5631,.01,"DT")
+3010227
+"^DD",2006.563,2006.5631,2,0)
+PATH^F^^0;2^K:$L(X)>50!($L(X)<1) X
+"^DD",2006.563,2006.5631,2,3)
+Enter the directory-prefix for this data channel.
+"^DD",2006.563,2006.5631,2,21,0)
+^^4^4^3010227^^
+"^DD",2006.563,2006.5631,2,21,1,0)
+The value of this field is the 'path-prefix'
+"^DD",2006.563,2006.5631,2,21,2,0)
+that needs to be applied to gain access to the
+"^DD",2006.563,2006.5631,2,21,3,0)
+files that are created to implement the FIFO
+"^DD",2006.563,2006.5631,2,21,4,0)
+queues.
+"^DD",2006.563,2006.5631,2,"DT")
+3010227
+"^DD",2006.563,2006.5632,0)
+PROFILE SUB-FIELD^^4^4
+"^DD",2006.563,2006.5632,0,"DT")
+3040303
+"^DD",2006.563,2006.5632,0,"IX","B",2006.5632,.01)
+
+"^DD",2006.563,2006.5632,0,"NM","PROFILE")
+
+"^DD",2006.563,2006.5632,0,"UP")
+2006.563
+"^DD",2006.563,2006.5632,.01,0)
+USER^NJ12,0^^0;1^K:+X'=X!(X>999999999999)!(X<0)!(X?.E1"."1N.N) X
+"^DD",2006.563,2006.5632,.01,1,0)
+^.1
+"^DD",2006.563,2006.5632,.01,1,1,0)
+2006.5632^B
+"^DD",2006.563,2006.5632,.01,1,1,1)
+S ^MAGDICOM(2006.563,DA(1),"PROFILE","B",$E(X,1,30),DA)=""
+"^DD",2006.563,2006.5632,.01,1,1,2)
+K ^MAGDICOM(2006.563,DA(1),"PROFILE","B",$E(X,1,30),DA)
+"^DD",2006.563,2006.5632,.01,3)
+Enter a number that uniquely identifies this user.
+"^DD",2006.563,2006.5632,.01,21,0)
+^.001^3^3^3021002^^
+"^DD",2006.563,2006.5632,.01,21,1,0)
+The value of this field is an integer number that identifies a user.
+"^DD",2006.563,2006.5632,.01,21,2,0)
+The value for this field is copied from the value of "DUZ" (user number)
+"^DD",2006.563,2006.5632,.01,21,3,0)
+on the VistA system where this number is registered.
+"^DD",2006.563,2006.5632,.01,"DT")
+3021002
+"^DD",2006.563,2006.5632,1,0)
+ACCESS LEVEL^S^1:Full Access;2:View Only Access;^0;2^Q
+"^DD",2006.563,2006.5632,1,3)
+Indicate the access level for this user.
+"^DD",2006.563,2006.5632,1,21,0)
+^^5^5^3021002^
+"^DD",2006.563,2006.5632,1,21,1,0)
+The value of this field is a code that identifies the
+"^DD",2006.563,2006.5632,1,21,2,0)
+access level (on the DICOM Gateway) for the current user.
+"^DD",2006.563,2006.5632,1,21,3,0)
+ 
+"^DD",2006.563,2006.5632,1,21,4,0)
+On a DICOM Gateway, a user can have full access (value is 1)
+"^DD",2006.563,2006.5632,1,21,5,0)
+or view only access (value is 2).
+"^DD",2006.563,2006.5632,1,"DT")
+3021002
+"^DD",2006.563,2006.5632,2,0)
+VISTA ACCESS INFO^F^^0;3^K:$L(X)>63!($L(X)<1) X
+"^DD",2006.563,2006.5632,2,3)
+Enter access information for this user.
+"^DD",2006.563,2006.5632,2,21,0)
+^^3^3^3021002^
+"^DD",2006.563,2006.5632,2,21,1,0)
+The value of this field, which is stored in an encrypted
+"^DD",2006.563,2006.5632,2,21,2,0)
+fashion, is a string that is passed to a VistA system as
+"^DD",2006.563,2006.5632,2,21,3,0)
+the access and verify codes for the current user.
+"^DD",2006.563,2006.5632,2,"DT")
+3021002
+"^DD",2006.563,2006.5632,4,0)
+VISTA SERVICE ACCOUNT^F^^0;4^K:$L(X)>63!($L(X)<1) X
+"^DD",2006.563,2006.5632,4,3)
+Enter the (encrypted) service credentials.
+"^DD",2006.563,2006.5632,4,21,0)
+^^11^11^3040303^
+"^DD",2006.563,2006.5632,4,21,1,0)
+The value of this field is a string containing encrypted data.
+"^DD",2006.563,2006.5632,4,21,2,0)
+This value contains the access and verify codes that the DICOM Gateway
+"^DD",2006.563,2006.5632,4,21,3,0)
+is allowed to use as a "service account" when the credentials that
+"^DD",2006.563,2006.5632,4,21,4,0)
+were provided by the end-user during login expire during the course
+"^DD",2006.563,2006.5632,4,21,5,0)
+of the session.
+"^DD",2006.563,2006.5632,4,21,6,0)
+ 
+"^DD",2006.563,2006.5632,4,21,7,0)
+This field is automatically populated when an end-user successfully
+"^DD",2006.563,2006.5632,4,21,8,0)
+logs in on a DICOM Gateway.
+"^DD",2006.563,2006.5632,4,21,9,0)
+ 
+"^DD",2006.563,2006.5632,4,21,10,0)
+When a site decides not to have such a service account, the value
+"^DD",2006.563,2006.5632,4,21,11,0)
+of this field will be an encrypted value for the string ";".
+"^DD",2006.563,2006.5632,4,"DT")
+3040303
+"^DD",2006.563,2006.5633,0)
+PACS QUERY SUB-FIELD^^2^2
+"^DD",2006.563,2006.5633,0,"DT")
+3040303
+"^DD",2006.563,2006.5633,0,"IX","B",2006.5633,.01)
+
+"^DD",2006.563,2006.5633,0,"NM","PACS QUERY")
+
+"^DD",2006.563,2006.5633,0,"UP")
+2006.563
+"^DD",2006.563,2006.5633,.01,0)
+PACS QUERY START^F^^0;1^K:$L(X)>20!($L(X)<1) X
+"^DD",2006.563,2006.5633,.01,1,0)
+^.1
+"^DD",2006.563,2006.5633,.01,1,1,0)
+2006.5633^B
+"^DD",2006.563,2006.5633,.01,1,1,1)
+S ^MAGDICOM(2006.563,DA(1),"GE CONV #HRS","B",$E(X,1,30),DA)=""
+"^DD",2006.563,2006.5633,.01,1,1,2)
+K ^MAGDICOM(2006.563,DA(1),"GE CONV #HRS","B",$E(X,1,30),DA)
+"^DD",2006.563,2006.5633,.01,3)
+Indicate when this query session started.
+"^DD",2006.563,2006.5633,.01,21,0)
+^.001^3^3^3040303^^
+"^DD",2006.563,2006.5633,.01,21,1,0)
+The value of this field is a timestamp ($HOROLOG) that
+"^DD",2006.563,2006.5633,.01,21,2,0)
+indicates the date and time when a PACS query process
+"^DD",2006.563,2006.5633,.01,21,3,0)
+was started.
+"^DD",2006.563,2006.5633,.01,"DT")
+3040303
+"^DD",2006.563,2006.5633,2,0)
+PACS QUERY END^F^^1;1^K:$L(X)>20!($L(X)<1) X
+"^DD",2006.563,2006.5633,2,3)
+Indicate when this query ended.
+"^DD",2006.563,2006.5633,2,21,0)
+^^7^7^3040303^
+"^DD",2006.563,2006.5633,2,21,1,0)
+The value of this field is a timestamp ($HOROLOG) that
+"^DD",2006.563,2006.5633,2,21,2,0)
+indicates the date and time when a PACS query process
+"^DD",2006.563,2006.5633,2,21,3,0)
+completed.
+"^DD",2006.563,2006.5633,2,21,4,0)
+  
+"^DD",2006.563,2006.5633,2,21,5,0)
+Note: when a PACS query process was terminated as a side-effect
+"^DD",2006.563,2006.5633,2,21,6,0)
+of a system-shut-down operation, no completion time
+"^DD",2006.563,2006.5633,2,21,7,0)
+will be recorded.
+"^DD",2006.563,2006.5633,2,"DT")
+3040303
+"^DD",2006.563,2006.5634,0)
+INSTALLATION SUB-FIELD^^1^2
+"^DD",2006.563,2006.5634,0,"DT")
+3021212
+"^DD",2006.563,2006.5634,0,"NM","INSTALLATION")
+
+"^DD",2006.563,2006.5634,0,"UP")
+2006.563
+"^DD",2006.563,2006.5634,.01,0)
+INSTALLATION^F^^0;1^K:$L(X)>14!($L(X)<3)!'(X?1.N1"."1.5N) X
+"^DD",2006.563,2006.5634,.01,1,0)
+^.1^^0
+"^DD",2006.563,2006.5634,.01,3)
+Enter the time-stamp ($H-format) for this installation.
+"^DD",2006.563,2006.5634,.01,21,0)
+^.001^3^3^3021212^^
+"^DD",2006.563,2006.5634,.01,21,1,0)
+The value of this field is a time-stamp (in $Horolog-format) that
+"^DD",2006.563,2006.5634,.01,21,2,0)
+identifies the date and time when the current installation of
+"^DD",2006.563,2006.5634,.01,21,3,0)
+software on the current DICOM Gateway completed.
+"^DD",2006.563,2006.5634,.01,"DT")
+3021212
+"^DD",2006.563,2006.5634,1,0)
+COMMENT^F^^0;2^K:$L(X)>60!($L(X)<1) X
+"^DD",2006.563,2006.5634,1,3)
+Enter a comment that identifies this installation.
+"^DD",2006.563,2006.5634,1,21,0)
+^^2^2^3021212^
+"^DD",2006.563,2006.5634,1,21,1,0)
+The value of this field is a text that describes the
+"^DD",2006.563,2006.5634,1,21,2,0)
+software that was installed.
+"^DD",2006.563,2006.5634,1,"DT")
+3021212
+"^DD",2006.563,2006.5635,0)
+WORKLIST PORT SUB-FIELD^^.01^1
+"^DD",2006.563,2006.5635,0,"DT")
+3051028
+"^DD",2006.563,2006.5635,0,"IX","B",2006.5635,.01)
+
+"^DD",2006.563,2006.5635,0,"NM","WORKLIST PORT")
+
+"^DD",2006.563,2006.5635,0,"UP")
+2006.563
+"^DD",2006.563,2006.5635,.01,0)
+WORKLIST PORT^NJ5,0^^0;1^K:+X'=X!(X>65535)!(X<1)!(X?.E1"."1N.N) X
+"^DD",2006.563,2006.5635,.01,1,0)
+^.1
+"^DD",2006.563,2006.5635,.01,1,1,0)
+2006.5635^B
+"^DD",2006.563,2006.5635,.01,1,1,1)
+S ^MAGDICOM(2006.563,DA(1),"WORKLIST PORT","B",$E(X,1,30),DA)=""
+"^DD",2006.563,2006.5635,.01,1,1,2)
+K ^MAGDICOM(2006.563,DA(1),"WORKLIST PORT","B",$E(X,1,30),DA)
+"^DD",2006.563,2006.5635,.01,3)
+Enter a TCP/IP port number (between 1 and 65536).
+"^DD",2006.563,2006.5635,.01,21,0)
+^^3^3^3051028^
+"^DD",2006.563,2006.5635,.01,21,1,0)
+The value of this field is an integer number that identifies
+"^DD",2006.563,2006.5635,.01,21,2,0)
+the TCP/IP port that will be used by DICOM WorkList processes
+"^DD",2006.563,2006.5635,.01,21,3,0)
+to post their requests and obtain their results.
+"^DD",2006.563,2006.5635,.01,"DT")
+3051028
+"^DIC",2006.563,2006.563,0)
+DICOM GATEWAY PARAMETER^2006.563
+"^DIC",2006.563,2006.563,0,"GL")
+^MAGDICOM(2006.563,
+"^DIC",2006.563,2006.563,"%",0)
+^1.005^^0
+"^DIC",2006.563,2006.563,"%D",0)
+^^24^24^3020815^
+"^DIC",2006.563,2006.563,"%D",1,0)
+ +---------------------------------------------------------------+
+"^DIC",2006.563,2006.563,"%D",2,0)
+ |                                                               |
+"^DIC",2006.563,2006.563,"%D",3,0)
+ | Property of the US Government.                                |
+"^DIC",2006.563,2006.563,"%D",4,0)
+ | No permission to copy or redistribute this software is given. |
+"^DIC",2006.563,2006.563,"%D",5,0)
+ | Use of unreleased versions of this software requires the user |
+"^DIC",2006.563,2006.563,"%D",6,0)
+ | to execute a written test agreement with the VistA Imaging    |
+"^DIC",2006.563,2006.563,"%D",7,0)
+ | Development Office of the Department of Veterans Affairs,     |
+"^DIC",2006.563,2006.563,"%D",8,0)
+ | telephone (301) 734-0100.                                     |
+"^DIC",2006.563,2006.563,"%D",9,0)
+ |                                                               |
+"^DIC",2006.563,2006.563,"%D",10,0)
+ | The Food and Drug Administration classifies this software as  |
+"^DIC",2006.563,2006.563,"%D",11,0)
+ | a medical device.  As such, it may not be changed in any way. |
+"^DIC",2006.563,2006.563,"%D",12,0)
+ | Modifications to this software may result in an adulterated   |
+"^DIC",2006.563,2006.563,"%D",13,0)
+ | medical device under 21CFR820, the use of which is considered |
+"^DIC",2006.563,2006.563,"%D",14,0)
+ | to be a violation of US Federal Statutes.                     |
+"^DIC",2006.563,2006.563,"%D",15,0)
+ |                                                               |
+"^DIC",2006.563,2006.563,"%D",16,0)
+ +---------------------------------------------------------------+
+"^DIC",2006.563,2006.563,"%D",17,0)
+ 
+"^DIC",2006.563,2006.563,"%D",18,0)
+This table contains only one entry.
+"^DIC",2006.563,2006.563,"%D",19,0)
+The information in this entry defines the customization for the DICOM
+"^DIC",2006.563,2006.563,"%D",20,0)
+Gateway Processor on which this table is stored.
+"^DIC",2006.563,2006.563,"%D",21,0)
+Note that some site-specific parameters apply to the whole site, those
+"^DIC",2006.563,2006.563,"%D",22,0)
+parameters are stored in the table "IMAGING SITE PARAMETERS", and other
+"^DIC",2006.563,2006.563,"%D",23,0)
+parameters apply to the individual PCs. The latter parameters are stored
+"^DIC",2006.563,2006.563,"%D",24,0)
+in this table.
+"^DIC",2006.563,"B","DICOM GATEWAY PARAMETER",2006.563)
+
+**END**
+**END**

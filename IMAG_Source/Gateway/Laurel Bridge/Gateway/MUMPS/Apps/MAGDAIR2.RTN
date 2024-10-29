@@ -1,0 +1,255 @@
+Cache for Windows NT^INT^Saved from DICOM (ISW-KUZMAKP3-LT)^~Format=Cache.S~
+%RO on 09/14/2012  16:13
+MAGDAIR2^INT^1^62714,58323^0
+MAGDAIR2 ;WOIFO/PMK - Automatic Import Reconciliation Workflow ; 14 Sep 2012 4:12 PM
+ ;;3.0;IMAGING;**53,110**;Mar 19, 2002;Build 48;Aug 23, 2012
+ ;; Per VHA Directive 2004-038, this routine should not be modified.
+ ;; +---------------------------------------------------------------+
+ ;; | Property of the US Government.                                |
+ ;; | No permission to copy or redistribute this software is given. |
+ ;; | Use of unreleased versions of this software requires the user |
+ ;; | to execute a written test agreement with the VistA Imaging    |
+ ;; | Development Office of the Department of Veterans Affairs,     |
+ ;; | telephone (301) 734-0100.                                     |
+ ;; | The Food and Drug Administration classifies this software as  |
+ ;; | a medical device.  As such, it may not be changed in any way. |
+ ;; | Modifications to this software may result in an adulterated   |
+ ;; | medical device under 21CFR820, the use of which is considered |
+ ;; | to be a violation of US Federal Statutes.                     |
+ ;; +---------------------------------------------------------------+
+ ;;
+ ;
+ORDERING(REQPHYS,REQLOC) ; get ordering provider and ordering location 
+ N NAME,X
+ ; get ordering provider
+ S REQPHYS=$G(^MAGDICOM(2006.563,1,"IMPORTER ORDER PROVIDER"))
+ I REQPHYS D
+ . S NAME=$G(^MAGDICOM(2006.563,1,"IMPORTER ORDER PROVIDER NAME"))
+ . S X="Ordering Provider: "_$$HIGHLITE^MAGDAIR0("YELLOW",NAME)_"   Change it?"
+ . I $$YESNO^MAGDAIR0(X,"n",.X)<0 Q
+ . Q
+ E  S X="YES"
+ I X="YES" D
+ . S REQPHYS=$$GETPROV^MAGDAIRR(.NAME) Q:REQPHYS<0
+ . S ^MAGDICOM(2006.563,1,"IMPORTER ORDER PROVIDER")=REQPHYS
+ . S ^MAGDICOM(2006.563,1,"IMPORTER ORDER PROVIDER NAME")=NAME
+ . Q
+ ;
+ ; get ordering location
+ S REQLOC=$G(^MAGDICOM(2006.563,1,"IMPORTER ORDER LOCATION"))
+ I REQLOC D
+ . S NAME=$G(^MAGDICOM(2006.563,1,"IMPORTER ORDER LOCATION NAME"))
+ . S X="Ordering Location: "_$$HIGHLITE^MAGDAIR0("YELLOW",NAME)_"   Change it?"
+ . I $$YESNO^MAGDAIR0(X,"n",.X)<0 Q
+ . Q
+ E  S X="YES"
+ I X="YES" D
+ . S REQLOC=$$GETLOC^MAGDAIRR(.NAME) Q:REQLOC<0
+ . S ^MAGDICOM(2006.563,1,"IMPORTER ORDER LOCATION")=REQLOC
+ . S ^MAGDICOM(2006.563,1,"IMPORTER ORDER LOCATION NAME")=NAME
+ . Q
+ Q
+ ;
+ ;
+ ;
+DRIVE(DRIVE) ; get importation device
+ N X
+ S DRIVE=$G(^MAGDICOM(2006.563,1,"IMPORTER DRIVE"))
+ I DRIVE'="" D
+ . S X="CD/DVD Import Drive: "_$$HIGHLITE^MAGDAIR0("YELLOW",DRIVE)_"   Change it?"
+ . I $$YESNO^MAGDAIR0(X,"n",.X)<0 Q
+ . Q
+ E  S X="YES"
+ I X="YES" D
+ . N DONE
+ . S DONE=0 F  D  Q:DONE
+ . . W !,"Please enter the CD/DVD Import Drive letter or path: "
+ . . R DRIVE:DTIME E  S DRIVE="^"
+ . . I DRIVE?1"^".E S DONE=-1 Q
+ . . I DRIVE?1"?".E D  Q
+ . . . W !,"Enter the letter or path for the CD/DVD Import Drive.",!
+ . . . Q
+ . . I DRIVE?1A S DRIVE=DRIVE_":"
+ . . S ^MAGDICOM(2006.563,1,"IMPORTER DRIVE")=DRIVE
+ . . S DONE=1
+ . . Q
+ . Q
+ Q 
+ ;
+ ;
+ ;
+SELECT(STUDYCNT) ; select studies to export
+ N DFN ;------ internal entry number for patient
+ N DOB ;------ patient date of birth
+ N PID ;------ patient identifier (ssn)
+ N PNAMEDCM ;- patient name in DICOM format
+ N SEX ;------ sex of patient
+ N STUDYN ;--- number of selected study
+ N VAICN ;---- VA integration control number
+ N DONE,OK,X
+ ;
+ S OK=0 F  D  Q:OK
+ . S STUDYN=$$SELSTUDY^MAGDAIR3(STUDYCNT,0)
+ . I STUDYN=0 Q  ; could not select study or procedure
+ . I STUDYN=-1 S OK=1 Q
+ . I STUDYN<0 S OK=STUDYN Q
+ . I $P($G(^TMP("MAG",$J,"IMPORT","LIST",STUDYN,"STUDY")),"^",5)="UID" D ONFILE Q
+ . I ORDERED D ORDERED Q
+ . D UNORDER
+ . Q
+ Q OK
+ ;
+UNORDER ; get procedure, patient, ordering provider, and ordering location
+ ; select the procedure for automatic ordering
+ N DATA,DFN,DOB,MODALITY,MODLIST,PID,PNAMEDCM,RADCACHE,RADPROC
+ N SEX,STUDYDAT,STUDYDES,X,VAICN,Z
+ N MAGDICOM
+ ;
+ ; get study description, modalities, and number of images
+ S X=$$GETDATA^MAGDAIRD(STUDYN,"LIST",.DATA)
+ ;
+ ; select the VA patient
+ S DFN=$$PATIENT^MAGDAIRP(.PNAMEDCM,.PID,.DOB,.SEX,.VAICN)
+ I DFN=0 Q
+ I '$$PATCHECK^MAGDAIRW(DFN) Q
+ W !
+ ;
+ S RADCACHE=""
+ S (MODLIST,MODALITY)=""
+ F  S MODALITY=$O(^TMP("MAG",$J,"IMPORT","LIST",STUDYN,"MOD",MODALITY)) Q:MODALITY=""  D
+ . I MODLIST'="" S MODLIST=MODLIST_" "
+ . S X=^TMP("MAG",$J,"IMPORT","LIST",STUDYN,"MOD",MODALITY)
+ . S MODLIST=MODLIST_MODALITY_"="_$S(X<10:X,1:"*")
+ . Q
+ I DATA("STUDYDES")="" S RADCACHE=""
+ E  S RADCACHE=$G(RADCACHE(DATA("STUDYDES"),MODLIST))
+ I RADCACHE'="" D
+ . S RADPROC=$P(RADCACHE,"^",1),MODIFIER=$P(RADCACHE,"^",2,999)
+ . S Z=$O(^MAGDICOM(2006.5758,"C",RADPROC,""))
+ . S STUDYDES=$P(^MAGDICOM(2006.5758,Z,0),"^",1)
+ . S X="Use Radiology Procedure """_STUDYDES
+ . I MODIFIER'="" D
+ . . N I
+ . . F I=1:1:$L(MODIFIER,"^") S X=X_", "_$P($P(MODIFIER,"^",I),"|",1)
+ . . Q
+ . S X=X_""""
+ . I $$YESNO^MAGDAIR0(X,"y",.X)<0 S RADCACHE="" Q
+ . I X="NO" S RADCACHE=""
+ . Q
+ ;
+ I RADCACHE="" D  Q:'RADPROC
+ . ; select the radiology procedure
+ . S RADPROC=$$SELECT^MAGDAIRR
+ . ; select the radiology procedure
+ . I 'RADPROC Q
+ . ;
+ . S Z=$O(^MAGDICOM(2006.5758,"C",RADPROC,""))
+ . S MAGDICOM=$G(^MAGDICOM(2006.5758,Z,0))
+ . S RAMLC=$P(MAGDICOM,"^",7)
+ . S RAIMGTYP=$P(MAGDICOM,"^",5)
+ . ;
+ . ;Select Radiology Modifiers
+ . S MODIFIER=$$SELMODS^MAGDAIRR(RAIMGTYP)
+ . Q
+ ;
+ ; final patient/study/procedure verificaition
+ S Z=$O(^MAGDICOM(2006.5758,"C",RADPROC,""))
+ S (ACNUMB,STUDYDAT)="",STUDYDES=$P(^MAGDICOM(2006.5758,Z,0),"^",1)
+ S X=$$VERIFY^MAGDAIRW(DFN,STUDYN,PNAMEDCM,PID,DOB,SEX,ACNUMB,STUDYDAT,STUDYDES,MODIFIER)
+ I X'=1 Q
+ S ^TMP("MAG",$J,"IMPORT","LIST",STUDYN,"RADPROC")=RADPROC_"^"_MODIFIER
+ I DATA("STUDYDES")'="" S RADCACHE(DATA("STUDYDES"),MODLIST)=RADPROC_"^"_MODIFIER
+ D SAVEDATA(DFN,STUDYN,PNAMEDCM,PID,DOB,SEX,VAICN)
+ I $G(^TMP("MAG",$J,"IMPORT","LIST",STUDYN,"DUP UID")) D
+ . W $$HIGHLITE^MAGDAIR0("YELLOW")
+ . W !!,"Because this study's Study Instance UID is already in use on VistA for other studies,"
+ . W !,"it will receive a new unique Study Instance UID when it is stored on VistA."
+ . W $$HIGHLITE^MAGDAIR0
+ . D CONTINUE^MAGDAIR0
+ . Q
+ ;
+ ; get ordering provider and ordering location
+ Q
+ ;
+ORDERED ; study and patient are selected from MWL or Radiology Order file
+ N DFN,PNAMEDCM,PID,DOB,SEX,VAICN,ACNUMB,LOOKUP,STUDYDAT,RACNI,RADFN,RADPROC,RADTI,IMAGLOCN,PROCNAME,MODIFIER,X
+ S LOOKUP=""
+ I ORIGINDX="F" D
+ . N OPTION
+ . S OPTION(1)="Modality Worklist"
+ . S OPTION(2)="Radiology Order file"
+ . I $$CHOOSE^MAGDAIR0("Use Modality Worklist or look up in Radiology Order file","r",.LOOKUP,.OPTION)
+ . Q
+ ;
+ I LOOKUP="Radiology Order file" D
+ . D ORDEREDR ; look up in Radiology Order file
+ . Q
+ E  D ORDEREDM ; use Modality Worklist
+ ;
+ I (DFN=0)!(STUDYN=0) D CONTINUE^MAGDAIR0 Q  ; no VA study selected
+ ;
+ ; ask the "VA Radiologist read" question only for fee basis studies
+ I $$GMRCIEN^MAGDFCNS(ACNUMB) Q  ; not applicable for consults
+ I ORIGINDX'="F" S X="YES" ; assume a VA Radiology will read a DICOM Correct Study
+ E  I $$YESNO^MAGDAIR0("Will a VA Radiologist read this study?","N",.X)<0 S X="YES"
+ I X="YES" S ^TMP("MAG",$J,"IMPORT","LIST",STUDYN,"VA READ")=""
+ Q
+ ;
+ORDEREDR ; look up ordered study in the Radiology Order file
+ ; select the VA patient
+ S DFN=$$PATIENT^MAGDAIRP(.PNAMEDCM,.PID,.DOB,.SEX,.VAICN)
+ I DFN=0 Q
+ I '$$PATCHECK^MAGDAIRW(DFN) S DFN=0 Q
+ I '$$ORDERS^MAGDAIRA(DFN,.ACNUMB,.STUDYDAT,.RADPROC,.PROCNAME,.MODIFIER,.RADTI,.RACNI,.RAOIEN,.IMAGLOCN) S STUDYN=0 Q
+ D SAVEDATA(DFN,STUDYN,PNAMEDCM,PID,DOB,SEX,VAICN,ACNUMB,STUDYDAT,PROCNAME,MODIFIER,"Radiology Order File",0,RADTI,RACNI,IMAGLOCN,RAOIEN)
+ S ^TMP("MAG",$J,"IMPORT","LIST",STUDYN,"RADPROC")=RADPROC_"^"_MODIFIER
+ Q
+ ;
+ORDEREDM ; look up ordered study using Modality Worklist
+ N INFO
+ S X=$$WORKLIST^MAGDAIRW(.DFN,.PNAMEDCM,.PID,.DOB,.SEX,.VAICN,.ACNUMB,.STUDYDAT,.RADPROC,.PROCNAME,.MODIFIER)
+ I X'=1 S DFN=0 W !!,"Worklist study not accepted - push [Enter] " R X:DTIME Q
+ D SAVEDATA(DFN,STUDYN,PNAMEDCM,PID,DOB,SEX,VAICN,ACNUMB,STUDYDAT,PROCNAME,MODIFIER,"MWL")
+ I $$GMRCIEN^MAGDFCNS(ACNUMB) Q  ; don't do additional radiology processing for consults
+ S ^TMP("MAG",$J,"IMPORT","LIST",STUDYN,"RADPROC")=RADPROC_"^"_MODIFIER
+ S X=$$CALLRPC^MAGM2VCU("MAG DICOM GET RAD INFO BY ACN","M",.INFO,ACNUMB)
+ I INFO<0 D  Q
+ . D ERRORMSG^MAGDAIR0(1,"Error in MAG DICOM GET RAD INFO BY ACN rpc",.INFO)
+ . Q
+ S RADFN=$P(INFO(1),"^",2),RADTI=$P(INFO(1),"^",3)
+ S RACNI=$P(INFO(1),"^",4),IMAGLOCN=$P(INFO(1),"^",5)
+ I RADFN'=DFN D
+ . N MSG
+ . S MSG(1)="Patient mismatch for Radiology Accession Number "_ACNUMB
+ . S MSG(2)="Modality Worklist DFN = "_DFN_"   Radiology DFN = "_RADFN
+ . D WARNING^MAGDFCNS(.MSG)
+ . Q
+ D SAVEDATA(DFN,STUDYN,PNAMEDCM,PID,DOB,SEX,VAICN,ACNUMB,STUDYDAT,PROCNAME,MODIFIER,"MWL",0,RADTI,RACNI,IMAGLOCN)
+ Q
+ ;
+ONFILE ;
+ N MSG
+ S MSG(1)="The study is on file."
+ S MSG(2)="This is an unusual situation and is probably due to an error."
+ D ERRORMSG^MAGDAIR0(1,"Error in Study Status",.MSG)
+ Q
+ ;
+SAVEDATA(DFN,STUDYN,PNAMEDCM,PID,DOB,SEX,VAICN,ACNUMB,STUDYDAT,PROCNAME,MODIFIER,TYPE,DUPUID,RADTI,RACNI,IMAGLOCN,RAOIEN) ;
+ N X
+ S X=$TR(PNAMEDCM,"^","|")_"^"_PID_"^"_DOB_"^"_SEX_"^"_VAICN
+ S ^TMP("MAG",$J,"IMPORT","PATIENT",DFN)=X
+ S ^TMP("MAG",$J,"IMPORT","LIST",STUDYN,"PATIENT")=DFN
+ Q:'$D(ACNUMB)  ; from MWL for ordered studies or Study UID lookup
+ D SAVESTDY(STUDYN,ACNUMB,.STUDYDAT,.PROCNAME,.MODIFIER,.TYPE,.RADTI,.RACNI,.IMAGLOCN,.RAOIEN)
+ I $G(DUPUID) M ^TMP("MAG",$J,"IMPORT","LIST",STUDYN,"DUP UID")=DUPUID
+ Q
+ ;
+SAVESTDY(STUDYN,ACNUMB,STUDYDAT,PROCNAME,MODIFIER,TYPE,RADTI,RACNI,IMAGLOCN,RAOIEN) ;
+ N X
+ S X=ACNUMB_"^"_$G(STUDYDAT)_"^"_$G(PROCNAME)_"^"_$G(MODIFIER)
+ S X=X_"^"_TYPE_"^"_$G(RADTI)_"^"_$G(RACNI)_"^"_$G(IMAGLOCN)_"^"_$G(RAOIEN)
+ S ^TMP("MAG",$J,"IMPORT","LIST",STUDYN,"STUDY")=X
+ Q
+
+
+

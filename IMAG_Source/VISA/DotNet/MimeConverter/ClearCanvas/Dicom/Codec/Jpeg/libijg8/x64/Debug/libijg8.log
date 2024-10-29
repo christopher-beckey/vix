@@ -1,0 +1,77 @@
+﻿cl : command line warning D9035: option 'Gm' has been deprecated and will be removed in a future release
+  jutils.c
+  jquant2.c
+  jquant1.c
+  jmemnobs.c
+  jmemmgr.c
+C:\usr\Hydra4\ClearCanvas\Dicom\Codec\Jpeg\libijg8\jmemmgr.c(315,53): warning C4267: '+=': conversion from 'size_t' to 'long', possible loss of data
+C:\usr\Hydra4\ClearCanvas\Dicom\Codec\Jpeg\libijg8\jmemmgr.c(375,70): warning C4267: '+=': conversion from 'size_t' to 'long', possible loss of data
+C:\usr\Hydra4\ClearCanvas\Dicom\Codec\Jpeg\libijg8\jmemmgr.c(1037,46): warning C4267: '-=': conversion from 'size_t' to 'long', possible loss of data
+C:\usr\Hydra4\ClearCanvas\Dicom\Codec\Jpeg\libijg8\jmemmgr.c(1051,46): warning C4267: '-=': conversion from 'size_t' to 'long', possible loss of data
+  jidctred.c
+  jidctint.c
+  jidctfst.c
+  jidctflt.c
+  jfdctint.c
+  jfdctfst.c
+  jfdctflt.c
+  jerror.c
+  jdtrans.c
+  jdshuff.c
+  jdscale.c
+  jdsample.c
+  jdpred.c
+  jdpostct.c
+  jdphuff.c
+  Generating Code...
+  Compiling...
+  jdmerge.c
+  jdmaster.c
+  jdmarker.c
+  jdmainct.c
+  jdlossy.c
+  jdlossls.c
+  jdlhuff.c
+  jdinput.c
+  jdhuff.c
+  jddiffct.c
+  jddctmgr.c
+  jdcolor.c
+  jdcoefct.c
+  jdatasrc.c
+  jdatadst.c
+  jdarith.c
+  jdapistd.c
+  jdapimin.c
+  jctrans.c
+  jcshuff.c
+  Generating Code...
+  Compiling...
+  jcscale.c
+  jcsample.c
+  jcprepct.c
+  jcpred.c
+  jcphuff.c
+  jcparam.c
+  jcomapi.c
+  jcodec.c
+  jcmaster.c
+  jcmarker.c
+  jcmainct.c
+  jclossy.c
+  jclossls.c
+  jclhuff.c
+  jcinit.c
+  jchuff.c
+  jcdiffct.c
+  jcdctmgr.c
+  jccolor.c
+  jccoefct.c
+  Generating Code...
+  Compiling...
+  jcarith.c
+  jcapistd.c
+  jcapimin.c
+  jaricom.c
+  Generating Code...
+  libijg8.vcxproj -> C:\usr\Hydra4\ClearCanvas\Dicom\Codec\Jpeg\libijg8\x64\Debug\libijg8.lib

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">	
+	<PropertyGroup>
+		<Version>3.0</Version>
+		<RootDir>E:\Builds\</RootDir>
+		<ProjectName>TeleReader\</ProjectName>
+		<PatchNumber>127</PatchNumber>
+		<BaseVersion>30.50.$(PatchNumber)</BaseVersion>
+		<TempDelete>false</TempDelete>
+		<TestNumber>11</TestNumber>
+		<PatchFolderName>V$(Version)p$(PatchNumber)Build$(BuildNumber)</PatchFolderName>
+		<FullBuildPath>$(RootDir)$(ProjectName)$(PatchFolderName)</FullBuildPath>
+		<TempFolder>\temp</TempFolder>
+		<ReleaseDir>C:\Release</ReleaseDir>
+		<ReleaseName>TeleReader</ReleaseName>		
+		<InstallShieldPath>C:\Program Files\InstallShield\2011\System</InstallShieldPath>
+		<InstallShieldProject>$(FullBuildPath)$(TempFolder)\p$(PatchNumber)\MagTeleReaderInstall.ism</InstallShieldProject>
+		<BuildCompressed>true</BuildCompressed>
+		<ProductVersion Condition="'$(ProductVersionInclude)'!='False'">$(BaseVersion).$(TestNumber)</ProductVersion>
+	</PropertyGroup>
+	<!-- Itemgroups below are patch dependencies -->
+	<ItemGroup>
+		<PatchDepName Include="$(SourceDir)\**\*.*" >
+			<PatchDepNumber>127</PatchDepNumber>
+			<Folder></Folder>
+		</PatchDepName>
+	</ItemGroup>
+	<!-- Itemgroups below are projects to compile -->
+	<ItemGroup>
+		<DelphiFiles Include="$(RootDir)$(ProjectName)$(PatchFolderName)$(TempFolder)\p$(PatchNumber)\TeleReader\MagTeleReaderMain.dproj" >
+			<Options>Rebuild</Options>
+			<Configuration>Release</Configuration> 
+			<Compiler>MSBuild</Compiler>			
+		</DelphiFiles>
+		<DelphiFiles Include="$(RootDir)$(ProjectName)$(PatchFolderName)$(TempFolder)\p$(PatchNumber)\MiniBld\MagMinibld.dproj" >
+			<Options>Rebuild</Options>
+			<Configuration>Release</Configuration> 
+			<ProjectOverride>false</ProjectOverride>			
+			<Compiler>MSBuild</Compiler>	
+			<Sign></Sign>
+		</DelphiFiles>		
+	</ItemGroup>
+<!-- Itemgroups below are for InstallShield -->
+	<ItemGroup Condition="'$(CreateMSI)'!='false'">
+		<InstallShieldReleaseConfiguration Include="MagInstall-msi">
+			<SetupExe>false</SetupExe>
+		</InstallShieldReleaseConfiguration>	
+	</ItemGroup>	
+	<ItemGroup Condition="'$(CreateExe)'!='false'">
+		<InstallShieldReleaseConfiguration Include="MagInstall-exe">
+			<SetupExe>true</SetupExe>
+		</InstallShieldReleaseConfiguration>	
+	</ItemGroup>
+	<ItemGroup>
+		<InstallShieldPathVariableOverrides Include="$(FullBuildPath)$(TempFolder)">
+			<PathVariable>PATH_TO_DEV_FILES</PathVariable>
+		</InstallShieldPathVariableOverrides>
+		<InstallShieldPathVariableOverrides Include="$(FullBuildPath)$(TempFolder)\P106Lib\LIB\Accusoft16.2">
+			<PathVariable>PATH_TO_ACCUSOFT16.2_FILES</PathVariable>
+		</InstallShieldPathVariableOverrides>
+		<InstallShieldPathVariableOverrides Include="$(ReleaseDir)">
+			<PathVariable>PATH_TO_RELEASE_FILES</PathVariable>
+		</InstallShieldPathVariableOverrides>
+	</ItemGroup>
+</Project>

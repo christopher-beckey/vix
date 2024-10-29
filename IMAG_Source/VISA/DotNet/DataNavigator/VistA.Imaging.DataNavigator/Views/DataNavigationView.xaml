@@ -1,0 +1,134 @@
+﻿<mvvm:View x:Class="VistA.Imaging.DataNavigator.Views.DataNavigationView"
+           x:TypeArguments="vm:DataNavigationViewModel"
+           xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+           xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+           xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+           xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+           xmlns:m="clr-namespace:VistA.Imaging.DataNavigator.Model"
+           xmlns:vm="clr-namespace:VistA.Imaging.DataNavigator.ViewModels"
+           xmlns:mvvm="clr-namespace:ImagingClient.Infrastructure.Prism.Mvvm;assembly=ImagingClient.Infrastructure"
+           xmlns:view="clr-namespace:VistA.Imaging.DataNavigator.Views"
+           mc:Ignorable="d"
+           d:DesignHeight="500"
+           d:DesignWidth="700">
+    <Grid x:Name="LayoutRoot">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="38" />
+            <RowDefinition Height="26" />
+            <RowDefinition Height="436*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="300" />
+            <ColumnDefinition Width="5" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <DockPanel Grid.ColumnSpan="3" Margin="0,0,0,5">
+            <StackPanel Orientation="Horizontal" DockPanel.Dock="Left">
+                <ComboBox Name="FilemanFileComboBox" ItemsSource="{Binding Path=SearchFiles}" SelectedItem="{Binding Path=SelectedSearchFile}"
+                          SelectedIndex="0" Width="250" Height="23" VerticalAlignment="Top" TabIndex="1"
+                          IsEditable="True" IsTextSearchEnabled ="True" Text="{Binding Path=SearchFileText}"
+                          LostFocus="ComboBox_LostFocus" KeyUp="ComboBox_KeyUp">
+                    <ComboBox.ItemContainerStyle>
+                        <Style TargetType="{x:Type ComboBoxItem}">
+                            <Setter Property="IsSelected" Value="{Binding IsSelected, Mode=TwoWay}" />
+                        </Style>
+                    </ComboBox.ItemContainerStyle>
+                </ComboBox>
+                <ComboBox ItemsSource="{Binding Path=SelectedSearchFile.IndexedFieldViewModels}"
+                          SelectedItem="{Binding Path=SelectedSearchFile.SelectedIndexedField}"
+                          SelectedIndex="0" Width="250" Height="23" VerticalAlignment="Top" TabIndex="2">
+                    <ComboBox.ItemContainerStyle>
+                        <Style TargetType="{x:Type ComboBoxItem}">
+                            <Setter Property="IsSelected" Value="{Binding IsSelected, Mode=TwoWay}" />
+                        </Style>
+                    </ComboBox.ItemContainerStyle>
+                </ComboBox>
+            </StackPanel>
+            <Button Name="SearchButton" DockPanel.Dock="Right" Content="Search" Command="{Binding Path=SearchCommand}"
+                    Margin="3,3,3,5" TabIndex="4" Height="23" />
+            <TextBox Name="SearchTextBox" Height="23" VerticalAlignment="Top" Margin="5,3,5,0"
+                     Text="{Binding Path=SearchText, UpdateSourceTrigger=PropertyChanged}"
+                     TabIndex="3" KeyUp="SearchTextBox_KeyUp" />
+        </DockPanel>
+
+        <GridSplitter HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Column="1" Grid.Row="1" Grid.RowSpan="2" />
+
+        <StackPanel Orientation="Horizontal" Grid.Column="0" Grid.Row="1">
+            <Button ToolTip="Expand All" Command="{Binding Path=ExpandAllTreeNodesCommand}" Height="15" Width="15">
+                <Button.Template>
+                    <ControlTemplate>
+                        <Image Source="/VistA.Imaging.DataNavigator;component/Images/ExpandAll.gif" />
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+            <Button ToolTip="Collapse All" Command="{Binding Path=CollapseAllTreeNodesCommand}" Height="15" Width="15">
+                <Button.Template>
+                    <ControlTemplate>
+                        <Image Source="/VistA.Imaging.DataNavigator;component/Images/CollapseAll.gif" />
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+            <Button Name="saveXMLButton" ToolTip="Save Selected As XML" Command="{Binding Path=SaveAsXMLFileCommand}"
+                    Height="20" Width="20" HorizontalAlignment="Right" Margin="235,0,0,0">
+                <Button.Template>
+                    <ControlTemplate>
+                        <Image Source="/VistA.Imaging.DataNavigator;component/Images/XML-Logo.jpg" />
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+        </StackPanel>
+
+        <TreeView x:Name="treeView" Grid.Row="2" Margin="0,3,0,0"
+                  HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                  ItemsSource="{Binding EntryViewModels}" SelectedItemChanged="treeView_SelectedItemChanged">
+            <TreeView.ItemContainerStyle>
+                <Style TargetType="{x:Type TreeViewItem}">
+                    <Setter Property="IsExpanded" Value="{Binding IsExpanded, Mode=TwoWay}" />
+                    <Setter Property="IsSelected" Value="{Binding IsSelected, Mode=TwoWay}" />
+                    <Setter Property="FontWeight" Value="Normal" />
+                </Style>
+            </TreeView.ItemContainerStyle>
+            <TreeView.ItemTemplate>
+                <HierarchicalDataTemplate ItemsSource="{Binding Children}">
+                    <TextBlock Text="{Binding}" />
+                </HierarchicalDataTemplate>
+            </TreeView.ItemTemplate>
+        </TreeView>
+
+        <StackPanel Orientation="Horizontal" Grid.Column="2" Grid.Row="1">
+            <CheckBox Content="Show Ancestors" IsChecked="{Binding Path=IsShowingAncestors}" />
+            <Button ToolTip="Expand All" Command="{Binding Path=ExpandAllTrailGridsCommand}" Height="15" Width="15">
+                <Button.Template>
+                    <ControlTemplate>
+                        <Image Source="/VistA.Imaging.DataNavigator;component/Images/ExpandAll.gif" />
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+            <Button ToolTip="Collapse All" Command="{Binding Path=CollapseAllTrailGridsCommand}" Height="15" Width="15">
+                <Button.Template>
+                    <ControlTemplate>
+                        <Image Source="/VistA.Imaging.DataNavigator;component/Images/CollapseAll.gif" />
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+        </StackPanel>
+        
+        <ItemsControl Grid.Column="2" Grid.Row="2"
+                      x:Name="EntryItemsControl"
+                      ItemsSource="{Binding Path=EntryViewModelTrail}">
+            <ItemsControl.Template>
+                <ControlTemplate>
+                    <ScrollViewer x:Name="EntryItemsControlScrollViewer" Padding="{TemplateBinding Padding}">
+                        <ItemsPresenter />
+                    </ScrollViewer>
+                </ControlTemplate>
+            </ItemsControl.Template>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <view:FilemanEntryView />
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+    </Grid>
+</mvvm:View>

@@ -1,0 +1,99 @@
+MAGDACR2 ;WOIFO/PMK - DICOM Networking / Upper Layer Service / A-ASSOCIATE ; 02 Apr 2009 11:59 AM
+ ;;3.0;IMAGING;**30,54**;MAR 19, 2002;;OCT 28, 2009
+ ;; Per VHA Directive 2004-038, this routine should not be modified.
+ ;; +---------------------------------------------------------------+
+ ;; | Property of the US Government.                                |
+ ;; | No permission to copy or redistribute this software is given. |
+ ;; | Use of unreleased versions of this software requires the user |
+ ;; | to execute a written test agreement with the VistA Imaging    |
+ ;; | Development Office of the Department of Veterans Affairs,     |
+ ;; | telephone (301) 734-0100.                                     |
+ ;; | The Food and Drug Administration classifies this software as  |
+ ;; | a medical device.  As such, it may not be changed in any way. |
+ ;; | Modifications to this software may result in an adulterated   |
+ ;; | medical device under 21CFR820, the use of which is considered |
+ ;; | to be a violation of US Federal Statutes.                     |
+ ;; +---------------------------------------------------------------+
+ ;;
+ Q
+ ; Refer to Part 8, Section 9.3.2 of the DICOM Standard
+ ;
+ ; Read an Association Control Service Element Protocol Data Unit (PDU)
+ ;
+ ; Additional decoding for PDUs
+ ;
+REJECT ; association rejected
+ N MESSAGE,STATUS,X,X1,X2,Y,Y1,Y2
+ S MESSAGE(1)="ASSOCIATION REQUEST REJECTED"
+ S STATUS=$$USE^MAGOSFIL(FILE)
+ S X=$$GETBYTE^MAGDDR0 ; Reserved (byte 7)
+ S X=$$GETBYTE^MAGDDR0 ; Result (byte 8)
+ S X1=$$GETBYTE^MAGDDR0 ; Source (byte 9)
+ S X2=$$GETBYTE^MAGDDR0 ; Reason/Diagnosis (byte 10)
+ I $$USEPRIN^MAGOSFIL(1)
+ S Y=$S(X=1:"rejected-permanent",X=2:"rejected-transient",1:"<unknown>")
+ S MESSAGE(2)="Result="_X_" ("_Y_")"
+ I X1=1 D
+ . S Y1="DICOM UL service-user"
+ . I X2=1 S Y2="no reason given"
+ . E  I X2=2 S Y2="application context name not supported"
+ . E  I X2=3 S Y2="calling AE title """_$G(CALLING)_""" not recognized"
+ . E  I X2=4 S Y2="reserved"
+ . E  I X2=5 S Y2="reserved"
+ . E  I X2=6 S Y2="reserved"
+ . E  I X2=7 S Y2="called AE title """_$G(CALLED)_""" not recognized"
+ . E  I X2=8 S Y2="reserved"
+ . E  I X2=9 S Y2="reserved"
+ . E  I X2=10 S Y2="reserved"
+ . E  S Y2="<unknown>"
+ . Q
+ E  I X1=2 D
+ . S Y1="DICOM UL service-provider (ACSE related function)"
+ . I X2=1 S Y2="no reason given"
+ . E  I X2=2 S Y2="protocol version not supported"
+ . E  S Y2="<unknown>"
+ . Q
+ E  I X1=3 D
+ . S Y1="DICOM UL service-provider (Presentation related function)"
+ . I X2=0 S Y2="reserved"
+ . E  I X2=1 S Y2="temporary congestion"
+ . E  I X2=2 S Y2="local limit exceeded"
+ . E  I X2=3 S Y2="reserved"
+ . E  I X2=4 S Y2="reserved"
+ . E  I X2=5 S Y2="reserved"
+ . E  I X2=6 S Y2="reserved"
+ . E  I X2=7 S Y2="reserved"
+ . E  S Y2="<unknown>"
+ . Q
+ E  S Y1="<unknown>",Y2="<unknown>"
+ I $$USEPRIN^MAGOSFIL(1)
+ S MESSAGE(3)="Source="_X1_" ("_Y1_")"
+ S MESSAGE(4)="Reason="_X2_" ("_Y2_")"
+ D MESSAGE^MAGDMLOG(2,0,.MESSAGE,"BTV")
+ Q
+ ;
+ITEM56H(SCAINFOL) ; SOP Class Extended Negotiation Sub-Item
+ N I,READCODE
+ ;
+ ; The application information is dependent upon the specific SOP class
+ ;
+ S UIDNAME=$$GETNAME^MAGDUID2(UID)
+ S UIDIEN=$O(^MAGDICOM(2006.531,"B",UIDNAME,""))
+ I UIDIEN S READCODE=$P(^MAGDICOM(2006.531,UIDIEN,0),"^",2)
+ E  D  ; UID not defined for SOP class extended negotiation
+ . S READCODE="BYTE^MAGDACR2"
+ . S X="WARNING: Unsupported SOP Class Extended Negotiation"
+ . D MESSAGE^MAGDMLOG(1,0,X,"BV1")
+ . Q
+ S READCODE=$TR(READCODE,".","^") ; {entry point}.{routine}
+ ; read all the service class application information bytes
+ F I=1:1:SCAINFOL D
+ . D @READCODE
+ . S ^TMP("MAG",$J,"DICOM","NEGOTIATE","REQUEST","EXTENDED",UID,I)=VALUE
+ . Q
+ S ^TMP("MAG",$J,"DICOM","NEGOTIATE","REQUEST","EXTENDED",UID,0)=SCAINFOL
+ Q
+ ;
+BYTE ; read one byte of application information
+ S VALUE=$$GETBYTE^MAGDDR0
+ Q

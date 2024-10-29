@@ -1,0 +1,17 @@
+﻿<Window x:Class="VistA.Imaging.Shell.Shell"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:regions="clr-namespace:Microsoft.Practices.Prism.Regions;assembly=Microsoft.Practices.Prism"
+        xmlns:inf="clr-namespace:VistA.Imaging.Prism;assembly=VistA.Imaging.Prism"
+        Title="MainWindow" Height="600" Width="800">
+    <Grid x:Name="LayoutRoot" Background="White">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <ContentControl regions:RegionManager.RegionName="MenuRegion" />
+        <ContentControl regions:RegionManager.RegionName="ToolbarRegion" Grid.Row="2" />
+        <ContentControl regions:RegionManager.RegionName="MainRegion" Grid.Row="2" />
+    </Grid>
+</Window>

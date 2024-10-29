@@ -1,0 +1,23 @@
+02/09/2000  09:17 AM
+Saved from DCM,DCE (MSM)
+SCRAMBLE
+SCRAMBLE ;PMK/WIRMFO - Routine to scramble patient demographics [ 02/09/2000  09:17 AM ]
+ ;
+ O 51:("MAGDHL71.GBL":"R")
+ O 52:("MAGDHL72.GBL":"W")
+ F  U 51 R X Q:$ZC  D
+ . S Y=X
+ . I $E(Y,1,3)="PID" D
+ . . ; translate from THIS to THAT
+ . . S $P(Y,"^",4)=$$S($P(Y,"^",4))
+ . . S $P(Y,"^",6)=$$S($P(Y,"^",6))
+ . . S $P(Y,"^",20)=$$S($P(Y,"^",20))
+ . . Q
+ . U 52 W Y,!
+ . U 0 W "."
+ . Q
+ C 51,52
+ Q
+S(X) Q $TR(X,"ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789","AWTRENXGIPQSDFOHJKLZUCVBYM0987654321")
+
+

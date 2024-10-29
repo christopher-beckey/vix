@@ -1,0 +1,95 @@
+MAGDMFBA ;WOIFO/PMK - Program to build DICOM Master File ; 10/05/2006 08:27
+ ;;3.0;IMAGING;**30,69**;MAR 19, 2002;;NOV 7, 2007
+ ;; Per VHA Directive 2004-038, this routine should not be modified.
+ ;; +---------------------------------------------------------------+
+ ;; | Property of the US Government.                                |
+ ;; | No permission to copy or redistribute this software is given. |
+ ;; | Use of unreleased versions of this software requires the user |
+ ;; | to execute a written test agreement with the VistA Imaging    |
+ ;; | Development Office of the Department of Veterans Affairs,     |
+ ;; | telephone (301) 734-0100.                                     |
+ ;; | The Food and Drug Administration classifies this software as  |
+ ;; | a medical device.  As such, it may not be changed in any way. |
+ ;; | Modifications to this software may result in an adulterated   |
+ ;; | medical device under 21CFR820, the use of which is considered |
+ ;; | to be a violation of US Federal Statutes.                     |
+ ;; +---------------------------------------------------------------+
+ ;;
+ Q
+ ;
+XFER N D0,D1,FILE,LIST,PATH
+ ;
+ ; get the list of Data Transfer dictionaries from the modality file
+ S D0=0 F  S D0=$O(^MAGDICOM(2006.582,D0)) Q:'D0  D
+ . S X=$G(^MAGDICOM(2006.582,D0,0))
+ . I $P(X,"^",9)'="",'$P(X,"^",9) Q
+ . S FILE=$$UPPER^MAGOSMSC($P(X,"^",7)) Q:FILE=""
+ . S LIST(FILE)=""
+ . Q
+ ;
+ ; stuff the data from each Data Transfer dictionary into a global
+ K ^MAGDICOM(2006.511)
+ S D0=0
+ S ^MAGDICOM(2006.511,0)="DIAGNOSTIC INFO FIELD^2006.511^^"
+ S FILE="" F  S FILE=$O(LIST(FILE)) Q:FILE=""  D GETDICT(FILE)
+ S X=D0_" file"_$S(D0=1:"",1:"s")_" added to database."
+ D MESSAGE^MAGDMLOG(1,0,X,"t")
+ Q
+ ;
+GETDICT(FILE) ; copy the DICOM elements specified in FILE to the global
+ N DATXPATH,STDNAME
+ ;
+ S DATXPATH=$$INIT^MAGDMFB(2006.511,"Data Transfer",FILE)
+ Q:DATXPATH=""
+ S X=$$GETDIR^MAGOSDIR(DATXPATH,"*")
+ I 'X D  Q
+ . D MESSAGE^MAGDMLOG(1,0,"Data transfer dictionary <<"_DATXPATH_">> is missing","t")
+ . S FATAL=FATAL+1
+ . Q
+ I X<0 D  Q
+ . D MESSAGE^MAGDMLOG(1,0,"Network Error: "_X,"t")
+ . D MESSAGE^MAGDMLOG(1,0,"Can't read data transfer dictionary <<"_DATXPATH_">>","t")
+ . S FATAL=FATAL+1
+ . Q
+ S STATUS=$$OPEN^MAGOSFIL(DATXPATH,"R")
+ I STATUS<0 D  Q
+ . D MESSAGE^MAGDMLOG(1,0,"Can't open dictionary file, status: "_STATUS,"t")
+ . S FATAL=FATAL+1
+ . Q
+ ;
+ ; read the file and stuff the data into the global
+ S D0=D0+1
+ S ^MAGDICOM(2006.511,D0,0)=FILE
+ S ^MAGDICOM(2006.511,"B",FILE,D0)=""
+ S $P(^MAGDICOM(2006.511,0),"^",3,4)=D0_"^"_D0
+ ;
+ F  S STATUS=$$READ^MAGOSFIL(DATXPATH,.X) Q:STATUS'=""  D
+ . N NAME,TAG
+ . ; copy one DICOM element to the DATA1 block
+ . I "#;"[$E(X) Q  ; comment
+ . S TAG=$P(X,"|"),NAME=$P(X,"|",2)
+ . I '$D(^MAGDICOM(2006.51,"B",TAG)) S STDNAME="unknown element ("_TAG_")"
+ . E  D  ; real data group
+ . . S X=$O(^MAGDICOM(2006.51,"B",TAG,"")),X=^MAGDICOM(2006.51,X,0)
+ . . S STDNAME=$P(X,"^",2)
+ . . Q
+ . I STDNAME'=NAME D
+ . . D MESSAGE^MAGDMLOG(1,0,"In file """_DATXPATH_""":","t")
+ . . D MESSAGE^MAGDMLOG(1,0,"Element Name <<"_NAME_">> not DICOM Name <<"_STDNAME_">>","t")
+ . . S FATAL=FATAL+1
+ . . Q
+ . S NAME=$TR($$UPPER^MAGOSMSC(NAME)," /\","___") ; change spaces and slashes to underscores
+ . I $TR(NAME,"_")?.E1P.E D  ; remove all other punctuation
+ . . F I=1:1:$L(NAME) I $E(NAME,I)?1P D
+ . . . I $E(NAME,I)="_" Q  ; don't remove underscores
+ . . . S $E(NAME,I)="" ; remove any other punctuation
+ . . . Q
+ . . Q
+ . S X=TAG_"^"_NAME
+ . S D1=$P($G(^MAGDICOM(2006.511,D0,1,0)),"^",3)+1
+ . S ^MAGDICOM(2006.511,D0,1,D1,0)=X
+ . S $P(^MAGDICOM(2006.511,D0,1,0),"^",3,4)=D1_"^"_D1
+ . Q
+ S STATUS=$$CLOSE^MAGOSFIL(DATXPATH)
+ Q
+ ;

@@ -1,0 +1,147 @@
+magpt4 ;WOIFO/MLH - individual PACS tests ; 08 Mar 2005  10:50 AM
+ ; *** CAUTION:  not for distribution beyond Silver Spring OIFO!
+ q
+ ;
+A206 ; exception flow - same case with different SSN
+ ;
+ n result,stat,logent,ids,ssn
+ k HLA
+ ;
+ d LOG^magpt($t(A206)_" ; begin")
+ ;
+ ; new order message
+ d ORM^magpt("NW")
+ s stat=$$SEND^magptm("ORM",.result)
+ s logent="A.2.6.1 ; "_result w !,logent,! d LOG^magpt(logent,$na(HLA("HLS")))
+ ;
+ ; change the order code & status (OK) and diddle the SSN (not OK)
+ s $p(HLA("HLS",3),"^",2)="XO",$p(HLA("HLS",3),"^",6)="CM"
+ s ids=$p(HLA("HLS",1),"^",4),ssn=$p(ids,"|",2)
+ s $p(ssn,"~",1)="998"_$e(1000000+$r(1000000),2,7)
+ s $p(ids,"|",1)=ssn,$p(HLA("HLS",1),"^",4)=ids
+ s stat=$$SEND^magptm("ORM",.result)
+ s logent="A.2.6.2 ; "_result w !,logent,! d LOG^magpt(logent,$na(HLA("HLS")))
+ ;
+ d LOG^magpt($t(A206)_" ; end")
+ q
+ ;
+A20 ; exception flow - same case with different DOB
+ ;
+ n result,stat,logent,ids,dob
+ k HLA
+ ;
+ d LOG^magpt($t(A20)_" ; begin")
+ ;
+ ; new order message
+ d ORM^magpt("NW")
+ s stat=$$SEND^magptm("ORM",.result)
+ s logent="A.20.1 ; "_result w !,logent,! d LOG^magpt(logent,$na(HLA("HLS")))
+ ;
+ ; change the order code & status (OK) and diddle the DOB (not OK)
+ s $p(HLA("HLS",3),"^",2)="XO",$p(HLA("HLS",3),"^",6)="CM"
+ s dob=$p(HLA("HLS",2),"^",8)
+ i $r(2) d
+ . s $e(dob,1,4)=$e(dob,1,4)+$r(10)+1
+ . q
+ e  d
+ . s $e(dob,5,6)=$e(100+(13-$e(dob,5,6)),2,3)
+ . q
+ s $p(HLA("HLS",1),"^",8)=dob
+ s stat=$$SEND^magptm("ORM",.result)
+ s logent="A.20.2 ; "_result w !,logent,! d LOG^magpt(logent,$na(HLA("HLS")))
+ ;
+ d LOG^magpt($t(A20)_" ; end")
+ q
+ ;
+A21 ; exception flow - same case with different name
+ ;
+ n result,stat,logent,ids
+ k HLA
+ ;
+ d LOG^magpt($t(A21)_" ; begin")
+ ;
+ ; new 'order' message
+ d ORM^magpt("NW")
+ s stat=$$SEND^magptm("ORM",.result)
+ s logent="A.21.1 ; "_result w !,logent,! d LOG^magpt(logent,$na(HLA("HLS")))
+ ;
+ ; change the order code & status (OK) and diddle the sex value (not OK)
+ s $p(HLA("HLS",3),"^",2)="XO",$p(HLA("HLS",3),"^",6)="CM"
+ s $p(HLA("HLS",1),"^",9)=$s($p(HLA("HLS",1),"^",9)="M":"F",1:"M")
+ s stat=$$SEND^magptm("ORM",.result)
+ s logent="A.21.2 ; "_result w !,logent,! d LOG^magpt(logent,$na(HLA("HLS")))
+ ;
+ d LOG^magpt($t(A21)_" ; end")
+ q
+ ;
+A22 ; exception flow - same case with different name
+ ;
+ n result,stat,logent,ids,name
+ k HLA
+ ;
+ d LOG^magpt($t(A22)_" ; begin")
+ ;
+ ; new 'order' message
+ d ORM^magpt("NW")
+ s stat=$$SEND^magptm("ORM",.result)
+ s logent="A.22.1 ; "_result w !,logent,! d LOG^magpt(logent,$na(HLA("HLS")))
+ ;
+ ; change the order code & status (OK) and diddle the name (not OK)
+ s $p(HLA("HLS",3),"^",2)="XO",$p(HLA("HLS",3),"^",6)="CM"
+ s name=$p(HLA("HLS",2),"^",6)
+ s $p(name,"~",1)="LAST"_($r(10)+1)
+ s $p(name,"~",2)="FIRST"_($r(10)+1)
+ s $p(name,"~",3)="MID"_($r(10)+1)
+ s $p(HLA("HLS",1),"^",6)=name
+ s stat=$$SEND^magptm("ORM",.result)
+ s logent="A.22.2 ; "_result w !,logent,! d LOG^magpt(logent,$na(HLA("HLS")))
+ ;
+ d LOG^magpt($t(A22)_" ; end")
+ q
+ ;
+A24 ; exception flow - same case with different orderable item
+ ;
+ n result,orditm,flddta
+ k HLA
+ ;
+ d LOG^magpt($t(A24)_" ; begin")
+ ;
+ ; new order message
+ d ORM^magpt("NW")
+ s stat=$$SEND^magptm("ORM",.result)
+ s logent="A.24.1 ; "_result w !,logent,! d LOG^magpt(logent,$na(HLA("HLS")))
+ ;
+ ; change the orderable item
+ s orditm=$p(HLA("HLS",4),"^",5)
+ s chg=0
+ f  s stat=$$rncmitm^magptu(.flddta) q:flddta'=orditm
+ s $p(HLA("HLS",4),"^",5)=flddta
+ s stat=$$SEND^magptm("ORM",.result)
+ s logent="A.24.2 ; "_result w !,logent,! d LOG^magpt(logent,$na(HLA("HLS")))
+ ;
+ d LOG^magpt($t(A24)_" ; end")
+ q
+ ;
+A26 ; exception flow - cancel order with different case
+ ;
+ n result,stat,logent,case,cas1,cas2
+ k HLA
+ ;
+ d LOG^magpt($t(A24)_" ; begin")
+ ;
+ ; new order message
+ d ORM^magpt("NW")
+ s stat=$$SEND^magptm("ORM",.result)
+ s logent="A.24.1 ; "_result w !,logent,! d LOG^magpt(logent,$na(HLA("HLS")))
+ ;
+ ; cancel order with different case
+ s $p(HLA("HLS",3),"^",2)="CA",$p(HLA("HLS",3),"^",6)="CA"
+ s case=$p(HLA("HLS",3),"^",3),cas1=$p(case,"-",1),cas2=$p(case,"-",2)
+ s case=$r(cas1)_"-"_$r(cas2)
+ f i=3,4 f j=3,4 s $p(HLA("HLS",i),"^",j)=case
+ s $p(HLA("HLS",4),"^",20)=case
+ s stat=$$SEND^magptm("ORM",.result)
+ s logent="A.24.2 ; "_result w !,logent,! d LOG^magpt(logent,$na(HLA("HLS")))
+ ;
+ d LOG^magpt($t(A24)_" ; end")
+ q

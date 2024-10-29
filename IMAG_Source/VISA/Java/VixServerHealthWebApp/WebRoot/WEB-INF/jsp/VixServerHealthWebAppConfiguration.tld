@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!-- a tag library descriptor -->
+<taglib version="2.0" xmlns="http://java.sun.com/xml/ns/j2ee"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-jsptaglibrary_2_0.xsd">
+ <description>A tag handler library for VIX Server Health Configuration information</description>
+ <tlib-version>1.0</tlib-version>
+ <short-name>VixServerHealthWebAppConfiguration</short-name>
+ <uri>http://imaging.med.va.gov/vix/vixServerHealthWebAppConfiguration</uri>
+ <!-- Java Log Parent Tags --> 
+ 
+ <tag>
+  <description></description>
+  <name>VixServerHealthConfigurationTag</name>
+  <tag-class>gov.va.med.imaging.vixserverhealth.configuration.taglib.VixServerHealthConfigurationTag</tag-class>
+  <body-content>JSP</body-content>
+  <attribute>
+   <description>The message to show if there are no sites</description>
+   <name>emptyResultMessage</name>
+   <rtexprvalue>false</rtexprvalue>
+   <type>java.lang.String</type>
+  </attribute>
+ </tag>
+ 
+ 
+ 
+ <tag>
+  <description></description>
+  <name>DriveCapacityCriticalLimit</name>
+  <tag-class>gov.va.med.imaging.vixserverhealth.configuration.taglib.VixServerHealthConfigurationDriveCapacityCriticalLimitTag</tag-class>
+  <body-content>JSP</body-content>
+ </tag>
+ <tag>
+  <description></description>
+  <name>ThreadPoolThreshold</name>
+  <tag-class>gov.va.med.imaging.vixserverhealth.configuration.taglib.VixServerHealthConfigurationThreadPoolThresholdTag</tag-class>
+  <body-content>JSP</body-content>
+ </tag>
+ <tag>
+  <description></description>
+  <name>ThreadProcessingTimeCriticalLimit</name>
+  <tag-class>gov.va.med.imaging.vixserverhealth.configuration.taglib.VixServerHealthConfigurationThreadProcessingTimeCriticalLimitTag</tag-class>
+  <body-content>JSP</body-content>
+ </tag>
+ <tag>
+  <description></description>
+  <name>ReloadPageInterval</name>
+  <tag-class>gov.va.med.imaging.vixserverhealth.configuration.taglib.VixServerHealthConfigurationReloadPageIntervalTag</tag-class>
+  <body-content>JSP</body-content>
+ </tag>
+ 
+</taglib>

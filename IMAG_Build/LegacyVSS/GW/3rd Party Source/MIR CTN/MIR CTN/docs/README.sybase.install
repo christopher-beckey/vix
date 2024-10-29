@@ -1,0 +1,272 @@
+
+## FILE: /dicom1a/projects/dicom94/doc/README.sybase.install ##
+
+This is a synopsis of what you need to do in order
+to install Sybase on a (SUN) machine.  I assume that you
+have a machine with unix installed, the Sybase
+distribution on CDROM, and the MIR Dicom Software
+distribution. Before starting, you should also identify two
+free areas of disk that you can use.  One should be a 
+"system area" (SArea), and should be between 30 and 50 Meg
+is size.  The second should be a "data area" (DArea) and should
+be between 100 and 200 Meg in size.
+
+0. Make sure your machine has shared memory and semaphores installed.
+	Look at the file /etc/system.  It should contain the following
+	statements.  If not you will need to add them (as root), and
+	reboot.
+
+		forceload: sys/shmsys
+		forceload: sys/semsys
+		forceload: sys/msgsys
+
+		set shmsys:shminfo_shmmni=100
+		set shmsys:shminfo_shmmax=67108864
+
+1. Create a new user on the system with login id "sybase".
+
+	Use "adduser" under the admintool utility.
+	Just create a regular user, and make this
+	user a member of (at least) the group "dicom".
+	Make the password for the sybase account the same
+	as the root password for the machine.
+
+2. Unload the Sybase distribution from CDROM.
+
+	You should do this as the "root" user.
+
+	Manual: SYBASE SQL Server, Installation Guide
+
+	Chapter 3 talks about the unloading.  You
+	need to install both the Server side and the
+	Client side software, both are done in exactly
+	the same manner.
+
+	You will have to load the appropriate CD, keeping
+	the CD cover handy because it contains a long
+	string of characters that you will need to type
+	in before the software will unload correctly.
+
+	In general, if you bring up the file manager under
+	SunOS, and then insert the CDROM, the file manager
+	will automatically do the mount for you, so you
+	won't need to go find the command to do that.
+	But, if you need to, the appropriate commands
+	can be found in the installation guide.
+
+	The automatic mount *usually* mounts the CDROM
+	at the point /cdrom.  In the /cdrom directory,
+	there will be a directory called "sybase".  
+	Underneath "sybase" there are usually 2 files,
+	one called "sybload" (the loader utility) and 
+	"sybimage", the image of the sybase distribution.
+	Note that sometimes "sybimage" may have a 
+	slightly different name.
+
+	Execute the loader utility with the command:
+
+		/cdrom/sybase/sybload -D
+
+	The -D option is important, as the software
+	will not load properly without it.  The actual
+	installation process takes some time, so be
+	patient.  Repeat the above process to load
+	the other side, either the client or the server,
+	depending on which you already loaded.
+
+	What I normally do after the software has loaded
+	is to proceed to the distribution directory
+	(typically ~sybase), and, as user "root", execute
+	the following command.  What you are doing is 
+	changing the ownership of all the files to "sybase".
+
+		chown -R sybase .
+
+3. Initialize the server and the client with "sybinit".
+
+	You should now be logged in as user "sybase" and
+	in the sybase home directory (~sybase).  You need
+	to run the utility ~sybase/install/sybinit.
+
+	This utility seems a little complicated at first,
+	but running through it a couple of times will 
+	simplify matters greatly.  This utility is explained
+	in detail in Chapter 4 of the Installation Guide.
+
+	You will be concerned with options 3 and 4
+	(Configuring a Server Product and Configuring an
+	Open Client/Server product respectively).
+
+	The important things to know for this section are
+	where you want to put your master database.  Be
+	ready to specify a file on the system that has
+	at least 20 Megabytes of space available to it.
+
+	Once you have initialized both the client and the
+	server, this process has ended, and you should be
+	ready to proceed with device and database initialization.
+
+	Note that the script for starting the server
+	(startserver) is found in the ~sybase/install
+	directory and must be executed from there.
+
+4. Add the sybase user account.
+
+	Start the interactive sql interpretor (~sybase/bin/isql)
+	with the following command:
+
+		isql -Usa -P <return>
+
+	This logs you into the server as the system's administrator.
+
+	Execute the following isql commands:
+
+		sp_addlogin sybase,sybase
+		go
+		sp_adduser sybase
+		go
+
+5. Reconfigure the server.
+
+	The default characteristics of the server are
+	inappropriate for the demonstration run.
+	Therefore, you must modify some of the default
+	parameters before you can successfully run the
+	demonstration.
+
+	First, stop the server by executing the interactive
+	sql commands:
+
+		shutdown
+		go
+
+	If you don't know how to run the interactive sql
+	interpretor, you should read about this in the
+	administration guide.
+
+	As configured, the Sybase server supports only 25
+	interactive connections, and this is inadequate
+	for the purposes of our demonstration.  However,
+	there is also a shell parameter that affects how
+	large this number can get.  So, one of the first
+	things you need to do is increase the number of 
+	descriptors that a process can use.  This is
+	accomplished by adding the line
+
+		limit descriptors 200
+
+	to the .cshrc file.  (Don't forget to "source" it).
+	Restart the Sybase server:
+
+		cd ~sybase/install
+		startserver
+
+	Now, start isql ("~sybase/bin/isql -Usa -P"), and
+	look at the configuration parameters with the
+	following commands:
+
+		sp_configure
+		go
+
+	You need to change the both "user connections" and
+	"memory" and then restart the server with the
+	following commands:
+
+		sp_configure "user connections", 100
+		go
+		sp_configure "memory", 7680
+		go
+		reconfigure
+		go
+		shutdown
+		go
+
+	You may then restart the server, confirm the settings
+	have taken effect by viewing the output of sp_configure,
+	and then continue with the installation.
+
+	In the event that the server will not restart
+	(possible if you messed up one of the configuration
+	parameters), you will need to reset the parameters
+	and try again.  If this happens, you need to execute
+	the command:
+
+		buildmaster -r
+
+	Just follow the instructions, and try reconfiguring.
+
+6. Create Database devices.
+
+	Before you can create the devices, you need to 
+	identify a space on your system with at least 200
+	Megabytes of free space, and make sure that it
+	is readable and writable by the sybase account.
+
+	Now, proceed to the Dicom distribution directory
+	and cd to .../cfg_scripts/sybase/MakeDevices.  You
+	should make sure that ~sybase/bin is in your
+	current path because you will be executing a script
+	called "irun" which in turn invokes "isql".
+
+	The script "CreateDBDevice" will make Sybase devices
+	for you.  You will create 2 devices, DEV_DICOMIS and
+	LOG_DICOMIS (the data device and the log device).  
+
+	Type "CreateDBDevice" for a listing of parameters.
+	The parameter <Virtual Device Number> must be computed
+	from the VDN's currently in use.  You can get a
+	listing of the VDN's in use by executing the command
+
+		irun ListVirtualDeviceNos
+
+	from the  .../cfg_scripts/sybase/MakeDevices directory.
+
+	If the above script lists numbers 0 thru 3, then pick
+	4 for the first device you are going to create....
+	that is, just choose the next largest number *not*
+	reported by the above command.
+
+	Choose where you want the device to reside. For this
+	example you will choose /big1/db1 for the database
+	device and /big1/log1 for the log device.
+
+	Now execute the commands:
+
+		CreateDBDevice DEV_DICOMIS /big1/db1 4 96000
+		CreateDBDevice LOG_DICOMIS /big1/log1 5 24000
+
+	The last parameter is the size of the database device
+	in 2k blocks.  So, 96000 is about 200 Megabytes, and 
+	24000 is about 50 Megabytes.  These can be adjusted
+	if necessary, but the log device should be about 25%
+	of the database device.
+
+7. Create the Databases.
+
+	Creating the databases is now quite easy. Change
+	directory up one level to .../cfg_scripts/sybase,
+	and execute the command "CreateDB" to see a listing
+	of the parameters for database creation.  Execute
+	the following commands to create the databases
+	necessary for the demonstration:
+
+	    CreateDB CTNControl DEV_DICOMIS LOG_DICOMIS 10 5
+	    CreateDB IMAGE DEV_DICOMIS LOG_DICOMIS 10 5
+	    CreateDB MIR_FIS DEV_DICOMIS LOG_DICOMIS 5 1
+	    CreateDB RSA_FIS DEV_DICOMIS LOG_DICOMIS 5 1
+
+	These are just examples of the type of databases
+	you may need (want) to create.  Your actual needs
+	(wants) will probably vary from the above.
+
+	And execute the following commands to create the
+	tables needed:
+
+	    CreateTables Control CTNControl
+	    CreateTables DIM IMAGE
+	    CreateTables FIS MIR_FIS
+	    CreateTables FIS RSA_FIS
+
+
+	That's it...and you should now be ready to run the
+	demonstration software.

@@ -1,0 +1,622 @@
+KIDS Distribution saved on Aug 10, 2007@09:01:16
+Package for FILE named 2006.88
+**KIDS**:MAG*3.0*87*1^
+
+**INSTALL NAME**
+MAG*3.0*87*1
+"BLD",6317,0)
+MAG*3.0*87*1^^0^3070810^y
+"BLD",6317,1,0)
+^^4^4^3070810^
+"BLD",6317,1,1,0)
+This package contains a KIDS component
+"BLD",6317,1,2,0)
+for Patch 87.
+"BLD",6317,1,3,0)
+ 
+"BLD",6317,1,4,0)
+This package transports the FileMan data dictionary named 2006.88.
+"BLD",6317,4,0)
+^9.64PA^2006.88^1
+"BLD",6317,4,2006.88,0)
+2006.88
+"BLD",6317,4,2006.88,222)
+y^y^f^^^^n
+"BLD",6317,4,"B",2006.88,2006.88)
+
+"BLD",6317,6.3)
+1
+"BLD",6317,"KRN",0)
+^9.67PA^8989.52^19
+"BLD",6317,"KRN",.4,0)
+.4
+"BLD",6317,"KRN",.401,0)
+.401
+"BLD",6317,"KRN",.402,0)
+.402
+"BLD",6317,"KRN",.403,0)
+.403
+"BLD",6317,"KRN",.5,0)
+.5
+"BLD",6317,"KRN",.84,0)
+.84
+"BLD",6317,"KRN",3.6,0)
+3.6
+"BLD",6317,"KRN",3.8,0)
+3.8
+"BLD",6317,"KRN",9.2,0)
+9.2
+"BLD",6317,"KRN",9.8,0)
+9.8
+"BLD",6317,"KRN",19,0)
+19
+"BLD",6317,"KRN",19.1,0)
+19.1
+"BLD",6317,"KRN",101,0)
+101
+"BLD",6317,"KRN",409.61,0)
+409.61
+"BLD",6317,"KRN",771,0)
+771
+"BLD",6317,"KRN",870,0)
+870
+"BLD",6317,"KRN",8989.51,0)
+8989.51
+"BLD",6317,"KRN",8989.52,0)
+8989.52
+"BLD",6317,"KRN",8994,0)
+8994
+"BLD",6317,"KRN","B",.4,.4)
+
+"BLD",6317,"KRN","B",.401,.401)
+
+"BLD",6317,"KRN","B",.402,.402)
+
+"BLD",6317,"KRN","B",.403,.403)
+
+"BLD",6317,"KRN","B",.5,.5)
+
+"BLD",6317,"KRN","B",.84,.84)
+
+"BLD",6317,"KRN","B",3.6,3.6)
+
+"BLD",6317,"KRN","B",3.8,3.8)
+
+"BLD",6317,"KRN","B",9.2,9.2)
+
+"BLD",6317,"KRN","B",9.8,9.8)
+
+"BLD",6317,"KRN","B",19,19)
+
+"BLD",6317,"KRN","B",19.1,19.1)
+
+"BLD",6317,"KRN","B",101,101)
+
+"BLD",6317,"KRN","B",409.61,409.61)
+
+"BLD",6317,"KRN","B",771,771)
+
+"BLD",6317,"KRN","B",870,870)
+
+"BLD",6317,"KRN","B",8989.51,8989.51)
+
+"BLD",6317,"KRN","B",8989.52,8989.52)
+
+"BLD",6317,"KRN","B",8994,8994)
+
+"FIA",2006.88)
+TEST AGREEMENT
+"FIA",2006.88,0)
+^MAGDBB("AGREE",
+"FIA",2006.88,0,0)
+2006.88
+"FIA",2006.88,0,1)
+y^y^f^^^^n
+"FIA",2006.88,0,10)
+
+"FIA",2006.88,0,11)
+
+"FIA",2006.88,0,"RLRO")
+
+"FIA",2006.88,2006.88)
+0
+"FIA",2006.88,2006.884)
+0
+"FIA",2006.88,2006.88417)
+0
+"FIA",2006.88,2006.884175)
+0
+"FIA",2006.88,2006.884176)
+0
+"MBREQ")
+0
+"QUES","XPF1",0)
+Y
+"QUES","XPF1","??")
+^D REP^XPDH
+"QUES","XPF1","A")
+Shall I write over your |FLAG| File
+"QUES","XPF1","B")
+YES
+"QUES","XPF1","M")
+D XPF1^XPDIQ
+"QUES","XPF2",0)
+Y
+"QUES","XPF2","??")
+^D DTA^XPDH
+"QUES","XPF2","A")
+Want my data |FLAG| yours
+"QUES","XPF2","B")
+YES
+"QUES","XPF2","M")
+D XPF2^XPDIQ
+"QUES","XPI1",0)
+YO
+"QUES","XPI1","??")
+^D INHIBIT^XPDH
+"QUES","XPI1","A")
+Want KIDS to INHIBIT LOGONs during the install
+"QUES","XPI1","B")
+YES
+"QUES","XPI1","M")
+D XPI1^XPDIQ
+"QUES","XPM1",0)
+PO^VA(200,:EM
+"QUES","XPM1","??")
+^D MG^XPDH
+"QUES","XPM1","A")
+Enter the Coordinator for Mail Group '|FLAG|'
+"QUES","XPM1","B")
+
+"QUES","XPM1","M")
+D XPM1^XPDIQ
+"QUES","XPO1",0)
+Y
+"QUES","XPO1","??")
+^D MENU^XPDH
+"QUES","XPO1","A")
+Want KIDS to Rebuild Menu Trees Upon Completion of Install
+"QUES","XPO1","B")
+YES
+"QUES","XPO1","M")
+D XPO1^XPDIQ
+"QUES","XPZ1",0)
+Y
+"QUES","XPZ1","??")
+^D OPT^XPDH
+"QUES","XPZ1","A")
+Want to DISABLE Scheduled Options, Menu Options, and Protocols
+"QUES","XPZ1","B")
+YES
+"QUES","XPZ1","M")
+D XPZ1^XPDIQ
+"QUES","XPZ2",0)
+Y
+"QUES","XPZ2","??")
+^D RTN^XPDH
+"QUES","XPZ2","A")
+Want to MOVE routines to other CPUs
+"QUES","XPZ2","B")
+NO
+"QUES","XPZ2","M")
+D XPZ2^XPDIQ
+"SEC","^DIC",2006.88,2006.88,0,"AUDIT")
+@
+"SEC","^DIC",2006.88,2006.88,0,"DD")
+@
+"SEC","^DIC",2006.88,2006.88,0,"DEL")
+@
+"SEC","^DIC",2006.88,2006.88,0,"LAYGO")
+@
+"SEC","^DIC",2006.88,2006.88,0,"RD")
+@
+"SEC","^DIC",2006.88,2006.88,0,"WR")
+@
+"VER")
+8.0^22.0
+"^DD",2006.88,2006.88,0)
+FIELD^^4^4
+"^DD",2006.88,2006.88,0,"DT")
+3070810
+"^DD",2006.88,2006.88,0,"IX","B",2006.88,.01)
+
+"^DD",2006.88,2006.88,0,"NM","TEST AGREEMENT")
+
+"^DD",2006.88,2006.88,.01,0)
+PATCH NUMBER^RNJ5,0^^0;1^K:+X'=X!(X>99999)!(X<0)!(X?.E1"."1N.N) X
+"^DD",2006.88,2006.88,.01,1,0)
+^.1
+"^DD",2006.88,2006.88,.01,1,1,0)
+2006.88^B
+"^DD",2006.88,2006.88,.01,1,1,1)
+S ^MAGDBB("AGREE","B",$E(X,1,30),DA)=""
+"^DD",2006.88,2006.88,.01,1,1,2)
+K ^MAGDBB("AGREE","B",$E(X,1,30),DA)
+"^DD",2006.88,2006.88,.01,3)
+Enter the number of the patch.
+"^DD",2006.88,2006.88,.01,21,0)
+^^2^2^3070810^
+"^DD",2006.88,2006.88,.01,21,1,0)
+The value of this field is an integer number.
+"^DD",2006.88,2006.88,.01,21,2,0)
+This number is the number of a patch for VistA Imaging.
+"^DD",2006.88,2006.88,.01,"DT")
+3070810
+"^DD",2006.88,2006.88,2,0)
+STATUS^RS^Test:Test;Released:Released;Obsolete:Obsolete;^0;2^Q
+"^DD",2006.88,2006.88,2,3)
+Indicate whether the patch is in test, released or obsolete.
+"^DD",2006.88,2006.88,2,21,0)
+^^6^6^3070810^
+"^DD",2006.88,2006.88,2,21,1,0)
+The value of this field is a code that indicates the status of the patch:
+"^DD",2006.88,2006.88,2,21,2,0)
+ 
+"^DD",2006.88,2006.88,2,21,3,0)
+Possible values are:
+"^DD",2006.88,2006.88,2,21,4,0)
+   Test
+"^DD",2006.88,2006.88,2,21,5,0)
+   Released
+"^DD",2006.88,2006.88,2,21,6,0)
+   Obsolete
+"^DD",2006.88,2006.88,2,"DT")
+3070810
+"^DD",2006.88,2006.88,3,0)
+NAME^RF^^0;3^K:$L(X)>100!($L(X)<1) X
+"^DD",2006.88,2006.88,3,3)
+Enter the name of the patch.
+"^DD",2006.88,2006.88,3,21,0)
+^^3^3^3070810^
+"^DD",2006.88,2006.88,3,21,1,0)
+The value of this field is a string. This string identifies the patch.
+"^DD",2006.88,2006.88,3,21,2,0)
+Typically, the name of a patch looks like:
+"^DD",2006.88,2006.88,3,21,3,0)
+   Version 3.0 Patch 011 - MUMPS to MUMPS Broker
+"^DD",2006.88,2006.88,3,"DT")
+3070810
+"^DD",2006.88,2006.88,4,0)
+SITE^2006.884P^^1;0
+"^DD",2006.88,2006.884,0)
+SITE SUB-FIELD^^17^12
+"^DD",2006.88,2006.884,0,"DT")
+3070810
+"^DD",2006.88,2006.884,0,"IX","B",2006.884,.01)
+
+"^DD",2006.88,2006.884,0,"NM","SITE")
+
+"^DD",2006.88,2006.884,0,"UP")
+2006.88
+"^DD",2006.88,2006.884,.01,0)
+SITE^MRP2006.899'^MAGDBB("DTA",^0;1^Q
+"^DD",2006.88,2006.884,.01,1,0)
+^.1
+"^DD",2006.88,2006.884,.01,1,1,0)
+2006.884^B
+"^DD",2006.88,2006.884,.01,1,1,1)
+S ^MAGDBB("AGREE",DA(1),1,"B",$E(X,1,30),DA)=""
+"^DD",2006.88,2006.884,.01,1,1,2)
+K ^MAGDBB("AGREE",DA(1),1,"B",$E(X,1,30),DA)
+"^DD",2006.88,2006.884,.01,3)
+Identify the site.
+"^DD",2006.88,2006.884,.01,21,0)
+^^8^8^3070810^
+"^DD",2006.88,2006.884,.01,21,1,0)
+The value of this field is a pointer to the table that contains
+"^DD",2006.88,2006.884,.01,21,2,0)
+the ET-Phone Home information.
+"^DD",2006.88,2006.884,.01,21,3,0)
+ 
+"^DD",2006.88,2006.884,.01,21,4,0)
+The information in that table is organized by site, and the
+"^DD",2006.88,2006.884,.01,21,5,0)
+site information in the test-agreement table (this table) is
+"^DD",2006.88,2006.884,.01,21,6,0)
+first organized by patch, then by site.
+"^DD",2006.88,2006.884,.01,21,7,0)
+ 
+"^DD",2006.88,2006.884,.01,21,8,0)
+The SITE multiple is "DINUMed" to the ET-Phone Home table.
+"^DD",2006.88,2006.884,.01,"DT")
+3070810
+"^DD",2006.88,2006.884,1,0)
+DATE PACKAGE COMPLETE^D^^1;1^S %DT="EX" D ^%DT S X=Y K:Y<1 X
+"^DD",2006.88,2006.884,1,3)
+Enter the date on which the submitted package was deemed complete.
+"^DD",2006.88,2006.884,1,21,0)
+^^3^3^3070810^
+"^DD",2006.88,2006.884,1,21,1,0)
+The value of this field is a VA-FileMan date (date only, no time).
+"^DD",2006.88,2006.884,1,21,2,0)
+This date identifies the day on which the test agreement was reviewed
+"^DD",2006.88,2006.884,1,21,3,0)
+and it was determined that the submitted package was complete.
+"^DD",2006.88,2006.884,1,"DT")
+3070810
+"^DD",2006.88,2006.884,2,0)
+APPROVAL DATE REGULATORY^D^^2;1^S %DT="EX" D ^%DT S X=Y K:Y<1 X
+"^DD",2006.88,2006.884,2,3)
+Enter the date that the agreement was approved by the Regulatory officer.
+"^DD",2006.88,2006.884,2,21,0)
+^^3^3^3070810^
+"^DD",2006.88,2006.884,2,21,1,0)
+The value of this field is a VA-FileMan date (date only, no time).
+"^DD",2006.88,2006.884,2,21,2,0)
+This date identifies the day on which the FDA Regulatory officer
+"^DD",2006.88,2006.884,2,21,3,0)
+approved the test agreement.
+"^DD",2006.88,2006.884,2,"DT")
+3070810
+"^DD",2006.88,2006.884,3,0)
+DATE TECHNICAL REVIEW^D^^3;1^S %DT="EX" D ^%DT S X=Y K:Y<1 X
+"^DD",2006.88,2006.884,3,3)
+Enter the date of the technical review.
+"^DD",2006.88,2006.884,3,21,0)
+^^3^3^3070810^
+"^DD",2006.88,2006.884,3,21,1,0)
+The value of this field is a VA-FileMan date (date only, no time).
+"^DD",2006.88,2006.884,3,21,2,0)
+This date identifies the day on which the technical review of the
+"^DD",2006.88,2006.884,3,21,3,0)
+test agreement took place.
+"^DD",2006.88,2006.884,3,"DT")
+3070810
+"^DD",2006.88,2006.884,4,0)
+DATE MANAGEMENT REVIEW^D^^4;1^S %DT="EX" D ^%DT S X=Y K:Y<1 X
+"^DD",2006.88,2006.884,4,3)
+Enter the date of the Project Management Review.
+"^DD",2006.88,2006.884,4,21,0)
+^^3^3^3070810^
+"^DD",2006.88,2006.884,4,21,1,0)
+The value of this field is a VA-FileMan date (date only, no time).
+"^DD",2006.88,2006.884,4,21,2,0)
+This date identifies the day on which the project manager reviewed
+"^DD",2006.88,2006.884,4,21,3,0)
+and approved the test-agreement.
+"^DD",2006.88,2006.884,4,"DT")
+3070810
+"^DD",2006.88,2006.884,5,0)
+DATE FINAL REVIEW^D^^5;1^S %DT="EX" D ^%DT S X=Y K:Y<1 X
+"^DD",2006.88,2006.884,5,3)
+Enter the date of the final review.
+"^DD",2006.88,2006.884,5,21,0)
+^^3^3^3070810^
+"^DD",2006.88,2006.884,5,21,1,0)
+The value of this field is a VA-FileMan date (date only, no time).
+"^DD",2006.88,2006.884,5,21,2,0)
+This date identifies the day on which the final review and approval
+"^DD",2006.88,2006.884,5,21,3,0)
+of the test-agreement took place.
+"^DD",2006.88,2006.884,5,"DT")
+3070810
+"^DD",2006.88,2006.884,17,0)
+TEST BUILD^2006.88417^^17;0
+"^DD",2006.88,2006.884,21,0)
+PERSON PACKAGE COMPLETE^P2006.889'^MAGDBB("AGREEP",^1;2^Q
+"^DD",2006.88,2006.884,21,3)
+Identify the person who checked that the package was complete.
+"^DD",2006.88,2006.884,21,21,0)
+^^2^2^3070810^
+"^DD",2006.88,2006.884,21,21,1,0)
+The value of this field is a pointer to table # 2006.889.
+"^DD",2006.88,2006.884,21,21,2,0)
+This field identifies the person who checked that the package was complete.
+"^DD",2006.88,2006.884,21,"DT")
+3070810
+"^DD",2006.88,2006.884,22,0)
+PERSON REGULATORY REVIEW^P2006.889'^MAGDBB("AGREEP",^2;2^Q
+"^DD",2006.88,2006.884,22,3)
+Identify the Regulatory Officer.
+"^DD",2006.88,2006.884,22,21,0)
+^^3^3^3070810^
+"^DD",2006.88,2006.884,22,21,1,0)
+The value of this field is a pointer to table # 2006.889.
+"^DD",2006.88,2006.884,22,21,2,0)
+This field identifies the person who carried out the (FDA)
+"^DD",2006.88,2006.884,22,21,3,0)
+Regulatory review.
+"^DD",2006.88,2006.884,22,"DT")
+3070810
+"^DD",2006.88,2006.884,23,0)
+PERSON TECHNICAL REVIEW^P2006.889'^MAGDBB("AGREEP",^3;2^Q
+"^DD",2006.88,2006.884,23,3)
+Identify the technical reviewer.
+"^DD",2006.88,2006.884,23,21,0)
+^^2^2^3070810^
+"^DD",2006.88,2006.884,23,21,1,0)
+The value of this field is a pointer to table # 2006.889.
+"^DD",2006.88,2006.884,23,21,2,0)
+This field identifies the person who carried out the technical review.
+"^DD",2006.88,2006.884,23,"DT")
+3070810
+"^DD",2006.88,2006.884,24,0)
+PERSON MANAGEMENT REVIEW^P2006.889'^MAGDBB("AGREEP",^4;2^Q
+"^DD",2006.88,2006.884,24,3)
+Identify the project manager.
+"^DD",2006.88,2006.884,24,21,0)
+^^3^3^3070810^
+"^DD",2006.88,2006.884,24,21,1,0)
+The value of this field is a pointer to table # 2006.889.
+"^DD",2006.88,2006.884,24,21,2,0)
+This field identifies the person who carried out the project management
+"^DD",2006.88,2006.884,24,21,3,0)
+review.
+"^DD",2006.88,2006.884,24,"DT")
+3070810
+"^DD",2006.88,2006.884,25,0)
+PERSON FINAL REVIEW^P2006.889'^MAGDBB("AGREEP",^5;2^Q
+"^DD",2006.88,2006.884,25,3)
+Identify the final reviewer.
+"^DD",2006.88,2006.884,25,21,0)
+^^2^2^3070810^
+"^DD",2006.88,2006.884,25,21,1,0)
+The value of this field is a pointer to table # 2006.889.
+"^DD",2006.88,2006.884,25,21,2,0)
+This field identifies the person who carried out the final review.
+"^DD",2006.88,2006.884,25,"DT")
+3070810
+"^DD",2006.88,2006.88417,0)
+TEST BUILD SUB-FIELD^^6^6
+"^DD",2006.88,2006.88417,0,"DT")
+3070810
+"^DD",2006.88,2006.88417,0,"IX","B",2006.88417,.01)
+
+"^DD",2006.88,2006.88417,0,"NM","TEST BUILD")
+
+"^DD",2006.88,2006.88417,0,"UP")
+2006.884
+"^DD",2006.88,2006.88417,.01,0)
+TEST BUILD^MNJ6,0^^0;1^K:+X'=X!(X>999999)!(X<0)!(X?.E1"."1N.N) X
+"^DD",2006.88,2006.88417,.01,1,0)
+^.1
+"^DD",2006.88,2006.88417,.01,1,1,0)
+2006.88417^B
+"^DD",2006.88,2006.88417,.01,1,1,1)
+S ^MAGDBB("AGREE",DA(2),1,DA(1),17,"B",$E(X,1,30),DA)=""
+"^DD",2006.88,2006.88417,.01,1,1,2)
+K ^MAGDBB("AGREE",DA(2),1,DA(1),17,"B",$E(X,1,30),DA)
+"^DD",2006.88,2006.88417,.01,3)
+Enter the Test-Build number (T-number).
+"^DD",2006.88,2006.88417,.01,21,0)
+^^2^2^3070810^
+"^DD",2006.88,2006.88417,.01,21,1,0)
+The value of this field is an integer number.
+"^DD",2006.88,2006.88417,.01,21,2,0)
+This number uniquely identifies a test-build.
+"^DD",2006.88,2006.88417,.01,"DT")
+3070810
+"^DD",2006.88,2006.88417,2,0)
+DATE DISTRIBUTED^D^^0;2^S %DT="EX" D ^%DT S X=Y K:Y<1 X
+"^DD",2006.88,2006.88417,2,3)
+Enter the date on which the T-build was sent to the site.
+"^DD",2006.88,2006.88417,2,21,0)
+^^3^3^3070810^
+"^DD",2006.88,2006.88417,2,21,1,0)
+The value of this field is a VA-FileMan date (date only, no time).
+"^DD",2006.88,2006.88417,2,21,2,0)
+This date identifies the day on which the test build of the patch
+"^DD",2006.88,2006.88417,2,21,3,0)
+was sent to the test-site.
+"^DD",2006.88,2006.88417,2,"DT")
+3070810
+"^DD",2006.88,2006.88417,3,0)
+DATE FEEDBACK RECEIVED^D^^0;3^S %DT="EX" D ^%DT S X=Y K:Y<1 X
+"^DD",2006.88,2006.88417,3,3)
+Enter the date on which the feedback was received.
+"^DD",2006.88,2006.88417,3,21,0)
+^^3^3^3070810^
+"^DD",2006.88,2006.88417,3,21,1,0)
+The value of this field is a VA-FileMan date (date only, no time).
+"^DD",2006.88,2006.88417,3,21,2,0)
+This date identifies the day on which the feedback form was
+"^DD",2006.88,2006.88417,3,21,3,0)
+returned.
+"^DD",2006.88,2006.88417,3,"DT")
+3070810
+"^DD",2006.88,2006.88417,4,0)
+FEEDBACK RESULT^S^OK:Positive;NOT OK:Negative;^0;4^Q
+"^DD",2006.88,2006.88417,4,3)
+Indicate whether the feedback was positive or not.
+"^DD",2006.88,2006.88417,4,21,0)
+^^4^4^3070810^
+"^DD",2006.88,2006.88417,4,21,1,0)
+The value of this field is a code that indicates whether or not
+"^DD",2006.88,2006.88417,4,21,2,0)
+the feedback from the site about this test build was positive
+"^DD",2006.88,2006.88417,4,21,3,0)
+(patch is OK to be released) or negative (improvements need
+"^DD",2006.88,2006.88417,4,21,4,0)
+to be applied before the patch can be released).
+"^DD",2006.88,2006.88417,4,"DT")
+3070810
+"^DD",2006.88,2006.88417,5,0)
+MACHINE^2006.884175^^1;0
+"^DD",2006.88,2006.88417,6,0)
+FEEDBACK SUMMARY TEXT^2006.884176^^2;0
+"^DD",2006.88,2006.884175,0)
+MACHINE SUB-FIELD^^2^2
+"^DD",2006.88,2006.884175,0,"DT")
+3070810
+"^DD",2006.88,2006.884175,0,"IX","B",2006.884175,.01)
+
+"^DD",2006.88,2006.884175,0,"NM","MACHINE")
+
+"^DD",2006.88,2006.884175,0,"UP")
+2006.88417
+"^DD",2006.88,2006.884175,.01,0)
+MACHINE^MF^^0;1^K:$L(X)>63!($L(X)<1) X
+"^DD",2006.88,2006.884175,.01,1,0)
+^.1
+"^DD",2006.88,2006.884175,.01,1,1,0)
+2006.884175^B
+"^DD",2006.88,2006.884175,.01,1,1,1)
+S ^MAGDBB("AGREE",DA(3),1,DA(2),17,DA(1),1,"B",$E(X,1,30),DA)=""
+"^DD",2006.88,2006.884175,.01,1,1,2)
+K ^MAGDBB("AGREE",DA(3),1,DA(2),17,DA(1),1,"B",$E(X,1,30),DA)
+"^DD",2006.88,2006.884175,.01,3)
+Enter the name of the computer on which the test patch was installed.
+"^DD",2006.88,2006.884175,.01,21,0)
+^^3^3^3070810^
+"^DD",2006.88,2006.884175,.01,21,1,0)
+The value of this field is a string.
+"^DD",2006.88,2006.884175,.01,21,2,0)
+This string identifies the computer at the test site
+"^DD",2006.88,2006.884175,.01,21,3,0)
+where the test build was installed.
+"^DD",2006.88,2006.884175,.01,"DT")
+3070810
+"^DD",2006.88,2006.884175,2,0)
+INSTALLATION DATE^D^^0;2^S %DT="EX" D ^%DT S X=Y K:Y<1 X
+"^DD",2006.88,2006.884175,2,3)
+Enter the date on which the test patch was installed on this machine.
+"^DD",2006.88,2006.884175,2,21,0)
+^^3^3^3070810^
+"^DD",2006.88,2006.884175,2,21,1,0)
+The value of this field is a VA-FileMan date (date only, no time).
+"^DD",2006.88,2006.884175,2,21,2,0)
+This date identifies the day on which the test build was installed
+"^DD",2006.88,2006.884175,2,21,3,0)
+at the test site on the computer identified in this record.
+"^DD",2006.88,2006.884175,2,"DT")
+3070810
+"^DD",2006.88,2006.884176,0)
+FEEDBACK SUMMARY TEXT SUB-FIELD^^.01^1
+"^DD",2006.88,2006.884176,0,"DT")
+3070810
+"^DD",2006.88,2006.884176,0,"IX","B",2006.884176,.01)
+
+"^DD",2006.88,2006.884176,0,"NM","FEEDBACK SUMMARY TEXT")
+
+"^DD",2006.88,2006.884176,0,"UP")
+2006.88417
+"^DD",2006.88,2006.884176,.01,0)
+FEEDBACK SUMMARY TEXT^MF^^0;1^K:$L(X)>245!($L(X)<1) X
+"^DD",2006.88,2006.884176,.01,1,0)
+^.1
+"^DD",2006.88,2006.884176,.01,1,1,0)
+2006.884176^B
+"^DD",2006.88,2006.884176,.01,1,1,1)
+S ^MAGDBB("AGREE",DA(3),1,DA(2),17,DA(1),2,"B",$E(X,1,30),DA)=""
+"^DD",2006.88,2006.884176,.01,1,1,2)
+K ^MAGDBB("AGREE",DA(3),1,DA(2),17,DA(1),2,"B",$E(X,1,30),DA)
+"^DD",2006.88,2006.884176,.01,3)
+Enter the text that the site provided in the feedback form.
+"^DD",2006.88,2006.884176,.01,21,0)
+^^3^3^3070810^
+"^DD",2006.88,2006.884176,.01,21,1,0)
+The value of this field is a multi-line text.
+"^DD",2006.88,2006.884176,.01,21,2,0)
+This text is the feedback that was provided by the test site
+"^DD",2006.88,2006.884176,.01,21,3,0)
+about the current test build.
+"^DD",2006.88,2006.884176,.01,"DT")
+3070810
+"^DIC",2006.88,2006.88,0)
+TEST AGREEMENT^2006.88
+"^DIC",2006.88,2006.88,0,"GL")
+^MAGDBB("AGREE",
+"^DIC",2006.88,"B","TEST AGREEMENT",2006.88)
+
+**END**
+**END**

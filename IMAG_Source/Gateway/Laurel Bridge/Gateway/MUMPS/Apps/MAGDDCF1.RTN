@@ -1,0 +1,197 @@
+Cache for Windows NT^INT^Saved from DICOM,DICOM (ISW-KUZMAKP3-LT)^~Format=Cache.S~
+%RO on 02/27/2013  10:39
+MAGDDCF1^INT^1^62880,38361^0
+MAGDDCF1 ;WOIFO/PMK - Program to invoke Laurel Bridge DCF routine via System Call ; 27 Feb 2013 10:39 AM
+ ;;3.0;IMAGING;**110**;Mar 19, 2002;Build 61;Oct 10, 2012
+ ;; Per VHA Directive 2004-038, this routine should not be modified.
+ ;; +---------------------------------------------------------------+
+ ;; | Property of the US Government.                                |
+ ;; | No permission to copy or redistribute this software is given. |
+ ;; | Use of unreleased versions of this software requires the user |
+ ;; | to execute a written test agreement with the VistA Imaging    |
+ ;; | Development Office of the Department of Veterans Affairs,     |
+ ;; | telephone (301) 734-0100.                                     |
+ ;; | The Food and Drug Administration classifies this software as  |
+ ;; | a medical device.  As such, it may not be changed in any way. |
+ ;; | Modifications to this software may result in an adulterated   |
+ ;; | medical device under 21CFR820, the use of which is considered |
+ ;; | to be a violation of US Federal Statutes.                     |
+ ;; +---------------------------------------------------------------+
+ ;;
+ ;
+SEND(USERAPP) ; invoke dcf_store_scu to transmit image(s)
+ ; mainline DICOM service class provider code
+ ;
+ ; Input:
+ ;   USERAPP - name of Storage SCU from SCU_LIST.DIC
+ ;   
+ ;   ^TMP("MAG",$J,"DCF_STORE_SCU",0) -------------- number of DICOM objects to transmit
+ ;   ^TMP("MAG",$J,"DCF_STORE_SCU",<i>,"FILE") ----- path to i-th DICOM object
+ ;   ^TMP("MAG",$J,"DCF_STORE_SCU",<i>,"REMOVE",0) ---- number of data element deletions for i-th object   
+ ;   ^TMP("MAG",$J,"DCF_STORE_SCU",<i>,"REMOVE",<j>) -- j-th data element deletion for i-th object
+ ;   ^TMP("MAG",$J,"DCF_STORE_SCU",<i>,"REPLACE",0) ---- number of data elements changes for i-th object   
+ ;   ^TMP("MAG",$J,"DCF_STORE_SCU",<i>,"REPLACE",<j>) -- j-th data element change for i-th object
+ ;   
+ ;   Format of data element replace:  gggg,eeee = <new value>  (note spaces on both sides of = sign)
+ ;   Format of data element remove:   tag = gggg,eeee          (note spaces on both sides of = sign)
+ ;   
+ ;   Data element changes and the "REMOVE" and "REPLACE" nodes are optional.
+ ;   
+ ; Return:
+ ;   0 = Success
+ ;  <0 = Failure  (-error#,reason)
+ ;  >0   not used
+ ;
+ N APPIEN ;------ pointer to the USERAPP in file 2006.585
+ N CALLED ;------ called application entity title, i.e., the "listener"
+ N CALLING ;----- calling application entity title, i.e., the "initiator"
+ N CFGFILE ;----- DCF_STORE_SCU configuration file
+ N DCFPATH ;----- path to DCF_RUNTIME\bin for DCF_STORE_SCU.exe
+ N DESTINATION ;- network address of Storage SCP 
+ N ERROR ;------- return error indicator from subroutines
+ N PORT ;-------- TCP/IP port number on which the SCP will listen
+ N RETURN ;------ return code from SEND1
+ N SOPCLASS ;---- SOP Class of the DICOM file (from Part-10 header)
+ N TSYNTAX ;----- transfer syntax of the DICOM file (from Part-10 header)
+ N X
+ ;
+ S RETURN="-100,Unknown Error in "_$T(+0)
+ ;
+ S APPIEN=$O(^MAGDICOM(2006.585,"B",USERAPP,""))
+ I 'APPIEN Q "-1,Illegal User Application: """_USERAPP_""""
+ ;
+ S X=^MAGDICOM(2006.585,APPIEN,0)
+ S CALLED=$P(X,"^",2),CALLING=$P(X,"^",3)
+ S DESTINATION=$P(X,"^",4),PORT=$P(X,"^",5)
+ ;
+ S DCFPATH=$$ENVIRON^MAGOSDIR("DCF_USER_ROOT")
+ I DCFPATH="" Q "-2,No DCF_USER_ROOT environment variable"
+ ;
+ S CFGFILE=^MAGDICOM(2006.563,1,"IMAGE OUTPUT PATH")_"\DCF_STORE_SCU_"_$J_".CFG"
+ ;
+ ; first sort the DICOM objects by presentation context
+ S ERROR=$$PCONTEXT^MAGDDCF2()
+ I ERROR'="" Q ERROR
+ ;
+ ; now transmit them in presentation context order
+ S SOPCLASS=""
+ F  S SOPCLASS=$O(^TMP("MAG",$J,"DCF_STORE_SCU","PRESENTATION CONTEXT",SOPCLASS)) Q:SOPCLASS=""  D  Q:RETURN
+ . S TSYNTAX=""
+ . F  S TSYNTAX=$O(^TMP("MAG",$J,"DCF_STORE_SCU","PRESENTATION CONTEXT",SOPCLASS,TSYNTAX)) Q:TSYNTAX=""  D
+ . . S RETURN=$$SEND1(SOPCLASS,TSYNTAX) Q:RETURN
+ . . Q
+ . Q
+ Q RETURN
+ ;
+SEND1(SOPCLASS,TSYNTAX) ;
+ N EVRLE ;--- Explicit VR Little Endian transfer syntax
+ N IVRLE ;--- Implicit VR Little Endian transfer syntax
+ N RETURN ;-- return code from SEND2
+ N X
+ ;
+ S EVRLE=$$GETUID^MAGDUID1("Explicit VR Little Endian")
+ S IVRLE=$$GETUID^MAGDUID1("Implicit VR Little Endian")
+ ;
+ I TSYNTAX=IVRLE D
+ . ; IVRLE is the default transfer syntax for DICOM and has to work
+ . S RETURN=$$SEND2(SOPCLASS,TSYNTAX)
+ . Q
+ E  I TSYNTAX=EVRLE D
+ . ; EVRLE is the preferred transfer syntax for DICOM and should work
+ . S RETURN=$$SEND2(SOPCLASS,TSYNTAX)
+ . I (+RETURN)=-1 D  ; no EVRLE, so try IVRLE
+ . . S RETURN=$$SEND2(SOPCLASS,TSYNTAX,IVRLE)
+ . . Q
+ . Q
+ E  D   ; compressed transfer syntax
+ . ; this should work if the SCP accepts compression
+ . S RETURN=$$SEND2(SOPCLASS,TSYNTAX)
+ . I (+RETURN)=-1 D  ; no compression, so then try EVRLE
+ . . S RETURN=$$SEND2(SOPCLASS,TSYNTAX,EVRLE)
+ . . I (+RETURN)=-1 D  ; no EVRLE, so try IVRLE
+ . . . S RETURN=$$SEND2(SOPCLASS,TSYNTAX,IVRLE)
+ . . . Q
+ . . Q
+ . Q
+ I RETURN>-3 S X=$$DEL^MAGOSDIR(CFGFILE) ; Laurel Bridge DCF_STORE_SCU.EXE configuration file
+ Q RETURN
+ ;
+SEND2(SOPCLASS,TSYNTAX,COERCETSYNTAX) ; send a set of DICOM objects
+ ; This sends all the DICOM objects with this presentation context
+ ; 
+ ; Input:
+ ;   CFGFILE -- path to configuration file
+ ;   APPIEN --- pointer to the USERAPP in file 2006.585
+ ;   
+ ; Output:
+ ;    Return -- return code from SEND1
+ ;    
+ N APPLICATION
+ N CMD
+ N COMMENTS ;---- flag to control comment lines in the DCF_STORE_SCU configuration file
+ N OBJECTCOUNT ;- count of the number of DICOM objects with this presentation context
+ N OBJECTNUMBER
+ N OUTPUT
+ N I
+ ;
+ W:$G(DEBUG) !,"SOP CLASS: ",$$GETNAME^MAGDUID2(SOPCLASS)
+ W:$G(DEBUG) " -- TRANSFER SYNTAX: ",$$GETNAME^MAGDUID2(TSYNTAX)
+ I $D(COERCETSYNTAX) W:$G(DEBUG) !,"*** Coerce Transfer Syntax: ",$$GETNAME^MAGDUID2(COERCETSYNTAX)," ***"
+ S COERCETSYNTAX=$G(COERCETSYNTAX,TSYNTAX)
+ ;
+ S COMMENTS=0 ; set to 1 output comments in configuration file
+ ;
+ ; count the objects to be sent with this presentation context and build the CFG file header
+ S (I,OBJECTCOUNT)=0
+ F  S I=$O(^TMP("MAG",$J,"DCF_STORE_SCU","PRESENTATION CONTEXT",SOPCLASS,TSYNTAX,I)) Q:'I  D
+ . S OBJECTCOUNT=OBJECTCOUNT+1
+ . Q
+ D INITCFG^MAGDDCF2(CFGFILE,APPIEN,COERCETSYNTAX,OBJECTCOUNT)
+ ;
+ ; add each of the DICOM objects to the CFG file
+ S (I,OBJECTNUMBER)=0
+ F  S I=$O(^TMP("MAG",$J,"DCF_STORE_SCU","PRESENTATION CONTEXT",SOPCLASS,TSYNTAX,I)) Q:'I  D
+ . S OBJECTNUMBER=OBJECTNUMBER+1
+ . D BUILDCFG^MAGDDCF2(CFGFILE,COERCETSYNTAX,I,OBJECTNUMBER)
+ . Q
+ ;
+ ; close the CFG file
+ D CLOSECFG^MAGDDCF2(CFGFILE)
+ ;
+ ; send the DICOM object(s)
+ S CMD=DCFPATH_"\bin\DCF_STORE_SCU -f file:/"""_CFGFILE_""""
+ S APPLICATION="BATCH DICOM IMAGE TRANSISSION"
+ S RETURN=$$HOSTCMD(CMD,.OUTPUT,.ERROR,APPLICATION)
+ Q RETURN
+ ;
+HOSTCMD(CMD,OUT,ERR,APP,DEBUG) ; invoke the command shell and return exit code
+ ; Laurel Bridge outputs its messages on Standard Error (STDERR) instead of Standard Output (STDOUT)
+ N DISPLAY,RETURN,X
+ S DISPLAY=$G(VERBOSE)
+ I DISPLAY="" S DISPLAY=1 ; set default to display commands
+ S X=$$HOSTCMD^MAGOSMSC(CMD,.OUT,.ERR,,$G(DEBUG))
+ I DISPLAY W !,$C(27),"[1m",$C(27),"[7m"," ",CMD," ",$C(27),"[0m "
+ I DISPLAY>1,X D
+ . W !!,"**** Error: ",APP," abnormally terminated with error #",X," ***",!
+ . I $G(OUT(0)) W !,"*** DOS OUTPUT ***" D
+ . . F I=1:1:OUT(0) W !,$J(I,3),") ",OUT(I)
+ . . Q
+ . I $G(ERR(0)) W !,"*** DOS ERROR ***" D
+ . . F I=1:1:ERR(0) W !,$J(I,3),") ",ERR(I)
+ . . Q
+ . Q
+ I X=0 S RETURN=X
+ E  I X=1,$G(ERR(0)) D  ; read the error file
+ . N Y S Y=""
+ . F I=1:1:ERR(0) I ERR(I)["status_info" S Y=$P(ERR(I)," = ",2) Q
+ . I Y="REMOTE_REJECTED_TRANSIENT" S RETURN="-1,"_Y
+ . E  I Y="REMOTE_IO_ERROR" S RETURN="-2,"_Y
+ . E  S RETURN="-3,Unexpected Error: "_Y
+ . Q
+ E  I X=1 S RETURN="-4,Undocumented Laurel Bridge DCF_STORE_SCU.EXE error"
+ E  I X=2 S RETURN="-5,Fatal error trying to use Laurel Bridge DCF_STORE_SCU.EXE"
+ E  S RETURN="-100,Unknown Laurel Bridge DCF_STORE_SCU.EXE return code: "_X
+ Q RETURN
+
+
+

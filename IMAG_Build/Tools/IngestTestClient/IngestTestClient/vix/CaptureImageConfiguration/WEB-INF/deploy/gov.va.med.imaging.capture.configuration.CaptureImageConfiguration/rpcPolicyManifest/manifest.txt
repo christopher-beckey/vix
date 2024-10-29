@@ -1,0 +1,7 @@
+# Module gov.va.med.imaging.capture.configuration.CaptureImageConfiguration
+# RPC service class, partial path of RPC policy file
+gov.va.med.imaging.capture.configuration.client.service.IndexTermService, 2DFC5BA71D043A9818181377FE0E975D.gwt.rpc
+gov.va.med.imaging.capture.configuration.client.service.UserAuthenticationService, D97727EF1521A54FCD850821A5F9238A.gwt.rpc
+gov.va.med.imaging.capture.configuration.client.service.TIUService, 543C91A197FC961405EDABB882470436.gwt.rpc
+gov.va.med.imaging.capture.configuration.client.service.CaptureConfigurationService, E652E46BABD1D914D02965387DB7D65E.gwt.rpc
+gov.va.med.imaging.capture.configuration.client.service.WelcomeMessageService, B7E41994976D8068F6E4A76B3E1CDBA5.gwt.rpc

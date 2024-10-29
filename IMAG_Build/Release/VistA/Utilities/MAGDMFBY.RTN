@@ -1,0 +1,250 @@
+01/18/2005  09:58
+Saved from DCM,DCE
+MAGDMFBY
+MAGDMFBY ;WOIFO/EdM - Update SOP CLASS table ; 01/18/2005  09:58
+ ;;3.0;IMAGING;**51**;14-Jan-2005
+ ;; +---------------------------------------------------------------+
+ ;; | Property of the US Government.                                |
+ ;; | No permission to copy or redistribute this software is given. |
+ ;; | Use of unreleased versions of this software requires the user |
+ ;; | to execute a written test agreement with the VistA Imaging    |
+ ;; | Development Office of the Department of Veterans Affairs,     |
+ ;; | telephone (301) 734-0100.                                     |
+ ;; |                                                               |
+ ;; | The Food and Drug Administration classifies this software as  |
+ ;; | a medical device.  As such, it may not be changed in any way. |
+ ;; | Modifications to this software may result in an adulterated   |
+ ;; | medical device under 21CFR820, the use of which is considered |
+ ;; | to be a violation of US Federal Statutes.                     |
+ ;; +---------------------------------------------------------------+
+ ;;
+ Q
+ ;
+LOAD N D0,H,LINE,N,Q,V,X
+ L +^MAG(2006.532):1E9 ; Background process MUST wait
+ S H=$G(^MAG(2006.532,0))
+ S $P(H,"^",1,2)="DICOM SOP CLASS^2006.532"
+ S N=0,D0=0 F  S D0=$O(^MAG(2006.532,D0)) Q:'D0  S N=N+1
+ S $P(H,"^",4)=N F N=1:1:4 S V(N)=""
+ S N=0 F LINE=1:1 S X=$T(SOPCLASS+LINE) Q:X'[";;"  D
+ . S X=$P(X,";;",2)
+ . I X'="" D  Q
+ . . S N=N+1
+ . . I N=1 S V(4)=$S(X["R":"R",1:"A"),X=$P($TR(X," "),"R",1)
+ . . S V(N)=X
+ . . Q
+ . S D0=$O(^MAG(2006.532,"B",V(1),"")) D:'D0
+ . . S D0=$O(^MAG(2006.532," "),-1)+1
+ . . S $P(H,"^",3)=D0
+ . . S $P(H,"^",4)=$P(H,"^",4)+1
+ . . Q
+ . S X=V(1)_"^"_V(2)_"^^"_V(4) S:V(3)'="" Q(D0)=V(3)
+ . S ^MAG(2006.532,D0,0)=X
+ . S ^MAG(2006.532,"B",V(1),D0)=""
+ . S ^MAG(2006.532,"C",V(2),D0)=""
+ . F N=1:1:4 S V(N)=""
+ . S N=0
+ . Q
+ S D0="" F  S D0=$O(Q(D0)) Q:D0=""  D
+ . S Q=$O(^MAG(2006.532,"B",Q(D0),""))
+ . I 'Q W !,"Cannot find equivalence class ",Q(D0) Q
+ . I $P(^MAG(2006.532,Q,0),"^",4)="R" W !,"Equivalence class ",Q(D0)," is retired." Q
+ . S $P(^MAG(2006.532,D0,0),"^",3)=Q
+ . Q
+ S ^MAG(2006.532,0)=H
+ L -^MAG(2006.532):1E9 ; Background process MUST wait
+ Q
+ ;
+ ; 1st line: SOP Class UID
+ ; 2nd line: SOP CLass name
+ ; 3rd line (optional): equivalence class
+ ;
+SOPCLASS ;
+ ;;1.2.840.10008.5.1.4.1.1.1
+ ;;Computed Radiography Image Storage
+ ;;
+ ;;1.2.840.10008.5.1.4.1.1.1.1
+ ;;Digital X-Ray Image Storage - For Presentation
+ ;;1.2.840.10008.5.1.4.1.1.1
+ ;;
+ ;;1.2.840.10008.5.1.4.1.1.1.1.1
+ ;;Digital X-Ray Image Storage - For Processing
+ ;;
+ ;;1.2.840.10008.5.1.4.1.1.1.2
+ ;;Digital Mammography X-Ray Image Storage - For Presentation
+ ;;
+ ;;1.2.840.10008.5.1.4.1.1.1.2.1
+ ;;Digital Mammography X-Ray Image Storage - For Processing
+ ;;
+ ;;1.2.840.10008.5.1.4.1.1.1.3
+ ;;Digital Intra-oral X-Ray Image Storage - For Presentation
+ ;;
+ ;;1.2.840.10008.5.1.4.1.1.1.3.1
+ ;;Digital Intra-oral X-Ray Image Storage - For Processing
+ ;;
+ ;;1.2.840.10008.5.1.4.1.1.2
+ ;;CT Image Storage
+ ;;
+ ;;1.2.840.10008.5.1.4.1.1.3
+ ;;Ultrasound Multi-frame Image Storage (Retired)
+ ;;
+ ;;1.2.840.10008.5.1.4.1.1.3.1
+ ;;Ultrasound Multi-frame Image Storage
+ ;;
+ ;;1.2.840.10008.5.1.4.1.1.4
+ ;;MR Image Storage
+ ;;
+ ;;1.2.840.10008.5.1.4.1.1.5
+ ;;Nuclear Medicine Image Storage (Retired)
+ ;;
+ ;;1.2.840.10008.5.1.4.1.1.6
+ ;;Ultrasound Image Storage (Retired)
+ ;;
+ ;;1.2.840.10008.5.1.4.1.1.6.1
+ ;;Ultrasound Image Storage
+ ;;
+ ;;1.2.840.10008.5.1.4.1.1.7
+ ;;Secondary Capture Image Storage
+ ;;
+ ;;1.2.840.10008.5.1.4.1.1.7.1
+ ;;Multi-frame Single Bit Secondary Capture Image Storage
+ ;;1.2.840.10008.5.1.4.1.1.7
+ ;;
+ ;;1.2.840.10008.5.1.4.1.1.7.2
+ ;;Multi-frame Grayscale Byte Secondary Capture Image Storage
+ ;;1.2.840.10008.5.1.4.1.1.7
+ ;;
+ ;;1.2.840.10008.5.1.4.1.1.7.3
+ ;;Multi-frame Grayscale Word Secondary Capture Image Storage
+ ;;1.2.840.10008.5.1.4.1.1.7
+ ;;
+ ;;1.2.840.10008.5.1.4.1.1.7.4
+ ;;Multi-frame True Color Secondary Capture Image Storage
+ ;;1.2.840.10008.5.1.4.1.1.7
+ ;;
+ ;;1.2.840.10008.5.1.4.1.1.8
+ ;;Standalone Overlay Storage
+ ;;
+ ;;1.2.840.10008.5.1.4.1.1.9
+ ;;Standalone Curve Storage
+ ;;
+ ;;1.2.840.10008.5.1.4.1.1.9.1.1
+ ;;12-lead ECG Waveform Storage
+ ;;
+ ;;1.2.840.10008.5.1.4.1.1.9.1.2
+ ;;General ECG Waveform Storage
+ ;;
+ ;;1.2.840.10008.5.1.4.1.1.9.1.3
+ ;;Ambulatory ECG Waveform Storage
+ ;;
+ ;;1.2.840.10008.5.1.4.1.1.9.2.1
+ ;;Hemodynamic Waveform Storage
+ ;;
+ ;;1.2.840.10008.5.1.4.1.1.9.3.1
+ ;;Cardiac Electrophysiology Waveform Storage
+ ;;
+ ;;1.2.840.10008.5.1.4.1.1.9.4.1
+ ;;Basic Voice Audio Waveform Storage
+ ;;
+ ;;1.2.840.10008.5.1.4.1.1.10
+ ;;Standalone Modality LUT Storage
+ ;;
+ ;;1.2.840.10008.5.1.4.1.1.11
+ ;;Standalone VOI LUT Storage
+ ;;
+ ;;1.2.840.10008.5.1.4.1.1.11.1
+ ;;Grayscale Softcopy Presentation State Storage SOP Class
+ ;;
+ ;;1.2.840.10008.5.1.4.1.1.12.1
+ ;;X-Ray Angiographic Image Storage
+ ;;
+ ;;1.2.840.10008.5.1.4.1.1.12.2
+ ;;X-Ray Radiofluoroscopic Image Storage
+ ;;
+ ;;1.2.840.10008.5.1.4.1.1.12.3
+ ;;X-Ray Angiographic Bi-Plane Image Storage (Retired)
+ ;;
+ ;;1.2.840.10008.5.1.4.1.1.20
+ ;;Nuclear Medicine Image Storage
+ ;;
+ ;;1.2.840.10008.5.1.4.1.1.66
+ ;;Raw Data Storage
+ ;;
+ ;;1.2.840.10008.5.1.4.1.1.66.1
+ ;;Spatial Registration Storage
+ ;;
+ ;;1.2.840.10008.5.1.4.1.1.66.2
+ ;;Spatial Fiducials Storage
+ ;;
+ ;;1.2.840.10008.5.1.4.1.1.77.1
+ ;;VL Image Storage (Retired)
+ ;;
+ ;;1.2.840.10008.5.1.4.1.1.77.2
+ ;;VL Multi-frame Image Storage (Retired)
+ ;;
+ ;;1.2.840.10008.5.1.4.1.1.77.1.1
+ ;;VL Endoscopic Image Storage
+ ;;
+ ;;1.2.840.10008.5.1.4.1.1.77.1.1.1
+ ;;Video Endoscopic Image Storage
+ ;;
+ ;;1.2.840.10008.5.1.4.1.1.77.1.2
+ ;;VL Microscopic Image Storage
+ ;;
+ ;;1.2.840.10008.5.1.4.1.1.77.1.2.1
+ ;;Video Microscopic Image Storage
+ ;;
+ ;;1.2.840.10008.5.1.4.1.1.77.1.3
+ ;;VL Slide-Coordinates Microscopic Image Storage
+ ;;
+ ;;1.2.840.10008.5.1.4.1.1.77.1.4
+ ;;VL Photographic Image Storage
+ ;;
+ ;;1.2.840.10008.5.1.4.1.1.77.1.4.1
+ ;;Video Photographic Image Storage
+ ;;
+ ;;1.2.840.10008.5.1.4.1.1.77.1.5.1
+ ;;Ophthalmic Photography 8 Bit Image Storage
+ ;;
+ ;;1.2.840.10008.5.1.4.1.1.77.1.5.2
+ ;;Ophthalmic Photography 16 Bit Image Storage
+ ;;1.2.840.10008.5.1.4.1.1.77.1.5.1
+ ;;
+ ;;1.2.840.10008.5.1.4.1.1.77.1.5.3
+ ;;Stereometric Relationship Storage
+ ;;
+ ;;1.2.840.10008.5.1.4.1.1.88.40
+ ;;Procedure Log Storage
+ ;;
+ ;;1.2.840.10008.5.1.4.1.1.128
+ ;;Positron Emission Tomography Image Storage
+ ;;
+ ;;1.2.840.10008.5.1.4.1.1.129
+ ;;Standalone PET Curve Storage
+ ;;
+ ;;1.2.840.10008.5.1.4.1.1.481.1
+ ;;RT Image Storage
+ ;;
+ ;;1.2.840.10008.5.1.4.1.1.481.2
+ ;;RT Dose Storage
+ ;;
+ ;;1.2.840.10008.5.1.4.1.1.481.3
+ ;;RT Structure Set Storage
+ ;;
+ ;;1.2.840.10008.5.1.4.1.1.481.4
+ ;;RT Beams Treatment Record Storage
+ ;;
+ ;;1.2.840.10008.5.1.4.1.1.481.5
+ ;;RT Plan Storage
+ ;;
+ ;;1.2.840.10008.5.1.4.1.1.481.6
+ ;;RT Brachy Treatment Record Storage
+ ;;
+ ;;1.2.840.10008.5.1.4.1.1.481.7
+ ;;RT Treatment Summary Record Storage
+ ;;
+ ; Note, the above line must be " ;;",
+ ; otherwise the last entry won't be stored.
+ ;
+
+

@@ -1,0 +1,90 @@
+11/15/2004  10:51
+Saved from DCM,DCE
+MAGTSTDS
+MAGTSTDS ; DICOM Send ; 11/15/2004  10:51
+ Q
+ ;
+READLOG(OUT,L1,L2,L3,L4) N I,IMG,N1,N2,SND,STS,X
+ ; OUT = name of output file
+ ; L1...L4 = names of log-files
+ K ^TMP($J)
+ S STS=$$OPEN^MAGOSFIL(OUT,"W"),X=$$USEPRIN^MAGOSFIL(1)
+ I STS<0 W !,STS Q
+ D READ(L1)
+ D READ(L2)
+ D READ(L3)
+ D READ(L4)
+ ;
+ S STS=$$USE^MAGOSFIL(OUT)
+ ;
+ S IMG="" F  S IMG=$O(^TMP($J,"I",IMG)) Q:IMG=""  D
+ . S N2=^TMP($J,"I",IMG)
+ . S I(N2)=$G(I(N2))+1
+ . Q
+ S N2="" F  S N2=$O(I(N2)) Q:N2=""  D
+ . W $J(I(N2),5)," images queued"
+ . W:N2=1 " once" W:N2>1 " ",N2," times"
+ . W !
+ . Q
+ W !
+ ;
+ S SND="" F  S SND=$O(^TMP($J,"S",SND)) Q:SND=""  D
+ . Q:$TR($E(SND,$L(SND)-3,$L(SND)),"DCM","dcm")'=".dcm"
+ . S N1=^TMP($J,"S",SND)
+ . F I=$L(SND)-4:-1:0 Q:$E(SND,I)'?1N
+ . S IMG=+$E(SND,I+1,$L(SND)-4) Q:'IMG
+ . S N2=+$G(^TMP($J,"I",IMG))
+ . D:N1'=N2
+ . . S X="Image "_IMG_" queued" S:N2>1 X=X_" "_N2_" times"
+ . . S X=X_", sent "_N1_" time" S:N1'=1 X=X_"s"
+ . . W X,!
+ . . Q
+ . K ^TMP($J,"I",IMG),^TMP($J,"S",SND)
+ . Q
+ W !
+ S IMG="" F  S IMG=$O(^TMP($J,"I",IMG)) Q:IMG=""  D
+ . S N2=^TMP($J,"I",IMG)
+ . S X="Image "_IMG_" queued " S:N2>1 X=X_" "_N2_" times"
+ . S X=X_", never sent"
+ . W X,!
+ . K ^TMP($J,"I",IMG)
+ . Q
+ S SND="" F  S SND=$O(^TMP($J,"S",SND)) Q:SND=""  D
+ . S N1=^TMP($J,"S",SND)
+ . W "File ",SND," sent" W:N1>1 " ",N1," times"
+ . Q
+ W !
+ S STS=$$CLOSE^MAGOSFIL(OUT)
+ K ^TMP($J)
+ Q
+ ;
+READ(FILE) N FIL,I,N,OK,SND,STS,X
+ S STS=$$USE^MAGOSFIL(OUT)
+ W !,"Reading ",FILE
+ ;
+ S STS=$$OPEN^MAGOSFIL(FILE,"R"),X=$$USEPRIN^MAGOSFIL(1)
+ I STS<0 W !,STS Q
+ S N=0,FIL=0,OK=1,SND="" F  D  Q:'OK
+ . S N=N+1
+ . S STS=$$READ^MAGOSFIL(FILE,.X) S:+STS=-2 OK=0
+ . I X?1"There are "1.N1" images in this group".E S FIL=1 Q
+ . I $TR(X," ")="" S FIL=0 Q
+ . I FIL F I=1:1:$L(X," ") S P=$P(X," ",I) S:P ^TMP($J,"I",P)=$G(^TMP($J,"I",P))+1
+ . I X?1"Image "1.N1"/"1.N1": ".E S SND=$P(X," ",3)
+ . I SND'="",X="Recving <<IMAGE SENT>>" S ^TMP($J,"S",SND)=$G(^TMP($J,"S",SND))+1,SND=""
+ . Q
+ S STS=$$CLOSE^MAGOSFIL(FILE)
+ S STS=$$USE^MAGOSFIL(OUT)
+ W " --- ",N," lines.",!
+ Q
+ ;
+TEST N O,L1,L2,L3,L4
+ S O="c:\edm\vss\out.log"
+ S L1="c:\edm\vss\m1.log"
+ S L2="c:\edm\vss\m2.log"
+ S L3="c:\edm\vss\m3.log"
+ S L4="c:\edm\vss\m4.log"
+ D READLOG(O,L1,L2,L3,L4)
+ Q
+
+

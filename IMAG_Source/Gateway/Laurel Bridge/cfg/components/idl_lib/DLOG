@@ -1,0 +1,22 @@
+#==============================================================================
+#	static information about this component
+#==============================================================================
+[ component_info ]
+name = DLOG
+type = idl_lib
+category = idl_interface_libs
+module = DLOG
+description = Distributed Log CORBA interface
+slnreldir = .\isrc\DLOG
+
+[ required_components ]
+component = idl_lib/DCDS
+[ debug_controls ]
+debug_flag = df_SHOW_CONSTRUCTORS, 0x0001, show object constructors
+debug_flag = df_SHOW_DESTRUCTORS, 0x0002, show object destructors
+debug_flag = df_SHOW_GENERAL_FLOW, 0x0004, show general flow
+debug_flag = df_SIMULATE_HARDWARE, 0x0008, simulate external devices
+debug_flag = df_SHOW_CFG_INFO, 0x0010, show configuration information
+debug_flag = df_SHOW_EXC_THROW, 0x0020, show exceptions before throwing
+
+[ DLOG ]

@@ -1,0 +1,28 @@
+maguMAGGA03UzUSERS ;WOIFO/MLH - unit test USERS^MAGGA03U ; 6/10/11 11:13 AM
+ Q
+TEST(verblvl) ;
+ S verblvl=$G(verblvl,1)
+ N I
+ W:verblvl "ROUTINE: MAGGA03U   ENTRY POINT: USERS",!
+ F I=1:1 Q:$T(@I)=""  D @(I_"(verblvl)")
+ Q
+1(verblvl) ; ensure all data are returned for valid criteria
+ N MLH
+ W:verblvl "UNIT TEST 1: "
+ D USERS^MAGGA03U(.MLH,3020401,3020430,"C") M MLH=@MLH
+ W:verblvl $S('MLH(0):"FAILURE",'$D(MLH(3)):"FAILURE",1:"SUCCESS"),!
+ Q
+2(verblvl) ; exception message if invalid flag sent
+ N MLH
+ W:verblvl "UNIT TEST 2: "
+ D USERS^MAGGA03U(.MLH,3020401,3020430,"FOO") M MLH=@MLH
+ W:verblvl $S(MLH(0):"FAILURE",$D(MLH(1)):"FAILURE",1:"SUCCESS"),!
+ Q
+3(verblvl) ; ensure all data are returned for default flag values
+ N MLH
+ W:verblvl "UNIT TEST 3: "
+ D USERS^MAGGA03U(.MLH,3020401,3020430) M MLH=@MLH ; defaults should be taken
+ W:verblvl $S('MLH(0):"FAILURE",'$D(MLH(3)):"FAILURE",1:"SUCCESS"),!
+ Q
+
+

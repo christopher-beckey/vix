@@ -1,0 +1,484 @@
+KIDS Distribution saved on Jul 05, 2006@09:43:09
+VistA Imaging Version 3.0 Patch 49 File 15 AMAGDHLTM cross reference
+**KIDS**:Z VSS FILE 0.1T^
+
+**INSTALL NAME**
+Z VSS FILE 0.1T
+"BLD",1522,0)
+Z VSS FILE 0.1T^^0^3060705^n
+"BLD",1522,1,0)
+^^3^3^3060705^^
+"BLD",1522,1,1,0)
+This build produces a KIDS distribution for the AMAGDHLTM cross reference
+"BLD",1522,1,2,0)
+to the DUPLICATE RECORD File (#15), which is to be included in Patch
+"BLD",1522,1,3,0)
+MAG*3.0*49.
+"BLD",1522,4,0)
+^9.64PA^15^1
+"BLD",1522,4,15,0)
+15
+"BLD",1522,4,15,2,0)
+^9.641^15^1
+"BLD",1522,4,15,2,15,0)
+DUPLICATE RECORD  (File-top level)
+"BLD",1522,4,15,2,15,1,0)
+^9.6411^.05^1
+"BLD",1522,4,15,2,15,1,.05,0)
+MERGE STATUS
+"BLD",1522,4,15,222)
+y^y^p^^^^n^^n
+"BLD",1522,4,15,224)
+
+"BLD",1522,4,"APDD",15,15)
+
+"BLD",1522,4,"APDD",15,15,.05)
+
+"BLD",1522,4,"B",15,15)
+
+"BLD",1522,"INID")
+y^y^y
+"BLD",1522,"KRN",0)
+^9.67PA^19^17
+"BLD",1522,"KRN",.4,0)
+.4
+"BLD",1522,"KRN",.4,"NM",0)
+^9.68A^^
+"BLD",1522,"KRN",.401,0)
+.401
+"BLD",1522,"KRN",.402,0)
+.402
+"BLD",1522,"KRN",.403,0)
+.403
+"BLD",1522,"KRN",.5,0)
+.5
+"BLD",1522,"KRN",.84,0)
+.84
+"BLD",1522,"KRN",3.6,0)
+3.6
+"BLD",1522,"KRN",3.8,0)
+3.8
+"BLD",1522,"KRN",9.2,0)
+9.2
+"BLD",1522,"KRN",9.8,0)
+9.8
+"BLD",1522,"KRN",19,0)
+19
+"BLD",1522,"KRN",19,"NM",0)
+^9.68A^2^2
+"BLD",1522,"KRN",19,"NM",1,0)
+MAG CONFIGURE IHE PACS HL7 I/F^^0
+"BLD",1522,"KRN",19,"NM",2,0)
+MAG HL7 MAINT^^2
+"BLD",1522,"KRN",19,"NM","B","MAG CONFIGURE IHE PACS HL7 I/F",1)
+
+"BLD",1522,"KRN",19,"NM","B","MAG HL7 MAINT",2)
+
+"BLD",1522,"KRN",19.1,0)
+19.1
+"BLD",1522,"KRN",19.1,"NM",0)
+^9.68A^^
+"BLD",1522,"KRN",101,0)
+101
+"BLD",1522,"KRN",101,"NM",0)
+^9.68A^^0
+"BLD",1522,"KRN",409.61,0)
+409.61
+"BLD",1522,"KRN",409.61,"NM",0)
+^9.68A^^
+"BLD",1522,"KRN",771,0)
+771
+"BLD",1522,"KRN",771,"NM",0)
+^9.68A^^0
+"BLD",1522,"KRN",870,0)
+870
+"BLD",1522,"KRN",870,"NM",0)
+^9.68A^^0
+"BLD",1522,"KRN",8994,0)
+8994
+"BLD",1522,"KRN","B",.4,.4)
+
+"BLD",1522,"KRN","B",.401,.401)
+
+"BLD",1522,"KRN","B",.402,.402)
+
+"BLD",1522,"KRN","B",.403,.403)
+
+"BLD",1522,"KRN","B",.5,.5)
+
+"BLD",1522,"KRN","B",.84,.84)
+
+"BLD",1522,"KRN","B",3.6,3.6)
+
+"BLD",1522,"KRN","B",3.8,3.8)
+
+"BLD",1522,"KRN","B",9.2,9.2)
+
+"BLD",1522,"KRN","B",9.8,9.8)
+
+"BLD",1522,"KRN","B",19,19)
+
+"BLD",1522,"KRN","B",19.1,19.1)
+
+"BLD",1522,"KRN","B",101,101)
+
+"BLD",1522,"KRN","B",409.61,409.61)
+
+"BLD",1522,"KRN","B",771,771)
+
+"BLD",1522,"KRN","B",870,870)
+
+"BLD",1522,"KRN","B",8994,8994)
+
+"BLD",1522,"QUES",0)
+^9.62^^
+"FIA",15)
+DUPLICATE RECORD
+"FIA",15,0)
+^VA(15,
+"FIA",15,0,0)
+15IsV
+"FIA",15,0,1)
+y^y^p^^^^n^^n
+"FIA",15,0,10)
+
+"FIA",15,0,11)
+
+"FIA",15,0,"RLRO")
+
+"FIA",15,15)
+1
+"FIA",15,15,.05)
+
+"KRN",19,22404,-1)
+2^2
+"KRN",19,22404,0)
+MAG HL7 MAINT^Imaging HL7 Messaging Maintenance^^M^1353^^^^^^^454
+"KRN",19,22404,10,0)
+^19.01IP^2^2
+"KRN",19,22404,10,2,0)
+22406^IHE
+"KRN",19,22404,10,2,"^")
+MAG CONFIGURE IHE PACS HL7 I/F
+"KRN",19,22404,"U")
+IMAGING HL7 MESSAGING MAINTENA
+"KRN",19,22406,-1)
+0^1
+"KRN",19,22406,0)
+MAG CONFIGURE IHE PACS HL7 I/F^Configure IHE-Based HL7 Interface to PACS^^R^^^^^^^y^IMAGING
+"KRN",19,22406,1,0)
+^^3^3^3060127^
+"KRN",19,22406,1,1,0)
+This option allows the user to specify sender and receiver names 
+"KRN",19,22406,1,2,0)
+associated with the IHE-based interface for sending HL7 ADT messages to 
+"KRN",19,22406,1,3,0)
+commercial PACS and to the DICOM/Text Gateway.
+"KRN",19,22406,25)
+CONFIG^MAG7UCFG
+"KRN",19,22406,"U")
+CONFIGURE IHE-BASED HL7 INTERF
+"MBREQ")
+0
+"ORD",18,19)
+19;18;;;OPT^XPDTA;OPTF1^XPDIA;OPTE1^XPDIA;OPTF2^XPDIA;;OPTDEL^XPDIA
+"ORD",18,19,0)
+OPTION
+"QUES","XPF1",0)
+Y
+"QUES","XPF1","??")
+^D REP^XPDH
+"QUES","XPF1","A")
+Shall I write over your |FLAG| File
+"QUES","XPF1","B")
+YES
+"QUES","XPF1","M")
+D XPF1^XPDIQ
+"QUES","XPF2",0)
+Y
+"QUES","XPF2","??")
+^D DTA^XPDH
+"QUES","XPF2","A")
+Want my data |FLAG| yours
+"QUES","XPF2","B")
+YES
+"QUES","XPF2","M")
+D XPF2^XPDIQ
+"QUES","XPI1",0)
+YO
+"QUES","XPI1","??")
+^D INHIBIT^XPDH
+"QUES","XPI1","A")
+Want KIDS to INHIBIT LOGONs during the install
+"QUES","XPI1","B")
+YES
+"QUES","XPI1","M")
+D XPI1^XPDIQ
+"QUES","XPM1",0)
+PO^VA(200,:EM
+"QUES","XPM1","??")
+^D MG^XPDH
+"QUES","XPM1","A")
+Enter the Coordinator for Mail Group '|FLAG|'
+"QUES","XPM1","B")
+
+"QUES","XPM1","M")
+D XPM1^XPDIQ
+"QUES","XPO1",0)
+Y
+"QUES","XPO1","??")
+^D MENU^XPDH
+"QUES","XPO1","A")
+Want KIDS to Rebuild Menu Trees Upon Completion of Install
+"QUES","XPO1","B")
+YES
+"QUES","XPO1","M")
+D XPO1^XPDIQ
+"QUES","XPZ1",0)
+Y
+"QUES","XPZ1","??")
+^D OPT^XPDH
+"QUES","XPZ1","A")
+Want to DISABLE Scheduled Options, Menu Options, and Protocols
+"QUES","XPZ1","B")
+YES
+"QUES","XPZ1","M")
+D XPZ1^XPDIQ
+"QUES","XPZ2",0)
+Y
+"QUES","XPZ2","??")
+^D RTN^XPDH
+"QUES","XPZ2","A")
+Want to MOVE routines to other CPUs
+"QUES","XPZ2","B")
+NO
+"QUES","XPZ2","M")
+D XPZ2^XPDIQ
+"VER")
+8.0^22.0
+"^DD",15,15,.05,0)
+MERGE STATUS^*S^0:NOT READY;1:READY;2:MERGED;3:IN PROGRESS;^0;5^Q
+"^DD",15,15,.05,1,0)
+^.1
+"^DD",15,15,.05,1,1,0)
+15^AFR^MUMPS
+"^DD",15,15,.05,1,1,1)
+Q:X'=2  S X=$P(^VA(15,DA,0),U,1,2),%=+$P(^(0),U,4),^VA(15,"AFR",$P($P(X,";",2),U,1),+$P(X,U,%),DA)=""
+"^DD",15,15,.05,1,1,2)
+Q:X'=2  S X=$P(^VA(15,DA,0),U,1,2) K ^VA(15,"AFR",$P($P(X,";",2),U,1),+$P(X,U,1),DA),^VA(15,"AFR",$P($P(X,";",2),U,1),+$P(X,U,2),DA)
+"^DD",15,15,.05,1,1,"%D",0)
+^^12^12^2900607^^^
+"^DD",15,15,.05,1,1,"%D",1,0)
+This xref is permanent and exists for all merged entries.  It indicates
+"^DD",15,15,.05,1,1,"%D",2,0)
+which file entry was the 'from' entry.  It is used by the INPUT TRANSFORMS
+"^DD",15,15,.05,1,1,"%D",3,0)
+on the .01 and .02 fields to prevent entering a file entry that has
+"^DD",15,15,.05,1,1,"%D",4,0)
+already been merged away.
+"^DD",15,15,.05,1,1,"%D",5,0)
+
+"^DD",15,15,.05,1,1,"%D",6,0)
+The form of this xref, using file 2 as an example, is:
+"^DD",15,15,.05,1,1,"%D",7,0)
+
+"^DD",15,15,.05,1,1,"%D",8,0)
+^VA(15,"AFR","DPT(",fe#,DA)=""  where fe# is the 'from' file entry.
+"^DD",15,15,.05,1,1,"%D",9,0)
+
+"^DD",15,15,.05,1,1,"%D",10,0)
+Note that the kill side of this xref kills all possible combinations
+"^DD",15,15,.05,1,1,"%D",11,0)
+because deleting an entry in this file using ^DIK results in the MERGE
+"^DD",15,15,.05,1,1,"%D",12,0)
+DIRECTION field being NULL when this xref is fired.
+"^DD",15,15,.05,1,2,0)
+15^ATO^MUMPS
+"^DD",15,15,.05,1,2,1)
+Q:X'=2  S X=$P(^VA(15,DA,0),U,1,2),%=+$P(^(0),U,4)#2+1,^VA(15,"ATO",$P($P(X,";",2),U,1),+$P(X,U,%),DA)=""
+"^DD",15,15,.05,1,2,2)
+Q:X'=2  S X=$P(^VA(15,DA,0),U,1,2) K ^VA(15,"ATO",$P($P(X,";",2),U,1),+$P(X,U,1),DA),^VA(15,"ATO",$P($P(X,";",2),U,1),+$P(X,U,2),DA)
+"^DD",15,15,.05,1,2,"%D",0)
+^^11^11^2900607^
+"^DD",15,15,.05,1,2,"%D",1,0)
+This xref is permanent and exists for all merged entires.  It indicates
+"^DD",15,15,.05,1,2,"%D",2,0)
+which file entry was the 'to' entry.  It is currently not used by the
+"^DD",15,15,.05,1,2,"%D",3,0)
+dictionary.
+"^DD",15,15,.05,1,2,"%D",4,0)
+
+"^DD",15,15,.05,1,2,"%D",5,0)
+The form of this xref, using file 2 as an example, is:
+"^DD",15,15,.05,1,2,"%D",6,0)
+
+"^DD",15,15,.05,1,2,"%D",7,0)
+^VA(15,"ATO","DPT(",fe#,DA)="" where fe# is the 'to' file entry.
+"^DD",15,15,.05,1,2,"%D",8,0)
+
+"^DD",15,15,.05,1,2,"%D",9,0)
+Note that the kill side of this xref kills all possible combinations
+"^DD",15,15,.05,1,2,"%D",10,0)
+because deleting an entry in this file using ^DIK results in the MERGE
+"^DD",15,15,.05,1,2,"%D",11,0)
+DIRECTION field being NULL when this xref is fired.
+"^DD",15,15,.05,1,3,0)
+15^AMRG^MUMPS
+"^DD",15,15,.05,1,3,1)
+Q:X=2  S %=$P($P(^VA(15,DA,0),U,1),";",2),^VA(15,"AMRG",%,X,DA)=""
+"^DD",15,15,.05,1,3,2)
+S %=$P($P(^VA(15,DA,0),U,1),";",2) K ^VA(15,"AMRG",%,X,DA)
+"^DD",15,15,.05,1,3,"%D",0)
+^^9^9^2900607^
+"^DD",15,15,.05,1,3,"%D",1,0)
+This xref is short lived and exists only for entries that are verified
+"^DD",15,15,.05,1,3,"%D",2,0)
+duplicates that have not yet been merged.
+"^DD",15,15,.05,1,3,"%D",3,0)
+
+"^DD",15,15,.05,1,3,"%D",4,0)
+The form of this xref, using file 2 as an example, is:
+"^DD",15,15,.05,1,3,"%D",5,0)
+
+"^DD",15,15,.05,1,3,"%D",6,0)
+^VA(15,"AMRG","DPT(",n,DA)="" where 'n' will be 0 for a MERGE STATUS of
+"^DD",15,15,.05,1,3,"%D",7,0)
+                              NOT READY and a 1 for READY.
+"^DD",15,15,.05,1,3,"%D",8,0)
+
+"^DD",15,15,.05,1,3,"%D",9,0)
+Once merged the "AMRG" xref for this entry will be killed.
+"^DD",15,15,.05,1,4,0)
+15^ALK3^MUMPS
+"^DD",15,15,.05,1,4,1)
+Q:X'=2  S X=$P(^VA(15,DA,0),U,1,2),%=$P(^(0),U,4) K ^VA(15,"ALK",$P($P(X,";",2),U,1),+$P(X,U,%),2,+$P(X,U,%#2+1),DA)
+"^DD",15,15,.05,1,4,2)
+Q
+"^DD",15,15,.05,1,4,"%D",0)
+^^2^2^2900607^
+"^DD",15,15,.05,1,4,"%D",1,0)
+This xref kills the "ALK" xref for this entry.  See the "ALK" xref on the
+"^DD",15,15,.05,1,4,"%D",2,0)
+STATUS field for more info.
+"^DD",15,15,.05,1,5,0)
+^^TRIGGER^15^.08
+"^DD",15,15,.05,1,5,1)
+X ^DD(15,.05,1,5,1.3) I X S X=DIV S Y(1)=$S($D(^VA(15,D0,0)):^(0),1:"") S X=$P(Y(1),U,8),X=X S DIU=X K Y S X=DIV S X=DT X ^DD(15,.05,1,5,1.4)
+"^DD",15,15,.05,1,5,1.3)
+K DIV S DIV=X,D0=DA,DIV(0)=D0 S Y(0)=X S Y(1)=$C(59)_$S($D(^DD(15,.05,0)):$P(^(0),U,3),1:"") S X=$P($P(Y(1),$C(59)_Y(0)_":",2),$C(59),1)="MERGED" S:X X=$D(DIU(0))=0
+"^DD",15,15,.05,1,5,1.4)
+S DIH=$S($D(^VA(15,DIV(0),0)):^(0),1:""),DIV=X S $P(^(0),U,8)=DIV,DIH=15,DIG=.08 D ^DICR:$O(^DD(DIH,DIG,1,0))>0
+"^DD",15,15,.05,1,5,2)
+Q
+"^DD",15,15,.05,1,5,"%D",0)
+^^5^5^2900613^^
+"^DD",15,15,.05,1,5,"%D",1,0)
+This TRIGGER sets the DATE RESOLVED field when the merge status is set
+"^DD",15,15,.05,1,5,"%D",2,0)
+to 'merged'.
+"^DD",15,15,.05,1,5,"%D",3,0)
+
+"^DD",15,15,.05,1,5,"%D",4,0)
+The conditional logic on this TRIGGER was modified, using ^%GEDIT, to
+"^DD",15,15,.05,1,5,"%D",5,0)
+prevent firing during a RE-INDEX.
+"^DD",15,15,.05,1,5,"CREATE CONDITION")
+MERGE STATUS="MERGED"
+"^DD",15,15,.05,1,5,"CREATE VALUE")
+TODAY
+"^DD",15,15,.05,1,5,"DELETE VALUE")
+NO EFFECT
+"^DD",15,15,.05,1,5,"FIELD")
+DATE RESOLVED
+"^DD",15,15,.05,1,6,0)
+15^ADJ^MUMPS
+"^DD",15,15,.05,1,6,1)
+Q:X'=2  S X="XDRDADJ" X ^%ZOSF("TEST") D:$T ^XDRDADJ
+"^DD",15,15,.05,1,6,2)
+Q
+"^DD",15,15,.05,1,6,"%D",0)
+^^8^8^2900830^^^^
+"^DD",15,15,.05,1,6,"%D",1,0)
+This xref is fired only when an entry has been merged.  The routine ^XDRDADJ
+"^DD",15,15,.05,1,6,"%D",2,0)
+then looks at the file to determine if any other file entry pairs need to
+"^DD",15,15,.05,1,6,"%D",3,0)
+be adjusted.  For example, using file 2, if patient 5 was merged to patient
+"^DD",15,15,.05,1,6,"%D",4,0)
+10, and there was a potential duplicate entry for patient 5 and patient 15,
+"^DD",15,15,.05,1,6,"%D",5,0)
+that entry would be changed to patient 10 and patient 15.
+"^DD",15,15,.05,1,6,"%D",6,0)
+
+"^DD",15,15,.05,1,6,"%D",7,0)
+There are other possible situations that are far more complex than the
+"^DD",15,15,.05,1,6,"%D",8,0)
+above example.
+"^DD",15,15,.05,1,6,"DT")
+2900830
+"^DD",15,15,.05,1,7,0)
+15^AMAGDHLTM^MUMPS
+"^DD",15,15,.05,1,7,1)
+I X=2 D A40^MAGDHLTM
+"^DD",15,15,.05,1,7,2)
+Q
+"^DD",15,15,.05,1,7,"%D",0)
+^^2^2^3060626^
+"^DD",15,15,.05,1,7,"%D",1,0)
+This cross reference causes an ADT^A40 message to be sent to commercial 
+"^DD",15,15,.05,1,7,"%D",2,0)
+PACS when a patient is merged.
+"^DD",15,15,.05,1,7,"DT")
+3060626
+"^DD",15,15,.05,3)
+This field indicates the status of verified duplicate entries with respect to merging.
+"^DD",15,15,.05,5,1,0)
+15.01101^.02^2
+"^DD",15,15,.05,5,2,0)
+15^.03^8
+"^DD",15,15,.05,12)
+Must be verified duplicate and once merged cannot be modified
+"^DD",15,15,.05,12.1)
+S DIC("S")="I $P(^VA(15,DA,0),U,3)=""V"",$P(^(0),U,5)'=2"
+"^DD",15,15,.05,21,0)
+^^8^8^2890725^^^^
+"^DD",15,15,.05,21,1,0)
+This field is set when a duplicate record pair is verified as a duplicate.
+"^DD",15,15,.05,21,2,0)
+The actual merge will not occur until this field is set to READY (1).  The
+"^DD",15,15,.05,21,3,0)
+merge routine will set this field to MERGED (2).  Once set to MERGED (2)
+"^DD",15,15,.05,21,4,0)
+this field cannot be modified.
+"^DD",15,15,.05,21,5,0)
+
+"^DD",15,15,.05,21,6,0)
+Note:  Kill side of "AFR" and "ATO" xref kill all possible combinations of
+"^DD",15,15,.05,21,7,0)
+       xref because deleting an entry in this file using ^DIK results in
+"^DD",15,15,.05,21,8,0)
+       the .04 field being NULL when these xrefs are fired.
+"^DD",15,15,.05,23,0)
+^^8^8^2900830^^^^
+"^DD",15,15,.05,23,1,0)
+This field is set when a duplicate record pair is verified as a duplicate.
+"^DD",15,15,.05,23,2,0)
+The actual merge will not occur until this field is set to READY (1).  The
+"^DD",15,15,.05,23,3,0)
+merge routine will set this field to MERGED (2).  Once set to MERGED (2)
+"^DD",15,15,.05,23,4,0)
+this field cannot be modified.
+"^DD",15,15,.05,23,5,0)
+
+"^DD",15,15,.05,23,6,0)
+Note:  Kill side of "AFR" and "ATO" xref kill all possible combinations of
+"^DD",15,15,.05,23,7,0)
+       xref because deleting an entry in this file using ^DIK results in
+"^DD",15,15,.05,23,8,0)
+       the .04 field being NULL when these xrefs are fired.
+"^DD",15,15,.05,"DEL",.05,0)
+I 1
+"^DD",15,15,.05,"DT")
+3060626
+**END**
+**END**

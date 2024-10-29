@@ -1,0 +1,67 @@
+02:05 PM 11/18/2009 
+DICOM Gateway MUMPS routines Build <No Build ID Specified>
+MAGIER
+MAGIER ;WOIFO/PMK - Correct ^%ZOSF("ERRTR") entry for MSM DICOM Gateway ; 28 Sep 2001  10:07 AM [ 09/28/2001  11:25 AM ]
+ ;;3.0;IMAGING;;12-March-2002
+ ;; Per VHA Directive 2004-038, this routine should not be modified.
+ ;; +---------------------------------------------------------------+
+ ;; | Property of the US Government.                                |
+ ;; | No permission to copy or redistribute this software is given. |
+ ;; | Use of unreleased versions of this software requires the user |
+ ;; | to execute a written test agreement with the VistA Imaging    |
+ ;; | Development Office of the Department of Veterans Affairs,     |
+ ;; | telephone (301) 734-0100.                                     |
+ ;; | The Food and Drug Administration classifies this software as  |
+ ;; | a medical device.  As such, it may not be changed in any way. |
+ ;; | Modifications to this software may result in an adulterated   |
+ ;; | medical device under 21CFR820, the use of which is considered |
+ ;; | to be a violation of US Federal Statutes.                     |
+ ;; +---------------------------------------------------------------+
+ ;;
+ENTRY ; entry point from programmer mode
+ N INFO
+ S INFO(1)=""
+ S INFO(2)="This routine changes the ^%ZOSF(""ERRTN"") entry for the DICOM Gateway"
+ S INFO(3)="from ^%ZOSF(""ERRTN"")=""^%ZTER"" to ^%ZOSF(""ERRTN"")=""INT^%ER"""
+ S INFO(4)=""
+ S INFO(5)="It must be run in the manager UCI in order to have write permission."
+ S INFO(6)=""
+ S INFO(7)="There should be two manager UCI's on the DICOM Gateway."
+ S INFO(8)="The first is called [MGR,MGR] and is in the DATABASE.MSM database."
+ S INFO(9)="The second is called [MGR,DCM] and is in the DICOM.MSM database."
+ S INFO(10)="Since all %-globals of the DICOM application UCI [DCM,DCM] are"
+ S INFO(11)="translated to the [MGR,DCM] manager UCI in the DICOM.MSM database,"
+ S INFO(12)="this routine needs to be run in [MGR,DCM]."
+ S INFO(13)=""
+ S INFO(14)="Log into the [MGR,DCM] UCI by entering MGR,DCM:XXX at the UCI prompt."
+ S INFO(15)=""
+ D MESSAGE(.INFO)
+ ;
+ S X=^%ZOSF("ERRTN")
+ I X="INT^%ET" W !!,"This system is already setup correctly.",! Q
+ ;
+ R !!,"Ready to run this routine?  y// ",X:$G(DTIME,1E9)
+ I X="" S X="Y" W X
+ I "Nn"[$E(X) W " - not run",! Q
+ ;
+ S UCI=$ZU(0) I UCI'="MGR,DCM" D  Q
+ . N MSG
+ . S MSG(1)="WARNING -- this is the ["_UCI_"] UCI, the wrong one!"
+ . S MSG(2)="This application MUST be run in the [MGR,DCM] UCI."
+ . S MSG(3)="Please halt and log into the proper UCI and try again."
+ . D MESSAGE(.MSG)
+ . Q
+ ;
+ S ^%ZOSF("ERRTN")="INT^%ET"
+ W !,"Change made.",!
+ Q
+ ;
+MESSAGE(MSG) ;Display Message
+ N I
+ W ! F I=1:1:80 W "*"
+ I $D(MSG)=1 W !,"*** ",MSG,?76," ***"
+ E  F I=1:1 Q:'$D(MSG(I))  W !,"*** ",MSG(I),?76," ***"
+ W ! F I=1:1:80 W "*"
+ Q
+
+

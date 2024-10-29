@@ -1,0 +1,63 @@
+MAGDACU0 ;WOIFO/PMK - DICOM Networking / Upper Layer Service / A-ASSOCIATE ; 09/08/2004  07:12
+ ;;3.0;IMAGING;**30**;MAR 19, 2002;;NOV 5, 2004
+ ;; Per VHA Directive 2004-038, this routine should not be modified.
+ ;; +---------------------------------------------------------------+
+ ;; | Property of the US Government.                                |
+ ;; | No permission to copy or redistribute this software is given. |
+ ;; | Use of unreleased versions of this software requires the user |
+ ;; | to execute a written test agreement with the VistA Imaging    |
+ ;; | Development Office of the Department of Veterans Affairs,     |
+ ;; | telephone (301) 734-0100.                                     |
+ ;; | The Food and Drug Administration classifies this software as  |
+ ;; | a medical device.  As such, it may not be changed in any way. |
+ ;; | Modifications to this software may result in an adulterated   |
+ ;; | medical device under 21CFR820, the use of which is considered |
+ ;; | to be a violation of US Federal Statutes.                     |
+ ;; +---------------------------------------------------------------+
+ ;;
+ Q
+ ;  Refer to Part 8, Section 9.3.2 of the DICOM Standard
+ ;
+SETUP ; initialize the presentation contexts for negotiation
+ N PCONTEXT ;- presentation context id (abstract & transfer syntaxes)
+ N SOPCLASS ;- a Class made up of instantiations of a Service Order Pair
+ N TSYNTAX ;-- Transfer Syntax
+ N PCIEN,TSIEN
+ K ^TMP("MAG",$J,"DICOM","NEGOTIATE")
+ S PCONTEXT=-1 ; initialize presentation context id
+ ;
+ S PCIEN=0 ; presentation context SOP Class name
+ F  S PCIEN=$O(^MAGDICOM(2006.585,APPIEN,1,PCIEN)) Q:'PCIEN  D
+ . S SOPCLASS=^MAGDICOM(2006.585,APPIEN,1,PCIEN,0)
+ . D SET1(SOPCLASS)
+ . S TSIEN=0 ; transfer syntax name
+ . F  S TSIEN=$O(^MAGDICOM(2006.585,APPIEN,1,PCIEN,1,TSIEN)) Q:'TSIEN  D
+ . . S TSYNTAX=^MAGDICOM(2006.585,APPIEN,1,PCIEN,1,TSIEN,0)
+ . . D SET2(TSYNTAX)
+ . . Q
+ . Q
+ Q
+ ;
+SETUP1 ; entry point to initialize presentation contexts for image transfer
+ N PCONTEXT ;- presentation context id (abstract & transfer syntaxes)
+ K ^TMP("MAG",$J,"DICOM","NEGOTIATE")
+ S PCONTEXT=-1 ; initialize presentation context id
+ D SET1(SOPCLASS) ; SOP Class UID
+ D SET2(TSYNTAX) ; Transfer Syntax UID
+ Q
+ ;
+SET1(X) ; enter a presentation context into the negotiation table
+ N SOPUID ;--- UID of a SOP Class
+ S PCONTEXT=PCONTEXT+2 ; all presentation context IDs must be odd
+ S SOPUID=$$GETUID^MAGDUID1(X)
+ S ^TMP("MAG",$J,"DICOM","NEGOTIATE","REQUEST",PCONTEXT,"SOP CLASS UID")=SOPUID
+ S ^TMP("MAG",$J,"DICOM","NEGOTIATE","REQUEST","SOP CLASS UID",SOPUID)=PCONTEXT
+ Q
+ ;
+SET2(X) ; enter a transfer syntax into the negotiation table
+ N I,XFERUID
+ S XFERUID=$$GETUID^MAGDUID1(X)
+ S I=$G(^TMP("MAG",$J,"DICOM","NEGOTIATE","REQUEST",PCONTEXT,"TRANSFER UID"))+1
+ S ^TMP("MAG",$J,"DICOM","NEGOTIATE","REQUEST",PCONTEXT,"TRANSFER UID")=I
+ S ^TMP("MAG",$J,"DICOM","NEGOTIATE","REQUEST",PCONTEXT,"TRANSFER UID",I)=XFERUID
+ Q

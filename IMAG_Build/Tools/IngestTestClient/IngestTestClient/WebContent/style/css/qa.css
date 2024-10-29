@@ -1,0 +1,168 @@
+body{
+    background: #343434;
+    font-family: 'Segoe UI';
+    font-size: 11px;
+}
+.text-on-pannel {
+    height: auto;
+    margin-left: 20px;
+    padding: 3px 5px;
+    margin-top: -48px;
+}
+.panel{
+  margin-top: 14px !important;
+}
+.panel-primary{
+    border-color: #ccc;
+}
+.text-primary{
+    color: white;
+}
+.panel-body {
+  padding-top: 30px !important;
+}
+.form-horizontal .control-label{
+    text-align: left;
+}
+.btn-style{
+    margin-top: 5px;
+} 
+.icon-link-color  {
+    padding: 0px 2px;
+    color: white;
+}
+.iconbox { 
+    border: 1px solid #ccc;
+    display: inline-flex;
+    border-radius: 5px;
+    width: 100%;
+    overflow-x: scroll;
+}
+.iconbox p 
+{
+     width: 400px;
+}
+.patient-lbl-style{
+    margin-left: -55px;
+}
+.border-color-class:hover{
+    background-color: #ea7001;
+    color: white;
+}    
+.btn-primary{
+    color: #fff;
+  background-color: #7b7b7e;
+  border-color: #7b7b7e;
+}
+.btn-primary:hover,.open .dropdown-toggle.btn-primary {
+  color: #fff;
+  background-color: #ea7001;
+  border-color: #ea7001;
+}
+.btn-primary:focus,.btn-primary:active,.btn-primary.active,.open .dropdown-toggle.btn-primary{
+        color:#fff;
+        background-color:#7b7b7e;
+        border-color:#7b7b7e
+    }
+    .btn-primary:active,.btn-primary.active,.open .dropdown-toggle.btn-primary{
+        background-image:none
+        background-color:#7b7b7e;
+        border-color:#7b7b7e
+    }
+    .btn-primary.disabled,.btn-primary[disabled],fieldset[disabled] .btn-primary,.btn-primary.disabled:hover,.btn-primary[disabled]:hover,fieldset[disabled] .btn-primary:hover,.btn-primary.disabled:focus,.btn-primary[disabled]:focus,fieldset[disabled] .btn-primary:focus,.btn-primary.disabled:active,.btn-primary[disabled]:active,fieldset[disabled] .btn-primary:active,.btn-primary.disabled.active,.btn-primary[disabled].active,fieldset[disabled] .btn-primary.active{
+        background-color: darkgray;
+        border-color: darkgray;
+    } 
+.form-group 
+{
+    margin-bottom: 5px;
+}
+.nav-tabs>li>a 
+{
+  color:#fff;
+}
+label{
+    display: inline-block;
+    font-weight: 100;
+}    
+.nav-tabs>li.active>a, .nav-tabs>li.active>a:hover, .nav-tabs>li.active>a:focus{
+  color: #fff;
+  background-color: #7b7b7e;
+  /*border: 1px solid #888888;*/
+}   
+.nav-tabs>li>a:hover {
+  border-color: #000000;
+  background-color: #ea7001;
+}  
+::-webkit-scrollbar {
+    width: 1em;
+    height: 1em
+}
+::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px grey; 
+    border-radius: 4px;
+}
+::-webkit-scrollbar-thumb {
+    background: #808080; 
+    border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: #808080; 
+}        
+.selectModalWindow-content{
+    height: auto;
+    min-height: 100%;
+    border-radius: 0;
+    background: #343434;
+    color: #eee;
+}
+.close-modal-window{
+    margin-top: -10px;
+    float: right;
+    font-size: 21px;
+    line-height: 1;
+    color: #eee;
+    text-shadow: 0 1px 0 #444444;
+}
+.selectModalWindow-dialog{
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+.modal-header-hide-line{
+    border-bottom: 0px solid #e5e5e5;
+}
+.checkbox-width{
+    width: 15%;
+}
+.radio-btn-width{
+    width: 18%;
+}
+#home-patient-info-table tbody tr.highlight td{ 
+    background-color: grey;
+}
+
+#home-patient-info-table tbody tr:hover td, #home-patient-info-table tbody tr:hover th {
+        color: whitesmoke;
+        background: black;
+} 
+
+.custom-table-header-design thead tr th{ 
+    background-color: #615e5e;
+    font-size: 12px;
+}
+.custom-table-design tbody tr:hover td, .custom-table-design tbody tr:hover th {
+        color: whitesmoke;
+        background: black;
+        cursor: pointer;
+} 
+.custom-table-design td a {
+    color: #a0a5b1;
+    display: inline-block;
+    margin: 0 5px;
+}
+#user-report-table tbody tr.highlight td{ 
+    background-color: grey;
+}
+   

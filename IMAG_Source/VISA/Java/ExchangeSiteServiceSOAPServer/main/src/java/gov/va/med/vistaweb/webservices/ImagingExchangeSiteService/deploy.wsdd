@@ -1,0 +1,58 @@
+<!-- Use this file to deploy some handlers/chains and services      -->
+<!-- Two ways to do this:                                           -->
+<!--   java org.apache.axis.client.AdminClient deploy.wsdd          -->
+<!--      after the axis server is running                          -->
+<!-- or                                                             -->
+<!--   java org.apache.axis.utils.Admin client|server deploy.wsdd   -->
+<!--      from the same directory that the Axis engine runs         -->
+
+<deployment
+    xmlns="http://xml.apache.org/axis/wsdd/"
+    xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
+
+  <!-- Services from ImagingExchangeSiteService WSDL service -->
+
+  <service name="ImagingExchangeSiteServiceSoap" provider="java:RPC" style="wrapped" use="literal">
+      <parameter name="wsdlTargetNamespace" value="http://vistaweb.med.va.gov/webservices/ImagingExchangeSiteService"/>
+      <parameter name="wsdlServiceElement" value="ImagingExchangeSiteService"/>
+      <parameter name="schemaQualified" value="http://vistaweb.med.va.gov/webservices/ImagingExchangeSiteService"/>
+      <parameter name="wsdlServicePort" value="ImagingExchangeSiteServiceSoap"/>
+      <parameter name="className" value="gov.va.med.vistaweb.webservices.ImagingExchangeSiteService.ImagingExchangeSiteServiceSoapSkeleton"/>
+      <parameter name="wsdlPortType" value="ImagingExchangeSiteServiceSoap"/>
+      <parameter name="typeMappingVersion" value="1.2"/>
+      <parameter name="allowedMethods" value="*"/>
+
+      <typeMapping
+        xmlns:ns="http://vistaweb.med.va.gov/webservices/ImagingExchangeSiteService"
+        qname="ns:ImagingExchangeSiteTO"
+        type="java:gov.va.med.vistaweb.webservices.ImagingExchangeSiteService.ImagingExchangeSiteTO"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://vistaweb.med.va.gov/webservices/ImagingExchangeSiteService"
+        qname="ns:ImagingExchangeRegionTO"
+        type="java:gov.va.med.vistaweb.webservices.ImagingExchangeSiteService.ImagingExchangeRegionTO"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://vistaweb.med.va.gov/webservices/ImagingExchangeSiteService"
+        qname="ns:FaultTO"
+        type="java:gov.va.med.vistaweb.webservices.ImagingExchangeSiteService.FaultTO"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://vistaweb.med.va.gov/webservices/ImagingExchangeSiteService"
+        qname="ns:ArrayOfImagingExchangeSiteTO"
+        type="java:gov.va.med.vistaweb.webservices.ImagingExchangeSiteService.ArrayOfImagingExchangeSiteTO"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+  </service>
+</deployment>

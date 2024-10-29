@@ -1,0 +1,83 @@
+﻿<Views:BaseWindow x:Class="DicomImporter.Views.PatientLookupWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+        mc:Ignorable="d" 
+        xmlns:Controls="clr-namespace:ImagingClient.Infrastructure.Controls;assembly=ImagingClient.Infrastructure" 
+        xmlns:Views="clr-namespace:ImagingClient.Infrastructure.Views;assembly=ImagingClient.Infrastructure"
+        Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}"
+        Width="776" 
+        Height="466" 
+        Title="Patient Lookup"
+        WindowStartupLocation="CenterOwner">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Label Grid.Row="0" Content="Patient Lookup" Style="{DynamicResource ResourceKey=SectionTitle}" />
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <Label Grid.Column="0" Content="Patient:" />
+            <Controls:SubmitTextBox Name="TxtSearchCriteria" TabIndex="0" Grid.Column="1" MaxLength="50" Text="{Binding SearchCriteria, UpdateSourceTrigger=LostFocus}" />
+            <Button Grid.Column="2" Content="Search" IsDefault="True" Command="{Binding PerformSearchCommand}" />
+        </Grid>
+        <DataGrid Grid.Row="2" Name="dgPatientResults" 
+                  ItemsSource="{Binding Path=MatchingPatients, UpdateSourceTrigger=PropertyChanged}"
+                  SelectedItem="{Binding Path=SelectedPatient, UpdateSourceTrigger=PropertyChanged}"
+                  EnableRowVirtualization="True" 
+                  EnableColumnVirtualization="True"
+                  SelectionMode="Single"
+                  VirtualizingStackPanel.IsVirtualizing="True"
+                  VirtualizingStackPanel.VirtualizationMode="Recycling">
+            <DataGrid.Columns>
+                <DataGridTextColumn 
+                    Header="Patient Name" 
+                    Binding="{Binding Path=PatientName, UpdateSourceTrigger=PropertyChanged}" 
+                    Width="*"/>
+
+                <DataGridTextColumn 
+                    Header="Patient Id" 
+                    Binding="{Binding Path=Ssn, UpdateSourceTrigger=PropertyChanged}" 
+                    Width="*"/>
+<!--
+                <DataGridTextColumn 
+                    Header="DFN" 
+                    Binding="{Binding Path=Dfn}" 
+                    Width="*"/>
+
+                <DataGridTextColumn 
+                    Header="ICN" 
+                    Binding="{Binding Path=PatientIcn}" 
+                    Width="*"/>
+-->
+                <DataGridTextColumn 
+                    Header="DOB" 
+                    Binding="{Binding Path=FormattedBirthDate, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" 
+                    Width="*"/>
+                
+                <DataGridTextColumn 
+                    Header="Sex" 
+                    Binding="{Binding Path=PatientSex, UpdateSourceTrigger=PropertyChanged}" 
+                    Width="*"/>
+                
+                <DataGridTextColumn 
+                    Header="Veteran Status" 
+                    Binding="{Binding Path=VeteranStatus, UpdateSourceTrigger=PropertyChanged}" 
+                    Width="*"/>
+                
+            </DataGrid.Columns>
+        </DataGrid>
+        <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Right">
+            <Button Width="50" Content="OK" VerticalAlignment="Top" Command="{Binding OkCommand}" />
+            <Button Width="50" Content="Cancel" IsCancel="True" VerticalAlignment="Top" Command="{Binding CancelCommand}"  />
+        </StackPanel>
+    </Grid>
+</Views:BaseWindow>

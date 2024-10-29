@@ -1,0 +1,283 @@
+magpt ;WOIFO/MLH - PACS testing driver ; 20 Jun 2005  1:14 PM
+ ; *** CAUTION:  not for distribution beyond Silver Spring OIFO!
+ q
+ ;
+main ; MAIN ENTRY POINT
+ f  d  q:$d(DTOUT)  q:$d(DUOUT)
+ . s DIR(0)="F^2:3",DIR("A")="Test to execute"
+ . d ^DIR q:$d(DTOUT)  q:$d(DUOUT)
+ . i $t(@X)="" d
+ . . w !,"Enter a valid test code",!
+ . . q
+ . e  d
+ . . d @X
+ . . q
+ . q
+ q
+ ;
+A101 ; non-exception flow - order and examination
+ G A101^magpt1
+A102 ; non-exception flow - order for pregnant patient
+ G A102^magpt1
+A103 ; non-exception flow - order for sensitive patient
+ G A103^magpt1
+A104 ; non-exception flow - storage of CPT and VistA codes
+ G A104^magpt1
+A105 ; non-exception flow - long reason for study
+ G A105^magpt1
+A106 ; non-exception flow - order and demo update
+ G A106^magpt1
+A107 ; non-exception flow - order and ADT transfer
+ G A107^magpt1
+A108 ; non-exception flow - order and cancellation
+ G A108^magpt1
+A109 ; non-exception flow - order and 2nd order w/new modality/study instance UID
+ G A109^magpt1
+A110 ; 
+ G A110^magpt1
+A111 ; non-exception flow - SSN change for existing pt
+ G A111^magpt1
+A112 ; non-exception flow - DOB change for existing pt
+ G A112^magpt1
+A113 ; non-exception flow - ICN change for existing pt
+ G A113^magpt2
+A114 ; non-exception flow - ICN change for existing pt
+ G A114^magpt2
+A115 ; non-exception flow - SSN change for existing pt
+ G A115^magpt2
+A116 ; non-exception flow - DOB change for existing pt
+ G A116^magpt2
+A117 ; non-exception flow - sex value change for existing pt
+ G A117^magpt2
+A118 ; non-exception flow - order and ADT transfer/cancel
+ G A118^magpt2
+A119 ; non-exception flow - order and ADT discharge/cancel
+ G A119^magpt2
+A201 ; exception flow - message type reject
+ G A201^magpt2
+A202 ; exception flow - processing code reject
+ G A202^magpt2
+A203 ; exception flow - HL7 version reject
+ G A203^magpt2
+A204 ; exception flow - 2 values for 1 identifier
+ G A204^magpt2
+A205 ; exception flow - same case with different ICN
+ G A205^magpt2
+A206 ; exception flow - same case with different SSN
+ G A206^magpt3
+A207 ; exception flow - same case with different DOB
+ G A207^magpt3
+A208 ; exception flow - same case with different sex
+ G A208^magpt3
+A209 ; exception flow - same case with different name
+ G A209^magpt3
+A210 ; exception flow - undefined orderable item
+ G A210^magpt3
+A211 ; exception flow - same case with different orderable item
+ G A211^magpt3
+A212 ; exception flow - cancel order with different ICN
+ G A212^magpt3
+A213 ; exception flow - cancel order with different case
+ G A213^magpt3
+A214 ; exception flow - cancel order with different study instance UID
+ G A214^magpt3
+A215 ; non-exception flow - order for pregnant male patient
+ G A215^magpt3
+B101 ; non-exception flow - case & ICN found, no prev rpt on file
+ G B101^magpt5
+B102 ; non-exception flow - case and ICN found, previous report already on file
+ G B102^magpt5
+B103 ; non-exception flow - case and ICN found, subsequent report already on file
+ G B103^magpt5
+B104 ; non-exception flow - case and ICN not found
+ G B104^magpt5
+B201 ; exception flow - message type reject
+ G B201^magpt6
+B202 ; exception flow - processing code reject
+ G B202^magpt6
+B203 ; exception flow - HL7 version reject
+ G B203^magpt6
+ ;
+ORM(xordcod,xtyp,xnsegs) ; SUBROUTINE - order message
+ n rannum ; random 6-digit numbers
+ i '$d(xtyp) s xtyp="ORM"
+ k HLA
+ ;
+ s rannum=$e($r(1000000)+1000000,2,7),^TMP($j,"RANNUM")=rannum
+ d INIT^HLFNC2("MAG "_xtyp,.HL)
+ S HLCS=$E(HLECH,1),HLRS=$E(HLECH,2),HLSS=$E(HLECH,4)
+ i $g(HL) d  q
+ . w !,"Error: "_$p(HL,"^",2)
+ . q
+ ;
+ d PID^magpta ; build PID segment
+ d PV1^magpta ; build PV1 segment
+ d ORC^magpto("NW") ; build ORC segment
+ d OBR^magpto ; build DG1 segment
+ d ZDS^magpto ; build ZDS segment
+ d OBX^magpto($g(xnsegs,10)) ; build OBX segments
+ q
+ ;
+ADTDIS ; SUBROUTINE - ADT discharge message
+ ;
+ n ormmsg,loc,segdta
+ m ormmsg=HLA("HLS") k HLA
+ d INIT^HLFNC2("MAG A03",.HL)
+ S HLCS=$E(HLECH,1),HLRS=$E(HLECH,2),HLSS=$E(HLECH,4)
+ i $g(HL) d  q
+ . w !,"Error: "_$p(HL,"^",2)
+ . q
+ ;
+ d EVN^magpta ; build EVN segment
+ s HLA("HLS",2)=ormmsg(1) ; recover PID segment
+ s HLA("HLS",3)=ormmsg(2) ; recover PV1 segment
+ ; insert discharge date/time
+ s $p(HLA("HLS",3),HLFS,46)=$zd(+$h,8)_$tr($zt($p($h,",",2)),":")_"-0500"
+ ; 
+ q
+ ;
+ADTICN(xnuxist) ; SUBROUTINE - ADT update of ICN
+ ;
+ n ormmsg,ids,idix,id1,icn,newicn
+ n oldicn,oldname
+ s oldicn=$p(HLA("HLS",1),"^",4),oldname=$p(HLA("HLS",1),"^",6)
+ m ormmsg=HLA("HLS") k HLA
+ d INIT^HLFNC2("MAG "_$s(xnuxist="NEW":"A47",1:"A40"),.HL)
+ S HLCS=$E(HLECH,1),HLRS=$E(HLECH,2),HLSS=$E(HLECH,4)
+ i $g(HL) d  q
+ . w !,"Error: "_$p(HL,"^",2)
+ . q
+ ;
+ d EVN^magpta ; build EVN segment
+ ; save merge-from icn and name
+ ; recover PID segment
+ s HLA("HLS",2)=$s(xnuxist="NEW":ormmsg(1),1:^TMP($J,"PID"))
+ ; recover old ICN
+ s $p(HLA("HLS",3),"^",1)="MRG"
+ s $p(HLA("HLS",3),"^",2)=oldicn
+ s $p(HLA("HLS",3),"^",5)=oldicn
+ s $p(HLA("HLS",3),"^",8)=oldname
+ i xnuxist="NEW" d
+ . s newicn="999V997"_$e(1000000+$r(1000000),2,7)
+ . s newicn=newicn_"~"_$p(oldicn,"~",2,99)
+ . s $p(HLA("HLS",2),HLFS,4)=newicn
+ . q
+ e  d
+ . s HLA("HLS",2)=^TMP($J,"PID")
+ . q
+ ;
+ q
+ ;
+ADTSSN ; SUBROUTINE - ADT update of SSN
+ ;
+ n ormmsg,ids,ssn,irep
+ m ormmsg=HLA("HLS") k HLA
+ d INIT^HLFNC2("MAG A47",.HL)
+ S HLCS=$E(HLECH,1),HLRS=$E(HLECH,2),HLSS=$E(HLECH,4)
+ i $g(HL) d  q
+ . w !,"Error: "_$p(HL,"^",2)
+ . q
+ ;
+ d EVN^magpta ; build EVN segment
+ s HLA("HLS",2)=ormmsg(1) ; recover PID segment
+ ; insert new ICN
+ s ids=$p(HLA("HLS",2),"^",4)
+ f irep=1:1:10 s id1=$p(ids,"|",irep) i $p(id1,HLCS,4)="USSSA" s ssn=id1 q
+ i irep>9 q
+ s $p(HLA("HLS",3),HLFS,1)="MRG"
+ s $p(HLA("HLS",3),HLFS,2)=ids
+ s $p(HLA("HLS",3),HLFS,8)=$p(HLA("HLS",2),HLFS,6) ; name
+ ; new ssn in PID
+ s ($p(ssn,HLCS,1),$p(HLA("HLS",2),HLFS,20))="998"_$e(1000000+$r(1000000),2,7)
+ s $p(ids,"|",irep)=ssn
+ s $p(HLA("HLS",2),HLFS,4)=ids
+ s HLA("HLS",4)=ormmsg(2) ; recover PV1 segment
+ ;
+ q
+ ;
+ADTUPD(xtyp) ; SUBROUTINE - ADT demo update message
+ ;
+ n ormmsg,flddta,segix
+ m ormmsg=HLA("HLS") k HLA
+ d INIT^HLFNC2("MAG A08",.HL)
+ S HLCS=$E(HLECH,1),HLRS=$E(HLECH,2),HLSS=$E(HLECH,4)
+ i $g(HL) d  q
+ . w !,"Error: "_$p(HL,"^",2)
+ . q
+ ;
+ d EVN^magpta ; build EVN segment
+ s HLA("HLS",2)=ormmsg(1) ; recover PID segment
+ s HLA("HLS",3)=ormmsg(2) ; recover PV1 segment
+ ; insert demographic update
+ i xtyp="addr" d
+ . s flddta=$p(HLA("HLS",2),"^",12)
+ . s $p(flddta,"~",3)="TOWN"_($r(10)+1),$p(flddta,"~",5)=$r(10)+99980
+ . s $p(HLA("HLS",2),"^",12)=flddta
+ . q
+ i xtyp="dob" d
+ . s flddta=$p(HLA("HLS",2),"^",8)
+ . i $r(2) d
+ . . s $e(flddta,1,4)=$e(flddta,1,4)+$r(10)+1
+ . . q
+ . e  d
+ . . s $e(flddta,5,6)=$e(100+(13-$e(flddta,5,6)),2,3)
+ . . q
+ . s $p(HLA("HLS",2),"^",8)=flddta
+ . q
+ i xtyp="sex" d
+ . s flddta=$p(HLA("HLS",2),"^",9)
+ . s $p(HLA("HLS",2),"^",9)=$s(flddta="M":"F",1:"M")
+ . q
+ ;
+ i $r(3)=0 d OBX^magptr  ; height / weight update
+ q
+ ;
+ADTXFR ; SUBROUTINE - ADT transfer message
+ ;
+ n ormmsg,loc,newloc
+ m ormmsg=HLA("HLS") k HLA
+ d INIT^HLFNC2("MAG A02",.HL)
+ S HLCS=$E(HLECH,1),HLRS=$E(HLECH,2),HLSS=$E(HLECH,4)
+ i $g(HL) d  q
+ . w !,"Error: "_$p(HL,"^",2)
+ . q
+ ;
+ d EVN^magpta ; build EVN segment
+ s HLA("HLS",2)=ormmsg(1) ; recover PID segment
+ s HLA("HLS",3)=ormmsg(2) ; recover PV1 segment
+ ; insert transfer
+ s loc=$p(HLA("HLS",3),"^",4),$p(HLA("HLS",3),"^",7)=loc
+ f  s newloc=$r(10)_$c(65+$r(26)) q:newloc'=$p(loc,"&")
+ s $p(loc,"&",1)=newloc,$p(loc,"&",2)="ROOM "_newloc
+ s $p(HLA("HLS",3),"^",4)=loc
+ ;
+ q
+ ;
+LOG(xtext,xmsg) ;
+ n ss,i,dta
+ d LOG1(xtext)
+ i $g(xmsg)'="" d
+ . s ss=""
+ . f  s ss=$o(@xmsg@(ss)) q:ss=""  d LOG1(@xmsg@(ss))
+ . q 
+ k HLA("HLS",0)
+ q
+ ;
+LOG1(xtext) ;
+ n ss
+ s ss=$o(^XTMP("MAGPACSTESTLOG"," "),-1)+1
+ s ^XTMP("MAGPACSTESTLOG",ss)=$h*86400+$p($h,",",2)_"^"_xtext
+ q
+TAIL(xn) ;
+ n ss,i
+ i '$d(xn) s xn=30
+ s ss=$o(^XTMP("MAGPACSTESTLOG"," "),-1)-xn+1
+ f i=ss:1 q:ss=""  i $d(^XTMP("MAGPACSTESTLOG",ss)) w ^(ss),! s ss=$o(^(ss))
+ q 0
+PURGE ;
+ s DIK="^HL(772,",DA=0 f  s DA=$o(^HL(772,DA)) q:'DA  d ^DIK
+ s DIK="^HLMA(",DA=0 f  s DA=$o(^HLMA(DA)) q:'DA  d ^DIK
+ u IO(0) w !,"Purge complete.",!
+ q
+ u IO(0) w !,"Purge complete.",!
+ q

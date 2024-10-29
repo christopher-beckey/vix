@@ -1,0 +1,576 @@
+KIDS Distribution saved on Jul 26, 2012@08:58:40
+Split from GOLD - last patch SEQ81_P120
+**KIDS**:MAG*3.0*350_DD*2006.5751^
+
+**INSTALL NAME**
+MAG*3.0*350_DD*2006.5751
+"BLD",7776,0)
+MAG*3.0*350_DD*2006.5751^IMAGING^0^3120726^n
+"BLD",7776,4,0)
+^9.64PA^2006.5751^1
+"BLD",7776,4,2006.5751,0)
+2006.5751
+"BLD",7776,4,2006.5751,222)
+y^y^f^^^^y
+"BLD",7776,4,"B",2006.5751,2006.5751)
+
+"BLD",7776,6.3)
+1
+"BLD",7776,"KRN",0)
+^9.67PA^779.2^20
+"BLD",7776,"KRN",.4,0)
+.4
+"BLD",7776,"KRN",.401,0)
+.401
+"BLD",7776,"KRN",.402,0)
+.402
+"BLD",7776,"KRN",.403,0)
+.403
+"BLD",7776,"KRN",.5,0)
+.5
+"BLD",7776,"KRN",.84,0)
+.84
+"BLD",7776,"KRN",3.6,0)
+3.6
+"BLD",7776,"KRN",3.8,0)
+3.8
+"BLD",7776,"KRN",9.2,0)
+9.2
+"BLD",7776,"KRN",9.8,0)
+9.8
+"BLD",7776,"KRN",19,0)
+19
+"BLD",7776,"KRN",19.1,0)
+19.1
+"BLD",7776,"KRN",101,0)
+101
+"BLD",7776,"KRN",409.61,0)
+409.61
+"BLD",7776,"KRN",771,0)
+771
+"BLD",7776,"KRN",779.2,0)
+779.2
+"BLD",7776,"KRN",870,0)
+870
+"BLD",7776,"KRN",8989.51,0)
+8989.51
+"BLD",7776,"KRN",8989.52,0)
+8989.52
+"BLD",7776,"KRN",8994,0)
+8994
+"BLD",7776,"KRN","B",.4,.4)
+
+"BLD",7776,"KRN","B",.401,.401)
+
+"BLD",7776,"KRN","B",.402,.402)
+
+"BLD",7776,"KRN","B",.403,.403)
+
+"BLD",7776,"KRN","B",.5,.5)
+
+"BLD",7776,"KRN","B",.84,.84)
+
+"BLD",7776,"KRN","B",3.6,3.6)
+
+"BLD",7776,"KRN","B",3.8,3.8)
+
+"BLD",7776,"KRN","B",9.2,9.2)
+
+"BLD",7776,"KRN","B",9.8,9.8)
+
+"BLD",7776,"KRN","B",19,19)
+
+"BLD",7776,"KRN","B",19.1,19.1)
+
+"BLD",7776,"KRN","B",101,101)
+
+"BLD",7776,"KRN","B",409.61,409.61)
+
+"BLD",7776,"KRN","B",771,771)
+
+"BLD",7776,"KRN","B",779.2,779.2)
+
+"BLD",7776,"KRN","B",870,870)
+
+"BLD",7776,"KRN","B",8989.51,8989.51)
+
+"BLD",7776,"KRN","B",8989.52,8989.52)
+
+"BLD",7776,"KRN","B",8994,8994)
+
+"FIA",2006.5751)
+DICOM OBJECTS TO BE IMPORTED
+"FIA",2006.5751,0)
+^MAGDICOM(2006.5751,
+"FIA",2006.5751,0,0)
+2006.5751
+"FIA",2006.5751,0,1)
+y^y^f^^^^y
+"FIA",2006.5751,0,10)
+
+"FIA",2006.5751,0,11)
+
+"FIA",2006.5751,0,"RLRO")
+
+"FIA",2006.5751,0,"VR")
+3.0^MAG
+"FIA",2006.5751,2006.5751)
+0
+"MBREQ")
+0
+"PKG",454,-1)
+1^1
+"PKG",454,0)
+IMAGING^MAG^Imaging-V1 to release 
+"PKG",454,20,0)
+^9.402P^^
+"PKG",454,22,0)
+^9.49I^1^1
+"PKG",454,22,1,0)
+3.0^3020319^3020517^126
+"PKG",454,22,1,"PAH",1,0)
+350_DD^3120726
+"QUES","XPF1",0)
+Y
+"QUES","XPF1","??")
+^D REP^XPDH
+"QUES","XPF1","A")
+Shall I write over your |FLAG| File
+"QUES","XPF1","B")
+YES
+"QUES","XPF1","M")
+D XPF1^XPDIQ
+"QUES","XPF2",0)
+Y
+"QUES","XPF2","??")
+^D DTA^XPDH
+"QUES","XPF2","A")
+Want my data |FLAG| yours
+"QUES","XPF2","B")
+YES
+"QUES","XPF2","M")
+D XPF2^XPDIQ
+"QUES","XPI1",0)
+YO
+"QUES","XPI1","??")
+^D INHIBIT^XPDH
+"QUES","XPI1","A")
+Want KIDS to INHIBIT LOGONs during the install
+"QUES","XPI1","B")
+NO
+"QUES","XPI1","M")
+D XPI1^XPDIQ
+"QUES","XPM1",0)
+PO^VA(200,:EM
+"QUES","XPM1","??")
+^D MG^XPDH
+"QUES","XPM1","A")
+Enter the Coordinator for Mail Group '|FLAG|'
+"QUES","XPM1","B")
+
+"QUES","XPM1","M")
+D XPM1^XPDIQ
+"QUES","XPO1",0)
+Y
+"QUES","XPO1","??")
+^D MENU^XPDH
+"QUES","XPO1","A")
+Want KIDS to Rebuild Menu Trees Upon Completion of Install
+"QUES","XPO1","B")
+NO
+"QUES","XPO1","M")
+D XPO1^XPDIQ
+"QUES","XPZ1",0)
+Y
+"QUES","XPZ1","??")
+^D OPT^XPDH
+"QUES","XPZ1","A")
+Want to DISABLE Scheduled Options, Menu Options, and Protocols
+"QUES","XPZ1","B")
+NO
+"QUES","XPZ1","M")
+D XPZ1^XPDIQ
+"QUES","XPZ2",0)
+Y
+"QUES","XPZ2","??")
+^D RTN^XPDH
+"QUES","XPZ2","A")
+Want to MOVE routines to other CPUs
+"QUES","XPZ2","B")
+NO
+"QUES","XPZ2","M")
+D XPZ2^XPDIQ
+"SEC","^DIC",2006.5751,2006.5751,0,"AUDIT")
+@
+"SEC","^DIC",2006.5751,2006.5751,0,"DD")
+@
+"SEC","^DIC",2006.5751,2006.5751,0,"DEL")
+@
+"SEC","^DIC",2006.5751,2006.5751,0,"LAYGO")
+@
+"SEC","^DIC",2006.5751,2006.5751,0,"RD")
+@
+"SEC","^DIC",2006.5751,2006.5751,0,"WR")
+@
+"VER")
+8.0^22.0
+"^DD",2006.5751,2006.5751,0)
+FIELD^^44^25
+"^DD",2006.5751,2006.5751,0,"DDA")
+N
+"^DD",2006.5751,2006.5751,0,"DT")
+3090505
+"^DD",2006.5751,2006.5751,0,"IX","B",2006.5751,.01)
+
+"^DD",2006.5751,2006.5751,0,"NM","DICOM OBJECTS TO BE IMPORTED")
+
+"^DD",2006.5751,2006.5751,.01,0)
+PATIENT NAME^RFX^^0;1^K:X'?.E1"|".E1"|".E!(X?2"|") X I $D(X),$L(X)>60 K X
+"^DD",2006.5751,2006.5751,.01,1,0)
+^.1
+"^DD",2006.5751,2006.5751,.01,1,1,0)
+2006.5751^B
+"^DD",2006.5751,2006.5751,.01,1,1,1)
+S ^MAGDICOM(2006.5751,"B",$E(X,1,60),DA)=""
+"^DD",2006.5751,2006.5751,.01,1,1,2)
+K ^MAGDICOM(2006.5751,"B",$E(X,1,60),DA)
+"^DD",2006.5751,2006.5751,.01,3)
+Enter the patient's name in format: LAST|FIRST|MIDDLE
+"^DD",2006.5751,2006.5751,.01,21,0)
+^.001^2^2^3090505^^^^
+"^DD",2006.5751,2006.5751,.01,21,1,0)
+This is the patient name as identified in DICOM tag 0010,0010 from the
+"^DD",2006.5751,2006.5751,.01,21,2,0)
+DICOM Object file that is to be imported.
+"^DD",2006.5751,2006.5751,.01,"DT")
+3090505
+"^DD",2006.5751,2006.5751,2,0)
+PATIENT ID^F^^0;2^K:$L(X)>30!($L(X)<1) X
+"^DD",2006.5751,2006.5751,2,3)
+Enter the patient's id for the imported image; answer must be 1-30 characters in length.
+"^DD",2006.5751,2006.5751,2,21,0)
+^.001^4^4^3090505^^^^
+"^DD",2006.5751,2006.5751,2,21,1,0)
+This is the Patient ID as identified in DICOM tag 0010,0020 from the DICOM
+"^DD",2006.5751,2006.5751,2,21,2,0)
+Object file that is to be imported.  
+"^DD",2006.5751,2006.5751,2,21,3,0)
+The patient id may be a social security number or the sending facility's
+"^DD",2006.5751,2006.5751,2,21,4,0)
+own patient identification.
+"^DD",2006.5751,2006.5751,2,"DT")
+3090505
+"^DD",2006.5751,2006.5751,3,0)
+DOB^FX^^0;3^K:X'?8N X
+"^DD",2006.5751,2006.5751,3,3)
+Enter the patient's date of birth, use format YYYYMMDD.
+"^DD",2006.5751,2006.5751,3,21,0)
+^.001^2^2^3090505^^^^
+"^DD",2006.5751,2006.5751,3,21,1,0)
+The patient's date of birth is obtained in DICOM tag 0010,0030 from the
+"^DD",2006.5751,2006.5751,3,21,2,0)
+DICOM Object file that is to be imported.
+"^DD",2006.5751,2006.5751,3,"DT")
+3090505
+"^DD",2006.5751,2006.5751,4,0)
+SEX^S^M:MALE;F:FEMALE;O:UNKNOWN;^0;4^Q
+"^DD",2006.5751,2006.5751,4,3)
+Identify patient's sex.
+"^DD",2006.5751,2006.5751,4,21,0)
+^.001^2^2^3090505^^^^
+"^DD",2006.5751,2006.5751,4,21,1,0)
+The patient's sex is obtained in DICOM tag 0010,0040 from the DICOM Object
+"^DD",2006.5751,2006.5751,4,21,2,0)
+file that is to be imported.
+"^DD",2006.5751,2006.5751,4,"DT")
+3090420
+"^DD",2006.5751,2006.5751,11,0)
+STUDY DATE^FX^^1;1^K:X'?8N X
+"^DD",2006.5751,2006.5751,11,3)
+Enter image's study date; use format YYYYMMDD
+"^DD",2006.5751,2006.5751,11,21,0)
+^.001^2^2^3090505^^^^
+"^DD",2006.5751,2006.5751,11,21,1,0)
+The study date is obtained in DICOM tag 0008,0020 from the DICOM Object
+"^DD",2006.5751,2006.5751,11,21,2,0)
+file that is to be imported.
+"^DD",2006.5751,2006.5751,11,"DT")
+3090505
+"^DD",2006.5751,2006.5751,12,0)
+STUDY TIME^FX^^1;2^K:X'?4N X
+"^DD",2006.5751,2006.5751,12,3)
+Enter the image study time, in format HHMM.
+"^DD",2006.5751,2006.5751,12,21,0)
+^^2^2^3090505^
+"^DD",2006.5751,2006.5751,12,21,1,0)
+The study time is obtained in DICOM tag 0008,0030 from the DICOM Object
+"^DD",2006.5751,2006.5751,12,21,2,0)
+file that is to be imported.
+"^DD",2006.5751,2006.5751,12,"DT")
+3090505
+"^DD",2006.5751,2006.5751,13,0)
+ACCESSION NUMBER^F^^1;3^K:$L(X)>16!($L(X)<1) X
+"^DD",2006.5751,2006.5751,13,3)
+Enter the image's accession number; answer must be 1-16 characters in length.
+"^DD",2006.5751,2006.5751,13,21,0)
+^.001^2^2^3090505^^^^
+"^DD",2006.5751,2006.5751,13,21,1,0)
+This is the accession number as identified in DICOM tag 0008,0050 from the
+"^DD",2006.5751,2006.5751,13,21,2,0)
+DICOM Object file that is to be imported.
+"^DD",2006.5751,2006.5751,13,"DT")
+3080425
+"^DD",2006.5751,2006.5751,14,0)
+REFERRING PHYSICIAN^F^^1;4^K:$L(X)>30!($L(X)<1) X
+"^DD",2006.5751,2006.5751,14,3)
+Enter the referring physician for the image; answer must be 1-30 characters in length.
+"^DD",2006.5751,2006.5751,14,21,0)
+^.001^2^2^3090505^^^
+"^DD",2006.5751,2006.5751,14,21,1,0)
+This is the physician name as identified in DICOM tag 0008,0090 from the
+"^DD",2006.5751,2006.5751,14,21,2,0)
+DICOM Object file that is to be imported.
+"^DD",2006.5751,2006.5751,14,"DT")
+3080425
+"^DD",2006.5751,2006.5751,15,0)
+STUDY DESCRIPTION^F^^1;5^K:$L(X)>64!($L(X)<1) X
+"^DD",2006.5751,2006.5751,15,3)
+Enter the image's study description; answer must be 1-64 characters in length.
+"^DD",2006.5751,2006.5751,15,21,0)
+^.001^2^2^3090505^^^
+"^DD",2006.5751,2006.5751,15,21,1,0)
+This is the image's study description obtained in DICOM tag 0008,1030
+"^DD",2006.5751,2006.5751,15,21,2,0)
+from the DICOM Object file that is to be imported.
+"^DD",2006.5751,2006.5751,15,"DT")
+3080425
+"^DD",2006.5751,2006.5751,16,0)
+STUDY INSTANCE UID^F^^1;6^K:$L(X)>64!($L(X)<1) X
+"^DD",2006.5751,2006.5751,16,3)
+Enter the image's study instance uid; answer must be 1-64 characters in length.
+"^DD",2006.5751,2006.5751,16,21,0)
+^.001^2^2^3090505^^^
+"^DD",2006.5751,2006.5751,16,21,1,0)
+The study instance uid is obtained in DICOM tag 0020,000D from the 
+"^DD",2006.5751,2006.5751,16,21,2,0)
+DICOM Object file that is to be imported. 
+"^DD",2006.5751,2006.5751,16,"DT")
+3080425
+"^DD",2006.5751,2006.5751,21,0)
+MODALITY^F^^2;1^K:$L(X)>16!($L(X)<1) X
+"^DD",2006.5751,2006.5751,21,3)
+Enter the modality that captured the image; answer must be 1-16 characters in length.
+"^DD",2006.5751,2006.5751,21,21,0)
+^.001^2^2^3090505^^^^
+"^DD",2006.5751,2006.5751,21,21,1,0)
+The modality is obtained in DICOM tag 0008,0060 from the DICOM Object
+"^DD",2006.5751,2006.5751,21,21,2,0)
+file that is to be imported.
+"^DD",2006.5751,2006.5751,21,"DT")
+3080425
+"^DD",2006.5751,2006.5751,22,0)
+INSTITUTION NAME^F^^2;2^K:$L(X)>30!($L(X)<1) X
+"^DD",2006.5751,2006.5751,22,3)
+Enter the institution name where the image was acquired; answer must be 1-30 characters in length.
+"^DD",2006.5751,2006.5751,22,21,0)
+^.001^5^5^3090505^^^^
+"^DD",2006.5751,2006.5751,22,21,1,0)
+The institution name is obtained from the DICOM Object file
+"^DD",2006.5751,2006.5751,22,21,2,0)
+under DICOM tag 0008,0080.
+"^DD",2006.5751,2006.5751,22,21,3,0)
+ 
+"^DD",2006.5751,2006.5751,22,21,4,0)
+The DICOM Object file's institution may be an outside non-VA facility
+"^DD",2006.5751,2006.5751,22,21,5,0)
+such as DOD facility or a fee basis entity.
+"^DD",2006.5751,2006.5751,22,"DT")
+3080425
+"^DD",2006.5751,2006.5751,23,0)
+INSTITUTION ADDRESS^F^^2;3^K:$L(X)>40!($L(X)<1) X
+"^DD",2006.5751,2006.5751,23,3)
+Enter the institution address where the image was acquired; answer must be 1-40 characters in length.
+"^DD",2006.5751,2006.5751,23,21,0)
+^.001^2^2^3090505^^^^
+"^DD",2006.5751,2006.5751,23,21,1,0)
+The institution address is obtained from the DICOM Object file under
+"^DD",2006.5751,2006.5751,23,21,2,0)
+DICOM tag 0008,0081.  
+"^DD",2006.5751,2006.5751,23,"DT")
+3080425
+"^DD",2006.5751,2006.5751,24,0)
+SERIES DESCRIPTION^F^^2;4^K:$L(X)>40!($L(X)<1) X
+"^DD",2006.5751,2006.5751,24,3)
+Enter the image's series description; answer must be 1-40 characters in length.
+"^DD",2006.5751,2006.5751,24,21,0)
+^.001^2^2^3090505^^^^
+"^DD",2006.5751,2006.5751,24,21,1,0)
+This is the image's series description as identified in DICOM tag
+"^DD",2006.5751,2006.5751,24,21,2,0)
+0008,103E from the DICOM Object file that is to be imported.
+"^DD",2006.5751,2006.5751,24,"DT")
+3080425
+"^DD",2006.5751,2006.5751,25,0)
+SERIES INSTANCE UID^F^^2;5^K:$L(X)>64!($L(X)<1) X
+"^DD",2006.5751,2006.5751,25,3)
+Enter the image's series instance uid; answer must be 1-64 characters in length.
+"^DD",2006.5751,2006.5751,25,21,0)
+^.001^2^2^3090505^^^^
+"^DD",2006.5751,2006.5751,25,21,1,0)
+This is the image's series instance uid as identified in DICOM tag 0020,000E
+"^DD",2006.5751,2006.5751,25,21,2,0)
+from the DICOM Object file that is to be imported.
+"^DD",2006.5751,2006.5751,25,"DT")
+3080425
+"^DD",2006.5751,2006.5751,31,0)
+PATH TO DICOM OBJECT^F^^3;1^K:$L(X)>30!($L(X)<1) X
+"^DD",2006.5751,2006.5751,31,3)
+Enter the path where the images are located; answer must be 1-30 characters in length.
+"^DD",2006.5751,2006.5751,31,21,0)
+^.001^2^2^3090505^^^^
+"^DD",2006.5751,2006.5751,31,21,1,0)
+This is the share path either on the local machine or a mapped drive
+"^DD",2006.5751,2006.5751,31,21,2,0)
+where the images to be imported reside.
+"^DD",2006.5751,2006.5751,31,"DT")
+3080425
+"^DD",2006.5751,2006.5751,32,0)
+SOP CLASS^F^^3;2^K:$L(X)>35!($L(X)<1) X
+"^DD",2006.5751,2006.5751,32,3)
+Enter the image's sop class; answer must be 1-35 characters in length.
+"^DD",2006.5751,2006.5751,32,21,0)
+^.001^2^2^3090505^^
+"^DD",2006.5751,2006.5751,32,21,1,0)
+The image's sop class is obtained in DICOM tag from the DICOM Object
+"^DD",2006.5751,2006.5751,32,21,2,0)
+file for the image to be imported.
+"^DD",2006.5751,2006.5751,32,"DT")
+3080425
+"^DD",2006.5751,2006.5751,33,0)
+TRANSFER SYNTAX^F^^3;3^K:$L(X)>35!($L(X)<1) X
+"^DD",2006.5751,2006.5751,33,3)
+Enter the image's transfer syntax; answer must be 1-35 characters in length.
+"^DD",2006.5751,2006.5751,33,21,0)
+^.001^2^2^3090505^^^^
+"^DD",2006.5751,2006.5751,33,21,1,0)
+The image's transfer syntax is obtained in DICOM tag 0004,1523 from
+"^DD",2006.5751,2006.5751,33,21,2,0)
+the DICOM Object file for the image to be imported.
+"^DD",2006.5751,2006.5751,33,"DT")
+3080425
+"^DD",2006.5751,2006.5751,34,0)
+SOP INSTANCE UID^F^^3;4^K:$L(X)>64!($L(X)<1) X
+"^DD",2006.5751,2006.5751,34,3)
+Enter the image's sop instance uid; answer must be 1-64 characters in length.
+"^DD",2006.5751,2006.5751,34,21,0)
+^.001^2^2^3090505^^^^
+"^DD",2006.5751,2006.5751,34,21,1,0)
+The image's sop instance uid is obtained in DICOM tag 0008,0018 and
+"^DD",2006.5751,2006.5751,34,21,2,0)
+0004,1511 from the DICOM Object file for the image to be imported.
+"^DD",2006.5751,2006.5751,34,"DT")
+3080425
+"^DD",2006.5751,2006.5751,35,0)
+INSTANCE NUMBER^NJ5,0^^3;5^K:+X'=X!(X>99999)!(X<1)!(X?.E1"."1N.N) X
+"^DD",2006.5751,2006.5751,35,3)
+Enter the image number; answer must be 1 to 5 numeric characters.
+"^DD",2006.5751,2006.5751,35,21,0)
+^.001^3^3^3090505^^^^
+"^DD",2006.5751,2006.5751,35,21,1,0)
+The image's instance number (actual image number within the study) is
+"^DD",2006.5751,2006.5751,35,21,2,0)
+obtained in DICOM tag 0020,0013 from the DICOM Object file for the image
+"^DD",2006.5751,2006.5751,35,21,3,0)
+to be imported.
+"^DD",2006.5751,2006.5751,35,"DT")
+3090420
+"^DD",2006.5751,2006.5751,36,0)
+NUMBER OF FRAMES^NJ5,0^^3;6^K:+X'=X!(X>99999)!(X<1)!(X?.E1"."1N.N) X
+"^DD",2006.5751,2006.5751,36,3)
+Enter the frame number for the image; answer must be 1 to 5 numeric characters.
+"^DD",2006.5751,2006.5751,36,21,0)
+^.001^3^3^3090505^^^^
+"^DD",2006.5751,2006.5751,36,21,1,0)
+This field is optional and used for multi-frame images.  The
+"^DD",2006.5751,2006.5751,36,21,2,0)
+information is obtained in DICOM tag 0028,0008 from the DICOM Object
+"^DD",2006.5751,2006.5751,36,21,3,0)
+file for the image to be imported.
+"^DD",2006.5751,2006.5751,36,"DT")
+3090420
+"^DD",2006.5751,2006.5751,41,0)
+INSTRUMENT NAME^F^^4;1^K:$L(X)>16!($L(X)<1) X
+"^DD",2006.5751,2006.5751,41,3)
+Enter the instrument name where the image was captured on; answer must be 1-16 characters in length.
+"^DD",2006.5751,2006.5751,41,21,0)
+^.001^1^1^3090505^^^^
+"^DD",2006.5751,2006.5751,41,21,1,0)
+This field stores the Instrument Name (C-Store process name).
+"^DD",2006.5751,2006.5751,41,"DT")
+3080425
+"^DD",2006.5751,2006.5751,42,0)
+CALLING AE TITLE^F^^4;2^K:$L(X)>16!($L(X)<1) X
+"^DD",2006.5751,2006.5751,42,3)
+Enter the application's entity title; answer must be 1-16 characters in length.
+"^DD",2006.5751,2006.5751,42,21,0)
+^.001^2^2^3090505^^^^
+"^DD",2006.5751,2006.5751,42,21,1,0)
+This field stores the Calling application entity title, e.g. DICOM_TEST.  The
+"^DD",2006.5751,2006.5751,42,21,2,0)
+possible values are defined in file AE_TITLE.DIC.
+"^DD",2006.5751,2006.5751,42,"DT")
+3080425
+"^DD",2006.5751,2006.5751,43,0)
+TIMESTAMP^D^^4;3^S %DT="ET" D ^%DT S X=Y K:Y<1 X
+"^DD",2006.5751,2006.5751,43,3)
+Enter the present date and time for the entry being added.
+"^DD",2006.5751,2006.5751,43,21,0)
+^.001^1^1^3090505^^^^
+"^DD",2006.5751,2006.5751,43,21,1,0)
+This field stores the date and time when an entry was made into this file.
+"^DD",2006.5751,2006.5751,43,"DT")
+3090420
+"^DD",2006.5751,2006.5751,44,0)
+PRESENTATION CONTEXT FLAG^S^0:acceptable;2:VISTA_STORAGE is missing;3:abstract syntax not supported;4:transfer syntax not supported;^4;4^Q
+"^DD",2006.5751,2006.5751,44,3)
+Select image's presentation context.
+"^DD",2006.5751,2006.5751,44,21,0)
+^.001^6^6^3090505^^^^
+"^DD",2006.5751,2006.5751,44,21,1,0)
+This field is updated during the process of reading the DICOM Object
+"^DD",2006.5751,2006.5751,44,21,2,0)
+file and will store the image's presentation context.  The values
+"^DD",2006.5751,2006.5751,44,21,3,0)
+provided are DICOM standards.
+"^DD",2006.5751,2006.5751,44,21,4,0)
+ 
+"^DD",2006.5751,2006.5751,44,21,5,0)
+If VISTA_STORAGE is undefined in the PROVIDER APPLICATION file (#2006.586),
+"^DD",2006.5751,2006.5751,44,21,6,0)
+this field will record 'VISTA_STORAGE is missing'.
+"^DD",2006.5751,2006.5751,44,"DT")
+3090505
+"^DIC",2006.5751,2006.5751,0)
+DICOM OBJECTS TO BE IMPORTED^2006.5751
+"^DIC",2006.5751,2006.5751,0,"GL")
+^MAGDICOM(2006.5751,
+"^DIC",2006.5751,2006.5751,"%",0)
+^1.005^^0
+"^DIC",2006.5751,2006.5751,"%D",0)
+^1.001^6^6^3090505^^^
+"^DIC",2006.5751,2006.5751,"%D",1,0)
+The DICOM OBJECTS TO BE IMPORTED file (#2006.5751) resides on the DICOM
+"^DIC",2006.5751,2006.5751,"%D",2,0)
+Gateway and tracks DICOM objects that have been received and may be imported.
+"^DIC",2006.5751,2006.5751,"%D",3,0)
+ 
+"^DIC",2006.5751,2006.5751,"%D",4,0)
+Entries are made to this file by reading the DICOM Object files and recording the 
+"^DIC",2006.5751,2006.5751,"%D",5,0)
+raw data elements from the file.  The information is displayed in listing
+"^DIC",2006.5751,2006.5751,"%D",6,0)
+which are selectable for importing into the VistA database.
+"^DIC",2006.5751,"B","DICOM OBJECTS TO BE IMPORTED",2006.5751)
+
+**END**
+**END**

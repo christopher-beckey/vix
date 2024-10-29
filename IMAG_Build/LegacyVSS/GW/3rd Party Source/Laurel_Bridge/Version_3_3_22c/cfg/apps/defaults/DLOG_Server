@@ -1,0 +1,156 @@
+[ application_info ]
+name = DLOG_Server
+description = Java server implementation of DLOG interface, for centralized logging facilities.
+app_component_name = java_app/DLOG_Server
+execution_state = STOPPED
+
+[ required_components ]
+component = java_lib/LOG
+component = java_lib/LOG_a
+component = java_lib/DCF
+component = java_lib/APC
+component = java_lib/CDS
+component = java_lib/APC_a
+component = java_lib/CDS_a
+[ java_app ]
+
+#==============================================================================
+# per-instance information for the DLOG_Server component
+#==============================================================================
+[ java_app/DLOG_Server ]
+debug_flags = 0x00000
+special_params = integer;Socket Port;java_app/DLOG_Server/output_configuration_info;server_port_number;single;6;;;;
+special_params = integer;Max Number of Sockets;java_app/DLOG_Server/output_configuration_info;max_number_of_sockets;single;6;;;;
+special_params = integer;Max Number of System logs (-1 for no limit);java_app/DLOG_Server/output_1;max_files;single;6;;;;
+special_params = integer;Max size (KB) per System log file (-1 for no limit);java_app/DLOG_Server/output_1;max_size;single;6;;;;
+special_params = integer;Max Number of Error logs (-1 for no limit);java_app/DLOG_Server/output_2;max_files;single;6;;;;
+special_params = integer;Max size (KB) per Error log file (-1 for no limit);java_app/DLOG_Server/output_2;max_size;single;6;;;;
+
+[ java_app/DLOG_Server/output_configuration_info ]
+number_of_outputs = 2
+max_number_of_sockets = 10
+server_port_number = 3000
+
+# System log file -- holds everything
+[ java_app/DLOG_Server/output_1 ]
+type = file
+message_types = *
+server_names = *
+component_names = *
+filename = C:/DCF/DCF-3.3.22c/tmp/log/system.${CNT}.log
+max_size = 3000
+max_files = 5
+character_encoding = UTF-8
+sync_on_write = false
+write_bom = false
+
+# Error log file -- holds errors only
+[ java_app/DLOG_Server/output_2 ]
+type = file
+message_types = ERROR
+message_types = FATAL_ERROR
+server_names = *
+component_names = *
+filename = C:/DCF/DCF-3.3.22c/tmp/log/error.${CNT}.log
+max_size = 3000
+max_files = 5
+character_encoding = UTF-8
+sync_on_write = false
+write_bom = false
+[ java_lib ]
+
+#==============================================================================
+# per-instance information for the LOG component
+#==============================================================================
+[ java_lib/LOG ]
+debug_flags = 0x00000
+
+#==============================================================================
+# per-instance information for the LOG_a component
+#==============================================================================
+[ java_lib/LOG_a ]
+debug_flags = 0
+
+[ java_lib/LOG_a/outputs ]
+[ java_lib/LOG_a/outputs/server_output_1 ]
+type = LOGSERVER
+use_log_server = TRUE
+
+[ java_lib/LOG_a/outputs/file_output_1 ]
+type = textfile
+message_types = *
+component_names = *
+# Note that changing the format of this name may affect the behavior of the web
+# utilities that manipulate log files (e.g., list_logs.pl, dcfrmlogs.pl).
+filename = C:/DCF/DCF-3.3.22c/tmp/log/${APPIBNAME}.${CNT}.log
+append_to_logfile = TRUE
+# Maximum size (KBytes) of each log file before rotating.
+max_size = 3000
+# Maximum number of log files before old ones are deleted.
+max_files = 5
+# Sync the file output on the disk on every write operation - this could affect performance
+sync_on_write = false
+character_encoding = UTF-8
+# true if a Byte-Order-Marker should be written at the start of the file.
+# Some UTF capable viewers use this to detect that the file is UTF format.
+write_bom = false
+
+[ java_lib/LOG_a/outputs/std_output_1 ]
+type = stdout
+redirect_stdout = FALSE
+redirect_stderr = FALSE
+
+#==============================================================================
+# per-instance information for the DCF component
+#==============================================================================
+[ java_lib/DCF ]
+debug_flags = 0x00000
+
+#==============================================================================
+# per-instance information for the APC component
+#==============================================================================
+[ java_lib/APC ]
+debug_flags = 0x00000
+
+#==============================================================================
+# per-instance information for the CDS component
+#==============================================================================
+[ java_lib/CDS ]
+debug_flags = 0x00000
+
+#==============================================================================
+# per-instance information for the APC_a component
+#==============================================================================
+[ java_lib/APC_a ]
+debug_flags = 0x00000
+
+# If true, proc configuration will be saved in CDS CFGDB.
+save_proc_cfg_in_cds = true
+
+# If true, <proc_cfg>/application_info/execution_state attribute
+# will be monitored for a shutdown request 
+# (not supported if CFGDB is in FSys Mode)
+handle_external_shutdown_rq = true
+
+# If true, <proc_cfg> will be observed, and re-loaded if it changes
+# (not supported if CFGDB is in FSys Mode)
+observe_proc_cfg = false
+
+# If true, the value passed to AppControl.shutdown() will be saved in
+# the proc config - usually delete_proc_cfg is set to false with this.
+save_exit_status_in_proc_cfg = false
+
+# If true, the proc config object in CDS is deleted during shutdown
+delete_proc_cfg = true
+
+# Specify the TCP-IP host address that will identify CORBA server
+# objects hosted by this process. The value 0.0.0.0 will result
+# in the default address being used. This controls the value of
+# property com.sun.CORBA.ORBServerHost.
+orb_server_host = 0.0.0.0
+
+#==============================================================================
+# per-instance information for the CDS_a component
+#==============================================================================
+[ java_lib/CDS_a ]
+debug_flags = 0x00000

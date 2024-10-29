@@ -1,0 +1,51 @@
+# Last edited 3 July 2013 11:55 AM
+#
+# List of different typs of modality image acquisition devices
+#
+#manufacturer|model|modality|dcmtotga.exe parameters|case# lookup code|data extraction code|data extraction file|imaging service
+#
+# Note: For Healthcare Providers, the following two values should always be used:
+#	dcmtotga.exe parameters should be "<DICOM>"
+#	Case# lookup code should be "CORRECT^MAGDIR3"
+#
+# Imaging services are defined as follows
+#    RAD --------- Radiology
+#    CON --------- Consult/Procedure Request Tracking (CPRS)
+#    LAB --------- Anatomic Pathology
+#
+# Examples:
+#
+#Default Radiology
+
+#DEFAULT| DEFAULT|DEFAULT|<DICOM>|CORRECT^MAGDIR3||DATAMISC.DIC|RAD
+#DEFAULT| DEFAULT |CT|<DICOM>|CORRECT^MAGDIR3||DATAMISC.DIC|RAD
+#DEFAULT| DEFAULT |CR|R8/<DICOM>|CORRECT^MAGDIR3||DATAMISC.DIC|RAD
+#DEFAULT| DEFAULT |DX|R16/<DICOM>|CORRECT^MAGDIR3||DATAMISC.DIC|RAD
+#DEFAULT| DEFAULT |OT|<DICOM>|CORRECT^MAGDIR3||DATAMISC.DIC|RAD
+#DEFAULT| DEFAULT |US|<DICOM>|CORRECT^MAGDIR3||DATAMISC.DIC|RAD
+
+# Radiology
+
+#ACME, Inc.|Coyotes Rule|CT|<DICOM>|CORRECT^MAGDIR3||DATAGECT.DIC|RAD
+#ACME, Inc.|Coyotes Rule|CR|R8/<DICOM>|CORRECT^MAGDIR3||DATAMISC.DIC|RAD
+#ACME, Inc.|Coyotes Rule|DX|R16/<DICOM>|CORRECT^MAGDIR3||DATAMISC.DIC|RAD
+#ACME, Inc.|Coyotes Rule|OT|<DICOM>|CORRECT^MAGDIR3||DATAMISC.DIC|RAD
+#ACME, Inc.|Coyotes Rule|OT||CORRECT^MAGDIR3||DATAMISC.DIC|RAD
+#ACME, Inc.|Coyotes Rule|US|<DICOM>|CORRECT^MAGDIR3||DATAMISC.DIC|RAD
+
+#ACME, Inc.|Coyotes Rule|<SC>|<DICOM>|CORRECT^MAGDIR3||DATAMISC.DIC|RAD
+#Roadrunner, Inc.|Beep-Beep|<SC>||CORRECT^MAGDIR3||DATAMISC.DIC|RAD
+
+# Consults
+
+#ACME, Inc.|Coyotes Rule|BMD|<DICOM>|CORRECT^MAGDIR3||DATAMISC.DIC|CON
+#ACME, Inc.|Coyotes Rule|OP|<DICOM>|CORRECT^MAGDIR3||DATAMISC.DIC|CON
+#ACME, Inc.|Coyotes Rule|OPV|<DICOM>|CORRECT^MAGDIR3||DATAMISC.DIC|CON
+#ACME, Inc.|Coyotes Rule|OPM|<DICOM>|CORRECT^MAGDIR3||DATAMISC.DIC|CON
+#ACME, Inc.|Coyotes Rule|OPT|<DICOM>|CORRECT^MAGDIR3||DATAMISC.DIC|CON
+#
+# Place your entries below
+
+
+
+# end of file

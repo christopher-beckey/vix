@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module rename-to='imagingcacheweb'>
+	<!-- Inherit the core Web Toolkit stuff. -->
+	<inherits name='com.google.gwt.user.User' />
+	<inherits name='javax.validation.Validation' />
+	<inherits name='com.google.gwt.validation.Validation' />
+	
+	<!-- Inherit the default GWT style sheet. You can change -->
+	<!-- the theme of your GWT application by uncommenting -->
+	<!-- any one of the following lines. -->
+	<inherits name='com.google.gwt.user.theme.clean.Clean' />
+
+	<!-- Enables client logging through java.util.logging API -->
+	<inherits name="com.google.gwt.logging.Logging" />
+
+	<!-- Enable ClientBundle usage, loads icons as one transaction -->
+	<inherits name="com.google.gwt.resources.Resources" />
+
+	<!-- Enable internalization, loads icons as one transaction -->
+	<inherits name="com.google.gwt.i18n.I18N"/>
+
+	<!-- <inherits name='com.google.gwt.user.theme.standard.Standard'/> -->
+	<!-- <inherits name='com.google.gwt.user.theme.chrome.Chrome'/> -->
+	<!-- <inherits name='com.google.gwt.user.theme.dark.Dark'/> -->
+
+	<!-- Other module inherits -->
+
+	<!-- Specify the app entry point class. -->
+	<entry-point class='gov.va.med.cache.gui.client.ImagingCacheWeb' />
+	<!-- <entry-point class='gov.va.med.cache.gui.client.CellTreeExample2'/> -->
+
+	<!-- Specify the paths for translatable code -->
+	<source path='client' />
+	<source path='shared' />
+
+	<!-- Enable or disable logging (enable for debug use only) -->
+    <set-property name="gwt.logging.enabled" value="TRUE"/>
+    <set-property name="gwt.logging.logLevel" value="ALL"/>
+    
+    <set-property name="gwt.logging.consoleHandler" value="DISABLED"/>
+    <set-property name="gwt.logging.popupHandler" value="DISABLED"/>
+    <set-property name="gwt.logging.systemHandler" value="DISABLED"/>
+    <set-property name="gwt.logging.firebugHandler" value="ENABLED"/>
+    <set-property name="gwt.logging.simpleRemoteHandler" value="DISABLED"/>
+</module>

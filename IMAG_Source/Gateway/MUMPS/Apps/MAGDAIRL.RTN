@@ -1,0 +1,204 @@
+MAGDAIRL ;WOIFO/PMK - Automatic Import Reconciliation Workflow ; 23 Oct 2008 7:11 AM
+ ;;3.0;IMAGING;**53**;Mar 19, 2002;Build 1715;Apr 22, 2010
+ ;; Per VHA Directive 2004-038, this routine should not be modified.
+ ;; +---------------------------------------------------------------+
+ ;; | Property of the US Government.                                |
+ ;; | No permission to copy or redistribute this software is given. |
+ ;; | Use of unreleased versions of this software requires the user |
+ ;; | to execute a written test agreement with the VistA Imaging    |
+ ;; | Development Office of the Department of Veterans Affairs,     |
+ ;; | telephone (301) 734-0100.                                     |
+ ;; | The Food and Drug Administration classifies this software as  |
+ ;; | a medical device.  As such, it may not be changed in any way. |
+ ;; | Modifications to this software may result in an adulterated   |
+ ;; | medical device under 21CFR820, the use of which is considered |
+ ;; | to be a violation of US Federal Statutes.                     |
+ ;; +---------------------------------------------------------------+
+ ;;
+ ; Generate a log of the import session
+ ;
+LOG ; record the data for the study
+ N ACTION ;--- action for study
+ N DATA
+ N DATE ;----- current date
+ N FILE ;----- full path to log file
+ N IEN ;------ internal entry number in DATAFILE
+ N ISERIES ;-- series counter
+ N MODALITY ;- DICOM modality, for counting how many images
+ N NSERIES ;-- number of series in the study
+ N PATH ;----- path for importer log file
+ N PATIENT ;-- DFN of patient to whom the study is assigned
+ N PNAMEDCM ;- patient name in DICOM format
+ N RECVDATE ;- date/time the study was received (that is, C-Stored)
+ N RECVFROM ;- source that sent the study
+ N SERIEUID ;- DICOM series instance uid
+ N STUDYN ;--- number of study, 1:n
+ N TIME ;----- current time
+ N VISTA
+ N I,J,K,STATUS,X,Y,Z
+ ;
+ S PATH=$G(^MAGDICOM(2006.563,1,"IMPORTER LOG"))
+ I PATH="" D
+ . S X=^MAGDICOM(2006.563,1,"IMAGE OUTPUT PATH")
+ . S PATH=$P(X,"\",1,$L(X,"\")-1)_"\IMPORTER_LOG"
+ . S ^MAGDICOM(2006.563,1,"IMPORTER LOG")=PATH
+ . Q
+ I '$$GETDIR^MAGOSDIR(PATH,"D") D
+ . S X=$$MKDIR^MAGDFCNS(PATH)
+ . I X<0 D  ; fatal error
+ . . N FBSWITCH,MSG
+ . . S FBSWITCH="FOREGROUND"
+ . . S MSG(1)="IMPORTER LOG SUBDIRECTORY CREATION ERROR"
+ . . S MSG(2)="Cannot create the Importer Log subdirectory """_PATH_""""
+ . . S MSG(3)=X
+ . . D TRAPERR^MAGDSTRT(1,$T(+0),"DICOM IMAGE PROCESSING ERROR",.MSG)
+ . . Q  ; Error trap does not return
+ . Q
+ D DATETIME($$NOW^XLFDT(),.DATE,.TIME)
+ S DATE=$E(DATE,1,4)_"-"_$E(DATE,5,6)_"-"_$E(DATE,7,8)
+ S TIME=$E(TIME,1,2)_"-"_$E(TIME,3,4)_"-"_$E(TIME,5,6)
+ S FILE=PATH_"\Importer Log "_$$HOSTNAME^MAGOSMSC()_" "_DATE_" "_TIME_".CSV"
+ S STATUS=$$OPEN^MAGOSFIL(FILE,"W")
+ S STATUS=$$USEDEV^MAGOSFIL(FILE)
+ ;
+ S ACTION=""
+ ;
+ F I="#","Received","Source","Action","Patient ID"  D OUTPUT(I)
+ F I="Name (last,first middle)","DOB","Sex","Accession #" D OUTPUT(I)
+ F I="Study Date","Study Description","# Series","Series #" D OUTPUT(I)
+ F I="Series Description","Modality","# files" D OUTPUT(I)
+ F I="Acquisition Facility","Acquisition Location" D OUTPUT(I)
+ F I="VistA PID","VistA Pt Name","VistA DOB","VistA Sex" D OUTPUT(I)
+ F I="VistA Accession #","VistA Study Date" D OUTPUT(I)
+ F I="VistA Study Description","VistA Modifier" D OUTPUT(I)
+ D OUTPUT("User Name",1) ; end of header record
+ ;
+ S STUDYN=0 F  S STUDYN=$O(^TMP("MAG",$J,"IMPORT","LIST",STUDYN)) Q:'STUDYN  D
+ . I '$$GETDATA^MAGDAIRD(STUDYN,"LIST",.DATA) Q
+ . S ACTION="",PATIENT=$G(^TMP("MAG",$J,"IMPORT","LIST",STUDYN,"PATIENT"))
+ . I PATIENT D
+ . . S Z=$G(^TMP("MAG",$J,"IMPORT","LIST",STUDYN,"ALREADY ON FILE"))
+ . . I Z="" S ACTION="Imported"
+ . . E  I $P(Z,"^",1)=$P(Z,"^",2) S ACTION="Completely on VistA" ; completely stored on VistA
+ . . E  S ACTION="Partially on VistA" ; only partially stored on VistA
+ . . S X=^TMP("MAG",$J,"IMPORT","LIST",STUDYN,"STUDY")
+ . . S VISTA("ACNUMB")=$P(X,"^",1)
+ . . S VISTA("STUDYDAT")=$P(X,"^",2)
+ . . S VISTA("PROCNAME")=$P(X,"^",3)
+ . . S VISTA("MODIFIER")=$P(X,"^",4)
+ . . S DFN=^TMP("MAG",$J,"IMPORT","LIST",STUDYN,"PATIENT")
+ . . S X=^TMP("MAG",$J,"IMPORT","PATIENT",DFN)
+ . . S VISTA("PNAMEDCM")=$P(X,"^",1)
+ . . S VISTA("PID")=$P(X,"^",2)
+ . . S VISTA("DOB")=$P(X,"^",3)
+ . . S VISTA("SEX")=$P(X,"^",4)
+ . . S VISTA("PNAMEDCM")=$TR(VISTA("PNAMEDCM"),"|","^")
+ . . Q
+ . E  K VISTA
+ . I $G(^TMP("MAG",$J,"IMPORT","LIST",STUDYN,"DELETE")) D
+ . . S ACTION="Deleted"
+ . . Q
+ . I $L(DATA("CALLING")) D
+ . . S Y="",X=$$UPPER^MAGOSMSC(DATA("CALLING"))
+ . . S X=$O(^MAGDICOM(2006.588,"B",X,""))
+ . . I X S Y=$P(^MAGDICOM(2006.588,X,0),"^",3)
+ . . S RECVFROM=$S(Y'="":Y,1:DATA("CALLING"))
+ . . Q
+ . E  S RECVFROM=""
+ . I $L(DATA("RECVDATE")) D
+ . . D DATETIME(DATA("RECVDATE"),.DATE,.TIME)
+ . . S DATE=$E(DATE,5,6)_"/"_$E(DATE,7,8)_"/"_$E(DATE,1,4)
+ . . S TIME=$E(TIME,1,2)_":"_$E(TIME,3,4)_":"_$E(TIME,5,6)
+ . . S RECVDATE=DATE_" "_TIME
+ . . Q
+ . E  S RECVDATE=""
+ . S NSERIES=$$BLDSERIE^MAGDAIR3(STUDYN)
+ . F ISERIES=1:1:NSERIES D
+ . . S SERIEUID=$O(^TMP("MAG",$J,"IMPORT","SERIES","INDEX",ISERIES,""))
+ . . D SERIES1(SERIEUID)
+ . . Q
+ . Q
+ S STATUS=$$CLOSE^MAGOSFIL(FILE)
+ S STATUS=$$USEPRIN^MAGOSFIL(0)
+ Q
+ ;
+SERIES1(SERIEUID) ; output one series 
+ N N,X
+ S X=^TMP("MAG",$J,"IMPORT","SERIES","IEN",SERIEUID,"DATA")
+ S N=^TMP("MAG",$J,"IMPORT","SERIES","IEN",SERIEUID,"NIMAGES")
+ S MODALITY=$P(X,"^",1),ACQLOCN=$P(X,"^",2),ACQADDR=$P(X,"^",3),SERIEDES=$P(X,"^",4)
+ D OUTPUT(STUDYN)
+ D OUTPUT(RECVDATE)
+ D OUTPUT(RECVFROM)
+ D OUTPUT(ACTION)
+ D OUTPUT(DATA("PID"))
+ D OUTPUT($$NAME^MAGDAIR0(DATA("PNAMEDCM")))
+ D OUTPUT($$DATE^MAGDAIR0(DATA("DOB"),"B"))
+ D OUTPUT(DATA("SEX"))
+ D OUTPUT(DATA("ACNUMB"))
+ D OUTPUT($$DATE^MAGDAIR0(DATA("STUDYDAT"),"S"))
+ D OUTPUT(DATA("STUDYDES"))
+ D OUTPUT(NSERIES)
+ D OUTPUT(ISERIES)
+ D OUTPUT(SERIEDES)
+ D OUTPUT(MODALITY)
+ D OUTPUT(N)
+ D OUTPUT(ACQLOCN)
+ D OUTPUT(ACQADDR)
+ D OUTPUT($G(VISTA("PID")))
+ D OUTPUT($$NAME^MAGDAIR0($G(VISTA("PNAMEDCM"))))
+ D OUTPUT($$DATE^MAGDAIR0($G(VISTA("DOB")),"B"))
+ D OUTPUT($G(VISTA("SEX")))
+ D OUTPUT($G(VISTA("ACNUMB")))
+ D OUTPUT($$DATE^MAGDAIR0($G(VISTA("STUDYDAT")),"S"))
+ D OUTPUT($G(VISTA("PROCNAME")))
+ D OUTPUT($G(VISTA("MODIFIER")))
+ D OUTPUT(USERNAME,1) ; end of record
+ Q
+ ;
+OUTPUT(FIELD,LASTONE) ; output the value of the field
+ ; output a field using the comma-separated value (CSV) format
+ S LASTONE=$G(LASTONE,0)
+ W $$OUTPUT1(FIELD)
+ I LASTONE W ! ; last field in a line is terminated with a newline
+ E  W "," ; other fields are terminated with a comma
+ Q
+ ;
+OUTPUT1(FIELD) ; 
+ N CHAR,I,X
+ I FIELD["""" D  S FIELD=X
+ . ; replace every double quote with two double quotes
+ . S X=""
+ . F I=1:1:$L(FIELD) D
+ . . S CHAR=$E(FIELD,I)
+ . . S X=X_$S(CHAR="""":CHAR_CHAR,1:CHAR)
+ . . Q
+ . Q
+ ; double quote field enclosure rules
+ I FIELD["," S FIELD=""""_FIELD_"""" ; contains comma
+ E  I FIELD["""" S FIELD=""""_FIELD_"""" ; contains quote
+ E  I FIELD[$C(13) S FIELD=""""_FIELD_"""" ; contains <cr>
+ E  I FIELD[$C(10) S FIELD=""""_FIELD_"""" ; contains <lf>
+ E  I $E(FIELD)=" " S FIELD=""""_FIELD_"""" ; leading space
+ E  I $E($RE(FIELD))="" S FIELD=""""_FIELD_"""" ; trailing space
+ Q FIELD
+ ;
+DATETIME(DATETIME,DATE,TIME) ; returns date and time
+ S $E(DATETIME)=$E(DATETIME)+17
+ S DATE=$P(DATETIME,".",1),TIME=$E($P(DATETIME,".",2)_"000000",1,6)
+ Q
+ ;
+TEST ; test from http://en.wikipedia.org/wiki/Comma-separated_values
+ N MFGR,MODEL,TEXT,YEAR
+ W #
+ S YEAR=1997,MFGR="Ford",MODEL="E350"
+ D OUTPUT(YEAR,0),OUTPUT(MFGR,0),OUTPUT(MODEL,1) ; test 1 (no test 2)
+ S TEXT="Super, luxurious truck"
+ D OUTPUT(YEAR,0),OUTPUT(MFGR,0),OUTPUT(MODEL,0),OUTPUT(TEXT,1) ; test 3
+ S TEXT="Super ""luxurious"" truck"
+ D OUTPUT(YEAR,0),OUTPUT(MFGR,0),OUTPUT(MODEL,0),OUTPUT(TEXT,1) ; test 4
+ S TEXT="Get one now"_$C(13,10)_"they are going fast"
+ D OUTPUT(YEAR,0),OUTPUT(MFGR,0),OUTPUT(MODEL,0),OUTPUT(TEXT,1) ; test 5
+ S TEXT="   Super luxurious truck   "
+ D OUTPUT(YEAR,0),OUTPUT(MFGR,0),OUTPUT(MODEL,0),OUTPUT(TEXT,1) ; test 6
+ Q

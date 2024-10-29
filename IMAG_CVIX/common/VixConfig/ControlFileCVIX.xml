@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+	files: root element
+	file: repeatable element for each config file to be process
+		filePath: full path to a config file to operate from
+		isClearText: flag to tell the program that the following "fieldToChange" elements are in clear text. If true, decrypt won't happen.
+		fieldToChange: repeatable element(s) of value(s) to change
+-->
+<files>
+	<file>
+		<filePath>C:/VixConfig/DxDataSourceProvider-1.0.config</filePath>
+		<isClearText>true</isClearText>
+		<fieldToChange>trustStorePassword</fieldToChange>
+		<fieldToChange>keystorePassword</fieldToChange>
+		<fieldToChange>alexdelargePassword</fieldToChange>
+	</file>
+	<file>
+		<filePath>C:/VixConfig/ExchangeDataSource-1.0.config</filePath>
+		<isClearText>true</isClearText>
+		<fieldToChange>username</fieldToChange>
+		<fieldToChange>password</fieldToChange>
+	</file>
+	<file>
+		<filePath>C:/VixConfig/FederationDataSource-1.0.config</filePath>
+		<isClearText>true</isClearText>
+		<fieldToChange>aKeystorePassVal</fieldToChange>
+		<fieldToChange>aTruststorePassVal</fieldToChange>
+	</file>
+	<file>
+		<filePath>C:/VixConfig/MIXDataSource-1.0.config</filePath>
+		<isClearText>true</isClearText>
+		<fieldToChange>keystorePassword</fieldToChange>
+		<fieldToChange>truststorePassword</fieldToChange>
+		<fieldToChange>username</fieldToChange>
+		<fieldToChange>password</fieldToChange>
+	</file>	
+    <file>
+		<filePath>C:/VixConfig/IdConversionConfiguration.config</filePath>
+		<isClearText>true</isClearText>
+        <fieldToChange>trustStorePassword</fieldToChange>
+		<fieldToChange>password</fieldToChange>
+		<fieldToChange>username</fieldToChange>
+    </file>
+</files>

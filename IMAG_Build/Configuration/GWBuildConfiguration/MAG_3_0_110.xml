@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<build
+ name="MAG*3.0*110"
+ patch="110"
+ patchName="VistA Imaging Version 3.0 Patch 110 - Multiple Modality Worklist Service">
+
+  <dictionaries>
+    <dictionary export="ELEMENT.DIC" />
+    <dictionary export="TEMPLATE.DIC" />
+    <dictionary export="UID.DIC" />
+   </dictionaries>
+
+  <samples>
+    <sample export="WorkList.Sample" />
+  </samples>  
+   
+ <routines>
+   <routine name="MAGBRTA6" export="MAGBRTA6.RTN" />
+   <routine name="MAGDACP1" export="MAGDACP1.RTN" />
+   <routine name="MAGDAIR2" export="MAGDAIR2.RTN" />
+   <routine name="MAGDAIR5" export="MAGDAIR5.RTN" />
+   <routine name="MAGDAIR6" export="MAGDAIR6.RTN" />
+   <routine name="MAGDAIRS" export="MAGDAIRS.RTN" />
+   <routine name="MAGDAIRW" export="MAGDAIRW.RTN" />
+   <routine name="MAGDCST1" export="MAGDCST1.RTN" />
+   <routine name="MAGDCST3" export="MAGDCST3.RTN" />
+   <routine name="MAGDCST4" export="MAGDCST4.RTN" />
+   <routine name="MAGDDCF1" export="MAGDDCF1.RTN" />
+   <routine name="MAGDDCF2" export="MAGDDCF2.RTN" />
+   <routine name="MAGDDR2" export="MAGDDR2.RTN" />
+   <routine name="MAGDDR2A" export="MAGDDR2A.RTN" />
+   <routine name="MAGDDR3" export="MAGDDR3.RTN" />
+   <routine name="MAGDFCNS" export="MAGDFCNS.RTN" />
+   <routine name="MAGDFND2" export="MAGDFND2.RTN" />
+   <routine name="MAGDFND3" export="MAGDFND3.RTN" />
+   <routine name="MAGDFND4" export="MAGDFND4.RTN" />
+   <routine name="MAGDHR9" export="MAGDHR9.RTN" />
+   <routine name="MAGDHRC" export="MAGDHRC.RTN" />
+   <routine name="MAGDHRC2" export="MAGDHRC2.RTN" />
+   <routine name="MAGDHRC3" export="MAGDHRC3.RTN" />
+   <routine name="MAGDHRC4" export="MAGDHRC4.RTN" />
+   <routine name="MAGDHRC5" export="MAGDHRC5.RTN" />
+   <routine name="MAGDHRC6" export="MAGDHRC6.RTN" />
+   <routine name="MAGDHRC7" export="MAGDHRC7.RTN" />
+   <routine name="MAGDHRCP" export="MAGDHRCP.RTN" />
+   <routine name="MAGDIR6C" export="MAGDIR6C.RTN" />
+   <routine name="MAGDIR71" export="MAGDIR71.RTN" />
+   <routine name="MAGDIW2A" export="MAGDIW2A.RTN" />
+   <routine name="MAGDIW3A" export="MAGDIW3A.RTN" />
+   <routine name="MAGDIW3B" export="MAGDIW3B.RTN" />
+   <routine name="MAGDIW4" export="MAGDIW4.RTN" />
+   <routine name="MAGDIWB2" export="MAGDIWB2.RTN" />
+   <routine name="MAGDIWB3" export="MAGDIWB3.RTN" />
+   <routine name="MAGDIWBD" export="MAGDIWBD.RTN" />
+   <routine name="MAGDIWDG" export="MAGDIWDG.RTN" />
+   <routine name="MAGDIWDX" export="MAGDIWDX.RTN" />
+   <routine name="MAGDMENA" export="MAGDMENA.RTN" />
+   <routine name="MAGDMENL" export="MAGDMENL.RTN" />
+   <routine name="MAGDMENO" export="MAGDMENO.RTN" />
+   <routine name="MAGDMENU" export="MAGDMENU.RTN" />
+   <routine name="MAGDMFB1" export="MAGDMFB1.RTN" />
+   <routine name="MAGDMFBB" export="MAGDMFBB.RTN" />
+   <routine name="MAGDMFBD" export="MAGDMFBD.RTN" />
+   <routine name="MAGDMFBE" export="MAGDMFBE.RTN" />
+   <routine name="MAGDMFBI" export="MAGDMFBI.RTN" />
+   <routine name="MAGDMFBM" export="MAGDMFBM.RTN" />
+   <routine name="MAGDMFBW" export="MAGDMFBW.RTN" />
+   <routine name="MAGDMFCC" export="MAGDMFCC.RTN" />
+   <routine name="MAGDMFIC" export="MAGDMFIC.RTN" />
+   <routine name="MAGDMLGV" export="MAGDMLGV.RTN" />
+   <routine name="MAGDMLOG" export="MAGDMLOG.RTN" />
+   <routine name="MAGDMMSG" export="MAGDMMSG.RTN" />
+   <routine name="MAGDQUE1" export="MAGDQUE1.RTN" />
+   <routine name="MAGDQUE3" export="MAGDQUE3.RTN" />
+   <routine name="MAGDRPC0" export="MAGDRPC0.RTN" />
+   <routine name="MAGDVRSN" export="MAGDVRSN.RTN" />
+   <routine name="MAGDWLP2" export="MAGDWLP2.RTN" />
+   <routine name="MAGDWLPA" export="MAGDWLPA.RTN" />
+   <routine name="MAGDWLPB" export="MAGDWLPB.RTN" />
+   <routine name="MAGDWLPC" export="MAGDWLPC.RTN" />
+   <routine name="MAGDWLU2" export="MAGDWLU2.RTN" />
+   <routine name="MAGDWLU3" export="MAGDWLU3.RTN" />
+   <routine name="MAGM2VC" export="MAGM2VC.RTN" />
+   <routine name="MAGSPID" export="MAGSPID.RTN" />
+   <routine name="MAGVCSTR" export="MAGVCSTR.RTN" />
+   <routine name="MAGVDGW1" export="MAGVDGW1.RTN" />
+ </routines>
+ 
+  <PatchBuildInfo>
+	<BuildInfo BuildNumber="20" BuildDate="Nov 04, 2014"/>
+  </PatchBuildInfo>
+  	 
+</build>

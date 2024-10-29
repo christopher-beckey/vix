@@ -1,0 +1,253 @@
+﻿<Views:BaseWindow x:Class="DicomImporter.Views.DicomViewerLauncherWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+        xmlns:Model="clr-namespace:DicomImporter.Common.Model;assembly=DicomImporter.Common" 
+        mc:Ignorable="d" 
+        xmlns:my="clr-namespace:DicomImporter.Views"
+        xmlns:Views="clr-namespace:ImagingClient.Infrastructure.Views;assembly=ImagingClient.Infrastructure"
+        Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" 
+        Width="700" 
+        Height="550" 
+        Title="Study Details"
+        WindowStartupLocation="CenterOwner">
+    <Grid>
+        <Grid.ColumnDefinitions>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <GroupBox 
+            Grid.Row="1"
+            Header="Original Study Information" >
+            
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+
+                <Label Content="Patient Name:" 
+                       Grid.Column="0" 
+                       Grid.Row="0" />
+                <TextBox Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" 
+                         Grid.Column="1" 
+                         Grid.Row="0" 
+                         IsReadOnly="True" 
+                         Text="{Binding Path=SelectedStudy.Patient.PatientName, Mode=OneWay}" />
+
+                <Label Content="Patient ID:" 
+                       Grid.Column="2" 
+                       Grid.Row="0" />
+                <TextBox Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" 
+                         Grid.Column="3" 
+                         Grid.Row="0" 
+                         IsReadOnly="True" 
+                         Text="{Binding Path=SelectedStudy.Patient.Ssn, Mode=OneWay}" />
+
+                <Label Content="Date of Birth:" 
+                       Grid.Column="0" 
+                       Grid.Row="1" />
+                <TextBox Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" 
+                         Grid.Column="1" 
+                         Grid.Row="1" 
+                         IsReadOnly="True" 
+                         Text="{Binding Path=SelectedStudy.Patient.FormattedBirthDate, Mode=OneWay}" />
+
+                <Label Content="Sex:" 
+                       Grid.Column="2" 
+                       Grid.Row="1" />
+                <TextBox Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" 
+                         Grid.Column="3" 
+                         Grid.Row="1" 
+                         IsReadOnly="True" 
+                         Text="{Binding Path=SelectedStudy.Patient.PatientSex, Mode=OneWay}" />
+
+
+
+                <Label Content="Study Date:" 
+                       Grid.Column="0" 
+                       Grid.Row="2" />
+                <TextBox Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" 
+                         Grid.Column="1" 
+                         Grid.Row="2" 
+                         IsReadOnly="True" 
+                         Text="{Binding Path=SelectedStudy.FormattedStudyDate, Mode=OneWay}" />
+
+                <Label Content="Study Time:" 
+                       Grid.Column="2" 
+                       Grid.Row="2" />
+                <TextBox Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" 
+                         Grid.Column="3" 
+                         Grid.Row="2" 
+                         IsReadOnly="True" 
+                         Text="{Binding Path=SelectedStudy.FormattedStudyTime, Mode=OneWay}" />
+
+                <Label Content="Modalities:" 
+                       Grid.Column="0" 
+                       Grid.Row="3" />
+                <TextBox Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" 
+                         Grid.Column="1" 
+                         Grid.Row="3" 
+                         IsReadOnly="True" 
+                         Text="{Binding Path=SelectedStudy.ModalityCodes, Mode=OneWay}" />
+
+                <Label Content="Referring Physician:" 
+                       Grid.Column="2" 
+                       Grid.Row="3" />
+                <TextBox Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" 
+                         Grid.Column="3" 
+                         Grid.Row="3" 
+                         IsReadOnly="True" 
+                         Text="{Binding Path=SelectedStudy.ReferringPhysician, Mode=OneWay}" />
+
+                <Label Content="Procedure:" 
+                       Grid.Column="0" 
+                       Grid.Row="4" />
+                <TextBox Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" 
+                         Grid.Column="1" 
+                         Grid.ColumnSpan="3" 
+                         Grid.Row="4" 
+                         IsReadOnly="True" 
+                         Text="{Binding Path=SelectedStudy.Procedure}" />
+
+                <Label Content="Study Description:" 
+                       Grid.Column="0" 
+                       Grid.Row="5" />
+                <TextBox Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" 
+                         Grid.Column="1" 
+                         Grid.ColumnSpan="3" 
+                         Grid.Row="5" 
+                         IsReadOnly="True" 
+                         Text="{Binding Path=SelectedStudy.Description}" />
+
+                <Label Content="Acquisition Site:" 
+                       Grid.Column="0" 
+                       Grid.Row="6" />
+                <TextBox Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" 
+                         Grid.Column="1" 
+                         Grid.ColumnSpan="3" 
+                         Grid.Row="6" 
+                         IsReadOnly="True" 
+                         Text="{Binding Path=SelectedStudy.Facility, Mode=OneWay}" />
+
+                <Label Content="Acquisition Site Address:" 
+                       Grid.Column="0" 
+                       Grid.Row="7" />
+                <TextBox Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" 
+                         Grid.Column="1" 
+                         Grid.ColumnSpan="3" 
+                         Grid.Row="7" 
+                         IsReadOnly="True" 
+                         Text="{Binding Path=SelectedStudy.InstitutionAddress, Mode=OneWay}" />
+
+                <Label Content="Study Instance UID:" 
+                       Grid.Column="0" 
+                       Grid.Row="8" />
+                <TextBox Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" 
+                         Grid.Column="1" 
+                         Grid.ColumnSpan="3" 
+                         Grid.Row="8" 
+                         IsReadOnly="True" 
+                         Text="{Binding Path=SelectedStudy.Uid}" />
+            </Grid>
+        </GroupBox>
+        <GroupBox 
+            Grid.Row="2"
+            Header="Series" >
+
+            <DataGrid ItemsSource="{Binding Path=SelectedStudy.Series}" 
+                      SelectedItem="{Binding Path=SelectedSeries}" 
+                      Grid.Row="2"
+                      SelectionMode="Single"
+                      ScrollViewer.VerticalScrollBarVisibility="Auto"
+                      EnableRowVirtualization="True" 
+                      EnableColumnVirtualization="True"
+                      CanUserSortColumns="False"
+                      VirtualizingStackPanel.IsVirtualizing="True"
+                      VirtualizingStackPanel.VirtualizationMode="Recycling">
+                <DataGrid.Columns>
+                    <DataGridTextColumn 
+                                Header="Series #"
+                                Binding="{Binding Path=SeriesNumber}"
+                                Width="Auto"/>
+
+                    <DataGridTextColumn 
+                                Header="Modality" 
+                                Binding="{Binding Path=Modality}"
+                                Width="Auto" />
+
+                    <DataGridTextColumn 
+                                Header="# of DICOM Objects (e.g. images)" 
+                                Binding="{Binding Path=SopInstances.Count, Mode=OneWay}"
+                                Width="Auto" />
+
+                    <DataGridTextColumn 
+                                Header="Series Description" 
+                                Binding="{Binding Path=SeriesDescription, Mode=OneWay}"
+                                Width="*" />
+
+                </DataGrid.Columns>
+            </DataGrid>
+
+        </GroupBox>
+        <GroupBox 
+            Grid.Row="3"
+            Header="Images" >
+            
+            <Grid>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <Label Content="Type an image number or number range (i.e. 3-10) into the text box below:"
+                       Grid.Column="0"
+                       Grid.Row="0" />
+
+                <TextBox Grid.Row="1" 
+                         Text="{Binding Path=InstanceRange}" 
+                         IsEnabled="{Binding Path=AnyImagesSelected}" />
+            </Grid>
+
+        </GroupBox>
+        <StackPanel Margin="0,10,0,0" 
+                    Grid.Row="4"
+                    Visibility="{Binding Path=ProgressViewModel.IsWorkInProgress, Converter={StaticResource BooleanToVisibilityConverter}}">
+            <Views:ProgressView DataContext="{Binding ProgressViewModel}"/>
+        </StackPanel>        
+        <StackPanel 
+            Grid.Row="5" 
+            Orientation="Horizontal"
+            HorizontalAlignment="Right">
+            <Button Name="btnView" 
+                    HorizontalAlignment="Right" 
+                    Content="View Images" 
+                    Command="{Binding LaunchViewerCommand}"/>
+            <Button Name="btnClose"
+                    HorizontalAlignment="Right" 
+                    Content="Close" Click="Close_Click" />
+        </StackPanel>
+    </Grid>
+</Views:BaseWindow>

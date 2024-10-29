@@ -1,0 +1,18 @@
+maguP117 ;WOIFO/MLH - execute unit tests of Patch 117 code
+ Q
+TEST(verblvl) ;
+ N R
+ F I=1:1 S R=$P($T(ROU+I),";",2) Q:R=""  D
+ . D in^magvss(R,"c:\temp\p117") W !
+ . D @("TEST^"_R_"()")
+ . Q
+ Q
+ROU ;
+ ;magu2005xADTDUZ
+ ;magu20051xADTDUZ
+ ;maguMAGGA03UzUSERS
+ ;maguMAGGTU6zSHARE
+ ;maguMAGUXDPSzREBUILD
+ ;;END
+
+

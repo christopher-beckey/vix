@@ -1,0 +1,3074 @@
+KIDS Distribution saved on Jan 16, 2013@15:40:33
+Full DD Extract from GOLD - SEQ82_P122
+**KIDS**:MAG*3.0*999_DD*2006.18^
+
+**INSTALL NAME**
+MAG*3.0*999_DD*2006.18
+"BLD",7813,0)
+MAG*3.0*999_DD*2006.18^IMAGING^0^3130116^n
+"BLD",7813,4,0)
+^9.64PA^2006.18^1
+"BLD",7813,4,2006.18,0)
+2006.18
+"BLD",7813,4,2006.18,222)
+y^y^f^^^^n
+"BLD",7813,4,"B",2006.18,2006.18)
+
+"BLD",7813,6.3)
+1
+"BLD",7813,"KRN",0)
+^9.67PA^779.2^20
+"BLD",7813,"KRN",.4,0)
+.4
+"BLD",7813,"KRN",.401,0)
+.401
+"BLD",7813,"KRN",.402,0)
+.402
+"BLD",7813,"KRN",.403,0)
+.403
+"BLD",7813,"KRN",.5,0)
+.5
+"BLD",7813,"KRN",.84,0)
+.84
+"BLD",7813,"KRN",3.6,0)
+3.6
+"BLD",7813,"KRN",3.8,0)
+3.8
+"BLD",7813,"KRN",9.2,0)
+9.2
+"BLD",7813,"KRN",9.8,0)
+9.8
+"BLD",7813,"KRN",19,0)
+19
+"BLD",7813,"KRN",19.1,0)
+19.1
+"BLD",7813,"KRN",101,0)
+101
+"BLD",7813,"KRN",409.61,0)
+409.61
+"BLD",7813,"KRN",771,0)
+771
+"BLD",7813,"KRN",779.2,0)
+779.2
+"BLD",7813,"KRN",870,0)
+870
+"BLD",7813,"KRN",8989.51,0)
+8989.51
+"BLD",7813,"KRN",8989.52,0)
+8989.52
+"BLD",7813,"KRN",8994,0)
+8994
+"BLD",7813,"KRN","B",.4,.4)
+
+"BLD",7813,"KRN","B",.401,.401)
+
+"BLD",7813,"KRN","B",.402,.402)
+
+"BLD",7813,"KRN","B",.403,.403)
+
+"BLD",7813,"KRN","B",.5,.5)
+
+"BLD",7813,"KRN","B",.84,.84)
+
+"BLD",7813,"KRN","B",3.6,3.6)
+
+"BLD",7813,"KRN","B",3.8,3.8)
+
+"BLD",7813,"KRN","B",9.2,9.2)
+
+"BLD",7813,"KRN","B",9.8,9.8)
+
+"BLD",7813,"KRN","B",19,19)
+
+"BLD",7813,"KRN","B",19.1,19.1)
+
+"BLD",7813,"KRN","B",101,101)
+
+"BLD",7813,"KRN","B",409.61,409.61)
+
+"BLD",7813,"KRN","B",771,771)
+
+"BLD",7813,"KRN","B",779.2,779.2)
+
+"BLD",7813,"KRN","B",870,870)
+
+"BLD",7813,"KRN","B",8989.51,8989.51)
+
+"BLD",7813,"KRN","B",8989.52,8989.52)
+
+"BLD",7813,"KRN","B",8994,8994)
+
+"FIA",2006.18)
+IMAGING USER PREFERENCE
+"FIA",2006.18,0)
+^MAG(2006.18,
+"FIA",2006.18,0,0)
+2006.18
+"FIA",2006.18,0,1)
+y^y^f^^^^n
+"FIA",2006.18,0,10)
+
+"FIA",2006.18,0,11)
+
+"FIA",2006.18,0,"RLRO")
+
+"FIA",2006.18,0,"VR")
+3.0^MAG
+"FIA",2006.18,2006.18)
+0
+"FIA",2006.18,2006.1867)
+0
+"MBREQ")
+0
+"PKG",454,-1)
+1^1
+"PKG",454,0)
+IMAGING^MAG^Imaging-V1 to release 
+"PKG",454,20,0)
+^9.402P^^
+"PKG",454,22,0)
+^9.49I^1^1
+"PKG",454,22,1,0)
+3.0^3020319^3020517^126
+"PKG",454,22,1,"PAH",1,0)
+999_DD^3130116
+"QUES","XPF1",0)
+Y
+"QUES","XPF1","??")
+^D REP^XPDH
+"QUES","XPF1","A")
+Shall I write over your |FLAG| File
+"QUES","XPF1","B")
+YES
+"QUES","XPF1","M")
+D XPF1^XPDIQ
+"QUES","XPF2",0)
+Y
+"QUES","XPF2","??")
+^D DTA^XPDH
+"QUES","XPF2","A")
+Want my data |FLAG| yours
+"QUES","XPF2","B")
+YES
+"QUES","XPF2","M")
+D XPF2^XPDIQ
+"QUES","XPI1",0)
+YO
+"QUES","XPI1","??")
+^D INHIBIT^XPDH
+"QUES","XPI1","A")
+Want KIDS to INHIBIT LOGONs during the install
+"QUES","XPI1","B")
+NO
+"QUES","XPI1","M")
+D XPI1^XPDIQ
+"QUES","XPM1",0)
+PO^VA(200,:EM
+"QUES","XPM1","??")
+^D MG^XPDH
+"QUES","XPM1","A")
+Enter the Coordinator for Mail Group '|FLAG|'
+"QUES","XPM1","B")
+
+"QUES","XPM1","M")
+D XPM1^XPDIQ
+"QUES","XPO1",0)
+Y
+"QUES","XPO1","??")
+^D MENU^XPDH
+"QUES","XPO1","A")
+Want KIDS to Rebuild Menu Trees Upon Completion of Install
+"QUES","XPO1","B")
+NO
+"QUES","XPO1","M")
+D XPO1^XPDIQ
+"QUES","XPZ1",0)
+Y
+"QUES","XPZ1","??")
+^D OPT^XPDH
+"QUES","XPZ1","A")
+Want to DISABLE Scheduled Options, Menu Options, and Protocols
+"QUES","XPZ1","B")
+NO
+"QUES","XPZ1","M")
+D XPZ1^XPDIQ
+"QUES","XPZ2",0)
+Y
+"QUES","XPZ2","??")
+^D RTN^XPDH
+"QUES","XPZ2","A")
+Want to MOVE routines to other CPUs
+"QUES","XPZ2","B")
+NO
+"QUES","XPZ2","M")
+D XPZ2^XPDIQ
+"SEC","^DIC",2006.18,2006.18,0,"DD")
+@
+"SEC","^DIC",2006.18,2006.18,0,"DEL")
+@
+"SEC","^DIC",2006.18,2006.18,0,"LAYGO")
+@
+"SEC","^DIC",2006.18,2006.18,0,"RD")
+@
+"SEC","^DIC",2006.18,2006.18,0,"WR")
+@
+"VER")
+8.0^22.0
+"^DD",2006.18,2006.18,0)
+FIELD^^179^221
+"^DD",2006.18,2006.18,0,"DDA")
+N
+"^DD",2006.18,2006.18,0,"DT")
+3000615
+"^DD",2006.18,2006.18,0,"IX","AC",2006.18,1)
+
+"^DD",2006.18,2006.18,0,"IX","B",2006.18,.01)
+
+"^DD",2006.18,2006.18,0,"NM","IMAGING USER PREFERENCE")
+
+"^DD",2006.18,2006.18,0,"PT",2006.1,100)
+
+"^DD",2006.18,2006.18,0,"VRPK")
+IMAGING
+"^DD",2006.18,2006.18,.01,0)
+DESCRIPTION^RF^^0;1^K:$L(X)>30!(X?.N)!($L(X)<3)!'(X'?1P.E) X
+"^DD",2006.18,2006.18,.01,1,0)
+^.1
+"^DD",2006.18,2006.18,.01,1,1,0)
+2006.18^B
+"^DD",2006.18,2006.18,.01,1,1,1)
+S ^MAG(2006.18,"B",$E(X,1,30),DA)=""
+"^DD",2006.18,2006.18,.01,1,1,2)
+K ^MAG(2006.18,"B",$E(X,1,30),DA)
+"^DD",2006.18,2006.18,.01,3)
+NAME MUST BE 3-30 CHARACTERS, NOT NUMERIC OR STARTING WITH PUNCTUATION
+"^DD",2006.18,2006.18,.01,21,0)
+^.001^1^1^3050203^^
+"^DD",2006.18,2006.18,.01,21,1,0)
+The preference style name.
+"^DD",2006.18,2006.18,.01,"DT")
+2990126
+"^DD",2006.18,2006.18,1,0)
+USER^P200'^VA(200,^0;2^Q
+"^DD",2006.18,2006.18,1,1,0)
+^.1
+"^DD",2006.18,2006.18,1,1,1,0)
+2006.18^AC
+"^DD",2006.18,2006.18,1,1,1,1)
+S ^MAG(2006.18,"AC",$E(X,1,30),DA)=""
+"^DD",2006.18,2006.18,1,1,1,2)
+K ^MAG(2006.18,"AC",$E(X,1,30),DA)
+"^DD",2006.18,2006.18,1,1,1,"DT")
+2961102
+"^DD",2006.18,2006.18,1,21,0)
+^.001^1^1^3050203^^
+"^DD",2006.18,2006.18,1,21,1,0)
+This field will contain the name of the user.  This field is a pointer to the New Person file (200).
+"^DD",2006.18,2006.18,1,"DT")
+2961102
+"^DD",2006.18,2006.18,2,0)
+ABS COUNT^NJ2,0^^0;3^K:+X'=X!(X>64)!(X<4)!(X?.E1"."1N.N) X
+"^DD",2006.18,2006.18,2,3)
+Type a Number between 4 and 64, 0 Decimal Digits
+"^DD",2006.18,2006.18,2,21,0)
+^^1^1^2970722^
+"^DD",2006.18,2006.18,2,21,1,0)
+The number of abstract images to be displayed.
+"^DD",2006.18,2006.18,2,"DT")
+2961102
+"^DD",2006.18,2006.18,3,0)
+GROUP ABS COUNT^NJ2,0^^0;4^K:+X'=X!(X>64)!(X<4)!(X?.E1"."1N.N) X
+"^DD",2006.18,2006.18,3,3)
+Type a Number between 4 and 64, 0 Decimal Digits
+"^DD",2006.18,2006.18,3,21,0)
+^^1^1^2970722^
+"^DD",2006.18,2006.18,3,21,1,0)
+The number of abstract images to be displayed in a group.
+"^DD",2006.18,2006.18,3,"DT")
+2961102
+"^DD",2006.18,2006.18,4,0)
+MAIN STYLE^S^0:fsMDIChild;1:fsMDIForm;2:fsNormal;3:fsStayOnTop;^MAIN;1^Q
+"^DD",2006.18,2006.18,4,21,0)
+^^1^1^2970722^
+"^DD",2006.18,2006.18,4,21,1,0)
+Set of codes defining the type of window style for the main window.
+"^DD",2006.18,2006.18,4,"DT")
+2961102
+"^DD",2006.18,2006.18,5,0)
+MAIN LEFT^NJ4,0^^MAIN;2^K:+X'=X!(X>3000)!(X<0)!(X?.E1"."1N.N) X
+"^DD",2006.18,2006.18,5,3)
+Type a Number between 0 and 3000, 0 Decimal Digits
+"^DD",2006.18,2006.18,5,21,0)
+^^1^1^2970722^
+"^DD",2006.18,2006.18,5,21,1,0)
+The left main window settings.
+"^DD",2006.18,2006.18,5,"DT")
+2961102
+"^DD",2006.18,2006.18,6,0)
+MAIN TOP^NJ4,0^^MAIN;3^K:+X'=X!(X>3000)!(X<0)!(X?.E1"."1N.N) X
+"^DD",2006.18,2006.18,6,3)
+Type a Number between 0 and 3000, 0 Decimal Digits
+"^DD",2006.18,2006.18,6,21,0)
+^^1^1^2970722^
+"^DD",2006.18,2006.18,6,21,1,0)
+The top main window settings.
+"^DD",2006.18,2006.18,6,"DT")
+2961102
+"^DD",2006.18,2006.18,7,0)
+MAIN WIDTH^NJ4,0^^MAIN;4^K:+X'=X!(X>4000)!(X<100)!(X?.E1"."1N.N) X
+"^DD",2006.18,2006.18,7,3)
+Type a Number between 100 and 4000, 0 Decimal Digits
+"^DD",2006.18,2006.18,7,21,0)
+^^1^1^2970722^
+"^DD",2006.18,2006.18,7,21,1,0)
+The main window width settings.
+"^DD",2006.18,2006.18,7,"DT")
+2961102
+"^DD",2006.18,2006.18,8,0)
+MAIN HEIGHT^NJ4,0^^MAIN;5^K:+X'=X!(X>4000)!(X<30)!(X?.E1"."1N.N) X
+"^DD",2006.18,2006.18,8,3)
+Type a Number between 30 and 4000, 0 Decimal Digits
+"^DD",2006.18,2006.18,8,21,0)
+^^1^1^2970722^
+"^DD",2006.18,2006.18,8,21,1,0)
+The main window height settings.
+"^DD",2006.18,2006.18,8,"DT")
+2961102
+"^DD",2006.18,2006.18,8.5,0)
+MAIN TOOLBAR^S^0:FALSE;1:TRUE;^MAIN;6^Q
+"^DD",2006.18,2006.18,8.5,3)
+
+"^DD",2006.18,2006.18,8.5,21,0)
+^.001^1^1^3020419^^^
+"^DD",2006.18,2006.18,8.5,21,1,0)
+This determines if the Main Toolbar is Visible or Not.
+"^DD",2006.18,2006.18,8.5,"DT")
+3020225
+"^DD",2006.18,2006.18,9,0)
+ABS STYLE^S^0:fsMDIChild;2:fsNormal;3:fsStayOnTop;^ABS;1^Q
+"^DD",2006.18,2006.18,9,21,0)
+^^2^2^2970722^
+"^DD",2006.18,2006.18,9,21,1,0)
+Set of codes defining the type of window style for the abstract image
+"^DD",2006.18,2006.18,9,21,2,0)
+window.
+"^DD",2006.18,2006.18,9,"DT")
+2961102
+"^DD",2006.18,2006.18,10,0)
+ABS LEFT^NJ4,0^^ABS;2^K:+X'=X!(X>4000)!(X<0)!(X?.E1"."1N.N) X
+"^DD",2006.18,2006.18,10,3)
+Type a Number between 0 and 4000, 0 Decimal Digits
+"^DD",2006.18,2006.18,10,21,0)
+^^1^1^2970722^
+"^DD",2006.18,2006.18,10,21,1,0)
+The left abstract window settings.
+"^DD",2006.18,2006.18,10,"DT")
+2961102
+"^DD",2006.18,2006.18,11,0)
+ABS TOP^NJ4,0^^ABS;3^K:+X'=X!(X>4000)!(X<0)!(X?.E1"."1N.N) X
+"^DD",2006.18,2006.18,11,3)
+Type a Number between 0 and 4000, 0 Decimal Digits
+"^DD",2006.18,2006.18,11,21,0)
+^^1^1^2970722^
+"^DD",2006.18,2006.18,11,21,1,0)
+The top abstract window settings.
+"^DD",2006.18,2006.18,11,"DT")
+2961102
+"^DD",2006.18,2006.18,12,0)
+ABS WIDTH^NJ4,0^^ABS;4^K:+X'=X!(X>4000)!(X<100)!(X?.E1"."1N.N) X
+"^DD",2006.18,2006.18,12,3)
+Type a Number between 100 and 4000, 0 Decimal Digits
+"^DD",2006.18,2006.18,12,21,0)
+^^1^1^2970722^
+"^DD",2006.18,2006.18,12,21,1,0)
+The abstract window width settings.
+"^DD",2006.18,2006.18,12,"DT")
+2961102
+"^DD",2006.18,2006.18,13,0)
+ABS HEIGHT^NJ4,0^^ABS;5^K:+X'=X!(X>4000)!(X<100)!(X?.E1"."1N.N) X
+"^DD",2006.18,2006.18,13,3)
+Type a Number between 100 and 4000, 0 Decimal Digits
+"^DD",2006.18,2006.18,13,21,0)
+^^1^1^2970722^
+"^DD",2006.18,2006.18,13,21,1,0)
+The abstract window height settings.
+"^DD",2006.18,2006.18,13,"DT")
+2961102
+"^DD",2006.18,2006.18,14,0)
+GROUP STYLE^S^0:fsMDIChild;2:fsNormal;3:fsStayOnTop;^GROUP;1^Q
+"^DD",2006.18,2006.18,14,21,0)
+^^1^1^2970722^
+"^DD",2006.18,2006.18,14,21,1,0)
+Set of codes defining the window style for a group of abstracts.
+"^DD",2006.18,2006.18,14,"DT")
+2961102
+"^DD",2006.18,2006.18,15,0)
+GROUP LEFT^NJ4,0^^GROUP;2^K:+X'=X!(X>4000)!(X<0)!(X?.E1"."1N.N) X
+"^DD",2006.18,2006.18,15,3)
+Type a Number between 0 and 4000, 0 Decimal Digits
+"^DD",2006.18,2006.18,15,21,0)
+^^1^1^2970722^
+"^DD",2006.18,2006.18,15,21,1,0)
+The left group window settings.
+"^DD",2006.18,2006.18,15,"DT")
+2961102
+"^DD",2006.18,2006.18,16,0)
+GROUP TOP^NJ4,0^^GROUP;3^K:+X'=X!(X>4000)!(X<0)!(X?.E1"."1N.N) X
+"^DD",2006.18,2006.18,16,3)
+Type a Number between 0 and 4000, 0 Decimal Digits
+"^DD",2006.18,2006.18,16,21,0)
+^^1^1^2970722^
+"^DD",2006.18,2006.18,16,21,1,0)
+The top group window settings.
+"^DD",2006.18,2006.18,16,"DT")
+2961102
+"^DD",2006.18,2006.18,17,0)
+GROUP WIDTH^NJ4,0^^GROUP;4^K:+X'=X!(X>4000)!(X<100)!(X?.E1"."1N.N) X
+"^DD",2006.18,2006.18,17,3)
+Type a Number between 100 and 4000, 0 Decimal Digits
+"^DD",2006.18,2006.18,17,21,0)
+^^1^1^2970722^
+"^DD",2006.18,2006.18,17,21,1,0)
+The group window width settings.
+"^DD",2006.18,2006.18,17,"DT")
+2961102
+"^DD",2006.18,2006.18,18,0)
+GROUP HEIGHT^NJ4,0^^GROUP;5^K:+X'=X!(X>4000)!(X<30)!(X?.E1"."1N.N) X
+"^DD",2006.18,2006.18,18,3)
+Type a Number between 30 and 4000, 0 Decimal Digits
+"^DD",2006.18,2006.18,18,21,0)
+^^1^1^2970722^
+"^DD",2006.18,2006.18,18,21,1,0)
+The group window height settings.
+"^DD",2006.18,2006.18,18,"DT")
+2961102
+"^DD",2006.18,2006.18,19,0)
+FULL STYLE^S^0:fsMDIChild;2:fsNormal;3:fsStayOnTop;^FULL;1^Q
+"^DD",2006.18,2006.18,19,21,0)
+^^1^1^2970722^
+"^DD",2006.18,2006.18,19,21,1,0)
+Set of codes defining the window style for a full image display.
+"^DD",2006.18,2006.18,19,"DT")
+2961102
+"^DD",2006.18,2006.18,20,0)
+FULL LEFT^NJ4,0^^FULL;2^K:+X'=X!(X>4000)!(X<0)!(X?.E1"."1N.N) X
+"^DD",2006.18,2006.18,20,3)
+Type a Number between 0 and 4000, 0 Decimal Digits
+"^DD",2006.18,2006.18,20,21,0)
+^^1^1^2970722^
+"^DD",2006.18,2006.18,20,21,1,0)
+The left full image window settings.
+"^DD",2006.18,2006.18,20,"DT")
+2961102
+"^DD",2006.18,2006.18,21,0)
+FULL TOP^NJ4,0^^FULL;3^K:+X'=X!(X>4000)!(X<0)!(X?.E1"."1N.N) X
+"^DD",2006.18,2006.18,21,3)
+Type a Number between 0 and 4000, 0 Decimal Digits
+"^DD",2006.18,2006.18,21,21,0)
+^^1^1^2981029^^
+"^DD",2006.18,2006.18,21,21,1,0)
+The top full image window settings.
+"^DD",2006.18,2006.18,21,"DT")
+2961102
+"^DD",2006.18,2006.18,22,0)
+FULL WIDTH^NJ4,0^^FULL;4^K:+X'=X!(X>4000)!(X<100)!(X?.E1"."1N.N) X
+"^DD",2006.18,2006.18,22,3)
+Type a Number between 100 and 4000, 0 Decimal Digits
+"^DD",2006.18,2006.18,22,21,0)
+^^1^1^2970722^
+"^DD",2006.18,2006.18,22,21,1,0)
+The full image window width settings.
+"^DD",2006.18,2006.18,22,"DT")
+2961102
+"^DD",2006.18,2006.18,23,0)
+FULL HEIGHT^NJ4,0^^FULL;5^K:+X'=X!(X>4000)!(X<30)!(X?.E1"."1N.N) X
+"^DD",2006.18,2006.18,23,3)
+Type a Number between 30 and 4000, 0 Decimal Digits
+"^DD",2006.18,2006.18,23,21,0)
+^^1^1^2981029^^
+"^DD",2006.18,2006.18,23,21,1,0)
+The full image window height settings.
+"^DD",2006.18,2006.18,23,"DT")
+2961102
+"^DD",2006.18,2006.18,24,0)
+REPORT STYLE^S^0:fsMDIChild;2:fsNormal;3:fsStayOnTop;^REPORT;1^Q
+"^DD",2006.18,2006.18,24,21,0)
+^^1^1^2970722^
+"^DD",2006.18,2006.18,24,21,1,0)
+Set of codes defining the window style for a report display.
+"^DD",2006.18,2006.18,24,"DT")
+2961102
+"^DD",2006.18,2006.18,25,0)
+REPORT LEFT^NJ4,0^^REPORT;2^K:+X'=X!(X>4000)!(X<0)!(X?.E1"."1N.N) X
+"^DD",2006.18,2006.18,25,3)
+Type a Number between 0 and 4000, 0 Decimal Digits
+"^DD",2006.18,2006.18,25,21,0)
+^^1^1^2970722^
+"^DD",2006.18,2006.18,25,21,1,0)
+The left report window settings.
+"^DD",2006.18,2006.18,25,"DT")
+2961102
+"^DD",2006.18,2006.18,26,0)
+REPORT TOP^NJ4,0^^REPORT;3^K:+X'=X!(X>4000)!(X<0)!(X?.E1"."1N.N) X
+"^DD",2006.18,2006.18,26,3)
+Type a Number between 0 and 4000, 0 Decimal Digits
+"^DD",2006.18,2006.18,26,21,0)
+^^1^1^2970722^
+"^DD",2006.18,2006.18,26,21,1,0)
+The top report window settings.
+"^DD",2006.18,2006.18,26,"DT")
+2961102
+"^DD",2006.18,2006.18,27,0)
+REPORT WIDTH^NJ4,0^^REPORT;4^K:+X'=X!(X>4000)!(X<10)!(X?.E1"."1N.N) X
+"^DD",2006.18,2006.18,27,3)
+Type a Number between 10 and 4000, 0 Decimal Digits
+"^DD",2006.18,2006.18,27,21,0)
+^^1^1^2970722^
+"^DD",2006.18,2006.18,27,21,1,0)
+The report window width settings.
+"^DD",2006.18,2006.18,27,"DT")
+2961102
+"^DD",2006.18,2006.18,28,0)
+REPORT HEIGHT^NJ4,0^^REPORT;5^K:+X'=X!(X>4000)!(X<10)!(X?.E1"."1N.N) X
+"^DD",2006.18,2006.18,28,3)
+Type a Number between 10 and 4000, 0 Decimal Digits
+"^DD",2006.18,2006.18,28,21,0)
+^^1^1^2970722^
+"^DD",2006.18,2006.18,28,21,1,0)
+The report window height settings.
+"^DD",2006.18,2006.18,28,"DT")
+2961102
+"^DD",2006.18,2006.18,29,0)
+REPORT FONT^F^^REPORT;6^K:$L(X)>30!($L(X)<2) X
+"^DD",2006.18,2006.18,29,3)
+Answer must be 2-30 characters in length.
+"^DD",2006.18,2006.18,29,21,0)
+^^1^1^2970722^^
+"^DD",2006.18,2006.18,29,21,1,0)
+Set of codes for the fonts to be used in report display.
+"^DD",2006.18,2006.18,29,"DT")
+2961102
+"^DD",2006.18,2006.18,30,0)
+REPORT FONT STYLE^S^0:Regular;1:Italic;2:Bold;3:Bold Italic;^REPORT;7^Q
+"^DD",2006.18,2006.18,30,"DT")
+2961102
+"^DD",2006.18,2006.18,31,0)
+REPORT FONT SIZE^NJ3,0^^REPORT;8^K:+X'=X!(X>100)!(X<4)!(X?.E1"."1N.N) X
+"^DD",2006.18,2006.18,31,3)
+Type a Number between 4 and 100, 0 Decimal Digits
+"^DD",2006.18,2006.18,31,21,0)
+^^1^1^2970722^
+"^DD",2006.18,2006.18,31,21,1,0)
+The font size for report display.
+"^DD",2006.18,2006.18,31,"DT")
+2961102
+"^DD",2006.18,2006.18,32,0)
+DOC STYLE^S^0:fsMDIChild;2:fsNormal;3:fsStayOnTop;^DOC;1^Q
+"^DD",2006.18,2006.18,32,21,0)
+^^1^1^2970722^
+"^DD",2006.18,2006.18,32,21,1,0)
+Set of codes defining the window style for a document.
+"^DD",2006.18,2006.18,32,"DT")
+2961102
+"^DD",2006.18,2006.18,33,0)
+DOC LEFT^NJ4,0^^DOC;2^K:+X'=X!(X>4000)!(X<0)!(X?.E1"."1N.N) X
+"^DD",2006.18,2006.18,33,3)
+Type a Number between 0 and 4000, 0 Decimal Digits
+"^DD",2006.18,2006.18,33,21,0)
+^^1^1^2970722^
+"^DD",2006.18,2006.18,33,21,1,0)
+The left document window settings.
+"^DD",2006.18,2006.18,33,"DT")
+2961102
+"^DD",2006.18,2006.18,34,0)
+DOC TOP^NJ4,0^^DOC;3^K:+X'=X!(X>4000)!(X<0)!(X?.E1"."1N.N) X
+"^DD",2006.18,2006.18,34,3)
+Type a Number between 0 and 4000, 0 Decimal Digits
+"^DD",2006.18,2006.18,34,21,0)
+^^1^1^2970722^
+"^DD",2006.18,2006.18,34,21,1,0)
+The top document window settings.
+"^DD",2006.18,2006.18,34,"DT")
+2961102
+"^DD",2006.18,2006.18,35,0)
+DOC WIDTH^NJ4,0^^DOC;4^K:+X'=X!(X>4000)!(X<10)!(X?.E1"."1N.N) X
+"^DD",2006.18,2006.18,35,3)
+Type a Number between 10 and 4000, 0 Decimal Digits
+"^DD",2006.18,2006.18,35,21,0)
+^^1^1^2970722^
+"^DD",2006.18,2006.18,35,21,1,0)
+The document window width settings.
+"^DD",2006.18,2006.18,35,"DT")
+2961102
+"^DD",2006.18,2006.18,36,0)
+DOC HEIGHT^NJ4,0^^DOC;5^K:+X'=X!(X>4000)!(X<10)!(X?.E1"."1N.N) X
+"^DD",2006.18,2006.18,36,3)
+Type a Number between 10 and 4000, 0 Decimal Digits
+"^DD",2006.18,2006.18,36,21,0)
+^^1^1^2970722^
+"^DD",2006.18,2006.18,36,21,1,0)
+The document window height settings.
+"^DD",2006.18,2006.18,36,"DT")
+2961102
+"^DD",2006.18,2006.18,37,0)
+ABS IMAGE WIDTH^NJ4,0^^ABS;6^K:+X'=X!(X>4000)!(X<10)!(X?.E1"."1N.N) X
+"^DD",2006.18,2006.18,37,3)
+Type a Number between 10 and 4000, 0 Decimal Digits
+"^DD",2006.18,2006.18,37,"DT")
+2961102
+"^DD",2006.18,2006.18,38,0)
+ABS IMAGE HEIGHT^NJ4,0^^ABS;7^K:+X'=X!(X>4000)!(X<10)!(X?.E1"."1N.N) X
+"^DD",2006.18,2006.18,38,3)
+Type a Number between 10 and 4000, 0 Decimal Digits
+"^DD",2006.18,2006.18,38,"DT")
+2961102
+"^DD",2006.18,2006.18,39,0)
+GROUP IMAGE WIDTH^NJ5,0^^GROUP;6^K:+X'=X!(X>40000)!(X<10)!(X?.E1"."1N.N) X
+"^DD",2006.18,2006.18,39,3)
+Type a Number between 10 and 40000, 0 Decimal Digits
+"^DD",2006.18,2006.18,39,21,0)
+^^1^1^2970722^
+"^DD",2006.18,2006.18,39,21,1,0)
+The group image window width settings.
+"^DD",2006.18,2006.18,39,"DT")
+2961102
+"^DD",2006.18,2006.18,40,0)
+GROUP IMAGE HEIGHT^NJ4,0^^GROUP;7^K:+X'=X!(X>4000)!(X<10)!(X?.E1"."1N.N) X
+"^DD",2006.18,2006.18,40,3)
+Type a Number between 10 and 4000, 0 Decimal Digits
+"^DD",2006.18,2006.18,40,21,0)
+^^1^1^2970722^
+"^DD",2006.18,2006.18,40,21,1,0)
+The group image window height settings.
+"^DD",2006.18,2006.18,40,"DT")
+2961102
+"^DD",2006.18,2006.18,41,0)
+IMAGEGRID STYLE^S^0:fsMDIChild;1:fsMDIForm;2:fsNormal;3:fsStayOnTop;^IMAGEGRID;1^Q
+"^DD",2006.18,2006.18,41,21,0)
+^.001^1^1^3000615^^^
+"^DD",2006.18,2006.18,41,21,1,0)
+Set of codes defining the window style for an image grid.
+"^DD",2006.18,2006.18,41,"DT")
+2961105
+"^DD",2006.18,2006.18,42,0)
+IMAGEGRID LEFT^NJ4,0^^IMAGEGRID;2^K:+X'=X!(X>4000)!(X<0)!(X?.E1"."1N.N) X
+"^DD",2006.18,2006.18,42,3)
+Type a Number between 0 and 4000, 0 Decimal Digits
+"^DD",2006.18,2006.18,42,21,0)
+^.001^1^1^3000615^^^
+"^DD",2006.18,2006.18,42,21,1,0)
+The image grid left window settings.
+"^DD",2006.18,2006.18,42,"DT")
+2961105
+"^DD",2006.18,2006.18,43,0)
+IMAGEGRID TOP^NJ4,0^^IMAGEGRID;3^K:+X'=X!(X>4000)!(X<0)!(X?.E1"."1N.N) X
+"^DD",2006.18,2006.18,43,3)
+Type a Number between 0 and 4000, 0 Decimal Digits
+"^DD",2006.18,2006.18,43,21,0)
+^.001^1^1^3000615^^^^
+"^DD",2006.18,2006.18,43,21,1,0)
+The image grid top window settings.
+"^DD",2006.18,2006.18,43,"DT")
+2961105
+"^DD",2006.18,2006.18,44,0)
+IMAGEGRID WIDTH^NJ4,0^^IMAGEGRID;4^K:+X'=X!(X>4000)!(X<10)!(X?.E1"."1N.N) X
+"^DD",2006.18,2006.18,44,3)
+Type a Number between 10 and 4000, 0 Decimal Digits
+"^DD",2006.18,2006.18,44,21,0)
+^.001^1^1^3000615^^
+"^DD",2006.18,2006.18,44,21,1,0)
+The image grid width window settings.
+"^DD",2006.18,2006.18,44,"DT")
+2961105
+"^DD",2006.18,2006.18,45,0)
+IMAGEGRID HEIGHT^NJ4,0^^IMAGEGRID;5^K:+X'=X!(X>4000)!(X<0)!(X?.E1"."1N.N) X
+"^DD",2006.18,2006.18,45,3)
+Type a Number between 0 and 4000, 0 Decimal Digits
+"^DD",2006.18,2006.18,45,21,0)
+^^1^1^2970722^
+"^DD",2006.18,2006.18,45,21,1,0)
+The image grid height window settings.
+"^DD",2006.18,2006.18,45,"DT")
+2961105
+"^DD",2006.18,2006.18,46,0)
+DOC FITWIDTH^S^0:FALSE;1:TRUE;^DOC;6^Q
+"^DD",2006.18,2006.18,46,21,0)
+^^1^1^2970722^
+"^DD",2006.18,2006.18,46,21,1,0)
+Whether the document should fit the width defined.
+"^DD",2006.18,2006.18,46,"DT")
+2961106
+"^DD",2006.18,2006.18,47,0)
+DOC FITHEIGHT^S^0:FALSE;1:TRUE;^DOC;7^Q
+"^DD",2006.18,2006.18,47,21,0)
+^^1^1^2970722^
+"^DD",2006.18,2006.18,47,21,1,0)
+Whether the document should fit the height defined.
+"^DD",2006.18,2006.18,47,"DT")
+2961106
+"^DD",2006.18,2006.18,48,0)
+DOC BANDINGMODE^S^0:Normal;1:Mouse Up Zoom;2:Right Click Zoom;3:Pan;^DOC;8^Q
+"^DD",2006.18,2006.18,48,21,0)
+^^1^1^2970722^
+"^DD",2006.18,2006.18,48,21,1,0)
+Set of codes defining the banding mode.
+"^DD",2006.18,2006.18,48,"DT")
+2961106
+"^DD",2006.18,2006.18,49,0)
+ABS SHOW^S^0:FALSE;1:TRUE;^ABS;8^Q
+"^DD",2006.18,2006.18,49,21,0)
+^^1^1^2970722^
+"^DD",2006.18,2006.18,49,21,1,0)
+Whether or not to display abstracts.
+"^DD",2006.18,2006.18,49,"DT")
+2961108
+"^DD",2006.18,2006.18,50,0)
+IMAGEGRID SHOW^S^0:FALSE;1:TRUE;^IMAGEGRID;6^Q
+"^DD",2006.18,2006.18,50,21,0)
+^.001^1^1^3000615^^
+"^DD",2006.18,2006.18,50,21,1,0)
+Whether or not to display the image grid.
+"^DD",2006.18,2006.18,50,"DT")
+2961108
+"^DD",2006.18,2006.18,51,0)
+REMOTE CONNECT [FUTURE USE]^S^0:FALSE;1:TRUE;^0;5^Q
+"^DD",2006.18,2006.18,51,21,0)
+^^3^3^3001025^
+"^DD",2006.18,2006.18,51,21,1,0)
+[FOR FUTURE USE]
+"^DD",2006.18,2006.18,51,21,2,0)
+This field tells whether this computer was signed on remotely,
+"^DD",2006.18,2006.18,51,21,3,0)
+or is a part of the Sites Network.
+"^DD",2006.18,2006.18,51,"DT")
+3001025
+"^DD",2006.18,2006.18,52,0)
+VIEWJBOX IMAGES^S^0:FALSE;1:TRUE;^0;6^Q
+"^DD",2006.18,2006.18,52,21,0)
+^^1^1^2970722^
+"^DD",2006.18,2006.18,52,21,1,0)
+Control whether images from the jukebox will be displayed.
+"^DD",2006.18,2006.18,52,"DT")
+2961112
+"^DD",2006.18,2006.18,53,0)
+REVERSE ORDER^S^0:FALSE;1:TRUE;^0;7^Q
+"^DD",2006.18,2006.18,53,21,0)
+^^1^1^2970722^
+"^DD",2006.18,2006.18,53,21,1,0)
+Display images in reverse order.
+"^DD",2006.18,2006.18,53,"DT")
+2961112
+"^DD",2006.18,2006.18,54,0)
+RADEXAMS STYLE^S^0:fsMDIChild;1:fsMDIForm;2:fsNormal;3:fsStayOnTop;^RADLISTWIN;1^Q
+"^DD",2006.18,2006.18,54,21,0)
+^^1^1^2970722^
+"^DD",2006.18,2006.18,54,21,1,0)
+Set of codes defining the window style for a Radiology Exam display.
+"^DD",2006.18,2006.18,54,"DT")
+2961115
+"^DD",2006.18,2006.18,55,0)
+RADEXAMS LEFT^NJ4,0^^RADLISTWIN;2^K:+X'=X!(X>4000)!(X<0)!(X?.E1"."1N.N) X
+"^DD",2006.18,2006.18,55,3)
+Type a Number between 0 and 4000, 0 Decimal Digits
+"^DD",2006.18,2006.18,55,21,0)
+^^1^1^2970722^
+"^DD",2006.18,2006.18,55,21,1,0)
+The radiology exams left window settings.
+"^DD",2006.18,2006.18,55,"DT")
+2961115
+"^DD",2006.18,2006.18,56,0)
+RADEXAMS TOP^NJ4,0^^RADLISTWIN;3^K:+X'=X!(X>4000)!(X<0)!(X?.E1"."1N.N) X
+"^DD",2006.18,2006.18,56,3)
+Type a Number between 0 and 4000, 0 Decimal Digits
+"^DD",2006.18,2006.18,56,21,0)
+^^1^1^2970722^
+"^DD",2006.18,2006.18,56,21,1,0)
+The radiology exams top window settings.
+"^DD",2006.18,2006.18,56,"DT")
+2961115
+"^DD",2006.18,2006.18,57,0)
+RADEXAMS WIDTH^NJ4,0^^RADLISTWIN;4^K:+X'=X!(X>4000)!(X<10)!(X?.E1"."1N.N) X
+"^DD",2006.18,2006.18,57,3)
+Type a Number between 10 and 4000, 0 Decimal Digits
+"^DD",2006.18,2006.18,57,21,0)
+^^1^1^2970722^
+"^DD",2006.18,2006.18,57,21,1,0)
+The radiology exams width window settings.
+"^DD",2006.18,2006.18,57,"DT")
+2961115
+"^DD",2006.18,2006.18,58,0)
+RADEXAMS HEIGHT^NJ4,0^^RADLISTWIN;5^K:+X'=X!(X>4000)!(X<10)!(X?.E1"."1N.N) X
+"^DD",2006.18,2006.18,58,3)
+Type a Number between 10 and 4000, 0 Decimal Digits
+"^DD",2006.18,2006.18,58,21,0)
+^^1^1^2970722^
+"^DD",2006.18,2006.18,58,21,1,0)
+The radiology exams height window settings.
+"^DD",2006.18,2006.18,58,"DT")
+2961115
+"^DD",2006.18,2006.18,59,0)
+RADEXAMS SHOW^S^0:FALSE;1:TRUE;^RADLISTWIN;6^Q
+"^DD",2006.18,2006.18,59,21,0)
+^^1^1^2970722^
+"^DD",2006.18,2006.18,59,21,1,0)
+Radiology exams view preference.
+"^DD",2006.18,2006.18,59,"DT")
+2961115
+"^DD",2006.18,2006.18,60,0)
+SMTP/POP Server Address^F^^EMAIL;1^K:$L(X)>50!($L(X)<2) X
+"^DD",2006.18,2006.18,60,3)
+Enter Your default SMTP/POP3 server to send/receive image mail
+"^DD",2006.18,2006.18,60,21,0)
+^^2^2^2970722^
+"^DD",2006.18,2006.18,60,21,1,0)
+The default SMTP/POP3 server to send and receive emailed images.  It must
+"^DD",2006.18,2006.18,60,21,2,0)
+be a server that can handle SMTP and POP3 mail protocols.
+"^DD",2006.18,2006.18,60,"DT")
+2961218
+"^DD",2006.18,2006.18,61,0)
+Image Email Address^F^^EMAIL;2^K:$L(X)>50!($L(X)<5) X
+"^DD",2006.18,2006.18,61,3)
+Enter email address where images will be sent.
+"^DD",2006.18,2006.18,61,21,0)
+^^1^1^2961218^
+"^DD",2006.18,2006.18,61,21,1,0)
+This field contains the email address of the person who will receive images.
+"^DD",2006.18,2006.18,61,"DT")
+2961218
+"^DD",2006.18,2006.18,62,0)
+Alias^F^^EMAIL;3^K:$L(X)>30!($L(X)<5) X
+"^DD",2006.18,2006.18,62,3)
+Enter the full name of the mail user.
+"^DD",2006.18,2006.18,62,21,0)
+^^1^1^2961218^
+"^DD",2006.18,2006.18,62,21,1,0)
+This name will appear on the Message header.
+"^DD",2006.18,2006.18,62,"DT")
+2961218
+"^DD",2006.18,2006.18,63,0)
+POP3 Username^F^^EMAIL;4^K:$L(X)>20!($L(X)<3) X
+"^DD",2006.18,2006.18,63,3)
+Enter the POP3 account username to login to the POP3 server
+"^DD",2006.18,2006.18,63,21,0)
+^^1^1^2961218^
+"^DD",2006.18,2006.18,63,21,1,0)
+This is the account username for the POP3 server where user will receive image mail from.
+"^DD",2006.18,2006.18,63,"DT")
+2961218
+"^DD",2006.18,2006.18,64,0)
+POP3 Password^F^^EMAIL;5^K:$L(X)>20!($L(X)<3) X
+"^DD",2006.18,2006.18,64,3)
+Enter the POP3 account password to login to the POP3 server.
+"^DD",2006.18,2006.18,64,21,0)
+^^2^2^2970722^
+"^DD",2006.18,2006.18,64,21,1,0)
+The POP3 password for the user to login and retrieve messages from the
+"^DD",2006.18,2006.18,64,21,2,0)
+POP3 server.
+"^DD",2006.18,2006.18,64,"DT")
+2961218
+"^DD",2006.18,2006.18,65,0)
+PCanywhere Script Name^F^^EMAIL;6^K:$L(X)>20!($L(X)<3) X
+"^DD",2006.18,2006.18,65,3)
+User's script name to send images via PCanywhere
+"^DD",2006.18,2006.18,65,21,0)
+^^1^1^2970722^
+"^DD",2006.18,2006.18,65,21,1,0)
+The user's script name to send images via PCanywhere.
+"^DD",2006.18,2006.18,65,"DT")
+2961230
+"^DD",2006.18,2006.18,66,0)
+LAST TEN PATIENTS^F^^PAT;1^K:$L(X)>200!($L(X)<1) X
+"^DD",2006.18,2006.18,66,3)
+Answer must be 1-200 characters in length.
+"^DD",2006.18,2006.18,66,21,0)
+^^1^1^2970722^
+"^DD",2006.18,2006.18,66,21,1,0)
+The last ten patients the user last referenced.
+"^DD",2006.18,2006.18,66,"DT")
+2970310
+"^DD",2006.18,2006.18,67,0)
+PATIENT LIST^2006.1867PA^^PATLIST;0
+"^DD",2006.18,2006.18,70,0)
+APP SAVE ON EXIT^S^1:YES;0:NO;^APPPREFS;1^Q
+"^DD",2006.18,2006.18,70,3)
+Enter 'YES' to automatically save application settings when the application exits.
+"^DD",2006.18,2006.18,70,21,0)
+^.001^1^1^3080826^^^^
+"^DD",2006.18,2006.18,70,21,1,0)
+This value determines if settings will be automatically saved on exit.
+"^DD",2006.18,2006.18,70,"DT")
+3080820
+"^DD",2006.18,2006.18,71,0)
+APP ABS FONT SIZE^NJ2,0^^APPPREFS;2^K:+X'=X!(X>12)!(X<6)!(X?.E1"."1N.N) X
+"^DD",2006.18,2006.18,71,3)
+Enter a font size from 6 through 12.
+"^DD",2006.18,2006.18,71,21,0)
+^.001^2^2^3080826^^^^
+"^DD",2006.18,2006.18,71,21,1,0)
+This is the font size for Abstract captions.
+"^DD",2006.18,2006.18,71,21,2,0)
+Sizes can be 6 through 12.
+"^DD",2006.18,2006.18,71,"DT")
+3080820
+"^DD",2006.18,2006.18,72,0)
+APP GRP ABS FONT SIZE^NJ2,0^^APPPREFS;3^K:+X'=X!(X>12)!(X<6)!(X?.E1"."1N.N) X
+"^DD",2006.18,2006.18,72,3)
+Enter a font size from 6 through 12.
+"^DD",2006.18,2006.18,72,21,0)
+^.001^2^2^3080826^^^^
+"^DD",2006.18,2006.18,72,21,1,0)
+This is the font size for Abstract captions in Group Window.
+"^DD",2006.18,2006.18,72,21,2,0)
+Sizes can be 6 through 12.
+"^DD",2006.18,2006.18,72,"DT")
+3080820
+"^DD",2006.18,2006.18,73,0)
+APP IMAGE FONT SIZE^NJ2,0^^APPPREFS;4^K:+X'=X!(X>12)!(X<6)!(X?.E1"."1N.N) X
+"^DD",2006.18,2006.18,73,3)
+Enter a font size from 6 through 12.
+"^DD",2006.18,2006.18,73,21,0)
+^.001^2^2^3080826^^^^
+"^DD",2006.18,2006.18,73,21,1,0)
+This is the font size for Full Resolution Image captions.
+"^DD",2006.18,2006.18,73,21,2,0)
+Sizes can be from 6 through 12.
+"^DD",2006.18,2006.18,73,"DT")
+3080820
+"^DD",2006.18,2006.18,74,0)
+APP RELEASE NOTES [FUTURE USE]^F^^APPPREFS;5^K:$L(X)>30!($L(X)<1) X
+"^DD",2006.18,2006.18,74,3)
+Future: will be used to show Patch release notes (1-30 chars). 
+"^DD",2006.18,2006.18,74,21,0)
+^.001^1^1^3080826^^^
+"^DD",2006.18,2006.18,74,21,1,0)
+This field is reserved for future functionality
+"^DD",2006.18,2006.18,74,"DT")
+3080418
+"^DD",2006.18,2006.18,75,0)
+APP ALT VIDEO VIEWER^S^1:YES;0:NO;^APPPREFS;6^Q
+"^DD",2006.18,2006.18,75,3)
+Enter 'YES' if you want to use an alternate viewer for video files.
+"^DD",2006.18,2006.18,75,21,0)
+^.001^3^3^3080826^^^^
+"^DD",2006.18,2006.18,75,21,1,0)
+VistA Imaging Display includes a viewer that will play video files.
+"^DD",2006.18,2006.18,75,21,2,0)
+The user can also view video files in an alternate viewer.
+"^DD",2006.18,2006.18,75,21,3,0)
+If 'YES' is entered an alternate viewer will be used for video files.
+"^DD",2006.18,2006.18,75,"DT")
+3080818
+"^DD",2006.18,2006.18,76,0)
+APP VIDEO AUTO PLAY^S^1:YES;0:NO;^APPPREFS;7^Q
+"^DD",2006.18,2006.18,76,3)
+Enter 'YES' if you want the video file to automatically play when opened in the imaging video viewer.
+"^DD",2006.18,2006.18,76,21,0)
+^.001^3^3^3080826^^^^
+"^DD",2006.18,2006.18,76,21,1,0)
+The Video file can be automatically started when it is open and the
+"^DD",2006.18,2006.18,76,21,2,0)
+ Imaging Video viewer is being used.  This is ignored when using any
+"^DD",2006.18,2006.18,76,21,3,0)
+ alternate video viewer.
+"^DD",2006.18,2006.18,76,"DT")
+3080820
+"^DD",2006.18,2006.18,77,0)
+APP ALT PDF VIEWER^S^1:YES;0:NO;^APPPREFS;8^Q
+"^DD",2006.18,2006.18,77,3)
+Enter 'YES' if you want to use an alternate viewer for PDF Files.
+"^DD",2006.18,2006.18,77,21,0)
+^.001^3^3^3080826^^^^
+"^DD",2006.18,2006.18,77,21,1,0)
+VistA Imaging Display includes a viewer that will display PDF files.
+"^DD",2006.18,2006.18,77,21,2,0)
+The user can also view PDF files in an alternate viewer.
+"^DD",2006.18,2006.18,77,21,3,0)
+If 'YES' is entered an alternate viewer will be used for PDF files.
+"^DD",2006.18,2006.18,77,"DT")
+3080818
+"^DD",2006.18,2006.18,78,0)
+SHOW DELETED IMAGE PLACEHOLDER^S^0:NO;1:YES;^APPPREFS;9^Q
+"^DD",2006.18,2006.18,78,3)
+Enter 'YES' if you want to see the deleted image placeholder.
+"^DD",2006.18,2006.18,78,21,0)
+^^2^2^3101214^
+"^DD",2006.18,2006.18,78,21,1,0)
+The value of this field controls the visibility of the
+"^DD",2006.18,2006.18,78,21,2,0)
+deleted image placeholder in VistA Imaging Display.
+"^DD",2006.18,2006.18,78,23,0)
+^^1^1^3101214^
+"^DD",2006.18,2006.18,78,23,1,0)
+Added in patch MAG*3.0*117
+"^DD",2006.18,2006.18,78,"DT")
+3101214
+"^DD",2006.18,2006.18,79,0)
+SUPPRESS PRINT SUMMARY^S^0:NO;1:YES;^APPPREFS;10^Q
+"^DD",2006.18,2006.18,79,3)
+Enter 'YES' to stop the Print Summary from being printed at the end.
+"^DD",2006.18,2006.18,79,21,0)
+^.001^4^4^3110304^^^
+"^DD",2006.18,2006.18,79,21,1,0)
+This field is enabled so that the user can suppress the printing of the 
+"^DD",2006.18,2006.18,79,21,2,0)
+'Print Summary' at the end of a Multi-Image print. The Print Summary is a 
+"^DD",2006.18,2006.18,79,21,3,0)
+list of all images in the filtered image list and the print status of 
+"^DD",2006.18,2006.18,79,21,4,0)
+each image.
+"^DD",2006.18,2006.18,79,23,0)
+^.001^1^1^3110304^^
+"^DD",2006.18,2006.18,79,23,1,0)
+Added in patch MAG*3.0*117.
+"^DD",2006.18,2006.18,79,"DT")
+3110304
+"^DD",2006.18,2006.18,100,0)
+EKG STYLE^S^0:fsMDIChild;2:fsNormal;3:fsStayOnTop;^EKG;1^Q
+"^DD",2006.18,2006.18,100,"DT")
+2980731
+"^DD",2006.18,2006.18,101,0)
+EKG LEFT^NJ4,0^^EKG;2^K:+X'=X!(X>4000)!(X<0)!(X?.E1"."1N.N) X
+"^DD",2006.18,2006.18,101,3)
+Type a Number between 0 and 4000, 0 Decimal Digits
+"^DD",2006.18,2006.18,101,"DT")
+2980731
+"^DD",2006.18,2006.18,102,0)
+EKG TOP^NJ4,0^^EKG;3^K:+X'=X!(X>4000)!(X<0)!(X?.E1"."1N.N) X
+"^DD",2006.18,2006.18,102,3)
+Type a Number between 0 and 4000, 0 Decimal Digits
+"^DD",2006.18,2006.18,102,"DT")
+2980731
+"^DD",2006.18,2006.18,103,0)
+EKG WIDTH^NJ4,0^^EKG;4^K:+X'=X!(X>4000)!(X<10)!(X?.E1"."1N.N) X
+"^DD",2006.18,2006.18,103,3)
+Type a Number between 10 and 4000, 0 Decimal Digits
+"^DD",2006.18,2006.18,103,"DT")
+2980731
+"^DD",2006.18,2006.18,104,0)
+EKG HEIGHT^NJ4,0^^EKG;5^K:+X'=X!(X>4000)!(X<10)!(X?.E1"."1N.N) X
+"^DD",2006.18,2006.18,104,3)
+Type a Number between 10 and 4000, 0 Decimal Digits
+"^DD",2006.18,2006.18,104,"DT")
+2980731
+"^DD",2006.18,2006.18,105,0)
+EKG SHOW^S^0:FALSE;1:TRUE;^EKG;6^Q
+"^DD",2006.18,2006.18,105,"DT")
+2980731
+"^DD",2006.18,2006.18,110,0)
+DICOM WIN STYLE^S^0:fsMDIChild;2:fsNormal;3:fsStayOnTop;^DICOMWIN;1^Q
+"^DD",2006.18,2006.18,110,"DT")
+2981029
+"^DD",2006.18,2006.18,111,0)
+DICOM WIN LEFT^NJ4,0^^DICOMWIN;2^K:+X'=X!(X>4000)!(X<0)!(X?.E1"."1N.N) X
+"^DD",2006.18,2006.18,111,3)
+Type a Number between 0 and 4000, 0 Decimal Digits
+"^DD",2006.18,2006.18,111,"DT")
+2981029
+"^DD",2006.18,2006.18,112,0)
+DICOM WIN TOP^NJ4,0^^DICOMWIN;3^K:+X'=X!(X>4000)!(X<0)!(X?.E1"."1N.N) X
+"^DD",2006.18,2006.18,112,3)
+Type a Number between 0 and 4000, 0 Decimal Digits
+"^DD",2006.18,2006.18,112,"DT")
+2981029
+"^DD",2006.18,2006.18,113,0)
+DICOM WIN WIDTH^NJ4,0^^DICOMWIN;4^K:+X'=X!(X>4000)!(X<100)!(X?.E1"."1N.N) X
+"^DD",2006.18,2006.18,113,3)
+Type a Number between 100 and 4000, 0 Decimal Digits
+"^DD",2006.18,2006.18,113,"DT")
+2981029
+"^DD",2006.18,2006.18,114,0)
+DICOM WIN HEIGHT^NJ4,0^^DICOMWIN;5^K:+X'=X!(X>4000)!(X<100)!(X?.E1"."1N.N) X
+"^DD",2006.18,2006.18,114,3)
+Type a Number between 100 and 4000, 0 Decimal Digits
+"^DD",2006.18,2006.18,114,"DT")
+2981029
+"^DD",2006.18,2006.18,115,0)
+DICOM SCROLL SPEED^NJ5,0^^DICOMWIN;6^K:+X'=X!(X>10000)!(X<1)!(X?.E1"."1N.N) X
+"^DD",2006.18,2006.18,115,3)
+Enter the scroll speed of Dicom Studies in the Radiology Viewer. (from 1 to 10000)
+"^DD",2006.18,2006.18,115,21,0)
+^.001^4^4^3080827^^^^
+"^DD",2006.18,2006.18,115,21,1,0)
+This number is used to control the speed of painting the next image
+"^DD",2006.18,2006.18,115,21,2,0)
+in the control.  The minimum and maximum scroll speeds will change
+"^DD",2006.18,2006.18,115,21,3,0)
+depending on the workstation and the type of image.  The min and 
+"^DD",2006.18,2006.18,115,21,4,0)
+max are set in the GUI. (from 1 to 10000)
+"^DD",2006.18,2006.18,115,"DT")
+3080826
+"^DD",2006.18,2006.18,116,0)
+DICOM CINE SPEED^NJ5,0^^DICOMWIN;7^K:+X'=X!(X>10000)!(X<1)!(X?.E1"."1N.N) X
+"^DD",2006.18,2006.18,116,3)
+Enter the scroll speed of Dicom Studies in the Cine Tool window.  (from 1 to 10000)
+"^DD",2006.18,2006.18,116,21,0)
+^.001^4^4^3080826^^^^
+"^DD",2006.18,2006.18,116,21,1,0)
+This number is used to control the speed of painting the next image
+"^DD",2006.18,2006.18,116,21,2,0)
+in the Cine control.  The minimum and maximum scroll speeds will change
+"^DD",2006.18,2006.18,116,21,3,0)
+depending on the workstation and the type of image.  The min and
+"^DD",2006.18,2006.18,116,21,4,0)
+max are set in the GUI.  (from 1 to 10000)
+"^DD",2006.18,2006.18,116,"DT")
+3080826
+"^DD",2006.18,2006.18,117,0)
+DICOM STACK PAGING^S^1:Different settings;2:Same settings;3:Image settings;^DICOMWIN;8^Q
+"^DD",2006.18,2006.18,117,3)
+Enter the code for stack view 'paging settings'.
+"^DD",2006.18,2006.18,117,21,0)
+^.001^14^14^3080826^^^^
+"^DD",2006.18,2006.18,117,21,1,0)
+This value is the default stack view 'paging settings' preference.
+"^DD",2006.18,2006.18,117,21,2,0)
+ 1 =   Page With Different Settings,
+"^DD",2006.18,2006.18,117,21,3,0)
+       When selected, each stack will page with the settings held
+"^DD",2006.18,2006.18,117,21,4,0)
+       from the previous image in that stack
+"^DD",2006.18,2006.18,117,21,5,0)
+ 2 =   Page With Same Settings,
+"^DD",2006.18,2006.18,117,21,6,0)
+       When selected, each stack will page with the settings from the
+"^DD",2006.18,2006.18,117,21,7,0)
+       stack that changed images.  If the left stack changes images, both
+"^DD",2006.18,2006.18,117,21,8,0)
+       stacks will change images and then set their view settings
+"^DD",2006.18,2006.18,117,21,9,0)
+       (window/level, zoom, etc) to the same as the left stack.
+"^DD",2006.18,2006.18,117,21,10,0)
+ 3 =   Page With Image Settings
+"^DD",2006.18,2006.18,117,21,11,0)
+       When selected, each image will automatically set itself based on the
+"^DD",2006.18,2006.18,117,21,12,0)
+       contents of the image.  It does not matter what the previous
+"^DD",2006.18,2006.18,117,21,13,0)
+       image had set.
+"^DD",2006.18,2006.18,117,21,14,0)
+  
+"^DD",2006.18,2006.18,117,"DT")
+3080826
+"^DD",2006.18,2006.18,118,0)
+DICOM LAYOUT PAGING^S^1:Selected window settings;2:Individual Image settings;^DICOMWIN;9^Q
+"^DD",2006.18,2006.18,118,3)
+Enter the code for layout view 'paging settings'.
+"^DD",2006.18,2006.18,118,21,0)
+^.001^8^8^3080826^^^^
+"^DD",2006.18,2006.18,118,21,1,0)
+This value is the default layout view 'paging settings' preference
+"^DD",2006.18,2006.18,118,21,2,0)
+ 1 = Use Selected Window Settings
+"^DD",2006.18,2006.18,118,21,3,0)
+     When selected, and the user changes images, the next
+"^DD",2006.18,2006.18,118,21,4,0)
+     image loaded will use the same settings as the previous image.
+"^DD",2006.18,2006.18,118,21,5,0)
+ 2 = Use Individual Image Settings
+"^DD",2006.18,2006.18,118,21,6,0)
+     When selected, each image will automatically set itself based
+"^DD",2006.18,2006.18,118,21,7,0)
+     on the contents of the image.  It does not matter what
+"^DD",2006.18,2006.18,118,21,8,0)
+     settings the previous image had.
+"^DD",2006.18,2006.18,118,"DT")
+3080826
+"^DD",2006.18,2006.18,119,0)
+DICOM STACK PAGE TOGETHER^S^1:YES;0:NO;^DICOMWIN;10^Q
+"^DD",2006.18,2006.18,119,3)
+Enter 'YES' if the Dicom images should default to the page together setting.
+"^DD",2006.18,2006.18,119,21,0)
+^.001^5^5^3080826^^^^
+"^DD",2006.18,2006.18,119,21,1,0)
+This setting tells if the Images in the Dicom Viewer should stack
+"^DD",2006.18,2006.18,119,21,2,0)
+together by default.
+"^DD",2006.18,2006.18,119,21,3,0)
+If 'YES' then two stack views will page together. This does not
+"^DD",2006.18,2006.18,119,21,4,0)
+ guarantee they will always be on the same image number, but as
+"^DD",2006.18,2006.18,119,21,5,0)
+ one stack changes images, the other stack will follow.
+"^DD",2006.18,2006.18,119,"DT")
+3080826
+"^DD",2006.18,2006.18,120,0)
+DICOM ORIENTATION LABELS^S^1:YES;0:NO;^DICOMWIN;11^Q
+"^DD",2006.18,2006.18,120,3)
+Enter 'YES' to show the orientation labels by default.
+"^DD",2006.18,2006.18,120,21,0)
+^.001^5^5^3080826^^^^
+"^DD",2006.18,2006.18,120,21,1,0)
+This setting tells if the orientation labels should be 
+"^DD",2006.18,2006.18,120,21,2,0)
+displayed by default.  Orientation labels show the 'right' and 'left' 
+"^DD",2006.18,2006.18,120,21,3,0)
+side of a radiology image.
+"^DD",2006.18,2006.18,120,21,4,0)
+If 'YES' then the orientation labels are displayed on the middle left
+"^DD",2006.18,2006.18,120,21,5,0)
+  side of the image.
+"^DD",2006.18,2006.18,120,"DT")
+3080826
+"^DD",2006.18,2006.18,121,0)
+DICOM PIXEL VALUE SHOW^S^1:YES;0:NO;^DICOMWIN;12^Q
+"^DD",2006.18,2006.18,121,3)
+Enter 'YES' if the pixel values should show when mouse is paused on a Dicom Image.
+"^DD",2006.18,2006.18,121,21,0)
+^.001^6^6^3080826^^^^
+"^DD",2006.18,2006.18,121,21,1,0)
+This value determines if the pixel values will be displayed
+"^DD",2006.18,2006.18,121,21,2,0)
+ as a popup hint when the mouse is stopped over an image
+"^DD",2006.18,2006.18,121,21,3,0)
+ in the Dicom Viewer.
+"^DD",2006.18,2006.18,121,21,4,0)
+ If 'YES', when the user clicks on an image the hint will change
+"^DD",2006.18,2006.18,121,21,5,0)
+ to the value of the pixel at the location clicked.  If 'NO'
+"^DD",2006.18,2006.18,121,21,6,0)
+  then the hint will contain series and study description information.
+"^DD",2006.18,2006.18,121,"DT")
+3080826
+"^DD",2006.18,2006.18,122,0)
+DICOM MEASURE COLOR^NJ8,0^^DICOMWIN;13^K:+X'=X!(X>16777215)!(X<0)!(X?.E1"."1N.N) X
+"^DD",2006.18,2006.18,122,3)
+Colors should be selected in the Client Application, and not entered through FileMan.
+"^DD",2006.18,2006.18,122,21,0)
+^.001^2^2^3080826^^^^
+"^DD",2006.18,2006.18,122,21,1,0)
+This setting is the color specified by the user for ruler measurements.
+"^DD",2006.18,2006.18,122,21,2,0)
+Colors are stored as integer representations of the selected color.
+"^DD",2006.18,2006.18,122,23,0)
+^.001^3^3^3080826^^
+"^DD",2006.18,2006.18,122,23,1,0)
+In a future version colors may be limited to a certain few colors.  Now
+"^DD",2006.18,2006.18,122,23,2,0)
+colors are not limited, and the integer representation of the color is 
+"^DD",2006.18,2006.18,122,23,3,0)
+stored in this field. Color can range from Black (=0) to White (=16777215)
+"^DD",2006.18,2006.18,122,"DT")
+3080826
+"^DD",2006.18,2006.18,123,0)
+DICOM MEASURE LINE WIDTH^NJ2,0^^DICOMWIN;14^K:+X'=X!(X>20)!(X<1)!(X?.E1"."1N.N) X
+"^DD",2006.18,2006.18,123,3)
+Type a Number between 1 and 20, 0 Decimal Digits
+"^DD",2006.18,2006.18,123,21,0)
+^.001^2^2^3080826^^^^
+"^DD",2006.18,2006.18,123,21,1,0)
+This is the line width in pixels for ruler measurements that are
+"^DD",2006.18,2006.18,123,21,2,0)
+displayed on the image.
+"^DD",2006.18,2006.18,123,"DT")
+3080826
+"^DD",2006.18,2006.18,124,0)
+DICOM MEASURE UNITS^S^0:Inches;1:Feet;4:Micrometers;5:Millimeters;6:Centimeters;^DICOMWIN;15^Q
+"^DD",2006.18,2006.18,124,3)
+Enter the numeric code for the unit of measurement for the ruler tool on dicom images.
+"^DD",2006.18,2006.18,124,21,0)
+^.001^2^2^3080826^^^^
+"^DD",2006.18,2006.18,124,21,1,0)
+This field stores the unit of measurement for the ruler drawn on
+"^DD",2006.18,2006.18,124,21,2,0)
+images displayed in the Dicom Viewer.
+"^DD",2006.18,2006.18,124,"DT")
+3080826
+"^DD",2006.18,2006.18,125,0)
+DICOM SETTINGS WINDOW LEVEL^S^1:Device Settings;2:Histogram settings;^DICOMWIN;16^Q
+"^DD",2006.18,2006.18,125,3)
+Enter the code for the window level settings used for radiology images.
+"^DD",2006.18,2006.18,125,21,0)
+^.001^8^8^3080826^^^^
+"^DD",2006.18,2006.18,125,21,1,0)
+This value is the window level setting for radiology images.
+"^DD",2006.18,2006.18,125,21,2,0)
+Possible settings for window level display are:
+"^DD",2006.18,2006.18,125,21,3,0)
+ 1 = Use device window level settings. 
+"^DD",2006.18,2006.18,125,21,4,0)
+     When selected the image will be automatically window leveled
+"^DD",2006.18,2006.18,125,21,5,0)
+     using values specified in the DICOM header (if available).
+"^DD",2006.18,2006.18,125,21,6,0)
+ 2 = Histogram window level settings.  
+"^DD",2006.18,2006.18,125,21,7,0)
+     When selected the image will be window leveled using
+"^DD",2006.18,2006.18,125,21,8,0)
+     the contents of the image.
+"^DD",2006.18,2006.18,125,"DT")
+3080826
+"^DD",2006.18,2006.18,130,0)
+NOTESWIN STYLE^S^0:fsMDIChild;1:fsMDIForm;2:fsNormal;3:fsStayOnTop;^NOTES;1^Q
+"^DD",2006.18,2006.18,130,21,0)
+^^1^1^3000615^
+"^DD",2006.18,2006.18,130,21,1,0)
+Set of codes defining the window style for TIU Documents window
+"^DD",2006.18,2006.18,130,"DT")
+3000615
+"^DD",2006.18,2006.18,131,0)
+NOTESWIN LEFT^NJ4,0^^NOTES;2^K:+X'=X!(X>4000)!(X<0)!(X?.E1"."1N.N) X
+"^DD",2006.18,2006.18,131,3)
+Type a Number between 0 and 4000, 0 Decimal Digits
+"^DD",2006.18,2006.18,131,21,0)
+^^2^2^3000615^
+"^DD",2006.18,2006.18,131,21,1,0)
+The left setting for the TIU Documents window position.
+"^DD",2006.18,2006.18,131,21,2,0)
+
+"^DD",2006.18,2006.18,131,"DT")
+3000615
+"^DD",2006.18,2006.18,132,0)
+NOTESWIN TOP^NJ4,0^^NOTES;3^K:+X'=X!(X>4000)!(X<0)!(X?.E1"."1N.N) X
+"^DD",2006.18,2006.18,132,3)
+Type a Number between 0 and 4000, 0 Decimal Digits
+"^DD",2006.18,2006.18,132,21,0)
+^^1^1^3000615^
+"^DD",2006.18,2006.18,132,21,1,0)
+The top setting for the TIU Documents window position.
+"^DD",2006.18,2006.18,132,"DT")
+3000615
+"^DD",2006.18,2006.18,133,0)
+NOTESWIN WIDTH^NJ4,0^^NOTES;4^K:+X'=X!(X>4000)!(X<50)!(X?.E1"."1N.N) X
+"^DD",2006.18,2006.18,133,3)
+Type a Number between 50 and 4000, 0 Decimal Digits
+"^DD",2006.18,2006.18,133,21,0)
+^.001^1^1^3000615^^
+"^DD",2006.18,2006.18,133,21,1,0)
+The width of the TIU Documents window.
+"^DD",2006.18,2006.18,133,"DT")
+3000615
+"^DD",2006.18,2006.18,134,0)
+NOTESWIN HEIGHT^NJ4,0^^NOTES;5^K:+X'=X!(X>4000)!(X<50)!(X?.E1"."1N.N) X
+"^DD",2006.18,2006.18,134,3)
+Type a Number between 50 and 4000, 0 Decimal Digits
+"^DD",2006.18,2006.18,134,21,0)
+^^1^1^3000615^
+"^DD",2006.18,2006.18,134,21,1,0)
+The Height of the TIU Documents window.
+"^DD",2006.18,2006.18,134,"DT")
+3000615
+"^DD",2006.18,2006.18,135,0)
+NOTESWIN SHOW^S^0:FALSE;1:TRUE;^NOTES;6^Q
+"^DD",2006.18,2006.18,135,21,0)
+^^2^2^3000615^
+"^DD",2006.18,2006.18,135,21,1,0)
+Whether or not to automatically open (show) 
+"^DD",2006.18,2006.18,135,21,2,0)
+this window when a patient is selected.
+"^DD",2006.18,2006.18,135,"DT")
+3000615
+"^DD",2006.18,2006.18,137,0)
+ABS COLS^NJ4,0^^ABS;10^K:+X'=X!(X>1000)!(X<1)!(X?.E1"."1N.N) X
+"^DD",2006.18,2006.18,137,3)
+Type a Number between 1 and 1000, 0 Decimal Digits
+"^DD",2006.18,2006.18,137,21,0)
+^.001^1^1^3021010^^^^
+"^DD",2006.18,2006.18,137,21,1,0)
+This field contains the number of columns in the Abstract window.
+"^DD",2006.18,2006.18,137,"DT")
+3020724
+"^DD",2006.18,2006.18,138,0)
+ABS MAXLOAD^NJ4,0^^ABS;11^K:+X'=X!(X>1000)!(X<1)!(X?.E1"."1N.N) X
+"^DD",2006.18,2006.18,138,3)
+Type a Number between 1 and 1000, 0 Decimal Digits
+"^DD",2006.18,2006.18,138,21,0)
+^.001^1^1^3021010^^^
+"^DD",2006.18,2006.18,138,21,1,0)
+This field contains the maximum number of abstracts to load in the Abstract window. 
+"^DD",2006.18,2006.18,138,"DT")
+3020724
+"^DD",2006.18,2006.18,140,0)
+FULL COLS^NJ4,0^^FULL;10^K:+X'=X!(X>1000)!(X<1)!(X?.E1"."1N.N) X
+"^DD",2006.18,2006.18,140,3)
+Type a Number between 1 and 1000, 0 Decimal Digits
+"^DD",2006.18,2006.18,140,21,0)
+^.001^1^1^3021010^^^
+"^DD",2006.18,2006.18,140,21,1,0)
+This field contains the number of columns in the Full Resolution window. 
+"^DD",2006.18,2006.18,140,"DT")
+3020724
+"^DD",2006.18,2006.18,141,0)
+FULL MAXLOAD^NJ4,0^^FULL;11^K:+X'=X!(X>1000)!(X<1)!(X?.E1"."1N.N) X
+"^DD",2006.18,2006.18,141,3)
+Type a Number between 1 and 1000, 0 Decimal Digits
+"^DD",2006.18,2006.18,141,21,0)
+^.001^1^1^3021010^^^^
+"^DD",2006.18,2006.18,141,21,1,0)
+This field contains the maximum number of images to load in the Full Resolution window.
+"^DD",2006.18,2006.18,141,"DT")
+3020724
+"^DD",2006.18,2006.18,143,0)
+DOC COLS^NJ4,0^^DOC;10^K:+X'=X!(X>1000)!(X<1)!(X?.E1"."1N.N) X
+"^DD",2006.18,2006.18,143,3)
+Type a Number between 1 and 1000, 0 Decimal Digits
+"^DD",2006.18,2006.18,143,21,0)
+^.001^1^1^3021010^^
+"^DD",2006.18,2006.18,143,21,1,0)
+This field contains the number of columns in the Document window.
+"^DD",2006.18,2006.18,143,"DT")
+3020724
+"^DD",2006.18,2006.18,144,0)
+DOC MAXLOAD^NJ4,0^^DOC;11^K:+X'=X!(X>1000)!(X<1)!(X?.E1"."1N.N) X
+"^DD",2006.18,2006.18,144,3)
+Type a Number between 1 and 1000, 0 Decimal Digits
+"^DD",2006.18,2006.18,144,21,0)
+^.001^1^1^3021010^^^
+"^DD",2006.18,2006.18,144,21,1,0)
+This field contains the maximum number of images to load in the Document window.
+"^DD",2006.18,2006.18,144,"DT")
+3020724
+"^DD",2006.18,2006.18,146,0)
+GRP COLS^NJ4,0^^GROUP;10^K:+X'=X!(X>1000)!(X<1)!(X?.E1"."1N.N) X
+"^DD",2006.18,2006.18,146,3)
+Type a Number between 1 and 1000, 0 Decimal Digits
+"^DD",2006.18,2006.18,146,21,0)
+^.001^1^1^3021010^^
+"^DD",2006.18,2006.18,146,21,1,0)
+This field contains the number of columns in the Group window.
+"^DD",2006.18,2006.18,146,"DT")
+3020724
+"^DD",2006.18,2006.18,147,0)
+GRP MAXLOAD^NJ4,0^^GROUP;11^K:+X'=X!(X>1000)!(X<1)!(X?.E1"."1N.N) X
+"^DD",2006.18,2006.18,147,3)
+Type a Number between 1 and 1000, 0 Decimal Digits
+"^DD",2006.18,2006.18,147,21,0)
+^.001^1^1^3021010^^^
+"^DD",2006.18,2006.18,147,21,1,0)
+This field contains the maximum number of images to load in the Group Abstract window.
+"^DD",2006.18,2006.18,147,"DT")
+3020724
+"^DD",2006.18,2006.18,148,0)
+ABS TOOLBAR^NJ2,0^^ABS;9^K:+X'=X!(X>10)!(X<0)!(X?.E1"."1N.N) X
+"^DD",2006.18,2006.18,148,3)
+Type '0' to hide or '1' to display the toolbar on the Abstract window.
+"^DD",2006.18,2006.18,148,21,0)
+^.001^1^1^3021010^^^^
+"^DD",2006.18,2006.18,148,21,1,0)
+Show or Hide the toolbar on the Abstract window.
+"^DD",2006.18,2006.18,148,"DT")
+3020724
+"^DD",2006.18,2006.18,149,0)
+FULL TOOLBAR^NJ2,0^^FULL;9^K:+X'=X!(X>10)!(X<0)!(X?.E1"."1N.N) X
+"^DD",2006.18,2006.18,149,3)
+Type '0' to hide or '1' to display the toolbar on the Full Resolution window.
+"^DD",2006.18,2006.18,149,21,0)
+^.001^1^1^3021010^^^^
+"^DD",2006.18,2006.18,149,21,1,0)
+Show or Hide the toolbar on the Full Resolution window.
+"^DD",2006.18,2006.18,149,"DT")
+3020724
+"^DD",2006.18,2006.18,150,0)
+DOC TOOLBAR^NJ2,0^^DOC;9^K:+X'=X!(X>10)!(X<0)!(X?.E1"."1N.N) X
+"^DD",2006.18,2006.18,150,3)
+Type '0' to hide or '1' to display the toolbar on the Document window.
+"^DD",2006.18,2006.18,150,21,0)
+^.001^1^1^3021010^^^^
+"^DD",2006.18,2006.18,150,21,1,0)
+Show or Hide the toolbar on the Document window.
+"^DD",2006.18,2006.18,150,"DT")
+3020724
+"^DD",2006.18,2006.18,151,0)
+GRP TOOLBAR^NJ2,0^^GROUP;9^K:+X'=X!(X>10)!(X<0)!(X?.E1"."1N.N) X
+"^DD",2006.18,2006.18,151,3)
+Type '0' to hide or '1' to display the toolbar on the Group Abstract window.
+"^DD",2006.18,2006.18,151,21,0)
+^.001^1^1^3021010^^^
+"^DD",2006.18,2006.18,151,21,1,0)
+Show or Hide the toolbar on the Group Abstract window.
+"^DD",2006.18,2006.18,151,"DT")
+3020724
+"^DD",2006.18,2006.18,152,0)
+ABS ROWS^NJ4,0^^ABS;12^K:+X'=X!(X>1000)!(X<1)!(X?.E1"."1N.N) X
+"^DD",2006.18,2006.18,152,3)
+Type a Number between 1 and 1000, 0 Decimal Digits
+"^DD",2006.18,2006.18,152,21,0)
+^.001^1^1^3021010^^^^
+"^DD",2006.18,2006.18,152,21,1,0)
+This field contains the number of rows of images to display in the Abstract window.
+"^DD",2006.18,2006.18,152,"DT")
+3020724
+"^DD",2006.18,2006.18,153,0)
+FULL ROWS^NJ4,0^^FULL;12^K:+X'=X!(X>1000)!(X<1)!(X?.E1"."1N.N) X
+"^DD",2006.18,2006.18,153,3)
+Type a Number between 1 and 1000, 0 Decimal Digits
+"^DD",2006.18,2006.18,153,21,0)
+^.001^1^1^3021010^^^^
+"^DD",2006.18,2006.18,153,21,1,0)
+ This field contains the number of rows of images to display in the Full Resolution window.
+"^DD",2006.18,2006.18,153,"DT")
+3020724
+"^DD",2006.18,2006.18,154,0)
+DOC ROWS^NJ4,0^^DOC;12^K:+X'=X!(X>1000)!(X<1)!(X?.E1"."1N.N) X
+"^DD",2006.18,2006.18,154,3)
+Type a Number between 1 and 1000, 0 Decimal Digits
+"^DD",2006.18,2006.18,154,21,0)
+^.001^1^1^3021010^^^^
+"^DD",2006.18,2006.18,154,21,1,0)
+This field contains the number of rows of images to display in the Document window.
+"^DD",2006.18,2006.18,154,"DT")
+3020724
+"^DD",2006.18,2006.18,155,0)
+GRP ROWS^NJ4,0^^GROUP;12^K:+X'=X!(X>1000)!(X<1)!(X?.E1"."1N.N) X
+"^DD",2006.18,2006.18,155,3)
+Type a Number between 1 and 1000, 0 Decimal Digits
+"^DD",2006.18,2006.18,155,21,0)
+^.001^1^1^3021010^^^^
+"^DD",2006.18,2006.18,155,21,1,0)
+This field contains the number of rows of images in the Group Abstract window.
+"^DD",2006.18,2006.18,155,"DT")
+3020724
+"^DD",2006.18,2006.18,156,0)
+ABS LOCKSIZE^NJ2,0^^ABS;13^K:+X'=X!(X>10)!(X<0)!(X?.E1"."1N.N) X
+"^DD",2006.18,2006.18,156,3)
+Type a Number between 0 and 10, 0 Decimal Digits
+"^DD",2006.18,2006.18,156,21,0)
+^.001^2^2^3021010^^
+"^DD",2006.18,2006.18,156,21,1,0)
+Lock the size of the image when resizing the window. 
+"^DD",2006.18,2006.18,156,21,2,0)
+User will see more images, not bigger images.
+"^DD",2006.18,2006.18,156,"DT")
+3020724
+"^DD",2006.18,2006.18,157,0)
+FULL LOCKSIZE^NJ2,0^^FULL;13^K:+X'=X!(X>10)!(X<0)!(X?.E1"."1N.N) X
+"^DD",2006.18,2006.18,157,3)
+Type a Number between 0 and 10, 0 Decimal Digits
+"^DD",2006.18,2006.18,157,21,0)
+^^2^2^3020724^
+"^DD",2006.18,2006.18,157,21,1,0)
+Lock the size of the image when resizing the window.
+"^DD",2006.18,2006.18,157,21,2,0)
+User will see more images, not bigger images
+"^DD",2006.18,2006.18,157,"DT")
+3020724
+"^DD",2006.18,2006.18,158,0)
+DOC LOCKSIZE^NJ2,0^^DOC;13^K:+X'=X!(X>10)!(X<0)!(X?.E1"."1N.N) X
+"^DD",2006.18,2006.18,158,3)
+Type a Number between 0 and 10, 0 Decimal Digits
+"^DD",2006.18,2006.18,158,21,0)
+^^2^2^3020724^
+"^DD",2006.18,2006.18,158,21,1,0)
+Lock the size of the image when resizing the window.
+"^DD",2006.18,2006.18,158,21,2,0)
+User will see more images, not bigger images
+"^DD",2006.18,2006.18,158,"DT")
+3020724
+"^DD",2006.18,2006.18,159,0)
+GRP LOCKSIZE^NJ2,0^^GROUP;13^K:+X'=X!(X>10)!(X<0)!(X?.E1"."1N.N) X
+"^DD",2006.18,2006.18,159,3)
+Type a Number between 0 and 10, 0 Decimal Digits
+"^DD",2006.18,2006.18,159,21,0)
+^^2^2^3020724^
+"^DD",2006.18,2006.18,159,21,1,0)
+Lock the size of the image when resizing the window.
+"^DD",2006.18,2006.18,159,21,2,0)
+User will see more images, not bigger images
+"^DD",2006.18,2006.18,159,"DT")
+3020724
+"^DD",2006.18,2006.18,163,0)
+COLUMN WIDTHS^F^^IMAGEGRID;7^K:$L(X)>60!($L(X)<3) X
+"^DD",2006.18,2006.18,163,3)
+Answer must be 3-60 characters in length.
+"^DD",2006.18,2006.18,163,21,0)
+^^3^3^3020812^
+"^DD",2006.18,2006.18,163,21,1,0)
+This is a Comma delimited string of widths of the columns 
+"^DD",2006.18,2006.18,163,21,2,0)
+in the image list window.  
+"^DD",2006.18,2006.18,163,21,3,0)
+$p(columnwidths,',',1)= width of column 1 etc.
+"^DD",2006.18,2006.18,163,"DT")
+3020812
+"^DD",2006.18,2006.18,164,0)
+FULL IMAGE WIDTH^NJ4,0^^FULL;6^K:+X'=X!(X>1000)!(X<1)!(X?.E1"."1N.N) X
+"^DD",2006.18,2006.18,164,3)
+Type a Number between 1 and 1000, 0 Decimal Digits
+"^DD",2006.18,2006.18,164,21,0)
+^^1^1^3020819^
+"^DD",2006.18,2006.18,164,21,1,0)
+This is the Width of the Images in the Full Resolution window
+"^DD",2006.18,2006.18,164,"DT")
+3020819
+"^DD",2006.18,2006.18,165,0)
+FULL IMAGE HEIGHT^NJ4,0^^FULL;7^K:+X'=X!(X>1000)!(X<1)!(X?.E1"."1N.N) X
+"^DD",2006.18,2006.18,165,3)
+Type a Number between 1 and 1000, 0 Decimal Digits
+"^DD",2006.18,2006.18,165,21,0)
+^^1^1^3020819^
+"^DD",2006.18,2006.18,165,21,1,0)
+This is the Height of the Images in the Full Resolution window.
+"^DD",2006.18,2006.18,165,"DT")
+3020819
+"^DD",2006.18,2006.18,174,0)
+VIEW REMOTE ABS^S^1:TRUE;0:FALSE;^0;8^Q
+"^DD",2006.18,2006.18,174,3)
+If true, Imaging display will display abstracts located on remote servers. If flase, only abstracts on local servers will be displayed.
+"^DD",2006.18,2006.18,174,21,0)
+^.001^6^6^3021105^^^
+"^DD",2006.18,2006.18,174,21,1,0)
+If True, Imaging display will always display abstracts
+"^DD",2006.18,2006.18,174,21,2,0)
+ even if they are located on remote servers
+"^DD",2006.18,2006.18,174,21,3,0)
+If False, Imaging display will only display abstracts
+"^DD",2006.18,2006.18,174,21,4,0)
+ if they are on local servers.
+"^DD",2006.18,2006.18,174,21,5,0)
+In a Consolidated Site, 'Local Site' is where the User logs into
+"^DD",2006.18,2006.18,174,21,6,0)
+All others are considered 'Remote Sites'.
+"^DD",2006.18,2006.18,174,"DT")
+3021105
+"^DD",2006.18,2006.18,175,0)
+ABS PREVIEW^S^1:YES;0:NO;^LISTWIN1;1^Q
+"^DD",2006.18,2006.18,175,3)
+Set to yes if user wants to preview the abstract in the Image List window.
+"^DD",2006.18,2006.18,175,21,0)
+^^2^2^3030930^
+"^DD",2006.18,2006.18,175,21,1,0)
+if Yes, the Image Abstract will be displayed when the user selects an 
+"^DD",2006.18,2006.18,175,21,2,0)
+an entry from the Image List.
+"^DD",2006.18,2006.18,175,"DT")
+3030930
+"^DD",2006.18,2006.18,176,0)
+REPORT PREVIEW^S^1:YES;0:NO;^LISTWIN1;2^Q
+"^DD",2006.18,2006.18,176,3)
+Set to yes if user wants to preview the report in the image list window
+"^DD",2006.18,2006.18,176,21,0)
+^^2^2^3030930^
+"^DD",2006.18,2006.18,176,21,1,0)
+if Yes, the Image Report will be displayed when the user selects an
+"^DD",2006.18,2006.18,176,21,2,0)
+an entry from the Image List.
+"^DD",2006.18,2006.18,176,"DT")
+3030930
+"^DD",2006.18,2006.18,177,0)
+FILTER DEFAULT^P2005.87'^MAG(2005.87,^LISTWIN1;3^Q
+"^DD",2006.18,2006.18,177,3)
+Enter the default filter for the User.
+"^DD",2006.18,2006.18,177,21,0)
+^.001^2^2^3030930^^^
+"^DD",2006.18,2006.18,177,21,1,0)
+Pointer to the Image List filter file.
+"^DD",2006.18,2006.18,177,21,2,0)
+This is the users default Image Filter.
+"^DD",2006.18,2006.18,177,"DT")
+3030930
+"^DD",2006.18,2006.18,178,0)
+FILTER TABS^S^1:YES;0:NO;^LISTWIN1;4^Q
+"^DD",2006.18,2006.18,178,3)
+Select yes to display the filters as Tabs across the top of the image list window.
+"^DD",2006.18,2006.18,178,21,0)
+^^3^3^3030930^
+"^DD",2006.18,2006.18,178,21,1,0)
+If set to YES (1), the list of filters will be displayed across
+"^DD",2006.18,2006.18,178,21,2,0)
+the top of image list window as Tabs.
+"^DD",2006.18,2006.18,178,21,3,0)
+This will allow quick access to different filters, and subsets of images.
+"^DD",2006.18,2006.18,178,"DT")
+3030930
+"^DD",2006.18,2006.18,179,0)
+FILTER TABS MULTILINE^S^1:YES;0:NO;^LISTWIN1;5^Q
+"^DD",2006.18,2006.18,179,3)
+Enter yes to display the filter tabs as multi-line tabs.
+"^DD",2006.18,2006.18,179,21,0)
+^^7^7^3030930^
+"^DD",2006.18,2006.18,179,21,1,0)
+If YES (1) then filters will be displayed as multi-line tabs when there
+"^DD",2006.18,2006.18,179,21,2,0)
+are too many to fit in one line.  This will allow all filters to be visible
+"^DD",2006.18,2006.18,179,21,3,0)
+when the window is resized, or there are too many to fit in one line.
+"^DD",2006.18,2006.18,179,21,4,0)
+If NO (0) and too many filters exist to display in one line, then scroll
+"^DD",2006.18,2006.18,179,21,5,0)
+buttons will be displayed to the right of the last visible filter.  The 
+"^DD",2006.18,2006.18,179,21,6,0)
+user can use the scroll buttons to access any filters (tabs) that aren't
+"^DD",2006.18,2006.18,179,21,7,0)
+visible.
+"^DD",2006.18,2006.18,179,"DT")
+3030930
+"^DD",2006.18,2006.18,180,0)
+TIU TOP^NJ5,0^^CAPTIU;1^K:+X'=X!(X>10000)!(X<0)!(X?.E1"."1N.N) X
+"^DD",2006.18,2006.18,180,3)
+This is the Top pixel location of the Notes Window in Capture.
+"^DD",2006.18,2006.18,180,21,0)
+^.001^1^1^3060629^^
+"^DD",2006.18,2006.18,180,21,1,0)
+This is the Top pixel location of the Notes Window in Capture.
+"^DD",2006.18,2006.18,180,"DT")
+3060629
+"^DD",2006.18,2006.18,181,0)
+TIU LEFT^NJ5,0^^CAPTIU;2^K:+X'=X!(X>10000)!(X<0)!(X?.E1"."1N.N) X
+"^DD",2006.18,2006.18,181,3)
+This is the Left pixel location of the Notes Window in Capture.
+"^DD",2006.18,2006.18,181,21,0)
+^^1^1^3060629^
+"^DD",2006.18,2006.18,181,21,1,0)
+This is the Left pixel location of the Notes Window in Capture.
+"^DD",2006.18,2006.18,181,"DT")
+3060629
+"^DD",2006.18,2006.18,182,0)
+TIU HEIGHT^NJ5,0^^CAPTIU;3^K:+X'=X!(X>10000)!(X<0)!(X?.E1"."1N.N) X
+"^DD",2006.18,2006.18,182,3)
+This is the pixel Height of the Notes Window in Capture.
+"^DD",2006.18,2006.18,182,21,0)
+^^1^1^3060629^
+"^DD",2006.18,2006.18,182,21,1,0)
+This is the pixel Height of the Notes Window in Capture.
+"^DD",2006.18,2006.18,182,"DT")
+3060629
+"^DD",2006.18,2006.18,183,0)
+TIU WIDTH^NJ5,0^^CAPTIU;4^K:+X'=X!(X>10000)!(X<0)!(X?.E1"."1N.N) X
+"^DD",2006.18,2006.18,183,3)
+This is the pixel Width of the Notes Window in Capture.
+"^DD",2006.18,2006.18,183,21,0)
+^.001^1^1^3060629^^
+"^DD",2006.18,2006.18,183,21,1,0)
+This is the pixel Width of the Notes Window in Capture.
+"^DD",2006.18,2006.18,183,"DT")
+3060629
+"^DD",2006.18,2006.18,184,0)
+TIU PREVIEW HEIGHT^NJ4,0^^CAPTIU;5^K:+X'=X!(X>3000)!(X<0)!(X?.E1"."1N.N) X
+"^DD",2006.18,2006.18,184,3)
+This is the pixel height of the Preview Panel in the Notes Window in Capture.
+"^DD",2006.18,2006.18,184,21,0)
+^^1^1^3060629^
+"^DD",2006.18,2006.18,184,21,1,0)
+This is the pixel height of the Preview Panel in the Notes Window in Capture.
+"^DD",2006.18,2006.18,184,"DT")
+3060629
+"^DD",2006.18,2006.18,185,0)
+TIU TEXT HEIGHT^NJ4,0^^CAPTIU;6^K:+X'=X!(X>3000)!(X<0)!(X?.E1"."1N.N) X
+"^DD",2006.18,2006.18,185,3)
+This is the pixel height of the Text area in the Notes Window in Capture.
+"^DD",2006.18,2006.18,185,21,0)
+^.001^1^1^3060629^^
+"^DD",2006.18,2006.18,185,21,1,0)
+This is the pixel height of the Text area in the Notes Window in Capture.
+"^DD",2006.18,2006.18,185,"DT")
+3060629
+"^DD",2006.18,2006.18,186,0)
+TIU TITLE HEIGHT^NJ4,0^^CAPTIU;7^K:+X'=X!(X>3000)!(X<0)!(X?.E1"."1N.N) X
+"^DD",2006.18,2006.18,186,3)
+This is the pixel height of the Title List in the Notes Window in Capture.
+"^DD",2006.18,2006.18,186,21,0)
+^.001^1^1^3060629^^^
+"^DD",2006.18,2006.18,186,21,1,0)
+This is the pixel height of the Title List in the Notes Window in Capture.
+"^DD",2006.18,2006.18,186,"DT")
+3060629
+"^DD",2006.18,2006.18,187,0)
+TIU PREVIEW ON^S^0:FALSE;1:TRUE;^CAPTIU;8^Q
+"^DD",2006.18,2006.18,187,3)
+Enter '1' to make the Preview Panel in the Notes Window visible.
+"^DD",2006.18,2006.18,187,21,0)
+^^1^1^3060629^
+"^DD",2006.18,2006.18,187,21,1,0)
+Enter '1' to make the Preview Panel in the Notes Window visible.
+"^DD",2006.18,2006.18,187,"DT")
+3060629
+"^DD",2006.18,2006.18,188,0)
+TIU SHOW ADDENDUMS^S^0:FALSE;1:TRUE;^CAPTIU;9^Q
+"^DD",2006.18,2006.18,188,3)
+Enter '1' to show related Addendums in the Note Listing.
+"^DD",2006.18,2006.18,188,21,0)
+^^1^1^3060629^
+"^DD",2006.18,2006.18,188,21,1,0)
+Enter '1' to show related Addendums in the Note Listing.
+"^DD",2006.18,2006.18,188,"DT")
+3060629
+"^DD",2006.18,2006.18,189,0)
+TIU VISIT LOCATION^F^^CAPTIU;10^K:$L(X)>40!($L(X)<1) X
+"^DD",2006.18,2006.18,189,3)
+This is the IEN ~ NAME of the Visit Location default to use for New Notes.
+"^DD",2006.18,2006.18,189,21,0)
+^^1^1^3060629^
+"^DD",2006.18,2006.18,189,21,1,0)
+This is the IEN ~ NAME of the Visit Location default to use for New Notes.
+"^DD",2006.18,2006.18,189,"DT")
+3060629
+"^DD",2006.18,2006.18,190,0)
+TIU STATUS ICONS ON^S^0:FALSE;1:TRUE;^CAPTIU;11^Q
+"^DD",2006.18,2006.18,190,3)
+Enter '1' to use icons in the Note Listing to represent the Note Status.
+"^DD",2006.18,2006.18,190,21,0)
+^^1^1^3060629^
+"^DD",2006.18,2006.18,190,21,1,0)
+Enter '1' to use icons in the Note Listing to represent the Note Status.
+"^DD",2006.18,2006.18,190,"DT")
+3060629
+"^DD",2006.18,2006.18,191,0)
+TIU LIST COUNT^NJ4,0^^CAPTIU;12^K:+X'=X!(X>3000)!(X<0)!(X?.E1"."1N.N) X
+"^DD",2006.18,2006.18,191,3)
+Maximun number of Notes to list.
+"^DD",2006.18,2006.18,191,21,0)
+^^1^1^3060629^
+"^DD",2006.18,2006.18,191,21,1,0)
+Maximun number of Notes to list.
+"^DD",2006.18,2006.18,191,"DT")
+3060629
+"^DD",2006.18,2006.18,192,0)
+TIU LIST MONTHS^NJ3,0^^CAPTIU;13^K:+X'=X!(X>999)!(X<-999)!(X?.E1"."1N.N) X
+"^DD",2006.18,2006.18,192,3)
+List a Patient's Notes for this number of Previous Months.
+"^DD",2006.18,2006.18,192,21,0)
+^^1^1^3060629^
+"^DD",2006.18,2006.18,192,21,1,0)
+List a Patient's Notes for this number of Previous Months.
+"^DD",2006.18,2006.18,192,"DT")
+3060629
+"^DD",2006.18,2006.18,193,0)
+TIU LIST FROM^D^^CAPTIU;14^S %DT="E" D ^%DT S X=Y K:Y<1 X
+"^DD",2006.18,2006.18,193,3)
+List a Patient's note in the Date Range starting with This Date.
+"^DD",2006.18,2006.18,193,21,0)
+^^1^1^3060629^
+"^DD",2006.18,2006.18,193,21,1,0)
+List a Patient's note in the Date Range starting with This Date.
+"^DD",2006.18,2006.18,193,"DT")
+3060629
+"^DD",2006.18,2006.18,194,0)
+TIU LIST TO^D^^CAPTIU;15^S %DT="E" D ^%DT S X=Y K:Y<1 X
+"^DD",2006.18,2006.18,194,3)
+List a Patient's note in the Date Range ending with This Date.
+"^DD",2006.18,2006.18,194,21,0)
+^.001^1^1^3060629^^
+"^DD",2006.18,2006.18,194,21,1,0)
+List a Patient's note in the Date Range ending with This Date.
+"^DD",2006.18,2006.18,194,"DT")
+3060629
+"^DD",2006.18,2006.18,195,0)
+TIU NOTE GLYPHS ON^S^0:FALSE;1:TRUE;^CAPTIU;16^Q
+"^DD",2006.18,2006.18,195,3)
+Enter '1' to use glyphs rather than text to display note info.
+"^DD",2006.18,2006.18,195,21,0)
+^^3^3^3060629^
+"^DD",2006.18,2006.18,195,21,1,0)
+Enter '1' to use glyphs rather than text to display note info.
+"^DD",2006.18,2006.18,195,21,2,0)
+This refers to the Note-Status-Location information field that 
+"^DD",2006.18,2006.18,195,21,3,0)
+is displayed when a Progress Note is selected.
+"^DD",2006.18,2006.18,195,"DT")
+3060629
+"^DD",2006.18,2006.18,196,0)
+TIU USE DEFAULT LOCATION^S^0:FALSE;1:TRUE;^CAPTIU;17^Q
+"^DD",2006.18,2006.18,196,3)
+Enter '1' to Use the defaults for Visit Location.
+"^DD",2006.18,2006.18,196,21,0)
+^^2^2^3060629^
+"^DD",2006.18,2006.18,196,21,1,0)
+Enter '1' to Use the defaults for Visit Location.
+"^DD",2006.18,2006.18,196,21,2,0)
+Enter '0' to be prompted each time a visit location is needed.
+"^DD",2006.18,2006.18,196,"DT")
+3060629
+"^DD",2006.18,2006.18,200,0)
+TELEREADER FORM STYLE^S^1:on;0:off;^TELEREADER_1;1^Q
+"^DD",2006.18,2006.18,200,21,0)
+^^2^2^3060509^
+"^DD",2006.18,2006.18,200,21,1,0)
+This is a set of codes to define the window style for TeleReader (this 
+"^DD",2006.18,2006.18,200,21,2,0)
+field is not currently being used).
+"^DD",2006.18,2006.18,200,"DT")
+3060509
+"^DD",2006.18,2006.18,201,0)
+TELEREADER LEFT^NJ4,0^^TELEREADER_1;2^K:+X'=X!(X>4000)!(X<0)!(X?.E1"."1N.N) X
+"^DD",2006.18,2006.18,201,3)
+Type a Number between 0 and 4000, 0 Decimal Digits
+"^DD",2006.18,2006.18,201,21,0)
+^^1^1^3060509^
+"^DD",2006.18,2006.18,201,21,1,0)
+This defines the left side of the TeleReader window settings.
+"^DD",2006.18,2006.18,201,"DT")
+3060509
+"^DD",2006.18,2006.18,202,0)
+TELEREADER TOP^NJ4,0^^TELEREADER_1;3^K:+X'=X!(X>4000)!(X<0)!(X?.E1"."1N.N) X
+"^DD",2006.18,2006.18,202,3)
+Type a Number between 0 and 4000, 0 Decimal Digits
+"^DD",2006.18,2006.18,202,21,0)
+^^1^1^3060509^
+"^DD",2006.18,2006.18,202,21,1,0)
+This defines the top side of the TeleReader window settings.
+"^DD",2006.18,2006.18,202,"DT")
+3060509
+"^DD",2006.18,2006.18,203,0)
+TELEREADER WIDTH^NJ4,0^^TELEREADER_1;4^K:+X'=X!(X>4000)!(X<10)!(X?.E1"."1N.N) X
+"^DD",2006.18,2006.18,203,3)
+Type a Number between 10 and 4000, 0 Decimal Digits
+"^DD",2006.18,2006.18,203,21,0)
+^^1^1^3060509^
+"^DD",2006.18,2006.18,203,21,1,0)
+This defines the TeleReader window width settings.
+"^DD",2006.18,2006.18,203,"DT")
+3060509
+"^DD",2006.18,2006.18,204,0)
+TELEREADER HEIGHT^NJ4,0^^TELEREADER_1;5^K:+X'=X!(X>4000)!(X<10)!(X?.E1"."1N.N) X
+"^DD",2006.18,2006.18,204,3)
+Type a Number between 10 and 4000, 0 Decimal Digits
+"^DD",2006.18,2006.18,204,21,0)
+^^1^1^3060509^
+"^DD",2006.18,2006.18,204,21,1,0)
+This defines the TeleReader window height settings.
+"^DD",2006.18,2006.18,204,"DT")
+3060509
+"^DD",2006.18,2006.18,205,0)
+TELEREADER SHOW OR NOT SHOW^S^1:SHOW;0:NOT SHOW;^TELEREADER_1;6^Q
+"^DD",2006.18,2006.18,205,21,0)
+^^2^2^3060509^
+"^DD",2006.18,2006.18,205,21,1,0)
+Determines if the user wants to have the TeleReader visible or not (this 
+"^DD",2006.18,2006.18,205,21,2,0)
+field is not currently being used).
+"^DD",2006.18,2006.18,205,"DT")
+3060509
+"^DD",2006.18,2006.18,206,0)
+TELEREADER UNREAD COL WIDTHS^F^^TELEREADER_1;7^K:$L(X)>60!($L(X)<3) X
+"^DD",2006.18,2006.18,206,3)
+Answer must be 3-60 characters in length.
+"^DD",2006.18,2006.18,206,21,0)
+^.001^1^1^3060503^^
+"^DD",2006.18,2006.18,206,21,1,0)
+This determines the width of the columns in the TeleReader Unread Window.
+"^DD",2006.18,2006.18,206,"DT")
+3060330
+"^DD",2006.18,2006.18,207,0)
+TELEREADER AUTO-LAUNCH^S^1:YES;0:NO;^TELEREADER_1;8^Q
+"^DD",2006.18,2006.18,207,21,0)
+^^2^2^3060127^
+"^DD",2006.18,2006.18,207,21,1,0)
+Determines if TeleReader should automatically launch CPRS and Display 
+"^DD",2006.18,2006.18,207,21,2,0)
+when the user selects a study (if they are not already launched).
+"^DD",2006.18,2006.18,207,"DT")
+3060127
+"^DD",2006.18,2006.18,208,0)
+TELEREADER VIEW ALL STUDIES^S^1:YES;0:NO;^TELEREADER_1;9^Q
+"^DD",2006.18,2006.18,208,21,0)
+^^2^2^3060127^
+"^DD",2006.18,2006.18,208,21,1,0)
+Determines if TeleReader should view all studies or only studies 
+"^DD",2006.18,2006.18,208,21,2,0)
+available to the user for resulting.
+"^DD",2006.18,2006.18,208,"DT")
+3060127
+"^DD",2006.18,2006.18,209,0)
+TELEREADER SHOW DIALOG^S^1:YES;0:NO;^TELEREADER_1;10^Q
+"^DD",2006.18,2006.18,209,21,0)
+^^1^1^3060127^
+"^DD",2006.18,2006.18,209,21,1,0)
+Determines if TeleReader should show the Specialties dialog at startup.
+"^DD",2006.18,2006.18,209,"DT")
+3060127
+"^DD",2006.18,2006.18,210,0)
+TELEREADER SAVE SETTINGS^S^1:YES;0:NO;^TELEREADER_1;11^Q
+"^DD",2006.18,2006.18,210,21,0)
+^^2^2^3060509^
+"^DD",2006.18,2006.18,210,21,1,0)
+Determines if the user wants to save their user preferences when the user 
+"^DD",2006.18,2006.18,210,21,2,0)
+logs off.
+"^DD",2006.18,2006.18,210,"DT")
+3060509
+"^DD",2006.18,2006.18,211,0)
+TELEREADER READ COL WIDTHS^F^^TELEREADER_1;12^K:$L(X)>60!($L(X)<3) X
+"^DD",2006.18,2006.18,211,3)
+Answer must be 3-60 characters in length.
+"^DD",2006.18,2006.18,211,21,0)
+^^1^1^3060503^
+"^DD",2006.18,2006.18,211,21,1,0)
+This determines the width of the columns in the TeleReader Read Window.
+"^DD",2006.18,2006.18,211,"DT")
+3060330
+"^DD",2006.18,2006.18,220.01,0)
+SHOW IMAGE TREE^S^0:FALSE;1:TRUE;^ISTYLE;1^Q
+"^DD",2006.18,2006.18,220.01,3)
+Select TRUE to show tree view panel in the Image List window.
+"^DD",2006.18,2006.18,220.01,20,0)
+^.3LA^1^1
+"^DD",2006.18,2006.18,220.01,20,1,0)
+MAG*3*93
+"^DD",2006.18,2006.18,220.01,21,0)
+^^3^3^3090212^
+"^DD",2006.18,2006.18,220.01,21,1,0)
+This field controls visibility of the tree view 
+"^DD",2006.18,2006.18,220.01,21,2,0)
+panel in the Image List window of clinical client
+"^DD",2006.18,2006.18,220.01,21,3,0)
+applications (Display, Capture, etc.).
+"^DD",2006.18,2006.18,220.01,23,0)
+^.001^1^1^3090212^^^^
+"^DD",2006.18,2006.18,220.01,23,1,0)
+Added by the patch MAG*3*93.
+"^DD",2006.18,2006.18,220.01,"DT")
+3090127
+"^DD",2006.18,2006.18,220.02,0)
+ENABLE AUTOSELECT^S^0:FALSE;1:TRUE;^ISTYLE;2^Q
+"^DD",2006.18,2006.18,220.02,3)
+Select TRUE if you want tree and list items automatically selected by mouse pointer hover.
+"^DD",2006.18,2006.18,220.02,20,0)
+^.3LA^1^1
+"^DD",2006.18,2006.18,220.02,20,1,0)
+MAG*3*93
+"^DD",2006.18,2006.18,220.02,21,0)
+^^6^6^3090212^
+"^DD",2006.18,2006.18,220.02,21,1,0)
+This field controls if tree view and list items 
+"^DD",2006.18,2006.18,220.02,21,2,0)
+(in the clinical client applications) are
+"^DD",2006.18,2006.18,220.02,21,3,0)
+automatically selected after the mouse pointer 
+"^DD",2006.18,2006.18,220.02,21,4,0)
+hovers over them for amount of time longer than
+"^DD",2006.18,2006.18,220.02,21,5,0)
+that defined by the value of the DELAY FOR
+"^DD",2006.18,2006.18,220.02,21,6,0)
+AUTOSELECT field (220.03).
+"^DD",2006.18,2006.18,220.02,23,0)
+^.001^1^1^3090212^^^^
+"^DD",2006.18,2006.18,220.02,23,1,0)
+Added by the patch MAG*3*93.
+"^DD",2006.18,2006.18,220.02,"DT")
+3090127
+"^DD",2006.18,2006.18,220.03,0)
+AUTOSELECT SPEED^S^0:Slow;1:Medium;2:Fast;^ISTYLE;3^Q
+"^DD",2006.18,2006.18,220.03,3)
+Select delay for automatic selection of tree and list items.
+"^DD",2006.18,2006.18,220.03,20,0)
+^.3LA^1^1
+"^DD",2006.18,2006.18,220.03,20,1,0)
+MAG*3*93
+"^DD",2006.18,2006.18,220.03,21,0)
+^^11^11^3090216^
+"^DD",2006.18,2006.18,220.03,21,1,0)
+This field determines the amount of time after 
+"^DD",2006.18,2006.18,220.03,21,2,0)
+which a tree or list item is automatically
+"^DD",2006.18,2006.18,220.03,21,3,0)
+selected if the value of the ENABLE AUTOSELECT 
+"^DD",2006.18,2006.18,220.03,21,4,0)
+field (220.02) is TRUE.  Field values are
+"^DD",2006.18,2006.18,220.03,21,5,0)
+interpreted as follows:
+"^DD",2006.18,2006.18,220.03,21,6,0)
+  
+"^DD",2006.18,2006.18,220.03,21,7,0)
+  Code  Description   Delay
+"^DD",2006.18,2006.18,220.03,21,8,0)
+  ----  -----------  -------
+"^DD",2006.18,2006.18,220.03,21,9,0)
+    0   Slow         1000 ms
+"^DD",2006.18,2006.18,220.03,21,10,0)
+    1   Medium        500 ms
+"^DD",2006.18,2006.18,220.03,21,11,0)
+    2   Fast          250 ms
+"^DD",2006.18,2006.18,220.03,23,0)
+^.001^1^1^3090216^^^^
+"^DD",2006.18,2006.18,220.03,23,1,0)
+Added by the patch MAG*3*93.
+"^DD",2006.18,2006.18,220.03,"DT")
+3090216
+"^DD",2006.18,2006.18,220.04,0)
+SYNCHRONIZE IMAGE SELECTIONS^S^0:FALSE;1:TRUE;^ISTYLE;4^Q
+"^DD",2006.18,2006.18,220.04,3)
+Select TRUE to synchronize all image selections in the Image List window.
+"^DD",2006.18,2006.18,220.04,20,0)
+^.3LA^1^1
+"^DD",2006.18,2006.18,220.04,20,1,0)
+MAG*3*93
+"^DD",2006.18,2006.18,220.04,21,0)
+^^4^4^3090212^
+"^DD",2006.18,2006.18,220.04,21,1,0)
+Value of this field controls synchronization of 
+"^DD",2006.18,2006.18,220.04,21,2,0)
+image selections in all components of the Image
+"^DD",2006.18,2006.18,220.04,21,3,0)
+List window of the clinical client applications 
+"^DD",2006.18,2006.18,220.04,21,4,0)
+(Display, Capture, etc.).
+"^DD",2006.18,2006.18,220.04,23,0)
+^.001^1^1^3090212^^^
+"^DD",2006.18,2006.18,220.04,23,1,0)
+Added by the patch MAG*3*93.
+"^DD",2006.18,2006.18,220.04,"DT")
+3090127
+"^DD",2006.18,2006.18,220.05,0)
+WHERE TO SHOW ABSTRACTS^S^0:List Window;1:Separate Window;^ISTYLE;5^Q
+"^DD",2006.18,2006.18,220.05,3)
+Select where list of image abstracts is shown.
+"^DD",2006.18,2006.18,220.05,20,0)
+^.3LA^1^1
+"^DD",2006.18,2006.18,220.05,20,1,0)
+MAG*3*93
+"^DD",2006.18,2006.18,220.05,21,0)
+^.001^3^3^3090302^^
+"^DD",2006.18,2006.18,220.05,21,1,0)
+Value of this field determines whether the list 
+"^DD",2006.18,2006.18,220.05,21,2,0)
+of image abstracts is shown in a panel of the
+"^DD",2006.18,2006.18,220.05,21,3,0)
+Image List window or in a separate window.
+"^DD",2006.18,2006.18,220.05,23,0)
+^.001^1^1^3090302^^^^
+"^DD",2006.18,2006.18,220.05,23,1,0)
+Added by the patch MAG*3*93.
+"^DD",2006.18,2006.18,220.05,"DT")
+3090212
+"^DD",2006.18,2006.18,220.06,0)
+POSITION OF ABSTRACTS^S^0:Left;1:Bottom;2:Below Tree View;3:Separate Window;^ISTYLE;6^Q
+"^DD",2006.18,2006.18,220.06,3)
+Select position of the list of image abstracts.
+"^DD",2006.18,2006.18,220.06,20,0)
+^.3LA^1^1
+"^DD",2006.18,2006.18,220.06,20,1,0)
+MAG*3*93
+"^DD",2006.18,2006.18,220.06,21,0)
+^^4^4^3090212^
+"^DD",2006.18,2006.18,220.06,21,1,0)
+Value of this field controls where the list of 
+"^DD",2006.18,2006.18,220.06,21,2,0)
+image abstracts is shown in the Image List window
+"^DD",2006.18,2006.18,220.06,21,3,0)
+(if the value of the WHERE TO SHOW ABSTRACT field
+"^DD",2006.18,2006.18,220.06,21,4,0)
+(220.05) is TRUE).
+"^DD",2006.18,2006.18,220.06,23,0)
+^.001^1^1^3090212^^^
+"^DD",2006.18,2006.18,220.06,23,1,0)
+Added by the patch MAG*3*93.
+"^DD",2006.18,2006.18,220.06,"DT")
+3090219
+"^DD",2006.18,2006.18,220.07,0)
+WHERE TO SHOW IMAGE^S^0:List Window;1:Separate Window;^ISTYLE;7^Q
+"^DD",2006.18,2006.18,220.07,3)
+Select where images are shown.
+"^DD",2006.18,2006.18,220.07,20,0)
+^.3LA^1^1
+"^DD",2006.18,2006.18,220.07,20,1,0)
+MAG*3*93
+"^DD",2006.18,2006.18,220.07,21,0)
+^.001^3^3^3090212^^^
+"^DD",2006.18,2006.18,220.07,21,1,0)
+Value of this field determines whether images are
+"^DD",2006.18,2006.18,220.07,21,2,0)
+shown in a panel of the Image List window or in a
+"^DD",2006.18,2006.18,220.07,21,3,0)
+separate window.
+"^DD",2006.18,2006.18,220.07,23,0)
+^.001^1^1^3090212^^^
+"^DD",2006.18,2006.18,220.07,23,1,0)
+Added by the patch MAG*3*93.
+"^DD",2006.18,2006.18,220.07,"DT")
+3090127
+"^DD",2006.18,2006.18,220.08,0)
+SHOW TREE SORT BUTTONS^S^0:FALSE;1:TRUE;^ISTYLE;8^Q
+"^DD",2006.18,2006.18,220.08,3)
+Select TRUE to show sort buttons for the tree view in the Image List window.
+"^DD",2006.18,2006.18,220.08,20,0)
+^.3LA^1^1
+"^DD",2006.18,2006.18,220.08,20,1,0)
+MAG*3*93
+"^DD",2006.18,2006.18,220.08,21,0)
+^.001^3^3^3090212^^
+"^DD",2006.18,2006.18,220.08,21,1,0)
+Value of this field controls visibility of the 
+"^DD",2006.18,2006.18,220.08,21,2,0)
+sort buttons above the tree view in the Image 
+"^DD",2006.18,2006.18,220.08,21,3,0)
+List window.
+"^DD",2006.18,2006.18,220.08,23,0)
+^.001^1^1^3090212^^
+"^DD",2006.18,2006.18,220.08,23,1,0)
+Added by the patch MAG*3*93.
+"^DD",2006.18,2006.18,220.08,"DT")
+3090127
+"^DD",2006.18,2006.18,220.09,0)
+AUTOEXPAND TREE ITEMS^S^0:FALSE;1:TRUE;^ISTYLE;9^Q
+"^DD",2006.18,2006.18,220.09,3)
+Select TRUE to automatically expand tree items when they are selected.
+"^DD",2006.18,2006.18,220.09,20,0)
+^.3LA^1^1
+"^DD",2006.18,2006.18,220.09,20,1,0)
+MAG*3*93
+"^DD",2006.18,2006.18,220.09,21,0)
+^^5^5^3090212^
+"^DD",2006.18,2006.18,220.09,21,1,0)
+Value of this field determines if items of the tree
+"^DD",2006.18,2006.18,220.09,21,2,0)
+view in the Image List window are automatically
+"^DD",2006.18,2006.18,220.09,21,3,0)
+expanded when they are selected. At the same time,
+"^DD",2006.18,2006.18,220.09,21,4,0)
+previously expanded items are automatically
+"^DD",2006.18,2006.18,220.09,21,5,0)
+collapsed.
+"^DD",2006.18,2006.18,220.09,23,0)
+^.001^1^1^3090212^^^^
+"^DD",2006.18,2006.18,220.09,23,1,0)
+Added by the patch MAG*3*93.
+"^DD",2006.18,2006.18,220.09,"DT")
+3090212
+"^DD",2006.18,2006.18,220.1,0)
+ABSTRACT LIST SCROLL MODE^S^0:Vertical;1:Horizontal;^ISTYLE;10^Q
+"^DD",2006.18,2006.18,220.1,3)
+Select direction of scrolling in the list of image abstracts.
+"^DD",2006.18,2006.18,220.1,20,0)
+^.3LA^1^1
+"^DD",2006.18,2006.18,220.1,20,1,0)
+MAG*3*93
+"^DD",2006.18,2006.18,220.1,21,0)
+^^3^3^3090212^
+"^DD",2006.18,2006.18,220.1,21,1,0)
+Value of this fields determines the direction of 
+"^DD",2006.18,2006.18,220.1,21,2,0)
+scrolling and presence of the corresponding scroll
+"^DD",2006.18,2006.18,220.1,21,3,0)
+bar in the list of image abstracts.
+"^DD",2006.18,2006.18,220.1,23,0)
+^^1^1^3090212^
+"^DD",2006.18,2006.18,220.1,23,1,0)
+Added by the patch MAG*3*93.
+"^DD",2006.18,2006.18,220.1,"DT")
+3090127
+"^DD",2006.18,2006.18,220.11,0)
+IMAGE LIST SCROLL MODE^S^0:Vertical;1:Horizontal;^ISTYLE;11^Q
+"^DD",2006.18,2006.18,220.11,3)
+Select direction of scrolling in the image list.
+"^DD",2006.18,2006.18,220.11,20,0)
+^.3LA^1^1
+"^DD",2006.18,2006.18,220.11,20,1,0)
+MAG*3*93
+"^DD",2006.18,2006.18,220.11,21,0)
+^^4^4^3090212^
+"^DD",2006.18,2006.18,220.11,21,1,0)
+Value of this fields determines the direction of
+"^DD",2006.18,2006.18,220.11,21,2,0)
+scrolling (if several images are open at the same 
+"^DD",2006.18,2006.18,220.11,21,3,0)
+time) and presence of the corresponding scroll bar
+"^DD",2006.18,2006.18,220.11,21,4,0)
+in the image list.
+"^DD",2006.18,2006.18,220.11,23,0)
+^.001^1^1^3090212^^
+"^DD",2006.18,2006.18,220.11,23,1,0)
+Added by the patch MAG*3*93.
+"^DD",2006.18,2006.18,220.11,"DT")
+3090127
+"^DD",2006.18,2006.18,220.12,0)
+SHOW LIST VIEW^S^0:FALSE;1:TRUE;^ISTYLE;12^Q
+"^DD",2006.18,2006.18,220.12,3)
+Select TRUE to show list view panel in the Image List window.
+"^DD",2006.18,2006.18,220.12,20,0)
+^.3LA^1^1
+"^DD",2006.18,2006.18,220.12,20,1,0)
+MAG*3*93
+"^DD",2006.18,2006.18,220.12,21,0)
+^^3^3^3090212^
+"^DD",2006.18,2006.18,220.12,21,1,0)
+This field controls visibility of the list view
+"^DD",2006.18,2006.18,220.12,21,2,0)
+panel in the Image List window of clinical client
+"^DD",2006.18,2006.18,220.12,21,3,0)
+applications (Display, Capture, etc.).
+"^DD",2006.18,2006.18,220.12,23,0)
+^^1^1^3090212^
+"^DD",2006.18,2006.18,220.12,23,1,0)
+Added by the patch MAG*3*93.
+"^DD",2006.18,2006.18,220.12,"DT")
+3090127
+"^DD",2006.18,2006.18,220.13,0)
+LAYOUT OF IMAGE LIST WINDOW^F^^ISTYLE;13^K:$L(X)>90!($L(X)<1) X
+"^DD",2006.18,2006.18,220.13,3)
+Do not edit value of this field using the FileMan!
+"^DD",2006.18,2006.18,220.13,20,0)
+^.3LA^1^1
+"^DD",2006.18,2006.18,220.13,20,1,0)
+MAG*3*93
+"^DD",2006.18,2006.18,220.13,21,0)
+^.001^3^3^3090212^^
+"^DD",2006.18,2006.18,220.13,21,1,0)
+This field stores a string that determines the
+"^DD",2006.18,2006.18,220.13,21,2,0)
+layout of the Image List window of clinical client
+"^DD",2006.18,2006.18,220.13,21,3,0)
+applications (Display, Capture, etc.).
+"^DD",2006.18,2006.18,220.13,23,0)
+^.001^1^1^3090212^^^^
+"^DD",2006.18,2006.18,220.13,23,1,0)
+Added by the patch MAG*3*93.
+"^DD",2006.18,2006.18,220.13,"DT")
+3090212
+"^DD",2006.18,2006.18,221.01,0)
+VERIFY WINDOW STYLE^S^0:fsMDIChild;2:fsNormal;3:fsStayOnTop;^IVERIFY;1^Q
+"^DD",2006.18,2006.18,221.01,3)
+Select style for the Verification window.
+"^DD",2006.18,2006.18,221.01,20,0)
+^.3LA^1^1
+"^DD",2006.18,2006.18,221.01,20,1,0)
+MAG*3*93
+"^DD",2006.18,2006.18,221.01,21,0)
+^^3^3^3090212^
+"^DD",2006.18,2006.18,221.01,21,1,0)
+Value of this field controls style of the
+"^DD",2006.18,2006.18,221.01,21,2,0)
+Verification window of clinical client
+"^DD",2006.18,2006.18,221.01,21,3,0)
+applications (Display, Capture, etc.).
+"^DD",2006.18,2006.18,221.01,23,0)
+^.001^1^1^3090212^^
+"^DD",2006.18,2006.18,221.01,23,1,0)
+Added by the patch MAG*3*93.
+"^DD",2006.18,2006.18,221.01,"DT")
+3090212
+"^DD",2006.18,2006.18,221.02,0)
+VERIFY LEFT^NJ4,0^^IVERIFY;2^K:+X'=X!(X>4000)!(X<0)!(X?.E1"."1N.N) X
+"^DD",2006.18,2006.18,221.02,3)
+Type a Number between 0 and 4000, 0 Decimal Digits
+"^DD",2006.18,2006.18,221.02,20,0)
+^.3LA^1^1
+"^DD",2006.18,2006.18,221.02,20,1,0)
+MAG*3*93
+"^DD",2006.18,2006.18,221.02,21,0)
+^.001^2^2^3090212^^
+"^DD",2006.18,2006.18,221.02,21,1,0)
+This field stores the horizontal coordinate of the
+"^DD",2006.18,2006.18,221.02,21,2,0)
+left side of the Image Verify window.
+"^DD",2006.18,2006.18,221.02,23,0)
+^.001^1^1^3090212^^
+"^DD",2006.18,2006.18,221.02,23,1,0)
+Added by the patch MAG*3*93.
+"^DD",2006.18,2006.18,221.02,"DT")
+3090212
+"^DD",2006.18,2006.18,221.03,0)
+VERIFY TOP^NJ4,0^^IVERIFY;3^K:+X'=X!(X>4000)!(X<0)!(X?.E1"."1N.N) X
+"^DD",2006.18,2006.18,221.03,3)
+Type a Number between 0 and 4000, 0 Decimal Digits
+"^DD",2006.18,2006.18,221.03,20,0)
+^.3LA^1^1
+"^DD",2006.18,2006.18,221.03,20,1,0)
+MAG*3*93
+"^DD",2006.18,2006.18,221.03,21,0)
+^^2^2^3090212^
+"^DD",2006.18,2006.18,221.03,21,1,0)
+This field stores vertical coordinate of the top 
+"^DD",2006.18,2006.18,221.03,21,2,0)
+side of the Image Verify window.
+"^DD",2006.18,2006.18,221.03,23,0)
+^^1^1^3090212^
+"^DD",2006.18,2006.18,221.03,23,1,0)
+Added by the patch MAG*3*93.
+"^DD",2006.18,2006.18,221.03,"DT")
+3090212
+"^DD",2006.18,2006.18,221.04,0)
+VERIFY WIDTH^NJ4,0^^IVERIFY;4^K:+X'=X!(X>4000)!(X<10)!(X?.E1"."1N.N) X
+"^DD",2006.18,2006.18,221.04,3)
+Type a Number between 10 and 4000, 0 Decimal Digits
+"^DD",2006.18,2006.18,221.04,20,0)
+^.3LA^1^1
+"^DD",2006.18,2006.18,221.04,20,1,0)
+MAG*3*93
+"^DD",2006.18,2006.18,221.04,21,0)
+^^2^2^3090212^
+"^DD",2006.18,2006.18,221.04,21,1,0)
+This field stores the width (in pixels) of the
+"^DD",2006.18,2006.18,221.04,21,2,0)
+Image Verify window.
+"^DD",2006.18,2006.18,221.04,23,0)
+^.001^1^1^3090212^^
+"^DD",2006.18,2006.18,221.04,23,1,0)
+Added by the patch MAG*3*93.
+"^DD",2006.18,2006.18,221.04,"DT")
+3090212
+"^DD",2006.18,2006.18,221.05,0)
+VERIFY HEIGHT^NJ4,0^^IVERIFY;5^K:+X'=X!(X>4000)!(X<10)!(X?.E1"."1N.N) X
+"^DD",2006.18,2006.18,221.05,3)
+Type a Number between 10 and 4000, 0 Decimal Digits
+"^DD",2006.18,2006.18,221.05,20,0)
+^.3LA^1^1
+"^DD",2006.18,2006.18,221.05,20,1,0)
+MAG*3*93
+"^DD",2006.18,2006.18,221.05,21,0)
+^^2^2^3090212^
+"^DD",2006.18,2006.18,221.05,21,1,0)
+This field stores the height (in pixels) of the
+"^DD",2006.18,2006.18,221.05,21,2,0)
+Image Verify window.
+"^DD",2006.18,2006.18,221.05,23,0)
+^.001^1^1^3090212^^
+"^DD",2006.18,2006.18,221.05,23,1,0)
+Added by the patch MAG*3*93.
+"^DD",2006.18,2006.18,221.05,"DT")
+3090212
+"^DD",2006.18,2006.18,221.06,0)
+VERIFY SHOW IMAGE REPORT^S^0:FALSE;1:TRUE;^IVERIFY;6^Q
+"^DD",2006.18,2006.18,221.06,3)
+Select TRUE to show report preview panel in the Image Verify window.
+"^DD",2006.18,2006.18,221.06,20,0)
+^.3LA^1^1
+"^DD",2006.18,2006.18,221.06,20,1,0)
+MAG*3*93
+"^DD",2006.18,2006.18,221.06,21,0)
+^.001^2^2^3090212^^
+"^DD",2006.18,2006.18,221.06,21,1,0)
+Value of this field controls visibility of the
+"^DD",2006.18,2006.18,221.06,21,2,0)
+report preview panel in the Image Verify window.
+"^DD",2006.18,2006.18,221.06,23,0)
+^.001^1^1^3090212^^
+"^DD",2006.18,2006.18,221.06,23,1,0)
+Added by the patch MAG*3*93.
+"^DD",2006.18,2006.18,221.06,"DT")
+3090212
+"^DD",2006.18,2006.18,221.07,0)
+VERIFY SHOW IMAGE INFO^S^0:FALSE;1:TRUE;^IVERIFY;7^Q
+"^DD",2006.18,2006.18,221.07,3)
+ Select TRUE to show image information panel in the Image Verify window.
+"^DD",2006.18,2006.18,221.07,20,0)
+^.3LA^1^1
+"^DD",2006.18,2006.18,221.07,20,1,0)
+MAG*3*93
+"^DD",2006.18,2006.18,221.07,21,0)
+^^3^3^3090212^
+"^DD",2006.18,2006.18,221.07,21,1,0)
+Value of this field controls visibility of the 
+"^DD",2006.18,2006.18,221.07,21,2,0)
+image information panel in the Image Verify 
+"^DD",2006.18,2006.18,221.07,21,3,0)
+window.
+"^DD",2006.18,2006.18,221.07,23,0)
+^^1^1^3090212^
+"^DD",2006.18,2006.18,221.07,23,1,0)
+Added by the patch MAG*3*93.
+"^DD",2006.18,2006.18,221.07,"DT")
+3090212
+"^DD",2006.18,2006.18,221.08,0)
+VERIFY AUTOHIDE QUICK FILTER^S^0:FALSE;1:TRUE;^IVERIFY;8^Q
+"^DD",2006.18,2006.18,221.08,3)
+Select TRUE to automatically hide quick filter panel after search.
+"^DD",2006.18,2006.18,221.08,20,0)
+^.3LA^1^1
+"^DD",2006.18,2006.18,221.08,20,1,0)
+MAG*3*93
+"^DD",2006.18,2006.18,221.08,21,0)
+^^6^6^3090212^
+"^DD",2006.18,2006.18,221.08,21,1,0)
+Value of this field controls visibility of the 
+"^DD",2006.18,2006.18,221.08,21,2,0)
+quick filter panel in the Image Verify window. 
+"^DD",2006.18,2006.18,221.08,21,3,0)
+ 
+"^DD",2006.18,2006.18,221.08,21,4,0)
+If the value is TRUE, then the quick filter panel
+"^DD",2006.18,2006.18,221.08,21,5,0)
+is automatically hidden after the search is done
+"^DD",2006.18,2006.18,221.08,21,6,0)
+and the list of images is loaded.
+"^DD",2006.18,2006.18,221.08,23,0)
+^.001^1^1^3090212^^
+"^DD",2006.18,2006.18,221.08,23,1,0)
+Added by the patch MAG*3*93.
+"^DD",2006.18,2006.18,221.08,"DT")
+3090212
+"^DD",2006.18,2006.18,221.09,0)
+VERIFY SINGLE VIEW ONLY^S^0:FALSE;1:TRUE;^IVERIFY;9^Q
+"^DD",2006.18,2006.18,221.09,3)
+Select TRUE to allow only one image in the Image Viewer during verification.
+"^DD",2006.18,2006.18,221.09,20,0)
+^.3LA^1^1
+"^DD",2006.18,2006.18,221.09,20,1,0)
+MAG*3*93
+"^DD",2006.18,2006.18,221.09,21,0)
+^^4^4^3090212^
+"^DD",2006.18,2006.18,221.09,21,1,0)
+If value of this field is TRUE, then the image 
+"^DD",2006.18,2006.18,221.09,21,2,0)
+viewer can show only a single image during the 
+"^DD",2006.18,2006.18,221.09,21,3,0)
+image verification process. Otherwise, multiple
+"^DD",2006.18,2006.18,221.09,21,4,0)
+images can be opened.
+"^DD",2006.18,2006.18,221.09,23,0)
+^.001^1^1^3090212^^
+"^DD",2006.18,2006.18,221.09,23,1,0)
+Added by the patch MAG*3*93.
+"^DD",2006.18,2006.18,221.09,"DT")
+3090212
+"^DD",2006.18,2006.18,221.1,0)
+VERIFY COLUMN WIDTHS^F^^IVERIFY;10^K:$L(X)>90!($L(X)<1) X
+"^DD",2006.18,2006.18,221.1,3)
+Enter the column widths separated by commas (1-90 characters).
+"^DD",2006.18,2006.18,221.1,20,0)
+^.3LA^1^1
+"^DD",2006.18,2006.18,221.1,20,1,0)
+MAG*3*93
+"^DD",2006.18,2006.18,221.1,21,0)
+^^3^3^3090213^
+"^DD",2006.18,2006.18,221.1,21,1,0)
+This field stores comma separated column widths
+"^DD",2006.18,2006.18,221.1,21,2,0)
+(in pixels) for the image list view in the Image
+"^DD",2006.18,2006.18,221.1,21,3,0)
+Verify window.
+"^DD",2006.18,2006.18,221.1,23,0)
+^.001^1^1^3090213^^
+"^DD",2006.18,2006.18,221.1,23,1,0)
+Added by the patch MAG*3*93.
+"^DD",2006.18,2006.18,221.1,"DT")
+3090212
+"^DD",2006.18,2006.18,222.01,0)
+EDIT WINDOW STYLE^S^0:fsMDIChild;2:fsNormal;3:fsStayOnTop;^IEDIT;1^Q
+"^DD",2006.18,2006.18,222.01,3)
+Select style for the Image Index Edit window.
+"^DD",2006.18,2006.18,222.01,20,0)
+^.3LA^1^1
+"^DD",2006.18,2006.18,222.01,20,1,0)
+MAG*3*93
+"^DD",2006.18,2006.18,222.01,21,0)
+^^3^3^3090213^
+"^DD",2006.18,2006.18,222.01,21,1,0)
+Value of this field controls style of the Image
+"^DD",2006.18,2006.18,222.01,21,2,0)
+Index Edit window of clinical client applications
+"^DD",2006.18,2006.18,222.01,21,3,0)
+(Display, Capture, etc.).
+"^DD",2006.18,2006.18,222.01,23,0)
+^^1^1^3090213^
+"^DD",2006.18,2006.18,222.01,23,1,0)
+Added by the patch MAG*3*93.
+"^DD",2006.18,2006.18,222.01,"DT")
+3090127
+"^DD",2006.18,2006.18,222.02,0)
+EDIT LEFT^NJ4,0^^IEDIT;2^K:+X'=X!(X>4000)!(X<0)!(X?.E1"."1N.N) X
+"^DD",2006.18,2006.18,222.02,3)
+Type a Number between 0 and 4000, 0 Decimal Digits
+"^DD",2006.18,2006.18,222.02,20,0)
+^.3LA^1^1
+"^DD",2006.18,2006.18,222.02,20,1,0)
+MAG*3*93
+"^DD",2006.18,2006.18,222.02,21,0)
+^^2^2^3090213^
+"^DD",2006.18,2006.18,222.02,21,1,0)
+This field stores the horizontal coordinate of the
+"^DD",2006.18,2006.18,222.02,21,2,0)
+left side of the Image Index Edit window.
+"^DD",2006.18,2006.18,222.02,23,0)
+^^1^1^3090213^
+"^DD",2006.18,2006.18,222.02,23,1,0)
+Added by the patch MAG*3*93.
+"^DD",2006.18,2006.18,222.02,"DT")
+3090127
+"^DD",2006.18,2006.18,222.03,0)
+EDIT TOP^NJ4,0^^IEDIT;3^K:+X'=X!(X>4000)!(X<0)!(X?.E1"."1N.N) X
+"^DD",2006.18,2006.18,222.03,3)
+Type a Number between 0 and 4000, 0 Decimal Digits
+"^DD",2006.18,2006.18,222.03,20,0)
+^.3LA^1^1
+"^DD",2006.18,2006.18,222.03,20,1,0)
+MAG*3*93
+"^DD",2006.18,2006.18,222.03,21,0)
+^^2^2^3090302^
+"^DD",2006.18,2006.18,222.03,21,1,0)
+This field stores the vertical coordinate of the
+"^DD",2006.18,2006.18,222.03,21,2,0)
+top side of the Image Index Edit window.
+"^DD",2006.18,2006.18,222.03,23,0)
+^.001^1^1^3090302^^
+"^DD",2006.18,2006.18,222.03,23,1,0)
+Added by the patch MAG*3*93.
+"^DD",2006.18,2006.18,222.03,"DT")
+3090127
+"^DD",2006.18,2006.18,222.04,0)
+EDIT WIDTH^NJ4,0^^IEDIT;4^K:+X'=X!(X>4000)!(X<10)!(X?.E1"."1N.N) X
+"^DD",2006.18,2006.18,222.04,3)
+Type a Number between 10 and 4000, 0 Decimal Digits
+"^DD",2006.18,2006.18,222.04,20,0)
+^.3LA^1^1
+"^DD",2006.18,2006.18,222.04,20,1,0)
+MAG*3*93
+"^DD",2006.18,2006.18,222.04,21,0)
+^^2^2^3090213^
+"^DD",2006.18,2006.18,222.04,21,1,0)
+This field stores the width (in pixels) of the
+"^DD",2006.18,2006.18,222.04,21,2,0)
+Image Index Edit window.
+"^DD",2006.18,2006.18,222.04,23,0)
+^^1^1^3090213^
+"^DD",2006.18,2006.18,222.04,23,1,0)
+Added by the patch MAG*3*93.
+"^DD",2006.18,2006.18,222.04,"DT")
+3090127
+"^DD",2006.18,2006.18,222.05,0)
+EDIT HEIGHT^NJ4,0^^IEDIT;5^K:+X'=X!(X>4000)!(X<10)!(X?.E1"."1N.N) X
+"^DD",2006.18,2006.18,222.05,3)
+Type a Number between 10 and 4000, 0 Decimal Digits
+"^DD",2006.18,2006.18,222.05,20,0)
+^.3LA^1^1
+"^DD",2006.18,2006.18,222.05,20,1,0)
+MAG*3*93
+"^DD",2006.18,2006.18,222.05,21,0)
+^^2^2^3090213^
+"^DD",2006.18,2006.18,222.05,21,1,0)
+This field stores the height (in pixels) of the
+"^DD",2006.18,2006.18,222.05,21,2,0)
+Image Index Edit window.
+"^DD",2006.18,2006.18,222.05,23,0)
+^^1^1^3090213^
+"^DD",2006.18,2006.18,222.05,23,1,0)
+Added by the patch MAG*3*93.
+"^DD",2006.18,2006.18,222.05,"DT")
+3090127
+"^DD",2006.18,2006.18,250,0)
+ANNOTATION CAPTURE FONT NAME^F^^ANNOTCAPTURE;1^K:$L(X)>30!($L(X)<1) X
+"^DD",2006.18,2006.18,250,3)
+Enter the font for Capture annotation tools in 1-30 characters.
+"^DD",2006.18,2006.18,250,21,0)
+^.001^1^1^3120501^^^
+"^DD",2006.18,2006.18,250,21,1,0)
+This defines the text font of the Capture annotation tools. The default is "Arial".
+"^DD",2006.18,2006.18,250,"DT")
+3120426
+"^DD",2006.18,2006.18,251,0)
+ANNOTATION CAPTURE FONT STYLE^S^0:REGULAR;1:BOLD;2:ITALIC;3:BOLD ITALIC;^ANNOTCAPTURE;2^Q
+"^DD",2006.18,2006.18,251,3)
+Enter the text font style of the annotation tools.
+"^DD",2006.18,2006.18,251,21,0)
+2^.001^2^2^3120501^^^^
+"^DD",2006.18,2006.18,251,21,1,0)
+This defines the text font style of the Capture annotation tools.
+"^DD",2006.18,2006.18,251,21,2,0)
+The default is 'Regular'.
+"^DD",2006.18,2006.18,251,"DT")
+3120501
+"^DD",2006.18,2006.18,252,0)
+ANNOTATION CAPTURE FONT SIZE^NJ2,0^^ANNOTCAPTURE;3^K:+X'=X!(X>72)!(X<8)!(X?.E1"."1N.N) X
+"^DD",2006.18,2006.18,252,3)
+Type a number between 8 and 72, 0 decimal digits.
+"^DD",2006.18,2006.18,252,21,0)
+^.001^3^3^3120501^^^^
+"^DD",2006.18,2006.18,252,21,1,0)
+This defines the text font size in points of the Capture annotation tools.
+"^DD",2006.18,2006.18,252,21,2,0)
+Each point is 1/72nd of an inch. A font size of 72 results in letters 1 inch high. 
+"^DD",2006.18,2006.18,252,21,3,0)
+The default is 36.
+"^DD",2006.18,2006.18,252,"DT")
+3120501
+"^DD",2006.18,2006.18,253,0)
+ANNOTATION CAPTURE LINE WIDTH^NJ3,0^^ANNOTCAPTURE;4^K:+X'=X!(X>100)!(X<1)!(X?.E1"."1N.N) X
+"^DD",2006.18,2006.18,253,3)
+Type a number between 1 and 100, 0 decimal digits.
+"^DD",2006.18,2006.18,253,21,0)
+^.001^2^2^3120501^^^^
+"^DD",2006.18,2006.18,253,21,1,0)
+This defines the line width of the Capture annotation tools.
+"^DD",2006.18,2006.18,253,21,2,0)
+The default is 5.
+"^DD",2006.18,2006.18,253,"DT")
+3120501
+"^DD",2006.18,2006.18,254,0)
+ANNOTATION CAPTURE COLOR^NJ8,0^^ANNOTCAPTURE;5^K:+X'=X!(X>99999999)!(X<0)!(X?.E1"."1N.N) X
+"^DD",2006.18,2006.18,254,3)
+Type a number between 0 and 99999999, 0 decimal digits. 
+"^DD",2006.18,2006.18,254,21,0)
+^.001^6^6^3120501^^^^
+"^DD",2006.18,2006.18,254,21,1,0)
+This defines the color of the Capture annotation tools. The default is 32768 (GREEN).
+"^DD",2006.18,2006.18,254,21,2,0)
+For example: 
+"^DD",2006.18,2006.18,254,21,3,0)
+BLACK - 0, WHITE - 16777215, MEDIUM GREY - 10789024, SILVER - 12632256, MAROON - 128, RED - 255
+"^DD",2006.18,2006.18,254,21,4,0)
+OLIVE - 32896, YELLOW - 65535, GREEN - 32768, LIME - 65280, TEAL - 8421376, AQUA - 16776960
+"^DD",2006.18,2006.18,254,21,5,0)
+NAVY - 8388608, BLUE - 16711680, PURPLE - 8388736, FUCHSIA -16711935
+"^DD",2006.18,2006.18,254,21,6,0)
+Reference: AccuSoft ImageGear MD
+"^DD",2006.18,2006.18,254,"DT")
+3120426
+"^DD",2006.18,2006.18,255,0)
+ANNOTATION CAPTURE OPACITY^NJ3,0^^ANNOTCAPTURE;6^K:+X'=X!(X>255)!(X<63)!(X?.E1"."1N.N) X
+"^DD",2006.18,2006.18,255,3)
+Type a number between 63 and 255.
+"^DD",2006.18,2006.18,255,21,0)
+^.001^3^3^3120501^^
+"^DD",2006.18,2006.18,255,21,1,0)
+This defines the opacity of the Capture annotation tools. The default is 159.
+"^DD",2006.18,2006.18,255,21,2,0)
+It is the degree to which light is not allowed to travel through Opaque 
+"^DD",2006.18,2006.18,255,21,3,0)
+context.
+"^DD",2006.18,2006.18,255,"DT")
+3120501
+"^DD",2006.18,2006.18,256,0)
+ANNOTATION CAPTURE ARROW STYLE^S^0:POINTER;1:SOLID;2:OPEN;3:POINTER SOLID;4:NONE;^ANNOTCAPTURE;7^Q
+"^DD",2006.18,2006.18,256,3)
+Enter the arrow style of the Capture annotation tools.
+"^DD",2006.18,2006.18,256,21,0)
+^.001^2^2^3120501^^^^
+"^DD",2006.18,2006.18,256,21,1,0)
+This defines the arrow style of the Capture annotation tools.
+"^DD",2006.18,2006.18,256,21,2,0)
+The default is 0 - Pointer.
+"^DD",2006.18,2006.18,256,"DT")
+3120501
+"^DD",2006.18,2006.18,257,0)
+ANNOTATION CAPTURE ARROWLENGTH^NJ3,0^^ANNOTCAPTURE;8^K:+X'=X!(X>200)!(X<10)!(X?.E1"."1N.N) X
+"^DD",2006.18,2006.18,257,3)
+Type a number between 10 and 200, 0 decimal digits.
+"^DD",2006.18,2006.18,257,21,0)
+^.001^2^2^3120501^^^^
+"^DD",2006.18,2006.18,257,21,1,0)
+This defines the arrow length of the Capture annotation tools.
+"^DD",2006.18,2006.18,257,21,2,0)
+The default is 35.
+"^DD",2006.18,2006.18,257,"DT")
+3120501
+"^DD",2006.18,2006.18,258,0)
+ANNOTATION CAPTURE ARROW ANGLE^NJ2,0^^ANNOTCAPTURE;9^K:+X'=X!(X>60)!(X<10)!(X?.E1"."1N.N) X
+"^DD",2006.18,2006.18,258,3)
+Type a number between 10 and 60 degrees, 0 decimal digits.
+"^DD",2006.18,2006.18,258,21,0)
+^.001^2^2^3120501^^^^
+"^DD",2006.18,2006.18,258,21,1,0)
+This defines the arrow angle of the Capture annotation tools (10-60 degrees).
+"^DD",2006.18,2006.18,258,21,2,0)
+The default is 35 degrees.
+"^DD",2006.18,2006.18,258,"DT")
+3120501
+"^DD",2006.18,2006.18,259,0)
+ANNOTATION CAPTURE G WIN LEFT^NJ5,0^^ANNOTCAPTURE;10^K:+X'=X!(X>99999)!(X<-99999)!(X?.E1"."1N.N) X
+"^DD",2006.18,2006.18,259,3)
+Type a number between -99999 and 99999, 0 decimal digits.
+"^DD",2006.18,2006.18,259,21,0)
+^.001^1^1^3120501^^^^
+"^DD",2006.18,2006.18,259,21,1,0)
+This defines the global setting of the Capture annotation window left position on the screen (dot pixel).
+"^DD",2006.18,2006.18,259,"DT")
+3120426
+"^DD",2006.18,2006.18,260,0)
+ANNOTATION CAPTURE G WIN TOP^NJ5,0^^ANNOTCAPTURE;11^K:+X'=X!(X>99999)!(X<-99999)!(X?.E1"."1N.N) X
+"^DD",2006.18,2006.18,260,3)
+Type a number between -99999 and 99999, 0 decimal digits.
+"^DD",2006.18,2006.18,260,21,0)
+^.001^1^1^3120501^^^
+"^DD",2006.18,2006.18,260,21,1,0)
+This defines the global setting of the Capture annotation window top position on the screen (dot pixel).
+"^DD",2006.18,2006.18,260,"DT")
+3120426
+"^DD",2006.18,2006.18,270,0)
+ANNOTATION DISPLAY FONT NAME^F^^ANNOTDISPLAY;1^K:$L(X)>30!($L(X)<1) X
+"^DD",2006.18,2006.18,270,3)
+Enter the font for Display annotation tools in 1-30 characters.
+"^DD",2006.18,2006.18,270,21,0)
+^.001^1^1^3120501^^^
+"^DD",2006.18,2006.18,270,21,1,0)
+This defines the text font of the Display annotation tools. The default is "Arial".
+"^DD",2006.18,2006.18,270,"DT")
+3120426
+"^DD",2006.18,2006.18,271,0)
+ANNOTATION DISPLAY FONT STYLE^S^0:REGULAR;1:BOLD;2:ITALIC;3:BOLD ITALIC;^ANNOTDISPLAY;2^Q
+"^DD",2006.18,2006.18,271,3)
+Enter the text font style of the annotation tools.
+"^DD",2006.18,2006.18,271,21,0)
+^.001^1^1^3120501^^^
+"^DD",2006.18,2006.18,271,21,1,0)
+This defines the text font style of the Display annotation tools. The default is 'Regular'. 
+"^DD",2006.18,2006.18,271,"DT")
+3120501
+"^DD",2006.18,2006.18,272,0)
+ANNOTATION DISPLAY FONT SIZE^NJ2,0^^ANNOTDISPLAY;3^K:+X'=X!(X>72)!(X<8)!(X?.E1"."1N.N) X
+"^DD",2006.18,2006.18,272,3)
+Type a number between 8 and 72, 0 decimal digits.
+"^DD",2006.18,2006.18,272,21,0)
+^.001^3^3^3120501^^^^
+"^DD",2006.18,2006.18,272,21,1,0)
+This defines the text font size in points of the Display annotation tools.
+"^DD",2006.18,2006.18,272,21,2,0)
+Each point is 1/72nd of an inch. A font size of 72 results in letters 1 inch high.
+"^DD",2006.18,2006.18,272,21,3,0)
+The default is 36.
+"^DD",2006.18,2006.18,272,"DT")
+3120501
+"^DD",2006.18,2006.18,273,0)
+ANNOTATION DISPLAY LINE WIDTH^NJ3,0^^ANNOTDISPLAY;4^K:+X'=X!(X>999)!(X<0)!(X?.E1"."1N.N) X
+"^DD",2006.18,2006.18,273,3)
+Type a number between 0 and 999, 0 decimal digits.
+"^DD",2006.18,2006.18,273,21,0)
+^.001^2^2^3120501^^^^
+"^DD",2006.18,2006.18,273,21,1,0)
+This defines the line width of the Display annotation tools.
+"^DD",2006.18,2006.18,273,21,2,0)
+The default is 5.
+"^DD",2006.18,2006.18,273,"DT")
+3120426
+"^DD",2006.18,2006.18,274,0)
+ANNOTATION DISPLAY COLOR^NJ8,0^^ANNOTDISPLAY;5^K:+X'=X!(X>99999999)!(X<0)!(X?.E1"."1N.N) X
+"^DD",2006.18,2006.18,274,3)
+Type a number between 0 and 99999999 for Color, 0 decimal digits. 
+"^DD",2006.18,2006.18,274,21,0)
+^.001^6^6^3120501^^^^
+"^DD",2006.18,2006.18,274,21,1,0)
+This defines the color of the Display annotation tools.
+"^DD",2006.18,2006.18,274,21,2,0)
+The default is 32768 (GREEN). For example: BLACK - 0, WHITE - 16777215, MEDIUM GREY - 10789024, 
+"^DD",2006.18,2006.18,274,21,3,0)
+SILVER - 12632256, MAROON - 128, RED - 255 OLIVE - 32896, YELLOW - 65535, GREEN - 32768, 
+"^DD",2006.18,2006.18,274,21,4,0)
+LIME - 65280, TEAL - 8421376, AQUA - 16776960 NAVY - 8388608, BLUE - 16711680, PURPLE - 8388736, 
+"^DD",2006.18,2006.18,274,21,5,0)
+FUCHSIA -16711935
+"^DD",2006.18,2006.18,274,21,6,0)
+Reference: AccuSoft ImageGear MD
+"^DD",2006.18,2006.18,274,"DT")
+3120426
+"^DD",2006.18,2006.18,275,0)
+ANNOTATION DISPLAY OPACITY^NJ3,0^^ANNOTDISPLAY;6^K:+X'=X!(X>255)!(X<63)!(X?.E1"."1N.N) X
+"^DD",2006.18,2006.18,275,3)
+Type a number between 63 and 255.
+"^DD",2006.18,2006.18,275,21,0)
+^.001^2^2^3120501^^^^
+"^DD",2006.18,2006.18,275,21,1,0)
+This defines the opacity of the Display annotation tools. The default is 159.
+"^DD",2006.18,2006.18,275,21,2,0)
+It is the degree to which light is not allowed to travel through Opaque context.
+"^DD",2006.18,2006.18,275,"DT")
+3120501
+"^DD",2006.18,2006.18,276,0)
+ANNOTATION DISPLAY ARROW STYLE^S^0:POINTER;1:SOLID;2:OPEN;3:POINTER SOLID;4:NONE;^ANNOTDISPLAY;7^Q
+"^DD",2006.18,2006.18,276,3)
+Enter the arrow style of the Display annotation tools.
+"^DD",2006.18,2006.18,276,21,0)
+^.001^2^2^3120501^^^^
+"^DD",2006.18,2006.18,276,21,1,0)
+This defines the arrow style of the Display annotation tools.
+"^DD",2006.18,2006.18,276,21,2,0)
+The default is 0 - Pointer.
+"^DD",2006.18,2006.18,276,"DT")
+3120501
+"^DD",2006.18,2006.18,277,0)
+ANNOTATION DISPLAY ARROWLENGTH^NJ3,0^^ANNOTDISPLAY;8^K:+X'=X!(X>200)!(X<10)!(X?.E1"."1N.N) X
+"^DD",2006.18,2006.18,277,3)
+Type a number between 10 and 200, 0 decimal digits.
+"^DD",2006.18,2006.18,277,21,0)
+^.001^2^2^3120501^^^
+"^DD",2006.18,2006.18,277,21,1,0)
+This defines the arrow length of the Display annotation tools.
+"^DD",2006.18,2006.18,277,21,2,0)
+The default is 35.
+"^DD",2006.18,2006.18,277,"DT")
+3120501
+"^DD",2006.18,2006.18,278,0)
+ANNOTATION DISPLAY ARROW ANGLE^NJ2,0^^ANNOTDISPLAY;9^K:+X'=X!(X>60)!(X<10)!(X?.E1"."1N.N) X
+"^DD",2006.18,2006.18,278,3)
+Type a number between 10 and 60, 0 decimal digits.
+"^DD",2006.18,2006.18,278,21,0)
+^.001^2^2^3120501^^^^
+"^DD",2006.18,2006.18,278,21,1,0)
+This defines the arrow angle of the Display annotation tools (10-60 degrees).
+"^DD",2006.18,2006.18,278,21,2,0)
+The default is 35 degrees.
+"^DD",2006.18,2006.18,278,"DT")
+3120501
+"^DD",2006.18,2006.18,279,0)
+ANNOTATION DISPLAY G WIN LEFT^NJ5,0^^ANNOTDISPLAY;10^K:+X'=X!(X>99999)!(X<-99999)!(X?.E1"."1N.N) X
+"^DD",2006.18,2006.18,279,3)
+Type a number between -99999 and 99999, 0 decimal digits.
+"^DD",2006.18,2006.18,279,21,0)
+^.001^1^1^3120501^^
+"^DD",2006.18,2006.18,279,21,1,0)
+This defines the global setting of the Display annotation window left position on the screen (dot pixel). 
+"^DD",2006.18,2006.18,279,"DT")
+3120426
+"^DD",2006.18,2006.18,280,0)
+ANNOTATION DISPLAY G WIN TOP^NJ5,0^^ANNOTDISPLAY;11^K:+X'=X!(X>99999)!(X<-99999)!(X?.E1"."1N.N) X
+"^DD",2006.18,2006.18,280,3)
+Type a number between -99999 and 99999, 0 decimal digits.
+"^DD",2006.18,2006.18,280,21,0)
+^.001^1^1^3120501^^
+"^DD",2006.18,2006.18,280,21,1,0)
+This defines the global setting of the Display annotation window top position on the screen (dot pixel).
+"^DD",2006.18,2006.18,280,"DT")
+3120426
+"^DD",2006.18,2006.18,281,0)
+ANNOTATION DISPLAY AUTO SHOW^S^1:YES;0:NO;^ANNOTDISPLAY;12^Q
+"^DD",2006.18,2006.18,281,3)
+Enter 'YES' to auto-show the annotation of Display image.
+"^DD",2006.18,2006.18,281,21,0)
+^.001^1^1^3120430^^
+"^DD",2006.18,2006.18,281,21,1,0)
+This defines the auto-show annotation of Display image.
+"^DD",2006.18,2006.18,281,"DT")
+3120426
+"^DD",2006.18,2006.18,300,0)
+RIVER AUTO CONNECT ENABLED^S^1:ENABLED;0:DISABLED;^RIVER;1^Q
+"^DD",2006.18,2006.18,300,21,0)
+^^2^2^3060403^
+"^DD",2006.18,2006.18,300,21,1,0)
+Determines if the display client should automatically connect to remote 
+"^DD",2006.18,2006.18,300,21,2,0)
+sites for the selected patient.
+"^DD",2006.18,2006.18,300,"DT")
+3060403
+"^DD",2006.18,2006.18,301,0)
+RIVER CONNECT VISN ONLY^S^1:YES;0:NO;^RIVER;2^Q
+"^DD",2006.18,2006.18,301,21,0)
+^^2^2^3060403^
+"^DD",2006.18,2006.18,301,21,1,0)
+Determines if the display client should automatically connect to remote 
+"^DD",2006.18,2006.18,301,21,2,0)
+sites only in the users VISN.
+"^DD",2006.18,2006.18,301,"DT")
+3060403
+"^DD",2006.18,2006.18,302,0)
+RIVER HIDE EMPTY SITES^S^1:YES;0:NO;^RIVER;3^Q
+"^DD",2006.18,2006.18,302,21,0)
+^^2^2^3060509^
+"^DD",2006.18,2006.18,302,21,1,0)
+Determines if the display client should hide sites with 0 (zero) images on
+"^DD",2006.18,2006.18,302,21,2,0)
+the RIV (Remote Image View) toolbar.
+"^DD",2006.18,2006.18,302,"DT")
+3060509
+"^DD",2006.18,2006.18,303,0)
+RIVER HIDE DISCONNECTED SITES^S^1:YES;0:NO;^RIVER;4^Q
+"^DD",2006.18,2006.18,303,3)
+
+"^DD",2006.18,2006.18,303,21,0)
+^^2^2^3060509^
+"^DD",2006.18,2006.18,303,21,1,0)
+Determines if the display client should hide disconnected sites on the 
+"^DD",2006.18,2006.18,303,21,2,0)
+RIV (Remote Image View) toolbar.
+"^DD",2006.18,2006.18,303,"DT")
+3060509
+"^DD",2006.18,2006.18,304,0)
+RIVER AUTO CONNECT DOD^S^0:NO;1:YES;^RIVER;5^Q
+"^DD",2006.18,2006.18,304,3)
+Enter 'YES' if you want to auto connect to DoD sites.
+"^DD",2006.18,2006.18,304,21,0)
+^^2^2^3101221^
+"^DD",2006.18,2006.18,304,21,1,0)
+Determines if the display client should automatically connect to 
+"^DD",2006.18,2006.18,304,21,2,0)
+DoD sites for the selected patient.
+"^DD",2006.18,2006.18,304,23,0)
+^.001^1^1^3101214^^^
+"^DD",2006.18,2006.18,304,23,1,0)
+Added in patch MAG*3.0*117.
+"^DD",2006.18,2006.18,304,"DT")
+3101221
+"^DD",2006.18,2006.1867,0)
+PATIENT LIST SUB-FIELD^^.01^1
+"^DD",2006.18,2006.1867,0,"DT")
+2980410
+"^DD",2006.18,2006.1867,0,"IX","B",2006.1867,.01)
+
+"^DD",2006.18,2006.1867,0,"NM","PATIENT LIST")
+
+"^DD",2006.18,2006.1867,0,"UP")
+2006.18
+"^DD",2006.18,2006.1867,.01,0)
+PATIENT LIST^P2'^DPT(^0;1^Q
+"^DD",2006.18,2006.1867,.01,1,0)
+^.1
+"^DD",2006.18,2006.1867,.01,1,1,0)
+2006.1867^B
+"^DD",2006.18,2006.1867,.01,1,1,1)
+S ^MAG(2006.18,DA(1),"PATLIST","B",$E(X,1,30),DA)=""
+"^DD",2006.18,2006.1867,.01,1,1,2)
+K ^MAG(2006.18,DA(1),"PATLIST","B",$E(X,1,30),DA)
+"^DD",2006.18,2006.1867,.01,3)
+List of patients that the user wants to have easy access to.
+"^DD",2006.18,2006.1867,.01,21,0)
+^^3^3^2980410^
+"^DD",2006.18,2006.1867,.01,21,1,0)
+The user can define a list of his/her patients.  This list will be displayed
+"^DD",2006.18,2006.1867,.01,21,2,0)
+on the Imaging Workstation menu option: 'Patients'. Users may add to and remove from
+"^DD",2006.18,2006.1867,.01,21,3,0)
+to this list as they please.
+"^DD",2006.18,2006.1867,.01,"DT")
+2980410
+"^DIC",2006.18,2006.18,0)
+IMAGING USER PREFERENCE^2006.18
+"^DIC",2006.18,2006.18,0,"GL")
+^MAG(2006.18,
+"^DIC",2006.18,2006.18,"%",0)
+^1.005^1^1
+"^DIC",2006.18,2006.18,"%",1,0)
+MAG
+"^DIC",2006.18,2006.18,"%","B","MAG",1)
+
+"^DIC",2006.18,2006.18,"%D",0)
+^^29^29^3010619^
+"^DIC",2006.18,2006.18,"%D",1,0)
+ +---------------------------------------------------------------+
+"^DIC",2006.18,2006.18,"%D",2,0)
+ |                                                               |
+"^DIC",2006.18,2006.18,"%D",3,0)
+ | Property of the US Government.                                |
+"^DIC",2006.18,2006.18,"%D",4,0)
+ | No permission to copy or redistribute this software is given. |
+"^DIC",2006.18,2006.18,"%D",5,0)
+ | Use of unreleased versions of this software requires the user |
+"^DIC",2006.18,2006.18,"%D",6,0)
+ | to execute a written test agreement with the VistA Imaging    |
+"^DIC",2006.18,2006.18,"%D",7,0)
+ | Development Office of the Department of Veterans Affairs,     |
+"^DIC",2006.18,2006.18,"%D",8,0)
+ | telephone (301) 734-0100.                                     |
+"^DIC",2006.18,2006.18,"%D",9,0)
+ |                                                               |
+"^DIC",2006.18,2006.18,"%D",10,0)
+ | The Food and Drug Administration classifies this software as  |
+"^DIC",2006.18,2006.18,"%D",11,0)
+ | a medical device.  As such, it may not be changed in any way. |
+"^DIC",2006.18,2006.18,"%D",12,0)
+ | Modifications to this software may result in an adulterated   |
+"^DIC",2006.18,2006.18,"%D",13,0)
+ | medical device under 21CFR820, the use of which is considered |
+"^DIC",2006.18,2006.18,"%D",14,0)
+ | to be a violation of US Federal Statutes.                     |
+"^DIC",2006.18,2006.18,"%D",15,0)
+ |                                                               |
+"^DIC",2006.18,2006.18,"%D",16,0)
+ +---------------------------------------------------------------+
+"^DIC",2006.18,2006.18,"%D",17,0)
+ 
+"^DIC",2006.18,2006.18,"%D",18,0)
+This file keeps user preferences for placements of the Imaging System
+"^DIC",2006.18,2006.18,"%D",19,0)
+windows components.  
+"^DIC",2006.18,2006.18,"%D",20,0)
+ 
+"^DIC",2006.18,2006.18,"%D",21,0)
+For example:
+"^DIC",2006.18,2006.18,"%D",22,0)
+         . window placement: top, left, height, width, 
+"^DIC",2006.18,2006.18,"%D",23,0)
+                  if it is standalone or MDIChild;
+"^DIC",2006.18,2006.18,"%D",24,0)
+         . font for reports;
+"^DIC",2006.18,2006.18,"%D",25,0)
+         . acquire images from archive (jukebox)
+"^DIC",2006.18,2006.18,"%D",26,0)
+         . number of abstract to display in abstract window
+"^DIC",2006.18,2006.18,"%D",27,0)
+         . display Radiology exam listing
+"^DIC",2006.18,2006.18,"%D",28,0)
+         . patient listings
+"^DIC",2006.18,2006.18,"%D",29,0)
+         . and more to be added for future development.
+"^DIC",2006.18,"B","IMAGING USER PREFERENCE",2006.18)
+
+**END**
+**END**

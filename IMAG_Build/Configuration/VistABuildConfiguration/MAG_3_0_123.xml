@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<build xmlns="http://va.gov/VistA/kids/manifest" name="MAG*3.0*123" patchName="IHS Patient Identifier" patch="123">
+  <components>
+    <securityKeys />
+    <parameterDefinitions />
+    <printTemplates />
+    <sortTemplates />
+    <menuOptions />
+    <rpcs />
+    <dataDictionaries>
+      <dataDictionary export="DD_2006_563.KID" />
+    </dataDictionaries>
+    <hl7s />
+    <routines>
+      <routine export="MAG7RS.RTN" />
+      <routine export="MAGDCCS.RTN" />
+      <routine export="MAGDCCS2.RTN" />
+      <routine export="MAGDCCSD.RTN" />
+      <routine export="MAGDHLS.RTN" />
+      <routine export="MAGDIR81.RTN" />
+      <routine export="MAGDIR8A.RTN" />
+      <routine export="MAGDLB1.RTN" />
+      <routine export="MAGDLB12.RTN" />
+      <routine export="MAGDLB9.RTN" />
+      <routine export="MAGDLBAA.RTN" />
+      <routine export="MAGDQR03.RTN" />
+      <routine export="MAGDQR04.RTN" />
+      <routine export="MAGDQR21.RTN" />
+      <routine export="MAGDRA1.RTN" />
+      <routine export="MAGDRA2.RTN" />
+      <routine export="MAGDRAHL.RTN" />
+      <routine export="MAGDRPC3.RTN" />
+      <routine export="MAGDRPC9.RTN" />
+      <routine export="MAGDRPCA.RTN" />
+      <routine export="MAGDTR05.RTN" />
+      <routine export="MAGIP123.RTN" />
+      <routine export="MAGSPID.RTN" />
+    </routines>
+    <protocols />
+  </components>
+</build>

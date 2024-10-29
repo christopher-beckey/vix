@@ -1,0 +1,302 @@
+KIDS Distribution saved on Oct 04, 2000@15:14:02
+File export for VSS
+**KIDS**:Z VSS FILE 0.1T^
+
+**INSTALL NAME**
+Z VSS FILE 0.1T
+"BLD",1195,0)
+Z VSS FILE 0.1T^^0^3001004^n
+"BLD",1195,1,0)
+^^1^1^3000906^
+"BLD",1195,1,1,0)
+KIDS file for one single file
+"BLD",1195,4,0)
+^9.64PA^2006^1
+"BLD",1195,4,2006,0)
+2006
+"BLD",1195,4,2006,222)
+y^y^f^^^^n
+"BLD",1195,4,"B",2006,2006)
+
+"BLD",1195,"KRN",0)
+^9.67PA^19^17
+"BLD",1195,"KRN",.4,0)
+.4
+"BLD",1195,"KRN",.401,0)
+.401
+"BLD",1195,"KRN",.402,0)
+.402
+"BLD",1195,"KRN",.403,0)
+.403
+"BLD",1195,"KRN",.5,0)
+.5
+"BLD",1195,"KRN",.84,0)
+.84
+"BLD",1195,"KRN",3.6,0)
+3.6
+"BLD",1195,"KRN",3.8,0)
+3.8
+"BLD",1195,"KRN",9.2,0)
+9.2
+"BLD",1195,"KRN",9.8,0)
+9.8
+"BLD",1195,"KRN",19,0)
+19
+"BLD",1195,"KRN",19.1,0)
+19.1
+"BLD",1195,"KRN",101,0)
+101
+"BLD",1195,"KRN",409.61,0)
+409.61
+"BLD",1195,"KRN",771,0)
+771
+"BLD",1195,"KRN",870,0)
+870
+"BLD",1195,"KRN",8994,0)
+8994
+"BLD",1195,"KRN","B",.4,.4)
+
+"BLD",1195,"KRN","B",.401,.401)
+
+"BLD",1195,"KRN","B",.402,.402)
+
+"BLD",1195,"KRN","B",.403,.403)
+
+"BLD",1195,"KRN","B",.5,.5)
+
+"BLD",1195,"KRN","B",.84,.84)
+
+"BLD",1195,"KRN","B",3.6,3.6)
+
+"BLD",1195,"KRN","B",3.8,3.8)
+
+"BLD",1195,"KRN","B",9.2,9.2)
+
+"BLD",1195,"KRN","B",9.8,9.8)
+
+"BLD",1195,"KRN","B",19,19)
+
+"BLD",1195,"KRN","B",19.1,19.1)
+
+"BLD",1195,"KRN","B",101,101)
+
+"BLD",1195,"KRN","B",409.61,409.61)
+
+"BLD",1195,"KRN","B",771,771)
+
+"BLD",1195,"KRN","B",870,870)
+
+"BLD",1195,"KRN","B",8994,8994)
+
+"FIA",2006)
+IMAGING MOTD
+"FIA",2006,0)
+^MAG(2006,"MOTD",
+"FIA",2006,0,0)
+2006O
+"FIA",2006,0,1)
+y^y^f^^^^n
+"FIA",2006,0,10)
+
+"FIA",2006,0,11)
+
+"FIA",2006,0,"RLRO")
+
+"FIA",2006,2006)
+0
+"FIA",2006,2006.04)
+0
+"MBREQ")
+0
+"QUES","XPF1",0)
+Y
+"QUES","XPF1","??")
+^D REP^XPDH
+"QUES","XPF1","A")
+Shall I write over your |FLAG| File
+"QUES","XPF1","B")
+YES
+"QUES","XPF1","M")
+D XPF1^XPDIQ
+"QUES","XPF2",0)
+Y
+"QUES","XPF2","??")
+^D DTA^XPDH
+"QUES","XPF2","A")
+Want my data |FLAG| yours
+"QUES","XPF2","B")
+YES
+"QUES","XPF2","M")
+D XPF2^XPDIQ
+"QUES","XPI1",0)
+YO
+"QUES","XPI1","??")
+^D INHIBIT^XPDH
+"QUES","XPI1","A")
+Want KIDS to INHIBIT LOGONs during the install
+"QUES","XPI1","B")
+YES
+"QUES","XPI1","M")
+D XPI1^XPDIQ
+"QUES","XPM1",0)
+PO^VA(200,:EM
+"QUES","XPM1","??")
+^D MG^XPDH
+"QUES","XPM1","A")
+Enter the Coordinator for Mail Group '|FLAG|'
+"QUES","XPM1","B")
+
+"QUES","XPM1","M")
+D XPM1^XPDIQ
+"QUES","XPO1",0)
+Y
+"QUES","XPO1","??")
+^D MENU^XPDH
+"QUES","XPO1","A")
+Want KIDS to Rebuild Menu Trees Upon Completion of Install
+"QUES","XPO1","B")
+YES
+"QUES","XPO1","M")
+D XPO1^XPDIQ
+"QUES","XPZ1",0)
+Y
+"QUES","XPZ1","??")
+^D OPT^XPDH
+"QUES","XPZ1","A")
+Want to DISABLE Scheduled Options, Menu Options, and Protocols
+"QUES","XPZ1","B")
+YES
+"QUES","XPZ1","M")
+D XPZ1^XPDIQ
+"QUES","XPZ2",0)
+Y
+"QUES","XPZ2","??")
+^D RTN^XPDH
+"QUES","XPZ2","A")
+Want to MOVE routines to other CPUs
+"QUES","XPZ2","B")
+NO
+"QUES","XPZ2","M")
+D XPZ2^XPDIQ
+"SEC","^DIC",2006,2006,0,"AUDIT")
+
+"SEC","^DIC",2006,2006,0,"DD")
+#
+"SEC","^DIC",2006,2006,0,"DEL")
+#
+"SEC","^DIC",2006,2006,0,"LAYGO")
+#
+"SEC","^DIC",2006,2006,0,"RD")
+#
+"SEC","^DIC",2006,2006,0,"WR")
+#
+"VER")
+8.0^22.0
+"^DD",2006,2006,0)
+FIELD^^1^2
+"^DD",2006,2006,0,"DDA")
+N
+"^DD",2006,2006,0,"DT")
+2950324
+"^DD",2006,2006,0,"IX","B",2006,.01)
+
+"^DD",2006,2006,0,"NM","IMAGING MOTD")
+
+"^DD",2006,2006,.01,0)
+NAME^RF^^0;1^K:$L(X)>30!($L(X)<3)!'(X'?1P.E) X
+"^DD",2006,2006,.01,1,0)
+^.1
+"^DD",2006,2006,.01,1,1,0)
+2006^B
+"^DD",2006,2006,.01,1,1,1)
+S ^MAG(2006,"MOTD","B",$E(X,1,30),DA)=""
+"^DD",2006,2006,.01,1,1,2)
+K ^MAG(2006,"MOTD","B",$E(X,1,30),DA)
+"^DD",2006,2006,.01,3)
+Answer must be 3-30 characters in length.
+"^DD",2006,2006,.01,21,0)
+^^4^4^2950324^
+"^DD",2006,2006,.01,21,1,0)
+This file contains the message contents that are displayed at
+"^DD",2006,2006,.01,21,2,0)
+workstation logon time.  There should be an entry for NORMAL
+"^DD",2006,2006,.01,21,3,0)
+MESSAGE that will be displayed.  This can be changed to reflect
+"^DD",2006,2006,.01,21,4,0)
+new features/software available from the workstation.
+"^DD",2006,2006,.01,"DT")
+2950324
+"^DD",2006,2006,1,0)
+MOTD TEXT^2006.04^^1;0
+"^DD",2006,2006.04,0)
+MOTD TEXT SUB-FIELD^^.01^1
+"^DD",2006,2006.04,0,"DT")
+2950324
+"^DD",2006,2006.04,0,"NM","MOTD TEXT")
+
+"^DD",2006,2006.04,0,"UP")
+2006
+"^DD",2006,2006.04,.01,0)
+MOTD TEXT^W^^0;1^Q
+"^DD",2006,2006.04,.01,3)
+Enter text to be displayed at workstation logon time.
+"^DD",2006,2006.04,.01,21,0)
+^^2^2^2950324^
+"^DD",2006,2006.04,.01,21,1,0)
+This word processing text will be displayed at workstation logon
+"^DD",2006,2006.04,.01,21,2,0)
+time.
+"^DD",2006,2006.04,.01,"DT")
+2950324
+"^DIC",2006,2006,0)
+IMAGING MOTD^2006
+"^DIC",2006,2006,0,"GL")
+^MAG(2006,"MOTD",
+"^DIC",2006,2006,"%D",0)
+^^19^19^3000510
+"^DIC",2006,2006,"%D",1,0)
+ +---------------------------------------------------------------+
+"^DIC",2006,2006,"%D",2,0)
+ |                                                               |
+"^DIC",2006,2006,"%D",3,0)
+ | Property of the US Government.                                |
+"^DIC",2006,2006,"%D",4,0)
+ | No permission to copy or redistribute this software is given. |
+"^DIC",2006,2006,"%D",5,0)
+ | Use of unreleased versions of this software requires the user |
+"^DIC",2006,2006,"%D",6,0)
+ | to execute a written test agreement with the VistA Imaging    |
+"^DIC",2006,2006,"%D",7,0)
+ | Development Office of the Department of Veterans Affairs,     |
+"^DIC",2006,2006,"%D",8,0)
+ | telephone (301) 734-0100.                                     |
+"^DIC",2006,2006,"%D",9,0)
+ |                                                               |
+"^DIC",2006,2006,"%D",10,0)
+ | The Food and Drug Administration classifies this software as  |
+"^DIC",2006,2006,"%D",11,0)
+ | a Class II medical device.  As such, it may not be changed    |
+"^DIC",2006,2006,"%D",12,0)
+ | in any way.  Modifications to this software may result in an  |
+"^DIC",2006,2006,"%D",13,0)
+ | adulterated medical device under 21CFR820, the use of which   |
+"^DIC",2006,2006,"%D",14,0)
+ | is considered to be a violation of US Federal Statutes.       |
+"^DIC",2006,2006,"%D",15,0)
+ |                                                               |
+"^DIC",2006,2006,"%D",16,0)
+ +---------------------------------------------------------------+
+"^DIC",2006,2006,"%D",17,0)
+ 
+"^DIC",2006,2006,"%D",18,0)
+This is the descriptive name for the message.  There should be
+"^DIC",2006,2006,"%D",19,0)
+an entry for NORMAL MESSAGE.
+"^DIC",2006,"B","IMAGING MOTD",2006)
+
+**END**
+**END**
+
+
+****
+****

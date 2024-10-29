@@ -1,0 +1,64 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RijndaelCOM", "RijndaelCOM\RijndaelCOM.csproj", "{D7C31954-AAEC-493F-BDE0-C6FF449E32ED}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RijndaelCOM.Tests", "RijndaelCOM.Tests\RijndaelCOM.Tests.csproj", "{861FA073-91B3-499C-8225-969B02946AF5}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{FB739070-5792-47F0-9C0B-BD98042B7B8F}"
+	ProjectSection(SolutionItems) = preProject
+		Local.testsettings = Local.testsettings
+		RijndaelCOM.vsmdi = RijndaelCOM.vsmdi
+		TraceAndTestImpact.testsettings = TraceAndTestImpact.testsettings
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 3
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = http://hctfs01.harris-hc-lab.com:8080/tfs/healthcarecollection
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = RijndaelCOM.Tests\\RijndaelCOM.Tests.csproj
+		SccProjectName1 = RijndaelCOM.Tests
+		SccLocalPath1 = RijndaelCOM.Tests
+		SccProjectUniqueName2 = RijndaelCOM\\RijndaelCOM.csproj
+		SccProjectName2 = RijndaelCOM
+		SccLocalPath2 = RijndaelCOM
+	EndGlobalSection
+	GlobalSection(TestCaseManagementSettings) = postSolution
+		CategoryFile = RijndaelCOM.vsmdi
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|Mixed Platforms = Debug|Mixed Platforms
+		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
+		Release|Mixed Platforms = Release|Mixed Platforms
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D7C31954-AAEC-493F-BDE0-C6FF449E32ED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D7C31954-AAEC-493F-BDE0-C6FF449E32ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D7C31954-AAEC-493F-BDE0-C6FF449E32ED}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{D7C31954-AAEC-493F-BDE0-C6FF449E32ED}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{D7C31954-AAEC-493F-BDE0-C6FF449E32ED}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{D7C31954-AAEC-493F-BDE0-C6FF449E32ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D7C31954-AAEC-493F-BDE0-C6FF449E32ED}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D7C31954-AAEC-493F-BDE0-C6FF449E32ED}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{D7C31954-AAEC-493F-BDE0-C6FF449E32ED}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{D7C31954-AAEC-493F-BDE0-C6FF449E32ED}.Release|x86.ActiveCfg = Release|Any CPU
+		{861FA073-91B3-499C-8225-969B02946AF5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{861FA073-91B3-499C-8225-969B02946AF5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{861FA073-91B3-499C-8225-969B02946AF5}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{861FA073-91B3-499C-8225-969B02946AF5}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{861FA073-91B3-499C-8225-969B02946AF5}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{861FA073-91B3-499C-8225-969B02946AF5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{861FA073-91B3-499C-8225-969B02946AF5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{861FA073-91B3-499C-8225-969B02946AF5}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{861FA073-91B3-499C-8225-969B02946AF5}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{861FA073-91B3-499C-8225-969B02946AF5}.Release|x86.ActiveCfg = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

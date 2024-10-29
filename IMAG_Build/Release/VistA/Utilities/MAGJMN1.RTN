@@ -1,0 +1,178 @@
+MAGJMN1	;WIRMFO/JHC VistaRad Maintenance functions [ 05/06/1999  2:42 PM ]
+	;;3.0;IMAGING;;Mar 01, 2002
+	;; +---------------------------------------------------------------+
+	;; | Property of the US Government.                                |
+	;; | No permission to copy or redistribute this software is given. |
+	;; | Use of unreleased versions of this software requires the user |
+	;; | to execute a written test agreement with the VistA Imaging    |
+	;; | Development Office of the Department of Veterans Affairs,     |
+	;; | telephone (301) 734-0100.                                     |
+	;; |                                                               |
+	;; | The Food and Drug Administration classifies this software as  |
+	;; | a medical device.  As such, it may not be changed in any way. |
+	;; | Modifications to this software may result in an adulterated   |
+	;; | medical device under 21CFR820, the use of which is considered |
+	;; | to be a violation of US Federal Statutes.                     |
+	;; +---------------------------------------------------------------+
+	;;
+	Q
+	; Subroutines for VistaRad file maintenance activities
+	;
+SVRLIST	;
+	W @IOF,!!?10,"Enter/Edit VistARad Exams List Definition",!!
+	N MAGIEN
+	K DIC S DIC=2006.631,DIC(0)="ALMEQ"
+	D ^DIC I Y=-1 K DIC,DA,DR,DIE Q
+	S X=$P(@(DIC_+Y_",0)"),U,2)
+	I X>9000 W !!,*7,"You may not edit System-Supplied files!" H 3 G SVRLIST
+	S DIE=2006.631,DA=+Y,DR="[MAGJ LIST EDIT]"
+	S MAGIEN=DA
+	D ^DIE I '$D(DA) G SVRLIST
+	D ENSRCH
+	D BLDDEF(MAGIEN)
+	D NOW^%DTC S $P(^MAG(2006.631,MAGIEN,0),U,5)=%
+	W !!,"List Definition complete!" R X:2
+	G SVRLIST
+	Q
+ENSRCH	; Invoke Search for 2006.631 definition
+	N GREF,GLIN,GO,CT,DIARI,DIC
+	S GREF=$NA(^MAG(2006.631,MAGIEN,"DEF"))
+	S GO=1 I $D(@GREF@(5,1)) D
+	. W ! D DISPSRCH(GREF)
+	. S X=$$YN("Do you want to delete or modify the search logic?","NO")
+	. I X'="Y" S GO=0
+	I 'GO Q
+	W !!?7,"Now enter search logic for this List.  To do this, the program"
+	W !?7,"will prompt you just as if you were going to run a Fileman Search."
+	W !?7,"When prompted STORE RESULTS OF SEARCH IN TEMPLATE:, answer with 'TEMP'"
+	W !?7,"If prompted ... OK TO PURGE? NO// answer 'YES'; don't bother specifying"
+	W !?7,"output print fields, but just RETURN through all the prompts to"
+	W !?7,"complete the process.  The search definition will be saved as part"
+	W !?7,"of this List definition; you will test it out by running it from "
+	W !?7,"the workstation.  If you need to modify the search logic, you will"
+	W !?7,"have to re-enter it in its entirety."
+	W !!?7,"NOTES: EXAM LOCK INDICATOR will not work for search logic;"
+	W !?14,"REMOTE CACHE INDICATOR only works for Null/Not Null logic."
+	S DIC=2006.634 D EN^DIS  ; .634 is intentional--do not change this!
+	I '$G(DIARI) W !!," Search logic NOT updated" D  Q
+	. Q:'$D(@GREF@(5,1))
+	. S X=$$YN("Do you want to DELETE the search logic?","NO")
+	. I X="Y" K @GREF@(3) K ^(4),^(5) W " -- Deleted!"
+	K @GREF@(3) K ^(4),^(5)
+	S GLIN=$NA(^DIBT(DIARI))  ; Copy search logic to 2006.631 "DEF" nodes
+	F TNOD=3,4 S FNOD=$P("^^DC^DL",U,TNOD) D
+	. S T="",CT=0
+	. F  S T=$O(@GLIN@(FNOD,T)) Q:T=""  S X=^(T) I X]"" S CT=CT+1,@GREF@(TNOD,CT)=X
+	. S @GREF@(TNOD,0)=CT
+	S T=0 F  S T=$O(@GLIN@("O",T)) Q:T=""  S @GREF@(5,T)=^(T,0)
+	Q
+	;
+BLDDEF(LSTID)	  ; build DEF nodes for Column/Sort definitions
+	N QX,SS,STR,LSTHDR,T,T0,T6,HASCASE S SS=0,HASCASE=0
+	; columns/hdrs:
+	F  S SS=$O(^MAG(2006.631,LSTID,1,SS)) D  Q:'SS
+	. I 'SS Q:HASCASE
+	. I  S X=1  ; * FORCE list to always contain CASE #
+	. E  S X=^MAG(2006.631,LSTID,1,SS,0)
+	. S X=+X_$S($P(X,U,2):";"_+$P(X,U,2),1:"")
+	. I 'HASCASE S HASCASE=(+X=1)
+	. S T0=^MAG(2006.63,+X,0),T6=+$P(T0,U,6) S:'T6 T6=99
+	. S T8=$P(T0,U,8) I T8]"" S T8="~"_T8
+	. S T(T6,+X)=X_U_$S($P(T0,U,3)]"":$P(T0,U,3),1:$P(T0,U,2))_T8
+	S QX="T",STR="",LSTHDR=""
+	F  S QX=$Q(@QX) Q:QX=""  S X=@QX D
+	. S STR=STR_$S(STR="":"",1:U)_$P(X,U)
+	. S LSTHDR=LSTHDR_$S(LSTHDR="":"",1:U)_$P(X,U,2)
+	S ^MAG(2006.631,LSTID,"DEF",.5)=LSTHDR,^(1)=STR
+	; Sort values:
+	S SS=0,STR=""
+	F  S SS=$O(^MAG(2006.631,LSTID,2,SS)) Q:'SS  S X=^(SS,0) D
+	. S X=+X_$S($P(X,U,2):"-",1:"")
+	. S STR=STR_$S(STR="":"",1:U)_X
+	S ^MAG(2006.631,LSTID,"DEF",2)=STR
+	D NOW^%DTC S $P(^MAG(2006.631,LSTID,"DEF",0),U)=%
+	Q
+	;
+	;
+YN(MSG,DFLT)	; prompt for Yes/No reply
+	N X I $G(DFLT)="" S DFLT="N"
+	W !
+	S DFLT=$E(DFLT),DFLT=$S(DFLT="N":"NO",1:"YES")
+YN1	W !,MSG_" "_DFLT_"// "
+	R X:DTIME S:X="" X=DFLT S X=$E(X),X=$TR(X,"ynYN","YNYN")
+	I "YN"'[X W "  ??? Enter YES or NO",! G YN1
+	Q X
+	;
+LSTINQ	; Inquire/Display list def'n
+	N GREF,MAGIEN
+	W !!?15,"Display VistARad Exams List Definition",!!
+	N MAGIEN
+	S DIC=2006.631,DIC(0)="AMEQ"
+	D ^DIC I Y=-1 K DIC,DA,DR Q
+	K DR S DA=+Y,MAGIEN=DA
+	S GREF=$NA(^MAG(2006.631,MAGIEN,"DEF"))
+	W ! D EN^DIQ
+	R !,"Enter RETURN to display the Search Logic: ",X:DTIME W !
+	D DISPSRCH(GREF)
+	G LSTINQ
+	Q
+	;
+DISPSRCH(GREF)	;
+	I $D(@GREF@(5,1)) W !,"List Exams where:",! D
+	. F I=1:1 Q:'$D(@GREF@(5,I))  W !?3,^(I)
+	E  W !?3,"NO Search Logic defined!"
+	W ! Q
+	;
+VRSIT	;
+	W @IOF,!!?10,"Enter/Edit VistARad Site Parameters",!!
+	S DIC=2006.69,DIC(0)="ALMEQ"
+	I '$D(^MAG(DIC,1)) S DLAYGO=DIC
+	D ^DIC I Y=-1 K DIC,DA,DR,DIE,DLAYGO Q
+	S DIE=2006.69,DA=+Y,DR=".01:3.99;4.1:20"
+	D ^DIE
+	K DIC,DA,DR,DIE,DLAYGO
+	Q
+	;
+ENEXCAT	; <*> This not needed once convert file 2006.61 to file 72
+	W !!!?10,"Enter/Edit VistARad Exam Categories Definition",!!
+	K DIC S DIC=2006.61,DIC(0)="ALMEQN"
+	D ^DIC I Y=-1 K DIC,DA,DR,DIE Q
+	S DIE=2006.61,DA=+Y,DR=".01:5",DIE("NO^")="BACK"
+	D ^DIE
+	G ENEXCAT
+	Q
+PEXCAT	; <*> This not needed once convert file 2006.61 to file 72
+	;Print VistARad Exam Categories
+	W !! S DIC=2006.61,L=0,BY="[MAGJ EXCAT SORT]"
+	D EN1^DIP
+	R !,"Enter RETURN to continue: ",X:DTIME W !
+	Q
+	;
+EEPREF	;
+	W @IOF,!!?10,"Enter/Edit VistARad Prefetch Logic",!!
+	N MAGIEN
+	K DIC S DIC=2006.65,DIC(0)="ALMEQ"
+	D ^DIC I Y=-1 K DIC,DIE,DR Q
+	S DIE=2006.65,DA=+Y,DR="[MAGJ PRIOR EDIT]"
+	S MAGIEN=DA
+	D ^DIE I '$D(DA) G EEPREF
+	G EEPREF
+	Q
+INPREF	; Inquire VistARad PreFetch
+	W @IOF,!!?10,"Inquire VistARad Prefetch Logic",!!
+	N MAGIEN
+	S DIC=2006.65,DIC(0)="AMEQ"
+	D ^DIC I Y=-1 K DIC Q
+	S DA=+Y,(FR,TO)=$P(Y,U,2),MAGIEN=DA,L=0
+	S BY="[MAGJ PRIOR SORT]",DIS(0)="I D0=MAGIEN"
+	D EN^DIP
+	R !,"Enter RETURN to continue: ",X:DTIME W !
+	G INPREF
+	Q
+PRPREF	;Print VistARad Prefetch
+	W !! S DIC=2006.65,L=0,BY="[MAGJ PRIOR SORT]"
+	D EN1^DIP
+	R !,"Enter RETURN to continue: ",X:DTIME W !
+	Q
+	;
+END	;

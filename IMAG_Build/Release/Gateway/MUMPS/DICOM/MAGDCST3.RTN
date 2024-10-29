@@ -1,0 +1,104 @@
+MAGDCST3 ;WOIFO/PMK - Backend for C-STORE (part 3) ; 19 Dec 2008 3:04 PM
+ ;;3.0;IMAGING;**51,54**;MAR 19, 2002;;OCT 28, 2009
+ ;; Per VHA Directive 2004-038, this routine should not be modified.
+ ;; +---------------------------------------------------------------+
+ ;; | Property of the US Government.                                |
+ ;; | No permission to copy or redistribute this software is given. |
+ ;; | Use of unreleased versions of this software requires the user |
+ ;; | to execute a written test agreement with the VistA Imaging    |
+ ;; | Development Office of the Department of Veterans Affairs,     |
+ ;; | telephone (301) 734-0100.                                     |
+ ;; | The Food and Drug Administration classifies this software as  |
+ ;; | a medical device.  As such, it may not be changed in any way. |
+ ;; | Modifications to this software may result in an adulterated   |
+ ;; | medical device under 21CFR820, the use of which is considered |
+ ;; | to be a violation of US Federal Statutes.                     |
+ ;; +---------------------------------------------------------------+
+ ;;
+ Q
+ ;
+ZSTU ; Re-initialize activity flags at system start-up
+ N D0
+ S D0=0 F  S D0=$O(^MAGDICOM(2006.5764,D0)) Q:'D0  D
+ . S $P(^MAGDICOM(2006.5764,D0,0),"^",2,3)="0^"_$$NOW^XLFDT()
+ . Q
+ Q
+ ;
+CONBEG ; record the start of a new connection to the MUMPS surrogate
+ N D0
+ D DATETIME
+ S D0=$$GETD0(INSTNAME)
+ S ^MAGDICOM(2006.5764,D0,0)=INSTNAME_"^1^"_NOW
+ Q
+ ;
+CONEND ; record the end of a connection to the MUMPS surrogate
+ N D0
+ D DATETIME
+ S D0=$$GETD0(INSTNAME)
+ S ^MAGDICOM(2006.5764,D0,0)=INSTNAME_"^0^"_NOW
+ Q
+ ;
+ASCBEG ; record the start of a new association
+ N D0,D1,X
+ D DATETIME
+ S D0=$$GETD0(INSTNAME)
+ S X=$G(^MAGDICOM(2006.5764,D0,0))
+ S $P(X,"^",4,5)="1^"_NOW
+ S ^MAGDICOM(2006.5764,D0,0)=X
+ ;
+ D ADDAY(D0,TODAY)
+ S X=$G(^MAGDICOM(2006.5764,D0,1,TODAY,0))
+ S $P(X,"^",2)=$P(X,"^",2)+1
+ S ^MAGDICOM(2006.5764,D0,1,TODAY,0)=X
+ Q
+ ;
+ASCEND ; record the end of an association
+ N D0,X
+ D DATETIME
+ S D0=$$GETD0(INSTNAME)
+ S X=$G(^MAGDICOM(2006.5764,D0,0))
+ S $P(X,"^",4,5)="0^"_NOW
+ S ^MAGDICOM(2006.5764,D0,0)=X
+ Q
+ ;
+IMAGE ; record the transfer of each image
+ N D0,D1,X
+ D DATETIME
+ S D0=$$GETD0(INSTNAME)
+ D ADDAY(D0,TODAY)
+ S X=$G(^MAGDICOM(2006.5764,D0,1,TODAY,0))
+ S $P(X,"^",3)=$P(X,"^",3)+1,$P(X,"^",4)=NOW
+ S ^MAGDICOM(2006.5764,D0,1,TODAY,0)=X
+ Q
+ ;
+DATETIME ; obtain the current date and time
+ S NOW=$$NOW^XLFDT(),TODAY=NOW\1
+ Q
+ ;
+GETD0(INSTNAME) N X
+ ; Get internal entry number
+ S D0=$O(^MAGDICOM(2006.5764,"B",INSTNAME,"")) Q:D0 D0
+ L +^MAGDICOM(2006.5764,0):1E9 ; Background process MUST wait
+ S D0=$O(^MAGDICOM(2006.5764," "),-1)+1
+ S X=$G(^MAGDICOM(2006.5764,0))
+ S $P(X,"^",1,2)="DICOM LOCAL INSTRUMENT STATISTICS^2006.5764"
+ S $P(X,"^",3)=D0
+ S $P(X,"^",4)=$P(X,"^",4)+1
+ S ^MAGDICOM(2006.5764,0)=X
+ S ^MAGDICOM(2006.5764,D0,0)=INSTNAME
+ S ^MAGDICOM(2006.5764,"B",INSTNAME,D0)=""
+ L -^MAGDICOM(2006.5764,0)
+ Q D0
+ ;
+ADDAY(D0,TODAY) N X
+ ; Add entry for 'today' if not yet present
+ Q:$D(^MAGDICOM(2006.5764,D0,1,TODAY))
+ L +^MAGDICOM(2006.5764,D0,1,0):1E9 ; Background process MUST wait
+ S X=$G(^MAGDICOM(2006.5764,D0,1,0))
+ S $P(X,"^",2)="2006.57641"
+ S $P(X,"^",3)=TODAY
+ S $P(X,"^",4)=$P(X,"^",4)+1
+ S ^MAGDICOM(2006.5764,D0,1,0)=X
+ S ^MAGDICOM(2006.5764,D0,1,TODAY,0)=TODAY
+ L -^MAGDICOM(2006.5764,D0,1,0)
+ Q

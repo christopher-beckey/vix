@@ -1,0 +1,279 @@
+<rOIRequestTypes>
+  <roiRequestType>
+    <createdDate>01/22/2019@02:15:30</createdDate>
+    <errorMessage />
+    <exportQueue>urn:dicomexportqueue:994-13</exportQueue>
+    <guid>00000050560112a8.5739de7d.00000168746a0021.6b2dd4ddf</guid>
+    <lastUpdateDate>01/22/2019@02:15:33</lastUpdateDate>
+    <patientId>icn(1008689511)</patientId>
+    <patientName>IPOAASEN,LUCIA A</patientName>
+    <patientSsn>*****3472</patientSsn>
+    <resultUri />
+    <status>EXPORT_QUEUE</status>
+    <studyIds>urn:vastudy:994-73115305-1008689511[icn]</studyIds>
+    <studyIds>urn:vastudy:994-73115154-1008689511[icn]</studyIds>
+  </roiRequestType>
+  <roiRequestType>
+    <createdDate>01/22/2019@02:16:16</createdDate>
+    <errorMessage />
+    <exportQueue>urn:dicomexportqueue:994-12</exportQueue>
+    <guid>00000050560112a8.5739de7d.00000168746ab41f.6b2dd4f20</guid>
+    <lastUpdateDate>01/22/2019@02:16:18</lastUpdateDate>
+    <patientId>icn(1008689511)</patientId>
+    <patientName>IPOAASEN,LUCIA A</patientName>
+    <patientSsn>*****3472</patientSsn>
+    <resultUri />
+    <status>EXPORT_QUEUE</status>
+    <studyIds>urn:vastudy:994-73112669-1008689511[icn]</studyIds>
+  </roiRequestType>
+  <roiRequestType>
+    <createdDate>01/22/2019@02:17:37</createdDate>
+    <errorMessage />
+    <exportQueue>urn:dicomexportqueue:994-11</exportQueue>
+    <guid>00000050560112a8.5739de7d.00000168746bee27.6b2dd50c5</guid>
+    <lastUpdateDate>01/22/2019@02:17:38</lastUpdateDate>
+    <patientId>icn(1008689511)</patientId>
+    <patientName>IPOAASEN,LUCIA A</patientName>
+    <patientSsn>*****3472</patientSsn>
+    <resultUri />
+    <status>EXPORT_QUEUE</status>
+    <studyIds>urn:vastudy:994-73114928-1008689511[icn]</studyIds>
+  </roiRequestType>
+  <roiRequestType>
+    <createdDate>01/22/2019@02:36:33</createdDate>
+    <errorMessage />
+    <exportQueue>urn:dicomexportqueue:994-11</exportQueue>
+    <guid>00000050560112a8.5739de7d.00000168747d32d9.6b2dd54a0</guid>
+    <lastUpdateDate>01/22/2019@02:36:34</lastUpdateDate>
+    <patientId>icn(1008689511)</patientId>
+    <patientName>IPOAASEN,LUCIA A</patientName>
+    <patientSsn>*****3472</patientSsn>
+    <resultUri />
+    <status>EXPORT_QUEUE</status>
+    <studyIds>urn:vastudy:994-264187-1008689511[icn]</studyIds>
+    <studyIds>urn:vastudy:994-264249-1008689511[icn]</studyIds>
+  </roiRequestType>
+  <roiRequestType>
+    <createdDate>02/01/2019@14:15:49</createdDate>
+    <errorMessage />
+    <exportQueue>urn:dicomexportqueue:994-12</exportQueue>
+    <guid>00000050560112a8.334feb4d.00000168aa7d105a.400481ee3</guid>
+    <lastUpdateDate>02/01/2019@14:15:54</lastUpdateDate>
+    <patientId>icn(1008689511)</patientId>
+    <patientName>IPOAASEN,LUCIA A</patientName>
+    <patientSsn>*****3472</patientSsn>
+    <resultUri />
+    <status>EXPORT_QUEUE</status>
+    <studyIds>urn:vastudy:994-73115305-1008689511[icn]</studyIds>
+  </roiRequestType>
+  <roiRequestType>
+    <createdDate>04/29/2019@13:34:16</createdDate>
+    <errorMessage />
+    <exportQueue />
+    <guid>00000050560112a8.4e73d397.0000016a6a2957e8.5e22c4ea1</guid>
+    <patientId>icn(1008689511)</patientId>
+    <patientName>IPOAASEN,LUCIA A</patientName>
+    <patientSsn>*****3472</patientSsn>
+    <resultUri />
+    <status>MERGING_IMAGES</status>
+    <studyIds>urn:vastudy:994-73116209-1008689511[icn]</studyIds>
+  </roiRequestType>
+  <roiRequestType>
+    <createdDate>08/15/2019@09:22:47</createdDate>
+    <errorMessage />
+    <exportQueue>urn:dicomexportqueue:994-12</exportQueue>
+    <guid>00000050560112a8.6fb39cb6.0000016c9571ee86.4833a5e94</guid>
+    <lastUpdateDate>08/15/2019@09:22:49</lastUpdateDate>
+    <patientId>icn(1008689511)</patientId>
+    <patientName>IPOAASEN,LUCIA A</patientName>
+    <patientSsn>*****3472</patientSsn>
+    <resultUri />
+    <status>EXPORT_QUEUE</status>
+    <studyIds>urn:vastudy:994-73116206-1008689511[icn]</studyIds>
+  </roiRequestType>
+  <roiRequestType>
+    <createdDate>08/15/2019@09:33:03</createdDate>
+    <errorMessage />
+    <exportQueue>urn:dicomexportqueue:994-11</exportQueue>
+    <guid>00000050560112a8.6fb39cb6.0000016c957b51e2.4833a754c</guid>
+    <lastUpdateDate>08/15/2019@09:33:03</lastUpdateDate>
+    <patientId>icn(1008689511)</patientId>
+    <patientName>IPOAASEN,LUCIA A</patientName>
+    <patientSsn>*****3472</patientSsn>
+    <resultUri />
+    <status>EXPORT_QUEUE</status>
+    <studyIds>urn:vastudy:994-73113912-1008689511[icn]</studyIds>
+  </roiRequestType>
+  <roiRequestType>
+    <createdDate>08/19/2019@17:58:47</createdDate>
+    <errorMessage />
+    <exportQueue>urn:dicomexportqueue:994-12</exportQueue>
+    <guid>00000050560112a8.17e72779.0000016cabe3c63d.4ace19522</guid>
+    <lastUpdateDate>08/19/2019@17:58:48</lastUpdateDate>
+    <patientId>icn(1008689511)</patientId>
+    <patientName>IPOAASEN,LUCIA A</patientName>
+    <patientSsn>*****3472</patientSsn>
+    <resultUri />
+    <status>EXPORT_QUEUE</status>
+    <studyIds>urn:vastudy:994-73113912-1008689511[icn]</studyIds>
+  </roiRequestType>
+  <roiRequestType>
+    <createdDate>08/28/2019@15:13:11</createdDate>
+    <errorMessage />
+    <exportQueue>urn:dicomexportqueue:994-11</exportQueue>
+    <guid>00000050560112a8.46d567cb.0000016cd9a5636c.69a4f313a</guid>
+    <lastUpdateDate>08/28/2019@15:13:11</lastUpdateDate>
+    <patientId>icn(1008689559)</patientId>
+    <patientName>IPOAADLAND,THADDEUS A</patientName>
+    <patientSsn>*****6540</patientSsn>
+    <resultUri />
+    <status>EXPORT_QUEUE</status>
+    <studyIds>urn:vastudy:994-201741-1008689559[icn]</studyIds>
+  </roiRequestType>
+  <roiRequestType>
+    <createdDate>06/17/2022@15:33:39</createdDate>
+    <errorMessage />
+    <exportQueue>urn:dicomexportqueue:994-12</exportQueue>
+    <guid>0000005056ac94bd.4e10a90a.0000018173281fe3.63e05b46b</guid>
+    <lastUpdateDate>06/17/2022@15:33:39</lastUpdateDate>
+    <patientId>icn(1008689586V409506)</patientId>
+    <patientName>IPOACEVEDA,DEWAYNE DEAN</patientName>
+    <patientSsn>*****9203</patientSsn>
+    <resultUri />
+    <status>EXPORT_QUEUE</status>
+    <studyIds>urn:vastudy:994-73117028-1008689586V409506[icn]</studyIds>
+  </roiRequestType>
+  <roiRequestType>
+    <createdDate>06/22/2022@10:09:24</createdDate>
+    <errorMessage />
+    <exportQueue>urn:dicomexportqueue:994-13</exportQueue>
+    <guid>0000005056ac94bd.67155504.000001818bbf01a7.492a28e91</guid>
+    <lastUpdateDate>06/22/2022@10:09:24</lastUpdateDate>
+    <patientId>icn(1008689586V409506)</patientId>
+    <patientName>IPOACEVEDA,DEWAYNE DEAN</patientName>
+    <patientSsn>*****9203</patientSsn>
+    <resultUri />
+    <status>EXPORT_QUEUE</status>
+    <studyIds>urn:vastudy:994-73117028-1008689586V409506[icn]</studyIds>
+    <studyIds>urn:vastudy:994-72825144-1008689586V409506[icn]</studyIds>
+  </roiRequestType>
+  <roiRequestType>
+    <createdDate>06/23/2022@16:06:51</createdDate>
+    <errorMessage />
+    <exportQueue>urn:dicomexportqueue:994-13</exportQueue>
+    <guid>0000005056ac94bd.1049db08.00000181922caf79.6277ea069</guid>
+    <lastUpdateDate>06/23/2022@16:06:52</lastUpdateDate>
+    <patientId>icn(1008689646V678823)</patientId>
+    <patientName>IPOACEVEDA,VANCE MALCOM</patientName>
+    <patientSsn>*****2884</patientSsn>
+    <resultUri />
+    <status>EXPORT_QUEUE</status>
+    <studyIds>urn:vastudy:994-73115151-1008689646V678823[icn]</studyIds>
+    <studyIds>urn:vastudy:994-73031829-1008689646V678823[icn]</studyIds>
+  </roiRequestType>
+  <roiRequestType>
+    <createdDate>06/28/2022@14:52:48</createdDate>
+    <errorMessage />
+    <exportQueue>urn:dicomexportqueue:994-13</exportQueue>
+    <guid>0000005056ac94bd.3c5d3a93.00000181aba8b13d.759262af8</guid>
+    <lastUpdateDate>06/28/2022@14:52:49</lastUpdateDate>
+    <patientId>icn(1008689586V409506)</patientId>
+    <patientName>IPOACEVEDA,DEWAYNE DEAN</patientName>
+    <patientSsn>*****9203</patientSsn>
+    <resultUri />
+    <status>EXPORT_QUEUE</status>
+    <studyIds>urn:vastudy:994-73114898-1008689586V409506[icn]</studyIds>
+    <studyIds>urn:vastudy:994-72825144-1008689586V409506[icn]</studyIds>
+  </roiRequestType>
+  <roiRequestType>
+    <createdDate>06/29/2022@16:32:46</createdDate>
+    <errorMessage />
+    <exportQueue>urn:dicomexportqueue:994-13</exportQueue>
+    <guid>0000005056ac94bd.25b1b3df.00000181b12a9293.057d03092</guid>
+    <lastUpdateDate>06/29/2022@16:32:46</lastUpdateDate>
+    <patientId>icn(1008689559V859134)</patientId>
+    <patientName>IPOAADLAND,THADDEUS A</patientName>
+    <patientSsn>*****6540</patientSsn>
+    <resultUri />
+    <status>EXPORT_QUEUE</status>
+    <studyIds>urn:vastudy:994-201741-1008689559V859134[icn]</studyIds>
+  </roiRequestType>
+  <roiRequestType>
+    <createdDate>06/29/2022@16:40:01</createdDate>
+    <errorMessage />
+    <exportQueue>urn:dicomexportqueue:994-13</exportQueue>
+    <guid>0000005056ac94bd.25b1b3df.00000181b13134ce.057d03234</guid>
+    <lastUpdateDate>06/29/2022@16:40:01</lastUpdateDate>
+    <patientId>icn(1008689559V859134)</patientId>
+    <patientName>IPOAADLAND,THADDEUS A</patientName>
+    <patientSsn>*****6540</patientSsn>
+    <resultUri />
+    <status>EXPORT_QUEUE</status>
+    <studyIds>urn:vastudy:994-201778-1008689559V859134[icn]</studyIds>
+  </roiRequestType>
+  <roiRequestType>
+    <createdDate>07/20/2022@16:47:34</createdDate>
+    <errorMessage />
+    <exportQueue>urn:dicomexportqueue:994-13</exportQueue>
+    <guid>0000005056ac94bd.136236ff.000001821d5dabf5.401f54e81</guid>
+    <lastUpdateDate>07/20/2022@16:47:35</lastUpdateDate>
+    <patientId>icn(1008689586V409506)</patientId>
+    <patientName>IPOACEVEDA,DEWAYNE DEAN</patientName>
+    <patientSsn>*****9203</patientSsn>
+    <resultUri />
+    <status>EXPORT_QUEUE</status>
+    <studyIds>urn:vastudy:994-73114898-1008689586V409506[icn]</studyIds>
+  </roiRequestType>
+  <roiRequestType>
+    <createdDate>07/21/2022@12:11:28</createdDate>
+    <errorMessage />
+    <exportQueue>urn:dicomexportqueue:994-13</exportQueue>
+    <guid>0000005056ac94bd.49a65e3b.0000018221873f9c.206d4d777</guid>
+    <lastUpdateDate>07/21/2022@12:11:34</lastUpdateDate>
+    <patientId>icn(1008689586V409506)</patientId>
+    <patientName>IPOACEVEDA,DEWAYNE DEAN</patientName>
+    <patientSsn>*****9203</patientSsn>
+    <resultUri />
+    <status>EXPORT_QUEUE</status>
+    <studyIds>urn:vastudy:994-73117028-1008689586V409506[icn]</studyIds>
+  </roiRequestType>
+  <roiRequestType>
+    <createdDate>07/22/2022@14:36:53</createdDate>
+    <errorMessage />
+    <exportQueue>urn:dicomexportqueue:994-13</exportQueue>
+    <guid>0000005056ac94bd.29526e58.000001822732ba3c.34fcc303b</guid>
+    <lastUpdateDate>07/22/2022@14:36:53</lastUpdateDate>
+    <patientId>icn(1008689559V859134)</patientId>
+    <patientName>IPOAADLAND,THADDEUS A</patientName>
+    <patientSsn>*****6540</patientSsn>
+    <resultUri />
+    <status>EXPORT_QUEUE</status>
+    <studyIds>urn:vastudy:994-73114912-1008689559V859134[icn]</studyIds>
+  </roiRequestType>
+  <roiRequestType>
+    <errorMessage />
+    <exportQueue>urn:dicomexportqueue:994-13</exportQueue>
+    <guid>0000005056ac94bd.29526e58.0000018227409775.34fcc31c2</guid>
+    <lastUpdateDate>07/22/2022@14:52:01</lastUpdateDate>
+    <patientId>icn(1008689559V859134)</patientId>
+    <patientName>IPOAADLAND,THADDEUS A</patientName>
+    <patientSsn>*****6540</patientSsn>
+    <resultUri />
+    <status>EXPORT_QUEUE</status>
+    <studyIds>urn:vastudy:994-73114912-1008689559V859134[icn]</studyIds>
+    <studyIds>urn:vastudy:994-201778-1008689559V859134[icn]</studyIds>
+  </roiRequestType>
+  <roiRequestType>
+    <createdDate>12/08/2022@16:07:09</createdDate>
+    <errorMessage />
+    <exportQueue>urn:dicomexportqueue:994-12</exportQueue>
+    <guid>0000005056ac94bd.1a336c79.00000184f3904282.3d8d223a2</guid>
+    <lastUpdateDate>12/08/2022@16:07:11</lastUpdateDate>
+    <patientId>icn(1008689413V585605)</patientId>
+    <patientName>IPOABUD,BRYANT E</patientName>
+    <patientSsn>*****1215</patientSsn>
+    <resultUri />
+    <status>EXPORT_QUEUE</status>
+    <studyIds>urn:vastudy:994-73117022-1008689413V585605[icn]</studyIds>
+  </roiRequestType>
+</rOIRequestTypes>

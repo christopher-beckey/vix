@@ -1,0 +1,269 @@
+MAGDAIRU ;WOIFO/PMK - Automatic Import Reconciliation Workflow ; 16 Apr 2010 10:51 AM
+ ;;3.0;IMAGING;**53**;Mar 19, 2002;Build 1715;Apr 22, 2010
+ ;; Per VHA Directive 2004-038, this routine should not be modified.
+ ;; +---------------------------------------------------------------+
+ ;; | Property of the US Government.                                |
+ ;; | No permission to copy or redistribute this software is given. |
+ ;; | Use of unreleased versions of this software requires the user |
+ ;; | to execute a written test agreement with the VistA Imaging    |
+ ;; | Development Office of the Department of Veterans Affairs,     |
+ ;; | telephone (301) 734-0100.                                     |
+ ;; | The Food and Drug Administration classifies this software as  |
+ ;; | a medical device.  As such, it may not be changed in any way. |
+ ;; | Modifications to this software may result in an adulterated   |
+ ;; | medical device under 21CFR820, the use of which is considered |
+ ;; | to be a violation of US Federal Statutes.                     |
+ ;; +---------------------------------------------------------------+
+ ;;
+ ; Check for studies that are already on file
+ ;
+STUDYUID() ; check Study Instance UIDs to see if it is already on file
+ N ACNUMB ;--- accession number
+ N COUNT ;---- number of study instance UIDs on file
+ N DFN ;------ internal entry number for patient
+ N DOB ;------ date of birth
+ N DUPUID ;--- duplicate UID flag
+ N IEN ;------ internal entry number in DATAFILE
+ N INFO ;----- returned results of RPC
+ N MODIFIER ;- procedure modifier
+ N PID ;------ patient identifier
+ N PNAMEDCM ;- patient name in DICOM format
+ N PROCNAME ;- procedure name
+ N SERIEUID ;- DICOM series instance uid
+ N SEX ;------ patient sex
+ N STUDYDAT ;- study date
+ N STUDYUID ;- DICOM study instance uid
+ N VAICN ;---- VA integration control number
+ N I,J,K,UIDLIST,X
+ S (I,K)=0 F  S I=$O(^TMP("MAG",$J,"IMPORT","LIST",I)) Q:'I  D
+ . I '$$GETDATA^MAGDAIRD(I,"LIST",.DATA) Q
+ . S K=K+1
+ . S UIDLIST(1)=K,UIDLIST(K+1)=DATA("STUDYUID")
+ . Q
+ S X=$$CALLRPC^MAGM2VCU("MAG DICOM IMPORTER CHECK UIDS","M",.INFO,.UIDLIST,"STUDY")
+ I INFO(1)<0 D  Q 0
+ . D ERRORMSG^MAGDAIR0(1,"Error in rpc MAG DICOM IMPORTER CHECK UIDS",.INFO)
+ . Q
+ S COUNT=0
+ F I=1:1:INFO(1) S X=INFO(I+1) I X'="" D
+ . I X<0 D  Q
+ . . N Z
+ . . S Z="Error at INFO("_(I+1)_")"
+ . . S Z=Z_" -- UIDLIST("_(I+1)_") = "_UIDLIST(I+1)
+ . . D ERRORMSG^MAGDAIR0(1,Z,.INFO)
+ . . Q
+ . S DFN=$P(X,"^",2),PID=$P(X,"^",4),DOB=$P(X,"^",5),SEX=$P(X,"^",6)
+ . S VAICN=$P(X,"^",7),ACNUMB=$P(X,"^",8),STUDYDAT=$P(X,"^",9)
+ . S PROCNAME=$P(X,"^",10),MODIFIER=$P(X,"^",11),DUPUID=$P(X,"^",12)
+ . F J=1:1:DUPUID S DUPUID($P(X,"^",12+J))=""
+ . S PNAMEDCM=$$PNAMEDCM^MAGDAIR0($P(X,"^",3))
+ . I DUPUID D
+ . . S DFN=-1,PNAMEDCM="DUPLICATE STUDY INSTANCE UIDS"
+ . . S (PID,DOB,SEX,VAICN,ACNUMB,STUDYDAT,PROCNAME,MODIFIER)=""
+ . . Q
+ . D SAVEDATA^MAGDAIR2(DFN,I,PNAMEDCM,PID,DOB,SEX,VAICN,ACNUMB,STUDYDAT,PROCNAME,MODIFIER,"UID",.DUPUID)
+ . S COUNT=COUNT+1
+ . Q
+ Q COUNT
+ ;
+ ;
+ ;
+IMAGEUID() ; check SOP Instance UID to see if it is already on file
+ N COMPLETE,COUNT,DATA,FILED,I,IEN,IENLIST,INFO,J,K,PATIENT,SERIEUID,UIDLIST,X
+ S COMPLETE=0 ; number of studies completely on VistA
+ S I=0 F  S I=$O(^TMP("MAG",$J,"IMPORT","LIST",I)) Q:'I  D
+ . S PATIENT=$G(^TMP("MAG",$J,"IMPORT","LIST",I,"PATIENT")) Q:'PATIENT
+ . S SERIEUID="",(COUNT,FILED)=0
+ . F  S SERIEUID=$O(^TMP("MAG",$J,"IMPORT","LIST",I,"IEN",SERIEUID)) Q:SERIEUID=""  D
+ . . S (K,IEN)=0 K IENLIST,UIDLIST
+ . . F  S IEN=$O(^TMP("MAG",$J,"IMPORT","LIST",I,"IEN",SERIEUID,IEN)) Q:IEN=""  D
+ . . . S X=$$GETDATA^MAGDAIRD(IEN,"IEN",.DATA)
+ . . . S K=K+1,COUNT=COUNT+1
+ . . . S IENLIST(1)=K,IENLIST(K+1)=IEN
+ . . . S UIDLIST(1)=K,UIDLIST(K+1)=DATA("IMAGEUID")
+ . . . Q
+ . . K X ; remove array information
+ . . S X=$$CALLRPC^MAGM2VCU("MAG DICOM IMPORTER CHECK UIDS","M",.INFO,.UIDLIST,"SOP")
+ . . I INFO(1)<0 D  Q
+ . . . D ERRORMSG^MAGDAIR0(1,"Error in rpc MAG DICOM IMPORTER CHECK UIDS",.INFO)
+ . . . Q
+ . . F J=1:1:K D
+ . . . S IEN=IENLIST(J+1)
+ . . . I INFO(J+1)'="" D
+ . . . . S ^TMP("MAG",$J,"IMPORT","LIST",I,"IEN",SERIEUID,IEN)=INFO(J+1)
+ . . . . S FILED=FILED+1
+ . . . . Q
+ . . . Q
+ . . Q
+ . S ^TMP("MAG",$J,"IMPORT","LIST",I,"ALREADY ON FILE")=FILED_"^"_COUNT
+ . I FILED=COUNT S COMPLETE=COMPLETE+1
+ . Q
+ Q COMPLETE
+ ;
+ ;
+ ;
+ONFILE(STUDYN) ; entry point from ^MAGDAIR2 for a selected study that is onfile
+ N ACNUMB,COUNT,DFN,DOB,DUPUID,FILED,PID,PNAMEDCM,PROCNAME
+ N MODIFIER,MORE,ONFILE,SEX,STUDYDAT,NOTFILED,X,Z
+ S ONFILE=^TMP("MAG",$J,"IMPORT","LIST",STUDYN,"ALREADY ON FILE")
+ S FILED=$P(ONFILE,"^",1),COUNT=$P(ONFILE,"^",2),NOTFILED=COUNT-FILED
+ W !!
+ I 'NOTFILED D  ; all of the DICOM objects are on file
+ . I FILED=1 W "The one DICOM object for this study has already been filed on VistA."
+ . E  W "All ",FILED," DICOM objects for this study have already been filed on VistA."
+ . S MORE=0
+ . Q
+ E  D  ; not all the DICOM objects are on file
+ . I NOTFILED=1 W "This study has one DICOM object that may be imported.  "
+ . E  W "This study has ",NOTFILED," DICOM objects that may be imported.  "
+ . I FILED=1 W "At least one DICOM object from the study is already on VistA."
+ . E  I 'FILED W "There are an unknown number of DICOM objects already on VistA."
+ . E  W "There are at least ",FILED," DICOM objects from the study already on VistA."
+ . S MORE=1
+ . Q
+ M DUPUID=^TMP("MAG",$J,"IMPORT","LIST",STUDYN,"DUP UID") S DUPUID=$G(DUPUID)
+ S DFN=^TMP("MAG",$J,"IMPORT","LIST",STUDYN,"PATIENT")
+ I $G(DUPUID) D
+ . W $$HIGHLITE^MAGDAIR0("YELLOW")
+ . W !!,"*** Warning: There are ",DUPUID," studies on VistA that have this study's Study Instance UID. ***"
+ . S Z=$$YESNO^MAGDAIR0("Display all the studies on VistA that have this study's Study Instance UID?","y",.X)
+ . W $$HIGHLITE^MAGDAIR0("")
+ . I X="NO" Q
+ . D DUPUID(STUDYN,.DUPUID)
+ . I DFN=-1 D
+ . . D PICKDUP(STUDYN,.DUPUID)
+ . . Q
+ . E  D
+ . . W !!,$$HIGHLITE^MAGDAIR0("REVERSE","This is the currently associated Study on VistA:")
+ . . Q
+ . Q
+ S DFN=^TMP("MAG",$J,"IMPORT","LIST",STUDYN,"PATIENT")
+ S X=^TMP("MAG",$J,"IMPORT","LIST",STUDYN,"STUDY")
+ S ACNUMB=$P(X,"^",1),STUDYDAT=$P(X,"^",2),PROCNAME=$P(X,"^",3),MODIFIER=$P(X,"^",4)
+ S X=^TMP("MAG",$J,"IMPORT","PATIENT",DFN)
+ S PNAMEDCM=$P(X,"^",1),PID=$P(X,"^",2),DOB=$P(X,"^",3),SEX=$P(X,"^",4)
+ S PNAMEDCM=$TR(PNAMEDCM,"|","^")
+ I 'MORE D  Q
+ . D DISPLAY^MAGDAIRW(STUDYN,PNAMEDCM,PID,DOB,SEX,ACNUMB,STUDYDAT,PROCNAME,MODIFIER)
+ . W !!
+ . I MEDIA="T" W "These DICOM files will be deleted automatically.  "
+ . W "No additional DICOM objects will be imported for this study."
+ . D CONTINUE^MAGDAIR0
+ . Q
+ D DISPLAY^MAGDAIRW(STUDYN,PNAMEDCM,PID,DOB,SEX,ACNUMB,STUDYDAT,PROCNAME,MODIFIER)
+ S NSERIES=$$BLDSERIE^MAGDAIR3(STUDYN) ; build SERIES array
+ S OK=-2 F  D  Q:OK>-2
+ . W !!,"Is this the correct patient/study/procedure from VistA/view images? [enter Y, N, V]  N// "
+ . R X:DTIME E  S OK=-1 Q
+ . I X="" S X="n" W X
+ . I "^"[$E(X) S OK=-1 Q
+ . S X=$$UPPER^MAGOSMSC(X)
+ . I "Y"[$E(X) S OK=1 Q
+ . I "N"[$E(X) S OK=0 Q
+ . I "V"[$E(X) D ENTRY^MAGDAIR4(NSERIES) Q  ; display the images
+ . W:X'["?" " ???"
+ . W !!,"Please enter one of the following options:"
+ . W !,"      ",$$HIGHLITE^MAGDAIR0("YELLOW","Y")
+ . W "es -- to import these images to the same patient and study on VistA"
+ . W !,"       ",$$HIGHLITE^MAGDAIR0("YELLOW","N")
+ . W "o -- if you want to skip this study and select a different one"
+ . W !,"     ",$$HIGHLITE^MAGDAIR0("YELLOW","V")
+ . W "iew -- when you want to display the DICOM objects for this study"
+ . Q
+ I OK=0 D  ; wrong patient/study
+ . S Z=$$YESNO^MAGDAIR0("Select another patient and/or study on VistA for the "_COUNT_" DICOM objects?","n",.X)
+ . I X="NO" W "   (No action taken.)"
+ . E  D
+ . . K ^TMP("MAG",$J,"IMPORT","LIST",STUDYN,"ALREADY ON FILE"),^("PATIENT"),^("STUDY")
+ . . W !!,$$HIGHLITE^MAGDAIR0("YELLOW","New DICOM objects are now disassociated from the previous study.")
+ . . Q
+ . Q
+ E  I OK=1 D  ; right patient/study
+ . I $$YESNO^MAGDAIR0("Import the remaining "_NOTFILED_" DICOM object(s) to the same patient and study on VistA?","n",.X)<0
+ . I X="YES" D  ; process these new DICOM objects just like the previous ones
+ . . S $P(^TMP("MAG",$J,"IMPORT","LIST",STUDYN,"STUDY"),"^",2)="ON LINE"
+ . . K ^TMP("MAG",$J,"IMPORT","LIST",STUDYN,"ALREADY ON FILE")
+ . . W !!,"New DICOM objects will be imported."
+ . . Q
+ . E  D
+ . . W "   (No action taken.)"
+ . . Q
+ . Q
+ D CONTINUE^MAGDAIR0
+ Q
+ ;
+ ;
+ ;
+PICKDUP(STUDYN,DUPUID) ; pick the studies with the duplicate UID
+ N OK,X
+ S OK=0 F  D  Q:OK
+ . W !!,"Enter the number of the study (1-",DUPUID,") or N for None: "
+ . R X:DTIME E  S OK=-1 Q
+ . I X["^" S OK=-1 Q
+ . I X["?" D  Q
+ . . W "Enter a number"
+ . . Q
+ . I X?1N.N,X>0,X'>DUPUID D PICKDUP1(STUDYN,.DUPUID,X) S OK=1 Q
+ . S X=$$UPPER^MAGOSMSC(X)
+ . I X?1"N".E W " none selected" S OK=1 Q
+ . W:X'["X" " ???"
+ . Q
+ Q
+ ;
+PICKDUP1(STUDYN,DUPUID,N) ; display a study with a duplicate UID
+ N ACNUMB,DFN,DOB,I,INFO,J,MAGIEN,MODIFIER,PID,PNAMEDCM,PROCNAME,SEX,STUDYDAT,VAICN,X
+ S MAGIEN="" F I=1:1:N S MAGIEN=$O(DUPUID(MAGIEN)) Q:MAGIEN=""
+ D GETDATA(MAGIEN,.DFN,.PNAMEDCM,.PID,.DOB,.SEX,.VAICN,.ACNUMB,.STUDYDAT,.PROCNAME,.MODIFIER)
+ D SAVEDATA^MAGDAIR2(DFN,STUDYN,PNAMEDCM,PID,DOB,SEX,VAICN,ACNUMB,STUDYDAT,PROCNAME,MODIFIER,"UID",.DUPUID)
+ Q
+ ;
+DUPUID(STUDYN,DUPUID) ; highlite a study with a duplicate UID
+ N ACNUMB,DFN,DOB,I,INFO,J,MAGIEN,MODIFIER,PID,PNAMEDCM,PROCNAME,SEX,STUDYDAT,VAICN,X
+ S MAGIEN="" F I=1:1:DUPUID S MAGIEN=$O(DUPUID(MAGIEN)) Q:MAGIEN=""  D
+ . S X="This is Study #"_I_" on VistA that has this study's Study Instance UID:"
+ . W !!,$$HIGHLITE^MAGDAIR0("REVERSE",X)
+ . D GETDATA(MAGIEN,.DFN,.PNAMEDCM,.PID,.DOB,.SEX,.VAICN,.ACNUMB,.STUDYDAT,.PROCNAME,.MODIFIER)
+ . D DISPLAY^MAGDAIRW(STUDYN,PNAMEDCM,PID,DOB,SEX,ACNUMB,STUDYDAT,PROCNAME,MODIFIER)
+ . I I<DUPUID D CONTINUE^MAGDAIR0
+ . Q
+ Q
+ ;
+GETDATA(MAGIEN,DFN,PNAMEDCM,PID,DOB,SEX,VAICN,ACNUMB,STUDYDAT,PROCNAME,MODIFIER) ;
+ N INFO,J,X
+ S X=$$CALLRPC^MAGM2VCU("MAG DICOM IMPORTER LOOKUP","M",.INFO,MAGIEN)
+ I INFO(1)<0 D  Q
+ . D ERRORMSG^MAGDAIR0(1,"Error in rpc MAG DICOM IMPORTER LOOKUP",.INFO)
+ . Q
+ S X="DFN^PNAMEDCM^PID^DOB^SEX^VAICN^ACNUMB^STUDYDAT^PROCNAME^MODIFIER"
+ F J=1:1:$L(X,"^") S @$P(X,"^",J)=$P(INFO(1),"^",J+1)
+ Q
+ ;
+NEWFILE(STUDYN) ; entry point from ^MAGDAIR2 for a selected new study that is to be imported
+ N ACNUMB,COUNT,DFN,DOB,I,PID,PNAMEDCM,MODIFIER,MORE,ONFILE,RADPROC,SEX,STUDYDAT,STUDYDES,X,Z
+ S DFN=^TMP("MAG",$J,"IMPORT","LIST",STUDYN,"PATIENT")
+ S X=$G(^TMP("MAG",$J,"IMPORT","LIST",STUDYN,"STUDY"))
+ S ACNUMB=$P(X,"^",1)
+ S STUDYDAT=$P(X,"^",2),STUDYDES=$P(X,"^",3)
+ S X=^TMP("MAG",$J,"IMPORT","PATIENT",DFN)
+ S PNAMEDCM=$P(X,"^",1),PID=$P(X,"^",2),DOB=$P(X,"^",3),SEX=$P(X,"^",4)
+ S PNAMEDCM=$TR(PNAMEDCM,"|","^")
+ S X=$G(^TMP("MAG",$J,"IMPORT","LIST",STUDYN,"RADPROC"))
+ S RADPROC=$P(X,"^",1),X=$P(X,"^",2,999),MODIFIER=""
+ I RADPROC D
+ . S Z=$O(^MAGDICOM(2006.5758,"C",RADPROC,""))
+ . S STUDYDES=$P(^MAGDICOM(2006.5758,Z,0),"^",1)
+ . Q
+ F I=1:1:$L(X,"^") S:I>1 MODIFIER=MODIFIER_"^" S MODIFIER=MODIFIER_$P($P(X,"^",I),",",1)
+ S X=$$VERIFY^MAGDAIRW(0,STUDYN,PNAMEDCM,PID,DOB,SEX,ACNUMB,STUDYDAT,STUDYDES,MODIFIER,"Y")
+ I 'X D  ; wrong patient/study
+ . S Z=$$YESNO^MAGDAIR0("Disassociate these DICOM objects from this patient and study on VistA?","n",.X)
+ . I X="NO" W "   (No action taken.)"
+ . E  D
+ . . K ^TMP("MAG",$J,"IMPORT","LIST",STUDYN,"PATIENT"),^("STUDY"),^("VA READ")
+ . . W !!,$$HIGHLITE^MAGDAIR0("YELLOW","New DICOM objects are now disassociated from the previous study.")
+ . . Q
+ . Q
+ E  D  ; right patient/study
+ . W "   (No action taken.)"
+ . Q
+ D CONTINUE^MAGDAIR0

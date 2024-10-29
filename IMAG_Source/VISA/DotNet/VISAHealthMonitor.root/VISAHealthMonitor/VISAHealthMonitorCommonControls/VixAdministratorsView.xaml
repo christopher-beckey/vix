@@ -1,0 +1,100 @@
+﻿<Window x:Class="VISAHealthMonitorCommonControls.VixAdministratorsView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        DataContext="{Binding VixAdministrators, Source={StaticResource Locator}}" xmlns:my="clr-namespace:VISAHealthMonitorCommonControls"
+        d:DesignHeight="380" d:DesignWidth="700" 
+        Height="400"
+        Width="700"
+        Title="{Binding Path=Title}" WindowStartupLocation="CenterOwner" Icon="/VISAHealthMonitorCommonControls;component/images/Administrator.png">
+
+    <DockPanel LastChildFill="True" VerticalAlignment="Stretch" >
+        <DockPanel.Resources>
+            <Style x:Key="LeftHeaderStyle" TargetType="{x:Type GridViewColumnHeader}">
+                <Setter Property="HorizontalContentAlignment" Value="Left"/>
+            </Style>
+        </DockPanel.Resources>
+        <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="2,2,2,0" DockPanel.Dock="Top">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="25"/>
+
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="120" />
+                <ColumnDefinition Width="100*" />
+            </Grid.ColumnDefinitions>
+
+            <Label Grid.Row="0" Grid.Column="0" Content="Site" Height="23" HorizontalContentAlignment="Right" />
+            <TextBox Grid.Row="0" Grid.Column="1" Height="23" Margin="2,0,2,0"
+                             HorizontalAlignment="Stretch" Text="{Binding Path=SiteName}" IsReadOnly="True"/>
+
+        </Grid>
+        <Label Content="VIX Administrators" DockPanel.Dock="Top" Height="23" 
+               HorizontalContentAlignment="Left" Margin="2,2,2,0" />
+
+        <StatusBar DockPanel.Dock="Bottom" Height="23" HorizontalAlignment="Stretch">
+            <StatusBarItem HorizontalAlignment="Stretch">
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="images/failed.ico" Visibility="{Binding Path=ErrorIconVisibility}" Stretch="None" Margin="0,0,2,0"/>
+                    <TextBlock Text="{Binding Path=StatusMessage}" />
+                </StackPanel>
+            </StatusBarItem>
+        </StatusBar>
+
+        <StackPanel Orientation="Horizontal" DockPanel.Dock="Bottom" HorizontalAlignment="Center">
+            <Button Content="Send Email" Command="{Binding Path=SendEmailCommand}" Margin="2,1,2,1" />
+            <Button  Content="Close" Command="{Binding Path=CloseCommand}" Margin="2,1,2,1" />
+        </StackPanel>
+
+        <ListView  HorizontalAlignment="Stretch" DockPanel.Dock="Bottom"
+                       MinHeight="130" Margin="2,2,2,0" 
+                      VerticalAlignment="Stretch"
+                      ItemsSource="{Binding Path=VixAdministrators.Sources.View}"
+                   SelectedItem="{Binding Path=SelectedItem}">
+            <ListView.ContextMenu>
+                <ContextMenu Name="RightClick">
+                    <MenuItem Header="Copy to Clipboard" Command="{Binding Path=CopyToClipboardCommand}"/>                        
+                </ContextMenu>
+            </ListView.ContextMenu>
+            
+            
+            <ListView.View>
+                <GridView >
+                    <GridViewColumn Width="200" HeaderContainerStyle="{StaticResource LeftHeaderStyle}" >
+                        <GridViewColumnHeader Content="Name" />
+                        <GridViewColumn.CellTemplate>
+                            <HierarchicalDataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="{Binding Name}"  />
+                                </StackPanel>
+                            </HierarchicalDataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Width="180" HeaderContainerStyle="{StaticResource LeftHeaderStyle}" >
+                        <GridViewColumnHeader Content="Phone Number"/>
+                        <GridViewColumn.CellTemplate>
+                            <HierarchicalDataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="{Binding PhoneNumber}"  />
+                                </StackPanel>
+                            </HierarchicalDataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Width="200" HeaderContainerStyle="{StaticResource LeftHeaderStyle}" >
+                        <GridViewColumnHeader Content="Email" />
+                        <GridViewColumn.CellTemplate>
+                            <HierarchicalDataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="{Binding Email}"  />
+                                </StackPanel>
+                            </HierarchicalDataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>                   
+                </GridView>
+            </ListView.View>
+        </ListView>
+
+    </DockPanel>
+</Window>

@@ -1,0 +1,92 @@
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+	<comment>The mapping of VA artifact types to Military Health System (MHS) codes </comment>
+	
+	<!-- 6-INSURANCE FORM  -->
+	<entry key="INSURANCE FORM">mhs-11</entry>
+	
+	<!-- 49-APPT OF VSO AS CLAIMANT'S REP  -->
+	<entry key="APPT OF VSO AS CLAIMANT'S REP">mhs-22</entry>
+	
+	<!-- 51-DD214 ENLISTED RECORD & RPT OF SEP  -->
+	<entry key="DD214 ENLISTED RECORD &amp; RPT OF SEP">mhs-2</entry>
+	
+	<!-- 52-DEATH CERTIFICATE  -->
+	<entry key="DEATH CERTIFICATE">mhs-20</entry>
+	
+	<!-- 56-FINANCIAL WORKSHEET  -->
+	<entry key="FINANCIAL WORKSHEET">mhs-12</entry>
+	
+	<!-- 57-INVENTORY OF FUNDS AND EFFECTS  -->
+	<entry key="INVENTORY OF FUNDS AND EFFECTS">mhs-12</entry>
+	
+	<!-- 59-HEALTH INSURANCE CARDS  -->
+	<entry key="HEALTH INSURANCE CARDS">mhs-10</entry>
+	
+	<!-- 60-PLENARY GUARDIANSHIP  -->
+	<entry key="PLENARY GUARDIANSHIP">mhs-22</entry>
+	
+	<!-- 61-POWER OF ATTORNEY  -->
+	<entry key="POWER OF ATTORNEY">mhs-21</entry>
+	
+	<!-- 65-DESIGNATION OF HEALTHCARE SURROGATE  -->
+	<entry key="DESIGNATION OF HEALTHCARE SURROGATE">mhs-22</entry>
+	
+	<!-- 66-CONSENT  -->
+	<entry key="CONSENT">mhs-17</entry>
+	
+	<!-- 67-ADVANCE DIRECTIVE  -->
+	<entry key="ADVANCE DIRECTIVE">mhs-16</entry>
+	
+	<!-- 71-MEDICATION RECORD  -->
+	<entry key="MEDICATION RECORD">mhs-32</entry>
+	
+	<!-- 72-FLOWSHEET  -->
+	<entry key="FLOWSHEET">mhs-31</entry>
+	
+	<!-- 75-IMAGE  -->
+	<entry key="IMAGE">mhs-15</entry>
+	
+	<!-- 76-DIAGRAM  -->
+	<entry key="DIAGRAM">mhs-15</entry>
+	
+	<!-- 80-CONSULT  -->
+	<entry key="CONSULT">mhs-7</entry>
+	
+	<!-- 81-COMMITMENT  -->
+	<entry key="COMMITMENT">mhs-22</entry>
+	
+	<!-- 82-REQUEST FOR AUTOPSY  -->
+	<entry key="REQUEST FOR AUTOPSY">mhs-25</entry>
+	
+	<!-- 83-RELEASE OF INFORMATION  -->
+	<entry key="RELEASE OF INFORMATION">mhs-22</entry>
+	
+	<!-- 84-PHOTO ID  -->
+	<entry key="PHOTO ID">mhs-15</entry>
+	
+	<!-- 90-VIDEO  -->
+	<entry key="VIDEO">mhs-15</entry>
+	
+	<!-- 93-REFERRAL  -->
+	<entry key="REFERRAL">mhs-25</entry>
+	
+	<!-- 94-LEGAL DOCUMENTS  -->
+	<entry key="LEGAL DOCUMENTS">mhs-22</entry>
+	
+	<!-- 96-ORGAN DONATION  -->
+	<entry key="ORGAN DONATION">mhs-22</entry>
+	
+	<!-- 97-BILLS  -->
+	<entry key="BILLS">mhs-12</entry>
+	
+	<!-- 98-MTF REFERRAL FORM  -->
+	<entry key="MTF REFERRAL FORM">mhs-25</entry>
+	
+	<!-- 100-ORDER  -->
+	<entry key="ORDER">mhs-25</entry>
+	
+	<!-- 104-FINANCIAL STATUS/1837/5655/1100  -->
+	<entry key="FINANCIAL STATUS/1837/5655/1100">mhs-104</entry>
+	
+</properties>

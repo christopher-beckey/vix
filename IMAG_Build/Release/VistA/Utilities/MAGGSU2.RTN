@@ -1,0 +1,50 @@
+MAGGSU2 ;WOIFO/GEK - Utilities
+ ;;3.0;IMAGING;**7**;Apr 17, 2002
+ ;; +---------------------------------------------------------------+
+ ;; | Property of the US Government.                                |
+ ;; | No permission to copy or redistribute this software is given. |
+ ;; | Use of unreleased versions of this software requires the user |
+ ;; | to execute a written test agreement with the VistA Imaging    |
+ ;; | Development Office of the Department of Veterans Affairs,     |
+ ;; | telephone (301) 734-0100.                                     |
+ ;; |                                                               |
+ ;; | The Food and Drug Administration classifies this software as  |
+ ;; | a medical device.  As such, it may not be changed in any way. |
+ ;; | Modifications to this software may result in an adulterated   |
+ ;; | medical device under 21CFR820, the use of which is considered |
+ ;; | to be a violation of US Federal Statutes.                     |
+ ;; +---------------------------------------------------------------+
+ ;;
+ W !,"List RPC's with TAG and ROUTINE"
+ W !,"D A        : list all MAG* RPC's"
+ W !,"D AS(x)    : list all x* RPC's"
+ W !,"D R        : list all MAG* RPC's sorted by routine"
+ W !,"D RS(r)    : list all MAG* RPC'S that call routines starting with r"
+ Q
+ ;
+A S ST="MAG"
+DO S I=ST,STY=$G(STY,1),CT=0
+ F  S I=$O(^XWB(8994,"B",I)) Q:($E(I,1,$L(ST))'=ST)  D
+ . S IEN=$O(^(I,""))
+ . S X=^XWB(8994,IEN,0) ; NAME^TAG^ROUTINE
+ . I STY=1 S CT=CT+1 W !,$P(X,U),?30,$P(X,U,2),?40,$P(X,U,3)
+ . I STY=2 S ^TMP($J,"MAGGSU2",$P(X,U,3),$P(X,U,2),$P(X,U))=""
+ I STY=1 W !!,CT,"   ENTRIES FOUND"
+ Q
+AS(ST) D DO Q
+ ;
+R N STY
+ S RTN=$G(RTN)
+ S STY=2 K ^TMP($J,"MAGGSU2") D A
+ S I="",CT=0
+ F  S I=$O(^TMP($J,"MAGGSU2",I)) Q:I=""  D
+ . I $L(RTN) Q:($E(I,1,$L(RTN))'=RTN)
+ . S J="" F  S J=$O(^TMP($J,"MAGGSU2",I,J)) Q:J=""  D
+ . . S K="" F  S K=$O(^TMP($J,"MAGGSU2",I,J,K)) Q:K=""  D
+ . . . S CT=CT+1 W !,I,?10,J,?20,K
+ W !!,CT,"  ENTRIES FOUND"
+ K ^TMP($J,"MAGGSU2")
+ Q
+RS(RTN) D R Q
+OLD S RTN="MAGGT" D R Q
+NEW S RTN="MAGGS" D R Q

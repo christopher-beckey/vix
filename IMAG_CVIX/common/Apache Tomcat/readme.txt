@@ -1,0 +1,1 @@
+tcnative-1.dll is version 1.2.25 corresponding to Tomcat 9.0.40

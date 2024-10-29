@@ -1,0 +1,618 @@
+KIDS Distribution saved on Jul 16, 2007@13:09:41
+Package for FILE named 2006.59
+**KIDS**:MAG*3.0*121^
+
+**INSTALL NAME**
+MAG*3.0*121
+"BLD",5933,0)
+MAG*3.0*121^^0^3070716^y
+"BLD",5933,1,0)
+^^4^4^3070716^
+"BLD",5933,1,1,0)
+This package contains a KIDS component
+"BLD",5933,1,2,0)
+for Running Baseline.
+"BLD",5933,1,3,0)
+ 
+"BLD",5933,1,4,0)
+This package transports the FileMan data dictionary named 2006.59.
+"BLD",5933,4,0)
+^9.64PA^2006.59^1
+"BLD",5933,4,2006.59,0)
+2006.59
+"BLD",5933,4,2006.59,222)
+y^y^f^^^^n
+"BLD",5933,4,"B",2006.59,2006.59)
+
+"BLD",5933,6.3)
+1
+"BLD",5933,"KRN",0)
+^9.67PA^8989.52^19
+"BLD",5933,"KRN",.4,0)
+.4
+"BLD",5933,"KRN",.401,0)
+.401
+"BLD",5933,"KRN",.402,0)
+.402
+"BLD",5933,"KRN",.403,0)
+.403
+"BLD",5933,"KRN",.5,0)
+.5
+"BLD",5933,"KRN",.84,0)
+.84
+"BLD",5933,"KRN",3.6,0)
+3.6
+"BLD",5933,"KRN",3.8,0)
+3.8
+"BLD",5933,"KRN",9.2,0)
+9.2
+"BLD",5933,"KRN",9.8,0)
+9.8
+"BLD",5933,"KRN",19,0)
+19
+"BLD",5933,"KRN",19.1,0)
+19.1
+"BLD",5933,"KRN",101,0)
+101
+"BLD",5933,"KRN",409.61,0)
+409.61
+"BLD",5933,"KRN",771,0)
+771
+"BLD",5933,"KRN",870,0)
+870
+"BLD",5933,"KRN",8989.51,0)
+8989.51
+"BLD",5933,"KRN",8989.52,0)
+8989.52
+"BLD",5933,"KRN",8994,0)
+8994
+"BLD",5933,"KRN","B",.4,.4)
+
+"BLD",5933,"KRN","B",.401,.401)
+
+"BLD",5933,"KRN","B",.402,.402)
+
+"BLD",5933,"KRN","B",.403,.403)
+
+"BLD",5933,"KRN","B",.5,.5)
+
+"BLD",5933,"KRN","B",.84,.84)
+
+"BLD",5933,"KRN","B",3.6,3.6)
+
+"BLD",5933,"KRN","B",3.8,3.8)
+
+"BLD",5933,"KRN","B",9.2,9.2)
+
+"BLD",5933,"KRN","B",9.8,9.8)
+
+"BLD",5933,"KRN","B",19,19)
+
+"BLD",5933,"KRN","B",19.1,19.1)
+
+"BLD",5933,"KRN","B",101,101)
+
+"BLD",5933,"KRN","B",409.61,409.61)
+
+"BLD",5933,"KRN","B",771,771)
+
+"BLD",5933,"KRN","B",870,870)
+
+"BLD",5933,"KRN","B",8989.51,8989.51)
+
+"BLD",5933,"KRN","B",8989.52,8989.52)
+
+"BLD",5933,"KRN","B",8994,8994)
+
+"FIA",2006.59)
+ROUTING RULE
+"FIA",2006.59,0)
+^MAGDICOM(2006.59,
+"FIA",2006.59,0,0)
+2006.59
+"FIA",2006.59,0,1)
+y^y^f^^^^n
+"FIA",2006.59,0,10)
+
+"FIA",2006.59,0,11)
+
+"FIA",2006.59,0,"RLRO")
+
+"FIA",2006.59,2006.59)
+0
+"FIA",2006.59,2006.5901)
+0
+"FIA",2006.59,2006.5902)
+0
+"FIA",2006.59,2006.5903)
+0
+"FIA",2006.59,2006.5904)
+0
+"FIA",2006.59,2006.5905)
+0
+"MBREQ")
+0
+"QUES","XPF1",0)
+Y
+"QUES","XPF1","??")
+^D REP^XPDH
+"QUES","XPF1","A")
+Shall I write over your |FLAG| File
+"QUES","XPF1","B")
+YES
+"QUES","XPF1","M")
+D XPF1^XPDIQ
+"QUES","XPF2",0)
+Y
+"QUES","XPF2","??")
+^D DTA^XPDH
+"QUES","XPF2","A")
+Want my data |FLAG| yours
+"QUES","XPF2","B")
+YES
+"QUES","XPF2","M")
+D XPF2^XPDIQ
+"QUES","XPI1",0)
+YO
+"QUES","XPI1","??")
+^D INHIBIT^XPDH
+"QUES","XPI1","A")
+Want KIDS to INHIBIT LOGONs during the install
+"QUES","XPI1","B")
+YES
+"QUES","XPI1","M")
+D XPI1^XPDIQ
+"QUES","XPM1",0)
+PO^VA(200,:EM
+"QUES","XPM1","??")
+^D MG^XPDH
+"QUES","XPM1","A")
+Enter the Coordinator for Mail Group '|FLAG|'
+"QUES","XPM1","B")
+
+"QUES","XPM1","M")
+D XPM1^XPDIQ
+"QUES","XPO1",0)
+Y
+"QUES","XPO1","??")
+^D MENU^XPDH
+"QUES","XPO1","A")
+Want KIDS to Rebuild Menu Trees Upon Completion of Install
+"QUES","XPO1","B")
+YES
+"QUES","XPO1","M")
+D XPO1^XPDIQ
+"QUES","XPZ1",0)
+Y
+"QUES","XPZ1","??")
+^D OPT^XPDH
+"QUES","XPZ1","A")
+Want to DISABLE Scheduled Options, Menu Options, and Protocols
+"QUES","XPZ1","B")
+YES
+"QUES","XPZ1","M")
+D XPZ1^XPDIQ
+"QUES","XPZ2",0)
+Y
+"QUES","XPZ2","??")
+^D RTN^XPDH
+"QUES","XPZ2","A")
+Want to MOVE routines to other CPUs
+"QUES","XPZ2","B")
+NO
+"QUES","XPZ2","M")
+D XPZ2^XPDIQ
+"SEC","^DIC",2006.59,2006.59,0,"AUDIT")
+@
+"SEC","^DIC",2006.59,2006.59,0,"DD")
+@
+"SEC","^DIC",2006.59,2006.59,0,"DEL")
+@
+"SEC","^DIC",2006.59,2006.59,0,"LAYGO")
+@
+"SEC","^DIC",2006.59,2006.59,0,"RD")
+@
+"SEC","^DIC",2006.59,2006.59,0,"WR")
+@
+"VER")
+8.0^22.0
+"^DD",2006.59,2006.59,0)
+FIELD^^4^5
+"^DD",2006.59,2006.59,0,"DDA")
+N
+"^DD",2006.59,2006.59,0,"DT")
+2981112
+"^DD",2006.59,2006.59,0,"NM","ROUTING RULE")
+
+"^DD",2006.59,2006.59,0,"PT",2006.5906,.01)
+
+"^DD",2006.59,2006.59,0,"VRPK")
+MAG
+"^DD",2006.59,2006.59,.01,0)
+RULE NUMBER^RF^^0;1^K:$L(X)>30!($L(X)<3)!'(X'?1P.E) X
+"^DD",2006.59,2006.59,.01,.1)
+Rule Number
+"^DD",2006.59,2006.59,.01,1,0)
+^.1^^0
+"^DD",2006.59,2006.59,.01,3)
+Enter an integer number that uniquely identifies a rule.
+"^DD",2006.59,2006.59,.01,21,0)
+^^2^2^3000223^^
+"^DD",2006.59,2006.59,.01,21,1,0)
+The value of this field is an integer number
+"^DD",2006.59,2006.59,.01,21,2,0)
+that uniquely identifies a routing rule.
+"^DD",2006.59,2006.59,.01,"DT")
+2980921
+"^DD",2006.59,2006.59,1,0)
+RAW TEXT^2006.5901A^^1;0
+"^DD",2006.59,2006.59,2,0)
+ACTION^2006.5902A^^ACTION;0
+"^DD",2006.59,2006.59,3,0)
+CONDITION^2006.5904A^^CONDITION;0
+"^DD",2006.59,2006.59,4,0)
+PRIORITY^S^HIGH:High;NORMAL:Normal;LOW:Low;^PRIORITY;1^Q
+"^DD",2006.59,2006.59,4,3)
+Enter a priority for this action (High, Normal or Low).
+"^DD",2006.59,2006.59,4,21,0)
+^^3^3^3000223^^
+"^DD",2006.59,2006.59,4,21,1,0)
+The value of this field is a priority to be assigned to this action.
+"^DD",2006.59,2006.59,4,21,2,0)
+The priority will be observed by the queue manager that takes
+"^DD",2006.59,2006.59,4,21,3,0)
+actions off a queue.
+"^DD",2006.59,2006.59,4,"DT")
+2981112
+"^DD",2006.59,2006.5901,0)
+RAW TEXT SUB-FIELD^^.01^1
+"^DD",2006.59,2006.5901,0,"DT")
+2980911
+"^DD",2006.59,2006.5901,0,"NM","RAW TEXT")
+
+"^DD",2006.59,2006.5901,0,"UP")
+2006.59
+"^DD",2006.59,2006.5901,.01,0)
+LINE^MRF^^0;1^K:$L(X)>250!($L(X)<1) X
+"^DD",2006.59,2006.5901,.01,1,0)
+^.1^^0
+"^DD",2006.59,2006.5901,.01,3)
+Enter a text that defines a routing rule.
+"^DD",2006.59,2006.5901,.01,21,0)
+^^7^7^3000223^^
+"^DD",2006.59,2006.5901,.01,21,1,0)
+The value of this field is a line of text that would
+"^DD",2006.59,2006.5901,.01,21,2,0)
+be read from the file 'route.dic'.
+"^DD",2006.59,2006.5901,.01,21,3,0)
+ 
+"^DD",2006.59,2006.5901,.01,21,4,0)
+The text in this file specifies a group of routing
+"^DD",2006.59,2006.5901,.01,21,5,0)
+rules. The further fields in this file contain the
+"^DD",2006.59,2006.5901,.01,21,6,0)
+parsed values from these texts that are used to
+"^DD",2006.59,2006.5901,.01,21,7,0)
+evaluate the rules at run time.
+"^DD",2006.59,2006.5901,.01,"DT")
+2990422
+"^DD",2006.59,2006.5902,0)
+ACTION SUB-FIELD^^1^2
+"^DD",2006.59,2006.5902,0,"DT")
+2980911
+"^DD",2006.59,2006.5902,0,"NM","ACTION")
+
+"^DD",2006.59,2006.5902,0,"UP")
+2006.59
+"^DD",2006.59,2006.5902,.01,0)
+VERB^F^^0;1^K:$L(X)>31!($L(X)<1) X
+"^DD",2006.59,2006.5902,.01,1,0)
+^.1^^0
+"^DD",2006.59,2006.5902,.01,3)
+Enter a verb like 'SEND' or 'BALANCE'.
+"^DD",2006.59,2006.5902,.01,21,0)
+^^5^5^3000223^^
+"^DD",2006.59,2006.5902,.01,21,1,0)
+The value of this field is a string that defines
+"^DD",2006.59,2006.5902,.01,21,2,0)
+the action-verb for the rule at hand.
+"^DD",2006.59,2006.5902,.01,21,3,0)
+ 
+"^DD",2006.59,2006.5902,.01,21,4,0)
+Currently, only 'SEND' and 'BALANCE' are defined
+"^DD",2006.59,2006.5902,.01,21,5,0)
+actions.
+"^DD",2006.59,2006.5902,.01,"DT")
+2990422
+"^DD",2006.59,2006.5902,1,0)
+PARAMETER^2006.5903A^^1;0
+"^DD",2006.59,2006.5903,0)
+PARAMETER SUB-FIELD^^.01^1
+"^DD",2006.59,2006.5903,0,"DT")
+2980911
+"^DD",2006.59,2006.5903,0,"NM","PARAMETER")
+
+"^DD",2006.59,2006.5903,0,"UP")
+2006.5902
+"^DD",2006.59,2006.5903,.01,0)
+VALUE^F^^0;1^K:$L(X)>250!($L(X)<1) X
+"^DD",2006.59,2006.5903,.01,1,0)
+^.1^^0
+"^DD",2006.59,2006.5903,.01,3)
+Enter the value of a positional parameter.
+"^DD",2006.59,2006.5903,.01,21,0)
+^^5^5^3000223^^
+"^DD",2006.59,2006.5903,.01,21,1,0)
+The value of this field is a string that defines
+"^DD",2006.59,2006.5903,.01,21,2,0)
+a parameter to a routing rule.
+"^DD",2006.59,2006.5903,.01,21,3,0)
+ 
+"^DD",2006.59,2006.5903,.01,21,4,0)
+For the verb 'SEND', the parameter would be the
+"^DD",2006.59,2006.5903,.01,21,5,0)
+name of the destination to send a file to.
+"^DD",2006.59,2006.5903,.01,"DT")
+2990422
+"^DD",2006.59,2006.5904,0)
+CONDITION SUB-FIELD^^4^5
+"^DD",2006.59,2006.5904,0,"DT")
+2980911
+"^DD",2006.59,2006.5904,0,"NM","CONDITION")
+
+"^DD",2006.59,2006.5904,0,"UP")
+2006.59
+"^DD",2006.59,2006.5904,.01,0)
+FIELD^F^^0;1^K:$L(X)>250!($L(X)<1) X
+"^DD",2006.59,2006.5904,.01,1,0)
+^.1^^0
+"^DD",2006.59,2006.5904,.01,3)
+Enter a the name of a parameter.
+"^DD",2006.59,2006.5904,.01,21,0)
+^^6^6^3000223^^
+"^DD",2006.59,2006.5904,.01,21,1,0)
+The value of this field is a string that identifies
+"^DD",2006.59,2006.5904,.01,21,2,0)
+a parameter that is checked for the purpose of evaluating
+"^DD",2006.59,2006.5904,.01,21,3,0)
+the current condition.
+"^DD",2006.59,2006.5904,.01,21,4,0)
+ 
+"^DD",2006.59,2006.5904,.01,21,5,0)
+Such a parameter can be any field from the Image File
+"^DD",2006.59,2006.5904,.01,21,6,0)
+(# 2005, stored in ^MAG(2005,...), or 'NOW'.
+"^DD",2006.59,2006.5904,.01,"DT")
+2990422
+"^DD",2006.59,2006.5904,1,0)
+DATATYPE^S^DT:Date Time;LO:Long String;SH:Short String;AE:AE;AS:AS;AT:AT;CS:CS;DA:DA;DS:DS;FL:FL;FD:FD;IS:IS;LT:LT;OB:OB;OW:OW;PN:PN;SL:SL;SQ:SQ;SS:SS;ST:ST;TM:TM;UI:UI;UL:UL;UN:UN;US:US;UT:UT;^DATATYPE;1^Q
+"^DD",2006.59,2006.5904,1,3)
+Enter the data type for this condition.
+"^DD",2006.59,2006.5904,1,21,0)
+^^30^30^3000223^^
+"^DD",2006.59,2006.5904,1,21,1,0)
+The value of this field is a code that identifies
+"^DD",2006.59,2006.5904,1,21,2,0)
+the data type of the field that is referenced in
+"^DD",2006.59,2006.5904,1,21,3,0)
+the current condition to be evaluated.
+"^DD",2006.59,2006.5904,1,21,4,0)
+ 
+"^DD",2006.59,2006.5904,1,21,5,0)
+Possible data types are:
+"^DD",2006.59,2006.5904,1,21,6,0)
+  AE   Application Entity
+"^DD",2006.59,2006.5904,1,21,7,0)
+  AS   Age String
+"^DD",2006.59,2006.5904,1,21,8,0)
+  AT   Attribute Tag
+"^DD",2006.59,2006.5904,1,21,9,0)
+  CS   Code String
+"^DD",2006.59,2006.5904,1,21,10,0)
+  DA   Date
+"^DD",2006.59,2006.5904,1,21,11,0)
+  DS   Decimal String
+"^DD",2006.59,2006.5904,1,21,12,0)
+  DT   Date/Time
+"^DD",2006.59,2006.5904,1,21,13,0)
+  FL   Floating Point Single
+"^DD",2006.59,2006.5904,1,21,14,0)
+  FD   Floating Point Double
+"^DD",2006.59,2006.5904,1,21,15,0)
+  IS   Integer String
+"^DD",2006.59,2006.5904,1,21,16,0)
+  LO   Long String
+"^DD",2006.59,2006.5904,1,21,17,0)
+  LT   Long Text
+"^DD",2006.59,2006.5904,1,21,18,0)
+  OB   Other Byte String
+"^DD",2006.59,2006.5904,1,21,19,0)
+  OW   Other Word String
+"^DD",2006.59,2006.5904,1,21,20,0)
+  PN   Person Name
+"^DD",2006.59,2006.5904,1,21,21,0)
+  SH   Short String
+"^DD",2006.59,2006.5904,1,21,22,0)
+  SL   Signed Long
+"^DD",2006.59,2006.5904,1,21,23,0)
+  SQ   Sequence of Items
+"^DD",2006.59,2006.5904,1,21,24,0)
+  SS   Signed Short
+"^DD",2006.59,2006.5904,1,21,25,0)
+  ST   Short Text
+"^DD",2006.59,2006.5904,1,21,26,0)
+  TM   Time
+"^DD",2006.59,2006.5904,1,21,27,0)
+  UI   Unique Identifier
+"^DD",2006.59,2006.5904,1,21,28,0)
+  UL   Unsigned Long
+"^DD",2006.59,2006.5904,1,21,29,0)
+  US   Unsigned Short
+"^DD",2006.59,2006.5904,1,21,30,0)
+  UT   Unlimited Text
+"^DD",2006.59,2006.5904,1,"DT")
+2980911
+"^DD",2006.59,2006.5904,2,0)
+OPERATOR^F^^OPERATOR;1^K:$L(X)>5!($L(X)<1) X
+"^DD",2006.59,2006.5904,2,3)
+Enter an operator for this comparison.
+"^DD",2006.59,2006.5904,2,21,0)
+^^6^6^3000223^^
+"^DD",2006.59,2006.5904,2,21,1,0)
+The value if this field is a short string that defines
+"^DD",2006.59,2006.5904,2,21,2,0)
+the operator that is applied to compare the value of a
+"^DD",2006.59,2006.5904,2,21,3,0)
+parameter with a specified value.
+"^DD",2006.59,2006.5904,2,21,4,0)
+ 
+"^DD",2006.59,2006.5904,2,21,5,0)
+Typical operators are = (equal), != (not equal),
+"^DD",2006.59,2006.5904,2,21,6,0)
+> (greater or later than) and < (less or earlier than).
+"^DD",2006.59,2006.5904,2,"DT")
+2980911
+"^DD",2006.59,2006.5904,3,0)
+VALUE^F^^VALUE;1^K:$L(X)>250!($L(X)<1) X
+"^DD",2006.59,2006.5904,3,3)
+Enter the value to compare this parameter to.
+"^DD",2006.59,2006.5904,3,21,0)
+^^3^3^3000223^^
+"^DD",2006.59,2006.5904,3,21,1,0)
+The value of this field is a string that defines
+"^DD",2006.59,2006.5904,3,21,2,0)
+the value to which a parameter is being compared
+"^DD",2006.59,2006.5904,3,21,3,0)
+in the context of evaluating the current rule.
+"^DD",2006.59,2006.5904,3,"DT")
+2980911
+"^DD",2006.59,2006.5904,4,0)
+TIMEFRAME^2006.5905A^^1;0
+"^DD",2006.59,2006.5905,0)
+TIMEFRAME SUB-FIELD^^3^4
+"^DD",2006.59,2006.5905,0,"DT")
+2980911
+"^DD",2006.59,2006.5905,0,"NM","TIMEFRAME")
+
+"^DD",2006.59,2006.5905,0,"UP")
+2006.5904
+"^DD",2006.59,2006.5905,.01,0)
+NUMBER^NJ5,0^^0;1^K:+X'=X!(X>99999)!(X<0)!(X?.E1"."1N.N) X
+"^DD",2006.59,2006.5905,.01,1,0)
+^.1^^0
+"^DD",2006.59,2006.5905,.01,3)
+Enter an integer number that uniquely identifies a time-frame.
+"^DD",2006.59,2006.5905,.01,21,0)
+^^2^2^3000223^^
+"^DD",2006.59,2006.5905,.01,21,1,0)
+The value of this field is an integer number
+"^DD",2006.59,2006.5905,.01,21,2,0)
+that uniquely identifies a time frame for a routing rule.
+"^DD",2006.59,2006.5905,.01,"DT")
+2990422
+"^DD",2006.59,2006.5905,1,0)
+MASK^F^^MASK;1^K:$L(X)>20!($L(X)<1) X
+"^DD",2006.59,2006.5905,1,3)
+Enter a date/time mask ('ddd yyymmdd.hhmmss').
+"^DD",2006.59,2006.5905,1,21,0)
+^.001^8^8^3020815^^^
+"^DD",2006.59,2006.5905,1,21,1,0)
+The value of this field is a string of characters
+"^DD",2006.59,2006.5905,1,21,2,0)
+that indicates which fields in the values for the
+"^DD",2006.59,2006.5905,1,21,3,0)
+start and end of the current time-frame are validated
+"^DD",2006.59,2006.5905,1,21,4,0)
+while evaluating the current routing rule.
+"^DD",2006.59,2006.5905,1,21,5,0)
+ 
+"^DD",2006.59,2006.5905,1,21,6,0)
+Those characters in the 'begin' and 'end' fields
+"^DD",2006.59,2006.5905,1,21,7,0)
+that correspond to upper case characters in this
+"^DD",2006.59,2006.5905,1,21,8,0)
+mask, will be evaluated.
+"^DD",2006.59,2006.5905,1,"DT")
+2980911
+"^DD",2006.59,2006.5905,2,0)
+BEGIN DATE/TIME^F^^BEGIN;1^K:$L(X)>20!($L(X)<1) X
+"^DD",2006.59,2006.5905,2,3)
+Enter a date/time ('ddd yyymmdd.hhmmss' start of frame).
+"^DD",2006.59,2006.5905,2,21,0)
+^^4^4^3000223^^
+"^DD",2006.59,2006.5905,2,21,1,0)
+The value of this field is a date/time string
+"^DD",2006.59,2006.5905,2,21,2,0)
+that indicates the start of the time-frame that
+"^DD",2006.59,2006.5905,2,21,3,0)
+validates as 'positive' for this part of the
+"^DD",2006.59,2006.5905,2,21,4,0)
+routing rule.
+"^DD",2006.59,2006.5905,2,"DT")
+2980911
+"^DD",2006.59,2006.5905,3,0)
+END DATE/TIME^F^^END;1^K:$L(X)>20!($L(X)<1) X
+"^DD",2006.59,2006.5905,3,3)
+Enter a date/time ('ddd yyymmdd.hhmmss' end of frame).
+"^DD",2006.59,2006.5905,3,21,0)
+^^4^4^3000223^^
+"^DD",2006.59,2006.5905,3,21,1,0)
+The value of this field is a date/time string
+"^DD",2006.59,2006.5905,3,21,2,0)
+that indicates the end of the time-frame that
+"^DD",2006.59,2006.5905,3,21,3,0)
+validates as 'positive' for this part of the
+"^DD",2006.59,2006.5905,3,21,4,0)
+routing rule.
+"^DD",2006.59,2006.5905,3,"DT")
+2980911
+"^DIC",2006.59,2006.59,0)
+ROUTING RULE^2006.59
+"^DIC",2006.59,2006.59,0,"GL")
+^MAGDICOM(2006.59,
+"^DIC",2006.59,2006.59,"%",0)
+^1.005^^0
+"^DIC",2006.59,2006.59,"%D",0)
+^^19^19^3020528^^
+"^DIC",2006.59,2006.59,"%D",1,0)
+ +---------------------------------------------------------------+
+"^DIC",2006.59,2006.59,"%D",2,0)
+ |                                                               |
+"^DIC",2006.59,2006.59,"%D",3,0)
+ | Property of the US Government.                                |
+"^DIC",2006.59,2006.59,"%D",4,0)
+ | No permission to copy or redistribute this software is given. |
+"^DIC",2006.59,2006.59,"%D",5,0)
+ | Use of unreleased versions of this software requires the user |
+"^DIC",2006.59,2006.59,"%D",6,0)
+ | to execute a written test agreement with the VistA Imaging    |
+"^DIC",2006.59,2006.59,"%D",7,0)
+ | Development Office of the Department of Veterans Affairs,     |
+"^DIC",2006.59,2006.59,"%D",8,0)
+ | telephone (301) 734-0100.                                     |
+"^DIC",2006.59,2006.59,"%D",9,0)
+ |                                                               |
+"^DIC",2006.59,2006.59,"%D",10,0)
+ | The Food and Drug Administration classifies this software as  |
+"^DIC",2006.59,2006.59,"%D",11,0)
+ | a medical device.  As such, it may not be changed in any way. |
+"^DIC",2006.59,2006.59,"%D",12,0)
+ | Modifications to this software may result in an adulterated   |
+"^DIC",2006.59,2006.59,"%D",13,0)
+ | medical device under 21CFR820, the use of which is considered |
+"^DIC",2006.59,2006.59,"%D",14,0)
+ | to be a violation of US Federal Statutes.                     |
+"^DIC",2006.59,2006.59,"%D",15,0)
+ |                                                               |
+"^DIC",2006.59,2006.59,"%D",16,0)
+ +---------------------------------------------------------------+
+"^DIC",2006.59,2006.59,"%D",17,0)
+ 
+"^DIC",2006.59,2006.59,"%D",18,0)
+The entries in this table define the various rules for automatically
+"^DIC",2006.59,2006.59,"%D",19,0)
+routing image files to remote locations.
+"^DIC",2006.59,"B","ROUTING RULE",2006.59)
+
+**END**
+**END**

@@ -1,0 +1,96 @@
+MAGDFND1 ;WOIFO/PMK - DICOM FIND Handler ; 12/20/2006 07:21
+ ;;3.0;IMAGING;**51,54**;MAR 19, 2002;;OCT 28, 2009
+ ;; Per VHA Directive 2004-038, this routine should not be modified.
+ ;; +---------------------------------------------------------------+
+ ;; | Property of the US Government.                                |
+ ;; | No permission to copy or redistribute this software is given. |
+ ;; | Use of unreleased versions of this software requires the user |
+ ;; | to execute a written test agreement with the VistA Imaging    |
+ ;; | Development Office of the Department of Veterans Affairs,     |
+ ;; | telephone (301) 734-0100.                                     |
+ ;; | The Food and Drug Administration classifies this software as  |
+ ;; | a medical device.  As such, it may not be changed in any way. |
+ ;; | Modifications to this software may result in an adulterated   |
+ ;; | medical device under 21CFR820, the use of which is considered |
+ ;; | to be a violation of US Federal Statutes.                     |
+ ;; +---------------------------------------------------------------+
+ ;;
+ Q
+ ; DICOM Part 4 C.4.1.1.3.2 states that the identifier in a C-FIND
+ ; response shall contain Key Attributes with values corresponding
+ ; to Key Attributes contained in the identifier of the request.
+ ;
+ ; The SCU specifies *exactly* the set of attributes in the request
+ ; that it wants to have returned in the response (no more, no less).
+ ;
+ ; This routine collects the set of attributes in the request.
+ ;
+ ; A second entry point (FILTER^MAGDFND1) is called after the data for
+ ; the response has been stored in the ^TMP global.  The routine then
+ ; deletes extraneous attributes from the response in the ^TMP global.
+ ;
+ENTRY ; entry point to process a C-FIND request
+ D MESSAGE^MAGDMLOG(2,0,"MAGDFND1 called for the """_SOPCLASS,"BV")
+ D DATASET
+ I SOPCLASS="Modality Worklist Information Model - FIND" D
+ . D UPDTITLE^MAGDMLOG("MWL "_CALLING_" "_IPADDR)
+ . ; the variables CALLING and IPADDR must be defined (DIRECT mode only)
+ . D ENTRY^MAGDFND2
+ . Q
+ E  D
+ . N MSG
+ . S MSG(1)="Expected SOP Class ""Modality Worklist Information Model - FIND""."
+ . S MSG(2)="Found """_SOPCLASS_"""."
+ . D TRAPERR^MAGDSTRT(1,$T(+0),"ERROR IN C-FIND",.MSG)
+ . Q  ; Error trap does not return
+ Q
+ ;
+DATASET ; record the set of data attributes in the request message
+ K DATASET S DATASET("MESSAGE")="C-FIND-RSP"
+ S TAG=""
+ F  S TAG=$O(^TMP("MAG",$J,"DICOM",INODE,TAG)) Q:TAG=""  D
+ . S DATASET(TAG)=""
+ . Q
+ ; additional required fields for the response message
+ S DATASET("0000,0120")="" ; message ID being responded to
+ S DATASET("0000,0900")="" ; status
+ S DATASET("0000,0901")="" ; offending element
+ S DATASET("0000,0902")="" ; error comment
+ S DATASET("0000,0903")="" ; error ID
+ ;
+ I $D(DATASET("0008,1110")) D  ; Referenced Study Sequence Sequence
+ . S DATASET("0008,1110.0001^0008,1150")="" ; Referenced SOP Class UID
+ . S DATASET("0008,1110.0001^0008,1155")="" ; Referenced SOP Instance
+ . Q
+ ;
+ I $D(DATASET("0008,1120")) D  ; Referenced Patient Sequence Sequence
+ . S DATASET("0008,1120.0001^0008,1150")="" ; Referenced SOP Class UID
+ . S DATASET("0008,1120.0001^0008,1155")="" ; Referenced SOP Instance
+ . Q
+ ;
+ I $D(DATASET("0008,1125")) D  ; Referenced Visit Sequence Sequence
+ . S DATASET("0008,1125.0001^0008,1150")="" ; Referenced SOP Class UID
+ . S DATASET("0008,1125.0001^0008,1155")="" ; Referenced SOP Instance
+ . Q
+ ;
+ I $D(DATASET("0032,1064")) D  ; Requested Procedure Code Sequence
+ . S DATASET("0032,1064.0001^0008,0100")="" ; Code Value
+ . S DATASET("0032,1064.0001^0008,0102")="" ; Coding Scheme Designator
+ . S DATASET("0032,1064.0001^0008,0104")="" ; Code Meaning
+ . Q
+ ;
+ I $D(DATASET("0040,0100.0001^0040,0008")) D  ; Scheduled Action Item Code Sequence
+ . S DATASET("0040,0100.0001^0040,0008.0001^0008,0100")="" ; Code Value
+ . S DATASET("0040,0100.0001^0040,0008.0001^0008,0102")="" ; Coding Scheme Designator
+ . S DATASET("0040,0100.0001^0040,0008.0001^0008,0104")="" ; Code Meaning
+ . Q
+ Q
+ ;
+FILTER ; Verify that each attribute of the response is in the request dataset.
+ ; If the response doesn't need the attribute, blow it away.
+ S TAG=""
+ F  S TAG=$O(^TMP("MAG",$J,"DICOM","OUT",TAG)) Q:TAG=""  D
+ . I '$D(DATASET(TAG)) K ^TMP("MAG",$J,"DICOM","OUT",TAG)
+ . Q
+ Q
+ ;

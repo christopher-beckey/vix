@@ -1,0 +1,62 @@
+﻿<Window x:Class="VistA.Imaging.Telepathology.Worklist.Views.ConsultationStatusView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+        xmlns:beh="clr-namespace:VistA.Imaging.Telepathology.Worklist.Behaviors"
+        Title="Consultation" 
+        Background="{StaticResource {x:Static SystemColors.ControlBrushKey}}" 
+        Icon="/MagTPWorklist;component/Images/PathWLM48.ico"
+        Loaded="Window_Loaded" ResizeMode="CanResizeWithGrip" SizeToContent="WidthAndHeight">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Label Content="Request a Consultation or Recall/Decline an Existing Consultation Request" Grid.ColumnSpan="2" Margin="5"/>
+
+        <Label Grid.Row="1" Content="Accession #:" Margin="5,0,5,0"/>
+        <Label Grid.Row="1" Grid.Column="1" Content="{Binding AccessionNr}" Margin="5,0,5,0"/>
+
+        <Label Grid.Row="2" Content="Patient:" Margin="5,0,5,0"/>
+        <Label Grid.Row="2" Grid.Column="1" Content="{Binding PatientName}" Margin="5,0,5,0"/>
+
+        <Label Grid.Row="3" Content="Patient ID:" Margin="5,0,5,0"/>
+        <Label Grid.Row="3" Grid.Column="1" Content="{Binding PatientID}" Margin="5,0,5,0"/>
+
+        <ListView Grid.Row="4" Grid.ColumnSpan="2" Height="150" SelectionMode="Extended" 
+                  Margin="5" ItemsSource="{Binding Path=Sites}" 
+                  SelectedItem="{Binding SelectedSite}">
+            <i:Interaction.Behaviors>
+                <beh:ListViewMultiSelectBehavior SelectedItems="{Binding SelectedSites, Mode=TwoWay}"/>
+            </i:Interaction.Behaviors>
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Sites" 
+                                    DisplayMemberBinding="{Binding Path=SiteDisplayName}"/>
+                    <GridViewColumn Header="Consultation Status" 
+                                    DisplayMemberBinding="{Binding Path=ConsultationStatus}"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+
+        <StackPanel Grid.Row="5" Grid.ColumnSpan="2" Orientation="Horizontal" 
+                    VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="5">
+            <Button Content="_Request" Width="75" Command="{Binding RequestConsultationCommand}" 
+                    Margin="5" />
+            <Button Content="Re_call" Width="75" Command="{Binding CancelConsultationCommand}" 
+                    Margin="5" />
+            <Button Content="_Decline" Width="75" Command="{Binding RefuseConsultationCommand}" 
+                    Margin="5" />
+            <Button Content="Clo_se" Width="75" Command="{Binding CloseCommand}" Margin="5" />
+        </StackPanel>
+    </Grid>
+</Window>

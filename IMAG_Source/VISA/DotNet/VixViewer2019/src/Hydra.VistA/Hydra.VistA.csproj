@@ -1,0 +1,199 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{CE6DA7B8-8418-4E63-A481-09BB23F13565}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Hydra.VistA</RootNamespace>
+    <AssemblyName>Hydra.VistA</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\</SolutionDir>
+    <RestorePackages>false</RestorePackages>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="HtmlAgilityPack, Version=1.4.9.0, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\HtmlAgilityPack.1.4.9\lib\Net45\HtmlAgilityPack.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Newtonsoft.Json.10.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.IO.Compression" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ApiResponseViewerToken.cs" />
+    <Compile Include="ClientAuthenticationElement.cs" />
+    <Compile Include="Commands\GetStudyReportCommand.cs" />
+    <Compile Include="Commands\LogImageExportCommand.cs" />
+    <Compile Include="Commands\StudyCacheCommand.cs" />
+    <Compile Include="Commands\StudyQueryCommand.cs" />
+    <Compile Include="Commands\GetImageCommand.cs" />
+    <Compile Include="Commands\GetImagingDataCommand.cs" />
+    <Compile Include="Commands\ROIQueryCommand.cs" />
+    <Compile Include="Commands\ROISubmitQueryCommand.cs" />
+    <Compile Include="Commands\GetStudyDetailsCommand.cs" />
+    <Compile Include="Commands\VerifyESignatureCommand.cs" />
+    <Compile Include="DisplayObject.cs" />
+    <Compile Include="DisplayObjectGroup.cs" />
+    <Compile Include="DisplayObjectLocator.cs" />
+    <Compile Include="DisplayObjectQueueProcessor.cs" />
+    <Compile Include="HttpClientTimeoutHandler.cs" />
+    <Compile Include="HttpRequestExtensions.cs" />
+    <Compile Include="ImageItemDetails.cs" />
+    <Compile Include="Parsers\DisplayObjectParser.cs" />
+    <Compile Include="MetadataQuery.cs" />
+    <Compile Include="IVixClient.cs" />
+    <Compile Include="LoggerExtensions.cs" />
+    <Compile Include="Parsers\PatientInformationParser.cs" />
+    <Compile Include="Parsers\ROIParser.cs" />
+    <Compile Include="Parsers\TreatingFacilitiesParser.cs" />
+    <Compile Include="PatientStudyQueryJob.cs" />
+    <Compile Include="PolicyUtil.cs" />
+    <Compile Include="Parsers\PStateParser.cs" />
+    <Compile Include="QueryUtil.cs" />
+    <Compile Include="Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="ROISubmitQuery.cs" />
+    <Compile Include="ROIStatusItem.cs" />
+    <Compile Include="ROISubmitPrompts.cs" />
+    <Compile Include="SecurityTokenTimeoutType.cs" />
+    <Compile Include="StudyReportQuery.cs" />
+    <Compile Include="StudyItemGroup.cs" />
+    <Compile Include="ROIQuery.cs" />
+    <Compile Include="Parsers\UserPreferenceParser.cs" />
+    <Compile Include="UrlItem.cs" />
+    <Compile Include="ViewerToken.cs" />
+    <Compile Include="VistAExceptions.cs" />
+    <Compile Include="VixCredentials.cs" />
+    <Compile Include="VixPStateRecord.cs" />
+    <Compile Include="ClientAuthenticationCollection.cs" />
+    <Compile Include="VixSite.cs" />
+    <Compile Include="VixStudyPStateRecord.cs" />
+    <Compile Include="VixRootPath.cs" />
+    <Compile Include="VixServiceCollection.cs" />
+    <Compile Include="VixServiceElement.cs" />
+    <Compile Include="SeriesItemDetails.cs" />
+    <Compile Include="SiteServiceUtil.cs" />
+    <Compile Include="StudyDetails.cs" />
+    <Compile Include="StudyDetailsQuery.cs" />
+    <Compile Include="StudyItemDetails.cs" />
+    <Compile Include="ImageQuery.cs" />
+    <Compile Include="VistAQuery.cs" />
+    <Compile Include="StudyItem.cs" />
+    <Compile Include="Parsers\StudyMetadataParser.cs" />
+    <Compile Include="StudyQuery.cs" />
+    <Compile Include="ThumbnailItem.cs" />
+    <Compile Include="VistAWorkerData.cs" />
+    <Compile Include="VistAWorkerHost.cs" />
+    <Compile Include="VistAWorkerPool.cs" />
+    <Compile Include="VistAWorkerProxy.cs" />
+    <Compile Include="VistAService.cs" />
+    <Compile Include="VistAWorkerUri.cs" />
+    <Compile Include="IVistAWorker.cs" />
+    <Compile Include="VistAConfigurationSection.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="..\..\SharedAssemblyInfo.cs">
+      <Link>Properties\SharedAssemblyInfo.cs</Link>
+    </Compile>
+    <Compile Include="VistAWorker.cs" />
+    <Compile Include="VixClient.cs" />
+    <Compile Include="VixHeaders.cs" />
+    <Compile Include="VixServiceUtil.cs" />
+    <Compile Include="VixService.cs" />
+    <Compile Include="VixStatusCode.cs" />
+    <Compile Include="Parsers\VixTextParser.cs" />
+    <Compile Include="VixUrlFormatter.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\src3rdParty\Nancy\Nancy.csproj">
+      <Project>{34576216-0dca-4b0f-a0dc-9075e75a676f}</Project>
+      <Name>Nancy</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HIX\Hydra.IX.Common\Hydra.IX.Common.csproj">
+      <Project>{b59efbc2-574a-4c10-a2f3-16203bc4f109}</Project>
+      <Name>Hydra.IX.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Hydra.Common\Hydra.Common.csproj">
+      <Project>{46ae373d-b654-4209-88f0-3e416c9f7267}</Project>
+      <Name>Hydra.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HIX\Hydra.Dicom\Hydra.Dicom.csproj">
+      <Project>{b4d5e28a-3cb7-46fa-8245-4891b44387b7}</Project>
+      <Name>Hydra.Dicom</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Hydra.IX.Client\Hydra.IX.Client.csproj">
+      <Project>{b72abe98-ae91-413c-8218-10e576480e04}</Project>
+      <Name>Hydra.IX.Client</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Hydra.Log\Hydra.Log.csproj">
+      <Project>{39a30969-59a3-48b1-be80-975d6d833ec8}</Project>
+      <Name>Hydra.Log</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Hydra.Security\Hydra.Security.csproj">
+      <Project>{46ae373d-b654-4209-88f0-3e416c9f7268}</Project>
+      <Name>Hydra.Security</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Hydra.Web.Common\Hydra.Web.Common.csproj">
+      <Project>{a1453293-5c7d-41f5-a18d-6abde871968e}</Project>
+      <Name>Hydra.Web.Common</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="magsensitive.bmp" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

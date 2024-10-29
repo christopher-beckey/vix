@@ -1,0 +1,245 @@
+Cache for Windows NT^INT^Saved from DICOM (ISW-KUZMAKP3-LT)^~Format=Cache.S~
+%RO on 09/17/2012  11:24
+MAGDIR71^INT^1^62692,59318^0
+MAGDIR71 ;WOIFO/PMK - Read a DICOM image file ; 21 Apr 2011 12:47 PM
+ ;;3.0;IMAGING;**11,30,51,50,54,53,110**;Mar 19, 2002;Build 48;Aug 23, 2012
+ ;; Per VHA Directive 2004-038, this routine should not be modified.
+ ;; +---------------------------------------------------------------+
+ ;; | Property of the US Government.                                |
+ ;; | No permission to copy or redistribute this software is given. |
+ ;; | Use of unreleased versions of this software requires the user |
+ ;; | to execute a written test agreement with the VistA Imaging    |
+ ;; | Development Office of the Department of Veterans Affairs,     |
+ ;; | telephone (301) 734-0100.                                     |
+ ;; | The Food and Drug Administration classifies this software as  |
+ ;; | a medical device.  As such, it may not be changed in any way. |
+ ;; | Modifications to this software may result in an adulterated   |
+ ;; | medical device under 21CFR820, the use of which is considered |
+ ;; | to be a violation of US Federal Statutes.                     |
+ ;; +---------------------------------------------------------------+
+ ;;
+ Q
+ ; M2MB client
+ ;
+STORE ; called by ^MAGDIR7 to handle the "STORE" RESULT item after the RPC
+ N TOPATH,UPCOUNT
+ S UPCOUNT=1
+ S STATUS=$P(ARGS,"|",1)
+ I STATUS<0 D
+ . N MSG
+ . ; an error was detected - process it
+ . I STATUS="-1 Image already in database" D
+ . . ; if there are copies of images that need to be DICOM CORRECTed,
+ . . ; they must be removed from ^MAGD(2006.575)
+ . . I IMAGMODE="CORRECTED IMAGE" D CORRECT ; remove copy from 2006.575
+ . . D COPYMSG(.MSG)
+ . . D IMAGEDEL^MAGDIR71(.MSG)
+ . . Q
+ . E  I STATUS="-2 Image Association Problem" D
+ . . S IRESULT=IRESULT+1
+ . . W " - ",$P($P(@RESULT@(IRESULT),"|",3),",",2)
+ . . I $G(^MAGDICOM(2006.563,1,"IMPORTER"))="YES" D
+ . . . D CORRECT^MAGDAIRS ; store DICOM file so that it can be corrected
+ . . . Q
+ . . Q
+ . E  D
+ . . N CRITICAL,ROUTINE,TITLE
+ . . D COPYMSG(.MSG)
+ . . S TITLE=$P(ARGS,"|",2),ROUTINE=$P(ARGS,"|",3)
+ . . I TITLE="" S TITLE="DICOM IMAGE PROCESSING ERROR"
+ . . S CRITICAL=$P(ARGS,"|",4)
+ . . ; generate the message
+ . . D TRAPERR^MAGDSTRT(1,ROUTINE,TITLE,.MSG,0,CRITICAL)
+ . . Q  ; Error trap does not return
+ . Q
+ ;
+ E  I STATUS>0 D  ; output the warning message
+ . N MSG
+ . I STATUS="1 Image partially in the database" S UPCOUNT=0
+ . D COPYMSG(.MSG)
+ . D WARNING^MAGDFCNS(.MSG)
+ . Q
+ ;
+ E  D  ; process the image
+ . D GETPATH
+ . I MODPARMS="<DICOM>" D  ; store DICOM image type in VistA
+ . . D ENTRY^MAGDIR7D
+ . . Q
+ . E  D  ; convert DICOM image type to TGA and store it in VistA
+ . . D ENTRY^MAGDIR7C
+ . . Q
+ . ;
+ . D POSTPROC
+ . Q
+ ;
+ I UPCOUNT D  ; update the queue pointer in ^MAGDINPT
+ . I IMAGMODE="NEW IMAGE" D
+ . . D UPCOUNT^MAGDIR6(2006.571,NEXTIEN)
+ . . Q
+ . E  I IMAGMODE="CORRECTED IMAGE" D
+ . . D UPCOUNT^MAGDIR6(2006.5712,NEXTFIX)
+ . . Q
+ . E  D
+ . . W !,"Unknown IMAGE MODE: ",IMAGMODE
+ . . Q
+ . Q
+ ;
+ Q
+ ;
+GETPATH ; get the file path to store the image (called from NEXTIMG^MAGDIR7C)
+ N HDIRFLAG ;- Hierarchal directory flag
+ N LASTIMG ;-- Last Image Pointer
+ N TESTFILE ;- Fully qualified file name
+ N N,TITLE,X
+ ;
+ S RETURN=$P(ARGS,"|",2)
+ ; get pname, pid, dob, age, and sex from server DEM^VADPT invocation
+ F I=1:1:5 S VADM(I)=$P(ARGS,"|",I+2)
+ S VADM("ICN")=$P(ARGS,"|",8)
+ S IMAGEPTR=+RETURN
+ I 'IMAGEPTR D  ; fatal error
+ . N MSG
+ . S MSG(1)="IMAGE FILE CREATION ERROR - Image Pointer value was not returned in RPC."
+ . S MSG(2)=$P(RETURN,"^",2,999)
+ . S TITLE="DICOM IMAGE PROCESSING ERROR"
+ . D BADERROR^MAGDIRDE($T(+0),TITLE,.MSG)
+ . Q  ; Error trap does not return
+ ;
+ S LASTIMG=$G(^MAGDICOM(2006.563,1,"LAST IMAGE POINTER"))
+ I IMAGEPTR<LASTIMG D  ; fatal
+ . D IMAGEPTR^MAGDIRDE($T(+0),IMAGEPTR,LASTIMG)
+ . Q  ; Error trap does not return
+ ;
+ ; record the image being processed values for cleanup if crash
+ S TOPATH=$P(RETURN,"^",2),FILE=$P(RETURN,"^",3)
+ S HDIRFLAG=$P(RETURN,"^",4)
+ S ^MAGDICOM(2006.563,1,"CURRENT IMAGE POINTER")=$P(RETURN,"^",1)
+ S ^MAGDICOM(2006.563,1,"CURRENT IMAGE DESTINATION")=TOPATH
+ S ^MAGDICOM(2006.563,1,"CURRENT IMAGE FILE NAME")=FILE
+ S ^MAGDICOM(2006.563,1,"CURRENT IMAGE SOURCE")=FROMPATH
+ ;
+ ; create the directory, if need be
+ ;
+ I TOPATH'=$G(OLD2PATH) D  ; create the new TOPATH subdirectory
+ . I HDIRFLAG D  ; need to make a new hierarchal subdirectory
+ . . S X=$$MKDIR^MAGDFCNS(TOPATH)
+ . . I X<0 D  ; fatal error
+ . . . N MSG
+ . . . S MSG(1)="IMAGE FILE SUBDIRECTORY CREATION ERROR"
+ . . . S MSG(2)="Can not create the image subdirectory """_TOPATH_""""
+ . . . S MSG(3)=X
+ . . . D ROLLBACK^MAGDIR75(IMAGEPTR,.MSG) ; delete ^MAG(2005,IMAGEPTR)
+ . . . D TRAPERR^MAGDSTRT(1,$T(+0),"DICOM IMAGE PROCESSING ERROR",.MSG)
+ . . . Q  ; Error trap does not return
+ . . Q
+ . S OLD2PATH=TOPATH
+ . Q
+ ;
+ S IMGFILE=TOPATH_FILE
+ ;
+ ; check that there are no files already there
+ ;
+ S TESTFILE=TOPATH_$P(FILE,".")_".*"
+ S N=$$GETDIR^MAGOSDIR(TESTFILE)
+ I N D  ; fatal error
+ . N I,FILE,MSG
+ . S MSG(1)="IMAGE FILE CREATION ERROR - NEW FILES MIGHT OVERWRITE EXISTING ONES"
+ . S MSG(2)="Trying to create file:"
+ . S MSG(3)=""""_TESTFILE_""""
+ . S MSG(4)=""
+ . I N=1 S MSG(5)="However, this file already exists in that directory:"
+ . E  S MSG(5)="However, these "_N_" files already exist in that directory:"
+ . S FILE="" F I=1:1:N D
+ . . S FILE=$O(^TMP("MAG",$J,"DIR LIST",FILE))
+ . . S MSG(I+5)=$J(I,6)_") "_FILE
+ . . Q
+ . S MSG(N+6)=""
+ . I N=1 S MSG(N+7)="Can not overwrite this with the image files."
+ . E  S MSG(N+7)="Can not overwrite these with the image files."
+ . D ROLLBACK^MAGDIR75(IMAGEPTR,.MSG) ; delete ^MAG(2005,IMAGEPTR) entry
+ . D BADERROR^MAGDIRDE($T(+0),"DICOM IMAGE PROCESSING ERROR",.MSG)
+ . Q  ; Error trap does not return
+ Q
+ ;
+POSTPROC ; these steps are done after every DICOM image is processed
+ N EVAL,X
+ ;
+ ;add the processed image to the queue to be handled in the next RPC
+ S EVAL=$G(^MAGDICOM(2006.563,1,"ROUTING RULES"))="YES"
+ S X="PROCESSED"_"|0|"_LOCATION_"|"_INSTNAME_"|"_IMAGEPTR_"|1|"_EVAL_"|"_$$HOSTNAME^MAGOSMSC()
+ D RPCQUEUE(X)
+ ;
+ I IMAGMODE="CORRECTED IMAGE" D CORRECT
+ ;
+ D DELETE^MAGDIR71(FROMPATH,"ORIGINAL DICOM FILE",1)
+ Q
+ ;
+CORRECT ; build the request to delete the corrected image from ^MAGD(2006.575)
+ ; (invoked from ^MAGDIR6A and ^MAGDIR6C)
+ S X="CORRECT|PROCESSED|"_NEW("IMAGEIEN")_"|"_NEW("STUDYIEN")
+ S X=X_"|"_DELTYPE_"|"_INSTNAME_"|"_FROMPATH_"|"_STUDYUID
+ S X=X_"|"_$$HOSTNAME^MAGOSMSC()_"|"_LOCATION
+ D RPCQUEUE(X)
+ Q
+ ;
+RPCQUEUE(ENTRY) ; add an entry onto the queue to be handled in the next RPC
+ N QUEUEIEN
+ I '$D(^MAGDINPT(2006.5711,0)) D  ; create the local global
+ . S ^MAGDINPT(2006.5711,0)="DICOM M2MB RPC QUEUE^2006.5711^^"
+ . Q
+ L +^MAGDINPT(2006.5711,"COUNT"):1E9 ; serialize name generation code
+ S QUEUEIEN=$P(^MAGDINPT(2006.5711,0),"^",3)+1
+ S $P(^MAGDINPT(2006.5711,0),"^",3)=QUEUEIEN ; get next QUEUEIEN
+ S $P(^MAGDINPT(2006.5711,0),"^",4)=$P(^MAGDINPT(2006.5711,0),"^",4)+1
+ L -^MAGDINPT(2006.5711,"COUNT") ; clear the serial name generation code
+ S ^MAGDINPT(2006.5711,QUEUEIEN,0)=ENTRY
+ Q
+ ;
+DELETE(DELPATH,TYPE,IGNORE,VERBOSE) ; delete the file
+ ; There are three kinds of files to be deleted:
+ ;   1) previous TARGA image
+ ;   2) previous ABSTRACT image
+ ;   3) original DICOM composite object
+ ;
+ N CMD,ERROR
+ S CMD="DEL "_DELPATH
+ S VERBOSE=$G(VERBOSE,1) D DOS^MAGDOS(CMD,.ERROR)
+ I ERROR(0) D  ; fatal error
+ . N ERR,I,MSG
+ . S ERR=1,I=0 I $G(IGNORE) F  S I=$O(ERROR(I)) Q:I=""  D
+ . . I ERROR(I)["Could Not Find" S ERR=0 Q
+ . . I ERROR(I)["The system cannot find the file specified." S ERR=0 Q
+ . . I ERROR(I)["The network path was not found." S ERR=0 Q
+ . . Q
+ . Q:'ERR  ; it's only an error when there is a file to be deleted
+ . ;
+ . S MSG(1)="ERROR DELETING "_TYPE
+ . S MSG(2)="Unexpected error in """_CMD_""""
+ . F I=1:1:ERROR(0) S MSG(I+2)=$J(I,3)_") "_ERROR(I)
+ . D TRAPERR^MAGDSTRT(1,$T(+0),"DICOM IMAGE PROCESSING ERROR",.MSG)
+ . Q  ; Error trap does not return
+ Q
+ ;
+IMAGEDEL(MSG) ; delete an image file from the input directory
+ N I
+ D WARNING^MAGDFCNS(.MSG)
+ D DELETE^MAGDIR71(FROMPATH,"ORIGINAL DICOM FILE")
+ Q
+ ;
+COPYMSG(MSG) ; copy a message from the RESULTs array to the MSG array
+ N DONE,I,J,OPCODE,STATUS,TEXT
+ S (DONE,J)=0
+ F I=IRESULT+1:1 S X=$G(@RESULT@(I)) D  Q:DONE
+ . S OPCODE=$P(X,"|",1)
+ . I OPCODE'="MSG" S DONE=1
+ . E  D
+ . . S STATUS=$P(X,"|",2),TEXT=$P(X,"|",3,999)
+ . . S J=J+1,MSG(J)=TEXT
+ . . I STATUS="END" S DONE=1
+ . . Q
+ . Q
+ S IRESULT=I
+ Q
+
+
+

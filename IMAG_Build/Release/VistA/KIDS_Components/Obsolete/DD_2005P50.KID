@@ -1,0 +1,302 @@
+KIDS Distribution saved on Aug 03, 2005@07:07:45
+Package for FILE named 2005;252,253
+**KIDS**:MAG*3.0*50*4^
+
+**INSTALL NAME**
+MAG*3.0*50*4
+"BLD",4823,0)
+MAG*3.0*50*4^^0^3050803^y
+"BLD",4823,1,0)
+^^4^4^3050803^
+"BLD",4823,1,1,0)
+This package contains a KIDS component
+"BLD",4823,1,2,0)
+for patch 50.
+"BLD",4823,1,3,0)
+ 
+"BLD",4823,1,4,0)
+This package transports the FileMan data dictionary named 2005;252,253.
+"BLD",4823,4,0)
+^9.64PA^2005^1
+"BLD",4823,4,2005,0)
+2005
+"BLD",4823,4,2005,2,0)
+^9.641^2005^1
+"BLD",4823,4,2005,2,2005,0)
+IMAGE  (File-top level)
+"BLD",4823,4,2005,2,2005,1,0)
+^9.6411^253^2
+"BLD",4823,4,2005,2,2005,1,252,0)
+NEW SOP INSTANCE UID
+"BLD",4823,4,2005,2,2005,1,253,0)
+SERIES UID
+"BLD",4823,4,2005,222)
+y^y^p^^^^n^^n
+"BLD",4823,4,2005,224)
+
+"BLD",4823,4,"APDD",2005,2005)
+
+"BLD",4823,4,"APDD",2005,2005,252)
+
+"BLD",4823,4,"APDD",2005,2005,253)
+
+"BLD",4823,4,"B",2005,2005)
+
+"BLD",4823,"KRN",0)
+^9.67PA^8989.52^19
+"BLD",4823,"KRN",.4,0)
+.4
+"BLD",4823,"KRN",.401,0)
+.401
+"BLD",4823,"KRN",.402,0)
+.402
+"BLD",4823,"KRN",.403,0)
+.403
+"BLD",4823,"KRN",.5,0)
+.5
+"BLD",4823,"KRN",.84,0)
+.84
+"BLD",4823,"KRN",3.6,0)
+3.6
+"BLD",4823,"KRN",3.8,0)
+3.8
+"BLD",4823,"KRN",9.2,0)
+9.2
+"BLD",4823,"KRN",9.8,0)
+9.8
+"BLD",4823,"KRN",19,0)
+19
+"BLD",4823,"KRN",19.1,0)
+19.1
+"BLD",4823,"KRN",101,0)
+101
+"BLD",4823,"KRN",409.61,0)
+409.61
+"BLD",4823,"KRN",771,0)
+771
+"BLD",4823,"KRN",870,0)
+870
+"BLD",4823,"KRN",8989.51,0)
+8989.51
+"BLD",4823,"KRN",8989.52,0)
+8989.52
+"BLD",4823,"KRN",8994,0)
+8994
+"BLD",4823,"KRN","B",.4,.4)
+
+"BLD",4823,"KRN","B",.401,.401)
+
+"BLD",4823,"KRN","B",.402,.402)
+
+"BLD",4823,"KRN","B",.403,.403)
+
+"BLD",4823,"KRN","B",.5,.5)
+
+"BLD",4823,"KRN","B",.84,.84)
+
+"BLD",4823,"KRN","B",3.6,3.6)
+
+"BLD",4823,"KRN","B",3.8,3.8)
+
+"BLD",4823,"KRN","B",9.2,9.2)
+
+"BLD",4823,"KRN","B",9.8,9.8)
+
+"BLD",4823,"KRN","B",19,19)
+
+"BLD",4823,"KRN","B",19.1,19.1)
+
+"BLD",4823,"KRN","B",101,101)
+
+"BLD",4823,"KRN","B",409.61,409.61)
+
+"BLD",4823,"KRN","B",771,771)
+
+"BLD",4823,"KRN","B",870,870)
+
+"BLD",4823,"KRN","B",8989.51,8989.51)
+
+"BLD",4823,"KRN","B",8989.52,8989.52)
+
+"BLD",4823,"KRN","B",8994,8994)
+
+"FIA",2005)
+IMAGE
+"FIA",2005,0)
+^MAG(2005,
+"FIA",2005,0,0)
+2005I
+"FIA",2005,0,1)
+y^y^p^^^^n^^n
+"FIA",2005,0,10)
+
+"FIA",2005,0,11)
+
+"FIA",2005,0,"RLRO")
+
+"FIA",2005,2005)
+1
+"FIA",2005,2005,252)
+
+"FIA",2005,2005,253)
+
+"IX",2005,2005,"P",0)
+2005^P^UID for corrected images^MU^^F^IR^I^2005^^^^^LS
+"IX",2005,2005,"P",.1,0)
+^^2^2^3041109^
+"IX",2005,2005,"P",.1,1,0)
+This cross-reference includes SOP Instance UIDs for corrected images
+"IX",2005,2005,"P",.1,2,0)
+in the cross-reference on the original SOP Instance UIDs.
+"IX",2005,2005,"P",1)
+S ^MAG(2005,"P",X,DA)=""
+"IX",2005,2005,"P",2)
+K ^MAG(2005,"P",X,DA)
+"IX",2005,2005,"P",2.5)
+K ^MAG(2005,"P")
+"IX",2005,2005,"P",11.1,0)
+^.114IA^1^1
+"IX",2005,2005,"P",11.1,1,0)
+1^F^2005^252^^1^F
+"IX",2005,2005,"P",11.1,1,3)
+
+"IX",2005,2005,"SERIESUID",0)
+2005^SERIESUID^Images sorted by Series UID^R^^F^IR^I^2005^^^^^LS
+"IX",2005,2005,"SERIESUID",.1,0)
+^^2^2^3050803^
+"IX",2005,2005,"SERIESUID",.1,1,0)
+This cross-reference keeps track of which images have
+"IX",2005,2005,"SERIESUID",.1,2,0)
+which Series UID.
+"IX",2005,2005,"SERIESUID",1)
+S ^MAG(2005,"SERIESUID",X,DA)=""
+"IX",2005,2005,"SERIESUID",2)
+K ^MAG(2005,"SERIESUID",X,DA)
+"IX",2005,2005,"SERIESUID",2.5)
+K ^MAG(2005,"SERIESUID")
+"IX",2005,2005,"SERIESUID",11.1,0)
+^.114IA^1^1
+"IX",2005,2005,"SERIESUID",11.1,1,0)
+1^F^2005^253^^1^F
+"IX",2005,2005,"SERIESUID",11.1,1,3)
+
+"MBREQ")
+0
+"QUES","XPF1",0)
+Y
+"QUES","XPF1","??")
+^D REP^XPDH
+"QUES","XPF1","A")
+Shall I write over your |FLAG| File
+"QUES","XPF1","B")
+YES
+"QUES","XPF1","M")
+D XPF1^XPDIQ
+"QUES","XPF2",0)
+Y
+"QUES","XPF2","??")
+^D DTA^XPDH
+"QUES","XPF2","A")
+Want my data |FLAG| yours
+"QUES","XPF2","B")
+YES
+"QUES","XPF2","M")
+D XPF2^XPDIQ
+"QUES","XPI1",0)
+YO
+"QUES","XPI1","??")
+^D INHIBIT^XPDH
+"QUES","XPI1","A")
+Want KIDS to INHIBIT LOGONs during the install
+"QUES","XPI1","B")
+YES
+"QUES","XPI1","M")
+D XPI1^XPDIQ
+"QUES","XPM1",0)
+PO^VA(200,:EM
+"QUES","XPM1","??")
+^D MG^XPDH
+"QUES","XPM1","A")
+Enter the Coordinator for Mail Group '|FLAG|'
+"QUES","XPM1","B")
+
+"QUES","XPM1","M")
+D XPM1^XPDIQ
+"QUES","XPO1",0)
+Y
+"QUES","XPO1","??")
+^D MENU^XPDH
+"QUES","XPO1","A")
+Want KIDS to Rebuild Menu Trees Upon Completion of Install
+"QUES","XPO1","B")
+YES
+"QUES","XPO1","M")
+D XPO1^XPDIQ
+"QUES","XPZ1",0)
+Y
+"QUES","XPZ1","??")
+^D OPT^XPDH
+"QUES","XPZ1","A")
+Want to DISABLE Scheduled Options, Menu Options, and Protocols
+"QUES","XPZ1","B")
+YES
+"QUES","XPZ1","M")
+D XPZ1^XPDIQ
+"QUES","XPZ2",0)
+Y
+"QUES","XPZ2","??")
+^D RTN^XPDH
+"QUES","XPZ2","A")
+Want to MOVE routines to other CPUs
+"QUES","XPZ2","B")
+NO
+"QUES","XPZ2","M")
+D XPZ2^XPDIQ
+"VER")
+8.0^22.0
+"^DD",2005,2005,252,0)
+NEW SOP INSTANCE UID^F^^SOP;2^K:$L(X)>64!($L(X)<1)!'($TR(X,"1234567890.")="") X
+"^DD",2005,2005,252,3)
+Enter the VA's new SOP instance UID for the corrected image.
+"^DD",2005,2005,252,21,0)
+^^8^8^3041109^
+"^DD",2005,2005,252,21,1,0)
+The value of this field is a string that represents a DICOM UID.
+"^DD",2005,2005,252,21,2,0)
+The DICOM standard defines the format of a UID: a string containing
+"^DD",2005,2005,252,21,3,0)
+only digits and periods that does not exceed a length of 64 characters.
+"^DD",2005,2005,252,21,4,0)
+This field is populated when a corrected version of an image
+"^DD",2005,2005,252,21,5,0)
+is exported, and the corrections are of such a nature that
+"^DD",2005,2005,252,21,6,0)
+the image cannot be exported with its original SOP Instance UID.
+"^DD",2005,2005,252,21,7,0)
+Note that this UID value is assigned by VA software, and thus
+"^DD",2005,2005,252,21,8,0)
+will always start with the characters "1.2.840.113754.".
+"^DD",2005,2005,252,"DT")
+3041109
+"^DD",2005,2005,253,0)
+SERIES UID^F^^SERIESUID;1^K:$L(X)>64!($L(X)<1)!'(X?1.64(1N,1".")) X
+"^DD",2005,2005,253,1,0)
+^.1^^0
+"^DD",2005,2005,253,3)
+Enter the Series UID for the current image.
+"^DD",2005,2005,253,21,0)
+^.001^5^5^3050712^^
+"^DD",2005,2005,253,21,1,0)
+The value of this field is a DICOM unique identifier for
+"^DD",2005,2005,253,21,2,0)
+the series to which an image belongs.
+"^DD",2005,2005,253,21,3,0)
+A DICOM UID looks like a series of digits and periods,
+"^DD",2005,2005,253,21,4,0)
+is not longer than 64 characters, starts and ends with a digit
+"^DD",2005,2005,253,21,5,0)
+and never has two consecutive periods.
+"^DD",2005,2005,253,"DT")
+3050803
+**END**
+**END**

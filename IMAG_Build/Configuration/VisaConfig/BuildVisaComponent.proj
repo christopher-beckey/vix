@@ -1,0 +1,327 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="BuildVisaProject" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+	
+	<PropertyGroup>
+	
+		<!-- ============================== Input parameters ============================== -->
+		<ProductType></ProductType>
+		<PatchNumber></PatchNumber>
+		<TestNumber></TestNumber>
+		<BuildNumber></BuildNumber>		
+		<CodeBaseDir></CodeBaseDir>
+		<BuildJava></BuildJava>
+		<StageToSQA></StageToSQA>
+		<!-- =============================================================================== -->
+
+		<!-- ================= Specific to each build server ===================== -->
+		
+		<!-- Specfic defined parameters for Build-4 server -->
+		<JreExt Condition="'$(COMPUTERNAME)'=='isw-imgxpvmbld4'">C:\Program Files\Java\jdk1.6.0_45\jre\lib\ext</JreExt>
+		<MavenRepo Condition="'$(COMPUTERNAME)'=='isw-imgxpvmbld4'">C:\Documents and Settings\vhaiswia\.m2\repository</MavenRepo>		
+		<MSBuildExtensionsPath Condition="'$(COMPUTERNAME)'=='isw-imgxpvmbld4'">$(MSBuildExtensionsPath)</MSBuildExtensionsPath>
+		<VixBuilderConsole Condition="'$(COMPUTERNAME)'=='isw-imgxpvmbld4'">C:\Program Files\Vista\Imaging\VixBuilder\VixBuilderConsole.exe</VixBuilderConsole>
+		<!-- =================================== -->
+		
+		<!-- Specfic defined parameters for Build-5 server -->
+		<JreExt Condition="'$(COMPUTERNAME)'=='VAAUSVIMAPP872'">C:\Program Files\Java\jdk1.6.0_45\jre\lib\ext</JreExt>
+		<MavenRepo Condition="'$(COMPUTERNAME)'=='VAAUSVIMAPP872'">E:\BuildLib\Maven\.m2\repository</MavenRepo>		
+		<MSBuildExtensionsPath Condition="'$(COMPUTERNAME)'=='VAAUSVIMAPP872'">$(MSBuildExtensionsPath64)</MSBuildExtensionsPath>
+		<VixBuilderConsole Condition="'$(COMPUTERNAME)'=='VAAUSVIMAPP872'">C:\Program Files (x86)\Vista\Imaging\VixBuilder\VixBuilderConsole.exe</VixBuilderConsole>
+		<!-- =================================== -->
+		
+		<DevEnv>$(VS100COMNTOOLS)..\IDE\devenv.com</DevEnv>
+		<!-- =============================================================================== -->
+
+		<baseOutputDir>$(CodeBaseDir)\Builds</baseOutputDir>
+		<!-- outputDir>$(baseOutputDir)\P$(PatchNumber)</outputDir -->
+		<outputDir>$(baseOutputDir)</outputDir>
+		
+		<VixBldBaseDir>$(CodeBaseDir)\VixBuilder</VixBldBaseDir>
+		<VixBldImageDir>$(VixBldBaseDir)\VistA_Imaging</VixBldImageDir>
+		<VixBldCfgDir>$(VixBldImageDir)\Configuration</VixBldCfgDir>
+		<VixBldBldCfgDir>$(VixBldCfgDir)\VisaBuildConfiguration</VixBldBldCfgDir>
+		<VixBldPayloadDir>$(VixBldCfgDir)\VisaInstallerPayload\Patch$(PatchNumber)$(ProductType)</VixBldPayloadDir>		
+		<VixBldInstallerDir>$(VixBldImageDir)\Main\Source\Production\VISA\DotNet\VixInstallerSolution2010.root</VixBldInstallerDir>
+		<VixBldInstallerSolutionDir>$(VixBldImageDir)\Main\Source\Production\VISA\DotNet\VixInstallerSolution2010.root\VixInstallerSolution2010</VixBldInstallerSolutionDir>
+		<VixBldDotNetDir>$(VixBldImageDir)\Main\Source\Production\VISA\DotNet</VixBldDotNetDir>
+		<VixBldBuildCfgFile>$(VixBldInstallerSolutionDir)\Buildconfig.xml</VixBldBuildCfgFile>
+
+		<VixBldBuildManifestFileName>VixBuildManifestPatch$(PatchNumber)$(ProductType).xml</VixBldBuildManifestFileName>
+		<VixBldBuildManifestFile>$(VixBldBldCfgDir)\$(VixBldBuildManifestFileName)</VixBldBuildManifestFile>	
+		<VixBldManifestFileName>VixManifestPatch$(PatchNumber)$(ProductType).xml</VixBldManifestFileName>
+		<VixBldManifestFile>$(VixBldBldCfgDir)\$(VixBldManifestFileName)</VixBldManifestFile>
+
+		<BaseVersion>30</BaseVersion>
+		<VISAProductVersion>$(BaseVersion).$(PatchNumber).$(TestNumber).$(BuildNumber)</VISAProductVersion>	
+			
+		<rtcPayloadDir Condition="'$(ProductType)'=='VIX'">$(CodeBaseDir)\IMAG_VIX</rtcPayloadDir>
+		<rtcPayloadDir Condition="'$(ProductType)'=='CVIX'">$(CodeBaseDir)\IMAG_CVIX</rtcPayloadDir>
+		<rtcPayloadDir Condition="'$(ProductType)'=='HDIG'">$(CodeBaseDir)\IMAG_HDIG</rtcPayloadDir>	
+		
+		<srcCodeBaseDir>$(CodeBaseDir)\IMAG_Source</srcCodeBaseDir>
+		<bldCodeBaseDir>$(CodeBaseDir)\IMAG_Build</bldCodeBaseDir>		
+		<cfgBaseDir>$(bldCodeBaseDir)\Configuration</cfgBaseDir>
+		<srcDotNetDir>$(srcCodeBaseDir)\VISA\DotNet</srcDotNetDir>
+		<JavaRootDir>$(srcCodeBaseDir)\VISA\Java</JavaRootDir>
+		<VisaBuildConfigurationDir>$(cfgBaseDir)\VisaBuildConfiguration</VisaBuildConfigurationDir>
+
+		<PaddedPatchNumber>$(PatchNumber)</PaddedPatchNumber>
+		<PaddedPatchNumber Condition="$(PatchNumber) &lt; 100">0$(PatchNumber)</PaddedPatchNumber>
+		<PaddedPatchNumber Condition="$(PatchNumber) &lt; 10">00$(PatchNumber)</PaddedPatchNumber>
+		<!-- PatchFolderName>V3.0p$(PaddedPatchNumber)Build$(BuildNumber)</PatchFolderName -->
+		<PatchFolderName>P$(PatchNumber)-T$(TestNumber)-S$(BuildNumber)</PatchFolderName>
+		<PayloadWorkingDir>$(outputDir)\$(ProductType)\$(PatchFolderName)</PayloadWorkingDir>
+		
+					
+		<VISAMsiVersion>3.0.0</VISAMsiVersion>
+				
+		<SourceMsiFile>$(VixBldInstallerSolutionDir)\VixInstallerSetup\Release\VixInstallerSetup.msi</SourceMsiFile>
+		<TargetMsiFile>$(PayloadWorkingDir)\MAG3_0P$(PatchNumber)T$(TestNumber)_$(ProductType)_Setup.msi</TargetMsiFile>
+
+		<!-- SQA staged network location -->		
+		<NetworkBuildDir>\\vaausvimapp804.aac.dva.va.gov\CM\ReadyToTest\Patch$(PatchNumber)</NetworkBuildDir>						
+		
+	</PropertyGroup>
+
+	<ItemGroup> 
+		<OldConnectionJars Include="$(JreExt)\*Connection-0.1.jar" />
+	</ItemGroup>
+
+
+	<Import Project="$(MSBuildExtensionsPath)\ExtensionPack\4.0\MSBuild.ExtensionPack.tasks"/> 
+
+	<!-- =============================================================================== -->
+	<!-- =============================================================================== -->			
+	<UsingTask TaskName="GetFoldersToDelete" TaskFactory="CodeTaskFactory"
+		AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.v4.0.dll">
+		<ParameterGroup>
+			<Folders ParameterType="Microsoft.Build.Framework.ITaskItem[]" Required="true" />
+			<FolderList ParameterType="Microsoft.Build.Framework.ITaskItem[]" Output="true" />
+		</ParameterGroup>
+		<Task>
+			<Code Type="Fragment" Language="cs"><![CDATA[
+				var result = new List<ITaskItem>();
+				foreach (var Item in Folders) {
+					foreach (var dir in Directory.GetDirectories(Item.ItemSpec, "*", SearchOption.AllDirectories)) {
+						if (dir.Contains(@"\target") || dir.EndsWith(@"\Release") || dir.EndsWith(@"\obj") 
+								|| dir.Contains(@"\Debug") || dir.Contains(@"\vixtests")) 
+							result.Add(new TaskItem(dir));
+					}
+				}
+				FolderList = result.ToArray();
+			]]></Code>
+		</Task>
+	</UsingTask>
+
+	<!-- =============================================================================== -->
+	<!-- =============================================================================== -->
+	<Target Name="CleanPreviousBuild" >
+		<Message Text="Clean up '$(PayloadWorkingDir)' ... " />
+		<RemoveDir Directories="$(PayloadWorkingDir)" />
+
+		<Message Text="Clean up '$(VixBldBaseDir)' ... " />
+		<RemoveDir Directories="$(VixBldBaseDir)" />
+	</Target>
+
+	<!-- =============================================================================== -->
+	<!-- =============================================================================== -->		
+	<Target Name="CleanPreviousJavaBuild"  >
+		<ItemGroup>
+			<VisaFolders Include="$(JavaRootDir)" />
+		</ItemGroup>
+		
+		<GetFoldersToDelete Folders="%(VisaFolders.Identity)" ContinueOnError="true">
+			<Output TaskParameter="FolderList" ItemName="FoldersToDelete"  />
+		</GetFoldersToDelete>
+	
+		<RemoveDir Directories="@(FoldersToDelete)" ContinueOnError="true" />	
+	</Target>
+
+	<!-- =============================================================================== -->
+	<!-- =============================================================================== -->	
+	<Target Name="PrintCompilerVersion">
+		<PropertyGroup>
+			<tempFile>.\tmp_msbuild_Output.txt</tempFile>
+		</PropertyGroup>
+		
+		<Delete Files="$(tempFile)" Condition="Exists('$(tempFile)')" />
+		<Exec Command="mvn -version > &quot;$(tempFile)&quot;" />
+		<ReadLinesFromFile File="$(tempFile)">
+			<Output TaskParameter="Lines" ItemName="OutputLines"/>
+		</ReadLinesFromFile>
+		<Message Text="@(OutputLines->'%(Identity)', '%0a%0d')" />
+		<Delete Files="$(tempFile)" Condition="Exists('$(tempFile)')" />
+	</Target>
+
+	<!-- =============================================================================== -->
+	<!-- =============================================================================== -->	
+	<Target Name="BuildJavaProjects" Condition="('$(ProductType)'=='VIX' OR '$(ProductType)'=='CVIX' OR '$(ProductType)'=='HDIG')" >
+		<CallTarget Targets="PrintCompilerVersion" />
+			
+		<Delete Files="@(OldConnectionJars)" />
+		<RemoveDir Directories="$(MavenRepo)\Imaging" />
+		
+		<!-- 
+			-Dmaven.test.skip=true 	= disable JUnit testing
+			-Dmaven.test.skip=false = enable JUnit testing
+			mvn -e -X (-e=error messages; -X=debug)
+		-->					
+		<Exec Command='mvn -f "$(JavaRootDir)\VISA\ConnectorsPom.xml" clean install -Dmaven.test.skip=false' WorkingDirectory="$(JavaRootDir)" />		
+		<ItemGroup>
+			<ConnectionJars Include="$(JavaRootDir)\*Connection\target\*Connection-0.1.jar" />
+		</ItemGroup>		
+		<Copy SourceFiles="@(ConnectionJars)" DestinationFolder="$(JreExt)" />
+		
+		<!-- 
+			-Dmaven.test.skip=true 	= disable JUnit testing
+			-Dmaven.test.skip=false = enable JUnit testing			
+		-->			
+		<Exec Command='mvn -f "$(JavaRootDir)\VISA\Pom.xml" clean install -Dmaven.test.skip=false' WorkingDirectory="$(JavaRootDir)" />
+	</Target>
+
+	<!-- =============================================================================== -->
+	<!-- =============================================================================== -->
+	<Target Name="UpdateBuildManifestFileVersion">
+		<Message Text="Updating $(VixBldBuildManifestFile) to version $(VISAProductVersion)" />
+		<Exec Command='attrib -r "$(VixBldBuildManifestFile)"'/>
+		<MSBuild.ExtensionPack.Xml.XmlFile TaskAction="UpdateAttribute" File="$(VixBldBuildManifestFile)" XPath="//Patch/@number" Value="$(VISAProductVersion)"/>
+	</Target>
+
+	<!-- =============================================================================== -->
+	<!-- =============================================================================== -->
+	<Target Name="UpdateManifestVersion">
+		<Message Text="Updating $(VixBldManifestFile) to version $(VISAProductVersion)" />
+		<Exec Command='attrib -r "$(VixBldManifestFile)"'/>
+		<MSBuild.ExtensionPack.Xml.XmlFile TaskAction="UpdateAttribute" File="$(VixBldManifestFile)" XPath="//Patch/@number" Value="$(VISAProductVersion)"/>
+	</Target>
+
+	<!-- =============================================================================== -->
+	<!-- =============================================================================== -->
+	<Target Name="UpdateBuildConfig">
+		<Exec Command='attrib -r "$(VixBldBuildCfgFile)"'/>
+		<XmlPoke XmlInputPath="$(VixBldBuildCfgFile)" Query="/BuildConfiguration/BuildManifestFilename" Value="$(VixBldBuildManifestFileName)"/>
+		<XmlPoke XmlInputPath="$(VixBldBuildCfgFile)" Query="/BuildConfiguration/DeploymentManifestFilename" Value="$(VixBldManifestFileName)"/>
+		<XmlPoke XmlInputPath="$(VixBldBuildCfgFile)" Query="/BuildConfiguration/InstallationType" Value="$(ProductType)"/>
+	</Target>
+
+	<!-- =============================================================================== -->
+	<!-- =============================================================================== -->
+	<Target Name="assembleAndStageMsiPayload">
+		<Exec Command='"$(VixBuilderConsole)" "$(VixBldBuildCfgFile)" "-TfsWorkspaceWorkingFolder=$(JavaRootDir)" "-TfsRootDirspec=$(VixBldBaseDir)" "-Maven2RepoDirspec=$(MavenRepo)" "-VixPayloadRootDirspec=$(PayloadWorkingDir)" "-VixInstallerRootDirspec=$(VixBldInstallerSolutionDir)" "-MsiVersion=$(VISAMsiVersion)"  assembleAndStageMsiPayload' />
+	</Target>
+
+	<!-- =============================================================================== -->
+	<!-- =============================================================================== -->
+	<Target Name="updateMsiIdentityAndVersion">
+		<Exec Command="attrib -r $(VixBldInstallerSolutionDir)\VixInstallerSetup\VixInstallerSetup.vdproj" />
+		<Exec Command='"$(VixBuilderConsole)" "$(VixBldBuildCfgFile)" "-TfsWorkspaceWorkingFolder=$(JavaRootDir)" "-TfsRootDirspec=$(VixBldBaseDir)" "-Maven2RepoDirspec=$(MavenRepo)" "-VixPayloadRootDirspec=$(PayloadWorkingDir)" "-VixInstallerRootDirspec=$(VixBldInstallerSolutionDir)" "-MsiVersion=$(VISAMsiVersion)"  updateMsiIdentityAndVersion' />
+	</Target>
+
+	<!-- =============================================================================== -->
+	<!-- =============================================================================== -->
+	<Target Name="BuildMSI">
+		<Message Text="Building MSI in $(VixBldInstallerSolutionDir)" />
+		<Exec Command='"$(DevEnv)" /Rebuild Release "VixInstallerSolution2010.sln" "VixInstallerSetup\VixInstallerSetup.vdproj" /Out devenvlog.txt' WorkingDirectory="$(VixBldInstallerSolutionDir)" />
+	</Target>
+		
+	<!-- =============================================================================== -->
+	<!-- =============================================================================== -->
+	<Target Name="CopyMSI">
+		<Exec Command='copy "$(SourceMsiFile)" "$(TargetMsiFile)"' />
+	</Target>
+
+	<!-- =============================================================================== -->
+	<!-- =============================================================================== -->
+	<Target Name="StageMSI">
+		<MakeDir Directories="$(NetworkBuildDir)" Condition="!Exists('$(NetworkBuildDir)')" />
+		<Delete Files="$(TargetMsiFile)" Condition="!Exists('$(TargetMsiFile)')" />
+		<Copy SourceFiles="$(TargetMsiFile)" Destinationfolder="$(NetworkBuildDir)"/>	
+	</Target>
+
+	<!-- =============================================================================== -->
+	<!-- =============================================================================== -->
+	<Target Name="CopyConnectionJars">
+		<Message text="No Java recompiling so copying previous build connection jars from '$(JavaRootDir)' ..." />
+		<ItemGroup>
+			<ConnectionJars Include="$(JavaRootDir)\*Connection\target\*Connection-0.1.jar" />
+		</ItemGroup>		
+		<Copy SourceFiles="@(ConnectionJars)" DestinationFolder="$(JreExt)" />
+	</Target>
+
+	<!-- =============================================================================== -->
+	<!-- =============================================================================== -->
+	<Target Name="CreateVixBuilderDir">
+		<ItemGroup>
+			<VisaBldCfgFiles Include="$(VisaBuildConfigurationDir)\*.*" />
+			<FileOnDotNetDir Include="$(srcDotNetDir)\VIX.pfx" />						  
+		</ItemGroup>
+
+		<MakeDir Directories="$(VixBldBaseDir)" Condition="!Exists('$(VixBldBaseDir)')" />
+		<RemoveDir Directories="$(VixBldImageDir)" Condition="Exists('$(VixBldImageDir)')" />	
+		<MakeDir Directories="$(VixBldBldCfgDir)" />
+		<!-- copy all of them istead of only these two files
+		<Copy SourceFiles="$(VixBldBuildManifestFile)" Destinationfolder="$(VixBldBldCfgDir)"/>
+		<Copy SourceFiles="$(VixBldManifestFile)" Destinationfolder="$(VixBldBldCfgDir)"/>
+		-->
+		<Copy Sourcefiles="@(VisaBldCfgFiles)" DestinationFiles="@(VisaBldCfgFiles->'$(VixBldBldCfgDir)\%(RecursiveDir)%(Filename)%(Extension)')"/>
+		<Copy Sourcefiles="@(FileOnDotNetDir)" DestinationFiles="@(FileOnDotNetDir->'$(VixBldDotNetDir)\%(RecursiveDir)%(Filename)%(Extension)')"/>
+
+		<ItemGroup>
+			<payloadDir Include="$(rtcPayloadDir)\**\*.*" />
+		</ItemGroup>
+		<MakeDir Directories="$(VixBldPayloadDir)" Condition="!Exists('$(VixBldPayloadDir)')" />
+		<!-- This will not copy empty folder: 
+		Copy Sourcefiles="@(payloadDir)" DestinationFiles="@(payloadDir->'$(VixBldPayloadDir)\%(RecursiveDir)%(Filename)%(Extension)')"/ 
+		-->
+		<Exec Command="xcopy /E /Y &quot;$(rtcPayloadDir)&quot; &quot;$(VixBldPayloadDir)&quot; "/>	
+
+		<ItemGroup>
+			<installerDir Include="$(srcCodeBaseDir)\VISA\DotNet\VixInstallerSolution2010.root\**\*.*" />
+		</ItemGroup>
+		<MakeDir Directories="$(VixBldInstallerDir)" Condition="!Exists('$(VixBldInstallerDir)')" />
+		<Copy Sourcefiles="@(installerDir)" DestinationFiles="@(installerDir->'$(VixBldInstallerDir)\%(RecursiveDir)%(Filename)%(Extension)')"/>
+	</Target>
+
+	<!-- =============================================================================== -->
+	<!-- =============================================================================== -->
+	<Target Name="BuildVisaProject" >
+	
+		<!-- Check needed required input parameters -->
+		<Error Text="Need 'ProductType' input" Condition="'$(ProductType)' == ''" />
+		<Error Text="Need 'PatchNumber' input" Condition="'$(PatchNumber)' == ''" />
+		<Error Text="Need 'TestNumber'  input" Condition="'$(TestNumber)' == ''" />
+		<Error Text="Need 'BuildNumber' input" Condition="'$(BuildNumber)' == ''" />
+		<Error Text="Need 'CodeBaseDir' input" Condition="'$(CodeBaseDir)' == ''" />
+		<Error Text="Need 'BuildJava'   input" Condition="'$(BuildJava)' == ''" />
+
+		<Message text="Starting build for '$(ProductType)' on '$(CodeBaseDir)'..." />
+	
+		<!-- Clean up previous build, Recompiling and Executing JUnit testing for java projects -->
+		<CallTarget Targets="CleanPreviousJavaBuild" Condition="'$(BuildJava)' == 'True'" />			
+		<CallTarget Targets="BuildJavaProjects"  Condition="'$(BuildJava)' == 'True'" />
+		<!-- If no Java recompile, then copy previous built connection jars -->
+		<CallTarget Targets="CopyConnectionJars"  Condition="'$(BuildJava)' == 'False'" />
+
+		<CallTarget Targets="CleanPreviousBuild" />
+		<CallTarget Targets="CreateVixBuilderDir" />	
+		<CallTarget Targets="UpdateBuildManifestFileVersion" />
+		<CallTarget Targets="UpdateManifestVersion" />
+		<CallTarget Targets="UpdateBuildConfig" />
+		<CallTarget Targets="assembleAndStageMsiPayload" />	
+		<CallTarget Targets="updateMsiIdentityAndVersion" />			
+		<CallTarget Targets="BuildMSI" />
+		<CallTarget Targets="CopyMSI" />
+		<CallTarget Targets="StageMSI" Condition="'$(StageToSQA)' == 'True'"/>			
+	</Target>
+
+	<!-- =============================================================================== -->
+	<!-- =============================================================================== -->
+	<Target Name="TEST" >
+		<Message text="DEBUGING DEBUGING DEBUGING ..." />		
+		<!-- CallTarget Targets="CleanPreviousBuild" / -->
+		<Message text="$(MSBuildExtensionsPath)" />
+		<Message text="$(MSBuildExtensionsPath32)" />
+		<Message text="$(MSBuildExtensionsPath64)" /> 		
+	</Target>	
+		
+</Project>

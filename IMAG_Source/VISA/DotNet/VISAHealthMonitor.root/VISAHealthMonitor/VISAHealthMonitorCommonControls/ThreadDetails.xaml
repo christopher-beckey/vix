@@ -1,0 +1,120 @@
+﻿<Window x:Class="VISAHealthMonitorCommonControls.ThreadDetails"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        DataContext="{Binding ThreadDetails, Source={StaticResource Locator}}" xmlns:my="clr-namespace:VISAHealthMonitorCommonControls"
+        d:DesignHeight="380" d:DesignWidth="700" 
+        Height="400"
+        Width="700"
+        Title="{Binding Path=Title}" WindowStartupLocation="CenterOwner" Icon="/VISAHealthMonitorCommonControls;component/images/threads.png">
+
+    <DockPanel LastChildFill="True" VerticalAlignment="Stretch" >
+        <DockPanel.Resources>
+            <Style x:Key="LeftHeaderStyle" TargetType="{x:Type GridViewColumnHeader}">
+                <Setter Property="HorizontalContentAlignment" Value="Left"/>
+            </Style>
+        </DockPanel.Resources>
+        <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="2,2,2,0" DockPanel.Dock="Top">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="26"/>
+                <RowDefinition Height="{Binding Path=RequestRowHeight}"/>
+                <RowDefinition Height="26"/>
+
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="120" />
+                <ColumnDefinition Width="100*" />                
+            </Grid.ColumnDefinitions>
+
+            <Label Grid.Row="0" Grid.Column="0" Content="Site" Height="23" HorizontalContentAlignment="Right" />
+            <TextBox Grid.Row="0" Grid.Column="1" Height="23" Margin="2,0,2,0"
+                             HorizontalAlignment="Stretch" Text="{Binding Path=SiteName}" IsReadOnly="True"/>
+
+            <Label Grid.Row="1" Grid.Column="0" Content="Request" Height="23" HorizontalContentAlignment="Right" 
+                   Visibility="{Binding Path=ShowRequestRowHeight}" />
+            <TextBox Grid.Row="1" Grid.Column="1" Height="23" Margin="2,0,2,0"
+                     HorizontalAlignment="Stretch" Text="{Binding Path=RequestName}" IsReadOnly="True"
+                     Visibility="{Binding Path=ShowRequestRowHeight}"/>
+
+            <Label Grid.Row="2" Grid.Column="0" Content="Worker Thread" Height="23" HorizontalContentAlignment="Right" />
+            
+            <DockPanel Grid.Row="2" Grid.Column="1" LastChildFill="True" >
+                <Button Command="{Binding Path=RefreshCommand}" Content="Refresh" DockPanel.Dock="Right" />
+                <TextBox DockPanel.Dock="Left" Height="23" Margin="2,0,2,0"
+                             HorizontalAlignment="Stretch" Text="{Binding Path=WorkerThread}" IsReadOnly="True" />
+            </DockPanel>
+
+        </Grid>
+        <Label Content="Thread Stack Trace" DockPanel.Dock="Top" Height="23" 
+               HorizontalContentAlignment="Left" Margin="2,2,2,0" />
+
+        <StatusBar DockPanel.Dock="Bottom" Height="23" HorizontalAlignment="Stretch">
+            <StatusBarItem HorizontalAlignment="Stretch">
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="images/failed.ico" Visibility="{Binding Path=ErrorIconVisibility}" Stretch="None" Margin="0,0,2,0"/>
+                    <TextBlock Text="{Binding Path=StatusMessage}" />
+                </StackPanel>
+            </StatusBarItem>
+        </StatusBar>
+
+        <StackPanel Orientation="Horizontal" DockPanel.Dock="Bottom" HorizontalAlignment="Center">
+            <Button  Content="Close" Command="{Binding Path=CloseCommand}" Margin="2,1,2,1" /> 
+        </StackPanel>
+
+        <ListView  HorizontalAlignment="Stretch" DockPanel.Dock="Bottom"
+                       MinHeight="130" Margin="2,2,2,0" 
+                      VerticalAlignment="Stretch"
+                      ItemsSource="{Binding Path=StackTrace.Sources.View}" >
+            <ListView.View>
+                <GridView >
+                    <GridViewColumn Width="300" HeaderContainerStyle="{StaticResource LeftHeaderStyle}" >
+                        <GridViewColumnHeader Content="Class Name" />
+                        <GridViewColumn.CellTemplate>
+                            <HierarchicalDataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="{Binding ClassName}"  />
+                                </StackPanel>
+                            </HierarchicalDataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Width="150" HeaderContainerStyle="{StaticResource LeftHeaderStyle}" >
+                        <GridViewColumnHeader Content="Method Name"/>
+                        <GridViewColumn.CellTemplate>
+                            <HierarchicalDataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="{Binding MethodName}"  />
+                                </StackPanel>
+                            </HierarchicalDataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Width="135" HeaderContainerStyle="{StaticResource LeftHeaderStyle}" >
+                        <GridViewColumnHeader Content="File Name" />
+                        <GridViewColumn.CellTemplate>
+                            <HierarchicalDataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="{Binding FileName}"  />
+                                </StackPanel>
+                            </HierarchicalDataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Width="75" HeaderContainerStyle="{StaticResource LeftHeaderStyle}" >
+                        <GridViewColumnHeader Content="Line Number" />
+                        <GridViewColumn.CellTemplate>
+                            <HierarchicalDataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="{Binding LineNumber}"  />
+                                </StackPanel>
+                            </HierarchicalDataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        
+        
+        
+        
+    </DockPanel>
+</Window>

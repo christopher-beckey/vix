@@ -1,0 +1,236 @@
+MAGBRTA5 ;WOIFO/EdM - Action Queue Processor ; 05/04/2007 07:56
+ ;;3.0;IMAGING;**11,30,51,54**;MAR 19, 2002;;OCT 28, 2009
+ ;; Per VHA Directive 2004-038, this routine should not be modified.
+ ;; +---------------------------------------------------------------+
+ ;; | Property of the US Government.                                |
+ ;; | No permission to copy or redistribute this software is given. |
+ ;; | Use of unreleased versions of this software requires the user |
+ ;; | to execute a written test agreement with the VistA Imaging    |
+ ;; | Development Office of the Department of Veterans Affairs,     |
+ ;; | telephone (301) 734-0100.                                     |
+ ;; | The Food and Drug Administration classifies this software as  |
+ ;; | a medical device.  As such, it may not be changed in any way. |
+ ;; | Modifications to this software may result in an adulterated   |
+ ;; | medical device under 21CFR820, the use of which is considered |
+ ;; | to be a violation of US Federal Statutes.                     |
+ ;; +---------------------------------------------------------------+
+ ;;
+ Q
+ ;
+DOS ; MS-DOS type file copy for routing
+ N ERMSG ;- Error message array
+ N EXE ;--- Name of compressor-executable program
+ N NET ;--- UNC name for NEWDEST
+ N REMOTE ; File Name at destination
+ N RENAME ; Eventual name at destination
+ N SCR ;--- Scratch directory
+ N SIZE ;-- size of file at origin
+ N XMIT ;-- Timestamp (start of transmission)
+ N TMPFIL ; Temporary file to hold compressed version
+ N TYP ;--- File type
+ N I,X
+ ;
+ S SCR=$G(^MAGDICOM(2006.563,1,"SCRATCH")) S:SCR="" SCR="C:\TEMP"
+ S:$E(SCR,$L(SCR))'="\" SCR=SCR_"\"
+ S TMPFIL=SCR_"Compress"_(+DEST)_"."
+ ;
+ I NEWDEST="" D  Q
+ . D MESSAGE^MAGDMLOG(1,0,"No destination specified...","t")
+ . D STATUS(D0,"SENT",LOCATION)
+ . Q
+ ;
+ S NET=NEWDEST S:$E(NET,$L(NET))="\" NET=$E(NET,1,$L(NET)-1)
+ S OK=1,(EXE,RENAME)=""
+ D:COMPR="J2K"
+ . N D,I,SET,X
+ . S X=$$HOSTCMD^MAGOSMSC("set",.SET),D="C"
+ . S I="" F  S I=$O(SET(I)) Q:I=""  D
+ . . S X=SET(I)
+ . . I $E(X,1,12)="SystemDrive=" S D=$E($P(X,"=",2,$L(X)+2),1)
+ . . Q
+ . S D=D_":\Program Files\VistA\Imaging\DICOM\awj2k.dll"
+ . I $$GETDIR^MAGOSDIR(D)>0 S EXE="MAG_Compressor_Aware.exe" Q
+ . D MESSAGE^MAGDMLOG(1,0,"JPEG 2000 Compression not licensed on this system.","tB")
+ . S COMPR="NONE"
+ . Q
+ D:CURDEST'=NEWDEST  ; Connect to new destination
+ . D RELSHARE^MAGBRTA4 S OK=0
+ . S X="net use "_CURDEST_" /delete"
+ . I CURDEST'="" W !,X  S X=$$HOSTCMD^MAGOSMSC(X)
+ . S X="net use "_NEWDEST_" /delete"
+ . I NEWDEST'="" W !,X S X=$$HOSTCMD^MAGOSMSC(X)
+ . F  S SHARE=$$GETSHARE^MAGBRTA4() Q:SHARE'=""  D  Q:STOP
+ . . W !!,"Currently no drive letter available to mount"
+ . . W !,NEWDEST,!,"Waiting 5 minutes to retry...",!
+ . . H 300
+ . . D CHECK^MAGBRTA4
+ . . Q
+ . S RETRY=0 F  D  Q:OK  Q:RETRY>$P(NODE3,"^",2)  Q:STOP
+ . . N E ;----- Array containing error output
+ . . N I ;----- Loop counter
+ . . N O ;----- Array containing standard output
+ . . D CHECK^MAGBRTA4 Q:STOP
+ . . W !,"Connect to "_NET
+ . . S X="net use "_SHARE_" "_NET_" --password-- /user:"_DSTUSR
+ . . W !,X
+ . . S X="net use "_SHARE_" "_NET_" "_$$DECRYP^MAGM2VCU(DSTPWD)_" /user:"_DSTUSR
+ . . S X=$$HOSTCMD^MAGOSMSC(X,.O,.E)
+ . . S (OK,I)=0 F  S I=$O(O(I)) Q:I=""  D  Q:OK
+ . . . I O(I)["The command completed successfully." S OK=1
+ . . . Q
+ . . I 'OK D  S RETRY=RETRY+1
+ . . . D MESSAGE^MAGDMLOG(1,0,"Could not connect to "_NET,"t")
+ . . . D MSG
+ . . . Q
+ . . Q
+ . I 'OK D  Q
+ . . N OUT,X
+ . . S X=$$CALLRPC^MAGM2VCU("MAG DICOM NETWORK STATUS","MT",.OUT,+DEST,0)
+ . . D STATUS(D0,"WAITING",LOCATION)
+ . . Q
+ . S CURDEST=NEWDEST
+ . D  ; Purge if needed
+ . . N DONE,FILE,I,OK
+ . . Q:$P(NODE3,"^",4)'<($$NOW^XLFDT()\1)
+ . . ;
+ . . S DONE(1)="^"
+ . . S OK=0 F  D  Q:OK
+ . . . S:$$CALLRPC^MAGM2VCU("MAG DICOM ROUTE GET PURGE","MT",.OUT,LOCATION,+DEST,100,.DONE)<0 FATAL=1
+ . . . I FATAL S OK=13 Q
+ . . . S I=$O(OUT("")) I I="" S OK=13 Q
+ . . . S X=OUT(I) I +X=1 S OK=1 Q
+ . . . I X<0 D  S OK=13 Q
+ . . . . W !!,"Error in RPC: ",X,!
+ . . . . Q
+ . . . K DONE S DONE(1)="^"
+ . . . F  S I=$O(OUT(I)) Q:I=""  D
+ . . . . S X=OUT(I),FILE=$PIECE(X,"^",5,$L(X)+2),DONE(1)="^^^"_$P(X,"^",1,3)
+ . . . . I $E(FILE,1,2)?1A1":" S $E(FILE,1)=$E(SHARE,1)
+ . . . . E  S FILE=SHARE_FILE
+ . . . . W !,"Purge ",FILE
+ . . . . S Z=$$DEL^MAGOSDIR(FILE) S:+Z=-2 Z=0 ; -2 = already deleted
+ . . . . I Z W !,"Cannot delete, status is """,Z,"""."
+ . . . . S:'Z DONE(I)=OUT(I)
+ . . . . S X=$P(FILE,"\",$L(FILE,"\")) Q:$L(X,".")=2
+ . . . . ; If file was sent compressed, delete uncompressed file as well
+ . . . . S FILE=$P(FILE,"\",1,$L(FILE,"\")-1)_"\"_$P(X,".",1,2)
+ . . . . W !,"Purge ",FILE
+ . . . . S Z=$$DEL^MAGOSDIR(FILE) S:+Z=-2 Z=0 ; -2 = already deleted
+ . . . . I Z W !,"Cannot delete, status is """,Z,"""."
+ . . . . S:'Z DONE(I)=OUT(I)
+ . . . . Q
+ . . . Q
+ . . Q
+ . Q
+ Q:'OK
+ ;
+ S (REMOTE,FILDST)=SHARE_FILDST
+ ; Make sure directory exists
+ S X=$$MKDIR^MAGOSDIR($P(FILDST,"\",1,$L(FILDST,"\")-1))
+ I X<0 D  Q
+ . D MESSAGE^MAGDMLOG(1,0,"Cannot create directory for "_FILSRC,"t")
+ . D MESSAGE^MAGDMLOG(1,0,"Remote name is """_$P(FILDST,"\",1,$L(FILDST,"\")-1)_""".")
+ . D MESSAGE^MAGDMLOG(1,0,"Reason: "_X,"t")
+ . D STATUS(D0,"FAILED",LOCATION)
+ . Q
+ ;
+ ; Check if the file is already there
+ S X=$$GETDIR^MAGOSDIR(FILDST)
+ I X>0 D  Q
+ . D MESSAGE^MAGDMLOG(1,0,FILSRC_" already present at "_NET,"t")
+ . D STATUS(D0,"SENT",LOCATION)
+ . Q
+ ;
+ S X=$$GETDIR^MAGOSDIR(FILSRC) I X<0 D  Q
+ . D MESSAGE^MAGDMLOG(1,0,FILSRC_" cannot be copied.","t")
+ . D MESSAGE^MAGDMLOG(1,0,"Reason: "_X,"t")
+ . D STATUS(D0,"SENT",LOCATION)
+ . Q
+ ;
+ D ERRCMP^MAGDCMPE(.ERMSG)
+ S X=$P(FILSRC,"\",$L(FILSRC,"\")),TYP=$P(X,".",2)
+ I X="" D  Q
+ . D MESSAGE^MAGDMLOG(1,0,"Invalid source file name: "_FILSRC,"t")
+ . D STATUS(D0,"SENT",LOCATION)
+ . Q
+ S SIZE=$P($G(^TMP("MAG",$J,"DIR LIST",X)),";",1)
+ ;
+ S OK=0 F RETRY=0:1 D  Q:OK  Q:RETRY>$P(NODE3,"^",3)  Q:STOP
+ . N CMD ;--- MS-DOS command to be executed
+ . N E ;----- Array containing error output
+ . N O ;----- Array containing standard output
+ . N ACT ;--- Actual name of file
+ . N P1,P2 ;- Compressor parameters
+ . D CHECK^MAGBRTA4 I STOP S OK=13 Q
+ . S XMIT=$$NOW^XLFDT()
+ . D MESSAGE^MAGDMLOG(1,0,"Transmit "_FILSRC_" to "_NET,"t")
+ . S ACT=FILSRC,(P1,P2)=""
+ . D:COMPR="J2K"
+ . . S:TYP="DCM" P1="DCM",P2="J2K",ACT=TMPFIL_TYP
+ . . S:TYP="TGA" P1="TGA",P2="J2K",ACT=TMPFIL_TYP
+ . . S:TYP="BIG" P1="TGA",P2="J2K",ACT=TMPFIL_TYP
+ . . S:TYP="ABS" P1="TGA",P2="J2K",ACT=TMPFIL_TYP
+ . . Q
+ . D:P1'=""
+ . . S CMD=EXE_" -t "_P1_" -c "_P2_" -i """_FILSRC_""" -o """_ACT_""""
+ . . W !,CMD
+ . . S X=$$HOSTCMD^MAGOSMSC(CMD,.O,.E)
+ . . I 'X D  Q:'X
+ . . . S X=$$GETDIR^MAGOSDIR(ACT)
+ . . . I X'=1 S X=131313,E(1001)="Could not create file "_ACT Q
+ . . . S X=$$UPPER^MAGOSMSC($P(ACT,"\",$L(ACT,"\")))
+ . . . S SIZE=$P($G(^TMP("MAG",$J,"DIR LIST",X)),";",1)
+ . . . S RENAME=REMOTE_"."_P2 ; eventual name
+ . . . S FILDST=REMOTE_".tmp" ; temporary name
+ . . . K O,E S X=0
+ . . . Q
+ . . D MESSAGE^MAGDMLOG(1,0,CMD,"t")
+ . . D MESSAGE^MAGDMLOG(1,0,$G(ERMSG(+X),"Error # "_X),"t")
+ . . D MSG
+ . . S ACT=FILSRC
+ . . K O,E
+ . . Q
+ . S CMD="copy /b "_ACT_" "_FILDST
+ . W !,CMD S X=$$HOSTCMD^MAGOSMSC(CMD,.O,.E)
+ . S OK=0,I=0 F  S I=$O(O(I)) Q:I=""  D  Q:OK
+ . . I O(I)["1 file(s) copied." S OK=1
+ . . I O(I)["The system cannot find the file specified." S OK=666
+ . . Q
+ . I OK'=1 D
+ . . D MESSAGE^MAGDMLOG(1,0,CMD,"t"),MSG
+ . . Q
+ . S:ACT'=FILSRC X=$$DEL^MAGOSDIR(ACT)
+ . ; Verify that file was copied properly
+ . S X=$$GETDIR^MAGOSDIR(FILDST) I X<0 D  Q
+ . . D MESSAGE^MAGDMLOG(1,0,"Copy not successful, code "_X,"t")
+ . . S OK=0
+ . . Q
+ . S X=$$UPPER^MAGOSMSC($P(FILDST,"\",$L(FILDST,"\")))
+ . S X=$P($G(^TMP("MAG",$J,"DIR LIST",X)),";",1)
+ . I SIZE'=X D  Q
+ . . D MESSAGE^MAGDMLOG(1,0,"Source-size = "_SIZE_", copied size = "_X,"t")
+ . . S OK=0
+ . . Q
+ . D:RENAME'=""
+ . . S CMD="del "_RENAME
+ . . W !,CMD S X=$$HOSTCMD^MAGOSMSC(CMD,.O,.E)
+ . . S CMD="rename "_FILDST_" "_$P(RENAME,"\",$L(RENAME,"\"))
+ . . S FILDST=RENAME
+ . . W !,CMD S X=$$HOSTCMD^MAGOSMSC(CMD,.O,.E)
+ . . S OK=1,I=0 F  S I=$O(E(I)) Q:I=""  S:E(I)["duplicate" OK=0 Q:'OK
+ . . D:'OK MSG
+ . . Q
+ . Q
+ S X=$S(OK=666:"NOT FOUND",OK=13:"WAITING",OK:"SENT",1:"FAILED")
+ S:$$CALLRPC^MAGM2VCU("MAG DICOM ROUTE LOG XMIT","MT",.OUT,D0,+DEST,LOCATION,X,FILDST,XMIT,1)<0 FATAL=1
+ Q
+ ;
+STATUS(D0,NEWSTS,LOCATION) N OUT
+ S:$$CALLRPC^MAGM2VCU("MAG DICOM ROUTE STATUS","MT",.OUT,D0,NEWSTS,LOCATION)<0 FATAL=1
+ Q
+ ;
+MSG N I
+ S I=0 F  S I=$O(O(I)) Q:I=""  D MESSAGE^MAGDMLOG(1,0,O(I),"t")
+ S I=0 F  S I=$O(E(I)) Q:I=""  D MESSAGE^MAGDMLOG(1,0,E(I),"t")
+ Q
+ ;

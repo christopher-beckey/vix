@@ -1,0 +1,200 @@
+Cache for Windows NT^INT^Saved from DICOM (ISW-KUZMAKP3-LT)^~Format=Cache.S~
+%RO on 09/17/2012  11:24
+MAGDDR3^INT^1^62692,59318^0
+MAGDDR3 ;WOIFO/PMK - Program to read a DICOM file ; 17 Feb 2012 10:23 AM
+ ;;3.0;IMAGING;**1,10,51,50,110**;Mar 19, 2002;Build 48;Aug 23, 2012
+ ;; Per VHA Directive 2004-038, this routine should not be modified.
+ ;; +---------------------------------------------------------------+
+ ;; | Property of the US Government.                                |
+ ;; | No permission to copy or redistribute this software is given. |
+ ;; | Use of unreleased versions of this software requires the user |
+ ;; | to execute a written test agreement with the VistA Imaging    |
+ ;; | Development Office of the Department of Veterans Affairs,     |
+ ;; | telephone (301) 734-0100.                                     |
+ ;; | The Food and Drug Administration classifies this software as  |
+ ;; | a medical device.  As such, it may not be changed in any way. |
+ ;; | Modifications to this software may result in an adulterated   |
+ ;; | medical device under 21CFR820, the use of which is considered |
+ ;; | to be a violation of US Federal Statutes.                     |
+ ;; +---------------------------------------------------------------+
+ ;;
+ ; PACS Interface -- read DICOM files (routine #3)
+ ;
+ENTRY ; entry point from ^MAGDDR2 to get the value for an element
+ N N
+ D INTVALUE ; initialize the value array for the 1st multiple
+ ; get the value(s), if they are present
+ I 'LENGTH D  ; set the value to <unknown>
+ . D SETVALUE("<unknown>")
+ . Q
+ E  D  ; get the value and set context-sensitive switches
+ . D GETVALUE ; get the value from the file
+ . I TAG="0028,0103" D  ; set pixel representation switch
+ . . I VALUE=0 S PIXELREP="unsigned integer"
+ . . E  I VALUE=1 S PIXELREP="2's complement"
+ . . E  W !,"*** ERROR -- Illegal pixel representation: ",VALUE," ***",!
+ . . Q
+ . Q
+ Q
+ ;
+GETVALUE ; get the value for the element
+ I "^AE^AS^CS^DA^DS^DT^IS^LO^LT^PN^SH^ST^TM^UI^UT^"[("^"_VR_"^") D ASCII Q
+ I "^SS^US^"[("^"_VR_"^") D BINARY(2) Q  ; 2-byte integers
+ I "^SL^UL^"[("^"_VR_"^") D BINARY(4) Q  ; 4-byte integers
+ I $T(@VR)'="" D @VR Q
+ N MSG
+ S MSG(1)="Undefined value representation: """_VR_"""."
+ D TRAPERR^MAGDSTRT(1,$T(+0),"DICOM GATEWAY ERROR",.MSG)
+ Q  ; Error trap does not return
+ ;
+AT ; Attribute Tag
+ N G,E,N
+ S N=LENGTH
+ F  D  Q:N=0
+ . S STATUS=$$USE^MAGOSFIL(QUEUEIN("FILE"))
+ . D AT^MAGDDR0(.G,.E)
+ . S STATUS=$$USE^MAGDFCNS(ODEVTYPE,ODEVNAME)
+ . D SETVALUE(G_","_E)
+ . S N=N-4 I N>0 D INTVALUE ; increment the multiple counter
+ . Q
+ Q
+ ;
+FL ; Floating Point Single
+OF ; Other Float String - Floating Point Single
+ N FLOAT
+ I LENGTH#4 D  Q
+ . W !?17,"Incorrect length (",LENGTH,") for Single Precision Floating Point"
+ . S STATUS=$$USE^MAGOSFIL(QUEUEIN("FILE"))
+ . S N=$$SEEK^MAGOSFIL(QUEUEIN("FILE"),LENGTH,1)
+ . Q
+ S N=LENGTH
+ F  D  Q:N=0
+ . S STATUS=$$USE^MAGOSFIL(QUEUEIN("FILE"))
+ . S FLOAT=$$FL^MAGDDR0 S STATUS=$$USE^MAGDFCNS(ODEVTYPE,ODEVNAME)
+ . D SETVALUE($$FMTFL^MAGDDR0(1,6,FLOAT))
+ . S N=N-4 I N>0 D INTVALUE ; increment the multiple counter
+ . Q
+ Q
+ ;
+FD ; Floating Point Double
+ N DOUBLE
+ I LENGTH#8 D  Q
+ . W !?17,"Incorrect length (",LENGTH,") for Double Precision Floating Point"
+ . S STATUS=$$USE^MAGOSFIL(QUEUEIN("FILE"))
+ . S N=$$SEEK^MAGOSFIL(QUEUEIN("FILE"),LENGTH,1)
+ . Q
+ S N=LENGTH
+ F  D  Q:N=0
+ . S STATUS=$$USE^MAGOSFIL(QUEUEIN("FILE"))
+ . S DOUBLE=$$FD^MAGDDR0 S STATUS=$$USE^MAGDFCNS(ODEVTYPE,ODEVNAME)
+ . D SETVALUE($$FMTFD^MAGDDR0(1,6,DOUBLE))
+ . S N=N-8 I N>0 D INTVALUE ; increment the multiple counter
+ . Q
+ Q
+ ;
+OB ; Other Byte String
+ I TAG="7FE0,0010" D PIXEL Q
+ D BINARY(1)
+ Q
+ ;
+OW ; Other Word String
+ I TAG="7FE0,0010" D PIXEL Q
+ D BINARY(2)
+ Q
+ ;
+PIXEL ; read Picture Data or Overlay
+ N L
+ D SETVALUE($S(GROUP="7FE0":"<image>",1:"<overlay>"))
+ I SEQUENCE="" D  ; normal image
+ . D SETVALUE("length="_LENGTH_" (0x"_HLENGTH_")")
+ . Q
+ E  D  ; image imbedded in a sequence -- ignore and record length of 0
+ . I ODEVTYPE="" D
+ . . D SETVALUE("length=0 (0x0)")
+ . . Q
+ . E  D
+ . . D SETVALUE("length="_LENGTH_" (0x"_HLENGTH_")")
+ . . Q
+ . Q
+ I 'EXPLICIT S L=8  ; Implicit VR -- length(tag + length) = 8
+ E  S L=12  ; Explicit VR -- length of (tag + VR + pad + length) = 12
+ D SETVALUE("offset="_(OFFSET+L)_" (0x"_$$HEX^MAGDDR0(OFFSET+L,4)_")")
+ I HLENGTH="FFFFFFFF" S EOF=1 Q
+ S X=$$SEEK^MAGOSFIL(QUEUEIN("FILE"),LENGTH,1)
+ S STATUS=$$USE^MAGDFCNS(ODEVTYPE,ODEVNAME) ; skip the overlay or picture
+ Q
+ ;
+SQIS ; Start of Sequence Item
+ D SEQINC^MAGDFCNS ; increment sequence counter
+ S VALUE=SEQNUMB_"."_+$P(SEQUENCE,".",$L(SEQUENCE,"."))
+ I HLENGTH="FFFFFFFF" Q  ; undefined length
+ S SEQIEND(SEQNUMB)=OFFSET+LENGTH+8 ; explicit length - save end offset
+ Q
+ ;
+SQIE ; End of Sequence Item
+ K SEQIEND(SEQNUMB) ; remove offset to end of sequence item (if present)
+ S VALUE=SEQNUMB_"."_+$P(SEQUENCE,".",$L(SEQUENCE,"."))
+ Q
+ ;
+SQ ; Start of Sequence
+ I 'LENGTH S VALUE="<null sequence>" Q
+ D SEQPUSH0^MAGDFCNS(TAG) S VALUE=SEQNUMB
+ I HLENGTH="FFFFFFFF" Q  ; undefined length
+ S SEQEND(SEQNUMB)=OFFSET+LENGTH+8 ; explicit length - save end offset
+ Q
+ ;
+SQE ; End of Sequence
+ K SEQEND(SEQNUMB) ; remove offset to end of sequence (if present)
+ S VALUE=SEQNUMB D SEQPOP^MAGDFCNS
+ Q
+ ;
+UN ; Unknown Element
+ D UNKNOWN Q
+ ;
+ASCII ; read ASCII text
+ N DELIMIT,N,STATUS
+ S N=LENGTH,DELIMIT=$S(VM="1":"",1:"\")
+ F  D  Q:N<1  ; ignore the space trailing an odd-length string
+ . S STATUS=$$USE^MAGOSFIL(QUEUEIN("FILE"))
+ . S @("VALUE=$$"_VR_"^MAGDDR0(.N,.DELIMIT)")
+ . S STATUS=$$USE^MAGDFCNS(ODEVTYPE,ODEVNAME)
+ . D SETVALUE(VALUE)
+ . I DELIMIT="\" D INTVALUE ; increment the multiple counter
+ . Q
+ Q
+ ;
+BINARY(INC) ; read one or more fixed length binary fields
+ S N=LENGTH
+ F  D  Q:N=0
+ . S STATUS=$$USE^MAGOSFIL(QUEUEIN("FILE"))
+ . S @("VALUE=$$"_VR_"^MAGDDR0")
+ . S STATUS=$$USE^MAGDFCNS(ODEVTYPE,ODEVNAME)
+ . D SETVALUE(VALUE)
+ . S N=N-INC I N>0 D INTVALUE ; increment the multiple counter
+ . Q
+ Q
+UNKNOWN ; read for unknown group/element
+ S VALUE=$$GETUNKWN^MAGDDR0(QUEUEIN("FILE"),LENGTH)
+ S STATUS=$$USE^MAGDFCNS(ODEVTYPE,ODEVNAME)
+ I (VALUE'?.ANP) D SETVALUE("<binary data>")
+ E  D SETVALUE(VALUE)
+ Q
+ ;
+SETVALUE(X) ; set x into value array
+ N SS1,SS2
+ ; ss1 = multiple #, ^(ss1,ss2) = row within a multiple
+ S SS1=^TMP("MAG",$J,"DICOM",INODE,SS0,0,0)
+ S (SS2,^(0))=^TMP("MAG",$J,"DICOM",INODE,SS0,SS1,0)+1
+ S ^TMP("MAG",$J,"DICOM",INODE,SS0,SS1,SS2)=X ; set value into ^TMP global
+ Q
+ ;
+INTVALUE ; initialize the value array for the next multiple
+ N SS1
+ ; ss1, ^(0,0) = # multiples , ^(ss1,0) = # rows within a multiple
+ S (SS1,^(0))=$G(^TMP("MAG",$J,"DICOM",INODE,SS0,0,0))+1
+ ; initialize the row counter
+ S ^TMP("MAG",$J,"DICOM",INODE,SS0,SS1,0)=0
+ Q
+
+
+

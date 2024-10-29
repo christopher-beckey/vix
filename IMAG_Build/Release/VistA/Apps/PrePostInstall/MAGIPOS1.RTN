@@ -1,0 +1,43 @@
+03/22/2002 15:52
+Saved by magvss from ZVA
+MAGIPOS1
+MAGIPOS1 ;Post init routine to queue site activity at install.
+ ;;3.0;IMAGING;**1**;Mar 18, 2002
+ ;; +---------------------------------------------------------------+
+ ;; | Property of the US Government.                                |
+ ;; | No permission to copy or redistribute this software is given. |
+ ;; | Use of unreleased versions of this software requires the user |
+ ;; | to execute a written test agreement with the VistA Imaging    |
+ ;; | Development Office of the Department of Veterans Affairs,     |
+ ;; | telephone (301) 734-0100.                                     |
+ ;; |                                                               |
+ ;; | The Food and Drug Administration classifies this software as  |
+ ;; | a medical device.  As such, it may not be changed             |
+ ;; | in any way.  Modifications to this software may result in an  |
+ ;; | adulterated medical device under 21CFR820, the use of which   |
+ ;; | is considered to be a violation of US Federal Statutes.       |
+ ;; +---------------------------------------------------------------+
+ ;;
+ Q
+POST ;
+ I $T(POST^MAGQST)="" Q
+ D POST^MAGQST
+ D UPDATE
+ Q
+UPDATE ;Is GCC Export set in the Imaging Site Param file?
+ N ENTRY
+ S ENTRY=0
+ F  S ENTRY=$O(^MAG(2006.1,ENTRY)) Q:'ENTRY  D
+ . I $D(^MAG(2006.1,ENTRY,0)),+$P(^MAG(2006.1,ENTRY,0),"^",7) D
+ . . D MAGDESC
+ . . Q
+ . Q
+ Q
+MAGDESC ;Reset the MEANS TEST entries in file 2005.81
+ ; Only set the ACTION IS ACTIVE field
+ N XX,IEN
+ F XX="MEANS TEST (10-10EZ)","MEANS TEST (10-10F)" D
+ . S IEN=$O(^MAG(2005.81,"B",XX,0)) Q:'IEN
+ . I $D(^MAG(2005.81,IEN,0)) S $P(^MAG(2005.81,IEN,1),"^")=1
+ . Q
+ Q

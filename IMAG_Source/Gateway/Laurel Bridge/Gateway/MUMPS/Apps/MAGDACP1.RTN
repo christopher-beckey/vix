@@ -1,0 +1,264 @@
+Cache for Windows NT^INT^Saved from DICOM,DICOM (ISW-KUZMAKP3-LT)^~Format=Cache.S~
+%RO on 06/04/2013  12:00
+MAGDACP1^INT^1^62977,43226.52978^0
+MAGDACP1 ;WOIFO/PMK - DICOM ACSE for SOP Class Provider ; 04 Jun 2013 12:00 PM
+ ;;3.0;IMAGING;**21,11,30,51,69,54,110**;Mar 19, 2002;Build 48;Aug 23, 2012
+ ;; Per VHA Directive 2004-038, this routine should not be modified.
+ ;; +---------------------------------------------------------------+
+ ;; | Property of the US Government.                                |
+ ;; | No permission to copy or redistribute this software is given. |
+ ;; | Use of unreleased versions of this software requires the user |
+ ;; | to execute a written test agreement with the VistA Imaging    |
+ ;; | Development Office of the Department of Veterans Affairs,     |
+ ;; | telephone (301) 734-0100.                                     |
+ ;; | The Food and Drug Administration classifies this software as  |
+ ;; | a medical device.  As such, it may not be changed in any way. |
+ ;; | Modifications to this software may result in an adulterated   |
+ ;; | medical device under 21CFR820, the use of which is considered |
+ ;; | to be a violation of US Federal Statutes.                     |
+ ;; +---------------------------------------------------------------+
+ ;;
+ Q
+ ; Association Control Service Element (ACSE) for a SOP Class Provider
+ ;
+ ; There are nine steps to DICOM (ACSE) association processing
+ ;   1) Listen on the socket and wait for the incoming connection
+ ;   2) Receive the A-ASSOCIATE-RQ request PDU from the user
+ ;   3) Decode the A-ASSOCIATE-RQ request
+ ;   4) Generate the A-ASSOCIATE-AC/RJ response
+ ;   5) Send the A-ASSOCIATE-AC/RJ response
+ ;   6) Process the P-DATA-TF (data transfer) PDUs
+ ;   7) Receive the A-RELEASE-RQ request PDU from the user
+ ;   8) Generate the A-RELEASE-RP response PDU
+ ;   9) Issue the A-RELEASE-RP response PDU
+ ;
+FIFOQUE ; Called by ^MAGDTCP to initialize the server for the association
+ ; use the FIFO queue mechanism (i.e., for PACS)
+ N CHANNEL,FILEMODE,INTERRUPT,PORT
+ S FILEMODE="FIFO QUEUE",CHANNEL=^TMP("MAG",$J,"DICOM","CHANNEL")
+ S PORT=^TMP("MAG",$J,"DICOM","PORT") ; TCP/IP port number on which the SCP will listen
+ F  D FOREGND Q:INTERRUPT  ; endless provider loop for each association
+ Q
+ ;
+DIRECT ; Called by ^MAGDTCP to initialize the server for the association
+ ; communicate directly w/o the FIFO queue mechanism (i.e., for queries)
+ N CHANNEL,FILEMODE,INTERRUPT,PORT
+ S FILEMODE="DIRECT",CHANNEL=1
+ S PORT=^TMP("MAG",$J,"DICOM","PORT") ; TCP/IP port number on which the SCP will listen
+ F  D FOREGND Q:INTERRUPT  ; endless provider loop for each association
+ Q
+ ;
+FOREGND ; mainline DICOM service class provider code
+ N DEBUG ;---- controls diagnostic screen output
+ N DONEFLAG ;- flag indicating that the transmission is completed
+ N DTIME ;---- VA Kernel standard read timeout parameter
+ N FBSWITCH ;- foreground / midground / background flag for ^MAGDMLOG
+ N INCOMING ;- file path for the incoming DICOM request
+ N IPADDR ;--- SCU application's IP address and name
+ N LOG ;------ number of entry in ^MAGDMLOG
+ N LOGDIR ;--- directory for logging message files
+ N OUTGOING ;- file path for the outgoing DICOM response
+ N STATUS ;--- Result from I/O function
+ N SUCCESS ;-- Success/failure flag
+ ;
+ N $ES,$ET S $ET="D FGNDERR^"_$T(+0)
+ ;
+ ; initialize variables
+ S FBSWITCH="FOREGROUND" ; foreground/background switch
+ S INTERRUPT=0 ; will be set to 1 if CTRL-C is hit
+ S DTIME=5 ; restart TCP/IP in five seconds after association ends
+ D INIT^MAGDTLOG ; initialize the message log
+ S ^TMP("MAG",$J,"DICOM","PORT")=PORT
+ I FILEMODE="FIFO QUEUE" D INIT^MAGDQUE1
+ I FILEMODE="DIRECT" D INIT^MAGDQUE3
+ ;
+ ; STEP 1: "Listen" for the connection from the SOP Class User
+ D NEWLOG^MAGDMLOG("FGND on Port #"_PORT)
+ D MESSAGE^MAGDMLOG(3,0,"Provider Process (Job #"_$J_") Started","BTV")
+ S STATUS=$$TCPCLOSE^MAGOSTCP("",PORT) ; in case previous task aborted
+ D LISTEN^MAGDTCP1(PORT)
+ D UPDTITLE^MAGDMLOG("FGND with "_IPADDR)
+ G STEP2
+ ;
+FGNDERR ; error trap for jobs started in the foreground error
+ ; begin a new session when a disconnect error occurs
+ N ECODE,MSG,ZERROR
+ S ECODE=$EC,$EC="" ; clear $ECODE before calling BACK^%ETN
+ S CASCADE=$G(CASCADE)+1 I CASCADE>1000 D ^%ET H  ; halt run away job
+ D BACK^%ETN ; invoke InterSystems error trap routine
+ S ZERROR=$ZERROR
+ I ZERROR["<INTERRUPT>" D  ; CTRL-C entered - stop transmission
+ . S STATUS=$$TCPCLOSE^MAGOSTCP("",PORT) I $$USEPRIN^MAGOSFIL(1)
+ . S INTERRUPT=1
+ . Q
+ I ZERROR["<DISCON>" S ZERROR=""
+ E  I ZERROR["<DSCON>" S ZERROR=""
+ D INIT^MAGOSFIL
+ I ZERROR="" D
+ . I $D(IPADDR)#2 S MSG="Dropped DICOM connection to "_IPADDR
+ . E  S MSG="Could not open socket" S:$D(PORT)#2 MSG=MSG_" for port # "_PORT
+ . Q
+ E  S MSG="Error: "_ZERROR
+ D MESSAGE^MAGDMLOG(1,0,MSG,"BVt")
+ ;
+ ; generate an error to unwind the stack
+ S $ET="D FGNDERR1^"_$T(+0)
+ S $EC="",$EC=",U13<RESTART>,"
+ Q
+ ;
+FGNDERR1 ; unwind the stack
+ ; The gets called automatically to pop off each frame of the stack
+ ; Clear $ECODE when you get to the first frame ($ES=1), quit the routine
+ I $ES<2 S $EC="" ; clear process error stack to return back to ^MAGDTCP
+ Q
+ ;
+BACKGND ; Called by listener when a user connects to the listen socket
+ N IPADDR ;--- SCU application's IP address and name
+ N PORT ;----- TCP/IP port number on which the SCP will listen
+ N STATUS ;--- Success indicator
+ N VERBOSE ;-- Switch -- display additional information
+ ;
+ S $ET="D BACKERR^"_$T(+0)
+ ;
+ S STATUS=$$TCPGET^MAGOSTCP(.IPADDR,.PORT)
+ ;
+ D  ; Set up credentials to use MUMPS-to-MUMPS Broker
+ . N A,V,X
+ . S A=$G(^MAGDICOM(2006.563,1,"M-to-M BROKER BGND ACCESS"))
+ . S V=$G(^MAGDICOM(2006.563,1,"M-to-M BROKER BGND VERIFY"))
+ . S X=$$DECRYP^MAGM2VCU(A)_";"_$$DECRYP^MAGM2VCU(V)
+ . S ^TMP("MAG",$J,"DICOM RPC USER")="666^1^"_$$ENCRYPT^MAGM2VCU(X)
+ . Q
+ ;
+ ; When we get here, the socket is inherited from the operating
+ ; environment, and not opened through MAGOSTCP.
+ ; Define the essential variables:
+ ;
+ S STATUS=$$TCPINHRT^MAGOSTCP(PORT)
+ ;
+ S ^TMP("MAG",$J,"DICOM","PORT")=PORT
+ ; provider process runs entirely in the background, w/o terminal i/o
+ S FBSWITCH="BACKGROUND" ; foreground/background switch
+ S FILEMODE="DIRECT",CHANNEL=1,VERBOSE=0
+ D NEWLOG^MAGDMLOG("BGND for port "_PORT_" with "_IPADDR)
+ D MESSAGE^MAGDMLOG(1,0,"Provider Process (Job #"_$J_") Started","BTV")
+ D INIT^MAGDTLOG ; initialize the message log
+ D INIT^MAGDQUE3
+ G STEP2
+ ;
+BACKERR ; error trap for MSERVER started background jobs
+ N ECODE
+ S ECODE=$EC,$EC="" ; clear $ECODE before calling ^%ET
+ D MESSAGE^MAGDMLOG(1,0,"Error: "_$ZERROR,"BVt")
+ D ^%ET ; Cache's error trap terminates the process
+ Q:$Q "" Q
+ ;
+STEP2 ; Receive the A-ASSOCIATE-RQ request PDU from the user
+ ; record the start of the session
+ N CALLED ;--- the called application entity, i.e., the "listener"
+ N CALLING ;-- the calling application entity, i.e., the "initiator"
+ N PDUIN ;---- the file path for the incoming Protocol Data Unit
+ N PDUOUT ;--- the file path for the outgoing Protocol Data Unit
+ N PDULEN ;--- the byte length of the Protocol Data Unit
+ N PDUTYPE ;-- the PDU type 01H-07H -- see ^MAGDMFB6
+ N SYSTITLE ;- given name of gateway (e. g., VAMC Image Gateway #2)
+ N TIMEOUT ;-- DICOM TCP timeout counter
+ N TICKER ;--- ticker counter for idle loop
+ N VERBOSE,X
+ D MESSAGE^MAGDMLOG(1,0,"Connection with "_IPADDR,"BTV1")
+ S SYSTITLE=$G(^MAGDICOM(2006.563,1,"SYSTEM TITLE"),"<unknown>")
+ ;
+ ; The User should now send an A-ASSOCIATE-RQ PDU to the Provider
+ ;
+ S TIMEOUT=0 ; initialize DICOM TCP timeout counter
+ ;
+ ; get the PDU from the User via TCP and store it in the PDU INPUT file
+ S PDUIN=$$NEWFILE^MAGDTLOG("I")
+ F  D  Q:X  ; loop until association
+ . N STATUS
+ . ;
+ . S TIMEOUT=TIMEOUT+1 ; increment DICOM TCP timeout counter
+ . I TIMEOUT>$G(^MAGDICOM(2006.563,1,"DICOM TCP TIMEOUT"),300) S $EC=",U13-DICOM TCP Timeout,"
+ . ;
+ . S X=$$RECEIVE^MAGDTCP3(PDUIN,.PDUTYPE,.PDULEN,"",PORT) Q:X
+ . D IDLE^MAGDBB(.TICKER,$G(FBSWITCH)'="BACKGROUND",1)
+ . Q
+ ;
+ ; A PDU has been received from the User.  Is it an A-ASSOCIATE-RQ?
+ I PDUTYPE'="01H" D  Q  ; nope
+ . D MESSAGE^MAGDMLOG(2,0,"Illegal PDU type: "_PDUTYPE,"BVT")
+ . Q
+ ;
+ ; STEP 3: Decode the A-ASSOCIATE-RQ request
+ S VERBOSE=1 D REQUEST^MAGDACP2(PDUIN) ; first decode the PDU
+ ;
+ ; The PDU was a proper A-ASSOCIATE-RQ.  Create the A-ASSOCIATE-AC
+ ; response and send it back to the User.
+ ;
+ ; STEP 4: Generate the A-ASSOCIATE-AC/RJ response
+ S PDUOUT=$$NEWFILE^MAGDTLOG("O")
+ D REQUEST^MAGDACP3(PDUOUT) ; create the A-ASSOCIATE-AC PDU
+ ; read the message being sent for the log
+ S STATUS=$$OPEN^MAGOSFIL(PDUOUT,"B")
+ I STATUS<0 D
+ . N M
+ . S M="Could not open file """_PDUOUT_""" for Binary Read."
+ . W:$$USEPRIN^MAGOSFIL(1) !!!,M,!,STATUS
+ . S $EC=",U"_M_","
+ . Q  ; Error trap does not return
+ D ORESPONS^MAGDACR1(PDUOUT)
+ ;
+ ; STEP 5: Send the A-ASSOCIATE-AC/RJ response
+ D SEND^MAGDTCP2(PDUOUT,"",PORT) ; send the A-ASSOCIATE-AC to the User
+ ;
+ ; invoke ENTRY^MAGDQUE1/3 to transfer data files across the net
+ ;
+ ; STEP 6: Process the P-DATA-TF (data transfer) PDUs
+ S PDUIN=$$NEWFILE^MAGDTLOG("I")
+ S PDUOUT=$$NEWFILE^MAGDTLOG("O")
+ ;
+ ; transfer the data via P-DATA-TF PDUs
+ I FILEMODE="FIFO QUEUE" D  ;
+ . D ENTRY^MAGDQUE1("",PORT)
+ . Q
+ I FILEMODE="DIRECT" D  ;
+ . D ENTRY^MAGDQUE3("",PORT)
+ . Q
+ ;
+ ; A non-P-DATA-TF PDU has been received.  Is it an A-RELEASE-RQ?
+ ;
+ ; STEP 7: Receive the A-RELEASE-RQ request PDU from the user
+ I PDUTYPE'="05H" D  Q  ; nope
+ . D MESSAGE^MAGDMLOG(2,0,"Illegal PDU type: "_PDUTYPE,"BVT")
+ . Q
+ ;
+ ; create the A-RELEASE-RP PDU to terminate the association
+ N STATUS
+ S PDUOUT=$$NEWFILE^MAGDTLOG("O")
+ S STATUS=$$OPEN^MAGOSFIL(PDUOUT,"W")
+ I STATUS<0 D
+ . N M
+ . S M="Could not open file """_PDUOUT_""" for Write."
+ . W:$$USEPRIN^MAGOSFIL(1) !!!,M,!,STATUS
+ . S $EC=",U"_M_","
+ . Q  ; Error trap does not return
+ ;
+ ; STEP 8: Generate the A-RELEASE-RP response PDU
+ D RELEASRP^MAGDACW2(PDUOUT) ; create the A-RELEASE-RP PDU
+ ;
+ ; STEP 9: Issue the A-RELEASE-RP response PDU
+ I $G(FBSWITCH)="BACKGROUND" S X=$$CLOSE^MAGM2VC()
+ N $ET
+ S $ET="D DISCON^"_$T(+0)
+ D SEND^MAGDTCP2(PDUOUT,"",PORT) ; send the A-RELEASE-RP PDU to the User
+ K ^TMP("MAG",$J) ; remove temporary data
+ Q
+ ;
+DISCON ; If we loose the connection at this point, we don't care anymore...
+ I $EC["<DISCON>" S $EC=""
+ E  I $EC["<DSCON>" S $EC=""
+ Q:$Q "" Q
+ ;
+
+
+

@@ -1,0 +1,18 @@
+<project default="Imaging-dist" xmlns:m="jelly:maven">
+	
+	<preGoal name="jar:jar">
+    	<copy file="${basedir}/../DicomServicesDataSourceProvider/main/src/resources/dicomGenericSCUContext.xml" 
+    	tofile="${maven.build.dir}/classes/dicomGenericSCUContext.xml"/>
+   	</preGoal>
+	
+	
+	<goal name="Imaging-dist">
+		<attainGoal name="clean:clean" />
+		<attainGoal name="jar:install" />
+	</goal>
+	
+	<goal name="CruiseControl-build">
+		<cvs command="up -d -P" />
+		<attainGoal name="Imaging-dist" />
+	</goal>
+</project>

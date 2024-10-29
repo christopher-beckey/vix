@@ -1,0 +1,176 @@
+MAGDWLPC ;WOIFO/PMK - Update DICOM worklist information ; 07 Dec 2010 2:08 PM
+ ;;3.0;IMAGING;**11,51,102,49**;Mar 19, 2002;Build 2201;Jun 29, 2011
+ ;; Per VHA Directive 2004-038, this routine should not be modified.
+ ;; +---------------------------------------------------------------+
+ ;; | Property of the US Government.                                |
+ ;; | No permission to copy or redistribute this software is given. |
+ ;; | Use of unreleased versions of this software requires the user |
+ ;; | to execute a written test agreement with the VistA Imaging    |
+ ;; | Development Office of the Department of Veterans Affairs,     |
+ ;; | telephone (301) 734-0100.                                     |
+ ;; | The Food and Drug Administration classifies this software as  |
+ ;; | a medical device.  As such, it may not be changed in any way. |
+ ;; | Modifications to this software may result in an adulterated   |
+ ;; | medical device under 21CFR820, the use of which is considered |
+ ;; | to be a violation of US Federal Statutes.                     |
+ ;; +---------------------------------------------------------------+
+ ;;
+ ;
+ ; M2M Broker Version
+ ;
+ ; Original Version: ^MAGDWLP4
+ ;
+ Q
+ ;
+ ; Overflow from MAGDWLPA
+ ;
+PIECES ; set the pieces of data for nodes 0, 1, 2, 3, 4 and 5
+ N ATTDOC,CPTCODE,CPTNAME,CPTSCHM,D0,I,MODALITY,N,X
+ N VANAME,VACODE,PROCMOD
+ N RECEPENT,REFDOC,REQDOC,REQSVC,SPSLOC,S0,S3,S4,S5
+ S S0=SERVICE_"^"_DFN_"^"_DATECASE_"^"_STUDYID_"^"_TRANSFDT
+ ;
+ ; Requested Procedure Description (procedure modifier)
+ S PROCMOD=$$GETDATA^MAGDFCNS("OUT","0032,1060")
+ ;
+ ; get the procedure code and description
+ D SEQPUSH^MAGDFCNS("0032,1064") ; Requested Procedure Code Sequence
+ S VACODE=$$GETDATA^MAGDFCNS("OUT","0008,0100") ; VistA procedure code
+ S VANAME=$$GETDATA^MAGDFCNS("OUT","0008,0104") ; VistA procedure name
+ S $P(S0,"^",6)=VACODE
+ S S4=VANAME
+ I PROCMOD'="",PROCMOD'="None" S S4=S4_" - "_PROCMOD ; proc modifier
+ D SEQINC^MAGDFCNS ; now get the CPT values
+ S CPTCODE=$$GETDATA^MAGDFCNS("OUT","0008,0100") ; CPT procedure code
+ S CPTSCHM=$$GETDATA^MAGDFCNS("OUT","0008,0102") ; CPT procedure scheme
+ S CPTNAME=$$GETDATA^MAGDFCNS("OUT","0008,0104") ; CPT procedure name
+ S $P(S0,"^",8)=CPTCODE ; 8
+ S S5=CPTNAME
+ I PROCMOD'="",PROCMOD'="None" S S5=S5_" - "_PROCMOD ; proc modifier
+ D SEQPOP^MAGDFCNS ; end Requested Procedure Code Sequence
+ ;
+ S $P(S0,"^",7)=$$GETDATA^MAGDFCNS("OUT","0032,000A") ; study status id
+ S $P(S0,"^",9)=$$GETDATA^MAGDFCNS("OUT","0040,1003") ; proc priority
+ ;
+ ; get the modality(ies) from the OBR-24 field
+ S MODALITY=""
+ I RECVAPP="MAGD-CLIENT" D  ; check modality cross-reference
+ . N HL7SEGNO
+ . S HL7SEGNO=$$GETSEG^MAGDHRC0("OBR")
+ . I HL7SEGNO,$$GETEXIST^MAGDHRC0(24) D
+ . . N I
+ . . F I=1:1 Q:'$$GETEXIST^MAGDHRC0(24,I)  D
+ . . . S MODALITY=MODALITY_$S(I>1:",",1:"")_$$GETDATA^MAGDHRC0(24,I,1)
+ . . . Q
+ . . Q
+ . Q
+ S $P(S0,"^",10)=MODALITY
+ S $P(S0,"^",11)=ITYPCODE ; radiology image type code/consult service
+ S $P(S0,"^",12)=TIUSIGN ; consult/procedure completed flag (complete=1)
+ S $P(S0,"^",13)=ACNUMB ; radiology long accession number: site-date-case number
+ S $P(S0,"^",14)=CPTSCHM ; CPT coding scheme
+ ;
+ ; get the referring (primary care) physician
+ S REFDOC=$$GETDATA^MAGDFCNS("OUT","0008,0090") ; referring physician
+ S REFDOC=$TR(REFDOC,"^","~") ; referring physician
+ S S3=REFDOC ; piece 1
+ ;
+ ; get the attending physician
+ S ATTDOC=$$GETDATA^MAGDFCNS("OUT","0008,1050") ; attending physician
+ S ATTDOC=$TR(ATTDOC,"^","~") ; attending (performing) physician
+ S $P(S3,"^",2)=ATTDOC
+ ;
+ ; get the requesting physician
+ S REQDOC=$$GETDATA^MAGDFCNS("OUT","0032,1032") ; requesting physician
+ S REQDOC=$TR(REQDOC,"^","~") ; requesting physician
+ S $P(S3,"^",3)=REQDOC
+ ;
+ ; get the requesting service
+ S REQSVC=$$GETDATA^MAGDFCNS("OUT","0032,1033") ; requesting service
+ S $P(S3,"^",4)=REQSVC
+ ;
+ ; get the intended recipient of results (CPRS "Attention:")
+ S RECEPENT=$$GETDATA^MAGDFCNS("OUT","0040,1010")
+ S RECEPENT=$TR(RECEPENT,"^","~") ; intended recipient of results
+ S $P(S3,"^",5)=RECEPENT
+ ;
+ ; store the data into the study file in the ^MAGDWLST global
+ S ^MAGDWLST(2006.56,DIVISION,1,STUDYIEN,0)=S0
+ S ^MAGDWLST(2006.56,DIVISION,1,STUDYIEN,1)=UID("STUDY") ; Study UID
+ S ^MAGDWLST(2006.56,DIVISION,1,STUDYIEN,3)=S3
+ S ^MAGDWLST(2006.56,DIVISION,1,STUDYIEN,4)=S4
+ S ^MAGDWLST(2006.56,DIVISION,1,STUDYIEN,5)=S5
+ ;
+ ; output patient history and the reason for the examination
+ S N=$$GETDATA^MAGDFCNS("OUT","0033,xx50,VA DHCP",1,0)
+ I N D  ; output the patient history and reason for the examination
+ . K ^MAGDWLST(2006.56,DIVISION,1,STUDYIEN,2)
+ . S ^MAGDWLST(2006.56,DIVISION,1,STUDYIEN,2,0)="PATIENT HISTORY^2006.5621^"_N_"^"_N
+ . F I=1:1:N D  ; output each line of the patient history
+ . . S X=$$GETDATA^MAGDFCNS("OUT","0033,xx50,VA DHCP",1,I)
+ . . ; remove <CR><LF> from the end of the line, if it exists
+ . . I $E(X,$L(X)-1,$L(X))=$C(13,10) S X=$E(X,1,$L(X)-2)
+ . . S ^MAGDWLST(2006.56,DIVISION,1,STUDYIEN,2,I,0)=X
+ . . Q
+ . Q
+ ;
+ ; save miscellaneous data
+ D INSERT^MAGDWLPB("S",DIVISION,STUDYIEN,"0008,0080") ; Institution Name
+ D INSERT^MAGDWLPB("S",DIVISION,STUDYIEN,"0032,1030") ; reason for study
+ D INSERT^MAGDWLPB("S",DIVISION,STUDYIEN,"0032,4000") ; Study Comments (these are tech comments)
+ D INSERT^MAGDWLPB("S",DIVISION,STUDYIEN,"0040,2010") ; call back number
+ ;
+ ; for radiology, the arrival time is the scheduled date & time
+ ; for consults & procedures, the orders don't include scheduling info
+ ;     scheduling information is handled independently
+ ;
+ I $$GETSCHED()=0,RECVAPP="VI-CONSULT" Q  ; no scheduling information
+ ;
+ ; build the 2006.5622 file and "G" cross reference
+ I 'D0 D  ; add the clinic and appointment date/time to the list
+ . N X
+ . L +^MAGDWLST(2006.56,DIVISION,1,STUDYIEN,7,0):1E9 ; Background job MUST wait
+ . S X=$G(^MAGDWLST(2006.56,DIVISION,1,STUDYIEN,7,0))
+ . S $P(X,"^",1,2)="APPOINTMENT SCHEDULE^2006.5622"
+ . S D0=$O(^MAGDWLST(2006.56,DIVISION,1,STUDYIEN,7," "),-1)+1
+ . S $P(X,"^",3)=D0,$P(X,"^",4)=$P(X,"^",4)+1
+ . S ^MAGDWLST(2006.56,DIVISION,1,STUDYIEN,7,0)=X
+ . S ^MAGDWLST(2006.56,DIVISION,1,STUDYIEN,7,D0,0)=SPSLOC_"^"_SCHSDYDT
+ . S ^MAGDWLST(2006.56,DIVISION,1,STUDYIEN,7,"C",SPSLOC,SCHSDYDT,D0)=""
+ . L -^MAGDWLST(2006.56,DIVISION,1,STUDYIEN,7,0)
+ . Q
+ ;
+ S ^MAGDWLST(2006.56,DIVISION,1,"G",SERVICE,ITYPCODE,SCHSDYDT,STUDYIEN,SPSLOC)=""
+ Q
+ ;
+CHECKOUT ; remove the appointment from the 2006.5622 file and the "G" cross reference
+ N X
+ I '$$GETSCHED() Q  ; no scheduling information for a CHECK OUT transact
+ I D0 D  ; remove the entry from the 2006.5622 file
+ . L +^MAGDWLST(2006.56,DIVISION,1,STUDYIEN,7,0):1E9 ; Background job MUST wait
+ . K ^MAGDWLST(2006.56,DIVISION,1,STUDYIEN,7,D0)
+ . K ^MAGDWLST(2006.56,DIVISION,1,STUDYIEN,7,"C",SPSLOC,SCHSDYDT,D0)
+ . I $O(^MAGDWLST(2006.56,DIVISION,1,STUDYIEN,7,0)) D
+ . . ; one or more remaining
+ . . S X=^MAGDWLST(2006.56,DIVISION,1,STUDYIEN,7,0)
+ . . S $P(X,"^",4)=$P(X,"^",4)-1
+ . . S ^MAGDWLST(2006.56,DIVISION,1,STUDYIEN,7,0)=X
+ . . Q
+ . E  K ^MAGDWLST(2006.56,DIVISION,1,STUDYIEN,7) ; no more - kill node
+ . L -^MAGDWLST(2006.56,DIVISION,1,STUDYIEN,7,0)
+ . Q
+ K ^MAGDWLST(2006.56,DIVISION,1,"G",SERVICE,ITYPCODE,SCHSDYDT,STUDYIEN,SPSLOC)
+ Q
+ ;
+GETSCHED() ; get scheduled study start date & time
+ ; arrival event for radiology, appointment for consults and procedures
+ I STUDYIEN="" Q 0  ; no study on file
+ S SCHSDYDT=$$GETDATA^MAGDFCNS("OUT","0032,1000")
+ I SCHSDYDT="" Q 0 ; no scheduling information is present
+ S SCHSDYDT=SCHSDYDT_"^"_$$GETDATA^MAGDFCNS("OUT","0032,1001")
+ S SCHSDYDT=$TR(SCHSDYDT,"^.:",".")
+ S SCHSDYDT=SCHSDYDT-17000000 ; convert to FM date/time
+ S SPSLOC=$$GETDATA^MAGDFCNS("OUT","0040,0011") ; appointment location
+ S D0=$O(^MAGDWLST(2006.56,DIVISION,1,STUDYIEN,7,"C",SPSLOC,SCHSDYDT,""))
+ Q 1
+ ;

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <parent>
+    <groupId>Imaging</groupId>
+    <artifactId>ImagingRoot</artifactId>
+    <version>${BUILD_VERSION}</version>
+    <relativePath>../ImagingRoot/pom.xml</relativePath>
+  </parent>
+  <modelVersion>4.0.0</modelVersion>
+  <artifactId>Patch138Connectors</artifactId>
+  <name>Patch138Connectors</name>
+ 
+   
+  <packaging>pom</packaging>
+  <modules>
+ 	<!-- patch 138 Connectors --> 	
+ 	<module>../ClinicalDisplayConnection</module>
+ 	<module>../ExchangeConnection</module>
+ 	<module>../FederationConnection</module>
+ 	<module>../VistaConnection</module>
+ 	<module>../XCAConnection</module>
+ 	<module>../XCASConnection</module>
+ 	<module>../VistaImagingConnection</module>
+ 	<module>../AwivConnection</module>
+ 	<module>../ImageGearConnection</module>
+  </modules>
+</project>

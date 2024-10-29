@@ -1,0 +1,234 @@
+MAGDDW4 ;WOIFO/PMK - Generate a DICOM message ; 12/20/2006 07:20
+ ;;3.0;IMAGING;**1,10,51,54**;MAR 19, 2002;;OCT 28, 2009
+ ;; Per VHA Directive 2004-038, this routine should not be modified.
+ ;; +---------------------------------------------------------------+
+ ;; | Property of the US Government.                                |
+ ;; | No permission to copy or redistribute this software is given. |
+ ;; | Use of unreleased versions of this software requires the user |
+ ;; | to execute a written test agreement with the VistA Imaging    |
+ ;; | Development Office of the Department of Veterans Affairs,     |
+ ;; | telephone (301) 734-0100.                                     |
+ ;; | The Food and Drug Administration classifies this software as  |
+ ;; | a medical device.  As such, it may not be changed in any way. |
+ ;; | Modifications to this software may result in an adulterated   |
+ ;; | medical device under 21CFR820, the use of which is considered |
+ ;; | to be a violation of US Federal Statutes.                     |
+ ;; +---------------------------------------------------------------+
+ ;;
+ Q
+ ; PACS interface -- PACS DICOM data output routine #4
+ ;
+PUTVALUE ; output the value for the element -- entry point from ^MAGDDW3
+ N LENGTH,J,K,MAXLEN,X
+ K ^TMP("MAG",$J,"DICOM","OUT","TMP") ; local copy to make changes
+ M ^TMP("MAG",$J,"DICOM","OUT","TMP")=^TMP("MAG",$J,"DICOM","OUT",SS0)
+ I "^AE^AS^CS^DA^DS^DT^IS^LO^LT^PN^SH^ST^TM^UI^UT^"[("^"_VR_"^") D ASCII Q
+ I "^SS^US^"[("^"_VR_"^") D BINARY(2) Q  ; 2-byte integers
+ I "^SL^UL^"[("^"_VR_"^") D BINARY(4) Q  ; 4-byte integers
+ I $T(@VR)'="" D @VR Q
+ N MSG
+ S MSG(1)="ERROR -- Undefined value representation: "_VR
+ D TRAPERR^MAGDSTRT(1,$T(+0),"DICOM TEXT GATEWAY ERROR -- WRITING DICOM FILE",.MSG)
+ Q  ; Error trap does not return
+ ;
+ASCII ; ASCII text value
+ ; maximum length check each ASCII value; if it is too long, truncate it
+ ; maximum length of DA (date) is 17, allowing yyyymmdd-yyyymmdd values
+ S X="AE,64^AS,4^CS,16^DA,17^DS,16^DT,26^IS,12^LO,64^LT,10240^PN,64^SH,16^ST,1024^TM,16^UI,64^UT,4294967294"
+ S J=$F(X,VR),MAXLEN=$P($E(X,J+1,9999),"^")
+ ;
+ ; check length of text data separately from the other ascii data
+ I "^LT^ST^UT^"[("^"_VR_"^") D  ; check length of text data
+ . ; check the length of the aggregate text data
+ . ; note: text VRs are not multi-valued, so sixth subscript is always 1
+ . ; first remove the trailing <cr> <lf> from the last line of text
+ . S K=^TMP("MAG",$J,"DICOM","OUT","TMP",1,0),LENGTH=$L(^(K))
+ . I $E(^TMP("MAG",$J,"DICOM","OUT","TMP",1,K),LENGTH-1,LENGTH)=$C(13,10) S $E(^(K),LENGTH-1,LENGTH)=""
+ . S LENGTH=0 ; sum the length of all the lines
+ . F K=1:1:^TMP("MAG",$J,"DICOM","OUT","TMP",1,0) S LENGTH=LENGTH+$L(^(K))
+ . I LENGTH>MAXLEN D  ; length of data exceeds maximum
+ . . D WARNING ; display the maximum length exceeded warning message
+ . . ; truncate the text data
+ . . S LENGTH=0 F K=1:1:^TMP("MAG",$J,"DICOM","OUT","TMP",1,0) D  ;
+ . . . S LENGTH=LENGTH+$L(^TMP("MAG",$J,"DICOM","OUT","TMP",1,K)) ; aggregate length thus far
+ . . . I LENGTH>MAXLEN D  Q  ; length exceeded -- truncate rest of text
+ . . . . S ^(K)=$E(^TMP("MAG",$J,"DICOM","OUT","TMP",1,K),1,$L(^(K))-(LENGTH-MAXLEN)) ; truncate last line
+ . . . . S ^TMP("MAG",$J,"DICOM","OUT","TMP",1,0)=K ; ignore the remainder of the text
+ . . . . S K=99999 ; escape the loop
+ . . . . Q
+ . . . Q
+ . . Q
+ . Q
+ E  D  ; check length of non-text data and truncate it if necessary
+ . F J=1:1:MULTIPLE D  ; check length of each item
+ . . ; there is only one line per item; truncate it if too long
+ . . S LENGTH=$L(^TMP("MAG",$J,"DICOM","OUT","TMP",J,1))
+ . . I LENGTH>MAXLEN D  ; single line is too long
+ . . . S ^TMP("MAG",$J,"DICOM","OUT","TMP",J,1)=$E(^TMP("MAG",$J,"DICOM","OUT","TMP",J,1),1,MAXLEN) ; truncate the line
+ . . . D WARNING ; display the maximum length exceeded warning message
+ . . Q
+ . Q
+ ;
+ I MULTIPLE>1 F J=1:1:MULTIPLE-1 D  ; add "\" delimiter to each string
+ . S K=^TMP("MAG",$J,"DICOM","OUT","TMP",J,0)
+ . S ^(K)=^TMP("MAG",$J,"DICOM","OUT","TMP",J,K)_"\" ; concatenate the "\" delimiter to the last line
+ . Q
+ ;
+ S LENGTH=0 F J=1:1:MULTIPLE D  ; sum the length of all the ASCII data
+ . F K=1:1:^TMP("MAG",$J,"DICOM","OUT","TMP",J,0) S LENGTH=LENGTH+$L(^(K))
+ . Q
+ ;
+ ; if the length is odd, add a pad character (Part 5, Section 6.2)
+ I LENGTH#2 S LENGTH=LENGTH+1,^(K)=^TMP("MAG",$J,"DICOM","OUT","TMP",J,K)_$S(VR="UI":$C(0),1:" ") ; pad
+ ;
+ ; output the ASCII data
+ ; output the length of the ASCII data
+ I EXPLICIT D
+ . D PUTASCII^MAGDDW0(VR)
+ . I VR="UT" D  ; output a 32-bit length value for UT
+ . . ; According to PS 3.5, Section 7.1.2, first output a reserved
+ . . ; 16-bit  data length  field with a value of 0000H, then the
+ . . ; actual 32-bit length field
+ . . D PUTUSHOR^MAGDDW0(0) ; reserved 16-bit data length field
+ . . D PUTULONG^MAGDDW0(LENGTH) ; 32-bit length field
+ . . Q
+ . E  D  ; output a 16-bit length value for everything else
+ . . D PUTUSHOR^MAGDDW0(LENGTH)
+ . . Q
+ . Q
+ E  D PUTULONG^MAGDDW0(LENGTH) ; implicit VR - 32-bit length field
+ F J=1:1:MULTIPLE D  ; output the ASCII data for each multiple
+ . F K=1:1:^TMP("MAG",$J,"DICOM","OUT","TMP",J,0) D PUTASCII^MAGDDW0(^(K))
+ . Q
+ Q
+ ;
+WARNING ; display the maximum length exceeded warning message
+ N MSG
+ S MSG="WARNING -- Max length exceeded "
+ S MSG=MSG_LENGTH_" > "_MAXLEN_" for tag ("_TAG_")"
+ D MESSAGE^MAGDMLOG(1,0,MSG,"V")
+ Q
+ ;
+BINARY(SIZE) ; output binary data
+ I MULTIPLE,^TMP("MAG",$J,"DICOM","OUT","TMP",1,1)="" S MULTIPLE=0
+ I EXPLICIT D
+ . D PUTASCII^MAGDDW0(VR)
+ . D PUTUSHOR^MAGDDW0(SIZE*MULTIPLE)
+ . Q
+ E  D PUTULONG^MAGDDW0(SIZE*MULTIPLE) ; implicit VR
+ F J=1:1:MULTIPLE D  ; output the binary value for each multiple
+ . S X=+^TMP("MAG",$J,"DICOM","OUT","TMP",J,1)
+ . I $E(VR)="S" D
+ . . I VR="SS" D PUTSHORT^MAGDDW0(X) Q  ; short signed integer
+ . . D PUTLONG^MAGDDW0(X) Q  ; long signed integer
+ . E  D
+ . . I VR="US" D PUTUSHOR^MAGDDW0(X) Q  ; short unsigned integer
+ . . D PUTULONG^MAGDDW0(X) ; long unsigned integer
+ . Q
+ Q
+ ;
+AT ; Attribute Tag
+ I EXPLICIT D
+ . D PUTASCII^MAGDDW0(VR)
+ . D PUTUSHOR^MAGDDW0(4*MULTIPLE)
+ . Q
+ E  D PUTULONG^MAGDDW0(4*MULTIPLE) ; implicit VR
+ F J=1:1:MULTIPLE D  ; output attribute tags
+ . S X=^TMP("MAG",$J,"DICOM","OUT","TMP",J,1)
+ . D PUTUSHOR^MAGDDW0($$HEX2DEC^MAGOSMSC($P(X,",",1))) ; output group
+ . D PUTUSHOR^MAGDDW0($$HEX2DEC^MAGOSMSC($P(X,",",2))) ; output element
+ . Q
+ Q
+ ;
+FL ; Single-Precision Floating Point
+ I EXPLICIT  D
+ . D PUTASCII^MAGDDW0(VR)
+ . D PUTUSHOR^MAGDDW0(4*MULTIPLE)
+ . Q
+ E  D PUTULONG^MAGDDW0(4*MULTIPLE) ; implicit VR
+ F J=1:1:MULTIPLE D  ; output a single-precision floating point
+ . S X=$$MAKEFL^MAGDDW0(^TMP("MAG",$J,"DICOM","OUT","TMP",J,1))
+ . D PUTFLOAT^MAGDDW0(X) ; X is 4-bytes of IEEE FLOAT binary data
+ . Q
+ Q
+ ;
+OF ; Other Float String - Single-Precision Floating Point
+ I EXPLICIT  D
+ . D PUTASCII^MAGDDW0(VR)
+ . D PUTUSHOR^MAGDDW0(0)
+ . Q
+ D PUTULONG^MAGDDW0(4*MULTIPLE) ; 32-bit length field
+ F J=1:1:MULTIPLE D  ; output a single-precision floating point
+ . S X=$$MAKEFL^MAGDDW0(^TMP("MAG",$J,"DICOM","OUT","TMP",J,1))
+ . D PUTFLOAT^MAGDDW0(X) ; X is 4-bytes of IEEE FLOAT binary data
+ . Q
+ Q
+ ;
+FD ; Double-Precision Floating Point
+ I EXPLICIT  D
+ . D PUTASCII^MAGDDW0(VR)
+ . D PUTUSHOR^MAGDDW0(8*MULTIPLE)
+ . Q
+ E  D PUTULONG^MAGDDW0(8*MULTIPLE) ; implicit VR
+ F J=1:1:MULTIPLE D  ; output a double-precision floating point
+ . S X=$$MAKEFD^MAGDDW0(^TMP("MAG",$J,"DICOM","OUT","TMP",J,1))
+ . D PUTDOUBL^MAGDDW0(X) ; X is 8-bytes of IEEE DOUBLE binary data
+ . Q
+ Q
+ ;
+OB ; Other Byte String -- may be used for images
+OW ; Other Word String -- may be used for images
+ I EXPLICIT  D
+ . D PUTASCII^MAGDDW0(VR)
+ . D PUTUSHOR^MAGDDW0(0)
+ . Q
+ I TAG="7FE0,0010" D  ; image pixel
+ . ; update the length of the image data
+ . S OLDSIZE=^TMP("MAG",$J,"DICOM","OUT","TMP",1,2)
+ . S OLDSIZE=+$P(OLDSIZE,"=",2)
+ . D PUTULONG^MAGDDW0(OLDSIZE) ; output the length of image itself
+ . Q
+ E  D  ; non-image other byte/word string
+ . I VR="OB" D  ; other byte string
+ . . D PUTULONG^MAGDDW0(MULTIPLE) ; 32-bit length
+ . . F J=1:1:MULTIPLE D  ; output one byte at a time
+ . . . D PUTBYTE^MAGDDW0(+^TMP("MAG",$J,"DICOM","OUT","TMP",J,1))
+ . . . Q
+ . . Q
+ . E  D  ; other word string
+ . . D PUTULONG^MAGDDW0(MULTIPLE*2) ; 32-bit length
+ . . F J=1:1:MULTIPLE D  ; output one 16-bit unsigned short at a time
+ . . . D PUTUSHOR^MAGDDW0(+^TMP("MAG",$J,"DICOM","OUT","TMP",J,1))
+ . . . Q
+ . . Q
+ . Q
+ Q
+ ;
+SQ ; Start of Sequence
+ I EXPLICIT D PUTASCII^MAGDDW0("SQ"),PUTSHORT^MAGDDW0(0)
+ D SEQPUSH^MAGDFCNS(TAG)
+ ;
+ ; Fall-through intended
+SQIS ; Start of Sequence Item
+ D PUTULONG^MAGDDW0(4294967295)
+ Q
+ ;
+SQE ; End of Sequence
+ D PUTULONG^MAGDDW0(0)
+ D SEQPOP^MAGDFCNS
+ Q
+ ;
+SQIE ; End of Sequence Item
+ N Y,Z
+ D PUTULONG^MAGDDW0(0)
+ D SEQINC^MAGDFCNS ; check for additional sequence items
+ S Y=$O(^TMP("MAG",$J,"DICOM","OUT",SEQUENCE))
+ I SEQUENCE=$P(Y,"^",1,$L(Y,"^")-1),SEQMARK D
+ . S Z=$G(@GBLREF@(IPTR+1,0)) ; check for Sequence End (FFFE,E0DD)
+ . I $P(Z,"^")="FFFE,E0DD" D  ; repeating sequence in template
+ . . ; set the element pointer to the beginning of the sequence
+ . . S IPTR=SEQMARK-1
+ . . Q
+ . Q
+ Q
+ ;

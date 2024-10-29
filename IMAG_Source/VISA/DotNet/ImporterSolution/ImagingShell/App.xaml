@@ -1,0 +1,41 @@
+﻿<Application x:Class="ImagingShell.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:Controls="clr-namespace:ImagingClient.Infrastructure.Controls;assembly=ImagingClient.Infrastructure" xmlns:Converters="clr-namespace:ImagingClient.Infrastructure.Converters;assembly=ImagingClient.Infrastructure">
+    <Application.Resources>
+        
+        <!-- Converters -->
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+        <Converters:BoolToOppositeBoolConverter x:Key="BoolToOppositeBoolConverter" />
+        <Converters:BoolToOppositeVisibilityConverter x:Key="BoolToOppositeVisibilityConverter" />
+        
+        <!-- Styles-->
+        <Style x:Key="ControlBaseStyle" TargetType="{x:Type Control}">
+            <Setter Property="Margin" Value="3" />
+        </Style>
+
+        <Style TargetType="{x:Type Button}" BasedOn="{StaticResource ControlBaseStyle}"/>
+        <Style TargetType="{x:Type Controls:SubmitTextBox}" BasedOn="{StaticResource ControlBaseStyle}"/>
+        <Style TargetType="{x:Type PasswordBox}" BasedOn="{StaticResource ControlBaseStyle}"/>
+        <Style TargetType="{x:Type ComboBox}" BasedOn="{StaticResource ControlBaseStyle}"/>
+        <Style TargetType="{x:Type RadioButton}" BasedOn="{StaticResource ControlBaseStyle}"/>
+        <Style TargetType="{x:Type CheckBox}" BasedOn="{StaticResource ControlBaseStyle}"/>
+        <Style TargetType="{x:Type TextBox}" >
+            <Setter Property="Margin" Value="3" />
+            <Setter Property="IsReadOnlyCaretVisible" Value="True" />
+        </Style>
+        <Style TargetType="{x:Type GroupBox}" >
+            <Setter Property="Margin" Value="3" />
+            <Setter Property="Padding" Value="3" />
+        </Style>
+        <Style TargetType="{x:Type DataGrid}">
+            <Setter Property="Margin" Value="3" />
+            <Setter Property="IsReadOnly" Value="True" />
+            <Setter Property="AutoGenerateColumns" Value="False" />
+        </Style>
+        <Style TargetType="{x:Type Label}" x:Key="SectionTitle" 
+               BasedOn="{StaticResource ControlBaseStyle}">
+            <Setter Property="FontSize" Value="18" />
+        </Style>
+        
+    </Application.Resources>
+</Application>

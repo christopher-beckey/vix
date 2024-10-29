@@ -1,0 +1,106 @@
+Cache for Windows NT^INT^^~Format=Cache.S~
+%RO on 25 Mar 2013   8:45 AM
+MAGDMMSN^INT^1^62753,48278^0
+MAGDMMSN ;WOIFO/MS/NST/BT - Send an e-mail; 04 Jun 2013 1:03 PM
+ ;;3.0;IMAGING;**87**;Mar 19, 2002;Build 110;Oct 08, 2012
+ ;; Per VHA Directive 2004-038, this routine should not be modified.
+ ;; +---------------------------------------------------------------+
+ ;; | Property of the US Government.                                |
+ ;; | No permission to copy or redistribute this software is given. |
+ ;; | Use of unreleased versions of this software requires the user |
+ ;; | to execute a written test agreement with the VistA Imaging    |
+ ;; | Development Office of the Department of Veterans Affairs,     |
+ ;; | telephone (301) 734-0100.                                     |
+ ;; | The Food and Drug Administration classifies this software as  |
+ ;; | a medical device.  As such, it may not be changed in any way. |
+ ;; | Modifications to this software may result in an adulterated   |
+ ;; | medical device under 21CFR820, the use of which is considered |
+ ;; | to be a violation of US Federal Statutes.                     |
+ ;; +---------------------------------------------------------------+
+ ;;
+ Q
+ ; Borrowed from XMIT^MAGDMMSG
+NOTIFY(KEY) ;Notify InterSystems of license upgrade
+ N EMAIL,H,NL,OFF,POSTPORT,R,SID,VIEMAIL,STS,Z,X,V
+ N $ET,TRAPLVL
+ S $ET="D TRAP^"_$T(+0),TRAPLVL=$ST+1
+ ;
+ S VIEMAIL="OEDPDVistAImagingP87Activation@va.gov" ; email for customer support
+ S EMAIL="support@intersystems.com"
+ ;
+ S NL=$C(13,10),V="",H=$H
+ S SID=$G(^MAGDICOM(2006.563,1,"DOMAIN")) S:SID="" SID="unknown"
+ S SID=$$UPPER^MAGOSMSC(SID) S:SID'[".VA.GOV" SID=SID_".VA.GOV"
+ S OFF=$G(^MAGDICOM(2006.563,1,"POST OFFICE")) S:OFF="" OFF="SMTP.VA.GOV"
+ S POSTPORT=$G(^MAGDICOM(2006.563,1,"POST PORT")) S:'POSTPORT POSTPORT=25
+ S Z=$$TIMEZONE^MAGDMSGT() ; Get TIMEZONE offset
+ I '$G(Z) S Z="-0500" ; Default TIMEZONE offset
+ D
+ . ; This block is indented, so that error trapping
+ . ; will return control to the right DO level if
+ . ; an additional problem occurs.
+ . ;
+ . ;
+ . S STS=$$TCPCLOSE^MAGOSTCP(OFF,POSTPORT)
+ . S STS=$$TCPOPEN^MAGOSTCP(OFF,POSTPORT,1) I STS<0 D LOGSTS^MAGDMMSG("Open") Q
+ . S STS=$$TCPUSE^MAGOSTCP(OFF,POSTPORT) I STS<0 D LOGSTS^MAGDMMSG("Use") Q
+ . ; Expected result: 220 <mailserver> <version> ready
+ . S R=$$READ^MAGDMMSG() S:+R'=220 V=V_";1:"_R
+ . W "HELO med.va.gov",NL S STS=$$TCPFLUSH^MAGOSTCP(OFF,POSTPORT)
+ . ; Expected result: 250 OK
+ . S R=$$READ^MAGDMMSG() S:+R'=250 V=V_";2:"_R
+ . ;
+ . ; Mail From
+ . W "MAIL FROM:<Postmaster@"_SID_">"_NL S STS=$$TCPFLUSH^MAGOSTCP(OFF,POSTPORT)
+ . ; Expected result: 250 OK
+ . S R=$$READ^MAGDMMSG() S:+R'=250 V=V_";3:"_R
+ . ;
+ . ; Send to InterSystems Support
+ . W "RCPT TO:<"_EMAIL_">"_NL
+ . S STS=$$TCPFLUSH^MAGOSTCP(OFF,POSTPORT)
+ . ; Expected result: 250 OK
+ . S R=$$READ^MAGDMMSG() S:+R'=250 V=V_";4:"_R_"="_EMAIL
+ . ;
+ . ; Send to Mail Group
+ . W "RCPT TO:<"_VIEMAIL_">"_NL
+ . S STS=$$TCPFLUSH^MAGOSTCP(OFF,POSTPORT)
+ . ; Expected result: 250 OK
+ . S R=$$READ^MAGDMMSG() S:+R'=250 V=V_";5:"_R_"="_VIEMAIL
+ . ; 
+ . W "DATA",NL S STS=$$TCPFLUSH^MAGOSTCP(OFF,POSTPORT)
+ . ; Expected result: 354 Send data.  End with CRLF.CRLF
+ . S R=$$READ^MAGDMMSG() S:+R'=354 V=V_";6:"_R
+ . W "Subject: RE: WRC Problem 789374",NL
+ . D
+ . . N D,M,W,Y
+ . . W "Date: " D H2YMD^MAGDBB(+H,.Y,.M,.D,.W)
+ . . W W,", ",D," ",$P("Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec"," ",M)
+ . . W " ",Y S Y=$P(H,",",2)
+ . . W " ",$TR($J(Y\3600,2)," ",0),":",$TR($J(Y\60#60,2)," ",0)," ",Z
+ . . Q
+ . W $C(13,10,13,10)
+ . ;
+ . W " "_NL
+ . W "Existing key file contents: ",NL,KEY,NL
+ . ;
+ . W " "_NL
+ . S X=$G(^MAGDICOM(2006.563,1,"SYSTEM TITLE"))_" ("_$$HOSTNAME^MAGOSMSC()_")"
+ . W "DICOM Gateway """_X_"""."_NL
+ . W " "_NL
+ . W "Message transmitted at "_$$NOW^MAGDMMSG()_"."
+ . W " "_NL
+ . ;
+ . ;
+ . W NL,".",NL S STS=$$TCPFLUSH^MAGOSTCP(OFF,POSTPORT)
+ . ; Expected result: 250 OK
+ . S R=$$READ^MAGDMMSG() S:+R'=250 V=V_";7:"_R
+ . W "QUIT",NL S STS=$$TCPFLUSH^MAGOSTCP(OFF,POSTPORT)
+ . ; Expected result: 221 OK
+ . S R=$$READ^MAGDMMSG() S:+R'=221 V=V_";8:"_R
+ . S STS=$$TCPCLOSE^MAGOSTCP(OFF,POSTPORT)
+ . I $$USEPRIN^MAGOSFIL(1)
+ . Q
+ Q
+
+
+

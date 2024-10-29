@@ -1,0 +1,61 @@
+MAGDMSGT ;WOIFO/EdM/RRB - Send an test e-mail ; 04 Nov 2008 10:13 AM
+ ;;3.0;IMAGING;**54**;MAR 19, 2002;;OCT 28, 2009
+ ;; Per VHA Directive 2004-038, this routine should not be modified.
+ ;; +---------------------------------------------------------------+
+ ;; | Property of the US Government.                                |
+ ;; | No permission to copy or redistribute this software is given. |
+ ;; | Use of unreleased versions of this software requires the user |
+ ;; | to execute a written test agreement with the VistA Imaging    |
+ ;; | Development Office of the Department of Veterans Affairs,     |
+ ;; | telephone (301) 734-0100.                                     |
+ ;; | The Food and Drug Administration classifies this software as  |
+ ;; | a medical device.  As such, it may not be changed in any way. |
+ ;; | Modifications to this software may result in an adulterated   |
+ ;; | medical device under 21CFR820, the use of which is considered |
+ ;; | to be a violation of US Federal Statutes.                     |
+ ;; +---------------------------------------------------------------+
+ ;;
+ Q
+ ;
+TEST ; Send test e-mail
+ N CRITICAL,FATAL,HDR,I,IGNORE,MSG,OK,ROU,X
+ W !!,"Enter some text to be included in the test message:"
+ S OK=0,I=0
+ S I=I+1,MSG(I)=" "
+ S I=I+1,MSG(I)="This is a message to demonstrate the e-mail capability"
+ S I=I+1,MSG(I)="of the VistA Imaging DICOM Gateway."
+ S I=I+1,MSG(I)=" "
+ F  D  Q:OK
+ . W !,"> " R X:$G(DTIME,300) E  S OK=-1 Q
+ . I X["^" S OK=-2 Q
+ . I X="" S OK=1 Q
+ . S I=I+1,MSG(I)=X
+ . Q
+ I OK<0 W !!,"No message sent.",! Q
+ ;
+ W !!,"Test message will contain:"
+ S I="" F  S I=$O(MSG(I)) Q:I=""  W !,MSG(I)
+ W !!,"OK to send: Yes//" R X:$G(DTIME,300) E  S X="^"
+ I "Yy"'[$E(X_"Y",1) W !,"No message sent.",! Q
+ S FATAL=0,ROU=$T(+0),HDR="TEST E-MAIL FOR DICOM GATEWAY",IGNORE=1,CRITICAL=0
+ D SEND^MAGDMMSG
+ W !!,"Message should arrive within minutes.",!
+ Q
+ ;
+TIMEZONE() ; Main entry point - Calculate time zone offset
+ N UTCH ; ------ Universal Coordinated Time in $H format
+ N LOCTIMH ; --- Local time in $H format
+ N UTC ; ------- UCT in seconds from 12/31/1840
+ N LOCTIM ; ---- Local time in seconds from 12/31/1840
+ N SGN ; ------- sign to be prepended
+ N OFFSETM ; --- Offset in minutes
+ N OFFSET ; ---- Offset in 4-digit format with sign
+ ;
+ S UTCH=$ZTIMESTAMP,LOCTIMH=$H
+ S UTC=($P(UTCH,",",2)\1)+(UTCH*86400)
+ S LOCTIM=($P(LOCTIMH,",",2)\1)+(LOCTIMH*86400)
+ S OFFSETM=$J(LOCTIM-UTC/60,0) ; round, don't truncate!
+ S SGN=$S(OFFSETM<0:"-",1:"+") S:SGN="-" OFFSETM=-OFFSETM
+ S OFFSET=$TR($J(OFFSETM\60,2)," ",0)_$TR($J(OFFSETM#60,2)," ",0)
+ Q SGN_OFFSET
+ 

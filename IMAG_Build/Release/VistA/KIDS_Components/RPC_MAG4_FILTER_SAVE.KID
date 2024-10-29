@@ -1,0 +1,212 @@
+KIDS Distribution saved on Jan 31, 2009@17:21:08
+Temporary build for VSS
+**KIDS**:MAG-VSS*3.0*93^
+
+**INSTALL NAME**
+MAG-VSS*3.0*93
+"BLD",6032,0)
+MAG-VSS*3.0*93^IMAGING^0^3090131^n
+"BLD",6032,6.3)
+7
+"BLD",6032,"KRN",0)
+^9.67PA^8994^0
+"BLD",6032,"KRN",8994,"NM",0)
+^9.68A^11^1
+"BLD",6032,"KRN",8994,"NM",11,0)
+MAG4 FILTER SAVE^^0
+"KRN",8994,1800,-1)
+0^11
+"KRN",8994,1800,0)
+MAG4 FILTER SAVE^SET^MAGGSFL1^1^R
+"KRN",8994,1800,1,0)
+^^2^2^3090126^
+"KRN",8994,1800,1,1,0)
+Stores the new filter to the IMAGE LIST FILTERS file (#2005.87) or updates
+"KRN",8994,1800,1,2,0)
+properties of the existing filter.
+"KRN",8994,1800,2,0)
+^8994.02A^1^1
+"KRN",8994,1800,2,1,0)
+MAGGZ^2^^1^1
+"KRN",8994,1800,2,1,1,0)
+^^36^36^3090126^
+"KRN",8994,1800,2,1,1,1,0)
+List that stores the filter data and related parameters.
+"KRN",8994,1800,2,1,1,2,0)
+ 
+"KRN",8994,1800,2,1,1,3,0)
+Each list item has 2 pieces separated by '^': 
+"KRN",8994,1800,2,1,1,4,0)
+ 
+"KRN",8994,1800,2,1,1,5,0)
+  ^01: Field number
+"KRN",8994,1800,2,1,1,6,0)
+  ^02: Field value
+"KRN",8994,1800,2,1,1,7,0)
+ 
+"KRN",8994,1800,2,1,1,8,0)
+The following special names can be used in place of field numbers:
+"KRN",8994,1800,2,1,1,9,0)
+ 
+"KRN",8994,1800,2,1,1,10,0)
+  FLAGS - Value contains flags that control the execution 
+"KRN",8994,1800,2,1,1,11,0)
+          (can be combined):
+"KRN",8994,1800,2,1,1,12,0)
+ 
+"KRN",8994,1800,2,1,1,13,0)
+            S  Selective save. If this flag is
+"KRN",8994,1800,2,1,1,14,0)
+               provided, then only the fields listed
+"KRN",8994,1800,2,1,1,15,0)
+               in the MAGZ array are updated; other
+"KRN",8994,1800,2,1,1,16,0)
+               filter properties are not changed.
+"KRN",8994,1800,2,1,1,17,0)
+ 
+"KRN",8994,1800,2,1,1,18,0)
+               By default, all filter properties,
+"KRN",8994,1800,2,1,1,19,0)
+               which do not have new values in the
+"KRN",8994,1800,2,1,1,20,0)
+               MAGZ array, are cleared.
+"KRN",8994,1800,2,1,1,21,0)
+ 
+"KRN",8994,1800,2,1,1,22,0)
+  IEN   - Value is the Internal Entry Number of the filter 
+"KRN",8994,1800,2,1,1,23,0)
+          that has to be modified.
+"KRN",8994,1800,2,1,1,24,0)
+ 
+"KRN",8994,1800,2,1,1,25,0)
+  USER  - Value is the IEN of the user who this filter is 
+"KRN",8994,1800,2,1,1,26,0)
+          saved for.
+"KRN",8994,1800,2,1,1,27,0)
+ 
+"KRN",8994,1800,2,1,1,28,0)
+Example:
+"KRN",8994,1800,2,1,1,29,0)
+ 
+"KRN",8994,1800,2,1,1,30,0)
+  with RPCBroker.Param[0] do
+"KRN",8994,1800,2,1,1,31,0)
+    begin
+"KRN",8994,1800,2,1,1,32,0)
+      PType := list;
+"KRN",8994,1800,2,1,1,33,0)
+      Mult[1] := 'IEN^23';
+"KRN",8994,1800,2,1,1,34,0)
+      Mult[2] := 'FLAGS^S';
+"KRN",8994,1800,2,1,1,35,0)
+      Mult[3] := '15^Column Description';
+"KRN",8994,1800,2,1,1,36,0)
+    end;
+"KRN",8994,1800,2,"B","MAGGZ",1)
+
+"KRN",8994,1800,2,"PARAMSEQ",1,1)
+
+"KRN",8994,1800,3,0)
+^8994.03^3^3^3090126^^^^
+"KRN",8994,1800,3,1,0)
+The return literal is two piece "^" delimited string
+"KRN",8994,1800,3,2,0)
+If successful:    Filter IEN ^ Filter NAME
+"KRN",8994,1800,3,3,0)
+If an Error:  0^error message
+"MBREQ")
+
+"ORD",16,8994)
+8994;16;1;;;;;;;RPCDEL^XPDIA1
+"ORD",16,8994,0)
+REMOTE PROCEDURE
+"PKG",454,-1)
+1^1
+"PKG",454,0)
+IMAGING^MAG^Imaging-V1 to release 
+"PKG",454,20,0)
+^9.402P^^
+"PKG",454,22,0)
+^9.49I^1^1
+"PKG",454,22,1,0)
+3.0^3020319^3020517^126
+"PKG",454,22,1,"PAH",1,0)
+93^3090131
+"PKG",454,22,1,"PAH",1,1,0)
+^^1^1^3090131
+"PKG",454,22,1,"PAH",1,1,1,0)
+Code for the Clinical Display and Capture. 
+"QUES","XPF1",0)
+Y
+"QUES","XPF1","??")
+^D REP^XPDH
+"QUES","XPF1","A")
+Shall I write over your |FLAG| File
+"QUES","XPF1","B")
+YES
+"QUES","XPF1","M")
+D XPF1^XPDIQ
+"QUES","XPF2",0)
+Y
+"QUES","XPF2","??")
+^D DTA^XPDH
+"QUES","XPF2","A")
+Want my data |FLAG| yours
+"QUES","XPF2","B")
+YES
+"QUES","XPF2","M")
+D XPF2^XPDIQ
+"QUES","XPI1",0)
+YO
+"QUES","XPI1","??")
+^D INHIBIT^XPDH
+"QUES","XPI1","A")
+Want KIDS to INHIBIT LOGONs during the install
+"QUES","XPI1","B")
+NO
+"QUES","XPI1","M")
+D XPI1^XPDIQ
+"QUES","XPM1",0)
+PO^VA(200,:EM
+"QUES","XPM1","??")
+^D MG^XPDH
+"QUES","XPM1","A")
+Enter the Coordinator for Mail Group '|FLAG|'
+"QUES","XPM1","B")
+
+"QUES","XPM1","M")
+D XPM1^XPDIQ
+"QUES","XPO1",0)
+Y
+"QUES","XPO1","??")
+^D MENU^XPDH
+"QUES","XPO1","A")
+Want KIDS to Rebuild Menu Trees Upon Completion of Install
+"QUES","XPO1","B")
+NO
+"QUES","XPO1","M")
+D XPO1^XPDIQ
+"QUES","XPZ1",0)
+Y
+"QUES","XPZ1","??")
+^D OPT^XPDH
+"QUES","XPZ1","A")
+Want to DISABLE Scheduled Options, Menu Options, and Protocols
+"QUES","XPZ1","B")
+NO
+"QUES","XPZ1","M")
+D XPZ1^XPDIQ
+"QUES","XPZ2",0)
+Y
+"QUES","XPZ2","??")
+^D RTN^XPDH
+"QUES","XPZ2","A")
+Want to MOVE routines to other CPUs
+"QUES","XPZ2","B")
+NO
+"QUES","XPZ2","M")
+D XPZ2^XPDIQ
+"VER")
+8.0^22.0
+**END**
+**END**

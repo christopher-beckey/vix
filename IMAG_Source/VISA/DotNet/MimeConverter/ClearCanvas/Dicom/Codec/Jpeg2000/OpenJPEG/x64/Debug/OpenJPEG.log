@@ -1,0 +1,50 @@
+﻿cl : command line warning D9035: option 'Gm' has been deprecated and will be removed in a future release
+  tgt.c
+  tcd.c
+  t2.c
+C:\usr\Hydra4\ClearCanvas\Dicom\Codec\Jpeg2000\OpenJPEG\t2.c(296,19): warning C4244: 'return': conversion from '__int64' to 'int', possible loss of data
+C:\usr\Hydra4\ClearCanvas\Dicom\Codec\Jpeg2000\OpenJPEG\t2.c(385,35): warning C4244: 'function': conversion from '__int64' to 'int', possible loss of data
+C:\usr\Hydra4\ClearCanvas\Dicom\Codec\Jpeg2000\OpenJPEG\t2.c(414,34): warning C4244: '+=': conversion from '__int64' to 'int', possible loss of data
+C:\usr\Hydra4\ClearCanvas\Dicom\Codec\Jpeg2000\OpenJPEG\t2.c(416,20): warning C4244: 'return': conversion from '__int64' to 'int', possible loss of data
+C:\usr\Hydra4\ClearCanvas\Dicom\Codec\Jpeg2000\OpenJPEG\t2.c(419,34): warning C4244: '+=': conversion from '__int64' to 'int', possible loss of data
+C:\usr\Hydra4\ClearCanvas\Dicom\Codec\Jpeg2000\OpenJPEG\t2.c(421,20): warning C4244: 'return': conversion from '__int64' to 'int', possible loss of data
+C:\usr\Hydra4\ClearCanvas\Dicom\Codec\Jpeg2000\OpenJPEG\t2.c(424,20): warning C4244: 'return': conversion from '__int64' to 'int', possible loss of data
+C:\usr\Hydra4\ClearCanvas\Dicom\Codec\Jpeg2000\OpenJPEG\t2.c(513,31): warning C4244: '+=': conversion from '__int64' to 'int', possible loss of data
+C:\usr\Hydra4\ClearCanvas\Dicom\Codec\Jpeg2000\OpenJPEG\t2.c(516,33): warning C4244: '+=': conversion from '__int64' to 'int', possible loss of data
+C:\usr\Hydra4\ClearCanvas\Dicom\Codec\Jpeg2000\OpenJPEG\t2.c(589,18): warning C4244: 'return': conversion from '__int64' to 'int', possible loss of data
+C:\usr\Hydra4\ClearCanvas\Dicom\Codec\Jpeg2000\OpenJPEG\t2.c(623,80): warning C4244: 'function': conversion from '__int64' to 'int', possible loss of data
+C:\usr\Hydra4\ClearCanvas\Dicom\Codec\Jpeg2000\OpenJPEG\t2.c(646,79): warning C4244: 'function': conversion from '__int64' to 'int', possible loss of data
+C:\usr\Hydra4\ClearCanvas\Dicom\Codec\Jpeg2000\OpenJPEG\t2.c(681,20): warning C4244: 'return': conversion from '__int64' to 'int', possible loss of data
+C:\usr\Hydra4\ClearCanvas\Dicom\Codec\Jpeg2000\OpenJPEG\t2.c(711,46): warning C4244: 'function': conversion from '__int64' to 'int', possible loss of data
+C:\usr\Hydra4\ClearCanvas\Dicom\Codec\Jpeg2000\OpenJPEG\t2.c(764,18): warning C4244: 'return': conversion from '__int64' to 'int', possible loss of data
+  t1.c
+  raw.c
+C:\usr\Hydra4\ClearCanvas\Dicom\Codec\Jpeg2000\OpenJPEG\raw.c(59,29): warning C4244: 'return': conversion from '__int64' to 'int', possible loss of data
+  pi.c
+C:\usr\Hydra4\ClearCanvas\Dicom\Codec\Jpeg2000\OpenJPEG\pi.c(742,14): warning C4996: 'strncpy': This function or variable may be unsafe. Consider using strncpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\usr\Hydra4\ClearCanvas\Dicom\Codec\Jpeg2000\OpenJPEG\pi.c(744,14): warning C4996: 'strncpy': This function or variable may be unsafe. Consider using strncpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\usr\Hydra4\ClearCanvas\Dicom\Codec\Jpeg2000\OpenJPEG\pi.c(746,14): warning C4996: 'strncpy': This function or variable may be unsafe. Consider using strncpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\usr\Hydra4\ClearCanvas\Dicom\Codec\Jpeg2000\OpenJPEG\pi.c(748,14): warning C4996: 'strncpy': This function or variable may be unsafe. Consider using strncpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\usr\Hydra4\ClearCanvas\Dicom\Codec\Jpeg2000\OpenJPEG\pi.c(750,14): warning C4996: 'strncpy': This function or variable may be unsafe. Consider using strncpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  openjpeg.c
+  mqc.c
+C:\usr\Hydra4\ClearCanvas\Dicom\Codec\Jpeg2000\OpenJPEG\mqc.c(361,29): warning C4244: 'return': conversion from '__int64' to 'int', possible loss of data
+  mct.c
+  jpt.c
+  jp2.c
+  j2k_lib.c
+  j2k.c
+C:\usr\Hydra4\ClearCanvas\Dicom\Codec\Jpeg2000\OpenJPEG\j2k.c(1487,41): warning C4244: 'function': conversion from '__int64' to 'int', possible loss of data
+C:\usr\Hydra4\ClearCanvas\Dicom\Codec\Jpeg2000\OpenJPEG\j2k.c(2078,4): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  image.c
+  event.c
+C:\usr\Hydra4\ClearCanvas\Dicom\Codec\Jpeg2000\OpenJPEG\event.c(111,65): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+C:\usr\Hydra4\ClearCanvas\Dicom\Codec\Jpeg2000\OpenJPEG\event.c(113,3): warning C4996: 'vsprintf': This function or variable may be unsafe. Consider using vsprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  dwt.c
+  cio.c
+C:\usr\Hydra4\ClearCanvas\Dicom\Codec\Jpeg2000\OpenJPEG\cio.c(102,29): warning C4244: 'return': conversion from '__int64' to 'int', possible loss of data
+C:\usr\Hydra4\ClearCanvas\Dicom\Codec\Jpeg2000\OpenJPEG\cio.c(118,27): warning C4244: 'return': conversion from '__int64' to 'int', possible loss of data
+  bio.c
+C:\usr\Hydra4\ClearCanvas\Dicom\Codec\Jpeg2000\OpenJPEG\bio.c(131,31): warning C4244: 'return': conversion from '__int64' to 'int', possible loss of data
+  Generating Code...
+  OpenJPEG.vcxproj -> C:\usr\Hydra4\ClearCanvas\Dicom\Codec\Jpeg2000\OpenJPEG\x64\Debug\OpenJPEG.lib

@@ -1,0 +1,984 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Enhanced Image Viewer (VIX Viewer) Web Service",
+    "version": "REPLACE_VERSION_NUMBER",
+    "description": "<H1>Introduction</H1><p>The VIX Viewer, aka the Enhanced Image Viewer, is a web application and a web service. Please see the User Guide to learn the basic concepts behind the application and service.</p><p>To consume the web service, you must register your application prior to executing a user workflow.</p><H2>Register your application (one-time initialization)</H2><p>Contact VistA Imaging Support to receive the Fully Qualified Domain Name (FDQN) of your CVIX at AITC or PITC. If the capacity at the data center is insufficient to support a new application, Support can deploy a new CVIX stack. Initial engagement is in a test environment before proceeding to production. Your application can be one of the following:    <ul>        <li>Already authenticated by VistA and has access to a fully patched VistA site and VistA Imaging infrastructure.</li>        <li>Hosted on a trusted server secured with a certificate shared with VIX Viewer.</li>    </ul></p><p>When Support supplies you with the FQDN, they also inform you of the port number. All communication is over HTTPS on port 343 or 344. For the sake of brevity, we use <strong>https://fqdn:343</strong> as the endpoint for the remainder of this document, and you must use your assigned endpoint.</p><H2>Typical user workflow</H2><p>You can call <i>ping</i> to ensure the service is running.</p><nl>    <li><strong>Authenticate the user using the <i>token</i> or <i>token2</i> calls.</strong> Use one of the following methods to receive a time-limited security token:         <ul>            <li>Pass a Visitor Broker Security Enhancement (BSE) token in the request header. You can acquire the token by calling the <strong>XUS GET TOKEN</strong> RPC.</li>            <li>Authenticate the user in a VistA instance, and pass the access and verify codes in the request header.</li>            <li>Use a mutual trust (shared) certificate.</li>            <li>Send VistA Access/Verify Code credentials in the request header.</li>        </ul>    </li>    <li><strong>Ask for a patient's study list using the <i>studyquery</i> call.</strong> After receiving this request, the web service determines the treating facilities for the patient and performs all the site level bulk queries in response to the request, but you can also specify sites, too (see the <i>sites</i> call. The response contains an array of JSON objects. Each object represents a study and contains basic metadata that includes useful URLs for discovering more information about the study. If one Viewer instance is to service multiple studies, call <i>session</i> to obtain a sessionId to send to the web service.<div style='line-height:50%;'><br></div></li>    <li><strong>Ask for the patient's particular study using URLs from the study list response.</strong> Use one or more of the following:        <ul>            <li><i>detailsUrl</i> - Get detailed metadata about the study.</li>            <li><i>manageUrl</i> - Open a web page that displays image thumbnails, imaging data etc. One can delete images or manage controlled images using this web page</li>            <li><i>reportUrl</i> - Open a web page containing the study report.</li>            <li><i>thumbnailUrl</i> - Get a thumbnail image that could be used to represent the study.</li>            <li><i>viewerUrl</i> - Open a web page containing the Image Viewer.</li>        </ul>    </li></nl>"
+  },
+  "paths": {
+    "/vix/viewer/ping": {
+      "get": {
+        "summary": "Ping Service",
+        "description": "Test whether the service is running.",
+        "tags": [
+          "Service"
+        ],
+        "responses": {
+          "200": {
+            "description": "The service is running"
+          }
+        }
+      }
+    },
+    "/vix/viewer/token": {
+      "get": {
+        "summary": "Fetch security token",
+        "description": "Fetch the security token to be used for the rest of the API. <strong>This request must be made with a valid client certificate</strong>",
+        "tags": [
+          "Service"
+        ],
+        "servers": [
+          {
+            "url": "https://fqdn:343/",
+            "description": "Server url for token related endpoints."
+          }
+        ],
+        "parameters": [
+          {
+            "name": "userid",
+            "in": "header",
+            "required": true,
+            "description": "User Id. Can be any non-empty value.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Security token successfully generated",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/vix/viewer/token2": {
+      "get": {
+        "summary": "Fetch structured security token",
+        "description": "Fetch the security token to be used for the rest of the API along with VIX security token for VIX operations.</br>**This request must be made with a valid client certificate**   </br></br>*Sample PowerShell Script*</br> \n```\n\n $CertNumber = 'd3950388e9e704c934bbcefa496ccb35c864d863'\n $CheckURL = 'https://fqdn:343//vix/viewer/token2'\n $Certificate = Get-ChildItem -Path Cert:\\LocalMachine\\My\\$CertNumber\n \n $req = [system.Net.HttpWebRequest]::Create($checkURL)\n $req.ClientCertificates.AddRange($Certificate)\n $req.Headers.Add(\"userId\", \"000\")\n $req.Headers.Add(\"appName\", \"clientAppName\")\n $req.Timeout=10000\n \n [System.Net.ServicePointManager]::ServerCertificateValidationCallback = { $true }\n \n $res = $req.GetResponse()\n $ResponseStream = $res.GetResponseStream()\n $StreamReader = New-Object System.IO.StreamReader -ArgumentList $ResponseStream\n $str = $StreamReader.ReadToEnd()\n Write-Host $str\n \n write-host \"Press any key to continue...\"\n [void][System.Console]::ReadKey($true)\n\n```",
+        "tags": [
+          "Service"
+        ],
+        "servers": [
+          {
+            "url": "https://fqdn:343/",
+            "description": "Server url for token related endpoints."
+          }
+        ],
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "header",
+            "required": true,
+            "description": "User Id. Can be any non-empty value.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "appname",
+            "in": "header",
+            "required": true,
+            "description": "Application Name. Can be any non-empty value. This value will be reflected in the VIX transaction log.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Security token successfully generated",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/token2Response"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/vix/viewer/studyquery": {
+      "post": {
+        "summary": "Perform study search",
+        "description": "Identifies which document(s) in a collection of documents (studies) for a patient have associated images. If the document collection is not passed, then all documents associated with the patient at the specified site are returned. In either case, the returned studies are filtered by the imageFilter.",
+        "tags": [
+          "Studies"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/studyQueryRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [
+          {
+            "name": "xxx-fullname",
+            "in": "header",
+            "description": "Full name of logged in VistA user.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "xxx-duz",
+            "in": "header",
+            "description": "duz of logged in VistA user.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "xxx-ssn",
+            "in": "header",
+            "description": "SSN of logged-in VistA user.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "xxx-sitename",
+            "in": "header",
+            "description": "Name of logged-in site.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "xxx-sitenumber",
+            "in": "header",
+            "description": "Site number of logged-in site.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "xxx-securitytoken",
+            "in": "header",
+            "description": "BSE token for authenticating logged in VistA user.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "apitoken",
+            "in": "header",
+            "description": "API token from the /token request. If this value is present. all the above headers are optional.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A container for a collection of documents. The response definition is similar to that of the object in the request body.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/studyQueryResponse"
+                }
+              }
+            }
+          },
+          "504": {
+            "description": "rVIX to site VIX request timed out (based on vixRequest parameter)"
+          }
+        }
+      }
+    },
+    "/vix/viewer/studydetails": {
+      "get": {
+        "summary": "Fetch study details",
+        "description": "Fetches the study details given a study id (study urn or CPRS identifier). Note- The complete url for this call is in the studyQuery response.",
+        "tags": [
+          "Studies"
+        ],
+        "parameters": [
+          {
+            "name": "patientICN",
+            "in": "query",
+            "required": true,
+            "description": "Patient ICN",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "siteNumber",
+            "in": "query",
+            "required": true,
+            "description": "VA hospital site number (aka Station Number)",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "contextId",
+            "in": "query",
+            "required": true,
+            "description": "Study Id (study urn or CPRS identifier)",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "IncludeImageDetails",
+            "in": "query",
+            "required": false,
+            "description": "Whether to include the image details in the response (true or false).",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "securityToken",
+            "in": "query",
+            "required": true,
+            "description": "A security token that is provided in the token or token2 response.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A container for a collection of studyItemDetails objects, such as thumbnailUrl, viewerUrl, and other characteristics of the study. A pdfUrl appears for each PDF in the study (see servePdf).\"",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/studyDetails"
+                }
+              }
+            }
+          },
+          "204": {
+            "description": "No metadata available for the study"
+          },
+          "default": {
+            "description": "Security token expired if the error code is 600."
+          }
+        }
+      }
+    },
+    "/vix/viewer/servePdf": {
+      "get": {
+        "summary": "Fetch study PDF URL",
+        "description": "Get the URL to the PDF for the study. Note: The complete URL for this call is in the studyQuery response's pdfUrl name-value pair.",
+        "tags": [
+          "Studies"
+        ],
+        "parameters": [
+          {
+            "name": "AuthSiteNumber",
+            "in": "query",
+            "required": false,
+            "description": "VA hospital site number (aka Station Number)",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "ContextId",
+            "in": "query",
+            "required": true,
+            "description": "Study/Series Id (study urn or CPRS identifier)",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "PatientICN",
+            "in": "query",
+            "required": false,
+            "description": "Patient ICN",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "SecurityToken",
+            "in": "query",
+            "required": true,
+            "description": "A VIX Viewer security token that is provided in the token or token2 response.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "SiteNumber",
+            "in": "query",
+            "required": false,
+            "description": "VA hospital site number (aka Station Number)",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A json result containing the URL name and URL value of the PDF on the server.\"",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "url": { "type": "string" }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "The reason for the failure."
+          },
+          "default": {
+            "description": "Security token expired if the error code is 600."
+          }
+        }
+      }
+    },
+    "/vix/viewer/thumbnails": {
+      "get": {
+        "summary": "Fetch image thumbnail",
+        "description": "Get the thumbnail image. Note: The complete url for this call is in the studyQuery response.",
+        "tags": [
+          "Studies"
+        ],
+        "parameters": [
+          {
+            "name": "imageURN",
+            "in": "query",
+            "required": true,
+            "description": "Part of studyDetails reponse",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "imageQuality",
+            "in": "query",
+            "required": true,
+            "description": "Part of studyDetails reponse",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "contentType",
+            "in": "query",
+            "required": true,
+            "description": "Part of studyDetails reponse",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "contentTypeWithSubType",
+            "in": "query",
+            "required": true,
+            "description": "Part of studyDetails reponse",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Sucessfully retrieved thumbnail image"
+          },
+          "default": {
+            "description": "Security token expired if the error code is 600"
+          }
+        }
+      }
+    },
+    "/vix/viewer/site/{siteNumber}/session/{sessionId}/context": {
+      "post": {
+        "summary": "Add study to a tab",
+        "description": "Add a new study to an existing tab (identified using SiteNumber and SessionId).<br><br>\nUsage:<br>\n1. When opening the first study, simply append a unique SessionId to its viewerUrl.\n  https://fqdn:343/vix/viewer/loader?ContextId=xxxx&...&SessionId=<strong>1234</strong>\n2. To add one or more studies to the same tab, first extract all query parameters from the viewerUrl except contextId.\n  Then use the following url format to post the contextIds of the studies you wish to add.<br>\n  <p style = \"background-color: WhiteSmoke\">curl -x POST -data '[<strong>yyyy,zzzz</strong>]' https://fqdn:343/vix/viewer/site/<strong>500</strong>/session/<strong>1234</strong>/context?SecurityToken=...&SiteNumber=...&PatientICN=...&AuthSiteNumber=...</p>\n",
+        "tags": [
+          "Session"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [
+          {
+            "name": "siteNumber",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "VA hospital site number (aka Station Number)"
+          },
+          {
+            "name": "sessionId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "User defined session id"
+          },
+          {
+            "name": "PatientICN",
+            "in": "query",
+            "required": true,
+            "description": "Patient ICN (from query response)",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "SiteNumber",
+            "in": "query",
+            "required": true,
+            "description": "VA hospital site number (aka Station Number) (from query response)",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "SecurityToken",
+            "in": "query",
+            "required": true,
+            "description": "A security token that is provided in the token or token2 respeonse.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "AuthSiteNumber",
+            "in": "query",
+            "required": true,
+            "description": "Site where the user was authenticated. (from query response)",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully added new studies to an existing Viewer instance."
+          },
+          "default": {
+            "description": "Security token expired if error code is 600"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Remove study from a tab",
+        "description": "Remove one or more studies from an existing tab (identified using SiteNumber and SessionId).<br><br>\nUsage:<br>\nTo remove one or more studies from a tab, first extract all query parameters from the viewerUrl except contextId.\n  Then use the following url format to post the contextIds of the studies you wish to remove.<br>\n  <p style = \"background-color: WhiteSmoke\">curl -x DELETE -data '[<strong>yyyy,zzzz</strong>]' https://fqdn:343/vix/viewer/site/<strong>500</strong>/session/<strong>1234</strong>/context?SecurityToken=...&SiteNumber=...&PatientICN=...&AuthSiteNumber=...</p>\n",
+        "tags": [
+          "Session"
+        ],
+        "parameters": [
+          {
+            "name": "sessionId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "siteNumber",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully removed studies from an existing Viewer instance. (tab)"
+          },
+          "default": {
+            "description": "Security token expired if the error code is 600"
+          }
+        }
+      }
+    },
+    "/vix/viewer/site/{siteNumber}/session/{sessionId}/status": {
+      "get": {
+        "summary": "Get list of studes in a tab",
+        "description": "Get status information of a session (tab). The status information contains <br>\n  1. ContextIds of the studies currenly displayed.\n  2. Idle time (in seconds) of the Viewer<br><br>\nUsage:<br>\nFirst extract all query parameters from the viewerUrl except contextId. Then use the following url format to get the status information for sessionId 1234.<br>\n  <p style = \"background-color: WhiteSmoke\">curl -x GET https://fqdn:343/vix/viewer/site/<strong>500</strong>/session/<strong>1234</strong>/status?SecurityToken=...&SiteNumber=...&PatientICN=...&AuthSiteNumber=...</p>\n",
+        "tags": [
+          "Session"
+        ],
+        "parameters": [
+          {
+            "name": "sessionId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "siteNumber",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/sessionStatusResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Session not found."
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "studyQueryRequest": {
+        "type": "object",
+        "properties": {
+          "patientICN": {
+            "description": "ICN of the selected patient. This parameter is not required if patientICN is specified for each studyItem.",
+            "type": "string"
+          },
+          "siteNumber": {
+            "description": "VA hospital site number (aka Station Number).",
+            "type": "string"
+          },
+          "siteNumbers": {
+            "description": "Array of site numbers. This is useful for fetching patient studies from multiple sites in a single call.",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "vixTimeout": {
+            "description": "rVIX to site VIX request timeout (in milliseconds).",
+            "type": "integer"
+          },
+          "imageFilter": {
+            "description": "Image source filter. Use this filter to specify the type of images that are to be retrieved. <BR/> Usage: Comma delimited string containing one or more of the following image types. <BR/> DODnoDICOM = DOD documents, that are not DICOM images, coming from DAS/DES/HAIMS <BR/> ENC = Encounter images <BR/> MUSE = MUSE images (EKGs) <BR/> PAT = Patient images <BR/> The default is \"PAT,ENC\" which means both Patient and Encounter images.",
+            "type": "string"
+          },
+          "studies": {
+            "description": "(Optional) A collection of documents.",
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "contextId": {
+                  "description": "Document id. This can either be the study urn or a CPRS identifier.",
+                  "type": "string"
+                },
+                "patientICN": {
+                  "description": "Patient ICN. If this property is not set, then the patient ICN of this object's parent is used.",
+                  "type": "string"
+                },
+                "siteNumber": {
+                  "description": "The site number of the site to which the document belongs to. If this property is not set, then the site number of this object's parent is used.\"",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "contextId",
+                "patientICN"
+              ]
+            }
+          }
+        }
+      },
+      "studyQueryResponse": {
+        "type": "object",
+        "properties": {
+          "patientICN": {
+            "description": "ICN of the selected patient.",
+            "type": "string"
+          },
+          "siteNumber": {
+            "description": "VA hospital site number (aka Station Number).",
+            "type": "string"
+          },
+          "studies": {
+            "description": "A collection of documents or studies.",
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "patientICN": {
+                  "description": "Patient ICN. If this property is not set, then the patient ICN of this object's parent is used.",
+                  "type": "string"
+                },
+                "siteNumber": {
+                  "description": "The site number of the site to which the document belongs to. If this property is not set, then the site number of this object's parent is used.",
+                  "type": "string"
+                },
+                "detailsUrl": {
+                  "description": "An absolute url to fetch the details of the study.",
+                  "type": "string"
+                },
+                "reportUrl": {
+                  "description": "An absolute url to fetch the study report.",
+                  "type": "string"
+                },
+                "viewerUrl": {
+                  "description": "An absolute url to open the study in a Viewer.",
+                  "type": "string"
+                },
+                "thumbnailUrl": {
+                  "description": "An absolute url to get the thumbnail image for the study",
+                  "type": "string"
+                },
+                "manageUrl": {
+                  "description": "An absolute url to view image thumbnails and imaging data, delete images and manage controlled images.",
+                  "type": "string"
+                },
+                "groupIen": {
+                  "description": "The group IEN of the study, if present",
+                  "type": "string"
+                },
+                "externalContextId": {
+                  "description": "The alternate exam number, if present",
+                  "type": "string"
+                },
+                "statusCode": {
+                  "description": "HTTP status code, if present",
+                  "type": "string"
+                },
+                "status": {
+                  "description": "Error message if statusCode is present and is not equal to 200 (HTTP OK)",
+                  "type": "string"
+                },
+                "contextId": {
+                  "description": "Document id. This can either be the study urn or a CPRS identifier.",
+                  "type": "string"
+                },
+                "imageCount": {
+                  "description": "The number of images associated with the study.",
+                  "type": "integer"
+                },
+                "studyDescription": {
+                  "description": "Study description from vix study metadata",
+                  "type": "string"
+                },
+                "studyDate": {
+                  "description": "Study date from the vix study metadata",
+                  "type": "string"
+                },
+                "acquisitionDate": {
+                  "description": "Acquisition date from vix study metadata",
+                  "type": "string"
+                },
+                "studyId": {
+                  "description": "Study Id from vix study metadata",
+                  "type": "string"
+                },
+                "siteName": {
+                  "description": "Site name from vix study metadata",
+                  "type": "string"
+                },
+                "event": {
+                  "description": "Event from vix study metadata",
+                  "type": "string"
+                },
+                "package": {
+                  "description": "Package from vix study metadata",
+                  "type": "string"
+                },
+                "type": {
+                  "description": "Type from vix study metadata",
+                  "type": "string"
+                },
+                "origin": {
+                  "description": "Origin from vix study metadata",
+                  "type": "string"
+                },
+                "studyType": {
+                  "description": "Study type from vix study metadata",
+                  "type": "string"
+                },
+                "procedureDescription": {
+                  "description": "Procedure description from vix study metadata",
+                  "type": "string"
+                },
+                "specialtyDescription": {
+                  "description": "Specialty Description from vix study metadata",
+                  "type": "string"
+                },
+                "studyClass": {
+                  "description": "Study Class from vix study metadata",
+                  "type": "string"
+                },
+                "isSensitive": {
+                  "description": "Sensitive flag from vix study metadata",
+                  "type": "boolean"
+                }
+              },
+              "required": [
+                "patientICN",
+                "siteNumber",
+                "detailsUrl",
+                "reportUrl",
+                "viewerUrl",
+                "thumbnailUrl",
+                "manageUrl",
+                "groupIen",
+                "externalContextId",
+                "statusCode",
+                "status",
+                "contextId",
+                "imageCount",
+                "studyDescription",
+                "studyDate",
+                "acquisitionDate",
+                "studyId",
+                "siteName",
+                "event",
+                "package",
+                "type",
+                "origin",
+                "studyType",
+                "procedureDescription",
+                "specialtyDescription",
+                "studyClass",
+                "isSensitive"
+              ]
+            }
+          }
+        },
+        "required": [
+          "patientICN",
+          "siteNumber",
+          "studies"
+        ]
+      },
+      "studyDetails": {
+        "type": "object",
+        "properties": {
+          "totalImageCount": {
+            "description": "Total number of images associated with the document",
+            "type": "integer"
+          },
+          "viewerUrl": {
+            "description": "An absolute url to open the study in a Viewer.",
+            "type": "string"
+          },
+          "reportUrl": {
+            "description": "An absolute url to fetch the study report.",
+            "type": "string"
+          },
+          "studies": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "contextId": {
+                  "description": "Document id. This can either be the study urn or a CPRS identifier.",
+                  "type": "string"
+                },
+                "imageCount": {
+                  "description": "The number of images associated with the study.",
+                  "type": "integer"
+                },
+                "studyDescription": {
+                  "description": "Study description from vix study metadata",
+                  "type": "string"
+                },
+                "studyDate": {
+                  "description": "Study date from the vix study metadata",
+                  "type": "string"
+                },
+                "acquisitionDate": {
+                  "description": "Acquisition date from vix study metadata",
+                  "type": "string"
+                },
+                "studyId": {
+                  "description": "Study Id from vix study metadata",
+                  "type": "string"
+                },
+                "siteName": {
+                  "description": "Site name from vix study metadata",
+                  "type": "string"
+                },
+                "event": {
+                  "description": "Event from vix study metadata",
+                  "type": "string"
+                },
+                "package": {
+                  "description": "Package from vix study metadata",
+                  "type": "string"
+                },
+                "type": {
+                  "description": "Type from vix study metadata",
+                  "type": "string"
+                },
+                "origin": {
+                  "description": "Origin from vix study metadata",
+                  "type": "string"
+                },
+                "studyType": {
+                  "description": "Study type from vix study metadata",
+                  "type": "string"
+                },
+                "procedureDescription": {
+                  "description": "Procedure description from vix study metadata",
+                  "type": "string"
+                },
+                "specialtyDescription": {
+                  "description": "Specialty Description from vix study metadata",
+                  "type": "string"
+                },
+                "studyClass": {
+                  "description": "Study Class from vix study metadata",
+                  "type": "string"
+                },
+                "isSensitive": {
+                  "description": "Sensitive flag from vix study metadata",
+                  "type": "boolean"
+                },
+                "series": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "imageCount": {
+                        "description": "Number of images in the series",
+                        "type": "integer"
+                      },
+                      "caption": {
+                        "description": "Series description",
+                        "type": "string"
+                      },
+                      "thumbnailUrl": {
+                        "description": "An absolute url to fetch the thumbnail image",
+                        "type": "string"
+                      },
+                      "viewerUrl": {
+                        "description": "An absolute url to open the study with the series selected in a Viewer.",
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "imageCount",
+                      "caption",
+                      "thumbnailUrl",
+                      "viewerUrl"
+                    ]
+                  }
+                }
+              },
+              "required": [
+                "contextId",
+                "imageCount",
+                "studyDescription",
+                "studyDate",
+                "acquisitionDate",
+                "studyId",
+                "siteName",
+                "event",
+                "package",
+                "type",
+                "origin",
+                "studyType",
+                "procedureDescription",
+                "specialtyDescription",
+                "studyClass",
+                "isSensitive",
+                "series"
+              ]
+            }
+          }
+        },
+        "required": [
+          "totalImageCount",
+          "viewerUrl",
+          "reportUrl",
+          "studies"
+        ]
+      },
+      "sessionStatusResponse": {
+        "type": "object",
+        "properties": {
+          "idleTime": {
+            "description": "Current idle time of the VIX Viewer",
+            "type": "string"
+          },
+          "contextIds": {
+            "description": "Array of context Ids currently displayed in the VIX Viewer.",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "idleTime",
+          "contextIds"
+        ]
+      },
+      "token2Response": {
+        "type": "object",
+        "properties": {
+          "token": {
+            "description": "security token for the VIX Viewer API",
+            "type": "string"
+          },
+          "vixToken": {
+            "description": "VIX security token",
+            "type": "string"
+          }
+        }
+      }
+    },
+    "responses": {},
+    "parameters": {},
+    "examples": {},
+    "requestBodies": {},
+    "headers": {},
+    "links": {},
+    "callbacks": {}
+  },
+  "tags": [
+    {
+      "name": "Service"
+    },
+    {
+      "name": "Studies"
+    },
+    {
+      "name": "Session"
+    }
+  ]
+}

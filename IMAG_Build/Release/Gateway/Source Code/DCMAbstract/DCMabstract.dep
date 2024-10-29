@@ -1,0 +1,20 @@
+# Microsoft Developer Studio Generated Dependency File, included by DCMabstract.mak
+
+.\DCMabstract.cpp : \
+	"\program files\accusoft\imagegear v15\md\dll\include\accucb.h"\
+	"\program files\accusoft\imagegear v15\md\dll\include\accucnst.h"\
+	"\program files\accusoft\imagegear v15\md\dll\include\accufunc.h"\
+	"\program files\accusoft\imagegear v15\md\dll\include\accuimg.h"\
+	"\program files\accusoft\imagegear v15\md\dll\include\accuold.h"\
+	"\program files\accusoft\imagegear v15\md\dll\include\accuosd.h"\
+	"\program files\accusoft\imagegear v15\md\dll\include\accustd.h"\
+	"\program files\accusoft\imagegear v15\md\dll\include\accuvers.h"\
+	"\program files\accusoft\imagegear v15\md\dll\include\datadict.h"\
+	"\program files\accusoft\imagegear v15\md\dll\include\dcm.h"\
+	"\program files\accusoft\imagegear v15\md\dll\include\gear.h"\
+	"\program files\accusoft\imagegear v15\md\dll\include\gearerrs.h"\
+	"\program files\accusoft\imagegear v15\md\dll\include\geartags.h"\
+	"\program files\accusoft\imagegear v15\md\dll\include\i_med.h"\
+	"\program files\microsoft visual studio\vc98\include\basetsd.h"\
+	".\StdAfx.h"\
+	

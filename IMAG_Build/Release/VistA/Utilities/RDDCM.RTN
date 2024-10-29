@@ -1,0 +1,162 @@
+01/13/2005  10:18
+Saved from DCM,DCE
+RDDCM
+rddcm ; Read a DD from the DICOM standard ; 01/13/2005  10:18
+ ; The file to be read must be created by loading the
+ ; .doc version of volume #6 into MS-Word, and then saving
+ ; the file as text only
+ ;
+read03(in,out) New a,da,db,i,f,l,s,t,u,x,z
+ Open 51:(in:"r")
+ Open 52:(out:"w")
+ Set u=0
+ For i=0:1:31,127 Set a(i)=63 ; ?
+ For i=-1,31:1:255 Set a(i)=i
+ Set a(9)=124 ; |
+ Set a(146)=39 ; '
+ Set a(226)=45 ; -
+ Set z=$J("",1000),da=600,db=300
+ For  Use 51 Read x#1000 Quit:$ZC<0  Do
+ . Use 52
+ . Set:$Length(x)<1000 x=x_$Char(13,10)
+ . Do:$Length(z)+$Length(x)>30000
+ . . Set f=1000-db,s="Enumerated Value",l=$Length(s)
+ . . For  Set f=$Find(z,s,f) Quit:f<1  Quit:f>29000  Do
+ . . . Set t=$Extract(z,f-db,f+da)
+ . . . Set t=$Extract(t,1,db-l)_"{{"_s_"}}"_$Extract(t,db+1,$Length(t))
+ . . . Set u=u+1
+ . . . Write !,"~~~",u,"~~~",!,t,!
+ . . . Quit
+ . . Set f=1000-db,s="Defined Term",l=$Length(s)
+ . . For  Set f=$Find(z,s,f) Quit:f<1  Quit:f>29000  Do
+ . . . Set t=$Extract(z,f-db,f+da)
+ . . . Set t=$Extract(t,1,db-l)_"{{"_s_"}}"_$Extract(t,db+1,$Length(t))
+ . . . Set u=u+1
+ . . . Write !,"~~~",u,"~~~",!,t,!
+ . . . Quit
+ . . Set z=$Extract(z,$Length(z)-db,$Length(z))
+ . . Quit
+ . Set z=z_x
+ . Quit
+ Close 51
+ Use 52 Write !! Close 52
+ Quit
+ ;
+read06(in,out) New a,field,i,ok,x
+ Open 51:(in:"r")
+ Open 52:(out:"w")
+ For field=1:1:5 Set field(field)=""
+ For i=0:1:31,127 Set a(i)=63 ; ?
+ For i=-1,31:1:255 Set a(i)=i
+ Set a(9)=124 ; |
+ Set a(146)=39 ; '
+ Set a(226)=45 ; -
+ Set ok=0 For  Use 51 Read x#1000 Quit:$ZC<0  Do
+ . If $Extract(x,1,2)=$Char(54,9) Set ok=1,field=1 Quit
+ . If $Extract(x,1,2)=$Char(55,9) Set ok=0 Quit
+ . If $Extract(x,1,2)=$Char(56,9) Set ok=2,field=1 Quit
+ . If $Extract(x,1,8)=$Char(65,110,110,101,120,32,65,9) Set ok=3,field=1 Quit
+ . Do:(ok=1)!(ok=2)
+ . . For i=1:1:$Length(x) Do
+ . . . Set a=$ASCII(x,i)
+ . . . If a=13 Do  Quit
+ . . . . Set field=field+1 Quit:field<6
+ . . . . Use 52 Write field(1),"|",field(2),"|",field(3),"|",field(4),"|",field(5),!
+ . . . . For field=1:1:5 Set field(field)=""
+ . . . . Set field=1
+ . . . . Quit
+ . . . Set field(field)=field(field)_$Char(a(a))
+ . . . Quit
+ . . Quit
+ . If ok=3 Do  Quit
+ . . If x["UID VALUES" Set ok=4,field=1 Use 52 Write !#! Quit
+ . . Quit
+ . Do:ok=4
+ . . For i=1:1:$Length(x) Do
+ . . . Set a=$ASCII(x,i)
+ . . . If a=13 Do  Quit
+ . . . . Set field=field+1 Quit:field<5
+ . . . . Use 52 Write field(1),"|",field(2),"|",field(3),"|",field(4),"|",field(5),!
+ . . . . For field=1:1:5 Set field(field)=""
+ . . . . Set field=1
+ . . . . Quit
+ . . . Set field(field)=field(field)_$Char(a(a))
+ . . . Quit
+ . . Quit
+ . Quit
+ Use 52 Write !! Close 52
+ Close 51
+ Quit
+ ;
+test ;
+ ;;Do read06("c:\edm\vss\2003_06.txt","c:\edm\vss\2003_dd.txt")
+ ;;Do read06("c:\edm\vss\2004_06.txt","c:\edm\vss\2004_dd.txt")
+ Do read03("c:\edm\vss\2004_03.txt","c:\edm\vss\2004_dd3.txt")
+ Quit
+ ;
+Verify New d0,i,id,l,n,x,y,z
+ Open 51:("c:\edm\vss\2004_dd.txt":"r")
+ Open 52:("c:\edm\vss\verify.txt":"w")
+ For  Use 51 Read x Quit:$ZC<0  Do
+ . Use 52
+ . Set id=$Piece(x,"|",1) Quit:id=""
+ . If $Translate(id,"(,)0123456789abcdefABCDEF")="" Do  Quit
+ . . Set id=$Extract(id,2,10)
+ . . If id="" Write !,"Invalid tag: """_id_"""." Quit
+ . . Set n=0,d0="",$Piece(x,"|",1)=id
+ . . For  Set d0=$Order(^MAGDICOM(2006.51,"B",id,d0)) Quit:d0=""  Set n=n+1
+ . . If n'=1 Write !,n," entries for tag """_id_"""." Quit
+ . . Set d0="" For  Set d0=$Order(^MAGDICOM(2006.51,"B",id,d0)) Quit:d0=""  Do
+ . . . Set y=$Get(^MAGDICOM(2006.51,d0,0))
+ . . . Do diff(x,y,1)
+ . . . Quit
+ . . Quit
+ . If $Translate(id,"0123456789.")="" Do  Quit
+ . . If id="" Write !,"Invalid UID: """_id_"""." Quit
+ . . Set n=0,d0=""
+ . . For  Set d0=$Order(^MAGDICOM(2006.53,"C",id,d0)) Quit:d0=""  Set n=n+1
+ . . If n'=1 Write !,n," entries for UID """_id_"""." Quit
+ . . Set d0="" For  Set d0=$Order(^MAGDICOM(2006.53,"C",id,d0)) Quit:d0=""  Do
+ . . . Set y=$Get(^MAGDICOM(2006.53,d0,0))
+ . . . Set z=$Piece(y,"^",2)_"^"_$Piece(y,"^",1)_"^"_$Piece(y,"^",3,$Length(y))
+ . . . Do diff(x,z,2)
+ . . . Quit
+ . . Quit
+ . Quit
+ Close 51
+ Use 52 Write !! Close 52
+ Quit
+ ;
+diff(x,y,t) New a,i,l,px,py
+ Quit:$Translate(x,"|")=$Translate(y,"^")
+ Set l=$Length(x,"|") Set:$Length(y,"^")>l l=$Length(y,"^")
+ Set a=0
+ For i=1:1:l Set px(i)=$Piece(x,"|",i),py(i)=$Piece(y,"^",i)
+ If t=1,l>5 Do
+ . Set px(6)=px(5),px(5)=""
+ . Set:px(6)="RET" px(6)="R"
+ . Set:px(6)="Retired" px(6)="R"
+ . Quit
+ For i=1:1:l Do:px(i)'=py(i)
+ . For  Quit:$Extract(px(i),1)'=" "  Set px(i)=$Extract(px(i),2,$Length(px(i)))
+ . For  Quit:$Extract(px(i),$Length(px(i)))'=" "  Set px(i)=$Extract(px(i),1,$Length(px(i))-1)
+ . For  Quit:$Extract(py(i),1)'=" "  Set py(i)=$Extract(py(i),2,$Length(py(i)))
+ . For  Quit:$Extract(py(i),$Length(py(i)))'=" "  Set py(i)=$Extract(py(i),1,$Length(py(i))-1)
+ . For  Quit:px(i)'["  "  Set px(i)=$Piece(px(i),"  ",1)_" "_$Piece(px(i),"  ",2,$Length(px(i)))
+ . For  Quit:py(i)'["  "  Set py(i)=$Piece(py(i),"  ",1)_" "_$Piece(py(i),"  ",2,$Length(py(i)))
+ . Quit:px(i)=py(i)
+ . If t=1,i=3 For  Quit:px(i)'[" or "  Set px(i)=$Piece(px(i)," or ",1)_"/"_$Piece(px(i)," or ",2,$Length(px(i))+2)
+ . Quit:px(i)=py(i)
+ . If t=1,i=3,px(6)="R",px(i)="",py(i)'="" Quit
+ . If t=1,i=4,px(6)="R",px(i)="",py(i)'="" Quit
+ . If t=1,i=5,py(i)="D" Quit
+ . If t=1,i=5,py(i)="E" Quit
+ . If t=2,i>2 Quit
+ . Quit:px(i)=py(i)
+ . Write:'a !,id Set a=1
+ . Write !,"Piece ",i," DICOM = """,px(i),"""",!?9,".dic = """,py(i),""""
+ . Quit
+ Quit
+ ;
+
+

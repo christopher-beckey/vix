@@ -1,0 +1,253 @@
+MAGDMFBM ;WOIFO/PMK/RRB - Program to build DICOM Master File ; 06 Apr 2010 3:03 PM
+ ;;3.0;IMAGING;**9,10,11,30,51,69,54,53,99,118**;Mar 19, 2002;Build 4525;May 01, 2013
+ ;; Per VHA Directive 2004-038, this routine should not be modified.
+ ;; +---------------------------------------------------------------+
+ ;; | Property of the US Government.                                |
+ ;; | No permission to copy or redistribute this software is given. |
+ ;; | Use of unreleased versions of this software requires the user |
+ ;; | to execute a written test agreement with the VistA Imaging    |
+ ;; | Development Office of the Department of Veterans Affairs,     |
+ ;; | telephone (301) 734-0100.                                     |
+ ;; | The Food and Drug Administration classifies this software as  |
+ ;; | a medical device.  As such, it may not be changed in any way. |
+ ;; | Modifications to this software may result in an adulterated   |
+ ;; | medical device under 21CFR820, the use of which is considered |
+ ;; | to be a violation of US Federal Statutes.                     |
+ ;; +---------------------------------------------------------------+
+ ;;
+MODALITY ; Radiology Modality Types
+ N FILE,RECORD
+ ;
+ S FILE=$$INIT^MAGDMFB(2006.582,"DICOM Modality","Modality")
+ Q:FILE=""
+ ;
+ L +^MAGDICOM(2006.582):1 E  D  Q
+ . D MESSAGE^MAGDMLOG(1,0,"Someone else is importing this data...","t")
+ . S FATAL=FATAL+1
+ . Q
+ ;
+ K ^MAGDICOM(2006.582)
+ ;
+ S STATUS=$$OPEN^MAGOSFIL(FILE,"R")
+ I STATUS<0 D  Q
+ . D MESSAGE^MAGDMLOG(1,0,"Open Error: "_STATUS,"t")
+ . S FATAL=FATAL+1
+ . Q
+ F  D  Q:STATUS'=""
+ . S STATUS=$$READ^MAGOSFIL(FILE,.RECORD)
+ . I $$USEPRIN^MAGOSFIL(1)
+ . I STATUS<0 Q:+STATUS=-2  D  Q
+ . . D MESSAGE^MAGDMLOG(1,0,"Read Error: "_STATUS,"t")
+ . . S FATAL=FATAL+1
+ . . Q
+ . Q:RECORD=""  Q:RECORD=$C(12)
+ . S RECORD=$TR(RECORD,$C(9,145,146,147,148),$C(32,39,39,34,34))
+ . I RECORD?1"#".E D  Q  ; comment
+ . . D:'SILENT MESSAGE^MAGDMLOG(1,0,"Comment: <<"_$P(RECORD,"#",2,999)_">>","t")
+ . . Q
+ . ; data
+ . I ($L(RECORD,"|")=7)!($L(RECORD,"|")=8) D  Q
+ . . N CASECODE ;- Name of subroutine to pick up case number
+ . . N D0 ;------- Internal Entry Number
+ . . N DCMTOTGA ;- Parameters to convert from DICOM to Targa(TM)
+ . . N DATXCODE ;- Name of subroutine to extract header info
+ . . N DATXFILE ;- Dictionary file to extract data
+ . . N ERR ;------ Flag; Error in input-line
+ . . N IMGSVC ;--- Specified Imaging Service
+ . . N MODALITY ;- mnemonic code for modality
+ . . N MODEL ;---- Name of model
+ . . N MFGR ;----- Name of manufacturer
+ . . N T ;-------- Scratch
+ . . N X ;-------- Scratch
+ . . ;
+ . . S MFGR=$$UP^MAGDFCNS($$PIECE^MAGDMFBI(RECORD,1))
+ . . S MODEL=$$UP^MAGDFCNS($$PIECE^MAGDMFBI(RECORD,2))
+ . . S MODALITY=$$UPPER^MAGOSMSC($$UP^MAGDFCNS($$PIECE^MAGDMFBI(RECORD,3)))
+ . . S DCMTOTGA=$$PIECE^MAGDMFBI(RECORD,4)
+ . . S CASECODE=$$PIECE^MAGDMFBI(RECORD,5)
+ . . S DATXCODE=$$PIECE^MAGDMFBI(RECORD,6)
+ . . S DATXFILE=$$PIECE^MAGDMFBI(RECORD,7)
+ . . S IMGSVC=$$PIECE^MAGDMFBI(RECORD,8)
+ . . S ERR=0
+ . . ;
+ . . D:MFGR=""
+ . . . D MESSAGE^MAGDMLOG(1,0,"***Error: Manufacturer is missing.","t")
+ . . . S FATAL=FATAL+1,ERR=1
+ . . . Q
+ . . ;
+ . . D:MODEL=""
+ . . . D MESSAGE^MAGDMLOG(1,0,"***Error: Model is missing.","t")
+ . . . S FATAL=FATAL+1,ERR=1
+ . . . Q
+ . . ;
+ . . D:MODALITY=""
+ . . . D MESSAGE^MAGDMLOG(1,0,"***Error: Modality type is missing.","t")
+ . . . S FATAL=FATAL+1,ERR=1
+ . . . Q
+ . . ;
+ . . I IMGSVC'="",IMGSVC'="RAD",IMGSVC'="CON" D
+ . . . D MESSAGE^MAGDMLOG(1,0,"***Warning: Imaging Service """_IMGSVC_""" is not defined and will be ignored.","t")
+ . . . S IMGSVC=""
+ . . . Q
+ . . ;
+ . . N E
+ . . S E=0,DCMTOTGA=$$UPPER^MAGOSMSC(DCMTOTGA)
+ . . ;
+ . . I DCMTOTGA'="",DCMTOTGA'="<DICOM>",DCMTOTGA'["/" D
+ . . . ;
+ . . . I DCMTOTGA["<DICOM>" D  ; <DICOM> cannot be reduced or modified.
+ . . . . N X,Y
+ . . . . S X=$TR($P(DCMTOTGA,"<DICOM>",1)," ",""),Y=$TR($P(DCMTOTGA,"<DICOM>",2)," ","")
+ . . . . I X'=""!(Y'="") D
+ . . . . . S E=E+1,E(E)="<DICOM> cannot be reduced or modified."
+ . . . . . S FATAL=FATAL+1,ERR=1
+ . . . . . Q
+ . . . . Q
+ . . . ;
+ . . . I DCMTOTGA["DICOM" D  ; <DICOM> must be enclosed with < and >.
+ . . . . I ($L(DCMTOTGA,"<DICOM>")-1)'>0 D
+ . . . . . S E=E+1,E(E)="<DICOM> must be enclosed with < and >."
+ . . . . . S FATAL=FATAL+1,ERR=1
+ . . . . . Q
+ . . . . Q
+ . . . ;
+ . . . I DCMTOTGA["<DICOM>",($L(DCMTOTGA,"<DICOM>")-1)>1 D  ; <DICOM> defined more than once.
+ . . . . S E=E+1,E(E)="<DICOM> can only be defined once."
+ . . . . S FATAL=FATAL+1,ERR=1
+ . . . . Q
+ . . . ;
+ . . . I DCMTOTGA["R" D  ; FULL cannot be reduced.
+ . . . . S E=E+1,E(E)="FULL file cannot be reduced unless a BIG (TGA or DCM)is also defined."
+ . . . . S FATAL=FATAL+1,ERR=1
+ . . . . Q
+ . . . ;
+ . . . Q:'E
+ . . . F I=1:1:E D
+ . . . . D MESSAGE^MAGDMLOG(1,0,"***Invalid conversion parameter"_$S(E=1:"",1:"s")_":","t")
+ . . . . D MESSAGE^MAGDMLOG(1,0,"     "_DCMTOTGA,"t")
+ . . . . D MESSAGE^MAGDMLOG(1,0,"     "_E(I),"t")
+ . . . . D CONTINUE^MAGDMFBN
+ . . . . Q
+ . . . Q
+ . . ;
+ . . I DCMTOTGA'="",DCMTOTGA'="<DICOM>",DCMTOTGA["/" D
+ . . . N I,P,P1,P2
+ . . . S P=DCMTOTGA,P1=$P(P,"/",1),P2=$P(P,"/",2)
+ . . . ;
+ . . . ; piece-1 for the FULL file, that is the clinician's image
+ . . . ; piece-2 for the uncompressed BIG file for radiologists
+ . . . ; FULL file can only be reduced in size if there is also BIG file
+ . . . ; No modifications can be made to reduce the uncompressed BIG file.
+ . . . ; 
+ . . . I P1="",P2="" Q  ; no DCMTOTGA parameters" -- ignore it
+ . . . I P1["<DICOM>" D  ; <DICOM> parmeter for full.
+ . . . . S E=E+1,E(E)="FULL file cannot be <DICOM> when an uncompressed BIG (TGA or DCM)is defined."
+ . . . . S FATAL=FATAL+1,ERR=1
+ . . . . Q
+ . . . ;
+ . . . I P1=""!(P1'["R") D  ; FULL file not reduced.
+ . . . . S E=E+1,E(E)="FULL file must be reduced when an uncompressed BIG (TGA or DCM)is defined."
+ . . . . S FATAL=FATAL+1,ERR=1
+ . . . . Q
+ . . . ;
+ . . . I P1'="",$L(P1,"R")-1>1 D  ; Reduction can only be defined once.
+ . . . . S E=E+1,E(E)="Reduction can only be defined once."
+ . . . . S FATAL=FATAL+1,ERR=1
+ . . . . Q
+ . . . ;
+ . . . I P1'="",P1["R" D
+ . . . . F I=1:1:$L(P1," ") D  ; Reduction factor pattern match.
+ . . . . . I $P(P1," ",I)["R",$P(P1," ",I)'?1"R"1.2N D
+ . . . . . . S E=E+1,E(E)="Reduction factor invalid"
+ . . . . . . S FATAL=FATAL+1,ERR=1
+ . . . . . Q
+ . . . . Q
+ . . . ;
+ . . . ; Invalid parameters for BIG
+ . . . I P2["R" D
+ . . . . S E=E+1,E(E)="BIG file cannot be reduced. "
+ . . . . S FATAL=FATAL+1,ERR=1
+ . . . . Q
+ . . . ;
+ . . . I P2["<DICOM>"&($TR($P(P2,"<DICOM>",1)," ","")'=""!($TR($P(P2,"<DICOM>",2)," ","")'="")) D
+ . . . . S E=E+1,E(E)="BIG <DICOM> file cannot be modified. "
+ . . . . S FATAL=FATAL+1,ERR=1
+ . . . . Q
+ . . . ;
+ . . . I P2["<DICOM>",$L(P2,"<DICOM>")-1>1 D  ; <DICOM> can only be defined once.
+ . . . . S E=E+1,E(E)="<DICOM> cannot be specified more than once."
+ . . . . S FATAL=FATAL+1,ERR=1
+ . . . . Q
+ . . . ;
+ . . . Q:'E
+ . . . F I=1:1:E D
+ . . . . D MESSAGE^MAGDMLOG(1,0,"***Invalid conversion parameter"_$S(E=1:"",1:"s")_":","t")
+ . . . . D MESSAGE^MAGDMLOG(1,0,"     "_P,"t")
+ . . . . D MESSAGE^MAGDMLOG(1,0,"     "_E(I),"t")
+ . . . . D CONTINUE^MAGDMFBN
+ . . . . Q
+ . . . Q
+ . . ;
+ . . S X="No entry point specified for Accession Number subroutine"
+ . . S:CASECODE'="" X=$$ENTRYPT^MAGDMFBN(CASECODE,"MAGDIR3")
+ . . I 'X D
+ . . . D MESSAGE^MAGDMLOG(1,0,"***Error:","t")
+ . . . D MESSAGE^MAGDMLOG(1,0,X,"t")
+ . . . S FATAL=FATAL+1,ERR=1
+ . . . Q
+ . . ;
+ . . S X=$$ENTRYPT^MAGDMFBN(DATXCODE,"MAGDIR4A")
+ . . I 'X D
+ . . . D MESSAGE^MAGDMLOG(1,0,"***Error:","t")
+ . . . D MESSAGE^MAGDMLOG(1,0,X,"t")
+ . . . S FATAL=FATAL+1,ERR=1
+ . . . Q
+ . . ;
+ . . D:DATXFILE'=""
+ . . . S X=DATXFILE
+ . . . F  Q:$E(X,1)'=" "  S X=$E(X,2,$L(X))
+ . . . F  Q:$E(X,$L(X))'=" "  S X=$E(X,1,$L(X)-1)
+ . . . S DATXFILE=X
+ . . . S T=^MAGDICOM(2006.563,1,"DICT PATH")_"\"_X
+ . . . S X=$$GETDIR^MAGOSDIR(T)
+ . . . Q:X=1
+ . . . D MESSAGE^MAGDMLOG(1,0,"***Error: Could not find file """_T_"""","t")
+ . . . S FATAL=FATAL+1,ERR=1
+ . . . Q
+ . . ;
+ . . D:ERR!'SILENT
+ . . . I 'ERR,$Y>20 D CONTINUE^MAGDMFBN
+ . . . D MESSAGE^MAGDMLOG(1,0,"     "_MFGR_" -- "_MODEL_" -- "_MODALITY_" -- "_DCMTOTGA,"t")
+ . . . D MESSAGE^MAGDMLOG(1,0,"     "_CASECODE_" -- "_DATXCODE_" -- "_DATXFILE_" -- "_IMGSVC,"t")
+ . . . Q
+ . . I ERR D CONTINUE^MAGDMFBN Q
+ . . ;
+ . . ; Store the entry-points as {label}.{routine}
+ . . S CASECODE=$TR(CASECODE,"^",".")
+ . . S DATXCODE=$TR(DATXCODE,"^",".")
+ . . ;
+ . . S X=MFGR_"^"_MODEL_"^"_MODALITY_"^"_DCMTOTGA_"^"_CASECODE
+ . . S X=X_"^"_DATXCODE_"^"_DATXFILE_"^"_IMGSVC_"^"_1
+ . . ;
+ . . S D0=$O(^MAGDICOM(2006.582,"B",MFGR,MODEL,MODALITY,""))
+ . . S:'D0 D0=$O(^MAGDICOM(2006.582," "),-1)+1
+ . . S ^MAGDICOM(2006.582,D0,0)=X
+ . . S ^MAGDICOM(2006.582,"B",MFGR,MODEL,MODALITY,D0)=""
+ . . Q
+ . D MESSAGE^MAGDMLOG(1,0,"  *** FORMAT ERROR ***","t")
+ . D MESSAGE^MAGDMLOG(1,0,RECORD,"t")
+ . S FATAL=FATAL+1
+ . I FBSWITCH="FOREGROUND" R Z:DTIME
+ . Q
+ S STATUS=$$CLOSE^MAGOSFIL(FILE)
+ I $$USEPRIN^MAGOSFIL(1)
+ S D0=$O(^MAGDICOM(2006.582," "),-1)
+ D MESSAGE^MAGDMLOG(1,0,D0_" modality entr"_$S(D0=1:"y",1:"ies")_" in database.","t")
+ S ^MAGDICOM(2006.582,0)="MODALITY TYPE DICTIONARY^2006.582^"_D0_"^"_D0
+ L -^MAGDICOM(2006.582)
+ ;
+ D SENDMOD^MAGVDGW1  ; Send Info to VistA
+ ;
+ D NEWMOD^MAGDIR6D ; process any images for the new modalities
+ Q
+ ;

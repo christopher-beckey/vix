@@ -1,0 +1,19 @@
+
+Future Additions to ucDavis DICOM Toolkit.
+
+__ 1. Add Type to each element in each module in CCOC.
+
+__ 2. Add CheckData method to each VR to validate the being
+passed under that VR.
+
+__ 3. DICOMDIR functionality.
+
+__ 4. Modality Worklist functionality.
+
+__ 5. HIS/RIS Integration.  Expand on the existing HL7 code.
+
+__ 6. Make ActiveX object based on each SOP Class.
+
+__ 7. JPEG2000 functionality.
+
+

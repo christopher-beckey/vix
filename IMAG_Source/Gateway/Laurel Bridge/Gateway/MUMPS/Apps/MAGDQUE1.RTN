@@ -1,0 +1,151 @@
+Cache for Windows NT^INT^Saved from DICOM (ISW-KUZMAKP3-LT)^~Format=Cache.S~
+%RO on 09/17/2012  11:24
+MAGDQUE1^INT^1^62692,59318^0
+MAGDQUE1 ;WOIFO/PMK - Transfer DICOM files between TCP/IP and FIFO Queues ; 20 Nov 2008 7:57 AM
+ ;;3.0;IMAGING;**30,110**;Mar 19, 2002;Build 48;Aug 23, 2012
+ ;; Per VHA Directive 2004-038, this routine should not be modified.
+ ;; +---------------------------------------------------------------+
+ ;; | Property of the US Government.                                |
+ ;; | No permission to copy or redistribute this software is given. |
+ ;; | Use of unreleased versions of this software requires the user |
+ ;; | to execute a written test agreement with the VistA Imaging    |
+ ;; | Development Office of the Department of Veterans Affairs,     |
+ ;; | telephone (301) 734-0100.                                     |
+ ;; | The Food and Drug Administration classifies this software as  |
+ ;; | a medical device.  As such, it may not be changed in any way. |
+ ;; | Modifications to this software may result in an adulterated   |
+ ;; | medical device under 21CFR820, the use of which is considered |
+ ;; | to be a violation of US Federal Statutes.                     |
+ ;; +---------------------------------------------------------------+
+ ;;
+ ;XXXXXXX XXXX XXXXXXX  XXXXX      XXXXX  XX  XX XXXXXXX XX  XX XXXXXXX
+ ; XX   X  XX   XX   X XX   XX    XX   XX XX  XX  XX   X XX  XX  XX   X
+ ; XX X    XX   XX X   XX   XX    XX   XX XX  XX  XX X   XX  XX  XX X
+ ; XXXX    XX   XXXX   XX   XX    XX   XX XX  XX  XXXX   XX  XX  XXXX
+ ; XX X    XX   XX X   XX   XX    XX   XX XX  XX  XX X   XX  XX  XX X
+ ; XX      XX   XX     XX   XX    XX   XX XX  XX  XX   X XX  XX  XX   X
+ ;XXXX    XXXX XXXX     XXXXX      XXXXX   XXXX  XXXXXXX  XXXX  XXXXXXX
+ ;                                      XX
+ ;
+ ; PACS Interface -- transfer DICOM files in the background
+ ;
+ENTRY(IP,PORT) ; loop transferring DICOM files between TCP/IP and the FIFO Queues
+ N TICKER ;--- ticker counter for idle loop
+ N TIMEOUT ;-- DICOM TCP timeout counter
+ N PDUERR,PDUNULL,PDUACSE,PDUDATA,STATUS,X
+ ;
+ S PDUERR=-1,PDUNULL=0,PDUACSE=1,PDUDATA=2
+ ;
+ S TIMEOUT=0 ; initialize DICOM TCP timeout counter
+ ;
+ F  D  Q:X=PDUACSE  Q:X=PDUERR
+ . S X=$$RECEIVE(IP,PORT) Q:X'=PDUNULL
+ . S X=$$TRANSMIT(IP,PORT) Q:X'=PDUNULL
+ . D IDLE^MAGDBB(.TICKER,$G(FBSWITCH)="FOREGROUND",1)
+ . Q
+ Q
+ ;
+RECEIVE(IP,PORT) ; get the data packet from TCP/IP
+ N PDULEN ;--- the byte length of the Protocol Data Unit
+ N PRIORITY ;- "IMMEDATE", "HIGH", "MEDIUM", or "LOW"
+ N SENDTYPE ;- "REQUEST" or "RESPONSE"
+ N D0,COMMAND,DATASET,FILENUMB,ODEVNAME,ODEVTYPE,QUEUEIN,QUEUEOUT,X
+ ; and store it into the PDU INPUT file
+ ;
+ S TIMEOUT=TIMEOUT+1 ; increment DICOM TCP timeout counter
+ I TIMEOUT>$G(^MAGDICOM(2006.563,1,"DICOM TCP TIMEOUT"),300) S $EC=",U13-DICOM TCP Timeout,"
+ ;
+ S X=$$RECEIVE^MAGDTCP3(PDUIN,.PDUTYPE,.PDULEN,IP,PORT)
+ ;
+ I X'=PDUDATA Q X ; quit if not DATA PDU
+ ;
+ S TIMEOUT=0 ; clear DICOM TCP timeout counter
+ ;
+ ; process the incoming DICOM message
+ D RECVCMD^MAGDTCP3(PDUIN,.PDULEN,IP,PORT) ; get the DICOM data file
+ ;
+ ; read the Message Command information to determine the input queue
+ S QUEUEIN("FILE")=PDUIN,(ODEVTYPE,ODEVNAME)="",INODE="IN"
+ D ENTRY^MAGDDR2 ; parse the Message Command info Protocol Data Value
+ S COMMAND=$G(^TMP("MAG",$J,"DICOM","IN","0000,0100",1,1))
+ S SENDTYPE=$S(COMMAND>$$HEX2DEC^MAGOSMSC("8000"):"RESPONSE",1:"REQUEST")
+ S PRIORITY=$G(^TMP("MAG",$J,"DICOM","IN","0000,0700",1,1))
+ S PRIORITY=$S(PRIORITY=1:"HIGH",PRIORITY=2:"LOW",1:"MEDIUM")
+ ;
+ I COMMAND=$$HEX2DEC^MAGOSMSC("30") S PRIORITY="IMMEDIATE" ; C-ECHO-RQ
+ I COMMAND=$$HEX2DEC^MAGOSMSC("8030") S PRIORITY="IMMEDIATE" ; C-ECHO-RSP
+ ;
+ S QUEUEOUT("DATAPATH")=$$DATAPATH^MAGDQUE2("INCOMING",SENDTYPE,PRIORITY,CHANNEL)
+ S QUEUEOUT("FPTRPATH")=^MAGDICOM(2006.563,1,"DATA PATH",CHANNEL,0)
+ S D0=^MAGDICOM(2006.564,"X","INCOMING",SENDTYPE,PRIORITY)
+ S QUEUEOUT("QLETTER")=$P(^MAGDICOM(2006.564,D0,0),"^")
+ ;
+ D GETWPTR^MAGDQUE0 ; get the write file pointer
+ ;
+ ; display the output file name on the monitor
+ D MESSAGE^MAGDMLOG(0,0,QUEUEOUT("FILE"),"V1")
+ ;
+ ; copy the Message Command information to the DICOM data file
+ S STATUS=$$OPEN^MAGOSFIL(PDUIN,"B")
+ I STATUS<0 D
+ . N M
+ . S M="Could not open file """_PDUIN_""" for Binary Read."
+ . W:$$USEPRIN^MAGOSFIL(1) !!!,M,!,STATUS
+ . S $EC=",U"_M_","
+ . Q  ; Error trap does not return
+ S STATUS=$$OPEN^MAGOSFIL(QUEUEOUT("FILE"),"W")
+ I STATUS<0 D
+ . N M
+ . S M="Could not open file """_QUEUEOUT("FILE")_""" for Write."
+ . W:$$USEPRIN^MAGOSFIL(1) !!!,M,!,STATUS
+ . S $EC=",U"_M_","
+ . Q  ; Error trap does not return
+ F  S X=$$READSTAR^MAGOSFIL(PDUIN) Q:X<0  S STATUS=$$USE^MAGOSFIL(QUEUEOUT("FILE")) W *X
+ S STATUS=$$CLOSE^MAGOSFIL(PDUIN)
+ S STATUS=$$CLOSE^MAGOSFIL(QUEUEOUT("FILE"))
+ I $$USEPRIN^MAGOSFIL(1)
+ ;
+ ; check if there is a Message Data Set
+ S DATASET=$G(^TMP("MAG",$J,"DICOM","IN","0000,0800",1,1))
+ I DATASET'=$$HEX2DEC^MAGOSMSC("0101") D  ; Data Set is not Null
+ . ; transfer the Message Data Set information to the DICOM file
+ . D RECVDATA^MAGDTCP3(QUEUEOUT("FILE"),.PDULEN,IP,PORT)
+ . Q
+ ;
+ D FINISHW^MAGDQUE0 ; rename the file and bump the file pointer
+ Q PDUDATA
+ ;
+TRANSMIT(IP,PORT) ; check if there is anything in the queues to send across TCP/IP
+ ;
+ ; first check for RESPONSEs to DICOM REQUESTs
+ I $$CHECKQUE("RESPONSE","IMMEDIATE") Q PDUDATA
+ I $$CHECKQUE("RESPONSE","HIGH") Q PDUDATA
+ I $$CHECKQUE("RESPONSE","MEDIUM") Q PDUDATA
+ I $$CHECKQUE("RESPONSE","LOW") Q PDUDATA
+ ;
+ ; then check for REQUESTs for DICOM
+ I $$CHECKQUE("REQUEST","IMMEDIATE") Q PDUDATA
+ I $$CHECKQUE("REQUEST","HIGH") Q PDUDATA
+ I $$CHECKQUE("REQUEST","MEDIUM") Q PDUDATA
+ I $$CHECKQUE("REQUEST","LOW") Q PDUDATA
+ Q PDUNULL
+ ;
+CHECKQUE(SENDTYPE,PRIORITY) ; function to read a queue and transmit a file
+ N D0,QUEUEIN,X
+ S QUEUEIN("DATAPATH")=$$DATAPATH^MAGDQUE2("OUTGOING",SENDTYPE,PRIORITY,CHANNEL)
+ S QUEUEIN("FPTRPATH")=^MAGDICOM(2006.563,1,"DATA PATH",CHANNEL,0)
+ S D0=^MAGDICOM(2006.564,"X","OUTGOING",SENDTYPE,PRIORITY)
+ S QUEUEIN("QLETTER")=$P(^MAGDICOM(2006.564,D0,0),"^")
+ S X=$$GETRPTR^MAGDQUE0 ; get the read file pointer
+ I X<1 Q PDUNULL ; nothing to send in the queue
+ S X=$$SENDDATA^MAGDTCP2(QUEUEIN("FILE"),IP,PORT)
+ D FINISHR^MAGDQUE0 ; bump the file pointer
+ Q PDUDATA
+ ;
+INIT ; called by ^MAGDACP1 and ^MAGDACU1 to initialize common variables
+ S DEBUG=0 ; turn off debugging messages
+ S PORT=^TMP("MAG",$J,"DICOM","PORT")
+ Q
+
+
+

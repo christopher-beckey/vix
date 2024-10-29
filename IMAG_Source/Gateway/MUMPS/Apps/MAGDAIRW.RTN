@@ -1,0 +1,116 @@
+Cache for Windows NT^INT^Saved from DICOM (ISW-KUZMAKP3-LT)^~Format=Cache.S~
+%RO on 09/17/2012  11:24
+MAGDAIRW^INT^1^62692,59318^0
+MAGDAIRW ;WOIFO/PMK - Automatic Import Reconciliation Workflow ; 16 May 2011 11:31 AM
+ ;;3.0;IMAGING;**53,110**;Mar 19, 2002;Build 48;Aug 23, 2012
+ ;; Per VHA Directive 2004-038, this routine should not be modified.
+ ;; +---------------------------------------------------------------+
+ ;; | Property of the US Government.                                |
+ ;; | No permission to copy or redistribute this software is given. |
+ ;; | Use of unreleased versions of this software requires the user |
+ ;; | to execute a written test agreement with the VistA Imaging    |
+ ;; | Development Office of the Department of Veterans Affairs,     |
+ ;; | telephone (301) 734-0100.                                     |
+ ;; | The Food and Drug Administration classifies this software as  |
+ ;; | a medical device.  As such, it may not be changed in any way. |
+ ;; | Modifications to this software may result in an adulterated   |
+ ;; | medical device under 21CFR820, the use of which is considered |
+ ;; | to be a violation of US Federal Statutes.                     |
+ ;; +---------------------------------------------------------------+
+ ;;
+ ; Select the study from Modality Worklist
+ ; 
+ ; Returns -1 (error), 0 (no patient selected), or DFN
+ ;
+WORKLIST(DFN,PNAMEDCM,PID,DOB,SEX,VAICN,ACNUMB,STUDYDAT,RADPROC,STUDYDES,MODIFIER) ; get the study for the import
+ N GNODE,SEQUENCE,SEQNUMB,SITEDFN,X
+ D SEQINIT^MAGDFCNS
+ D ENTRY^MAGDWLU ; modality worklist lookup
+ I '$D(GNODE) Q 0
+ S MODIFIER="" ; no separate MODIFIER for worklist
+ ; move data to "OUT" node for functions in ^MAGDFCNS
+ K ^TMP("MAG",$J,"DICOM","OUT")
+ M ^TMP("MAG",$J,"DICOM","OUT")=^TMP("MAG",$J,"DICOM",GNODE)
+ S GNODE="OUT"
+ S PNAMEDCM=$$GETDATA^MAGDFCNS(GNODE,"0010,0010")
+ S PID=$$GETDATA^MAGDFCNS(GNODE,"0010,0020")
+ S DOB=$$GETDATA^MAGDFCNS(GNODE,"0010,0030")
+ S SEX=$$GETDATA^MAGDFCNS(GNODE,"0010,0040")
+ S VAICN=$$GETDATA^MAGDFCNS(GNODE,"0010,1000",1)
+ S SITEDFN=$$GETDATA^MAGDFCNS(GNODE,"0010,1000",2),DFN=$P(SITEDFN,"-",2)
+ S ACNUMB=$$GETDATA^MAGDFCNS(GNODE,"0008,0050")
+ D SEQPUSH^MAGDFCNS("0040,0100")
+ S STUDYDAT=$$GETDATA^MAGDFCNS(GNODE,"0040,0002") ; scheduled procedure step start date
+ S STUDYDES=$$GETDATA^MAGDFCNS(GNODE,"0040,0007") ; scheduled procedure step descrption
+ S STUDYDAT=STUDYDAT_"~(scheduled date)"
+ D SEQPUSH^MAGDFCNS("0040,0008")
+ S RADPROC=$$GETDATA^MAGDFCNS(GNODE,"0008,0100") ; scheduled procedure code
+ D SEQPOP^MAGDFCNS ; (0040,0008)
+ D SEQPOP^MAGDFCNS ; (0040,0100)
+ I '$$PATCHECK(DFN) Q 0
+ Q $$VERIFY(DFN,STUDYN,PNAMEDCM,PID,DOB,SEX,ACNUMB,STUDYDAT,STUDYDES)
+ ;
+PATCHECK(DFN) ; check patient sensitivity
+ N NOTICE,SECINFO,PATCHECK,X
+ I $D(PIDCACHE("DFN",DFN)) S SECINFO(1)=0 ; patient already checked
+ E  S X=$$CALLRPC^MAGM2VCU("DG SENSITIVE RECORD ACCESS","M",.SECINFO,DFN,1) ; ICR #3027
+ I SECINFO(1)=-1 D  Q 0 ; RPC failed, required variable not defined
+ . D ERRORMSG^MAGDAIR0(1,"Error in rpc DG SENSITIVE RECORD ACCESS",.SECINFO)
+ . Q
+ I SECINFO(1) D  I 'PATCHECK Q 0
+ . N I
+ . W ! S I=1 F  S I=$O(SECINFO(I)) Q:I=""  W !,SECINFO(I)
+ . I SECINFO(1)=1 D CONTINUE^MAGDAIR0 S PATCHECK=1 Q
+ . I SECINFO(1)'=2 D CONTINUE^MAGDAIR0 S PATCHECK=0 Q
+ . I $$YESNO^MAGDAIR0("Do you want to continue processing this patient record?","NO",.X)<0 S PATCHECK=0 Q
+ . I X="NO" S PATCHECK=0 Q
+ . S X=$$CALLRPC^MAGM2VCU("DG SENSITIVE RECORD BULLETIN","M",.NOTICE,DFN,"^DICOM Gateway Importer",1) ; ICR #3027
+ . I 'NOTICE D  S PATCHECK=0 Q  ; required variable undefined
+ . . D ERRORMSG^MAGDAIR0(1,"Error in rpc DG SENSITIVE RECORD BULLETIN",.NOTICE)
+ . . Q
+ . S PATCHECK=1
+ . Q
+ E  S PATCHECK=1
+ Q PATCHECK
+ ;
+VERIFY(DFN,STUDYN,PNAMEDCM,PID,DOB,SEX,ACNUMB,STUDYDAT,STUDYDES,MODIFIER,DEFAULT) ;
+ S PIDCACHE("DFN",DFN)="" ; ignore sensitivity check for patient next time
+ S MODIFIER=$G(MODIFIER),DEFAULT=$G(DEFAULT,"N")
+ I ACNUMB="" S ACNUMB="(automatically generated)"
+ I STUDYDAT="" S STUDYDAT="~(will be set to same date)"
+ I STUDYDES="" S STUDYDES="<not known>"
+ D DISPLAY(STUDYN,PNAMEDCM,PID,DOB,SEX,ACNUMB,STUDYDAT,STUDYDES,MODIFIER)
+ I $$YESNO^MAGDAIR0("Is this the correct patient/study/procedure from VistA?",DEFAULT,.X)<0 Q -1
+ I X="NO" Q 0
+ Q 1
+ ;
+DISPLAY(STUDYN,PNAMEDCM,PID,DOB,SEX,ACNUMB,STUDYDAT,STUDYDES,MODIFIER) ;
+ N DATA,IEN,I,PATIENT,SERIEUID,X
+ S MODIFIER=$G(MODIFIER)
+ S PATIENT=$G(^TMP("MAG",$J,"IMPORT","LIST",STUDYN,"PATIENT"))
+ S X=$$GETDATA^MAGDAIRD(STUDYN,"LIST",.DATA)
+ W $$HIGHLITE^MAGDAIR0("REVERSE")
+ W !!?20,$J("Imported File",40),?63,"VistA",?103
+ W !?20,$J("-------------",40),?63,"-----",?103
+ W !,"Patient Name:",?20,$J($E($$NAME^MAGDAIR0(DATA("PNAMEDCM")),1,40),40)
+ W ?63,$E($$NAME^MAGDAIR0(PNAMEDCM),1,40),?103
+ W !,"Patient ID:",?20,$J(DATA("PID"),40),?63,PID,?103
+ W !,"Date of Birth:",?20,$J($$DATE^MAGDAIR0(DATA("DOB"),"B"),40)
+ W ?63,$$DATE^MAGDAIR0(DOB,"B"),?103
+ W !,"Patient Sex:",?20,$J(DATA("SEX"),40),?63,SEX,?103
+ W !,"Accession Number:",?20,$J(DATA("ACNUMB"),40),?63,$G(ACNUMB),?103
+ W !,"Study Date:",?20
+ W $J($$DATE^MAGDAIR0(DATA("STUDYDAT"),"S"),40)
+ W ?63,$$DATE^MAGDAIR0($P($G(STUDYDAT),"~",1),"S")
+ W:$L($P($G(STUDYDAT),"~",1)) " " W $P(STUDYDAT,"~",2) W ?103
+ W !,"Procedure:",?20,$J(DATA("STUDYDES"),40),?63,$G(STUDYDES),?103
+ I MODIFIER'="" D
+ . W !?63
+ . F I=1:1:$L(MODIFIER,"~") W:I>1 ", " W $P($P(MODIFIER,"~",I),"|",1)
+ . W ?103
+ . Q
+ W $$HIGHLITE^MAGDAIR0
+ Q
+
+
+

@@ -1,0 +1,305 @@
+Cache for Windows NT^INT^Saved from DICOM,DICOM (ISW-KUZMAKP3-LT)^~Format=Cache.S~
+%RO on 06/11/2013  14:01
+MAGDHRC4^INT^1^62984,49233.139772^0
+MAGDHRC4 ;WOIFO/PMK - Read HL7 and generate DICOM ; 11 Jun 2013 1:40 PM
+ ;;3.0;IMAGING;**11,51,102,49,110**;Mar 19, 2002;Build 48;Aug 23, 2012
+ ;; Per VHA Directive 2004-038, this routine should not be modified.
+ ;; +---------------------------------------------------------------+
+ ;; | Property of the US Government.                                |
+ ;; | No permission to copy or redistribute this software is given. |
+ ;; | Use of unreleased versions of this software requires the user |
+ ;; | to execute a written test agreement with the VistA Imaging    |
+ ;; | Development Office of the Department of Veterans Affairs,     |
+ ;; | telephone (301) 734-0100.                                     |
+ ;; | The Food and Drug Administration classifies this software as  |
+ ;; | a medical device.  As such, it may not be changed in any way. |
+ ;; | Modifications to this software may result in an adulterated   |
+ ;; | medical device under 21CFR820, the use of which is considered |
+ ;; | to be a violation of US Federal Statutes.                     |
+ ;; +---------------------------------------------------------------+
+ ;;
+ ;
+ Q
+ ; PACS interface -- Radiology HL7 data input routine
+ ;
+ ;   XXXXXX      XX    XXXXXX
+ ;    XX  XX    XXXX    XX  XX
+ ;    XX  XX   XX  XX   XX  XX
+ ;    XXXXX    XX  XX   XX  XX
+ ;    XX XX    XXXXXX   XX  XX
+ ;    XX  XX   XX  XX   XX  XX
+ ;   XXX  XX   XX  XX  XXXXXX
+ ;
+ORC ; ORC Segment (Order Entry & Examination Change Only)
+ N ORCTRL ;---- HL7 order control code
+ N ORSTATUS ;-- HL7 order status code
+ N DCMSTS ;---- DICOM status code
+ N HL7DTTM ;--- date/time (HL7 format)
+ N DCMDT ;----- date value (DICOM format)
+ N DCMTM ;----- time value (DICOM format)
+ ;
+ S ORCTRL=$$GETDATA^MAGDHRC0(1) ; Order Control
+ S ORSTATUS=$$GETDATA^MAGDHRC0(5) ; Order Status
+ I ORCTRL="NW",ORSTATUS="IP" S MESSAGE="ORDER ENTRY",DCMSTS="SCHEDULED"
+ E  I ORCTRL="XO",ORSTATUS="IP" S MESSAGE="EXAM VERIFICATION",DCMSTS="VERIFIED"
+ E  I ORCTRL="XO",ORSTATUS="CM" S MESSAGE="EXAM VERIFICATION",DCMSTS="VERIFIED"
+ E  I ORCTRL="CA",ORSTATUS="CA" S MESSAGE="EXAM CHANGE",DCMSTS="CANCELLED"
+ E  I ORCTRL="CA",ORSTATUS="IP" S MESSAGE="EXAM CHANGE",DCMSTS="CANCELLED"
+ D SAVE^MAGDFCNS("0032,000A",DCMSTS) ; Order Status
+ ;
+ S HL7DTTM=$$GETDATA^MAGDHRC0(9) ; Date/Time of Transaction
+ ; The transaction date is needed later in MAGDWLPB
+ D CVTDT^MAGDHRCU(HL7DTTM,.DCMDT,.DCMTM)
+ ; convert to FileMan date/time format
+ S TRANSFDT=(DCMDT_"."_DCMTM)-17000000
+ D:HL7DTTM'=""
+ . D REPLACE^MAGDFCNS("0032,1000",DCMDT) ; Start Study date
+ . D REPLACE^MAGDFCNS("0032,1001",DCMTM) ; Start Study time
+ . Q
+ ;
+ ; Scheduled Procedure Step Location hard-coded
+ ; for radiology, appointment clinic for CPRS
+ D SAVE^MAGDFCNS("0040,0011","RAD")
+ ;
+ ; call back numbers
+ S Z=$$GETDATA^MAGDHRC0(14,1,1)
+ D SAVE^MAGDFCNS("0040,2010",Z) ; order callback phone number
+ ;
+ I VERSION]2.3 D  ; HL7 version > 2.3
+ . S Z=$$GETDATA^MAGDHRC0(17,1,2) I Z'="" D  ; Entering Organization
+ . . D SAVE^MAGDFCNS("0032,1033",Z) ; Requesting Service
+ . . ; Requesting Service Sequence - to be deprecated
+ . . D SEQPUSH^MAGDFCNS("0033,xx30,VA DHCP")
+ . . D SAVE^MAGDFCNS("0032,1033",Z) ; Requesting Service
+ . . S Z=$$GETDATA^MAGDHRC0(17,1,1)
+ . . D SAVE^MAGDFCNS("0008,0100",Z) ; code value
+ . . S Z=$$GETDATA^MAGDHRC0(17,1,3)
+ . . D SAVE^MAGDFCNS("0008,0102",Z) ; coding scheme
+ . . D SEQPOP^MAGDFCNS
+ . . Q
+ . Q
+ Q
+ ;
+OBR ; OBR Segment
+ N CPTCODE,CPTNAME,CPTSCHM,DIVISION,DIVNAME,I,ITYPCODE,ITYPNAME,LEFTRIGHT
+ N PREGSTAT,RADPT0,RADPT2,RADPT3,RAO0,RAOIEN,RPTDATE,RPTTIME,STATUS
+ N VACODE,VANAME,VASCHM,Y,Z,ZDSHLSEG
+ N SDYDT,SDYTM ; -- study start date and time (DICOM format)
+ ;
+ S FORWARD=0,REQSTATE="" ; needed in ^MAGDWLPB for consistency with GMRC
+ ;
+ ; The following line is a quick patch for Radiology Version 5.0
+ Q:$G(SEGMENT("OBR"))  S SEGMENT("OBR")=1 ; handle only first OBR
+ ;
+ ; Fillers Order # (Accession Number and Case IDs)
+ I VERSION]"2.3.1" D  ; HL7 version > 2.3.1
+ . S Z=$$GETDATA^MAGDHRC0(18) ; get Accession Number (sss-mmddyy-nnn)
+ . D SAVE^MAGDFCNS("0008,0050",Z) ; Accession Number (sss-mmddyy-nnn)
+ . S Z=$$GETDATA^MAGDHRC0(19) ; get Study ID (i.e., case number)
+ . D SAVE^MAGDFCNS("0020,0010",Z) ; Study ID (i.e., case number)
+ . Q
+ E  D  ; HL7 version <= 2.3.1
+ . S Z=$$GETDATA^MAGDHRC0(3,1,2) ; get Accession Number (mmddyy-nnn)
+ . D SAVE^MAGDFCNS("0008,0050",Z) ; Accession Number (mmddyy-nnn)
+ . D SAVE^MAGDFCNS("0020,0010",$P(Z,"-",2)) ; Study ID (i.e., case number)
+ . Q
+ ;
+ I VERSION]"2.3.1" D  ; HL7 version > 2.3.1
+ . S Y=$$GETDATA^MAGDHRC0(18)
+ . Q 
+ E  S Y=$$GETDATA^MAGDHRC0(3,1,1)_"."_$$GETDATA^MAGDHRC0(3,1,2)
+ S Y=$TR(Y,"-",".") ; unique number for UID
+ S UID("INTERP")=$$INTERP^MAGDUID1(STATNUMB,Y,1)
+ S UID("RESULTS")=$$RESULTS^MAGDUID1(STATNUMB,Y)
+ S ZDSHLSEG=$$GETSEG^MAGDHRC0("ZDS")
+ I ZDSHLSEG D  ; get the Study Instance UID from the ZDS segment
+ . N HL7SEGNO
+ . S HL7SEGNO=ZDSHLSEG
+ . S UID("STUDY")=$$GETDATA^MAGDHRC0(1,1,1)
+ . Q
+ E  S UID("STUDY")=$$STUDY^MAGDUID1(STATNUMB,Y)
+ ;
+ ; Save Referenced Results SOP Class & Instance UID
+ D SEQPUSH^MAGDFCNS("0008,1100") ; referenced results sequence
+ S Y=$$GETUID^MAGDUID1("VA Detached Results Management SOP Class")
+ D SAVE^MAGDFCNS("0008,1150",Y)
+ D SAVE^MAGDFCNS("0008,1155",UID("RESULTS"))
+ D SEQPOP^MAGDFCNS
+ ;
+ ; Save Referenced Study SOP Class & Instance UID
+ D SEQPUSH^MAGDFCNS("0008,1110") ; referenced study sequence
+ S Y=$$GETUID^MAGDUID1("VA Detached Study Management SOP Class")
+ D SAVE^MAGDFCNS("0008,1150",Y)
+ D SAVE^MAGDFCNS("0008,1155",UID("STUDY"))
+ D SEQPOP^MAGDFCNS
+ ;
+ S Z=$$GETDATA^MAGDHRC0(7) ; Observation Date/Time
+ D CVTDT^MAGDHRCU(Z,.SDYDT,.SDYTM) ; convert from HL7 to DICOM format
+ I Z'="" D  ; Observation Date/Time -> study start date/time
+ . D REPLACE^MAGDFCNS("0032,1000",SDYDT) ; scheduled study start date in yyyymmdd
+ . D REPLACE^MAGDFCNS("0032,1001",SDYTM) ; scheduled study start time in hhmmss format
+ . Q
+ ;
+ ; Universal Service Identifier
+ S CPTCODE=$$GETDATA^MAGDHRC0(4,1,1) ; CPT procedure code
+ S CPTNAME=$$GETDATA^MAGDHRC0(4,1,2) ; CPT procedure name
+ S CPTSCHM=$$GETDATA^MAGDHRC0(4,1,3) ; CPT coding scheme
+ I CPTSCHM="CPT4" S CPTSCHM="C4" ; convert to DICOM value
+ S VACODE=$$GETDATA^MAGDHRC0(4,1,4) ; VistA procedure code
+ S VANAME=$$GETDATA^MAGDHRC0(4,1,5) ; VistA procedure name
+ S VASCHM=$$GETDATA^MAGDHRC0(4,1,6) ; VistA coding scheme
+ ;
+ S LEFTRIGHT=$$GETDATA^MAGDHRC0(15,1,5,2)
+ I LEFTRIGHT'="" D  ; add laterality to procedure name
+ . S CPTNAME=CPTNAME_" ("_LEFTRIGHT_")"
+ . S VANAME=VANAME_" ("_LEFTRIGHT_")"
+ . Q
+ ;
+ ; Requested Procedure Code Sequence
+ D SEQPUSH^MAGDFCNS("0032,1064")
+ D SAVE^MAGDFCNS("0008,0100",VACODE) ; procedure code
+ D SAVE^MAGDFCNS("0008,0102",VASCHM) ; coding scheme
+ D SAVE^MAGDFCNS("0008,0104",VANAME) ; code meaning
+ D SEQINC^MAGDFCNS ; increment the sequence counter
+ D SAVE^MAGDFCNS("0008,0100",CPTCODE) ; CPT code value
+ D SAVE^MAGDFCNS("0008,0102",CPTSCHM) ; coding scheme
+ D SAVE^MAGDFCNS("0008,0104",CPTNAME) ; code meaning
+ D SEQPOP^MAGDFCNS
+ ;
+ D SAVE^MAGDFCNS("0032,1060",CPTNAME) ; requested procedure description
+ ;
+ ; get the type of imaging and division location for the study
+ I VERSION>2.3 D  ; code for HL7 version 2.4
+ . ; Fillers Field #2 (Imaging Type of exam & location information)
+ . ; back quote (`) is the component delimiter
+ . ; underscore (_) is the sub-component delimiter
+ . ; piece-1 <image type code> _ <image type name>
+ . ; piece-2 <rad location code> _ <rad location name>
+ . ; piece-3 <station number> _ <station name>
+ . S Z=$$GETDATA^MAGDHRC0(21)
+ . ; get the image type from the segment
+ . S ITYPCODE=$P($P(Z,"`",1),"_",1)
+ . S ITYPNAME=$P($P(Z,"`",1),"_",2)
+ . ; get the station (division) code and name
+ . S DIVISION=$P($P(Z,"`",3),"_",1)
+ . S DIVNAME=$P($P(Z,"`",3),"_",2)
+ . Q
+ E  D  ; code for HL7 version 2.3 and earlier
+ . S DIVISION=$$GETDATA^MAGDHRC0(20,1,3)
+ . S DIVNAME=$$GETDATA^MAGDHRC0(20,1,4)
+ . S ITYPCODE=$$GETDATA^MAGDHRC0(21,1,1)
+ . S ITYPNAME=$$GETDATA^MAGDHRC0(21,1,2)
+ . Q
+ ;
+ ; save image type information
+ D SEQPUSH^MAGDFCNS("0033,xx40,VA DHCP") ; imaging type sequence
+ D SAVE^MAGDFCNS("0008,0100",ITYPCODE) ; code value
+ D SAVE^MAGDFCNS("0008,0102","99RAD") ; coding scheme
+ D SAVE^MAGDFCNS("0008,0104",ITYPNAME) ; meaning of code
+ D SEQPOP^MAGDFCNS ; end imaging type sequence
+ ; save division information
+ D REPLACE^MAGDFCNS("0008,0080",DIVNAME) ; institution name
+ D SEQPUSH^MAGDFCNS("0008,0082") ; institution code sequence
+ D REPLACE^MAGDFCNS("0008,0100",DIVISION) ; code value
+ D REPLACE^MAGDFCNS("0008,0102","L") ; coding scheme
+ D REPLACE^MAGDFCNS("0008,0104",DIVNAME) ; name of division
+ D SEQPOP^MAGDFCNS ; end institution code sequence
+ ;
+ S Z=$$GETNAME^MAGDHRC0(16) I Z'="" D
+ . D SAVE^MAGDFCNS("0032,1032",$P(Z,"^",2,999)) ; Requesting Physician's Name
+ . ; Requesting Physician Sequence - to be deprecated
+ . D SEQPUSH^MAGDFCNS("0033,xx10,VA DHCP")
+ . D SAVE^MAGDFCNS("0008,0100",$P(Z,"^",1)) ; code value
+ . D SAVE^MAGDFCNS("0008,0102","L") ; coding scheme
+ . D SAVE^MAGDFCNS("0032,1032",$P(Z,"^",2,999)) ; Requesting Physician's Name
+ . D SEQPOP^MAGDFCNS
+ . Q
+ ;
+ I '(VERSION]2.3) D  ; HL7 version <= 2.3 D
+ . S Z=$$GETDATA^MAGDHRC0(18) I Z'="" D  ; Placers Field #1
+ . . D SAVE^MAGDFCNS("0032,1033",Z) ; Requesting Service
+ . . ; Requesting Service Sequence - to be deprecated
+ . . D SEQPUSH^MAGDFCNS("0033,xx30,VA DHCP")
+ . . D SAVE^MAGDFCNS("0008,0100","") ; code value (none)
+ . . D SAVE^MAGDFCNS("0008,0102","L") ; coding scheme
+ . . D SAVE^MAGDFCNS("0032,1033",Z) ; Requesting Service
+ . . D SEQPOP^MAGDFCNS
+ . . Q
+ . Q
+ ;
+ S Z=$$GETDATA^MAGDHRC0(22) ; Report Approval Date and Time
+ D CVTDT^MAGDHRCU(Z,.RPTDATE,.RPTTIME) ; convert from HL7 to DICOM format
+ ;
+ S Z=$$GETDATA^MAGDHRC0(25) ; Report Status
+ I MSGTYPE="ORU",".C.F.R."'[("."_Z_".") D  ; reports must have a valid VA Report Status
+ . N MSG
+ . S MSG(1)="DICOM TEXT GATEWAY -- HL7 DATA WARNING"
+ . S MSG(2)="Expected Report Status=""C"", or ""F"", or ""R""."
+ . S MSG(3)="Found Report Status="""_Z_"""."
+ . S MSG(4)="Using Report Status=""R"" instead."
+ . S MSG(5)="Routine: "_$T(+0)
+ . D WARNING^MAGDFCNS(.MSG)
+ . S Z="R" ; default status value (Released, Not Verified)
+ . Q
+ ;
+ I Z="R" D  ; Transcribed Reports (Released, Not Verified)
+ . S STATUS="TRANSCRIBED" ; Interpretation Status ID
+ . D SAVE^MAGDFCNS("4008,0108",RPTDATE) ; Transcription Date
+ . D SAVE^MAGDFCNS("4008,0109",RPTTIME) ; Transcription Time
+ . Q
+ ;
+ E  I (Z="F")!(Z="C") D  ; Approved Reports (Verified)
+ . S STATUS="APPROVED" ; Interpretation Status ID
+ . D SEQPUSH^MAGDFCNS("4008,0111") ; Interpretation Approver Sequence
+ . D SAVE^MAGDFCNS("4008,0112",RPTDATE) ; Approval Date
+ . D SAVE^MAGDFCNS("4008,0113",RPTTIME) ; Approval Time
+ . ;
+ . D SEQPUSH^MAGDFCNS("4009,xx20,VA DHCP") ; Approving Physician Seq
+ . S Z=$$GETNAME^MAGDHRC0(32) ; Principal Result Interpreter
+ . D SAVE^MAGDFCNS("0008,0100",$P(Z,"^",1)) ; code value
+ . D SAVE^MAGDFCNS("0008,0102","L") ; coding scheme
+ . D SAVE^MAGDFCNS("4008,0114",$P(Z,"^",2,999)) ; Physician Approving Interpretation
+ . D SEQPOP^MAGDFCNS ; pop Approving Physician Sequence
+ . ;
+ . D SEQPOP^MAGDFCNS
+ . Q
+ ;
+ I  D  ; REPORT processing only
+ . D SEQPUSH^MAGDFCNS("4009,xx10,VA DHCP") ; Interpretation Author Seq
+ . I '$$GETEXIST^MAGDHRC0(33) D  ; use OBR-32 as the default author
+ . . S Z=$$GETNAME^MAGDHRC0(32) ; Principal Result Interpreter
+ . . D SAVE^MAGDFCNS("0008,0100",$P(Z,"^",1)) ; code value
+ . . D SAVE^MAGDFCNS("0008,0102","L") ; coding scheme
+ . . D SAVE^MAGDFCNS("4008,010C",$P(Z,"^",2,999)) ; Interpretation Author's Name
+ . . Q
+ . E  F I=1:1 Q:'$$GETEXIST^MAGDHRC0(33,I)  D  ; handle multiple authors
+ . . S Z=$$GETNAME^MAGDHRC0(33,I) ; Assistant Result Interpreter
+ . . I I>1 D SEQINC^MAGDFCNS
+ . . D SAVE^MAGDFCNS("0008,0100",$P(Z,"^",1)) ; code value
+ . . D SAVE^MAGDFCNS("0008,0102","L") ; coding scheme
+ . . D SAVE^MAGDFCNS("4008,010C",$P(Z,"^",2,999)) ; Interpretation Author's Name
+ . . Q
+ . D SEQPOP^MAGDFCNS
+ . ;
+ . D SAVE^MAGDFCNS("4008,0210","REPORT") ; Interpretation Type ID
+ . D SAVE^MAGDFCNS("4008,0212",STATUS) ; Interpretation Status ID
+ . S MESSAGE=STATUS_" "_MESSAGE ; set message type
+ . Q
+ ;
+ S Z=$$GETDATA^MAGDHRC0(27,1,6) ; Scheduling Priority
+ ; HL7 Priorities are STAT, ASAP, and ROUTINE
+ ; DICOM Priorities for Study Priority ID are
+ ;   HIGH, MED, and LOW
+ S Y=$S(Z="S":"HIGH",Z="A":"MED",Z="R":"MED",1:"MED") D SAVE^MAGDFCNS("0032,000C",Y)
+ ; DICOM Priorities for Requested Procedure Priority are
+ ;   STAT, HIGH, ROUTINE, MEDIUM, LOW
+ S Y=$S(Z="S":"STAT",Z="A":"HIGH",Z="C":"HIGH",Z="P":"HIGH",1:"ROUTINE")
+ D SAVE^MAGDFCNS("0040,1003",Y)
+ ;
+ S Z=$$GETDATA^MAGDHRC0(31,1,2) ; Reason for Study
+ D SAVE^MAGDFCNS("0032,1030",Z) ; Reason for Study
+ D ORDER^MAGDAUD3
+ Q
+
+
+

@@ -1,0 +1,468 @@
+KIDS Distribution saved on Jul 26, 2012@08:58:55
+Split from GOLD - last patch SEQ81_P120
+**KIDS**:MAG*3.0*350_RPC*2621^
+
+**INSTALL NAME**
+MAG*3.0*350_RPC*2621
+"BLD",8309,0)
+MAG*3.0*350_RPC*2621^IMAGING^0^3120726^n
+"BLD",8309,6.3)
+1
+"BLD",8309,"KRN",0)
+^9.67PA^779.2^20
+"BLD",8309,"KRN",.4,0)
+.4
+"BLD",8309,"KRN",.401,0)
+.401
+"BLD",8309,"KRN",.402,0)
+.402
+"BLD",8309,"KRN",.403,0)
+.403
+"BLD",8309,"KRN",.5,0)
+.5
+"BLD",8309,"KRN",.84,0)
+.84
+"BLD",8309,"KRN",3.6,0)
+3.6
+"BLD",8309,"KRN",3.8,0)
+3.8
+"BLD",8309,"KRN",9.2,0)
+9.2
+"BLD",8309,"KRN",9.8,0)
+9.8
+"BLD",8309,"KRN",19,0)
+19
+"BLD",8309,"KRN",19.1,0)
+19.1
+"BLD",8309,"KRN",101,0)
+101
+"BLD",8309,"KRN",409.61,0)
+409.61
+"BLD",8309,"KRN",771,0)
+771
+"BLD",8309,"KRN",779.2,0)
+779.2
+"BLD",8309,"KRN",870,0)
+870
+"BLD",8309,"KRN",8989.51,0)
+8989.51
+"BLD",8309,"KRN",8989.52,0)
+8989.52
+"BLD",8309,"KRN",8994,0)
+8994
+"BLD",8309,"KRN",8994,"NM",0)
+^9.68A^1^1
+"BLD",8309,"KRN",8994,"NM",1,0)
+MAGG IMAGE SET PROPERTIES^^0
+"BLD",8309,"KRN",8994,"NM","B","MAGG IMAGE SET PROPERTIES",1)
+
+"BLD",8309,"KRN","B",.4,.4)
+
+"BLD",8309,"KRN","B",.401,.401)
+
+"BLD",8309,"KRN","B",.402,.402)
+
+"BLD",8309,"KRN","B",.403,.403)
+
+"BLD",8309,"KRN","B",.5,.5)
+
+"BLD",8309,"KRN","B",.84,.84)
+
+"BLD",8309,"KRN","B",3.6,3.6)
+
+"BLD",8309,"KRN","B",3.8,3.8)
+
+"BLD",8309,"KRN","B",9.2,9.2)
+
+"BLD",8309,"KRN","B",9.8,9.8)
+
+"BLD",8309,"KRN","B",19,19)
+
+"BLD",8309,"KRN","B",19.1,19.1)
+
+"BLD",8309,"KRN","B",101,101)
+
+"BLD",8309,"KRN","B",409.61,409.61)
+
+"BLD",8309,"KRN","B",771,771)
+
+"BLD",8309,"KRN","B",779.2,779.2)
+
+"BLD",8309,"KRN","B",870,870)
+
+"BLD",8309,"KRN","B",8989.51,8989.51)
+
+"BLD",8309,"KRN","B",8989.52,8989.52)
+
+"BLD",8309,"KRN","B",8994,8994)
+
+"KRN",8994,2621,-1)
+0^1
+"KRN",8994,2621,0)
+MAGG IMAGE SET PROPERTIES^SETPROPS^MAGGA02^2^R^^^1
+"KRN",8994,2621,1,0)
+^^9^9^3090304^
+"KRN",8994,2621,1,1,0)
+This remote procedure updates one or more image properties (fields of the
+"KRN",8994,2621,1,2,0)
+record of the IMAGE file (#2005)).
+"KRN",8994,2621,1,3,0)
+ 
+"KRN",8994,2621,1,4,0)
+If one of the following fields is updated in the parent or the child of a
+"KRN",8994,2621,1,5,0)
+group that has only one image, then the changes are replicated to the
+"KRN",8994,2621,1,6,0)
+child or parent respectively: SHORT DESCRIPTION (10), TYPE INDEX (42),
+"KRN",8994,2621,1,7,0)
+PROC/EVENT INDEX (43), SPEC/SUBSPEC INDEX (44), ORIGIN INDEX (45),
+"KRN",8994,2621,1,8,0)
+CREATION DATE (110), CONTROLLED IMAGE (112), STATUS (113), and STATUS
+"KRN",8994,2621,1,9,0)
+REASON (113.3).
+"KRN",8994,2621,2,0)
+^8994.02A^3^3
+"KRN",8994,2621,2,1,0)
+IMGIEN^1^^1^1
+"KRN",8994,2621,2,1,1,0)
+^8994.021^1^1^3080331^^
+"KRN",8994,2621,2,1,1,1,0)
+IEN of the image record in the IMAGE file (#2005).
+"KRN",8994,2621,2,2,0)
+FLAGS^1^^^2
+"KRN",8994,2621,2,2,1,0)
+^8994.021^1^1^3080331^^
+"KRN",8994,2621,2,2,1,1,0)
+Reserved for future use.
+"KRN",8994,2621,2,3,0)
+PROPVALS^2^^^3
+"KRN",8994,2621,2,3,1,0)
+^^92^92^3090126^
+"KRN",8994,2621,2,3,1,1,0)
+Items of this list define new values of image properties. Each item has
+"KRN",8994,2621,2,3,1,2,0)
+3 pieces separated by '^':
+"KRN",8994,2621,2,3,1,3,0)
+ 
+"KRN",8994,2621,2,3,1,4,0)
+  ^01: Parameter name
+"KRN",8994,2621,2,3,1,5,0)
+  ^02: "" (empty)
+"KRN",8994,2621,2,3,1,6,0)
+  ^03: Value
+"KRN",8994,2621,2,3,1,7,0)
+ 
+"KRN",8994,2621,2,3,1,8,0)
+The following parameters are supported by this remote procedure:
+"KRN",8994,2621,2,3,1,9,0)
+ 
+"KRN",8994,2621,2,3,1,10,0)
+  CRTNDT^^{Date/time}
+"KRN",8994,2621,2,3,1,11,0)
+    Internal or external value for the CREATION DATE field (110)
+"KRN",8994,2621,2,3,1,12,0)
+    of the IMAGE file #2005.
+"KRN",8994,2621,2,3,1,13,0)
+ 
+"KRN",8994,2621,2,3,1,14,0)
+  GDESC^^{Text}
+"KRN",8994,2621,2,3,1,15,0)
+    Text for the SHORT DESCRIPTION field (10) of the file #2005.
+"KRN",8994,2621,2,3,1,16,0)
+ 
+"KRN",8994,2621,2,3,1,17,0)
+  ISTAT^^{Name or Code}
+"KRN",8994,2621,2,3,1,18,0)
+    Internal or external value for the STATUS field (113)
+"KRN",8994,2621,2,3,1,19,0)
+    of the file #2005.
+"KRN",8994,2621,2,3,1,20,0)
+ 
+"KRN",8994,2621,2,3,1,21,0)
+  ISTATRSN^^{Name or IEN}
+"KRN",8994,2621,2,3,1,22,0)
+    Name or IEN of a reason for image status change
+"KRN",8994,2621,2,3,1,23,0)
+    (see the STATUS REASON field (113.3) of the file #2005
+"KRN",8994,2621,2,3,1,24,0)
+    for details).
+"KRN",8994,2621,2,3,1,25,0)
+ 
+"KRN",8994,2621,2,3,1,26,0)
+  IXORIGIN^^{Name or Code}
+"KRN",8994,2621,2,3,1,27,0)
+    Internal or external value for the ORIGIN INDEX field (45)
+"KRN",8994,2621,2,3,1,28,0)
+    of the file #2005.
+"KRN",8994,2621,2,3,1,29,0)
+ 
+"KRN",8994,2621,2,3,1,30,0)
+  IXPKG^^{Name or Code}
+"KRN",8994,2621,2,3,1,31,0)
+    Internal or external value for the PACKAGE INDEX field (40)
+"KRN",8994,2621,2,3,1,32,0)
+    of the file #2005.
+"KRN",8994,2621,2,3,1,33,0)
+ 
+"KRN",8994,2621,2,3,1,34,0)
+  IXPROC^^{Name or IEN}
+"KRN",8994,2621,2,3,1,35,0)
+    Procedure/Event name or IEN (see the PROC/EVENT INDEX
+"KRN",8994,2621,2,3,1,36,0)
+    field (43) of the file #2005 for details).
+"KRN",8994,2621,2,3,1,37,0)
+ 
+"KRN",8994,2621,2,3,1,38,0)
+  IXSPEC^^{Name or IEN}
+"KRN",8994,2621,2,3,1,39,0)
+    Specialty/SubSpecialty name or IEN (see the SPEC/SUBSPEC
+"KRN",8994,2621,2,3,1,40,0)
+    INDEX field (44) of the file #2005 for details).
+"KRN",8994,2621,2,3,1,41,0)
+ 
+"KRN",8994,2621,2,3,1,42,0)
+  IXTYPE^^{Name or IEN}
+"KRN",8994,2621,2,3,1,43,0)
+    Image type name or IEN (see the TYPE INDEX field (42) of
+"KRN",8994,2621,2,3,1,44,0)
+    the file #2005 for details).
+"KRN",8994,2621,2,3,1,45,0)
+ 
+"KRN",8994,2621,2,3,1,46,0)
+  PARDF^^{File Number}
+"KRN",8994,2621,2,3,1,47,0)
+    Value for the PARENT DATA FILE# field (16) of
+"KRN",8994,2621,2,3,1,48,0)
+    the file #2005.
+"KRN",8994,2621,2,3,1,49,0)
+ 
+"KRN",8994,2621,2,3,1,50,0)
+  PARGRD0^^{IEN}
+"KRN",8994,2621,2,3,1,51,0)
+    Value for the PARENT GLOBAL ROOT D0 field (17) of
+"KRN",8994,2621,2,3,1,52,0)
+    the file #2005.
+"KRN",8994,2621,2,3,1,53,0)
+ 
+"KRN",8994,2621,2,3,1,54,0)
+  PARGRD1^^{IEN}
+"KRN",8994,2621,2,3,1,55,0)
+    Value for the PARENT GLOBAL ROOT D1 field (63) of
+"KRN",8994,2621,2,3,1,56,0)
+    the file #2005.
+"KRN",8994,2621,2,3,1,57,0)
+ 
+"KRN",8994,2621,2,3,1,58,0)
+  PARIPTR^^{IEN}
+"KRN",8994,2621,2,3,1,59,0)
+    Value for the PARENT DATA FILE IMAGE POINTER field (18)
+"KRN",8994,2621,2,3,1,60,0)
+    of the file #2005.
+"KRN",8994,2621,2,3,1,61,0)
+ 
+"KRN",8994,2621,2,3,1,62,0)
+  PROC^^{Name}
+"KRN",8994,2621,2,3,1,63,0)
+    Name of the procedure (see the PROCEDURE field (6) 
+"KRN",8994,2621,2,3,1,64,0)
+    of the file #2005 for details).
+"KRN",8994,2621,2,3,1,65,0)
+ 
+"KRN",8994,2621,2,3,1,66,0)
+  PROCDT^^{Date/time}
+"KRN",8994,2621,2,3,1,67,0)
+    Internal or external value for the PROCEDURE/EXAM 
+"KRN",8994,2621,2,3,1,68,0)
+    DATE/TIME field (15) of the IMAGE file #2005.
+"KRN",8994,2621,2,3,1,69,0)
+ 
+"KRN",8994,2621,2,3,1,70,0)
+  SENSIMG^^{Name or Code}
+"KRN",8994,2621,2,3,1,71,0)
+    Internal or external value for the CONTROLLED IMAGE field 
+"KRN",8994,2621,2,3,1,72,0)
+    (112) of the file #2005.
+"KRN",8994,2621,2,3,1,73,0)
+ 
+"KRN",8994,2621,2,3,1,74,0)
+For pointer type parameters, pure numeric values are always treated as
+"KRN",8994,2621,2,3,1,75,0)
+internal entry numbers (IEN).
+"KRN",8994,2621,2,3,1,76,0)
+ 
+"KRN",8994,2621,2,3,1,77,0)
+For sets of codes, the API checks for internal values first. So, if there
+"KRN",8994,2621,2,3,1,78,0)
+is an ambiguity between internal and external values, the parameter value
+"KRN",8994,2621,2,3,1,79,0)
+will be treated as the internal one.
+"KRN",8994,2621,2,3,1,80,0)
+ 
+"KRN",8994,2621,2,3,1,81,0)
+Parameters can be added to the list in any order. See comments preceding
+"KRN",8994,2621,2,3,1,82,0)
+the SETPROPS^MAGGA02 for more details.
+"KRN",8994,2621,2,3,1,83,0)
+ 
+"KRN",8994,2621,2,3,1,84,0)
+Example:
+"KRN",8994,2621,2,3,1,85,0)
+ 
+"KRN",8994,2621,2,3,1,86,0)
+  with RPCBroker.Param[2] do
+"KRN",8994,2621,2,3,1,87,0)
+    begin
+"KRN",8994,2621,2,3,1,88,0)
+      PType := list;
+"KRN",8994,2621,2,3,1,89,0)
+      Mult[1] := 'IXPKG^^RAD';
+"KRN",8994,2621,2,3,1,90,0)
+      Mult[2] := 'IXSPEC^^1';
+"KRN",8994,2621,2,3,1,91,0)
+      Mult[3] := 'IXORIGIN^^NON-VA';
+"KRN",8994,2621,2,3,1,92,0)
+    end;
+"KRN",8994,2621,2,"B","FLAGS",2)
+
+"KRN",8994,2621,2,"B","IMGIEN",1)
+
+"KRN",8994,2621,2,"B","PROPVALS",3)
+
+"KRN",8994,2621,2,"PARAMSEQ",1,1)
+
+"KRN",8994,2621,2,"PARAMSEQ",2,2)
+
+"KRN",8994,2621,2,"PARAMSEQ",3,3)
+
+"KRN",8994,2621,3,0)
+^8994.03^19^19^3080813^^^^
+"KRN",8994,2621,3,1,0)
+Zero value of the first '^'-piece of the Results[0] indicates that an
+"KRN",8994,2621,3,2,0)
+error occurred during the execution of the procedure. In this case, the
+"KRN",8994,2621,3,3,0)
+errors are returned in the Results array as shown below:
+"KRN",8994,2621,3,4,0)
+  
+"KRN",8994,2621,3,5,0)
+  Results[0]            Result descriptor
+"KRN",8994,2621,3,6,0)
+                          ^01: 0
+"KRN",8994,2621,3,7,0)
+                          ^02: Message
+"KRN",8994,2621,3,8,0)
+  
+"KRN",8994,2621,3,9,0)
+  Results[i]            Error descriptor
+"KRN",8994,2621,3,10,0)
+                          ^01: Error code
+"KRN",8994,2621,3,11,0)
+                          ^02: Message
+"KRN",8994,2621,3,12,0)
+                          ^03: Error location
+"KRN",8994,2621,3,13,0)
+                          ^04: Message type
+"KRN",8994,2621,3,14,0)
+ 
+"KRN",8994,2621,3,15,0)
+  Results[j]            Line of the additional info (optional)
+"KRN",8994,2621,3,16,0)
+                          ^01: ""
+"KRN",8994,2621,3,17,0)
+                          ^02: Text
+"KRN",8994,2621,3,18,0)
+  
+"KRN",8994,2621,3,19,0)
+Otherwise, '1^Ok' is returned in the Results[0].
+"MBREQ")
+0
+"ORD",16,8994)
+8994;16;1;;;;;;;RPCDEL^XPDIA1
+"ORD",16,8994,0)
+REMOTE PROCEDURE
+"PKG",454,-1)
+1^1
+"PKG",454,0)
+IMAGING^MAG^Imaging-V1 to release 
+"PKG",454,20,0)
+^9.402P^^
+"PKG",454,22,0)
+^9.49I^1^1
+"PKG",454,22,1,0)
+3.0^3020319^3020517^126
+"PKG",454,22,1,"PAH",1,0)
+350_RPC^3120726
+"QUES","XPF1",0)
+Y
+"QUES","XPF1","??")
+^D REP^XPDH
+"QUES","XPF1","A")
+Shall I write over your |FLAG| File
+"QUES","XPF1","B")
+YES
+"QUES","XPF1","M")
+D XPF1^XPDIQ
+"QUES","XPF2",0)
+Y
+"QUES","XPF2","??")
+^D DTA^XPDH
+"QUES","XPF2","A")
+Want my data |FLAG| yours
+"QUES","XPF2","B")
+YES
+"QUES","XPF2","M")
+D XPF2^XPDIQ
+"QUES","XPI1",0)
+YO
+"QUES","XPI1","??")
+^D INHIBIT^XPDH
+"QUES","XPI1","A")
+Want KIDS to INHIBIT LOGONs during the install
+"QUES","XPI1","B")
+NO
+"QUES","XPI1","M")
+D XPI1^XPDIQ
+"QUES","XPM1",0)
+PO^VA(200,:EM
+"QUES","XPM1","??")
+^D MG^XPDH
+"QUES","XPM1","A")
+Enter the Coordinator for Mail Group '|FLAG|'
+"QUES","XPM1","B")
+
+"QUES","XPM1","M")
+D XPM1^XPDIQ
+"QUES","XPO1",0)
+Y
+"QUES","XPO1","??")
+^D MENU^XPDH
+"QUES","XPO1","A")
+Want KIDS to Rebuild Menu Trees Upon Completion of Install
+"QUES","XPO1","B")
+NO
+"QUES","XPO1","M")
+D XPO1^XPDIQ
+"QUES","XPZ1",0)
+Y
+"QUES","XPZ1","??")
+^D OPT^XPDH
+"QUES","XPZ1","A")
+Want to DISABLE Scheduled Options, Menu Options, and Protocols
+"QUES","XPZ1","B")
+NO
+"QUES","XPZ1","M")
+D XPZ1^XPDIQ
+"QUES","XPZ2",0)
+Y
+"QUES","XPZ2","??")
+^D RTN^XPDH
+"QUES","XPZ2","A")
+Want to MOVE routines to other CPUs
+"QUES","XPZ2","B")
+NO
+"QUES","XPZ2","M")
+D XPZ2^XPDIQ
+"VER")
+8.0^22.0
+**END**
+**END**

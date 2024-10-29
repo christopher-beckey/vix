@@ -1,0 +1,56 @@
+﻿<Window x:Class="ImagingClient.Infrastructure.Views.LoginWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+        xmlns:Controls="clr-namespace:ImagingClient.Infrastructure.Controls" 
+        Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" Title="VistA Sign-on" Height="428" Width="674">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+        <Border Background="White" Margin="6,6,6,6" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="4" BorderBrush="Black" BorderThickness="1">
+            <TextBlock FontSize="12" TextWrapping="Wrap" Text="{Binding AlertText}" />
+        </Border>
+        <Label Height="23" HorizontalAlignment="Center" FontWeight="Bold" Foreground="Red" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="4" Content="{Binding Path=LoginErrorMessage}" />
+        <Label Grid.Row="2" Grid.Column="1" Content="AccessCode: " />
+
+        <!--Controls:SubmitTextBox Grid.Row="2" 
+                                Grid.Column="2" 
+                                Width="100"  
+                                Text="{Binding AccessCode, UpdateSourceTrigger=LostFocus}" 
+                                TabIndex="0" /-->
+
+
+        <PasswordBox Grid.Row="2" 
+                     Grid.Column="2" 
+                     Width="100" 
+                     Controls:PasswordBoxAssistant.BindPassword="true"  
+                     Controls:PasswordBoxAssistant.BoundPassword="{Binding Path=AccessCode, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                     TabIndex="0" />
+
+        <Button Grid.Row="2" Grid.Column="3" Content="OK" Width="80" Command="{Binding OnLogin}" HorizontalAlignment="Right" IsDefault="True" TabIndex="2" />
+
+        <Label Grid.Row="3" Grid.Column="1" Content="Verify Code:" />
+        <PasswordBox Grid.Row="3" 
+                     Grid.Column="2" 
+                     Width="100" 
+                     TabIndex="1"
+                     Controls:PasswordBoxAssistant.BindPassword="true"  
+                     Controls:PasswordBoxAssistant.BoundPassword="{Binding Path=VerifyCode, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                     />
+        
+        <Button Grid.Row="3" Grid.Column="3" Content="Cancel" Width="80" Command="{Binding OnCancelLogin}" HorizontalAlignment="Right"/>
+        <Image Margin="7,0,0,0" Grid.Row="1" Grid.RowSpan="3"  Name="image1" Stretch="None" HorizontalAlignment="Left" Source="/ImagingClient.Infrastructure;component/Images/VAlogo.jpg" />
+        <!-- CheckBox Grid.Row="4" Grid.Column="2" Grid.ColumnSpan="2" Content="Change Verify Code" Margin="0,6,0,10"  /-->
+
+    </Grid>
+</Window>

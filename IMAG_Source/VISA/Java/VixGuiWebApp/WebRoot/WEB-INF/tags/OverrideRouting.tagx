@@ -1,0 +1,73 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<jsp:root 
+ 	version="2.0"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:tags="urn:jsptagdir:/WEB-INF/tags"
+    xmlns:c="http://java.sun.com/jsp/jstl/core"
+    xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+    xmlns:business="http://imaging.med.va.gov/vix/business"
+>
+	<jsp:directive.tag import="gov.va.med.WellKnownOID"/>
+	
+	<jsp:useBean id="transactionContext" class="gov.va.med.imaging.transactioncontext.TransactionContextBean" scope="request"/>
+	<jsp:useBean id="developerRole" class="gov.va.med.imaging.exchange.MutableBoolean" scope="request"/>
+	
+	<c:set var="homeCommunityIdParam" value="${param.homeCommunityId}" />
+	<jsp:useBean id="homeCommunityIdParam" type="java.lang.String" />
+	<c:set var="repositoryIdParam" value="${param.repositoryId}" />
+	<jsp:useBean id="repositoryIdParam" type="java.lang.String" />
+
+	
+	<jsp:scriptlet>
+		developerRole.setValue( request.isUserInRole("developer") );
+	</jsp:scriptlet>
+	
+	<fieldset id="OverrideRouting">
+		<legend>
+		<c:choose>
+			<c:when test='${developerRole.value}'>VISA Redirection</c:when>
+			<c:otherwise>Repository</c:otherwise>
+		</c:choose>
+		</legend>
+		*Home Community ID: <c:out value="${homeCommunityIdParam}"/> 
+		<c:choose>
+			<c:when test='${developerRole.value}'>
+				<jsp:element name="select">
+					<jsp:attribute name="id">${homeCommunityIdParam}</jsp:attribute>
+					<jsp:attribute name="name">${homeCommunityIdParam}</jsp:attribute>
+					<jsp:attribute name="title">cssbody=[dvbdy1] cssheader=[dvhdr1] header=[Home Community ID] body=[The community to retrieve data from.]</jsp:attribute>
+					<jsp:body>
+						<c:forEach var="oid" items="${WellKnownOID.values}">
+							<jsp:text><![CDATA[<option ]]></jsp:text>
+							<c:if test="${oid.canonicalValue eq homeCommunityIdParam}">
+								<jsp:text><![CDATA[ selected="selected"]]></jsp:text>
+							</c:if>
+							<jsp:text><![CDATA[ value="]]></jsp:text>
+								${oid.canonicalValue}
+							<jsp:text><![CDATA[">]]></jsp:text>
+								${oid}
+							<jsp:text><![CDATA[</option>]]></jsp:text>
+						</c:forEach>
+					</jsp:body>
+				</jsp:element> 
+			</c:when>
+			<c:otherwise>
+				<jsp:text><![CDATA[<input type="text" id="communityId" name="communityId" size="32" readonly="readonly" ]]></jsp:text>
+				<jsp:text><![CDATA[value="]]></jsp:text>${homeCommunityEnum}
+				<jsp:text><![CDATA["/>]]></jsp:text> 
+			</c:otherwise>
+		</c:choose>
+
+		<br/> 
+		*Repository ID:
+		<jsp:text><![CDATA[<input type="text" id="repositoryId" name="repositoryId" ]]></jsp:text>
+		    <c:if test="${not developerRole.value}"> readonly="readonly"</c:if>
+		<jsp:text><![CDATA[value="]]></jsp:text>${repositoryIdParam}<jsp:text><![CDATA["/>]]></jsp:text>
+		<c:if test='${developerRole.value}'>
+			<p>
+			VISA Redirection is an advanced feature allowing development and operations personnel to direct requests to a specific
+			artifact repository.  This is NOT intended for use by clinical staff, it may produce intuitively incorrect results.  
+			</p> 
+		</c:if>
+	</fieldset>
+</jsp:root> 

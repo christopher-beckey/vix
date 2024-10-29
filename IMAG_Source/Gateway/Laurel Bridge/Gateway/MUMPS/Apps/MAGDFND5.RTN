@@ -1,0 +1,65 @@
+MAGDFND5 ;WOIFO/PMK - DICOM FIND Handler ; 07 Dec 2010 2:09 PM
+ ;;3.0;IMAGING;**10,30,54,49**;Mar 19, 2002;Build 2201;Jun 29, 2011
+ ;; Per VHA Directive 2004-038, this routine should not be modified.
+ ;; +---------------------------------------------------------------+
+ ;; | Property of the US Government.                                |
+ ;; | No permission to copy or redistribute this software is given. |
+ ;; | Use of unreleased versions of this software requires the user |
+ ;; | to execute a written test agreement with the VistA Imaging    |
+ ;; | Development Office of the Department of Veterans Affairs,     |
+ ;; | telephone (301) 734-0100.                                     |
+ ;; | The Food and Drug Administration classifies this software as  |
+ ;; | a medical device.  As such, it may not be changed in any way. |
+ ;; | Modifications to this software may result in an adulterated   |
+ ;; | medical device under 21CFR820, the use of which is considered |
+ ;; | to be a violation of US Federal Statutes.                     |
+ ;; +---------------------------------------------------------------+
+ ;;
+ Q
+ ;
+STUDY() ; get the worklist information from the study
+ N S0,S3
+ I '$D(^MAGDWLST(2006.56,DIVISION,1,STUDYIEN,0)) Q "-2,Study not on file"
+ S S0=$G(^MAGDWLST(2006.56,DIVISION,1,STUDYIEN,0)) Q:S0="" "-2,Study not on file"
+ S S3=$G(^MAGDWLST(2006.56,DIVISION,1,STUDYIEN,3))
+ S STUDYUID=$G(^MAGDWLST(2006.56,DIVISION,1,STUDYIEN,1))
+ I STUDYUID="" Q "-3,Study UID not on file"
+ S DFN=$P(S0,"^",2),STUDYID=$P(S0,"^",4)
+ S ACNUMB=$P(S0,"^",13) I ACNUMB="" S ACNUMB=$P(S0,"^",3)
+ S SCHSDYDT=$P(S0,"^",5),PROCIEN=$P(S0,"^",6),STATUS=$P(S0,"^",7)
+ S CPTCODE=$P(S0,"^",8),CPTSCHM=$P(S0,"^",14)
+ S PROCDESC=$G(^MAGDWLST(2006.56,DIVISION,1,STUDYIEN,4))
+ S CPTNAME=$G(^MAGDWLST(2006.56,DIVISION,1,STUDYIEN,5))
+ ;
+ S REQPRPRI=$P(S0,"^",9) ; requested procedure priority
+ S MODALITY=$P(S0,"^",10)
+ I $D(KEY("MODALITY")) I KEY("MODALITY")'="<unknown>" D
+ . S MODALITY=KEY("MODALITY") ; may be one of many, but not "<unknown>"
+ . Q
+ S REFDOC=$P(S3,"^",1),REFDOC=$TR(REFDOC,"~","^")
+ S ATTDOC=$P(S3,"^",2),ATTDOC=$TR(ATTDOC,"~","^")
+ S REQDOC=$P(S3,"^",3),REQDOC=$TR(REQDOC,"~","^")
+ S REQSVC=$P(S3,"^",4)
+ S RECIPENT=$P(S3,"^",5),RECIPENT=$TR(RECIPENT,"~","^")
+ ;
+ ; get date/time for first scheduled visit to clinic, if information is present
+ S SPSLOC=$O(^MAGDWLST(2006.56,DIVISION,1,STUDYIEN,7,"C",""))
+ I SPSLOC'="" D
+ . N DATETIME
+ . S DATETIME=$O(^MAGDWLST(2006.56,DIVISION,1,STUDYIEN,7,"C",SPSLOC,""))
+ . I DATETIME S SCHSDYDT=DATETIME
+ . Q
+ D EXTRACT^MAGDWLPB("S",DIVISION,STUDYIEN,"0040,2010") ; call back number
+ S CALLBACK=$$GETDATA^MAGDFCNS("OUT","0040,2010")
+ Q 0
+ ;
+PATIENT() ; get the patient demographics
+ N PAT
+ S PAT=$G(^MAGDWLST(2006.55,DIVISION,1,DFN,0))
+ I PAT="" Q "-1,Patient not on file"
+ S STATNUMB=$P(PAT,"^",1),PNAME=$TR($P(PAT,"^",2),"~","^")
+ S PID=$P(PAT,"^",3),DCMPID=$P(PAT,"^",4),DOB=$P(PAT,"^",5)
+ S SEX=$P(PAT,"^",6),RACE=$P(PAT,"^",8) ; piece 7 is short id
+ S PREGSTAT=$P(PAT,"^",9),WARD=$P(PAT,"^",10),ADDRESS=$P(PAT,"^",11)
+ S ICN=$P(PAT,"^",12),SITEDFN=$P(PAT,"^",13)
+ Q 0

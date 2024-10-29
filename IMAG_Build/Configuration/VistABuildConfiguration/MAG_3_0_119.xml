@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<build
+
+ name="MAG*3.0*119"
+
+ patch="119"
+
+ patchName="VistA Imaging V3.0 Patch 119 - VIX Maintenance"
+
+ envCheckRoutine=""
+
+ deleteEnvCheckRoutine=""
+
+ preInstallRoutine="PRE^MAGIP119"
+
+ deletePreInstalltRoutine="Yes"
+
+ postInstallRoutine="POS^MAGIP119"
+
+ deletePostInstallRoutine="Yes"
+
+ packageNumber="454"
+
+ packageName="IMAGING"
+
+ alphaBetaTesting="YES"
+
+ installationMessage="YES"
+
+ addressForUsageReporting="G.IMAGING DEVELOPMENT TEAM@FORUM.VA.GOV"
+
+ xmlns="http://va.gov/VistA/kids/manifest">
+
+<requiredBuilds>
+<!-- action= 0:Warning only;1:Don't install, remove global;2:Don't install, leave global;
+ -->
+<requiredBuild name="MAG*3.0*104" action="2"/>
+</requiredBuilds>
+<components>
+<dataDictionaries>
+<dataDictionary name="2005.1" export="DD_2005_1.KID"/>
+</dataDictionaries>
+<routines>
+      <routine name="MAGDQR20" export="MAGDQR20.RTN" />
+      <routine name="MAGDQR21" export="MAGDQR21.RTN" />
+      <routine name="MAGGDEV" export="MAGGDEV.RTN" />
+      <routine name="MAGGTUX5" export="MAGGTUX5.RTN" />
+      <routine name="MAGIP119" export="MAGIP119.RTN" />
+</routines>
+
+<rpcs>
+	<rpc name="MAG DOD GET STUDIES IEN" export="RPC_MAG_DOD_GET_STUDIES_IEN.KID"/>
+</rpcs>
+
+<options>
+</options>
+<securityKeys>
+</securityKeys>
+<protocols>
+</protocols>
+<templateLists>
+</templateLists>
+<hl7Applications>
+</hl7Applications>
+<hl7LogicalLinks>
+</hl7LogicalLinks>
+<parameterDefinitions>
+</parameterDefinitions>
+<parameterTemplates>
+</parameterTemplates>
+<printTemplates>
+</printTemplates>
+<sortTemplates>
+</sortTemplates>
+<inputTemplates>
+</inputTemplates>
+<forms>
+</forms>
+<functions>
+</functions>
+<dialogs>
+</dialogs>
+<bulletins>
+</bulletins>
+<mailGroups>
+</mailGroups>
+<helpFrames>
+</helpFrames>
+</components>
+</build>

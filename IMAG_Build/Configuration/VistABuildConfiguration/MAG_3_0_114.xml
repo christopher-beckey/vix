@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<build xmlns="http://va.gov/VistA/kids/manifest" name="MAG*3.0*114" patchName="Telereader Configurator" patch="114">
+  <components>
+    <securityKeys />
+    <parameterDefinitions />
+    <printTemplates />
+    <sortTemplates />
+    <menuOptions />
+    <rpcs>
+      <rpc export="RPC_1_MAG3_SET_TIMEOUT.KID" />
+      <rpc export="RPC_2_MAG3_TR_ACQ_SRVC_SETUP.KID" />
+      <rpc export="RPC_3_MAG3_TR_DHPS_LIST.KID" />
+      <rpc export="RPC_4_MAG3_TR_PDR_SRVC_SETUP.KID" />
+      <rpc export="RPC_5_MAG3_TR_READER_LIST.KID" />
+      <rpc export="RPC_6_MAG3_TR_READER_SETUP.KID" />
+      <rpc export="RPC_7_MAG3_TR_SITE_SETUP.KID" />
+      <rpc export="RPC_8_MAGDDR_GETS_ENTRY_DATA.KID" />
+      <rpc export="RPC_9_MAGDDR_LISTER.KID" />
+    </rpcs>
+    <dataDictionaries>
+      <dataDictionary export="DD_1_2006_1.KID" />
+      <dataDictionary export="DD_2_2006_5831.KID" />
+      <dataDictionary export="DD_3_2006_5841.KID" />
+      <dataDictionary export="DD_4_2006_5842.KID" />
+      <dataDictionary export="DD_5_2006_5843.KID" />
+    </dataDictionaries>
+    <hl7s />
+    <routines>
+      <routine export="MAGDDR.RTN" />
+      <routine export="MAGIP114.RTN" />
+      <routine export="MAGNTLR2.RTN" />
+      <routine export="MAGNTLRS.RTN" />
+    </routines>
+    <protocols />
+  </components>
+</build>

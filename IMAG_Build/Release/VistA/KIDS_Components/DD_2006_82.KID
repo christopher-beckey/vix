@@ -1,0 +1,844 @@
+KIDS Distribution saved on Jul 16, 2007@13:19:31
+Package for FILE named 2006.82
+**KIDS**:MAG*3.0*140^
+
+**INSTALL NAME**
+MAG*3.0*140
+"BLD",5952,0)
+MAG*3.0*140^^0^3070716^y
+"BLD",5952,1,0)
+^^4^4^3070716^
+"BLD",5952,1,1,0)
+This package contains a KIDS component
+"BLD",5952,1,2,0)
+for Running Baseline.
+"BLD",5952,1,3,0)
+ 
+"BLD",5952,1,4,0)
+This package transports the FileMan data dictionary named 2006.82.
+"BLD",5952,4,0)
+^9.64PA^2006.82^1
+"BLD",5952,4,2006.82,0)
+2006.82
+"BLD",5952,4,2006.82,222)
+y^y^f^^^^n
+"BLD",5952,4,"B",2006.82,2006.82)
+
+"BLD",5952,6.3)
+1
+"BLD",5952,"KRN",0)
+^9.67PA^8989.52^19
+"BLD",5952,"KRN",.4,0)
+.4
+"BLD",5952,"KRN",.401,0)
+.401
+"BLD",5952,"KRN",.402,0)
+.402
+"BLD",5952,"KRN",.403,0)
+.403
+"BLD",5952,"KRN",.5,0)
+.5
+"BLD",5952,"KRN",.84,0)
+.84
+"BLD",5952,"KRN",3.6,0)
+3.6
+"BLD",5952,"KRN",3.8,0)
+3.8
+"BLD",5952,"KRN",9.2,0)
+9.2
+"BLD",5952,"KRN",9.8,0)
+9.8
+"BLD",5952,"KRN",19,0)
+19
+"BLD",5952,"KRN",19.1,0)
+19.1
+"BLD",5952,"KRN",101,0)
+101
+"BLD",5952,"KRN",409.61,0)
+409.61
+"BLD",5952,"KRN",771,0)
+771
+"BLD",5952,"KRN",870,0)
+870
+"BLD",5952,"KRN",8989.51,0)
+8989.51
+"BLD",5952,"KRN",8989.52,0)
+8989.52
+"BLD",5952,"KRN",8994,0)
+8994
+"BLD",5952,"KRN","B",.4,.4)
+
+"BLD",5952,"KRN","B",.401,.401)
+
+"BLD",5952,"KRN","B",.402,.402)
+
+"BLD",5952,"KRN","B",.403,.403)
+
+"BLD",5952,"KRN","B",.5,.5)
+
+"BLD",5952,"KRN","B",.84,.84)
+
+"BLD",5952,"KRN","B",3.6,3.6)
+
+"BLD",5952,"KRN","B",3.8,3.8)
+
+"BLD",5952,"KRN","B",9.2,9.2)
+
+"BLD",5952,"KRN","B",9.8,9.8)
+
+"BLD",5952,"KRN","B",19,19)
+
+"BLD",5952,"KRN","B",19.1,19.1)
+
+"BLD",5952,"KRN","B",101,101)
+
+"BLD",5952,"KRN","B",409.61,409.61)
+
+"BLD",5952,"KRN","B",771,771)
+
+"BLD",5952,"KRN","B",870,870)
+
+"BLD",5952,"KRN","B",8989.51,8989.51)
+
+"BLD",5952,"KRN","B",8989.52,8989.52)
+
+"BLD",5952,"KRN","B",8994,8994)
+
+"FIA",2006.82)
+IMAGING WINDOWS SESSIONS
+"FIA",2006.82,0)
+^MAG(2006.82,
+"FIA",2006.82,0,0)
+2006.82IAO
+"FIA",2006.82,0,1)
+y^y^f^^^^n
+"FIA",2006.82,0,10)
+
+"FIA",2006.82,0,11)
+
+"FIA",2006.82,0,"RLRO")
+
+"FIA",2006.82,2006.82)
+0
+"FIA",2006.82,2006.821)
+0
+"FIA",2006.82,2006.823)
+0
+"IX",2006.82,2006.82,"ACDUZ",0)
+2006.82^ACDUZ^CR by DUZ and Start Time^R^^R^IR^I^2006.82^^^^^S
+"IX",2006.82,2006.82,"ACDUZ",1)
+S ^MAG(2006.82,"ACDUZ",$E(X(1),1,30),$E(X(2),1,30),DA)=""
+"IX",2006.82,2006.82,"ACDUZ",2)
+K ^MAG(2006.82,"ACDUZ",$E(X(1),1,30),$E(X(2),1,30),DA)
+"IX",2006.82,2006.82,"ACDUZ",2.5)
+K ^MAG(2006.82,"ACDUZ")
+"IX",2006.82,2006.82,"ACDUZ",11.1,0)
+^.114IA^2^2
+"IX",2006.82,2006.82,"ACDUZ",11.1,1,0)
+1^F^2006.82^1^30^1^F
+"IX",2006.82,2006.82,"ACDUZ",11.1,1,3)
+
+"IX",2006.82,2006.82,"ACDUZ",11.1,2,0)
+2^F^2006.82^2^30^2^F
+"IX",2006.82,2006.82,"ACDUZ",11.1,2,3)
+
+"IX",2006.82,2006.82,"APL",0)
+2006.82^APL^Place and Date^R^^R^IR^I^2006.82^^^^^S
+"IX",2006.82,2006.82,"APL",.1,0)
+^^1^1^3041027^
+"IX",2006.82,2006.82,"APL",.1,1,0)
+This allows sorting by Place and Start Time.
+"IX",2006.82,2006.82,"APL",1)
+S ^MAG(2006.82,"APL",X(1),X(2),DA)=""
+"IX",2006.82,2006.82,"APL",2)
+K ^MAG(2006.82,"APL",X(1),X(2),DA)
+"IX",2006.82,2006.82,"APL",2.5)
+K ^MAG(2006.82,"APL")
+"IX",2006.82,2006.82,"APL",11.1,0)
+^.114IA^2^2
+"IX",2006.82,2006.82,"APL",11.1,1,0)
+1^F^2006.82^.04^^1^F
+"IX",2006.82,2006.82,"APL",11.1,1,3)
+
+"IX",2006.82,2006.82,"APL",11.1,2,0)
+2^F^2006.82^2^^2^F
+"IX",2006.82,2006.82,"APL",11.1,2,3)
+
+"MBREQ")
+0
+"QUES","XPF1",0)
+Y
+"QUES","XPF1","??")
+^D REP^XPDH
+"QUES","XPF1","A")
+Shall I write over your |FLAG| File
+"QUES","XPF1","B")
+YES
+"QUES","XPF1","M")
+D XPF1^XPDIQ
+"QUES","XPF2",0)
+Y
+"QUES","XPF2","??")
+^D DTA^XPDH
+"QUES","XPF2","A")
+Want my data |FLAG| yours
+"QUES","XPF2","B")
+YES
+"QUES","XPF2","M")
+D XPF2^XPDIQ
+"QUES","XPI1",0)
+YO
+"QUES","XPI1","??")
+^D INHIBIT^XPDH
+"QUES","XPI1","A")
+Want KIDS to INHIBIT LOGONs during the install
+"QUES","XPI1","B")
+YES
+"QUES","XPI1","M")
+D XPI1^XPDIQ
+"QUES","XPM1",0)
+PO^VA(200,:EM
+"QUES","XPM1","??")
+^D MG^XPDH
+"QUES","XPM1","A")
+Enter the Coordinator for Mail Group '|FLAG|'
+"QUES","XPM1","B")
+
+"QUES","XPM1","M")
+D XPM1^XPDIQ
+"QUES","XPO1",0)
+Y
+"QUES","XPO1","??")
+^D MENU^XPDH
+"QUES","XPO1","A")
+Want KIDS to Rebuild Menu Trees Upon Completion of Install
+"QUES","XPO1","B")
+YES
+"QUES","XPO1","M")
+D XPO1^XPDIQ
+"QUES","XPZ1",0)
+Y
+"QUES","XPZ1","??")
+^D OPT^XPDH
+"QUES","XPZ1","A")
+Want to DISABLE Scheduled Options, Menu Options, and Protocols
+"QUES","XPZ1","B")
+YES
+"QUES","XPZ1","M")
+D XPZ1^XPDIQ
+"QUES","XPZ2",0)
+Y
+"QUES","XPZ2","??")
+^D RTN^XPDH
+"QUES","XPZ2","A")
+Want to MOVE routines to other CPUs
+"QUES","XPZ2","B")
+NO
+"QUES","XPZ2","M")
+D XPZ2^XPDIQ
+"SEC","^DIC",2006.82,2006.82,0,"DD")
+@
+"SEC","^DIC",2006.82,2006.82,0,"DEL")
+@
+"SEC","^DIC",2006.82,2006.82,0,"LAYGO")
+@
+"SEC","^DIC",2006.82,2006.82,0,"RD")
+@
+"SEC","^DIC",2006.82,2006.82,0,"WR")
+@
+"VER")
+8.0^22.0
+"^DD",2006.82,2006.82,0)
+FIELD^^30^20
+"^DD",2006.82,2006.82,0,"DDA")
+N
+"^DD",2006.82,2006.82,0,"DT")
+3021104
+"^DD",2006.82,2006.82,0,"ID",2)
+W "   ",$$FMTE^DILIBF($P(^(0),U,3),5)
+"^DD",2006.82,2006.82,0,"IX","AC",2006.82,2)
+
+"^DD",2006.82,2006.82,0,"IX","ACWRK",2006.82,4)
+
+"^DD",2006.82,2006.82,0,"IX","B",2006.82,.01)
+
+"^DD",2006.82,2006.82,0,"IX","C",2006.82,4)
+
+"^DD",2006.82,2006.82,0,"IX","D",2006.82,1)
+
+"^DD",2006.82,2006.82,0,"IX","E",2006.82,8)
+
+"^DD",2006.82,2006.82,0,"NM","IMAGING WINDOWS SESSIONS")
+
+"^DD",2006.82,2006.82,0,"PT",2006.81,10)
+
+"^DD",2006.82,2006.82,0,"VRPK")
+MAG
+"^DD",2006.82,2006.82,.01,0)
+NAME^RF^^0;1^K:$L(X)>30!($L(X)<3)!'(X'?1P.E) X
+"^DD",2006.82,2006.82,.01,1,0)
+^.1
+"^DD",2006.82,2006.82,.01,1,1,0)
+2006.82^B
+"^DD",2006.82,2006.82,.01,1,1,1)
+S ^MAG(2006.82,"B",$E(X,1,30),DA)=""
+"^DD",2006.82,2006.82,.01,1,1,2)
+K ^MAG(2006.82,"B",$E(X,1,30),DA)
+"^DD",2006.82,2006.82,.01,3)
+Answer must be 3-30 characters in length
+"^DD",2006.82,2006.82,.01,21,0)
+^.001^1^1^3001107^^^^
+"^DD",2006.82,2006.82,.01,21,1,0)
+The users name is entered in this field.
+"^DD",2006.82,2006.82,.01,"DT")
+3001010
+"^DD",2006.82,2006.82,.04,0)
+PLACE^P2006.1'^MAG(2006.1,^1;4^Q
+"^DD",2006.82,2006.82,.04,3)
+Select the Imaging Site Parameter entry where this image was captured.
+"^DD",2006.82,2006.82,.04,21,0)
+^^3^3^3050414^
+"^DD",2006.82,2006.82,.04,21,1,0)
+This field references the site parameter file. The Site parameter entry 
+"^DD",2006.82,2006.82,.04,21,2,0)
+defines all of the attributes of Vista Imaging local area network. This 
+"^DD",2006.82,2006.82,.04,21,3,0)
+includes facility user preferences, network write locations, etc.
+"^DD",2006.82,2006.82,.04,"DT")
+3050414
+"^DD",2006.82,2006.82,1,0)
+USER^P200'^VA(200,^0;2^Q
+"^DD",2006.82,2006.82,1,1,0)
+^.1^^-1
+"^DD",2006.82,2006.82,1,1,1,0)
+2006.82^D
+"^DD",2006.82,2006.82,1,1,1,1)
+S ^MAG(2006.82,"D",$E(X,1,30),DA)=""
+"^DD",2006.82,2006.82,1,1,1,2)
+K ^MAG(2006.82,"D",$E(X,1,30),DA)
+"^DD",2006.82,2006.82,1,1,1,"%D",0)
+^.101^1^1^3021120^^
+"^DD",2006.82,2006.82,1,1,1,"%D",1,0)
+Cross reference by User, to make it easy to list all sessions of a user for a day or range of days.
+"^DD",2006.82,2006.82,1,1,1,"DT")
+3001120
+"^DD",2006.82,2006.82,1,21,0)
+^.001^1^1^3001107^^^
+"^DD",2006.82,2006.82,1,21,1,0)
+Pointer to New Person file.  This is the user of the VistA Imaging Application.
+"^DD",2006.82,2006.82,1,"DT")
+3021120
+"^DD",2006.82,2006.82,2,0)
+START^D^^0;3^S %DT="ET" D ^%DT S X=Y K:Y<1 X
+"^DD",2006.82,2006.82,2,1,0)
+^.1^^-1
+"^DD",2006.82,2006.82,2,1,1,0)
+2006.82^AC^MUMPS
+"^DD",2006.82,2006.82,2,1,1,1)
+S ^MAG(2006.82,"AC","L"_X,DA)=""
+"^DD",2006.82,2006.82,2,1,1,2)
+K ^MAG(2006.82,"AC","L"_X,DA)
+"^DD",2006.82,2006.82,2,1,1,"%D",0)
+^^2^2^3001025^
+"^DD",2006.82,2006.82,2,1,1,"%D",1,0)
+This is the Start Time of the Session.  The Index is used by lookup routines to 
+"^DD",2006.82,2006.82,2,1,1,"%D",2,0)
+display a list sorted by the Start Time of the Imaging Session.
+"^DD",2006.82,2006.82,2,1,1,"DT")
+2980914
+"^DD",2006.82,2006.82,2,21,0)
+^.001^1^1^3001107^^^
+"^DD",2006.82,2006.82,2,21,1,0)
+This the Date Time (to the minute) when this imaging session started.
+"^DD",2006.82,2006.82,2,"DT")
+3041027
+"^DD",2006.82,2006.82,3,0)
+END^D^^0;4^S %DT="ET" D ^%DT S X=Y K:Y<1 X
+"^DD",2006.82,2006.82,3,21,0)
+^.001^1^1^3001107^^^
+"^DD",2006.82,2006.82,3,21,1,0)
+This is the Date Time (to the minute) when this imaging session ended.
+"^DD",2006.82,2006.82,3,"DT")
+2980508
+"^DD",2006.82,2006.82,4,0)
+WORKSTATION^P2006.81'^MAG(2006.81,^0;5^Q
+"^DD",2006.82,2006.82,4,1,0)
+^.1
+"^DD",2006.82,2006.82,4,1,1,0)
+2006.82^C
+"^DD",2006.82,2006.82,4,1,1,1)
+S ^MAG(2006.82,"C",$E(X,1,30),DA)=""
+"^DD",2006.82,2006.82,4,1,1,2)
+K ^MAG(2006.82,"C",$E(X,1,30),DA)
+"^DD",2006.82,2006.82,4,1,1,"DT")
+2980818
+"^DD",2006.82,2006.82,4,1,2,0)
+2006.82^ACWRK^MUMPS
+"^DD",2006.82,2006.82,4,1,2,1)
+S ^MAG(2006.82,"ACWRK",X,"L"_$P(^MAG(2006.82,DA,0),U,3),DA)=""
+"^DD",2006.82,2006.82,4,1,2,2)
+K ^MAG(2006.82,"ACWRK",X,"L"_$P(^MAG(2006.82,DA,0),U,3),DA)
+"^DD",2006.82,2006.82,4,1,2,"DT")
+2990304
+"^DD",2006.82,2006.82,4,21,0)
+^.001^1^1^3001025^^^
+"^DD",2006.82,2006.82,4,21,1,0)
+This is the workstation that was used for this Imaging session. 
+"^DD",2006.82,2006.82,4,"DT")
+2990304
+"^DD",2006.82,2006.82,5,0)
+PATIENT^P2'^DPT(^0;6^Q
+"^DD",2006.82,2006.82,5,1,0)
+^.1^^0
+"^DD",2006.82,2006.82,5,21,0)
+^.001^1^1^3001010^^
+"^DD",2006.82,2006.82,5,21,1,0)
+This is the last patient (or current patient) accessed during this Imaging session.
+"^DD",2006.82,2006.82,5,"DT")
+3001120
+"^DD",2006.82,2006.82,6,0)
+IMAGE^P2005'^MAG(2005,^0;7^Q
+"^DD",2006.82,2006.82,6,21,0)
+^.001^1^1^3001010^^
+"^DD",2006.82,2006.82,6,21,1,0)
+This is the last Image ( or current Image ) accessed during this Imaging session
+"^DD",2006.82,2006.82,6,"DT")
+2980724
+"^DD",2006.82,2006.82,7,0)
+USER SERVICE/SECTION^P49'^DIC(49,^0;8^Q
+"^DD",2006.82,2006.82,7,21,0)
+^.001^2^2^3001025^^
+"^DD",2006.82,2006.82,7,21,1,0)
+The Service/Section of the Imaging User.
+"^DD",2006.82,2006.82,7,21,2,0)
+Capturing this information provides statistical data to the site.
+"^DD",2006.82,2006.82,7,"DT")
+2980824
+"^DD",2006.82,2006.82,8,0)
+TRACKING ID^F^^0;9^K:$L(X)>40!($L(X)<3) X
+"^DD",2006.82,2006.82,8,1,0)
+^.1
+"^DD",2006.82,2006.82,8,1,1,0)
+2006.82^E
+"^DD",2006.82,2006.82,8,1,1,1)
+S ^MAG(2006.82,"E",$E(X,1,30),DA)=""
+"^DD",2006.82,2006.82,8,1,1,2)
+K ^MAG(2006.82,"E",$E(X,1,30),DA)
+"^DD",2006.82,2006.82,8,1,1,"%D",0)
+^^1^1^3020506^
+"^DD",2006.82,2006.82,8,1,1,"%D",1,0)
+Tracking ID associated with the Import.
+"^DD",2006.82,2006.82,8,1,1,"DT")
+3020506
+"^DD",2006.82,2006.82,8,3)
+Answer must be 3-40 characters in length.
+"^DD",2006.82,2006.82,8,21,0)
+^^2^2^3020506^
+"^DD",2006.82,2006.82,8,21,1,0)
+This is the tracking id sent by the Application doing the Import
+"^DD",2006.82,2006.82,8,21,2,0)
+It is a unique number, to be used for tracking purposes.
+"^DD",2006.82,2006.82,8,"DT")
+3020506
+"^DD",2006.82,2006.82,9,0)
+CLIENT VERSION^F^^0;10^K:$L(X)>20!($L(X)<3) X
+"^DD",2006.82,2006.82,9,3)
+Answer must be 3-20 characters in length.
+"^DD",2006.82,2006.82,9,21,0)
+^^1^1^3021029^
+"^DD",2006.82,2006.82,9,21,1,0)
+This is the version of the Client application.
+"^DD",2006.82,2006.82,9,"DT")
+3021029
+"^DD",2006.82,2006.82,9.2,0)
+HOST VERSION^F^^0;11^K:$L(X)>20!($L(X)<2) X
+"^DD",2006.82,2006.82,9.2,3)
+Answer must be 2-20 characters in length.
+"^DD",2006.82,2006.82,9.2,21,0)
+^^1^1^3021029^
+"^DD",2006.82,2006.82,9.2,21,1,0)
+This is the Version of Imaging installed on the Host.
+"^DD",2006.82,2006.82,9.2,"DT")
+3021029
+"^DD",2006.82,2006.82,9.4,0)
+OS VERSION^F^^0;12^K:$L(X)>20!($L(X)<3) X
+"^DD",2006.82,2006.82,9.4,3)
+Answer must be 3-20 characters in length.
+"^DD",2006.82,2006.82,9.4,21,0)
+^^2^2^3021029^
+"^DD",2006.82,2006.82,9.4,21,1,0)
+This is the Operating System Version installed 
+"^DD",2006.82,2006.82,9.4,21,2,0)
+on the Workstation.
+"^DD",2006.82,2006.82,9.4,"DT")
+3021029
+"^DD",2006.82,2006.82,10,0)
+PAT CT^NJ4,0^^1;1^K:+X'=X!(X>1000)!(X<0)!(X?.E1"."1N.N) X
+"^DD",2006.82,2006.82,10,3)
+This is a count of the Number of patients that were accessed during this imaging session.
+"^DD",2006.82,2006.82,10,21,0)
+^.001^1^1^3001025^^
+"^DD",2006.82,2006.82,10,21,1,0)
+This is the number of patients accessed during this imaging session.
+"^DD",2006.82,2006.82,10,"DT")
+2980724
+"^DD",2006.82,2006.82,11,0)
+IMAGE CT^NJ5,0^^1;2^K:+X'=X!(X>10000)!(X<0)!(X?.E1"."1N.N) X
+"^DD",2006.82,2006.82,11,3)
+This is a count of the number of images that were accessed during this imaging session.
+"^DD",2006.82,2006.82,11,21,0)
+^.001^5^5^3001025^^
+"^DD",2006.82,2006.82,11,21,1,0)
+This is the number of images viewed during the imaging session.
+"^DD",2006.82,2006.82,11,21,2,0)
+Images of all types are counted.  Documents, Full Color, EKGs and Radiology 
+"^DD",2006.82,2006.82,11,21,3,0)
+images.
+"^DD",2006.82,2006.82,11,21,4,0)
+Whenever a user clicks on an Abstract or Image list entry, and the images is 
+"^DD",2006.82,2006.82,11,21,5,0)
+displayed, it is counted.  Abstracts are not counted.
+"^DD",2006.82,2006.82,11,"DT")
+2980724
+"^DD",2006.82,2006.82,12,0)
+CAP CT^NJ6,0^^1;3^K:+X'=X!(X>999999)!(X<0)!(X?.E1"."1N.N) X
+"^DD",2006.82,2006.82,12,3)
+Number of images captured this session.
+"^DD",2006.82,2006.82,12,21,0)
+^.001^3^3^3001025^^
+"^DD",2006.82,2006.82,12,21,1,0)
+This is a count of the number of images captured during this Imaging session. 
+"^DD",2006.82,2006.82,12,21,2,0)
+All images are counted.  A Group of 10 is counted as 10.
+"^DD",2006.82,2006.82,12,21,3,0)
+Multipage Images are counted as 1 image.
+"^DD",2006.82,2006.82,12,"DT")
+2980824
+"^DD",2006.82,2006.82,13,0)
+START MODE^S^1:NORMAL;2:CPRS;3:IMPORT API;^1;6^Q
+"^DD",2006.82,2006.82,13,3)
+
+"^DD",2006.82,2006.82,13,21,0)
+^.001^5^5^3021107^^^^
+"^DD",2006.82,2006.82,13,21,1,0)
+Numerical Code to determine how the session started.
+"^DD",2006.82,2006.82,13,21,2,0)
+1 := normal start
+"^DD",2006.82,2006.82,13,21,3,0)
+2 := Started By CPRS
+"^DD",2006.82,2006.82,13,21,4,0)
+3 := Import API called.
+"^DD",2006.82,2006.82,13,21,5,0)
+Other codes to be determined later.
+"^DD",2006.82,2006.82,13,"DT")
+3021104
+"^DD",2006.82,2006.82,14,0)
+CONNECT TIME^NJ5,0^^1;5^K:+X'=X!(X>99999)!(X<0)!(X?.E1"."1N.N) X
+"^DD",2006.82,2006.82,14,3)
+Number of Minutes this session was connected.
+"^DD",2006.82,2006.82,14,21,0)
+^.001^2^2^3011219^^
+"^DD",2006.82,2006.82,14,21,1,0)
+Number of minutes this session was connected.
+"^DD",2006.82,2006.82,14,21,2,0)
+(If a session has no End Time... we don't set this field)
+"^DD",2006.82,2006.82,14,"DT")
+3011219
+"^DD",2006.82,2006.82,20,0)
+ACTIONS^2006.821A^^ACT;0
+"^DD",2006.82,2006.82,20,21,0)
+^.001^3^3^3021120^^^^
+"^DD",2006.82,2006.82,20,21,1,0)
+Certain actions are tracked in abbreviated form.
+"^DD",2006.82,2006.82,20,21,2,0)
+Patient selection, Image Capture, Image selection, Errors, Logon and Logoff.
+"^DD",2006.82,2006.82,20,21,3,0)
+This is mainly for debugging purposes.
+"^DD",2006.82,2006.82,20,23,0)
+^.001^9^9^3021120^^^^
+"^DD",2006.82,2006.82,20,23,1,0)
+The information in this 'ACTION' multiple can be viewed by using the 
+"^DD",2006.82,2006.82,20,23,2,0)
+MAGSYS.EXE utility program.  This is mainly used for debugging information.
+"^DD",2006.82,2006.82,20,23,3,0)
+//
+"^DD",2006.82,2006.82,20,23,4,0)
+(an example of the display)
+"^DD",2006.82,2006.82,20,23,5,0)
+LOGON^^^^3001010.1213
+"^DD",2006.82,2006.82,20,23,6,0)
+PAT^99999^^^3001010.1213
+"^DD",2006.82,2006.82,20,23,7,0)
+IMG^99999^12345^Anatomic Diagram^3001010.1214
+"^DD",2006.82,2006.82,20,23,8,0)
+ERROR^99999^12345^description of error^3001010.1214
+"^DD",2006.82,2006.82,20,23,9,0)
+LOGOFF^^^^3001010.1215
+"^DD",2006.82,2006.82,30,0)
+ERRORS^2006.823A^^ERR;0
+"^DD",2006.82,2006.82,30,21,0)
+^.001^4^4^3001025^^^
+"^DD",2006.82,2006.82,30,21,1,0)
+Errors that occur in 'M' routines are tracked for the Imaging session.  The
+"^DD",2006.82,2006.82,30,21,2,0)
+Error description is saved, and the Date/Time the error occured.
+"^DD",2006.82,2006.82,30,21,3,0)
+By using the MAGSYS.EXE Utility (for Imaging System Managers) the sequence of 
+"^DD",2006.82,2006.82,30,21,4,0)
+actions that preceded the Error can be viewed.
+"^DD",2006.82,2006.821,0)
+ACTIONS SUB-FIELD^^13^14
+"^DD",2006.82,2006.821,0,"DT")
+3021023
+"^DD",2006.82,2006.821,0,"NM","ACTIONS")
+
+"^DD",2006.82,2006.821,0,"UP")
+2006.82
+"^DD",2006.82,2006.821,.01,0)
+ACTION^F^^0;1^K:$L(X)>30!($L(X)<1) X
+"^DD",2006.82,2006.821,.01,1,0)
+^.1^^0
+"^DD",2006.82,2006.821,.01,3)
+Answer must be 1-30 characters in length.
+"^DD",2006.82,2006.821,.01,21,0)
+^.001^9^9^3021108^^^^
+"^DD",2006.82,2006.821,.01,21,1,0)
+The Action field is an abbreviated form of the actual information.  The 
+"^DD",2006.82,2006.821,.01,21,2,0)
+information in the field can be used for debugging purposes.
+"^DD",2006.82,2006.821,.01,21,3,0)
+The information contains the Action, DFN, MAGIEN, Desc, Date/Time
+"^DD",2006.82,2006.821,.01,21,4,0)
+Possible actions are :
+"^DD",2006.82,2006.821,.01,21,5,0)
+   LOGON,PAT (patient selected), IMG (image viewed),
+"^DD",2006.82,2006.821,.01,21,6,0)
+   CAP (image captured), MOD (image data modified), ERROR ('M' error occurred)
+"^DD",2006.82,2006.821,.01,21,7,0)
+   and LOGOFF.
+"^DD",2006.82,2006.821,.01,21,8,0)
+
+"^DD",2006.82,2006.821,.01,21,9,0)
+  IMPORT, Data, Result, and WSCheck are additional actions.
+"^DD",2006.82,2006.821,.01,"DT")
+2980827
+"^DD",2006.82,2006.821,1,0)
+DFN^F^^0;2^K:$L(X)>11!($L(X)<1) X
+"^DD",2006.82,2006.821,1,3)
+Answer must be 1-11 characters in length
+"^DD",2006.82,2006.821,1,21,0)
+^^2^2^3021108^
+"^DD",2006.82,2006.821,1,21,1,0)
+This is the internal entry number that relates the Imaging action to 
+"^DD",2006.82,2006.821,1,21,2,0)
+the Vista Patient file.
+"^DD",2006.82,2006.821,1,"DT")
+3021023
+"^DD",2006.82,2006.821,2,0)
+Image IEN^F^^0;3^K:$L(X)>11!($L(X)<1) X
+"^DD",2006.82,2006.821,2,3)
+Answer must be 1-11 characters in length
+"^DD",2006.82,2006.821,2,21,0)
+^^2^2^3021108^
+"^DD",2006.82,2006.821,2,21,1,0)
+This is the internal entry number of the Vista Image file (#2005) that
+"^DD",2006.82,2006.821,2,21,2,0)
+relates the ACTION activity to the Image.
+"^DD",2006.82,2006.821,2,"DT")
+3021023
+"^DD",2006.82,2006.821,3,0)
+Procedure^F^^0;4^K:$L(X)>64!($L(X)<1) X
+"^DD",2006.82,2006.821,3,3)
+Answer must be 1-64 characters in length
+"^DD",2006.82,2006.821,3,21,0)
+^^2^2^3021108^
+"^DD",2006.82,2006.821,3,21,1,0)
+This is the Imaging application or modality that resulted in this
+"^DD",2006.82,2006.821,3,21,2,0)
+session action.
+"^DD",2006.82,2006.821,3,"DT")
+3021023
+"^DD",2006.82,2006.821,4,0)
+TIMESTAMP^F^^0;5^K:$L(X)>26!($L(X)<1) X
+"^DD",2006.82,2006.821,4,3)
+Answer must be 1-26 characters in length
+"^DD",2006.82,2006.821,4,21,0)
+^^1^1^3021108^
+"^DD",2006.82,2006.821,4,21,1,0)
+This is the time and date that this action event occurred.
+"^DD",2006.82,2006.821,4,"DT")
+3021023
+"^DD",2006.82,2006.821,5,0)
+V-RAD IMAGES^F^^0;6^K:$L(X)>9!($L(X)<1) X
+"^DD",2006.82,2006.821,5,3)
+Answer must be 1-9 characters in length
+"^DD",2006.82,2006.821,5,21,0)
+^^1^1^3021108^
+"^DD",2006.82,2006.821,5,21,1,0)
+This is the number of images associated with this VistaRad action.
+"^DD",2006.82,2006.821,5,"DT")
+3021023
+"^DD",2006.82,2006.821,6,0)
+V-RAD PATIENTS^F^^0;7^K:$L(X)>9!($L(X)<1) X
+"^DD",2006.82,2006.821,6,3)
+Answer must be 1-9 characters in length
+"^DD",2006.82,2006.821,6,21,0)
+^^1^1^3021108^
+"^DD",2006.82,2006.821,6,21,1,0)
+This is the number of patients associated with this VistaRad action.
+"^DD",2006.82,2006.821,6,"DT")
+3021023
+"^DD",2006.82,2006.821,7,0)
+V-RAD USER TYPE^F^^0;8^K:$L(X)>18!($L(X)<1) X
+"^DD",2006.82,2006.821,7,3)
+Answer must be 1-18 characters in length
+"^DD",2006.82,2006.821,7,21,0)
+^^1^1^3021108^
+"^DD",2006.82,2006.821,7,21,1,0)
+This is the VistaRad user type associated with this action.
+"^DD",2006.82,2006.821,7,"DT")
+3021023
+"^DD",2006.82,2006.821,8,0)
+V-RAD REMOTE READ FLAG^S^1:Yes;0:No;^0;9^Q
+"^DD",2006.82,2006.821,8,3)
+Null is the default for local V-Rad user.
+"^DD",2006.82,2006.821,8,21,0)
+^.001^2^2^3021120^^
+"^DD",2006.82,2006.821,8,21,1,0)
+This is the flag that specifies whether this VistaRad action occurred
+"^DD",2006.82,2006.821,8,21,2,0)
+locally or remotely.
+"^DD",2006.82,2006.821,8,"DT")
+3021023
+"^DD",2006.82,2006.821,9,0)
+RESOLUTION HEIGHT^F^^0;10^K:$L(X)>11!($L(X)<1) X
+"^DD",2006.82,2006.821,9,3)
+Answer must be 1-11 characters in length
+"^DD",2006.82,2006.821,9,21,0)
+^^1^1^3021108^
+"^DD",2006.82,2006.821,9,21,1,0)
+This is the monitor resolution height settings at the action event.
+"^DD",2006.82,2006.821,9,"DT")
+3021023
+"^DD",2006.82,2006.821,10,0)
+RESOLUTION WIDTH^F^^0;11^K:$L(X)>11!($L(X)<1) X
+"^DD",2006.82,2006.821,10,3)
+Answer must be 1-11 characters in length
+"^DD",2006.82,2006.821,10,21,0)
+^^1^1^3021108^
+"^DD",2006.82,2006.821,10,21,1,0)
+This is the monitor resolution width at the action event.
+"^DD",2006.82,2006.821,10,"DT")
+3021023
+"^DD",2006.82,2006.821,11,0)
+RESOLUTION BITS^F^^0;12^K:$L(X)>4!($L(X)<1) X
+"^DD",2006.82,2006.821,11,3)
+Answer must be 1-4 characters in length
+"^DD",2006.82,2006.821,11,21,0)
+^^1^1^3021108^
+"^DD",2006.82,2006.821,11,21,1,0)
+This is the monitor resolution bit settings at the action event.
+"^DD",2006.82,2006.821,11,"DT")
+3021023
+"^DD",2006.82,2006.821,12,0)
+DISPLAY TYPE^S^CL:Clinical Quality;ND:Non-Dome;VR:VistaRad Quality;TC:Thin Client;^0;13^Q
+"^DD",2006.82,2006.821,12,3)
+CL (Default) is Clinical Quality, ND is VistaRAD non-dome, etc... 
+"^DD",2006.82,2006.821,12,21,0)
+^^1^1^3021108^
+"^DD",2006.82,2006.821,12,21,1,0)
+This field defines the monitor settings resolution quality at the action event.
+"^DD",2006.82,2006.821,12,"DT")
+3021023
+"^DD",2006.82,2006.821,13,0)
+ACTION PARAMETER^F^^1;1^K:$L(X)>250!($L(X)<1) X
+"^DD",2006.82,2006.821,13,3)
+Answer must be 1-250 characters in length
+"^DD",2006.82,2006.821,13,21,0)
+^^1^1^3021108^
+"^DD",2006.82,2006.821,13,21,1,0)
+This is the data parameters used for Data and Result action events.
+"^DD",2006.82,2006.821,13,"DT")
+3021023
+"^DD",2006.82,2006.823,0)
+ERRORS SUB-FIELD^^.01^1
+"^DD",2006.82,2006.823,0,"DT")
+2980724
+"^DD",2006.82,2006.823,0,"NM","ERRORS")
+
+"^DD",2006.82,2006.823,0,"UP")
+2006.82
+"^DD",2006.82,2006.823,.01,0)
+ERRORS^F^^0;1^K:$L(X)>60!($L(X)<3) X
+"^DD",2006.82,2006.823,.01,1,0)
+^.1^^0
+"^DD",2006.82,2006.823,.01,3)
+These errors happened during this imaging session
+"^DD",2006.82,2006.823,.01,21,0)
+^.001^1^1^3001010^^^
+"^DD",2006.82,2006.823,.01,21,1,0)
+If 'M' errors occur during this imaging session, they are logged here.
+"^DD",2006.82,2006.823,.01,"DT")
+2980724
+"^DIC",2006.82,2006.82,0)
+IMAGING WINDOWS SESSIONS^2006.82
+"^DIC",2006.82,2006.82,0,"GL")
+^MAG(2006.82,
+"^DIC",2006.82,2006.82,"%",0)
+^1.005^^0
+"^DIC",2006.82,2006.82,"%D",0)
+^^25^25^3010620^
+"^DIC",2006.82,2006.82,"%D",1,0)
+ +---------------------------------------------------------------+
+"^DIC",2006.82,2006.82,"%D",2,0)
+ |                                                               |
+"^DIC",2006.82,2006.82,"%D",3,0)
+ | Property of the US Government.                                |
+"^DIC",2006.82,2006.82,"%D",4,0)
+ | No permission to copy or redistribute this software is given. |
+"^DIC",2006.82,2006.82,"%D",5,0)
+ | Use of unreleased versions of this software requires the user |
+"^DIC",2006.82,2006.82,"%D",6,0)
+ | to execute a written test agreement with the VistA Imaging    |
+"^DIC",2006.82,2006.82,"%D",7,0)
+ | Development Office of the Department of Veterans Affairs,     |
+"^DIC",2006.82,2006.82,"%D",8,0)
+ | telephone (301) 734-0100.                                     |
+"^DIC",2006.82,2006.82,"%D",9,0)
+ |                                                               |
+"^DIC",2006.82,2006.82,"%D",10,0)
+ | The Food and Drug Administration classifies this software as  |
+"^DIC",2006.82,2006.82,"%D",11,0)
+ | a medical device.  As such, it may not be changed in any way. |
+"^DIC",2006.82,2006.82,"%D",12,0)
+ | Modifications to this software may result in an adulterated   |
+"^DIC",2006.82,2006.82,"%D",13,0)
+ | medical device under 21CFR820, the use of which is considered |
+"^DIC",2006.82,2006.82,"%D",14,0)
+ | to be a violation of US Federal Statutes.                     |
+"^DIC",2006.82,2006.82,"%D",15,0)
+ |                                                               |
+"^DIC",2006.82,2006.82,"%D",16,0)
+ +---------------------------------------------------------------+
+"^DIC",2006.82,2006.82,"%D",17,0)
+ 
+"^DIC",2006.82,2006.82,"%D",18,0)
+  The Imaging Windows Sessions File (2006.82) and the Imaging Windows 
+"^DIC",2006.82,2006.82,"%D",19,0)
+Workstations File (2006.81) have fields to store information about each
+"^DIC",2006.82,2006.82,"%D",20,0)
+imaging session that connects to this site.
+"^DIC",2006.82,2006.82,"%D",21,0)
+  The information is intended to be used to produce statistical reports,
+"^DIC",2006.82,2006.82,"%D",22,0)
+track workstation usage, Imaging version information for each workstation 
+"^DIC",2006.82,2006.82,"%D",23,0)
+and more.
+"^DIC",2006.82,2006.82,"%D",24,0)
+  This file also tracks errors that occur during an Imaging Session, 
+"^DIC",2006.82,2006.82,"%D",25,0)
+and certain actions that occur on the workstation.  
+"^DIC",2006.82,"B","IMAGING WINDOWS SESSIONS",2006.82)
+
+**END**
+**END**

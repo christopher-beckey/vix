@@ -1,0 +1,258 @@
+KIDS Distribution saved on Jul 17, 2007@10:43:43
+Package for RPC named MAGGRADPTR
+**KIDS**:MAG*3.0*305^
+
+**INSTALL NAME**
+MAG*3.0*305
+"BLD",6117,0)
+MAG*3.0*305^^0^3070717^y
+"BLD",6117,1,0)
+^^4^4^3070717^
+"BLD",6117,1,1,0)
+This package contains a KIDS component
+"BLD",6117,1,2,0)
+for Running Baseline.
+"BLD",6117,1,3,0)
+ 
+"BLD",6117,1,4,0)
+This package transports the remote procedure call named MAGGRADPTR.
+"BLD",6117,4,0)
+^9.64PA^^
+"BLD",6117,6.3)
+1
+"BLD",6117,"KRN",0)
+^9.67PA^8989.52^19
+"BLD",6117,"KRN",.4,0)
+.4
+"BLD",6117,"KRN",.401,0)
+.401
+"BLD",6117,"KRN",.402,0)
+.402
+"BLD",6117,"KRN",.403,0)
+.403
+"BLD",6117,"KRN",.5,0)
+.5
+"BLD",6117,"KRN",.84,0)
+.84
+"BLD",6117,"KRN",3.6,0)
+3.6
+"BLD",6117,"KRN",3.8,0)
+3.8
+"BLD",6117,"KRN",9.2,0)
+9.2
+"BLD",6117,"KRN",9.8,0)
+9.8
+"BLD",6117,"KRN",19,0)
+19
+"BLD",6117,"KRN",19.1,0)
+19.1
+"BLD",6117,"KRN",101,0)
+101
+"BLD",6117,"KRN",409.61,0)
+409.61
+"BLD",6117,"KRN",771,0)
+771
+"BLD",6117,"KRN",870,0)
+870
+"BLD",6117,"KRN",8989.51,0)
+8989.51
+"BLD",6117,"KRN",8989.52,0)
+8989.52
+"BLD",6117,"KRN",8994,0)
+8994
+"BLD",6117,"KRN",8994,"NM",0)
+^9.68A^1^1
+"BLD",6117,"KRN",8994,"NM",1,0)
+MAGGRADPTR^^0
+"BLD",6117,"KRN",8994,"NM","B","MAGGRADPTR",1)
+
+"BLD",6117,"KRN","B",.4,.4)
+
+"BLD",6117,"KRN","B",.401,.401)
+
+"BLD",6117,"KRN","B",.402,.402)
+
+"BLD",6117,"KRN","B",.403,.403)
+
+"BLD",6117,"KRN","B",.5,.5)
+
+"BLD",6117,"KRN","B",.84,.84)
+
+"BLD",6117,"KRN","B",3.6,3.6)
+
+"BLD",6117,"KRN","B",3.8,3.8)
+
+"BLD",6117,"KRN","B",9.2,9.2)
+
+"BLD",6117,"KRN","B",9.8,9.8)
+
+"BLD",6117,"KRN","B",19,19)
+
+"BLD",6117,"KRN","B",19.1,19.1)
+
+"BLD",6117,"KRN","B",101,101)
+
+"BLD",6117,"KRN","B",409.61,409.61)
+
+"BLD",6117,"KRN","B",771,771)
+
+"BLD",6117,"KRN","B",870,870)
+
+"BLD",6117,"KRN","B",8989.51,8989.51)
+
+"BLD",6117,"KRN","B",8989.52,8989.52)
+
+"BLD",6117,"KRN","B",8994,8994)
+
+"KRN",8994,410,-1)
+0^1
+"KRN",8994,410,0)
+MAGGRADPTR^MAGPTR^MAGGTRA^1^R
+"KRN",8994,410,1,0)
+^8994.01^2^2^3000517^^
+"KRN",8994,410,1,1,0)
+Files the image pointer into the Radiology package and the Radiology
+"KRN",8994,410,1,2,0)
+pointers into the Imaging package.
+"KRN",8994,410,2,0)
+^8994.02A^3^3
+"KRN",8994,410,2,1,0)
+XDUZ^1^30^1^1
+"KRN",8994,410,2,1,1,0)
+^8994.021^2^2^3000517^^^^
+"KRN",8994,410,2,1,1,1,0)
+Not being used anymore, kept for backward compatibility.
+"KRN",8994,410,2,1,1,2,0)
+DUZ of user.   
+"KRN",8994,410,2,2,0)
+MAGIEN^1^30^1^2
+"KRN",8994,410,2,2,1,0)
+^8994.021^1^1^3000517^^^
+"KRN",8994,410,2,2,1,1,0)
+Internal entry number of Image File entry  ^MAG(2005,
+"KRN",8994,410,2,3,0)
+DATA^1^255^1^3
+"KRN",8994,410,2,3,1,0)
+^8994.021^11^11^3000517^^
+"KRN",8994,410,2,3,1,1,0)
+First "^" piece is MAGIEN, The IMAGE File Internal number.  ^MAG(2005,
+"KRN",8994,410,2,3,1,2,0)
+Next  "^" pieces are the same RAD DATA that was sent in the 
+"KRN",8994,410,2,3,1,3,0)
+ RPC Call MAGGRADLIST, as the return Array.
+"KRN",8994,410,2,3,1,4,0)
+    RADFN_"^"_RADTI_"^"_RACNI_"^"_RANME_"^"_RASSN_"^"
+"KRN",8994,410,2,3,1,5,0)
+   _RADATE_"^"_RADTE_"^"_RACN_"^"_RAPRC_"^"_RARPT_"^"_RAST
+"KRN",8994,410,2,3,1,6,0)
+The same DATA that the RAD procedure RAPTLU saved in ^TMP($J,"RAEX",RACNT)
+"KRN",8994,410,2,3,1,7,0)
+ 
+"KRN",8994,410,2,3,1,8,0)
+We saved the variables that the RAD Routine RAPTLU set up when creating
+"KRN",8994,410,2,3,1,9,0)
+the list of Rad Exams for the patient. We send it back as input here,
+"KRN",8994,410,2,3,1,10,0)
+Initialize the variables so when we need to call any Rad Procedure, we
+"KRN",8994,410,2,3,1,11,0)
+have what we need.
+"KRN",8994,410,2,"B","DATA",3)
+
+"KRN",8994,410,2,"B","DUZ",1)
+
+"KRN",8994,410,2,"B","MAGIEN",2)
+
+"KRN",8994,410,2,"B","XDUZ",1)
+
+"KRN",8994,410,2,"PARAMSEQ",1,1)
+
+"KRN",8994,410,2,"PARAMSEQ",2,2)
+
+"KRN",8994,410,2,"PARAMSEQ",3,3)
+
+"KRN",8994,410,3,0)
+^8994.03^2^2^3000517^^
+"KRN",8994,410,3,1,0)
+If successful,   '1^message'
+"KRN",8994,410,3,2,0)
+If unsuccessful, '0^message'
+"MBREQ")
+0
+"ORD",16,8994)
+8994;16;1;;;;;;;RPCDEL^XPDIA1
+"ORD",16,8994,0)
+REMOTE PROCEDURE
+"QUES","XPF1",0)
+Y
+"QUES","XPF1","??")
+^D REP^XPDH
+"QUES","XPF1","A")
+Shall I write over your |FLAG| File
+"QUES","XPF1","B")
+YES
+"QUES","XPF1","M")
+D XPF1^XPDIQ
+"QUES","XPF2",0)
+Y
+"QUES","XPF2","??")
+^D DTA^XPDH
+"QUES","XPF2","A")
+Want my data |FLAG| yours
+"QUES","XPF2","B")
+YES
+"QUES","XPF2","M")
+D XPF2^XPDIQ
+"QUES","XPI1",0)
+YO
+"QUES","XPI1","??")
+^D INHIBIT^XPDH
+"QUES","XPI1","A")
+Want KIDS to INHIBIT LOGONs during the install
+"QUES","XPI1","B")
+YES
+"QUES","XPI1","M")
+D XPI1^XPDIQ
+"QUES","XPM1",0)
+PO^VA(200,:EM
+"QUES","XPM1","??")
+^D MG^XPDH
+"QUES","XPM1","A")
+Enter the Coordinator for Mail Group '|FLAG|'
+"QUES","XPM1","B")
+
+"QUES","XPM1","M")
+D XPM1^XPDIQ
+"QUES","XPO1",0)
+Y
+"QUES","XPO1","??")
+^D MENU^XPDH
+"QUES","XPO1","A")
+Want KIDS to Rebuild Menu Trees Upon Completion of Install
+"QUES","XPO1","B")
+YES
+"QUES","XPO1","M")
+D XPO1^XPDIQ
+"QUES","XPZ1",0)
+Y
+"QUES","XPZ1","??")
+^D OPT^XPDH
+"QUES","XPZ1","A")
+Want to DISABLE Scheduled Options, Menu Options, and Protocols
+"QUES","XPZ1","B")
+YES
+"QUES","XPZ1","M")
+D XPZ1^XPDIQ
+"QUES","XPZ2",0)
+Y
+"QUES","XPZ2","??")
+^D RTN^XPDH
+"QUES","XPZ2","A")
+Want to MOVE routines to other CPUs
+"QUES","XPZ2","B")
+NO
+"QUES","XPZ2","M")
+D XPZ2^XPDIQ
+"VER")
+8.0^22.0
+**END**
+**END**

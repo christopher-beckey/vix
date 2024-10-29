@@ -1,0 +1,354 @@
+KIDS Distribution saved on Jul 16, 2007@13:10:43
+Package for FILE named 2006.596
+**KIDS**:MAG*3.0*123^
+
+**INSTALL NAME**
+MAG*3.0*123
+"BLD",5935,0)
+MAG*3.0*123^^0^3070716^y
+"BLD",5935,1,0)
+^^4^4^3070716^
+"BLD",5935,1,1,0)
+This package contains a KIDS component
+"BLD",5935,1,2,0)
+for Running Baseline.
+"BLD",5935,1,3,0)
+ 
+"BLD",5935,1,4,0)
+This package transports the FileMan data dictionary named 2006.596.
+"BLD",5935,4,0)
+^9.64PA^2006.596^1
+"BLD",5935,4,2006.596,0)
+2006.596
+"BLD",5935,4,2006.596,222)
+y^y^f^^^^n
+"BLD",5935,4,"B",2006.596,2006.596)
+
+"BLD",5935,6.3)
+1
+"BLD",5935,"KRN",0)
+^9.67PA^8989.52^19
+"BLD",5935,"KRN",.4,0)
+.4
+"BLD",5935,"KRN",.401,0)
+.401
+"BLD",5935,"KRN",.402,0)
+.402
+"BLD",5935,"KRN",.403,0)
+.403
+"BLD",5935,"KRN",.5,0)
+.5
+"BLD",5935,"KRN",.84,0)
+.84
+"BLD",5935,"KRN",3.6,0)
+3.6
+"BLD",5935,"KRN",3.8,0)
+3.8
+"BLD",5935,"KRN",9.2,0)
+9.2
+"BLD",5935,"KRN",9.8,0)
+9.8
+"BLD",5935,"KRN",19,0)
+19
+"BLD",5935,"KRN",19.1,0)
+19.1
+"BLD",5935,"KRN",101,0)
+101
+"BLD",5935,"KRN",409.61,0)
+409.61
+"BLD",5935,"KRN",771,0)
+771
+"BLD",5935,"KRN",870,0)
+870
+"BLD",5935,"KRN",8989.51,0)
+8989.51
+"BLD",5935,"KRN",8989.52,0)
+8989.52
+"BLD",5935,"KRN",8994,0)
+8994
+"BLD",5935,"KRN","B",.4,.4)
+
+"BLD",5935,"KRN","B",.401,.401)
+
+"BLD",5935,"KRN","B",.402,.402)
+
+"BLD",5935,"KRN","B",.403,.403)
+
+"BLD",5935,"KRN","B",.5,.5)
+
+"BLD",5935,"KRN","B",.84,.84)
+
+"BLD",5935,"KRN","B",3.6,3.6)
+
+"BLD",5935,"KRN","B",3.8,3.8)
+
+"BLD",5935,"KRN","B",9.2,9.2)
+
+"BLD",5935,"KRN","B",9.8,9.8)
+
+"BLD",5935,"KRN","B",19,19)
+
+"BLD",5935,"KRN","B",19.1,19.1)
+
+"BLD",5935,"KRN","B",101,101)
+
+"BLD",5935,"KRN","B",409.61,409.61)
+
+"BLD",5935,"KRN","B",771,771)
+
+"BLD",5935,"KRN","B",870,870)
+
+"BLD",5935,"KRN","B",8989.51,8989.51)
+
+"BLD",5935,"KRN","B",8989.52,8989.52)
+
+"BLD",5935,"KRN","B",8994,8994)
+
+"FIA",2006.596)
+ACTION QUEUE STATUS
+"FIA",2006.596,0)
+^MAGDICOM(2006.596,
+"FIA",2006.596,0,0)
+2006.596S
+"FIA",2006.596,0,1)
+y^y^f^^^^n
+"FIA",2006.596,0,10)
+
+"FIA",2006.596,0,11)
+
+"FIA",2006.596,0,"RLRO")
+
+"FIA",2006.596,2006.596)
+0
+"FIA",2006.596,2006.5961)
+0
+"MBREQ")
+0
+"QUES","XPF1",0)
+Y
+"QUES","XPF1","??")
+^D REP^XPDH
+"QUES","XPF1","A")
+Shall I write over your |FLAG| File
+"QUES","XPF1","B")
+YES
+"QUES","XPF1","M")
+D XPF1^XPDIQ
+"QUES","XPF2",0)
+Y
+"QUES","XPF2","??")
+^D DTA^XPDH
+"QUES","XPF2","A")
+Want my data |FLAG| yours
+"QUES","XPF2","B")
+YES
+"QUES","XPF2","M")
+D XPF2^XPDIQ
+"QUES","XPI1",0)
+YO
+"QUES","XPI1","??")
+^D INHIBIT^XPDH
+"QUES","XPI1","A")
+Want KIDS to INHIBIT LOGONs during the install
+"QUES","XPI1","B")
+YES
+"QUES","XPI1","M")
+D XPI1^XPDIQ
+"QUES","XPM1",0)
+PO^VA(200,:EM
+"QUES","XPM1","??")
+^D MG^XPDH
+"QUES","XPM1","A")
+Enter the Coordinator for Mail Group '|FLAG|'
+"QUES","XPM1","B")
+
+"QUES","XPM1","M")
+D XPM1^XPDIQ
+"QUES","XPO1",0)
+Y
+"QUES","XPO1","??")
+^D MENU^XPDH
+"QUES","XPO1","A")
+Want KIDS to Rebuild Menu Trees Upon Completion of Install
+"QUES","XPO1","B")
+YES
+"QUES","XPO1","M")
+D XPO1^XPDIQ
+"QUES","XPZ1",0)
+Y
+"QUES","XPZ1","??")
+^D OPT^XPDH
+"QUES","XPZ1","A")
+Want to DISABLE Scheduled Options, Menu Options, and Protocols
+"QUES","XPZ1","B")
+YES
+"QUES","XPZ1","M")
+D XPZ1^XPDIQ
+"QUES","XPZ2",0)
+Y
+"QUES","XPZ2","??")
+^D RTN^XPDH
+"QUES","XPZ2","A")
+Want to MOVE routines to other CPUs
+"QUES","XPZ2","B")
+NO
+"QUES","XPZ2","M")
+D XPZ2^XPDIQ
+"SEC","^DIC",2006.596,2006.596,0,"AUDIT")
+@
+"SEC","^DIC",2006.596,2006.596,0,"DD")
+@
+"SEC","^DIC",2006.596,2006.596,0,"DEL")
+@
+"SEC","^DIC",2006.596,2006.596,0,"LAYGO")
+@
+"SEC","^DIC",2006.596,2006.596,0,"RD")
+@
+"SEC","^DIC",2006.596,2006.596,0,"WR")
+@
+"VER")
+8.0^22.0
+"^DD",2006.596,2006.596,0)
+FIELD^^1^2
+"^DD",2006.596,2006.596,0,"DT")
+3020404
+"^DD",2006.596,2006.596,0,"IX","B",2006.596,.01)
+
+"^DD",2006.596,2006.596,0,"NM","ACTION QUEUE STATUS")
+
+"^DD",2006.596,2006.596,0,"VRPK")
+MAG
+"^DD",2006.596,2006.596,.01,0)
+ACTION QUEUE^RS^SEND:Send;^0;1^Q
+"^DD",2006.596,2006.596,.01,1,0)
+^.1
+"^DD",2006.596,2006.596,.01,1,1,0)
+2006.596^B
+"^DD",2006.596,2006.596,.01,1,1,1)
+S ^MAGDICOM(2006.596,"B",$E(X,1,30),DA)=""
+"^DD",2006.596,2006.596,.01,1,1,2)
+K ^MAGDICOM(2006.596,"B",$E(X,1,30),DA)
+"^DD",2006.596,2006.596,.01,3)
+Enter the name of the queue.
+"^DD",2006.596,2006.596,.01,21,0)
+^^2^2^3020404^
+"^DD",2006.596,2006.596,.01,21,1,0)
+The value of this field is the name of an "action queue".
+"^DD",2006.596,2006.596,.01,21,2,0)
+Currently, only one action queue exists, which has the name "SEND".
+"^DD",2006.596,2006.596,.01,"DT")
+3020404
+"^DD",2006.596,2006.596,1,0)
+THREAD^2006.5961A^^1;0
+"^DD",2006.596,2006.5961,0)
+THREAD SUB-FIELD^^2^2
+"^DD",2006.596,2006.5961,0,"DT")
+3020404
+"^DD",2006.596,2006.5961,0,"NM","THREAD")
+
+"^DD",2006.596,2006.5961,0,"UP")
+2006.596
+"^DD",2006.596,2006.5961,.01,0)
+THREAD^F^^0;1^K:$L(X)>30!($L(X)<1) X
+"^DD",2006.596,2006.5961,.01,1,0)
+^.1^^0
+"^DD",2006.596,2006.5961,.01,3)
+Enter the name of a queue-thread.
+"^DD",2006.596,2006.5961,.01,21,0)
+^.001^6^6^3020404^^
+"^DD",2006.596,2006.5961,.01,21,1,0)
+Each queue may have zero or more "threads".
+"^DD",2006.596,2006.5961,.01,21,2,0)
+Each thread will process an instance of the queue,
+"^DD",2006.596,2006.5961,.01,21,3,0)
+thus taking care of the workload for one or more "origins",
+"^DD",2006.596,2006.5961,.01,21,4,0)
+and delivering to one or more "destinations".
+"^DD",2006.596,2006.5961,.01,21,5,0)
+ 
+"^DD",2006.596,2006.5961,.01,21,6,0)
+The format of names for threads is yet to be decided...
+"^DD",2006.596,2006.5961,.01,"DT")
+3020404
+"^DD",2006.596,2006.5961,2,0)
+STATUS^S^ACTIVE:Active;IDLE:Idle;SUSPENDED:Suspended;^0;2^Q
+"^DD",2006.596,2006.5961,2,3)
+Enter the code for the current status of the queue-thread.
+"^DD",2006.596,2006.5961,2,21,0)
+^^5^5^3020404^
+"^DD",2006.596,2006.5961,2,21,1,0)
+The value of this field is a code for the status of the queue-thread.
+"^DD",2006.596,2006.5961,2,21,2,0)
+Possible values are:
+"^DD",2006.596,2006.5961,2,21,3,0)
+ ACTIVE - thread is active, and has files to process
+"^DD",2006.596,2006.5961,2,21,4,0)
+ IDLE - thread is active, and has no files to process
+"^DD",2006.596,2006.5961,2,21,5,0)
+ SUSPENDED - thread is not active
+"^DD",2006.596,2006.5961,2,"DT")
+3020404
+"^DIC",2006.596,2006.596,0)
+ACTION QUEUE STATUS^2006.596
+"^DIC",2006.596,2006.596,0,"GL")
+^MAGDICOM(2006.596,
+"^DIC",2006.596,2006.596,"%D",0)
+^^27^27^3020405^^
+"^DIC",2006.596,2006.596,"%D",1,0)
+ +---------------------------------------------------------------+
+"^DIC",2006.596,2006.596,"%D",2,0)
+ |                                                               |
+"^DIC",2006.596,2006.596,"%D",3,0)
+ | Property of the US Government.                                |
+"^DIC",2006.596,2006.596,"%D",4,0)
+ | No permission to copy or redistribute this software is given. |
+"^DIC",2006.596,2006.596,"%D",5,0)
+ | Use of unreleased versions of this software requires the user |
+"^DIC",2006.596,2006.596,"%D",6,0)
+ | to execute a written test agreement with the VistA Imaging    |
+"^DIC",2006.596,2006.596,"%D",7,0)
+ | Development Office of the Department of Veterans Affairs,     |
+"^DIC",2006.596,2006.596,"%D",8,0)
+ | telephone (301) 734-0100.                                     |
+"^DIC",2006.596,2006.596,"%D",9,0)
+ |                                                               |
+"^DIC",2006.596,2006.596,"%D",10,0)
+ | The Food and Drug Administration classifies this software as  |
+"^DIC",2006.596,2006.596,"%D",11,0)
+ | a medical device.  As such, it may not be changed in any way. |
+"^DIC",2006.596,2006.596,"%D",12,0)
+ | Modifications to this software may result in an adulterated   |
+"^DIC",2006.596,2006.596,"%D",13,0)
+ | medical device under 21CFR820, the use of which is considered |
+"^DIC",2006.596,2006.596,"%D",14,0)
+ | to be a violation of US Federal Statutes.                     |
+"^DIC",2006.596,2006.596,"%D",15,0)
+ |                                                               |
+"^DIC",2006.596,2006.596,"%D",16,0)
+ +---------------------------------------------------------------+
+"^DIC",2006.596,2006.596,"%D",17,0)
+
+"^DIC",2006.596,2006.596,"%D",18,0)
+This file is used to keep track of the various queues and
+"^DIC",2006.596,2006.596,"%D",19,0)
+queue-threads that are used to conduct automated routing.
+"^DIC",2006.596,2006.596,"%D",20,0)
+
+"^DIC",2006.596,2006.596,"%D",21,0)
+The information in this file will be used by end-users
+"^DIC",2006.596,2006.596,"%D",22,0)
+to view which queue-threads are active, and to indicate that
+"^DIC",2006.596,2006.596,"%D",23,0)
+queue-threads are to be stopped or resumed.
+"^DIC",2006.596,2006.596,"%D",24,0)
+
+"^DIC",2006.596,2006.596,"%D",25,0)
+The various queue-processors will query this file to see
+"^DIC",2006.596,2006.596,"%D",26,0)
+whether a request has been posted to stop (suspend)
+"^DIC",2006.596,2006.596,"%D",27,0)
+the queue-thread that they are processing.
+"^DIC",2006.596,"B","ACTION QUEUE STATUS",2006.596)
+
+**END**
+**END**

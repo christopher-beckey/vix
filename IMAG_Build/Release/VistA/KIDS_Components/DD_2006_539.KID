@@ -1,0 +1,532 @@
+KIDS Distribution saved on Aug 02, 2013@13:11:38
+Full DD Extract from GOLD - SEQ89_P118
+**KIDS**:MAG*3.0*999*DD*2006.539^
+
+**INSTALL NAME**
+MAG*3.0*999*DD*2006.539
+"BLD",9630,0)
+MAG*3.0*999*DD*2006.539^IMAGING^0^3130802^y
+"BLD",9630,4,0)
+^9.64PA^2006.539^1
+"BLD",9630,4,2006.539,0)
+2006.539
+"BLD",9630,4,2006.539,222)
+y^y^f^^^^n
+"BLD",9630,4,"B",2006.539,2006.539)
+
+"BLD",9630,6.3)
+1
+"BLD",9630,"KRN",0)
+^9.67PA^779.2^20
+"BLD",9630,"KRN",.4,0)
+.4
+"BLD",9630,"KRN",.401,0)
+.401
+"BLD",9630,"KRN",.402,0)
+.402
+"BLD",9630,"KRN",.403,0)
+.403
+"BLD",9630,"KRN",.5,0)
+.5
+"BLD",9630,"KRN",.84,0)
+.84
+"BLD",9630,"KRN",3.6,0)
+3.6
+"BLD",9630,"KRN",3.8,0)
+3.8
+"BLD",9630,"KRN",9.2,0)
+9.2
+"BLD",9630,"KRN",9.8,0)
+9.8
+"BLD",9630,"KRN",19,0)
+19
+"BLD",9630,"KRN",19.1,0)
+19.1
+"BLD",9630,"KRN",101,0)
+101
+"BLD",9630,"KRN",409.61,0)
+409.61
+"BLD",9630,"KRN",771,0)
+771
+"BLD",9630,"KRN",779.2,0)
+779.2
+"BLD",9630,"KRN",870,0)
+870
+"BLD",9630,"KRN",8989.51,0)
+8989.51
+"BLD",9630,"KRN",8989.52,0)
+8989.52
+"BLD",9630,"KRN",8994,0)
+8994
+"BLD",9630,"KRN","B",.4,.4)
+
+"BLD",9630,"KRN","B",.401,.401)
+
+"BLD",9630,"KRN","B",.402,.402)
+
+"BLD",9630,"KRN","B",.403,.403)
+
+"BLD",9630,"KRN","B",.5,.5)
+
+"BLD",9630,"KRN","B",.84,.84)
+
+"BLD",9630,"KRN","B",3.6,3.6)
+
+"BLD",9630,"KRN","B",3.8,3.8)
+
+"BLD",9630,"KRN","B",9.2,9.2)
+
+"BLD",9630,"KRN","B",9.8,9.8)
+
+"BLD",9630,"KRN","B",19,19)
+
+"BLD",9630,"KRN","B",19.1,19.1)
+
+"BLD",9630,"KRN","B",101,101)
+
+"BLD",9630,"KRN","B",409.61,409.61)
+
+"BLD",9630,"KRN","B",771,771)
+
+"BLD",9630,"KRN","B",779.2,779.2)
+
+"BLD",9630,"KRN","B",870,870)
+
+"BLD",9630,"KRN","B",8989.51,8989.51)
+
+"BLD",9630,"KRN","B",8989.52,8989.52)
+
+"BLD",9630,"KRN","B",8994,8994)
+
+"FIA",2006.539)
+DICOM UID SPECIFIC ACTION
+"FIA",2006.539,0)
+^MAGDICOM(2006.539,
+"FIA",2006.539,0,0)
+2006.539
+"FIA",2006.539,0,1)
+y^y^f^^^^n
+"FIA",2006.539,0,10)
+
+"FIA",2006.539,0,11)
+
+"FIA",2006.539,0,"RLRO")
+
+"FIA",2006.539,0,"VR")
+3.0^MAG
+"FIA",2006.539,2006.539)
+0
+"FIA",2006.539,2006.5391)
+0
+"IX",2006.539,2006.539,"D",0)
+2006.539^D^Track type and subtype^R^^R^IR^I^2006.539^^^^^LS
+"IX",2006.539,2006.539,"D",.1,0)
+^^2^2^3071105^
+"IX",2006.539,2006.539,"D",.1,1,0)
+This cross-reference keeps track of which UIDs belong
+"IX",2006.539,2006.539,"D",.1,2,0)
+to which types and subtypes.
+"IX",2006.539,2006.539,"D",1)
+S ^MAGDICOM(2006.539,"D",X(1),X(2),DA)=""
+"IX",2006.539,2006.539,"D",2)
+K ^MAGDICOM(2006.539,"D",X(1),X(2),DA)
+"IX",2006.539,2006.539,"D",2.5)
+K ^MAGDICOM(2006.539,"D")
+"IX",2006.539,2006.539,"D",11.1,0)
+^.114IA^2^2
+"IX",2006.539,2006.539,"D",11.1,1,0)
+1^F^2006.539^3^^1^F
+"IX",2006.539,2006.539,"D",11.1,1,3)
+
+"IX",2006.539,2006.539,"D",11.1,2,0)
+2^F^2006.539^4^^2^F
+"IX",2006.539,2006.539,"D",11.1,2,3)
+
+"MBREQ")
+0
+"PKG",454,-1)
+1^1
+"PKG",454,0)
+IMAGING^MAG^Imaging-V1 to release 
+"PKG",454,20,0)
+^9.402P^^
+"PKG",454,22,0)
+^9.49I^1^1
+"PKG",454,22,1,0)
+3.0^3020319^3020517^126
+"PKG",454,22,1,"PAH",1,0)
+999^3130802
+"QUES","XPF1",0)
+Y
+"QUES","XPF1","??")
+^D REP^XPDH
+"QUES","XPF1","A")
+Shall I write over your |FLAG| File
+"QUES","XPF1","B")
+YES
+"QUES","XPF1","M")
+D XPF1^XPDIQ
+"QUES","XPF2",0)
+Y
+"QUES","XPF2","??")
+^D DTA^XPDH
+"QUES","XPF2","A")
+Want my data |FLAG| yours
+"QUES","XPF2","B")
+YES
+"QUES","XPF2","M")
+D XPF2^XPDIQ
+"QUES","XPI1",0)
+YO
+"QUES","XPI1","??")
+^D INHIBIT^XPDH
+"QUES","XPI1","A")
+Want KIDS to INHIBIT LOGONs during the install
+"QUES","XPI1","B")
+NO
+"QUES","XPI1","M")
+D XPI1^XPDIQ
+"QUES","XPM1",0)
+PO^VA(200,:EM
+"QUES","XPM1","??")
+^D MG^XPDH
+"QUES","XPM1","A")
+Enter the Coordinator for Mail Group '|FLAG|'
+"QUES","XPM1","B")
+
+"QUES","XPM1","M")
+D XPM1^XPDIQ
+"QUES","XPO1",0)
+Y
+"QUES","XPO1","??")
+^D MENU^XPDH
+"QUES","XPO1","A")
+Want KIDS to Rebuild Menu Trees Upon Completion of Install
+"QUES","XPO1","B")
+NO
+"QUES","XPO1","M")
+D XPO1^XPDIQ
+"QUES","XPZ1",0)
+Y
+"QUES","XPZ1","??")
+^D OPT^XPDH
+"QUES","XPZ1","A")
+Want to DISABLE Scheduled Options, Menu Options, and Protocols
+"QUES","XPZ1","B")
+NO
+"QUES","XPZ1","M")
+D XPZ1^XPDIQ
+"QUES","XPZ2",0)
+Y
+"QUES","XPZ2","??")
+^D RTN^XPDH
+"QUES","XPZ2","A")
+Want to MOVE routines to other CPUs
+"QUES","XPZ2","B")
+NO
+"QUES","XPZ2","M")
+D XPZ2^XPDIQ
+"SEC","^DIC",2006.539,2006.539,0,"AUDIT")
+@
+"SEC","^DIC",2006.539,2006.539,0,"DD")
+@
+"SEC","^DIC",2006.539,2006.539,0,"DEL")
+@
+"SEC","^DIC",2006.539,2006.539,0,"LAYGO")
+@
+"SEC","^DIC",2006.539,2006.539,0,"RD")
+@
+"SEC","^DIC",2006.539,2006.539,0,"WR")
+@
+"VER")
+8.0^22.0
+"^DD",2006.539,2006.539,0)
+FIELD^^5^5
+"^DD",2006.539,2006.539,0,"DDA")
+N
+"^DD",2006.539,2006.539,0,"DT")
+3071102
+"^DD",2006.539,2006.539,0,"IX","B",2006.539,.01)
+
+"^DD",2006.539,2006.539,0,"IX","C",2006.539,3)
+
+"^DD",2006.539,2006.539,0,"IX","E",2006.5391,.01)
+
+"^DD",2006.539,2006.539,0,"NM","DICOM UID SPECIFIC ACTION")
+
+"^DD",2006.539,2006.539,.01,0)
+UID^RF^^0;1^K:$L(X)>64!($L(X)<1)!'(X'?1P.E) X
+"^DD",2006.539,2006.539,.01,1,0)
+^.1
+"^DD",2006.539,2006.539,.01,1,1,0)
+2006.539^B
+"^DD",2006.539,2006.539,.01,1,1,1)
+S ^MAGDICOM(2006.539,"B",$E(X,1,64),DA)=""
+"^DD",2006.539,2006.539,.01,1,1,2)
+K ^MAGDICOM(2006.539,"B",$E(X,1,64),DA)
+"^DD",2006.539,2006.539,.01,3)
+Enter the UID for this entry.
+"^DD",2006.539,2006.539,.01,21,0)
+^.001^8^8^3120712^^
+"^DD",2006.539,2006.539,.01,21,1,0)
+The value of this field is a string that conforms to the format
+"^DD",2006.539,2006.539,.01,21,2,0)
+of a DICOM UID (Unique Object Identifier).
+"^DD",2006.539,2006.539,.01,21,3,0)
+A UID is a string that consists of only digits and periods.
+"^DD",2006.539,2006.539,.01,21,4,0)
+The first and the last characters must be digits, and none of
+"^DD",2006.539,2006.539,.01,21,5,0)
+the integer numbers in the string (that are separated by periods)
+"^DD",2006.539,2006.539,.01,21,6,0)
+may have leading or trailing zeroes.
+"^DD",2006.539,2006.539,.01,21,7,0)
+ 
+"^DD",2006.539,2006.539,.01,21,8,0)
+The meanings of UIDs are defined in the DICOM standard.
+"^DD",2006.539,2006.539,.01,"DT")
+3071102
+"^DD",2006.539,2006.539,2,0)
+DESCRIPTION^RF^^0;2^K:$L(X)>64!($L(X)<1) X
+"^DD",2006.539,2006.539,2,3)
+Enter the description for this UID.
+"^DD",2006.539,2006.539,2,21,0)
+^^2^2^3071102^
+"^DD",2006.539,2006.539,2,21,1,0)
+The value of this field is a string. This string is a descriptive
+"^DD",2006.539,2006.539,2,21,2,0)
+text that explains the meaning of the UID in this record.
+"^DD",2006.539,2006.539,2,"DT")
+3071102
+"^DD",2006.539,2006.539,3,0)
+TYPE^F^^0;3^K:$L(X)>20!($L(X)<1) X
+"^DD",2006.539,2006.539,3,1,0)
+^.1
+"^DD",2006.539,2006.539,3,1,1,0)
+2006.539^C
+"^DD",2006.539,2006.539,3,1,1,1)
+S ^MAGDICOM(2006.539,"C",X,DA)=""
+"^DD",2006.539,2006.539,3,1,1,2)
+K ^MAGDICOM(2006.539,"C",X,DA)
+"^DD",2006.539,2006.539,3,1,1,"%D",0)
+^^2^2^3071105^
+"^DD",2006.539,2006.539,3,1,1,"%D",1,0)
+This cross-reference keeps track of which UID belongs
+"^DD",2006.539,2006.539,3,1,1,"%D",2,0)
+to which type of object that has a UID.
+"^DD",2006.539,2006.539,3,1,1,"DT")
+3071105
+"^DD",2006.539,2006.539,3,3)
+Describe the type of entity for which this UID is used.
+"^DD",2006.539,2006.539,3,21,0)
+^^16^16^3071102^
+"^DD",2006.539,2006.539,3,21,1,0)
+The value of this field is a string. This string describes the
+"^DD",2006.539,2006.539,3,21,2,0)
+usage of this UID.
+"^DD",2006.539,2006.539,3,21,3,0)
+ 
+"^DD",2006.539,2006.539,3,21,4,0)
+The DICOM standard currently identifies the following possible values:
+"^DD",2006.539,2006.539,3,21,5,0)
+   Application Context Name
+"^DD",2006.539,2006.539,3,21,6,0)
+   Coding Scheme
+"^DD",2006.539,2006.539,3,21,7,0)
+   DICOM UIDs as a Coding Scheme
+"^DD",2006.539,2006.539,3,21,8,0)
+   LDAP OID
+"^DD",2006.539,2006.539,3,21,9,0)
+   Meta SOP Class
+"^DD",2006.539,2006.539,3,21,10,0)
+   SOP Class
+"^DD",2006.539,2006.539,3,21,11,0)
+   Service Class
+"^DD",2006.539,2006.539,3,21,12,0)
+   Transfer Syntax
+"^DD",2006.539,2006.539,3,21,13,0)
+   Well-known Print Queue SOP Instance
+"^DD",2006.539,2006.539,3,21,14,0)
+   Well-known Printer SOP Instance
+"^DD",2006.539,2006.539,3,21,15,0)
+   Well-known SOP Instance
+"^DD",2006.539,2006.539,3,21,16,0)
+   Well-known frame of reference
+"^DD",2006.539,2006.539,3,"DT")
+3071105
+"^DD",2006.539,2006.539,4,0)
+SUBTYPE^F^^0;4^K:$L(X)>10!($L(X)<1) X
+"^DD",2006.539,2006.539,4,3)
+Indicate a sub-type (if any) for this UID.
+"^DD",2006.539,2006.539,4,21,0)
+^^6^6^3071102^
+"^DD",2006.539,2006.539,4,21,1,0)
+The value of this field is a string that identifies a sub-type for
+"^DD",2006.539,2006.539,4,21,2,0)
+the UID. Sub-types are not defined in the DICOM standard but are
+"^DD",2006.539,2006.539,4,21,3,0)
+used to distinguish between application-specific usages of UIDs.
+"^DD",2006.539,2006.539,4,21,4,0)
+ 
+"^DD",2006.539,2006.539,4,21,5,0)
+For instance, an UID that has a "type" of "SOP Class" may have
+"^DD",2006.539,2006.539,4,21,6,0)
+a "sub-type" of "Storage".
+"^DD",2006.539,2006.539,4,"DT")
+3071105
+"^DD",2006.539,2006.539,5,0)
+PURPOSE^2006.5391A^^1;0
+"^DD",2006.539,2006.5391,0)
+PURPOSE SUB-FIELD^^3^3
+"^DD",2006.539,2006.5391,0,"DT")
+3071102
+"^DD",2006.539,2006.5391,0,"IX","B",2006.5391,.01)
+
+"^DD",2006.539,2006.5391,0,"NM","PURPOSE")
+
+"^DD",2006.539,2006.5391,0,"UP")
+2006.539
+"^DD",2006.539,2006.5391,.01,0)
+PURPOSE^MF^^0;1^K:$L(X)>64!($L(X)<1) X
+"^DD",2006.539,2006.5391,.01,1,0)
+^.1
+"^DD",2006.539,2006.5391,.01,1,1,0)
+2006.5391^B
+"^DD",2006.539,2006.5391,.01,1,1,1)
+S ^MAGDICOM(2006.539,DA(1),1,"B",X,DA)=""
+"^DD",2006.539,2006.5391,.01,1,1,2)
+K ^MAGDICOM(2006.539,DA(1),1,"B",X,DA)
+"^DD",2006.539,2006.5391,.01,1,2,0)
+2006.539^E
+"^DD",2006.539,2006.5391,.01,1,2,1)
+S ^MAGDICOM(2006.539,"E",X,DA(1),DA)=""
+"^DD",2006.539,2006.5391,.01,1,2,2)
+K ^MAGDICOM(2006.539,"E",X,DA(1),DA)
+"^DD",2006.539,2006.5391,.01,1,2,"%D",0)
+^^2^2^3071105^
+"^DD",2006.539,2006.5391,.01,1,2,"%D",1,0)
+This cross-reference keeps track of the various purposes for
+"^DD",2006.539,2006.5391,.01,1,2,"%D",2,0)
+which actions have been defined across all UIDs.
+"^DD",2006.539,2006.5391,.01,1,2,"DT")
+3071105
+"^DD",2006.539,2006.5391,.01,3)
+Enter the name of a purpose for which an action may be executed.
+"^DD",2006.539,2006.5391,.01,21,0)
+^^6^6^3071102^
+"^DD",2006.539,2006.5391,.01,21,1,0)
+The value of this field is a string. This string identifies an action
+"^DD",2006.539,2006.5391,.01,21,2,0)
+that may be executed by the application software.
+"^DD",2006.539,2006.5391,.01,21,3,0)
+ 
+"^DD",2006.539,2006.5391,.01,21,4,0)
+Depending on the UID of the object being manipulated, the application
+"^DD",2006.539,2006.5391,.01,21,5,0)
+will find in this table which specific action is to be executed
+"^DD",2006.539,2006.5391,.01,21,6,0)
+for which specific purpose.
+"^DD",2006.539,2006.5391,.01,"DT")
+3071105
+"^DD",2006.539,2006.5391,2,0)
+ACTION^F^^0;2^K:$L(X)>10!($L(X)<1) X
+"^DD",2006.539,2006.5391,2,3)
+Answer must be 1-10 characters in length.
+"^DD",2006.539,2006.5391,2,21,0)
+^^11^11^3071102^
+"^DD",2006.539,2006.5391,2,21,1,0)
+The value of this field is a string. This string identifies the
+"^DD",2006.539,2006.5391,2,21,2,0)
+action to be taken by the application for this purpose for this UID.
+"^DD",2006.539,2006.5391,2,21,3,0)
+ 
+"^DD",2006.539,2006.5391,2,21,4,0)
+Since the value in this field by be used by an application that runs
+"^DD",2006.539,2006.5391,2,21,5,0)
+on VistA, as well as by a client-application that acquires this
+"^DD",2006.539,2006.5391,2,21,6,0)
+value through a remote procedure, no assumption can be made about
+"^DD",2006.539,2006.5391,2,21,7,0)
+the mechanism that may be used to invoke the software to perform this
+"^DD",2006.539,2006.5391,2,21,8,0)
+action (it may be MUMPS, Delphi, Java, et cetera).
+"^DD",2006.539,2006.5391,2,21,9,0)
+ 
+"^DD",2006.539,2006.5391,2,21,10,0)
+Hence, the value in this field will be a numeric code. The meaning of
+"^DD",2006.539,2006.5391,2,21,11,0)
+this code is specific to each purpose for which an action may be taken.
+"^DD",2006.539,2006.5391,2,"DT")
+3071102
+"^DD",2006.539,2006.5391,3,0)
+COMMENT^F^^0;3^K:$L(X)>100!($L(X)<1) X
+"^DD",2006.539,2006.5391,3,3)
+Enter a comment that describes this action.
+"^DD",2006.539,2006.5391,3,21,0)
+^^7^7^3071102^
+"^DD",2006.539,2006.5391,3,21,1,0)
+The value of this field is a string.
+"^DD",2006.539,2006.5391,3,21,2,0)
+The value that will be used by the applications to determine which
+"^DD",2006.539,2006.5391,3,21,3,0)
+action to take is taken from a different field in this record (ACTION).
+"^DD",2006.539,2006.5391,3,21,4,0)
+ 
+"^DD",2006.539,2006.5391,3,21,5,0)
+In order to facilitate debugging and consistency checking, a semi
+"^DD",2006.539,2006.5391,3,21,6,0)
+free text is entered in this field that described the action to take
+"^DD",2006.539,2006.5391,3,21,7,0)
+in a human-readable form.
+"^DD",2006.539,2006.5391,3,"DT")
+3071102
+"^DIC",2006.539,2006.539,0)
+DICOM UID SPECIFIC ACTION^2006.539
+"^DIC",2006.539,2006.539,0,"GL")
+^MAGDICOM(2006.539,
+"^DIC",2006.539,2006.539,"%",0)
+^1.005^^0
+"^DIC",2006.539,2006.539,"%D",0)
+^^19^19^3080519^
+"^DIC",2006.539,2006.539,"%D",1,0)
+ +---------------------------------------------------------------+
+"^DIC",2006.539,2006.539,"%D",2,0)
+ |                                                               |
+"^DIC",2006.539,2006.539,"%D",3,0)
+ | Property of the US Government.                                |
+"^DIC",2006.539,2006.539,"%D",4,0)
+ | No permission to copy or redistribute this software is given. |
+"^DIC",2006.539,2006.539,"%D",5,0)
+ | Use of unreleased versions of this software requires the user |
+"^DIC",2006.539,2006.539,"%D",6,0)
+ | to execute a written test agreement with the VistA Imaging    |
+"^DIC",2006.539,2006.539,"%D",7,0)
+ | Development Office of the Department of Veterans Affairs,     |
+"^DIC",2006.539,2006.539,"%D",8,0)
+ | telephone (301) 734-0100.                                     |
+"^DIC",2006.539,2006.539,"%D",9,0)
+ |                                                               |
+"^DIC",2006.539,2006.539,"%D",10,0)
+ | The Food and Drug Administration classifies this software as  |
+"^DIC",2006.539,2006.539,"%D",11,0)
+ | a medical device.  As such, it may not be changed in any way. |
+"^DIC",2006.539,2006.539,"%D",12,0)
+ | Modifications to this software may result in an adulterated   |
+"^DIC",2006.539,2006.539,"%D",13,0)
+ | medical device under 21CFR820, the use of which is considered |
+"^DIC",2006.539,2006.539,"%D",14,0)
+ | to be a violation of US Federal Statutes.                     |
+"^DIC",2006.539,2006.539,"%D",15,0)
+ |                                                               |
+"^DIC",2006.539,2006.539,"%D",16,0)
+ +---------------------------------------------------------------+
+"^DIC",2006.539,2006.539,"%D",17,0)
+This file documents specific actions to be taken to process various kinds 
+"^DIC",2006.539,2006.539,"%D",18,0)
+of DICOM-defined entities or attributes, such as SOP Classes, application 
+"^DIC",2006.539,2006.539,"%D",19,0)
+contexts, etc.
+"^DIC",2006.539,"B","DICOM UID SPECIFIC ACTION",2006.539)
+
+**END**
+**END**

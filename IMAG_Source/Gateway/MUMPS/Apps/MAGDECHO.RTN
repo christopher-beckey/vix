@@ -1,0 +1,74 @@
+MAGDECHO ;WOIFO/PMK - DICOM ECHO Handler ; 08/10/2004  09:22
+ ;;3.0;IMAGING;**30**;MAR 19, 2002;;NOV 5, 2004
+ ;; Per VHA Directive 2004-038, this routine should not be modified.
+ ;; +---------------------------------------------------------------+
+ ;; | Property of the US Government.                                |
+ ;; | No permission to copy or redistribute this software is given. |
+ ;; | Use of unreleased versions of this software requires the user |
+ ;; | to execute a written test agreement with the VistA Imaging    |
+ ;; | Development Office of the Department of Veterans Affairs,     |
+ ;; | telephone (301) 734-0100.                                     |
+ ;; | The Food and Drug Administration classifies this software as  |
+ ;; | a medical device.  As such, it may not be changed in any way. |
+ ;; | Modifications to this software may result in an adulterated   |
+ ;; | medical device under 21CFR820, the use of which is considered |
+ ;; | to be a violation of US Federal Statutes.                     |
+ ;; +---------------------------------------------------------------+
+ ;;
+ Q
+ ;
+ENTRY ; entry point to process an ECHO request
+ N MESSAGE,MSGHANDL,MULTIMSG
+ D UPDTITLE^MAGDMLOG("Echo "_$G(CALLING)_" "_$G(IPADDR))
+ S MULTIMSG="" D RESPONSE,RESPONSE^MAGDDW1
+ Q
+ ;
+RESPONSE ; formulate the response message (entry point from ^MAGDCST2)
+ D MSGINIT^MAGDFCNS ; initialize the ^TMP global for this message
+ ;
+ ; copy Message ID to Message ID being responded to field
+ D SAVE("0000,0120",^TMP("MAG",$J,"DICOM",INODE,"0000,0110",1,1))
+ ;
+ S MESSAGE="VERIFICATION ECHO RESPONSE"
+ S MSGHANDL="NO MESSAGE HANDLE YET"
+ Q
+ ;
+USER ; entry point from ^MAGDMENU to generate an ECHO request
+ N DONEFLAG,MESSAGE,MULTIMSG,SUCCESS
+ W !!,"Generate a DICOM ECHO request"
+ S DEFAULT=$G(^TMP("MAG",$J,"DICOM ECHO","USER APPLICATIONS"))
+ S USERAPP=$$PICKSCP^MAGDACU(DEFAULT) Q:USERAPP=""
+ S ^TMP("MAG",$J,"DICOM ECHO","USER APPLICATIONS")=USERAPP
+ D INIT^MAGDWLU2 S MESSAGE="VERIFICATION ECHO REQUEST"
+ ;
+ D NEWLOG^MAGDMLOG("User Requested DICOM Echo")
+ ; construct a C-ECHO Request msg to send to the Verification SCP
+ S FBSWITCH="MIDGROUND",FILEMODE="DIRECT",MULTIMSG="" D REQUEST^MAGDDW1
+ D COUNT^MAGDAUD2 ; update audit record
+ ;
+ ; send the C-ECHO Request message
+ D
+ . N $ET
+ . S $ET="Q:$ST>"_($ST+1)_"  S SUCCESS=0,$EC="""" Q"
+ . S SUCCESS=0 D ENTRY^MAGDACU1
+ . Q
+ I $$USEPRIN^MAGOSFIL(1)
+ ;
+ ; did the C-ECHO Request work?
+ I SUCCESS=0 D
+ . W !!,"*** DICOM ECHO Failed -- check DICOM Message Log ***"
+ . Q
+ E  D
+ . S STATUS=$$DEC2HEX^MAGOSMSC(+$$GETDATA^MAGDFCNS("IN","0000,0900"))
+ . I STATUS=0  W !!,"DICOM ECHO Completed Successfully"
+ . E  W !!,"*** DICOM ECHO Failed -- Status = ",STATUS," ***"
+ W !!
+ Q
+ ;
+ ;
+ECHORESP ; entry point from ^MAGDQUE4 when a C-ECHO Response is received
+ S (DONEFLAG,SUCCESS)=1 ; completed
+ Q
+ ;
+SAVE(TAG,VALUE) D SAVE^MAGDFCNS(TAG,VALUE) Q
+ ;

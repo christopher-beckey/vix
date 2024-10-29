@@ -1,0 +1,111 @@
+@inherits Nancy.ViewEngines.Razor.NancyRazorViewBase<ViewerModel>
+@using Hydra.Web
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- This page was created for VAI-707 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+
+    <title>VIX Viewer Login</title>
+    <link type="text/css" rel="stylesheet" href="@Model.BaseUrl/bootstrap/css/bootstrap.min.css">
+    <link type="text/css" rel="stylesheet" href="@Model.BaseUrl/style/css/dash.css">
+    <link type="text/css" rel="stylesheet" href="@Model.BaseUrl/style/css/font-awesome.min.css">
+
+    <!-- TODO: script type="text/javascript" src="@Model.BaseUrl/js/jquery-1.12.4.min.js" --><!-- /script -->
+    <script type="text/javascript" src="@Model.BaseUrl/js/jquery-1.11.1.js"></script>
+
+    <script type="text/javascript">
+        const THIS_PAGE_URL = "@Model.BaseViewerUrl";
+        const RETURN_TO = "@Model.ReturnTo";
+    </script>
+</head>
+<body>
+    <nav class="navbar navbarStyle">
+        <div class="container-fluid">
+            <span class="dashboard-header-title" style="line-height: 50px;">VIX Viewer Login</span>
+        </div>
+    </nav>
+    <div id="loginDiv">
+        <div class="container">
+            <div class="login-form">
+                <form id="frmLogin" method="post" autocomplete="off">
+                    <h2 class="text-center">Login</h2>
+                    <!-- TO DO: Should we have a unique ID? in case of CVIX and Dev and Test environments? -->
+                    <div class="form-group">
+                        <label for="accessCode">Access Code</label><br />
+                        <input type="password" id="accessCode" class="form-control" autocomplete="off" required="required" autofocus>
+                    </div>
+                    <div class="form-group">
+                        <label for="verifyCode">Verify Code</label><br />
+                        <input type="password" id="verifyCode" class="form-control" autocomplete="off" required="required">
+                    </div>
+                    <div class="form-group">
+                        <br />
+                        <input type="submit" class="btn btn-primary btn-block" style="min-height: 38px;border-radius: 2px;" name="doLogin" id="doLogin" value="Login" />
+                        <!-- button id="btnLogin" type="button" class="btn btn-primary btn-block" onclick="doLogin()" style="min-height: 38px;border-radius: 2px;">Login</button -->
+                        <br /><div id="loginErrorMsg" class="dashboard-status-fail-style">@Model.ErrorMsg</div>
+                    </div>
+                </form>
+                <div id="divProcessing" width="100%">
+                    <p><img style="display:inline-block; vertical-align:middle" src="@Model.BaseUrl/images/ajax-loader.gif" alt="loggingIn"> Logging in ... </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+         function ChangeUrl(page, url) {
+             if (typeof (history.pushState) != "undefined") {
+                 var obj = { Page: page, Url: url };
+                 history.pushState(obj, obj.Page, obj.Url);
+             }
+         }
+
+        $(window).on('load', function () {
+
+             $("#divProcessing").hide();
+
+             $("#frmLogin").on("submit", function (event) {
+                 event.preventDefault();
+                 ChangeUrl('', THIS_PAGE_URL); //because we might have been called with URL parameters that we no longer want
+                 $("#loginErrorMsg").text("");
+                 var accessCode = $("#accessCode").val();
+                 var verifyCode = $("#verifyCode").val();
+                 if ((accessCode == null) || (accessCode == "")) {
+                     $("#loginErrorMsg").text("Invalid Access Code. Please try again.");
+                     return;
+                 }
+                 if ((verifyCode == null) || (verifyCode == "")) {
+                     $("#loginErrorMsg").text("Invalid Verify Code. Please try again.");
+                     return;
+                 }
+
+                 $("#divProcessing").show();
+
+                 $.ajax({
+                     url: THIS_PAGE_URL,
+                     type: "POST",
+                     data: btoa(accessCode + "|" + verifyCode + "|" + RETURN_TO),
+                     dataType: "text",
+                     success: function (response) {
+                         $("#divProcessing").hide();
+                         document.location.href = response;
+                     },
+                     error: function(httpObj, textStatus) {
+                         $("#divProcessing").hide();
+                         if ((httpObj.status == 401) || (httpObj.status == 403))
+                             $("#loginErrorMsg").text("Unauthorized. Please use different credentials.");
+                         else if (httpObj.status == 500)
+                             $("#loginErrorMsg").text("Login failed due to server error. Please try again.");
+                         else
+                             $("#loginErrorMsg").text("Login failed. Please try again.");
+                         $("#accessCode").val("");
+                         $("#verifyCode").val("");
+                     }
+                 });
+             });
+         });
+    </script>
+</body>
+</html>

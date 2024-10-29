@@ -1,0 +1,1196 @@
+KIDS Distribution saved on Jul 26, 2012@08:58:37
+Split from GOLD - last patch SEQ81_P120
+**KIDS**:MAG*3.0*350_DD*2005.2^
+
+**INSTALL NAME**
+MAG*3.0*350_DD*2005.2
+"BLD",7720,0)
+MAG*3.0*350_DD*2005.2^IMAGING^0^3120726^n
+"BLD",7720,4,0)
+^9.64PA^2005.2^1
+"BLD",7720,4,2005.2,0)
+2005.2
+"BLD",7720,4,2005.2,222)
+y^y^f^^^^n
+"BLD",7720,4,"B",2005.2,2005.2)
+
+"BLD",7720,6.3)
+1
+"BLD",7720,"KRN",0)
+^9.67PA^779.2^20
+"BLD",7720,"KRN",.4,0)
+.4
+"BLD",7720,"KRN",.401,0)
+.401
+"BLD",7720,"KRN",.402,0)
+.402
+"BLD",7720,"KRN",.403,0)
+.403
+"BLD",7720,"KRN",.5,0)
+.5
+"BLD",7720,"KRN",.84,0)
+.84
+"BLD",7720,"KRN",3.6,0)
+3.6
+"BLD",7720,"KRN",3.8,0)
+3.8
+"BLD",7720,"KRN",9.2,0)
+9.2
+"BLD",7720,"KRN",9.8,0)
+9.8
+"BLD",7720,"KRN",19,0)
+19
+"BLD",7720,"KRN",19.1,0)
+19.1
+"BLD",7720,"KRN",101,0)
+101
+"BLD",7720,"KRN",409.61,0)
+409.61
+"BLD",7720,"KRN",771,0)
+771
+"BLD",7720,"KRN",779.2,0)
+779.2
+"BLD",7720,"KRN",870,0)
+870
+"BLD",7720,"KRN",8989.51,0)
+8989.51
+"BLD",7720,"KRN",8989.52,0)
+8989.52
+"BLD",7720,"KRN",8994,0)
+8994
+"BLD",7720,"KRN","B",.4,.4)
+
+"BLD",7720,"KRN","B",.401,.401)
+
+"BLD",7720,"KRN","B",.402,.402)
+
+"BLD",7720,"KRN","B",.403,.403)
+
+"BLD",7720,"KRN","B",.5,.5)
+
+"BLD",7720,"KRN","B",.84,.84)
+
+"BLD",7720,"KRN","B",3.6,3.6)
+
+"BLD",7720,"KRN","B",3.8,3.8)
+
+"BLD",7720,"KRN","B",9.2,9.2)
+
+"BLD",7720,"KRN","B",9.8,9.8)
+
+"BLD",7720,"KRN","B",19,19)
+
+"BLD",7720,"KRN","B",19.1,19.1)
+
+"BLD",7720,"KRN","B",101,101)
+
+"BLD",7720,"KRN","B",409.61,409.61)
+
+"BLD",7720,"KRN","B",771,771)
+
+"BLD",7720,"KRN","B",779.2,779.2)
+
+"BLD",7720,"KRN","B",870,870)
+
+"BLD",7720,"KRN","B",8989.51,8989.51)
+
+"BLD",7720,"KRN","B",8989.52,8989.52)
+
+"BLD",7720,"KRN","B",8994,8994)
+
+"FIA",2005.2)
+NETWORK LOCATION
+"FIA",2005.2,0)
+^MAG(2005.2,
+"FIA",2005.2,0,0)
+2005.2
+"FIA",2005.2,0,1)
+y^y^f^^^^n
+"FIA",2005.2,0,10)
+
+"FIA",2005.2,0,11)
+
+"FIA",2005.2,0,"RLRO")
+
+"FIA",2005.2,0,"VR")
+3.0^MAG
+"FIA",2005.2,2005.2)
+0
+"FIA",2005.2,2005.201)
+0
+"FIA",2005.2,2005.22)
+0
+"IX",2005.2,2005.2,"C",0)
+2005.2^C^PHYSICAL REFERENCE and OPERATIONAL STATUS^MU^^R^IR^I^2005.2^^^^^LS
+"IX",2005.2,2005.2,"C",.1,0)
+^^1^1^3030220^
+"IX",2005.2,2005.2,"C",.1,1,0)
+This cross reference keeps track of which devices are on (or off) line.
+"IX",2005.2,2005.2,"C",1)
+S ^MAG(2005.2,"C",X(1),X(2),DA)=""
+"IX",2005.2,2005.2,"C",2)
+K ^MAG(2005.2,"C",X(1),X(2),DA)
+"IX",2005.2,2005.2,"C",2.5)
+K ^MAG(2005.2,"C")
+"IX",2005.2,2005.2,"C",11.1,0)
+^.114IA^2^2
+"IX",2005.2,2005.2,"C",11.1,1,0)
+1^F^2005.2^1^63^1^F
+"IX",2005.2,2005.2,"C",11.1,2,0)
+2^F^2005.2^5^^2^F
+"IX",2005.2,2005.2,"D",0)
+2005.2^D^Place and Name^R^^R^IR^I^2005.2^^^^^LS
+"IX",2005.2,2005.2,"D",.1,0)
+^^2^2^3090529^
+"IX",2005.2,2005.2,"D",.1,1,0)
+This cross reference will be used to check for uniqueness for
+"IX",2005.2,2005.2,"D",.1,2,0)
+Place (#.04) and Name (#.01).
+"IX",2005.2,2005.2,"D",1)
+S ^MAG(2005.2,"D",X(1),$E(X(2),1,30),DA)=""
+"IX",2005.2,2005.2,"D",2)
+K ^MAG(2005.2,"D",X(1),$E(X(2),1,30),DA)
+"IX",2005.2,2005.2,"D",2.5)
+K ^MAG(2005.2,"D")
+"IX",2005.2,2005.2,"D",11.1,0)
+^.114IA^2^2
+"IX",2005.2,2005.2,"D",11.1,1,0)
+1^F^2005.2^.04^^1^F
+"IX",2005.2,2005.2,"D",11.1,2,0)
+2^F^2005.2^.01^30^2^F
+"IX",2005.2,2005.2,"F",0)
+2005.2^F^Place and Storage type index^R^^R^IR^I^2005.2^^^^^LS
+"IX",2005.2,2005.2,"F",1)
+S ^MAG(2005.2,"F",X(1),X(2),DA)=""
+"IX",2005.2,2005.2,"F",2)
+K ^MAG(2005.2,"F",X(1),X(2),DA)
+"IX",2005.2,2005.2,"F",2.5)
+K ^MAG(2005.2,"F")
+"IX",2005.2,2005.2,"F",11.1,0)
+^.114IA^2^2
+"IX",2005.2,2005.2,"F",11.1,1,0)
+1^F^2005.2^.04^^1^F
+"IX",2005.2,2005.2,"F",11.1,1,3)
+
+"IX",2005.2,2005.2,"F",11.1,2,0)
+2^F^2005.2^6^^2^F
+"IX",2005.2,2005.2,"F",11.1,2,3)
+
+"IX",2005.2,2005.2,"G",0)
+2005.2^G^Sort for Place and Physical Reference^R^^R^IR^I^2005.2^^^^^LS
+"IX",2005.2,2005.2,"G",.1,0)
+^^2^2^3090529^
+"IX",2005.2,2005.2,"G",.1,1,0)
+This allows the input transform to evaluate for unique network shares
+"IX",2005.2,2005.2,"G",.1,2,0)
+within a given platform.
+"IX",2005.2,2005.2,"G",1)
+S ^MAG(2005.2,"G",X(1),$E(X(2),1,30),DA)=""
+"IX",2005.2,2005.2,"G",2)
+K ^MAG(2005.2,"G",X(1),$E(X(2),1,30),DA)
+"IX",2005.2,2005.2,"G",2.5)
+K ^MAG(2005.2,"G")
+"IX",2005.2,2005.2,"G",11.1,0)
+^.114IA^2^2
+"IX",2005.2,2005.2,"G",11.1,1,0)
+1^F^2005.2^.04^^1^F
+"IX",2005.2,2005.2,"G",11.1,1,3)
+
+"IX",2005.2,2005.2,"G",11.1,2,0)
+2^F^2005.2^1^30^2^F
+"IX",2005.2,2005.2,"G",11.1,2,3)
+
+"MBREQ")
+0
+"PKG",454,-1)
+1^1
+"PKG",454,0)
+IMAGING^MAG^Imaging-V1 to release 
+"PKG",454,20,0)
+^9.402P^^
+"PKG",454,22,0)
+^9.49I^1^1
+"PKG",454,22,1,0)
+3.0^3020319^3020517^126
+"PKG",454,22,1,"PAH",1,0)
+350_DD^3120726
+"QUES","XPF1",0)
+Y
+"QUES","XPF1","??")
+^D REP^XPDH
+"QUES","XPF1","A")
+Shall I write over your |FLAG| File
+"QUES","XPF1","B")
+YES
+"QUES","XPF1","M")
+D XPF1^XPDIQ
+"QUES","XPF2",0)
+Y
+"QUES","XPF2","??")
+^D DTA^XPDH
+"QUES","XPF2","A")
+Want my data |FLAG| yours
+"QUES","XPF2","B")
+YES
+"QUES","XPF2","M")
+D XPF2^XPDIQ
+"QUES","XPI1",0)
+YO
+"QUES","XPI1","??")
+^D INHIBIT^XPDH
+"QUES","XPI1","A")
+Want KIDS to INHIBIT LOGONs during the install
+"QUES","XPI1","B")
+NO
+"QUES","XPI1","M")
+D XPI1^XPDIQ
+"QUES","XPM1",0)
+PO^VA(200,:EM
+"QUES","XPM1","??")
+^D MG^XPDH
+"QUES","XPM1","A")
+Enter the Coordinator for Mail Group '|FLAG|'
+"QUES","XPM1","B")
+
+"QUES","XPM1","M")
+D XPM1^XPDIQ
+"QUES","XPO1",0)
+Y
+"QUES","XPO1","??")
+^D MENU^XPDH
+"QUES","XPO1","A")
+Want KIDS to Rebuild Menu Trees Upon Completion of Install
+"QUES","XPO1","B")
+NO
+"QUES","XPO1","M")
+D XPO1^XPDIQ
+"QUES","XPZ1",0)
+Y
+"QUES","XPZ1","??")
+^D OPT^XPDH
+"QUES","XPZ1","A")
+Want to DISABLE Scheduled Options, Menu Options, and Protocols
+"QUES","XPZ1","B")
+NO
+"QUES","XPZ1","M")
+D XPZ1^XPDIQ
+"QUES","XPZ2",0)
+Y
+"QUES","XPZ2","??")
+^D RTN^XPDH
+"QUES","XPZ2","A")
+Want to MOVE routines to other CPUs
+"QUES","XPZ2","B")
+NO
+"QUES","XPZ2","M")
+D XPZ2^XPDIQ
+"SEC","^DIC",2005.2,2005.2,0,"AUDIT")
+
+"SEC","^DIC",2005.2,2005.2,0,"DD")
+@
+"SEC","^DIC",2005.2,2005.2,0,"DEL")
+@
+"SEC","^DIC",2005.2,2005.2,0,"LAYGO")
+@
+"SEC","^DIC",2005.2,2005.2,0,"RD")
+@
+"SEC","^DIC",2005.2,2005.2,0,"WR")
+@
+"VER")
+8.0^22.0
+"^DD",2005.2,2005.2,0)
+FIELD^^7^33
+"^DD",2005.2,2005.2,0,"DDA")
+N
+"^DD",2005.2,2005.2,0,"DT")
+3040105
+"^DD",2005.2,2005.2,0,"IX","AC",2005.2,1)
+
+"^DD",2005.2,2005.2,0,"IX","B",2005.2,.01)
+
+"^DD",2005.2,2005.2,0,"IX","E",2005.2,6)
+
+"^DD",2005.2,2005.2,0,"NM","NETWORK LOCATION")
+
+"^DD",2005.2,2005.2,0,"PT",2005,2)
+
+"^DD",2005.2,2005.2,0,"PT",2005,2.1)
+
+"^DD",2005.2,2005.2,0,"PT",2005,2.2)
+
+"^DD",2005.2,2005.2,0,"PT",2005,102)
+
+"^DD",2005.2,2005.2,0,"PT",2005,103)
+
+"^DD",2005.2,2005.2,0,"PT",2005.01,.01)
+
+"^DD",2005.2,2005.2,0,"PT",2005.0106,2)
+
+"^DD",2005.2,2005.2,0,"PT",2005.0111,2)
+
+"^DD",2005.2,2005.2,0,"PT",2005.1,2)
+
+"^DD",2005.2,2005.2,0,"PT",2005.1,2.1)
+
+"^DD",2005.2,2005.2,0,"PT",2005.1,2.2)
+
+"^DD",2005.2,2005.2,0,"PT",2005.1,102)
+
+"^DD",2005.2,2005.2,0,"PT",2005.1,103)
+
+"^DD",2005.2,2005.2,0,"PT",2005.11,.01)
+
+"^DD",2005.2,2005.2,0,"PT",2005.1106,2)
+
+"^DD",2005.2,2005.2,0,"PT",2005.1111,2)
+
+"^DD",2005.2,2005.2,0,"PT",2005.2,31)
+
+"^DD",2005.2,2005.2,0,"PT",2005.22,.01)
+
+"^DD",2005.2,2005.2,0,"PT",2005.86,6)
+
+"^DD",2005.2,2005.2,0,"PT",2006.035,1)
+
+"^DD",2005.2,2005.2,0,"PT",2006.1,.03)
+
+"^DD",2005.2,2005.2,0,"PT",2006.1,.031)
+
+"^DD",2005.2,2005.2,0,"PT",2006.1,.07)
+
+"^DD",2005.2,2005.2,0,"PT",2006.1,.08)
+
+"^DD",2005.2,2005.2,0,"PT",2006.1,1.02)
+
+"^DD",2005.2,2005.2,0,"PT",2006.1,1.03)
+
+"^DD",2005.2,2005.2,0,"PT",2006.1,2.01)
+
+"^DD",2005.2,2005.2,0,"PT",2006.1,52)
+
+"^DD",2005.2,2005.2,0,"PT",2006.1,53)
+
+"^DD",2005.2,2005.2,0,"PT",2006.1,55)
+
+"^DD",2005.2,2005.2,0,"VRPK")
+IMAGING
+"^DD",2005.2,2005.2,.01,0)
+NETWORK LOCATION^RFX^^0;1^I $D(X) K:$L(X)>30!($L(X)<3)!'(X?1.E) X D CHKNAM^MAGQBUT6(.X)
+"^DD",2005.2,2005.2,.01,1,0)
+^.1
+"^DD",2005.2,2005.2,.01,1,1,0)
+2005.2^B
+"^DD",2005.2,2005.2,.01,1,1,1)
+S ^MAG(2005.2,"B",$E(X,1,30),DA)=""
+"^DD",2005.2,2005.2,.01,1,1,2)
+K ^MAG(2005.2,"B",$E(X,1,30),DA)
+"^DD",2005.2,2005.2,.01,3)
+Enter the alias name for the share; 3-30 characters in length.
+"^DD",2005.2,2005.2,.01,21,0)
+^.001^1^1^3100308^^^^
+"^DD",2005.2,2005.2,.01,21,1,0)
+This is the alias name of an Imaging share.
+"^DD",2005.2,2005.2,.01,23,0)
+^.001^2^2^3100308^^^
+"^DD",2005.2,2005.2,.01,23,1,0)
+This field must be unique within the site parameter file
+"^DD",2005.2,2005.2,.01,23,2,0)
+entry which systemically is referred to as PLACE.
+"^DD",2005.2,2005.2,.01,"DEL",1,0)
+D EN^DDIOL("Deletion is not allowed!") I 1
+"^DD",2005.2,2005.2,.01,"DT")
+3100210
+"^DD",2005.2,2005.2,.04,0)
+PLACE^RP2006.1'^MAG(2006.1,^0;10^Q
+"^DD",2005.2,2005.2,.04,1,0)
+^.1^^0
+"^DD",2005.2,2005.2,.04,21,0)
+^.001^5^5^3100308^^^^
+"^DD",2005.2,2005.2,.04,21,1,0)
+This field identifies the SITE PARAMETER file entry. The Site
+"^DD",2005.2,2005.2,.04,21,2,0)
+parameter entry defines all of the attributes of Vista Imaging
+"^DD",2005.2,2005.2,.04,21,3,0)
+local area network.
+"^DD",2005.2,2005.2,.04,21,4,0)
+ 
+"^DD",2005.2,2005.2,.04,21,5,0)
+This includes facility user preferences, network write locations, etc.
+"^DD",2005.2,2005.2,.04,"DT")
+3090529
+"^DD",2005.2,2005.2,1,0)
+PHYSICAL REFERENCE^FX^^0;2^Q:($P($G(^MAG(2005.2,DA,0)),U,7)["GRP")  K:($L(X)>120!($L(X)<1))!'((X?1"\\".E1"\".E1"\")!(X?1A1":\"1E.E1"\")!($P($$UPPER^MAGQE4(X),"//")["HTTP")) X D CHKNET^MAGQBUT6(.X)
+"^DD",2005.2,2005.2,1,1,0)
+^.1^^-1
+"^DD",2005.2,2005.2,1,1,1,0)
+2005.2^AC
+"^DD",2005.2,2005.2,1,1,1,1)
+S ^MAG(2005.2,"AC",X,DA)=""
+"^DD",2005.2,2005.2,1,1,1,2)
+K ^MAG(2005.2,"AC",X,DA)
+"^DD",2005.2,2005.2,1,1,1,"%D",0)
+^.101^2^2^3030220^^^^
+"^DD",2005.2,2005.2,1,1,1,"%D",1,0)
+This cross-reference allows a network location to be looked up
+"^DD",2005.2,2005.2,1,1,1,"%D",2,0)
+by physical name.
+"^DD",2005.2,2005.2,1,1,1,"DT")
+2951017
+"^DD",2005.2,2005.2,1,3)
+Enter the name of the physical location for this device. Answer must be 1-120 characters in length.
+"^DD",2005.2,2005.2,1,21,0)
+^.001^9^9^3100308^^^^
+"^DD",2005.2,2005.2,1,21,1,0)
+This is the physical network location where the image is stored.
+"^DD",2005.2,2005.2,1,21,2,0)
+This is the Universal Naming Convention (UNC) path for the 
+"^DD",2005.2,2005.2,1,21,3,0)
+Image Storage. For example: \\ISWIMG01\IMAGE1\
+"^DD",2005.2,2005.2,1,21,4,0)
+ 
+"^DD",2005.2,2005.2,1,21,5,0)
+This is a required field for all entries except for an entry 
+"^DD",2005.2,2005.2,1,21,6,0)
+defined with a RAID-GROUP STORAGE TYPE (#6).
+"^DD",2005.2,2005.2,1,21,7,0)
+ 
+"^DD",2005.2,2005.2,1,21,8,0)
+Duplicate PHYSICAL REFERENCE values within the same VistA Imaging
+"^DD",2005.2,2005.2,1,21,9,0)
+configuration PLACE (#.04) are not allowed.
+"^DD",2005.2,2005.2,1,"DT")
+3090529
+"^DD",2005.2,2005.2,2,0)
+TOTAL SPACE^NJ7,0^^0;3^K:+X'=X!(X>9999999)!(X<0)!(X?.E1"."1N.N) X
+"^DD",2005.2,2005.2,2,3)
+Type a Number between 0 and 9999999, 0 Decimal Digits
+"^DD",2005.2,2005.2,2,21,0)
+^.001^6^6^3100308^^^^
+"^DD",2005.2,2005.2,2,21,1,0)
+This is the total available formatted space of this network location. 
+"^DD",2005.2,2005.2,2,21,2,0)
+ 
+"^DD",2005.2,2005.2,2,21,3,0)
+The information in this field is dependent on the connectivity of the 
+"^DD",2005.2,2005.2,2,21,4,0)
+share and may be set to zero if the share is not available. 
+"^DD",2005.2,2005.2,2,21,5,0)
+ 
+"^DD",2005.2,2005.2,2,21,6,0)
+This field is maintained by the RPC MAGQ FS CHNGE.
+"^DD",2005.2,2005.2,2,"DT")
+2940609
+"^DD",2005.2,2005.2,3,0)
+SPACE USED^NJ7,0^^0;4^K:+X'=X!(X>9999999)!(X<0)!(X?.E1"."1N.N) X
+"^DD",2005.2,2005.2,3,3)
+Type a Number between 0 and 9999999, 0 Decimal Digits
+"^DD",2005.2,2005.2,3,21,0)
+^^2^2^2990301^^^^
+"^DD",2005.2,2005.2,3,21,1,0)
+This is the amount of space which has been used for this network location
+"^DD",2005.2,2005.2,3,21,2,0)
+- this value is device dependent.
+"^DD",2005.2,2005.2,3,"DT")
+2940505
+"^DD",2005.2,2005.2,4,0)
+FREE SPACE^NJ7,0^^0;5^K:+X'=X!(X>9999999)!(X<0)!(X?.E1"."1N.N) X
+"^DD",2005.2,2005.2,4,3)
+Type a Number between 0 and 9999999, 0 Decimal Digits
+"^DD",2005.2,2005.2,4,21,0)
+^.001^4^4^3100308^^^^
+"^DD",2005.2,2005.2,4,21,1,0)
+This is the amount of available space remaining for this network
+"^DD",2005.2,2005.2,4,21,2,0)
+location. The information in this field is dependent on the 
+"^DD",2005.2,2005.2,4,21,3,0)
+connectivity of the share and may be set to zero if the share is
+"^DD",2005.2,2005.2,4,21,4,0)
+not available. This field is maintained by the RPC MAGQ FS CHNGE.
+"^DD",2005.2,2005.2,4,"DT")
+2940505
+"^DD",2005.2,2005.2,5,0)
+OPERATIONAL STATUS^RSX^0:Off-Line;1:On-Line;^0;6^Q:DA["+1"  S:$P(^MAG(2005.2,DA,0),U,6)="" $P(^MAG(2005.2,DA,0),U,6)="0"
+"^DD",2005.2,2005.2,5,.1)
+Reachability Status
+"^DD",2005.2,2005.2,5,1,0)
+^.1^^0
+"^DD",2005.2,2005.2,5,3)
+Code the Network Location ONline/OFFline status
+"^DD",2005.2,2005.2,5,21,0)
+^.001^3^3^3020211^^^^
+"^DD",2005.2,2005.2,5,21,1,0)
+This field tells the Imaging software whether or not this network
+"^DD",2005.2,2005.2,5,21,2,0)
+location, where images are stored, is online. The default is online if the
+"^DD",2005.2,2005.2,5,21,3,0)
+field is null.
+"^DD",2005.2,2005.2,5,23,0)
+^.001^1^1^3020211^^^^
+"^DD",2005.2,2005.2,5,23,1,0)
+ 
+"^DD",2005.2,2005.2,5,"DT")
+3030220
+"^DD",2005.2,2005.2,5.5,0)
+READ ONLY^S^0:NO;1:YES;^1;6^S:$P(^MAG(2005.2,DA,1),U,6)="" $P(^MAG(2005.2,DA,1),U,6)="0"
+"^DD",2005.2,2005.2,5.5,21,0)
+^.001^2^2^3100308^^^^
+"^DD",2005.2,2005.2,5.5,21,1,0)
+This field enables applications to filter shares that are 
+"^DD",2005.2,2005.2,5.5,21,2,0)
+designated as read only by active VistA Imaging applications.
+"^DD",2005.2,2005.2,5.5,"DT")
+3070710
+"^DD",2005.2,2005.2,6,0)
+STORAGE TYPE^RS^MAG:MAGNETIC;WORM-DG:WORM-DG;WORM-PDT:WORM-PDT;RW:READ/WRITE;WORM-OTG:WORM-OTG;EKG:MUSE-EKG;GCC:EXPORT;DGM:DIAGRAM;URL:URL;RTR:ROUTER;GRP:RAID-GROUP;^0;7^Q
+"^DD",2005.2,2005.2,6,1,0)
+^.1
+"^DD",2005.2,2005.2,6,1,1,0)
+2005.2^E
+"^DD",2005.2,2005.2,6,1,1,1)
+S ^MAG(2005.2,"E",$E(X,1,30),DA)=""
+"^DD",2005.2,2005.2,6,1,1,2)
+K ^MAG(2005.2,"E",$E(X,1,30),DA)
+"^DD",2005.2,2005.2,6,1,1,"%D",0)
+^.101^1^1^3030813^^
+"^DD",2005.2,2005.2,6,1,1,"%D",1,0)
+Storage Type cross reference
+"^DD",2005.2,2005.2,6,1,1,"DT")
+3000131
+"^DD",2005.2,2005.2,6,3)
+Enter the type of storage for this network location.
+"^DD",2005.2,2005.2,6,21,0)
+^.001^18^18^3100308^^^^
+"^DD",2005.2,2005.2,6,21,1,0)
+This field describes the media type of this network location. 
+"^DD",2005.2,2005.2,6,21,2,0)
+It should be MAGNETIC for a magnetic disk server.
+"^DD",2005.2,2005.2,6,21,3,0)
+ 
+"^DD",2005.2,2005.2,6,21,4,0)
+Jukeboxes should be WORM-DG for Data General Jukeboxes under 
+"^DD",2005.2,2005.2,6,21,5,0)
+OpenNetware or WORM-PDT for Pegasus Jukeboxes or WORM-OTG for 
+"^DD",2005.2,2005.2,6,21,6,0)
+OTG Disk Extender. WORM-DG and WORM-PDT are for backward 
+"^DD",2005.2,2005.2,6,21,7,0)
+compatibility only. Note: WORM stands for Write Once, Read Many.
+"^DD",2005.2,2005.2,6,21,8,0)
+ 
+"^DD",2005.2,2005.2,6,21,9,0)
+The GCC type refers to the Generic Carbon Copy (GCC) utility. 
+"^DD",2005.2,2005.2,6,21,10,0)
+ 
+"^DD",2005.2,2005.2,6,21,11,0)
+URL is used for Web based file access. 
+"^DD",2005.2,2005.2,6,21,12,0)
+ 
+"^DD",2005.2,2005.2,6,21,13,0)
+Type 'RTR' should be used to identify network entries that are 
+"^DD",2005.2,2005.2,6,21,14,0)
+used for Routing images.
+"^DD",2005.2,2005.2,6,21,15,0)
+ 
+"^DD",2005.2,2005.2,6,21,16,0)
+Type 'GRP' will identify a group entry and will allow sites to group 
+"^DD",2005.2,2005.2,6,21,17,0)
+network locations. This functionality is useful for the Background 
+"^DD",2005.2,2005.2,6,21,18,0)
+Processor and Verifier applications.
+"^DD",2005.2,2005.2,6,"DT")
+3090225
+"^DD",2005.2,2005.2,7,0)
+HASH SUBDIRECTORY^SX^Y:YES;^0;8^Q
+"^DD",2005.2,2005.2,7,21,0)
+^.001^1^1^3100408^^^^
+"^DD",2005.2,2005.2,7,21,1,0)
+Control whether subdirectory should be hashed.
+"^DD",2005.2,2005.2,7,23,0)
+^.001^10^10^3100408^^^^
+"^DD",2005.2,2005.2,7,23,1,0)
+Imaging storage activities create a directory schema with the sites
+"^DD",2005.2,2005.2,7,23,2,0)
+namespace as the primary directory and sub directories
+"^DD",2005.2,2005.2,7,23,3,0)
+are created by parsing sequential 2 digit file name segments.
+"^DD",2005.2,2005.2,7,23,4,0)
+ 
+"^DD",2005.2,2005.2,7,23,5,0)
+The function DIRHASH in the M routine MAGFILEB calculates the 
+"^DD",2005.2,2005.2,7,23,6,0)
+hierarchical directory hash. The following is an example of 
+"^DD",2005.2,2005.2,7,23,7,0)
+the method it uses:
+"^DD",2005.2,2005.2,7,23,8,0)
+For an 8.3 filename AB123456.XYZ, the directory hash is AB\12\34
+"^DD",2005.2,2005.2,7,23,9,0)
+For a 14.3 filename BALT1234567890.XYZ, the directory 
+"^DD",2005.2,2005.2,7,23,10,0)
+hash is BALT\12\34\56\
+"^DD",2005.2,2005.2,7,"DT")
+2991119
+"^DD",2005.2,2005.2,8,0)
+ABSTRACT^S^0:No;1:Yes;^1;1^Q
+"^DD",2005.2,2005.2,8,.1)
+Site supports 'ABSTRACT' files
+"^DD",2005.2,2005.2,8,3)
+Enter Yes or No.
+"^DD",2005.2,2005.2,8,21,0)
+^.001^2^2^3100308^^^^
+"^DD",2005.2,2005.2,8,21,1,0)
+This field is a flag indicating whether or not 
+"^DD",2005.2,2005.2,8,21,2,0)
+a network location supports ABSTRACT image files'.  
+"^DD",2005.2,2005.2,8,"DT")
+2980929
+"^DD",2005.2,2005.2,9,0)
+FULL^S^0:No;1:Yes;^1;2^Q
+"^DD",2005.2,2005.2,9,.1)
+Site supports 'FULL' files
+"^DD",2005.2,2005.2,9,3)
+Enter Yes or No.
+"^DD",2005.2,2005.2,9,21,0)
+^.001^2^2^3100308^^^^
+"^DD",2005.2,2005.2,9,21,1,0)
+This field is a flag indicating whether or not 
+"^DD",2005.2,2005.2,9,21,2,0)
+a network location supports FULL image files. 
+"^DD",2005.2,2005.2,9,"DT")
+2980929
+"^DD",2005.2,2005.2,10,0)
+BIG^S^0:No;1:Yes;^1;3^Q
+"^DD",2005.2,2005.2,10,.1)
+Site supports 'BIG' files
+"^DD",2005.2,2005.2,10,3)
+Enter Yes or No.
+"^DD",2005.2,2005.2,10,21,0)
+^.001^2^2^3100308^^^^
+"^DD",2005.2,2005.2,10,21,1,0)
+This field is a flag indicating whether or not 
+"^DD",2005.2,2005.2,10,21,2,0)
+a network location supports BIG image files.  
+"^DD",2005.2,2005.2,10,"DT")
+2980929
+"^DD",2005.2,2005.2,11,0)
+TEXT^S^0:No;1:Yes;^1;4^Q
+"^DD",2005.2,2005.2,11,.1)
+Site supports 'TEXT' files
+"^DD",2005.2,2005.2,11,3)
+Enter Yes or No.
+"^DD",2005.2,2005.2,11,21,0)
+^.001^2^2^3100308^^^^
+"^DD",2005.2,2005.2,11,21,1,0)
+This field is a flag indicating whether or not 
+"^DD",2005.2,2005.2,11,21,2,0)
+a network location supports TEXT image files.  
+"^DD",2005.2,2005.2,11,"DT")
+2980929
+"^DD",2005.2,2005.2,12,0)
+DICOM^S^0:No;1:Yes;^1;5^Q
+"^DD",2005.2,2005.2,12,.1)
+Site supports 'DICOM' files
+"^DD",2005.2,2005.2,12,3)
+Enter Yes or No.
+"^DD",2005.2,2005.2,12,21,0)
+^.001^2^2^3100308^^^^
+"^DD",2005.2,2005.2,12,21,1,0)
+This field is a flag indicating whether or not 
+"^DD",2005.2,2005.2,12,21,2,0)
+a network location supports DICOM image files. 
+"^DD",2005.2,2005.2,12,"DT")
+2980929
+"^DD",2005.2,2005.2,14,0)
+COMPRESSION^S^NONE:None;J2K:JPEG-2000;^1;7^Q
+"^DD",2005.2,2005.2,14,.1)
+Type of data compression
+"^DD",2005.2,2005.2,14,3)
+Enter a code for the type of compression (NONE means no compression).
+"^DD",2005.2,2005.2,14,21,0)
+^.001^2^2^3100308^^^^
+"^DD",2005.2,2005.2,14,21,1,0)
+This field indicates which type of compression, if any, 
+"^DD",2005.2,2005.2,14,21,2,0)
+is to use while transmitting files to this network location.
+"^DD",2005.2,2005.2,14,"DT")
+3040903
+"^DD",2005.2,2005.2,15,0)
+USER NAME^F^^2;1^K:$L(X)>31!($L(X)<1) X
+"^DD",2005.2,2005.2,15,.1)
+User name
+"^DD",2005.2,2005.2,15,3)
+Enter a valid user name for this network location.
+"^DD",2005.2,2005.2,15,21,0)
+^.001^2^2^3100308^^^^
+"^DD",2005.2,2005.2,15,21,1,0)
+This field is for a user name used to establish 
+"^DD",2005.2,2005.2,15,21,2,0)
+a connection with the network location.
+"^DD",2005.2,2005.2,15,"DT")
+2980929
+"^DD",2005.2,2005.2,16,0)
+PASSWORD^FXO^^2;2^K:$L(X)>30!($L(X)<3) X Q:'$D(X)  S MAGPAS=X S X=$$ENCRYP^XUSRB1(MAGPAS)
+"^DD",2005.2,2005.2,16,.1)
+Password
+"^DD",2005.2,2005.2,16,2)
+S Y(0)=Y S Y="<Hidden>"
+"^DD",2005.2,2005.2,16,2.1)
+S Y="<Hidden>"
+"^DD",2005.2,2005.2,16,3)
+Enter a valid password for this user at this network location.
+"^DD",2005.2,2005.2,16,21,0)
+^.001^2^2^3100308^^^^
+"^DD",2005.2,2005.2,16,21,1,0)
+This field is a password used with a user name to 
+"^DD",2005.2,2005.2,16,21,2,0)
+establish a connection with this network location. 
+"^DD",2005.2,2005.2,16,"DT")
+3090415
+"^DD",2005.2,2005.2,17,0)
+MAINTAINCONNECTION^S^0:NO;1:YES;^2;3^Q
+"^DD",2005.2,2005.2,17,23,0)
+^^4^4^3100308^
+"^DD",2005.2,2005.2,17,23,1,0)
+This field allows the user to optimize the Export share output by
+"^DD",2005.2,2005.2,17,23,2,0)
+maintaining the connection between export events.  The normal 
+"^DD",2005.2,2005.2,17,23,3,0)
+export file copy connects to the share, copies a file, and then 
+"^DD",2005.2,2005.2,17,23,4,0)
+disconnects from the export share.
+"^DD",2005.2,2005.2,17,"DT")
+3011219
+"^DD",2005.2,2005.2,18,0)
+MAX # RETRY ON CONNECT^NJ3,0^^3;2^K:+X'=X!(X>999)!(X<0)!(X?.E1"."1N.N) X
+"^DD",2005.2,2005.2,18,.1)
+Maximum number of retries on connect
+"^DD",2005.2,2005.2,18,3)
+Enter the maximum number of attemps to establish a connection.
+"^DD",2005.2,2005.2,18,21,0)
+^.001^4^4^3100308^^^^
+"^DD",2005.2,2005.2,18,21,1,0)
+This field indicates  the number of attempts to make to connect with
+"^DD",2005.2,2005.2,18,21,2,0)
+the network location. When no connection can be established within
+"^DD",2005.2,2005.2,18,21,3,0)
+this number of attempts, the status of the network location will be 
+"^DD",2005.2,2005.2,18,21,4,0)
+set to 'Off-Line'. 
+"^DD",2005.2,2005.2,18,"DT")
+2980929
+"^DD",2005.2,2005.2,19,0)
+MAX # RETRY ON TRANSMIT^NJ3,0^^3;3^K:+X'=X!(X>999)!(X<0)!(X?.E1"."1N.N) X
+"^DD",2005.2,2005.2,19,.1)
+Maximum number of retries on transmit
+"^DD",2005.2,2005.2,19,3)
+Enter the maximum number of attempts to transmit a file.
+"^DD",2005.2,2005.2,19,21,0)
+^.001^3^3^3100308^^^^
+"^DD",2005.2,2005.2,19,21,1,0)
+This field indicates  the number of attempts to make to transmit
+"^DD",2005.2,2005.2,19,21,2,0)
+a file. When a file cannot be transmitted within this number of 
+"^DD",2005.2,2005.2,19,21,3,0)
+attempts, its status will be set to 'FAILED'.
+"^DD",2005.2,2005.2,19,"DT")
+2980929
+"^DD",2005.2,2005.2,20,0)
+SYNTAX^S^UNC:UNC;^4;1^Q
+"^DD",2005.2,2005.2,20,.1)
+Syntax for physical name
+"^DD",2005.2,2005.2,20,3)
+Enter a code for the syntax of the name of this network location.
+"^DD",2005.2,2005.2,20,21,0)
+^.001^2^2^3100308^^^^
+"^DD",2005.2,2005.2,20,21,1,0)
+This field is a code for the syntax that describes the actual 
+"^DD",2005.2,2005.2,20,21,2,0)
+(physical) name of the network location.
+"^DD",2005.2,2005.2,20,"DT")
+2980929
+"^DD",2005.2,2005.2,21,0)
+SUBDIRECTORY^F^^4;2^K:$L(X)>64!($L(X)<1) X
+"^DD",2005.2,2005.2,21,.1)
+Subdirectory at network location
+"^DD",2005.2,2005.2,21,3)
+Enter the name of the subdirectory where files are to be stored.
+"^DD",2005.2,2005.2,21,21,0)
+^.001^9^9^3100308^^^^
+"^DD",2005.2,2005.2,21,21,1,0)
+Files are typically not stored in root directories. 
+"^DD",2005.2,2005.2,21,21,2,0)
+ 
+"^DD",2005.2,2005.2,21,21,3,0)
+This field is the name of a subdirectory where files are to be
+"^DD",2005.2,2005.2,21,21,4,0)
+stored.  The value of this field is concatenated to the 
+"^DD",2005.2,2005.2,21,21,5,0)
+name of the network location (the 'physical name') to create 
+"^DD",2005.2,2005.2,21,21,6,0)
+the complete path-name for the location where files are to be 
+"^DD",2005.2,2005.2,21,21,7,0)
+stored.  When "directory hashing" iS active, additional 
+"^DD",2005.2,2005.2,21,21,8,0)
+subdirectory names will be added to the above-mentioned 
+"^DD",2005.2,2005.2,21,21,9,0)
+path-name before the file name  is appended.
+"^DD",2005.2,2005.2,21,"DT")
+2980929
+"^DD",2005.2,2005.2,22,0)
+EMAIL^2005.201PA^^5;0
+"^DD",2005.2,2005.2,23,0)
+RETENTION PERIOD^NJ3,0^^3;1^K:+X'=X!(X>365)!(X<1)!(X?.E1"."1N.N) X
+"^DD",2005.2,2005.2,23,.1)
+Number of days before automatic purge
+"^DD",2005.2,2005.2,23,3)
+Enter the number of days that routed images will be retained.
+"^DD",2005.2,2005.2,23,21,0)
+^.001^5^5^3100308^^^^
+"^DD",2005.2,2005.2,23,21,1,0)
+This field  indicates the number of days to retain routed image files
+"^DD",2005.2,2005.2,23,21,2,0)
+at the location identified by this entry in the NETWORK LOCATION file. 
+"^DD",2005.2,2005.2,23,21,3,0)
+ 
+"^DD",2005.2,2005.2,23,21,4,0)
+When Images  are present for more than this number of days, they are 
+"^DD",2005.2,2005.2,23,21,5,0)
+candidates for automatic removal.
+"^DD",2005.2,2005.2,23,"DT")
+2981110
+"^DD",2005.2,2005.2,24,0)
+LAST PURGE DATE^D^^3;4^S %DT="ESTXR" D ^%DT S X=Y K:Y<1 X
+"^DD",2005.2,2005.2,24,3)
+Enter the date of the latest automatic purge at this location.
+"^DD",2005.2,2005.2,24,21,0)
+^.001^4^4^3100308^^
+"^DD",2005.2,2005.2,24,21,1,0)
+This field indicates the date and time of the most recent purge 
+"^DD",2005.2,2005.2,24,21,2,0)
+at this network location.  An automatic purge will be executed
+"^DD",2005.2,2005.2,24,21,3,0)
+at most once per day; the value of this field determines whether 
+"^DD",2005.2,2005.2,24,21,4,0)
+or not a purge has already taken place.  
+"^DD",2005.2,2005.2,24,"DT")
+2981110
+"^DD",2005.2,2005.2,25,0)
+SITE^F^^3;5^K:$L(X)>20!($L(X)<3) X
+"^DD",2005.2,2005.2,25,3)
+Enter the three-letter abbreviation for the site.
+"^DD",2005.2,2005.2,25,21,0)
+^.001^6^6^3100908^^^^
+"^DD",2005.2,2005.2,25,21,1,0)
+This field is a code for the site of the 'network location.  
+"^DD",2005.2,2005.2,25,21,2,0)
+ 
+"^DD",2005.2,2005.2,25,21,3,0)
+This code is typically a three-letter abbreviation\acronym
+"^DD",2005.2,2005.2,25,21,4,0)
+(WAS for Washington DC, STL for St. Louis, etcetera).  
+"^DD",2005.2,2005.2,25,21,5,0)
+For stations 'at home', a longer code that starts with "HOME" 
+"^DD",2005.2,2005.2,25,21,6,0)
+is entered.
+"^DD",2005.2,2005.2,25,"DT")
+2981211
+"^DD",2005.2,2005.2,26,0)
+ROUTER^SX^0:NO;1:YES;^0;9^Q:DA="+1"  S:$P(^MAG(2005.2,DA,0),U,9)="" $P(^MAG(2005.2,DA,0),U,9)="0"
+"^DD",2005.2,2005.2,26,21,0)
+^.001^5^5^3100308^^^^
+"^DD",2005.2,2005.2,26,21,1,0)
+This boolean value is used to designate certain network location 
+"^DD",2005.2,2005.2,26,21,2,0)
+shares as routing shares.  This is necessary to allow clinical WS 
+"^DD",2005.2,2005.2,26,21,3,0)
+applications access to images on these shares but to prevent the 
+"^DD",2005.2,2005.2,26,21,4,0)
+background processor from designating this share as the current 
+"^DD",2005.2,2005.2,26,21,5,0)
+write location.
+"^DD",2005.2,2005.2,26,"DT")
+3080219
+"^DD",2005.2,2005.2,27,0)
+TIME OFFLINE^D^^3;6^S %DT="ESTX" D ^%DT S X=Y K:Y<1 X
+"^DD",2005.2,2005.2,27,3)
+Enter the date and time that this equipment went off-line.
+"^DD",2005.2,2005.2,27,21,0)
+^.001^5^5^3100308^^^
+"^DD",2005.2,2005.2,27,21,1,0)
+This field is a time stamp indicating when the equipment 
+"^DD",2005.2,2005.2,27,21,2,0)
+in question most recently went off-line.  This time stamp is
+"^DD",2005.2,2005.2,27,21,3,0)
+used by the Routing software to decide whether or not to 
+"^DD",2005.2,2005.2,27,21,4,0)
+attempt to reconnect to a destination that was not reachable
+"^DD",2005.2,2005.2,27,21,5,0)
+at an earlier stage.  
+"^DD",2005.2,2005.2,27,"DT")
+2990210
+"^DD",2005.2,2005.2,28,0)
+MUSE SITE #^NJ2,0^^6;1^K:+X'=X!(X>20)!(X<0)!(X?.E1"."1N.N) X
+"^DD",2005.2,2005.2,28,3)
+Type a Number between 0 and 20, 0 Decimal Digits
+"^DD",2005.2,2005.2,28,21,0)
+^.001^5^5^3100308^^^^
+"^DD",2005.2,2005.2,28,21,1,0)
+If this is a MUSE EKG network location, enter the MUSE site 
+"^DD",2005.2,2005.2,28,21,2,0)
+number for this location. Typically, a site with a single MUSE 
+"^DD",2005.2,2005.2,28,21,3,0)
+server that holds EKGs for one site uses 1.  If a MUSE server
+"^DD",2005.2,2005.2,28,21,4,0)
+stores EKGs for more than one site, then Marquette assigns 
+"^DD",2005.2,2005.2,28,21,5,0)
+each site a MUSE site number.  
+"^DD",2005.2,2005.2,28,"DT")
+3000208
+"^DD",2005.2,2005.2,29,0)
+MUSE VERSION #^P2006.17'^MAG(2006.17,^6;2^Q
+"^DD",2005.2,2005.2,29,3)
+Enter the MUSE version number.
+"^DD",2005.2,2005.2,29,21,0)
+^.001^2^2^3100308^^^^
+"^DD",2005.2,2005.2,29,21,1,0)
+Enter the MUSE version number if this network location is a 
+"^DD",2005.2,2005.2,29,21,2,0)
+MUSE EKG storage type.
+"^DD",2005.2,2005.2,29,"DT")
+3000228
+"^DD",2005.2,2005.2,30,0)
+SHARE GROUP^2005.22PA^^7;0
+"^DD",2005.2,2005.2,30,21,0)
+^.001^3^3^3100308^^^^
+"^DD",2005.2,2005.2,30,21,1,0)
+This subfile identifies the entries that are part of a Shared 
+"^DD",2005.2,2005.2,30,21,2,0)
+Group Imaging sites can use this functionality to group their  
+"^DD",2005.2,2005.2,30,21,3,0)
+network shares.
+"^DD",2005.2,2005.2,31,0)
+GROUP MEMBER^*P2005.2'^MAG(2005.2,^1;8^S DIC("S")="I $P(^(0),U,7)=""GRP""" D ^DIC K DIC S DIC=DIE,X=+Y K:Y<0 X
+"^DD",2005.2,2005.2,31,12)
+This should only reference a STORAGE TYPE of 'GRP'.
+"^DD",2005.2,2005.2,31,12.1)
+S DIC("S")="I $P(^(0),U,7)=""GRP"""
+"^DD",2005.2,2005.2,31,21,0)
+^.001^3^3^3100308^^^
+"^DD",2005.2,2005.2,31,21,1,0)
+This field identifies the Group name that this network location
+"^DD",2005.2,2005.2,31,21,2,0)
+ is part of. Only entries that have a Storage Type of 'GRP' can
+"^DD",2005.2,2005.2,31,21,3,0)
+ be selected.
+"^DD",2005.2,2005.2,31,"DT")
+3070905
+"^DD",2005.2,2005.201,0)
+EMAIL SUB-FIELD^^1^2
+"^DD",2005.2,2005.201,0,"DT")
+2980929
+"^DD",2005.2,2005.201,0,"NM","EMAIL")
+
+"^DD",2005.2,2005.201,0,"UP")
+2005.2
+"^DD",2005.2,2005.201,.01,0)
+USER^P200'^VA(200,^0;1^Q
+"^DD",2005.2,2005.201,.01,.1)
+User
+"^DD",2005.2,2005.201,.01,1,0)
+^.1^^0
+"^DD",2005.2,2005.201,.01,3)
+Enter the name of a user to notify.
+"^DD",2005.2,2005.201,.01,21,0)
+^.001^5^5^3100308^^^^
+"^DD",2005.2,2005.201,.01,21,1,0)
+This field identifies a user who is to receive notification
+"^DD",2005.2,2005.201,.01,21,2,0)
+messages when certain important events have occurred, or when 
+"^DD",2005.2,2005.201,.01,21,3,0)
+a certain number of images have been transmitted.  Messages 
+"^DD",2005.2,2005.201,.01,21,4,0)
+transmitted to the user identified in this field will be 
+"^DD",2005.2,2005.201,.01,21,5,0)
+sent through VA-MailMan (FORUM).  
+"^DD",2005.2,2005.201,.01,"DT")
+2980929
+"^DD",2005.2,2005.201,1,0)
+EMAIL^F^^0;2^K:$L(X)>64!($L(X)<1) X
+"^DD",2005.2,2005.201,1,.1)
+E-mail
+"^DD",2005.2,2005.201,1,3)
+Enter an e-mail address (name@machine.domain).
+"^DD",2005.2,2005.201,1,21,0)
+^.001^4^4^3100308^^^^
+"^DD",2005.2,2005.201,1,21,1,0)
+This field indicates the e-mail address of a user  to notify when
+"^DD",2005.2,2005.201,1,21,2,0)
+significant events occur for this network location.  Messages
+"^DD",2005.2,2005.201,1,21,3,0)
+transmitted to a user identified in this field will be sent through
+"^DD",2005.2,2005.201,1,21,4,0)
+'internet e-mail'.
+"^DD",2005.2,2005.201,1,"DT")
+2980929
+"^DD",2005.2,2005.22,0)
+SHARE GROUP SUB-FIELD^^.01^1
+"^DD",2005.2,2005.22,0,"DT")
+3070305
+"^DD",2005.2,2005.22,0,"IX","B",2005.22,.01)
+
+"^DD",2005.2,2005.22,0,"NM","SHARE GROUP")
+
+"^DD",2005.2,2005.22,0,"UP")
+2005.2
+"^DD",2005.2,2005.22,.01,0)
+SHARE GROUP^P2005.2^MAG(2005.2,^0;1^Q
+"^DD",2005.2,2005.22,.01,1,0)
+^.1^^-1
+"^DD",2005.2,2005.22,.01,1,1,0)
+2005.22^B
+"^DD",2005.2,2005.22,.01,1,1,1)
+S ^MAG(2005.2,DA(1),7,"B",$E(X,1,30),DA)=""
+"^DD",2005.2,2005.22,.01,1,1,2)
+K ^MAG(2005.2,DA(1),7,"B",$E(X,1,30),DA)
+"^DD",2005.2,2005.22,.01,3)
+Enter a RAID storage type member.
+"^DD",2005.2,2005.22,.01,21,0)
+^.001^2^2^3100308^^^
+"^DD",2005.2,2005.22,.01,21,1,0)
+This field identifies the RAID storage type members of
+"^DD",2005.2,2005.22,.01,21,2,0)
+ the parent RAID-GROUP.
+"^DD",2005.2,2005.22,.01,"DT")
+3090701
+"^DIC",2005.2,2005.2,0)
+NETWORK LOCATION^2005.2I
+"^DIC",2005.2,2005.2,0,"GL")
+^MAG(2005.2,
+"^DIC",2005.2,2005.2,"%",0)
+^1.005^1^1
+"^DIC",2005.2,2005.2,"%",1,0)
+MAG
+"^DIC",2005.2,2005.2,"%","B","MAG",1)
+
+"^DIC",2005.2,2005.2,"%D",0)
+^^59^59^3010619^
+"^DIC",2005.2,2005.2,"%D",1,0)
+ +---------------------------------------------------------------+
+"^DIC",2005.2,2005.2,"%D",2,0)
+ |                                                               |
+"^DIC",2005.2,2005.2,"%D",3,0)
+ | Property of the US Government.                                |
+"^DIC",2005.2,2005.2,"%D",4,0)
+ | No permission to copy or redistribute this software is given. |
+"^DIC",2005.2,2005.2,"%D",5,0)
+ | Use of unreleased versions of this software requires the user |
+"^DIC",2005.2,2005.2,"%D",6,0)
+ | to execute a written test agreement with the VistA Imaging    |
+"^DIC",2005.2,2005.2,"%D",7,0)
+ | Development Office of the Department of Veterans Affairs,     |
+"^DIC",2005.2,2005.2,"%D",8,0)
+ | telephone (301) 734-0100.                                     |
+"^DIC",2005.2,2005.2,"%D",9,0)
+ |                                                               |
+"^DIC",2005.2,2005.2,"%D",10,0)
+ | The Food and Drug Administration classifies this software as  |
+"^DIC",2005.2,2005.2,"%D",11,0)
+ | a medical device.  As such, it may not be changed in any way. |
+"^DIC",2005.2,2005.2,"%D",12,0)
+ | Modifications to this software may result in an adulterated   |
+"^DIC",2005.2,2005.2,"%D",13,0)
+ | medical device under 21CFR820, the use of which is considered |
+"^DIC",2005.2,2005.2,"%D",14,0)
+ | to be a violation of US Federal Statutes.                     |
+"^DIC",2005.2,2005.2,"%D",15,0)
+ |                                                               |
+"^DIC",2005.2,2005.2,"%D",16,0)
+ +---------------------------------------------------------------+
+"^DIC",2005.2,2005.2,"%D",17,0)
+ 
+"^DIC",2005.2,2005.2,"%D",18,0)
+ This file will contain an entry for every network storage location, as
+"^DIC",2005.2,2005.2,"%D",19,0)
+well as MUSE (EKG) network location(s). This file maps logical device
+"^DIC",2005.2,2005.2,"%D",20,0)
+names to physical device names, allowing continued operation even when
+"^DIC",2005.2,2005.2,"%D",21,0)
+network storage devices are done. The Imaging site parameters has a number
+"^DIC",2005.2,2005.2,"%D",22,0)
+of fields pointing to this file to locate where on the network different
+"^DIC",2005.2,2005.2,"%D",23,0)
+files are written. Because the Imaging System operates in a distributed
+"^DIC",2005.2,2005.2,"%D",24,0)
+environment, an object may be stored on one or more of the network storage
+"^DIC",2005.2,2005.2,"%D",25,0)
+devices.  These include multiple magnetic file servers, one or more
+"^DIC",2005.2,2005.2,"%D",26,0)
+optical jukeboxes, and possibly additional network devices accessed
+"^DIC",2005.2,2005.2,"%D",27,0)
+through a gateway.
+"^DIC",2005.2,2005.2,"%D",28,0)
+ 
+"^DIC",2005.2,2005.2,"%D",29,0)
+ Each logical location in the Network Location file is mapped to a
+"^DIC",2005.2,2005.2,"%D",30,0)
+physical device.  Every physical device on the network that will be used
+"^DIC",2005.2,2005.2,"%D",31,0)
+for objects must have at least one entry in the Network Location file.
+"^DIC",2005.2,2005.2,"%D",32,0)
+ 
+"^DIC",2005.2,2005.2,"%D",33,0)
+ The Operational Status field allows rapid software reconfiguration in the
+"^DIC",2005.2,2005.2,"%D",34,0)
+event of failure of one of the object storage devices.
+"^DIC",2005.2,2005.2,"%D",35,0)
+ 
+"^DIC",2005.2,2005.2,"%D",36,0)
+ Each network storage device has a type, such as magnetic or optical.
+"^DIC",2005.2,2005.2,"%D",37,0)
+This allows "automatic file migration," where an object resides on a fast
+"^DIC",2005.2,2005.2,"%D",38,0)
+magnetic disk until 30 days since its last access, then it is moved to
+"^DIC",2005.2,2005.2,"%D",39,0)
+slower, less expensive optical media.
+"^DIC",2005.2,2005.2,"%D",40,0)
+ 
+"^DIC",2005.2,2005.2,"%D",41,0)
+ Three fields in the Image file (2005) are used to indicate the storage
+"^DIC",2005.2,2005.2,"%D",42,0)
+device(s) on which the object resides.  For example, an object may
+"^DIC",2005.2,2005.2,"%D",43,0)
+originally be captured to MAG1, the first magnetic server.  Within
+"^DIC",2005.2,2005.2,"%D",44,0)
+seconds, an abstract is created and stored on this same device; the Disk &
+"^DIC",2005.2,2005.2,"%D",45,0)
+Vol, Abstract field will be set to MAG1 also.  Next, the Image file will
+"^DIC",2005.2,2005.2,"%D",46,0)
+be copied to the optical jukebox (if present on the network), creating an
+"^DIC",2005.2,2005.2,"%D",47,0)
+immediate backup copy.  The Disk & Vol, Optical field will now be set to
+"^DIC",2005.2,2005.2,"%D",48,0)
+point to the optical device used for the optical copy.
+"^DIC",2005.2,2005.2,"%D",49,0)
+ 
+"^DIC",2005.2,2005.2,"%D",50,0)
+ The Network Location file was designed to allow access across a gateway.
+"^DIC",2005.2,2005.2,"%D",51,0)
+This type of access has not been required at the test sites.
+"^DIC",2005.2,2005.2,"%D",52,0)
+ 
+"^DIC",2005.2,2005.2,"%D",53,0)
+ We recommend using names for magnetic devices that begin with the three
+"^DIC",2005.2,2005.2,"%D",54,0)
+letters, MAG, followed by sequential numbers.  We recommend that images be
+"^DIC",2005.2,2005.2,"%D",55,0)
+stored in directories named IMAGE at the first level.  Do not store any
+"^DIC",2005.2,2005.2,"%D",56,0)
+files in this directory that are not objects handled by File 2005.
+"^DIC",2005.2,2005.2,"%D",57,0)
+ 
+"^DIC",2005.2,2005.2,"%D",58,0)
+ Logical names for Write Once Read Many (WORM) optical devices should
+"^DIC",2005.2,2005.2,"%D",59,0)
+start with the four letters, WORM.
+"^DIC",2005.2,"B","NETWORK LOCATION",2005.2)
+
+**END**
+**END**

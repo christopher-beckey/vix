@@ -1,0 +1,25 @@
+MAGDWLU0 ;WOIFO/PMK - Worklist information user ; 21 Jun 2010 9:44 AM
+ ;;3.0;IMAGING;**49**;Mar 19, 2002;Build 2201;Jun 29, 2011
+ ;; Per VHA Directive 2004-038, this routine should not be modified.
+ ;; +---------------------------------------------------------------+
+ ;; | Property of the US Government.                                |
+ ;; | No permission to copy or redistribute this software is given. |
+ ;; | Use of unreleased versions of this software requires the user |
+ ;; | to execute a written test agreement with the VistA Imaging    |
+ ;; | Development Office of the Department of Veterans Affairs,     |
+ ;; | telephone (301) 734-0100.                                     |
+ ;; | The Food and Drug Administration classifies this software as  |
+ ;; | a medical device.  As such, it may not be changed in any way. |
+ ;; | Modifications to this software may result in an adulterated   |
+ ;; | medical device under 21CFR820, the use of which is considered |
+ ;; | to be a violation of US Federal Statutes.                     |
+ ;; +---------------------------------------------------------------+
+ ;;
+INIT ; entry point to initialize a Modality Worklist C-FIND-RQ
+ S CHANNEL=1
+ S ROLE="SCU",PRIORITY="MEDIUM",STATNUMB="0" ; STATNUMB needs to be corrected
+ D MSGINIT^MAGDFCNS ; Initialize the ^TMP global for this message
+ D TIMESTMP^MAGDFND0($H,.MSGDATE,.MSGTIME)
+ S UIDTYPE="NONE",UID(UIDTYPE)=""
+ S MESSAGE="MODALITY WORKLIST FIND REQUEST",MSGHANDL=""
+ Q

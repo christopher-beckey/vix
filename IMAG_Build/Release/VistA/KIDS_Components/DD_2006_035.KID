@@ -1,0 +1,552 @@
+KIDS Distribution saved on Jul 16, 2007@12:42:17
+Package for FILE named 2006.035
+**KIDS**:MAG*3.0*57^
+
+**INSTALL NAME**
+MAG*3.0*57
+"BLD",5880,0)
+MAG*3.0*57^^0^3070716^y
+"BLD",5880,1,0)
+^^4^4^3070716^
+"BLD",5880,1,1,0)
+This package contains a KIDS component
+"BLD",5880,1,2,0)
+for Running Baseline.
+"BLD",5880,1,3,0)
+ 
+"BLD",5880,1,4,0)
+This package transports the FileMan data dictionary named 2006.035.
+"BLD",5880,4,0)
+^9.64PA^2006.035^1
+"BLD",5880,4,2006.035,0)
+2006.035
+"BLD",5880,4,2006.035,222)
+y^y^f^^^^n
+"BLD",5880,4,"B",2006.035,2006.035)
+
+"BLD",5880,6.3)
+1
+"BLD",5880,"KRN",0)
+^9.67PA^8989.52^19
+"BLD",5880,"KRN",.4,0)
+.4
+"BLD",5880,"KRN",.401,0)
+.401
+"BLD",5880,"KRN",.402,0)
+.402
+"BLD",5880,"KRN",.403,0)
+.403
+"BLD",5880,"KRN",.5,0)
+.5
+"BLD",5880,"KRN",.84,0)
+.84
+"BLD",5880,"KRN",3.6,0)
+3.6
+"BLD",5880,"KRN",3.8,0)
+3.8
+"BLD",5880,"KRN",9.2,0)
+9.2
+"BLD",5880,"KRN",9.8,0)
+9.8
+"BLD",5880,"KRN",19,0)
+19
+"BLD",5880,"KRN",19.1,0)
+19.1
+"BLD",5880,"KRN",101,0)
+101
+"BLD",5880,"KRN",409.61,0)
+409.61
+"BLD",5880,"KRN",771,0)
+771
+"BLD",5880,"KRN",870,0)
+870
+"BLD",5880,"KRN",8989.51,0)
+8989.51
+"BLD",5880,"KRN",8989.52,0)
+8989.52
+"BLD",5880,"KRN",8994,0)
+8994
+"BLD",5880,"KRN","B",.4,.4)
+
+"BLD",5880,"KRN","B",.401,.401)
+
+"BLD",5880,"KRN","B",.402,.402)
+
+"BLD",5880,"KRN","B",.403,.403)
+
+"BLD",5880,"KRN","B",.5,.5)
+
+"BLD",5880,"KRN","B",.84,.84)
+
+"BLD",5880,"KRN","B",3.6,3.6)
+
+"BLD",5880,"KRN","B",3.8,3.8)
+
+"BLD",5880,"KRN","B",9.2,9.2)
+
+"BLD",5880,"KRN","B",9.8,9.8)
+
+"BLD",5880,"KRN","B",19,19)
+
+"BLD",5880,"KRN","B",19.1,19.1)
+
+"BLD",5880,"KRN","B",101,101)
+
+"BLD",5880,"KRN","B",409.61,409.61)
+
+"BLD",5880,"KRN","B",771,771)
+
+"BLD",5880,"KRN","B",870,870)
+
+"BLD",5880,"KRN","B",8989.51,8989.51)
+
+"BLD",5880,"KRN","B",8989.52,8989.52)
+
+"BLD",5880,"KRN","B",8994,8994)
+
+"FIA",2006.035)
+SEND QUEUE
+"FIA",2006.035,0)
+^MAGQUEUE(2006.035,
+"FIA",2006.035,0,0)
+2006.035P
+"FIA",2006.035,0,1)
+y^y^f^^^^n
+"FIA",2006.035,0,10)
+
+"FIA",2006.035,0,11)
+
+"FIA",2006.035,0,"RLRO")
+
+"FIA",2006.035,2006.035)
+0
+"IX",2006.035,2006.035,"DEST",0)
+2006.035^DEST^Destination, status, and file type^R^^R^IR^I^2006.035^^^^^LS
+"IX",2006.035,2006.035,"DEST",.1,0)
+^^2^2^3020312^
+"IX",2006.035,2006.035,"DEST",.1,1,0)
+This cross reference keeps track of which images are
+"IX",2006.035,2006.035,"DEST",.1,2,0)
+slated to go where.
+"IX",2006.035,2006.035,"DEST",1)
+S ^MAGQUEUE(2006.035,"DEST",X(1),X(2),X(3),X(4),DA)=""
+"IX",2006.035,2006.035,"DEST",2)
+K ^MAGQUEUE(2006.035,"DEST",X(1),X(2),X(3),X(4),DA)
+"IX",2006.035,2006.035,"DEST",2.5)
+K ^MAGQUEUE(2006.035,"DEST")
+"IX",2006.035,2006.035,"DEST",11.1,0)
+^.114IA^4^4
+"IX",2006.035,2006.035,"DEST",11.1,1,0)
+1^F^2006.035^1^^1^F
+"IX",2006.035,2006.035,"DEST",11.1,1,3)
+
+"IX",2006.035,2006.035,"DEST",11.1,2,0)
+2^F^2006.035^3^^2^F
+"IX",2006.035,2006.035,"DEST",11.1,2,3)
+
+"IX",2006.035,2006.035,"DEST",11.1,3,0)
+3^F^2006.035^.01^^3^F
+"IX",2006.035,2006.035,"DEST",11.1,3,3)
+
+"IX",2006.035,2006.035,"DEST",11.1,4,0)
+4^F^2006.035^2^^4^F
+"IX",2006.035,2006.035,"DEST",11.1,4,3)
+
+"IX",2006.035,2006.035,"STS",0)
+2006.035^STS^Status, priority and destination^R^^R^IR^I^2006.035^^^^^LS
+"IX",2006.035,2006.035,"STS",.1,0)
+^^2^2^3020312^
+"IX",2006.035,2006.035,"STS",.1,1,0)
+This cross reference keeps track of which files are to be sent where and
+"IX",2006.035,2006.035,"STS",.1,2,0)
+in which order.
+"IX",2006.035,2006.035,"STS",1)
+S ^MAGQUEUE(2006.035,"STS",X(1),X(2),X(3),X(4),DA)=""
+"IX",2006.035,2006.035,"STS",2)
+K ^MAGQUEUE(2006.035,"STS",X(1),X(2),X(3),X(4),DA)
+"IX",2006.035,2006.035,"STS",2.5)
+K ^MAGQUEUE(2006.035,"STS")
+"IX",2006.035,2006.035,"STS",11.1,0)
+^.114IA^4^4
+"IX",2006.035,2006.035,"STS",11.1,1,0)
+1^F^2006.035^8^^1^F
+"IX",2006.035,2006.035,"STS",11.1,2,0)
+2^F^2006.035^3^^2^F
+"IX",2006.035,2006.035,"STS",11.1,3,0)
+3^F^2006.035^4^^3^F
+"IX",2006.035,2006.035,"STS",11.1,4,0)
+4^F^2006.035^1^^4^F
+"MBREQ")
+0
+"QUES","XPF1",0)
+Y
+"QUES","XPF1","??")
+^D REP^XPDH
+"QUES","XPF1","A")
+Shall I write over your |FLAG| File
+"QUES","XPF1","B")
+YES
+"QUES","XPF1","M")
+D XPF1^XPDIQ
+"QUES","XPF2",0)
+Y
+"QUES","XPF2","??")
+^D DTA^XPDH
+"QUES","XPF2","A")
+Want my data |FLAG| yours
+"QUES","XPF2","B")
+YES
+"QUES","XPF2","M")
+D XPF2^XPDIQ
+"QUES","XPI1",0)
+YO
+"QUES","XPI1","??")
+^D INHIBIT^XPDH
+"QUES","XPI1","A")
+Want KIDS to INHIBIT LOGONs during the install
+"QUES","XPI1","B")
+YES
+"QUES","XPI1","M")
+D XPI1^XPDIQ
+"QUES","XPM1",0)
+PO^VA(200,:EM
+"QUES","XPM1","??")
+^D MG^XPDH
+"QUES","XPM1","A")
+Enter the Coordinator for Mail Group '|FLAG|'
+"QUES","XPM1","B")
+
+"QUES","XPM1","M")
+D XPM1^XPDIQ
+"QUES","XPO1",0)
+Y
+"QUES","XPO1","??")
+^D MENU^XPDH
+"QUES","XPO1","A")
+Want KIDS to Rebuild Menu Trees Upon Completion of Install
+"QUES","XPO1","B")
+YES
+"QUES","XPO1","M")
+D XPO1^XPDIQ
+"QUES","XPZ1",0)
+Y
+"QUES","XPZ1","??")
+^D OPT^XPDH
+"QUES","XPZ1","A")
+Want to DISABLE Scheduled Options, Menu Options, and Protocols
+"QUES","XPZ1","B")
+YES
+"QUES","XPZ1","M")
+D XPZ1^XPDIQ
+"QUES","XPZ2",0)
+Y
+"QUES","XPZ2","??")
+^D RTN^XPDH
+"QUES","XPZ2","A")
+Want to MOVE routines to other CPUs
+"QUES","XPZ2","B")
+NO
+"QUES","XPZ2","M")
+D XPZ2^XPDIQ
+"SEC","^DIC",2006.035,2006.035,0,"AUDIT")
+@
+"SEC","^DIC",2006.035,2006.035,0,"DD")
+@
+"SEC","^DIC",2006.035,2006.035,0,"DEL")
+@
+"SEC","^DIC",2006.035,2006.035,0,"LAYGO")
+@
+"SEC","^DIC",2006.035,2006.035,0,"RD")
+@
+"SEC","^DIC",2006.035,2006.035,0,"WR")
+@
+"VER")
+8.0^22.0
+"^DD",2006.035,2006.035,0)
+FIELD^^9^10
+"^DD",2006.035,2006.035,0,"DDA")
+N
+"^DD",2006.035,2006.035,0,"DT")
+3030624
+"^DD",2006.035,2006.035,0,"IX","ID",2006.035,9)
+
+"^DD",2006.035,2006.035,0,"NM","SEND QUEUE")
+
+"^DD",2006.035,2006.035,0,"VRPK")
+MAG
+"^DD",2006.035,2006.035,.01,0)
+IMAGE^RP2005'^MAG(2005,^0;1^Q
+"^DD",2006.035,2006.035,.01,.1)
+Image
+"^DD",2006.035,2006.035,.01,1,0)
+^.1^^0
+"^DD",2006.035,2006.035,.01,3)
+
+"^DD",2006.035,2006.035,.01,21,0)
+^^3^3^3000216^^
+"^DD",2006.035,2006.035,.01,21,1,0)
+The value of this field is a pointer to the image file.
+"^DD",2006.035,2006.035,.01,21,2,0)
+This entry in the SEND queue is intended to cause transmission
+"^DD",2006.035,2006.035,.01,21,3,0)
+of files for the image that is indicated by this pointer.
+"^DD",2006.035,2006.035,.01,"DT")
+3020312
+"^DD",2006.035,2006.035,1,0)
+DESTINATION^RV^^0;2^Q
+"^DD",2006.035,2006.035,1,3)
+Enter the name of the destination to which images are to be transmitted.
+"^DD",2006.035,2006.035,1,21,0)
+^.001^10^10^3041029^^^
+"^DD",2006.035,2006.035,1,21,1,0)
+The value of this field is a "Variable Pointer".
+"^DD",2006.035,2006.035,1,21,2,0)
+ 
+"^DD",2006.035,2006.035,1,21,3,0)
+The pointer may reference either an entry in
+"^DD",2006.035,2006.035,1,21,4,0)
+either File 2005.2 (Imaging Network Location) or
+"^DD",2006.035,2006.035,1,21,5,0)
+File 2006.585 (DICOM User Application).
+"^DD",2006.035,2006.035,1,21,6,0)
+ 
+"^DD",2006.035,2006.035,1,21,7,0)
+When pointing to File 2005.2, images will be
+"^DD",2006.035,2006.035,1,21,8,0)
+transmitted using a host-system copy protocol;
+"^DD",2006.035,2006.035,1,21,9,0)
+when pointing to File 2006.585, images will be
+"^DD",2006.035,2006.035,1,21,10,0)
+transmitted using the DICOM protocol.
+"^DD",2006.035,2006.035,1,"DT")
+3020312
+"^DD",2006.035,2006.035,1,"V",0)
+^.12P^3^3
+"^DD",2006.035,2006.035,1,"V",1,0)
+2005.2^Send to which Network Location^1^N^n^n
+"^DD",2006.035,2006.035,1,"V",2,0)
+2006.585^Send to which DICOM SCU^2^D^n^n
+"^DD",2006.035,2006.035,1,"V",3,0)
+2006.587^Send to which DICOM SCU^3^DCM^n^n
+"^DD",2006.035,2006.035,2,0)
+TYPE^RS^ABSTRACT:ABSTRACT;FULL:FULL;BIG:BIG;TEXT:TEXT;DICOM:DICOM;^0;3^Q
+"^DD",2006.035,2006.035,2,.1)
+Type of file
+"^DD",2006.035,2006.035,2,1,0)
+^.1^^0
+"^DD",2006.035,2006.035,2,21,0)
+^^2^2^2980921^
+"^DD",2006.035,2006.035,2,21,1,0)
+This field identifies the kind of file that is to be transmitted.
+"^DD",2006.035,2006.035,2,21,2,0)
+Currently 5 possible types exist (Abstract, Full, Big, Text and DICOM).
+"^DD",2006.035,2006.035,2,"DT")
+3020312
+"^DD",2006.035,2006.035,3,0)
+STATUS^S^WAITING:WAITING;SENDING:SENDING;SENT:SENT;FAILED:FAILED;^1;1^Q
+"^DD",2006.035,2006.035,3,.1)
+Status
+"^DD",2006.035,2006.035,3,1,0)
+^.1^^0
+"^DD",2006.035,2006.035,3,21,0)
+^^11^11^3000216^^
+"^DD",2006.035,2006.035,3,21,1,0)
+The value of this field indicates the status of the queue-entry.
+"^DD",2006.035,2006.035,3,21,2,0)
+Normally, an entry goes through three stages:
+"^DD",2006.035,2006.035,3,21,3,0)
+First, the status is "WAITING".
+"^DD",2006.035,2006.035,3,21,4,0)
+When the queue-processor starts working on the current file, the status will become "SENDING".
+"^DD",2006.035,2006.035,3,21,5,0)
+When the file has been transmitted, the status will change to "SENT".
+"^DD",2006.035,2006.035,3,21,6,0)
+ 
+"^DD",2006.035,2006.035,3,21,7,0)
+When a transmission fails, the queue processor will make a number of additional attempts to
+"^DD",2006.035,2006.035,3,21,8,0)
+transmit the file. If all attempts remain unsuccessful, the status
+"^DD",2006.035,2006.035,3,21,9,0)
+will be changed to "FAILED".
+"^DD",2006.035,2006.035,3,21,10,0)
+ 
+"^DD",2006.035,2006.035,3,21,11,0)
+There is a menu option to "re-queue" entries with a status of "FAILED".
+"^DD",2006.035,2006.035,3,"DT")
+3020312
+"^DD",2006.035,2006.035,4,0)
+PRIORITY^NJ3,0^^1;2^K:+X'=X!(X>999)!(X<1)!(X?.E1"."1N.N) X
+"^DD",2006.035,2006.035,4,.1)
+Relative priority
+"^DD",2006.035,2006.035,4,1,0)
+^.1^^0
+"^DD",2006.035,2006.035,4,3)
+Enter a number that represents the priority (normal is 500).
+"^DD",2006.035,2006.035,4,21,0)
+^^4^4^3000216^^
+"^DD",2006.035,2006.035,4,21,1,0)
+This field indicates the relative priority of the entry in the queue.
+"^DD",2006.035,2006.035,4,21,2,0)
+Normally, all entries have priority 500.
+"^DD",2006.035,2006.035,4,21,3,0)
+The software may assign a low priority (250) or a high priority (750).
+"^DD",2006.035,2006.035,4,21,4,0)
+In the future further refinement of these priorities is expected.
+"^DD",2006.035,2006.035,4,"DT")
+3020312
+"^DD",2006.035,2006.035,5,0)
+TIME IN^RD^^1;3^S %DT="ESTXR" D ^%DT S X=Y K:Y<1 X
+"^DD",2006.035,2006.035,5,.1)
+Timestamp (enter queue)
+"^DD",2006.035,2006.035,5,21,0)
+^^2^2^2980921^
+"^DD",2006.035,2006.035,5,21,1,0)
+The value of this field is a time-stamp that identifies the date and time
+"^DD",2006.035,2006.035,5,21,2,0)
+on which the entry was added to the queue.
+"^DD",2006.035,2006.035,5,"DT")
+2980921
+"^DD",2006.035,2006.035,6,0)
+TIME OUT^D^^1;4^S %DT="ESTXR" D ^%DT S X=Y K:Y<1 X
+"^DD",2006.035,2006.035,6,.1)
+Timestamp (processed)
+"^DD",2006.035,2006.035,6,21,0)
+^^3^3^2980921^
+"^DD",2006.035,2006.035,6,21,1,0)
+The value of this field is a time stamp that identifies when the
+"^DD",2006.035,2006.035,6,21,2,0)
+entry in the queue was processed (status changed to either SENT
+"^DD",2006.035,2006.035,6,21,3,0)
+or FAILED).
+"^DD",2006.035,2006.035,6,"DT")
+2980921
+"^DD",2006.035,2006.035,7,0)
+MECHANISM^S^1:MS-DOS Copy;2:DICOM Send;^0;4^Q
+"^DD",2006.035,2006.035,7,3)
+Enter a code for the method of transmission.
+"^DD",2006.035,2006.035,7,21,0)
+^^4^4^3000216^
+"^DD",2006.035,2006.035,7,21,1,0)
+The value of this field is a code that indicates how files
+"^DD",2006.035,2006.035,7,21,2,0)
+are to be transmitted to the remote location.
+"^DD",2006.035,2006.035,7,21,3,0)
+Possible methods of transmission are "MS-DOS copy" and
+"^DD",2006.035,2006.035,7,21,4,0)
+"DICOM copy".
+"^DD",2006.035,2006.035,7,"DT")
+2991222
+"^DD",2006.035,2006.035,8,0)
+ORIGIN^RP4'^DIC(4,^0;5^Q
+"^DD",2006.035,2006.035,8,3)
+Enter the location from which this image originates.
+"^DD",2006.035,2006.035,8,21,0)
+^^5^5^3010309^
+"^DD",2006.035,2006.035,8,21,1,0)
+The value of this field is a pointer (to the Institution
+"^DD",2006.035,2006.035,8,21,2,0)
+file, #4). The institution that is identified by this value
+"^DD",2006.035,2006.035,8,21,3,0)
+is the place where the image "comes from". In the context
+"^DD",2006.035,2006.035,8,21,4,0)
+of auto-routing, the image "comes from" the place where it
+"^DD",2006.035,2006.035,8,21,5,0)
+is permanently stored.
+"^DD",2006.035,2006.035,8,"DT")
+3020312
+"^DD",2006.035,2006.035,9,0)
+TRANSACTION ID^F^^0;6^K:$L(X)>30!($L(X)<1) X
+"^DD",2006.035,2006.035,9,1,0)
+^.1
+"^DD",2006.035,2006.035,9,1,1,0)
+2006.035^ID
+"^DD",2006.035,2006.035,9,1,1,1)
+S ^MAGQUEUE(2006.035,"ID",$E(X,1,30),DA)=""
+"^DD",2006.035,2006.035,9,1,1,2)
+K ^MAGQUEUE(2006.035,"ID",$E(X,1,30),DA)
+"^DD",2006.035,2006.035,9,1,1,"%D",0)
+^^2^2^3030624^
+"^DD",2006.035,2006.035,9,1,1,"%D",1,0)
+This cross-reference keeps track of which files belong
+"^DD",2006.035,2006.035,9,1,1,"%D",2,0)
+to which transactions (studies).
+"^DD",2006.035,2006.035,9,1,1,"DT")
+3030624
+"^DD",2006.035,2006.035,9,3)
+Enter an identification for the transaction to which this file belongs.
+"^DD",2006.035,2006.035,9,21,0)
+^^5^5^3030624^
+"^DD",2006.035,2006.035,9,21,1,0)
+The value of this field is a string that identifies the transaction
+"^DD",2006.035,2006.035,9,21,2,0)
+to which this file belongs.
+"^DD",2006.035,2006.035,9,21,3,0)
+ 
+"^DD",2006.035,2006.035,9,21,4,0)
+A transaction typically corresponds to a "study", a group of images
+"^DD",2006.035,2006.035,9,21,5,0)
+that are to be manipulated as a unit.
+"^DD",2006.035,2006.035,9,"DT")
+3030624
+"^DIC",2006.035,2006.035,0)
+SEND QUEUE^2006.035
+"^DIC",2006.035,2006.035,0,"GL")
+^MAGQUEUE(2006.035,
+"^DIC",2006.035,2006.035,"%D",0)
+^^26^26^3020528^^
+"^DIC",2006.035,2006.035,"%D",1,0)
+ +---------------------------------------------------------------+
+"^DIC",2006.035,2006.035,"%D",2,0)
+ |                                                               |
+"^DIC",2006.035,2006.035,"%D",3,0)
+ | Property of the US Government.                                |
+"^DIC",2006.035,2006.035,"%D",4,0)
+ | No permission to copy or redistribute this software is given. |
+"^DIC",2006.035,2006.035,"%D",5,0)
+ | Use of unreleased versions of this software requires the user |
+"^DIC",2006.035,2006.035,"%D",6,0)
+ | to execute a written test agreement with the VistA Imaging    |
+"^DIC",2006.035,2006.035,"%D",7,0)
+ | Development Office of the Department of Veterans Affairs,     |
+"^DIC",2006.035,2006.035,"%D",8,0)
+ | telephone (301) 734-0100.                                     |
+"^DIC",2006.035,2006.035,"%D",9,0)
+ |                                                               |
+"^DIC",2006.035,2006.035,"%D",10,0)
+ | The Food and Drug Administration classifies this software as  |
+"^DIC",2006.035,2006.035,"%D",11,0)
+ | a medical device.  As such, it may not be changed in any way. |
+"^DIC",2006.035,2006.035,"%D",12,0)
+ | Modifications to this software may result in an adulterated   |
+"^DIC",2006.035,2006.035,"%D",13,0)
+ | medical device under 21CFR820, the use of which is considered |
+"^DIC",2006.035,2006.035,"%D",14,0)
+ | to be a violation of US Federal Statutes.                     |
+"^DIC",2006.035,2006.035,"%D",15,0)
+ |                                                               |
+"^DIC",2006.035,2006.035,"%D",16,0)
+ +---------------------------------------------------------------+
+"^DIC",2006.035,2006.035,"%D",17,0)
+ 
+"^DIC",2006.035,2006.035,"%D",18,0)
+The entries in this file each represent a file to be transmitted
+"^DIC",2006.035,2006.035,"%D",19,0)
+to a remote location.
+"^DIC",2006.035,2006.035,"%D",20,0)
+Entries are placed (automatically) into this file when images
+"^DIC",2006.035,2006.035,"%D",21,0)
+are acquired, based on rules that are set up in a separate table.
+"^DIC",2006.035,2006.035,"%D",22,0)
+Entries in this file are processed by a "background routing processor"
+"^DIC",2006.035,2006.035,"%D",23,0)
+that takes care of the actual transmission of files to remote locations,
+"^DIC",2006.035,2006.035,"%D",24,0)
+and also takes care of purging obsolete routed files from those locations.
+"^DIC",2006.035,2006.035,"%D",25,0)
+Processed entries can be purged from this file using a menu option
+"^DIC",2006.035,2006.035,"%D",26,0)
+on the menu of the "Routing Processor".
+"^DIC",2006.035,"B","SEND QUEUE",2006.035)
+
+**END**
+**END**

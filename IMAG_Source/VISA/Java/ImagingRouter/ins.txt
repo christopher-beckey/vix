@@ -1,0 +1,135 @@
+[INFO] Scanning for projects...
+[INFO] ------------------------------------------------------------------------
+[INFO] Building ImagingRouter
+[INFO]    task-segment: [clean, install]
+[INFO] ------------------------------------------------------------------------
+[INFO] [clean:clean {execution: default-clean}]
+[INFO] Deleting directory D:\usr\vitelnet\eclipse197\ImagingRouter\target
+[INFO] [antrun:run {execution: default}]
+[INFO] Executing tasks
+[INFO] Executed tasks
+[INFO] [resources:resources {execution: default-resources}]
+[WARNING] Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+[INFO] Copying 1 resource
+[INFO] [compiler:compile {execution: default-compile}]
+[INFO] Compiling 152 source files to D:\usr\vitelnet\eclipse197\ImagingRouter\target\classes
+Generating test option: false
+Calling generate for method 'PostImageAnnotationDetailsDataSourceCommand'.
+Calling generate for method 'PostImagingLogEventDataSourceCommand'.
+Generating test option: true
+Generating test option: false
+Generating test option: true
+Generating test option: false
+Generating test option: true
+[WARNING] D:\usr\vitelnet\eclipse197\ImagingRouter\main\src\java\gov\va\med\imaging\router\commands\vistarad\datasource\GetExamImagesForExamFromDataSourceCommandImpl.java:[86,12] [deprecation] getExamImagesForExam(StudyURN) in VistaRadDataSourceSpi has been deprecated
+
+[INFO] [resources:testResources {execution: default-testResources}]
+[WARNING] Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+[INFO] skip non existing resourceDirectory D:\usr\vitelnet\eclipse197\ImagingRouter\main\test\resources
+[INFO] [compiler:testCompile {execution: default-testCompile}]
+[INFO] Compiling 7 source files to D:\usr\vitelnet\eclipse197\ImagingRouter\target\test-classes
+[INFO] [surefire:test {execution: default-test}]
+[INFO] Surefire report directory: D:\usr\vitelnet\eclipse197\ImagingRouter\target\surefire-reports
+
+-------------------------------------------------------
+ T E S T S
+-------------------------------------------------------
+Running gov.va.med.imaging.router.facade.ValidateImagingRouterCommandsExistTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.044 sec
+Running gov.va.med.imaging.core.router.commands.CommonExamFunctionsTest
+ERROR StatusLogger No log4j2 configuration file found. Using default configuration: logging only errors to the console. Set system property 'log4j2.debug' to show Log4j2 internal initialization logging.
+ImageURN NSS regular expression is '([^-]+)-([^-]+)-([^-]+)-([^-]+)(?:-)?([^-]+)?'.
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.794 sec
+Running gov.va.med.imaging.router.facade.ValidateImagingRouterFacadeTest
+gov.va.med.imaging.router.facade.ImagingRouter.getExamRequisitionReportFromDataSource->gov.va.med.imaging.router.facade.ImagingRouterImpl.getExamRequisitionReportFromDataSource
+gov.va.med.imaging.router.facade.ImagingRouter.getExamImagesForExamFromDataSource->gov.va.med.imaging.router.facade.ImagingRouterImpl.getExamImagesForExamFromDataSource
+gov.va.med.imaging.router.facade.ImagingRouter.getPatientEnterpriseExams->gov.va.med.imaging.router.facade.ImagingRouterImpl.getPatientEnterpriseExams
+gov.va.med.imaging.router.facade.ImagingRouter.getExamFromDataSource->gov.va.med.imaging.router.facade.ImagingRouterImpl.getExamFromDataSource
+gov.va.med.imaging.router.facade.ImagingRouter.getExamsForPatientFromDataSource->gov.va.med.imaging.router.facade.ImagingRouterImpl.getExamsForPatientFromDataSource
+gov.va.med.imaging.router.facade.ImagingRouter.getFullyLoadedExamSite->gov.va.med.imaging.router.facade.ImagingRouterImpl.getFullyLoadedExamSite
+gov.va.med.imaging.router.facade.ImagingRouter.getFullyLoadedExamSite->gov.va.med.imaging.router.facade.ImagingRouterImpl.getFullyLoadedExamSite
+gov.va.med.imaging.router.facade.ImagingRouter.getExamReportFromDataSource->gov.va.med.imaging.router.facade.ImagingRouterImpl.getExamReportFromDataSource
+gov.va.med.imaging.router.facade.ImagingRouter.getCumulativeStatisticsDocumentSetResultForPatient->gov.va.med.imaging.router.facade.ImagingRouterImpl.getCumulativeStatisticsDocumentSetResultForPatient
+gov.va.med.imaging.router.facade.ImagingRouter.getStudyWithImagesPatientArtifactResultsFromSiteAsync->gov.va.med.imaging.router.facade.ImagingRouterImpl.getStudyWithImagesPatientArtifactResultsFromSiteAsync
+gov.va.med.imaging.router.facade.ImagingRouter.getStudyWithReportPatientArtifactResultsFromSiteAsync->gov.va.med.imaging.router.facade.ImagingRouterImpl.getStudyWithReportPatientArtifactResultsFromSiteAsync
+gov.va.med.imaging.router.facade.ImagingRouter.getShallowStudySetResultBySiteNumber->gov.va.med.imaging.router.facade.ImagingRouterImpl.getShallowStudySetResultBySiteNumber
+gov.va.med.imaging.router.facade.ImagingRouter.getPatientIdentificationImageInformation->gov.va.med.imaging.router.facade.ImagingRouterImpl.getPatientIdentificationImageInformation
+gov.va.med.imaging.router.facade.ImagingRouter.getPatientIdentificationImageInformation->gov.va.med.imaging.router.facade.ImagingRouterImpl.getPatientIdentificationImageInformation
+gov.va.med.imaging.router.facade.ImagingRouter.getStudyWithReportPatientArtifactResultsFromSite->gov.va.med.imaging.router.facade.ImagingRouterImpl.getStudyWithReportPatientArtifactResultsFromSite
+gov.va.med.imaging.router.facade.ImagingRouter.getStudySetResultWithReportsBySiteNumber->gov.va.med.imaging.router.facade.ImagingRouterImpl.getStudySetResultWithReportsBySiteNumber
+gov.va.med.imaging.router.facade.ImagingRouter.prefetchInstanceByImageUrnDelayOneMinute->gov.va.med.imaging.router.facade.ImagingRouterImpl.prefetchInstanceByImageUrnDelayOneMinute
+gov.va.med.imaging.router.facade.ImagingRouter.getPatientArtifactResultsFromSiteAsync->gov.va.med.imaging.router.facade.ImagingRouterImpl.getPatientArtifactResultsFromSiteAsync
+gov.va.med.imaging.router.facade.ImagingRouter.prefetchExamInstanceByImageUrnDelayOneMinute->gov.va.med.imaging.router.facade.ImagingRouterImpl.prefetchExamInstanceByImageUrnDelayOneMinute
+gov.va.med.imaging.router.facade.ImagingRouter.getStudyWithImagesPatientArtifactResultsFromSite->gov.va.med.imaging.router.facade.ImagingRouterImpl.getStudyWithImagesPatientArtifactResultsFromSite
+gov.va.med.imaging.router.facade.ImagingRouter.getStudyOnlyPatientArtifactResultsFromSiteAsync->gov.va.med.imaging.router.facade.ImagingRouterImpl.getStudyOnlyPatientArtifactResultsFromSiteAsync
+gov.va.med.imaging.router.facade.ImagingRouter.getStudySetResultWithImagesBySiteNumber->gov.va.med.imaging.router.facade.ImagingRouterImpl.getStudySetResultWithImagesBySiteNumber
+gov.va.med.imaging.router.facade.ImagingRouter.getPatientPhotoIdentificationImage->gov.va.med.imaging.router.facade.ImagingRouterImpl.getPatientPhotoIdentificationImage
+gov.va.med.imaging.router.facade.ImagingRouter.getFullyLoadedPatientArtifactResultsFromSite->gov.va.med.imaging.router.facade.ImagingRouterImpl.getFullyLoadedPatientArtifactResultsFromSite
+gov.va.med.imaging.router.facade.ImagingRouter.getStudyFromCprsIdentifierAndFilter->gov.va.med.imaging.router.facade.ImagingRouterImpl.getStudyFromCprsIdentifierAndFilter
+gov.va.med.imaging.router.facade.ImagingRouter.getCumulativeStatisticsArtifactResultsForPatient->gov.va.med.imaging.router.facade.ImagingRouterImpl.getCumulativeStatisticsArtifactResultsForPatient
+gov.va.med.imaging.router.facade.ImagingRouter.getStudyOnlyPatientArtifactResultsFromSiteMuse->gov.va.med.imaging.router.facade.ImagingRouterImpl.getStudyOnlyPatientArtifactResultsFromSiteMuse
+gov.va.med.imaging.router.facade.ImagingRouter.getStudyOnlyPatientArtifactResultsFromSite->gov.va.med.imaging.router.facade.ImagingRouterImpl.getStudyOnlyPatientArtifactResultsFromSite
+gov.va.med.imaging.router.facade.ImagingRouter.getPatientIdentificationImageInformationAsync->gov.va.med.imaging.router.facade.ImagingRouterImpl.getPatientIdentificationImageInformationAsync
+gov.va.med.imaging.router.facade.ImagingRouter.postStudiesByCprsIdentifiersAndFilter->gov.va.med.imaging.router.facade.ImagingRouterImpl.postStudiesByCprsIdentifiersAndFilter
+gov.va.med.imaging.router.facade.ImagingRouter.getCumulativeStatisticsStudySetResultForPatient->gov.va.med.imaging.router.facade.ImagingRouterImpl.getCumulativeStatisticsStudySetResultForPatient
+gov.va.med.imaging.router.facade.ImagingRouter.getMostRecentImageAnnotationDetails->gov.va.med.imaging.router.facade.ImagingRouterImpl.getMostRecentImageAnnotationDetails
+gov.va.med.imaging.router.facade.ImagingRouter.prefetchInstanceByImageUrnSync->gov.va.med.imaging.router.facade.ImagingRouterImpl.prefetchInstanceByImageUrnSync
+gov.va.med.imaging.router.facade.ImagingRouter.getPatientInformation->gov.va.med.imaging.router.facade.ImagingRouterImpl.getPatientInformation
+gov.va.med.imaging.router.facade.ImagingRouter.postImagingLogEventRetryable->gov.va.med.imaging.router.facade.ImagingRouterImpl.postImagingLogEventRetryable
+gov.va.med.imaging.router.facade.ImagingRouter.getStudyFromCprsIdentifier->gov.va.med.imaging.router.facade.ImagingRouterImpl.getStudyFromCprsIdentifier
+gov.va.med.imaging.router.facade.ImagingRouter.getInstanceByImage->gov.va.med.imaging.router.facade.ImagingRouterImpl.getInstanceByImage
+gov.va.med.imaging.router.facade.ImagingRouter.getPatientIdentificationImage->gov.va.med.imaging.router.facade.ImagingRouterImpl.getPatientIdentificationImage
+gov.va.med.imaging.router.facade.ImagingRouter.getExamInstanceByImageUrn->gov.va.med.imaging.router.facade.ImagingRouterImpl.getExamInstanceByImageUrn
+gov.va.med.imaging.router.facade.ImagingRouter.getDocumentSetResultBySiteNumber->gov.va.med.imaging.router.facade.ImagingRouterImpl.getDocumentSetResultBySiteNumber
+gov.va.med.imaging.router.facade.ImagingRouter.getInstanceTextFileByImageUrn->gov.va.med.imaging.router.facade.ImagingRouterImpl.getInstanceTextFileByImageUrn
+gov.va.med.imaging.router.facade.ImagingRouter.postImageAccessEventRetryable->gov.va.med.imaging.router.facade.ImagingRouterImpl.postImageAccessEventRetryable
+gov.va.med.imaging.router.facade.ImagingRouter.getRelevantPriorCptCodes->gov.va.med.imaging.router.facade.ImagingRouterImpl.getRelevantPriorCptCodes
+gov.va.med.imaging.router.facade.ImagingRouter.getExamInstanceFromDataSource->gov.va.med.imaging.router.facade.ImagingRouterImpl.getExamInstanceFromDataSource
+gov.va.med.imaging.router.facade.ImagingRouter.getExamInstanceFromDataSource->gov.va.med.imaging.router.facade.ImagingRouterImpl.getExamInstanceFromDataSource
+gov.va.med.imaging.router.facade.ImagingRouter.getDocumentFromDataSource->gov.va.med.imaging.router.facade.ImagingRouterImpl.getDocumentFromDataSource
+gov.va.med.imaging.router.facade.ImagingRouter.getExamInstanceByImageUrnAsync->gov.va.med.imaging.router.facade.ImagingRouterImpl.getExamInstanceByImageUrnAsync
+gov.va.med.imaging.router.facade.ImagingRouter.getExamTextFileByImageUrnAsync->gov.va.med.imaging.router.facade.ImagingRouterImpl.getExamTextFileByImageUrnAsync
+gov.va.med.imaging.router.facade.ImagingRouter.postImageAnnotationDetails->gov.va.med.imaging.router.facade.ImagingRouterImpl.postImageAnnotationDetails
+gov.va.med.imaging.router.facade.ImagingRouter.getInstanceTextFileByImage->gov.va.med.imaging.router.facade.ImagingRouterImpl.getInstanceTextFileByImage
+gov.va.med.imaging.router.facade.ImagingRouter.prefetchExamImages->gov.va.med.imaging.router.facade.ImagingRouterImpl.prefetchExamImages
+gov.va.med.imaging.router.facade.ImagingRouter.getExamTextFileFromDataSource->gov.va.med.imaging.router.facade.ImagingRouterImpl.getExamTextFileFromDataSource
+gov.va.med.imaging.router.facade.ImagingRouter.getExamTextFileFromDataSource->gov.va.med.imaging.router.facade.ImagingRouterImpl.getExamTextFileFromDataSource
+gov.va.med.imaging.router.facade.ImagingRouter.prefetchPatientStudies->gov.va.med.imaging.router.facade.ImagingRouterImpl.prefetchPatientStudies
+gov.va.med.imaging.router.facade.ImagingRouter.postImageAccessEvent->gov.va.med.imaging.router.facade.ImagingRouterImpl.postImageAccessEvent
+gov.va.med.imaging.router.facade.ImagingRouter.prefetchInstanceByImageUrn->gov.va.med.imaging.router.facade.ImagingRouterImpl.prefetchInstanceByImageUrn
+gov.va.med.imaging.router.facade.ImagingRouter.getExamTextFileByImageUrn->gov.va.med.imaging.router.facade.ImagingRouterImpl.getExamTextFileByImageUrn
+gov.va.med.imaging.router.facade.ImagingRouter.getExamTextFileByImageUrn->gov.va.med.imaging.router.facade.ImagingRouterImpl.getExamTextFileByImageUrn
+gov.va.med.imaging.router.facade.ImagingRouter.getInstanceByImageUrn->gov.va.med.imaging.router.facade.ImagingRouterImpl.getInstanceByImageUrn
+gov.va.med.imaging.router.facade.ImagingRouter.getStudySetResultBySiteNumber->gov.va.med.imaging.router.facade.ImagingRouterImpl.getStudySetResultBySiteNumber
+gov.va.med.imaging.router.facade.ImagingRouter.getPatientDocumentSets->gov.va.med.imaging.router.facade.ImagingRouterImpl.getPatientDocumentSets
+gov.va.med.imaging.router.facade.ImagingRouter.getPatientRegistration->gov.va.med.imaging.router.facade.ImagingRouterImpl.getPatientRegistration
+gov.va.med.imaging.router.facade.ImagingRouter.getDocumentSetListBySiteNumber->gov.va.med.imaging.router.facade.ImagingRouterImpl.getDocumentSetListBySiteNumber
+gov.va.med.imaging.router.facade.ImagingRouter.postStudiesByCprsIdentifiers->gov.va.med.imaging.router.facade.ImagingRouterImpl.postStudiesByCprsIdentifiers
+gov.va.med.imaging.router.facade.ImagingRouter.getExamSiteBySiteNumber->gov.va.med.imaging.router.facade.ImagingRouterImpl.getExamSiteBySiteNumber
+gov.va.med.imaging.router.facade.ImagingRouter.postImagingLogEvent->gov.va.med.imaging.router.facade.ImagingRouterImpl.postImagingLogEvent
+gov.va.med.imaging.router.facade.ImagingRouter.getDocument->gov.va.med.imaging.router.facade.ImagingRouterImpl.getDocument
+gov.va.med.imaging.router.facade.ImagingRouter.prefetchDocument->gov.va.med.imaging.router.facade.ImagingRouterImpl.prefetchDocument
+gov.va.med.imaging.router.facade.ImagingRouter.getStudyList->gov.va.med.imaging.router.facade.ImagingRouterImpl.getStudyList
+gov.va.med.imaging.router.facade.ImagingRouter.getStudySet->gov.va.med.imaging.router.facade.ImagingRouterImpl.getStudySet
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.044 sec
+Running gov.va.med.imaging.core.router.commands.CommonStudyFunctionsTest
+StudyURN regular expression is '([^-]+)-([^-]+)-([^-]+)'.
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.136 sec
+Running gov.va.med.imaging.core.router.commands.CommonDocumentFunctionsTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.02 sec
+
+Results :
+
+Tests run: 5, Failures: 0, Errors: 0, Skipped: 0
+
+[INFO] [jar:jar {execution: default-jar}]
+[INFO] Building jar: D:\usr\vitelnet\eclipse197\ImagingRouter\target\ImagingRouter-0.1.jar
+[INFO] [install:install {execution: default-install}]
+[INFO] Installing D:\usr\vitelnet\eclipse197\ImagingRouter\target\ImagingRouter-0.1.jar to C:\Users\Administrator\.m2\repository\Imaging\ImagingRouter\0.1\ImagingRouter-0.1.jar
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESSFUL
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time: 20 seconds
+[INFO] Finished at: Mon Jan 08 11:37:05 EST 2018
+[INFO] Final Memory: 65M/688M
+[INFO] ------------------------------------------------------------------------

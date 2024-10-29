@@ -1,0 +1,170 @@
+MAGDIW2A ;WOIFO/PMK/JSL/SAF - Send images to DICOM storage ; 15 Oct 2008  11:56 AM
+ ;;3.0;IMAGING;**10,11,30,51,50,54,123**;Mar 19, 2002;Build 60;Jul 16, 2012
+ ;; Per VHA Directive 2004-038, this routine should not be modified.
+ ;; +---------------------------------------------------------------+
+ ;; | Property of the US Government.                                |
+ ;; | No permission to copy or redistribute this software is given. |
+ ;; | Use of unreleased versions of this software requires the user |
+ ;; | to execute a written test agreement with the VistA Imaging    |
+ ;; | Development Office of the Department of Veterans Affairs,     |
+ ;; | telephone (301) 734-0100.                                     |
+ ;; | The Food and Drug Administration classifies this software as  |
+ ;; | a medical device.  As such, it may not be changed in any way. |
+ ;; | Modifications to this software may result in an adulterated   |
+ ;; | medical device under 21CFR820, the use of which is considered |
+ ;; | to be a violation of US Federal Statutes.                     |
+ ;; +---------------------------------------------------------------+
+ ;;
+ Q
+ ;
+ENTRY ; called from ^MAGDIWB2 to handle PID correction of DICOM images
+ N DATA,DCMOUT,DICOM,DICTVR,DFN,FIRSTNAM,LASTNAME,MIDNAME,MODALITY
+ N PRODESC,RACE,STATUS,TEXT,TXTOUT,VADATA,X,Z
+ S DICOM("ACCESSION NUMBER")=$$GETDATA^MAGDFCNS(INODE,"0008,0050")
+ S DICOM("PATIENT NAME")=$$GETDATA^MAGDFCNS(INODE,"0010,0010")
+ S DICOM("PATIENT ID")=$$GETDATA^MAGDFCNS(INODE,"0010,0020")
+ ;
+ ; figure out the modality from the SOP Class, if needed
+ S MODALITY=$$GETDATA^MAGDFCNS(INODE,"0008,0060")
+ I MODALITY["," D
+ . N SOPCLASS
+ . S SOPCLASS=$$GETDATA^MAGDFCNS(INODE,"0008,0016")
+ . D MODALITY^MAGDIW3A(.MODALITY,SOPCLASS)
+ . Q
+ ;
+ ; get radiology procedure description
+ S PROCDESC="" I ACCNUMB'?1"GMRC-".N D RADLKUP^MAGDIW3B
+ I PROCDESC="" S PROCDESC=$$GETDATA^MAGDFCNS(INODE,"0032,1060")
+ ;
+ ; get AGE from DATA1 block - most accurate value on day of study
+ S AGE=$E(1000+^TMP("MAG",$J,"DICOM","DATA1 BLOCK","PATIENTS_AGE"),2,4)_"Y"
+ ;
+ ; build VADATA array
+ S VADATA("0008,0050")=ACCNUMB ; Accession Number
+ S VADATA("0008,0060")=MODALITY ; updated (maybe) modality
+ ; format patient name: last^first^middle
+ S LASTNAME=$P(VADM(1),","),Z=$P(VADM(1),",",2,999)
+ S FIRSTNAM=$P(Z," ",1),MIDNAME=$TR($P(Z," ",2,999),".")
+ S VADATA("0010,0010")=LASTNAME_"^"_FIRSTNAM_"^"_MIDNAME ; Patient's name
+ S VADATA("0010,0020")=$G(VA("PID")) ; p123 - Patient ID
+ S VADATA("0010,0030")=$P(VADM(3),"^",1)+17000000 ; Patient DOB
+ S VADATA("0010,0040")=$P(VADM(5),"^",1) ; Patient's Sex
+ S VADATA("0010,1010")=AGE ; patient's age from DATA1 block
+ S VADATA("0010,1000")=VAICN ; Other Patient IDs
+ S RACE=$P($G(VADM(12,1)),"^",2) D ETHNIC^MAGDFND4
+ S VADATA("0010,2000")="See patient's chart." ; medical alerts
+ S VADATA("0010,2160")=RACE ; Ethnic Group
+ S VADATA("0032,1060")=PROCDESC ; requested procedure description
+ ;
+ ; build the DATA array
+ F I=1:1 S TEXT=$P($T(ELEMENTS+I),";;",2,999) Q:TEXT="end"  D
+ . S TAG=$P(TEXT,";") Q:TAG=""
+ . S X=$O(^MAGDICOM(2006.51,"B",TAG,"")),X=^MAGDICOM(2006.51,X,0)
+ . S NAME=$P(X,"^",2),DICTVR=$P(X,"^",3)
+ . I DICTVR?1"US/SS".E S DICTVR="US" ; may be US/SS/OW
+ . I NAME'=$P(TEXT,";",2) W !,TEXT," Name should be <<",NAME,">>"
+ . S VALUE=VADATA(TAG)
+ . I $L(VALUE) D  ; ignore null values
+ . . S $P(DATA(TAG),"|",1)=NAME_"^"_DICTVR
+ . . S $P(DATA(TAG),"|",2)="1,1"
+ . . S $P(DATA(TAG),"|",3)=VALUE
+ . . Q
+ . Q
+ ;
+ ; create the change file
+ S TXTOUT=^MAGDICOM(2006.563,1,"IMAGE OUTPUT PATH")_"\DICOM_MOD_"_$J_".TXT"
+ S DCMOUT=^MAGDICOM(2006.563,1,"IMAGE OUTPUT PATH")_"\DICOM_MOD_"_$J_".DCM"
+ ;
+ ; delete the previous DICOM MOD files beforehand
+ D DELETE(TXTOUT,"TEMPORARY DICOM MOD TEXT",1)
+ D DELETE(DCMOUT,"TEMPORARY DICOM MOD IMAGE",1)
+ ;
+ S STATUS=$$OPEN^MAGOSFIL(TXTOUT,"W")
+ S STATUS=$$USE^MAGOSFIL(TXTOUT)
+ S TAG="" F  S TAG=$O(DATA(TAG)) Q:TAG=""  S Z=DATA(TAG) D
+ . F  Q:$E(Z,$L(Z))'=" "  S $E(Z,$L(Z))=""
+ . W "Change|",TAG,"|",Z,!
+ . Q
+ W "Remove|0008,1050|Performing Physician's Name^PN||",! ; delete docs
+ W "Remove|0010,1040|Patient's Address^LO||",! ; delete old patients address
+ S STATUS=$$CLOSE^MAGOSFIL(TXTOUT)
+ I $$USEPRIN^MAGOSFIL(1)
+ ;
+ ; change the DICOM file
+ S CMD="MAG_RECON """_FILEDCM_""" "_DCMOUT_" "_TXTOUT
+ S VERBOSE=1 D DOS^MAGDOS(CMD,.ERROR)
+ I ERROR(0) D  ; fatal error
+ . N I,MSG
+ . S MSG(1)="DICOM IMAGE RECONSTRUCTION ERROR"
+ . S MSG(2)="Unexpected error in """_CMD_""""
+ . F I=1:1:ERROR(0) S MSG(I+2)=$J(I,3)_") "_ERROR(I)
+ . D TRAPERR^MAGDSTRT(1,$T(+0),"DICOM IMAGE PROCESSING ERROR",.MSG)
+ . Q  ; Error trap does not return
+ D FILECOPY(DCMOUT,FILEDCM,"DICOM EXPORT MOD")
+ S QUEUEIN("FILE")=DCMOUT
+ ;
+ ; lookup file creation date & time
+ S X=$$HOSTFILE^MAGDDR1(QUEUEIN("FILE"),.FILESIZE,.DATE,.TIME) Q:X=1
+ I X'>0 D  ; fatal error
+ . N MSG
+ . I X=0 D  ; can't find file
+ . . S MSG(1)="The original DICOM file is not in the directory."
+ . . S MSG(2)="File: """_QUEUEIN("FILE")_""""
+ . . Q
+ . E  D  ; other error
+ . . S MSG(1)="There is a problem with the original DICOM file."
+ . . S MSG(2)="File: """_QUEUEIN("FILE")_""""
+ . . S MSG(3)="Error Message: "_X
+ . . Q
+ . D TRAPERR^MAGDSTRT(1,$T(+0),"DICOM IMAGE TRANSMISSION ERROR",.MSG)
+ . Q  ; Error trap does not return
+ ;
+ ; read new DICOM file's header
+ D ^MAGDDR2
+ Q
+ ;
+ELEMENTS ; list of elements to output
+ ;;0008,0050;Accession Number
+ ;;0008,0060;Modality
+ ;;0010,0010;Patient's Name
+ ;;0010,0020;Patient ID
+ ;;0010,0030;Patient's Birth Date
+ ;;0010,0040;Patient's Sex
+ ;;0010,1000;Other Patient IDs
+ ;;0010,1010;Patient's Age
+ ;;0010,2000;Medical Alerts
+ ;;0010,2160;Ethnic Group
+ ;;0032,1060;Requested Procedure Description
+ ;;end
+ ;
+FILECOPY(SOURCE,TARGET,TYPE) ; copy source file to target file
+ S CMD="COPY "_SOURCE_" "_TARGET
+ S VERBOSE=1 D DOS^MAGDOS(CMD,.ERROR)
+ I ERROR(0) D  ; fatal error
+ . N I,MSG
+ . S MSG(1)=TYPE_" IMAGE COPY ERROR"
+ . S MSG(2)="Unexpected error in """_CMD_""""
+ . F I=1:1:ERROR(0) S MSG(I+2)=$J(I,3)_") "_ERROR(I)
+ . D TRAPERR^MAGDSTRT(1,$T(+0),"DICOM IMAGE PROCESSING ERROR",.MSG)
+ . Q  ; Error trap does not return
+ Q
+ ;
+DELETE(DELPATH,TYPE,IGNORE) ; delete the file
+ ; There are three kinds of files to be deleted:
+ ;   1) previous TARGA image
+ ;   2) previous ABSTRACT image
+ ;   3) original DICOM composite object
+ ; 
+ N CMD,ERROR,VERBOSE
+ S CMD="DEL "_DELPATH
+ S VERBOSE=1 D DOS^MAGDOS(CMD,.ERROR)
+ I ERROR(0) D  ; fatal error
+ . I $G(IGNORE),ERROR(1)?1"Could Not Find".E Q  ; ignore error message 
+ . N I,MSG
+ . S MSG(1)="ERROR DELETING "_TYPE
+ . S MSG(2)="Unexpected error in """_CMD_""""
+ . F I=1:1:ERROR(0) S MSG(I+2)=$J(I,3)_") "_ERROR(I)
+ . D TRAPERR^MAGDSTRT(1,$T(+0),"DICOM IMAGE PROCESSING ERROR",.MSG)
+ . Q  ; Error trap does not return
+ Q
+ ;

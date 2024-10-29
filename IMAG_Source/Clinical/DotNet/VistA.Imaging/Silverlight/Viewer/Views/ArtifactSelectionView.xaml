@@ -1,0 +1,77 @@
+﻿<base:ArtifactSelectionViewBase x:Class="VistA.Imaging.Viewer.Views.ArtifactSelectionView"
+                                xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                                xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                                xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                                xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                                xmlns:prism="clr-namespace:Microsoft.Practices.Prism;assembly=Microsoft.Practices.Prism"
+                                xmlns:regions="clr-namespace:Microsoft.Practices.Prism.Regions;assembly=Microsoft.Practices.Prism"
+                                xmlns:base="clr-namespace:VistA.Imaging.Viewer.Views.Bases"
+                                xmlns:sdk="http://schemas.microsoft.com/winfx/2006/xaml/presentation/sdk"
+                                xmlns:converters="clr-namespace:VistA.Imaging.Windows.Data.Converters;assembly=VistA.Imaging.Windows"
+                                xmlns:toolkit="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls.Toolkit" 
+                                mc:Ignorable="d"
+                                d:DesignHeight="300" d:DesignWidth="400">
+
+    <Grid x:Name="LayoutRoot" Background="White">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="82" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid.Resources>
+            <converters:UriToBitmapImageConverter x:Key="UriToBitmapImageConverter" />
+            <sdk:HierarchicalDataTemplate x:Key="ArtifactSetTemplate" ItemsSource="{Binding ArtifactSets}">
+                <StackPanel>
+                    <TextBlock Text="{Binding DisplayName}"  />
+                </StackPanel>
+            </sdk:HierarchicalDataTemplate>
+        </Grid.Resources>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="76" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Image Name="PatientPhoto" Stretch="Fill" Source="{Binding Path=Photo}" />
+            <StackPanel Grid.Column="1">
+                <TextBlock Text="{Binding Path=Patient.FullName}" Margin="5" />
+            </StackPanel>
+        </Grid>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="125*" />
+                <ColumnDefinition Width="5" />
+                <ColumnDefinition Width="270*" />
+            </Grid.ColumnDefinitions>
+            <sdk:TreeView HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Name="abstractSelectionTreeView" 
+                          ItemTemplate="{StaticResource ArtifactSetTemplate}" ItemsSource="{Binding ArtifactSets}" SelectedItemChanged="ArtifactSet_SelectedItemChanged"  />
+            <sdk:GridSplitter Grid.Column="1" VerticalAlignment="Stretch" />
+            <Border Name="SelectArtifactTextBoxBorder" Background="LightGray" Grid.Column="2" BorderThickness="1" BorderBrush="Black" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                <TextBlock Text="Select an artifact set to display artifacts" VerticalAlignment="Center" HorizontalAlignment="Center" />
+            </Border>
+            
+           <!-- <ScrollViewer Name="ArtifactThumbnailsViewer"  HorizontalScrollBarVisibility="Disabled" > -->
+            <ListBox Name="ArtifactThumbnailsViewer" ItemsSource="{Binding ViewerArtifacts}" ScrollViewer.VerticalScrollBarVisibility="Disabled" BorderBrush="Black" BorderThickness="1" Grid.Column="2" Visibility="Collapsed" Padding="4"  >
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                        <toolkit:WrapPanel />
+                    </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Border Padding="4">
+                            <Border Width="125" Height="125" BorderBrush="Black" BorderThickness="1">
+                                <StackPanel>
+                                    <Image Source="{Binding Path=Thumbnail}" Stretch="Fill" HorizontalAlignment="Center" VerticalAlignment="Center" Height="90"   />
+                                    <Grid Background="LightGray">
+                                        <TextBlock Text="{Binding ThumbnailInfo}" TextWrapping="Wrap" TextAlignment="Center" Height="35"  HorizontalAlignment="Stretch"  />
+                                    </Grid> 
+                            </StackPanel> 
+                            </Border>
+                            </Border>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ListBox>
+           <!-- </ScrollViewer> -->
+        </Grid>
+
+    </Grid>
+</base:ArtifactSelectionViewBase>

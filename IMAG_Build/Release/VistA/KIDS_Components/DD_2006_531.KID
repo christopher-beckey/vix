@@ -1,0 +1,350 @@
+KIDS Distribution saved on Jul 16, 2007@12:48:59
+Package for FILE named 2006.531
+**KIDS**:MAG*3.0*75^
+
+**INSTALL NAME**
+MAG*3.0*75
+"BLD",5893,0)
+MAG*3.0*75^^0^3070716^y
+"BLD",5893,1,0)
+^^4^4^3070716^
+"BLD",5893,1,1,0)
+This package contains a KIDS component
+"BLD",5893,1,2,0)
+for Running Baseline.
+"BLD",5893,1,3,0)
+ 
+"BLD",5893,1,4,0)
+This package transports the FileMan data dictionary named 2006.531.
+"BLD",5893,4,0)
+^9.64PA^2006.531^1
+"BLD",5893,4,2006.531,0)
+2006.531
+"BLD",5893,4,2006.531,222)
+y^y^f^^^^n
+"BLD",5893,4,"B",2006.531,2006.531)
+
+"BLD",5893,6.3)
+1
+"BLD",5893,"KRN",0)
+^9.67PA^8989.52^19
+"BLD",5893,"KRN",.4,0)
+.4
+"BLD",5893,"KRN",.401,0)
+.401
+"BLD",5893,"KRN",.402,0)
+.402
+"BLD",5893,"KRN",.403,0)
+.403
+"BLD",5893,"KRN",.5,0)
+.5
+"BLD",5893,"KRN",.84,0)
+.84
+"BLD",5893,"KRN",3.6,0)
+3.6
+"BLD",5893,"KRN",3.8,0)
+3.8
+"BLD",5893,"KRN",9.2,0)
+9.2
+"BLD",5893,"KRN",9.8,0)
+9.8
+"BLD",5893,"KRN",19,0)
+19
+"BLD",5893,"KRN",19.1,0)
+19.1
+"BLD",5893,"KRN",101,0)
+101
+"BLD",5893,"KRN",409.61,0)
+409.61
+"BLD",5893,"KRN",771,0)
+771
+"BLD",5893,"KRN",870,0)
+870
+"BLD",5893,"KRN",8989.51,0)
+8989.51
+"BLD",5893,"KRN",8989.52,0)
+8989.52
+"BLD",5893,"KRN",8994,0)
+8994
+"BLD",5893,"KRN","B",.4,.4)
+
+"BLD",5893,"KRN","B",.401,.401)
+
+"BLD",5893,"KRN","B",.402,.402)
+
+"BLD",5893,"KRN","B",.403,.403)
+
+"BLD",5893,"KRN","B",.5,.5)
+
+"BLD",5893,"KRN","B",.84,.84)
+
+"BLD",5893,"KRN","B",3.6,3.6)
+
+"BLD",5893,"KRN","B",3.8,3.8)
+
+"BLD",5893,"KRN","B",9.2,9.2)
+
+"BLD",5893,"KRN","B",9.8,9.8)
+
+"BLD",5893,"KRN","B",19,19)
+
+"BLD",5893,"KRN","B",19.1,19.1)
+
+"BLD",5893,"KRN","B",101,101)
+
+"BLD",5893,"KRN","B",409.61,409.61)
+
+"BLD",5893,"KRN","B",771,771)
+
+"BLD",5893,"KRN","B",870,870)
+
+"BLD",5893,"KRN","B",8989.51,8989.51)
+
+"BLD",5893,"KRN","B",8989.52,8989.52)
+
+"BLD",5893,"KRN","B",8994,8994)
+
+"FIA",2006.531)
+EXTENDED SOP NEGOTIATION
+"FIA",2006.531,0)
+^MAGDICOM(2006.531,
+"FIA",2006.531,0,0)
+2006.531
+"FIA",2006.531,0,1)
+y^y^f^^^^n
+"FIA",2006.531,0,10)
+
+"FIA",2006.531,0,11)
+
+"FIA",2006.531,0,"RLRO")
+
+"FIA",2006.531,2006.531)
+0
+"MBREQ")
+0
+"QUES","XPF1",0)
+Y
+"QUES","XPF1","??")
+^D REP^XPDH
+"QUES","XPF1","A")
+Shall I write over your |FLAG| File
+"QUES","XPF1","B")
+YES
+"QUES","XPF1","M")
+D XPF1^XPDIQ
+"QUES","XPF2",0)
+Y
+"QUES","XPF2","??")
+^D DTA^XPDH
+"QUES","XPF2","A")
+Want my data |FLAG| yours
+"QUES","XPF2","B")
+YES
+"QUES","XPF2","M")
+D XPF2^XPDIQ
+"QUES","XPI1",0)
+YO
+"QUES","XPI1","??")
+^D INHIBIT^XPDH
+"QUES","XPI1","A")
+Want KIDS to INHIBIT LOGONs during the install
+"QUES","XPI1","B")
+YES
+"QUES","XPI1","M")
+D XPI1^XPDIQ
+"QUES","XPM1",0)
+PO^VA(200,:EM
+"QUES","XPM1","??")
+^D MG^XPDH
+"QUES","XPM1","A")
+Enter the Coordinator for Mail Group '|FLAG|'
+"QUES","XPM1","B")
+
+"QUES","XPM1","M")
+D XPM1^XPDIQ
+"QUES","XPO1",0)
+Y
+"QUES","XPO1","??")
+^D MENU^XPDH
+"QUES","XPO1","A")
+Want KIDS to Rebuild Menu Trees Upon Completion of Install
+"QUES","XPO1","B")
+YES
+"QUES","XPO1","M")
+D XPO1^XPDIQ
+"QUES","XPZ1",0)
+Y
+"QUES","XPZ1","??")
+^D OPT^XPDH
+"QUES","XPZ1","A")
+Want to DISABLE Scheduled Options, Menu Options, and Protocols
+"QUES","XPZ1","B")
+YES
+"QUES","XPZ1","M")
+D XPZ1^XPDIQ
+"QUES","XPZ2",0)
+Y
+"QUES","XPZ2","??")
+^D RTN^XPDH
+"QUES","XPZ2","A")
+Want to MOVE routines to other CPUs
+"QUES","XPZ2","B")
+NO
+"QUES","XPZ2","M")
+D XPZ2^XPDIQ
+"SEC","^DD",2006.531,2006.531,2,8)
+@
+"SEC","^DD",2006.531,2006.531,3,8)
+@
+"SEC","^DIC",2006.531,2006.531,0,"AUDIT")
+@
+"SEC","^DIC",2006.531,2006.531,0,"DD")
+@
+"SEC","^DIC",2006.531,2006.531,0,"DEL")
+@
+"SEC","^DIC",2006.531,2006.531,0,"LAYGO")
+@
+"SEC","^DIC",2006.531,2006.531,0,"RD")
+@
+"SEC","^DIC",2006.531,2006.531,0,"WR")
+@
+"VER")
+8.0^22.0
+"^DD",2006.531,2006.531,0)
+FIELD^^3^3
+"^DD",2006.531,2006.531,0,"DDA")
+N
+"^DD",2006.531,2006.531,0,"DT")
+2981113
+"^DD",2006.531,2006.531,0,"IX","B",2006.531,.01)
+
+"^DD",2006.531,2006.531,0,"NM","EXTENDED SOP NEGOTIATION")
+
+"^DD",2006.531,2006.531,0,"VRPK")
+IMAGING
+"^DD",2006.531,2006.531,.01,0)
+UIDNAME^RF^^0;1^K:$L(X)>30!($L(X)<1)!'(X'?1P.E) X
+"^DD",2006.531,2006.531,.01,1,0)
+^.1
+"^DD",2006.531,2006.531,.01,1,1,0)
+2006.531^B
+"^DD",2006.531,2006.531,.01,1,1,1)
+S ^MAGDICOM(2006.531,"B",$E(X,1,30),DA)=""
+"^DD",2006.531,2006.531,.01,1,1,2)
+K ^MAGDICOM(2006.531,"B",$E(X,1,30),DA)
+"^DD",2006.531,2006.531,.01,3)
+Enter the name of a SOP-class.
+"^DD",2006.531,2006.531,.01,21,0)
+^^3^3^3000218^^^^
+"^DD",2006.531,2006.531,.01,21,1,0)
+The value of this field is the name of a SOP-class
+"^DD",2006.531,2006.531,.01,21,2,0)
+for which 'Extended SOP Negotiation' is supported.
+"^DD",2006.531,2006.531,.01,21,3,0)
+ 
+"^DD",2006.531,2006.531,.01,23,0)
+^^1^1^3000218^^^
+"^DD",2006.531,2006.531,.01,23,1,0)
+^DESC
+"^DD",2006.531,2006.531,.01,"DT")
+2981113
+"^DD",2006.531,2006.531,2,0)
+READCODE^F^^0;2^K:$L(X)>17!($L(X)<1) X
+"^DD",2006.531,2006.531,2,3)
+Enter the name of the entry point (TAG.ROUTINE) to perform read operations.
+"^DD",2006.531,2006.531,2,8.5)
+@
+"^DD",2006.531,2006.531,2,9)
+@
+"^DD",2006.531,2006.531,2,21,0)
+^.001^6^6^3001004^^^^
+"^DD",2006.531,2006.531,2,21,1,0)
+The value of this field is the name of the entry-point
+"^DD",2006.531,2006.531,2,21,2,0)
+that will be called as a subroutine when information
+"^DD",2006.531,2006.531,2,21,3,0)
+is to be read for this SOP-class.
+"^DD",2006.531,2006.531,2,21,4,0)
+ 
+"^DD",2006.531,2006.531,2,21,5,0)
+In the value of this field, the caret that would normally
+"^DD",2006.531,2006.531,2,21,6,0)
+separate the label from the routine-name is replaced by a dot.
+"^DD",2006.531,2006.531,2,"DT")
+2981113
+"^DD",2006.531,2006.531,3,0)
+WRITECODE^F^^0;3^K:$L(X)>17!($L(X)<1) X
+"^DD",2006.531,2006.531,3,3)
+Enter the name of the entry point (TAG.ROUTINE) to perform write operations.
+"^DD",2006.531,2006.531,3,8.5)
+@
+"^DD",2006.531,2006.531,3,9)
+@
+"^DD",2006.531,2006.531,3,21,0)
+^^6^6^3000218^^^
+"^DD",2006.531,2006.531,3,21,1,0)
+The value of this field is the name of the entry-point
+"^DD",2006.531,2006.531,3,21,2,0)
+that will be called as a subroutine when information
+"^DD",2006.531,2006.531,3,21,3,0)
+is to be written for this SOP-class.
+"^DD",2006.531,2006.531,3,21,4,0)
+ 
+"^DD",2006.531,2006.531,3,21,5,0)
+In the value of this field, the caret that would normally
+"^DD",2006.531,2006.531,3,21,6,0)
+separate the label from the routine-name is replaced by a dot.
+"^DD",2006.531,2006.531,3,"DT")
+2981113
+"^DIC",2006.531,2006.531,0)
+EXTENDED SOP NEGOTIATION^2006.531
+"^DIC",2006.531,2006.531,0,"GL")
+^MAGDICOM(2006.531,
+"^DIC",2006.531,2006.531,"%",0)
+^1.005^^0
+"^DIC",2006.531,2006.531,"%D",0)
+^^20^20^3010619^
+"^DIC",2006.531,2006.531,"%D",1,0)
+ +---------------------------------------------------------------+
+"^DIC",2006.531,2006.531,"%D",2,0)
+ |                                                               |
+"^DIC",2006.531,2006.531,"%D",3,0)
+ | Property of the US Government.                                |
+"^DIC",2006.531,2006.531,"%D",4,0)
+ | No permission to copy or redistribute this software is given. |
+"^DIC",2006.531,2006.531,"%D",5,0)
+ | Use of unreleased versions of this software requires the user |
+"^DIC",2006.531,2006.531,"%D",6,0)
+ | to execute a written test agreement with the VistA Imaging    |
+"^DIC",2006.531,2006.531,"%D",7,0)
+ | Development Office of the Department of Veterans Affairs,     |
+"^DIC",2006.531,2006.531,"%D",8,0)
+ | telephone (301) 734-0100.                                     |
+"^DIC",2006.531,2006.531,"%D",9,0)
+ |                                                               |
+"^DIC",2006.531,2006.531,"%D",10,0)
+ | The Food and Drug Administration classifies this software as  |
+"^DIC",2006.531,2006.531,"%D",11,0)
+ | a medical device.  As such, it may not be changed in any way. |
+"^DIC",2006.531,2006.531,"%D",12,0)
+ | Modifications to this software may result in an adulterated   |
+"^DIC",2006.531,2006.531,"%D",13,0)
+ | medical device under 21CFR820, the use of which is considered |
+"^DIC",2006.531,2006.531,"%D",14,0)
+ | to be a violation of US Federal Statutes.                     |
+"^DIC",2006.531,2006.531,"%D",15,0)
+ |                                                               |
+"^DIC",2006.531,2006.531,"%D",16,0)
+ +---------------------------------------------------------------+
+"^DIC",2006.531,2006.531,"%D",17,0)
+ 
+"^DIC",2006.531,2006.531,"%D",18,0)
+The entries in this table define any extended SOP Negotiation information
+"^DIC",2006.531,2006.531,"%D",19,0)
+that is being used in the context of establishing a DICOM communication
+"^DIC",2006.531,2006.531,"%D",20,0)
+stream.
+"^DIC",2006.531,"B","EXTENDED SOP NEGOTIATION",2006.531)
+
+**END**
+**END**

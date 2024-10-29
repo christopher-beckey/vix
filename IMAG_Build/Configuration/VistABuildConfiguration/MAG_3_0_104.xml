@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<build xmlns="http://va.gov/VistA/kids/manifest" name="MAG*3.0*104" patchName="Central VistA Imaging Exchange Server" patch="104">
+  <components>
+    <securityKeys />
+    <parameterDefinitions />
+    <printTemplates />
+    <sortTemplates />
+    <menuOptions />
+    <rpcs />
+    <dataDictionaries />
+    <hl7s />
+    <routines>
+      <routine export="MAGDQR21.RTN" />
+      <routine export="MAGIP104.RTN" />
+      <routine export="MAGJEX1.RTN" />
+      <routine export="MAGJEX1B.RTN" />
+      <routine export="MAGJUTL2.RTN" />
+      <routine export="MAGJUTL5.RTN" />
+    </routines>
+    <protocols />
+  </components>
+</build>

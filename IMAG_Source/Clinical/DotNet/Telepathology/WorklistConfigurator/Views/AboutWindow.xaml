@@ -1,0 +1,19 @@
+﻿<Window x:Class="VistA.Imaging.Telepathology.Configurator.Views.AboutWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:views="clr-namespace:VistA.Imaging.Telepathology.Common.Controls;assembly=VistA.Imaging.Telepathology.Common"
+        Title="About: VistA Imaging Telepathology Configurator" 
+        Loaded="Window_Loaded" ResizeMode="NoResize" 
+        Icon="/MagTPConfigurator;component/Images/PathWLC48.ico"
+        SizeToContent="WidthAndHeight">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <views:AboutView x:Name="aboutViewer" Grid.Row="0" />
+        <Button Name="okButton" Content="_OK" Width="70" HorizontalAlignment="Center" 
+                VerticalAlignment="Bottom" Click="okButton_Click" Margin="10" Grid.Row="1" 
+                IsDefault="True" />
+    </Grid>
+</Window>

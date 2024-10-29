@@ -1,0 +1,832 @@
+KIDS Distribution saved on Jul 26, 2012@08:58:39
+Split from GOLD - last patch SEQ81_P120
+**KIDS**:MAG*3.0*350_DD*2006.55^
+
+**INSTALL NAME**
+MAG*3.0*350_DD*2006.55
+"BLD",7756,0)
+MAG*3.0*350_DD*2006.55^IMAGING^0^3120726^n
+"BLD",7756,4,0)
+^9.64PA^2006.55^1
+"BLD",7756,4,2006.55,0)
+2006.55
+"BLD",7756,4,2006.55,222)
+y^y^f^^^^y
+"BLD",7756,4,"B",2006.55,2006.55)
+
+"BLD",7756,6.3)
+1
+"BLD",7756,"KRN",0)
+^9.67PA^779.2^20
+"BLD",7756,"KRN",.4,0)
+.4
+"BLD",7756,"KRN",.401,0)
+.401
+"BLD",7756,"KRN",.402,0)
+.402
+"BLD",7756,"KRN",.403,0)
+.403
+"BLD",7756,"KRN",.5,0)
+.5
+"BLD",7756,"KRN",.84,0)
+.84
+"BLD",7756,"KRN",3.6,0)
+3.6
+"BLD",7756,"KRN",3.8,0)
+3.8
+"BLD",7756,"KRN",9.2,0)
+9.2
+"BLD",7756,"KRN",9.8,0)
+9.8
+"BLD",7756,"KRN",19,0)
+19
+"BLD",7756,"KRN",19.1,0)
+19.1
+"BLD",7756,"KRN",101,0)
+101
+"BLD",7756,"KRN",409.61,0)
+409.61
+"BLD",7756,"KRN",771,0)
+771
+"BLD",7756,"KRN",779.2,0)
+779.2
+"BLD",7756,"KRN",870,0)
+870
+"BLD",7756,"KRN",8989.51,0)
+8989.51
+"BLD",7756,"KRN",8989.52,0)
+8989.52
+"BLD",7756,"KRN",8994,0)
+8994
+"BLD",7756,"KRN","B",.4,.4)
+
+"BLD",7756,"KRN","B",.401,.401)
+
+"BLD",7756,"KRN","B",.402,.402)
+
+"BLD",7756,"KRN","B",.403,.403)
+
+"BLD",7756,"KRN","B",.5,.5)
+
+"BLD",7756,"KRN","B",.84,.84)
+
+"BLD",7756,"KRN","B",3.6,3.6)
+
+"BLD",7756,"KRN","B",3.8,3.8)
+
+"BLD",7756,"KRN","B",9.2,9.2)
+
+"BLD",7756,"KRN","B",9.8,9.8)
+
+"BLD",7756,"KRN","B",19,19)
+
+"BLD",7756,"KRN","B",19.1,19.1)
+
+"BLD",7756,"KRN","B",101,101)
+
+"BLD",7756,"KRN","B",409.61,409.61)
+
+"BLD",7756,"KRN","B",771,771)
+
+"BLD",7756,"KRN","B",779.2,779.2)
+
+"BLD",7756,"KRN","B",870,870)
+
+"BLD",7756,"KRN","B",8989.51,8989.51)
+
+"BLD",7756,"KRN","B",8989.52,8989.52)
+
+"BLD",7756,"KRN","B",8994,8994)
+
+"FIA",2006.55)
+DICOM WORKLIST PATIENT
+"FIA",2006.55,0)
+^MAGDWLST(2006.55,
+"FIA",2006.55,0,0)
+2006.55P
+"FIA",2006.55,0,1)
+y^y^f^^^^y
+"FIA",2006.55,0,10)
+
+"FIA",2006.55,0,11)
+
+"FIA",2006.55,0,"RLRO")
+
+"FIA",2006.55,0,"VR")
+3.0^MAG
+"FIA",2006.55,2006.55)
+0
+"FIA",2006.55,2006.552)
+0
+"FIA",2006.55,2006.5522)
+0
+"FIA",2006.55,2006.553)
+0
+"FIA",2006.55,2006.5533)
+0
+"MBREQ")
+0
+"PKG",454,-1)
+1^1
+"PKG",454,0)
+IMAGING^MAG^Imaging-V1 to release 
+"PKG",454,20,0)
+^9.402P^^
+"PKG",454,22,0)
+^9.49I^1^1
+"PKG",454,22,1,0)
+3.0^3020319^3020517^126
+"PKG",454,22,1,"PAH",1,0)
+350_DD^3120726
+"QUES","XPF1",0)
+Y
+"QUES","XPF1","??")
+^D REP^XPDH
+"QUES","XPF1","A")
+Shall I write over your |FLAG| File
+"QUES","XPF1","B")
+YES
+"QUES","XPF1","M")
+D XPF1^XPDIQ
+"QUES","XPF2",0)
+Y
+"QUES","XPF2","??")
+^D DTA^XPDH
+"QUES","XPF2","A")
+Want my data |FLAG| yours
+"QUES","XPF2","B")
+YES
+"QUES","XPF2","M")
+D XPF2^XPDIQ
+"QUES","XPI1",0)
+YO
+"QUES","XPI1","??")
+^D INHIBIT^XPDH
+"QUES","XPI1","A")
+Want KIDS to INHIBIT LOGONs during the install
+"QUES","XPI1","B")
+NO
+"QUES","XPI1","M")
+D XPI1^XPDIQ
+"QUES","XPM1",0)
+PO^VA(200,:EM
+"QUES","XPM1","??")
+^D MG^XPDH
+"QUES","XPM1","A")
+Enter the Coordinator for Mail Group '|FLAG|'
+"QUES","XPM1","B")
+
+"QUES","XPM1","M")
+D XPM1^XPDIQ
+"QUES","XPO1",0)
+Y
+"QUES","XPO1","??")
+^D MENU^XPDH
+"QUES","XPO1","A")
+Want KIDS to Rebuild Menu Trees Upon Completion of Install
+"QUES","XPO1","B")
+NO
+"QUES","XPO1","M")
+D XPO1^XPDIQ
+"QUES","XPZ1",0)
+Y
+"QUES","XPZ1","??")
+^D OPT^XPDH
+"QUES","XPZ1","A")
+Want to DISABLE Scheduled Options, Menu Options, and Protocols
+"QUES","XPZ1","B")
+NO
+"QUES","XPZ1","M")
+D XPZ1^XPDIQ
+"QUES","XPZ2",0)
+Y
+"QUES","XPZ2","??")
+^D RTN^XPDH
+"QUES","XPZ2","A")
+Want to MOVE routines to other CPUs
+"QUES","XPZ2","B")
+NO
+"QUES","XPZ2","M")
+D XPZ2^XPDIQ
+"SEC","^DIC",2006.55,2006.55,0,"AUDIT")
+@
+"SEC","^DIC",2006.55,2006.55,0,"DD")
+@
+"SEC","^DIC",2006.55,2006.55,0,"DEL")
+@
+"SEC","^DIC",2006.55,2006.55,0,"LAYGO")
+@
+"SEC","^DIC",2006.55,2006.55,0,"RD")
+@
+"SEC","^DIC",2006.55,2006.55,0,"WR")
+@
+"VER")
+8.0^22.0
+"^DD",2006.55,2006.55,0)
+FIELD^^2^2
+"^DD",2006.55,2006.55,0,"DDA")
+N
+"^DD",2006.55,2006.55,0,"DT")
+3100727
+"^DD",2006.55,2006.55,0,"IX","C",2006.552,2)
+
+"^DD",2006.55,2006.55,0,"IX","D",2006.552,3)
+
+"^DD",2006.55,2006.55,0,"IX","E",2006.552,7)
+
+"^DD",2006.55,2006.55,0,"NM","DICOM WORKLIST PATIENT")
+
+"^DD",2006.55,2006.55,0,"VRPK")
+MAG
+"^DD",2006.55,2006.55,.01,0)
+DIVISION^RP4'XI^DIC(4,^0;1^S DINUM=X
+"^DD",2006.55,2006.55,.01,1,0)
+^.1^^0
+"^DD",2006.55,2006.55,.01,3)
+Enter the name of the division.
+"^DD",2006.55,2006.55,.01,21,0)
+^^3^3^2990202^^^
+"^DD",2006.55,2006.55,.01,21,1,0)
+The value of this field is a pointer into the INSTITUTION file (#4).
+"^DD",2006.55,2006.55,.01,21,2,0)
+The pointed to location is the division where a study for a patient
+"^DD",2006.55,2006.55,.01,21,3,0)
+is scheduled to be performed.
+"^DD",2006.55,2006.55,.01,"DT")
+2990203
+"^DD",2006.55,2006.55,2,0)
+PATIENT^2006.552PA^^1;0
+"^DD",2006.55,2006.552,0)
+PATIENT SUB-FIELD^^15^16
+"^DD",2006.55,2006.552,0,"DT")
+3100727
+"^DD",2006.55,2006.552,0,"IX","B",2006.552,.01)
+
+"^DD",2006.55,2006.552,0,"IX","C",2006.552,2)
+
+"^DD",2006.55,2006.552,0,"IX","D",2006.552,3)
+
+"^DD",2006.55,2006.552,0,"IX","E",2006.552,7)
+
+"^DD",2006.55,2006.552,0,"NM","PATIENT")
+
+"^DD",2006.55,2006.552,0,"UP")
+2006.55
+"^DD",2006.55,2006.552,.001,0)
+PATIENT-NUMBER^P2'^DPT(^ ^Q
+"^DD",2006.55,2006.552,.001,3)
+Enter the name of the patient.
+"^DD",2006.55,2006.552,.001,21,0)
+^^2^2^3000218^^
+"^DD",2006.55,2006.552,.001,21,1,0)
+The value of this field is the internal entry number of the patient
+"^DD",2006.55,2006.552,.001,21,2,0)
+for whom the study is scheduled in the VistA Database.
+"^DD",2006.55,2006.552,.001,"DT")
+3000218
+"^DD",2006.55,2006.552,.01,0)
+SITE^RP4'^DIC(4,^0;1^Q
+"^DD",2006.55,2006.552,.01,1,0)
+^.1^^0
+"^DD",2006.55,2006.552,.01,1,1,0)
+2006.552^B
+"^DD",2006.55,2006.552,.01,1,1,1)
+S ^MAGDWLST(2006.55,DA(1),1,"B",$E(X,1,30),DA)=""
+"^DD",2006.55,2006.552,.01,1,1,2)
+K ^MAGDWLST(2006.55,DA(1),1,"B",$E(X,1,30),DA)
+"^DD",2006.55,2006.552,.01,3)
+Enter the name of the site where this study is to be performed.
+"^DD",2006.55,2006.552,.01,21,0)
+^^3^3^2990202^^^
+"^DD",2006.55,2006.552,.01,21,1,0)
+The value of this field is a pointer into the INSTITUTION file (#4).
+"^DD",2006.55,2006.552,.01,21,2,0)
+The pointed to location is the division where a study for a patient
+"^DD",2006.55,2006.552,.01,21,3,0)
+is scheduled to be performed.
+"^DD",2006.55,2006.552,.01,"DT")
+3000218
+"^DD",2006.55,2006.552,2,0)
+PATIENT NAME^RF^^0;2^K:$L(X)>30!($L(X)<1) X
+"^DD",2006.55,2006.552,2,1,0)
+^.1
+"^DD",2006.55,2006.552,2,1,1,0)
+2006.552^C
+"^DD",2006.55,2006.552,2,1,1,1)
+S ^MAGDWLST(2006.55,DA(1),1,"C",$E(X,1,30),DA)=""
+"^DD",2006.55,2006.552,2,1,1,2)
+K ^MAGDWLST(2006.55,DA(1),1,"C",$E(X,1,30),DA)
+"^DD",2006.55,2006.552,2,1,1,"%D",0)
+^^2^2^3001204^
+"^DD",2006.55,2006.552,2,1,1,"%D",1,0)
+This cross reference keeps track of which patients (name) are
+"^DD",2006.55,2006.552,2,1,1,"%D",2,0)
+seen at which location.
+"^DD",2006.55,2006.552,2,1,1,"DT")
+3001204
+"^DD",2006.55,2006.552,2,3)
+Enter the name of the patient.
+"^DD",2006.55,2006.552,2,21,0)
+^^7^7^3000218^^
+"^DD",2006.55,2006.552,2,21,1,0)
+The value of this field is the name of the patient
+"^DD",2006.55,2006.552,2,21,2,0)
+for whom the study is scheduled.
+"^DD",2006.55,2006.552,2,21,3,0)
+ 
+"^DD",2006.55,2006.552,2,21,4,0)
+This value if copied from the VistA Database, so that
+"^DD",2006.55,2006.552,2,21,5,0)
+worklist queries can also be performed when the network
+"^DD",2006.55,2006.552,2,21,6,0)
+connection (RPC) with the main Hospital Information System
+"^DD",2006.55,2006.552,2,21,7,0)
+is not available.
+"^DD",2006.55,2006.552,2,"DT")
+3001204
+"^DD",2006.55,2006.552,3,0)
+PID^RF^^0;3^K:$L(X)>20!($L(X)<1) X
+"^DD",2006.55,2006.552,3,1,0)
+^.1
+"^DD",2006.55,2006.552,3,1,1,0)
+2006.552^D
+"^DD",2006.55,2006.552,3,1,1,1)
+S ^MAGDWLST(2006.55,DA(1),1,"D",$E(X,1,30),DA)=""
+"^DD",2006.55,2006.552,3,1,1,2)
+K ^MAGDWLST(2006.55,DA(1),1,"D",$E(X,1,30),DA)
+"^DD",2006.55,2006.552,3,1,1,"%D",0)
+^^2^2^3001204^
+"^DD",2006.55,2006.552,3,1,1,"%D",1,0)
+This cross reference keeps track of which patients (ID) are
+"^DD",2006.55,2006.552,3,1,1,"%D",2,0)
+seen at which location.
+"^DD",2006.55,2006.552,3,1,1,"DT")
+3001204
+"^DD",2006.55,2006.552,3,3)
+Enter the Patient ID
+"^DD",2006.55,2006.552,3,21,0)
+^^11^11^3001006^^
+"^DD",2006.55,2006.552,3,21,1,0)
+The value of this field is the value that is transmitted
+"^DD",2006.55,2006.552,3,21,2,0)
+for DICOM element 0010,0020.
+"^DD",2006.55,2006.552,3,21,3,0)
+Typically, the value of this field is equal to
+"^DD",2006.55,2006.552,3,21,4,0)
+the Social Security Number of the patient
+"^DD",2006.55,2006.552,3,21,5,0)
+for whom the study is scheduled.
+"^DD",2006.55,2006.552,3,21,6,0)
+(Without the dashes between the number-groups.)
+"^DD",2006.55,2006.552,3,21,7,0)
+ 
+"^DD",2006.55,2006.552,3,21,8,0)
+This value is copied from the VistA Database, so that
+"^DD",2006.55,2006.552,3,21,9,0)
+worklist queries can also be performed when the network
+"^DD",2006.55,2006.552,3,21,10,0)
+connection (RPC) with the main Hospital Information System
+"^DD",2006.55,2006.552,3,21,11,0)
+is not available.
+"^DD",2006.55,2006.552,3,"DT")
+3001204
+"^DD",2006.55,2006.552,4,0)
+SSN^RF^^0;4^K:$L(X)>11!($L(X)<1) X
+"^DD",2006.55,2006.552,4,3)
+Enter the patient's SSN
+"^DD",2006.55,2006.552,4,21,0)
+^^8^8^3000218^^
+"^DD",2006.55,2006.552,4,21,1,0)
+The value of this field is the Social Security Number of the patient
+"^DD",2006.55,2006.552,4,21,2,0)
+for whom the study is scheduled.
+"^DD",2006.55,2006.552,4,21,3,0)
+(With the dashes between the number-groups.)
+"^DD",2006.55,2006.552,4,21,4,0)
+ 
+"^DD",2006.55,2006.552,4,21,5,0)
+This value if copied from the VistA Database, so that
+"^DD",2006.55,2006.552,4,21,6,0)
+worklist queries can also be performed when the network
+"^DD",2006.55,2006.552,4,21,7,0)
+connection (RPC) with the main Hospital Information System
+"^DD",2006.55,2006.552,4,21,8,0)
+is not available.
+"^DD",2006.55,2006.552,4,"DT")
+2990311
+"^DD",2006.55,2006.552,5,0)
+DOB^RD^^0;5^S %DT="EX" D ^%DT S X=Y K:Y<1 X
+"^DD",2006.55,2006.552,5,3)
+Enter the patient's date of birth.
+"^DD",2006.55,2006.552,5,21,0)
+^^7^7^3000218^^
+"^DD",2006.55,2006.552,5,21,1,0)
+The value of this field is the date of birth of the patient
+"^DD",2006.55,2006.552,5,21,2,0)
+for whom the study is scheduled.
+"^DD",2006.55,2006.552,5,21,3,0)
+ 
+"^DD",2006.55,2006.552,5,21,4,0)
+This value if copied from the VistA Database, so that
+"^DD",2006.55,2006.552,5,21,5,0)
+worklist queries can also be performed when the network
+"^DD",2006.55,2006.552,5,21,6,0)
+connection (RPC) with the main Hospital Information System
+"^DD",2006.55,2006.552,5,21,7,0)
+is not available.
+"^DD",2006.55,2006.552,5,"DT")
+2990311
+"^DD",2006.55,2006.552,6,0)
+GENDER^S^M:Male;F:Female;U:Unknown;^0;6^Q
+"^DD",2006.55,2006.552,6,3)
+Enter the patient's gender.
+"^DD",2006.55,2006.552,6,21,0)
+^^7^7^3000218^^
+"^DD",2006.55,2006.552,6,21,1,0)
+The value of this field is the gender of the patient
+"^DD",2006.55,2006.552,6,21,2,0)
+for whom the study is scheduled.
+"^DD",2006.55,2006.552,6,21,3,0)
+ 
+"^DD",2006.55,2006.552,6,21,4,0)
+This value if copied from the VistA Database, so that
+"^DD",2006.55,2006.552,6,21,5,0)
+worklist queries can also be performed when the network
+"^DD",2006.55,2006.552,6,21,6,0)
+connection (RPC) with the main Hospital Information System
+"^DD",2006.55,2006.552,6,21,7,0)
+is not available.
+"^DD",2006.55,2006.552,6,"DT")
+2990311
+"^DD",2006.55,2006.552,7,0)
+SHORT ID^F^^0;7^K:$L(X)>30!($L(X)<1) X
+"^DD",2006.55,2006.552,7,1,0)
+^.1
+"^DD",2006.55,2006.552,7,1,1,0)
+2006.552^E
+"^DD",2006.55,2006.552,7,1,1,1)
+S ^MAGDWLST(2006.55,DA(1),1,"E",$E(X,1,30),DA)=""
+"^DD",2006.55,2006.552,7,1,1,2)
+K ^MAGDWLST(2006.55,DA(1),1,"E",$E(X,1,30),DA)
+"^DD",2006.55,2006.552,7,1,1,"%D",0)
+^^2^2^3001204^
+"^DD",2006.55,2006.552,7,1,1,"%D",1,0)
+This cross reference keeps track of which patients (short ID)
+"^DD",2006.55,2006.552,7,1,1,"%D",2,0)
+are seen at which location.
+"^DD",2006.55,2006.552,7,1,1,"DT")
+3001204
+"^DD",2006.55,2006.552,7,3)
+Enter any other IDs for this patient.
+"^DD",2006.55,2006.552,7,21,0)
+^^13^13^3001006^^
+"^DD",2006.55,2006.552,7,21,1,0)
+The value of this field is the value that is transmitted
+"^DD",2006.55,2006.552,7,21,2,0)
+for DICOM element 0010,1000.
+"^DD",2006.55,2006.552,7,21,3,0)
+Typically, the value of this field is equal to
+"^DD",2006.55,2006.552,7,21,4,0)
+the first letter of the last name of the patient, followed by
+"^DD",2006.55,2006.552,7,21,5,0)
+the last four digits of the Social Security Number of the patient
+"^DD",2006.55,2006.552,7,21,6,0)
+for whom the study is scheduled.
+"^DD",2006.55,2006.552,7,21,7,0)
+
+"^DD",2006.55,2006.552,7,21,8,0)
+Sometimes, this data element is also referred to as the "Quick ID".
+"^DD",2006.55,2006.552,7,21,9,0)
+ 
+"^DD",2006.55,2006.552,7,21,10,0)
+This value is copied from the VistA Database, so that
+"^DD",2006.55,2006.552,7,21,11,0)
+worklist queries can also be performed when the network
+"^DD",2006.55,2006.552,7,21,12,0)
+connection (RPC) with the main Hospital Information System
+"^DD",2006.55,2006.552,7,21,13,0)
+is not available.
+"^DD",2006.55,2006.552,7,"DT")
+3001204
+"^DD",2006.55,2006.552,8,0)
+RACE^F^^0;8^K:$L(X)>20!($L(X)<1) X
+"^DD",2006.55,2006.552,8,3)
+Enter the patient's race.
+"^DD",2006.55,2006.552,8,21,0)
+^^7^7^3001024^^
+"^DD",2006.55,2006.552,8,21,1,0)
+The value of this field is the race of the patient
+"^DD",2006.55,2006.552,8,21,2,0)
+for whom the study is scheduled.
+"^DD",2006.55,2006.552,8,21,3,0)
+ 
+"^DD",2006.55,2006.552,8,21,4,0)
+This value if copied from the VistA Database, so that
+"^DD",2006.55,2006.552,8,21,5,0)
+worklist queries can also be performed when the network
+"^DD",2006.55,2006.552,8,21,6,0)
+connection (RPC) with the main Hospital Information System
+"^DD",2006.55,2006.552,8,21,7,0)
+is not available.
+"^DD",2006.55,2006.552,8,"DT")
+2990311
+"^DD",2006.55,2006.552,9,0)
+PREGNANCY STATUS^S^1:Not pregnant;2:Possibly pregnant;3:Definitely pregnant;4:Unknown;^0;9^Q
+"^DD",2006.55,2006.552,9,3)
+Indicate whether or not the patient is pregnant.
+"^DD",2006.55,2006.552,9,21,0)
+^^7^7^3001024^^
+"^DD",2006.55,2006.552,9,21,1,0)
+The value of this field is the pregnancy status of the patient
+"^DD",2006.55,2006.552,9,21,2,0)
+for whom the study is scheduled.
+"^DD",2006.55,2006.552,9,21,3,0)
+ 
+"^DD",2006.55,2006.552,9,21,4,0)
+This value if copied from the VistA Database, so that
+"^DD",2006.55,2006.552,9,21,5,0)
+worklist queries can also be performed when the network
+"^DD",2006.55,2006.552,9,21,6,0)
+connection (RPC) with the main Hospital Information System
+"^DD",2006.55,2006.552,9,21,7,0)
+is not available.
+"^DD",2006.55,2006.552,9,"DT")
+3001011
+"^DD",2006.55,2006.552,10,0)
+CURRENT PATIENT LOCATION^F^^0;10^K:$L(X)>20!($L(X)<1) X
+"^DD",2006.55,2006.552,10,3)
+Indicate where the patient currently is located.
+"^DD",2006.55,2006.552,10,21,0)
+^^7^7^3001024^^
+"^DD",2006.55,2006.552,10,21,1,0)
+The value of this field is the location of the patient
+"^DD",2006.55,2006.552,10,21,2,0)
+for whom the study is scheduled.
+"^DD",2006.55,2006.552,10,21,3,0)
+ 
+"^DD",2006.55,2006.552,10,21,4,0)
+This value if copied from the VistA Database, so that
+"^DD",2006.55,2006.552,10,21,5,0)
+worklist queries can also be performed when the network
+"^DD",2006.55,2006.552,10,21,6,0)
+connection (RPC) with the main Hospital Information System
+"^DD",2006.55,2006.552,10,21,7,0)
+is not available.
+"^DD",2006.55,2006.552,10,"DT")
+3001011
+"^DD",2006.55,2006.552,11,0)
+PATIENT ADDRESS^F^^0;11^K:$L(X)>30!($L(X)<1) X
+"^DD",2006.55,2006.552,11,3)
+Enter the Patient's address, 1-30 characters.
+"^DD",2006.55,2006.552,11,21,0)
+^^1^1^3020605^
+"^DD",2006.55,2006.552,11,21,1,0)
+This field stores the patient address.
+"^DD",2006.55,2006.552,11,"DT")
+3020401
+"^DD",2006.55,2006.552,12,0)
+INTEGRATION CONTROL NUMBER^F^^0;12^K:$L(X)>30!($L(X)<1) X
+"^DD",2006.55,2006.552,12,3)
+Enter the Integration Control Number for this patient.
+"^DD",2006.55,2006.552,12,21,0)
+^.001^8^8^3020605^^^
+"^DD",2006.55,2006.552,12,21,1,0)
+The value of this field is an Integration Control Number.
+"^DD",2006.55,2006.552,12,21,2,0)
+ 
+"^DD",2006.55,2006.552,12,21,3,0)
+The format and possible values for this field are determined by the
+"^DD",2006.55,2006.552,12,21,4,0)
+software that maintains the Master Patient Index.
+"^DD",2006.55,2006.552,12,21,5,0)
+ 
+"^DD",2006.55,2006.552,12,21,6,0)
+Values for this field are obtained by calling $$GETICN^MPIF001(dfn) (only
+"^DD",2006.55,2006.552,12,21,7,0)
+the first piece of the return value is retained (ICNVICN), not the
+"^DD",2006.55,2006.552,12,21,8,0)
+checksum).
+"^DD",2006.55,2006.552,12,"DT")
+3020605
+"^DD",2006.55,2006.552,13,0)
+TAG^2006.553^^2;0
+"^DD",2006.55,2006.552,13,21,0)
+^.001^2^2^3100212^^^^
+"^DD",2006.55,2006.552,13,21,1,0)
+This multiple contains the DICOM tag-value pairs that record the patient 
+"^DD",2006.55,2006.552,13,21,2,0)
+and study information that will be returned in a Modality Worklist query.
+"^DD",2006.55,2006.552,14,0)
+MEDICAL ALERT^2006.5522^^1;0
+"^DD",2006.55,2006.552,14,21,0)
+^^1^1^3100212^
+"^DD",2006.55,2006.552,14,21,1,0)
+This multiple contains lines of text that describe a medical alert.
+"^DD",2006.55,2006.552,15,0)
+SITE-DFN^F^^0;13^K:$L(X)>20!($L(X)<5)!'(X?3N.N1"-"1N.N) X
+"^DD",2006.55,2006.552,15,.1)
+STATION NUMBER - DFN
+"^DD",2006.55,2006.552,15,3)
+Answer must be 5-20 characters in length.
+"^DD",2006.55,2006.552,15,21,0)
+^^1^1^3100820^
+"^DD",2006.55,2006.552,15,21,1,0)
+This is the 3-digit Station Number concatenated with the DFN, separated by a dash.
+"^DD",2006.55,2006.552,15,"DT")
+3100727
+"^DD",2006.55,2006.5522,0)
+MEDICAL ALERT SUB-FIELD^^.01^1
+"^DD",2006.55,2006.5522,0,"DT")
+3061006
+"^DD",2006.55,2006.5522,0,"IX","B",2006.5522,.01)
+
+"^DD",2006.55,2006.5522,0,"NM","MEDICAL ALERT")
+
+"^DD",2006.55,2006.5522,0,"UP")
+2006.552
+"^DD",2006.55,2006.5522,.01,0)
+MEDICAL ALERT^MF^^0;1^K:$L(X)>240!($L(X)<1) X
+"^DD",2006.55,2006.5522,.01,1,0)
+^.1
+"^DD",2006.55,2006.5522,.01,1,1,0)
+2006.5522^B
+"^DD",2006.55,2006.5522,.01,1,1,1)
+S ^MAGDWLST(2006.55,DA(2),1,DA(1),1,"B",$E(X,1,30),DA)=""
+"^DD",2006.55,2006.5522,.01,1,1,2)
+K ^MAGDWLST(2006.55,DA(2),1,DA(1),1,"B",$E(X,1,30),DA)
+"^DD",2006.55,2006.5522,.01,3)
+Enter text that describes the medical alert (1-240 char).
+"^DD",2006.55,2006.5522,.01,21,0)
+^^2^2^3100212^
+"^DD",2006.55,2006.5522,.01,21,1,0)
+The value of this field is a line of free text that describes a medical
+"^DD",2006.55,2006.5522,.01,21,2,0)
+alert.
+"^DD",2006.55,2006.5522,.01,"DT")
+3061006
+"^DD",2006.55,2006.553,0)
+TAG SUB-FIELD^^3^3
+"^DD",2006.55,2006.553,0,"DT")
+3061006
+"^DD",2006.55,2006.553,0,"IX","B",2006.553,.01)
+
+"^DD",2006.55,2006.553,0,"NM","TAG")
+
+"^DD",2006.55,2006.553,0,"UP")
+2006.552
+"^DD",2006.55,2006.553,.01,0)
+TAG^MF^^0;1^K:$L(X)>30!($L(X)<1) X
+"^DD",2006.55,2006.553,.01,1,0)
+^.1
+"^DD",2006.55,2006.553,.01,1,1,0)
+2006.553^B
+"^DD",2006.55,2006.553,.01,1,1,1)
+S ^MAGDWLST(2006.55,DA(2),1,DA(1),1,"B",$E(X,1,30),DA)=""
+"^DD",2006.55,2006.553,.01,1,1,2)
+K ^MAGDWLST(2006.55,DA(2),1,DA(1),1,"B",$E(X,1,30),DA)
+"^DD",2006.55,2006.553,.01,3)
+Enter the code for the tag (1-30 char).
+"^DD",2006.55,2006.553,.01,21,0)
+^.001^3^3^3100212^^
+"^DD",2006.55,2006.553,.01,21,1,0)
+The value of this field is a string.  This string corresponds to the tag
+"^DD",2006.55,2006.553,.01,21,2,0)
+in the DICOM standard.  Each tag corresponds to a data item, e.g.,
+"^DD",2006.55,2006.553,.01,21,3,0)
+0010,0010 identifies the patient's name.
+"^DD",2006.55,2006.553,.01,"DT")
+3061006
+"^DD",2006.55,2006.553,2,0)
+VALUE^F^^0;2^K:$L(X)>200!($L(X)<1) X
+"^DD",2006.55,2006.553,2,3)
+Enter the value for this tag (1-200 chars).
+"^DD",2006.55,2006.553,2,21,0)
+^^5^5^3100212^
+"^DD",2006.55,2006.553,2,21,1,0)
+The value of this field is a string.  This string is the value that is
+"^DD",2006.55,2006.553,2,21,2,0)
+associated with the tag that is stored in the .01 field of this multiple.
+"^DD",2006.55,2006.553,2,21,3,0)
+ 
+"^DD",2006.55,2006.553,2,21,4,0)
+E.g., for the DICOM tag "0010,0010" (patient's name), the value could be
+"^DD",2006.55,2006.553,2,21,5,0)
+"DOE,JOHN Q".
+"^DD",2006.55,2006.553,2,"DT")
+3061006
+"^DD",2006.55,2006.553,3,0)
+TEXT^2006.5533^^1;0
+"^DD",2006.55,2006.553,3,21,0)
+^^4^4^3100212^
+"^DD",2006.55,2006.553,3,21,1,0)
+This multiple contains text that will populate a DICOM element whose value
+"^DD",2006.55,2006.553,3,21,2,0)
+representation allows it to contain one to many lines of text.  The 
+"^DD",2006.55,2006.553,3,21,3,0)
+meaning of this text is determined by the value of the .01 field in this 
+"^DD",2006.55,2006.553,3,21,4,0)
+multiple.
+"^DD",2006.55,2006.5533,0)
+TEXT SUB-FIELD^^.01^1
+"^DD",2006.55,2006.5533,0,"DT")
+3061006
+"^DD",2006.55,2006.5533,0,"NM","TEXT")
+
+"^DD",2006.55,2006.5533,0,"UP")
+2006.553
+"^DD",2006.55,2006.5533,.01,0)
+TEXT^MF^^0;1^K:$L(X)>240!($L(X)<1) X
+"^DD",2006.55,2006.5533,.01,1,0)
+^.1^^0
+"^DD",2006.55,2006.5533,.01,3)
+Enter a line of text (1-240 chars).
+"^DD",2006.55,2006.5533,.01,21,0)
+^^1^1^3100212^
+"^DD",2006.55,2006.5533,.01,21,1,0)
+The value of this field is a single line of text.
+"^DD",2006.55,2006.5533,.01,"DT")
+3061006
+"^DIC",2006.55,2006.55,0)
+DICOM WORKLIST PATIENT^2006.55
+"^DIC",2006.55,2006.55,0,"GL")
+^MAGDWLST(2006.55,
+"^DIC",2006.55,2006.55,"%",0)
+^1.005^^0
+"^DIC",2006.55,2006.55,"%D",0)
+^^36^36^3010620^
+"^DIC",2006.55,2006.55,"%D",1,0)
+ +---------------------------------------------------------------+
+"^DIC",2006.55,2006.55,"%D",2,0)
+ |                                                               |
+"^DIC",2006.55,2006.55,"%D",3,0)
+ | Property of the US Government.                                |
+"^DIC",2006.55,2006.55,"%D",4,0)
+ | No permission to copy or redistribute this software is given. |
+"^DIC",2006.55,2006.55,"%D",5,0)
+ | Use of unreleased versions of this software requires the user |
+"^DIC",2006.55,2006.55,"%D",6,0)
+ | to execute a written test agreement with the VistA Imaging    |
+"^DIC",2006.55,2006.55,"%D",7,0)
+ | Development Office of the Department of Veterans Affairs,     |
+"^DIC",2006.55,2006.55,"%D",8,0)
+ | telephone (301) 734-0100.                                     |
+"^DIC",2006.55,2006.55,"%D",9,0)
+ |                                                               |
+"^DIC",2006.55,2006.55,"%D",10,0)
+ | The Food and Drug Administration classifies this software as  |
+"^DIC",2006.55,2006.55,"%D",11,0)
+ | a medical device.  As such, it may not be changed in any way. |
+"^DIC",2006.55,2006.55,"%D",12,0)
+ | Modifications to this software may result in an adulterated   |
+"^DIC",2006.55,2006.55,"%D",13,0)
+ | medical device under 21CFR820, the use of which is considered |
+"^DIC",2006.55,2006.55,"%D",14,0)
+ | to be a violation of US Federal Statutes.                     |
+"^DIC",2006.55,2006.55,"%D",15,0)
+ |                                                               |
+"^DIC",2006.55,2006.55,"%D",16,0)
+ +---------------------------------------------------------------+
+"^DIC",2006.55,2006.55,"%D",17,0)
+ 
+"^DIC",2006.55,2006.55,"%D",18,0)
+The entries in this table contain the demographic information for the various
+"^DIC",2006.55,2006.55,"%D",19,0)
+patients, for whom tasks are recorded on the worklist for a DICOM "modality".
+"^DIC",2006.55,2006.55,"%D",20,0)
+The top-level information in this table separates the patients from the
+"^DIC",2006.55,2006.55,"%D",21,0)
+various clinics at a consolidated site; the next level contains the patient
+"^DIC",2006.55,2006.55,"%D",22,0)
+information.
+"^DIC",2006.55,2006.55,"%D",23,0)
+ 
+"^DIC",2006.55,2006.55,"%D",24,0)
+This file contains temporary copies of information from the VistA
+"^DIC",2006.55,2006.55,"%D",25,0)
+system that live on our satellite systems for the duration of the
+"^DIC",2006.55,2006.55,"%D",26,0)
+study that produces the images, and the only reason for
+"^DIC",2006.55,2006.55,"%D",27,0)
+replicating the information onto these "DICOM Gateway Stations"
+"^DIC",2006.55,2006.55,"%D",28,0)
+is that we want to be able to allow the acquisition of images and
+"^DIC",2006.55,2006.55,"%D",29,0)
+the presentation of "worklist information" to continue, even
+"^DIC",2006.55,2006.55,"%D",30,0)
+while the VistA system is down, or when the RPC connection
+"^DIC",2006.55,2006.55,"%D",31,0)
+between our Gateways and the VistA system is not operating. 
+"^DIC",2006.55,2006.55,"%D",32,0)
+ 
+"^DIC",2006.55,2006.55,"%D",33,0)
+Information is copied from VistA to DICOM Gateway when an HL7
+"^DIC",2006.55,2006.55,"%D",34,0)
+message is processed that announces the "exam", and removed when
+"^DIC",2006.55,2006.55,"%D",35,0)
+an HL7 message is processed that announces that the exam is
+"^DIC",2006.55,2006.55,"%D",36,0)
+carried out. 
+"^DIC",2006.55,"B","DICOM WORKLIST PATIENT",2006.55)
+
+**END**
+**END**

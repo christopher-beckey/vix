@@ -1,0 +1,3 @@
+Three routines in ...mumps/vrad/not-exported were originally in ...mumps/vrad/vista and were used in the build of patch 3.0*9T2.
+They were moved here prior to initializing different versions of these same routines into ...mumps/vista/vista.
+Those versions reflected changes introduced in Patch 16, which were to be part of the final release of Patch 9.

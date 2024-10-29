@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<build
+name="MAG*3.0*133"
+patch="133"
+patchName="Version 3.0 Patch 133 - VistARad Maintenance"
+
+envCheckRoutine="MAGJMN1"
+deleteEnvCheckRoutine="NO"
+
+preInstallRoutine=""
+deletePreInstalltRoutine=""
+
+postInstallRoutine="POSTINST^MAGJMN1"
+deletePostInstallRoutine="NO"
+
+packageName="IMAGING"
+
+packageNumber="454"
+packageVersion="3.0"
+packagePrefix="MAG"
+packageDateDestributed="3020319"
+alphaBetaTesting="YES"
+
+installationMessage="YES"
+addressForUsageReporting="G.IMAGING DEVELOPMENT TEAM@FORUM.VA.GOV"
+xmlns="http://va.gov/VistA/kids/manifest">
+
+<requiredBuilds>
+<!-- action= 0:Warning only;1:Don't install, remove global;2:Don't install, leave global;
+ -->
+<requiredBuild name="MAG*3.0*120" action="2"/>
+</requiredBuilds>
+<components>
+<dataDictionaries>
+</dataDictionaries>
+<routines>
+  <routine name="MAGJEX1" export="MAGJEX1.RTN"/>
+  <routine name="MAGJMN1" export="MAGJMN1.RTN"/>
+  <routine name="MAGJRPT" export="MAGJRPT.RTN"/>
+  <routine name="MAGJTU4V" export="MAGJTU4V.RTN"/>
+  <routine name="MAGJUPD1" export="MAGJUPD1.RTN"/>
+  <routine name="MAGJUTL1" export="MAGJUTL1.RTN"/>
+  <routine name="MAGJUTL3" export="MAGJUTL3.RTN"/>
+  <routine name="MAGJUTL5" export="MAGJUTL5.RTN"/>
+</routines>
+<rpcs>
+</rpcs>
+<options>
+</options>
+<securityKeys>
+</securityKeys>
+<protocols>
+</protocols>
+<templateLists>
+</templateLists>
+<hl7Applications>
+</hl7Applications>
+<hl7LogicalLinks>
+</hl7LogicalLinks>
+<parameterDefinitions>
+</parameterDefinitions>
+<parameterTemplates>
+</parameterTemplates>
+<printTemplates>
+</printTemplates>
+<sortTemplates>
+</sortTemplates>
+<inputTemplates>
+</inputTemplates>
+<forms>
+</forms>
+<functions>
+</functions>
+<dialogs>
+</dialogs>
+<bulletins>
+</bulletins>
+<mailGroups>
+</mailGroups>
+<helpFrames>
+</helpFrames>
+</components>
+</build>

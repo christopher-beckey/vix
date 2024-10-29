@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<UsersExport>
+  <Users>
+    <ChangePassword>false</ChangePassword>
+    <Enabled>true</Enabled>
+    <ExpirationDate>0</ExpirationDate>
+    <Flags>1</Flags>
+    <FullName>Unauthenticated user</FullName>
+    <Name>UnknownUser</Name>
+    <NameSpace>DICOM</NameSpace>
+    <Password>ObUutDN0/PoS2R1gUuQz9cTQZ7Q=</Password>
+    <PasswordChangedDateTime>62433,61620.517</PasswordChangedDateTime>
+    <Roles>
+      <RolesItem>%All</RolesItem>
+    </Roles>
+    <Routine>^MAGDLOGN</Routine>
+    <Salt>nbDhPivmpds=</Salt>
+  </Users>
+</UsersExport>

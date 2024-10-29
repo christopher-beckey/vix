@@ -1,0 +1,84 @@
+﻿<UserControl x:Class="VixHealthMonitor.VixSitesListView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300"
+             xmlns:b="clr-namespace:VISAHealthMonitorCommonControls;assembly=VISAHealthMonitorCommonControls"
+             DataContext="{Binding VixSitesList, Source={StaticResource Locator}}" xmlns:my="clr-namespace:VixHealthMonitor"
+             xmlns:local="clr-namespace:VISACommon;assembly=VISACommon"
+             xmlns:vix="clr-namespace:VixHealthMonitor">
+    <Grid>
+        <Grid.Resources>
+            <Style x:Key="LeftHeaderStyle" TargetType="{x:Type GridViewColumnHeader}">
+                <Setter Property="HorizontalContentAlignment" Value="Left"/>
+            </Style>
+        </Grid.Resources>
+
+
+        <ListView HorizontalAlignment="Stretch"  VerticalAlignment="Stretch" ItemsSource="{Binding Path=VisaSources.Sources.View}"
+                b:SelectorDoubleClickCommandBehavior.HandleDoubleClick="true"
+                b:SelectorDoubleClickCommandBehavior.TheCommandToRun="{Binding Path=ListMouseDoubleClickCommand}"
+                SelectedItem="{Binding Path=SelectedItem}" >
+
+            <ListView.ContextMenu >
+                <!-- 
+                <ContextMenu Name="RightClick" ItemsSource="{Binding VixHealth.Urls}">
+                -->
+                <ContextMenu Name="RightClick">    
+                    <MenuItem Header="Add Watch" Command="{Binding Path=AddWatchCommand}"/>
+                    <Separator />
+                    <MenuItem Header="Transaction Log" Command="{Binding Path=ViewTransactionLogCommand}" />
+                    <MenuItem Header="Site Service" Command="{Binding Path=ViewSiteServiceCommand}" />
+                    <MenuItem Header="Java Logs" Command="{Binding Path=ViewJavaLogsCommand}" />
+                    <MenuItem Header="Root Page" Command="{Binding Path=ViewVixRootCommand}" />
+                    <MenuItem Header="ROI Status" Command="{Binding Path=ViewROIStatusCommand}" />
+                    <Separator />
+                    <MenuItem Header="View Threads" Command="{Binding Path=ViewThreadsCommand}"/>
+                    <MenuItem Header="Memory Information" Command="{Binding Path=ViewMemoryInformationCommand}" />
+                    <MenuItem Header="View Logged Test Results" Command="{Binding Path=ViewLoggedTestResultsCommand}" />
+                    <MenuItem Header="View Checksums" Command="{Binding Path=ViewChecksumsCommand}" />                    
+                    <Separator />
+                    <MenuItem Header="VIX Administrators" Command="{Binding Path=ViewVixAdministratorsCommand}" />
+                    <Separator Visibility="{Binding Path=AdminVisibility, Mode=OneWay}" />
+                    <MenuItem Header="View Tomcat Libraries" Command="{Binding Path=ViewTomcatLibsCommand}"
+                              Visibility="{Binding Path=AdminVisibility, Mode=OneWay}" />
+                    <MenuItem Header="View JRE\Lib\Ext Libraries" Command="{Binding Path=ViewJreLibExtLibsCommand}"
+                              Visibility="{Binding Path=AdminVisibility, Mode=OneWay}" />
+                    <MenuItem Header="JMX Utility" Command="{Binding Path=ViewJmxUtilityCommand}"
+                              Visibility="{Binding Path=AdminVisibility, Mode=OneWay}" />
+                    <MenuItem Header="View VIX System Information" Command="{Binding Path=ViewVixSystemInformationCommand}"
+                              Visibility="{Binding Path=AdminVisibility, Mode=OneWay}" />
+                    
+                </ContextMenu>
+            </ListView.ContextMenu>
+
+
+            <ListView.View>
+                <GridView>
+                    <!--
+                    <GridViewColumn Width="160" HeaderContainerStyle="{StaticResource LeftHeaderStyle}">
+                    -->
+                    <GridViewColumn Width="Auto" HeaderContainerStyle="{StaticResource LeftHeaderStyle}">
+                        <GridViewColumnHeader Content="Site Name" 
+                                              Command="{Binding Path=SortCommand}" CommandParameter="VisaSource.DisplayName" />
+                        <GridViewColumn.CellTemplate>
+                            <HierarchicalDataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <Image Source="{Binding Path=VixHealth.HealthIcon}" />
+                                    <TextBlock Text="{Binding VisaSource.DisplayName}"  >
+                                        <TextBlock.ToolTip>
+                                            <Label Content="{Binding Path=VixHealth.VisaHealth.ErrorMessage}"/>
+                                        </TextBlock.ToolTip>
+                                    </TextBlock>
+                                </StackPanel>
+                            </HierarchicalDataTemplate>                          
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>                   
+                </GridView>
+            </ListView.View>
+        </ListView>
+
+    </Grid>
+</UserControl>

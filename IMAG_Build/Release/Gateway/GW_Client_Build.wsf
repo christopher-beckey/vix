@@ -1,0 +1,1548 @@
+<package>
+  <job id="KIDS_Maker">
+    <script language="JScript">
+      //
+      // Build GW Client
+      // Mike Stark
+      // 03.22.12 -- modified to build from TFS
+      // 
+      //
+	  var Manifest = WScript.CreateObject("Msxml2.DOMDocument.4.0");
+	  var Sequence = WScript.CreateObject("Msxml2.DOMDocument.4.0");
+	  var FSO = WScript.CreateObject("Scripting.FileSystemObject");
+	  var Shell = WScript.CreateObject("WScript.Shell");
+      var VSS = WScript.CreateObject("SourceSafe");
+      var VSS1 = WScript.CreateObject("SourceSafe"); 
+      var net = WScript.CreateObject("WScript.Network");
+      var pProj;
+      var VSSDatabase;
+      var VSSFLAG_TIMEMOD = 8;
+	  var user, pass, VStudio;
+	  var PatchRoot, VSSRoot, TfsRoot;
+	  var Version, buildtype, ismvers, compilvers, BuildNumber, Vers, Patch, TVers, Label;
+	  var Order, Depen, Status, Release;
+	  var HomeDir="C:\\DEV\\Gateway\\";
+	  var ManifestFile="Gateway_Manifest.xml";
+	  var SecLineOne=";;3.0;IMAGING;**";
+	  var SecLineTwo="**;~date~";
+	  var SecLine;
+	  var Hist = new Array();
+	  var TfsFetchLog;
+      var Log; 
+      //
+      
+      Main();
+      
+      function Main()
+      {
+        if ((WScript.Arguments.length != 1) || (WScript.Arguments(0) == "/?"))
+        {
+          WScript.StdOut.WriteLine("Usage: cscript VRAD_Client_Build.wsf [Test Version]");
+          WScript.StdOut.WriteLine("\tExample: cscript VRAD_Client_Build.wsf  12");
+          WScript.Quit(0);
+        } // if
+        //
+        LoadManifest(); //  Load patch manifest file
+        pProj = WScript.CreateObject(LoadManifest.ISWiProject);
+        if (LoadManifest.Repository !="TFS")
+        {
+          VSS.Open(LoadManifest.VSSDatabase, LoadManifest.user, LoadManifest.pass);  //connect to s15\GW_VSS$
+		  VSS1.Open(LoadManifest.VSSDatabase1, LoadManifest.user, LoadManifest.pass);  //connect to imm7\VSS$
+		} // if
+		TfsFetchLog = FSO.CreateTextFile("C:\\DEV\\Gateway\\TFSFetch.log");
+		GetBuildNumber(); //Get the unique incrimented build number from VSS
+		WScript.StdOut.WriteLine("Build number is: " + BuildNumber);
+		Version = "V" + Vers + "p" + Patch + "Build"+ BuildNumber +"_T" + TVers; // TEMP
+		compilvers = "3.0." + BuildNumber + "." + Patch;
+		WScript.StdOut.WriteLine(Version);
+		ismvers = Vers + "." + Patch + "." + TVers; //
+		WScript.StdOut.WriteLine(ismvers);
+		initializeXMLLog(); // Start Log
+        cleanupPreviousBuilds();  // clean up previous build folders
+        GetCode();  // fetch sources (code, libraries, install files)
+        Compile(); //compile code
+        GetMUMPS(); //grab mumps code by patch sequence
+        UpdateSecLine(); // update 2nd line and roll up M code
+        UpdateDICT(); //update 2nd line for DICT entries and roll into baseline
+        RollUpMumps(); // roll up mumps routines into one file
+        UpdateISM(); // modify *.ISM project
+        ExecuteCMDs(); // execute compile and commands
+		PubishResults();  // copy build results up to network location
+        logMessage("Build Complete");
+        closeLog();
+        //
+        WScript.Echo("Build Complete");
+      } // Main
+      
+      function GetBuildNumber()
+      {
+        var VSSItem, filename, f, r, Num, SourceFolder;
+        var ForReading = 1, ForWriting = 2, ForAppending = 8;
+        var BuildNumFold = LoadManifest.HomeDir + "BuildNum\\"; // kt 0328112 removed 1
+        var BuildBat = LoadManifest.UtilRoot + "Build.bat";
+        var output = FSO.CreateTextFile(LoadManifest.HomeDir + "\\GetBuildNumber.log");
+        //logMessage("Getting latest Build Number");
+        if (FSO.FolderExists(BuildNumFold))
+		{
+			WScript.StdOut.WriteLine("  Deleting folder [" + BuildNumFold +"]");
+			SourceFolder = FSO.GetFolder(BuildNumFold);
+			SourceFolder.Delete(true);
+		} //if
+        if (!FSO.FolderExists(BuildNumFold))
+		{
+			FSO.CreateFolder(BuildNumFold);
+			if (FSO.FileExists(BuildNumFold + "\\Build.bat"))
+			{
+			  WScript.StdOut.WriteLine("  Changing attributes for folder [" + BuildNumFold +"]");
+			  File = FSO.GetFile(BuildNumFold + "\\Build.bat");
+			  File.Attributes = 0;  // make sure it is not read only
+			} //if
+		} //if
+		Shell.CurrentDirectory = BuildNumFold;
+		if (LoadManifest.Repository !="TFS")
+		{
+		  try
+		    {
+		      WScript.StdOut.WriteLine("Trying to check out build.bat from :" + BuildBat);
+		      VSSItem = VSS1.VSSItem(BuildBat, false);
+		      VSSItem.CheckOut("Incriment build number for Patch #: " + Patch + " Version: " + TVers, BuildNumFold + "\\Build.bat", VSSFLAG_TIMEMOD);
+		    } //try
+		    catch(CheckOutException)
+		    {
+		      ShowException(CheckOutException);
+		      WScript.StdOut.WriteLine("Failed to check out Build.bat from VSS.  Fatal.");
+		      WScript.Quit(1);
+		    } //catch
+		 } else
+		 {
+		   //Map workfolder
+		   BuildBat = LoadManifest.TfsUtilRoot + "Build.bat";
+		   cmdstring = LoadManifest.TfsCmd + " workfold /login:\"" + LoadManifest.user + "," + LoadManifest.pass + "\" /workspace:" + LoadManifest.TfsWorkspace + " /map \"" + LoadManifest.TfsUtilRoot + "\" " + BuildNumFold;
+		   WScript.StdOut.WriteLine(cmdstring);
+		   ExitCode = ExecuteFile(cmdstring, output, 3);
+		   if (ExitCode == 0)
+		   {
+		     WScript.StdOut.WriteLine("Workfolder mapping to "  + LoadManifest.TfsWorkspace + "succeed.");
+		   }
+		   else
+		   {
+			  WScript.StdOut.WriteLine("Workfolder mapping failed: " + LoadManifest.TfsWorkspace);
+			  //logMessage("Workfolder mapping failed: " + LoadManifest.TfsWorkspace);
+			  WScript.Quit(1);
+		   } // if
+		   //Get project or file
+		   cmdstring = LoadManifest.TfsCmd + " get /login:\"" + LoadManifest.user + "," + LoadManifest.pass + "\" \"" + BuildBat + "\" /force";
+	       //%tfscmd% get /login:%tfslogin% "%tfsroot%/GW_Manifest.xml" /force
+	       WScript.StdOut.WriteLine(cmdstring);
+           ExitCode = ExecuteFile(cmdstring, output, 3);
+	       if (ExitCode == 0)
+           {
+		      WScript.StdOut.WriteLine("Get for: " + BuildBat + " succeeded.");
+	       }
+	       else
+           {
+             WScript.StdOut.WriteLine("Get failed for: " + BuildBat);
+             WScript.Quit(1);
+           } // if
+		   //Checkout  file
+		   cmdstring = LoadManifest.TfsCmd + " checkout /type:text /login:\"" + LoadManifest.user + "," + LoadManifest.pass + "\" " + BuildBat + " /lock:checkin";
+		   //%tfscmd% checkout /login:user,pass /type:text file
+		   WScript.StdOut.WriteLine(cmdstring);
+		   ExitCode = ExecuteFile(cmdstring, output, 3);
+		   if (ExitCode == 0)
+		   {
+		     WScript.StdOut.WriteLine("Checkout for "  + BuildBat + "succeed.");
+		   }
+		   else
+		   {
+			 WScript.StdOut.WriteLine("Checkout failed for: " + BuildBat);
+			 //logMessage("Checkout failed for: " + BuildBat);
+			 WScript.Quit(1);
+		   } // if
+		 }
+		filename = BuildNumFold + "\\Build.bat"
+		try
+		{
+		  f = FSO.OpenTextFile(filename, ForReading);
+	      r = f.ReadLine();
+		  Num = r.substring(16,20); //assumes a four-digit build-number
+		  f.Close();
+		} // try
+		catch(e)
+		{
+		  ShowException(e);
+		} // catch
+        if (Num != null)
+        {
+		  var BuildNum = parseInt(Num);
+		  BuildNum++;
+          BuildNumber = BuildNum;
+        } // if
+        else
+        {
+          WScript.StdOut.WriteLine("Failed to incriment next build number.  Fatal.");
+          //VSSItem.UndoCheckOut(LoadManifest.locUtil + "\\Build.bat");
+          WScript.Quit(1);
+        } // else
+        Version = "V" + Vers + "p" + Patch + "Build"+ BuildNumber +"_T" + TVers;
+        WScript.StdOut.WriteLine("Version: " + Version);
+        f = FSO.OpenTextFile(filename, ForWriting);
+        f.WriteLine("set BuildNumber=" + BuildNumber);
+        f.CLose();
+		if (LoadManifest.Repository !="TFS")
+        {
+          try
+          {
+            VSSItem.CheckIN("Incriment build number for Patch #: " + Patch + " Version: " + TVers, BuildNumFold + "\\Build.bat");
+          } //try
+          catch(CheckInException)
+          {
+            ShowException(CheckInException);
+          } //catch
+          VSSItem.Label(Version);
+        } else
+        {
+		   //Checkin  file
+		   cmdstring = LoadManifest.TfsCmd + " checkin /login:\"" + LoadManifest.user + "," + LoadManifest.pass + "\" " + BuildBat + " /noprompt /comment:\"Automated build.\"";
+		   //%tfscmd% checkin /login:user,pass file /noprompt /comment:text
+		   WScript.StdOut.WriteLine(cmdstring);
+		   ExitCode = ExecuteFile(cmdstring, output, 3);
+		   if (ExitCode == 0)
+		   {
+		     WScript.StdOut.WriteLine("Checkin for: " + BuildBat + "succeeded.");
+		   }
+		   else
+		   {
+			 WScript.StdOut.WriteLine("Checkin failed for: " + BuildBat);
+			 //logMessage("Checkin failed for: " + BuildBat);
+			 WScript.Quit(1);
+		   } // if
+		   //Label file or project
+		   cmdstring = LoadManifest.TfsCmd + " label " + Version + " " + BuildBat + " /login:\""  + LoadManifest.user + "," + LoadManifest.pass + "\" /comment:\"Automated build.\"";
+		   WScript.StdOut.WriteLine(cmdstring);
+		   ExitCode = ExecuteFile(cmdstring, output, 3);
+		   if (ExitCode == 0)
+		   {
+		     WScript.StdOut.WriteLine("Label for: " + BuildBat + "succeeded.");
+		   }
+		   else		   
+		   {
+			  WScript.StdOut.WriteLine("Label failed for: " + BuildBat);
+			  //logMessage("Label failed for: " + project);
+			  WScript.Quit(1);
+		   } // if
+		   //Unmap workfolder
+		   //%tfscmd% workfold /login:%tfslogin% /workspace:build /unmap "%tfsroot%"
+		   cmdstring = LoadManifest.TfsCmd + " workfold /login:\"" + LoadManifest.user + "," + LoadManifest.pass + "\" /unmap \"" + LoadManifest.TfsUtilRoot + "\"";
+		   WScript.StdOut.WriteLine(cmdstring);
+		   ExitCode = ExecuteFile(cmdstring, output, 3);
+		   if (ExitCode == 0)
+		   {
+		     WScript.StdOut.WriteLine("Unmap for: " + LoadManifest.TfsUtilRoot + "succeed.");
+		   }
+		   else
+		   {
+			 WScript.StdOut.WriteLine("Unmap failed for: " + LoadManifest.TfsUtilRoot);
+			 //logMessage("Unmap failed for: " + project);
+			 WScript.Quit(1);
+		   } // if
+		}
+		Shell.CurrentDirectory = LoadManifest.HomeDir;
+      } //GetBuildNumber
+      
+      function initializeXMLLog()
+      {
+        var date = new Date();
+        var filename = LoadManifest.log + getDateString(date) + "_" + Version + ".xml";
+        WScript.StdOut.WriteLine("Log: " + filename);
+		//
+        if (!FSO.FolderExists(LoadManifest.log))
+        {
+          FSO.CreateFolder(LoadManifest.log);
+        } // if
+        Log = FSO.CreateTextFile(filename);
+        Log.WriteLine("<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?>");
+        Log.WriteLine("<?xml-stylesheet type=\"text/xsl\" href=\"build.xslt\"?>");
+        Log.WriteLine("<Build>");
+        Log.WriteLine("<BuildDate>" + date + "</BuildDate>");
+        Log.WriteLine("<BuildVersion>Patch " + Version + "</BuildVersion>");
+      } // initializeXMLLog
+      
+      function LoadManifest()
+      {
+	    var loadError, xmltext, File;
+	    //Load Manifest File -- this assumes it is already pre-fetch prior to build
+        File = HomeDir + ManifestFile;
+        WScript.StdOut.WriteLine("Loading [" + File + "]");
+        if (!Manifest.load(File))
+        {
+          loadError = Manifest.parseError;
+          WScript.StdOut.WriteLine("Failed to load Manifest file: " + File);
+          WScript.StdOut.WriteLine("Error Code: " + loadError.errorCode);
+          WScript.StdOut.WriteLine("Error Description: " + loadError.reason);
+          WScript.StdOut.WriteLine("Location: " + loadError.line + "(" + loadError.linepos + ")");
+          WScript.StdOut.WriteLine("Source Text: " + loadError.srcText);
+          WScript.Quit(2);
+        } // if
+		Patch = Manifest.selectSingleNode("/build/@patch").value;
+		Vers = Manifest.selectSingleNode("/build/@ver").value;
+		TVers = WScript.Arguments(0);
+		buildtype = Manifest.selectSingleNode("/build/@buildtype").value;
+		WScript.StdOut.WriteLine("Patch #: " + Patch + " Version: " + Vers + "T Build " + TVers);
+		
+		var XmlItem;
+		var ItemsList = Manifest.selectNodes("/build/config/variables/item");
+		for (var i=0;i<ItemsList.length;i++)
+		{
+		  XmlItem = ItemsList.item(i);
+		  var name = XmlItem.getAttribute("name");
+		  var value = XmlItem.text;
+		  eval("LoadManifest." + name + "=value");
+		  WScript.StdOut.WriteLine("LoadManifest." + name + "=" + value);
+		} //for
+		
+      } // LoadManifest
+      
+	function cleanupPreviousBuilds()
+	{		
+	  WScript.StdOut.WriteLine("cleanupPreviousBuilds()");
+	  function DelFolder(folder)
+	  {
+	    if (FSO.FolderExists(folder))
+		{
+		  logMessage("Deleting folder [" + folder +"]");
+		  WScript.StdOut.WriteLine("  Deleting folder [" + folder +"]");
+		  FolderAttrib(folder);
+		  SourceFolder = FSO.GetFolder(folder);
+		  SourceFolder.Delete(true);
+		} //if
+	  } // DelFolder
+		
+	  function CreateFolder(folder)
+	  {
+		var File
+		if (!FSO.FolderExists(folder))
+		{
+		  logMessage("Creating folder [" + folder +"]");
+		  WScript.StdOut.WriteLine("  Creating folder [" + folder +"]");
+		  FSO.CreateFolder(folder);
+		}
+		if (FSO.FileExists(folder))
+		{
+		  WScript.StdOut.WriteLine("  Changing attributes for folder [" + folder +"]");
+		  File = FSO.GetFile(folder + "\\");
+          File.Attributes = 0;  // make sure it is not read only
+		} //if
+	  } //CreateFolder
+		
+	  var folderlist, folderitem, relpath, del, foldpath;
+      folderlist = Manifest.selectNodes("/build/config/folders/item");
+      for (var i=0;i<folderlist.length;i++)
+      {
+        folderitem = folderlist[i];
+        relpath = folderitem.getAttribute("relpath");
+        del = folderitem.getAttribute("delete");
+        foldpath=folderitem.text;
+        if (relpath == "HomeDir")
+        {
+          foldpath = LoadManifest.HomeDir + folderitem.text;
+        } //if
+        if (del == "Y")
+        {
+          DelFolder(foldpath);
+        } // if
+        CreateFolder(foldpath);
+		} //for	
+	} //cleanupPreviousBuilds
+      
+	function GetCode()
+    {
+	  logMessage("GetCode()");
+	  WScript.StdOut.WriteLine("GetCode()");
+	  var vssproj, vssitem, tfsproj;
+	  var loadError;
+	  var codelist, codeitem;
+	  var loc, type, target, codepath, attrib, relpath, vers;
+	  vssitem = Manifest.selectSingleNode("/build");
+	  VSSRoot = LoadManifest.VSSRoot;
+	  TfsRoot = LoadManifest.TfsRoot;
+	  codelist = Manifest.selectNodes("/build/patch/item");
+	  for (var i=0;i<codelist.length;i++)
+      {
+        codeitem = codelist[i];
+        loc = codeitem.getAttribute("loc");
+        type = codeitem.getAttribute("type");
+        target = codeitem.getAttribute("target") + "\\";
+        relpath = codeitem.getAttribute("relpath");
+		vers  = codeitem.getAttribute("vers");
+        if (relpath == "HomeDir")
+        {
+          target = LoadManifest.HomeDir + target;
+        }
+        codepath = codeitem.text;
+        attrib = codeitem.getAttribute("attrib");
+        if (loc == "tfs")
+        {
+          tfsproj = TfsRoot + codepath;
+          TfsFetch(tfsproj, target, type);
+        }  
+        if (loc == "vss")
+        {
+          vssproj = VSSRoot + codepath;
+          VSSFetch(loc, vssproj, target, type);
+        } //if
+        if (loc == "vss1")
+        {
+          vssproj = VSSRoot + codepath;
+          VSSFetch(loc, vssproj, target, type);
+        } //if
+        if (loc == "network")
+        {
+          NetFetch(codepath, target);
+        } //if
+        if (loc == "cvs")
+        {
+          CVSFetch(codepath, target, vers);
+        }
+        if (loc == "cmd")
+        {
+           ExecuteFile(codepath);
+        }
+        if (attrib == "W")
+        {
+          if (type == "proj")
+          {
+            FolderAttrib(target);
+          }
+        }
+      }	
+    } //GetCode
+    
+    function GetMUMPS()
+      {
+		// fetch patch level MUMPS & Dictionary changes
+		logMessage("GetMUMPS()");
+		var vssproj, vssproj1, SourceFolder;
+		var tfsproj, tfsproj1;
+		var loadError, SequencePath;
+		SequencePath = LoadManifest.SequenceFile;
+		logMessage("Load Sequence " + SequencePath);
+		if (!Sequence.load(SequencePath))
+		{
+		  loadError = Sequence.parseError;
+		  WScript.StdOut.WriteLine("Failed to load sequence file: " + SequencePath);
+          WScript.StdOut.WriteLine("Error Code: " + loadError.errorCode);
+          WScript.StdOut.WriteLine("Error Description: " + loadError.reason);
+          WScript.StdOut.WriteLine("Location: " + loadError.line + "(" + loadError.linepos + ")");
+          WScript.StdOut.WriteLine("Source Text: " + loadError.srcText);
+          WScript.Quit(2);	  
+		} //if
+		var ItemList = Sequence.getElementsByTagName("patch");
+		var name,sname,order,status,release,type;
+		var indexone, indextwo, indexthree, pstring;
+		var porder = new Array();
+		Release = 0;
+		for (var i=0;i<ItemList.length;i++)
+		{
+		  name = (ItemList(i).getElementsByTagName("name")(0).childNodes(0).nodeValue);
+		  sname = (ItemList(i).getElementsByTagName("sname")(0).childNodes(0).nodeValue);
+		  order = (ItemList(i).getElementsByTagName("order")(0).childNodes(0).nodeValue);
+		  status = (ItemList(i).getElementsByTagName("status")(0).childNodes(0).nodeValue);
+		  type =  (ItemList(i).getElementsByTagName("type")(0).childNodes(0).nodeValue);
+		  //WScript.StdOut.WriteLine("Order:" + order + ":");
+		  if (sname == Patch)
+		  {
+		    Label = name;
+		    Order = order;
+		    Status = status;
+		    //WScript.StdOut.WriteLine(name);
+		  }
+		  order = (order * 1);
+	      porder[order] = sname + "^" + status + "^" + name + "^" + type;
+		  if ((status == "release") && (order > Release) && (type == "DICOM"))
+		  {
+		    Release = order; // track highest release order in sequence
+		  }
+		} //for
+		WScript.StdOut.WriteLine("Release: " + Release);
+		var folder, folder1;
+		for (var i=0;i<porder.length;i++)
+		{
+		  if ((i > Release) && (i <= Order))
+		  {
+		    indexone = porder[i].indexOf("^");
+	        indextwo = porder[i].lastIndexOf("^");
+	        sname = porder[i].substring(0, indexone);
+	        status = porder[i].substring(indexone + 1, indextwo);
+	        indexthree = status.indexOf("^");
+	        name = status.substring(indexthree + 1, 9999);
+	        status = status.substring(0, indexthree);
+	        type = porder[i].substring(indextwo + 1, 9999);
+	        if (type == "DICOM")
+	        {
+	          Hist[i] = sname;
+	          folder = LoadManifest.HomeDir + "P" + sname + "\\";
+	          folder1 = folder + "DICT\\";
+	          WScript.StdOut.WriteLine("Create: " + folder);
+	          if (FSO.FolderExists(folder))
+	          {
+				WScript.StdOut.WriteLine("  Deleting folder [" + folder +"]");
+				FolderAttrib(folder);
+				var SourceFolder = FSO.GetFolder(folder);
+				SourceFolder.Delete(true);
+	          }
+	          if (!FSO.FolderExists(folder))
+			  {
+			    FSO.CreateFolder(folder);
+			  } //if
+	          if (FSO.FolderExists(folder1))
+	          {
+				WScript.StdOut.WriteLine("  Deleting folder [" + folder1 +"]");
+				FolderAttrib(folder1);
+				var SourceFolder = FSO.GetFolder(folder1);
+				SourceFolder.Delete(true);
+	          }
+			  vssproj = "$/VistAImaging/" + name + "/MUMPS/DICOM";
+			  tfsproj = LoadManifest.TfsRoot + "LegacyVSS/GW/VistAImaging/" + name + "/MUMPS/DICOM";
+			  vssproj1 = "$/VistAImaging/" + name + "/DICOM Gateway/Dictionaries";
+			  tfsproj1 = LoadManifest.TfsRoot + "LegacyVSS/GW/VistAImaging/" + name + "/DICOM Gateway/Dictionaries";
+			  if (LoadManifest.Repository !="TFS")
+			  {
+			    VSSFetch("vss", vssproj, folder, "proj");
+			    if (!FSO.FolderExists(folder1))
+			    {
+			      FSO.CreateFolder(folder1);
+			    } //if
+			    VSSFetch("vss", vssproj1, folder1, "proj");
+			  }  else
+			  {
+			    TfsFetch(tfsproj, folder, "proj");
+			    if (!FSO.FolderExists(folder1))
+			    {
+			      FSO.CreateFolder(folder1);
+			    } //if
+			    TfsFetch(tfsproj1, folder1, "proj");		  
+			  }
+			  Shell.CurrentDirectory = folder;
+			  ExecuteFile("attrib -s -h -r " + folder + "*.* /S /D");
+			  ExecuteFile("attrib -s -h -r " + folder1 + "*.* /S /D");
+		    } //if 
+		  } //if
+		} //for
+      } //GetMUMPS
+    
+    function UpdateSecLine()
+    {
+		logMessage("SecondLine()");
+		var ExitCode, Log, Folder, Parent, Files, File, FileName, chngFileName, holdFileName, f;
+		var myEnum, fold, sname, delim;
+		var mft = LoadManifest.mft;
+		var locWork = LoadManifest.locWork;
+		var locDistrib = LoadManifest.locDistrib;
+		var locMUMPSBase = LoadManifest.HomeDir + "MUMPS\\Baseline\\DICOM\\";
+		Log = FSO.CreateTextFile(LoadManifest.HomeDir + "Second_Line.log");
+		WScript.StdOut.WriteLine("Modify Patch Routines to update 2nd Line");
+		ExecuteFile("attrib -s -h -r " + locMUMPSBase + "*.* /S /D");
+		//
+		for (var i=0;i<Hist.length;i++)
+		{
+		 sname = Hist[i];
+		 if (sname !=null)
+		 {
+		 fold = LoadManifest.HomeDir + "P" + sname + "\\";
+		 Shell.CurrentDirectory = fold;
+		 Folder = FSO.GetFolder(fold);
+		 myEnum = new Enumerator(Folder.Files);
+	     var file, read, posone, postwo, p;
+	     while(!myEnum.atEnd())
+	     {
+	      var patchlist, pfile;
+	      File = FSO.GetFile(myEnum.item());
+	      FileName = File.name;
+	      delim = FileName.indexOf(".");
+	      var chk = FileName.substring(delim + 1,999);
+	      WScript.StdOut.WriteLine("Check: " + chk);
+	      if ((chk != "RTN") && (chk != "Cache")) 
+	      {
+	        myEnum.moveNext();
+	        continue;
+	      }
+	      patchlist = sname;
+	      // MAGOS routines have .cache extensions
+	      if (chk == "Cache")
+	      {
+	        chngFileName = FileName;
+	        FileName = FileName.substring(0,delim) + ".RTN";
+	      } //if
+	      p = null;
+		  try
+	      {
+	          file = FSO.OpenTextFile(locMUMPSBase + FileName, 1, true); // Open read only
+	          var out = 0;
+	          while(out == 0)
+	          {
+	            read = file.ReadLine();
+	            var chkln = read.substring(0,3);
+	            if (chkln == " ;;")
+	            {
+	              out = 1;
+	            }
+	          } // while
+	          posone = read.indexOf("**") + 2;
+	          postwo = read.lastIndexOf("**");
+	          p = read.substring(posone, postwo);
+	          WScript.StdOut.WriteLine("P: " + p);
+	          //logMessage("Baseline Sec Line result for " + FileName + "is: " + p);
+	          file.close();
+	      } //try
+	      catch(e)
+		  {
+		    //expect not find many
+		  } //catch
+		  if (chk == "Cache")
+		  {
+		    FileName = chngFileName;
+		  } //if
+		  SecLine = " " + SecLineOne + patchlist + SecLineTwo; // default
+		  if (((p !=" ") && (p != null)) || (patchlist != ""))
+		  {
+		    if ((p == " ") || (p == null))
+		    {
+		      SecLine = " " + SecLineOne + patchlist + SecLineTwo;
+		    } // if
+		    else
+		    {
+		      SecLine = " " + SecLineOne + p + "," + patchlist + SecLineTwo;
+		    } //else
+		   } // if
+		   try
+		   {
+		     WScript.StdOut.WriteLine("New Second Line of " + FileName + " is "+ SecLine);
+		     //WScript.StdOut.WriteLine("Step 1 -- move file");
+		     f = FSO.GetFile(fold + "\\" + FileName);
+		     f.Copy(locWork + FileName);
+		     //WScript.StdOut.WriteLine("Step 2 -- create 2nd line file");
+		     Shell.CurrentDirectory = locWork;
+		     file = FSO.CreateTextFile(locWork + "2nd_Line.txt", true);
+		     file.WriteLine(SecLine);
+		     file.close();
+		     if (chk == "Cache")
+		     {
+		       f = FSO.GetFile(locWork + FileName);
+		       f.name = FileName.substring(0,delim) + ".RTN";
+		       FileName = f.name;
+		     }
+		     //WScript.StdOut.WriteLine("Step 3 -- run formatter");
+		     ExitCode = ExecuteFile(mft + " -s 2nd_Line.txt -b " + BuildNumber, Log);
+		     if (ExitCode == 0)
+             {
+               //logMessage(FileName + " 2nd Line Format Complete");
+             } // if
+             else
+             {
+               WScript.StdOut.WriteLine(FileName + " ERROR 2nd Line Format Complete.");
+               logError(FileName + " ERROR 2nd Line Format for project [" + Version + "].  See Second_Line.log for error messages.");
+               closeLog();
+               WScript.Quit(1);
+             } // else
+             //WScript.StdOut.WriteLine("Step 4 -- delete original file" + FileName);
+             FSO.DeleteFile(locWork + FileName, true);
+             posone = FileName.indexOf(".") + 1;
+             chngFileName = FileName.substring(0,posone) + "new_RTN";
+             //WScript.StdOut.WriteLine("Step 5 -- Rename File " + NewFileName + " to " + FileName);
+             file = FSO.GetFile(locWork + chngFileName);
+             file.name = FileName;
+             //WScript.StdOut.WriteLine("Step 6 -- copy to the locMUMPSBase");
+             f = FSO.GetFile(locWork + FileName);
+             if ((buildtype == "partial") && (sname == Patch))
+             {
+               f.Copy(locDistrib, true);
+             }
+             f.Copy(locMUMPSBase, true);
+             //WScript.StdOut.WriteLine("Step 7 -- delete from work location");
+             FSO.DeleteFile(locWork + FileName, true);
+		   } // try
+		   catch(e)
+		   {
+		     ShowException(e);
+		   } //catch
+	     myEnum.moveNext();
+	      } //while
+	     } // if
+	    } //for
+	    Log.Close();
+	    //
+    } //UpdateSecLine
+    
+    function UpdateDICT()
+    {
+		logMessage("UpdateDICT()");
+		var ExitCode, Log, Folder, Parent, Files, File, FileName, chngFileName, holdFileName, f;
+		var myEnum, fold, sname, delim;
+		var mft = LoadManifest.mft;
+		var locWork = LoadManifest.locWork;
+		var locDistrib = LoadManifest.locDistrib;
+		var locDICTBase = LoadManifest.HomeDir + "DICT\\Baseline\\";
+		Log = FSO.CreateTextFile(LoadManifest.HomeDir + "DICT_Second_Line.log");
+		WScript.StdOut.WriteLine("Modify DICT files to update 2nd Line");
+		//
+		for (var i=0;i<Hist.length;i++)
+		{
+		 sname = Hist[i];
+		 if (sname !=null)
+		 {
+		 fold = LoadManifest.HomeDir + "P" + sname + "\\DICT\\";
+		 Shell.CurrentDirectory = fold;
+		 Folder = FSO.GetFolder(fold);
+		 myEnum = new Enumerator(Folder.Files);
+	     var file, read, posone, postwo, p;
+	     while(!myEnum.atEnd())
+	     {
+	      var patchlist, pfile;
+	      File = FSO.GetFile(myEnum.item());
+	      FileName = File.name;
+		  SecLine = " " + SecLineOne + sname + SecLineTwo;
+		  try
+		  {
+		     WScript.StdOut.WriteLine("New Second Line of " + FileName + " is "+ SecLine);
+		     //WScript.StdOut.WriteLine("Step 1 -- move file");
+		     f = FSO.GetFile(fold + "\\" + FileName);
+		     f.Copy(locWork + FileName);
+		     //WScript.StdOut.WriteLine("Step 2 -- create 2nd line file");
+		     Shell.CurrentDirectory = locWork;
+		     file = FSO.CreateTextFile(locWork + "2nd_Line.txt", true);
+		     file.WriteLine(SecLine);
+		     file.close();
+		     //WScript.StdOut.WriteLine("Step 3 -- run formatter");
+		     ExitCode = ExecuteFile(mft + " -d -s 2nd_Line.txt -b " + BuildNumber + " -e " + FileName, Log);
+		     if (ExitCode == 0)
+             {
+               //logMessage(FileName + " 2nd Line Format Complete");
+             } // if
+             else
+             {
+               WScript.StdOut.WriteLine(FileName + " ERROR 2nd Line Format Complete.");
+               logError(FileName + " ERROR 2nd Line Format for project [" + Version + "].  See DICT_Second_Line.loh for error messages.");
+               closeLog();
+               WScript.Quit(1);
+             } // else
+             //WScript.StdOut.WriteLine("Step 4 -- delete original file" + FileName);
+             FSO.DeleteFile(locWork + FileName, true);
+             posone = FileName.indexOf(".") + 1;
+             chngFileName = FileName.substring(0,posone) + "new_DIC";
+             //WScript.StdOut.WriteLine("Step 5 -- Rename File " + NewFileName + " to " + FileName);
+             file = FSO.GetFile(locWork + chngFileName);
+             file.name = FileName;
+             //WScript.StdOut.WriteLine("Step 6 -- copy to the locDistrib");
+             f = FSO.GetFile(locWork + FileName);
+             //f.Copy(locDistrib, true);
+             f.Copy(locDICTBase, true);
+             //WScript.StdOut.WriteLine("Step 7 -- delete from work location");
+             FSO.DeleteFile(locWork + FileName, true);
+		   } // try
+		   catch(e)
+		   {
+		     ShowException(e);
+		   } //catch
+	     myEnum.moveNext();
+	      } //while
+	     } // if
+	    } //for
+	    Log.Close();
+	    //
+    } //UpdateSecLine
+    
+    function RollUpMumps()
+    {
+	  var rollup = "C:\\DEV\\Gateway\\MUMPS\\Baseline\\DICOM\\";
+	  var mft = "C:\\DEV\\Gateway\\Utilities\\Compiled\\MumpsFormatter.exe";
+	  if (buildtype == "partial")
+	  {
+	    rollup = LoadManifest.locDistrib;
+	  }
+	  Shell.CurrentDirectory = rollup;
+	  WScript.StdOut.WriteLine(mft + ' -x -l "' + Version + '"');
+	  ExitCode = ExecuteFile(mft + ' -x -l "' + Version + '"');
+	  if (ExitCode == 0)
+      {
+        logMessage("Routines bundled into " + rollup + "\\DICOMRtns.rtn");
+      } // if
+      else
+      {
+        WScript.StdOut.WriteLine("ERROR bundling routines into " + rollup + "\\DICOMRtns.rtn");
+        logError("ERROR using MUMPS formatter to bundle routines in  [" + Version + "].  See Second_Line.log for error messages.");
+        closeLog();
+        WScript.Quit(1);
+      } // else
+      var File = FSO.GetFile(rollup + "DICOMRtns.rtn");
+	  File.name = "MAGDCM.rtn";
+    } //RollupMumps
+    
+    function Compile()
+    {
+	  logMessage("Compile()");
+	  WScript.StdOut.WriteLine("Compile()");
+	  var vssproj, vssitem;
+	  var loadError;
+	  var compilelist, compileitem;
+	  var type, compiler, target, compileproj, source, artifact, rename, relpath;
+	  var codesign;
+	  vssitem = Manifest.selectSingleNode("/build");
+	  VSSRoot = vssitem.getAttribute("vssroot");
+	  compilelist = Manifest.selectNodes("/build/compile/item");
+	  var CompileLog = FSO.CreateTextFile(LoadManifest.HomeDir + "\\Compile.log");
+	  for (var i=0;i<compilelist.length;i++)
+      {
+        compileitem = compilelist[i];
+        type = compileitem.getAttribute("type");
+        compiler = compileitem.getAttribute("compiler");
+        source = compileitem.getAttribute("source") + "\\";
+        target = compileitem.getAttribute("target") + "\\";
+        relpath = compileitem.getAttribute("relpath");
+        codesign = compileitem.getAttribute("codesign");
+        if (relpath == "HomeDir")
+        {
+          target = LoadManifest.HomeDir + target;
+          source = LoadManifest.HomeDir + source;
+        }
+        compileproj = compileitem.text;
+        artifact = compileitem.getAttribute("artifact");  
+        rename = compileitem.getAttribute("rename");
+        if (type == "java")
+        {
+          //check specific mave version
+          JavaCompile(compileproj, target);
+        } //Jave Compile
+        if (type == "delphi")
+        {
+          var options = compileitem.getAttribute("options");
+          if (compiler == "seven")
+          {
+		    DelphiSeven(compileproj, target, source, options, artifact); 
+          }
+        } // delphi compile
+        if (type == "C")
+        {
+          //check specific compiler type
+          if (compiler == "make")
+          {
+            CMakeCompile(compileproj, target, source, CompileLog, artifact);
+          }
+          if (compiler == "msbld")
+          {
+            MSBuild(compileproj, target, source, CompileLog);
+          }
+          if (compiler == "custommake")
+          {
+            CustomMake(compileproj, target, source, CompileLog, artifact);
+          }
+                    
+        } // C compile
+        if (type == "VB")
+        {
+          if (compiler == "VB6")
+          {
+            VBSIXCompile(compileproj, target, source, CompileLog, artifact);
+          }
+        }
+        if (type == "cmd")
+        {
+           ExecuteFile(compileproj, CompileLog);
+        }
+        if (type == "run")
+        {
+           RunFile(compileproj, CompileLog)
+        }
+        if (codesign == "TRUE" && artifact !="")
+        {
+           WScript.StdOut.WriteLine("Code Signing " + artifact);
+           logMessage("Performing code signing on " + artifact);
+           ExecuteFile("\"C:\\Program Files\\Microsoft Visual Studio 8\\SDK\\v2.0\\Bin\\signtool.exe\" sign /a " + "\"" + artifact + "\"", CompileLog);
+        } //codesign
+        if (rename !="" && rename !=null)
+        {
+          var File = FSO.GetFile(target + artifact);
+	      File.name = rename;
+        }
+      }
+      CompileLog.close();	
+    } //Compile  
+            
+    function VSSFetch(loc, proj, target, type)
+	{
+	  var VSSItem;
+	  if (target == "")
+	  {
+	    WScript.StdOut.WriteLine("Error in VSSFetch, missing target location for " + proj);
+	    logMessage("Error in VSSFetch, missing target location for " + proj);
+	    WScript.Quit(0);
+	  }
+	  if (type == "proj")
+	  {
+	    logMessage("Getting " + proj + " target:" + target);
+		WScript.StdOut.WriteLine("VSS Fetch: " + proj + " target: " + target + " type: " + type);
+	    Shell.CurrentDirectory = target;
+	    GetVSS(loc, proj, target);
+	  }
+	  if (type == "file")
+	  {
+	    logMessage("Getting " + proj + " target:" + target);
+	    WScript.StdOut.WriteLine("VSS Fetch: " + proj + " target: " + target + " type: " + type);
+	    Shell.CurrentDirectory = target;
+	    var VSSFile;
+	    if (loc == "vss")
+	    {
+	      VSSFile = VSS.VSSItem(proj, false);
+	    }
+	    if (loc == "vss1")
+	    {
+	     VSSFile = VSS1.VSSItem(proj, false);
+	    }
+	    VSSFile.Get(target, true);
+	    Shell.CurrentDirectory = LoadManifest.HomeDir;
+	  }
+	  //
+	  if (loc == "vss")
+	  {
+	    var VSSLabel = VSS.VSSItem(proj, false);
+	  }
+	  if (loc == "vss1")
+	  {
+	    var VSSLabel = VSS1.VSSItem(proj, false);
+	  } 
+	  VSSLabel.Label(Version); // Label utility
+	  VSSLabel = null;
+	} 
+	
+   function TfsFetch(proj, target, type)
+	{
+	  var cmdstring;
+	  var shortproj;
+	  //var output = FSO.CreateTextFile(LoadManifest.HomeDir + "TFSFetch.log");
+	  //WScript.StdOut.WriteLine("TFS Fetch: " + proj + " " + target);
+	  logMessage("TFS Fetch " + proj);
+	  if (target == "")
+	  {
+	    WScript.StdOut.WriteLine("Error in TfsFetch, missing target folder for " + proj);
+	    logMessage("Error in TfsFetch, missing target folder for " + proj);
+	    WScript.Quit(0);
+	  }
+      Shell.CurrentDirectory = target;
+      logMessage("Getting " + proj + " target:" + target + " type: " + type);
+      //WScript.StdOut.WriteLine("TFS Fetch: " + proj + " target: " + target + " type: " + type);
+	  Shell.CurrentDirectory = target;
+	  //Map workfolder
+	  cmdstring = LoadManifest.TfsCmd + " workfold /login:\"" + LoadManifest.user + "," + LoadManifest.pass + "\" /workspace:" + LoadManifest.TfsWorkspace + " /map \"" + proj + "\" " + target;
+	  if (type == "file")
+	  {
+	     shortproj = proj.substring(0, proj.lastIndexOf("/"));
+	     cmdstring = LoadManifest.TfsCmd + " workfold /login:\"" + LoadManifest.user + "," + LoadManifest.pass + "\" /workspace:" + LoadManifest.TfsWorkspace + " /map \"" + shortproj + "\" " + target;
+	  }
+	  //WScript.StdOut.WriteLine(cmdstring);
+	  ExitCode = ExecuteFile(cmdstring, TfsFetchLog);
+	  if (ExitCode == 0)
+      {
+		 logMessage("Workfolder mapping : " + LoadManifest.TfsWorkspace + " succeeded.");
+	  }
+	  else
+      {
+        logMessage("Workfolder mapping failed: " + LoadManifest.TfsWorkspace);
+        WScript.Quit(1);
+      } // if
+	  //Get project or file
+	  cmdstring = LoadManifest.TfsCmd + " get /login:\"" + LoadManifest.user + "," + LoadManifest.pass + "\" \"" + proj + "\"";
+	  //%tfscmd% get /login:%tfslogin% "%tfsroot%/GW_Manifest.xml" /force
+	  if (type == "proj")
+	  {
+	   cmdstring = cmdstring + " /recursive /force /noprompt";
+	  }
+	  if (type == "file")
+	  {
+	   cmdstring = cmdstring + " /force";
+	  }
+	  WScript.StdOut.WriteLine(cmdstring);
+      ExitCode = ExecuteFile(cmdstring, TfsFetchLog, 3);
+	  if (ExitCode == 0)
+      {
+		 logMessage("Get for: " + proj + " succeeded.");
+	  }
+	  else
+      {
+        logMessage("Get failed for: " + proj);
+        WScript.Quit(1);
+      } // if
+      //Label file or project
+      cmdstring = LoadManifest.TfsCmd + " label " + Version + " " + target + " /login:\"" + LoadManifest.user + "," + LoadManifest.pass + "\" /comment:\"Automated build.\"";
+      if (type == "file")
+      {
+        var filename = proj.substring((proj.lastIndexOf("/") + 1),999);
+        cmdstring = LoadManifest.TfsCmd + " label " + Version + " " + target + filename +" /login:\"" + LoadManifest.user + "," + LoadManifest.pass + "\" /comment:\"Automated build.\"";
+      }
+	  else
+	  {
+	    cmdstring = cmdstring + " /recursive";
+	  } //if
+      WScript.StdOut.WriteLine(cmdstring);
+      ExitCode = ExecuteFile(cmdstring, TfsFetchLog, 3);
+	  if (ExitCode == 0)
+      {
+		 logMessage("Label for: " + target + " succeeded.");
+	  }
+	  else	  
+      {
+        logMessage("Label failed for: " + target);
+        WScript.Quit(1);
+      } // if
+      //Unmap workfolder
+      //%tfscmd% workfold /login:%tfslogin% /workspace:build /unmap "%tfsroot%"
+      cmdstring = LoadManifest.TfsCmd + " workfold /login:\"" + LoadManifest.user + "," + LoadManifest.pass + "\" /workspace:" + LoadManifest.TfsWorkspace + " /unmap";
+      if (type == "file")
+      {
+        cmdstring = cmdstring + " \"" + shortproj + "\"";
+      }
+      else
+      {
+        cmdstring = cmdstring + " \"" + proj + "\"";
+      }
+      WScript.StdOut.WriteLine(cmdstring);
+      ExitCode = ExecuteFile(cmdstring, TfsFetchLog, 3);
+	  if (ExitCode == 0)
+	  {
+		 logMessage("Unmap for: " + proj + " succeeded.");
+	  }
+	  else	
+      {
+        logMessage("Unmap failed for: " + proj);
+        WScript.Quit(1);
+      } // if
+      Shell.CurrentDirectory = LoadManifest.HomeDir;
+	} //TfsFetch
+			
+ 	function NetFetch(proj, target)
+	{
+	  WScript.StdOut.WriteLine("Net copy: " + proj + " " + target);
+	  logMessage("Net copy " + proj);
+	  ExecuteFile("xcopy /S /Q /Y /R " + proj + " " + target);
+	} //NetFetch
+    
+    function CVSFetch(project, path, vers)
+    {
+      var Process;
+      var output = WScript.StdOut;
+      var cvscmd = "C:\\CVS\\cvs.exe";
+      //var CVS_PASSFILE="C:\\CVS\\passfile.txt";
+      //var CVSROOT = ":pserver:vhaiswdemoee@vhaiswimmris:/cvs";
+      Shell.CurrentDirectory = path;
+	  if ((vers == null) || (vers == ""))
+	  {
+		WScript.StdOut.WriteLine(cvscmd + " checkout " + project);
+		RunFile(cvscmd + " checkout " + project);
+	  }
+	  else
+	  {
+		WScript.StdOut.WriteLine(cvscmd + " checkout " + project);
+		RunFile(cvscmd + " checkout -r " + vers + " " + project);
+	  }
+    }
+    
+    function JavaCompile(project, target, source, output)
+    {
+      logMessage("JavaCompile(" + project + ")");
+      maven = '"C:\\Program Files\\Apache Software Foundation\\Maven 1.0.2\\bin\\maven.bat"'
+      if (source == null)
+      {
+        source = "C:\\Dev\\Gateway\\Java"
+      }
+      Shell.CurrentDirectory = source;
+      WScript.StdOut.WriteLine(maven + " -e -p " + source + "\\" + project + "/project.xml");
+      ExecuteFile(maven + " -e -p " + source + "\\" + project + "/project.xml", output);
+      WScript.StdOut.WriteLine("xcopy /Y " + source + "\\" + project + "\\target\\*.jar " + target);
+      ExecuteFile("xcopy /Y " + source + "\\" + project + "\\target\\*.jar " + target);
+      WScript.StdOut.WriteLine("xcopy /Y " + source + "\\" + project + "\\*.xml " + target);
+      ExecuteFile("xcopy /Y " + source + "\\" + project + "\\*.xml " + target);
+    }
+    
+    function CMakeCompile(project, target, source, output, artifact)
+    {
+        WScript.StdOut.WriteLine("Compile " + project + " in " + source)
+		Shell.CurrentDirectory = source;
+		if (FSO.FileExists(source + "Version.rc"))
+		{
+		  ExecuteFile("attrib -r " + source + "Version.rc", output);
+		  ExitCode = ExecuteFile("C:\\DEV\\Gateway\\Utilities\\Compiled\\SetBuild.exe " + source + "version.rc 3 0 " + Patch + " " + BuildNumber, output);
+		  if (ExitCode == 0)
+          {
+            logMessage("Version update sucessful for: " + project);
+          } // if
+          else
+          {
+            WScript.StdOut.WriteLine("ERROR " + project + " Version update failed.  See compile.log for error messages.");
+            logError("ERROR Version Update failed for project [" + Version + "].  See compile.log for error messages.");
+            closeLog();
+            WScript.Quit(1);
+          } // else
+          FSO.DeleteFile(source + "Version.rc");
+          var file = FSO.GetFile(source + "version.new");
+	      file.name = "Version.rc";
+	      file = "";
+		} // if
+		ExitCode = ExecuteFile('nmake CFG="' + project + ' - Win32 Release" -f ' + source + project + '.mak', output);
+		if (ExitCode == 0)
+          {
+            logMessage("Compile Successful: " + project);
+          } // if
+          else
+          {
+            WScript.StdOut.WriteLine("ERROR " + project + " Compile Failed.  See compile.log for error messages.");
+            logError("ERROR Compile Failed for project [" + Version + "].  See compile.log for error messages.");
+            closeLog();
+            WScript.Quit(1);
+          } // else
+        if (artifact !="")
+        {
+          FSO.CopyFile(source + "\\Release\\" + artifact, target);
+        }
+        // 
+    } //CMakeCompile
+    
+    function CustomMake(project, target, source, output, artifact)
+    {
+        WScript.StdOut.WriteLine("Compile " + project + " in " + source)
+		Shell.CurrentDirectory = source;
+		ExitCode = ExecuteFile(project, output);
+		if (ExitCode == 0)
+          {
+            logMessage("Compile Successful: " + project);
+          } // if
+          else
+          {
+            WScript.StdOut.WriteLine("ERROR " + project + " Compile Failed.  See compile.log for error messages.");
+            logError("ERROR Compile Failed for project [" + Version + "].  See compile.log for error messages.");
+            closeLog();
+            WScript.Quit(1);
+          } // else
+        if (artifact !="")
+        {
+          FSO.CopyFile(source + artifact, target);
+        }
+        // 
+    } //CustomMake
+    
+    function MSBuild(project, target, source, output)
+    {
+		WScript.StdOut.WriteLine("MSBuild Compile " + project + " in " + source);
+		Shell.CurrentDirectory = source;
+		if (FSO.FileExists(source + "Version.rc"))
+		{
+		  ExecuteFile("attrib -r " + source + "Version.rc", output);
+		  ExitCode = ExecuteFile("C:\\DEV\\Gateway\\Utilities\\Compiled\\SetBuild.exe " + source + "version.rc 3 0 " + Patch + " " + BuildNumber, output);
+		  if (ExitCode == 0)
+          {
+            logMessage("Version update successful for: " + project);
+          } // if
+          else
+          {
+            WScript.StdOut.WriteLine("ERROR " + project + " version updated failed.  See compile.log for error messages.");
+            logError("ERROR Version update failed for project [" + Version + "].  See compile.log for error messages.");
+            closeLog();
+            WScript.Quit(1);
+          } // else
+          FSO.DeleteFile(source + "Version.rc");
+          var file = FSO.GetFile(source + "version.new");
+	      file.name = "Version.rc";
+	      file = "";
+		} // if
+		ExitCode = ExecuteFile('C:\\WINDOWS\\Microsoft.NET\\Framework\\V2.0.50727\\MSBuild.exe ' + source + project + '.sln /t:Rebuild /p:Configuration=Release', output);;
+		if (ExitCode == 0)
+          {
+            logMessage("Compile Successful: " + project);
+          } // if
+          else
+          {
+            WScript.StdOut.WriteLine("ERROR " + project + " Compile Failed.  See compile.log for error messages.");
+            logError("ERROR Compile Failed for project [" + Version + "].  See compile.log for error messages.");
+            closeLog();
+            WScript.Quit(1);
+          } // else
+        FSO.CopyFile(source + "\\Release\\" + project + ".exe", target);
+      //set msbld="C:\WINDOWS\Microsoft.NET\Framework\V2.0.50727\MSBuild.exe"
+      //%msbld% "%SourceDir%\DICOMgw\Source Code\C-Store\CStore.sln" /t:Rebuild /p:Configuration=Release
+    } //MSBuild
+    
+    function VBSIXCompile(project, target, source, output, artifact)
+    {
+       WScript.StdOut.WriteLine("Compile " + project + " in " + source)
+		Shell.CurrentDirectory = source;
+		var vbcompil="C:\\Program Files\\Microsoft Visual Studio\\VB98\\VB6.EXE"
+		ExitCode = ExecuteFile(vbcompil +' /make ' + project + '.vbp', output);
+		if (ExitCode == 0)
+          {
+            logMessage("Compile Successful: " + project);
+          } // if
+          else
+          {
+            WScript.StdOut.WriteLine("ERROR " + project + " Compile Failed.  See compile.log for error messages.");
+            logError("ERROR Compile Failed for project [" + Version + "].  See compile.log for error messages.");
+            closeLog();
+            WScript.Quit(1);
+          } // else
+        if (artifact !="")
+        {
+          FSO.CopyFile(source + "\\" + artifact, target);
+        }
+    }
+    
+    function DelphiSeven(compileproj, target, source, options, artifact)
+    {
+      var Log, Project, dcufolder;
+      var delcompiler = "c:\\Program Files\\Borland\\Delphi7\\Bin\\Dcc32.exe";
+      WScript.StdOut.WriteLine("Delphi Compile " + compileproj + " in " + source);
+      Shell.CurrentDirectory = source;
+      UpdateVersion(compileproj, source);
+      Project = source + compileproj;
+      WScript.StdOut.WriteLine("\"" + delcompiler + "\" -B \"" + Project + "\" " + options);
+      if (!FSO.FolderExists(source + "dcu\\"))
+	  {
+		FSO.CreateFolder(source + "dcu\\");
+	  } //if
+      Log = FSO.CreateTextFile(source + "dcu\\compile.log");
+      ExitCode = ExecuteFile("\"" + delcompiler + "\" -B \"" + Project + "\" " + options, Log);
+          if (ExitCode == 0)
+          {
+            logMessage("Compile Successful - " + Project);
+            //VSSExecutable.CheckIn("Building version " + Version, ExecutableLocal);
+          } // if
+          else
+          {
+            WScript.StdOut.WriteLine("ERROR Compile Failed.  See compile.log for error messages.");
+            //VSSExecutable.UndoCheckOut(ExecutableLocal);
+            logError("ERROR Compile Failed for project [" + Project + "].  See compile.log for error messages.");
+            closeLog();
+            WScript.Quit(1);
+          } // else
+          FSO.CopyFile(source + artifact, target);
+    } //
+    
+    function UpdateVersion(compileproj, source)
+    {
+        var DelphiProject, DelphiResource, DelphiDOF, ExitCode;
+        var VSSDelphiResource, VSSDelphiDof;
+        var LocalDelphiResource, LocalDelphiDOF;
+		var File;
+		var VersLog;
+		File = compileproj;
+		VersLog = FSO.CreateTextFile(source + "\\VersionLog.txt");
+        DelphiResource = source + File.replace(".dpr", ".res");
+        //DelphiDOF = BaseVSSProject + File.replace(".dpr", ".dof");
+        WScript.StdOut.WriteLine("Updating version for " + File);
+        logMessage("Updating version for " + File);
+        try
+        {
+          ExitCode = ExecuteFile("\"" + LoadManifest.HomeDir + "\\Utilities\\ChangeRes\\ChangeRes.exe\" \"" + DelphiResource + "\" -U [VERSIONINFO] FileVersion=" + compilvers + "/s", VersLog);
+        } // try
+        catch(RunException)
+        {
+          ShowException(RunException)
+        } // catch
+      } // UpdateVersion
+    
+    function UpdateISM()
+    {
+      pProj.OpenProject(LoadManifest.ISMFile);
+      pProj.ProductCode = pProj.GenerateGUID();
+      //pProj.PackageCode = pProj.GenerateGUID();
+      pProj.ProductVersion = ismvers;
+      pProj.SaveProject();
+      pProj.CloseProject();
+    } //UpdateISM
+      
+	function ExecuteCMDs()
+	{
+	  logMessage("ExecuteCMDs()");
+	  var SourceFile, ExitCode, Log;
+	  Log = FSO.CreateTextFile(LoadManifest.HomeDir + "\\Execute_CMDs.log");
+	  WScript.StdOut.WriteLine("ExecuteCMDs")
+
+	  var cmd, cmdlist, cmditem, type, order, descr;
+	  var indexone, indextwo;
+	  //var cmdorder = new Array();
+      cmdlist = Manifest.selectNodes("/build/execute/item");
+      for (var i=0;i<cmdlist.length;i++)
+      {
+        cmditem = cmdlist[i];
+        cmd = cmditem.text;
+        type = cmditem.getAttribute("type");
+        descr = cmditem.getAttribute("descr");
+        WScript.StdOut.WriteLine("CMD:" + cmd + " Type:" + type + "  Descr:" + descr);
+        //cmdorder[order] = cmd + "^" + type + "^" + descr;
+		if (type == "exec")
+	    {
+	      ExecuteFile(cmd, Log);
+	    }
+	    if (type == "run")
+	    {
+	      RunFile(cmd, Log);
+	    }
+	    if (type == "installshield")
+	    {
+	      InstallShield();
+	    }
+	   } //for
+	 } //Execute CMDs
+	 
+	 function InstallShield()
+	 {
+	 Shell.CurrentDirectory = LoadManifest.HomeDir + "INSTALL\\InstallShield\\";
+	 var cmdstring = LoadManifest.Installshield + ' -p "' + LoadManifest.ISMFile + '" -c COMP -b "' + LoadManifest.Release + '" -e y -r SINGLE_EXE_IMAGE';
+	 WScript.StdOut.WriteLine(cmdstring);
+	 ExecuteFile(cmdstring);
+	 Shell.CurrentDirectory = LoadManifest.HomeDir;
+	 }
+	 
+	 function PubishResults()
+	 {
+	   logMessage("PublishResults()");
+	   var TargetFolder = LoadManifest.NetPublishResult + Version;
+	   logMessage("Creating folder in " + TargetFolder);
+	   WScript.StdOut.WriteLine("Creating folder in " + TargetFolder);
+	   FSO.CreateFolder(TargetFolder);
+	   TargetFolder +="\\";
+	   FSO.CopyFile(LoadManifest.Release + "\\PROJECT_ASSISTANT\\SINGLE_EXE_IMAGE\\DiskImages\\DISK1\\setup.exe", TargetFolder);
+	   // publish source code
+	   var folderlist, folderitem, foldname, relpath, del, foldpath, publish, fold;
+       folderlist = Manifest.selectNodes("/build/config/folders/item");
+        for (var i=0;i<folderlist.length;i++)
+        {
+          folderitem = folderlist[i];
+          relpath = folderitem.getAttribute("relpath");
+          del = folderitem.getAttribute("delete");
+          publish = folderitem.getAttribute("publish");
+          foldname=folderitem.text;
+          if (publish == "Y")
+          {
+            if (relpath == "HomeDir")
+            {
+              foldpath = LoadManifest.HomeDir + folderitem.text;
+              //if (!FSO.FolderExists(TargetFolder + foldname + "\\"))
+			  //{
+			  //  foldname = foldname.substring(foldname.lastIndexOf("\\") + 1, 9999);
+			  //  WScript.StdOut.WriteLine("Create " + TargetFolder + foldname + "\\");
+			  //  FSO.CreateFolder(TargetFolder + foldname + "\\");
+			  //} //if
+              WScript.StdOut.WriteLine("Copy " + foldpath + " to " + TargetFolder + "\\");
+              FSO.CopyFolder(foldpath, TargetFolder + "\\");
+            } //if
+            else
+            {
+              //foldname = foldname.substring(foldname.lastIndexOf("\\") + 1, 9999);
+              //if (!FSO.FolderExists(TargetFolder + foldname + "\\"))
+			  //{
+			  //  WScript.StdOut.WriteLine("Create " + TargetFolder + foldname + "\\");
+			  //  FSO.CreateFolder(TargetFolder + foldname + "\\");
+			  //} //if
+              WScript.StdOut.WriteLine("Copy " + folderitem.text + " to " + TargetFolder + "\\");
+              FSO.CopyFolder(folderitem.text, TargetFolder + "\\");
+			}
+          }  
+          } //for	
+	 } // PublishResults
+	  
+     function ExecuteFile(command, output, attempts)
+     {
+       //logMessage("ExecuteFile [" + command + "]");
+       WScript.StdOut.WriteLine("ExecuteFile [" + command + "]");
+       var Process;
+       var cntattempts = 0;
+       var excode;
+       if (attempts == null)
+       {
+         attempts = 1
+       }
+       if (output == null)
+       {
+         output = WScript.StdOut;
+       } // if
+       while (cntattempts < attempts)
+       {
+         try
+         {
+           Process = Shell.Exec(command);
+           while(!Process.StdOut.AtEndOfStream)
+             output.WriteLine(Process.StdOut.ReadLine());
+           while(!Process.StdErr.AtEndOfStream)
+             output.WriteLine(Process.StdErr.ReadLine());
+           while (Process.Status == 0)
+           WScript.Sleep(100);
+          } // try
+          catch(e)
+          {
+            output.WriteLine(e.message);
+          }
+          finally
+          {
+		    cntattempts = cntattempts + 1;
+		    excode = Process.ExitCode;
+		    if (excode == 0)
+		    {
+		      cntattempts = attempts + 1;
+		    }
+          }//finally
+        }  //while
+        return excode; 
+      } // ExecuteFile
+
+     function RunFile(command, output)
+     {
+       logMessage("ExecuteFile [" + command + "]");
+       var Process;
+       if (output == null)
+       {
+         output = WScript.StdOut;
+       } // if
+       try
+       {
+         Process = Shell.run(command);
+       } // try
+       catch(e)
+       {
+		  logError(e.message + "[" + command + "]");
+		  ShowException(e);
+       } 
+      } // ExecuteFile
+      
+    function GetVSS(loc, project, localDir)	
+	{
+		  var VSSItem
+		  logMessage("Getting " + project);
+		  try
+		  {
+		    if (loc == "vss")
+		    {
+		     VSSItem = VSS.VSSItem(project, false);
+		    }
+		    else
+		    {
+		     VSSItem = VSS1.VSSItem(project, false);
+		    }
+		    Get(VSSItem, localDir, true); 
+		  } //try
+		  catch(e)
+		  {
+		    logError(e.message + "[" + project + "]");
+		    ShowException(e);
+		  } //catch
+	} // GetVSS
+		
+	function Get(VSSItem, WorkingDir, recursive)
+    {
+          var ChildVSSItem, Items;
+          VSSItem.Get(WorkingDir, VSSFLAG_TIMEMOD);
+          if (recursive)
+          {
+            Items = VSSItem.Items(false);
+            for (var enumerator = new Enumerator(Items) ; !enumerator.atEnd(); enumerator.moveNext())
+            {
+              ChildVSSItem = enumerator.item();
+              if (ChildVSSItem.Type == 0)
+              {
+                Get(ChildVSSItem, WorkingDir + "\\" + ChildVSSItem.Name, recursive);
+              } // if
+            } // for VSSItems Enumeration
+          } // if recursive
+    } // Get (VSSitem)
+
+	function FolderAttrib(folder)
+    {
+         var cmd = "attrib -r -h -s " + folder + "\\*.* /S /D"
+         ExecuteFile(cmd);
+         
+         var fold = FSO.GetFolder(folder);
+         fold.attributes = 0;
+         for (var subFlds = new Enumerator(fold.SubFolders) ; !subFlds.atEnd(); subFlds.moveNext())
+         {
+		   var folditem = subFlds.item();
+		   folditem.attributes = 0;
+         }
+         
+	} //FolderAttrib
+
+	function GetPatch(project)
+	{
+       var VSSItem, XmlItem, WorkingDir;
+       var ItemsList = Manifest.selectNodes("/build/vss/items/item");
+       for (var i=0;i<ItemsList.length;i++)
+       {
+         XmlItem = ItemsList.item(i);
+         WScript.StdOut.WriteLine("Getting " + project + XmlItem.text);
+         logMessage("Getting " + project + XmlItem.text);
+         try
+         {
+            VSSItem = VSS.VSSItem(project + XmlItem.text, false);
+            WorkingDir = XmlItem.getAttribute("working-directory");
+            if (WorkingDir != null)
+            {
+              if ((WorkingDir.indexOf("\\") != 0) && (WorkingDir.indexOf(":") != 1))
+              {
+                WorkingDir = BaseWorkingDir + WorkingDir;
+              } // if
+            } // if
+            else
+            {
+              WorkingDir = XmlItem.text;
+              WorkingDir = BaseWorkingDir + WorkingDir.replace(/\//g, "\\");
+            } // else
+            Get(VSSItem, WorkingDir, true);
+          } // try
+          catch(e)
+          {
+            logError(e.message + "[" + project + XmlItem.text + "]");
+            ShowException(e);
+          } // catch
+	  } // for
+	} // GetPatch
+				
+	function getDateString(date)
+    {
+      var fName = "";
+      fName = "" + date.getYear() + "-" + prefixString((date.getMonth() + 1) + "", 2, "0") + "-" + prefixString(date.getDate() + "", 2, "0") + "_" + prefixString(date.getHours() + "", 2, "0") + prefixString(date.getMinutes() + "", 2, "0") + prefixString(date.getSeconds() + "", 2, "0");;
+      return fName;
+    } // getDateString
+
+     function prefixString(input, targetLength, prefix)
+     {
+       while (input.length < targetLength)
+       input = prefix + input;
+        return input;
+      } // prefixString
+	
+	function ShowException(e)
+      {
+        WScript.StdOut.WriteLine("Exception: " + e.name);
+        WScript.StdOut.WriteLine("\t" + e.description);
+        WScript.StdOut.WriteLine("\t" + e.message);
+        WScript.StdOut.Write("\t");
+        WScript.StdOut.WriteLine(e.number & 0xFFFF);
+        logError(e.message);
+      } // Show Exception
+
+      function closeLog()
+      {
+        Log.WriteLine("</Build>");
+        Log.close();
+      } // closeLog
+
+      function logMessage(Message)
+      {
+        var date = new Date();
+        Log.WriteLine("<Message><Time>" + getDateString(date) + "</Time><Details>" + Message + "</Details></Message>");
+      } // logMessage
+
+      function logError(Error)
+      {
+        var date = new Date();
+        Log.WriteLine("<Error><Time>" + getDateString(date) + "</Time><Details>" + Error + "</Details></Error>");
+      } // logError
+    
+    </script>
+  </job>
+</package>

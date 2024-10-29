@@ -1,0 +1,95 @@
+Cache for Windows NT^INT^Saved from DICOM (ISW-KUZMAKP1)^~Format=Cache.S~
+%RO on 06/21/2010  12:08
+MAGDEXC0^INT^1^61898,36785^0
+MAGDEXC0 ;WOIFO/PMK - DICOM, Simulator for Exam Complete request, part 1 ; 21 Jun 2010 10:13 AM
+ ;;3.0;IMAGING;**11**;1-Mar-2004
+ ;; +---------------------------------------------------------------+
+ ;; | Property of the US Government.                                |
+ ;; | No permission to copy or redistribute this software is given. |
+ ;; | Use of unreleased versions of this software requires the user |
+ ;; | to execute a written test agreement with the VistA Imaging    |
+ ;; | Development Office of the Department of Veterans Affairs,     |
+ ;; | telephone (301) 734-0100.                                     |
+ ;; |                                                               |
+ ;; | The Food and Drug Administration classifies this software as  |
+ ;; | a medical device.  As such, it may not be changed in any way. |
+ ;; | Modifications to this software may result in an adulterated   |
+ ;; | medical device under 21CFR820, the use of which is considered |
+ ;; | to be a violation of US Federal Statutes.                     |
+ ;; +---------------------------------------------------------------+
+ ;
+ ;
+ENTRY ; entry point to process an EXAM COMPLETE request sent by EMED PACS
+ N DTIME,MESSAGE,MULTIMSG
+ W !!,"Issue an EXAM COMPLETE message"
+ S DTIME=$G(DTIME,300)
+ S DEFAULT=$G(^TMP("MAG","EXAM COMPLETE","USER APPLICATIONS"))
+ S USERAPP=$$PICKSCP^MAGDACU(DEFAULT) Q:USERAPP=""
+ S ^TMP("MAG","EXAM COMPLETE","USER APPLICATIONS")=USERAPP
+ D INIT^MAGDWLU2 S MESSAGE="EXAM COMPLETE"
+ ;
+ D NEWLOG^MAGDMLOG("User generated Exam Complete")
+ S FBSWITCH="FOREGROUND",FILEMODE="DIRECT",MULTIMSG=""
+ ;
+ D BUILDMSG
+ ;
+ ; send the EXAM COMPLETE Message
+ D ENTRY^MAGDACU1
+ ;
+ U $P W !!,"Completed!"
+ Q
+ ;
+BUILDMSG ; build a prototype EXAM COMPLETE message
+ D NOW^%DTC S MSGDATE=17000000+$P(%,".",1)
+ S MSGTIME=$E($P(%,".",2)_"000000",1,6),STATNUMB=660
+ S UID=$$NEXTUID^MAGDUID1
+ S UIDTYPE="STUDY",UID(UIDTYPE)=UID
+ ;
+ ; SOP Class specific parameters
+ ; 
+ D SAVE^MAGDFCNS("0008,0060","VL") ; modality
+ ;
+ D SEQPUSH^MAGDFCNS("0008,1110") ; referenced study sequence
+ D SAVE^MAGDFCNS("0008,1150",UID) ; referenced sop class uid
+ D SAVE^MAGDFCNS("0008,1155",UID) ; referenced sop instance uid
+ D SEQPOP^MAGDFCNS
+ ;
+ D SEQPUSH^MAGDFCNS("0008,1120") ; referenced patient sequence
+ D SAVE^MAGDFCNS("0008,1150",UID) ; referenced sop class uid
+ D SAVE^MAGDFCNS("0008,1155",UID) ; referenced sop instance uid
+ D SEQPOP^MAGDFCNS
+ ;
+ D SEQPUSH^MAGDFCNS("0008,1032") ; procedure code sequence
+ D SAVE^MAGDFCNS("0008,0100","Procedure Code") ; code value
+ D SAVE^MAGDFCNS("0008,0102","VA Local") ; coding scheme designator
+ D SAVE^MAGDFCNS("0008,0104","Procedure Name") ; code meaning
+ D SEQPOP^MAGDFCNS
+ ;
+ D SAVE^MAGDFCNS("0032,1055",12345) ; study component status id
+ D SAVE^MAGDFCNS("0008,0050","060104-12345") ; accession number
+ D SAVE^MAGDFCNS("0020,0010",12345) ; study id
+ ;
+ D SEQPUSH^MAGDFCNS("0008,1115") ; referenced series sequence
+ D SAVE^MAGDFCNS("0008,0021",MSGDATE) ; series date
+ D SAVE^MAGDFCNS("0008,0031",MSGTIME) ; series time
+ D SAVE^MAGDFCNS("0020,000E",UID) ; series instance uid
+ D SAVE^MAGDFCNS("0008,0054","DICOM AE TITLE") ; retrieve ae title
+ D SAVE^MAGDFCNS("0088,0130",54321) ; storage media file-set id
+ D SAVE^MAGDFCNS("0088,0140",UID) ; storage media file-set uid
+ D SEQPOP^MAGDFCNS
+ ;
+ D SAVE^MAGDFCNS("0010,0010","Bush^George^W^^President")
+ D SAVE^MAGDFCNS("0010,0020","1")
+ D SAVE^MAGDFCNS("0010,0021","White House")
+ D SAVE^MAGDFCNS("0010,0030","19460706")
+ D SAVE^MAGDFCNS("0010,0040","M")
+ D SAVE^MAGDFCNS("0010,1000","GWB")
+ D SAVE^MAGDFCNS("0010,1040","1600 Pennsylvania Avenue NW, Washington DC 20500")
+ D SAVE^MAGDFCNS("0010,2160","Caucasian")
+ D SAVE^MAGDFCNS("0010,21B0","Policiticitis, expected to flare up in 2004")
+ ;
+ D REQUEST^MAGDDW1
+ Q
+
+
+

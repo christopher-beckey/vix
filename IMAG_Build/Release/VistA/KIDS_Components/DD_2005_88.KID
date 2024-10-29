@@ -1,0 +1,536 @@
+KIDS Distribution saved on Feb 19, 2013@13:40:18
+Full DD Extract from GOLD - SEQ84_P124
+**KIDS**:MAG*3.0*999_DD*2005.88^
+
+**INSTALL NAME**
+MAG*3.0*999_DD*2005.88
+"BLD",7848,0)
+MAG*3.0*999_DD*2005.88^^0^3130219^y
+"BLD",7848,4,0)
+^9.64PA^2005.88^1
+"BLD",7848,4,2005.88,0)
+2005.88
+"BLD",7848,4,2005.88,222)
+y^y^f^^^^y
+"BLD",7848,4,"B",2005.88,2005.88)
+
+"BLD",7848,6.3)
+1
+"BLD",7848,"KRN",0)
+^9.67PA^779.2^20
+"BLD",7848,"KRN",.4,0)
+.4
+"BLD",7848,"KRN",.401,0)
+.401
+"BLD",7848,"KRN",.402,0)
+.402
+"BLD",7848,"KRN",.403,0)
+.403
+"BLD",7848,"KRN",.5,0)
+.5
+"BLD",7848,"KRN",.84,0)
+.84
+"BLD",7848,"KRN",3.6,0)
+3.6
+"BLD",7848,"KRN",3.8,0)
+3.8
+"BLD",7848,"KRN",9.2,0)
+9.2
+"BLD",7848,"KRN",9.8,0)
+9.8
+"BLD",7848,"KRN",19,0)
+19
+"BLD",7848,"KRN",19.1,0)
+19.1
+"BLD",7848,"KRN",101,0)
+101
+"BLD",7848,"KRN",409.61,0)
+409.61
+"BLD",7848,"KRN",771,0)
+771
+"BLD",7848,"KRN",779.2,0)
+779.2
+"BLD",7848,"KRN",870,0)
+870
+"BLD",7848,"KRN",8989.51,0)
+8989.51
+"BLD",7848,"KRN",8989.52,0)
+8989.52
+"BLD",7848,"KRN",8994,0)
+8994
+"BLD",7848,"KRN","B",.4,.4)
+
+"BLD",7848,"KRN","B",.401,.401)
+
+"BLD",7848,"KRN","B",.402,.402)
+
+"BLD",7848,"KRN","B",.403,.403)
+
+"BLD",7848,"KRN","B",.5,.5)
+
+"BLD",7848,"KRN","B",.84,.84)
+
+"BLD",7848,"KRN","B",3.6,3.6)
+
+"BLD",7848,"KRN","B",3.8,3.8)
+
+"BLD",7848,"KRN","B",9.2,9.2)
+
+"BLD",7848,"KRN","B",9.8,9.8)
+
+"BLD",7848,"KRN","B",19,19)
+
+"BLD",7848,"KRN","B",19.1,19.1)
+
+"BLD",7848,"KRN","B",101,101)
+
+"BLD",7848,"KRN","B",409.61,409.61)
+
+"BLD",7848,"KRN","B",771,771)
+
+"BLD",7848,"KRN","B",779.2,779.2)
+
+"BLD",7848,"KRN","B",870,870)
+
+"BLD",7848,"KRN","B",8989.51,8989.51)
+
+"BLD",7848,"KRN","B",8989.52,8989.52)
+
+"BLD",7848,"KRN","B",8994,8994)
+
+"DATA",2005.88,1,0)
+Clinical care for the patient whose images are being downloaded^CP^^1
+"DATA",2005.88,2,0)
+Clinical care for other VA patients^CP^^2
+"DATA",2005.88,3,0)
+For use in approved research by VA staff^CP^^3
+"DATA",2005.88,4,0)
+For approved teaching purposes by VA staff^CP^^4
+"DATA",2005.88,5,0)
+For use in approved VA publications^CP^^5
+"DATA",2005.88,6,0)
+Authorized release of medical records or health information (ROI)^CP^^6
+"DATA",2005.88,7,0)
+Corrupt image^D^^7
+"DATA",2005.88,8,0)
+Low quality image^DS^^8
+"DATA",2005.88,9,0)
+Wrong case/exam/accession number^DS^^9
+"DATA",2005.88,10,0)
+Wrong note title^D^^10
+"DATA",2005.88,11,0)
+Wrong patient^D^^11
+"DATA",2005.88,12,0)
+Image is incorrectly included in an image group^S^^12
+"DATA",2005.88,13,0)
+All images were removed from the group^D^^13
+"DATA",2005.88,14,0)
+HIMS document correction^DS^^14
+"DATA",2005.88,14,1,0)
+^^1^1^3090804^
+"DATA",2005.88,14,1,1,0)
+When a document or image needs to have the patient or image data corrected.
+"DATA",2005.88,15,0)
+Rescinded TIU Note^SD^^15
+"DATA",2005.88,15,1,0)
+^^1^1^3120321
+"DATA",2005.88,15,1,1,0)
+The TIU Note has been Rescinded.
+"DATA",2005.88,16,0)
+For use in Veterans Benefits Administration claims processing.^CP^^16
+"FIA",2005.88)
+MAG REASON
+"FIA",2005.88,0)
+^MAG(2005.88,
+"FIA",2005.88,0,0)
+2005.88I
+"FIA",2005.88,0,1)
+y^y^f^^^^y
+"FIA",2005.88,0,10)
+
+"FIA",2005.88,0,11)
+
+"FIA",2005.88,0,"RLRO")
+
+"FIA",2005.88,2005.88)
+0
+"FIA",2005.88,2005.881)
+0
+"IX",2005.88,2005.88,"C",0)
+2005.88^C^Uniqueness Index for Key 'A' of File #2005.88^R^^F^IR^I^2005.88^^^^^LS
+"IX",2005.88,2005.88,"C",1)
+S ^MAG(2005.88,"C",X,DA)=""
+"IX",2005.88,2005.88,"C",2)
+K ^MAG(2005.88,"C",X,DA)
+"IX",2005.88,2005.88,"C",2.5)
+K ^MAG(2005.88,"C")
+"IX",2005.88,2005.88,"C",11.1,0)
+^.114IA^1^1
+"IX",2005.88,2005.88,"C",11.1,1,0)
+1^F^2005.88^.04^^1
+"KEY",2005.88,2005.88,"A",0)
+2005.88^A^P^617
+"KEY",2005.88,2005.88,"A",2,0)
+^.312IA^1^1
+"KEY",2005.88,2005.88,"A",2,1,0)
+.04^2005.88^1
+"KEYPTR",2005.88,2005.88,"A")
+2005.88^C
+"MBREQ")
+0
+"QUES","XPF1",0)
+Y
+"QUES","XPF1","??")
+^D REP^XPDH
+"QUES","XPF1","A")
+Shall I write over your |FLAG| File
+"QUES","XPF1","B")
+YES
+"QUES","XPF1","M")
+D XPF1^XPDIQ
+"QUES","XPF2",0)
+Y
+"QUES","XPF2","??")
+^D DTA^XPDH
+"QUES","XPF2","A")
+Want my data |FLAG| yours
+"QUES","XPF2","B")
+YES
+"QUES","XPF2","M")
+D XPF2^XPDIQ
+"QUES","XPI1",0)
+YO
+"QUES","XPI1","??")
+^D INHIBIT^XPDH
+"QUES","XPI1","A")
+Want KIDS to INHIBIT LOGONs during the install
+"QUES","XPI1","B")
+NO
+"QUES","XPI1","M")
+D XPI1^XPDIQ
+"QUES","XPM1",0)
+PO^VA(200,:EM
+"QUES","XPM1","??")
+^D MG^XPDH
+"QUES","XPM1","A")
+Enter the Coordinator for Mail Group '|FLAG|'
+"QUES","XPM1","B")
+
+"QUES","XPM1","M")
+D XPM1^XPDIQ
+"QUES","XPO1",0)
+Y
+"QUES","XPO1","??")
+^D MENU^XPDH
+"QUES","XPO1","A")
+Want KIDS to Rebuild Menu Trees Upon Completion of Install
+"QUES","XPO1","B")
+NO
+"QUES","XPO1","M")
+D XPO1^XPDIQ
+"QUES","XPZ1",0)
+Y
+"QUES","XPZ1","??")
+^D OPT^XPDH
+"QUES","XPZ1","A")
+Want to DISABLE Scheduled Options, Menu Options, and Protocols
+"QUES","XPZ1","B")
+NO
+"QUES","XPZ1","M")
+D XPZ1^XPDIQ
+"QUES","XPZ2",0)
+Y
+"QUES","XPZ2","??")
+^D RTN^XPDH
+"QUES","XPZ2","A")
+Want to MOVE routines to other CPUs
+"QUES","XPZ2","B")
+NO
+"QUES","XPZ2","M")
+D XPZ2^XPDIQ
+"SEC","^DD",2005.88,2005.881,.01,8.5)
+
+"SEC","^DD",2005.88,2005.881,.01,9)
+
+"SEC","^DIC",2005.88,2005.88,0,"AUDIT")
+@
+"SEC","^DIC",2005.88,2005.88,0,"DD")
+@
+"SEC","^DIC",2005.88,2005.88,0,"DEL")
+@
+"SEC","^DIC",2005.88,2005.88,0,"LAYGO")
+@
+"SEC","^DIC",2005.88,2005.88,0,"WR")
+@
+"VER")
+8.0^22.0
+"^DD",2005.88,2005.88,0)
+FIELD^^.04^5
+"^DD",2005.88,2005.88,0,"DDA")
+N
+"^DD",2005.88,2005.88,0,"DT")
+3080728
+"^DD",2005.88,2005.88,0,"ID","W1")
+N MAGT S MAGT=$P($G(^(0)),"^",2) D EN^DDIOL($S(MAGT["C":"-Copy",1:"")_$S(MAGT["D":"-Delete",1:"")_$S(MAGT["P":"-Print",1:"")_$S(MAGT["S":"-Status",1:"")_"-",,"?0")
+"^DD",2005.88,2005.88,0,"ID","W2")
+N MAGINDT S MAGINDT=$P($G(^(0)),"^",3) D:(MAGINDT>0)&(MAGINDT'>DT) EN^DDIOL("*INACTIVE*",,"?0")
+"^DD",2005.88,2005.88,0,"IX","B",2005.88,.01)
+
+"^DD",2005.88,2005.88,0,"NM","MAG REASON")
+
+"^DD",2005.88,2005.88,0,"PT",2005,113.3)
+
+"^DD",2005.88,2005.88,0,"PT",2005.1,113.3)
+
+"^DD",2005.88,2005.88,0,"VRPK")
+MAG
+"^DD",2005.88,2005.88,.01,0)
+REASON^RF^^0;1^K:$L(X)>70!($L(X)<3)!'(X'?1P.E) X
+"^DD",2005.88,2005.88,.01,1,0)
+^.1
+"^DD",2005.88,2005.88,.01,1,1,0)
+2005.88^B
+"^DD",2005.88,2005.88,.01,1,1,1)
+S ^MAG(2005.88,"B",$E(X,1,30),DA)=""
+"^DD",2005.88,2005.88,.01,1,1,2)
+K ^MAG(2005.88,"B",$E(X,1,30),DA)
+"^DD",2005.88,2005.88,.01,1,1,"DT")
+3080728
+"^DD",2005.88,2005.88,.01,1,2,0)
+^^TRIGGER^2005.88^.04
+"^DD",2005.88,2005.88,.01,1,2,1)
+X ^DD(2005.88,.01,1,2,1.3) I X S X=DIV S Y(1)=$S($D(^MAG(2005.88,D0,0)):^(0),1:"") S X=$P(Y(1),U,4),X=X S DIU=X K Y S X=DIV S X="L"_$S('$D(D0):"",D0<0:"",1:D0) X ^DD(2005.88,.01,1,2,1.4)
+"^DD",2005.88,2005.88,.01,1,2,1.3)
+K DIV S DIV=X,D0=DA,DIV(0)=D0 S Y(0)=X S Y(1)=$S($D(^MAG(2005.88,D0,0)):^(0),1:"") S X=$P(Y(1),U,4)=""
+"^DD",2005.88,2005.88,.01,1,2,1.4)
+S DIH=$G(^MAG(2005.88,DIV(0),0)),DIV=X S $P(^(0),U,4)=DIV,DIH=2005.88,DIG=.04 D ^DICR
+"^DD",2005.88,2005.88,.01,1,2,2)
+Q
+"^DD",2005.88,2005.88,.01,1,2,"%D",0)
+^^3^3^3081003^
+"^DD",2005.88,2005.88,.01,1,2,"%D",1,0)
+When a new record is created and the CODE field (4) is empty, this trigger
+"^DD",2005.88,2005.88,.01,1,2,"%D",2,0)
+populates the latter with the default value (a "local" code). See the
+"^DD",2005.88,2005.88,.01,1,2,"%D",3,0)
+definition of the CODE field (.04) for more details.
+"^DD",2005.88,2005.88,.01,1,2,"CREATE CONDITION")
+CODE=""
+"^DD",2005.88,2005.88,.01,1,2,"CREATE VALUE")
+"L"_NUMBER
+"^DD",2005.88,2005.88,.01,1,2,"DELETE VALUE")
+NO EFFECT
+"^DD",2005.88,2005.88,.01,1,2,"DT")
+3080728
+"^DD",2005.88,2005.88,.01,1,2,"FIELD")
+CODE
+"^DD",2005.88,2005.88,.01,3)
+Answer must be 3-70 characters in length.
+"^DD",2005.88,2005.88,.01,21,0)
+^^2^2^3080728^
+"^DD",2005.88,2005.88,.01,21,1,0)
+This field stores a valid reason/justification for
+"^DD",2005.88,2005.88,.01,21,2,0)
+action(s).
+"^DD",2005.88,2005.88,.01,"DEL",1,0)
+I $D(^MAG(2005.88,"AREF",+$G(DA)))
+"^DD",2005.88,2005.88,.01,"DT")
+3080728
+"^DD",2005.88,2005.88,.02,0)
+TYPE^RFX^^0;2^S X=$$UP^XLFSTR(X) K:$L(X)>4!($L(X)<1)!($TR(X,"CDPS")'="") X
+"^DD",2005.88,2005.88,.02,3)
+Enter characters for actions that this flag is applicable to (C, D, P, and/or S).
+"^DD",2005.88,2005.88,.02,21,0)
+^^12^12^3080717^
+"^DD",2005.88,2005.88,.02,21,1,0)
+This field indicates actions that this reason is
+"^DD",2005.88,2005.88,.02,21,2,0)
+applicable to. Actions are represented by the 
+"^DD",2005.88,2005.88,.02,21,3,0)
+concatenation of the following characters:
+"^DD",2005.88,2005.88,.02,21,4,0)
+ 
+"^DD",2005.88,2005.88,.02,21,5,0)
+  C - Copy image
+"^DD",2005.88,2005.88,.02,21,6,0)
+  D - Delete image
+"^DD",2005.88,2005.88,.02,21,7,0)
+  P - Print image
+"^DD",2005.88,2005.88,.02,21,8,0)
+  S - Change image status
+"^DD",2005.88,2005.88,.02,21,9,0)
+ 
+"^DD",2005.88,2005.88,.02,21,10,0)
+For example, if a reason is applicable for copying
+"^DD",2005.88,2005.88,.02,21,11,0)
+and printing, then the value of this field should
+"^DD",2005.88,2005.88,.02,21,12,0)
+be "CP".
+"^DD",2005.88,2005.88,.02,"DT")
+3080630
+"^DD",2005.88,2005.88,.03,0)
+DATE OF INACTIVATION^D^^0;3^S %DT="EX" D ^%DT S X=Y K:Y<1 X
+"^DD",2005.88,2005.88,.03,21,0)
+^^9^9^3081003^
+"^DD",2005.88,2005.88,.03,21,1,0)
+If this field is not empty and the stored date is
+"^DD",2005.88,2005.88,.03,21,2,0)
+no later than today's date, then this record is
+"^DD",2005.88,2005.88,.03,21,3,0)
+excluded from the list of reasons presented to the
+"^DD",2005.88,2005.88,.03,21,4,0)
+user (e.g. by the GUI application).
+"^DD",2005.88,2005.88,.03,21,5,0)
+ 
+"^DD",2005.88,2005.88,.03,21,6,0)
+Use this field to exclude records from selection 
+"^DD",2005.88,2005.88,.03,21,7,0)
+without deleting them. This is especially 
+"^DD",2005.88,2005.88,.03,21,8,0)
+important if inactive records are pointed to by
+"^DD",2005.88,2005.88,.03,21,9,0)
+records of other files.
+"^DD",2005.88,2005.88,.03,"DT")
+3080229
+"^DD",2005.88,2005.88,.04,0)
+CODE^RFX^^0;4^K:$S(X?1.6N:(+X'=X)!(X'>0),X?1"L"1.6N:$P(X,"L",2)'>0,1:1) X
+"^DD",2005.88,2005.88,.04,1,0)
+^.1^^0
+"^DD",2005.88,2005.88,.04,3)
+Enter unique code of the reason (from 1 to 999999). Codes of local reasons must be preceded by letter L.
+"^DD",2005.88,2005.88,.04,5,1,0)
+2005.88^.01^2
+"^DD",2005.88,2005.88,.04,21,0)
+^^15^15^3080728^
+"^DD",2005.88,2005.88,.04,21,1,0)
+This field stores the code that uniquely 
+"^DD",2005.88,2005.88,.04,21,2,0)
+identifies the reason. You must not modify value 
+"^DD",2005.88,2005.88,.04,21,3,0)
+of this field unless you are instructed to do so
+"^DD",2005.88,2005.88,.04,21,4,0)
+by the VistA support personnel or Imaging software
+"^DD",2005.88,2005.88,.04,21,5,0)
+developers.
+"^DD",2005.88,2005.88,.04,21,6,0)
+ 
+"^DD",2005.88,2005.88,.04,21,7,0)
+"Standard" reasons (i.e. those distributed with
+"^DD",2005.88,2005.88,.04,21,8,0)
+the Imaging software) have numeric codes. 
+"^DD",2005.88,2005.88,.04,21,9,0)
+ 
+"^DD",2005.88,2005.88,.04,21,10,0)
+Codes of "local" reasons created by the users at
+"^DD",2005.88,2005.88,.04,21,11,0)
+the sites consist from record IENs preceded by
+"^DD",2005.88,2005.88,.04,21,12,0)
+letter L (e.g. "L12").
+"^DD",2005.88,2005.88,.04,21,13,0)
+ 
+"^DD",2005.88,2005.88,.04,21,14,0)
+When a new record is created, this field is 
+"^DD",2005.88,2005.88,.04,21,15,0)
+automatically pre-populated with a "local" code. 
+"^DD",2005.88,2005.88,.04,23,0)
+^.001^3^3^3080728^^^
+"^DD",2005.88,2005.88,.04,23,1,0)
+When a new record is created, this field is 
+"^DD",2005.88,2005.88,.04,23,2,0)
+automatically pre-populated by the trigger associated
+"^DD",2005.88,2005.88,.04,23,3,0)
+with the REASON field (.01).
+"^DD",2005.88,2005.88,.04,"DT")
+3080728
+"^DD",2005.88,2005.88,1,0)
+DESCRIPTION^2005.881^^1;0
+"^DD",2005.88,2005.88,1,21,0)
+^.001^3^3^3090204^^^^
+"^DD",2005.88,2005.88,1,21,1,0)
+This field stores an optional explanation for the 
+"^DD",2005.88,2005.88,1,21,2,0)
+reason. The text can be presented to the user by
+"^DD",2005.88,2005.88,1,21,3,0)
+the GUI application as a context sensitive help.
+"^DD",2005.88,2005.881,0)
+DESCRIPTION SUB-FIELD^^.01^1
+"^DD",2005.88,2005.881,0,"DT")
+3080228
+"^DD",2005.88,2005.881,0,"NM","DESCRIPTION")
+
+"^DD",2005.88,2005.881,0,"UP")
+2005.88
+"^DD",2005.88,2005.881,.01,0)
+DESCRIPTION^W^^0;1^Q
+"^DD",2005.88,2005.881,.01,21,0)
+^^3^3^3081003^
+"^DD",2005.88,2005.881,.01,21,1,0)
+This field stores an optional explanation for the 
+"^DD",2005.88,2005.881,.01,21,2,0)
+reason. The text can be presented to the user by
+"^DD",2005.88,2005.881,.01,21,3,0)
+the GUI application as a context tive help.
+"^DD",2005.88,2005.881,.01,"DT")
+3080228
+"^DIC",2005.88,2005.88,0)
+MAG REASON^2005.88
+"^DIC",2005.88,2005.88,0,"GL")
+^MAG(2005.88,
+"^DIC",2005.88,2005.88,"%",0)
+^1.005^^0
+"^DIC",2005.88,2005.88,"%D",0)
+^1.001^25^25^3090204^^
+"^DIC",2005.88,2005.88,"%D",1,0)
+ +---------------------------------------------------------------+
+"^DIC",2005.88,2005.88,"%D",2,0)
+ |                                                               |
+"^DIC",2005.88,2005.88,"%D",3,0)
+ | Property of the US Government.                                |
+"^DIC",2005.88,2005.88,"%D",4,0)
+ | No permission to copy or redistribute this software is given. |
+"^DIC",2005.88,2005.88,"%D",5,0)
+ | Use of unreleased versions of this software requires the user |
+"^DIC",2005.88,2005.88,"%D",6,0)
+ | to execute a written test agreement with the VistA Imaging    |
+"^DIC",2005.88,2005.88,"%D",7,0)
+ | Development Office of the Department of Veterans Affairs,     |
+"^DIC",2005.88,2005.88,"%D",8,0)
+ | telephone (301) 734-0100.                                     |
+"^DIC",2005.88,2005.88,"%D",9,0)
+ |                                                               |
+"^DIC",2005.88,2005.88,"%D",10,0)
+ | The Food and Drug Administration classifies this software as  |
+"^DIC",2005.88,2005.88,"%D",11,0)
+ | a medical device.  As such, it may not be changed in any way. |
+"^DIC",2005.88,2005.88,"%D",12,0)
+ | Modifications to this software may result in an adulterated   |
+"^DIC",2005.88,2005.88,"%D",13,0)
+ | medical device under 21CFR820, the use of which is considered |
+"^DIC",2005.88,2005.88,"%D",14,0)
+ | to be a violation of US Federal Statutes.                     |
+"^DIC",2005.88,2005.88,"%D",15,0)
+ |                                                               |
+"^DIC",2005.88,2005.88,"%D",16,0)
+ +---------------------------------------------------------------+
+"^DIC",2005.88,2005.88,"%D",17,0)
+ 
+"^DIC",2005.88,2005.88,"%D",18,0)
+This file stores valid reasons (justifications) for actions performed on
+"^DIC",2005.88,2005.88,"%D",19,0)
+images: copying, printing, etc.
+"^DIC",2005.88,2005.88,"%D",20,0)
+ 
+"^DIC",2005.88,2005.88,"%D",21,0)
+Once a reason is referenced by a record of other file (e.g. IMAGE file 
+"^DIC",2005.88,2005.88,"%D",22,0)
+(#2005)), it cannot be deleted. Use the DATE OF INACTIVATION field (.03) 
+"^DIC",2005.88,2005.88,"%D",23,0)
+to exclude the reason from the list presented to the users.
+"^DIC",2005.88,2005.88,"%D",24,0)
+ 
+"^DIC",2005.88,2005.88,"%D",25,0)
+This file is defined by the patch MAG*3*93.
+"^DIC",2005.88,"B","MAG REASON",2005.88)
+
+**END**
+**END**

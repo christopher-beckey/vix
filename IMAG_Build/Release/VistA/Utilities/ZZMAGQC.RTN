@@ -1,0 +1,96 @@
+ZZMAGQC ;
+ Q
+CPRICE(BASKET,DUZ) ;
+ N BIEN,MIEN
+ S BIEN=$O(^XMB(3.7,DUZ,2,"B",BASKET,"")) Q:BIEN'?1N.N
+ S MIEN=0
+ F  S MIEN=$O(^XMB(3.7,DUZ,2,BIEN,1,MIEN)) Q:MIEN'?1N.N  D
+ . I $P($G(^XMB(3.9,MIEN,0)),"^")[("Imaging Integrity Check") D  Q
+ . . D CLEAR(MIEN)
+ . . D FMESS(MIEN)
+ . . Q
+ . Q
+ Q
+CLEAR(IEN) ;
+ N SIEN,NODE
+ S SIEN=$O(^XMB(3.9,IEN,1,"C","S.MAG SITE IMAGING UTILIZATION",""))
+ Q:SIEN'?1N.N  D
+ . S DIK="^XMB(3.9,"_IEN_",1,"
+ . S DA(1)=IEN,DA=SIEN
+ . D ^DIK
+ . K DIK
+ Q
+FMESS(XMZ) ;
+ S XMY="S.MAG SITE IMAGING UTILIZATION"
+ D ENT1^XMD
+ Q
+SREP(STYPE,RTYPE) ; Site Report ~ STYPE = "CO" "QA" OR BOTH
+ N MAGI,TYPE,T,NAME
+ S (NAME,SIEN)=""
+ D SETUP(.T,STYPE)
+ I '$D(T) Q
+ D HDR(RTYPE,.T)
+ F  S NAME=$O(^MAG(2006.19,"B",NAME)) Q:NAME=""  D
+ . S SIEN=$O(^MAG(2006.19,"B",NAME,"")) Q:SIEN'?1N.N
+ . I $D(^MAG(2006.98,"B",SIEN)) D
+ . . S MAGI=$O(^MAG(2006.98,"B",SIEN,"")) D
+ . . . I (STYPE="CO")!(STYPE="QA") D SRBT(STYPE,RTYPE,.T) Q
+ . . . F TYPE="QA","CO" D SRBT(TYPE,RTYPE,.T)
+ . . . Q
+ Q
+SRBT(TYPE,REP,T) ; Site Report By Type
+ N J,NAME
+ S NAME=$P($G(^MAG(2006.19,SIEN,0)),"^")
+ Q:NAME["POPLAR BLUFF"
+ Q:NAME["COLUMBIA"
+ Q:NAME["ISL-MELDRUMK"
+ Q:NAME["COLUMBUS"
+ Q:NAME["LAVC.ISC-WASH"
+ Q:NAME["MARION-IL"
+ Q:NAME["WICHITA"
+ Q:NAME["TOPEKA"
+ Q:NAME["IMGDEM01"
+ I $P($G(^MAG(2006.98,MAGI,7)),"^",$S(TYPE["QA":1,1:3))'?1N.N D  Q
+ . W !,"No ",TYPE," Report for site: "_NAME,"^^^^^^"
+ . Q
+ S J=0
+ I REP["HR" D  Q
+ . W !,$P($G(^MAG(2006.19,SIEN,0)),"^")," ",TYPE," Totals:"
+ . W !,"Date of Report: "
+ . W $$FMTE^XLFDT($P($G(^MAG(2006.98,MAGI,7)),U,$S(TYPE["QA":1,1:3)),"")
+ . W "  # of Image Entries scanned: "
+ . W $P($G(^MAG(2006.98,MAGI,7)),U,$S(TYPE["QA":2,1:4))
+ . F  S J=$O(^MAG(2006.98,MAGI,$S(TYPE["QA":8,1:9),J)) Q:J'?1N.N  D
+ . . W !,$P($G(^MAG(2006.98,MAGI,$S(TYPE["QA":8,1:9),J,0)),"^")," : "
+ . . W $P($P($G(^MAG(2006.98,MAGI,$S(TYPE["QA":8,1:9),J,0)),"^",2),"TOTAL~",2)
+ . Q
+ ;"DS" = "Delimited String output"
+ N LU S LU=""
+ W !,$P($G(^MAG(2006.19,SIEN,0)),"^")_U
+ W $$FMTE^XLFDT($P($G(^MAG(2006.98,MAGI,7)),U,$S(TYPE["QA":1,1:3)),"")_U
+ W $P($G(^MAG(2006.98,MAGI,7)),U,$S(TYPE["QA":2,1:4)),U
+ F  S LU=$O(T(LU)) Q:LU=""  D
+ . S J=$O(^MAG(2006.98,MAGI,$S(TYPE["QA":8,1:9),"C",LU,""))
+ . W $S(J'?1N.N:"",1:$P($P($G(^MAG(2006.98,MAGI,$S(TYPE["QA":8,1:9),J,0)),"^",2),"TOTAL~",2)),U
+ . Q
+ Q
+SETUP(T,TYPE) ;
+ N I,J
+ K T
+ S I=""
+ F  S I=$O(^MAG(2006.98,I)) Q:I'?1N.N  D
+ . S J=""
+ . F  S J=$O(^MAG(2006.98,I,$S(TYPE["QA":8,1:9),"C",J)) Q:J=""  D
+ . . ;Q:'$D(^MAG(2006.98,I,$S(TYPE["QA":8,1:9),"C",J))
+ . . S K=$O(^MAG(2006.98,I,$S(TYPE["QA":8,1:9),"C",J,""))
+ . . S T(J)=$P(^MAG(2006.98,I,$S(TYPE["QA":8,1:9),K,0),U)
+ . . Q
+ Q
+HDR(TYPE,T1) ;
+ N INDEX
+ W !,"Site^Date of report^# of image entries scanned^"
+ S INDEX=""
+ F  S INDEX=$O(T1(INDEX)) Q:INDEX=""  D
+ . W T1(INDEX),U
+ . Q
+ Q

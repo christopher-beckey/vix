@@ -1,0 +1,628 @@
+KIDS Distribution saved on Jul 26, 2012@08:58:41
+Split from GOLD - last patch SEQ81_P120
+**KIDS**:MAG*3.0*350_DD*2006.69^
+
+**INSTALL NAME**
+MAG*3.0*350_DD*2006.69
+"BLD",7818,0)
+MAG*3.0*350_DD*2006.69^IMAGING^0^3120726^n
+"BLD",7818,4,0)
+^9.64PA^2006.69^1
+"BLD",7818,4,2006.69,0)
+2006.69
+"BLD",7818,4,2006.69,222)
+y^y^f^^^^n
+"BLD",7818,4,"B",2006.69,2006.69)
+
+"BLD",7818,6.3)
+1
+"BLD",7818,"KRN",0)
+^9.67PA^779.2^20
+"BLD",7818,"KRN",.4,0)
+.4
+"BLD",7818,"KRN",.401,0)
+.401
+"BLD",7818,"KRN",.402,0)
+.402
+"BLD",7818,"KRN",.403,0)
+.403
+"BLD",7818,"KRN",.5,0)
+.5
+"BLD",7818,"KRN",.84,0)
+.84
+"BLD",7818,"KRN",3.6,0)
+3.6
+"BLD",7818,"KRN",3.8,0)
+3.8
+"BLD",7818,"KRN",9.2,0)
+9.2
+"BLD",7818,"KRN",9.8,0)
+9.8
+"BLD",7818,"KRN",19,0)
+19
+"BLD",7818,"KRN",19.1,0)
+19.1
+"BLD",7818,"KRN",101,0)
+101
+"BLD",7818,"KRN",409.61,0)
+409.61
+"BLD",7818,"KRN",771,0)
+771
+"BLD",7818,"KRN",779.2,0)
+779.2
+"BLD",7818,"KRN",870,0)
+870
+"BLD",7818,"KRN",8989.51,0)
+8989.51
+"BLD",7818,"KRN",8989.52,0)
+8989.52
+"BLD",7818,"KRN",8994,0)
+8994
+"BLD",7818,"KRN","B",.4,.4)
+
+"BLD",7818,"KRN","B",.401,.401)
+
+"BLD",7818,"KRN","B",.402,.402)
+
+"BLD",7818,"KRN","B",.403,.403)
+
+"BLD",7818,"KRN","B",.5,.5)
+
+"BLD",7818,"KRN","B",.84,.84)
+
+"BLD",7818,"KRN","B",3.6,3.6)
+
+"BLD",7818,"KRN","B",3.8,3.8)
+
+"BLD",7818,"KRN","B",9.2,9.2)
+
+"BLD",7818,"KRN","B",9.8,9.8)
+
+"BLD",7818,"KRN","B",19,19)
+
+"BLD",7818,"KRN","B",19.1,19.1)
+
+"BLD",7818,"KRN","B",101,101)
+
+"BLD",7818,"KRN","B",409.61,409.61)
+
+"BLD",7818,"KRN","B",771,771)
+
+"BLD",7818,"KRN","B",779.2,779.2)
+
+"BLD",7818,"KRN","B",870,870)
+
+"BLD",7818,"KRN","B",8989.51,8989.51)
+
+"BLD",7818,"KRN","B",8989.52,8989.52)
+
+"BLD",7818,"KRN","B",8994,8994)
+
+"FIA",2006.69)
+MAG VISTARAD SITE PARAMETERS
+"FIA",2006.69,0)
+^MAG(2006.69,
+"FIA",2006.69,0,0)
+2006.69
+"FIA",2006.69,0,1)
+y^y^f^^^^n
+"FIA",2006.69,0,10)
+
+"FIA",2006.69,0,11)
+
+"FIA",2006.69,0,"RLRO")
+
+"FIA",2006.69,0,"VR")
+3.0^MAG
+"FIA",2006.69,2006.69)
+0
+"MBREQ")
+0
+"PKG",454,-1)
+1^1
+"PKG",454,0)
+IMAGING^MAG^Imaging-V1 to release 
+"PKG",454,20,0)
+^9.402P^^
+"PKG",454,22,0)
+^9.49I^1^1
+"PKG",454,22,1,0)
+3.0^3020319^3020517^126
+"PKG",454,22,1,"PAH",1,0)
+350_DD^3120726
+"QUES","XPF1",0)
+Y
+"QUES","XPF1","??")
+^D REP^XPDH
+"QUES","XPF1","A")
+Shall I write over your |FLAG| File
+"QUES","XPF1","B")
+YES
+"QUES","XPF1","M")
+D XPF1^XPDIQ
+"QUES","XPF2",0)
+Y
+"QUES","XPF2","??")
+^D DTA^XPDH
+"QUES","XPF2","A")
+Want my data |FLAG| yours
+"QUES","XPF2","B")
+YES
+"QUES","XPF2","M")
+D XPF2^XPDIQ
+"QUES","XPI1",0)
+YO
+"QUES","XPI1","??")
+^D INHIBIT^XPDH
+"QUES","XPI1","A")
+Want KIDS to INHIBIT LOGONs during the install
+"QUES","XPI1","B")
+NO
+"QUES","XPI1","M")
+D XPI1^XPDIQ
+"QUES","XPM1",0)
+PO^VA(200,:EM
+"QUES","XPM1","??")
+^D MG^XPDH
+"QUES","XPM1","A")
+Enter the Coordinator for Mail Group '|FLAG|'
+"QUES","XPM1","B")
+
+"QUES","XPM1","M")
+D XPM1^XPDIQ
+"QUES","XPO1",0)
+Y
+"QUES","XPO1","??")
+^D MENU^XPDH
+"QUES","XPO1","A")
+Want KIDS to Rebuild Menu Trees Upon Completion of Install
+"QUES","XPO1","B")
+NO
+"QUES","XPO1","M")
+D XPO1^XPDIQ
+"QUES","XPZ1",0)
+Y
+"QUES","XPZ1","??")
+^D OPT^XPDH
+"QUES","XPZ1","A")
+Want to DISABLE Scheduled Options, Menu Options, and Protocols
+"QUES","XPZ1","B")
+NO
+"QUES","XPZ1","M")
+D XPZ1^XPDIQ
+"QUES","XPZ2",0)
+Y
+"QUES","XPZ2","??")
+^D RTN^XPDH
+"QUES","XPZ2","A")
+Want to MOVE routines to other CPUs
+"QUES","XPZ2","B")
+NO
+"QUES","XPZ2","M")
+D XPZ2^XPDIQ
+"SEC","^DIC",2006.69,2006.69,0,"AUDIT")
+@
+"SEC","^DIC",2006.69,2006.69,0,"DD")
+@
+"SEC","^DIC",2006.69,2006.69,0,"DEL")
+@
+"SEC","^DIC",2006.69,2006.69,0,"LAYGO")
+@
+"SEC","^DIC",2006.69,2006.69,0,"RD")
+@
+"SEC","^DIC",2006.69,2006.69,0,"WR")
+@
+"VER")
+8.0^22.0
+"^DD",2006.69,2006.69,0)
+FIELD^^12^14
+"^DD",2006.69,2006.69,0,"DDA")
+N
+"^DD",2006.69,2006.69,0,"DT")
+3050217
+"^DD",2006.69,2006.69,0,"IX","B",2006.69,.01)
+
+"^DD",2006.69,2006.69,0,"IX","RECENT",2006.69,1)
+
+"^DD",2006.69,2006.69,0,"IX","UNREAD",2006.69,2)
+
+"^DD",2006.69,2006.69,0,"NM","MAG VISTARAD SITE PARAMETERS")
+
+"^DD",2006.69,2006.69,0,"VRPK")
+MAG
+"^DD",2006.69,2006.69,.01,0)
+VISTARAD SITE NAME^RFX^^0;1^K:$L(X)>30!($L(X)<3) X S DINUM=1
+"^DD",2006.69,2006.69,.01,1,0)
+^.1
+"^DD",2006.69,2006.69,.01,1,1,0)
+2006.69^B
+"^DD",2006.69,2006.69,.01,1,1,1)
+S ^MAG(2006.69,"B",$E(X,1,30),DA)=""
+"^DD",2006.69,2006.69,.01,1,1,2)
+K ^MAG(2006.69,"B",$E(X,1,30),DA)
+"^DD",2006.69,2006.69,.01,3)
+Enter Name of your site, 3 to 30 characters.
+"^DD",2006.69,2006.69,.01,21,0)
+^^1^1^3020313^
+"^DD",2006.69,2006.69,.01,21,1,0)
+Field contains the name of the site.
+"^DD",2006.69,2006.69,.01,"DT")
+2970924
+"^DD",2006.69,2006.69,.05,0)
+ENABLE STATUS UPDATE?^S^1:YES;0:NO;^0;4^Q
+"^DD",2006.69,2006.69,.05,3)
+Enter YES to enable VistaRad to update the Radiology Package Exam Status field
+"^DD",2006.69,2006.69,.05,21,0)
+^^4^4^3000307^
+"^DD",2006.69,2006.69,.05,21,1,0)
+Answering this question "YES" will enable VistaRad to update the Radiology
+"^DD",2006.69,2006.69,.05,21,2,0)
+Package Interpreting Radiologist fields (#12 & #15), and the Exam Status
+"^DD",2006.69,2006.69,.05,21,3,0)
+field (#3).  Otherwise, use of VistaRad provides read-only access to VISTA
+"^DD",2006.69,2006.69,.05,21,4,0)
+data.
+"^DD",2006.69,2006.69,.05,"DT")
+2980917
+"^DD",2006.69,2006.69,1,0)
+RECENT EXAMS DAYS LIMIT^NJ5,0^^0;2^K:+X'=X!(X>99999)!(X<2)!(X?.E1"."1N.N) X
+"^DD",2006.69,2006.69,1,1,0)
+^.1^^0
+"^DD",2006.69,2006.69,1,1,1,0)
+2006.69^RECENT^MUMPS
+"^DD",2006.69,2006.69,1,1,1,1)
+S ^MAG(2006.69,"RECENT")=X
+"^DD",2006.69,2006.69,1,1,1,2)
+K ^MAG(2006.69,"RECENT")
+"^DD",2006.69,2006.69,1,1,1,"DT")
+2970924
+"^DD",2006.69,2006.69,1,3)
+Type a Number between 2 and 99999, 0 Decimal Digits
+"^DD",2006.69,2006.69,1,21,0)
+^.001^6^6^3020313^^
+"^DD",2006.69,2006.69,1,21,1,0)
+The RECENT Exams list shows all exams having a Status of Interpreted or
+"^DD",2006.69,2006.69,1,21,2,0)
+Transcribed.  The list can be further restricted to show only exams up to
+"^DD",2006.69,2006.69,1,21,3,0)
+'N' days old--use this field to define a value for 'N'.  Note that for
+"^DD",2006.69,2006.69,1,21,4,0)
+most sites, Exams are likely to be marked Complete within 3 to 4 working
+"^DD",2006.69,2006.69,1,21,5,0)
+days of being Interpreted, at which point they no longer show up on the
+"^DD",2006.69,2006.69,1,21,6,0)
+RECENT Exams list.  If NOT defined, the system defaults to  a value of 6.
+"^DD",2006.69,2006.69,1,"DT")
+3020313
+"^DD",2006.69,2006.69,2,0)
+UNREAD EXAMS DAYS LIMIT^NJ5,0^^0;3^K:+X'=X!(X>99999)!(X<2)!(X?.E1"."1N.N) X
+"^DD",2006.69,2006.69,2,1,0)
+^.1^^0
+"^DD",2006.69,2006.69,2,1,1,0)
+2006.69^UNREAD^MUMPS
+"^DD",2006.69,2006.69,2,1,1,1)
+S ^MAG(2006.69,"UNREAD")=X
+"^DD",2006.69,2006.69,2,1,1,2)
+K ^MAG(2006.69,"UNREAD")
+"^DD",2006.69,2006.69,2,1,1,"DT")
+2970924
+"^DD",2006.69,2006.69,2,3)
+The Unread Exams list will not display exams older than the number of days you specify.
+"^DD",2006.69,2006.69,2,21,0)
+^^4^4^3000307^
+"^DD",2006.69,2006.69,2,21,1,0)
+The UNREAD Exams list shows all exams having a Status of EXAMINED.  The
+"^DD",2006.69,2006.69,2,21,2,0)
+list can be further restricted to show only exams up to 'N' days old--use
+"^DD",2006.69,2006.69,2,21,3,0)
+this field to define a value for 'N'.  If NOT defined, the system defaults
+"^DD",2006.69,2006.69,2,21,4,0)
+to a value of 30.
+"^DD",2006.69,2006.69,2,"DT")
+3020313
+"^DD",2006.69,2006.69,3,0)
+PREFETCH ACTIVE?^S^1:YES;0:NO;^0;5^Q
+"^DD",2006.69,2006.69,3,3)
+To Enable Prefetch of prior exams' images from archive, enter YES.
+"^DD",2006.69,2006.69,3,21,0)
+^^4^4^2980821^
+"^DD",2006.69,2006.69,3,21,1,0)
+Exam images that have been archived, e.g. to jukebox storage, may be
+"^DD",2006.69,2006.69,3,21,2,0)
+retrieved to magnetic disk at the time a new exam is registered for a
+"^DD",2006.69,2006.69,3,21,3,0)
+patient.  Enabling this allows immediate retrieval of the patient's prior
+"^DD",2006.69,2006.69,3,21,4,0)
+exams when the radiologist is ready to read the new exam.
+"^DD",2006.69,2006.69,3,"DT")
+2980821
+"^DD",2006.69,2006.69,5,0)
+LIST ONLY EXAMS HAVING IMAGES?^S^0:NO;1:YES;^0;7^Q
+"^DD",2006.69,2006.69,5,3)
+Enter 'NO' to list ALL exams, 'YES' to list only exams that have images.    This applies only to UNREAD, ACTIVE, PENDING, and ALL EXAMS lists.
+"^DD",2006.69,2006.69,5,21,0)
+^^7^7^3000307^
+"^DD",2006.69,2006.69,5,21,1,0)
+Some sites may have a mix of exams that do, and do not, have images stored
+"^DD",2006.69,2006.69,5,21,2,0)
+digitally.  In this case, the UNREAD, ACTIVE and PENDING exams lists may
+"^DD",2006.69,2006.69,5,21,3,0)
+be optionally configured to either list only the exams that have images
+"^DD",2006.69,2006.69,5,21,4,0)
+available for display on the VistaRad workstation, or to list all exams,
+"^DD",2006.69,2006.69,5,21,5,0)
+including those that do not have images available for display.
+"^DD",2006.69,2006.69,5,21,6,0)
+NOTE that the Patient Exams List always lists ALL exams, regardless of
+"^DD",2006.69,2006.69,5,21,7,0)
+whether images exist or not.
+"^DD",2006.69,2006.69,5,"DT")
+2980825
+"^DD",2006.69,2006.69,6,0)
+BACKGROUND COMPILE EXAM LISTS?^S^1:YES;0:NO;^0;8^Q
+"^DD",2006.69,2006.69,6,3)
+To compile Exam Lists in the background, enter desired value.
+"^DD",2006.69,2006.69,6,21,0)
+^^16^16^3000307^
+"^DD",2006.69,2006.69,6,21,1,0)
+The process of compiling UNREAD & RECENT exam lists from the radiology
+"^DD",2006.69,2006.69,6,21,2,0)
+database may be relatively lengthy.  To enable these lists to reach
+"^DD",2006.69,2006.69,6,21,3,0)
+the radiology workstation rapidly, they can be compiled periodically
+"^DD",2006.69,2006.69,6,21,4,0)
+in the background on the Vista system.  Enabling this option generally
+"^DD",2006.69,2006.69,6,21,5,0)
+should provide for very fast retrieval of the exam lists.
+"^DD",2006.69,2006.69,6,21,6,0)
+Note, however, that on the UNREAD Exams list the most recently completed
+"^DD",2006.69,2006.69,6,21,7,0)
+("EXAMINED") exams may not appear on the list, up to a time limit defined
+"^DD",2006.69,2006.69,6,21,8,0)
+below; however, exams that are "INTERPRETED" will be dropped from the
+"^DD",2006.69,2006.69,6,21,9,0)
+UNREAD list, even in between compiles.
+"^DD",2006.69,2006.69,6,21,10,0)
+UNREAD compiles are automatically started by requesting an UNREAD Exams
+"^DD",2006.69,2006.69,6,21,11,0)
+list at the workstation.  The background program is initiated via an
+"^DD",2006.69,2006.69,6,21,12,0)
+internal TaskMan call, but it will run continuously in the background
+"^DD",2006.69,2006.69,6,21,13,0)
+after being initiated. The RECENT compile is initiated using the TaskMan
+"^DD",2006.69,2006.69,6,21,14,0)
+Scheduled Options capability.  The Option to schedule is MAGJ SCHED RECENT
+"^DD",2006.69,2006.69,6,21,15,0)
+LIST COMPILE; it is recommended that this process be scheduled to run
+"^DD",2006.69,2006.69,6,21,16,0)
+every 30 to 90 minutes.
+"^DD",2006.69,2006.69,6,"DT")
+3000223
+"^DD",2006.69,2006.69,7,0)
+UNREAD BKGND COMPILE INTERVAL^NJ2,0^^0;9^K:+X'=X!(X>15)!(X<2)!(X?.E1"."1N.N) X
+"^DD",2006.69,2006.69,7,.1)
+BACKGROUND COMPILE INTERVAL--UNREAD LIST
+"^DD",2006.69,2006.69,7,3)
+Type a Number between 2 and 15, 0 Decimal Digits
+"^DD",2006.69,2006.69,7,21,0)
+^^7^7^3000313^
+"^DD",2006.69,2006.69,7,21,1,0)
+If compiling exams lists in the background, this field is used to
+"^DD",2006.69,2006.69,7,21,2,0)
+define the number of minutes to wait in between each successive compile of
+"^DD",2006.69,2006.69,7,21,3,0)
+the UNREAD Exams List.  If not specified, the default value used will be 6
+"^DD",2006.69,2006.69,7,21,4,0)
+minutes.
+"^DD",2006.69,2006.69,7,21,5,0)
+For sites that tend to have more than 100 Unread exams on average, it is 
+"^DD",2006.69,2006.69,7,21,6,0)
+recommended to use a value of 3 or 4 minutes; less than 100, use 2 or 3
+"^DD",2006.69,2006.69,7,21,7,0)
+minutes.
+"^DD",2006.69,2006.69,7,"DT")
+3000307
+"^DD",2006.69,2006.69,7.2,0)
+RECENT BKGND COMPILE INTERVAL^NJ3,0^^0;13^K:+X'=X!(X>240)!(X<30)!(X?.E1"."1N.N) X
+"^DD",2006.69,2006.69,7.2,.1)
+
+"^DD",2006.69,2006.69,7.2,3)
+Type a Number between 30 and 240, 0 Decimal Digits
+"^DD",2006.69,2006.69,7.2,21,0)
+^.001^8^8^3011003^^
+"^DD",2006.69,2006.69,7.2,21,1,0)
+The Recent List Background Compile is managed by Taskman, where a
+"^DD",2006.69,2006.69,7.2,21,2,0)
+Scheduled Option should be defined for periodically compiling this list
+"^DD",2006.69,2006.69,7.2,21,3,0)
+(recommended to compile every two to three hours).  Use this field to let
+"^DD",2006.69,2006.69,7.2,21,4,0)
+VistARad know what you have defined in TaskMan as the interval between
+"^DD",2006.69,2006.69,7.2,21,5,0)
+compiles.  This value is used to provide a warning message to the VistaRad
+"^DD",2006.69,2006.69,7.2,21,6,0)
+user should it appear that the Background Compile has not run for more
+"^DD",2006.69,2006.69,7.2,21,7,0)
+than this expected interval of time.  Obviously, this field only is useful
+"^DD",2006.69,2006.69,7.2,21,8,0)
+if BACKGROUND COMPILE EXAM LISTS has been Enabled.
+"^DD",2006.69,2006.69,7.2,"DT")
+3000405
+"^DD",2006.69,2006.69,8,0)
+REMOTE LIST ONLY REMOTE CACHE?^S^1:YES;0:NO;^0;10^Q
+"^DD",2006.69,2006.69,8,3)
+Enter 'NO' to list ALL exams, 'YES' to list only exams that were routed to the remote site.
+"^DD",2006.69,2006.69,8,21,0)
+^.001^6^6^3021001^^^
+"^DD",2006.69,2006.69,8,21,1,0)
+This question only applies to sites that use the Imaging Routing Gateway
+"^DD",2006.69,2006.69,8,21,2,0)
+to route images to a remote facility for reading.
+"^DD",2006.69,2006.69,8,21,3,0)
+ 
+"^DD",2006.69,2006.69,8,21,4,0)
+At the remote reading workstation, the Unread & Recent Exams lists may
+"^DD",2006.69,2006.69,8,21,5,0)
+display either all exams, or only the subset of the exams that have been
+"^DD",2006.69,2006.69,8,21,6,0)
+routed to the remote site. Enter YES to display only the routed exams.
+"^DD",2006.69,2006.69,8,"DT")
+2981222
+"^DD",2006.69,2006.69,9,0)
+SITE SENDS TO REMOTE CACHE^S^1:YES;0:NO;^0;11^Q
+"^DD",2006.69,2006.69,9,3)
+Enter YES if this site routes images to remote locations.
+"^DD",2006.69,2006.69,9,21,0)
+^.001^5^5^3021001^^^
+"^DD",2006.69,2006.69,9,21,1,0)
+This question only applies to sites that use the Imaging Routing Gateway
+"^DD",2006.69,2006.69,9,21,2,0)
+to route images to a remote facility for reading.
+"^DD",2006.69,2006.69,9,21,3,0)
+ 
+"^DD",2006.69,2006.69,9,21,4,0)
+Answering this question YES turns on extra processing that is needed
+"^DD",2006.69,2006.69,9,21,5,0)
+to manage the remote exams properly in VistARad.
+"^DD",2006.69,2006.69,9,"DT")
+2990319
+"^DD",2006.69,2006.69,12,0)
+REQUISITION FOR RAD STAFF ONLY^S^1:Y;^0;16^Q
+"^DD",2006.69,2006.69,12,3)
+Enter YES to restrict access to the Requisition report.
+"^DD",2006.69,2006.69,12,21,0)
+^^5^5^3050217^
+"^DD",2006.69,2006.69,12,21,1,0)
+Setting this value to YES will prevent non-radiology personnel from
+"^DD",2006.69,2006.69,12,21,2,0)
+viewing the Radiology Requisition from Vistarad.
+"^DD",2006.69,2006.69,12,21,3,0)
+Some sites have data that appears on the requisition which is
+"^DD",2006.69,2006.69,12,21,4,0)
+strictly for internal radiology staff use.  This prompt provides
+"^DD",2006.69,2006.69,12,21,5,0)
+a way to restrict access to that report.
+"^DD",2006.69,2006.69,12,"DT")
+3050217
+"^DD",2006.69,2006.69,13,0)
+ENA DICT PREF-YES ALL LOCKED^S^1:YES;0:NO;^0;17^Q
+"^DD",2006.69,2006.69,13,.1)
+ENABLE DICTATION PREFERENCE--YES FOR ALL LOCKED EXAMS
+"^DD",2006.69,2006.69,13,3)
+This sets a site policy for enabling a user preference for the dictation interface.  Enter ?? for a detailed explanation.
+"^DD",2006.69,2006.69,13,21,0)
+^.001^15^15^3090408^^^
+"^DD",2006.69,2006.69,13,21,1,0)
+This setting affects some behavior of VistARad's dictation system
+"^DD",2006.69,2006.69,13,21,2,0)
+interface.  When a locked exam is opened, the accession number is sent
+"^DD",2006.69,2006.69,13,21,3,0)
+across the interface via the Dictation dialog.  Normally, whenever more
+"^DD",2006.69,2006.69,13,21,4,0)
+than one locked exam is opened, the dialog displays an entry for each
+"^DD",2006.69,2006.69,13,21,5,0)
+of the exams, and defaults YES (i.e. send the accession number across)
+"^DD",2006.69,2006.69,13,21,6,0)
+for only one of the exams; the user may manually change the selection
+"^DD",2006.69,2006.69,13,21,7,0)
+for any or all of the exams to YES if desired.
+"^DD",2006.69,2006.69,13,21,8,0)
+  
+"^DD",2006.69,2006.69,13,21,9,0)
+A user preference exists to allow the user to specify that ALL locked
+"^DD",2006.69,2006.69,13,21,10,0)
+exams in this dialog be defaulted to YES.  This preference is only 
+"^DD",2006.69,2006.69,13,21,11,0)
+enabled if a site-level policy is implemented to allow the use of this
+"^DD",2006.69,2006.69,13,21,12,0)
+preference.  Answering YES to the setting ENA DICT PREF-YES ALL LOCKED
+"^DD",2006.69,2006.69,13,21,13,0)
+implements this site-level policy.  Each user then may choose to
+"^DD",2006.69,2006.69,13,21,14,0)
+enable the preference--the system's default behavior is to disable
+"^DD",2006.69,2006.69,13,21,15,0)
+this preference.
+"^DD",2006.69,2006.69,13,"DT")
+3090408
+"^DD",2006.69,2006.69,20,0)
+UNREAD LIST PRIORITY SEQ^F^^1;E1,245^S X=$TR(X,"supr;. ","SUPR,,") K:'((X?1U1","1U1","1U1","1U)&($F(X,"R")&$F(X,"S")&$F(X,"P")&$F(X,"U"))) X
+"^DD",2006.69,2006.69,20,3)
+Answer must be 7 characters in length, using the letters S, U, P & R; enter ?? for more help.
+"^DD",2006.69,2006.69,20,9)
+@
+"^DD",2006.69,2006.69,20,21,0)
+^^9^9^2990222^^^
+"^DD",2006.69,2006.69,20,21,1,0)
+The Unread lists show a column, PRIORITY, that is typically used as a 
+"^DD",2006.69,2006.69,20,21,2,0)
+sort item for the list.  Four values are possible (from the Radiology Exam
+"^DD",2006.69,2006.69,20,21,3,0)
+order, file 75.1).  This field allows the site to define the preferred
+"^DD",2006.69,2006.69,20,21,4,0)
+sort ordering for these 4 values.  The default order is:
+"^DD",2006.69,2006.69,20,21,5,0)
+   Stat, Urgent, Pre-op, Routine
+"^DD",2006.69,2006.69,20,21,6,0)
+To achieve this ordering, the value for this field would be specified:
+"^DD",2006.69,2006.69,20,21,7,0)
+   S,U,P,R
+"^DD",2006.69,2006.69,20,21,8,0)
+Any sequence of these 4 letters may be defined, and then will be used by
+"^DD",2006.69,2006.69,20,21,9,0)
+the list program.
+"^DD",2006.69,2006.69,20,"DT")
+2990222
+"^DIC",2006.69,2006.69,0)
+MAG VISTARAD SITE PARAMETERS^2006.69
+"^DIC",2006.69,2006.69,0,"GL")
+^MAG(2006.69,
+"^DIC",2006.69,2006.69,"%",0)
+^1.005^1^1
+"^DIC",2006.69,2006.69,"%",1,0)
+MAGJ
+"^DIC",2006.69,2006.69,"%","B","MAGJ",1)
+
+"^DIC",2006.69,2006.69,"%D",0)
+^1.001^19^19^3020313^
+"^DIC",2006.69,2006.69,"%D",1,0)
+ +---------------------------------------------------------------+
+"^DIC",2006.69,2006.69,"%D",2,0)
+ |                                                               |
+"^DIC",2006.69,2006.69,"%D",3,0)
+ | Property of the US Government.                                |
+"^DIC",2006.69,2006.69,"%D",4,0)
+ | No permission to copy or redistribute this software is given. |
+"^DIC",2006.69,2006.69,"%D",5,0)
+ | Use of unreleased versions of this software requires the user |
+"^DIC",2006.69,2006.69,"%D",6,0)
+ | to execute a written test agreement with the VistA Imaging    |
+"^DIC",2006.69,2006.69,"%D",7,0)
+ | Development Office of the Department of Veterans Affairs,     |
+"^DIC",2006.69,2006.69,"%D",8,0)
+ | telephone (301) 734-0100.                                     |
+"^DIC",2006.69,2006.69,"%D",9,0)
+ |                                                               |
+"^DIC",2006.69,2006.69,"%D",10,0)
+ | The Food and Drug Administration classifies this software as  |
+"^DIC",2006.69,2006.69,"%D",11,0)
+ | a medical device.  As such, it may not be changed in any way. |
+"^DIC",2006.69,2006.69,"%D",12,0)
+ | Modifications to this software may result in an adulterated   |
+"^DIC",2006.69,2006.69,"%D",13,0)
+ | medical device under 21CFR820, the use of which is considered |
+"^DIC",2006.69,2006.69,"%D",14,0)
+ | to be a violation of US Federal Statutes.                     |
+"^DIC",2006.69,2006.69,"%D",15,0)
+ |                                                               |
+"^DIC",2006.69,2006.69,"%D",16,0)
+ +---------------------------------------------------------------+
+"^DIC",2006.69,2006.69,"%D",17,0)
+ 
+"^DIC",2006.69,2006.69,"%D",18,0)
+This file contains various site-specific parameters that control the
+"^DIC",2006.69,2006.69,"%D",19,0)
+behavior of VistaRad.
+"^DIC",2006.69,"B","MAG VISTARAD SITE PARAMETERS",2006.69)
+
+**END**
+**END**

@@ -1,0 +1,17 @@
+! Clear everything from the configuration file
+clear
+! Set the location of the keystore, the password to access the keystore and the alias of the certificate 
+key,"file:///c:/VixConfig/dx.keystore","R00tbeer",dx
+! Set the location of the truststore and the password to access the truststore
+trust,"file:///c:/VixConfig/dx.truststore","R00tbeer" 
+! disable TLS, this will be enabled in production
+tls,dxs,8443
+!
+! adding a repository configuration format
+! a,<home community ID>,<repository ID>,<query protocol>,<query user ID>,<query password>,<query host>,<query port>,<query file>,
+!   <retrieve protocol>,<retrieve user ID>,<retrieve password>,<retrieve host>,<retrieve port>,<retrieve file>
+! 
+! save the configuration  
+save 
+! exit the utility
+exit

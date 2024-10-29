@@ -1,0 +1,178 @@
+Cache for Windows NT^INT^Saved from DICOM,DICOM (ISW-KUZMAKP3-LT)^~Format=Cache.S~
+%RO on 04/30/2013  14:58
+MAGDMFIC^INT^1^62942,53910.075446^0
+MAGDMFIC ;WOIFO/EdM/DAC - Add icons for modalities ; 30 Apr 2013 2:58 PM
+ ;;3.0;IMAGING;**10,11,30,69,54,118,110**;MAR 19, 2002;;OCT 28, 2009
+ ;; Per VHA Directive 2004-038, this routine should not be modified.
+ ;; +---------------------------------------------------------------+
+ ;; | Property of the US Government.                                |
+ ;; | No permission to copy or redistribute this software is given. |
+ ;; | Use of unreleased versions of this software requires the user |
+ ;; | to execute a written test agreement with the VistA Imaging    |
+ ;; | Development Office of the Department of Veterans Affairs,     |
+ ;; | telephone (301) 734-0100.                                     |
+ ;; | The Food and Drug Administration classifies this software as  |
+ ;; | a medical device.  As such, it may not be changed in any way. |
+ ;; | Modifications to this software may result in an adulterated   |
+ ;; | medical device under 21CFR820, the use of which is considered |
+ ;; | to be a violation of US Federal Statutes.                     |
+ ;; +---------------------------------------------------------------+
+ ;;
+ N ALLUSER,CSTORE,CDIR,D0,E,N,F1,F3,F4,F5,FILE,HOSTNAME,ICO,PORT,ROOT
+ N S,SCR,SYSDRIVE,SYSROOT,T,TELDIR,TELNET,X,Z
+ ;
+ K ^TMP("MAG",$J,"ICON")
+ S SCR=$G(^MAGDICOM(2006.563,1,"SCRATCH"),"C:\TEMP")
+ S X=$$MKDIR^MAGOSDIR(SCR)
+ S HOSTNAME=$$HOSTNAME^MAGOSMSC()
+ S:$E(SCR,$L(SCR))'="\" SCR=SCR_"\"
+ S F4=SCR_"linkmake.bat"
+ S X=$$HOSTCMD^MAGOSMSC("set",.SET)
+ S ALLUSER=""
+ S I="" F  S I=$O(SET(I)) Q:I=""  D
+ . S X=SET(I)
+ . I $E(X,1,12)="SystemDrive=" S SYSDRIVE=$E($P(X,"=",2,$L(X)+2),1)
+ . I $E(X,1,11)="SystemRoot=" S SYSROOT=$P(X,"=",2,$L(X)+2)
+ . I $E(X,1,16)="ALLUSERSPROFILE=" S ALLUSER=$P(X,"=",2,$L(X)+2)
+ . Q
+ S:ALLUSER="" ALLUSER=SYSROOT_"Profiles\All Users\"
+ S:$E(ALLUSER,$L(ALLUSER))'="\" ALLUSER=ALLUSER_"\"
+ K SET
+ S:$E(SYSROOT,$L(SYSROOT))'="\" SYSROOT=SYSROOT_"\"
+ S F1=SYSROOT_"system32\drivers\etc\hosts."
+ S CDIR=SYSDRIVE_":\Program Files\VistA\Imaging\DICOM"
+ S CSTORE=CDIR_"\MAG_CStore.exe"
+ ;
+ D WRT(F4,"path="_CDIR)
+ D WRT(F4,$E(SCR,1)_":")
+ D WRT(F4,"cd "_SCR)
+ ;
+ S F3=SCR_"add.tmp"
+ D WRT(F3,"# Lines that may need to be added to the 'HOSTS' file")
+ D WRT(F3,"127.0.0.1"_$C(9)_"TEXT_GATEWAY_1_1"_$C(9)_"# HIS to DICOM Text Gateway")
+ ;
+ S ROOT=ALLUSER_"Start Menu\Programs\Vista Imaging Programs\DICOM\"
+ S F5=$E(ROOT,1)_":\DICOM\StartUpGateway.bat"
+ S ICO=$E(ROOT,1)_":\DICOM\MAGCStore.ico"
+ ;
+ S PORT=$G(^MAGDICOM(2006.563,1,"CSTORE CONTROL PORT"),60000)
+ ;
+ ; Step 1: Text gateway
+ ;
+ S TELNET=CDIR_"\MAG_Telnet.exe"
+ S TELDIR=CDIR
+ S (D0,N)=0 F  S D0=$O(^MAGDICOM(2006.584,D0)) Q:'D0  D
+ . S X=$G(^MAGDICOM(2006.584,D0,0)) Q:X=""
+ . S N=N+1,E=$TR($P(X,"^",1)," ","_")_"_1_2_"_N
+ . D LINK(ROOT_"Text Gateway\"_$P(X,"^",1)_".lnk",TELNET,TELDIR,E)
+ . S Z="# "_$P(X,"^",2)
+ . S T=$P(X,"^",3) S:T'="" Z=Z_$S(T="F":", FIFO queue",1:", Direct")
+ . S T=$P(X,"^",4) S:T'="" Z=Z_", Port "_T
+ . S T=$P(X,"^",5) S:T'="" Z=Z_", Channel "_T
+ . D WRT(F3,"127.0.0.1"_$C(9)_E_$C(9)_"# "_Z)
+ . Q
+ ;
+ D WRT(F3,"127.0.0.1"_$C(9)_"PACS_COMMUNICATIONS_STATUS_1_3"_$C(9)_"# Status Window")
+ D WRT(F3,"127.0.0.1"_$C(9)_"MODALITY_WORKLIST_STATUS_1_4"_$C(9)_"# Status Window")
+ ;
+ ; Step 2: Image gateway
+ ;
+ D WRT(F3,"127.0.0.1"_$C(9)_"PACS_EXAM_COMPLETE_2_1"_$C(9)_"# Receiver for Exam Complete")
+ D WRT(F3,"127.0.0.1"_$C(9)_"PACS_REQUEST_IMAGE_TRANSFER_2_2"_$C(9)_"# Request Image Transfer from PACS")
+ D WRT(F3,"127.0.0.1"_$C(9)_"PROCESS_DICOM_IMAGES_2_3"_$C(9)_"# Process DICOM Images")
+ D WRT(F3,"127.0.0.1"_$C(9)_"IMAGE_STATUS_2_4"_$C(9)_"# Status of Image Transfer and Processing")
+ D WRT(F3,"127.0.0.1"_$C(9)_"IMAGE_STATUS_2_5"_$C(9)_"# Status of Image Transfer and Processing")
+ D WRT(F3,"127.0.0.1"_$C(9)_"START_TRANSMITTER_3_1"_$C(9)_"# Transmit auto-routed files")
+ D WRT(F3,"127.0.0.1"_$C(9)_"START_EVALUATOR_3_3"_$C(9)_"# Evaluate newly acquired Images for Auto-Routing")
+ ;
+ ; Step 3: Create start-up batch file
+ ;
+ D WRT(F5,"@echo off"),WRT(F5,"")
+ D WRT(F5,"rem Ensure that Cache is running")
+ D WRT(F5,$E(ROOT,1)_":\CacheSys\bin\ccontrol start CACHE")
+ D WRT(F5,"rem Start Image Gateway")
+ S E=""
+ S D0=0 F  S D0=$O(^MAGDICOM(2006.581,D0)) Q:'D0  D
+ . S X=$G(^MAGDICOM(2006.581,D0,0)) Q:X=""  Q:$P(X,"^",6)'=HOSTNAME
+ . S E=$P(X,"^",1)
+ . Q
+ D:E'=""
+ . D WRT(F5,""""_ROOT_"Image Gateway\Image Status.lnk""")
+ . D WRT(F5,""""_ROOT_"Image Gateway\Process DICOM Images.lnk""")
+ . D:$G(^MAGDICOM(2006.563,1,"PACS EXAM COMPLETE"))="YES"
+ . . D WRT(F5,"rem Start Pacs Interface tasks for Image Gateway")
+ . . D WRT(F5,""""_ROOT_"Image Gateway\Exam Complete.lnk""")
+ . . D WRT(F5,""""_ROOT_"Image Gateway\Request Images.lnk"""),WRT(F5,"")
+ . . Q
+ . Q
+ D:$G(^MAGDICOM(2006.563,1,"TEXT GATEWAY"))="YES"
+ . D WRT(F5,"rem Start Text Gateway")
+ . D WRT(F5,"echo Starting DICOM Instruments")
+ . D WRT(F5,""""_ROOT_"Text Gateway\Process Text Messages.lnk""")
+ . D WRT(F5,""""_ROOT_"Text Gateway\Modality Worklist Status.lnk""")
+ . D:$G(^MAGDICOM(2006.563,1,"SEND PACS TEXT"))="YES"
+ . . D WRT(F5,"rem Start Pacs Interface tasks for Text Gateway")
+ . . D WRT(F5,""""_ROOT_"Text Gateway\PACS Status.lnk""")
+ . . S (D0,N)=0 F  S D0=$O(^MAGDICOM(2006.584,D0)) Q:'D0  D
+ . . . S X=$G(^MAGDICOM(2006.584,D0,0)) Q:X=""
+ . . . D WRT(F5,""""_ROOT_"Text Gateway\"_$P(X,"^",1)_".lnk""")
+ . . . Q
+ . . Q
+ . Q
+ D WRT(F5,":ExitPoint")
+ ;
+ ; Step 4: Create icon for this batch file
+ ;
+ S ICO=$E(ROOT,1)_":\DICOM\MAGVistA.ico"
+ S X=ALLUSER_"Desktop\Start DICOM.lnk"
+ D LINK(X,F5,"","",ICO,0)
+ ;
+ D WRT(F4,"set LinkFile=")
+ D WRT(F4,"set LinkDest=")
+ D WRT(F4,"set LinkWork=")
+ D WRT(F4,"set LinkParm=")
+ ;
+ ; Step 5: Create actual files
+ ;
+ S FILE="" F  S FILE=$O(^TMP("MAG",$J,"ICON",FILE)) Q:FILE=""  D
+ . S S=$$OPEN^MAGOSFIL(FILE,"W"),S=$$USE^MAGOSFIL(FILE)
+ . S I="" F  S I=$O(^TMP("MAG",$J,"ICON",FILE,I)) Q:I=""  D
+ . . W ^TMP("MAG",$J,"ICON",FILE,I),!
+ . . Q
+ . S S=$$CLOSE^MAGOSFIL(FILE)
+ . Q
+ I $$USEPRIN^MAGOSFIL(1)
+ K ^TMP("MAG",$J,"ICON")
+ ;
+ ; Step 6: Add names to HOSTS file
+ ;
+ S X=$$HOSTCMD^MAGOSMSC(F4)
+ S X=$$HOSTCMD^MAGOSMSC("del "_F4)
+ ;
+ W !,"Do you want to edit the 'HOSTS' file? Y//" R X:$G(DTIME,300) E  S X="^"
+ D:"yY"[$E(X_"Y",1)
+ . S X=$$HOSTCMD^MAGOSMSC("notepad "_F1,,,1)
+ . S X=$$HOSTCMD^MAGOSMSC("notepad "_F3)
+ . Q
+ W !,"Done."
+ S X=$$HOSTCMD^MAGOSMSC("del "_F3)
+ Q
+ ;
+LINK(LINK,DEST,DIR,PARAMS,ICON,ICONR) N X
+ D WRT(F4,"set LinkFile="_LINK)
+ D WRT(F4,"set LinkDest="_DEST)
+ D WRT(F4,"set LinkWork="_DIR)
+ D WRT(F4,"set LinkParm="_PARAMS)
+ D WRT(F4,"set LinkIcon="_$G(ICON))
+ D WRT(F4,"set LinkIcSq="_$G(ICONR))
+ D WRT(F4,"MAG_MakeLink")
+ Q
+ ;
+WRT(FILE,TXT) N I
+ S I=$O(^TMP("MAG",$J,"ICON",FILE," "),-1)+1
+ S ^TMP("MAG",$J,"ICON",FILE,I)=TXT
+ Q
+ ;
+
+
+

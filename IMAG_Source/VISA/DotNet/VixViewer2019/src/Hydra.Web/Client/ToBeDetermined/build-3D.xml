@@ -1,0 +1,80 @@
+    <property name="develop.js.3DViewer" value="../Develop/js/3DViewer"/>
+
+    <property name="release.js.3DViewer" value="../Release/js/3DViewer"/>
+
+    <!--Path for merged 3DViewer files -->
+    <property name="js.merge.3DViewer.renderer" value="${release.js.3DViewer}/3DViewer.renderer.js" />
+    <property name="js.merge.3DViewer.toolbar" value="${release.js.3DViewer}/3DViewer.toolbar.js" />
+    <property name="js.merge.3DViewer.cache" value="${release.js.cache}/3DViewer.cache.js" />
+    <property name="js.merge.3DViewer.core" value="${release.js.render}/3DViewer.core.js" />
+
+    <target name="viewer">
+        <copy file="${develop.html.views}/3DViewer-release.cshtml" tofile="${release.html.views}/3DViewer.cshtml"/>
+
+    <!-- Build all the java scripts -->
+    <target name="...,build-3DViewer">
+
+    <!-- build 3DViewer page -->
+    <target name="build-3DViewer" description="Build the 3D Viewer page" depends ="3DViewer-renderer-min-js, 3DViewer-toolbar-min-js" />
+
+    <!-- merge-3DViewer-renderer-js -->
+    <target name="merge-3DViewer-renderer-js">
+        <mkdir dir="${release.js.3DViewer}"/>
+        <concat destfile="${js.merge.3DViewer.renderer}">
+            <filelist dir="${develop.js.3DViewer}">
+                <file name="3DCommon.js" />
+                <file name="3DImageRenderer.js" />
+                <file name="3DThumbnail.js" />
+                <file name="3DThumbnailRenderer.js" />
+                <file name="3DViewport.js" />
+            </filelist>
+        </concat>
+    </target>
+
+    <!-- 3DViewer-renderer-min-js -->
+    <target name="3DViewer-renderer-min-js" depends="merge-3DViewer-renderer-js">
+        <echo message="compressing 3DViewer.renderer.js to 3DViewer.renderer.min.js" />
+        <apply executable="java" parallel="false" verbose="true" dest="${release.js.3DViewer}">
+            <fileset dir="${release.js.3DViewer}">
+                <include name="3DViewer.renderer.js" />
+            </fileset>
+            <arg line="-jar" />
+            <arg path="${YUICompressor}" />
+            <arg value="--charset" />
+            <arg value="ANSI" />
+            <arg value="-o" />
+
+            <mapper type="glob" from="3DViewer.renderer.js" to="3DViewer.render.min.js" />
+            <targetfile />
+        </apply>
+        <delete file="${release.js.3DViewer}/3DViewer.renderer.js"/>
+    </target>
+
+    <!-- merge-3DViewer-toolbar-js -->
+    <target name="merge-3DViewer-toolbar-js">
+        <mkdir dir="${release.js.3DViewer}"/>
+        <concat destfile="${js.merge.3DViewer.toolbar}">
+            <filelist dir="${develop.js.3DViewer}">
+                <file name="3DToolbar.js" />
+            </filelist>
+        </concat>
+    </target>
+
+    <!-- 3DViewer-toolbar-min-js -->
+    <target name="3DViewer-toolbar-min-js" depends="merge-3DViewer-toolbar-js">
+        <echo message="compressing 3DViewer.toolbar.js to 3DViewer.toolbar.min.js" />
+        <apply executable="java" parallel="false" verbose="true" dest="${release.js.3DViewer}">
+            <fileset dir="${release.js.3DViewer}">
+                <include name="3DViewer.toolbar.js" />
+            </fileset>
+            <arg line="-jar" />
+            <arg path="${YUICompressor}" />
+            <arg value="--charset" />
+            <arg value="ANSI" />
+            <arg value="-o" />
+
+            <mapper type="glob" from="3DViewer.toolbar.js" to="3DViewer.toolbar.min.js" />
+            <targetfile />
+        </apply>
+        <delete file="${release.js.3DViewer}/3DViewer.toolbar.js"/>
+    </target>

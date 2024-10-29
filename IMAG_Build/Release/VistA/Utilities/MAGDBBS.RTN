@@ -1,0 +1,271 @@
+MAGDBBS ;WOIFO/EdM - Daily Site Activity Scrutinizer ; [ 09/27/2000  08:16 ]
+ ;;2.5T;DICOM42;;1-Nov-2000
+ ;; +---------------------------------------------------------------+
+ ;; | Property of the US Government.                                |
+ ;; | No permission to copy or redistribute this software is given. |
+ ;; | Use of unreleased versions of this software requires the user |
+ ;; | to execute a written test agreement with the VistA Imaging    |
+ ;; | Development Office of the Department of Veterans Affairs,     |
+ ;; | telephone (301) 734-0100.                                     |
+ ;; |                                                               |
+ ;; | The Food and Drug Administration classifies this software as  |
+ ;; | a Class II medical device.  As such, it may not be changed    |
+ ;; | in any way.  Modifications to this software may result in an  |
+ ;; | adulterated medical device under 21CFR820, the use of which   |
+ ;; | is considered to be a violation of US Federal Statutes.       |
+ ;; +---------------------------------------------------------------+
+ ;;
+ ; aka Big Brother Info Collector
+ ; or ET Phone Home
+ ;
+ ; Transmit on a daily basis:
+ ;  -- station info
+ ;  -- condensed error trap info
+ ;  -- routine check sums
+ ;  -- routing tallies
+ ;  -- master file contents
+ ;
+SERVER N DATE,DT,EDT,ERR,F,H,IP,M,MENU,N,PC,RDT,RTN,SID,V,XMRG
+ S SID=0
+ L +^MAGDBB("DTA")
+ K ^TMP("MAG",$J,"BB")
+ S XMER=0 F  D  Q:XMER
+ . ; Get next line of message
+ . X XMREC Q:XMER
+ . ;
+ . ; The value of XMRG is the next line of the message
+ . ;
+ . S N=$P(XMRG,"=",1),V=$P(XMRG,"=",2,$L(XMRG)+2)
+ . I N="SID" D  Q
+ . . S SID=$$GETSITE(V)
+ . . K H
+ . . S H(1,"PC")=$O(^MAGDBB("DTA",SID,1," "),-1)
+ . . Q
+ . I N="DT" S ^TMP("MAG",$J,"BB",SID,0)=SID_"^"_V,DT=V Q
+ . I N="IP" D  Q
+ . . N F
+ . . S PC=$O(^MAGDBB("DTA",SID,1,"B",V,"")) S:V'="" IP(V)=""
+ . . S:'PC PC=$O(^TMP("MAG",$J,"BB",SID,1,"B",V,""))
+ . . S:'PC (H(1,"PC"),PC)=$G(H(1,"PC"))+1
+ . . S ^TMP("MAG",$J,"BB",SID,1,PC,0)=V_"^^"_DT
+ . . S ^TMP("MAG",$J,"BB",SID,1,"B",V,PC)=""
+ . . K H(2)
+ . . S H(2,"ERR")=$O(^MAGDBB("DTA",SID,1,PC,1," "),-1)
+ . . S H(2,"RTN")=$O(^MAGDBB("DTA",SID,1,PC,2," "),-1)
+ . . S H(2,"DST")=$O(^MAGDBB("DTA",SID,1,PC,3," "),-1)
+ . . F F=10:1:12 K H(F) S H(F)=$O(^MAGDBB("DTA",SID,1,PC,F," "),-1)
+ . . Q
+ . I N="BLD" S $P(^TMP("MAG",$J,"BB",SID,1,PC,0),"^",2)=V Q
+ . I N="TTL" S $P(^TMP("MAG",$J,"BB",SID,1,PC,0),"^",4)=V Q
+ . I N="PHY" S $P(^TMP("MAG",$J,"BB",SID,1,PC,0),"^",5)=V Q
+ . I N="ERR" D  Q
+ . . S ERR=$O(^MAGDBB("DTA",SID,1,PC,1,"B",V,""))
+ . . S:'ERR ERR=$O(^TMP("MAG",$J,"BB",SID,1,PC,1,"B",V,""))
+ . . S:'ERR (H(2,"ERR"),ERR)=$G(H(2,"ERR"))+1
+ . . S ^TMP("MAG",$J,"BB",SID,1,PC,1,ERR,0)=V
+ . . S ^TMP("MAG",$J,"BB",SID,1,PC,1,"B",V,ERR)=""
+ . . Q
+ . I N="ERD" S EDT=V Q
+ . I N="ERC" S ^TMP("MAG",$J,"BB",SID,1,PC,1,ERR,1,EDT,0)=EDT_"^"_V Q
+ . I N="RTN" D  Q
+ . . S RTN=$O(^MAGDBB("DTA",SID,1,PC,2,"B",V,""))
+ . . S:'RTN (H(2,"RTN"),RTN)=$G(H(2,"RTN"))+1
+ . . S ^TMP("MAG",$J,"BB",SID,1,PC,2,RTN,0)=V
+ . . S ^TMP("MAG",$J,"BB",SID,1,PC,2,"B",V,RTN)=""
+ . . Q
+ . I N="CHK" D  Q
+ . . N LST
+ . . S LST=$O(^MAGDBB("DTA",SID,1,PC,2,RTN,1,""),-1)
+ . . I LST,$P($G(^MAGDBB("DTA",SID,1,PC,2,RTN,1,LST,0)),"^",2)=V Q
+ . . S ^TMP("MAG",$J,"BB",SID,1,PC,2,RTN,1,DT,0)=DT_"^"_V
+ . . Q
+ . I N="MENU" S MENU=V Q
+ . I N="MCNT" D  Q
+ . . N D2,DT
+ . . S D2=$O(^MAGDBB("DTA",SID,1,PC,9,"B",MENU,""))
+ . . S:'D2 D2=$O(^MAGDBB("DTA",SID,1,PC,9," "),-1)+1
+ . . S ^MAGDBB("DTA",SID,1,PC,9,D2,0)=MENU
+ . . S ^MAGDBB("DTA",SID,1,PC,9,"B",MENU,D2)=""
+ . . S DT=$P(V,"=",1)
+ . . S V=$P(V,"=",2)+$P($G(^MAGDBB("DTA",SID,1,PC,9,D2,1,DT,0)),"^",2)
+ . . S ^MAGDBB("DTA",SID,1,PC,9,D2,1,DT,0)=DT_"^"_V
+ . . Q
+ . I N="RDT" S RDT=V Q
+ . I N="DST" D  Q
+ . . S DST=$O(^MAGDBB("DTA",SID,1,PC,3,"B",V,""))
+ . . S:'DST DST=$O(^TMP("MAG",$J,"BB",SID,1,PC,3,"B",V,""))
+ . . S:'DST (H(2,"DST"),DST)=$G(H(2,"DST"))+1
+ . . S ^TMP("MAG",$J,"BB",SID,1,PC,3,DST,0)=V
+ . . S ^TMP("MAG",$J,"BB",SID,1,PC,3,"B",V,DST)=""
+ . . Q
+ . I N="RST" S ^TMP("MAG",$J,"BB",SID,1,PC,3,DST,1,RDT,0)=RDT_"^"_V Q
+ . I N="DIC1" D DIC(4,1,SID,PC,V) Q
+ . I N="DIC2" D DIC(5,3,SID,PC,V) Q
+ . I N="DIC3" D DIC(6,1,SID,PC,V) Q
+ . I N="DIC4" D DIC(7,1,SID,PC,V) Q
+ . I N="DIC5" K DIC5 S DIC5=0,DIC5(0)=V Q
+ . I N="SOP" S DIC5=DIC5+1,DIC5(DIC5)=V Q
+ . I N="XFR" S DIC5(DIC5,V)="" Q
+ . I N="DIC5." D  Q
+ . . N D2,D4,D5,I4,R,SAME
+ . . S D2=$O(^MAGDBB("DTA",SID,1,PC,8,"B",$P(DIC5(0),"^",1),"")) I D2 D  Q:'D2
+ . . . N L,O,T
+ . . . S L=$O(^MAGDBB("DTA",SID,1,PC,8,D2,1," "),-1) Q:'L
+ . . . D SCU(SID,PC,D2,L,.O)
+ . . . S T=DIC5(0),DIC5(0)=$P(DIC5(0),"^",2,$L(T)+2)
+ . . . S SAME=$$SCUCMP(.O,.DIC5),DIC5(0)=T
+ . . . S:SAME D2=0
+ . . . Q
+ . . S:'D2 D2=$O(^MAGDBB("DTA",SID,1,PC,8," "),-1)+1
+ . . K ^MAGDBB("DTA",SID,1,PC,8,D2,1,DT)
+ . . S ^MAGDBB("DTA",SID,1,PC,8,D2,0)=$P(DIC5(0),"^",1)
+ . . S ^MAGDBB("DTA",SID,1,PC,8,D2,1,DT,0)=DT_"^"_$P(DIC5(0),"^",2,$L(DIC5(0))+2)
+ . . S ^MAGDBB("DTA",SID,1,PC,8,"B",$P(DIC5(0),"^",1),D2)=""
+ . . S I4=0 F  S I4=$O(DIC5(I4)) Q:'I4  D
+ . . . S D4=I4,^MAGDBB("DTA",SID,1,PC,8,D2,1,DT,1,D4,0)=DIC5(I4)
+ . . . S D5=0,X="" F  S X=$O(DIC5(I4,X)) Q:X=""  D
+ . . . . S D5=D5+1,^MAGDBB("DTA",SID,1,PC,8,D2,1,DT,1,D4,1,D5,0)=X
+ . . . . Q
+ . . . Q
+ . . Q
+ . I N="STTX" D STAT(10,V) Q
+ . I N="STWL" D STAT(11,V) Q
+ . I N="STIM" D STAT(12,V) Q
+ . Q
+ ;
+ ; Alternate IP addresses
+ ;
+ S V=$P(^TMP("MAG",$J,"BB",SID,1,PC,0),"^",1) K:V'="" IP(V)
+ M ^TMP("MAG",$J,"BB",SID,1,PC,13)=^MAGDBB("DTA",SID,1,PC,13)
+ S X=$G(^TMP("MAG",$J,"BB",SID,1,PC,13,0)),$P(X,"^",2)=2006.899313,N=$P(X,"^",4)
+ S V="" F  S V=$O(IP(V)) Q:V=""  D
+ . S D2=$O(^TMP("MAG",$J,"BB",SID,1,PC,13,"B",V,""))
+ . S:'D2 N=N+1,D2=$O(^TMP("MAG",$J,"BB",SID,1,PC,13," "),-1)+1
+ . S ^TMP("MAG",$J,"BB",SID,1,PC,13,D2,0)=V_"^"_DT
+ . S ^TMP("MAG",$J,"BB",SID,1,PC,13,"B",V,D2)=""
+ . Q
+ S $P(X,"^",3,4)=N_"^"_N
+ S ^TMP("MAG",$J,"BB",SID,1,PC,13,0)=X
+ ;
+ ; Ignore entries that have just an IP address
+ ;
+ S PC=0 F  S PC=$O(^TMP("MAG",$J,"BB",SID,1,PC)) Q:'PC  D
+ . Q:$O(^TMP("MAG",$J,"BB",SID,1,PC,0))
+ . S V=$P($G(^TMP("MAG",$J,"BB",SID,1,PC,0)),"^",1)
+ . K ^TMP("MAG",$J,"BB",SID,1,PC,0) Q:V=""
+ . K ^TMP("MAG",$J,"BB",SID,1,"B",V,PC)
+ . Q
+ ;
+ M ^MAGDBB("DTA")=^TMP("MAG",$J,"BB")
+ K ^TMP("MAG",$J,"BB")
+ ;
+ ; Re-adjust the FileMan Counters
+ ;
+ D
+ . N D0,H,N
+ . ;
+ . ; First the number of sites
+ . ;
+ . S (D0,H,N)=0 F  S D0=$O(^MAGDBB("DTA",D0)) Q:'D0  S N=N+1,H=D0
+ . S $P(^MAGDBB("DTA",0),"^",3,4)=H_"^"_N
+ . ;
+ . ; Then the entries for the current site
+ . ;
+ . D COUNT($NA(^MAGDBB("DTA",SID,1)))
+ . Q
+ L -^MAGDBB("DTA")
+ Q
+ ;
+DIC(F2,P2,SID,PC,V) N D2,K,L,X
+ S K=$P(V,"^",1,P2),(D2,L)=0,X="",V=$P(V,"^",P2+1,$L(V)+2)
+ S:K'="" D2=$O(^MAGDBB("DTA",SID,1,PC,F2,"B",K,""))
+ S:D2 L=$O(^MAGDBB("DTA",SID,1,PC,F2,D2,1," "),-1)
+ S:L X=$G(^MAGDBB("DTA",SID,1,PC,F2,D2,1,L,0))
+ Q:$P(X,"^",2,$L(X)+2)=V
+ S:'D2 D2=$O(^MAGDBB("DTA",SID,1,PC,F2," "),-1)+1
+ S ^MAGDBB("DTA",SID,1,PC,F2,D2,0)=K
+ S:K'="" ^MAGDBB("DTA",SID,1,PC,F2,"B",K,D2)=""
+ S ^MAGDBB("DTA",SID,1,PC,F2,D2,1,DT,0)=DT_"^"_V
+ Q
+ ;
+ ;
+SCU(D0,D1,D2,D3,O) N I4,D4,D5,X
+ K O
+ S O=0,O(0)=$P($G(^MAGDBB("DTA",D0,1,D1,8,D2,1,D3,0)),"^",2,5)
+ S (I4,D4)=0 F  S D4=$O(^MAGDBB("DTA",D0,1,D1,8,D2,1,D3,1,D4)) Q:'D4  D
+ . S I4=I4+1,O(I4)=$G(^MAGDBB("DTA",D0,1,D1,8,D2,1,D3,1,D4,0))
+ . S D5=0 F  S D5=$O(^MAGDBB("DTA",D0,1,D1,8,D2,1,D3,1,D4,1,D5)) Q:'D5  D
+ . . S X=$G(^MAGDBB("DTA",D0,1,D1,8,D2,1,D3,1,D4,1,D5,0)) Q:X=""
+ . . S O(I4,X)=""
+ . . Q
+ . Q
+ Q
+ ;
+SCUCMP(A,B) N SAME
+ S SAME=1
+ S R="A" F  S R=$Q(@R) Q:R=""  I $G(@R)'=$G(@("B"_$E(R,2,$L(R)))) S SAME=0 Q
+ S R="B" F  S R=$Q(@R) Q:R=""  I $G(@R)'=$G(@("A"_$E(R,2,$L(R)))) S SAME=0 Q
+ Q SAME
+ ;
+COUNT(NAME) N D,F,H,N,X
+ S (D,H,N)=0 F  S D=$O(@NAME@(D)) Q:'D  D
+ . S N=N+1,H=D
+ . S F="" F  S F=$O(@NAME@(D,F)) Q:F=""  D:F'="0" COUNT($NA(@NAME@(D,F)))
+ . Q
+ I N S X=$G(@NAME@(0)),$P(X,"^",3)=H,$P(X,"^",4)=N,@NAME@(0)=X
+ E  K @NAME@(0)
+ Q
+ ;
+STAT(F,V) N D2,DT,NM,R
+ S DT=$P(V,"^",1),NM=$P(V,"^",2),R=$P(V,"^",3,$L(V)+2) Q:NM=""
+ S D2=$O(^MAGDBB("DTA",SID,1,PC,F,"B",NM,""))
+ S:'D2 D2=$G(H(F,NM)) S:'D2 (H(F),D2)=H(F)+1 S H(F,NM)=D2
+ S ^TMP("MAG",$J,"BB",SID,1,PC,F,D2,0)=NM
+ S ^TMP("MAG",$J,"BB",SID,1,PC,F,"B",NM,D2)=""
+ S ^TMP("MAG",$J,"BB",SID,1,PC,F,D2,1,DT,0)=DT_"^"_R
+ Q
+ ;
+GETSITE(V) N SID,V1,V2
+ S V=$$UPPER^MAGOSMSC(V)
+ S V1=$P(V,",",1),V2=$P(V,", ",2)
+ S V=V1 S:V'[".VA.GOV" V=V_".VA.GOV"
+ S SID=$O(^MAG(2006.19,"B",V,"")) S:'SID SID=0
+ D:'SID
+ . S V=V1_"-"_V2 S:V'[".VA.GOV" V=V_".VA.GOV"
+ . S SID=$O(^MAG(2006.19,"B",V,"")) S:'SID SID=0
+ . Q
+ D:'SID
+ . Q:$E(V1,1,5)'="VAMC "
+ . S V=$E(V1,6,$L(V1)) S:V'[".VA.GOV" V=V_".VA.GOV"
+ . S SID=$O(^MAG(2006.19,"B",V,"")) S:'SID SID=0
+ . Q
+ D:'SID
+ . N T
+ . S V1=$P(V,".",1)
+ . S:$E(V1,$L(V1)-4,$L(V1))=" VAMC" V1=$E(V1,1,$L(V1)-5)
+ . S:V1'[".VA.GOV" V1=V1_".VA.GOV"
+ . S SID=$O(^MAG(2006.19,"B",V1,"")) Q:SID
+ . S SID=$O(^MAG(2006.19,"B",$TR(V1," ","-"),"")) Q:SID
+ . F  Q:V1'[" "  D  Q:SID
+ . . S V1=$P(V1," ",1,$L(V1," ")-1)_".VA.GOV"
+ . . S SID=$O(^MAG(2006.19,"B",$TR(V1," ","-"),"")) Q:SID
+ . . Q
+ . Q:SID
+ . S V1=$P(V,"/",1)
+ . S:$E(V1,$L(V1)-4,$L(V1))=" VAMC" V1=$E(V1,1,$L(V1)-5)
+ . S:V1'[".VA.GOV" V1=V1_".VA.GOV"
+ . S SID=$O(^MAG(2006.19,"B",V1,"")) Q:SID
+ . S SID=$O(^MAG(2006.19,"B",$TR(V1," ","-"),"")) Q:SID
+ . F  Q:V1'[" "  D  Q:SID
+ . . S V1=$P(V1," ",1,$L(V1," ")-1)_".VA.GOV"
+ . . S SID=$O(^MAG(2006.19,"B",$TR(V1," ","-"),"")) Q:SID
+ . . Q
+ . Q:SID
+ . S:$E(V,1,3)="VA " V=$E(V,4,$L(V))
+ . S T=" HEALTHCARE SYSTEM"
+ . S:V[T V=$P(V,T,1)_".VA.GOV"
+ . S SID=$O(^MAG(2006.19,"B",V,"")) Q:SID
+ . S SID=$O(^MAG(2006.19,"B",$TR(V," ","-"),"")) Q:SID
+ . S:'SID SID=0
+ . Q
+ Q SID

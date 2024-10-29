@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<build
+ name="MAG*3.0*87"
+ patch="87"
+ patchName="VistA Imaging Version 3.0 Patch 87 - DICOM Maintenance V">
+	<routines>
+		<routine name="MAGDMMSN" export="MAGDMMSN.RTN" />
+		<routine name="MAGDVRSN" export="MAGDVRSN.RTN" />
+		<routine name="MAGDHRC3" export="MAGDHRC3.RTN" />
+	</routines>
+	
+  <PatchBuildInfo>
+	<BuildInfo BuildNumber="20" BuildDate="Nov 04, 2014"/>
+  </PatchBuildInfo>
+  	
+</build>
+

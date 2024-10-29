@@ -1,0 +1,76 @@
+# Microsoft Developer Studio Generated Dependency File, included by Decompressor.mak
+
+.\App.cpp : \
+	".\App.h"\
+	".\DelayedDirectoryChangeHandler.h"\
+	".\DirectoryChanges.h"\
+	".\DWDecomp.h"\
+	".\error.h"\
+	".\ntserv.h"\
+	".\ntserv_msg.h"\
+	".\StdAfx.h"\
+	
+
+.\common.cpp : \
+	".\aw_j2k_dtypes.h"\
+	".\common.h"\
+	".\error.h"\
+	".\j2k.h"\
+	".\StdAfx.h"\
+	
+
+.\Decompressor.cpp : \
+	".\aw_j2k_dtypes.h"\
+	".\aw_j2k_errors.h"\
+	".\common.h"\
+	".\decompressor.h"\
+	".\error.h"\
+	".\imageIO.h"\
+	".\j2k.h"\
+	".\StdAfx.h"\
+	
+
+.\DelayedDirectoryChangeHandler.cpp : \
+	".\DelayedDirectoryChangeHandler.h"\
+	".\DirectoryChanges.h"\
+	".\StdAfx.h"\
+	
+
+.\DirectoryChanges.cpp : \
+	".\DelayedDirectoryChangeHandler.h"\
+	".\DirectoryChanges.h"\
+	".\StdAfx.h"\
+	
+
+.\DWDecomp.cpp : \
+	".\aw_j2k_dtypes.h"\
+	".\aw_j2k_errors.h"\
+	".\common.h"\
+	".\decompressor.h"\
+	".\DelayedDirectoryChangeHandler.h"\
+	".\DirectoryChanges.h"\
+	".\DWDecomp.h"\
+	".\error.h"\
+	".\imageIO.h"\
+	".\j2k.h"\
+	".\StdAfx.h"\
+	
+
+.\imageIO.cpp : \
+	".\aw_j2k_dtypes.h"\
+	".\common.h"\
+	".\error.h"\
+	".\imageIO.h"\
+	".\j2k.h"\
+	".\StdAfx.h"\
+	
+
+.\ntserv.cpp : \
+	".\ntserv.h"\
+	".\ntserv_msg.h"\
+	".\StdAfx.h"\
+	
+
+.\StdAfx.cpp : \
+	".\StdAfx.h"\
+	

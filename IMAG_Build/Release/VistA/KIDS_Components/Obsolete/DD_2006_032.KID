@@ -1,0 +1,448 @@
+KIDS Distribution saved on Jul 16, 2007@12:40:44
+Package for FILE named 2006.032
+**KIDS**:MAG*3.0*54^
+
+**INSTALL NAME**
+MAG*3.0*54
+"BLD",5877,0)
+MAG*3.0*54^^0^3070716^y
+"BLD",5877,1,0)
+^^4^4^3070716^
+"BLD",5877,1,1,0)
+This package contains a KIDS component
+"BLD",5877,1,2,0)
+for Running Baseline.
+"BLD",5877,1,3,0)
+ 
+"BLD",5877,1,4,0)
+This package transports the FileMan data dictionary named 2006.032.
+"BLD",5877,4,0)
+^9.64PA^2006.032^1
+"BLD",5877,4,2006.032,0)
+2006.032
+"BLD",5877,4,2006.032,222)
+y^y^f^^^^n
+"BLD",5877,4,"B",2006.032,2006.032)
+
+"BLD",5877,6.3)
+1
+"BLD",5877,"KRN",0)
+^9.67PA^8989.52^19
+"BLD",5877,"KRN",.4,0)
+.4
+"BLD",5877,"KRN",.401,0)
+.401
+"BLD",5877,"KRN",.402,0)
+.402
+"BLD",5877,"KRN",.403,0)
+.403
+"BLD",5877,"KRN",.5,0)
+.5
+"BLD",5877,"KRN",.84,0)
+.84
+"BLD",5877,"KRN",3.6,0)
+3.6
+"BLD",5877,"KRN",3.8,0)
+3.8
+"BLD",5877,"KRN",9.2,0)
+9.2
+"BLD",5877,"KRN",9.8,0)
+9.8
+"BLD",5877,"KRN",19,0)
+19
+"BLD",5877,"KRN",19.1,0)
+19.1
+"BLD",5877,"KRN",101,0)
+101
+"BLD",5877,"KRN",409.61,0)
+409.61
+"BLD",5877,"KRN",771,0)
+771
+"BLD",5877,"KRN",870,0)
+870
+"BLD",5877,"KRN",8989.51,0)
+8989.51
+"BLD",5877,"KRN",8989.52,0)
+8989.52
+"BLD",5877,"KRN",8994,0)
+8994
+"BLD",5877,"KRN","B",.4,.4)
+
+"BLD",5877,"KRN","B",.401,.401)
+
+"BLD",5877,"KRN","B",.402,.402)
+
+"BLD",5877,"KRN","B",.403,.403)
+
+"BLD",5877,"KRN","B",.5,.5)
+
+"BLD",5877,"KRN","B",.84,.84)
+
+"BLD",5877,"KRN","B",3.6,3.6)
+
+"BLD",5877,"KRN","B",3.8,3.8)
+
+"BLD",5877,"KRN","B",9.2,9.2)
+
+"BLD",5877,"KRN","B",9.8,9.8)
+
+"BLD",5877,"KRN","B",19,19)
+
+"BLD",5877,"KRN","B",19.1,19.1)
+
+"BLD",5877,"KRN","B",101,101)
+
+"BLD",5877,"KRN","B",409.61,409.61)
+
+"BLD",5877,"KRN","B",771,771)
+
+"BLD",5877,"KRN","B",870,870)
+
+"BLD",5877,"KRN","B",8989.51,8989.51)
+
+"BLD",5877,"KRN","B",8989.52,8989.52)
+
+"BLD",5877,"KRN","B",8994,8994)
+
+"FIA",2006.032)
+JUKEBOX
+"FIA",2006.032,0)
+^MAGQUEUE(2006.032,
+"FIA",2006.032,0,0)
+2006.032I
+"FIA",2006.032,0,1)
+y^y^f^^^^n
+"FIA",2006.032,0,10)
+
+"FIA",2006.032,0,11)
+
+"FIA",2006.032,0,"RLRO")
+
+"FIA",2006.032,2006.032)
+0
+"IX",2006.032,2006.032,"C",0)
+2006.032^C^Place and Jukeox index^R^^R^IR^I^2006.032^^^^^LS
+"IX",2006.032,2006.032,"C",1)
+S ^MAGQUEUE(2006.032,"C",X(1),$E(X(2),1,30),DA)=""
+"IX",2006.032,2006.032,"C",2)
+K ^MAGQUEUE(2006.032,"C",X(1),$E(X(2),1,30),DA)
+"IX",2006.032,2006.032,"C",2.5)
+K ^MAGQUEUE(2006.032,"C")
+"IX",2006.032,2006.032,"C",11.1,0)
+^.114IA^2^2
+"IX",2006.032,2006.032,"C",11.1,1,0)
+1^F^2006.032^.04^^1^F
+"IX",2006.032,2006.032,"C",11.1,1,3)
+
+"IX",2006.032,2006.032,"C",11.1,2,0)
+2^F^2006.032^.01^30^2^F
+"IX",2006.032,2006.032,"C",11.1,2,3)
+
+"MBREQ")
+0
+"QUES","XPF1",0)
+Y
+"QUES","XPF1","??")
+^D REP^XPDH
+"QUES","XPF1","A")
+Shall I write over your |FLAG| File
+"QUES","XPF1","B")
+YES
+"QUES","XPF1","M")
+D XPF1^XPDIQ
+"QUES","XPF2",0)
+Y
+"QUES","XPF2","??")
+^D DTA^XPDH
+"QUES","XPF2","A")
+Want my data |FLAG| yours
+"QUES","XPF2","B")
+YES
+"QUES","XPF2","M")
+D XPF2^XPDIQ
+"QUES","XPI1",0)
+YO
+"QUES","XPI1","??")
+^D INHIBIT^XPDH
+"QUES","XPI1","A")
+Want KIDS to INHIBIT LOGONs during the install
+"QUES","XPI1","B")
+YES
+"QUES","XPI1","M")
+D XPI1^XPDIQ
+"QUES","XPM1",0)
+PO^VA(200,:EM
+"QUES","XPM1","??")
+^D MG^XPDH
+"QUES","XPM1","A")
+Enter the Coordinator for Mail Group '|FLAG|'
+"QUES","XPM1","B")
+
+"QUES","XPM1","M")
+D XPM1^XPDIQ
+"QUES","XPO1",0)
+Y
+"QUES","XPO1","??")
+^D MENU^XPDH
+"QUES","XPO1","A")
+Want KIDS to Rebuild Menu Trees Upon Completion of Install
+"QUES","XPO1","B")
+YES
+"QUES","XPO1","M")
+D XPO1^XPDIQ
+"QUES","XPZ1",0)
+Y
+"QUES","XPZ1","??")
+^D OPT^XPDH
+"QUES","XPZ1","A")
+Want to DISABLE Scheduled Options, Menu Options, and Protocols
+"QUES","XPZ1","B")
+YES
+"QUES","XPZ1","M")
+D XPZ1^XPDIQ
+"QUES","XPZ2",0)
+Y
+"QUES","XPZ2","??")
+^D RTN^XPDH
+"QUES","XPZ2","A")
+Want to MOVE routines to other CPUs
+"QUES","XPZ2","B")
+NO
+"QUES","XPZ2","M")
+D XPZ2^XPDIQ
+"SEC","^DIC",2006.032,2006.032,0,"AUDIT")
+
+"SEC","^DIC",2006.032,2006.032,0,"DD")
+@
+"SEC","^DIC",2006.032,2006.032,0,"DEL")
+@
+"SEC","^DIC",2006.032,2006.032,0,"LAYGO")
+@
+"SEC","^DIC",2006.032,2006.032,0,"RD")
+@
+"SEC","^DIC",2006.032,2006.032,0,"WR")
+@
+"VER")
+8.0^22.0
+"^DD",2006.032,2006.032,0)
+FIELD^^9^11
+"^DD",2006.032,2006.032,0,"DDA")
+N
+"^DD",2006.032,2006.032,0,"DT")
+3050418
+"^DD",2006.032,2006.032,0,"ID",.04)
+S %I=Y,Y=$S('$D(^(0)):"",$D(^MAG(2006.1,+$P(^(0),U,11),0))#2:$P(^(0),U,1),1:""),C=$P(^DD(2006.1,.01,0),U,2) D Y^DIQ:Y]"" W "   ",Y,@("$E("_DIC_"%I,0),0)") S Y=%I K %I
+"^DD",2006.032,2006.032,0,"IX","B",2006.032,.01)
+
+"^DD",2006.032,2006.032,0,"NM","JUKEBOX")
+
+"^DD",2006.032,2006.032,0,"PT",2006.1,54)
+
+"^DD",2006.032,2006.032,0,"VRPK")
+MAG
+"^DD",2006.032,2006.032,.01,0)
+JUKEBOX NAME^RF^^0;1^K:$L(X)>30!($L(X)<3)!'(X'?1P.E) X
+"^DD",2006.032,2006.032,.01,1,0)
+^.1^^0
+"^DD",2006.032,2006.032,.01,1,1,0)
+2006.032^B
+"^DD",2006.032,2006.032,.01,1,1,1)
+S ^MAGQUEUE(2006.032,"B",$E(X,1,30),DA)=""
+"^DD",2006.032,2006.032,.01,1,1,2)
+K ^MAGQUEUE(2006.032,"B",$E(X,1,30),DA)
+"^DD",2006.032,2006.032,.01,3)
+Answer must be 3-30 characters in length.
+"^DD",2006.032,2006.032,.01,21,0)
+^^2^2^2970721^^
+"^DD",2006.032,2006.032,.01,21,1,0)
+This is the name for the jukebox.  It is typically the name of the
+"^DD",2006.032,2006.032,.01,21,2,0)
+manufacturer of the jukebox hardware and/or software.
+"^DD",2006.032,2006.032,.01,"DT")
+3010313
+"^DD",2006.032,2006.032,.04,0)
+PLACE^RP2006.1'^MAG(2006.1,^0;11^Q
+"^DD",2006.032,2006.032,.04,1,0)
+^.1^^0
+"^DD",2006.032,2006.032,.04,21,0)
+^^3^3^3050414^
+"^DD",2006.032,2006.032,.04,21,1,0)
+This field references the site parameter file. The Site parameter entry 
+"^DD",2006.032,2006.032,.04,21,2,0)
+defines all of the attributes of Vista Imaging local area network. This 
+"^DD",2006.032,2006.032,.04,21,3,0)
+includes facility user preferences, network write locations, etc.
+"^DD",2006.032,2006.032,.04,"DT")
+3050414
+"^DD",2006.032,2006.032,1,0)
+JUKEBOX DEVICE^RFX^^0;2^K:$L(X)>30!($L(X)<2)!'((X?1"\\".E1"\".E1"\")!(X?1A1":")) X
+"^DD",2006.032,2006.032,1,3)
+Answer must be 2-30 characters in length.  Type ?? for more detailed help.
+"^DD",2006.032,2006.032,1,21,0)
+^^2^2^3001025^
+"^DD",2006.032,2006.032,1,21,1,0)
+This is the Universal Naming Convention (UNC) name for your jukebox share
+"^DD",2006.032,2006.032,1,21,2,0)
+(e.g. \\wasimgjb1\image1$\). Format required: \\servername\sharename\
+"^DD",2006.032,2006.032,1,"DT")
+3001025
+"^DD",2006.032,2006.032,2,0)
+CURRENT WRITE PLATTER^R*P2005.2'^MAG(2005.2,^0;3^S DIC("S")="I $P(^MAGQUEUE(2006.032,DA,0),U,11)=$P(^MAG(2005.2,Y,0),U,10)" D ^DIC K DIC S DIC=$G(DIE),X=+Y K:Y<0 X
+"^DD",2006.032,2006.032,2,12)
+The Jukebox and the Network Location file entries must be associated with the same Vista Imaging network or 'PLACE".
+"^DD",2006.032,2006.032,2,12.1)
+S DIC("S")="I $P(^MAGQUEUE(2006.032,DA,0),U,11)=$P(^MAG(2005.2,Y,0),U,10)"
+"^DD",2006.032,2006.032,2,21,0)
+^^2^2^2970721^
+"^DD",2006.032,2006.032,2,21,1,0)
+New files are written to this platter of the jukebox. This field is a
+"^DD",2006.032,2006.032,2,21,2,0)
+pointer to the Network Location file (2005.2).
+"^DD",2006.032,2006.032,2,"DT")
+3050418
+"^DD",2006.032,2006.032,3,0)
+NUMBER OF CARTRIDGES^NJ4,0^^0;4^K:+X'=X!(X>1000)!(X<1)!(X?.E1"."1N.N) X
+"^DD",2006.032,2006.032,3,3)
+Type a Number between 1 and 1000, 0 Decimal Digits
+"^DD",2006.032,2006.032,3,21,0)
+^^2^2^2970721^^
+"^DD",2006.032,2006.032,3,21,1,0)
+This field contains the number of cartridges that have been entered into
+"^DD",2006.032,2006.032,3,21,2,0)
+the jukebox.  The field is not decremented when cartridges are removed.
+"^DD",2006.032,2006.032,3,"DT")
+2950318
+"^DD",2006.032,2006.032,4,0)
+PERCENT FREE SPACE^NJ4,1^^0;5^K:+X'=X!(X>10)!(X<2.5)!(X?.E1"."2N.N) X
+"^DD",2006.032,2006.032,4,3)
+Type a Number between 2.5 and 10, 1 Decimal Digit
+"^DD",2006.032,2006.032,4,21,0)
+^^3^3^2991116^^^^
+"^DD",2006.032,2006.032,4,21,1,0)
+The minimum free space specifies the percentage of the platter to
+"^DD",2006.032,2006.032,4,21,2,0)
+be kept empty.  For example, if it is 10, then 90% of the platter can
+"^DD",2006.032,2006.032,4,21,3,0)
+written to, before swapping to the next platter.
+"^DD",2006.032,2006.032,4,"DT")
+2991116
+"^DD",2006.032,2006.032,5,0)
+LAST TIMESTAMP FOR SIZE^D^^0;6^S %DT="ESTXR" D ^%DT S X=Y K:Y<1 X
+"^DD",2006.032,2006.032,5,21,0)
+^^3^3^2950318^
+"^DD",2006.032,2006.032,5,21,1,0)
+The Background Poster must periodically check the amount of free-space
+"^DD",2006.032,2006.032,5,21,2,0)
+on the current jukebox platter.  This field records the last time that
+"^DD",2006.032,2006.032,5,21,3,0)
+this check was performed.
+"^DD",2006.032,2006.032,5,"DT")
+2950318
+"^DD",2006.032,2006.032,6,0)
+JB VOLUME SIZE ROUTINE^FX^^0;7^K:($E(X,1,3)'="MAG") X
+"^DD",2006.032,2006.032,6,3)
+Answer must be a routine in the "MAG" namespace and located in the routine file.
+"^DD",2006.032,2006.032,6,21,0)
+^^2^2^2991112^^
+"^DD",2006.032,2006.032,6,21,1,0)
+The Background Poster will invoke this MUMPS routine to determine
+"^DD",2006.032,2006.032,6,21,2,0)
+how much space is used, and how much is still available.
+"^DD",2006.032,2006.032,6,"DT")
+2991112
+"^DD",2006.032,2006.032,7,0)
+*USE SUBDIRECTORIES^S^Y:Use Subdirectories;N:Don't Use Subdirectories;^0;8^Q
+"^DD",2006.032,2006.032,7,4)
+
+"^DD",2006.032,2006.032,7,21,0)
+^^4^4^2991112^^^^
+"^DD",2006.032,2006.032,7,21,1,0)
+DO NOT USE on an OTG jukebox. 
+"^DD",2006.032,2006.032,7,21,2,0)
+The Data General Jukebox requires subdirectories of the form
+"^DD",2006.032,2006.032,7,21,3,0)
+1a\image\nn\<image file>.  The Pegasus jukebox does not require
+"^DD",2006.032,2006.032,7,21,4,0)
+the subdirectories.
+"^DD",2006.032,2006.032,7,"DT")
+3001025
+"^DD",2006.032,2006.032,8,0)
+JUKEBOX VOLUME NAME^S^OJMI:Pegasus OJMI Jukebox;OPTICAL:Data General AViiON Jukebox;DEX:OTG Disk Extender;^0;9^Q
+"^DD",2006.032,2006.032,8,21,0)
+^^2^2^2980304^^^
+"^DD",2006.032,2006.032,8,21,1,0)
+This is the volume name for the jukebox.  For Pegasus jukebox software, it
+"^DD",2006.032,2006.032,8,21,2,0)
+is "OJMI" (Optical Jukebox Management Interface).
+"^DD",2006.032,2006.032,8,"DT")
+2980304
+"^DD",2006.032,2006.032,9,0)
+MEDIA NAME^S^WORM-PDT:Pegasus WORM cartridge;WORM-DG:Data General WORK cartridge;^0;10^Q
+"^DD",2006.032,2006.032,9,21,0)
+^^2^2^2950327^
+"^DD",2006.032,2006.032,9,21,1,0)
+This identifies the kind of jukebox cartridge.  Use "WORM-PDT" for
+"^DD",2006.032,2006.032,9,21,2,0)
+Pegasus WORM cartridge and "WORM-DG" for Data General WORM cartridges.
+"^DD",2006.032,2006.032,9,"DT")
+2950318
+"^DIC",2006.032,2006.032,0)
+JUKEBOX^2006.032
+"^DIC",2006.032,2006.032,0,"GL")
+^MAGQUEUE(2006.032,
+"^DIC",2006.032,2006.032,"%",0)
+^1.005^1^1
+"^DIC",2006.032,2006.032,"%",1,0)
+MAG
+"^DIC",2006.032,2006.032,"%","B","MAG",1)
+
+"^DIC",2006.032,2006.032,"%D",0)
+^^22^22^3010619^
+"^DIC",2006.032,2006.032,"%D",1,0)
+ +---------------------------------------------------------------+
+"^DIC",2006.032,2006.032,"%D",2,0)
+ |                                                               |
+"^DIC",2006.032,2006.032,"%D",3,0)
+ | Property of the US Government.                                |
+"^DIC",2006.032,2006.032,"%D",4,0)
+ | No permission to copy or redistribute this software is given. |
+"^DIC",2006.032,2006.032,"%D",5,0)
+ | Use of unreleased versions of this software requires the user |
+"^DIC",2006.032,2006.032,"%D",6,0)
+ | to execute a written test agreement with the VistA Imaging    |
+"^DIC",2006.032,2006.032,"%D",7,0)
+ | Development Office of the Department of Veterans Affairs,     |
+"^DIC",2006.032,2006.032,"%D",8,0)
+ | telephone (301) 734-0100.                                     |
+"^DIC",2006.032,2006.032,"%D",9,0)
+ |                                                               |
+"^DIC",2006.032,2006.032,"%D",10,0)
+ | The Food and Drug Administration classifies this software as  |
+"^DIC",2006.032,2006.032,"%D",11,0)
+ | a medical device.  As such, it may not be changed in any way. |
+"^DIC",2006.032,2006.032,"%D",12,0)
+ | Modifications to this software may result in an adulterated   |
+"^DIC",2006.032,2006.032,"%D",13,0)
+ | medical device under 21CFR820, the use of which is considered |
+"^DIC",2006.032,2006.032,"%D",14,0)
+ | to be a violation of US Federal Statutes.                     |
+"^DIC",2006.032,2006.032,"%D",15,0)
+ |                                                               |
+"^DIC",2006.032,2006.032,"%D",16,0)
+ +---------------------------------------------------------------+
+"^DIC",2006.032,2006.032,"%D",17,0)
+ 
+"^DIC",2006.032,2006.032,"%D",18,0)
+The Jukebox file contains information about a jukebox(s).  Some of the
+"^DIC",2006.032,2006.032,"%D",19,0)
+fields are not currently used but are reserved for future development.
+"^DIC",2006.032,2006.032,"%D",20,0)
+ 
+"^DIC",2006.032,2006.032,"%D",21,0)
+Please note: Review the Imaging Installation Manual for instructions on
+"^DIC",2006.032,2006.032,"%D",22,0)
+Jukebox installation and creating entries into this file.
+"^DIC",2006.032,"B","JUKEBOX",2006.032)
+
+**END**
+**END**

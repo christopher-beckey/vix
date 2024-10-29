@@ -1,0 +1,2 @@
+Main-Class: gov.va.med.imaging.dx.proxy.DxTest
+Class-Path:ImagingCommon-0.1.jar CoreValueObjects-0.1.jar TransactionContext-0.1.jar CoreRouterSemantics-0.1.jar CoreRouterAnnotation-0.1.jar CoreRouter-0.1.jar DataSourceServiceProvider-0.1.jar DxCommon-0.1.jar ImagingVistaRealmClient-0.1.jar ImagingExchangeBaseWebProxy-0.1.jar ImagingTestResources-0.1.jar

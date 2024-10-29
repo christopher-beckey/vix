@@ -1,0 +1,188 @@
+﻿<Window x:Class="VixHealthMonitor.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="{Binding Path=ApplicationCaption}"
+        Height="{Binding Path=MainWindowPosition.Height, Mode=TwoWay}"
+        Width="{Binding Path=MainWindowPosition.Width, Mode=TwoWay}"
+        Top="{Binding Path=MainWindowPosition.Top, Mode=TwoWay}"
+        Left="{Binding Path=MainWindowPosition.Left, Mode=TwoWay}"
+        DataContext="{Binding Main, Source={StaticResource Locator}}" 
+        xmlns:my="clr-namespace:VISAHealthMonitorCommonControls;assembly=VISAHealthMonitorCommonControls" 
+        Cursor="{Binding Path=Cursor}" 
+        xmlns:my1="clr-namespace:VixHealthMonitor"
+        xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+        xmlns:cmd="clr-namespace:GalaSoft.MvvmLight.Command;assembly=GalaSoft.MvvmLight.Extras.WPF4"
+        Icon="{Binding Path=WindowIcon}" 
+        xmlns:tb="http://www.hardcodet.net/taskbar" StateChanged="Window_StateChanged">
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Closing">
+            <cmd:EventToCommand Command="{Binding Path=WindowClosingCommand, Mode=OneWay}" />
+        </i:EventTrigger>
+        <i:EventTrigger EventName="Loaded">
+            <cmd:EventToCommand Command="{Binding Path=WindowLoadedCommand, Mode=OneWay}" />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Skins/MainSkin.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+    
+    
+
+    <Grid x:Name="LayoutRoot">
+        <Menu IsMainMenu="True">
+            <MenuItem Header="_File"  >
+                <MenuItem Header="Exit" Command="{Binding Path=ExitApplicationCommand}" />
+            </MenuItem>
+            <MenuItem Header="_Edit">
+                <MenuItem Header="_Settings" Command="{Binding Path=SettingsCommand}" />
+            </MenuItem>
+            <MenuItem Header="_Help">
+                <MenuItem Header="_About" Click="MenuItem_Click" />
+            </MenuItem>
+        </Menu>
+        
+        <TabControl HorizontalAlignment="Stretch" Margin="0,28,0,51" SelectedIndex="{Binding Path=SelectedTabIndex}">
+            <TabItem Header="Site Details">
+                <TabItem.Content>
+                    <Grid>
+                        <!--
+                        <my1:VixTreeView HorizontalAlignment="Left" Margin="12,0,0,6" x:Name="visaSourceTree1" VerticalAlignment="Stretch" Width="248"  />
+                        -->
+                        <my1:VixSitesListView HorizontalAlignment="Left" Margin="12,0,0,6" VerticalAlignment="Stretch" Width="248" />
+                        <my1:VixView HorizontalAlignment="Stretch"  Margin="266,0,0,6" x:Name="vixView1" VerticalAlignment="Stretch"  />
+                    </Grid>
+                </TabItem.Content>
+            </TabItem>
+
+            <TabItem Header="Quick View">
+                <TabItem.Content>
+                    <Grid>
+                        <my1:VixTestInformationView VerticalAlignment="Stretch" HorizontalAlignment="Stretch" />
+                    </Grid>
+                </TabItem.Content>
+            </TabItem>
+
+            <TabItem Header="Sites List">
+                <TabItem.Content>
+                    
+                        <Grid>
+                            <my1:VixListView VerticalAlignment="Stretch" Margin="0,0,0,0" HorizontalAlignment="Stretch" x:Name="vixList"  />
+                            <!-- 
+                            <my1:VixListView VerticalAlignment="Stretch" Margin="0,0,0,163" HorizontalAlignment="Stretch" x:Name="vixList"  />
+                            <my1:CvixListView HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Height="160" Margin="0,0,0,0" />
+                            -->
+                            
+                            <!--
+                            <my1:VixListView VerticalAlignment="Stretch" Margin="0,0,0,179" HorizontalAlignment="Stretch" x:Name="vixList"  />
+                            <my1:CvixListView HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Height="105" Margin="0,0,0,68" />
+                        
+                            <my1:ViewCountsView HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Height="65" />                            
+                            -->
+                    </Grid>
+                </TabItem.Content>
+            </TabItem>
+            <!--
+            <TabItem Header="Failed Sites">
+                <TabItem.Content>
+                    <Grid>
+                        <my1:VixListView VerticalAlignment="Stretch" HorizontalAlignment="Stretch" x:Name="failedVixList"  />
+                    </Grid>
+                </TabItem.Content>
+            </TabItem>
+            -->
+            <TabItem Header="Watched Sites">
+                <TabItem.Content>
+                    <Grid>
+                        <my1:VixListView VerticalAlignment="Stretch" HorizontalAlignment="Stretch" x:Name="watchedVixList"  />
+                    </Grid>
+                </TabItem.Content>
+            </TabItem>
+
+            <TabItem>
+                <TabItem.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="{Binding Path=TestSitesErrorIcon, Mode=OneWay}" />
+                        <TextBlock Text="Test Sites" />
+                    </StackPanel>
+                </TabItem.Header>
+                <TabItem.Content>
+                    <DockPanel LastChildFill="True" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                        <TextBlock HorizontalAlignment="Stretch" DockPanel.Dock="Top" TextWrapping="WrapWithOverflow" Margin="2,3,2,4">
+                            This tab shows test sites only. Test site information also shows up in the Site Details but not elsewhere. You can add/remove Test Sites in the Configuration dialog
+                        </TextBlock>
+                        <my1:VixListView VerticalAlignment="Stretch" HorizontalAlignment="Stretch" x:Name="testSitesList"  />
+                    </DockPanel>
+                    
+                </TabItem.Content>
+            </TabItem>
+
+            <TabItem Header="Monitored Properties" >
+                <TabItem.Content>
+                    <Grid>
+                        <my1:DailyMonitoredProperties VerticalAlignment="Stretch" HorizontalAlignment="Stretch" />
+                    </Grid>
+                </TabItem.Content>
+            </TabItem>
+
+            <TabItem>
+                <TabItem.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <Image Visibility="{Binding Path=LongRunningThreadsErrorVisibility, Mode=OneWay}" Source="{Binding Path=ErrorIcon, Mode=OneWay}" />
+                        <TextBlock Text="{Binding Path=LongRunningThreadsTabTitle, Mode=OneWay}" />
+                    </StackPanel>
+                </TabItem.Header>
+                <TabItem.Content>
+                    <Grid>
+                        <my1:LongRunningThreadsView VerticalAlignment="Stretch" HorizontalAlignment="Stretch" />
+                    </Grid>
+                </TabItem.Content>
+            </TabItem>
+                        
+            <TabItem Header="Site Utilities" Visibility="{Binding Path=SiteUtilitiesVisibility, Mode=OneWay}">
+                <TabItem.Content>
+                    <Grid>
+                        <my1:SiteUtilitiesView VerticalAlignment="Stretch" HorizontalAlignment="Stretch" />                        
+                    </Grid>
+                </TabItem.Content>
+            </TabItem>
+
+            
+            
+            
+            <!--
+            <TabItem Header="Watched Sites">
+                <TabItem.Content>
+                    <Grid>
+                        <my1:WatchSiteContainer VerticalAlignment="Stretch" HorizontalAlignment="Stretch" />
+                    </Grid>
+                </TabItem.Content>
+            </TabItem>
+            -->
+        </TabControl>
+
+        <StatusBar VerticalAlignment="Bottom" Height="23" HorizontalAlignment="Stretch" DataContext="{Binding Path=StatusMessage, Source={StaticResource Locator}}">
+            <StatusBarItem HorizontalAlignment="Stretch">
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="images/failed.ico" Visibility="{Binding Path=ErrorIconVisibility}" Stretch="None" Margin="0,0,2,0"/>
+                    <TextBlock Text="{Binding Path=Message}" />
+                </StackPanel>
+            </StatusBarItem>
+            <StatusBarItem HorizontalAlignment="Right" DockPanel.Dock="Right" Margin="1,0,1,0">
+                <TextBlock Text="{Binding Path=AsyncStatus}" />
+            </StatusBarItem>
+            <StatusBarItem HorizontalAlignment="Right" DockPanel.Dock="Right" Margin="1,0,1,0">
+                <TextBlock Text="{Binding Path=IntervalTestStatus}" />
+            </StatusBarItem>
+            
+        </StatusBar>
+
+        <my:ButtonBar VerticalAlignment="Bottom" Margin="0,0,0,24" HorizontalAlignment="Stretch"/>
+        
+        <tb:TaskbarIcon Name="tbIcon" ToolTipText="VIX Health Monitor" IconSource="{Binding Path=WindowIcon}" TrayMouseDoubleClick="TaskbarIcon_TrayMouseDoubleClick" />
+    </Grid>
+</Window>

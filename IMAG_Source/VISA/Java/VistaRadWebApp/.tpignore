@@ -1,0 +1,4 @@
+/target/.*
+/main/generated/java/.*
+\Q/VistA-RAD-soapui-project.xml\E
+\Q/VistaRAD-soapui-project.xml\E

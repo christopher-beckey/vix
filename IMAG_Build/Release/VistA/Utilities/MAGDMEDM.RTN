@@ -1,0 +1,43 @@
+MAGDMEDM ;WOIFO/LB  DICOM routine to lookup Medicine entry
+ ;;2.5T;DICOM42;;1-Nov-2000
+ ;; +---------------------------------------------------------------+
+ ;; | Property of the US Government.                                |
+ ;; | No permission to copy or redistribute this software is given. |
+ ;; | Use of unreleased versions of this software requires the user |
+ ;; | to execute a written test agreement with the VistA Imaging    |
+ ;; | Development Office of the Department of Veterans Affairs,     |
+ ;; | telephone (301) 734-0100.                                     |
+ ;; |                                                               |
+ ;; | The Food and Drug Administration classifies this software as  |
+ ;; | a Class II medical device.  As such, it may not be changed    |
+ ;; | in any way.  Modifications to this software may result in an  |
+ ;; | adulterated medical device under 21CFR820, the use of which   |
+ ;; | is considered to be a violation of US Federal Statutes.       |
+ ;; +---------------------------------------------------------------+
+ ;;
+ Q
+MEDLKUP ; Medicine patient/study lookup
+ ; Will set DFN, DATETIME, PROCDESC, MAGGP, APPLFILE, APPLIEN
+ N RETDATA,MAGDATA,MAGFILE
+ ;
+ K MEDATA ; returned array of Medinine Package data
+ S RETDATA=""
+ ; CASENUMB= Medicine's DICOM ID (GI-nnn, EC-nnn, etc.)
+ S MAGFILE=$$FILE^MAGDMEDI($P(CASENUMB,"-"))
+ S MAGDATA=MAGFILE_"^"_$P(CASENUMB,"-",2)
+ ;
+ D MEDLKUP^MAGDMED2(.RETDATA,MAGDATA)
+ Q:'+RETDATA
+ S DATETIME=$P(RETDATA,"^",6)   ;Date/time of procedure
+ S PROCDESC=$P(RETDATA,"^",9)   ;Procedure name
+ S DFN=$P(RETDATA,"^",4)
+ S MEDATA("IMAGE PTR")=""
+ I RETDATA["i~" D
+ . S MEDIMGP=$P($P(RETDATA,"^",10),"~",2)  ;Image group pointer
+ . S MEDATA("IMAGE PTR")=MEDIMGP
+ S MEDATA("PARENT IEN")=$P(RETDATA,"^",3)    ;Medicine ien
+ S MEDATA("PARENT FILE")=$P(RETDATA,"^",2)   ;Medicine file number
+ S MEDATA("OBJECT TYPE")=3             ;Image type, at present -xray
+ S MEDATA("MODALITY")=MODALITY
+ S MEDATA("MED PROC IEN")=$P(RETDATA,"^",8)   ;Procedure ien
+ Q

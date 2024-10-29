@@ -1,0 +1,178 @@
+Cache for Windows NT^INT^Saved from DICOM (ISW-KUZMAKP3-LT)^~Format=Cache.S~
+%RO on 08/30/2012  10:53
+MAGDMLOG^INT^1^62699,39031^0
+MAGDMLOG ;WOIFO/PMK - Record DICOM events in a log ; 30 Aug 2012 10:50 AM
+ ;;3.0;IMAGING;**9,10,30,51,54,110**;Mar 19, 2002;Build 48;Aug 23, 2012
+ ;; Per VHA Directive 2004-038, this routine should not be modified.
+ ;; +---------------------------------------------------------------+
+ ;; | Property of the US Government.                                |
+ ;; | No permission to copy or redistribute this software is given. |
+ ;; | Use of unreleased versions of this software requires the user |
+ ;; | to execute a written test agreement with the VistA Imaging    |
+ ;; | Development Office of the Department of Veterans Affairs,     |
+ ;; | telephone (301) 734-0100.                                     |
+ ;; | The Food and Drug Administration classifies this software as  |
+ ;; | a medical device.  As such, it may not be changed in any way. |
+ ;; | Modifications to this software may result in an adulterated   |
+ ;; | medical device under 21CFR820, the use of which is considered |
+ ;; | to be a violation of US Federal Statutes.                     |
+ ;; +---------------------------------------------------------------+
+ ;;
+ Q
+ ; Message Log
+ ; ^MAGDMLGV is the log listing routine
+ ;
+NEWLOG(TITLE) ; initialize a log
+ I $G(^MAGDICOM(2006.563,1,"MESSAGE LOG"))="NO" Q
+ ; each new session gets a new log entry, pointed to by the $J
+ N D0,MAXLOGS,N,X
+ ;
+ ; MAXLOGS is the maximum number of logs that are supported (20 minimum)
+ S MAXLOGS=$G(^MAGDICOM(2006.563,1,"MLOG MAXLOGS")) S:MAXLOGS<20 MAXLOGS=20
+ ;
+ L +^MAGDMLOG(0):1E9
+ ;
+ ; Clear any previous LOCKs for this job
+ S D0="" F  S D0=$O(^MAGDMLOG("B",$J,D0)) Q:D0=""  L -^MAGDMLOG(D0)
+ ;
+ S X="DICOM LOG^2006.58^^"
+ S D0=$O(^MAGDMLOG(" "),-1)+1
+ F  L +^MAGDMLOG(D0):0 Q:$T  S D0=D0+1
+ S $P(X,"^",3)=D0
+ S ^MAGDMLOG(D0,0)=$J_"^"_$H_"^"_TITLE
+ K ^MAGDMLOG("B",$J)
+ S ^MAGDMLOG("B",$J,D0)=""
+ ; save a maximum of MAXLOGS sessions in the log
+ ; but don't kill entries of jobs that are still active
+ S N=2 F  S D0=$O(^MAGDMLOG(D0),-1) Q:'D0  D
+ . S N=N+1
+ . L +^MAGDMLOG(D0):0 E  Q
+ . ; Note that the above LOCKs get released automatically
+ . ; when the jobs in question terminate
+ . ; (whether they terminate normally, or because of an error)
+ . L -^MAGDMLOG(D0) Q:N'>MAXLOGS
+ . K ^MAGDMLOG(D0) S N=N-1
+ . Q
+ S $P(X,"^",4)=N,^MAGDMLOG(0)=X
+ L -^MAGDMLOG(0)
+ ;
+ ; Clean up any cross-references that were left behind
+ ; by jobs that have terminated
+ ;
+ S N="" F  S N=$O(^MAGDMLOG("B",N)) Q:N=""  D
+ . S D0="" F  S D0=$O(^MAGDMLOG("B",N,D0)) Q:D0=""  D
+ . . K:'$D(^MAGDMLOG(D0)) ^MAGDMLOG("B",N,D0)
+ . . Q
+ . Q
+ Q
+ ;
+UPDTITLE(TITLE) ; update the title of a log
+ I $G(^MAGDICOM(2006.563,1,"MESSAGE LOG"))="NO" Q
+ N D0
+ ; Get the message log entry number, create message if needed
+ F  S D0=$O(^MAGDMLOG("B",$J,"")) Q:D0  D NEWLOG("-")
+ S $P(^MAGDMLOG(D0,0),"^",3)=TITLE
+ Q
+ ;
+MESSAGE(NEWLINE,TAB,TEXT,OPTION) ;
+ ; NEWLINE -- specifies number of <cr> <lf> to output before the text
+ ; TAB -- specifies horizontal tab position for text
+ ; TEXT -- single string or may be multiline -- passed as (dot) .ARRAY
+ ; Options:
+ ; B -- Enclose message text in a box
+ ; t -- Date stamp at the beginning of message text
+ ; T -- Time stamp at the end of message text
+ ; V -- Verbose mode (output message on screen)
+ ; <n> -- Output <n> new line(s) <cr><lf> after the text
+ ;
+ ; format the message
+ N COUNT,D0,D1,DATETIME,DEVICE,I,ICOUNT,LOG
+ N MAXLEN,MESSAGE,S,STATUS,VERBOSE,X,Y
+ ;
+ ; Get the message log entry number,
+ ; create a new log if the old log has been deleted
+ F  S D0=$O(^MAGDMLOG("B",$J,"")) Q:D0  D NEWLOG("-")
+ ;
+ S D1=''NEWLINE+$O(^MAGDMLOG(D0,1," "),-1)
+ S X=$P($G(^MAGDMLOG(D0,2,D1,0)),"^",2) S:X'="" X=X_" "
+ S X=X_$TR($ST($ST-1,"PLACE"),"^","~")
+ S:$L(X)>240 X="..."_$E(X,$L(X)-238,$L(X))
+ S ^MAGDMLOG(D0,2,D1,0)=$H_"^"_X
+ S DEVICE=$$CURDEV^MAGOSFIL() ; save the current device
+ I FBSWITCH="FOREGROUND" D
+ . I $$USEPRIN^MAGOSFIL(1) ; switch to the principal device
+ . S VERBOSE=1
+ . Q
+ E  S VERBOSE=0
+ F I=1:1:NEWLINE S D1=$$MSGNEW(D0,"") ; output new lines of text
+ ; copy the TEXT to the MESSAGE array
+ S (COUNT,MAXLEN)=0
+ S:$G(TEXT)'="" COUNT=COUNT+1,MESSAGE(COUNT)=TEXT,MAXLEN=$L(TEXT)
+ S I="" F  S I=$O(TEXT(I)) Q:I=""  D
+ . S COUNT=COUNT+1,MESSAGE(COUNT)=TEXT(I)
+ . S:MAXLEN<$L(MESSAGE(COUNT)) MAXLEN=$L(MESSAGE(COUNT))
+ . Q
+ S:'COUNT COUNT=1,MESSAGE(1)=""
+ D:$G(OPTION)["t"  ; concatenate day & time to beginning of message
+ . N DAY,DH,NOW,TIME,X
+ . S DH=$H,NOW=$$HTFM^XLFDT(DH,0)
+ . S TIME=$P(NOW,".",2)_"000000"
+ . S TIME=$E(TIME,1,2)_":"_$E(TIME,3,4) ; _":"_$E(TIME,5,6)
+ . S DAY=$P("Thu^Fri^Sat^Sun^Mon^Tue^Wed","^",DH#7+1)
+ . S MESSAGE(1)=DAY_" "_TIME_" "_MESSAGE(1)
+ . I MAXLEN<$L(MESSAGE(1)) S MAXLEN=$L(MESSAGE(1))
+ . Q
+ ;
+ D:$G(OPTION)["T"  ; concatenate date & time to end of message
+ . S Y=$$HTE^XLFDT($H,1) S DATETIME=$P(Y,"@",1)_" at "_$P(Y,"@",2)
+ . S:$L(MESSAGE(1)) MESSAGE(1)=MESSAGE(1)_" on "
+ . S MESSAGE(1)=MESSAGE(1)_DATETIME
+ . I MAXLEN<$L(MESSAGE(1)) S MAXLEN=$L(MESSAGE(1))
+ . Q
+ ;
+ F ICOUNT=1:1:COUNT D
+ . ; output one line of the message
+ . D:TAB  ; tab to the appropriate offset
+ . . W:VERBOSE ?TAB
+ . . Q:'D0  Q:'D1
+ . . S $E(^MAGDMLOG(D0,1,D1,0),TAB+1)=""
+ . . Q
+ . S MESSAGE=MESSAGE(ICOUNT)
+ . I $G(OPTION)["B" D  ; output message in a box
+ . . S X="" F I=1:1:MAXLEN+8 S X=X_"*"
+ . . S Y="*** "_MESSAGE F I=$L(Y):1:MAXLEN+4 S Y=Y_" "
+ . . S Y=Y_"***"
+ . . I ICOUNT=1 D MSGTXT(D0,D1,X) ; top row of stars
+ . . S D1=$$MSGNEW(D0,Y) ; message line
+ . . I ICOUNT=COUNT S D1=$$MSGNEW(D0,X) ; output bottom row of stars
+ . . Q
+ . E  D MSGTXT(D0,D1,MESSAGE)
+ . F I=1:1:$TR($G(OPTION),"BTtV","") S D1=$$MSGNEW(D0,"")
+ . Q
+ S STATUS=$$USEDEV^MAGOSFIL(DEVICE)
+ Q
+ ;
+MSGNEW(D0,TXT) ; output a new message line
+ N D1,J,LIMIT
+ I VERBOSE W !,TXT
+ Q:'D0 ""
+ Q:$G(^MAGDICOM(2006.563,1,"MESSAGE LOG"))="NO"
+ ;
+ S D1=$O(^MAGDMLOG(D0,1," "),-1)+1
+ S ^MAGDMLOG(D0,1,D1,0)=TXT
+ ; save a maximum of a thousand records in the log
+ S LIMIT=D1-1000
+ S J=0 F  S J=$O(^MAGDMLOG(D0,1,J)) Q:'J  Q:J>LIMIT  K ^MAGDMLOG(D0,1,J),^MAGDMLOG(D0,2,J)
+ Q D1
+ ;
+MSGTXT(D0,D1,TXT) ; output the message
+ W:VERBOSE TXT
+ Q:'D0  Q:'D1
+ Q:$G(^MAGDICOM(2006.563,1,"MESSAGE LOG"))="NO"
+ ;
+ S ^MAGDMLOG(D0,1,D1,0)=$G(^MAGDMLOG(D0,1,D1,0))_TXT
+ Q
+ ;
+
+
+

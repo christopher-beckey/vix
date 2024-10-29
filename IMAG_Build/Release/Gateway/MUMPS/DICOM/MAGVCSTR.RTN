@@ -1,0 +1,72 @@
+MAGVCSTR ;WOIFO/RRB,NST,DAC - VISA CSTORE Background Listener ; 16 Jul 2012 11:27 PM
+ ;;3.0;IMAGING;**118**;Mar 19, 2002;Build 4525;May 01, 2013
+ ;; Per VHA Directive 2004-038, this routine should not be modified.
+ ;; +---------------------------------------------------------------+
+ ;; | Property of the US Government.                                |
+ ;; | No permission to copy or redistribute this software is given. |
+ ;; | Use of unreleased versions of this software requires the user |
+ ;; | to execute a written test agreement with the VistA Imaging    |
+ ;; | Development Office of the Department of Veterans Affairs,     |
+ ;; | telephone (301) 734-0100.                                     |
+ ;; | The Food and Drug Administration classifies this software as  |
+ ;; | a medical device.  As such, it may not be changed in any way. |
+ ;; | Modifications to this software may result in an adulterated   |
+ ;; | medical device under 21CFR820, the use of which is considered |
+ ;; | to be a violation of US Federal Statutes.                     |
+ ;; +---------------------------------------------------------------+
+ ;;
+ ;
+ Q
+ ;
+CSTORE ; Entry
+ N X,SOCKET,STATUS,IMGPATH
+ S IMGPATH=^MAGDICOM(2006.563,1,"IMAGE INPUT PATH")
+ S $ET="D ^%ET"
+ S SOCKET="|TCP|60001"
+ O SOCKET:(:60001:"M")
+ U $P W !,"Socket is ",SOCKET
+ F  D  ;Not supposed to Quit until the system is shut down
+ . U SOCKET R X
+ . J BACKGND(X):(:5:SOCKET:SOCKET)
+ . Q
+ Q
+ ;
+BACKGND(X) ;
+ N COMMAND,PARAM
+ S COMMAND=$P(X,"^",1)
+ S PARAM=$P(X,"^",2,999) ; Instrument Name^Origin Index^Media^Old Path
+ I (COMMAND="FileNameRequest") D  Q
+ . S X=$$NEXTFILE(PARAM) ;  ^MAGDCST2 ; get next file name
+ . W X,!
+ . Q
+ N MAGIEN
+ I (COMMAND="FileCreated") D  Q
+ . S MAGIEN=$P(X,"^",2,2)
+ . S $P(^MAGDINPT(2006.571,MAGIEN,0),"^",3)=1 ; completed
+ . W "Done",!
+ . Q
+ Q
+ ;
+NEXTFILE(PARAM) ; Get the full name of the next image file
+ ;
+ ; ^MAGDINPT is a local global because it must be available when VistA
+ ; is down.  Unlike ^TMP, it must be persistent and be accessible
+ ; by different image storage jobs.
+ ;
+ N X,IMAGEIEN,PATH,INSTNAME,ORIGIN,MEDIA,OLDPATH
+ L +^MAGDINPT(2006.571,0):1E9 ; serialize name generation code
+ S INSTNAME=$$UP^MAGDFCNS($P(PARAM,"^",1)) ; Instrument Name
+ S ORIGIN=$P(PARAM,"^",2)  ; Origin Index
+ S MEDIA=$P(PARAM,"^",3)  ; Media
+ S OLDPATH=$P(PARAM,"^",4)  ; Old Path
+ S X=$G(^MAGDINPT(2006.571,0))
+ S $P(X,"^",1,2)="DICOM RAW IMAGE^2006.571"
+ S $P(X,"^",3)=$P(X,"^",3)+1,IMAGEIEN=$P(X,"^",3) ; get next IEN
+ S $P(X,"^",4)=$P(X,"^",4)+1 ; increment total count
+ S ^MAGDINPT(2006.571,0)=X
+ S PATH=IMGPATH_"\"_$$HOSTNAME^MAGOSMSC()_"_"_$TR($J(IMAGEIEN,7)," ",0)_".DCM"
+ S ^MAGDINPT(2006.571,IMAGEIEN,0)=PATH_"^"_INSTNAME_"^"_0_"^"_ORIGIN_"^"_MEDIA_"^"_OLDPATH ; first entry
+ L -^MAGDINPT(2006.571,0) ; clear the serial name generation code
+ D IMAGE^MAGDCST3 ; increment the image counter
+ ;
+ Q PATH_"^"_IMAGEIEN

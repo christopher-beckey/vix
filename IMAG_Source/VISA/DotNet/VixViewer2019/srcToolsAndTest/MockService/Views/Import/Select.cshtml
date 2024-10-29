@@ -1,0 +1,47 @@
+﻿@{
+    ViewBag.Title = "Select";
+}
+<h2>Select image for DASH display</h2>
+<div id="customImage">
+    @{
+        Html.RenderPartial("CustomImage");
+    }
+</div>
+
+<a class="btn btn-primary" href="@Url.Action("ImportStockImage","Import", new { imageType = "BMP" })">BMP</a>
+<a class="btn btn-primary" href="@Url.Action("ImportStockImage","Import", new { imageType = "GIF" })">GIF</a>
+<a class="btn btn-primary" href="@Url.Action("ImportStockImage","Import", new { imageType = "JPEG" })">JPEG</a>
+<a class="btn btn-primary" href="@Url.Action("ImportStockImage","Import", new { imageType = "Multi" })">Multi Type</a>
+<a class="btn btn-primary" href="@Url.Action("ImportStockImage","Import", new { imageType = "PNG" })">PNG</a>
+<a class="btn btn-primary" href="@Url.Action("ImportStockImage","Import", new { imageType = "PDF" })">PDF</a>
+<a class="btn btn-primary" href="@Url.Action("ImportStockImage","Import", new { imageType = "RTF" })">RTF</a>
+<a class="btn btn-primary" href="@Url.Action("ImportStockImage","Import", new { imageType = "Tiff-6Pages" })">TIFF</a>
+<br />
+<br />
+<a class="btn btn-primary" href="@Url.Action("ImportStockImage","Import", new { imageType = "ECG-JPEG" })">ECG-JPEG</a>
+<a class="btn btn-primary" href="@Url.Action("ImportStockImage","Import", new { imageType = "ECG-PDF" })">ECG-PDF</a>
+<a class="btn btn-primary" href="@Url.Action("ImportStockImage","Import", new { imageType = "ECG-DICOM" })">ECG-DICOM [1]</a>
+<br />
+<!-- br />
+    TODO - I verified the GetStudyMetada.xml for this is correct. Something else is wrong with the MockService.
+    https://vhaispappvixip4.vha.med.va.gov:343/vix/viewer/loader?ContextId=RPT%5eCPRS%5e7178910%5eTIU%5e4764243&SiteNumber=994&PatientICN=1008689559V859134&SecurityToken=foo&AuthSiteNumber=994&Flags=PSTATE
+<a class="btn btn-primary" href="@Url.Action("ImportStockImage","Import", new { imageType = "AVI" })">AVI with sound</a>
+<br / -->
+<br />
+<a class="btn btn-primary" href="@Url.Action("ImportStockImage","Import", new { imageType = "DICOM-1CT134" })">DICOM-1 CT [2]</a>
+<a class="btn btn-primary" href="@Url.Action("ImportStockImage","Import", new { imageType = "DICOM-1MR" })">DICOM-1 MR</a>
+<a class="btn btn-primary" href="@Url.Action("ImportStockImage","Import", new { imageType = "DICOM-SR" })">DICOM-1 SR</a>
+<a class="btn btn-primary" href="@Url.Action("ImportStockImage","Import", new { imageType = "DICOM-4US" })">DICOM-4 US [3]</a>
+<br />
+<br />
+[1] ecg = ekg. electrocardiogram.
+<br />
+[2] bad lung level (VAI-134).
+<br />
+[3] echocardiogram. cine. displays alert.bmp.
+<br />
+<br />
+<a class="btn btn-success" href="@Url.Action("ImportFile","Import")">Import Custom Image</a>
+<br />
+<br />
+@ViewBag.Message

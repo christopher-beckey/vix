@@ -1,0 +1,92 @@
+MAGDIWB7 ;WOIFO/PMK - Coerce Multiframe SOP Class to Single Frame SOP Class ; 03/08/2005  09:02
+ ;;3.0;IMAGING;**11,51**;MAR 19, 2002;;JUN 16, 2006
+ ;; Per VHA Directive 2004-038, this routine should not be modified.
+ ;; +---------------------------------------------------------------+
+ ;; | Property of the US Government.                                |
+ ;; | No permission to copy or redistribute this software is given. |
+ ;; | Use of unreleased versions of this software requires the user |
+ ;; | to execute a written test agreement with the VistA Imaging    |
+ ;; | Development Office of the Department of Veterans Affairs,     |
+ ;; | telephone (301) 734-0100.                                     |
+ ;; | The Food and Drug Administration classifies this software as  |
+ ;; | a medical device.  As such, it may not be changed in any way. |
+ ;; | Modifications to this software may result in an adulterated   |
+ ;; | medical device under 21CFR820, the use of which is considered |
+ ;; | to be a violation of US Federal Statutes.                     |
+ ;; +---------------------------------------------------------------+
+ ;;
+ Q
+ ; VistA stores multiframe DICOM objects as individual TGA images
+ ; Change the SOP Class from multiframe to single frame
+ ;
+ENTRY ; entry point from ^MAGDIW2, called after ^MAGDIW3
+ N SOPCLASS ;- Class made up of instantiations of a Service Order Pair
+ S SOPCLASS=$$GETNAME^MAGDUID2($$GETDATA^MAGDFCNS("OUT","0008,0016"))
+ I SOPCLASS="Ultrasound Multi-frame Image Storage (Retired)" G US
+ I SOPCLASS="Ultrasound Multi-frame Image Storage" G US
+ I SOPCLASS="X-Ray Radiofluoroscopic Image Storage" G FLUORO
+ I SOPCLASS="X-Ray Angiographic Image Storage" G FLUORO
+ I SOPCLASS="Nuclear Medicine Image Storage" G NUCMED
+ I SOPCLASS="Nuclear Medicine Image Storage (Retired)" G NUCMED
+ Q
+ ;
+US ; Ultrasound - coerce the SOP Class & delete multiframe stuff
+ N PHOTOINT
+ D CLEANUP
+ S PHOTOINT=$$GETDATA^MAGDFCNS("OUT","0028,0004") ; photo intrepretation
+ I PHOTOINT="RGB" D  ; make monochrome2
+ . D KILL^MAGDFCNS("0028,0002")
+ . D SAVE^MAGDFCNS("0028,0002",1) ; samples per pixel
+ . D KILL^MAGDFCNS("0028,0004")
+ . D SAVE^MAGDFCNS("0028,0004","MONOCHROME2")
+ . D KILL^MAGDFCNS("0028,0006") ; planar configuration
+ . D KILL^MAGDFCNS("0028,0014") ; ultrasound color data present
+ . D SAVE^MAGDFCNS("0028,0014",32768)
+ . Q
+ Q
+ ;
+FLUORO ; Digital Radio Fluoro -- delete multiframe stuff
+ D CLEANUP
+ Q
+ ;
+NUCMED ; Nuclear Medicine -- delete multiframe stuff
+ D CLEANUP
+ Q
+ ;
+CLEANUP ; remove cine and multi-frame elements, fix SOP classes
+ N SOPCLASS
+ ; PS 3.3 C.7.6.5 Cine Module
+ D KILL^MAGDFCNS("0018,1244") ; Preferred Playback Sequencing
+ D KILL^MAGDFCNS("0018,1063") ; Frame Time
+ D KILL^MAGDFCNS("0018,1065") ; Frame Time Vector
+ D KILL^MAGDFCNS("0008,2142") ; Start Trim
+ D KILL^MAGDFCNS("0008,2143") ; Stop Trim
+ D KILL^MAGDFCNS("0008,2144") ; Recommended Display Frame Rate
+ D KILL^MAGDFCNS("0018,0040") ; Cine Rate
+ D KILL^MAGDFCNS("0018,1066") ; Frame Delay
+ D KILL^MAGDFCNS("0018,0072") ; Effective Series Duration
+ D KILL^MAGDFCNS("0018,1242") ; Actual Frame Duration
+ ; PS 3.3 C.7.6.6 Multi-Frame Module
+ D KILL^MAGDFCNS("0028,0008") ; Number of Frames
+ D KILL^MAGDFCNS("0028,0009") ; Frame Increment Pointer
+ ; PS 3.3 C.7.6.9 Frame Pointers Module
+ D KILL^MAGDFCNS("0028,6010") ; Representative Frame Number
+ D KILL^MAGDFCNS("0028,6020") ; Frame Number(s) Of Interest (FOI)
+ D KILL^MAGDFCNS("0028,6022") ; Frame Of Interest Description
+ ;
+ ; coerce SOP class
+ S SOPCLASS="Secondary Capture Image Storage"
+ D KILL^MAGDFCNS("0008,0016")
+ D SAVE^MAGDFCNS("0008,0016",$$GETUID^MAGDUID1(SOPCLASS))
+ S ^TMP("MAG",$J,"DICOMXMIT",D0,D1,5)=SOPCLASS
+ ;
+ ; Generate a new SOP Instance UID
+ ; the SOP Instance UID needs to be changed
+ D KILL^MAGDFCNS("0008,0018") ; remove the old SOP Instance UID
+ D SAVE^MAGDFCNS("0008,0018",$$NEXTUID^MAGDUID1)
+ ;
+ ; Coerce Modality
+ D KILL^MAGDFCNS("0008,0060") ; Modality
+ D SAVE^MAGDFCNS("0008,0060","SC") ; Secondary Capture
+ Q
+ ;

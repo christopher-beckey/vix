@@ -1,0 +1,242 @@
+Cache for Windows NT^INT^Saved from DICOM (ISW-KUZMAKP3-LT)^~Format=Cache.S~
+%RO on 09/14/2012  16:44
+MAGDDR2A^INT^1^62714,60251^0
+MAGDDR2A ;WOIFO/PMK - Program to read a DICOM file ; 14 Sep 2012 4:44 PM
+ ;;3.0;IMAGING;**1,10,51,54,99,110**;Mar 19, 2002;Build 48;Aug 23, 2012
+ ;; Per VHA Directive 2004-038, this routine should not be modified.
+ ;; +---------------------------------------------------------------+
+ ;; | Property of the US Government.                                |
+ ;; | No permission to copy or redistribute this software is given. |
+ ;; | Use of unreleased versions of this software requires the user |
+ ;; | to execute a written test agreement with the VistA Imaging    |
+ ;; | Development Office of the Department of Veterans Affairs,     |
+ ;; | telephone (301) 734-0100.                                     |
+ ;; | The Food and Drug Administration classifies this software as  |
+ ;; | a medical device.  As such, it may not be changed in any way. |
+ ;; | Modifications to this software may result in an adulterated   |
+ ;; | medical device under 21CFR820, the use of which is considered |
+ ;; | to be a violation of US Federal Statutes.                     |
+ ;; +---------------------------------------------------------------+
+ ;;
+ ; PACS Interface -- read DICOM files (overflow from MAGDDR2)
+ ;
+READGRP2 ; used above to read Part 10 Group 2 elements
+ N I,J,K
+ N HLENGTH ;- length of the element in hexadecimal
+ N LENGTH ;-- length of the element in decimal
+ N NAME ;---- name of DICOM element
+ N OWNER ;--- owner of a private group of elements
+ N MAXLEN ;-- maximum length of the data element in bytes
+ N SS0 ;----- element subscript in ^TMP composed of g, e, and sequence
+ N STATUS ;-- file i/o status
+ N TAG ;----- the group and element number
+ N TEMPTAG ;- temporary tag for looking up the name of a private group
+ N VALUE ;--- value of the DICOM element
+ N VM ;------ DICOM value multiplicity
+ N VR ;------ DICOM value representation
+ ; check for the beginning of a new message in the file
+ I GROUP="0000",ELEMENT="0000",'SEQNUMB D  ; new message in file
+ . K ^TMP("MAG",$J,"DICOM",INODE) ; target global
+ . S MSGNUMB=MSGNUMB+1
+ . I $L(ODEVTYPE),MSGNUMB>1 D  ;
+ . . S STATUS=$$USE^MAGDFCNS(ODEVTYPE,ODEVNAME)
+ . . W !
+ . . I ODEVTYPE="SCREEN" D  ; scrolling for the screen
+ . . . W "Message #",MSGNUMB
+ . . . R " next...",X:DTIME S $Y=0
+ . . . Q
+ . . S STATUS=$$USE^MAGOSFIL(QUEUEIN("FILE"))
+ . . Q
+ . Q
+ ;
+ I EXPLICIT,GROUP="FFFE",(ELEMENT="E000")!(ELEMENT="E00D")!(ELEMENT="E0DD") S EXPLICIT=-1 ; sequence item delimiter w/o VRs
+ I EXPLICIT,GROUP="0000",'SEQNUMB S EXPLICIT=-1 ; Command Set is Implicit VR
+ I EXPLICIT>0 D  ; explicit
+ . S VR=$$GETASCII^MAGDDR0(2,"","") ; read VR
+ . S LENGTH=$$US^MAGDDR0 ; read 16-bit data length
+ . S HLENGTH=$$HEX^MAGDDR0(LENGTH,4)
+ . I "^OB^OF^OW^SQ^UN^UT^"[("^"_VR_"^") D  ; read extra 32-bit length field
+ . . ; According to PS 3.5, Section 7.1.2, the previously read 16-bit
+ . . ; data length field is reserved and always has a value of 0000H
+ . . ; This reserved field is followed by the actual 32-bit length field
+ . . S LENGTH=$$UL^MAGDDR0 ; 32-bit length
+ . . S HLENGTH=$$HEX^MAGDDR0(LENGTH,8)
+ . . Q
+ . Q
+ E  D  ; implicit VR mode (or sequence item delimiter w/o VRs)
+ . S LENGTH=$$UL^MAGDDR0 ; read 32-bit data length
+ . S HLENGTH=$$HEX^MAGDDR0(LENGTH,8)
+ . Q
+ ;
+ S STATUS=$$USE^MAGDFCNS(ODEVTYPE,ODEVNAME)
+ I $L(ODEVTYPE) D NEXTLINE^MAGDDR2 Q:STOP
+ ;
+ I "13579BDF"[$E(GROUP,4),$E(ELEMENT,1,2)'="00" D  Q:STOP  ; private group
+ . ; the group is private since it is an odd number
+ . S TEMPTAG=GROUP_",00"_$E(ELEMENT,1,2) ; temporary owner of group TAG
+ . S SS0=$S(SEQUENCE="":TEMPTAG,1:SEQUENCE_"^"_TEMPTAG)
+ . S OWNER=$G(^TMP("MAG",$J,"DICOM",INODE,SS0,1,1))
+ . I OWNER="" D
+ . . S OWNER="*UNKNOWN*"
+ . . I '$L(ODEVTYPE) Q  ; Don't output message
+ . . W " *** WARNING -- No Private Creator Data Element Specified ***"
+ . . D NEXTLINE^MAGDDR2
+ . . Q
+ . S $E(ELEMENT,1,2)="xx"
+ . I '$D(OWNERID(OWNER)) D
+ . . S OWNERID=$G(OWNERID)+1
+ . . I OWNER="VA DHCP" S OWNERID(OWNER)=OWNER ; use VA DHCP as OWNERID
+ . . E  S OWNERID(OWNER)=OWNERID ; use id# for vendor's private element
+ . . Q
+ . Q
+ E  S OWNER="" ;  standard (non-private) group
+ ;
+ S TAG=GROUP_","_ELEMENT I OWNER'="" S TAG=TAG_","_OWNERID(OWNER)
+ ;
+ I '$D(^MAGDICOM(2006.51,"B",TAG)) D  ;
+ . I "13579BDF"[$E(GROUP,4) D  ; code for unknown private groups
+ . . I ELEMENT="0000" S NAME="Length of Private Group",VR="UL"
+ . . E  I "Xx"'[$E(ELEMENT) S NAME="Name of Private Group",VR="LO"
+ . . E  D  ; unknown private group element
+ . . . I HLENGTH="FFFFFFFF" D
+ . . . . S VR="SQ" ; beginning of unknown sequence
+ . . . . S NAME="Begin Private Sequence"
+ . . . . Q
+ . . . E  D
+ . . . . S:'EXPLICIT VR="UN" ; unknown element
+ . . . . S NAME="Private element"
+ . . . . Q
+ . . . Q
+ . . Q
+ . E  S NAME="Undef. group/element" S:'EXPLICIT VR="UN"
+ . I EXPLICIT,VR'?2A S VR="UN" ; illegal VR - set to unknown
+ . S VM=1 ; can't know otherwise
+ . Q
+ E  D  ; real data group
+ . N DICTVR,X
+ . S X=$O(^MAGDICOM(2006.51,"B",TAG,"")),X=^MAGDICOM(2006.51,X,0)
+ . S NAME=$P(X,"^",2),VM=$P(X,"^",4),DICTVR=$P(X,"^",3)
+ . I DICTVR?1"US/SS".E S DICTVR=$S(PIXELREP="2's complement":"SS",1:"US") ; may be US/SS/OW
+ . I EXPLICIT<1 S VR=DICTVR Q
+ . I DICTVR'[VR D:$L(ODEVTYPE)
+ . . W ?17,$J($E(VR,1,2),2)," "
+ . . W "*** Explicit VR not same as dictionary "
+ . . W """",DICTVR,""" ***",!
+ . . Q
+ . Q
+ ;
+ I VR="OW/OB" D  ; resolve other word/byte ambiguity
+ . I TAG="7FE0,0010" D  ; pixel data
+ . . N PIXBITS
+ . . ; determine whether word or byte from the BITS ALLOCATED attribute
+ . . S PIXBITS=$G(^TMP("MAG",$J,"DICOM",INODE,"0028,0100",1,1))
+ . . S VR=$S(PIXBITS>8:"OW",1:"OB")
+ . . Q
+ . E  S VR="OB" ; either works fine
+ . Q
+ ;
+ I "OB^OW"[VR,GROUP'="0002",GROUP'="7FE0" D  ; find VR of OB or OW
+ . ; skip overlay data and color lookup tables (don't convert them to ascii)
+ . S STATUS=$$USE^MAGOSFIL(QUEUEIN("FILE"))
+ . S X=$$SEEK^MAGOSFIL(QUEUEIN("FILE"),LENGTH,1)
+ . S STATUS=$$USE^MAGDFCNS(ODEVTYPE,ODEVNAME)
+ . S LENGTH=0
+ . Q
+ ;
+ I $L(ODEVTYPE) D
+ . W ?17,$J($E(VR,1,2),2)," "
+ . W $E(HLENGTH,$L(HLENGTH)-3,$L(HLENGTH))," "
+ . F I=1:1:SEQNUMB W ">"
+ . S I=SPACING("NAME")-SEQNUMB W $E(NAME,1,I),?SPACING("VALUE")
+ . Q
+ ;
+ ; sanity check LENGTH for the VR
+ S X="AE,64^AS,4^AT,4^CS,16^DA,17^DS,16^DT,26^FL,4^FD,8^IS,12^LO,64^LT,10240^OB,*^OF,*^OW,*^PN,64^SH,16^SL,4^SQ,*^SS,2^ST,1024^TM,16^UI,64^UL,4^UN,*^US,2^UT,4294967294"
+ S J=$F(X,VR),MAXLEN=$P($E(X,J+1,9999),"^")
+ I MAXLEN,LENGTH>MAXLEN,VM=1 D
+ . I $L(ODEVTYPE) W "*** Length: ",LENGTH," > ",MAXLEN," ***",!,?SPACING("VALUE")
+ . ; check length against the value of the characters "AA", 16705 = $A("A") + (256 * $A("A"))
+ . ; this is a check for the two letters that are in the Explicit VR transfer syntax
+ . I LENGTH>16705 D  ; illegal length -- stop the system
+ . . N A1,A2,LEN,MSG,X
+ . . S LEN=LENGTH\65536,X=LENGTH#65536
+ . . S A2=X\256,A1=X#256
+ . . S MSG(1)="DICOM Transfer syntax illegally switched from Implicit VR to Explicit VR"
+ . . S MSG(2)="Offset = """_$$HEX^MAGDDR0(OFFSET,6)_"""  ("_OFFSET_" decimal)"
+ . . S MSG(3)="Data Element = """_NAME_" ("_TAG_")""    VR = """_VR_""""
+ . . S MSG(4)="Calculated VR = """_$C(A1,A2)_"""     Calculated length = """_LEN_""""
+ . . S MSG(5)="File = """_QUEUEIN("FILE")_""""
+ . . D TRAPERR^MAGDSTRT(0,$T(+0),"DICOM GATEWAY ERROR -- READING DICOM FILE",.MSG)
+ . . Q  ; Error trap does not return
+ . Q
+ ;
+ ; record the length of the value field and its offset
+ ;
+ I VR="SQIS" D GETVALUE^MAGDDR3 ; sequence begin item - update counter
+ ;
+ S SS0=$S(SEQUENCE="":TAG,1:SEQUENCE_"^"_TAG)
+ S ^TMP("MAG",$J,"DICOM",INODE,SS0)=NAME_"^"_VR_"^"_OFFSET_"^"_LENGTH
+ ;
+ I VR?1"SQ".E D:VR'="SQIS" GETVALUE^MAGDDR3 W:$L(ODEVTYPE) VALUE Q  ; process sequence
+ ;
+ D ENTRY^MAGDDR3 ; get the value for the element
+ ;
+ Q:'$L(ODEVTYPE)  ; don't print out the values in silent mode
+ ;
+ ; display the value of the element
+ F I=1:1:^TMP("MAG",$J,"DICOM",INODE,SS0,0,0) D  Q:STOP  ; loop thru multiples
+ . I I>1 D NEWLINE^MAGDDR2 Q:STOP  W ?SPACING("VALUE")
+ . F J=1:1:^TMP("MAG",$J,"DICOM",INODE,SS0,I,0) D  Q:STOP  ; loop thru text
+ . . I J>1 D NEWLINE^MAGDDR2 Q:STOP
+ . . S VALUE=^TMP("MAG",$J,"DICOM",INODE,SS0,I,J)
+ . . I VALUE'="<unknown>",TAG'="7FE0,0010" D  ;
+ . . . I (VR="FL")!(VR="FD") D  ; show Floating Single or Double
+ . . . . N EXPONENT
+ . . . . S EXPONENT=+$P(VALUE,"E",2)
+ . . . . I EXPONENT>-4,EXPONENT<4 S VALUE=$J(VALUE,0,6-EXPONENT)
+ . . . . Q
+ . . . ; output the binary value after the decimal value in hexadecimal
+ . . . I "^OB^"[("^"_VR_"^") D  ; show 1-byte integers in hexadecimal
+ . . . . S VALUE=VALUE_" (0x"_$$HEX^MAGDDR0(VALUE,2)_")"
+ . . . . Q
+ . . . I "^SS^US^"[("^"_VR_"^") D  ; show 2-byte integers in hexadecimal
+ . . . . S VALUE=VALUE_" (0x"_$$HEX^MAGDDR0(VALUE,4)_")"
+ . . . . Q
+ . . . I "^SL^UL^"[("^"_VR_"^") D  ; show 4-byte integers in hexadecimal
+ . . . . S VALUE=VALUE_" (0x"_$$HEX^MAGDDR0(VALUE,8)_")"
+ . . . . Q
+ . . . Q
+ . . I VALUE?1"<".E1">" W VALUE ; <unknown> displayed without quotes
+ . . E  D  ; display the value with quotes and character wrap
+ . . . W """" F K=1:1:$L(VALUE) D  Q:STOP  ; output the data, one char at a time
+ . . . . I $X>SPACING("MAX_$X") D NEWLINE^MAGDDR2 Q:STOP
+ . . . . W $E(VALUE,K)
+ . . . . Q
+ . . . W """" ; values are displayed within quotes
+ . . . Q
+ . . Q
+ . Q
+ I TAG="0000,0002" D UID Q  ; Affected SOP Class UID
+ I TAG="0000,0003" D UID Q  ; Requested SOP Class UID
+ I TAG="0002,0002" D UID Q  ; Media Storage SOP Class UID
+ I TAG="0002,0010" D UID Q  ; Transfer Syntax UID
+ I TAG="0004,1510" D UID Q  ; Referenced SOP Class UID in File
+ I TAG="0004,1512" D UID Q  ; Referenced Transfer Syntax UID in File
+ I TAG="0008,0016" D UID Q  ; SOP Class UID
+ I TAG="0008,1150" D UID Q  ; Referenced SOP Class UID
+ Q
+ ;
+UID ; output the name of the UID
+ N L,TAB,UIDNAME
+ I VALUE="<unknown>" Q
+ S UIDNAME=$$GETNAME^MAGDUID2(VALUE),L=$L(UIDNAME)
+ I L>(SPACING("MAX_$X")+1-SPACING("VALUE")) D
+ . S TAB=SPACING("MAX_$X")+1-L
+ . Q
+ E  S TAB=SPACING("VALUE")
+ I ($X+5)>TAB D NEWLINE^MAGDDR2
+ W ?TAB,UIDNAME
+ Q
+
+
+

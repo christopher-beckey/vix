@@ -1,0 +1,882 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<deployment xmlns="http://xml.apache.org/axis/wsdd/" xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
+	<globalConfiguration>
+		<parameter name="sendMultiRefs" value="true" />
+		<parameter name="disablePrettyXML" value="true" />
+		<parameter name="adminKey" value="admin" />
+		<parameter name="attachments.Directory"
+			value="C:\Program Files\Apache Software Foundation\Tomcat 8.0\webapps\ImagingExchangeWebApp\WEB-INF\attachments" />
+		<parameter name="dotNetSoapEncFix" value="true" />
+		<parameter name="enableNamespacePrefixOptimization" value="false" />
+		<parameter name="sendXMLDeclaration" value="true" />
+		<parameter name="sendXsiTypes" value="true" />
+		<parameter name="attachments.implementation" value="org.apache.axis.attachments.AttachmentsImpl" />
+		<requestFlow>
+			<handler type="java:org.apache.axis.handlers.JWSHandler">
+				<parameter name="scope" value="session" />
+			</handler>
+			<handler type="java:org.apache.axis.handlers.JWSHandler">
+				<parameter name="scope" value="request" />
+				<parameter name="extension" value=".jwr" />
+			</handler>
+		</requestFlow>
+	</globalConfiguration>
+	<handler name="LocalResponder" type="java:org.apache.axis.transport.local.LocalResponder" />
+	<handler name="URLMapper" type="java:org.apache.axis.handlers.http.URLMapper" />
+	<handler name="Authenticate" type="java:org.apache.axis.handlers.SimpleAuthenticationHandler" />
+	<service name="AdminService" provider="java:MSG">
+		<parameter name="allowedMethods" value="AdminService" />
+		<parameter name="enableRemoteAdmin" value="false" />
+		<parameter name="className" value="org.apache.axis.utils.Admin" />
+		<namespace>http://xml.apache.org/axis/wsdd/</namespace>
+	</service>
+	<service name="Version" provider="java:RPC">
+		<parameter name="allowedMethods" value="getVersion" />
+		<parameter name="className" value="org.apache.axis.Version" />
+	</service>
+  
+  <!-- Exchange Webservice -->
+  <service name="ImageMetadata.V1" provider="java:RPC" style="wrapped" use="literal">
+      <parameter name="wsdlTargetNamespace" value="urn:v1.soap.webservices.exchange.imaging.med.va.gov"/>
+      <parameter name="wsdlServiceElement" value="ImageMetadataService"/>
+      <parameter name="schemaQualified" value="urn:v1.types.soap.webservices.exchange.imaging.med.va.gov"/>
+      <parameter name="wsdlServicePort" value="ImageMetadata.V1"/>
+      <parameter name="className" value="gov.va.med.imaging.exchange.webservices.soap.v1.ImageMetadataSoapBindingSkeleton"/>
+      <parameter name="wsdlPortType" value="ImageMetadata"/>
+      <parameter name="typeMappingVersion" value="1.2"/>
+      <parameter name="allowedMethods" value="*"/>
+
+      <typeMapping
+        xmlns:ns="urn:v1.types.soap.webservices.exchange.imaging.med.va.gov"
+        qname="ns:SeriesIdentifierType"
+        type="java:java.lang.String"
+        serializer="org.apache.axis.encoding.ser.SimpleSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.SimpleDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="urn:v1.types.soap.webservices.exchange.imaging.med.va.gov"
+        qname="ns:DicomDateType"
+        type="java:java.lang.String"
+        serializer="org.apache.axis.encoding.ser.SimpleSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.SimpleDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="urn:v1.types.soap.webservices.exchange.imaging.med.va.gov"
+        qname="ns:RequestorType"
+        type="java:gov.va.med.imaging.exchange.webservices.soap.types.v1.RequestorType"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="urn:v1.types.soap.webservices.exchange.imaging.med.va.gov"
+        qname="ns:DatasourceIdentifierType"
+        type="java:java.lang.String"
+        serializer="org.apache.axis.encoding.ser.SimpleSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.SimpleDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="urn:v1.types.soap.webservices.exchange.imaging.med.va.gov"
+        qname="ns:>RequestorType>username"
+        type="java:java.lang.String"
+        serializer="org.apache.axis.encoding.ser.SimpleSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.SimpleDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="urn:v1.types.soap.webservices.exchange.imaging.med.va.gov"
+        qname="ns:>RequestorType>purpose-of-use"
+        type="java:gov.va.med.imaging.exchange.webservices.soap.types.v1.RequestorTypePurposeOfUse"
+        serializer="org.apache.axis.encoding.ser.EnumSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.EnumDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="urn:v1.types.soap.webservices.exchange.imaging.med.va.gov"
+        qname="ns:>RequestorType>facility-name"
+        type="java:java.lang.String"
+        serializer="org.apache.axis.encoding.ser.SimpleSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.SimpleDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="urn:v1.types.soap.webservices.exchange.imaging.med.va.gov"
+        qname="ns:>StudyType>specialty-description"
+        type="java:java.lang.String"
+        serializer="org.apache.axis.encoding.ser.SimpleSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.SimpleDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="urn:v1.types.soap.webservices.exchange.imaging.med.va.gov"
+        qname="ns:InstanceType"
+        type="java:gov.va.med.imaging.exchange.webservices.soap.types.v1.InstanceType"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="urn:v1.types.soap.webservices.exchange.imaging.med.va.gov"
+        qname="ns:FilterType"
+        type="java:gov.va.med.imaging.exchange.webservices.soap.types.v1.FilterType"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="urn:v1.types.soap.webservices.exchange.imaging.med.va.gov"
+        qname="ns:>StudyType>site-name"
+        type="java:java.lang.String"
+        serializer="org.apache.axis.encoding.ser.SimpleSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.SimpleDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="urn:v1.types.soap.webservices.exchange.imaging.med.va.gov"
+        qname="ns:ImageUrnType"
+        type="java:java.lang.String"
+        serializer="org.apache.axis.encoding.ser.SimpleSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.SimpleDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="urn:v1.types.soap.webservices.exchange.imaging.med.va.gov"
+        qname="ns:StudyType"
+        type="java:gov.va.med.imaging.exchange.webservices.soap.types.v1.StudyType"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="urn:v1.types.soap.webservices.exchange.imaging.med.va.gov"
+        qname="ns:>SeriesType>description"
+        type="java:java.lang.String"
+        serializer="org.apache.axis.encoding.ser.SimpleSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.SimpleDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="urn:v1.types.soap.webservices.exchange.imaging.med.va.gov"
+        qname="ns:TransactionIdentifierType"
+        type="java:java.lang.String"
+        serializer="org.apache.axis.encoding.ser.SimpleSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.SimpleDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="urn:v1.types.soap.webservices.exchange.imaging.med.va.gov"
+        qname="ns:>SeriesType>component-instances"
+        type="java:gov.va.med.imaging.exchange.webservices.soap.types.v1.SeriesTypeComponentInstances"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="urn:v1.types.soap.webservices.exchange.imaging.med.va.gov"
+        qname="ns:>StudyType>procedure-description"
+        type="java:java.lang.String"
+        serializer="org.apache.axis.encoding.ser.SimpleSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.SimpleDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="urn:v1.types.soap.webservices.exchange.imaging.med.va.gov"
+        qname="ns:>StudyType>site-abbreviation"
+        type="java:java.lang.String"
+        serializer="org.apache.axis.encoding.ser.SimpleSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.SimpleDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="urn:v1.types.soap.webservices.exchange.imaging.med.va.gov"
+        qname="ns:>RequestorType>facility-id"
+        type="java:java.lang.String"
+        serializer="org.apache.axis.encoding.ser.SimpleSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.SimpleDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="urn:v1.types.soap.webservices.exchange.imaging.med.va.gov"
+        qname="ns:SeriesType"
+        type="java:gov.va.med.imaging.exchange.webservices.soap.types.v1.SeriesType"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="urn:v1.types.soap.webservices.exchange.imaging.med.va.gov"
+        qname="ns:>StudyType>component-series"
+        type="java:gov.va.med.imaging.exchange.webservices.soap.types.v1.StudyTypeComponentSeries"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="urn:v1.types.soap.webservices.exchange.imaging.med.va.gov"
+        qname="ns:>StudyType>patient-name"
+        type="java:java.lang.String"
+        serializer="org.apache.axis.encoding.ser.SimpleSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.SimpleDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="urn:v1.types.soap.webservices.exchange.imaging.med.va.gov"
+        qname="ns:>StudyType>site-number"
+        type="java:java.lang.String"
+        serializer="org.apache.axis.encoding.ser.SimpleSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.SimpleDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="urn:v1.types.soap.webservices.exchange.imaging.med.va.gov"
+        qname="ns:StudyIdentifierType"
+        type="java:java.lang.String"
+        serializer="org.apache.axis.encoding.ser.SimpleSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.SimpleDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="urn:v1.types.soap.webservices.exchange.imaging.med.va.gov"
+        qname="ns:DicomUidType"
+        type="java:java.lang.String"
+        serializer="org.apache.axis.encoding.ser.SimpleSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.SimpleDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="urn:v1.types.soap.webservices.exchange.imaging.med.va.gov"
+        qname="ns:>StudyType>description"
+        type="java:java.lang.String"
+        serializer="org.apache.axis.encoding.ser.SimpleSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.SimpleDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="urn:v1.types.soap.webservices.exchange.imaging.med.va.gov"
+        qname="ns:SocialSecurityNumberType"
+        type="java:java.lang.String"
+        serializer="org.apache.axis.encoding.ser.SimpleSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.SimpleDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="urn:v1.types.soap.webservices.exchange.imaging.med.va.gov"
+        qname="ns:PatientIdentifierType"
+        type="java:java.lang.String"
+        serializer="org.apache.axis.encoding.ser.SimpleSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.SimpleDeserializerFactory"
+        encodingStyle=""
+      />
+  </service>  
+  
+  <service name="ImageMetadata.V2" provider="java:RPC" style="wrapped" use="literal">
+      <parameter name="wsdlTargetNamespace" value="urn:v2.soap.webservices.exchange.imaging.med.va.gov"/>
+      <parameter name="wsdlServiceElement" value="ImageMetadataService"/>
+      <parameter name="schemaQualified" value="urn:v2.types.soap.webservices.exchange.imaging.med.va.gov"/>
+      <parameter name="wsdlServicePort" value="ImageMetadata.V2"/>
+      <parameter name="className" value="gov.va.med.imaging.exchange.webservices.soap.v2.ImageMetadataSoapBindingSkeleton"/>
+      <parameter name="wsdlPortType" value="ImageMetadata"/>
+      <parameter name="typeMappingVersion" value="1.2"/>
+      <parameter name="allowedMethods" value="*"/>
+
+      <typeMapping
+        xmlns:ns="urn:v2.types.soap.webservices.exchange.imaging.med.va.gov"
+        qname="ns:InstanceType"
+        type="java:gov.va.med.imaging.exchange.webservices.soap.types.v2.InstanceType"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="urn:v2.types.soap.webservices.exchange.imaging.med.va.gov"
+        qname="ns:>RequestorType>facility-name"
+        type="java:java.lang.String"
+        serializer="org.apache.axis.encoding.ser.SimpleSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.SimpleDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="urn:v2.types.soap.webservices.exchange.imaging.med.va.gov"
+        qname="ns:>StudyType>procedure-description"
+        type="java:java.lang.String"
+        serializer="org.apache.axis.encoding.ser.SimpleSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.SimpleDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="urn:v2.types.soap.webservices.exchange.imaging.med.va.gov"
+        qname="ns:StudyType"
+        type="java:gov.va.med.imaging.exchange.webservices.soap.types.v2.StudyType"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="urn:v2.types.soap.webservices.exchange.imaging.med.va.gov"
+        qname="ns:>ReportType>site-abbreviation"
+        type="java:java.lang.String"
+        serializer="org.apache.axis.encoding.ser.SimpleSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.SimpleDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="urn:v2.types.soap.webservices.exchange.imaging.med.va.gov"
+        qname="ns:SeverityType"
+        type="java:gov.va.med.imaging.exchange.webservices.soap.types.v2.SeverityType"
+        serializer="org.apache.axis.encoding.ser.EnumSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.EnumDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="urn:v2.types.soap.webservices.exchange.imaging.med.va.gov"
+        qname="ns:DicomDateType"
+        type="java:java.lang.String"
+        serializer="org.apache.axis.encoding.ser.SimpleSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.SimpleDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="urn:v2.types.soap.webservices.exchange.imaging.med.va.gov"
+        qname="ns:DatasourceIdentifierType"
+        type="java:java.lang.String"
+        serializer="org.apache.axis.encoding.ser.SimpleSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.SimpleDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="urn:v2.types.soap.webservices.exchange.imaging.med.va.gov"
+        qname="ns:RequestedSiteNumberType"
+        type="java:java.lang.String"
+        serializer="org.apache.axis.encoding.ser.SimpleSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.SimpleDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="urn:v2.types.soap.webservices.exchange.imaging.med.va.gov"
+        qname="ns:TransactionIdentifierType"
+        type="java:java.lang.String"
+        serializer="org.apache.axis.encoding.ser.SimpleSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.SimpleDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="urn:v2.types.soap.webservices.exchange.imaging.med.va.gov"
+        qname="ns:StudyIdentifierType"
+        type="java:java.lang.String"
+        serializer="org.apache.axis.encoding.ser.SimpleSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.SimpleDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="urn:v2.types.soap.webservices.exchange.imaging.med.va.gov"
+        qname="ns:FilterType"
+        type="java:gov.va.med.imaging.exchange.webservices.soap.types.v2.FilterType"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="urn:v2.types.soap.webservices.exchange.imaging.med.va.gov"
+        qname="ns:RequestorType"
+        type="java:gov.va.med.imaging.exchange.webservices.soap.types.v2.RequestorType"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="urn:v2.types.soap.webservices.exchange.imaging.med.va.gov"
+        qname="ns:>RequestorType>purpose-of-use"
+        type="java:gov.va.med.imaging.exchange.webservices.soap.types.v2.RequestorTypePurposeOfUse"
+        serializer="org.apache.axis.encoding.ser.EnumSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.EnumDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="urn:v2.types.soap.webservices.exchange.imaging.med.va.gov"
+        qname="ns:>ReportType>site-number"
+        type="java:java.lang.String"
+        serializer="org.apache.axis.encoding.ser.SimpleSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.SimpleDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="urn:v2.types.soap.webservices.exchange.imaging.med.va.gov"
+        qname="ns:ModalityType"
+        type="java:java.lang.String"
+        serializer="org.apache.axis.encoding.ser.SimpleSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.SimpleDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="urn:v2.types.soap.webservices.exchange.imaging.med.va.gov"
+        qname="ns:DicomUidType"
+        type="java:java.lang.String"
+        serializer="org.apache.axis.encoding.ser.SimpleSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.SimpleDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="urn:v2.types.soap.webservices.exchange.imaging.med.va.gov"
+        qname="ns:>StudyType>description"
+        type="java:java.lang.String"
+        serializer="org.apache.axis.encoding.ser.SimpleSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.SimpleDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="urn:v2.types.soap.webservices.exchange.imaging.med.va.gov"
+        qname="ns:>ReportType>procedure-codes"
+        type="java:gov.va.med.imaging.exchange.webservices.soap.types.v2.ReportTypeProcedureCodes"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="urn:v2.types.soap.webservices.exchange.imaging.med.va.gov"
+        qname="ns:ErrorResultType"
+        type="java:gov.va.med.imaging.exchange.webservices.soap.types.v2.ErrorResultType"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="urn:v2.types.soap.webservices.exchange.imaging.med.va.gov"
+        qname="ns:>RequestorType>username"
+        type="java:java.lang.String"
+        serializer="org.apache.axis.encoding.ser.SimpleSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.SimpleDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="urn:v2.types.soap.webservices.exchange.imaging.med.va.gov"
+        qname="ns:>ReportType>site-name"
+        type="java:java.lang.String"
+        serializer="org.apache.axis.encoding.ser.SimpleSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.SimpleDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="urn:v2.types.soap.webservices.exchange.imaging.med.va.gov"
+        qname="ns:>StudyType>patient-name"
+        type="java:java.lang.String"
+        serializer="org.apache.axis.encoding.ser.SimpleSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.SimpleDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="urn:v2.types.soap.webservices.exchange.imaging.med.va.gov"
+        qname="ns:>StudyType>procedure-codes"
+        type="java:gov.va.med.imaging.exchange.webservices.soap.types.v2.StudyTypeProcedureCodes"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="urn:v2.types.soap.webservices.exchange.imaging.med.va.gov"
+        qname="ns:>StudyType>site-abbreviation"
+        type="java:java.lang.String"
+        serializer="org.apache.axis.encoding.ser.SimpleSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.SimpleDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="urn:v2.types.soap.webservices.exchange.imaging.med.va.gov"
+        qname="ns:>StudyType>site-name"
+        type="java:java.lang.String"
+        serializer="org.apache.axis.encoding.ser.SimpleSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.SimpleDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="urn:v2.types.soap.webservices.exchange.imaging.med.va.gov"
+        qname="ns:SocialSecurityNumberType"
+        type="java:java.lang.String"
+        serializer="org.apache.axis.encoding.ser.SimpleSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.SimpleDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="urn:v2.types.soap.webservices.exchange.imaging.med.va.gov"
+        qname="ns:ReportType"
+        type="java:gov.va.med.imaging.exchange.webservices.soap.types.v2.ReportType"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="urn:v2.types.soap.webservices.exchange.imaging.med.va.gov"
+        qname="ns:ImageUrnType"
+        type="java:java.lang.String"
+        serializer="org.apache.axis.encoding.ser.SimpleSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.SimpleDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="urn:v2.types.soap.webservices.exchange.imaging.med.va.gov"
+        qname="ns:>StudyType>component-series"
+        type="java:gov.va.med.imaging.exchange.webservices.soap.types.v2.StudyTypeComponentSeries"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="urn:v2.types.soap.webservices.exchange.imaging.med.va.gov"
+        qname="ns:CptCodeType"
+        type="java:java.lang.String"
+        serializer="org.apache.axis.encoding.ser.SimpleSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.SimpleDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="urn:v2.types.soap.webservices.exchange.imaging.med.va.gov"
+        qname="ns:SeriesIdentifierType"
+        type="java:java.lang.String"
+        serializer="org.apache.axis.encoding.ser.SimpleSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.SimpleDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="urn:v2.types.soap.webservices.exchange.imaging.med.va.gov"
+        qname="ns:ModalitiesType"
+        type="java:gov.va.med.imaging.exchange.webservices.soap.types.v2.ModalitiesType"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="urn:v2.types.soap.webservices.exchange.imaging.med.va.gov"
+        qname="ns:SeriesType"
+        type="java:gov.va.med.imaging.exchange.webservices.soap.types.v2.SeriesType"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="urn:v2.types.soap.webservices.exchange.imaging.med.va.gov"
+        qname="ns:ErrorCodeType"
+        type="java:gov.va.med.imaging.exchange.webservices.soap.types.v2.ErrorCodeType"
+        serializer="org.apache.axis.encoding.ser.EnumSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.EnumDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="urn:v2.types.soap.webservices.exchange.imaging.med.va.gov"
+        qname="ns:StudyListResponseType"
+        type="java:gov.va.med.imaging.exchange.webservices.soap.types.v2.StudyListResponseType"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="urn:v2.types.soap.webservices.exchange.imaging.med.va.gov"
+        qname="ns:>StudyType>site-number"
+        type="java:java.lang.String"
+        serializer="org.apache.axis.encoding.ser.SimpleSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.SimpleDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="urn:v2.types.soap.webservices.exchange.imaging.med.va.gov"
+        qname="ns:>SeriesType>description"
+        type="java:java.lang.String"
+        serializer="org.apache.axis.encoding.ser.SimpleSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.SimpleDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="urn:v2.types.soap.webservices.exchange.imaging.med.va.gov"
+        qname="ns:PatientIdentifierType"
+        type="java:java.lang.String"
+        serializer="org.apache.axis.encoding.ser.SimpleSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.SimpleDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="urn:v2.types.soap.webservices.exchange.imaging.med.va.gov"
+        qname="ns:LocationType"
+        type="java:java.lang.String"
+        serializer="org.apache.axis.encoding.ser.SimpleSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.SimpleDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="urn:v2.types.soap.webservices.exchange.imaging.med.va.gov"
+        qname="ns:>RequestorType>facility-id"
+        type="java:java.lang.String"
+        serializer="org.apache.axis.encoding.ser.SimpleSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.SimpleDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="urn:v2.types.soap.webservices.exchange.imaging.med.va.gov"
+        qname="ns:CodeContextType"
+        type="java:java.lang.String"
+        serializer="org.apache.axis.encoding.ser.SimpleSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.SimpleDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="urn:v2.types.soap.webservices.exchange.imaging.med.va.gov"
+        qname="ns:>SeriesType>component-instances"
+        type="java:gov.va.med.imaging.exchange.webservices.soap.types.v2.SeriesTypeComponentInstances"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="urn:v2.types.soap.webservices.exchange.imaging.med.va.gov"
+        qname="ns:>StudyType>specialty-description"
+        type="java:java.lang.String"
+        serializer="org.apache.axis.encoding.ser.SimpleSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.SimpleDeserializerFactory"
+        encodingStyle=""
+      />
+  </service>
+	<!-- 
+	Version 0 WebServices 
+	-->
+	<!-- COPY from generated deploy.wsdd to here -->
+	<!-- ADD <parameter name="scope" value="application"/> for multi-threading -->
+	<!-- 
+	<service name="ImageMetadata" provider="java:RPC" style="wrapped" use="literal">
+		<parameter name="wsdlTargetNamespace" value="urn:soap.webservices.exchange.imaging.med.va.gov" />
+		<parameter name="wsdlServiceElement" value="ImageMetadataService" />
+		<parameter name="schemaQualified" value="urn:types.soap.webservices.exchange.imaging.med.va.gov" />
+		<parameter name="wsdlServicePort" value="ImageMetadata" />
+		<parameter name="className"
+			value="gov.va.med.imaging.exchange.webservices.soap.ImageMetadataSoapBindingSkeleton" />
+		<parameter name="wsdlPortType" value="ImageMetadata" />
+		<parameter name="typeMappingVersion" value="1.2" />
+		<parameter name="allowedMethods" value="*" />
+
+		<typeMapping xmlns:ns="urn:types.soap.webservices.exchange.imaging.med.va.gov"
+			qname="ns:>SeriesType>description" type="java:java.lang.String"
+			serializer="org.apache.axis.encoding.ser.SimpleSerializerFactory"
+			deserializer="org.apache.axis.encoding.ser.SimpleDeserializerFactory" encodingStyle="" />
+		<typeMapping xmlns:ns="urn:types.soap.webservices.exchange.imaging.med.va.gov"
+			qname="ns:TransactionIdentifierType" type="java:java.lang.String"
+			serializer="org.apache.axis.encoding.ser.SimpleSerializerFactory"
+			deserializer="org.apache.axis.encoding.ser.SimpleDeserializerFactory" encodingStyle="" />
+		<typeMapping xmlns:ns="urn:types.soap.webservices.exchange.imaging.med.va.gov" qname="ns:InstanceIdentifierType"
+			type="java:java.lang.String" serializer="org.apache.axis.encoding.ser.SimpleSerializerFactory"
+			deserializer="org.apache.axis.encoding.ser.SimpleDeserializerFactory" encodingStyle="" />
+		<typeMapping xmlns:ns="urn:types.soap.webservices.exchange.imaging.med.va.gov"
+			qname="ns:>StudyType>component-series"
+			type="java:gov.va.med.imaging.exchange.webservices.soap.types.StudyTypeComponentSeries"
+			serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+			deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="" />
+		<typeMapping xmlns:ns="urn:types.soap.webservices.exchange.imaging.med.va.gov"
+			qname="ns:>RequestorType>username" type="java:java.lang.String"
+			serializer="org.apache.axis.encoding.ser.SimpleSerializerFactory"
+			deserializer="org.apache.axis.encoding.ser.SimpleDeserializerFactory" encodingStyle="" />
+		<typeMapping xmlns:ns="urn:types.soap.webservices.exchange.imaging.med.va.gov" qname="ns:InstanceType"
+			type="java:gov.va.med.imaging.exchange.webservices.soap.types.InstanceType"
+			serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+			deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="" />
+		<typeMapping xmlns:ns="urn:types.soap.webservices.exchange.imaging.med.va.gov" qname="ns:>StudyType>site-number"
+			type="java:java.lang.String" serializer="org.apache.axis.encoding.ser.SimpleSerializerFactory"
+			deserializer="org.apache.axis.encoding.ser.SimpleDeserializerFactory" encodingStyle="" />
+		<typeMapping xmlns:ns="urn:types.soap.webservices.exchange.imaging.med.va.gov"
+			qname="ns:>SeriesType>component-instances"
+			type="java:gov.va.med.imaging.exchange.webservices.soap.types.SeriesTypeComponentInstances"
+			serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+			deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="" />
+		<typeMapping xmlns:ns="urn:types.soap.webservices.exchange.imaging.med.va.gov"
+			qname="ns:>StudyType>procedure-description" type="java:java.lang.String"
+			serializer="org.apache.axis.encoding.ser.SimpleSerializerFactory"
+			deserializer="org.apache.axis.encoding.ser.SimpleDeserializerFactory" encodingStyle="" />
+		<typeMapping xmlns:ns="urn:types.soap.webservices.exchange.imaging.med.va.gov" qname="ns:StudyIdentifierType"
+			type="java:java.lang.String" serializer="org.apache.axis.encoding.ser.SimpleSerializerFactory"
+			deserializer="org.apache.axis.encoding.ser.SimpleDeserializerFactory" encodingStyle="" />
+		<typeMapping xmlns:ns="urn:types.soap.webservices.exchange.imaging.med.va.gov"
+			qname="ns:>StudyType>site-abbreviation" type="java:java.lang.String"
+			serializer="org.apache.axis.encoding.ser.SimpleSerializerFactory"
+			deserializer="org.apache.axis.encoding.ser.SimpleDeserializerFactory" encodingStyle="" />
+		<typeMapping xmlns:ns="urn:types.soap.webservices.exchange.imaging.med.va.gov"
+			qname="ns:>RequestorType>facility-id" type="java:java.lang.String"
+			serializer="org.apache.axis.encoding.ser.SimpleSerializerFactory"
+			deserializer="org.apache.axis.encoding.ser.SimpleDeserializerFactory" encodingStyle="" />
+		<typeMapping xmlns:ns="urn:types.soap.webservices.exchange.imaging.med.va.gov" qname="ns:DicomUidType"
+			type="java:java.lang.String" serializer="org.apache.axis.encoding.ser.SimpleSerializerFactory"
+			deserializer="org.apache.axis.encoding.ser.SimpleDeserializerFactory" encodingStyle="" />
+		<typeMapping xmlns:ns="urn:types.soap.webservices.exchange.imaging.med.va.gov"
+			qname="ns:SocialSecurityNumberType" type="java:java.lang.String"
+			serializer="org.apache.axis.encoding.ser.SimpleSerializerFactory"
+			deserializer="org.apache.axis.encoding.ser.SimpleDeserializerFactory" encodingStyle="" />
+		<typeMapping xmlns:ns="urn:types.soap.webservices.exchange.imaging.med.va.gov" qname="ns:>StudyType>site-name"
+			type="java:java.lang.String" serializer="org.apache.axis.encoding.ser.SimpleSerializerFactory"
+			deserializer="org.apache.axis.encoding.ser.SimpleDeserializerFactory" encodingStyle="" />
+		<typeMapping xmlns:ns="urn:types.soap.webservices.exchange.imaging.med.va.gov"
+			qname="ns:>RequestorType>purpose-of-use"
+			type="java:gov.va.med.imaging.exchange.webservices.soap.types.RequestorTypePurposeOfUse"
+			serializer="org.apache.axis.encoding.ser.EnumSerializerFactory"
+			deserializer="org.apache.axis.encoding.ser.EnumDeserializerFactory" encodingStyle="" />
+		<typeMapping xmlns:ns="urn:types.soap.webservices.exchange.imaging.med.va.gov" qname="ns:FilterType"
+			type="java:gov.va.med.imaging.exchange.webservices.soap.types.FilterType"
+			serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+			deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="" />
+		<typeMapping xmlns:ns="urn:types.soap.webservices.exchange.imaging.med.va.gov"
+			qname="ns:>StudyType>patient-name" type="java:java.lang.String"
+			serializer="org.apache.axis.encoding.ser.SimpleSerializerFactory"
+			deserializer="org.apache.axis.encoding.ser.SimpleDeserializerFactory" encodingStyle="" />
+		<typeMapping xmlns:ns="urn:types.soap.webservices.exchange.imaging.med.va.gov" qname="ns:StudyType"
+			type="java:gov.va.med.imaging.exchange.webservices.soap.types.StudyType"
+			serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+			deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="" />
+		<typeMapping xmlns:ns="urn:types.soap.webservices.exchange.imaging.med.va.gov" qname="ns:PatientIdentifierType"
+			type="java:java.lang.String" serializer="org.apache.axis.encoding.ser.SimpleSerializerFactory"
+			deserializer="org.apache.axis.encoding.ser.SimpleDeserializerFactory" encodingStyle="" />
+		<typeMapping xmlns:ns="urn:types.soap.webservices.exchange.imaging.med.va.gov"
+			qname="ns:>StudyType>specialty-description" type="java:java.lang.String"
+			serializer="org.apache.axis.encoding.ser.SimpleSerializerFactory"
+			deserializer="org.apache.axis.encoding.ser.SimpleDeserializerFactory" encodingStyle="" />
+		<typeMapping xmlns:ns="urn:types.soap.webservices.exchange.imaging.med.va.gov"
+			qname="ns:>RequestorType>facility-name" type="java:java.lang.String"
+			serializer="org.apache.axis.encoding.ser.SimpleSerializerFactory"
+			deserializer="org.apache.axis.encoding.ser.SimpleDeserializerFactory" encodingStyle="" />
+		<typeMapping xmlns:ns="urn:types.soap.webservices.exchange.imaging.med.va.gov" qname="ns:>StudyType>description"
+			type="java:java.lang.String" serializer="org.apache.axis.encoding.ser.SimpleSerializerFactory"
+			deserializer="org.apache.axis.encoding.ser.SimpleDeserializerFactory" encodingStyle="" />
+		<typeMapping xmlns:ns="urn:types.soap.webservices.exchange.imaging.med.va.gov" qname="ns:DicomDateType"
+			type="java:java.lang.String" serializer="org.apache.axis.encoding.ser.SimpleSerializerFactory"
+			deserializer="org.apache.axis.encoding.ser.SimpleDeserializerFactory" encodingStyle="" />
+		<typeMapping xmlns:ns="urn:types.soap.webservices.exchange.imaging.med.va.gov" qname="ns:SeriesType"
+			type="java:gov.va.med.imaging.exchange.webservices.soap.types.SeriesType"
+			serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+			deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="" />
+		<typeMapping xmlns:ns="urn:types.soap.webservices.exchange.imaging.med.va.gov" qname="ns:RequestorType"
+			type="java:gov.va.med.imaging.exchange.webservices.soap.types.RequestorType"
+			serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+			deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="" />
+		<typeMapping xmlns:ns="urn:types.soap.webservices.exchange.imaging.med.va.gov" qname="ns:SeriesIdentifierType"
+			type="java:java.lang.String" serializer="org.apache.axis.encoding.ser.SimpleSerializerFactory"
+			deserializer="org.apache.axis.encoding.ser.SimpleDeserializerFactory" encodingStyle="" />
+	</service>
+	 -->
+	<!-- Image Federation -->
+	<!-- 
+	<service name="ImageMetadataFederation" provider="java:RPC" style="wrapped" use="literal">
+		<parameter name="wsdlTargetNamespace" value="urn:soap.webservices.federation.imaging.med.va.gov" />
+		<parameter name="wsdlServiceElement" value="ImageMetadataFederationService" />
+		<parameter name="schemaQualified" value="urn:intf.webservices.federation.imaging.med.va.gov" />
+		<parameter name="schemaUnqualified" value="urn:types.webservices.imaging.med.va.gov" />
+		<parameter name="wsdlServicePort" value="ImageMetadataFederation" />
+		<parameter name="className"
+			value="gov.va.med.imaging.federation.webservices.soap.ImageMetadataFederationSoapBindingSkeleton" />
+		<parameter name="wsdlPortType" value="ImageFederationMetadata" />
+		<parameter name="typeMappingVersion" value="1.2" />
+		<parameter name="allowedMethods" value="*" />
+
+		<typeMapping xmlns:ns="urn:types.webservices.imaging.med.va.gov" qname="ns:SocialSecurityNumberType"
+			type="java:java.lang.String" serializer="org.apache.axis.encoding.ser.SimpleSerializerFactory"
+			deserializer="org.apache.axis.encoding.ser.SimpleDeserializerFactory" encodingStyle="" />
+		<typeMapping xmlns:ns="urn:types.webservices.imaging.med.va.gov" qname="ns:SeriesIdentifierType"
+			type="java:java.lang.String" serializer="org.apache.axis.encoding.ser.SimpleSerializerFactory"
+			deserializer="org.apache.axis.encoding.ser.SimpleDeserializerFactory" encodingStyle="" />
+		<typeMapping xmlns:ns="urn:types.webservices.imaging.med.va.gov" qname="ns:TransactionIdentifierType"
+			type="java:java.lang.String" serializer="org.apache.axis.encoding.ser.SimpleSerializerFactory"
+			deserializer="org.apache.axis.encoding.ser.SimpleDeserializerFactory" encodingStyle="" />
+		<typeMapping xmlns:ns="urn:types.webservices.imaging.med.va.gov" qname="ns:>StudyType>specialty-description"
+			type="java:java.lang.String" serializer="org.apache.axis.encoding.ser.SimpleSerializerFactory"
+			deserializer="org.apache.axis.encoding.ser.SimpleDeserializerFactory" encodingStyle="" />
+		<typeMapping xmlns:ns="urn:types.webservices.imaging.med.va.gov" qname="ns:StudyIdentifierType"
+			type="java:java.lang.String" serializer="org.apache.axis.encoding.ser.SimpleSerializerFactory"
+			deserializer="org.apache.axis.encoding.ser.SimpleDeserializerFactory" encodingStyle="" />
+		<typeMapping xmlns:ns="urn:types.webservices.imaging.med.va.gov" qname="ns:InstanceType"
+			type="java:gov.va.med.imaging.webservices.types.InstanceType"
+			serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+			deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="" />
+		<typeMapping xmlns:ns="urn:types.webservices.imaging.med.va.gov" qname="ns:RequestorType"
+			type="java:gov.va.med.imaging.webservices.types.RequestorType"
+			serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+			deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="" />
+		<typeMapping xmlns:ns="urn:types.webservices.imaging.med.va.gov" qname="ns:>StudyType>procedure-description"
+			type="java:java.lang.String" serializer="org.apache.axis.encoding.ser.SimpleSerializerFactory"
+			deserializer="org.apache.axis.encoding.ser.SimpleDeserializerFactory" encodingStyle="" />
+		<arrayMapping xmlns:ns="urn:types.webservices.imaging.med.va.gov" qname="ns:>StudyType>component-series"
+			type="java:gov.va.med.imaging.webservices.types.SeriesType[]" innerType="cmp-ns:SeriesType"
+			xmlns:cmp-ns="urn:types.webservices.imaging.med.va.gov" encodingStyle="" />
+		<typeMapping xmlns:ns="urn:types.webservices.imaging.med.va.gov" qname="ns:>RequestorType>username"
+			type="java:java.lang.String" serializer="org.apache.axis.encoding.ser.SimpleSerializerFactory"
+			deserializer="org.apache.axis.encoding.ser.SimpleDeserializerFactory" encodingStyle="" />
+		<typeMapping xmlns:ns="urn:types.webservices.imaging.med.va.gov" qname="ns:FilterType"
+			type="java:gov.va.med.imaging.webservices.types.FilterType"
+			serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+			deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="" />
+		<typeMapping xmlns:ns="urn:types.webservices.imaging.med.va.gov" qname="ns:InstanceIdentifierType"
+			type="java:java.lang.String" serializer="org.apache.axis.encoding.ser.SimpleSerializerFactory"
+			deserializer="org.apache.axis.encoding.ser.SimpleDeserializerFactory" encodingStyle="" />
+		<typeMapping xmlns:ns="urn:types.webservices.imaging.med.va.gov" qname="ns:>RequestorType>purpose-of-use"
+			type="java:gov.va.med.imaging.webservices.types.RequestorTypePurposeOfUse"
+			serializer="org.apache.axis.encoding.ser.EnumSerializerFactory"
+			deserializer="org.apache.axis.encoding.ser.EnumDeserializerFactory" encodingStyle="" />
+		<typeMapping xmlns:ns="urn:types.webservices.imaging.med.va.gov" qname="ns:>StudyType>site-name"
+			type="java:java.lang.String" serializer="org.apache.axis.encoding.ser.SimpleSerializerFactory"
+			deserializer="org.apache.axis.encoding.ser.SimpleDeserializerFactory" encodingStyle="" />
+		<typeMapping xmlns:ns="urn:types.webservices.imaging.med.va.gov" qname="ns:>RequestorType>facility-name"
+			type="java:java.lang.String" serializer="org.apache.axis.encoding.ser.SimpleSerializerFactory"
+			deserializer="org.apache.axis.encoding.ser.SimpleDeserializerFactory" encodingStyle="" />
+		<typeMapping xmlns:ns="urn:types.webservices.imaging.med.va.gov" qname="ns:>SeriesType>description"
+			type="java:java.lang.String" serializer="org.apache.axis.encoding.ser.SimpleSerializerFactory"
+			deserializer="org.apache.axis.encoding.ser.SimpleDeserializerFactory" encodingStyle="" />
+		<typeMapping xmlns:ns="urn:types.webservices.imaging.med.va.gov" qname="ns:SeriesType"
+			type="java:gov.va.med.imaging.webservices.types.SeriesType"
+			serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+			deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="" />
+		<typeMapping xmlns:ns="urn:types.webservices.imaging.med.va.gov" qname="ns:>StudyType>site-number"
+			type="java:java.lang.String" serializer="org.apache.axis.encoding.ser.SimpleSerializerFactory"
+			deserializer="org.apache.axis.encoding.ser.SimpleDeserializerFactory" encodingStyle="" />
+		<typeMapping xmlns:ns="urn:types.webservices.imaging.med.va.gov" qname="ns:>StudyType>description"
+			type="java:java.lang.String" serializer="org.apache.axis.encoding.ser.SimpleSerializerFactory"
+			deserializer="org.apache.axis.encoding.ser.SimpleDeserializerFactory" encodingStyle="" />
+		<typeMapping xmlns:ns="urn:types.webservices.imaging.med.va.gov" qname="ns:>StudyType>patient-name"
+			type="java:java.lang.String" serializer="org.apache.axis.encoding.ser.SimpleSerializerFactory"
+			deserializer="org.apache.axis.encoding.ser.SimpleDeserializerFactory" encodingStyle="" />
+		<typeMapping xmlns:ns="urn:types.webservices.imaging.med.va.gov" qname="ns:DicomDateType"
+			type="java:java.lang.String" serializer="org.apache.axis.encoding.ser.SimpleSerializerFactory"
+			deserializer="org.apache.axis.encoding.ser.SimpleDeserializerFactory" encodingStyle="" />
+		<typeMapping xmlns:ns="urn:types.webservices.imaging.med.va.gov" qname="ns:DicomUidType"
+			type="java:java.lang.String" serializer="org.apache.axis.encoding.ser.SimpleSerializerFactory"
+			deserializer="org.apache.axis.encoding.ser.SimpleDeserializerFactory" encodingStyle="" />
+		<arrayMapping xmlns:ns="urn:types.webservices.imaging.med.va.gov" qname="ns:>SeriesType>component-instances"
+			type="java:gov.va.med.imaging.webservices.types.InstanceType[]" innerType="cmp-ns:InstanceType"
+			xmlns:cmp-ns="urn:types.webservices.imaging.med.va.gov" encodingStyle="" />
+		<typeMapping xmlns:ns="urn:types.webservices.imaging.med.va.gov" qname="ns:>StudyType>site-abbreviation"
+			type="java:java.lang.String" serializer="org.apache.axis.encoding.ser.SimpleSerializerFactory"
+			deserializer="org.apache.axis.encoding.ser.SimpleDeserializerFactory" encodingStyle="" />
+		<typeMapping xmlns:ns="urn:types.webservices.imaging.med.va.gov" qname="ns:StudyType"
+			type="java:gov.va.med.imaging.webservices.types.StudyType"
+			serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+			deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="" />
+		<typeMapping xmlns:ns="urn:types.webservices.imaging.med.va.gov" qname="ns:>RequestorType>facility-id"
+			type="java:java.lang.String" serializer="org.apache.axis.encoding.ser.SimpleSerializerFactory"
+			deserializer="org.apache.axis.encoding.ser.SimpleDeserializerFactory" encodingStyle="" />
+		<typeMapping xmlns:ns="urn:types.webservices.imaging.med.va.gov" qname="ns:PatientIdentifierType"
+			type="java:java.lang.String" serializer="org.apache.axis.encoding.ser.SimpleSerializerFactory"
+			deserializer="org.apache.axis.encoding.ser.SimpleDeserializerFactory" encodingStyle="" />
+	</service>
+	-->
+	
+ 
+	<transport name="http">
+		<requestFlow>
+			<handler type="URLMapper" />
+			<handler type="java:org.apache.axis.handlers.http.HTTPAuthHandler" />
+		</requestFlow>
+		<parameter name="qs:list" value="org.apache.axis.transport.http.QSListHandler" />
+		<parameter name="qs:wsdl" value="org.apache.axis.transport.http.QSWSDLHandler" />
+		<parameter name="qs.list" value="org.apache.axis.transport.http.QSListHandler" />
+		<parameter name="qs.method" value="org.apache.axis.transport.http.QSMethodHandler" />
+		<parameter name="qs:method" value="org.apache.axis.transport.http.QSMethodHandler" />
+		<parameter name="qs.wsdl" value="org.apache.axis.transport.http.QSWSDLHandler" />
+	</transport>
+
+	<transport name="local">
+		<responseFlow>
+			<handler type="LocalResponder" />
+		</responseFlow>
+	</transport>
+</deployment>

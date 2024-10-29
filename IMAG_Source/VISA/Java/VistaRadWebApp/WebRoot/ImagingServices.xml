@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<java version="1.6.0_03" class="java.beans.XMLDecoder"> 
+ <object class="java.util.ArrayList"> 
+  <void method="add"> 
+   <object class="gov.va.med.imaging.versions.ImagingService"> 
+    <void property="applicationPath"> 
+     <string>VistaRadWebApp</string> 
+    </void> 
+    <void property="applicationType"> 
+     <string>VistARad</string> 
+    </void> 
+    <void property="operations"> 
+     <void method="add"> 
+      <object class="gov.va.med.imaging.versions.ImagingOperation"> 
+       <void property="operationPath"> 
+        <string>vistarad-ws/ImageMetadataVistarad.V1</string> 
+       </void> 
+       <void property="operationType"> 
+        <string>Metadata</string> 
+       </void> 
+      </object> 
+     </void>      
+     <void method="add"> 
+      <object class="gov.va.med.imaging.versions.ImagingOperation"> 
+       <void property="operationPath"> 
+        <string>vistarad/image</string> 
+       </void> 
+       <void property="operationType"> 
+        <string>Image</string> 
+       </void> 
+      </object> 
+     </void>
+     <void method="add"> 
+      <object class="gov.va.med.imaging.versions.ImagingOperation"> 
+       <void property="operationPath"> 
+        <string>vistarad/text</string> 
+       </void> 
+       <void property="operationType"> 
+        <string>Text</string> 
+       </void> 
+      </object> 
+     </void>
+     <void method="add"> 
+      <object class="gov.va.med.imaging.versions.ImagingOperation"> 
+       <void property="operationPath"> 
+        <string>vistarad/imagetext</string> 
+       </void> 
+       <void property="operationType"> 
+        <string>ImageText</string> 
+       </void> 
+      </object> 
+     </void>
+     <void method="add"> 
+      <object class="gov.va.med.imaging.versions.ImagingOperation"> 
+       <void property="operationPath"> 
+        <string>vistarad/cachedimage</string> 
+       </void> 
+       <void property="operationType"> 
+        <string>CachedImage</string> 
+       </void> 
+      </object> 
+     </void>
+     <void method="add"> 
+      <object class="gov.va.med.imaging.versions.ImagingOperation"> 
+       <void property="operationPath"> 
+        <string>vistarad/cachedimagetext</string> 
+       </void> 
+       <void property="operationType"> 
+        <string>CachedImageText</string> 
+       </void> 
+      </object> 
+     </void>      
+    </void> 
+    <void property="version"> 
+     <string>1</string> 
+    </void> 
+   </object> 
+  </void>   
+  <void method="add"> 
+   <object class="gov.va.med.imaging.versions.ImagingService"> 
+    <void property="applicationPath"> 
+     <string>VistaRadWebApp</string> 
+    </void> 
+    <void property="applicationType"> 
+     <string>VistARad</string> 
+    </void> 
+    <void property="operations"> 
+     <void method="add"> 
+      <object class="gov.va.med.imaging.versions.ImagingOperation"> 
+       <void property="operationPath"> 
+        <string>vistarad-ws/ImageMetadataVistarad.V1</string> 
+       </void> 
+       <void property="operationType"> 
+        <string>Metadata</string> 
+       </void> 
+      </object> 
+     </void>      
+     <void method="add"> 
+      <object class="gov.va.med.imaging.versions.ImagingOperation"> 
+       <void property="operationPath"> 
+        <string>vistarad/image</string> 
+       </void> 
+       <void property="operationType"> 
+        <string>Image</string> 
+       </void> 
+      </object> 
+     </void>
+     <void method="add"> 
+      <object class="gov.va.med.imaging.versions.ImagingOperation"> 
+       <void property="operationPath"> 
+        <string>vistarad/text</string> 
+       </void> 
+       <void property="operationType"> 
+        <string>Text</string> 
+       </void> 
+      </object> 
+     </void>
+     <void method="add"> 
+      <object class="gov.va.med.imaging.versions.ImagingOperation"> 
+       <void property="operationPath"> 
+        <string>vistarad/imagetext</string> 
+       </void> 
+       <void property="operationType"> 
+        <string>ImageText</string> 
+       </void> 
+      </object> 
+     </void>
+     <void method="add"> 
+      <object class="gov.va.med.imaging.versions.ImagingOperation"> 
+       <void property="operationPath"> 
+        <string>vistarad/cachedimage</string> 
+       </void> 
+       <void property="operationType"> 
+        <string>CachedImage</string> 
+       </void> 
+      </object> 
+     </void>
+     <void method="add"> 
+      <object class="gov.va.med.imaging.versions.ImagingOperation"> 
+       <void property="operationPath"> 
+        <string>vistarad/cachedimagetext</string> 
+       </void> 
+       <void property="operationType"> 
+        <string>CachedImageText</string> 
+       </void> 
+      </object> 
+     </void>      
+    </void> 
+    <void property="version"> 
+     <string>2</string> 
+    </void> 
+   </object> 
+  </void> 
+ </object> 
+</java> 

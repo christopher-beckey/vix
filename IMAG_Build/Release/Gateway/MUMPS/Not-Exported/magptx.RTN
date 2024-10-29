@@ -1,0 +1,56 @@
+magptx ;WOIFO/MLH - PACS HL7 testing - execute a test suite
+ q
+ ;
+EXECUTE ; main entry point - execute a test suite
+ n DIR ; ---- FileMan work var
+ n active ; - index of the currently active test
+ n ix ; ----- scratch index var
+ n set ; ---- set of codes
+ n testser ;  which series of tests to run
+ n aserix ; - series index array
+ n test ; --- test name (A101, etc.)
+ n nextest ;  what test to run next
+ ;
+ ; determine which test is the current active test
+ s active=$g(^imlh("test","active"))
+ i 'active s active=$o(^imlh("test"," "),-1)
+ ;
+ ; populate the set of available tests
+ s DIR(0)="S"
+ s ix=0
+ f  s ix=$o(^imlh("test",ix)) q:'ix  s dta=^(ix,0) d
+ . i '$p(dta,"^",2) d
+ . . i '$d(set) d
+ . . . s DIR("B")=ix,set=ix_":"_$p(dta,"^",1)
+ . . . q
+ . . e  d
+ . . . s set=set_";"_ix_":"_$p(dta,"^",1)
+ . . . q
+ . . q
+ . q
+ s $p(DIR(0),"^",2)=set
+ s DIR("A")="System to validate" d ^DIR
+ g EXIT:$D(DTOUT),EXIT:$D(DUOUT)
+ s testser=Y
+ ;
+ f  d NEXTEST g EXIT:$D(DTOUT),EXIT:$D(DUOUT)
+ ;
+NEXTEST 
+ s ix=0,set="" k DIR,aserix,amsg
+ f  s ix=$o(^imlh("test",testser,ix)) q:ix=""  s test=^(ix) d:$d(^(ix))<10
+ . i '$d(DIR("B")) s DIR("B")=test
+ . s set=set_$s(set="":"",1:";")_test_":",aserix(test)=ix
+ . q
+ s DIR(0)="S^"_set
+ s DIR("A")="Test to run" d ^DIR
+ q:$d(DTOUT)  q:$d(DUOUT)
+ s nextest=Y,nextix=aserix(nextest)
+ d @nextest^magpt
+ s amsg=nextest,amsg(0)=$h,segix=""
+ f ix=$o(^imlh("test",testser," "),-1)+1:1 d
+ . s segix=$o(HLA("HLS",segix)) q:'segix  s amsg(ix)=HLA("HLS",segix)
+ . q
+ m ^imlh("test",testser,nextix)=amsg
+ ;
+EXIT ;
+ q

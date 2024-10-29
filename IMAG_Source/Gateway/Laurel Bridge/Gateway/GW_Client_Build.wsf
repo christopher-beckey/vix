@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<build vssroot="$/" patch="87" ver="3.0">
+	<config>
+		<variables>
+			<item name="user">release</item>
+			<item name="pass">release</item>
+			<item name="HomeDir">C:\DEV\Gateway\</item>
+			<item name="NetPublishResult">\\vhaiswclu4\common$\builds\</item>
+			<item name="Installshield">"c:\Program Files\InstallShield\2011\System\ISCmdBld.exe"</item>
+			<item name="ISWiProject">IswiAuto17.ISWiProject</item>
+			<item name="VSSDatabase">\\vhaiswimgs15\GW_VSS$</item>
+			<item name="VSSDatabase1">\\vhaiswimm7\vss$</item>
+			<item name="VSSRoot">$/</item>
+			<item name="ISMFile">C:\DEV\Gateway\INSTALL\InstallShield\DICOM_Silent_Install_2011.ism</item>
+			<item name="Release">C:\DEV\Gateway\Release</item>
+			<item name="log">C:\DEV\Gateway\LOG\</item>
+			<item name="locUtil">C:\DEV\Gateway\Utilities</item>
+			<item name="locWork">C:\DEV\Gateway\MUMPS\Work\</item>
+			<item name="locDistrib">C:\DEV\Gateway\MUMPS\Distrib\</item>
+			<item name="UtilRoot">$/Utilities/</item>
+			<item name="SequenceFile">C:\DEV\Gateway\Sequence\Build_Sequence.xml</item>
+			<item name="mft">C:\DEV\Gateway\Utilities\Compiled\MumpsFormatter.exe</item>
+		</variables>
+		<folders descr="Basic folder setup, relative to HomeDir">
+			<item relpath="HomeDir" delete="Y" publish="Y">Sequence</item>
+		    <item relpath="HomeDir" delete="Y" publish="N">Distrib</item>
+			<item relpath="HomeDir" delete="N" publish="N">LOG</item>
+			<item relpath="HomeDir" delete="Y" publish="N">LIB</item>
+			<item relpath="HomeDir" delete="Y" publish="N">LIB\Accusoft</item>
+			<item relpath="HomeDir" delete="Y" publish="N">LIB\Laurel_Bridge</item>
+			<item relpath="HomeDir" delete="Y" publish="N">LIB\MIR_CTN</item>
+			<item relpath="HomeDir" delete="Y" publish="Y">ICON</item>
+			<item relpath="HomeDir" delete="Y" publish="N">ICON\Letters</item>
+			<item relpath="HomeDir" delete="Y" publish="N">ICON\Logo</item>
+			<item relpath="HomeDir" delete="Y" publish="Y">DICT</item>
+			<item relpath="HomeDir" delete="Y" publish="Y">DICT\Baseline</item>
+			<item relpath="HomeDir" delete="Y" publish="Y">Images</item>
+			<item relpath="HomeDir" delete="Y" publish="N">INSTALL</item>
+		    <item relpath="HomeDir" delete="Y" publish="N">INSTALL\Cache</item>
+		    <item relpath="HomeDir" delete="Y" publish="N">INSTALL\InstallShield</item>
+		    <item relpath="HomeDir" delete="Y" publish="N">INSTALL\System</item>
+			<item relpath="HomeDir" delete="Y" publish="N">MUMPS</item>
+			<item relpath="HomeDir" delete="Y" publish="N">MUMPS\Distrib</item>
+			<item relpath="HomeDir" delete="Y" publish="N">MUMPS\Work</item>
+			<item relpath="HomeDir" delete="Y" publish="N">MUMPS\Baseline</item>
+			<item relpath="HomeDir" delete="Y" publish="Y">MUMPS\Baseline\DICOM</item>
+			<item relpath="HomeDir" delete="Y" publish="N">MUMPS\Baseline\DICOM_MGR</item>
+			<item relpath="HomeDir" delete="Y" publish="N">JAVA</item>
+			<item relpath="HomeDir" delete="Y" publish="N">JAVA\Compiled</item>
+			<item relpath="HomeDir" delete="Y" publish="N">Web</item>
+			<item relpath="HomeDir" delete="Y" publish="N">Utilities</item>
+			<item relpath="HomeDir" delete="Y" publish="N">Utilities\ChangeRes</item>
+			<item relpath="HomeDir" delete="Y" publish="N">Utilities\checksum</item>
+			<item relpath="HomeDir" delete="Y" publish="N">Utilities\ercho</item>
+			<item relpath="HomeDir" delete="Y" publish="N">Utilities\SetBuild</item>
+			<item relpath="HomeDir" delete="Y" publish="N">Utilities\MakeLink</item>
+			<item relpath="HomeDir" delete="Y" publish="N">Utilities\SetBuild</item>
+			<item relpath="HomeDir" delete="Y" publish="N">Utilities\shared_exes</item>
+			<item relpath="HomeDir" delete="Y" publish="N">Utilities\Compiled</item>
+			<item relpath="HomeDir" delete="Y" publish="N">Utilities\MumpsFormatter</item>
+			<item relpath="HomeDir" delete="Y" publish="Y">Source</item>
+			<item relpath="HomeDir" delete="Y" publish="N">Source\Abstract</item>
+			<item relpath="HomeDir" delete="Y" publish="N">Source\Batch_Files</item>
+			<item relpath="HomeDir" delete="Y" publish="N">Source\C-Store</item>
+			<item relpath="HomeDir" delete="Y" publish="N">Source\DCM_TO_TGA</item>
+			<item relpath="HomeDir" delete="Y" publish="N">Source\DICOM_Image_Copy</item>
+			<item relpath="HomeDir" delete="Y" publish="N">Source\MAG_Compressor</item>
+			<item relpath="HomeDir" delete="Y" publish="N">Source\MAG_Decompressor</item>
+			<item relpath="HomeDir" delete="Y" publish="N">Source\Reconstruct</item>
+			<item relpath="HomeDir" delete="Y" publish="N">Source\TGA_TO_DCM</item>
+			<item relpath="HomeDir" delete="Y" publish="N">Source\VistA_Send_Image</item>
+			<item relpath="HomeDir" delete="Y" publish="N">Source\DCMAbstract</item>
+			<item relpath="HomeDir" delete="Y" publish="N">Source\Compiled</item>
+			<item relpath="" delete="Y" publish="Y">C:\DEV\Mag_MakeAbs</item>
+			<item relpath="" delete="Y" publish="N">C:\DEV\Mag_MakeAbs\dcu</item>
+			<item relpath="HomeDir" delete="Y" publish="N">Release</item>
+		</folders>
+		<Utils descr="utilities">
+			<item loc="vss" type="proj" descr="Utilities" target="Utilities" attrib="W">$/Utilities</item>
+		</Utils>
+	</config>
+	<patch descr="">
+		<item loc="vss1" type="file" vers="" descr="Sequence File" relpath="HomeDir" target="Sequence" attrib="">Utilities/KIDS_Build/Build_Sequence.xml</item>
+		<item loc="vss" type="proj" vers="" descr="MUMPS Formatter" relpath="HomeDir" target="Utilities\MumpsFormatter" attrib="W">Utilities/MFormat</item>
+		<item loc="vss" type="file" vers="" descr="compiled exes" relpath="HomeDir" target="Distrib" attrib="">Baseline/Distrib/MAG_DCMView.exe</item>
+		<item loc="vss" type="proj" vers="" descr="Mag Make Abs" relpath="" target="C:\DEV\Mag_MakeAbs" attrib="W">Baseline/Source Code/MakeAbs/Source</item>
+		<item loc="vss" type="proj" vers="" descr="Accusoft 15" relpath="HomeDir" target="LIB\Accusoft" attrib="W">3rd Party Source/Accusoft/Accusoft15</item>
+		<item loc="vss" type="proj" vers="" descr="MIR CTN 3.1.0" relpath="HomeDir" target="LIB\MIR_CTN" attrib="W">3rd Party Source/MIR CTN/MIR_CTN_3_1_0</item>
+		<item loc="vss" type="proj" vers="" descr="Utilities" relpath="HomeDir" target="Utilities" attrib="W">Utilities</item>
+		<item loc="vss" type="proj" vers="" descr="Mumps Baseline" relpath="HomeDir" target="MUMPS\Baseline" attrib="W">Baseline/MUMPS</item>
+		<item loc="vss" type="proj" vers="" descr="Dictionary files" relpath="HomeDir" target="DICT\Baseline" attrib="W">Baseline/DICT</item>
+		<item loc="vss" type="proj" vers="" descr="Web files" relpath="HomeDir" target="Web" attrib="">Baseline/Web</item>
+		<item loc="vss" type="proj" vers="" descr="Gateway Icons" relpath="HomeDir" target="ICON" attrib="W">Baseline/ICON</item>
+		<item loc="vss" type="proj" vers="" descr="Gateway *.bmps" relpath="HomeDir" target="Images" attrib="W">Baseline/Images</item>
+		<item loc="vss" type="proj" vers="" descr="Compiled C Code" relpath="HomeDir" target="Source" attrib="W">Baseline/Source Code</item>
+		<item loc="vss" type="proj" vers="" descr="Install" relpath="HomeDir" target="INSTALL\Cache" attrib="W">Baseline/INSTALL/Cache</item>
+		<item loc="vss" type="proj" vers="" descr="Install" relpath="HomeDir" target="INSTALL\System" attrib="W">Baseline/INSTALL/System</item>
+        <item loc="vss" type="file" vers="" descr="bogus.txt" relpath="HomeDir" target="INSTALL\InstallShield" attrib="W">Baseline/INSTALL/InstallShield/BOGUS.TXT</item>
+	    <item loc="vss" type="proj" vers="" descr="P99 DCMAbstract" relpath="HomeDir" target="Source\DCMAbstract" attrib="W">VistAImaging/Version 3.0 Patch 099 - Storing DICOM Objects,Phase III/DICOM Gateway/Source Code/DCMAbstract</item>
+		<item loc="vss" type="file" vers="" descr="P99 canned image" relpath="HomeDir" target="Images" attrib="">VistAImaging/Version 3.0 Patch 099 - Storing DICOM Objects,Phase III/DICOM Gateway/Source Code/DCMAbstract/canned_image.jpg</item>
+	    <item loc="vss" type="proj" vers="" descr="P87 Installshield" relpath="HomeDir" target="INSTALL\InstallShield" attrib="W">VistAImaging/Version 3.0 Patch 087 - DICOM Maintenance V/DICOM Gateway/AutoRun</item>
+	</patch>
+	<compile>
+	   <item type="C" compiler="make" relpath="HomeDir" source="Utilities\checksum" target="Utilities\Compiled" artifact="chk.exe" rename="">chk</item>
+	   <item type="C" compiler="make" relpath="HomeDir" source="Utilities\MumpsFormatter" target="Utilities\Compiled" artifact="MumpsFormatter.exe" rename="">MumpsFormatter</item> 
+	   <item type="VB" compiler="VB6" relpath="HomeDir" source="Utilities\MakeLink" target="Utilities\Compiled" artifact="MakeLink.exe" rename="MAG_MakeLink.exe">MakeLink</item>
+	   <item type="C" compiler="make" relpath="HomeDir" source="Utilities\SetBuild" target="Utilities\Compiled" artifact="SetBuild.exe" rename="">SetBuild</item>
+	   <item type="C" compiler="make" relpath="HomeDir" source="Source\Abstract" target="Source\Compiled" artifact="Abstract.exe" rename="MAG_AbstrTGA.exe">Abstract</item>
+	   <item type="C" compiler="make" relpath="HomeDir" source="Source\MAG_Compressor" target="Source\Compiled" artifact="MAG_Compressor.exe" rename="MAG_Compressor_Aware.exe">Compressor</item>
+	   <item type="C" compiler="make" relpath="HomeDir" source="Source\MAG_Decompressor" target="Source\Compiled" artifact="MAG_Decompressor.exe" rename="MAG_Decompressor_Aware.exe">Decompressor</item>
+	   <item type="C" compiler="make" relpath="HomeDir" source="Source\DICOM_Image_Copy" target="Source\Compiled" artifact="DCM_Copy.exe" rename="MAG_DCM_Copy.exe">DCM_COPY</item>
+	   <item type="C" compiler="make" relpath="HomeDir" source="Source\DCM_TO_TGA" target="Source\Compiled" artifact="DCMtoTGA.exe" rename="MAG_DCMtoTGA.exe">DCMTOTGA</item>
+	   <item type="C" compiler="make" relpath="HomeDir" source="Source\TGA_TO_DCM" target="Source\Compiled" artifact="TGAtoDCM.exe" rename="MAG_TGAtoDCM.exe">tgatodcm</item>
+	   <item type="C" compiler="make" relpath="HomeDir" source="Source\DICOM_LIB" target="" artifact="" rename="">dicom</item>
+	   <item type="C" compiler="make" relpath="HomeDir" source="Source\DCMAbstract" target="Source\Compiled" artifact="DCMabstract.exe" rename="MAG_DCMabstract.exe">DCMabstract</item>
+	   <item type="cmd" compiler="" relpath="" source="" target="" artifact="" rename="">xcopy /Y C:\DEV\Gateway\Source\DICOM_LIB\WinRel\dicom.lib C:\DEV\Gateway\Source\Reconstruct</item>
+	   <item type="C" compiler="make" relpath="HomeDir" source="Source\Reconstruct" target="Source\Compiled" artifact="MAGDrecon.exe" rename="MAG_Recon.exe">reconstruct</item>
+	   <item type="C" compiler="make" relpath="HomeDir" source="Source\VistA_Send_Image" target="Source\Compiled" artifact="VistA_Send_Image.exe" rename="MAG_VistA_Send_Image.exe">VISTA_SEND_IMAGE</item>
+       <item type="cmd" compiler="" relpath="" source="" target="" artifact="" rename="">attrib -r -h /S /D C:\DEV\Gateway\Lib\MIR_CTN\*.*</item>
+       <item type="C" compiler="custommake" relpath="HomeDir" source="Lib\MIR_CTN" target="Source\Compiled" artifact="\winctn\bin\*.exe" rename="">nmake /f w32_install.mak install</item>
+	   <item type="C" compiler="msbld" relpath="HomeDir" source="Source\C-Store" target="Source\Compiled" artifact="CStore.exe" rename="MAG_CStore.exe">CSTORE</item>
+	   <item type="cmd" compiler="" relpath="" source="" target="" artifact="" rename="">attrib -r C:\DEV\Mag_MakeAbs\Shared\*.*</item>
+	   <item type="delphi" compiler="seven" relpath="" source="C:\DEV\Mag_MakeAbs" target="C:\DEV\Gateway\Source\Compiled" artifact="MagMakeAbs2.exe" rename="MAG_MakeAbs.exe" options='-Q "-NC:\DEV\Mag_MakeAbs\dcu" "-UC:\DEV\Mag_MakeAbs\dcu;C:\Program Files\AccuSoft\ImageGear v15\MD\ActiveX\Samples\Delphi7\Shared;C:\Program Files\Borland\Delphi7\Demos\Doc\Filmanex;C:\Program Files\AccuSoft\ImageGear v15\MD\ActiveX\Samples\Delphi7\Medical;C:\Program Files\AccuSoft\ImageGear v15\MD\ActiveX\Samples\Delphi7\Package" "-I C:\Program Files\Borland\Delphi7\Imports"'>MagMakeAbs2.dpr</item>
+	   <item type="cmd" compiler="" relpath="" source="" target="" artifact="" rename="">xcopy /Y C:\DEV\Gateway\ICON\MAG_MakeAbs.ICO C:\DEV\Gateway\Source\Compiled</item>
+	   <item type="cmd" compiler="" relpath="" source="" target="" artifact="" rename="">xcopy /Y C:\DEV\Gateway\ICON\VIEWER1.ICO C:\DEV\Gateway\Distrib</item>
+	   <item type="cmd" compiler="" relpath="" source="" target="" artifact="" rename="">xcopy /Y C:\DEV\Gateway\ICON\MAGCStore.ico C:\DEV\Gateway\Distrib</item>
+	</compile>
+	<execute>
+		<item type="exec" descr="">attrib -s -h -r C:\DEV\Gateway\INSTALL\*.* /S /D</item>
+		<item type="exec" descr="">attrib -r C:\DEV\Gateway\INSTALL\InstallShield\DICOM_Silent_Install_2011.ism</item>
+		<item type="exec" descr="">attrib -r C:\DEV\Gateway\INSTALL\InstallShield\DICOM_Silent_Install_2011\script Files\Setup.obs</item>
+		<item type="exec" descr="">attrib -s -h -r C:\DEV\Gateway\INSTALL\*.* /S /D</item>
+		<item type="run" descr="">CMD /C "DEL /F /S C:\DEV\Gateway\INSTALL\Cache\C_DIST\*.scc"</item>
+		<item type="installshield" descr="Create install exe" order="2">create</item>
+	</execute>
+</build>

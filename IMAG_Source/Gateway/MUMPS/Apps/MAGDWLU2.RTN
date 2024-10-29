@@ -1,0 +1,154 @@
+Cache for Windows NT^INT^Saved from DICOM,DICOM (ISW-KUZMAKP3-LT)^~Format=Cache.S~
+%RO on 06/11/2013  14:01
+MAGDWLU2^INT^1^62984,49409.101294^0
+MAGDWLU2 ;WOIFO/PMK - Worklist information user ; 11 Jun 2013 1:43 PM
+ ;;3.0;IMAGING;**21,30,53,110**;Mar 19, 2002;Build 48;Aug 23, 2012
+ ;; Per VHA Directive 2004-038, this routine should not be modified.
+ ;; +---------------------------------------------------------------+
+ ;; | Property of the US Government.                                |
+ ;; | No permission to copy or redistribute this software is given. |
+ ;; | Use of unreleased versions of this software requires the user |
+ ;; | to execute a written test agreement with the VistA Imaging    |
+ ;; | Development Office of the Department of Veterans Affairs,     |
+ ;; | telephone (301) 734-0100.                                     |
+ ;; | The Food and Drug Administration classifies this software as  |
+ ;; | a medical device.  As such, it may not be changed in any way. |
+ ;; | Modifications to this software may result in an adulterated   |
+ ;; | medical device under 21CFR820, the use of which is considered |
+ ;; | to be a violation of US Federal Statutes.                     |
+ ;; +---------------------------------------------------------------+
+ ;;
+ENTRY ; entry point to generate a Modality Worklist C-FIND-RQ
+ D INIT
+ D SETKEYS ; set the query attribute keys
+ D MISCKEYS ; set all the other attributes to be returned
+ D BUILDMSG ; construct the C-FIND Request
+ D SENDMSG ; send the C-FIND Request to the Modality Worklist SCP
+ ; request from Biloxi - David Massey - to kill query keys afterwards
+ I $G(^MAGDICOM(2006.563,1,"KEEP MWL VALUES"))'="YES" D KILL^MAGDWLU1
+ Q
+ ;
+INIT ; initialization of variables
+ K ^TMP("MAG",$J,"DICOM")
+ D INIT^MAGDWLU0 ; initialize variables
+ D INIT^MAGDTLOG ; initialize the message log
+ D INIT^MAGDQUE3 ; initialization for the DIRECT FILEMODE
+ S QUEUEIN("FILE")=INCOMING,QUEUEOUT("FILE")=OUTGOING
+ Q
+ ;
+SETKEYS ; set the query attribute keys
+ ;
+ S ACNUMB=$G(^TMP("MAG","MOD WORK LIST","ACCESSION NUMBER"))
+ D SAVE^MAGDFCNS("0008,0050",ACNUMB) ; accession number
+ ;
+ S PNAME=$G(^TMP("MAG","MOD WORK LIST","PATIENT NAME"))
+ D SAVE^MAGDFCNS("0010,0010",PNAME) ; patient name
+ ;
+ S PID=$G(^TMP("MAG","MOD WORK LIST","PATIENT ID"))
+ D SAVE^MAGDFCNS("0010,0020",PID) ; patient id
+ ;
+ D SEQPUSH^MAGDFCNS("0040,0100") ; scheduled procedure step sequence
+ ;
+ S MODALITY=$G(^TMP("MAG","MOD WORK LIST","MODALITY"))
+ D SAVE^MAGDFCNS("0008,0060",MODALITY) ; modality
+ ;
+ S AETITLE=^TMP("MAG","MOD WORK LIST","AE TITLE")
+ D SAVE^MAGDFCNS("0040,0001",AETITLE) ; station AE title
+ ;
+ D SAVE^MAGDFCNS("0040,0002",$G(^TMP("MAG","MOD WORK LIST","START DATE")))
+ D SAVE^MAGDFCNS("0040,0003",$G(^TMP("MAG","MOD WORK LIST","START TIME")))
+ ;
+ D SEQPOP^MAGDFCNS ; end scheduled procedure step sequence
+ ;
+ D SAVE^MAGDFCNS("0040,1001",$G(^TMP("MAG","MOD WORK LIST","REQUESTED PROCEDURE ID")))
+ ;
+ Q
+ ;
+MISCKEYS ; specify miscellaneous attributes query keys
+ D SAVE^MAGDFCNS("0008,0005","") ; specific character set
+ D SAVE^MAGDFCNS("0008,0080","") ; institution name
+ D SAVE^MAGDFCNS("0008,0090","") ; referring physician's name
+ D SAVE^MAGDFCNS("0008,1030","") ; study description
+ D SAVE^MAGDFCNS("0010,0021","") ; issuer of patient id
+ D SAVE^MAGDFCNS("0010,0030","") ; patient birth date
+ D SAVE^MAGDFCNS("0010,0040","") ; patient sex
+ D SAVE^MAGDFCNS("0010,1000","") ; other patient ids
+ D SAVE^MAGDFCNS("0010,1020","") ; patient's size
+ D SAVE^MAGDFCNS("0010,1030","") ; patient's weight
+ D SAVE^MAGDFCNS("0010,1040","") ; patient home address
+ D SAVE^MAGDFCNS("0010,2000","") ; medical alerts
+ D SAVE^MAGDFCNS("0010,2110","") ; allergies
+ D SAVE^MAGDFCNS("0010,21B0","") ; additional patient history
+ D SAVE^MAGDFCNS("0010,2160","") ; ethnic group
+ D SAVE^MAGDFCNS("0010,21C0","") ; pregnancy status
+ D SAVE^MAGDFCNS("0020,000D","") ; study instance uid
+ D SAVE^MAGDFCNS("0020,0010","") ; study id
+ D SAVE^MAGDFCNS("0032,1030","") ; reason for the study
+ D SAVE^MAGDFCNS("0032,1032","") ; requesting physician
+ D SAVE^MAGDFCNS("0032,1033","") ; requesting service
+ D SAVE^MAGDFCNS("0032,1060","") ; requested procedure description
+ D SAVE^MAGDFCNS("0032,4000","") ; Study Comments (these are tech comments)
+ D SAVE^MAGDFCNS("0040,2010","") ; call back number
+ D SAVE^MAGDFCNS("0038,0010","") ; admission id
+ D SAVE^MAGDFCNS("0038,0300","") ; current patient location (ward)
+ D SAVE^MAGDFCNS("0038,0400","") ; patient's institutional residence (bed)
+ D SAVE^MAGDFCNS("0038,4000","") ; visit comments (in/out patient)
+ D SAVE^MAGDFCNS("0040,3001","") ; confidentality constraint
+ ;
+ D SEQPUSH^MAGDFCNS("0032,1064") ; requested procedure code sequence
+ D SAVE^MAGDFCNS("0008,0100","")
+ D SAVE^MAGDFCNS("0008,0102","")
+ D SAVE^MAGDFCNS("0008,0104","")
+ D SEQPOP^MAGDFCNS ; end requested procedure code sequence
+ ;
+ D SEQPUSH^MAGDFCNS("0040,0100") ; scheduled procedure step sequence
+ D SAVE^MAGDFCNS("0040,0006","") ; sch performing physician
+ D SAVE^MAGDFCNS("0040,0007","") ; sch procedure step
+ ;
+ D SEQPUSH^MAGDFCNS("0040,0008") ; scheduled action item code sequence
+ D SAVE^MAGDFCNS("0008,0100","")
+ D SAVE^MAGDFCNS("0008,0102","")
+ D SAVE^MAGDFCNS("0008,0104","")
+ D SEQPOP^MAGDFCNS ; end scheduled action item code sequence
+ ;
+ D SAVE^MAGDFCNS("0040,0009","") ; sch procedure step
+ D SAVE^MAGDFCNS("0040,0010","") ; sch station name
+ D SAVE^MAGDFCNS("0040,0011","") ; sch location (for appointment)
+ D SAVE^MAGDFCNS("0040,0020","") ; sch procedure step status
+ D SAVE^MAGDFCNS("0040,0400","") ; comments on the scheduled procedure step
+ D SEQPOP^MAGDFCNS ; end secheduled procedure step sequence
+ ;
+ D SAVE^MAGDFCNS("0040,1002","") ; reason for the requested procedure
+ D SAVE^MAGDFCNS("0040,1003","") ; requested procedure priority
+ D SAVE^MAGDFCNS("0040,1005","") ; requested procedure location
+ D SAVE^MAGDFCNS("0040,1010","") ; names of intended recipients of results
+ D SAVE^MAGDFCNS("0040,1400","") ; requested procedure comments
+ D SAVE^MAGDFCNS("0040,2001","") ; reason for the imaging service request
+ D SAVE^MAGDFCNS("0040,2400","") ; image service request comments
+ Q
+ ;
+BUILDMSG ; construct a C-FIND Request msg to send to the Modality Worklist SCP
+ S FBSWITCH="MIDGROUND",FILEMODE="DIRECT",MULTIMSG="" D REQUEST^MAGDDW1
+ S MESSAGE="Modality Worklist Query"
+ Q
+ ;
+SENDMSG ; send the C-FIND Request message to the Modality Worklist Provider
+ ; Initiate the connection with the SOP Class Provider
+ S FBSWITCH="MIDGROUND",FILEMODE="DIRECT"
+ D ENTRY^MAGDACU1
+ Q
+ ;
+RESPONSE ; entry point from ^MAGDQUE4 when a C-FIND Response is received
+ N RESPNUMB
+ S RESPNUMB=$G(^TMP("MAG",$J,"DICOM","MOD WORK LIST"))+1
+ S ^TMP("MAG",$J,"DICOM","MOD WORK LIST")=RESPNUMB
+ ; save each response in ^TMP
+ S SAVENODE="MOD WORK LIST "_RESPNUMB
+ M ^TMP("MAG",$J,"DICOM",SAVENODE)=^TMP("MAG",$J,"DICOM",INODE)
+ ;
+ S STATUS=$$DEC2HEX^MAGOSMSC(+$$GETDATA^MAGDFCNS(INODE,"0000,0900"))
+ I STATUS'="FF00",STATUS'="FF01" S DONEFLAG=1 ; completed
+ Q
+
+
+

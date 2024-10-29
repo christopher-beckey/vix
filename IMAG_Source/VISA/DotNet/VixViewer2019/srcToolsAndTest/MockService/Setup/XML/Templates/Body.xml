@@ -1,0 +1,15 @@
+          <image>
+            <captureDate>2021-02-16T13:52:00-01:00</captureDate>
+            <description>FILE_DESCRIPTION</description>
+            <diagnosticImageUri>imageURN=urn:vaimage:660-26732Mock-FILE_NAME-1008861107V475740&amp;imageQuality=100&amp;contentType=CONTENT_TYPE,*/*</diagnosticImageUri>
+            <dicomImageNumber />
+            <dicomSequenceNumber />
+            <documentDate>2021-02-16T00:00:00-02:00</documentDate>
+            <imageId>urn:vaimage:660-26732Mock-26732Mock_01.JPG-1008861107V475740</imageId>
+            <imageNumber>1</imageNumber>
+            <imageStatus>Viewable</imageStatus>
+            <imageType>IMAGE_TYPE</imageType>
+            <imageViewStatus>Viewable</imageViewStatus>
+            <referenceImageUri />
+            <sensitive>false</sensitive>
+          </image>

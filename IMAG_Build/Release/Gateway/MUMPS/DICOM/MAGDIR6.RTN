@@ -1,0 +1,223 @@
+MAGDIR6 ;WOIFO/PMK - Read a DICOM image file ; 31 Mar 2011 7:46 AM
+ ;;3.0;IMAGING;**11,30,51,54,53,49**;Mar 19, 2002;Build 2201;Jun 29, 2011
+ ;; Per VHA Directive 2004-038, this routine should not be modified.
+ ;; +---------------------------------------------------------------+
+ ;; | Property of the US Government.                                |
+ ;; | No permission to copy or redistribute this software is given. |
+ ;; | Use of unreleased versions of this software requires the user |
+ ;; | to execute a written test agreement with the VistA Imaging    |
+ ;; | Development Office of the Department of Veterans Affairs,     |
+ ;; | telephone (301) 734-0100.                                     |
+ ;; | The Food and Drug Administration classifies this software as  |
+ ;; | a medical device.  As such, it may not be changed in any way. |
+ ;; | Modifications to this software may result in an adulterated   |
+ ;; | medical device under 21CFR820, the use of which is considered |
+ ;; | to be a violation of US Federal Statutes.                     |
+ ;; +---------------------------------------------------------------+
+ ;;
+ ; M2MB client
+ ;
+ ; This routine controls the processing of images.  It runs forever
+ ; waiting for new work to appear in one of its three input queues:
+ ;    1) ^MAGDINPT(2006.571) --- DICOM RAW IMAGE FILE
+ ;    2) ^MAGDINPT(2006.5711) -- DICOM M2MB RPC QUEUE
+ ;    3) ^MAGDINPT(2006.5712) -- DICOM FIXED QUEUE
+ ; When if finds new work, it invokes the appropriate routines to
+ ; formulate the various requests for the M2MB RPC.  It then invokes
+ ; ^MAGDM2MB to issue the RPC and ^MAGDIR7 to process the results
+ ;
+ Q
+ ;
+ENTRY ; Stub to start ^MAGDIR6 processing DICOM images
+ ; 
+ ; Get the latest version of the DICOM UID SPECIFIC ACTION table
+ D CLIENT^MAGDUID4
+ ;
+ S ENTRY="REENTRY^MAGDIR6"
+ S PROMPT="Ready to process DICOM Images and send them to VistA?"
+ G SETUP^MAGDSTRT
+ ;
+REENTRY ; Re-entry point from ^MAGDSTRT
+ N DELTYPE ;-- Type of deletion for CORRECT^MAGDIR71
+ N EMAIL ;---- email group address to report serious errors
+ N FBSWITCH ;- foreground / midground / background flag for ^MAGDMLOG
+ N IDLETIME ;- counter indicating duration of idle time
+ N LOCATION ;- the site where the DICOM gateway is physically located
+ N MULTFRAM ;- Single/Multi Frame indicator
+ N NOHALT ;--- flag to not halt the process for MSM <DSCON> errors
+ N OLD2PATH ;- previous path for minimizing hierarchical directory checks
+ N SERIEUID ;- Series (Study) UID
+ N SYSTITLE ;- given name of gateway (e. g., VAMC Image Gateway #2)
+ N TICKER ;--- ticker counter for idle loop
+ N WAIT ;----- waiting for file to be completed state indicator
+ N X
+ ;
+ D NEWLOG^MAGDMLOG("IMAGE PROCESSING")
+ ;
+ S X="Server """_$G(^MAGDICOM(2006.563,1,"M-to-M BROKER ADDR"))_""""
+ S X=X_" on Port "_$G(^MAGDICOM(2006.563,1,"M-to-M BROKER PORT"))
+ W !,"Connecting to M-to-M RPC Broker ",X
+ ; The error trap on the next line causes MAGDSTRT to
+ ; make re-connection attempts
+ I '$$RECONCT^MAGDMENA(1) S $EC=",U13-<NORPC>," ; Throw the error
+ W " - SUCCESS!",!
+ S NOHALT("DSCON")="1,M-to-M BROKER" ; Don't halt if MSM <DSCON>
+ ;
+ ; Initialization of static variables
+ S FBSWITCH="FOREGROUND" ; this always runs in the foreground
+ S LOCATION=^MAGDICOM(2006.563,1,"LOCATION")
+ S SYSTITLE=$G(^MAGDICOM(2006.563,1,"SYSTEM TITLE"),"<unknown>")
+ S EMAIL=$G(^MAGDICOM(2006.563,1,"MAILGROUP"))
+ I EMAIL="" S EMAIL=$$MAGDBB^MAGDMFBE()
+ ;
+ ; Big do forever loop!
+ ;
+ S IDLETIME=-1,WAIT=0
+ F  D
+ . N ACNUMB ;--- accession number (date-case number for radiology)
+ . N CASENUMB ;- radiology case number (also used for other services)
+ . N CASETEXT ;- variation of case number, may also be accession number
+ . N COLUMNS ;-- number of columns in image, ie, the X-dimension
+ . N COMPLETE ;- flag indicating completion of image acquisition
+ . N FILESIZE ;- image file size (set in ^MAGDIR6B, used in ^MAGDIR7D)
+ . N FROMPATH ;- file path to the image (D:\DICOM\IMAGE_IN\Annnn.DCM)
+ . N IMGSVC ;--- imaging service (RAD or CON)
+ . N IMAGMODE ;- switch indicating a new image or a DICOM corrected one
+ . N IMGFILE ;-- path to which the DICOM image file is copied
+ . N IMAGEUID ;- image instance uid -- defined by modality instrument
+ . N IMAGEPTR ;- pointer to image in ^MAG(2005)
+ . N INODE ;---- node in ^TMP global for DICOM data storage
+ . N INSTLOC ;-- location of the instrument acquiring the image
+ . N INSTNAME ;- abbreviation for acquisition unit in INSTRUMENT.DIC
+ . N INSTIEN ;-- IEN of the acquisition unit in the INSTRUMENT file
+ . N MEDIA ;---- source of DICOM object for Importer (D=disk, T=transmission)
+ . N MFGR ;----- name of instrument manufacturer from the image header
+ . N MODALITY ;- DICOM modality from the image header
+ . N MODPARMS ;- image processing parameters for the modality
+ . N MODEL ;---- manufacturer's name for the instrument
+ . N MODIEN ;--- IEN of the instrument's modality in the MODALITY.DIC
+ . N NEXTFIX ;-- IEN of next entry in ^MAGDINPT(2006.5712)
+ . N NEXTIEN ;-- IEN of next image file entry in ^MAGDINPT(2006.571)
+ . N NEXTQUE ;-- IEN of next entry in ^MAGDINPT(2006.5711)
+ . N NEW ;------ new demographic values from DICOM Correct
+ . N OFFSET ;--- offset to the first tag beyond the DICOM meta file info
+ . N OLDPATH ;-- original path for imported images (set by Importer)
+ . N ORIGINDX ;- origin index (file 2005, field 45)
+ . N OUTSIDE ;-- outside DICOM object flag 1=outside, 0/null=internal
+ . N PID ;------ patient identifier from the image header
+ . N PNAMEDCM ;- patient name in DICOM format from the image header
+ . N ROWS ;----- number of rows in image, ie, the Y-dimension
+ . N SOPCLASS ;- SOP Class UID
+ . N STUDYUID ;- study instance uid -- defined by VistA
+ . N STUDYDAT ;- date of the study (or more properly, image acquisition)
+ . N STUDYTIM ;- time of the study (or more properly, image acquisition)
+ . N REQUEST ;-- array of requests for M2MB server to perform
+ . N RESULT ;--- pointer to array of results from M2MB server for client
+ . N UPCOUNT ;-- flag to update ^MAGDINPT counter
+ . N VADM ;----- patient demographics array, returned from DEM^VADPT
+ . N %I,DISYS,DTIME,I,MSG,READFILE,STATUS,X
+ . ;
+ . S LOCATION=^MAGDICOM(2006.563,1,"LOCATION")
+ . ;
+ . ; Check the image being processed node to see if there was an error
+ . I $G(^MAGDICOM(2006.563,1,"CURRENT IMAGE POINTER")) D
+ . . D CLEANUP^MAGDIR6G
+ . . Q
+ . ;
+ . S NEXTIEN=+$G(^MAGDINPT(2006.571,"ACOUNT"))+1
+ . S NEXTQUE=+$G(^MAGDINPT(2006.5711,"ACOUNT"))+1
+ . S NEXTFIX=+$G(^MAGDINPT(2006.5712,"ACOUNT"))+1
+ . ;
+ . I NEXTQUE'>$P($G(^MAGDINPT(2006.5711,0)),"^",3) D
+ . . ; Process something in the RPC QUEUE first
+ . . ; request BP queue & statistics for an entry previously processed
+ . . S X=^MAGDINPT(2006.5711,NEXTQUE,0)
+ . . D REQUEST($P(X,"|",1),$P(X,"|",2,999))
+ . . S X=$G(^MAGDINPT(2006.5711,NEXTQUE+1,0))
+ . . I X'="" D  ; Request removal of entry from DICOM CORRECT file
+ . . . D REQUEST($P(X,"|",1),$P(X,"|",2,999))
+ . . . Q
+ . . Q
+ . E  I NEXTFIX'>$P($G(^MAGDINPT(2006.5712,0)),"^",3) D
+ . . ; Process DICOM corrections before new images
+ . . D FIXIMAGE^MAGDIR6A
+ . . Q
+ . E  I NEXTIEN'>$P($G(^MAGDINPT(2006.571,0)),"^",3) D
+ . . ; Process new images
+ . . D NEWIMAGE^MAGDIR6A
+ . . Q
+ . E  D  Q:IDLETIME  ; There is nothing to do
+ . . D IDLE^MAGDBB(.TICKER,1)
+ . . S IDLETIME=(IDLETIME+1)#10 I IDLETIME Q
+ . . ;
+ . . ; Do the following only once in a while
+ . . ;
+ . . ; Generate a patient safety request
+ . . S X="0|"_$G(^MAGDICOM(2006.563,1,"LAST IMAGE POINTER"))
+ . . S X=X_"|"_$G(^MAGDICOM(2006.563,1,"LAST RAD REPORT POINTER"))
+ . . S X=X_"|"_SYSTITLE_"|"_EMAIL
+ . . D REQUEST("PATIENT SAFETY",X)
+ . . ;
+ . . ; Generate a DICOM correct request
+ . . D REQUEST("CORRECT","QUERY|"_LOCATION_"|"_$$HOSTNAME^MAGOSMSC())
+ . . ;
+ . . D FIXIT^MAGDIR6E ; Check for incomplete images
+ . . Q
+ . ;
+ . ; Call the RPC which transfers control to ^MAGDIR8
+ . D IMAGPROC^MAGDIR6(.RESULT,.REQUEST)
+ . ;
+ . D ^MAGDIR7 ; Process the results
+ . Q
+ Q
+ ;
+IMAGPROC(RESULT,REQUEST) ; Process the image request on VistA
+ N LOCKOK,TIMEFM,TIMESEC,X
+ F  D  Q:LOCKOK
+ . ; Call the RPC which transfers control to ^MAGDIR8
+ . D IMAGPROC^MAGDM2MB(.RESULT,.REQUEST)
+ . ; Check for a VistA lock condition
+ . I $P($P($G(@RESULT@(2)),"|",2),"^")=-399 D
+ . . I '$D(TIMEFM) D  ; first time through the loop
+ . . . S TIMEFM=$$NOW^XLFDT
+ . . . S TIMESEC=$$H^MAGDMMSG($H)+300 ; now + five minutes
+ . . . W ! ; new line for Waiting ...
+ . . . Q
+ . . S X=$P($P($G(@RESULT@(2)),"|",2),"^",2)
+ . . W $C(13),"Waiting (",X,")...",$$FMDIFF^XLFDT($$NOW^XLFDT,TIMEFM,3)
+ . . S LOCKOK=0 H 5
+ . . I $$H^MAGDMMSG($H)>TIMESEC D
+ . . . N CRITICAL,FATAL,HDR,IGNORE,MSG,ROU
+ . . . S HDR="NON-FATAL WARNING: IMAGE PROCESSING IS BLOCKED"
+ . . . S MSG(1)="Someone in the Radiology Department is editing study "_$G(ACNUMB)
+ . . . S MSG(2)="whose images are being processed by the DICOM gateway."
+ . . . S MSG(3)="Image processing is temporarily stopped and will resume"
+ . . . S MSG(4)="upon completion of the editing."
+ . . . S IGNORE=1,FATAL=0,ROU=$T(+0),CRITICAL=0
+ . . . D SEND^MAGDMMSG
+ . . . S TIMESEC=1E10 ; bigger than any date/time in seconds
+ . . . Q
+ . . Q
+ . E  S LOCKOK=1
+ . Q
+ Q
+ ;
+UPCOUNT(FILE,NEXT) ; Remove completed entry from ^MAGDINPT
+ ; (entry also from ^MAGDMENU)
+ N N
+ S (N,^MAGDINPT(FILE,"ACOUNT"))=$G(^MAGDINPT(FILE,"ACOUNT"))+1
+ K ^MAGDINPT(FILE,N)
+ L +^MAGDINPT(FILE,"COUNT"):1E9 ; Serialize update counter
+ S $P(^MAGDINPT(FILE,0),"^",4)=$P(^MAGDINPT(FILE,0),"^",4)-1
+ L -^MAGDINPT(FILE,"COUNT") ; Clear the serialization
+ I $G(^MAGDICOM(2006.563,1,"M-to-M BROKER MSGS"))="YES" D
+ . W !,"UPCOUNT called for file # ",FILE,", entry # ",NEXT," really ",N
+ . Q
+ Q
+ ;
+REQUEST(OPCODE,ARGS) ; Add an item to the REQUEST list
+ N LAST
+ S LAST=$G(REQUEST(1),1) ; First element in array is counter
+ S LAST=LAST+1,REQUEST(LAST)=OPCODE_"|"_ARGS,REQUEST(1)=LAST
+ Q
+ ;

@@ -1,0 +1,173 @@
+Cache for Windows NT^INT^Saved from DICOM,DICOM (ISW-KUZMAKP3-LT)^~Format=Cache.S~
+%RO on 01/28/2013  16:34
+MAGDIR6C^INT^1^62850,59605^0
+MAGDIR6C ;WOIFO/PMK/RRB - Read a DICOM image file ; 28 Jan 2013 4:33 PM
+ ;;3.0;IMAGING;**11,30,51,54,53,99,110**;Mar 19, 2002;Build 2179;Jun 28, 2011
+ ;; Per VHA Directive 2004-038, this routine should not be modified.
+ ;; +---------------------------------------------------------------+
+ ;; | Property of the US Government.                                |
+ ;; | No permission to copy or redistribute this software is given. |
+ ;; | Use of unreleased versions of this software requires the user |
+ ;; | to execute a written test agreement with the VistA Imaging    |
+ ;; | Development Office of the Department of Veterans Affairs,     |
+ ;; | telephone (301) 734-0100.                                     |
+ ;; | The Food and Drug Administration classifies this software as  |
+ ;; | a medical device.  As such, it may not be changed in any way. |
+ ;; | Modifications to this software may result in an adulterated   |
+ ;; | medical device under 21CFR820, the use of which is considered |
+ ;; | to be a violation of US Federal Statutes.                     |
+ ;; +---------------------------------------------------------------+
+ ;;
+ ;
+ ; M2MB client
+ ;
+ ; This routine builds the STORE1/STORE2 REQUEST items to create the
+ ; association for one DICOM image.
+ ;
+ENTRY ; read DICOM file and get data for the association
+ N COMPRESSED
+ S UPCOUNT=1
+ S LOCATION=^MAGDICOM(2006.563,1,"LOCATION")
+ I COMPLETE=1 D REQUEST^MAGDIR6("ACQUIRED","0|"_LOCATION_"|"_INSTNAME)
+ S READFILE=$$READFILE^MAGDIR6B()
+ I READFILE<0 D  ; ERROR
+ . Q
+ E  I 'READFILE  D  ; FILE DOES NOT EXIT
+ . I IMAGMODE="CORRECTED IMAGE" D
+ . . D CORRECT^MAGDIR71
+ . . Q
+ . Q
+ E  D  ;do these things if the file exists
+ . S MULTFRAM=0 ; multiframe switch must be zero at the beginning
+ . ;
+ . ; double check multiframe counter and set MULTFRAM if same file
+ . I $G(^MAGDICOM(2006.563,1,"MULTIFRAME COUNTER")) D
+ . . I FROMPATH=$G(^MAGDICOM(2006.563,1,"CURRENT IMAGE SOURCE")) D
+ . . . N NFRAME ;--- number of image frames in a multi-frame image object
+ . . . S NFRAME=$$GETDATA^MAGDFCNS(INODE,"0028,0008") ; number of frames
+ . . . I NFRAME>1 S MULTFRAM=1 ; previous multiframe image didn't complete
+ . . . Q
+ . . E  S ^MAGDICOM(2006.563,1,"MULTIFRAME COUNTER")=0 ; new image
+ . . Q
+ . ;
+ . I $G(^MAGDICOM(2006.563,1,"SHOW PATIENT NAME & ID"))="YES" D
+ . . W " -- ",PNAMEDCM," -- ",PID
+ . . Q
+ . E  D  ; this is patient privacy for HIPAA
+ . . N STARS
+ . . S STARS=$TR($J("",26)," ","*") ; generate 26 asterisks
+ . . W " -- ",$TR(PNAMEDCM,"ABCDEFGHIJKLMNOPQRSTUVWXYZ",STARS)
+ . . W " -- ",$TR(PID,"0123456789",STARS)
+ . . Q
+ . ;
+ . I '$$SIZECHK^MAGDIR6F() Q  ; check DICOM file for expected size
+ . ;
+ . I '$$MODALITY^MAGDIR6B Q  ; undefined modality
+ . ;
+ . ; Check for compressed image and force filing in DICOM format only.
+ . ; COMPRESSED = 4294967295 (FFFFFFFF in HEX) = Compressed image - file as DICOM image only
+ . ; 
+ . S COMPRESSED=+$P($$GETDATA^MAGDFCNS(INODE,"7FE0,0010",1,2),"length=",2)
+ . S:COMPRESSED=4294967295 MODPARMS="<DICOM>"
+ . ;
+ . W " -- ",CASENUMB
+ . ;
+ . I IMAGMODE="CORRECTED IMAGE" D  ; override patient/study values in file
+ . . S PNAMEDCM=NEW("NAME"),PID=NEW("PID")
+ . . S (ACNUMB,CASENUMB,CASETEXT)=NEW("ACNUMB")
+ . . W !,*27,"[1m",*27,"[7m"," CORRECTED ",*27,"[0m "
+ . . I $G(^MAGDICOM(2006.563,1,"SHOW PATIENT NAME & ID"))="YES" D
+ . . . W " -- ",PNAMEDCM," -- ",PID
+ . . . Q
+ . . E  D  ; this is patient privacy for HIPAA
+ . . . N STARS
+ . . . S STARS=$TR($J("",26)," ","*") ; generate 26 asterisks
+ . . . W " -- ",$TR(PNAMEDCM,"ABCDEFGHIJKLMNOPQRSTUVWXYZ",STARS)
+ . . . W " -- ",$TR(PID,"0123456789",STARS)
+ . . . Q
+ . . W " -- ",CASENUMB
+ . . Q
+ . ;
+ . I CASENUMB["IGNORE IMAGE" D  Q
+ . . ; image should be ignored
+ . . S MSG="Image "_FROMPATH_" will be ignored."
+ . . D IMAGEDEL^MAGDIR71(MSG) ; delete the image
+ . . Q
+ . S UPCOUNT=0 D STORE12 ; D UPCOUNT in STORE^MAGDIR71
+ . Q
+ Q
+STORE12 ; also called from ^MAGDIR7C to build the "STORE" REQUESTs for the RPC
+ N DAT,IMAGNAME,IMAGNUMB,IMPORTER,SERINUMB,STAMP,T,TIM,X
+ ;
+ ; Get the date and time the image was created
+ S STAMP="" F T="0023/0033","0022/0032","0012/0013" D  Q:STAMP'=""
+ . N TD,TT
+ . S TD="0008,"_$P(T,"/",1),TT="0008,"_$P(T,"/",2)
+ . S DAT=$$GETDATA^MAGDFCNS(INODE,TD) ; Date
+ . S TIM=$TR($J($$GETDATA^MAGDFCNS(INODE,TT)\1,6)," ",0) ; Time
+ . S:DAT="<unknown>" DAT=""
+ . S:DAT'="" STAMP=+((DAT-17000000)_"."_TIM)
+ . Q
+ ;
+ ; get the series number and image number for the proper sequencing
+ ;
+ S SERINUMB=+$$GETDATA^MAGDFCNS(INODE,"0020,0011") ; series number
+ S IMAGNUMB=+$$GETDATA^MAGDFCNS(INODE,"0020,0013") ; image number
+ ;
+ ; determine the service actually performing the examination
+ I INSTNAME?1"PORT_".1N.N D  ; port number from MAG_CSTORE.EXE shortcut
+ . S X=$G(^TMP("MAG","MAG_CSTORE",INSTNAME))
+ . S IMGSVC=$P(X,"^",1),INSTLOC=$P(X,"^",2),IMAGNAME=""
+ . I IMGSVC="" S IMGSVC="RAD" ; RAD is the default
+ . I INSTLOC="" S INSTLOC=$G(^MAGDICOM(2006.563,1,"LOCATION"))
+ . Q
+ E  D  Q:INSTIEN=""  ; from INSTRUMENT.DIC
+ . S INSTIEN=$O(^MAGDICOM(2006.581,"B",INSTNAME,""))
+ . I INSTIEN="" D  Q
+ . . N MSG
+ . . S MSG(1)="Image #"_NEXTIEN_" has an unknown instrument mnemonic "
+ . . S MSG(1)=MSG(1)_""""_INSTNAME_""" -- skipped"
+ . . D WARNING^MAGDFCNS(.MSG)
+ . . S ^MAGDINPT(2006.571,NEXTIEN,1)="Unknown instrument mnemonic"
+ . . S ^MAGDINPT(2006.571,"ACOUNT")=NEXTIEN
+ . . Q
+ . S X=^MAGDICOM(2006.581,INSTIEN,0)
+ . S IMGSVC=$P(X,"^",3),INSTLOC=$P(X,"^",5),IMAGNAME=""
+ . Q
+ ;
+ ;service-specific code
+ I IMGSVC="RAD" D
+ . S IMAGNAME=""
+ . Q
+ E  I IMGSVC="CON" D
+ . N NAME
+ . ; check for intra-oral x-ray images & get tooth number(s)
+ . S NAME=$$GETNAME^MAGDUID2(SOPCLASS)
+ . I NAME="Digital Intra-oral X-Ray Image Storage - For Presentation" D
+ . . S IMAGNAME=$$ENTRY^MAGDIR7F()
+ . . Q
+ . Q
+ ;
+ S IMPORTER=($G(^MAGDICOM(2006.563,1,"IMPORTER"))="YES")
+ ;
+ ; create the "STORE1" REQUEST string
+ S STATUS="",ACNUMB=$TR(ACNUMB,"<>"),CASENUMB=$TR(CASENUMB,"<>")
+ S X=STATUS_"|"_LOCATION_"|"_$$HOSTNAME^MAGOSMSC()_"|"_IMGSVC_"|"_INSTNAME
+ S X=X_"|"_FROMPATH_"|"_PID_"|"_PNAMEDCM_"|"_CASENUMB_"|"_ACNUMB
+ S X=X_"|"_STUDYDAT_"|"_STUDYTIM_"|"_IMPORTER_"|"_MODALITY_"|"_IMAGNAME
+ S X=X_"|"_MODPARMS_"|"_SERINUMB_"|"_IMAGNUMB_"|"_INSTLOC_"|"_MULTFRAM
+ S X=X_"|"_SYSTITLE_"|"_EMAIL
+ D REQUEST^MAGDIR6("STORE1",X)
+ ;
+ ; create the "STORE2" REQUEST string
+ S X=STUDYUID_"|"_SERIEUID_"|"_IMAGEUID_"|"_SOPCLASS
+ S X=X_"|"_$G(^MAGDICOM(2006.563,1,"LAST IMAGE POINTER"))
+ S X=X_"|"_$G(^MAGDICOM(2006.563,1,"ROUTING RULES"))
+ S X=X_"|"_MFGR_"|"_MODEL_"|"_STAMP
+ S X=X_"|"_ORIGINDX_"|"_MEDIA_"|"_OLDPATH
+ D REQUEST^MAGDIR6("STORE2",X)
+ Q
+ ;
+
+
+

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-module
+  type="WEB"
+  name="DataDictionaryWebApp"
+  id="myeclipse.1313163845250"
+  context-root="/dd"
+  j2ee-spec="5.0"
+  archive="DataDictionaryWebApp.war">
+  <attributes>
+    <attribute name="webrootdir" value="/WebRoot" />
+  </attributes>
+</project-module>
+

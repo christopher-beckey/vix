@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<build xmlns="http://va.gov/VistA/kids/manifest" name="MAG*3.0*125" patchName="Background Processor Maintenance III" patch="125">
+  <components>
+    <securityKeys />
+    <parameterDefinitions />
+    <printTemplates />
+    <hl7s />
+    <menuOptions />
+    <sorts />
+    <rpcs />
+    <dataDictionaries />
+    <routines />
+    <protocols />
+  </components>
+</build>

@@ -1,0 +1,29 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MavenBuilder2", "MavenBuilder2\MavenBuilder2.csproj", "{22E7EBBE-9F7C-4801-B3F9-095EEE5B6C87}"
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 2
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://tfs.hrshsc.net/tfs/healthcarecollection
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = MavenBuilder2\\MavenBuilder2.csproj
+		SccProjectName1 = MavenBuilder2
+		SccLocalPath1 = MavenBuilder2
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{22E7EBBE-9F7C-4801-B3F9-095EEE5B6C87}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{22E7EBBE-9F7C-4801-B3F9-095EEE5B6C87}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{22E7EBBE-9F7C-4801-B3F9-095EEE5B6C87}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{22E7EBBE-9F7C-4801-B3F9-095EEE5B6C87}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

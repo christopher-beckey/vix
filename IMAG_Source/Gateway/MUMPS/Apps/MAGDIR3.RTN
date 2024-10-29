@@ -1,0 +1,200 @@
+MAGDIR3 ;WOIFO/PMK - Read a DICOM image file ; 05/07/2007 11:04
+ ;;3.0;IMAGING;**10,54**;MAR 19, 2002;;OCT 28, 2009
+ ;; Per VHA Directive 2004-038, this routine should not be modified.
+ ;; +---------------------------------------------------------------+
+ ;; | Property of the US Government.                                |
+ ;; | No permission to copy or redistribute this software is given. |
+ ;; | Use of unreleased versions of this software requires the user |
+ ;; | to execute a written test agreement with the VistA Imaging    |
+ ;; | Development Office of the Department of Veterans Affairs,     |
+ ;; | telephone (301) 734-0100.                                     |
+ ;; | The Food and Drug Administration classifies this software as  |
+ ;; | a medical device.  As such, it may not be changed in any way. |
+ ;; | Modifications to this software may result in an adulterated   |
+ ;; | medical device under 21CFR820, the use of which is considered |
+ ;; | to be a violation of US Federal Statutes.                     |
+ ;; +---------------------------------------------------------------+
+ ;;
+ Q
+ ; $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+ ; $$                                                              $$
+ ; $$  This routine should not be modified at the site to create   $$
+ ; $$  new entries to look up the case number.  Rather, contact    $$
+ ; $$  the Imaging Software Development team (via NOIS), and they  $$
+ ; $$  will make the changes for you.  That way, the software      $$
+ ; $$  remains under FDA sanctioned control.                       $$
+ ; $$  Also, your suggested changes will be shared with other      $$
+ ; $$  sites, and won't be erased when upgrades are installed.     $$
+ ; $$                                                              $$
+ ; $$  Thanks in advance for following this policy!                $$
+ ; $$                                                              $$
+ ; $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+ ;
+ADACNM ; ADAC Nuclear Medicine -- accession number at end of Study Description
+ N X
+ S X=$$GETDATA^MAGDFCNS(INODE,"0008,1030") ; Study Description
+ S X=$TR(X,"\","/") ; just in case the techs type the wrong slash!
+ S (CASETEXT,CASENUMB)=$P(X,"//",2) ; after // delimiter
+ Q
+ ;
+CEMAX ; CEMAX: location depends on version of firmware
+ N D,X
+ S X=$$GETDATA^MAGDFCNS(INODE,"0008,0050")
+ I (X="")!(X="<unknown>") D
+ . S X=$$GETDATA^MAGDFCNS(INODE,"0020,0010")
+ . Q
+ ;
+ ; YYYYMMDD or YYYY.MM.DD --> MMDDYY
+ S D=$TR(STUDYDAT,"."),D=$E(D,5,8)_$E(D,3,4)
+ ;
+ S (CASETEXT,CASENUMB)=D_"-"_X
+ Q
+ ;
+GECTHISA ; GE High Speed Advantage CT
+ ;
+ ; The case number is passed as the accession number.
+ S CASETEXT=ACNUMB,CASENUMB=+CASETEXT
+ Q
+ ;
+GEDRS ; GE Digital Radiography System
+ ;
+ ; The case number is passed in the Study ID element
+ ;
+ S CASETEXT=$$GETDATA^MAGDFCNS(INODE,"0020,0010")
+ S CASENUMB=+CASETEXT
+ Q
+ ;
+GEMSPACS ; All modalities for the GE Medical Systems PACS come here
+ N D
+ ;
+ ; The GEMS PACS puts the case number in the accession number field
+ ; Create the date-case# from the study date and the case number
+ ;
+ ; YYYYMMDD or YYYY.MM.DD --> MMDDYY
+ S D=$TR(STUDYDAT,"."),D=$E(D,5,8)_$E(D,3,4)
+ S (CASETEXT,CASENUMB)=D_"-"_ACNUMB
+ Q
+ ;
+GEWHCT ; Special case for West Haven CT
+ N X
+ ; The Comment field gets mapped to the Study Description
+ S X=$$GETDATA^MAGDFCNS(INODE,"0008,1030")
+ I (X="")!(X="<unknown>") D IGNORE Q
+ ; Otherwise, the case number is passed as the accession number.
+ ;S CASETEXT=X,CASENUMB=+CASETEXT  ;WFP-Only generates a Case#, not an Accession#
+ ;Q  ;WFP-connected with above line
+ ;
+ ;WFP-The following lines will generate the Accession#
+ ; YYYYMMDD or YYYY.MM.DD --> MMDDYY
+ S D=$TR(STUDYDAT,"."),D=$E(D,5,8)_$E(D,3,4)
+ ;
+ S (CASETEXT,CASENUMB)=D_"-"_X
+ Q
+ ;
+GEWHMR ; Special case for West Haven MRI
+ N D,X
+ S X=$$GETDATA^MAGDFCNS(INODE,"0008,0050") ; Study Description
+ I (X="")!(X="<unknown>") D IGNORE Q
+ ; Otherwise, the case number is passed as the accession number.
+ ;
+ ; YYYYMMDD or YYYY.MM.DD --> MMDDYY
+ S D=$TR(STUDYDAT,"."),D=$E(D,5,8)_$E(D,3,4)
+ ;
+ S (CASETEXT,CASENUMB)=D_"-"_X
+ Q
+ ;
+IGNORE ; Ignore this image file
+ S (CASETEXT,CASENUMB)="*** IGNORE IMAGE ***"
+ Q
+ ;
+LONGCASE ; Accession number has long case number in it
+ I ACNUMB'["-" G GEMSPACS ; probably contains just the case number
+ I ACNUMB["~" S ACNUMB=$P(ACNUMB,"~",2) ; ACR-NEMA formatted value
+ S (CASETEXT,CASENUMB)=ACNUMB
+ Q
+ ;
+MEDCASE ; Medicine images captured on modalities, such as the OEC C-Arm Fluro.
+ ; The accession number field has the case number. This number consists
+ ; of 2 letters followed by numbers.
+ G CORRECT
+ ;
+CORRECT ; Accession number has the correct value
+ S (CASENUMB,CASETEXT)=ACNUMB
+ Q
+ ;
+PCRMR ; Picker Vista 1.0 MR
+ N T
+ ; The accession number number is passed as the first item
+ ; in the patient comments element.
+ ; The comment lines are 61 characters each, delimited by the
+ ; backslash character ("\").  This code strips out the accession number.
+ ;
+ ; The tech may enter the wrong slash...
+ S T=$TR($$GETDATA^MAGDFCNS(INODE,"0010,4000"),"\_","//")
+ S CASETEXT=T,(CASENUMB,ACNUMB)=$P(T,"/",1)
+ Q
+ ;
+PIDCASE ; Case number in PID, after SSN
+ S PID=$TR(PID,"\_","//") ; just in case techs type the wrong /
+ S CASETEXT=$P(PID,"/",2),CASENUMB=+CASETEXT
+ S PID=$P(PID,"/")
+ Q
+ ;
+PIDCASE2 ; Accession number is at the at end of the Patient ID, after //
+ S PID=$TR(PID,"\_","//") ; just in case techs type the wrong /
+ S (CASETEXT,CASENUMB)=$P(PID,"//",2) ; after // delimiter
+ S PID=$P(PID,"//")
+ Q
+ ;
+PNAME ; Accession number is at the at end of the Patient Name, after //
+ S PNAMEDCM=$TR(PNAMEDCM,"\","/") ; just in case techs type the wrong /
+ S (CASETEXT,CASENUMB)=$P(PNAMEDCM,"//",2) ; after // delimiter
+ S PNAMEDCM=$P(PNAMEDCM,"//")
+ Q
+ ;
+PQ2000 ; Picker PQ2000 CT
+ N I
+ ;
+ ; The case number is passed as the first line of the patient comments
+ ; element.  The comment lines are 61 characters each, delimited by the
+ ; backslash character ("\").  This code strips out the case number.
+ ;
+ S CASETEXT=$$GETDATA^MAGDFCNS(INODE,"0010,4000")
+ S CASENUMB=$P(CASETEXT,"\")
+ S:CASENUMB'["-" CASENUMB=+CASENUMB
+ ;
+ ; Special code to format patient name
+ S PNAMEDCM=$P(PNAMEDCM,"/") ; remove the patient location comment
+ Q
+ ;
+SERDESC ; ADAC Nuclear Medicine -- accession number at end of Series Description
+ N X
+ S X=$$GETDATA^MAGDFCNS(INODE,"0008,103E") ; Series Description
+ S X=$TR(X,"\","/") ; just in case the techs type the wrong slash!
+ S (CASETEXT,CASENUMB)=$P(X,"/",$L(X,"/")) ; after last / delimiter
+ Q
+ ;
+STUDYID ; Study ID has long case number in it
+ S (CASETEXT,CASENUMB)=$$GETDATA^MAGDFCNS(INODE,"0020,0010")
+ Q
+ ;
+STUDYUID ; DICOM Study Instance UID may come from VistA
+ N UIDROOT
+ S UIDROOT=^MAGDICOM(2006.563,1,"UID ROOT")_".1.4"
+ I $P(STUDYUID,".",1,6)=UIDROOT D  ; comes from VistA!
+ . ; get the case number from last two pieces of the study instance uid
+ . S CASETEXT=$TR($P(STUDYUID,".",$L(STUDYUID,".")-1,999),".","-")
+ . I $L($P(CASETEXT,"-"))=5 S CASETEXT="0"_CASETEXT ; add zero to month
+ . Q
+ E  S CASETEXT="<unknown>" ; not a VistA Study Instance UID
+ S CASENUMB=CASETEXT
+ Q
+ ;
+BOICT ; PICKER MxTwin WITH NO MWL - Boise VAMC
+ ;
+ ; The case number is passed in the 0010,0042
+ ;
+ S CASETEXT=$$GETDATA^MAGDFCNS(INODE,"0010,0042")
+ S CASENUMB=+CASETEXT
+ Q
+ ;

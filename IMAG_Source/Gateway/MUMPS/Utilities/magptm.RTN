@@ -1,0 +1,210 @@
+magptm ;WOIFO/MLH - PACS testing - message master ; 20 Jun 2005  4:16 PM
+ ; *** CAUTION:  not for distribution beyond Silver Spring OIFO!
+ q
+ ;
+ORU(xnsegs) ; SUBROUTINE - report message
+ n rannum ; random 6-digit number
+ i '$d(xtyp) s xtyp="ORU"
+ k HLA
+ ;
+ s rannum=$e($r(1000000)+1000000,2,7),^TMP($j,"RANNUM")=rannum
+ d INIT^HLFNC2("MAG "_xtyp,.HL)
+ S HLCS=$E(HLECH,1),HLRS=$E(HLECH,2),HLSS=$E(HLECH,4)
+ i $g(HL) d  q
+ . w !,"Error: "_$p(HL,"^",2)
+ . q
+ ;
+ d PID^magpta ; build PID segment
+ d PV1^magpta ; build PV1 segment
+ d ORC^magpto("XO") ; build ORC segment
+ d OBR^magpto ; build OBR segment
+ d OBX^magpto($g(xnsegs,10)) ; build OBX segments
+ q
+ ;
+ORM(xordcod,xtyp,xnsegs) ; SUBROUTINE - order message
+ n rannum ; random 6-digit numbers
+ i '$d(xtyp) s xtyp="ORM"
+ k HLA
+ ;
+ s rannum=$e($r(1000000)+1000000,2,7),^TMP($j,"RANNUM")=rannum
+ d INIT^HLFNC2("MAG "_xtyp,.HL)
+ S HLCS=$E(HLECH,1),HLRS=$E(HLECH,2),HLSS=$E(HLECH,4)
+ i $g(HL) d  q
+ . w !,"Error: "_$p(HL,"^",2)
+ . q
+ ;
+ d PID^magpta ; build PID segment
+ d PV1^magpta ; build PV1 segment
+ d ORC^magpto("NW") ; build ORC segment
+ d OBR^magpto ; build OBR segment
+ d ZDS^magpto ; build ZDS segment
+ d OBX^magpto($g(xnsegs,10)) ; build OBX segments
+ q
+ ;
+ADTDIS ; SUBROUTINE - ADT discharge message
+ ;
+ n ormmsg,loc
+ m ormmsg=HLA("HLS") k HLA
+ d INIT^HLFNC2("MAG A03",.HL)
+ S HLCS=$E(HLECH,1),HLRS=$E(HLECH,2),HLSS=$E(HLECH,4)
+ i $g(HL) d  q
+ . w !,"Error: "_$p(HL,"^",2)
+ . q
+ ;
+ d EVN^magpta ; build EVN segment
+ s HLA("HLS",2)=ormmsg(1) ; recover PID segment
+ s HLA("HLS",3)=ormmsg(2) ; recover PV1 segment
+ ; insert transfer
+ s loc=$p(HLA("HLS",3),"^",4),$p(HLA("HLS",3),"^",7)=loc
+ s $p(loc,"&",1)=$c(65+$r(26))_($r(10)+1),$p(loc,"&",2)=$c(65+$r(26))
+ s $p(HLA("HLS",3),"^",4)=loc
+ ;
+ q
+ ;
+ADTICN(xnuxist) ; SUBROUTINE - ADT update of ICN
+ ;
+ n ormmsg,ids,icn
+ m ormmsg=HLA("HLS") k HLA
+ d INIT^HLFNC2("MAG A40",.HL)
+ S HLCS=$E(HLECH,1),HLRS=$E(HLECH,2),HLSS=$E(HLECH,4)
+ i $g(HL) d  q
+ . w !,"Error: "_$p(HL,"^",2)
+ . q
+ ;
+ d EVN^magpta ; build EVN segment
+ s HLA("HLS",2)=ormmsg(1) ; recover PID segment
+ ; insert new ICN
+ s ids=$p(HLA("HLS",2),"^",4),icn=$p(ids,"|",2)
+ s $p(HLA("HLS",3),"^",1)="MRG"
+ s $p(HLA("HLS",3),"^",2)=ids
+ s $p(HLA("HLS",3),"^",5)=icn
+ s $p(HLA("HLS",3),"^",8)=$p(HLA("HLS",2),"^",6) ; name
+ i xnuxist="NEW" d
+ . s $p(icn,"~",1)="999V997"_$e(1000000+$r(1000000),2,7)
+ . q
+ e  d
+ . s $p(icn,"~",1)=^TMP($J,"PID")
+ . q
+ s $p(ids,"|",2)=icn
+ s $p(HLA("HLS",2),"^",4)=ids
+ s HLA("HLS",4)=ormmsg(2) ; recover PV1 segment
+ ;
+ q
+ ;
+ADTSSN ; SUBROUTINE - ADT update of SSN
+ ;
+ n ormmsg,ids,ssn
+ m ormmsg=HLA("HLS") k HLA
+ d INIT^HLFNC2("MAG A47",.HL)
+ S HLCS=$E(HLECH,1),HLRS=$E(HLECH,2),HLSS=$E(HLECH,4)
+ i $g(HL) d  q
+ . w !,"Error: "_$p(HL,"^",2)
+ . q
+ ;
+ d EVN^magpta ; build EVN segment
+ s HLA("HLS",2)=ormmsg(1) ; recover PID segment
+ ; insert new SSN
+ s ids=$p(HLA("HLS",2),"^",4),ssn=$p(ids,"|",1)
+ s $p(ssn,"~",1)="998"_$e(1000000+$r(1000000),2,7)
+ s $p(ids,"|",1)=ssn
+ s $p(HLA("HLS",2),"^",4)=ids
+ s HLA("HLS",4)=ormmsg(2) ; recover PV1 segment
+ ;
+ q
+ ;
+ADTUPD(xtyp) ; SUBROUTINE - ADT demo update message
+ ;
+ n ormmsg,flddta,segix
+ m ormmsg=HLA("HLS") k HLA
+ d INIT^HLFNC2("MAG A08",.HL)
+ S HLCS=$E(HLECH,1),HLRS=$E(HLECH,2),HLSS=$E(HLECH,4)
+ i $g(HL) d  q
+ . w !,"Error: "_$p(HL,"^",2)
+ . q
+ ;
+ d EVN^magpta ; build EVN segment
+ s HLA("HLS",2)=ormmsg(1) ; recover PID segment
+ s HLA("HLS",3)=ormmsg(2) ; recover PV1 segment
+ ; insert demographic update
+ i xtyp="addr" d
+ . s flddta=$p(HLA("HLS",2),"^",12)
+ . s $p(flddta,"~",3)="TOWN"_($r(10)+1),$p(flddta,"~",5)=$r(10)+99980
+ . s $p(HLA("HLS",2),"^",12)=flddta
+ . q
+ i xtyp="dob" d
+ . s flddta=$p(HLA("HLS",2),"^",8)
+ . i $r(2) d
+ . . s $e(flddta,1,4)=$e(flddta,1,4)+$r(10)+1
+ . . q
+ . e  d
+ . . s $e(flddta,5,6)=$e(100+(13-$e(flddta,5,6)),2,3)
+ . . q
+ . s $p(HLA("HLS",2),"^",8)=flddta
+ . q
+ i xtyp="sex" d
+ . s flddta=$p(HLA("HLS",2),"^",9)
+ . s $p(HLA("HLS",2),"^",9)=$s(flddta="M":"F",1:"M")
+ . q
+ ;
+ i $r(3)=0 d OBX^magptr  ; height / weight update
+ q
+ ;
+ADTXFR ; SUBROUTINE - ADT transfer message
+ ;
+ n ormmsg,loc
+ m ormmsg=HLA("HLS") k HLA
+ d INIT^HLFNC2("MAG A02",.HL)
+ S HLCS=$E(HLECH,1),HLRS=$E(HLECH,2),HLSS=$E(HLECH,4)
+ i $g(HL) d  q
+ . w !,"Error: "_$p(HL,"^",2)
+ . q
+ ;
+ d EVN^magpta ; build EVN segment
+ s HLA("HLS",2)=ormmsg(1) ; recover PID segment
+ s HLA("HLS",3)=ormmsg(2) ; recover PV1 segment
+ ; insert transfer
+ s loc=$p(HLA("HLS",3),"^",4),$p(HLA("HLS",3),"^",7)=loc
+ s $p(loc,"&",1)=$c(65+$r(26))_($r(10)+1),$p(loc,"&",2)=$c(65+$r(26))
+ s $p(HLA("HLS",3),"^",4)=loc
+ ;
+ q
+ ;
+SEND(xtyp,xresult) ;
+ n myresult,ids,idix,id1,HLHDR
+ i xtyp="ORM",'$D(^TMP($J,"PID")) s ^TMP($J,"PID")=HLA("HLS",1) ;d  ; seed temporary pt ICN
+ . s ids=$p(HLA("HLS",1),HLFS,4)
+ . f idix=1,2 d  q:'$d(ids)
+ . . s id1=$p(ids,"|",idix) 
+ . . i $p(id1,HLCS,4,5)=("USVHA"_HLCS_"NI") d
+ . . . s ^TMP($J,"PID")=$p(id1,HLCS,1)
+ . . . k ids
+ . . . q
+ . . q
+ . q
+ i $d(^XTMP("MAGNOSEND")) s xresult=$ZR_" is defined, no action taken" q 1
+ d GENERATE^HLMA("MAG "_xtyp,"LM",1,.myresult) ;i 1/0
+ i $p($g(myresult),"^",2,$L(myresult,"^"))="" d  q 0
+ . s xresult="Message #"_myresult_" generated."
+ . s HLA("HLS",0)=HLHDR(1)
+ . s ss="" f  s ss=$o(HLA("HLS",ss)) q:ss=""  w HLA("HLS",ss),!
+ . q
+ e  d  q -1
+ . s xresult="Could not generate a message, error: "_myresult
+ . q
+ q 0
+ ;
+LOG(xtext,xmsg) ;
+ n ss,i,dta
+ d LOG1(xtext)
+ i $g(xmsg)'="" d
+ . s ss=""
+ . f  s ss=$o(@xmsg@(ss)) q:ss=""  d LOG1(@xmsg@(ss))
+ . q 
+ k HLA("HLS",0)
+ q
+ ;
+LOG1(xtext) ;
+ n ss
+ s ss=$o(^XTMP("MAGPACSTESTLOG"," "),-1)+1
+ s ^XTMP("MAGPACSTESTLOG",ss)=$h*86400+$p($h,",",2)_"^"_xtext
+ q

@@ -1,0 +1,106 @@
+magtu001 ; 26 Jul 2006  4:02 PM
+ ; find patients who have admissions, allergies, height & weight on file
+ q
+ ;
+ ; unit test entry points
+ ; 
+unitadm d utfind(1) q  ; find admission candidates
+unitxfr d utfind(2) q  ; find transfer candidates
+unitdis d utfind(3) q  ; find discharge candidates
+ ;
+utfind(xtyp) ; subroutine - find candidates based on patient movement type
+ ; this fcn should be invoked for unit testing, when we want to recreate
+ ; a message from a specific pt movement number
+ ; 
+ ; input:  xtyp      type of patient movement
+ ;                   1=admission, 2=transfer, 3=discharge
+ ;
+ n pmix ; ---- patient movement index
+ n pmrec ; --- patient movement record
+ ;
+ w !
+ s pmix=0
+ f  s pmix=$o(^DGPM(pmix)) q:'pmix  s pmrec=^(pmix,0) d flchk
+ q
+ ;
+flchk ; subroutine - check vitals, allergies files
+ ;
+ n dfn ; ----- patient IEN
+ n fht ; ----- height-on-file flag
+ n fwt ; ----- weight-on-file flag
+ n gmrix ; --- ien on vitals or allergy file
+ n typ ; ----- type of vital
+ ;
+ i $p(pmrec,"^",2)'=xtyp q
+ s dfn=$p(pmrec,"^",3)
+ i xtyp=1,'$d(^DPT(dfn,.1)) q  ; admission but pt no longer i/p
+ i xtyp=2,'$d(^DPT(dfn,.1)) q  ; transfer but pt no longer i/p
+ i xtyp=3,$d(^DPT(dfn,.1)) q  ; discharge but pt now i/p
+ ;
+ w "pm: ",$j(pmix,4),"  pt: ",$j(dfn,5),"  "
+ s (fht,fwt)=""
+ s gmrix=0
+ f  s gmrix=$o(^GMR(120.5,"C",dfn,gmrix)) q:'gmrix  d  i fht,fwt q
+ . s typ=$p($g(^GMR(120.5,gmrix,0)),"^",3)
+ . s fht=fht+(typ=8)
+ . s fwt=fwt+(typ=9)
+ . q
+ w "height: ",$s(fht:"yes",1:"no "),"  "
+ w "weight: ",$s(fwt:"yes",1:"no "),"  "
+ w "allergies: ",$s($d(^GMR(120.8,"B",dfn)):"yes",1:"no ")
+ w !
+ q
+ ;
+findsys(xtyp,xobs) ; find in/outpatients with vitals, allergies
+ ; invoke this entry pt for system testing, when we want to find an
+ ; outpatient to admit (or outpatient to transfer/discharge)
+ ; and don't care about recreating a specific historical pt movement
+ ;
+ ; input:  xtyp   patient type
+ ;                  I = inpatient, O = outpatient
+ ;         xobs   observation desired
+ ;                  A = allergy, H = height, W = weight
+ ; 
+ i "^I^O^"'[("^"_xtyp_"^") d  q
+ . w "usage:  DO findsys^"_$t(+0)_"([""I""|""O""],[""A""|""H""|""W""]*)",!
+ . q
+ ;
+ n dfn ; --- patient IEN
+ ;
+ w !
+ s dfn=0
+ f  s dfn=$o(^DPT(dfn)) q:'dfn  d
+ . i xtyp="I",'$d(^DPT(dfn,.1)) q  ; not an i/p
+ . i xtyp="O",$d(^DPT(dfn,.1)) q  ; not an o/p
+ . d sflchk ; check vitals, allergy files
+ . q
+ q
+ ;
+sflchk ; system testing subroutine - check vitals, allergy files
+ ;
+ n fal ; ---- allergies-on-file flag
+ n fht ; ---- height-on-file flag
+ n fwt ; ---- weight-on-file flag
+ n gmrix ; -- ien on vitals or allergy file
+ n typ ; ---- type of vital
+ ;
+ s fal=$d(^GMR(120.8,"B",dfn))
+ s (fht,fwt)=""
+ s gmrix=0
+ f  s gmrix=$o(^GMR(120.5,"C",dfn,gmrix)) q:'gmrix  d  i fht,fwt q
+ . s typ=$p($g(^GMR(120.5,gmrix,0)),"^",3)
+ . s fht=fht+(typ=8)
+ . s fwt=fwt+(typ=9)
+ . q
+ ;
+ ; bail if they asked for something we don't have on file
+ i xobs["A",'fal q
+ i xobs["H",'fht q
+ i xobs["W",'fwt q
+ ;
+ w "  pt: ",$j(dfn,5),"  "
+ w "height: ",$s(fht:"yes",1:"no "),"  "
+ w "weight: ",$s(fwt:"yes",1:"no "),"  "
+ w "allergies: ",$s($d(^GMR(120.8,"B",dfn)):"yes",1:"no ")
+ w !
+ q

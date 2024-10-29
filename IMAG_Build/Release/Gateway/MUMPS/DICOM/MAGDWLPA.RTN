@@ -1,0 +1,219 @@
+MAGDWLPA ;WOIFO/PMK - Update DICOM worklist information ; 26 Jul 2010 10:17 AM
+ ;;3.0;IMAGING;**11,51,49**;Mar 19, 2002;Build 2201;Jun 29, 2011
+ ;; Per VHA Directive 2004-038, this routine should not be modified.
+ ;; +---------------------------------------------------------------+
+ ;; | Property of the US Government.                                |
+ ;; | No permission to copy or redistribute this software is given. |
+ ;; | Use of unreleased versions of this software requires the user |
+ ;; | to execute a written test agreement with the VistA Imaging    |
+ ;; | Development Office of the Department of Veterans Affairs,     |
+ ;; | telephone (301) 734-0100.                                     |
+ ;; | The Food and Drug Administration classifies this software as  |
+ ;; | a medical device.  As such, it may not be changed in any way. |
+ ;; | Modifications to this software may result in an adulterated   |
+ ;; | medical device under 21CFR820, the use of which is considered |
+ ;; | to be a violation of US Federal Statutes.                     |
+ ;; +---------------------------------------------------------------+
+ ;;
+ ; M2M Broker Version
+ ;
+ ; Original Version: ^MAGDWLP1
+ ;
+ENTRY ; entry point from ^MAGDHRC to update DICOM worklist information
+ N ACNUMB ;--- accession number (radiology or consults)
+ N DATECASE ;- radiology date case number (mmddyy-nnnnn format)
+ N DIVISION ;- the 3-digit hospital identifier (e.g. 688 for Wash.)
+ N DCMPID ;--- patient id for DICOM (SSN with dashes)
+ N ITYPCODE ;- Radiology image type code (RAD for General Radiology)
+ N PID ;------ patient identifier (social security number w/o dashes)
+ N PNAME ;---- patient name (last~first~middle)
+ N SCHSDYDT ;- date and time for which the procedure is scheduled
+ N SERVICE ;-- imaging service (defined in ^MAGDICOM(2006.589))
+ N SID ;------ short patient id (example: K1234)
+ N STATUS ;--- study status (SCHEDULED, CANCELLED, VERIFIED)
+ N STUDYID ;-- study identifier (case number, nnnnn format)
+ N STUDYIEN ;- MWL Fileman table internal entry number for the study
+ N TIUSIGN ;-- TIU note signed flag (-1=only SDAM, no GMRC; 0=no; 1=yes)
+ N I,N,X,Y,Z
+ ;
+ I 'SENDPACS D  ; set in ^MAGDHRC and used to display MWL progress
+ . S X=" Update Modality Worklist -- "_MESSAGE_" -- HL7("_MSGNO_")"
+ . D MESSAGE^MAGDMLOG(1,0,X,"tV")
+ . Q
+ ;
+ ; get the division location for the study
+ D SEQPUSH^MAGDFCNS("0008,0082") ; Institution Code Sequence
+ S DIVISION=$$GETDATA^MAGDFCNS("OUT","0008,0100") ; division code
+ D SEQPOP^MAGDFCNS ; end Institution Code Sequence
+ ;
+ ; get the imaging type code
+ D SEQPUSH^MAGDFCNS("0033,xx40,VA DHCP") ; Imaging Type Sequence
+ S ITYPCODE=$$GETDATA^MAGDFCNS("OUT","0008,0100") ; imaging type code
+ S SERVICE=$$GETDATA^MAGDFCNS("OUT","0008,0102") ; imaging service
+ S SERVICE=$P(SERVICE,"99",2) ; strip off leading 99
+ D SEQPOP^MAGDFCNS ; end Imaging Type Sequence
+ ;
+ I FORWARD D  ; all FORWARDs have STATUS="CREATED"
+ . N HL7SEGNO
+ . S HL7SEGNO=$$GETSEG^MAGDHRC0("ZSV") ; setup to randomly read HL7 fields
+ . I HL7SEGNO,$$GETEXIST^MAGDHRC0(4),$$GETEXIST^MAGDHRC0(5) D
+ . . ; the original service request is likely to be in the MWL db
+ . . ; delete the original service request from the MWL db
+ . . D  ; needed to protect the DIVISION, ITYPCODE & SERVICE variables
+ . . . N DIVISION,ITYPCODE,SERVICE
+ . . . S DIVISION=$$GETDATA^MAGDHRC0(5,1,3)
+ . . . S ITYPCODE=$$GETDATA^MAGDHRC0(5,1,1)
+ . . . S SERVICE=$$GETDATA^MAGDHRC0(4,1,6)
+ . . . S SERVICE=$P(SERVICE,"99",2) ; strip off leading 99
+ . . . D LOOKUP
+ . . . I STUDYIEN D
+ . . . . ; delete the original service request from the MWL db
+ . . . . D VERIFIED^MAGDWLPB
+ . . . . Q
+ . . . Q
+ . . ; if the new request should be in MWL db, create it
+ . . I ITYPCODE'="" D REGULAR ; create the new request in MWL db
+ . . Q
+ . E  D
+ . . ; the original service not in MWL db, new one should be, create it
+ . . D REGULAR
+ . . Q
+ . Q
+ E  D  ; non-FORWARD
+ . D REGULAR ; create/update the request in MWL db
+ . Q
+ Q
+ ;
+REGULAR ; process a regular (non-forwarded) request transaction
+ D LOOKUP
+ ; get the study data from the DICOM message
+ S STATUS=$$GETDATA^MAGDFCNS("OUT","0032,000A")
+ I "^CREATED^SCHEDULED^ARRIVED^STARTED^"[("^"_STATUS_"^") D
+ . ; add the study to the database
+ . D CREATE^MAGDWLPB
+ . Q
+ E  I STATUS="CANCELLED" D  ; remove the study from the database
+ . ; study cancelled, remove it from the database
+ . ; Note: might want to keep it in the db and flag it as cancelled
+ . D VERIFIED^MAGDWLPB
+ . Q
+ E  I STATUS="CHECK OUT" D  ; remove the appointment from the study
+ . ; remove one appointment from the study - may be more than one
+ . D CHECKOUT^MAGDWLPC
+ . Q
+ E  I STATUS="COMPLETED" D  ; remove the study from the database
+ . D VERIFIED^MAGDWLPB
+ . Q
+ E  I STATUS="VERIFIED" D  ; remove the study from the database
+ . D VERIFIED^MAGDWLPB
+ . Q
+ E  D  ;
+ . S MSG="Unknown STATUS: """_STATUS_""" -- message ignored"
+ . D WARNING^MAGDFCNS(MSG)
+ . Q
+ Q
+ ;
+LOOKUP ; lookup patient in MWL db - update patient demographics
+ D SEQINIT^MAGDFCNS ; initialize sequence stack
+ I '$D(^MAGDWLST(2006.55,DIVISION,1,DFN)) D  ; create the patient entry
+ . N X
+ . L +^MAGDWLST(2006.55,DIVISION,1):1E9 ; serialize name generation code
+ . S X=$G(^MAGDWLST(2006.55,DIVISION,1,0))
+ . S $P(X,"^",1,2)="2006.552^PATIENT"
+ . S:$O(^MAGDWLST(2006.55,DIVISION,1," "),-1)<DFN $P(X,"^",3)=DFN
+ . S $P(X,"^",4)=$P(X,"^",4)+1
+ . S ^MAGDWLST(2006.55,DIVISION,1,0)=X
+ . S ^MAGDWLST(2006.55,DIVISION,1,DFN,0)=""
+ . L -^MAGDWLST(2006.55,DIVISION,1)
+ . Q
+ ;
+ D UPDATE(DIVISION,DFN)
+ ;
+ ; check for medical alerts -- update them if necessary
+ S N=$$GETDATA^MAGDFCNS("OUT","0010,2000",0,0)
+ I N D  ; update the medical alerts
+ . K ^MAGDWLST(2006.55,DIVISION,1,DFN,1) ; remove previous alerts
+ . S ^MAGDWLST(2006.55,DIVISION,1,DFN,1,0)="2006.5522^MEDICAL ALERT^"_N_"^"_N
+ . F I=1:1:N D  ; output each medical alert
+ . . S X=$$GETDATA^MAGDFCNS("OUT","0010,2000",I,1)
+ . . S ^MAGDWLST(2006.55,DIVISION,1,DFN,1,I,0)=X
+ . . Q
+ . Q
+ ;
+ ; get the IEN for the study -- accession number is mmddyy-CASE# format
+ S ACNUMB=$$GETDATA^MAGDFCNS("OUT","0008,0050") ; accession number
+ S DATECASE=$S(SERVICE="RAD":$P(ACNUMB,"-",$L(ACNUMB,"-")-1,999),1:ACNUMB)
+ S STUDYID=$$GETDATA^MAGDFCNS("OUT","0020,0010") ; case number (CASE#)
+ ; lookup study
+ S STUDYIEN=$O(^MAGDWLST(2006.56,DIVISION,1,"C",SERVICE,DATECASE,""))
+ Q
+ ;
+UPDATE(DIVISION,DFN) ; update the patient record in the MWL db
+ N OLDPID,OLDPNAME,OLDSID,X,Y
+ S Y=^MAGDWLST(2006.55,DIVISION,1,DFN,0) ; get old data, if present
+ S OLDPNAME=$P(Y,"^",2),OLDPID=$P(Y,"^",3),OLDSID=$P(Y,"^",7)
+ ; get patient data from the DICOM message
+ S PNAME=$$GETDATA^MAGDFCNS("OUT","0010,0010") ; patient name
+ S PNAME=$TR(PNAME,"^","~")
+ S DCMPID=$$GETDATA^MAGDFCNS("OUT","0010,0020") ; patient id (ssn)
+ I $G(^MAGDICOM(2006.563,1,"SSN DASHES FOR PACS"))="NO",DCMPID'["-" D
+ . S PID=DCMPID ; put the dashes back into the SSN (NNN-NN-NNNN)
+ . S DCMPID=$E(DCMPID,1,3)_"-"_$E(DCMPID,4,5)_"-"_$E(DCMPID,6,999)
+ . Q
+ E  D
+ . S PID=$TR(DCMPID,"-") ; remove dashes from patient id (ssn)
+ . Q
+ S X=STATNUMB,$P(X,"^",2)=PNAME,$P(X,"^",3)=PID
+ S SID=$$GETDATA^MAGDFCNS("OUT","0010,1000") ; Short patient id
+ S $P(X,"^",4)=DCMPID ; social security number
+ S $P(X,"^",5)=$$GETDATA^MAGDFCNS("OUT","0010,0030") ; patient dob
+ S $P(X,"^",6)=$$GETDATA^MAGDFCNS("OUT","0010,0040") ; patient sex
+ S $P(X,"^",7)=SID
+ S $P(X,"^",8)=$$GETDATA^MAGDFCNS("OUT","0010,2160") ; race
+ S $P(X,"^",9)=$$GETDATA^MAGDFCNS("OUT","0010,21C0") ; pregnancy status
+ ;
+ ; get current patient location (ward)
+ S $P(X,"^",10)=$$GETDATA^MAGDFCNS("OUT","0038,0300") ; patient location
+ ;
+ ; get patient home address
+ S $P(X,"^",11)=$$GETDATA^MAGDFCNS("OUT","0010,1040") ; patient address
+ ;
+ ; get master patient index integration control number (ICN)
+ S Z=$$GETDATA^MAGDFCNS("OUT","ICN") ; "0010,1000" is for PACS short id
+ S $P(X,"^",12)=$S(Z'="":Z,1:$$GETDATA^MAGDFCNS("OUT","0010,1000"))
+ S $P(X,"^",13)=$$GETDATA^MAGDFCNS("OUT","SITE-DFN")
+ ;
+ ; store the data into the patient file in the ^MAGDWLST global
+ S ^MAGDWLST(2006.55,DIVISION,1,DFN,0)=X
+ ;
+ ; remove old cross references, if necessary
+ I OLDPNAME'="",OLDPNAME'=PNAME K ^MAGDWLST(2006.55,DIVISION,1,"C",OLDPNAME,DFN)
+ I OLDPID'="",OLDPID'=PID K ^MAGDWLST(2006.55,DIVISION,1,"D",OLDPID,DFN)
+ I OLDSID'="",OLDSID'=SID K ^MAGDWLST(2006.55,DIVISION,1,"E",OLDSID,DFN)
+ ;
+ ; set new cross references
+ S ^MAGDWLST(2006.55,DIVISION,1,"C",PNAME,DFN)=""
+ S ^MAGDWLST(2006.55,DIVISION,1,"D",PID,DFN)=""
+ S:SID'="" ^MAGDWLST(2006.55,DIVISION,1,"E",SID,DFN)=""
+ ;
+ ; save miscellaneous data
+ K ^MAGDWLST(2006.55,DIVISION,1,DFN,2) ; remove any old data
+ D INSERT^MAGDWLPB("P",DIVISION,DFN,"0010,1020") ; Patient Size (height)
+ D INSERT^MAGDWLPB("P",DIVISION,DFN,"0010,1030") ; Patient Weight
+ D INSERT^MAGDWLPB("P",DIVISION,DFN,"0038,0010") ; Admission ID
+ D INSERT^MAGDWLPB("P",DIVISION,DFN,"0038,4000") ; Visit Comments (in/out patient)
+ D INSERT^MAGDWLPB("P",DIVISION,DFN,"0040,3001") ; Confidentiality Constraint
+ Q
+ ;
+ADT ; entry for ADT updates
+ N DIVISION,EVENT,HL7SEGNO,X
+ S HL7SEGNO=$$GETSEG^MAGDHRC0("EVN")
+ I 'HL7SEGNO Q
+ S EVENT=$$GETDATA^MAGDHRC0(1) Q:$E(EVENT)'="A"  ; non-ADT event code
+ S DIVISION="" ; check for the patient in multiple DIVISIONs
+ F  S DIVISION=$O(^MAGDWLST(2006.55,DIVISION)) Q:'DIVISION  D
+ . I $D(^MAGDWLST(2006.55,DIVISION,1,DFN)) D  ; found the patient
+ . . D UPDATE(DIVISION,DFN)
+ . . Q
+ . Q
+ Q

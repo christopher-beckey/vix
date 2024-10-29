@@ -1,0 +1,1730 @@
+KIDS Distribution saved on Mar 31, 2006@16:43:11
+Vistarad distributed RPCs for P18
+**KIDS**:MAG*3.0*18*RPC^
+
+**INSTALL NAME**
+MAG*3.0*18*RPC
+"BLD",2852,0)
+MAG*3.0*18*RPC^IMAGING^0^3060331^n
+"BLD",2852,1,0)
+^^1^1^3060331^
+"BLD",2852,1,1,0)
+Vistarad distributed RPCs for P18
+"BLD",2852,4,0)
+^9.64PA^^
+"BLD",2852,"KRN",0)
+^9.67PA^8989.52^19
+"BLD",2852,"KRN",.4,0)
+.4
+"BLD",2852,"KRN",.401,0)
+.401
+"BLD",2852,"KRN",.402,0)
+.402
+"BLD",2852,"KRN",.403,0)
+.403
+"BLD",2852,"KRN",.5,0)
+.5
+"BLD",2852,"KRN",.84,0)
+.84
+"BLD",2852,"KRN",3.6,0)
+3.6
+"BLD",2852,"KRN",3.8,0)
+3.8
+"BLD",2852,"KRN",9.2,0)
+9.2
+"BLD",2852,"KRN",9.8,0)
+9.8
+"BLD",2852,"KRN",19,0)
+19
+"BLD",2852,"KRN",19.1,0)
+19.1
+"BLD",2852,"KRN",101,0)
+101
+"BLD",2852,"KRN",409.61,0)
+409.61
+"BLD",2852,"KRN",771,0)
+771
+"BLD",2852,"KRN",870,0)
+870
+"BLD",2852,"KRN",8989.51,0)
+8989.51
+"BLD",2852,"KRN",8989.52,0)
+8989.52
+"BLD",2852,"KRN",8994,0)
+8994
+"BLD",2852,"KRN",8994,"NM",0)
+^9.68A^21^21
+"BLD",2852,"KRN",8994,"NM",1,0)
+MAGJ CACHELOCATION^^0
+"BLD",2852,"KRN",8994,"NM",2,0)
+MAGJ CPTMATCH^^0
+"BLD",2852,"KRN",8994,"NM",3,0)
+MAGJ CUSTOM LISTS^^0
+"BLD",2852,"KRN",8994,"NM",4,0)
+MAGJ EXAM REPORT^^0
+"BLD",2852,"KRN",8994,"NM",5,0)
+MAGJ HISTORYLIST^^0
+"BLD",2852,"KRN",8994,"NM",6,0)
+MAGJ PRIOREXAMS^^0
+"BLD",2852,"KRN",8994,"NM",7,0)
+MAGJ PT ALL EXAMS^^0
+"BLD",2852,"KRN",8994,"NM",8,0)
+MAGJ PTRADEXAMS^^0
+"BLD",2852,"KRN",8994,"NM",9,0)
+MAGJ RADACTIVEEXAMS^^0
+"BLD",2852,"KRN",8994,"NM",10,0)
+MAGJ RADCASEIMAGES^^0
+"BLD",2852,"KRN",8994,"NM",11,0)
+MAGJ RADCASELOCKS^^0
+"BLD",2852,"KRN",8994,"NM",12,0)
+MAGJ RADORDERDISP^^0
+"BLD",2852,"KRN",8994,"NM",13,0)
+MAGJ RADSTATUSCHECK^^0
+"BLD",2852,"KRN",8994,"NM",14,0)
+MAGJ RADSTATUSUPDATE^^0
+"BLD",2852,"KRN",8994,"NM",15,0)
+MAGJ REMOTESCREEN^^0
+"BLD",2852,"KRN",8994,"NM",16,0)
+MAGJ ROUTE ENABLE^^0
+"BLD",2852,"KRN",8994,"NM",17,0)
+MAGJ ROUTE EXAMS^^0
+"BLD",2852,"KRN",8994,"NM",18,0)
+MAGJ ROUTE REQUEST^^0
+"BLD",2852,"KRN",8994,"NM",19,0)
+MAGJ STUDY_DATA^^0
+"BLD",2852,"KRN",8994,"NM",20,0)
+MAGJ USER DATA^^0
+"BLD",2852,"KRN",8994,"NM",21,0)
+MAGJ USER2^^0
+"BLD",2852,"KRN",8994,"NM","B","MAGJ CACHELOCATION",1)
+
+"BLD",2852,"KRN",8994,"NM","B","MAGJ CPTMATCH",2)
+
+"BLD",2852,"KRN",8994,"NM","B","MAGJ CUSTOM LISTS",3)
+
+"BLD",2852,"KRN",8994,"NM","B","MAGJ EXAM REPORT",4)
+
+"BLD",2852,"KRN",8994,"NM","B","MAGJ HISTORYLIST",5)
+
+"BLD",2852,"KRN",8994,"NM","B","MAGJ PRIOREXAMS",6)
+
+"BLD",2852,"KRN",8994,"NM","B","MAGJ PT ALL EXAMS",7)
+
+"BLD",2852,"KRN",8994,"NM","B","MAGJ PTRADEXAMS",8)
+
+"BLD",2852,"KRN",8994,"NM","B","MAGJ RADACTIVEEXAMS",9)
+
+"BLD",2852,"KRN",8994,"NM","B","MAGJ RADCASEIMAGES",10)
+
+"BLD",2852,"KRN",8994,"NM","B","MAGJ RADCASELOCKS",11)
+
+"BLD",2852,"KRN",8994,"NM","B","MAGJ RADORDERDISP",12)
+
+"BLD",2852,"KRN",8994,"NM","B","MAGJ RADSTATUSCHECK",13)
+
+"BLD",2852,"KRN",8994,"NM","B","MAGJ RADSTATUSUPDATE",14)
+
+"BLD",2852,"KRN",8994,"NM","B","MAGJ REMOTESCREEN",15)
+
+"BLD",2852,"KRN",8994,"NM","B","MAGJ ROUTE ENABLE",16)
+
+"BLD",2852,"KRN",8994,"NM","B","MAGJ ROUTE EXAMS",17)
+
+"BLD",2852,"KRN",8994,"NM","B","MAGJ ROUTE REQUEST",18)
+
+"BLD",2852,"KRN",8994,"NM","B","MAGJ STUDY_DATA",19)
+
+"BLD",2852,"KRN",8994,"NM","B","MAGJ USER DATA",20)
+
+"BLD",2852,"KRN",8994,"NM","B","MAGJ USER2",21)
+
+"BLD",2852,"KRN","B",.4,.4)
+
+"BLD",2852,"KRN","B",.401,.401)
+
+"BLD",2852,"KRN","B",.402,.402)
+
+"BLD",2852,"KRN","B",.403,.403)
+
+"BLD",2852,"KRN","B",.5,.5)
+
+"BLD",2852,"KRN","B",.84,.84)
+
+"BLD",2852,"KRN","B",3.6,3.6)
+
+"BLD",2852,"KRN","B",3.8,3.8)
+
+"BLD",2852,"KRN","B",9.2,9.2)
+
+"BLD",2852,"KRN","B",9.8,9.8)
+
+"BLD",2852,"KRN","B",19,19)
+
+"BLD",2852,"KRN","B",19.1,19.1)
+
+"BLD",2852,"KRN","B",101,101)
+
+"BLD",2852,"KRN","B",409.61,409.61)
+
+"BLD",2852,"KRN","B",771,771)
+
+"BLD",2852,"KRN","B",870,870)
+
+"BLD",2852,"KRN","B",8989.51,8989.51)
+
+"BLD",2852,"KRN","B",8989.52,8989.52)
+
+"BLD",2852,"KRN","B",8994,8994)
+
+"KRN",8994,508,-1)
+0^9
+"KRN",8994,508,0)
+MAGJ RADACTIVEEXAMS^ACTIVE^MAGJLS2^4^R^^^1
+"KRN",8994,508,1,0)
+^8994.01^23^23
+"KRN",8994,508,1,1,0)
+ +---------------------------------------------------------------+
+"KRN",8994,508,1,2,0)
+ | Property of the US Government.                                |
+"KRN",8994,508,1,3,0)
+ | No permission to copy or redistribute this software is given. |
+"KRN",8994,508,1,4,0)
+ | Use of unreleased versions of this software requires the user |
+"KRN",8994,508,1,5,0)
+ | to execute a written test agreement with the VistA Imaging    |
+"KRN",8994,508,1,6,0)
+ | Development Office of the Department of Veterans Affairs,     |
+"KRN",8994,508,1,7,0)
+ | telephone (301) 734-0100.                                     |
+"KRN",8994,508,1,8,0)
+ |                                                               |
+"KRN",8994,508,1,9,0)
+ | The Food and Drug Administration classifies this software as  |
+"KRN",8994,508,1,10,0)
+ | a medical device.  As such, it may not be changed in any way. |
+"KRN",8994,508,1,11,0)
+ | Modifications to this software may result in an adulterated   |
+"KRN",8994,508,1,12,0)
+ | medical device under 21CFR820, the use of which is considered |
+"KRN",8994,508,1,13,0)
+ | to be a violation of US Federal Statutes.                     |
+"KRN",8994,508,1,14,0)
+ +---------------------------------------------------------------+
+"KRN",8994,508,1,15,0)
+This procedure is used by the Radiology Imaging Workstation to display
+"KRN",8994,508,1,16,0)
+listings of radiology exams:
+"KRN",8994,508,1,17,0)
+  1) UNREAD Exams--list all Active exams for selected modalities (Rad
+"KRN",8994,508,1,18,0)
+     Imaging Types) having an Exam Status of "Examined" (or its
+"KRN",8994,508,1,19,0)
+     equivalent).
+"KRN",8994,508,1,20,0)
+  2) RECENT Exams--list all Active exams for selected modalities (Rad
+"KRN",8994,508,1,21,0)
+     Imaging Types) EXCEPT those having an Exam Status of "Examined" (or
+"KRN",8994,508,1,22,0)
+     its equivalent).
+"KRN",8994,508,1,23,0)
+  3) ALL ACTIVE--Lists the union of the above two lists.
+"KRN",8994,508,2,0)
+^8994.02A^1^1
+"KRN",8994,508,2,1,0)
+DATA^1^50^1
+"KRN",8994,508,2,1,1,0)
+^^7^7^2981020^
+"KRN",8994,508,2,1,1,1,0)
+The input string supplies two parameters: LIST_TYPE ^ MODALITY
+"KRN",8994,508,2,1,1,2,0)
+  LIST_TYPE:  "U"--UNREAD Exams List; or, 
+"KRN",8994,508,2,1,1,3,0)
+              "R"--RECENT Exams List
+"KRN",8994,508,2,1,1,4,0)
+               "ALL"--All Active Exams
+"KRN",8994,508,2,1,1,5,0)
+  MODALITY:   "ALL"--list for all modalities; or,
+"KRN",8994,508,2,1,1,6,0)
+              ABB[^ABB^...] where ABB is the Radiology Imaging Type
+"KRN",8994,508,2,1,1,7,0)
+                Abbreviation (Imaging Types will correspond to modalities)
+"KRN",8994,508,2,"B","DATA",1)
+
+"KRN",8994,508,3,0)
+^^11^11^2981020^^^
+"KRN",8994,508,3,1,0)
+ARRAY(0)     = # Exams Found ^ Text for listing title, or error message
+"KRN",8994,508,3,2,0)
+ARRAY(1)     = List Column Headings, delimited by "^"
+"KRN",8994,508,3,3,0)
+ARRAY(2..N+1)= Exam data for display, delimited by "^", followed by exam
+"KRN",8994,508,3,4,0)
+               data as stored by Radiology package routine RAPTLU in ^TMP
+"KRN",8994,508,3,5,0)
+ 
+"KRN",8994,508,3,6,0)
+  Display data: ^ DAYCASE # ^ PAT. NAME ^ PAT ABB. ^ URGENCY ^ PROCEDURE ^
+"KRN",8994,508,3,7,0)
+     EXAM DATE ^ EXAM STATUS ^ # IMAGES ^ IMAGES ON MAG DISK? ^ EXAM LOC.
+"KRN",8994,508,3,8,0)
+     ^ ^TMP($J,"RAEX",
+"KRN",8994,508,3,9,0)
+      Data from ^TMP (expressed as Rad Pkg variable names):
+"KRN",8994,508,3,10,0)
+        RADFN ^ RADTI ^ RACNI ^ RANME ^ RASSN ^ RADATE ^ RADTE ^ RACN ^
+"KRN",8994,508,3,11,0)
+        RAPRC ^ RARPT ^ RAST
+"KRN",8994,509,-1)
+0^8
+"KRN",8994,509,0)
+MAGJ PTRADEXAMS^PTLIST^MAGJLST1^4^R^^^1
+"KRN",8994,509,1,0)
+^8994.01^17^17
+"KRN",8994,509,1,1,0)
+ +---------------------------------------------------------------+
+"KRN",8994,509,1,2,0)
+ | Property of the US Government.                                |
+"KRN",8994,509,1,3,0)
+ | No permission to copy or redistribute this software is given. |
+"KRN",8994,509,1,4,0)
+ | Use of unreleased versions of this software requires the user |
+"KRN",8994,509,1,5,0)
+ | to execute a written test agreement with the VistA Imaging    |
+"KRN",8994,509,1,6,0)
+ | Development Office of the Department of Veterans Affairs,     |
+"KRN",8994,509,1,7,0)
+ | telephone (301) 734-0100.                                     |
+"KRN",8994,509,1,8,0)
+ |                                                               |
+"KRN",8994,509,1,9,0)
+ | The Food and Drug Administration classifies this software as  |
+"KRN",8994,509,1,10,0)
+ | a medical device.  As such, it may not be changed in any way. |
+"KRN",8994,509,1,11,0)
+ | Modifications to this software may result in an adulterated   |
+"KRN",8994,509,1,12,0)
+ | medical device under 21CFR820, the use of which is considered |
+"KRN",8994,509,1,13,0)
+ | to be a violation of US Federal Statutes.                     |
+"KRN",8994,509,1,14,0)
+ +---------------------------------------------------------------+
+"KRN",8994,509,1,15,0)
+This procedure is used by the Radiology Imaging Workstation to display a
+"KRN",8994,509,1,16,0)
+listing of all, or a subset of all, radiology exams for a selected
+"KRN",8994,509,1,17,0)
+patient.
+"KRN",8994,509,2,0)
+^8994.02A^1^1
+"KRN",8994,509,2,1,0)
+DATA^1^30^1
+"KRN",8994,509,2,1,1,0)
+^^7^7^3000215^
+"KRN",8994,509,2,1,1,1,0)
+Patient DFN ^ #_YRS_LIMIT ^ #_EXAMS_LIMIT
+"KRN",8994,509,2,1,1,2,0)
+ 
+"KRN",8994,509,2,1,1,3,0)
+#_YRS_LIMIT -- optional; an integer value, used to limit the returned list
+"KRN",8994,509,2,1,1,4,0)
+to include only exams within the most recent # of years specified
+"KRN",8994,509,2,1,1,5,0)
+ 
+"KRN",8994,509,2,1,1,6,0)
+#_EXAMS_LIMIT -- optiona; integer value to limit the number of list
+"KRN",8994,509,2,1,1,7,0)
+entries returned
+"KRN",8994,509,2,"B","DATA",1)
+
+"KRN",8994,509,3,0)
+^^11^11^3000215^^^^
+"KRN",8994,509,3,1,0)
+ ARRAY(0)     = # Exams Found ^ Text for listing title, or error message
+"KRN",8994,509,3,2,0)
+ ARRAY(1)     = List Column Headings, delimited by "^"
+"KRN",8994,509,3,3,0)
+ ARRAY(2..N+1)= Exam data for display, delimited by "^", followed by exam
+"KRN",8994,509,3,4,0)
+                data as stored by Radiology package routine RAPTLU in ^TMP
+"KRN",8994,509,3,5,0)
+ 
+"KRN",8994,509,3,6,0)
+ Display data: 
+"KRN",8994,509,3,7,0)
+         LIST COUNTER ^ DAY-CASE # ^ PROCEDURE ^ EXAM DATE ^ EXAM STATUS ^
+"KRN",8994,509,3,8,0)
+         EXAM LOC. ^ ^TMP($J,"RAEX",
+"KRN",8994,509,3,9,0)
+ Data from ^TMP (expressed as Rad Pkg variable names):
+"KRN",8994,509,3,10,0)
+         RADFN ^ RADTI ^ RACNI ^ RANME ^ RASSN ^ RADATE ^ RADTE ^ RACN ^
+"KRN",8994,509,3,11,0)
+         RAPRC ^ RARPT ^ RAST 
+"KRN",8994,510,-1)
+0^10
+"KRN",8994,510,0)
+MAGJ RADCASEIMAGES^OPENCASE^MAGJEX1^4^R^^^1
+"KRN",8994,510,1,0)
+^8994.01^19^19
+"KRN",8994,510,1,1,0)
+ +---------------------------------------------------------------+
+"KRN",8994,510,1,2,0)
+ | Property of the US Government.                                |
+"KRN",8994,510,1,3,0)
+ | No permission to copy or redistribute this software is given. |
+"KRN",8994,510,1,4,0)
+ | Use of unreleased versions of this software requires the user |
+"KRN",8994,510,1,5,0)
+ | to execute a written test agreement with the VistA Imaging    |
+"KRN",8994,510,1,6,0)
+ | Development Office of the Department of Veterans Affairs,     |
+"KRN",8994,510,1,7,0)
+ | telephone (301) 734-0100.                                     |
+"KRN",8994,510,1,8,0)
+ |                                                               |
+"KRN",8994,510,1,9,0)
+ | The Food and Drug Administration classifies this software as  |
+"KRN",8994,510,1,10,0)
+ | a medical device.  As such, it may not be changed in any way. |
+"KRN",8994,510,1,11,0)
+ | Modifications to this software may result in an adulterated   |
+"KRN",8994,510,1,12,0)
+ | medical device under 21CFR820, the use of which is considered |
+"KRN",8994,510,1,13,0)
+ | to be a violation of US Federal Statutes.                     |
+"KRN",8994,510,1,14,0)
+ +---------------------------------------------------------------+
+"KRN",8994,510,1,15,0)
+This procedure is used by the Radiology Imaging Workstation to fetch image
+"KRN",8994,510,1,16,0)
+file information for all the images for a selected case.  If the case's
+"KRN",8994,510,1,17,0)
+images are not on magnetic storage, but are on archive storage (e.g.,
+"KRN",8994,510,1,18,0)
+jukebox), then the procedure initiates a fetch of the image files from
+"KRN",8994,510,1,19,0)
+the archive.
+"KRN",8994,510,2,0)
+^8994.02A^1^1
+"KRN",8994,510,2,1,0)
+DATA^1^50^1
+"KRN",8994,510,2,1,1,0)
+^^2^2^2980520^^^^
+"KRN",8994,510,2,1,1,1,0)
+Input value is the pointer to the RAD/NUC MED REPORTS file for the case;
+"KRN",8994,510,2,1,1,2,0)
+this pointer is referred to by the Radiology pkg variable RARPT.
+"KRN",8994,510,2,"B","DATA",1)
+
+"KRN",8994,510,3,0)
+^^7^7^2980520^^^
+"KRN",8994,510,3,1,0)
+ ARRAY(0)   = # Images Found ^ Text for reply status or error message
+"KRN",8994,510,3,2,0)
+ ARRAY(1..N)= "B2" ^ Image file data, delimited by "^", as supplied by the
+"KRN",8994,510,3,3,0)
+              subroutine BOTH^MAGFILEA
+"KRN",8994,510,3,4,0)
+ 
+"KRN",8994,510,3,5,0)
+ If images are on archive storage (not on magnetic disk), then the return
+"KRN",8994,510,3,6,0)
+ is :
+"KRN",8994,510,3,7,0)
+      ARRAY(0) = 0 ^ N images on jukebox have been requested
+"KRN",8994,511,-1)
+0^14
+"KRN",8994,511,0)
+MAGJ RADSTATUSUPDATE^STATUS^MAGJUPD1^4^R
+"KRN",8994,511,1,0)
+^8994.01^20^20^3051209^^^^
+"KRN",8994,511,1,1,0)
+ +---------------------------------------------------------------+
+"KRN",8994,511,1,2,0)
+ | Property of the US Government.                                |
+"KRN",8994,511,1,3,0)
+ | No permission to copy or redistribute this software is given. |
+"KRN",8994,511,1,4,0)
+ | Use of unreleased versions of this software requires the user |
+"KRN",8994,511,1,5,0)
+ | to execute a written test agreement with the VistA Imaging    |
+"KRN",8994,511,1,6,0)
+ | Development Office of the Department of Veterans Affairs,     |
+"KRN",8994,511,1,7,0)
+ | telephone (301) 734-0100.                                     |
+"KRN",8994,511,1,8,0)
+ |                                                               |
+"KRN",8994,511,1,9,0)
+ | The Food and Drug Administration classifies this software as  |
+"KRN",8994,511,1,10,0)
+ | a medical device.  As such, it may not be changed in any way. |
+"KRN",8994,511,1,11,0)
+ | Modifications to this software may result in an adulterated   |
+"KRN",8994,511,1,12,0)
+ | medical device under 21CFR820, the use of which is considered |
+"KRN",8994,511,1,13,0)
+ | to be a violation of US Federal Statutes.                     |
+"KRN",8994,511,1,14,0)
+ +---------------------------------------------------------------+
+"KRN",8994,511,1,15,0)
+This procedure is used by the Radiology Imaging Workstation to update the
+"KRN",8994,511,1,16,0)
+Radiology Exam Status code for the current exam to "Interpreted" (or an
+"KRN",8994,511,1,17,0)
+equivalent value).  Also, the case is closed by this procedure, and
+"KRN",8994,511,1,18,0)
+Key Image and/or Presentation State data is stored, if required.
+"KRN",8994,511,1,19,0)
+  Note: This procedure will only update the Exam Status if the current
+"KRN",8994,511,1,20,0)
+        value is "Examined".
+"KRN",8994,511,2,0)
+^8994.02A^2^2
+"KRN",8994,511,2,1,0)
+PARAMS^1^50^1^1
+"KRN",8994,511,2,1,1,0)
+^8994.021^5^5^3050216^^^^
+"KRN",8994,511,2,1,1,1,0)
+Input string = UPDFLAG ^ RARPT ^ RADFN ^ RADTI ^ RACNI ^ UPDPSKEY
+"KRN",8994,511,2,1,1,2,0)
+             UPDFLAG = 1/0 -- 1 to perform update; else no update made
+"KRN",8994,511,2,1,1,3,0)
+             RARPT = pointer to Rad Exam Report file
+"KRN",8994,511,2,1,1,4,0)
+             RADFN,RADTI,RACNI = pointers to Rad Patient File for the exam
+"KRN",8994,511,2,1,1,5,0)
+            UPDPSKEY = 1 if updating Pres State or Key Image data
+"KRN",8994,511,2,2,0)
+DATA^3^120^0^2
+"KRN",8994,511,2,2,1,0)
+^8994.021^14^14^3050601^^^^
+"KRN",8994,511,2,2,1,1,0)
+optional array of text containing Key Image and/or
+"KRN",8994,511,2,2,1,2,0)
+Image Presentation State data. The format of the message
+"KRN",8994,511,2,2,1,3,0)
+contained in DATA is:
+"KRN",8994,511,2,2,1,4,0)
+*IMAGE
+"KRN",8994,511,2,2,1,5,0)
+Image_IEN ^ KEY
+"KRN",8994,511,2,2,1,6,0)
+*PS
+"KRN",8994,511,2,2,1,7,0)
+PS_UID ^ KEY
+"KRN",8994,511,2,2,1,8,0)
+xml text lines 1
+"KRN",8994,511,2,2,1,9,0)
+xml text lines 2:N (as needed)
+"KRN",8994,511,2,2,1,10,0)
+*END_PS
+"KRN",8994,511,2,2,1,11,0)
+[*PS . . . *END_PS] (as many as for this image)
+"KRN",8994,511,2,2,1,12,0)
+*END_IMAGE
+"KRN",8994,511,2,2,1,13,0)
+[*IMAGE . . . *END_IMAGE] (as many as for the exam)
+"KRN",8994,511,2,2,1,14,0)
+*END
+"KRN",8994,511,2,"B","DATA",2)
+
+"KRN",8994,511,2,"B","PARAMS",1)
+
+"KRN",8994,511,2,"PARAMSEQ",1,1)
+
+"KRN",8994,511,2,"PARAMSEQ",2,2)
+
+"KRN",8994,511,3,0)
+^8994.03^3^3^3051209^^^^
+"KRN",8994,511,3,1,0)
+Returns string = 1/0 ^ RESULT
+"KRN",8994,511,3,2,0)
+                 1--Normal result; 0--Unexpected result
+"KRN",8994,511,3,3,0)
+                 RESULT--text description of the update results
+"KRN",8994,659,-1)
+0^1
+"KRN",8994,659,0)
+MAGJ CACHELOCATION^CACHEQ^MAGJUTL3^4^R^^^1
+"KRN",8994,659,1,0)
+^8994.01^17^17^3050224^
+"KRN",8994,659,1,1,0)
+ +---------------------------------------------------------------+
+"KRN",8994,659,1,2,0)
+ | Property of the US Government.                                |
+"KRN",8994,659,1,3,0)
+ | No permission to copy or redistribute this software is given. |
+"KRN",8994,659,1,4,0)
+ | Use of unreleased versions of this software requires the user |
+"KRN",8994,659,1,5,0)
+ | to execute a written test agreement with the VistA Imaging    |
+"KRN",8994,659,1,6,0)
+ | Development Office of the Department of Veterans Affairs,     |
+"KRN",8994,659,1,7,0)
+ | telephone (301) 734-0100.                                     |
+"KRN",8994,659,1,8,0)
+ |                                                               |
+"KRN",8994,659,1,9,0)
+ | The Food and Drug Administration classifies this software as  |
+"KRN",8994,659,1,10,0)
+ | a medical device.  As such, it may not be changed in any way. |
+"KRN",8994,659,1,11,0)
+ | Modifications to this software may result in an adulterated   |
+"KRN",8994,659,1,12,0)
+ | medical device under 21CFR820, the use of which is considered |
+"KRN",8994,659,1,13,0)
+ | to be a violation of US Federal Statutes.                     |
+"KRN",8994,659,1,14,0)
+ +---------------------------------------------------------------+
+"KRN",8994,659,1,15,0)
+This procedure is used by the Radiology Imaging Workstation to obtain from
+"KRN",8994,659,1,16,0)
+the Imaging Host system the image cache locations for images that have
+"KRN",8994,659,1,17,0)
+been routed to remote sites/workstations.
+"KRN",8994,659,2,0)
+^8994.02A^1^1
+"KRN",8994,659,2,1,0)
+DATA^1^50^1
+"KRN",8994,659,2,1,1,0)
+^8994.021^2^2^3050224^^^^
+"KRN",8994,659,2,1,1,1,0)
+This is the Remote Location identifier as defined on the reading
+"KRN",8994,659,2,1,1,2,0)
+workstation in MAGJ.INI
+"KRN",8994,659,2,"B","DATA",1)
+
+"KRN",8994,659,3,0)
+^8994.03^9^9^3050224^^^
+"KRN",8994,659,3,1,0)
+  ARRAY(0)   = # of Cache Locations below (0 to n)
+"KRN",8994,659,3,2,0)
+  ARRAY(1..n)= Physical Location ^ Subdirectory ^ Hash Indicator
+"KRN",8994,659,3,3,0)
+             ^ Password ^ Username ^ REMOTE_LOC_IEN
+"KRN",8994,659,3,4,0)
+    Only defined if ARRAY(0)>0
+"KRN",8994,659,3,5,0)
+    Physical Location = File Path string
+"KRN",8994,659,3,6,0)
+    Subdirectory = Directory root on Physical Location
+"KRN",8994,659,3,7,0)
+    Hash Indicator = Null, or 1 if images stored in hashed directories
+"KRN",8994,659,3,8,0)
+    Username = Used to establish a connection with the image share
+"KRN",8994,659,3,9,0)
+    Password = Used to establish a connection with the image share
+"KRN",8994,748,-1)
+0^3
+"KRN",8994,748,0)
+MAGJ CUSTOM LISTS^LISTINF^MAGJUTL3^4^R^^^1
+"KRN",8994,748,1,0)
+^8994.01^19^19
+"KRN",8994,748,1,1,0)
+ +---------------------------------------------------------------+
+"KRN",8994,748,1,2,0)
+ | Property of the US Government.                                |
+"KRN",8994,748,1,3,0)
+ | No permission to copy or redistribute this software is given. |
+"KRN",8994,748,1,4,0)
+ | Use of unreleased versions of this software requires the user |
+"KRN",8994,748,1,5,0)
+ | to execute a written test agreement with the VistA Imaging    |
+"KRN",8994,748,1,6,0)
+ | Development Office of the Department of Veterans Affairs,     |
+"KRN",8994,748,1,7,0)
+ | telephone (301) 734-0100.                                     |
+"KRN",8994,748,1,8,0)
+ |                                                               |
+"KRN",8994,748,1,9,0)
+ | The Food and Drug Administration classifies this software as  |
+"KRN",8994,748,1,10,0)
+ | a medical device.  As such, it may not be changed in any way. |
+"KRN",8994,748,1,11,0)
+ | Modifications to this software may result in an adulterated   |
+"KRN",8994,748,1,12,0)
+ | medical device under 21CFR820, the use of which is considered |
+"KRN",8994,748,1,13,0)
+ | to be a violation of US Federal Statutes.                     |
+"KRN",8994,748,1,14,0)
+ +---------------------------------------------------------------+
+"KRN",8994,748,1,15,0)
+This procedure is used by the Radiology Imaging Workstation to obtain from
+"KRN",8994,748,1,16,0)
+ the Imaging Host system information for defined custom exam lists (from
+"KRN",8994,748,1,17,0)
+the file MAG RAD LISTS DEFINITION).  This information is used to load
+"KRN",8994,748,1,18,0)
+a workstation menu option with available lists, as well as make these
+"KRN",8994,748,1,19,0)
+available via buttons on the VistaRad Server window.
+"KRN",8994,748,3,0)
+^^2^2^2990630^^^
+"KRN",8994,748,3,1,0)
+ARRAY(0)   = # of List entries below
+"KRN",8994,748,3,2,0)
+ARRAY(1:n) = Button Label ~ List # ~ Button Hints text ~ List Type
+"KRN",8994,749,-1)
+0^12
+"KRN",8994,749,0)
+MAGJ RADORDERDISP^ORD^MAGJRPT^4^R^^^1
+"KRN",8994,749,1,0)
+^8994.01^15^15
+"KRN",8994,749,1,1,0)
+ +---------------------------------------------------------------+
+"KRN",8994,749,1,2,0)
+ | Property of the US Government.                                |
+"KRN",8994,749,1,3,0)
+ | No permission to copy or redistribute this software is given. |
+"KRN",8994,749,1,4,0)
+ | Use of unreleased versions of this software requires the user |
+"KRN",8994,749,1,5,0)
+ | to execute a written test agreement with the VistA Imaging    |
+"KRN",8994,749,1,6,0)
+ | Development Office of the Department of Veterans Affairs,     |
+"KRN",8994,749,1,7,0)
+ | telephone (301) 734-0100.                                     |
+"KRN",8994,749,1,8,0)
+ |                                                               |
+"KRN",8994,749,1,9,0)
+ | The Food and Drug Administration classifies this software as  |
+"KRN",8994,749,1,10,0)
+ | a medical device.  As such, it may not be changed in any way. |
+"KRN",8994,749,1,11,0)
+ | Modifications to this software may result in an adulterated   |
+"KRN",8994,749,1,12,0)
+ | medical device under 21CFR820, the use of which is considered |
+"KRN",8994,749,1,13,0)
+ | to be a violation of US Federal Statutes.                     |
+"KRN",8994,749,1,14,0)
+ +---------------------------------------------------------------+
+"KRN",8994,749,1,15,0)
+Returns the Detailed Request Display for the radiology exam.
+"KRN",8994,749,2,0)
+^8994.02A^1^1
+"KRN",8994,749,2,1,0)
+DATA^1^40^1
+"KRN",8994,749,2,1,1,0)
+^^4^4^2991014^^^
+"KRN",8994,749,2,1,1,1,0)
+Input is pointers to the Radiology exam--
+"KRN",8994,749,2,1,1,2,0)
+Can be either the RARPT value (pointer to the Rad Reports file), or the
+"KRN",8994,749,2,1,1,3,0)
+values of RADFN, RADTI, RACNI (pointers to the Rad Patient File).
+"KRN",8994,749,2,1,1,4,0)
+   Format is:  RADFN^RADTI^RACNI^RARPT
+"KRN",8994,749,2,"B","DATA",1)
+
+"KRN",8994,749,3,0)
+^^1^1^2991014^^^^
+"KRN",8994,749,3,1,0)
+Returns info in an array.
+"KRN",8994,914,-1)
+0^7
+"KRN",8994,914,0)
+MAGJ PT ALL EXAMS^PTLSTALL^MAGJLST1^4^R^^^1
+"KRN",8994,914,1,0)
+^8994.01^17^17
+"KRN",8994,914,1,1,0)
+ +---------------------------------------------------------------+
+"KRN",8994,914,1,2,0)
+ | Property of the US Government.                                |
+"KRN",8994,914,1,3,0)
+ | No permission to copy or redistribute this software is given. |
+"KRN",8994,914,1,4,0)
+ | Use of unreleased versions of this software requires the user |
+"KRN",8994,914,1,5,0)
+ | to execute a written test agreement with the VistA Imaging    |
+"KRN",8994,914,1,6,0)
+ | Development Office of the Department of Veterans Affairs,     |
+"KRN",8994,914,1,7,0)
+ | telephone (301) 734-0100.                                     |
+"KRN",8994,914,1,8,0)
+ |                                                               |
+"KRN",8994,914,1,9,0)
+ | The Food and Drug Administration classifies this software as  |
+"KRN",8994,914,1,10,0)
+ | a medical device.  As such, it may not be changed in any way. |
+"KRN",8994,914,1,11,0)
+ | Modifications to this software may result in an adulterated   |
+"KRN",8994,914,1,12,0)
+ | medical device under 21CFR820, the use of which is considered |
+"KRN",8994,914,1,13,0)
+ | to be a violation of US Federal Statutes.                     |
+"KRN",8994,914,1,14,0)
+ +---------------------------------------------------------------+
+"KRN",8994,914,1,15,0)
+This procedure is used by the Radiology Imaging Workstation to display
+"KRN",8994,914,1,16,0)
+ a listing of all radiology exams for a selected patient.  Further details
+"KRN",8994,914,1,17,0)
+may be found in the Remote Procedure MAGJ PTRADEXAMS.
+"KRN",8994,914,2,0)
+^8994.02A^1^1
+"KRN",8994,914,2,1,0)
+DATA^1^50^1
+"KRN",8994,914,2,1,1,0)
+^^1^1^3000215^
+"KRN",8994,914,2,1,1,1,0)
+Patient DFN
+"KRN",8994,914,2,"B","DATA",1)
+
+"KRN",8994,914,3,0)
+^^1^1^3000215^
+"KRN",8994,914,3,1,0)
+See RPC: MAGJ PTRADEXAMS
+"KRN",8994,915,-1)
+0^4
+"KRN",8994,915,0)
+MAGJ EXAM REPORT^RADRPT^MAGJRPT^4^R^^^1
+"KRN",8994,915,1,0)
+^8994.01^15^15
+"KRN",8994,915,1,1,0)
+ +---------------------------------------------------------------+
+"KRN",8994,915,1,2,0)
+ | Property of the US Government.                                |
+"KRN",8994,915,1,3,0)
+ | No permission to copy or redistribute this software is given. |
+"KRN",8994,915,1,4,0)
+ | Use of unreleased versions of this software requires the user |
+"KRN",8994,915,1,5,0)
+ | to execute a written test agreement with the VistA Imaging    |
+"KRN",8994,915,1,6,0)
+ | Development Office of the Department of Veterans Affairs,     |
+"KRN",8994,915,1,7,0)
+ | telephone (301) 734-0100.                                     |
+"KRN",8994,915,1,8,0)
+ |                                                               |
+"KRN",8994,915,1,9,0)
+ | The Food and Drug Administration classifies this software as  |
+"KRN",8994,915,1,10,0)
+ | a medical device.  As such, it may not be changed in any way. |
+"KRN",8994,915,1,11,0)
+ | Modifications to this software may result in an adulterated   |
+"KRN",8994,915,1,12,0)
+ | medical device under 21CFR820, the use of which is considered |
+"KRN",8994,915,1,13,0)
+ | to be a violation of US Federal Statutes.                     |
+"KRN",8994,915,1,14,0)
+ +---------------------------------------------------------------+
+"KRN",8994,915,1,15,0)
+Imaging VistaRad workstation call to display a Radiology report.
+"KRN",8994,915,2,0)
+^8994.02A^1^1
+"KRN",8994,915,2,1,0)
+DATA^1^30^1
+"KRN",8994,915,2,1,1,0)
+^^1^1^3000216^
+"KRN",8994,915,2,1,1,1,0)
+This is the pointer to the Radiology report file.
+"KRN",8994,915,2,"B","DATA",1)
+
+"KRN",8994,915,3,0)
+^^2^2^3000216^
+"KRN",8994,915,3,1,0)
+Text of the exam report is returned in a global array.  A header line is
+"KRN",8994,915,3,2,0)
+inserted at the top, to be used for labeling the report display window.
+"KRN",8994,1090,-1)
+0^6
+"KRN",8994,1090,0)
+MAGJ PRIOREXAMS^PRIOR1^MAGJEX2^2^R
+"KRN",8994,1090,1,0)
+^8994.01^24^24
+"KRN",8994,1090,1,1,0)
+ +---------------------------------------------------------------+
+"KRN",8994,1090,1,2,0)
+ | Property of the US Government.                                |
+"KRN",8994,1090,1,3,0)
+ | No permission to copy or redistribute this software is given. |
+"KRN",8994,1090,1,4,0)
+ | Use of unreleased versions of this software requires the user |
+"KRN",8994,1090,1,5,0)
+ | to execute a written test agreement with the VistA Imaging    |
+"KRN",8994,1090,1,6,0)
+ | Development Office of the Department of Veterans Affairs,     |
+"KRN",8994,1090,1,7,0)
+ | telephone (301) 734-0100.                                     |
+"KRN",8994,1090,1,8,0)
+ |                                                               |
+"KRN",8994,1090,1,9,0)
+ | The Food and Drug Administration classifies this software as  |
+"KRN",8994,1090,1,10,0)
+ | a medical device.  As such, it may not be changed in any way. |
+"KRN",8994,1090,1,11,0)
+ | Modifications to this software may result in an adulterated   |
+"KRN",8994,1090,1,12,0)
+ | medical device under 21CFR820, the use of which is considered |
+"KRN",8994,1090,1,13,0)
+ | to be a violation of US Federal Statutes.                     |
+"KRN",8994,1090,1,14,0)
+ +---------------------------------------------------------------+
+"KRN",8994,1090,1,15,0)
+This procedure is used by the Radiology Imaging Workstation to fetch
+"KRN",8994,1090,1,16,0)
+case pointer information for all the cases/prior exams related to a given
+"KRN",8994,1090,1,17,0)
+case.  If the images for the prior exams are not on magnetic storage, but
+"KRN",8994,1090,1,18,0)
+are on archive storage (e.g., jukebox), then the procedure initiates a
+"KRN",8994,1090,1,19,0)
+fetch of the image files from the archive.  This procedure can be run in
+"KRN",8994,1090,1,20,0)
+two modes: 1) to Pre-Fetch from the archive exams that are likely to be of
+"KRN",8994,1090,1,21,0)
+interest to the radiologist--this mode would be invoked some time after
+"KRN",8994,1090,1,22,0)
+a new exam is ordered (e.g., at Register Patient for Exam);
+"KRN",8994,1090,1,23,0)
+2) to Auto-Display images for prior cases at
+"KRN",8994,1090,1,24,0)
+the time the radiologist is reading a new case.
+"KRN",8994,1090,2,0)
+^8994.02A^1^1
+"KRN",8994,1090,2,1,0)
+DATA^1^50^1
+"KRN",8994,1090,2,1,1,0)
+^^8^8^2980821^
+"KRN",8994,1090,2,1,1,1,0)
+The input string has 5 pieces, delimited by "^":
+"KRN",8994,1090,2,1,1,2,0)
+  "P" or "A" ^ RADFN ^ RADTI ^ RACNI ^ RARPT
+"KRN",8994,1090,2,1,1,3,0)
+    P--run Pre-Fetch mode
+"KRN",8994,1090,2,1,1,4,0)
+    A--run Auto-Display mode
+"KRN",8994,1090,2,1,1,5,0)
+    RADFN, RADTI, & RACNI are pointers to the Current Case exam in file 70
+"KRN",8994,1090,2,1,1,6,0)
+    RARPT--pointer to ^RARPT (file 74) for the current case
+"KRN",8994,1090,2,1,1,7,0)
+Either RARPT or the values RADFN/RADTI/RACNI may be passed for executing
+"KRN",8994,1090,2,1,1,8,0)
+this function.
+"KRN",8994,1090,2,"B","DATA",1)
+
+"KRN",8994,1090,3,0)
+^^2^2^2980821^
+"KRN",8994,1090,3,1,0)
+ ARRAY(0)   = # Cases Found ^ Text for reply status or error message
+"KRN",8994,1090,3,2,0)
+ ARRAY(1..N)= "M08" ^ RADFN ^ RADTI ^ RACNI ^ RARPT 
+"KRN",8994,1091,-1)
+0^16
+"KRN",8994,1091,0)
+MAGJ ROUTE ENABLE^RTENA^MAGJRT^1^R^^^1
+"KRN",8994,1091,1,0)
+^8994.01^17^17
+"KRN",8994,1091,1,1,0)
+ +---------------------------------------------------------------+
+"KRN",8994,1091,1,2,0)
+ | Property of the US Government.                                |
+"KRN",8994,1091,1,3,0)
+ | No permission to copy or redistribute this software is given. |
+"KRN",8994,1091,1,4,0)
+ | Use of unreleased versions of this software requires the user |
+"KRN",8994,1091,1,5,0)
+ | to execute a written test agreement with the VistA Imaging    |
+"KRN",8994,1091,1,6,0)
+ | Development Office of the Department of Veterans Affairs,     |
+"KRN",8994,1091,1,7,0)
+ | telephone (301) 734-0100.                                     |
+"KRN",8994,1091,1,8,0)
+ |                                                               |
+"KRN",8994,1091,1,9,0)
+ | The Food and Drug Administration classifies this software as  |
+"KRN",8994,1091,1,10,0)
+ | a medical device.  As such, it may not be changed in any way. |
+"KRN",8994,1091,1,11,0)
+ | Modifications to this software may result in an adulterated   |
+"KRN",8994,1091,1,12,0)
+ | medical device under 21CFR820, the use of which is considered |
+"KRN",8994,1091,1,13,0)
+ | to be a violation of US Federal Statutes.                     |
+"KRN",8994,1091,1,14,0)
+ +---------------------------------------------------------------+
+"KRN",8994,1091,1,15,0)
+This procedure is used by the VistARad Workstation to obtain from
+"KRN",8994,1091,1,16,0)
+ the Imaging Host system user permission to use the Demand Routing
+"KRN",8994,1091,1,17,0)
+function.
+"KRN",8994,1091,2,0)
+^8994.02A^^0
+"KRN",8994,1091,3,0)
+^^1^1^3010227^
+"KRN",8994,1091,3,1,0)
+Returns "TRUE" or "FALSE", based on user security key.
+"KRN",8994,1092,-1)
+0^18
+"KRN",8994,1092,0)
+MAGJ ROUTE REQUEST^RTREQ^MAGJRT^4^R^^^1
+"KRN",8994,1092,1,0)
+^8994.01^18^18
+"KRN",8994,1092,1,1,0)
+ +---------------------------------------------------------------+
+"KRN",8994,1092,1,2,0)
+ | Property of the US Government.                                |
+"KRN",8994,1092,1,3,0)
+ | No permission to copy or redistribute this software is given. |
+"KRN",8994,1092,1,4,0)
+ | Use of unreleased versions of this software requires the user |
+"KRN",8994,1092,1,5,0)
+ | to execute a written test agreement with the VistA Imaging    |
+"KRN",8994,1092,1,6,0)
+ | Development Office of the Department of Veterans Affairs,     |
+"KRN",8994,1092,1,7,0)
+ | telephone (301) 734-0100.                                     |
+"KRN",8994,1092,1,8,0)
+ |                                                               |
+"KRN",8994,1092,1,9,0)
+ | The Food and Drug Administration classifies this software as  |
+"KRN",8994,1092,1,10,0)
+ | a medical device.  As such, it may not be changed in any way. |
+"KRN",8994,1092,1,11,0)
+ | Modifications to this software may result in an adulterated   |
+"KRN",8994,1092,1,12,0)
+ | medical device under 21CFR820, the use of which is considered |
+"KRN",8994,1092,1,13,0)
+ | to be a violation of US Federal Statutes.                     |
+"KRN",8994,1092,1,14,0)
+ +---------------------------------------------------------------+
+"KRN",8994,1092,1,15,0)
+This rpc processes a list of input exams to configure the dialog by which
+"KRN",8994,1092,1,16,0)
+the user will request exams to be routed.  The rpc returns the exam list
+"KRN",8994,1092,1,17,0)
+and information used to prompt the user for routing destination and
+"KRN",8994,1092,1,18,0)
+priority for each exam.
+"KRN",8994,1092,2,0)
+^8994.02A^1^1
+"KRN",8994,1092,2,1,0)
+DATA^2^50^1^1
+"KRN",8994,1092,2,1,1,0)
+^^3^3^3010227^
+"KRN",8994,1092,2,1,1,1,0)
+List of Radiology Exam pointers.  Each entry in the list contains:
+"KRN",8994,1092,2,1,1,2,0)
+ 
+"KRN",8994,1092,2,1,1,3,0)
+   RADFN ^ RADTI ^ RACNI ^ RARPT
+"KRN",8994,1092,2,"B","DATA",1)
+
+"KRN",8994,1092,2,"PARAMSEQ",1,1)
+
+"KRN",8994,1093,-1)
+0^17
+"KRN",8994,1093,0)
+MAGJ ROUTE EXAMS^RTEXAM^MAGJRT^4^R^^^1
+"KRN",8994,1093,1,0)
+^8994.01^16^16
+"KRN",8994,1093,1,1,0)
+ +---------------------------------------------------------------+
+"KRN",8994,1093,1,2,0)
+ | Property of the US Government.                                |
+"KRN",8994,1093,1,3,0)
+ | No permission to copy or redistribute this software is given. |
+"KRN",8994,1093,1,4,0)
+ | Use of unreleased versions of this software requires the user |
+"KRN",8994,1093,1,5,0)
+ | to execute a written test agreement with the VistA Imaging    |
+"KRN",8994,1093,1,6,0)
+ | Development Office of the Department of Veterans Affairs,     |
+"KRN",8994,1093,1,7,0)
+ | telephone (301) 734-0100.                                     |
+"KRN",8994,1093,1,8,0)
+ |                                                               |
+"KRN",8994,1093,1,9,0)
+ | The Food and Drug Administration classifies this software as  |
+"KRN",8994,1093,1,10,0)
+ | a medical device.  As such, it may not be changed in any way. |
+"KRN",8994,1093,1,11,0)
+ | Modifications to this software may result in an adulterated   |
+"KRN",8994,1093,1,12,0)
+ | medical device under 21CFR820, the use of which is considered |
+"KRN",8994,1093,1,13,0)
+ | to be a violation of US Federal Statutes.                     |
+"KRN",8994,1093,1,14,0)
+ +---------------------------------------------------------------+
+"KRN",8994,1093,1,15,0)
+For input list of exams, queue corresponding image files to be routed to
+"KRN",8994,1093,1,16,0)
+indicated destinations (according to Network Location file entries).
+"KRN",8994,1093,2,0)
+^8994.02A^1^1
+"KRN",8994,1093,2,1,0)
+DATA^2^50^1^1
+"KRN",8994,1093,2,1,1,0)
+^8994.021^7^7^3010227^^
+"KRN",8994,1093,2,1,1,1,0)
+Each entry in the list contains:
+"KRN",8994,1093,2,1,1,2,0)
+ 
+"KRN",8994,1093,2,1,1,3,0)
+  Network Location ^ Priority | RADFN ^ RADTI ^ RACNI ^ RARPT
+"KRN",8994,1093,2,1,1,4,0)
+ 
+"KRN",8994,1093,2,1,1,5,0)
+Network Location is IEN to Network Location file.
+"KRN",8994,1093,2,1,1,6,0)
+Priority is a number; higher numbers indicate higher priority.  The
+"KRN",8994,1093,2,1,1,7,0)
+Priority is specific to the Routing Queue Manager.
+"KRN",8994,1093,2,"B","DATA",1)
+
+"KRN",8994,1093,2,"PARAMSEQ",1,1)
+
+"KRN",8994,1093,3,0)
+^8994.03^1^1^3010227^^^^
+"KRN",8994,1093,3,1,0)
+Normal reply indicating success/failure of the operation.
+"KRN",8994,1280,-1)
+0^20
+"KRN",8994,1280,0)
+MAGJ USER DATA^RPCIN^MAGJPRF1^4^R^^^1
+"KRN",8994,1280,1,0)
+^8994.01^16^16^3050601^^
+"KRN",8994,1280,1,1,0)
+  +---------------------------------------------------------------+
+"KRN",8994,1280,1,2,0)
+  | Property of the US Government.                                |
+"KRN",8994,1280,1,3,0)
+  | No permission to copy or redistribute this software is given. |
+"KRN",8994,1280,1,4,0)
+  | Use of unreleased versions of this software requires the user |
+"KRN",8994,1280,1,5,0)
+  | to execute a written test agreement with the VistA Imaging    |
+"KRN",8994,1280,1,6,0)
+  | Development Office of the Department of Veterans Affairs,     |
+"KRN",8994,1280,1,7,0)
+  | telephone (301) 734-0100.                                     |
+"KRN",8994,1280,1,8,0)
+  |                                                               |
+"KRN",8994,1280,1,9,0)
+  | The Food and Drug Administration classifies this software as  |
+"KRN",8994,1280,1,10,0)
+  | a medical device.  As such, it may not be changed in any way. |
+"KRN",8994,1280,1,11,0)
+  | Modifications to this software may result in an adulterated   |
+"KRN",8994,1280,1,12,0)
+  | medical device under 21CFR820, the use of which is considered |
+"KRN",8994,1280,1,13,0)
+  | to be a violation of US Federal Statutes.                     |
+"KRN",8994,1280,1,14,0)
+  +---------------------------------------------------------------+
+"KRN",8994,1280,1,15,0)
+ 
+"KRN",8994,1280,1,16,0)
+Store/retrieve Vistarad USer preferences, including hanging protocols, etc.
+"KRN",8994,1280,2,0)
+^8994.02A^3^2
+"KRN",8994,1280,2,2,0)
+PARAMS^1^100^1^1
+"KRN",8994,1280,2,2,1,0)
+^8994.021^5^5^3050216^^^^
+"KRN",8994,1280,2,2,1,1,0)
+TXID ^ SYSUPDAT ^ TXDUZ ^ TXDIV
+"KRN",8994,1280,2,2,1,2,0)
+TXID: Transaction ID--identifies the type of transaction being requested;
+"KRN",8994,1280,2,2,1,3,0)
+TXDUZ: Optional; DUZ value for retrieving another users stored data.
+"KRN",8994,1280,2,2,1,4,0)
+  E.g., allow User X to see User Y's Hanging Protocols
+"KRN",8994,1280,2,2,1,5,0)
+TXDIV: Optional; DIVision value for viewing data stored from other divisions.
+"KRN",8994,1280,2,3,0)
+DATA^3^240^^2
+"KRN",8994,1280,2,3,1,0)
+^8994.021^6^6^3050216^^
+"KRN",8994,1280,2,3,1,1,0)
+Optional Block of text sent from the client side; has structure as follows
+"KRN",8994,1280,2,3,1,2,0)
+ *LABEL
+"KRN",8994,1280,2,3,1,3,0)
+ Label Value
+"KRN",8994,1280,2,3,1,4,0)
+ 0:N lines of text associated with Label Value
+"KRN",8994,1280,2,3,1,5,0)
+ *END
+"KRN",8994,1280,2,3,1,6,0)
+Note: multiple sequences of the above may be included.
+"KRN",8994,1280,2,"B","DATA",3)
+
+"KRN",8994,1280,2,"B","PARAMS",2)
+
+"KRN",8994,1280,2,"PARAMSEQ",1,2)
+
+"KRN",8994,1280,2,"PARAMSEQ",2,3)
+
+"KRN",8994,1280,3,0)
+^^2^2^3050216^
+"KRN",8994,1280,3,1,0)
+DATA returned varies according to the TXID, but generally is a block
+"KRN",8994,1280,3,2,0)
+of text data that was created by the Client application.
+"KRN",8994,1281,-1)
+0^13
+"KRN",8994,1281,0)
+MAGJ RADSTATUSCHECK^STATCHK^MAGJUTL4^1^R^^^0
+"KRN",8994,1281,1,0)
+^8994.01^17^17^3050718^^^^
+"KRN",8994,1281,1,1,0)
+  +---------------------------------------------------------------+
+"KRN",8994,1281,1,2,0)
+  | Property of the US Government.                                |
+"KRN",8994,1281,1,3,0)
+  | No permission to copy or redistribute this software is given. |
+"KRN",8994,1281,1,4,0)
+  | Use of unreleased versions of this software requires the user |
+"KRN",8994,1281,1,5,0)
+  | to execute a written test agreement with the VistA Imaging    |
+"KRN",8994,1281,1,6,0)
+  | Development Office of the Department of Veterans Affairs,     |
+"KRN",8994,1281,1,7,0)
+  | telephone (301) 734-0100.                                     |
+"KRN",8994,1281,1,8,0)
+  |                                                               |
+"KRN",8994,1281,1,9,0)
+  | The Food and Drug Administration classifies this software as  |
+"KRN",8994,1281,1,10,0)
+  | a medical device.  As such, it may not be changed in any way. |
+"KRN",8994,1281,1,11,0)
+  | Modifications to this software may result in an adulterated   |
+"KRN",8994,1281,1,12,0)
+  | medical device under 21CFR820, the use of which is considered |
+"KRN",8994,1281,1,13,0)
+  | to be a violation of US Federal Statutes.                     |
+"KRN",8994,1281,1,14,0)
+  +---------------------------------------------------------------+
+"KRN",8994,1281,1,15,0)
+ 
+"KRN",8994,1281,1,16,0)
+Function to determine if the exam has been Tech-Verified (at least).
+"KRN",8994,1281,1,17,0)
+Images are assumed to be verified if Exam Status is Examined, or higher status
+"KRN",8994,1281,2,0)
+^8994.02A^1^1
+"KRN",8994,1281,2,1,0)
+DATA^1^50^1
+"KRN",8994,1281,2,1,1,0)
+^8994.021^3^3^3050718^^^
+"KRN",8994,1281,2,1,1,1,0)
+String consisting: RADFN^RADTI^RACNI^RARPT
+"KRN",8994,1281,2,1,1,2,0)
+Input is either RADFN, RADTI, and RACNI; or, RARPT only may be input in piece 4
+"KRN",8994,1281,2,1,1,3,0)
+Patient DFN^Exam Internal Date^Exam Number^Rad Report IEN
+"KRN",8994,1281,2,"B","DATA",1)
+
+"KRN",8994,1281,3,0)
+^8994.03^1^1^3050718^^^
+"KRN",8994,1281,3,1,0)
+Code^Description
+"KRN",8994,1282,-1)
+0^11
+"KRN",8994,1282,0)
+MAGJ RADCASELOCKS^CASLOCK^MAGJEX1A^4^R
+"KRN",8994,1282,1,0)
+^^16^16^3050601^
+"KRN",8994,1282,1,1,0)
+  +---------------------------------------------------------------+
+"KRN",8994,1282,1,2,0)
+  | Property of the US Government.                                |
+"KRN",8994,1282,1,3,0)
+  | No permission to copy or redistribute this software is given. |
+"KRN",8994,1282,1,4,0)
+  | Use of unreleased versions of this software requires the user |
+"KRN",8994,1282,1,5,0)
+  | to execute a written test agreement with the VistA Imaging    |
+"KRN",8994,1282,1,6,0)
+  | Development Office of the Department of Veterans Affairs,     |
+"KRN",8994,1282,1,7,0)
+  | telephone (301) 734-0100.                                     |
+"KRN",8994,1282,1,8,0)
+  |                                                               |
+"KRN",8994,1282,1,9,0)
+  | The Food and Drug Administration classifies this software as  |
+"KRN",8994,1282,1,10,0)
+  | a medical device.  As such, it may not be changed in any way. |
+"KRN",8994,1282,1,11,0)
+  | Modifications to this software may result in an adulterated   |
+"KRN",8994,1282,1,12,0)
+  | medical device under 21CFR820, the use of which is considered |
+"KRN",8994,1282,1,13,0)
+  | to be a violation of US Federal Statutes.                     |
+"KRN",8994,1282,1,14,0)
+  +---------------------------------------------------------------+
+"KRN",8994,1282,1,15,0)
+ 
+"KRN",8994,1282,1,16,0)
+Manage Exam Reserve/Lock interactions.
+"KRN",8994,1282,2,0)
+^8994.02A^1^1
+"KRN",8994,1282,2,1,0)
+DATA^1^70^1
+"KRN",8994,1282,2,1,1,0)
+^^3^3^3041012^
+"KRN",8994,1282,2,1,1,1,0)
+Input string = OPEN FLAG ^ RADFN ^ RADTI ^ RACNI ^ RARPT
+"KRN",8994,1282,2,1,1,2,0)
+      OPEN_FLAG = 3: Reserve-to-Lock; 4: Lock-to-Reserve; 5: Lock/Take
+"KRN",8994,1282,2,1,1,3,0)
+      RADFN,RADTI,RACNI,RARPT = pointers to Rad Patient File for the exam
+"KRN",8994,1282,2,"B","DATA",1)
+
+"KRN",8994,1282,3,0)
+^8994.03^4^4^3041012^^
+"KRN",8994,1282,3,1,0)
+Returns string = Count ^ CODE ~ RESULT | RADFN ^ RADTI ^ RACNI ^ RARPT
+"KRN",8994,1282,3,2,0)
+    Count = # lines to follow (always zero)
+"KRN",8994,1282,3,3,0)
+    CODE - numeric code indicating success/failure
+"KRN",8994,1282,3,4,0)
+    RESULT--text description of the update results
+"KRN",8994,1283,-1)
+0^5
+"KRN",8994,1283,0)
+MAGJ HISTORYLIST^HIST^MAGJLS4^4^R^^^1
+"KRN",8994,1283,1,0)
+^8994.01^16^16^3050601^^
+"KRN",8994,1283,1,1,0)
+  +---------------------------------------------------------------+
+"KRN",8994,1283,1,2,0)
+  | Property of the US Government.                                |
+"KRN",8994,1283,1,3,0)
+  | No permission to copy or redistribute this software is given. |
+"KRN",8994,1283,1,4,0)
+  | Use of unreleased versions of this software requires the user |
+"KRN",8994,1283,1,5,0)
+  | to execute a written test agreement with the VistA Imaging    |
+"KRN",8994,1283,1,6,0)
+  | Development Office of the Department of Veterans Affairs,     |
+"KRN",8994,1283,1,7,0)
+  | telephone (301) 734-0100.                                     |
+"KRN",8994,1283,1,8,0)
+  |                                                               |
+"KRN",8994,1283,1,9,0)
+  | The Food and Drug Administration classifies this software as  |
+"KRN",8994,1283,1,10,0)
+  | a medical device.  As such, it may not be changed in any way. |
+"KRN",8994,1283,1,11,0)
+  | Modifications to this software may result in an adulterated   |
+"KRN",8994,1283,1,12,0)
+  | medical device under 21CFR820, the use of which is considered |
+"KRN",8994,1283,1,13,0)
+  | to be a violation of US Federal Statutes.                     |
+"KRN",8994,1283,1,14,0)
+  +---------------------------------------------------------------+
+"KRN",8994,1283,1,15,0)
+ 
+"KRN",8994,1283,1,16,0)
+Functions for maintaining and displaying the Vistarad Exam History List
+"KRN",8994,1283,2,0)
+^8994.02A^2^2
+"KRN",8994,1283,2,1,0)
+PARAMS^1^1^1^1
+"KRN",8994,1283,2,1,1,0)
+^^5^5^3050601^
+"KRN",8994,1283,2,1,1,1,0)
+TXID ^ TXDUZ ^ TXDIV
+"KRN",8994,1283,2,1,1,2,0)
+TXID: Required; designates action to take:
+"KRN",8994,1283,2,1,1,3,0)
+ 1--Add entries; 2--Update/refresh data; 3--Delete entries
+"KRN",8994,1283,2,1,1,4,0)
+TXDUZ: Optional; if supplied, get data for another user (Read Only)
+"KRN",8994,1283,2,1,1,5,0)
+TXDIV: Optional; if supplied, get data for another division (Read Only)
+"KRN",8994,1283,2,2,0)
+DATA^2^30^^2
+"KRN",8994,1283,2,2,1,0)
+^^1^1^3050601^
+"KRN",8994,1283,2,2,1,1,0)
+Exam ID "|" Display data
+"KRN",8994,1283,2,"B","DATA",2)
+
+"KRN",8994,1283,2,"B","PARAMS",1)
+
+"KRN",8994,1283,2,"PARAMSEQ",1,1)
+
+"KRN",8994,1283,2,"PARAMSEQ",2,2)
+
+"KRN",8994,1284,-1)
+0^19
+"KRN",8994,1284,0)
+MAGJ STUDY_DATA^RPCIN^MAGJEX3^4^R^^^1
+"KRN",8994,1284,1,0)
+^8994.01^19^19^3050601^^
+"KRN",8994,1284,1,1,0)
+  +---------------------------------------------------------------+
+"KRN",8994,1284,1,2,0)
+  | Property of the US Government.                                |
+"KRN",8994,1284,1,3,0)
+  | No permission to copy or redistribute this software is given. |
+"KRN",8994,1284,1,4,0)
+  | Use of unreleased versions of this software requires the user |
+"KRN",8994,1284,1,5,0)
+  | to execute a written test agreement with the VistA Imaging    |
+"KRN",8994,1284,1,6,0)
+  | Development Office of the Department of Veterans Affairs,     |
+"KRN",8994,1284,1,7,0)
+  | telephone (301) 734-0100.                                     |
+"KRN",8994,1284,1,8,0)
+  |                                                               |
+"KRN",8994,1284,1,9,0)
+  | The Food and Drug Administration classifies this software as  |
+"KRN",8994,1284,1,10,0)
+  | a medical device.  As such, it may not be changed in any way. |
+"KRN",8994,1284,1,11,0)
+  | Modifications to this software may result in an adulterated   |
+"KRN",8994,1284,1,12,0)
+  | medical device under 21CFR820, the use of which is considered |
+"KRN",8994,1284,1,13,0)
+  | to be a violation of US Federal Statutes.                     |
+"KRN",8994,1284,1,14,0)
+  +---------------------------------------------------------------+
+"KRN",8994,1284,1,15,0)
+ 
+"KRN",8994,1284,1,16,0)
+This rpc is used to obtain various study and/or image data.  The data
+"KRN",8994,1284,1,17,0)
+is stored in blocks of free-text (word-processing) in XML format created
+"KRN",8994,1284,1,18,0)
+by the Vistarad Client.
+"KRN",8994,1284,1,19,0)
+Current data items include: Key Images; Presentation State data.
+"KRN",8994,1284,2,0)
+^8994.02A^2^2
+"KRN",8994,1284,2,1,0)
+PARAMS^1^120^1^1
+"KRN",8994,1284,2,1,1,0)
+^^5^5^3050216^
+"KRN",8994,1284,2,1,1,1,0)
+TXID ^ DFN ^ DTI ^ CNI ^ RARPT ^ MAGIEN
+"KRN",8994,1284,2,1,1,2,0)
+TXID: Required; designates action to take
+"KRN",8994,1284,2,1,1,3,0)
+DFN...RARPT: standard Vistarad Exam Identifier string (keys to
+"KRN",8994,1284,2,1,1,4,0)
+  RAD Exam file and Report file).
+"KRN",8994,1284,2,1,1,5,0)
+MAGIEN: Image IEN to identify the exam (Image or Group ien OK)
+"KRN",8994,1284,2,2,0)
+DATA^2^120^^2
+"KRN",8994,1284,2,2,1,0)
+^^2^2^3050216^
+"KRN",8994,1284,2,2,1,1,0)
+List of image identifiers with optional Presentation State UIDs
+"KRN",8994,1284,2,2,1,2,0)
+in format IMGIEN^PS_UID.
+"KRN",8994,1284,2,"B","DATA",2)
+
+"KRN",8994,1284,2,"B","PARAMS",1)
+
+"KRN",8994,1284,2,"PARAMSEQ",1,1)
+
+"KRN",8994,1284,2,"PARAMSEQ",2,2)
+
+"KRN",8994,1284,3,0)
+^^13^13^3050216^
+"KRN",8994,1284,3,1,0)
+Array containing Key Image and/or Image Presentation State data,
+"KRN",8994,1284,3,2,0)
+according to requesting TXID:
+"KRN",8994,1284,3,3,0)
+"*IMAGE"
+"KRN",8994,1284,3,4,0)
+Image_IEN ^ "KEY"
+"KRN",8994,1284,3,5,0)
+"*PS"
+"KRN",8994,1284,3,6,0)
+PS_UID ^ "KEY"
+"KRN",8994,1284,3,7,0)
+xml text lines 1
+"KRN",8994,1284,3,8,0)
+xml text lines 2:N (as needed)
+"KRN",8994,1284,3,9,0)
+"*END_PS"
+"KRN",8994,1284,3,10,0)
+[*PS . . . *END_PS] (as many as for this image)
+"KRN",8994,1284,3,11,0)
+"*END_IMAGE"
+"KRN",8994,1284,3,12,0)
+[*IMAGE . . . *END_IMAGE] (as many as for the exam)
+"KRN",8994,1284,3,13,0)
+"*END"
+"KRN",8994,1285,-1)
+0^21
+"KRN",8994,1285,0)
+MAGJ USER2^USERINF2^MAGJUTL3^2^R
+"KRN",8994,1285,1,0)
+^8994.01^16^16^3050601^^^^
+"KRN",8994,1285,1,1,0)
+  +---------------------------------------------------------------+
+"KRN",8994,1285,1,2,0)
+  | Property of the US Government.                                |
+"KRN",8994,1285,1,3,0)
+  | No permission to copy or redistribute this software is given. |
+"KRN",8994,1285,1,4,0)
+  | Use of unreleased versions of this software requires the user |
+"KRN",8994,1285,1,5,0)
+  | to execute a written test agreement with the VistA Imaging    |
+"KRN",8994,1285,1,6,0)
+  | Development Office of the Department of Veterans Affairs,     |
+"KRN",8994,1285,1,7,0)
+  | telephone (301) 734-0100.                                     |
+"KRN",8994,1285,1,8,0)
+  |                                                               |
+"KRN",8994,1285,1,9,0)
+  | The Food and Drug Administration classifies this software as  |
+"KRN",8994,1285,1,10,0)
+  | a medical device.  As such, it may not be changed in any way. |
+"KRN",8994,1285,1,11,0)
+  | Modifications to this software may result in an adulterated   |
+"KRN",8994,1285,1,12,0)
+  | medical device under 21CFR820, the use of which is considered |
+"KRN",8994,1285,1,13,0)
+  | to be a violation of US Federal Statutes.                     |
+"KRN",8994,1285,1,14,0)
+  +---------------------------------------------------------------+
+"KRN",8994,1285,1,15,0)
+ 
+"KRN",8994,1285,1,16,0)
+Returns info about user, and site settings.
+"KRN",8994,1285,2,0)
+^8994.02A^1^1
+"KRN",8994,1285,2,1,0)
+MAGWRKID^1^50^0^1
+"KRN",8994,1285,2,1,1,0)
+^8994.021^1^1^3050222^^^
+"KRN",8994,1285,2,1,1,1,0)
+Workstation ID
+"KRN",8994,1285,2,"B","MAGWRKID",1)
+
+"KRN",8994,1285,2,"PARAMSEQ",1,1)
+
+"KRN",8994,1285,3,0)
+^8994.03^2^2^3050222^^^
+"KRN",8994,1285,3,1,0)
+ = DUZ ^ FULL NAME  ^ INITIALS ^ REQ_FLAG ^ Network UserName ^ PassWord
+"KRN",8994,1285,3,2,0)
+REQ_FLAG = 1/0 (Enable/Disable Requisition for non-rad staff)
+"KRN",8994,1286,-1)
+0^2
+"KRN",8994,1286,0)
+MAGJ CPTMATCH^CPTGRP^MAGJUTL4^4^R^^^1
+"KRN",8994,1286,1,0)
+^8994.01^16^16^3050601^^
+"KRN",8994,1286,1,1,0)
+  +---------------------------------------------------------------+
+"KRN",8994,1286,1,2,0)
+  | Property of the US Government.                                |
+"KRN",8994,1286,1,3,0)
+  | No permission to copy or redistribute this software is given. |
+"KRN",8994,1286,1,4,0)
+  | Use of unreleased versions of this software requires the user |
+"KRN",8994,1286,1,5,0)
+  | to execute a written test agreement with the VistA Imaging    |
+"KRN",8994,1286,1,6,0)
+  | Development Office of the Department of Veterans Affairs,     |
+"KRN",8994,1286,1,7,0)
+  | telephone (301) 734-0100.                                     |
+"KRN",8994,1286,1,8,0)
+  |                                                               |
+"KRN",8994,1286,1,9,0)
+  | The Food and Drug Administration classifies this software as  |
+"KRN",8994,1286,1,10,0)
+  | a medical device.  As such, it may not be changed in any way. |
+"KRN",8994,1286,1,11,0)
+  | Modifications to this software may result in an adulterated   |
+"KRN",8994,1286,1,12,0)
+  | medical device under 21CFR820, the use of which is considered |
+"KRN",8994,1286,1,13,0)
+  | to be a violation of US Federal Statutes.                     |
+"KRN",8994,1286,1,14,0)
+  +---------------------------------------------------------------+
+"KRN",8994,1286,1,15,0)
+Imaging Vistarad RPC for finding related procedures based on CPT
+"KRN",8994,1286,1,16,0)
+matching table (file #2006.67 -- MAG RAD CPT MATCHING FILE).
+"KRN",8994,1286,2,0)
+^8994.02A^1^1
+"KRN",8994,1286,2,1,0)
+DATA^1^20^1^1
+"KRN",8994,1286,2,1,1,0)
+^8994.021^3^3^3050601^^
+"KRN",8994,1286,2,1,1,1,0)
+CPT Code ^ Matching Criteria
+"KRN",8994,1286,2,1,1,2,0)
+MAtching Criteria is a number, 1:n, to indicate basis for matching:
+"KRN",8994,1286,2,1,1,3,0)
+ 1--Similar CPT; 2--Body Part; 3--Body Part & Modality
+"KRN",8994,1286,2,"B","DATA",1)
+
+"KRN",8994,1286,2,"PARAMSEQ",1,1)
+
+"KRN",8994,1286,3,0)
+^8994.03^2^2^3050601^^
+"KRN",8994,1286,3,1,0)
+List of results; each result consists of:
+"KRN",8994,1286,3,2,0)
+  CPT ^ Short Procedure Description
+"KRN",8994,1287,-1)
+0^15
+"KRN",8994,1287,0)
+MAGJ REMOTESCREEN^REMSCRN^MAGJUTL4^1^R^^^0
+"KRN",8994,1287,1,0)
+^8994.01^17^17^3051209^^^^
+"KRN",8994,1287,1,1,0)
+ +---------------------------------------------------------------+
+"KRN",8994,1287,1,2,0)
+ | Property of the US Government.                                |
+"KRN",8994,1287,1,3,0)
+ | No permission to copy or redistribute this software is given. |
+"KRN",8994,1287,1,4,0)
+ | Use of unreleased versions of this software requires the user |
+"KRN",8994,1287,1,5,0)
+ | to execute a written test agreement with the VistA Imaging    |
+"KRN",8994,1287,1,6,0)
+ | Development Office of the Department of Veterans Affairs,     |
+"KRN",8994,1287,1,7,0)
+ | telephone (301) 734-0100.                                     |
+"KRN",8994,1287,1,8,0)
+ |                                                               |
+"KRN",8994,1287,1,9,0)
+ | The Food and Drug Administration classifies this software as  |
+"KRN",8994,1287,1,10,0)
+ | a medical device.  As such, it may not be changed in any way. |
+"KRN",8994,1287,1,11,0)
+ | Modifications to this software may result in an adulterated   |
+"KRN",8994,1287,1,12,0)
+ | medical device under 21CFR820, the use of which is considered |
+"KRN",8994,1287,1,13,0)
+ | to be a violation of US Federal Statutes.                     |
+"KRN",8994,1287,1,14,0)
+ +---------------------------------------------------------------+
+"KRN",8994,1287,1,15,0)
+ 
+"KRN",8994,1287,1,16,0)
+VistARad client calls this to set/clear flag to show/not show remote
+"KRN",8994,1287,1,17,0)
+exams only when displaying exam lists for a routing/remote read user.
+"KRN",8994,1287,2,0)
+^8994.02A^1^1
+"KRN",8994,1287,2,1,0)
+DATA^1^20^1
+"KRN",8994,1287,2,1,1,0)
+^8994.021^1^1^3051209^^^^
+"KRN",8994,1287,2,1,1,1,0)
+Input is 1 or 0;  1=screen for remote only; 0=no screen applied
+"KRN",8994,1287,2,"B","DATA",1)
+
+"KRN",8994,1287,3,0)
+^8994.03^4^4^3051209^^^^
+"KRN",8994,1287,3,1,0)
+Return: Reply^Code~msg
+"KRN",8994,1287,3,2,0)
+  Reply -- 0=Problem; 1=Success
+"KRN",8994,1287,3,3,0)
+  Code -- 4=Error; 1=ok
+"KRN",8994,1287,3,4,0)
+  msg -- display text if error
+"MBREQ")
+0
+"ORD",16,8994)
+8994;16;1;;;;;;;RPCDEL^XPDIA1
+"ORD",16,8994,0)
+REMOTE PROCEDURE
+"PKG",454,-1)
+1^1
+"PKG",454,0)
+IMAGING^MAG^Imaging-V1 to release 
+"PKG",454,20,0)
+^9.402P^^
+"PKG",454,22,0)
+^9.49I^1^1
+"PKG",454,22,1,0)
+3.0^3020319^3020402^126
+"PKG",454,22,1,"PAH",1,0)
+18^3060331
+"PKG",454,22,1,"PAH",1,1,0)
+^^1^1^3060331
+"PKG",454,22,1,"PAH",1,1,1,0)
+Vistarad distributed RPCs for P18
+"QUES","XPF1",0)
+Y
+"QUES","XPF1","??")
+^D REP^XPDH
+"QUES","XPF1","A")
+Shall I write over your |FLAG| File
+"QUES","XPF1","B")
+YES
+"QUES","XPF1","M")
+D XPF1^XPDIQ
+"QUES","XPF2",0)
+Y
+"QUES","XPF2","??")
+^D DTA^XPDH
+"QUES","XPF2","A")
+Want my data |FLAG| yours
+"QUES","XPF2","B")
+YES
+"QUES","XPF2","M")
+D XPF2^XPDIQ
+"QUES","XPI1",0)
+YO
+"QUES","XPI1","??")
+^D INHIBIT^XPDH
+"QUES","XPI1","A")
+Want KIDS to INHIBIT LOGONs during the install
+"QUES","XPI1","B")
+YES
+"QUES","XPI1","M")
+D XPI1^XPDIQ
+"QUES","XPM1",0)
+PO^VA(200,:EM
+"QUES","XPM1","??")
+^D MG^XPDH
+"QUES","XPM1","A")
+Enter the Coordinator for Mail Group '|FLAG|'
+"QUES","XPM1","B")
+
+"QUES","XPM1","M")
+D XPM1^XPDIQ
+"QUES","XPO1",0)
+Y
+"QUES","XPO1","??")
+^D MENU^XPDH
+"QUES","XPO1","A")
+Want KIDS to Rebuild Menu Trees Upon Completion of Install
+"QUES","XPO1","B")
+YES
+"QUES","XPO1","M")
+D XPO1^XPDIQ
+"QUES","XPZ1",0)
+Y
+"QUES","XPZ1","??")
+^D OPT^XPDH
+"QUES","XPZ1","A")
+Want to DISABLE Scheduled Options, Menu Options, and Protocols
+"QUES","XPZ1","B")
+YES
+"QUES","XPZ1","M")
+D XPZ1^XPDIQ
+"QUES","XPZ2",0)
+Y
+"QUES","XPZ2","??")
+^D RTN^XPDH
+"QUES","XPZ2","A")
+Want to MOVE routines to other CPUs
+"QUES","XPZ2","B")
+NO
+"QUES","XPZ2","M")
+D XPZ2^XPDIQ
+"VER")
+8.0^22.0
+**END**
+**END**

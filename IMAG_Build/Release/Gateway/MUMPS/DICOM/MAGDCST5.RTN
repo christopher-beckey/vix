@@ -1,0 +1,80 @@
+MAGDCST5 ;WOIFO/PMK - Display cumulative image acquisition statistics ; 26 Feb 2009 7:46 AM
+ ;;3.0;IMAGING;**10,11,54**;MAR 19, 2002;;OCT 28, 2009
+ ;; Per VHA Directive 2004-038, this routine should not be modified.
+ ;; +---------------------------------------------------------------+
+ ;; | Property of the US Government.                                |
+ ;; | No permission to copy or redistribute this software is given. |
+ ;; | Use of unreleased versions of this software requires the user |
+ ;; | to execute a written test agreement with the VistA Imaging    |
+ ;; | Development Office of the Department of Veterans Affairs,     |
+ ;; | telephone (301) 734-0100.                                     |
+ ;; | The Food and Drug Administration classifies this software as  |
+ ;; | a medical device.  As such, it may not be changed in any way. |
+ ;; | Modifications to this software may result in an adulterated   |
+ ;; | medical device under 21CFR820, the use of which is considered |
+ ;; | to be a violation of US Federal Statutes.                     |
+ ;; +---------------------------------------------------------------+
+ ;;
+ ; Cumulative image acquisition statistics
+ ;
+ N CNT,DATE,HDR,HALT,I,INFO,INSTR,J,L,LINES,LOCATION,OFFSET,PAGE,TAB,X
+ S LOCATION=^MAGDICOM(2006.563,1,"LOCATION")
+ K ^TMP("MAG",$J,"AUDIT")
+ ;
+ W !!,"Querying VistA...",!
+ ;
+ Q:$$CALLRPC^MAGM2VCU("MAG DICOM FILEMAN GET","M",.LOCNAM,4,LOCATION,.01)<0
+ S HALT=0,OFFSET=0 F  D  Q:HALT
+ . I $$CALLRPC^MAGM2VCU("MAG DICOM IMAGE AUDIT GET","M",.INFO,LOCATION,0,0,100,OFFSET)<0 S HALT=-1 Q
+ . S I=$O(INFO("")) I 'I S HALT=-1 Q
+ . S OFFSET=$P(INFO(I),",",2) I 'OFFSET S HALT=1 Q
+ . F  S I=$O(INFO(I)) Q:I=""  D
+ . . Q:$E(INFO(I),1,2)="^^"
+ . . S J=$O(^TMP("MAG",$J,"AUDIT"," "),-1)+1
+ . . S ^TMP("MAG",$J,"AUDIT",J)=INFO(I)
+ . . Q
+ . Q
+ ;
+ I HALT<0 D  Q
+ . W !!,"Cannot obtain audit information from VistA at this time.",!
+ . Q
+ ;
+ I '$O(^TMP("MAG",$J,"AUDIT","")) D  Q
+ . W !!,"No audit information available.",!
+ . Q
+ ;
+ S TAB=14,PAGE=23,LINES=PAGE+1,HALT=0
+ F  S I=$O(INFO(I)) Q:I=""  Q:INFO(I)  D
+ . S INSTR=$P(INFO(I),"^",3),L=$L(INSTR) S:L<4 L=4
+ . S HDR(TAB,1)=$J(INSTR,L),HDR(TAB,2)=$TR($J("",L)," ","="),HDR(TAB,3)=L
+ . S INSTR(INSTR)=TAB,TAB=TAB+L+1
+ . Q
+ D NEWLINE(0)
+ ;
+ S DATE="",I="" F  S I=$O(^TMP("MAG",$J,"AUDIT",I)) Q:I=""  D  Q:HALT
+ . S X=^TMP("MAG",$J,"AUDIT",I) D:DATE'=$P(X,"^",1)  Q:HALT
+ . . D NEWLINE(1) Q:HALT  S DATE=$P(X,"^",1)
+ . . W $J(+(DATE#100),2),"-",$P("Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec"," ",DATE\100#100),"-",DATE\10000+1700
+ . . Q
+ . S INSTR=$P(X,"^",3),TAB=INSTR(INSTR) W ?TAB
+ . S CNT=$P(X,"^",2) S:$P(X,"^",5)>CNT CNT=$P(X,"^",5)
+ . W $J(CNT,HDR(TAB,3))
+ . Q
+ K ^TMP("MAG",$J,"AUDIT")
+ Q
+ ;
+NEWLINE(WAIT) N I,X
+ S LINES=LINES+1,X="" I LINES<PAGE W ! Q
+ D:WAIT  Q:HALT
+ . W !,"Press <Enter> to continue: " R X:$G(DTIME,300) E  S X="^"
+ . I X="^" S HALT=1
+ . Q
+ S LINES=5
+ W !!?14,"IMAGE CAPTURE STATISTICS BY INSTRUMENT"
+ W !?19,"FOR ",LOCNAM,!!
+ S I="" F  S I=$O(HDR(I)) Q:I=""  W ?I,HDR(I,1)
+ W !
+ S I="" F  S I=$O(HDR(I)) Q:I=""  W ?I,HDR(I,2)
+ W !
+ Q
+ ;

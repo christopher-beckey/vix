@@ -1,0 +1,706 @@
+KIDS Distribution saved on Aug 02, 2013@12:43:05
+Extract from GOLD
+**KIDS**:MAG*3.0*118*DD*2006.918^
+
+**INSTALL NAME**
+MAG*3.0*118*DD*2006.918
+"BLD",8035,0)
+MAG*3.0*118*DD*2006.918^IMAGING^0^3130802^y
+"BLD",8035,4,0)
+^9.64PA^2006.918^1
+"BLD",8035,4,2006.918,0)
+2006.918
+"BLD",8035,4,2006.918,222)
+y^y^f^^^^n
+"BLD",8035,4,"B",2006.918,2006.918)
+
+"BLD",8035,6.3)
+1
+"BLD",8035,"KRN",0)
+^9.67PA^779.2^20
+"BLD",8035,"KRN",.4,0)
+.4
+"BLD",8035,"KRN",.401,0)
+.401
+"BLD",8035,"KRN",.402,0)
+.402
+"BLD",8035,"KRN",.403,0)
+.403
+"BLD",8035,"KRN",.5,0)
+.5
+"BLD",8035,"KRN",.84,0)
+.84
+"BLD",8035,"KRN",3.6,0)
+3.6
+"BLD",8035,"KRN",3.8,0)
+3.8
+"BLD",8035,"KRN",9.2,0)
+9.2
+"BLD",8035,"KRN",9.8,0)
+9.8
+"BLD",8035,"KRN",19,0)
+19
+"BLD",8035,"KRN",19.1,0)
+19.1
+"BLD",8035,"KRN",101,0)
+101
+"BLD",8035,"KRN",409.61,0)
+409.61
+"BLD",8035,"KRN",771,0)
+771
+"BLD",8035,"KRN",779.2,0)
+779.2
+"BLD",8035,"KRN",870,0)
+870
+"BLD",8035,"KRN",8989.51,0)
+8989.51
+"BLD",8035,"KRN",8989.52,0)
+8989.52
+"BLD",8035,"KRN",8994,0)
+8994
+"BLD",8035,"KRN","B",.4,.4)
+
+"BLD",8035,"KRN","B",.401,.401)
+
+"BLD",8035,"KRN","B",.402,.402)
+
+"BLD",8035,"KRN","B",.403,.403)
+
+"BLD",8035,"KRN","B",.5,.5)
+
+"BLD",8035,"KRN","B",.84,.84)
+
+"BLD",8035,"KRN","B",3.6,3.6)
+
+"BLD",8035,"KRN","B",3.8,3.8)
+
+"BLD",8035,"KRN","B",9.2,9.2)
+
+"BLD",8035,"KRN","B",9.8,9.8)
+
+"BLD",8035,"KRN","B",19,19)
+
+"BLD",8035,"KRN","B",19.1,19.1)
+
+"BLD",8035,"KRN","B",101,101)
+
+"BLD",8035,"KRN","B",409.61,409.61)
+
+"BLD",8035,"KRN","B",771,771)
+
+"BLD",8035,"KRN","B",779.2,779.2)
+
+"BLD",8035,"KRN","B",870,870)
+
+"BLD",8035,"KRN","B",8989.51,8989.51)
+
+"BLD",8035,"KRN","B",8989.52,8989.52)
+
+"BLD",8035,"KRN","B",8994,8994)
+
+"FIA",2006.918)
+ARTIFACT INSTANCE
+"FIA",2006.918,0)
+^MAGV(2006.918,
+"FIA",2006.918,0,0)
+2006.918P
+"FIA",2006.918,0,1)
+y^y^f^^^^n
+"FIA",2006.918,0,10)
+
+"FIA",2006.918,0,11)
+
+"FIA",2006.918,0,"RLRO")
+
+"FIA",2006.918,0,"VR")
+3.0^MAG
+"FIA",2006.918,2006.918)
+0
+"FIA",2006.918,2006.9183)
+0
+"MBREQ")
+0
+"PKG",454,-1)
+1^1
+"PKG",454,0)
+IMAGING^MAG^Imaging-V1 to release 
+"PKG",454,20,0)
+^9.402P^^
+"PKG",454,22,0)
+^9.49I^1^1
+"PKG",454,22,1,0)
+3.0^3020319^3020517^126
+"PKG",454,22,1,"PAH",1,0)
+118^3130802^1214
+"PKG",454,22,1,"PAH",1,1,0)
+^^122^122^3130729
+"PKG",454,22,1,"PAH",1,1,1,0)
+Routines for Patch 118, Test Build 35.
+"PKG",454,22,1,"PAH",1,1,2,0)
+ 
+"PKG",454,22,1,"PAH",1,1,3,0)
+Routines:
+"PKG",454,22,1,"PAH",1,1,4,0)
+MAGDCCS     value = 14748319
+"PKG",454,22,1,"PAH",1,1,5,0)
+MAGDGMRC    value = 9330669
+"PKG",454,22,1,"PAH",1,1,6,0)
+MAGDLB1     value = 12761979
+"PKG",454,22,1,"PAH",1,1,7,0)
+MAGDLB6     value = 3631343
+"PKG",454,22,1,"PAH",1,1,8,0)
+MAGDMEDJ    value = 10380972
+"PKG",454,22,1,"PAH",1,1,9,0)
+MAGDQR00    value = 2610540
+"PKG",454,22,1,"PAH",1,1,10,0)
+MAGDQR01    value = 10215111
+"PKG",454,22,1,"PAH",1,1,11,0)
+MAGDQR02    value = 14623747
+"PKG",454,22,1,"PAH",1,1,12,0)
+MAGDQR03    value = 26241944
+"PKG",454,22,1,"PAH",1,1,13,0)
+MAGDQR04    value = 22474528
+"PKG",454,22,1,"PAH",1,1,14,0)
+MAGDQR05    value = 12458785
+"PKG",454,22,1,"PAH",1,1,15,0)
+MAGDQR06    value = 12808429
+"PKG",454,22,1,"PAH",1,1,16,0)
+MAGDQR07    value = 3462324
+"PKG",454,22,1,"PAH",1,1,17,0)
+MAGDQR08    value = 11135227
+"PKG",454,22,1,"PAH",1,1,18,0)
+MAGDQR09    value = 9701238
+"PKG",454,22,1,"PAH",1,1,19,0)
+MAGDQR10    value = 5838068
+"PKG",454,22,1,"PAH",1,1,20,0)
+MAGDQR11    value = 4093753
+"PKG",454,22,1,"PAH",1,1,21,0)
+MAGDQR12    value = 6766715
+"PKG",454,22,1,"PAH",1,1,22,0)
+MAGDQR13    value = 10738725
+"PKG",454,22,1,"PAH",1,1,23,0)
+MAGDQR22    value = 5932725
+"PKG",454,22,1,"PAH",1,1,24,0)
+MAGDQR23    value = 3787648
+"PKG",454,22,1,"PAH",1,1,25,0)
+MAGDQR31    value = 5530671
+"PKG",454,22,1,"PAH",1,1,26,0)
+MAGDQR32    value = 4894421
+"PKG",454,22,1,"PAH",1,1,27,0)
+MAGDQR71    value = 3683372
+"PKG",454,22,1,"PAH",1,1,28,0)
+MAGDQR72    value = 4232194
+"PKG",454,22,1,"PAH",1,1,29,0)
+MAGDQR73    value = 4336726
+"PKG",454,22,1,"PAH",1,1,30,0)
+MAGDQR74    value = 4916336
+"PKG",454,22,1,"PAH",1,1,31,0)
+MAGDQRUE    value = 3231286
+"PKG",454,22,1,"PAH",1,1,32,0)
+MAGDQRUL    value = 5075915
+"PKG",454,22,1,"PAH",1,1,33,0)
+MAGDRPC8    value = 12088901
+"PKG",454,22,1,"PAH",1,1,34,0)
+MAGDRPC9    value = 15300257
+"PKG",454,22,1,"PAH",1,1,35,0)
+MAGDRPCA    value = 18858560
+"PKG",454,22,1,"PAH",1,1,36,0)
+MAGDRPCB    value = 19610086
+"PKG",454,22,1,"PAH",1,1,37,0)
+MAGFXQRS    value = 3528617
+"PKG",454,22,1,"PAH",1,1,38,0)
+MAGGTID     value = 15318885
+"PKG",454,22,1,"PAH",1,1,39,0)
+MAGIP118    value = 16658406
+"PKG",454,22,1,"PAH",1,1,40,0)
+MAGJUTL6    value = 5235694
+"PKG",454,22,1,"PAH",1,1,41,0)
+MAGKIDS1    value = 8496976
+"PKG",454,22,1,"PAH",1,1,42,0)
+MAGUAUD     value = 3432831
+"PKG",454,22,1,"PAH",1,1,43,0)
+MAGUE001    value = 5265937
+"PKG",454,22,1,"PAH",1,1,44,0)
+MAGUE002    value = 4127699
+"PKG",454,22,1,"PAH",1,1,45,0)
+MAGUE004    value = 2837439
+"PKG",454,22,1,"PAH",1,1,46,0)
+MAGUE005    value = 2768991
+"PKG",454,22,1,"PAH",1,1,47,0)
+MAGUFFLA    value = 4780171
+"PKG",454,22,1,"PAH",1,1,48,0)
+MAGUFFLL    value = 3976859
+"PKG",454,22,1,"PAH",1,1,49,0)
+MAGUPSE     value = 3173130
+"PKG",454,22,1,"PAH",1,1,50,0)
+MAGURQRS    value = 3271458
+"PKG",454,22,1,"PAH",1,1,51,0)
+MAGVAC01    value = 9767703
+"PKG",454,22,1,"PAH",1,1,52,0)
+MAGVAD01    value = 2734865
+"PKG",454,22,1,"PAH",1,1,53,0)
+MAGVAD02    value = 4280272
+"PKG",454,22,1,"PAH",1,1,54,0)
+MAGVAF01    value = 13045577
+"PKG",454,22,1,"PAH",1,1,55,0)
+MAGVAF02    value = 3488127
+"PKG",454,22,1,"PAH",1,1,56,0)
+MAGVAF03    value = 19053073
+"PKG",454,22,1,"PAH",1,1,57,0)
+MAGVAF04    value = 2921702
+"PKG",454,22,1,"PAH",1,1,58,0)
+MAGVAF05    value = 4899077
+"PKG",454,22,1,"PAH",1,1,59,0)
+MAGVAG01    value = 2797051
+"PKG",454,22,1,"PAH",1,1,60,0)
+MAGVAG02    value = 12435913
+"PKG",454,22,1,"PAH",1,1,61,0)
+MAGVAG03    value = 15139645
+"PKG",454,22,1,"PAH",1,1,62,0)
+MAGVAG04    value = 14868843
+"PKG",454,22,1,"PAH",1,1,63,0)
+MAGVAKL1    value = 7388351
+"PKG",454,22,1,"PAH",1,1,64,0)
+MAGVAQ01    value = 16822050
+"PKG",454,22,1,"PAH",1,1,65,0)
+MAGVAQ02    value = 10394360
+"PKG",454,22,1,"PAH",1,1,66,0)
+MAGVAU01    value = 5159205
+"PKG",454,22,1,"PAH",1,1,67,0)
+MAGVD001    value = 7603789
+"PKG",454,22,1,"PAH",1,1,68,0)
+MAGVD002    value = 4124064
+"PKG",454,22,1,"PAH",1,1,69,0)
+MAGVD003    value = 4420661
+"PKG",454,22,1,"PAH",1,1,70,0)
+MAGVD004    value = 4488582
+"PKG",454,22,1,"PAH",1,1,71,0)
+MAGVD005    value = 3174483
+"PKG",454,22,1,"PAH",1,1,72,0)
+MAGVD006    value = 5561142
+"PKG",454,22,1,"PAH",1,1,73,0)
+MAGVD007    value = 3685164
+"PKG",454,22,1,"PAH",1,1,74,0)
+MAGVD008    value = 3954473
+"PKG",454,22,1,"PAH",1,1,75,0)
+MAGVD010    value = 5632336
+"PKG",454,22,1,"PAH",1,1,76,0)
+MAGVDATE    value = 3369336
+"PKG",454,22,1,"PAH",1,1,77,0)
+MAGVDGWP    value = 17603694
+"PKG",454,22,1,"PAH",1,1,78,0)
+MAGVGUID    value = 9565266
+"PKG",454,22,1,"PAH",1,1,79,0)
+MAGVIM01    value = 30059037
+"PKG",454,22,1,"PAH",1,1,80,0)
+MAGVIM02    value = 13662782
+"PKG",454,22,1,"PAH",1,1,81,0)
+MAGVIM03    value = 9162433
+"PKG",454,22,1,"PAH",1,1,82,0)
+MAGVIM04    value = 11718870
+"PKG",454,22,1,"PAH",1,1,83,0)
+MAGVIM05    value = 15242382
+"PKG",454,22,1,"PAH",1,1,84,0)
+MAGVIM06    value = 12862098
+"PKG",454,22,1,"PAH",1,1,85,0)
+MAGVIM07    value = 15335247
+"PKG",454,22,1,"PAH",1,1,86,0)
+MAGVIM08    value = 4973894
+"PKG",454,22,1,"PAH",1,1,87,0)
+MAGVIM09    value = 5293910
+"PKG",454,22,1,"PAH",1,1,88,0)
+MAGVIM10    value = 8365751
+"PKG",454,22,1,"PAH",1,1,89,0)
+MAGVORDR    value = 7090722
+"PKG",454,22,1,"PAH",1,1,90,0)
+MAGVRS01    value = 2771259
+"PKG",454,22,1,"PAH",1,1,91,0)
+MAGVRS04    value = 2988202
+"PKG",454,22,1,"PAH",1,1,92,0)
+MAGVRS05    value = 2843603
+"PKG",454,22,1,"PAH",1,1,93,0)
+MAGVRS06    value = 2963783
+"PKG",454,22,1,"PAH",1,1,94,0)
+MAGVRS07    value = 3017184
+"PKG",454,22,1,"PAH",1,1,95,0)
+MAGVRS08    value = 13251433
+"PKG",454,22,1,"PAH",1,1,96,0)
+MAGVRS09    value = 3304082
+"PKG",454,22,1,"PAH",1,1,97,0)
+MAGVRS11    value = 2822694
+"PKG",454,22,1,"PAH",1,1,98,0)
+MAGVRS14    value = 3873307
+"PKG",454,22,1,"PAH",1,1,99,0)
+MAGVRS15    value = 3427655
+"PKG",454,22,1,"PAH",1,1,100,0)
+MAGVRS21    value = 2823667
+"PKG",454,22,1,"PAH",1,1,101,0)
+MAGVRS24    value = 4410330
+"PKG",454,22,1,"PAH",1,1,102,0)
+MAGVRS31    value = 3079264
+"PKG",454,22,1,"PAH",1,1,103,0)
+MAGVRS41    value = 30228912
+"PKG",454,22,1,"PAH",1,1,104,0)
+MAGVRS42    value = 12201505
+"PKG",454,22,1,"PAH",1,1,105,0)
+MAGVRS43    value = 7578338
+"PKG",454,22,1,"PAH",1,1,106,0)
+MAGVRS44    value = 13926434
+"PKG",454,22,1,"PAH",1,1,107,0)
+MAGVRS45    value = 5247038
+"PKG",454,22,1,"PAH",1,1,108,0)
+MAGVRS46    value = 5857183
+"PKG",454,22,1,"PAH",1,1,109,0)
+MAGVRS51    value = 18061747
+"PKG",454,22,1,"PAH",1,1,110,0)
+MAGVRS52    value = 9106742
+"PKG",454,22,1,"PAH",1,1,111,0)
+MAGVRS61    value = 17820732
+"PKG",454,22,1,"PAH",1,1,112,0)
+MAGVRS71    value = 3184401
+"PKG",454,22,1,"PAH",1,1,113,0)
+MAGVRS81    value = 8694832
+"PKG",454,22,1,"PAH",1,1,114,0)
+MAGVRS82    value = 7085769
+"PKG",454,22,1,"PAH",1,1,115,0)
+MAGVSOPC    value = 4221335
+"PKG",454,22,1,"PAH",1,1,116,0)
+MAGVSOPU    value = 48817298
+"PKG",454,22,1,"PAH",1,1,117,0)
+MAGVSTDY    value = 3494166
+"PKG",454,22,1,"PAH",1,1,118,0)
+MAGVUID     value = 16416361
+"PKG",454,22,1,"PAH",1,1,119,0)
+MAGVUID1    value = 3192862
+"PKG",454,22,1,"PAH",1,1,120,0)
+ 
+"PKG",454,22,1,"PAH",1,1,121,0)
+Please note that routine MAGIP118 is deleted after the KIDS Build is
+"PKG",454,22,1,"PAH",1,1,122,0)
+installed.
+"QUES","XPF1",0)
+Y
+"QUES","XPF1","??")
+^D REP^XPDH
+"QUES","XPF1","A")
+Shall I write over your |FLAG| File
+"QUES","XPF1","B")
+YES
+"QUES","XPF1","M")
+D XPF1^XPDIQ
+"QUES","XPF2",0)
+Y
+"QUES","XPF2","??")
+^D DTA^XPDH
+"QUES","XPF2","A")
+Want my data |FLAG| yours
+"QUES","XPF2","B")
+YES
+"QUES","XPF2","M")
+D XPF2^XPDIQ
+"QUES","XPI1",0)
+YO
+"QUES","XPI1","??")
+^D INHIBIT^XPDH
+"QUES","XPI1","A")
+Want KIDS to INHIBIT LOGONs during the install
+"QUES","XPI1","B")
+NO
+"QUES","XPI1","M")
+D XPI1^XPDIQ
+"QUES","XPM1",0)
+PO^VA(200,:EM
+"QUES","XPM1","??")
+^D MG^XPDH
+"QUES","XPM1","A")
+Enter the Coordinator for Mail Group '|FLAG|'
+"QUES","XPM1","B")
+
+"QUES","XPM1","M")
+D XPM1^XPDIQ
+"QUES","XPO1",0)
+Y
+"QUES","XPO1","??")
+^D MENU^XPDH
+"QUES","XPO1","A")
+Want KIDS to Rebuild Menu Trees Upon Completion of Install
+"QUES","XPO1","B")
+NO
+"QUES","XPO1","M")
+D XPO1^XPDIQ
+"QUES","XPZ1",0)
+Y
+"QUES","XPZ1","??")
+^D OPT^XPDH
+"QUES","XPZ1","A")
+Want to DISABLE Scheduled Options, Menu Options, and Protocols
+"QUES","XPZ1","B")
+NO
+"QUES","XPZ1","M")
+D XPZ1^XPDIQ
+"QUES","XPZ2",0)
+Y
+"QUES","XPZ2","??")
+^D RTN^XPDH
+"QUES","XPZ2","A")
+Want to MOVE routines to other CPUs
+"QUES","XPZ2","B")
+NO
+"QUES","XPZ2","M")
+D XPZ2^XPDIQ
+"SEC","^DIC",2006.918,2006.918,0,"AUDIT")
+@
+"SEC","^DIC",2006.918,2006.918,0,"DD")
+@
+"SEC","^DIC",2006.918,2006.918,0,"DEL")
+@
+"SEC","^DIC",2006.918,2006.918,0,"LAYGO")
+@
+"SEC","^DIC",2006.918,2006.918,0,"RD")
+@
+"SEC","^DIC",2006.918,2006.918,0,"WR")
+@
+"VER")
+8.0^22.0
+"^DD",2006.918,2006.918,0)
+FIELD^^8^8
+"^DD",2006.918,2006.918,0,"DDA")
+N
+"^DD",2006.918,2006.918,0,"DT")
+3101111
+"^DD",2006.918,2006.918,0,"IX","B",2006.918,.01)
+
+"^DD",2006.918,2006.918,0,"IX","C",2006.918,6)
+
+"^DD",2006.918,2006.918,0,"NM","ARTIFACT INSTANCE")
+
+"^DD",2006.918,2006.918,0,"PT",2006.922,2)
+
+"^DD",2006.918,2006.918,0,"VRPK")
+MAG
+"^DD",2006.918,2006.918,.01,0)
+ARTIFACT^RP2006.916'^MAGV(2006.916,^0;1^Q
+"^DD",2006.918,2006.918,.01,1,0)
+^.1
+"^DD",2006.918,2006.918,.01,1,1,0)
+2006.918^B
+"^DD",2006.918,2006.918,.01,1,1,1)
+S ^MAGV(2006.918,"B",X,DA)=""
+"^DD",2006.918,2006.918,.01,1,1,2)
+K ^MAGV(2006.918,"B",X,DA)
+"^DD",2006.918,2006.918,.01,3)
+Select Artifact.
+"^DD",2006.918,2006.918,.01,21,0)
+^.001^1^1^3100411^^^
+"^DD",2006.918,2006.918,.01,21,1,0)
+This is the Artifact.
+"^DD",2006.918,2006.918,.01,23,0)
+^.001^1^1^3100411^^
+"^DD",2006.918,2006.918,.01,23,1,0)
+Added in patch MAG*3.0*34
+"^DD",2006.918,2006.918,.01,"DT")
+3110804
+"^DD",2006.918,2006.918,2,0)
+STORAGE PROVIDER^RP2006.917'^MAGV(2006.917,^0;2^Q
+"^DD",2006.918,2006.918,2,3)
+Select Storage Provider.
+"^DD",2006.918,2006.918,2,21,0)
+^.001^2^2^3110903^^^^
+"^DD",2006.918,2006.918,2,21,1,0)
+This is the storage provider that created 
+"^DD",2006.918,2006.918,2,21,2,0)
+the artifact instance.
+"^DD",2006.918,2006.918,2,23,0)
+^.001^1^1^3110903^^^^
+"^DD",2006.918,2006.918,2,23,1,0)
+Added in patch MAG*3.0*34
+"^DD",2006.918,2006.918,2,"DT")
+3110804
+"^DD",2006.918,2006.918,3,0)
+URL^2006.9183^^1;0
+"^DD",2006.918,2006.918,3,21,0)
+^.001^2^2^3110914^^^^
+"^DD",2006.918,2006.918,3,21,1,0)
+ A field used by storage provider subclasses to retrieve an artifact. The 
+"^DD",2006.918,2006.918,3,21,2,0)
+URL needs to have meaning only to the storage provider that created the artifact.
+"^DD",2006.918,2006.918,3,23,0)
+^.001^1^1^3110914^^^^
+"^DD",2006.918,2006.918,3,23,1,0)
+Added in patch MAG*3.0*34
+"^DD",2006.918,2006.918,4,0)
+CREATED DATE/TIME^RD^^0;3^S %DT="ESTR" D ^%DT S X=Y K:Y<1 X
+"^DD",2006.918,2006.918,4,3)
+Enter date and time when the artifact was created.
+"^DD",2006.918,2006.918,4,21,0)
+^.001^1^1^3110914^^^^
+"^DD",2006.918,2006.918,4,21,1,0)
+The date and time at which the artifact was created.
+"^DD",2006.918,2006.918,4,23,0)
+^.001^1^1^3110914^^^^
+"^DD",2006.918,2006.918,4,23,1,0)
+Added in patch MAG*3.0*34
+"^DD",2006.918,2006.918,4,"DT")
+3110914
+"^DD",2006.918,2006.918,5,0)
+LAST ACCESS DATE/TIME^D^^0;4^S %DT="EST" D ^%DT S X=Y K:Y<1 X
+"^DD",2006.918,2006.918,5,3)
+Enter date and time when the artifact was most recently retrieved.
+"^DD",2006.918,2006.918,5,21,0)
+^.001^1^1^3110914^^^^
+"^DD",2006.918,2006.918,5,21,1,0)
+The date and time at which the artifact was most recently retrieved.
+"^DD",2006.918,2006.918,5,23,0)
+^.001^1^1^3110914^^^^
+"^DD",2006.918,2006.918,5,23,1,0)
+Added in patch MAG*3.0*34
+"^DD",2006.918,2006.918,5,"DT")
+3110914
+"^DD",2006.918,2006.918,6,0)
+FILEREF^F^^2;1^K:$L(X)>30!($L(X)<1) X
+"^DD",2006.918,2006.918,6,1,0)
+^.1
+"^DD",2006.918,2006.918,6,1,1,0)
+2006.918^C
+"^DD",2006.918,2006.918,6,1,1,1)
+S ^MAGV(2006.918,"C",$E(X,1,30),DA)=""
+"^DD",2006.918,2006.918,6,1,1,2)
+K ^MAGV(2006.918,"C",$E(X,1,30),DA)
+"^DD",2006.918,2006.918,6,1,1,"%D",0)
+^^1^1^3101111^
+"^DD",2006.918,2006.918,6,1,1,"%D",1,0)
+This cross-reference is used for locating the artifact information by artifact filename.
+"^DD",2006.918,2006.918,6,1,1,"DT")
+3101111
+"^DD",2006.918,2006.918,6,3)
+Answer must be 1-30 characters in length.
+"^DD",2006.918,2006.918,6,21,0)
+^^2^2^3101111^
+"^DD",2006.918,2006.918,6,21,1,0)
+This field contains the artifact filename of the artifact stored on the 
+"^DD",2006.918,2006.918,6,21,2,0)
+VistA Imaging file servers.
+"^DD",2006.918,2006.918,6,23,0)
+^^1^1^3101111^
+"^DD",2006.918,2006.918,6,23,1,0)
+Added in patch MAG*3.0*34
+"^DD",2006.918,2006.918,6,"DT")
+3101111
+"^DD",2006.918,2006.918,7,0)
+DISK VOLUME^P2005.2'^MAG(2005.2,^2;2^Q
+"^DD",2006.918,2006.918,7,3)
+Enter the disk name and volume set name where the artifact will be stored.
+"^DD",2006.918,2006.918,7,21,0)
+^^2^2^3101118^^
+"^DD",2006.918,2006.918,7,21,1,0)
+This field gives the path for the network location of the stored artifact 
+"^DD",2006.918,2006.918,7,21,2,0)
+(i.e. on which server it resides).
+"^DD",2006.918,2006.918,7,23,0)
+^^1^1^3101111^
+"^DD",2006.918,2006.918,7,23,1,0)
+Added in patch MAG*3.0*34
+"^DD",2006.918,2006.918,7,"DT")
+3110804
+"^DD",2006.918,2006.918,8,0)
+FILEPATH^F^^3;1^K:$L(X)>240!($L(X)<1) X
+"^DD",2006.918,2006.918,8,3)
+Answer must be 1-240 characters in length.
+"^DD",2006.918,2006.918,8,21,0)
+^^2^2^3101111^
+"^DD",2006.918,2006.918,8,21,1,0)
+This field contains the artifact filepath of the artifact stored on the 
+"^DD",2006.918,2006.918,8,21,2,0)
+VistA Imaging file servers.
+"^DD",2006.918,2006.918,8,23,0)
+^^1^1^3101111^
+"^DD",2006.918,2006.918,8,23,1,0)
+Added in patch MAG*3.0*34
+"^DD",2006.918,2006.918,8,"DT")
+3101111
+"^DD",2006.918,2006.9183,0)
+URL SUB-FIELD^^.01^1
+"^DD",2006.918,2006.9183,0,"DT")
+3100411
+"^DD",2006.918,2006.9183,0,"NM","URL")
+
+"^DD",2006.918,2006.9183,0,"UP")
+2006.918
+"^DD",2006.918,2006.9183,.01,0)
+URL^Wx^^0;1^Q
+"^DD",2006.918,2006.9183,.01,3)
+Enter the URL where the artifact could be retrieved.
+"^DD",2006.918,2006.9183,.01,21,0)
+^.001^2^2^3110914^^^^
+"^DD",2006.918,2006.9183,.01,21,1,0)
+A field used by storage provider subclasses to retrieve an artifact. The 
+"^DD",2006.918,2006.9183,.01,21,2,0)
+URL needs to have meaning only to the storage provider that created the artifact.
+"^DD",2006.918,2006.9183,.01,23,0)
+^.001^1^1^3110914^^^^
+"^DD",2006.918,2006.9183,.01,23,1,0)
+Added in patch MAG*3.0*34
+"^DD",2006.918,2006.9183,.01,"DT")
+3100411
+"^DIC",2006.918,2006.918,0)
+ARTIFACT INSTANCE^2006.918
+"^DIC",2006.918,2006.918,0,"GL")
+^MAGV(2006.918,
+"^DIC",2006.918,2006.918,"%",0)
+^1.005^^0
+"^DIC",2006.918,2006.918,"%D",0)
+^^25^25^3100420
+"^DIC",2006.918,2006.918,"%D",1,0)
+ +---------------------------------------------------------------+
+"^DIC",2006.918,2006.918,"%D",2,0)
+ |                                                               |
+"^DIC",2006.918,2006.918,"%D",3,0)
+ | Property of the US Government.                                |
+"^DIC",2006.918,2006.918,"%D",4,0)
+ | No permission to copy or redistribute this software is given. |
+"^DIC",2006.918,2006.918,"%D",5,0)
+ | Use of unreleased versions of this software requires the user |
+"^DIC",2006.918,2006.918,"%D",6,0)
+ | to execute a written test agreement with the VistA Imaging    |
+"^DIC",2006.918,2006.918,"%D",7,0)
+ | Development Office of the Department of Veterans Affairs,     |
+"^DIC",2006.918,2006.918,"%D",8,0)
+ | telephone (301) 734-0100.                                     |
+"^DIC",2006.918,2006.918,"%D",9,0)
+ |                                                               |
+"^DIC",2006.918,2006.918,"%D",10,0)
+ | The Food and Drug Administration classifies this software as  |
+"^DIC",2006.918,2006.918,"%D",11,0)
+ | a medical device.  As such, it may not be changed in any way. |
+"^DIC",2006.918,2006.918,"%D",12,0)
+ | Modifications to this software may result in an adulterated   |
+"^DIC",2006.918,2006.918,"%D",13,0)
+ | medical device under 21CFR820, the use of which is considered |
+"^DIC",2006.918,2006.918,"%D",14,0)
+ | to be a violation of US Federal Statutes.                     |
+"^DIC",2006.918,2006.918,"%D",15,0)
+ |                                                               |
+"^DIC",2006.918,2006.918,"%D",16,0)
+ +---------------------------------------------------------------+
+"^DIC",2006.918,2006.918,"%D",17,0)
+ 
+"^DIC",2006.918,2006.918,"%D",18,0)
+This file holds the details of a particular instance of the binary data 
+"^DIC",2006.918,2006.918,"%D",19,0)
+for an artifact. Each record is owned by a specific storage provider, and has a 
+"^DIC",2006.918,2006.918,"%D",20,0)
+reference to its parent Artifact record, as well as a URL understandable 
+"^DIC",2006.918,2006.918,"%D",21,0)
+by the given provider that can be used to return a stream for the 
+"^DIC",2006.918,2006.918,"%D",22,0)
+artifact.
+"^DIC",2006.918,2006.918,"%D",23,0)
+ 
+"^DIC",2006.918,2006.918,"%D",24,0)
+It also holds properties related to when the file was created, when it 
+"^DIC",2006.918,2006.918,"%D",25,0)
+was last accessed, etc.
+"^DIC",2006.918,"B","ARTIFACT INSTANCE",2006.918)
+
+**END**
+**END**

@@ -1,0 +1,30 @@
+﻿<Views:BaseWindow x:Class="ImagingClient.Infrastructure.Views.ExceptionWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:Views="clr-namespace:ImagingClient.Infrastructure.Views"
+        Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" 
+        Title="Error Information" Height="338" Width="552"
+        WindowStartupLocation="CenterOwner">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+        <Label Grid.Row="0" Name="lblExceptionMessage" Content="An exception occurred" />
+
+        <GroupBox Grid.Row="1" 
+                  Header="Error Details">
+            <TextBox Name="txtexceptionDetails" 
+                 TextWrapping="Wrap"  
+                 BorderBrush="Gray" 
+                 BorderThickness="2" 
+                 IsReadOnly="True"
+                 IsReadOnlyCaretVisible="True"
+                 VerticalScrollBarVisibility="Auto"
+                 HorizontalScrollBarVisibility="Auto" />
+        </GroupBox>
+
+        <Button Grid.Row="2" Content="Close" Width="60" HorizontalAlignment="Right" Click="Close_Click" />
+    </Grid>
+</Views:BaseWindow>

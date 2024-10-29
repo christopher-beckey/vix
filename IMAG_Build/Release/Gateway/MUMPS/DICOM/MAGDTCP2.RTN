@@ -1,0 +1,212 @@
+MAGDTCP2 ;WOIFO/PMK - DICOM Networking / Upper Layer Service ; 24 Feb 2009 7:17 AM
+ ;;3.0;IMAGING;**30,54**;MAR 19, 2002;;OCT 28, 2009
+ ;; Per VHA Directive 2004-038, this routine should not be modified.
+ ;; +---------------------------------------------------------------+
+ ;; | Property of the US Government.                                |
+ ;; | No permission to copy or redistribute this software is given. |
+ ;; | Use of unreleased versions of this software requires the user |
+ ;; | to execute a written test agreement with the VistA Imaging    |
+ ;; | Development Office of the Department of Veterans Affairs,     |
+ ;; | telephone (301) 734-0100.                                     |
+ ;; | The Food and Drug Administration classifies this software as  |
+ ;; | a medical device.  As such, it may not be changed in any way. |
+ ;; | Modifications to this software may result in an adulterated   |
+ ;; | medical device under 21CFR820, the use of which is considered |
+ ;; | to be a violation of US Federal Statutes.                     |
+ ;; +---------------------------------------------------------------+
+ ;;
+ Q
+ ; Generate one PDU for each PDV.  Separate PDUs are used, one for
+ ; the command PDV and one for each data PDV.  This is completely
+ ; allowable, and is much simpler to code and maintain than packing
+ ; two PDVs into the first PDU, the command PDV followed by the
+ ; first data PDV.
+ ;
+ ; See Part 7, Annex F, and Part 8, Section 9.3.5.
+ ;
+ ; Send a message via TCP
+ ;
+SEND(FILE,IP,PORT) ; send an Asynchronous Association PDU
+ N BYTE0,BYTE1,BYTE2,BYTE3,PAD,STATUS,TYPE,X
+ ; to the destination via TCP
+ I '$$GETDIR^MAGOSDIR(FILE) D
+ . N MSG
+ . S MSG(1)="Cannot find file """_FILE_"""."
+ . D TRAPERR^MAGDSTRT(1,$T(+0),"DICOM GATEWAY ERROR",.MSG)
+ . Q  ; Error trap does not return
+ S STATUS=$$OPEN^MAGOSFIL(FILE,"B")
+ I STATUS<0 D
+ . N M
+ . S M="Could not open file """_FILE_""" for Binary Read."
+ . W:$$USEPRIN^MAGOSFIL(1) !!!,M,!,STATUS
+ . S $EC=",U"_M_","
+ . Q  ; Error trap does not return
+ ; read and write PDU header (save TYPE and BYTEs for dx trace msg)
+ S TYPE=$$READSTAR^MAGOSFIL(FILE)
+ S PAD=$$READSTAR^MAGOSFIL(FILE)
+ S BYTE3=$$READSTAR^MAGOSFIL(FILE)
+ S BYTE2=$$READSTAR^MAGOSFIL(FILE)
+ S BYTE1=$$READSTAR^MAGOSFIL(FILE)
+ S BYTE0=$$READSTAR^MAGOSFIL(FILE)
+ S STATUS=$$TCPUSE^MAGOSTCP(IP,PORT)
+ W *TYPE,*PAD,*BYTE3,*BYTE2,*BYTE1,*BYTE0
+ ; copy the rest of the PDU
+ F  S X=$$READSTAR^MAGOSFIL(FILE) Q:X<0  D
+ . S STATUS=$$TCPUSE^MAGOSTCP(IP,PORT)
+ . I $P($$MUMPS^MAGOSMSC(),"^",1)="Cache",$X>500 W *-3
+ . W *X
+ . Q
+ S STATUS=$$TCPFLUSH^MAGOSTCP(IP,PORT) ; flush the TCP/IP device
+ S STATUS=$$CLOSE^MAGOSFIL(FILE)
+ I $$USEPRIN^MAGOSFIL(1)
+ ; output diagnostic trace message
+ S X=$$ULONG^MAGDTCP3(BYTE0,BYTE1,BYTE2,BYTE3)
+ D TRACE($$HEX^MAGDDR0(TYPE,2)_"H",X)
+ Q
+ ;
+SENDDATA(FILE,IP,PORT) ; send a message using the P-DATA Service
+ N BYTEORDR,EOF,ERROR,FILENAME,FILESIZE,LENTOEND,I,MAXSIZE,MSGLNGTH
+ N MSGCTRLH,NUM2SEND,PCONTEXT,SOPUID,STATUS,YET2SEND
+ S ERROR=0
+ I '$$GETDIR^MAGOSDIR(FILE) D
+ . N MSG
+ . S MSG(1)="Cannot find file """_FILE_"""."
+ . D TRAPERR^MAGDSTRT(1,$T(+0),"DICOM GATEWAY ERROR",.MSG)
+ . Q  ; Error trap does not return
+ S FILENAME=$P(FILE,"\",$L(FILE,"\"))
+ S FILESIZE=$P(^TMP("MAG",$J,"DIR LIST",FILENAME),";",1)
+ ;
+ S EOF=0
+ ; try OPEN three times - work around for a possible race condition
+ F I=1:1:3 S STATUS=$$OPEN^MAGOSFIL(FILE,"B") Q:STATUS'<0  H 1
+ I STATUS<0 D
+ . N M
+ . S M="Could not open file """_FILE_""" for Binary Read."
+ . W:$$USEPRIN^MAGOSFIL(1) !!!,M,!,STATUS
+ . S $EC=",U"_M_","
+ . Q  ; Error trap does not return
+ F  D  Q:EOF  Q:ERROR  ; big for loop to output each message
+ . N BYTEORDR,ELEMENT,GROUP,LENGRP0,LENGTH,OFFSET,PDUTYPE,STATUS
+ . ; send each message in a single or multiple message file
+ . ; get the length of Group 0 to separate the command from the data
+ . S BYTEORDR="L" ; DICOM default is Little Endian
+ . ;
+ . ; get length of Group 0 (0000,0000)
+ . S OFFSET=$$GETOFSET^MAGOSFIL(FILE) ; save offset to start of message
+ . S GROUP=+$$US^MAGDDR0,ELEMENT=+$$US^MAGDDR0,LENGTH=+$$UL^MAGDDR0
+ . I $$USEPRIN^MAGOSFIL(1)
+ . I (GROUP'=0)!(ELEMENT'=0)!(LENGTH'=4) D
+ . . N MSG
+ . . S MSG(1)="Incorrect DICOM Message -- first 8 bytes are wrong"
+ . . S MSG(2)="Group="""_GROUP_""", Element="""_ELEMENT
+ . . S MSG(2)=MSG(2)_""", Length="""_LENGTH_"""."
+ . . D TRAPERR^MAGDSTRT(1,$T(+0),"DICOM GATEWAY ERROR",.MSG)
+ . . Q  ; Error trap does not return
+ . S STATUS=$$USE^MAGOSFIL(FILE)
+ . S LENGRP0=+$$UL^MAGDDR0 ; get Group 0 length
+ . I $$USEPRIN^MAGOSFIL(1)
+ . S LENGRP0=LENGRP0+12 ; add group, element, length, and data fields
+ . ;
+ . ; get length to end of message (0000,0001)
+ . S STATUS=$$USE^MAGOSFIL(FILE)
+ . S GROUP=+$$US^MAGDDR0,ELEMENT=+$$US^MAGDDR0,LENGTH=+$$UL^MAGDDR0
+ . I $$USEPRIN^MAGOSFIL(1)
+ . I (GROUP'=0)!(ELEMENT'=1)!(LENGTH'=4) D
+ . . N MSG
+ . . S MSG(1)="Incorrect DICOM Message -- Length to End not present"
+ . . S MSG(2)="Group="""_GROUP_""", Element="""_ELEMENT
+ . . S MSG(2)=MSG(2)_""", Length="""_LENGTH_"""."
+ . . D TRAPERR^MAGDSTRT(1,$T(+0),"DICOM GATEWAY ERROR",.MSG)
+ . . Q  ; Error trap does not return
+ . S STATUS=$$USE^MAGOSFIL(FILE)
+ . S LENTOEND=+$$UL^MAGDDR0 ; get length to end of message
+ . I $$USEPRIN^MAGOSFIL(1)
+ . S MSGLNGTH=LENTOEND+24 ; add length of first two elements
+ . ;
+ . ; get SOP Class UID (0000,0002) and lookup Presentation Context ID
+ . S STATUS=$$USE^MAGOSFIL(FILE)
+ . S GROUP=+$$US^MAGDDR0,ELEMENT=+$$US^MAGDDR0,LENGTH=+$$UL^MAGDDR0
+ . I $$USEPRIN^MAGOSFIL(1)
+ . I (GROUP'=0)!(ELEMENT'=2) D
+ . . N MSG
+ . . S MSG(1)="Incorrect DICOM Message -- SOP Class UID not present"
+ . . S MSG(2)="Group="""_GROUP_""", Element="""_ELEMENT_"""."
+ . . D TRAPERR^MAGDSTRT(1,$T(+0),"DICOM GATEWAY ERROR",.MSG)
+ . . Q  ; Error trap does not return
+ . S STATUS=$$USE^MAGOSFIL(FILE)
+ . S SOPUID=$$UI^MAGDDR0(LENGTH,"") ; get SOP Class UID
+ . I $$USEPRIN^MAGOSFIL(1)
+ . I 'SOPUID D
+ . . N MSG
+ . . S MSG(1)="Incorrect SOP Class UID format <<"_SOPUID_">>"
+ . . D TRAPERR^MAGDSTRT(1,$T(+0),"DICOM GATEWAY ERROR",.MSG)
+ . . Q  ; Error trap does not return
+ . I '$D(^TMP("MAG",$J,"DICOM","NEGOTIATE","SOP CLASS UID",SOPUID)) D  Q
+ . . S ERROR="-5,Unknown Presentation Context ID for "_SOPUID
+ . . Q
+ . S PCONTEXT=^TMP("MAG",$J,"DICOM","NEGOTIATE","SOP CLASS UID",SOPUID)
+ . ;
+ . ; reset the pointer to the beginning of the message with the file
+ . S OFFSET=$$SEEK^MAGOSFIL(FILE,OFFSET,0)
+ . I $$USEPRIN^MAGOSFIL(1)
+ . ;
+ . S MAXSIZE=1000
+ . S BYTEORDR="B" ; PDU and PDV lengths are Big Endian
+ . S PDUTYPE="04H" ; P-DATA-TF PDU type
+ . D TRACE(PDUTYPE,MSGLNGTH_" ("_FILESIZE_")")
+ . ;
+ . ; output the MESSAGE COMMAND PDU/PDV (assume only 1)
+ . D SENDFRAG(LENGRP0,PCONTEXT,3) ; output the Message Command fragment
+ . ;
+ . ; output the MESSAGE DATA SET PDU/PDV(s) (there may be more than one)
+ . S YET2SEND=MSGLNGTH-LENGRP0 ; number of bytes in file yet to send
+ . I YET2SEND>0 F  D  Q:YET2SEND<1  ; send MESSAGE DATA SET fragments
+ . . I YET2SEND>(MAXSIZE-6) S NUM2SEND=MAXSIZE-6,MSGCTRLH=0 ; not last
+ . . E  S NUM2SEND=YET2SEND,MSGCTRLH=2 ; last/only fragment of msg dataset
+ . . D MESSAGE^MAGDMLOG(0,0,"","tV") ; output the message time stamp
+ . . D SENDFRAG(NUM2SEND,PCONTEXT,MSGCTRLH) ; output the fragment
+ . . S YET2SEND=YET2SEND-NUM2SEND
+ . . Q
+ . S FILESIZE=FILESIZE-MSGLNGTH S:FILESIZE'>0 EOF=1 ; end of file
+ . Q
+ S STATUS=$$TCPFLUSH^MAGOSTCP(IP,PORT) ; flush the TCP/IP device
+ S STATUS=$$CLOSE^MAGOSFIL(FILE)
+ I $$USEPRIN^MAGOSFIL(1)
+ Q ERROR
+ ;
+SENDFRAG(LENGTH,PCONTEXT,MSGCTRLH) ; send a PDU & PDV Command or Data fragment
+ N I,STATUS,X
+ D MESSAGE^MAGDMLOG(0,39,"PDU len="_(LENGTH+6),"V")
+ D MESSAGE^MAGDMLOG(0,53,"PDV hdr="_MSGCTRLH_", pc="_PCONTEXT_", len="_LENGTH,"V1")
+ ;
+ S STATUS=$$TCPUSE^MAGOSTCP(IP,PORT)
+ ;
+ ; output the P-DATA-TF PDU Fields (Part 8, Section 9.3.5)
+ D PUTBYTE^MAGDDW0($$HEX2DEC^MAGOSMSC(PDUTYPE)) ; PDU type (byte 1)
+ D PUTBYTE^MAGDDW0(0) ; reserved (byte 2)
+ D PUTULONG^MAGDDW0(LENGTH+6) ; PDU length (bytes 3-6)
+ ;
+ ; output the P-DATA-TF PDV Fields (Part 8, Section 9.3.5.1)
+ D PUTULONG^MAGDDW0(LENGTH+2) ; message length + 2 bytes
+ D PUTBYTE^MAGDDW0(PCONTEXT) ; presentation context ID
+ D PUTBYTE^MAGDDW0(MSGCTRLH) ; data header
+ ;
+ ; output the data
+ F I=1:1:LENGTH S X=$$READSTAR^MAGOSFIL(FILE) Q:X<0  D
+ . S STATUS=$$TCPUSE^MAGOSTCP(IP,PORT)
+ . W *X
+ . Q
+ ;
+ I $$USEPRIN^MAGOSFIL(1)
+ Q
+ ;
+TRACE(PDUTYPE,LENGTH) ; output diagnostic trace message
+ N I,MSG,X
+ S MSG="Sending PDU Type: "_PDUTYPE_" ("
+ S I=$O(^MAGDICOM(2006.54,"B",PDUTYPE,""))
+ I I S X=^MAGDICOM(2006.54,I,0) S MSG=MSG_$P(X,"^",2)
+ S MSG=MSG_")  Length: "_LENGTH
+ D MESSAGE^MAGDMLOG(2,0,MSG,"V")
+ D MESSAGE^MAGDMLOG(1,0,FILE,"V1")
+ Q
+ ;

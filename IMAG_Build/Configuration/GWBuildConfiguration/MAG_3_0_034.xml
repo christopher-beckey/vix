@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<build
+ name="MAG*3.0*34"
+ patch="34"
+ patchName="Version 3.0 Patch 034 - Storing DICOM Objects, Phase IV">
+	<routines>
+	</routines>
+</build>
+

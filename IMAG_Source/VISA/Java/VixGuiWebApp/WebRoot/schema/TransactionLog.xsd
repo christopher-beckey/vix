@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema 
+	xmlns="http://www.w3.org/2001/XMLSchema" 
+	targetNamespace="urn:gov.va.med.imaging.visa.transaction" 
+	xmlns:tns="urn:gov.va.med.imaging.visa.transaction" 
+	elementFormDefault="qualified">
+
+	<complexType name="transactionType">
+		<sequence>
+			<element type="string" name="start-time"/>
+			<element type="string" name="elapsed-time"/>
+			<element type="string" name="patient-icn"/>
+			<element type="string" name="query-type"/>
+			<element type="string" name="query-filter"/>
+			<element type="string" name="asynchronous-command"/>
+			<element type="string" name="item-count"/>
+			<element type="string" name="received-count"/>
+			<element type="string" name="entry-quality"/>
+			<element type="string" name="command-class"/>
+			<element type="string" name="originating-host"/>
+			<element type="string" name="user"/>
+			<element type="string" name="cache-hit"/>
+			<element type="string" name="error-msg"/>
+			<element type="string" name="modality"/>
+			<element type="string" name="purpose-of-use"/>
+			<element type="string" name="datasource-protocol"/>
+			<element type="string" name="response-code"/>
+			<element type="string" name="realm-site-number"/>
+			<element type="string" name="transaction-identifier"/>
+			<element type="string" name="software-version"/>
+			<element type="string" name="remote-login"/>
+		</sequence>
+	</complexType>
+	
+	<complexType name="transationLogType">
+		<sequence>
+			<element minOccurs="0" maxOccurs="65536" name="transaction" type="tns:transactionType" />
+		</sequence>
+	</complexType>
+	
+	<element name="transaction-log" type="tns:transationLogType" />
+
+</schema>

@@ -1,0 +1,159 @@
+magpta ;WOIFO/MLH - PACS testing subroutines (ADT) ; 20 Jun 2005  10:53 AM
+ ; *** CAUTION:  not for distribution beyond Silver Spring OIFO!
+ q
+ ;
+ADT ; SUBROUTINE - adt message and pt examined message
+ n rannum ; random 6-digit number
+ n HLFS,HLCS,HLRS,HLSS ; encoding characters
+ k HLA ; n HLA ; HL7 segments array
+ ;
+ s rannum=$e($r(1000000)+1000000,2,7)
+ d INIT^HLFNC2("MAG ORM",.HL)
+ S HLCS=$E(HLECH,1),HLRS=$E(HLECH,2),HLSS=$E(HLECH,4)
+ i $g(HL) d  q
+ . w !,"Error: "_$p(HL,"^",2)
+ . q
+ ;
+ d EVN^magpta ; build EVN segment
+ d PID^magpta ; build PID segment
+ d PV1^magpta ; build PV1 segment
+ d ROL^magptp ; build ROL segments
+ d DG1^magptf ; build DG1 segment
+ d OBX^magptr ; build OBX segments (height/weight)
+ d AL1^magpta ; build AL1 segments
+ q
+ ;
+AL1 ; SUBROUTINE - build AL1 segments - up to 6
+ n setid ; --- set ID index for repeating segment groups
+ n segdta ; -- segment data
+ n iprime ; -- various prime numbers used as loop indices
+ n filix ; --- FileMan index
+ n fildta ; -- FileMan data
+ ;
+ s setid=0
+ f iprime=3,5,7,11,13,17 i rannum+43#iprime=0 d
+ . s filix=(rannum+iprime)#($o(^GMRD(120.82," "),-1)+1)
+ . s fildta=$g(^GMRD(120.82,filix,0))
+ . i fildta]"" d
+ . . ; AL1-1-set ID
+ . . s setid=setid+1,$p(segdta,HLFS,1)=setid
+ . . ; AL1-2-allergy type
+ . . s $p(segdta,HLFS,2)=$p(fildta,"^",2)
+ . . ; AL1-3-allergy code/mnemonic/description
+ . . s $p(segdta,HLFS,3)=$p(fildta,"^",1)
+ . . s segix=segix+1,HLA("HLS",segix)="AL1"_HLFS_segdta k segdta
+ . . q
+ . q
+ q
+ ;
+EVN ; SUBROUTINE - build EVN segment
+ n segdta ; -- segment data
+ ;   EVN-6-event occurred
+ s $p(segdta,HLFS,6)=$zd(+$h,8)_$tr($zt($p($h,",",2)),":")_"-0500"
+ ;   EVN-2-event recorded
+ s $p(segdta,HLFS,2)=$zd(+$h,8)_$tr($zt($p($h,",",2)),":")_"-0500"
+ s segix=$o(HLA("HLS"," "),-1)+1,HLA("HLS",segix)="EVN"_HLFS_segdta k segdta
+ q
+ ;       
+PID ; SUBROUTINE - build PID segment
+ n acmpdta ; -- array of component data
+ n segdta ; --- segment data
+ n flddta ; --- field data scalar
+ n ssn ; ------ social security number
+ n race ; ----- race code
+ n address ; -- address data
+ n eth ; ethnicity information
+ ;
+ ;   build PID-3-patient ID list
+ k acmpdta
+ s ssn="999"_rannum
+ s acmpdta(1)=ssn_HLCS_HLCS_HLCS_"USSSA"_HLCS_"SS"
+ s acmpdta(2)="999V999"_$e(9999999-rannum/2,2,7)_HLCS_HLCS_HLCS_"USVHA"_HLCS_"NI"
+ ; MLH 16-Jan-06:  per IHE, only 1 pt ID in PID-3
+ s $p(segdta,HLFS,3)=acmpdta(2) ;$s(rannum#2:acmpdta(1)_HLRS_acmpdta(2),1:acmpdta(2)_HLRS_acmpdta(1))
+ ;   build PID-5-patient name
+ s $p(flddta,HLCS,1)="PATIENT"_($e(rannum,1,2)*2+1)
+ s $p(flddta,HLCS,2)="FIRST"_($e(rannum,3,4)*3+1)
+ s $p(flddta,HLCS,3)="MID"_($e(rannum,5,6)*5+1)
+ s $p(flddta,HLCS,4)=$P("JR^III^SR","^",rannum#13+1)
+ s $p(flddta,HLCS,5)=$P("MR","^",rannum#7+1)
+ s $p(flddta,HLCS,6)=$P("MS^PHD","^",rannum#23+1)
+ s $p(flddta,HLCS,7)="L"
+ s $p(segdta,HLFS,5)=flddta
+ ;   build PID-7-date/time of birth
+ s $p(segdta,HLFS,7)=$zd(40000+$e(rannum,2,4),8)_$tr($zt(60000+$e(rannum,2,5)),":")_$e("+-",rannum#2+1)_$E(rannum#12+100,2,3)_"00"
+ ;   build PID-8-sex
+ s $p(segdta,HLFS,8)=$s(rannum#10:"M",1:"F")
+ i rannum#11 d  ;   build PID-10-race
+ . s race=$t(race+rannum#7+1)
+ . s $p(segdta,HLFS,10)=$p(race,";",2)_HLCS_$p(race,";",4)_HLCS_"0005"_HLCS_$p(race,";",3)_HLCS_$p(race,";",4)_HLCS_"CDC"
+ . q
+ ;   build PID-11-patient address
+ s $p(address,HLCS,1)=($e(rannum,2,3)*7+1)_" "_$e(" ENSW",rannum#5+1)_" "_($e(rannum,4,5)+1)_" "_$p("ST^AV","^",rannum#2+1)
+ i rannum#10=1 s $p(address,HLCS,2)="APT "_($e(rannum,3,4)*7+1)
+ s $p(address,HLCS,3)="CITY"_($e(rannum,2)+1)
+ s $p(address,HLCS,4)=$P("DC^DE^MD^PA^VA^WV","^",rannum#6+1)
+ s $p(address,HLCS,5)=9999_($e(rannum))
+ s $p(segdta,HLFS,11)=address
+ ;   build PID-19-SSN Number-Patient
+ s $p(segdta,HLFS,19)=ssn
+ i rannum#7 d  ;   build PID-22-ethnic group
+ . s eth=$t(eth+rannum#5+1)
+ . s $p(segdta,HLFS,22)=$p(eth,";",2)_HLCS_$p(eth,";",4)_HLCS_"0189"_HLCS_$p(eth,";",3)_HLCS_$p(eth,";",4)_HLCS_"CDC"
+ . q
+ ;
+ s segix=$o(HLA("HLS"," "),-1)+1,HLA("HLS",segix)="PID"_HLFS_segdta k segdta
+ q
+ ;
+PV1 ; SUBROUTINE - build PV1 segment
+ n pio ; ------ inpatient or outpatient?
+ n segdta ; --- segment data
+ n flddta ; --- field data scalar
+ n fldloc ; --- patient location field
+ n fldattd ; -- attending doctor field
+ n fldrefd ; referring doctor field
+ ;
+ s pio=$p($h,",",2)#2 ; i/p (0) or o/p (1)
+ ;   build PV1-2-patient class
+ s $p(segdta,HLFS,2)=$e("IO",pio+1)
+ i 'pio d  ;   build PV1-3-patient location
+ . s fldloc=$r(10)_$c(65+$r(26))
+ . s $p(segdta,HLFS,3)=fldloc_HLSS_"ROOM "_fldloc_HLSS_"VISTA42"
+ . q
+ i 'pio d  ;   build PV1-7-attending doctor
+ . i '$$doc^magptu(7,.fldattd) s $p(segdta,HLFS,7)=fldattd
+ . q
+ ;   build PV1-8-referring doctor
+ i '$$doc^magptu(8,.fldrefd) s $p(segdta,HLFS,8)=fldrefd
+ i 'pio d  ;   build PV1-10-hospital service
+ . s $p(segdta,HLFS,10)=$p($g(^SC(rannum#80,0)),"^",1)
+ . q
+ ;   build PV1-15-ambulatory status
+ s flddta=$s($e(rannum,3,5)+1#3:"A0",1:"A2")
+ i rannum#10=0,rannum\10#5=0 s flddta=flddta_HLRS_"B6"
+ s $p(segdta,HLFS,15)=flddta
+ ;   build PV1-16-VIP flag
+ s flddta=""
+ i $e(rannum,1,2)+7#17=0 s flddta=flddta_"E"
+ i $e(rannum,2,3)+11#19=0 s flddta=flddta_"S"
+ s $p(segdta,HLFS,16)=flddta
+ ;   build PV1-19-visit
+ s $p(segdta,HLFS,19)=rannum*13+23
+ ;   build PV1-44-admit date/time
+ s $p(segdta,HLFS,44)=$zd($h-1,8)_$tr($zt($e(rannum,1,5)#86400),":")_$e("+-",$e(rannum,4)#2+1)_$e($e(rannum,2,3)#12+100,2,3)_"00"
+ s segix=$o(HLA("HLS"," "),-1)+1,HLA("HLS",segix)="PV1"_HLFS_segdta k segdta
+ q
+ ;
+race ;
+ ;D;0000-0;DECLINED TO ANSWER;
+ ;3;1002-5;AMERICAN INDIAN OR ALASKA NATIVE;
+ ;A;2028-9;ASIAN;
+ ;B;2054-5;BLACK OR AFRICAN AMERICAN;
+ ;H;2076-8;NATIVE HAWAIIAN OR OTHER PACIFIC ISLANDER;
+ ;W;2106-3;WHITE;
+ ;U;9999-4;UNKNOWN BY PATIENT;
+eth ;
+ ;D;0000-0;DECLINED TO ANSWER;
+ ;H;2135-2;HISPANIC OR LATINO;
+ ;N;2186-5;NOT HISPANIC OR LATINO;
+ ;U;9999-4;UNKNOWN BY PATIENT;

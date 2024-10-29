@@ -1,0 +1,128 @@
+MAGDIR6D ;WOIFO/PMK - Read a DICOM image file ; 24 Feb 2009 12:35 PM
+ ;;3.0;IMAGING;**11,54**;MAR 19, 2002;;OCT 28, 2009
+ ;; Per VHA Directive 2004-038, this routine should not be modified.
+ ;; +---------------------------------------------------------------+
+ ;; | Property of the US Government.                                |
+ ;; | No permission to copy or redistribute this software is given. |
+ ;; | Use of unreleased versions of this software requires the user |
+ ;; | to execute a written test agreement with the VistA Imaging    |
+ ;; | Development Office of the Department of Veterans Affairs,     |
+ ;; | telephone (301) 734-0100.                                     |
+ ;; | The Food and Drug Administration classifies this software as  |
+ ;; | a medical device.  As such, it may not be changed in any way. |
+ ;; | Modifications to this software may result in an adulterated   |
+ ;; | medical device under 21CFR820, the use of which is considered |
+ ;; | to be a violation of US Federal Statutes.                     |
+ ;; +---------------------------------------------------------------+
+ ;;
+ Q
+ ; This routine handles the unknown modalities that are not defined
+ ; in MODALITY.DIC.  There are three entry points:
+ ;    1) MODUNDEF - called from ^MAGDIR6B when an unknown modality is
+ ;       encountered.  The image is placed into ^MAGDINPT(2006.5713)
+ ;    2) ENTRIES - called from ^MAGDCST4 to display unknown modalities
+ ;    3) NEWMOD - invoked each time ^MAGDMFBM is run to add information
+ ;       about newly defined modalities.  This will cause the image
+ ;       for these modalities (stored in the ^MAGDINPT(2006.5713) file)
+ ;       to be processed.
+ ;
+MODUNDEF ; record the undefined modality in the ^MAGDINPT(2006.5713) file
+ N IEN,NOW,NUMBER,X,WARNING
+ ;
+ S WARNING(1)="DICOM IMAGE PROCESSING WARNING"
+ S WARNING(2)="The following device is not yet defined in the system:"
+ S WARNING(3)="Mfgr: "_MFGR_" Model: "_MODEL_" Modality: "_UMODALTY
+ D WARNING^MAGDFCNS(.WARNING)
+ ;
+ ; log the file with the unknown modality
+ S NOW=$$NOW^XLFDT()
+ L +^MAGDINPT(2006.5713,0):1E9
+ S X=$G(^MAGDINPT(2006.5713,0))
+ S $P(X,"^",1,2)="DICOM UNKNOWN MODALITY^2006.5713D"
+ S $P(X,"^",3)=$P(X,"^",3)+1,IEN=$P(X,"^",3)
+ S $P(X,"^",4)=$P(X,"^",4)+1
+ S ^MAGDINPT(2006.5713,0)=X
+ S X=NOW_"^"_MFGR_"^"_MODEL_"^"_UMODALTY_"^"_INSTNAME_"^"_FROMPATH
+ S ^MAGDINPT(2006.5713,IEN,0)=X
+ S NUMBER=$G(^MAGDINPT(2006.5713,"D",MFGR,MODEL,UMODALTY))
+ S ^MAGDINPT(2006.5713,"B",NOW,IEN)=""
+ S ^MAGDINPT(2006.5713,"C",MFGR,MODEL,UMODALTY,IEN)=""
+ S ^MAGDINPT(2006.5713,"D",MFGR,MODEL,UMODALTY)=NUMBER+1
+ L -^MAGDINPT(2006.5713,0)
+ Q
+ ;
+ENTRIES ;Display
+ N NUMBER,MFGR,MODEL,MODALITY,ONCE
+ S MFGR="",ONCE=1
+ F  S MFGR=$O(^MAGDINPT(2006.5713,"D",MFGR)) Q:MFGR=""  D
+ . S MODEL=""
+ . F  S MODEL=$O(^MAGDINPT(2006.5713,"D",MFGR,MODEL)) Q:MODEL=""  D
+ . . S MODALITY=""
+ . . F  S MODALITY=$O(^MAGDINPT(2006.5713,"D",MFGR,MODEL,MODALITY)) Q:MODALITY=""  D
+ . . . S NUMBER=$G(^MAGDINPT(2006.5713,"D",MFGR,MODEL,MODALITY))
+ . . . I NUMBER>0 D
+ . . . . I ONCE D
+ . . . . . W !?10,"*** The following undefined modalities have images ***"
+ . . . . . W !?1,"Manufacturer",?30,"Model",?60,"Modality ",?70,"#Images"
+ . . . . . W !?1,"------------",?30,"-----",?60,"-------- ",?70,"-------"
+ . . . . . S ONCE=0
+ . . . . . Q
+ . . . . W !?1,MFGR,?30,MODEL,?63,MODALITY,?72,NUMBER
+ . . . . Q
+ . . . Q
+ . . Q
+ . Q
+ Q
+ ;
+NEWMOD ; entry point called from ^MAGDMFBM when new MODALITY.DIC is loaded
+ N MFGR,MODEL,MODALITY,UD0,UMFGR,UMODEL,UMODALTY
+ S MFGR=""
+ F  S MFGR=$O(^MAGDINPT(2006.5713,"C",MFGR)) Q:MFGR=""  D
+ . S MODEL=""
+ . F  S MODEL=$O(^MAGDINPT(2006.5713,"C",MFGR,MODEL)) Q:MODEL=""  D
+ . . S MODALITY=""
+ . . F  S MODALITY=$O(^MAGDINPT(2006.5713,"C",MFGR,MODEL,MODALITY)) Q:MODALITY=""  D
+ . . . S UMFGR=$$UP^MAGDFCNS(MFGR)
+ . . . S UMODEL=$$UP^MAGDFCNS(MODEL)
+ . . . S UMODALTY=$$UP^MAGDFCNS(MODALITY)
+ . . . S UD0=+$O(^MAGDICOM(2006.582,"B",UMFGR,UMODEL,UMODALTY,"")) Q:'UD0
+ . . . S X=$G(^MAGDICOM(2006.582,UD0,0)) I $P(X,"^",9)'="",'$P(X,"^",9) Q
+ . . . D NEWMOD1
+ . . . Q
+ . . Q
+ . Q
+ Q
+ ;
+NEWMOD1 ; found one new modality - copy its entries to ^MAGDINPT(2006.571)
+ N DATETIME,IEN,IMAGEIEN,N,X
+ L +^MAGDINPT(2006.5713,0):1E9
+ S IEN="",N=0
+ F  S IEN=$O(^MAGDINPT(2006.5713,"C",MFGR,MODEL,MODALITY,IEN)) Q:IEN=""  D
+ . S X=^MAGDINPT(2006.5713,IEN,0)
+ . S DATETIME=$P(X,"^",1),INSTNAME=$P(X,"^",5),FROMPATH=$P(X,"^",6)
+ . W !,INSTNAME," - ",FROMPATH
+ . ;
+ . D RETRY(FROMPATH,INSTNAME,2) ; set COMPLETE=2 because already counted
+ . ;
+ . ; remove the image file from the DICOM undefined modality file
+ . K ^MAGDINPT(2006.5713,IEN)
+ . K ^MAGDINPT(2006.5713,"B",DATETIME,IEN)
+ . K ^MAGDINPT(2006.5713,"C",MFGR,MODEL,MODALITY,IEN)
+ . S N=N+1
+ . Q
+ S:N $P(^MAGDINPT(2006.5713,0),"^",4)=$P(^MAGDINPT(2006.5713,0),"^",4)-N
+ K ^MAGDINPT(2006.5713,"D",MFGR,MODEL,MODALITY)
+ L -^MAGDINPT(2006.5713,0)
+ Q
+ ;
+RETRY(FROMPATH,INSTNAME,COMPLETE) ; add the file to the DICOM input queue
+ ; also invoked from ^MAGDIR6E for lately completed images
+ N X
+ L +^MAGDINPT(2006.571,0):1E9 ; serialize name generation code
+ S X=^MAGDINPT(2006.571,0)
+ S $P(X,"^",3)=$P(X,"^",3)+1,IMAGEIEN=$P(X,"^",3) ; get next IEN
+ S $P(X,"^",4)=$P(X,"^",4)+1
+ S ^MAGDINPT(2006.571,0)=X
+ S ^MAGDINPT(2006.571,IMAGEIEN,0)=FROMPATH_"^"_INSTNAME_"^"_COMPLETE
+ L -^MAGDINPT(2006.571,0) ; clear serial name generation code
+ Q

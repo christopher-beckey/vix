@@ -1,0 +1,1 @@
+gov.va.med.imaging.dicomservices.datasource.DicomServicesDataSourceProvider		# The VIX datasource Provider realization to access DICOM Services, or more properly to access the factories to create the proxy classes to access Vista 

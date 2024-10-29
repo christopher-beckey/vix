@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<build xmlns="http://va.gov/VistA/kids/manifest" name="MAG*3.0*121" patchName="Watermarking" patch="121">
+  <components>
+    <securityKeys />
+    <parameterDefinitions />
+    <printTemplates />
+    <sortTemplates />
+    <menuOptions />
+    <rpcs />
+    <dataDictionaries>
+      <dataDictionary export="DD_2005.KID" />
+      <dataDictionary export="DD_2005_1.KID" />
+    </dataDictionaries>
+    <hl7s />
+    <routines>
+      <routine export="MAGGSIA1.RTN" />
+      <routine export="MAGGSIU4.RTN" />
+      <routine export="MAGGSIU5.RTN" />
+      <routine export="MAGGSIUI.RTN" />
+      <routine export="MAGGSIV.RTN" />
+      <routine export="MAGIP121.RTN" />
+      <routine export="MAGQBUT4.RTN" />
+    </routines>
+    <protocols />
+  </components>
+</build>

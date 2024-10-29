@@ -1,0 +1,152 @@
+MAGDDW3 ;WOIFO/PMK - Generate a DICOM message ; 31 Mar 2008 3:11 PM
+ ;;3.0;IMAGING;**10,30,51,54**;MAR 19, 2002;;OCT 28, 2009
+ ;; Per VHA Directive 2004-038, this routine should not be modified.
+ ;; +---------------------------------------------------------------+
+ ;; | Property of the US Government.                                |
+ ;; | No permission to copy or redistribute this software is given. |
+ ;; | Use of unreleased versions of this software requires the user |
+ ;; | to execute a written test agreement with the VistA Imaging    |
+ ;; | Development Office of the Department of Veterans Affairs,     |
+ ;; | telephone (301) 734-0100.                                     |
+ ;; | The Food and Drug Administration classifies this software as  |
+ ;; | a medical device.  As such, it may not be changed in any way. |
+ ;; | Modifications to this software may result in an adulterated   |
+ ;; | medical device under 21CFR820, the use of which is considered |
+ ;; | to be a violation of US Federal Statutes.                     |
+ ;; +---------------------------------------------------------------+
+ ;;
+ Q
+ ; PACS interface -- PACS DICOM data output routine #4
+ ;
+OUTPUT1 ; entry point from ^MAGDDW2
+ N MULTIPLE ;- number of values permitted for a DICOM element
+ N NODATA ; -- indicates that there is no data for element or sequence
+ N PIXBITS ;-- number of bits in a pixel
+ N SS0 ;------ element subscript in ^TMP composed of g, e, and sequence
+ N TYPE ;----- DICOM element type attribute (1, 2, or 3)
+ N VM ;------- DICOM value multiplicity
+ N VR ;------- DICOM value representation
+ N ENUMTYPE,JPTR,OLDVR,X
+ ;
+ ; Output each element, one at a time
+ S JPTR=$O(^MAGDICOM(2006.51,"B",TAG,""))
+ I JPTR="" D  Q
+ . N MSG
+ . S MSG="Undefined Element: "_TAG
+ . D MESSAGE^MAGDMLOG(1,0,MSG,"BV")
+ . Q
+ ; get the element's DICOM Dictionary entry for driving the output
+ S X=^MAGDICOM(2006.51,JPTR,0)
+ S VR=$P(X,"^",3),VM=$P(X,"^",4),ENUMTYPE=$P(X,"^",5)
+ ;
+ ; look for the value of the element
+ ;
+ S SS0=$S(SEQUENCE="":TAG,1:SEQUENCE_"^"_TAG)
+ ;
+ ; check if VR is already in ^TMP, may be more specific than dictionary
+ I $D(^TMP("MAG",$J,"DICOM","OUT",SS0))#2 D  ;
+ . ; get original VR of attribute from ^TMP
+ . S OLDVR=$P(^TMP("MAG",$J,"DICOM","OUT",SS0),"^",2)
+ . I OLDVR'="",VR'=OLDVR D  ;
+ . . ; check the old VR first, to make sure it's consistent
+ . . I "/"_VR_"/"'[("/"_OLDVR_"/") D
+ . . . N MSG
+ . . . S MSG(1)="VR Mismatch"
+ . . . S MSG(2)="Requested Value Representation="""_OLDVR
+ . . . S MSG(2)=MSG(2)_""", Dictionary="""_VR_"""."
+ . . . S MSG(3)="Group: "_GROUP_", Group Owner: "_OWNER_"  Element: "_ELEMENT
+ . . . S MSG(3)=MSG(3)_"  ("_$P(X,"^",2)_")"
+ . . . D TRAPERR^MAGDSTRT(1,$T(+0),"DICOM TEXT GATEWAY ERROR -- WRITING DICOM FILE",.MSG)
+ . . . Q  ; Error trap does not return
+ . . S VR=OLDVR
+ . . Q
+ . Q
+ ;
+ I SS0="0028,0103" D  ; set pixel representation switch
+ . S VALUE=$$GETDATA^MAGDFCNS("OUT",SS0)
+ . I VALUE=0 S PIXELREP="unsigned integer" Q
+ . I VALUE=1 S PIXELREP="2's complement" Q
+ . D MESSAGE^MAGDMLOG(2,0,"ERROR -- Illegal pixel representation: "_VALUE,"BV")
+ . Q
+ ;
+ I VR?1"US/SS".E S VR=$S(PIXELREP="2's complement":"SS",1:"US") ; may be US/SS/OW
+ ;
+ I VR="OW/OB" D  ; resolve other word/byte ambiguity
+ . I SS0="7FE0,0010" D  ; pixel data
+ . . ; determine whether word or byte from the BITS ALLOCATED attribute
+ . . S PIXBITS=$G(^TMP("MAG",$J,"DICOM","OUT","0028,0100",1,1))
+ . . S VR=$S(PIXBITS>8:"OW",PIXBITS:"OB",1:VR)
+ . . Q
+ . Q
+ ;
+ ; use the default value if the actual value is not already specified
+ I DEFAULT'="",$D(^TMP("MAG",$J,"DICOM","OUT",SS0))<10 D  ; save default
+ . D SAVE^MAGDFCNS(TAG,DEFAULT)
+ . Q
+ ;
+ S TYPE=$P(SCUSCP,"/",$S($G(ROLE)="SCU":1,1:2)) ; scu=1, scp=2
+ ;
+ I TYPE["C" S TYPE=3 ;make type 1C & 2C into 3
+ ;
+ ; if C-FIND-RSP, look for the element in the request dataset
+ I $G(DATASET("MESSAGE"))="C-FIND-RSP",'$D(DATASET(SS0)) S TYPE=3
+ ;
+ I VR="SQ" S TYPE=$S(TYPE="O":3,TYPE="R":1,1:TYPE) ; C-FIND sequences
+ ;
+ ; check to see if there is data for the element or the sequence
+ I VR'?1"SQ".E S NODATA=$D(^TMP("MAG",$J,"DICOM","OUT",SS0))<10 ; element
+ ; VR may be SQ, SQIS, SQIE, or SQE (NODATA=0 for SQIS, SQIE, or SQE)
+ E  S NODATA=0 I VR="SQ" D  ; is there data for the sequence?
+ . S X=$O(^TMP("MAG",$J,"DICOM","OUT",SS0))
+ . I $E(X,1,$L(SS0))'=SS0 D  ; the sequence is empty, skip over it
+ . . S NODATA=1 ; there is no data for the sequence
+ . . S IPTR=SEQMARK ; change IPTR to skip over the rest of the sequence
+ . . Q
+ . Q
+ ;
+ I VR="SQ",NODATA,TYPE=3 Q  ; skip type 3 empty sequences
+ ;
+ ; check for absent data and handle situation depending upon TYPE
+ I NODATA D  Q  ; data absent
+ . I TYPE=1 D  Q  ; all TYPE 1 attributes require valid data
+ . . N MSG
+ . . S MSG(1)="REQUIRED TYPE 1 DATA MISSING"
+ . . S MSG(2)="Group: "_GROUP_"  Group Owner: "_OWNER_"  Element: "_ELEMENT
+ . . S MSG(2)=MSG(2)_"  ("_$P(X,"^",2)_")"
+ . . D TRAPERR^MAGDSTRT(1,$T(+0),"DICOM TEXT GATEWAY ERROR -- WRITING DICOM FILE",.MSG,1)
+ . . Q  ; Error trap does not return
+ . I $E(TYPE)=2 D  Q  ; generate zero-length field elements
+ . . S STATUS=$$USE^MAGOSFIL(QUEUEOUT("FILE"))
+ . . D PUTUSHOR^MAGDDW0($$HEX2DEC^MAGOSMSC(GROUP))
+ . . D PUTUSHOR^MAGDDW0($$HEX2DEC^MAGOSMSC(ELEMENT))
+ . . ; output the zero-length for a unknown type-2 element
+ . . I EXPLICIT D
+ . . . D PUTASCII^MAGDDW0(VR)
+ . . . D PUTUSHOR^MAGDDW0(0)
+ . . . Q
+ . . E  D PUTULONG^MAGDDW0(0) ; implicit VR, output the zero-length
+ . . I $$USEPRIN^MAGOSFIL(1)
+ . . Q
+ . Q
+ ;
+ ; data is present
+ S STATUS=$$USE^MAGOSFIL(QUEUEOUT("FILE"))
+ ; output the group, element, length, and then the data
+ D PUTUSHOR^MAGDDW0($$HEX2DEC^MAGOSMSC(GROUP))
+ D PUTUSHOR^MAGDDW0($$HEX2DEC^MAGOSMSC(ELEMENT))
+ ;
+ I VR'?1"SQ".E D  ; check for multiple data items in a field
+ . S MULTIPLE=^TMP("MAG",$J,"DICOM","OUT",SS0,0,0)
+ . I MULTIPLE>1,VM="1",VR'="OB",VR'="OW" D
+ . . N MSG
+ . . S MSG="Not a MULTIPLE -- Sequence: "_SEQUENCE
+ . . S MSG=MSG_"  Tag: ("_GROUP_","_ELEMENT_")"
+ . . I OWNER'="" S MSG=MSG_"  Owner: "_OWNER
+ . . D MESSAGE^MAGDMLOG(1,0,MSG,"V")
+ . . S MULTIPLE=1
+ . . Q
+ . Q
+ D PUTVALUE^MAGDDW4
+ I $$USEPRIN^MAGOSFIL(1)
+ Q
+ ;

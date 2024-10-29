@@ -1,0 +1,26 @@
+﻿Build started 1/14/2015 1:12:28 AM.
+     1>Project "C:\ClearCanvas-master\ClearCanvas-master\Dicom\Codec\Jpeg2000\Dicom.Jpeg2000.vcxproj" on node 2 (Build target(s)).
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /AI"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0" /AI"C:\Program Files (x86)\Windows Kits\8.1\References\CommonConfiguration\Neutral" /Zi /clr /nologo /W1 /WX- /O2 /Oy- /Gm- /EHa /MD /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Template\\" /Fd"Template\vc120.pdb" /Gd /TP /FU"C:\ClearCanvas-master\ClearCanvas-master\Common\bin\Release\ClearCanvas.Common.dll" /FU"C:\ClearCanvas-master\ClearCanvas-master\Dicom\bin\Release\ClearCanvas.Dicom.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\mscorlib.dll" /analyze- /errorReport:prompt /clr:nostdlib AssemblyInfo.cpp DicomJpeg2000Codec.cpp DicomJpeg2000CodecFactory.cpp DicomJpeg2000CodecTest.cpp
+         AssemblyInfo.cpp
+         DicomJpeg2000Codec.cpp
+         DicomJpeg2000CodecFactory.cpp
+     1>c:\clearcanvas-master\clearcanvas-master\dicom\codec\jpeg2000\DicomJpeg2000CodecFactory.h(55): error C2039: 'Xml' : is not a member of 'System'
+     1>c:\clearcanvas-master\clearcanvas-master\dicom\codec\jpeg2000\DicomJpeg2000CodecFactory.h(55): error C2871: 'Xml' : a namespace with this name does not exist
+     1>c:\clearcanvas-master\clearcanvas-master\dicom\codec\jpeg2000\DicomJpeg2000CodecFactory.h(75): error C2061: syntax error : identifier 'XmlDocument'
+     1>c:\clearcanvas-master\clearcanvas-master\dicom\codec\jpeg2000\DicomJpeg2000CodecFactory.h(77): error C3766: 'ClearCanvas::Dicom::Codec::Jpeg2000::DicomJpeg2000LosslessCodecFactory' must provide an implementation for the interface method 'ClearCanvas::Dicom::Codec::DicomCodecParameters ^ClearCanvas::Dicom::Codec::IDicomCodecFactory::GetCodecParameters(System::Xml::XmlDocument ^)'
+                 c:\clearcanvas-master\clearcanvas-master\dicom\bin\release\clearcanvas.dicom.dll : see declaration of 'ClearCanvas::Dicom::Codec::IDicomCodecFactory::GetCodecParameters'
+     1>c:\clearcanvas-master\clearcanvas-master\dicom\codec\jpeg2000\DicomJpeg2000CodecFactory.h(87): error C2061: syntax error : identifier 'XmlDocument'
+     1>c:\clearcanvas-master\clearcanvas-master\dicom\codec\jpeg2000\DicomJpeg2000CodecFactory.h(89): error C3766: 'ClearCanvas::Dicom::Codec::Jpeg2000::DicomJpeg2000LossyCodecFactory' must provide an implementation for the interface method 'ClearCanvas::Dicom::Codec::DicomCodecParameters ^ClearCanvas::Dicom::Codec::IDicomCodecFactory::GetCodecParameters(System::Xml::XmlDocument ^)'
+                 c:\clearcanvas-master\clearcanvas-master\dicom\bin\release\clearcanvas.dicom.dll : see declaration of 'ClearCanvas::Dicom::Codec::IDicomCodecFactory::GetCodecParameters'
+     1>DicomJpeg2000CodecFactory.cpp(79): error C2065: 'XmlDocument' : undeclared identifier
+     1>DicomJpeg2000CodecFactory.cpp(79): error C2065: 'parms' : undeclared identifier
+     1>DicomJpeg2000CodecFactory.cpp(79): error C2761: 'GetCodecParameters' : member function redeclaration not allowed
+     1>DicomJpeg2000CodecFactory.cpp(79): fatal error C1903: unable to recover from previous error(s); stopping compilation
+         DicomJpeg2000CodecTest.cpp
+         Generating Code...
+     1>Done Building Project "C:\ClearCanvas-master\ClearCanvas-master\Dicom\Codec\Jpeg2000\Dicom.Jpeg2000.vcxproj" (Build target(s)) -- FAILED.
+
+Build FAILED.
+
+Time Elapsed 00:00:00.71

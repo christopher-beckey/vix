@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project>
+	<extend>../ImagingRoot/project.xml</extend>
+    <pomVersion>1</pomVersion>
+    <artifactId>VistaConnection</artifactId>
+    <name>VistaConnection</name>
+	<package>gov.va.med.imaging.url.vista</package>
+	<shortDescription>VistA URLConnection and related classes</shortDescription>  
+	<build>
+		<sourceDirectory>main/src/java</sourceDirectory>
+		<unitTestSourceDirectory>main/test/java</unitTestSourceDirectory>
+		<unitTest>
+			<includes>
+				<include>**/Test*.java</include>
+			</includes>
+			<excludes>
+				<exclude>**/TestVistaConnection.java</exclude>
+			</excludes>
+			<resources>
+				<resource>
+					<directory>main/test/resources</directory>
+					<includes>
+						<include>**/*</include>
+					</includes>
+					<filtering>false</filtering>
+				</resource>
+			</resources>
+		</unitTest>
+		<resources>
+			<resource>
+				<directory>main/src/resources</directory>
+				<includes>
+					<include>**/*</include>
+				</includes>
+				<filtering>false</filtering>
+			</resource>
+		</resources>			
+	</build>
+  <dependencies>
+  </dependencies>
+</project>
+

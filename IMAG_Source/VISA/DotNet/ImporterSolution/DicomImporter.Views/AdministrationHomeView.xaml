@@ -1,0 +1,130 @@
+﻿<Views:BaseImagingView x:Class="DicomImporter.Views.AdministrationHomeView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:Views="clr-namespace:ImagingClient.Infrastructure.Views;assembly=ImagingClient.Infrastructure" mc:Ignorable="d" 
+             d:DesignHeight="468" d:DesignWidth="617">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+            <Label Style="{DynamicResource ResourceKey=SectionTitle}" 
+                   Content="DICOM Importer Administration Home" 
+                   Grid.Row="0"/>
+        
+            <GroupBox Header="Revert Importer Items" 
+                      Margin="0,0,0,10"
+                      Grid.Row="1">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    
+                    <Button Grid.Column="0" 
+                            Content="Revert Items" 
+                            HorizontalAlignment="Left" 
+                            VerticalAlignment="Top" 
+                            Width="105" 
+                            Command="{Binding NavigateToAdminRevertWorkItemView}"/>
+                    
+                    <TextBlock Grid.Column="1" 
+                               TextWrapping="Wrap" 
+                               Padding="2"
+                               Margin="6,0,0,0">
+                        Allows Importer items to be sent back to the Importer List if they have gotten 
+                        stuck in reconciliation mode.
+                    </TextBlock>
+                
+                </Grid>
+            </GroupBox>
+
+
+            <GroupBox Header="In-Process Imports" 
+                      Margin="0,0,0,10"
+                      Grid.Row="2">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    
+                    <Button Content="In-Process Imports" 
+                            HorizontalAlignment="Left" 
+                            VerticalAlignment="Top" 
+                            Width="105" 
+                            Command="{Binding NavigateToInProcessImportsView}"/>
+                    
+                    <TextBlock Grid.Column="1" 
+                               TextWrapping="Wrap" 
+                               Padding="2"
+                               Margin="6,0,0,0">
+                        Displays importer work items that are currently being processed by an HDIG.
+                    </TextBlock>
+                </Grid>
+            </GroupBox>
+
+
+        <GroupBox Header="View Failed Imports" 
+                      Margin="0,0,0,10"
+                      Grid.Row="3">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <Button Content="Failed Imports" 
+                            HorizontalAlignment="Left" 
+                            VerticalAlignment="Top" 
+                            Width="105" 
+                            Command="{Binding NavigateToAdminFailedImportView}"/>
+
+                <TextBlock Grid.Column="1" 
+                               TextWrapping="Wrap" 
+                               Padding="2"
+                               Margin="6,0,0,0">
+                        Displays error information for work items with partial or complete failures during the
+                        import process.
+                </TextBlock>
+            </Grid>
+        </GroupBox>
+
+        <GroupBox Header="View Log" 
+                      Margin="0,0,0,10"
+                      Grid.Row="4">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <Button Content="Log" 
+                            HorizontalAlignment="Left" 
+                            VerticalAlignment="Top" 
+                            Width="105" 
+                            Command="{Binding NavigateToLogView}"/>
+
+                <TextBlock Grid.Column="1" 
+                               TextWrapping="Wrap" 
+                               Padding="2"
+                               Margin="6,0,0,0">
+                        Displays client side information on the Importer.
+                </TextBlock>
+            </Grid>
+        </GroupBox>
+
+        <Button Grid.Row="5" 
+                Content="Return to Importer Home"
+                HorizontalAlignment="Right" 
+                Command="{Binding NavigateToImporterHomeView}" />
+
+    </Grid>
+</Views:BaseImagingView>

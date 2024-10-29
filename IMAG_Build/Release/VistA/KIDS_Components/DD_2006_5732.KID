@@ -1,0 +1,472 @@
+KIDS Distribution saved on Jul 16, 2007@12:58:18
+Package for FILE named 2006.5732
+**KIDS**:MAG*3.0*99^
+
+**INSTALL NAME**
+MAG*3.0*99
+"BLD",5911,0)
+MAG*3.0*99^^0^3070716^y
+"BLD",5911,1,0)
+^^4^4^3070716^
+"BLD",5911,1,1,0)
+This package contains a KIDS component
+"BLD",5911,1,2,0)
+for Running Baseline.
+"BLD",5911,1,3,0)
+ 
+"BLD",5911,1,4,0)
+This package transports the FileMan data dictionary named 2006.5732.
+"BLD",5911,4,0)
+^9.64PA^2006.5732^1
+"BLD",5911,4,2006.5732,0)
+2006.5732
+"BLD",5911,4,2006.5732,222)
+y^y^f^^^^n
+"BLD",5911,4,"B",2006.5732,2006.5732)
+
+"BLD",5911,6.3)
+1
+"BLD",5911,"KRN",0)
+^9.67PA^8989.52^19
+"BLD",5911,"KRN",.4,0)
+.4
+"BLD",5911,"KRN",.401,0)
+.401
+"BLD",5911,"KRN",.402,0)
+.402
+"BLD",5911,"KRN",.403,0)
+.403
+"BLD",5911,"KRN",.5,0)
+.5
+"BLD",5911,"KRN",.84,0)
+.84
+"BLD",5911,"KRN",3.6,0)
+3.6
+"BLD",5911,"KRN",3.8,0)
+3.8
+"BLD",5911,"KRN",9.2,0)
+9.2
+"BLD",5911,"KRN",9.8,0)
+9.8
+"BLD",5911,"KRN",19,0)
+19
+"BLD",5911,"KRN",19.1,0)
+19.1
+"BLD",5911,"KRN",101,0)
+101
+"BLD",5911,"KRN",409.61,0)
+409.61
+"BLD",5911,"KRN",771,0)
+771
+"BLD",5911,"KRN",870,0)
+870
+"BLD",5911,"KRN",8989.51,0)
+8989.51
+"BLD",5911,"KRN",8989.52,0)
+8989.52
+"BLD",5911,"KRN",8994,0)
+8994
+"BLD",5911,"KRN","B",.4,.4)
+
+"BLD",5911,"KRN","B",.401,.401)
+
+"BLD",5911,"KRN","B",.402,.402)
+
+"BLD",5911,"KRN","B",.403,.403)
+
+"BLD",5911,"KRN","B",.5,.5)
+
+"BLD",5911,"KRN","B",.84,.84)
+
+"BLD",5911,"KRN","B",3.6,3.6)
+
+"BLD",5911,"KRN","B",3.8,3.8)
+
+"BLD",5911,"KRN","B",9.2,9.2)
+
+"BLD",5911,"KRN","B",9.8,9.8)
+
+"BLD",5911,"KRN","B",19,19)
+
+"BLD",5911,"KRN","B",19.1,19.1)
+
+"BLD",5911,"KRN","B",101,101)
+
+"BLD",5911,"KRN","B",409.61,409.61)
+
+"BLD",5911,"KRN","B",771,771)
+
+"BLD",5911,"KRN","B",870,870)
+
+"BLD",5911,"KRN","B",8989.51,8989.51)
+
+"BLD",5911,"KRN","B",8989.52,8989.52)
+
+"BLD",5911,"KRN","B",8994,8994)
+
+"FIA",2006.5732)
+DICOM QUERY RETRIEVE RESULT
+"FIA",2006.5732,0)
+^MAGDQR(2006.5732,
+"FIA",2006.5732,0,0)
+2006.5732
+"FIA",2006.5732,0,1)
+y^y^f^^^^n
+"FIA",2006.5732,0,10)
+
+"FIA",2006.5732,0,11)
+
+"FIA",2006.5732,0,"RLRO")
+
+"FIA",2006.5732,2006.5732)
+0
+"FIA",2006.5732,2006.57321)
+0
+"MBREQ")
+0
+"QUES","XPF1",0)
+Y
+"QUES","XPF1","??")
+^D REP^XPDH
+"QUES","XPF1","A")
+Shall I write over your |FLAG| File
+"QUES","XPF1","B")
+YES
+"QUES","XPF1","M")
+D XPF1^XPDIQ
+"QUES","XPF2",0)
+Y
+"QUES","XPF2","??")
+^D DTA^XPDH
+"QUES","XPF2","A")
+Want my data |FLAG| yours
+"QUES","XPF2","B")
+YES
+"QUES","XPF2","M")
+D XPF2^XPDIQ
+"QUES","XPI1",0)
+YO
+"QUES","XPI1","??")
+^D INHIBIT^XPDH
+"QUES","XPI1","A")
+Want KIDS to INHIBIT LOGONs during the install
+"QUES","XPI1","B")
+YES
+"QUES","XPI1","M")
+D XPI1^XPDIQ
+"QUES","XPM1",0)
+PO^VA(200,:EM
+"QUES","XPM1","??")
+^D MG^XPDH
+"QUES","XPM1","A")
+Enter the Coordinator for Mail Group '|FLAG|'
+"QUES","XPM1","B")
+
+"QUES","XPM1","M")
+D XPM1^XPDIQ
+"QUES","XPO1",0)
+Y
+"QUES","XPO1","??")
+^D MENU^XPDH
+"QUES","XPO1","A")
+Want KIDS to Rebuild Menu Trees Upon Completion of Install
+"QUES","XPO1","B")
+YES
+"QUES","XPO1","M")
+D XPO1^XPDIQ
+"QUES","XPZ1",0)
+Y
+"QUES","XPZ1","??")
+^D OPT^XPDH
+"QUES","XPZ1","A")
+Want to DISABLE Scheduled Options, Menu Options, and Protocols
+"QUES","XPZ1","B")
+YES
+"QUES","XPZ1","M")
+D XPZ1^XPDIQ
+"QUES","XPZ2",0)
+Y
+"QUES","XPZ2","??")
+^D RTN^XPDH
+"QUES","XPZ2","A")
+Want to MOVE routines to other CPUs
+"QUES","XPZ2","B")
+NO
+"QUES","XPZ2","M")
+D XPZ2^XPDIQ
+"SEC","^DIC",2006.5732,2006.5732,0,"AUDIT")
+@
+"SEC","^DIC",2006.5732,2006.5732,0,"DD")
+@
+"SEC","^DIC",2006.5732,2006.5732,0,"DEL")
+@
+"SEC","^DIC",2006.5732,2006.5732,0,"LAYGO")
+@
+"SEC","^DIC",2006.5732,2006.5732,0,"RD")
+@
+"SEC","^DIC",2006.5732,2006.5732,0,"WR")
+@
+"VER")
+8.0^22.0
+"^DD",2006.5732,2006.5732,0)
+FIELD^^5^5
+"^DD",2006.5732,2006.5732,0,"DT")
+3041201
+"^DD",2006.5732,2006.5732,0,"IX","B",2006.5732,.01)
+
+"^DD",2006.5732,2006.5732,0,"NM","DICOM QUERY RETRIEVE RESULT")
+
+"^DD",2006.5732,2006.5732,.01,0)
+RESULT^RNJ12,0^^0;1^K:+X'=X!(X>999999999999)!(X<0)!(X?.E1"."1N.N) X
+"^DD",2006.5732,2006.5732,.01,1,0)
+^.1
+"^DD",2006.5732,2006.5732,.01,1,1,0)
+2006.5732^B
+"^DD",2006.5732,2006.5732,.01,1,1,1)
+S ^MAGDQR(2006.5732,"B",$E(X,1,30),DA)=""
+"^DD",2006.5732,2006.5732,.01,1,1,2)
+K ^MAGDQR(2006.5732,"B",$E(X,1,30),DA)
+"^DD",2006.5732,2006.5732,.01,3)
+Enter the sequence number of this result-set.
+"^DD",2006.5732,2006.5732,.01,21,0)
+^^5^5^3041201^
+"^DD",2006.5732,2006.5732,.01,21,1,0)
+The value of this field is an integer number.
+"^DD",2006.5732,2006.5732,.01,21,2,0)
+This number uniquely identifies a result-set that
+"^DD",2006.5732,2006.5732,.01,21,3,0)
+results from a DICOM Query/Retrieve request.
+"^DD",2006.5732,2006.5732,.01,21,4,0)
+ 
+"^DD",2006.5732,2006.5732,.01,21,5,0)
+The rest of the record is the result-set in question.
+"^DD",2006.5732,2006.5732,.01,"DT")
+3041201
+"^DD",2006.5732,2006.5732,2,0)
+STATUS^S^IP:Query in progress;OK:Query complete;X:Query completely reported;^0;2^Q
+"^DD",2006.5732,2006.5732,2,3)
+Indicate the status of this query.
+"^DD",2006.5732,2006.5732,2,21,0)
+^^14^14^3041201^
+"^DD",2006.5732,2006.5732,2,21,1,0)
+The value of this field is a code that indicates the status of
+"^DD",2006.5732,2006.5732,2,21,2,0)
+a query.
+"^DD",2006.5732,2006.5732,2,21,3,0)
+ 
+"^DD",2006.5732,2006.5732,2,21,4,0)
+When a query is initiated, the value of this field will be set
+"^DD",2006.5732,2006.5732,2,21,5,0)
+to IP = In Progress.
+"^DD",2006.5732,2006.5732,2,21,6,0)
+ 
+"^DD",2006.5732,2006.5732,2,21,7,0)
+When a query is complete, the value of this field will be changed
+"^DD",2006.5732,2006.5732,2,21,8,0)
+to OK = Query Complete.
+"^DD",2006.5732,2006.5732,2,21,9,0)
+ 
+"^DD",2006.5732,2006.5732,2,21,10,0)
+When all results that are logged for the query have been reported,
+"^DD",2006.5732,2006.5732,2,21,11,0)
+the value of this field will be set to X = Query Completely Reported,
+"^DD",2006.5732,2006.5732,2,21,12,0)
+so that a clean-up process may remove the now obsolete result-set.
+"^DD",2006.5732,2006.5732,2,21,13,0)
+ 
+"^DD",2006.5732,2006.5732,2,21,14,0)
+(See also the field TIMESTAMP.)
+"^DD",2006.5732,2006.5732,2,"DT")
+3041201
+"^DD",2006.5732,2006.5732,3,0)
+TIMESTAMP^D^^0;3^S %DT="ESTXR" D ^%DT S X=Y K:Y<1 X
+"^DD",2006.5732,2006.5732,3,3)
+Enter the date and time of last access to this result-set.
+"^DD",2006.5732,2006.5732,3,21,0)
+^^10^10^3041201^
+"^DD",2006.5732,2006.5732,3,21,1,0)
+The value of this field is a timestamp that indicates when a
+"^DD",2006.5732,2006.5732,3,21,2,0)
+result-set was last accessed.
+"^DD",2006.5732,2006.5732,3,21,3,0)
+ 
+"^DD",2006.5732,2006.5732,3,21,4,0)
+This value is set to the current date and time when the result-set
+"^DD",2006.5732,2006.5732,3,21,5,0)
+is first marked as complete, and will be updated each time
+"^DD",2006.5732,2006.5732,3,21,6,0)
+a (partial) result is reported.
+"^DD",2006.5732,2006.5732,3,21,7,0)
+ 
+"^DD",2006.5732,2006.5732,3,21,8,0)
+The main purpose of this field to to assist a maintenance process
+"^DD",2006.5732,2006.5732,3,21,9,0)
+in cleaning up result-sets that haven't been accessed in more than
+"^DD",2006.5732,2006.5732,3,21,10,0)
+a couple of days.
+"^DD",2006.5732,2006.5732,3,"DT")
+3041201
+"^DD",2006.5732,2006.5732,4,0)
+TAG^2006.57321A^^1;0
+"^DD",2006.5732,2006.5732,5,0)
+TASKMAN^NJ12,0^^0;4^K:+X'=X!(X>999999999999)!(X<0)!(X?.E1"."1N.N) X
+"^DD",2006.5732,2006.5732,5,3)
+Enter the process-number of the TaskMan process that does the query.
+"^DD",2006.5732,2006.5732,5,21,0)
+^^11^11^3041201^
+"^DD",2006.5732,2006.5732,5,21,1,0)
+The value of this field is a number.
+"^DD",2006.5732,2006.5732,5,21,2,0)
+ 
+"^DD",2006.5732,2006.5732,5,21,3,0)
+This number is returned by TaskMan when a new background
+"^DD",2006.5732,2006.5732,5,21,4,0)
+process is created to perform the actual query.
+"^DD",2006.5732,2006.5732,5,21,5,0)
+ 
+"^DD",2006.5732,2006.5732,5,21,6,0)
+This number will be used to query TaskMan to see whether
+"^DD",2006.5732,2006.5732,5,21,7,0)
+the background process has completed.
+"^DD",2006.5732,2006.5732,5,21,8,0)
+ 
+"^DD",2006.5732,2006.5732,5,21,9,0)
+Note: if the background process is no longer active,
+"^DD",2006.5732,2006.5732,5,21,10,0)
+and no result-set has been delivered, the error log should
+"^DD",2006.5732,2006.5732,5,21,11,0)
+be checked for any problems.
+"^DD",2006.5732,2006.5732,5,"DT")
+3041201
+"^DD",2006.5732,2006.57321,0)
+TAG SUB-FIELD^^2^2
+"^DD",2006.5732,2006.57321,0,"DT")
+3041201
+"^DD",2006.5732,2006.57321,0,"IX","B",2006.57321,.01)
+
+"^DD",2006.5732,2006.57321,0,"NM","TAG")
+
+"^DD",2006.5732,2006.57321,0,"UP")
+2006.5732
+"^DD",2006.5732,2006.57321,.01,0)
+TAG^RF^^0;1^K:$L(X)>9!($L(X)<9) X
+"^DD",2006.5732,2006.57321,.01,1,0)
+^.1
+"^DD",2006.5732,2006.57321,.01,1,1,0)
+2006.57321^B
+"^DD",2006.5732,2006.57321,.01,1,1,1)
+S ^MAGDQR(2006.5732,DA(1),1,"B",$E(X,1,30),DA)=""
+"^DD",2006.5732,2006.57321,.01,1,1,2)
+K ^MAGDQR(2006.5732,DA(1),1,"B",$E(X,1,30),DA)
+"^DD",2006.5732,2006.57321,.01,3)
+Enter the DICOM tag (xxxx,xxxx) for the current value.
+"^DD",2006.5732,2006.57321,.01,21,0)
+^^6^6^3041201^
+"^DD",2006.5732,2006.57321,.01,21,1,0)
+The value of this field is a string that represents a DICOM tag.
+"^DD",2006.5732,2006.57321,.01,21,2,0)
+A DICOM tag consists of two pairs of 4 hexadecimal digits,
+"^DD",2006.5732,2006.57321,.01,21,3,0)
+separated by a comma.
+"^DD",2006.5732,2006.57321,.01,21,4,0)
+ 
+"^DD",2006.5732,2006.57321,.01,21,5,0)
+The DICOM tag qualifies the meaning of the data-value that
+"^DD",2006.5732,2006.57321,.01,21,6,0)
+is stored in the rest of the current record.
+"^DD",2006.5732,2006.57321,.01,"DT")
+3041201
+"^DD",2006.5732,2006.57321,2,0)
+VALUE^F^^0;2^K:$L(X)>200!($L(X)<1) X
+"^DD",2006.5732,2006.57321,2,3)
+Enter the value for the current DICOM tag.
+"^DD",2006.5732,2006.57321,2,21,0)
+^^5^5^3041201^
+"^DD",2006.5732,2006.57321,2,21,1,0)
+The value of this field is a string.
+"^DD",2006.5732,2006.57321,2,21,2,0)
+This value is used to report the actual value of a certain
+"^DD",2006.5732,2006.57321,2,21,3,0)
+DICOM element in response to a query. The DICOM element in
+"^DD",2006.5732,2006.57321,2,21,4,0)
+question is identified by the TAG at the start of the current
+"^DD",2006.5732,2006.57321,2,21,5,0)
+record.
+"^DD",2006.5732,2006.57321,2,"DT")
+3041201
+"^DIC",2006.5732,2006.5732,0)
+DICOM QUERY RETRIEVE RESULT^2006.5732
+"^DIC",2006.5732,2006.5732,0,"GL")
+^MAGDQR(2006.5732,
+"^DIC",2006.5732,2006.5732,"%D",0)
+^^33^33^3041201^^
+"^DIC",2006.5732,2006.5732,"%D",1,0)
+ +---------------------------------------------------------------+
+"^DIC",2006.5732,2006.5732,"%D",2,0)
+ |                                                               |
+"^DIC",2006.5732,2006.5732,"%D",3,0)
+ | Property of the US Government.                                |
+"^DIC",2006.5732,2006.5732,"%D",4,0)
+ | No permission to copy or redistribute this software is given. |
+"^DIC",2006.5732,2006.5732,"%D",5,0)
+ | Use of unreleased versions of this software requires the user |
+"^DIC",2006.5732,2006.5732,"%D",6,0)
+ | to execute a written test agreement with the VistA Imaging    |
+"^DIC",2006.5732,2006.5732,"%D",7,0)
+ | Development Office of the Department of Veterans Affairs,     |
+"^DIC",2006.5732,2006.5732,"%D",8,0)
+ | telephone (301) 734-0100.                                     |
+"^DIC",2006.5732,2006.5732,"%D",9,0)
+ |                                                               |
+"^DIC",2006.5732,2006.5732,"%D",10,0)
+ | The Food and Drug Administration classifies this software as  |
+"^DIC",2006.5732,2006.5732,"%D",11,0)
+ | a medical device.  As such, it may not be changed in any way. |
+"^DIC",2006.5732,2006.5732,"%D",12,0)
+ | Modifications to this software may result in an adulterated   |
+"^DIC",2006.5732,2006.5732,"%D",13,0)
+ | medical device under 21CFR820, the use of which is considered |
+"^DIC",2006.5732,2006.5732,"%D",14,0)
+ | to be a violation of US Federal Statutes.                     |
+"^DIC",2006.5732,2006.5732,"%D",15,0)
+ |                                                               |
+"^DIC",2006.5732,2006.5732,"%D",16,0)
+ +---------------------------------------------------------------+
+"^DIC",2006.5732,2006.5732,"%D",17,0)
+ 
+"^DIC",2006.5732,2006.5732,"%D",18,0)
+The entries in this table are the result-sets that are created
+"^DIC",2006.5732,2006.5732,"%D",19,0)
+in response to DICOM Query/Retrieve requests that may be processed
+"^DIC",2006.5732,2006.5732,"%D",20,0)
+through Remote Procedure Calls.
+"^DIC",2006.5732,2006.5732,"%D",21,0)
+ 
+"^DIC",2006.5732,2006.5732,"%D",22,0)
+Each entry in this table is one such result-set.
+"^DIC",2006.5732,2006.5732,"%D",23,0)
+ 
+"^DIC",2006.5732,2006.5732,"%D",24,0)
+Result-sets are kept in this table, so that client-stations can
+"^DIC",2006.5732,2006.5732,"%D",25,0)
+call Remote Procedures to obtain the content of a result-set in
+"^DIC",2006.5732,2006.5732,"%D",26,0)
+portions of a limited size.
+"^DIC",2006.5732,2006.5732,"%D",27,0)
+ 
+"^DIC",2006.5732,2006.5732,"%D",28,0)
+Also, since the creation of a result-set may need more time than
+"^DIC",2006.5732,2006.5732,"%D",29,0)
+is reasonable wait for in a single Remote Procedure Call, the
+"^DIC",2006.5732,2006.5732,"%D",30,0)
+existence of this table makes it possible to call a first
+"^DIC",2006.5732,2006.5732,"%D",31,0)
+Remote Procedure to create the result-set through a TaskMan process
+"^DIC",2006.5732,2006.5732,"%D",32,0)
+and then call subsequent Remote Procedures to inquire whether
+"^DIC",2006.5732,2006.5732,"%D",33,0)
+the result-set is complete, and subsequently to obtain the results.
+"^DIC",2006.5732,"B","DICOM QUERY RETRIEVE RESULT",2006.5732)
+
+**END**
+**END**

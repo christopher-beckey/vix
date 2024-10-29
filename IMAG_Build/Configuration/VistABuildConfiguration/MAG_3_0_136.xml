@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<build name="MAG*3.0*136"
+       patch="136"
+       patchName="Version 3.0 Patch 136 - DICOM Importer III"
+       envCheckRoutine=""
+       deleteEnvCheckRoutine=""
+       preInstallRoutine=""
+       deletePreInstalltRoutine=""
+       postInstallRoutine="POS^MAGIP136"
+       deletePostInstallRoutine="Yes"
+       packageName="IMAGING"
+       packageNumber="454"
+       packageVersion="3.0"
+       packagePrefix="MAG"
+       packageDateDestributed="3020319"
+       alphaBetaTesting="YES"
+       installationMessage="YES"
+       addressForUsageReporting="G.IMAGING DEVELOPMENT TEAM@FORUM.VA.GOV"
+       xmlns="http://va.gov/VistA/kids/manifest">
+<requiredBuilds>
+<!-- action= 0:Warning only;1:Don't install, remove global;2:Don't install, leave global;
+ -->
+<!-- ADD RA*5.0*116. Patch number is confirmed; patch is not yet available.
+ -->
+<!-- likely will need to add MAG*3.0*110
+ -->
+<!--
+requiredBuild name="MAG*3.0*118" action="2"
+requiredBuild name="MAG*3.0*79" action="2"
+-->
+  <requiredBuild name="MAG*3.0*137" action="2"/>
+</requiredBuilds>
+<components>
+<dataDictionaries>
+  <!--
+  dataDictionary export="DD_2006_1.KID"
+  -->
+</dataDictionaries>
+<routines>
+  <routine name="MAGIP136" export="MAGIP136.RTN"/>
+  <!--
+  routine name="MAGGTU6" export="MAGGTU6.RTN"
+  routine name="MAGVIM02" export="MAGVIM02.RTN"
+  routine name="MAGVIM05" export="MAGVIM05.RTN"
+  routine name="MAGVIMRA" export="MAGVIMRA.RTN"
+  routine name="MAGVUID" export="MAGVUID.RTN"
+  routine name="MAGVUID2" export="MAGVUID2.RTN"
+  -->
+</routines>
+<rpcs>
+  <!--
+  rpc name="MAGG GET TIMEOUT" export="RPC_MAGG_GET_TIMEOUT.KID"
+  rpc name="MAGV GENERATE DICOM UID" export="RPC_MAGV_GENERATE_DICOM_UID.KID"
+  rpc name="MAGV GET PAT ORDERS" export="RPC_MAGV_GET_PAT_ORDERS.KID"
+  rpc name="MAGV GET RAD DX CODES" export="RPC_MAGV_GET_RAD_DX_CODES.KID"
+  rpc name="MAGV GET RAD IMAGING LOCATIONS" export="RPC_MAGV_GET_RAD_IMAGING_LOCATIONS.KID"
+  rpc name="MAGV GET RAD STD RPTS" export="RPC_MAGV_GET_RAD_STD_RPTS.KID"
+  rpc name="MAGV RAD STAT COMPLETE" export="RPC_MAGV_RAD_STAT_COMPLETE.KID"
+  -->
+</rpcs>
+<options>
+</options>
+<securityKeys>
+</securityKeys>
+<protocols>
+</protocols>
+<templateLists>
+</templateLists>
+<hl7Applications>
+</hl7Applications>
+<hl7LogicalLinks>
+</hl7LogicalLinks>
+<parameterDefinitions>
+</parameterDefinitions>
+<parameterTemplates>
+</parameterTemplates>
+<printTemplates>
+</printTemplates>
+<sortTemplates>
+</sortTemplates>
+<inputTemplates>
+</inputTemplates>
+<forms>
+</forms>
+<functions>
+</functions>
+<dialogs>
+</dialogs>
+<bulletins>
+</bulletins>
+<mailGroups>
+</mailGroups>
+<helpFrames>
+</helpFrames>
+</components>
+</build>

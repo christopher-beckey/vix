@@ -1,0 +1,123 @@
+MAGDMFB5 ;WOIFO/PMK - Program to build DICOM Master File ; 12/27/2005 08:26
+ ;;3.0;IMAGING;**30,69**;MAR 19, 2002;;NOV 7, 2007
+ ;; Per VHA Directive 2004-038, this routine should not be modified.
+ ;; +---------------------------------------------------------------+
+ ;; | Property of the US Government.                                |
+ ;; | No permission to copy or redistribute this software is given. |
+ ;; | Use of unreleased versions of this software requires the user |
+ ;; | to execute a written test agreement with the VistA Imaging    |
+ ;; | Development Office of the Department of Veterans Affairs,     |
+ ;; | telephone (301) 734-0100.                                     |
+ ;; | The Food and Drug Administration classifies this software as  |
+ ;; | a medical device.  As such, it may not be changed in any way. |
+ ;; | Modifications to this software may result in an adulterated   |
+ ;; | medical device under 21CFR820, the use of which is considered |
+ ;; | to be a violation of US Federal Statutes.                     |
+ ;; +---------------------------------------------------------------+
+ ;;
+ Q
+ ;
+UID ; Import UID Dictionary
+ ;
+ N D0 ;------- Top level record counter
+ N D1 ;------- Next level record counter
+ N FILE ;----- Name of input file
+ N FUNCTION ;- Code: "*" = ???, "S" = ???
+ N METAFLAG ;- Flag: 0 = normal UID, 1 = Meta UID
+ N NAME ;----- Name of UID or Sub-UID
+ N RECORD ;--- Input line from UID.dic
+ N STS1 ;----- Status of I/O function
+ N TYPE ;----- Type of SOP-class (Normal or Meta)
+ N UID ;------ Numeric code for UID or Sub-UID
+ N X ;-------- Scratch
+ ;
+ S FILE=$$INIT^MAGDMFB(2006.53,"DICOM UID","UID")
+ Q:FILE=""
+ ;
+ K ^MAGDICOM(2006.53),UID
+ S ^MAGDICOM(2006.53,0)="DICOM UID DICTIONARY^2006.53^^"
+ S METAFLAG=0 ; set to 1 for Meta SOP Class, 0 otherwise
+ S STS1=$$OPEN^MAGOSFIL(FILE,"R")
+ I STS1<0 D  Q
+ . D MESSAGE^MAGDMLOG(1,0,"Open Error: "_STS1,"t")
+ . S FATAL=FATAL+1
+ . Q
+ F  D  Q:STS1'=""
+ . S STS1=$$READ^MAGOSFIL(FILE,.RECORD)
+ . I $$USEPRIN^MAGOSFIL(1)
+ . I STS1<0 Q:+STS1=-2  D  Q
+ . . D MESSAGE^MAGDMLOG(1,0,"Read Error: "_STS1,"t")
+ . . S FATAL=FATAL+1
+ . . Q
+ . Q:RECORD=""  Q:RECORD=$C(12)
+ . I RECORD?.">"1"#".E D  Q  ; comment
+ . . D:'SILENT MESSAGE^MAGDMLOG(1,0,"Comment: <<"_$P(RECORD,"#",2,999)_">>","t")
+ . . Q
+ . ; data
+ . I $E(RECORD)'="|" D  ; SOP Class definition
+ . . I $L(RECORD,"|")'=5 D  Q
+ . . . D MESSAGE^MAGDMLOG(1,0,"*** Format Error ***","t")
+ . . . D MESSAGE^MAGDMLOG(1,0,RECORD,"t")
+ . . . S FATAL=FATAL+1
+ . . . I FBSWITCH="FOREGROUND" R Z:DTIME
+ . . . Q
+ . . D:'SILENT MESSAGE^MAGDMLOG(1,0,RECORD,"t")
+ . . S UID=$P(RECORD,"|"),NAME=$P(RECORD,"|",2),TYPE=$P(RECORD,"|",3)
+ . . S FUNCTION=$P(RECORD,"|",5)
+ . . I $L(UID)>64 D  ; maximum UID length is 64 characters
+ . . . D MESSAGE^MAGDMLOG(2,0,"*** Error: UID is too long! ***","t")
+ . . . D MESSAGE^MAGDMLOG(1,0,"(a UID can be up to 64 characters maximum)","t")
+ . . . D MESSAGE^MAGDMLOG(1,0,$E(UID,1,64)_" | "_$E(UID,65,$L(UID)),"t")
+ . . . I FBSWITCH="FOREGROUND" R Z:DTIME
+ . . . S FATAL=FATAL+1
+ . . . Q
+ . . S METAFLAG=(TYPE="Meta SOP Class")
+ . . ; create the entry in the DICOM SOP Class file
+ . . S X=$E(UID_$J("",40),1,40)_NAME_" ("_TYPE_")"
+ . . D:'SILENT MESSAGE^MAGDMLOG(1,0,X,"t")
+ . . S X=NAME_"^"_UID_"^"_FUNCTION_"^"_METAFLAG
+ . . S D0=$P(^MAGDICOM(2006.53,0),"^",3)+1
+ . . S ^MAGDICOM(2006.53,D0,0)=X
+ . . S ^MAGDICOM(2006.53,"B",NAME,D0)=""
+ . . S ^MAGDICOM(2006.53,"C",UID,D0)=""
+ . . S $P(^MAGDICOM(2006.53,0),"^",3)=D0
+ . . S $P(^MAGDICOM(2006.53,0),"^",4)=D0
+ . . Q
+ . E  D  ; Meta SOP Class union member
+ . . ; see Part 7, Annex D.1.2 - D.3.2
+ . . I $L(RECORD,"|")'=3 D  Q
+ . . . D MESSAGE^MAGDMLOG(1,0,"*** Format Error ***","t")
+ . . . D MESSAGE^MAGDMLOG(1,0,RECORD,"t")
+ . . . S FATAL=FATAL+1
+ . . . I FBSWITCH="FOREGROUND" R Z:DTIME
+ . . . Q
+ . . I 'METAFLAG D  Q
+ . . . D MESSAGE^MAGDMLOG(1,0,"*** Not a Meta SOP Class ***","t")
+ . . . D MESSAGE^MAGDMLOG(1,0,RECORD,"t")
+ . . . S FATAL=FATAL+1
+ . . . I FBSWITCH="FOREGROUND" R Z:DTIME
+ . . . Q
+ . . S UID=$P(RECORD,"|",2),NAME=$P(RECORD,"|",3)
+ . . I $L(UID)>64 D  ; maximum UID length is 64 characters
+ . . . D MESSAGE^MAGDMLOG(2,0,"*** Error: UID is too long! ***","t")
+ . . . D MESSAGE^MAGDMLOG(1,0,"(a UID can be up to 64 characters maximum)","t")
+ . . . D MESSAGE^MAGDMLOG(1,0,$E(UID,1,64)_" | "_$E(UID,65,$L(UID)),"t")
+ . . . I FBSWITCH="FOREGROUND" R Z:DTIME
+ . . . S FATAL=FATAL+1
+ . . . Q
+ . . ; create a SOP Class entry in the Meta union
+ . . S X=$E("Meta Union: "_UID_$J("",50),1,50)_NAME
+ . . D:'SILENT MESSAGE^MAGDMLOG(1,0,X,"t")
+ . . S X=NAME_"^"_UID
+ . . S D1=$P($G(^MAGDICOM(2006.53,D0,1,0)),"^",3)+1
+ . . S ^MAGDICOM(2006.53,D0,1,D1,0)=X
+ . . S ^MAGDICOM(2006.53,D0,1,"B",NAME,D1)=""
+ . . S ^MAGDICOM(2006.53,D0,1,"C",UID,D1)=""
+ . . S $P(^MAGDICOM(2006.53,D0,1,0),"^",3)=D1
+ . . S $P(^MAGDICOM(2006.53,D0,1,0),"^",4)=D1
+ . . Q
+ . Q
+ S STS1=$$CLOSE^MAGOSFIL(FILE)
+ I $$USEPRIN^MAGOSFIL(1)
+ Q
+ ;

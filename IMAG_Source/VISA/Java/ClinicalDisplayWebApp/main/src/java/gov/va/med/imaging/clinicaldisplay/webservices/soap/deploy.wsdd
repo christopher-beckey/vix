@@ -1,0 +1,106 @@
+<!-- Use this file to deploy some handlers/chains and services      -->
+<!-- Two ways to do this:                                           -->
+<!--   java org.apache.axis.client.AdminClient deploy.wsdd          -->
+<!--      after the axis server is running                          -->
+<!-- or                                                             -->
+<!--   java org.apache.axis.utils.Admin client|server deploy.wsdd   -->
+<!--      from the same directory that the Axis engine runs         -->
+
+<deployment
+    xmlns="http://xml.apache.org/axis/wsdd/"
+    xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
+
+  <!-- Services from ImageMetadataClinicalDisplayService WSDL service -->
+
+  <service name="ImageMetadataClinicalDisplay" provider="java:RPC" style="wrapped" use="literal">
+      <parameter name="wsdlTargetNamespace" value="urn:soap.webservices.clinicaldisplay.imaging.med.va.gov"/>
+      <parameter name="wsdlServiceElement" value="ImageMetadataClinicalDisplayService"/>
+      <parameter name="schemaQualified" value="urn:soap.webservices.clinicaldisplay.imaging.med.va.gov"/>
+      <parameter name="wsdlServicePort" value="ImageMetadataClinicalDisplay"/>
+      <parameter name="className" value="gov.va.med.imaging.clinicaldisplay.webservices.soap.ImageMetadataClinicalDisplaySoapBindingSkeleton"/>
+      <parameter name="wsdlPortType" value="ImageClinicalDisplayMetadata"/>
+      <parameter name="typeMappingVersion" value="1.2"/>
+      <parameter name="allowedMethods" value="*"/>
+
+      <typeMapping
+        xmlns:ns="urn:soap.webservices.clinicaldisplay.imaging.med.va.gov"
+        qname="ns:ShallowStudyType"
+        type="java:gov.va.med.imaging.clinicaldisplay.webservices.soap.ShallowStudyType"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="urn:soap.webservices.clinicaldisplay.imaging.med.va.gov"
+        qname="ns:FatImageType"
+        type="java:gov.va.med.imaging.clinicaldisplay.webservices.soap.FatImageType"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="urn:soap.webservices.clinicaldisplay.imaging.med.va.gov"
+        qname="ns:>PingServerType>response"
+        type="java:gov.va.med.imaging.clinicaldisplay.webservices.soap.PingServerTypeResponse"
+        serializer="org.apache.axis.encoding.ser.EnumSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.EnumDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="urn:soap.webservices.clinicaldisplay.imaging.med.va.gov"
+        qname="ns:>FilterType>origin"
+        type="java:gov.va.med.imaging.clinicaldisplay.webservices.soap.FilterTypeOrigin"
+        serializer="org.apache.axis.encoding.ser.EnumSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.EnumDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="urn:soap.webservices.clinicaldisplay.imaging.med.va.gov"
+        qname="ns:ImageAccessLogEventType"
+        type="java:gov.va.med.imaging.clinicaldisplay.webservices.soap.ImageAccessLogEventType"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="urn:soap.webservices.clinicaldisplay.imaging.med.va.gov"
+        qname="ns:>ImageAccessLogEventType>eventType"
+        type="java:gov.va.med.imaging.clinicaldisplay.webservices.soap.ImageAccessLogEventTypeEventType"
+        serializer="org.apache.axis.encoding.ser.EnumSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.EnumDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="urn:soap.webservices.clinicaldisplay.imaging.med.va.gov"
+        qname="ns:UserCredentials"
+        type="java:gov.va.med.imaging.clinicaldisplay.webservices.soap.UserCredentials"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="urn:soap.webservices.clinicaldisplay.imaging.med.va.gov"
+        qname="ns:FilterType"
+        type="java:gov.va.med.imaging.clinicaldisplay.webservices.soap.FilterType"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="urn:soap.webservices.clinicaldisplay.imaging.med.va.gov"
+        qname="ns:TransactionIdentifierType"
+        type="java:java.lang.String"
+        serializer="org.apache.axis.encoding.ser.SimpleSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.SimpleDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="urn:soap.webservices.clinicaldisplay.imaging.med.va.gov"
+        qname="ns:DateType"
+        type="java:java.lang.String"
+        serializer="org.apache.axis.encoding.ser.SimpleSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.SimpleDeserializerFactory"
+        encodingStyle=""
+      />
+  </service>
+</deployment>

@@ -1,0 +1,432 @@
+KIDS Distribution saved on Oct 04, 2000@15:14:28
+File export for VSS
+**KIDS**:Z VSS FILE 0.1T^
+
+**INSTALL NAME**
+Z VSS FILE 0.1T
+"BLD",1195,0)
+Z VSS FILE 0.1T^^0^3001004^n
+"BLD",1195,1,0)
+^^1^1^3000906^
+"BLD",1195,1,1,0)
+KIDS file for one single file
+"BLD",1195,4,0)
+^9.64PA^2006.592^1
+"BLD",1195,4,2006.592,0)
+2006.592
+"BLD",1195,4,2006.592,222)
+y^y^f^^^^n
+"BLD",1195,4,"B",2006.592,2006.592)
+
+"BLD",1195,"KRN",0)
+^9.67PA^19^17
+"BLD",1195,"KRN",.4,0)
+.4
+"BLD",1195,"KRN",.401,0)
+.401
+"BLD",1195,"KRN",.402,0)
+.402
+"BLD",1195,"KRN",.403,0)
+.403
+"BLD",1195,"KRN",.5,0)
+.5
+"BLD",1195,"KRN",.84,0)
+.84
+"BLD",1195,"KRN",3.6,0)
+3.6
+"BLD",1195,"KRN",3.8,0)
+3.8
+"BLD",1195,"KRN",9.2,0)
+9.2
+"BLD",1195,"KRN",9.8,0)
+9.8
+"BLD",1195,"KRN",19,0)
+19
+"BLD",1195,"KRN",19.1,0)
+19.1
+"BLD",1195,"KRN",101,0)
+101
+"BLD",1195,"KRN",409.61,0)
+409.61
+"BLD",1195,"KRN",771,0)
+771
+"BLD",1195,"KRN",870,0)
+870
+"BLD",1195,"KRN",8994,0)
+8994
+"BLD",1195,"KRN","B",.4,.4)
+
+"BLD",1195,"KRN","B",.401,.401)
+
+"BLD",1195,"KRN","B",.402,.402)
+
+"BLD",1195,"KRN","B",.403,.403)
+
+"BLD",1195,"KRN","B",.5,.5)
+
+"BLD",1195,"KRN","B",.84,.84)
+
+"BLD",1195,"KRN","B",3.6,3.6)
+
+"BLD",1195,"KRN","B",3.8,3.8)
+
+"BLD",1195,"KRN","B",9.2,9.2)
+
+"BLD",1195,"KRN","B",9.8,9.8)
+
+"BLD",1195,"KRN","B",19,19)
+
+"BLD",1195,"KRN","B",19.1,19.1)
+
+"BLD",1195,"KRN","B",101,101)
+
+"BLD",1195,"KRN","B",409.61,409.61)
+
+"BLD",1195,"KRN","B",771,771)
+
+"BLD",1195,"KRN","B",870,870)
+
+"BLD",1195,"KRN","B",8994,8994)
+
+"FIA",2006.592)
+DICOM UNDEFINED MODALITIES
+"FIA",2006.592,0)
+^MAGD(2006.592,
+"FIA",2006.592,0,0)
+2006.592
+"FIA",2006.592,0,1)
+y^y^f^^^^n
+"FIA",2006.592,0,10)
+
+"FIA",2006.592,0,11)
+
+"FIA",2006.592,0,"RLRO")
+
+"FIA",2006.592,2006.592)
+0
+"MBREQ")
+0
+"QUES","XPF1",0)
+Y
+"QUES","XPF1","??")
+^D REP^XPDH
+"QUES","XPF1","A")
+Shall I write over your |FLAG| File
+"QUES","XPF1","B")
+YES
+"QUES","XPF1","M")
+D XPF1^XPDIQ
+"QUES","XPF2",0)
+Y
+"QUES","XPF2","??")
+^D DTA^XPDH
+"QUES","XPF2","A")
+Want my data |FLAG| yours
+"QUES","XPF2","B")
+YES
+"QUES","XPF2","M")
+D XPF2^XPDIQ
+"QUES","XPI1",0)
+YO
+"QUES","XPI1","??")
+^D INHIBIT^XPDH
+"QUES","XPI1","A")
+Want KIDS to INHIBIT LOGONs during the install
+"QUES","XPI1","B")
+YES
+"QUES","XPI1","M")
+D XPI1^XPDIQ
+"QUES","XPM1",0)
+PO^VA(200,:EM
+"QUES","XPM1","??")
+^D MG^XPDH
+"QUES","XPM1","A")
+Enter the Coordinator for Mail Group '|FLAG|'
+"QUES","XPM1","B")
+
+"QUES","XPM1","M")
+D XPM1^XPDIQ
+"QUES","XPO1",0)
+Y
+"QUES","XPO1","??")
+^D MENU^XPDH
+"QUES","XPO1","A")
+Want KIDS to Rebuild Menu Trees Upon Completion of Install
+"QUES","XPO1","B")
+YES
+"QUES","XPO1","M")
+D XPO1^XPDIQ
+"QUES","XPZ1",0)
+Y
+"QUES","XPZ1","??")
+^D OPT^XPDH
+"QUES","XPZ1","A")
+Want to DISABLE Scheduled Options, Menu Options, and Protocols
+"QUES","XPZ1","B")
+YES
+"QUES","XPZ1","M")
+D XPZ1^XPDIQ
+"QUES","XPZ2",0)
+Y
+"QUES","XPZ2","??")
+^D RTN^XPDH
+"QUES","XPZ2","A")
+Want to MOVE routines to other CPUs
+"QUES","XPZ2","B")
+NO
+"QUES","XPZ2","M")
+D XPZ2^XPDIQ
+"SEC","^DIC",2006.592,2006.592,0,"AUDIT")
+@
+"SEC","^DIC",2006.592,2006.592,0,"DD")
+@
+"SEC","^DIC",2006.592,2006.592,0,"DEL")
+@
+"SEC","^DIC",2006.592,2006.592,0,"LAYGO")
+@
+"SEC","^DIC",2006.592,2006.592,0,"RD")
+@
+"SEC","^DIC",2006.592,2006.592,0,"WR")
+@
+"VER")
+8.0^22.0
+"^DD",2006.592,2006.592,0)
+FIELD^^6^7
+"^DD",2006.592,2006.592,0,"DDA")
+N
+"^DD",2006.592,2006.592,0,"DT")
+2990421
+"^DD",2006.592,2006.592,0,"IX","B",2006.592,.01)
+
+"^DD",2006.592,2006.592,0,"NM","DICOM UNDEFINED MODALITIES")
+
+"^DD",2006.592,2006.592,.01,0)
+DATE TIME^RD^^0;1^S %DT="EST" D ^%DT S X=Y K:Y<1 X
+"^DD",2006.592,2006.592,.01,.1)
+Time Stamp
+"^DD",2006.592,2006.592,.01,1,0)
+^.1
+"^DD",2006.592,2006.592,.01,1,1,0)
+2006.592^B
+"^DD",2006.592,2006.592,.01,1,1,1)
+S ^MAGD(2006.592,"B",$E(X,1,30),DA)=""
+"^DD",2006.592,2006.592,.01,1,1,2)
+K ^MAGD(2006.592,"B",$E(X,1,30),DA)
+"^DD",2006.592,2006.592,.01,3)
+Enter this moment's date and time.
+"^DD",2006.592,2006.592,.01,21,0)
+^^3^3^3000224^^
+"^DD",2006.592,2006.592,.01,21,1,0)
+The value of this field is a string that represents
+"^DD",2006.592,2006.592,.01,21,2,0)
+a date/time stamp. The date and time reflect the moment
+"^DD",2006.592,2006.592,.01,21,3,0)
+on which the current entry was made into the database.
+"^DD",2006.592,2006.592,.01,"DT")
+2980501
+"^DD",2006.592,2006.592,1,0)
+FROMPATH^F^^0;2^K:$L(X)>30!($L(X)<1) X
+"^DD",2006.592,2006.592,1,.1)
+Name of File
+"^DD",2006.592,2006.592,1,3)
+Enter the name (including directory path) of this file.
+"^DD",2006.592,2006.592,1,21,0)
+^^4^4^3000224^^
+"^DD",2006.592,2006.592,1,21,1,0)
+The value of this field is a string that represents
+"^DD",2006.592,2006.592,1,21,2,0)
+the full name (including any directory prefixes)
+"^DD",2006.592,2006.592,1,21,3,0)
+of the DICOM file for which the modality that created
+"^DD",2006.592,2006.592,1,21,4,0)
+it is not yet defined in the DICOM Gateway database.
+"^DD",2006.592,2006.592,1,"DT")
+2980501
+"^DD",2006.592,2006.592,2,0)
+MANUFACTURER^F^^0;3^K:$L(X)>30!($L(X)<1) X
+"^DD",2006.592,2006.592,2,.1)
+Manufacturer
+"^DD",2006.592,2006.592,2,3)
+Enter the name of the manufacturer of this modality.
+"^DD",2006.592,2006.592,2,21,0)
+^^9^9^3000224^^
+"^DD",2006.592,2006.592,2,21,1,0)
+The name of this field is a string that represents
+"^DD",2006.592,2006.592,2,21,2,0)
+the name of the manufacturer of the modality that
+"^DD",2006.592,2006.592,2,21,3,0)
+transmitted the image file being described in the
+"^DD",2006.592,2006.592,2,21,4,0)
+current entry.
+"^DD",2006.592,2006.592,2,21,5,0)
+ 
+"^DD",2006.592,2006.592,2,21,6,0)
+The entry that needs to be made in the database
+"^DD",2006.592,2006.592,2,21,7,0)
+so that the DICOM Gateway will recognize this modality
+"^DD",2006.592,2006.592,2,21,8,0)
+will need to include the name of this manufacturer
+"^DD",2006.592,2006.592,2,21,9,0)
+spelled exactly as reported in this field.
+"^DD",2006.592,2006.592,2,"DT")
+2980501
+"^DD",2006.592,2006.592,3,0)
+MODEL^F^^0;5^K:$L(X)>8!($L(X)<1) X
+"^DD",2006.592,2006.592,3,.1)
+Model
+"^DD",2006.592,2006.592,3,3)
+Enter the name of the model of this modality.
+"^DD",2006.592,2006.592,3,21,0)
+^^9^9^3000224^^
+"^DD",2006.592,2006.592,3,21,1,0)
+The name of this field is a string that represents
+"^DD",2006.592,2006.592,3,21,2,0)
+the name of the model of the modality that
+"^DD",2006.592,2006.592,3,21,3,0)
+transmitted the image file being described in the
+"^DD",2006.592,2006.592,3,21,4,0)
+current entry.
+"^DD",2006.592,2006.592,3,21,5,0)
+ 
+"^DD",2006.592,2006.592,3,21,6,0)
+The entry that needs to be made in the database
+"^DD",2006.592,2006.592,3,21,7,0)
+so that the DICOM Gateway will recognize this modality
+"^DD",2006.592,2006.592,3,21,8,0)
+will need to include the name of this model
+"^DD",2006.592,2006.592,3,21,9,0)
+spelled exactly as reported in this field.
+"^DD",2006.592,2006.592,3,"DT")
+2980501
+"^DD",2006.592,2006.592,4,0)
+MACHID^F^^0;7^K:$L(X)>8!($L(X)<1) X
+"^DD",2006.592,2006.592,4,.1)
+Machine ID
+"^DD",2006.592,2006.592,4,3)
+Enter the letter that identifies the computer that received this file.
+"^DD",2006.592,2006.592,4,21,0)
+^^3^3^3000224^^
+"^DD",2006.592,2006.592,4,21,1,0)
+The value of this field is a single letter.
+"^DD",2006.592,2006.592,4,21,2,0)
+This letter identifies the DICOM Gateway computer
+"^DD",2006.592,2006.592,4,21,3,0)
+that received the file that is described in this entry.
+"^DD",2006.592,2006.592,4,"DT")
+2980501
+"^DD",2006.592,2006.592,5,0)
+MODALITY^F^^0;4^K:$L(X)>10!($L(X)<1) X
+"^DD",2006.592,2006.592,5,.1)
+Modality
+"^DD",2006.592,2006.592,5,3)
+Enter the name of the modality.
+"^DD",2006.592,2006.592,5,21,0)
+^^5^5^3000224^^
+"^DD",2006.592,2006.592,5,21,1,0)
+The name of this field is a code that represents
+"^DD",2006.592,2006.592,5,21,2,0)
+the type of modality that transmitted the image file
+"^DD",2006.592,2006.592,5,21,3,0)
+being described in the current entry.
+"^DD",2006.592,2006.592,5,21,4,0)
+ 
+"^DD",2006.592,2006.592,5,21,5,0)
+Codes for types of modalities are defined in the DICOM standard.
+"^DD",2006.592,2006.592,5,"DT")
+2990421
+"^DD",2006.592,2006.592,6,0)
+INSTRUMENT^F^^0;6^K:$L(X)>10!($L(X)<1) X
+"^DD",2006.592,2006.592,6,.1)
+Instrument
+"^DD",2006.592,2006.592,6,3)
+Enter the name of the instrument.
+"^DD",2006.592,2006.592,6,21,0)
+^^3^3^3000224^^
+"^DD",2006.592,2006.592,6,21,1,0)
+The value of this field is a string that identifies
+"^DD",2006.592,2006.592,6,21,2,0)
+the specific instrument that transmitted the image
+"^DD",2006.592,2006.592,6,21,3,0)
+file being described in the current entry.
+"^DD",2006.592,2006.592,6,"DT")
+3000224
+"^DIC",2006.592,2006.592,0)
+DICOM UNDEFINED MODALITIES^2006.592
+"^DIC",2006.592,2006.592,0,"GL")
+^MAGD(2006.592,
+"^DIC",2006.592,2006.592,"%",0)
+^1.005^^
+"^DIC",2006.592,2006.592,"%D",0)
+^^32^32^3000510
+"^DIC",2006.592,2006.592,"%D",1,0)
+ +---------------------------------------------------------------+
+"^DIC",2006.592,2006.592,"%D",2,0)
+ |                                                               |
+"^DIC",2006.592,2006.592,"%D",3,0)
+ | Property of the US Government.                                |
+"^DIC",2006.592,2006.592,"%D",4,0)
+ | No permission to copy or redistribute this software is given. |
+"^DIC",2006.592,2006.592,"%D",5,0)
+ | Use of unreleased versions of this software requires the user |
+"^DIC",2006.592,2006.592,"%D",6,0)
+ | to execute a written test agreement with the VistA Imaging    |
+"^DIC",2006.592,2006.592,"%D",7,0)
+ | Development Office of the Department of Veterans Affairs,     |
+"^DIC",2006.592,2006.592,"%D",8,0)
+ | telephone (301) 734-0100.                                     |
+"^DIC",2006.592,2006.592,"%D",9,0)
+ |                                                               |
+"^DIC",2006.592,2006.592,"%D",10,0)
+ | The Food and Drug Administration classifies this software as  |
+"^DIC",2006.592,2006.592,"%D",11,0)
+ | a Class II medical device.  As such, it may not be changed    |
+"^DIC",2006.592,2006.592,"%D",12,0)
+ | in any way.  Modifications to this software may result in an  |
+"^DIC",2006.592,2006.592,"%D",13,0)
+ | adulterated medical device under 21CFR820, the use of which   |
+"^DIC",2006.592,2006.592,"%D",14,0)
+ | is considered to be a violation of US Federal Statutes.       |
+"^DIC",2006.592,2006.592,"%D",15,0)
+ |                                                               |
+"^DIC",2006.592,2006.592,"%D",16,0)
+ +---------------------------------------------------------------+
+"^DIC",2006.592,2006.592,"%D",17,0)
+ 
+"^DIC",2006.592,2006.592,"%D",18,0)
+This file will store references of DICOM images for the modality that need
+"^DIC",2006.592,2006.592,"%D",19,0)
+to be defined.  The defining of the modality will be done on the DICOM
+"^DIC",2006.592,2006.592,"%D",20,0)
+Image Gateway. Review the DICOM documentation for the DIC file that needs
+"^DIC",2006.592,2006.592,"%D",21,0)
+to be corrected.
+"^DIC",2006.592,2006.592,"%D",22,0)
+ 
+"^DIC",2006.592,2006.592,"%D",23,0)
+Entries in this file will be deleted by the DICOM Image Gateway as soon as
+"^DIC",2006.592,2006.592,"%D",24,0)
+the Undefined Modality is defined.  The DICOM Image Gateway will set
+"^DIC",2006.592,2006.592,"%D",25,0)
+entries into this file.
+"^DIC",2006.592,2006.592,"%D",26,0)
+ 
+"^DIC",2006.592,2006.592,"%D",27,0)
+The B cross-reference is set for each entry.
+"^DIC",2006.592,2006.592,"%D",28,0)
+The C cross-reference is in the following format and is set by the DICOM
+"^DIC",2006.592,2006.592,"%D",29,0)
+server process.
+"^DIC",2006.592,2006.592,"%D",30,0)
+ ^MAGD(2006.592,"C",machine id,manufacturer,model,modality)=# entries
+"^DIC",2006.592,2006.592,"%D",31,0)
+This cross-refence is used during the status display on the Image DICOM
+"^DIC",2006.592,2006.592,"%D",32,0)
+Image Gateway.
+"^DIC",2006.592,"B","DICOM UNDEFINED MODALITIES",2006.592)
+
+**END**
+**END**
+
+
+****
+****

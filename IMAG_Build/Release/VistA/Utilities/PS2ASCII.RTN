@@ -1,0 +1,72 @@
+6:24 PM  05/13/1997
+Saved from INT
+PS2ASCII
+PS2ASCII ;WISC/PMK - Read a PostScript file and output ASCII [ 05/02/95  11:17 AM ]
+ENTRY ; entry point
+ ; R !!,"Enter input file name: ",INFILE Q:INFILE=""
+ S DEBUG=0
+ S INFILE="V:\DICOM\STANDARD\PART06FI.PS"
+ S INPUT=$$DEVICE^%ZMAGOSF
+ D OPEN^%ZMAGOSF(INPUT,INFILE,"R")
+ S OUTPUT=$P
+ S EOF=1 F  U INPUT Q:$$EOF^%ZMAGOSF  R X I X="%%EndSetup" S EOF=0 Q
+ S TEXT="",CARRY="",PAGE=0 ; CARRY is the carried over continuation text
+ K ^TMP($J)
+ F  U INPUT Q:$$EOF^%ZMAGOSF  R X U OUTPUT D
+ . I X?1"%%Page:".E D  ; new page
+ . . ; W #,$E(X,2,999)
+ . .  W !,$E(X,2,999)
+ . . S PAGE=$P(X," ",3)
+ . . S (OLDX,OLDY)=9999
+ . . Q
+ . I X["(" D
+ . . S RIGHT=$P(X,")",2),XPOS=$P(RIGHT," ",2)\20,YPOS=$P(RIGHT," ",3)
+ . . S CONTINUE=X["-)"
+ . . I CONTINUE D  ; carry last piece of text to the next line
+ . . . S TEXT=CARRY_$P($P(X,"(",2),"-)")
+ . . . S CARRY=$P(TEXT," ",$L(TEXT," "))
+ . . . S TEXT=$P(TEXT," ",1,$L(TEXT," ")-1)
+ . . . Q
+ . . E  S TEXT=CARRY_$P($P(X,"(",2),")")
+ . . I TEXT["\" D  ; convert escape sequences to ASCII
+ . . . S ESCAPE="\050^\051^\255^\320^\322^\323^\325^\134"
+ . . . S ASCII="(^)^ not equal ^--^""^""^'^\"
+ . . . F I=1:1:$L(ESCAPE,"^") D
+ . . . . S FROM=$P(ESCAPE,"^",I),TO=$P(ASCII,"^",I)
+ . . . . F  Q:TEXT'[FROM  S TEXT=$P(TEXT,FROM)_TO_$P(TEXT,FROM,2,999)
+ . . . . Q
+ . . . Q
+ . . I YPOS'=OLDY D  ; new line
+ . . . W:DEBUG !
+ . . . S OLDY=YPOS
+ . . . I XPOS<OLDX K TAB S TAB=0,OLDX=XPOS
+ . . . E  S TAB=$G(TAB(XPOS)) I TAB F I=1:1:TAB S TEXT=$C(9)_TEXT
+ . . . Q
+ . . I '$D(TAB(XPOS)) S TAB(XPOS)=TAB,TAB=TAB+1
+ . . W:DEBUG " [",XPOS,",",YPOS,"] ",TEXT
+ . . S TEXT=TEXT_$C(9)
+ . . S ^TMP($J,PAGE,YPOS)=$G(^TMP($J,PAGE,YPOS))_TEXT
+ . . I 'CONTINUE S CARRY=""
+ . . Q
+ . Q
+ C INPUT
+ Q
+ ;
+COPY ; copy text to output
+ S OUTFILE="V:\DICOM\STANDARD\PART06FI.TXT"
+ S OUTPUT=$$DEVICE^%ZMAGOSF
+ D OPEN^%ZMAGOSF(OUTPUT,OUTFILE,"W")
+ S PAGE=""
+ F  S PAGE=$O(^TMP($J,PAGE)) Q:PAGE=""  D
+ . W !,PAGE
+ . U OUTPUT W #,"Page ",PAGE,!!
+ . S YPOS=""
+ . F  S YPOS=$O(^TMP($J,PAGE,YPOS),-1) Q:YPOS=""  W ^(YPOS),!
+ . U $P
+ . Q
+ C OUTPUT
+ O $P
+ Q
+
+
+

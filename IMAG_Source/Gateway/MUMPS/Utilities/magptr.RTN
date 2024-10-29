@@ -1,0 +1,35 @@
+magptr ;WOIFO/MLH - PACS testing subroutines (reporting) ; 23 Jun 2005  5:01 PM
+ ; *** CAUTION:  not for distribution beyond Silver Spring OIFO!
+ q
+OBX ; SUBROUTINE - build OBX segments for height/weight
+ n segdta ; -- segment data
+ i '$d(rannum) s rannum=$e($r(1000000)+1000000,2,7),^TMP($j,"RANNUM")=rannum
+ ;   height
+ ;     OBX-1-set ID
+ s $p(segdta,HLFS,1)=1
+ ;     OBX-2-value type
+ s $p(segdta,HLFS,2)="ST"
+ ;     OBX-3-observation identifier
+ s $p(segdta,HLFS,3)=HLCS_"HEIGHT"
+ ;     OBX-5-observation value
+ s $p(segdta,HLFS,5)=$e(rannum,1,4)#23+55
+ ;     OBX-6-units
+ s $p(segdta,HLFS,6)="in"_HLCS_"inch"_HLCS_"ANS+"
+ ;     OBX-11-observation result status
+ s $p(segdta,HLFS,11)="F"
+ s segix=$o(HLA("HLS"," "),-1)+1,HLA("HLS",segix)="OBX"_HLFS_segdta k segdta
+ ;   weight
+ ;     OBX-1-set ID
+ s $p(segdta,HLFS,1)=2
+ ;     OBX-2-value type
+ s $p(segdta,HLFS,2)="ST"
+ ;     OBX-3-observation identifier
+ s $p(segdta,HLFS,3)=HLCS_"WEIGHT"
+ ;     OBX-5-observation value
+ s $p(segdta,HLFS,5)=rannum#127+100
+ ;     OBX-6-units
+ s $p(segdta,HLFS,6)="lb"_HLCS_"pound"_HLCS_"ANS+"
+ ;     OBX-11-observation result status
+ s $p(segdta,HLFS,11)="F"
+ s segix=$o(HLA("HLS"," "),-1)+1,HLA("HLS",segix)="OBX"_HLFS_segdta k segdta
+ q

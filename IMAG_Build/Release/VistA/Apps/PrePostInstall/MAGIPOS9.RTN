@@ -1,0 +1,54 @@
+MAGIPOS9 ;Post init routine to queue site activity at install.
+ ;;3.0;IMAGING;**9**;31-March-2003
+ ;; +---------------------------------------------------------------+
+ ;; | Property of the US Government.                                |
+ ;; | No permission to copy or redistribute this software is given. |
+ ;; | Use of unreleased versions of this software requires the user |
+ ;; | to execute a written test agreement with the VistA Imaging    |
+ ;; | Development Office of the Department of Veterans Affairs,     |
+ ;; | telephone (301) 734-0100.                                     |
+ ;; |                                                               |
+ ;; | The Food and Drug Administration classifies this software as  |
+ ;; | a medical device.  As such, it may not be changed in any way. |
+ ;; | Modifications to this software may result in an adulterated   |
+ ;; | medical device under 21CFR820, the use of which is considered |
+ ;; | to be a violation of US Federal Statutes.                     |
+ ;; +---------------------------------------------------------------+
+ ;;
+ ;
+POST ;
+ I $T(POST^MAGQST)-"" Q
+ D POST^MAGQST
+ Q
+PRE ;Clear any values in field 13 which was the 6th piece of node 1.
+ N CONS,ENTRY,DIK,DA,FILE
+ S ENTRY=0
+ F  S ENTRY=$O(^MAG(2005.2,ENTRY)) Q:'ENTRY  D
+ . Q:'$D(^MAG(2005.2,ENTRY,0))
+ . I $D(^MAG(2005.2,ENTRY,1)) S $P(^MAG(2005.2,ENTRY,1),"^",6)=""
+ . Q
+ ;Delete the VIEWER field #13
+ S DIK="^DD(2005.2,",DA=13,DA(1)=2005.2 D ^DIK
+ K DIK,DA
+ ;Reset the DDs for the following files but only if they exist.
+ F FILE=2006.5906,2006.596,2006.035,2006.036,2006.59 D
+ . I $$VFILE^DILFD(FILE) D DELFILE(FILE)
+ . Q
+ S CONS=0
+ I $T(CONSOLID^MAGBAPI)'="",$$CONSOLID^MAGBAPI() S CONS=1
+ D:'CONS
+ . S X=$$KSP^XUPARAM("INST") Q:'X
+ . S X=$$GET1^DIQ(4,+X,.01)
+ . S $P(^MAG(2006.1,1,0),"^",1)=X
+ . Q
+ Q
+DELFILE(NUMBER) ;
+ N DIU,SNDX
+ Q:'NUMBER
+ I (NUMBER<2006)!(NUMBER>2006.5906) Q
+ ; Remove subfile before deleting the file.
+ S SNDX="" F  S SNDX=$O(^DD(NUMBER,"SB",SNDX)) Q:SNDX'?1N.N.".".N  D
+ . S DIU=SNDX,DIU(0)="S" D EN^DIU2
+ S DIU=NUMBER,DIU(0)="E" W !,"FILE # ",NUMBER D EN^DIU2
+ K DIU
+ Q

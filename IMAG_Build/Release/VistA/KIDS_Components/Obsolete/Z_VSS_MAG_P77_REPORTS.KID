@@ -1,0 +1,882 @@
+KIDS Distribution saved on Dec 01, 2006@11:04:55
+UPDATE
+**KIDS**:Z_VSS_MAG_P77_REPORTS 3.0^
+
+**INSTALL NAME**
+Z_VSS_MAG_P77_REPORTS 3.0
+"BLD",4950,0)
+Z_VSS_MAG_P77_REPORTS 3.0^^0^3061201^y
+"BLD",4950,4,0)
+^9.64PA^^
+"BLD",4950,"INIT")
+
+"BLD",4950,"KRN",0)
+^9.67PA^8989.52^19
+"BLD",4950,"KRN",.4,0)
+.4
+"BLD",4950,"KRN",.4,"NM",0)
+^9.68A^4^4
+"BLD",4950,"KRN",.4,"NM",1,0)
+MAG REPORT 1    FILE #2005^2005^0
+"BLD",4950,"KRN",.4,"NM",2,0)
+MAG REPORT 2    FILE #2005^2005^0
+"BLD",4950,"KRN",.4,"NM",3,0)
+MAG REPORT 3    FILE #2005^2005^0
+"BLD",4950,"KRN",.4,"NM",4,0)
+MAG REPORT 4    FILE #2005^2005^0
+"BLD",4950,"KRN",.4,"NM","B","MAG REPORT 1    FILE #2005",1)
+
+"BLD",4950,"KRN",.4,"NM","B","MAG REPORT 2    FILE #2005",2)
+
+"BLD",4950,"KRN",.4,"NM","B","MAG REPORT 3    FILE #2005",3)
+
+"BLD",4950,"KRN",.4,"NM","B","MAG REPORT 4    FILE #2005",4)
+
+"BLD",4950,"KRN",.401,0)
+.401
+"BLD",4950,"KRN",.401,"NM",0)
+^9.68A^4^4
+"BLD",4950,"KRN",.401,"NM",1,0)
+MAG REPORT 1    FILE #2005^2005^0
+"BLD",4950,"KRN",.401,"NM",2,0)
+MAG REPORT 2    FILE #2005^2005^0
+"BLD",4950,"KRN",.401,"NM",3,0)
+MAG REPORT 3    FILE #2005^2005^0
+"BLD",4950,"KRN",.401,"NM",4,0)
+MAG REPORT 4    FILE #2005^2005^0
+"BLD",4950,"KRN",.401,"NM","B","MAG REPORT 1    FILE #2005",1)
+
+"BLD",4950,"KRN",.401,"NM","B","MAG REPORT 2    FILE #2005",2)
+
+"BLD",4950,"KRN",.401,"NM","B","MAG REPORT 3    FILE #2005",3)
+
+"BLD",4950,"KRN",.401,"NM","B","MAG REPORT 4    FILE #2005",4)
+
+"BLD",4950,"KRN",.402,0)
+.402
+"BLD",4950,"KRN",.403,0)
+.403
+"BLD",4950,"KRN",.5,0)
+.5
+"BLD",4950,"KRN",.84,0)
+.84
+"BLD",4950,"KRN",3.6,0)
+3.6
+"BLD",4950,"KRN",3.8,0)
+3.8
+"BLD",4950,"KRN",9.2,0)
+9.2
+"BLD",4950,"KRN",9.8,0)
+9.8
+"BLD",4950,"KRN",19,0)
+19
+"BLD",4950,"KRN",19,"NM",0)
+^9.68A^7^6
+"BLD",4950,"KRN",19,"NM",2,0)
+MAG REPORT 1^^0
+"BLD",4950,"KRN",19,"NM",3,0)
+MAG REPORT 2^^0
+"BLD",4950,"KRN",19,"NM",4,0)
+MAG REPORT 3^^0
+"BLD",4950,"KRN",19,"NM",5,0)
+MAG REPORT 4^^0
+"BLD",4950,"KRN",19,"NM",6,0)
+MAG REPORT MENU^^0
+"BLD",4950,"KRN",19,"NM",7,0)
+MAG SYS MENU^^2
+"BLD",4950,"KRN",19,"NM","B","MAG REPORT 1",2)
+
+"BLD",4950,"KRN",19,"NM","B","MAG REPORT 2",3)
+
+"BLD",4950,"KRN",19,"NM","B","MAG REPORT 3",4)
+
+"BLD",4950,"KRN",19,"NM","B","MAG REPORT 4",5)
+
+"BLD",4950,"KRN",19,"NM","B","MAG REPORT MENU",6)
+
+"BLD",4950,"KRN",19,"NM","B","MAG SYS MENU",7)
+
+"BLD",4950,"KRN",19.1,0)
+19.1
+"BLD",4950,"KRN",19.1,"NM",0)
+^9.68A^^
+"BLD",4950,"KRN",101,0)
+101
+"BLD",4950,"KRN",101,"NM",0)
+^9.68A^^
+"BLD",4950,"KRN",409.61,0)
+409.61
+"BLD",4950,"KRN",771,0)
+771
+"BLD",4950,"KRN",870,0)
+870
+"BLD",4950,"KRN",8989.51,0)
+8989.51
+"BLD",4950,"KRN",8989.52,0)
+8989.52
+"BLD",4950,"KRN",8994,0)
+8994
+"BLD",4950,"KRN","B",.4,.4)
+
+"BLD",4950,"KRN","B",.401,.401)
+
+"BLD",4950,"KRN","B",.402,.402)
+
+"BLD",4950,"KRN","B",.403,.403)
+
+"BLD",4950,"KRN","B",.5,.5)
+
+"BLD",4950,"KRN","B",.84,.84)
+
+"BLD",4950,"KRN","B",3.6,3.6)
+
+"BLD",4950,"KRN","B",3.8,3.8)
+
+"BLD",4950,"KRN","B",9.2,9.2)
+
+"BLD",4950,"KRN","B",9.8,9.8)
+
+"BLD",4950,"KRN","B",19,19)
+
+"BLD",4950,"KRN","B",19.1,19.1)
+
+"BLD",4950,"KRN","B",101,101)
+
+"BLD",4950,"KRN","B",409.61,409.61)
+
+"BLD",4950,"KRN","B",771,771)
+
+"BLD",4950,"KRN","B",870,870)
+
+"BLD",4950,"KRN","B",8989.51,8989.51)
+
+"BLD",4950,"KRN","B",8989.52,8989.52)
+
+"BLD",4950,"KRN","B",8994,8994)
+
+"BLD",4950,"QUES",0)
+^9.62^^
+"BLD",4950,"REQB",0)
+^9.611^^
+"KRN",.4,2713,-1)
+0^1
+"KRN",.4,2713,0)
+MAG REPORT 1^3060713.1702^@^2005^^@^3060713
+"KRN",.4,2713,"DCL","2005^3")
+!
+"KRN",.4,2713,"DNP")
+1
+"KRN",.4,2713,"F",2)
+3;"";R20~
+"KRN",.4,2713,"H")
+Image Type Count by User
+"KRN",.4,2714,-1)
+0^2
+"KRN",.4,2714,0)
+MAG REPORT 2^3060713.1704^@^2005^^@^3060713
+"KRN",.4,2714,"DCL","2005^3")
+!
+"KRN",.4,2714,"F",2)
+7;L17~3;C20;L8~42;C31;L15~8;C50;L30~
+"KRN",.4,2714,"H")
+Document Count
+"KRN",.4,2715,-1)
+0^3
+"KRN",.4,2715,0)
+MAG REPORT 3^3060713.1705^@^2005^^@^3061128
+"KRN",.4,2715,"DCL","2005^10")
+!
+"KRN",.4,2715,"F",1)
+5;L35;N~-2,^DPT(^^S I(0,0)=D0 S DIP(1)=$S($D(^MAG(2005,D0,0)):^(0),1:"") S X=$P(DIP(1),U,7),X=X S D(0)=+X;Z;"PAT:"~-2,.0905;"SSN";C38;N~10;"DOC";C45~
+"KRN",.4,2715,"F",2)
+S DIP(1)=$S($D(^MAG(2005,D0,2)):^(2),1:"") S X=$P(DIP(1),U,1) S:X X=$E(X,4,5)_"/"_$E(X,6,7)_"/"_$E(X,2,3) W X K DIP;"DATE";C108;N;L8;Z;"NUMDATE(#7)"~
+"KRN",.4,2715,"F",3)
+8;"SCANNED BY";C118;N;L15~
+"KRN",.4,2715,"H")
+Package Index Contains 'Note'
+"KRN",.4,2716,-1)
+0^4
+"KRN",.4,2716,0)
+MAG REPORT 4^3061121.0813^@^2005^^@^3061128
+"KRN",.4,2716,"DCL","2005^42")
+!
+"KRN",.4,2716,"F",1)
+5;L35~-2,^DPT(^^S I(0,0)=D0 S DIP(1)=$S($D(^MAG(2005,D0,0)):^(0),1:"") S X=$P(DIP(1),U,7),X=X S D(0)=+X;Z;"PAT:"~-2,.0905;"SSN";C38~42;C45~
+"KRN",.4,2716,"F",2)
+S DIP(1)=$S($D(^MAG(2005,D0,2)):^(2),1:"") S X=$P(DIP(1),U,1) S:X X=$E(X,4,5)_"/"_$E(X,6,7)_"/"_$E(X,2,3) W X K DIP;N;"Date";C70;Z;"NUMDATE(#7)"~.06,.01~
+"KRN",.4,2716,"H")
+MEANS TEST
+"KRN",.401,1570,-1)
+0^1
+"KRN",.401,1570,0)
+MAG REPORT 1^3060713.0827^@^2005^^@^3061013
+"KRN",.401,1570,2,0)
+^.4014^4^4
+"KRN",.401,1570,2,1,0)
+2005^^ACQUISITION SITE^+#".05^^^^^^4
+"KRN",.401,1570,2,1,"ASK")
+1
+"KRN",.401,1570,2,1,"CM")
+S Y(1)=$S($D(^MAG(2005,D0,100)):^(100),1:"") S X=$P($G(^DIC(4,+$P(Y(1),U,3),0)),U) I D0>0 S DISX(1)=X
+"KRN",.401,1570,2,1,"F")
+@z^A
+"KRN",.401,1570,2,1,"GET")
+S Y(1)=$S($D(^MAG(2005,D0,100)):^(100),1:"") S X=$P($G(^DIC(4,+$P(Y(1),U,3),0)),U) I D0>0 S DISX(1)=X
+"KRN",.401,1570,2,1,"IX")
+^MAG(2005,"D",^MAG(2005,^2
+"KRN",.401,1570,2,1,"PTRIX")
+^DIC(4,"B",
+"KRN",.401,1570,2,1,"QCON")
+I (DISX(1)]]"@z")&(DISX(1)']]"ZZZ")
+"KRN",.401,1570,2,1,"T")
+ZZZ^ZZZ
+"KRN",.401,1570,2,1,"TXT")
+ACQUISITION SITE from A to ZZZ
+"KRN",.401,1570,2,2,0)
+2005^7^DATE/TIME IMAGE SAVED^'@^^^^^^1
+"KRN",.401,1570,2,2,"ASK")
+1
+"KRN",.401,1570,2,2,"F")
+3000100.999999^Jan 1,2000^Jan 1,2000
+"KRN",.401,1570,2,2,"GET")
+S DISX(2)=$P($G(^MAG(2005,D0,2)),U)
+"KRN",.401,1570,2,2,"QCON")
+I (DISX(2)]]3000100.999999)&(DISX(2)']]3060411.24)
+"KRN",.401,1570,2,2,"T")
+3060411.24^Apr 11,2006@2400^Apr 11,2006@24:00
+"KRN",.401,1570,2,2,"TXT")
+DATE/TIME IMAGE SAVED from Jan 1,2000 to Apr 11,2006@24:00
+"KRN",.401,1570,2,3,0)
+2005^^IMAGE SAVE BY^+"8^;S3;""^^^^^4
+"KRN",.401,1570,2,3,"ASK")
+1
+"KRN",.401,1570,2,3,"CM")
+S Y(1)=$S($D(^MAG(2005,D0,2)):^(2),1:"") S X=$P($G(^VA(200,+$P(Y(1),U,2),0)),U) I D0>0 S DISX(3)=X
+"KRN",.401,1570,2,3,"F")
+@z^A
+"KRN",.401,1570,2,3,"GET")
+S Y(1)=$S($D(^MAG(2005,D0,2)):^(2),1:"") S X=$P($G(^VA(200,+$P(Y(1),U,2),0)),U) I D0>0 S DISX(3)=X
+"KRN",.401,1570,2,3,"QCON")
+I (DISX(3)]]"@z")&(DISX(3)']]"ZZZZ")
+"KRN",.401,1570,2,3,"T")
+ZZZZ^ZZZZ
+"KRN",.401,1570,2,3,"TXT")
+IMAGE SAVE BY from A to ZZZZ
+"KRN",.401,1570,2,4,0)
+2005^^OBJECT TYPE^+"3^;S;"";C1^^^^^4
+"KRN",.401,1570,2,4,"ASK")
+1
+"KRN",.401,1570,2,4,"CM")
+S Y(1)=$S($D(^MAG(2005,D0,0)):^(0),1:"") S X=$P($G(^MAG(2005.02,+$P(Y(1),U,6),0)),U) I D0>0 S DISX(4)=X
+"KRN",.401,1570,2,4,"F")
+@z^A
+"KRN",.401,1570,2,4,"GET")
+S Y(1)=$S($D(^MAG(2005,D0,0)):^(0),1:"") S X=$P($G(^MAG(2005.02,+$P(Y(1),U,6),0)),U) I D0>0 S DISX(4)=X
+"KRN",.401,1570,2,4,"QCON")
+I (DISX(4)]]"@z")&(DISX(4)']]"ZZZZ")
+"KRN",.401,1570,2,4,"T")
+ZZZZ^ZZZZ
+"KRN",.401,1570,2,4,"TXT")
+OBJECT TYPE from A to ZZZZ
+"KRN",.401,1570,2,"B",2005,1)
+
+"KRN",.401,1570,2,"B",2005,2)
+
+"KRN",.401,1570,2,"B",2005,3)
+
+"KRN",.401,1570,2,"B",2005,4)
+
+"KRN",.401,1570,"DIPT")
+
+"KRN",.401,1571,-1)
+0^2
+"KRN",.401,1571,0)
+MAG REPORT 2^3060713.0752^@^2005^^@^3060713
+"KRN",.401,1571,2,0)
+^.4014^3^3
+"KRN",.401,1571,2,1,0)
+2005^^ACQUISITION SITE^+#".05^^^^^^4
+"KRN",.401,1571,2,1,"ASK")
+1
+"KRN",.401,1571,2,1,"CM")
+S Y(1)=$S($D(^MAG(2005,D0,100)):^(100),1:"") S X=$P($G(^DIC(4,+$P(Y(1),U,3),0)),U) I D0>0 S DISX(1)=X
+"KRN",.401,1571,2,1,"F")
+@z^A
+"KRN",.401,1571,2,1,"GET")
+S Y(1)=$S($D(^MAG(2005,D0,100)):^(100),1:"") S X=$P($G(^DIC(4,+$P(Y(1),U,3),0)),U) I D0>0 S DISX(1)=X
+"KRN",.401,1571,2,1,"IX")
+^MAG(2005,"D",^MAG(2005,^2
+"KRN",.401,1571,2,1,"PTRIX")
+^DIC(4,"B",
+"KRN",.401,1571,2,1,"QCON")
+I (DISX(1)]]"@z")&(DISX(1)']]"ZZZ")
+"KRN",.401,1571,2,1,"SER")
+0.0204^0.0200
+"KRN",.401,1571,2,1,"T")
+ZZZ^ZZZ
+"KRN",.401,1571,2,1,"TXT")
+ACQUISITION SITE from A to ZZZ
+"KRN",.401,1571,2,2,0)
+2005^7^DATE/TIME IMAGE SAVED^@^^^^^^1
+"KRN",.401,1571,2,2,"ASK")
+1
+"KRN",.401,1571,2,2,"F")
+3000100.999999^Jan 1,2000^Jan 1,2000
+"KRN",.401,1571,2,2,"GET")
+S DISX(2)=$P($G(^MAG(2005,D0,2)),U)
+"KRN",.401,1571,2,2,"QCON")
+I (DISX(2)]]3000100.999999)&(DISX(2)']]3060411.24)
+"KRN",.401,1571,2,2,"SER")
+0.0900^0.0900
+"KRN",.401,1571,2,2,"T")
+3060411.24^Apr 11,2006@2400^Apr 11,2006@24:00
+"KRN",.401,1571,2,2,"TXT")
+DATE/TIME IMAGE SAVED from Jan 1,2000 to Apr 11,2006@24:00
+"KRN",.401,1571,2,3,0)
+2005^^OBJECT TYPE^"3^^^^^^4
+"KRN",.401,1571,2,3,"CM")
+S Y(1)=$S($D(^MAG(2005,D0,0)):^(0),1:"") S X=$P($G(^MAG(2005.02,+$P(Y(1),U,6),0)),U) I D0>0 S DISX(3)=X
+"KRN",.401,1571,2,3,"F")
+DOCUMENSz^DOCUMENT
+"KRN",.401,1571,2,3,"GET")
+S Y(1)=$S($D(^MAG(2005,D0,0)):^(0),1:"") S X=$P($G(^MAG(2005.02,+$P(Y(1),U,6),0)),U) I D0>0 S DISX(3)=X
+"KRN",.401,1571,2,3,"QCON")
+I DISX(3)="DOCUMENT"
+"KRN",.401,1571,2,3,"T")
+DOCUMENT^DOCUMENT
+"KRN",.401,1571,2,3,"TXT")
+OBJECT TYPE equals DOCUMENT
+"KRN",.401,1571,2,"B",2005,1)
+
+"KRN",.401,1571,2,"B",2005,2)
+
+"KRN",.401,1571,2,"B",2005,3)
+
+"KRN",.401,1572,-1)
+0^3
+"KRN",.401,1572,0)
+MAG REPORT 3^3060713.08^@^2005^^@^3061128
+"KRN",.401,1572,2,0)
+^.4014^5^5
+"KRN",.401,1572,2,1,0)
+2005^^ACQUISITION SITE^+#".05^^^^^^4
+"KRN",.401,1572,2,1,"ASK")
+1
+"KRN",.401,1572,2,1,"CM")
+S Y(1)=$S($D(^MAG(2005,D0,100)):^(100),1:"") S X=$P($G(^DIC(4,+$P(Y(1),U,3),0)),U) I D0>0 S DISX(1)=X
+"KRN",.401,1572,2,1,"F")
+@z^A
+"KRN",.401,1572,2,1,"GET")
+S Y(1)=$S($D(^MAG(2005,D0,100)):^(100),1:"") S X=$P($G(^DIC(4,+$P(Y(1),U,3),0)),U) I D0>0 S DISX(1)=X
+"KRN",.401,1572,2,1,"IX")
+^MAG(2005,"D",^MAG(2005,^2
+"KRN",.401,1572,2,1,"PTRIX")
+^DIC(4,"B",
+"KRN",.401,1572,2,1,"QCON")
+I (DISX(1)]]"@z")&(DISX(1)']]"ZZZ")
+"KRN",.401,1572,2,1,"SER")
+0.0000^0.0000
+"KRN",.401,1572,2,1,"T")
+ZZZ^ZZZ
+"KRN",.401,1572,2,1,"TXT")
+ACQUISITION SITE from A to ZZZ
+"KRN",.401,1572,2,2,0)
+2005^7^DATE/TIME IMAGE SAVED^@^^^^^^1
+"KRN",.401,1572,2,2,"ASK")
+1
+"KRN",.401,1572,2,2,"F")
+2600100.999999^Jan 1,1960^Jan 1,1960
+"KRN",.401,1572,2,2,"GET")
+S DISX(2)=$P($G(^MAG(2005,D0,2)),U)
+"KRN",.401,1572,2,2,"QCON")
+I (DISX(2)]]2600100.999999)&(DISX(2)']]3060606.24)
+"KRN",.401,1572,2,2,"SER")
+0.0000^0.0000
+"KRN",.401,1572,2,2,"T")
+3060606.24^Jun 6,2006@2400^Jun 6,2006@24:00
+"KRN",.401,1572,2,2,"TXT")
+DATE/TIME IMAGE SAVED from Jan 1,1960 to Jun 6,2006@24:00
+"KRN",.401,1572,2,3,0)
+2005^^IMAGE SAVE BY^@"8^^^^^^4
+"KRN",.401,1572,2,3,"CM")
+S Y(1)=$S($D(^MAG(2005,D0,2)):^(2),1:"") S X=$P($G(^VA(200,+$P(Y(1),U,2),0)),U) I D0>0 S DISX(3)=X
+"KRN",.401,1572,2,3,"F")
+@z^A
+"KRN",.401,1572,2,3,"GET")
+S Y(1)=$S($D(^MAG(2005,D0,2)):^(2),1:"") S X=$P($G(^VA(200,+$P(Y(1),U,2),0)),U) I D0>0 S DISX(3)=X
+"KRN",.401,1572,2,3,"QCON")
+I (DISX(3)]]"@z")&(DISX(3)']]"ZZZZ")
+"KRN",.401,1572,2,3,"T")
+ZZZZ^ZZZZ
+"KRN",.401,1572,2,3,"TXT")
+IMAGE SAVE BY from A to ZZZZ
+"KRN",.401,1572,2,4,0)
+2005^10^SHORT DESCRIPTION^'+^^^^^^4
+"KRN",.401,1572,2,4,"F")
+@z^A
+"KRN",.401,1572,2,4,"GET")
+S DISX(4)=$P($G(^MAG(2005,D0,2)),U,4)
+"KRN",.401,1572,2,4,"QCON")
+I (DISX(4)]]"@z")&(DISX(4)']]"ZZZZ")
+"KRN",.401,1572,2,4,"SER")
+0.4300^0.4300
+"KRN",.401,1572,2,4,"T")
+ZZZZ^ZZZZ
+"KRN",.401,1572,2,4,"TXT")
+SHORT DESCRIPTION from A to ZZZZ
+"KRN",.401,1572,2,5,0)
+2005^^PACKAGE INDEX["NOTE"^]"@B^;L1^^^^^4
+"KRN",.401,1572,2,5,"CM")
+S Y(2)=$C(59)_$P($G(^DD(2005,40,0)),U,3),Y(1)=$S($D(^MAG(2005,D0,40)):^(40),1:"") S X=$P($P(Y(2),$C(59)_$P(Y(1),U,1)_":",2),$C(59))["NOTE" I D0>0 S DISX(5)=X
+"KRN",.401,1572,2,5,"F")
+0
+"KRN",.401,1572,2,5,"GET")
+S Y(2)=$C(59)_$P($G(^DD(2005,40,0)),U,3),Y(1)=$S($D(^MAG(2005,D0,40)):^(40),1:"") S X=$P($P(Y(2),$C(59)_$P(Y(1),U,1)_":",2),$C(59))["NOTE" I D0>0 S DISX(5)=X
+"KRN",.401,1572,2,5,"QCON")
+I DISX(5)
+"KRN",.401,1572,2,5,"T")
+1
+"KRN",.401,1572,2,5,"TXT")
+PACKAGE INDEX[""NOTE""
+"KRN",.401,1572,2,"B",2005,1)
+
+"KRN",.401,1572,2,"B",2005,2)
+
+"KRN",.401,1572,2,"B",2005,3)
+
+"KRN",.401,1572,2,"B",2005,4)
+
+"KRN",.401,1572,2,"B",2005,5)
+
+"KRN",.401,1573,-1)
+0^4
+"KRN",.401,1573,0)
+MAG REPORT 4^3061121.0812^@^2005^^@^3061128
+"KRN",.401,1573,2,0)
+^.4014^4^4
+"KRN",.401,1573,2,1,0)
+2005^^ACQUISITION SITE^+#".05^^^^^^4
+"KRN",.401,1573,2,1,"ASK")
+1
+"KRN",.401,1573,2,1,"CM")
+S Y(1)=$S($D(^MAG(2005,D0,100)):^(100),1:"") S X=$P($G(^DIC(4,+$P(Y(1),U,3),0)),U) I D0>0 S DISX(1)=X
+"KRN",.401,1573,2,1,"F")
+@z^A
+"KRN",.401,1573,2,1,"GET")
+S Y(1)=$S($D(^MAG(2005,D0,100)):^(100),1:"") S X=$P($G(^DIC(4,+$P(Y(1),U,3),0)),U) I D0>0 S DISX(1)=X
+"KRN",.401,1573,2,1,"IX")
+^MAG(2005,"D",^MAG(2005,^2
+"KRN",.401,1573,2,1,"PTRIX")
+^DIC(4,"B",
+"KRN",.401,1573,2,1,"QCON")
+I (DISX(1)]]"@z")&(DISX(1)']]"ZZZ")
+"KRN",.401,1573,2,1,"SER")
+0.0000^0.0000
+"KRN",.401,1573,2,1,"T")
+ZZZ^ZZZ
+"KRN",.401,1573,2,1,"TXT")
+ACQUISITION SITE from A to ZZZ
+"KRN",.401,1573,2,2,0)
+2005^7^DATE/TIME IMAGE SAVED^'^^^^^^1
+"KRN",.401,1573,2,2,"ASK")
+1
+"KRN",.401,1573,2,2,"F")
+2600100.999999^Jan 1,1960^Jan 1,1960
+"KRN",.401,1573,2,2,"GET")
+S DISX(2)=$P($G(^MAG(2005,D0,2)),U)
+"KRN",.401,1573,2,2,"QCON")
+I (DISX(2)]]2600100.999999)&(DISX(2)']]3060606.24)
+"KRN",.401,1573,2,2,"SER")
+0.0000^0.0000
+"KRN",.401,1573,2,2,"T")
+3060606.24^Jun 6,2006@2400^Jun 6,2006@24:00
+"KRN",.401,1573,2,2,"TXT")
+DATE/TIME IMAGE SAVED from Jan 1,1960 to Jun 6,2006@24:00
+"KRN",.401,1573,2,3,0)
+2005.01^^EXPORT LOCATION^".01^^^^^^4
+"KRN",.401,1573,2,3,1,0)
+^.40141^1^1
+"KRN",.401,1573,2,3,1,1,0)
+2005^5
+"KRN",.401,1573,2,3,1,"B",2005,1)
+
+"KRN",.401,1573,2,3,"CM")
+S Y(1)=$S($D(^MAG(2005,D0,5,D1,0)):^(0),1:"") S X=$P($G(^MAG(2005.2,+$P(Y(1),U,1),0)),U) I D1>0 S DISX(3)=X
+"KRN",.401,1573,2,3,"F")
+?z^@
+"KRN",.401,1573,2,3,"GET")
+S Y(1)=$S($D(^MAG(2005,D0,5,D1,0)):^(0),1:"") S X=$P($G(^MAG(2005.2,+$P(Y(1),U,1),0)),U) I D1>0 S DISX(3)=X
+"KRN",.401,1573,2,3,"QCON")
+I DISX(3)']]"ZZZ"
+"KRN",.401,1573,2,3,"T")
+ZZZ^ZZZ
+"KRN",.401,1573,2,3,"TXT")
+EXPORT LOCATION to ZZZ (includes nulls)
+"KRN",.401,1573,2,4,0)
+2005^^TYPE INDEX^+"42^^^^^^4
+"KRN",.401,1573,2,4,"CM")
+S Y(1)=$S($D(^MAG(2005,D0,40)):^(40),1:"") S X=$P($G(^MAG(2005.83,+$P(Y(1),U,3),0)),U) I D0>0 S DISX(4)=X
+"KRN",.401,1573,2,4,"F")
+MEANRz^MEANS
+"KRN",.401,1573,2,4,"GET")
+S Y(1)=$S($D(^MAG(2005,D0,40)):^(40),1:"") S X=$P($G(^MAG(2005.83,+$P(Y(1),U,3),0)),U) I D0>0 S DISX(4)=X
+"KRN",.401,1573,2,4,"QCON")
+I (DISX(4)]]"MEANRz")&(DISX(4)']]"MEANSZ")
+"KRN",.401,1573,2,4,"T")
+MEANSZ^MEANSZ
+"KRN",.401,1573,2,4,"TXT")
+TYPE INDEX from MEANS to MEANSZ
+"KRN",.401,1573,2,"B",2005,1)
+
+"KRN",.401,1573,2,"B",2005,2)
+
+"KRN",.401,1573,2,"B",2005,4)
+
+"KRN",.401,1573,2,"B",2005.01,3)
+
+"KRN",19,20680,-1)
+2^7
+"KRN",19,20680,0)
+MAG SYS MENU^Imaging System Manager Menu^^M^133^MAG SYSTEM^^^^^^454
+"KRN",19,20680,10,0)
+^19.01IP^15^14
+"KRN",19,20680,10,15,0)
+22807
+"KRN",19,20680,10,15,"^")
+MAG REPORT MENU
+"KRN",19,20680,"U")
+IMAGING SYSTEM MANAGER MENU
+"KRN",19,22803,-1)
+0^2
+"KRN",19,22803,0)
+MAG REPORT 1^Image Type Count by User^^P^^^^^^^^IMAGING
+"KRN",19,22803,1,0)
+^^32^32^3060725^
+"KRN",19,22803,1,1,0)
+This is a report of the Image file (#2005) of Image Types for a 
+"KRN",19,22803,1,2,0)
+'From' and 'To' Acquisition Site and 'From' and 'To' Date/Time Image Saved
+"KRN",19,22803,1,3,0)
+date range.  The report will give totals for each Object Type, for each
+"KRN",19,22803,1,4,0)
+user, within the date range.  A grand total of images within the date
+"KRN",19,22803,1,5,0)
+range is given at the end of the report.
+"KRN",19,22803,1,6,0)
+ 
+"KRN",19,22803,1,7,0)
+Sorted by:
+"KRN",19,22803,1,8,0)
+ 
+"KRN",19,22803,1,9,0)
+.   Acquisition Site
+"KRN",19,22803,1,10,0)
+ 
+"KRN",19,22803,1,11,0)
+        You will be asked for a From and To Acquisition Site.
+"KRN",19,22803,1,12,0)
+ 
+"KRN",19,22803,1,13,0)
+.  Date/Time Image Saved
+"KRN",19,22803,1,14,0)
+ 
+"KRN",19,22803,1,15,0)
+        You will be asked for a From and To date.
+"KRN",19,22803,1,16,0)
+ 
+"KRN",19,22803,1,17,0)
+.  Image Saved By
+"KRN",19,22803,1,18,0)
+ 
+"KRN",19,22803,1,19,0)
+        Enter the exact name of the User at the 'From' and 'To'
+"KRN",19,22803,1,20,0)
+        prompts to get a report for a single User.
+"KRN",19,22803,1,21,0)
+ 
+"KRN",19,22803,1,22,0)
+        Or, enter 'A' at the 'From' prompt and 'ZZZ' at the 'To'
+"KRN",19,22803,1,23,0)
+        prompt for all Users.
+"KRN",19,22803,1,24,0)
+ 
+"KRN",19,22803,1,25,0)
+.  Object Type  (Image Type)
+"KRN",19,22803,1,26,0)
+ 
+"KRN",19,22803,1,27,0)
+        Enter the exact name of the Image Type in the 'From' and
+"KRN",19,22803,1,28,0)
+        'To' prompts, to get a report for a single Object Type, 
+"KRN",19,22803,1,29,0)
+        ex., DOCUMENT.
+"KRN",19,22803,1,30,0)
+ 
+"KRN",19,22803,1,31,0)
+        Or, enter 'A' at the 'From' prompt and 'ZZZ' at the 'To'
+"KRN",19,22803,1,32,0)
+        prompt for all Object Types.
+"KRN",19,22803,30)
+
+"KRN",19,22803,60)
+MAG(2005,
+"KRN",19,22803,63)
+[MAG REPORT 1]
+"KRN",19,22803,64)
+[MAG REPORT 1]
+"KRN",19,22803,67)
+
+"KRN",19,22803,72)
+
+"KRN",19,22803,79)
+^^1
+"KRN",19,22803,"U")
+IMAGE TYPE COUNT BY USER
+"KRN",19,22804,-1)
+0^3
+"KRN",19,22804,0)
+MAG REPORT 2^Document Count^^P^^^^^^^^IMAGING
+"KRN",19,22804,1,0)
+^^16^16^3060725^
+"KRN",19,22804,1,1,0)
+This is a report of the Image file (#2005) with images having an Image
+"KRN",19,22804,1,2,0)
+Type of 'DOCUMENT'.  A 'From'and 'To' Acquisition Site and 'From' and 'To'
+"KRN",19,22804,1,3,0)
+Date/time Image Saved will be asked.  Output includes: Date/Time Image
+"KRN",19,22804,1,4,0)
+Saved, Object Type (DOCUMENT), Type Index, and Image Saved By.  There will
+"KRN",19,22804,1,5,0)
+be a total of the count of images that meet the sort criteria.
+"KRN",19,22804,1,6,0)
+ 
+"KRN",19,22804,1,7,0)
+You will be asked:
+"KRN",19,22804,1,8,0)
+ 
+"KRN",19,22804,1,9,0)
+.   Acquisition Site
+"KRN",19,22804,1,10,0)
+ 
+"KRN",19,22804,1,11,0)
+        You will be asked for a From and To Acquisition Site.
+"KRN",19,22804,1,12,0)
+ 
+"KRN",19,22804,1,13,0)
+ 
+"KRN",19,22804,1,14,0)
+.  Date/Time Image Saved
+"KRN",19,22804,1,15,0)
+ 
+"KRN",19,22804,1,16,0)
+        You will be asked for a From and To date.
+"KRN",19,22804,60)
+MAG(2005,
+"KRN",19,22804,63)
+[MAG REPORT 2]
+"KRN",19,22804,64)
+[MAG REPORT 2]
+"KRN",19,22804,79)
+^^1
+"KRN",19,22804,"U")
+DOCUMENT COUNT
+"KRN",19,22805,-1)
+0^4
+"KRN",19,22805,0)
+MAG REPORT 3^Package Index Contains 'Note'^^P^^^^^^^^IMAGING^^1
+"KRN",19,22805,1,0)
+^^11^11^3060725^
+"KRN",19,22805,1,1,0)
+This is a report of the Image file (#2005) sorted by  'From' and 'To'
+"KRN",19,22805,1,2,0)
+Acquisition Site and 'From' and 'To' Date/Time Image Saved date range,
+"KRN",19,22805,1,3,0)
+Short Description, and Package index containing  NOTE.  Report detail will
+"KRN",19,22805,1,4,0)
+include: Patient Name, SSN, Short Description, Date/Time Image Saved, and
+"KRN",19,22805,1,5,0)
+Image Saved by.  Sub-counts and counts are given per Scanned By, with
+"KRN",19,22805,1,6,0)
+Short Description, within Patient.
+"KRN",19,22805,1,7,0)
+ 
+"KRN",19,22805,1,8,0)
+ 
+"KRN",19,22805,1,9,0)
+You will be asked for the Acquisition Site 'From' and 'To' range.
+"KRN",19,22805,1,10,0)
+ 
+"KRN",19,22805,1,11,0)
+You will be asked for the Image Date/time Saved 'From' and 'To' date.
+"KRN",19,22805,20)
+W !!!,"Right Margin for this report is 132",!!!
+"KRN",19,22805,60)
+MAG(2005,
+"KRN",19,22805,63)
+[MAG REPORT 3]
+"KRN",19,22805,64)
+[MAG REPORT 3]
+"KRN",19,22805,72)
+
+"KRN",19,22805,79)
+^^1
+"KRN",19,22805,"U")
+PACKAGE INDEX CONTAINS 'NOTE'
+"KRN",19,22806,-1)
+0^5
+"KRN",19,22806,0)
+MAG REPORT 4^MEANS TEST^^P^^^^^^^^IMAGING^^1
+"KRN",19,22806,1,0)
+^^9^9^3061128^
+"KRN",19,22806,1,1,0)
+This is a report of the Image file (#2005) sorted by  'From' and 'To'
+"KRN",19,22806,1,2,0)
+Acquisition Site and 'From' and 'To' Date/Time Image Saved date range, and
+"KRN",19,22806,1,3,0)
+Type Index = MEANS TEST.  Report detail will include: Patient Name, SSN,
+"KRN",19,22806,1,4,0)
+Descriptive Category, Date/Time Image Saved and Export Location.
+"KRN",19,22806,1,5,0)
+ 
+"KRN",19,22806,1,6,0)
+You will be asked for the Acquisition Site 'From' and 'To' range.
+"KRN",19,22806,1,7,0)
+ 
+"KRN",19,22806,1,8,0)
+ 
+"KRN",19,22806,1,9,0)
+You will be asked for the Image Date/time Saved 'From' and 'To' date.
+"KRN",19,22806,20)
+W !!!,"Right Margin for this report is 132",!!!
+"KRN",19,22806,60)
+MAG(2005,
+"KRN",19,22806,63)
+[MAG REPORT 4]
+"KRN",19,22806,64)
+[MAG REPORT 4]
+"KRN",19,22806,79)
+^^1
+"KRN",19,22806,"U")
+MEANS TEST
+"KRN",19,22807,-1)
+0^6
+"KRN",19,22807,0)
+MAG REPORT MENU^Imaging Site Reports^^M^^^^^^^^IMAGING
+"KRN",19,22807,1,0)
+^19.06^3^3^3061201^^^^
+"KRN",19,22807,1,1,0)
+ This is a menu of a compilation of Imaging Site Reports that
+"KRN",19,22807,1,2,0)
+ are used at sites and have been given to the Imaging department to review and
+"KRN",19,22807,1,3,0)
+ distribute to all Imaging sites.
+"KRN",19,22807,10,0)
+^19.01IP^4^4
+"KRN",19,22807,10,1,0)
+22803
+"KRN",19,22807,10,1,"^")
+MAG REPORT 1
+"KRN",19,22807,10,2,0)
+22804
+"KRN",19,22807,10,2,"^")
+MAG REPORT 2
+"KRN",19,22807,10,3,0)
+22805
+"KRN",19,22807,10,3,"^")
+MAG REPORT 3
+"KRN",19,22807,10,4,0)
+22806
+"KRN",19,22807,10,4,"^")
+MAG REPORT 4
+"KRN",19,22807,99)
+60600,37011
+"KRN",19,22807,"U")
+IMAGING SITE REPORTS
+"MBREQ")
+0
+"ORD",5,.4)
+.4;5;;;EDEOUT^DIFROMSO(.4,DA,"",XPDA);FPRE^DIFROMSI(.4,"",XPDA);EPRE^DIFROMSI(.4,DA,$E("N",$G(XPDNEW)),XPDA,"",OLDA);;EPOST^DIFROMSI(.4,DA,"",XPDA);DEL^DIFROMSK(.4,"",%)
+"ORD",5,.4,0)
+PRINT TEMPLATE
+"ORD",6,.401)
+.401;6;;;EDEOUT^DIFROMSO(.401,DA,"",XPDA);FPRE^DIFROMSI(.401,"",XPDA);EPRE^DIFROMSI(.401,DA,$E("N",$G(XPDNEW)),XPDA,"",OLDA);;EPOST^DIFROMSI(.401,DA,"",XPDA);DEL^DIFROMSK(.401,"",%)
+"ORD",6,.401,0)
+SORT TEMPLATE
+"ORD",18,19)
+19;18;;;OPT^XPDTA;OPTF1^XPDIA;OPTE1^XPDIA;OPTF2^XPDIA;;OPTDEL^XPDIA
+"ORD",18,19,0)
+OPTION
+"QUES","XPF1",0)
+Y
+"QUES","XPF1","??")
+^D REP^XPDH
+"QUES","XPF1","A")
+Shall I write over your |FLAG| File
+"QUES","XPF1","B")
+YES
+"QUES","XPF1","M")
+D XPF1^XPDIQ
+"QUES","XPF2",0)
+Y
+"QUES","XPF2","??")
+^D DTA^XPDH
+"QUES","XPF2","A")
+Want my data |FLAG| yours
+"QUES","XPF2","B")
+YES
+"QUES","XPF2","M")
+D XPF2^XPDIQ
+"QUES","XPI1",0)
+YO
+"QUES","XPI1","??")
+^D INHIBIT^XPDH
+"QUES","XPI1","A")
+Want KIDS to INHIBIT LOGONs during the install
+"QUES","XPI1","B")
+YES
+"QUES","XPI1","M")
+D XPI1^XPDIQ
+"QUES","XPM1",0)
+PO^VA(200,:EM
+"QUES","XPM1","??")
+^D MG^XPDH
+"QUES","XPM1","A")
+Enter the Coordinator for Mail Group '|FLAG|'
+"QUES","XPM1","B")
+
+"QUES","XPM1","M")
+D XPM1^XPDIQ
+"QUES","XPO1",0)
+Y
+"QUES","XPO1","??")
+^D MENU^XPDH
+"QUES","XPO1","A")
+Want KIDS to Rebuild Menu Trees Upon Completion of Install
+"QUES","XPO1","B")
+YES
+"QUES","XPO1","M")
+D XPO1^XPDIQ
+"QUES","XPZ1",0)
+Y
+"QUES","XPZ1","??")
+^D OPT^XPDH
+"QUES","XPZ1","A")
+Want to DISABLE Scheduled Options, Menu Options, and Protocols
+"QUES","XPZ1","B")
+YES
+"QUES","XPZ1","M")
+D XPZ1^XPDIQ
+"QUES","XPZ2",0)
+Y
+"QUES","XPZ2","??")
+^D RTN^XPDH
+"QUES","XPZ2","A")
+Want to MOVE routines to other CPUs
+"QUES","XPZ2","B")
+NO
+"QUES","XPZ2","M")
+D XPZ2^XPDIQ
+"VER")
+8.0^22.0
+**END**
+**END**

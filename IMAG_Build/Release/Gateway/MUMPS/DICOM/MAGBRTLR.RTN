@@ -1,0 +1,76 @@
+MAGBRTLR ;WOIFO/EdM - Display Routing Rules ; 06/06/2005  13:02
+ ;;3.0;IMAGING;**11,51**;MAR 19, 2002;;JUN 16, 2006
+ ;; Per VHA Directive 2004-038, this routine should not be modified.
+ ;; +---------------------------------------------------------------+
+ ;; | Property of the US Government.                                |
+ ;; | No permission to copy or redistribute this software is given. |
+ ;; | Use of unreleased versions of this software requires the user |
+ ;; | to execute a written test agreement with the VistA Imaging    |
+ ;; | Development Office of the Department of Veterans Affairs,     |
+ ;; | telephone (301) 734-0100.                                     |
+ ;; | The Food and Drug Administration classifies this software as  |
+ ;; | a medical device.  As such, it may not be changed in any way. |
+ ;; | Modifications to this software may result in an adulterated   |
+ ;; | medical device under 21CFR820, the use of which is considered |
+ ;; | to be a violation of US Federal Statutes.                     |
+ ;; +---------------------------------------------------------------+
+ ;;
+ Q
+ ;
+SHOW N ANY,D0,D1,D2,P,S,V,X
+ S ANY=0
+ S D0=0 F  S D0=$O(^MAGDICOM(2006.59,D0)) Q:'D0  D
+ . W:'ANY !!,"Routing rules:" S ANY=1
+ . S D1=0 F  S D1=$O(^MAGDICOM(2006.59,D0,"ACTION",D1)) Q:'D1  D
+ . . W !!,$P(^MAGDICOM(2006.59,D0,"ACTION",D1,0),"^",1)
+ . . S P="(",D2=0 F  S D2=$O(^MAGDICOM(2006.59,D0,"ACTION",D1,1,D2)) Q:'D2  D
+ . . . W P S P="; "
+ . . . S X=^MAGDICOM(2006.59,D0,"ACTION",D1,1,D2,0)
+ . . . W $P(X,"^",1)
+ . . . W:$P(X,"^",2)'="" "=",$P(X,"^",2),"%"
+ . . . W:$P(X,"^",3)'="" ", max ",$P(X,"^",3)," per day"
+ . . . Q
+ . . W:P'="(" ")"
+ . . Q
+ . S D1=0 F  S D1=$O(^MAGDICOM(2006.59,D0,"CONDITION",D1)) Q:'D1  D
+ . . W !?5,"If: ",^MAGDICOM(2006.59,D0,"CONDITION",D1,0)
+ . . W ^MAGDICOM(2006.59,D0,"CONDITION",D1,"OPERATOR")
+ . . S V=$G(^MAGDICOM(2006.59,D0,"CONDITION",D1,"VALUE"))
+ . . S P="{",S=$J("",$X+1)
+ . . S D2=0 F  S D2=$O(^MAGDICOM(2006.59,D0,"CONDITION",D1,1,D2)) Q:'D2  D
+ . . . N B,E,I,M
+ . . . S V=V_P,P=","_$C(13,10)_S
+ . . . S B=$G(^MAGDICOM(2006.59,D0,"CONDITION",D1,1,D2,"BEGIN"))
+ . . . S E=$G(^MAGDICOM(2006.59,D0,"CONDITION",D1,1,D2,"END"))
+ . . . S M=$G(^MAGDICOM(2006.59,D0,"CONDITION",D1,1,D2,"MASK"))
+ . . . D SEP(16,17,":",.M,.B,.E)
+ . . . D SEP(14,15,":",.M,.B,.E)
+ . . . D SEP(11,13," at ",.M,.B,.E)
+ . . . D SEP(09,10,"/",.M,.B,.E)
+ . . . D SEP(07,08,"/",.M,.B,.E)
+ . . . S:$E(M,1,3)?3U $E(M,4)="Y"
+ . . . D:$E(M,5)?1U
+ . . . . S M=$E(M,1,4)_"C"_$E(M,5,99)
+ . . . . S B=$E(B,1,4)_$J($E(B,5)+17,2)_$E(B,6,99)
+ . . . . S E=$E(E,1,4)_$J($E(E,5)+17,2)_$E(E,6,99)
+ . . . . Q
+ . . . F I=1:1:$L(M) I $E(M,I)?1U,($E(B,I)'=" ")!(I=4) S V=V_$E(B,I)
+ . . . S V=V_" to "
+ . . . F I=1:1:$L(M) I $E(M,I)?1U,$E(E,I)'=" " S V=V_$E(E,I)
+ . . . Q
+ . . S:P'="{" V=V_"}" W V
+ . . Q
+ . S X=$G(^MAGDICOM(2006.59,D0,"PRIORITY"))
+ . W:X'="" !?5,"Priority: ",X
+ . S X=$G(^MAGDICOM(2006.59,D0,"PRIORSTUDY"))
+ . W:X'="" !?5,"Include Prior Studies: ",X
+ . Q
+ Q
+ ;
+SEP(F,T,S,M,B,E) N Y
+ Q:$E(M,F,T)'?.UP
+ S Y=$TR($J("",$L(S))," ","Y")
+ S M=$E(M,1,F)_Y_$E(M,T,$L(M))
+ S B=$E(B,1,F)_S_$E(B,T,$L(M))
+ S E=$E(E,1,F)_S_$E(E,T,$L(M))
+ Q

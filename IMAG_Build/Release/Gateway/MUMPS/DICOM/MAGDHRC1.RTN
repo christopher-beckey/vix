@@ -1,0 +1,144 @@
+MAGDHRC1 ;WOIFO/PMK - Read HL7 and generate DICOM ; 12/20/2006 08:31
+ ;;3.0;IMAGING;**11,30,54**;MAR 19, 2002;;OCT 28, 2009
+ ;; Per VHA Directive 2004-038, this routine should not be modified.
+ ;; +---------------------------------------------------------------+
+ ;; | Property of the US Government.                                |
+ ;; | No permission to copy or redistribute this software is given. |
+ ;; | Use of unreleased versions of this software requires the user |
+ ;; | to execute a written test agreement with the VistA Imaging    |
+ ;; | Development Office of the Department of Veterans Affairs,     |
+ ;; | telephone (301) 734-0100.                                     |
+ ;; | The Food and Drug Administration classifies this software as  |
+ ;; | a medical device.  As such, it may not be changed in any way. |
+ ;; | Modifications to this software may result in an adulterated   |
+ ;; | medical device under 21CFR820, the use of which is considered |
+ ;; | to be a violation of US Federal Statutes.                     |
+ ;; +---------------------------------------------------------------+
+ ;;
+ Q
+ ; M-to-M Broker Client
+ ;
+ENTRY(DEL) ; entry point from ^MAGDHRC to copy message from HL7MSG to ^TMP
+ ;
+ ; A Version 5.0 Radiology report HL7 message may apply to more than
+ ; one study at a time.
+ ;
+ ; The DICOM message can only support one study at a time.
+ ;
+ ; This routine creates individual HL7 messages, one for each study,
+ ; from which the DICOM messages are generated.
+ ;
+ N DEL2,DEL3,DEL4,DEL5 ; HL7 delimiters
+ N RECORD ;--- text of HL7 record
+ N I ;-------- loop counter
+ N MSGCOUNT ;- number of HL7 message segments
+ N OBR ;------ loop counter while traversing OBR segments
+ N OBRCOUNT ;- running counter for number of OBR segments
+ N OBRNUMB ;-- OBR segment number in message (may be more than one)
+ N OUTMSGNO ;- number of original message + (OBRcounter/100)
+ N MSGDATE ;-- message date/time
+ N NRECORDS ;- number of records in HL7 message
+ N SEGMENT ;-- HL7 Segment Type (3 letter abbreviation)
+ N STATE ;---- transition state (either "" or "OBR")
+ N ZERONODE ;- HL7 Message header
+ ;
+ K ^TMP("MAG",$J,"HL7") ; initialize destination global
+ ;
+ S MSGCOUNT=$P(@HL7MSG@(3),"^",3)
+ S RECORD=@HL7MSG@(4)
+ I $E(RECORD,1,3)'="MSH" D
+ . N MSG
+ . S MSG(1)="Error: BAD HL7 MESSAGE HEADER"
+ . S MSG(2)=""
+ . S MSG(3)="HL7 message header should start with ""MSH"","
+ . S MSG(4)="starts with """_$E(RECORD,1,3)_"""."
+ . D TRAPERR^MAGDSTRT(1,$T(+0),"DICOM TEXT GATEWAY -- HL7 DATA ERROR",.MSG)
+ . Q  ; Error trap does not return
+ S DEL=$E(RECORD,4),X=$P(RECORD,DEL,2)
+ F I=1:1:$L(X) S @("DEL"_(I+1))=$E(X,I)
+ ;
+ ; check for an ORU (observation result / unsolicited) message type
+ S ZERONODE=@HL7MSG@(2)
+ I $P(ZERONODE,"^",2)'="ORU" D COPYMSG Q  ; not a result message type
+ ;
+ S OBRCOUNT=0 ; count the number of OBR segments
+ F I=1:1:MSGCOUNT D  ;
+ . S RECORD=@HL7MSG@(I+3)
+ . S SEGMENT=$E(RECORD,1,3)
+ . I SEGMENT="OBR" S OBRCOUNT=OBRCOUNT+1
+ . Q
+ ;
+ I OBRCOUNT<2 D COPYMSG Q  ; not multiple studies, just copy the message
+ ;
+ ; there are multiple studies in the ^MAGDHL7 message
+ ; output each study as a separate HL7 message in ^TMP
+ ;
+ F OBR=1:1:OBRCOUNT D  ;
+ . S NRECORDS=0 ; record count
+ . S OBRNUMB=0,STATE=""
+ . S OUTMSGNO=HL7MSGNO+(OBR/100) ; output global has decimal fraction
+ . S ^TMP("MAG",$J,"HL7",OUTMSGNO,0)=@HL7MSG@(2)
+ . S MSGDATE=$P(@HL7MSG@(2),"^",1) ; message creation date
+ . F I=1:1:MSGCOUNT D  ;
+ . . S RECORD=@HL7MSG@(I+3)
+ . . S SEGMENT=$E(RECORD,1,3)
+ . . I STATE="",SEGMENT="OBR" S OBRNUMB=OBRNUMB+1,STATE="OBR"
+ . . I (STATE="")!(OBRNUMB=OBR) D
+ . . . ; copy the record to the output global
+ . . . S NRECORDS=NRECORDS+1
+ . . . S ^TMP("MAG",$J,"HL7",OUTMSGNO,1,NRECORDS,0)=RECORD
+ . . I STATE="OBR",SEGMENT="OBX" D  ;
+ . . . S STATE=""
+ . . . ; if $P(RECORD,DEL,1,4) does not equal "OBX^^CE^P~PROCEDURE~L" D
+ . . . S X="OBX"_DEL_DEL_"CE"_DEL_"P"_DEL2_"PROCEDURE"_DEL2_"L"
+ . . . I $P(RECORD,DEL,1,4)'=X D
+ . . . . W !!,"*** Missing OBX Procedure Segment -- HL7("
+ . . . . W HL7MSGNO,") ***"
+ . . . . Q
+ . . . I $E(@HL7MSG@(I+4))=DEL D  ;
+ . . . . W !!,"*** No continuation in OBX Procedure Segment -- HL7("
+ . . . . W HL7MSGNO,") ***"
+ . . . . Q
+ . . . Q
+ . . Q
+ . S X="^^"_NRECORDS_"^"_NRECORDS_"^"_MSGDATE
+ . S ^TMP("MAG",$J,"HL7",OUTMSGNO,1,0)=X ; computed value of @HL7MSG@(3)
+ . Q
+ Q
+ ;
+COPYMSG ; copy the entire message from ^MAGDHL7 to ^TMP
+ S ^TMP("MAG",$J,"HL7",HL7MSGNO,0)=@HL7MSG@(2)
+ S ^TMP("MAG",$J,"HL7",HL7MSGNO,1,0)=@HL7MSG@(3)
+ F I=1:1:MSGCOUNT S ^TMP("MAG",$J,"HL7",HL7MSGNO,1,I,0)=@HL7MSG@(I+3)
+ Q
+ ;
+HL7COPY ; from ^MAGDHRC to copy HL7 message from ^TMP to HL7RAW global array
+ N MORE ;----- Flag that indicates that there is a data to be concatenated
+ N PEEKABOO ;- look ahead to next record to see if it should be concatenated
+ N SEGMENT ;-- HL7 segment consisting of concatenated spanned records
+ N SEGCNT ;--- Index for segment continuation record
+ N I,J ;------ working variables
+ ;
+ ; VistA supports spanned HL7 records... look ahead to the next record
+ ; VistA breaks records when there is no more room for the next piece
+ ; Then, each additional portion of the record begins with a DEL
+ ; VistA also breaks fields arbitrarily when they are too long to fit
+ ; Then, the additional record does not begin with a segment id
+ ;
+ S (J,SEGCNT,MORE)=0
+ F I=1:1:$P(^TMP("MAG",$J,"HL7",MSGNO,1,0),"^",3) D
+ . S SEGMENT=^TMP("MAG",$J,"HL7",MSGNO,1,I,0)
+ . I 'MORE S J=J+1,@HL7RAW@(J)=SEGMENT,SEGCNT=0
+ . E  S SEGCNT=SEGCNT+1,@HL7RAW@(J,SEGCNT)=SEGMENT
+ . ;
+ . ; Look-ahead check for spanned records
+ . ; Quit if next record seems like it should be concatenated to current value
+ . S PEEKABOO=$G(^TMP("MAG",$J,"HL7",MSGNO,1,I+1,0)),MORE=0
+ . Q:PEEKABOO=""
+ . I $E(PEEKABOO,1)=UFS S MORE=1 Q  ; First kind (that is, like "|...")
+ . I $E(PEEKABOO,4)=UFS,$E(PEEKABOO,1,3)?1A2AN Q  ; Not second kind
+ . I PEEKABOO?1A2AN Q  ; Not second kind, just a segment id, nothing else
+ . S MORE=1
+ . Q
+ Q
+ ;

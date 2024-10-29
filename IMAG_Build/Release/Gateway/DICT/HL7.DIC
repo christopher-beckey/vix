@@ -1,0 +1,361 @@
+# HL7.dic, 25 March 2011
+# 3.0;IMAGING;**49**;Mar 19, 2002;Build 2201;Jun 29, 2011
+# Per VHA Directive 2004-038, this routine should not be modified.
+# +---------------------------------------------------------------+
+# | Property of the US Government.                                |
+# | No permission to copy or redistribute this software is given. |
+# | Use of unreleased versions of this software requires the user |
+# | to execute a written test agreement with the VistA Imaging    |
+# | Development Office of the Department of Veterans Affairs,     |
+# | telephone (301) 734-0100.                                     |
+# | The Food and Drug Administration classifies this software as  |
+# | a medical device.  As such, it may not be changed in any way. |
+# | Modifications to this software may result in an adulterated   |
+# | medical device under 21CFR820, the use of which is considered |
+# | to be a violation of US Federal Statutes.                     |
+# +---------------------------------------------------------------+
+#
+MSH|Message Header Segment
+1|Field Separator
+2|Encoding Characters
+3|Sending Application
+4|Sending Facility
+5|Receiving Application
+6|Receiving Facility
+7|Date/Time of Message
+8|Security
+9|Message Type
+10|Message Control ID
+11|Processing ID
+12|Version ID
+13|Sequence Number
+14|Continuation Pointer
+15|Accept Acknowledgement Type
+16|Application Acknowledgement Type
+17|Country Code
+18|Character Set
+19|Principal Language of Message
+20|Alternate Character Set Handling Scheme
+21|Conformance Statement ID
+#
+MSA|Message Acknowledgement Segment
+1|Acknowledgement Code
+2|Message Control ID
+3|Text Message
+4|Expected Sequence Number
+5|Delayed Acknowledgement Type
+6|Error Condition
+#
+ERR|Error Segment
+1|Error Code and Location
+#
+PID|Patient Identification Segment
+1|Set ID - Patient ID
+2|Patient ID
+3|Patient Identifier List
+4|Alternate Patient ID - PID
+5|Patient Name
+6|Mother's Maiden Name
+7|Date of Birth
+8|Sex
+9|Patient Alias
+10|Race
+11|Patient Address
+12|Country Code
+13|Phone Number - Home
+14|Phone Number - Business
+15|Language - Patient
+16|Marital Status
+17|Religion
+18|Patient Account Number
+19|SSN Number - Patient
+20|Driver's Lic Num - Patient
+21|Mother's Identifier
+22|Ethnic Group
+23|Birth Place
+24|Multiple Birth Indicator
+25|Birth Order
+26|Citizenship
+27|Veterans Military Status
+28|Nationality 
+29|Patient Death Date and Time
+30|Patient Death Indicator
+31|Identity Unknown Indicator
+32|Identity Reliability Code
+33|Last Update Date/Time
+34|Last Update Facility
+35|Species Code
+36|Breed Code
+37|Strain
+38|Production Class Code
+#
+PV1|Patient Visit Segment
+1|Set ID - PV1
+2|Patient Class
+3|Assigned Patient Location
+4|Admission Type
+5|Preadmit Number
+6|Prior Patient Location
+7|Attending Doctor
+8|Referring Doctor
+9|Consulting Doctor
+10|Hospital Service
+11|Temporary Location
+12|Preadmit Test Indicator
+13|Re-admission Indicator
+14|Admit Source
+15|Ambulatory Status
+16|VIP Indicator
+17|Admitting Doctor
+18|Patient Type
+19|Visit Number
+20|Financial Class
+21|Charge Price Indicator
+22|Courtesy Code
+23|Credit Rating
+24|Contract Code
+25|Contract Effective Date
+26|Contract Amount
+27|Contract Period
+28|Interest Code
+29|Transfer to Bad Debt Code
+30|Transfer to Bad Debt Date
+31|Bad Debt Agency Code
+32|Bad Debt Transfer Amount
+33|Bad Debt Recovery Amount
+34|Delete Account Indicator
+35|Delete Account Date
+36|Discharge Disposition
+37|Discharged to Location
+38|Diet Type
+39|Servicing Facility
+40|Bed Status
+41|Account Status
+42|Pending Location
+43|Prior Temporary Location
+44|Admit Date/Time
+45|Discharge Date/Time
+46|Current Patient Balance
+47|Total Charges
+48|Total Adjustments
+49|Total Payments
+50|Alternate Visit ID
+51|Visit Indicator
+52|Other Healthcare Provider
+#
+NK1|Next of Kin Segment
+1|Set ID - Next of Kin
+2|Name
+3|Relationship
+4|Address
+5|Phone Nunber
+6|Business Phone Number
+7|Contact Role
+8|Start Date
+9|End Date
+10|Next of Kin / Associated Parties Job Title
+11|Next of Kin / Associated Parties Job Code/Class
+12|Next of Kin / Associated Parties Employee Number
+13|Organization Name - NK1
+14|Marital Status
+15|Administrative Sex
+16|Date/Time of Birth
+17|Living Dependency
+18|Ambulatory Status
+19|Citizenship
+20|Primary Language
+21|Living Arrangement
+22|Publicity Code
+23|Protection Indicator
+24|Student Indicator
+25|Religion
+26|Mother's Maiden Name
+27|Nationality
+28|Ethnic Group
+29|Contact Reason
+30|Contact Person's Name
+31|Contact Person's Telephone Number
+32|Contact Person's Address
+33|Next of Kin/Associated Party's Identifiers
+34|Job Status
+35|Race
+36|Handicap
+37|Contact Person Social Security Number
+#
+DG1|Diagnosis Segment
+1|Set ID - DG1
+2|Diagnosis Coding Method
+3|Diagnosis Code - DG1
+4|Diagnosis Description
+5|Diagnosis Date/Time
+6|Diagnosis Type
+7|Major Diagnostic Category
+8|Diagnostic Related Group
+9|DRG Approval Indicator
+10|DRG Grouper Review Code
+11|Outlier Type
+12|Outlier Days
+13|Outlier Cost
+14|Grouper Version and Type
+15|Diagnosis Priority
+16|Diagnosing Clinician
+17|Diagnosis Classification
+18|Confidential Indicator
+19|Attestation Date/Time
+#
+EVN|Event Type Segment
+1|Event Type Code
+2|Recorded Date/Time
+3|Date/Time Planned Event
+4|Event Reason Code
+5|Operator ID
+6|Event Occurred
+7|Event Facility
+#
+ORC|Common Order Segment
+1|Order Control
+2|Placers Order Number
+3|Filler Order Number
+4|Placer Group Number
+5|Order Status ID
+6|Response Flag
+7|Quantity/Timing
+8|Parent
+9|Date/Time of Transaction
+10|Enter By
+11|Verified By
+12|Ordering Provider
+13|Enterer's Location
+14|Call Back Phone Number
+15|Order Effective Date/Time
+16|Order Control Code Reason
+17|Entering Organization
+18|Entering Device
+19|Action By
+20|Advanced Beneficiary Notice Code
+21|Ordering Facility Name
+22|Ordering Facility Address
+23|Ordering Facility Phone Number
+24|Ordering Provider Address
+25|Order Status Modifier
+#
+OBR|Observation Request
+1|Set ID - Observation Request
+2|Placer Order Number
+3|Filler Order Number
+4|Universal Service ID
+5|Priority
+6|Requested Date/Time
+7|Observation Date/Time
+8|Observation End Date/Time
+9|Collection Volume
+10|Collector Identified
+11|Specimen Action Code
+12|Danger Code
+13|Relevant Clinical Info
+14|Specimen Received Date/Time
+15|Specimen Source
+16|Ordering Provider
+17|Order Call Back Phone #
+18|Placer field #1
+19|Placer field #2
+20|Filler field #1
+21|Filler field #2
+22|Results Rpt/Status Chng Date/Time
+23|Charge to Practice
+24|Diagnostic Serv Sect ID
+25|Result Status
+26|Parent Results
+27|Quantity/Timing
+28|Result Copies To
+29|Parent Accession Number
+30|Transportation Mode
+31|Reason for Study
+32|Principal Result Interpreter
+33|Assistant Result Interpreter
+34|Technician
+35|Transcriptionist
+36|Scheduled Date/Time
+37|Number of Sample Containers
+38|Transport Logistics of Collected Sample
+39|Collector’s Comment
+40|Transport Arrangement Responsibility
+41|Transport Arranged
+42|Escort Required
+43|Planned Patient Transport Comment
+44|Ordering Facility Name
+45|Ordering Facility Address
+46|Ordering Facility Phone Number
+47|Ordering Provider Address
+#
+NTE|Notes and Comments Segment
+1|Set ID - Notes and Comments
+2|Source of Comment
+3|Comment
+4|Comment Type
+#
+OBX|Observation Segment
+1|Set ID - Observational Simple
+2|Value Type
+3|Observation Identifier
+4|Observation sub-ID
+5|Observation Value
+6|Units
+7|References Range
+8|Abnormal Flags
+9|Probability
+10|Nature of Abnormal Test
+11|Observ Result Status
+12|Date Last Obs Normal Values
+13|User Defined Access Checks
+14|Date/Time of the Observation
+15|Producer's ID
+16|Responsible Observer
+17|Observation Method
+18|Equipment Instance Identifier
+19|Date/Time of the Analysis
+#
+MFI|Master File Identification Segment
+1|Master File Identification
+2|Master File Application Identifier
+3|File-Level Event Code
+4|Entered Date/Time
+5|Effective Date/Time
+6|Response Level Code
+#
+MFE|Master File Entry Segment
+1|Record-Level Event Code
+2|MFN Control ID
+3|Effective Date/Time
+4|Primary Key Value - MFE
+5|Primary Key Value Type
+#
+ROL|Role Segment
+1|Role Instance ID
+2|Action Code
+3|Role-ROL
+4|Role Person
+5|Role Begin Date/Time
+6|Role End Date/Time
+7|Role Duration
+8|Role Action Reason
+9|Provider Type
+10|Organization Unit Type
+11|Office/Home Address
+12|Phone
+#
+ZM1|Radiology Procedure Segment Definition
+1|Name
+2|Code
+#
+ZDS|DICOM Compliant Study Instance UID
+1|Study Instance UID
+#
+AL1|Patient Allergy Information Segment
+1|Set ID - AL1
+2|Allergen Type Code
+3|Allergen Code / Mnemonic
+4|Allergy Severity Code
+5|Allergy Reaction Code
+6|Identification Date
+

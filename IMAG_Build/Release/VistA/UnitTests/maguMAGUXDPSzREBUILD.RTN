@@ -1,0 +1,43 @@
+maguMAGUXDPSzREBUILD ;WOIFO/MLH - unit test REBUILD^MAGUXDPS; 6/10/11 3:27 PM
+ Q
+TEST(verblvl) ;
+ S verblvl=$G(verblvl,1)
+ N I
+ W:verblvl "ROUTINE: MAGUXDPS   ENTRY POINT: REBUILD",!
+ F I=1:1 Q:$T(@I)=""  D @(I_"(verblvl)")
+ Q
+1(verblvl) ; test foreground - new indexes
+ N FILENO,HIT,SILENT,IEN,SAVINFO,SAVDAT,SAVUSER,CAPAPP,PLACE
+ W:verblvl "UNIT TEST 1: "
+ F FILENO=2005,2005.1 K ^MAG(FILENO,"ADTDUZ")
+ D REBUILD^MAGUXDPS
+ S HIT=0,IEN=0
+ F  S IEN=$O(^MAG(2005.1,IEN)) Q:'IEN  D  Q:HIT
+ . Q:$P(^MAG(2005.1,IEN,0),"^",10) ; parentless image only
+ . S SAVINFO=$G(^MAG(2005.1,IEN,2))
+ . S SAVDAT=$P(SAVINFO,"^",1)\1,SAVUSER=$P(SAVINFO,"^",2),CAPAPP=$P(SAVINFO,"^",12)
+ . S PLACE=$P($G(^MAG(2005.1,IEN,100)),"^",3)
+ . I SAVDAT'="",SAVUSER'="",CAPAPP'="",PLACE'="" D
+ . . S HIT=$S($D(^MAG(2005.1,"ADTDUZ",CAPAPP,SAVDAT,SAVUSER,PLACE,IEN)):1,1:-1)
+ . . Q
+ . Q
+ W:verblvl $S(HIT=1:"SUCCESS",1:"FAILURE"),!
+ Q
+2(verblvl) ; simulate existing indexes - they will be killed w/in routine
+ N FILENO,HIT,SILENT,IEN,SAVINFO,SAVDAT,SAVUSER,CAPAPP,PLACE
+ W:verblvl "UNIT TEST 2: "
+ D REBUILD^MAGUXDPS ; no kill here, cf. unit test 1
+ S HIT=0,IEN=0
+ F  S IEN=$O(^MAG(2005.1,IEN)) Q:'IEN  D  Q:HIT
+ . Q:$P(^MAG(2005.1,IEN,0),"^",10) ; parentless image only
+ . S SAVINFO=$G(^MAG(2005.1,IEN,2))
+ . S SAVDAT=$P(SAVINFO,"^",1)\1,SAVUSER=$P(SAVINFO,"^",2),CAPAPP=$P(SAVINFO,"^",12)
+ . S PLACE=$P($G(^MAG(2005.1,IEN,100)),"^",3)
+ . I SAVDAT'="",SAVUSER'="",CAPAPP'="",PLACE'="" D
+ . . S HIT=$S($D(^MAG(2005.1,"ADTDUZ",CAPAPP,SAVDAT,SAVUSER,PLACE,IEN)):1,1:-1)
+ . . Q
+ . Q
+ W:verblvl $S(HIT=1:"SUCCESS",1:"FAILURE"),!
+ Q
+
+

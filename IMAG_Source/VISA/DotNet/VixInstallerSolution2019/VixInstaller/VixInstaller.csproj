@@ -1,0 +1,441 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="Current" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{A22C9D67-34CD-4B90-9EA7-B514F52CA3F6}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>VixInstaller</RootNamespace>
+    <AssemblyName>VixInstaller</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <TargetFrameworkProfile />
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>false</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationManifest>VixInstaller.exe.manifest</ApplicationManifest>
+  </PropertyGroup>
+  <PropertyGroup>
+    <DelaySign>false</DelaySign>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Nightly|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Nightly\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <CodeAnalysisLogFile>bin\Debug\VixInstaller.exe.CodeAnalysisLog.xml</CodeAnalysisLogFile>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSetDirectories>;C:\Program Files\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\\Rule Sets</CodeAnalysisRuleSetDirectories>
+    <CodeAnalysisIgnoreBuiltInRuleSets>true</CodeAnalysisIgnoreBuiltInRuleSets>
+    <CodeAnalysisRuleDirectories>;C:\Program Files\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\FxCop\\Rules</CodeAnalysisRuleDirectories>
+    <CodeAnalysisIgnoreBuiltInRules>true</CodeAnalysisIgnoreBuiltInRules>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Nightly|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\Nightly\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="log4net, Version=1.2.10.0, Culture=neutral, PublicKeyToken=1b44e1d426115821, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\log4net.2.0.3\lib\net40-full\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.DirectoryServices" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.ServiceProcess" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BiaCredentialsDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BiaCredentialsDialog.designer.cs">
+      <DependentUpon>BiaCredentialsDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ConfigureCvixSitePage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ConfigureCvixSitePage.designer.cs">
+      <DependentUpon>ConfigureCvixSitePage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ConfigureDicomPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ConfigureDicomPage.designer.cs">
+      <DependentUpon>ConfigureDicomPage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ConfigureMusePage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ConfigureMusePage.designer.cs">
+      <DependentUpon>ConfigureMusePage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ConfigureVistaPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ConfigureVistaPage.designer.cs">
+      <DependentUpon>ConfigureVistaPage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ConfigureVixCachePage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ConfigureVixCachePage.designer.cs">
+      <DependentUpon>ConfigureVixCachePage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ConfigureVixSitePage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ConfigureVixSitePage.designer.cs">
+      <DependentUpon>ConfigureVixSitePage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ConfigureDoDPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ConfigureDoDPage.designer.cs">
+      <DependentUpon>ConfigureDoDPage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ErrorProviderFixed.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="FederationInfoDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FederationInfoDialog.designer.cs">
+      <DependentUpon>FederationInfoDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form1.Designer.cs">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ImagingExchangeSiteService.cs" />
+    <Compile Include="InstallVixPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="InstallVixPage.designer.cs">
+      <DependentUpon>InstallVixPage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="InteriorWizardPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="InteriorWizardPage.Designer.cs">
+      <DependentUpon>InteriorWizardPage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="IWizardForm.cs" />
+    <Compile Include="IWizardPage.cs" />
+    <Compile Include="LaurelBridgeInfoDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LaurelBridgeInfoDialog.Designer.cs">
+      <DependentUpon>LaurelBridgeInfoDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NewInstallWelcomePage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="NewInstallWelcomePage.Designer.cs">
+      <DependentUpon>NewInstallWelcomePage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PrerequisiteChecklistPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PrerequisiteChecklistPage.Designer.cs">
+      <DependentUpon>PrerequisiteChecklistPage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="..\SharedAssemblyInfo.cs">
+      <Link>Properties\SharedAssemblyInfo.cs</Link>
+    </Compile>
+    <Compile Include="SelectDeploymentConfigPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="SelectDeploymentConfigPage.Designer.cs">
+      <DependentUpon>SelectDeploymentConfigPage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ServiceAccountDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ServiceAccountDialog.designer.cs">
+      <DependentUpon>ServiceAccountDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SitesFileDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SitesFileDialog.Designer.cs">
+      <DependentUpon>SitesFileDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TomcatCredentialsDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TomcatCredentialsDialog.Designer.cs">
+      <DependentUpon>TomcatCredentialsDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UndeployVixPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UndeployVixPage.Designer.cs">
+      <DependentUpon>UndeployVixPage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ZFViewerInfoDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ZFViewerInfoDialog.designer.cs">
+      <DependentUpon>ZFViewerInfoDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WizardForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WizardForm.Designer.cs">
+      <DependentUpon>WizardForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WizardPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WizardPage.Designer.cs">
+      <DependentUpon>WizardPage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="XcaInfoDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="XcaInfoDialog.designer.cs">
+      <DependentUpon>XcaInfoDialog.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="BiaCredentialsDialog.resx">
+      <DependentUpon>BiaCredentialsDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ConfigureCvixSitePage.resx">
+      <DependentUpon>ConfigureCvixSitePage.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ConfigureDicomPage.resx">
+      <DependentUpon>ConfigureDicomPage.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ConfigureMusePage.resx">
+      <DependentUpon>ConfigureMusePage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ConfigureVistaPage.resx">
+      <DependentUpon>ConfigureVistaPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ConfigureVixCachePage.resx">
+      <DependentUpon>ConfigureVixCachePage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ConfigureVixSitePage.resx">
+      <DependentUpon>ConfigureVixSitePage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ConfigureDoDPage.resx">
+      <DependentUpon>ConfigureDoDPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FederationInfoDialog.resx">
+      <DependentUpon>FederationInfoDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form1.resx">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="InstallVixPage.resx">
+      <DependentUpon>InstallVixPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="InteriorWizardPage.resx">
+      <DependentUpon>InteriorWizardPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LaurelBridgeInfoDialog.resx">
+      <DependentUpon>LaurelBridgeInfoDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NewInstallWelcomePage.resx">
+      <DependentUpon>NewInstallWelcomePage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PrerequisiteChecklistPage.resx">
+      <DependentUpon>PrerequisiteChecklistPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <EmbeddedResource Include="SelectDeploymentConfigPage.resx">
+      <DependentUpon>SelectDeploymentConfigPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ServiceAccountDialog.resx">
+      <DependentUpon>ServiceAccountDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SitesFileDialog.resx">
+      <DependentUpon>SitesFileDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TomcatCredentialsDialog.resx">
+      <DependentUpon>TomcatCredentialsDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UndeployVixPage.resx">
+      <DependentUpon>UndeployVixPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ZFViewerInfoDialog.resx">
+      <DependentUpon>ZFViewerInfoDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WizardForm.resx">
+      <DependentUpon>WizardForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WizardPage.resx">
+      <DependentUpon>WizardPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="XcaInfoDialog.resx">
+      <DependentUpon>XcaInfoDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="App.config" />
+    <None Include="ClassDiagram1.cd" />
+    <Content Include="federation.zip">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <None Include="VixInstaller.exe.manifest" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\check.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\error.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\HDIG.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\VixInstaller.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\VIX.Viewer.Install\Vix.Viewer.Install.csproj">
+      <Project>{0471f6bd-b82d-4123-850d-05532aad5ebe}</Project>
+      <Name>Vix.Viewer.Install</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\VixInstallerBusiness\VixInstallerBusiness.csproj">
+      <Project>{F1CB26A1-4F2A-4ADC-9E52-DC91FE9FF5A6}</Project>
+      <Name>VixInstallerBusiness</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="log4net.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="VixInstallerLog.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="VixManifest.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.8">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.8 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>copy "$(TargetPath)" "$(ProjectDir)obj\x86\$(ConfigurationName)\$(TargetFileName)" /Y</PostBuildEvent>
+  </PropertyGroup>
+  <PropertyGroup>
+    <PreBuildEvent>
+    </PreBuildEvent>
+  </PropertyGroup>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

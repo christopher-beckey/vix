@@ -1,0 +1,187 @@
+﻿<UserControl x:Class="VixHealthMonitor.VixTestInformationView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="500" d:DesignWidth="500"
+             xmlns:my1="clr-namespace:VixHealthMonitor"
+             DataContext="{Binding VixTestInformation, Source={StaticResource Locator}}">
+
+    <DockPanel  HorizontalAlignment="Stretch" VerticalAlignment="Stretch" LastChildFill="True">
+        <DockPanel.Resources>
+            <Style x:Key="LeftHeaderStyle" TargetType="{x:Type GridViewColumnHeader}">
+                <Setter Property="HorizontalContentAlignment" Value="Left"/>
+            </Style>
+        </DockPanel.Resources>
+
+        <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Hidden" DockPanel.Dock="Top">
+            
+            <Expander Header="VIX Test Details" IsExpanded="True">
+                <StackPanel Orientation="Horizontal">
+                    <ListView HorizontalAlignment="Stretch" VerticalAlignment="Stretch" 
+                              ItemsSource="{Binding Path=VixVersions.Sources.View}" Height="110"
+                              Margin="2,0,2,0">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Width="120" HeaderContainerStyle="{StaticResource LeftHeaderStyle}">
+                                    <GridViewColumnHeader Content="Version" 
+                                                    Command="{Binding Path=VixVersionsSortCommand}" CommandParameter="Version"/>
+                                    <GridViewColumn.CellTemplate>
+                                        <HierarchicalDataTemplate>
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock Text="{Binding Path=Version}" />
+                                            </StackPanel>
+                                        </HierarchicalDataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                                <GridViewColumn Width="50" HeaderContainerStyle="{StaticResource LeftHeaderStyle}">
+                                    <GridViewColumnHeader Content="Count" 
+                                                    Command="{Binding Path=VixVersionsSortCommand}" CommandParameter="Count"/>
+                                    <GridViewColumn.CellTemplate>
+                                        <HierarchicalDataTemplate>
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock Text="{Binding Path=Count}" />
+                                            </StackPanel>
+                                        </HierarchicalDataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                    <ListView HorizontalAlignment="Stretch" VerticalAlignment="Stretch" 
+                              ItemsSource="{Binding Path=VixTestStatuses.Sources.View}" Height="110"
+                              Margin="2,0,2,0">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Width="130" HeaderContainerStyle="{StaticResource LeftHeaderStyle}">
+                                    <GridViewColumnHeader Content="Test Status" 
+                                                    Command="{Binding Path=VixTestStatusSortCommand}" CommandParameter="VixTestStatusDescription"/>
+                                    <GridViewColumn.CellTemplate>
+                                        <HierarchicalDataTemplate>
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock Text="{Binding Path=VixTestStatusDescription}" />
+                                            </StackPanel>
+                                        </HierarchicalDataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                                <GridViewColumn Width="50" HeaderContainerStyle="{StaticResource LeftHeaderStyle}">
+                                    <GridViewColumnHeader Content="Count" 
+                                                    Command="{Binding Path=VixTestStatusSortCommand}" CommandParameter="Count"/>
+                                    <GridViewColumn.CellTemplate>
+                                        <HierarchicalDataTemplate>
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock Text="{Binding Path=Count}" />
+                                            </StackPanel>
+                                        </HierarchicalDataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                    <ListView HorizontalAlignment="Stretch" VerticalAlignment="Stretch" 
+                              ItemsSource="{Binding Path=VixOperatingSystems.Sources.View}" Height="110"
+                              Margin="2,0,2,0">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Width="170" HeaderContainerStyle="{StaticResource LeftHeaderStyle}">
+                                    <GridViewColumnHeader Content="Operating System" 
+                                                    Command="{Binding Path=VixOperatingSystemSortCommand}" CommandParameter="OperatingSystem"/>
+                                    <GridViewColumn.CellTemplate>
+                                        <HierarchicalDataTemplate>
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock Text="{Binding Path=OperatingSystem}" />
+                                            </StackPanel>
+                                        </HierarchicalDataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                                <GridViewColumn Width="50" HeaderContainerStyle="{StaticResource LeftHeaderStyle}">
+                                    <GridViewColumnHeader Content="Count" 
+                                                    Command="{Binding Path=VixOperatingSystemSortCommand}" CommandParameter="Count"/>
+                                    <GridViewColumn.CellTemplate>
+                                        <HierarchicalDataTemplate>
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock Text="{Binding Path=Count}" />
+                                            </StackPanel>
+                                        </HierarchicalDataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                    <ListView HorizontalAlignment="Stretch" VerticalAlignment="Stretch" 
+                              ItemsSource="{Binding Path=VixOSArchitectures.Sources.View}" Height="110"
+                              Margin="2,0,2,0">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Width="130" HeaderContainerStyle="{StaticResource LeftHeaderStyle}">
+                                    <GridViewColumnHeader Content="O/S Architecture" 
+                                                    Command="{Binding Path=VixOSArchitectureSortCommand}" CommandParameter="OSArchitecture"/>
+                                    <GridViewColumn.CellTemplate>
+                                        <HierarchicalDataTemplate>
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock Text="{Binding Path=OSArchitecture}" />
+                                            </StackPanel>
+                                        </HierarchicalDataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                                <GridViewColumn Width="50" HeaderContainerStyle="{StaticResource LeftHeaderStyle}">
+                                    <GridViewColumnHeader Content="Count" 
+                                                    Command="{Binding Path=VixOSArchitectureSortCommand}" CommandParameter="Count"/>
+                                    <GridViewColumn.CellTemplate>
+                                        <HierarchicalDataTemplate>
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock Text="{Binding Path=Count}" />
+                                            </StackPanel>
+                                        </HierarchicalDataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+
+                    <ListView HorizontalAlignment="Stretch" VerticalAlignment="Stretch" 
+                              ItemsSource="{Binding Path=MonitoredErrors.Sources.View}" Height="110"
+                              Margin="2,0,2,0">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Width="140" HeaderContainerStyle="{StaticResource LeftHeaderStyle}">
+                                    <GridViewColumnHeader Content="Monitored Error Contains" 
+                                                    Command="{Binding Path=MonitoredErrorsSortCommand}" CommandParameter="Name"/>
+                                    <GridViewColumn.CellTemplate>
+                                        <HierarchicalDataTemplate>
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock Text="{Binding Path=Name}" />
+                                            </StackPanel>
+                                        </HierarchicalDataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                                <GridViewColumn Width="50" HeaderContainerStyle="{StaticResource LeftHeaderStyle}">
+                                    <GridViewColumnHeader Content="Count" 
+                                                    Command="{Binding Path=MonitoredErrorsSortCommand}" CommandParameter="Count"/>
+                                    <GridViewColumn.CellTemplate>
+                                        <HierarchicalDataTemplate>
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock Text="{Binding Path=Count}" />
+                                            </StackPanel>
+                                        </HierarchicalDataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+
+
+
+                </StackPanel>
+            </Expander>
+        </ScrollViewer>
+
+        
+        <my1:ViewCountsView HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Height="95" DockPanel.Dock="Bottom" />
+        <my1:CvixListView HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Height="160" Margin="0,0,0,0" DockPanel.Dock="Bottom" Visibility="Visible" />
+
+        <my1:VixListView HorizontalAlignment="Stretch" x:Name="failedVixList"  VerticalAlignment="Stretch" />
+
+    </DockPanel>
+</UserControl>

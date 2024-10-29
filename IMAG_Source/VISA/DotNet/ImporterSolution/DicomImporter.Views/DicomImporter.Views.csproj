@@ -1,0 +1,384 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="16.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{D9734885-837A-4147-9CEE-790EB3883EA3}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>DicomImporter.Views</RootNamespace>
+    <AssemblyName>DicomImporter.Views</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+    <SccProjectName>
+    </SccProjectName>
+    <SccLocalPath>
+    </SccLocalPath>
+    <SccAuxPath>
+    </SccAuxPath>
+    <SccProvider>
+    </SccProvider>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x86</PlatformTarget>
+    <Prefer32Bit>false</Prefer32Bit>
+    <LangVersion>9.0</LangVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DebugSymbols>true</DebugSymbols>
+    <PlatformTarget>x86</PlatformTarget>
+    <Prefer32Bit>false</Prefer32Bit>
+    <LangVersion>9.0</LangVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <CodeAnalysisLogFile>bin\Debug\DicomImporter.Views.dll.CodeAnalysisLog.xml</CodeAnalysisLogFile>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSetDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\\Rule Sets</CodeAnalysisRuleSetDirectories>
+    <CodeAnalysisIgnoreBuiltInRuleSets>true</CodeAnalysisIgnoreBuiltInRuleSets>
+    <CodeAnalysisRuleDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\FxCop\\Rules</CodeAnalysisRuleDirectories>
+    <CodeAnalysisIgnoreBuiltInRules>true</CodeAnalysisIgnoreBuiltInRules>
+    <Prefer32Bit>false</Prefer32Bit>
+    <LangVersion>9.0</LangVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <CodeAnalysisLogFile>bin\Release\DicomImporter.Views.dll.CodeAnalysisLog.xml</CodeAnalysisLogFile>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSetDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\\Rule Sets</CodeAnalysisRuleSetDirectories>
+    <CodeAnalysisIgnoreBuiltInRuleSets>true</CodeAnalysisIgnoreBuiltInRuleSets>
+    <CodeAnalysisRuleDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\FxCop\\Rules</CodeAnalysisRuleDirectories>
+    <CodeAnalysisIgnoreBuiltInRules>true</CodeAnalysisIgnoreBuiltInRules>
+    <Prefer32Bit>false</Prefer32Bit>
+    <LangVersion>9.0</LangVersion>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="log4net, Version=2.0.12.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Lib\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Prism, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Lib\Microsoft.Practices.Prism.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Prism.Interactivity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Lib\Microsoft.Practices.Prism.Interactivity.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.ServiceLocation">
+      <HintPath>..\Lib\Microsoft.Practices.ServiceLocation.dll</HintPath>
+    </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xaml" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
+    <Reference Include="WindowsFormsIntegration" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AddNonDicomFilesToReconcilationView.xaml.cs">
+      <DependentUpon>AddNonDicomFilesToReconcilationView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ConfirmationView.xaml.cs">
+      <DependentUpon>ConfirmationView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="AdministrationHomeView.xaml.cs">
+      <DependentUpon>AdministrationHomeView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="AdminRevertWorkItemView.xaml.cs">
+      <DependentUpon>AdminRevertWorkItemView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ChooseExistingOrderView.xaml.cs">
+      <DependentUpon>ChooseExistingOrderView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="AdminFailedImportView.xaml.cs">
+      <DependentUpon>AdminFailedImportView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="AdminInProcessImportsView.xaml.cs">
+      <DependentUpon>AdminInProcessImportsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="DialogProgress.xaml.cs" />
+    <Compile Include="DialogServiceImporter.cs" />
+    <Compile Include="SelectServiceWindow.xaml.cs">
+      <DependentUpon>SelectServiceWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ScanDocumentWindow.xaml.cs">
+      <DependentUpon>ScanDocumentWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ImporterMessagesView.xaml.cs">
+      <DependentUpon>ImporterMessagesView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="NonDicomListView.xaml.cs">
+      <DependentUpon>NonDicomListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="NonDicomMediaView.xaml.cs">
+      <DependentUpon>NonDicomMediaView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SelectMediaCategoryView.xaml.cs">
+      <DependentUpon>SelectMediaCategoryView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="StatusChangeDetailWindows.xaml.cs">
+      <DependentUpon>StatusChangeDetailWindows.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="DeleteWithRemainingFilesWindow.xaml.cs">
+      <DependentUpon>DeleteWithRemainingFilesWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ImporterDialogService.cs" />
+    <Compile Include="LogView.xaml.cs">
+      <DependentUpon>LogView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PatientSensitivityWarningWindow.xaml.cs">
+      <DependentUpon>PatientSensitivityWarningWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="DicomViewerLauncherWindow.xaml.cs">
+      <DependentUpon>DicomViewerLauncherWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ProcedureLookupWindow.xaml.cs">
+      <DependentUpon>ProcedureLookupWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="OrderingLocationLookupWindow.xaml.cs">
+      <DependentUpon>OrderingLocationLookupWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="OrderingProviderLookupWindow.xaml.cs">
+      <DependentUpon>OrderingProviderLookupWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CreateNewRadiologyOrderView.xaml.cs">
+      <DependentUpon>CreateNewRadiologyOrderView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SelectOrderTypeView.xaml.cs">
+      <DependentUpon>SelectOrderTypeView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ReportsHomeView.xaml.cs">
+      <DependentUpon>ReportsHomeView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ReconciliationDetailsView.xaml.cs">
+      <DependentUpon>ReconciliationDetailsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ReconciliationSummaryView.xaml.cs">
+      <DependentUpon>ReconciliationSummaryView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PatientLookupWindow.xaml.cs">
+      <DependentUpon>PatientLookupWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="DirectImportHomeView.xaml.cs">
+      <DependentUpon>DirectImportHomeView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ImporterHomeView.xaml.cs">
+      <DependentUpon>ImporterHomeView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MediaStagingView.xaml.cs">
+      <DependentUpon>MediaStagingView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PatientSelectionView.xaml.cs">
+      <DependentUpon>PatientSelectionView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="StudyListView.xaml.cs">
+      <DependentUpon>StudyListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WorkListView.xaml.cs">
+      <DependentUpon>WorkListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="AddNonDicomFilesToReconcilationView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ConfirmationView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AdministrationHomeView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="AdminRevertWorkItemView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ChooseExistingOrderView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="AdminFailedImportView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="AdminInProcessImportsView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="DialogProgress.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="SelectServiceWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ScanDocumentWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ImporterMessagesView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="NonDicomListView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="NonDicomMediaView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="SelectMediaCategoryView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="StatusChangeDetailWindows.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="DeleteWithRemainingFilesWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="LogView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="PatientSensitivityWarningWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="DicomViewerLauncherWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ProcedureLookupWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="OrderingLocationLookupWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="OrderingProviderLookupWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="CreateNewRadiologyOrderView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="SelectOrderTypeView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ReportsHomeView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ReconciliationDetailsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ReconciliationSummaryView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="PatientLookupWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="DirectImportHomeView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ImporterHomeView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MediaStagingView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PatientSelectionView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="StudyListView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WorkListView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DicomImporter.Common\DicomImporter.Common.csproj">
+      <Project>{E014E723-8DCE-4D9F-A7E1-859C9D2E6FFF}</Project>
+      <Name>DicomImporter.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DicomImporter.ViewModels\DicomImporter.ViewModels.csproj">
+      <Project>{1120F228-DAD1-4AD5-8705-6694152E387A}</Project>
+      <Name>DicomImporter.ViewModels</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ImagingClient.Infrastructure\ImagingClient.Infrastructure.csproj">
+      <Project>{0c709bab-8c69-4624-be2d-2f3554ce8173}</Project>
+      <Name>ImagingClient.Infrastructure</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

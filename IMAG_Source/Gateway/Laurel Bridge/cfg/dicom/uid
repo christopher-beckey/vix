@@ -1,0 +1,19 @@
+#
+# This data is read by the UID factory in the DicomDataDictionary class.
+#
+[ oem_info ]
+# The uid_prefix is typically the same for each system
+# than an OEM might ship. It can contain for instance, your
+# DICOM/ANSI orgranization code, along with the standard DICOM prefix.
+#
+# change the following if you don't want
+# the LaurelBridge UID organization prefix
+#
+# uid_prefix = 1.2.3.4
+#
+# The uid_system_prefix is typically different for each system
+# or host that is shipped.
+# Change the following if you don't want
+# the IP address to be used as part of the uid base
+#
+#uid_system_prefix = 11111.22222

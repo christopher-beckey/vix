@@ -1,0 +1,88 @@
+MAGDTCP ;WOIFO/PMK - VistA-PACS Interface Menu ; 09 Feb 2009 10:18 AM
+ ;;3.0;IMAGING;**30,54**;MAR 19, 2002;;OCT 28, 2009
+ ;; Per VHA Directive 2004-038, this routine should not be modified.
+ ;; +---------------------------------------------------------------+
+ ;; | Property of the US Government.                                |
+ ;; | No permission to copy or redistribute this software is given. |
+ ;; | Use of unreleased versions of this software requires the user |
+ ;; | to execute a written test agreement with the VistA Imaging    |
+ ;; | Development Office of the Department of Veterans Affairs,     |
+ ;; | telephone (301) 734-0100.                                     |
+ ;; | The Food and Drug Administration classifies this software as  |
+ ;; | a medical device.  As such, it may not be changed in any way. |
+ ;; | Modifications to this software may result in an adulterated   |
+ ;; | medical device under 21CFR820, the use of which is considered |
+ ;; | to be a violation of US Federal Statutes.                     |
+ ;; +---------------------------------------------------------------+
+ ;;
+ENTRY ; entry point -- invoked by ^MAGDMENU
+ D SETUP^MAGDMENU W @IOF
+ N INTERRUPT,MENU,PORTIEN
+ S INTERRUPT=0 ; will be set to 1 if CTRL-C is hit
+LOOP S PORTIEN=$$SELECT("DICOM TCP/IP Port Applications")
+ I PORTIEN D  G:'INTERRUPT LOOP
+ . N OLD
+ . S MENU="Transmit messages to "_$P(^MAGDICOM(2006.584,PORTIEN,0),"^",1)
+ . L +^MAGDICOM("Menu","VISTA1",2,PORTIEN):0 E  D  Q
+ . . W !!,"*** ",MENU," is already running. ***"
+ . . Q
+ . S OLD=$G(^TMP("MAG",$J,"DICOM","PORT"))
+ . I OLD S STATUS=$$TCPCLOSE^MAGOSTCP("",OLD) I $$USEPRIN^MAGOSFIL(1)
+ . D TCPIP
+ . I 'INTERRUPT D RETURN^MAGDMENU
+ . L -^MAGDICOM("Menu","VISTA1",2,PORTIEN)
+ . Q
+ Q
+ ;
+SELECT(PROMPT) ; called by ^MAGDSTAT for displaying real-time statistics
+ N PORTIEN ;-- ien in PORT LIST table
+ ;
+ ; select the desired communications port
+ ;
+ N I,N,R,X
+ D SETUP^MAGDMENU W !!,PROMPT,!
+ S PORTIEN=0
+ F N=1:1 S PORTIEN=$O(^MAGDICOM(2006.584,PORTIEN)) Q:'PORTIEN  D
+ . S X=^MAGDICOM(2006.584,PORTIEN,0)
+ . W !,?2,$J(N,2),?6,$P(X,"^")
+ . W " " F I=$X:1:48 W "-"
+ . W ?50,"Port #",$P(X,"^",3)
+ . Q
+ S N=N-1
+ ;
+AGAIN ;
+ I N=0 W !,"<< No entries are defined in PORTLIST.DIC >>" Q 0
+ W !!,?2,"OPTION: " R " ",R:DTIME I R="" Q ""
+ I R?1N.N,R>0,R'>N D  ;
+ . S PORTIEN=0
+ . F N=1:1 S PORTIEN=$O(^MAGDICOM(2006.584,PORTIEN)) Q:'PORTIEN  Q:R=N
+ . Q
+ I 'PORTIEN W " ??? -- Invalid option.  Try again." G AGAIN
+ Q PORTIEN
+ ;
+TCPIP ; Start TCP/IP for DICOM
+ N AETITLE,CHANNEL,FILEMODE,MENUOPT,PORT,X
+ S X=^MAGDICOM(2006.584,PORTIEN,0)
+ S MENUOPT=$P(X,"^"),AETITLE=$P(X,"^",2)
+ S PORT=$P(X,"^",3),FILEMODE=$P(X,"^",4),CHANNEL=$P(X,"^",5)
+ I '$D(^MAGDICOM(2006.563,1,"DATA PATH",CHANNEL,0)) D  Q
+ . W !,"Error in ",^MAGDICOM(2006.563,1,"DICT PATH"),"\PORTLIST.DIC"
+ . W !,"  *** Illegal Communications Channel: ",CHANNEL," ***"
+ . Q
+ S ^TMP("MAG",$J,"DICOM","PORT")=PORT
+ S ^TMP("MAG",$J,"DICOM","CHANNEL")=CHANNEL
+ ;
+ W !!,"Beginning communications with the ",MENUOPT
+ ;
+ W !!,"Ready to transfer DICOM messages via TCP/IP?" R "  y// ",X:DTIME
+ I X="" S X="Yes" W X
+ I "Yy"'[$E(X) W " -- not started" Q
+ ;
+ I FILEMODE="F" D  ; file mode is FIFO QUEUE
+ . ; use the FIFO queue mechanism (i.e., for PACS)
+ . D FIFOQUE^MAGDACP1
+ . Q
+ E  I FILEMODE="D" D  ; file mode is DIRECT
+ . ; use direct communications w/o the FIFO queue (e.g., for queries)
+ . D DIRECT^MAGDACP1
+ Q

@@ -1,0 +1,44 @@
+:Base MAGSYS.HLP
+:Title Imaging System Manager Tools
+1 Site Manager Tools Overview=Overview
+1 Site Manager Tools Window=Site_Manager_Tools
+1 Imaging Workstation Configuration
+2 Introduction=Introduction@MAGWRKS.HLP
+2 OverView=OverView@MAGWRKS.HLP
+2 Workstation Configuration Window=Workstation_Configuration_Window@MAGWRKS.HLP
+2 Modifying entries=Modifying_entries@MAGWRKS.HLP
+2 Configuration File Sections
+3 Button/Field Options=Button_Field_Options@MAGWRKS.HLP
+3 File Server=File_Server@MAGWRKS.HLP
+3 Image Type=Image_Type@MAGWRKS.HLP
+3 Import Options=Import_Options@MAGWRKS.HLP
+3 Input Type=Input_Type@MAGWRKS.HLP
+3 Input Type Options=Input_Type_Options@MAGWRKS.HLP
+3 Login Options=Login_Options@MAGWRKS.HLP
+3 Medicine Options=Medicine_Options@MAGWRKS.HLP
+3 Save Options=Save_Options@MAGWRKS.HLP
+3 Specialty=Specialty@MAGWRKS.HLP
+3 Workstation Settings=Workstation_Settings@MAGWRKS.HLP
+2 [SYS_ ] System Sections
+3 Overview : System Sections=SYS__System_Sections.@MAGWRKS.HLP
+3 SYS_Autoupdate=SYS_Autoupdate@MAGWRKS.HLP
+3 SYS_Film_Lumisys100=SYS_Film_Lumisys100@MAGWRKS.HLP
+3 SYS_Hotbuttons=SYS_Hotbuttons@MAGWRKS.HLP
+3 SYS LastPositions=SYS_LastPositions@MAGWRKS.HLP
+3 SYS_Meteor=SYS_Meteor@MAGWRKS.HLP
+1 Imaging Workstation Tracking
+; next level + 1
+1 Imaging Workstation Tracking=Imaging_Workstation_Tracking
+2 Imaging Workstation Session information=Imaging_Workstation_Session_information
+2 Workstation columns descriptions=Workstation_columns_descriptions
+2 Session columns descriptions=Session_columns_descriptions
+2 Workstation Listing : Views=Workstation_Listing___Views
+1 MAG SYSTEM Security Key
+2 VistA Imaging Display
+3 System Manager menu option=VistA_Imaging_Display___System_Manager_Options@MagSysKey
+3 Prefetch Patient Images menu option=Prefetch_Patient_Images_menu_option@MagSysKey.hlp
+3 Image Information window=Image_Information_window@MagSysKey.hlp
+3 message history window=message_history_window@MagSysKey.hlp
+2 VistA Imaging Capture
+3 System Manager menu option=VistA_Imaging_Capture___System_Manager_Options@MagSysKey.hlp
+3 message history window=message_history_window@MagSysKey.hlp

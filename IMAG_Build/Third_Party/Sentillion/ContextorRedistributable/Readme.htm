@@ -1,0 +1,101 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+
+<html>
+
+<head>
+<title>Read Me</title>
+<meta name="GENERATOR" content="Microsoft FrontPage 4.0">
+</head>
+
+<body>
+<hr>
+<p> <font size=4 face="Arial"><strong>Sentillion Vergence Contextor Redistributable<br>
+  Version 3.3&nbsp;<br>
+  <br>
+  Read Me Notes<br>
+  Updated: July, 2002</strong></font></p>
+<hr>
+<p><font face="Arial">This Read Me file contains Installationinformation for the 
+  Sentillion&reg; Vergence&reg; Contextor Redistributable.</font></p>
+<hr>
+<p> <font size=3 face="Arial"><strong>Contents<a name="Contents"></a></strong></font></p>
+<blockquote>
+  <p><font face="Arial"><a href="#Introduction">Introduction</a></font></p>
+  <p><font face="Arial"><a href="#Redistribute">To Distribute the Contextor</a></font></p>
+  <p><font face="Arial"><a href="#Support">Support</a></font></p>
+</blockquote>
+<hr>
+<p><font face="Arial"><b><a name="Introduction">Introduction</a></b></font></p>
+<p><font face="Arial">The Contextor Redistributable is a self-extracting installer 
+  that automatically installs the Vergence Contextor.dll on the computer where 
+  it is run. It is designed to be included in the installation program of other 
+  products so that it can be launched by those products' installers and install 
+  itself without any user interaction.</font></p>
+<p><font face="Arial">The Contextor Redistributable performs several
+verifications before installation. If any of these verifications fails, the
+installation aborts. These verifications are as follows:</font></p>
+<blockquote>
+  <ul>
+    <li>
+      <p style="margin-bottom: 5"><font face="Arial">Operating System: Windows 
+        XP, Windows 2000, Windows NT 4.0 with Service Packs 3, 4, 5, or 6; Windows 
+        95 OSR2; or Windows 98.</font>
+    </li>
+    <li>
+      <p style="margin-bottom: 5"><font face="Arial">Crypto API: crypt32.dll
+      version 5.101.0000.0 or newer.</font></li>
+    <li>
+      <p style="margin-bottom: 5"><font face="Arial">Previous versions of the
+      Contextor must not already be installed.</font></li>
+    <li>
+      <p style="margin-bottom: 5"><font face="Arial">The user installing the
+      software must have administrator privileges (that is, the ability to
+      create directories and the ability to create and modify registry keys).</font></li>
+  </ul>
+</blockquote>
+<p><font face="Arial">The Contextor Redistributable is licensed by the SDK Runtime 
+  License. A copy of the license is installed with the SDK software.</font></p>
+<p><font face="Arial">Return to <a href="#Contents">Contents</a>.</font></p>
+<hr>
+<p><font face="Arial"><b>To Distribute the Contextor<a name="Redistribute"></a></b></font></p>
+<p><font face="Arial, Helvetica, sans-serif">You, the developer using the Vergence 
+  SDK products, will create your own installation package for your customers. 
+  </font></p>
+<p><font face="Arial, Helvetica, sans-serif">Your installation package installs 
+  the Contextor by running</font><font face="Arial"> ContextorRedist.exe from 
+  the directory where the ContextorRedist.exe resides.</font></p>
+<p><font face="Arial">The Vergence Contextor.dll is installed in the Windows system 
+  directory (typically </font><font SIZE="3" face="Courier New">C:\WINNT\System32</font><font face="Arial"> 
+  on Windows 2000).</font></p>
+<p><font face="Arial">The Vergence Contextor.dll installs without any user interaction. 
+  The installation creates a log file named </font><font SIZE="3" face="Courier New">SentillionSetup.log</font><font face="Arial"> 
+  in the Windows system directory. </font></p>
+<p><font face="Arial">If any of the installation verifications fail, as described 
+  above, a dialog box displays the reason for the failure, and the installation 
+  aborts. You may want to include a statement to this effect in the Readme file 
+  for your product.</font></p>
+<p><font face="Arial">To see how this works, run ContextorRedist.exe by hand and 
+  check the contents of </font><font size="3" face="Courier New">SentillionSetup.log</font><font face="Arial"> 
+  </font><font face="Arial"> to determine the results of the installation.</font></p>
+<p><font face="Arial"></font><font face="Arial">Return to <a href="#Contents">Contents</a>.</font></p>
+<hr>
+<p><font face="Arial"><b><a name="Support"></a>Support</b></font></p>
+<p><font face="Arial, Helvetica, sans-serif">You can access support for all Sentillion 
+  products by the following means: </font></p>
+<p><font face="Arial, Helvetica, sans-serif">Phone: 978-749-0022<br>
+  E-mail: support@sentillion.com<br>
+  Online: http://www.sentillion.com/support <br>
+  </font></p>
+<p><font face="Arial">Return to <a href="#Contents">Contents</a>.</font></p>
+<hr>
+<p><font face="Arial"> Vergence&reg; and Sentillion&reg; are registered trademarks 
+  of Sentillion, Inc.<br>
+  Windows XP, WIndows 2000, Windows NT, Windows 95 and Windows 98 are trademarks 
+  or registered trademarks of Microsoft Corporation.<br>
+  (c) Copyright 2002 Sentillion, Inc. All rights reserved.</font> </p>
+<hr>
+<p>&nbsp;
+</p>
+</body>
+
+</html>

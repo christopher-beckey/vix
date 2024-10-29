@@ -1,0 +1,324 @@
+MAGDAIRM ;WOIFO/PMK - Automatic Import Reconciliation Workflow ; 06 Jun 2009 9:33 PM
+ ;;3.0;IMAGING;**53**;Mar 19, 2002;Build 1715;Apr 22, 2010
+ ;; Per VHA Directive 2004-038, this routine should not be modified.
+ ;; +---------------------------------------------------------------+
+ ;; | Property of the US Government.                                |
+ ;; | No permission to copy or redistribute this software is given. |
+ ;; | Use of unreleased versions of this software requires the user |
+ ;; | to execute a written test agreement with the VistA Imaging    |
+ ;; | Development Office of the Department of Veterans Affairs,     |
+ ;; | telephone (301) 734-0100.                                     |
+ ;; | The Food and Drug Administration classifies this software as  |
+ ;; | a medical device.  As such, it may not be changed in any way. |
+ ;; | Modifications to this software may result in an adulterated   |
+ ;; | medical device under 21CFR820, the use of which is considered |
+ ;; | to be a violation of US Federal Statutes.                     |
+ ;; +---------------------------------------------------------------+
+ ;;
+ ; Reads a DICOM IHE PDI formatted disk and construct the DATAFILE
+ ;
+ENTRY(PATH) ; start here
+ N ACNUMB ;--- accession number
+ N DOB ;------ patient date of birth
+ N DONE ;----- variable needed in EXAMTYPE^MAGDIWB1
+ N EXAMTYPE ;- "R" for radiology, "C" for consult
+ N FACILITY ;- institution name
+ N INODE ;---- input node for DICOM header information stored in ^TMP
+ N INSTADDR ;- institution address
+ N INSTNAME ;- pseudo instrument name (real name in INSTRUMENT.DIC)
+ N LEVEL ;---- DICOMDIR level: patient(1), study(2), series(3), image(4)
+ N NEXT ;----- array of DICOMDIR next directory record offsets
+ N OFFSET ;--- offset of DICOMDIR directory record
+ N MODALITY ;- DICOM modality
+ N PID ;------ patient identifier (ssn)
+ N PNAMEDCM ;- patient name in DICOM format
+ N REFDOC ;--- referring physician's name
+ N SERIEDES ;- series description
+ N SERINUMB ;- series number
+ N SERIEUID ;- series instance uid
+ N SEX ;------ sex of patient
+ N SILENT ;--- debug parameter
+ N STUDYDAT ;- study date
+ N STUDYDES ;- study description
+ N STUDYN ;--- number of selected study
+ N STUDYTIM ;- study time
+ N STUDYUID ;- study instance uid
+ N TYPE ;----- type of DICOMDIR directory record
+ N I,X
+ ;
+ K @DATAFILE
+ S DONE=0,SILENT=1
+ S INSTNAME="PORTABLE MEDIA"
+ S X=$$TRYREAD(PATH)
+ I X=0 D  ; look for DICOMDIR in subdirectories
+ . N DIRLIST,FOLDER,NUMBDIR
+ . I '$$GETDIR^MAGOSDIR(PATH_"\*","D") Q  ; no subdirectories
+ . M DIRLIST=^TMP("MAG",$J,"DIR LIST")
+ . S NUMBDIR=0 ; number of DICOMDIRs found
+ . S FOLDER="" F  S FOLDER=$O(DIRLIST(FOLDER)) Q:FOLDER=""  D
+ . . I '$$GETDIR^MAGOSDIR(PATH_"\"_FOLDER_"\DICOMDIR") Q
+ . . S NUMBDIR=NUMBDIR+1,FOLDER(NUMBDIR)=FOLDER
+ . . Q
+ . I NUMBDIR=0 Q
+ . I NUMBDIR=1 S FOLDER=FOLDER(1)
+ . E  D
+ . . N DONE,I
+ . . S DONE=0 F  D  Q:DONE
+ . . . W !!,"There are ",NUMBDIR," folders with DICOM Directories (DICOMDIRs):"
+ . . . F I=1:1:NUMBDIR W !?3,I," -- ",FOLDER(I)
+ . . . W !,"Please select one (enter 1-",NUMBDIR,"): "
+ . . . R I:DTIME E  S I="^"
+ . . . I I?1"^".E S DONE=-1 Q
+ . . . I I?1N.N,I>0,I'>NUMBDIR S FOLDER=FOLDER(I),DONE=1 Q
+ . . . W:I'["?" "   ???"
+ . . . Q
+ . . Q
+ . S PATH=PATH_"\"_FOLDER
+ . S X=$$TRYREAD(PATH)
+ . Q
+ I X<1 W !!,"Can't read DICOM Directory (DICOMDIR)" Q
+ ;
+ S INODE="IN",NEXT(0)=0,LEVEL=1
+ S OFFSET=$$GETDATA^MAGDFCNS(INODE,"0004,1200")
+ F  D  I 'OFFSET Q
+ . D READITEM(OFFSET,LEVEL,.DATA)
+ . ; check record in-use flag
+ . I $$GET("0004,1410")=0 D  ; not in-use
+ . . ; skip any lower levels that may be present
+ . . S DATA(LEVEL,"0004,1420",VALUE,1)=0
+ . . Q
+ . E   D TYPE ; in-use
+ . S OFFSET=$$OFFSET(.LEVEL,OFFSET)
+ . Q
+ Q
+ ;
+TYPE ;
+ S TYPE=$$GET("0004,1430")
+ I 'SILENT W !,TYPE
+ I TYPE="PATIENT"         D PATIENT Q
+ I TYPE="STUDY"           D STUDY Q
+ I TYPE="SERIES"          D SERIES Q
+ I TYPE="IMAGE"           D IMAGE Q
+ I TYPE="KEY OBJECT DOC"  D KEYOBDOC Q
+ I TYPE="SR DOCUMENT"     D SRDOC Q
+ I TYPE="PRESENTATION"    D PRESENT Q
+ D ERRORMSG^MAGDAIR0(0,"Unknown type:  "_TYPE,"")
+ Q
+ ;
+PATIENT ; process a patient
+ D DUMP("0010,0010"),DUMP("0010,0020")
+ S PNAMEDCM=$$GET("0010,0010")
+ S PID=$$GET("0010,0020")
+ S DOB=$$GET("0010,0030")
+ S SEX=$$GET("0010,0040")
+ I $G(^MAGDICOM(2006.563,1,"IMPORTER ANONYMIZE"))="YES" D ALIAS
+ ; create a patient record
+ Q
+ ;
+ALIAS ; change demographics for documentation purposes
+ N PTNUMBER
+ I '$D(ALIAS(PNAMEDCM,PID)) D
+ . S (PTNUMBER,ALIAS(0))=$G(ALIAS(0))+1
+ . S ALIAS(PNAMEDCM,PID)=PTNUMBER
+ . Q
+ S PTNUMBER=ALIAS(PNAMEDCM,PID)
+ S PNAMEDCM="OUTSIDE-"_PTNUMBER_"|PATIENT-"_PTNUMBER
+ S PID=$TR("000-00-00"_$J(PTNUMBER,2)," ",0)
+ Q 
+ ;
+STUDY ; process a study
+ D DUMP("0008,0020"),DUMP("0008,0030"),DUMP("0008,0050")
+ D DUMP("0008,0090"),DUMP("0008,1030")
+ S STUDYDAT=$$GET("0008,0020")
+ S STUDYTIM=$$GET("0008,0030")
+ S ACNUMB=$$GET("0008,0050")
+ S REFDOC=$$GET("0008,0090") ; referring physician's name
+ S STUDYDES=$$GET("0008,1030")
+ S STUDYUID=$$GET("0020,000D")
+ Q
+ ;
+SERIES ; process a series
+ D DUMP("0008,0060")
+ S MODALITY=$$GET("0008,0060")
+ S FACILITY=$$GET("0008,0080")
+ S INSTADDR=$$GET("0008,0081")
+ S SERIEDES=$$GET("0008,103E")
+ S SERIEUID=$$GET("0020,000E")
+ S SERINUMB=$$GET("0020,0011")
+ Q
+ ;
+IMAGE ; process an image
+ N FROMPATH ;- path to DICOM object on portable media
+ N IMAGEUID ;- SOP instance uid
+ N IMAGNUMB ;- instance number
+ N NFRAMES ;-- number of iamge frames
+ N SOPCLASS ;- SOP class
+ N SUBDIR ;--- subdirectory
+ N TSYNTAX ;-- transfer syntax
+ N I
+ ;
+ D DUMP("0008,0008"),DUMP("0004,1500")
+ ;
+ ; get path to DICOM object on portable media
+ S FROMPATH=PATH,I=0
+ F  S I=$O(DATA(LEVEL,"0004,1500","VALUE",I)) Q:'I  D
+ . S SUBDIR=DATA(LEVEL,"0004,1500","VALUE",I)
+ . S SUBDIR=$$UP^MAGDFCNS(SUBDIR)
+ . S FROMPATH=FROMPATH_"\"_SUBDIR
+ . Q
+ ;
+ S SOPCLASS=$$GET("0004,1510")
+ S IMAGEUID=$$GET("0004,1511")
+ S TSYNTAX=$$GET("0004,1512")
+ S IMAGNUMB=$$GET("0020,0013")
+ S NFRAMES=$$GET("0028,0008")
+ D MEDIA^MAGDAIRS ; store the data in the DATA
+ Q
+ ;
+KEYOBDOC ; process a key object document
+ D DUMP("0004,1500")
+ Q
+ ;
+SRDOC ; process an structured report document
+ D DUMP("0004,1500")
+ Q
+ ;
+PRESENT ; process a presentation state
+ D DUMP("0004,1500")
+ Q
+ ;
+OFFSET(LEVEL,OFFSET) ; update offset
+ N I
+ ; Offset of the Next Directory Record
+ S NEXT(LEVEL)=$$GET("0004,1400")
+ ; Offset of Referenced Lower-Level Directory Entity
+ S OFFSET=$$GET("0004,1420")
+ I OFFSET>0 S LEVEL=LEVEL+1 ; go down
+ E  F I=1:1:LEVEL D  Q:OFFSET
+ . S OFFSET=NEXT(LEVEL)
+ . I OFFSET=0 D
+ . . K DATA(LEVEL)
+ . . S LEVEL=LEVEL-1,OFFSET=NEXT(LEVEL)
+ . . Q
+ . Q
+ Q OFFSET
+ ;
+READITEM(OFFSET,LEVEL,DATA) ;
+ N END ;------ flag indicating the end of the sequence item
+ N MULTIPLE ;- DICOM multiplicity
+ N NAME ;----- name of DICOM data element
+ N NLINES ;--- number of lines of text
+ N SEQTAG ;--- DICOM nested sequence element tag
+ N TAG ;------ DICOM element tag (group,element)
+ N VALUE ;---- value of the DICOM data element
+ N VR ;------- DICOM value representation
+ N I,J,K
+ ;
+ K DATA(LEVEL)
+ I 'SILENT W !,"Offset: ",OFFSET
+ S SEQTAG=^TMP("MAG",$J,"DICOM","OFFSET",OFFSET)
+ S TAG=$P(SEQTAG,"^",$L(SEQTAG,"^"))
+ I TAG'="FFFE,E000" D  Q
+ . S DONE=1
+ . W !,"Error"
+ . Q
+ S END=0
+ F  S OFFSET=$O(^TMP("MAG",$J,"DICOM","OFFSET",OFFSET)) Q:'OFFSET  D  Q:END
+ . S SEQTAG=^TMP("MAG",$J,"DICOM","OFFSET",OFFSET)
+ . S TAG=$P(SEQTAG,"^",$L(SEQTAG,"^"))
+ . I TAG?1"FFFE,".E S END=1 Q
+ . S NAME=$P(^TMP("MAG",$J,"DICOM",INODE,SEQTAG),"^",1),VR=$P(^(SEQTAG),"^",2)
+ . S MULTIPLE=$G(^TMP("MAG",$J,"DICOM",INODE,SEQTAG,0,0),0)
+ . K VALUE S K=0
+ . F I=1:1:MULTIPLE S NLINES=^TMP("MAG",$J,"DICOM",INODE,SEQTAG,I,0) D
+ . . F J=1:1:NLINES S K=K+1,VALUE(K)=^TMP("MAG",$J,"DICOM",INODE,SEQTAG,I,J)
+ . . Q
+ . S DATA(LEVEL,TAG,"NAME")=NAME
+ . M DATA(LEVEL,TAG,"VALUE")=VALUE
+ . Q
+ Q
+ ;
+GET(TAG) ; get data value
+ Q $G(DATA(LEVEL,TAG,"VALUE",1))
+ ;
+DUMP(TAG) ;
+ N I,T
+ I SILENT Q
+ I '$D(DATA(LEVEL,TAG)) W !,"Error -- Missing Tag: ",TAG Q
+ W !,DATA(LEVEL,TAG,"NAME"),": " S T=$X
+ F I=1:1 Q:'$D(DATA(LEVEL,TAG,"VALUE",I))  W:I>1 ! W ?T,DATA(LEVEL,TAG,"VALUE",I)
+ Q
+ ;
+TRYREAD(PATH) ; try $$READFILE() - three strikes and you're out
+ N I,X
+ F I=1:1:3 D  Q:X=1
+ . S X=$$READFILE(PATH)
+ . I X W "  decoding DICOM Directory (DICOMDIR)"
+ . E  W "   trying again..." H 3
+ . Q
+ Q X
+ ;
+READFILE(PATH) ; load the DICOMDIR file into the ^TMP global
+ N FILE ;----- name of file (always "DICOMDIR")
+ N FILESIZE ;- size of DICOMDIR file
+ N FROMPATH ;- path to DICOMDIR file
+ N OFFSET ;--- offset of DICOM element
+ N TAG ;------ DICOM element tag (group,element)
+ N ODEVNAME,ODEVTYPE,QUEUEIN,X
+ ;
+ S FILE="DICOMDIR",FROMPATH=PATH_"\"_FILE
+ W !,"Reading ",FROMPATH
+ S X=$$GETDIR^MAGOSDIR(FROMPATH)
+ I 'X W "  (not on file)" Q 0 ; not on file
+ I X<0 W " *** FILE ERROR: ",X," ***" Q -1 ; error
+ S FILESIZE=$P($G(^TMP("MAG",$J,"DIR LIST",FILE)),";")
+ I 'FILESIZE W " *** ERROR: ZERO-LENGTH FILE ***" Q -2 ; error
+ S MEDIA("FROMPATH")=FROMPATH
+ S MEDIA("DIR LIST INFO")=$G(^TMP("MAG",$J,"DIR LIST",FILE))
+ S QUEUEIN("FILE")=FROMPATH,(ODEVTYPE,ODEVNAME)="",INODE="IN"
+ D ENTRY^MAGDDR2 ; read the header
+ ; build the offset cross-reference needed to parse DICOMDIR
+ K ^TMP("MAG",$J,"DICOM","OFFSET")
+ S TAG="" F  S TAG=$O(^TMP("MAG",$J,"DICOM","IN",TAG)) Q:TAG=""  D
+ . S X=^TMP("MAG",$J,"DICOM","IN",TAG),OFFSET=$P(X,"^",3)
+ . S ^TMP("MAG",$J,"DICOM","OFFSET",OFFSET)=TAG
+ . Q
+ Q 1
+ ;
+MEDIACHK(MEDIA) ; check media info
+ N ERROR,I,MSG
+ S I=0
+ D MEDIACH1(.MEDIA,.ERROR,.MSG) Q:'ERROR 0
+ S I=$O(MSG(""),-1)
+ S:I I=I+1,MSG(I)=""
+ S I=I+1,MSG(I)="Error Message: "_$P(ERROR,",",2,999)
+ D WARNING^MAGDFCNS(.MSG)
+ Q ERROR
+ ;
+MEDIACH1(MEDIA,ERROR,MSG) ; check for error 
+ N I,X
+ S (ERROR,I)=0
+ I '$D(MEDIA("FROMPATH")) D  Q
+ . S ERROR="-1,MEDIA(""FROMPATH"") not defined"
+ . Q
+ I '$D(MEDIA("DIR LIST INFO")) D  Q
+ . S ERROR="-2,MEDIA(""DIR LIST INFO"") not defined"
+ . Q
+ S X=$$GETDIR^MAGOSDIR(MEDIA("FROMPATH"))
+ I 'X D  Q
+ . S ERROR="-3,DICOMDIR is not on file"
+ . S I=I+1,MSG(I)="Something is wrong with CD/DVD disk.  The DICOMDIR DICOM directory file"
+ . S I=I+1,MSG(I)="can no longer be read.  Has the drive door been opened?"
+ . Q
+ I X<0 D  Q
+ . S ERROR="-4,*** FILE ERROR: "_X_" ***"
+ . S I=I+1,MSG(I)="Something is wrong with CD/DVD disk.  The DICOMDIR DICOM directory file"
+ . S I=I+1,MSG(I)="can no longer be read.  This may be a hardware or a CD/DVD drive error."
+ . Q
+ I MEDIA("DIR LIST INFO")'=$G(^TMP("MAG",$J,"DIR LIST","DICOMDIR")) D  Q
+ . S ERROR="-5,DICOMDIR Directory Information Mismatch"
+ . S I=I+1,MSG(I)="Something is wrong with CD/DVD disk.  The disk does not appear to be the"
+ . S I=I+1,MSG(I)="same one that was used at the start of the Importer session.  Could the"
+ . S I=I+1,MSG(I)="original disk have been removed and another one inserted into the drive?"
+ . Q
+ Q  ; no error

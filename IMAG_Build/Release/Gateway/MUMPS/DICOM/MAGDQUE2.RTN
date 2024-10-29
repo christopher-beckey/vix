@@ -1,0 +1,116 @@
+MAGDQUE2 ;WOIFO/PMK - Program to read a DICOM file from the FIFO QUEUE ; 03 Jan 2011 9:09 AM
+ ;;3.0;IMAGING;**11,30,49**;Mar 19, 2002;Build 2201;Jun 29, 2011
+ ;; Per VHA Directive 2004-038, this routine should not be modified.
+ ;; +---------------------------------------------------------------+
+ ;; | Property of the US Government.                                |
+ ;; | No permission to copy or redistribute this software is given. |
+ ;; | Use of unreleased versions of this software requires the user |
+ ;; | to execute a written test agreement with the VistA Imaging    |
+ ;; | Development Office of the Department of Veterans Affairs,     |
+ ;; | telephone (301) 734-0100.                                     |
+ ;; | The Food and Drug Administration classifies this software as  |
+ ;; | a medical device.  As such, it may not be changed in any way. |
+ ;; | Modifications to this software may result in an adulterated   |
+ ;; | medical device under 21CFR820, the use of which is considered |
+ ;; | to be a violation of US Federal Statutes.                     |
+ ;; +---------------------------------------------------------------+
+ ;;
+ ;XXXXXXX XXXX XXXXXXX  XXXXX      XXXXX  XX  XX XXXXXXX XX  XX XXXXXXX
+ ; XX   X  XX   XX   X XX   XX    XX   XX XX  XX  XX   X XX  XX  XX   X
+ ; XX X    XX   XX X   XX   XX    XX   XX XX  XX  XX X   XX  XX  XX X
+ ; XXXX    XX   XXXX   XX   XX    XX   XX XX  XX  XXXX   XX  XX  XXXX
+ ; XX X    XX   XX X   XX   XX    XX   XX XX  XX  XX X   XX  XX  XX X
+ ; XX      XX   XX     XX   XX    XX   XX XX  XX  XX   X XX  XX  XX   X
+ ;XXXX    XXXX XXXX     XXXXX      XXXXX   XXXX  XXXXXXX  XXXX  XXXXXXX
+ ;
+ ; PACS Interface -- read DICOM files in the background
+ ;
+ENTRY ; stub to start ^MAGDQUE2 processing DICOM messages in background
+ S ENTRY="REENTRY^MAGDQUE2"
+ S PROMPT="Ready to process DICOM messages from the PACS?"
+ G SETUP^MAGDSTRT
+ ;
+REENTRY ; Re-entry point from ^MAGDSTRT
+ ; Read DICOM files from the FIFO QUEUE & process them in the Background
+ N TICKER ;--- ticker counter for idle loop
+ S U="^"
+ S FBSWITCH="FOREGROUND" ; this always runs in the foreground
+ D NEWLOG^MAGDMLOG("PACS Gateway") ; initialize the message log
+ D MESSAGE^MAGDMLOG(3,0,"PACS Gateway Process Started","BTV2")
+ ;
+ ; big do forever loop!
+ F  Q:'$$BKGND  D IDLE^MAGDBB(.TICKER,1) ; loop forever
+ Q
+ ;
+BKGND() ; Entry point from ^MAGDHRC for the one processor configuration
+ N STATUS
+ N CHANNEL ;-- number "n" of the "\DICOM\DATAn" message directory
+ N FBSWITCH ;- foreground / midground / background flag for ^MAGDMLOG
+ N III
+ ;
+ S FBSWITCH="FOREGROUND" ; this always runs in the foreground
+ S III=1 ; status 0 - processed queue entry, 1 - idle
+ F CHANNEL=1:1:$O(^MAGDICOM(2006.563,1,"DATA PATH"," "),-1) D
+ . S III=III&$$CHECK ; check queues, one at a time
+ . Q
+ Q III ; 0 - processed queue entry, 1 - idle
+ ;
+CHECK() ; check the HIGH priority queue first, then the MEDIUM, then the LOW
+ ;
+ ; first check for RESPONSEs to outgoing HIS/RIS to DICOM REQUESTs
+ I $$CHECKQUE("RESPONSE","IMMEDIATE") Q 0
+ I $$CHECKQUE("RESPONSE","HIGH") Q 0
+ I $$CHECKQUE("RESPONSE","MEDIUM") Q 0
+ I $$CHECKQUE("RESPONSE","LOW") Q 0
+ ;
+ ; then check for incoming DICOM to HIS/RIS REQUESTs
+ I $$CHECKQUE("REQUEST","IMMEDIATE") Q 0
+ I $$CHECKQUE("REQUEST","HIGH") Q 0
+ I $$CHECKQUE("REQUEST","MEDIUM") Q 0
+ I $$CHECKQUE("REQUEST","LOW") Q 0
+ Q 1
+ ;
+CHECKQUE(SENDTYPE,PRIORITY) ; function to read a queue and process a file
+ N D0,X
+ N FILEMODE ;- either "FIFO QUEUE" (for PACS) or "DIRECT" (for MWL)
+ N INODE ;---- node in ^TMP global for DICOM data storage
+ N SEQNUMB ;-- nesting level of DICOM sequence; set in MSGINIT^MAGDFCNS
+ N SEQUENCE ;- DICOM nesting subscript sequence; set in MSGINIT^MAGDFCNS
+ N QUEUEIN ;-- input file array
+ ;
+ S FILEMODE="FIFO QUEUE" ; use FIFO queues for PACS interface
+ S QUEUEIN("DATAPATH")=$$DATAPATH^MAGDQUE2("INCOMING",SENDTYPE,PRIORITY,CHANNEL)
+ S QUEUEIN("FPTRPATH")=^MAGDICOM(2006.563,1,"DATA PATH",CHANNEL,0)
+ S D0=^MAGDICOM(2006.564,"X","INCOMING",SENDTYPE,PRIORITY)
+ S QUEUEIN("QLETTER")=$P(^MAGDICOM(2006.564,D0,0),"^")
+ S X=$$GETRPTR^MAGDQUE0 ; get the file read pointer
+ I X<1 Q 0 ; the specified file does not exist
+ ;
+ ; process the DICOM message file
+ D MESSAGE^MAGDMLOG(1,0,"Reading "_QUEUEIN("FILE"),"V")
+ ;
+ ; read the DICOM file and save a copy to the ASCII text file
+ S INODE="IN"
+ I ^MAGDICOM(2006.563,1,"ASCII DICOM TEXT")="YES" D  ; generate text file
+ . D TEXTCOPY^MAGDDR1
+ . Q
+ E  D  ; skip text file generation
+ . N ODEVNAME,ODEVTYPE
+ . S (ODEVNAME,ODEVTYPE)="" D ENTRY^MAGDDR2
+ . Q
+ ;
+ D INCOMING^MAGDAUD2 ; update audit record
+ ;
+ S FILEMODE="FIFO QUEUE" ; use the FIFO queues for outgoing responses
+ D ENTRY^MAGDQUE4 ; process the DICOM message
+ ;
+ D FINISHR^MAGDQUE0 ; bump the file pointer
+ Q 1 ; file processed
+ ;
+DATAPATH(DIRECTIO,SENDTYPE,PRIORITY,CHANNEL) N D0
+ ; return the data path for the server
+ ; if not IMMEDIATE priority outgoing request message, use DATA1 queue
+ S D0=^MAGDICOM(2006.564,"X",DIRECTIO,SENDTYPE,PRIORITY)
+ I $P(^MAGDICOM(2006.564,D0,0),"^",2)=1 S CHANNEL=1
+ Q ^MAGDICOM(2006.563,1,"DATA PATH",CHANNEL,0)
+ ;

@@ -1,0 +1,30 @@
+magp47tc ; clean up testing environment for imaging patch 47
+ q
+clean ; clean up anomalies in test environment
+ n magpkgix ; -- index on PACKAGE File (#9.4)
+ n DA ; -------- entry number for FileMan kill
+ n DIK ; ------- file root for FileMan kill
+ n magfilix ; -- file index under 20 node on PACKAGE File
+ ;
+ d DT^DICRW ; setup environment
+ ; get rid of mergefile entries for PROSTHETICS package
+ ; (null routine name associated w/ PATIENT file causes merge to throw an error)
+ u IO(0) w !,"Locating mergefile entries for PROSTHETICS package..."
+ s magpkgix=$o(^DIC(9.4,"B","PROSTHETICS",""))
+ i 'magpkgix d
+ . w "package not found, continuing..."
+ . q
+ e  d
+ . s DA(1)=magpkgix
+ . s DIK="^DIC(9.4,"_DA(1)_",20,"
+ . s magfilix=0
+ . f  s magfilix=$o(^DIC(9.4,DA(1),20,magfilix)) q:'magfilix  d
+ . . s DA=magfilix
+ . . d ^DIK
+ . . u IO(0) w "."
+ . . q
+ . w "done."
+ . q
+ q
+
+

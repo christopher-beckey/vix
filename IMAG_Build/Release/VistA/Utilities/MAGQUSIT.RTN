@@ -1,0 +1,254 @@
+MAGQUSIT ;WISC/RMP - IMAGE SITE PARAMETERS COMPANION ;[ 05/08/95   9:05 AM ]
+ ;;2.0;MAG;;Aug 18, 1997
+ ;;
+ Q
+SERVER ;
+ S X="ERRA^MAGQUSIT",@^%ZOSF("TRAP")
+ N LINE,OPTION,MSGNUM,NETADD,SUB,I
+ X XMREC
+ Q:XMER'=0
+ S ^TMP("MAGQ","SERV",$$NOW^XLFDT,"MSGNUM")=XQMSG_U_XQSUB
+ S OPTION=XQSOP ; THE SERVER OPTION NAME.
+ S MSGNUM=XQMSG ; THE SERVER REQUEST MESSAGE NUMBER (MAILMAN NUMBER).
+ S NETADD=XQSND ; NETWORK ADDRESS OF THE SENDER.
+ S SUB=XQSUB ; SUBJECT HEADING OF THE SERVER REQUEST MESSAGE.
+ I SUB["Imaging Integrity Check" D  Q
+ . S ^TMP("MAGQZ",MSGNUM)=SUB
+ . D IIC^MAGQUSI2($$TRIM($P($P(SUB,"(",2),")",1))) Q
+ I SUB["Update Site file from" D INIT Q
+ I SUB["Image Site Usage:" D SIU Q
+ I ((SUB["MAG")&(SUB["INSTALLATION")) D INST Q
+ Q  ;ERRORLESS QUIT ON ALL OTHER MESSAGES MIGHT ADD SUPPORT MESS PROC
+INIT ;INITIALS SERVER MESSAGES
+ N LOC,DATE,DOMAIN,INITS
+ S LOC=$$TRIM($P(XMRG,"SITE:",2))
+ F I="DATE","DOMAIN","INITS" X XMREC Q:XMER'=0  D @I
+ D FINIT^MAGQAI(DOMAIN,INITS)
+ Q
+INST ;INSTALLATIONS
+ N SITE,DATE,INSTN,INSTRN,I
+ Q:XMRG'["PACKAGE INSTALL"  ;else continue
+ X XMREC Q:XMER'=0
+ D SITE F I=3:1:7 X XMREC Q:XMER'=0  ;skip VERSION,(Start,Comp,Run)Time
+ F I="DATE","INSTRN","INSTN" X XMREC Q:XMER'=0  D @I
+ S X=SITE,DIC="^MAG(2006.98,",DIC(0)="LX",DLAYGO=2006.98
+ D ^DIC K DLAYGO
+ G:+Y<0 EXIT
+ S DA=+Y,DIE=2006.98
+ S DR=".01///^S X=SITE;4///^S X=INSTN;5///^S X=INSTRN;6///^S X=DATE"
+ D ^DIE
+ Q
+SIU ;SITE IMAGING UTILIZATION
+ N LOC,DATE,DOMAIN,IMAGES,WSTNS,I,DIS,CAP,DLIM,VRAD,VDCM
+ N DCMEL,IWS,IWP,QFCNT,UPQUE,BPV,VIV,DCM,NMSP
+ S LOC=$$TRIM($P(XMRG,"SITE:",2))
+ S (DIS,CAP,VRAD,VDCM,DCMEL,QFCNT,UPQUE,IWS,IWP,RI,VIV,DCM,DCMFI)=""
+ S (IWI,IWC,NMSP)=""
+ S ^TMP("MAGQ",XQMSG,5)=""
+ F I="DATE","DOMAIN","IMAGES","WSTAT" X XMREC Q:XMER'=0  D @I
+ S ^TMP("MAGQ",XQMSG,6)=""
+ F  Q:XMER'=0  D  X XMREC
+ . I XMRG["Image file namespace(s):" D NMSP(.NMSP) Q
+ . I XMRG["WS DIS VERS:" D ALD("WS DIS VERS:",.DIS) Q
+ . I XMRG["WS CAP VERS:" D ALD("WS CAP VERS:",.CAP) Q
+ . I XMRG["VistaRad Version:" D SET(.VRAD) Q
+ . I XMRG["Dicom Version:" D SET(.VDCM) Q
+ . I XMRG["DICOM Error Log:" D SET(.DCMEL) Q
+ . I XMRG["DICOM FAILED IMAGES:" D SET(.DCMFI) Q
+ . I XMRG["Queue File count:" D SET(.QFCNT) Q
+ . I XMRG["Unprocessed Queues:" D SET(.UPQUE) Q
+ . I XMRG["Vista Image Version/Build:" D  Q
+ . . D SET(.VIV)
+ . . S VIV="MAG"_$S($P(VIV,U)'="-1":$P(VIV,U),1:"")
+ . . S VIV=VIV_$S($P(VIV,U,2)'="-1":$P(VIV,U,2),1:"")
+ . I XMRG["30 DAY Image Workstation Images:" D SET(.IWI) Q
+ . I XMRG["30 DAY Image Workstation Captures:" D SET(.IWC) Q
+ . I XMRG["30 DAY Image Workstation Sessions:" D SET(.IWS) Q
+ . I XMRG["30 DAY Image Workstation Patients:" D SET(.IWP) Q
+ . I XMRG["30 DAY average daily routed images:" D SET(.RI) Q
+ . I XMRG["BP VERS NUM DATE:" D ALD("BP VERS NUM DATE:",.BPV) Q
+ . I XMRG["DICOM Gateway Version:" D ALD("DICOM Gateway Version:",.DCM)
+ S ^TMP("MAGQ",XQMSG,8)=""
+ D FSIU(LOC,DATE,DOMAIN,IMAGES,WSTNS,VRAD,VDCM,DCMEL,QFCNT,UPQUE,IWS,IWP,RI,.DIS,.CAP,.BPV,VIV,.DCM,DCMFI,IWI,IWC,.NMSP)
+ Q
+SET(DATA) ;
+ S DATA=$$TRIM($P(XMRG,":",2)) Q
+FSIU(LOC,DATE,DOMAIN,IMAGES,WSTNS,VRAD,VDCM,DCMEL,QFCNT,UPQUE,IWS,IWP,RI,DIS,CAP,BPV,VIV,DCM,DCMFI,IWI,IWC,NMSP) ;
+ ;File Site Imaging Utilization
+ N TDA,NLOC,X,Y,MAILDOM,INST
+ I '$D(NMSP(0)) S ^TMP("MAGQ",$J,"NMSP",XMZ)="" Q
+ D MDOM(LOC,DOMAIN,"",.NMSP,.Y) G:+Y<0 EXIT
+ S (DA,TDA)=+Y,DIE=2006.98
+ S DR="1///^S X=DATE"
+ S:IMAGES'="" DR=DR_";2///^S X=IMAGES"
+ S:WSTNS'="" DR=DR_";3///^S X=WSTNS"
+ I VRAD'="" D
+ . S:$P(VRAD,U)'="" DR=DR_";8///^S X=$P(VRAD,U)"
+ . S:$P(VRAD,U,2)'="" DR=DR_";8.5///^S X=$P(VRAD,U,2)"
+ S:VDCM'="" DR=DR_";7///^S X=VDCM"
+ S:DCMEL'="" DR=DR_";9///^S X=DCMEL"
+ S:DCMFI'="" DR=DR_";9.5///^S X=DCMFI"
+ S:QFCNT'="" DR=DR_";10///^S X=QFCNT"
+ S:UPQUE'="" DR=DR_";11///^S X=UPQUE"
+ S:IWS'="" DR=DR_";12///^S X=IWS"
+ S:IWP'="" DR=DR_";13///^S X=IWP"
+ S:IWI'="" DR=DR_";13.2///^S X=IWI"
+ S:IWC'="" DR=DR_";13.4///^S X=IWC"
+ S:RI'="" DR=DR_";14///^S X=RI"
+ S:VIV'="" DR=DR_";4///^S X=VIV"
+ S ^TMP("MAGQ",XQMSG,30)=""
+ D ^DIE
+ S ^TMP("MAGQ",XQMSG,40)=""
+ D WSVD(TDA),WSVU(TDA,.DIS,.CAP,.BPV,.DCM)
+ S ^TMP("MAGQ",XQMSG,50)=""
+ Q
+EXIT ;
+ S ^TMP("RMP","MAGQ","SERV","EXIT")=Y_"^"_$S($G(SITE):SITE,$G(LOC):LOC,1:MSGNUM)
+ Q
+DATE ;
+ S DATE=$$TRIM($P(XMRG,"DATE:",2)) Q
+DOMAIN ; handles "DOMAIN" & "MAIL DOMAIN"
+ S DOMAIN=$$TRIM($P(XMRG,"DOMAIN:",2)) Q
+INITS ;
+ S INITS=$$TRIM($P(XMRG,"INITIALS:",2)) Q
+IMAGES ;
+ N DELIM
+ S DELIM=$S(XMRG["IMAGES:":"IMAGES:",1:"2005 ENTRIES:")
+ S IMAGES=$$TRIM($P(XMRG,DELIM,2)) Q
+WSTAT ;
+ S WSTNS=$$TRIM($P(XMRG,"2006.81 ENTRIES:",2)) Q
+SITE ;
+ S SITE=$$TRIM($P(XMRG,"SITE:",2))
+ I SITE[".MED" S SITE=$P(SITE,".MED",1)_$P(SITE,".MED",2) Q
+INSTN ;Install name
+ S INSTN=$$TRIM($P(XMRG,"Install Name:",2)) Q
+INSTRN ;Installer name
+ S INSTRN=$$TRIM($P(XMRG,"Installed by:",2)) Q
+ALD(DELIM,DIS) ;Array loader
+ S DIS($$TRIM($P($P(XMRG,DELIM,2),U)))=$$TRIM($P($P(XMRG,DELIM,2),U,2,9))
+ Q
+NMSP(NMSP) ;
+ N INDEX,TEMP
+ S INDEX=0,TEMP=$$TRIM($P(XMRG,":",2))
+ F  S INDEX=INDEX+1 Q:$P(TEMP,"^",INDEX)=""  D
+ . S NMSP(INDEX-1)=$P(TEMP,"^",INDEX)
+ Q
+ERRA ;
+ S SERVER="0^ERROR "_$$EC^%ZOSV
+ D @^%ZOSF("ERRTN")
+ Q
+TRIM(X) ; remove both leading and trailing blanks
+ N I,J
+ F I=1:1:$L(X) Q:$E(X,I)'=" "
+ F J=$L(X):-1:I Q:$E(X,J)'=" "
+ Q $E(X,I,J)
+WSVD(SIEN) ; Imaging Workstation capture/display version delete
+ ;Clearing both WS Version multiples to prepare for update
+ ;Clearing both BP & Dicom Version multiples to prepare for update
+ N IEN,NODE
+ F NODE=2,3,5,6 S IEN=0 D
+ . F  S IEN=$O(^MAG(2006.98,SIEN,NODE,IEN)) Q:IEN'?1N.N  D
+ . . S DIE="^MAG(2006.98,"_SIEN_","_NODE_","
+ . . S DA(1)=SIEN,DA=IEN,DR=".01///@"
+ . . D ^DIE
+ Q
+WSVU(SIEN,WSD,WSC,BPV,DCM) ; Update the version multiples with current data
+ N NAME,COUNT
+ S NAME=""
+ F  S NAME=$O(WSD(NAME)) Q:NAME=""  D
+ . S COUNT=WSD(NAME)
+ . S DIC="^MAG(2006.98,"_SIEN_",3,"
+ . S DIC(0)="XL",DIC("P")=$P(^DD(2006.98,3.6,0),"^",2)
+ . S DA(1)=SIEN,X=NAME ;,DIC("DR")=".01"
+ . K DD,DO
+ . D FILE^DICN
+ . S $P(^MAG(2006.98,SIEN,3,+Y,0),"^",2)=COUNT
+ . K DIC
+ S NAME=""
+ F  S NAME=$O(WSC(NAME)) Q:NAME=""  D
+ . S COUNT=WSC(NAME)
+ . S DIC="^MAG(2006.98,"_SIEN_",2,"
+ . S DIC(0)="XL",DIC("P")=$P(^DD(2006.98,3.5,0),"^",2)
+ . S DA(1)=SIEN,X=NAME ;,DIC("DR")=".01"
+ . K DD,DO
+ . D FILE^DICN
+ . S $P(^MAG(2006.98,SIEN,2,+Y,0),"^",2)=COUNT
+ . K DIC
+ S NAME=""
+ F  S NAME=$O(BPV(NAME)) Q:NAME=""  D
+ . S DIC="^MAG(2006.98,"_SIEN_",5,"
+ . S DIC(0)="XL",DIC("P")=$P(^DD(2006.98,3.7,0),"^",2)
+ . S DA(1)=SIEN,X=NAME
+ . K DD,DO
+ . D FILE^DICN
+ . S $P(^MAG(2006.98,SIEN,5,+Y,0),"^",2)=BPV(NAME)
+ . K DIC
+ S NAME=""
+ F  S NAME=$O(DCM(NAME)) Q:NAME=""  D
+ . S DIC="^MAG(2006.98,"_SIEN_",6,"
+ . S DIC(0)="XL",DIC("P")=$P(^DD(2006.98,3.8,0),"^",2)
+ . S DA(1)=SIEN,X=$P(NAME,";",1,2)
+ . K DD,DO
+ . D FILE^DICN
+ . S $P(^MAG(2006.98,SIEN,6,+Y,0),"^",2)=DCM(NAME)
+ . S $P(^MAG(2006.98,SIEN,6,+Y,0),"^",3)=$P(NAME,";;",2)
+ . K DIC
+ Q
+MDOM(LOC,DOMAIN,INST,NMSP,DA) ; Mail Domain lookup
+ N INDX,FDA,NLOC
+ K MAGMNS,MAGNS,MAGINST,MAGIMP
+ ; 1st find user file (#2006.19) entry
+ I $P(LOC,U,2)?1N.N D  ;Consolidated version
+ . S INST=$$UINST($P(LOC,U),$P(LOC,U,2))
+ . S Y=$O(^MAG(2006.19,"D",INST,""))
+ . S:Y'?1N.N Y=$$ADDU($P(LOC,U),.NMSP)
+ E  D  Q:Y'?1N.N  ;NON-INSTITUTION related
+ . S Y=$O(^MAG(2006.19,"B",LOC,""))
+ . I Y'?1N.N D
+ . . I LOC[".MED." D
+ . . . S NLOC=$P(LOC,".MED.")_"."_$P(LOC,".MED.",2)
+ . . . S Y=$O(^MAG(2006.19,"B",NLOC,""))
+ . . . I Y?1N.N S LOC=NLOC
+ . . . E  S:$D(NMSP) Y=$$ADDU(LOC,.NMSP)
+ . . E  S:$D(NMSP) Y=$$ADDU(LOC,.NMSP)
+ ;Update the Image User entry
+ Q:Y'?1N.N
+ S MAGDA=Y,INDX=0
+ F  S INDX=$O(NMSP(INDX)) Q:INDX'?1N.N  D
+ . S FDA(2006.191,"?+"_INDX_","_MAGDA_",",.01)=NMSP(INDX)
+ D UPDATE^DIE("E","FDA","","MAGMNS")
+ K FDA
+ S:$D(NMSP(0)) FDA(2006.19,MAGDA_",",.02)=NMSP(0)
+ S FDA(2006.19,MAGDA_",",.06)=DOMAIN
+ D UPDATE^DIE("U","FDA","","MAGNS")
+ K FDA
+ S DA=$O(^MAG(2006.98,"B",Y,""))
+ S:DA="" DA=$$ADDA($P(LOC,U))
+ S ^TMP("MAGQ",XQMSG,"MDOM5")=DA_U_Y
+ Q
+UINST(NAME,ID) ; Update Institution file & Image User
+ I '$D(^DIC(4,"B",NAME)) D
+ . S FDA(4,"+1,",.01)=NAME
+ . S FDA(4,"+1,",99)=ID
+ . S ID(1)=ID
+ . D UPDATE^DIE("U","FDA","ID","MAGINST")
+ . K FDA
+ Q ID
+ADDU(LOC,NMSP) ;
+ N Y
+ S FDA(2006.19,"+1,",.01)=LOC
+ S FDA(2006.19,"+1,",.02)=NMSP(0)
+ S FDA(2006.19,"+1,",.05)=$O(^DIC(4,"B",LOC,""))
+ D UPDATE^DIE("U","FDA","Y","MAGIMP")
+ K FDA
+ Q Y(1)
+ADDA(NAME) ; Add user activity entry
+ N ID
+ S ID=$O(^MAG(2006.19,"B",NAME,""))
+ Q:ID="" 0
+ S DIC="^MAG(2006.98,",DIC(0)="LX",DLAYGO=2006.98
+ S X=NAME
+ ;S DIC("DR")=".01///"_NAME
+ D ^DIC
+ K DIC
+ Q +Y

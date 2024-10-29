@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
+  <display-name></display-name>
+
+  <welcome-file-list>
+    <welcome-file>index.jsp</welcome-file>
+  </welcome-file-list>
+
+  <context-param>
+    <param-name>contextConfigLocation</param-name>
+    <param-value>/WEB-INF/applicationContext.xml</param-value>
+  </context-param>
+
+  <listener>
+    <description>
+      The Spring servlet context listener that loads the
+      application context.
+    </description>
+    <display-name>Spring context loader listener</display-name>
+    <listener-class>
+      org.springframework.web.context.ContextLoaderListener
+    </listener-class>
+  </listener>
+
+  <servlet>
+    <display-name>JAX-RS REST Servlet</display-name>
+    <servlet-name>JAX-RS REST Servlet</servlet-name>
+    <servlet-class>
+      com.sun.jersey.spi.container.servlet.ServletContainer
+    </servlet-class>
+    <init-param>
+      <param-name>com.sun.jersey.config.property.packages</param-name>
+      <param-value>gov.va.med.imaging.web.rest.exceptions;gov.va.med.imaging.viewer.rest</param-value>
+    </init-param>
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+  <servlet>
+    <servlet-name>ViewerImagingServlet</servlet-name>
+    <servlet-class>gov.va.med.imaging.viewer.web.ViewerImagingServlet</servlet-class>
+  </servlet>
+
+  <filter>
+    <description>Sets the security context on the request and clears it on the response.</description>
+    <display-name>Security Context Creation and Destruction</display-name>
+    <filter-name>SecurityFilter</filter-name>
+    <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+    <init-param>
+      <param-name>targetBeanName</param-name>
+      <param-value>securityFilter</param-value>
+    </init-param>
+  </filter>
+  <filter>
+    <filter-name>TokenFilter</filter-name>
+    <filter-class>gov.va.med.imaging.tomcat.vistarealm.encryption.TokenFilter</filter-class>
+  </filter>
+
+  <filter>
+    <filter-name>StsFilter</filter-name>
+    <filter-class>gov.va.med.imaging.StsFilter</filter-class>
+  </filter>
+
+  <servlet-mapping>
+    <servlet-name>JAX-RS REST Servlet</servlet-name>
+    <url-pattern>/restservices/*</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>JAX-RS REST Servlet</servlet-name>
+    <url-pattern>/token/restservices/*</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>JAX-RS REST Servlet</servlet-name>
+    <url-pattern>/sts/restservices/*</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>JAX-RS REST Servlet</servlet-name>
+    <url-pattern>/secure/*</url-pattern>
+  </servlet-mapping>
+
+
+  <servlet-mapping>
+    <servlet-name>ViewerImagingServlet</servlet-name>
+    <url-pattern>/viewerImaging/deleteImage/*</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>ViewerImagingServlet</servlet-name>
+    <url-pattern>/token/viewerImaging/deleteImage/*</url-pattern>
+  </servlet-mapping>
+
+  <filter-mapping>
+    <filter-name>TokenFilter</filter-name>
+    <url-pattern>/token/*</url-pattern>
+  </filter-mapping>
+
+  <filter-mapping>
+    <filter-name>StsFilter</filter-name>
+    <url-pattern>/sts/*</url-pattern>
+  </filter-mapping>
+
+  <filter-mapping>
+    <filter-name>SecurityFilter</filter-name>
+    <servlet-name>JAX-RS REST Servlet</servlet-name>
+  </filter-mapping>
+
+  <security-constraint>
+    <display-name>ViewerImagingServiceConstraint</display-name>
+    <web-resource-collection>
+      <web-resource-name>Viewer Imaging Service</web-resource-name>
+      <description>The Viewer Imaging web app is protected with VistA security</description>
+      <url-pattern>/restservices/*</url-pattern>
+      <url-pattern>/secure/*</url-pattern>
+    </web-resource-collection>
+    <auth-constraint>
+      <description>A vista user is authenticated against the Vista system</description>
+      <role-name>vista-user</role-name>
+      <role-name>clinical-display-user</role-name>
+    </auth-constraint>
+    <user-data-constraint>
+      <description>The transport does not have to be guaranteed just the user authenticated</description>
+      <transport-guarantee>NONE</transport-guarantee>
+    </user-data-constraint>
+  </security-constraint>
+
+  <!--Null security constraint-->
+  <security-constraint>
+    <display-name>Null Security Constraint</display-name>
+    <web-resource-collection>
+      <web-resource-name>Viewer Imaging Service</web-resource-name>
+      <description>Null filter; should affect no calls</description>
+      <url-pattern>/nullfilter/*</url-pattern>
+    </web-resource-collection>
+    <auth-constraint>
+      <role-name>vista-user</role-name>
+      <role-name>clinical-display-user</role-name>
+    </auth-constraint>
+    <user-data-constraint>
+      <transport-guarantee>NONE</transport-guarantee>
+    </user-data-constraint>
+  </security-constraint>
+
+  <login-config>
+    <auth-method>BASIC</auth-method>
+    <realm-name>VistaRealm</realm-name>
+  </login-config>
+
+  <security-role>
+    <description>A VistaImaging user authenticated against VistaImaging</description>
+    <role-name>vista-user</role-name>
+  </security-role>
+
+  <security-role>
+    <role-name>clinical-display-user</role-name>
+  </security-role>
+
+</web-app>

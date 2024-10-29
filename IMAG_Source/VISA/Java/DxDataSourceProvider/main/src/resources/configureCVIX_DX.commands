@@ -1,0 +1,12 @@
+! Clear everything from the configuration file
+clear
+! Set the location of the keystore, the password to access the keystore and the alias of the certificate 
+key,"%1","%2",dx
+! Set the location of the truststore and the password to access the truststore
+trust,"%3","%4" 
+! disable TLS, this will be enabled in production
+tls,dxs,"%5"
+! save the configuration  
+save 
+! exit the utility
+exit

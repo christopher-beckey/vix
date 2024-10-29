@@ -1,0 +1,124 @@
+MAGDMFBI ;WOIFO/PMK - Program to build DICOM Master File ; 01/04/2006  13:51
+ ;;3.0;IMAGING;**9,10,11,69,118**;Mar 19, 2002;Build 4525;May 01, 2013
+ ;; Per VHA Directive 2004-038, this routine should not be modified.
+ ;; +---------------------------------------------------------------+
+ ;; | Property of the US Government.                                |
+ ;; | No permission to copy or redistribute this software is given. |
+ ;; | Use of unreleased versions of this software requires the user |
+ ;; | to execute a written test agreement with the VistA Imaging    |
+ ;; | Development Office of the Department of Veterans Affairs,     |
+ ;; | telephone (301) 734-0100.                                     |
+ ;; | The Food and Drug Administration classifies this software as  |
+ ;; | a medical device.  As such, it may not be changed in any way. |
+ ;; | Modifications to this software may result in an adulterated   |
+ ;; | medical device under 21CFR820, the use of which is considered |
+ ;; | to be a violation of US Federal Statutes.                     |
+ ;; +---------------------------------------------------------------+
+ ;;
+ Q
+ ;
+INSTRUMT ; Radiology Instruments
+ N D0,DTIME,FILE,LOCATION,PORTLIST,RECORD,RPCERR,STATUS,VALLOC
+ N RPCERR
+ ;
+ S FILE=$$INIT^MAGDMFB(2006.581,"Instrument","Instrument")
+ Q:FILE=""
+ ;
+ S LOCATION=$G(^MAGDICOM(2006.563,1,"LOCATION"))
+ Q:$$CALLRPC^MAGM2VCU("MAG DICOM VALID LOCATIONS","M",.VALLOC)<0
+ ;
+ K ^MAGDICOM(2006.581)
+ S ^MAGDICOM(2006.581,0)="INSTRUMENT DICTIONARY^2006.581^^"
+ ;
+ K PORTLIST
+ S D0=0
+ S STATUS=$$OPEN^MAGOSFIL(FILE,"R")
+ I STATUS<0 W !,"Open Error: ",STATUS S FATAL=FATAL+1 Q
+ F  D  Q:STATUS'=""
+ . N DESCRIPT,ERR,MACHINE,MNEMONIC,PORT,IMGSVC,SITEIEN
+ . S STATUS=$$READ^MAGOSFIL(FILE,.RECORD)
+ . I $$USEPRIN^MAGOSFIL(1)
+ . I STATUS<0 Q:+STATUS=-2  D  Q
+ . . D MESSAGE^MAGDMLOG(1,0,"Read Error: "_STATUS,"t")
+ . . S FATAL=FATAL+1
+ . . Q
+ . Q:RECORD=""  Q:RECORD=$C(12)
+ . S RECORD=$TR(RECORD,$C(9,145,146,147,148),$C(32,39,39,34,34))
+ . I RECORD?1"#".E D  Q  ; comment
+ . . D:'SILENT MESSAGE^MAGDMLOG("Comment: <<"_$P(RECORD,"#",2,999)_">>","t")
+ . . Q
+ . ; data
+ . S ERR=0
+ . S X=$L(RECORD,"|") I X'=5,X'=6 D
+ . . D MESSAGE^MAGDMLOG(2,0,"*** Record should contain 5 or 6 fields (separated by |) ***","t")
+ . . D MESSAGE^MAGDMLOG(1,0,RECORD,"t")
+ . . S FATAL=FATAL+1,ERR=1
+ . . Q
+ . S MNEMONIC=$$UPPER^MAGOSMSC($$PIECE(RECORD,1))
+ . S DESCRIPT=$$PIECE(RECORD,2)
+ . S SITE=$$PIECE(RECORD,3) ; Case Sensitive
+ . S IMGSVC=$$PIECE(RECORD,4)
+ . S PORT=$$PIECE(RECORD,5)
+ . S MACHINE=$$PIECE(RECORD,6)
+ . ;
+ . I $TR(MNEMONIC,"-_")'?1.AN D
+ . . D MESSAGE^MAGDMLOG(1,0,"Mnemonic must be alphanumeric (dashes and underscores optional).","t")
+ . . S ERR=1,FATAL=FATAL+1
+ . . Q
+ . ;
+ . I "^RAD^CON^"'[("^"_IMGSVC_"^") D
+ . . D MESSAGE^MAGDMLOG(1,0,"Unknown imaging service: "_IMGSVC,"t")
+ . . D MESSAGE^MAGDMLOG(1,0,"Must be either ""RAD"" or ""CON"".","t")
+ . . S FATAL=FATAL+1,ERR=1
+ . . Q
+ . ;
+ . D
+ . . I SITE="" S SITEIEN=LOCATION Q
+ . . S X=$TR(SITE,"abcdefghijklmnopqrstuvwxyz","ABCDEFGHIJKLMNOPQRSTUVWXYZ")
+ . . S RPCERR=$$CALLRPC^MAGM2VCU("MAG DICOM FIND LOCATION","M",.SITEIEN,X)
+ . . I RPCERR<0 S SITEIEN=RPCERR Q
+ . . Q:SITEIEN>0
+ . . S X=$TR(X,", ")
+ . . S RPCERR=$$CALLRPC^MAGM2VCU("MAG DICOM FIND LOCATION","M",.SITEIEN,X)
+ . . I RPCERR<0 S SITEIEN=RPCERR Q
+ . . Q
+ . I SITEIEN<0 D
+ . . D MESSAGE^MAGDMLOG(1,0,"*** Error: "_SITEIEN_" ***","t")
+ . . S SITEIEN="",FATAL=FATAL+1,ERR=1
+ . . Q
+ . I PORT="" D
+ . . D MESSAGE^MAGDMLOG(1,0,"Error, port number MUST be specified.","t")
+ . . S FATAL=FATAL+1,ERR=1
+ . . Q
+ . E  I $D(PORTLIST(PORT)) D  ; just a warning
+ . . D MESSAGE^MAGDMLOG(1,0,"Warning, port "_PORT_" is already in use by "_PORTLIST(PORT)_".","t")
+ . . Q
+ . E  S PORTLIST(PORT)=MNEMONIC
+ . D:'SILENT!ERR
+ . . S X=MNEMONIC_" -- "_DESCRIPT_" -- "_SITEIEN
+ . . S X=X_" -- "_IMGSVC_" -- "_PORT_" -- "_MACHINE
+ . . D MESSAGE^MAGDMLOG(1,0,X,"t")
+ . . Q
+ . I ERR,FBSWITCH="FOREGROUND" W !,"Press <Enter> to continue: " R Z:DTIME
+ . Q:ERR
+ . ;
+ . S X=MNEMONIC_"^"_DESCRIPT_"^"_IMGSVC_"^"_PORT_"^"_SITEIEN_"^"_MACHINE
+ . S D0=D0+1
+ . S ^MAGDICOM(2006.581,D0,0)=X
+ . S ^MAGDICOM(2006.581,"B",MNEMONIC,D0)=""
+ . S $P(^MAGDICOM(2006.581,0),"^",3,4)=D0_"^"_D0
+ . Q
+ S STATUS=$$CLOSE^MAGOSFIL(FILE)
+ S X=D0_" instrument"_$S(D0=1:"",1:"s")_" entered into database."
+ D MESSAGE^MAGDMLOG(1,0,X,"t")
+ ;
+ D SENDINST^MAGVDGW1  ; Send Info to VistA
+ Q
+ ;
+PIECE(IN,SEQ) ; Get piece, remove leading and trailing blanks
+ N X
+ S X=$TR($P(IN,"|",SEQ),$C(9,10,12,13)," ")
+ F  Q:$E(X,1)'=" "  S X=$E(X,2,$L(X))
+ F  Q:$E(X,$L(X))'=" "  S X=$E(X,1,$L(X)-1)
+ Q X
+ ;

@@ -1,0 +1,249 @@
+#==============================================================================
+# static information common to all instances of DPS component
+#==============================================================================
+[ component_info ]
+name = DPS
+type = java_lib
+category = application_support_libs
+description = DICOM Print Services Java class library
+package_prefix = com.lbs
+slnreldir = .\jsrc\com\lbs\DPS
+
+[ required_components ]
+component = java_lib/DCS
+component = java_lib/DDS
+[ debug_controls ]
+debug_flag = df_SHOW_CONSTRUCTORS, 0x0001, show object constructors
+debug_flag = df_SHOW_DESTRUCTORS, 0x0002, show object destructors
+debug_flag = df_SHOW_GENERAL_FLOW, 0x0004, show general flow
+debug_flag = df_SIMULATE_HARDWARE, 0x0008, simulate external devices
+debug_flag = df_SHOW_CFG_INFO, 0x0010, show configuration information
+debug_flag = df_SHOW_EXC_THROW, 0x0020, show exceptions before throwing
+debug_flag = df_SHOW_DIMSE,     0x10000, log n-object actions
+debug_flag = df_SHOW_VERBOSE,   0x20000, various verbose messages
+debug_flag = df_WARN_NO_NSET,   0x20000, log objects that were not n-set
+debug_flag = df_SUPPORT_DEBUG_CMD_EVENTS,   0x40000, allow notifications on .../DPS/debug_command cfg attribute
+debug_flag = df_FORCE_DCS_EXCEPTION_ON_N_ACTION, 0x100000, simulate internal error when client sends n-action
+debug_flag = df_FORCE_DIMSE_EXCEPTION_ON_N_ACTION, 0x200000, simulate client error when client sends n-action
+debug_flag = df_ABORT_ASSOCIATION, 0x400000, PrintClient will abort after n-action
+
+#==============================================================================
+# per-instance information for the DPS component
+#==============================================================================
+[ DPS ]
+debug_flags = 0x00000
+debug_command = NONE
+enable_statistics = yes
+images_in_counter_name = /dicom/print/scp_statistics/images_in
+sheets_in_counter_name = /dicom/print/scp_statistics/sheets_in
+images_out_counter_name = /dicom/print/scu_statistics/images_out
+sheets_out_counter_name = /dicom/print/scu_statistics/sheets_out
+
+[ DPS/PrintClient ]
+
+#
+# following are the list of attributes that are requested when 
+# PrintClient sends N-GET-RQ dimse messages to the SCP for the
+# Printer SOP Class. 
+#
+# The full set of attributes defined for printer is:
+#   2110,0030
+#   0008,0070
+#   0008,1090
+#   0018,1000
+#   0018,1020
+#   0018,1200
+#   0018,1201
+#   2110,0010
+#   2110,0020
+#
+[ DPS/PrintClient/printer_n_get_attributes ]
+attribute = 2110,0010
+attribute = 2110,0020
+
+#
+# following are the list of attributes that are requested when 
+# PrintClient sends N-GET-RQ dimse messages to the SCP for the
+# PrintJob SOP Class. 
+#
+# The full set of attributes defined for print job is:
+#    2100,0040
+#    2100,0050
+#    2110,0030
+#    2100,0070
+#    2100,0020
+#    2100,0030
+#    2000,0020
+#
+[ DPS/PrintClient/printjob_n_get_attributes ]
+attribute = 2100,0020
+attribute = 2100,0030
+attribute = 2000,0020
+
+[ DPS/PrintJobDescription ]
+
+#
+# default values for PrintJobDescription settings
+# These values are used only if the application that is using
+# PrintClient does not specify them in the PrintJobDescription
+# that it is producing.
+#
+[ DPS/PrintJobDescription/defaults ]
+#
+# Number of seconds between the time that a dimse request is queued
+# for sending by the client, and the dimse response must be
+# received from the server.
+# Note that since the timer starts when the request is queued, and
+# not when it has completed sending, for a large message (e.g. n-set
+# on a large image), much of the time may be spent sending the
+# request. Adjust this timeout accordingly.
+#
+response_timeout_seconds = 60
+#
+# Number of seconds between the time that an n-action-request is
+# sent to the server, and the resulting print job must have a status
+# of FAILURE or DONE.
+#
+job_timeout_seconds = 180
+#
+# If the poll_print_job attribute is set to true, this specifies the
+# number of seconds that the client will wait before sending each
+# n-get-request dimse messages.
+#
+print_job_poll_rate_seconds = 2
+#
+# If true then the print job sop class will be requested
+#
+request_print_job_sopclass = false
+#
+# If true, then the print job status will be polled using n-get messages.
+# The attribute request_print_job_sopclass must also be true.
+# If false, and request_print_job_sopclass is true, then the client
+# will expect to receive n-event-report messages from the server to 
+# indicate when the printer or print job status changes.
+#
+poll_print_job = false
+#
+# If true then the color print management meta sop class will be requested.
+#
+request_color = false
+#
+# If true, then n-action requests will be sent at the film session level.
+# The server may not support this.
+#
+print_by_session = false
+#
+# The transfer syntax uid that will be proposed for all requested sop classes.
+#
+association_ts_uid = 1.2.840.10008.1.2
+
+#
+# settings that control the PrintSCU behaviour, but are not specified
+# in each print job
+#
+[ DPS/scu_association_options ]
+#
+# set to true if SCU should send affected_sop_instance_uid in the
+# n_create_request dimse messages. If false, then the SCP
+# is required to provide UID's for created objects.
+#
+send_uid_in_n_create_req = true
+
+
+[ DPS/scp_association_options ]
+#
+# If true, then PrintSCP will generate n-event-report dimse messages for
+# the printer object, and print job object, if the print job sop class
+# has been negotiated. If false, then SCU's must poll (n-get) for
+# printer or print job status.
+send_n_event_report = no
+#
+# If true then PrintSCP will allow n-action request dimse messages on
+# the film session object. Otherwise, n-action can only be sent to the
+# film box object.
+enable_film_session_printing = yes
+
+#
+# Printer failure status values can be mapped to an alternate (WARNING or
+# NORMAL) value using this field
+#
+printer_failure_status_mapping = FAILURE
+#
+# Printer warning status values can be mapped to an alternate (FAILURE or
+# NORMAL) value using this field
+# 
+printer_warning_status_mapping = WARNING
+#
+# If true, then allow clients to negotiate the printer sop class explicitly
+# even if they are also negotiating grayscale or color print management
+# meta sop class.
+#
+allow_printer_sop_class_with_meta = no
+
+#
+#	UID's of the sop classes that will be supported by the SCP, in order of
+#	preference.
+#
+[ DPS/scp_association_options/supported_sop_classes ]
+# basic grayscale print meta sop class
+sop_class = 1.2.840.10008.5.1.1.9
+# print job
+sop_class = 1.2.840.10008.5.1.1.14
+# annotation box
+sop_class = 1.2.840.10008.5.1.1.15
+# printer
+sop_class = 1.2.840.10008.5.1.1.16
+# basic color print meta sop class
+sop_class = 1.2.840.10008.5.1.1.18
+# presentation lut
+sop_class = 1.2.840.10008.5.1.1.23
+# basic print image overlay box 
+sop_class = 1.2.840.10008.5.1.1.24.1
+
+#
+#	UID's of the transfer syntaxes that will be supported by the SCP, in order of
+#	preference.
+#
+[ DPS/scp_association_options/supported_transfer_syntaxes ]
+# implicit-little-endian
+transfer_syntax = 1.2.840.10008.1.2
+# explicit-little-endian
+transfer_syntax = 1.2.840.10008.1.2.1
+# explicit-big-endian
+transfer_syntax = 1.2.840.10008.1.2.2
+
+#
+# config for default OEMPrinterInfo implementation
+#
+[ DPS/OPI ]
+
+#
+# an example of config file based decoding, left hand side is the format string
+# right hand side is count of annotation boxes for this format.
+#
+[ DPS/OPI/annotation_formats ]
+annot_format_A = 1
+annot_format_B = 3 
+# test odd number of byte string
+annot_format_B2 = 3
+annot_format_C = 4
+annot_format_Z = 256
+# This is needed for the DROC setup
+ANNOTATION = 6
+
+#
+# an example of config file based decoding, left hand side is the format is string
+# right hand side is count of image boxes for this format.
+#
+[ DPS/OPI/formats ]
+CUSTOM\1 = 9
+CUSTOM\2 = 3 
+CUSTOM\3 = 6
+
+#
+# Default setup for ObjectTable
+#
+[ DPS/ObjectTable ]
+use_ctx_id_in_key = no
+use_sop_class_in_key = no
+check_ctx_id_during_lookup = yes

@@ -1,0 +1,104 @@
+﻿<Views:BaseImagingView x:Class="DicomImporter.Views.DirectImportHomeView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:Converters="clr-namespace:ImagingClient.Infrastructure.Converters;assembly=ImagingClient.Infrastructure" 
+             xmlns:Views="clr-namespace:ImagingClient.Infrastructure.Views;assembly=ImagingClient.Infrastructure" 
+             xmlns:ImporterViews="clr-namespace:DicomImporter.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="576" d:DesignWidth="520">
+    <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+        <Converters:BoolToOppositeBoolConverter x:Key="BoolToOppositeBoolConverter" />
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Label Style="{DynamicResource ResourceKey=SectionTitle}" 
+               Content="Media Direct Import" 
+               Grid.Row="0"/>
+
+        <StackPanel Grid.Row="1">
+            <ImporterViews:ImporterMessagesView x:Name="ImporterMessages" 
+                                  DataContext="{Binding ImporterMessagesViewModel}" />
+        </StackPanel>
+
+        <GroupBox Name="gbMediaSource" 
+                  Header="Media Source"
+                  Grid.Row="2"
+                  Visibility="{Binding IsMixedorDicomMedia, Converter={StaticResource BooleanToVisibilityConverter}}" >
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <RadioButton Content=" Choose a Drive:"
+                             Grid.Row="0"
+                             Grid.Column="0"
+                             IsChecked="{Binding UseDrive}"/>
+
+                <ComboBox VerticalAlignment="Top" 
+                      Width="80" 
+                      IsEnabled="{Binding DriveControlsEnabled}" 
+                      ItemsSource="{Binding Path=Drives}" 
+                      SelectedItem="{Binding Path=DriveLetter}" 
+                      HorizontalAlignment="Left" 
+                      VerticalContentAlignment="Top"
+                      Grid.Row="0"
+                      Grid.Column="1" 
+                      Grid.ColumnSpan="2"/>
+
+
+                <RadioButton Content=" Choose a Folder:"
+                             Grid.Row="1"
+                             Grid.Column="0"
+                             IsChecked="{Binding UseDrive, Converter={StaticResource BoolToOppositeBoolConverter}}"/>
+
+                <TextBox IsEnabled="{Binding FolderControlsEnabled}" 
+                         IsReadOnly="True" 
+                         Text="{Binding Path=Folder}" 
+                         Grid.Row="1"
+                         Grid.Column="1"/>
+
+                <Button Content="Select Folder"
+                        Grid.Row="1"
+                        Grid.Column="2"
+                        Name="btnSelectFolder" 
+                        IsEnabled="{Binding FolderControlsEnabled}"
+                        Click="SelectFolder_Click" />
+            </Grid>
+        </GroupBox >
+        <StackPanel Margin="0,10,0,0"
+                    Grid.Row="3">
+            <ImporterViews:NonDicomMediaView x:Name="NonDicomMedia" 
+                                  DataContext="{Binding Path=NonDicomMediaViewModel}" />
+        </StackPanel>
+        <StackPanel Margin="0,10,0,0" 
+                    Grid.Row="4"
+                    Visibility="{Binding Path=ProgressViewModel.IsWorkInProgress, Converter={StaticResource BooleanToVisibilityConverter}}">
+            <Views:ProgressView DataContext="{Binding Path=ProgressViewModel}"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" 
+                    HorizontalAlignment="Right" 
+                    Margin="0,10,0,0"
+                    Grid.Row="5">
+            <Button Name="btnBack" Content="&lt; Back" HorizontalAlignment="Right" Command="{Binding NavigateBackCommand}" />
+            <Button Content="Reconcile Media" HorizontalAlignment="Right" Command="{Binding PerformActionCommand}"/>
+            <Button Content="Cancel" HorizontalAlignment="Right" Command="{Binding CancelActionCommand}"/>
+        </StackPanel>
+
+    </Grid>
+</Views:BaseImagingView>

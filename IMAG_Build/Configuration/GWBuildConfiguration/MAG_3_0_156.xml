@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<build
+ name="MAG*3.0*156"
+ patch="156"
+ patchName="VistA Imaging Version 3.0 Patch 156 - Legacy DICOM Gateway">
+
+  <routines>
+    <routine name="MAGDFND5" export="MAGDFND5.RTN" />
+    <routine name="MAGDWLU"  export="MAGDWLU.RTN" />
+    <routine name="MAGDVRSN" export="MAGDVRSN.RTN" />
+    <routine name="MAGDTCP3" export="MAGDTCP3.RTN" />
+    <routine name="MAGDMFBS" export="MAGDMFBS.RTN" />
+    <routine name="MAGDIWBD" export="MAGDIWBD.RTN" />
+    <routine name="MAGDIWBB" export="MAGDIWBB.RTN" />
+    <routine name="MAGDIWB1" export="MAGDIWB1.RTN" />
+    <routine name="MAGDHRCB" export="MAGDHRCB.RTN" />
+    <routine name="MAGDDW2"  export="MAGDDW2.RTN" />
+    <routine name="MAGDDR2"  export="MAGDDR2.RTN" />
+    <routine name="MAGDACU"  export="MAGDACU.RTN" />
+    <routine name="MAGDACP1" export="MAGDACP1.RTN" />
+  </routines>
+
+  <PatchBuildInfo>
+	<BuildInfo BuildNumber="6006" BuildDate="Feb 27, 2015"/>
+  </PatchBuildInfo>
+   
+</build>

@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="2.5" 
+	xmlns="http://java.sun.com/xml/ns/javaee" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
+	http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+  <display-name></display-name>	
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+  </welcome-file-list>
+  
+  <context-param>
+        <param-name>contextConfigLocation</param-name>
+    	<param-value>/WEB-INF/applicationContext.xml</param-value>
+    </context-param>
+
+  	<listener>
+		<description>
+			The Spring servlet context listener that loads the
+			application context.
+		</description>
+		<display-name>Spring context loader listener</display-name>
+		<listener-class>
+			org.springframework.web.context.ContextLoaderListener
+		</listener-class>
+	</listener>
+	
+	
+	<filter>
+		<description>Sets the security context on the request and clears it on the response.</description>
+		<display-name>Security Context Creation and Destruction</display-name>
+		<filter-name>SecurityFilter</filter-name>
+		<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+		<init-param>
+			<param-name>targetBeanName</param-name>
+			<param-value>securityFilter</param-value>
+		</init-param>
+	</filter>
+	
+	<filter>		
+		<filter-name>UserFilter</filter-name>
+		<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+		<init-param>
+			<param-name>targetBeanName</param-name>
+			<param-value>userFilter</param-value>
+		</init-param>
+	</filter>
+	
+	<filter>		
+		<filter-name>UserServiceFilter</filter-name>
+		<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+		<init-param>
+			<param-name>targetBeanName</param-name>
+			<param-value>userServiceFilter</param-value>
+		</init-param>
+	</filter>
+	
+	<filter>		
+		<filter-name>UnauthenticatedFilter</filter-name>
+		<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+		<init-param>
+			<param-name>targetBeanName</param-name>
+			<param-value>unauthenticatedFilter</param-value>
+		</init-param>
+	</filter>
+	
+	
+	<servlet>
+		<servlet-name>WelcomeMessageService</servlet-name>
+		<servlet-class>gov.va.med.imaging.capture.configuration.server.WelcomeMessageServiceImpl</servlet-class>
+	</servlet>
+	
+	<servlet>
+		<servlet-name>UserAuthenticationService</servlet-name>
+		<servlet-class>gov.va.med.imaging.capture.configuration.server.UserAuthenticationServiceImpl</servlet-class>
+	</servlet>
+	
+	<servlet>
+		<servlet-name>CaptureConfigurationService</servlet-name>
+		<servlet-class>gov.va.med.imaging.capture.configuration.server.CaptureConfigurationServiceImpl</servlet-class>
+	</servlet>
+	
+	<servlet>
+		<servlet-name>IndexTermService</servlet-name>
+		<servlet-class>gov.va.med.imaging.capture.configuration.server.IndexTermServiceImpl</servlet-class>
+	</servlet>
+	
+	<servlet>
+		<servlet-name>TIUService</servlet-name>
+		<servlet-class>gov.va.med.imaging.capture.configuration.server.TIUServiceImpl</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>WelcomeMessageService</servlet-name>
+		<url-pattern>/gov.va.med.imaging.capture.configuration.CaptureImageConfiguration/WelcomeMessageService</url-pattern>
+	</servlet-mapping>
+	
+	<servlet-mapping>
+		<servlet-name>UserAuthenticationService</servlet-name>
+		<url-pattern>/gov.va.med.imaging.capture.configuration.CaptureImageConfiguration/UserAuthenticationService</url-pattern>
+	</servlet-mapping>
+	
+	<servlet-mapping>
+		<servlet-name>CaptureConfigurationService</servlet-name>
+		<url-pattern>/gov.va.med.imaging.capture.configuration.CaptureImageConfiguration/CaptureConfigurationService</url-pattern>
+	</servlet-mapping>
+	
+	<servlet-mapping>
+		<servlet-name>IndexTermService</servlet-name>
+		<url-pattern>/gov.va.med.imaging.capture.configuration.CaptureImageConfiguration/IndexTermService</url-pattern>
+	</servlet-mapping>
+	
+	<servlet-mapping>
+		<servlet-name>TIUService</servlet-name>
+		<url-pattern>/gov.va.med.imaging.capture.configuration.CaptureImageConfiguration/TIUService</url-pattern>
+	</servlet-mapping>
+	
+	
+	<filter-mapping>
+		<filter-name>UnauthenticatedFilter</filter-name>
+		<url-pattern>/</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>UnauthenticatedFilter</filter-name>
+		<url-pattern>/index.html</url-pattern>
+	</filter-mapping>
+	
+	<filter-mapping>
+		<filter-name>UnauthenticatedFilter</filter-name>
+		<servlet-name>UserAuthenticationService</servlet-name>
+	</filter-mapping>
+	
+	
+	
+	<filter-mapping>
+		<filter-name>SecurityFilter</filter-name>
+		<servlet-name>WelcomeMessageService</servlet-name>
+	</filter-mapping>
+	
+	<filter-mapping>
+		<filter-name>UserServiceFilter</filter-name>
+		<servlet-name>CaptureConfigurationService</servlet-name>
+	</filter-mapping>
+	
+	<filter-mapping>
+		<filter-name>UserServiceFilter</filter-name>
+		<servlet-name>IndexTermService</servlet-name>
+	</filter-mapping>
+	
+	<filter-mapping>
+		<filter-name>SecurityFilter</filter-name>
+		<servlet-name>IndexTermService</servlet-name>
+	</filter-mapping>
+	
+	<filter-mapping>
+		<filter-name>UserServiceFilter</filter-name>
+		<servlet-name>TIUService</servlet-name>
+	</filter-mapping>
+	
+	<filter-mapping>
+		<filter-name>SecurityFilter</filter-name>
+		<servlet-name>TIUService</servlet-name>
+	</filter-mapping>
+	
+	
+
+	<!-- Filter not used unless a command is called - not sure if that will be the case or not -->
+
+	<security-constraint>
+		<display-name>CaptureImageConfigurationConstraint</display-name>
+		<web-resource-collection>
+			<web-resource-name>Consent Service</web-resource-name>
+			<description>The Capture Image Configuration web app is protected with VistA security</description>
+			<url-pattern>/secure/*</url-pattern>
+			<url-pattern>/secure/servlet/*</url-pattern>
+		</web-resource-collection>
+		<auth-constraint>
+			<description>A vista user is authenticated against the Vista system</description>
+			<role-name>vista-user</role-name>
+			<role-name>clinical-display-user</role-name>
+		</auth-constraint>
+		<user-data-constraint>
+			<description>The transport does not have to be guaranteed just the user authenticated</description>
+			<transport-guarantee>NONE</transport-guarantee>
+		</user-data-constraint>
+	</security-constraint>
+
+
+	<login-config>
+		<auth-method>BASIC</auth-method>
+		<realm-name>VistaRealm</realm-name>
+	</login-config>
+
+
+	<security-role>
+		<description>A VistaImaging user authenticated against VistaImaging</description>
+		<role-name>vista-user</role-name>
+	</security-role>
+	
+	<security-role>
+		<role-name>clinical-display-user</role-name>
+	</security-role>
+  
+  
+</web-app>

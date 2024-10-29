@@ -1,0 +1,249 @@
+Cache for Windows^INT^P156^~Format=Cache.S~
+%RO on 05 Jan 2015   6:26 AM
+MAGDIWB1^INT^1^63557,22116^0
+MAGDIWB1 ;WOIFO/EdM,PMK,DAC - Select images to send to DICOM storage ;  Dec 22, 2014 9:28 AM
+ ;;3.0;IMAGING;**11,30,51,50,54,138,156**;Mar 19, 2002;Build 5333;Jul 31, 2013
+ ;; Per VHA Directive 2004-038, this routine should not be modified.
+ ;; +---------------------------------------------------------------+
+ ;; | Property of the US Government.                                |
+ ;; | No permission to copy or redistribute this software is given. |
+ ;; | Use of unreleased versions of this software requires the user |
+ ;; | to execute a written test agreement with the VistA Imaging    |
+ ;; | Development Office of the Department of Veterans Affairs,     |
+ ;; | telephone (301) 734-0100.                                     |
+ ;; | The Food and Drug Administration classifies this software as  |
+ ;; | a medical device.  As such, it may not be changed in any way. |
+ ;; | Modifications to this software may result in an adulterated   |
+ ;; | medical device under 21CFR820, the use of which is considered |
+ ;; | to be a violation of US Federal Statutes.                     |
+ ;; +---------------------------------------------------------------+
+ ;;
+ Q
+ ;
+ ;
+SELECT ; Called from ^MAGDMENU
+ N DONE,DTIME,EXAMTYPE,REASON
+ S DTIME=300,DONE=0
+ D REASON Q:DONE
+ D ESIGN Q:DONE
+ D EXAMTYPE Q:DONE
+ F  D  Q:DONE
+ . N ACQSITE,I,INFO
+ . D CASE Q:DONE
+ . S I="" F  S I=$O(INFO(I))  Q:I=""  D VERIFY Q:DONE
+ . I $O(INFO(""))'="" D TRANSMIT
+ . Q
+ Q
+ ;
+ ;
+REASON ; reason for transmitting the images - also called from ^MAGDIWBA
+ N I,LIST,REASONS,TRY,X
+ S REASONS(1)="Clinical care for the patient whose images are being transmitted"
+ S REASONS(2)="Clinical care for other VA patients"
+ S REASONS(3)="Use in approved research by VA staff"
+ S REASONS(4)="Approved teaching purposes by VA staff"
+ S REASONS(5)="Use in approved VA publications"
+ S REASONS(6)="Clinical care (Export to HIPAA Compliant Archive)"
+ S REASON="" F  D  Q:REASON'=""  Q:DONE
+ . W !!,"All uses pose potential violations of patient privacy."
+ . W !!,"It is absolutely required that all users with transmission capability"
+ . W !,"personally inspect each downloaded image."
+ . W !!,"For technical reasons, related to the image capture process,"
+ . W !,"some of the images contain patient identification data which"
+ . W !,"must be removed manually."
+ . W !!,"Each image transmitted is tracked and audited by the Imaging System."
+ . W !!,"The images are not to be distributed outside of the VA, or used for"
+ . W !,"any other purposes than listed below."
+ . W !!,"The transmitting user is specifically responsible for the protection"
+ . W !,"of these images."
+ . W !!,"Press <Enter> to continue: " R X:DTIME E  S DONE=-1 Q
+ . W !!,"Indicate the reason for transmission:"
+ . F I=1:1:6 W !!,"  [",$C(I+96),"]  ",REASONS(I)
+ . W !!,"Enter letter for reason: " R X:DTIME E  S X="^"
+ . I X["^" S DONE=-1 Q
+ . S X=$TR($E(X_"?",1),"abcdef","ABCDEF") Q:"ABCDEF"'[X
+ . S X=$A(X)-64,REASON=X_","_$G(REASONS(X))
+ . Q
+ Q
+ ;
+ ;
+ESIGN ; electronic signature - also called from ^MAGDIWBA
+ N INFO,OK,USR,RPCERR,TRY
+ X ^%ZOSF("EOFF")
+ S (OK,TRY)=0 F  D  Q:OK  Q:DONE
+ . W !,"Enter electronic signature: " R USR:DTIME E  S USR="^"
+ . I $TR(USR,"^")="" S DONE=-1 Q
+ . S RPCERR=$$CALLRPC^MAGM2VCU("MAGG VERIFY ESIG","M",.INFO,$$ENCRYPT^MAGM2VCU(USR))
+ . I RPCERR<0 S DONE=-2 Q
+ . I $G(INFO) S OK=1 Q
+ . W !!,"Not a valid signature code: ",$P($G(INFO),"^",2),!
+ . S TRY=TRY+1 S:TRY>2 DONE=-3
+ . Q
+ X ^%ZOSF("EON")
+ Q
+ ;
+ ;
+EXAMTYPE ; radiology or consult?
+ N X
+ S EXAMTYPE="" F  D  Q:EXAMTYPE'=""  Q:DONE
+ . W !!,"Specify RADIOLOGY, CONSULT, or LAB examination (R, C, or L): R// "
+ . R X:DTIME E  S X="^"
+ . I X="" S X="R" W X
+ . I X["^" S DONE=-1 Q
+ . S X=$TR(X,"rcl","RCL")
+ . I "RCL"[$E(X,1) S EXAMTYPE=$E(X,1) Q
+ . W !!,"Enter either ""R"" (Radiology), ""C"" (Consult), or ""L"" (Lab - Anatomic Pathology)."
+ . Q
+ Q
+ ;
+ ;
+CASE ; look up the case
+ N RPCERR,X
+ F  D  Q:$O(INFO(""))'=""  Q:DONE
+ . W !!,"Enter ",$S(EXAMTYPE="R":"Case",EXAMTYPE="C":"Consult",1:"Accession")," Number"
+ . W " (or `image-ien): "
+ . R X:DTIME E  S X="^"
+ . I X["^" S DONE=-1 Q
+ . I X="" S DONE=-1 Q
+ . I X["?" D  Q
+ . . I EXAMTYPE="R" D
+ . . . W !!,"You may either enter the short case number (""nnnnn"" format),"
+ . . . W !,"the short accession number (""mmddyy-nnnnn"" format),"
+ . . . W !,"the site-specific accession number (""sss-mmddyy-nnnnn"" format), or"
+ . . . Q
+ . . E  I EXAMTYPE="C" D
+ . . . W !!,"You may either enter the short case number (""nnnnn"" format),"
+ . . . W !,"the short accession number (""GMRC-nnnnn"" format),"
+ . . . W !,"the site-specific accession number (""sss-GMR-nnnnn"" format), or"
+ . . . Q
+ . . E  D
+ . . . W !,"Enter the lab accession number (""ll yy nnnnn"" format, like SP 13 123), or"
+ . . . Q
+ . . W !,"the internal entry number of the image (""`nnnnn"" format)."
+ . . Q
+ . ;
+ . S X=$$UPPER^MAGOSMSC(X)
+ . S RPCERR=$$CALLRPC^MAGM2VCU("MAG DICOM LOOKUP STUDY","M",.INFO,EXAMTYPE_X)
+ . I RPCERR<0 S DONE=-2 Q
+ . S I=$O(INFO("")) I I="" D  Q
+ . . W !!,"No images found for """_X_""".",!
+ . . Q
+ . I INFO(I)<0 D
+ . . W !!,"Problem with ",$S(EXAMTYPE="R":"Radiology ",EXAMTYPE="C":"Consult ",EXAMTYPE="L":"Lab",1:""),X
+ . . W !,$P(INFO(I),",",2,999),!
+ . . Q
+ . K INFO(I)
+ . I $O(INFO(""))="" W !!,"No valid selection made..."
+ . Q
+ Q
+ ;
+ ;
+VERIFY ; verify the image data that was selected
+ N ACCNUMB,DATA,DFN,F,IMAGE,J,K,MAGIEN,NIMAGES,RPCERR,TYPE,VADM,VAIN,VAINFO,VAPA,X
+ S MAGIEN=$P(INFO(I),"^",3),ACCNUMB=$P(INFO(I),"^",4)
+ ;
+ S RPCERR=$$CALLRPC^MAGM2VCU("MAG DICOM GET BASIC IMAGE","M",.IMAGE,MAGIEN)
+ I RPCERR<0 S DONE=-2 Q
+ ;
+ S K=$O(IMAGE("")) I K="" D  Q
+ . W !!,"Cannot retrieve information for image # ",MAGIEN,!
+ . K INFO(I)
+ . Q
+ I IMAGE(K)<0 D  Q
+ . W !!,"Problem with ",$S(EXAMTYPE="R":"Radiology ",EXAMTYPE="C":"Consult ",1:"")
+ . W !,$P(IMAGE(K),",",2,999),!
+ . K INFO(I)
+ . Q
+ S J=K F  S J=$O(IMAGE(J)) Q:J=""  D
+ . S X=IMAGE(J),F=$P(X,"^",1) S:F'="" DATA(F)=$P(X,"^",2,3)
+ . Q
+ I '$D(DATA("PATIENT")) Q
+ ;
+ ; Obtain the Image Acquisition Site info.
+ ; 
+ S ACQSITE=$G(DATA("ACQUISITION SITE"))
+ ;
+ S DFN=$P(DATA("PATIENT"),"^",1)
+ S RPCERR=$$CALLRPC^MAGM2VCU("MAG DICOM GET PATIENT","M",.VAINFO,DFN)
+ I RPCERR<0 S DONE=-3 Q
+ D VADPT^MAGDRPC0(.VAINFO)
+ I I>2 D  ; extra space to make it the other groups for the study stand out
+ . S X="Note: There is another Image Group for this Study."
+ . W !! D WARNING^MAGDFCNS(X)
+ . Q
+ W !!,"Patient Information"
+ W !,"-------------------"
+ W !,"Name: ",VADM(1)
+ W "     SSN: ",$P(VADM(2),"^",2)
+ W "     DOB: ",$P(VADM(3),"^",2)
+ S TYPE=$G(DATA("OBJECT TYPE"))
+ W !!,"Image File Information"
+ W !,"----------------------"
+ W !,"Acquisition Site: ",$P(ACQSITE,"^",1)_", "_$P(ACQSITE,"^",2)
+ W !,"Number: ",MAGIEN I ACCNUMB'="" W ?20,"Accession Number: ",ACCNUMB
+ W !,"Name: """,$G(DATA("OBJECT NAME")),""""
+ W !,"Object: ",$P(TYPE,"^",2)
+ W ?30,"Image Type: ",$G(DATA("PROCEDURE"))
+ W !,"Description: """,$G(DATA("SHORT DESCRIPTION")),""""
+ ;
+ I (+TYPE=3)!(+TYPE=100) D  ; single XRAY or DICOM image
+ . W !,"Group #: ",$G(DATA("GROUP PARENT"))
+ . W !,"Image UID: ",$G(DATA("PACS UID"))
+ . S NIMAGES=1
+ . Q
+ ;
+ E  I +TYPE=11 D  ; XRAY group
+ . N GROUP,I,N,P
+ . W !,"Study UID: ",$G(DATA("PACS UID"))
+ . S NIMAGES=+$G(DATA("# Images"))
+ . W !,"There ",$S(NIMAGES=1:"is one image",1:"are "_NIMAGES_" images")
+ . W " in this group:"
+ . S RPCERR=$$CALLRPC^MAGM2VCU("MAG DICOM GET IMAGE GROUP","M",.GROUP,MAGIEN)
+ . I RPCERR<0 S RPCERR=-4 Q
+ . I GROUP(1)?1"0^".E D  Q
+ . . W !!,"Problem with Image Group #",MAGIEN,"  Accession Number: ",ACCNUMB
+ . . W !,$P(GROUP(1),"^",2,999)
+ . . K GROUP,INFO
+ . . Q
+ . S I=$O(GROUP("")),N=0
+ . F  S I=$O(GROUP(I)) Q:I=""  S N=N+1 W:N#10=1 ! W $J(GROUP(I),8)
+ . Q
+ ;
+ E  D  Q
+ . W !!,"Unsupported Image Object: ",$P(TYPE,"^",1)," - ",$P(TYPE,"^",2)
+ . K INFO(I)
+ . Q
+ W !!,"Do you want to transmit "
+ W $S(NIMAGES>1:"these images",1:"this image"),"?  n// " R X:DTIME E  S X=""
+ I X="" S X="no" W X
+ I "Yy"'[$E(X,1) K INFO(I)
+ Q
+ ;
+ ;
+TRANSMIT ; put the images onto the transmission queue
+ N ACCNUMB,APPNAM,I,PRIORITY,RPCERR,X
+ S APPNAM="" F  D  Q:APPNAM'=""  Q:DONE
+ . N T
+ . S T=$$PICKSCP^MAGDACU("","STORE") I T="" S DONE=-1 Q  ; P156 DAC - added additonal parameter
+ . W !!,"Send the images to "_T_"?  n// " R X:DTIME E  S DONE=-1 Q
+ . I X="" W " no" Q
+ . I "Yy"[$E(X,1) S APPNAM=T W " -- images will be sent" Q
+ . W !!,"Try another destination...",!
+ . Q
+ Q:DONE
+ ;
+ S X=$O(^MAGDICOM(2006.585,"B",APPNAM,""))
+ I 'X W !!,"*** Illegal User Application: """,APPNAM,""" ***" S DONE=-2 Q
+ S PRIORITY=$P($G(^MAGDICOM(2006.585,+X,0)),"^",7) S:'PRIORITY PRIORITY=500
+ S I="" F  S I=$O(INFO(I)) Q:I=""  D  Q:DONE
+ . N A1,A3,A6 ; Parameters for RPC
+ . S A1=$P(INFO(I),"^",3),ACCNUMB=$P(INFO(I),"^",4)
+ . S A3=^MAGDICOM(2006.563,1,"LOCATION")
+ . S A6=$G(^MAGDICOM(2006.563,1,"MAILGROUP"))
+ . S RPCERR=$$CALLRPC^MAGM2VCU("MAG DICOM QUEUE IMAGE","M",.IMAGE,A1,APPNAM,A3,$G(ACCNUMB),REASON,A6,PRIORITY,1)
+ . I RPCERR<0 S DONE=-3 Q
+ . Q
+ Q
+
+
+

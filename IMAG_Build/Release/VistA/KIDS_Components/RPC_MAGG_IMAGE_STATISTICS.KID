@@ -1,0 +1,410 @@
+KIDS Distribution saved on Jan 22, 2009@14:33:41
+Temporary build for VSS
+**KIDS**:MAG-VSS*3.0*93^
+
+**INSTALL NAME**
+MAG-VSS*3.0*93
+"BLD",6032,0)
+MAG-VSS*3.0*93^IMAGING^0^3090122^n
+"BLD",6032,6.3)
+4
+"BLD",6032,"KRN",0)
+^9.67PA^8994^0
+"BLD",6032,"KRN",8994,"NM",0)
+^9.68A^10^1
+"BLD",6032,"KRN",8994,"NM",10,0)
+MAGG IMAGE STATISTICS^^0
+"KRN",8994,2335,-1)
+0^10
+"KRN",8994,2335,0)
+MAGG IMAGE STATISTICS^IMGQUERY^MAGGA03^4^R^^^1
+"KRN",8994,2335,1,0)
+^8994.01^9^9^3090121^^^^
+"KRN",8994,2335,1,1,0)
+The MAGG IMAGE STATISTICS remote procedure queries the image file(s) and 
+"KRN",8994,2335,1,2,0)
+returns various statistics/summary data. Currently, 2 queries are 
+"KRN",8994,2335,1,3,0)
+implemented:
+"KRN",8994,2335,1,4,0)
+ 
+"KRN",8994,2335,1,5,0)
+  Counts of images captured in the provided date range 
+"KRN",8994,2335,1,6,0)
+  grouped by the image status codes.
+"KRN",8994,2335,1,7,0)
+ 
+"KRN",8994,2335,1,8,0)
+  Counts of images captured in the provided date range
+"KRN",8994,2335,1,9,0)
+  grouped by users and image status codes.
+"KRN",8994,2335,2,0)
+^8994.02A^3^3
+"KRN",8994,2335,2,1,0)
+FLAGS^1^^1^1
+"KRN",8994,2335,2,1,1,0)
+^^26^26^3081215^
+"KRN",8994,2335,2,1,1,1,0)
+Flags that control the execution (can be combined):
+"KRN",8994,2335,2,1,1,2,0)
+ 
+"KRN",8994,2335,2,1,1,3,0)
+  C  Capture date range. If this flag is provided,
+"KRN",8994,2335,2,1,1,4,0)
+     then the remote procedure uses values of the
+"KRN",8994,2335,2,1,1,5,0)
+     FROMDATE and TODATE parameters to select images
+"KRN",8994,2335,2,1,1,6,0)
+     that were captured in this date range (see the
+"KRN",8994,2335,2,1,1,7,0)
+     DATE/TIME IMAGE SAVED field (7) and the "AD"
+"KRN",8994,2335,2,1,1,8,0)
+     cross-reference).
+"KRN",8994,2335,2,1,1,9,0)
+ 
+"KRN",8994,2335,2,1,1,10,0)
+     Otherwise, values of those parameters are
+"KRN",8994,2335,2,1,1,11,0)
+     treated as the date range when procedures were
+"KRN",8994,2335,2,1,1,12,0)
+     performed (see the PROCEDURE/EXAM DATE/TIME
+"KRN",8994,2335,2,1,1,13,0)
+     field (15) and cross-references "APDTPX" and
+"KRN",8994,2335,2,1,1,14,0)
+     "APDT").
+"KRN",8994,2335,2,1,1,15,0)
+ 
+"KRN",8994,2335,2,1,1,16,0)
+  D  Include only deleted images (file #2005.1)
+"KRN",8994,2335,2,1,1,17,0)
+  E  Include only existing images (file #2005)
+"KRN",8994,2335,2,1,1,18,0)
+ 
+"KRN",8994,2335,2,1,1,19,0)
+  S  Return image counts grouped by status
+"KRN",8994,2335,2,1,1,20,0)
+  U  Return image counts grouped by users and status
+"KRN",8994,2335,2,1,1,21,0)
+ 
+"KRN",8994,2335,2,1,1,22,0)
+If neither 'E' nor 'D' flag is provided, then an error code (-6) is
+"KRN",8994,2335,2,1,1,23,0)
+returned.
+"KRN",8994,2335,2,1,1,24,0)
+ 
+"KRN",8994,2335,2,1,1,25,0)
+If neither 'S' nor 'U' flag is provided, then an error code (-6) is
+"KRN",8994,2335,2,1,1,26,0)
+returned.
+"KRN",8994,2335,2,2,0)
+FROMDATE^1^^^2
+"KRN",8994,2335,2,2,1,0)
+^^11^11^3081107^
+"KRN",8994,2335,2,2,1,1,0)
+Beginning of the date range for image selection. Dates can be in internal
+"KRN",8994,2335,2,2,1,2,0)
+or external FileMan format. If the parameter is not defined or empty, then
+"KRN",8994,2335,2,2,1,3,0)
+the date range remains open on this side.
+"KRN",8994,2335,2,2,1,4,0)
+ 
+"KRN",8994,2335,2,2,1,5,0)
+Depending on the value of the FLAGS parameter, the date range filter is
+"KRN",8994,2335,2,2,1,6,0)
+applied either to the exam/procedure dates (PROCEDURE/EXAM DATE/TIME field
+"KRN",8994,2335,2,2,1,7,0)
+(15)) or image capture dates (DATE/TIME IMAGE SAVED field (7)).
+"KRN",8994,2335,2,2,1,8,0)
+ 
+"KRN",8994,2335,2,2,1,9,0)
+Time parts of date range parameters are ignored and both ends of the date
+"KRN",8994,2335,2,2,1,10,0)
+range are included in the search. For example, in order to search images
+"KRN",8994,2335,2,2,1,11,0)
+for May 21, 2008, the internal value of both parameters should be 3080521.
+"KRN",8994,2335,2,3,0)
+TODATE^1^^^3
+"KRN",8994,2335,2,3,1,0)
+^8994.021^11^11^3090121^^^^
+"KRN",8994,2335,2,3,1,1,0)
+End of the date range for image selection. Dates can be in internal or
+"KRN",8994,2335,2,3,1,2,0)
+external FileMan format. If the parameter is not defined or empty, then
+"KRN",8994,2335,2,3,1,3,0)
+the date range remains open on this side.
+"KRN",8994,2335,2,3,1,4,0)
+ 
+"KRN",8994,2335,2,3,1,5,0)
+Depending on the value of the FLAGS parameter, the date range filter is
+"KRN",8994,2335,2,3,1,6,0)
+applied either to the exam/procedure dates (PROCEDURE/EXAM DATE/TIME field
+"KRN",8994,2335,2,3,1,7,0)
+(15)) or image capture dates (DATE/TIME IMAGE SAVED field (7)).
+"KRN",8994,2335,2,3,1,8,0)
+ 
+"KRN",8994,2335,2,3,1,9,0)
+Time parts of date range parameters are ignored and both ends of the date
+"KRN",8994,2335,2,3,1,10,0)
+range are included in the search. For example, in order to search images
+"KRN",8994,2335,2,3,1,11,0)
+for May 21, 2008, the internal value of both parameters should be 3080521.
+"KRN",8994,2335,2,"B","FLAGS",1)
+
+"KRN",8994,2335,2,"B","FROMDATE",2)
+
+"KRN",8994,2335,2,"B","TODATE",3)
+
+"KRN",8994,2335,2,"PARAMSEQ",1,1)
+
+"KRN",8994,2335,2,"PARAMSEQ",2,2)
+
+"KRN",8994,2335,2,"PARAMSEQ",3,3)
+
+"KRN",8994,2335,3,0)
+^^75^75^3090121^
+"KRN",8994,2335,3,1,0)
+Zero value of the first '^'-piece of the Results[0] indicates that an
+"KRN",8994,2335,3,2,0)
+error occurred during the execution of the procedure. In this case, the
+"KRN",8994,2335,3,3,0)
+errors are returned in the Results array as shown below:
+"KRN",8994,2335,3,4,0)
+  
+"KRN",8994,2335,3,5,0)
+  Results[0]            Result descriptor
+"KRN",8994,2335,3,6,0)
+                          ^01: 0
+"KRN",8994,2335,3,7,0)
+                          ^02: Message
+"KRN",8994,2335,3,8,0)
+  
+"KRN",8994,2335,3,9,0)
+  Results[i]            Error descriptor
+"KRN",8994,2335,3,10,0)
+                          ^01: Error code
+"KRN",8994,2335,3,11,0)
+                          ^02: Message
+"KRN",8994,2335,3,12,0)
+                          ^03: Error location
+"KRN",8994,2335,3,13,0)
+                          ^04: Message type
+"KRN",8994,2335,3,14,0)
+ 
+"KRN",8994,2335,3,15,0)
+  Results[j]            Line of the additional info (optional)
+"KRN",8994,2335,3,16,0)
+                          ^01: ""
+"KRN",8994,2335,3,17,0)
+                          ^02: Text  
+"KRN",8994,2335,3,18,0)
+ 
+"KRN",8994,2335,3,19,0)
+Otherwise, '1^Ok' is returned in the Results[0] and subsequent nodes 
+"KRN",8994,2335,3,20,0)
+contain requested data:
+"KRN",8994,2335,3,21,0)
+ 
+"KRN",8994,2335,3,22,0)
+  Results[i]            Header of the counts grouped by status
+"KRN",8994,2335,3,23,0)
+                          ^01: "S"
+"KRN",8994,2335,3,24,0)
+                          ^02: empty
+"KRN",8994,2335,3,25,0)
+                          ^03: Number of "S"-items
+"KRN",8994,2335,3,26,0)
+                          ^04: empty
+"KRN",8994,2335,3,27,0)
+                          ^05: "Totals"
+"KRN",8994,2335,3,28,0)
+                          ^06: Number of image entries
+"KRN",8994,2335,3,29,0)
+                          ^07: Number of images/pages
+"KRN",8994,2335,3,30,0)
+         
+"KRN",8994,2335,3,31,0)
+  Results[i+j]          Image status record
+"KRN",8994,2335,3,32,0)
+                          ^01: "S"
+"KRN",8994,2335,3,33,0)
+                          ^02: Sequential number of the "S"-item
+"KRN",8994,2335,3,34,0)
+                          ^03: empty
+"KRN",8994,2335,3,35,0)
+                          ^04: Internal value of the STATUS field (113).
+"KRN",8994,2335,3,36,0)
+                               If this piece is empty or 0, then the
+"KRN",8994,2335,3,37,0)
+                               record contains counts of images with 
+"KRN",8994,2335,3,38,0)
+                               empty STATUS field.
+"KRN",8994,2335,3,39,0)
+                          ^05: External value of the STATUS field (113)
+"KRN",8994,2335,3,40,0)
+                          ^06: Number of image entries
+"KRN",8994,2335,3,41,0)
+                          ^07: Number of images/pages
+"KRN",8994,2335,3,42,0)
+        
+"KRN",8994,2335,3,43,0)
+  Results[i]            Header of the counts grouped by users and status
+"KRN",8994,2335,3,44,0)
+                          ^01: "U"
+"KRN",8994,2335,3,45,0)
+                          ^02: empty
+"KRN",8994,2335,3,46,0)
+                          ^03: Number of "U"-items
+"KRN",8994,2335,3,47,0)
+                          ^04: empty
+"KRN",8994,2335,3,48,0)
+                          ^05: "Totals"
+"KRN",8994,2335,3,49,0)
+                          ^06: Number of image entries
+"KRN",8994,2335,3,50,0)
+                          ^07: Number of images/pages
+"KRN",8994,2335,3,51,0)
+         
+"KRN",8994,2335,3,52,0)
+  Results[i+j]          User record
+"KRN",8994,2335,3,53,0)
+                          ^01: "U"
+"KRN",8994,2335,3,54,0)
+                          ^02: Sequential number of the "U"-item
+"KRN",8994,2335,3,55,0)
+                          ^03: Number of "US"-items
+"KRN",8994,2335,3,56,0)
+                          ^04: User IEN (DUZ).
+"KRN",8994,2335,3,57,0)
+                               If this piece is empty or 0, then the
+"KRN",8994,2335,3,58,0)
+                               record contains counts of images that 
+"KRN",8994,2335,3,59,0)
+                               are not associated with a user.
+"KRN",8994,2335,3,60,0)
+                          ^05: User name
+"KRN",8994,2335,3,61,0)
+                          ^06: Number of image entries
+"KRN",8994,2335,3,62,0)
+                          ^07: Number of images/pages
+"KRN",8994,2335,3,63,0)
+                          ^08: Percentage of verified images
+"KRN",8994,2335,3,64,0)
+         
+"KRN",8994,2335,3,65,0)
+  Results[i+j+k]        User/status record
+"KRN",8994,2335,3,66,0)
+                          ^01: "US"
+"KRN",8994,2335,3,67,0)
+                          ^02: Sequential number of the "US"-item
+"KRN",8994,2335,3,68,0)
+                          ^03: empty
+"KRN",8994,2335,3,69,0)
+                          ^04: Internal value of the STATUS field (113).
+"KRN",8994,2335,3,70,0)
+                               If this piece is empty or 0, then the
+"KRN",8994,2335,3,71,0)
+                               record contains counts of images with 
+"KRN",8994,2335,3,72,0)
+                               empty STATUS field.
+"KRN",8994,2335,3,73,0)
+                          ^05: External value of the STATUS field (113)
+"KRN",8994,2335,3,74,0)
+                          ^06: Number of image entries
+"KRN",8994,2335,3,75,0)
+                          ^07: Number of images/pages
+"MBREQ")
+
+"ORD",16,8994)
+8994;16;1;;;;;;;RPCDEL^XPDIA1
+"ORD",16,8994,0)
+REMOTE PROCEDURE
+"PKG",454,-1)
+1^1
+"PKG",454,0)
+IMAGING^MAG^Imaging-V1 to release 
+"PKG",454,20,0)
+^9.402P^^
+"PKG",454,22,0)
+^9.49I^1^1
+"PKG",454,22,1,0)
+3.0^3020319^3020517^126
+"PKG",454,22,1,"PAH",1,0)
+93^3090122
+"PKG",454,22,1,"PAH",1,1,0)
+^^1^1^3090120
+"PKG",454,22,1,"PAH",1,1,1,0)
+Code for the Clinical Display and Capture. 
+"QUES","XPF1",0)
+Y
+"QUES","XPF1","??")
+^D REP^XPDH
+"QUES","XPF1","A")
+Shall I write over your |FLAG| File
+"QUES","XPF1","B")
+YES
+"QUES","XPF1","M")
+D XPF1^XPDIQ
+"QUES","XPF2",0)
+Y
+"QUES","XPF2","??")
+^D DTA^XPDH
+"QUES","XPF2","A")
+Want my data |FLAG| yours
+"QUES","XPF2","B")
+YES
+"QUES","XPF2","M")
+D XPF2^XPDIQ
+"QUES","XPI1",0)
+YO
+"QUES","XPI1","??")
+^D INHIBIT^XPDH
+"QUES","XPI1","A")
+Want KIDS to INHIBIT LOGONs during the install
+"QUES","XPI1","B")
+NO
+"QUES","XPI1","M")
+D XPI1^XPDIQ
+"QUES","XPM1",0)
+PO^VA(200,:EM
+"QUES","XPM1","??")
+^D MG^XPDH
+"QUES","XPM1","A")
+Enter the Coordinator for Mail Group '|FLAG|'
+"QUES","XPM1","B")
+
+"QUES","XPM1","M")
+D XPM1^XPDIQ
+"QUES","XPO1",0)
+Y
+"QUES","XPO1","??")
+^D MENU^XPDH
+"QUES","XPO1","A")
+Want KIDS to Rebuild Menu Trees Upon Completion of Install
+"QUES","XPO1","B")
+NO
+"QUES","XPO1","M")
+D XPO1^XPDIQ
+"QUES","XPZ1",0)
+Y
+"QUES","XPZ1","??")
+^D OPT^XPDH
+"QUES","XPZ1","A")
+Want to DISABLE Scheduled Options, Menu Options, and Protocols
+"QUES","XPZ1","B")
+NO
+"QUES","XPZ1","M")
+D XPZ1^XPDIQ
+"QUES","XPZ2",0)
+Y
+"QUES","XPZ2","??")
+^D RTN^XPDH
+"QUES","XPZ2","A")
+Want to MOVE routines to other CPUs
+"QUES","XPZ2","B")
+NO
+"QUES","XPZ2","M")
+D XPZ2^XPDIQ
+"VER")
+8.0^22.0
+**END**
+**END**

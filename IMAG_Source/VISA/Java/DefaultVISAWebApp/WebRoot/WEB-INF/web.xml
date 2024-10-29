@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="2.5" 
+	xmlns="http://java.sun.com/xml/ns/javaee" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
+	http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+  <display-name></display-name>	
+  <welcome-file-list>
+    <welcome-file>index.jsp</welcome-file>
+  </welcome-file-list>
+  
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>VersionServlet</servlet-name>
+    <servlet-class>gov.va.med.imaging.visa.web.VersionServlet</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+    <servlet-name>VersionServlet</servlet-name>
+    <url-pattern>/Version</url-pattern>
+  </servlet-mapping>
+  
+  <filter>
+	<filter-name>TransactionContextClearFilter</filter-name>
+	<filter-class>gov.va.med.imaging.TransactionContextClearFilter</filter-class>
+  </filter>
+  
+  <filter-mapping>
+  	<filter-name>TransactionContextClearFilter</filter-name>
+  	<servlet-name>VersionServlet</servlet-name>
+  </filter-mapping>
+  
+  <filter-mapping>
+  	<filter-name>TransactionContextClearFilter</filter-name>
+  	<url-pattern>/*</url-pattern>
+  </filter-mapping>
+  
+  <filter-mapping>
+  	<filter-name>TransactionContextClearFilter</filter-name>
+  	<url-pattern>/</url-pattern>
+  </filter-mapping>
+
+  <context-param>
+	<description>Forced Shutdown Limit (seconds)</description>
+	<param-name>forceShutdownTimeout</param-name>
+	<param-value>10</param-value>
+  </context-param>
+  <listener>
+	<listener-class>gov.va.med.imaging.system.ShutdownServletContextListener</listener-class>
+  </listener>
+</web-app>

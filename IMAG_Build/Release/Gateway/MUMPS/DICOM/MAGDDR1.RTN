@@ -1,0 +1,185 @@
+MAGDDR1 ;WOIFO/PMK - Program to read a DICOM file ; 05/17/2007 15:21
+ ;;3.0;IMAGING;**10,11,30,51,54**;MAR 19, 2002;;OCT 28, 2009
+ ;; Per VHA Directive 2004-038, this routine should not be modified.
+ ;; +---------------------------------------------------------------+
+ ;; | Property of the US Government.                                |
+ ;; | No permission to copy or redistribute this software is given. |
+ ;; | Use of unreleased versions of this software requires the user |
+ ;; | to execute a written test agreement with the VistA Imaging    |
+ ;; | Development Office of the Department of Veterans Affairs,     |
+ ;; | telephone (301) 734-0100.                                     |
+ ;; | The Food and Drug Administration classifies this software as  |
+ ;; | a medical device.  As such, it may not be changed in any way. |
+ ;; | Modifications to this software may result in an adulterated   |
+ ;; | medical device under 21CFR820, the use of which is considered |
+ ;; | to be a violation of US Federal Statutes.                     |
+ ;; +---------------------------------------------------------------+
+ ;;
+ Q
+ ; PACS Interface -- read DICOM files (routine #1)
+ ;
+READ(QLETTER) N DONE,INFO,LASTINPT,RPCERR,STATUS
+ S DTIME=$G(DTIME,100000)
+ D OUTDEV^MAGDFCNS Q:ODEVTYPE=""
+ S INODE="IN"
+ ;
+ S DONE=0 F  D  Q:DONE<0
+ . S:'$D(QLETTER) QLETTER="w"
+ . W !!,"Enter the queue letter (a-h or s-z), "
+ . W "or I for image (or '^' to exit): ",QLETTER,"// " R X:DTIME E  S X="^" Q
+ . I X="" S X=QLETTER W X
+ . X ^%ZOSF("UPPERCASE") S X=Y
+ . I "^"[$E(X) S STATUS=$$CLOSE^MAGDFCNS(ODEVTYPE,ODEVNAME),DONE=-1 Q
+ . I "ABCDEFGHISTUVWXYZ"'[$E(X) D  Q
+ . . W !,"   *** Please enter the letter of the queue, or ^ to exit ***"
+ . . Q
+ . S QLETTER=X
+ . ;
+ . F  D  Q:DONE
+ . . W !!,"Enter file number (or path): " R I:DTIME E  S X="^"
+ . . I I="" S DONE=1 Q
+ . . I I["?" D  Q
+ . . . W !,"File numbers are reported in the logs (see option 4-1-2)."
+ . . . W !,"For a DICOM file stored in VistA, enter `ien."
+ . . . Q
+ . . I "^"[$E(I) S STATUS=$$CLOSE^MAGDFCNS(ODEVTYPE,ODEVNAME),DONE=-1 Q
+ . . I QLETTER="I","Vv"[$E(I) D ^MAGDDR7 Q  ; verify the image header
+ . . I $D(LASTINPT),$E(I)=" " S I=LASTINPT W I
+ . . I ODEVTYPE="SCREEN" W !
+ . . S LASTINPT=I
+ . . I I?1N.N1"-"1N.N D  ; range
+ . . . S BEGIN=$P(I,"-",1),END=$P(I,"-",2)
+ . . . F LOOP=BEGIN:1:END S I=LOOP D FILENAME,INPUT D
+ . . . . I ODEVTYPE="SCREEN" R !,"next...",X:DTIME W $C(8,8,8,8,8,8,8)
+ . . . . Q
+ . . . Q
+ . . E  I I?1N.N D  ; numerical letter
+ . . . D FILENAME,INPUT
+ . . . Q
+ . . E  I I?1"`"1N.N D  ; ^MAG(2005) file lookup
+ . . . N D0
+ . . . S D0=$P(I,"`",2)
+ . . . S RPCERR=$$CALLRPC^MAGM2VCU("MAG DICOM GET BASIC IMAGE","M",.INFO,D0)
+ . . . I RPCERR<0 S DONE=1 Q
+ . . . S (X,I)="" F  S I=$O(INFO(I)) Q:I=""  D  Q:X'=""
+ . . . . S:INFO(I)["Full Path+FileName^" X=$P(INFO(I),"^",2,$L(INFO(I))+2)
+ . . . . Q
+ . . . I X="" D  S DONE=1 Q
+ . . . . W !!,"This image does not have a ""full"" file.",!
+ . . . . Q
+ . . . I $E(X,$L(X)-3,$L(X))'=".DCM" D  S DONE=1 Q
+ . . . . W !!,"The ""full"" file for this image is not a DICOM file:"
+ . . . . W !,"(",X,").",!
+ . . . . Q
+ . . . S I=X D MANUAL S DONE=1
+ . . . Q
+ . . E  D MANUAL S DONE=1
+ . . Q
+ . Q
+ Q
+ ;
+MANUAL ; look up the file manually -- may be invoked from programmer mode
+ N STATUS
+ S X=I X ^%ZOSF("UPPERCASE") ; I contains the complete path to file
+ S QUEUEIN("FILE")=Y ; uppercase file path
+ S DTIME=$G(DTIME,10000)
+ I '$D(ODEVTYPE) D OUTDEV^MAGDFCNS I ODEVTYPE="SCREEN" W !
+ S:'$D(INODE) INODE="IN" D INPUT
+ Q
+ ;
+FILENAME ; get the file name from the number
+ I QLETTER="I" D  ; image
+ . S QUEUEIN("FILE")=$$HOSTNAME^MAGOSMSC()_"_"_$TR($J(I,7)," ",0)_".DCM"
+ . S QUEUEIN("FILE")=^MAGDICOM(2006.563,1,"IMAGE INPUT PATH")_"\"_QUEUEIN("FILE")
+ . Q
+ E  D  ; fifo queue file
+ . S QUEUEIN("FILE")=QLETTER_$TR($J(I,7)," ",0)_".DCM"
+ . S QUEUEIN("FILE")=^MAGDICOM(2006.563,1,"DATA PATH",1,0)_"\"_$E(QUEUEIN("FILE"),1,6)_"\"_QUEUEIN("FILE")
+ . Q
+ Q
+ ;
+INPUT ; lookup file creation date & time
+ N DATE,FILESIZE,TIME,SPACING,STATUS,Y
+ S X=$$HOSTFILE(QUEUEIN("FILE"),.FILESIZE,.DATE,.TIME) Q:X=1
+ I X'>0 W $S('X:" -- Not on file",1:"  Error: "_X) Q
+ ;
+ ; determine the kind of output device and adjust spacing accordingly
+ I ODEVTYPE="SCREEN" D  ; output to screen in truncated mode
+ . S SPACING("NAME")=25,SPACING("VALUE")=51,SPACING("MAX_$X")=79
+ . Q
+ E  D  ; output to a file with in broad mode
+ . S SPACING("NAME")=40,SPACING("VALUE")=66,SPACING("MAX_$X")=99999
+ . Q
+ ;
+ S Y=SPACING("VALUE") ; horizontal tab for "V a l u e"
+ S STATUS=$$USE^MAGDFCNS(ODEVTYPE,ODEVNAME)
+ W "DUMP of DICOM file ",QUEUEIN("FILE"),!! S $Y=2
+ W ?02,"O    G    E       L",?40,"Created at ",TIME," on ",DATE
+ W !?2,"f    r    l       e"
+ W !?2,"f    o    e       n"
+ W !?2,"s    u    m       g"
+ W !?2,"e    p    e       t"
+ W !?2,"t         n       h",?25,"A t t r i b u t e",?Y,"V a l u e" S Y=$X-1
+ W !?2,"          t        ",?25 F  W "-" Q:$X>Y
+ D ENTRY^MAGDDR2
+ S STATUS=$$USE^MAGDFCNS(ODEVTYPE,ODEVNAME)
+ W ! I ODEVTYPE="SCREEN",$Y>19 D
+ . R "more...",X:DTIME
+ . W $C(8,8,8,8,8,8,8),"       ",$C(8,8,8,8,8,8,8)
+ . Q
+ W !,"End of File ",QUEUEIN("FILE")
+ S Y=$$HTE^XLFDT($H,1) W "  (printed ",$P($P(Y,"@",2),":",1,2)," on"
+ W " ",$P($P(Y," ",2),","),"-",$P(Y," "),"-",$P($P(Y," ",3),"@"),")",!
+ I ODEVTYPE="FILE" W # ; output form feed for printer
+ I $$USEPRIN^MAGOSFIL(1)
+ Q
+ ;
+TEXTCOPY ; output an ASCII formatted text copy of a DICOM file
+ ; invoked by ^MAGDQUE2 for input files and ^MAGDDW1 for output files
+ N STATUS,TMPFILE,TXTFILE
+ S TMPFILE=$P(QUEUEIN("FILE"),".DCM")_".XXX"
+ S STATUS=$$OPEN^MAGOSFIL(TMPFILE,"W")
+ I STATUS<0 D
+ . N M
+ . S M="Could not open file """_TMPFILE_""" for Write."
+ . W:$$USEPRIN^MAGOSFIL(1) !!!,M,!,STATUS
+ . S $EC=",U"_M_","
+ . Q  ; Error trap does not return
+ ;
+ S ODEVTYPE="FILE",ODEVNAME=TMPFILE
+ D INPUT ; read the *.DCM file and write all the data to the *.TXT file
+ S STATUS=$$CLOSE^MAGOSFIL(TMPFILE)
+ I $$USEPRIN^MAGOSFIL(1)
+ S TXTFILE=$P(QUEUEIN("FILE"),".DCM")_".TXT"
+ S X=$$RENAME^MAGOSDIR(TMPFILE,TXTFILE)
+ I X<0 D  ; rename failed the first time, try to correct it
+ . I FILEMODE="FIFO QUEUE" D  ; output warning message
+ . . W !,"*** WARNING -- Having to RENAME file ",TXTFILE," ***"
+ . . Q
+ . S X=$$DEL^MAGOSDIR(TXTFILE) ; delete the old *.TXT file
+ . S X=$$RENAME^MAGOSDIR(TMPFILE,TXTFILE) ; retry to rename the file
+ . I X<0 W !!,"Cannot rename ",TMPFILE," to ",TXTFILE,"."
+ . Q
+ Q
+ ;
+HOSTFILE(FILENAME,FILESIZE,DATE,TIME) ; get the size and creation date and time
+ N NAME,X
+ S X=$$GETDIR^MAGOSDIR(FILENAME) Q:X'>0 X
+ S NAME=$P(FILENAME,"\",$L(FILENAME,"\"))
+ I NAME[":" S NAME=$P(NAME,":",2)
+ I NAME="" D  Q 1
+ . I $$USEPRIN^MAGOSFIL(1)
+ . W !,FILENAME," is not the name of any file."
+ . W !,"Please try again."
+ . Q
+ S X=$G(^TMP("MAG",$J,"DIR LIST",$$UPPER^MAGOSMSC(NAME)))
+ I X="" D  Q 1
+ . I $$USEPRIN^MAGOSFIL(1)
+ . W !,"Found file name(s):"
+ . S X="" F  S X=$O(^TMP("MAG",$J,"DIR LIST",X)) Q:X=""  W !?5,X
+ . W !,"None is equal to ",FILENAME
+ . W !,"Please try again, check file name for invalid character(s)"
+ . Q
+ S FILESIZE=$P(X,";",1),DATE=$P(X,";",2),TIME=$P(X,";",3)
+ Q 2
+ ;

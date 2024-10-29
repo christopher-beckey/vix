@@ -1,0 +1,108 @@
+﻿<studies>
+    <study>
+        <alternateExamNumber/>
+        <captureDate>05/02/2001 18:31</captureDate>
+        <capturedBy>IMAGPROVIDERONETWOSIX,ONETWOSIX</capturedBy>
+        <description>VAS May 02, 2001</description>
+        <event>ULTRASOUND</event>
+        <firstImage>
+            <captureDate>2001-05-02T18:31:00-04:00</captureDate>
+            <description>VAS May 02, 2001</description>
+            <diagnosticImageUri>imageURN=urn:vaimage:756-26732Mock-DICOM_4US1.dcm-1008861107V475740&amp;imageQuality=90&amp;contentType=application/dicom,image/j2k,application/dicom,image/x-targa,*/*&amp;contentTypeWithSubType=application/dicom,image/j2k,application/dicom,image/x-targa,*/*</diagnosticImageUri>
+            <dicomImageNumber/>
+            <dicomSequenceNumber/>
+            <imageId>urn:vaimage:756-791-790-1008861107V475740</imageId>
+            <imageStatus>Viewable</imageStatus>
+            <imageType>DICOM</imageType>
+            <imageViewStatus>Viewable</imageViewStatus>
+            <referenceImageUri>imageURN=urn:vaimage:756-26732Mock-DICOM_4US.dcm-1008861107V475740&amp;imageQuality=70&amp;contentType=application/dicom,image/j2k,application/dicom,image/x-targa,*/*&amp;contentTypeWithSubType=application/dicom,image/j2k,application/dicom,image/x-targa,*/*</referenceImageUri>
+            <sensitive>false</sensitive>
+            <thumbnailImageUri>imageURN=urn:vaimage:756-26732Mock-DICOM_4US.dcm-1008861107V475740&amp;imageQuality=20&amp;contentType=image/jpeg,image/x-targa,image/bmp,*/*</thumbnailImageUri>
+        </firstImage>
+        <firstImageId>urn:vaimage:756-26732Mock-DICOM_4US.dcm-1008861107V475740</firstImageId>
+        <groupIen>790</groupIen>
+        <imageCount>4</imageCount>
+        <package>MED</package>
+        <type>IMAGE</type>
+        <noteTitle/>
+        <origin>VA</origin>
+        <patientId>icn(1008861107V475740)</patientId>
+        <patientName>PATIENT,ONEZEROTWOTHREE</patientName>
+        <procedureDate>2001-05-02T18:27:00-04:00</procedureDate>
+        <procedureDescription>US</procedureDescription>
+        <sensitive>false</sensitive>
+        <serieses>
+            <series>
+                <images>
+                    <image>
+                        <captureDate>2001-05-02T18:31:00-04:00</captureDate>
+                        <description>VAS May 02, 2001</description>
+                        <diagnosticImageUri>imageURN=urn:vaimage:756-26732Mock-DICOM_4US1.dcm-1008861107V475740&amp;imageQuality=90&amp;contentType=application/dicom,image/j2k,application/dicom,image/x-targa,*/*&amp;contentTypeWithSubType=application/dicom,image/j2k,application/dicom,image/x-targa,*/*</diagnosticImageUri>
+                        <dicomImageNumber/>
+                        <dicomSequenceNumber/>
+                        <imageId>urn:vaimage:756-791-790-1008861107V475740</imageId>
+                        <imageStatus>Viewable</imageStatus>
+                        <imageType>DICOM</imageType>
+                        <imageViewStatus>Viewable</imageViewStatus>
+                        <referenceImageUri>imageURN=urn:vaimage:756-26732Mock-DICOM_4US.dcm-1008861107V475740&amp;imageQuality=70&amp;contentType=application/dicom,image/j2k,application/dicom,image/x-targa,*/*&amp;contentTypeWithSubType=application/dicom,image/j2k,application/dicom,image/x-targa,*/*</referenceImageUri>
+                        <sensitive>false</sensitive>
+                        <thumbnailImageUri>imageURN=urn:vaimage:756-26732Mock-DICOM_4US.dcm-1008861107V475740&amp;imageQuality=20&amp;contentType=image/jpeg,image/x-targa,image/bmp,*/*</thumbnailImageUri>
+                    </image>
+                    <image>
+                        <captureDate>2001-05-02T18:32:00-04:00</captureDate>
+                        <description>VAS May 02, 2001</description>
+                        <diagnosticImageUri>imageURN=urn:vaimage:756-26732Mock-DICOM_4US2.dcm-1008861107V475740&amp;imageQuality=90&amp;contentType=application/dicom,image/j2k,application/dicom,image/x-targa,*/*&amp;contentTypeWithSubType=application/dicom,image/j2k,application/dicom,image/x-targa,*/*</diagnosticImageUri>
+                        <dicomImageNumber/>
+                        <dicomSequenceNumber/>
+                        <imageId>urn:vaimage:756-792-790-1008861107V475740</imageId>
+                        <imageStatus>Viewable</imageStatus>
+                        <imageType>DICOM</imageType>
+                        <imageViewStatus>Viewable</imageViewStatus>
+                        <referenceImageUri>imageURN=urn:vaimage:756-26732Mock-DICOM_4US2.dcm-1008861107V475740&amp;imageQuality=70&amp;contentType=application/dicom,image/j2k,application/dicom,image/x-targa,*/*&amp;contentTypeWithSubType=application/dicom,image/j2k,application/dicom,image/x-targa,*/*</referenceImageUri>
+                        <sensitive>false</sensitive>
+                        <thumbnailImageUri>imageURN=urn:vaimage:756-26732Mock-DICOM_4US2.dcm-1008861107V475740&amp;imageQuality=20&amp;contentType=image/jpeg,image/x-targa,image/bmp,*/*</thumbnailImageUri>
+                    </image>
+                    <image>
+                        <captureDate>2001-05-02T18:32:00-04:00</captureDate>
+                        <description>VAS May 02, 2001</description>
+                        <diagnosticImageUri>imageURN=urn:vaimage:756-26732Mock-DICOM_4US3.dcm-1008861107V475740&amp;imageQuality=90&amp;contentType=application/dicom,image/j2k,application/dicom,image/x-targa,*/*&amp;contentTypeWithSubType=application/dicom,image/j2k,application/dicom,image/x-targa,*/*</diagnosticImageUri>
+                        <dicomImageNumber/>
+                        <dicomSequenceNumber/>
+                        <imageId>urn:vaimage:756-793-790-1008861107V475740</imageId>
+                        <imageStatus>Viewable</imageStatus>
+                        <imageType>DICOM</imageType>
+                        <imageViewStatus>Viewable</imageViewStatus>
+                        <referenceImageUri>imageURN=urn:vaimage:756-26732Mock-DICOM_4US3.dcm-1008861107V475740&amp;imageQuality=70&amp;contentType=application/dicom,image/j2k,application/dicom,image/x-targa,*/*&amp;contentTypeWithSubType=application/dicom,image/j2k,application/dicom,image/x-targa,*/*</referenceImageUri>
+                        <sensitive>false</sensitive>
+                        <thumbnailImageUri>imageURN=urn:vaimage:756-26732Mock-DICOM_4US3.dcm-1008861107V475740&amp;imageQuality=20&amp;contentType=image/jpeg,image/x-targa,image/bmp,*/*</thumbnailImageUri>
+                    </image>
+                    <image>
+                        <captureDate>2001-05-02T18:32:00-04:00</captureDate>
+                        <description>VAS May 02, 2001</description>
+                        <diagnosticImageUri>imageURN=urn:vaimage:756-26732Mock-DICOM_4US4.dcm-1008861107V475740&amp;imageQuality=90&amp;contentType=application/dicom,image/j2k,application/dicom,image/x-targa,*/*&amp;contentTypeWithSubType=application/dicom,image/j2k,application/dicom,image/x-targa,*/*</diagnosticImageUri>
+                        <dicomImageNumber/>
+                        <dicomSequenceNumber/>
+                        <imageId>urn:vaimage:756-794-790-1008861107V475740</imageId>
+                        <imageStatus>Viewable</imageStatus>
+                        <imageType>DICOM</imageType>
+                        <imageViewStatus>Viewable</imageViewStatus>
+                        <referenceImageUri>imageURN=urn:vaimage:756-26732Mock-DICOM_4US4.dcm-1008861107V475740&amp;imageQuality=70&amp;contentType=application/dicom,image/j2k,application/dicom,image/x-targa,*/*&amp;contentTypeWithSubType=application/dicom,image/j2k,application/dicom,image/x-targa,*/*</referenceImageUri>
+                        <sensitive>false</sensitive>
+                        <thumbnailImageUri>imageURN=urn:vaimage:756-26732Mock-DICOM_4US4.dcm-1008861107V475740&amp;imageQuality=20&amp;contentType=image/jpeg,image/x-targa,image/bmp,*/*</thumbnailImageUri>
+                    </image>
+                </images>
+                <modality/>
+                <seriesNumber>1</seriesNumber>
+                <seriesUid/>
+            </series>
+        </serieses>
+        <siteAbbreviation>ELP</siteAbbreviation>
+        <siteName>El Paso, TX</siteName>
+        <siteNumber>756</siteNumber>
+        <specialtyDescription>VASCULAR</specialtyDescription>
+        <studyClass>CLIN</studyClass>
+        <studyId>urn:vastudy:756-790-1008861107V475740</studyId>
+        <studyPackage>MED</studyPackage>
+        <studyType>IMAGE</studyType>
+    </study>
+</studies>

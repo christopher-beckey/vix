@@ -1,0 +1,67 @@
+<studies>
+  <study>
+    <alternateExamNumber>TIU-485</alternateExamNumber>
+    <captureDate>05/02/2005 16:47:53</captureDate>
+    <capturedBy>IMAGPROVIDERONETWOSIX,ONETWOSIX</capturedBy>
+    <contextId>RPT^CPRS^1023^TIU^485</contextId>
+    <description>CARDIOLOGY NOTE</description>
+    <event>PACEMAKER PLACEMENT/MONITORING</event>
+    <firstImage>
+      <captureDate>2005-05-02T16:47:00-04:00</captureDate>
+      <description>CARDIOLOGY NOTE</description>
+      <diagnosticImageUri>imageURN=urn:vaimage:660-26732Mock-test.pdf-1008861107V475740&amp;imageQuality=100&amp;contentType=application/pdf,*/*</diagnosticImageUri>
+      <dicomImageNumber/>
+      <dicomSequenceNumber/>
+      <imageId>urn:vaimage:660-26732Mock-test.pdf-1008861107V475740</imageId>
+      <imageStatus>Viewable</imageStatus>
+      <imageType>PDF</imageType>
+      <imageViewStatus>Viewable</imageViewStatus>
+      <referenceImageUri/>
+      <sensitive>false</sensitive>
+      <thumbnailImageUri/>
+    </firstImage>
+    <firstImageId>urn:vaimage:660-26732Mock-test.pdf-1008861107V475740</firstImageId>
+    <groupIen>8833</groupIen>
+    <imageCount>1</imageCount>
+    <package>NOTE</package>
+    <type>IMAGE</type>
+    <noteTitle>CARDIOLOGY NOTE</noteTitle>
+    <origin>VA</origin>
+    <patientId>icn(1008861107V475740)</patientId>
+    <patientName>PATIENT,ONEZEROTWOTHREE</patientName>
+    <procedureDate>2005-05-02T00:01:00-04:00</procedureDate>
+    <procedureDescription>NOTE</procedureDescription>
+    <sensitive>false</sensitive>
+    <serieses>
+      <series>
+        <images>
+          <image>
+            <captureDate>2005-05-02T16:47:00-04:00</captureDate>
+            <description>CARDIOLOGY NOTE</description>
+            <diagnosticImageUri>imageURN=urn:vaimage:660-26732Mock-test.pdf-1008861107V475740&amp;imageQuality=100&amp;contentType=application/pdf,*/*</diagnosticImageUri>
+            <dicomImageNumber/>
+            <dicomSequenceNumber/>
+            <imageId>urn:vaimage:660-26732Mock-test.pdf-1008861107V475740</imageId>
+            <imageStatus>Viewable</imageStatus>
+            <imageType>PDF</imageType>
+            <imageViewStatus>Viewable</imageViewStatus>
+            <referenceImageUri/>
+            <sensitive>false</sensitive>
+            <thumbnailImageUri/>
+          </image>
+        </images>
+        <modality/>
+        <seriesNumber>1</seriesNumber>
+        <seriesUid/>
+      </series>
+    </serieses>
+    <siteAbbreviation>SLC</siteAbbreviation>
+    <siteName>Salt Lake City, UT</siteName>
+    <siteNumber>660</siteNumber>
+    <specialtyDescription>CARDIOLOGY</specialtyDescription>
+    <studyClass>CLIN</studyClass>
+    <studyId>urn:vastudy:660-8833-1008861107V475740</studyId>
+    <studyPackage>NOTE</studyPackage>
+    <studyType>IMAGE</studyType>
+  </study>
+</studies>

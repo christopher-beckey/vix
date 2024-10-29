@@ -1,0 +1,84 @@
+[ application_info ]
+name = cds_client
+description = Command line client for Configuration Data Service.
+app_component_name = cpp_app/cds_client
+execution_state = STOPPED
+
+[ required_components ]
+component = cpp_lib_src/DCF_cl
+component = cpp_lib_src/DCF
+component = cpp_lib_src/LOG
+component = cpp_lib_src/CDS
+component = cpp_lib_src/APC
+component = cpp_lib/DCFUtil
+component = cpp_lib/APC_a
+component = idl_lib/DAPC
+component = cpp_lib/CDS_a
+component = idl_lib/DCDS
+[ cpp_app ]
+
+#==============================================================================
+# per-instance information for the cds_client component
+#==============================================================================
+[ cpp_app/cds_client ]
+debug_flags = 0x00000
+[ cpp_lib_src ]
+
+
+#==============================================================================
+# per-instance information for the DCF_cl component
+#==============================================================================
+[ cpp_lib_src/DCF_cl ]
+debug_flags = 0x00000
+
+#==============================================================================
+# per-instance information for the DCF component
+#==============================================================================
+[ cpp_lib_src/DCF ]
+debug_flags = 0
+
+#==============================================================================
+# per-instance information for the LOG component
+#==============================================================================
+[ cpp_lib_src/LOG ]
+debug_flags = 0x00000
+
+#==============================================================================
+# per-instance information for the CDS component
+#==============================================================================
+[ cpp_lib_src/CDS ]
+debug_flags = 0x00000
+
+#==============================================================================
+# per-instance information for the APC component
+#==============================================================================
+[ cpp_lib_src/APC ]
+debug_flags = 0x00000
+[ cpp_lib ]
+
+
+#==============================================================================
+# per-instance information for the DCFUtil component
+#==============================================================================
+[ cpp_lib/DCFUtil ]
+debug_flags = 0
+
+#==============================================================================
+# per-instance information for the APC_a component
+#==============================================================================
+[ cpp_lib/APC_a ]
+debug_flags = 0
+save_proc_cfg_in_cds = yes
+save_exit_status_in_proc_cfg = no
+delete_proc_cfg = yes
+
+#==============================================================================
+# per-instance information for the CDS_a component
+#==============================================================================
+[ cpp_lib/CDS_a ]
+debug_flags = 0
+[ idl_lib ]
+
+[ idl_lib/DAPC ]
+
+[ idl_lib/DCDS ]

@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<build xmlns="http://va.gov/VistA/kids/manifest" name="MAG*3.0*120" patchName="VistARad Maintenance VII" patch="120">
+  <components>
+    <securityKeys />
+    <parameterDefinitions />
+    <printTemplates />
+    <sortTemplates />
+    <menuOptions />
+    <rpcs />
+    <dataDictionaries />
+    <hl7s />
+    <routines>
+      <routine export="MAGJEX1.RTN" />
+      <routine export="MAGJEX1A.RTN" />
+      <routine export="MAGJEX2.RTN" />
+      <routine export="MAGJLS3.RTN" />
+      <routine export="MAGJLST1.RTN" />
+      <routine export="MAGJMN1.RTN" />
+      <routine export="MAGJMN3.RTN" />
+      <routine export="MAGJRPT.RTN" />
+      <routine export="MAGJTU4V.RTN" />
+      <routine export="MAGJUPD1.RTN" />
+      <routine export="MAGJUTL2.RTN" />
+      <routine export="MAGJUTL3.RTN" />
+      <routine export="MAGJUTL4.RTN" />
+      <routine export="MAGJUTL5.RTN" />
+    </routines>
+    <protocols />
+  </components>
+</build>

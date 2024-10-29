@@ -1,0 +1,93 @@
+<!doctype HTML public "-//W3C//DTD HTML 4.0 Frameset//EN">
+
+<html>
+
+<head>
+<title>Patch 72 Overview</title>
+<meta http-equiv="content-type" content="text/html; charset=windows-1252">
+<meta name="generator" content="RoboHelp by eHelp Corporation www.ehelp.com">
+<link rel="stylesheet" href="css/default_ns.css">
+
+ <style type="text/css">
+<!--
+ul.whs1 { list-style:square; }
+ul.whs2 { list-style:circle; }
+-->
+</style>
+<style type="text/css">
+<!--
+div.WebHelpPopupMenu { position:absolute; left:0px; top:0px; z-index:4; visibility:hidden; }
+-->
+</style>
+
+</head>
+<body>
+
+<h4>vista imaging - clinical display</h4>
+
+<h1>Patch 72 Overview</h1>
+
+<p>Patch 72 upgrades the imaging component used within the Clinical Display 
+ client to AccuSoft ImageGear 15.4 (currently).</p>
+
+<ul type="square" class="whs1">
+	
+	<li class=kadov-p><p>This component is now used throughout the application 
+ for viewing of all images.</p></li>
+	
+	<li class=kadov-p><p>By using this new component we have fixed several 
+ problems we had with the previous version of AccuSoft ImageGear (IG99) 
+ including:</p></li>
+	
+	<ul type="circle" class="whs2">
+		
+		<li class=kadov-p><p>the odd-columns problem and viewing embedded 
+ thumbnails.</p></li>
+	</ul>
+</ul>
+
+<p>&nbsp;</p>
+
+<p>Included in this patch is a brand new Radiology Viewer that makes use 
+ of some of the features available in this new image toolkit.</p>
+
+<ul type="square" class="whs1">
+	
+	<li class=kadov-p><p>This new viewer is based on the functionality 
+ of the old Radiology Viewer but has a look and feel that matches more 
+ closely to the Full Resolution viewer.</p></li>
+	
+	<li class=kadov-p><p>The goal here is to make it easier for users to 
+ access buttons and functions.</p></li>
+</ul>
+
+<p>&nbsp;</p>
+
+<ul type="square" class="whs1">
+	
+	<li class=kadov-p><p>Also in this patch are new components needed to 
+ communicate with the DOD and view DOD images.</p></li>
+	
+	<ul type="circle" class="whs2">
+		
+		<li class=kadov-p><p>These components allow images and studies 
+ from the DOD to appear like VA sites.</p></li>
+		
+		<li class=kadov-p><p>If a patient has been seen at the DOD, the 
+ DOD site will appear on the Remote Image View toolbar in the same manner 
+ as a VA site would.</p></li>
+		
+		<li class=kadov-p><p>Communication with the DOD is done through 
+ the VistA Imaging Exchange (VIX) service (Patch 83).</p></li>
+		
+		<ul type="square" class="whs1">
+			
+			<li class=kadov-p><p>A site can only view DOD images if they 
+ have a VIX installed.</p></li>
+		</ul>
+	</ul>
+</ul>
+
+
+</body>
+</html>

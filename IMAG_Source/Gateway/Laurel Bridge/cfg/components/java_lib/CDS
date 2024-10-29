@@ -1,0 +1,26 @@
+#==============================================================================
+# static information common to all instances of CDS component
+#==============================================================================
+[ component_info ]
+name = CDS
+type = java_lib
+category = common_service_interface_libs
+description = Configuration Data Service - java interface to hierarchical database for application settings
+package_prefix = com.lbs
+slnreldir = .\jsrc\com\lbs\CDS
+
+[ required_components ]
+[ debug_controls ]
+debug_flag = df_SHOW_CONSTRUCTORS, 0x0001, show object constructors
+debug_flag = df_SHOW_DESTRUCTORS, 0x0002, show object destructors
+debug_flag = df_SHOW_GENERAL_FLOW, 0x0004, show general flow
+debug_flag = df_SIMULATE_HARDWARE, 0x0008, simulate external devices
+debug_flag = df_SHOW_CFG_INFO, 0x0010, show configuration information
+debug_flag = df_SHOW_EXC_THROW, 0x0020, show exceptions before throwing
+debug_flag = df_VERBOSE,     0x10000, Show verbose trace messages
+
+#==============================================================================
+# per-instance information for the CDS component
+#==============================================================================
+[ CDS ]
+debug_flags = 0x00000

@@ -1,0 +1,65 @@
+<?xml version="1.0"?>
+<build xmlns="http://va.gov/VistA/kids/manifest" name="MAG*3.0*049" patchName="HL7 ADT Transmission to Commercial PACS" patch="049">
+  <components>
+    <securityKeys />
+    <parameterDefinitions />
+    <printTemplates />
+    <sortTemplates />
+    <menuOptions>
+      <menuOption export="Z_VSS_P035_OPTS.KID" />
+      <menuOption export="Z_VSS_P049_OPTS.KID" />
+    </menuOptions>
+    <rpcs>
+      <rpc export="RPC_MAG_DICOM_GET_PATIENT_VITALS.KID" />
+    </rpcs>
+    <dataDictionaries>
+      <dataDictionary export="Z_VSS_2006_1.KID" />
+      <dataDictionary export="Z_VSS_2006_15.KID" />
+      <dataDictionary export="Z_VSS_2006_55.KID" />
+      <dataDictionary export="Z_VSS_2006_56.KID" />
+      <dataDictionary export="Z_VSS_2006_563.KID" />
+    </dataDictionaries>
+    <hl7s>
+      <hl7 export="Z_VSS_P049_HL7.KID" />
+    </hl7s>
+    <routines>
+      <routine export="MAG7UCFG.RTN" />
+      <routine export="MAG7UD.RTN" />
+      <routine export="MAGDHLE.RTN" />
+      <routine export="MAGDHLI.RTN" />
+      <routine export="MAGDHLL.RTN" />
+      <routine export="MAGDHLS.RTN" />
+      <routine export="MAGDHLSO.RTN" />
+      <routine export="MAGDHLSV.RTN" />
+      <routine export="MAGDHLT.RTN" />
+      <routine export="MAGDHLTA.RTN" />
+      <routine export="MAGDHLTC.RTN" />
+      <routine export="MAGDHPS.RTN" />
+      <routine export="MAGDHRC0.RTN" />
+      <routine export="MAGDHW0.RTN" />
+      <routine export="MAGDHWA.RTN" />
+      <routine export="MAGDHWR.RTN" />
+      <routine export="MAGDIR8A.RTN" />
+      <routine export="MAGDIR8R.RTN" />
+      <routine export="MAGDIR9A.RTN" />
+      <routine export="MAGDRA2.RTN" />
+      <routine export="MAGDRA3.RTN" />
+      <routine export="MAGDRAHL.RTN" />
+      <routine export="MAGDRPC1.RTN" />
+      <routine export="MAGDRPC3.RTN" />
+      <routine export="MAGDRPC4.RTN" />
+      <routine export="MAGDRPC9.RTN" />
+      <routine export="MAGDRUID.RTN" />
+      <routine export="MAGENV49.RTN" />
+      <routine export="MAGIPS49.RTN" />
+    </routines>
+    <protocols>
+      <protocol export="Z_VSS_P049_PROTO_A01.KID" />
+      <protocol export="Z_VSS_P049_PROTO_A02.KID" />
+      <protocol export="Z_VSS_P049_PROTO_A03.KID" />
+      <protocol export="Z_VSS_P049_PROTO_A11.KID" />
+      <protocol export="Z_VSS_P049_PROTO_A12.KID" />
+      <protocol export="Z_VSS_P049_PROTO_A13.KID" />
+    </protocols>
+  </components>
+</build>

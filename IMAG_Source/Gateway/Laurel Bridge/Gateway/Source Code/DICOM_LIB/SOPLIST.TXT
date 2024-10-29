@@ -1,0 +1,69 @@
+#
+# DICOM Application / sop / transfer UID list.
+#
+# This list is used by the CheckedPDU_Service ( "filename" ) service
+# class.  All incoming associations will be verified against this
+# file.
+# Modifications:
+#   19990109: MvH, added all sops for GE advantagesim, listed as 'unknown'
+#   19990317: MvH, Completed with RT objects, GE, Philips
+#   19990318: ljz, added three xxxxRetrieveNKI sops
+#   19991105: ljz, changed the xxxxRetrieveNKI sops using NKI unique root
+#                  1.2.826.0.1.3680043.2.135.yyyy.xxxxxxxxxx (yyyy = 1066)
+#
+#None				none				RemoteAE
+#None				none				LocalAE
+#DICOM				1.2.840.10008.3.1.1.1		application
+Verification			1.2.840.10008.1.1		sop
+CRStorage			1.2.840.10008.5.1.4.1.1.1	sop
+CTStorage			1.2.840.10008.5.1.4.1.1.2	sop
+RetiredUSMultiframeStorage	1.2.840.10008.5.1.4.1.1.3	sop
+USMultiframeStorage		1.2.840.10008.5.1.4.1.1.3.1	sop
+MRStorage			1.2.840.10008.5.1.4.1.1.4	sop
+RetiredNMStorage		1.2.840.10008.5.1.4.1.1.5	sop
+NMStorage			1.2.840.10008.5.1.4.1.1.20	sop
+RetiredUSStorage		1.2.840.10008.5.1.4.1.1.6	sop
+USStorage			1.2.840.10008.5.1.4.1.1.6.1	sop
+SCStorage			1.2.840.10008.5.1.4.1.1.7	sop
+StandaloneOverlayStorage	1.2.840.10008.5.1.4.1.1.8	sop
+StandaloneCurveStorage		1.2.840.10008.5.1.4.1.1.9	sop
+StandaloneModalityLUTStorage	1.2.840.10008.5.1.4.1.1.10	sop
+StandaloneVOILUTStorage		1.2.840.10008.5.1.4.1.1.11	sop
+RetiredXASinglePlaneStorage	1.2.840.10008.5.1.4.1.1.12	sop
+XASinglePlaneStorage		1.2.840.10008.5.1.4.1.1.12.1	sop
+RFStorage			1.2.840.10008.5.1.4.1.1.12.2	sop
+XABiPlaneStorage		1.2.840.10008.5.1.4.1.1.12.3	sop
+VLImageStorage			1.2.840.10008.5.1.4.1.1.77.1	sop
+VLMultiFrameImageStorage	1.2.840.10008.5.1.4.1.1.77.2	sop
+RTImageStorage			1.2.840.10008.5.1.4.1.1.481.1	sop
+RTDoseStorage			1.2.840.10008.5.1.4.1.1.481.2	sop
+RTStructureStorage		1.2.840.10008.5.1.4.1.1.481.3	sop
+#RTTreatmentRecordStorage	1.2.840.10008.5.1.4.1.1.481.4	sop
+RTPlanStorage			1.2.840.10008.5.1.4.1.1.481.5	sop
+GEMRStorage			1.2.840.113619.4.2		sop
+GECTStorage			1.2.840.113619.4.3		sop
+GE3DModelObjectStorage		1.2.840.113619.4.26		sop
+GERTPlanStorage			1.2.840.113619.5.249		sop
+GESaturnTDSObjectStorage	1.2.840.113619.5.253		sop
+Philips3DVolumeStorage		1.2.46.670589.5.0.1		sop
+Philips3DObjectStorage		1.2.46.670589.5.0.2		sop
+PhilipsSurfaceStorage		1.2.46.670589.5.0.3		sop
+PhilipsCompositeObjectStorage	1.2.46.670589.5.0.4		sop
+PhilipsMRCardioProfileStorage	1.2.46.670589.5.0.7		sop
+PhilipsMRCardioImageStorage	1.2.46.670589.5.0.8		sop
+PatientRootQuery		1.2.840.10008.5.1.4.1.2.1.1			sop
+PatientRootRetrieveNKI		1.2.826.0.1.3680043.2.135.1066.5.1.4.1.2.1.2	sop
+PatientRootRetrieve		1.2.840.10008.5.1.4.1.2.1.2			sop
+StudyRootQuery			1.2.840.10008.5.1.4.1.2.2.1			sop
+StudyRootRetrieveNKI		1.2.826.0.1.3680043.2.135.1066.5.1.4.1.2.2.2	sop
+StudyRootRetrieve		1.2.840.10008.5.1.4.1.2.2.2			sop
+PatientStudyOnlyQuery		1.2.840.10008.5.1.4.1.2.3.1			sop
+PatientStudyOnlyRetrieveNKI	1.2.826.0.1.3680043.2.135.1066.5.1.4.1.2.3.2	sop
+PatientStudyOnlyRetrieve	1.2.840.10008.5.1.4.1.2.3.2			sop
+LittleEndianImplicit		1.2.840.10008.1.2		transfer
+LittleEndianExplicit		1.2.840.10008.1.2.1		transfer
+#BigEndianExplicit		1.2.840.10008.1.2.2		transfer
+#JPEGBaseLine1			1.2.840.10008.1.2.4.50		transfer	LittleEndianImplicit
+#JPEGExtended2and4		1.2.840.10008.1.2.4.51		transfer	LittleEndianImplicit
+#JPEGExtended3and5		1.2.840.10008.1.2.4.52		transfer	LittleEndianImplicit
+#JPEGSpectralNH6and8		1.2.840.10008.1.2.4.53		transfer	LittleEndianImplicit

@@ -1,0 +1,766 @@
+<html><head><title>VistA Imaging DICOM Master File Set-Up</title>
+<!--
+ ;; +---------------------------------------------------------------+
+ ;; | Property of the US Government.                                |
+ ;; | No permission to copy or redistribute this software is given. |
+ ;; | Use of unreleased versions of this software requires the user |
+ ;; | to execute a written test agreement with the VistA Imaging    |
+ ;; | Development Office of the Department of Veterans Affairs,     |
+ ;; | telephone (301) 734-0100.                                     |
+ ;; |                                                               |
+ ;; | The Food and Drug Administration classifies this software as  |
+ ;; | a medical device.  As such, it may not be changed in any way. |
+ ;; | Modifications to this software may result in an adulterated   |
+ ;; | medical device under 21CFR820, the use of which is considered |
+ ;; | to be a violation of US Federal Statutes.                     |
+ ;; +---------------------------------------------------------------+
+-->
+<meta http-equiv=Content-Type content="text/html; charset=iso-8859-1">
+</head>
+<body background="vabkg.jpg">
+<csp:method name=OnPreHTTP arguments="" returntype=%Boolean>
+ Do %response.SetHeader("Expires","")
+ Do %response.SetHeader("Cache-Control","none")
+ Quit 1
+</csp:method>
+<table cellSpacing=0 cellPadding=0 border=0 summary="This table is for formatting purposes only.">
+  <tr>
+    <td vAlign=top><img alt="First part of VistA Imaging Logo" src="MAGLogo1.gif" border=0></td>
+    <td vAlign=top><img alt="Second part of Vista Imaging Logo" src="MAGLogo2.gif"><br>
+      <h2><font color=#0033ff>VistA Imaging DICOM Master File Set-Up</font></h2></td>
+  </tr>
+</table>
+
+<script language=CACHE runat=server>
+ Do ..Process()
+</script>
+ 
+</body>
+
+<csp:method name=Process arguments="">
+ New Err,M2MOK,Service,Table,VALLOC,WebPage
+ ;
+ Set token="" Do
+ . New cmd,from,ip,util,x
+ . Set WebPage=$IO
+ . Set cmd="ipconfig",ip("127.0.0.1")=1
+ . Open cmd:"QR" Use cmd Set util=$ZUtil(68,40,1)
+ . For  Read x Quit:$ZEOF  Do
+ . . Quit:x'["IP Address. ."
+ . . Set x=$Extract(x,38,$Length(x))
+ . . Set:x'="" ip(x)=1
+ . . Quit
+ . Set x=$ZUtil(68,40,util)
+ . Close cmd Use WebPage
+ . ;
+ . Set id=""
+ . Set from=%request.GetCgiEnv("REMOTE_HOST")
+ . If from'="",$Get(ip(from)) Set id=from
+ . Quit:id=""
+ . Set token=id_"|"_..Now()_"|"_$Random(10000000)
+ . Set ^MAGtoken(token)=5*60+..Now()
+ . Quit
+ ;
+ Set:id="" token=%request.Get("SessionToken")
+ Do:token'=""
+ . New exp
+ . Set exp=$Get(^MAGtoken(token))
+ . If 'exp Set token="" Quit
+ . If exp<..Now() Set token="" Quit
+ . ; Extend expiration of token by 15 minutes
+ . Set ^MAGtoken(token)=15*60+..Now()
+ . Quit
+ Do:token=""
+ . New N1,N2,Pass,User
+ . Set User=%request.Get("UserName")
+ . Set Pass=%request.Get("PassWord")
+ . Set N1=%request.Get("PassN1")
+ . Set N2=%request.Get("PassN2")
+ . Set:User_Pass_N1_N2'="" token=..LogInVal("DICOMGateway",User,Pass,N1,N2)
+ . If token="" Do  Quit
+ . . Do ..LogInFrm("DICOMGateway","MAGDSET2.csp")
+ . . Quit
+ . ; Initial token lives 5 minutes
+ . Set ^MAGtoken(token)=5*60+..Now()
+ . Set ^MAGtoken(token,"DICOMGateway")=1
+ . Quit
+ Do:token'=""
+ . New Active,Case,Data,Field,File,FMnum,GateWay,Specialty
+ . Do  ; Set up credentials to use MUMPS-to-MUMPS Broker
+ . . N A,V,X
+ . . Kill ^TMP("MAG",$Job)
+ . . Set ^TMP("MAG",$Job,"DICOM MENU OPTION")=0
+ . . Set ^TMP("MAG",$Job,"DICOM MENU VIEW ONLY")=0
+ . . S A=$G(^MAGDICOM(2006.563,1,"M-to-M BROKER BGND ACCESS"))
+ . . S V=$G(^MAGDICOM(2006.563,1,"M-to-M BROKER BGND VERIFY"))
+ . . S X=$$DECRYP^MAGM2VCU(A)_";"_$$DECRYP^MAGM2VCU(V)
+ . . S ^TMP("MAG",$Job,"DICOM RPC USER")="666^1^"_$$ENCRYPT^MAGM2VCU(X)
+ . . Q
+ . ;
+ . Set M2MOK=1,WebPage=$IO
+ . Do
+ . . New DOMAIN,gw,i,idx,sp,val
+ . . If '$$ISCONT^MAGM2VCU() Do  Quit:'M2MOK
+ . . . Set X=$$RECONCT^MAGDMENA() Quit:X
+ . . . Set M2MOK=0
+ . . . Quit
+ . . Quit:'M2MOK
+ . . Set M2MOK=0
+ . . Quit:$$CALLRPC^MAGM2VCU("MAG DICOM VALID LOCATIONS","M",.VALLOC)<0
+ . . Quit:$$CALLRPC^MAGM2VCU("MAG DICOM GET DOMAIN","M",.DOMAIN)<0
+ . . Set M2MOK=1
+ . . If $$CALLRPC^MAGM2VCU("MAG DICOM GET MACHINES","M",.gw)
+ . . Set i="" For  Set i=$Order(gw(i))  Quit:i=""  Do
+ . . . Quit:gw(i)'["^"
+ . . . Set idx=$Piece(gw(i),"^",1),val=$p(gw(i),"^",2)
+ . . . If idx'="",val'="" Set GateWay(idx)=val
+ . . . Quit
+ . . If $$CALLRPC^MAGM2VCU("MAG DICOM GET SPECIALTIES","M",.sp)
+ . . Set i="" For  Set i=$Order(sp(i))  Quit:i=""  Do
+ . . . Quit:sp(i)'["^"
+ . . . Set idx=$Piece(sp(i),"^",1),val=$p(sp(i),"^",2)
+ . . . If idx'="",val'="" Set Specialty(idx)=val
+ . . . Quit
+ . . If $Get(DOMAIN)'="" Set ^MAGDICOM(2006.563,1,"DOMAIN")=DOMAIN
+ . . Quit
+ . ;
+ . Set Table(2006.581)="Instrument"
+ . Set Table(2006.582)="Modality"
+ . Set Table(2006.583)="Modality WorkList"
+ . Set Table(2006.584)="TCP/IP Port List"
+ . Set Table(2006.585)="User Application (SCU List)"
+ . ;
+ . Set FMnum=%request.Get("FMNum")
+ . Do:FMnum=2006.581
+ . . Set Field(1)="Nickname|Nick-<br>name"
+ . . Set Field(2)="Description|Description"
+ . . Set Field(3)="Imaging Service|Imaging<br>Service"
+ . . Set Field(4)="Port|Port"
+ . . Set Field(5)="Institution|Institution"
+ . . Set Field(6)="DICOM Gateway|DICOM<br>Gateway"
+ . . Set Field=6
+ . . Quit
+ . Do:FMnum=2006.582
+ . . Set Field(1)="Manufacturer|Manufacturer"
+ . . Set Field(2)="Model|Model"
+ . . Set Field(3)="Modality|Modality"
+ . . Set Field(4)="Conversion Parameters|DICOM to Targa<br>Conversion Parameters"
+ . . Set Field(5)="CaseCode|Function<br>to obtain<br>Case Code"
+ . . Set Field(6)="Extraction|Function<br>to extract<br>data"
+ . . Set Field(7)="Data File|File Name<br>for additional<br>information"
+ . . Set Field(8)="Imaging Service|Imaging<br>Service"
+ . . Set Field(9)="Active|Active"
+ . . Set Field=9
+ . . Quit
+ . Do:FMnum=2006.583
+ . . Set Field(1)="AE Title|Application<br>Entity<br>Title"
+ . . Set Field(2)="Imaging Service|Imaging<br>Service"
+ . . Set Field(3)="Imging Type|Imaging<br>Type"
+ . . Set Field(4)="Specialty|(Sub)<br>Specialty"
+ . . Set Field(5)="AC Format|Accession<br>Number<br>Format"
+ . . Set Field(6)="Description|Description"
+ . . Set Field(7)="SSN Format|SSN<br>Format"
+ . . Set Field=7
+ . . Quit
+ . Do:FMnum=2006.584
+ . . Set Field(1)="Menu Option|Menu Option"
+ . . Set Field(2)="AE Title|Application<br>Entity<br>Title"
+ . . Set Field(3)="Port|Port<br>Number"
+ . . Set Field(4)="Mode|File<br>Mode"
+ . . Set Field(5)="Channel|Channel"
+ . . Set Field=5
+ . . Quit
+ . Do:FMnum=2006.585
+ . . Set Field(1)="Application|User Application"
+ . . Set Field(2)="Called|Called<br>Application<br>Entity<br>Title"
+ . . Set Field(3)="Calling|Calling<br>Application<br>Entity<br>Title"
+ . . Set Field(4)="IP Address|IP Address"
+ . . Set Field(5)="Port|Port<br>Number"
+ . . Set Field(6)="PACS|PACS<br>Type"
+ . . Set Field(7)="Priority|Priority"
+ . . Set Field=7
+ . . Quit
+ . ;
+ . Do
+ . . New loc,n
+ . . Set n=0,loc="" For  Set loc=$Order(VALLOC(loc)) Quit:loc=""  Do
+ . . . If VALLOC(loc)'["^" Kill VALLOC(loc) Quit
+ . . . Set n=n+1,VALLOC=VALLOC(loc)
+ . . . Quit
+ . . Set:n'=1 VALLOC=""
+ . . Quit
+ . Set Service("RAD")="Radiology"
+ . Set Service("CON")="Consults"
+ . ;
+ . Set Active(0)="No"
+ . Set Active(1)="Yes"
+ . ;
+ . Set Case("ADACNM.MAGDIR3")="ADACNM^MAGDIR3"
+ . Set Case("CEMAX.MAGDIR3")="CEMAX^MAGDIR3"
+ . Set Case("GECTHISA.MAGDIR3")="GECTHISA^MAGDIR3"
+ . Set Case("GEDRS.MAGDIR3")="GEDRS^MAGDIR3"
+ . Set Case("GEMSPACS.MAGDIR3")="GEMSPACS^MAGDIR3"
+ . Set Case("GEWHCT.MAGDIR3")="GEWHCT^MAGDIR3"
+ . Set Case("GEWHMR.MAGDIR3")="GEWHMR^MAGDIR3"
+ . Set Case("IGNORE.MAGDIR3")="IGNORE^MAGDIR3"
+ . Set Case("LONGCASE.MAGDIR3")="LONGCASE^MAGDIR3"
+ . Set Case("MEDCASE.MAGDIR3")="MEDCASE^MAGDIR3"
+ . Set Case("CORRECT.MAGDIR3")="CORRECT^MAGDIR3"
+ . Set Case("PIDCASE.MAGDIR3")="PIDCASE^MAGDIR3"
+ . Set Case("PIDCASE2.MAGDIR3")="PIDCASE2^MAGDIR3"
+ . Set Case("PNAME.MAGDIR3")="PNAME^MAGDIR3"
+ . Set Case("PQ2000.MAGDIR3")="PQ2000^MAGDIR3"
+ . Set Case("SERDESC.MAGDIR3")="SERDESC^MAGDIR3"
+ . Set Case("STUDYID.MAGDIR3")="STUDYID^MAGDIR3"
+ . Set Case("STUDYUID.MAGDIR3")="STUDYUID^MAGDIR3"
+ . Set Case("BOICT.MAGDIR3")="BOICT^MAGDIR3"
+ . ;
+ . Set Data("GECT.MAGDIR4A")="GECT^MAGDIR4A"
+ . Set Data("PICKERUZ.MAGDIR4A")="PICKERUZ^MAGDIR4A"
+ . Set Data("GECT1000.MAGDIR4A")="GECT1000^MAGDIR4A"
+ . Set Data("PICKERCT.MAGDIR4A")="PICKERCT^MAGDIR4A"
+ . Set Data("PHILIPCT.MAGDIR4A")="PHILIPCT^MAGDIR4A"
+ . Set Data("CTCOMMON.MAGDIR4A")="CTCOMMON^MAGDIR4A"
+ . Set Data("GELCA.MAGDIR4A")="GELCA^MAGDIR4A"
+ . ;
+ . Set File("DataGECT.dic")=""
+ . Set File("DataMisc.dic")=""
+ . Set File("Data_CR.dic")=""
+ . Set File("Data_MRI.dic")=""
+ . ;
+ . Use WebPage
+ . If 'M2MOK Do  Quit
+ . . Write $Char(13,10),"<h3><font color=#ff0000>"
+ . . Write "Cannot connect to VistA at this time"
+ . . Write " - update capabilities limited.</font></h3>",$Char(13,10)
+ . . Quit
+ . Write $Char(13,10),"<form action=""MAGMasterFile.csp"" method=""POST"">"
+ . ;
+ . Do ..Update() ; Update database
+ . ;
+ . Do
+ . . New d0,d1,d2,FMnum,fmok,gw,p,sort,v,x
+ . . Set FMnum=%request.Get("FMNum"),fmok=0
+ . . Set v="" For  Set v=$Order(Table(v)) Quit:v=""  Set:FMnum=v fmok=1
+ . . If 'fmok Do  Quit
+ . . . Write $Char(13,10),"<h3>Select one of the tables below</h3><p>"
+ . . . Set v="" For  Set v=$Order(Table(v)) Quit:v=""  Do
+ . . . . Write $Char(13,10),"<input type=radio name=""FMNum"" value=""",v,""">"
+ . . . . Write "&nbsp;&nbsp; ",Table(v)
+ . . . . Write $Select($Order(Table(v))="":"</p>",1:"<br>")
+ . . . . Quit
+ . . . Quit
+ . . ;
+ . . Write $Char(13,10),"<input type=hidden name=""FMNum"" value=""",FMnum,""">"
+ . . Set sort(1)=+%request.Get("Sort1")
+ . . Set sort(2)=+%request.Get("Sort2")
+ . . Set sort(3)=+%request.Get("Sort3")
+ . . ;
+ . . Write "<p><b>Sort by</b> <select name=""Sort1"">",$Char(13,10)
+ . . Write:sort(1) "<option value=",sort(1)," selected>",$Piece(Field(sort(1)),"|",1),"</option>",$Char(13,10)
+ . . Write "<option value=0>-- Don't sort --</option>",$Char(13,10)
+ . . Set sort="" for  set sort=$Order(Field(sort)) Quit:sort=""  Do
+ . . . Quit:sort=sort(1)
+ . . . Write "<option value=",sort,">",$Piece(Field(sort),"|",1),"</option>",$Char(13,10)
+ . . . Quit
+ . . Write "</select> and <select name=""Sort2"">",$Char(13,10)
+ . . Write:sort(2) "<option value=",sort(2)," selected>",$Piece(Field(sort(2)),"|",1),"</option>",$Char(13,10)
+ . . Write "<option value=0>-- Don't sort --</option>",$Char(13,10)
+ . . Set sort="" for  set sort=$Order(Field(sort)) Quit:sort=""  Do
+ . . . Quit:sort=sort(2)
+ . . . Write "<option value=",sort,">",$Piece(Field(sort),"|",1),"</option>",$Char(13,10)
+ . . . Quit
+ . . Write "</select> and <select name=""Sort3"">",$Char(13,10)
+ . . Write:sort(3) "<option value=",sort(3)," selected>",$Piece(Field(sort(3)),"|",1),"</option>",$Char(13,10)
+ . . Write "<option value=0>-- Don't sort --</option>",$Char(13,10)
+ . . Set sort="" for  set sort=$Order(Field(sort)) Quit:sort=""  Do
+ . . . Quit:sort=sort(1)
+ . . . Write "<option value=",sort,">",$Piece(Field(sort),"|",1),"</option>",$Char(13,10)
+ . . . Quit
+ . . Write "</select></p>",$Char(13,10)
+ . . ;
+ . . Set d0=0 For  Set d0=$Order(^MAGDICOM(FMnum,d0)) Quit:'d0  Do
+ . . . Set x=$Get(^MAGDICOM(FMnum,d0,0))
+ . . . Set p(1)=$Piece(x,"^",sort(1)) Set:p(1)="" p(1)=" "
+ . . . Set p(2)=$Piece(x,"^",sort(2)) Set:p(2)="" p(2)=" "
+ . . . Set p(3)=$Piece(x,"^",sort(3)) Set:p(3)="" p(3)=" "
+ . . . Set sort(" ",p(1),p(2),p(3),d0)=""
+ . . . Quit
+ . . ;
+ . . set sort=1,sort("!",1)=0 ; Slot for new entry
+ . . Set p(1)="" For  Set p(1)=$Order(sort(" ",p(1))) Quit:p(1)=""  Do
+ . . . Set p(2)="" For  Set p(2)=$Order(sort(" ",p(1),p(2))) Quit:p(2)=""  Do
+ . . . . Set p(3)="" For  Set p(3)=$Order(sort(" ",p(1),p(2),p(3))) Quit:p(3)=""  Do
+ . . . . . Set d0="" For  Set d0=$Order(sort(" ",p(1),p(2),p(3),d0)) Quit:d0=""  Do
+ . . . . . . Set sort=sort+1,sort("!",sort)=d0
+ . . . . . . Quit
+ . . . . . Quit
+ . . . . Quit
+ . . . Quit
+ . . ;
+ . . Write $Char(13,10),"<table border=2 summary=""This table is for formatting purposes only."">"
+ . . Write $Char(13,10),"<td valign=bottom align=center><b>Delete</b></td>"
+ . . Set i="" For  Set i=$Order(Field(i)) Quit:i=""  Do
+ . . . Write $Char(13,10),"<td valign=bottom align=center><b>",$Piece(Field(i),"|",2),"</b></td>"
+ . . . Quit
+ . . Write "</tr>"
+ . . Set sort="" For  Set sort=$Order(sort("!",sort)) Quit:sort=""  DO
+ . . . New i,loc,p,pp
+ . . . Set d0=sort("!",sort)
+ . . . Set x=$Get(^MAGDICOM(FMnum,d0,0))
+ . . . For i=1:1:Field Do
+ . . . . Set p=$Translate($Piece(x,"^",i),$Char(9,10,12,13)," ")
+ . . . . For  Quit:$Extract(p,1)'=" "  Set p=$Extract(p,2,$Length(p))
+ . . . . For  Quit:$Extract(p,$Length(p))'=" "  Set p=$Extract(p,1,$Length(p)-1)
+ . . . . Set pp(i)=p
+ . . . . Quit
+ . . . Write $Char(13,10),"<tr>"
+ . . . Write $Char(13,10),"<td align=center>" Write:'d0 "&nbsp;"
+ . . . Write:d0 "<input type=checkbox name=""Del_"_d0_""">"
+ . . . Write "</td>"
+ . . . Do:FMnum=2006.581
+ . . . . Do ..inText("Edit_"_d0_"_1",..HTML(pp(1)),4) ; Nick-name
+ . . . . Do ..inText("Edit_"_d0_"_2",..HTML(pp(2))) ; Description
+ . . . . Do ..inList("Edit_"_d0_"_3",pp(3),.Service) ; Service
+ . . . . Do ..inText("Edit_"_d0_"_4",..HTML(pp(4)),4) ; Port
+ . . . . ; Location
+ . . . . Do:VALLOC ..inHidden("Edit_"_d0_"_5",..HTML($Piece(VALLOC,"^",2)),$Piece(VALLOC,"^",1))
+ . . . . Do:'VALLOC ..inList("Edit_"_d0_"_5",pp(5),.VALLOC)
+ . . . . Do ..inList("Edit_"_d0_"_6",pp(6),.GateWay) ; Machine
+ . . . . Quit
+ . . . Do:FMnum=2006.582
+ . . . . Do ..inText("Edit_"_d0_"_1",..HTML(pp(1)),15) ; Manufacturer
+ . . . . Do ..inText("Edit_"_d0_"_2",..HTML(pp(2)),10) ; Model
+ . . . . Do ..inText("Edit_"_d0_"_3",..HTML(pp(3)),15) ; Modality
+ . . . . Do ..inText("Edit_"_d0_"_4",..HTML(pp(4)),25) ; DICOM to Targa Conversion Parameters
+ . . . . Do ..inList("Edit_"_d0_"_5",pp(5),.Case) ; Function to obtain Case Code
+ . . . . Do ..inList("Edit_"_d0_"_6",pp(6),.Data) ; Function to extract data
+ . . . . Do ..inList("Edit_"_d0_"_7",pp(7),.File) ; File Name for additional information
+ . . . . Do ..inList("Edit_"_d0_"_8",pp(8),.Service) ; Imaging Service
+ . . . . Do ..inList("Edit_"_d0_"_9",pp(9),.Active) ; Active
+ . . . . Quit
+ . . . Do:FMnum=2006.583
+ . . . . New ACfmt,SSNfmt
+ . . . . Set ACfmt("L")="Long"
+ . . . . Set ACfmt("S")="Short"
+ . . . . Set SSNfmt("D")="Include dashes"
+ . . . . Set SSNfmt("N")="No dashes"
+ . . . . ;
+ . . . . Do ..inText("Edit_"_d0_"_1",..HTML(pp(1)),10) ; Application Entity Title
+ . . . . Do ..inText("Edit_"_d0_"_2",..HTML(pp(2)),10) ; Location
+ . . . . Do ..inList("Edit_"_d0_"_3",pp(3),.Service) ; Imaging Service
+ . . . . Do ..inList("Edit_"_d0_"_4",pp(4),.Specialty) ; (Sub)Specialty
+ . . . . Do ..inList("Edit_"_d0_"_5",pp(5),.ACfmt) ; Accession Number Format
+ . . . . Do ..inText("Edit_"_d0_"_6",..HTML(pp(6)),20) ; Description
+ . . . . Do ..inList("Edit_"_d0_"_7",pp(7),.SSNfmt) ; SSN Format
+ . . . . Quit
+ . . . Do:FMnum=2006.584
+ . . . . New chan,mode
+ . . . . For chan=1:1:5 Set chan(chan)="Channel # "_chan
+ . . . . Set mode("F")="FIFO"
+ . . . . Set mode("D")="Direct"
+ . . . . ;
+ . . . . Do ..inText("Edit_"_d0_"_1",..HTML(pp(1)),15) ; Menu Option
+ . . . . Do ..inText("Edit_"_d0_"_2",..HTML(pp(2)),10) ; Application Entity Title
+ . . . . Do ..inText("Edit_"_d0_"_3",..HTML(pp(3)),4) ; Port Number
+ . . . . Do ..inList("Edit_"_d0_"_4",$Extract(pp(4),1),.mode) ; File Mode
+ . . . . Do ..inList("Edit_"_d0_"_5",pp(5),.chan) ; Channel
+ . . . . Quit
+ . . . Do:FMnum=2006.585
+ . . . . New PACS,prior,v
+ . . . . Set PACS("GE")="General Electric"
+ . . . . Set PACS("KODAK")="Kodak"
+ . . . . Set PACS("other")="Other"
+ . . . . Set prior(250)="Low"
+ . . . . Set prior(500)="Normal"
+ . . . . Set prior(750)="High"
+ . . . . ;
+ . . . . Do ..inText("Edit_"_d0_"_1",..HTML(pp(1)),20) ; User Application
+ . . . . Do ..inText("Edit_"_d0_"_2",..HTML(pp(2)),10) ; Called Application Entity Title
+ . . . . Do ..inText("Edit_"_d0_"_3",..HTML(pp(3)),10) ; Calling Application Entity Title
+ . . . . Do ..inText("Edit_"_d0_"_4",..HTML(pp(4)),15) ; IP Address
+ . . . . Do ..inText("Edit_"_d0_"_5",..HTML(pp(5)),4) ; Port Number
+ . . . . Set v=pp(6) Set:v="" v="other"
+ . . . . Do ..inList("Edit_"_d0_"_6",v,.PACS) ; PACS Type
+ . . . . Set v=pp(7) Set:'v v=500
+ . . . . Do ..inList("Edit_"_d0_"_7",v,.prior) ; Priority
+ . . . . Quit
+ . . . Write "</tr>"
+ . . . Do:FMnum=2006.583
+ . . . . Set d1=0 Do  For  Set d1=$Order(^MAGDICOM(FMnum,d0,1,d1)) Quit:'d1  Do
+ . . . . . If 'd1,VALLOC Quit
+ . . . . . Set x=$Get(^MAGDICOM(FMnum,d0,1,d1,0))
+ . . . . . Write $Char(13,10),"<tr>"
+ . . . . . Write $Char(13,10),"<td align=center>"
+ . . . . . If VALLOC Write "&nbsp;"
+ . . . . . Else  Write "<input type=checkbox name=""Del_"_d0_"_"_d1_""">"
+ . . . . . Write "</td>"
+ . . . . . Do:VALLOC ..inHidden("Edit_"_d0_"__1_1",..HTML($Piece(VALLOC,"^",2)),$Piece(VALLOC,"^",1),7)
+ . . . . . Do:'VALLOC ..inList("Edit_"_d0_"__"_d1_"_1",$Piece(x,"^",1),.VALLOC,7)
+ . . . . . Write "</tr>"
+ . . . . . Quit
+ . . . . Quit
+ . . . Do:FMnum=2006.585
+ . . . . Set d1=0 Do  For  Set d1=$Order(^MAGDICOM(FMnum,d0,1,d1)) Quit:'d1  Do
+ . . . . . New syntax
+ . . . . . Set x=$Get(^MAGDICOM(FMnum,d0,1,d1,0))
+ . . . . . Write $Char(13,10),"<tr>"
+ . . . . . Write $Char(13,10),"<td align=center>"
+ . . . . . If VALLOC Write "&nbsp;"
+ . . . . . Else  Write "<input type=checkbox name=""Del_"_d0_"_"_d1_""">"
+ . . . . . Write "</td>"
+ . . . . . Write $Char(13,10),"<td align=left colspan=7>"
+ . . . . . Write "<input type=text name=""Edit_"_d0_"__"_d1_"_10"""
+ . . . . . Write " value=""",..HTML(x),""" size=50>"
+ . . . . . Set d2=0 For  Set d2=$Order(^MAGDICOM(FMnum,d0,1,d1,1,d2)) Quit:'d2  Do
+ . . . . . . Set x=$Get(^MAGDICOM(FMnum,d0,1,d1,1,d2,0))
+ . . . . . . Set:x'="" syntax(x)=1
+ . . . . . . Quit
+ . . . . . Set syntax="Implicit VR Little Endian"
+ . . . . . Write "<br>",$Char(13,10),"<input type=checkbox "
+ . . . . . Write " name=""Edit_"_d0_"__"_d1_"_11"""
+ . . . . . Write:$Get(syntax(syntax)) " checked" Write ">&nbsp; ",syntax
+ . . . . . Set syntax="Implicit VR Big Endian"
+ . . . . . Write "<br>",$Char(13,10),"<input type=checkbox "
+ . . . . . Write " name=""Edit_"_d0_"__"_d1_"_12"""
+ . . . . . Write:$Get(syntax(syntax)) " checked" Write ">&nbsp; ",syntax
+ . . . . . Set syntax="Explicit VR Little Endian"
+ . . . . . Write "<br>",$Char(13,10),"<input type=checkbox "
+ . . . . . Write " name=""Edit_"_d0_"__"_d1_"_13"""
+ . . . . . Write:$Get(syntax(syntax)) " checked" Write ">&nbsp; ",syntax
+ . . . . . Set syntax="Explicit VR Big Endian"
+ . . . . . Write "<br>",$Char(13,10),"<input type=checkbox "
+ . . . . . Write " name=""Edit_"_d0_"__"_d1_"_14"""
+ . . . . . Write:$Get(syntax(syntax)) " checked" Write ">&nbsp; ",syntax
+ . . . . . Quit
+ . . . . Quit
+ . . . Quit
+ . . Write $Char(13,10),"</table>"
+ . . Quit
+ . Write !,"<p><input type=submit value=""Update""></p>"
+ . Do
+ . . New fm,FMnum,fmok
+ . . Set FMnum=%request.Get("FMNum"),fmok=0
+ . . Set fm="" For  Set fm=$Order(Table(fm)) Quit:fm=""  Set:FMnum=fm fmok=1
+ . . Quit:'fmok
+ . . Write $Char(13,10),"<p>Switch to:"
+ . . Set fm="" For  Set fm=$Order(Table(fm)) Quit:fm=""  Do:fm'=FMnum
+ . . . Write "<br>",$Char(13,10)
+ . . . Write "<a href=""MAGMasterFile.csp?FMNum=",fm,""">",Table(fm)," table"
+ . . . Quit
+ . . Write "</p>"
+ . . Quit
+ . Write $Char(13,10),"</form>"
+ . Quit
+ Quit
+</csp:method>
+
+<csp:method name=HTML arguments="in:%String" returntype=%String>
+ New A,I,out
+ Set out="" For I=1:1:$Length(in) D
+ . Set A=$Ascii(in,I)
+ . If $Char(A)="&" Set out=out_"&amp;" Quit
+ . If $Char(A)="<" Set out=out_"&lt;" Quit
+ . If $Char(A)=">" Set out=out_"&gt;" Quit
+ . If A<31 Set out=out_"&#"_A_";" Quit
+ . If A>126 Set out=out_"&#"_A_";" Quit
+ . Set out=out_$Char(A)
+ . Quit
+ Quit out
+</csp:method>
+
+<csp:method name=Remove arguments="in:%String,del:%String,i:%String" returntype=%String>
+ New A,B,out,n,p
+ Set out=in,n=i
+ For p=1:1:$Length(del) D
+ . Set A=$Ascii(in,n) Set:A>96 A=A-32
+ . Set B=$Ascii(del,p) Set:B>96 B=B-32
+ . If A=B Set $Extract(out,n)=" ",n=n+1
+ . Quit
+ Quit out
+</csp:method>
+
+<csp:method name=LogInFrm arguments="app:%String,url:%String">
+ ;Present Log In form
+ ;
+ ; app = name of application
+ ; url = url to re-invoke application
+ ;
+ New any,var
+ Write !,"<form action=""",url,""" method=""POST"">"
+ Write !,"<input type=hidden name=""Application"" value=""",app,""">"
+ ;
+ Write !,"<h3>Access to this site is restricted."
+ Write !,"If you wish to request access to this site,"
+ Write !,"please send e-mail"
+ Write !,"to <a href=""",$Get(^MAGDICOM(2006.563,1,"MAILGROUP")),""">our system manager</a>.</h3>"
+ Write !,"<p>If you are a registered user, please login.</p>"
+ ;
+ Write !,"<table cellspacing=3 summary=""This table is for formatting purposes only."">"
+ Write !,"<tr><td align=right><font size=+2>User Name:</font></td>"
+ Write !,"<td align=left><input type=text name=""UserName""></td></tr>"
+ Write !,"<tr><td align=right><font size=+2>Current Password:</font></td>"
+ Write !,"<td align=left><input type=password name=""PassWord""></td></tr>"
+ Write !,"<tr><td align=right><b>New Password:</b></td>"
+ Write !,"<td align=left><input type=password name=""PassN1""></td></tr>"
+ Write !,"<tr><td align=right><b>Verify New Password:</b></td>"
+ Write !,"<td align=left><input type=password name=""PassN2""></td></tr>"
+ Write !,"<tr><td>&nbsp;</td>"
+ Write !,"<td><input type=submit value=""Login"" name=""LogIn""></td></tr>"
+ Write !,"</table></form>"
+ Quit
+</csp:method>
+
+<csp:method name=LogInVal arguments="App:%String,UserName:%String,PassWord:%String,New1:%String,New2:%String" returntype=%String>
+ ; Authenticate username and password
+ New d,id,lo,r1,r2,up
+ ;
+ Set r1="<h2><font color=#ff0000>",r2="</font></h2>"
+ Set lo="abcdefghijklmnopqrstuvwxyz"
+ Set up="ABCDEFGHIJKLMNOPQRSTUVWXYZ "
+ Set UserName=$tr(UserName,up,lo)
+ ;
+ If UserName="",PassWord="" Do   Quit ""
+ . Write !,r1,"Please enter a user name and/or a password.",r2
+ . Quit
+ ;
+ If New1'=New2 Do   Quit ""
+ . Write !,r1,"New Passwords do not match.",r2
+ . Quit
+ ;
+ Set id="" Do  Quit:id="" ""
+ . New ac,pp,ps,pv,pw,us,ve
+ . Set ac=$Get(^MAGDICOM(2006.563,1,"LOGIN ACCESS"))
+ . Set pv=$Get(^MAGDICOM(2006.563,1,"LOGIN PRINT/VIEW ONLY"))
+ . Set pp=$Get(^MAGDICOM(2006.563,1,"LOGIN PROGRAMMER ACCESS"))
+ . Set ps=$Get(^MAGDICOM(2006.563,1,"LOGIN SUPPORT"))
+ . Set ve=$Get(^MAGDICOM(2006.563,1,"LOGIN VERIFY"))
+ . Set pw=..Crypt(PassWord),us=..Crypt(UserName),New1=..Crypt(New1)
+ . Do:pw=pp
+ . . Set id="1_programmer"
+ . . If New1'="" Set ^MAGDICOM(2006.563,1,"LOGIN PROGRAMMER ACCESS")=New1
+ . . Quit
+ . Do:pw=ps
+ . . Set id="2_support"
+ . . If New1'="" Set ^MAGDICOM(2006.563,1,"LOGIN SUPPORT")=New1
+ . . Quit
+ . Do:pw=pv
+ . . Set id="3_viewonly"
+ . . If New1'="" Set ^MAGDICOM(2006.563,1,"LOGIN PRINT/VIEW ONLY")=New1
+ . . Quit
+ . If us=ac,pw=ve Do
+ . . Set id="4_fulluser"
+ . . If New1'="" Set ^MAGDICOM(2006.563,1,"LOGIN VERIFY")=New1
+ . . Quit
+ . Quit
+ ;
+ Quit id_"|"_..Now()_"|"_$Random(10000000)
+</csp:method>
+
+<csp:method name=Now arguments="" returntype=%String>
+ New h
+ Set h=$Horolog
+ Quit $Piece(h,",",1)*86400+$Piece(h,",",2)
+</csp:method>
+
+<csp:method name=Crypt arguments="in:%String" returntype=%String>
+ ; return an encrypted value for a string
+ New I,S,X
+ Set S=$Translate(in,"abcdefghijklmnopqrstuvwxyz","ABCDEFGHIJKLMNOPQRSTUVWXYZ")
+ If $Length(S)<6 Quit ""
+ If S?.E1P.E Quit ""
+ If '((S?.E1A.E)&(S?.E1N.E)) Quit ""
+ ; compute a weighted sum of characters, return last 10 digits of sqrt
+ Set X=0 For I=1:1:$Length(S) Set X=$Ascii(S,I)+(128*X)
+ Set X=X**.5,X=$Extract(X,$Length(X)-9,999)
+ Quit X
+</csp:method>
+
+<csp:method name=inText arguments="name:%String,value:%String,width:%String,colspan:%String">
+ Write $Char(13,10),"<td align=left"
+ Write:$Get(colspan)>1 " colspan=",colspan
+ Write ">"
+ Write "<input type=text name="""_name_""" value="""_value_""""
+ Write:$Get(width) " size=",+width Write "></td>",$Char(13,10)
+ Quit
+</csp:method>
+
+<csp:method name=inHidden arguments="name:%String,valShow:%String,valPass:%String,colspan:%String">
+ Write $Char(13,10),"<td align=left"
+ Write:$Get(colspan)>1 " colspan=",colspan
+ Write ">"
+ Write valShow
+ Write $Char(13,10),"<input type=hidden name="""_name_""""
+ Write " value=""",valPass,"""></td>",$Char(13,10)
+ Quit
+</csp:method>
+
+<csp:method name=inList arguments="name:%String,value:%String,options:%String,colspan:%String">
+ New opt,v
+ Write $Char(13,10),"<td align=left"
+ Write:$Get(colspan)>1 " colspan=",colspan
+ Write ">"
+ Write "<select name="""_name_""">"
+ If value'="" Do
+ . Set v=$Get(options(value)) Set:v="" v=value
+ . Write "<option value="""_value_""" selected>",v
+ . Write "</option>",$Char(13,10)
+ . Quit
+ Set opt="" For  Set opt=$Order(options(opt)) Quit:opt=""  Do:opt'=value
+ . Set v=$Get(options(opt)) Set:v="" v=opt
+ . Write "<option value="""_opt_""">"_v_"</option>",$Char(13,10)
+ . Quit
+ Write "</select></td>",$Char(13,10)
+ Quit
+</csp:method>
+
+<csp:method name=Update arguments="">
+ New d0,d1,d2,fm,fmhdr,hdr,i,key,lock,old,same,x
+ ;
+ Set fm=%request.Get("FMNum") Quit:'fm
+ Set fm(2006.581)="INSTRUMENT DICTIONARY^2006.581"
+ Set fm(2006.582)="MODALITY TYPE DICTIONARY^2006.582"
+ Set fm(2006.583)="MODALITY WORKLIST DICTIONARY^2006.583"
+ Set fm(2006.584)="TCP/IP PROVIDER PORT LIST^2006.584"
+ Set fm(2006.585)="USER APPLICATION^2006.585"
+ Set hdr(2006.581)="Instrument Dictionary"
+ Set hdr(2006.582)="Modality Type Dictionary"
+ Set hdr(2006.583)="Modality WorkList Dictionary"
+ Set hdr(2006.584)="TCP/IP Provider Port List"
+ Set hdr(2006.585)="User Application (SCU List)"
+ Set fmhdr=$Get(fm(fm)) Quit:fmhdr=""
+ Write $Char(13,10),"<h3><font color=#0033ff>",hdr(fm),"</font></h3>"
+ ;
+ Set key="Edit_" For  Set key=%request.Next(key) Quit:$Extract(key,1,5)'="Edit_"  Do
+ . New newdata
+ . Quit:$Piece(key,"_",3)'=1
+ . Set d0=$Piece(key,"_",2),lock=0
+ . Set x=$Get(^MAGDICOM(fm,d0,0)),same=1
+ . For i=1:1:Field Do
+ . . Set newdata(i)=%request.Get($Piece(key,"_",1,2)_"_"_i)
+ . . Set old(i)=$Piece(x,"^",i) Set:old(i)'=newdata(i) same=0
+ . . Quit
+ . If 'd0,newdata(1)="" Set same=1
+ . ;
+ . If d0,%request.Get("Del_"_d0)'=""  Do  Quit
+ . . New n
+ . . ;;Write $Char(13,10),"<p>Delete record # ",d0,".</p>"
+ . . Set x=$Get(^MAGDICOM(fm,0))
+ . . Set n=$Piece(x,"^",4)-1 Set:n<1 n=0
+ . . Set $Piece(x,"^",1,2)=fm(fm),$Piece(x,"^",4)=n
+ . . Set ^MAGDICOM(fm,0)=x
+ . . Kill ^MAGDICOM(fm,d0)
+ . . Do:fm'=2006.582
+ . . . Kill:old(1)'="" ^MAGDICOM(fm,"B",old(1),d0)
+ . . . Quit
+ . . Do:fm=2006.582
+ . . . If old(1)'="",old(2)'="",old(3)'="" Kill ^MAGDICOM(fm,"B",old(1),old(2),old(3),d0)
+ . . . Quit
+ . . Quit
+ . ;
+ . Do:'same
+ . . ;;Write $Char(13,10),"<p>Update record # ",d0,".</p>"
+ . . Do:'d0  Quit:'d0
+ . . . Lock +^MAGDICOM(fm):10 Else  Do  Quit
+ . . . . Write "<h3><font color=#ff0000>Cannot add new entries to database"
+ . . . . Write " at this time...</font></h3>"
+ . . . . Quit
+ . . . Set x=$Get(^MAGDICOM(fm,0)),lock=1
+ . . . Set $Piece(x,"^",1,2)=$Piece(fmhdr,"^",1,2)
+ . . . Set d0=$Order(^MAGDICOM(fm," "),-1)+1
+ . . . Set $Piece(x,"^",3)=d0
+ . . . Set $Piece(x,"^",4)=$Piece(x,"^",4)+1
+ . . . Set ^MAGDICOM(fm,0)=x
+ . . . Quit
+ . . Set x=newdata(1) For i=2:1:Field Set x=x_"^"_newdata(i)
+ . . Set ^MAGDICOM(fm,d0,0)=x
+ . . Do:fm'=2006.582
+ . . . Kill:old(1)'="" ^MAGDICOM(fm,"B",old(1),d0)
+ . . . Set:newdata(1)'="" ^MAGDICOM(fm,"B",newdata(1),d0)=""
+ . . . Quit
+ . . Do:fm=2006.582
+ . . . If old(1)'="",old(2)'="",old(3)'="" Kill ^MAGDICOM(fm,"B",old(1),old(2),old(3),d0)
+ . . . If newdata(1)'="",newdata(2)'="",newdata(3)'="" Set ^MAGDICOM(fm,"B",newdata(1),newdata(2),newdata(3),d0)=""
+ . . . Quit
+ . . Quit
+ . If d0,fm=2006.583 Do
+ . . New d,idx,idl,old
+ . . If VALLOC Do  Quit
+ . . . Kill ^MAGDICOM(fm,d0,1)
+ . . . Set ^MAGDICOM(fm,d0,1,0)="^2006.5832PA^1^1"
+ . . . Set ^MAGDICOM(fm,d0,1,1,0)=+VALLOC
+ . . . Set ^MAGDICOM(fm,d0,1,"B",+VALLOC,1)=""
+ . . . Quit
+ . . Set (idx,idl)=$Piece(key,"_",1,3)_"_"
+ . . For  Set idl=%request.Next(idl) Quit:$Extract(idl,1,$Length(idx))'=idx  Do
+ . . . Set d1=$Piece(idl,"_",4)
+ . . . Set d2=$Piece(idl,"_",5) Quit:d2'=1
+ . . . If d0,%request.Get("Del_"_d0_"_"_d1)'=""  Do  Quit
+ . . . . New n
+ . . . . ;;Write $Char(13,10),"<p>Delete record # ",d0,"/",d1,".</p>"
+ . . . . Set x=$Get(^MAGDICOM(fm,d0,1,0))
+ . . . . Set n=$Piece(x,"^",4)-1 Set:n<1 n=0
+ . . . . Set $Piece(x,"^",1,2)="^2006.5832PA",$Piece(x,"^",4)=n
+ . . . . Set ^MAGDICOM(fm,d0,1,0)=x
+ . . . . Set x=$Piece($Get(^MAGDICOM(fm,d0,1,d1,0)),"^",1)
+ . . . . Kill ^MAGDICOM(fm,d0,1,d1)
+ . . . . Kill:x'="" ^MAGDICOM(fm,d0,1,"B",x,d1)
+ . . . . Quit
+ . . . ;;Write $Char(13,10),"<p>Update record # ",d0,"/",d1,".</p>"
+ . . . Set:'d1 d1=$Order(^MAGDICOM(fm,d0,1," "),-1)+1
+ . . . Set x=%request.Get(idl) Quit:'x
+ . . . Set old=$Piece($Get(^MAGDICOM(fm,d0,1,d1,0)),"^",1)
+ . . . Quit:old=x
+ . . . Set ^MAGDICOM(fm,d0,1,d1,0)=x
+ . . . Kill:old'="" ^MAGDICOM(fm,d0,1,"B",old,d1)
+ . . . Set ^MAGDICOM(fm,d0,1,"B",x,d1)=""
+ . . . Quit
+ . . Quit
+ . If d0,fm=2006.585 Do
+ . . New idx,idl,s
+ . . Set (idx,idl)=$Piece(key,"_",1,3)_"_"
+ . . For  Set idl=%request.Next(idl) Quit:$Extract(idl,1,$Length(idx))'=idx  Do
+ . . . Set d1=$Piece(idl,"_",4)
+ . . . Set d2=$Piece(idl,"_",5) Quit:d2'=10
+ . . . If d0,%request.Get("Del_"_d0_"_"_d1)'=""  Do  Quit
+ . . . . New n
+ . . . . ;;Write $Char(13,10),"<p>Delete record # ",d0,"/",d1,".</p>"
+ . . . . Set x=$Get(^MAGDICOM(fm,d0,1,0))
+ . . . . Set n=$Piece(x,"^",4)-1 Set:n<1 n=0
+ . . . . Set $Piece(x,"^",1,2)="^2006.5852A",$Piece(x,"^",4)=n
+ . . . . Set ^MAGDICOM(fm,d0,1,0)=x
+ . . . . Set x=$Piece($Get(^MAGDICOM(fm,d0,1,d1,0)),"^",1)
+ . . . . Kill ^MAGDICOM(fm,d0,1,d1)
+ . . . . Kill:x'="" ^MAGDICOM(fm,d0,1,"B",x,d1)
+ . . . . Quit
+ . . . ;;Write $Char(13,10),"<p>Update record # ",d0,"/",d1,".</p>"
+ . . . Set:'d1 d1=$Order(^MAGDICOM(fm,d0,1," "),-1)+1
+ . . . Set x=%request.Get(idl) Quit:x=""
+ . . . Set old=$Piece($Get(^MAGDICOM(fm,d0,1,d1,0)),"^",1)
+ . . . Quit:old=x
+ . . . Set ^MAGDICOM(fm,d0,1,d1,0)=x
+ . . . Kill:old'="" ^MAGDICOM(fm,d0,1,"B",old,d1)
+ . . . Set ^MAGDICOM(fm,d0,1,"B",x,d1)=""
+ . . . Kill ^MAGDICOM(fm,d0,1,d1,1)
+ . . . Set d2=0
+ . . . Set x=%request.Get(idx_d1_"_11"),s="Implicit VR Little Endian"
+ . . . Set:x'="" d2=d2+1,^MAGDICOM(fm,d0,1,d1,1,d2,0)=s
+ . . . Set:x'="" ^MAGDICOM(fm,d0,1,d1,1,"B",s,d2)=""
+ . . . Set x=%request.Get(idx_d1_"_12"),s="Implicit VR Big Endian"
+ . . . Set:x'="" d2=d2+1,^MAGDICOM(fm,d0,1,d1,1,d2,0)=s
+ . . . Set:x'="" ^MAGDICOM(fm,d0,1,d1,1,"B",s,d2)=""
+ . . . Set x=%request.Get(idx_d1_"_13"),s="Explicit VR Little Endian"
+ . . . Set:x'="" d2=d2+1,^MAGDICOM(fm,d0,1,d1,1,d2,0)=s
+ . . . Set:x'="" ^MAGDICOM(fm,d0,1,d1,1,"B",s,d2)=""
+ . . . Set x=%request.Get(idx_d1_"_14"),s="Explicit VR Big Endian"
+ . . . Set:x'="" d2=d2+1,^MAGDICOM(fm,d0,1,d1,1,d2,0)=s
+ . . . Set:x'="" ^MAGDICOM(fm,d0,1,d1,1,"B",s,d2)=""
+ . . . Set:d2 ^MAGDICOM(fm,d0,1,d1,1,0)="^2006.58522A^"_d2_"^"_d2
+ . . . Quit
+ . . Quit
+ . Lock:lock -^MAGDICOM(fm,0)
+ . Quit
+ Quit
+</csp:method>
+
+</html>

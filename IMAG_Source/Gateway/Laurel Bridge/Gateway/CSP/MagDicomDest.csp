@@ -1,0 +1,345 @@
+<html><head><title>VistA Imaging DICOM Destination Set-Up</title>
+<!--
+ ;; +---------------------------------------------------------------+
+ ;; | Property of the US Government.                                |
+ ;; | No permission to copy or redistribute this software is given. |
+ ;; | Use of unreleased versions of this software requires the user |
+ ;; | to execute a written test agreement with the VistA Imaging    |
+ ;; | Development Office of the Department of Veterans Affairs,     |
+ ;; | telephone (301) 734-0100.                                     |
+ ;; |                                                               |
+ ;; | The Food and Drug Administration classifies this software as  |
+ ;; | a medical device.  As such, it may not be changed in any way. |
+ ;; | Modifications to this software may result in an adulterated   |
+ ;; | medical device under 21CFR820, the use of which is considered |
+ ;; | to be a violation of US Federal Statutes.                     |
+ ;; +---------------------------------------------------------------+
+-->
+<meta http-equiv=Content-Type content="text/html; charset=iso-8859-1">
+</head>
+<body background="vabkg.jpg">
+<csp:method name=OnPreHTTP arguments="" returntype=%Boolean>
+ Do %response.SetHeader("Expires","")
+ Do %response.SetHeader("Cache-Control","none")
+ Quit 1
+</csp:method>
+<table cellSpacing=0 cellPadding=0 border=0 summary="This table is for formatting purposes only.">
+  <tr>
+    <td vAlign=top><img alt="First part of VistA Imaging Logo" src="MAGLogo1.gif" border=0></td>
+    <td vAlign=top><img alt="Second part of Vista Imaging Logo" src="MAGLogo2.gif"><br>
+      <h2><font color=#0033ff>VistA Imaging DICOM Destination Set-Up</font></h2></td>
+  </tr>
+</table>
+
+<script language=CACHE runat=server>
+ Do ..Process()
+</script>
+ 
+</body>
+
+<csp:method name=Process arguments="">
+ New CurrVal,DestInfo,Dest,DIMSE,Err,Gateway,M2MOK,WebPage
+ ;
+ Set id="",token=%request.Get("SessionToken") Do:token=""
+ . New cmd,from,ip,util,x
+ . Set WebPage=$IO
+ . Set cmd="ipconfig",ip("127.0.0.1")=1
+ . Open cmd:"QR" Use cmd Set util=$ZUtil(68,40,1)
+ . For  Read x Quit:$ZEOF  Do
+ . . Quit:x'["IP Address. ."
+ . . Set x=$Extract(x,38,$Length(x))
+ . . Set:x'="" ip(x)=1
+ . . Quit
+ . Set x=$ZUtil(68,40,util)
+ . Close cmd Use WebPage
+ . ;
+ . Set id=""
+ . Set from=%request.GetCgiEnv("REMOTE_HOST")
+ . If from'="",$Get(ip(from)) Set id=from
+ . Quit:id=""
+ . Set token=id_"|"_..Now()_"|"_$Random(10000000)
+ . Kill ^TMP("MAG",token)
+ . Set ^MAGtoken(token)=5*60+..Now()
+ . Quit
+ ;
+ Set:id="" token=%request.Get("SessionToken")
+ Do:token'=""
+ . New exp
+ . Set exp=$Get(^MAGtoken(token))
+ . If 'exp Set token="" Quit
+ . If exp<..Now() Set token="" Quit
+ . ; Extend expiration of token by 15 minutes
+ . Set ^MAGtoken(token)=15*60+..Now()
+ . Quit
+ Do:token=""
+ . New N1,N2,Pass,User
+ . Set User=%request.Get("UserName")
+ . Set Pass=%request.Get("PassWord")
+ . Set N1=%request.Get("PassN1")
+ . Set N2=%request.Get("PassN2")
+ . Set:User_Pass_N1_N2'="" token=..LogInVal("DICOMGateway",User,Pass,N1,N2)
+ . If token="" Do  Quit
+ . . Do ..LogInFrm("DICOMGateway","MagDicomDest.csp")
+ . . Quit
+ . ; Initial token lives 5 minutes
+ . Kill ^TMP("MAG",token)
+ . Set ^MAGtoken(token)=5*60+..Now()
+ . Set ^MAGtoken(token,"DICOMGateway")=1
+ . Quit
+ Do:token'=""
+ . New key
+ . Do  ; Set up credentials to use MUMPS-to-MUMPS Broker
+ . . N A,V,X
+ . . Kill ^TMP("MAG",$Job)
+ . . Set ^TMP("MAG",$Job,"DICOM MENU OPTION")=0
+ . . Set ^TMP("MAG",$Job,"DICOM MENU VIEW ONLY")=0
+ . . S A=$G(^MAGDICOM(2006.563,1,"M-to-M BROKER BGND ACCESS"))
+ . . S V=$G(^MAGDICOM(2006.563,1,"M-to-M BROKER BGND VERIFY"))
+ . . S X=$$DECRYP^MAGM2VCU(A)_";"_$$DECRYP^MAGM2VCU(V)
+ . . S ^TMP("MAG",$Job,"DICOM RPC USER")="666^1^"_$$ENCRYPT^MAGM2VCU(X)
+ . . Q
+ . ;
+ . Set M2MOK=1,WebPage=$IO
+ . Kill:%request.Get("RefreshQueue")'="" ^TMP("MAG",token,"Queue")
+ . Do
+ . . New c,i,n,x
+ . . If '$$ISCONT^MAGM2VCU() Do  Quit:'M2MOK
+ . . . Set X=$$RECONCT^MAGDMENA() Quit:X
+ . . . Write $Char(13,10),"<h3><font color=#ff0000>"
+ . . . Write "Cannot connect to VistA at this time"
+ . . . Write " - update capabilities limited.</font></h3>",$Char(13,10)
+ . . . Write "<p>",..HTML($P(X,",",2,$L(X)+2)),"</p>"
+ . . . Set M2MOK=0
+ . . . Quit
+ . . If $$CALLRPC^MAGM2VCU("MAG GET DICOM DEST","M",.DestInfo)<0 Set M2MOK=0
+ . . Set Dest(0)="--Select a Destination--"
+ . . Set Gateway(0)="--All DICOM Gateways--"
+ . . Set i="" For  Set i=$Order(DestInfo(i)) Quit:i=""  Do
+ . . . Set x=$Get(DestInfo(i)),c=$Piece(x,"^",1),n=$Piece(x,"^",2)
+ . . . If c="B",n'="" Set Dest(i)=n
+ . . . If c="D",n'="" Set Gateway(i)=n
+ . . . Quit
+ . . Quit
+ . ;
+ . Set DIMSE("C-STORE")="0^0"
+ . Set DIMSE("C-GET")="0^0"
+ . Set DIMSE("C-MOVE")="0^0"
+ . Set DIMSE("C-FIND")="0^0"
+ . Set DIMSE("C-ECHO")="0^0"
+ . Set DIMSE("N-EVENT-REPORT")="0^0"
+ . Set DIMSE("N-GET")="0^0"
+ . Set DIMSE("N-SET")="0^0"
+ . Set DIMSE("N-ACTION")="0^0"
+ . Set DIMSE("N-CREATE")="0^0"
+ . Set DIMSE("N-DELETE")="0^0"
+ . ;
+ . If %request.Get("Store")'="",M2MOK Do
+ . . New data,dest,gw,key,n,ok
+ . . Set dest=%request.Get("Destination") Quit:dest=""  Quit:dest["--Select"
+ . . Set gw=%request.Get("Gateway")
+ . . Set data(2)="2^"_%request.Get("Service")
+ . . Set data(3)="3^"_%request.Get("IPaddr")
+ . . Set data(4)="4^"_%request.Get("Port")
+ . . Set data(5)="5^"_%request.Get("GW_AE")
+ . . Set data(6)="6^"_%request.Get("GW_Loc")
+ . . Set n=6
+ . . Set key="" For  Set key=%request.Next(key) Quit:key=""  Do
+ . . . Quit:%request.Get(key)'="on"
+ . . . If key["_SCU" Set $Piece(key($Piece(key,"_",1)),"^",1)=1
+ . . . If key["_SCP" Set $Piece(key($Piece(key,"_",1)),"^",2)=1
+ . . . Quit
+ . . Set key="" For  Set key=$Order(key(key)) Quit:key=""  Do
+ . . . Set n=n+1,data(n)=key_"^"_key(key)
+ . . . Quit
+ . . Set n=$$CALLRPC^MAGM2VCU("MAG SET DICOM DEST","M",.ok,.data,dest,gw)
+ . . Write:n<0 $Char(13,10),"<h3><font color=#ff0000>Could not update database</font></h3>"
+ . . If $Get(ok)<0 Do  Quit
+ . . . Write $Char(13,10),"<h3><font color=#ff0000>Error while"
+ . . . Write " attempting to update database:<br>",ok,"</font></h3>"
+ . . . Quit
+ . . Write $Char(13,10),"<h3>",ok," record" Write:ok'=1 "s"
+ . . Write " updated.</h3>"
+ . . Quit
+ . ;
+ . If %request.Get("Fetch")'="",M2MOK Do
+ . . New dest,gw,i,n,x
+ . . Set dest=%request.Get("Destination") Quit:dest=""  Quit:dest["--Select"
+ . . Set gw=%request.Get("Gateway")
+ . . If $$CALLRPC^MAGM2VCU("MAG GET DICOM DEST","M",.DestInfo,dest,gw)<0 Set M2MOK=0
+ . . Set i="" For  Set i=$Order(DestInfo(i)) Quit:i=""  Do
+ . . . Set x=$Get(DestInfo(i)),n=$Piece(x,"^",1) Quit:x'["^"  Quit:n=""
+ . . . If $Get(DIMSE(n))'="" Set DIMSE(n)=$Piece(x,"^",2,3) Quit
+ . . . Set CurrVal(n)=$Piece(x,"^",2)
+ . . . Quit
+ . . Quit
+ . ;
+ . If $$CLOSE^MAGM2VC()
+ . ;
+ . Use WebPage
+ . Write $Char(13,10),"<form action=""MagDicomDest.csp"" method=""POST"">"
+ . Write $Char(13,10),"<input type=hidden name=""SessionToken"" value=""",token,""">"
+ . ;
+ . Write $Char(13,10),"<table>"
+ . Write $Char(13,10),"<tr>"
+ . Write $Char(13,10),"<td align=right>Destination</td>"
+ . Write $Char(13,10),"<td align=left>" Do ..DropList("Destination",.Dest) Write "</td>"
+ . Write $Char(13,10),"</tr>"
+ . Write $Char(13,10),"<tr>"
+ . Write $Char(13,10),"<td align=right>DICOM Gateway</td>"
+ . Write $Char(13,10),"<td align=left>" Do ..DropList("Gateway",.Gateway) Write "</td>"
+ . Write $Char(13,10),"</tr>"
+ . Write $Char(13,10),"</table>"
+ . Write $Char(13,10),"<p><input type=submit name=""Fetch"" value=""Fetch Current Settings""></p>"
+ . If %request.Get("Fetch")'="",M2MOK Do
+ . . Write $Char(13,10),"<table>"
+ . . Set x(2)="Service|Service Provider AE Title"
+ . . Set x(3)="IPaddr|IP Address"
+ . . Set x(4)="Port|Port Number"
+ . . Set x(5)="GW_AE|DICOM Gateway AE Title"
+ . . Set x(6)="GW_Loc|DICOM Gateway Location"
+ . . Set x="" For  Set x=$Order(CurrVal(x)) Quit:x=""  Do
+ . . . Write $Char(13,10),"<tr><td align=right>",$Piece(x(x),"|",2),"</td>"
+ . . . Write $Char(13,10),"<td align=left>"
+ . . . Write "<input type=text size=30 name=""",$Piece(x(x),"|",1),""""
+ . . . Write " value=""",CurrVal(x),"""></td></tr>"
+ . . . Quit
+ . . Set x="" For  Set x=$Order(DIMSE(x)) Quit:x=""  Do
+ . . . Write $Char(13,10),"<tr><td align=right>",x,"</td>"
+ . . . Write $Char(13,10),"<td align=left>"
+ . . . Write "<input type=checkbox name=""",x_"_SCU",""""
+ . . . Write:$Piece(DIMSE(x),"^",1) " checked" Write "> SCU &nbsp; &nbsp;"
+ . . . Write $Char(13,10),"<input type=checkbox name=""",x_"_SCP",""""
+ . . . Write:$Piece(DIMSE(x),"^",2) " checked" Write "> SCP</td></tr>"
+ . . . Quit
+ . . Write $Char(13,10),"</table>"
+ . . Write $Char(13,10),"<p><input type=submit name=""Store"" value=""Store Updated Settings""></p>"
+ . . Quit
+ . ;
+ . Write $Char(13,10),"</form>"
+ . Quit
+ Quit
+</csp:method>
+
+<csp:method name=DropList arguments="name:%String,list:%String">
+ New i
+ Write $Char(13,10),"<select name=""",name,""">"
+ Set i="" For  Set i=$Order(list(i)) Quit:i=""  Do
+ . Set x=$Get(list(i))
+ . Write $Char(13,10),"<option value=""",x,""""
+ . Write:%request.Get(name)=x " selected" Write ">"
+ . Write x,"</option>"
+ . Quit
+ Write $Char(13,10),"</select>"
+</csp:method>
+
+<csp:method name=HTML arguments="in:%String" returntype=%String>
+ New A,I,out
+ Set out="" For I=1:1:$Length(in) D
+ . Set A=$Ascii(in,I)
+ . If $Char(A)="&" Set out=out_"&amp;" Quit
+ . If $Char(A)="<" Set out=out_"&lt;" Quit
+ . If $Char(A)=">" Set out=out_"&gt;" Quit
+ . If A<31 Set out=out_"&#"_A_";" Quit
+ . If A>126 Set out=out_"&#"_A_";" Quit
+ . Set out=out_$Char(A)
+ . Quit
+ Quit out
+</csp:method>
+
+<csp:method name=LogInFrm arguments="app:%String,url:%String">
+ ;Present Log In form
+ ;
+ ; app = name of application
+ ; url = url to re-invoke application
+ ;
+ New any,var
+ Write !,"<form action=""",url,""" method=""POST"">"
+ Write !,"<input type=hidden name=""Application"" value=""",app,""">"
+ ;
+ Write !,"<h3>Access to this site is restricted."
+ Write !,"If you wish to request access to this site,"
+ Write !,"please send e-mail"
+ Write !,"to <a href=""",$Get(^MAGDICOM(2006.563,1,"MAILGROUP")),""">our system manager</a>.</h3>"
+ Write !,"<p>If you are a registered user, please login.</p>"
+ ;
+ Write !,"<table cellspacing=3 summary=""This table is for formatting purposes only."">"
+ Write !,"<tr><td align=right><font size=+2>User Name:</font></td>"
+ Write !,"<td align=left><input type=text name=""UserName""></td></tr>"
+ Write !,"<tr><td align=right><font size=+2>Current Password:</font></td>"
+ Write !,"<td align=left><input type=password name=""PassWord""></td></tr>"
+ Write !,"<tr><td align=right><b>New Password:</b></td>"
+ Write !,"<td align=left><input type=password name=""PassN1""></td></tr>"
+ Write !,"<tr><td align=right><b>Verify New Password:</b></td>"
+ Write !,"<td align=left><input type=password name=""PassN2""></td></tr>"
+ Write !,"<tr><td>&nbsp;</td>"
+ Write !,"<td><input type=submit value=""Login"" name=""LogIn""></td></tr>"
+ Write !,"</table></form>"
+ Quit
+</csp:method>
+
+<csp:method name=LogInVal arguments="App:%String,UserName:%String,PassWord:%String,New1:%String,New2:%String" returntype=%String>
+ ; Authenticate username and password
+ New d,id,lo,r1,r2,up
+ ;
+ Set r1="<h2><font color=#ff0000>",r2="</font></h2>"
+ Set lo="abcdefghijklmnopqrstuvwxyz"
+ Set up="ABCDEFGHIJKLMNOPQRSTUVWXYZ "
+ Set UserName=$tr(UserName,up,lo)
+ ;
+ If UserName="",PassWord="" Do   Quit ""
+ . Write !,r1,"Please enter a user name and/or a password.",r2
+ . Quit
+ ;
+ If New1'=New2 Do   Quit ""
+ . Write !,r1,"New Passwords do not match.",r2
+ . Quit
+ ;
+ Set id="" Do  Quit:id="" ""
+ . New ac,pp,ps,pv,pw,us,ve
+ . Set ac=$Get(^MAGDICOM(2006.563,1,"LOGIN ACCESS"))
+ . Set pv=$Get(^MAGDICOM(2006.563,1,"LOGIN PRINT/VIEW ONLY"))
+ . Set pp=$Get(^MAGDICOM(2006.563,1,"LOGIN PROGRAMMER ACCESS"))
+ . Set ps=$Get(^MAGDICOM(2006.563,1,"LOGIN SUPPORT"))
+ . Set ve=$Get(^MAGDICOM(2006.563,1,"LOGIN VERIFY"))
+ . Set pw=..Crypt(PassWord),us=..Crypt(UserName),New1=..Crypt(New1)
+ . Do:pw=pp
+ . . Set id="1_programmer"
+ . . If New1'="" Set ^MAGDICOM(2006.563,1,"LOGIN PROGRAMMER ACCESS")=New1
+ . . Quit
+ . Do:pw=ps
+ . . Set id="2_support"
+ . . If New1'="" Set ^MAGDICOM(2006.563,1,"LOGIN SUPPORT")=New1
+ . . Quit
+ . Do:pw=pv
+ . . Set id="3_viewonly"
+ . . If New1'="" Set ^MAGDICOM(2006.563,1,"LOGIN PRINZT/VIEW ONLY")=New1
+ . . Quit
+ . If us=ac,pw=ve Do
+ . . Set id="4_fulluser"
+ . . If New1'="" Set ^MAGDICOM(2006.563,1,"LOGIN VERIFY")=New1
+ . . Quit
+ . Quit
+ ;
+ Quit id_"|"_..Now()_"|"_$Random(10000000)
+</csp:method>
+
+<csp:method name=Now arguments="" returntype=%String>
+ New h
+ Set h=$Horolog
+ Quit $Piece(h,",",1)*86400+$Piece(h,",",2)
+</csp:method>
+
+<csp:method name=Crypt arguments="in:%String" returntype=%String>
+ ; return an encrypted value for a string
+ New I,S,X
+ Set S=$Translate(in,"abcdefghijklmnopqrstuvwxyz","ABCDEFGHIJKLMNOPQRSTUVWXYZ")
+ If $Length(S)<6 Quit ""
+ If S?.E1P.E Quit ""
+ If '((S?.E1A.E)&(S?.E1N.E)) Quit ""
+ ; compute a weighted sum of characters, return last 10 digits of sqrt
+ Set X=0 For I=1:1:$Length(S) Set X=$Ascii(S,I)+(128*X)
+ Set X=X**.5,X=$Extract(X,$Length(X)-9,999)
+ Quit X
+</csp:method>
+
+</body></html>

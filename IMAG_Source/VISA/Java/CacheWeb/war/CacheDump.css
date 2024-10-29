@@ -1,0 +1,102 @@
+@CHARSET "ISO-8859-1";
+
+/** HTML Browser elements **/
+body {
+	background-color: #000000;
+}
+
+.cache {
+	font-size: 2em;
+	font-weight: bold;
+	color: #777777;
+	margin: 40px 0px 70px;
+	text-align: center;
+}
+
+.region {
+	font-size: 2em;
+	font-weight: normal;
+	color: #777777;
+	margin: 20px 0px 35px;
+	text-align: left;
+}
+
+.group0:before {
+	content:"-";
+	display: inline;
+}
+.group0 {
+	font-size: 1em;
+	font-weight: normal;
+	color: #777777;
+	text-align: left;
+}
+
+.group1:before {
+	content:"--";
+	display: inline;
+}
+.group1 {
+	font-size: 1em;
+	font-weight: normal;
+	color: #777777;
+	text-align: left;
+}
+
+.group2:before {
+	content:"---";
+	display: inline;
+}
+.group2 {
+	font-size: 1em;
+	font-weight: normal;
+	color: #777777;
+	text-align: left;
+}
+
+.group3:before {
+	content:"----";
+	display: inline;
+}
+.group3 {
+	font-size: 1em;
+	font-weight: normal;
+	color: #777777;
+	text-align: left;
+}
+
+.group0 .instance :before {
+	content:"----";
+	display: inline;
+}
+.group1 .instance :before {
+	content:"------";
+	display: inline;
+}
+.group2 .instance :before {
+	content:"--------";
+	display: inline;
+}
+.group3 .instance :before {
+	content:"----------";
+	display: inline;
+}
+
+.instance {
+	font-size: 1em;
+	font-weight: normal;
+	color: #FFFFFF;
+	text-align: left;
+}
+
+.delete:before{
+	content:"";
+}
+.delete {
+	font-weight: lighter;
+	color: #777777;
+}
+.delete:after{
+	content:"";
+}
+

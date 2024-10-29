@@ -1,0 +1,31 @@
+maguMAGGTU6zSHARE ; WOIFO/MLH - unit test SHARE^MAGGTU6() ; 6/3/11
+ Q
+TEST(verblvl) ;
+ S verblvl=$G(verblvl,1)
+ N I
+ W:verblvl "ROUTINE: MAGGTU6   ENTRY POINT: SHARE",!
+ D  ; data preparation
+ . ;   need to add an image share w/FQDN?
+ . N I,HIT,X,DIC
+ . S I=0,HIT=0
+ . F  S I=$O(^MAG(2005.2,I)) Q:'I  D  Q:HIT
+ . . S X=$G(^MAG(2005.2,I,0))
+ . . I $P(X,"^",7)'="URL",$P(X,"^",2)["." S HIT=1
+ . . Q
+ . D:'HIT  ; if none found, need to add
+ . . ; just tack it to the bottom for now - no xrefs
+ . . S ^MAG(2005.2,$O(^MAG(2005.2," "),-1)+1,0)="TEST-1^\\foo.bar^^^^^MAG^^^660"
+ . . Q
+ ; test execution
+ F I=1:1 Q:$T(@I)=""  D @(I_"(verblvl)")
+ Q
+1(verblvl) ;	test
+ N MLH,I,HIT
+ W "UNIT TEST 1:  "
+ D SHARE^MAGGTU6(.MLH,"MAG")
+ I verblvl>1 ZW MLH
+ S I=0 F  S I=$O(MLH(I)) Q:'I  S HIT=($P(MLH(I),"^",2)[".") Q:HIT
+ W $S(HIT:"SUCCESS",1:"FAILURE"),!
+ Q
+
+

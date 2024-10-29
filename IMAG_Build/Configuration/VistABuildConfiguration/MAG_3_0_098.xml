@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<build xmlns="http://va.gov/VistA/kids/manifest" name="MAG*3.0*098" patchName="Storage Site Utilities" patch="098">
+  <components>
+    <securityKeys>
+      <securityKey export="KEY_MAG_DOD_FIX.KID" />
+    </securityKeys>
+    <parameterDefinitions />
+    <printTemplates />
+    <sortTemplates />
+    <menuOptions>
+      <menuOption export="OPT_MAGKAT.KID" />
+      <menuOption export="OPT_MAG_JB_OFFLINE.KID" />
+      <menuOption export="OPT_MAG_UTILITY.KID" />
+    </menuOptions>
+    <rpcs>
+      <rpc export="RPC_MAG_FIND_IMAGE_TEXT_FILE.KID" />
+      <rpc export="RPC_MAG_SCAN IMAGE_TEXT_FILES.KID" />
+      <rpc export="RPC_MAG_STORAGE_FETCH.KID" />
+      <rpc export="RPC_MAG_STORAGE_FETCH_SET.KID" />
+      <rpc export="RPC_MAG_STORE_TEXT_FILE DETAILS.KID" />
+      <rpc export="RPC_MAG_UTIL_BKONLJB.KID" />
+      <rpc export="RPC_MAG_UTIL_CLNLOC.KID" />
+      <rpc export="RPC_MAG_UTIL_DT2IEN.KID" />
+      <rpc export="RPC_MAG_UTIL_GETNETLOC.KID" />
+      <rpc export="RPC_MAG_UTIL_JBOFFLN.KID" />
+      <rpc export="RPC_MAG_UTIL_LSTOFLJB.KID" />
+    </rpcs>
+    <dataDictionaries>
+      <dataDictionary export="DD_2006_563.KID" />
+    </dataDictionaries>
+    <hl7s />
+    <routines>
+      <routine export="MAGDOD01.RTN" />
+      <routine export="MAGGDEV.RTN" />
+      <routine export="MAGIPS98.RTN" />
+      <routine export="MAGSDEL5.RTN" />
+      <routine export="MAGSDOFL.RTN" />
+      <routine export="MAGSFTCH.RTN" />
+      <routine export="MAGSHEC.RTN" />
+      <routine export="MAGUF.RTN" />
+    </routines>
+    <protocols />
+  </components>
+</build>

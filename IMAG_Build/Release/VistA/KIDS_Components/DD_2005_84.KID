@@ -1,0 +1,750 @@
+KIDS Distribution saved on Jul 26, 2012@08:58:37
+Split from GOLD - last patch SEQ81_P120
+**KIDS**:MAG*3.0*350_DD*2005.84^
+
+**INSTALL NAME**
+MAG*3.0*350_DD*2005.84
+"BLD",7727,0)
+MAG*3.0*350_DD*2005.84^IMAGING^0^3120726^n
+"BLD",7727,4,0)
+^9.64PA^2005.84^1
+"BLD",7727,4,2005.84,0)
+2005.84
+"BLD",7727,4,2005.84,222)
+y^y^f^^^^y
+"BLD",7727,4,"B",2005.84,2005.84)
+
+"BLD",7727,6.3)
+1
+"BLD",7727,"KRN",0)
+^9.67PA^779.2^20
+"BLD",7727,"KRN",.4,0)
+.4
+"BLD",7727,"KRN",.401,0)
+.401
+"BLD",7727,"KRN",.402,0)
+.402
+"BLD",7727,"KRN",.403,0)
+.403
+"BLD",7727,"KRN",.5,0)
+.5
+"BLD",7727,"KRN",.84,0)
+.84
+"BLD",7727,"KRN",3.6,0)
+3.6
+"BLD",7727,"KRN",3.8,0)
+3.8
+"BLD",7727,"KRN",9.2,0)
+9.2
+"BLD",7727,"KRN",9.8,0)
+9.8
+"BLD",7727,"KRN",19,0)
+19
+"BLD",7727,"KRN",19.1,0)
+19.1
+"BLD",7727,"KRN",101,0)
+101
+"BLD",7727,"KRN",409.61,0)
+409.61
+"BLD",7727,"KRN",771,0)
+771
+"BLD",7727,"KRN",779.2,0)
+779.2
+"BLD",7727,"KRN",870,0)
+870
+"BLD",7727,"KRN",8989.51,0)
+8989.51
+"BLD",7727,"KRN",8989.52,0)
+8989.52
+"BLD",7727,"KRN",8994,0)
+8994
+"BLD",7727,"KRN","B",.4,.4)
+
+"BLD",7727,"KRN","B",.401,.401)
+
+"BLD",7727,"KRN","B",.402,.402)
+
+"BLD",7727,"KRN","B",.403,.403)
+
+"BLD",7727,"KRN","B",.5,.5)
+
+"BLD",7727,"KRN","B",.84,.84)
+
+"BLD",7727,"KRN","B",3.6,3.6)
+
+"BLD",7727,"KRN","B",3.8,3.8)
+
+"BLD",7727,"KRN","B",9.2,9.2)
+
+"BLD",7727,"KRN","B",9.8,9.8)
+
+"BLD",7727,"KRN","B",19,19)
+
+"BLD",7727,"KRN","B",19.1,19.1)
+
+"BLD",7727,"KRN","B",101,101)
+
+"BLD",7727,"KRN","B",409.61,409.61)
+
+"BLD",7727,"KRN","B",771,771)
+
+"BLD",7727,"KRN","B",779.2,779.2)
+
+"BLD",7727,"KRN","B",870,870)
+
+"BLD",7727,"KRN","B",8989.51,8989.51)
+
+"BLD",7727,"KRN","B",8989.52,8989.52)
+
+"BLD",7727,"KRN","B",8994,8994)
+
+"DATA",2005.84,1,0)
+INTERNAL MEDICINE^1
+"DATA",2005.84,1,2)
+INT MED
+"DATA",2005.84,2,0)
+CARDIOLOGY^1^1
+"DATA",2005.84,2,2)
+CARDIO
+"DATA",2005.84,3,0)
+GASTROENTEROLOGY^1^1
+"DATA",2005.84,3,2)
+GI
+"DATA",2005.84,4,0)
+HEMATOLOGY, MEDICAL^1^1
+"DATA",2005.84,4,2)
+HEM MED
+"DATA",2005.84,5,0)
+INFECTIOUS DISEASE^1^1
+"DATA",2005.84,5,2)
+ID
+"DATA",2005.84,6,0)
+ONCOLOGY^1^1
+"DATA",2005.84,6,2)
+ONC
+"DATA",2005.84,7,0)
+NEPHROLOGY^1^1
+"DATA",2005.84,7,2)
+NEPHRO
+"DATA",2005.84,8,0)
+PULMONARY^1^1
+"DATA",2005.84,8,2)
+PULM
+"DATA",2005.84,9,0)
+RHEUMATOLOGY^1^1
+"DATA",2005.84,9,2)
+RHEUM
+"DATA",2005.84,10,0)
+CRITICAL CARE, MED^1^1
+"DATA",2005.84,10,2)
+MICU
+"DATA",2005.84,11,0)
+GERIATRICS^1^47
+"DATA",2005.84,11,2)
+GERIAT
+"DATA",2005.84,12,0)
+ENDOCRINOLOGY, DIABETES, METAB^1^1
+"DATA",2005.84,12,2)
+ENDOCR
+"DATA",2005.84,14,0)
+THORACIC SURGERY^1^48
+"DATA",2005.84,14,2)
+THORSURG
+"DATA",2005.84,15,0)
+UROLOGY^1^48
+"DATA",2005.84,15,2)
+GU
+"DATA",2005.84,16,0)
+ORTHOPEDICS^1^48
+"DATA",2005.84,16,2)
+ORTHO
+"DATA",2005.84,17,0)
+OPHTHALMOLOGY^1^57
+"DATA",2005.84,17,2)
+OPHTH
+"DATA",2005.84,18,0)
+NEUROLOGIC SURGERY^1^48
+"DATA",2005.84,18,2)
+NEUROSURG
+"DATA",2005.84,19,0)
+DERMATOLOGY^1^1
+"DATA",2005.84,19,2)
+DERM
+"DATA",2005.84,20,0)
+COLON & RECTAL SURGERY^1^48
+"DATA",2005.84,20,2)
+C&RSURG
+"DATA",2005.84,21,0)
+VASCULAR^1^48
+"DATA",2005.84,21,2)
+VAS
+"DATA",2005.84,22,0)
+CRITICAL CARE, SURGERY^1^48
+"DATA",2005.84,22,2)
+SICU
+"DATA",2005.84,23,0)
+PODIATRY^1
+"DATA",2005.84,23,2)
+POD
+"DATA",2005.84,24,0)
+OTORHINOLARYNGOLOGY (ENT)^1^48
+"DATA",2005.84,24,2)
+OTOLAR
+"DATA",2005.84,25,0)
+REHABILITATIVE^1^47
+"DATA",2005.84,25,2)
+REHAB
+"DATA",2005.84,26,0)
+PSYCHIATRY^1^55
+"DATA",2005.84,26,2)
+PSYCH
+"DATA",2005.84,27,0)
+NEUROLOGY^1
+"DATA",2005.84,27,2)
+NEURO
+"DATA",2005.84,28,0)
+NUCLEAR MEDICINE^1
+"DATA",2005.84,28,2)
+NUC MED
+"DATA",2005.84,29,0)
+RADIOLOGY^1
+"DATA",2005.84,29,2)
+RAD
+"DATA",2005.84,30,0)
+HEMATOLOGY, LAB^1^50
+"DATA",2005.84,30,2)
+HEM LAB
+"DATA",2005.84,31,0)
+BLOOD BANK^1^50
+"DATA",2005.84,31,2)
+BB
+"DATA",2005.84,32,0)
+MICROBIOLOGY^1^50
+"DATA",2005.84,32,2)
+MICRO
+"DATA",2005.84,33,0)
+CHEMISTRY^1^50
+"DATA",2005.84,33,2)
+CHEM
+"DATA",2005.84,34,0)
+IMMUNOLOGY^1^1
+"DATA",2005.84,34,2)
+IMMUNO
+"DATA",2005.84,39,0)
+EMERGENCY MEDICINE^1^48
+"DATA",2005.84,39,2)
+ER
+"DATA",2005.84,40,0)
+ANESTHESIOLOGY^1
+"DATA",2005.84,40,2)
+ANESTH
+"DATA",2005.84,41,0)
+ALLERGY & IMMUNOLOGY^1^1
+"DATA",2005.84,41,2)
+ALL&IMM
+"DATA",2005.84,42,0)
+PRIMARY CARE^1
+"DATA",2005.84,42,2)
+PC
+"DATA",2005.84,43,0)
+OBSTETRICS & GYNECOLOGY^1
+"DATA",2005.84,43,2)
+OBGYN
+"DATA",2005.84,44,0)
+PLASTIC SURGERY^1^48
+"DATA",2005.84,44,2)
+PLSURG
+"DATA",2005.84,45,0)
+PREVENTIVE MEDICINE^1^1
+"DATA",2005.84,45,2)
+PREV MED
+"DATA",2005.84,47,0)
+MEDICINE^1
+"DATA",2005.84,47,2)
+MED
+"DATA",2005.84,48,0)
+SURGERY^1
+"DATA",2005.84,48,2)
+SURGERY
+"DATA",2005.84,49,0)
+LABORATORY^1
+"DATA",2005.84,49,2)
+LAB
+"DATA",2005.84,50,0)
+PATHOLOGY^1
+"DATA",2005.84,50,2)
+PATH
+"DATA",2005.84,51,0)
+NEURORADIOLOGY^1^29
+"DATA",2005.84,51,2)
+NEURORAD
+"DATA",2005.84,52,0)
+NURSING^1
+"DATA",2005.84,52,2)
+NURS
+"DATA",2005.84,53,0)
+DENTISTRY^1
+"DATA",2005.84,53,2)
+DENT
+"DATA",2005.84,55,0)
+MENTAL HEALTH^1
+"DATA",2005.84,55,2)
+MH
+"DATA",2005.84,56,0)
+OPTOMETRY^1^57
+"DATA",2005.84,56,2)
+OPTOM
+"DATA",2005.84,57,0)
+EYE CARE^1
+"DATA",2005.84,57,2)
+EYE
+"DATA",2005.84,58,0)
+AUDIOLOGY^1
+"DATA",2005.84,58,2)
+AUDIO
+"DATA",2005.84,60,0)
+PHARMACY^1
+"DATA",2005.84,60,2)
+PHARM
+"DATA",2005.84,66,0)
+RESEARCH^1
+"DATA",2005.84,66,2)
+RES
+"DATA",2005.84,67,0)
+SPINAL CORD INJURY^1
+"DATA",2005.84,67,2)
+SCI
+"DATA",2005.84,68,0)
+SOCIAL WORK^1
+"DATA",2005.84,68,2)
+SW
+"DATA",2005.84,69,0)
+DIETETICS^1
+"DATA",2005.84,69,2)
+DIET
+"DATA",2005.84,70,0)
+PROSTHETICS^1
+"DATA",2005.84,70,2)
+PROS
+"DATA",2005.84,71,0)
+RADIATION THERAPY^1^29
+"DATA",2005.84,71,2)
+RAD THER
+"DATA",2005.84,72,0)
+PROCTOLOGY^1^48
+"DATA",2005.84,72,2)
+PROC
+"DATA",2005.84,73,0)
+ORAL MF SURGERY^1^48
+"DATA",2005.84,73,2)
+ORALSURG
+"DATA",2005.84,74,0)
+CARDIAC SURGERY^1^48
+"DATA",2005.84,74,2)
+CARD
+"DATA",2005.84,75,0)
+TRANSPLANTATION^1^48
+"DATA",2005.84,75,2)
+TRANSP
+"DATA",2005.84,76,0)
+PSYCHOLOGY^1^^
+"DATA",2005.84,76,2)
+PSYCHOL
+"DATA",2005.84,78,0)
+WOMEN'S HEALTH CLINIC^1^^
+"DATA",2005.84,78,2)
+WH
+"DATA",2005.84,79,0)
+CHIROPRACTIC^1^^
+"DATA",2005.84,79,2)
+CHIROPRC
+"DATA",2005.84,80,0)
+ENDODONTICS^1^53
+"DATA",2005.84,80,2)
+ENDODONT
+"DATA",2005.84,81,0)
+PAIN MANAGEMENT^1^40
+"DATA",2005.84,81,2)
+PAIN MGT
+"DATA",2005.84,82,0)
+SPEECH PATHOLOGY^1^
+"DATA",2005.84,82,2)
+SPCHPATH
+"DATA",2005.84,83,0)
+OTOLARYNGOLOGY^1
+"DATA",2005.84,83,2)
+OTO
+"DATA",2005.84,84,0)
+BLIND REHAB^1^25^A
+"DATA",2005.84,84,2)
+BLINDRHB
+"DATA",2005.84,85,0)
+POLYTRAUMA^1^85
+"DATA",2005.84,85,2)
+POLYTRMA
+"DATA",2005.84,86,0)
+PRENATAL^1
+"DATA",2005.84,86,2)
+PRENATL
+"DATA",2005.84,87,0)
+PEDIATRICS^1
+"DATA",2005.84,87,2)
+PEDS
+"DATA",2005.84,88,0)
+ORTHODONTICS^1^53
+"DATA",2005.84,88,2)
+ORTHODON
+"DATA",2005.84,89,0)
+PERIODONTICS^1^53
+"DATA",2005.84,89,2)
+PERIODON
+"DATA",2005.84,90,0)
+PROSTHODONTICS^1^53
+"DATA",2005.84,90,2)
+PROSDONT
+"DATA",2005.84,91,0)
+ORAL MAXILLOFACIAL RADIOLOGY^1^^A
+"DATA",2005.84,91,2)
+ORALRAD
+"DATA",2005.84,92,0)
+PALLIATIVE CARE^1^92
+"DATA",2005.84,92,2)
+HPC
+"DATA",2005.84,93,0)
+HOSPICE^1^^A
+"DATA",2005.84,93,2)
+HOSPIC
+"DATA",2005.84,94,0)
+BARIATRIC SURGERY^1^94
+"DATA",2005.84,94,2)
+BARIATRI
+"FIA",2005.84)
+IMAGE INDEX FOR SPECIALTY/SUBSPECIALTY
+"FIA",2005.84,0)
+^MAG(2005.84,
+"FIA",2005.84,0,0)
+2005.84
+"FIA",2005.84,0,1)
+y^y^f^^^^y
+"FIA",2005.84,0,10)
+
+"FIA",2005.84,0,11)
+
+"FIA",2005.84,0,"RLRO")
+
+"FIA",2005.84,0,"VR")
+3.0^MAG
+"FIA",2005.84,2005.84)
+0
+"MBREQ")
+0
+"PKG",454,-1)
+1^1
+"PKG",454,0)
+IMAGING^MAG^Imaging-V1 to release 
+"PKG",454,20,0)
+^9.402P^^
+"PKG",454,22,0)
+^9.49I^1^1
+"PKG",454,22,1,0)
+3.0^3020319^3020517^126
+"PKG",454,22,1,"PAH",1,0)
+350_DD^3120726
+"QUES","XPF1",0)
+Y
+"QUES","XPF1","??")
+^D REP^XPDH
+"QUES","XPF1","A")
+Shall I write over your |FLAG| File
+"QUES","XPF1","B")
+YES
+"QUES","XPF1","M")
+D XPF1^XPDIQ
+"QUES","XPF2",0)
+Y
+"QUES","XPF2","??")
+^D DTA^XPDH
+"QUES","XPF2","A")
+Want my data |FLAG| yours
+"QUES","XPF2","B")
+YES
+"QUES","XPF2","M")
+D XPF2^XPDIQ
+"QUES","XPI1",0)
+YO
+"QUES","XPI1","??")
+^D INHIBIT^XPDH
+"QUES","XPI1","A")
+Want KIDS to INHIBIT LOGONs during the install
+"QUES","XPI1","B")
+NO
+"QUES","XPI1","M")
+D XPI1^XPDIQ
+"QUES","XPM1",0)
+PO^VA(200,:EM
+"QUES","XPM1","??")
+^D MG^XPDH
+"QUES","XPM1","A")
+Enter the Coordinator for Mail Group '|FLAG|'
+"QUES","XPM1","B")
+
+"QUES","XPM1","M")
+D XPM1^XPDIQ
+"QUES","XPO1",0)
+Y
+"QUES","XPO1","??")
+^D MENU^XPDH
+"QUES","XPO1","A")
+Want KIDS to Rebuild Menu Trees Upon Completion of Install
+"QUES","XPO1","B")
+NO
+"QUES","XPO1","M")
+D XPO1^XPDIQ
+"QUES","XPZ1",0)
+Y
+"QUES","XPZ1","??")
+^D OPT^XPDH
+"QUES","XPZ1","A")
+Want to DISABLE Scheduled Options, Menu Options, and Protocols
+"QUES","XPZ1","B")
+NO
+"QUES","XPZ1","M")
+D XPZ1^XPDIQ
+"QUES","XPZ2",0)
+Y
+"QUES","XPZ2","??")
+^D RTN^XPDH
+"QUES","XPZ2","A")
+Want to MOVE routines to other CPUs
+"QUES","XPZ2","B")
+NO
+"QUES","XPZ2","M")
+D XPZ2^XPDIQ
+"SEC","^DIC",2005.84,2005.84,0,"AUDIT")
+@
+"SEC","^DIC",2005.84,2005.84,0,"DD")
+@
+"SEC","^DIC",2005.84,2005.84,0,"DEL")
+@
+"SEC","^DIC",2005.84,2005.84,0,"LAYGO")
+@
+"SEC","^DIC",2005.84,2005.84,0,"RD")
+@
+"SEC","^DIC",2005.84,2005.84,0,"WR")
+@
+"VER")
+8.0^22.0
+"^DD",2005.84,2005.84,0)
+FIELD^^4^5
+"^DD",2005.84,2005.84,0,"DDA")
+N
+"^DD",2005.84,2005.84,0,"DT")
+3020823
+"^DD",2005.84,2005.84,0,"IX","ACL",2005.84,1)
+
+"^DD",2005.84,2005.84,0,"IX","ASPEC",2005.84,2)
+
+"^DD",2005.84,2005.84,0,"IX","B",2005.84,.01)
+
+"^DD",2005.84,2005.84,0,"IX","C",2005.84,3)
+
+"^DD",2005.84,2005.84,0,"NM","IMAGE INDEX FOR SPECIALTY/SUBSPECIALTY")
+
+"^DD",2005.84,2005.84,0,"PT",2005,44)
+
+"^DD",2005.84,2005.84,0,"PT",2005.03,44)
+
+"^DD",2005.84,2005.84,0,"PT",2005.1,44)
+
+"^DD",2005.84,2005.84,0,"PT",2005.81,44)
+
+"^DD",2005.84,2005.84,0,"PT",2005.84,2)
+
+"^DD",2005.84,2005.84,0,"PT",2005.852,.01)
+
+"^DD",2005.84,2005.84,0,"PT",2005.8722,.01)
+
+"^DD",2005.84,2005.84,0,"PT",2006.5831,2)
+
+"^DD",2005.84,2005.84,0,"PT",2006.5841,2)
+
+"^DD",2005.84,2005.84,0,"PT",2006.584311,.01)
+
+"^DD",2005.84,2005.84,0,"PT",2006.5849,2)
+
+"^DD",2005.84,2005.84,0,"VRPK")
+MAG
+"^DD",2005.84,2005.84,.01,0)
+NAME^RFI^^0;1^K:$L(X)>30!($L(X)<3)!'(X'?1P.E) X
+"^DD",2005.84,2005.84,.01,1,0)
+^.1
+"^DD",2005.84,2005.84,.01,1,1,0)
+2005.84^B
+"^DD",2005.84,2005.84,.01,1,1,1)
+S ^MAG(2005.84,"B",$E(X,1,30),DA)=""
+"^DD",2005.84,2005.84,.01,1,1,2)
+K ^MAG(2005.84,"B",$E(X,1,30),DA)
+"^DD",2005.84,2005.84,.01,3)
+Answer must be 3-30 characters in length.
+"^DD",2005.84,2005.84,.01,21,0)
+^^2^2^3020819^
+"^DD",2005.84,2005.84,.01,21,1,0)
+This field contains the name of the Specialty or SubSpecialty that an 
+"^DD",2005.84,2005.84,.01,21,2,0)
+images is captured to and will be used in sorting during image display. 
+"^DD",2005.84,2005.84,.01,"DT")
+3020819
+"^DD",2005.84,2005.84,.01,"LAYGO",1,0)
+I 0
+"^DD",2005.84,2005.84,1,0)
+CLASS^RP2005.82'^MAG(2005.82,^0;2^Q
+"^DD",2005.84,2005.84,1,1,0)
+^.1
+"^DD",2005.84,2005.84,1,1,1,0)
+2005.84^ACL
+"^DD",2005.84,2005.84,1,1,1,1)
+S ^MAG(2005.84,"ACL",$E(X,1,30),DA)=""
+"^DD",2005.84,2005.84,1,1,1,2)
+K ^MAG(2005.84,"ACL",$E(X,1,30),DA)
+"^DD",2005.84,2005.84,1,1,1,"DT")
+3020118
+"^DD",2005.84,2005.84,1,9)
+^
+"^DD",2005.84,2005.84,1,21,0)
+^^3^3^3020819^
+"^DD",2005.84,2005.84,1,21,1,0)
+This field is a pointer to the IMAGE INDEX FOR CLASS file.  Select the
+"^DD",2005.84,2005.84,1,21,2,0)
+appropriate class for this specialty. For example, non-document images 
+"^DD",2005.84,2005.84,1,21,3,0)
+are of class type 'CLIN'. 
+"^DD",2005.84,2005.84,1,"DT")
+3020118
+"^DD",2005.84,2005.84,2,0)
+SPEC LEVEL^P2005.84'^MAG(2005.84,^0;3^Q
+"^DD",2005.84,2005.84,2,1,0)
+^.1
+"^DD",2005.84,2005.84,2,1,1,0)
+2005.84^ASPEC
+"^DD",2005.84,2005.84,2,1,1,1)
+S ^MAG(2005.84,"ASPEC",$E(X,1,30),DA)=""
+"^DD",2005.84,2005.84,2,1,1,2)
+K ^MAG(2005.84,"ASPEC",$E(X,1,30),DA)
+"^DD",2005.84,2005.84,2,1,1,"DT")
+3050222
+"^DD",2005.84,2005.84,2,9)
+^
+"^DD",2005.84,2005.84,2,21,0)
+^.001^4^4^3050909^^^^
+"^DD",2005.84,2005.84,2,21,1,0)
+This field contain the specialty level for the specialty being entered.
+"^DD",2005.84,2005.84,2,21,2,0)
+For example specialties VASCULAR and UROLOGY are part of the specialty 
+"^DD",2005.84,2005.84,2,21,3,0)
+level SURGERY. This field will be used in indexing images and provide a
+"^DD",2005.84,2005.84,2,21,4,0)
+broad level of sorting.
+"^DD",2005.84,2005.84,2,"DT")
+3050909
+"^DD",2005.84,2005.84,3,0)
+ABBREVIATION^F^^2;1^K:$L(X)>8!($L(X)<2) X
+"^DD",2005.84,2005.84,3,1,0)
+^.1
+"^DD",2005.84,2005.84,3,1,1,0)
+2005.84^C
+"^DD",2005.84,2005.84,3,1,1,1)
+S ^MAG(2005.84,"C",$E(X,1,30),DA)=""
+"^DD",2005.84,2005.84,3,1,1,2)
+K ^MAG(2005.84,"C",$E(X,1,30),DA)
+"^DD",2005.84,2005.84,3,1,1,"DT")
+3020724
+"^DD",2005.84,2005.84,3,3)
+Answer must be 2-8 characters in length.
+"^DD",2005.84,2005.84,3,9)
+^
+"^DD",2005.84,2005.84,3,21,0)
+^.001^1^1^3090902^^^^
+"^DD",2005.84,2005.84,3,21,1,0)
+Enter an abbreviation for this specialty.
+"^DD",2005.84,2005.84,3,"DT")
+3020801
+"^DD",2005.84,2005.84,4,0)
+STATUS^S^A:ACTIVE;I:INACTIVE;^0;4^Q
+"^DD",2005.84,2005.84,4,21,0)
+^^3^3^3020905^
+"^DD",2005.84,2005.84,4,21,1,0)
+This field is used to inactivate an entry in this file. It affects which
+"^DD",2005.84,2005.84,4,21,2,0)
+specialties can be selected in the filtering option of VistA Imaging
+"^DD",2005.84,2005.84,4,21,3,0)
+Display.
+"^DD",2005.84,2005.84,4,23,0)
+^^3^3^3020905^
+"^DD",2005.84,2005.84,4,23,1,0)
+This field is used to inactivate an entry in this file. It affects which
+"^DD",2005.84,2005.84,4,23,2,0)
+specialties can be selected in the filtering option of VistA Imaging
+"^DD",2005.84,2005.84,4,23,3,0)
+Display introduced in Patch 8.
+"^DD",2005.84,2005.84,4,"DT")
+3020905
+"^DIC",2005.84,2005.84,0)
+IMAGE INDEX FOR SPECIALTY/SUBSPECIALTY^2005.84
+"^DIC",2005.84,2005.84,0,"GL")
+^MAG(2005.84,
+"^DIC",2005.84,2005.84,"%D",0)
+^^25^25^3020822^
+"^DIC",2005.84,2005.84,"%D",1,0)
+ +---------------------------------------------------------------+
+"^DIC",2005.84,2005.84,"%D",2,0)
+ |                                                               |
+"^DIC",2005.84,2005.84,"%D",3,0)
+ | Property of the US Government.                                |
+"^DIC",2005.84,2005.84,"%D",4,0)
+ | No permission to copy or redistribute this software is given. |
+"^DIC",2005.84,2005.84,"%D",5,0)
+ | Use of unreleased versions of this software requires the user |
+"^DIC",2005.84,2005.84,"%D",6,0)
+ | to execute a written test agreement with the VistA Imaging    |
+"^DIC",2005.84,2005.84,"%D",7,0)
+ | Development Office of the Department of Veterans Affairs,     |
+"^DIC",2005.84,2005.84,"%D",8,0)
+ | telephone (301) 734-0100.                                     |
+"^DIC",2005.84,2005.84,"%D",9,0)
+ |                                                               |
+"^DIC",2005.84,2005.84,"%D",10,0)
+ | The Food and Drug Administration classifies this software as  |
+"^DIC",2005.84,2005.84,"%D",11,0)
+ | a medical device.  As such, it may not be changed in any way. |
+"^DIC",2005.84,2005.84,"%D",12,0)
+ | Modifications to this software may result in an adulterated   |
+"^DIC",2005.84,2005.84,"%D",13,0)
+ | medical device under 21CFR820, the use of which is considered |
+"^DIC",2005.84,2005.84,"%D",14,0)
+ | to be a violation of US Federal Statutes.                     |
+"^DIC",2005.84,2005.84,"%D",15,0)
+ |                                                               |
+"^DIC",2005.84,2005.84,"%D",16,0)
+ +---------------------------------------------------------------+
+"^DIC",2005.84,2005.84,"%D",17,0)
+ 
+"^DIC",2005.84,2005.84,"%D",18,0)
+This file has all the specialties and sub-specialties that an image can be
+"^DIC",2005.84,2005.84,"%D",19,0)
+captured to.  These specialties will be used to allow clinicians the
+"^DIC",2005.84,2005.84,"%D",20,0)
+flexibility to filter images according to only the images they are 
+"^DIC",2005.84,2005.84,"%D",21,0)
+interested in researching or viewing.
+"^DIC",2005.84,2005.84,"%D",22,0)
+                                  
+"^DIC",2005.84,2005.84,"%D",23,0)
+This file is updated by Imaging and should not be edited on-site.
+"^DIC",2005.84,2005.84,"%D",24,0)
+Request for additions or modifications should be submitted to the Imaging
+"^DIC",2005.84,2005.84,"%D",25,0)
+Developers group.
+"^DIC",2005.84,"B","IMAGE INDEX FOR SPECIALTY/SUBSPECIALTY",2005.84)
+
+**END**
+**END**

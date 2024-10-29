@@ -1,0 +1,83 @@
+<html><head><title>RPC Debug Information</title>
+<!-- 
+ +---------------------------------------------------------------+
+ | Property of the US Government.                                |
+ | No permission to copy or redistribute this software is given. |
+ | Use of unreleased versions of this software requires the user |
+ | to execute a written test agreement with the VistA Imaging    |
+ | Development Office of the Department of Veterans Affairs,     |
+ | telephone (301) 734-0100.                                     |
+ +---------------------------------------------------------------+
+-->
+<meta http-equiv=Content-Type content="text/html; charset=iso-8859-1">
+</head>
+<body background="vabkg.jpg">
+
+<script language=CACHE runat=server>
+ Do ..Process()
+</script>
+</body>
+
+<csp:method name=Process arguments="">
+ New any,i,k,name,x
+ ;
+ Write $Char(13,10),"<table cellSpacing=0 cellPadding=0 border=0 summary=""This table is for formatting purposes only."">"
+ Write $Char(13,10),"<tr>"
+ Write $Char(13,10),"<td vAlign=top><img alt=""First part of VistA Imaging Logo"" src=""MAGLogo1.gif"" border=0></td>"
+ Write $Char(13,10),"<td vAlign=top><img alt=""Second part of Vista Imaging Logo"" src=""MAGLogo2.gif""><br>"
+ Write $Char(13,10),"<h2><font color=#0033ff>RPC Debug Information</font></h2></td>"
+ Write $Char(13,10),"</tr>"
+ Write $Char(13,10),"</table>",$Char(13,10)
+ ;
+ Write $Char(13,10),"<form action=""RPCDebug.csp"" method=""POST"">"
+ ;
+ Write $Char(13,10),"<table summary=""This table is for formatting purposes only."">"
+ Set job="" For  Set job=$Order(^TMP("MAG",job)) Quit:job=""  Do
+ . Quit:'$Order(^TMP("MAG",job,"DEBUG",""))
+ . Write $Char(13,10),"<tr><td valign=top>"
+ . Set name="Job_"_job
+ . Write "<input type=checkbox name="""_name_""""
+ . Write:%request.Get(name)'="" " checked" Write "></td>"
+ . Write $Char(13,10),"<td align=right valign=top>",job,"</td>"
+ . Write $Char(13,10),"<td align=left valign=top>First entry: "
+ . Set name="First_"_job
+ . Write "<input type=text name="""_name_""" value=""",%request.Get(name),"""></td></tr>"
+ . Quit
+ Write $Char(13,10),"</table>"
+ ;
+ Write "<p><input type=submit value=""Show""></p>"
+ ;
+ Set any=0
+ Set job="" For  Set job=$Order(^TMP("MAG",job)) Quit:job=""  Do
+ . Quit:%request.Get("Job_"_job)=""
+ . Write $Char(13,10),"<h3><font color=#0033ff>Job # ",job,"</font></h3>"
+ . Set i="" Set:%request.Get("First_"_job) i=%request.Get("First_"_job)-1
+ . For  Set i=$Order(^TMP("MAG",job,"DEBUG",i)) Quit:i=""  Do
+ . . Write $Char(13,10),"<p><font color=#0033ff>Entry # ",i,"</font>"
+ . . Set k="" For  Set k=$Order(^TMP("MAG",job,"DEBUG",i,k)) Quit:k=""  Do
+ . . . Set x=$Get(^TMP("MAG",job,"DEBUG",i,k)) Quit:x=""
+ . . . Write "<br>",$Char(13,10)
+ . . . Set any=1 Write ..HTML(x)
+ . . . Quit
+ . . Write "</p>"
+ . . Quit
+ . Quit
+ ;
+ Write:any "<p><input type=submit value=""Show""></p>"
+ Write "</form>",$Char(13,10)
+ Quit
+</csp:method>
+
+<csp:method name=HTML arguments="in:%String" returnvalue=%String>
+ New a,i,o
+ Set o="" For i=1:1:$Length(in) Do
+ . Set a=$ASCII(in,i)
+ . If $Char(a)="&" Set o=o_"&amp;" Quit
+ . If $Char(a)="<" Set o=o_"&lt;" Quit
+ . If $Char(a)=">" Set o=o_"&gt;" Quit
+ . If a>31,a<127 Set o=o_$Char(a) Quit
+ . Set o=o_"&lt;"_a_"&gt;"
+ Quit o
+</csp:method>
+
+</html>

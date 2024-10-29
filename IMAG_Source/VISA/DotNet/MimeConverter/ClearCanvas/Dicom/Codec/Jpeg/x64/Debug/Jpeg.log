@@ -1,0 +1,30 @@
+﻿C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild\Current\Bin\Microsoft.Common.CurrentVersion.targets(2123,5): warning MSB3245: Could not resolve this reference. Could not locate the assembly "nunit.framework, Version=2.6.0.0, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77". Check to make sure the assembly exists on disk. If this reference is required by your code, you may get compilation errors.
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild\Current\Bin\Microsoft.Common.CurrentVersion.targets(2123,5): warning MSB3277: Found conflicts between different versions of "nunit.framework" that could not be resolved.  These reference conflicts are listed in the build log when log verbosity is set to detailed.
+  AssemblyInfo.cpp
+  DicomJpegCodec.cpp
+  DicomJpegCodecFactory.cpp
+  Jpeg12Codec.cpp
+C:\usr\Hydra4\ClearCanvas\Dicom\Codec\Jpeg\JpegCodec.i(69,59): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\usr\Hydra4\ClearCanvas\Dicom\Codec\Jpeg\JpegCodec.i(255,1): warning C4947: 'ClearCanvas::Dicom::Iod::Window::Window': marked as obsolete
+C:\usr\Hydra4\ClearCanvas\Dicom\Codec\Jpeg\JpegCodec.i(255,1): message : Message: 'Cloning a Window has no utility, as the properties of the Window are immutable.'
+C:\usr\Hydra4\ClearCanvas\Dicom\Codec\Jpeg\JpegCodec.i(438,60): warning C4267: '-=': conversion from 'size_t' to 'long', possible loss of data
+C:\usr\Hydra4\ClearCanvas\Dicom\Codec\Jpeg\JpegCodec.i(461,70): warning C4267: '=': conversion from 'size_t' to 'long', possible loss of data
+C:\usr\Hydra4\ClearCanvas\Dicom\Codec\Jpeg\JpegCodec.i(541,69): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+  Jpeg16Codec.cpp
+C:\usr\Hydra4\ClearCanvas\Dicom\Codec\Jpeg\JpegCodec.i(69,59): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\usr\Hydra4\ClearCanvas\Dicom\Codec\Jpeg\JpegCodec.i(255,1): warning C4947: 'ClearCanvas::Dicom::Iod::Window::Window': marked as obsolete
+C:\usr\Hydra4\ClearCanvas\Dicom\Codec\Jpeg\JpegCodec.i(255,1): message : Message: 'Cloning a Window has no utility, as the properties of the Window are immutable.'
+C:\usr\Hydra4\ClearCanvas\Dicom\Codec\Jpeg\JpegCodec.i(438,60): warning C4267: '-=': conversion from 'size_t' to 'long', possible loss of data
+C:\usr\Hydra4\ClearCanvas\Dicom\Codec\Jpeg\JpegCodec.i(461,70): warning C4267: '=': conversion from 'size_t' to 'long', possible loss of data
+C:\usr\Hydra4\ClearCanvas\Dicom\Codec\Jpeg\JpegCodec.i(541,69): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+  Jpeg8Codec.cpp
+C:\usr\Hydra4\ClearCanvas\Dicom\Codec\Jpeg\JpegCodec.i(69,59): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\usr\Hydra4\ClearCanvas\Dicom\Codec\Jpeg\JpegCodec.i(255,1): warning C4947: 'ClearCanvas::Dicom::Iod::Window::Window': marked as obsolete
+C:\usr\Hydra4\ClearCanvas\Dicom\Codec\Jpeg\JpegCodec.i(255,1): message : Message: 'Cloning a Window has no utility, as the properties of the Window are immutable.'
+C:\usr\Hydra4\ClearCanvas\Dicom\Codec\Jpeg\JpegCodec.i(438,60): warning C4267: '-=': conversion from 'size_t' to 'long', possible loss of data
+C:\usr\Hydra4\ClearCanvas\Dicom\Codec\Jpeg\JpegCodec.i(461,70): warning C4267: '=': conversion from 'size_t' to 'long', possible loss of data
+C:\usr\Hydra4\ClearCanvas\Dicom\Codec\Jpeg\JpegCodec.i(541,69): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+  .NETFramework,Version=v4.5.AssemblyAttributes.cpp
+  Generating Code...
+  AssemblyInfo.obj : MSIL module encountered; incremental linking is disabled for MSIL; performing full link
+  Jpeg.vcxproj -> C:\usr\Hydra4\ClearCanvas\Dicom\Codec\Jpeg\x64\Debug\ClearCanvas.Dicom.Codec.Jpeg.dll

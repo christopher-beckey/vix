@@ -1,0 +1,230 @@
+KIDS Distribution saved on Oct 27, 2009@19:50:36
+RPC: MAGJ GET TREATING LIST
+**KIDS**:Z_VSS_RPC_MAGJ_GET_TREATING_LIST 3.0^
+
+**INSTALL NAME**
+Z_VSS_RPC_MAGJ_GET_TREATING_LIST 3.0
+"BLD",6409,0)
+Z_VSS_RPC_MAGJ_GET_TREATING_LIST 3.0^^0^3091027^y
+"BLD",6409,1,0)
+^^1^1^3091027^^
+"BLD",6409,1,1,0)
+RPC: MAGJ GET TREATING LIST
+"BLD",6409,4,0)
+^9.64PA^^
+"BLD",6409,6.3)
+1
+"BLD",6409,"KRN",0)
+^9.67PA^779.2^20
+"BLD",6409,"KRN",.4,0)
+.4
+"BLD",6409,"KRN",.401,0)
+.401
+"BLD",6409,"KRN",.402,0)
+.402
+"BLD",6409,"KRN",.403,0)
+.403
+"BLD",6409,"KRN",.5,0)
+.5
+"BLD",6409,"KRN",.84,0)
+.84
+"BLD",6409,"KRN",3.6,0)
+3.6
+"BLD",6409,"KRN",3.8,0)
+3.8
+"BLD",6409,"KRN",9.2,0)
+9.2
+"BLD",6409,"KRN",9.8,0)
+9.8
+"BLD",6409,"KRN",19,0)
+19
+"BLD",6409,"KRN",19.1,0)
+19.1
+"BLD",6409,"KRN",101,0)
+101
+"BLD",6409,"KRN",409.61,0)
+409.61
+"BLD",6409,"KRN",771,0)
+771
+"BLD",6409,"KRN",779.2,0)
+779.2
+"BLD",6409,"KRN",870,0)
+870
+"BLD",6409,"KRN",8989.51,0)
+8989.51
+"BLD",6409,"KRN",8989.52,0)
+8989.52
+"BLD",6409,"KRN",8994,0)
+8994
+"BLD",6409,"KRN",8994,"NM",0)
+^9.68A^1^1
+"BLD",6409,"KRN",8994,"NM",1,0)
+MAGJ GET TREATING LIST^^0
+"BLD",6409,"KRN",8994,"NM","B","MAGJ GET TREATING LIST",1)
+
+"BLD",6409,"KRN","B",.4,.4)
+
+"BLD",6409,"KRN","B",.401,.401)
+
+"BLD",6409,"KRN","B",.402,.402)
+
+"BLD",6409,"KRN","B",.403,.403)
+
+"BLD",6409,"KRN","B",.5,.5)
+
+"BLD",6409,"KRN","B",.84,.84)
+
+"BLD",6409,"KRN","B",3.6,3.6)
+
+"BLD",6409,"KRN","B",3.8,3.8)
+
+"BLD",6409,"KRN","B",9.2,9.2)
+
+"BLD",6409,"KRN","B",9.8,9.8)
+
+"BLD",6409,"KRN","B",19,19)
+
+"BLD",6409,"KRN","B",19.1,19.1)
+
+"BLD",6409,"KRN","B",101,101)
+
+"BLD",6409,"KRN","B",409.61,409.61)
+
+"BLD",6409,"KRN","B",771,771)
+
+"BLD",6409,"KRN","B",779.2,779.2)
+
+"BLD",6409,"KRN","B",870,870)
+
+"BLD",6409,"KRN","B",8989.51,8989.51)
+
+"BLD",6409,"KRN","B",8989.52,8989.52)
+
+"BLD",6409,"KRN","B",8994,8994)
+
+"BLD",6409,"QUES",0)
+^9.62^^
+"BLD",6409,"REQB",0)
+^9.611^^
+"KRN",8994,2515,-1)
+0^1
+"KRN",8994,2515,0)
+MAGJ GET TREATING LIST^FACLIST^MAGJLST1^2^R^^^1
+"KRN",8994,2515,1,0)
+^8994.01^2^2^3091021^^
+"KRN",8994,2515,1,1,0)
+Get Treating Facility List for a patient.  This RPC merely calls
+"KRN",8994,2515,1,2,0)
+the subroutine used for the VAFCTFU GET TREATING LIST rpc.
+"KRN",8994,2515,2,0)
+^8994.02A^1^1
+"KRN",8994,2515,2,1,0)
+DFN^1^30^1^1
+"KRN",8994,2515,2,1,1,0)
+^8994.021^1^1^3091021^^
+"KRN",8994,2515,2,1,1,1,0)
+Patient DFN
+"KRN",8994,2515,2,"B","DFN",1)
+
+"KRN",8994,2515,2,"PARAMSEQ",1,1)
+
+"KRN",8994,2515,3,0)
+^8994.03^9^9^3091021^^
+"KRN",8994,2515,3,1,0)
+Array; first entry contains result header with # lines to follow
+"KRN",8994,2515,3,2,0)
+and reply message description.
+"KRN",8994,2515,3,3,0)
+Entries 2:N (if any exist) contain data for each Treating facility,
+"KRN",8994,2515,3,4,0)
+up-caret delimited : A ^ B ^ C ^ D ^ E
+"KRN",8994,2515,3,5,0)
+   A: Institution IEN of the Facility
+"KRN",8994,2515,3,6,0)
+   B: Institution Name
+"KRN",8994,2515,3,7,0)
+   C: Current date on record for that institution
+"KRN",8994,2515,3,8,0)
+   D: ADT/HL7 event reason 
+"KRN",8994,2515,3,9,0)
+   E: FACILITY TYPE
+"MBREQ")
+0
+"ORD",16,8994)
+8994;16;1;;;;;;;RPCDEL^XPDIA1
+"ORD",16,8994,0)
+REMOTE PROCEDURE
+"QUES","XPF1",0)
+Y
+"QUES","XPF1","??")
+^D REP^XPDH
+"QUES","XPF1","A")
+Shall I write over your |FLAG| File
+"QUES","XPF1","B")
+YES
+"QUES","XPF1","M")
+D XPF1^XPDIQ
+"QUES","XPF2",0)
+Y
+"QUES","XPF2","??")
+^D DTA^XPDH
+"QUES","XPF2","A")
+Want my data |FLAG| yours
+"QUES","XPF2","B")
+YES
+"QUES","XPF2","M")
+D XPF2^XPDIQ
+"QUES","XPI1",0)
+YO
+"QUES","XPI1","??")
+^D INHIBIT^XPDH
+"QUES","XPI1","A")
+Want KIDS to INHIBIT LOGONs during the install
+"QUES","XPI1","B")
+NO
+"QUES","XPI1","M")
+D XPI1^XPDIQ
+"QUES","XPM1",0)
+PO^VA(200,:EM
+"QUES","XPM1","??")
+^D MG^XPDH
+"QUES","XPM1","A")
+Enter the Coordinator for Mail Group '|FLAG|'
+"QUES","XPM1","B")
+
+"QUES","XPM1","M")
+D XPM1^XPDIQ
+"QUES","XPO1",0)
+Y
+"QUES","XPO1","??")
+^D MENU^XPDH
+"QUES","XPO1","A")
+Want KIDS to Rebuild Menu Trees Upon Completion of Install
+"QUES","XPO1","B")
+NO
+"QUES","XPO1","M")
+D XPO1^XPDIQ
+"QUES","XPZ1",0)
+Y
+"QUES","XPZ1","??")
+^D OPT^XPDH
+"QUES","XPZ1","A")
+Want to DISABLE Scheduled Options, Menu Options, and Protocols
+"QUES","XPZ1","B")
+NO
+"QUES","XPZ1","M")
+D XPZ1^XPDIQ
+"QUES","XPZ2",0)
+Y
+"QUES","XPZ2","??")
+^D RTN^XPDH
+"QUES","XPZ2","A")
+Want to MOVE routines to other CPUs
+"QUES","XPZ2","B")
+NO
+"QUES","XPZ2","M")
+D XPZ2^XPDIQ
+"VER")
+8.0^22.0
+**END**
+**END**

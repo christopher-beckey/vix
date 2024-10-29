@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<build xmlns="http://va.gov/VistA/kids/manifest" name="MAG*3.0*066" patchName="DICOM Query Retrieve SCP" patch="066">
+  <components>
+    <securityKeys />
+    <parameterDefinitions />
+    <printTemplates />
+    <sortTemplates />
+    <menuOptions>
+      <menuOption export="OPTION_MAG_DICOM_QUERY_RETRIEVE.KID" />
+    </menuOptions>
+    <rpcs />
+    <dataDictionaries />
+    <hl7s />
+    <routines>
+      <routine export="MAGDQR01.RTN" />
+      <routine export="MAGDQR02.RTN" />
+      <routine export="MAGDQR03.RTN" />
+      <routine export="MAGDQR04.RTN" />
+      <routine export="MAGDQR06.RTN" />
+      <routine export="MAGIPS66.RTN" />
+    </routines>
+    <protocols />
+  </components>
+</build>

@@ -1,0 +1,17 @@
+#
+# The following is an example extended data dictionary file.
+# If this file is named "ext_data_dictionary", it will be
+# used whenever DCF libraries or applications look up information
+# for a dicom tag. The name of the extended data dictionary file
+# is contained in the [ DCS] configuration group of DICOM related
+# applications. 
+#
+# Examples:
+#      0029,1020 = CS,1,Example Private Attribute 1
+#      0039,1020 = US,1,Another Example Private Attribute 2
+#      0049,1001 = DS,1,Private DS attribute 3
+#      0049,1002 = UL,1,Private UL attribute 4
+#      0049,1003 = SL,1,Private SL attribute 5
+#      0049,1004 = UI,1,Private UI attribute 6
+[ elements ]
+

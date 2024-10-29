@@ -1,0 +1,336 @@
+KIDS Distribution saved on Jul 17, 2007@09:48
+Package for RPC named MAG DICOM GET BASIC IMAGE
+**KIDS**:MAG*3.0*160^
+
+**INSTALL NAME**
+MAG*3.0*160
+"BLD",5972,0)
+MAG*3.0*160^^0^3070717^y
+"BLD",5972,1,0)
+^^5^5^3070717^
+"BLD",5972,1,1,0)
+This package contains a KIDS component
+"BLD",5972,1,2,0)
+for Running Baseline.
+"BLD",5972,1,3,0)
+ 
+"BLD",5972,1,4,0)
+This package transports the remote procedure call named MAG DICOM GET 
+"BLD",5972,1,5,0)
+BASIC IMAGE.
+"BLD",5972,4,0)
+^9.64PA^^
+"BLD",5972,6.3)
+1
+"BLD",5972,"KRN",0)
+^9.67PA^8989.52^19
+"BLD",5972,"KRN",.4,0)
+.4
+"BLD",5972,"KRN",.401,0)
+.401
+"BLD",5972,"KRN",.402,0)
+.402
+"BLD",5972,"KRN",.403,0)
+.403
+"BLD",5972,"KRN",.5,0)
+.5
+"BLD",5972,"KRN",.84,0)
+.84
+"BLD",5972,"KRN",3.6,0)
+3.6
+"BLD",5972,"KRN",3.8,0)
+3.8
+"BLD",5972,"KRN",9.2,0)
+9.2
+"BLD",5972,"KRN",9.8,0)
+9.8
+"BLD",5972,"KRN",19,0)
+19
+"BLD",5972,"KRN",19.1,0)
+19.1
+"BLD",5972,"KRN",101,0)
+101
+"BLD",5972,"KRN",409.61,0)
+409.61
+"BLD",5972,"KRN",771,0)
+771
+"BLD",5972,"KRN",870,0)
+870
+"BLD",5972,"KRN",8989.51,0)
+8989.51
+"BLD",5972,"KRN",8989.52,0)
+8989.52
+"BLD",5972,"KRN",8994,0)
+8994
+"BLD",5972,"KRN",8994,"NM",0)
+^9.68A^1^1
+"BLD",5972,"KRN",8994,"NM",1,0)
+MAG DICOM GET BASIC IMAGE^^0
+"BLD",5972,"KRN",8994,"NM","B","MAG DICOM GET BASIC IMAGE",1)
+
+"BLD",5972,"KRN","B",.4,.4)
+
+"BLD",5972,"KRN","B",.401,.401)
+
+"BLD",5972,"KRN","B",.402,.402)
+
+"BLD",5972,"KRN","B",.403,.403)
+
+"BLD",5972,"KRN","B",.5,.5)
+
+"BLD",5972,"KRN","B",.84,.84)
+
+"BLD",5972,"KRN","B",3.6,3.6)
+
+"BLD",5972,"KRN","B",3.8,3.8)
+
+"BLD",5972,"KRN","B",9.2,9.2)
+
+"BLD",5972,"KRN","B",9.8,9.8)
+
+"BLD",5972,"KRN","B",19,19)
+
+"BLD",5972,"KRN","B",19.1,19.1)
+
+"BLD",5972,"KRN","B",101,101)
+
+"BLD",5972,"KRN","B",409.61,409.61)
+
+"BLD",5972,"KRN","B",771,771)
+
+"BLD",5972,"KRN","B",870,870)
+
+"BLD",5972,"KRN","B",8989.51,8989.51)
+
+"BLD",5972,"KRN","B",8989.52,8989.52)
+
+"BLD",5972,"KRN","B",8994,8994)
+
+"KRN",8994,1726,-1)
+0^1
+"KRN",8994,1726,0)
+MAG DICOM GET BASIC IMAGE^IMAGE^MAGDRPC2^2^R^0^0^1^3^0
+"KRN",8994,1726,1,0)
+^8994.01^54^54
+"KRN",8994,1726,1,1,0)
+ +---------------------------------------------------------------+
+"KRN",8994,1726,1,2,0)
+ | Property of the US Government.                                |
+"KRN",8994,1726,1,3,0)
+ | No permission to copy or redistribute this software is given. |
+"KRN",8994,1726,1,4,0)
+ | Use of unreleased versions of this software requires the user |
+"KRN",8994,1726,1,5,0)
+ | to execute a written test agreement with the VistA Imaging    |
+"KRN",8994,1726,1,6,0)
+ | Development Office of the Department of Veterans Affairs,     |
+"KRN",8994,1726,1,7,0)
+ | telephone (301) 734-0100.                                     |
+"KRN",8994,1726,1,8,0)
+ |                                                               |
+"KRN",8994,1726,1,9,0)
+ | The Food and Drug Administration classifies this software as  |
+"KRN",8994,1726,1,10,0)
+ | a medical device.  As such, it may not be changed in any way. |
+"KRN",8994,1726,1,11,0)
+ | Modifications to this software may result in an adulterated   |
+"KRN",8994,1726,1,12,0)
+ | medical device under 21CFR820, the use of which is considered |
+"KRN",8994,1726,1,13,0)
+ | to be a violation of US Federal Statutes.                     |
+"KRN",8994,1726,1,14,0)
+ +---------------------------------------------------------------+
+"KRN",8994,1726,1,15,0)
+ 
+"KRN",8994,1726,1,16,0)
+This RPC returns information about an image.
+"KRN",8994,1726,1,17,0)
+The information that is returned consists of any of
+"KRN",8994,1726,1,18,0)
+the fields listed below. Fields that do not have
+"KRN",8994,1726,1,19,0)
+a value (or that have an "empty" value) are not
+"KRN",8994,1726,1,20,0)
+returned.
+"KRN",8994,1726,1,21,0)
+ 
+"KRN",8994,1726,1,22,0)
+    OBJECT NAME
+"KRN",8994,1726,1,23,0)
+    FILEREF
+"KRN",8994,1726,1,24,0)
+    DISK & VOLUME, MAGNETIC
+"KRN",8994,1726,1,25,0)
+    DISK & VOLUME, ABSTRACT
+"KRN",8994,1726,1,26,0)
+    DISK & VOLUME, WORM
+"KRN",8994,1726,1,27,0)
+    OBJECT TYPE
+"KRN",8994,1726,1,28,0)
+    PATIENT
+"KRN",8994,1726,1,29,0)
+    PROCEDURE
+"KRN",8994,1726,1,30,0)
+    LAST ACCESS DATE
+"KRN",8994,1726,1,31,0)
+    IQ
+"KRN",8994,1726,1,32,0)
+    GROUP PARENT
+"KRN",8994,1726,1,33,0)
+    ACQUISITION SITE
+"KRN",8994,1726,1,34,0)
+    DESCRIPTIVE CATEGORY
+"KRN",8994,1726,1,35,0)
+    CLINIC
+"KRN",8994,1726,1,36,0)
+    ACQUISITION DEVICE
+"KRN",8994,1726,1,37,0)
+    TRACKING ID
+"KRN",8994,1726,1,38,0)
+    DOCUMENT DATE
+"KRN",8994,1726,1,39,0)
+    DATE/TIME IMAGE SAVED
+"KRN",8994,1726,1,40,0)
+    IMAGE SAVE BY
+"KRN",8994,1726,1,41,0)
+    SUMMARY OBJECT
+"KRN",8994,1726,1,42,0)
+    SHORT DESCRIPTION
+"KRN",8994,1726,1,43,0)
+    PROCEDURE/EXAM DATE/TIME
+"KRN",8994,1726,1,44,0)
+    PARENT DATA FILE#
+"KRN",8994,1726,1,45,0)
+    PARENT GLOBAL ROOT D0
+"KRN",8994,1726,1,46,0)
+    PARENT DATA FILE IMAGE POINTER
+"KRN",8994,1726,1,47,0)
+    EXPORT REQUEST STATUS
+"KRN",8994,1726,1,48,0)
+    PARENT GLOBAL ROOT D1
+"KRN",8994,1726,1,49,0)
+    Full FileName
+"KRN",8994,1726,1,50,0)
+    Full Path+FileName
+"KRN",8994,1726,1,51,0)
+    Big FileName
+"KRN",8994,1726,1,52,0)
+    Big Path+FileName
+"KRN",8994,1726,1,53,0)
+    Abstract FileName
+"KRN",8994,1726,1,54,0)
+    Abstract Path+FileName
+"KRN",8994,1726,2,0)
+^8994.02^1^1
+"KRN",8994,1726,2,1,0)
+D0^1^30^1^1
+"KRN",8994,1726,2,1,1,0)
+^8994.021^3^3
+"KRN",8994,1726,2,1,1,1,0)
+The value of this parameter is a pointer to ^MAG(2005).
+"KRN",8994,1726,2,1,1,2,0)
+This pointer identifies the image for which information
+"KRN",8994,1726,2,1,1,3,0)
+is being requested.
+"KRN",8994,1726,2,"B","D0",1)
+
+"KRN",8994,1726,2,"PARAMSEQ",1,1)
+
+"KRN",8994,1726,3,0)
+^8994.03^8^8
+"KRN",8994,1726,3,1,0)
+When an error occurs during the processing of this RPC,
+"KRN",8994,1726,3,2,0)
+the output array consists only one element:
+"KRN",8994,1726,3,3,0)
+    OUT(1) = -1,Invalid IEN (xxx)
+"KRN",8994,1726,3,4,0)
+    OUT(1) = -3,Image #nnn has been deleted.
+"KRN",8994,1726,3,5,0)
+    OUT(1) = -2,No data for "nnn".
+"KRN",8994,1726,3,6,0)
+Otherwise, each element of the output array contains
+"KRN",8994,1726,3,7,0)
+three or more caret-separated pieces of data:
+"KRN",8994,1726,3,8,0)
+    OUT(i) = field-name ^ data (internal) [ ^ data (external) ]
+"MBREQ")
+0
+"ORD",16,8994)
+8994;16;1;;;;;;;RPCDEL^XPDIA1
+"ORD",16,8994,0)
+REMOTE PROCEDURE
+"QUES","XPF1",0)
+Y
+"QUES","XPF1","??")
+^D REP^XPDH
+"QUES","XPF1","A")
+Shall I write over your |FLAG| File
+"QUES","XPF1","B")
+YES
+"QUES","XPF1","M")
+D XPF1^XPDIQ
+"QUES","XPF2",0)
+Y
+"QUES","XPF2","??")
+^D DTA^XPDH
+"QUES","XPF2","A")
+Want my data |FLAG| yours
+"QUES","XPF2","B")
+YES
+"QUES","XPF2","M")
+D XPF2^XPDIQ
+"QUES","XPI1",0)
+YO
+"QUES","XPI1","??")
+^D INHIBIT^XPDH
+"QUES","XPI1","A")
+Want KIDS to INHIBIT LOGONs during the install
+"QUES","XPI1","B")
+YES
+"QUES","XPI1","M")
+D XPI1^XPDIQ
+"QUES","XPM1",0)
+PO^VA(200,:EM
+"QUES","XPM1","??")
+^D MG^XPDH
+"QUES","XPM1","A")
+Enter the Coordinator for Mail Group '|FLAG|'
+"QUES","XPM1","B")
+
+"QUES","XPM1","M")
+D XPM1^XPDIQ
+"QUES","XPO1",0)
+Y
+"QUES","XPO1","??")
+^D MENU^XPDH
+"QUES","XPO1","A")
+Want KIDS to Rebuild Menu Trees Upon Completion of Install
+"QUES","XPO1","B")
+YES
+"QUES","XPO1","M")
+D XPO1^XPDIQ
+"QUES","XPZ1",0)
+Y
+"QUES","XPZ1","??")
+^D OPT^XPDH
+"QUES","XPZ1","A")
+Want to DISABLE Scheduled Options, Menu Options, and Protocols
+"QUES","XPZ1","B")
+YES
+"QUES","XPZ1","M")
+D XPZ1^XPDIQ
+"QUES","XPZ2",0)
+Y
+"QUES","XPZ2","??")
+^D RTN^XPDH
+"QUES","XPZ2","A")
+Want to MOVE routines to other CPUs
+"QUES","XPZ2","B")
+NO
+"QUES","XPZ2","M")
+D XPZ2^XPDIQ
+"VER")
+8.0^22.0
+**END**
+**END**

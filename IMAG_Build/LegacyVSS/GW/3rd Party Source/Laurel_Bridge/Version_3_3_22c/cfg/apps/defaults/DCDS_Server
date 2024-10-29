@@ -1,0 +1,199 @@
+[ application_info ]
+name = DCDS_Server
+description = Distributed Config Data Service - Java server for CDS data storage/retrieval.
+app_component_name = java_app/DCDS_Server
+execution_state = STOPPED
+
+[ required_components ]
+component = idl_lib/DCDS
+component = java_lib/LOG
+component = java_lib/LOG_a
+component = java_lib/DCF
+component = java_lib/APC
+component = java_lib/CDS
+component = java_lib/APC_a
+component = java_lib/CDS_a
+[ java_app ]
+
+#==============================================================================
+# per-instance information for the DCDS_Server component
+#==============================================================================
+[ java_app/DCDS_Server ]
+debug_flags = 0x00000
+#
+# send notifications to observers of groups when objects below
+# the observed group are changed
+#
+enable_upward_notifications = YES
+#
+# send notifications to observers of groups and attributes when
+# a group somewhere above the observed object changes
+#
+enable_downward_notifications = NO
+#
+# enable sending of notifications to observers of groups
+#
+enable_group_notifications = YES
+
+create_system_info_group = NO
+
+system_info_group_name = system.info
+#
+# set the name used for attributes at the directory level.
+# If a directory contains a file of this name,
+# it will be assumed to contain attribute data
+# that will be saved at the directory level.
+# If a CFGGroup object that is associated with a
+# file system directory contains attributes, they will be
+# stored to a file with this name in the given directory.
+dir_attribute_filename = _DIR_ATTRS_
+
+#
+# Indicate whether this system runs in MASTER mode (default, and
+# how DCDS_Server historically ran), or SLAVE mode (this
+# server will monitor a remote server for changes to specified
+# CFGGroup or CFGAttribute objects and replicate those changes.
+#
+run_as_slave = NO
+#
+# If in slave mode, this attribute indicates the host:port for the
+# remote server's web server. That will be used to locate the
+# remote DCDS CORBA Server
+remote_server_addr = masterhost:2001
+#
+# Number of seconds between connect retries if the remote server is down
+#
+remote_server_reconnect_retry_period_seconds = 5
+#
+# Number of seconds between checks to verify that the remote server is up
+#
+remote_server_poll_time_seconds = 5
+#
+# Location of remote servers run_as_slave attribute
+# 
+remote_server_test_attr_name = /procs/DCDS_Server.001/java_app/DCDS_Server/run_as_slave
+#
+# Set to true if objects from a remote server should be updated
+# right when they change. Otherwise, updates occur on the interval set by
+# remote_server_poll_time_seconds.
+#
+update_when_notified = true
+# Remote Synchronization information. This group may
+# contain one or more sub-groups. Each subgroup
+# describes an object that will be monitored on the
+# remote system. If this system is in SLAVE mode,
+# and the specified object changes, it is copied to the
+# local system. Example:
+#
+#[ java_app/DCDS_Server/remote_sync_info/1]
+### true if the object to be synchronized is a CFGGroup false for CFGAttribute
+#is_group = Y
+### name in the local CDS tree for this object
+#local_name = /dicom/filter_sets
+### name in the remote CDS tree for this object
+#remote_name = /dicom/filter_sets
+### true if local observer notifications should be sent when the
+### object is copied from the remote system
+#send_local_notifications = true
+#
+[ java_app/DCDS_Server/remote_sync_info ]
+[ idl_lib ]
+
+[ idl_lib/DCDS ]
+[ java_lib ]
+
+#==============================================================================
+# per-instance information for the LOG component
+#==============================================================================
+[ java_lib/LOG ]
+debug_flags = 0x00000
+
+#==============================================================================
+# per-instance information for the LOG_a component
+#==============================================================================
+[ java_lib/LOG_a ]
+debug_flags = 0
+
+[ java_lib/LOG_a/outputs ]
+[ java_lib/LOG_a/outputs/server_output_1 ]
+type = LOGSERVER
+use_log_server = TRUE
+
+[ java_lib/LOG_a/outputs/file_output_1 ]
+type = textfile
+message_types = *
+component_names = *
+# Note that changing the format of this name may affect the behavior of the web
+# utilities that manipulate log files (e.g., list_logs.pl, dcfrmlogs.pl).
+filename = C:/DCF/DCF-3.3.22c/tmp/log/${APPIBNAME}.${CNT}.log
+append_to_logfile = TRUE
+# Maximum size (KBytes) of each log file before rotating.
+max_size = 3000
+# Maximum number of log files before old ones are deleted.
+max_files = 5
+# Sync the file output on the disk on every write operation - this could affect performance
+sync_on_write = false
+character_encoding = UTF-8
+# true if a Byte-Order-Marker should be written at the start of the file.
+# Some UTF capable viewers use this to detect that the file is UTF format.
+write_bom = false
+
+[ java_lib/LOG_a/outputs/std_output_1 ]
+type = stdout
+redirect_stdout = FALSE
+redirect_stderr = FALSE
+
+#==============================================================================
+# per-instance information for the DCF component
+#==============================================================================
+[ java_lib/DCF ]
+debug_flags = 0x00000
+
+#==============================================================================
+# per-instance information for the APC component
+#==============================================================================
+[ java_lib/APC ]
+debug_flags = 0x00000
+
+#==============================================================================
+# per-instance information for the CDS component
+#==============================================================================
+[ java_lib/CDS ]
+debug_flags = 0x00000
+
+#==============================================================================
+# per-instance information for the APC_a component
+#==============================================================================
+[ java_lib/APC_a ]
+debug_flags = 0x00000
+
+# If true, proc configuration will be saved in CDS CFGDB.
+save_proc_cfg_in_cds = true
+
+# If true, <proc_cfg>/application_info/execution_state attribute
+# will be monitored for a shutdown request 
+# (not supported if CFGDB is in FSys Mode)
+handle_external_shutdown_rq = true
+
+# If true, <proc_cfg> will be observed, and re-loaded if it changes
+# (not supported if CFGDB is in FSys Mode)
+observe_proc_cfg = false
+
+# If true, the value passed to AppControl.shutdown() will be saved in
+# the proc config - usually delete_proc_cfg is set to false with this.
+save_exit_status_in_proc_cfg = false
+
+# If true, the proc config object in CDS is deleted during shutdown
+delete_proc_cfg = true
+
+# Specify the TCP-IP host address that will identify CORBA server
+# objects hosted by this process. The value 0.0.0.0 will result
+# in the default address being used. This controls the value of
+# property com.sun.CORBA.ORBServerHost.
+orb_server_host = 0.0.0.0
+
+#==============================================================================
+# per-instance information for the CDS_a component
+#==============================================================================
+[ java_lib/CDS_a ]
+debug_flags = 0x00000

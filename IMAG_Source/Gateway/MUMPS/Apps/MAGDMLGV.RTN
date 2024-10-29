@@ -1,0 +1,285 @@
+Cache for Windows NT^INT^Saved from DICOM,DICOM (ISW-KUZMAKP3-LT)^~Format=Cache.S~
+%RO on 04/01/2013  19:02
+MAGDMLGV^INT^1^62913,68489.89908^0
+MAGDMLGV ;WOIFO/PMK - View DICOM event log ; 01 Apr 2013 7:01 PM
+ ;;3.0;IMAGING;**21,10,11,30,54,110**;Mar 19, 2002;Build 61;Oct 10, 2012
+ ;; Per VHA Directive 2004-038, this routine should not be modified.
+ ;; +---------------------------------------------------------------+
+ ;; | Property of the US Government.                                |
+ ;; | No permission to copy or redistribute this software is given. |
+ ;; | Use of unreleased versions of this software requires the user |
+ ;; | to execute a written test agreement with the VistA Imaging    |
+ ;; | Development Office of the Department of Veterans Affairs,     |
+ ;; | telephone (301) 734-0100.                                     |
+ ;; | The Food and Drug Administration classifies this software as  |
+ ;; | a medical device.  As such, it may not be changed in any way. |
+ ;; | Modifications to this software may result in an adulterated   |
+ ;; | medical device under 21CFR820, the use of which is considered |
+ ;; | to be a violation of US Federal Statutes.                     |
+ ;; +---------------------------------------------------------------+
+ ;;
+ ; Message Log
+ ;
+ ; display an existing message log or new activity in real time
+ N D0,D1,DH,DONE,DEFAULT,STS,TXT,X,Z
+ S DTIME=$G(DTIME,300)
+ S DONE=0 F  D  Q:DONE
+ . S DEFAULT=$G(^MAGDICOM(2006.563,1,"MLOG NEW/HISTORY"),"New")
+ . W !!,"Historical Log or New Activity?  ",DEFAULT,"// "
+ . R Z:DTIME E  S DONE=1 Q
+ . I Z="" S Z=DEFAULT W Z
+ . I Z="^" S DONE=1 Q
+ . I Z["?" D  Q
+ . . W !!,"Enter 'H' for a report with historical information,"
+ . . W !,"or enter 'N' for a report with only new information."
+ . . Q
+ . I "Hh"[$E(Z) D HISTORY Q
+ . D NEWLOG
+ . Q
+ Q
+ ;
+HISTORY ; display an existing log
+ N FOUND
+ S ^MAGDICOM(2006.563,1,"MLOG NEW/HISTORY")="Historical"
+ ; get the log number
+ W !!,"Log #",?8,"Process Start & End",?29,"Description"
+ W !,"-----",?8,"-------------------",?29,"-----------"
+ S (D0,FOUND,$Y)=0 F  S D0=$O(^MAGDMLOG(D0)) Q:'D0  D  Q:DONE  Q:FOUND
+ . N DATE1,DATE2,END,START,TIME1,TIME2,Y
+ . ; Note: ^MAGDMLOG is extremely volatile:
+ . ; entries may be KILLed while this report is running.
+ . ; Those $G()s are really needed.
+ . W ! I $Y>21 D  Q:DONE  Q:FOUND  ; control scrolling
+ . . W "Enter Log Number or Press <Enter> to continue: " R Z:DTIME E  S Z="^"
+ . . I Z["^" S DONE=1
+ . . I Z,$D(^MAGDMLOG(Z)) S FOUND=Z Q
+ . . F  Q:$X=0  W $C(8,32,8) ; erase the line
+ . . S $Y=0
+ . . Q
+ . W $J(D0,5),?8 S (START,END,DATE1,DATE2)=""
+ . S D1=$O(^MAGDMLOG(D0,2,0))
+ . I D1 S START=$P($G(^MAGDMLOG(D0,2,D1,0)),"^",1)
+ . S D1=$O(^MAGDMLOG(D0,2," "),-1)
+ . I D1 S END=$P($G(^MAGDMLOG(D0,2,D1,0)),"^",1)
+ . S Y="" I START'="" S DATE1=$$DATE(START,$P(START,",",2))
+ . S Y="" I END'="" S DATE2=$$DATE(END,$P(END,",",2))
+ . S TIME1=$E($P(DATE1," ",2),1,5),DATE1=$P(DATE1,"-",1,2)
+ . S TIME2=$E($P(DATE2," ",2),1,5),DATE2=$P(DATE2,"-",1,2)
+ . I DATE1=DATE2 W DATE1," ",TIME1,"  ",TIME2 ; same dates
+ . E  W DATE1,"/",DATE2," ",TIME2  ; different dates
+ . W ?29,$P($G(^MAGDMLOG(D0,0)),"^",3)
+ . Q
+ Q:DONE
+ ;
+ S D0=$O(^MAGDMLOG(" "),-1)
+ I 'D0 W !!,"No entries present in the log ..." S DONE=1 Q
+ ;
+ ; select a log from the list
+ I FOUND S X=FOUND
+ E  F  D  Q:X'=""
+ . W !!,"Enter Log Number: ",D0,"// "
+ . R X:$G(DTIME,300) E  S X="^"
+ . I X="" S X=D0 W X
+ . Q:X["^"
+ . I X["?" D  S X="" Q
+ . . W !!,"Enter the number of the log you wish to view."
+ . . W !,"Select one of the log-numbers from the list above."
+ . . Q
+ . I '$D(^MAGDMLOG(X)) W "  -- Undefined Log" S X=""
+ . Q
+ S D0=X I D0["^" S DONE=1 Q
+ ;
+ F  D  Q:X'=""
+ . W !!,"Display log on Screen, view in Real time, or print to a File?  S// "
+ . R X:DTIME E  S X="^"
+ . Q:X["^"
+ . I X="" S X="S" W X
+ . S X=$TR($E(X),"fsr","FSR")
+ . I "FSR"'[X D  S X="" Q
+ . . W !!,"Enter S to display a historical log on the Screen"
+ . . W !,"      R to display a log in Real time"
+ . . W !,"      F to print a historical log to a File"
+ . . Q
+ . Q
+ I X["^" S DONE=1 Q
+ I X="R" D REALTIME Q
+ D HISTORY1(X)
+ Q
+ ;
+ I X="R" D  Q  ; Display the log in real time TO BE DONE !!!!
+ . S (D1,WAIT)=0
+ . F I=1:1 S J=$O(^MAGDMLOG(D0,1,D1)) D
+ . . I J W !,^MAGDMLOG(D0,1,J,0) S D1=J,WAIT=0 Q
+ . . I WAIT H 1 Q
+ . . ; wait a few milliseconds for the data
+ . . F I=1:1:1000 S J=$O(^MAGDMLOG(D0,1,D1)) Q:J
+ . . I 'J S WAIT=1 H 1
+ . . Q
+ . Q
+ ;
+HISTORY1(MODE) ; Output a historical log either to the Screen or to a File
+ N CHANNEL,LOGDIR,LOGFILE
+ S LOGFILE=""
+ I MODE="F" D  ; open the output file
+ . S CHANNEL=1 D INIT^MAGDTLOG S LOGFILE=LOGDIR_"\LOG.TXT"
+ . W !,"Log being printed to file ",LOGFILE
+ . S STS=$$OPEN^MAGOSFIL(LOGFILE,"W")
+ . I STS<0 D  Q
+ . . I $$USEPRIN^MAGOSFIL(1)
+ . . W !,"Cannot open ",LOGFILE," for write.",!,STS,!
+ . . S LOGFILE=""
+ . . Q
+ . S STS=$$USE^MAGOSFIL(LOGFILE)
+ . Q
+ S $Y=0
+ ;
+ S D1=0 F  S D1=$O(^MAGDMLOG(D0,1,D1)) Q:'D1  D   Q:D1'>0
+ . S TXT=$G(^MAGDMLOG(D0,1,D1,0))
+ . S DH=$P($G(^MAGDMLOG(D0,2,D1,0)),"^",1)
+ . W ! I LOGFILE="",$Y>20 D  ; control scrolling
+ . . W "Press <Enter> to continue, ^ to exit: " R Z:DTIME E  S Z="^"
+ . . I Z="^" S D1=-1 Q
+ . . F  Q:$X=0  W $C(8,32,8) ; erase the line
+ . . S $Y=0
+ . . Q
+ . Q:D1'>0
+ . W TXT ; output the text
+ . I LOGFILE'="" D  ; output format short timestamp
+ . . I DH W ?100,$$DATE(+DH,$P(DH,",",2))
+ . . Q
+ . Q
+ I LOGFILE'="" D  ;
+ . S STS=$$CLOSE^MAGOSFIL(LOGFILE)
+ . I $$USEPRIN^MAGOSFIL(1)
+ . W !,"-DONE-"
+ . Q
+ W !,"-- End of Log --"
+ Q
+ ;
+NEWLOG ; display a new log
+ S ^MAGDICOM(2006.563,1,"MLOG NEW/HISTORY")="New"
+ F  D  Q:X'=""
+ . W !!,"Show new activity in All logs or just the One log?  A// "
+ . R X:DTIME E  Q
+ . I X="" S X="All" W X
+ . I X="^" Q
+ . I "AaOo"'[$E(X) D  S X="" Q
+ . . W !!,"Enter 'A' for a report on all logs,"
+ . . W !,"or enter 'O' for a report on only one log."
+ . . Q
+ . Q
+ I X["^" S DONE=1 Q
+ I "Aa"[$E(X) D ALL Q
+ D ONE
+ Q
+ ;
+ALL ; Display new activity in all logs and display it in real-time
+ N D0,D1,DATA,DASHES,HEADER,I,J,LASTNODE,LASTHEAD
+ W !!,"Ready to display activity in all logs..."
+ S DASHES="" F I=1:1:78 S DASHES=DASHES_"-"
+ ; initialize the counters
+ S D0=0 F  S D0=$O(^MAGDMLOG(D0)) Q:'D0  D
+ . S LASTNODE(D0)=$O(^MAGDMLOG(D0,1,""),-1)
+ . Q
+ S LASTHEAD=""
+ F I=1:1 D  ; display the changes
+ . S (D0,DATA)=0 F  S D0=$O(^MAGDMLOG(D0)) Q:'D0  D
+ . . N HEADER
+ . . S LASTNODE=$O(^MAGDMLOG(D0,1,""),-1)
+ . . I '$D(LASTNODE(D0)) S LASTNODE(D0)=0,LASTHEAD=""
+ . . E  I LASTNODE(D0)'<LASTNODE Q
+ . . ; Display one log
+ . . S HEADER=$P(^MAGDMLOG(D0,0),"^",3)
+ . . I LASTHEAD'=HEADER D
+ . . . W !!,"+",DASHES,"+"
+ . . . W !,"|",?79,"|"
+ . . . W !,"|  ",HEADER,?77,"  |"
+ . . . W !,"|",?79,"|"
+ . . . W !,"+",DASHES,"+"
+ . . . S LASTHEAD=HEADER
+ . . . Q
+ . . F D1=LASTNODE(D0)+1:1:LASTNODE D
+ . . . ; use $G to prevent a race condition problem
+ . . . W !,$G(^MAGDMLOG(D0,1,D1,0),"<no data>")
+ . . . Q
+ . . S LASTNODE(D0)=LASTNODE,DATA=1
+ . . Q
+ . I 'DATA H 1
+ . Q
+ Q
+ ;
+ONE ; Find the next log and display it in real-time
+ N HIT,I,J,MATCH,WAIT
+ F  D  Q:$D(MATCH)  Q:DONE
+ . W !!,"Enter description matching string: "
+ . R X:DTIME E  S X="^"
+ . I X="^" S DONE=1 Q
+ . I X["?" D  Q
+ . . W !!,"Press <Enter> to view the next log activity in real-time."
+ . . W !,"In order to select a specific log, enter matching"
+ . . W !,"characters that will appear in its description."
+ . . Q
+ . X ^%ZOSF("UPPERCASE")
+ . S MATCH=Y
+ . Q
+ Q:DONE
+ W !
+ S HIT=0 F  D  Q:HIT
+ . N HEADER
+ . S D0=$O(^MAGDMLOG(" "),-1)+1
+ . F I=1:1  Q:$D(^MAGDMLOG(D0,0))  D WAIT(I) H 1
+ . H 1 ; wait for original title to be updated to the new title
+ . S HEADER=$P($G(^MAGDMLOG(D0,0)),"^",3,999)
+ . W !,"Receiving """,HEADER,""""
+ . S X=HEADER X ^%ZOSF("UPPERCASE")
+ . I Y'[MATCH W " -- Does not match "
+ . E  S HIT=1
+ . Q
+ D REALTIME
+ Q
+ ;
+REALTIME ; display the contents of the log in real time
+ S (D1,WAIT)=0
+ F I=1:1 S J=$O(^MAGDMLOG(D0,1,D1)) D
+ . I J W !,^MAGDMLOG(D0,1,J,0) S D1=J,WAIT=0
+ . E  D  ; wait for more data
+ . . I 'WAIT D  ; Wait just a few milliseconds for the data
+ . . . F I=1:1:1000 S J=$O(^MAGDMLOG(D0,1,D1)) Q:J
+ . . . I 'J S WAIT=1 ; wait a second before proceeding next time
+ . . . Q
+ . . E  D  H 1 ; wait a second before proceeding
+ . . . S WAIT=WAIT+1
+ . . . D WAIT(WAIT)
+ . . . Q
+ . . Q
+ . Q
+ Q
+ ;
+WAIT(WAIT) ; output the amount of wait time
+ I WAIT<120 D
+ . I '(WAIT#10) D
+ . . I WAIT=10,$X W !
+ . . E  F X=1:1:$X W $C(8)
+ . . W "(waiting ",WAIT," seconds - hit ^C to stop)"
+ . . Q
+ E  I '(WAIT#60) D
+ . F X=1:1:$X W $C(8)
+ . W "(waiting ",WAIT/60," minutes --> hit ^C to stop)"
+ . Q
+ Q
+ ;
+DATE(DH,T) N D,H,M,R,S,Y,X
+ S X=$$HTFM^XLFDT(DH,1)
+ S D=X#100,M=X\100#100,Y=X\10000+1700 S:D<10 D=0_D
+ S M=$P("JAN FEB MAR APR MAY JUN JUL AUG SEP OCT NOV DEC"," ",M)
+ S R=D_"-"_M_"-"_Y
+ D:$D(T)
+ . S H=T\3600,M=T\60#60,S=T#60
+ . S:H<10 H=0_H S:M<10 M=0_M S:S<10 S=0_S
+ . S R=R_" "_H_":"_M_":"_S
+ . Q
+ Q R
+ ;
+
+
+

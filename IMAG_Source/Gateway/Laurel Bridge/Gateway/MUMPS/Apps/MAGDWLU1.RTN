@@ -1,0 +1,152 @@
+MAGDWLU1 ;WOIFO/PMK - Worklist information user ; 12/20/2006 12:43
+ ;;3.0;IMAGING;**21,10,30,51,54**;MAR 19, 2002;;OCT 28, 2009
+ ;; Per VHA Directive 2004-038, this routine should not be modified.
+ ;; +---------------------------------------------------------------+
+ ;; | Property of the US Government.                                |
+ ;; | No permission to copy or redistribute this software is given. |
+ ;; | Use of unreleased versions of this software requires the user |
+ ;; | to execute a written test agreement with the VistA Imaging    |
+ ;; | Development Office of the Department of Veterans Affairs,     |
+ ;; | telephone (301) 734-0100.                                     |
+ ;; | The Food and Drug Administration classifies this software as  |
+ ;; | a medical device.  As such, it may not be changed in any way. |
+ ;; | Modifications to this software may result in an adulterated   |
+ ;; | medical device under 21CFR820, the use of which is considered |
+ ;; | to be a violation of US Federal Statutes.                     |
+ ;; +---------------------------------------------------------------+
+ ;;
+ Q
+ ;
+PNAME ; get patient name attribute
+ N HELP,PROMPT,X
+ S PROMPT="Enter the Patient Name"
+ S HELP(1)="Enter the Patient Name in ""LAST^FIRST MI"" format"
+ S HELP(2)="You can enter a partial match and use ""*"" as a wild-card"
+ S HELP(3)="Alternatively, you may enter the ""Quick PID"", which is the initial of"
+ S HELP(4)="the last name followed by the last four SSN digits (e.g., A1234)"
+ S X=$$GETKEY(ATTRIB,PROMPT,.HELP)
+ Q
+ ;
+PID ; get patient id attribute
+ N HELP,PROMPT,X
+ S PROMPT="Enter the Patient ID"
+ S HELP(1)="Enter the Patient ID (Social Security Number)"
+ S HELP(2)="You may also enter the ""Quick PID"", which is the initial of"
+ S HELP(3)="the last name followed by the last four SSN digits (e.g., A1234)"
+ S X=$$GETKEY(ATTRIB,PROMPT,.HELP)
+ Q
+ ;
+STUDY ; enter the accession number or the case number
+ N HELP,PROMPT,X
+ S PROMPT="Enter the Accession Number or the Case Number"
+ S HELP(1)="For Radiology, the Accession Number is the Date-Case Number"
+ S HELP(2)="You may also enter just the Case Number"
+ S HELP(3)="For CPRS Requests, it is ""GMRC-"" followed by the request number"
+ S X=$$GETKEY(ATTRIB,PROMPT,.HELP)
+ Q
+ ;
+REQPROC ; enter the request number or the case number
+ N HELP,PROMPT,X
+ S PROMPT="Enter the Requested Procedure ID"
+ S HELP(1)="For Radiology, the Request Procedure ID is the Case Number"
+ S HELP(2)="For CPRS Requests, this value is the number of the request"
+ S X=$$GETKEY(ATTRIB,PROMPT,.HELP)
+ Q
+ ;
+MODALITY ; select the modality
+ N HELP,PROMPT,X
+ S PROMPT="Enter the 2-character Modality Code"
+ S HELP(1)="Please enter the DICOM modality value"
+ S HELP(2)="Examples: CR, CT, DX, MR, NM, RF, US, XA"
+ S X=$$GETKEY(ATTRIB,PROMPT,.HELP,"$$CHECKMOD(.X)")
+ Q
+ ;
+CHECKMOD(X) ; check the validity of the entered modality value
+ N DICTIEN,MODALIEN,RETURN,Y
+ X ^%ZOSF("UPPERCASE") S X=Y
+ I X="" S RETURN=0
+ E  D
+ . S DICTIEN=$O(^MAGDICOM(2006.51,"B","0008,0060",""))
+ . I 'DICTIEN D
+ . . W !!,"Please run the menu option to Reinitialize All the DICOM Master Files",!
+ . . S RETURN=-1
+ . . Q
+ . E  S MODALIEN=$O(^MAGDICOM(2006.51,DICTIEN,1,"B",X,"")) I 'MODALIEN D
+ . . W !,"*** Warning: Modality """,X,""" is not defined in DICOM."
+ . . S RETURN=-1
+ . . Q
+ . E  D
+ . . W " -- ",$P($P(^MAGDICOM(2006.51,DICTIEN,1,MODALIEN,0),"^",2),"=",1)
+ . . R Y:5
+ . . S RETURN=0
+ . . Q
+ . Q
+ Q RETURN
+ ;
+STRTDATE ; start date, may be a range
+ N HELP,PROMPT,X
+ S PROMPT="Start Date (yyyymmdd or yyyymmdd-yyyymmdd)"
+ S HELP(1)="The start date can be entered in several formats:"
+ S HELP(2)="   1)  yyyymmdd  (selects only one date)"
+ S HELP(3)="   2)  yyyymmdd- (selects that date and subsequent ones)"
+ S HELP(4)="   3) -yyyymmdd  (selects that date and prior ones)"
+ S HELP(5)="   4)  yyyymmdd-yyyymmdd (selects an inclusive range of dates)"
+ S HELP(6)="   5)  FileMan ""T..."" dates are accepted and converted to yyyymmdd"
+ S HELP(7)="Remember, a CPRS Request must be SCHEDULED for date query to work!"
+ S X=$$GETKEY(ATTRIB,PROMPT,.HELP,"$$CHKDATE(.X)")
+ Q
+ ;
+CHKDATE(X) ; check the starting date
+ I (X?1"T".E)!(X="NOW") D
+ . N %DT
+ . S %DT="TS" D ^%DT
+ . S X=Y\1,$E(X)=$E(X)+17
+ . Q
+ Q $S(X="":0,X?8N:0,X?8N1"-":0,X?1"-"8N:0,X?8N1"-"8N:0,1:-1)
+ ;
+STRTTIME ; start time, may be a range
+ N HELP,PROMPT,X
+ S PROMPT="Start Time (hhmmss or hhmmss-hhmmss)"
+ S HELP(1)="The start time can be entered in several formats:"
+ S HELP(2)="   1)  hhmmss  (selects only one time - not too useful!)"
+ S HELP(3)="   2)  hhmmss- (selects that time and subsequent ones)"
+ S HELP(4)="   3) -hhmmss  (selects that time and prior ones)"
+ S HELP(5)="   4)  hhmmss-hhmmss (selects an inclusive range of times)"
+ S HELP(6)="Note: all times are 24-hour"
+ S HELP(7)="Remember, a CPRS Request must be SCHEDULED for date/time query to work!"
+ S X=$$GETKEY(ATTRIB,PROMPT,.HELP)
+ Q
+ ;
+CHKTIME(X) ; check the starting time
+ Q $S(X="":0,X?6N:0,X?6N1"-":0,X?1"-"6N:0,X?6N1"-"6N:0,1:-1)
+ ;
+GETKEY(ATTRIB,PROMPT,HELP,CHECK) ; get the value for the key
+ N DONE,DEFAULT,I,X
+ S DEFAULT=$G(^TMP("MAG","MOD WORK LIST",ATTRIB))
+ S DONE="" F  D  Q:DONE
+ . W !!,PROMPT,":  " I DEFAULT'="" W DEFAULT,"// "
+ . R X:DTIME I X="" S X=DEFAULT W X
+ . I X["?" D
+ . . W ! S I=0 F  S I=$O(HELP(I)) Q:'I  W !,HELP(I)
+ . . I DEFAULT'="" W !,"(Enter ""@"" to delete the default value)"
+ . . Q
+ . E  S DONE=1 I X'="^" D  ; a caret will terminate the program
+ . . I X="@" K ^TMP("MAG","MOD WORK LIST",ATTRIB) W " -- deleted"
+ . . E  D
+ . . . I $D(CHECK),@CHECK W "  Illegal Value" S DONE=0
+ . . . E  S ^TMP("MAG","MOD WORK LIST",ATTRIB)=X
+ . . . Q
+ . . Q
+ . Q
+ Q X
+ ;
+KILL ; remove the old query variables
+ K ^TMP("MAG","MOD WORK LIST","ACCESSION NUMBER")
+ K ^TMP("MAG","MOD WORK LIST","REQUESTED PROCEDURE ID")
+ K ^TMP("MAG","MOD WORK LIST","MODALITY")
+ K ^TMP("MAG","MOD WORK LIST","PATIENT NAME")
+ K ^TMP("MAG","MOD WORK LIST","PATIENT ID")
+ K ^TMP("MAG","MOD WORK LIST","START DATE")
+ K ^TMP("MAG","MOD WORK LIST","START TIME")
+ Q
+ ;

@@ -1,0 +1,63 @@
+MAGQTST ;
+ Q
+RADHLD(RESULT,SWITCH,FROM,TO) ;
+ N TEMP,RADIEN,MAGIEN,CNT,ECNT,HCNT,MAGDFN,I
+ K RESULT
+ W:((SWITCH'=0)&(SWITCH'=1)) !,"ILLEGAL SWITCH"
+ S MAGIEN=$O(^MAG(2005,FROM),-1),(HCNT,ECNT,CNT)=0
+ F  S MAGIEN=$O(^MAG(2005,MAGIEN))  Q:MAGIEN'?1N.N  Q:MAGIEN>TO  D
+ . S (RADIEN,DONE)=0
+ . S CNT=CNT+1
+ . Q:'$D(^(MAGIEN,2))
+ . S TEMP=^(2)
+ . S MAGDFN=$P(^MAG(2005,MAGIEN,0),"^",7)
+ . I MAGDFN'?1N.N D  Q
+ . . ;W !,"Image #: ",MAGIEN," has no valid Patient ID"
+ . . S ECNT=ECNT+1
+ . I $P($G(^DPT(MAGDFN,0)),"^")="" D  Q
+ . . ;W !,"Image #: ",MAGIEN," has no valid Patient ID"
+ . . S ECNT=ECNT+1
+ . Q:$P(TEMP,"^",7)=""
+ . Q:$P(TEMP,"^",7)'?1N.N
+ . Q:$P(TEMP,"^",6)'=74
+ . Q:'$D(^RARPT($P(TEMP,"^",7),0))
+ . S RADIEN=$P(TEMP,"^",7)
+ . Q:RADIEN'?1N.N
+ . S RADDFN=$P(^RARPT(RADIEN,0),"^",2)
+ . I ((RADDFN'?1N.N)!($P($G(^DPT(RADDFN,0)),"^")="")) D  Q
+ . . ;W !,"Radiology Report #: ",RADIEN," has no valid Patient ID"
+ . . S ECNT=ECNT+1
+ . I MAGDFN'=RADDFN D  Q
+ . . W !,"Radiology Report #: ",RADIEN," references Patient #: ",RADDFN
+ . . W !,"The Radiology report references Image #: ",MAGIEN
+ . . W !,"This Image references Patient #: ",MAGDFN
+ . . S ECNT=ECNT+1
+ . D RDSET(RADIEN,SWITCH,.HCNT)
+ . Q
+ . F  S RADIEN=$O(^RARPT(RADIEN)) Q:RADIEN'?1N.N  D  Q:DONE
+ . . Q:'$D(^RARPT(RADIEN,2005))
+ . . S SUB=0
+ . . F  S SUB=$O(^RARPT(RADIEN,2005,SUB)) Q:SUB'?1N.N  D  Q:DONE
+ . . . Q:$G(^RARPT(RADIEN,2005,SUB,0))'=MAGIEN
+ . . . D RDSET(RADIEN,SWITCH,.CNT)
+ . . . S DONE=1
+ W !,"Patient ID Error count: ",ECNT
+ W !,"Evaluation CNT: ",CNT
+ W !,"Radiology Holds switched ",$S(SWITCH=0:"OFF",SWITCH=1:"ON")," : ",HCNT
+ S I=0
+ F  S I=$O(RESULT(I)) Q:I'?1N.N  D
+ . W !,"Image/Radiology IEN: ",I,"/",RESULT(I)
+ Q
+RDSET(IEN,SW,CNT) ;
+ S ^RARPT(IEN,"NOPURGE")=$S(SW=0:"o",1:"n")
+ S HCNT=HCNT+1
+ S RESULT(MAGIEN)=IEN
+ Q
+RDCHK(MAGIEN,RADIEN,CNT) ;
+ N MAGDFN
+ S CNT=CNT+1
+ I $P(^RARPT(RADIEN,0),"^",2)'=$P(^MAG(2005,MAGIEN,0),"^",7) D
+ . W !,"RAD: ",$P($G(^DPT($P($G(^RARPT(RADIEN,0)),"^",2),0)),"^")
+ . W " MAG: ",$P($G(^DPT($P($G(^MAG(2005,MAGIEN,0)),"^",7),0)),"^")
+ . W MAGIEN," ",RADIEN
+ Q

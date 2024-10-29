@@ -1,0 +1,46 @@
+						May 17, 2002
+
+Please read the Release Notes carefully.  This is a beta release
+with features for Explicit VR Transfer Syntaxes, including
+those with encapsulated pixels.  This has only
+been tested with a few applications.  If you want to use the image
+archive, do not use this release.
+
+Welcome to the DICOM software produced by the Mallinckrodt Institute of
+Radiology (MIR) under contract to the Radiological Society of North America.
+Copyright notice and terms and conditions for the use of this software
+are found in the file "copyright" in this directory and in all source
+code files.
+
+This is version 3.0.4 of the software.  The release notes
+on our web page contain the changes for this release.
+
+If you are retrieving the software from an ftp server, you should
+have a file ctn-3.0.4.tar.Z.  This is a tar file that has been compressed
+with unix compress.  Uncompress and untar the file.  We have
+also included the software in ctn-3.0.4.zip.  The contents
+are the same as the tar file.
+
+Documentation is found in the "doc" directory (stored in postscript).
+You may decide to print the installation instructions first,
+found in doc/installation.ps.  There is a script in that directory
+(print_docs) which prints all of the documentation.  All you need to do
+is supply a printer name.  There will be nearly 500 pages of documentation.
+
+Note: Our ftp site maintains a "doc" directory in case you want to
+  retrieve individual documents before you obtain the entire distribution.
+  The distribution file also contains the same doc directory with postscript
+  documents.
+
+Documents are also found in pdf format in the same directory.
+Use a web browswer to open the file doc_index.html.  It
+has the links to the pdf documents.
+
+Discussion of this implementation and of DICOM related issues
+is publicized in several ways.  The newsgroup comp.protocols.dicom
+was established to handle DICOM related issues, including RSNA
+demonstrations.
+
+Bug reports should be sent to
+	dicom_bugs@wuerl.wustl.edu
+We will repair bugs as time permits.

@@ -1,0 +1,777 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Publish" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+	
+	<PropertyGroup>
+		
+		<!-- ****************************************************** -->
+		<!-- Input parameters -->
+		<PatchNumber></PatchNumber>
+		<TestNumber></TestNumber>
+		<SequenceNumber></SequenceNumber>
+		<CodeBaseDir></CodeBaseDir>
+		<StageToSQA></StageToSQA>
+		<!-- using SequenceNumber as BuildNumber -->
+		<BuildNumber>$(SequenceNumber)</BuildNumber>	
+		
+		<ProjectName>GW</ProjectName>
+		<TempFolder>\temp</TempFolder>		
+		<BuildCompressed>true</BuildCompressed>
+			
+		<PaddedPatchNumber>$(PatchNumber)</PaddedPatchNumber>
+		<PaddedPatchNumber Condition="$(PatchNumber) &lt; 100">0$(PatchNumber)</PaddedPatchNumber>
+		<PaddedPatchNumber Condition="$(PatchNumber) &lt; 10">00$(PatchNumber)</PaddedPatchNumber>
+		<!-- PatchFolderName>V3.0p$(PaddedPatchNumber)Sequence$(SequenceNumber)</PatchFolderName -->
+		<PatchFolderName>P$(PatchNumber)-T$(TestNumber)-S$(SequenceNumber)</PatchFolderName>
+				
+		<BuildDir>$(CodeBaseDir)\Builds</BuildDir>		
+		<OutputDir>$(BuildDir)\$(ProjectName)</OutputDir>	
+		<FullBuildPath>$(OutputDir)\$(PatchFolderName)</FullBuildPath>	
+		
+		<ReleaseDir>$(CodeBaseDir)\IMAG_Build\Release</ReleaseDir>
+		<GWBaselineDir>$(ReleaseDir)\Gateway</GWBaselineDir>
+		<SourceGWDir>$(CodeBaseDir)\IMAG_Source\Gateway</SourceGWDir>
+		<ToolsDir>$(CodeBaseDir)\IMAG_Build\Tools</ToolsDir>
+		<LegacyVSSGatewayDir>$(CodeBaseDir)\IMAG_Build\LegacyVSS\GW</LegacyVSSGatewayDir>
+		<BuildManifestFilePath>$(CodeBaseDir)\IMAG_Build\Configuration\GWBuildConfiguration\</BuildManifestFilePath>	
+		<DependPatchesDir>$(SourceGWDir)</DependPatchesDir>
+					
+		<NonVisaCfgDir>$(CodeBaseDir)\IMAG_Build\Configuration\NonVisaConfig</NonVisaCfgDir>
+		
+		<MumpsFormatterExe>$(GWBaselineDir)\Source Code\Pre_Compiled\MumpsFormatter.exe</MumpsFormatterExe>
+		<SetBuildExe>$(GWBaselineDir)\Source Code\Pre_Compiled\SetBuild.exe</SetBuildExe>
+				
+		<ExeFileName>MAG3_0P$(PatchNumber)T$(TestNumber)_DICOM_setup.exe</ExeFileName>	
+		
+		<!-- Specfic defined parameters for Build-4 server -->
+		<NmakeHome Condition="'$(COMPUTERNAME)'=='isw-imgxpvmbld4'">"C:\Program Files\Microsoft Visual Studio 10.0\VC\bin"</NmakeHome>
+		<VBHome Condition="'$(COMPUTERNAME)'=='isw-imgxpvmbld4'">C:\Program Files\Microsoft Visual Studio\VB98</VBHome>
+		<AccuSoft16PackageDir Condition="'$(COMPUTERNAME)'=='isw-imgxpvmbld4'">C:\Program Files\AccuSoft\ImageGear v16\MD\ActiveX\Samples\Delphi2007\Package</AccuSoft16PackageDir>
+		<DelphiFilmanexDir Condition="'$(COMPUTERNAME)'=='isw-imgxpvmbld4'">C:\Documents and Settings\All Users\Documents\RAD Studio\5.0\Demos\DelphiWin32\VCLWin32\Doc\Filmanex</DelphiFilmanexDir>
+		<Delphi2007Dir Condition="'$(COMPUTERNAME)'=='isw-imgxpvmbld4'">C:\Program Files\CodeGear\RAD Studio\5.0</Delphi2007Dir>
+		<AccuSoft15IncludeDir Condition="'$(COMPUTERNAME)'=='isw-imgxpvmbld4'">C:\Program Files\AccuSoft\ImageGear v15\MD\DLL\Include</AccuSoft15IncludeDir>
+		<MsSdkIncludeDir Condition="'$(COMPUTERNAME)'=='isw-imgxpvmbld4'">C:\Program Files\Microsoft Visual Studio\VC98\Include</MsSdkIncludeDir>
+		<NetworkBuildDir Condition="'$(COMPUTERNAME)'=='isw-imgxpvmbld4'">\\W2k8-stvi-sqa\Release\ReadyToTest\Patch$(PatchNumber)</NetworkBuildDir>
+		<MSBuildInstallShieldDir Condition="'$(COMPUTERNAME)'=='isw-imgxpvmbld4'">C:\Program Files\MSBuild\InstallShield\2012Spring</MSBuildInstallShieldDir>
+		<Cache2010DistDir Condition="'$(COMPUTERNAME)'=='isw-imgxpvmbld4'">C:\Cache Distributions\Cache2010</Cache2010DistDir>
+		<AccuSoft15MedDir Condition="'$(COMPUTERNAME)'=='isw-imgxpvmbld4'">C:\Program Files\AccuSoft\ImageGear v15\MD\ActiveX\Samples\Delphi7\Medical</AccuSoft15MedDir>
+		<InstallShieldPath Condition="'$(COMPUTERNAME)'=='isw-imgxpvmbld4'">C:\Program Files\InstallShield\2012Spring\System</InstallShieldPath>
+		
+		<!-- =============================================================================== -->
+			
+		<!-- Specfic defined parameters for Build-5 server -->	
+		<NmakeHome Condition="'$(COMPUTERNAME)'=='VAAUSVIMAPP872'">"C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin"</NmakeHome>
+		<VBHome Condition="'$(COMPUTERNAME)'=='VAAUSVIMAPP872'">C:\Program Files (x86)\Microsoft Visual Studio\VB98\</VBHome>
+		<Delphi2007Dir Condition="'$(COMPUTERNAME)'=='VAAUSVIMAPP872'">C:\Program Files (x86)\CodeGear\RAD Studio\5.0</Delphi2007Dir> 
+		<AccuSoft16PackageDir Condition="'$(COMPUTERNAME)'=='VAAUSVIMAPP872'">C:\Program Files (x86)\AccuSoft\ImageGear v16\MD\ActiveX\Samples\Delphi2007\Package</AccuSoft16PackageDir>
+		<DelphiFilmanexDir Condition="'$(COMPUTERNAME)'=='VAAUSVIMAPP872'">C:\Users\Public\Documents\RAD Studio\5.0\Demos\DelphiWin32\VCLWin32\Doc\Filmanex</DelphiFilmanexDir>					
+		<AccuSoft15IncludeDir Condition="'$(COMPUTERNAME)'=='VAAUSVIMAPP872'">C:\Program Files (x86)\AccuSoft\ImageGear v15\MD\DLL\Include</AccuSoft15IncludeDir>
+		<MsSdkIncludeDir Condition="'$(COMPUTERNAME)'=='VAAUSVIMAPP872'">C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\Include</MsSdkIncludeDir>
+		<NetworkBuildDir Condition="'$(COMPUTERNAME)'=='VAAUSVIMAPP872'">\\vaausvimapp804.aac.dva.va.gov\CM\ReadyToTest\Patch$(PatchNumber)</NetworkBuildDir>
+		<MSBuildInstallShieldDir Condition="'$(COMPUTERNAME)'=='VAAUSVIMAPP872'">C:\Program Files (x86)\MSBuild\InstallShield\2012Spring</MSBuildInstallShieldDir>
+		<Cache2010DistDir Condition="'$(COMPUTERNAME)'=='VAAUSVIMAPP872'">E:\BuildLib\Cache Distributions\Cache2010</Cache2010DistDir>
+		<AccuSoft15MedDir Condition="'$(COMPUTERNAME)'=='VAAUSVIMAPP872'">C:\Program Files (x86)\AccuSoft\ImageGear v15\MD\ActiveX\Samples\Delphi7\Medical</AccuSoft15MedDir>
+		<InstallShieldPath Condition="'$(COMPUTERNAME)'=='VAAUSVIMAPP872'">C:\Program Files (x86)\InstallShield\2012Spring\System</InstallShieldPath>
+		
+		<MSBuildExtensionsPath Condition="'$(COMPUTERNAME)'=='VAAUSVIMAPP872'">$(MSBuildExtensionsPath64)</MSBuildExtensionsPath>	
+		<!-- =============================================================================== -->
+		
+		<!-- This is the way Capture and Display have for ProductionVersion	
+		<ProductVersion Condition="'$(ProductVersionInclude)'!='false'">30.$(SequenceNumber).$(PatchNumber).$(TestNumber)</ProductVersion 
+		 -->
+		<ProductVersion Condition="'$(ProductVersionInclude)'!='false'">3.0.$(PatchNumber).$(TestNumber)</ProductVersion>
+					
+		<CreateMsi>false</CreateMsi>
+		<PackageCodeInclude>false</PackageCodeInclude>
+		<BuildCompressed>True</BuildCompressed>			
+		
+		<InstallShieldProject>$(FullBuildPath)$(TempFolder)\Install\InstallShield\DICOM_Silent_Install_2011.ism</InstallShieldProject>
+	
+	</PropertyGroup>
+	
+	<!-- ============================================================================  -->
+	<Import Project="$(MSBuildInstallShieldDir)\InstallShield.targets"/>	
+	<Import Project="$(MSBuildExtensionsPath)\MSBuildCommunityTasks\MSBuild.Community.Tasks.Targets"/>
+	<Import Project="$(MSBuildExtensionsPath)\ExtensionPack\4.0\MSBuild.ExtensionPack.tasks" /> 
+	<Import Project="$(SourceGWDir)\build.Gateway.prop"/>
+	<Import Project="$(NonVisaCfgDir)\Common\build.VistAImaging.xml"/>
+		
+	<!-- =============================================================================== -->
+	<!-- =============================================================================== -->	
+	<UsingTask TaskName="FormatPatchNumber" TaskFactory="CodeTaskFactory" AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.v4.0.dll" >
+		<ParameterGroup>
+			<UnformattedPatchNum ParameterType="System.String" Required="true" />
+			<FormattedPatchNumber ParameterType="System.String" Output="true" />
+		</ParameterGroup>
+		<Task>
+			<Code Type="Fragment" Language="cs">
+				<![CDATA[
+					int patchNum=Convert.ToInt32(UnformattedPatchNum);
+					if (patchNum<100)  										//if the patch number is less than 100 add a 0 to the front of the patch number
+						FormattedPatchNumber="0" + UnformattedPatchNum;
+					else
+						FormattedPatchNumber=UnformattedPatchNum;
+				
+					]]>		 
+			</Code>
+		</Task>
+	</UsingTask>		
+
+	<!-- =============================================================================== -->
+	<!-- =============================================================================== -->
+	<UsingTask TaskName="ReadManifest" TaskFactory="CodeTaskFactory" AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.v4.0.dll" >
+		  
+		<ParameterGroup>
+			<PatchNumber ParameterType="System.String" Required="true" />
+			<BuildManifestFilePath ParameterType="System.String" Required="true" />
+			<BuildManifestFileNumber ParameterType="System.String" Required="true" />
+			<FolderPath ParameterType="System.String" Required="true" />
+			<RtnFileNames ParameterType="System.String" Output="true" />
+			<DDFileNames ParameterType="System.String" Output="true" />				
+		</ParameterGroup>
+		
+		<Task>
+			<Reference Include="System.Xml" />	
+			<Using Namespace="System.Xml" />
+			<Code Type="Fragment" Language="cs">
+				<![CDATA[
+					string rtnAttrVal;
+					string dicAttrVal;
+					string patchRtns="";	
+					string patchDD="";
+					string buildManifest;
+					
+					if (Convert.ToInt32(BuildManifestFileNumber)<100)
+						buildManifest=BuildManifestFilePath+"MAG_3_0_0" + BuildManifestFileNumber + ".xml";
+					else
+						buildManifest=BuildManifestFilePath+"MAG_3_0_" + BuildManifestFileNumber + ".xml";
+					
+					XmlDocument xml = new XmlDocument();
+					xml.Load(buildManifest); 
+					XmlNodeList xnRtnList = xml.GetElementsByTagName("routine");
+					for (int i=0; i < xnRtnList.Count; i++){
+						rtnAttrVal=xnRtnList[i].Attributes["export"].Value;
+						patchRtns=rtnAttrVal+";"+patchRtns;
+					}
+					
+					XmlNodeList xnDicList = xml.GetElementsByTagName("dictionary");
+					for (int i=0; i < xnDicList.Count; i++){
+						dicAttrVal=xnDicList[i].Attributes["export"].Value;
+						patchDD=dicAttrVal+";"+patchDD;
+					}
+					DDFileNames=patchDD;		//return a list of routines and dictonary files listed in manifest.
+					RtnFileNames=patchRtns;
+				]]>
+			</Code>
+		</Task>
+		
+	</UsingTask>
+	
+	<!-- =============================================================================== -->
+	<!-- =============================================================================== -->
+	<UsingTask TaskName="ProcessSecondLine" TaskFactory="CodeTaskFactory" AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.v4.0.dll" >
+		  <ParameterGroup>
+			<Routine ParameterType="System.String" Required="true" />
+			<BaselineDir ParameterType="System.String" Required="true" />
+			<PatchNumber ParameterType="System.String" Required="true" />
+			<BuildNumber ParameterType="System.String" Required="true" />
+			<BuildDate ParameterType="System.String" Required="true" />
+			<FilteredLine ParameterType="System.String" Output="true" />		
+		</ParameterGroup>
+		<Task>
+			<Using Namespace="System.Text.RegularExpressions" />
+			<Code Type="Fragment" Language="cs">
+				<![CDATA[
+					int posone; string p; int postwo; int substrlength; string line;
+					string comma=""; 
+					string routineloc=BaselineDir + Routine;
+					string trimmedp="";
+					string oldDate="Mar 19, 2002";
+					if (Directory.GetFiles(BaselineDir,Routine).Length > 0){  //check that the rtn or dic is in the baseline
+						StreamReader sr = new StreamReader(routineloc);
+						line = sr.ReadLine();  //read second line of rtn or dic.
+						line = sr.ReadLine();
+						if (line.IndexOf("**")!=-1){}
+						
+						else{       //after first run of mumpsformatter 'second line' is now on the fifth line.
+							line = sr.ReadLine();  
+							line = sr.ReadLine();
+							line = sr.ReadLine(); 
+							}
+							
+						if (line.IndexOf("**")!=-1){	
+							posone = line.IndexOf("**") + 2;
+							postwo = line.LastIndexOf("**");
+							substrlength=postwo-posone;
+							p = line.Substring(posone, substrlength); 	//get the string between ** and **
+							
+							Match m=Regex.Match(p,PatchNumber);			//Remove duplicate patch folder if it exists.
+							if (m.Success){
+								Match m1=Regex.Match(p,PatchNumber+",");
+								if(m1.Success){
+									p=Regex.Replace(p,PatchNumber+",","");}
+								else{
+									p=Regex.Replace(p,PatchNumber+"*","");}
+							} 
+							trimmedp=p.TrimEnd(','); //Remove extra comma if it exists.
+							comma=",";
+							
+							if (string.IsNullOrEmpty(trimmedp)){
+								comma="";}
+							}
+							
+						if (line.IndexOf("**;") !=-1 ) {
+							posone = line.LastIndexOf("**;")+3;			// extract date
+							postwo = posone + 12;						// ex: 'Mar 19, 2002' = 12 chars
+							substrlength=postwo-posone;
+							oldDate = line.Substring(posone, substrlength);
+						}		
+								
+						sr.Close();	
+					}
+					
+					//string fullsecondline=" ;;3.0;IMAGING;**"+trimmedp+comma+PatchNumber+"**;~date~";
+					string fullsecondline=" ;;3.0;IMAGING;**"+trimmedp+","+PatchNumber+"**;"+oldDate+";Build "+BuildNumber+";"+BuildDate;					
+					FilteredLine=fullsecondline; 
+				]]>
+			</Code>
+		</Task>
+	</UsingTask>	
+
+	<!-- =============================================================================== -->
+	<!-- =============================================================================== -->
+	<UsingTask TaskName="GetPatchNumbers" TaskFactory="CodeTaskFactory" AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.v4.0.dll" >
+		<ParameterGroup>
+			<PatchNumber ParameterType="System.String" Required="true" />
+			<PatchSeqFile ParameterType="System.String" Required="true" />
+			<ItemList ParameterType="Microsoft.Build.Framework.ITaskItem[]" Output="true" />
+		</ParameterGroup>
+		
+		<Task>
+			<Reference Include="System.Xml" />	
+			<Using Namespace="System.Xml" />
+			<Code Type="Fragment" Language="cs">
+				<![CDATA[
+					var dicompatchlist = new List<ITaskItem>();
+					string number;
+					int patch= Convert.ToInt32(PatchNumber);
+					XmlDocument xml = new XmlDocument();
+					xml.Load(PatchSeqFile); 
+					XmlNodeList xnList=xml.SelectNodes("//dev/patches/patch[@type='DICOM']");
+					foreach (XmlNode xn in xnList)
+					{
+						number = (xn.InnerText);
+						dicompatchlist.Add(new TaskItem(number));
+						if (number == PatchNumber)
+							break;
+					} //for
+					
+					ItemList = dicompatchlist.ToArray();
+				]]>		
+			</Code>
+		</Task>
+	</UsingTask>
+
+	<!-- =============================================================================== -->
+	<!-- =============================================================================== -->	
+	<UsingTask TaskName="GetPatchBuildInfo" TaskFactory="CodeTaskFactory" AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.v4.0.dll" >
+		  <ParameterGroup>
+			<PatchNumber ParameterType="System.String" Required="true" />			
+			<BuildManifestFilePath ParameterType="System.String" Required="true" />
+			<BldNumber ParameterType="System.String" Output="true" />
+			<BldDate ParameterType="System.String" Output="true" />				
+		</ParameterGroup>
+		<Task>
+			<Reference Include="System.Xml" />	
+			<Using Namespace="System.Xml" />
+			<Code Type="Fragment" Language="cs">
+				<![CDATA[
+					string tmpAttrVal1;
+					string tmpAttrVal11="";
+					string tmpAttrVal2;
+					string tmpAttrVal22="";
+					string buildManifest;
+					if (Convert.ToInt32(PatchNumber)<100)
+						buildManifest=BuildManifestFilePath+"MAG_3_0_0" + PatchNumber + ".xml";
+					else
+						buildManifest=BuildManifestFilePath+"MAG_3_0_" + PatchNumber + ".xml";
+					XmlDocument xml = new XmlDocument();
+					xml.Load(buildManifest); 
+					XmlNodeList bldInfoList = xml.GetElementsByTagName("BuildInfo");
+					for (int i=0; i < bldInfoList.Count; i++){
+						tmpAttrVal1=bldInfoList[i].Attributes["BuildNumber"].Value;
+						tmpAttrVal11=tmpAttrVal1;						
+						tmpAttrVal2=bldInfoList[i].Attributes["BuildDate"].Value;
+						tmpAttrVal22=tmpAttrVal2;						
+					}
+					BldNumber=tmpAttrVal11;									
+					BldDate=tmpAttrVal22;
+				]]>
+			</Code>
+		</Task>
+	</UsingTask>
+		
+	<!-- =============================================================================== -->
+	<!-- =============================================================================== -->	
+	<!-- Delete previous build (if build folder exists) -->
+	<Target Name="CleanPreviousBuild" >
+		<RemoveDir Directories="$(FullBuildPath)" Condition="Exists('$(FullBuildPath)')"/>
+	</Target>
+
+	<!-- =============================================================================== -->
+	<!-- =============================================================================== -->		
+	<Target Name="CreateItemGroups" DependsOnTargets="CleanPreviousBuild" >
+
+		<ItemGroup>
+
+			<BaselineUtilities Include="$(GWBaselineDir)\Source Code\C-Store\**\*.*"  > 
+				<ParentFolder>C-Store</ParentFolder>	
+			</BaselineUtilities>
+			
+			<BatchFiles Include="$(GWBaselineDir)\Source Code\Batch_Files\*.bat" />
+			<MakeAbsFiles Include="$(GWBaselineDir)\Source Code\MakeAbs\**\*.*" />
+			<ImageFiles Include="$(GWBaselineDir)\Source Code\DCMAbstract\canned_image.jpg" />		
+
+			<TagNames Include="routine;dictionary" />
+				
+			<InstallCacheFiles Include="$(GWBaselineDir)\Install\Cache\**\*.*" /> 
+			<InstallSystemFiles Include="$(GWBaselineDir)\Install\System\**\*.*" />
+			<InstallBogusFile Include="$(GWBaselineDir)\Install\InstallShield\BOGUS.txt" />
+
+			<IconFiles Include="$(GWBaselineDir)\ICON\**\*.*" />
+			<BaselineMumpsFiles Include="$(GWBaselineDir)\MUMPS\DICOM\*.*" /> 
+			<BaselineDictFiles Include="$(GWBaselineDir)\DICT\**\*.*" /> 		
+			<ImageFiles Include="$(GWBaselineDir)\Images\**\*.*" /> 			
+			<DCMView Include="$(GWBaselineDir)\Distrib\MAG_DCMView.exe" /> 
+			<WebFiles Include="$(GWBaselineDir)\Web\**\*.*" /> 			
+
+			<UtilitiesSource Include="$(ToolsDir)\**\*.*" /> 
+			<UtilitiesSource Include="$(LegacyVSSGatewayDir)\utilities\**\*.*"  />  
+			<UtilitiesSource Include="$(LegacyVSSGatewayDir)\utilities\Mag_Recon.txt" />
+			
+			<SharedExeFiles Include="$(ToolsDir)\**\*.*" /> 
+							
+			<AccusoftFiles Include="$(LegacyVSSGatewayDir)\3rd Party Source\Accusoft\Accusoft15\**\*.*" />
+
+			<!-- on IMAG_Source -->
+			<DCF_Runtime Include="$(SourceGWDir)\Laurel Bridge\**\*.*" Exclude="$(SourceGWDir)\Laurel Bridge\DCF_RunTime_Install.zip"/>
+			<InstallShieldFiles Include="$(SourceGWDir)\AutoRun\**\*.*" />
+
+			<!-- After copying -->					
+			<WorkDicts Include="$(FullBuildPath)$(TempFolder)\Dict\Work\*.dic" />	
+			<SecondLineMumpsFile Include="$(FullBuildPath)$(TempFolder)\MUMPS\Work\2nd_Line.txt" />
+			<SecondLineDictFile Include="$(FullBuildPath)$(TempFolder)\Dict\Work\2nd_Line.txt" />
+			
+		</ItemGroup>
+
+	</Target>	
+	
+	<!-- =============================================================================== -->
+	<!-- =============================================================================== -->		
+	<!-- Create build ouput directories -->
+	<Target Name="CreateDirectories" DependsOnTargets="CreateItemGroups" >
+		
+		<MakeDir directories="$(FullBuildPath)$(TempFolder)" />
+		<MakeDir directories="$(FullBuildPath)$(TempFolder)" />
+		<MakeDir directories="$(FullBuildPath)$(TempFolder)\Distrib"  />
+		<MakeDir directories="$(FullBuildPath)$(TempFolder)\Utilities"  />
+		<MakeDir directories="$(FullBuildPath)$(TempFolder)\Source"  />
+		<MakeDir directories="$(FullBuildPath)$(TempFolder)\DICT"  />
+		<MakeDir directories="$(FullBuildPath)$(TempFolder)\INSTALL\Cache\C_DIST"  />
+		<MakeDir directories="$(FullBuildPath)$(TempFolder)\Source\Batch_Files"  />
+		<MakeDir directories="$(FullBuildPath)$(TempFolder)\INSTALL\Cache"  />
+		<MakeDir directories="$(FullBuildPath)$(TempFolder)\LIB\Laurel_Bridge"  />
+		<MakeDir directories="$(FullBuildPath)$(TempFolder)\MUMPS\DICOM_MGR"  />
+		<MakeDir directories="$(FullBuildPath)$(TempFolder)\MUMPS\Not-Exported"  />
+		<MakeDir directories="$(FullBuildPath)$(TempFolder)\MUMPS\Dicom"  />
+		<MakeDir directories="$(FullBuildPath)$(TempFolder)\MUMPS\Work"  />
+		<MakeDir directories="$(FullBuildPath)$(TempFolder)\Dict\Work"  />
+		<MakeDir directories="$(FullBuildPath)$(TempFolder)\ICON"  />
+		<MakeDir directories="$(FullBuildPath)$(TempFolder)\Images"  />
+		<MakeDir directories="$(FullBuildPath)$(TempFolder)\documentation"  />
+		<MakeDir directories="$(FullBuildPath)$(TempFolder)\Source\MakeAbs"  />
+
+		<MakeDir directories="$(FullBuildPath)$(TempFolder)\Utilities\shared_exes"  />
+		<MakeDir directories="$(FullBuildPath)$(TempFolder)\Web"  />		
+		<MakeDir directories="$(FullBuildPath)$(TempFolder)\LIB\Accusoft" />
+
+		<MakeDir directories="$(FullBuildPath)$(TempFolder)\Utilities\Compiled"  />
+		<MakeDir directories="$(FullBuildPath)$(TempFolder)\Source\Compiled" />
+		<MakeDir directories="$(FullBuildPath)$(TempFolder)\Source\MakeAbs\dcu" />
+		
+	</Target>
+
+	<!-- =============================================================================== -->
+	<!-- =============================================================================== -->	
+	<Target Name="FormatPatchNumber" DependsOnTargets="CreateDirectories">
+		
+		<!-- the task below takes the patch number and, if the patch number is less than 100, 
+		     adds a 0 in front of the patch number -->
+		<FormatPatchNumber
+			UnformattedPatchNum="$(PatchNumber)" >
+			<Output PropertyName="FormattedPatchNumber" TaskParameter="FormattedPatchNumber" />
+		</FormatPatchNumber>
+		
+	</Target>	
+	
+	<!-- =============================================================================== -->
+	<!-- =============================================================================== -->		
+	<Target Name="GetPatchMumpsDepNumbers" DependsOnTargets="FormatPatchNumber" >
+		
+		<GetPatchNumbers
+            PatchNumber="$(PatchNumber)"
+			PatchSeqFile="$(NonVisaCfgDir)\Common\build.Sequence.xml" >
+			<Output ItemName="SplitPatchDep" TaskParameter="ItemList" />
+		</GetPatchNumbers>
+			
+		<message text="Patch number is %(SplitPatchDep.Identity)" Importance="High"/>
+		<MakeDir directories="$(FullBuildPath)$(TempFolder)\P%(SplitPatchDep.Identity)\routine" />	
+		<MakeDir directories="$(FullBuildPath)$(TempFolder)\P%(SplitPatchDep.Identity)\dictionary" />
+			
+	</Target> 	
+
+	<!-- =============================================================================== -->
+	<!-- =============================================================================== -->
+	<!-- Read patch manifest -->
+	<Target Name="ReadManifest" Outputs="%(SplitPatchDep.Identity)" DependsOnTargets="GetPatchMumpsDepNumbers"  >
+	
+		<!-- read the patch manifests and pull the routines and dic -->
+		<ReadManifest
+			PatchNumber="$(PatchNumber)"
+			BuildManifestFileNumber="@(SplitPatchDep)" 
+			BuildManifestFilePath="$(BuildManifestFilePath)" 
+			FolderPath="$(FullBuildPath)$(TempFolder)\P%(SplitPatchDep.Identity)\routine" >
+			<Output PropertyName="RtnFiles" TaskParameter="RtnFileNames" />
+			<Output PropertyName="DDFiles" TaskParameter="DDFileNames" />
+		</ReadManifest>	
+		
+		<ItemGroup>
+			<SplitRtnFiles Include="$(RtnFiles.Split(';'))" />
+			<SplitDDFiles Include="$(DDFiles.Split(';'))" />
+		</ItemGroup>
+					
+		<PropertyGroup>
+			<PatchFolderNumber>@(SplitPatchDep)</PatchFolderNumber>
+		</PropertyGroup>
+		
+		<message text="Routines from patch @(SplitPatchDep) manifest are %(SplitRtnFiles.Identity)" Importance="High" />
+		<message text="Dics from patch @(SplitPatchDep) manifest are %(SplitDDFiles.Identity)" Importance="High"  />	
+
+		<Copy SourceFiles="$(DependPatchesDir)\MUMPS\Apps\%(SplitRtnFiles.Identity)" DestinationFolder="$(FullBuildPath)$(TempFolder)\P$(PatchFolderNumber)\routine" ContinueOnError="True" />
+		<Copy SourceFiles="$(DependPatchesDir)\DICT\%(SplitDDFiles.Identity)" DestinationFolder="$(FullBuildPath)$(TempFolder)\P$(PatchFolderNumber)\dictionary" ContinueOnError="True" />
+							
+	</Target>
+
+	<!-- =============================================================================== -->
+	<!-- =============================================================================== -->
+	<!-- Copy files from source control over to build output directory -->
+	<Target Name="CopyFiles"  DependsOnTargets="ReadManifest" >
+		
+		<Copy SourceFiles="@(DCF_Runtime)" DestinationFiles="@(DCF_Runtime->'$(FullBuildPath)$(TempFolder)\Lib\Laurel_Bridge\%(RecursiveDir)%(Filename)%(Extension)')" />
+		<Copy SourceFiles="@(UtilitiesSource)" DestinationFiles="@(UtilitiesSource->'$(FullBuildPath)$(TempFolder)\Utilities\%(RecursiveDir)%(Filename)%(Extension)')" />
+		
+		<Copy SourceFiles="@(SharedExeFiles)" DestinationFiles="@(SharedExeFiles->'$(FullBuildPath)$(TempFolder)\Utilities\shared_exes\%(RecursiveDir)%(Filename)%(Extension)')" />
+		<Copy SourceFiles="@(BaselineDictFiles)" DestinationFolder="$(FullBuildPath)$(TempFolder)\Baseline\Dict\" />
+		<Copy SourceFiles="@(BaselineMumpsFiles)" DestinationFolder="$(FullBuildPath)$(TempFolder)\Baseline\MUMPS\dicom\"/>
+		<Copy SourceFiles="@(InstallCacheFiles)" DestinationFiles="@(InstallCacheFiles->'$(FullBuildPath)$(TempFolder)\Install\Cache\%(RecursiveDir)%(Filename)%(Extension)')" />
+		<Copy SourceFiles="@(InstallSystemFiles)" DestinationFiles="@(InstallSystemFiles->'$(FullBuildPath)$(TempFolder)\Install\System\%(RecursiveDir)%(Filename)%(Extension)')" />
+		<Copy SourceFiles="@(InstallShieldFiles)" DestinationFiles="@(InstallShieldFiles->'$(FullBuildPath)$(TempFolder)\Install\InstallShield\%(RecursiveDir)%(Filename)%(Extension)')" />
+		<Copy SourceFiles="@(InstallBogusFile)" DestinationFolder="$(FullBuildPath)$(TempFolder)\Install\InstallShield" /> 		
+		<Copy SourceFiles="@(BaselineUtilities)" DestinationFiles="@(BaselineUtilities->'$(FullBuildPath)$(TempFolder)\Source\%(ParentFolder)\%(Filename)%(Extension)')" /> 
+		<Copy SourceFiles="@(BatchFiles)" DestinationFolder="$(FullBuildPath)$(TempFolder)\Source\Batch_Files\"/>
+		<Copy SourceFiles="@(MakeAbsFiles)" DestinationFiles="@(MakeAbsFiles->'$(FullBuildPath)$(TempFolder)\Source\MakeAbs\%(RecursiveDir)%(Filename)%(Extension)')" />
+
+		<Copy SourceFiles="@(IconFiles)" DestinationFiles="@(IconFiles->'$(FullBuildPath)$(TempFolder)\ICON\%(RecursiveDir)%(Filename)%(Extension)')" />
+		<Copy SourceFiles="@(ImageFiles)" DestinationFiles="@(ImageFiles->'$(FullBuildPath)$(TempFolder)\Images\%(RecursiveDir)%(Filename)%(Extension)')" />
+		<Copy SourceFiles="@(WebFiles)" DestinationFiles="@(WebFiles->'$(FullBuildPath)$(TempFolder)\Web\%(RecursiveDir)%(Filename)%(Extension)')" />
+		<Copy SourceFiles="@(AccusoftFiles)" DestinationFiles="@(AccusoftFiles->'$(FullBuildPath)$(TempFolder)\LIB\Accusoft\%(RecursiveDir)%(Filename)%(Extension)')" />
+		<Copy SourceFiles="@(DCMView)" DestinationFolder="$(FullBuildPath)$(TempFolder)\Distrib\"/>
+
+	</Target>
+
+	<!-- =============================================================================== -->
+	<!-- =============================================================================== -->
+	<!-- Create an Itemgroup out of the patch dependencies -->
+	<Target Name="SetDependencies" Outputs="%(SplitPatchDep.Identity)" DependsOnTargets="CopyFiles" >
+		
+		<ItemGroup>	
+			<MumpsDependency Include="$(FullBuildPath)$(TempFolder)\P%(SplitPatchDep.Identity)\routine\*.RTN; $(FullBuildPath)$(TempFolder)\P%(SplitPatchDep.Identity)\routine\*.cache" >
+				<FolderName>%(SplitPatchDep.Identity)</FolderName>
+			</MumpsDependency>
+				
+			<DictsDependency Include="$(FullBuildPath)$(TempFolder)\P%(SplitPatchDep.Identity)\dictionary\*.dic" >
+				<FolderName>%(SplitPatchDep.Identity)</FolderName>
+			</DictsDependency>				
+		</ItemGroup>	
+			
+	</Target>		
+
+	<!-- =============================================================================== -->
+	<!-- =============================================================================== -->
+	<!-- Compile C Utility projects -->
+	<Target Name="BuildUtilites" DependsOnTargets="SetDependencies" >
+ 		<Message text="No thing to do here ..." />
+	</Target>
+
+	<!-- =============================================================================== -->
+	<!-- =============================================================================== -->
+	<!-- Set File Version = -->
+	<Target Name="SetBuild" DependsOnTargets="BuildUtilites" >
+		
+		<ItemGroup>
+			<Version Include="$(FullBuildPath)$(TempFolder)\Source\C-Store\"  /> 
+		</ItemGroup>
+		
+		<Exec Command='"$(SetBuildExe)" version.rc 3 0 $(PatchNumber) $(BuildNumber)' WorkingDirectory="%(Version.FullPath)"  />
+		
+			<ItemGroup>	
+			<NewVersionFiles Include="$(FullBuildPath)$(TempFolder)\Source\**\version.new" /> 		
+		</ItemGroup>
+		<Copy SourceFiles="%(NewVersionFiles.FullPath)" DestinationFiles="%(RootDir)%(Directory)%(Filename).rc" />
+		
+	</Target>
+
+	<!-- =============================================================================== -->
+	<!-- =============================================================================== -->
+
+	<Target Name="CreateDep"  DependsOnTargets="SetBuild" >
+		<Message text="No thing to do here ..." />
+	</Target>
+
+	<!-- =============================================================================== -->
+	<!-- =============================================================================== -->	
+	<!-- Compile C Source projects  -->
+	<Target Name="BuildC" DependsOnTargets="CreateDep">
+
+		<MSBuild Projects="$(FullBuildPath)$(TempFolder)\Source\C-Store\CSTORE.sln" Targets="Rebuild" Properties="Configuration=Release;Platform=Win32"  /> 
+ 
+	</Target>
+	
+	<!-- =============================================================================== -->
+	<!-- =============================================================================== -->		
+	<!-- Compile Delphi projects using Delphi-2007 -->
+	<Target Name="BuildDelphi" DependsOnTargets="BuildC" >
+		
+		<Message text="Updating File Version number for %(DelphiSourceFiles.Resource)" Importance="High"/>
+		<Exec Command='"$(FullBuildPath)$(TempFolder)\Utilities\ChangeRes\ChangeRes.exe" %(DelphiSourceFiles.Resource) -U [VERSIONINFO] FileVersion=$(ProductVersion)/s' WorkingDirectory="%(DelphiSourceFiles.Identity)" />
+		
+		<Message text="Compiling %(DelphiSourceFiles.Project)" Importance="High"/>
+		<Exec Command='"$(Delphi2007Dir)\bin\Dcc32.exe" -B %(DelphiSourceFiles.Project) -Q -N"$(FullBuildPath)$(TempFolder)\Source\MakeAbs\dcu" -U"$(FullBuildPath)$(TempFolder)\Source\MakeAbs\dcu;$(AccuSoft16PackageDir);$(DelphiFilmanexDir);$(AccuSoft15MedDir)" -I"$(Delphi2007Dir)\Imports"' WorkingDirectory="%(DelphiSourceFiles.Identity)" />
+	</Target>
+
+	<!-- =============================================================================== -->
+	<!-- =============================================================================== -->
+	<!-- Copy build artifacts over to build output directory -->
+	<Target Name="CopyArtifacts"  DependsOnTargets="BuildDelphi" >
+		
+		<ItemGroup>
+			<UtilitiesCompiled Include="$(FullBuildPath)$(TempFolder)\Utilities\*.txt; $(FullBuildPath)$(TempFolder)\Utilities\**\Release\*.exe; $(FullBuildPath)$(TempFolder)\Utilities\ChangeRes\*.lic" />
+			 <SourcePreCompiled Include="$(GWBaselineDir)\Source Code\Pre_Compiled\*.*" />
+		</ItemGroup>
+		
+		<Copy SourceFiles="@(UtilitiesCompiled)" DestinationFolder="$(FullBuildPath)$(TempFolder)\Utilities\Compiled\"/>
+		
+		<Copy SourceFiles="$(GWBaselineDir)\ICON\MAG_MakeAbs.ICO" DestinationFolder="$(FullBuildPath)$(TempFolder)\Source\Compiled\" ContinueOnError="False"/>
+		<Copy SourceFiles="%(DelphiSourceFiles.Identity)\%(DelphiSourceFiles.CompiledOutput)" DestinationFiles="$(FullBuildPath)$(TempFolder)\Source\Compiled\%(DelphiSourceFiles.Rename)"/>
+		<Copy SourceFiles="$(GWBaselineDir)\ICON\VIEWER1.ICO" DestinationFolder="$(FullBuildPath)$(TempFolder)\Distrib\" ContinueOnError="False"/>
+		<Copy SourceFiles="$(GWBaselineDir)\ICON\MAGCStore.ico" DestinationFolder="$(FullBuildPath)$(TempFolder)\Distrib\" ContinueOnError="False"/>
+		<Copy SourceFiles="$(FullBuildPath)$(TempFolder)\Source\C-Store\Release\CSTORE.exe" DestinationFiles="$(FullBuildPath)$(TempFolder)\Source\Compiled\MAG_CStore.exe" ContinueOnError="False"/>
+
+		<Message text="Copying Pre Compiled utilities ..." Importance="High"/>		
+		<Copy SourceFiles="@(SourcePreCompiled)" DestinationFolder="$(FullBuildPath)$(TempFolder)\Source\Compiled\" ContinueOnError="False" />
+
+		<Copy SourceFiles="$(FullBuildPath)$(TempFolder)\Utilities\Pre_Compiled\MAG_MakeLink.exe" DestinationFiles="$(FullBuildPath)$(TempFolder)\Utilities\Compiled\MAG_MakeLink.exe" ContinueOnError="False"/>
+		
+	</Target>
+
+	<!-- =============================================================================== -->
+	<!-- =============================================================================== -->
+	<!-- Update Second Line in Mumps file for patch and its dependencies -->
+	<Target Name="SecondLineMumps" DependsOnTargets="CopyArtifacts" Outputs="%(MumpsDependency.FullPath)">
+		
+		<!-- Extract second line by reading the version of the rtn (that is being processed in the work folder) 
+		     from the baseline folder.  If the rtn	does not exist in the baseline folder skip the ProcessSecondLine 
+			(second line processing) task. -->		
+		<PropertyGroup>
+			<FileName>%(MumpsDependency.FileName)</FileName>		
+			<PatchMumpDepNumber>%(MumpsDependency.Foldername)</PatchMumpDepNumber>
+		</PropertyGroup>
+		
+		<GetPatchBuildInfo
+			PatchNumber="$(PatchMumpDepNumber)"
+			BuildManifestFilePath="$(BuildManifestFilePath)" >
+			<Output PropertyName="BldPatchNumber" TaskParameter="BldNumber" />
+			<Output PropertyName="BldPatchDate" TaskParameter="BldDate" />				
+		</GetPatchBuildInfo>
+						
+		<!--If the routine exisits in the patch being built copy routine from the patches distrib folder 
+		    to the temporary work directory -->
+		<Message text="Reading routine %(MumpsDependency.FileName) from P%(MumpsDependency.FolderName) and moving to work folder" Importance="High"/>
+		<Copy SourceFiles="$(FullBuildPath)$(TempFolder)\P%(MumpsDependency.FolderName)\routine\%(MumpsDependency.FileName).RTN" DestinationFolder="$(FullBuildPath)$(TempFolder)\MUMPS\Work\" ContinueOnError="True" />
+
+		<ItemGroup>
+			<WorkRoutines Include="$(FullBuildPath)$(TempFolder)\MUMPS\Work\*.RTN" />
+		</ItemGroup>
+		
+		<!-- Call the ProcessSecondLine task passing in the patch number, routine name, and baseline directory.  
+		     The task returns the new second line -->
+		<message text="Reading work routine: $(FullBuildPath)$(TempFolder)\Baseline\MUMPS\DICOM\%(WorkRoutines.Filename)%(WorkRoutines.Extension)" />
+		<ProcessSecondLine 
+			Routine="%(WorkRoutines.Filename)%(WorkRoutines.Extension)" 
+			BaselineDir="$(FullBuildPath)$(TempFolder)\Baseline\MUMPS\DICOM\"
+			PatchNumber="$(PatchMumpDepNumber)"
+			BuildNumber="$(BldPatchNumber)"
+			BuildDate="$(BldPatchDate)">							
+			<Output ItemName="ItemsFromFile" TaskParameter="FilteredLine" />
+		</ProcessSecondLine>
+
+		<!--Create a new 2nd_Line.txt file and write the returned second line (from the ReadSeconLine task) to 2nd_line.txt -->
+		<WriteLinesToFile File="@(SecondLineMumpsFile)"  />		
+		<MSBuild.ExtensionPack.FileSystem.File TaskAction="WriteLines" Files="@(SecondLineMumpsFile)" Lines="@(ItemsFromFile)" Condition="'@(ItemsFromFile)'!=''" TextEncoding="ASCII"/>
+
+		<!-- Run Mumps Formatter on routines of patch folder(s) -->
+		<Exec Command='"$(MumpsFormatterExe)" -s 2nd_Line.txt -b $(BuildNumber)' Condition="'@(ItemsFromFile)'!=''" WorkingDirectory="$(FullBuildPath)$(TempFolder)\MUMPS\Work"  />
+
+		<ItemGroup>
+			<NewMumpsWorkFiles Include="$(FullBuildPath)$(TempFolder)\MUMPS\Work\*.new_RTN"  />
+		</ItemGroup>
+		
+		<!-- Rename .new_rtn files to .rtn and move to baseline folder after each round of processing-->
+		<Message text="Renaming routines from .new_RTN to .RTN and  copying to build folder" Importance="High"/>
+		<Copy SourceFiles="@(NewMumpsWorkFiles)" DestinationFiles="@(NewMumpsWorkFiles->'$(FullBuildPath)$(TempFolder)\Baseline\MUMPS\DICOM\%(RecursiveDir)%(Filename).RTN')" Condition="'$(IncrementalUpgrade)'!='true'" />
+		<RemoveDir Directories="$(FullBuildPath)$(TempFolder)\MUMPS\Work" /> 
+		<MakeDir directories="$(FullBuildPath)$(TempFolder)\MUMPS\Work"  /> 
+	</Target>
+
+	<!-- =============================================================================== -->
+	<!-- =============================================================================== -->
+	<!-- Move dictonary files from patch folders to work folder for for Second Line processing -->
+	<Target Name="SecondLineDict" DependsOnTargets="SecondLineMumps" Outputs="%(DictsDependency.FullPath)">
+		
+		<!-- add to section if dictonary files are added -->
+		<PropertyGroup>
+			<PatchDictDepNumber>%(DictsDependency.Foldername)</PatchDictDepNumber>
+		</PropertyGroup>
+		
+		<Message text="Reading dictionary %(DictsDependency.FileName) from P%(DictsDependency.Foldername) and moving to work folder" Importance="High"/>	
+		<Copy SourceFiles="$(FullBuildPath)$(TempFolder)\P$(PatchDictDepNumber)\dictionary\%(DictsDependency.FileName).dic" DestinationFolder="$(FullBuildPath)$(TempFolder)\Dict\Work\ " ContinueOnError="True" />
+
+		<ItemGroup>
+			<WorkDicts Include="$(FullBuildPath)$(TempFolder)\Dict\Work\*.dic" />
+		</ItemGroup>
+
+		<GetPatchBuildInfo
+			PatchNumber="$(PatchDictDepNumber)"
+			BuildManifestFilePath="$(BuildManifestFilePath)" >
+			<Output PropertyName="BldPatchNumber" TaskParameter="BldNumber" />
+			<Output PropertyName="BldPatchDate" TaskParameter="BldDate" />				
+		</GetPatchBuildInfo>
+		
+		<!-- Call the ProcessSecondLine task passing in the patch number, dict name, and baseline directory.  
+		     The task returns the new second line -->
+		<message text="Reading work dic: $(FullBuildPath)$(TempFolder)\Baseline\DICT\%(WorkDicts.Filename)%(WorkDicts.Extension)" />
+		<ProcessSecondLine 
+			Condition="'$(PatchDictDepNumber)'!=''"
+			Routine="%(WorkDicts.Filename)%(WorkDicts.Extension)" 
+			BaselineDir="$(FullBuildPath)$(TempFolder)\Baseline\DICT\"
+			PatchNumber="$(PatchDictDepNumber)"
+			BuildNumber="$(BldPatchNumber)"
+			BuildDate="$(BldPatchDate)">			
+			<Output ItemName="ItemsFromFile1" TaskParameter="FilteredLine" />
+		</ProcessSecondLine>
+
+		<WriteLinesToFile File="@(SecondLineDictFile)"	/>
+
+		<Message text="Write lines to 2nd_line.txt" Importance="High"/>
+		<MSBuild.ExtensionPack.FileSystem.File TaskAction="WriteLines" Files="@(SecondLineDictFile)" Lines="@(ItemsFromFile1)" Condition="'@(ItemsFromFile1)'!=''" TextEncoding="ASCII"/>
+		<Message text="Processing second line" Importance="High"/>
+		<Exec Command='"$(MumpsFormatterExe)" -d -s 2nd_Line.txt -b $(BuildNumber) -e %(WorkDicts.Filename)%(WorkDicts.Extension)' WorkingDirectory="$(FullBuildPath)$(TempFolder)\Dict\Work" Condition="'$(PatchDictDepNumber)'!=''" />
+		<Delete Files="@(SecondLineDictFile)"	/>
+
+		<ItemGroup>
+			<NewDictFiles Include="$(FullBuildPath)$(TempFolder)\Dict\Work\*.new_Dic"  />
+		</ItemGroup>
+		<Message text="Renaming .new_dic files to .dic and copy to build output" Importance="High"/>
+		<Copy SourceFiles="@(NewDictFiles)" DestinationFiles="@(NewDictFiles->'$(FullBuildPath)$(TempFolder)\Baseline\DICT\%(RecursiveDir)%(Filename).dic')" Condition="'$(IncrementalUpgrade)'!='true'" />
+		<RemoveDir Directories="$(FullBuildPath)$(TempFolder)\Dict\Work" /> 
+		<MakeDir directories="$(FullBuildPath)$(TempFolder)\Dict\Work"  />
+	</Target>
+
+	<!-- =============================================================================== -->
+	<!-- =============================================================================== -->
+	<Target Name="RollUpMumps" DependsOnTargets="SecondLineDict" >
+		<Exec Command='"$(MumpsFormatterExe)" -x -l "$(PatchFolderName)"' WorkingDirectory="$(FullBuildPath)$(TempFolder)\Baseline\MUMPS\DICOM"  Condition="'$(IncrementalUpgrade)'!='true'" />
+		<Copy SourceFiles="$(FullBuildPath)$(TempFolder)\Baseline\MUMPS\DICOM\DICOMRtns.rtn" DestinationFiles="$(FullBuildPath)$(TempFolder)\Baseline\MUMPS\DICOM\MAGDCM.rtn" Condition="'$(IncrementalUpgrade)'!='true'" />
+		<Delete Files="$(FullBuildPath)$(TempFolder)\Baseline\MUMPS\DICOM\DICOMRtns.rtn" Condition="'$(IncrementalUpgrade)'!='true'"/>	
+	</Target>
+
+	<!-- =============================================================================== -->
+	<!-- =============================================================================== -->
+	<!-- Generate new InstallShield product code -->
+	<Target Name="UpdateISM" DependsOnTargets="RollUpMumps" >
+		<CallTarget Targets="GenerateProductCode" />	<!-- from ...\Common\buil.VistAImaging.xml -->
+		<CallTarget Targets="GeneratePackageCode" />	<!-- from ...\Common\buil.VistAImaging.xml -->
+	</Target>
+
+	<!-- =============================================================================== -->
+	<!-- =============================================================================== -->
+	<!-- Create InstallShield Installer -->
+	<Target Name="BuildRelease" DependsOnTargets="UpdateISM" >
+		<CallTarget Targets="CreateInstaller" />	<!-- from ...\Common\buil.VistAImaging.xml -->
+	</Target>	
+
+	<!-- =============================================================================== -->
+	<!-- =============================================================================== -->	
+	<Target Name="StageToSQA" >	
+		<MakeDir Directories="$(NetworkBuildDir)" Condition="!Exists('$(NetworkBuildDir)')" />
+		<Delete Files="$(NetworkBuildDir)\$(ExeFileName)" Condition="!Exists('$(NetworkBuildDir)\$(ExeFileName)')" />
+		<Copy SourceFiles="$(FullBuildPath)\$(ExeFileName)" Destinationfolder="$(NetworkBuildDir)"/>	
+	</Target>
+	
+	<!-- =============================================================================== -->
+	<!-- =============================================================================== -->	
+	<Target Name="Publish" DependsOnTargets="BuildRelease" >		                                                
+		<Copy SourceFiles="$(FullBuildPath)$(TempFolder)\Install\InstallShield\DICOM_Silent_Install_2011\PROJECT_ASSISTANT\SINGLE_EXE_IMAGE\DiskImages\DISK1\setup.exe" DestinationFiles="$(FullBuildPath)\$(ExeFileName)" Condition="'$(CreateExe)'!='False'"/>
+		<CallTarget Targets="StageToSQA"  Condition="'$(StageToSQA)'=='True'" />
+	</Target>
+
+	
+	<!-- =============================================================================== -->
+	<!-- =============================================================================== -->	
+	<Target Name="Testing" >	
+		<Message text="TESTING ..." Importance="High"/>
+		
+		<ItemGroup>
+			<UtilitiesCompiled Include="$(FullBuildPath)$(TempFolder)\Utilities\*.txt; $(FullBuildPath)$(TempFolder)\Utilities\**\Release\*.exe; $(FullBuildPath)$(TempFolder)\Utilities\ChangeRes\*.lic" />
+			<SourcePreCompiled Include="$(GWBaselineDir)\Source Code\Pre_Compiled\*.*" />
+		</ItemGroup>
+		
+		<Copy SourceFiles="@(UtilitiesCompiled)" DestinationFolder="$(FullBuildPath)$(TempFolder)\Utilities\Compiled\"/>
+		
+		<Copy SourceFiles="$(GWBaselineDir)\ICON\MAG_MakeAbs.ICO" DestinationFolder="$(FullBuildPath)$(TempFolder)\Source\Compiled\"/>
+		<Copy SourceFiles="%(DelphiSourceFiles.Identity)\%(DelphiSourceFiles.CompiledOutput)" DestinationFiles="$(FullBuildPath)$(TempFolder)\Source\Compiled\%(DelphiSourceFiles.Rename)"/>
+		<Copy SourceFiles="$(GWBaselineDir)\ICON\VIEWER1.ICO" DestinationFolder="$(FullBuildPath)$(TempFolder)\Distrib\"/>
+		<Copy SourceFiles="$(GWBaselineDir)\ICON\MAGCStore.ico" DestinationFolder="$(FullBuildPath)$(TempFolder)\Distrib\"/>
+		<Copy SourceFiles="$(FullBuildPath)$(TempFolder)\Source\C-Store\Release\CSTORE.exe" DestinationFiles="$(FullBuildPath)$(TempFolder)\Source\Compiled\MAG_CStore.exe"/>
+	
+		<Message text="Copying what need from ($(GWBaselineDir)\Source Code\Pre_Compiled)..." Importance="High"/>	
+		<Copy SourceFiles="@(SourcePreCompiled)" DestinationFolder="$(FullBuildPath)$(TempFolder)\Source\Compiled\"/>
+				
+	</Target>
+
+	<!-- =============================================================================== --> 
+	<!-- =============================================================================== -->
+	<Target Name="TEST" >
+		
+		<Message text="DEBUGING DEBUGING DEBUGING ..." />
+		<CallTarget Targets="CreateDirectories" />					
+		<message text="WHAT: $(InstallShieldPath)" />		
+					
+	</Target>
+							
+</Project>
+
+
+
+
+
+	

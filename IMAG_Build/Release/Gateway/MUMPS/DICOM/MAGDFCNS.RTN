@@ -1,0 +1,247 @@
+MAGDFCNS ;WOIFO/PMK/JSL/SAF - Read HL7 and generate DICOM ; 21 Jun 2010 12:48 PM
+ ;;3.0;IMAGING;**9,10,11,30,50,49,123**;Mar 19, 2002;Build 60;Jul 16, 2012
+ ;; Per VHA Directive 2004-038, this routine should not be modified.
+ ;; +---------------------------------------------------------------+
+ ;; | Property of the US Government.                                |
+ ;; | No permission to copy or redistribute this software is given. |
+ ;; | Use of unreleased versions of this software requires the user |
+ ;; | to execute a written test agreement with the VistA Imaging    |
+ ;; | Development Office of the Department of Veterans Affairs,     |
+ ;; | telephone (301) 734-0100.                                     |
+ ;; | The Food and Drug Administration classifies this software as  |
+ ;; | a medical device.  As such, it may not be changed in any way. |
+ ;; | Modifications to this software may result in an adulterated   |
+ ;; | medical device under 21CFR820, the use of which is considered |
+ ;; | to be a violation of US Federal Statutes.                     |
+ ;; +---------------------------------------------------------------+
+ ;;
+QUIT W "This routine should not be called directly.",! Q
+ ;
+ ; DICOM low level utility functions
+ ;
+CONSOLID() Q $G(^MAGDICOM(2006.563,1,"CONSOLIDATED"))="YES"
+ ;
+MSGINIT ; This entry point is called to initialize all DICOM messages
+ D SEQINIT
+ ; ^TMP initialization
+ K ^TMP("MAG",$J,"DICOM","OUT") ; start with a clean slate
+ Q
+ ;
+SEQINIT ; initialize the DICOM sequence
+ S SEQUENCE="",SEQNUMB=0 ; initialize the DICOM sequence
+ K SEQCOUNT,SEQEND ; clear the sequence counters and ending offsets
+ Q
+ ;
+SEQPUSH(TAG,NAME) ; Create a new sequence and increment the DICOM sequence counter
+ I $D(NAME) D
+ . ; output the name of the sequence (needed by reconstitution only)
+ . N SS0
+ . S SS0=$S(SEQUENCE="":TAG,1:SEQUENCE_"^"_TAG)
+ . S ^TMP("MAG",$J,"DICOM","OUT",SS0)=NAME_"^SQ^^"
+ . Q
+ D SEQPUSH0(TAG)
+ G SEQINC1 ; handle the sequence counting below
+ ;
+SEQPUSH0(TAG) ;
+ ; Create a new sequence w/o incrementing the DICOM sequence count
+ S SEQNUMB=SEQNUMB+1
+ I SEQUENCE'="" S SEQUENCE=SEQUENCE_"^"
+ S SEQUENCE=SEQUENCE_TAG
+ Q
+ ;
+SEQINC ; external entry point to increment a DICOM sequence counter
+ D SEQTRIM
+ G SEQINC1
+ ;
+SEQINC1 ; increment a DICOM sequence counter
+ S SEQCOUNT(SEQUENCE)=$G(SEQCOUNT(SEQUENCE))+1
+ S SEQUENCE=SEQUENCE_"."_$E(10000+SEQCOUNT(SEQUENCE),2,5)
+ Q
+ ;
+SEQPOP ; Remove a sequence
+ K OLDGROUP(SEQNUMB),PRIVATE(SEQNUMB) ; used in ^MAGDDW2
+ D SEQTRIM K SEQCOUNT(SEQUENCE) ; remove the old sequence counter
+ S SEQNUMB=SEQNUMB-1
+ S SEQUENCE=$P(SEQUENCE,"^",1,SEQNUMB)
+ Q
+ ;
+SEQTRIM ; strip off the counter from the last sequence
+ N LASTSEQ
+ S LASTSEQ=$P(SEQUENCE,"^",SEQNUMB)
+ I LASTSEQ["." D  ; strip off the counter from the last sequence
+ . S LASTSEQ=$P(LASTSEQ,".",1,$L(LASTSEQ,".")-1)
+ . S $P(SEQUENCE,"^",SEQNUMB)=LASTSEQ
+ . Q
+ Q
+ ;
+KILL(TAG) ; Remove a node from the ^TMP("MAG",$J,"DICOM","OUT",...) global
+ ; This entry point is called to remove data from a DICOM message
+ N SS0
+ S SS0=$S(SEQUENCE="":TAG,1:SEQUENCE_"^"_TAG)
+ K ^TMP("MAG",$J,"DICOM","OUT",SS0)
+ Q
+ ;
+SAVE(TAG,VALUE) ; Save the data in the ^TMP("MAG",$J,"DICOM","OUT",...) global
+ ; This entry point is called to stuff data into DICOM messages
+ N SS0,SS1,SS2
+ ; SS1, ^(0,0) = # multiples , ^(SS1,0) = # rows within a multiple
+ ; ^(SS1) = multiple #, ^(SS1,SS2) = row within a multiple
+ S SS0=$S(SEQUENCE="":TAG,1:SEQUENCE_"^"_TAG)
+ S (SS1,^(0))=$G(^TMP("MAG",$J,"DICOM","OUT",SS0,0,0))+1
+ S (SS2,^(0))=$G(^TMP("MAG",$J,"DICOM","OUT",SS0,SS1,0))+1,^(SS2)=VALUE
+ Q
+ ;
+REPLACE(TAG,VALUE) ; Replace data in the ^TMP("MAG",$J,"DICOM","OUT",...) global
+ ; Call to replace one or more values in the DICOM message
+ N DICTINFO,DOLLARD,I
+ S DICTINFO=$G(^TMP("MAG",$J,"DICOM","OUT",TAG)) ; save dictionary info
+ D KILL(TAG) ; blow away the old tag
+ I DICTINFO'="" S ^TMP("MAG",$J,"DICOM","OUT",TAG)=DICTINFO ; restore
+ S DOLLARD=$D(VALUE)
+ I $D(VALUE)=1 D  ; only a scalar value is passed
+ . D SAVE(TAG,VALUE) ; replace it with the new value
+ . Q
+ E  I DOLLARD=10 S I="" F  S I=$O(VALUE(I)) Q:'I  D SAVE(TAG,VALUE(I))
+ Q
+ ;
+GETDATA(NODE,TAG,SS1,SS2) ; get data from ^TMP("MAG",$J,"DICOM",NODE,...)
+ N SS0,I,J,X
+ S SS0=$S($G(SEQUENCE)="":TAG,1:SEQUENCE_"^"_TAG)
+ I '$D(SS1) S SS1=1 ; default SS1 node is 1
+ I '$D(SS2) S SS2=1 ; default SS2 node is 1
+ S X=$G(^TMP("MAG",$J,"DICOM",NODE,SS0,SS1,SS2))
+ S I=1,J=$L(X) ; strip leading (numeric) or trailing (string) pads
+ F I=1:1:J Q:$A($E(X,I))'=32  ;strip leading pads
+ F J=J:-1:0 Q:$A($E(X,J))'=32  ;strip trailing pads
+ F J=J:-1:0 Q:$A($E(X,J))'=0  ;strip trailing NULLS
+ Q $E(X,I,J)
+ ;
+ENUM(X) ; convert exponential number to decimal number
+ I (X?.E1N.E1"E".E1N)!(X?.E1N.E1"e".E1N) D
+ . I X?.E1N.E1"e".E1N S X=$TR(X,"e","E")
+ . S X=+X
+ Q X
+ ;
+ ; instead of DO USE^MAGDFCNS(DEVICE)
+ ; use        SET STATUS=$$USEDEV^MAGOSFIL(DEVICE)
+ ;
+MKDIR(PATH) ; create the desired directory
+ N D0
+ ;
+ I $P(PATH,"\",$L(PATH,"\"))["." D  Q X ; illegal directory path
+ . S X="-2 *** Illegal path for a directory: "_PATH_" ***"
+ . W !,X
+ . Q
+ ;
+ I $E(PATH,$L(PATH))="\" S $E(PATH,$L(PATH))=""
+ I $$GETDIR^MAGOSDIR(PATH,"D")>0 D  Q "" ; existing directory path
+ . W !,"Image directory path """,PATH,""" already exists"
+ . Q
+ W !,"Creating the image subdirectory """,PATH,""""
+ N NSUBDIR ; number of sub directories
+ S NSUBDIR=$S(PATH?1."\\".E:$L(PATH,"\")-3,1:$L(PATH,"\")-1)
+ Q $$MKDIR1(PATH)
+ ;
+MKDIR1(PATH) ;
+ N LPATH,X
+ S X=$$GETDIR^MAGOSDIR(PATH,"D")
+ I X>0 Q ""  ; directory already exits
+ I X<0 D  I X'="" Q X ; the path doesn't exit, try to create it
+ . S NSUBDIR=NSUBDIR-1 ; decrement subdirectory counter by one
+ . I NSUBDIR'>0 S X="-1 (Cannot create directory """_PATH_""")" Q
+ . S LPATH=$P(PATH,"\",1,$L(PATH,"\")-1) ; pop up one level on the path
+ . S X=$$MKDIR1(LPATH) ; try to create the left portion of the path
+ . Q
+ Q $$MKDIR^MAGOSDIR(PATH) ; path created, now make the sub-directory
+ ;
+OUTDEV ; output device selection routine
+ N STATUS,X,Y
+ K ODEVTYPE,ODEVNAME
+ F  D  Q:$D(ODEVTYPE)  ; loop
+ . W !!,"Enter output device (""S"" for screen or ""F"" for file): S// "
+ . R X:DTIME E  S ODEVTYPE="" Q
+ . I X="" S X="screen" W X ; default
+ . I X["?" D  Q
+ . . W !!,"Answering 'S' has the effect that the report will be"
+ . . W !,"displayed on the current monitor; answering 'F' has"
+ . . W !,"the effect that the report will be printed to a file."
+ . . Q
+ . I (X["^")!("Qq"[$E(X,1)) S ODEVTYPE="" Q  ; abort
+ . I "Ss"[$E(X,1) S ODEVTYPE="SCREEN",ODEVNAME="" Q  ; screen
+ . I "Ff"[$E(X,1) D  Q  ; file
+ . . S ODEVTYPE="FILE"
+ . . F  D  Q:$D(ODEVNAME)  ; loop
+ . . . W !!,"Please enter the output file name: "
+ . . . R X:DTIME E  S (ODEVNAME,ODEVTYPE)="" Q
+ . . . I X["?" D  Q
+ . . . . W !!,"The requested report will be written to a file."
+ . . . . W !,"Enter the name of the file to which this report will be written."
+ . . . . Q
+ . . . I X="" W "  ??? the file name is required!" Q
+ . . . I "^Qq"[$E(X) S (ODEVNAME,ODEVTYPE)="" Q  ; abort file name entry
+ . . . S STATUS=$$GETDIR^MAGOSDIR(X)
+ . . . I STATUS<0 D  Q
+ . . . . W !,"Directory look-up error ",STATUS
+ . . . . Q
+ . . . I STATUS=1 D  Q:"Yy"'[$E(Y,1)  Q:ODEVTYPE=""  ; don't overwrite
+ . . . . F  D  Q:Y'=""
+ . . . . . W !,"File exists.  Do you want to overwrite it? NO// "
+ . . . . . R Y:DTIME E  S (ODEVNAME,ODEVTYPE)="",Y="^" Q
+ . . . . . I Y="" S Y="no" W Y ; default
+ . . . . . I Y["?" D  S Y="" Q
+ . . . . . . W !!,"Answer 'Yes' to overwrite the file,"
+ . . . . . . W !,"destroying any current content, or answer"
+ . . . . . . W !,"'No' to keep the current content of the file."
+ . . . . . . Q
+ . . . . . I "Yy"'[$E(Y,1) W "   (not overwritten)"
+ . . . . . Q
+ . . . . Q
+ . . . S STATUS=$$OPEN^MAGOSFIL(X,"W")
+ . . . I STATUS D  Q
+ . . . . W !,"File open error ",STATUS
+ . . . . Q
+ . . . S ODEVNAME=X ; host file system
+ . . . Q
+ . . Q
+ . Q
+ Q
+ ;
+USE(ODEVTYPE,FILENAME) ; use principal device or host file system
+ N STATUS
+ I ODEVTYPE="" D  ; bkgnd job reading DICOM header, without ascii file
+ . S STATUS='$$USEPRIN^MAGOSFIL(0)
+ . Q
+ E  I ODEVTYPE="SCREEN" D  ; principal device
+ . S STATUS='$$USEPRIN^MAGOSFIL(1)
+ . Q
+ E  I ODEVTYPE="FILE" D  ; host file system
+ . S STATUS=$$USE^MAGOSFIL(FILENAME)
+ . Q
+ Q STATUS
+ ;
+CLOSE(ODEVTYPE,FILENAME) ; close host file
+ N STATUS
+ I ODEVTYPE="SCREEN" S STATUS=0 ; principal device
+ E  S STATUS=$$CLOSE^MAGOSFIL(FILENAME)
+ I $$USEPRIN^MAGOSFIL(1)
+ Q STATUS
+ ;
+UP(X) ; special UPPER CASE function -- removes redundant blanks as well
+ F  Q:X'["  "  S $E(X,$F(X,"  ")-1)=""  ; remove redundant blank
+ I $E(X)=" " S $E(X)=""  ; remove leading blank
+ I $E(X,$L(X))=" " S $E(X,$L(X))=""  ; remove trailing blank
+ Q $TR(X,"abcdefghijklmnopqrstuvwxyz^|","ABCDEFGHIJKLMNOPQRSTUVWXYZ~~")
+ ;
+STATNUMB() ; return numeric 3-digit station number
+ N STATNUMB
+ S STATNUMB=^MAGDICOM(2006.563,1,"LOCATION STATION NUMBER")
+ Q $S($$ISIHS^MAGSPID():STATNUMB,1:$E(STATNUMB,1,3)) ; station number is 3 digits, exclusive of any modifiers or Full station number for IHS
+ ;
+WARNING(MSG,WIDTH) ; Warning Message
+ N I
+ S WIDTH=$G(WIDTH,80)
+ W ! F I=1:1:WIDTH W "*"
+ I $D(MSG)=1 W !,"*** ",MSG,?WIDTH-4," ***"
+ E  F I=1:1 Q:'$D(MSG(I))  W !,"*** ",MSG(I),?WIDTH-4," ***"
+ W ! F I=1:1:WIDTH W "*"
+ Q

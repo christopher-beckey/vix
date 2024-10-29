@@ -1,0 +1,348 @@
+KIDS Distribution saved on Jul 17, 2007@09:57:11
+Package for RPC named MAG DICOM ROUTE EVAL START
+**KIDS**:MAG*3.0*186^
+
+**INSTALL NAME**
+MAG*3.0*186
+"BLD",5998,0)
+MAG*3.0*186^^0^3070717^y
+"BLD",5998,1,0)
+^^5^5^3070717^
+"BLD",5998,1,1,0)
+This package contains a KIDS component
+"BLD",5998,1,2,0)
+for Running Baseline.
+"BLD",5998,1,3,0)
+ 
+"BLD",5998,1,4,0)
+This package transports the remote procedure call named MAG DICOM ROUTE 
+"BLD",5998,1,5,0)
+EVAL START.
+"BLD",5998,4,0)
+^9.64PA^^
+"BLD",5998,6.3)
+1
+"BLD",5998,"KRN",0)
+^9.67PA^8989.52^19
+"BLD",5998,"KRN",.4,0)
+.4
+"BLD",5998,"KRN",.401,0)
+.401
+"BLD",5998,"KRN",.402,0)
+.402
+"BLD",5998,"KRN",.403,0)
+.403
+"BLD",5998,"KRN",.5,0)
+.5
+"BLD",5998,"KRN",.84,0)
+.84
+"BLD",5998,"KRN",3.6,0)
+3.6
+"BLD",5998,"KRN",3.8,0)
+3.8
+"BLD",5998,"KRN",9.2,0)
+9.2
+"BLD",5998,"KRN",9.8,0)
+9.8
+"BLD",5998,"KRN",19,0)
+19
+"BLD",5998,"KRN",19.1,0)
+19.1
+"BLD",5998,"KRN",101,0)
+101
+"BLD",5998,"KRN",409.61,0)
+409.61
+"BLD",5998,"KRN",771,0)
+771
+"BLD",5998,"KRN",870,0)
+870
+"BLD",5998,"KRN",8989.51,0)
+8989.51
+"BLD",5998,"KRN",8989.52,0)
+8989.52
+"BLD",5998,"KRN",8994,0)
+8994
+"BLD",5998,"KRN",8994,"NM",0)
+^9.68A^1^1
+"BLD",5998,"KRN",8994,"NM",1,0)
+MAG DICOM ROUTE EVAL START^^0
+"BLD",5998,"KRN",8994,"NM","B","MAG DICOM ROUTE EVAL START",1)
+
+"BLD",5998,"KRN","B",.4,.4)
+
+"BLD",5998,"KRN","B",.401,.401)
+
+"BLD",5998,"KRN","B",.402,.402)
+
+"BLD",5998,"KRN","B",.403,.403)
+
+"BLD",5998,"KRN","B",.5,.5)
+
+"BLD",5998,"KRN","B",.84,.84)
+
+"BLD",5998,"KRN","B",3.6,3.6)
+
+"BLD",5998,"KRN","B",3.8,3.8)
+
+"BLD",5998,"KRN","B",9.2,9.2)
+
+"BLD",5998,"KRN","B",9.8,9.8)
+
+"BLD",5998,"KRN","B",19,19)
+
+"BLD",5998,"KRN","B",19.1,19.1)
+
+"BLD",5998,"KRN","B",101,101)
+
+"BLD",5998,"KRN","B",409.61,409.61)
+
+"BLD",5998,"KRN","B",771,771)
+
+"BLD",5998,"KRN","B",870,870)
+
+"BLD",5998,"KRN","B",8989.51,8989.51)
+
+"BLD",5998,"KRN","B",8989.52,8989.52)
+
+"BLD",5998,"KRN","B",8994,8994)
+
+"KRN",8994,1751,-1)
+0^1
+"KRN",8994,1751,0)
+MAG DICOM ROUTE EVAL START^START^MAGDRPC5^1^R^0^0^1^3.0^0
+"KRN",8994,1751,1,0)
+^8994.01^20^20
+"KRN",8994,1751,1,1,0)
+ +---------------------------------------------------------------+
+"KRN",8994,1751,1,2,0)
+ | Property of the US Government.                                |
+"KRN",8994,1751,1,3,0)
+ | No permission to copy or redistribute this software is given. |
+"KRN",8994,1751,1,4,0)
+ | Use of unreleased versions of this software requires the user |
+"KRN",8994,1751,1,5,0)
+ | to execute a written test agreement with the VistA Imaging    |
+"KRN",8994,1751,1,6,0)
+ | Development Office of the Department of Veterans Affairs,     |
+"KRN",8994,1751,1,7,0)
+ | telephone (301) 734-0100.                                     |
+"KRN",8994,1751,1,8,0)
+ |                                                               |
+"KRN",8994,1751,1,9,0)
+ | The Food and Drug Administration classifies this software as  |
+"KRN",8994,1751,1,10,0)
+ | a medical device.  As such, it may not be changed in any way. |
+"KRN",8994,1751,1,11,0)
+ | Modifications to this software may result in an adulterated   |
+"KRN",8994,1751,1,12,0)
+ | medical device under 21CFR820, the use of which is considered |
+"KRN",8994,1751,1,13,0)
+ | to be a violation of US Federal Statutes.                     |
+"KRN",8994,1751,1,14,0)
+ +---------------------------------------------------------------+
+"KRN",8994,1751,1,15,0)
+ 
+"KRN",8994,1751,1,16,0)
+Start one rule evaluator to evaluate the newly acquired
+"KRN",8994,1751,1,17,0)
+images for one specific location.
+"KRN",8994,1751,1,18,0)
+ 
+"KRN",8994,1751,1,19,0)
+The rule-evaluators will run on the VistA system. They will be
+"KRN",8994,1751,1,20,0)
+started and stopped, however, from the DICOM Gateways.
+"KRN",8994,1751,2,0)
+^8994.02^2^2
+"KRN",8994,1751,2,1,0)
+LOCATION^1^30^1^1
+"KRN",8994,1751,2,1,1,0)
+^8994.021^2^2
+"KRN",8994,1751,2,1,1,1,0)
+The value of this parameter is a pointer to ^DIC(4).
+"KRN",8994,1751,2,1,1,2,0)
+This pointer identifies the location at which images were acquired.
+"KRN",8994,1751,2,2,0)
+RULES^2^^1^2
+"KRN",8994,1751,2,2,1,0)
+^8994.021^39^39
+"KRN",8994,1751,2,2,1,1,0)
+The value of this parameter is an array (one integer subscript).
+"KRN",8994,1751,2,2,1,2,0)
+This array contains the routing rules. Each element of this
+"KRN",8994,1751,2,2,1,3,0)
+array represents one part of a rule; the strings in these elements
+"KRN",8994,1751,2,2,1,4,0)
+each contain a number of fields, separated by carets ("^").
+"KRN",8994,1751,2,2,1,5,0)
+ 
+"KRN",8994,1751,2,2,1,6,0)
+In all rule-elements, the first caret-piece is the rule-number.
+"KRN",8994,1751,2,2,1,7,0)
+ 
+"KRN",8994,1751,2,2,1,8,0)
+The second piece is equal to either "ACTION", "CONDITION"
+"KRN",8994,1751,2,2,1,9,0)
+or "PRIORITY".
+"KRN",8994,1751,2,2,1,10,0)
+ 
+"KRN",8994,1751,2,2,1,11,0)
+When the second piece is equal to "ACTION", there may be one or more
+"KRN",8994,1751,2,2,1,12,0)
+additional pieces. If there is only an additional third piece,
+"KRN",8994,1751,2,2,1,13,0)
+this piece represents the action-verb ("SEND" or "BALANCE"
+"KRN",8994,1751,2,2,1,14,0)
+currently).
+"KRN",8994,1751,2,2,1,15,0)
+When there are four or more pieces, the third piece represents
+"KRN",8994,1751,2,2,1,16,0)
+the sequence number of the command-parameter, and the additional
+"KRN",8994,1751,2,2,1,17,0)
+pieces represent the command-specific parameters.
+"KRN",8994,1751,2,2,1,18,0)
+ 
+"KRN",8994,1751,2,2,1,19,0)
+When the second piece is equal to "PRIORITY", the third piece
+"KRN",8994,1751,2,2,1,20,0)
+will indicate the relative priority. Typical values are "LOW",
+"KRN",8994,1751,2,2,1,21,0)
+"MEDIUM" and "HIGH".
+"KRN",8994,1751,2,2,1,22,0)
+ 
+"KRN",8994,1751,2,2,1,23,0)
+When the second piece is equal to "CONDITION", there are either
+"KRN",8994,1751,2,2,1,24,0)
+five or seven pieces in total. 
+"KRN",8994,1751,2,2,1,25,0)
+In that case, the third piece always represents the sequence number
+"KRN",8994,1751,2,2,1,26,0)
+of the current condition for the current rule.
+"KRN",8994,1751,2,2,1,27,0)
+When there are five pieces,
+"KRN",8994,1751,2,2,1,28,0)
+the fourth and fifth are a keyword=value pair and describe
+"KRN",8994,1751,2,2,1,29,0)
+the nature of the condition. Valid keywords are "KW" (keyword),
+"KRN",8994,1751,2,2,1,30,0)
+"DT" (data-type), "OP" (operator) and "VA" (value).
+"KRN",8994,1751,2,2,1,31,0)
+A sequence of seven pieces only occurs when the data-type is
+"KRN",8994,1751,2,2,1,32,0)
+equal to DT (Date/Time). When there are seven pieces, the fourth
+"KRN",8994,1751,2,2,1,33,0)
+piece is always equal to "VA" (value) and the fifth through seventh
+"KRN",8994,1751,2,2,1,34,0)
+pieces indicate a possible date/time range that applies for the
+"KRN",8994,1751,2,2,1,35,0)
+condition.
+"KRN",8994,1751,2,2,1,36,0)
+ 
+"KRN",8994,1751,2,2,1,37,0)
+Note that conditions are always ANDed with one another, and
+"KRN",8994,1751,2,2,1,38,0)
+the multiple date/time ranges for a date/time value are always
+"KRN",8994,1751,2,2,1,39,0)
+ORed with one another.
+"KRN",8994,1751,2,"B","LOCATION",1)
+
+"KRN",8994,1751,2,"B","RULES",2)
+
+"KRN",8994,1751,2,"PARAMSEQ",1,1)
+
+"KRN",8994,1751,2,"PARAMSEQ",2,2)
+
+"KRN",8994,1751,3,0)
+^8994.03^6^6
+"KRN",8994,1751,3,1,0)
+The value of this parameter is one of:
+"KRN",8994,1751,3,2,0)
+  "0,TaskMan task#=nnn"
+"KRN",8994,1751,3,3,0)
+  "-1,No Location Specified"
+"KRN",8994,1751,3,4,0)
+  "-2,No Routing Rules Specified"
+"KRN",8994,1751,3,5,0)
+  "-3,A Rule Evaluator is Already Running for <location>"
+"KRN",8994,1751,3,6,0)
+  "-4,TaskMan did not Accept Request"
+"MBREQ")
+0
+"ORD",16,8994)
+8994;16;1;;;;;;;RPCDEL^XPDIA1
+"ORD",16,8994,0)
+REMOTE PROCEDURE
+"QUES","XPF1",0)
+Y
+"QUES","XPF1","??")
+^D REP^XPDH
+"QUES","XPF1","A")
+Shall I write over your |FLAG| File
+"QUES","XPF1","B")
+YES
+"QUES","XPF1","M")
+D XPF1^XPDIQ
+"QUES","XPF2",0)
+Y
+"QUES","XPF2","??")
+^D DTA^XPDH
+"QUES","XPF2","A")
+Want my data |FLAG| yours
+"QUES","XPF2","B")
+YES
+"QUES","XPF2","M")
+D XPF2^XPDIQ
+"QUES","XPI1",0)
+YO
+"QUES","XPI1","??")
+^D INHIBIT^XPDH
+"QUES","XPI1","A")
+Want KIDS to INHIBIT LOGONs during the install
+"QUES","XPI1","B")
+YES
+"QUES","XPI1","M")
+D XPI1^XPDIQ
+"QUES","XPM1",0)
+PO^VA(200,:EM
+"QUES","XPM1","??")
+^D MG^XPDH
+"QUES","XPM1","A")
+Enter the Coordinator for Mail Group '|FLAG|'
+"QUES","XPM1","B")
+
+"QUES","XPM1","M")
+D XPM1^XPDIQ
+"QUES","XPO1",0)
+Y
+"QUES","XPO1","??")
+^D MENU^XPDH
+"QUES","XPO1","A")
+Want KIDS to Rebuild Menu Trees Upon Completion of Install
+"QUES","XPO1","B")
+YES
+"QUES","XPO1","M")
+D XPO1^XPDIQ
+"QUES","XPZ1",0)
+Y
+"QUES","XPZ1","??")
+^D OPT^XPDH
+"QUES","XPZ1","A")
+Want to DISABLE Scheduled Options, Menu Options, and Protocols
+"QUES","XPZ1","B")
+YES
+"QUES","XPZ1","M")
+D XPZ1^XPDIQ
+"QUES","XPZ2",0)
+Y
+"QUES","XPZ2","??")
+^D RTN^XPDH
+"QUES","XPZ2","A")
+Want to MOVE routines to other CPUs
+"QUES","XPZ2","B")
+NO
+"QUES","XPZ2","M")
+D XPZ2^XPDIQ
+"VER")
+8.0^22.0
+**END**
+**END**

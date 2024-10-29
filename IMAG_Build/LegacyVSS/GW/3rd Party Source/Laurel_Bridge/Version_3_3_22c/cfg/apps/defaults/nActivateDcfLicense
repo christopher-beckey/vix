@@ -1,0 +1,388 @@
+[ application_info ]
+name = nActivateDcfLicense
+description = License Activation GUI.
+app_component_name = cs_app/nActivateDcfLicense
+execution_state = STOPPED
+
+[ required_components ]
+component = cs_lib/DCF
+component = cs_lib/LOG_a
+component = cs_lib/APC_a
+component = cs_lib/DCS
+[ cs_app ]
+
+#==============================================================================
+# per-instance information for the nActivateDcfLicense component
+#==============================================================================
+[ cs_app/nActivateDcfLicense ]
+debug_flags = 0x00000
+[ cs_lib ]
+
+#==============================================================================
+# per-instance information for the DCF component
+#==============================================================================
+[ cs_lib/DCF ]
+debug_flags = 0x00000
+
+#==============================================================================
+# per-instance information for the LOG_a component
+#==============================================================================
+[ cs_lib/LOG_a ]
+debug_flags = 0x00000
+
+[ cs_lib/LOG_a/outputs ]
+[ cs_lib/LOG_a/outputs/file_output_1 ]
+type = textfile
+message_types = *
+component_names = *
+# Note that changing the format of this name may affect the behavior of the web
+# utilities that manipulate log files (e.g., list_logs.pl, dcfrmlogs.pl).
+filename = C:/DCF/DCF-3.3.22c/tmp/log/${APPIBNAME}.${CNT}.log
+# Maximum size in kilobytes of each log file before rotating.
+max_size = 3000
+# Maximum number of log files before deleting older ones.
+max_files = 5
+character_encoding = UTF-8
+# True if Byte-Order-Marker (0xFFFE) should be written in UTF-8 files
+#
+write_bom = false
+
+#==============================================================================
+# per-instance information for the APC_a component
+#==============================================================================
+[ cs_lib/APC_a ]
+debug_flags = 0x00000
+
+# If true, proc configuration will be saved in CDS CFGDB.
+save_proc_cfg_in_cds = true
+
+# If true, this process will communicate with dcf_sysmgr to
+# inform of initialization progress, and will handle shutdown
+# requests.
+handle_external_shutdown_rq = true
+
+# If true, <proc_cfg> will be observed, and re-loaded if it changes
+# (not supported if CFGDB is in FSys Mode)
+observe_proc_cfg = false
+
+# If true, the value passed to AppControl.shutdown() will be saved in
+# the proc config - usually delete_proc_cfg is set to false with this.
+save_exit_status_in_proc_cfg = false
+
+# If true, the proc config object in CDS is deleted during shutdown
+delete_proc_cfg = true
+
+#==============================================================================
+# per-instance information for the DCS component
+#==============================================================================
+[ cs_lib/DCS ]
+debug_flags = 0x00000
+# default name of extended data dictionary configuration group
+extended_data_dictionary = /dicom/ext_data_dictionary
+# if true, DicomDataDictionary will LOG a warning if private dictionary
+# conflicts with the standard dictionary.
+check_dictionary_overrides = true
+# Reports if an element tries to be added out-of-order
+# 0 - report an error only, throw the element away
+# 1 - report an error but still insert the element (may overwrite existing one)
+# 2 - report an error and throw an exception
+# 3 - do not report an error, throw element away
+element_out_of_order_option = 0
+
+# directory to keep temp files for very large element data
+large_element_data_file_dir = C:\DCF\DCF-3.3.22c\tmp
+# size above which OB,OW,OF,UN data will be streamed to/from
+# temp files rather than fully buffered.
+# The value 0 disables special handling for large elements.
+large_element_threshold = 1000000000
+# Size in items of the attribute tag cache.
+# Cache size equal to 0 means unlimited size.
+# Less than 0 means do not cache.
+tag_cache_size = 1024
+# set to true for PresentationContext and subclasses to check uids
+validate_pres_ctx_uids = false
+
+[ cs_lib/DCS/AssociationManager ]
+server_host_address = 0.0.0.0
+server_tcp_port = 2000
+max_concurrent_associations = 32
+max_total_associations = -1
+first_pdu_read_timeout = 15
+default_session_config_name = 
+#
+# If true, AssociationManager will get notified if this group is
+# changed in its process configuration while it is running.
+# This is useful if you want to change the listen port
+# without stopping and restarting AssociationManager or other settings.
+#
+listen_cfg_group = false;
+select_timeout = 1
+call_app_ready_in_run = true
+reuse_address = false
+exclusive_address_use = true
+# controls the size of incoming socket receive buffers
+receive_buffer_size = 0
+# controls the size of incoming socket send buffers
+send_buffer_size = 0
+
+[ cs_lib/DCS/IOStatisticsManager ]
+enable_statistics = NO
+seconds_between_updates = 0
+save_stats_in_proc_cfg = YES
+statistics_cfg_group_name = 
+
+
+[ cs_lib/DCS/default_session_cfg ]
+debug_flags = 0
+max_read_pdu_size = 32768
+max_write_pdu_size = 32768
+ignore_max_length_negotiation = NO
+favor_proposed_syntax_order = YES
+decode_un_seqs_in_ile = YES
+pdu_read_timeout_seconds = -1
+pdu_write_timeout_seconds = -1
+send_dimse_timeout_seconds = -1
+receive_dimse_timeout_seconds = -1
+enable_streaming_mode = YES
+stream_mode_buffer_size = 16384
+enable_compression_pass_through_mode = YES
+pdu_write_delay_seconds = 0
+pdu_read_delay_seconds = 0
+association_idle_timeout_seconds = -1
+pre_association_script = 
+post_association_script = 
+disable_multi_pdv_pdus = YES
+input_filter_cfg_name = 
+output_filter_cfg_name = 
+remove_incoming_role_selection_items = NO
+remove_outgoing_role_selection_items = NO
+# if set, private tags in a dataset with VR UN that are in the data dictionary
+# (via the extended data dictionary) with a different VR will be fixed to have
+# the VR from the dictionary.  If not set, a warning will be logged if the VRs are not the same
+fix_private_tags_with_vr_UN = NO
+# if set, standard tags in a dataset with VR UN that are in the data dictionary
+# (via the default data dictionary) with a different VR will be fixed to have
+# the VR from the dictionary.  If not set, a warning will be logged if the VRs are not the same
+fix_standard_tags_with_vr_UN = NO
+scu_socket_receive_buffer_size = 0
+scu_socket_send_buffer_size = 0
+
+[ cs_lib/DCS/default_session_cfg/input_filters ]
+
+[ cs_lib/DCS/default_session_cfg/output_filters ]
+
+[ cs_lib/DCS/default_session_cfg/supported_transfer_syntaxes ]
+# explicit-little-endian
+transfer_syntax = 1.2.840.10008.1.2.1
+# implicit-little-endian
+transfer_syntax = 1.2.840.10008.1.2
+# explicit-big-endian
+transfer_syntax = 1.2.840.10008.1.2.2
+# RLE Lossless Transfer Syntax
+transfer_syntax = 1.2.840.10008.1.2.5
+# JPEG lossless prediction selector = 1
+transfer_syntax = 1.2.840.10008.1.2.4.70
+# JPEG2000 lossless
+transfer_syntax = 1.2.840.10008.1.2.4.90
+# JPEG2000 lossy
+transfer_syntax = 1.2.840.10008.1.2.4.91
+# JPEG lossless
+transfer_syntax = 1.2.840.10008.1.2.4.57
+# JPEG lossy 8 bit 
+transfer_syntax = 1.2.840.10008.1.2.4.50
+# JPEG lossy 12 bit
+transfer_syntax = 1.2.840.10008.1.2.4.51
+# JPEG-LS Lossless Transfer Syntax
+transfer_syntax = 1.2.840.10008.1.2.4.80
+# JPEG-LS Lossy (Near-Lossless) Transfer Syntax
+transfer_syntax = 1.2.840.10008.1.2.4.81
+# MPEG2 Main Profile @ Main Level Transfer Syntax
+transfer_syntax = 1.2.840.10008.1.2.4.100
+# MPEG2 Main Profile @ High Level Transfer Syntax
+transfer_syntax = 1.2.840.10008.1.2.4.101
+# JPEG 2000 Part 2 Multi-component (Lossless Only) Transfer Syntax
+transfer_syntax = 1.2.840.10008.1.2.4.92
+# JPEG 2000 Part 2 Multi-component Transfer Syntax
+transfer_syntax = 1.2.840.10008.1.2.4.93
+
+[ cs_lib/DCS/default_session_cfg/DicomRLECodec ]
+# if false convert RLE segments to Big Endian
+# if true leave RLE segments in machine byte order
+RLE_legacy_mode = false
+
+[ cs_lib/DCS/default_session_cfg/DicomJPEGCodec ]
+[ cs_lib/DCS/default_session_cfg/DicomJPEGCodec/jpeg_lossy ]
+# lossy compression quality : 0 to 100
+compression_quality = 75
+# If true, then 12 bit operations will use the 16 bit IJG library
+no_12bit_lib = false
+# If true, derived image elements are added to data sets
+# as they are written. This includes changing Image-Type,
+# and adding Source-Image-Sequence and Derivation-Code-Sequence.
+# A new sop-instance-uid will be created for the output data set.
+add_derived_image_fields = true
+# If true, signed pixel data (pixel-representation = 1 ) will
+# be allowed.
+allow_signed_data = false
+# For codecs that support creating multiple threads for a single
+# compress or decompress operation.
+max_threads = 1
+
+[ cs_lib/DCS/default_session_cfg/DicomJPEGCodec/jpeg_lossless ]
+# If true, then 12 bit operations will use the 16 bit IJG library
+no_12bit_lib = true
+# Set the jpeg predictor selection value for the .57 syntax.
+# If the transfer syntax is 1.2.840.10008.1.2.4.70,
+# this attribute is ignored and predictor selection value
+# is set to 1.
+jpeg_predictor_selection_value = 6
+# If true, then derived image fields are added for monochrome
+# images. (Some implementations add derived fields, create
+# a new sop-instance-uid, etc. even for lossless compressed
+# images.)
+add_derived_image_fields_for_mono = false
+# If true, then derived image fields are added for color 
+# images. (Some implementations add derived fields, create
+# a new sop-instance-uid, etc. even for lossless compressed
+# images.)
+add_derived_image_fields_for_color = false
+# If true, signed pixel data (pixel-representation = 1 ) will
+# be allowed.
+allow_signed_data = false
+# If true, color pixel data will be allowed. Some implementations
+# don't implement lossless jpeg for color, since the RGB to YBR
+# color space conversion may result in some information loss.
+allow_color = true
+# For codecs that support creating multiple threads for a single
+# compress or decompress operation.
+max_threads = 1
+
+[ cs_lib/DCS/default_session_cfg/DicomJPEGCodec/jpeg2000_lossy ]
+# override all jasper options by using this attribute
+# use "\" to end lines for a multi-lined attribute value.
+# Do not use with Aware plugin
+jpeg2000_codec_options = 
+# Specify the compression ratio
+compression_ratio = 2
+# Specify the number of jpeg2000 compression levels
+compression_levels = 4
+# If true, derived image elements are added to data sets
+# as they are written. This includes changing Image-Type,
+# and adding Source-Image-Sequence and Derivation-Code-Sequence.
+# A new sop-instance-uid will be created for the output data set.
+add_derived_image_fields = true
+#
+# set max tile width: 0 means full frame size
+#
+max_tile_width = 0
+#
+# set max tile height: 0 means full frame size
+max_tile_height = 1024
+# For codecs that support creating multiple threads for a single
+# compress or decompress operation.
+max_threads = 1
+
+[ cs_lib/DCS/default_session_cfg/DicomJPEGCodec/jpeg2000_lossless ]
+# override all jasper options by using this attribute
+# use "\" to end lines for a multi-lined attribute value.
+# Do not use with Aware plugin
+jpeg2000_codec_options = 
+# If true, then derived image fields are added for monochrome
+# images. (Some implementations add derived fields, create
+# a new sop-instance-uid, etc. even for lossless compressed
+# images.)
+add_derived_image_fields_for_mono = false
+# If true, then derived image fields are added for color 
+# images. (Some implementations add derived fields, create
+# a new sop-instance-uid, etc. even for lossless compressed
+# images.)
+add_derived_image_fields_for_color = false
+#
+# set max tile width: 0 means full frame size
+#
+max_tile_width = 0
+#
+# set max tile height: 0 means full frame size
+max_tile_height = 1024
+# For codecs that support creating multiple threads for a single
+# compress or decompress operation.
+max_threads = 1
+
+[ cs_lib/DCS/DicomFileInput ]
+#Always scan for transfer syntax/chapter 10
+#whether a DicomFileInput is constructed with a
+#transfer syntax or not
+force_autodetect = TRUE
+
+[ cs_lib/DCS/DicomFileOutput ]
+# This attribute is deprecated
+create_chapter_10_format = true
+# This attribute is deprecated
+invent_group_2_data = true
+
+# Uncomment this and set to appropriate value if needed (tag: 0002,0012)
+# implementation_class_uid = 1.2.840.114089.1.1.0.3.3.2
+
+# Uncomment this and set to appropriate value if needed (tag: 0002,0013)
+# implementation_version_name = DCF 3.3.2c
+
+# The default Source AE title to use when writing a file
+default_source_ae_title = DCF
+
+# Use the (incorrect) legacy mode of using existing values from Group 2 in the File
+# Meta Information, instead of updating them to reflect the current implementation
+preserve_fmi_legacy_mode = false
+
+[ cs_lib/DCS/DicomDeviceInput ]
+enforce_sq_delim_check = true
+
+[ cs_lib/DCS/VerificationSCP ]
+[ cs_lib/DCS/VerificationSCP/default_session_cfg ]
+[ cs_lib/DCS/VerificationSCP/default_session_cfg/supported_sop_classes ]
+#SOPCLASSVERIFICATION
+sop_class = 1.2.840.10008.1.1
+
+[ cs_lib/DCS/DicomEncapsulatedCodec ]
+# force number_of_frames in bad files with non-zero pixel data length from 0 to 1
+override_n_frames = true
+
+[ cs_lib/DCS/DicomTSCWCodec ]
+[ cs_lib/DCS/DicomTSCWCodec/plugins ]
+
+[ cs_lib/DCS/DicomTSCWCodec/plugins/TSCWJasper ]
+win_dll_base_name = DCF_tscwjasper
+unix_dll_base_name = DCF_tscwjasper
+[ cs_lib/DCS/DicomTSCWCodec/plugins/TSCWJasper/plugin_cfg ]
+
+[ cs_lib/DCS/DicomTSCWCodec/plugins/TSCWIJG ]
+win_dll_base_name = DCF_TSCWIJG
+unix_dll_base_name = DCF_tscwijg
+[ cs_lib/DCS/DicomTSCWCodec/plugins/TSCWIJG/plugin_cfg ]
+
+[ cs_lib/DCS/DicomTSCWCodec/plugins/TSCWAware ]
+win_dll_base_name = DCF_TSCWAware
+unix_dll_base_name = DCF_tscwaware
+[ cs_lib/DCS/DicomTSCWCodec/plugins/TSCWAware/plugin_cfg ]
+
+
+[ cs_lib/DCS/DicomTSCWCodec/plugin_mappings ]
+# use TSCWIJG or TSCWAware for .50
+[ cs_lib/DCS/DicomTSCWCodec/plugin_mappings/1.2.840.10008.1.2.4.50 ]
+plugin_name = TSCWIJG
+# use TSCWIJG or TSCWAware for .51
+[ cs_lib/DCS/DicomTSCWCodec/plugin_mappings/1.2.840.10008.1.2.4.51 ]
+plugin_name = TSCWIJG
+# use TSCWIJG for .57
+# TSCWAware does not support .57 transfer syntax
+[ cs_lib/DCS/DicomTSCWCodec/plugin_mappings/1.2.840.10008.1.2.4.57 ]
+plugin_name = TSCWIJG
+# use TSCWIJG or TSCWAware for .70
+[ cs_lib/DCS/DicomTSCWCodec/plugin_mappings/1.2.840.10008.1.2.4.70 ]
+plugin_name = TSCWIJG
+# use TSCWJasper or TSCWAware for .90
+[ cs_lib/DCS/DicomTSCWCodec/plugin_mappings/1.2.840.10008.1.2.4.90 ]
+plugin_name = TSCWJasper
+#plugin_name = TSCWAware
+# use TSCWJasper or TSCWAware for .91
+[ cs_lib/DCS/DicomTSCWCodec/plugin_mappings/1.2.840.10008.1.2.4.91 ]
+plugin_name = TSCWJasper

@@ -1,0 +1,171 @@
+10/11/2006 13:58
+Saved from DICOM
+MAGDWLPU
+MAGDWLPU ;WOIFO/PMK - Read HL7 and generate DICOM ; 10/11/2006 13:58
+ ;;3.0;IMAGING;**11,30,51,49**;19-September-2006;;Build 942
+ ;; Per VHA Directive 2004-038, this routine should not be modified.
+ ;; +---------------------------------------------------------------+
+ ;; | Property of the US Government.                                |
+ ;; | No permission to copy or redistribute this software is given. |
+ ;; | Use of unreleased versions of this software requires the user |
+ ;; | to execute a written test agreement with the VistA Imaging    |
+ ;; | Development Office of the Department of Veterans Affairs,     |
+ ;; | telephone (301) 734-0100.                                     |
+ ;; | The Food and Drug Administration classifies this software as  |
+ ;; | a medical device.  As such, it may not be changed in any way. |
+ ;; | Modifications to this software may result in an adulterated   |
+ ;; | medical device under 21CFR820, the use of which is considered |
+ ;; | to be a violation of US Federal Statutes.                     |
+ ;; +---------------------------------------------------------------+
+ ;;
+ Q
+ ;
+UPDATE ; Update Modality WorkList after processing an HL7 message
+ N ACNUMB,DFN,DIVISION,FOUND,PATID,PATNAME,SERVICE,STUDY
+ S PATNAME=$$GETDATA^MAGDFCNS("OUT","0010,0010") ; Patient name
+ S PATID=$$GETDATA^MAGDFCNS("OUT","0010,0020") ; SSN
+ D SEQPUSH^MAGDFCNS("0008,0082") ; Institution Code Sequence
+ S DIVISION=$$GETDATA^MAGDFCNS("OUT","0008,0100") ; Division location code
+ D SEQPOP^MAGDFCNS ; end Institution Code Sequence
+ S:'DIVISION DIVISION=$G(^MAGDICOM(2006.563,1,"LOCATION"))
+ Q:'DIVISION
+ ;
+ S PATNAME=$TR(PATNAME,"^","~")
+ S X="" F  S X=$O(^MAGDWLST(2006.55,DIVISION,1,"C",PATNAME,X)) Q:X=""  D
+ . S FOUND(X,1)=1
+ . Q
+ S X="" F  S X=$O(^MAGDWLST(2006.55,DIVISION,1,"D",PATID,X)) Q:X=""  D
+ . S FOUND(X,2)=1
+ . Q
+ S FOUND=0,X="" F  S X=$O(FOUND(X)) Q:X=""  S FOUND=FOUND+1
+ Q:'FOUND  ; Patient not in Modality Worklist Database
+ ;
+ D:FOUND>1
+ . S FOUND=0,X="" F  S X=$O(FOUND(X)) Q:X=""  D
+ . . Q:'$G(FOUND(X,1))
+ . . Q:'$G(FOUND(X,2))
+ . . ; If there is an exact match with both name and SSN,
+ . . ; then that must be the one.
+ . . S FOUND=FOUND+1
+ . . Q
+ I FOUND>1 D  Q
+ . W !,FOUND," patients with this identification; cannot update"
+ . Q
+ ;
+ S DFN=$O(FOUND(""))
+ D INSERT(2006.55,DIVISION,DFN,"0010,0010",0) ; Patient's name
+ D INSERT(2006.55,DIVISION,DFN,"0010,0020",0) ; SSN
+ D INSERT(2006.55,DIVISION,DFN,"0010,0030",0) ; Patient's Date of Birth
+ D INSERT(2006.55,DIVISION,DFN,"0010,0040",0) ; Patient's Sex
+ D INSERT(2006.55,DIVISION,DFN,"0010,4000",0) ; Patient Comment
+ D INSERT(2006.55,DIVISION,DFN,"0010,1000",0) ; ICN
+ D INSERT(2006.55,DIVISION,DFN,"0010,2160",0) ; Race
+ D INSERT(2006.55,DIVISION,DFN,"0010,21C0",0) ; Pregnancy status
+ D INSERT(2006.55,DIVISION,DFN,"0010,1040",0) ; Patient's Home Address
+ D INSERT(2006.55,DIVISION,DFN,"0038,0300",0) ; Current Patient DIVISION
+ ;
+ D INSERT(2006.55,DIVISION,DFN,"0010,1020",0) ; Weight
+ D INSERT(2006.55,DIVISION,DFN,"0010,1030",0) ; Height
+ D INSERT(2006.55,DIVISION,DFN,"0010,2000",2) ; Medical Alert
+ D INSERT(2006.55,DIVISION,DFN,"0010,21B0",2) ; Additional Patient History
+ D INSERT(2006.55,DIVISION,DFN,"0038,0020",0) ; Admission Date
+ D INSERT(2006.55,DIVISION,DFN,"0038,0021",0) ; Admission Time
+ D INSERT(2006.55,DIVISION,DFN,"0038,0030",0) ; Discharge Date
+ D INSERT(2006.55,DIVISION,DFN,"0038,0032",0) ; Discharge Time
+ D INSERT(2006.55,DIVISION,DFN,"0038,0050",0) ; Special Needs
+ D INSERT(2006.55,DIVISION,DFN,"0038,0100",0) ; Admission ID
+ D INSERT(2006.55,DIVISION,DFN,"0038,0400",0) ; Patient's Institutional Residence
+ D INSERT(2006.55,DIVISION,DFN,"0038,0500",0) ; Patient State
+ D INSERT(2006.55,DIVISION,DFN,"0040,1008",0) ; Confidentiality Code
+ D INSERT(2006.55,DIVISION,DFN,"0040,3001",0) ; Confidentiality Constraint
+ ;
+ D SEQPUSH^MAGDFCNS("0033,xx40,VA DHCP") ; Imaging Type Sequence
+ S SERVICE=$P($$GETDATA^MAGDFCNS("OUT","0008,0102"),99,2) ; Imaging Service
+ D SEQPOP^MAGDFCNS ; end Imaging Type Sequence
+ ;
+ S ACNUMB=$$GETDATA^MAGDFCNS("OUT","0008,0050") ; Accession Number
+ S STUDY=$O(^MAGDWLST(2006.56,DIVISION,1,"C",SERVICE,ACNUMB,"")) D:'STUDY
+ . L +^MAGDWLST(2006.56,DIVISION,1,0):1E9
+ . S STUDY=$O(^MAGDWLST(2006.56,DIVISION,1," "),-1)+1
+ . S X=$G(^MAGDWLST(2006.56,DIVISION,1,0))
+ . S $P(X,"^",1,2)="^2006.562"
+ . S $P(X,"^",3)=STUDY
+ . S $P(X,"^",4)=$P(X,"^",4)+1
+ . S ^MAGDWLST(2006.56,DIVISION,1,0)=X
+ . S ^MAGDWLST(2006.56,DIVISION,1,STUDY,0)=SERVICE_"^^"_ACNUMB
+ . S ^MAGDWLST(2006.56,DIVISION,1,"C",SERVICE,ACNUMB,STUDY)=""
+ . L -^MAGDWLST(2006.56,DIVISION,1,0)
+ . Q
+ ;
+ D INSERT(2006.56,DIVISION,STUDY,"0008,0050",0) ; Accession Number
+ D INSERT(2006.56,DIVISION,STUDY,"0008,0060",0) ; Modality
+ D INSERT(2006.56,DIVISION,STUDY,"0008,0090",0) ; Referring Physician’s Name
+ D INSERT(2006.56,DIVISION,STUDY,"0008,0094",0) ; Telephone (list)
+ D INSERT(2006.56,DIVISION,STUDY,"0008,1050",0) ; Performing Physician's Name
+ D INSERT(2006.56,DIVISION,STUDY,"0008,1110|0008,1155",0) ; Study UID
+ D INSERT(2006.56,DIVISION,STUDY,"0020,000D",0) ; Study Instance UID
+ D INSERT(2006.56,DIVISION,STUDY,"0020,000E",0) ; Series Instance UID
+ D INSERT(2006.56,DIVISION,STUDY,"0020,0010",0) ; Study ID
+ D INSERT(2006.56,DIVISION,STUDY,"0032,1000",0) ; Scheduled Study Start Date
+ D INSERT(2006.56,DIVISION,STUDY,"0032,1001",0) ; Scheduled Study Start Time
+ D INSERT(2006.56,DIVISION,STUDY,"0032,1032",0) ; Requesting Physician
+ D INSERT(2006.56,DIVISION,STUDY,"0032,1060",0) ; Requested Procedure Description (procedure modifier)
+ D INSERT(2006.56,DIVISION,STUDY,"0032,000A",0) ; Study status ID
+ D INSERT(2006.56,DIVISION,STUDY,"0032,1064|0008,0100~0",0) ; Procedure code
+ D INSERT(2006.56,DIVISION,STUDY,"0032,1064|0008,0104~0",0) ; Procedure description
+ D INSERT(2006.56,DIVISION,STUDY,"0032,1064|0008,0100~1",0) ; CPT Code
+ D INSERT(2006.56,DIVISION,STUDY,"0032,1064|0008,0104~1",0) ; CPT Description
+ D INSERT(2006.56,DIVISION,STUDY,"0033,xx50,VA DHCP",1) ; Patient History
+ D INSERT(2006.56,DIVISION,STUDY,"0040,0011",0) ; Scheduled Procedure Step Location
+ D INSERT(2006.56,DIVISION,STUDY,"0040,0100|0008,0060",0) ; SPS Modality
+ D INSERT(2006.56,DIVISION,STUDY,"0040,0100|0040,0002",0) ; SPS Start Date
+ D INSERT(2006.56,DIVISION,STUDY,"0040,0100|0040,0003",0) ; SPS Start Time
+ D INSERT(2006.56,DIVISION,STUDY,"0040,1003",0) ; Procedure priority
+ D INSERT(2006.56,DIVISION,STUDY,"0040,1010",0) ; Names of Intended Recipients of Results
+ D INSERT(2006.56,DIVISION,STUDY,"4008,0300",0) ; Diagnosis
+ Q
+ ;
+INSERT(FM,D0,D1,TAGS,MULTI) N D2,D3,I,INC,N,NODE,OK,PUSH,SUB1,SUB2,TAG,VALUE,X
+ S NODE=$S(FM=2006.55:2,FM=2006.56:8,1:"?") Q:NODE="?"
+ S SUB1=$S(FM=2006.55:2006.553,FM=2006.56:2006.5623,1:"?")
+ S SUB2=$S(FM=2006.55:2006.5533,FM=2006.56:2006.5624,1:"?")
+ ;
+ S PUSH=$P(TAGS,"|",1,$L(TAGS,"|")-1),TAG=$P(TAGS,"|",$L(TAGS,"|"))
+ S INC=$P(TAG,"~",2),TAG=$P(TAG,"~",1)
+ F I=1:1 S X=$P(PUSH,"|",I) Q:X=""  D SEQPUSH^MAGDFCNS(X)
+ F I=1:1:INC D SEQINC^MAGDFCNS
+ S VALUE="",OK=0
+ S:'MULTI VALUE=$$NOCR($$GETDATA^MAGDFCNS("OUT",TAG)),OK=$L(VALUE)
+ S:MULTI=1 N=$$GETDATA^MAGDFCNS("OUT",TAG,1,0),OK=N
+ S:MULTI=2 N=$$GETDATA^MAGDFCNS("OUT",TAG,0,0),OK=N
+ ;
+ D:OK
+ . S D2=$O(^MAGDWLST(FM,D0,1,D1,NODE,"B",TAGS,"")) D:'D2
+ . . L +^MAGDWLST(FM,D0,1,1,D1,0):1E9
+ . . S D2=$O(^MAGDWLST(FM,D0,1,D1,NODE," "),-1)+1
+ . . S X=$G(^MAGDWLST(FM,D0,1,D1,NODE,0))
+ . . S $P(X,"^",1,2)="^"_SUB1
+ . . S $P(X,"^",3)=D2
+ . . S $P(X,"^",4)=$P(X,"^",4)+1
+ . . S ^MAGDWLST(FM,D0,1,D1,NODE,0)=X
+ . . S ^MAGDWLST(FM,D0,1,D1,NODE,"B",TAGS,D2)=""
+ . . L -^MAGDWLST(FM,D0,1,1,D1,0)
+ . . Q
+ . S ^MAGDWLST(FM,D0,1,D1,NODE,D2,0)=TAGS_"^"_VALUE Q:'MULTI
+ . K ^MAGDWLST(FM,D0,1,D1,NODE,D2,1)
+ . F D3=1:1:N D
+ . . S:MULTI=1 X=$$NOCR($$GETDATA^MAGDFCNS("OUT",TAG,1,D3))
+ . . S:MULTI=2 X=$$NOCR($$GETDATA^MAGDFCNS("OUT",TAG,D3,1))
+ . . S ^MAGDWLST(FM,D0,1,D1,NODE,D2,1,D3,0)=X
+ . . Q
+ . S ^MAGDWLST(FM,D0,1,D1,NODE,D2,1,0)="^"_SUB2_"^"_N_"^"_N
+ . Q
+ F I=1:1 S X=$P(PUSH,"|",I) Q:X=""  D SEQPOP^MAGDFCNS
+ Q
+ ;
+NOCR(X) ; Remove trailing CR/LF, if needed
+ S:$E(X,$L(X)-1,$L(X))=$C(13,10) X=$E(X,1,$L(X)-2)
+ Q X
+ ;
+
+

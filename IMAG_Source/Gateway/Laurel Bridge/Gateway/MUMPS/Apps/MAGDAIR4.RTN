@@ -1,0 +1,219 @@
+MAGDAIR4 ;WOIFO/PMK - Automatic Import Reconciliation Workflow ; 05 Jan 2010 11:49 AM
+ ;;3.0;IMAGING;**53**;Mar 19, 2002;Build 1715;Apr 22, 2010
+ ;; Per VHA Directive 2004-038, this routine should not be modified.
+ ;; +---------------------------------------------------------------+
+ ;; | Property of the US Government.                                |
+ ;; | No permission to copy or redistribute this software is given. |
+ ;; | Use of unreleased versions of this software requires the user |
+ ;; | to execute a written test agreement with the VistA Imaging    |
+ ;; | Development Office of the Department of Veterans Affairs,     |
+ ;; | telephone (301) 734-0100.                                     |
+ ;; | The Food and Drug Administration classifies this software as  |
+ ;; | a medical device.  As such, it may not be changed in any way. |
+ ;; | Modifications to this software may result in an adulterated   |
+ ;; | medical device under 21CFR820, the use of which is considered |
+ ;; | to be a violation of US Federal Statutes.                     |
+ ;; +---------------------------------------------------------------+
+ ;;
+ENTRY(NSERIES) ;
+ ;
+ D SERINFO(NSERIES) ; display series information
+ ;
+ I NSERIES=1 D
+ . D IMAGE(1)
+ . Q
+ E  D
+ . D SERIES(NSERIES)
+ . Q
+ Q
+ ;
+SERIES(NSERIES) ; select the series
+ N OK,X
+ S OK=0 F  D  Q:OK
+ . W !!,"There are ",$$HIGHLITE^MAGDAIR0("YELLOW",NSERIES)," Series in this Study."
+ . W "  Enter a series number: "
+ . R X:DTIME E  S OK=-1 Q
+ . I "^"[X S OK=-1 Q
+ . I "?"[X D SERIESM(0),SERINFO(NSERIES) Q
+ . I (X'?1N.N)!(X<1)!(X>NSERIES) D SERIESM(1) Q
+ . D IMAGE(X)
+ . Q
+ Q
+ ;
+SERIESM(QUESMARK) ; output series help message
+ ; QUESMARK - question mark flag, 1 output them, 0 don't output them
+ I QUESMARK W " ???"
+ W "  Enter a number between 1 and ",NSERIES
+ Q
+ ;
+SERINFO(NSERIES) ; output series information
+ N I,TEXT
+ D SERINFO1(NSERIES,.TEXT,1)
+ F I=1:1:TEXT W !,TEXT(I)
+ Q
+SERINFO1(NSERIES,TEXT,DISPLAY) ; format series information
+ ; called both for display and formatting clinical history for CPRS
+ ; DISPLAY = 1 if called for display and 0 if called for CPRS
+ N ACQADDR ;-- acquisition location address
+ N ACQLOCN ;-- acquisition location name
+ N ACQSAME ;-- 1 if all series are from same acquisition site
+ N COLOR ;---- YELLOW or null
+ N ISERIES ;-- series counter for FOR loop
+ N SERIEUID ;- series instance uid
+ N SERIEDES ;- series description
+ N I,N,X
+ ;
+ ; process SERIES array
+ S I=1,TEXT(I)=""
+ ; check for same acquisition location and address for all series
+ S (ACQLOCN,ACQADDR)="",ACQSAME=1
+ F ISERIES=1:1:NSERIES D
+ . S SERIEUID=$O(^TMP("MAG",$J,"IMPORT","SERIES","INDEX",ISERIES,""))
+ . I ACQLOCN="" S ACQLOCN=$P(^TMP("MAG",$J,"IMPORT","SERIES","IEN",SERIEUID,"DATA"),"^",2)
+ . E  I ACQLOCN'=$P(^TMP("MAG",$J,"IMPORT","SERIES","IEN",SERIEUID,"DATA"),"^",2) S ACQSAME=0
+ . I ACQADDR="" S ACQADDR=$P(^TMP("MAG",$J,"IMPORT","SERIES","IEN",SERIEUID,"DATA"),"^",3)
+ . E  I ACQADDR'=$P(^TMP("MAG",$J,"IMPORT","SERIES","IEN",SERIEUID,"DATA"),"^",3) S ACQSAME=0
+ . Q
+ ;
+ S COLOR=$S(DISPLAY:"YELLOW",1:"")
+ ; output information about each series
+ F ISERIES=1:1:NSERIES D
+ . S SERIEUID=$O(^TMP("MAG",$J,"IMPORT","SERIES","INDEX",ISERIES,""))
+ . S X=^TMP("MAG",$J,"IMPORT","SERIES","IEN",SERIEUID,"DATA")
+ . S N=^TMP("MAG",$J,"IMPORT","SERIES","IEN",SERIEUID,"NIMAGES")
+ . S TEXT=$S(ISERIES<10:" ",1:"")_"Series "
+ . S TEXT=TEXT_$$HIGHLITE^MAGDAIR0(COLOR,ISERIES)
+ . S TEXT=TEXT_$S(DISPLAY:" contains ",1:": ")
+ . S TEXT=TEXT_$$HIGHLITE^MAGDAIR0(COLOR,$J(N,4))
+ . S TEXT=TEXT_" "_$$HIGHLITE^MAGDAIR0(COLOR,$P(X,"^",1))
+ . S TEXT=TEXT_" file" S:N>1 TEXT=TEXT_"s"
+ . S ACQLOCN=$P(X,"^",2),ACQADDR=$P(X,"^",3),SERIEDES=$P(X,"^",4)
+ . I SERIEDES'="",SERIEDES'="<unknown>" D
+ . . I DISPLAY S TEXT=TEXT_$S(N>1:"",1:" ")_"   Series Description: "
+ . . E  S TEXT=TEXT_$S(N>1:",",1:", ")_" description: "
+ . . S TEXT=TEXT_$$HIGHLITE^MAGDAIR0(COLOR,SERIEDES)
+ . . Q
+ . I DISPLAY,'ACQSAME,ACQLOCN'="",ACQLOCN'="<unknown>" D
+ . . S TEXT=TEXT_"   Acquisition site: "
+ . . S TEXT=TEXT_$$HIGHLITE^MAGDAIR0(COLOR,ACQLOCN)
+ . . I ACQADDR'="",ACQADDR'="<unknown>" D
+ . . . S TEXT=TEXT_"     Address: "
+ . . . S TEXT=TEXT_$$HIGHLITE^MAGDAIR0(COLOR,ACQADDR)
+ . . . Q
+ . . Q
+ . S I=I+1,TEXT(I)=TEXT
+ . Q
+ I ('DISPLAY!ACQSAME),ACQLOCN'="",ACQLOCN'="<unknown>" D
+ . S TEXT="Acquisition site: "
+ . S TEXT=TEXT_$$HIGHLITE^MAGDAIR0(COLOR,ACQLOCN)
+ . I ACQADDR'="",ACQADDR'="<unknown>" D
+ . . S TEXT=TEXT_"    Address: "
+ . . S TEXT=TEXT_$$HIGHLITE^MAGDAIR0(COLOR,ACQADDR)
+ . . Q
+ . S I=I+1,TEXT(I)=""
+ . S I=I+1,TEXT(I)=TEXT
+ . Q
+ S TEXT=I ; number of lines of text
+ Q
+ ;
+IMAGE(SERINUMB) ; select the image
+ N NIMAGES ;-- number of DICOM objects in a study
+ N SERIEUID ;- DICOM series instance uid
+ N FIRST,OK,N,X,Y
+ ;
+ S SERIEUID=$O(^TMP("MAG",$J,"IMPORT","SERIES","INDEX",SERINUMB,""))
+ S NIMAGES=^TMP("MAG",$J,"IMPORT","SERIES","IEN",SERIEUID,"NIMAGES")
+ I NIMAGES=1 D  Q  ; only one image
+ . D DISPLAY(1)
+ . Q
+ ;
+ S OK=0,FIRST=1 F  D  Q:OK
+ . I FIRST D
+ . . W !!,"There are ",$$HIGHLITE^MAGDAIR0("YELLOW",NIMAGES)
+ . . W " Images in Series ",$$HIGHLITE^MAGDAIR0("YELLOW",SERINUMB),".  "
+ . . W "Enter an image number: "
+ . . Q
+ . E  W !!,"Enter another" W " image number: "
+ . R X:DTIME E  S OK=-1 Q
+ . I "^"[X S OK=-1 Q
+ . I "?"[X D IMAGEM(0) S FIRST=1 Q
+ . S Y=$P(X,"-",2),X=$P(X,"-",1) ; handle range
+ . I (X'?1N.N)!(X<1)!(X>NIMAGES) D IMAGEM(1) Q
+ . I $L(Y),(Y'?1N.N)!(Y'>X)!(Y>NIMAGES) D IMAGEM(1) Q
+ . D DISPLAY($S($L(Y):X_"-"_Y,1:X))
+ . S FIRST=0
+ . Q
+ Q
+ ;
+IMAGEM(QUESMARK) ; output image help message
+ ; QUESMARK - question mark flag, 1 output them, 0 don't output them
+ I QUESMARK W " ???"
+ W "  Enter a number between 1 and ",NIMAGES,", or m-n for a sequence of images"
+ Q
+ ;
+DISPLAY(RANGE) ; display a single image
+ N CMD,CMD0,END,IEN,START,VERBOSE,X
+ S (CMD,CMD0)="""""C:\Program Files\VistA\Imaging\DCMView\MAG_DCMView.exe"""
+ I RANGE["-" D  ; range of IENs
+ . S START=$P(RANGE,"-",1),END=$P(RANGE,"-",2)
+ . I (END-START)>39 D
+ . . S END=START+39
+ . . W $$HIGHLITE^MAGDAIR0("YELLOW"," -- Limited to 40 Images")
+ . . Q
+ . F N=START:1:END D
+ . . S X=$$ONEFILE(N)
+ . . I X>0 S CMD=CMD_" """_$P(X,",",2,999)_""""
+ . . Q
+ . Q
+ E  D  ; single image
+ . S X=$$ONEFILE(RANGE)
+ . I X>0 S CMD=CMD_" """_$P(X,",",2,999)_""""
+ . Q
+ I CMD=CMD0 D  Q
+ . W !,$$HIGHLITE^MAGDAIR0("YELLOW","*** Nothing to display ***")
+ . D CONTINUE^MAGDAIR0
+ . Q
+ S CMD=CMD_"""" ; add trailing quote
+ S VERBOSE=0 D DOS^MAGDOS(CMD,.ERROR)
+ I ERROR(0) D  ; DOS error
+ . N I,MSG
+ . S MSG(1)="DICOM IMAGE DISPLAY ERROR"
+ . S MSG(2)="Unexpected error in """_CMD_""""
+ . F I=1:1:ERROR(0) S MSG(I+2)=$J(I,3)_") "_ERROR(I)
+ . D WARNING^MAGDFCNS(.MSG)
+ . Q
+ Q
+ ;
+ONEFILE(N) ; get a file to be displayed
+ N IEN ;------ internal entry number in DATAFILE
+ N IMAGNUMB ;- instance number
+ N DATA,I,PATH,X
+ ; find the Nth image in the list
+ S I=0,IMAGNUMB="" ; IMAGNUMB can be 0
+ F  S IMAGNUMB=$O(^TMP("MAG",$J,"IMPORT","SERIES","IEN",SERIEUID,"LIST",IMAGNUMB)) Q:IMAGNUMB=""  D  Q:I=N
+ . S IEN=""
+ . F  S IEN=$O(^TMP("MAG",$J,"IMPORT","SERIES","IEN",SERIEUID,"LIST",IMAGNUMB,IEN)) Q:IEN=""  S I=I+1 Q:I=N
+ . Q
+ I 'IEN W " -- incorrect number of images" Q
+ I '$D(@DATAFILE@(IEN)) W " -- IEN = "_IEN_" is not on file in "_DATAFILE Q
+ S X=$$GETDATA^MAGDAIRD(IEN,"IEN",.DATA)
+ I DATA("PCONTEXT") D
+ . N I,MSG
+ . S I=0
+ . S I=I+1,MSG(I)=""
+ . S I=I+1,MSG(I)=$$HIGHLITE^MAGDAIR0("YELLOW","     This DICOM object cannot be stored on VistA.")
+ . S I=I+1,MSG(I)=""
+ . W ! D WARNING^MAGDFCNS(.MSG)
+ . D CONTINUE^MAGDAIR0
+ . Q
+ Q $$FILECHK(DATA("FROMPATH"))
+ ;
+FILECHK(FROMPATH) ; check for the existence of the the file
+ N FILE,FILESIZE,X
+ S X=$$GETDIR^MAGOSDIR(FROMPATH)
+ I 'X W $$HIGHLITE^MAGDAIR0("YELLOW","  (not on file)") Q 0 ; not on file
+ I X<0 W $$HIGHLITE^MAGDAIR0("YELLOW"," *** FILE ERROR: ",X," ***") Q -1 ; error
+ S FILE=$P(FROMPATH,"\",$L(FROMPATH,"\"))
+ S FILESIZE=$P($G(^TMP("MAG",$J,"DIR LIST",FILE)),";")
+ I 'FILESIZE W $$HIGHLITE^MAGDAIR0("YELLOW"," *** ERROR: ZERO-LENGTH FILE ***") Q -2 ; error
+ Q "1,"_FROMPATH

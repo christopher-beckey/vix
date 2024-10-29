@@ -1,0 +1,1461 @@
+<sequence working-base="Version 3.0 Baseline" date-updated="02.04.2015" author="Eric Klinker">
+	<branch>	
+		<dev>
+			<!-- Used for the dev and main KIDS branches/folders and LegacyVSS GW folders.  Patches must be listed in the correct release order, 
+				 and the status should be changed to "released", or the patch should be removed from this file once the patch is released -->
+			<patches>
+				<patch name="Version 3.0 Patch 107 - Clinical Client Refactor" type="null" status="null">107</patch>
+				<patch name="Version 3.0 Patch 109 - Surgery-Clinical Capture patchType" type="null" status="null">109</patch>
+				<patch name="Version 3.0 Patch 141 - HL7 Version 2.4 Corrections" type="null" status="null">141</patch>
+				<patch name="Version 3.0 Patch 034 - Storing DICOM Objects, Phase IV" type="DICOM" status="released">34</patch>
+				<patch name="Version 3.0 Patch 112 - DICOM File Archive Application" type="null" status="null">112</patch>
+				<patch name="Version 3.0 Patch 116 - Query Retrieve Provider II" type="DICOM" status="released">116</patch>
+				<patch name="Version 3.0 Patch 118 - DICOM Importer II" type="DICOM" status="released">118</patch>
+				<patch name="Version 3.0 Patch 135 - Emergency patch for MAG 3.0 121" type="null" status="null">135</patch>
+				<patch name="Version 3.0 Patch 119 - VIX Maintenance" type="null" status="released">119</patch>
+				<patch name="Version 3.0 Patch 087 - DICOM Maintenance V" type="DICOM" status="null">87</patch>
+				<patch name="Version 3.0 Patch 044 - TeleOphthalmology Routing" type="null" status="null">44</patch>
+				<patch name="Version 3.0 Patch 127 - TeleReader Maintenance" type="null" status="released">127</patch>
+				<patch name="Version 3.0 Patch 079 - DICOM Storage Commit" type="null" status="null">79</patch>				
+				<patch name="Version 3.0 Patch 110 - Multiple Modality Worklist Service" type="DICOM" status="null">110</patch>
+				<patch name="Version 3.0 Patch 129 - Clinical Capture Accusoft Version Update Maintenance" type="null" status="released">129</patch>
+				<patch name="Version 3.0 Patch 131 - Clinical Display Scout Lines Enhancement" type="null" status="released">131</patch>
+				<patch name="Version 3.0 Patch 130 - Clinical Display Release of Information Enhancement" type="null" status="null">130</patch>
+				<patch name="Version 3.0 Patch 140 - Clinical Capture Scanning Enhancements" type="null" status="released">140</patch>			
+				<patch name="Version 3.0 Patch 133 - VistARad Maintenance" type="null" status="null">133</patch>
+				<patch name="Version 3.0 Patch 137 - Radiation Dose Collection Phase I" type="null" status="null">137</patch>
+				<patch name="Version 3.0 Patch 136 - DICOM Importer III" type="null" status="null">136</patch>				
+				<patch name="Version 3.0 Patch 138 - Telepathology Worklist" type="DICOM" status="null">138</patch>
+				<patch name="Version 3.0 Patch 156 - Legacy DICOM Gateway" type="DICOM" status="null">156</patch>
+				<patch name="Version 3.0 Patch 160 - LDGW 64 bits Compatibility" type="DICOM" status="null">160</patch>
+				<patch name="Version 3.0 Patch 162 - Query Retrieve" type="DICOM" status="null">162</patch>
+			</patches>
+		</dev>
+		
+		<!-- Legacyvss settings below are used only for KIDS patch 135 that are still built out of LegacyVSS-->
+		<legacyvss>
+			<patches>
+				<patch>
+					<name>Version 3.0 Patch 001 - Defect Patch</name>
+					<sname>1</sname>
+					<order>1</order>
+					<type>GEN</type>
+					<status>release</status>
+					<reldate>03.28.2002</reldate>
+					<depen>null</depen>
+					<pre>null</pre>
+					<post>null</post>
+					<Env>null</Env>
+					<nodelete>null</nodelete>
+				</patch>
+				<patch>
+					<name>Version 3.0 Patch 006 - VistARad Enhancements</name>
+					<sname>6</sname>
+					<order>2</order>
+					<type>null</type>
+					<status>release</status>
+					<reldate>05.23.2002</reldate>
+					<depen>MAG*3.0*1</depen>
+					<pre>null</pre>
+					<post>null</post>
+					<Env>null</Env>
+					<nodelete>null</nodelete>
+				</patch>
+				<patch>
+					<name>Version 3.0 Patch 007 - Support for Clinical Procedures</name>
+					<sname>7</sname>
+					<order>3</order>
+					<type>DICOM</type>
+					<status>release</status>
+					<reldate>07.25.2002</reldate>
+					<depen>MAG*3.0*1</depen>
+					<pre>null</pre>
+					<post>null</post>
+					<Env>null</Env>
+					<nodelete>null</nodelete>
+				</patch>
+				<patch>
+					<name>Version 3.0 Patch 016 - VistARad Enhancements</name>
+					<sname>16</sname>
+					<order>4</order>
+					<type>null</type>
+					<status>release</status>
+					<reldate>03.17.2003</reldate>
+					<depen>MAG*3.0*7</depen>
+					<pre>null</pre>
+					<post>null</post>
+					<Env>null</Env>
+					<nodelete>null</nodelete>
+				</patch>
+				<patch>
+					<name>Version 3.0 Patch 009 - Routing</name>
+					<sname>9</sname>
+					<order>5</order>
+					<type>DICOM</type>
+					<status>release</status>
+					<reldate>03.31.2003</reldate>
+					<depen>MAG*3.0*16</depen>
+					<pre>null</pre>
+					<post>null</post>
+					<Env>null</Env>
+					<nodelete>null</nodelete>
+				</patch>
+				<patch>
+					<name>Version 3.0 Patch 017 - Image Index Conversion</name>
+					<sname>17</sname>
+					<order>6</order>
+					<type>null</type>
+					<status>release</status>
+					<reldate>03.31.2003</reldate>
+					<depen>MAG*3.0*7</depen>
+					<pre>null</pre>
+					<post>null</post>
+					<Env>null</Env>
+					<nodelete>null</nodelete>
+				</patch>
+				<patch>
+					<name>Version 3.0 Patch 002 - Display Resolution Check</name>
+					<sname>2</sname>
+					<order>7</order>
+					<type>null</type>
+					<status>release</status>
+					<reldate>03.31.2003</reldate>
+					<depen>MAG*3.0*7</depen>
+					<pre>null</pre>
+					<post>null</post>
+					<Env>null</Env>
+					<nodelete>null</nodelete>
+				</patch>
+				<patch>
+					<name>Version 3.0 Patch 019 - Site Usage Reporting</name>
+					<sname>19</sname>
+					<order>8</order>
+					<type>null</type>
+					<status>withdrawn</status>
+					<reldate>na</reldate>
+					<depen>null</depen>
+					<pre>null</pre>
+					<post>null</post>
+					<Env>null</Env>
+					<nodelete>null</nodelete>
+				</patch>
+				<patch>
+					<name>Version 3.0 Patch 026 - Basic DICOM File Size Verification</name>
+					<sname>26</sname>
+					<order>9</order>
+					<type>DICOM</type>
+					<status>release</status>
+					<reldate>05.08.2003</reldate>
+					<depen>MAG*3.0*7</depen>
+					<pre>null</pre>
+					<post>null</post>
+					<Env>null</Env>
+					<nodelete>null</nodelete>
+				</patch>
+				<patch>
+					<name>Version 3.0 Patch 023 - VistARad Maintenance I</name>
+					<sname>23</sname>
+					<order>10</order>
+					<type>null</type>
+					<status>release</status>
+					<reldate>05.20.2003</reldate>
+					<depen>MAG*3.0*16</depen>
+					<pre>null</pre>
+					<post>null</post>
+					<Env>null</Env>
+					<nodelete>null</nodelete>
+				</patch>
+				<patch>
+					<name>Version 3.0 Patch 028 - Routing Maintenance</name>
+					<sname>28</sname>
+					<order>11</order>
+					<type>null</type>
+					<status>release</status>
+					<reldate>06.19.2003</reldate>
+					<depen>null</depen>
+					<pre>null</pre>
+					<post>null</post>
+					<Env>null</Env>
+					<nodelete>null</nodelete>			
+				</patch>
+				<patch>
+					<name>Version 3.0 Patch 027 - Imaging Site Usage Reporting Maintenance</name>
+					<sname>27</sname>
+					<order>12</order>
+					<type>null</type>
+					<status>release</status>
+					<reldate>06.26.2003</reldate>
+					<depen>MAG*3.0*17</depen>
+					<pre>null</pre>
+					<post>null</post>
+					<Env>null</Env>
+					<nodelete>null</nodelete>
+				</patch>
+				<patch>
+					<name>Version 3.0 Patch 025 - Image Index Conversion Phase 2</name>
+					<sname>25</sname>
+					<order>13</order>
+					<type>null</type>
+					<status>release</status>
+					<reldate>09.30.2003</reldate>
+					<depen>MAG*3.0*17</depen>
+					<pre>PRE^MAGIPS25</pre>
+					<post>PRE^MAGIPS25</post>
+					<Env>null</Env>
+					<nodelete>null</nodelete>
+				</patch>
+				<patch>
+					<name>Version 3.0 Patch 022 - VistARad Maintenance II</name>
+					<sname>22</sname>
+					<order>14</order>
+					<type>null</type>
+					<status>release</status>
+					<reldate>09.30.2003</reldate>
+					<depen>MAG*3.0*9</depen>
+					<pre>null</pre>
+					<post>null</post>
+					<Env>null</Env>
+					<nodelete>null</nodelete>
+				</patch>
+				<patch>
+					<name>Version 3.0 Patch 024 - EKG MultiSite</name>
+					<sname>24</sname>
+					<order>15</order>
+					<type>null</type>
+					<status>release</status>
+					<reldate>10.01.2003</reldate>
+					<depen>MAG*3.0*1</depen>
+					<pre>null</pre>
+					<post>null</post>
+					<Env>null</Env>
+					<nodelete>null</nodelete>
+				</patch>
+				<patch>
+					<name>Version 3.0 Patch 021 - DICOM Maintenance</name>
+					<sname>21</sname>
+					<order>16</order>
+					<type>DICOM</type>
+					<status>release</status>
+					<reldate>11.30.2003</reldate>
+					<depen>MAG*3.0*26</depen>
+					<pre>null</pre>
+					<post>null</post>
+					<Env>null</Env>
+					<nodelete>null</nodelete>
+				</patch>
+				<patch>
+					<name>Version 3.0 Patch 010 - DICOM for Healthcare Providers</name>
+					<sname>10</sname>
+					<order>17</order>
+					<type>DICOM</type>
+					<status>release</status>
+					<reldate>10.20.2003</reldate>
+					<depen>MAG*3.0*21</depen>
+					<pre>PRE^MAGIPS10</pre>
+					<post>POST^MAGIPS10</post>
+					<Env>null</Env>
+					<nodelete>null</nodelete>
+				</patch>
+				<patch>
+					<name>Version 3.0 Patch 036 - DICOM Maintenance for Kernel patch 335</name>
+					<sname>36</sname>
+					<order>18</order>
+					<type>DICOM</type>
+					<status>release</status>
+					<reldate>02.25.2004</reldate>
+					<depen>XU*8*335</depen>
+					<pre>null</pre>
+					<post>POST^MAGIPS36</post>
+					<Env>null</Env>
+					<nodelete>null</nodelete>
+				</patch>
+				<patch>
+					<name>Version 3.0 Patch 003 - Long File Names</name>
+					<sname>3</sname>
+					<order>19</order>
+					<type>DICOM</type>
+					<status>release</status>
+					<reldate>03.23.2004</reldate>
+					<depen>MAG*3.0*1,MAG*3.0*7</depen>
+					<pre>PRE^MAGIPOS3</pre>
+					<post>POST^MAGIPOS3</post>
+					<Env>null</Env>
+					<nodelete>null</nodelete>
+				</patch>
+				<patch>
+					<name>Version 3.0 Patch 011 - MUMPS to MUMPS Broker</name>
+					<sname>11</sname>
+					<order>20</order>
+					<type>DICOM</type>
+					<status>release</status>
+					<reldate>04.30.2004</reldate>
+					<depen>MAG*3.0*10,XWB*1.1*28,XWB*1.1*41</depen>
+					<pre>null</pre>
+					<post>POST^MAGIPS11</post>
+					<Env>MAGENV11</Env>
+					<nodelete>null</nodelete>
+				</patch>
+				<patch>
+					<name>Version 3.0 Patch 029 - Imaging Site Usage Maintenance II</name>
+					<sname>29</sname>
+					<order>21</order>
+					<type>null</type>
+					<status>release</status>
+					<reldate>04.30.2004</reldate>
+					<depen>MAG*3.0*7,MAG*3.0*9</depen>
+					<pre>null</pre>
+					<post>POST^MAGIPS29</post>
+					<Env>null</Env>
+					<nodelete>null</nodelete>
+				</patch>
+				<patch>
+					<name>Version 3.0 Patch 032 - VistARad Maintenance III</name>
+					<sname>32</sname>
+					<order>22</order>
+					<type>null</type>
+					<status>release</status>
+					<reldate>05.06.2004</reldate>
+					<depen>MAG*3.0*22</depen>
+					<pre>null</pre>
+					<post>null</post>
+					<Env>null</Env>
+					<nodelete>null</nodelete>
+				</patch>
+				<patch>
+					<name>Version 3.0 Patch 033 - Cleanup Permissions Issues</name>
+					<sname>33</sname>
+					<order>23</order>
+					<type>null</type>
+					<status>release</status>
+					<reldate>06.23.2004</reldate>
+					<depen>MAG*3.0*11</depen>
+					<pre>null</pre>
+					<post>POST^MAGIPS33</post>
+					<Env>null</Env>
+					<nodelete>null</nodelete>
+				</patch>
+				<patch>
+					<name>Version 3.0 Patch 015 - Active X Control</name>
+					<sname>15</sname>
+					<order>24</order>
+					<type>null</type>
+					<status>release</status>
+					<reldate>08.12.2004</reldate>
+					<depen>MAG*3.0*7</depen>
+					<pre>null</pre>
+					<post>null</post>
+					<Env>null</Env>
+					<nodelete>null</nodelete>
+				</patch>
+				<patch>
+					<name>Version 3.0 Patch 040 - DIQUIET Maintenance</name>
+					<sname>40</sname>
+					<order>25</order>
+					<type>null</type>
+					<status>release</status>
+					<reldate>08.30.2004</reldate>
+					<depen>MAG*3.0*11</depen>
+					<pre>null</pre>
+					<post>POST^MAGIPS40</post>
+					<Env>null</Env>
+					<nodelete>null</nodelete>
+				</patch>
+				<patch>
+					<name>Version 3.0 Patch 008 - Document Imaging</name>
+					<sname>8</sname>
+					<order>26</order>
+					<type>null</type>
+					<status>release</status>
+					<reldate>09.30.2004</reldate>
+					<depen>MAG*3.0*24,MAG*3.0*25</depen>
+					<pre>null</pre>
+					<post>POST^MAGIPOS8</post>
+					<Env>null</Env>
+					<nodelete>null</nodelete>				
+				</patch>
+				<patch>
+					<name>Version 3.0 Patch 030 - DICOM Gateway Maintenance II</name>
+					<sname>30</sname>
+					<order>27</order>
+					<type>DICOM</type>
+					<status>release</status>
+					<reldate>11.05.2004</reldate>
+					<depen>MAG*3.0*40,MAG*3.0*29</depen>
+					<pre>PRE^MAGIPS30</pre>
+					<post>PRE^MAGIPS30</post>
+					<Env>null</Env>
+					<nodelete>null</nodelete>
+				</patch>
+				<patch>
+					<name>Version 3.0 Patch 005 - Storing DICOM Objects, Phase I</name>
+					<sname>5</sname>
+					<order>28</order>
+					<type>DICOM</type>
+					<status>release</status>
+					<reldate>01.26.2005</reldate>
+					<depen>MAG*3.0*8,MAG*3.0*10</depen>
+					<pre>null</pre>
+					<post>POST^MAGIPS05</post>
+					<Env>null</Env>
+					<nodelete>null</nodelete>
+				</patch>
+				<patch>
+					<name>Version 3.0 Patch 048 - Clinical Capture and Display Maintenance</name>
+					<sname>48</sname>
+					<order>29</order>
+					<type>null</type>
+					<status>release</status>
+					<reldate>03.04.2005</reldate>
+					<depen>MAG*3.0*8</depen>
+					<pre>null</pre>
+					<post>null</post>
+					<Env>null</Env>
+					<nodelete>null</nodelete>
+				</patch>
+				<patch>
+					<name>Version 3.0 Patch 047 - Medicine Conversion API</name>
+					<sname>47</sname>
+					<order>30</order>
+					<type>null</type>
+					<status>release</status>
+					<reldate>04.13.2005</reldate>
+					<depen>null</depen>
+					<pre>null</pre>
+					<post>null</post>
+					<Env>null</Env>
+					<nodelete>null</nodelete>
+				</patch>
+				<patch>
+					<name>Version 3.0 Patch 063 - EKG Patient Safety Fix</name>
+					<sname>63</sname>
+					<order>31</order>
+					<type>null</type>
+					<status>release</status>
+					<reldate>05.31.2005</reldate>
+					<depen>MAG*3.0*48</depen>
+					<pre>null</pre>
+					<post>null</post>
+					<Env>null</Env>
+					<nodelete>null</nodelete>
+				</patch>
+				<patch>
+					<name>Version 3.0 Patch 031 - Image Index Maintenance</name>
+					<sname>31</sname>
+					<order>32</order>
+					<type>null</type>
+					<status>release</status>
+					<reldate>08.11.2005</reldate>
+					<depen>MAG*3.0*25</depen>
+					<pre>null</pre>
+					<post>POST^MAGIPS31</post>
+					<Env>null</Env>
+					<nodelete>null</nodelete>
+				</patch>
+				<patch>
+					<name>Version 3.0 Patch 045 - TeleOphthalmology Remote Image Views</name>
+					<sname>45</sname>
+					<order>33</order>
+					<type>null</type>
+					<status>release</status>
+					<reldate>09.26.2005</reldate>
+					<depen>MAG*3.0*63</depen>
+					<pre>null</pre>
+					<post>POST^MAGIPS45</post>
+					<Env>null</Env>
+					<nodelete>null</nodelete>
+				</patch>
+				<patch>
+					<name>Version 3.0 Patch 057 - Documentation Maintenance</name>
+					<sname>57</sname>
+					<order>34</order>
+					<type>null</type>
+					<status>release</status>
+					<reldate>12.15.2005</reldate>
+					<depen>null</depen>
+					<pre>null</pre>
+					<post>null</post>
+					<Env>null</Env>
+					<nodelete>null</nodelete>
+				</patch>
+				<patch>
+					<name>Version 3.0 Patch 078 - MAG Enterprise Productivity Reports Update</name>
+					<sname>78</sname>
+					<order>35</order>
+					<type>null</type>
+					<status>release</status>
+					<reldate>05.26.2006</reldate>
+					<depen>null</depen>
+					<pre>null</pre>
+					<post>null</post>
+					<Env>null</Env>
+					<nodelete>null</nodelete>
+				</patch>
+				<patch>
+					<name>Version 3.0 Patch 051 - DICOM Maintenance III</name>
+					<sname>51</sname>
+					<order>36</order>
+					<type>DICOM</type>
+					<status>release</status>
+					<reldate>06.16.2006</reldate>
+					<depen>MAG*3.0*8,MAG*3.0*10,MAG*3.0*11,MAG*3.0*30</depen>
+					<pre>null</pre>
+					<post>null</post>
+					<Env>null</Env>
+					<nodelete>null</nodelete>
+				</patch>
+				<patch>
+					<name>Version 3.0 Patch 018 - VistARad Enhancements</name>
+					<sname>18</sname>
+					<order>37</order>
+					<type>null</type>
+					<status>release</status>
+					<reldate>06.16.2006</reldate>
+					<depen>MAG*3.0*51</depen>
+					<pre>null</pre>
+					<post>null</post>
+					<Env>null</Env>
+					<nodelete>null</nodelete>
+				</patch>
+				<patch>
+					<name>Version 3.0 Patch 061 - Index Terms</name>
+					<sname>61</sname>
+					<order>38</order>
+					<type>null</type>
+					<status>release</status>
+					<reldate>06.28.2006</reldate>
+					<depen>MAG*3.0*31,MAG*3.0*48</depen>
+					<pre>null</pre>
+					<post>null</post>
+					<Env>null</Env>
+					<nodelete>null</nodelete>
+				</patch>
+				<patch>
+					<name>Version 3.0 Patch 020 - Background Processor Enhancements</name>
+					<sname>20</sname>
+					<order>39</order>
+					<type>null</type>
+					<status>release</status>
+					<reldate>07.11.2006</reldate>
+					<depen>MAG*3.0*51,MAG*3.0*45,MAG*3.0*48</depen>
+					<pre>null</pre>
+					<post>null</post>
+					<Env>null</Env>
+					<nodelete>null</nodelete>
+				</patch>
+				<patch>
+					<name>Version 3.0 Patch 050 - DICOM Export I</name>
+					<sname>50</sname>
+					<order>40</order>
+					<type>DICOM</type>
+					<status>release</status>
+					<reldate>07.13.2006</reldate>
+					<depen>MAG*3.0*51</depen>
+					<pre>null</pre>
+					<post>null</post>
+					<Env>null</Env>
+					<nodelete>null</nodelete>
+				</patch>
+				<patch>
+					<name>Version 3.0 Patch 052 - Storing DICOM Objects, Phase II</name>
+					<sname>52</sname>
+					<order>41</order>
+					<type>DICOM</type>
+					<status>release</status>
+					<reldate>09.13.2006</reldate>
+					<depen>MAG*3.0*30,MAG*3.0*51,MAG*3.0*50</depen>
+					<pre>null</pre>
+					<post>null</post>
+					<Env>null</Env>
+					<nodelete>null</nodelete>
+				</patch>
+				<patch>
+					<name>Version 3.0 Patch 038 - Import API Maintenance</name>
+					<sname>38</sname>
+					<order>42</order>
+					<type>null</type>
+					<status>release</status>
+					<reldate>10.24.2006</reldate>
+					<depen>null</depen>
+					<pre>null</pre>
+					<post>POST^MAGIPS38</post>
+					<Env>null</Env>
+					<nodelete>null</nodelete>
+				</patch>
+				<patch>
+					<name>Version 3.0 Patch 084 - Ambulatory Care Phase II Synchronization</name>
+					<sname>84</sname>
+					<order>43</order>
+					<type>null</type>
+					<status>release</status>
+					<reldate>01.30.2007</reldate>
+					<depen>SD*5.3*466</depen>
+					<pre>null</pre>
+					<post>null</post>
+					<Env>null</Env>
+					<nodelete>null</nodelete>
+				</patch>
+				<patch>
+					<name>Version 3.0 Patch 092 - Filling VistA Error Trap Repair</name>
+					<sname>92</sname>
+					<order>44</order>
+					<type>null</type>
+					<status>release</status>
+					<reldate>02.23.2007</reldate>
+					<depen>MAG*3.0*45</depen>
+					<pre>null</pre>
+					<post>null</post>
+					<Env>null</Env>
+					<nodelete>null</nodelete>
+				</patch>
+				<patch>
+					<name>Version 3.0 Patch 077 - Image Activity Reports</name>
+					<sname>77</sname>
+					<order>45</order>
+					<type>null</type>
+					<status>release</status>
+					<reldate>04.05.2007</reldate>
+					<depen>null</depen>
+					<pre>null</pre>
+					<post>POST^MAGIPS77</post>
+					<Env>MAGENV77</Env>
+					<nodelete>null</nodelete>
+				</patch>
+				<patch>
+					<name>Version 3.0 Patch 046 - TeleReader</name>
+					<sname>46</sname>
+					<order>46</order>
+					<type>null</type>
+					<status>release</status>
+					<reldate>04.11.2007</reldate>
+					<depen>MAG*3.0*50,GMRC*3.0*51,TIU*1.0*223</depen>
+					<pre>null</pre>
+					<post>POST^MAGIPS46</post>
+					<Env>null</Env>
+					<nodelete>null</nodelete>
+				</patch>
+				<patch>
+					<name>Version 3.0 Patch 065 - VistARad Maintenance IV</name>
+					<sname>65</sname>
+					<order>47</order>
+					<type>null</type>
+					<status>release</status>
+					<reldate>05.04.2007</reldate>
+					<depen>MAG*3.0*18,MAG*3.0*20</depen>
+					<pre>null</pre>
+					<post>null</post>
+					<Env>null</Env>
+					<nodelete>null</nodelete>
+				</patch>
+				<patch>
+					<name>Version 3.0 Patch 086 - Chronologic Messages</name>
+					<sname>86</sname>
+					<order>48</order>
+					<type>DICOM</type>
+					<status>release</status>
+					<reldate>06.26.2007</reldate>
+					<depen>null</depen>
+					<pre>null</pre>
+					<post>null</post>
+					<Env>null</Env>
+					<nodelete>null</nodelete>
+				</patch>
+				<patch>
+					<name>Version 3.0 Patch 085 - Import API + SRA + Maintenance</name>
+					<sname>85</sname>
+					<order>49</order>
+					<type>null</type>
+					<status>release</status>
+					<reldate>07.13.2007</reldate>
+					<depen>null</depen>
+					<pre>null</pre>
+					<post>null</post>
+					<Env>null</Env>
+					<nodelete>null</nodelete>
+				</patch>
+				<patch>
+					<name>Version 3.0 Patch 081 - BP Verifier Updates</name>
+					<sname>81</sname>
+					<order>50</order>
+					<type>null</type>
+					<status>release</status>
+					<reldate>08.19.2007</reldate>
+					<depen>MAG*3.0*20</depen>
+					<pre>null</pre>
+					<post>null</post>
+					<Env>null</Env>
+					<nodelete>null</nodelete>
+				</patch>
+				<patch>
+					<name>Version 3.0 Patch 069 - Convert DICOM Gateway to Cache</name>
+					<sname>69</sname>
+					<order>51</order>
+					<type>DICOM</type>
+					<status>release</status>
+					<reldate>11.07.2007</reldate>
+					<depen>null</depen>
+					<pre>null</pre>
+					<post>null</post>
+					<Env>null</Env>
+					<nodelete>null</nodelete>
+				</patch>
+				<patch>
+					<name>Version 3.0 Patch 076 - VistARad Section 508</name>
+					<sname>76</sname>
+					<order>52</order>
+					<type>null</type>
+					<status>release</status>
+					<reldate>01.02.2008</reldate>
+					<depen>MAG*3.0*65</depen>
+					<pre>null</pre>
+					<post>null</post>
+					<Env>null</Env>
+					<nodelete>null</nodelete>
+				</patch>
+				<patch>
+					<name>Version 3.0 Patch 059 - TIU</name>
+					<sname>59</sname>
+					<order>53</order>
+					<type>null</type>
+					<status>release</status>
+					<reldate>02.13.2008</reldate>
+					<depen>MAG*3.0*85</depen>
+					<pre>null</pre>
+					<post>null</post>
+					<Env>null</Env>
+					<nodelete>null</nodelete>
+				</patch>
+				<patch>
+					<name>Version 3.0 Patch 096 - VistaWeb CCOW Fix</name>
+					<sname>96</sname>
+					<order>54</order>
+					<type>null</type>
+					<status>release</status>
+					<reldate>06.12.2008</reldate>
+					<depen>MAG*3.0*59</depen>
+					<pre>null</pre>
+					<post>null</post>
+					<Env>null</Env>
+					<nodelete>null</nodelete>
+				</patch>
+				<patch>
+					<name>Version 3.0 Patch 075 - AbstrTGA and DCMtoTGA</name>
+					<sname>75</sname>
+					<order>55</order>
+					<type>DICOM</type>
+					<status>release</status>
+					<reldate>07.01.2008</reldate>
+					<depen>null</depen>
+					<pre>null</pre>
+					<post>null</post>
+					<Env>null</Env>
+					<nodelete>null</nodelete>
+				</patch>
+				<patch>
+					<name>Version 3.0 Patch 102 - MWL G-xref and Add Reason for Study</name>
+					<sname>102</sname>
+					<order>56</order>
+					<type>DICOM</type>
+					<status>release</status>
+					<reldate>09.08.2008</reldate>
+					<depen>null</depen>
+					<pre>null</pre>
+					<post>null</post>
+					<Env>null</Env>
+					<nodelete>null</nodelete>
+				</patch>
+				<patch>
+					<name>Version 3.0 Patch 095 - MUSE ECG Maintenance</name>
+					<sname>95</sname>
+					<order>57</order>
+					<type>null</type>
+					<status>release</status>
+					<reldate>09.25.2008</reldate>
+					<depen>MAG*3.0*46</depen>
+					<pre>null</pre>
+					<post>null</post>
+					<Env>null</Env>
+					<nodelete>null</nodelete>
+				</patch>
+				<patch>
+					<name>Version 3.0 Patch 072 - Accusoft Toolkit Conversion</name>
+					<sname>72</sname>
+					<order>58</order>
+					<type>null</type>
+					<status>release</status>
+					<reldate>02.09.2009</reldate>
+					<depen>MAG*3.0*59</depen>
+					<pre>null</pre>
+					<post>null</post>
+					<Env>null</Env>
+					<nodelete>null</nodelete>
+				</patch>
+				<patch>
+					<name>Version 3.0 Patch 103 - M2M Log On Error</name>
+					<sname>103</sname>
+					<order>59</order>
+					<type>DICOM</type>
+					<status>release</status>
+					<reldate>03.03.2009</reldate>
+					<depen>MAG*3.0*69</depen>
+					<pre>null</pre>
+					<post>null</post>
+					<Env>null</Env>
+					<nodelete>null</nodelete>
+				</patch>		
+				<patch>
+					<name>Version 3.0 Patch 054 - DICOM Maintenance IV</name>
+					<sname>54</sname>
+					<order>60</order>
+					<type>DICOM</type>
+					<status>release</status>
+					<reldate>10.28.2009</reldate>
+					<depen>MAG*3.0*69</depen>
+					<pre>PRE^MAGIPS54</pre>
+					<post>POST^MAGIPS54</post>
+					<Env>MAGENCHK</Env>
+					<nodelete>null</nodelete>
+				</patch>
+				<patch>
+					<name>Version 3.0 Patch 101 - VistARad Maintenance V</name>
+					<sname>101</sname>
+					<order>61</order>
+					<type>null</type>
+					<status>release</status>
+					<reldate>02.10.2010</reldate>
+					<depen>MAG*3.0*76</depen>
+					<pre>null</pre>
+					<post>POSTINST^MAGJMN1</post>
+					<Env>MAGJMN1</Env>
+					<nodelete>null</nodelete>
+				</patch>
+				<patch>
+					<name>Version 3.0 Patch 093 - Clinical Display Maintenance II</name>
+					<sname>93</sname>
+					<order>62</order>
+					<type>null</type>
+					<status>release</status>
+					<reldate>02.10.2010</reldate>
+					<depen>MAG*3.0*54</depen>
+					<pre>null</pre>
+					<post>POST^MAGIPS93</post>
+					<Env>null</Env>
+					<nodelete>null</nodelete>
+				</patch>
+				<patch>
+					<name>Version 3.0 Patch 111 - Broker Security Enhancements</name>
+					<sname>111</sname>
+					<order>63</order>
+					<type>null</type>
+					<status>release</status>
+					<reldate>05.06.2010</reldate>
+					<depen>XWB*1.1*53,XU*8.0*523</depen>
+					<pre>null</pre>
+					<post>POS^MAGIP111</post>
+					<Env>null</Env>
+					<nodelete>null</nodelete>
+				</patch>
+				<patch>
+					<name>Version 3.0 Patch 083 - Display Enhancements VA-DOD Image Exchange</name>
+					<sname>83</sname>
+					<order>64</order>
+					<type>null</type>
+					<status>release</status>
+					<reldate>06.28.2010</reldate>
+					<depen>null</depen>
+					<pre>null</pre>
+					<post>POST^MAGIPS83</post>
+					<Env>null</Env>
+					<nodelete>null</nodelete>
+				</patch>
+				<patch>
+					<name>Version 3.0 Patch 108 - Import API Patch for Surgery, VIC</name>
+					<sname>108</sname>
+					<order>65</order>
+					<type>null</type>
+					<status>release</status>
+					<reldate>08.20.2010</reldate>
+					<depen>MAG*3.0*59,MAG*3.0*93</depen>
+					<pre>PRE^MAGIP108</pre>
+					<post>POS^MAGIP108</post>
+					<Env>null</Env>
+					<nodelete>null</nodelete>
+				</patch>
+				<patch>
+					<name>Version 3.0 Patch 090 - VistARad Enhancements (User Survey)</name>
+					<sname>90</sname>
+					<order>66</order>
+					<type>null</type>
+					<status>release</status>
+					<reldate>08.30.2010</reldate>
+					<depen>MAG*3.0*101,MAG*3.0*111</depen>
+					<pre>null</pre>
+					<post>POSTINST^MAGJMN1</post>
+					<Env>MAGJMN1</Env>
+					<nodelete>true</nodelete>
+				</patch>
+				<patch>	
+					<name>Version 3.0 Patch 053 - DICOM Import I</name>
+					<sname>53</sname>
+					<order>67</order>
+					<type>DICOM</type>
+					<status>release</status>
+					<reldate>09.02.2010</reldate>
+					<depen>MAG*.3.0*54,RA*5.0*90</depen>
+					<pre>null</pre>
+					<post>POST^MAGIPS53</post>
+					<Env>null</Env>
+					<nodelete>null</nodelete>
+				</patch>
+				<patch>
+					<name>Version 3.0 Patch 094 - Clinical Capture Maintenance II</name>
+					<sname>94</sname>
+					<order>68</order>
+					<type>null</type>
+					<status>release</status>
+					<reldate>09.21.2010</reldate>
+					<depen>MAG*3.0*93,MAG*3.0*111</depen>
+					<pre>PRE^MAGIPS94</pre>
+					<post>POS^MAGIPS94</post>
+					<Env>null</Env>
+					<nodelete>null</nodelete>
+				</patch>
+				<patch>	
+					<name>Version 3.0 Patch 114 - Telereader Configurator</name>
+					<sname>114</sname>
+					<order>69</order>
+					<type>null</type>
+					<status>release</status>
+					<reldate>10.05.2010</reldate>
+					<depen>MAG*3.0*46</depen>
+					<pre>null</pre>
+					<post>POS^MAGIP114</post>
+					<Env>null</Env>
+					<nodelete>null</nodelete>
+				</patch>
+				<patch>
+					<name>Version 3.0 Patch 066 - DICOM Query Retrieve SCP</name>
+					<sname>66</sname>
+					<order>70</order>
+					<type>DICOM</type>
+					<status>release</status>
+					<reldate>null</reldate>
+					<depen>MAG*3.0*54</depen>
+					<pre>PRE^MAGIPS66</pre>
+					<post>POST^MAGIPS66</post>
+					<Env>null</Env>
+					<nodelete>null</nodelete>
+				</patch>
+				<patch>
+					<name>Version 3.0 Patch 105 - Advanced Web Image Viewer</name>
+					<sname>105</sname>
+					<order>71</order>
+					<type>null</type>
+					<status>release</status>
+					<reldate>01.05.2011</reldate>
+					<depen>null</depen>
+					<pre>null</pre>
+					<post>POS^MAGIP105</post>
+					<Env>null</Env>
+					<nodelete>null</nodelete>
+				</patch>
+				<patch>
+					<name>Version 3.0 Patch 098 - Storage Site Utilities</name>
+					<sname>98</sname>
+					<order>72</order>
+					<type>null</type>
+					<status>release</status>
+					<reldate>null</reldate>
+					<depen>MAG*3.0*81</depen>
+					<pre>null</pre>
+					<post>POST^MAGIPS98</post>
+					<Env>null</Env>
+					<nodelete>null</nodelete>
+				</patch>
+				<patch>
+					<name>Version 3.0 Patch 115 - VistARad Maintenance VI</name>
+					<sname>115</sname>
+					<order>73</order>
+					<type>null</type>
+					<status>release</status>
+					<reldate>null</reldate>
+					<depen>MAG*3.0*90</depen>
+					<pre>null</pre>
+					<post>POSTINST^MAGJMN1</post>
+					<Env>MAGJMN1</Env>
+					<nodelete>true</nodelete>
+				</patch>
+				<patch>
+					<name>Version 3.0 Patch 106 - Teledermatology</name>
+					<sname>106</sname>
+					<order>74</order>
+					<type>null</type>
+					<status>release</status>
+					<reldate>null</reldate>
+					<depen>MAG*3.0*54,MAG*3.0*94,MAG*3.0*114</depen>
+					<pre>PRE^MAGIP106</pre>
+					<post>POS^MAGIP106</post>
+					<Env>MAGIP106</Env>
+					<nodelete>null</nodelete>
+				</patch>
+				<patch>
+					<name>Version 3.0 Patch 039 - Background Processor Enhancements II</name>
+					<sname>39</sname>
+					<order>75</order>
+					<type>null</type>
+					<status>release</status>
+					<reldate>null</reldate>
+					<depen>MAG*3.0*81</depen>
+					<pre>PRE^MAGIP39</pre>
+					<post>POST^MAGIP39B</post>
+					<Env>MAGIP39E</Env>
+					<nodelete>null</nodelete>
+				</patch>
+				<patch>
+					<name>Version 3.0 Patch 049 - HL7 ADT Transmission to Commercial PACS</name>
+					<sname>49</sname>
+					<order>76</order>
+					<type>DICOM</type>
+					<status>release</status>
+					<reldate>08.24.2011</reldate>
+					<depen>MAG*3.0*66,RA*5.0*47</depen>
+					<pre>null</pre>
+					<post>POST^MAGIPS49</post>
+					<Env>MAGENV49</Env>
+					<nodelete>null</nodelete>
+				</patch>
+				<patch>
+					<name>Version 3.0 Patch 117 - Deleted Image Placeholder</name>
+					<sname>117</sname>
+					<order>77</order>
+					<type>null</type>
+					<status>release</status>
+					<reldate>08.30.2011</reldate>
+					<depen>MAG*3.0*106</depen>
+					<pre>PRE^MAGIP117</pre>
+					<post>POS^MAGIP117</post>
+					<Env>null</Env>
+					<nodelete>null</nodelete>
+				</patch>
+				<patch>
+					<name>Version 3.0 Patch 099 - Storing DICOM Objects,Phase III</name>
+					<sname>99</sname>
+					<order>78</order>
+					<type>DICOM</type>
+					<status>release</status>
+					<reldate>09.30.2011</reldate>
+					<depen>MAG*3.0*53,MAG*3.0*39</depen>
+					<pre>null</pre>
+					<post>POST^MAGIPS99</post>
+					<Env>null</Env>
+					<nodelete>null</nodelete>
+				</patch>
+				<patch>
+					<name>Version 3.0 Patch 104 - Central VistA Imaging Exchange Server</name>
+					<sname>104</sname>
+					<order>79</order>
+					<type>null</type>
+					<status>release</status>
+					<reldate>11.03.2011</reldate>
+					<depen>MAG*3.0*83,MAG*3.0*93,MAG*3.0*115</depen>
+					<pre>PRE^MAGIP104</pre>
+					<post>POS^MAGIP104</post>
+					<Env>null</Env>
+					<nodelete>null</nodelete>
+				</patch>
+				<patch>
+					<name>Version 3.0 Patch 121 - Watermarking</name>
+					<sname>121</sname>
+					<order>80</order>
+					<type>null</type>
+					<status>release</status>
+					<reldate>03.21.12</reldate>
+					<depen>MAG*3.0*39,MAG*3.0*117,MAG*3.0*108</depen>
+					<pre>null</pre>
+					<post>POS^MAGIP121</post>
+					<Env>null</Env>
+					<nodelete>null</nodelete>
+				</patch>
+				<patch>
+					<name>Version 3.0 Patch 120 - VistARad Maintenance VII</name>
+					<sname>120</sname>
+					<order>81</order>
+					<type>null</type>
+					<status>release</status>
+					<reldate>07.02.12</reldate>
+					<depen>MAG*3.0*115,MAG*3.0*104</depen>
+					<pre>null</pre>
+					<post>POSTINST^MAGJMN1</post>
+					<Env>MAGJMN1</Env>
+					<nodelete>true</nodelete>
+				</patch>
+				<patch>
+					<name>Version 3.0 Patch 122 - Annotations</name>
+					<sname>122</sname>
+					<order>82</order>
+					<type>null</type>
+					<status>release</status>
+					<reldate>11.14.12</reldate>
+					<depen>MAG*3.0*108,MAG*3.0*49,MAG*3.0*117,MAG*3.0*104</depen>
+					<pre>null</pre>
+					<post>POST^MAGIP122</post>
+					<Env>null</Env>
+					<nodelete>null</nodelete>
+				</patch>
+				<patch>
+					<name>Version 3.0 Patch 123 - IHS Patient Identifier</name>
+					<sname>123</sname>
+					<order>83</order>
+					<type>DICOM</type>
+					<status>release</status>
+					<reldate>11.29.12</reldate>
+					<depen>MAG*3.0*99,MAG*3.0*122</depen>
+					<pre>null</pre>
+					<post>POST^MAGIP123</post>
+					<Env>null</Env>
+					<nodelete>null</nodelete>
+				</patch>
+				<patch>
+					<name>Version 3.0 Patch 124 - AWIV Independent of VistA Web</name>
+					<sname>124</sname>
+					<order>84</order>
+					<type>null</type>
+					<status>release</status>
+					<reldate>02.19.13</reldate>
+					<depen>null</depen>
+					<pre>null</pre>
+					<post>POS^MAGIP124</post>
+					<Env>null</Env>
+					<nodelete>null</nodelete>
+				</patch>
+				<patch>
+					<name>Version 3.0 Patch 127 - TeleReader Maintenance</name>
+					<sname>127</sname>
+					<order>85</order>
+					<type>null</type>
+					<status>release</status>
+					<reldate>07.25.13</reldate>
+					<depen>MAG*3.0*123</depen>
+					<pre>PRE^MAGIP127</pre>
+					<post>POS^MAGIP127</post>
+					<Env>null</Env>
+					<nodelete>null</nodelete>
+				</patch>
+				<patch>
+					<name>Version 3.0 Patch 034 - Storing DICOM Objects, Phase IV</name>
+					<sname>34</sname>
+					<order>86</order>
+					<type>DICOM</type>
+					<status>release</status>
+					<reldate>07.30.13</reldate>
+					<depen>MAG*3.0*93,MAG*3.0*99,MAG*3.0*123</depen>
+					<pre>null</pre>
+					<post>POS^MAGIPS34</post>
+					<Env>null</Env>
+					<nodelete>null</nodelete>
+				</patch>
+
+				<patch>
+					<name>Version 3.0 Patch 116 - Query Retrieve Provider II</name>
+					<sname>116</sname>
+					<order>87</order>
+					<type>DICOM</type>
+					<status>release</status>
+					<reldate>07.30.13</reldate>
+					<depen>MAG*3.0*49,MAG*3.0*34</depen>
+					<pre>null</pre>
+					<post>POS^MAGIP116</post>
+					<Env>null</Env>
+					<nodelete>null</nodelete>
+				</patch>
+				<patch>
+					<name>Version 3.0 Patch 118 - DICOM Importer II</name>
+					<sname>118</sname>
+					<order>88</order>
+					<type>DICOM</type>
+					<status>release</status>
+					<reldate>07.30.13</reldate>
+					<depen>MAG*3.0*116</depen>
+					<pre>null</pre>
+					<post>POS^MAGIP118</post>
+					<Env>MAGIP118</Env>
+					<nodelete>null</nodelete>
+				</patch>
+				<patch>
+					<name>Version 3.0 Patch 119 - VIX Maintenance</name>
+					<sname>119</sname>
+					<order>89</order>
+					<type>null</type>
+					<status>release</status>
+					<reldate>07.30.13</reldate>
+					<depen>MAG*3.0*104</depen>
+					<pre>PRE^MAGIP119</pre>
+					<post>POS^MAGIP119</post>
+					<Env>null</Env>
+					<nodelete>null</nodelete>
+				</patch>
+				<patch>
+					<name>Version 3.0 Patch 129 - Clinical Capture Accusoft Version Update Maintenance</name>
+					<sname>129</sname>
+					<order>90</order>
+					<type>null</type>
+					<status>release</status>
+					<reldate>08.20.13</reldate>
+					<depen>MAG*3.0*122</depen>
+					<pre>PRE^MAGIP129</pre>
+					<post>POS^MAGIP129</post>
+					<Env>null</Env>
+					<nodelete>null</nodelete>
+				</patch>				<patch>
+					<name>Version 3.0 Patch 140 - Clinical Capture Scanning Enhancements</name>
+					<sname>140</sname>
+					<order>91</order>
+					<type>null</type>
+					<status>released</status>
+					<reldate>09.04.2013</reldate>
+					<depen>MAG*3.0*130</depen>
+					<pre>PRE^MAGIP140</pre>
+					<post>POS^MAGIP140</post>
+					<Env>null</Env>
+					<nodelete>true</nodelete>
+				</patch>
+				<patch>
+					<name>Version 3.0 Patch 141 - HL7 Version 2.4 Corrections</name>
+					<sname>141</sname>
+					<order>92</order>
+					<type>null</type>
+					<status>test</status>
+					<reldate>null</reldate>
+					<depen>MAG*3.0*123</depen>
+					<pre>null</pre>
+					<post>POS^MAGIP141</post>
+					<Env>null</Env>
+					<nodelete>null</nodelete>
+				</patch>
+
+				<patch>
+					<name>Version 3.0 Patch 135 - Emergency Patch for MAG 3.0 121</name>
+					<sname>135</sname>
+					<order>93</order>
+					<type>null</type>
+					<status>null</status>
+					<reldate>null</reldate>
+					<depen>MAG*3.0*121</depen>
+					<pre>PRE^MAGIP135</pre>
+					<post>POST^MAGIP135</post>
+					<Env>null</Env>
+					<nodelete>null</nodelete>
+				</patch>
+				<patch>
+					<name>Version 3.0 Patch 087 - DICOM Maintenance V</name>
+					<sname>87</sname>
+					<order>94</order>
+					<type>DICOM</type>
+					<status>test</status>
+					<reldate>null</reldate>
+					<depen>MAG*3.0*118</depen>
+					<pre>null</pre>
+					<post>POS^MAGIPS87</post>
+					<Env>null</Env>
+					<nodelete>null</nodelete>
+				</patch>
+				<patch>
+					<name>Version 3.0 Patch 079 - DICOM Storage Commit</name>
+					<sname>79</sname>
+					<order>95</order>
+					<type>null</type>
+					<status>null</status>
+					<reldate>null</reldate>
+					<depen>MAG*3.0*118</depen>
+					<pre>null</pre>
+					<post>POS^MAGIP079</post>
+					<Env>null</Env>
+					<nodelete>null</nodelete>
+				</patch>				
+				<patch>
+					<name>Version 3.0 Patch 110 - Multiple Modality Worklist Service</name>
+					<sname>110</sname>
+					<order>96</order>
+					<type>DICOM</type>
+					<status>null</status>
+					<reldate>null</reldate>
+					<depen>MAG*3.0*123,MAG*3.0*118,MAG*3.0*127</depen>
+					<pre>PRE^MAGIP110</pre>
+					<post>POS^MAGIP110</post>
+					<Env>null</Env>
+					<nodelete>null</nodelete>
+				</patch>
+				<patch>
+					<name>Version 3.0 Patch 131 - Clinical Display Scout Lines Enhancement</name>
+					<sname>131</sname>
+					<order>97</order>
+					<type>null</type>
+					<status>null</status>
+					<reldate>null</reldate>
+					<depen>MAG*3.0*122</depen>
+					<pre>null</pre>
+					<post>POS^MAGIP131</post>
+					<Env>null</Env>
+					<nodelete>null</nodelete>
+				</patch>
+                                <patch>
+                                        <name>Version 3.0 Patch 130 - Clinical Display Release of Information Enhancement</name>
+                                        <sname>130</sname>
+                                        <order>98</order>
+                                        <type>null</type>
+                                        <status>null</status>
+                                        <reldate>null</reldate>
+                                        <depen>MAG*3.0*131,MAG*3.0*118,MAG*3.0*110</depen>
+                                        <pre>PRE^MAGIP130</pre>
+                                        <post>POS^MAGIP130</post>
+                                        <Env>null</Env>
+                                        <nodelete>null</nodelete>
+                                </patch>
+
+				<patch>
+					<name>Version 3.0 Patch 133 - VistARad Maintenance</name>
+					<sname>133</sname>
+					<order>99</order>
+					<type>null</type>
+					<status>null</status>
+					<reldate>null</reldate>
+					<depen>MAG*3.0*120</depen>
+					<pre>null</pre>
+					<post>POSTINST^MAGJMN1</post>
+					<Env>MAGJMN1</Env>
+					<nodelete>true</nodelete>
+				</patch>
+				<patch>
+					<name>Version 3.0 Patch 137 - Radiation Dose Collection Phase I</name>
+					<sname>137</sname>
+					<order>100</order>
+					<type>null</type>
+					<status>null</status>
+					<reldate>null</reldate>
+					<depen>null</depen>
+					<pre>null</pre>
+					<post>null</post>
+					<Env>null</Env>
+					<nodelete>null</nodelete>
+				</patch>	
+				<patch>
+					<name>Version 3.0 Patch 136 - DICOM Importer III</name>
+					<sname>136</sname>
+					<order>101</order>
+					<type>DICOM</type>
+					<status>null</status>
+					<reldate>null</reldate>
+					<depen>null</depen>
+					<pre>null</pre>
+					<post>null</post>
+					<Env>null</Env>
+					<nodelete>null</nodelete>
+				</patch>	
+				<patch>
+					<name>Version 3.0 Patch 138 - Telepathology Worklist</name>
+					<sname>138</sname>
+					<order>102</order>
+					<type>null</type>
+					<status>null</status>
+					<reldate>null</reldate>
+					<depen>MAG*3.0*110</depen>
+					<pre>PRE^MAGIP138</pre>
+					<post>POS^MAGIP138</post>
+					<Env>null</Env>
+					<nodelete>null</nodelete>
+				</patch>
+				<patch>	
+					<name>Version 3.0 Patch 112 - DICOM File Archive Application</name>
+					<sname>112</sname>
+					<order>103</order>
+					<type>null</type>
+					<status>test</status>
+					<reldate>null</reldate>
+					<depen>MAG*3.0*34</depen>
+					<pre>null</pre>
+					<post>POS^MAGIP112</post>
+					<Env>null</Env>
+					<nodelete>null</nodelete>
+				</patch>
+				<patch>
+					<name>Version 3.0 Patch 107 - Clinical Client Refactor</name>
+					<sname>107</sname>
+					<order>104</order>
+					<type>null</type>
+					<status>future</status>
+					<reldate>null</reldate>
+					<depen>null</depen>
+					<pre>null</pre>
+					<post>null</post>
+					<Env>null</Env>
+					<nodelete>null</nodelete>
+				</patch>		
+				<patch>
+					<name>Version 3.0 Patch 109 - Surgery-Clinical Capture Patch</name>
+					<sname>109</sname>
+					<order>105</order>
+					<type>null</type>
+					<status>future</status>
+					<reldate>null</reldate>
+					<depen>null</depen>
+					<pre>null</pre>
+					<post>null</post>
+					<Env>null</Env>
+					<nodelete>null</nodelete>
+				</patch>
+				<patch>
+					<name>Version 3.0 Patch 044 - TeleOphthalmology Routing</name>
+					<sname>44</sname>
+					<order>106</order>
+					<type>null</type>
+					<status>future</status>
+					<reldate>null</reldate>
+					<depen>null</depen>
+					<pre>null</pre>
+					<post>POST^MAGIPS44</post>
+					<Env>null</Env>
+					<nodelete>null</nodelete>
+				</patch>
+				<patch>
+					<name>Version 3.0 Patch 156 - Legacy DICOM Gateway</name>
+					<sname>156</sname>
+					<order>107</order>
+					<type>null</type>
+					<status>null</status>
+					<reldate>null</reldate>
+					<depen>MAG*3.0*138</depen>
+					<pre>null</pre>
+					<post>POS^MAGIP156</post>
+					<Env>null</Env>
+					<nodelete>null</nodelete>
+				</patch>
+				<patch>
+					<name>Version 3.0 Patch 160 - LDGW 64 bits Compatibility</name>
+					<sname>160</sname>
+					<order>108</order>
+					<type>null</type>
+					<status>null</status>
+					<reldate>null</reldate>
+					<depen>MAG*3.0*157</depen>
+					<pre>null</pre>
+					<post>POS^MAGIP160</post>
+					<Env>null</Env>
+					<nodelete>null</nodelete>
+				</patch>
+				<patch>
+					<name>Version 3.0 Patch 162 - Query Retrieve</name>
+					<sname>162</sname>
+					<order>109</order>
+					<type>null</type>
+					<status>null</status>
+					<reldate>null</reldate>
+					<depen>MAG*3.0*156</depen>
+					<pre>null</pre>
+					<post>POS^MAGIP162</post>
+					<Env>null</Env>
+					<nodelete>null</nodelete>
+				</patch>	
+			</patches>
+		</legacyvss>
+		
+	</branch>
+</sequence>	

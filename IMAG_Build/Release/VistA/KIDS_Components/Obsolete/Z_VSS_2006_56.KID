@@ -1,0 +1,1238 @@
+KIDS Distribution saved on Dec 07, 2010@15:34:49
+ADDED FIELD 26
+**KIDS**:Z VSS 0.1T^
+
+**INSTALL NAME**
+Z VSS 0.1T
+"BLD",6938,0)
+Z VSS 0.1T^^0^3101207^n
+"BLD",6938,4,0)
+^9.64PA^2006.56^1
+"BLD",6938,4,2006.56,0)
+2006.56
+"BLD",6938,4,2006.56,222)
+y^y^f^^^^n
+"BLD",6938,4,"B",2006.56,2006.56)
+
+"BLD",6938,6.3)
+1
+"BLD",6938,"KRN",0)
+^9.67PA^779.2^20
+"BLD",6938,"KRN",.4,0)
+.4
+"BLD",6938,"KRN",.401,0)
+.401
+"BLD",6938,"KRN",.402,0)
+.402
+"BLD",6938,"KRN",.403,0)
+.403
+"BLD",6938,"KRN",.5,0)
+.5
+"BLD",6938,"KRN",.84,0)
+.84
+"BLD",6938,"KRN",3.6,0)
+3.6
+"BLD",6938,"KRN",3.8,0)
+3.8
+"BLD",6938,"KRN",9.2,0)
+9.2
+"BLD",6938,"KRN",9.8,0)
+9.8
+"BLD",6938,"KRN",19,0)
+19
+"BLD",6938,"KRN",19.1,0)
+19.1
+"BLD",6938,"KRN",101,0)
+101
+"BLD",6938,"KRN",409.61,0)
+409.61
+"BLD",6938,"KRN",771,0)
+771
+"BLD",6938,"KRN",779.2,0)
+779.2
+"BLD",6938,"KRN",870,0)
+870
+"BLD",6938,"KRN",8989.51,0)
+8989.51
+"BLD",6938,"KRN",8989.52,0)
+8989.52
+"BLD",6938,"KRN",8994,0)
+8994
+"BLD",6938,"KRN","B",.4,.4)
+
+"BLD",6938,"KRN","B",.401,.401)
+
+"BLD",6938,"KRN","B",.402,.402)
+
+"BLD",6938,"KRN","B",.403,.403)
+
+"BLD",6938,"KRN","B",.5,.5)
+
+"BLD",6938,"KRN","B",.84,.84)
+
+"BLD",6938,"KRN","B",3.6,3.6)
+
+"BLD",6938,"KRN","B",3.8,3.8)
+
+"BLD",6938,"KRN","B",9.2,9.2)
+
+"BLD",6938,"KRN","B",9.8,9.8)
+
+"BLD",6938,"KRN","B",19,19)
+
+"BLD",6938,"KRN","B",19.1,19.1)
+
+"BLD",6938,"KRN","B",101,101)
+
+"BLD",6938,"KRN","B",409.61,409.61)
+
+"BLD",6938,"KRN","B",771,771)
+
+"BLD",6938,"KRN","B",779.2,779.2)
+
+"BLD",6938,"KRN","B",870,870)
+
+"BLD",6938,"KRN","B",8989.51,8989.51)
+
+"BLD",6938,"KRN","B",8989.52,8989.52)
+
+"BLD",6938,"KRN","B",8994,8994)
+
+"FIA",2006.56)
+DICOM WORKLIST STUDY
+"FIA",2006.56,0)
+^MAGDWLST(2006.56,
+"FIA",2006.56,0,0)
+2006.56P
+"FIA",2006.56,0,1)
+y^y^f^^^^n
+"FIA",2006.56,0,10)
+
+"FIA",2006.56,0,11)
+
+"FIA",2006.56,0,"RLRO")
+
+"FIA",2006.56,2006.56)
+0
+"FIA",2006.56,2006.562)
+0
+"FIA",2006.56,2006.5621)
+0
+"FIA",2006.56,2006.5622)
+0
+"FIA",2006.56,2006.5623)
+0
+"FIA",2006.56,2006.5624)
+0
+"IX",2006.56,2006.562,"C",0)
+2006.562^C^Study and Service^R^^R^IR^I^2006.562^^^^^LS
+"IX",2006.56,2006.562,"C",.1,0)
+^^3^3^3001204^
+"IX",2006.56,2006.562,"C",.1,1,0)
+This cross reference keeps track of which accessions
+"IX",2006.56,2006.562,"C",.1,2,0)
+were perfromed 
+"IX",2006.56,2006.562,"C",.1,3,0)
+for which services.
+"IX",2006.56,2006.562,"C",1)
+S ^MAGDWLST(2006.56,DA(1),1,"C",X(1),X(2),DA)=""
+"IX",2006.56,2006.562,"C",2)
+K ^MAGDWLST(2006.56,DA(1),1,"C",X(1),X(2),DA)
+"IX",2006.56,2006.562,"C",2.5)
+K ^MAGDWLST(2006.56,DA(1),1,"C")
+"IX",2006.56,2006.562,"C",11.1,0)
+^.114IA^2^2
+"IX",2006.56,2006.562,"C",11.1,1,0)
+1^F^2006.562^.01^^1^F
+"IX",2006.56,2006.562,"C",11.1,2,0)
+2^F^2006.562^3^^2^F
+"IX",2006.56,2006.562,"D",0)
+2006.562^D^Service and Study ID^R^^R^IR^I^2006.562^^^^^LS
+"IX",2006.56,2006.562,"D",.1,0)
+^^2^2^3001204^
+"IX",2006.56,2006.562,"D",.1,1,0)
+This cross reference keeps track of which Study IDs are
+"IX",2006.56,2006.562,"D",.1,2,0)
+performed for which services.
+"IX",2006.56,2006.562,"D",1)
+S ^MAGDWLST(2006.56,DA(1),1,"D",X(1),X(2),DA)=""
+"IX",2006.56,2006.562,"D",2)
+K ^MAGDWLST(2006.56,DA(1),1,"D",X(1),X(2),DA)
+"IX",2006.56,2006.562,"D",2.5)
+K ^MAGDWLST(2006.56,DA(1),1,"D")
+"IX",2006.56,2006.562,"D",11.1,0)
+^.114IA^2^2
+"IX",2006.56,2006.562,"D",11.1,1,0)
+1^F^2006.562^.01^^1^F
+"IX",2006.56,2006.562,"D",11.1,2,0)
+2^F^2006.562^4^^2^F
+"IX",2006.56,2006.562,"E",0)
+2006.562^E^Service, timestamp and Modality^R^^R^IR^I^2006.562^^^^^LS
+"IX",2006.56,2006.562,"E",.1,0)
+^^2^2^3001204^
+"IX",2006.56,2006.562,"E",.1,1,0)
+This cross reference keeps track of which modalities have
+"IX",2006.56,2006.562,"E",.1,2,0)
+studies performed for which services.
+"IX",2006.56,2006.562,"E",1)
+S ^MAGDWLST(2006.56,DA(1),1,"E",X(1),X(2),X(3),DA)=""
+"IX",2006.56,2006.562,"E",2)
+K ^MAGDWLST(2006.56,DA(1),1,"E",X(1),X(2),X(3),DA)
+"IX",2006.56,2006.562,"E",2.5)
+K ^MAGDWLST(2006.56,DA(1),1,"E")
+"IX",2006.56,2006.562,"E",11.1,0)
+^.114IA^3^3
+"IX",2006.56,2006.562,"E",11.1,1,0)
+1^F^2006.562^.01^^1^F
+"IX",2006.56,2006.562,"E",11.1,1,3)
+
+"IX",2006.56,2006.562,"E",11.1,2,0)
+2^F^2006.562^10^^2^F
+"IX",2006.56,2006.562,"E",11.1,2,3)
+
+"IX",2006.56,2006.562,"E",11.1,3,0)
+3^F^2006.562^5^^3^F
+"IX",2006.56,2006.562,"E",11.1,3,3)
+
+"IX",2006.56,2006.562,"G",0)
+2006.562^G^Services and modalities^R^^R^IR^I^2006.562^^^^^LS
+"IX",2006.56,2006.562,"G",.1,0)
+^^4^4^3030114^
+"IX",2006.56,2006.562,"G",.1,1,0)
+This cross reference keeps track of studies by:
+"IX",2006.56,2006.562,"G",.1,2,0)
+ 1. service
+"IX",2006.56,2006.562,"G",.1,3,0)
+ 2. modality code
+"IX",2006.56,2006.562,"G",.1,4,0)
+ 3. timestamp
+"IX",2006.56,2006.562,"G",1)
+S ^MAGDWLST(2006.56,DA(1),1,"G",X(1),X(2),X(3),DA)=""
+"IX",2006.56,2006.562,"G",2)
+K ^MAGDWLST(2006.56,DA(1),1,"G",X(1),X(2),X(3),DA)
+"IX",2006.56,2006.562,"G",2.5)
+K ^MAGDWLST(2006.56,DA(1),1,"G")
+"IX",2006.56,2006.562,"G",11.1,0)
+^.114IA^3^3
+"IX",2006.56,2006.562,"G",11.1,1,0)
+1^F^2006.562^.01^^1^F
+"IX",2006.56,2006.562,"G",11.1,1,3)
+
+"IX",2006.56,2006.562,"G",11.1,2,0)
+2^F^2006.562^10^^2^F
+"IX",2006.56,2006.562,"G",11.1,2,3)
+
+"IX",2006.56,2006.562,"G",11.1,3,0)
+3^F^2006.562^5^^3^F
+"IX",2006.56,2006.562,"G",11.1,3,3)
+
+"IX",2006.56,2006.562,"H",0)
+2006.562^H^Accession Number and Service^R^^R^IR^I^2006.562^^^^^LS
+"IX",2006.56,2006.562,"H",.1,0)
+^^1^1^3090813^
+"IX",2006.56,2006.562,"H",.1,1,0)
+This cross reference tracks the accession number by service.
+"IX",2006.56,2006.562,"H",1)
+S ^MAGDWLST(2006.56,DA(1),1,"H",$E(X(1),1,30),$E(X(2),1,30),DA)=""
+"IX",2006.56,2006.562,"H",2)
+K ^MAGDWLST(2006.56,DA(1),1,"H",$E(X(1),1,30),$E(X(2),1,30),DA)
+"IX",2006.56,2006.562,"H",2.5)
+K ^MAGDWLST(2006.56,DA(1),1,"H")
+"IX",2006.56,2006.562,"H",11.1,0)
+^.114IA^2^2
+"IX",2006.56,2006.562,"H",11.1,1,0)
+1^F^2006.562^.01^30^1^F
+"IX",2006.56,2006.562,"H",11.1,1,3)
+
+"IX",2006.56,2006.562,"H",11.1,2,0)
+2^F^2006.562^25^30^2^F
+"IX",2006.56,2006.562,"H",11.1,2,3)
+
+"MBREQ")
+0
+"QUES","XPF1",0)
+Y
+"QUES","XPF1","??")
+^D REP^XPDH
+"QUES","XPF1","A")
+Shall I write over your |FLAG| File
+"QUES","XPF1","B")
+YES
+"QUES","XPF1","M")
+D XPF1^XPDIQ
+"QUES","XPF2",0)
+Y
+"QUES","XPF2","??")
+^D DTA^XPDH
+"QUES","XPF2","A")
+Want my data |FLAG| yours
+"QUES","XPF2","B")
+YES
+"QUES","XPF2","M")
+D XPF2^XPDIQ
+"QUES","XPI1",0)
+YO
+"QUES","XPI1","??")
+^D INHIBIT^XPDH
+"QUES","XPI1","A")
+Want KIDS to INHIBIT LOGONs during the install
+"QUES","XPI1","B")
+NO
+"QUES","XPI1","M")
+D XPI1^XPDIQ
+"QUES","XPM1",0)
+PO^VA(200,:EM
+"QUES","XPM1","??")
+^D MG^XPDH
+"QUES","XPM1","A")
+Enter the Coordinator for Mail Group '|FLAG|'
+"QUES","XPM1","B")
+
+"QUES","XPM1","M")
+D XPM1^XPDIQ
+"QUES","XPO1",0)
+Y
+"QUES","XPO1","??")
+^D MENU^XPDH
+"QUES","XPO1","A")
+Want KIDS to Rebuild Menu Trees Upon Completion of Install
+"QUES","XPO1","B")
+NO
+"QUES","XPO1","M")
+D XPO1^XPDIQ
+"QUES","XPZ1",0)
+Y
+"QUES","XPZ1","??")
+^D OPT^XPDH
+"QUES","XPZ1","A")
+Want to DISABLE Scheduled Options, Menu Options, and Protocols
+"QUES","XPZ1","B")
+NO
+"QUES","XPZ1","M")
+D XPZ1^XPDIQ
+"QUES","XPZ2",0)
+Y
+"QUES","XPZ2","??")
+^D RTN^XPDH
+"QUES","XPZ2","A")
+Want to MOVE routines to other CPUs
+"QUES","XPZ2","B")
+NO
+"QUES","XPZ2","M")
+D XPZ2^XPDIQ
+"SEC","^DIC",2006.56,2006.56,0,"AUDIT")
+@
+"SEC","^DIC",2006.56,2006.56,0,"DD")
+@
+"SEC","^DIC",2006.56,2006.56,0,"DEL")
+@
+"SEC","^DIC",2006.56,2006.56,0,"LAYGO")
+@
+"SEC","^DIC",2006.56,2006.56,0,"RD")
+@
+"SEC","^DIC",2006.56,2006.56,0,"WR")
+@
+"VER")
+8.0^22.0
+"^DD",2006.56,2006.56,0)
+FIELD^^2^2
+"^DD",2006.56,2006.56,0,"DDA")
+N
+"^DD",2006.56,2006.56,0,"DT")
+3101207
+"^DD",2006.56,2006.56,0,"IX","AC",2006.562,3)
+
+"^DD",2006.56,2006.56,0,"IX","AD",2006.562,4)
+
+"^DD",2006.56,2006.56,0,"IX","AF",2006.562,5)
+
+"^DD",2006.56,2006.56,0,"IX","C",2006.562,.01)
+
+"^DD",2006.56,2006.56,0,"IX","D",2006.562,.01)
+
+"^DD",2006.56,2006.56,0,"IX","E",2006.562,.01)
+
+"^DD",2006.56,2006.56,0,"IX","F",2006.562,11)
+
+"^DD",2006.56,2006.56,0,"IX","S",2006.562,2)
+
+"^DD",2006.56,2006.56,0,"NM","DICOM WORKLIST STUDY")
+
+"^DD",2006.56,2006.56,0,"VRPK")
+MAG
+"^DD",2006.56,2006.56,.01,0)
+DIVISION^RP4'XI^DIC(4,^0;1^S DINUM=X
+"^DD",2006.56,2006.56,.01,1,0)
+^.1^^0
+"^DD",2006.56,2006.56,.01,3)
+Enter the name of the division.
+"^DD",2006.56,2006.56,.01,21,0)
+^.001^3^3^3090721^^^^
+"^DD",2006.56,2006.56,.01,21,1,0)
+The value of this field is a pointer into the INSTITUTION file (#4).
+"^DD",2006.56,2006.56,.01,21,2,0)
+The pointed to location is the division where a study for a patient
+"^DD",2006.56,2006.56,.01,21,3,0)
+is scheduled to be performed.
+"^DD",2006.56,2006.56,.01,"DT")
+2990203
+"^DD",2006.56,2006.56,2,0)
+STUDY^2006.562A^^1;0
+"^DD",2006.56,2006.56,2,21,0)
+^.001^1^1^3101207^^^^
+"^DD",2006.56,2006.56,2,21,1,0)
+This subfile holds the studies for the current division.
+"^DD",2006.56,2006.56,2,"DT")
+2990615
+"^DD",2006.56,2006.562,0)
+STUDY SUB-FIELD^^26^25
+"^DD",2006.56,2006.562,0,"DT")
+3101207
+"^DD",2006.56,2006.562,0,"IX","S",2006.562,2)
+
+"^DD",2006.56,2006.562,0,"NM","STUDY")
+
+"^DD",2006.56,2006.562,0,"UP")
+2006.56
+"^DD",2006.56,2006.562,.01,0)
+SERVICE^RF^^0;1^K:$L(X)>10!($L(X)<1) X
+"^DD",2006.56,2006.562,.01,1,0)
+^.1^^0
+"^DD",2006.56,2006.562,.01,1,1,0)
+2006.56^C^MUMPS
+"^DD",2006.56,2006.562,.01,1,1,1)
+N ACC S ACC=$P($G(^MAGDWLST(2006.56,DA(1),1,DA,0)),"^",3) S:ACC'="" ^MAGDWLST(2006.56,"C",DA(1),X,ACC,DA)=""
+"^DD",2006.56,2006.562,.01,1,1,2)
+N ACC S ACC=$P($G(^MAGDWLST(2006.56,DA(1),1,DA,0)),"^",3) K:ACC'="" ^MAGDWLST(2006.56,"C",DA(1),X,ACC,DA)
+"^DD",2006.56,2006.562,.01,1,1,"%D",0)
+^.101^1^1^3100212^^
+"^DD",2006.56,2006.562,.01,1,1,"%D",1,0)
+This cross reference keeps track of which accession numbers belong to which services.
+"^DD",2006.56,2006.562,.01,1,1,"DT")
+2990312
+"^DD",2006.56,2006.562,.01,1,2,0)
+2006.56^D^MUMPS
+"^DD",2006.56,2006.562,.01,1,2,1)
+N SID S SID=$P($G(^MAGDWLST(2006.56,DA(1),1,DA,0)),"^",4) S:SID'="" ^MAGDWLST(2006.56,"D",DA(1),X,SID,DA)=""
+"^DD",2006.56,2006.562,.01,1,2,2)
+N SID S SID=$P($G(^MAGDWLST(2006.56,DA(1),1,DA,0)),"^",4) K:SID'="" ^MAGDWLST(2006.56,"D",DA(1),X,SID,DA)
+"^DD",2006.56,2006.562,.01,1,2,"%D",0)
+^^1^1^2990312^
+"^DD",2006.56,2006.562,.01,1,2,"%D",1,0)
+This cross reference keeps track of which study-IDs belong to which services.
+"^DD",2006.56,2006.562,.01,1,2,"DT")
+2990312
+"^DD",2006.56,2006.562,.01,1,3,0)
+2006.56^E^MUMPS
+"^DD",2006.56,2006.562,.01,1,3,1)
+N MOD,TIM,Z S Z=$G(^MAGDWLST(2006.56,DA(1),1,DA,0)),MOD=$P(Z,"^",10),TIM=$P(X,"^",5) I MOD'="",TIM'="" S ^MAGDWLST(2006.56,"E",DA(1),X,MOD,TIM,DA)=""
+"^DD",2006.56,2006.562,.01,1,3,2)
+N MOD,TIM,Z S Z=$G(^MAGDWLST(2006.56,DA(1),1,DA,0)),MOD=$P(Z,"^",10),TIM=$P(X,"^",5) I MOD'="",TIM'="" K ^MAGDWLST(2006.56,"E",DA(1),X,MOD,TIM,DA)
+"^DD",2006.56,2006.562,.01,1,3,"%D",0)
+^^1^1^2990312^^
+"^DD",2006.56,2006.562,.01,1,3,"%D",1,0)
+This cross reference keeps track of which modalities perform which services, and when these services are scheduled.
+"^DD",2006.56,2006.562,.01,1,3,"DT")
+2990312
+"^DD",2006.56,2006.562,.01,3)
+Enter the name of a service
+"^DD",2006.56,2006.562,.01,21,0)
+^.001^2^2^3021105^^^^
+"^DD",2006.56,2006.562,.01,21,1,0)
+The value of this field identifies the service to be
+"^DD",2006.56,2006.562,.01,21,2,0)
+performed for the patient.
+"^DD",2006.56,2006.562,.01,"DT")
+3090813
+"^DD",2006.56,2006.562,2,0)
+PATIENT^P2'^DPT(^0;2^Q
+"^DD",2006.56,2006.562,2,1,0)
+^.1^^0
+"^DD",2006.56,2006.562,2,1,1,0)
+2006.562^S
+"^DD",2006.56,2006.562,2,1,1,1)
+S ^MAGDWLST(2006.56,DA(1),1,"S",$E(X,1,30),DA)=""
+"^DD",2006.56,2006.562,2,1,1,2)
+K ^MAGDWLST(2006.56,DA(1),1,"S",$E(X,1,30),DA)
+"^DD",2006.56,2006.562,2,1,1,"%D",0)
+^^1^1^3001204^
+"^DD",2006.56,2006.562,2,1,1,"%D",1,0)
+This cross reference keeps track of which studies belong to which patients.
+"^DD",2006.56,2006.562,2,1,1,"DT")
+3001204
+"^DD",2006.56,2006.562,2,3)
+Enter the name of a patient.
+"^DD",2006.56,2006.562,2,21,0)
+^^3^3^2990311^
+"^DD",2006.56,2006.562,2,21,1,0)
+The value of this field is a pointer into the PATIENT file (#2).
+"^DD",2006.56,2006.562,2,21,2,0)
+The patient being pointed to is a patient for whom a study
+"^DD",2006.56,2006.562,2,21,3,0)
+being scheduled.
+"^DD",2006.56,2006.562,2,"DT")
+3061006
+"^DD",2006.56,2006.562,3,0)
+DATE-CASE NUMBER^F^^0;3^K:$L(X)>20!($L(X)<1) X
+"^DD",2006.56,2006.562,3,1,0)
+^.1^^0
+"^DD",2006.56,2006.562,3,1,1,0)
+2006.56^AC^MUMPS
+"^DD",2006.56,2006.562,3,1,1,1)
+N SVC S SVC=$P($G(^MAGDWLST(2006.56,DA(1),1,DA,0)),"^",1) I SVC'="" S ^MAGDWLST(2006.56,"C",DA(1),SVC,X,DA)=""
+"^DD",2006.56,2006.562,3,1,1,2)
+N SVC S SVC=$P($G(^MAGDWLST(2006.56,DA(1),1,DA,0)),"^",1) I SVC'="" K ^MAGDWLST(2006.56,"C",DA(1),SVC,X,DA)
+"^DD",2006.56,2006.562,3,1,1,"%D",0)
+^^2^2^3100212^
+"^DD",2006.56,2006.562,3,1,1,"%D",1,0)
+This cross reference allows studies to be located by division, service, 
+"^DD",2006.56,2006.562,3,1,1,"%D",2,0)
+and date-case number.
+"^DD",2006.56,2006.562,3,1,1,"DT")
+2990312
+"^DD",2006.56,2006.562,3,3)
+Enter an accession number (1-20 chars).
+"^DD",2006.56,2006.562,3,21,0)
+^.001^7^7^3100212^^^^
+"^DD",2006.56,2006.562,3,21,1,0)
+The value of this field is the (long) accession number
+"^DD",2006.56,2006.562,3,21,2,0)
+for the study being performed.
+"^DD",2006.56,2006.562,3,21,3,0)
+ 
+"^DD",2006.56,2006.562,3,21,4,0)
+An accession number is created by encoding the date
+"^DD",2006.56,2006.562,3,21,5,0)
+in six digits (ddmmyy), and suffixing a dash and an
+"^DD",2006.56,2006.562,3,21,6,0)
+integer number (no leading zeroes) that uniquely identifies the study
+"^DD",2006.56,2006.562,3,21,7,0)
+for that date.
+"^DD",2006.56,2006.562,3,"DT")
+3090722
+"^DD",2006.56,2006.562,4,0)
+STUDY ID^F^^0;4^K:$L(X)>20!($L(X)<1) X
+"^DD",2006.56,2006.562,4,1,0)
+^.1^^0
+"^DD",2006.56,2006.562,4,1,1,0)
+2006.56^AD^MUMPS
+"^DD",2006.56,2006.562,4,1,1,1)
+N SVC S SVC=$P($G(^MAGDWLST(2006.56,DA(1),1,DA,0)),"^",1) I SVC'="" S ^MAGDWLST(2006.56,"D",DA(1),SVC,X,DA)=""
+"^DD",2006.56,2006.562,4,1,1,2)
+N SVC S SVC=$P($G(^MAGDWLST(2006.56,DA(1),1,DA,0)),"^",1) I SVC'="" K ^MAGDWLST(2006.56,"D",DA(1),SVC,X,DA)
+"^DD",2006.56,2006.562,4,1,1,"DT")
+2990312
+"^DD",2006.56,2006.562,4,3)
+Enter a Study ID.
+"^DD",2006.56,2006.562,4,21,0)
+^^6^6^3000218^^
+"^DD",2006.56,2006.562,4,21,1,0)
+The value of this field is the (short) accession number
+"^DD",2006.56,2006.562,4,21,2,0)
+for the study being performed.
+"^DD",2006.56,2006.562,4,21,3,0)
+ 
+"^DD",2006.56,2006.562,4,21,4,0)
+A short accession number is an
+"^DD",2006.56,2006.562,4,21,5,0)
+integer number (no leading zeroes) that uniquely identifies
+"^DD",2006.56,2006.562,4,21,6,0)
+a study during the day on which it occurs.
+"^DD",2006.56,2006.562,4,"DT")
+3061006
+"^DD",2006.56,2006.562,5,0)
+TIMESTAMP^D^^0;5^S %DT="EST" D ^%DT S X=Y K:Y<1 X
+"^DD",2006.56,2006.562,5,1,0)
+^.1^^0
+"^DD",2006.56,2006.562,5,1,1,0)
+2006.56^AF^MUMPS
+"^DD",2006.56,2006.562,5,1,1,1)
+N MOD,SVC,Z S Z=$G(^MAGDWLST(2006.56,DA(1),1,DA,0)),SVC=$P(Z,"^",1),MOD=$P(Z,"^",10) I SVC'="",MOD'="" S ^MAGDWLST(2006.56,"E",DA(1),SVC,MOD,X,DA)=""
+"^DD",2006.56,2006.562,5,1,1,2)
+N MOD,SVC,Z S Z=$G(^MAGDWLST(2006.56,DA(1),1,DA,0)),SVC=$P(Z,"^",1),MOD=$P(Z,"^",10) I SVC'="",MOD'="" K ^MAGDWLST(2006.56,"E",DA(1),SVC,MOD,X,DA)
+"^DD",2006.56,2006.562,5,1,1,"DT")
+2990312
+"^DD",2006.56,2006.562,5,3)
+Enter the date and time of the study.
+"^DD",2006.56,2006.562,5,21,0)
+^^3^3^3000218^^
+"^DD",2006.56,2006.562,5,21,1,0)
+The value of this field indicates the date and time
+"^DD",2006.56,2006.562,5,21,2,0)
+for which the procedure that is described in this
+"^DD",2006.56,2006.562,5,21,3,0)
+entry has been scheduled.
+"^DD",2006.56,2006.562,5,"DT")
+3061006
+"^DD",2006.56,2006.562,6,0)
+PROCEDURE^F^^0;6^K:$L(X)>10!($L(X)<1) X
+"^DD",2006.56,2006.562,6,3)
+Enter a code for the procedure to be performed during the study.
+"^DD",2006.56,2006.562,6,21,0)
+^^5^5^3000218^^
+"^DD",2006.56,2006.562,6,21,1,0)
+The value of this field is the internal entry number
+"^DD",2006.56,2006.562,6,21,2,0)
+in ^RAMIS(71,... that identifies the procedure
+"^DD",2006.56,2006.562,6,21,3,0)
+that is described in this entry.
+"^DD",2006.56,2006.562,6,21,4,0)
+ 
+"^DD",2006.56,2006.562,6,21,5,0)
+VA-FileMan file 71 (RAD/NUC MED procedures) is stored in ^RAMIS(71,...
+"^DD",2006.56,2006.562,6,"DT")
+2990202
+"^DD",2006.56,2006.562,7,0)
+PROCEDURE DESCRIPTION^F^^4;1^K:$L(X)>30!($L(X)<1) X
+"^DD",2006.56,2006.562,7,3)
+Enter a description of the procedure to be performed.
+"^DD",2006.56,2006.562,7,21,0)
+^^6^6^3000218^^
+"^DD",2006.56,2006.562,7,21,1,0)
+The value of this field is the name of the procedure
+"^DD",2006.56,2006.562,7,21,2,0)
+that is described in this entry.
+"^DD",2006.56,2006.562,7,21,3,0)
+This name is copied from ^RAMIS(71,... so that
+"^DD",2006.56,2006.562,7,21,4,0)
+worklist queries can also be performed when the network
+"^DD",2006.56,2006.562,7,21,5,0)
+connection (DDP) with the main Hospital Information System
+"^DD",2006.56,2006.562,7,21,6,0)
+is not available.
+"^DD",2006.56,2006.562,7,"DT")
+2990202
+"^DD",2006.56,2006.562,8,0)
+CPT CODE^F^^0;8^K:$L(X)>10!($L(X)<1) X
+"^DD",2006.56,2006.562,8,3)
+Enter the CPT code for the procedure to be performed.
+"^DD",2006.56,2006.562,8,21,0)
+^^5^5^3000218^^
+"^DD",2006.56,2006.562,8,21,1,0)
+The value of this field is the internal entry number
+"^DD",2006.56,2006.562,8,21,2,0)
+in ^ICPT(... that identifies the procedure
+"^DD",2006.56,2006.562,8,21,3,0)
+that is described in this entry.
+"^DD",2006.56,2006.562,8,21,4,0)
+ 
+"^DD",2006.56,2006.562,8,21,5,0)
+VA-FileMan file 81 (CPT codes) is stored in ^ICPT(...
+"^DD",2006.56,2006.562,8,"DT")
+2990202
+"^DD",2006.56,2006.562,9,0)
+CPT DESCRIPTION^F^^5;1^K:$L(X)>10!($L(X)<1) X
+"^DD",2006.56,2006.562,9,3)
+Enter the description of the CPT code for the procedure to be performed.
+"^DD",2006.56,2006.562,9,21,0)
+^^9^9^3000218^^
+"^DD",2006.56,2006.562,9,21,1,0)
+The value of this field is the name of the procedure
+"^DD",2006.56,2006.562,9,21,2,0)
+that is described in this entry.
+"^DD",2006.56,2006.562,9,21,3,0)
+ 
+"^DD",2006.56,2006.562,9,21,4,0)
+CPT stands for Current Procedural Terminology.
+"^DD",2006.56,2006.562,9,21,5,0)
+ 
+"^DD",2006.56,2006.562,9,21,6,0)
+This name is copied from ^ICPT(... so that
+"^DD",2006.56,2006.562,9,21,7,0)
+worklist queries can also be performed when the network
+"^DD",2006.56,2006.562,9,21,8,0)
+connection (DDP) with the main Hospital Information System
+"^DD",2006.56,2006.562,9,21,9,0)
+is not available.
+"^DD",2006.56,2006.562,9,"DT")
+2990312
+"^DD",2006.56,2006.562,10,0)
+MODALITY^F^^0;10^K:$L(X)>20!($L(X)<1) X
+"^DD",2006.56,2006.562,10,1,0)
+^.1^^0
+"^DD",2006.56,2006.562,10,3)
+Enter the name of the modality.
+"^DD",2006.56,2006.562,10,21,0)
+^^43^43^3000218^^
+"^DD",2006.56,2006.562,10,21,1,0)
+The value of this field is a list of codes, separated
+"^DD",2006.56,2006.562,10,21,2,0)
+by commas, that each identify a modality on which the
+"^DD",2006.56,2006.562,10,21,3,0)
+requested procedure can be performed.
+"^DD",2006.56,2006.562,10,21,4,0)
+ 
+"^DD",2006.56,2006.562,10,21,5,0)
+Possible codes for modalities are:
+"^DD",2006.56,2006.562,10,21,6,0)
+   AS: Angioscopy
+"^DD",2006.56,2006.562,10,21,7,0)
+   BI: Biomagnetic imaging
+"^DD",2006.56,2006.562,10,21,8,0)
+   CD: Color flow Doppler
+"^DD",2006.56,2006.562,10,21,9,0)
+   CF: Cinefluorography
+"^DD",2006.56,2006.562,10,21,10,0)
+   CP: Culposcopy
+"^DD",2006.56,2006.562,10,21,11,0)
+   CR: Computed Radiography
+"^DD",2006.56,2006.562,10,21,12,0)
+   CS: Cystoscopy
+"^DD",2006.56,2006.562,10,21,13,0)
+   CT: Computed Tomography
+"^DD",2006.56,2006.562,10,21,14,0)
+   DD: Duplex Doppler
+"^DD",2006.56,2006.562,10,21,15,0)
+   DF: Digital fluoroscopy
+"^DD",2006.56,2006.562,10,21,16,0)
+   DG: Diaphanography
+"^DD",2006.56,2006.562,10,21,17,0)
+   DM: Digital microscopy
+"^DD",2006.56,2006.562,10,21,18,0)
+   DS: Digital Subtraction Angiography
+"^DD",2006.56,2006.562,10,21,19,0)
+   DX: Digital Radiography
+"^DD",2006.56,2006.562,10,21,20,0)
+   EC: Echocardiography
+"^DD",2006.56,2006.562,10,21,21,0)
+   ES: Endoscopy
+"^DD",2006.56,2006.562,10,21,22,0)
+   FA: Fluorescein angiography
+"^DD",2006.56,2006.562,10,21,23,0)
+   FS: Fundoscopy
+"^DD",2006.56,2006.562,10,21,24,0)
+   IO: Intra-oral Radiology
+"^DD",2006.56,2006.562,10,21,25,0)
+   LP: Laparoscopy
+"^DD",2006.56,2006.562,10,21,26,0)
+   LS: Laser surface scan
+"^DD",2006.56,2006.562,10,21,27,0)
+   MA: Magnetic resonance angiography
+"^DD",2006.56,2006.562,10,21,28,0)
+   MG: Mammography
+"^DD",2006.56,2006.562,10,21,29,0)
+   MR: Magnetic Resonance
+"^DD",2006.56,2006.562,10,21,30,0)
+   MS: Magnetic resonance spectroscopy
+"^DD",2006.56,2006.562,10,21,31,0)
+   NM: Nuclear Medicine
+"^DD",2006.56,2006.562,10,21,32,0)
+   OT: Other
+"^DD",2006.56,2006.562,10,21,33,0)
+   PT: Positron emission tomography (PET)
+"^DD",2006.56,2006.562,10,21,34,0)
+   RF: Radio Fluoroscopy
+"^DD",2006.56,2006.562,10,21,35,0)
+   RG: Radiographic imaging (conventional film/screen)
+"^DD",2006.56,2006.562,10,21,36,0)
+   ST: Single-photon emission computed tomography (SPECT)
+"^DD",2006.56,2006.562,10,21,37,0)
+   TG: Thermography
+"^DD",2006.56,2006.562,10,21,38,0)
+   US: Ultrasound
+"^DD",2006.56,2006.562,10,21,39,0)
+   VF: Videofluorography
+"^DD",2006.56,2006.562,10,21,40,0)
+   VL: Visable Light
+"^DD",2006.56,2006.562,10,21,41,0)
+   XA: X-Ray Angiography
+"^DD",2006.56,2006.562,10,21,42,0)
+ 
+"^DD",2006.56,2006.562,10,21,43,0)
+These codes are also stored in ^RAMIS(73.1,...
+"^DD",2006.56,2006.562,10,"DT")
+3030114
+"^DD",2006.56,2006.562,11,0)
+STUDY UID^F^^1;1^K:$L(X)>99!($L(X)<1) X
+"^DD",2006.56,2006.562,11,1,0)
+^.1
+"^DD",2006.56,2006.562,11,1,1,0)
+2006.56^F^MUMPS
+"^DD",2006.56,2006.562,11,1,1,1)
+S ^MAGDWLST(2006.56,"F",X,DA(1),DA)=""
+"^DD",2006.56,2006.562,11,1,1,2)
+K ^MAGDWLST(2006.56,"F",X,DA(1),DA)
+"^DD",2006.56,2006.562,11,1,1,"%D",0)
+^^3^3^2990615^^
+"^DD",2006.56,2006.562,11,1,1,"%D",1,0)
+This cross reference keeps track of the Study UIDs.
+"^DD",2006.56,2006.562,11,1,1,"%D",2,0)
+Since the UIDs are unique, the division is a later subscript
+"^DD",2006.56,2006.562,11,1,1,"%D",3,0)
+in this cross reference than in all other cross references on this file.
+"^DD",2006.56,2006.562,11,1,1,"DT")
+2990615
+"^DD",2006.56,2006.562,11,3)
+Enter the unique identifier for the study to be performed.
+"^DD",2006.56,2006.562,11,21,0)
+^^2^2^3000218^^
+"^DD",2006.56,2006.562,11,21,1,0)
+The value of this field is a unique identifier for
+"^DD",2006.56,2006.562,11,21,2,0)
+the study that is described in this entry.
+"^DD",2006.56,2006.562,11,"DT")
+2990615
+"^DD",2006.56,2006.562,12,0)
+PATIENT HISTORY^2006.5621A^^2;0
+"^DD",2006.56,2006.562,13,0)
+REFERRING PHYSICIAN^F^^3;1^K:$L(X)>20!($L(X)<1) X
+"^DD",2006.56,2006.562,13,1,0)
+^.1^^0
+"^DD",2006.56,2006.562,13,3)
+Enter the name of the referring physician.
+"^DD",2006.56,2006.562,13,21,0)
+^^2^2^3000218^^
+"^DD",2006.56,2006.562,13,21,1,0)
+The value of this field, if any, is the name of the
+"^DD",2006.56,2006.562,13,21,2,0)
+physician who ...
+"^DD",2006.56,2006.562,13,"DT")
+2990312
+"^DD",2006.56,2006.562,14,0)
+ATTENDING PHYSICIAN^F^^3;2^K:$L(X)>20!($L(X)<1) X
+"^DD",2006.56,2006.562,14,3)
+Enter the name of the attending physician.
+"^DD",2006.56,2006.562,14,21,0)
+^^2^2^3000218^^
+"^DD",2006.56,2006.562,14,21,1,0)
+The value of this field, if any, is the name of the
+"^DD",2006.56,2006.562,14,21,2,0)
+physician who ...
+"^DD",2006.56,2006.562,14,"DT")
+2990312
+"^DD",2006.56,2006.562,15,0)
+REQUESTING PHYSICIAN^F^^3;3^K:$L(X)>20!($L(X)<1) X
+"^DD",2006.56,2006.562,15,3)
+Enter the name of the requesting physician
+"^DD",2006.56,2006.562,15,21,0)
+^^3^3^3000218^^
+"^DD",2006.56,2006.562,15,21,1,0)
+The value of this field, if any, is the name of the
+"^DD",2006.56,2006.562,15,21,2,0)
+physician who requested the study that is described
+"^DD",2006.56,2006.562,15,21,3,0)
+in this entry.
+"^DD",2006.56,2006.562,15,"DT")
+2990312
+"^DD",2006.56,2006.562,16,0)
+REQUESTED SERVICE^F^^3;4^K:$L(X)>20!($L(X)<1) X
+"^DD",2006.56,2006.562,16,3)
+Enter the name of the requested service.
+"^DD",2006.56,2006.562,16,21,0)
+^^4^4^3000218^^
+"^DD",2006.56,2006.562,16,21,1,0)
+The value of this field, if any, is the name of the
+"^DD",2006.56,2006.562,16,21,2,0)
+service that was requested for the study that is described
+"^DD",2006.56,2006.562,16,21,3,0)
+in this entry.
+"^DD",2006.56,2006.562,16,21,4,0)
+
+"^DD",2006.56,2006.562,16,"DT")
+2990311
+"^DD",2006.56,2006.562,17,0)
+TYPE CODE^F^^0;11^K:$L(X)>10!($L(X)<1) X
+"^DD",2006.56,2006.562,17,3)
+Enter the 'type code'.
+"^DD",2006.56,2006.562,17,21,0)
+^.001^19^19^3020401^^^
+"^DD",2006.56,2006.562,17,21,1,0)
+The value of this field is a code for the type of imaging
+"^DD",2006.56,2006.562,17,21,2,0)
+activity.
+"^DD",2006.56,2006.562,17,21,3,0)
+
+"^DD",2006.56,2006.562,17,21,4,0)
+The value for this field is obtained from the HL7 message
+"^DD",2006.56,2006.562,17,21,5,0)
+that was transmitted for this event.
+"^DD",2006.56,2006.562,17,21,6,0)
+
+"^DD",2006.56,2006.562,17,21,7,0)
+Typical values are codes like:
+"^DD",2006.56,2006.562,17,21,8,0)
+   ANI
+"^DD",2006.56,2006.562,17,21,9,0)
+   CT
+"^DD",2006.56,2006.562,17,21,10,0)
+   MAM
+"^DD",2006.56,2006.562,17,21,11,0)
+   MRI
+"^DD",2006.56,2006.562,17,21,12,0)
+   NM
+"^DD",2006.56,2006.562,17,21,13,0)
+   RAD
+"^DD",2006.56,2006.562,17,21,14,0)
+   US
+"^DD",2006.56,2006.562,17,21,15,0)
+   VAS
+"^DD",2006.56,2006.562,17,21,16,0)
+
+"^DD",2006.56,2006.562,17,21,17,0)
+Since any value obtained from an HL7 message will be considered
+"^DD",2006.56,2006.562,17,21,18,0)
+valid when entering data into this file, this field is typed as
+"^DD",2006.56,2006.562,17,21,19,0)
+"free text", rather than as a "set of codes".
+"^DD",2006.56,2006.562,17,"DT")
+2990318
+"^DD",2006.56,2006.562,19,0)
+STATUS^S^CREATED:Created;SCHEDULED:Scheduled;ARRIVED:Arrived;STARTED:Started;COMPLETED:Completed;VERIFIED:Verified;^0;7^Q
+"^DD",2006.56,2006.562,19,3)
+Enter a code for the status of this study.
+"^DD",2006.56,2006.562,19,21,0)
+^^10^10^3020401^
+"^DD",2006.56,2006.562,19,21,1,0)
+The value of this field is a code that identifies the current
+"^DD",2006.56,2006.562,19,21,2,0)
+status of the study.
+"^DD",2006.56,2006.562,19,21,3,0)
+ 
+"^DD",2006.56,2006.562,19,21,4,0)
+Initially, the following possible values are defined:
+"^DD",2006.56,2006.562,19,21,5,0)
+  CREATED      Ordered or Created, but not yet Scheduled
+"^DD",2006.56,2006.562,19,21,6,0)
+  SCHEDULED    Scheduled, but not yet started
+"^DD",2006.56,2006.562,19,21,7,0)
+  ARRIVED      Patient has arrived, but study has not yet started
+"^DD",2006.56,2006.562,19,21,8,0)
+  STARTED      Study has started, but not yet finished
+"^DD",2006.56,2006.562,19,21,9,0)
+  COMPLETED    Study has completed
+"^DD",2006.56,2006.562,19,21,10,0)
+  VERIFIED     Study has completed, and image quality has been verified
+"^DD",2006.56,2006.562,19,"DT")
+3020401
+"^DD",2006.56,2006.562,20,0)
+PRIORITY^S^STAT:STAT;HIGH:High;MEDIUM:Medium;ROUTINE:Routine;LOW:Low;^0;9^Q
+"^DD",2006.56,2006.562,20,3)
+Enter a code for the priority of this study.
+"^DD",2006.56,2006.562,20,21,0)
+^^2^2^3020401^
+"^DD",2006.56,2006.562,20,21,1,0)
+The value of this field is a code that identifies the
+"^DD",2006.56,2006.562,20,21,2,0)
+priority of the study.
+"^DD",2006.56,2006.562,20,"DT")
+3020401
+"^DD",2006.56,2006.562,21,0)
+TIU NOTE SIGNED^S^0:No;1:Yes;^0;12^Q
+"^DD",2006.56,2006.562,21,3)
+Indicate whether or not the TIU note has been signed.
+"^DD",2006.56,2006.562,21,21,0)
+^.001^6^6^3020422^^^^
+"^DD",2006.56,2006.562,21,21,1,0)
+The value for this field is a code that indicates
+"^DD",2006.56,2006.562,21,21,2,0)
+whether or not the TIU note with which this study is
+"^DD",2006.56,2006.562,21,21,3,0)
+associated has been signed.
+"^DD",2006.56,2006.562,21,21,4,0)
+ 
+"^DD",2006.56,2006.562,21,21,5,0)
+A value of 0 indicates that the note has not yet been signed.
+"^DD",2006.56,2006.562,21,21,6,0)
+A value of 1 indicates that the note has been signed.
+"^DD",2006.56,2006.562,21,"DT")
+3020422
+"^DD",2006.56,2006.562,22,0)
+INTENDED RECIPIENT OF RESULTS^F^^3;5^K:$L(X)>30!($L(X)<1) X
+"^DD",2006.56,2006.562,22,3)
+Enter the name of the recipient of the results of this study.
+"^DD",2006.56,2006.562,22,21,0)
+^.001^6^6^3021105^^^
+"^DD",2006.56,2006.562,22,21,1,0)
+The value of this field is a string that contains the name of
+"^DD",2006.56,2006.562,22,21,2,0)
+the person who is intended to receive the results of this study.
+"^DD",2006.56,2006.562,22,21,3,0)
+ 
+"^DD",2006.56,2006.562,22,21,4,0)
+(Intentionally, this field is NOT a pointer to the Person File
+"^DD",2006.56,2006.562,22,21,5,0)
+(#200), because that file may not be accessible when the value
+"^DD",2006.56,2006.562,22,21,6,0)
+for this field is being retrieved.)
+"^DD",2006.56,2006.562,22,"DT")
+3020401
+"^DD",2006.56,2006.562,23,0)
+APPOINTMENT SCHEDULE^2006.5622A^^7;0
+"^DD",2006.56,2006.562,24,0)
+TAG^2006.5623^^8;0
+"^DD",2006.56,2006.562,24,21,0)
+^.001^2^2^3100407^^
+"^DD",2006.56,2006.562,24,21,1,0)
+This multiple contains the DICOM tag-value pairs that record the patient 
+"^DD",2006.56,2006.562,24,21,2,0)
+and study information that will be returned in a Modality Worklist query.
+"^DD",2006.56,2006.562,25,0)
+ACCESSION NUMBER^F^^0;13^K:$L(X)>16!($L(X)<1) X
+"^DD",2006.56,2006.562,25,3)
+This is the full-length accession number (1-16 chars).
+"^DD",2006.56,2006.562,25,21,0)
+^.001^8^8^3100212^^
+"^DD",2006.56,2006.562,25,21,1,0)
+The accession number should be placed into this field.  The format of the 
+"^DD",2006.56,2006.562,25,21,2,0)
+accession number varies by service.
+"^DD",2006.56,2006.562,25,21,3,0)
+ 
+"^DD",2006.56,2006.562,25,21,4,0)
+For Radiology studies, the accession number can be either the old
+"^DD",2006.56,2006.562,25,21,5,0)
+date-case number (mmddyy-nnnnn format) or the new site-specific accession
+"^DD",2006.56,2006.562,25,21,6,0)
+number (sss-mmddyy-nnnnn format).
+"^DD",2006.56,2006.562,25,21,7,0)
+ 
+"^DD",2006.56,2006.562,25,21,8,0)
+For Consult studies, the format of the accession number is GMRC-nnnnnnnn.
+"^DD",2006.56,2006.562,25,"DT")
+3090813
+"^DD",2006.56,2006.562,26,0)
+CPT CODING SCHEME^F^^0;14^K:$L(X)>15!($L(X)<1) X
+"^DD",2006.56,2006.562,26,3)
+Answer must be 1-15 characters in length.
+"^DD",2006.56,2006.562,26,21,0)
+^^1^1^3101207^
+"^DD",2006.56,2006.562,26,21,1,0)
+This is the CPT Coding Scheme as defined by the DICOM Standard.
+"^DD",2006.56,2006.562,26,"DT")
+3101207
+"^DD",2006.56,2006.5621,0)
+PATIENT HISTORY SUB-FIELD^^.01^1
+"^DD",2006.56,2006.5621,0,"DT")
+2990202
+"^DD",2006.56,2006.5621,0,"NM","PATIENT HISTORY")
+
+"^DD",2006.56,2006.5621,0,"UP")
+2006.562
+"^DD",2006.56,2006.5621,.01,0)
+PATIENT HISTORY^F^^0;1^K:$L(X)>99!($L(X)<1) X
+"^DD",2006.56,2006.5621,.01,1,0)
+^.1^^0
+"^DD",2006.56,2006.5621,.01,3)
+Enter a line of patient history text.
+"^DD",2006.56,2006.5621,.01,21,0)
+^^6^6^3000218^^
+"^DD",2006.56,2006.5621,.01,21,1,0)
+The text in this multi-line entry describes any
+"^DD",2006.56,2006.5621,.01,21,2,0)
+patient history that is germane in the context
+"^DD",2006.56,2006.5621,.01,21,3,0)
+of the study that is described in this entry.
+"^DD",2006.56,2006.5621,.01,21,4,0)
+ 
+"^DD",2006.56,2006.5621,.01,21,5,0)
+Often, this section of the patient's history is
+"^DD",2006.56,2006.5621,.01,21,6,0)
+referred to as the 'reason for study'.
+"^DD",2006.56,2006.5621,.01,"DT")
+2990202
+"^DD",2006.56,2006.5622,0)
+APPOINTMENT SCHEDULE SUB-FIELD^^1^2
+"^DD",2006.56,2006.5622,0,"DT")
+3020521
+"^DD",2006.56,2006.5622,0,"IX","B",2006.5622,.01)
+
+"^DD",2006.56,2006.5622,0,"NM","APPOINTMENT SCHEDULE")
+
+"^DD",2006.56,2006.5622,0,"UP")
+2006.562
+"^DD",2006.56,2006.5622,.01,0)
+CLINIC NAME^F^^0;1^K:$L(X)>60!($L(X)<3) X
+"^DD",2006.56,2006.5622,.01,1,0)
+^.1^^0
+"^DD",2006.56,2006.5622,.01,1,1,0)
+2006.5622^B
+"^DD",2006.56,2006.5622,.01,1,1,1)
+S ^MAGDWLST(2006.56,DA(2),1,DA(1),7,"B",$E(X,1,30),DA)=""
+"^DD",2006.56,2006.5622,.01,1,1,2)
+K ^MAGDWLST(2006.56,DA(2),1,DA(1),7,"B",$E(X,1,30),DA)
+"^DD",2006.56,2006.5622,.01,3)
+Enter the name of the clinic where the appointment will take place.
+"^DD",2006.56,2006.5622,.01,21,0)
+^.001^3^3^3021105^^^
+"^DD",2006.56,2006.5622,.01,21,1,0)
+The value of this field is a string that identifies
+"^DD",2006.56,2006.5622,.01,21,2,0)
+the name of the clinic where the appointment will
+"^DD",2006.56,2006.5622,.01,21,3,0)
+take place.
+"^DD",2006.56,2006.5622,.01,"DT")
+3030114
+"^DD",2006.56,2006.5622,1,0)
+DATE/TIME^D^^0;2^S %DT="EST" D ^%DT S X=Y K:Y<1 X
+"^DD",2006.56,2006.5622,1,21,0)
+^^1^1^3020521^
+"^DD",2006.56,2006.5622,1,21,1,0)
+Date and time of appointment.
+"^DD",2006.56,2006.5622,1,"DT")
+3020521
+"^DD",2006.56,2006.5623,0)
+TAG SUB-FIELD^^2^3
+"^DD",2006.56,2006.5623,0,"DT")
+3061006
+"^DD",2006.56,2006.5623,0,"IX","B",2006.5623,.01)
+
+"^DD",2006.56,2006.5623,0,"NM","TAG")
+
+"^DD",2006.56,2006.5623,0,"UP")
+2006.562
+"^DD",2006.56,2006.5623,.01,0)
+TAG^MF^^0;1^K:$L(X)>30!($L(X)<1) X
+"^DD",2006.56,2006.5623,.01,1,0)
+^.1
+"^DD",2006.56,2006.5623,.01,1,1,0)
+2006.5623^B
+"^DD",2006.56,2006.5623,.01,1,1,1)
+S ^MAGDWLST(2006.56,DA(2),1,DA(1),8,"B",$E(X,1,30),DA)=""
+"^DD",2006.56,2006.5623,.01,1,1,2)
+K ^MAGDWLST(2006.56,DA(2),1,DA(1),8,"B",$E(X,1,30),DA)
+"^DD",2006.56,2006.5623,.01,3)
+Enter the tag for this entry (1-30 char).
+"^DD",2006.56,2006.5623,.01,21,0)
+^.001^3^3^3100212^^
+"^DD",2006.56,2006.5623,.01,21,1,0)
+The value of this field is a string. This string corresponds to the tag in
+"^DD",2006.56,2006.5623,.01,21,2,0)
+the DICOM standard. Each tag corresponds to a data item, e.g., 0010,0010
+"^DD",2006.56,2006.5623,.01,21,3,0)
+identifies the patient's name.
+"^DD",2006.56,2006.5623,.01,"DT")
+3061006
+"^DD",2006.56,2006.5623,1,0)
+VALUE^F^^0;2^K:$L(X)>100!($L(X)<1) X
+"^DD",2006.56,2006.5623,1,3)
+Enter the value for this tag (1-100 char).
+"^DD",2006.56,2006.5623,1,21,0)
+^.001^5^5^3100407^^^^
+"^DD",2006.56,2006.5623,1,21,1,0)
+The value of this field is a string. This string is the value that is
+"^DD",2006.56,2006.5623,1,21,2,0)
+associated with the tag that is stored in the .01 field of this multiple.
+"^DD",2006.56,2006.5623,1,21,3,0)
+ 
+"^DD",2006.56,2006.5623,1,21,4,0)
+E.g. for the DICOM tag "0010,0010" (patient's name),
+"^DD",2006.56,2006.5623,1,21,5,0)
+the value could be "DOE,JOHN Q".
+"^DD",2006.56,2006.5623,1,"DT")
+3061006
+"^DD",2006.56,2006.5623,2,0)
+TEXT^2006.5624^^1;0
+"^DD",2006.56,2006.5623,2,21,0)
+^.001^4^4^3100407^^
+"^DD",2006.56,2006.5623,2,21,1,0)
+This multiple contains text that will populate a DICOM element whose 
+"^DD",2006.56,2006.5623,2,21,2,0)
+value representation allows it to contain one to many lines of text.  The 
+"^DD",2006.56,2006.5623,2,21,3,0)
+meaning of this text is determined by the value of the .01 field in this 
+"^DD",2006.56,2006.5623,2,21,4,0)
+multiple.
+"^DD",2006.56,2006.5624,0)
+TEXT SUB-FIELD^^.01^1
+"^DD",2006.56,2006.5624,0,"DT")
+3061006
+"^DD",2006.56,2006.5624,0,"NM","TEXT")
+
+"^DD",2006.56,2006.5624,0,"UP")
+2006.5623
+"^DD",2006.56,2006.5624,.01,0)
+TEXT^MF^^0;1^K:$L(X)>240!($L(X)<1) X
+"^DD",2006.56,2006.5624,.01,1,0)
+^.1^^0
+"^DD",2006.56,2006.5624,.01,3)
+Enter a line of text (1-240 char).
+"^DD",2006.56,2006.5624,.01,21,0)
+^^1^1^3100212^
+"^DD",2006.56,2006.5624,.01,21,1,0)
+The value of this field is a single line of text. 
+"^DD",2006.56,2006.5624,.01,"DT")
+3100407
+"^DIC",2006.56,2006.56,0)
+DICOM WORKLIST STUDY^2006.56
+"^DIC",2006.56,2006.56,0,"GL")
+^MAGDWLST(2006.56,
+"^DIC",2006.56,2006.56,"%",0)
+^1.005^^0
+"^DIC",2006.56,2006.56,"%D",0)
+^^36^36^3010619^
+"^DIC",2006.56,2006.56,"%D",1,0)
+ +---------------------------------------------------------------+
+"^DIC",2006.56,2006.56,"%D",2,0)
+ |                                                               |
+"^DIC",2006.56,2006.56,"%D",3,0)
+ | Property of the US Government.                                |
+"^DIC",2006.56,2006.56,"%D",4,0)
+ | No permission to copy or redistribute this software is given. |
+"^DIC",2006.56,2006.56,"%D",5,0)
+ | Use of unreleased versions of this software requires the user |
+"^DIC",2006.56,2006.56,"%D",6,0)
+ | to execute a written test agreement with the VistA Imaging    |
+"^DIC",2006.56,2006.56,"%D",7,0)
+ | Development Office of the Department of Veterans Affairs,     |
+"^DIC",2006.56,2006.56,"%D",8,0)
+ | telephone (301) 734-0100.                                     |
+"^DIC",2006.56,2006.56,"%D",9,0)
+ |                                                               |
+"^DIC",2006.56,2006.56,"%D",10,0)
+ | The Food and Drug Administration classifies this software as  |
+"^DIC",2006.56,2006.56,"%D",11,0)
+ | a medical device.  As such, it may not be changed in any way. |
+"^DIC",2006.56,2006.56,"%D",12,0)
+ | Modifications to this software may result in an adulterated   |
+"^DIC",2006.56,2006.56,"%D",13,0)
+ | medical device under 21CFR820, the use of which is considered |
+"^DIC",2006.56,2006.56,"%D",14,0)
+ | to be a violation of US Federal Statutes.                     |
+"^DIC",2006.56,2006.56,"%D",15,0)
+ |                                                               |
+"^DIC",2006.56,2006.56,"%D",16,0)
+ +---------------------------------------------------------------+
+"^DIC",2006.56,2006.56,"%D",17,0)
+ 
+"^DIC",2006.56,2006.56,"%D",18,0)
+The entries in this table contain the information about the various
+"^DIC",2006.56,2006.56,"%D",19,0)
+studies that are recorded as tasks on the worklist for a DICOM "modality".
+"^DIC",2006.56,2006.56,"%D",20,0)
+The top-level information in this table separates the activities from the
+"^DIC",2006.56,2006.56,"%D",21,0)
+various clinics at a consolidated site; the next level contains the study
+"^DIC",2006.56,2006.56,"%D",22,0)
+information.
+"^DIC",2006.56,2006.56,"%D",23,0)
+ 
+"^DIC",2006.56,2006.56,"%D",24,0)
+This file contains temporary copies of information from the VistA
+"^DIC",2006.56,2006.56,"%D",25,0)
+system that live on our satellite systems for the duration of the
+"^DIC",2006.56,2006.56,"%D",26,0)
+study that produces the images, and the only reason for
+"^DIC",2006.56,2006.56,"%D",27,0)
+replicating the information onto these "DICOM Gateway Stations"
+"^DIC",2006.56,2006.56,"%D",28,0)
+is that we want to be able to allow the acquisition of images and
+"^DIC",2006.56,2006.56,"%D",29,0)
+the presentation of "worklist information" to continue, even
+"^DIC",2006.56,2006.56,"%D",30,0)
+while the VistA system is down, or when the DDP connection
+"^DIC",2006.56,2006.56,"%D",31,0)
+between our Gateways and the VistA system is not operating. 
+"^DIC",2006.56,2006.56,"%D",32,0)
+ 
+"^DIC",2006.56,2006.56,"%D",33,0)
+Information is copied from VistA to DICOM Gateway when an HL7
+"^DIC",2006.56,2006.56,"%D",34,0)
+message is processed that announces the "exam", and removed when
+"^DIC",2006.56,2006.56,"%D",35,0)
+an HL7 message is processed that announces that the exam is
+"^DIC",2006.56,2006.56,"%D",36,0)
+carried out. 
+"^DIC",2006.56,"B","DICOM WORKLIST STUDY",2006.56)
+
+**END**
+**END**

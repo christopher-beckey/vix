@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<build xmlns="http://va.gov/VistA/kids/manifest" name="MAG*3.0*044" patchName="TeleOphthalmology Routing" patch="044">
+  <components>
+    <securityKeys />
+    <parameterDefinitions />
+    <printTemplates />
+    <sortTemplates />
+    <menuOptions />
+    <rpcs />
+    <dataDictionaries>
+      <dataDictionary export="Z_VSS_2006_591.KID" />
+    </dataDictionaries>
+    <hl7s />
+    <routines>
+      <routine export="MAGBRTE4.RTN" />
+      <routine export="MAGBRTE5.RTN" />
+      <routine export="MAGIPS44.RTN" />
+    </routines>
+    <protocols />
+  </components>
+</build>

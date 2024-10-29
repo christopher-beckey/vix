@@ -1,0 +1,53 @@
+Cache for Windows^INT^^~Format=Cache.S~^RAW
+%RO on 30 Jul 2013  10:44 AM
+MAGDHRCC^INT^1^63029,54496^0
+MAGDHRCC ;WOIFO/PMK - Read HL7 and generate DICOM ; 25 Jun 2013 10:15 AM
+ ;;3.0;IMAGING;**138**;Mar 19, 2002;Build 5311;Jul 26, 2013
+ ;; Per VHA Directive 2004-038, this routine should not be modified.
+ ;; +---------------------------------------------------------------+
+ ;; | Property of the US Government.                                |
+ ;; | No permission to copy or redistribute this software is given. |
+ ;; | Use of unreleased versions of this software requires the user |
+ ;; | to execute a written test agreement with the VistA Imaging    |
+ ;; | Development Office of the Department of Veterans Affairs,     |
+ ;; | telephone (301) 734-0100.                                     |
+ ;; | The Food and Drug Administration classifies this software as  |
+ ;; | a medical device.  As such, it may not be changed in any way. |
+ ;; | Modifications to this software may result in an adulterated   |
+ ;; | medical device under 21CFR820, the use of which is considered |
+ ;; | to be a violation of US Federal Statutes.                     |
+ ;; +---------------------------------------------------------------+
+ ;;
+ Q
+ ; Anatomic Pathology HL7 data input routine
+ ; This module reads and parses the HL7 NTE,OBX and SPM Segments for HL7 2.5.1
+ ;
+NTE ; NTE segment
+ N IDNAME,RESULT
+ S IDNAME="Comment",TEXTOUT(IDNAME)="" ; don't output it
+ S RESULT=$$GETDATA^MAGDHRC0(3)
+ D TEXTOUT("0032,4000") ; output comments
+ Q
+ ;
+SPM ; SPM segment
+ N IDNAME,RESULT
+ S IDNAME="Specimen(s)"
+ S RESULT=$$GETDATA^MAGDHRC0(1)_")  " ; ordinal number of specimen
+ S RESULT=RESULT_$$GETDATA^MAGDHRC0(2,1,1) ; specimen identification
+ S RESULT=RESULT_" -- "_$$GETDATA^MAGDHRC0(14) ; specimen description
+ S RESULT=RESULT_" -- "_$$GETDATA^MAGDHRC0(4,1,2) ; topography
+ D TEXTOUT("0032,4000") ; output comments
+ Q
+ ;
+TEXTOUT(TAG) ; output text
+ I '$D(TEXTOUT(IDNAME)) D  ; output the title of the text
+ . I $D(TEXTOUT) D MULTLINE^MAGDHRC6(TAG,$C(13,10)) ; blank line
+ . D MULTLINE^MAGDHRC6(TAG,IDNAME_$C(13,10))
+ . D MULTLINE^MAGDHRC6(TAG,$TR($J("",$L(IDNAME))," ","-")_$C(13,10))
+ . S TEXTOUT(IDNAME)=""
+ . Q
+ D MULTLINE^MAGDHRC6(TAG,RESULT_$C(13,10)) ; concatenate <cr> <lf>
+ Q
+
+
+

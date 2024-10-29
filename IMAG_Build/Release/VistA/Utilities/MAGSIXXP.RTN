@@ -1,0 +1,163 @@
+MAGSIXXP ;WOIFO/SEB - Image File Exports ; [ 09/11/2002 13:59 ]
+ ;;3.0;IMAGING;**17**;Sep 11, 2002
+ ;; +---------------------------------------------------------------+
+ ;; | Property of the US Government.                                |
+ ;; | No permission to copy or redistribute this software is given. |
+ ;; | Use of unreleased versions of this software requires the user |
+ ;; | to execute a written test agreement with the VistA Imaging    |
+ ;; | Development Office of the Department of Veterans Affairs,     |
+ ;; | telephone (301) 734-0100.                                     |
+ ;; |                                                               |
+ ;; | The Food and Drug Administration classifies this software as  |
+ ;; | a Class II medical device.  As such, it may not be changed    |
+ ;; | in any way.  Modifications to this software may result in an  |
+ ;; | adulterated medical device under 21CFR820, the use of which   |
+ ;; | is considered to be a violation of US Federal Statutes.       |
+ ;; +---------------------------------------------------------------+
+ ;;
+ Q
+ ;
+EX N PATH
+EX1 R !!,"Please enter a directory for the output files: ",PATH:DTIME
+ I $E(PATH)="?" D  G EX1
+ . W !!,"Enter the directory of the files to output."
+ . Q
+ I PATH="" W !!,"No directory entered. Goodbye!" G EXDONE
+ D PKG(PATH),CLS(PATH),TYP(PATH),SPEC(PATH),PROC(PATH)
+ D ADMIN(PATH),CLIN(PATH),PROCSPEC(PATH),SPECPROC(PATH)
+EXDONE Q
+ ;
+ ; Output packages to file PATH\1-Packages.txt
+PKG(PATH) N X,POP,%ZIS,IOP,I,PKGS
+ W !!,"Exporting packages..."
+ D FIELD^DID(2005,40,"","POINTER","PKGS")
+ S %ZIS="",%ZIS("HFSNAME")=PATH_"\1-Packages.txt",%ZIS("HFSMODE")="W",IOP="HFS"
+ S X="PKGDONE^MAGSSIXXP",@^%ZOSF("TRAP")
+ D ^%ZIS I POP=1 U 0 W !,"Invalid filename." G PKGDONE
+ F I=1:1:$L(PKGS("POINTER"),";") U IO W $P($P(PKGS("POINTER"),";",I),":"),!
+PKGDONE D ^%ZISC
+ W !,"Done!"
+ Q
+ ;
+ ; Output packages to file PATH\2-Classes.txt
+CLS(PATH) N X,POP,%ZIS,IOP,I,CLSID
+ W !!,"Exporting classes..."
+ S %ZIS="",%ZIS("HFSNAME")=PATH_"\2-Classes.txt",%ZIS("HFSMODE")="W",IOP="HFS"
+ S X="CLSDONE^MAGSSIXXP",@^%ZOSF("TRAP")
+ D ^%ZIS I POP=1 U 0 W !,"Invalid filename." G CLSDONE
+ S CLSID=0 F  S CLSID=$O(^MAG(2005.82,CLSID)) Q:+CLSID=0  D
+ . U IO
+ . I CLSID=1!(CLSID=8) W CLSID,U,$P($G(^MAG(2005.82,CLSID,0)),U),!
+ . Q
+CLSDONE D ^%ZISC
+ W !,"Done!"
+ Q
+ ;
+ ; Output packages to file PATH\3-Types.txt
+TYP(PATH) N X,POP,%ZIS,IOP,I,TYPID
+ W !!,"Exporting types..."
+ S %ZIS="",%ZIS("HFSNAME")=PATH_"\3-Types.txt",%ZIS("HFSMODE")="W",IOP="HFS"
+ S X="TYPDONE^MAGSSIXXP",@^%ZOSF("TRAP")
+ D ^%ZIS I POP=1 U 0 W !,"Invalid filename." G TYPDONE
+ S TYPID=0 F  S TYPID=$O(^MAG(2005.83,TYPID)) Q:+TYPID=0  D
+ . U IO W TYPID,U,$P($G(^MAG(2005.83,TYPID,0)),U),!
+ . Q
+TYPDONE D ^%ZISC
+ W !,"Done!"
+ Q
+ ;
+ ; Output packages to file PATH\4-Specialties.txt
+SPEC(PATH) N X,POP,%ZIS,IOP,I,SPECID
+ W !!,"Exporting specialties..."
+ S %ZIS="",%ZIS("HFSNAME")=PATH_"\4-Specialties.txt",%ZIS("HFSMODE")="W",IOP="HFS"
+ S X="SPECDONE^MAGSSIXXP",@^%ZOSF("TRAP")
+ D ^%ZIS I POP=1 U 0 W !,"Invalid filename." G SPECDONE
+ S SPECID=0 F  S SPECID=$O(^MAG(2005.84,SPECID)) Q:+SPECID=0  D
+ . U IO W SPECID,U,$P($G(^MAG(2005.84,SPECID,0)),U),!
+ . Q
+SPECDONE D ^%ZISC
+ W !,"Done!"
+ Q
+ ;
+ ; Output packages to file PATH\5-Procedures.txt
+PROC(PATH) N X,POP,%ZIS,IOP,I,PROCID
+ W !!,"Exporting procedures..."
+ S %ZIS="",%ZIS("HFSNAME")=PATH_"\5-Procedures.txt",%ZIS("HFSMODE")="W",IOP="HFS"
+ S X="PROCDONE^MAGSSIXXP",@^%ZOSF("TRAP")
+ D ^%ZIS I POP=1 U 0 W !,"Invalid filename." G PROCDONE
+ S PROCID=0 F  S PROCID=$O(^MAG(2005.85,PROCID)) Q:+PROCID=0  D
+ . U IO W PROCID,U,$P($G(^MAG(2005.85,PROCID,0)),U),!
+ . Q
+PROCDONE D ^%ZISC
+ W !,"Done!"
+ Q
+ ;
+ ; Output packages to file PATH\AdminTypes.txt
+ADMIN(PATH) N X,POP,%ZIS,IOP,I,TYPID,TYPDATA
+ W !!,"Exporting administrative types..."
+ S %ZIS="",%ZIS("HFSNAME")=PATH_"\AdminTypes.txt",%ZIS("HFSMODE")="W",IOP="HFS"
+ S X="ADMDONE^MAGSSIXXP",@^%ZOSF("TRAP")
+ D ^%ZIS I POP=1 U 0 W !,"Invalid filename." G ADMDONE
+ U IO W "Types",!
+ S TYPID=0 F  S TYPID=$O(^MAG(2005.83,TYPID)) Q:+TYPID=0  D
+ . S TYPDATA=$G(^MAG(2005.83,TYPID,0))
+ . U IO
+ . I $P(TYPDATA,U,2)=8 W $P(TYPDATA,U),!
+ . Q
+ADMDONE D ^%ZISC
+ W !,"Done!"
+ Q
+ ;
+ ; Output packages to file PATH\ClinTypes.txt
+CLIN(PATH) N X,POP,%ZIS,IOP,I,TYPID,TYPDATA
+ W !!,"Exporting clinical types..."
+ S %ZIS="",%ZIS("HFSNAME")=PATH_"\ClinTypes.txt",%ZIS("HFSMODE")="W",IOP="HFS"
+ S X="CLINDONE^MAGSSIXXP",@^%ZOSF("TRAP")
+ D ^%ZIS I POP=1 U 0 W !,"Invalid filename." G CLINDONE
+ U IO W "Types",!
+ S TYPID=0 F  S TYPID=$O(^MAG(2005.83,TYPID)) Q:+TYPID=0  D
+ . S TYPDATA=$G(^MAG(2005.83,TYPID,0))
+ . U IO
+ . I $P(TYPDATA,U,2)=1 W $P(TYPDATA,U),!
+ . Q
+CLINDONE D ^%ZISC
+ W !,"Done!"
+ Q
+ ;
+ ; Output packages to file PATH\ProcsBySpec.txt
+PROCSPEC(PATH) N X,POP,%ZIS,IOP,I,SPECNAME,SPECID,PROCS
+ W !!,"Exporting procedures by specialty..."
+ S %ZIS="",%ZIS("HFSNAME")=PATH_"\ProcsBySpec.txt",%ZIS("HFSMODE")="W",IOP="HFS"
+ S X="PRSPDONE^MAGSSIXXP",@^%ZOSF("TRAP")
+ D ^%ZIS I POP=1 U 0 W !,"Invalid filename." G PRSPDONE
+ U IO W "Specialty^Procedure/Event",!
+ S SPECNAME="" F  S SPECNAME=$O(^MAG(2005.84,"B",SPECNAME)) Q:SPECNAME=""  D
+ . S SPECID=$O(^MAG(2005.84,"B",SPECNAME,""))
+ . K PROCS D IGE^MAGSIXGT(.PROCS,"",SPECID)
+ . I $P(PROCS(0),U)=1 F I=2:1:$P(PROCS(0)," ",2) D
+ . . I I=2 W $P($G(^MAG(2005.84,SPECID,0)),U)
+ . . W U,$P($P(PROCS(I),"|"),U),!
+ . W !
+ . Q
+PRSPDONE D ^%ZISC
+ W !,"Done!"
+ Q
+ ;
+ ; Output packages to file PATH\SpecsByProc.txt
+SPECPROC(PATH) N X,POP,%ZIS,IOP,I,PROCNAME,PROCID,SPECS
+ W !!,"Exporting specialties by procedure..."
+ S %ZIS="",%ZIS("HFSNAME")=PATH_"\SpecsByProc.txt",%ZIS("HFSMODE")="W",IOP="HFS"
+ S X="SPPRDONE^MAGSSIXXP",@^%ZOSF("TRAP")
+ D ^%ZIS I POP=1 U 0 W !,"Invalid filename." G SPPRDONE
+ U IO W "Procedure/Event^Specialty",!
+ S PROCNAME="" F  S PROCNAME=$O(^MAG(2005.85,"B",PROCNAME)) Q:PROCNAME=""  D
+ . S PROCID=$O(^MAG(2005.85,"B",PROCNAME,""))
+ . K SPECS D IGS^MAGSIXGT(.SPECS,"",PROCID)
+ . I $P(SPECS(0),U)=1 F I=2:1:$P(SPECS(0)," ",2) D
+ . . I I=2 W $P($G(^MAG(2005.85,PROCID,0)),U)
+ . . W U,$P($P(SPECS(I),"|"),U),!
+ . W !
+ . Q
+SPPRDONE D ^%ZISC
+ W !,"Done!"
+ Q

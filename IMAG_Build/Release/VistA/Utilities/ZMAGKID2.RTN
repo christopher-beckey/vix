@@ -1,0 +1,83 @@
+Cache for Windows^INT^^~Format=Cache.S~
+%RO on 10 Sep 2012   1:40 PM
+ZMAGKID2^INT^1^62699,40211^0
+ZMAGKID2  ; 19 Jul 2012 9:54 AM
+ Q
+ ;
+ ; Call DELALL^ZMAGKID2 to delete all VI components from the database
+ ; 
+DELALL ; Delete all IMAGING (MAG) components 
+ N %
+ W !,"Are you sure you want to delete VI form this database" S %=2 D YN^DICN
+ I %=-1!(%=2) Q
+ W !,"Are you really sure" S %=2 D YN^DICN
+ I %=-1!(%=2) Q 
+ W !,"..."
+ D DDDEL  ; Delete FileMan files
+ W !
+ D DEL  ; Delete KIDS Components
+ W "Done!"
+ Q
+ ;
+DDDEL  ; Delete Files from 2005 to 2006.999999 
+ S DDFILE=2005-.00000000001
+ F  S DDFILE=$O(^DIC(DDFILE)) Q:DDFILE>=2007  D
+ . D DELFILE^MAGKIDS(DDFILE,"DET")
+ . Q
+ Q
+DEL ; Delete KIDS Components
+ N CNT,I,FILE
+ S CNT=0
+ S CNT=CNT+1,FILE(CNT)=19.1   ; Security Key
+ S CNT=CNT+1,FILE(CNT)=19     ; Option
+ ; .4, .401, .402, and .403 are deleted along with files
+ ;S CNT=CNT+1,FILE(CNT)=.4     ; Print Template
+ ;S CNT=CNT+1,FILE(CNT)=.401   ; Sort Template
+ ;S CNT=CNT+1,FILE(CNT)=.402   ; Input Template
+ ;S CNT=CNT+1,FILE(CNT)=.403   ; FORM
+ S CNT=CNT+1,FILE(CNT)=.5     ; Function
+ S CNT=CNT+1,FILE(CNT)=.84    ; Dialogue
+ S CNT=CNT+1,FILE(CNT)=3.6    ; BULLETIN
+ S CNT=CNT+1,FILE(CNT)=3.8    ;  Mail Group
+ S CNT=CNT+1,FILE(CNT)=9.2    ;  HELP FRAME
+ S CNT=CNT+1,FILE(CNT)=9.8   ; ROUTINE
+ S CNT=CNT+1,FILE(CNT)=101    ;  PROTOCOL
+ S CNT=CNT+1,FILE(CNT)=409.61 ; LIST TEMPLATE
+ S CNT=CNT+1,FILE(CNT)=771    ; HL7 Application parameter
+ S CNT=CNT+1,FILE(CNT)=870    ; HL Logical Link
+ S CNT=CNT+1,FILE(CNT)=8989.51  ; PARAMETER DEFINITION
+ S CNT=CNT+1,FILE(CNT)=8989.52  ; PARAMETER TEMPLATE
+ S CNT=CNT+1,FILE(CNT)=8994   ;  RPC
+ ;
+ S CNT=CNT+1,FILE(CNT)=9.7  ; Installed Patches
+ S CNT=CNT+1,FILE(CNT)=9.6  ; Builds
+ ; 
+ ; Delete one component at time
+ F I=1:1:CNT D DELONE(FILE(I),"MAG")
+ ;
+ F I=9.4,9.7,9.6 D DELONE(I,"IMAGING")  ; Clean up IMAGING installations and builds
+ Q
+ ;
+DELONE(FILE,MAGX) ; Delete one component type
+ ; FILE = Component file number
+ ; MAGX = "MAG" or "IMAGING"
+ N J,DIK,DA,I,MAGXX
+ N MAGI,MAGXL
+ W FILE,"; "
+ S DIK=$$ROOT^DILFD(FILE)
+ S MAGXL=$L(MAGX)
+ K ^TMP("DILIST",$J)
+ D:FILE'=.84 LIST^DIC(FILE,"","","","*",.MAGI,MAGX,"","I $E(^(0),1,MAGXL)=MAGX")
+ I FILE=.84 D LIST^DIC(.84,"","","","*","","IMAGING","C")
+ ;
+ F J=1:1 S MAGXX=$G(^TMP("DILIST",$J,1,J)) Q:MAGXX=""  D 
+ . S DA=$G(^TMP("DILIST",$J,2,J))
+ . D ^DIK 
+ . I FILE=9.8 S I=$$DEL^%R(MAGXX) ; Delete the routine.
+ . Q 
+ K ^TMP("DILIST",$J)
+ ;
+ Q
+
+
+

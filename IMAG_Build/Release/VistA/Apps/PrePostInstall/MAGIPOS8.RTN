@@ -1,0 +1,170 @@
+MAGIPOS8 ;Post init routine to queue site activity at install.
+ ;;3.0;IMAGING;**8**;Sep 15, 2004
+ ;; +---------------------------------------------------------------+
+ ;; | Property of the US Government.                                |
+ ;; | No permission to copy or redistribute this software is given. |
+ ;; | Use of unreleased versions of this software requires the user |
+ ;; | to execute a written test agreement with the VistA Imaging    |
+ ;; | Development Office of the Department of Veterans Affairs,     |
+ ;; | telephone (301) 734-0100.                                     |
+ ;; |                                                               |
+ ;; | The Food and Drug Administration classifies this software as  |
+ ;; | a medical device.  As such, it may not be changed             |
+ ;; | in any way.  Modifications to this software may result in an  |
+ ;; | adulterated medical device under 21CFR820, the use of which   |
+ ;; | is considered to be a violation of US Federal Statutes.       |
+ ;; +---------------------------------------------------------------+
+ ;;
+ Q
+PRE ; Remove DD definition so that new definition can be laid down cleanly
+ N I
+ F DIU=2005.86,2005.021,2005.87 D
+ . S DIU(0)="" D EN^DIU2
+ . Q
+ ;Also handle partials DDs for 2005, 2005.1, 2006.1, 2006.81, 2006.82, 2006.95
+ S DIK="^DD(2005,",DA=30,DA(1)=2005 D ^DIK
+ S DIK="^DD(2005,",DA=30.1,DA(1)=2005 D ^DIK
+ S DIK="^DD(2005,",DA=30.2,DA(1)=2005 D ^DIK
+ S DIK="^DD(2005.1,",DA=.05,DA(1)=2005.1 D ^DIK
+ S DIK="^DD(2005.1,",DA=.06,DA(1)=2005.1 D ^DIK
+ S DIK="^DD(2005.1,",DA=13,DA(1)=2005.1 D ^DIK
+ S DIK="^DD(2005.1,",DA=20,DA(1)=2005.1 D ^DIK
+ S DIK="^DD(2005.1,",DA=30,DA(1)=2005 D ^DIK
+ S DIK="^DD(2005.1,",DA=30.1,DA(1)=2005 D ^DIK
+ S DIK="^DD(2005.1,",DA=30.2,DA(1)=2005 D ^DIK
+ S DIK="^DD(2005.1,",DA=40,DA(1)=2005.1 D ^DIK
+ S DIK="^DD(2005.1,",DA=41,DA(1)=2005.1 D ^DIK
+ S DIK="^DD(2005.1,",DA=42,DA(1)=2005.1 D ^DIK
+ S DIK="^DD(2005.1,",DA=43,DA(1)=2005.1 D ^DIK
+ S DIK="^DD(2005.1,",DA=44,DA(1)=2005.1 D ^DIK
+ S DIK="^DD(2005.1,",DA=45,DA(1)=2005.1 D ^DIK
+ S DIK="^DD(2005.1,",DA=106,DA(1)=2005.1 D ^DIK
+ S DIK="^DD(2005.1,",DA=107,DA(1)=2005.1 D ^DIK
+ S DIK="^DD(2005.1,",DA=108,DA(1)=2005.1 D ^DIK
+ S DIK="^DD(2005.1,",DA=109,DA(1)=2005.1 D ^DIK
+ S DIK="^DD(2005.1,",DA=110,DA(1)=2005.1 D ^DIK
+ S DIK="^DD(2005.1106,",DA=.01,DA(1)=2005.1106 D ^DIK
+ S DIK="^DD(2005.1106,",DA=2,DA(1)=2005.1106 D ^DIK
+ S DIK="^DD(2005.1106,",DA=3,DA(1)=2005.1106 D ^DIK
+ S DIK="^DD(2005.1106,",DA=4,DA(1)=2005.1106 D ^DIK
+ S DIK="^DD(2005.1106,",DA=5,DA(1)=2005.1106 D ^DIK
+ S DIK="^DD(2005.1106,",DA=6,DA(1)=2005.1106 D ^DIK
+ S DIK="^DD(2005.1106,",DA=7,DA(1)=2005.1106 D ^DIK
+ S DIK="^DD(2005.2,",DA=6,DA(1)=2005 D ^DIK
+ S DIK="^DD(2006.95,",DA=9,DA(1)=2006.95 D ^DIK
+ S DIK="^DD(2006.1,",DA=70,DA(1)=2006.1 D ^DIK
+ S DIK="^DD(2006.1,",DA=11.6,DA(1)=2006.1 D ^DIK
+ S DIK="^DD(2006.1,",DA=11.7,DA(1)=2006.1 D ^DIK
+ S DIK="^DD(2006.1,",DA=11.8,DA(1)=2006.1 D ^DIK
+ S DIK="^DD(2006.1,",DA=60,DA(1)=2006.1 D ^DIK
+ S DIK="^DD(2006.1,",DA=61,DA(1)=2006.1 D ^DIK
+ S DIK="^DD(2006.1,",DA=62,DA(1)=2006.1 D ^DIK
+ S DIK="^DD(2006.1,",DA=63,DA(1)=2006.1 D ^DIK
+ S DIK="^DD(2006.1,",DA=64,DA(1)=2006.1 D ^DIK
+ S DIK="^DD(2006.1,",DA=65,DA(1)=2006.1 D ^DIK
+ S DIK="^DD(2006.8,",DA=17,DA(1)=2006.8 D ^DIK
+ S DIK="^DD(2006.81,",DA=.04,DA(1)=2006.81 D ^DIK
+ S DIK="^DD(2006.82,",DA=.04,DA(1)=2006.82 D ^DIK
+ F I=137,138,140,141,143,144,146,147,148,149,150,151,152,153,154,155,156,157,158,159,163,164,165,174,175,176,177,178,179 D
+ . S DIK="^DD(2006.18,",DA=I,DA(1)=2006.18 D ^DIK
+ K DIK,DA
+ K ^DD(2006.8,0,"IX","AMAPI",2006.8,6)
+ Q
+POST ;
+ ; Remove field 105 it is now .05 same field nameACQUISITION SITE 
+ ; and global storage in file IMAGE AUDIT.
+ S DIK="^DD(2005.1,",DA=105,DA(1)=2005 D ^DIK K DIK,DA
+ D UPDATE
+ D CLEARUP
+ D NETREL
+ D INDEX
+ ; Assign the MAGDISP CLIN Key to all MAG WINDOWS Option holders. 
+ D EN^MAGGTU9
+ ;  Create a Few Public Filters 
+ D FLT^MAGGTU9
+ D CHTYP ; Change CLASS of ADVANCE DIRECTIVE to CLIN/ADMIN
+ D REMTASK^MAGQE4
+ D STTASK^MAGQE4
+ D INS(XPDNM,DUZ,$$NOW^XLFDT,XPDA)
+ D POSTI^MAGQBUT
+ Q
+INDEX ; Re-index actually
+ K ^MAG(2005.2,"E") S DIK="MAG(2005.2,",DIK(1)="6^E" D ENALL^DIK
+ K ^MAG(2006.95,"AS") S DIK="MAG(2006.95,",DIK(1)="9^AS" D ENALL^DIK
+ K ^MAG(2006.81,"C") S DIK="MAG(2005.81,",DIK(1)=".04^C" D ENALL^DIK
+ K ^MAG(2006.8,"B"),^MAG(2006.8,"C"),^MAG(2006.8,"D") S DIK="^MAG(2006.8," D IXALL^DIK
+ K DIK
+ Q
+UPDATE ;Is GCC Export set in the Imaging Site Param file?
+ N ENTRY
+ S ENTRY=0
+ F  S ENTRY=$O(^MAG(2006.1,ENTRY)) Q:'ENTRY  D
+ . I $D(^MAG(2006.1,ENTRY,0)),+$P(^MAG(2006.1,ENTRY,0),"^",7) D
+ . . D IMAGACT
+ . . Q
+ . Q
+ Q
+IMAGACT ;Set the IMAGE ACTION entry in file 2005.86
+ ; Set the ACTIVE field = to MEANS TEST Active field in MAG DESC CTGS
+ N IEN,HEC,MTIEN,MTNAME
+ S MTNAME=$O(^MAG(2005.81,"B","MEANS TEST")) ; Get IEN of MEANS TEST 10-10EZ
+ ;  - Sites were allowed to change names.
+ I MTNAME'["MEANS TEST" Q
+ S MTIEN=$O(^MAG(2005.81,"B",MTNAME,""))
+ Q:'MTIEN
+ S HEC=+$G(^MAG(2005.81,MTIEN,1))
+ S IEN=$O(^MAG(2005.86,"B","HEC COPY",0)) Q:'IEN
+ I $D(^MAG(2005.86,IEN,0)) S $P(^MAG(2005.86,IEN,0),"^",2)=HEC
+ Q
+CLEARUP ;Clear field #52 VIEWJBOX IMAGES in file 2006.18 Imaging User Preference.
+ ; field 52 is the 6th piece of ^MAG(2006.18,0)
+ N J
+ W !,"Clearing the VIEWJBOX IMAGES field values from file 2006.18"
+ S J=0 F  S J=$O(^MAG(2006.18,J)) Q:'J  I $D(^MAG(2006.18,J,0)) S $P(^(0),"^",6)=0
+ W !,"Complete"
+ Q
+NETREL ; Set Internal and External values for each of the Network locations
+ N IEN,NAME,TYPE,VALUE,DR,DA,DIE,X,Y
+ S (NAME,IEN)="" F  S IEN=$O(^MAG(2005.2,"B",NAME)) Q:NAME=""  D
+ . S IEN=$O(^MAG(2005.2,"B",NAME,""))
+ . S TYPE=$P($G(^MAG(2005.2,IEN,0)),U,7)
+ . S VALUE=$S(TYPE["MAG":"I",TYPE["WORM":"I",1:"E")
+ . S DR="6.5///^S X=VALUE",DA=IEN,DIE=2005.2 D ^DIE
+ . Q
+ Q
+INS(XP,DUZ,DATE,IDA) ;
+ N CT,CNT,COM,D,D0,D1,D2,DDATE,DG,DIC,DICR,DIW,MAGMSG,ST,XMID,XMY
+ D GETENV^%ZOSV
+ S CNT=0
+ S CNT=CNT+1,MAGMSG(CNT)="PACKAGE INSTALL"
+ S CNT=CNT+1,MAGMSG(CNT)="SITE: "_$$KSP^XUPARAM("WHERE")
+ S CNT=CNT+1,MAGMSG(CNT)="PACKAGE: "_XP
+ S CNT=CNT+1,MAGMSG(CNT)="Version: "_$$VER^XPDUTL(XP)
+ S ST=$$GET1^DIQ(9.7,IDA,11,"I")
+ S CNT=CNT+1,MAGMSG(CNT)="Start time: "_$$FMTE^XLFDT(ST)
+ S CT=$$GET1^DIQ(9.7,IDA,17,"I") S:+CT'=CT CT=$$NOW^XLFDT
+ S CNT=CNT+1,MAGMSG(CNT)="Completion time: "_$$FMTE^XLFDT(CT)
+ S CNT=CNT+1,MAGMSG(CNT)="Run time: "_$$FMDIFF^XLFDT(CT,ST,3)
+ S CNT=CNT+1,MAGMSG(CNT)="Environment: "_Y
+ S COM=$$GET1^DIQ(9.7,IDA,6,"I")
+ S CNT=CNT+1,MAGMSG(CNT)="FILE COMMENT: "_COM
+ S CNT=CNT+1,MAGMSG(CNT)="DATE: "_DATE
+ S CNT=CNT+1,MAGMSG(CNT)="Installed by: "_$$GET1^DIQ(9.7,IDA,9,"E")
+ S CNT=CNT+1,MAGMSG(CNT)="Install Name: "_$$GET1^DIQ(9.7,IDA,.01,"E")
+ S DDATE=$$GET1^DIQ(9.7,IDA,51,"I")
+ S CNT=CNT+1,MAGMSG(CNT)="Distribution Date: "_$$FMTE^XLFDT(DDATE)
+ S XMSUB=XP_" INSTALLATION"
+ S XMID=$G(DUZ) S:'XMID XMID=.5
+ S XMY(XMID)=""
+ S XMY("G.MAG SERVER")=""
+ S:$G(MAGDUZ) XMY(MAGDUZ)=""
+ S XMSUB=$E(XMSUB,1,63)
+ D SENDMSG^XMXAPI(XMID,XMSUB,"MAGMSG",.XMY,,.XMZ,)
+ I $G(XMERR) M XMERR=^TMP("XMERR",$J) S $EC=",U13-Cannot send MailMan message,"
+ Q
+CHTYP ;Change CLASS of INDEX TYPE:  ADVANCE DIRECTIVE to CLIN/ADMIN
+ N I,J
+ S I=$O(^MAG(2005.82,"B","CLIN/ADMIN","")) Q:'I
+ S J=$O(^MAG(2005.83,"B","ADVANCE DIRECTIVE","")) Q:'J
+ S $P(^MAG(2005.83,J,0),"^",2)=I
+ Q

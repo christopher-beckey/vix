@@ -1,0 +1,430 @@
+# SCP_List.dic, 07 June 2011
+# 3.0;IMAGING;**99**;Mar 19, 2002;Build 2179;Jun 28, 2011
+# Per VHA Directive 2004-038, this routine should not be modified.
+# +---------------------------------------------------------------+
+# | Property of the US Government.                                |
+# | No permission to copy or redistribute this software is given. |
+# | Use of unreleased versions of this software requires the user |
+# | to execute a written test agreement with the VistA Imaging    |
+# | Development Office of the Department of Veterans Affairs,     |
+# | telephone (301) 734-0100.                                     |
+# | The Food and Drug Administration classifies this software as  |
+# | a medical device.  As such, it may not be changed in any way. |
+# | Modifications to this software may result in an adulterated   |
+# | medical device under 21CFR820, the use of which is considered |
+# | to be a violation of US Federal Statutes.                     |
+# +---------------------------------------------------------------+
+#
+#
+# (the above line is intentionally blank)
+#
+# Last edited 7 June 2011, 12:45 PM  -- 2009 DICOM Standard
+#
+#
+# VistA Service Class Providers
+# <VistA Application Entity Title> | <application name>
+# | <supported SOP class>
+# || <transfer syntax, in order of preference>
+#
+#
+VISTA_WORKLIST|VistA Modality Worklist
+|Verification SOP Class
+||Explicit VR Little Endian
+||Implicit VR Little Endian
+||Explicit VR Big Endian
+|Modality Worklist Information Model - FIND
+||Implicit VR Little Endian
+#
+VISTA_QR_SCP|VistA Query/Retrieve
+|Verification SOP Class
+||Explicit VR Little Endian
+||Implicit VR Little Endian
+||Explicit VR Big Endian
+|Patient Root Query/Retrieve Information Model - FIND
+||Implicit VR Little Endian
+|Study Root Query/Retrieve Information Model - FIND
+||Implicit VR Little Endian
+|Patient/Study Only Query/Retrieve Information Model - FIND (Retired)
+||Implicit VR Little Endian
+#
+VISTA_STORAGE|VistA Storage
+|Verification SOP Class
+||Explicit VR Little Endian
+||Implicit VR Little Endian
+||Explicit VR Big Endian
+#
+|Computed Radiography Image Storage
+||Explicit VR Little Endian
+||Implicit VR Little Endian
+||JPEG Baseline (Process 1): Default Transfer Syntax for Lossy JPEG 8 Bit Image Compression
+||JPEG Lossless, Non-Hierarchical (Process 14)
+||JPEG Lossless, Non-Hierarchical (Process 14): Default Lossless JPEG Compression
+#
+|Digital X-Ray Image Storage - For Presentation
+||Explicit VR Little Endian
+||Implicit VR Little Endian
+||JPEG Baseline (Process 1): Default Transfer Syntax for Lossy JPEG 8 Bit Image Compression
+||JPEG Lossless, Non-Hierarchical (Process 14)
+||JPEG Lossless, Non-Hierarchical (Process 14): Default Lossless JPEG Compression
+#
+|Digital X-Ray Image Storage - For Processing
+||Explicit VR Little Endian
+||Implicit VR Little Endian
+#
+|Digital Mammography X-Ray Image Storage - For Presentation
+||Explicit VR Little Endian
+||Implicit VR Little Endian
+#
+|Digital Mammography X-Ray Image Storage - For Processing
+||Explicit VR Little Endian
+||Implicit VR Little Endian
+#
+|Digital Intra-oral X-Ray Image Storage - For Presentation
+||Explicit VR Little Endian
+||Implicit VR Little Endian
+||JPEG Baseline (Process 1): Default Transfer Syntax for Lossy JPEG 8 Bit Image Compression
+||JPEG Lossless, Non-Hierarchical (Process 14)
+||JPEG Lossless, Non-Hierarchical (Process 14): Default Lossless JPEG Compression
+#
+|Digital Intra-oral X-Ray Image Storage - For Processing
+||Explicit VR Little Endian
+||Implicit VR Little Endian
+#
+|CT Image Storage
+||Explicit VR Little Endian
+||Implicit VR Little Endian
+||JPEG Baseline (Process 1): Default Transfer Syntax for Lossy JPEG 8 Bit Image Compression
+||JPEG Lossless, Non-Hierarchical (Process 14)
+||JPEG Lossless, Non-Hierarchical (Process 14): Default Lossless JPEG Compression
+#
+|Ultrasound Multi-frame Image Storage (Retired)
+||Explicit VR Little Endian
+||Implicit VR Little Endian
+||JPEG Baseline (Process 1): Default Transfer Syntax for Lossy JPEG 8 Bit Image Compression
+||JPEG Lossless, Non-Hierarchical (Process 14)
+||JPEG Lossless, Non-Hierarchical (Process 14): Default Lossless JPEG Compression
+#
+|Ultrasound Multi-frame Image Storage
+||Explicit VR Little Endian
+||Implicit VR Little Endian
+||JPEG Baseline (Process 1): Default Transfer Syntax for Lossy JPEG 8 Bit Image Compression
+||JPEG Lossless, Non-Hierarchical (Process 14)
+||JPEG Lossless, Non-Hierarchical (Process 14): Default Lossless JPEG Compression
+#
+|MR Image Storage
+||Explicit VR Little Endian
+||Implicit VR Little Endian
+||JPEG Baseline (Process 1): Default Transfer Syntax for Lossy JPEG 8 Bit Image Compression
+||JPEG Lossless, Non-Hierarchical (Process 14)
+||JPEG Lossless, Non-Hierarchical (Process 14): Default Lossless JPEG Compression
+#
+|Nuclear Medicine Image Storage (Retired)
+||Explicit VR Little Endian
+||Implicit VR Little Endian
+||JPEG Baseline (Process 1): Default Transfer Syntax for Lossy JPEG 8 Bit Image Compression
+||JPEG Lossless, Non-Hierarchical (Process 14)
+||JPEG Lossless, Non-Hierarchical (Process 14): Default Lossless JPEG Compression
+#
+|Ultrasound Image Storage (Retired)
+||Explicit VR Little Endian
+||Implicit VR Little Endian
+||JPEG Baseline (Process 1): Default Transfer Syntax for Lossy JPEG 8 Bit Image Compression
+||JPEG Lossless, Non-Hierarchical (Process 14)
+||JPEG Lossless, Non-Hierarchical (Process 14): Default Lossless JPEG Compression
+#
+|Encapsulated PDF Storage
+||Explicit VR Little Endian
+||Implicit VR Little Endian
+#
+|Ultrasound Image Storage
+||Explicit VR Little Endian
+||Implicit VR Little Endian
+||JPEG Baseline (Process 1): Default Transfer Syntax for Lossy JPEG 8 Bit Image Compression
+||JPEG Lossless, Non-Hierarchical (Process 14)
+||JPEG Lossless, Non-Hierarchical (Process 14): Default Lossless JPEG Compression
+#
+|Secondary Capture Image Storage
+||Explicit VR Little Endian
+||Implicit VR Little Endian
+||JPEG Baseline (Process 1): Default Transfer Syntax for Lossy JPEG 8 Bit Image Compression
+||JPEG Lossless, Non-Hierarchical (Process 14)
+||JPEG Lossless, Non-Hierarchical (Process 14): Default Lossless JPEG Compression
+#
+# |Multi-frame Single Bit Secondary Capture Image Storage
+# ||Explicit VR Little Endian
+# ||Implicit VR Little Endian
+#
+|Multi-frame Grayscale Byte Secondary Capture Image Storage
+||Explicit VR Little Endian
+||Implicit VR Little Endian
+||JPEG Baseline (Process 1): Default Transfer Syntax for Lossy JPEG 8 Bit Image Compression
+||JPEG Lossless, Non-Hierarchical (Process 14)
+||JPEG Lossless, Non-Hierarchical (Process 14): Default Lossless JPEG Compression
+#
+|Multi-frame Grayscale Word Secondary Capture Image Storage
+||Explicit VR Little Endian
+||Implicit VR Little Endian
+||JPEG Lossless, Non-Hierarchical (Process 14)
+||JPEG Lossless, Non-Hierarchical (Process 14): Default Lossless JPEG Compression
+#
+|Multi-frame True Color Secondary Capture Image Storage
+||Explicit VR Little Endian
+||Implicit VR Little Endian
+||JPEG Baseline (Process 1): Default Transfer Syntax for Lossy JPEG 8 Bit Image Compression
+||JPEG Lossless, Non-Hierarchical (Process 14)
+||JPEG Lossless, Non-Hierarchical (Process 14): Default Lossless JPEG Compression
+#
+# |Standalone Overlay Storage
+# ||Explicit VR Little Endian
+# ||Implicit VR Little Endian
+#
+# |Standalone Curve Storage
+# ||Explicit VR Little Endian
+# ||Implicit VR Little Endian
+#
+# |12-lead ECG Waveform Storage
+# ||Explicit VR Little Endian
+# ||Implicit VR Little Endian
+#
+# |General ECG Waveform Storage
+# ||Explicit VR Little Endian
+# ||Implicit VR Little Endian
+#
+# |Ambulatory ECG Waveform Storage
+# ||Explicit VR Little Endian
+# ||Implicit VR Little Endian
+#
+# |Hemodynamic Waveform Storage
+# ||Explicit VR Little Endian
+# ||Implicit VR Little Endian
+#
+# |Cardiac Electrophysiology Waveform Storage
+# ||Explicit VR Little Endian
+# ||Implicit VR Little Endian
+#
+# |Basic Voice Audio Waveform Storage
+# ||Explicit VR Little Endian
+# ||Implicit VR Little Endian
+#
+# |Standalone Modality LUT Storage
+# ||Explicit VR Little Endian
+# ||Implicit VR Little Endian
+#
+# |Standalone VOI LUT Storage
+# ||Explicit VR Little Endian
+# ||Implicit VR Little Endian
+#
+# |Grayscale Softcopy Presentation State Storage SOP Class
+# ||Explicit VR Little Endian
+# ||Implicit VR Little Endian
+#
+|X-Ray Angiographic Image Storage
+||Explicit VR Little Endian
+||Implicit VR Little Endian
+||JPEG Lossless, Non-Hierarchical (Process 14)
+||JPEG Lossless, Non-Hierarchical (Process 14): Default Lossless JPEG Compression
+#
+|X-Ray Radiofluoroscopic Image Storage
+||Explicit VR Little Endian
+||Implicit VR Little Endian
+||JPEG Baseline (Process 1): Default Transfer Syntax for Lossy JPEG 8 Bit Image Compression
+||JPEG Lossless, Non-Hierarchical (Process 14)
+||JPEG Lossless, Non-Hierarchical (Process 14): Default Lossless JPEG Compression
+#
+# |X-Ray Angiographic Bi-Plane Image Storage (Retired)
+# ||Explicit VR Little Endian
+# ||Implicit VR Little Endian
+#
+|Nuclear Medicine Image Storage
+||Explicit VR Little Endian
+||Implicit VR Little Endian
+||JPEG Baseline (Process 1): Default Transfer Syntax for Lossy JPEG 8 Bit Image Compression
+||JPEG Lossless, Non-Hierarchical (Process 14)
+||JPEG Lossless, Non-Hierarchical (Process 14): Default Lossless JPEG Compression
+#
+# |Raw Data Storage
+# ||Explicit VR Little Endian
+# ||Implicit VR Little Endian
+#
+# |Spatial Registration Storage
+# ||Explicit VR Little Endian
+# ||Implicit VR Little Endian
+#
+# |Spatial Fiducials Storage
+# ||Explicit VR Little Endian
+# ||Implicit VR Little Endian
+#
+|VL Image Storage - Trial (Retired)
+||Explicit VR Little Endian
+||Implicit VR Little Endian
+||JPEG Baseline (Process 1): Default Transfer Syntax for Lossy JPEG 8 Bit Image Compression
+||JPEG Lossless, Non-Hierarchical (Process 14)
+||JPEG Lossless, Non-Hierarchical (Process 14): Default Lossless JPEG Compression
+#
+|VL Multi-frame Image Storage - Trial (Retired)
+||Explicit VR Little Endian
+||Implicit VR Little Endian
+||JPEG Baseline (Process 1): Default Transfer Syntax for Lossy JPEG 8 Bit Image Compression
+||JPEG Lossless, Non-Hierarchical (Process 14)
+||JPEG Lossless, Non-Hierarchical (Process 14): Default Lossless JPEG Compression
+#
+|VL Endoscopic Image Storage
+||Explicit VR Little Endian
+||Implicit VR Little Endian
+||JPEG Baseline (Process 1): Default Transfer Syntax for Lossy JPEG 8 Bit Image Compression
+||JPEG Lossless, Non-Hierarchical (Process 14)
+||JPEG Lossless, Non-Hierarchical (Process 14): Default Lossless JPEG Compression
+#
+# |Video Endoscopic Image Storage
+# ||Explicit VR Little Endian
+# ||Implicit VR Little Endian
+#
+|VL Microscopic Image Storage
+||Explicit VR Little Endian
+||Implicit VR Little Endian
+||JPEG Baseline (Process 1): Default Transfer Syntax for Lossy JPEG 8 Bit Image Compression
+||JPEG Lossless, Non-Hierarchical (Process 14)
+||JPEG Lossless, Non-Hierarchical (Process 14): Default Lossless JPEG Compression
+#
+# |Video Microscopic Image Storage
+# ||Explicit VR Little Endian
+# ||Implicit VR Little Endian
+#
+|VL Slide-Coordinates Microscopic Image Storage
+||Explicit VR Little Endian
+||Implicit VR Little Endian
+||JPEG Baseline (Process 1): Default Transfer Syntax for Lossy JPEG 8 Bit Image Compression
+||JPEG Lossless, Non-Hierarchical (Process 14)
+||JPEG Lossless, Non-Hierarchical (Process 14): Default Lossless JPEG Compression
+#
+|VL Photographic Image Storage
+||Explicit VR Little Endian
+||Implicit VR Little Endian
+||JPEG Baseline (Process 1): Default Transfer Syntax for Lossy JPEG 8 Bit Image Compression
+||JPEG Lossless, Non-Hierarchical (Process 14)
+||JPEG Lossless, Non-Hierarchical (Process 14): Default Lossless JPEG Compression
+#
+# |Video Photographic Image Storage
+# ||Explicit VR Little Endian
+# ||Implicit VR Little Endian
+#
+|Ophthalmic Photography 8 Bit Image Storage
+||Explicit VR Little Endian
+||Implicit VR Little Endian
+||JPEG Baseline (Process 1): Default Transfer Syntax for Lossy JPEG 8 Bit Image Compression
+||JPEG Lossless, Non-Hierarchical (Process 14)
+||JPEG Lossless, Non-Hierarchical (Process 14): Default Lossless JPEG Compression
+#
+|Ophthalmic Photography 16 Bit Image Storage
+||Explicit VR Little Endian
+||Implicit VR Little Endian
+||JPEG Lossless, Non-Hierarchical (Process 14)
+||JPEG Lossless, Non-Hierarchical (Process 14): Default Lossless JPEG Compression
+#
+# |Stereometric Relationship Storage
+# ||Explicit VR Little Endian
+# ||Implicit VR Little Endian
+#
+# |Basic Text SR
+# ||Explicit VR Little Endian
+# ||Implicit VR Little Endian
+#
+# |Enhanced SR
+# ||Explicit VR Little Endian
+# ||Implicit VR Little Endian
+#
+# |Comprehensive SR
+# ||Explicit VR Little Endian
+# ||Implicit VR Little Endian
+#
+# |Procedure Log Storage
+# ||Explicit VR Little Endian
+# ||Implicit VR Little Endian
+#
+# |Mammography CAD SR
+# ||Explicit VR Little Endian
+# ||Implicit VR Little Endian
+#
+# |Key Object Selection Document
+# ||Explicit VR Little Endian
+# ||Implicit VR Little Endian
+#
+# |Chest CAD SR
+# ||Explicit VR Little Endian
+# ||Implicit VR Little Endian
+#
+|Positron Emission Tomography Image Storage
+||Explicit VR Little Endian
+||Implicit VR Little Endian
+||JPEG Baseline (Process 1): Default Transfer Syntax for Lossy JPEG 8 Bit Image Compression
+||JPEG Lossless, Non-Hierarchical (Process 14)
+||JPEG Lossless, Non-Hierarchical (Process 14): Default Lossless JPEG Compression
+#
+# |Standalone PET Curve Storage
+# ||Explicit VR Little Endian
+# ||Implicit VR Little Endian
+#
+# Radiation Therapy
+|RT Image Storage
+||Explicit VR Little Endian
+||Implicit VR Little Endian
+||JPEG Baseline (Process 1): Default Transfer Syntax for Lossy JPEG 8 Bit Image Compression
+||JPEG Lossless, Non-Hierarchical (Process 14)
+||JPEG Lossless, Non-Hierarchical (Process 14): Default Lossless JPEG Compression
+#
+# |RT Dose Storage
+# ||Explicit VR Little Endian
+# ||Implicit VR Little Endian
+#
+# |RT Structure Set Storage
+# ||Explicit VR Little Endian
+# ||Implicit VR Little Endian
+#
+# |RT Beams Treatment Record Storage
+# ||Explicit VR Little Endian
+# ||Implicit VR Little Endian
+#
+# |RT Plan Storage
+# ||Explicit VR Little Endian
+# ||Implicit VR Little Endian
+#
+# |RT Brachy Treatment Record Storage
+# ||Explicit VR Little Endian
+# ||Implicit VR Little Endian
+#
+# |RT Treatment Summary Record Storage
+# ||Explicit VR Little Endian
+# ||Implicit VR Little Endian
+#
+#
+### End of Storage ###
+#
+# VistA PACS Text Interface
+VISTA_PACS_IF|VistA Text PACS Interface
+|Verification SOP Class
+||Explicit VR Little Endian
+||Implicit VR Little Endian
+||Explicit VR Big Endian
+|VA Detached Patient Management SOP Class
+||Implicit VR Little Endian
+|VA Detached Patient Management Meta SOP Class
+||Implicit VR Little Endian
+|VA Detached Visit Management SOP Class
+||Implicit VR Little Endian
+|VA Detached Study Management SOP Class
+||Implicit VR Little Endian
+|VA Study Component Management SOP Class
+||Implicit VR Little Endian
+|VA Detached Results Management SOP Class
+||Implicit VR Little Endian
+|VA Detached Results Management Meta SOP Class
+||Implicit VR Little Endian
+|VA Detached Study Management Meta SOP Class
+||Implicit VR Little Endian
+|VA Detached Interpretation Management SOP Class
+||Implicit VR Little Endian
+# End of File
+#
+#
+
+

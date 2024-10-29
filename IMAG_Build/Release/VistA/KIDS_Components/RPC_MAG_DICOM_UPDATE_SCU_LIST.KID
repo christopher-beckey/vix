@@ -1,0 +1,276 @@
+KIDS Distribution saved on Jul 17, 2007@10:03:53
+Package for RPC named MAG DICOM UPDATE SCU LIST
+**KIDS**:MAG*3.0*205^
+
+**INSTALL NAME**
+MAG*3.0*205
+"BLD",6017,0)
+MAG*3.0*205^^0^3070717^y
+"BLD",6017,1,0)
+^^5^5^3070717^
+"BLD",6017,1,1,0)
+This package contains a KIDS component
+"BLD",6017,1,2,0)
+for Running Baseline.
+"BLD",6017,1,3,0)
+ 
+"BLD",6017,1,4,0)
+This package transports the remote procedure call named MAG DICOM UPDATE 
+"BLD",6017,1,5,0)
+SCU LIST.
+"BLD",6017,4,0)
+^9.64PA^^
+"BLD",6017,6.3)
+1
+"BLD",6017,"KRN",0)
+^9.67PA^8989.52^19
+"BLD",6017,"KRN",.4,0)
+.4
+"BLD",6017,"KRN",.401,0)
+.401
+"BLD",6017,"KRN",.402,0)
+.402
+"BLD",6017,"KRN",.403,0)
+.403
+"BLD",6017,"KRN",.5,0)
+.5
+"BLD",6017,"KRN",.84,0)
+.84
+"BLD",6017,"KRN",3.6,0)
+3.6
+"BLD",6017,"KRN",3.8,0)
+3.8
+"BLD",6017,"KRN",9.2,0)
+9.2
+"BLD",6017,"KRN",9.8,0)
+9.8
+"BLD",6017,"KRN",19,0)
+19
+"BLD",6017,"KRN",19.1,0)
+19.1
+"BLD",6017,"KRN",101,0)
+101
+"BLD",6017,"KRN",409.61,0)
+409.61
+"BLD",6017,"KRN",771,0)
+771
+"BLD",6017,"KRN",870,0)
+870
+"BLD",6017,"KRN",8989.51,0)
+8989.51
+"BLD",6017,"KRN",8989.52,0)
+8989.52
+"BLD",6017,"KRN",8994,0)
+8994
+"BLD",6017,"KRN",8994,"NM",0)
+^9.68A^1^1
+"BLD",6017,"KRN",8994,"NM",1,0)
+MAG DICOM UPDATE SCU LIST^^0
+"BLD",6017,"KRN",8994,"NM","B","MAG DICOM UPDATE SCU LIST",1)
+
+"BLD",6017,"KRN","B",.4,.4)
+
+"BLD",6017,"KRN","B",.401,.401)
+
+"BLD",6017,"KRN","B",.402,.402)
+
+"BLD",6017,"KRN","B",.403,.403)
+
+"BLD",6017,"KRN","B",.5,.5)
+
+"BLD",6017,"KRN","B",.84,.84)
+
+"BLD",6017,"KRN","B",3.6,3.6)
+
+"BLD",6017,"KRN","B",3.8,3.8)
+
+"BLD",6017,"KRN","B",9.2,9.2)
+
+"BLD",6017,"KRN","B",9.8,9.8)
+
+"BLD",6017,"KRN","B",19,19)
+
+"BLD",6017,"KRN","B",19.1,19.1)
+
+"BLD",6017,"KRN","B",101,101)
+
+"BLD",6017,"KRN","B",409.61,409.61)
+
+"BLD",6017,"KRN","B",771,771)
+
+"BLD",6017,"KRN","B",870,870)
+
+"BLD",6017,"KRN","B",8989.51,8989.51)
+
+"BLD",6017,"KRN","B",8989.52,8989.52)
+
+"BLD",6017,"KRN","B",8994,8994)
+
+"KRN",8994,1769,-1)
+0^1
+"KRN",8994,1769,0)
+MAG DICOM UPDATE SCU LIST^UPDTAPP^MAGDRPC8^1^R^0^0^1^3^0
+"KRN",8994,1769,1,0)
+^8994.01^18^18
+"KRN",8994,1769,1,1,0)
+ +---------------------------------------------------------------+
+"KRN",8994,1769,1,2,0)
+ | Property of the US Government.                                |
+"KRN",8994,1769,1,3,0)
+ | No permission to copy or redistribute this software is given. |
+"KRN",8994,1769,1,4,0)
+ | Use of unreleased versions of this software requires the user |
+"KRN",8994,1769,1,5,0)
+ | to execute a written test agreement with the VistA Imaging    |
+"KRN",8994,1769,1,6,0)
+ | Development Office of the Department of Veterans Affairs,     |
+"KRN",8994,1769,1,7,0)
+ | telephone (301) 734-0100.                                     |
+"KRN",8994,1769,1,8,0)
+ |                                                               |
+"KRN",8994,1769,1,9,0)
+ | The Food and Drug Administration classifies this software as  |
+"KRN",8994,1769,1,10,0)
+ | a medical device.  As such, it may not be changed in any way. |
+"KRN",8994,1769,1,11,0)
+ | Modifications to this software may result in an adulterated   |
+"KRN",8994,1769,1,12,0)
+ | medical device under 21CFR820, the use of which is considered |
+"KRN",8994,1769,1,13,0)
+ | to be a violation of US Federal Statutes.                     |
+"KRN",8994,1769,1,14,0)
+ +---------------------------------------------------------------+
+"KRN",8994,1769,1,15,0)
+ 
+"KRN",8994,1769,1,16,0)
+This RPC updates the information that is stored in VistA
+"KRN",8994,1769,1,17,0)
+as the list of accessible C-Store providers for the current
+"KRN",8994,1769,1,18,0)
+DICOM Gateway.
+"KRN",8994,1769,2,0)
+^8994.02^1^1
+"KRN",8994,1769,2,1,0)
+APP^2^10000^1^1
+"KRN",8994,1769,2,1,1,0)
+^8994.021^9^9
+"KRN",8994,1769,2,1,1,1,0)
+This parameter is an array. Each element of this
+"KRN",8994,1769,2,1,1,2,0)
+array must contain 7 non-empty values, separated by carets ("^"):
+"KRN",8994,1769,2,1,1,3,0)
+  1: Service Application Name
+"KRN",8994,1769,2,1,1,4,0)
+  2: Service Provider Application Entity Title
+"KRN",8994,1769,2,1,1,5,0)
+  3: IP Address
+"KRN",8994,1769,2,1,1,6,0)
+  4: Port Number
+"KRN",8994,1769,2,1,1,7,0)
+  5: Gateway System Title
+"KRN",8994,1769,2,1,1,8,0)
+  6: Gateway Application Entity Title
+"KRN",8994,1769,2,1,1,9,0)
+  7: Gateway Location Pointer (#4)
+"KRN",8994,1769,2,"B","APP",1)
+
+"KRN",8994,1769,2,"PARAMSEQ",1,1)
+
+"KRN",8994,1769,3,0)
+^8994.03^8^8
+"KRN",8994,1769,3,1,0)
+The output value of this RPC indicates whether or not the
+"KRN",8994,1769,3,2,0)
+update was successful.
+"KRN",8994,1769,3,3,0)
+If the input-array contains any empty values, or if the
+"KRN",8994,1769,3,4,0)
+identification of the DICOM Gateway is inconsistent in
+"KRN",8994,1769,3,5,0)
+the various elements, the return value will be:
+"KRN",8994,1769,3,6,0)
+  OUT="-1,Missing or Inconsistent Parameters."
+"KRN",8994,1769,3,7,0)
+Otherwise, the return value will look like:
+"KRN",8994,1769,3,8,0)
+  OUT="1, nnn added, nnn removed, nnn updated"
+"MBREQ")
+0
+"ORD",16,8994)
+8994;16;1;;;;;;;RPCDEL^XPDIA1
+"ORD",16,8994,0)
+REMOTE PROCEDURE
+"QUES","XPF1",0)
+Y
+"QUES","XPF1","??")
+^D REP^XPDH
+"QUES","XPF1","A")
+Shall I write over your |FLAG| File
+"QUES","XPF1","B")
+YES
+"QUES","XPF1","M")
+D XPF1^XPDIQ
+"QUES","XPF2",0)
+Y
+"QUES","XPF2","??")
+^D DTA^XPDH
+"QUES","XPF2","A")
+Want my data |FLAG| yours
+"QUES","XPF2","B")
+YES
+"QUES","XPF2","M")
+D XPF2^XPDIQ
+"QUES","XPI1",0)
+YO
+"QUES","XPI1","??")
+^D INHIBIT^XPDH
+"QUES","XPI1","A")
+Want KIDS to INHIBIT LOGONs during the install
+"QUES","XPI1","B")
+YES
+"QUES","XPI1","M")
+D XPI1^XPDIQ
+"QUES","XPM1",0)
+PO^VA(200,:EM
+"QUES","XPM1","??")
+^D MG^XPDH
+"QUES","XPM1","A")
+Enter the Coordinator for Mail Group '|FLAG|'
+"QUES","XPM1","B")
+
+"QUES","XPM1","M")
+D XPM1^XPDIQ
+"QUES","XPO1",0)
+Y
+"QUES","XPO1","??")
+^D MENU^XPDH
+"QUES","XPO1","A")
+Want KIDS to Rebuild Menu Trees Upon Completion of Install
+"QUES","XPO1","B")
+YES
+"QUES","XPO1","M")
+D XPO1^XPDIQ
+"QUES","XPZ1",0)
+Y
+"QUES","XPZ1","??")
+^D OPT^XPDH
+"QUES","XPZ1","A")
+Want to DISABLE Scheduled Options, Menu Options, and Protocols
+"QUES","XPZ1","B")
+YES
+"QUES","XPZ1","M")
+D XPZ1^XPDIQ
+"QUES","XPZ2",0)
+Y
+"QUES","XPZ2","??")
+^D RTN^XPDH
+"QUES","XPZ2","A")
+Want to MOVE routines to other CPUs
+"QUES","XPZ2","B")
+NO
+"QUES","XPZ2","M")
+D XPZ2^XPDIQ
+"VER")
+8.0^22.0
+**END**
+**END**

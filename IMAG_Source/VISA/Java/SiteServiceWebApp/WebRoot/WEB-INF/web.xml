@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="2.4" 
+	xmlns="http://java.sun.com/xml/ns/j2ee" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee 
+	http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
+  
+  
+  <listener>
+		<description>
+			The Spring servlet context listener that loads the
+			application context.
+		</description>
+		<display-name>Spring context loader listener</display-name>
+		<listener-class>
+			org.springframework.web.context.ContextLoaderListener
+		</listener-class>
+	</listener>
+	
+	<listener>
+		<listener-class>org.apache.axis.transport.http.AxisHTTPSessionListener</listener-class>
+	</listener>
+  
+  <servlet>
+		<display-name>Apache-Axis Servlet</display-name>
+		<servlet-name>AxisServlet</servlet-name>
+		<servlet-class>gov.va.med.imaging.exchange.siteservice.web.SiteServiceAxisServlet</servlet-class>
+		<init-param>
+			<!-- 
+				Setting use-servlet-security to 1 tells AXIS to us J2EE servlet security.
+				See org.apache.axis.security.servlet.ServletSecurityProvider
+				"By utilizing this class (which the AxisServlet can be configured to do automatically), 
+				authentication and role information will come from your servlet engine."
+			-->
+			<param-name>use-servlet-security</param-name>
+			<param-value>1</param-value>
+		</init-param>
+
+	</servlet>
+	
+		<servlet>
+	  	<display-name>JAX-RS REST Servlet</display-name>
+	  	<servlet-name>JAX-RS REST Servlet</servlet-name>
+	  	<servlet-class>
+	  		com.sun.jersey.spi.container.servlet.ServletContainer
+	  	</servlet-class>
+	  	<!-- 
+	  	<init-param>  
+		  <param-name>com.sun.jersey.config.property.resourceConfigClass</param-name>  
+		  <param-value>com.sun.jersey.api.core.PackagesResourceConfig</param-value>  
+		</init-param>
+		-->
+		<!-- Define the packages for Jersey to look for REST stuff - need this here
+			so it can find the exception mappers that are in BaseWebFacade
+		 -->
+	  	<init-param>
+	  		<param-name>com.sun.jersey.config.property.packages</param-name>
+	  		<param-value>gov.va.med.imaging.web.rest.exceptions;gov.va.med.imaging.exchange.siteservice.rest</param-value>
+	  		<!-- 
+	  		<param-value>gov.va.med.imaging.web.rest.exceptions;gov.va.med.imaging.exchange.siteservice.rest;gov.va.med.imaging.siteservice.ws.providers</param-value>
+	  		 -->		
+        </init-param>
+	  	<load-on-startup>1</load-on-startup>
+  	</servlet>
+	
+	 <servlet>	 	
+	 	<servlet-name>ExchangeSiteService</servlet-name>
+	 	<servlet-class>gov.va.med.imaging.exchange.siteservice.web.ExchangeSiteServiceServlet</servlet-class>
+	 </servlet>
+	 
+	 <servlet-mapping>
+	 	<servlet-name>ExchangeSiteService</servlet-name>
+	 	<url-pattern>/ExchangeSiteService</url-pattern>
+	 </servlet-mapping>
+	
+	<servlet-mapping>
+		<servlet-name>AxisServlet</servlet-name>
+		<url-pattern>/VistaWebSvcs/*</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>AxisServlet</servlet-name>
+		<url-pattern>/vistawebsvcs/*</url-pattern>
+	</servlet-mapping>
+	
+	<servlet-mapping>
+	  	<servlet-name>JAX-RS REST Servlet</servlet-name>
+	  	<url-pattern>/restservices/*</url-pattern>
+	</servlet-mapping>	
+	
+	
+	<servlet-mapping>
+		<servlet-name>AxisServlet</servlet-name>
+		<url-pattern>/*</url-pattern>
+	</servlet-mapping>
+ 
+	<welcome-file-list>
+    	<welcome-file>index.jsp</welcome-file>
+  	</welcome-file-list>
+</web-app>

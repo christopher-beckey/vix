@@ -1,0 +1,204 @@
+KIDS Distribution saved on Dec 23, 2008@16:17:55
+Temporary build for VSS
+**KIDS**:MAG-VSS*3.0*93^
+
+**INSTALL NAME**
+MAG-VSS*3.0*93
+"BLD",6032,0)
+MAG-VSS*3.0*93^IMAGING^0^3081223^n
+"BLD",6032,6.3)
+17
+"BLD",6032,"KRN",0)
+^9.67PA^8994^0
+"BLD",6032,"KRN",8994,"NM",0)
+^9.68A^8^1
+"BLD",6032,"KRN",8994,"NM",8,0)
+MAGG WRKS UPDATES^^0
+"KRN",8994,436,-1)
+0^8
+"KRN",8994,436,0)
+MAGG WRKS UPDATES^UPD^MAGGTAU^1^R
+"KRN",8994,436,1,0)
+^^2^2^3080513^
+"KRN",8994,436,1,1,0)
+Using this remote procedure, the workstation updates its record in the
+"KRN",8994,436,1,2,0)
+IMAGING WINDOWS WORKSTATION file (#2006.81) and starts a new session.
+"KRN",8994,436,2,0)
+^8994.02A^1^1
+"KRN",8994,436,2,1,0)
+DATA^1^245^1^1
+"KRN",8994,436,2,1,1,0)
+^^21^21^3080513^
+"KRN",8994,436,2,1,1,1,0)
+Data that should be stored in the IMAGING WINDOWS WORKSTATION file
+"KRN",8994,436,2,1,1,2,0)
+(#2006.81):
+"KRN",8994,436,2,1,1,3,0)
+ 
+"KRN",8994,436,2,1,1,4,0)
+  ^01: Workstation name
+"KRN",8994,436,2,1,1,5,0)
+  ^02: Date/Time of the Capture application (external)
+"KRN",8994,436,2,1,1,6,0)
+  ^03: Date/Time of the Display application (external)
+"KRN",8994,436,2,1,1,7,0)
+  ^04: Location of the workstation
+"KRN",8994,436,2,1,1,8,0)
+  ^05: Date/Time of the MAGSETUP (external)
+"KRN",8994,436,2,1,1,9,0)
+  ^06: Version of the Display application (Major.Minor.Patch.Bild)
+"KRN",8994,436,2,1,1,10,0)
+  ^07: Version of the Capture application (Major.Minor.Patch.Bild)
+"KRN",8994,436,2,1,1,11,0)
+  ^08: Startup mode: 1 = Normal startup,
+"KRN",8994,436,2,1,1,12,0)
+       2 = Started by CPRS, 3 = Import API
+"KRN",8994,436,2,1,1,13,0)
+  ^09: OS Version
+"KRN",8994,436,2,1,1,14,0)
+  ^10: VistaRad version (Major.Minor.Patch.Bild)
+"KRN",8994,436,2,1,1,15,0)
+  ^11: RPCBroker server
+"KRN",8994,436,2,1,1,16,0)
+  ^12: RPCBroker port
+"KRN",8994,436,2,1,1,17,0)
+  ^13: Clinical Utilities version (Major.Minor.Patch.Bild)
+"KRN",8994,436,2,1,1,18,0)
+  ^14: TeleReader version (Major.Minor.Patch.Bild)
+"KRN",8994,436,2,1,1,19,0)
+  ^15: Date/Time of the Clinical Utilities (external)
+"KRN",8994,436,2,1,1,20,0)
+  ^16: Date/Time of the TeleReader (external)
+"KRN",8994,436,2,1,1,21,0)
+  ^17: Date/Time of the VistaRad (external)
+"KRN",8994,436,2,"B","DATA",1)
+
+"KRN",8994,436,2,"PARAMSEQ",1,1)
+
+"KRN",8994,436,3,0)
+^^14^14^3080513^
+"KRN",8994,436,3,1,0)
+Zero value of the first '^'-piece of the Results[0] indicates that an 
+"KRN",8994,436,3,2,0)
+error occurred during the execution of the procedure. In this case, the 
+"KRN",8994,436,3,3,0)
+Results[0] is formatted as follows:
+"KRN",8994,436,3,4,0)
+ 
+"KRN",8994,436,3,5,0)
+  Results[0]            Result descriptor
+"KRN",8994,436,3,6,0)
+                          ^01: 0
+"KRN",8994,436,3,7,0)
+                          ^02: Error message (optional)
+"KRN",8994,436,3,8,0)
+ 
+"KRN",8994,436,3,9,0)
+Otherwise, first '^'-piece of the Results[0] contains the session number
+"KRN",8994,436,3,10,0)
+(IEN in the IMAGING WINDOWS SESSIONS file (#2006.82)):
+"KRN",8994,436,3,11,0)
+ 
+"KRN",8994,436,3,12,0)
+  Results[0]            Result descriptor
+"KRN",8994,436,3,13,0)
+                          ^01: Session IEN (file #2006.82)
+"KRN",8994,436,3,14,0)
+                          ^02: Message
+"MBREQ")
+
+"ORD",16,8994)
+8994;16;1;;;;;;;RPCDEL^XPDIA1
+"ORD",16,8994,0)
+REMOTE PROCEDURE
+"PKG",454,-1)
+1^1
+"PKG",454,0)
+IMAGING^MAG^Imaging-V1 to release 
+"PKG",454,20,0)
+^9.402P^^
+"PKG",454,22,0)
+^9.49I^1^1
+"PKG",454,22,1,0)
+3.0^3020319^3020517^126
+"PKG",454,22,1,"PAH",1,0)
+93^3081223
+"PKG",454,22,1,"PAH",1,1,0)
+^^1^1^3081223
+"PKG",454,22,1,"PAH",1,1,1,0)
+Code for the Clinical Display and Capture. 
+"QUES","XPF1",0)
+Y
+"QUES","XPF1","??")
+^D REP^XPDH
+"QUES","XPF1","A")
+Shall I write over your |FLAG| File
+"QUES","XPF1","B")
+YES
+"QUES","XPF1","M")
+D XPF1^XPDIQ
+"QUES","XPF2",0)
+Y
+"QUES","XPF2","??")
+^D DTA^XPDH
+"QUES","XPF2","A")
+Want my data |FLAG| yours
+"QUES","XPF2","B")
+YES
+"QUES","XPF2","M")
+D XPF2^XPDIQ
+"QUES","XPI1",0)
+YO
+"QUES","XPI1","??")
+^D INHIBIT^XPDH
+"QUES","XPI1","A")
+Want KIDS to INHIBIT LOGONs during the install
+"QUES","XPI1","B")
+NO
+"QUES","XPI1","M")
+D XPI1^XPDIQ
+"QUES","XPM1",0)
+PO^VA(200,:EM
+"QUES","XPM1","??")
+^D MG^XPDH
+"QUES","XPM1","A")
+Enter the Coordinator for Mail Group '|FLAG|'
+"QUES","XPM1","B")
+
+"QUES","XPM1","M")
+D XPM1^XPDIQ
+"QUES","XPO1",0)
+Y
+"QUES","XPO1","??")
+^D MENU^XPDH
+"QUES","XPO1","A")
+Want KIDS to Rebuild Menu Trees Upon Completion of Install
+"QUES","XPO1","B")
+NO
+"QUES","XPO1","M")
+D XPO1^XPDIQ
+"QUES","XPZ1",0)
+Y
+"QUES","XPZ1","??")
+^D OPT^XPDH
+"QUES","XPZ1","A")
+Want to DISABLE Scheduled Options, Menu Options, and Protocols
+"QUES","XPZ1","B")
+NO
+"QUES","XPZ1","M")
+D XPZ1^XPDIQ
+"QUES","XPZ2",0)
+Y
+"QUES","XPZ2","??")
+^D RTN^XPDH
+"QUES","XPZ2","A")
+Want to MOVE routines to other CPUs
+"QUES","XPZ2","B")
+NO
+"QUES","XPZ2","M")
+D XPZ2^XPDIQ
+"VER")
+8.0^22.0
+**END**
+**END**

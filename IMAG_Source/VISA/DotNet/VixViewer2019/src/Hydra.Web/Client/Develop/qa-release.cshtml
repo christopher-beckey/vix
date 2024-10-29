@@ -1,0 +1,350 @@
+@inherits Nancy.ViewEngines.Razor.NancyRazorViewBase<ViewerModel>
+    @using Hydra.Web
+    <!DOCTYPE html>
+    <html lang="en">
+
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+        <meta content="utf-8" http-equiv="encoding">
+        <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+
+        <title>QA Review</title>
+        @Html.HydraCss("../js/jquery-ui-1.8.23.custom/css/custom-theme/jquery-ui-1.8.23.custom.css")
+        @Html.HydraCss("../bootstrap/css/bootstrap.min.css")
+        @Html.HydraCss("../style/css/font-awesome.min.css")
+        @Html.HydraCss("../style/datepicker.min.css")
+        @Html.HydraCss("../style/css/qa.css")
+        @Html.HydraCss("../style/jquery.multiselect.css")
+
+        @Html.HydraScript("../js/basic.min.js")
+        <!-- TODO @Html.HydraScript("../js/jquery-1.12.4.min.js") -->
+        @Html.HydraScript("../js/jquery-1.11.1.js")
+        @Html.HydraScript("../js/layouts/jquery-ui-latest.js")
+        @Html.HydraScript("../js/jquery.multiselect.js")
+        @Html.HydraScript("../bootstrap/js/bootstrap.min.js")
+        @Html.HydraScript("../js/datepicker.min.js")
+        @Html.HydraScript("../js/splash.js")
+        @Html.HydraScript("../js/qa/qa.min.js")
+        @Html.HydraScript("../js/sessionscript/json2.min.js")
+        @Html.HydraScript("../js/sessionscript/jquery.signalR-2.2.0.min.js")
+        <script type="text/javascript" src="~/signalr/hubs"></script>
+    </head>
+
+    <body id="qaViewer">
+        <div class="modal fade" id="selectRangeModalWindow" role="dialog">
+            <div class="modal-dialog" style="margin-top: 20%;">
+                <!-- Modal content-->
+                <div class="modal-content selectModalWindow-content">
+                    <div class="modal-header">
+                        <a class="close-modal-window" onclick="closeModalWin()"> <span class="glyphicon glyphicon-remove"></span></a>
+                        <h5 class="modal-title">Select Date Range</h5>
+                    </div>
+                    <div class="modal-body" style="padding: 10px">
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <div class="form-horizontal">
+                                    <div class="form-group">
+                                        <label class="col-xs-2 control-label">Today :</label>
+                                        <div class="col-xs-3" style="margin-left: 3px;">
+                                            <button type="button" class="btn btn-primary form-control" onclick="applySelectedRangeDate('today')" style="width: 120%;">Select</button>
+                                        </div>
+
+                                        <label class="col-xs-3 control-label" style="margin-left: 10px;">Yesterday :</label>
+                                        <div class="col-xs-3">
+                                            <button type="button" class="btn btn-primary form-control" onclick="applySelectedRangeDate('yesterday')" style="width: 132%;">Select</button>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-xs-2 control-label">Last 2 days :</label>
+                                        <div class="col-xs-3" style="margin-left: 3px;">
+                                            <button type="button" class="btn btn-primary form-control" onclick="applySelectedRangeDate('last2days')" style="width: 120%;">Select</button>
+                                        </div>
+
+                                        <label class="col-xs-3 control-label" style="margin-left: 10px;">Last 3 days :</label>
+                                        <div class="col-xs-3">
+                                            <button type="button" class="btn btn-primary form-control" onclick="applySelectedRangeDate('last3days')" style="width: 132%;">Select</button>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-xs-2 control-label">Last full week :</label>
+                                        <div class="col-xs-3" style="margin-left: 3px;">
+                                            <button type="button" class="btn btn-primary form-control" onclick="applySelectedRangeDate('lastfullweek')" style="width: 120%;">Select</button>
+                                        </div>
+
+                                        <label class="col-xs-3 control-label" style="margin-left: 10px;">Current week :</label>
+                                        <div class="col-xs-3">
+                                            <button type="button" class="btn btn-primary form-control" onclick="applySelectedRangeDate('currentweek')" style="width: 132%;">Select</button>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-xs-2 control-label" style="width: 19%;">Select date range :</label>
+                                        <div class="col-xs-6 input-group date">
+                                            <input type="text" class="form-control" id="startDateId" placeholder="Start Date" style="margin-left: 5px;"><span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                                            <input type="text" class="form-control" id="endDateId" placeholder="End Date" style="margin-left: 10px;"><span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                                        </div>
+                                        <div class="col-xs-2 pull-right" style="margin-top: -35px;width: 25%;margin-right: 37px;">
+                                            <button type="button" class="btn btn-primary form-control" style="width: 132%;" onclick="applySelectedRangeDate('selectdaterange')">Select</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <hr style="margin-top: 10px;">
+                                <button type="button" class="btn btn-primary pull-right" data-dismiss="modal" style="margin-top: -12px;">Cancel</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid" id="qa_page" style="margin-top: 10px">
+            <div class="header-text">
+                <h4>QA Review</h4>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="panel-group" id="accordion1" style="margin-top: -14px;margin-bottom:5px">
+                        <div class="panel panel-primary" style="background: #343434;color: white">
+                            <div class="panel-heading" style="background-color:darkgray;padding:5px 15px">
+                                <h4 class="panel-title">
+                                    <a data-toggle="collapse" data-parent="#accordion1" href="#searchStudy" onclick="setTimeout(function(){resizeFrames()}, 200);">Search Filters</a>
+                                </h4>
+                            </div>
+                            <div id="searchStudy" class="panel-collapse collapse in">
+                                <div class="panel-body">
+                                    <div id="home-search-study" style="margin-top: -13px;">
+                                        <form id="home-image-qa-form" method="post" class="form-horizontal">
+                                            <div class="form-group">
+                                                <label class="col-xs-5 control-label">Select Date Range</label>
+                                                <div class="col-xs-5">
+                                                    <input type="text" class="form-control" id="home-date-range" readonly />
+                                                </div>
+                                                <div class="col-xs-2">
+                                                    <button type="button" class="btn btn-primary" style="margin-left: -25px;" onclick="loadSelectModalWindow()">Select</button>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label class="col-xs-5 control-label">Captured By</label>
+                                                <div class="col-xs-7">
+                                                    <select class="form-control study-filter search-filter" id="home-captured-by">
+                                                    </select>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label class="col-xs-5 control-label">Has Status of</label>
+                                                <div class="col-xs-7">
+                                                    <select name="default[]" multiple="multiple" class="form-control study-filter search-filter" id="home-status-of">
+                                                        <option value="1">Viewable</option>
+                                                        <option value="2">QA Reviewed</option>
+                                                        <option value="11">Needs Review</option>
+                                                        <option value="13">Image Never Existed</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label class="col-xs-5 control-label">Percen (%) return</label>
+                                                <div class="col-xs-3">
+                                                    <select class="form-control study-filter search-filter" id="home-percentage-of">
+                                                        <option value="%,1">1</option>
+                                                        <option value="%,3">3</option>
+                                                        <option value="%,5">5</option>
+                                                        <option value="%,10">10</option>
+                                                        <option value="%,20">20</option>
+                                                        <option value="%,30">30</option>
+                                                        <option value="%,50">50</option>
+                                                    </select>
+                                                </div>
+                                                <label class="control-label" style="margin-left: -6px;">Or</label>
+                                                <div class="col-xs-4" style="margin-top: -23px;">
+                                                    <select class="form-control study-filter search-filter" id="home-max-of">
+                                                        <option value="#,200">200</option>
+                                                        <option value="#,300">300</option>
+                                                        <option value="#,500">500</option>
+                                                        <option value="#,750">750</option>
+                                                        <option value="#,1000">1000</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label class="col-xs-5 control-label">Select Filter</label>
+                                                <div class="col-xs-7">
+                                                    <select class="form-control study-filter search-filter" id="home-filter-of">
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="col-xs-12">
+                                                    <button type="button" id="home-search-of" class="btn btn-primary btn-block study-filter search-filter" onclick="doSearch()">Search</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-group" id="accordion2" style="margin-top: -10px;margin-bottom:5px">
+                        <div class="panel panel-primary" style="background: #343434;color: white">
+                            <div class="panel-heading" style="background-color:darkgray;padding:5px 15px">
+                                <h4 class="panel-title">
+                                    <a data-toggle="collapse" data-parent="#accordion2" href="#imageInfo" onclick="setTimeout(function(){resizeFrames()}, 200);">Image Information</a>
+                                </h4>
+                            </div>
+                            <div id="imageInfo" class="panel-collapse collapse in">
+                                <div class="panel-body">
+                                    <div id="home-patient-info">
+                                        <div style="width: 100%;border:0px solid;display:block;">
+                                            <div class="row">
+                                                <div class="col-sm-6">
+                                                    <div class="iconbox" style="display:inline-flex;width:110%">
+                                                        <div>
+                                                            <p>
+                                                                <div id="home-image-qa-form" class="form-vertical">
+                                                                    <div class="form-group">
+                                                                        <label class="col-xs-4 control-label">Patient</label>
+                                                                        <div class="col-xs-8">
+                                                                            <label class="control-label patient-lbl-style" id="home-patient-name" style="text-align:left"></label>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label class="col-xs-4 control-label">SSN</label>
+                                                                        <div class="col-xs-8">
+                                                                            <label class="control-label patient-lbl-style" id="home-patient-id" style="text-align:left"></label>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label class="col-xs-4 control-label">Short Desc</label>
+                                                                        <div class="col-xs-8">
+                                                                            <label class="control-label patient-lbl-style" id="home-patient-shortdesc" style="text-align:left"></label>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label class="col-xs-4 control-label">Type</label>
+                                                                        <div class="col-xs-8">
+                                                                            <label class="control-label patient-lbl-style" id="home-patient-type" style="text-align:left"></label>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label class="col-xs-4 control-label">Specialty</label>
+                                                                        <div class="col-xs-8">
+                                                                            <label class="control-label patient-lbl-style" id="home-patient-specialty" style="text-align:left"></label>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label class="col-xs-4 control-label">Proc/Event</label>
+                                                                        <div class="col-xs-8">
+                                                                            <label class="control-label patient-lbl-style" id="home-patient-procedure" style="text-align:left"></label>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label class="col-xs-4 control-label">Status</label>
+                                                                        <div class="col-xs-8">
+                                                                            <label class="control-label patient-lbl-style" id="home-patient-status" style="text-align:left"></label>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label class="col-xs-4 control-label">Reason</label>
+                                                                        <div class="col-xs-8">
+                                                                            <label class="control-label patient-lbl-style" id="home-patient-reason" style="text-align:left"></label>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <div class="form-vertical">
+                                                        <div class="form-group">
+                                                            <div class="col-xs-12">
+                                                                <button id="qaReviewedBtn" type="button" class="btn btn-primary btn-style study-filter" style="width: 100%;" onclick="updateImagePropertiesQA('2')">QA Reviewed</button>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <div class="col-xs-12">
+                                                                <button id="previousStudyBtn" type="button" class="btn btn-primary btn-style study-filter" onclick="loadPreviousStudy()" style="width:47%">Prev</button>
+                                                                <button id="nextStudyBtn" type="button" class="btn btn-primary btn-style study-filter" onclick="loadNextStudy()" style="width:50%">Next</button>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <div class="col-xs-12">
+                                                                <button id="needsReviewBtn" type="button" class="btn btn-primary btn-style study-filter" style="width: 100%" onclick="updateImagePropertiesQA('11')">Needs Review</button>
+                                                            </div>
+                                                            <div class="col-xs-12">
+                                                                <button id="mangeImageBtn" type="button" class="btn btn-primary btn-style study-filter" onclick="manageImage()" style="width:100%">Manage Study</button>
+                                                            </div>
+                                                            <div class="col-xs-12" style="display:none">
+                                                                <button type="button" id="imageReport" class="btn btn-primary study-filter" onclick="displayImageReports()" style="width: 100%;">Image Report</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-group" id="accordion3" style="margin-top: -10px;margin-bottom:5px">
+                        <div class="panel panel-primary" style="background: #343434;color: white">
+                            <div class="panel-heading" style="background-color:darkgray;padding:5px 15px">
+                                <h4 class="panel-title">
+                                    <a data-toggle="collapse" data-parent="#accordion3" href="#imageList" onclick="setTimeout(function(){resizeFrames()}, 200);">Search Results</a>
+                                </h4>
+                            </div>
+                            <div id="imageList" class="panel-collapse collapse in">
+                                <div class="panel-body">
+                                    <div id="searchResultTable" class="btn-style">
+                                        <table class="table table-bordered" style="border-collapse: collapse;table-layout: fixed;">
+                                            <thead>
+                                                <tr>
+                                                    <th style="width: 22%;text-align: center;">Item</th>
+                                                    <th style="width: 56%;text-align: center;">Patient</th>
+                                                    <th style="width: 18%;text-align: center;">Img</th>
+                                                    <th style="width: 30%;text-align: center;">Image ID</th>
+                                                    <th style="width: 37%;text-align: center;">Action</th>
+                                                </tr>
+                                            </thead>
+                                        </table>
+                                        <div class="btn-style" id="home-patient-table-id" style="overflow-x: auto;margin-top: -20px;">
+                                            <table class="table table-bordered" id="home-patient-info-table" style="border-collapse: collapse;table-layout: fixed;">
+                                                <tbody id="home-patient-info-table-body">
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    <div id="viewer-data" style="overflow:hidden">
+                        <ul class="nav nav-tabs" id="home-tab-id">
+                            <li class="active"><a name="viewer" data-toggle="tab" href="#home-viewer">Viewer</a></li>
+                            <li><a name="images" data-toggle="tab" href="#home-images">Images</a></li>
+                            <li style="display:none"><a name="report" data-toggle="tab" href="#home-report">Report</a></li>
+                        </ul>
+                        <div class="tab-content">
+                            <div id="home-viewer" class="tab-pane fade active in" style="z-index:100;width:97%;position:absolute;display:block;">
+                            </div>
+                            <div id="home-images" class="tab-pane fade" style="z-index:99;width:97%;position:absolute;display:block;">
+                            </div>
+                            <div id="home-report" class="tab-pane fade" style="background: white">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script>
+            $(window).on('load', function () { });
+        </script> 
+    </body>
+
+    </html>

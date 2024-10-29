@@ -1,0 +1,13 @@
+<patientType>
+  <patientName>Jim Smith</patientName>
+  <dfn>
+  </dfn>
+  <patientIcn>1008861107V475740</patientIcn>
+  <siteNumber>660</siteNumber>
+  <Description>TestDescription</Description>
+  <dob>02/16/1998</dob>
+  <Age>20</Age>
+  <patientSex>M</patientSex>
+  <DicomDirXmll>
+  </DicomDirXmll>
+</patientType>

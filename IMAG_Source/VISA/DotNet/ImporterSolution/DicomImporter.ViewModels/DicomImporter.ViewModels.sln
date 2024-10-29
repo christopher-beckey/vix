@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DicomImporter.ViewModels", "DicomImporter.ViewModels.csproj", "{1120F228-DAD1-4AD5-8705-6694152E387A}"
+EndProject
+Global
+	GlobalSection(SourceCodeControl) = preSolution
+		SccNumberOfProjects = 2
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = DicomImporter.ViewModels.csproj
+		SccLocalPath1 = .
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1120F228-DAD1-4AD5-8705-6694152E387A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1120F228-DAD1-4AD5-8705-6694152E387A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1120F228-DAD1-4AD5-8705-6694152E387A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1120F228-DAD1-4AD5-8705-6694152E387A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

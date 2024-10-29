@@ -1,0 +1,210 @@
+MAGDMFBE ;WOIFO/EdM/JSL/SAF/DAC - Questions for MAGDMFB1 ; 12 Jun 2012 4:14 PM
+ ;;3.0;IMAGING;**9,21,11,30,51,69,54,53,123,118**;Mar 19, 2002;Build 4525;May 01, 2013
+ ;; Per VHA Directive 2004-038, this routine should not be modified.
+ ;; +---------------------------------------------------------------+
+ ;; | Property of the US Government.                                |
+ ;; | No permission to copy or redistribute this software is given. |
+ ;; | Use of unreleased versions of this software requires the user |
+ ;; | to execute a written test agreement with the VistA Imaging    |
+ ;; | Development Office of the Department of Veterans Affairs,     |
+ ;; | telephone (301) 734-0100.                                     |
+ ;; | The Food and Drug Administration classifies this software as  |
+ ;; | a medical device.  As such, it may not be changed in any way. |
+ ;; | Modifications to this software may result in an adulterated   |
+ ;; | medical device under 21CFR820, the use of which is considered |
+ ;; | to be a violation of US Federal Statutes.                     |
+ ;; +---------------------------------------------------------------+
+ ;;
+ Q
+ ;
+Q22 I SENDPACS="NO" S SSNDASH="NO" Q
+ K QUIT S OK=0 F  D  Q:OK  Q:$D(QUIT)
+ . W !!,"Include DASHES in Social Security Numbers sent to PACS? ",SSNDASH,"// "
+ . R X:DTIME E  S X="^"
+ . I X="^" S QUIT=0 Q
+ . I X="^^" S QUIT=1 Q
+ . I X="" S X=SSNDASH W X
+ . S X=$$YN^MAGDMFB1(X) I X'="" S SSNDASH=X,OK=1 Q
+ . W !!,"Answering ""Yes"" to this question will have the effect that"
+ . W !,"when Social Security Numbers are transmitted to PACS, dashes"
+ . W !,"will be included.  (This is the default: NNN-NN-NNNN.)"
+ . W !,"Answering ""No"" means that this pair of dashes will be omitted."
+ . Q
+ Q
+ ;
+HISIPADR ; entry point from ^MAGLOGI to get the initial value
+Q23 K QUIT S OK=0 F  D  Q:OK  Q:$D(QUIT)
+ . W !!,"Enter the network address for the main VistA HIS: "
+ . W:HISIPADR'="" HISIPADR,"// "
+ . R X:DTIME E  S X="^"
+ . I X="^" S QUIT=0 Q
+ . I X="^^" S QUIT=1 Q
+ . I X="" S X=HISIPADR W X
+ . I $L(X)<31,X?1AN.E S HISIPADR=X,OK=1 Q
+ . W:X'="?" "  ???" W !
+ . W !,"Please enter the network address for the main VistA HIS where"
+ . W !,"the M-to-M Broker Listener is running.  Enter it either in "
+ . W !,"""nnn.nnn.nnn.nnn"" format, or as an entry in the HOSTS file."
+ . W !!,"NOTE: The name specified may not be longer than 30 characters."
+ . Q
+ Q
+ ;
+HISPORT ; entry point from ^MAGLOGI to get the initial value
+Q24 K QUIT S OK=0 F  D  Q:OK  Q:$D(QUIT)
+ . W !!,"Enter the network port number for the main VistA HIS: "
+ . W:HISPORT'="" HISPORT,"// "
+ . R X:DTIME E  S X="^"
+ . I X="^" S QUIT=0 Q
+ . I X="^^" S QUIT=1 Q
+ . I X="" S X=HISPORT W X
+ . I X?1N.N S HISPORT=X,OK=1 Q
+ . W:X'="?" "  ???" W !
+ . W !,"Please enter the port number of the M-to-M Broker Listener"
+ . W !,"on the main VistA HIS."
+ . W !!,"Please note that the M-to-M Broker Listener must be running"
+ . W !,"on the main VistA HIS in addition to the regular RPC Broker."
+ . W !,"Be sure to enter the port number of the M-to-M Broker Listener"
+ . W !,"and not that of the regular RPC Broker."
+ . Q
+ Q
+ ;
+Q25 N V
+ S V=".@-0123456789_"
+ S V=V_"abcdefghijklmnopqrstuvwxyz"
+ S V=V_"ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+ K QUIT S OK=0 F  D  Q:OK  Q:$D(QUIT)
+ . W !!,"Send emergency e-mail notices to: "
+ . W:MAILGRP'="" MAILGRP,"// "
+ . R X:DTIME E  S X="^"
+ . I X="^" S QUIT=0 Q
+ . I X="^^" S QUIT=1 Q
+ . I X="" S X=MAILGRP W X
+ . I X="" S OK=1 Q
+ . I $TR(X,V)="",$L(X,"@")=2 S:X="@" X="" S MAILGRP=X,OK=1 Q
+ . W !!,"The answer to this question must be the name of a mailgroup."
+ . W !,"Note that names of mailgroups may contain letters and digits"
+ . W !,"and dashes, but no spaces."
+ . W !,"The name of the mailgroup and the name of the server where this"
+ . W !,"group resides are separated by one at-sign (@)."
+ . W !,"(These messages are sent by SMTP-mail, not by FORUM-mail!)"
+ . W !,"A valid name of a mailgroup would be:"
+ . W !?15,$$MAGDBB()
+ . Q
+ Q
+ ;
+MAGDBB() Q $G(^MAGDICOM(2006.563,1,"ET ADDRESS"),"G.MAGDBB@LAVC.ISC-WASH.VA.GOV")
+ ;
+Q26 K QUIT S OK=0 F  D  Q:OK  Q:$D(QUIT)
+ . W !!,"Display Patient Name/ID in Image Processing? ",SHOWPID,"// "
+ . R X:DTIME E  S X="^"
+ . I X="^" S QUIT=0 Q
+ . I X="^^" S QUIT=1 Q
+ . I X="" S X=SHOWPID W X
+ . S X=$$YN^MAGDMFB1(X) I X'="" S SHOWPID=X,OK=1 Q
+ . W !!,"Answering ""Yes"" to this question will enable the normal image processing"
+ . W !,"application to display the patient name and id (ssn).  While this may"
+ . W !,"be needed for test purposes, it is recommended that it not be routinely"
+ . W !,"used in order to protect patient privacy (HIPAA)."
+ . W !!,"Answering ""No"" will disable the display of the patient identification."
+ . Q
+ Q
+ ;
+Q27 X ^%ZOSF("EOFF") D  X ^%ZOSF("EON")
+ . K QUIT S OK=0 F  D  Q:OK  Q:$D(QUIT)
+ . . W !!,"Access Code for Modality Worklist " W:BGACC'="" "<hidden>" W " // "
+ . . R X:DTIME E  S X="^"
+ . . I X="^" S QUIT=0 Q
+ . . I X="^^" S QUIT=1 Q
+ . . S:X=$$DECRYP^MAGM2VCU(BGACC) X=""
+ . . I X="" S OK=1 W "<unchanged>" Q
+ . . I X["?" D  Q
+ . . . W !!,"Background tasks like ""Modality WorkList"" need valid"
+ . . . W !!,"Access and Verify codes as well as foreground tasks."
+ . . . W !!,"Enter the Access code that such background tasks will use."
+ . . . W !!,"(The validity of this Access code can be verified using menu option 4-2-11)"
+ . . . Q
+ . . W !!,"Enter access code again: " R Y:DTIME E  S Y="^"
+ . . I Y="^" S QUIT=0 Q
+ . . I Y="^^" S QUIT=1 Q
+ . . I X'=Y W !!,"Those were not the same, please try again." Q
+ . . S BGACC=$$ENCRYPT^MAGM2VCU(X),OK=1 Q
+ . . Q
+ . Q
+ Q
+ ;
+Q28 X ^%ZOSF("EOFF") D  X ^%ZOSF("EON")
+ . K QUIT S OK=0 F  D  Q:OK  Q:$D(QUIT)
+ . . W !!,"Verify Code for Modality Worklist " W:BGVER'="" "<hidden>" W " // "
+ . . R X:DTIME E  S X="^"
+ . . I X="^" S QUIT=0 Q
+ . . I X="^^" S QUIT=1 Q
+ . . S:X=$$DECRYP^MAGM2VCU(BGVER) X=""
+ . . I X="" S OK=1 W "<unchanged>" Q
+ . . I X["?" D  Q
+ . . . W !!,"Background tasks like ""Modality WorkList"" need valid"
+ . . . W !!,"Access and Verify codes as well as foreground tasks."
+ . . . W !!,"Enter the Verify code that such background tasks will use."
+ . . . W !!,"(The validity of this Verify code can be verified using menu option 4-2-11)"
+ . . . Q
+ . . W !!,"Enter verify code again: " R Y:DTIME E  S Y="^"
+ . . I Y="^" S QUIT=0 Q
+ . . I Y="^^" S QUIT=1 Q
+ . . I X'=Y W !!,"Those were not the same, please try again." Q
+ . . S BGVER=$$ENCRYPT^MAGM2VCU(X),OK=1 Q
+ . . Q
+ . Q
+ Q
+ ;
+Q30 K QUIT S OK=0 F  D  Q:OK  Q:$D(QUIT)
+ . W !!,"Which post-office will this computer use? ",POSTOFF,"// "
+ . R X:DTIME E  S X="^"
+ . I X="^" S QUIT=0 Q
+ . I X="^^" S QUIT=1 Q
+ . S:X=1 X="10.2.27.92"
+ . S:X=2 X="10.3.27.92"
+ . S:X=3 X="10.6.27.92"
+ . S:X=4 X="10.2.29.131"
+ . S:X=0 X=$G(HISIPADR)
+ . I X="" S X=POSTOFF W X
+ . S:$TR(X,"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789.")'="" X=""
+ . I X'="" S POSTOFF=X,OK=1 Q
+ . W !!,"The Department of Veterans Affairs has three virus-checking"
+ . W !,"post-offices set up for nationwide e-mail."
+ . W !,"The default post-office can be indicated as ""smtp.va.gov""."
+ . W !!,"Indicate which system is to be used as a post-office:"
+ . W:$G(HISIPADR)'="" !,"  0: the local VistA system at ",HISIPADR
+ . W !,"  1: the Virus-Checking Office in Silver Spring, MD at 10.2.27.92"
+ . W !,"  2: the Virus-Checking Office in Hines, IL at 10.3.27.92"
+ . W !,"  3: the Virus-Checking Office in San Francisco, CA at 10.6.27.92"
+ . W !,"  4: VA-Forum at 10.2.29.131"
+ . W !,"(or enter the TCP/IP address of the system to be used)."
+ . Q
+ Q
+ ;
+Q31 K QUIT S OK=0 F  D  Q:OK  Q:$D(QUIT)
+ . W !!,"Which port number will this computer use for e-mail? ",POSTPORT,"// "
+ . R X:DTIME E  S X="^"
+ . I X="^" S QUIT=0 Q
+ . I X="^^" S QUIT=1 Q
+ . I X="" S X=POSTPORT W X
+ . I X\1=X,X>0,X<65535 S POSTPORT=X,OK=1 Q
+ . W !!,"E-mail is transmitted using the SMTP protocol."
+ . W !,"Normally, this protocol uses port number 25."
+ . W !,"In some cases, a different port number may have been set up."
+ . W !,"Note: 1 <= port-number <= 65,535."
+ . Q
+ Q
+ ;
+Q33 ;IHS or VA?
+ K QUIT S OK=0 F  D  Q:OK  Q:$D(QUIT)
+ . W !!,"Is this gateway installed in VA (V)or IHS (I)? ",AGENCY,"// "
+ . R X:DTIME E  S X="^"
+ . X ^%ZOSF("UPPERCASE") S X=Y
+ . I X="^" S QUIT=0 Q
+ . I X="^^" S QUIT=1 Q
+ . I X="" S X=AGENCY W X
+ . I "IV"[X S AGENCY=X,ISSUER=$S(AGENCY="I":"USIHS",1:"USVHA"),OK=1 Q 
+ . W !!,"Enter the agency code for this DICOM Gateway (I for IHS or V for VA)"
+ . Q
+ ;
+ Q

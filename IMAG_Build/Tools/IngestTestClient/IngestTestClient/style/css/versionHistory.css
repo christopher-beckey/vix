@@ -1,0 +1,32 @@
+#viewerVersionInfoModal{
+    font-size: 120%;
+    font-family: verdana, cursive, sans-serif;
+}
+
+#bold{
+    font-weight: bold;
+}
+
+#TableDesign{
+    border: 10px;
+    border-color: red;
+}
+
+#FeatureDesign{    
+    background-color:#6ABDA5;
+    font color: white;
+}
+
+#BugDesign{    
+    background-color:#B877A0;
+    font color: white;
+}
+
+#ImprovementDesign{    
+    background-color:#8AD3EB;
+    font color: white;
+}
+
+#subhistoryHeight{
+    height: 20px;
+}

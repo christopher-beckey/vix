@@ -1,0 +1,360 @@
+Cache for Windows NT^INT^Saved from DICOM (ISW-KUZMAKP3-LT)^~Format=Cache.S~
+%RO on 09/14/2012  16:16
+MAGDAIR5^INT^1^62714,58523^0
+MAGDAIR5 ;WOIFO/PMK - Automatic Import Reconciliation Workflow ; 14 Sep 2012 4:15 PM
+ ;;3.0;IMAGING;**53,49,110**;Mar 19, 2002;Build 48;Aug 23, 2012
+ ;; Per VHA Directive 2004-038, this routine should not be modified.
+ ;; +---------------------------------------------------------------+
+ ;; | Property of the US Government.                                |
+ ;; | No permission to copy or redistribute this software is given. |
+ ;; | Use of unreleased versions of this software requires the user |
+ ;; | to execute a written test agreement with the VistA Imaging    |
+ ;; | Development Office of the Department of Veterans Affairs,     |
+ ;; | telephone (301) 734-0100.                                     |
+ ;; | The Food and Drug Administration classifies this software as  |
+ ;; | a medical device.  As such, it may not be changed in any way. |
+ ;; | Modifications to this software may result in an adulterated   |
+ ;; | medical device under 21CFR820, the use of which is considered |
+ ;; | to be a violation of US Federal Statutes.                     |
+ ;; +---------------------------------------------------------------+
+ ;;
+ ; Order radiology study and perform import reconciliation workflow
+ ;
+IMPORT ; import each selected study
+ N ACNUMB ;--- accession number
+ N COUNT ;---- count of studies to be imported
+ N DATA ;----- study data array
+ N DFN ;------ internal entry number for patient
+ N ERR ;------ error indicator
+ N IMAGLOCN ;- radiology imaging location
+ N MODIFIER ;- procedure modifier(s)
+ N PROCNAME ;- VA radiology procedure name
+ N RACNI ;---- radiology ^RADPT study subscript (see RAEXAM)
+ N RADPROC ;-- internal entry number for radiology procedure
+ N RADTI ;---- radiology ^RADPT study subscript (see RAEXAM)
+ N RAEXAM ;--- radiology ^RADPT study subscripts: RADPT^RADTI^RACNI
+ N RAIMGTYP ;- radiology image type
+ N REGDATA ;-- registration data cache, so reg's won't be duplicated
+ N RAOIEN ;--- radiology order ien
+ N SOURCE ;--- source of study instance uid, if it alreay in on file
+ N STUDY ;---- value of "STUDY" node
+ N STUDYN ;--- number of selected study
+ N STUDYDAT ;- study date
+ N STUDYTIM ;- study time
+ N TODAYHL7 ;- today in HL7 format
+ N TMPSTAT ;-- status of study in ^TMP global array
+ N I,QUIT,X,Z
+ ;
+ ; pass 1 - make a list of all the studies that need to be imported
+ K ^TMP("MAG",$J,"IMPORT","IMPORT")
+ S (QUIT,STUDYN)=0
+ F  S STUDYN=$O(^TMP("MAG",$J,"IMPORT","LIST",STUDYN)) Q:'STUDYN  D  Q:QUIT
+ . ; check if portable medium has changed
+ . I MEDIA="D" D  Q:QUIT
+ . . S X=$$MEDIACHK^MAGDAIRM(.MEDIA)
+ . . I X<0 S QUIT=1
+ . . Q
+ . ;
+ . ; check for manual deletion
+ . I $G(^TMP("MAG",$J,"IMPORT","LIST",STUDYN,"DELETE")) Q
+ . ;
+ . ; check for studies with DICOM objects that are already in file
+ . I $G(^TMP("MAG",$J,"IMPORT","LIST",STUDYN,"ALREADY ON FILE"))'="" Q
+ . ;
+ . S (ERR,RADPROC)=0
+ . S DFN=$G(^TMP("MAG",$J,"IMPORT","LIST",STUDYN,"PATIENT")) Q:DFN'>0
+ . ;
+ . ; check if study has already been ordered
+ . S STUDY=$G(^TMP("MAG",$J,"IMPORT","LIST",STUDYN,"STUDY"))
+ . I STUDY="" D  Q:ERR  ; study not ordered yet - ORDER it now
+ . . ; place orders for the unordered studies
+ . . S X=$G(^TMP("MAG",$J,"IMPORT","LIST",STUDYN,"RADPROC"))
+ . . S RADPROC=$P(X,"^",1),MODIFIER=$P(X,"^",2)
+ . . I RADPROC D  Q:ERR
+ . . . S ERR=$$ORDER(DFN,STUDYN,RADPROC,MODIFIER,.ACNUMB,.RAEXAM) Q:ERR
+ . . . S Z=$O(^MAGDICOM(2006.5758,"C",RADPROC,""))
+ . . . S PROCNAME=$P(^MAGDICOM(2006.5758,Z,0),"^",1)
+ . . . S IMAGLOCN=$P(^MAGDICOM(2006.5758,Z,0),"^",9)
+ . . . S X=$G(^TMP("MAG",$J,"IMPORT","LIST",STUDYN,"RADPROC"))
+ . . . S MODIFIER=$P(X,"^",2)
+ . . . S RADTI=$P(RAEXAM,"^",2),RACNI=$P(RAEXAM,"^",3)
+ . . . D SAVESTDY^MAGDAIR2(STUDYN,ACNUMB,DATA("STUDYDAT"),PROCNAME,MODIFIER,"NEW ORDER",RADTI,RACNI,IMAGLOCN)
+ . . . S SOURCE="RAD"
+ . . . I $G(^TMP("MAG",$J,"IMPORT","LIST",STUDYN,"DUP UID")) D
+ . . . . N STUDYUID,Y
+ . . . . S Y=RADTI_"."_RACNI_"."_ACNUMB
+ . . . . S Y=$TR(Y,"-",".") ; unique number for UID
+ . . . . S STUDYUID=$$STUDY^MAGDUID1($$STATNUMB^MAGDFCNS(),Y)
+ . . . . S ^TMP("MAG",$J,"IMPORT","LIST",STUDYN,"NEW UID")=STUDYUID
+ . . . . Q
+ . . . Q
+ . . Q
+ . E  D  ; study already on file, don't ORDER it again
+ . . N TYPE
+ . . S ACNUMB=$P(STUDY,"^",1),TYPE=$P(STUDY,"^",5)
+ . . I ACNUMB="",TYPE="Radiology Order File" D
+ . . . ; Radiology study ordered, but not registered. Register the study now.
+ . . . S X=$G(^TMP("MAG",$J,"IMPORT","LIST",STUDYN,"RADPROC"))
+ . . . S RADPROC=$P(X,"^",1),MODIFIER=$P(X,"^",2)
+ . . . S Z=$O(^MAGDICOM(2006.5758,"C",RADPROC,""))
+ . . . S PROCNAME=$P(^MAGDICOM(2006.5758,Z,0),"^",1)
+ . . . S IMAGLOCN=$P(^MAGDICOM(2006.5758,Z,0),"^",9)
+ . . . S RAOIEN=$P(STUDY,"^",9)
+ . . . ; get the study date & time from the first entry
+ . . . S X=$$GETDATA^MAGDAIRD(STUDYN,"LIST",.DATA)
+ . . . S STUDYDAT=DATA("STUDYDAT"),STUDYTIM=DATA("STUDYTIM")
+ . . . S ERR=$$REGISTER(STUDYDAT,STUDYTIM,RAOIEN,RADPROC,.ACNUMB,.RAEXAM,.REGDATA)
+ . . . S RADTI=$P(RAEXAM,"^",2),RACNI=$P(RAEXAM,"^",3)
+ . . . D SAVESTDY^MAGDAIR2(STUDYN,ACNUMB,STUDYDAT,PROCNAME,MODIFIER,"Radiology Order File",RADTI,RACNI,IMAGLOCN,RAOIEN)
+ . . . S SOURCE="RAD"
+ . . . Q
+ . . E  S (SOURCE,RADPROC)="" ; might be consults, not radiology, so set these to null
+ . . Q
+ . ; make a list of all the studies that need to be imported
+ . I RADPROC!(STUDY'="") D
+ . . S (I,^("COUNT"))=$G(^TMP("MAG",$J,"IMPORT","IMPORT","COUNT"))+1
+ . . S X=DFN_"^"_STUDYN_"^"_SOURCE_"^"_RADPROC_"^"_ACNUMB
+ . . S ^TMP("MAG",$J,"IMPORT","IMPORT","LIST",I)=X
+ . . Q
+ . Q
+ I QUIT D MESSAGE(1) Q  ; media changed
+ ;
+ D LOG^MAGDAIRL ; record the activity in the log
+ ;
+ ; pass 2 - delete designated studies & ones that are already in file
+ S STUDYN=0
+ F  S STUDYN=$O(^TMP("MAG",$J,"IMPORT","LIST",STUDYN)) Q:'STUDYN  D  Q:QUIT
+ . ; check if portable medium has changed
+ . I MEDIA="D" D  Q:QUIT
+ . . S X=$$MEDIACHK^MAGDAIRM(.MEDIA)
+ . . I X<0 S QUIT=1
+ . . 
+ . . Q
+ . ;
+ . ; check for manual deletion
+ . I $G(^TMP("MAG",$J,"IMPORT","LIST",STUDYN,"DELETE")) D  Q
+ . . D DELETE^MAGDAIRD(STUDYN,"ALL")
+ . . Q
+ . ; check for automatic deletion of DICOM objects that are already in file
+ . S Z=$G(^TMP("MAG",$J,"IMPORT","LIST",STUDYN,"ALREADY ON FILE"))
+ . I Z'="",AUTODEL D DELETE^MAGDAIRD(STUDYN,"ALREADY ON FILE")
+ . Q
+ I QUIT D MESSAGE(2) Q  ; media changed
+ ;
+ ; pass 3 - reconcile the data and import the objects
+ S COUNT=$G(^TMP("MAG",$J,"IMPORT","IMPORT","COUNT"))
+ F I=1:1:COUNT D  Q:QUIT
+ . S X=^TMP("MAG",$J,"IMPORT","IMPORT","LIST",I)
+ . S DFN=$P(X,"^",1),STUDYN=$P(X,"^",2),SOURCE=$P(X,"^",3)
+ . S RADPROC=$P(X,"^",4),ACNUMB=$P(X,"^",5)
+ . D ONESTUDY(DFN,STUDYN,SOURCE,RADPROC,ACNUMB)
+ . Q
+ I QUIT D MESSAGE(3) Q  ; media changed
+ ;
+ ; pass 4 - set status of study to examined or exam complete
+ S STUDYN=0
+ S TODAYHL7=$$NOW^XLFDT()\1,$E(TODAYHL7)=$E(TODAYHL7)+17
+ F  S STUDYN=$O(^TMP("MAG",$J,"IMPORT","LIST",STUDYN)) Q:'STUDYN  D
+ . N I,RAMSC
+ . S DFN=$G(^TMP("MAG",$J,"IMPORT","LIST",STUDYN,"PATIENT"))
+ . S X=$G(^TMP("MAG",$J,"IMPORT","LIST",STUDYN,"STUDY"))
+ . S TMPSTAT=$P(X,"^",5)
+ . I TMPSTAT="UID" Q  ; ignore the studies that don't need update 
+ . S ACNUMB=$P(X,"^",1)
+ . I $$GMRCIEN^MAGDFCNS(ACNUMB) Q  ;don't update status for consults
+ . S RADTI=$P(X,"^",6),RACNI=$P(X,"^",7),IMAGLOCN=$P(X,"^",8)
+ . S RAEXAM=DFN_"^"_RADTI_"^"_RACNI
+ . ;
+ . S X=$G(^TMP("MAG",$J,"IMPORT","LIST",STUDYN,"RADPROC"))
+ . S RADPROC=$P(X,"^",1)
+ . I 'RADPROC Q  ; old inactivated radiology procedure - skip status update
+ . S Z=$O(^MAGDICOM(2006.5758,"C",RADPROC,""))
+ . S RAIMGTYP=$P($G(^MAGDICOM(2006.5758,Z,0)),"^",5)
+ . I $D(^TMP("MAG",$J,"IMPORT","LIST",STUDYN,"VA READ")) D
+ . . D EXAMINED^MAGDAIRC(RAEXAM,RAIMGTYP,IMAGLOCN)
+ . . Q
+ . E  D
+ . . D COMPLETE^MAGDAIRC(RAEXAM,RAIMGTYP,IMAGLOCN)
+ . . Q
+ . Q
+ D MESSAGE(0)
+ Q
+ ;
+MESSAGE(ERROR) ; final message
+ I MEDIA="D" D
+ . N DRIVE,MSG
+ . S DRIVE=$G(^MAGDICOM(2006.563,1,"IMPORTER DRIVE"))
+ . S I=0
+ . I 'ERROR D
+ . . S MSG="Import Complete"
+ . . I DRIVE?1A1":" D
+ . . . S MSG=MSG_"  -- Please remove the CD/DVD disk from the "
+ . . . S MSG=MSG_DRIVE_" drive."
+ . . . Q
+ . . Q
+ . E  D
+ . . S MSG="Import Cancelled (Error "_ERROR_")"
+ . . I DRIVE?1A1":" D
+ . . . S MSG=MSG_" -- Remove the CD/DVD disk from the "
+ . . . S MSG=MSG_DRIVE_" drive."
+ . . . Q
+ . . Q
+ . D WARNING^MAGDFCNS(MSG)
+ . Q
+ Q
+ ;
+ ;
+ ;
+ORDER(DFN,STUDYN,RADPROC,MODIFIER,ACNUMB,RAEXAM) ; order the study in the radiology package
+ N CATEGORY ;- examination category (hard coded to "S" for "shared")
+ N COMPINFO ;- completion rpc results
+ N DATE ;----- today's date
+ N ORDINFO ;-- ordering rpc results
+ N MISC ;----- miscellaneous parameters for RAMAG EXAM ORDER
+ N MODIENS ;-- IEN in the RAD/NUC MED PROCEDURES file (#71)
+ N REASON ;--- reason for the study
+ N RAMLC ;---- ien of the imaging location in the IMAGING LOCATIONS file (#79.1)
+ N RAVERPHY ;- radiology verifying physician - set to requesting physician
+ N I,X,Z
+ ;
+ ; get the study date & time from the first entry
+ S X=$$GETDATA^MAGDAIRD(STUDYN,"LIST",.DATA)
+ S STUDYDAT=DATA("STUDYDAT"),STUDYTIM=DATA("STUDYTIM")
+ ;
+ ; call RPC to order the study
+ S Z=$O(^MAGDICOM(2006.5758,"C",RADPROC,""))
+ S X=$G(^MAGDICOM(2006.5758,Z,0)),RAMLC=$P(X,"^",7)
+ S CATEGORY="S" ; exam category "Shared"
+ S REASON="Import images from outside" ; reason for study - this needs work
+ S MODIENS="" F I=1:1:$L(MODIFIER,"~") D
+ . S:MODIENS'="" MODIENS=MODIENS_"^"
+ . S MODIENS=MODIENS_$P($P(MODIFIER,"~",I),"|",2)
+ . Q
+ D CLINHIST(STUDYN,.MISC)
+ ; call the RPC to order the study
+ S X=$$CALLRPC^MAGM2VCU("RAMAG EXAM ORDER","M",.ORDINFO,DFN,RAMLC,RADPROC_"^"_MODIENS,STUDYDAT,CATEGORY,REQLOC,REQPHYS,REASON,.MISC)
+ I ORDINFO(1)<0 D  Q -1
+ . D ERRORMSG^MAGDAIR0(1,"Error in rpc RAMAG EXAM ORDER",.ORDINFO)
+ . Q
+ S RAOIEN=ORDINFO(1)
+ Q $$REGISTER(STUDYDAT,STUDYTIM,RAOIEN,RADPROC,.ACNUMB,.RAEXAM,.REGDATA)
+ ;
+ ;
+ ;
+REGISTER(STUDYDAT,STUDYTIM,RAOIEN,RADPROC,ACNUMB,RAEXAM,REGDATA) ; register the exam
+ N DATETIME ;- datetime of the study in HL7/DICOM time stamp format
+ N HOSPLOC ;-- hospital location associated with the procedure
+ N LOCINFO ;-- updating radiology imaging location results
+ N RAMISC ;--- miscellaneous radiology information for RAMAG EXAM REGISTER
+ N RAMLC ;---- ien of the imaging location in the IMAGING LOCATIONS file (#79.1)
+ N REGINFO ;-- registering rpc results
+ N X,Z
+ ;
+ ; check registration data cache
+ I $D(REGDATA(RAOIEN)) D  Q 0
+ . S X=REGDATA(RAOIEN) ; use data from previous reg for this order
+ . S ACNUMB=$P(X,"^",1)
+ . S RAEXAM=$P(X,"^",2,4) ; RAEXAM = DFN_"^"_RADTI_"^"_RACNI
+ . Q
+ ;
+ ; call RPC to register the study
+ S Z=$O(^MAGDICOM(2006.5758,"C",RADPROC,""))
+ S X=$G(^MAGDICOM(2006.5758,Z,0)),RAMLC=$P(X,"^",7),HOSPLOC=$P(X,"^",8)
+ ;
+ ; call the RPC to update the radiology imaging location
+ S X=$$CALLRPC^MAGM2VCU("MAG DICOM SET IMAGING LOCATION","M",.LOCINFO,RAOIEN,RAMLC)
+ I LOCINFO<0 D  Q -2
+ . D ERRORMSG^MAGDAIR0(1,"Error in rpc MAG DICOM SET IMAGING LOCATION",.LOCINFO)
+ . Q
+ ;
+ I STUDYTIM="" S STUDYTIM="0001" ; set default studytime to 1 minute after midnight
+ S DATETIME=STUDYDAT_STUDYTIM
+ S RAMISC(1)="PRINCLIN^^"_HOSPLOC
+ S RAMISC(2)="FLAGS^^D" ; handle multiple studies with the same date & time
+ ;
+ ; call the RPC to register the study
+ S X=$$CALLRPC^MAGM2VCU("RAMAG EXAM REGISTER","M",.REGINFO,RAOIEN,DATETIME,.RAMISC)
+ I REGINFO(1)<0 D  Q -3
+ . D ERRORMSG^MAGDAIR0(1,"Error in rpc RAMAG EXAM REGISTER",.REGINFO)
+ . S (ACNUMB,RAEXAM)=""
+ . Q
+ S RAEXAM=$P(REGINFO(2),"^",1,3)
+ S ACNUMB=$P(REGINFO(2),"^",5)
+ S REGDATA(RAOIEN)=ACNUMB_"^"_RAEXAM
+ Q 0
+ ;
+ ;
+ ;
+CLINHIST(STUDYN,A) ; output clinical history
+ N D,I,J,S
+ N NSERIES ;-- number of series (1, 2, 3, ..., n)
+ I '$$GETDATA^MAGDAIRD(STUDYN,"LIST",.D) Q 0
+ S I=0 ; first character needs to be a space to force new lines in CPRS
+ S I=I+1,A(I)="CLINHIST^"_I_"^ *** Original Data for Imported Study ***"
+ S I=I+1,A(I)="CLINHIST^"_I_"^        Patient Name: "_$$NAME^MAGDAIR0(D("PNAMEDCM"))
+ S I=I+1,A(I)="CLINHIST^"_I_"^          Patient ID: "_D("PID")
+ S I=I+1,A(I)="CLINHIST^"_I_"^          Birth Date: "_$$DATE^MAGDAIR0(D("DOB"),"L")_"          Sex: "_D("SEX")
+ S I=I+1,A(I)="CLINHIST^"_I_"^         Accession #: "_D("ACNUMB")
+ S I=I+1,A(I)="CLINHIST^"_I_"^          Study Date: "_$$DATE^MAGDAIR0(D("STUDYDAT"),"S")_"     Study Time: "_$$TIME^MAGDAIR0(D("STUDYTIM"))
+ S I=I+1,A(I)="CLINHIST^"_I_"^   Study Description: "_D("STUDYDES")
+ S I=I+1,A(I)="CLINHIST^"_I_"^ Referring Physician: "_$$NAME^MAGDAIR0(D("REFDOC"))
+ ; build SERIES array
+ K ^TMP("MAG",$J,"IMPORT","SERIES")
+ S NSERIES=$$BLDSERIE^MAGDAIR3(STUDYN)
+ D SERINFO1^MAGDAIR4(NSERIES,.S,0)
+ F J=1:1:S S I=I+1,A(I)="CLINHIST^"_I_"^ "_S(J)
+ Q 1
+ ;
+ ;
+ ;
+ONESTUDY(DFN,STUDYN,SOURCE,RADPROC,ACNUMB) ; import reconciliation
+ N DOB ;------ patient date of birth
+ N IEN ;------ ien of DICOM object in ^TMP
+ N NEWVALUE
+ N PID ;------ patient identifier (ssn)
+ N PNAMEDCM ;- patient name in DICOM format (last^first^middle...)
+ N SERIEUID ;- series instance uid
+ N SEX ;------ patient sex
+ N STUDYUID ;- new study instance uid for duplicates already on VistA
+ N I,X,Z
+ S X=^TMP("MAG",$J,"IMPORT","PATIENT",DFN)
+ S PNAMEDCM=$TR($P(X,"^",1),"|","^"),PID=$P(X,"^",2),DOB=$P(X,"^",3)
+ S SEX=$P(X,"^",4),VAICN=$P(X,"^",5)
+ W !!,"Importing Study #",STUDYN," for Patient "
+ W $$HIGHLITE^MAGDAIR0("YELLOW",$$NAME^MAGDAIR0(PNAMEDCM))
+ W "   ID: ",$$HIGHLITE^MAGDAIR0("YELLOW",PID)
+ W !,"Source: ",$$HIGHLITE^MAGDAIR0("YELLOW",SOURCE)
+ W "  Accession Number: ",$$HIGHLITE^MAGDAIR0("YELLOW",ACNUMB)
+ I RADPROC D
+ . S Z=$O(^MAGDICOM(2006.5758,"C",RADPROC,""))
+ . S X=$P(^MAGDICOM(2006.5758,Z,0),"^",1)
+ . W "  Radiology Procedure: ",$$HIGHLITE^MAGDAIR0("YELLOW",X)
+ . Q
+ W !
+ D NEWVALUE^MAGDAIR6(.NEWVALUE) ; get new data values for import reconciliation
+ S STUDYUID=$G(^TMP("MAG",$J,"IMPORT","LIST",STUDYN,"NEW UID"))
+ I STUDYUID'="" S NEWVALUE("0020,000D")=STUDYUID ; coerce study uid
+ ;
+ ; modify the images and process them again
+ S SERIEUID=""
+ F  S SERIEUID=$O(^TMP("MAG",$J,"IMPORT","LIST",STUDYN,"IEN",SERIEUID)) Q:'SERIEUID  D  Q:QUIT
+ . S IEN=""
+ . F  S IEN=$O(^TMP("MAG",$J,"IMPORT","LIST",STUDYN,"IEN",SERIEUID,IEN)) Q:'IEN  S X=^(IEN) D  Q:QUIT
+ . . I X'="" D  Q
+ . . . I MEDIA="T" D DELETE1^MAGDAIRD(IEN) ; image is already on file, delete it
+ . . . Q
+ . . W "."
+ . . ; check if portable medium has changed
+ . . I MEDIA="D" D  Q:QUIT
+ . . . S X=$$MEDIACHK^MAGDAIRM(.MEDIA)
+ . . . I X<0 S QUIT=1
+ . . . Q
+ . . ;
+ . . D ONEIMAGE^MAGDAIR6(IEN,.NEWVALUE)
+ . . Q
+ . Q
+ Q
+ ;
+
+
+

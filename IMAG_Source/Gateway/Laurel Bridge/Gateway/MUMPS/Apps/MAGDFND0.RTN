@@ -1,0 +1,148 @@
+MAGDFND0 ;WOIFO/PMK - DICOM FIND Handler ; 05/04/2007 09:05
+ ;;3.0;IMAGING;**10,30,54**;MAR 19, 2002;;OCT 28, 2009
+ ;; Per VHA Directive 2004-038, this routine should not be modified.
+ ;; +---------------------------------------------------------------+
+ ;; | Property of the US Government.                                |
+ ;; | No permission to copy or redistribute this software is given. |
+ ;; | Use of unreleased versions of this software requires the user |
+ ;; | to execute a written test agreement with the VistA Imaging    |
+ ;; | Development Office of the Department of Veterans Affairs,     |
+ ;; | telephone (301) 734-0100.                                     |
+ ;; | The Food and Drug Administration classifies this software as  |
+ ;; | a medical device.  As such, it may not be changed in any way. |
+ ;; | Modifications to this software may result in an adulterated   |
+ ;; | medical device under 21CFR820, the use of which is considered |
+ ;; | to be a violation of US Federal Statutes.                     |
+ ;; +---------------------------------------------------------------+
+ ;;
+ Q
+ ;
+PATTERN(X,Y,START,STOP) ;
+ ; converts from DICOM wildcard matching to MUMPS pattern matching
+ ; X ----- input in DICOM wildcard matching format
+ ; Y ----- output in MUMPS pattern matching (or exact value)
+ ; START - beginning for pattern match $O-ing
+ ; STOP -- end for pattern match $O-ing
+ ; Returns 0 if wildcard matching is *not* required
+ ; Returns 1 if wildcard matching is required
+ ;
+ N I,MODE,Z
+ S (START,STOP)=""
+ ;
+ I X'["*",X'["?" S Y=X Q 0 ; no wildcard matching
+ ;
+ S Y="",MODE="WILD"
+ F I=1:1:$L(X) D
+ . S Z=$E(X,I)
+ . I "*?"[Z D  ; zero or more character wildcard
+ . . I MODE="EXACT" S Y=Y_"""" ; terminate previous exact char match
+ . . S Y=Y_$S(Z="*":".E",1:"1E") ; 0:n or 1 character wildcard match
+ . . S MODE="WILD"
+ . . Q
+ . E  D  ; exact character match
+ . . I MODE="WILD" S Y=Y_"1""" ; start next previous exact char match
+ . . S Y=Y_Z ; match this character exactly
+ . . S MODE="EXACT"
+ . . Q
+ . Q
+ I MODE="EXACT" S Y=Y_"""" ; terminate previous exact char match
+ ; determine optimum start/stop $O values
+ S I=0 I X["*" S I=$F(X,"*"),START=$P(X,"*")
+ I X["?",$F(X,"?")<I S START=$P(X,"?")
+ S STOP=START_$C(127)
+ ;
+ Q 1 ; wildcard matching required
+ ;
+TIMESTMP(DH,D,T) ; generate the DICOM timestamp
+ N X
+ S X=$$HTFM^XLFDT(DH,0)
+ S D=X\1+17000000 ; date in yyyymmdd format
+ S T=$E($P(X,".",2)_"000000",1,6) ; time in hhmmss format
+ Q
+ ;
+RANGE(DATE,TIME,START,STOP) ; compute the date range for the search
+ N MAXDATE,MAXTIME,MINDATE
+ S MINDATE=.0000001,MAXDATE=9999999,MAXTIME=.999999
+ ;
+ S:DATE="<unknown>" DATE="" S:TIME="<unknown>" TIME="" ; artifacts
+ ;
+ I DATE="" S START=0,STOP=MAXDATE Q  ; null date
+ ;
+ S D1=$P(DATE,"-",1),D2=$P(DATE,"-",2)
+ S T1=$P(TIME,"-",1),T2=$P(TIME,"-",2)
+ ;
+ I DATE'["-" D  ; single date
+ . D D1 ; get the start date from D1
+ . I TIME="" S STOP=START+MAXTIME ; all day
+ . E  D  ; decode the time
+ . . I TIME'["-" D  ; single time
+ . . . D T1START ; add the start time from T1 to the start date
+ . . . S STOP=START
+ . . . Q
+ . . E  D  ; decode the time range
+ . . . S STOP=START
+ . . . D T1T2 ; add the T1-T2 times to the start/stop dates
+ . . . Q
+ . . Q
+ . Q
+ E  D  ; date range
+ . D D1D2 ; get the start/stop dates from D1-D2
+ . I TIME="" S STOP=STOP+MAXTIME ; inclusive date range
+ . E  D  ; decode the time
+ . . I TIME'["-" D  ; single time
+ . . . D T1START ; add the start time from T1 to the start date
+ . . . D T1STOP ; add the time from T1 to the stop date
+ . . . Q
+ . . E  D  ; decode the time range
+ . . . D T1T2 ; add the T1-T2 times to the start/stop dates
+ . . . Q
+ . Q
+ S START=START-MINDATE ; backup the start a bit for $O-ing
+ Q
+ ;
+D1 ; get the start date from D1
+ S START=$TR(D1,"."),$E(START,1,2)=$E(START,1,2)-17
+ Q
+ ;
+D1D2 ; get the start/stop dates from D1-D2
+ I D1="" S START=MINDATE
+ E  S START=$TR(D1,"."),$E(START,1,2)=$E(START,1,2)-17
+ I D2="" S STOP=MAXDATE
+ E  S STOP=$TR(D2,"."),$E(STOP,1,2)=$E(STOP,1,2)-17
+ Q
+ ;
+T1START ; add the start time from T1 to the start date
+ S START=+(START_"."_$TR(T1,":."))
+ Q
+ ;
+T1STOP ; add the time from T1 to the stop date
+ S STOP=+(STOP_"."_$TR(T1,":."))
+ Q
+ ;
+T1T2 ; add the T1-T2 times to the start/stop dates
+ I T1'="" S START=+(START_"."_$TR(T1,":."))
+ S STOP=STOP+$S(T2="":MAXTIME,1:"."_$TR(T2,":."))
+ Q
+ ;
+TEST ;
+ S (D,T)="" D TEST1
+ S D=19960501 D TEST1
+ S T=123456 D TEST1
+ S T="123456-" D TEST1
+ S T="-567890" D TEST1
+ S T="123456-567890" D TEST1
+ S D="19960501-19960505",T="" D TEST1
+ S D="19960501-" D TEST1
+ S D="-19960505" D TEST1
+ S D="19960501-19960505",T=123456 D TEST1
+ S D="19960501-19960505",T="123456-" D TEST1
+ S D="19960501-19960505",T="-567890" D TEST1
+ S D="19960501-19960505",T="123456-567890" D TEST1
+ Q
+TEST1 ;
+ D RANGE(D,T,.B,.E)
+ W !,"D=",D
+ W ?20,"T=",T
+ W ?40,"B=",B
+ W ?60,"E=",E
+ Q

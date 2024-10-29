@@ -1,0 +1,53 @@
+MAGDIR6G ;WOIFO/PMK - Read a DICOM image file ; 24 Jun 2004  10:32 AM
+ ;;3.0;IMAGING;**11,30**;MAR 19, 2002;;NOV 5, 2004
+ ;; Per VHA Directive 2004-038, this routine should not be modified.
+ ;; +---------------------------------------------------------------+
+ ;; | Property of the US Government.                                |
+ ;; | No permission to copy or redistribute this software is given. |
+ ;; | Use of unreleased versions of this software requires the user |
+ ;; | to execute a written test agreement with the VistA Imaging    |
+ ;; | Development Office of the Department of Veterans Affairs,     |
+ ;; | telephone (301) 734-0100.                                     |
+ ;; | The Food and Drug Administration classifies this software as  |
+ ;; | a medical device.  As such, it may not be changed in any way. |
+ ;; | Modifications to this software may result in an adulterated   |
+ ;; | medical device under 21CFR820, the use of which is considered |
+ ;; | to be a violation of US Federal Statutes.                     |
+ ;; +---------------------------------------------------------------+
+ ;;
+ ;
+ ;   This routine is invoked by ^MAGDIR6 when an image has not been
+ ;   completely processed by the gateway.  It removed the ^MAG(2005)
+ ;   entry and deletes any files that may have been created.
+ ;
+CLEANUP ; entry point from ^MAGDIR6 to cleanup an incomplete image file
+ N DELPATH ; -- path to delete incomplete image file(s)
+ N FILE ; ----- name of primary file
+ N FROMPATH ;-- name of original file
+ N IMAGEPTR ;-- pointer to image in ^MAG(2005)
+ N MSG ;------- scratch variable
+ N TOPATH ;---- path to file(s) in server
+ N X
+ ;
+ S IMAGEPTR=+$G(^MAGDICOM(2006.563,1,"CURRENT IMAGE POINTER"))
+ S TOPATH=$G(^MAGDICOM(2006.563,1,"CURRENT IMAGE DESTINATION"))
+ S FILE=$G(^MAGDICOM(2006.563,1,"CURRENT IMAGE FILE NAME"))
+ S FROMPATH=$G(^MAGDICOM(2006.563,1,"CURRENT IMAGE SOURCE"))
+ ;
+ ; remove the ^MAG(2005) entry
+ S MSG(1)="DICOM Image Gateway Incomplete Image File Processing Cleanup"
+ S MSG(2)="File """_FROMPATH_" "" was not completely processed."
+ S MSG(3)="It was stored as ^MAG(2005,"_IMAGEPTR_") in the VistA database"
+ S MSG(4)="and """_TOPATH_FILE_""""
+ S MSG(5)="on the server."
+ S MSG(6)="All of these entries have been entirely removed."
+ S MSG(7)=""
+ D ROLLBACK^MAGDIR75(IMAGEPTR,.MSG) ; delete ^MAG(2005,IMAGEPTR)
+ ;
+ ; delete the file(s)
+ S DELPATH=TOPATH_$P(FILE,".",1)_".*"
+ D DELETE^MAGDIR71(DELPATH,"Incompletely processed image files",1)
+ D MESSAGE^MAGDMLOG(2,0,.MSG,"tB")
+ ;
+ S ^MAGDICOM(2006.563,1,"CURRENT IMAGE POINTER")="" ; clear flag
+ Q

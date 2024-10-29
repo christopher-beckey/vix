@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-module
+  type="WEB"
+  name="ExchangeWebApp"
+  id="myeclipse.1201272691198"
+  context-root="/ImagingExchangeWebApp"
+  j2ee-spec="1.4"
+  archive="ExchangeWebApp.war">
+  <attributes>
+    <attribute name="webrootdir" value="/WebRoot" />
+  </attributes>
+</project-module>
+

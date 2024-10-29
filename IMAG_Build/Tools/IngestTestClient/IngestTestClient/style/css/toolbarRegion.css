@@ -1,0 +1,53 @@
+
+#LayoutRegion {
+   background: #343434;
+    border:black;
+    height:42px;
+    padding:2px;
+}
+
+#northlayout {
+    padding:2px;
+    overflow: hidden;
+}
+
+#toolbarheader {
+    width:100%;
+    background: #343434;
+}
+
+#pName {
+    text-align: center;
+}
+
+#dob {
+    text-align: center;
+}
+
+
+#toolbar {
+    background: #343434;
+    border-color:#343434
+}
+
+#manage_toolbar {
+    background: #343434;
+    border-color:#343434;
+}
+
+.k-overflow-button.k-button{
+    background: white;
+}
+
+#cineSpeedButton_option_selected{
+    background: #999999;
+    color: #343434;
+}
+
+.k-input{
+    text-align: center;
+    font-size: 15px;
+}
+.k-item{
+    font-size: 10px;
+}

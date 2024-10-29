@@ -1,0 +1,229 @@
+US 8
+CT 3
+
+ClearCanvas:
+1. Make sure plugin metadata is not cached
+2. Change framework target to .net 4.5
+3. For all projects - Project Properties -> Build -> Advanced : pdb-only
+
+
+
+PState api
+
+	// get all pstates
+	GET	//vix/api/context/pstate
+
+	// add/update pstate
+	POST	//vix/api/context/pstate
+
+	// delete pstate
+	DELETE //vix/api/context/pstate
+
+Presentation State workflow
+
+1. Create new PState
+
+	- Create PState record
+		Output: PStateUid, Name, UserId, UserName, UserAbbr
+
+	- Update
+
+
+
+2. Edit PState
+3. Delete PState
+
+//////////////////////////////////////////////////////////////////////////////////////
+// Image manager
+
+
+	// Get study storage details
+	GET //vix/api/context/storage
+
+		Studies
+		  Study
+   		     Series
+			Images
+
+
+	// get image thumbnails
+
+++M-
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+GET //vix/api/context/storage/thumbnail
+
+	// delete image
+	DELETE  //vix/api/context/storage/image
+
+
+	StorageData
+	   	Patient
+		Studies
+		   Study
+		      Description
+		      Procedure
+                      ProcedureDate
+		      Dicom
+		         Series
+			    Description
+			    Images
+		               Image
+			         ThumbnailUrl
+			         Modality
+			         IsSensitive
+                                 ImageNumber
+				 FrameCount
+		      Files
+			File
+			   Description
+			   Type
+			   ThumbnailUrl
+			   IsSensitive
+
+
+
+	DisplayContextMetadata
+	  Patient
+			PatientFullName,
+			PatientId
+			PatientAge,
+			PatientSex,
+			PatientDOB
+		ImageGroups
+		CanDelete
+		CanEdit
+
+	ImageGroupMetadata
+		Type - {DicomStudy, DicomSeries, DicomImage, General}
+		Caption
+		Description
+		ThumbnailUrl
+		ImageGroups
+		Images
+
+	ImageMetadata
+		Caption
+		Description
+		ImageId
+		IsSensitive
+		ThumbnailUrl
+		ImageUrl
+
+
+
+VistA
+M,
+L ,HKJPState Record
+	- CREATE_PSTATE_RECORD
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		USERID
+		CONTEXTID
+		PSTATEUID
+		TIMESTAMP
+		NAME
+
+	- DELETE_PSTATE_RECORD
+		PSTATEUID
+
+	- GET_PSTATE_RECORDS
+		USERID
+		CONTEXTID
+		PSTATEUID[] (OUT)
+
+PState Details
+
+	- SET_PSTATE_DETAILS
+		PSTATEUID
+		DATA
+
+	- GET_PSTATE_DETAILS
+		PSTATEUID
+		DATA [OUT]
+
+	- DELETE_PSTATE_DETAILS
+		PSTATEUID
+
+Sprint 22:
+1. Printing
+	Vix: Need RPC for electronic signature
+	Ability to print dicom images
+	How to display signature screen for pdf documents?
+	Use custom plugin or not?
+
+2. Mark sensitive images 
+	2 days
+	dependent on other tasks
+
+3. Linking stacks
+	for navigation only
+	use tool to create active pair
+	scroll simulatenously through linked stacks
+		slice by slice
+		no sorting
+		no wrap around
+	
+4. embedSecurityTokenDJ+K+J
+
+1q2w3e4r
+
++
+dciodvfy  "C:\TFS\ISI\ISIGP\Main\Hydra\Hydra2\Hydra.Dicom.Tests\data\Oroville\1586.dcm"
+Error - Media Storage SOP Instance UID different from SOP Instance UID
+Error - Scaled numeric values for same concept are inconsistent - Exposure = 1 and ExposureInuAs = 254
+Warning - Value dubious for this VR - (0x0010,0x0010) PN Patient's Name  PN [0] = <ZZ DO NOT,SCHEDULE> - Retired Person Name form
+Warning - Retired attribute - (0x0008,0x0000) UL Group Length
+Warning - Retired attribute - (0x0010,0x0000) UL Group Length
+Warning - Retired attribute - (0x0018,0x0000) UL Group Length
+Warning - Retired attribute - (0x0020,0x0000) UL Group Length
+Warning - Retired attribute - (0x0028,0x0000) UL Group Length
+Warning - Retired attribute - (0x0032,0x0000) UL Group Length
+Warning - Retired attribute - (0x0032,0x1020) LO Scheduled Study Location
+Warning - Retired attribute - (0x6000,0x0000) UL Group Length
+Warning - Retired attribute - (0x7fe0,0x0000) UL Group Length
+Warning - Retired attribute - (0xfffe,0x0000) UL Group Length
+Warning - Dicom dataset contains retired attributes
+XRFImage
+Error - Missing attribute Type 2C Conditional Element=<Laterality> Module=<GeneralSeries>
+Error - Attribute present when condition unsatisfied (which may not be present otherwise) Type 1C Conditional Element=<PlanarConfiguration> Module=<ImagePixelMacro>
+Warning - Attribute is not present in standard DICOM IOD - (0x0010,0x1040) LO Patient's Address
+Warning - Attribute is not present in standard DICOM IOD - (0x0032,0x1020) LO Scheduled Study Location
+Warning - Dicom dataset contains attributes not present in standard DICOM IOD - this is a Standard Extended SOP Class
+
+-------------------------------------------------------
+Retnaswamy.T
+Updated on: 11-May-2017
+Description: Properties displayed on thumbnail
+----------------------------------------------
+Study Title = procedure + dateTime
+Series Title = Series description + modality + instanceNumber + imageCount
+-------------------------------------------------------

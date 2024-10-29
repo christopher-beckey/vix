@@ -1,0 +1,828 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions 
+	name="ImagingClinicalDisplaySOAP"
+	xmlns:apachesoap="http://xml.apache.org/xml-soap"
+	xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" 
+	xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+	xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" 
+	xmlns:wsdlhttp="http://schemas.xmlsoap.org/wsdl/http/" 
+	xmlns:wsdlmime="http://schemas.xmlsoap.org/wsdl/mime/"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:tns="urn:v6.soap.webservices.clinicaldisplay.imaging.med.va.gov" 
+	targetNamespace="urn:v6.soap.webservices.clinicaldisplay.imaging.med.va.gov" 
+	>
+	<wsdl:documentation>
+		This WSDL describes the concrete bindings, abstract interface and types of the Web Service.
+	</wsdl:documentation>
+	
+	<wsdl:types>
+		<schema 
+			elementFormDefault="qualified" 
+			xmlns="http://www.w3.org/2001/XMLSchema"
+			xmlns:tns="urn:v6.soap.webservices.clinicaldisplay.imaging.med.va.gov" 
+			targetNamespace="urn:v6.soap.webservices.clinicaldisplay.imaging.med.va.gov" 
+		>
+
+			<xsd:simpleType name="DateType">
+				<!--  
+				MM/DD/YYYY
+				The components of this string, from left to right, are 
+				MM = Month, 
+				DD = Day, 
+				YYYY = Year, 
+				-->
+				<xsd:restriction base="xsd:string">
+					<xsd:pattern value="\d{1,2}/\d{1,2}/\d{4}"/>
+				</xsd:restriction>
+			</xsd:simpleType>
+			
+			<xsd:simpleType name="TransactionIdentifierType">
+				<!-- 
+					Transaction ID from the originating enterprise, an opaque object, should be used
+					by any enterprise involved in the transaction to identify log entries
+				-->
+				<xsd:restriction base="xsd:string">
+					<xsd:maxLength value="128" />
+				</xsd:restriction>
+			</xsd:simpleType>
+
+			<xsd:complexType name="FilterType">
+				<!-- 
+				A sequence of known filter terms
+				-->
+				<xsd:sequence>
+					<xsd:element name="package" type="xsd:string" nillable="true"/>
+					<xsd:element name="class" type="xsd:string" nillable="true"/>
+					<xsd:element name="types" type="xsd:string" nillable="true"/>
+					<xsd:element name="event" type="xsd:string" nillable="true"/>
+					<xsd:element name="specialty" type="xsd:string" nillable="true"/>
+					<xsd:element name="from-date" type="tns:DateType" nillable="true"/>
+					<xsd:element name="to-date" type="tns:DateType" nillable="true"/>
+					<xsd:element name="origin" nillable="true">
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:string">
+								<xsd:enumeration value="UNSPECIFIED"/>
+								<xsd:enumeration value="VA"/>
+								<xsd:enumeration value="NON-VA"/>
+								<xsd:enumeration value="DOD"/>
+								<xsd:enumeration value="FEE"/>
+							</xsd:restriction>
+						</xsd:simpleType>
+					</xsd:element>
+					<xsd:element name="include-deleted" type="xsd:boolean" nillable="true" />
+				</xsd:sequence>
+			</xsd:complexType>
+			
+			<!-- 
+			A ImageAccessLogEvent is a log action taken by a user on the clinical display client. 
+			 -->
+			<xsd:complexType name="ImageAccessLogEventType">
+				<xsd:sequence>
+					<!-- ImageURN of the viewed, copied, printed image -->
+					<xsd:element name="id" type="xsd:string" nillable="false" /> 
+					<!-- patient Icn (will need to convert to dfn at local site -->
+					<xsd:element name="patientIcn" type="xsd:string" nillable="false" />
+					<!-- reason for copying/printing image --> 
+					<xsd:element name="reason-code" type="xsd:string" nillable="false" /> 
+					<!-- description of the reason -->
+					<xsd:element name="reason-description" type="xsd:string" nillable="false" />
+					<!-- User who caused the event (looked at image, copied image, printed image)  --> 
+					<element name="credentials" type="tns:UserCredentialsType" /> 
+					<xsd:element name="eventType" nillable="false">
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:string">
+								<xsd:enumeration value="IMAGE_ACCESS"/>
+								<xsd:enumeration value="IMAGE_COPY"/>
+								<xsd:enumeration value="IMAGE_PRINT"/>
+								<xsd:enumeration value="PATIENT_ID_MISMATCH"/>
+								<xsd:enumeration value="LOG_RESTRICTED_ACCESS" />
+							</xsd:restriction>
+						</xsd:simpleType>
+					</xsd:element>
+				</xsd:sequence>
+			</xsd:complexType>
+			
+			<!-- 
+			A Fat Image Type includes more information than InstanceType.
+			Currently the only known use for this is the Clinical Display.
+			-->
+			<xsd:complexType name="FatImageType">
+				<xsd:sequence>
+					<xsd:element name="image-id" nillable="true" type="xsd:string"/>
+					<xsd:element name="description" nillable="true" type="xsd:string"/>
+					<xsd:element name="procedure-date" nillable="true" type="xsd:string"/>
+					<xsd:element name="procedure" nillable="true" type="xsd:string"/>
+					<xsd:element name="dicom-sequence-number" nillable="true" type="xsd:string"/>
+					<xsd:element name="dicom-image-number" nillable="true" type="xsd:string"/>
+					<xsd:element name="patient-icn" nillable="true" type="xsd:string"/>
+					<xsd:element name="patient-name" nillable="true" type="xsd:string"/>
+					<xsd:element name="site-number" nillable="true" type="xsd:string"/>
+					<xsd:element name="site-abbr" nillable="true" type="xsd:string"/>
+					<xsd:element name="image-type" nillable="true" type="xsd:integer"/>
+					<xsd:element name="abs-location" nillable="true" type="xsd:string"/>
+					<xsd:element name="full-location" nillable="true" type="xsd:string"/>
+					<xsd:element name="image-class" nillable="true" type="xsd:string"/>
+					<xsd:element name="full-image-URI" nillable="true" type="xsd:string"/>
+					<xsd:element name="abs-image-URI" nillable="true" type="xsd:string"/>
+					<xsd:element name="big-image-URI" nillable="true" type="xsd:string"/>
+					<xsd:element name="qaMessage" nillable="true" type="xsd:string"/>
+					
+					<xsd:element name="capture-date" nillable="true" type="xsd:string" />
+					<xsd:element name="document-date" nillable="true" type="xsd:string" />
+					<xsd:element name="sensitive" nillable="true" type="xsd:boolean" />
+					<xsd:element name="status" nillable="true" type="xsd:string" />
+					<xsd:element name="view-status" nillable="true" type="xsd:string" />
+					
+				</xsd:sequence>
+			</xsd:complexType>
+			
+			<!-- 			
+			UserCredentials are the information about the user made to create the remote connection to VistA
+			 -->
+			<xsd:complexType name="UserCredentialsType">
+				<xsd:sequence>
+					<xsd:element name="fullname" nillable="false" type="xsd:string"/>
+					<xsd:element name="duz" nillable="true" type="xsd:string"/>
+					<xsd:element name="ssn" nillable="true" type="xsd:string"/>
+					<xsd:element name="siteName" nillable="false" type="xsd:string"/>
+					<xsd:element name="siteNumber" nillable="false" type="xsd:string"/>		
+					<xsd:element name="securityToken" nillable="true" type="xsd:string" />	
+					<xsd:element name="client-version" nillable="true" type="xsd:string" />	
+				</xsd:sequence>			
+			</xsd:complexType>
+			
+			<xsd:complexType name="FatImagesType">
+				<xsd:sequence>
+					<xsd:element name="image" type="tns:FatImageType" minOccurs="1" maxOccurs="unbounded"/>
+				</xsd:sequence>
+			</xsd:complexType>
+			
+			<!-- 
+			A Shallow Study Type includes JUST the Study attributes, the related series are not included.
+			Currently the only known use for this is the Clinical Display.
+			-->
+			<xsd:complexType name="ShallowStudyType">
+				<xsd:sequence>
+					<xsd:element name="study-id" nillable="true" type="xsd:string"/>
+					<xsd:element name="description" nillable="true" type="xsd:string"/>
+					<xsd:element name="procedure-date" nillable="true" type="xsd:string"/>
+					<xsd:element name="procedure" nillable="true" type="xsd:string"/>
+					<xsd:element name="patient-icn" nillable="true" type="xsd:string"/>
+					<xsd:element name="patient-name" nillable="true" type="xsd:string"/>
+					<xsd:element name="site-number" nillable="true" type="xsd:string"/>
+					<xsd:element name="site-abbreviation" nillable="true" type="xsd:string"/>
+					<xsd:element name="image-count" type="xsd:integer"/>
+					<xsd:element name="note-title" nillable="true" type="xsd:string"/>
+					<xsd:element name="image-package" nillable="true" type="xsd:string"/>
+					<xsd:element name="image-type" nillable="true" type="xsd:string"/>
+					<xsd:element name="specialty" nillable="true" type="xsd:string"/>
+					<xsd:element name="event" nillable="true" type="xsd:string"/>
+					<xsd:element name="origin" nillable="true" type="xsd:string"/>
+					<xsd:element name="study-package" nillable="true" type="xsd:string"/>
+					<xsd:element name="study-class" nillable="true" type="xsd:string"/>
+					<xsd:element name="study-type" nillable="true" type="xsd:string"/>
+					<xsd:element name="capture-date" nillable="true" type="tns:DateType"/>
+					<xsd:element name="captured-by" nillable="true" type="xsd:string"/>
+					<xsd:element name="first-image" nillable="true" type="tns:FatImageType"/>
+					<xsd:element name="rpcResponseMsg" nillable="true" type="xsd:string"/>
+					<xsd:element name="document-date" nillable="true" type="xsd:string" />
+					<xsd:element name="sensitive" nillable="true" type="xsd:boolean" />
+					<xsd:element name="status" nillable="true" type="xsd:string" />
+					<xsd:element name="view-status" nillable="true" type="xsd:string" />
+				</xsd:sequence>
+			</xsd:complexType>
+			
+			<xsd:simpleType name="ShallowStudiesErrorType">
+				<xsd:restriction base="xsd:string">
+					<xsd:enumeration value="INSUFFICIENT_SENSITIVE_LEVEL"/>
+					<xsd:enumeration value="OTHER_ERROR"/>
+				</xsd:restriction>
+			</xsd:simpleType>
+			
+			<xsd:complexType name="ShallowStudiesErrorMessageType">
+				<xsd:sequence>
+					<!-- Message to be displayed to the user -->
+					<xsd:element name="errorMessage" type="xsd:string" minOccurs="1" maxOccurs="1" nillable="false" />
+					<!-- Error code of the error message -->
+					<xsd:element name="errorCode" type="xsd:integer" minOccurs="1" maxOccurs="1" nillable="false" />
+					<!--  type of error, either insufficient sensitive level or other error type -->
+					<xsd:element name="shallowStudiesError" nillable="false" type="tns:ShallowStudiesErrorType" />
+				</xsd:sequence>
+			</xsd:complexType>
+			
+			<xsd:complexType name="ShallowStudiesStudiesType">
+				<xsd:sequence>
+					<xsd:element name="study" type="tns:ShallowStudyType" minOccurs="0" maxOccurs="unbounded" nillable="false"/>
+				</xsd:sequence>
+			</xsd:complexType>
+			
+			<xsd:complexType name="ShallowStudiesType">
+				<xsd:sequence>
+					<xsd:element name="studies" type="tns:ShallowStudiesStudiesType" minOccurs="0" maxOccurs="1" nillable="true"/>
+					<xsd:element name="error" type="tns:ShallowStudiesErrorMessageType" minOccurs="0" maxOccurs="1" nillable="true" />
+					<xsd:element name="partial-result" type="xsd:boolean" minOccurs="1" maxOccurs="1" nillable="false" />
+					<xsd:element name="partial-result-message" type="xsd:string" minOccurs="1" maxOccurs="1" nillable="false" />
+				</xsd:sequence>
+			</xsd:complexType>			
+			 
+			<xsd:complexType name="ShallowStudiesResponseType">
+				<xsd:sequence>
+					<xsd:element name="result" type="tns:ShallowStudiesType" minOccurs="1" maxOccurs="1" nillable="false" />
+				</xsd:sequence>
+			</xsd:complexType>
+			
+			<xsd:complexType name="ImageAccessEventType">
+				<xsd:sequence>
+					<xsd:element name="result" type="xsd:boolean" minOccurs="1" maxOccurs="1" />
+				</xsd:sequence>			
+			</xsd:complexType>
+			
+			<xsd:complexType name="ImageInformationType">
+				<xsd:sequence>
+					<xsd:element name="imageInfo" type="xsd:string" minOccurs="1" maxOccurs="1" />
+				</xsd:sequence>
+			</xsd:complexType>
+			
+			<xsd:complexType name="ImageSystemGlobalNodeType">
+				<xsd:sequence>
+					<xsd:element name="imageInfo" type="xsd:string" minOccurs="1" maxOccurs="1" />
+				</xsd:sequence>	
+			</xsd:complexType>
+			
+			<xsd:complexType name="ImageDevFieldsType">
+				<xsd:sequence>
+					<xsd:element name="imageInfo" type="xsd:string" minOccurs="1" maxOccurs="1" />
+				</xsd:sequence>	
+			</xsd:complexType>
+			
+			<xsd:complexType name="StudyReportType">
+				<xsd:sequence>
+					<xsd:element name="studyReport" type="xsd:string" minOccurs="1" maxOccurs="1" />
+				</xsd:sequence>
+			</xsd:complexType>
+			
+			<xsd:simpleType name="RemoteMethodNameType">
+				<xsd:restriction base="xsd:string">
+					<xsd:maxLength value="255" />
+				</xsd:restriction>
+			</xsd:simpleType>
+			
+			<xsd:simpleType name="RemoteMethodParameterTypeType">
+				<xsd:restriction base="xsd:string">
+					<xsd:enumeration value="LIST" />
+					<xsd:enumeration value="LITERAL" />
+					<xsd:enumeration value="REFERENCE" />
+				</xsd:restriction>
+			</xsd:simpleType>					
+			
+			<xsd:complexType name="RemoteMethodParameterMultipleType">
+				<xsd:sequence>
+					<xsd:element name="multipleValue" type="xsd:string" minOccurs="0" maxOccurs="unbounded" nillable="true" />
+				</xsd:sequence>
+			</xsd:complexType>
+			
+			<xsd:complexType name="RemoteMethodParameterValueType">
+				<xsd:sequence>
+					<xsd:element name="value" type="xsd:string" minOccurs="1" maxOccurs="1" nillable="false" />
+					<xsd:element name="multipleValue" type="tns:RemoteMethodParameterMultipleType" minOccurs="0" maxOccurs="1" nillable="true" />
+				</xsd:sequence>
+			</xsd:complexType>
+			
+			<xsd:complexType name="RemoteMethodParameterType">
+				<xsd:sequence>	
+					<xsd:element name="parameterIndex" type="xsd:integer" minOccurs="1" maxOccurs="1" nillable="false" />
+					<xsd:element name="parameterType" type="tns:RemoteMethodParameterTypeType" minOccurs="1" maxOccurs="1" nillable="false" />
+					<xsd:element name="parameterValue" type="tns:RemoteMethodParameterValueType" minOccurs="1" maxOccurs="1" nillable="false" />
+				</xsd:sequence>
+			</xsd:complexType>
+			
+			<xsd:complexType name="RemoteMethodInputParameterType">
+				<xsd:sequence>
+					<xsd:element name="remoteMethodParameter" type="tns:RemoteMethodParameterType" nillable="false" minOccurs="0" maxOccurs="unbounded"/>
+				</xsd:sequence>
+			</xsd:complexType>
+			
+			<xsd:complexType name="RemoteMethodResponseType">
+				<xsd:sequence>
+					<xsd:element name="response" type="xsd:string" nillable="false" minOccurs="1" maxOccurs="1" />
+				</xsd:sequence>
+			</xsd:complexType>
+			
+			<xsd:complexType name="PingServerType">
+				<xsd:sequence>					
+					<xsd:element name="pingResponse" nillable="false">
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:string">
+								<xsd:enumeration value="SERVER_READY"/>
+								<xsd:enumeration value="SERVER_UNAVAILABLE"/>
+								<xsd:enumeration value="VISTA_UNAVAILABLE"/>
+							</xsd:restriction>
+						</xsd:simpleType>
+					</xsd:element>
+					
+					<!-- contains information from the server (IP, name, time, etc) -->
+					<!-- 
+					<xsd:element name="serverMsg" type="xsd:string" minOccurs="1" maxOccurs="1" />
+					 -->
+				</xsd:sequence>
+			</xsd:complexType>
+
+			<!-- A prefetch request either elicits a PrefetchResponseType.SUBMITTED or a SOAP fault -->
+			<xsd:complexType name="PrefetchResponseType">
+				<xsd:sequence>					
+					<xsd:element name="prefetchResponse" nillable="false">
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:string">
+								<xsd:enumeration value="SUBMITTED"/>
+							</xsd:restriction>
+						</xsd:simpleType>
+					</xsd:element>
+				</xsd:sequence>
+			</xsd:complexType>
+			
+			<xsd:simpleType name="PatientSensitivityLevelType">
+				<xsd:restriction base="xsd:string">
+					<xsd:enumeration value="RPC_FAILURE"/>
+					<xsd:enumeration value="NO_ACTION_REQUIRED"/>
+					<xsd:enumeration value="DISPLAY_WARNING"/>
+					<xsd:enumeration value="DISPLAY_WARNING_REQUIRE_OK"/>
+					<xsd:enumeration value="DISPLAY_WARNING_CANNOT_CONTINUE"/>
+					<xsd:enumeration value="ACCESS_DENIED"/>
+				</xsd:restriction>
+			</xsd:simpleType>
+			
+			<xsd:complexType name="PatientSensitiveCheckResponseType">
+				<xsd:sequence>
+					<xsd:element name="patientSensitivityLevel" type="tns:PatientSensitivityLevelType"/>
+					<xsd:element name="warningMessage" type="xsd:string" />
+				</xsd:sequence>
+			</xsd:complexType>
+			
+			<xsd:complexType name="PatientSensitiveCheckWrapperResponseType">
+				<xsd:sequence>
+					<xsd:element name="response" type="tns:PatientSensitiveCheckResponseType"/>
+				</xsd:sequence>
+			</xsd:complexType>
+			<!-- 
+				NOTE: 
+				The Request's wrapped element element name must match the operation name for AXIS to properly handle "wrapped" documents.
+				The Response's wrapped element element name should match the operation name (postfixed with "Response").
+				
+				
+				From the AXIS documentation (http://ws.apache.org/axis/java/reference.html#Java2WSDLReference)
+				-If an input message has is a single part.
+				-The part is an element.
+				-The element has the same name as the operation
+				-The element's complex type has no attributes
+				
+				-When it sees this, WSDL2Java will 'unwrap' the top level element, and treat each of the components of the element as 
+				arguments to the operation. This type of WSDL is the default for Microsoft .NET web services, which wrap up RPC style 
+				arguments in this top level schema element.
+				
+				For the .net WSDL to code generator, the name of the (only) message part must be "parameters"
+			-->
+			<xsd:element name="getPatientSensitivityLevel">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="transaction-id" type="tns:TransactionIdentifierType" />
+						<xsd:element name="site-id" type="xsd:string" />
+						<xsd:element name="patient-id" type="xsd:string" />
+						<xsd:element name="credentials" type="tns:UserCredentialsType" nillable="false" />
+					</xsd:sequence>
+				</xsd:complexType>				
+			</xsd:element>
+			<xsd:element name="getPatientSensitivityLevelResponse" type="tns:PatientSensitiveCheckWrapperResponseType" />"
+			
+			<element name="getPatientShallowStudyList">
+				<complexType>
+					<sequence>
+						<element name="transaction-id" type="tns:TransactionIdentifierType"/>
+						<element name="site-id" type="xsd:string" />
+						<element name="patient-id" type="xsd:string" />
+						<element name="filter" type="tns:FilterType" />
+						<element name="credentials" type="tns:UserCredentialsType" nillable="false" />
+						<element name="authorizedSensitivityLevel" type="xsd:integer" />
+						<!-- This parameter determines if artifacts are included in the result (only for DoD requests) -->	
+						<element name="includeArtifacts" type="xsd:boolean" />					
+					</sequence>
+				</complexType>
+			</element>
+			<element name="getPatientShallowStudyListResponse" type="tns:ShallowStudiesResponseType"/>
+
+			<element name="getStudyImageList">
+				<complexType>
+					<sequence>
+						<element name="transaction-id" type="tns:TransactionIdentifierType"/>
+						<element name="study-id" type="xsd:string" />
+						<element name="credentials" type="tns:UserCredentialsType" nillable="false" />
+						<element name="include-deleted-images" type="xsd:boolean" />
+					</sequence>
+				</complexType>
+			</element>
+			<element name="getStudyImageListResponse" type="tns:FatImagesType"/>
+			
+			<element name="postImageAccessEvent">
+				<complexType>
+					<sequence>
+						<element name="transaction-id" type="tns:TransactionIdentifierType"/>
+						<element name="log-event" type="tns:ImageAccessLogEventType" nillable="false"/>
+					</sequence>
+				</complexType>
+			</element>
+			<element name="postImageAccessEventResponse" type="tns:ImageAccessEventType"/>
+
+			<element name="pingServer">
+				<complexType>
+					<sequence>
+						<element name="transaction-id" type="tns:TransactionIdentifierType" maxOccurs="1" minOccurs="1"/>
+						<element name="clientWorkstation" type="xsd:string" maxOccurs="1" minOccurs="1"/>
+						<!-- requestSiteNumber is the site number the client wants to connect to. This allows the ViX to determine if that remote site ViX is available -->
+						<element name="requestSiteNumber" type="xsd:string" maxOccurs="1" minOccurs="1" />
+						<element name="credentials" type="tns:UserCredentialsType" nillable="false" />
+					</sequence>
+				</complexType>
+			</element>
+			<element name="postPingServerResponse" type="tns:PingServerType" />
+			
+			<!-- The request and response elements for the prefetch operation -->
+			<element name="prefetchStudyList">
+				<complexType>
+					<sequence>
+						<element name="transaction-id" type="tns:TransactionIdentifierType"/>
+						<element name="site-id" type="xsd:string" />
+						<element name="patient-id" type="xsd:string" />
+						<element name="filter" type="tns:FilterType" />
+						<element name="credentials" type="tns:UserCredentialsType" nillable="false" />
+					</sequence>
+				</complexType>
+			</element>
+			<element name="PrefetchStudyListResponse" type="tns:PrefetchResponseType"/>
+			
+			<element name="getImageInformation">
+				<complexType>
+					<sequence>
+						<element name="id" type="xsd:string" nillable="false" maxOccurs="1" minOccurs="1"/>
+						<element name="transaction-id" type="tns:TransactionIdentifierType" maxOccurs="1" minOccurs="1"/>
+						<element name="credentials" type="tns:UserCredentialsType" nillable="false" />
+						<element name="include-deleted-images" type="xsd:boolean" nillable="true" />
+					</sequence>
+				</complexType>
+			</element>
+			
+			<element name="getImageInformationResponse" type="tns:ImageInformationType" />
+			
+			<element name="getImageSystemGlobalNode">
+				<complexType>
+					<sequence>
+						<element name="id" type="xsd:string" nillable="false" maxOccurs="1" minOccurs="1"/>
+						<element name="transaction-id" type="tns:TransactionIdentifierType" maxOccurs="1" minOccurs="1"/>
+						<element name="credentials" type="tns:UserCredentialsType" nillable="false" />
+					</sequence>
+				</complexType>
+			</element>
+			
+			<element name="getImageSystemGlobalNodeResponse" type="tns:ImageSystemGlobalNodeType" />
+						
+			<element name="getImageDevFields">
+				<complexType>
+					<sequence>
+						<element name="id" type="xsd:string" nillable="false" maxOccurs="1" minOccurs="1"/>
+						<element name="flags" type="xsd:string" nillable="false" maxOccurs="1" minOccurs="1"/>
+						<element name="transaction-id" type="tns:TransactionIdentifierType" maxOccurs="1" minOccurs="1"/>
+						<element name="credentials" type="tns:UserCredentialsType" nillable="false" />
+					</sequence>
+				</complexType>
+			</element>
+			
+			<element name="getImageDevFieldsResponse" type="tns:ImageDevFieldsType" />		
+			
+			<xsd:element name="getStudyReport">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="transaction-id" type="tns:TransactionIdentifierType" maxOccurs="1" minOccurs="1"/>
+						<xsd:element name="credentials" type="tns:UserCredentialsType" nillable="false" />
+						<xsd:element name="study-id" type="xsd:string" />
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="getStudyReportResponse" type="tns:StudyReportType" />
+			
+			<xsd:element name="remoteMethodPassthrough">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="transaction-id" type="tns:TransactionIdentifierType" maxOccurs="1" minOccurs="1"/>
+						<xsd:element name="credentials" type="tns:UserCredentialsType" nillable="false" />
+						<xsd:element name="site-id" type="xsd:string" nillable="false" />
+						<xsd:element name="methodName" type="tns:RemoteMethodNameType" nillable="false" />
+						<xsd:element name="inputParameters" type="tns:RemoteMethodInputParameterType"/>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			
+			<xsd:element name="remoteMethodPassthroughResponse" type="tns:RemoteMethodResponseType" />
+			
+		</schema>
+
+	</wsdl:types>
+
+	<!-- Patient Shallow Study List Request/Response Message -->
+	<wsdl:message name="patientShallowStudyListRequest">
+		<wsdl:part name="parameters" element="tns:getPatientShallowStudyList" />
+	</wsdl:message>
+	<wsdl:message name="patientShallowStudyListResponse">
+		<wsdl:part name="parameters" element="tns:getPatientShallowStudyListResponse" />
+	</wsdl:message>
+	
+	<!-- Study Fat Image List Request/Response Message -->
+	<wsdl:message name="studyImageListRequest">
+		<wsdl:part name="parameters" element="tns:getStudyImageList" />
+	</wsdl:message>
+	<wsdl:message name="studyImageListResponse">
+		<wsdl:part name="parameters" element="tns:getStudyImageListResponse" />
+	</wsdl:message>
+	
+	<!-- Image Access Event Post/Response Message -->
+	<wsdl:message name="imageAccessEventRequest">
+		<wsdl:part name="parameters" element="tns:postImageAccessEvent" />
+	</wsdl:message>
+	<wsdl:message name="imageAccessEventResponse">
+		<wsdl:part name="parameters" element="tns:postImageAccessEventResponse"/>
+	</wsdl:message>
+	
+	<!-- Ping Server Get/Response Message -->
+	<wsdl:message name="pingServerRequest">
+		<wsdl:part name="parameters" element="tns:pingServer"/>
+	</wsdl:message>
+	<wsdl:message name="pingServerResponse">
+		<wsdl:part name="parameters" element="tns:postPingServerResponse" />
+	</wsdl:message>
+
+	<!-- Prefetch Patient Studies Get/Response Message -->
+	<wsdl:message name="prefetchStudyListRequest">
+		<wsdl:part name="parameters" element="tns:prefetchStudyList"/>
+	</wsdl:message>
+	<wsdl:message name="prefetchStudyListResponse">
+		<wsdl:part name="parameters" element="tns:PrefetchStudyListResponse" />
+	</wsdl:message>
+	
+	<wsdl:message name="getImageInformationRequest">
+		<wsdl:part name="parameters" element="tns:getImageInformation"/>
+	</wsdl:message>
+	<wsdl:message name="getImageInformationResponse">
+		<wsdl:part name="parameters" element="tns:getImageInformationResponse" />
+	</wsdl:message>
+	
+	<wsdl:message name="getImageSystemGlobalNodeRequest">
+		<wsdl:part name="parameters" element="tns:getImageSystemGlobalNode"/>
+	</wsdl:message>
+	<wsdl:message name="getImageSystemGlobalNodeResponse">
+		<wsdl:part name="parameters" element="tns:getImageSystemGlobalNodeResponse" />
+	</wsdl:message>
+	
+	<wsdl:message name="getImageDevFieldsRequest">
+		<wsdl:part name="parameters" element="tns:getImageDevFields"/>
+	</wsdl:message>
+	<wsdl:message name="getImageDevFieldsResponse">
+		<wsdl:part name="parameters" element="tns:getImageDevFieldsResponse" />
+	</wsdl:message>
+	
+	<wsdl:message name="getPatientSensitivityLevelRequest">
+		<wsdl:part name="parameters" element="tns:getPatientSensitivityLevel"/>
+	</wsdl:message>
+	<wsdl:message name="getPatientSensitivityLevelResponse">
+		<wsdl:part name="parameters" element="tns:getPatientSensitivityLevelResponse" />
+	</wsdl:message>
+	
+	<wsdl:message name="getStudyReportRequest">
+		<wsdl:part name="parameters" element="tns:getStudyReport" />
+	</wsdl:message>
+	<wsdl:message name="getStudyReportResponse">
+		<wsdl:part name="parameters" element="tns:getStudyReportResponse" />
+	</wsdl:message>
+	
+	<wsdl:message name="remoteMethodPassthroughRequest">
+		<wsdl:part name="parameters" element="tns:remoteMethodPassthrough" />
+	</wsdl:message>
+	<wsdl:message name="remoteMethodPassthroughResponse">
+		<wsdl:part name="parameters" element="tns:remoteMethodPassthroughResponse" />
+	</wsdl:message>	
+
+	<!-- Port Type Definition -->
+	<wsdl:portType name="ImageClinicalDisplayMetadata">
+		<wsdl:operation name="getPatientShallowStudyList">
+			<wsdl:input message="tns:patientShallowStudyListRequest" name="patientShallowStudyListRequest" />
+			<wsdl:output message="tns:patientShallowStudyListResponse" name="patientShallowStudyListResponse" />
+		</wsdl:operation>
+
+		<wsdl:operation name="getStudyImageList">
+			<wsdl:input message="tns:studyImageListRequest" name="studyImageListRequest" />
+			<wsdl:output message="tns:studyImageListResponse" name="studyImageListResponse" />
+		</wsdl:operation>
+		
+		<wsdl:operation name="postImageAccessEvent">
+			<wsdl:input message="tns:imageAccessEventRequest" name="imageAccessEventRequest" />
+			<wsdl:output message="tns:imageAccessEventResponse" name="imageAccessEventResponse" />
+		</wsdl:operation>		
+		
+		<wsdl:operation name="pingServerEvent">
+			<wsdl:input message="tns:pingServerRequest" name="pingServerRequest" />
+			<wsdl:output message="tns:pingServerResponse" name="pingServerResponse" />
+		</wsdl:operation>
+		
+		<wsdl:operation name="prefetchStudyList">
+			<wsdl:input message="tns:prefetchStudyListRequest" name="prefetchStudyListRequest" />
+			<wsdl:output message="tns:prefetchStudyListResponse" name="prefetchStudyListResponse" />
+		</wsdl:operation>
+		
+		<wsdl:operation name="getImageInformation">
+			<wsdl:input message="tns:getImageInformationRequest" name="getImageInformationRequest" />
+			<wsdl:output message="tns:getImageInformationResponse" name="getImageInformationResponse" />
+		</wsdl:operation>
+		
+		<wsdl:operation name="getImageSystemGlobalNode">
+			<wsdl:input message="tns:getImageSystemGlobalNodeRequest" name="getImageSystemGlobalNodeRequest" />
+			<wsdl:output message="tns:getImageSystemGlobalNodeResponse" name="getImageSystemGlobalNodeResponse" />
+		</wsdl:operation>
+		
+		<wsdl:operation name="getImageDevFields">
+			<wsdl:input message="tns:getImageDevFieldsRequest" name="getImageDevFieldsRequest" />
+			<wsdl:output message="tns:getImageDevFieldsResponse" name="getImageDevFieldsResponse" />
+		</wsdl:operation>
+		
+		<wsdl:operation name="getPatientSensitivityLevel">
+			<wsdl:input message="tns:getPatientSensitivityLevelRequest" name="getPatientSensitivityLevelRequest" />
+			<wsdl:output message="tns:getPatientSensitivityLevelResponse" name="getPatientSensitivityLevelResponse" />
+		</wsdl:operation>	
+		
+		<wsdl:operation name="getStudyReport">
+			<wsdl:input message="tns:getStudyReportRequest" name="getStudyReportRequest" />
+			<wsdl:output message="tns:getStudyReportResponse" name="getStudyReportResponse" />
+		</wsdl:operation>	
+		
+		<wsdl:operation name="remoteMethodPassthrough">
+			<wsdl:input message="tns:remoteMethodPassthroughRequest" name="remoteMethodPassthroughRequest" />
+			<wsdl:output message="tns:remoteMethodPassthroughResponse" name="remoteMethodPassthroughResponse" />
+		</wsdl:operation>			
+		
+	</wsdl:portType>
+	
+	
+	<!-- 
+	Bind the portType (from the abstract interface definition) to a a transport protocol 
+	
+	From: http://atmanes.blogspot.com/2005/03/wrapped-documentliteral-convention.html
+	"In the binding definition, the soap:binding should specify style="document" (although this is the default value, so the attribute may be omitted), 
+	and the soap:body definitions must specify use="literal" and nothing else. 
+	You must not specify the namespace or encodingStyle attributes in the soap:body definition."
+	
+	i.e. DO NOT USE: soap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+	-->
+	<wsdl:binding name="ImageMetadataClinicalDisplaySoapBinding" type="tns:ImageClinicalDisplayMetadata">
+		<wsdlsoap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http" />
+
+		<!-- operation to get a list of just studies (no series or image graph) -->
+		<wsdl:operation name="getPatientShallowStudyList">
+			<wsdlsoap:operation soapAction="getPatientShallowStudyList" />
+
+			<wsdl:input name="patientShallowStudyListRequest">
+				<wsdlsoap:body use="literal" />
+			</wsdl:input>
+
+			<wsdl:output name="patientShallowStudyListResponse">
+				<wsdlsoap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+
+		<!-- operation to get a list of images in a study -->
+		<wsdl:operation name="getStudyImageList">
+			<wsdlsoap:operation soapAction="getStudyImageList" />
+
+			<wsdl:input name="studyImageListRequest">
+				<wsdlsoap:body use="literal" />
+			</wsdl:input>
+
+			<wsdl:output name="studyImageListResponse">
+				<wsdlsoap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		
+		<wsdl:operation name="postImageAccessEvent">
+			<wsdlsoap:operation soapAction="postImageAccessEvent"/>
+			
+			<wsdl:input name="imageAccessEventRequest">
+				<wsdlsoap:body use="literal" />
+			</wsdl:input>
+			
+			<wsdl:output name="imageAccessEventResponse">
+				<wsdlsoap:body use="literal" />
+			</wsdl:output>		
+		</wsdl:operation>
+		
+		<!-- operation to determine if the service is available and functioning -->
+		<wsdl:operation name="pingServerEvent">
+			<wsdlsoap:operation soapAction="pingServer" />
+			
+			<wsdl:input name="pingServerRequest">
+				<wsdlsoap:body use="literal"/>
+			</wsdl:input>
+			
+			<wsdl:output name="pingServerResponse">
+				<wsdlsoap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		
+		<!-- operation to prefetch a patient study list asynchronously -->
+		<wsdl:operation name="prefetchStudyList">
+			<wsdlsoap:operation soapAction="prefetchStudyList" />
+			
+			<wsdl:input name="prefetchStudyListRequest">
+				<wsdlsoap:body use="literal"/>
+			</wsdl:input>
+			
+			<wsdl:output name="prefetchStudyListResponse">
+				<wsdlsoap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		
+		<wsdl:operation name="getImageInformation">
+			<wsdlsoap:operation soapAction="getImageInformation" />
+			
+			<wsdl:input name="getImageInformationRequest">
+				<wsdlsoap:body use="literal" />
+			</wsdl:input>
+			
+			<wsdl:output name="getImageInformationResponse">
+				<wsdlsoap:body use="literal" />
+			</wsdl:output>			
+		</wsdl:operation>
+		
+		<wsdl:operation name="getImageSystemGlobalNode">
+			<wsdlsoap:operation soapAction="getImageSystemGlobalNode" />
+			
+			<wsdl:input name="getImageSystemGlobalNodeRequest">
+				<wsdlsoap:body use="literal" />
+			</wsdl:input>
+			
+			<wsdl:output name="getImageSystemGlobalNodeResponse">
+				<wsdlsoap:body use="literal" />
+			</wsdl:output>			
+		</wsdl:operation>
+		
+		<wsdl:operation name="getImageDevFields">
+			<wsdlsoap:operation soapAction="getImageDevFields" />
+			
+			<wsdl:input name="getImageDevFieldsRequest">
+				<wsdlsoap:body use="literal" />
+			</wsdl:input>
+			
+			<wsdl:output name="getImageDevFieldsResponse">
+				<wsdlsoap:body use="literal" />
+			</wsdl:output>			
+		</wsdl:operation>
+		
+		<wsdl:operation name="getPatientSensitivityLevel">
+			<wsdlsoap:operation soapAction="getPatientSensitivityLevel" />
+			
+			<wsdl:input name="getPatientSensitivityLevelRequest">
+				<wsdlsoap:body use="literal" />
+			</wsdl:input>
+			
+			<wsdl:output name="getPatientSensitivityLevelResponse">
+				<wsdlsoap:body use="literal" />
+			</wsdl:output>			
+		</wsdl:operation>
+		
+		<wsdl:operation name="getStudyReport">
+			<wsdlsoap:operation soapAction="getStudyReport" />
+			
+			<wsdl:input name="getStudyReportRequest">
+				<wsdlsoap:body use="literal" />
+			</wsdl:input>
+			
+			<wsdl:output name="getStudyReportResponse">
+				<wsdlsoap:body use="literal" />
+			</wsdl:output>			
+		</wsdl:operation>
+		
+		<wsdl:operation name="remoteMethodPassthrough">
+			<wsdlsoap:operation soapAction="remoteMethodPassthrough" />
+			
+			<wsdl:input name="remoteMethodPassthroughRequest">
+				<wsdlsoap:body use="literal" />
+			</wsdl:input>
+			
+			<wsdl:output name="remoteMethodPassthroughResponse">
+				<wsdlsoap:body use="literal" />
+			</wsdl:output>			
+		</wsdl:operation>
+		
+	</wsdl:binding>
+
+	<!-- Locate the binding (the abstract interface definition bound to a protocol) at a specific host/port -->
+	<wsdl:service name="ImageMetadataClinicalDisplayService">
+		<wsdl:port binding="tns:ImageMetadataClinicalDisplaySoapBinding" name="ImageMetadataClinicalDisplay.V6">
+			<wsdlsoap:address location="http://localhost:8080/ImagingExchangeWebApp/webservices/ImageMetadataClinicalDisplay" />
+		</wsdl:port>
+	</wsdl:service>
+
+</wsdl:definitions>

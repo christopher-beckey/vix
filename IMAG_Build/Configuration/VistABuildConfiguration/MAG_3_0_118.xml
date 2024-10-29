@@ -1,0 +1,380 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<build
+	 
+	name="MAG*3.0*118"
+	
+	patch="118" 
+	
+	patchName="VistA Imaging V3.0 Patch 118 - DICOM Importer II" 
+	
+	envCheckRoutine="MAGIP118"
+	
+	deleteEnvCheckRoutine="Yes" 
+	
+	preInstallRoutine=""
+
+	deletePreInstalltRoutine="" 
+	
+	postInstallRoutine="POS^MAGIP118" 
+	
+	deletePostInstallRoutine="Yes"	
+	
+	alphaBetaTesting="YES"  
+	
+	installationMessage="YES"
+	
+	xmlns="http://va.gov/VistA/kids/manifest" >
+<requiredBuilds>
+<!-- action= 0:Warning only;1:Don't install, remove global;2:Don't install, leave global;
+ -->
+<requiredBuild name="MAG*3.0*116" action="2"/>
+</requiredBuilds>
+<components>
+<dataDictionaries>
+<dataDictionary name="2005" export="DD_2005.KID"/>
+<dataDictionary name="2005.1" export="DD_2005_1.KID"/>
+<dataDictionary name="2005.6" export="DD_2005_6.KID"/>
+<dataDictionary name="2005.61" export="DD_2005_61.KID"/>
+<dataDictionary name="2005.62" export="DD_2005_62.KID"/>
+<dataDictionary name="2005.63" export="DD_2005_63.KID"/>
+<dataDictionary name="2005.64" export="DD_2005_64.KID"/>
+<dataDictionary name="2005.65" export="DD_2005_65.KID"/>
+<dataDictionary name="2005.66" export="DD_2005_66.KID"/>
+<dataDictionary name="2005.8" export="DD_2005_8.KID"/>
+<dataDictionary name="2006.1" export="DD_2006_1.KID"/>
+<dataDictionary name="2006.539" export="DD_2006_539.KID"/>
+<dataDictionary name="2006.575" export="DD_2006_575.KID"/>
+<dataDictionary name="2006.911" export="DD_2006_911.KID"/>
+<dataDictionary name="2006.912" export="DD_2006_912.KID"/>
+<dataDictionary name="2006.913" export="DD_2006_913.KID"/>
+<dataDictionary name="2006.914" export="DD_2006_914.KID"/>
+<dataDictionary name="2006.915" export="DD_2006_915.KID"/>
+<dataDictionary name="2006.916" export="DD_2006_916.KID"/>
+<dataDictionary name="2006.917" export="DD_2006_917.KID"/>
+<dataDictionary name="2006.918" export="DD_2006_918.KID"/>
+<dataDictionary name="2006.9191" export="DD_2006_9191.KID"/>
+<dataDictionary name="2006.9192" export="DD_2006_9192.KID"/>
+<dataDictionary name="2006.9193" export="DD_2006_9193.KID"/>
+<dataDictionary name="2006.921" export="DD_2006_921.KID"/>
+<dataDictionary name="2006.922" export="DD_2006_922.KID"/>
+<dataDictionary name="2006.923" export="DD_2006_923.KID"/>
+<dataDictionary name="2006.924" export="DD_2006_924.KID"/>
+<dataDictionary name="2006.925" export="DD_2006_925.KID"/>
+<dataDictionary name="2006.926" export="DD_2006_926.KID"/>
+<dataDictionary name="2006.927" export="DD_2006_927.KID"/>
+<dataDictionary name="2006.928" export="DD_2006_928.KID"/>
+<dataDictionary name="2006.93" export="DD_2006_93.KID"/>
+<dataDictionary name="2006.931" export="DD_2006_931.KID"/>
+<dataDictionary name="2006.941" export="DD_2006_941.KID"/>
+<dataDictionary name="2006.9412" export="DD_2006_9412.KID"/>
+<dataDictionary name="2006.9413" export="DD_2006_9413.KID"/>
+<dataDictionary name="2006.9414" export="DD_2006_9414.KID"/>
+<dataDictionary name="2006.9421" export="DD_2006_9421.KID"/>
+<dataDictionary name="2006.9422" export="DD_2006_9422.KID"/>
+</dataDictionaries>
+<routines>
+<routine name="MAGDCCS" export="MAGDCCS.RTN"/>
+<routine name="MAGDGMRC" export="MAGDGMRC.RTN"/>
+<routine name="MAGDLB1" export="MAGDLB1.RTN"/>
+<routine name="MAGDLB6" export="MAGDLB6.RTN"/>
+<routine name="MAGDMEDJ" export="MAGDMEDJ.RTN"/>
+<routine name="MAGDQR00" export="MAGDQR00.RTN"/>
+<routine name="MAGDQR01" export="MAGDQR01.RTN"/>
+<routine name="MAGDQR02" export="MAGDQR02.RTN"/>
+<routine name="MAGDQR03" export="MAGDQR03.RTN"/>
+<routine name="MAGDQR04" export="MAGDQR04.RTN"/>
+<routine name="MAGDQR05" export="MAGDQR05.RTN"/>
+<routine name="MAGDQR06" export="MAGDQR06.RTN"/>
+<routine name="MAGDQR07" export="MAGDQR07.RTN"/>
+<routine name="MAGDQR08" export="MAGDQR08.RTN"/>
+<routine name="MAGDQR09" export="MAGDQR09.RTN"/>
+<routine name="MAGDQR10" export="MAGDQR10.RTN"/>
+<routine name="MAGDQR11" export="MAGDQR11.RTN"/>
+<routine name="MAGDQR12" export="MAGDQR12.RTN"/>
+<routine name="MAGDQR13" export="MAGDQR13.RTN"/>
+<routine name="MAGDQR22" export="MAGDQR22.RTN"/>
+<routine name="MAGDQR23" export="MAGDQR23.RTN"/>
+<routine name="MAGDQR31" export="MAGDQR31.RTN"/>
+<routine name="MAGDQR32" export="MAGDQR32.RTN"/>
+<routine name="MAGDQR71" export="MAGDQR71.RTN"/>
+<routine name="MAGDQR72" export="MAGDQR72.RTN"/>
+<routine name="MAGDQR73" export="MAGDQR73.RTN"/>
+<routine name="MAGDQR74" export="MAGDQR74.RTN"/>  
+<routine name="MAGDQRUE" export="MAGDQRUE.RTN"/>
+<routine name="MAGDQRUL" export="MAGDQRUL.RTN"/>
+<routine name="MAGDRPC8" export="MAGDRPC8.RTN"/>
+<routine name="MAGDRPC9" export="MAGDRPC9.RTN"/>
+<routine name="MAGDRPCA" export="MAGDRPCA.RTN"/>
+<routine name="MAGDRPCB" export="MAGDRPCB.RTN"/>
+<routine name="MAGFXQRS" export="MAGFXQRS.RTN"/>
+<routine name="MAGGTID" export="MAGGTID.RTN"/>
+<routine name="MAGIP118" export="MAGIP118.RTN"/>
+<routine name="MAGJUTL6" export="MAGJUTL6.RTN"/>
+<routine name="MAGKIDS1" export="MAGKIDS1.RTN"/>
+<routine name="MAGUAUD" export="MAGUAUD.RTN"/>
+<routine name="MAGUE001" export="MAGUE001.RTN"/>
+<routine name="MAGUE002" export="MAGUE002.RTN"/>
+<routine name="MAGUE004" export="MAGUE004.RTN"/>
+<routine name="MAGUE005" export="MAGUE005.RTN"/>
+<routine name="MAGUFFLA" export="MAGUFFLA.RTN"/>
+<routine name="MAGUFFLL" export="MAGUFFLL.RTN"/>
+<routine name="MAGUPSE" export="MAGUPSE.RTN"/>
+<routine name="MAGURQRS" export="MAGURQRS.RTN"/>
+<routine name="MAGVAC01" export="MAGVAC01.RTN"/>
+<routine name="MAGVAD01" export="MAGVAD01.RTN"/>
+<routine name="MAGVAD02" export="MAGVAD02.RTN"/>
+<routine name="MAGVAF01" export="MAGVAF01.RTN"/>
+<routine name="MAGVAF02" export="MAGVAF02.RTN"/>
+<routine name="MAGVAF03" export="MAGVAF03.RTN"/>
+<routine name="MAGVAF04" export="MAGVAF04.RTN"/>
+<routine name="MAGVAF05" export="MAGVAF05.RTN"/>
+<routine name="MAGVAG01" export="MAGVAG01.RTN"/>
+<routine name="MAGVAG02" export="MAGVAG02.RTN"/>
+<routine name="MAGVAG03" export="MAGVAG03.RTN"/>
+<routine name="MAGVAG04" export="MAGVAG04.RTN"/>
+<routine name="MAGVAKL1" export="MAGVAKL1.RTN"/>
+<routine name="MAGVAQ01" export="MAGVAQ01.RTN"/>
+<routine name="MAGVAQ02" export="MAGVAQ02.RTN"/>
+<routine name="MAGVAU01" export="MAGVAU01.RTN"/>
+<routine name="MAGVD001" export="MAGVD001.RTN"/>
+<routine name="MAGVD002" export="MAGVD002.RTN"/>
+<routine name="MAGVD003" export="MAGVD003.RTN"/>
+<routine name="MAGVD004" export="MAGVD004.RTN"/>
+<routine name="MAGVD005" export="MAGVD005.RTN"/>
+<routine name="MAGVD006" export="MAGVD006.RTN"/>
+<routine name="MAGVD007" export="MAGVD007.RTN"/>
+<routine name="MAGVD008" export="MAGVD008.RTN"/>
+<routine name="MAGVD010" export="MAGVD010.RTN"/>
+<routine name="MAGVDATE" export="MAGVDATE.RTN"/>
+<routine name="MAGVDGWP" export="MAGVDGWP.RTN"/>
+<routine name="MAGVGUID" export="MAGVGUID.RTN"/>
+<routine name="MAGVIM01" export="MAGVIM01.RTN"/>
+<routine name="MAGVIM02" export="MAGVIM02.RTN"/>
+<routine name="MAGVIM03" export="MAGVIM03.RTN"/>
+<routine name="MAGVIM04" export="MAGVIM04.RTN"/>
+<routine name="MAGVIM05" export="MAGVIM05.RTN"/>
+<routine name="MAGVIM06" export="MAGVIM06.RTN"/>
+<routine name="MAGVIM07" export="MAGVIM07.RTN"/>
+<routine name="MAGVIM08" export="MAGVIM08.RTN"/>
+<routine name="MAGVIM09" export="MAGVIM09.RTN"/>
+<routine name="MAGVIM10" export="MAGVIM10.RTN"/>
+<routine name="MAGVORDR" export="MAGVORDR.RTN"/>
+<routine name="MAGVRS01" export="MAGVRS01.RTN"/>
+<routine name="MAGVRS04" export="MAGVRS04.RTN"/>
+<routine name="MAGVRS05" export="MAGVRS05.RTN"/>
+<routine name="MAGVRS06" export="MAGVRS06.RTN"/>
+<routine name="MAGVRS07" export="MAGVRS07.RTN"/>
+<routine name="MAGVRS08" export="MAGVRS08.RTN"/>
+<routine name="MAGVRS09" export="MAGVRS09.RTN"/>
+<routine name="MAGVRS11" export="MAGVRS11.RTN"/>
+<routine name="MAGVRS14" export="MAGVRS14.RTN"/>
+<routine name="MAGVRS15" export="MAGVRS15.RTN"/>
+<routine name="MAGVRS21" export="MAGVRS21.RTN"/>
+<routine name="MAGVRS24" export="MAGVRS24.RTN"/>
+<routine name="MAGVRS31" export="MAGVRS31.RTN"/>
+<routine name="MAGVRS41" export="MAGVRS41.RTN"/>
+<routine name="MAGVRS42" export="MAGVRS42.RTN"/>
+<routine name="MAGVRS43" export="MAGVRS43.RTN"/>
+<routine name="MAGVRS44" export="MAGVRS44.RTN"/>
+<routine name="MAGVRS45" export="MAGVRS45.RTN"/>
+<routine name="MAGVRS46" export="MAGVRS46.RTN"/>
+<routine name="MAGVRS51" export="MAGVRS51.RTN"/>
+<routine name="MAGVRS52" export="MAGVRS52.RTN"/>
+<routine name="MAGVRS61" export="MAGVRS61.RTN"/>
+<routine name="MAGVRS71" export="MAGVRS71.RTN"/>
+<routine name="MAGVRS81" export="MAGVRS81.RTN"/>
+<routine name="MAGVRS82" export="MAGVRS82.RTN"/>
+<routine name="MAGVSOPC" export="MAGVSOPC.RTN"/>
+<routine name="MAGVSOPU" export="MAGVSOPU.RTN"/>
+<routine name="MAGVSTDY" export="MAGVSTDY.RTN"/>
+<routine name="MAGVUID" export="MAGVUID.RTN"/>
+<routine name="MAGVUID1" export="MAGVUID1.RTN"/>
+</routines>
+<rpcs>
+<rpc name="MAG CFIND QUERY" export="RPC_MAG_CFIND_QUERY.KID"/>
+<rpc name="MAG DICOM CHECK AE TITLE" export="RPC_MAG_DICOM_CHECK_AE_TITLE.KID"/>
+<rpc name="MAG DICOM RADIOLOGY PROCEDURES" export="RPC_MAG_DICOM_RADIOLOGY_PROCEDURES.KID"/>
+<rpc name="MAG DICOM VISTA AE TITLE" export="RPC_MAG_DICOM_VISTA_AE_TITLE.KID"/>
+<rpc name="MAG EVENT AUDIT" export="RPC_MAG_EVENT_AUDIT.KID"/>
+<rpc name="MAG FILEMAN FIELD ATTS" export="RPC_MAG_FILEMAN_FIELD_ATTS.KID"/>
+<rpc name="MAG FILEMAN FIELD LIST" export="RPC_MAG_FILEMAN_FIELD_LIST.KID"/>
+<rpc name="MAG STUDY UID QUERY" export="RPC_MAG_STUDY_UID_QUERY.KID"/>
+<rpc name="MAGV ADD WORK ITEM TAGS" export="RPC_MAGV_ADD_WORK_ITEM_TAGS.KID"/>
+<rpc name="MAGV ATTACH IMAGE INSTANCE" export="RPC_MAGV_ATTACH_IMAGE_INSTANCE.KID"/>
+<rpc name="MAGV ATTACH PAT PROC REF" export="RPC_MAGV_ATTACH_PAT_PROC_REF.KID"/>
+<rpc name="MAGV ATTACH SERIES" export="RPC_MAGV_ATTACH_SERIES.KID"/>
+<rpc name="MAGV ATTACH SOP" export="RPC_MAGV_ATTACH_SOP.KID"/>
+<rpc name="MAGV ATTACH STUDY" export="RPC_MAGV_ATTACH_STUDY.KID"/>
+<rpc name="MAGV CONFIRM RAD ORDER" export="RPC_MAGV_CONFIRM_RAD_ORDER.KID"/>
+<rpc name="MAGV CREATE DICOM FAILED IMAGE" export="RPC_MAGV_CREATE_DICOM_FAILED_IMAGE.KID"/>
+<rpc name="MAGV CREATE PAT REF" export="RPC_MAGV_CREATE_PAT_REF.KID"/>
+<rpc name="MAGV CREATE WORK ITEM" export="RPC_MAGV_CREATE_WORK_ITEM.KID"/>
+<rpc name="MAGV DELETE DICOM FAILED IMAGE" export="RPC_MAGV_DELETE_DICOM_FAILED_IMAGE.KID"/>
+<rpc name="MAGV DELETE WORK ITEM" export="RPC_MAGV_DELETE_WORK_ITEM.KID"/>
+<rpc name="MAGV DGW ACTION UID LIST" export="RPC_MAGV_DGW_ACTION_UID_LIST.KID"/>
+<rpc name="MAGV DGW INSTRUMENT LIST" export="RPC_MAGV_DGW_INSTRUMENT_LIST.KID"/>
+<rpc name="MAGV DGW MODALITY LIST" export="RPC_MAGV_DGW_MODALITY_LIST.KID"/>
+<rpc name="MAGV DICOM GET COUNT" export="RPC_MAGV_DICOM_GET_COUNT.KID"/>
+<rpc name="MAGV DICOM SET INSTRUMENT LIST" export="RPC_MAGV_DICOM_SET_INSTRUMENT_LIST.KID"/>
+<rpc name="MAGV DICOM SET MODALITY LIST" export="RPC_MAGV_DICOM_SET_MODALITY_LIST.KID"/>
+<rpc name="MAGV FIND PAT REF" export="RPC_MAGV_FIND_PAT_REF.KID"/>
+<rpc name="MAGV FIND PROC REF" export="RPC_MAGV_FIND_PROC_REF.KID"/>
+<rpc name="MAGV FIND SERIES BY REFERENCE" export="RPC_MAGV_FIND_SERIES_BY_REFERENCE.KID"/>
+<rpc name="MAGV FIND SERIES BY UID" export="RPC_MAGV_FIND_SERIES_BY_UID.KID"/>
+<rpc name="MAGV FIND SOP BY UID" export="RPC_MAGV_FIND_SOP_BY_UID.KID"/>
+<rpc name="MAGV FIND STUDY BY UID" export="RPC_MAGV_FIND_STUDY_BY_UID.KID"/>
+<rpc name="MAGV FIND STUDY TIU" export="RPC_MAGV_FIND_STUDY_TIU.KID"/>
+<rpc name="MAGV FIND WORK ITEM" export="RPC_MAGV_FIND_WORK_ITEM.KID"/>
+<rpc name="MAGV GET ACCESSION NUM" export="RPC_MAGV_GET_ACCESSION_NUM.KID"/>
+<rpc name="MAGV GET DGW CONFIG" export="RPC_MAGV_GET_DGW_CONFIG.KID"/>
+<rpc name="MAGV GET DICOM FAILED IMAGE" export="RPC_MAGV_GET_DICOM_FAILED_IMAGE.KID"/>
+<rpc name="MAGV GET IMAGE FILE" export="RPC_MAGV_GET_IMAGE_FILE.KID"/>
+<rpc name="MAGV GET NEXT WORK ITEM" export="RPC_MAGV_GET_NEXT_WORK_ITEM.KID"/>
+<rpc name="MAGV GET ORIG IMAGE FILE" export="RPC_MAGV_GET_ORIG_IMAGE_FILE.KID"/>
+<rpc name="MAGV GET PAT INFO" export="RPC_MAGV_GET_PAT_INFO.KID"/>
+<rpc name="MAGV GET PAT ORDERS" export="RPC_MAGV_GET_PAT_ORDERS.KID"/>
+<rpc name="MAGV GET PAT REF ATTS" export="RPC_MAGV_GET_PAT_REF_ATTS.KID"/>
+<rpc name="MAGV GET PROC REF ATTS" export="RPC_MAGV_GET_PROC_REF_ATTS.KID"/>
+<rpc name="MAGV GET PROCEDURE INFO" export="RPC_MAGV_GET_PROCEDURE_INFO.KID"/>
+<rpc name="MAGV GET RADIOLOGY PROCEDURES" export="RPC_MAGV_GET_RADIOLOGY_PROCEDURES.KID"/>
+<rpc name="MAGV GET REPORT" export="RPC_MAGV_GET_REPORT.KID"/>
+<rpc name="MAGV GET SERIES" export="RPC_MAGV_GET_SERIES.KID"/>
+<rpc name="MAGV GET SERVICE INST LIST" export="RPC_MAGV_GET_SERVICE_INST_LIST.KID"/>
+<rpc name="MAGV GET SOP DATA" export="RPC_MAGV_GET_SOP_DATA.KID"/>
+<rpc name="MAGV GET STUDY" export="RPC_MAGV_GET_STUDY.KID"/>
+<rpc name="MAGV GET WORK ITEM" export="RPC_MAGV_GET_WORK_ITEM.KID"/>
+<rpc name="MAGV GET WORKLISTS" export="RPC_MAGV_GET_WORKLISTS.KID"/>
+<rpc name="MAGV IMPORT MEDIA LOG STORE" export="RPC_MAGV_IMPORT_MEDIA_LOG_STORE.KID"/>
+<rpc name="MAGV IMPORT STATUS" export="RPC_MAGV_IMPORT_STATUS.KID"/>
+<rpc name="MAGV IMPORT STUDY LOG REPORT" export="RPC_MAGV_IMPORT_STUDY_LOG_REPORT.KID"/>
+<rpc name="MAGV IMPORT STUDY LOG STORE" export="RPC_MAGV_IMPORT_STUDY_LOG_STORE.KID"/>
+<rpc name="MAGV INACTIVATE INSTANCE FILE" export="RPC_MAGV_INACTIVATE_INSTANCE_FILE.KID"/>
+<rpc name="MAGV INACTIVATE PAT REF" export="RPC_MAGV_INACTIVATE_PAT_REF.KID"/>
+<rpc name="MAGV INACTIVATE PROC REF" export="RPC_MAGV_INACTIVATE_PROC_REF.KID"/>
+<rpc name="MAGV INACTIVATE SERIES" export="RPC_MAGV_INACTIVATE_SERIES.KID"/>
+<rpc name="MAGV INACTIVATE SOP" export="RPC_MAGV_INACTIVATE_SOP.KID"/>
+<rpc name="MAGV INACTIVATE STUDY" export="RPC_MAGV_INACTIVATE_STUDY.KID"/>
+<rpc name="MAGV RAD EXAM ORDER" export="RPC_MAGV_RAD_EXAM_ORDER.KID"/>
+<rpc name="MAGV RAD EXAM REGISTER" export="RPC_MAGV_RAD_EXAM_REGISTER.KID"/>
+<rpc name="MAGV RAD STAT COMPLETE" export="RPC_MAGV_RAD_STAT_COMPLETE.KID"/>
+<rpc name="MAGV RAD STAT EXAMINED" export="RPC_MAGV_RAD_STAT_EXAMINED.KID"/>
+<rpc name="MAGV SEARCH BY ATTRIBUTE" export="RPC_MAGV_SEARCH_BY_ATTRIBUTE.KID"/>
+<rpc name="MAGV SERIES UID CHECK" export="RPC_MAGV_SERIES_UID_CHECK.KID"/>
+<rpc name="MAGV SET DGW CONFIG" export="RPC_MAGV_SET_DGW_CONFIG.KID"/>
+<rpc name="MAGV SET DICOM FAILED IMAGE" export="RPC_MAGV_SET_DICOM_FAILED_IMAGE.KID"/>
+<rpc name="MAGV SOP UID CHECK" export="RPC_MAGV_SOP_UID_CHECK.KID"/>
+<rpc name="MAGV STUDY LOOKUP" export="RPC_MAGV_STUDY_LOOKUP.KID"/>
+<rpc name="MAGV STUDY UID CHECK" export="RPC_MAGV_STUDY_UID_CHECK.KID"/>
+<rpc name="MAGV TRAVERSE IMAGE FILE" export="RPC_MAGV_TRAVERSE_IMAGE_FILE.KID"/>
+<rpc name="MAGV TRAVERSE PROC REF" export="RPC_MAGV_TRAVERSE_PROC_REF.KID"/>
+<rpc name="MAGV TRAVERSE SERIES" export="RPC_MAGV_TRAVERSE_SERIES.KID"/>
+<rpc name="MAGV TRAVERSE SOP" export="RPC_MAGV_TRAVERSE_SOP.KID"/>
+<rpc name="MAGV TRAVERSE STUDY" export="RPC_MAGV_TRAVERSE_STUDY.KID"/>
+<rpc name="MAGV UPDATE IMAGE FILE" export="RPC_MAGV_UPDATE_IMAGE_FILE.KID"/>
+<rpc name="MAGV UPDATE PAT PROC REF" export="RPC_MAGV_UPDATE_PAT_PROC_REF.KID"/>
+<rpc name="MAGV UPDATE PAT REF" export="RPC_MAGV_UPDATE_PAT_REF.KID"/>
+<rpc name="MAGV UPDATE SERIES" export="RPC_MAGV_UPDATE_SERIES.KID"/>
+<rpc name="MAGV UPDATE SOP" export="RPC_MAGV_UPDATE_SOP.KID"/>
+<rpc name="MAGV UPDATE STUDY" export="RPC_MAGV_UPDATE_STUDY.KID"/>
+<rpc name="MAGV UPDATE WORK ITEM" export="RPC_MAGV_UPDATE_WORK_ITEM.KID"/>
+<rpc name="MAGV WORK ITEMS COUNT" export="RPC_MAGV_WORK_ITEMS_COUNT.KID"/>
+<rpc name="MAGVA CREATE AD" export="RPC_MAGVA_CREATE_AD.KID"/>
+<rpc name="MAGVA CREATE AINSTANCE" export="RPC_MAGVA_CREATE_AINSTANCE.KID"/>
+<rpc name="MAGVA CREATE ARETPOL" export="RPC_MAGVA_CREATE_ARETPOL.KID"/>
+<rpc name="MAGVA CREATE ARTIFACT W KL" export="RPC_MAGVA_CREATE_ARTIFACT_W_KL.KID"/>
+<rpc name="MAGVA CREATE KEYLIST" export="RPC_MAGVA_CREATE_KEYLIST.KID"/>
+<rpc name="MAGVA CREATE PROVAVAILTY" export="RPC_MAGVA_CREATE_PROVAVAILTY.KID"/>
+<rpc name="MAGVA CREATE PROVIDER" export="RPC_MAGVA_CREATE_PROVIDER.KID"/>
+<rpc name="MAGVA CREATE QUEUE" export="RPC_MAGVA_CREATE_QUEUE.KID"/>
+<rpc name="MAGVA CREATE RETPOL" export="RPC_MAGVA_CREATE_RETPOL.KID"/>
+<rpc name="MAGVA CREATE RETPOL PROV MAP" export="RPC_MAGVA_CREATE_RETPOL_PROV_MAP.KID"/>
+<rpc name="MAGVA CREATE RETPOLFF" export="RPC_MAGVA_CREATE_RETPOLFF.KID"/>
+<rpc name="MAGVA CREATE STORAGE TA" export="RPC_MAGVA_CREATE_STORAGE_TA.KID"/>
+<rpc name="MAGVA CREATE TRF STATS" export="RPC_MAGVA_CREATE_TRF_STATS.KID"/>
+<rpc name="MAGVA DELETE KEYLIST" export="RPC_MAGVA_DELETE_KEYLIST.KID"/>
+<rpc name="MAGVA DELETE PROVAVAILTY" export="RPC_MAGVA_DELETE_PROVAVAILTY.KID"/>
+<rpc name="MAGVA DELETE RETPOL PROV MAP" export="RPC_MAGVA_DELETE_RETPOL_PROV_MAP.KID"/>
+<rpc name="MAGVA DEQUEUE Q MSG" export="RPC_MAGVA_DEQUEUE_Q_MSG.KID"/>
+<rpc name="MAGVA ENQUEUE Q MSG" export="RPC_MAGVA_ENQUEUE_Q_MSG.KID"/>
+<rpc name="MAGVA FIND KEYLIST" export="RPC_MAGVA_FIND_KEYLIST.KID"/>
+<rpc name="MAGVA GET A AIS ARPS AND RPFFS" export="RPC_MAGVA_GET_A_AIS_ARPS_AND_RPFFS.KID"/>
+<rpc name="MAGVA GET A W KL AND AIS" export="RPC_MAGVA_GET_A_W_KL_AND_AIS.KID"/>
+<rpc name="MAGVA GET A W KL AND AIS BY KL" export="RPC_MAGVA_GET_A_W_KL_AND_AIS_BY_KL.KID"/>
+<rpc name="MAGVA GET A W KL AND AIS BY PK" export="RPC_MAGVA_GET_A_W_KL_AND_AIS_BY_PK.KID"/>
+<rpc name="MAGVA GET ALL ADS" export="RPC_MAGVA_GET_ALL_ADS.KID"/>
+<rpc name="MAGVA GET ALL PROVAVAILS" export="RPC_MAGVA_GET_ALL_PROVAVAILS.KID"/>
+<rpc name="MAGVA GET ALL PROVIDERS" export="RPC_MAGVA_GET_ALL_PROVIDERS.KID"/>
+<rpc name="MAGVA GET ALL QUEUES" export="RPC_MAGVA_GET_ALL_QUEUES.KID"/>
+<rpc name="MAGVA GET ALL RETPOL PROV MAPS" export="RPC_MAGVA_GET_ALL_RETPOL_PROV_MAPS.KID"/>
+<rpc name="MAGVA GET ALL RETPOLS" export="RPC_MAGVA_GET_ALL_RETPOLS.KID"/>
+<rpc name="MAGVA GET ALL SITE PARAM IDS" export="RPC_MAGVA_GET_ALL_SITE_PARAM_IDS.KID"/>
+<rpc name="MAGVA GET ARTIFACT W KL" export="RPC_MAGVA_GET_ARTIFACT_W_KL.KID"/>
+<rpc name="MAGVA GET CWL" export="RPC_MAGVA_GET_CWL.KID"/>
+<rpc name="MAGVA GET JUKEBOX WL" export="RPC_MAGVA_GET_JUKEBOX_WL.KID"/>
+<rpc name="MAGVA GET KEYLIST" export="RPC_MAGVA_GET_KEYLIST.KID"/>
+<rpc name="MAGVA GET NET LOC DETAILS" export="RPC_MAGVA_GET_NET_LOC_DETAILS.KID"/>
+<rpc name="MAGVA PEEK Q MSG" export="RPC_MAGVA_PEEK_Q_MSG.KID"/>
+<rpc name="MAGVA SET AD RETPOL" export="RPC_MAGVA_SET_AD_RETPOL.KID"/>
+<rpc name="MAGVA UPDATE ARETPOL" export="RPC_MAGVA_UPDATE_ARETPOL.KID"/>
+<rpc name="MAGVA UPDATE ARTIFACT" export="RPC_MAGVA_UPDATE_ARTIFACT.KID"/>
+<rpc name="MAGVA UPDATE LAST ACCESS DT" export="RPC_MAGVA_UPDATE_LAST_ACCESS_DT.KID"/>
+<rpc name="MAGVA UPDATE PROVAVAILTY" export="RPC_MAGVA_UPDATE_PROVAVAILTY.KID"/>
+<rpc name="MAGVA UPDATE PROVIDER" export="RPC_MAGVA_UPDATE_PROVIDER.KID"/>
+<rpc name="MAGVA UPDATE RETPOL PROV MAP" export="RPC_MAGVA_UPDATE_RETPOL_PROV_MAP.KID"/>
+</rpcs>
+<options>
+<option name="MAG DICOM VISA" export="OPT_MAG_DICOM_VISA.KID"/>
+<option name="MAG SYS-DELETE STUDY" export="OPT_MAG_SYS-DELETE_STUDY.KID"/>
+<option name="MAGV AE SEC MX SETTINGS" export="OPT_MAGV_AE_SEC_MX_SETTINGS.KID"/>
+<option name="MAGV HDIG MENU" export="OPT_MAGV_HDIG_MENU.KID"/>
+<option name="MAGVA ASYNC STORAGE ERR LIST" export="OPT_MAGVA_ASYNC_STORAGE_ERR_LIST.KID"/>
+<option name="MAGVA ASYNC STORAGE ERR QURY" export="OPT_MAGVA_ASYNC_STORAGE_ERR_QURY.KID"/>
+<option name="MAGVA ASYNC STORAGE ERR REQU" export="OPT_MAGVA_ASYNC_STORAGE_ERR_REQU.KID"/>
+</options>
+<securityKeys>
+<securityKey name="MAGV IMPORT MEDIA STAGER" export="KEY_MAGV_IMPORT_MEDIA_STAGER.KID"/>
+<securityKey name="MAGV IMPORT RECON ARTIFACT" export="KEY_MAGV_IMPORT_RECON_ARTIFACT.KID"/>
+<securityKey name="MAGV IMPORT RECON CONTRACT" export="KEY_MAGV_IMPORT_RECON_CONTRACT.KID"/>
+<securityKey name="MAGV IMPORT REPORTS" export="KEY_MAGV_IMPORT_REPORTS.KID"/>
+<securityKey name="MAGV IMPORT STAGE MEDIA ADV" export="KEY_MAGV_IMPORT_STAGE_MEDIA_ADV.KID"/>
+</securityKeys>
+<protocols>
+</protocols>
+<templateLists>
+</templateLists>
+<hl7Applications>
+</hl7Applications>
+<hl7LogicalLinks>
+</hl7LogicalLinks>
+<parameterDefinitions>
+</parameterDefinitions>
+<parameterTemplates>
+</parameterTemplates>
+<printTemplates>
+<printTemplate name="MAGV-FILEREF-QUERY" export="TPRNT_MAGV-FILEREF-QUERY.KID"/>
+<printTemplate name="MAGV-PAT-QUERY" export="TPRNT_MAGV-PAT-QUERY.KID"/>
+<printTemplate name="MAGV-PROC-QUERY" export="TPRNT_MAGV-PROC-QUERY.KID"/>
+</printTemplates>
+<sortTemplates>
+<sortTemplate name="MAGV-FILEREF-QUERY" export="TSORT_MAGV-FILEREF-QUERY.KID"/>
+<sortTemplate name="MAGV-PAT-QUERY" export="TSORT_MAGV-PAT-QUERY.KID"/>
+<sortTemplate name="MAGV-PROC-QUERY" export="TSORT_MAGV-PROC-QUERY.KID"/>
+<sortTemplate name="MAGVA-ASYNC-STORAGE-ERRORS" export="TSORT_MAGVA-ASYNC-STORAGE-ERRORS.KID"/>
+</sortTemplates>
+<inputTemplates>
+</inputTemplates>
+<forms>
+</forms>
+<functions>
+</functions>
+<dialogs>
+</dialogs>
+<bulletins>
+</bulletins>
+<mailGroups>
+</mailGroups>
+<helpFrames>
+</helpFrames>
+</components>
+</build>

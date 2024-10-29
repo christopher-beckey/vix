@@ -1,0 +1,470 @@
+KIDS Distribution saved on Jul 26, 2012@08:58:42
+Split from GOLD - last patch SEQ81_P120
+**KIDS**:MAG*3.0*350_DD*2006.95^
+
+**INSTALL NAME**
+MAG*3.0*350_DD*2006.95
+"BLD",7823,0)
+MAG*3.0*350_DD*2006.95^IMAGING^0^3120726^n
+"BLD",7823,4,0)
+^9.64PA^2006.95^1
+"BLD",7823,4,2006.95,0)
+2006.95
+"BLD",7823,4,2006.95,222)
+y^y^f^^^^n
+"BLD",7823,4,"B",2006.95,2006.95)
+
+"BLD",7823,6.3)
+1
+"BLD",7823,"KRN",0)
+^9.67PA^779.2^20
+"BLD",7823,"KRN",.4,0)
+.4
+"BLD",7823,"KRN",.401,0)
+.401
+"BLD",7823,"KRN",.402,0)
+.402
+"BLD",7823,"KRN",.403,0)
+.403
+"BLD",7823,"KRN",.5,0)
+.5
+"BLD",7823,"KRN",.84,0)
+.84
+"BLD",7823,"KRN",3.6,0)
+3.6
+"BLD",7823,"KRN",3.8,0)
+3.8
+"BLD",7823,"KRN",9.2,0)
+9.2
+"BLD",7823,"KRN",9.8,0)
+9.8
+"BLD",7823,"KRN",19,0)
+19
+"BLD",7823,"KRN",19.1,0)
+19.1
+"BLD",7823,"KRN",101,0)
+101
+"BLD",7823,"KRN",409.61,0)
+409.61
+"BLD",7823,"KRN",771,0)
+771
+"BLD",7823,"KRN",779.2,0)
+779.2
+"BLD",7823,"KRN",870,0)
+870
+"BLD",7823,"KRN",8989.51,0)
+8989.51
+"BLD",7823,"KRN",8989.52,0)
+8989.52
+"BLD",7823,"KRN",8994,0)
+8994
+"BLD",7823,"KRN","B",.4,.4)
+
+"BLD",7823,"KRN","B",.401,.401)
+
+"BLD",7823,"KRN","B",.402,.402)
+
+"BLD",7823,"KRN","B",.403,.403)
+
+"BLD",7823,"KRN","B",.5,.5)
+
+"BLD",7823,"KRN","B",.84,.84)
+
+"BLD",7823,"KRN","B",3.6,3.6)
+
+"BLD",7823,"KRN","B",3.8,3.8)
+
+"BLD",7823,"KRN","B",9.2,9.2)
+
+"BLD",7823,"KRN","B",9.8,9.8)
+
+"BLD",7823,"KRN","B",19,19)
+
+"BLD",7823,"KRN","B",19.1,19.1)
+
+"BLD",7823,"KRN","B",101,101)
+
+"BLD",7823,"KRN","B",409.61,409.61)
+
+"BLD",7823,"KRN","B",771,771)
+
+"BLD",7823,"KRN","B",779.2,779.2)
+
+"BLD",7823,"KRN","B",870,870)
+
+"BLD",7823,"KRN","B",8989.51,8989.51)
+
+"BLD",7823,"KRN","B",8989.52,8989.52)
+
+"BLD",7823,"KRN","B",8994,8994)
+
+"FIA",2006.95)
+IMAGE ACCESS LOG
+"FIA",2006.95,0)
+^MAG(2006.95,
+"FIA",2006.95,0,0)
+2006.95I
+"FIA",2006.95,0,1)
+y^y^f^^^^n
+"FIA",2006.95,0,10)
+
+"FIA",2006.95,0,11)
+
+"FIA",2006.95,0,"RLRO")
+
+"FIA",2006.95,0,"VR")
+3.0^MAG
+"FIA",2006.95,2006.95)
+0
+"MBREQ")
+0
+"PKG",454,-1)
+1^1
+"PKG",454,0)
+IMAGING^MAG^Imaging-V1 to release 
+"PKG",454,20,0)
+^9.402P^^
+"PKG",454,22,0)
+^9.49I^1^1
+"PKG",454,22,1,0)
+3.0^3020319^3020517^126
+"PKG",454,22,1,"PAH",1,0)
+350_DD^3120726
+"QUES","XPF1",0)
+Y
+"QUES","XPF1","??")
+^D REP^XPDH
+"QUES","XPF1","A")
+Shall I write over your |FLAG| File
+"QUES","XPF1","B")
+YES
+"QUES","XPF1","M")
+D XPF1^XPDIQ
+"QUES","XPF2",0)
+Y
+"QUES","XPF2","??")
+^D DTA^XPDH
+"QUES","XPF2","A")
+Want my data |FLAG| yours
+"QUES","XPF2","B")
+YES
+"QUES","XPF2","M")
+D XPF2^XPDIQ
+"QUES","XPI1",0)
+YO
+"QUES","XPI1","??")
+^D INHIBIT^XPDH
+"QUES","XPI1","A")
+Want KIDS to INHIBIT LOGONs during the install
+"QUES","XPI1","B")
+NO
+"QUES","XPI1","M")
+D XPI1^XPDIQ
+"QUES","XPM1",0)
+PO^VA(200,:EM
+"QUES","XPM1","??")
+^D MG^XPDH
+"QUES","XPM1","A")
+Enter the Coordinator for Mail Group '|FLAG|'
+"QUES","XPM1","B")
+
+"QUES","XPM1","M")
+D XPM1^XPDIQ
+"QUES","XPO1",0)
+Y
+"QUES","XPO1","??")
+^D MENU^XPDH
+"QUES","XPO1","A")
+Want KIDS to Rebuild Menu Trees Upon Completion of Install
+"QUES","XPO1","B")
+NO
+"QUES","XPO1","M")
+D XPO1^XPDIQ
+"QUES","XPZ1",0)
+Y
+"QUES","XPZ1","??")
+^D OPT^XPDH
+"QUES","XPZ1","A")
+Want to DISABLE Scheduled Options, Menu Options, and Protocols
+"QUES","XPZ1","B")
+NO
+"QUES","XPZ1","M")
+D XPZ1^XPDIQ
+"QUES","XPZ2",0)
+Y
+"QUES","XPZ2","??")
+^D RTN^XPDH
+"QUES","XPZ2","A")
+Want to MOVE routines to other CPUs
+"QUES","XPZ2","B")
+NO
+"QUES","XPZ2","M")
+D XPZ2^XPDIQ
+"SEC","^DIC",2006.95,2006.95,0,"AUDIT")
+@
+"SEC","^DIC",2006.95,2006.95,0,"DD")
+@
+"SEC","^DIC",2006.95,2006.95,0,"DEL")
+@
+"SEC","^DIC",2006.95,2006.95,0,"LAYGO")
+@
+"SEC","^DIC",2006.95,2006.95,0,"RD")
+@
+"SEC","^DIC",2006.95,2006.95,0,"WR")
+@
+"VER")
+8.0^22.0
+"^DD",2006.95,2006.95,0)
+FIELD^^100^12
+"^DD",2006.95,2006.95,0,"DDA")
+N
+"^DD",2006.95,2006.95,0,"DT")
+3030811
+"^DD",2006.95,2006.95,0,"ID",2)
+S %I=Y,Y=$S('$D(^(0)):"",$D(^VA(200,+$P(^(0),U,3),0))#2:$P(^(0),U,1),1:""),C=$P(^DD(200,.01,0),U,2) D Y^DIQ:Y]"" W "   ",Y,@("$E("_DIC_"%I,0),0)") S Y=%I K %I
+"^DD",2006.95,2006.95,0,"ID",7)
+S %I=Y,Y=$S('$D(^(0)):"",$D(^DPT(+$P(^(0),U,8),0))#2:$P(^(0),U,1),1:""),C=$P(^DD(2,.01,0),U,2) D Y^DIQ:Y]"" W "   ",Y,@("$E("_DIC_"%I,0),0)") S Y=%I K %I
+"^DD",2006.95,2006.95,0,"IX","AC",2006.95,6)
+
+"^DD",2006.95,2006.95,0,"IX","AS",2006.95,9)
+
+"^DD",2006.95,2006.95,0,"IX","B",2006.95,.01)
+
+"^DD",2006.95,2006.95,0,"IX","C",2006.95,10)
+
+"^DD",2006.95,2006.95,0,"NM","IMAGE ACCESS LOG")
+
+"^DD",2006.95,2006.95,0,"VRPK")
+MAG
+"^DD",2006.95,2006.95,.01,0)
+IMAGE ACCESS IEN^RNJ12,0X^^0;1^K:+X'=X!(X>999999999999)!(X<1)!(X?.E1"."1.N) X S:$D(X)#10 DINUM=X
+"^DD",2006.95,2006.95,.01,1,0)
+^.1
+"^DD",2006.95,2006.95,.01,1,1,0)
+2006.95^B
+"^DD",2006.95,2006.95,.01,1,1,1)
+S ^MAG(2006.95,"B",$E(X,1,30),DA)=""
+"^DD",2006.95,2006.95,.01,1,1,2)
+K ^MAG(2006.95,"B",$E(X,1,30),DA)
+"^DD",2006.95,2006.95,.01,3)
+Type a number between 1 and 999999999999, 0 Decimal Digits
+"^DD",2006.95,2006.95,.01,21,0)
+^^1^1^3030811^
+"^DD",2006.95,2006.95,.01,21,1,0)
+This field contains the internal entry number of the image access.
+"^DD",2006.95,2006.95,.01,"DT")
+3030811
+"^DD",2006.95,2006.95,1,0)
+ACCESS TYPE^RF^^0;2^K:$L(X)>30!($L(X)<1) X
+"^DD",2006.95,2006.95,1,3)
+Enter the type of access being logged; answer must be 1-30 characters in length.
+"^DD",2006.95,2006.95,1,21,0)
+^.001^2^2^3100406^^^^
+"^DD",2006.95,2006.95,1,21,1,0)
+This field describes the type of access made to the image or
+"^DD",2006.95,2006.95,1,21,2,0)
+page of image abstracts.
+"^DD",2006.95,2006.95,1,"DT")
+3100406
+"^DD",2006.95,2006.95,2,0)
+USER^P200'^VA(200,^0;3^Q
+"^DD",2006.95,2006.95,2,21,0)
+^^2^2^2950323^
+"^DD",2006.95,2006.95,2,21,1,0)
+This field indicates the user who accessed the image or page
+"^DD",2006.95,2006.95,2,21,2,0)
+of abstracts.
+"^DD",2006.95,2006.95,2,"DT")
+2950118
+"^DD",2006.95,2006.95,3,0)
+IMAGE^RP2005'^MAG(2005,^0;4^Q
+"^DD",2006.95,2006.95,3,21,0)
+^^1^1^2950323^
+"^DD",2006.95,2006.95,3,21,1,0)
+This field contains a pointer to the image that was accessed.
+"^DD",2006.95,2006.95,3,"DT")
+2950118
+"^DD",2006.95,2006.95,4,0)
+USER INTERFACE SOFTWARE^F^^0;5^K:$L(X)>10!($L(X)<1) X
+"^DD",2006.95,2006.95,4,3)
+Answer must be 1-10 characters in length.
+"^DD",2006.95,2006.95,4,21,0)
+^^2^2^2950323^
+"^DD",2006.95,2006.95,4,21,1,0)
+This field indicates the software package that was being used
+"^DD",2006.95,2006.95,4,21,2,0)
+to access the image.
+"^DD",2006.95,2006.95,4,"DT")
+2950118
+"^DD",2006.95,2006.95,5,0)
+WORKSTATION^F^^0;6^K:$L(X)>3!($L(X)<3) X
+"^DD",2006.95,2006.95,5,3)
+Answer must be 3 characters in length.
+"^DD",2006.95,2006.95,5,21,0)
+^^3^3^3030811^
+"^DD",2006.95,2006.95,5,21,1,0)
+This field records the 3-letter abbreviation of the
+"^DD",2006.95,2006.95,5,21,2,0)
+workstation on which the image access was made.  Meaningful only for MSM 
+"^DD",2006.95,2006.95,5,21,3,0)
+systems.
+"^DD",2006.95,2006.95,5,"DT")
+3030811
+"^DD",2006.95,2006.95,6,0)
+ACCESS DATE/TIME^D^^0;7^S %DT="ESTXR" D ^%DT S X=Y K:Y<1 X
+"^DD",2006.95,2006.95,6,1,0)
+^.1
+"^DD",2006.95,2006.95,6,1,1,0)
+2006.95^AC
+"^DD",2006.95,2006.95,6,1,1,1)
+S ^MAG(2006.95,"AC",$E(X,1,30),DA)=""
+"^DD",2006.95,2006.95,6,1,1,2)
+K ^MAG(2006.95,"AC",$E(X,1,30),DA)
+"^DD",2006.95,2006.95,6,1,1,"DT")
+2970711
+"^DD",2006.95,2006.95,6,21,0)
+^^1^1^2950323^
+"^DD",2006.95,2006.95,6,21,1,0)
+This field holds the date and time of the image access.
+"^DD",2006.95,2006.95,6,"DT")
+2970711
+"^DD",2006.95,2006.95,7,0)
+PATIENT^P2'^DPT(^0;8^Q
+"^DD",2006.95,2006.95,7,21,0)
+^^1^1^2950323^
+"^DD",2006.95,2006.95,7,21,1,0)
+This field indicates the patient whose images were accessed (optional).
+"^DD",2006.95,2006.95,7,"DT")
+2950118
+"^DD",2006.95,2006.95,8,0)
+IMAGE COUNT^NJ6,0^^0;9^K:+X'=X!(X>999999)!(X<0)!(X?.E1"."1N.N) X
+"^DD",2006.95,2006.95,8,3)
+Type a Number between 0 and 999999, 0 Decimal Digits
+"^DD",2006.95,2006.95,8,21,0)
+^^1^1^2950323^^
+"^DD",2006.95,2006.95,8,21,1,0)
+Number of images accessed for abstract accesses
+"^DD",2006.95,2006.95,8,"DT")
+2950119
+"^DD",2006.95,2006.95,9,0)
+SESSION^NJ14,0^^0;10^K:+X'=X!(X>99999999999999)!(X<0)!(X?.E1"."1N.N) X
+"^DD",2006.95,2006.95,9,1,0)
+^.1
+"^DD",2006.95,2006.95,9,1,1,0)
+2006.95^AS
+"^DD",2006.95,2006.95,9,1,1,1)
+S ^MAG(2006.95,"AS",$E(X,1,30),DA)=""
+"^DD",2006.95,2006.95,9,1,1,2)
+K ^MAG(2006.95,"AS",$E(X,1,30),DA)
+"^DD",2006.95,2006.95,9,1,1,"%D",0)
+^^1^1^3020723^
+"^DD",2006.95,2006.95,9,1,1,"%D",1,0)
+Cross reference to group actions together by session.
+"^DD",2006.95,2006.95,9,1,1,"DT")
+3020723
+"^DD",2006.95,2006.95,9,3)
+This is the Imaging Session that initiated the action.
+"^DD",2006.95,2006.95,9,21,0)
+^^1^1^3020723^
+"^DD",2006.95,2006.95,9,21,1,0)
+This is the IEN of the Imaging Windows Session file.
+"^DD",2006.95,2006.95,9,"DT")
+3020723
+"^DD",2006.95,2006.95,10,0)
+DIVISION^P4'^DIC(4,^0;11^Q
+"^DD",2006.95,2006.95,10,1,0)
+^.1
+"^DD",2006.95,2006.95,10,1,1,0)
+2006.95^C^MUMPS
+"^DD",2006.95,2006.95,10,1,1,1)
+S ^MAG(2006.95,"C",$S($D(^MAG(2006.1,"B",+X)):$$PLACE^MAGBAPI(X),1:$$PLACE^MAGBAPI($$KSP^XUPARAM("INST"))),$E(+$P(^MAG(2006.95,DA,0),U,7),1,30),DA)=""
+"^DD",2006.95,2006.95,10,1,1,2)
+K ^MAG(2006.95,"C",$S($D(^MAG(2006.1,"B",+X)):$$PLACE^MAGBAPI(X),1:$$PLACE^MAGBAPI($$KSP^XUPARAM("INST"))),$E(+$P(^MAG(2006.95,DA,0),U,7),1,30),DA)
+"^DD",2006.95,2006.95,10,1,1,"%D",0)
+^.101^5^5^3090408^^^^
+"^DD",2006.95,2006.95,10,1,1,"%D",1,0)
+This cross reference is used to sort by division in chronological order.
+"^DD",2006.95,2006.95,10,1,1,"%D",2,0)
+Example: ^MAG(2006.95,"C",Imaging site division,access date/time,da)=""
+"^DD",2006.95,2006.95,10,1,1,"%D",3,0)
+ 
+"^DD",2006.95,2006.95,10,1,1,"%D",4,0)
+The division will default to the Kernel Site Institution if a division does
+"^DD",2006.95,2006.95,10,1,1,"%D",5,0)
+not match an entry in the Imaging Site Parameter file (#2006.1).
+"^DD",2006.95,2006.95,10,1,1,"DT")
+3090408
+"^DD",2006.95,2006.95,10,21,0)
+^.001^1^1^3090408^^^^
+"^DD",2006.95,2006.95,10,21,1,0)
+Records the institution where the Imaging event took place. 
+"^DD",2006.95,2006.95,10,"DT")
+3090408
+"^DD",2006.95,2006.95,100,0)
+ADDITIONAL DATA^F^^100;1^K:$L(X)>250!($L(X)<1) X
+"^DD",2006.95,2006.95,100,3)
+Enter additional text for this log-entry.
+"^DD",2006.95,2006.95,100,21,0)
+^.001^4^4^3070515^^^
+"^DD",2006.95,2006.95,100,21,1,0)
+This field contains audit-specific information that cannot be fully 
+"^DD",2006.95,2006.95,100,21,2,0)
+recorded in other fields in the IMAGE ACCESS LOG File.  The specific 
+"^DD",2006.95,2006.95,100,21,3,0)
+information contained is based on the value of the USER INTERFACE 
+"^DD",2006.95,2006.95,100,21,4,0)
+SOFTWARE Field (#4).
+"^DD",2006.95,2006.95,100,"DT")
+3070413
+"^DIC",2006.95,2006.95,0)
+IMAGE ACCESS LOG^2006.95
+"^DIC",2006.95,2006.95,0,"GL")
+^MAG(2006.95,
+"^DIC",2006.95,2006.95,"%",0)
+^1.005^^0
+"^DIC",2006.95,2006.95,"%D",0)
+^^20^20^3010619^
+"^DIC",2006.95,2006.95,"%D",1,0)
+ +---------------------------------------------------------------+
+"^DIC",2006.95,2006.95,"%D",2,0)
+ |                                                               |
+"^DIC",2006.95,2006.95,"%D",3,0)
+ | Property of the US Government.                                |
+"^DIC",2006.95,2006.95,"%D",4,0)
+ | No permission to copy or redistribute this software is given. |
+"^DIC",2006.95,2006.95,"%D",5,0)
+ | Use of unreleased versions of this software requires the user |
+"^DIC",2006.95,2006.95,"%D",6,0)
+ | to execute a written test agreement with the VistA Imaging    |
+"^DIC",2006.95,2006.95,"%D",7,0)
+ | Development Office of the Department of Veterans Affairs,     |
+"^DIC",2006.95,2006.95,"%D",8,0)
+ | telephone (301) 734-0100.                                     |
+"^DIC",2006.95,2006.95,"%D",9,0)
+ |                                                               |
+"^DIC",2006.95,2006.95,"%D",10,0)
+ | The Food and Drug Administration classifies this software as  |
+"^DIC",2006.95,2006.95,"%D",11,0)
+ | a medical device.  As such, it may not be changed in any way. |
+"^DIC",2006.95,2006.95,"%D",12,0)
+ | Modifications to this software may result in an adulterated   |
+"^DIC",2006.95,2006.95,"%D",13,0)
+ | medical device under 21CFR820, the use of which is considered |
+"^DIC",2006.95,2006.95,"%D",14,0)
+ | to be a violation of US Federal Statutes.                     |
+"^DIC",2006.95,2006.95,"%D",15,0)
+ |                                                               |
+"^DIC",2006.95,2006.95,"%D",16,0)
+ +---------------------------------------------------------------+
+"^DIC",2006.95,2006.95,"%D",17,0)
+ 
+"^DIC",2006.95,2006.95,"%D",18,0)
+This file logs all users and the image activity that took place during
+"^DIC",2006.95,2006.95,"%D",19,0)
+their session (i.e., image accesses, reports displayed, exports, and
+"^DIC",2006.95,2006.95,"%D",20,0)
+image deletions).
+"^DIC",2006.95,"B","IMAGE ACCESS LOG",2006.95)
+
+**END**
+**END**

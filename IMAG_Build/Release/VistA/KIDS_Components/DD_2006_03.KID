@@ -1,0 +1,528 @@
+KIDS Distribution saved on Jul 16, 2007@12:39:42
+Package for FILE named 2006.03
+**KIDS**:MAG*3.0*49^
+
+**INSTALL NAME**
+MAG*3.0*49
+"BLD",5875,0)
+MAG*3.0*49^^0^3070716^y
+"BLD",5875,1,0)
+^^4^4^3070716^
+"BLD",5875,1,1,0)
+This package contains a KIDS component
+"BLD",5875,1,2,0)
+for Running Baseline.
+"BLD",5875,1,3,0)
+ 
+"BLD",5875,1,4,0)
+This package transports the FileMan data dictionary named 2006.03.
+"BLD",5875,4,0)
+^9.64PA^2006.03^1
+"BLD",5875,4,2006.03,0)
+2006.03
+"BLD",5875,4,2006.03,222)
+y^y^f^^^^n
+"BLD",5875,4,"B",2006.03,2006.03)
+
+"BLD",5875,6.3)
+1
+"BLD",5875,"KRN",0)
+^9.67PA^8989.52^19
+"BLD",5875,"KRN",.4,0)
+.4
+"BLD",5875,"KRN",.401,0)
+.401
+"BLD",5875,"KRN",.402,0)
+.402
+"BLD",5875,"KRN",.403,0)
+.403
+"BLD",5875,"KRN",.5,0)
+.5
+"BLD",5875,"KRN",.84,0)
+.84
+"BLD",5875,"KRN",3.6,0)
+3.6
+"BLD",5875,"KRN",3.8,0)
+3.8
+"BLD",5875,"KRN",9.2,0)
+9.2
+"BLD",5875,"KRN",9.8,0)
+9.8
+"BLD",5875,"KRN",19,0)
+19
+"BLD",5875,"KRN",19.1,0)
+19.1
+"BLD",5875,"KRN",101,0)
+101
+"BLD",5875,"KRN",409.61,0)
+409.61
+"BLD",5875,"KRN",771,0)
+771
+"BLD",5875,"KRN",870,0)
+870
+"BLD",5875,"KRN",8989.51,0)
+8989.51
+"BLD",5875,"KRN",8989.52,0)
+8989.52
+"BLD",5875,"KRN",8994,0)
+8994
+"BLD",5875,"KRN","B",.4,.4)
+
+"BLD",5875,"KRN","B",.401,.401)
+
+"BLD",5875,"KRN","B",.402,.402)
+
+"BLD",5875,"KRN","B",.403,.403)
+
+"BLD",5875,"KRN","B",.5,.5)
+
+"BLD",5875,"KRN","B",.84,.84)
+
+"BLD",5875,"KRN","B",3.6,3.6)
+
+"BLD",5875,"KRN","B",3.8,3.8)
+
+"BLD",5875,"KRN","B",9.2,9.2)
+
+"BLD",5875,"KRN","B",9.8,9.8)
+
+"BLD",5875,"KRN","B",19,19)
+
+"BLD",5875,"KRN","B",19.1,19.1)
+
+"BLD",5875,"KRN","B",101,101)
+
+"BLD",5875,"KRN","B",409.61,409.61)
+
+"BLD",5875,"KRN","B",771,771)
+
+"BLD",5875,"KRN","B",870,870)
+
+"BLD",5875,"KRN","B",8989.51,8989.51)
+
+"BLD",5875,"KRN","B",8989.52,8989.52)
+
+"BLD",5875,"KRN","B",8994,8994)
+
+"FIA",2006.03)
+IMAGE BACKGROUND QUEUE
+"FIA",2006.03,0)
+^MAGQUEUE(2006.03,
+"FIA",2006.03,0,0)
+2006.03I
+"FIA",2006.03,0,1)
+y^y^f^^^^n
+"FIA",2006.03,0,10)
+
+"FIA",2006.03,0,11)
+
+"FIA",2006.03,0,"RLRO")
+
+"FIA",2006.03,2006.03)
+0
+"IX",2006.03,2006.03,"C",0)
+2006.03^C^To Sort by Place and Queue name^R^^R^IR^I^2006.03^^^^^LS
+"IX",2006.03,2006.03,"C",1)
+S ^MAGQUEUE(2006.03,"C",X(1),$E(X(2),1,30),DA)=""
+"IX",2006.03,2006.03,"C",2)
+K ^MAGQUEUE(2006.03,"C",X(1),$E(X(2),1,30),DA)
+"IX",2006.03,2006.03,"C",2.5)
+K ^MAGQUEUE(2006.03,"C")
+"IX",2006.03,2006.03,"C",11.1,0)
+^.114IA^2^2
+"IX",2006.03,2006.03,"C",11.1,1,0)
+1^F^2006.03^.04^^1^F
+"IX",2006.03,2006.03,"C",11.1,1,3)
+
+"IX",2006.03,2006.03,"C",11.1,2,0)
+2^F^2006.03^.01^30^2^F
+"IX",2006.03,2006.03,"C",11.1,2,3)
+
+"IX",2006.03,2006.03,"D",0)
+2006.03^D^Status^R^^R^IR^I^2006.03^^^^^LS
+"IX",2006.03,2006.03,"D",1)
+S ^MAGQUEUE(2006.03,"D",X(1),$E(X(2),1,30),$E(X(3),1,30),DA)=""
+"IX",2006.03,2006.03,"D",2)
+K ^MAGQUEUE(2006.03,"D",X(1),$E(X(2),1,30),$E(X(3),1,30),DA)
+"IX",2006.03,2006.03,"D",2.5)
+K ^MAGQUEUE(2006.03,"D")
+"IX",2006.03,2006.03,"D",11.1,0)
+^.114IA^3^3
+"IX",2006.03,2006.03,"D",11.1,1,0)
+1^F^2006.03^.04^^1^F
+"IX",2006.03,2006.03,"D",11.1,1,3)
+
+"IX",2006.03,2006.03,"D",11.1,2,0)
+2^F^2006.03^.01^30^2^F
+"IX",2006.03,2006.03,"D",11.1,2,3)
+
+"IX",2006.03,2006.03,"D",11.1,3,0)
+3^F^2006.03^4^30^3^F
+"IX",2006.03,2006.03,"D",11.1,3,3)
+
+"IX",2006.03,2006.03,"E",0)
+2006.03^E^Place and Image number index to prevent redundant queues^R^^R^IR^I^2006.03^^^^^LS
+"IX",2006.03,2006.03,"E",1)
+S ^MAGQUEUE(2006.03,"E",X(1),$E(X(2),1,30),DA)=""
+"IX",2006.03,2006.03,"E",1.4)
+I $P(^MAGQUEUE(2006.03,DA,0),U)["JUKEBOX"
+"IX",2006.03,2006.03,"E",2)
+K ^MAGQUEUE(2006.03,"E",X(1),$E(X(2),1,30),DA)
+"IX",2006.03,2006.03,"E",2.4)
+I $P(^MAGQUEUE(2006.03,DA,0),U)["JUKEBOX"
+"IX",2006.03,2006.03,"E",2.5)
+K ^MAGQUEUE(2006.03,"E")
+"IX",2006.03,2006.03,"E",11.1,0)
+^.114IA^2^2
+"IX",2006.03,2006.03,"E",11.1,1,0)
+1^F^2006.03^.04^^1^F
+"IX",2006.03,2006.03,"E",11.1,1,3)
+
+"IX",2006.03,2006.03,"E",11.1,2,0)
+2^F^2006.03^6^30^2^F
+"IX",2006.03,2006.03,"E",11.1,2,3)
+
+"IX",2006.03,2006.03,"F",0)
+2006.03^F^Place, image number, type index^R^^R^IR^I^2006.03^^^^^LS
+"IX",2006.03,2006.03,"F",.1,0)
+^^2^2^3010313^
+"IX",2006.03,2006.03,"F",.1,1,0)
+This X-REF is used to prevent redundent queuing of images when
+"IX",2006.03,2006.03,"F",.1,2,0)
+network throughput is at a premium.
+"IX",2006.03,2006.03,"F",1)
+S ^MAGQUEUE(2006.03,"F",X(1),$E(X(2),1,30),$E(X(3),1,30),DA)=""
+"IX",2006.03,2006.03,"F",1.4)
+I (($P(^MAGQUEUE(2006.03,DA,0),U)["JBTOHD")&($P(^MAGQUEUE(2006.03,DA,0),U,7)?1N.N))
+"IX",2006.03,2006.03,"F",2)
+K ^MAGQUEUE(2006.03,"F",X(1),$E(X(2),1,30),$E(X(3),1,30),DA)
+"IX",2006.03,2006.03,"F",2.4)
+I (($P(^MAGQUEUE(2006.03,DA,0),U)["JBTOHD")&($P(^MAGQUEUE(2006.03,DA,0),U,7)?1N.N))
+"IX",2006.03,2006.03,"F",2.5)
+K ^MAGQUEUE(2006.03,"F")
+"IX",2006.03,2006.03,"F",11.1,0)
+^.114IA^3^3
+"IX",2006.03,2006.03,"F",11.1,1,0)
+1^F^2006.03^.04^^1^F
+"IX",2006.03,2006.03,"F",11.1,1,3)
+
+"IX",2006.03,2006.03,"F",11.1,2,0)
+2^F^2006.03^6^30^2^F
+"IX",2006.03,2006.03,"F",11.1,2,3)
+
+"IX",2006.03,2006.03,"F",11.1,3,0)
+3^F^2006.03^7^30^3^F
+"IX",2006.03,2006.03,"F",11.1,3,3)
+
+"MBREQ")
+0
+"QUES","XPF1",0)
+Y
+"QUES","XPF1","??")
+^D REP^XPDH
+"QUES","XPF1","A")
+Shall I write over your |FLAG| File
+"QUES","XPF1","B")
+YES
+"QUES","XPF1","M")
+D XPF1^XPDIQ
+"QUES","XPF2",0)
+Y
+"QUES","XPF2","??")
+^D DTA^XPDH
+"QUES","XPF2","A")
+Want my data |FLAG| yours
+"QUES","XPF2","B")
+YES
+"QUES","XPF2","M")
+D XPF2^XPDIQ
+"QUES","XPI1",0)
+YO
+"QUES","XPI1","??")
+^D INHIBIT^XPDH
+"QUES","XPI1","A")
+Want KIDS to INHIBIT LOGONs during the install
+"QUES","XPI1","B")
+YES
+"QUES","XPI1","M")
+D XPI1^XPDIQ
+"QUES","XPM1",0)
+PO^VA(200,:EM
+"QUES","XPM1","??")
+^D MG^XPDH
+"QUES","XPM1","A")
+Enter the Coordinator for Mail Group '|FLAG|'
+"QUES","XPM1","B")
+
+"QUES","XPM1","M")
+D XPM1^XPDIQ
+"QUES","XPO1",0)
+Y
+"QUES","XPO1","??")
+^D MENU^XPDH
+"QUES","XPO1","A")
+Want KIDS to Rebuild Menu Trees Upon Completion of Install
+"QUES","XPO1","B")
+YES
+"QUES","XPO1","M")
+D XPO1^XPDIQ
+"QUES","XPZ1",0)
+Y
+"QUES","XPZ1","??")
+^D OPT^XPDH
+"QUES","XPZ1","A")
+Want to DISABLE Scheduled Options, Menu Options, and Protocols
+"QUES","XPZ1","B")
+YES
+"QUES","XPZ1","M")
+D XPZ1^XPDIQ
+"QUES","XPZ2",0)
+Y
+"QUES","XPZ2","??")
+^D RTN^XPDH
+"QUES","XPZ2","A")
+Want to MOVE routines to other CPUs
+"QUES","XPZ2","B")
+NO
+"QUES","XPZ2","M")
+D XPZ2^XPDIQ
+"SEC","^DIC",2006.03,2006.03,0,"AUDIT")
+
+"SEC","^DIC",2006.03,2006.03,0,"DD")
+@
+"SEC","^DIC",2006.03,2006.03,0,"DEL")
+@
+"SEC","^DIC",2006.03,2006.03,0,"LAYGO")
+@
+"SEC","^DIC",2006.03,2006.03,0,"RD")
+@
+"SEC","^DIC",2006.03,2006.03,0,"WR")
+@
+"VER")
+8.0^22.0
+"^DD",2006.03,2006.03,0)
+FIELD^^10^13
+"^DD",2006.03,2006.03,0,"DDA")
+N
+"^DD",2006.03,2006.03,0,"DT")
+3001213
+"^DD",2006.03,2006.03,0,"ID",.001)
+W "   ",Y
+"^DD",2006.03,2006.03,0,"ID",.04)
+S %I=Y,Y=$S('$D(^(0)):"",$D(^MAG(2006.1,+$P(^(0),U,12),0))#2:$P(^(0),U,1),1:""),C=$P(^DD(2006.1,.01,0),U,2) D Y^DIQ:Y]"" W "   ",Y,@("$E("_DIC_"%I,0),0)") S Y=%I K %I
+"^DD",2006.03,2006.03,0,"NM","IMAGE BACKGROUND QUEUE")
+
+"^DD",2006.03,2006.03,0,"PT",2006.031,1)
+
+"^DD",2006.03,2006.03,0,"PT",2006.034,.01)
+
+"^DD",2006.03,2006.03,0,"VRPK")
+MAG
+"^DD",2006.03,2006.03,.001,0)
+NUMBER^NJ8,0^^ ^K:+X'=X!(X>99999999)!(X<1)!(X?.E1"."1.N) X
+"^DD",2006.03,2006.03,.001,3)
+Type a number between 1 and 99999999, 0 Decimal Digits
+"^DD",2006.03,2006.03,.001,21,0)
+^^1^1^3001025^
+"^DD",2006.03,2006.03,.001,21,1,0)
+This is the internal entry number (IEN) of the QUEUE entry.
+"^DD",2006.03,2006.03,.001,"DT")
+3001025
+"^DD",2006.03,2006.03,.01,0)
+QUEUE NAME^F^^0;1^K:X[""""!($A(X)=45) X I $D(X) K:$L(X)>10!($L(X)<1) X
+"^DD",2006.03,2006.03,.01,1,0)
+^.1^^0
+"^DD",2006.03,2006.03,.01,3)
+Answer must be 1-10 characters in length.
+"^DD",2006.03,2006.03,.01,21,0)
+^^1^1^2970721^^^
+"^DD",2006.03,2006.03,.01,21,1,0)
+Name of the queue holding the entry.
+"^DD",2006.03,2006.03,.01,"DT")
+3050107
+"^DD",2006.03,2006.03,.04,0)
+PLACE^RP2006.1'^MAG(2006.1,^0;12^Q
+"^DD",2006.03,2006.03,.04,1,0)
+^.1^^0
+"^DD",2006.03,2006.03,.04,21,0)
+^^3^3^3050414^
+"^DD",2006.03,2006.03,.04,21,1,0)
+This field references the site parameter file. The Site parameter entry 
+"^DD",2006.03,2006.03,.04,21,2,0)
+defines all of the attributes of Vista Imaging local area network. This 
+"^DD",2006.03,2006.03,.04,21,3,0)
+includes facility user preferences, network write locations, etc.
+"^DD",2006.03,2006.03,.04,"DT")
+3050414
+"^DD",2006.03,2006.03,1,0)
+USER^P200'^VA(200,^0;2^Q
+"^DD",2006.03,2006.03,1,21,0)
+^^1^1^2970721^^^
+"^DD",2006.03,2006.03,1,21,1,0)
+Pointer to the user creating the entry in the queue.
+"^DD",2006.03,2006.03,1,"DT")
+2941220
+"^DD",2006.03,2006.03,2,0)
+SYSTEM VOLUME GROUP ID^F^^0;3^K:$L(X)>3!($L(X)<3) X
+"^DD",2006.03,2006.03,2,3)
+Answer must be 3 characters in length
+"^DD",2006.03,2006.03,2,21,0)
+^^1^1^2970721^^
+"^DD",2006.03,2006.03,2,21,1,0)
+The identification of the system used to create the entry in the queue.
+"^DD",2006.03,2006.03,2,"DT")
+3001213
+"^DD",2006.03,2006.03,3,0)
+REQUEST DATE & TIME^D^^0;4^S %DT="EST" D ^%DT S X=Y K:Y<1 X
+"^DD",2006.03,2006.03,3,21,0)
+^^1^1^2970721^^
+"^DD",2006.03,2006.03,3,21,1,0)
+The date and time that the entry was placed into the queue.
+"^DD",2006.03,2006.03,3,"DT")
+2941220
+"^DD",2006.03,2006.03,4,0)
+COMPLETION STATUS^F^^0;5^K:$L(X)>60!($L(X)<1) X
+"^DD",2006.03,2006.03,4,1,0)
+^.1^^0
+"^DD",2006.03,2006.03,4,3)
+Answer must be 1-60 characters in length.
+"^DD",2006.03,2006.03,4,21,0)
+^^5^5^2970721^
+"^DD",2006.03,2006.03,4,21,1,0)
+The status of the handing of the request by the Background Processor. The
+"^DD",2006.03,2006.03,4,21,2,0)
+field is null until the entry is processed in the background. A positive
+"^DD",2006.03,2006.03,4,21,3,0)
+value indicates a successful completion of the request. A negative value
+"^DD",2006.03,2006.03,4,21,4,0)
+indicates a failure to complete the request. Explanatory text follows the
+"^DD",2006.03,2006.03,4,21,5,0)
+numeric status in this field
+"^DD",2006.03,2006.03,4,"DT")
+3041022
+"^DD",2006.03,2006.03,5,0)
+COMPLETION DATE & TIME^D^^0;6^S %DT="EST" D ^%DT S X=Y K:Y<1 X
+"^DD",2006.03,2006.03,5,21,0)
+^^1^1^2950318^
+"^DD",2006.03,2006.03,5,21,1,0)
+The date and time that the background processor finished the request.
+"^DD",2006.03,2006.03,5,"DT")
+2941220
+"^DD",2006.03,2006.03,6,0)
+IMAGE POINTER^F^^0;7^K:$L(X)>20!($L(X)<1) X
+"^DD",2006.03,2006.03,6,1,0)
+^.1^^0
+"^DD",2006.03,2006.03,6,3)
+Answer must be 1-20 characters in length.
+"^DD",2006.03,2006.03,6,21,0)
+^.001^1^1^3000705^^
+"^DD",2006.03,2006.03,6,21,1,0)
+Pointer to file 2005.
+"^DD",2006.03,2006.03,6,"DT")
+3041102
+"^DD",2006.03,2006.03,7,0)
+QUEUE TYPE^F^^0;8^K:$L(X)>20!($L(X)<1) X
+"^DD",2006.03,2006.03,7,1,0)
+^.1^^0
+"^DD",2006.03,2006.03,7,3)
+Answer must be 1-20 characters in length.
+"^DD",2006.03,2006.03,7,21,0)
+^^1^1^2980323^
+"^DD",2006.03,2006.03,7,21,1,0)
+Type of Background or DICOM processor queued process.
+"^DD",2006.03,2006.03,7,"DT")
+3041109
+"^DD",2006.03,2006.03,8,0)
+QUEUED SEQUENCE NUMBER^F^^0;9^K:$L(X)>20!($L(X)<1) X
+"^DD",2006.03,2006.03,8,3)
+Answer must be 1-20 characters in length.
+"^DD",2006.03,2006.03,8,21,0)
+^^2^2^2980323^
+"^DD",2006.03,2006.03,8,21,1,0)
+If this field is blank then this queued process record represents is
+"^DD",2006.03,2006.03,8,21,2,0)
+in its initial instantiation.
+"^DD",2006.03,2006.03,8,"DT")
+2980323
+"^DD",2006.03,2006.03,9,0)
+FILEPATH^F^^0;10^K:$L(X)>20!($L(X)<1) X
+"^DD",2006.03,2006.03,9,3)
+Answer must be 1-20 characters in length.
+"^DD",2006.03,2006.03,9,21,0)
+^.001^1^1^3000707^^
+"^DD",2006.03,2006.03,9,21,1,0)
+Complete Filepath passed from the foreground to the Background Processor.
+"^DD",2006.03,2006.03,9,"DT")
+2980423
+"^DD",2006.03,2006.03,10,0)
+QUEUE DATA ITEM 5^F^^0;11^K:$L(X)>20!($L(X)<1) X
+"^DD",2006.03,2006.03,10,3)
+Answer must be 1-20 characters in length.
+"^DD",2006.03,2006.03,10,21,0)
+^^1^1^2970721^^
+"^DD",2006.03,2006.03,10,21,1,0)
+Fifth parameter passed from the foreground to the Background Processor.
+"^DD",2006.03,2006.03,10,"DT")
+2950321
+"^DIC",2006.03,2006.03,0)
+IMAGE BACKGROUND QUEUE^2006.03
+"^DIC",2006.03,2006.03,0,"GL")
+^MAGQUEUE(2006.03,
+"^DIC",2006.03,2006.03,"%",0)
+^1.005^1^1
+"^DIC",2006.03,2006.03,"%",1,0)
+MAG
+"^DIC",2006.03,2006.03,"%","B","MAG",1)
+
+"^DIC",2006.03,2006.03,"%D",0)
+^^23^23^3010619^
+"^DIC",2006.03,2006.03,"%D",1,0)
+ +---------------------------------------------------------------+
+"^DIC",2006.03,2006.03,"%D",2,0)
+ |                                                               |
+"^DIC",2006.03,2006.03,"%D",3,0)
+ | Property of the US Government.                                |
+"^DIC",2006.03,2006.03,"%D",4,0)
+ | No permission to copy or redistribute this software is given. |
+"^DIC",2006.03,2006.03,"%D",5,0)
+ | Use of unreleased versions of this software requires the user |
+"^DIC",2006.03,2006.03,"%D",6,0)
+ | to execute a written test agreement with the VistA Imaging    |
+"^DIC",2006.03,2006.03,"%D",7,0)
+ | Development Office of the Department of Veterans Affairs,     |
+"^DIC",2006.03,2006.03,"%D",8,0)
+ | telephone (301) 734-0100.                                     |
+"^DIC",2006.03,2006.03,"%D",9,0)
+ |                                                               |
+"^DIC",2006.03,2006.03,"%D",10,0)
+ | The Food and Drug Administration classifies this software as  |
+"^DIC",2006.03,2006.03,"%D",11,0)
+ | a medical device.  As such, it may not be changed in any way. |
+"^DIC",2006.03,2006.03,"%D",12,0)
+ | Modifications to this software may result in an adulterated   |
+"^DIC",2006.03,2006.03,"%D",13,0)
+ | medical device under 21CFR820, the use of which is considered |
+"^DIC",2006.03,2006.03,"%D",14,0)
+ | to be a violation of US Federal Statutes.                     |
+"^DIC",2006.03,2006.03,"%D",15,0)
+ |                                                               |
+"^DIC",2006.03,2006.03,"%D",16,0)
+ +---------------------------------------------------------------+
+"^DIC",2006.03,2006.03,"%D",17,0)
+ 
+"^DIC",2006.03,2006.03,"%D",18,0)
+ The Image Background Queue file is a holding file for all the entries to
+"^DIC",2006.03,2006.03,"%D",19,0)
+be processed by the Background Processor.  Entries are made by Clinical
+"^DIC",2006.03,2006.03,"%D",20,0)
+Capture workstation, VistARad Diagnostic workstation, DICOM Image
+"^DIC",2006.03,2006.03,"%D",21,0)
+gateways or the Background Gui application for functions such as copying
+"^DIC",2006.03,2006.03,"%D",22,0)
+file to and from the jukebox and/or magnetic drives.   The Background GUI
+"^DIC",2006.03,2006.03,"%D",23,0)
+application will update entries as well as remove entries from this file.
+"^DIC",2006.03,"B","IMAGE BACKGROUND QUEUE",2006.03)
+
+**END**
+**END**

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<build xmlns="http://va.gov/VistA/kids/manifest" name="MAG*3.0*124" patch="124" patchName="VistA Imaging V3.0 - Patch 124" envCheckRoutine="" deleteEnvCheckRoutine="" preInstallRoutine="" deletePreInstalltRoutine="" postInstallRoutine="POS^MAGIP124" deletePostInstallRoutine="Yes">
+<requiredBuilds>
+<!-- action= 0:Warning only;1:Don't install, remove global;2:Don't install, leave global;
+ -->
+<requiredBuild name="MAG*3.0*104" action="2"/>
+</requiredBuilds>
+<components>
+<dataDictionaries>
+</dataDictionaries>
+<routines>
+<routine name="MAGIP124" export="MAGIP124.RTN"/>
+</routines>
+<rpcs>
+</rpcs>
+<options>
+</options>
+<securityKeys>
+</securityKeys>
+<protocols>
+</protocols>
+<templateLists>
+</templateLists>
+<hl7Applications>
+</hl7Applications>
+<hl7LogicalLinks>
+</hl7LogicalLinks>
+<parameterDefinitions>
+</parameterDefinitions>
+<parameterTemplates>
+</parameterTemplates>
+<printTemplates>
+</printTemplates>
+<sortTemplates>
+</sortTemplates>
+<inputTemplates>
+</inputTemplates>
+<forms>
+</forms>
+<functions>
+</functions>
+<dialogs>
+</dialogs>
+<bulletins>
+</bulletins>
+<mailGroups>
+</mailGroups>
+<helpFrames>
+</helpFrames>
+</components>
+</build>

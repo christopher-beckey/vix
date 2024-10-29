@@ -1,0 +1,26 @@
+HKCR
+{
+	SliceCalc.slicesX.1 = s 'slicesX Class'
+	{
+		CLSID = s '{F319F7FA-0F25-43f0-87D1-6BEFABCD0167}'
+	}
+	SliceCalc.slicesX = s 'slicesX Class'
+	{
+		CLSID = s '{F319F7FA-0F25-43f0-87D1-6BEFABCD0167}'
+		CurVer = s 'SliceCalc.slicesX.1'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {F319F7FA-0F25-43f0-87D1-6BEFABCD0167} = s 'slicesX Class'
+		{
+			ProgID = s 'SliceCalc.slicesX.1'
+			VersionIndependentProgID = s 'SliceCalc.slicesX'
+			ForceRemove 'Programmable'
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Apartment'
+			}
+			'TypeLib' = s '{92CF174F-66E9-4814-8BD5-62E13DDA885F}'
+		}
+	}
+}

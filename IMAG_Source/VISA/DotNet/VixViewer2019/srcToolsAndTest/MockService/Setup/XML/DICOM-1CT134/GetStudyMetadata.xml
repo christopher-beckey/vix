@@ -1,0 +1,64 @@
+﻿<studies>
+    <study>
+        <captureDate>11/25/2003 15:31</captureDate>
+        <capturedBy>IMAGPROVIDERONETHREEONE,ONETHREEONE</capturedBy>
+        <description>112403-214  CT EXAMPLE</description>
+        <event>COMPUTED TOMOGRAPHY</event>
+        <firstImage>
+            <captureDate>2003-11-25T15:31:00-05:00</captureDate>
+            <description>112403-214  CT EXAMPLE</description>
+            <diagnosticImageUri>imageURN=urn:vaimage:660-26732Mock-DICOM_1CT_WasBadLungLevel.DCM-9299999980V804874&amp;imageQuality=90&amp;contentType=application/dicom,image/j2k,application/dicom&amp;contentTypeWithSubType=application/dicom,image/j2k,application/dicom</diagnosticImageUri>
+            <dicomImageNumber></dicomImageNumber>
+            <dicomSequenceNumber></dicomSequenceNumber>
+            <imageId>urn:vaimage:660-26732Mock-DICOM_1CT_WasBadLungLevel.DCM-9299999980V804874</imageId>
+            <imageStatus>Viewable</imageStatus>
+            <imageType>TGA</imageType>
+            <imageViewStatus>Viewable</imageViewStatus>
+            <referenceImageUri>imageURN=urn:vaimage:660-26732Mock-DICOM_1CT_WasBadLungLevel.DCM-9299999980V804874&amp;imageQuality=70&amp;contentType=application/dicom,image/j2k,application/dicom&amp;contentTypeWithSubType=application/dicom,image/j2k,application/dicom</referenceImageUri>
+            <sensitive>false</sensitive>
+            <thumbnailImageUri>imageURN=urn:vaimage:660-26732Mock-DICOM_1CT_WasBadLungLevel.DCM-9299999980V804874&amp;imageQuality=20&amp;contentType=image/jpeg,image/x-targa,image/bmp,*/*</thumbnailImageUri>
+        </firstImage>
+        <firstImageId>urn:vaimage:660-26732Mock-DICOM_1CT_WasBadLungLevel.DCM-9299999980V804874</firstImageId>
+        <groupIen>7229</groupIen>
+        <imageCount>1</imageCount>
+        <package>RAD</package>
+        <type>IMAGE</type>
+        <noteTitle>   </noteTitle>
+        <origin>VA</origin>
+        <patientId>icn(9299999980V804874)</patientId>
+        <patientName>PATIENT,ONETWOZEROONE</patientName>
+        <procedureDate>2003-11-24T15:57:00-05:00</procedureDate>
+        <procedureDescription>CT</procedureDescription>
+        <sensitive>false</sensitive>
+        <serieses>
+            <series>
+                <images>
+                    <image>
+                        <captureDate>2003-11-25T15:31:00-05:00</captureDate>
+                        <description>112403-214  CT EXAMPLE</description>
+                        <diagnosticImageUri>imageURN=urn:vaimage:660-26732Mock-DICOM_1CT_WasBadLungLevel.DCM-1008861107V475740&amp;imageQuality=90&amp;contentType=application/dicom,image/j2k,application/dicom&amp;contentTypeWithSubType=application/dicom,image/j2k,application/dicom</diagnosticImageUri>
+                        <dicomImageNumber></dicomImageNumber>
+                        <dicomSequenceNumber></dicomSequenceNumber>
+                        <imageId>urn:vaimage:660-26732Mock-DICOM_1CT_WasBadLungLevel.DCM-1008861107V475740</imageId>
+                        <imageStatus>Viewable</imageStatus>
+                        <imageType>TGA</imageType>
+                        <imageViewStatus>Viewable</imageViewStatus>
+                        <sensitive>false</sensitive>
+                    </image>
+                </images>
+                <modality></modality>
+                <seriesNumber>1</seriesNumber>
+                <seriesUid></seriesUid>
+            </series>
+        </serieses>
+        <siteAbbreviation>SLC</siteAbbreviation>
+        <siteName>Salt Lake City, UT</siteName>
+        <siteNumber>660</siteNumber>
+        <specialtyDescription>RADIOLOGY</specialtyDescription>
+        <studyClass>CLIN</studyClass>
+        <studyId>urn:vastudy:660-7229-9299999980V804874</studyId>
+        <studyModalities>CT</studyModalities>
+        <studyPackage>RAD</studyPackage>
+        <studyType>IMAGE</studyType>
+    </study>
+</studies>

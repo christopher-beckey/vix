@@ -1,0 +1,754 @@
+KIDS Distribution saved on Jul 25, 2012@16:31:38
+Split from blank VI database - last patch SEQ81_P120
+**KIDS**:MAG*3.0*350_DD*2005.87^
+
+**INSTALL NAME**
+MAG*3.0*350_DD*2005.87
+"BLD",7730,0)
+MAG*3.0*350_DD*2005.87^IMAGING^0^3120725^n
+"BLD",7730,4,0)
+^9.64PA^2005.87^1
+"BLD",7730,4,2005.87,0)
+2005.87
+"BLD",7730,4,2005.87,222)
+y^y^f^^^^y
+"BLD",7730,4,"B",2005.87,2005.87)
+
+"BLD",7730,6.3)
+2
+"BLD",7730,"KRN",0)
+^9.67PA^779.2^20
+"BLD",7730,"KRN",.4,0)
+.4
+"BLD",7730,"KRN",.401,0)
+.401
+"BLD",7730,"KRN",.402,0)
+.402
+"BLD",7730,"KRN",.403,0)
+.403
+"BLD",7730,"KRN",.5,0)
+.5
+"BLD",7730,"KRN",.84,0)
+.84
+"BLD",7730,"KRN",3.6,0)
+3.6
+"BLD",7730,"KRN",3.8,0)
+3.8
+"BLD",7730,"KRN",9.2,0)
+9.2
+"BLD",7730,"KRN",9.8,0)
+9.8
+"BLD",7730,"KRN",19,0)
+19
+"BLD",7730,"KRN",19.1,0)
+19.1
+"BLD",7730,"KRN",101,0)
+101
+"BLD",7730,"KRN",409.61,0)
+409.61
+"BLD",7730,"KRN",771,0)
+771
+"BLD",7730,"KRN",779.2,0)
+779.2
+"BLD",7730,"KRN",870,0)
+870
+"BLD",7730,"KRN",8989.51,0)
+8989.51
+"BLD",7730,"KRN",8989.52,0)
+8989.52
+"BLD",7730,"KRN",8994,0)
+8994
+"BLD",7730,"KRN","B",.4,.4)
+
+"BLD",7730,"KRN","B",.401,.401)
+
+"BLD",7730,"KRN","B",.402,.402)
+
+"BLD",7730,"KRN","B",.403,.403)
+
+"BLD",7730,"KRN","B",.5,.5)
+
+"BLD",7730,"KRN","B",.84,.84)
+
+"BLD",7730,"KRN","B",3.6,3.6)
+
+"BLD",7730,"KRN","B",3.8,3.8)
+
+"BLD",7730,"KRN","B",9.2,9.2)
+
+"BLD",7730,"KRN","B",9.8,9.8)
+
+"BLD",7730,"KRN","B",19,19)
+
+"BLD",7730,"KRN","B",19.1,19.1)
+
+"BLD",7730,"KRN","B",101,101)
+
+"BLD",7730,"KRN","B",409.61,409.61)
+
+"BLD",7730,"KRN","B",771,771)
+
+"BLD",7730,"KRN","B",779.2,779.2)
+
+"BLD",7730,"KRN","B",870,870)
+
+"BLD",7730,"KRN","B",8989.51,8989.51)
+
+"BLD",7730,"KRN","B",8989.52,8989.52)
+
+"BLD",7730,"KRN","B",8994,8994)
+
+"DATA",2005.87,1,0)
+Rad All^RAD^CLIN^^^^^^0
+"DATA",2005.87,1,1)
+^1^.05
+"DATA",2005.87,2,0)
+Clin All^^CLIN^^^^^^0
+"DATA",2005.87,2,1)
+^1^.05
+"DATA",2005.87,3,0)
+Admin All^^ADMIN^^^^^^0
+"DATA",2005.87,3,1)
+^1^.05
+"DATA",2005.87,4,0)
+Clin 2 yr^^CLIN^^^^^^-24
+"DATA",2005.87,4,1)
+^1^.05
+"DATA",2005.87,5,0)
+Admin 10-10EZ All^^ADMIN^46,^^^^^0
+"DATA",2005.87,5,1)
+^1^.05
+"DATA",2005.87,6,0)
+Adv Directives^^CLIN^67^^^^^0
+"DATA",2005.87,6,1)
+^1^.05
+"DATA",2005.87,7,0)
+All^^^^^^^^0
+"DATA",2005.87,7,1)
+^1^.05
+"DATA",2005.87,8,0)
+All 2 yr^^^^^^^^-24
+"DATA",2005.87,8,1)
+^1^.05
+"DATA",2005.87,9,0)
+All 6 mth^^^^^^^^-6
+"DATA",2005.87,9,1)
+^1^.05
+"FIA",2005.87)
+IMAGE LIST FILTERS
+"FIA",2005.87,0)
+^MAG(2005.87,
+"FIA",2005.87,0,0)
+2005.87I
+"FIA",2005.87,0,1)
+y^y^f^^^^y
+"FIA",2005.87,0,10)
+
+"FIA",2005.87,0,11)
+
+"FIA",2005.87,0,"RLRO")
+
+"FIA",2005.87,0,"VR")
+3.0^MAG
+"FIA",2005.87,2005.87)
+0
+"MBREQ")
+0
+"PKG",454,-1)
+1^1
+"PKG",454,0)
+IMAGING^MAG^Imaging-V1 to release 
+"PKG",454,20,0)
+^9.402P^^
+"PKG",454,22,0)
+^9.49I^1^1
+"PKG",454,22,1,0)
+3.0^3020319^3120725^126
+"PKG",454,22,1,"PAH",1,0)
+350_DD^3120725
+"QUES","XPF1",0)
+Y
+"QUES","XPF1","??")
+^D REP^XPDH
+"QUES","XPF1","A")
+Shall I write over your |FLAG| File
+"QUES","XPF1","B")
+YES
+"QUES","XPF1","M")
+D XPF1^XPDIQ
+"QUES","XPF2",0)
+Y
+"QUES","XPF2","??")
+^D DTA^XPDH
+"QUES","XPF2","A")
+Want my data |FLAG| yours
+"QUES","XPF2","B")
+YES
+"QUES","XPF2","M")
+D XPF2^XPDIQ
+"QUES","XPI1",0)
+YO
+"QUES","XPI1","??")
+^D INHIBIT^XPDH
+"QUES","XPI1","A")
+Want KIDS to INHIBIT LOGONs during the install
+"QUES","XPI1","B")
+NO
+"QUES","XPI1","M")
+D XPI1^XPDIQ
+"QUES","XPM1",0)
+PO^VA(200,:EM
+"QUES","XPM1","??")
+^D MG^XPDH
+"QUES","XPM1","A")
+Enter the Coordinator for Mail Group '|FLAG|'
+"QUES","XPM1","B")
+
+"QUES","XPM1","M")
+D XPM1^XPDIQ
+"QUES","XPO1",0)
+Y
+"QUES","XPO1","??")
+^D MENU^XPDH
+"QUES","XPO1","A")
+Want KIDS to Rebuild Menu Trees Upon Completion of Install
+"QUES","XPO1","B")
+NO
+"QUES","XPO1","M")
+D XPO1^XPDIQ
+"QUES","XPZ1",0)
+Y
+"QUES","XPZ1","??")
+^D OPT^XPDH
+"QUES","XPZ1","A")
+Want to DISABLE Scheduled Options, Menu Options, and Protocols
+"QUES","XPZ1","B")
+NO
+"QUES","XPZ1","M")
+D XPZ1^XPDIQ
+"QUES","XPZ2",0)
+Y
+"QUES","XPZ2","??")
+^D RTN^XPDH
+"QUES","XPZ2","A")
+Want to MOVE routines to other CPUs
+"QUES","XPZ2","B")
+NO
+"QUES","XPZ2","M")
+D XPZ2^XPDIQ
+"SEC","^DIC",2005.87,2005.87,0,"AUDIT")
+@
+"SEC","^DIC",2005.87,2005.87,0,"DD")
+@
+"SEC","^DIC",2005.87,2005.87,0,"DEL")
+@
+"SEC","^DIC",2005.87,2005.87,0,"LAYGO")
+@
+"SEC","^DIC",2005.87,2005.87,0,"RD")
+@
+"SEC","^DIC",2005.87,2005.87,0,"WR")
+@
+"VER")
+8.0^22.0
+"^DD",2005.87,2005.87,0)
+FIELD^^22^20
+"^DD",2005.87,2005.87,0,"DDA")
+N
+"^DD",2005.87,2005.87,0,"DT")
+3030731
+"^DD",2005.87,2005.87,0,"ID",20)
+S %I=Y,Y=$S('$D(^(1)):"",$D(^VA(200,+$P(^(1),U,1),0))#2:$P(^(0),U,1),1:""),C=$P(^DD(200,.01,0),U,2) D Y^DIQ:Y]"" W "   ",Y,@("$E("_DIC_"%I,0),0)") S Y=%I K %I
+"^DD",2005.87,2005.87,0,"IX","B",2005.87,.01)
+
+"^DD",2005.87,2005.87,0,"IX","C",2005.87,20)
+
+"^DD",2005.87,2005.87,0,"IX","D",2005.87,21)
+
+"^DD",2005.87,2005.87,0,"NM","IMAGE LIST FILTERS")
+
+"^DD",2005.87,2005.87,0,"PT",2006.18,160)
+
+"^DD",2005.87,2005.87,0,"PT",2006.18,161)
+
+"^DD",2005.87,2005.87,0,"PT",2006.18,162)
+
+"^DD",2005.87,2005.87,0,"PT",2006.18,177)
+
+"^DD",2005.87,2005.87,0,"VRPK")
+MAG
+"^DD",2005.87,2005.87,.01,0)
+NAME^RF^^0;1^K:$L(X)>30!($L(X)<3)!'(X'?1P.E) X
+"^DD",2005.87,2005.87,.01,1,0)
+^.1
+"^DD",2005.87,2005.87,.01,1,1,0)
+2005.87^B
+"^DD",2005.87,2005.87,.01,1,1,1)
+S ^MAG(2005.87,"B",$E(X,1,30),DA)=""
+"^DD",2005.87,2005.87,.01,1,1,2)
+K ^MAG(2005.87,"B",$E(X,1,30),DA)
+"^DD",2005.87,2005.87,.01,3)
+Answer must be 3-30 characters in length.
+"^DD",2005.87,2005.87,.01,21,0)
+^.001^4^4^3030731^^^
+"^DD",2005.87,2005.87,.01,21,1,0)
+Descriptive name of filter.  Names aren't unique in the File, but are 
+"^DD",2005.87,2005.87,.01,21,2,0)
+forced to be unique by user.  i.e. A user can not have two filters 
+"^DD",2005.87,2005.87,.01,21,3,0)
+called "All Clinical", but two different users can have filters with
+"^DD",2005.87,2005.87,.01,21,4,0)
+the same name
+"^DD",2005.87,2005.87,.01,"DT")
+3030730
+"^DD",2005.87,2005.87,1,0)
+PACKAGE^F^^0;2^K:$L(X)>30!($L(X)<1) X
+"^DD",2005.87,2005.87,1,3)
+Answer must be 1-30 characters in length.
+"^DD",2005.87,2005.87,1,21,0)
+^.001^1^1^3041011^^^^
+"^DD",2005.87,2005.87,1,21,1,0)
+Corresponds to IMAGE File, Field #40 PACKAGE INDEX
+"^DD",2005.87,2005.87,1,"DT")
+3040923
+"^DD",2005.87,2005.87,2,0)
+CLASS^S^ADMIN:ADMIN;CLIN:CLIN;^0;3^Q
+"^DD",2005.87,2005.87,2,3)
+ADMIN or CLIN.  (If field is blank the entry will be considered both Admin and Clin.)
+"^DD",2005.87,2005.87,2,21,0)
+^.001^1^1^3030731^^^^
+"^DD",2005.87,2005.87,2,21,1,0)
+Corresponds to IMAGE File, Field #41 CLASS INDEX.
+"^DD",2005.87,2005.87,2,"DT")
+3030608
+"^DD",2005.87,2005.87,3,0)
+TYPE^F^^0;4^K:$L(X)>50!($L(X)<1) X
+"^DD",2005.87,2005.87,3,3)
+The INDEX TYPE(IENs) seperated by ':' included in this filter.
+"^DD",2005.87,2005.87,3,21,0)
+^.001^1^1^3030731^^
+"^DD",2005.87,2005.87,3,21,1,0)
+Corresponds to IMAGE File, Field #42 TYPE INDEX.
+"^DD",2005.87,2005.87,3,"DT")
+3030608
+"^DD",2005.87,2005.87,4,0)
+EVENT^F^^0;5^K:$L(X)>50!($L(X)<1) X
+"^DD",2005.87,2005.87,4,3)
+The INDEX PROC/EVENTS(IENs) seperated by ':' to include.
+"^DD",2005.87,2005.87,4,21,0)
+^^1^1^3030731^
+"^DD",2005.87,2005.87,4,21,1,0)
+Corresponds to IMAGE File, Field #43 PROC/EVENT INDEX.
+"^DD",2005.87,2005.87,4,"DT")
+3030608
+"^DD",2005.87,2005.87,5,0)
+SPEC^F^^0;6^K:$L(X)>50!($L(X)<1) X
+"^DD",2005.87,2005.87,5,3)
+The INDEX SPECIALTIES(IENs) seperated by ':' to include.
+"^DD",2005.87,2005.87,5,21,0)
+^^1^1^3030731^
+"^DD",2005.87,2005.87,5,21,1,0)
+Corresponds to IMAGE File, Field ##44 SPEC/SUBSPEC INDEX.
+"^DD",2005.87,2005.87,5,"DT")
+3030608
+"^DD",2005.87,2005.87,6,0)
+FROM^D^^0;7^S %DT="E" D ^%DT S X=Y K:Y<1 X
+"^DD",2005.87,2005.87,6,3)
+(No range limit on date)
+"^DD",2005.87,2005.87,6,21,0)
+^.001^3^3^3030731^^^^
+"^DD",2005.87,2005.87,6,21,1,0)
+If a specific date range is desired, these fields will be populated:
+"^DD",2005.87,2005.87,6,21,2,0)
+FROM and UNTIL.  This isn't a relative date range.  
+"^DD",2005.87,2005.87,6,21,3,0)
+If you want images for the last 3 months, use the RELATIVE RANGE FIELD.
+"^DD",2005.87,2005.87,6,"DT")
+3030731
+"^DD",2005.87,2005.87,7,0)
+UNTIL^D^^0;8^S %DT="E" D ^%DT S X=Y K:Y<1 X
+"^DD",2005.87,2005.87,7,3)
+(No range limit on date)
+"^DD",2005.87,2005.87,7,21,0)
+^.001^3^3^3030731^^^
+"^DD",2005.87,2005.87,7,21,1,0)
+If a specific date range is desired, these fields will be populated:
+"^DD",2005.87,2005.87,7,21,2,0)
+FROM and UNTIL.  This isn't a relative date range.
+"^DD",2005.87,2005.87,7,21,3,0)
+If you want images for the last 3 months, use the RELATIVE RANGE FIELD.
+"^DD",2005.87,2005.87,7,"DT")
+3030731
+"^DD",2005.87,2005.87,8,0)
+RELATIVE RANGE^NJ1,0^^0;9^K:+X'=X!(X>0)!(X<-120)!(X?.E1"."1N.N) X
+"^DD",2005.87,2005.87,8,1,0)
+^.1^^0
+"^DD",2005.87,2005.87,8,3)
+Enter the number of Months to search backwards.  -3 = search 3 months back.
+"^DD",2005.87,2005.87,8,21,0)
+^.001^5^5^3030731^^^^
+"^DD",2005.87,2005.87,8,21,1,0)
+This is a relative number of months to search backwards for Images.
+"^DD",2005.87,2005.87,8,21,2,0)
+  -1 means search back 1 month
+"^DD",2005.87,2005.87,8,21,3,0)
+ -12 means search back 1 year  etc.
+"^DD",2005.87,2005.87,8,21,4,0)
+  0  means get all (unless a specific date range exists
+"^DD",2005.87,2005.87,8,21,5,0)
+     in the From and Until Date Fields.
+"^DD",2005.87,2005.87,8,"DT")
+3030616
+"^DD",2005.87,2005.87,9,0)
+ORIGIN^F^^2;1^K:$L(X)>50!($L(X)<1) X
+"^DD",2005.87,2005.87,9,1,0)
+^.1^^0
+"^DD",2005.87,2005.87,9,3)
+Answer must be 1-50 characters in length.
+"^DD",2005.87,2005.87,9,21,0)
+^^3^3^3030731^
+"^DD",2005.87,2005.87,9,21,1,0)
+This field determines which scope of images to include in the filter
+"^DD",2005.87,2005.87,9,21,2,0)
+possible values of scope are VA and NON-VA.
+"^DD",2005.87,2005.87,9,21,3,0)
+Corresponds to IMAGE File, Field #45 ORIGIN INDEX.
+"^DD",2005.87,2005.87,9,"DT")
+3030730
+"^DD",2005.87,2005.87,10,0)
+IMAGE STATUS^F^^2;2^K:$L(X)>60!($L(X)<1) X
+"^DD",2005.87,2005.87,10,3)
+Enter list of image statuses separated by commas (1-60 characters).
+"^DD",2005.87,2005.87,10,4)
+N MAGMSG D HELP^DIE(2005,,113,"U","MAGMSG"),MSG^DIALOG("HW",,,5,"MAGMSG"),EN^DDIOL(" ")
+"^DD",2005.87,2005.87,10,20,0)
+^.3LA^1^1
+"^DD",2005.87,2005.87,10,20,1,0)
+MAG*3*93
+"^DD",2005.87,2005.87,10,21,0)
+^^10^10^3090213^
+"^DD",2005.87,2005.87,10,21,1,0)
+This field stores the list of image statuses
+"^DD",2005.87,2005.87,10,21,2,0)
+(internal or external values) separated by commas 
+"^DD",2005.87,2005.87,10,21,3,0)
+that limit the search results.
+"^DD",2005.87,2005.87,10,21,4,0)
+ 
+"^DD",2005.87,2005.87,10,21,5,0)
+If the field is empty, then image status is not 
+"^DD",2005.87,2005.87,10,21,6,0)
+considered during the search defined by this 
+"^DD",2005.87,2005.87,10,21,7,0)
+filter.
+"^DD",2005.87,2005.87,10,21,8,0)
+ 
+"^DD",2005.87,2005.87,10,21,9,0)
+See the IMAGE STATUS field (113) of the IMAGE 
+"^DD",2005.87,2005.87,10,21,10,0)
+file (#2005) for more details.
+"^DD",2005.87,2005.87,10,23,0)
+^^1^1^3090213^
+"^DD",2005.87,2005.87,10,23,1,0)
+Added by the patch MAG*3*93.
+"^DD",2005.87,2005.87,10,"DT")
+3090213
+"^DD",2005.87,2005.87,11,0)
+DESCRIPTION CONTAINS^F^^2;3^K:$L(X)>60!($L(X)<1) X
+"^DD",2005.87,2005.87,11,3)
+Enter part of image short description (1-60 characters).
+"^DD",2005.87,2005.87,11,20,0)
+^.3LA^1^1
+"^DD",2005.87,2005.87,11,20,1,0)
+MAG*3*93
+"^DD",2005.87,2005.87,11,21,0)
+^^7^7^3090213^
+"^DD",2005.87,2005.87,11,21,1,0)
+If this field is not empty, then the filter 
+"^DD",2005.87,2005.87,11,21,2,0)
+considers an image as a possible search result
+"^DD",2005.87,2005.87,11,21,3,0)
+only if its short description contains the value
+"^DD",2005.87,2005.87,11,21,4,0)
+of this field. The comparison is case insensitive.
+"^DD",2005.87,2005.87,11,21,5,0)
+ 
+"^DD",2005.87,2005.87,11,21,6,0)
+See the SHORT DESCRIPTION field (10) of the IMAGE 
+"^DD",2005.87,2005.87,11,21,7,0)
+file (#2005) for more details.
+"^DD",2005.87,2005.87,11,23,0)
+^^1^1^3090213^
+"^DD",2005.87,2005.87,11,23,1,0)
+Added by the patch MAG*3*93.
+"^DD",2005.87,2005.87,11,"DT")
+3090123
+"^DD",2005.87,2005.87,12,0)
+CAPTURED BY^P200'^VA(200,^2;4^Q
+"^DD",2005.87,2005.87,12,3)
+Select the user who captured the images.
+"^DD",2005.87,2005.87,12,20,0)
+^.3LA^1^1
+"^DD",2005.87,2005.87,12,20,1,0)
+MAG*3*93
+"^DD",2005.87,2005.87,12,21,0)
+^^5^5^3090213^
+"^DD",2005.87,2005.87,12,21,1,0)
+If this field has a value, then the filter 
+"^DD",2005.87,2005.87,12,21,2,0)
+considers only images captured by this user.
+"^DD",2005.87,2005.87,12,21,3,0)
+ 
+"^DD",2005.87,2005.87,12,21,4,0)
+See the IMAGE SAVE BY field (8) of the IMAGE file 
+"^DD",2005.87,2005.87,12,21,5,0)
+(#2005) for more details.
+"^DD",2005.87,2005.87,12,23,0)
+^^1^1^3090213^
+"^DD",2005.87,2005.87,12,23,1,0)
+Added by the patch MAG*3*93.
+"^DD",2005.87,2005.87,12,"DT")
+3090123
+"^DD",2005.87,2005.87,13,0)
+USE CAPTURE DATES^S^0:NO;1:YES;^2;5^Q
+"^DD",2005.87,2005.87,13,3)
+Select YES to search in capture date range instead of procedure/exam date range.
+"^DD",2005.87,2005.87,13,20,0)
+^.3LA^1^1
+"^DD",2005.87,2005.87,13,20,1,0)
+MAG*3*93
+"^DD",2005.87,2005.87,13,21,0)
+^^8^8^3090213^
+"^DD",2005.87,2005.87,13,21,1,0)
+If value of this field is YES, then filter's date 
+"^DD",2005.87,2005.87,13,21,2,0)
+range parameters are considered as image capture 
+"^DD",2005.87,2005.87,13,21,3,0)
+dates (see the DATE/TIME IMAGE SAVED field (7) of
+"^DD",2005.87,2005.87,13,21,4,0)
+the IMAGE file (#2005) for more details).
+"^DD",2005.87,2005.87,13,21,5,0)
+ 
+"^DD",2005.87,2005.87,13,21,6,0)
+Otherwise, they are interpreted as procedure/exam
+"^DD",2005.87,2005.87,13,21,7,0)
+dates (see the PROCEDURE/EXAM DATE/TIME field (15)
+"^DD",2005.87,2005.87,13,21,8,0)
+of the IMAGE file (#2005) for more details).
+"^DD",2005.87,2005.87,13,23,0)
+^^1^1^3090213^
+"^DD",2005.87,2005.87,13,23,1,0)
+Added by the patch MAG*3*93.
+"^DD",2005.87,2005.87,13,"DT")
+3090123
+"^DD",2005.87,2005.87,14,0)
+DAY RANGE^S^0:Today;1:Yesterday;2:2 Days Ago;3:3 Days Ago;4:Last 2 Days (thru today);5:Last 3 Days (thru today);6:Last Full Week (starts on Sunday);7:Current Week (starts on Sunday);^2;6^Q
+"^DD",2005.87,2005.87,14,3)
+Select predefined date range for image search.
+"^DD",2005.87,2005.87,14,20,0)
+^.3LA^1^1
+"^DD",2005.87,2005.87,14,20,1,0)
+MAG*3*93
+"^DD",2005.87,2005.87,14,21,0)
+^^6^6^3090302^
+"^DD",2005.87,2005.87,14,21,1,0)
+This field allows selection of predefined short 
+"^DD",2005.87,2005.87,14,21,2,0)
+date ranges. This is especially useful during the
+"^DD",2005.87,2005.87,14,21,3,0)
+image verification process.
+"^DD",2005.87,2005.87,14,21,4,0)
+ 
+"^DD",2005.87,2005.87,14,21,5,0)
+This filter parameter is mutually exclusive with 
+"^DD",2005.87,2005.87,14,21,6,0)
+the range defined by the RELATIVE RANGE field (8).
+"^DD",2005.87,2005.87,14,23,0)
+^.001^1^1^3090302^^
+"^DD",2005.87,2005.87,14,23,1,0)
+Added by the patch MAG*3*93.
+"^DD",2005.87,2005.87,14,"DT")
+3090123
+"^DD",2005.87,2005.87,15,0)
+COLUMN WIDTHS^F^^3;1^K:$L(X)>90!($L(X)<1) X
+"^DD",2005.87,2005.87,15,3)
+Enter comma separated list of column widths (1-90 characters).
+"^DD",2005.87,2005.87,15,20,0)
+^.3LA^1^1
+"^DD",2005.87,2005.87,15,20,1,0)
+MAG*3*93
+"^DD",2005.87,2005.87,15,21,0)
+^^3^3^3090213^
+"^DD",2005.87,2005.87,15,21,1,0)
+This field stores comma separated list of column 
+"^DD",2005.87,2005.87,15,21,2,0)
+widths (in pixels) that is applied to the image
+"^DD",2005.87,2005.87,15,21,3,0)
+list view when this filter is used.
+"^DD",2005.87,2005.87,15,23,0)
+^^1^1^3090213^
+"^DD",2005.87,2005.87,15,23,1,0)
+Added by the patch MAG*3*93.
+"^DD",2005.87,2005.87,15,"DT")
+3090213
+"^DD",2005.87,2005.87,16,0)
+PERCENT^NJ3,0^^2;7^K:+X'=X!(X>100)!(X<0)!(X?.E1"."1N.N) X
+"^DD",2005.87,2005.87,16,3)
+Enter percentage of found images that will be returned as the search results.
+"^DD",2005.87,2005.87,16,20,0)
+^.3LA^1^1
+"^DD",2005.87,2005.87,16,20,1,0)
+MAG*3*93
+"^DD",2005.87,2005.87,16,21,0)
+^^31^31^3090302^
+"^DD",2005.87,2005.87,16,21,1,0)
+If this field is populated, it stores the
+"^DD",2005.87,2005.87,16,21,2,0)
+percentage of images selected by the filter that
+"^DD",2005.87,2005.87,16,21,3,0)
+is returned as the result of the image search.
+"^DD",2005.87,2005.87,16,21,4,0)
+ 
+"^DD",2005.87,2005.87,16,21,5,0)
+  Firstly, images captured by the user (see the 
+"^DD",2005.87,2005.87,16,21,6,0)
+  the CAPTURED BY field (12) for more details) are
+"^DD",2005.87,2005.87,16,21,7,0)
+  preselected according to the date range and
+"^DD",2005.87,2005.87,16,21,8,0)
+  other criteria. Those of them that were captured
+"^DD",2005.87,2005.87,16,21,9,0)
+  immediately before and after patient changes are
+"^DD",2005.87,2005.87,16,21,10,0)
+  stored to the "priority" temporary buffer. The
+"^DD",2005.87,2005.87,16,21,11,0)
+  others are stored to the regular temporary
+"^DD",2005.87,2005.87,16,21,12,0)
+  buffer.
+"^DD",2005.87,2005.87,16,21,13,0)
+ 
+"^DD",2005.87,2005.87,16,21,14,0)
+  Then, the requested maximum number of images is
+"^DD",2005.87,2005.87,16,21,15,0)
+  calculated according to the total number of 
+"^DD",2005.87,2005.87,16,21,16,0)
+  preselected entries and the value stored in this
+"^DD",2005.87,2005.87,16,21,17,0)
+  field.
+"^DD",2005.87,2005.87,16,21,18,0)
+     
+"^DD",2005.87,2005.87,16,21,19,0)
+  If the number of entries in the "priority" 
+"^DD",2005.87,2005.87,16,21,20,0)
+  buffer is less than the calculated maximum
+"^DD",2005.87,2005.87,16,21,21,0)
+  number of images and the regular buffer is not
+"^DD",2005.87,2005.87,16,21,22,0)
+  empty, then missing quantity of preselected
+"^DD",2005.87,2005.87,16,21,23,0)
+  images is merged to the "priority" buffer from
+"^DD",2005.87,2005.87,16,21,24,0)
+  the regular one.
+"^DD",2005.87,2005.87,16,21,25,0)
+ 
+"^DD",2005.87,2005.87,16,21,26,0)
+  Finally, no more than the maximum number of
+"^DD",2005.87,2005.87,16,21,27,0)
+  entries is returned from the "priority" buffer
+"^DD",2005.87,2005.87,16,21,28,0)
+  as the result of the search.
+"^DD",2005.87,2005.87,16,21,29,0)
+  
+"^DD",2005.87,2005.87,16,21,30,0)
+If this field is empty, then the regular image
+"^DD",2005.87,2005.87,16,21,31,0)
+query is performed.
+"^DD",2005.87,2005.87,16,23,0)
+^.001^5^5^3090302^^^
+"^DD",2005.87,2005.87,16,23,1,0)
+See the description of the MAG4 IMAGE LIST remote 
+"^DD",2005.87,2005.87,16,23,2,0)
+procedure (the "S" control flag and the MAXNUM
+"^DD",2005.87,2005.87,16,23,3,0)
+parameter) for more details.
+"^DD",2005.87,2005.87,16,23,4,0)
+ 
+"^DD",2005.87,2005.87,16,23,5,0)
+Added by the patch MAG*3*93.
+"^DD",2005.87,2005.87,16,"DT")
+3090126
+"^DD",2005.87,2005.87,20,0)
+USER^P200'^VA(200,^1;1^Q
+"^DD",2005.87,2005.87,20,1,0)
+^.1
+"^DD",2005.87,2005.87,20,1,1,0)
+2005.87^C
+"^DD",2005.87,2005.87,20,1,1,1)
+S ^MAG(2005.87,"C",$E(X,1,30),DA)=""
+"^DD",2005.87,2005.87,20,1,1,2)
+K ^MAG(2005.87,"C",$E(X,1,30),DA)
+"^DD",2005.87,2005.87,20,1,1,"%D",0)
+^^1^1^3030608^
+"^DD",2005.87,2005.87,20,1,1,"%D",1,0)
+Cross reference for filters for a specific user.
+"^DD",2005.87,2005.87,20,1,1,"DT")
+3030608
+"^DD",2005.87,2005.87,20,3)
+Enter the User of the Filter
+"^DD",2005.87,2005.87,20,21,0)
+^.001^1^1^3030730^^
+"^DD",2005.87,2005.87,20,21,1,0)
+Users can have their own filters.  This field determines the user.
+"^DD",2005.87,2005.87,20,"DT")
+3030608
+"^DD",2005.87,2005.87,21,0)
+PUBLIC^S^1:PUBLIC;^1;2^Q
+"^DD",2005.87,2005.87,21,1,0)
+^.1
+"^DD",2005.87,2005.87,21,1,1,0)
+2005.87^D
+"^DD",2005.87,2005.87,21,1,1,1)
+S ^MAG(2005.87,"D",$E(X,1,30),DA)=""
+"^DD",2005.87,2005.87,21,1,1,2)
+K ^MAG(2005.87,"D",$E(X,1,30),DA)
+"^DD",2005.87,2005.87,21,1,1,"%D",0)
+^^1^1^3030608^
+"^DD",2005.87,2005.87,21,1,1,"%D",1,0)
+All public filters will be available for all users.
+"^DD",2005.87,2005.87,21,1,1,"DT")
+3030608
+"^DD",2005.87,2005.87,21,3)
+Public filters will be displayed on the Filter (File) menu for all users.
+"^DD",2005.87,2005.87,21,21,0)
+^.001^1^1^3030731^^^
+"^DD",2005.87,2005.87,21,21,1,0)
+If a filter is public, it will be displayed on the Filter (File) menu for all users.
+"^DD",2005.87,2005.87,21,"DT")
+3030608
+"^DD",2005.87,2005.87,22,0)
+CREATED BY^P200'^VA(200,^1;3^Q
+"^DD",2005.87,2005.87,22,3)
+This is the person that created the filter.
+"^DD",2005.87,2005.87,22,21,0)
+^.001^2^2^3030731^^^
+"^DD",2005.87,2005.87,22,21,1,0)
+A function (future) of the Imaging Filter window will be that a user
+"^DD",2005.87,2005.87,22,21,2,0)
+will be able to create a Filter for another user.
+"^DD",2005.87,2005.87,22,"DT")
+3030608
+"^DIC",2005.87,2005.87,0)
+IMAGE LIST FILTERS^2005.87
+"^DIC",2005.87,2005.87,0,"GL")
+^MAG(2005.87,
+"^DIC",2005.87,2005.87,"%",0)
+^1.005^^0
+"^DIC",2005.87,2005.87,"%D",0)
+^1.001^2^2^3030730^^^^
+"^DIC",2005.87,2005.87,"%D",1,0)
+This file holds Image Filters created by each user, and Created by an 
+"^DIC",2005.87,2005.87,"%D",2,0)
+Imaging system manager as public filters, to be available for all users.
+"^DIC",2005.87,"B","IMAGE LIST FILTERS",2005.87)
+
+**END**
+**END**

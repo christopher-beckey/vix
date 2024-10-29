@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-module
+  type="WEB"
+  name="CacheWeb"
+  id="myeclipse.655321"
+  context-root="/CacheWeb"
+  j2ee-spec="6.0"
+  archive="CacheWeb.war">
+  <attributes>
+    <attribute name="webrootdir" value="/war" />
+  </attributes>
+</project-module>
+

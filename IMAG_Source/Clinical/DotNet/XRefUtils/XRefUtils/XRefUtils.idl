@@ -1,0 +1,60 @@
+// XRefUtils.idl : IDL source for XRefUtils
+//
+
+// This file will be processed by the MIDL tool to
+// produce the type library (XRefUtils.tlb) and marshalling code.
+
+import "oaidl.idl";
+import "ocidl.idl";
+
+[
+	object,
+	uuid(CB9438F3-33C1-4322-8D80-CDB42F223670),
+	dual,
+	nonextensible,
+	pointer_default(unique)
+]
+interface IRadiologyImage : IDispatch{
+	[propget, id(1)] HRESULT ProjectionIndex([out, retval] SHORT* pVal);
+	[propput, id(1)] HRESULT ProjectionIndex([in] SHORT newVal);
+	[propget, id(2)] HRESULT TagValue([in] LONG group, [in] LONG element, [out, retval] BSTR* pVal);
+	[propput, id(2)] HRESULT TagValue([in] LONG group, [in] LONG element, [in] BSTR newVal);
+	[propget, id(3)] HRESULT UserData([out, retval] VARIANT* pVal);
+	[propput, id(3)] HRESULT UserData([in] VARIANT newVal);
+	[id(4)] HRESULT SetTag([in] LONG group, [in] LONG element, [in] BSTR newValue);
+};
+[
+	object,
+	uuid(89F140FF-44F0-45D1-83A5-6A99896697E9),
+	dual,
+	nonextensible,
+	pointer_default(unique)
+]
+interface IXRefLUT : IDispatch{
+	[id(1)] HRESULT GetXRefLine([in] IRadiologyImage* image1, [in] IRadiologyImage* image2, [in,out] LONG* success, [in,out] LONG* planeId, [in,out] VARIANT* line);
+	[id(2)] HRESULT GetNearestImage([in] IRadiologyImage* image, [in] VARIANT images, [in] LONG posX, [in] LONG posY, [in,out] IRadiologyImage** nearestImage);
+	[id(3)] HRESULT RegisterImage([in] IRadiologyImage* image);
+};
+[
+	uuid(E95A13F4-63AC-4C9F-9393-B00E3ED6D7E4),
+	version(1.0),
+]
+library XRefUtilsLib
+{
+	importlib("stdole2.tlb");
+	[
+		uuid(A09B8B23-BD28-42D5-8756-E04EFAC128BB)		
+	]
+	coclass RadiologyImage
+	{
+		[default] interface IRadiologyImage;
+	};
+	[
+		uuid(425DCE0C-58C7-4DC7-AE25-41A16AB96595)		
+	]
+	coclass XRefLUT
+	{
+		[default] interface IXRefLUT;
+	};
+};
+

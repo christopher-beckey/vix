@@ -1,0 +1,126 @@
+MAGDMFB9 ;WOIFO/PMK - Program to build DICOM Master File ; 12/27/2005 08:26
+ ;;3.0;IMAGING;**11,30,69**;MAR 19, 2002;;NOV 7, 2007
+ ;; Per VHA Directive 2004-038, this routine should not be modified.
+ ;; +---------------------------------------------------------------+
+ ;; | Property of the US Government.                                |
+ ;; | No permission to copy or redistribute this software is given. |
+ ;; | Use of unreleased versions of this software requires the user |
+ ;; | to execute a written test agreement with the VistA Imaging    |
+ ;; | Development Office of the Department of Veterans Affairs,     |
+ ;; | telephone (301) 734-0100.                                     |
+ ;; | The Food and Drug Administration classifies this software as  |
+ ;; | a medical device.  As such, it may not be changed in any way. |
+ ;; | Modifications to this software may result in an adulterated   |
+ ;; | medical device under 21CFR820, the use of which is considered |
+ ;; | to be a violation of US Federal Statutes.                     |
+ ;; +---------------------------------------------------------------+
+ ;;
+ Q
+ ;
+PROVIDER ; Provider Application List (SCPs)
+ N D0,D1,D2,FILE,RECORD,STATUS,TSFLAG
+ ;
+ S FILE=$$INIT^MAGDMFB(2006.586,"Provider Application","SCP_List")
+ Q:FILE=""
+ ;
+ S TSFLAG=0 ; no transfer syntax is yet defined (initial state)
+ K ^MAGDICOM(2006.586)
+ S ^MAGDICOM(2006.586,0)="PROVIDER APPLICATION^2006.586^^"
+ ;
+ S STATUS=$$OPEN^MAGOSFIL(FILE,"R")
+ I STATUS<0 D  Q
+ . D MESSAGE^MAGDMLOG(1,0,"Open Error: "_STATUS,"t")
+ . S FATAL=FATAL+1
+ . Q
+ F  D  Q:STATUS'=""
+ . S STATUS=$$READ^MAGOSFIL(FILE,.RECORD)
+ . I $$USEPRIN^MAGOSFIL(1)
+ . I STATUS<0 Q:+STATUS=-2  D  Q
+ . . D MESSAGE^MAGDMLOG(1,0,"Read Error: "_STATUS,"t")
+ . . S FATAL=FATAL+1
+ . . Q
+ . Q:RECORD=""  Q:RECORD=$C(12)
+ . I RECORD?1"#".E D  Q  ; comment
+ . . D:'SILENT MESSAGE^MAGDMLOG(1,0,"Comment: <<"_$P(RECORD,"#",2,999)_">>","t")
+ . . Q
+ . ; data
+ . I $P(RECORD,"|",1)'="" D PROVAPP1 Q
+ . D PROVAPP2
+ . Q
+ ; check for a missing transfer syntax for the last SOP Class
+ I TSFLAG=-1 D
+ . D MESSAGE^MAGDMLOG(1,0,"*** Error: Transfer Syntax is Missing ***","t")
+ . S FATAL=FATAL+1
+ . I FBSWITCH="FOREGROUND" R Z:DTIME
+ . Q
+ S STATUS=$$CLOSE^MAGOSFIL(FILE)
+ Q
+ ;
+PROVAPP1 ; VistA Application
+ N AETITLE
+ I $L(RECORD,"|")=2 D  Q
+ . I TSFLAG=-1 D
+ . . D MESSAGE^MAGDMLOG(1,0,"*** Error: Transfer Syntax is Missing ***","t")
+ . . S FATAL=FATAL+1
+ . . I FBSWITCH="FOREGROUND" R Z:DTIME
+ . . Q
+ . S AETITLE=$$UPPER^MAGOSMSC($P(RECORD,"|",1)) ; VistA application entity title
+ . S X=AETITLE_"^"_$P(RECORD,"|",2) ; application name
+ . D:'SILENT MESSAGE^MAGDMLOG(1,0,X,"t")
+ . S D0=$P(^MAGDICOM(2006.586,0),"^",3)+1
+ . S ^MAGDICOM(2006.586,D0,0)=X
+ . S ^MAGDICOM(2006.586,"B",AETITLE,D0)=""
+ . S $P(^MAGDICOM(2006.586,0),"^",3,4)=D0_"^"_D0
+ . S TSFLAG=0 ; no transfer syntax is yet defined (initial state)
+ . Q
+ D MESSAGE^MAGDMLOG(1,0,"*** FORMAT ERROR ***","t")
+ D MESSAGE^MAGDMLOG(1,0,RECORD,"t")
+ S FATAL=FATAL+1
+ I FBSWITCH="FOREGROUND" R Z:DTIME
+ Q
+ ;
+PROVAPP2 ; Presentation Context SOP Class or Transfer Syntax
+ N SOPCLASS,SOPUID
+ I $L(RECORD,"|")=2 D  Q  ; Presentation Context SOP Class
+ . I TSFLAG=-1 D
+ . . D MESSAGE^MAGDMLOG(1,0,"*** Error: Transfer Syntax is Missing ***","t")
+ . . S FATAL=FATAL+1
+ . . I FBSWITCH="FOREGROUND" R Z:DTIME
+ . . Q
+ . S SOPCLASS=$P(RECORD,"|",2)
+ . S SOPUID=$$GETUID^MAGDUID1(SOPCLASS)
+ . I SOPUID="" D
+ . . D MESSAGE^MAGDMLOG(1,0,"*** Error: SOP UID is Unknown ***","t")
+ . . S SOPUID="<unknown>",FATAL=FATAL+1
+ . . I FBSWITCH="FOREGROUND" R Z:DTIME
+ . . Q
+ . E  D:'SILENT MESSAGE^MAGDMLOG(1,0,"     "_SOPCLASS_" -- "_SOPUID,"t")
+ . S X=SOPUID_"^"_SOPCLASS
+ . S D1=$P($G(^MAGDICOM(2006.586,D0,1,0)),"^",3)+1
+ . S ^MAGDICOM(2006.586,D0,1,D1,0)=X
+ . S ^MAGDICOM(2006.586,D0,1,"B",SOPUID,D1)=""
+ . S $P(^MAGDICOM(2006.586,D0,1,0),"^",3,4)=D1_"^"_D1
+ . S TSFLAG=-1 ; no transfer syntax is yet defined
+ . Q
+ I $L(RECORD,"|")=3 D  Q  ; Transfer Syntax
+ . N TSYNTAX,TSUID
+ . S TSYNTAX=$P(RECORD,"|",3)
+ . S TSUID=$$GETUID^MAGDUID1(TSYNTAX)
+ . I TSUID="" D
+ . . D MESSAGE^MAGDMLOG(1,0,"*** Error: Transfer Syntax is Unknown ***","t")
+ . . S TSUID="<unknown>",FATAL=FATAL+1
+ . . I FBSWITCH="FOREGROUND" R Z:DTIME
+ . . Q
+ . E  D:'SILENT MESSAGE^MAGDMLOG(1,0,"          "_TSYNTAX_" -- "_TSUID,"t")
+ . S X=TSUID_"^"_TSYNTAX
+ . S D2=$P($G(^MAGDICOM(2006.586,D0,1,D1,1,0)),"^",3)+1
+ . S ^MAGDICOM(2006.586,D0,1,D1,1,D2,0)=X
+ . S ^MAGDICOM(2006.586,D0,1,D1,1,"B",TSUID,D2)=""
+ . S $P(^MAGDICOM(2006.586,D0,1,D1,1,0),"^",3,4)=D2_"^"_D2
+ . S TSFLAG=D2 ; at least one transfer syntax is now defined
+ . Q
+ D MESSAGE^MAGDMLOG(1,0,"*** FORMAT ERROR ***","t")
+ D MESSAGE^MAGDMLOG(1,0,RECORD,"t")
+ S FATAL=FATAL+1
+ I FBSWITCH="FOREGROUND" R Z:DTIME
+ Q

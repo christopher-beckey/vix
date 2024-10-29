@@ -1,0 +1,299 @@
+﻿<Views:BaseImagingView x:Class="DicomImporter.Views.ChooseExistingOrderView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:Converters="clr-namespace:ImagingClient.Infrastructure.Converters;assembly=ImagingClient.Infrastructure" 
+             xmlns:Views="clr-namespace:ImagingClient.Infrastructure.Views;assembly=ImagingClient.Infrastructure" mc:Ignorable="d"
+             xmlns:ImporterViews="clr-namespace:DicomImporter.Views"                    
+             Loaded="ScrollSelectedItemIntoView"
+             d:DesignHeight="565" d:DesignWidth="878" MinWidth="880">
+    <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+    </UserControl.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <Label Content="Choose Existing Order" 
+                   Style="{DynamicResource ResourceKey=SectionTitle}"
+                   Grid.Row="0" />
+        <StackPanel Grid.Row="1">
+            <ImporterViews:ImporterMessagesView x:Name="ImporterMessages" 
+                                  DataContext="{Binding ImporterMessagesViewModel}" />
+        </StackPanel>
+        
+        <GroupBox Header="VA Patient Information"
+                  Grid.Row="2">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <Label Grid.Row="0" 
+                           Grid.Column="0" 
+                           Content="Name:" />
+
+                <TextBox IsReadOnly="True" 
+                             Grid.Row="0" 
+                             Grid.Column="1" 
+                             Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}"
+                             Text="{Binding Path=CurrentReconciliation.Patient.PatientName}" />
+
+                <Label Grid.Row="0" 
+                           Grid.Column="2" 
+                           Content="DOB:" />
+
+                <TextBox IsReadOnly="True" 
+                             Grid.Row="0" 
+                             Grid.Column="3"
+                             Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}"
+                             Text="{Binding Path=CurrentReconciliation.Patient.FormattedBirthDate, Mode=OneWay}" />
+
+                <Label Grid.Row="1" 
+                           Grid.Column="0" 
+                           Content="ID:" />
+
+                <TextBox IsReadOnly="True" 
+                             Grid.Row="1" 
+                             Grid.Column="1" 
+                             Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}"
+                             Text="{Binding Path=CurrentReconciliation.Patient.Ssn}" />
+
+                <Label Grid.Row="1"
+                           Grid.Column="2" 
+                           Content="Sex:" />
+
+                <TextBox IsReadOnly="True"
+                             Grid.Column="3" 
+                             Grid.Row="1" 
+                             Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}"
+                             Text="{Binding Path=CurrentReconciliation.Patient.PatientSex}" />
+
+            </Grid>
+        </GroupBox>
+
+
+        <GroupBox Header="Original Study Information" 
+                  Grid.Row="3"
+                  Visibility="{Binding ShowOriginalStudyInfo, Converter={StaticResource BooleanToVisibilityConverter}}">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <Label Grid.Row="0" 
+                           Grid.Column="0" 
+                           Content="Study Date:" />
+
+                <TextBox IsReadOnly="True" 
+                             Grid.Row="0" 
+                             Grid.Column="1" 
+                             Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}"
+                             Text="{Binding Path=CurrentStudy.FormattedStudyDate, Mode=OneWay}" />
+
+                <Label Grid.Row="0" 
+                           Grid.Column="2" 
+                           Content="Modalities:" />
+
+                <TextBox IsReadOnly="True" 
+                             Grid.Row="0" 
+                             Grid.Column="3"
+                             Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}"
+                             Text="{Binding Path=CurrentStudy.ModalityCodes, Mode=OneWay}" />
+
+                <Label Grid.Row="1" 
+                           Grid.Column="0" 
+                           Content="Study Description:" />
+
+                <TextBox IsReadOnly="True" 
+                             Grid.Row="1" 
+                             Grid.Column="1" 
+                             Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}"
+                             Text="{Binding Path=CurrentStudy.Description}" />
+
+                <Label Grid.Row="1" 
+                           Grid.Column="2" 
+                           Content="Procedure:" />
+
+                <TextBox IsReadOnly="True" 
+                             Grid.Row="1" 
+                             Grid.Column="3"
+                             Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}"
+                             Text="{Binding Path=CurrentStudy.Procedure, Mode=OneWay}" />
+
+
+            </Grid>
+        </GroupBox>
+        <GroupBox Header="Existing Orders" 
+                      Grid.Row="4">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+ 
+                   <!-- <CheckBox 
+                        Content=" Set the exam to COMPLETE after import." 
+                        IsChecked="{Binding Path=CurrentReconciliation.IsStudyToBeReadByVaRadiologist, Converter={StaticResource BoolToOppositeBoolConverter}}" 
+                        IsEnabled="{Binding Path=IsStudyReadByVaRadiologistEnabled}"
+                        Margin="5,5,0,5" 
+                        Grid.Row="2"/> -->
+
+                <DataGrid Grid.Row="1"
+                              ItemsSource="{Binding Path=WorkItemDetails.CurrentStudy.Reconciliation.Orders}" 
+                              SelectedItem="{Binding Path=SelectedOrder}"
+                              Name="dgExistingOrders"
+                              EnableRowVirtualization="True" 
+                              SelectionMode="Single"
+                              EnableColumnVirtualization="True"
+                              VirtualizingStackPanel.IsVirtualizing="True"
+                              VirtualizingStackPanel.VirtualizationMode="Recycling">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn 
+                                        Header="Location" 
+                                        Binding="{Binding Path=Location}"
+                                        Width="Auto" />
+
+                        <DataGridTextColumn 
+                                        Header="Specialty" 
+                                        Binding="{Binding Path=Specialty}"
+                                        Width="Auto" />
+
+                        <DataGridTextColumn 
+                                        Header="Exam Status" 
+                                        Binding="{Binding Path=ExamStatus}"
+                                        Width="Auto" />
+
+                        <DataGridTextColumn 
+                                        Header="Order Date" 
+                                        Binding="{Binding Path=OrderDateAsDateTime}"
+                                        Width="Auto" />
+
+                        <DataGridTextColumn 
+                                        Header="Accession #" 
+                                        Binding="{Binding Path=AccessionNumber}" 
+                                        Width="Auto" />
+
+                        <DataGridTextColumn 
+                                        Header="Procedure Name" 
+                                        Binding="{Binding Path=Procedure.Name}" 
+                                        Width="Auto" />
+                        
+                        <DataGridTextColumn 
+                                        Header="Credit Method" 
+                                        Binding="{Binding Path=CreditMethod}" 
+                                        Width="Auto" />
+                        <DataGridTextColumn 
+                                        Header="Reason for Study" 
+                                        Binding="{Binding Path=OrderReason}" 
+                                        Width="*" />
+                    </DataGrid.Columns>
+                    
+                </DataGrid>
+
+                <Button Grid.Row="3" 
+                        Content="Refresh Orders" 
+                        Command="{Binding RefreshOrdersCommand}" 
+                        HorizontalAlignment="Right" />
+            </Grid>
+        </GroupBox>
+
+        <GroupBox Header="Status Change Details" Grid.Row="5" >
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <Label Grid.Row="0" 
+                           Grid.Column="0" 
+                           Content="Exam Status After Importing:" />
+                <!--Removed binding property {CurrentReconciliation.Order.StatusChangeDetails.RequestedStatus} and added {RequestedStatus} binding to retrieve dirty status.(p289-OITCOPondiS) -->
+                <TextBox IsReadOnly="True" 
+                             Grid.Row="0" 
+                             Grid.Column="1" 
+                             Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}"
+                             Text="{Binding Path=RequestedStatus}" /> 
+
+                <Label Grid.Row="0" 
+                           Grid.Column="2" 
+                           Content="Primary Diagnostic Code:" />
+                <!--Removed binding property {CurrentReconciliation.Order.StatusChangeDetails.PrimaryDiagnosticCode.DisplayName} and added {PrimaryDiagnosticCode} binding to retrieve dirty status.(p289-OITCOPondiS) -->
+                <TextBox IsReadOnly="True" 
+                             Grid.Row="0" 
+                             Grid.Column="3"
+                             Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}"
+                             Text="{Binding Path=PrimaryDiagnosticCode, Mode=OneWay}" />
+
+                <Label Grid.Row="1" 
+                           Grid.Column="0" 
+                           Content="Standard Report:" />
+                <!--Removed binding property {CurrentReconciliation.Order.StatusChangeDetails.StandardReportName} and added {StandardReportName} binding to retrieve dirty status.(p289-OITCOPondiS) -->
+                <TextBox IsReadOnly="True" 
+                             Grid.Row="1" 
+                             Grid.Column="1" 
+                             Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}"
+                             Text="{Binding Path=StandardReportName}" />
+
+                <Label Grid.Row="1"
+                           Grid.Column="2" 
+                           Content="# of Secondary Diagnostic Codes:" />
+                <!--Removed binding property {CurrentReconciliation.Order.StatusChangeDetails.SecondaryDiagnosticCodeCount} and added {NumOfSecondaryDiagnosticCodes} binding to retrieve dirty status.(p289-OITCOPondiS) -->
+                <TextBox IsReadOnly="True"
+                             Grid.Column="3" 
+                             Grid.Row="1" 
+                             Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}"
+                             Text="{Binding Path=NumOfSecondaryDiagnosticCodes}" />
+
+                <Button Grid.Row="2" Grid.ColumnSpan="4"  Name="buttonChangeStatus" Content="Change Details" Height="23" 
+                        Command="{Binding ChangeDetailsCommand}" HorizontalAlignment="Right" Margin="5,5,5,5" 
+                        VerticalAlignment="Top" />
+            </Grid>
+        </GroupBox>
+
+        <StackPanel Orientation="Horizontal" 
+                    HorizontalAlignment="Right"
+                    Grid.Row="6">
+            
+            <Button Name="btnBack" Content="&lt; Back" Command="{Binding NavigateBack}"/>
+            <Button Name="btnForward" Content="Next &gt;" Command="{Binding NavigateForward}"/>
+            <Button Name="btnCancel" Content="Cancel" Command="{Binding CancelReconciliationCommand}" />
+        </StackPanel>
+    </Grid>
+</Views:BaseImagingView>

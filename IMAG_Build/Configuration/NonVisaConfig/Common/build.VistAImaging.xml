@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+	
+	<!-- =============================================================================== -->
+	<!-- =============================================================================== -->	
+	<Target Name="GenerateProductCode">
+		<PropertyGroup>
+			<GuidGenFunction>
+				<![CDATA[
+					public static string ScriptMain() {
+					return System.Guid.NewGuid().ToString().ToUpper();
+					}
+				]]>
+			</GuidGenFunction>
+		</PropertyGroup>
+
+		<Script Language="C#" Code="$(GuidGenFunction)">
+			<Output TaskParameter="ReturnValue" PropertyName="ProductCode" /> 
+		</Script> 
+		<message text="Product Code is: $(ProductCode)" Importance="High"/>
+	</Target>
+
+	<!-- =============================================================================== -->
+	<!-- =============================================================================== -->			
+	<Target Name="GeneratePackageCode">
+		<PropertyGroup>
+			<GuidGenFunction>
+				<![CDATA[
+					public static string ScriptMain() {
+					return System.Guid.NewGuid().ToString().ToUpper();
+					}
+				]]>
+			</GuidGenFunction>
+		</PropertyGroup>
+
+		<Script Language="C#" Code="$(GuidGenFunction)">
+			<Output TaskParameter="ReturnValue" PropertyName="PackageCode" /> 
+		</Script> 
+		<message text="Package Code is: $(PackageCode)" Importance="High"/>
+	</Target>
+	
+	<!-- =============================================================================== -->
+	<!-- =============================================================================== -->	
+	<Target Name="CreateInstaller"  >
+		<ItemGroup Condition="'$(ProductCodeInclude)'!='false'">
+			<InstallShieldPropertyOverrides Include="{$(ProductCode)}" > 
+				<Property>ProductCode</Property> 
+			</InstallShieldPropertyOverrides>
+		</ItemGroup>
+		
+		<ItemGroup Condition="'$(PackageCodeInclude)'!='false'">
+		<InstallShieldPropertyOverrides Include="{$(PackageCode)}" > 
+				<Property>PackageCode</Property> 
+			</InstallShieldPropertyOverrides>
+		</ItemGroup>
+		
+		<Macrovision.InstallShield.Tasks.InstallShield	
+			Condition="'$(CreateMSI)'!='false' Or '$(CreateExe)'!='false'"
+			InstallShieldPath="$(InstallShieldPath)"
+			Project="$(InstallShieldProject)"
+			BuildCompressed="$(BuildCompressed)"
+			BuildSetupExe="%(InstallShieldReleaseConfiguration.SetupExe)"
+			ProductVersion="$(ProductVersion)"
+			ReleaseConfiguration="@(InstallShieldReleaseConfiguration)"
+			PathVariables="@(InstallShieldPathVariableOverrides)" 
+			PropertyOverrides="@(InstallShieldPropertyOverrides)" />
+	</Target>	
+
+</Project>
+
+ 

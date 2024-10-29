@@ -1,0 +1,58 @@
+#==============================================================================
+# static information common to all instances of LOG_a component
+#==============================================================================
+[ component_info ]
+name = LOG_a
+type = java_lib
+category = common_service_implementation_libs
+description = LOG Adapter - java reference implementation of LOG interface
+package_prefix = com.lbs
+slnreldir = .\jsrc\com\lbs\LOG_a
+
+[ required_components ]
+component = java_lib/DCF
+component = java_lib/LOG
+component = java_lib/APC
+component = java_lib/CDS
+[ debug_controls ]
+debug_flag = df_SHOW_CONSTRUCTORS, 0x0001, show object constructors
+debug_flag = df_SHOW_DESTRUCTORS, 0x0002, show object destructors
+debug_flag = df_SHOW_GENERAL_FLOW, 0x0004, show general flow
+debug_flag = df_SIMULATE_HARDWARE, 0x0008, simulate external devices
+debug_flag = df_SHOW_CFG_INFO, 0x0010, show configuration information
+debug_flag = df_SHOW_EXC_THROW, 0x0020, show exceptions before throwing
+
+#==============================================================================
+# per-instance information for the LOG_a component
+#==============================================================================
+[ LOG_a ]
+debug_flags = 0
+
+[ LOG_a/outputs ]
+[ LOG_a/outputs/server_output_1 ]
+type = LOGSERVER
+use_log_server = TRUE
+
+[ LOG_a/outputs/file_output_1 ]
+type = textfile
+message_types = *
+component_names = *
+# Note that changing the format of this name may affect the behavior of the web
+# utilities that manipulate log files (e.g., list_logs.pl, dcfrmlogs.pl).
+filename = C:/DCF/DCF-3.3.22c/tmp/log/${APPIBNAME}.${CNT}.log
+append_to_logfile = TRUE
+# Maximum size (KBytes) of each log file before rotating.
+max_size = 3000
+# Maximum number of log files before old ones are deleted.
+max_files = 5
+# Sync the file output on the disk on every write operation - this could affect performance
+sync_on_write = false
+character_encoding = UTF-8
+# true if a Byte-Order-Marker should be written at the start of the file.
+# Some UTF capable viewers use this to detect that the file is UTF format.
+write_bom = false
+
+[ LOG_a/outputs/std_output_1 ]
+type = stdout
+redirect_stdout = FALSE
+redirect_stderr = FALSE

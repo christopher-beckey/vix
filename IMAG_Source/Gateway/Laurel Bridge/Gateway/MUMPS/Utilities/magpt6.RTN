@@ -1,0 +1,49 @@
+magpt6 ;WOIFO/MLH - individual PACS tests ; 16 Jun 2005  1:51 PM
+ ; *** CAUTION:  not for distribution beyond Silver Spring OIFO!
+ q
+ ;
+B201 ; exception flow - message type reject
+ ;
+ n result,stat,logent
+ k HLA
+ ;
+ d LOG^magpt($t(B201)_" ; begin")
+ ;
+ ; new 'order' message
+ d ORM^magpt("NW","ORZ")
+ s stat=$$SEND^magptm("ORZ",.result)
+ s logent="B.2.1.1 ; "_result w !,logent,! d LOG^magpt(logent,$na(HLA("HLS")))
+ ;
+ d LOG^magpt($t(B201)_" ; end")
+ q
+ ;
+B202 ; exception flow - processing code reject
+ ;
+ n result,stat,logent
+ k HLA
+ ;
+ d LOG^magpt($t(A202)_" ; skipped") g B202X
+ d LOG^magpt($t(B202)_" ; begin")
+ ;
+ ; new 'order' message
+ d ORM^magpt("NW","ORX")
+ s stat=$$SEND^magptm("ORX",.result)
+ s logent="B.2.2.1 ; "_result w !,logent,! d LOG^magpt(logent,$na(HLA("HLS")))
+B202X ;
+ d LOG^magpt($t(B202)_" ; end")
+ q
+ ;
+B203 ; exception flow - HL7 version reject
+ ;
+ n result,stat,logent
+ k HLA
+ ;
+ d LOG^magpt($t(B203)_" ; begin")
+ ;
+ ; new 'order' message
+ d ORM^magpt("NW","ORY")
+ s stat=$$SEND^magptm("ORY",.result)
+ s logent="B.2.3.1 ; "_result w !,logent,! d LOG^magpt(logent,$na(HLA("HLS")))
+ ;
+ d LOG^magpt($t(B203)_" ; end")
+ q

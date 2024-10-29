@@ -1,0 +1,295 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="Current" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{A7C87337-F3E9-4AF3-8B65-44A6ABFE28E5}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>SCIP_Tool</RootNamespace>
+    <AssemblyName>SCIP_Tool</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">.\</SolutionDir>
+    <RestorePackages>false</RestorePackages>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\src3rdParty\ClearCanvas\Common\ClearCanvas.Common.csproj">
+      <Project>{f6ead428-e6cf-4df6-b2f3-d33d532c5343}</Project>
+      <Name>ClearCanvas.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\src3rdParty\ClearCanvas\Dicom\ClearCanvas.Dicom.csproj">
+      <Project>{ad9ece2b-8268-4115-8dc8-860fbd011fff}</Project>
+      <Name>ClearCanvas.Dicom</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\src3rdParty\ClearCanvas\ImageViewer\ClearCanvas.ImageViewer.csproj">
+      <Project>{85100d3e-471c-47c9-9687-abf25f617ed7}</Project>
+      <Name>ClearCanvas.ImageViewer</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Dicom.Core, Version=4.0.8.0, Culture=neutral, PublicKeyToken=3a13f649e28eb09a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>ManualPackages\fo-dicom.desktop.4.0.8\net45\Dicom.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="ImageResizer">
+      <HintPath>..\..\packages\ImageResizer.4.2.5\lib\net45\ImageResizer.dll</HintPath>
+    </Reference>
+    <Reference Include="Ookii.Dialogs.WinForms">
+      <HintPath>..\..\packages\Ookii.Dialogs.WinForms.1.2.0\lib\net45\Ookii.Dialogs.WinForms.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Design" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\..\src3rdParty\ClearCanvas\TestApp\Form1.cs">
+      <Link>DicomTools\Form1.cs</Link>
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="..\..\src3rdParty\ClearCanvas\TestApp\Form1.designer.cs">
+      <Link>DicomTools\Form1.designer.cs</Link>
+      <DependentUpon>Form1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Common.cs" />
+    <Compile Include="DicomTools\DicomTools.cs" />
+    <Compile Include="DicomTools\FormDicom.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DicomTools\FormDicom.designer.cs">
+      <DependentUpon>FormDicom.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormMain.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormMain.Designer.cs">
+      <DependentUpon>FormMain.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ImageProcessorFolderAllTypes\FormImage.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ImageProcessorFolderAllTypes\FormImage.Designer.cs">
+      <DependentUpon>FormImage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ImageVistAWorker\Form1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ImageVistAWorker\Form1.Designer.cs">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PasswordForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PasswordForm.Designer.cs">
+      <DependentUpon>PasswordForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ReformatLogs\FormReformatLogs.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ReformatLogs\FormReformatLogs.Designer.cs">
+      <DependentUpon>FormReformatLogs.cs</DependentUpon>
+    </Compile>
+    <Compile Include="RenameFolder\FormRenamer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RenameFolder\FormRenamer.Designer.cs">
+      <DependentUpon>FormRenamer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SecureToken\FormSecureToken.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SecureToken\FormSecureToken.designer.cs">
+      <DependentUpon>FormSecureToken.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SecureToken\Hydra.Common.Util.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="..\..\SharedAssemblyInfo.cs">
+      <Link>Properties\SharedAssemblyInfo.cs</Link>
+    </Compile>
+    <Compile Include="StudyTools\FormStudy.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="StudyTools\FormStudy.Designer.cs">
+      <DependentUpon>FormStudy.cs</DependentUpon>
+    </Compile>
+    <Compile Include="StudyTools\PseudoModule.cs" />
+    <Compile Include="Token2\FormToken2.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Token2\FormToken2.designer.cs">
+      <DependentUpon>FormToken2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="URLs\FormValidateUrl.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="URLs\FormValidateUrl.designer.cs">
+      <DependentUpon>FormValidateUrl.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="..\..\src3rdParty\ClearCanvas\TestApp\Form1.resx">
+      <Link>DicomTools\Form1.resx</Link>
+      <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DicomTools\FormDicom.resx">
+      <DependentUpon>FormDicom.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormMain.resx">
+      <DependentUpon>FormMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ImageProcessorFolderAllTypes\FormImage.resx">
+      <DependentUpon>FormImage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ImageVistAWorker\Form1.resx">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PasswordForm.resx">
+      <DependentUpon>PasswordForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReformatLogs\FormReformatLogs.resx">
+      <DependentUpon>FormReformatLogs.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RenameFolder\FormRenamer.resx">
+      <DependentUpon>FormRenamer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SecureToken\FormSecureToken.resx">
+      <DependentUpon>FormSecureToken.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <EmbeddedResource Include="StudyTools\FormStudy.resx">
+      <DependentUpon>FormStudy.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Token2\FormToken2.resx">
+      <DependentUpon>FormToken2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="URLs\FormValidateUrl.resx">
+      <DependentUpon>FormValidateUrl.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="ManualPackages\fo-dicom.desktop.4.0.8.zip" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <None Include="README.md">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\src3rdParty\Nancy\Nancy.csproj">
+      <Project>{34576216-0dca-4b0f-a0dc-9075e75a676f}</Project>
+      <Name>Nancy</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\src\HIX\Hydra.Dicom\Hydra.Dicom.csproj">
+      <Project>{b4d5e28a-3cb7-46fa-8245-4891b44387b7}</Project>
+      <Name>Hydra.Dicom</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\src\HIX\Hydra.IX.Common\Hydra.IX.Common.csproj">
+      <Project>{b59efbc2-574a-4c10-a2f3-16203bc4f109}</Project>
+      <Name>Hydra.IX.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\src\Hydra.Common\Hydra.Common.csproj">
+      <Project>{46ae373d-b654-4209-88f0-3e416c9f7267}</Project>
+      <Name>Hydra.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\src\Hydra.Log\Hydra.Log.csproj">
+      <Project>{39a30969-59a3-48b1-be80-975d6d833ec8}</Project>
+      <Name>Hydra.Log</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\src\Hydra.Security\Hydra.Security.csproj">
+      <Project>{46ae373d-b654-4209-88f0-3e416c9f7268}</Project>
+      <Name>Hydra.Security</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\src\Hydra.VistA.Web\Hydra.VistA.Web.csproj">
+      <Project>{30b19a34-e14c-44fa-8d2e-e009bc2d1fa4}</Project>
+      <Name>Hydra.VistA.Web</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\src\Hydra.VistA\Hydra.VistA.csproj">
+      <Project>{ce6da7b8-8418-4e63-a481-09bb23f13565}</Project>
+      <Name>Hydra.VistA</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\src\Hydra.Web\Hydra.Web.csproj">
+      <Project>{4d8defb5-c1c6-48fc-a106-5914d44f90e6}</Project>
+      <Name>Hydra.Web</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="..\..\src3rdParty\ClearCanvas\ImageViewer\Rendering\BilinearInterpolation\x64\$(Configuration)\BilinearInterpolation.dll">
+      <Link>BilinearInterpolation.dll</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="ManualPackages\fo-dicom.desktop.4.0.8\net45\Dicom.Core.dll" />
+    <Content Include="ManualPackages\fo-dicom.desktop.4.0.8\net45\Dicom.Core.pdb" />
+    <Content Include="ManualPackages\fo-dicom.desktop.4.0.8\net45\Dicom.Core.XML" />
+    <Content Include="ManualPackages\readme.txt" />
+    <Content Include="StudyTools\Sample1.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PreBuildEvent>
+    </PreBuildEvent>
+  </PropertyGroup>
+  <PropertyGroup>
+    <PostBuildEvent>
+    </PostBuildEvent>
+  </PropertyGroup>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

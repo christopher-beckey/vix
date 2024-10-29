@@ -1,0 +1,10 @@
+	<!-- 
+	This makes the Cache Manager singleton itself available as a JNDI object.
+	This is NOT required for the VIX, it is used by the ImagingCacheWeb application.
+	-->
+	<Resource 
+		auth="Container" 
+		description="Cache Manager"
+		name="cacheManager" 
+		type="gov.va.med.imaging.storage.cache.CacheManager"
+		factory="gov.va.med.server.CacheResourceReferenceFactory" />

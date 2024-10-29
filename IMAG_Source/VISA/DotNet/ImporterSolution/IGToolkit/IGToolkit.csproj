@@ -1,0 +1,199 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.50727</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{442A2029-F4FA-4E28-892E-1AC030EFCA3E}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>IGToolkit</RootNamespace>
+    <AssemblyName>IGToolkit</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>2.0</OldToolsVersion>
+    <PublishUrl>http://localhost/IGViewer/</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Web</InstallFrom>
+    <UpdateEnabled>true</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>true</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <LangVersion>9.0</LangVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DebugSymbols>true</DebugSymbols>
+    <LangVersion>9.0</LangVersion>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AxInterop.GearCORELib">
+      <HintPath>..\Lib\AxInterop.GearCORELib.dll</HintPath>
+    </Reference>
+    <Reference Include="AxInterop.GearDISPLAYLib">
+      <HintPath>..\Lib\AxInterop.GearDISPLAYLib.dll</HintPath>
+    </Reference>
+    <Reference Include="AxInterop.GearFORMATSLib">
+      <HintPath>..\Lib\AxInterop.GearFORMATSLib.dll</HintPath>
+    </Reference>
+    <Reference Include="AxInterop.GearMEDLib">
+      <HintPath>..\Lib\AxInterop.GearMEDLib.dll</HintPath>
+    </Reference>
+    <Reference Include="AxInterop.GearPDFLib">
+      <HintPath>..\Lib\AxInterop.GearPDFLib.dll</HintPath>
+    </Reference>
+    <Reference Include="AxInterop.GearPROCESSINGLib">
+      <HintPath>..\Lib\AxInterop.GearPROCESSINGLib.dll</HintPath>
+    </Reference>
+    <Reference Include="AxInterop.GearVIEWLib">
+      <HintPath>..\Lib\AxInterop.GearVIEWLib.dll</HintPath>
+    </Reference>
+    <Reference Include="AxInterop.IGGUIWinLib">
+      <HintPath>..\Lib\AxInterop.IGGUIWinLib.dll</HintPath>
+    </Reference>
+    <Reference Include="AxInterop.VECTLib">
+      <HintPath>..\Lib\AxInterop.VECTLib.dll</HintPath>
+    </Reference>
+    <Reference Include="Interop.GearArtXLib">
+      <HintPath>..\Lib\Interop.GearArtXLib.dll</HintPath>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="Interop.GearCORELib">
+      <HintPath>..\Lib\Interop.GearCORELib.dll</HintPath>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="Interop.GearDISPLAYLib">
+      <HintPath>..\Lib\Interop.GearDISPLAYLib.dll</HintPath>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="Interop.GearFORMATSLib">
+      <HintPath>..\Lib\Interop.GearFORMATSLib.dll</HintPath>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="Interop.GearMEDLib">
+      <HintPath>..\Lib\Interop.GearMEDLib.dll</HintPath>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="Interop.GearPDFLib">
+      <HintPath>..\Lib\Interop.GearPDFLib.dll</HintPath>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="Interop.GearPROCESSINGLib">
+      <HintPath>..\Lib\Interop.GearPROCESSINGLib.dll</HintPath>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="Interop.GearVIEWLib">
+      <HintPath>..\Lib\Interop.GearVIEWLib.dll</HintPath>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="Interop.IGGUIWinLib">
+      <HintPath>..\Lib\Interop.IGGUIWinLib.dll</HintPath>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="Interop.VECTLib">
+      <HintPath>..\Lib\Interop.VECTLib.dll</HintPath>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="log4net, Version=2.0.12.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Lib\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Dicom\DicomHeaderRecord.cs" />
+    <Compile Include="GearControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="GearControl.Designer.cs">
+      <DependentUpon>GearControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dicom\DicomDataSet.cs" />
+    <Compile Include="IGCommon.cs" />
+    <Compile Include="IGComponentManager.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="LZWLib">
+      <Guid>{35F795A5-58BF-4C8B-AB71-992D5666284C}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+    </COMReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="GearControl.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>GearControl.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ImagingClient.Infrastructure\ImagingClient.Infrastructure.csproj">
+      <Project>{0C709BAB-8C69-4624-BE2D-2F3554CE8173}</Project>
+      <Name>ImagingClient.Infrastructure</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,39 @@
+<studies>
+  <study>
+    <captureDate>02/16/2021 13:52:33</captureDate>
+    <capturedBy>IMAGPROVIDERONETWOSIX,ONETWOSIX</capturedBy>
+    <description>Mock Service - STUDY</description>
+    <documentDate>2021-03-16T00:00:00-01:23</documentDate>
+    <event />
+    <firstImage>
+      <captureDate>2021-02-16T13:52:00-06:00</captureDate>
+      <description>MISCELLANEOUS - THUMB</description>
+      <diagnosticImageUri>imageURN=urn:vaimage:660-26732Mock-26732Mock-1008861107V475740&amp;imageQuality=100&amp;contentType=image/jpeg,*/*</diagnosticImageUri>
+      <dicomImageNumber />
+      <dicomSequenceNumber />
+      <documentDate>2021-04-16T00:00:00-15:00</documentDate>
+      <imageId>urn:vaimage:660-26732Mock-26732Mock-1008861107V475740</imageId>
+      <imageNumber>1</imageNumber>
+      <imageStatus>Viewable</imageStatus>
+      <imageType>JPG</imageType>
+      <imageViewStatus>Viewable</imageViewStatus>
+      <referenceImageUri />
+      <sensitive>false</sensitive>
+      <thumbnailImageUri>imageURN=urn:vaimage:660-26732Mock-26732Mock-1008861107V475740&amp;imageQuality=20&amp;contentType=image/jpeg,image/bmp,*/*</thumbnailImageUri>
+    </firstImage>
+    <firstImageId>urn:vaimage:660-26732Mock-26732Mock-1008861107V475740</firstImageId>
+    <groupIen>123</groupIen>
+    <imageCount>1</imageCount>
+    <package>NONE</package>
+    <type>MISCELLANEOUS - CLIN</type>
+    <noteTitle>
+    </noteTitle>
+    <origin>VA</origin>
+    <patientId>icn(1008861107V475740)</patientId>
+    <patientName>PATIENT,ONEZEROTWOTHREE</patientName>
+    <procedureDate>2021-02-16T00:01:00-09:00</procedureDate>
+    <procedureDescription>CLIN</procedureDescription>
+    <sensitive>false</sensitive>
+    <serieses>
+      <series>
+        <images>

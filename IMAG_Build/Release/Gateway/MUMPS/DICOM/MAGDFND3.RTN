@@ -1,0 +1,210 @@
+MAGDFND3 ;WOIFO/PMK/JSL/SAF - DICOM FIND Handler ; 08 Dec 2010 1:53 PM
+ ;;3.0;IMAGING;**10,30,51,54,53,49,99,123**;Mar 19, 2002;Build 60;Jul 16, 2012
+ ;; Per VHA Directive 2004-038, this routine should not be modified.
+ ;; +---------------------------------------------------------------+
+ ;; | Property of the US Government.                                |
+ ;; | No permission to copy or redistribute this software is given. |
+ ;; | Use of unreleased versions of this software requires the user |
+ ;; | to execute a written test agreement with the VistA Imaging    |
+ ;; | Development Office of the Department of Veterans Affairs,     |
+ ;; | telephone (301) 734-0100.                                     |
+ ;; | The Food and Drug Administration classifies this software as  |
+ ;; | a medical device.  As such, it may not be changed in any way. |
+ ;; | Modifications to this software may result in an adulterated   |
+ ;; | medical device under 21CFR820, the use of which is considered |
+ ;; | to be a violation of US Federal Statutes.                     |
+ ;; +---------------------------------------------------------------+
+ ;;
+ Q
+ ;
+ENTRY ; entry point to generate a C-FIND response
+ N ACNUMB,ADDRESS,ATTDOC,CPTCODE,CPTNAME,CPTSCHM,D,DFN,DIVISION,DOB,DCMPID
+ N ICN,MESSAGE,MSGHANDL,MSGDATE,MSGTIME,MULTIMSG
+ N PNAME,PREGSTAT,PRIORITY,PROCDESC,PROCIEN
+ N RACE,RECIPENT,REFDOC,REQDOC,REQPRPRI,REQSVC,ROLE
+ N SCHSDYDT,SEX,SITEDFN,SPSLOC,STATNUMB,STATUS,STUDYID,STUDYIEN,STUDYUID
+ N T,UID,UIDTYPE,WARD,X,Y
+ ;
+ S ROLE="SCP",PRIORITY="IMMEDIATE"
+ S MESSAGE="MODALITY WORKLIST FIND RESPONSE - PENDING",MSGHANDL=""
+ S UIDTYPE="NONE",UID(UIDTYPE)=""
+ ;
+ I MATCHES D  ; store multiple messages in a single file
+ . S MULTIMSG="OPEN",DIVISION=""
+ . F  S DIVISION=$O(^TMP("MAG",$J,"DICOM","MATCH",DIVISION)) Q:DIVISION=""  D
+ . . ; division loop
+ . . S DFN=""
+ . . F  S DFN=$O(^TMP("MAG",$J,"DICOM","MATCH",DIVISION,DFN)) Q:DFN=""  D
+ . . . ; patient loop
+ . . . I $$PATIENT^MAGDFND5() Q  ; patient not on file
+ . . . S STUDYIEN=""
+ . . . F  S STUDYIEN=$O(^TMP("MAG",$J,"DICOM","MATCH",DIVISION,DFN,STUDYIEN)) Q:STUDYIEN=""  D
+ . . . . ; study loop
+ . . . . I $$STUDY^MAGDFND5() Q  ; study/study uid not on file
+ . . . . D SAVEDATA,SAVEMISC,OUTPUT
+ . . . . S MULTIMSG="USE" ; multiple messages are stored in one file
+ . . . . Q
+ . . . Q
+ . . Q
+ . ;
+ . S MULTIMSG="CLOSE" ; this will force the file to be finally closed
+ . Q
+ E  I MATCHES="VistA" D  ; lookup study on main VistA system
+ . S MULTIMSG="OPEN"
+ . I $$ENTRY^MAGDFND4 D  ; get patient & study data from VistA database
+ . . D SAVEDATA,OUTPUT
+ . . S MULTIMSG="CLOSE" ; this will force the file to be finally closed
+ . . Q
+ . E  S MULTIMSG="" ; patient or study not found in VistA database
+ . Q
+ E  S MULTIMSG="" ; will be treated as a single message
+ ; output the final response with the status of SUCCESS
+ D SUCCESS^MAGDFND9
+ Q
+ ;
+SAVEDATA ; save the data for one C-FIND response
+ D TIMESTMP^MAGDFND0($H,.MSGDATE,.MSGTIME)
+ D MSGINIT^MAGDFCNS ; Initialize the ^TMP global for this message
+ S Y=$$HEX2DEC^MAGOSMSC("FF01") ; pending, optional keys are not supported
+ D SAVE^MAGDFCNS("0000,0900",Y) ; response status value
+ D SAVE^MAGDFCNS("0000,0120",OLDMSGID) ; message id of original request
+ D SAVE^MAGDFCNS("0008,0005","ISO_IR 100") ; default character set
+ D SAVE^MAGDFCNS("0008,1030",PROCDESC) ; study description
+ D SAVE^MAGDFCNS("0010,0010",PNAME) ; patient name
+ S Y=DCMPID I SSNFMT="N" S Y=$TR(Y,"-") ; remove dashes from SSN
+ D SAVE^MAGDFCNS("0010,0020",Y) ; patient id
+ S Y=$G(^MAGDICOM(2006.563,1,"ISSUER OF PATIENT ID"),$S($$ISIHS^MAGSPID():"USIHS",1:"USVHA"))  ;P123 IHS/VA
+ D SAVE^MAGDFCNS("0010,0021",Y) ; issuer of patient id
+ D SAVE^MAGDFCNS("0010,0030",DOB) ; date of birth
+ D SAVE^MAGDFCNS("0010,0040",SEX) ; patient sex
+ D SAVE^MAGDFCNS("0010,1000",ICN) ; other patient id (1st)
+ D SAVE^MAGDFCNS("0010,1000",SITEDFN) ; other patient id (2nd)
+ D SAVE^MAGDFCNS("0011,xx20,VA DHCP",DFN) ; Patient ID (DFN)
+ D SAVE^MAGDFCNS("0010,1040",ADDRESS) ; patient home address
+ D SAVE^MAGDFCNS("0010,2160",RACE) ; race
+ D SAVE^MAGDFCNS("0010,21C0",PREGSTAT) ; pregnancy status
+ D SAVE^MAGDFCNS("0038,0300",WARD) ; current patient location (ward)
+ ;
+ ; save study information
+ I ACNFMT="L" D  ; long mmddyy-nnnn accession number format
+ . D SAVE^MAGDFCNS("0008,0050",$G(ACNUMB)) ; accession number
+ . D SAVE^MAGDFCNS("0020,0010",$G(STUDYID)) ; study id (case number)
+ . Q
+ E  D  ; short nnnn (case number) accession number format
+ . D SAVE^MAGDFCNS("0008,0050",$G(STUDYID)) ; accession number (case #)
+ . D SAVE^MAGDFCNS("0020,0010",$G(ACNUMB)) ; study id (accession number)
+ . Q
+ ;
+ D SAVE^MAGDFCNS("0020,000D",STUDYUID) ; Study Instance UID
+ D SAVE^MAGDFCNS("0040,1001",$G(STUDYID)) ; requested proc id / case #
+ ;
+ D SEQPUSH^MAGDFCNS("0008,1110") ; Referenced Study Sequence
+ S Y=$$GETUID^MAGDUID1("Detached Study Management SOP Class (Retired)")
+ D SAVE^MAGDFCNS("0008,1150",Y) ; referenced sop class uid
+ D SAVE^MAGDFCNS("0008,1155",STUDYUID) ; referenced sop instance uid
+ D SEQPOP^MAGDFCNS
+ ;
+ D SEQPUSH^MAGDFCNS("0008,1120") ; Referenced Patient Sequence
+ S Y=$$GETUID^MAGDUID1("Detached Patient Management SOP Class (Retired)")
+ D SAVE^MAGDFCNS("0008,1150",Y) ; referenced sop class uid
+ S Y=$$PATIENT^MAGDUID1(STATNUMB,DFN)
+ D SAVE^MAGDFCNS("0008,1155",Y) ; referenced sop instance uid
+ D SEQPOP^MAGDFCNS
+ ;
+ ; save the CPT values
+ D SAVE^MAGDFCNS("0032,1060",CPTNAME) ; requested procedure description
+ D SEQPUSH^MAGDFCNS("0032,1064") ; Requested Procedure Code Sequence
+ D SAVE^MAGDFCNS("0008,0100",CPTCODE) ; code value
+ D SAVE^MAGDFCNS("0008,0102",CPTSCHM) ; coding scheme designator
+ D SAVE^MAGDFCNS("0008,0104",CPTNAME) ; code meaning
+ D SEQPOP^MAGDFCNS
+ ;
+ Q:'PROCSTEP  ; no scheduled procedure step information requested
+ ;
+ ; save procedure step information
+ D SAVE^MAGDFCNS("0040,1003",REQPRPRI) ; requested procedure priority
+ D SEQPUSH^MAGDFCNS("0040,0100") ; scheduled procedure step sequence
+ D SAVE^MAGDFCNS("0040,0001",$G(KEY("STATION AE TITLE"))) ; AE title
+ S D=$P(SCHSDYDT,"."),T=$E($P(SCHSDYDT,".",2)_"000000",1,6)
+ S $E(D)=$E(D)+17 ; date in yyyymmdd format, time in hhmmss format
+ D SAVE^MAGDFCNS("0040,0002",D) ; scheduled procedure start date
+ D SAVE^MAGDFCNS("0040,0003",T) ; scheduled procedure start time
+ D SAVE^MAGDFCNS("0008,0060",$G(MODALITY)) ; modality
+ D SAVE^MAGDFCNS("0040,0007",PROCDESC) ; scheduled procedure description
+ D SEQPUSH^MAGDFCNS("0040,0008") ; Scheduled Action Item Code Sequence
+ D SAVE^MAGDFCNS("0008,0100",PROCIEN) ; code value
+ D SAVE^MAGDFCNS("0008,0102","L") ; coding scheme designator
+ D SAVE^MAGDFCNS("0008,0104",PROCDESC) ; code meaning (also 0040,0007)
+ D SEQPOP^MAGDFCNS
+ D SAVE^MAGDFCNS("0040,0009",ACNUMB) ; scheduled procedure step id
+ D SAVE^MAGDFCNS("0040,0011",SPSLOC) ; scheduled procedure step location
+ D SAVE^MAGDFCNS("0040,0020",STATUS) ; scheduled procedure step status
+ D SEQPOP^MAGDFCNS
+ Q
+ ;
+SAVEMISC ; save miscellaneous information (not for old case number lookup)
+ N I,J,N,X,Y
+ ;
+ ; output medical alerts, if there are any for this patient
+ S X=$G(^MAGDWLST(2006.55,DIVISION,1,DFN,1,0))
+ I X'="" S N=$P(X,"^",3) F I=1:1:N D
+ . S X=$G(^MAGDWLST(2006.55,DIVISION,1,DFN,1,I,0))
+ . D SAVE^MAGDFCNS("0010,2000",X)
+ . Q
+ ;
+ ; output patient history, if present
+ S (I,J)=0 F  S I=$O(^MAGDWLST(2006.56,DIVISION,1,STUDYIEN,2,I)) Q:'I  D
+ . S X=$G(^MAGDWLST(2006.56,DIVISION,1,STUDYIEN,2,I,0)),J=I
+ . S X=$TR(X,$C(13,10))_$C(13,10) ; add <CR><LF> to the end of the line
+ . D MULTLINE^MAGDHRC6("0010,21B0",X)
+ . Q
+ ;
+ ; get the 64-character reason for the study (RA*5*75)
+ I J=0 S X="<No reason for the study was given>"
+ E  D
+ . S X="<See the Additional Patient History field>"
+ . I J>1 Q  ; multi-line reason for study is passed in the other field
+ . S Y=$G(^MAGDWLST(2006.56,DIVISION,1,STUDYIEN,2,1,0))
+ . I $L(Y)>64 Q  ; long line reason for study is passed in the other field
+ . S X=Y ; short line reason for the study is passed in both fields
+ . Q
+ D EXTRACT^MAGDWLPB("S",DIVISION,STUDYIEN,"0032,1030")
+ I $$GETDATA^MAGDFCNS("OUT","0032,1030")="" D
+ . D REPLACE^MAGDFCNS("0032,1030",X) ; 64-character reason for the study
+ . Q
+ S X=$$GETDATA^MAGDFCNS("OUT","0032,1030") ; reason for the study
+ D SAVE^MAGDFCNS("0040,1002",X) ; reason for the requested procedure
+ D SAVE^MAGDFCNS("0040,1400",X) ; requested procedure comments
+ ;
+ D EXTRACT^MAGDWLPB("S",DIVISION,STUDYIEN,"0008,0080") ; Institution Name
+ D EXTRACT^MAGDWLPB("S",DIVISION,STUDYIEN,"0032,4000") ; Study Comments (these are tech comments)
+ D EXTRACT^MAGDWLPB("S",DIVISION,STUDYIEN,"0040,2010") ; call back number
+ ;
+ ; referring/primary care doctor
+ I REFDOC'="" D  ; save referring doctor if there is one (i.e., inpatient)
+ . D SAVE^MAGDFCNS("0008,0090",REFDOC)
+ . Q
+ E  D  ; save the requesting doctor, otherwise (i.e., outpatient visit)
+ . D SAVE^MAGDFCNS("0008,0090",REQDOC) ; also saved in (0032,1032)
+ . Q
+ D SAVE^MAGDFCNS("0008,1050",ATTDOC) ; performing (attending) physician
+ D SAVE^MAGDFCNS("0032,1032",REQDOC) ; requesting physician
+ D SAVE^MAGDFCNS("0032,1033",REQSVC) ; requesting service
+ D SAVE^MAGDFCNS("0040,2010",CALLBACK) ; call back number
+ D SAVE^MAGDFCNS("0040,1010",RECIPENT) ; names of recipients of results
+ ;
+ D EXTRACT^MAGDWLPB("P",DIVISION,DFN,"0010,1020") ; Patient size (height)
+ D EXTRACT^MAGDWLPB("P",DIVISION,DFN,"0010,1030") ; Patient weight
+ D EXTRACT^MAGDWLPB("P",DIVISION,DFN,"0038,0010") ; Admission ID
+ D EXTRACT^MAGDWLPB("P",DIVISION,DFN,"0038,4000") ; Visit Comments (in/out patient)
+ D EXTRACT^MAGDWLPB("P",DIVISION,DFN,"0040,3001") ; Confidentiality Constraint
+ S X=$$GETDATA^MAGDFCNS("OUT","0040,3001")
+ D SAVE^MAGDFCNS("0040,1008",X) ; Confidentiality Code
+ ;
+ Q
+ ;
+ ;
+OUTPUT ; output one C-FIND response
+ D FILTER^MAGDFND1
+ D RESPONSE^MAGDDW1
+ Q

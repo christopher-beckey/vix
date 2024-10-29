@@ -1,0 +1,43 @@
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+	<comment>
+	The mapping of VA artifact types to LOINC codes.
+	This is a one to many mapping.  The LOINC codes (target values) are comma delimited
+	strings.  Note that a comma in a target value will require a code change.
+	</comment>
+	
+	<!-- 11-PATIENT RIGHTS AND RESPONSIBILITIES  -->
+	<entry key="PATIENT RIGHTS AND RESPONSIBILITIES">51851-4</entry>
+	
+	<!-- 50-CORRESPONDENCE  -->
+	<entry key="CORRESPONDENCE">47049-2</entry>
+	
+	<!-- 53-DENIAL LETTER  -->
+	<entry key="DENIAL LETTER">47049-2</entry>
+	
+	<!-- 54-DISCHARGE AGAINST MEDICAL ADVICE  -->
+	<entry key="DISCHARGE AGAINST MEDICAL ADVICE">18842-5</entry>
+	
+	<!-- 64-VALUABLES / BELONGINGS CHECKLIST  -->
+	<entry key="VALUABLES / BELONGINGS CHECKLIST">51851-4</entry>
+	
+	<!-- 73-VISIT RECORD  -->
+	<entry key="VISIT RECORD">34109-9</entry>
+	
+	<!-- 74-PROCEDURE RECORD  -->
+	<entry key="PROCEDURE RECORD">28570-0</entry>
+	
+	<!-- 78-DISCHARGE SUMMARY  -->
+	<entry key="DISCHARGE SUMMARY">18842-5</entry>
+	
+	<!-- 85-PROGRESS NOTE  -->
+	<entry key="PROGRESS NOTE">11542-8</entry>
+	
+	<!-- 91-REPORT OF CONTACT (CLINICAL)  -->
+	<entry key="REPORT OF CONTACT (CLINICAL)">34109-9</entry>
+	
+	<!-- 101-DISCHARGE INSTRUCTIONS  -->
+	<entry key="DISCHARGE INSTRUCTIONS">18842-5</entry>
+
+	
+</properties>

@@ -1,0 +1,228 @@
+KIDS Distribution saved on Jul 17, 2007@11:08:53
+Package for RPC named MAGQ QUD
+**KIDS**:MAG*3.0*364^
+
+**INSTALL NAME**
+MAG*3.0*364
+"BLD",6176,0)
+MAG*3.0*364^^0^3070717^y
+"BLD",6176,1,0)
+^^4^4^3070717^
+"BLD",6176,1,1,0)
+This package contains a KIDS component
+"BLD",6176,1,2,0)
+for Running Baseline.
+"BLD",6176,1,3,0)
+ 
+"BLD",6176,1,4,0)
+This package transports the remote procedure call named MAGQ QUD.
+"BLD",6176,4,0)
+^9.64PA^^
+"BLD",6176,6.3)
+1
+"BLD",6176,"KRN",0)
+^9.67PA^8989.52^19
+"BLD",6176,"KRN",.4,0)
+.4
+"BLD",6176,"KRN",.401,0)
+.401
+"BLD",6176,"KRN",.402,0)
+.402
+"BLD",6176,"KRN",.403,0)
+.403
+"BLD",6176,"KRN",.5,0)
+.5
+"BLD",6176,"KRN",.84,0)
+.84
+"BLD",6176,"KRN",3.6,0)
+3.6
+"BLD",6176,"KRN",3.8,0)
+3.8
+"BLD",6176,"KRN",9.2,0)
+9.2
+"BLD",6176,"KRN",9.8,0)
+9.8
+"BLD",6176,"KRN",19,0)
+19
+"BLD",6176,"KRN",19.1,0)
+19.1
+"BLD",6176,"KRN",101,0)
+101
+"BLD",6176,"KRN",409.61,0)
+409.61
+"BLD",6176,"KRN",771,0)
+771
+"BLD",6176,"KRN",870,0)
+870
+"BLD",6176,"KRN",8989.51,0)
+8989.51
+"BLD",6176,"KRN",8989.52,0)
+8989.52
+"BLD",6176,"KRN",8994,0)
+8994
+"BLD",6176,"KRN",8994,"NM",0)
+^9.68A^1^1
+"BLD",6176,"KRN",8994,"NM",1,0)
+MAGQ QUD^^0
+"BLD",6176,"KRN",8994,"NM","B","MAGQ QUD",1)
+
+"BLD",6176,"KRN","B",.4,.4)
+
+"BLD",6176,"KRN","B",.401,.401)
+
+"BLD",6176,"KRN","B",.402,.402)
+
+"BLD",6176,"KRN","B",.403,.403)
+
+"BLD",6176,"KRN","B",.5,.5)
+
+"BLD",6176,"KRN","B",.84,.84)
+
+"BLD",6176,"KRN","B",3.6,3.6)
+
+"BLD",6176,"KRN","B",3.8,3.8)
+
+"BLD",6176,"KRN","B",9.2,9.2)
+
+"BLD",6176,"KRN","B",9.8,9.8)
+
+"BLD",6176,"KRN","B",19,19)
+
+"BLD",6176,"KRN","B",19.1,19.1)
+
+"BLD",6176,"KRN","B",101,101)
+
+"BLD",6176,"KRN","B",409.61,409.61)
+
+"BLD",6176,"KRN","B",771,771)
+
+"BLD",6176,"KRN","B",870,870)
+
+"BLD",6176,"KRN","B",8989.51,8989.51)
+
+"BLD",6176,"KRN","B",8989.52,8989.52)
+
+"BLD",6176,"KRN","B",8994,8994)
+
+"KRN",8994,645,-1)
+0^1
+"KRN",8994,645,0)
+MAGQ QUD^QUPDTE^MAGQBTM^1^R
+"KRN",8994,645,1,0)
+^8994.01^1^1^2990302^^
+"KRN",8994,645,1,1,0)
+Updates the status field in the specified queue record.
+"KRN",8994,645,2,0)
+^8994.02A^2^2
+"KRN",8994,645,2,1,0)
+IEN^1^^1^1
+"KRN",8994,645,2,1,1,0)
+^^2^2^2990302^
+"KRN",8994,645,2,1,1,1,0)
+The internal entry number of the Vista Imaging Queue file - the queue item
+"KRN",8994,645,2,1,1,2,0)
+to be updated.
+"KRN",8994,645,2,2,0)
+UPDATE^1^^1^2
+"KRN",8994,645,2,2,1,0)
+^^6^6^2990302^
+"KRN",8994,645,2,2,1,1,0)
+The message string result of the process:
+"KRN",8994,645,2,2,1,2,0)
+piece 1 if positive indicates the successful completion of the queue task
+"KRN",8994,645,2,2,1,3,0)
+       if negative indicates that the queue was not successfully completed
+"KRN",8994,645,2,2,1,4,0)
+piece 2 is the process message
+"KRN",8994,645,2,2,1,5,0)
+piece 3 contains the network location reference (IEN) of the location
+"KRN",8994,645,2,2,1,6,0)
+    successfully copied to by the queue task
+"KRN",8994,645,2,"B","IEN",1)
+
+"KRN",8994,645,2,"B","UPDATE",2)
+
+"KRN",8994,645,2,"PARAMSEQ",1,1)
+
+"KRN",8994,645,2,"PARAMSEQ",2,2)
+
+"MBREQ")
+0
+"ORD",16,8994)
+8994;16;1;;;;;;;RPCDEL^XPDIA1
+"ORD",16,8994,0)
+REMOTE PROCEDURE
+"QUES","XPF1",0)
+Y
+"QUES","XPF1","??")
+^D REP^XPDH
+"QUES","XPF1","A")
+Shall I write over your |FLAG| File
+"QUES","XPF1","B")
+YES
+"QUES","XPF1","M")
+D XPF1^XPDIQ
+"QUES","XPF2",0)
+Y
+"QUES","XPF2","??")
+^D DTA^XPDH
+"QUES","XPF2","A")
+Want my data |FLAG| yours
+"QUES","XPF2","B")
+YES
+"QUES","XPF2","M")
+D XPF2^XPDIQ
+"QUES","XPI1",0)
+YO
+"QUES","XPI1","??")
+^D INHIBIT^XPDH
+"QUES","XPI1","A")
+Want KIDS to INHIBIT LOGONs during the install
+"QUES","XPI1","B")
+YES
+"QUES","XPI1","M")
+D XPI1^XPDIQ
+"QUES","XPM1",0)
+PO^VA(200,:EM
+"QUES","XPM1","??")
+^D MG^XPDH
+"QUES","XPM1","A")
+Enter the Coordinator for Mail Group '|FLAG|'
+"QUES","XPM1","B")
+
+"QUES","XPM1","M")
+D XPM1^XPDIQ
+"QUES","XPO1",0)
+Y
+"QUES","XPO1","??")
+^D MENU^XPDH
+"QUES","XPO1","A")
+Want KIDS to Rebuild Menu Trees Upon Completion of Install
+"QUES","XPO1","B")
+YES
+"QUES","XPO1","M")
+D XPO1^XPDIQ
+"QUES","XPZ1",0)
+Y
+"QUES","XPZ1","??")
+^D OPT^XPDH
+"QUES","XPZ1","A")
+Want to DISABLE Scheduled Options, Menu Options, and Protocols
+"QUES","XPZ1","B")
+YES
+"QUES","XPZ1","M")
+D XPZ1^XPDIQ
+"QUES","XPZ2",0)
+Y
+"QUES","XPZ2","??")
+^D RTN^XPDH
+"QUES","XPZ2","A")
+Want to MOVE routines to other CPUs
+"QUES","XPZ2","B")
+NO
+"QUES","XPZ2","M")
+D XPZ2^XPDIQ
+"VER")
+8.0^22.0
+**END**
+**END**

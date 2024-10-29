@@ -1,0 +1,451 @@
+<html>
+<body>
+<pre>
+<h1>Build Log</h1>
+<h3>
+--------------------Configuration: ctn_lib - Win32 Release--------------------
+</h3>
+<h3>Command Lines</h3>
+Creating temporary file "C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp\RSP6.tmp" with contents
+[
+/nologo /MD /W3 /GX /O2 /I "..\..\include" /D "WIN32" /D "NDEBUG" /D "_MBCS" /D "_LIB" /Fp"Release/ctn_lib.pch" /YX /Fo"Release/" /Fd"Release/" /FD /c 
+"C:\usr\ctn\facilities\fis\build.c"
+"C:\usr\ctn\facilities\services\cmd_valid.c"
+"C:\usr\ctn\facilities\condition\condition.c"
+"C:\usr\ctn\facilities\manage\control.c"
+"C:\usr\ctn\facilities\thread\ctnthread.c"
+"C:\usr\ctn\facilities\objects\dcm.c"
+"C:\usr\ctn\facilities\objects\dcm1.c"
+"C:\usr\ctn\facilities\objects\dcmcond.c"
+"C:\usr\ctn\facilities\objects\dcmdict.c"
+"C:\usr\ctn\facilities\objects\dcmsupport.c"
+"C:\usr\ctn\facilities\ddr\ddr.c"
+"C:\usr\ctn\facilities\manage\delete.c"
+"C:\usr\ctn\facilities\dulprotocol\dulcond.c"
+"C:\usr\ctn\facilities\dulprotocol\dulconstruct.c"
+"C:\usr\ctn\facilities\dulprotocol\dulfsm.c"
+"C:\usr\ctn\facilities\dulprotocol\dulparse.c"
+"C:\usr\ctn\facilities\dulprotocol\dulpresent.c"
+"C:\usr\ctn\facilities\dulprotocol\dulprotocol.c"
+"C:\usr\ctn\facilities\messages\dump.c"
+"C:\usr\ctn\facilities\fis\event.c"
+"C:\usr\ctn\facilities\services\find.c"
+"C:\usr\ctn\facilities\fis\fis.c"
+"C:\usr\ctn\facilities\fis\fiscond.c"
+"C:\usr\ctn\facilities\fis\fisdelete.c"
+"C:\usr\ctn\facilities\fis\fisget.c"
+"C:\usr\ctn\facilities\fis\fisinsert.c"
+"C:\usr\ctn\facilities\services\get.c"
+"C:\usr\ctn\facilities\gq\gq.c"
+"C:\usr\ctn\facilities\iap\iap.c"
+"C:\usr\ctn\facilities\iap\iapcond.c"
+"C:\usr\ctn\facilities\idb\idb.c"
+"C:\usr\ctn\facilities\idb\idbcond.c"
+"C:\usr\ctn\facilities\info_entity\ie.c"
+"C:\usr\ctn\facilities\info_entity\iecond.c"
+"C:\usr\ctn\facilities\manage\insert.c"
+"C:\usr\ctn\facilities\lst\lst.c"
+"C:\usr\ctn\facilities\lst\lstcond.c"
+"C:\usr\ctn\facilities\manage\mancond.c"
+"C:\usr\ctn\facilities\messages\messages.c"
+"C:\usr\ctn\facilities\services\move.c"
+"C:\usr\ctn\facilities\messages\msgcond.c"
+"C:\usr\ctn\facilities\services\naction.c"
+"C:\usr\ctn\facilities\services\ncreate.c"
+"C:\usr\ctn\facilities\services\ndelete.c"
+"C:\usr\ctn\facilities\services\neventreport.c"
+"C:\usr\ctn\facilities\services\nget.c"
+"C:\usr\ctn\facilities\services\nset.c"
+"C:\usr\ctn\facilities\print\print.c"
+"C:\usr\ctn\facilities\print\printcond.c"
+"C:\usr\ctn\facilities\services\private.c"
+"C:\usr\ctn\facilities\fis\record.c"
+"C:\usr\ctn\facilities\messages\ref_item.c"
+"C:\usr\ctn\facilities\manage\select.c"
+"C:\usr\ctn\facilities\services\send.c"
+"C:\usr\ctn\facilities\sq\sequences.c"
+"C:\usr\ctn\facilities\manage\set.c"
+"C:\usr\ctn\facilities\sq\sqcond.c"
+"C:\usr\ctn\facilities\services\srv1.c"
+"C:\usr\ctn\facilities\services\srv2.c"
+"C:\usr\ctn\facilities\services\srvcond.c"
+"C:\usr\ctn\facilities\services\storage.c"
+"C:\usr\ctn\facilities\tbl\tbl_sqlserver.c"
+"C:\usr\ctn\facilities\tbl\tblcond.c"
+"C:\usr\ctn\facilities\thread\thrcond.c"
+"C:\usr\ctn\facilities\uid\uid.c"
+"C:\usr\ctn\facilities\uid\uidcond.c"
+"C:\usr\ctn\facilities\fis\update.c"
+"C:\usr\ctn\facilities\utility\utility.c"
+"C:\usr\ctn\facilities\services\verify.c"
+]
+Creating command line "cl.exe @C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp\RSP6.tmp" 
+Creating temporary file "C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp\RSP7.tmp" with contents
+[
+/nologo /out:"Release\ctn_lib.lib" 
+.\Release\build.obj
+.\Release\cmd_valid.obj
+.\Release\condition.obj
+.\Release\control.obj
+.\Release\ctnthread.obj
+.\Release\dcm.obj
+.\Release\dcm1.obj
+.\Release\dcmcond.obj
+.\Release\dcmdict.obj
+.\Release\dcmsupport.obj
+.\Release\ddr.obj
+.\Release\delete.obj
+.\Release\dulcond.obj
+.\Release\dulconstruct.obj
+.\Release\dulfsm.obj
+.\Release\dulparse.obj
+.\Release\dulpresent.obj
+.\Release\dulprotocol.obj
+.\Release\dump.obj
+.\Release\event.obj
+.\Release\find.obj
+.\Release\fis.obj
+.\Release\fiscond.obj
+.\Release\fisdelete.obj
+.\Release\fisget.obj
+.\Release\fisinsert.obj
+.\Release\get.obj
+.\Release\gq.obj
+.\Release\iap.obj
+.\Release\iapcond.obj
+.\Release\idb.obj
+.\Release\idbcond.obj
+.\Release\ie.obj
+.\Release\iecond.obj
+.\Release\insert.obj
+.\Release\lst.obj
+.\Release\lstcond.obj
+.\Release\mancond.obj
+.\Release\messages.obj
+.\Release\move.obj
+.\Release\msgcond.obj
+.\Release\naction.obj
+.\Release\ncreate.obj
+.\Release\ndelete.obj
+.\Release\neventreport.obj
+.\Release\nget.obj
+.\Release\nset.obj
+.\Release\print.obj
+.\Release\printcond.obj
+.\Release\private.obj
+.\Release\record.obj
+.\Release\ref_item.obj
+.\Release\select.obj
+.\Release\send.obj
+.\Release\sequences.obj
+.\Release\set.obj
+.\Release\sqcond.obj
+.\Release\srv1.obj
+.\Release\srv2.obj
+.\Release\srvcond.obj
+.\Release\storage.obj
+.\Release\tbl_sqlserver.obj
+.\Release\tblcond.obj
+.\Release\thrcond.obj
+.\Release\uid.obj
+.\Release\uidcond.obj
+.\Release\update.obj
+.\Release\utility.obj
+.\Release\verify.obj
+]
+Creating command line "link.exe -lib @C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp\RSP7.tmp"
+<h3>Output Window</h3>
+Compiling...
+build.c
+cmd_valid.c
+condition.c
+control.c
+ctnthread.c
+dcm.c
+C:\usr\ctn\facilities\objects\dcm.c(3921) : warning C4018: '!=' : signed/unsigned mismatch
+C:\usr\ctn\facilities\objects\dcm.c(4457) : warning C4028: formal parameter 5 different from declaration
+C:\usr\ctn\facilities\objects\dcm.c(7066) : warning C4018: '!=' : signed/unsigned mismatch
+C:\usr\ctn\facilities\objects\dcm.c(7088) : warning C4018: '<' : signed/unsigned mismatch
+dcm1.c
+C:\usr\ctn\facilities\objects\dcm.c(7149) : warning C4715: 'DCM_PrintSequenceList' : not all control paths return a value
+dcmcond.c
+dcmdict.c
+dcmsupport.c
+ddr.c
+delete.c
+dulcond.c
+dulconstruct.c
+dulfsm.c
+C:\usr\ctn\facilities\dulprotocol\dulfsm.c(4090) : warning C4101: 'requestedPresentationCtx' : unreferenced local variable
+C:\usr\ctn\facilities\dulprotocol\dulfsm.c(4092) : warning C4101: 'subItem' : unreferenced local variable
+C:\usr\ctn\facilities\dulprotocol\dulfsm.c(4087) : warning C4101: 'prvCtx' : unreferenced local variable
+C:\usr\ctn\facilities\dulprotocol\dulfsm.c(4089) : warning C4101: 'userPresentationCtx' : unreferenced local variable
+C:\usr\ctn\facilities\dulprotocol\dulfsm.c(4094) : warning C4101: 'scuscpRole' : unreferenced local variable
+dulparse.c
+C:\usr\ctn\facilities\dulprotocol\dulparse.c(152) : warning C4244: '=' : conversion from 'unsigned long ' to 'unsigned short ', possible loss of data
+C:\usr\ctn\facilities\dulprotocol\dulparse.c(321) : warning C4244: '=' : conversion from 'unsigned long ' to 'unsigned short ', possible loss of data
+C:\usr\ctn\facilities\dulprotocol\dulparse.c(383) : warning C4244: '=' : conversion from 'unsigned long ' to 'unsigned short ', possible loss of data
+C:\usr\ctn\facilities\dulprotocol\dulparse.c(507) : warning C4244: '=' : conversion from 'unsigned long ' to 'unsigned short ', possible loss of data
+C:\usr\ctn\facilities\dulprotocol\dulparse.c(620) : warning C4244: '=' : conversion from 'unsigned long ' to 'unsigned short ', possible loss of data
+C:\usr\ctn\facilities\dulprotocol\dulparse.c(677) : warning C4244: '=' : conversion from 'unsigned long ' to 'unsigned short ', possible loss of data
+C:\usr\ctn\facilities\dulprotocol\dulparse.c(711) : warning C4244: '=' : conversion from 'unsigned long ' to 'unsigned short ', possible loss of data
+C:\usr\ctn\facilities\dulprotocol\dulparse.c(714) : warning C4244: '=' : conversion from 'unsigned long ' to 'unsigned short ', possible loss of data
+dulpresent.c
+dulprotocol.c
+C:\usr\ctn\facilities\dulprotocol\dulprotocol.c(171) : warning C4101: 'hBuffer' : unreferenced local variable
+C:\usr\ctn\facilities\dulprotocol\dulprotocol.c(170) : warning C4101: 'hStorage' : unreferenced local variable
+C:\usr\ctn\facilities\dulprotocol\dulprotocol.c(999) : warning C4101: 'pduType' : unreferenced local variable
+C:\usr\ctn\facilities\dulprotocol\dulprotocol.c(1001) : warning C4101: 'event' : unreferenced local variable
+C:\usr\ctn\facilities\dulprotocol\dulprotocol.c(1003) : warning C4101: 'abortItems' : unreferenced local variable
+C:\usr\ctn\facilities\dulprotocol\dulprotocol.c(2191) : warning C4101: 'hBuf' : unreferenced local variable
+C:\usr\ctn\facilities\dulprotocol\dulprotocol.c(2190) : warning C4101: 'hStorage' : unreferenced local variable
+dump.c
+C:\usr\ctn\facilities\dulprotocol\dulprotocol.c(203) : warning C4761: integral size mismatch in argument; conversion supplied
+C:\usr\ctn\facilities\dulprotocol\dulprotocol.c(372) : warning C4716: 'closeTCP' : must return a value
+C:\usr\ctn\facilities\dulprotocol\dulprotocol.c(2422) : warning C4761: integral size mismatch in argument; conversion supplied
+event.c
+C:\usr\ctn\facilities\fis\event.c(121) : warning C4101: 'i' : unreferenced local variable
+C:\usr\ctn\facilities\fis\event.c(169) : warning C4101: 'i' : unreferenced local variable
+C:\usr\ctn\facilities\fis\event.c(396) : warning C4101: 'i' : unreferenced local variable
+find.c
+C:\usr\ctn\facilities\services\find.c(182) : warning C4101: 'l' : unreferenced local variable
+fis.c
+fiscond.c
+fisdelete.c
+fisget.c
+C:\usr\ctn\facilities\fis\fisget.c(177) : warning C4028: formal parameter 2 different from declaration
+C:\usr\ctn\facilities\fis\fisget.c(177) : warning C4024: 'TBL_Select' : different types for formal and actual parameter 5
+C:\usr\ctn\facilities\fis\fisget.c(299) : warning C4028: formal parameter 2 different from declaration
+C:\usr\ctn\facilities\fis\fisget.c(299) : warning C4024: 'TBL_Select' : different types for formal and actual parameter 5
+C:\usr\ctn\facilities\fis\fisget.c(420) : warning C4028: formal parameter 2 different from declaration
+C:\usr\ctn\facilities\fis\fisget.c(420) : warning C4024: 'TBL_Select' : different types for formal and actual parameter 5
+C:\usr\ctn\facilities\fis\fisget.c(513) : warning C4028: formal parameter 2 different from declaration
+C:\usr\ctn\facilities\fis\fisget.c(513) : warning C4024: 'TBL_Select' : different types for formal and actual parameter 5
+C:\usr\ctn\facilities\fis\fisget.c(652) : warning C4028: formal parameter 2 different from declaration
+C:\usr\ctn\facilities\fis\fisget.c(652) : warning C4024: 'TBL_Select' : different types for formal and actual parameter 5
+C:\usr\ctn\facilities\fis\fisget.c(763) : warning C4028: formal parameter 2 different from declaration
+C:\usr\ctn\facilities\fis\fisget.c(763) : warning C4024: 'TBL_Select' : different types for formal and actual parameter 5
+C:\usr\ctn\facilities\fis\fisget.c(873) : warning C4028: formal parameter 2 different from declaration
+C:\usr\ctn\facilities\fis\fisget.c(873) : warning C4024: 'TBL_Select' : different types for formal and actual parameter 5
+C:\usr\ctn\facilities\fis\fisget.c(845) : warning C4101: 'p' : unreferenced local variable
+C:\usr\ctn\facilities\fis\fisget.c(971) : warning C4028: formal parameter 2 different from declaration
+C:\usr\ctn\facilities\fis\fisget.c(971) : warning C4024: 'TBL_Select' : different types for formal and actual parameter 5
+C:\usr\ctn\facilities\fis\fisget.c(1005) : warning C4101: 'cond' : unreferenced local variable
+C:\usr\ctn\facilities\fis\fisget.c(1100) : warning C4028: formal parameter 2 different from declaration
+C:\usr\ctn\facilities\fis\fisget.c(1100) : warning C4024: 'TBL_Select' : different types for formal and actual parameter 5
+C:\usr\ctn\facilities\fis\fisget.c(1113) : warning C4101: 'cond' : unreferenced local variable
+C:\usr\ctn\facilities\fis\fisget.c(1162) : warning C4101: 'cond' : unreferenced local variable
+C:\usr\ctn\facilities\fis\fisget.c(1226) : warning C4028: formal parameter 2 different from declaration
+C:\usr\ctn\facilities\fis\fisget.c(1226) : warning C4024: 'TBL_Select' : different types for formal and actual parameter 5
+C:\usr\ctn\facilities\fis\fisget.c(1248) : warning C4101: 'cond' : unreferenced local variable
+C:\usr\ctn\facilities\fis\fisget.c(1346) : warning C4028: formal parameter 2 different from declaration
+C:\usr\ctn\facilities\fis\fisget.c(1346) : warning C4024: 'TBL_Select' : different types for formal and actual parameter 5
+C:\usr\ctn\facilities\fis\fisget.c(1363) : warning C4101: 'cond' : unreferenced local variable
+C:\usr\ctn\facilities\fis\fisget.c(1427) : warning C4028: formal parameter 2 different from declaration
+C:\usr\ctn\facilities\fis\fisget.c(1427) : warning C4024: 'TBL_Select' : different types for formal and actual parameter 5
+fisinsert.c
+C:\usr\ctn\facilities\fis\fisinsert.c(258) : warning C4244: '=' : conversion from 'double ' to 'float ', possible loss of data
+C:\usr\ctn\facilities\fis\fisinsert.c(275) : warning C4244: '=' : conversion from 'double ' to 'float ', possible loss of data
+C:\usr\ctn\facilities\fis\fisinsert.c(691) : warning C4244: '=' : conversion from 'double ' to 'float ', possible loss of data
+C:\usr\ctn\facilities\fis\fisinsert.c(701) : warning C4244: '=' : conversion from 'double ' to 'float ', possible loss of data
+get.c
+gq.c
+iap.c
+C:\usr\ctn\facilities\iap\iap.c(244) : warning C4113: 'unsigned long (__cdecl *)()' differs in parameter lists from 'unsigned long (__cdecl *)(struct MSG_C_STORE_REQ *,struct MSG_C_STORE_RESP *,unsigned long ,unsigned long ,void *)'
+iapcond.c
+idb.c
+C:\usr\ctn\facilities\idb\idb.c(483) : warning C4013: 'exit' undefined; assuming extern returning int
+C:\usr\ctn\facilities\idb\idb.c(693) : warning C4013: 'COND_PushCondition' undefined; assuming extern returning int
+C:\usr\ctn\facilities\idb\idb.c(753) : warning C4013: 'malloc' undefined; assuming extern returning int
+C:\usr\ctn\facilities\idb\idb.c(779) : warning C4013: 'free' undefined; assuming extern returning int
+C:\usr\ctn\facilities\idb\idb.c(665) : warning C4101: 'limitshandle' : unreferenced local variable
+C:\usr\ctn\facilities\idb\idb.c(657) : warning C4101: 'idbdb' : unreferenced local variable
+C:\usr\ctn\facilities\idb\idb.c(1365) : warning C4028: formal parameter 2 different from declaration
+C:\usr\ctn\facilities\idb\idb.c(1365) : warning C4024: 'TBL_Select' : different types for formal and actual parameter 5
+C:\usr\ctn\facilities\idb\idb.c(1387) : warning C4028: formal parameter 2 different from declaration
+C:\usr\ctn\facilities\idb\idb.c(1387) : warning C4024: 'TBL_Select' : different types for formal and actual parameter 5
+C:\usr\ctn\facilities\idb\idb.c(1410) : warning C4028: formal parameter 2 different from declaration
+C:\usr\ctn\facilities\idb\idb.c(1410) : warning C4024: 'TBL_Select' : different types for formal and actual parameter 5
+C:\usr\ctn\facilities\idb\idb.c(950) : warning C4101: 'imageuid' : unreferenced local variable
+C:\usr\ctn\facilities\idb\idb.c(1540) : warning C4028: formal parameter 2 different from declaration
+C:\usr\ctn\facilities\idb\idb.c(1540) : warning C4024: 'TBL_Select' : different types for formal and actual parameter 5
+C:\usr\ctn\facilities\idb\idb.c(1851) : warning C4028: formal parameter 2 different from declaration
+C:\usr\ctn\facilities\idb\idb.c(1851) : warning C4024: 'TBL_Select' : different types for formal and actual parameter 5
+C:\usr\ctn\facilities\idb\idb.c(1905) : warning C4028: formal parameter 2 different from declaration
+C:\usr\ctn\facilities\idb\idb.c(1905) : warning C4024: 'TBL_Select' : different types for formal and actual parameter 5
+C:\usr\ctn\facilities\idb\idb.c(1909) : warning C4028: formal parameter 2 different from declaration
+C:\usr\ctn\facilities\idb\idb.c(1909) : warning C4024: 'TBL_Select' : different types for formal and actual parameter 5
+C:\usr\ctn\facilities\idb\idb.c(1964) : warning C4028: formal parameter 2 different from declaration
+C:\usr\ctn\facilities\idb\idb.c(1964) : warning C4024: 'TBL_Select' : different types for formal and actual parameter 5
+C:\usr\ctn\facilities\idb\idb.c(1968) : warning C4028: formal parameter 2 different from declaration
+C:\usr\ctn\facilities\idb\idb.c(1968) : warning C4024: 'TBL_Select' : different types for formal and actual parameter 5
+C:\usr\ctn\facilities\idb\idb.c(2014) : warning C4028: formal parameter 2 different from declaration
+C:\usr\ctn\facilities\idb\idb.c(2014) : warning C4024: 'TBL_Select' : different types for formal and actual parameter 5
+C:\usr\ctn\facilities\idb\idb.c(1767) : warning C4101: 'buf' : unreferenced local variable
+C:\usr\ctn\facilities\idb\idb.c(1750) : warning C4101: 'ins' : unreferenced local variable
+C:\usr\ctn\facilities\idb\idb.c(1770) : warning C4101: 'temp_node' : unreferenced local variable
+C:\usr\ctn\facilities\idb\idb.c(2322) : warning C4028: formal parameter 2 different from declaration
+C:\usr\ctn\facilities\idb\idb.c(2322) : warning C4024: 'TBL_Select' : different types for formal and actual parameter 5
+C:\usr\ctn\facilities\idb\idb.c(2368) : warning C4028: formal parameter 2 different from declaration
+C:\usr\ctn\facilities\idb\idb.c(2368) : warning C4024: 'TBL_Select' : different types for formal and actual parameter 5
+C:\usr\ctn\facilities\idb\idb.c(2372) : warning C4028: formal parameter 2 different from declaration
+C:\usr\ctn\facilities\idb\idb.c(2372) : warning C4024: 'TBL_Select' : different types for formal and actual parameter 5
+C:\usr\ctn\facilities\idb\idb.c(2426) : warning C4028: formal parameter 2 different from declaration
+C:\usr\ctn\facilities\idb\idb.c(2426) : warning C4024: 'TBL_Select' : different types for formal and actual parameter 5
+C:\usr\ctn\facilities\idb\idb.c(2430) : warning C4028: formal parameter 2 different from declaration
+C:\usr\ctn\facilities\idb\idb.c(2430) : warning C4024: 'TBL_Select' : different types for formal and actual parameter 5
+C:\usr\ctn\facilities\idb\idb.c(2486) : warning C4028: formal parameter 2 different from declaration
+C:\usr\ctn\facilities\idb\idb.c(2486) : warning C4024: 'TBL_Select' : different types for formal and actual parameter 5
+C:\usr\ctn\facilities\idb\idb.c(2490) : warning C4028: formal parameter 2 different from declaration
+C:\usr\ctn\facilities\idb\idb.c(2490) : warning C4024: 'TBL_Select' : different types for formal and actual parameter 5
+C:\usr\ctn\facilities\idb\idb.c(2537) : warning C4028: formal parameter 2 different from declaration
+C:\usr\ctn\facilities\idb\idb.c(2537) : warning C4024: 'TBL_Select' : different types for formal and actual parameter 5
+C:\usr\ctn\facilities\idb\idb.c(2244) : warning C4101: 'buf' : unreferenced local variable
+C:\usr\ctn\facilities\idb\idb.c(2228) : warning C4101: 'ins' : unreferenced local variable
+C:\usr\ctn\facilities\idb\idb.c(2247) : warning C4101: 'temp_node' : unreferenced local variable
+C:\usr\ctn\facilities\idb\idb.c(2864) : warning C4028: formal parameter 2 different from declaration
+C:\usr\ctn\facilities\idb\idb.c(2864) : warning C4024: 'TBL_Select' : different types for formal and actual parameter 5
+C:\usr\ctn\facilities\idb\idb.c(2868) : warning C4028: formal parameter 2 different from declaration
+C:\usr\ctn\facilities\idb\idb.c(2868) : warning C4024: 'TBL_Select' : different types for formal and actual parameter 5
+C:\usr\ctn\facilities\idb\idb.c(2915) : warning C4028: formal parameter 2 different from declaration
+C:\usr\ctn\facilities\idb\idb.c(2915) : warning C4024: 'TBL_Select' : different types for formal and actual parameter 5
+C:\usr\ctn\facilities\idb\idb.c(2777) : warning C4101: 'buf' : unreferenced local variable
+C:\usr\ctn\facilities\idb\idb.c(2761) : warning C4101: 'ins' : unreferenced local variable
+C:\usr\ctn\facilities\idb\idb.c(2788) : warning C4101: 'iser' : unreferenced local variable
+C:\usr\ctn\facilities\idb\idb.c(2787) : warning C4101: 'istu' : unreferenced local variable
+C:\usr\ctn\facilities\idb\idb.c(2786) : warning C4101: 'ipat' : unreferenced local variable
+C:\usr\ctn\facilities\idb\idb.c(2780) : warning C4101: 'temp_node' : unreferenced local variable
+C:\usr\ctn\facilities\idb\idb.c(3101) : warning C4013: 'realloc' undefined; assuming extern returning int
+C:\usr\ctn\facilities\idb\idb.c(3741) : warning C4101: 'i' : unreferenced local variable
+C:\usr\ctn\facilities\idb\idb.c(3816) : warning C4244: '=' : conversion from 'double ' to 'float ', possible loss of data
+C:\usr\ctn\facilities\idb\idb.c(3820) : warning C4244: '=' : conversion from 'double ' to 'float ', possible loss of data
+C:\usr\ctn\facilities\idb\idb.c(3823) : warning C4244: '=' : conversion from 'double ' to 'float ', possible loss of data
+C:\usr\ctn\facilities\idb\idb.c(3826) : warning C4244: '=' : conversion from 'double ' to 'float ', possible loss of data
+C:\usr\ctn\facilities\idb\idb.c(3829) : warning C4244: '=' : conversion from 'double ' to 'float ', possible loss of data
+C:\usr\ctn\facilities\idb\idb.c(3926) : warning C4244: '=' : conversion from 'double ' to 'float ', possible loss of data
+C:\usr\ctn\facilities\idb\idb.c(3930) : warning C4244: '=' : conversion from 'double ' to 'float ', possible loss of data
+C:\usr\ctn\facilities\idb\idb.c(3933) : warning C4244: '=' : conversion from 'double ' to 'float ', possible loss of data
+C:\usr\ctn\facilities\idb\idb.c(3936) : warning C4244: '=' : conversion from 'double ' to 'float ', possible loss of data
+C:\usr\ctn\facilities\idb\idb.c(3939) : warning C4244: '=' : conversion from 'double ' to 'float ', possible loss of data
+C:\usr\ctn\facilities\idb\idb.c(4010) : warning C4244: '=' : conversion from 'double ' to 'float ', possible loss of data
+C:\usr\ctn\facilities\idb\idb.c(4014) : warning C4244: '=' : conversion from 'double ' to 'float ', possible loss of data
+C:\usr\ctn\facilities\idb\idb.c(4017) : warning C4244: '=' : conversion from 'double ' to 'float ', possible loss of data
+C:\usr\ctn\facilities\idb\idb.c(4020) : warning C4244: '=' : conversion from 'double ' to 'float ', possible loss of data
+C:\usr\ctn\facilities\idb\idb.c(4023) : warning C4244: '=' : conversion from 'double ' to 'float ', possible loss of data
+C:\usr\ctn\facilities\idb\idb.c(4166) : warning C4244: '=' : conversion from 'double ' to 'float ', possible loss of data
+C:\usr\ctn\facilities\idb\idb.c(4170) : warning C4244: '=' : conversion from 'double ' to 'float ', possible loss of data
+C:\usr\ctn\facilities\idb\idb.c(4173) : warning C4244: '=' : conversion from 'double ' to 'float ', possible loss of data
+C:\usr\ctn\facilities\idb\idb.c(4176) : warning C4244: '=' : conversion from 'double ' to 'float ', possible loss of data
+C:\usr\ctn\facilities\idb\idb.c(4179) : warning C4244: '=' : conversion from 'double ' to 'float ', possible loss of data
+C:\usr\ctn\facilities\idb\idb.c(3787) : warning C4101: 'c' : unreferenced local variable
+C:\usr\ctn\facilities\idb\idb.c(4268) : warning C4244: '=' : conversion from 'double ' to 'float ', possible loss of data
+C:\usr\ctn\facilities\idb\idb.c(4272) : warning C4244: '=' : conversion from 'double ' to 'float ', possible loss of data
+C:\usr\ctn\facilities\idb\idb.c(4275) : warning C4244: '=' : conversion from 'double ' to 'float ', possible loss of data
+C:\usr\ctn\facilities\idb\idb.c(4278) : warning C4244: '=' : conversion from 'double ' to 'float ', possible loss of data
+C:\usr\ctn\facilities\idb\idb.c(4281) : warning C4244: '=' : conversion from 'double ' to 'float ', possible loss of data
+C:\usr\ctn\facilities\idb\idb.c(4378) : warning C4244: '=' : conversion from 'double ' to 'float ', possible loss of data
+C:\usr\ctn\facilities\idb\idb.c(4382) : warning C4244: '=' : conversion from 'double ' to 'float ', possible loss of data
+C:\usr\ctn\facilities\idb\idb.c(4385) : warning C4244: '=' : conversion from 'double ' to 'float ', possible loss of data
+C:\usr\ctn\facilities\idb\idb.c(4388) : warning C4244: '=' : conversion from 'double ' to 'float ', possible loss of data
+C:\usr\ctn\facilities\idb\idb.c(4391) : warning C4244: '=' : conversion from 'double ' to 'float ', possible loss of data
+C:\usr\ctn\facilities\idb\idb.c(4464) : warning C4244: '=' : conversion from 'double ' to 'float ', possible loss of data
+C:\usr\ctn\facilities\idb\idb.c(4468) : warning C4244: '=' : conversion from 'double ' to 'float ', possible loss of data
+C:\usr\ctn\facilities\idb\idb.c(4471) : warning C4244: '=' : conversion from 'double ' to 'float ', possible loss of data
+C:\usr\ctn\facilities\idb\idb.c(4474) : warning C4244: '=' : conversion from 'double ' to 'float ', possible loss of data
+C:\usr\ctn\facilities\idb\idb.c(4477) : warning C4244: '=' : conversion from 'double ' to 'float ', possible loss of data
+C:\usr\ctn\facilities\idb\idb.c(4620) : warning C4244: '=' : conversion from 'double ' to 'float ', possible loss of data
+C:\usr\ctn\facilities\idb\idb.c(4624) : warning C4244: '=' : conversion from 'double ' to 'float ', possible loss of data
+C:\usr\ctn\facilities\idb\idb.c(4627) : warning C4244: '=' : conversion from 'double ' to 'float ', possible loss of data
+C:\usr\ctn\facilities\idb\idb.c(4630) : warning C4244: '=' : conversion from 'double ' to 'float ', possible loss of data
+C:\usr\ctn\facilities\idb\idb.c(4633) : warning C4244: '=' : conversion from 'double ' to 'float ', possible loss of data
+C:\usr\ctn\facilities\idb\idb.c(4796) : warning C4244: '=' : conversion from 'double ' to 'float ', possible loss of data
+C:\usr\ctn\facilities\idb\idb.c(4800) : warning C4244: '=' : conversion from 'double ' to 'float ', possible loss of data
+C:\usr\ctn\facilities\idb\idb.c(4803) : warning C4244: '=' : conversion from 'double ' to 'float ', possible loss of data
+C:\usr\ctn\facilities\idb\idb.c(4806) : warning C4244: '=' : conversion from 'double ' to 'float ', possible loss of data
+C:\usr\ctn\facilities\idb\idb.c(4809) : warning C4244: '=' : conversion from 'double ' to 'float ', possible loss of data
+C:\usr\ctn\facilities\idb\idb.c(4979) : warning C4244: '=' : conversion from 'double ' to 'float ', possible loss of data
+C:\usr\ctn\facilities\idb\idb.c(4983) : warning C4244: '=' : conversion from 'double ' to 'float ', possible loss of data
+C:\usr\ctn\facilities\idb\idb.c(4986) : warning C4244: '=' : conversion from 'double ' to 'float ', possible loss of data
+C:\usr\ctn\facilities\idb\idb.c(4989) : warning C4244: '=' : conversion from 'double ' to 'float ', possible loss of data
+C:\usr\ctn\facilities\idb\idb.c(4992) : warning C4244: '=' : conversion from 'double ' to 'float ', possible loss of data
+C:\usr\ctn\facilities\idb\idb.c(5319) : warning C4244: '=' : conversion from 'double ' to 'float ', possible loss of data
+C:\usr\ctn\facilities\idb\idb.c(5336) : warning C4244: '=' : conversion from 'double ' to 'float ', possible loss of data
+C:\usr\ctn\facilities\idb\idb.c(5376) : warning C4244: '=' : conversion from 'double ' to 'float ', possible loss of data
+C:\usr\ctn\facilities\idb\idb.c(5397) : warning C4244: '=' : conversion from 'double ' to 'float ', possible loss of data
+C:\usr\ctn\facilities\idb\idb.c(5462) : warning C4244: '=' : conversion from 'double ' to 'float ', possible loss of data
+C:\usr\ctn\facilities\idb\idb.c(5535) : warning C4244: '=' : conversion from 'double ' to 'float ', possible loss of data
+C:\usr\ctn\facilities\idb\idb.c(5584) : warning C4028: formal parameter 2 different from declaration
+C:\usr\ctn\facilities\idb\idb.c(5584) : warning C4024: 'TBL_Select' : different types for formal and actual parameter 5
+C:\usr\ctn\facilities\idb\idb.c(5647) : warning C4013: 'COND_DumpConditions' undefined; assuming extern returning int
+idbcond.c
+C:\usr\ctn\facilities\idb\idb.c(2141) : warning C4700: local variable 'iser' used without having been initialized
+C:\usr\ctn\facilities\idb\idb.c(2674) : warning C4700: local variable 'iser' used without having been initialized
+C:\usr\ctn\facilities\idb\idb.c(2923) : warning C4700: local variable 'numpatcrits' used without having been initialized
+C:\usr\ctn\facilities\idb\idb.c(2926) : warning C4700: local variable 'numstucrits' used without having been initialized
+C:\usr\ctn\facilities\idb\idb.c(2929) : warning C4700: local variable 'numsercrits' used without having been initialized
+ie.c
+iecond.c
+insert.c
+lst.c
+lstcond.c
+mancond.c
+messages.c
+move.c
+msgcond.c
+naction.c
+ncreate.c
+ndelete.c
+neventreport.c
+nget.c
+nset.c
+print.c
+printcond.c
+private.c
+record.c
+ref_item.c
+select.c
+C:\usr\ctn\facilities\manage\select.c(283) : warning C4028: formal parameter 2 different from declaration
+C:\usr\ctn\facilities\manage\select.c(283) : warning C4024: 'TBL_Select' : different types for formal and actual parameter 5
+C:\usr\ctn\facilities\manage\select.c(427) : warning C4028: formal parameter 2 different from declaration
+C:\usr\ctn\facilities\manage\select.c(427) : warning C4024: 'TBL_Select' : different types for formal and actual parameter 5
+C:\usr\ctn\facilities\manage\select.c(486) : warning C4028: formal parameter 2 different from declaration
+C:\usr\ctn\facilities\manage\select.c(486) : warning C4024: 'TBL_Select' : different types for formal and actual parameter 5
+C:\usr\ctn\facilities\manage\select.c(589) : warning C4028: formal parameter 2 different from declaration
+C:\usr\ctn\facilities\manage\select.c(589) : warning C4024: 'TBL_Select' : different types for formal and actual parameter 5
+C:\usr\ctn\facilities\manage\select.c(689) : warning C4028: formal parameter 2 different from declaration
+C:\usr\ctn\facilities\manage\select.c(689) : warning C4024: 'TBL_Select' : different types for formal and actual parameter 5
+C:\usr\ctn\facilities\manage\select.c(787) : warning C4028: formal parameter 2 different from declaration
+C:\usr\ctn\facilities\manage\select.c(787) : warning C4024: 'TBL_Select' : different types for formal and actual parameter 5
+C:\usr\ctn\facilities\manage\select.c(893) : warning C4028: formal parameter 2 different from declaration
+C:\usr\ctn\facilities\manage\select.c(893) : warning C4024: 'TBL_Select' : different types for formal and actual parameter 5
+C:\usr\ctn\facilities\manage\select.c(994) : warning C4028: formal parameter 2 different from declaration
+C:\usr\ctn\facilities\manage\select.c(994) : warning C4024: 'TBL_Select' : different types for formal and actual parameter 5
+send.c
+sequences.c
+set.c
+sqcond.c
+srv1.c
+srv2.c
+srvcond.c
+storage.c
+tbl_sqlserver.c
+C:\usr\ctn\facilities\tbl\tbl_sqlserver.c(653) : warning C4028: formal parameter 2 different from declaration
+C:\usr\ctn\facilities\tbl\tbl_sqlserver.c(830) : warning C4101: 'ttb' : unreferenced local variable
+C:\usr\ctn\facilities\tbl\tbl_sqlserver.c(1130) : warning C4028: formal parameter 5 different from declaration
+C:\usr\ctn\facilities\tbl\tbl_sqlserver.c(1298) : warning C4028: formal parameter 5 different from declaration
+tblcond.c
+thrcond.c
+uid.c
+uidcond.c
+update.c
+utility.c
+verify.c
+Creating library...
+
+
+
+<h3>Results</h3>
+ctn_lib.lib - 0 error(s), 215 warning(s)
+</pre>
+</body>
+</html>

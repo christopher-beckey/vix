@@ -1,0 +1,272 @@
+﻿<UserControl x:Class="VixHealthMonitor.CvixListView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="150" d:DesignWidth="1900"
+             xmlns:b="clr-namespace:VISAHealthMonitorCommonControls;assembly=VISAHealthMonitorCommonControls"
+             DataContext="{Binding CvixList, Source={StaticResource Locator}}" xmlns:my="clr-namespace:VixHealthMonitor">
+    <Grid>
+        <Grid.Resources>
+            <Style x:Key="LeftHeaderStyle" TargetType="{x:Type GridViewColumnHeader}">
+                <Setter Property="HorizontalContentAlignment" Value="Left"/>
+            </Style>
+        </Grid.Resources>
+        <!--
+        <ListView HorizontalAlignment="Stretch"  VerticalAlignment="Stretch" ItemsSource="{Binding Path=VixSources.Sources.View}" 
+                  SelectionMode="Single"  
+                  b:MouseDoubleClickBehavior.MouseDoubleClick="{Binding Path=ListMouseDoubleClickCommand}"
+                  SelectedItem="{Binding Path=SelectedItem}" >
+        -->
+        <ListView HorizontalAlignment="Stretch"  VerticalAlignment="Stretch" ItemsSource="{Binding Path=VixSources.Sources.View}" 
+                  SelectionMode="Single"  
+                  b:SelectorDoubleClickCommandBehavior.HandleDoubleClick="true"
+                  b:SelectorDoubleClickCommandBehavior.TheCommandToRun="{Binding Path=ListMouseDoubleClickCommand}"
+                  SelectedItem="{Binding Path=SelectedItem}" >
+            <ListView.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="Show Details" Command="{Binding Path=ShowSiteDetailsCommand}" />
+                    <Separator />
+                    <MenuItem Header="Transaction Log" Command="{Binding Path=ViewTransactionLogCommand}" />
+                    <MenuItem Header="Site Service" Command="{Binding Path=ViewSiteServiceCommand}" />
+                    <MenuItem Header="Java Logs" Command="{Binding Path=ViewJavaLogsCommand}" />
+                    <Separator />
+                    <MenuItem Header="View Threads" Command="{Binding Path=ViewThreadsCommand}"/>
+                    <MenuItem Header="Memory Information" Command="{Binding Path=ViewMemoryInformationCommand}" />
+                    <MenuItem Header="View Logged Test Results" Command="{Binding Path=ViewLoggedTestResultsCommand}" />
+                    <MenuItem Header="View Checksums" Command="{Binding Path=ViewChecksumsCommand}" />
+                    <Separator />
+                    
+                    <MenuItem Header="Test All CVIX" Command="{Binding Path=TestCVIXCommand}"  />
+                </ContextMenu>
+            </ListView.ContextMenu>
+            <ListView.View>
+                <GridView >
+                    <GridViewColumn Width="130" HeaderContainerStyle="{StaticResource LeftHeaderStyle}">
+                        <GridViewColumnHeader Content="Site Name" 
+                                              Command="{Binding Path=SortCommand}" CommandParameter="VisaSource.DisplayName" />
+                        <GridViewColumn.CellTemplate>
+                            <HierarchicalDataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <Image Source="{Binding Path=VixHealth.HealthIcon}" />
+                                    <TextBlock Text="{Binding VisaSource.DisplayName}"  />
+                                </StackPanel>
+                            </HierarchicalDataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Width="100" HeaderContainerStyle="{StaticResource LeftHeaderStyle}">
+                        <GridViewColumnHeader Content="Version" 
+                                              Command="{Binding Path=SortCommand}" CommandParameter="VixHealth.VisaHealth.VisaVersion" />
+                        <GridViewColumn.CellTemplate>
+                            <HierarchicalDataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="{Binding VixHealth.VisaHealth.VisaVersion}"  />
+                                    <TextBlock Text="{Binding VixHealth.VisaHealth.ErrorMessage}" />
+                                </StackPanel>
+                            </HierarchicalDataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Width="160" HeaderContainerStyle="{StaticResource LeftHeaderStyle}">
+                        <GridViewColumnHeader Content="Uptime" 
+                                              Command="{Binding Path=SortCommand}" CommandParameter="VixHealth.VisaHealth.JVMUptimeShort" />
+                        <GridViewColumn.CellTemplate>
+                            <HierarchicalDataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="{Binding VixHealth.VisaHealth.JVMUptimeShort}"  />
+                                </StackPanel>
+                            </HierarchicalDataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Width="65" HeaderContainerStyle="{StaticResource LeftHeaderStyle}">
+                        <GridViewColumnHeader Content="Cache Size" 
+                                              Command="{Binding Path=SortCommand}" CommandParameter="VixHealth.CacheSize" />
+                        <GridViewColumn.CellTemplate>
+                            <HierarchicalDataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="{Binding VixHealth.CacheSize}"  />
+                                    <Image Source="{Binding Path=VixHealth.CacheSizeIcon}" />
+                                </StackPanel>
+                            </HierarchicalDataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Width="70" HeaderContainerStyle="{StaticResource LeftHeaderStyle}">
+                        <GridViewColumnHeader Content="Java Log" 
+                                              Command="{Binding Path=SortCommand}" CommandParameter="VixHealth.JavaLogSizeFormatted" />
+                        <GridViewColumn.CellTemplate>
+                            <HierarchicalDataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="{Binding VixHealth.JavaLogSizeFormatted}"  />
+                                </StackPanel>
+                            </HierarchicalDataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Width="80" HeaderContainerStyle="{StaticResource LeftHeaderStyle}">
+                        <GridViewColumnHeader Content="Trans Written" 
+                                              Command="{Binding Path=SortCommand}" CommandParameter="VixHealth.TransactionsWrittenFormatted" />
+                        <GridViewColumn.CellTemplate>
+                            <HierarchicalDataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="{Binding VixHealth.TransactionsWrittenFormatted}"  />
+                                </StackPanel>
+                            </HierarchicalDataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Width="60" HeaderContainerStyle="{StaticResource LeftHeaderStyle}">
+                        <GridViewColumnHeader Content="Trans/Min" 
+                                              Command="{Binding Path=SortCommand}" CommandParameter="VixHealth.TransactionsPerMinuteFormatted" />
+                        <GridViewColumn.CellTemplate>
+                            <HierarchicalDataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="{Binding VixHealth.TransactionsPerMinuteFormatted}"  />
+                                </StackPanel>
+                            </HierarchicalDataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Width="70" HeaderContainerStyle="{StaticResource LeftHeaderStyle}">
+                        <GridViewColumnHeader Content="Long Thread" 
+                                              Command="{Binding Path=SortCommand}" CommandParameter="VixHealth.LongestThreadTime" />
+                        <GridViewColumn.CellTemplate>
+                            <HierarchicalDataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="{Binding VixHealth.LongestThreadTime}"  />
+                                </StackPanel>
+                            </HierarchicalDataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Width="110" HeaderContainerStyle="{StaticResource LeftHeaderStyle}">
+                        <GridViewColumnHeader Content="Active 80/8443/443" 
+                                              Command="{Binding Path=SortCommand}" CommandParameter="VixHealth.Active808443443Threads" />
+                        <GridViewColumn.CellTemplate>
+                            <HierarchicalDataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="{Binding VixHealth.Active808443443Threads}"  />
+                                </StackPanel>
+                            </HierarchicalDataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Width="80" HeaderContainerStyle="{StaticResource LeftHeaderStyle}">
+                        <GridViewColumnHeader Content="Long Threads" 
+                                              Command="{Binding Path=SortCommand}" CommandParameter="VixHealth.LongThreads" />
+                        <GridViewColumn.CellTemplate>
+                            <HierarchicalDataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="{Binding VixHealth.LongThreads}"  />
+                                    <Image Source="{Binding Path=VixHealth.LongThreadIcon}" />
+                                </StackPanel>
+                            </HierarchicalDataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Width="120" HeaderContainerStyle="{StaticResource LeftHeaderStyle}">
+                        <GridViewColumnHeader Content="AWIV: M/I/P/I2/P2" 
+                                              Command="{Binding Path=SortCommand}" CommandParameter="VixHealth.AwivCounts" />
+                        <GridViewColumn.CellTemplate>
+                            <HierarchicalDataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="{Binding VixHealth.AwivCounts}"  />
+                                </StackPanel>
+                            </HierarchicalDataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Width="170" HeaderContainerStyle="{StaticResource LeftHeaderStyle}">
+                        <GridViewColumnHeader Content="Fed: M/I4/EI4/ET4/I5/EI5/ET5" 
+                                              Command="{Binding Path=SortCommand}" CommandParameter="VixHealth.FederationCounts" />
+                        <GridViewColumn.CellTemplate>
+                            <HierarchicalDataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="{Binding VixHealth.FederationCounts}"  />
+                                </StackPanel>
+                            </HierarchicalDataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+
+                    <GridViewColumn Width="100" HeaderContainerStyle="{StaticResource LeftHeaderStyle}">
+                        <GridViewColumnHeader Content="Rad: M/I/I2" 
+                                              Command="{Binding Path=SortCommand}" CommandParameter="VixHealth.RadiologyCount" />
+                        <GridViewColumn.CellTemplate>
+                            <HierarchicalDataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="{Binding VixHealth.RadiologyCount}"  />
+                                </StackPanel>
+                            </HierarchicalDataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Width="70" HeaderContainerStyle="{StaticResource LeftHeaderStyle}">
+                        <GridViewColumnHeader Content="XCA:" 
+                                              Command="{Binding Path=SortCommand}" CommandParameter="VixHealth.XcaCounts" />
+                        <GridViewColumn.CellTemplate>
+                            <HierarchicalDataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="{Binding VixHealth.XcaCounts}"  />
+                                </StackPanel>
+                            </HierarchicalDataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Width="70" HeaderContainerStyle="{StaticResource LeftHeaderStyle}">
+                        <GridViewColumnHeader Content="Site Service" 
+                                              Command="{Binding Path=SortCommand}" CommandParameter="VixHealth.SiteServiceRequests" />
+                        <GridViewColumn.CellTemplate>
+                            <HierarchicalDataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="{Binding VixHealth.SiteServiceRequests}"  />
+                                </StackPanel>
+                            </HierarchicalDataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    
+                    <GridViewColumn Width="85" HeaderContainerStyle="{StaticResource LeftHeaderStyle}">
+                        <GridViewColumnHeader Content="Load Time (ms)" 
+                                              Command="{Binding Path=SortCommand}" CommandParameter="VixHealth.VisaHealth.HealthLoadTime" />
+                        <GridViewColumn.CellTemplate>
+                            <HierarchicalDataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="{Binding VixHealth.VisaHealth.HealthLoadTime}"  />
+                                </StackPanel>
+                            </HierarchicalDataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+
+                    <GridViewColumn Width="85" HeaderContainerStyle="{StaticResource LeftHeaderStyle}">
+                        <GridViewColumnHeader Content="DoD Requests" 
+                                              Command="{Binding Path=SortCommand}" CommandParameter="VixHealth.DoDCounts" ToolTip="VA Requests for DoD: Display Requests/Rejected/VRad Requests/Rejected" />
+                        <GridViewColumn.CellTemplate>
+                            <HierarchicalDataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="{Binding VixHealth.DoDCounts}"  />
+                                </StackPanel>
+                            </HierarchicalDataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+
+                    <GridViewColumn Width="85" HeaderContainerStyle="{StaticResource LeftHeaderStyle}">
+                        <GridViewColumnHeader Content="Thread Count" 
+                                              Command="{Binding Path=SortCommand}" CommandParameter="VixHealth.JavaThreadCount" ToolTip="Total number of Java threads" />
+                        <GridViewColumn.CellTemplate>
+                            <HierarchicalDataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="{Binding VixHealth.JavaThreadCount}"  />
+                                </StackPanel>
+                            </HierarchicalDataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+
+                    <GridViewColumn Width="145" HeaderContainerStyle="{StaticResource LeftHeaderStyle}">
+                        <GridViewColumnHeader Content="Certificate Expiration" 
+                                              Command="{Binding Path=SortCommand}" CommandParameter="VixHealth.CertificateExpirationDate" ToolTip="Date when public certificate expires" />
+                        <GridViewColumn.CellTemplate>
+                            <HierarchicalDataTemplate>
+                                <StackPanel Orientation="Horizontal">                                    
+                                    <TextBlock Text="{Binding VixHealth.CertificateExpirationDate}"  />
+                                    <Image Source="{Binding Path=VixHealth.CertificateExpiredIcon}" />
+                                </StackPanel>
+                            </HierarchicalDataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+
+
+
+                </GridView>
+            </ListView.View>
+        </ListView>
+    </Grid>
+</UserControl>

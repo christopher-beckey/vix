@@ -1,0 +1,296 @@
+KIDS Distribution saved on Nov 09, 2007@06:29:35
+Package for RPC named MAG DICOM GET UID TABLE
+**KIDS**:MAG*3.0*54*60^
+
+**INSTALL NAME**
+MAG*3.0*54*60
+"BLD",6415,0)
+MAG*3.0*54*60^^0^3071109^y
+"BLD",6415,1,0)
+^^5^5^3071109^
+"BLD",6415,1,1,0)
+This package contains a KIDS component
+"BLD",6415,1,2,0)
+for Patch 54.
+"BLD",6415,1,3,0)
+ 
+"BLD",6415,1,4,0)
+This package transports the remote procedure call named MAG DICOM GET UID 
+"BLD",6415,1,5,0)
+TABLE.
+"BLD",6415,4,0)
+^9.64PA^^
+"BLD",6415,6.3)
+1
+"BLD",6415,"KRN",0)
+^9.67PA^8989.52^19
+"BLD",6415,"KRN",.4,0)
+.4
+"BLD",6415,"KRN",.401,0)
+.401
+"BLD",6415,"KRN",.402,0)
+.402
+"BLD",6415,"KRN",.403,0)
+.403
+"BLD",6415,"KRN",.5,0)
+.5
+"BLD",6415,"KRN",.84,0)
+.84
+"BLD",6415,"KRN",3.6,0)
+3.6
+"BLD",6415,"KRN",3.8,0)
+3.8
+"BLD",6415,"KRN",9.2,0)
+9.2
+"BLD",6415,"KRN",9.8,0)
+9.8
+"BLD",6415,"KRN",19,0)
+19
+"BLD",6415,"KRN",19.1,0)
+19.1
+"BLD",6415,"KRN",101,0)
+101
+"BLD",6415,"KRN",409.61,0)
+409.61
+"BLD",6415,"KRN",771,0)
+771
+"BLD",6415,"KRN",870,0)
+870
+"BLD",6415,"KRN",8989.51,0)
+8989.51
+"BLD",6415,"KRN",8989.52,0)
+8989.52
+"BLD",6415,"KRN",8994,0)
+8994
+"BLD",6415,"KRN",8994,"NM",0)
+^9.68A^1^1
+"BLD",6415,"KRN",8994,"NM",1,0)
+MAG DICOM GET UID TABLE^^0
+"BLD",6415,"KRN",8994,"NM","B","MAG DICOM GET UID TABLE",1)
+
+"BLD",6415,"KRN","B",.4,.4)
+
+"BLD",6415,"KRN","B",.401,.401)
+
+"BLD",6415,"KRN","B",.402,.402)
+
+"BLD",6415,"KRN","B",.403,.403)
+
+"BLD",6415,"KRN","B",.5,.5)
+
+"BLD",6415,"KRN","B",.84,.84)
+
+"BLD",6415,"KRN","B",3.6,3.6)
+
+"BLD",6415,"KRN","B",3.8,3.8)
+
+"BLD",6415,"KRN","B",9.2,9.2)
+
+"BLD",6415,"KRN","B",9.8,9.8)
+
+"BLD",6415,"KRN","B",19,19)
+
+"BLD",6415,"KRN","B",19.1,19.1)
+
+"BLD",6415,"KRN","B",101,101)
+
+"BLD",6415,"KRN","B",409.61,409.61)
+
+"BLD",6415,"KRN","B",771,771)
+
+"BLD",6415,"KRN","B",870,870)
+
+"BLD",6415,"KRN","B",8989.51,8989.51)
+
+"BLD",6415,"KRN","B",8989.52,8989.52)
+
+"BLD",6415,"KRN","B",8994,8994)
+
+"KRN",8994,2332,-1)
+0^1
+"KRN",8994,2332,0)
+MAG DICOM GET UID TABLE^SERVER^MAGDUID3^2^R^^^^3
+"KRN",8994,2332,1,0)
+^8994.01^17^17^3071003^^
+"KRN",8994,2332,1,1,0)
+ +---------------------------------------------------------------+
+"KRN",8994,2332,1,2,0)
+ | Property of the US Government.                                |
+"KRN",8994,2332,1,3,0)
+ | No permission to copy or redistribute this software is given. |
+"KRN",8994,2332,1,4,0)
+ | Use of unreleased versions of this software requires the user |
+"KRN",8994,2332,1,5,0)
+ | to execute a written test agreement with the VistA Imaging    |
+"KRN",8994,2332,1,6,0)
+ | Development Office of the Department of Veterans Affairs,     |
+"KRN",8994,2332,1,7,0)
+ | telephone (301) 734-0100.                                     |
+"KRN",8994,2332,1,8,0)
+ |                                                               |
+"KRN",8994,2332,1,9,0)
+ | The Food and Drug Administration classifies this software as  |
+"KRN",8994,2332,1,10,0)
+ | a medical device.  As such, it may not be changed in any way. |
+"KRN",8994,2332,1,11,0)
+ | Modifications to this software may result in an adulterated   |
+"KRN",8994,2332,1,12,0)
+ | medical device under 21CFR820, the use of which is considered |
+"KRN",8994,2332,1,13,0)
+ | to be a violation of US Federal Statutes.                     |
+"KRN",8994,2332,1,14,0)
+ +---------------------------------------------------------------+
+"KRN",8994,2332,1,15,0)
+ 
+"KRN",8994,2332,1,16,0)
+This Remote Procedure transmits the current content of the
+"KRN",8994,2332,1,17,0)
+UID table from VistA to the DICOM Gateways.
+"KRN",8994,2332,2,0)
+^8994.02A^2^2
+"KRN",8994,2332,2,1,0)
+OFFSET^1^100^1^2
+"KRN",8994,2332,2,1,1,0)
+^^9^9^3071001^
+"KRN",8994,2332,2,1,1,1,0)
+The value of this parameter is a string.
+"KRN",8994,2332,2,1,1,2,0)
+ 
+"KRN",8994,2332,2,1,1,3,0)
+The first time this Remote Procedure is called for a certain
+"KRN",8994,2332,2,1,1,4,0)
+"master file", the value of this parameter must be empty.
+"KRN",8994,2332,2,1,1,5,0)
+ 
+"KRN",8994,2332,2,1,1,6,0)
+Each next time this Remote Procedure is called for the same
+"KRN",8994,2332,2,1,1,7,0)
+"master file", the value of this parameter must be copied from
+"KRN",8994,2332,2,1,1,8,0)
+the return array, so that the Remote Procedure will continue
+"KRN",8994,2332,2,1,1,9,0)
+where it left off in the previous call.
+"KRN",8994,2332,2,2,0)
+MAX^1^15^1^3
+"KRN",8994,2332,2,2,1,0)
+^8994.021^3^3^3071003^^
+"KRN",8994,2332,2,2,1,1,0)
+The value of this parameter is a positive integer number.
+"KRN",8994,2332,2,2,1,2,0)
+This value indicates the maximum number of values that may be
+"KRN",8994,2332,2,2,1,3,0)
+returned in each call to this Remote Procedure.
+"KRN",8994,2332,2,"B","MAX",2)
+
+"KRN",8994,2332,2,"B","OFFSET",1)
+
+"KRN",8994,2332,2,"PARAMSEQ",1,1)
+
+"KRN",8994,2332,2,"PARAMSEQ",2,1)
+
+"KRN",8994,2332,2,"PARAMSEQ",2,2)
+
+"KRN",8994,2332,2,"PARAMSEQ",3,2)
+
+"KRN",8994,2332,3,0)
+^8994.03^10^10^3071003^^
+"KRN",8994,2332,3,1,0)
+The return parameter for this Remote Procedure is an array.
+"KRN",8994,2332,3,2,0)
+ 
+"KRN",8994,2332,3,3,0)
+The first element of this array is either a positive
+"KRN",8994,2332,3,4,0)
+integer number that indicates the number of elements that follow,
+"KRN",8994,2332,3,5,0)
+or a negative number that indicates an error condition.
+"KRN",8994,2332,3,6,0)
+ 
+"KRN",8994,2332,3,7,0)
+The subsequent elements of this array are organized in pairs.
+"KRN",8994,2332,3,8,0)
+The first element of each pair is a reference to a global variable.
+"KRN",8994,2332,3,9,0)
+The second element of each pair is the value that is to be stored
+"KRN",8994,2332,3,10,0)
+in that global variable.
+"MBREQ")
+0
+"ORD",16,8994)
+8994;16;1;;;;;;;RPCDEL^XPDIA1
+"ORD",16,8994,0)
+REMOTE PROCEDURE
+"QUES","XPF1",0)
+Y
+"QUES","XPF1","??")
+^D REP^XPDH
+"QUES","XPF1","A")
+Shall I write over your |FLAG| File
+"QUES","XPF1","B")
+YES
+"QUES","XPF1","M")
+D XPF1^XPDIQ
+"QUES","XPF2",0)
+Y
+"QUES","XPF2","??")
+^D DTA^XPDH
+"QUES","XPF2","A")
+Want my data |FLAG| yours
+"QUES","XPF2","B")
+YES
+"QUES","XPF2","M")
+D XPF2^XPDIQ
+"QUES","XPI1",0)
+YO
+"QUES","XPI1","??")
+^D INHIBIT^XPDH
+"QUES","XPI1","A")
+Want KIDS to INHIBIT LOGONs during the install
+"QUES","XPI1","B")
+YES
+"QUES","XPI1","M")
+D XPI1^XPDIQ
+"QUES","XPM1",0)
+PO^VA(200,:EM
+"QUES","XPM1","??")
+^D MG^XPDH
+"QUES","XPM1","A")
+Enter the Coordinator for Mail Group '|FLAG|'
+"QUES","XPM1","B")
+
+"QUES","XPM1","M")
+D XPM1^XPDIQ
+"QUES","XPO1",0)
+Y
+"QUES","XPO1","??")
+^D MENU^XPDH
+"QUES","XPO1","A")
+Want KIDS to Rebuild Menu Trees Upon Completion of Install
+"QUES","XPO1","B")
+YES
+"QUES","XPO1","M")
+D XPO1^XPDIQ
+"QUES","XPZ1",0)
+Y
+"QUES","XPZ1","??")
+^D OPT^XPDH
+"QUES","XPZ1","A")
+Want to DISABLE Scheduled Options, Menu Options, and Protocols
+"QUES","XPZ1","B")
+YES
+"QUES","XPZ1","M")
+D XPZ1^XPDIQ
+"QUES","XPZ2",0)
+Y
+"QUES","XPZ2","??")
+^D RTN^XPDH
+"QUES","XPZ2","A")
+Want to MOVE routines to other CPUs
+"QUES","XPZ2","B")
+NO
+"QUES","XPZ2","M")
+D XPZ2^XPDIQ
+"VER")
+8.0^22.0
+**END**
+**END**

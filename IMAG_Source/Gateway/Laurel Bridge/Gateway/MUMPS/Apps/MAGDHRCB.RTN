@@ -1,0 +1,160 @@
+Cache for Windows NT^INT^Saved from DICOM,ROU (ISW-KUZMAKP3-LT)^~Format=Cache.S~
+%RO on 07/02/2013  10:46
+MAGDHRCB^INT^1^63005,38237.199634^0
+MAGDHRCB ;WOIFO/PMK - Read HL7 and generate DICOM ; 02 Jul 2013 10:37 AM
+ ;;3.0;IMAGING;**138**;Mar 19, 2002
+ ;; Per VHA Directive 2004-038, this routine should not be modified.
+ ;; +---------------------------------------------------------------+
+ ;; | Property of the US Government.                                |
+ ;; | No permission to copy or redistribute this software is given. |
+ ;; | Use of unreleased versions of this software requires the user |
+ ;; | to execute a written test agreement with the VistA Imaging    |
+ ;; | Development Office of the Department of Veterans Affairs,     |
+ ;; | telephone (301) 734-0100.                                     |
+ ;; | The Food and Drug Administration classifies this software as  |
+ ;; | a medical device.  As such, it may not be changed in any way. |
+ ;; | Modifications to this software may result in an adulterated   |
+ ;; | medical device under 21CFR820, the use of which is considered |
+ ;; | to be a violation of US Federal Statutes.                     |
+ ;; +---------------------------------------------------------------+
+ ;;
+ ;
+ Q
+ ; Anatomic Pathology HL7 data input routine
+ ; This module reads and parses the HL7 ORC,OBR and TQ1 Segments for HL7 2.5.1
+ ;
+ORC ; ORC Segment (Order Entry & Examination Change Only)
+ N ORCTRL ;---- HL7 order control code
+ N ORSTATUS ;-- HL7 order status code
+ N DCMSTS ;---- DICOM status code
+ N HL7DTTM ;--- date/time (HL7 format)
+ N DCMDT ;----- date value (DICOM format)
+ N DCMTM ;----- time value (DICOM format)
+ N DIVNAME ;--- division name
+ N DIVISION ;-- division (station number
+ ;
+ S ORCTRL=$$GETDATA^MAGDHRC0(1) ; Order Control
+ S ORSTATUS=$$GETDATA^MAGDHRC0(5) ; Order Status
+ I ORCTRL="NW",ORSTATUS="" S MESSAGE="ORDER ENTRY",DCMSTS="STARTED"
+ E  I ORCTRL="XO",ORSTATUS="IP" S MESSAGE="EXAM CHANGE",DCMSTS="STARTED"
+ E  I ORCTRL="SC",ORSTATUS="CM" S MESSAGE="EXAM CHANGE",DCMSTS="COMPLETED"
+ E  I ORCTRL="CA",ORSTATUS="CA" S MESSAGE="EXAM CHANGE",DCMSTS="CANCELLED"
+ D SAVE^MAGDFCNS("0032,000A",DCMSTS) ; Order Status
+ ;
+ S HL7DTTM=$$GETDATA^MAGDHRC0(9) ; Date/Time of Transaction
+ ; The transaction date is needed later in MAGDWLPB
+ D CVTDT^MAGDHRCU(HL7DTTM,.DCMDT,.DCMTM)
+ ; convert to FileMan date/time format
+ S TRANSFDT=(DCMDT_"."_DCMTM)-17000000
+ D:HL7DTTM'=""
+ . D REPLACE^MAGDFCNS("0032,1000",DCMDT) ; Start Study date
+ . D REPLACE^MAGDFCNS("0032,1001",DCMTM) ; Start Study time
+ . Q
+ ;
+ ; Scheduled Procedure Step Location hard-coded
+ D SAVE^MAGDFCNS("0040,0011","Anatomic Pathology")
+ ;
+ ; ordering provider
+ S Z=$$GETNAME^MAGDHRC0(12)
+ D SAVE^MAGDFCNS("0032,1032",$P(Z,"^",2,999)) ; Requesting Physician's Name
+ ;
+ ; call back numbers
+ S Z=$$GETDATA^MAGDHRC0(14,1,12) ; ORC-14.12 unformatted telephone number
+ D SAVE^MAGDFCNS("0040,2010",Z) ; order callback phone number
+ ;
+ ; entering organization
+ S Z=$$GETDATA^MAGDHRC0(17,1,2)
+ D SAVE^MAGDFCNS("0032,1033",Z) ; Requesting Service
+ ;
+ ; ordering facility name - last component is the DIVISION
+ S DIVNAME=$$GETDATA^MAGDHRC0(21,1,1)
+ S DIVISION=$$GETDATA^MAGDHRC0(21,1,10)
+ ; save division information
+ D REPLACE^MAGDFCNS("0008,0080",DIVNAME) ; institution name
+ D SEQPUSH^MAGDFCNS("0008,0082") ; institution code sequence
+ D REPLACE^MAGDFCNS("0008,0100",DIVISION) ; code value
+ D REPLACE^MAGDFCNS("0008,0102","L") ; coding scheme
+ D REPLACE^MAGDFCNS("0008,0104",DIVNAME) ; name of division
+ D SEQPOP^MAGDFCNS ; end institution code sequence
+ Q
+ ;
+OBR ; OBR Segment
+ N CPTCODE,CPTNAME,CPTSCHM,I,ITYPCODE,ITYPNAME,LEFTRIGHT
+ N PREGSTAT,RADPT0,RADPT2,RADPT3,RAO0,RAOIEN,RPTDATE,RPTTIME,STATUS
+ N VACODE,VANAME,VASCHM,Y,Z
+ N SDYDT,SDYTM ; -- study start date and time (DICOM format)
+ ;
+ S FORWARD=0,REQSTATE="" ; needed in ^MAGDWLPB for consistency with GMRC
+ ;
+ ; PLACER Order # (Accession Number and Case IDs)
+ S Z=$$GETDATA^MAGDHRC0(2) ; get Accession Number (ll yy nnnnnn)
+ D SAVE^MAGDFCNS("0008,0050",Z) ; Accession Number (ll yy nnnnnn)
+ D SAVE^MAGDFCNS("0020,0010",$P(Z," ",3)) ; Study ID (i.e., case number)
+ ;
+ ; I VERSION]"2.3.1" D  ; HL7 version > 2.3.1
+ ; . S Y=$$GETDATA^MAGDHRC0(18)
+ ; . Q 
+ ; E  S Y=$$GETDATA^MAGDHRC0(3,1,1)_"."_$$GETDATA^MAGDHRC0(3,1,2)
+ ; S Y=$TR(Y,"-",".") ; unique number for UID
+ ; S UID("INTERP")=$$INTERP^MAGDUID1(STATNUMB,Y,1)
+ ; S UID("RESULTS")=$$RESULTS^MAGDUID1(STATNUMB,Y)
+ ;
+ D  ; get the Study Instance UID from the IPC segment
+ . N HL7SEGNO,IPCHLSEG
+ . S IPCHLSEG=$$GETSEG^MAGDHRC0("IPC")
+ . S HL7SEGNO=$$GETSEG^MAGDHRC0("IPC")
+ . S UID("STUDY")=$$GETDATA^MAGDHRC0(3)
+ . Q
+ ;
+ S Z=$$GETDATA^MAGDHRC0(7) ; Observation Date/Time
+ D CVTDT^MAGDHRCU(Z,.SDYDT,.SDYTM) ; convert from HL7 to DICOM format
+ I Z'="" D  ; Observation Date/Time -> study start date/time
+ . D REPLACE^MAGDFCNS("0032,1000",SDYDT) ; scheduled study start date in yyyymmdd
+ . D REPLACE^MAGDFCNS("0032,1001",SDYTM) ; scheduled study start time in hhmmss format
+ . Q
+ ;
+ ; Universal Service Identifier
+ S (CPTCODE,VACODE)=$$GETDATA^MAGDHRC0(4,1,1) ; CPT procedure code
+ S (CPTNAME,VANAME)=$$GETDATA^MAGDHRC0(4,1,2) ; CPT procedure name
+ S (CPTSCHM,VASCHM)=$$GETDATA^MAGDHRC0(4,1,3) ; CPT coding scheme
+ I CPTSCHM="CPT4" S CPTSCHM="C4" ; convert to DICOM value
+ ;
+ ; Requested Procedure Code Sequence
+ D SEQPUSH^MAGDFCNS("0032,1064")
+ D SAVE^MAGDFCNS("0008,0100",VACODE) ; procedure code
+ D SAVE^MAGDFCNS("0008,0102",VASCHM) ; coding scheme
+ D SAVE^MAGDFCNS("0008,0104",VANAME) ; code meaning
+ D SEQINC^MAGDFCNS ; increment the sequence counter
+ D SAVE^MAGDFCNS("0008,0100",CPTCODE) ; CPT code value
+ D SAVE^MAGDFCNS("0008,0102",CPTSCHM) ; coding scheme
+ D SAVE^MAGDFCNS("0008,0104",CPTNAME) ; code meaning
+ D SEQPOP^MAGDFCNS
+ ;
+ D SAVE^MAGDFCNS("0032,1060",CPTNAME) ; requested procedure description
+ ;
+ ; get the type of imaging for the study
+ S ITYPCODE=$$GETDATA^MAGDHRC0(24) ; diagnostic service section id
+ ;
+ ; save image type information
+ D SEQPUSH^MAGDFCNS("0033,xx40,VA DHCP") ; imaging type sequence
+ D SAVE^MAGDFCNS("0008,0100",ITYPCODE) ; code value
+ D SAVE^MAGDFCNS("0008,0102","99LAB") ; coding scheme
+ D SAVE^MAGDFCNS("0008,0104",VANAME) ; meaning of code
+ D SEQPOP^MAGDFCNS ; end imaging type sequence
+ Q
+ ;
+TQ1 ; TQ1 Segment
+ N Z
+ S Z=$$GETDATA^MAGDHRC0(9) ; Scheduling Priority
+ ; HL7 Priorities are STAT, ASAP, and ROUTINE
+ ; DICOM Priorities for Study Priority ID are
+ ;   HIGH, MED, and LOW
+ S Y=$S(Z="S":"HIGH",Z="A":"MED",Z="R":"MED",1:"MED") D SAVE^MAGDFCNS("0032,000C",Y)
+ ; DICOM Priorities for Requested Procedure Priority are
+ ;   STAT, HIGH, ROUTINE, MEDIUM, LOW
+ S Y=$S(Z="S":"STAT",Z="A":"HIGH",Z="C":"HIGH",Z="P":"HIGH",1:"ROUTINE")
+ D SAVE^MAGDFCNS("0040,1003",Y)
+ Q
+
+
+

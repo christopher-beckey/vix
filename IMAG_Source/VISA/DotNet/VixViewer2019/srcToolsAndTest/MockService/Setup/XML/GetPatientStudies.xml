@@ -1,0 +1,27 @@
+<studies>
+  <study>
+    <imageCount>1</imageCount>
+    <contextId>urn%3avastudy%3a500-26732Mock-26732Mock-1008861107V475740</contextId>
+    <studyId>1008861107V475740</studyId>
+    <siteNumber>500</siteNumber>
+    <firstImage>
+      <thumbnailImageUri>http%3a%2f%2fclairenstreb.brinkster.net%2fimages%2fDelightInTheLord.png</thumbnailImageUri>
+      <sensitive>false</sensitive>
+      <captureDate>J</captureDate>
+    </firstImage>
+    <groupIen>26732Mock</groupIen>
+    <alternateExamNumber>F</alternateExamNumber>
+    <description>G</description>
+    <procedureDate>2021-02-16T00:01:00-05:00</procedureDate>
+    <sensitive>false</sensitive>
+    <package>NONE</package>
+    <type>MISCELLANEOUS - CLIN</type>
+    <origin>VA</origin>
+    <event>N</event>
+    <siteName>Salt Lake City, UT</siteName>
+    <studyClass>CLIN</studyClass>
+    <studyType>MISCELLANEOUS - CLIN</studyType>
+    <specialtyDescription>R</specialtyDescription>
+    <procedureDescription>CLIN</procedureDescription>
+  </study>
+</studies>

@@ -1,0 +1,136 @@
+09:50 AM 08/26/2005 
+DICOM Gateway MUMPS routines Build V3.0p51Build720_T22
+MAGOSDIR
+MAGOSDIR ;WOIFO/PMK/EdM - Host Operating System Utilities ; [ 11/19/2004  08:40 AM ]
+ ;;3.0;IMAGING;**10,51**;26-August-2005
+ ;; +---------------------------------------------------------------+
+ ;; | Property of the US Government.                                |
+ ;; | No permission to copy or redistribute this software is given. |
+ ;; | Use of unreleased versions of this software requires the user |
+ ;; | to execute a written test agreement with the VistA Imaging    |
+ ;; | Development Office of the Department of Veterans Affairs,     |
+ ;; | telephone (301) 734-0100.                                     |
+ ;; |                                                               |
+ ;; | The Food and Drug Administration classifies this software as  |
+ ;; | a medical device.  As such, it may not be changed in any way. |
+ ;; | Modifications to this software may result in an adulterated   |
+ ;; | medical device under 21CFR820, the use of which is considered |
+ ;; | to be a violation of US Federal Statutes.                     |
+ ;; +---------------------------------------------------------------+
+ ;;
+ ; Callable entries are:
+ ;
+ ; Directory scan
+ ;  Set STATUS=$$GETFST^MAGOSDIR(WILDCARD,.SEED,CASE,.NAME,.SIZE,.TIME,.ATTRIB)
+ ;  Set STATUS=$$GETNXT^MAGOSDIR(.SEED,CASE,.NAME,.SIZE,.TIME,.ATTRIB)
+ ;  Set STATUS=$$GETDIR^MAGOSDIR(WILDCARD,TYPES,CASE)
+ ;  Set STATUS=$$DRIVES^MAGOSDIR()
+ ;
+ ; File manipulation
+ ;  Set STATUS=$$DEL^MAGOSDIR(FILENAME)
+ ;  Set STATUS=$$MKDIR^MAGOSDIR(DIRNAME)
+ ;  Set STATUS=$$RMDIR^MAGOSDIR(DIRNAME)
+ ;  Set STATUS=$$RENAME^MAGOSDIR(OLDNAME,NEWNAME)
+ ;  Set STATUS=$$MOVE^MAGOSDIR(FILENAME,NEWLOC)
+ ;
+GETFILE(FILE,ARRAY) N I,S,X
+ K ARRAY
+ Q:'$$GETDIR^MAGOSDIR(FILE)
+ S S=$$OPEN^MAGOSFIL(FILE,"R")
+ I S<0 S $EC=",UOpen "_FILE_" for Read Failed," Q
+ S I=0 F  S S=$$READ^MAGOSFIL(FILE,.X) Q:S'=""  S:X'="" I=I+1,ARRAY(I)=X
+ S S=$$CLOSE^MAGOSFIL(FILE)
+ S ARRAY(0)=I
+ Q
+DEL(FILENAME) ;
+ ;  -- Deletes a file from a directory
+ Q $$MSMERROR^MAGOSMSC($ZOS(2,FILENAME))
+DRIVES() ;
+ ;  -- Returns list of active diskdrives
+ Q $TR($ZOS(17),$C(0)_":\")
+GETDIR(WILDCARD,TYPES,CASE) ;
+ ;  -- Searches for one or more files,
+ N ATTRIB,NAME,OK,R,SEED,SIZE,TIME,X
+ K ^TMP("MAG",$J,"DIR LIST")
+ S TYPES=$G(TYPES,"*") S:TYPES["*" TYPES="ACDHNRST"
+ F X=1:1:$L(TYPES) S OK($E(TYPES,X))=""
+ S OK("?")=""
+ S X=$$GETFST(WILDCARD,.SEED,$G(CASE),.NAME,.SIZE,.TIME,.ATTRIB)
+ Q:X<0 X Q:X="" 0
+ S R=0 F  D  S X=$$GETNXT(.SEED,$G(CASE),.NAME,.SIZE,.TIME,.ATTRIB) Q:NAME=""  I X<0 S R=X Q
+ . N D,H,M,T
+ . S OK=0 F X=1:1:$L(ATTRIB) I $D(OK($E(ATTRIB,X))) S OK=1 Q
+ . Q:'OK
+ . S R=R+1,D=TIME\1,T=TIME-D*10000\1
+ . S D=D#100_"-"_$P("JAN FEB MAR APR MAY JUN JUL AUG SEP OCT NOV DEC"," ",D\100#100)_"-"_(D\10000+1700)
+ . S H=T\100,M=T#100,T=H#12 S:'T T=12
+ . S T=H_":"_$TR($J(M,2)," ",0) ;_$S(H<12:" AM",1:" PM")
+ . S ^TMP("MAG",$J,"DIR LIST",NAME)=SIZE_";"_D_";"_T_";"_ATTRIB
+ . Q
+ Q R
+GETFST(WILDCARD,SEED,CASE,NAME,SIZE,TIME,ATTRIB) N X
+ ;  -- Starts a wild-card directory search
+ S (SEED,MAGOS("HAND"))=$ZOS(12,WILDCARD,31)
+ S MAGOS("DIR")=$P(WILDCARD,"\",1,$L(WILDCARD,"\")-1)
+ S:(MAGOS("DIR")'="")!(WILDCARD["\") MAGOS("DIR")=MAGOS("DIR")_"\"
+ G MSMWILD
+GETNXT(SEED,CASE,NAME,SIZE,TIME,ATTRIB) ;
+ ;  -- Continues a wild-card directory search
+ I '$D(MAGOS("HAND")) Q "-1 Search not properly initialized"
+ S SEED=$ZOS(13,SEED)
+ I $P(SEED,"^",1)="" S MAGOS("HAND")=$ZOS(16,MAGOS("HAND")) K MAGOS("HAND")
+ G MSMWILD
+MSMWILD N D,H,M,S,X,Y
+ I SEED<0 Q $$MSMERROR^MAGOSMSC(SEED)
+ S NAME=$P(SEED,"^",1) S:'$G(CASE) NAME=$$UPPER^MAGOSMSC(NAME)
+ S X=$P(SEED,"^",2,$L(SEED)+2) Q:X="" ""
+ S H=$A(X,24)*256+$A(X,23),S=H#32*2,H=H\32,M=H#64,H=H\64
+ S S=H*100+M*100+S/1000000
+ S Y=$A(X,26)*256+$A(X,25),D=Y#32,Y=Y\32,M=Y#16,Y=Y\16,Y=Y+280
+ S TIME=Y*100+M*100+D+S
+ S SIZE=$A(X,30)*256+$A(X,29)*256+$A(X,28)*256+$A(X,27)
+ S ATTRIB=$$DOSATT($ZOS(10,$G(MAGOS("DIR"))_NAME))
+ Q 0
+DOSATT(A) N ATT,BIT
+ ; DOS/Windows attribute values:
+ ;
+ ;  1:     1 = Read-Only
+ ;  2:     2 = Hidden
+ ;  3:     4 = System
+ ;  4:     8 = Volume Label
+ ;  5:    16 = Directory
+ ;  6:    32 = Archive
+ ;  7:    64 = Device (reserved for future use)
+ ;  8:   128 = Normal
+ ;  9:   256 = Temporary
+ ; 10:   512 = Sparse
+ ; 11:  1024 = Re-Parse Point
+ ; 12:  2048 = Compressed
+ ; 13:  4096 = Off-Line
+ ; 14:  8192 = Not Context-Indexed
+ ; 15: 16384 = Encrypted
+ ;
+ S ATT="" F BIT=1:1:8 S:A#2 ATT=ATT_$E("RHSVDA-N",BIT) S A=A\2
+ I A,ATT'["N" S ATT=ATT_"N"
+ S:ATT="" ATT="N"
+ Q ATT
+MKDIR(DIRNAME) N D,I,V
+ ;  -- Creates a new directory
+ S V=0
+ F I=$S($E(DIRNAME,1,2)="\\":5,1:2):1:$L(DIRNAME,"\") D  Q:V
+ . S D=$P(DIRNAME,"\",1,I),V=$ZOS(6,D)
+ . S:V=-183 V=0
+ . Q
+ S:V V=$$MSMERROR^MAGOSMSC(V)
+ Q V
+MOVE(FILENAME,NEWLOC) ;
+ ;  -- Moves a file to a different location
+ Q $$HOSTCMD^MAGOSMSC("move "_FILENAME_" "_NEWLOC)
+RENAME(OLDNAME,NEWNAME) ;
+ ;  -- Renames a file
+ Q $$MSMERROR^MAGOSMSC($ZOS(3,OLDNAME,NEWNAME))
+RMDIR(DIRNAME) ;
+ ;  -- Deletes a directory
+ Q $$MSMERROR^MAGOSMSC($ZOS(7,DIRNAME))
+
+

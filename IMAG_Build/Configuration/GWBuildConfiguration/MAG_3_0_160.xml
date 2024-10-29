@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<build
+ name="MAG*3.0*160"
+ patch="160"
+ patchName="VistA Imaging Version 3.0 Patch 160 - LDGW 64 bits Compatibility">
+
+  <routines>
+    <routine name="MAGDQR15" export="MAGDQR15.RTN" />
+    <routine name="MAGDIR75"  export="MAGDIR75.RTN" />
+    <routine name="MAGDVRSN" export="MAGDVRSN.RTN" />
+  </routines>
+  
+   <PatchBuildInfo>
+	<BuildInfo BuildNumber="6017" BuildDate="Aug 05, 2015"/>
+  </PatchBuildInfo>
+  
+</build>

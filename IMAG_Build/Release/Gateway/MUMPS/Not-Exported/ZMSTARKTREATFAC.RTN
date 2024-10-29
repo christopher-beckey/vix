@@ -1,0 +1,35 @@
+Cache for Windows NT^INT^^~Format=Cache.S~
+%RO on 02 Mar 2007   2:45 PM
+ZMSTARKTREATFAC^INT^1^60691,53126^0
+ZMSTARKTREATFAC ;
+ 
+START ;
+ n tempIEN,tempDGCN,FACNO
+ s tempDGCN=$p(^DGCN(391.91,0),"^",3)
+ i tempDGCN'?1N.N w !,"Problem!" b    
+ ;
+ W ! S DIC="^DPT(",DIC(0)="AEQMZ" D ^DIC  ; Patient Select utility stores results in Y array
+ s tempIEN = $p(Y,"^",1) d  
+ .i '$d(^DPT(tempIEN)) w !,"Problem!" b  
+ .;f FACNO=200,660,756  d  
+ .S DIC="^DIC(4,",DIC(0)="QEAL" D ^DIC
+ .I Y=-1 K DIC Q  
+ .s FACNO=$p(Y,"^",1) d  
+ ..d ADDTREAT
+ ;
+ s $p(^DGCN(391.91,0),"^",3)=tempDGCN
+ s $p(^DGCN(391.91,0),"^",4)=tempDGCN
+ ;w !,tempDGCN
+ Q
+ 
+ADDTREAT ;
+ s tempDGCN=tempDGCN+1
+ s ^DGCN(391.91,tempDGCN,0)=tempIEN_"^"_FACNO_"^3050229"
+ s ^DGCN(391.91,"AINST",FACNO,tempIEN,tempDGCN)=""
+ s ^DGCN(391.91,"APAT",tempIEN,FACNO,tempDGCN)=""
+ S ^DGCN(391.91,"B",tempIEN,tempDGCN)=""
+ s ^DGCN(391.91,"C",FACNO,tempDGCN)=""
+ q
+
+
+

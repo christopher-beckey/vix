@@ -1,0 +1,18 @@
+﻿<configuration>
+    <system.serviceModel>
+        <bindings>
+            <basicHttpBinding>
+                <binding name="ImagingExchangeSiteServiceSoapSoapBinding" maxBufferSize="2147483647"
+                    maxReceivedMessageSize="2147483647">
+                    <security mode="None" />
+                </binding>
+            </basicHttpBinding>
+        </bindings>
+        <client>
+            <endpoint address="http://siteserver.vista.med.va.gov/VistaWebSvcs/ImagingExchangeSiteService.asmx"
+                binding="basicHttpBinding" bindingConfiguration="ImagingExchangeSiteServiceSoapSoapBinding"
+                contract="Services.SiteService.ImagingExchange.ImagingExchangeSiteServiceSoap"
+                name="ImagingExchangeSiteServiceSoap" />
+        </client>
+    </system.serviceModel>
+</configuration>

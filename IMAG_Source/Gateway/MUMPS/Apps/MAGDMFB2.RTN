@@ -1,0 +1,197 @@
+MAGDMFB2 ;WOIFO/PMK - Program to build DICOM Master File ; 10/05/2006 08:27
+ ;;3.0;IMAGING;**21,30,51,69**;MAR 19, 2002;;NOV 7, 2007
+ ;; Per VHA Directive 2004-038, this routine should not be modified.
+ ;; +---------------------------------------------------------------+
+ ;; | Property of the US Government.                                |
+ ;; | No permission to copy or redistribute this software is given. |
+ ;; | Use of unreleased versions of this software requires the user |
+ ;; | to execute a written test agreement with the VistA Imaging    |
+ ;; | Development Office of the Department of Veterans Affairs,     |
+ ;; | telephone (301) 734-0100.                                     |
+ ;; | The Food and Drug Administration classifies this software as  |
+ ;; | a medical device.  As such, it may not be changed in any way. |
+ ;; | Modifications to this software may result in an adulterated   |
+ ;; | medical device under 21CFR820, the use of which is considered |
+ ;; | to be a violation of US Federal Statutes.                     |
+ ;; +---------------------------------------------------------------+
+ ;;
+ Q
+ ;
+ELEMENTS ; Import Element Dictionary
+ ;
+ N DESCRIPT,ELEMENT,ELM,ELMBEG,ELMEND,ELMINC,ENUM,ENUMBEG,ENUMEND
+ N ENUMINC,ENUMTYPE,EPTR,FILE,GROUP,GRP,GRPBEG,GRPEND,GRPH,GRPINC
+ N OLDELM,OLDGROUP,OWNER,OWNERS,RECORD,VRLEGAL
+ ;
+ S FILE=$$INIT^MAGDMFB(2006.51,"DICOM Element","Element")
+ Q:FILE=""
+ ;
+ K ^MAGDICOM(2006.51)
+ S ^MAGDICOM(2006.51,0)="DICOM DATA ELEMENT DICTIONARY^2006.51^^"
+ S VRLEGAL="^AE^AS^AT^CS^DA^DS^DT^FL^FD^IS^LO^LT^OB^OF^OW^OW/OB^PN^SH^SL^SQ^SQIS^SQIE^SQE^SS^ST^TM^UI^UL^US^US/SS^US/SS/OW^UT^NULL^"
+ ;
+ S STATUS=$$OPEN^MAGOSFIL(FILE,"R")
+ I STATUS<0 D  Q
+ . D MESSAGE^MAGDMLOG(1,0,"Open Error: "_STATUS,"t")
+ . S FATAL=FATAL+1
+ . Q
+ S OLDGROUP=-1,OLDELM=-1
+ F  D  Q:STATUS'=""
+ . N III
+ . S STATUS=$$READ^MAGOSFIL(FILE,.RECORD)
+ . I $$USEPRIN^MAGOSFIL(1)
+ . I STATUS<0 Q:+STATUS=-2  D  Q
+ . . D MESSAGE^MAGDMLOG(1,0,"Read Error: "_STATUS,"t")
+ . . S FATAL=FATAL+1
+ . . Q
+ . Q:RECORD=""
+ . I "#;"[$E(RECORD,1) D  Q  ; comment
+ . . D:'SILENT MESSAGE^MAGDMLOG(1,0,$E(RECORD,2,999),"tB")
+ . . Q
+ . ; Actual data
+ . I $L(RECORD,"|")=3 D GROUP Q
+ . I $L(RECORD,"|")=6 D  Q
+ . . F III=1:1:$L(OWNERS,"^") S OWNER=$P(OWNERS,"^",III) D ELEMENT
+ . . Q
+ . I $L(RECORD,"|")=2 D  Q
+ . . F III=1:1:$L(OWNERS,"^") S OWNER=$P(OWNERS,"^",III) D ENUM
+ . . Q
+ . D MESSAGE^MAGDMLOG(1,0,"*** Format Error ***","t")
+ . D MESSAGE^MAGDMLOG(1,0,RECORD,"t")
+ . S FATAL=FATAL+1
+ . I FBSWITCH="FOREGROUND" R Z:DTIME
+ . Q
+ S STATUS=$$CLOSE^MAGOSFIL(FILE)
+ D MESSAGE^MAGDMLOG(1,0,EPTR_" element definitions added to database.","t")
+ Q
+ ;
+GROUP ; process a group
+ S GROUP=$P(RECORD,"|"),OWNERS=$P(RECORD,"|",2),DESCRIPT=$P(RECORD,"|",3)
+ S OLDGROUP=GROUP
+ Q
+ ;
+ELEMENT ; process an element
+ N ELEMENT,NAME,RETIRED,VM,VR,X
+ S ELEMENT=$P(RECORD,"|",1),GROUP=$P(ELEMENT,",",1),ELEMENT=$P(ELEMENT,",",2)
+ S NAME=$P(RECORD,"|",2),VR=$P(RECORD,"|",3),VM=$P(RECORD,"|",4)
+ S X=$P(RECORD,"|",5) D
+ . I X="" S ENUMTYPE="" Q
+ . I "Ee"[$E(X,1) S ENUMTYPE="E" Q
+ . I "Dd"[$E(X,1) S ENUMTYPE="D" Q
+ . D MESSAGE^MAGDMLOG(1,0,"*** Illegal enumeration type: """_X_""" ***","t")
+ . D MESSAGE^MAGDMLOG(1,0,RECORD,"t")
+ . S FATAL=FATAL+1
+ . I FBSWITCH="FOREGROUND" R Z:DTIME
+ . S ENUMTYPE=""
+ . Q
+ S X=$P(RECORD,"|",6) D
+ . I X="" S RETIRED="" Q
+ . I $TR(X,"DEIRT","deirt")=$E("retired",1,$L(X)) S RETIRED="R" Q
+ . D MESSAGE^MAGDMLOG(1,0,"*** Illegal Retired status: """_X_""" ***","t")
+ . D MESSAGE^MAGDMLOG(1,0,RECORD,"t")
+ . S FATAL=FATAL+1
+ . I FBSWITCH="FOREGROUND" R Z:DTIME
+ . S RETIRED=""
+ . Q
+ I VRLEGAL'[("^"_VR_"^") D
+ . D MESSAGE^MAGDMLOG(1,0,"*** Illegal Value Representation: """_VR_""" ***","t")
+ . D MESSAGE^MAGDMLOG(1,0,RECORD,"t")
+ . S FATAL=FATAL+1
+ . I FBSWITCH="FOREGROUND" R Z:DTIME
+ . Q
+ S Y=NAME_"^"_VR_"^"_VM_"^"_ENUMTYPE_"^"_RETIRED
+ D:GROUP'=OLDGROUP
+ . D MESSAGE^MAGDMLOG(1,0,"*** Wrong group number ***","t")
+ . D MESSAGE^MAGDMLOG(1,0,RECORD,"t")
+ . S FATAL=FATAL+1
+ . I FBSWITCH="FOREGROUND" R Z:DTIME
+ . Q
+ I "0000,0010"[ELEMENT D  ; output the 0000 & 0010 elements
+ . D OUTPUT(Y,GROUP,ELEMENT,"")
+ . Q
+ E  D  ; output the other elements for the group
+ . D OUTPUT(Y,GROUP,ELEMENT,OWNER)
+ . Q
+ S OLDELM=ELEMENT
+ Q
+ ;
+ENUM ; enumeration
+ D:ENUMTYPE=""
+ . D MESSAGE^MAGDMLOG(1,0,"*** Enumeration type not set ***","t")
+ . D MESSAGE^MAGDMLOG(1,0,RECORD,"t")
+ . S FATAL=FATAL+1
+ . I FBSWITCH="FOREGROUND" R Z:DTIME
+ . Q
+ S ELEMENT=$P(RECORD,"|"),GROUP=$P(ELEMENT,","),ELEMENT=$P(ELEMENT,",",2)
+ S ENUM=$P(RECORD,"|",2),DESCRIPT=$P(ENUM,"=",2,999),ENUM=$P(ENUM,"=",1)
+ D:GROUP'=OLDGROUP
+ . D MESSAGE^MAGDMLOG(1,0,"*** Wrong group number ***","t")
+ . D MESSAGE^MAGDMLOG(1,0,RECORD,"t")
+ . S FATAL=FATAL+1
+ . I FBSWITCH="FOREGROUND" R Z:DTIME
+ . Q
+ D:ELEMENT'=OLDELM
+ . D MESSAGE^MAGDMLOG(1,0,"*** Wrong element number ***","t")
+ . D MESSAGE^MAGDMLOG(1,0,RECORD,"t")
+ . S FATAL=FATAL+1
+ . I FBSWITCH="FOREGROUND" R Z:DTIME
+ . Q
+ D OUTPUT(DESCRIPT,GROUP,ELEMENT,OWNER,ENUM)
+ Q
+ ;
+OUTPUT(VALUE,GROUP,ELEMENT,OWNER,ENUM) ; set the value into the global
+ N TAG
+ ; group processing
+ D PARSE(GROUP,.GRPBEG,.GRPINC,.GRPEND)
+ F GRP=GRPBEG:GRPINC:GRPEND D  ; output each group
+ . S GRPH=$$DEC2HEX^MAGOSMSC(GRP,4)
+ . ; element processing
+ . I "Xx"'[$E(ELEMENT,1) D  ; standard data element, not private
+ . . D PARSE(ELEMENT,.ELMBEG,.ELMINC,.ELMEND)
+ . . F ELM=ELMBEG:ELMINC:ELMEND D  ; output each element
+ . . . D OUTPUT1("",$$DEC2HEX^MAGOSMSC(ELM,4))
+ . . . Q
+ . . Q
+ . E  D OUTPUT1(OWNER,ELEMENT) ; private (xxNN) data element
+ . Q
+ Q
+ ;
+OUTPUT1(OWNER,ELMH) ; process each element (converted to hex "XXXX")
+ S TAG=GRPH_","_ELMH S:OWNER'="" TAG=TAG_","_OWNER
+ I '$D(ENUM) D SETELEM  Q  ; only set the element
+ ; enumeration processing
+ I ENUM'[":" D SETENUM(ENUM) Q  ; not a range of ENUMs
+ ; enumeration range
+ D PARSE(ENUM,.ENUMBEG,.ENUMINC,.ENUMEND)
+ F ENUM=ENUMBEG:ENUMINC:ENUMEND D  ; output each enum
+ . D SETENUM($$DEC2HEX^MAGOSMSC(ENUM,4)_"H")
+ . Q
+ Q
+ ;
+SETELEM ; output an element
+ D:'SILENT MESSAGE^MAGDMLOG(1,0,TAG_"="_VALUE,"t")
+ S X=^MAGDICOM(2006.51,0),EPTR=$P(X,"^",3)+1
+ S ^MAGDICOM(2006.51,EPTR,0)=TAG_"^"_VALUE
+ S ^MAGDICOM(2006.51,"B",TAG,EPTR)=""
+ S $P(^MAGDICOM(2006.51,0),"^",3,4)=EPTR_"^"_EPTR
+ Q
+ ;
+SETENUM(ENUMH) ; output an enumeration
+ D:'SILENT MESSAGE^MAGDMLOG(1,0,TAG_" <"_ENUMH_">="_VALUE,"t")
+ I '$D(^MAGDICOM(2006.51,EPTR,1,0)) S ^(0)="^2006.514^^"
+ S X=^MAGDICOM(2006.51,EPTR,1,0),I=$P(X,"^",3)+1
+ S ^MAGDICOM(2006.51,EPTR,1,I,0)=ENUMH_"^"_VALUE
+ S ^MAGDICOM(2006.51,EPTR,1,"B",ENUMH,I)=""
+ S $P(^MAGDICOM(2006.51,EPTR,1,0),"^",3,4)=I_"^"_I
+ Q
+ ;
+PARSE(RANGE,BEG,INC,END) ; parse the  into beg, inc, and end
+ I RANGE[":" D  ;
+ . S BEG=$P(RANGE,":",1)
+ . S INC=$P(RANGE,":",2)
+ . S END=$P(RANGE,":",3)
+ . Q
+ E  S (BEG,END)=RANGE,INC=1
+ S BEG=$$HEX2DEC^MAGOSMSC(BEG),END=$$HEX2DEC^MAGOSMSC(END)
+ Q
+ ;

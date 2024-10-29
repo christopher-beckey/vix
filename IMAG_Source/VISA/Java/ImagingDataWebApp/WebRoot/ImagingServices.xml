@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<java version="1.6.0_03" class="java.beans.XMLDecoder"> 
+ <object class="java.util.ArrayList"> 
+  <void method="add">
+   <object class="gov.va.med.imaging.versions.ImagingService"> 
+    <void property="applicationPath"> 
+     <string>ImagingDataWebApp</string> 
+    </void> 
+    <void property="applicationType"> 
+     <string>ImagingData</string> 
+    </void> 
+    <void property="operations"> 
+     <void method="add"> 
+      <object class="gov.va.med.imaging.versions.ImagingOperation"> 
+       <void property="operationPath"> 
+        <string>/restservices/image</string> 
+       </void> 
+       <void property="operationType"> 
+        <string>imagingData</string> 
+       </void> 
+      </object> 
+     </void>     
+     <void method="add"> 
+      <object class="gov.va.med.imaging.versions.ImagingOperation"> 
+       <void property="operationPath"> 
+        <string>token/restservices/image</string> 
+       </void> 
+       <void property="operationType"> 
+        <string>imagingData</string> 
+       </void> 
+      </object> 
+     </void>     
+    </void> 
+    <void property="version"> 
+     <string>1</string> 
+    </void> 
+   </object>  
+  </void>
+ </object> 
+</java>

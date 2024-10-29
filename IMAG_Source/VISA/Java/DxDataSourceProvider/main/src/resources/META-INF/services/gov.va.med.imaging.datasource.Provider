@@ -1,0 +1,1 @@
+gov.va.med.imaging.dx.datasource.DxDataSourceProvider		# The VIX datasource Provider realization to access DX databases, or more properly to access the factories to create the proxy classes to access DX 

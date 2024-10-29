@@ -1,0 +1,71 @@
+﻿<Window x:Class="DicomImporter.Views.DialogProgress"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DicomImporter.Views"
+        mc:Ignorable="d"
+        Title="Importer Progress" Height="200" Width="500"
+        WindowStyle="None"
+        WindowStartupLocation="CenterOwner"
+         ShowInTaskbar="False">
+   <Window.Resources>
+      <local:ConverterBoolToColumnWidth x:Key="ConverterBoolToColumnWidth" />
+   </Window.Resources>
+   <Grid HorizontalAlignment="Stretch">
+      <Grid.ColumnDefinitions>
+         <ColumnDefinition Width="*"/>
+      </Grid.ColumnDefinitions>
+      <Grid.RowDefinitions>
+         <RowDefinition Height="*"/>
+         <RowDefinition Height="*"/>
+      </Grid.RowDefinitions>
+      <Label Content="Processing request.  This might take a while..."               
+            Grid.Row="0"
+            Grid.Column="0"
+            HorizontalContentAlignment="Center"
+            VerticalContentAlignment="Center"
+            FontSize="20"/>
+     <!-- <Label Content="{Binding Path=StatusTimer}"
+            Grid.Row="1"
+            Grid.Column="0"
+            HorizontalContentAlignment="Center"
+            VerticalContentAlignment="Center"
+            FontSize="20"/>-->
+      <Grid HorizontalAlignment="Stretch" Grid.Row="1" Grid.Column="0">
+         <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="{Binding Path=TimerDayVisible, Converter={StaticResource ConverterBoolToColumnWidth}}"/>
+            <ColumnDefinition Width="{Binding Path=TimerHourVisible, Converter={StaticResource ConverterBoolToColumnWidth}}"/>
+            <ColumnDefinition Width="{Binding Path=TimerMinuteVisible, Converter={StaticResource ConverterBoolToColumnWidth}}"/>
+            <ColumnDefinition Width="{Binding Path=TimerSecondVisible, Converter={StaticResource ConverterBoolToColumnWidth}}"/>
+         </Grid.ColumnDefinitions>
+         <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+         </Grid.RowDefinitions>
+         <DockPanel Grid.Row="0" Grid.Column="0" LastChildFill="True">
+            <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="Black" DockPanel.Dock="Bottom" FontWeight="Bold">Day</TextBlock>
+            <Border Background="Black" Margin="5">
+               <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White" FontWeight="Bold"></TextBlock>
+            </Border>
+         </DockPanel>
+         <DockPanel Grid.Row="0" Grid.Column="1" LastChildFill="True">
+            <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="Black" DockPanel.Dock="Bottom" FontWeight="Bold">Hour</TextBlock>
+            <Border Background="Black" Margin="5">
+               <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White" FontWeight="Bold"></TextBlock>
+            </Border>
+         </DockPanel>
+         <DockPanel Grid.Row="0" Grid.Column="2" LastChildFill="True">
+            <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="Black" DockPanel.Dock="Bottom" FontWeight="Bold">Minute</TextBlock>
+            <Border Background="Black" Margin="5">
+               <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White" FontWeight="Bold" Text="{Binding Path=TimerMinute, Mode=TwoWay}"></TextBlock>
+            </Border>
+         </DockPanel>
+         <DockPanel Grid.Row="0" Grid.Column="3" LastChildFill="True">
+            <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="Black" DockPanel.Dock="Bottom" FontWeight="Bold">Second</TextBlock>
+            <Border Background="Black" Margin="5">
+               <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White" FontWeight="Bold" Text="{Binding Path=TimerSecond, Mode=TwoWay}"></TextBlock>
+            </Border>
+         </DockPanel>
+      </Grid>
+   </Grid>
+</Window>

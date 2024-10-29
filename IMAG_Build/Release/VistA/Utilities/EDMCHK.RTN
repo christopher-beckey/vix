@@ -1,0 +1,73 @@
+10/06/2005  09:48
+Saved from DCM,DCE
+EDMCHK
+edmchk ; Validate FileMan definitions ; 10/06/2005  09:48
+ Quit
+ ;
+File(file) New any,cref,data,i,lev,outdev,ref,rl,root,s
+ Kill ^edm($Job)
+ Set outdev=$IO
+ Set root=$Get(^DIC(file,0,"GL"))
+ If root="" Write !!,"No such FileMan file: ",file,!! Quit
+ Set ref=root_"0)"
+ If '$Data(@ref) Write !!,"No such database: ",ref," (#",file,")",!! Quit
+ Do Fields(file,root_"d0,",0)
+ Set rl=$QLength(ref)
+ For  Set ref=$Query(@ref) Quit:$Extract(ref,1,$Length(root))'=root  Do
+ . Set data=@ref
+ . Set cref=root,lev=0 For i=rl:1:$QLength(ref) Do  Quit:cref=""
+ . . Set s=$QSubscript(ref,i)
+ . . If i-rl#2 Set cref=cref_$$Quote(s)_"," Quit
+ . . If s Set cref=cref_"d"_lev_",",lev=lev+1 Quit
+ . . Set cref="" ; Ignore cross-references for the time being
+ . . Quit
+ . Quit:cref=""
+ . Set cref=$Extract(cref,1,$Length(cref)-1)_")",any=0 Kill part
+ . If '$Data(^edm($Job,"ref",cref)) Write !!,"Cannot find ",cref,! Quit
+ . Set part="" For  Set part=$Order(^edm($Job,"ref",cref,part)) Quit:part=""  Do
+ . . Set file="" For  Set file=$Order(^edm($Job,"ref",cref,part,file)) Quit:file=""  Do
+ . . . Set field="" For  Set field=$Order(^edm($Job,"ref",cref,part,file,field)) Quit:field=""  Do
+ . . . . Set @("X="_part) Quit:X=""  Set x=X
+ . . . . Set chk=^edm($Job,"ref",cref,part,file,field)
+ . . . . Use $Principal Xecute chk Use outdev
+ . . . . If $Data(X)#2 Quit
+ . . . . Write:'any !!,ref,":" Set any=1
+ . . . . Write !,part," = "
+ . . . . Set dd=$G(^DD(file,field,0)) Write $Piece(dd,"^",1),", type="
+ . . . . Write $Piece(dd,"^",2),", value=",x,!,"does not meet check: ",chk
+ . . . . Quit
+ . . . Quit
+ . . Quit
+ . Quit
+ ;;;Kill ^edm($Job)
+ Quit
+ ;
+Fields(file,root,lev) New chk,field,loc,node,piece,ref
+ Set field=0 For  Set field=$Order(^DD(file,field)) Quit:'field  Do
+ . Set x=$Get(^DD(file,field,0))
+ . Set loc=$Piece(x,"^",4),chk=$Piece(x,"^",5,$Length(x)+2)
+ . Quit:loc=" "
+ . Quit:loc=" ; "
+ . Set node=$Piece(loc,";",1),piece=$Piece(loc,";",2)
+ . If piece Do  Quit
+ . . Set ref="$Piece(data,""^"","_piece_")"
+ . . Set ^edm($Job,"ref",root_$$Quote(node)_")",ref,file,field)=chk
+ . . Quit
+ . If $Extract(piece,1)="E" Do  Quit
+ . . Set ref="$Extract(data,"_$Extract(piece,2,$Length(piece))_")"
+ . . Set ^edm($Job,"ref",root_$$Quote(node)_")",ref,file,field)=chk
+ . . Quit
+ . Do Fields(+$Piece(x,"^",2),root_$$Quote(node)_",d"_(lev+1)_",",lev+1)
+ . Quit
+ Quit
+ ;
+Quote(x) If +x=x Quit x
+ New e,i,r
+ Set r="""" For i=1:1:$Length(x) Set e=$Extract(x,i),r=r_e Set:e="""" r=r_e
+ Quit r_""""
+ ;
+test s fff="c:\edm\vss\chk.txt" o fff:"wn" u fff
+ d File(2005) w !! c fff
+ q
+
+

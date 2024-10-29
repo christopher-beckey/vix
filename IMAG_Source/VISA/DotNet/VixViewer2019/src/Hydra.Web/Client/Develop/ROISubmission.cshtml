@@ -1,0 +1,254 @@
+@inherits Nancy.ViewEngines.Razor.NancyRazorViewBase<ViewerModel>
+    @using Hydra.Web
+    <!DOCTYPE html>
+    <html lang="en">
+
+    <head>
+        <title>VIX Viewer ROI Submission</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        @Html.HydraCss("../bootstrap/css/bootstrap.min.css")
+        @Html.HydraCss("../js/dataTable/css/dataTables.bootstrap.min.css")
+        @Html.HydraCss("../js/jquery-ui-1.8.23.custom/css/custom-theme/jquery-ui-1.8.23.custom.css")
+
+        @Html.HydraScript("../js/basic.js")
+        @Html.HydraScript("../js/layouts/jquery-latest.js")
+        @Html.HydraScript("../js/layouts/jquery-ui-latest.js")
+        @Html.HydraScript("../js/layouts/jquery.layout-latest.js")
+        @Html.HydraScript("../bootstrap/js/bootstrap.min.js")
+        @Html.HydraScript("../js/dataTable/js/jquery.dataTables.min.js")
+        @Html.HydraScript("../js/dataTable/js/dataTables.bootstrap.min.js")
+        @Html.HydraScript("../js/spin.js")
+        @Html.HydraScript("../js/imageProgressManager.js")
+        @Html.HydraScript("../js/splash.js")
+        @Html.HydraScript("../js/roi/roiCommon.js")
+        @Html.HydraScript("../js/roi/roisubmission.js")
+
+        <style>
+            html {
+                margin: 0;
+                width: 100%;
+                height: 100%;
+            }
+
+            body {
+                margin: 0;
+                width: 100%;
+                height: 100%;
+                font-size: 12px;
+                background: black;
+            }
+
+            #patientInformation {
+                width: 100%;
+                height: 100%;
+                padding-left: 20px;
+                padding-right: 20px;
+                padding-top: 20px;
+                padding-bottom: 20px;
+                background: #363636;
+                border: 1px solid rgb(169, 169, 169);
+                border-radius: 3px;
+            }
+
+            #patientInfoTable {
+                width: 100%;
+                height: 100%;
+                background: #5C5D64;
+            }
+
+            #patientInfoTable_wrapper {
+                width: 100%;
+                height: 100%;
+            }
+
+            #tableHeader {
+                color: whitesmoke;
+                background: #5C5D64;
+            }
+
+            #patientInfo {
+                color: black;
+                background: darkgray;
+                height: : 100%;
+            }
+
+            #patientInfoTable_length, #patientInfoTable_filter, #patientInfoTable_info {
+                color: whitesmoke;
+            }
+
+            .table-hover tbody tr:hover td, .table-hover tbody tr:hover th {
+                color: whitesmoke;
+                background: #363636;
+            }
+
+            #patientInfoTable_paginate a {
+                color: whitesmoke;
+                background: #5C5D64;
+            }
+
+            #patientInfoTable_paginate .paginate_button li {
+                border: whitesmoke;
+            }
+
+            #patientInfoTable_paginate .active a {
+                color: black;
+                background: #5C5D64;
+            }
+
+            #patientInfoTable_paginate .disabled a {
+                color: whitesmoke;
+                background: #363636;
+            }
+
+            .dataTables_length .input-sm {
+                max-width: 55px;
+                height: 22px;
+                padding: 2px 5px;
+                font-size: 12px;
+                line-height: 1.5; /* If Placeholder of the input is moved up, rem/modify this. */
+                border-radius: 3px;
+            }
+
+            .dataTables_filter .input-sm {
+                height: 22px;
+                padding: 2px 5px;
+                font-size: 12px;
+                line-height: 1.5; /* If Placeholder of the input is moved up, rem/modify this. */
+                border-radius: 3px;
+            }
+
+            #patientInfo::-webkit-scrollbar-track {
+                -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+                background-color: #222;
+                border-radius: 10px;
+            }
+
+            #patientInfo::-webkit-scrollbar {
+                width: 10px;
+                background-color: #222;
+            }
+
+            #patientInfo::-webkit-scrollbar-thumb {
+                background-color: #444;
+                border-radius: 10px;
+            }
+
+            #patientInfo {
+                -ms-scrollbar-base-color: #222;
+                -ms-scrollbar-track-color: #222;
+                -ms-scrollbar-face-color: #444;
+            }
+
+            tbody {
+                max-height: 600px;
+                overflow-y: auto;
+                display: block;
+            }
+
+            tr {
+                display: block;
+            }
+
+            td {
+                display: table-cell;
+            }
+
+            .btnSubmit {
+                width: 200px;
+                height: 30px;
+                color: whitesmoke;
+                background: #5C5D64;
+            }
+
+            .btnSelectAll {
+                width: 100px;
+                height: 30px;
+                color: whitesmoke;
+                background: #5C5D64;
+            }
+
+            .btnSubmit:disabled {
+                color: gray;
+                background: #444;
+            }
+
+                .btnSubmit:disabled:hover {
+                    cursor: not-allowed;
+                    background-color: #444;
+                    border-color: #444;
+                }
+
+            .btnSubmit:hover,
+            .btnSubmit:focus,
+            .btnSubmit:active,
+            .btnSubmit.active,
+            .open .dropdown-toggle.btnSubmit {
+                color: #fff;
+                background-color: #ea7001;
+                border-color: #ea7001;
+            }
+
+            #patientInfoTable_paginate a:hover,
+            #patientInfoTable_paginate a:focus {
+                color: #fff;
+                background-color: #ea7001;
+                border-color: #ea7001;
+            }
+
+            #patientInfoTable_paginate .disabled a:hover {
+                color: whitesmoke;
+                background: #363636;
+                border-color: #fff;
+            }
+        </style>
+
+    </head>
+
+    <body id="roisubmission" oncontextmenu="return false;">
+        <div id="patientInformation" style="border: 1px solid #fff">
+            <div class="form-group row" style="margin-bottom:-8px">
+                <div class="col-xs-10">
+                    <div id="pName" style="margin-top:-10px;margin-left:45%"></div>
+                    <div id="dob" style="margin-top:-6px;margin-left:45%"></div>
+                </div>
+            </div>
+            <table class="table table-condensed table-striped table-bordered table-hover" id="patientInfoTable">
+                <thead id="tableHeader">
+                    <tr style="display:table;width:100%;">
+                        <th>Procedure</th>
+                        <th>Date</th>
+                        <th>Location</th>
+                        <th>Release</th>
+                    </tr>
+                </thead>
+                <tbody id="patientInfo">
+                </tbody>
+            </table>
+            <div id="submitDiv">
+                <button id="btnRoiPrint" class="btnSubmit" onclick="submitRoiPrintOrCD('Print')" style="display:none" disabled>Submit Print ROI Request</button>
+                <button id="btnRoiCD" class="btnSubmit" onclick="submitRoiPrintOrCD('CD')" disabled>Submit ROI CD Request</button>
+                <button id="btnSelectAll" class="btnSubmit pull-right" style="width:100px" onclick="selectOrDeselectAll()">Select All</button>
+            </div>
+        </div>
+
+        <!-- agreement -->
+        <div id="printOrWriterAgreementWindow" title="Physician Agreement for Downloaded Images">
+            <div id="printOrWriterAgreementTarget" width=100%>
+                <div id="printOrWriterAgreement" style="width:100%;height:100%;color:black;background:whitesmoke" rows="15" cols="15" readonly> Agreement </div>
+            </div>
+        </div>
+
+        <!-- print or writer -->
+        <div id="printOrWriterWindow" title="Select Printer">
+            <div id="alert-printOrWriter" class="alert alert-info" role="alert" style="padding: 5px;display:none"></div>
+            <div id="printOrWriterTarget" width=100%>
+                <select id="printOrWriter" style="width:100%;color:black;resize:none" />
+            </div>
+        </div>
+        <script>
+            $(window).on('load', function () { })
+        </script>
+    </body>
+
+    </html>

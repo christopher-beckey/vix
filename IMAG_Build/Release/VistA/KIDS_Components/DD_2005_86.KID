@@ -1,0 +1,426 @@
+KIDS Distribution saved on Jul 25, 2012@16:31:38
+Split from blank VI database - last patch SEQ81_P120
+**KIDS**:MAG*3.0*350_DD*2005.86^
+
+**INSTALL NAME**
+MAG*3.0*350_DD*2005.86
+"BLD",7729,0)
+MAG*3.0*350_DD*2005.86^IMAGING^0^3120725^n
+"BLD",7729,4,0)
+^9.64PA^2005.86^1
+"BLD",7729,4,2005.86,0)
+2005.86
+"BLD",7729,4,2005.86,222)
+y^y^f^^^^y
+"BLD",7729,4,"B",2005.86,2005.86)
+
+"BLD",7729,6.3)
+2
+"BLD",7729,"KRN",0)
+^9.67PA^779.2^20
+"BLD",7729,"KRN",.4,0)
+.4
+"BLD",7729,"KRN",.401,0)
+.401
+"BLD",7729,"KRN",.402,0)
+.402
+"BLD",7729,"KRN",.403,0)
+.403
+"BLD",7729,"KRN",.5,0)
+.5
+"BLD",7729,"KRN",.84,0)
+.84
+"BLD",7729,"KRN",3.6,0)
+3.6
+"BLD",7729,"KRN",3.8,0)
+3.8
+"BLD",7729,"KRN",9.2,0)
+9.2
+"BLD",7729,"KRN",9.8,0)
+9.8
+"BLD",7729,"KRN",19,0)
+19
+"BLD",7729,"KRN",19.1,0)
+19.1
+"BLD",7729,"KRN",101,0)
+101
+"BLD",7729,"KRN",409.61,0)
+409.61
+"BLD",7729,"KRN",771,0)
+771
+"BLD",7729,"KRN",779.2,0)
+779.2
+"BLD",7729,"KRN",870,0)
+870
+"BLD",7729,"KRN",8989.51,0)
+8989.51
+"BLD",7729,"KRN",8989.52,0)
+8989.52
+"BLD",7729,"KRN",8994,0)
+8994
+"BLD",7729,"KRN","B",.4,.4)
+
+"BLD",7729,"KRN","B",.401,.401)
+
+"BLD",7729,"KRN","B",.402,.402)
+
+"BLD",7729,"KRN","B",.403,.403)
+
+"BLD",7729,"KRN","B",.5,.5)
+
+"BLD",7729,"KRN","B",.84,.84)
+
+"BLD",7729,"KRN","B",3.6,3.6)
+
+"BLD",7729,"KRN","B",3.8,3.8)
+
+"BLD",7729,"KRN","B",9.2,9.2)
+
+"BLD",7729,"KRN","B",9.8,9.8)
+
+"BLD",7729,"KRN","B",19,19)
+
+"BLD",7729,"KRN","B",19.1,19.1)
+
+"BLD",7729,"KRN","B",101,101)
+
+"BLD",7729,"KRN","B",409.61,409.61)
+
+"BLD",7729,"KRN","B",771,771)
+
+"BLD",7729,"KRN","B",779.2,779.2)
+
+"BLD",7729,"KRN","B",870,870)
+
+"BLD",7729,"KRN","B",8989.51,8989.51)
+
+"BLD",7729,"KRN","B",8989.52,8989.52)
+
+"BLD",7729,"KRN","B",8994,8994)
+
+"DATA",2005.86,1,0)
+HEC COPY^0^HEC^MAGGSPP
+"DATA",2005.86,1,1)
+Means Test document images will be copied to the Health Eligibility Center (HEC) 
+"DATA",2005.86,1,2,0)
+^2005.865P^2^2
+"DATA",2005.86,1,2,1,0)
+46
+"DATA",2005.86,1,2,2,0)
+47
+"DATA",2005.86,2,0)
+PHOTO-ID COPY^0^PID^MAGQBGCC^
+"DATA",2005.86,2,1)
+This will copy photo ID's to an external share with the Patient's Name as the file name.
+"DATA",2005.86,2,2,0)
+^2005.865P^1^1
+"DATA",2005.86,2,2,1,0)
+84
+"FIA",2005.86)
+IMAGE ACTIONS
+"FIA",2005.86,0)
+^MAG(2005.86,
+"FIA",2005.86,0,0)
+2005.86
+"FIA",2005.86,0,1)
+y^y^f^^^^y
+"FIA",2005.86,0,10)
+
+"FIA",2005.86,0,11)
+
+"FIA",2005.86,0,"RLRO")
+
+"FIA",2005.86,0,"VR")
+3.0^MAG
+"FIA",2005.86,2005.86)
+0
+"FIA",2005.86,2005.865)
+0
+"MBREQ")
+0
+"PKG",454,-1)
+1^1
+"PKG",454,0)
+IMAGING^MAG^Imaging-V1 to release 
+"PKG",454,20,0)
+^9.402P^^
+"PKG",454,22,0)
+^9.49I^1^1
+"PKG",454,22,1,0)
+3.0^3020319^3120725^126
+"PKG",454,22,1,"PAH",1,0)
+350_DD^3120725
+"QUES","XPF1",0)
+Y
+"QUES","XPF1","??")
+^D REP^XPDH
+"QUES","XPF1","A")
+Shall I write over your |FLAG| File
+"QUES","XPF1","B")
+YES
+"QUES","XPF1","M")
+D XPF1^XPDIQ
+"QUES","XPF2",0)
+Y
+"QUES","XPF2","??")
+^D DTA^XPDH
+"QUES","XPF2","A")
+Want my data |FLAG| yours
+"QUES","XPF2","B")
+YES
+"QUES","XPF2","M")
+D XPF2^XPDIQ
+"QUES","XPI1",0)
+YO
+"QUES","XPI1","??")
+^D INHIBIT^XPDH
+"QUES","XPI1","A")
+Want KIDS to INHIBIT LOGONs during the install
+"QUES","XPI1","B")
+NO
+"QUES","XPI1","M")
+D XPI1^XPDIQ
+"QUES","XPM1",0)
+PO^VA(200,:EM
+"QUES","XPM1","??")
+^D MG^XPDH
+"QUES","XPM1","A")
+Enter the Coordinator for Mail Group '|FLAG|'
+"QUES","XPM1","B")
+
+"QUES","XPM1","M")
+D XPM1^XPDIQ
+"QUES","XPO1",0)
+Y
+"QUES","XPO1","??")
+^D MENU^XPDH
+"QUES","XPO1","A")
+Want KIDS to Rebuild Menu Trees Upon Completion of Install
+"QUES","XPO1","B")
+NO
+"QUES","XPO1","M")
+D XPO1^XPDIQ
+"QUES","XPZ1",0)
+Y
+"QUES","XPZ1","??")
+^D OPT^XPDH
+"QUES","XPZ1","A")
+Want to DISABLE Scheduled Options, Menu Options, and Protocols
+"QUES","XPZ1","B")
+NO
+"QUES","XPZ1","M")
+D XPZ1^XPDIQ
+"QUES","XPZ2",0)
+Y
+"QUES","XPZ2","??")
+^D RTN^XPDH
+"QUES","XPZ2","A")
+Want to MOVE routines to other CPUs
+"QUES","XPZ2","B")
+NO
+"QUES","XPZ2","M")
+D XPZ2^XPDIQ
+"SEC","^DIC",2005.86,2005.86,0,"AUDIT")
+@
+"SEC","^DIC",2005.86,2005.86,0,"DD")
+@
+"SEC","^DIC",2005.86,2005.86,0,"DEL")
+@
+"SEC","^DIC",2005.86,2005.86,0,"LAYGO")
+@
+"SEC","^DIC",2005.86,2005.86,0,"RD")
+@
+"SEC","^DIC",2005.86,2005.86,0,"WR")
+@
+"VER")
+8.0^22.0
+"^DD",2005.86,2005.86,0)
+FIELD^^5^7
+"^DD",2005.86,2005.86,0,"DDA")
+N
+"^DD",2005.86,2005.86,0,"DT")
+3020205
+"^DD",2005.86,2005.86,0,"IX","ATYPE",2005.865,.01)
+
+"^DD",2005.86,2005.86,0,"IX","B",2005.86,.01)
+
+"^DD",2005.86,2005.86,0,"NM","IMAGE ACTIONS")
+
+"^DD",2005.86,2005.86,0,"VRPK")
+MAG
+"^DD",2005.86,2005.86,.01,0)
+NAME^RF^^0;1^K:$L(X)>30!(X?.N)!($L(X)<3)!'(X'?1P.E) X
+"^DD",2005.86,2005.86,.01,1,0)
+^.1
+"^DD",2005.86,2005.86,.01,1,1,0)
+2005.86^B
+"^DD",2005.86,2005.86,.01,1,1,1)
+S ^MAG(2005.86,"B",$E(X,1,30),DA)=""
+"^DD",2005.86,2005.86,.01,1,1,2)
+K ^MAG(2005.86,"B",$E(X,1,30),DA)
+"^DD",2005.86,2005.86,.01,3)
+NAME MUST BE 3-30 CHARACTERS, NOT NUMERIC OR STARTING WITH PUNCTUATION
+"^DD",2005.86,2005.86,.01,21,0)
+^^1^1^3020827^
+"^DD",2005.86,2005.86,.01,21,1,0)
+Enter the name of the image action to take place.
+"^DD",2005.86,2005.86,.01,"DT")
+3020913
+"^DD",2005.86,2005.86,1,0)
+ACTIVE^S^1:YES;0:NO;^0;2^Q
+"^DD",2005.86,2005.86,1,21,0)
+^^1^1^3020201^
+"^DD",2005.86,2005.86,1,21,1,0)
+The processing of actions can be turned off/on.
+"^DD",2005.86,2005.86,1,"DT")
+3020201
+"^DD",2005.86,2005.86,2,0)
+TAG^RF^^0;3^K:$L(X)>20!($L(X)<1) X
+"^DD",2005.86,2005.86,2,3)
+Answer must be 1-20 characters in length.
+"^DD",2005.86,2005.86,2,21,0)
+^^1^1^3020201^
+"^DD",2005.86,2005.86,2,21,1,0)
+The tag of the routine that will be called to process the action.
+"^DD",2005.86,2005.86,2,"DT")
+3020201
+"^DD",2005.86,2005.86,3,0)
+ROUTINE^F^^0;4^K:$L(X)>20!($L(X)<1) X
+"^DD",2005.86,2005.86,3,3)
+Answer must be 1-20 characters in length.
+"^DD",2005.86,2005.86,3,21,0)
+^^1^1^3020201^
+"^DD",2005.86,2005.86,3,21,1,0)
+The routine that will be called to process the action.
+"^DD",2005.86,2005.86,3,"DT")
+3020201
+"^DD",2005.86,2005.86,4,0)
+DESC^F^^1;1^K:$L(X)>120!($L(X)<3) X
+"^DD",2005.86,2005.86,4,3)
+Answer must be 3-120 characters in length.
+"^DD",2005.86,2005.86,4,21,0)
+^^1^1^3020201^
+"^DD",2005.86,2005.86,4,21,1,0)
+A Description of the Action.
+"^DD",2005.86,2005.86,4,"DT")
+3020201
+"^DD",2005.86,2005.86,5,0)
+TYPE^2005.865P^^2;0
+"^DD",2005.86,2005.86,5,21,0)
+^.001^2^2^3020205^^
+"^DD",2005.86,2005.86,5,21,1,0)
+Certain Types of images can have actions performed when an entry is made
+"^DD",2005.86,2005.86,5,21,2,0)
+in the IMAGE File.  An example is Copying Means Tests Documents to H.E.C.
+"^DD",2005.86,2005.86,6,0)
+EXPORT LOCATION^P2005.2'^MAG(2005.2,^0;5^Q
+"^DD",2005.86,2005.86,6,3)
+Enter the Network Location for this type of image.
+"^DD",2005.86,2005.86,6,21,0)
+^.001^1^1^3090924^^
+"^DD",2005.86,2005.86,6,21,1,0)
+This is the export location to which an image may be exported.
+"^DD",2005.86,2005.86,6,"DT")
+3070712
+"^DD",2005.86,2005.865,0)
+TYPE SUB-FIELD^^.01^1
+"^DD",2005.86,2005.865,0,"DT")
+3020205
+"^DD",2005.86,2005.865,0,"IX","B",2005.865,.01)
+
+"^DD",2005.86,2005.865,0,"NM","TYPE")
+
+"^DD",2005.86,2005.865,0,"UP")
+2005.86
+"^DD",2005.86,2005.865,.01,0)
+TYPE^MP2005.83'^MAG(2005.83,^0;1^Q
+"^DD",2005.86,2005.865,.01,1,0)
+^.1
+"^DD",2005.86,2005.865,.01,1,1,0)
+2005.865^B
+"^DD",2005.86,2005.865,.01,1,1,1)
+S ^MAG(2005.86,DA(1),2,"B",$E(X,1,30),DA)=""
+"^DD",2005.86,2005.865,.01,1,1,2)
+K ^MAG(2005.86,DA(1),2,"B",$E(X,1,30),DA)
+"^DD",2005.86,2005.865,.01,1,2,0)
+2005.86^ATYPE
+"^DD",2005.86,2005.865,.01,1,2,1)
+S ^MAG(2005.86,"ATYPE",$E(X,1,30),DA(1),DA)=""
+"^DD",2005.86,2005.865,.01,1,2,2)
+K ^MAG(2005.86,"ATYPE",$E(X,1,30),DA(1),DA)
+"^DD",2005.86,2005.865,.01,1,2,"%D",0)
+^^1^1^3020205^
+"^DD",2005.86,2005.865,.01,1,2,"%D",1,0)
+Quickly find all actions for a certain type
+"^DD",2005.86,2005.865,.01,1,2,"DT")
+3020205
+"^DD",2005.86,2005.865,.01,21,0)
+0^.001^1^1^3020205^
+"^DD",2005.86,2005.865,.01,21,1,0)
+This field points to the Image Types that will have this action 
+"^DD",2005.86,2005.865,.01,"DT")
+3020205
+"^DIC",2005.86,2005.86,0)
+IMAGE ACTIONS^2005.86
+"^DIC",2005.86,2005.86,0,"GL")
+^MAG(2005.86,
+"^DIC",2005.86,2005.86,"%",0)
+^1.005^^0
+"^DIC",2005.86,2005.86,"%D",0)
+^^26^26^3020827^
+"^DIC",2005.86,2005.86,"%D",1,0)
+ +---------------------------------------------------------------+
+"^DIC",2005.86,2005.86,"%D",2,0)
+ |                                                               |
+"^DIC",2005.86,2005.86,"%D",3,0)
+ | Property of the US Government.                                |
+"^DIC",2005.86,2005.86,"%D",4,0)
+ | No permission to copy or redistribute this software is given. |
+"^DIC",2005.86,2005.86,"%D",5,0)
+ | Use of unreleased versions of this software requires the user |
+"^DIC",2005.86,2005.86,"%D",6,0)
+ | to execute a written test agreement with the VistA Imaging    |
+"^DIC",2005.86,2005.86,"%D",7,0)
+ | Development Office of the Department of Veterans Affairs,     |
+"^DIC",2005.86,2005.86,"%D",8,0)
+ | telephone (301) 734-0100.                                     |
+"^DIC",2005.86,2005.86,"%D",9,0)
+ |                                                               |
+"^DIC",2005.86,2005.86,"%D",10,0)
+ | The Food and Drug Administration classifies this software as  |
+"^DIC",2005.86,2005.86,"%D",11,0)
+ | a medical device.  As such, it may not be changed in any way. |
+"^DIC",2005.86,2005.86,"%D",12,0)
+ | Modifications to this software may result in an adulterated   |
+"^DIC",2005.86,2005.86,"%D",13,0)
+ | medical device under 21CFR820, the use of which is considered |
+"^DIC",2005.86,2005.86,"%D",14,0)
+ | to be a violation of US Federal Statutes.                     |
+"^DIC",2005.86,2005.86,"%D",15,0)
+ |                                                               |
+"^DIC",2005.86,2005.86,"%D",16,0)
+ +---------------------------------------------------------------+
+"^DIC",2005.86,2005.86,"%D",17,0)
+ 
+"^DIC",2005.86,2005.86,"%D",18,0)
+This file is populated with post processing actions for each image type.  
+"^DIC",2005.86,2005.86,"%D",19,0)
+The file has a multiple 'TYPE' field that points to the file IMAGE INDEX 
+"^DIC",2005.86,2005.86,"%D",20,0)
+FOR TYPES which allows the possibility of multiplempost processing for
+"^DIC",2005.86,2005.86,"%D",21,0)
+each entry in this file.
+"^DIC",2005.86,2005.86,"%D",22,0)
+ 
+"^DIC",2005.86,2005.86,"%D",23,0)
+When an Image is successfully captured an evaluation is done on the 
+"^DIC",2005.86,2005.86,"%D",24,0)
+image's TYPE property.  If the TYPE matches an entry's TYPE field value in
+"^DIC",2005.86,2005.86,"%D",25,0)
+this file and the entry is ACTIVE, then execution is passed to the routine
+"^DIC",2005.86,2005.86,"%D",26,0)
+identified in the fields: TAG and ROUTINE.
+"^DIC",2005.86,"B","IMAGE ACTIONS",2005.86)
+
+**END**
+**END**

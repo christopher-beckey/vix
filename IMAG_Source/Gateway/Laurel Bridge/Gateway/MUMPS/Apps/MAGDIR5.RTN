@@ -1,0 +1,53 @@
+MAGDIR5 ;WOIFO/PMK - Program to read a DICOM file ; 05/10/2004  10:56
+ ;;3.0;IMAGING;**10,30**;MAR 19, 2002;;NOV 5, 2004
+ ;; Per VHA Directive 2004-038, this routine should not be modified.
+ ;; +---------------------------------------------------------------+
+ ;; | Property of the US Government.                                |
+ ;; | No permission to copy or redistribute this software is given. |
+ ;; | Use of unreleased versions of this software requires the user |
+ ;; | to execute a written test agreement with the VistA Imaging    |
+ ;; | Development Office of the Department of Veterans Affairs,     |
+ ;; | telephone (301) 734-0100.                                     |
+ ;; | The Food and Drug Administration classifies this software as  |
+ ;; | a medical device.  As such, it may not be changed in any way. |
+ ;; | Modifications to this software may result in an adulterated   |
+ ;; | medical device under 21CFR820, the use of which is considered |
+ ;; | to be a violation of US Federal Statutes.                     |
+ ;; +---------------------------------------------------------------+
+ ;;
+ ; PACS Interface -- read DICOM files (routine #5)
+ ;
+ENTRY ; entry point from ^MAGDIR4
+ N LINECNT ;-- multi-line text line counter
+ N MULTIPLE ;- DICOM multiple value indicator
+ N NAME ;----- name of DICOM element
+ N TAG ;------ group and element tag of DICOM element
+ N VALUE ; --- value of element
+ N VR ;------- value representation of DICOM element
+ N I,J,STATUS
+ ;
+ S STATUS=$$USE^MAGOSFIL(FILETXT)
+ W "$$BEGIN DICOM DATA",!
+ I $$USEPRIN^MAGOSFIL(1)
+ S TAG="" F  S TAG=$O(^TMP("MAG",$J,"DICOM",INODE,TAG)) Q:TAG=""  D  ;
+ . S STATUS=$$USE^MAGOSFIL(FILETXT)
+ . S NAME=$P(^TMP("MAG",$J,"DICOM",INODE,TAG),"^"),VR=$P(^(TAG),"^",2)
+ . Q:VR="SQIE"  Q:VR="SQIS"  ; ignore item start/end
+ . Q:VR="SQE"  ; ignore sequence end too
+ . I VR="SQ" W TAG,"|",NAME,"^SQ||",! Q
+ . S MULTIPLE=^TMP("MAG",$J,"DICOM",INODE,TAG,0,0)
+ . F I=1:1:MULTIPLE D  ;
+ . . S LINECNT=^TMP("MAG",$J,"DICOM",INODE,TAG,I,0)
+ . . F J=1:1:LINECNT D  ;
+ . . . W TAG,"|",NAME,"^",VR,"|",I,",",J,"|"
+ . . . S VALUE=^TMP("MAG",$J,"DICOM",INODE,TAG,I,J)
+ . . . S VALUE=$P(VALUE,$C(13,10)) ; remove any trailing <CR,LF>
+ . . . W VALUE,!
+ . . . Q
+ . I $$USEPRIN^MAGOSFIL(1)
+ . Q
+ S STATUS=$$USE^MAGOSFIL(FILETXT)
+ W "$$END DICOM DATA",!
+ I $$USEPRIN^MAGOSFIL(1)
+ Q
+ ;

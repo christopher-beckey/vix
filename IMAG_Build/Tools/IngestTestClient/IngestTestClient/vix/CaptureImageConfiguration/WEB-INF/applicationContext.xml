@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+	<!-- 
+	The core router component is made available
+	on the JNDI tree as a resource.
+	-->
+		
+	<bean id="appConfiguration" class="org.springframework.jndi.JndiObjectFactoryBean">
+		<property name="resourceRef">
+			<value>true</value>
+		</property>
+		<property name="jndiName">
+			<value>AppConfiguration</value>
+		</property>
+	</bean>
+	
+	<bean id="coreRouter" class="org.springframework.jndi.JndiObjectFactoryBean">
+		<property name="resourceRef">
+			<value>true</value>
+		</property>
+		<property name="jndiName">
+			<value>CoreRouter</value>
+		</property>
+	</bean>	
+	
+	<!--
+	gov.va.med.imaging.SecurityFilter is a J2EE compliant servlet filter.
+	It is wrapped with a Spring defined proxy that provides it with injected
+	properties, most notably the transaction logger. 
+	-->
+	<bean 
+		id="securityFilter" 
+		class="gov.va.med.imaging.SecurityFilter" 
+		singleton="true">
+		<property name="generateTransactionId">
+			<value>true</value>
+		</property>
+		<property name="enableProtocolOverride">
+			<value>false</value>
+		</property>
+	</bean>
+	
+	<bean 
+		id="userFilter" 
+		class="com.isigp.gwt.common.web.UserFilter" 
+		singleton="true">
+		<property name="userCookieName">
+			<value>configurationUser</value>
+		</property>
+		<property name="redirectUrl">
+			<value>/CaptureImageConfiguration</value>
+		</property>
+	</bean>
+	
+	<bean 
+		id="userServiceFilter" 
+		class="com.isigp.gwt.common.web.UserServiceFilter" 
+		singleton="true">
+		<property name="userCookieName">
+			<value>configurationUser</value>
+		</property>
+		<property name="redirectUrl">
+			<value>/CaptureImageConfiguration</value>
+		</property>
+	</bean>
+	
+	<bean 
+		id="unauthenticatedFilter" 
+		class="com.isigp.gwt.common.web.UnauthenticatedFilter" 
+		singleton="true">
+		<property name="sslPort">
+			<value>443</value>
+		</property>
+		<property name="sslPortCookieName">
+			<value>sslPort</value>
+		</property>
+		<property name="cookiePath">
+			<value>/CaptureImageConfiguration</value>
+		</property>
+	</bean>
+	
+		  
+	<bean id="captureImageConfigurationContext" class="gov.va.med.imaging.capture.configuration.CaptureImageConfigurationContext" singleton="true">
+		<constructor-arg><ref bean="appConfiguration" /></constructor-arg>
+	</bean>
+	
+	<bean id="captureImageConfigurationContextHolder" class="gov.va.med.imaging.capture.configuration.CaptureImageConfigurationContextHolder">
+		
+	</bean>
+</beans>

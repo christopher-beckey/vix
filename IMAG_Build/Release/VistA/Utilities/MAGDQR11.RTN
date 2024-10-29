@@ -1,0 +1,163 @@
+12/06/2004  13:40
+Saved from DCM,DCE
+MAGDQR11
+MAGDQR11 ;WOIFO/EdM - Test Query/Retrieve ; 12/06/2004  13:40
+ ;;3.0;IMAGING;**xxx**;1-Jan-2005
+ ;; +---------------------------------------------------------------+
+ ;; | Property of the US Government.                                |
+ ;; | No permission to copy or redistribute this software is given. |
+ ;; | Use of unreleased versions of this software requires the user |
+ ;; | to execute a written test agreement with the VistA Imaging    |
+ ;; | Development Office of the Department of Veterans Affairs,     |
+ ;; | telephone (301) 734-0100.                                     |
+ ;; |                                                               |
+ ;; | The Food and Drug Administration classifies this software as  |
+ ;; | a medical device.  As such, it may not be changed in any way. |
+ ;; | Modifications to this software may result in an adulterated   |
+ ;; | medical device under 21CFR820, the use of which is considered |
+ ;; | to be a violation of US Federal Statutes.                     |
+ ;; +---------------------------------------------------------------+
+ ;;
+ Q
+ ;
+TEST ;
+ N OFFSET,OK,OUT,RESULT,TAGS,X
+ K ^TMP("MAG",$J)
+ S ^TMP("MAG",$J,"DICOM MENU OPTION")=0
+ S ^TMP("MAG",$J,"DICOM MENU VIEW ONLY")=0
+ S ^TMP("MAG",$J,"DICOM RPC USER")="135^1^"_$$ENCRYP^XUSRB1("testing_1;testing_2")
+ ;
+ D SET8
+ S (RESULT,OFFSET)=0
+ W !,"Start new query"
+ S X=$$CALLRPC^MAGM2VCU("MAG CFIND QUERY","MT",.OUT,.TAGS,RESULT,OFFSET,10)
+ W ! ZW OUT,X W !
+ I 'OUT(1) S RESULT=$P(OUT(1),",",2) I RESULT
+ E  W !,"failed..." Q
+ ;
+ S OK=0 F  D  Q:OK
+ . h 1 w !,"Result=",RESULT," waiting for taskman"
+ . S X=$$CALLRPC^MAGM2VCU("MAG CFIND QUERY","MT",.OUT,.TAGS,RESULT,OFFSET,10)
+ . W ! ZW OUT,X W !
+ . S:+OUT(1)'=-1 OK=1
+ . Q
+ S OK=0 F  D  Q:OK
+ . S OFFSET=$P(OUT(1),",",2) I 'OFFSET S OK=1 Q
+ . h 1 w !,"Offset=",OFFSET," get next result"
+ . S X=$$CALLRPC^MAGM2VCU("MAG CFIND QUERY","MT",.OUT,.TAGS,RESULT,OFFSET,10)
+ . W ! ZW OUT,X W !
+ . Q
+ S X=$$CALLRPC^MAGM2VCU("MAG CFIND QUERY","MT",.OUT,.TAGS,RESULT,-1,10)
+ W ! ZW OUT,X W !
+ S X=$$CLOSE^MAGM2VC()
+ Q
+ ;
+SET1 ;
+ S TAGS(1)="0008,0020|1|1|"          ; Study Date
+ S TAGS(2)="0008,0030|1|1|"          ; Study Time
+ S TAGS(3)="0008,0050|1|1|"          ; Accession Number
+ S TAGS(4)="0010,0010|1|1|c*^k*"     ; Patient's Name
+ S TAGS(5)="0010,0020|1|1|217103663" ; Patient ID
+ S TAGS(6)="0020,0010|1|1|"          ; Study ID
+ S TAGS(7)="0020,000D|1|1|"          ; Study Instance UID
+ Q
+ ;
+SET2 ;
+ S TAGS(1)="0008,0020|1|1|<UnKnOwN>" ; Study Date
+ S TAGS(2)="0008,0030|1|1|"          ; Study Time
+ S TAGS(3)="0008,0050|1|1|*-19"      ; Accession Number
+ S TAGS(4)="0010,0010|1|1|"          ; Patient's Name
+ S TAGS(5)="0010,0020|1|1|"          ; Patient ID
+ S TAGS(6)="0020,0010|1|1|"          ; Study ID
+ S TAGS(7)="0020,000D|1|1|"          ; Study Instance UID
+ Q
+ ;
+SET3 ;
+ S TAGS(1)="0008,0020|1|1|<UnKnOwN>" ; Study Date
+ S TAGS(2)="0008,0030|1|1|"          ; Study Time
+ S TAGS(3)="0008,0050|1|1|"          ; Accession Number
+ S TAGS(4)="0010,0010|1|1|"          ; Patient's Name
+ S TAGS(5)="0010,0020|1|1|"          ; Patient ID
+ S TAGS(6)="0020,0010|1|1|"          ; Study ID
+ S TAGS(7)="0020,000D|1|1|1.2.840.113754.1.4.660.7018875.859.1.112498.19"
+ S TAGS(8)="0008,0061|1|1|" ;  O  Modalities in Study
+ S TAGS(9)="0008,0090|1|1|" ;  O  Referring Physician's Name
+ S TAGS(10)="0008,1030|1|1|" ;  O  Study Description
+ S TAGS(11)="0008,1032|1|1|" ;  O  Procedure Code Sequence
+ S TAGS(12)="0008,0100|1|1|" ;  O  >Code Value
+ S TAGS(13)="0008,0102|1|1|" ;  O  >Coding Scheme Designator
+ S TAGS(14)="0008,0103|1|1|" ;  O  >Coding Scheme Version
+ S TAGS(15)="0008,0104|1|1|" ;  O  >Code Meaning
+ S TAGS(16)="0008,1060|1|1|" ;  O  Name of Physician(s) Reading Study
+ S TAGS(17)="0010,0030|1|1|" ;  O  Patient's Birth Date
+ S TAGS(18)="0010,0032|1|1|" ;  O  Patient's Birth Time [probably always blank]
+ S TAGS(19)="0010,0040|1|1|" ;  O  Patient's Sex
+ S TAGS(20)="0010,1000|1|1|" ;  O  Other Patient IDs
+ S TAGS(21)="0010,1001|1|1|" ;  O  Other Patient Names
+ S TAGS(22)="0010,1010|1|1|" ;  O  Patient's Age
+ S TAGS(23)="0010,2160|1|1|" ;  O  Ethnic Group
+ S TAGS(24)="0010,2180|1|1|" ;  O  Occupation
+ S TAGS(25)="0010,21B0|1|1|" ;  O  Additional Patient History
+ S TAGS(26)="0020,1206|1|1|" ;  O  Number of Study Related Series
+ S TAGS(27)="0020,1208|1|1|" ;  O  Number of Study Related Instances
+ S TAGS(28)="4008,010C|1|1|" ;  O  Interpretation Author
+ Q
+ ;
+SET4 ;
+ S TAGS(1)="0008,0020|1|1|"          ; Study Date
+ S TAGS(2)="0008,0030|1|1|"          ; Study Time
+ S TAGS(3)="0008,0050|1|1|"          ; Accession Number
+ S TAGS(4)="0010,0010|1|1|"          ; Patient's Name
+ S TAGS(5)="0010,0020|1|1|"          ; Patient ID
+ S TAGS(6)="0020,0010|1|1|"          ; Study ID
+ S TAGS(7)="0020,000D|1|1|"          ; Study Instance UID
+ Q
+ ;
+SET5 ;
+ S TAGS(4)="0010,0010|1|1|c*^k*"     ; Patient's Name
+ S TAGS(5)="0010,0020|1|1|217103663" ; Patient ID
+ Q
+ ;
+SET6 ;
+ S TAGS(1)="0008,0020|1|1|"          ; Study Date
+ S TAGS(2)="0008,0030|1|1|"          ; Study Time
+ S TAGS(3)="0008,0050|1|1|"          ; Accession Number
+ S TAGS(4)="0010,0010|1|1|c*^k*"     ; Patient's Name
+ S TAGS(5)="0010,0020|1|1|317103663" ; Patient ID
+ S TAGS(6)="0020,0010|1|1|"          ; Study ID
+ S TAGS(7)="0020,000D|1|1|"          ; Study Instance UID
+ Q
+ ;
+SET7 ;
+ S TAGS(1)="0008,0020|1|1|"          ; Study Date
+ S TAGS(2)="0008,0030|1|1|"          ; Study Time
+ S TAGS(3)="0008,0050|1|1|"          ; Accession Number
+ S TAGS(4)="0010,0010|1|1|c*^k*"     ; Patient's Name
+ S TAGS(5)="0010,0020|1|1|528220000" ; Patient ID
+ S TAGS(6)="0020,0010|1|1|"          ; Study ID
+ S TAGS(7)="0020,000D|1|1|"          ; Study Instance UID
+ Q
+ ;
+SET8 ;
+ S TAGS(1)="0008,0020|1|1|19900101-20050202"          ; Study Date
+ S TAGS(2)="0008,0030|1|1|"          ; Study Time
+ S TAGS(3)="0008,0050|1|1|"          ; Accession Number
+ S TAGS(4)="0010,0010|1|1|"          ; Patient's Name
+ S TAGS(5)="0010,0020|1|1|"          ; Patient ID
+ S TAGS(6)="0020,0010|1|1|"          ; Study ID
+ S TAGS(7)="0020,000D|1|1|"          ; Study Instance UID
+ Q
+ ;
+ S TAGS(1)="0008,0020|1|1|20040101" ; Study Date
+ S TAGS(1)="0008,0020|1|1|20040101-20050101" ; Study Date
+ S TAGS(2)="0008,0030|1|1|08-09"     ; Study Time
+ S TAGS(7)="0020,000D|1|1|1.2.840.113754.1.*.660.1.106" ; Study Instance UID
+ ;
+ ;
+ ; Problem cases left over:
+ ; 0008,0062  O  SOP Classes in Study [supported?]
+ ; 0008,1080  O  Admitting Diagnoses Description
+ ; 0010,4000  O  Patient Comments
+ ;
+
+

@@ -1,0 +1,78 @@
+# SCU_List.Sample, 19 November 2008
+# 3.0;IMAGING;**66**;Mar 19, 2002;Build 1843;Sep 08, 2010
+# Per VHA Directive 2004-038, this routine should not be modified.
+# +---------------------------------------------------------------+
+# | Property of the US Government.                                |
+# | No permission to copy or redistribute this software is given. |
+# | Use of unreleased versions of this software requires the user |
+# | to execute a written test agreement with the VistA Imaging    |
+# | Development Office of the Department of Veterans Affairs,     |
+# | telephone (301) 734-0100.                                     |
+# | The Food and Drug Administration classifies this software as  |
+# | a medical device.  As such, it may not be changed in any way. |
+# | Modifications to this software may result in an adulterated   |
+# | medical device under 21CFR820, the use of which is considered |
+# | to be a violation of US Federal Statutes.                     |
+# +---------------------------------------------------------------+
+#
+#
+# Format:
+# line 1:Application Name|Called AE Title|Calling AE Title|Destination IP Address|Socket
+# line 2:|Presentation Context Name|Transfer Syntax Name
+# line 3:||Transfer Syntax Name (if there are more than one)
+#
+# Examples:
+#
+# EMED Query/Retrieve|EMED_SCP_LAND|VISTA_QR_SCU|<Your IP-Address goes here>|104
+# |Verification SOP Class|Implicit VR Little Endian
+# |Study Root Query/Retrieve Information Model - MOVE|Implicit VR Little Endian
+#
+# GEMS PACS Query/Retrieve|QueryRetrieve|VISTA_QR_SCU|<Your IP-Address goes here>|104
+# |Verification SOP Class|Implicit VR Little Endian
+# |Study Root Query/Retrieve Information Model - FIND|Implicit VR Little Endian
+# |Study Root Query/Retrieve Information Model - MOVE|Implicit VR Little Endian
+#
+# MITRA Modality Worklist|Testing|SCANNER1|<Your IP-Address goes here>|60010
+# |Verification SOP Class|Implicit VR Little Endian
+# |Modality Worklist Information Model - FIND|Implicit VR Little Endian
+#
+# DeJarnette Lasershare|Lasershare|VistA Send Image|<Your IP-Address goes here>|60100
+# |CT Image Storage|Implicit VR Little Endian
+#
+#
+# The next two examples combined are needed for DICOM Q/R.  Both must exist to work properly.
+# -The first example is the DICOM Gateway.
+# -The second example is the vendor device requesting the Query and Retrieve.
+#
+# This represents the Q/R SCP, which is the DICOM Gateway itself.
+# Gateway QR SCP|DICOM_QR|Bogus|127.0.0.1|60090
+# |Verification SOP Class|Implicit VR Little Endian
+# |Study Root Query/Retrieve Information Model - FIND|Implicit VR Little Endian
+# |Study Root Query/Retrieve Information Model - MOVE|Implicit VR Little Endian
+# ~C-Find|No|Yes
+# ~C-Move|No|Yes
+# ~C-Store|Yes|No
+#
+# This represents the Q/R SCU, which is the vendor requesting the information
+#	from the DICOM Gateway.
+# 3D Station|3D_RECON|Bogus|10.2.18.120|22500
+# |Verification SOP Class|Implicit VR Little Endian
+# |Study Root Query/Retrieve Information Model - FIND|Implicit VR Little Endian
+# |Study Root Query/Retrieve Information Model - MOVE|Implicit VR Little Endian
+# ~C-Find|Yes|No
+# ~C-Move|Yes|No
+# ~C-Store|No|Yes
+#
+#
+Local Modality Worklist|VistA_Worklist|VistA Testing|LOCALHOST|60010
+|Verification SOP Class|Implicit VR Little Endian
+|Modality Worklist Information Model - FIND|Implicit VR Little Endian
+#
+# Place your entries below
+#
+#
+#
+#
+#
+# end of file
+

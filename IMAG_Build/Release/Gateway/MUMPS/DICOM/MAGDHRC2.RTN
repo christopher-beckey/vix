@@ -1,0 +1,149 @@
+MAGDHRC2 ;WOIFO/PMK - Read HL7 and generate DICOM ; 20 Aug 2009 2:42 PM
+ ;;3.0;IMAGING;**11,49**;Mar 19, 2002;Build 2201;Jun 29, 2011
+ ;; Per VHA Directive 2004-038, this routine should not be modified.
+ ;; +---------------------------------------------------------------+
+ ;; | Property of the US Government.                                |
+ ;; | No permission to copy or redistribute this software is given. |
+ ;; | Use of unreleased versions of this software requires the user |
+ ;; | to execute a written test agreement with the VistA Imaging    |
+ ;; | Development Office of the Department of Veterans Affairs,     |
+ ;; | telephone (301) 734-0100.                                     |
+ ;; | The Food and Drug Administration classifies this software as  |
+ ;; | a medical device.  As such, it may not be changed in any way. |
+ ;; | Modifications to this software may result in an adulterated   |
+ ;; | medical device under 21CFR820, the use of which is considered |
+ ;; | to be a violation of US Federal Statutes.                     |
+ ;; +---------------------------------------------------------------+
+ ;;
+ ; PACS interface -- Radiology HL7 data input routine
+ ; This module reads and parses the HL7 MSH Segment
+ ;
+ ; Entry point to build a DICOM message from an HL7 transaction
+ ;
+ N HL7NOSEG ;- number of HL7 segments in the message
+ N SEGMENT ;-- HL7 segment code; also used in ^MAGDHRC5/6 for OBR flag
+ N SEX ;------ patient's sex
+ N TEXTOUT ;-- array of text titles - used in TEXTOUT^MAGDHRC7
+ N II,X
+ ;
+ D MSGINIT^MAGDFCNS ; initialize the DICOM message
+ ;
+ ; process each message segment
+ S HL7NOSEG=$$GETCOUNT^MAGDHRC0() ; get number of HL7 segments in message
+ I HL7NOSEG<2 D  Q
+ . N MSG
+ . S MSG(1)="Incomplete copy of HL7 message encountered."
+ . S MSG(2)="In message number "_MSGNO_", only the MSH segment exists."
+ . S MSG(3)="All the other segments are missing."
+ . D TRAPERR^MAGDSTRT(1,$T(+0),"DICOM TEXT GATEWAY - HL7 DATA ERROR",.MSG)
+ . Q  ; Error trap does not return
+ ;
+ F HL7SEGNO=1:1:HL7NOSEG D  ;
+ . I '$$GETEXIST^MAGDHRC0() D  Q
+ . . N MSG
+ . . S MSG(1)="Incomplete copy of HL7 message encountered."
+ . . S MSG(2)="In message number "_MSGNO_","
+ . . S MSG(3)="segment number "_HL7SEGNO_" is missing."
+ . . D TRAPERR^MAGDSTRT(1,$T(+0),"DICOM TEXT GATEWAY - HL7 DATA ERROR",.MSG)
+ . . Q  ; Error trap does not return
+ . ;
+ . S SEGMENT=$$GETDATA^MAGDHRC0(0) D
+ . . I SEGMENT'?1A2AN D  Q
+ . . . N MSG
+ . . . S MSG="Segment Header Code not Recognized """_SEGMENT_""""
+ . . . D MESSAGE^MAGDMLOG(2,0,MSG,"BtV")
+ . . . Q
+ . . I $T(@SEGMENT)'["HL7 Segment:" D  Q
+ . . . N MSG
+ . . . S MSG="Ignoring HL7 Segment """_SEGMENT_""""
+ . . . D MESSAGE^MAGDMLOG(2,0,MSG,"BtV")
+ . . . Q
+ . . D @SEGMENT
+ . . Q
+ . Q
+ ;
+ D ^MAGDHR9 ; fixes to handle text longer than the DICOM field permits
+ Q
+ ;
+ ; Processing Routines
+PID ; HL7 Segment: patient identification
+ G PID^MAGDHRC3
+ Q
+ ;
+PV1 ; HL7 Segment: patient visit
+ G PV1^MAGDHRC3
+ Q
+ ;
+ROL ; HL7 Segment: role
+ Q  ; no processing for now
+ ;
+DG1 ; HL7 Segment: diagnosis
+ G DG1^MAGDHRC3
+ Q
+ ;
+ORC ; HL7 Segment: common order
+ I RECVAPP="MAGD-CLIENT" G ORC^MAGDHRC4
+ I RECVAPP="VI-CONSULT" G ORC^MAGDHRC5
+ D NONE
+ Q
+ ;
+OBR ; HL7 Segment: observation request
+ I RECVAPP="MAGD-CLIENT" G OBR^MAGDHRC4
+ I RECVAPP="VI-CONSULT" G OBR^MAGDHRC5
+ D NONE
+ Q
+ ;
+OBX ; HL7 Segment: observation
+ I RECVAPP="MAGD-CLIENT" G OBX^MAGDHRC6
+ I RECVAPP="VI-CONSULT" G OBX^MAGDHRC7
+ I RECVAPP="VISTA DICOM/TEXT GATEWAY" Q  ; ignore
+ D NONE
+ Q
+ ;
+NTE ; HL7 Segment: ignore
+ Q
+ ;
+ZDS ; HL7 Segment: DICOM Study Instance UID
+ Q
+ ;
+ZSV ; HL7 Segment: performing service
+ I RECVAPP="VI-CONSULT" G ZSV^MAGDHRC5
+ D NONE
+ Q
+ ;
+NONE ;
+ W !!,"No action defined for Receiving Application """,$G(RECVAPP)
+ W """ for segment: """,SEGMENT,"""",!
+ Q
+ ;
+NK1 ; HL7 Segment: ignore segment
+ Q
+ ;
+MSH ; HL7 Segment: Message Header Segment (already processed in ^MAGDHRC)
+ Q
+ ;
+EVN ; HL7 Segment: Patient Event (like ADT, PID Update, etc.)
+ N EVENT
+ S EVENT=$$GETDATA^MAGDHRC0(1) Q:$E(EVENT)'="A"  ; non-ADT event code
+ I $T(@EVENT)'="" G @EVENT
+ G A08 ; A08 is the catch-all event type
+ ;
+A01 ; HL7 Segment: Admit a Patient
+ S MESSAGE="ADT ADMIT"
+ D SAVE^MAGDFCNS("0038,0008","ADMITTED") ; visit status ID
+ Q
+ ;
+A02 ; HL7 Segment: Transfer
+ S MESSAGE="ADT TRANSFER"
+ D SAVE^MAGDFCNS("0038,0008","TRANSFERED") ; visit status ID
+ Q
+ ;
+A03 ; HL7 Segment: Discharge
+ S MESSAGE="ADT DISCHARGE"
+ D SAVE^MAGDFCNS("0038,0008","DISCHARGED") ; visit status ID
+ Q
+ ;
+A08 ; HL7 Segment: Update Patient Information - VistA
+ S MESSAGE="PATIENT DEMOGRAPHIC CHANGE"
+ Q
+ ;

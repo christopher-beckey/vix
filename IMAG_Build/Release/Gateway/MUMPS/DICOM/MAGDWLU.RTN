@@ -1,0 +1,98 @@
+MAGDWLU ;WOIFO/PMK - Worklist information user ; 04 Jan 2011 10:16 AM
+ ;;3.0;IMAGING;**21,11,30,51,53,49**;Mar 19, 2002;Build 2201;Jun 29, 2011
+ ;; Per VHA Directive 2004-038, this routine should not be modified.
+ ;; +---------------------------------------------------------------+
+ ;; | Property of the US Government.                                |
+ ;; | No permission to copy or redistribute this software is given. |
+ ;; | Use of unreleased versions of this software requires the user |
+ ;; | to execute a written test agreement with the VistA Imaging    |
+ ;; | Development Office of the Department of Veterans Affairs,     |
+ ;; | telephone (301) 734-0100.                                     |
+ ;; | The Food and Drug Administration classifies this software as  |
+ ;; | a medical device.  As such, it may not be changed in any way. |
+ ;; | Modifications to this software may result in an adulterated   |
+ ;; | medical device under 21CFR820, the use of which is considered |
+ ;; | to be a violation of US Federal Statutes.                     |
+ ;; +---------------------------------------------------------------+
+ ;;
+ENTRY ; entry point to generate a Modality Worklist C-FIND-RQ
+ N AETITLE,ATTRIB,CHANNEL,DEBUG,DEFAULT,DO,DONEFLAG,FBSWITCH,FILEMODE,HIT,INCOMING
+ N LOGDIR,MESSAGE,MSG,MSGDATE,MSGTIME,MSGHANDL,MULTIMSG,ODEVNAME,ODEVTYPE,OUTGOING
+ N PDUIN,PDUOUT,PORT,QUEUEIN,QUEUEOUT,ROLE,SAVENODE,SEQNUMB,SEQUENCE,SITE
+ N UID,UIDTYPE,USERAPP,Y,Y1,Y2
+ ;
+ S DTIME=$G(DTIME,300)
+ W !!,"Modality Worklist Query"
+ S DEFAULT=$G(^TMP("MAG","MOD WORK LIST","USER APPLICATIONS"))
+ S USERAPP=$$PICKSCP^MAGDACU(DEFAULT) Q:USERAPP=""
+ S ^TMP("MAG","MOD WORK LIST","USER APPLICATIONS")=USERAPP
+ ;
+ S HIT=0 F  D  Q:HIT  Q:X["^"
+ . ; select the application entity title
+ . S DEFAULT=$G(^TMP("MAG","MOD WORK LIST","AE TITLE"))
+ . W !!,"Select the Application Entity Title: " W:$L(DEFAULT) DEFAULT,"// "
+ . R X:DTIME E  S X="^"
+ . I X["^" Q  ; a caret will terminate the program
+ . I X="" S X=DEFAULT W X
+ . Q:X=""
+ . S X=$$UPPER^MAGOSMSC(X)
+ . S Y=$O(^MAGDICOM(2006.583,"B",X,""))
+ . I Y S HIT=1
+ . E  D  ;
+ . . ; check for a single match
+ . . S Y1=$O(^MAGDICOM(2006.583,"B",X)),Y2=$O(^(Y1))
+ . . I Y1'="",Y1[X,Y2'[X W $E(Y1,$L(X)+1,999) S X=Y1,HIT=1
+ . . E  D  S X="" Q  ; output a list of application entity titles
+ . . . W !,"Accessible AE Titles"
+ . . . W !,"--------------------"
+ . . . I Y1'="",Y1[X D  ; leading character match
+ . . . . S Y=X,L=$L(X)
+ . . . . F  S Y=$O(^MAGDICOM(2006.583,"B",Y)) Q:$E(Y,1,L)'=X  W !,Y
+ . . . . Q
+ . . . E  D  ; complete list
+ . . . . S Y="" F  S Y=$O(^MAGDICOM(2006.583,"B",Y)) Q:Y=""  W !,Y
+ . . . . Q
+ . . . Q
+ . . Q
+ . I HIT S ^TMP("MAG","MOD WORK LIST","AE TITLE")=X
+ . Q
+ Q:X["^"
+ ;
+ I $$GETKEYS-1 Q
+ ;
+ W !,"Performing Query..."
+ D ^MAGDWLU2
+ W " completed!"
+ D ^MAGDWLU3
+ Q
+ ;
+GETKEYS() ; get the keys for modality worklist query
+ N DONE,I,KEYLIST,N
+ S KEYLIST(1)="PATIENT NAME|PNAME^MAGDWLU1"
+ S KEYLIST(2)="PATIENT ID|PID^MAGDWLU1"
+ S KEYLIST(3)="ACCESSION NUMBER|STUDY^MAGDWLU1"
+ S KEYLIST(4)="REQUESTED PROCEDURE ID|REQPROC^MAGDWLU1"
+ S KEYLIST(5)="MODALITY|MODALITY^MAGDWLU1"
+ S KEYLIST(6)="START DATE|STRTDATE^MAGDWLU1"
+ S KEYLIST(7)="START TIME|STRTTIME^MAGDWLU1"
+ ;
+ S DONE=0 F  D  Q:DONE
+ . W @IOF,!!?10,"SELECT MODALITY WORKLIST ATTRIBUTE KEYS"
+ . W !?10,"---------------------------------------"
+ . F I=1:1:7 D
+ . . S ATTRIB=$P(KEYLIST(I),"|",1)
+ . . W !!,$J(ATTRIB,25)," (",I,") : "
+ . . W $G(^TMP("MAG","MOD WORK LIST",ATTRIB))
+ . . Q
+ . W !!!,"Enter 1-7 to change an item above, ""R"" to refresh, ""Q"" to query: "
+ . R N:$G(DTIME,300) E  S N="^"
+ . I N?1N,N>0,N<8 D
+ . . S ATTRIB=$P(KEYLIST(N),"|",1)
+ . . S DEFAULT=$G(^TMP("MAG","MOD WORK LIST",ATTRIB))
+ . . D @$P(KEYLIST(N),"|",2)
+ . . Q
+ . I N="^" S DONE=-1
+ . I (N="R")!(N="r") D KILL^MAGDWLU1
+ . I (N="Q")!(N="q") S DONE=1
+ . Q
+ Q DONE

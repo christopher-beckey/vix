@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<build xmlns="http://va.gov/VistA/kids/manifest" name="MAG*3.0*055" patchName="DICOM PACS Conformance" patch="055">
+  <components>
+    <securityKeys />
+    <parameterDefinitions />
+    <printTemplates />
+    <sortTemplates />
+    <menuOptions />
+    <rpcs>
+      <rpc export="RPC_MAG_GET_IAN_DATA.KID" />
+      <rpc export="RPC_MAG_GET_IAN_IEN.KID" />
+      <rpc export="RPC_MAG_GET_IMAGE_UIDS.KID" />
+      <rpc export="RPC_MAG_PERSIST_IAN.KID" />
+      <rpc export="RPC_MAG_REMOVE_IAN.KID" />
+    </rpcs>
+    <dataDictionaries>
+      <dataDictionary export="Z_VSS_2006_57901.KID" />
+    </dataDictionaries>
+    <hl7s />
+    <routines>
+      <routine export="MAGDIA01.RTN" />
+    </routines>
+    <protocols />
+  </components>
+</build>

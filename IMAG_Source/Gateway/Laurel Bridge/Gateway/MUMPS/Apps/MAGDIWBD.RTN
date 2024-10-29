@@ -1,0 +1,113 @@
+Cache for Windows NT^INT^Saved from DICOM,DICOM (ISW-KUZMAKP3-LT)^~Format=Cache.S~
+%RO on 05/16/2013  13:39
+MAGDIWBD^INT^1^62958,49116.238046^0
+MAGDIWBD ;WOIFO/EdM/PMK - Export of radiology images from VistA ; 16 May 2013 1:38 PM
+ ;;3.0;IMAGING;**50,54**;MAR 19, 2002;;OCT 28, 2009
+ ;; Per VHA Directive 2004-038, this routine should not be modified.
+ ;; +---------------------------------------------------------------+
+ ;; | Property of the US Government.                                |
+ ;; | No permission to copy or redistribute this software is given. |
+ ;; | Use of unreleased versions of this software requires the user |
+ ;; | to execute a written test agreement with the VistA Imaging    |
+ ;; | Development Office of the Department of Veterans Affairs,     |
+ ;; | telephone (301) 734-0100.                                     |
+ ;; | The Food and Drug Administration classifies this software as  |
+ ;; | a medical device.  As such, it may not be changed in any way. |
+ ;; | Modifications to this software may result in an adulterated   |
+ ;; | medical device under 21CFR820, the use of which is considered |
+ ;; | to be a violation of US Federal Statutes.                     |
+ ;; +---------------------------------------------------------------+
+ ;;
+ Q
+ ;
+VERIFY ; get the parameters for this run
+ N DFN,RPCERR,VADM,VAICN,VAIN,VAINFO,VAPA,X
+ S STORESCP=^MAGDICOM(2006.563,1,"EXPORT DICOM STORAGE SCP")
+ S SORTORDR=^MAGDICOM(2006.563,1,"EXPORT DIRECTION")
+ S BEGDATE=$G(^MAGDICOM(2006.563,1,"EXPORT BEGIN DATE"))
+ S STOPDATE=$G(^MAGDICOM(2006.563,1,"EXPORT STOP DATE"))
+ S BATCHSIZ=$G(^MAGDICOM(2006.563,1,"EXPORT BATCH SIZE"))
+ S HOURS=^MAGDICOM(2006.563,1,"EXPORT HOURS OF OPERATION")
+ ;
+ W !!!?10,"F i n a l  P a r a m e t e r   C h e c k l i s t"
+ W !?10,"------------------------------------------------"
+ W !,"     DICOM storage provider: ",STORESCP
+ W !,"      Report scanning order: ",SORTORDR
+ I SCANMODE="NUMBER" D  ; numeric report order
+ . S RARPT1=$G(^MAGDICOM(2006.563,1,"EXPORT RADIOLOGY REPORT #"))
+ . W !,"       Starting with report: ",RARPT1
+ . W !,"Number of studies to export: ",BATCHSIZ
+ . Q
+ E  I SCANMODE="PATIENT" D  ; patient scan
+ . S DFN=$G(^MAGDICOM(2006.563,1,"EXPORT PATIENT"))
+ . S RPCERR=$$CALLRPC^MAGM2VCU("MAG DICOM GET PATIENT","M",.VAINFO,DFN)
+ . I RPCERR<0 S QUIT=-1 Q
+ . D VADPT^MAGDRPC0(.VAINFO)
+ . S NAME=VADM(1),DOB=$P(VADM(3),"^",2),SSN=$P(VADM(2),"^",2)
+ . W !,"               Patient Name: ",NAME
+ . W !,"     Social Security Number: ",SSN
+ . W !,"              Date of Birth: ",DOB
+ . W !,"   Earliest date for report: ",$$FMTE^XLFDT(BEGDATE,1)
+ . W !,"     Latest date for report: ",$$FMTE^XLFDT(STOPDATE,1)
+ . Q
+ E  D  ; data scan order
+ . W !,"   Earliest date for report: ",$$FMTE^XLFDT(BEGDATE,1)
+ . W !,"     Latest date for report: ",$$FMTE^XLFDT(STOPDATE,1)
+ . Q
+ W !,"  Active hours of operation: ","M12345678901N12345678901 (M=midnight, N=noon)"
+ W !,"                             ",HOURS
+ ;
+ I $$YESNO^MAGDIWBB("Ready to begin exporting DICOM images?","",.X)<0 S QUIT=1 Q
+ I X="YES" S QUIT=0
+ E  W " -- export not started" S QUIT=-1
+ Q
+ ;
+FROMLOC(FROMLOC) ; Select "from" locations for transmitter
+ N DONE,FROM,LIST,P1,P2,TMPLOC,X
+ I '$G(LOCATION) D  Q
+ . W !!,"This DICOM Gateway has not yet been configured completely."
+ . W !,"Please run menu option 4-2-2 (Update Gateway Configuration Parameters).",!
+ . Q
+ S TMPLOC(LOCATION)=1
+ S P2=0 F  S P2=$O(^MAGDICOM(2006.563,1,"TRANSMIT LOCATION",P2)) Q:'P2  D
+ . S P1=$G(^MAGDICOM(2006.563,1,"TRANSMIT LOCATION",P2,0))
+ . S:P1 TMPLOC(P1)=1
+ . Q
+ D
+ . Q:$$CALLRPC^MAGM2VCU("MAG DICOM VALID LOCATIONS","M",.FROM)<0
+ . S FROM="" F  S FROM=$O(FROM(FROM)) Q:FROM=""  D
+ . . S X=FROM(FROM),P1=+X,P2=$P(X,"^",2) Q:X'["^"
+ . . S:P1'=LOCATION LIST(P1)=P2
+ . . Q
+ . Q:$O(LIST(""))=""
+ . W !!,"There are other locations from which to transmit DICOM objects"
+ . W !,"besides the one that is currently served by this Gateway."
+ . S DONE=0 F  D  Q:DONE
+ . . W !!,"Enter any number from the list below to include this location"
+ . . W !,"in the current selection (prefix a number with a - (minus sign)"
+ . . W !,"to remove it from the current selection."
+ . . S LIST="" F  S LIST=$O(LIST(LIST)) Q:LIST=""  D
+ . . . W !,$J(LIST,5),": ",LIST(LIST) W:$G(TMPLOC(LIST)) " (Selected)"
+ . . . Q
+ . . W !,"Add to or remove from selection: " R X:$G(DTIME,300) E  S DONE=1 Q
+ . . I $TR(X,".")="" S DONE=1 Q
+ . . F  D  Q:X=""
+ . . . S P1=$P(X,",",1),X=$P(X,",",2,$L(X)+2),P2=$TR(P1,"-")
+ . . . I P1="." S DONE=1 Q
+ . . . I P1?1.N,$D(LIST(P1)) S TMPLOC(P1)=1 Q
+ . . . I P1?1"-"1.N,$L(P2),$D(LIST(P2)) K TMPLOC(P2) Q
+ . . . W !,"Could not process """,P1,"""."
+ . . . Q
+ . . Q
+ . Q
+ K ^MAGDICOM(2006.563,1,"TRANSMIT LOCATION")
+ S P1="",P2=0 F  S P1=$O(TMPLOC(P1)) Q:P1=""  D
+ . S P2=P2+1,FROMLOC(P2)=P1
+ . S ^MAGDICOM(2006.563,1,"TRANSMIT LOCATION",P2,0)=P1
+ . Q
+ S ^MAGDICOM(2006.563,1,"TRANSMIT LOCATION",0)="^2006.5636^"_P2_"^"_P2
+ Q
+ ;
+
+
+

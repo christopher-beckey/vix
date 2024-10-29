@@ -1,0 +1,27 @@
+#==============================================================================
+# static information common to all instances of OEMLOG_a component
+#==============================================================================
+[ component_info ]
+name = OEMLOG_a
+type = java_lib
+category = examples
+description = LOG Adapter - java example implementation of LOG interface
+package_prefix = com.lbs.examples
+slnreldir = .\jsrc\com\lbs\examples\OEMLOG_a
+
+[ required_components ]
+component = java_lib/DCF
+component = java_lib/LOG
+[ debug_controls ]
+debug_flag = df_SHOW_CONSTRUCTORS, 0x0001, show object constructors
+debug_flag = df_SHOW_DESTRUCTORS, 0x0002, show object destructors
+debug_flag = df_SHOW_GENERAL_FLOW, 0x0004, show general flow
+debug_flag = df_SIMULATE_HARDWARE, 0x0008, simulate external devices
+debug_flag = df_SHOW_CFG_INFO, 0x0010, show configuration information
+debug_flag = df_SHOW_EXC_THROW, 0x0020, show exceptions before throwing
+
+#==============================================================================
+# per-instance information for the OEMLOG_a component
+#==============================================================================
+[ OEMLOG_a ]
+debug_flags = 0

@@ -1,0 +1,35 @@
+﻿
+@{
+    ViewBag.Title = "ImportFile";
+}
+
+<hr style="height:2px;border-width:0;color:gray;background-color:gray">
+<h2>Import Custom Image</h2>
+<div id="customImage">
+    @{
+        Html.RenderPartial("CustomImage");
+    }
+</div>
+<hr style="height:2px;border-width:0;color:gray;background-color:gray">
+Files uploaded:<br />
+@if (ViewBag.fileList != null)
+{
+    foreach (var item in ViewBag.fileList)
+    {
+        <span>@item<br /></span>
+    }
+}
+<hr style="height:2px;border-width:0;color:gray;background-color:gray">
+<br />
+@using (Html.BeginForm("ImportFile", "Import", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+<div>
+    @Html.TextBox("file", "", new { type = "file" }) <br />
+    <input type="submit" value="Upload File" />
+    @ViewBag.Message<br /><br /> @ViewBag.Status<br /><br />
+</div>
+}
+<a class="btn btn-primary" href="@Url.Action("ToViewer","Import")">Create Mock Responses from your uploaded images.</a>
+<a class="btn btn-primary" href="@Url.Action("DeleteUploadedImages","Import")">Delete Uploaded Images</a>
+
+<hr style="height:2px;border-width:0;color:gray;background-color:gray">

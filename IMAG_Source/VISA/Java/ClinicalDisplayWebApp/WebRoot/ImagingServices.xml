@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<java version="1.6.0_03" class="java.beans.XMLDecoder"> 
+ <object class="java.util.ArrayList"> 
+  <void method="add"> 
+   <object class="gov.va.med.imaging.versions.ImagingService"> 
+    <void property="applicationPath"> 
+     <string>ClinicalDisplayWebApp</string> 
+    </void> 
+    <void property="applicationType"> 
+     <string>ClinicalDisplay</string> 
+    </void> 
+    <void property="operations"> 
+     <void method="add"> 
+      <object class="gov.va.med.imaging.versions.ImagingOperation"> 
+       <void property="operationPath"> 
+        <string>webservices/ImageMetadataClinicalDisplay</string> 
+       </void> 
+       <void property="operationType"> 
+        <string>Metadata</string> 
+       </void> 
+      </object> 
+     </void> 
+     <void method="add"> 
+      <object class="gov.va.med.imaging.versions.ImagingOperation"> 
+       <void property="operationPath"> 
+        <string>xchange/xchange</string> 
+       </void> 
+       <void property="operationType"> 
+        <string>Image</string> 
+       </void> 
+      </object> 
+     </void> 
+    </void> 
+    <void property="version"> 
+     <string>0</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="gov.va.med.imaging.versions.ImagingService"> 
+    <void property="applicationPath"> 
+     <string>ClinicalDisplayWebApp</string> 
+    </void> 
+    <void property="applicationType"> 
+     <string>ClinicalDisplay</string> 
+    </void> 
+    <void property="operations"> 
+     <void method="add"> 
+      <object class="gov.va.med.imaging.versions.ImagingOperation"> 
+       <void property="operationPath"> 
+        <string>webservices/ImageMetadataClinicalDisplay.V2</string> 
+       </void> 
+       <void property="operationType"> 
+        <string>Metadata</string> 
+       </void> 
+      </object> 
+     </void> 
+     <void method="add"> 
+      <object class="gov.va.med.imaging.versions.ImagingOperation"> 
+       <void property="operationPath"> 
+        <string>xchange/xchange</string> 
+       </void> 
+       <void property="operationType"> 
+        <string>Image</string> 
+       </void> 
+      </object> 
+     </void> 
+    </void> 
+    <void property="version"> 
+     <string>2</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="gov.va.med.imaging.versions.ImagingService"> 
+    <void property="applicationPath"> 
+     <string>ClinicalDisplayWebApp</string> 
+    </void> 
+    <void property="applicationType"> 
+     <string>ClinicalDisplay</string> 
+    </void> 
+    <void property="operations"> 
+     <void method="add"> 
+      <object class="gov.va.med.imaging.versions.ImagingOperation"> 
+       <void property="operationPath"> 
+        <string>webservices/ImageMetadataClinicalDisplay.V3</string> 
+       </void> 
+       <void property="operationType"> 
+        <string>Metadata</string> 
+       </void> 
+      </object> 
+     </void> 
+     <void method="add"> 
+      <object class="gov.va.med.imaging.versions.ImagingOperation"> 
+       <void property="operationPath"> 
+        <string>xchangeV3/xchange</string> 
+       </void> 
+       <void property="operationType"> 
+        <string>Image</string> 
+       </void> 
+      </object> 
+     </void> 
+    </void> 
+    <void property="version"> 
+     <string>3</string> 
+    </void> 
+   </object> 
+  </void>  
+  <void method="add"> 
+   <object class="gov.va.med.imaging.versions.ImagingService"> 
+    <void property="applicationPath"> 
+     <string>ClinicalDisplayWebApp</string> 
+    </void> 
+    <void property="applicationType"> 
+     <string>ClinicalDisplay</string> 
+    </void> 
+    <void property="operations"> 
+     <void method="add"> 
+      <object class="gov.va.med.imaging.versions.ImagingOperation"> 
+       <void property="operationPath"> 
+        <string>webservices/ImageMetadataClinicalDisplay.V4</string> 
+       </void> 
+       <void property="operationType"> 
+        <string>Metadata</string> 
+       </void> 
+      </object> 
+     </void> 
+     <void method="add"> 
+      <object class="gov.va.med.imaging.versions.ImagingOperation"> 
+       <void property="operationPath"> 
+        <string>xchangeV4/xchange</string> 
+       </void> 
+       <void property="operationType"> 
+        <string>Image</string> 
+       </void> 
+      </object> 
+     </void> 
+    </void> 
+    <void property="version"> 
+     <string>4</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="gov.va.med.imaging.versions.ImagingService"> 
+    <void property="applicationPath"> 
+     <string>ClinicalDisplayWebApp</string> 
+    </void> 
+    <void property="applicationType"> 
+     <string>ClinicalDisplay</string> 
+    </void> 
+    <void property="operations"> 
+     <void method="add"> 
+      <object class="gov.va.med.imaging.versions.ImagingOperation"> 
+       <void property="operationPath"> 
+        <string>webservices/ImageMetadataClinicalDisplay.V5</string> 
+       </void> 
+       <void property="operationType"> 
+        <string>Metadata</string> 
+       </void> 
+      </object> 
+     </void> 
+     <void method="add"> 
+      <object class="gov.va.med.imaging.versions.ImagingOperation"> 
+       <void property="operationPath"> 
+        <string>xchangeV5/xchange</string> 
+       </void> 
+       <void property="operationType"> 
+        <string>Image</string> 
+       </void> 
+      </object> 
+     </void> 
+    </void> 
+    <void property="version"> 
+     <string>5</string> 
+    </void> 
+   </object> 
+  </void>
+  <void method="add"> 
+   <object class="gov.va.med.imaging.versions.ImagingService"> 
+    <void property="applicationPath"> 
+     <string>ClinicalDisplayWebApp</string> 
+    </void> 
+    <void property="applicationType"> 
+     <string>ClinicalDisplay</string> 
+    </void> 
+    <void property="operations"> 
+     <void method="add"> 
+      <object class="gov.va.med.imaging.versions.ImagingOperation"> 
+       <void property="operationPath"> 
+        <string>webservices/ImageMetadataClinicalDisplay.V6</string> 
+       </void> 
+       <void property="operationType"> 
+        <string>Metadata</string> 
+       </void> 
+      </object> 
+     </void> 
+     <void method="add"> 
+      <object class="gov.va.med.imaging.versions.ImagingOperation"> 
+       <void property="operationPath"> 
+        <string>xchangeV6/xchange</string> 
+       </void> 
+       <void property="operationType"> 
+        <string>Image</string> 
+       </void> 
+      </object> 
+     </void> 
+    </void> 
+    <void property="version"> 
+     <string>6</string> 
+    </void> 
+   </object> 
+  </void>
+  <void method="add"> 
+   <object class="gov.va.med.imaging.versions.ImagingService"> 
+    <void property="applicationPath"> 
+     <string>ClinicalDisplayWebApp</string> 
+    </void> 
+    <void property="applicationType"> 
+     <string>ClinicalDisplay</string> 
+    </void> 
+    <void property="operations"> 
+     <void method="add"> 
+      <object class="gov.va.med.imaging.versions.ImagingOperation"> 
+       <void property="operationPath"> 
+        <string>webservices/ImageMetadataClinicalDisplay.V7</string> 
+       </void> 
+       <void property="operationType"> 
+        <string>Metadata</string> 
+       </void> 
+      </object> 
+     </void> 
+     <void method="add"> 
+      <object class="gov.va.med.imaging.versions.ImagingOperation"> 
+       <void property="operationPath"> 
+        <string>xchangeV7/xchange</string> 
+       </void> 
+       <void property="operationType"> 
+        <string>Image</string> 
+       </void> 
+      </object> 
+     </void> 
+    </void> 
+    <void property="version"> 
+     <string>7</string> 
+    </void> 
+   </object> 
+  </void>
+ </object> 
+</java> 

@@ -1,0 +1,46 @@
+magptu ;WOIFO/MLH - PACS testing subroutines (utility) ; 01 Mar 2005  1:29 PM
+ ; *** CAUTION:  not for distribution beyond Silver Spring OIFO!
+ q
+ ;
+doc(xwhich,xflddta) ; subroutine, do not call directly
+ ; input:   xwhich = which doctor field are we populating
+ ; output:  .xflddta = doctor field data
+ ; returns: 0 if no error, non-0 if error
+ ;
+ n seed
+ s seed=rannum*xwhich+1
+ s seed=$e(seed,$l(seed)-5,$l(seed))
+ s xflddta=""
+ s $p(xflddta,HLCS,1)=seed
+ s $p(xflddta,HLCS,2)="DOCTOR"_($e(seed,1,2)*2+1)
+ s $p(xflddta,HLCS,3)="FIRST"_($e(seed,3,4)*3+1)
+ s $p(xflddta,HLCS,4)="MID"_($e(seed,5,6)*5+1)
+ s $p(xflddta,HLCS,5)=$P("JR^III^SR","^",seed#13+1)
+ s $p(xflddta,HLCS,6)=$P("DR^DR^DR^DR^^DR","^",seed#7+1)
+ s $p(xflddta,HLCS,7)=$P("MD^MD^MD^MD^^DO^DO","^",seed#7+1)
+ s $p(xflddta,HLCS,10)="L"
+ q 0
+ ;
+fon(xseed,xfon) ; subroutine function - do not call directly
+ s xfon="311555"_$e(10000+xseed,$l(xseed)-3,$l(xseed))
+ q 0
+ ;
+rncmitm(xflddta,xixcom,xixord) ; function - choose a random common orderable item
+ ;
+ n raien ; ---- radiology orderable item IEN
+ n orditm ; --- orderable item
+ n cpt ; ------ CPT-4 code
+ ;
+ f  d  i $g(xixord)]"",$g(cpt)]"" q
+ . s xixcom=$r($O(^RAMIS(71.3," "),-1))+1 ; index to commonly ordered items
+ . s raien=+^RAMIS(71.3,xixcom,0)
+ . s xixord=$g(^RAMIS(71,raien,0))
+ . s cpt=$p(xixord,"^",9)
+ . q
+ s $p(xflddta,HLCS,1)=cpt
+ s $p(xflddta,HLCS,2)=$p($g(^ICPT(cpt,0)),"^",2)
+ s $p(xflddta,HLCS,3)="C4"
+ s $p(xflddta,HLCS,4)=raien
+ s $p(xflddta,HLCS,5)=$p(xixord,"^",1)
+ s $p(xflddta,HLCS,6)="99RAP"
+ q 0

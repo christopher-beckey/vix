@@ -1,0 +1,91 @@
+﻿<UserControl x:Class="VixHealthMonitor.LongRunningThreadsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="400" d:DesignWidth="800"
+              DataContext="{Binding LongRunningThreads, Source={StaticResource Locator}}"
+             xmlns:b="clr-namespace:VISAHealthMonitorCommonControls;assembly=VISAHealthMonitorCommonControls"
+             xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+            xmlns:cmd="clr-namespace:GalaSoft.MvvmLight.Command;assembly=GalaSoft.MvvmLight.Extras.WPF4">
+    <Grid>
+        <Grid.Resources>
+            <Style x:Key="LeftHeaderStyle" TargetType="{x:Type GridViewColumnHeader}">
+                <Setter Property="HorizontalContentAlignment" Value="Left"/>
+            </Style>
+        </Grid.Resources>
+
+
+        <!--
+        <ListView HorizontalAlignment="Stretch"  VerticalAlignment="Stretch" ItemsSource="{Binding Path=VisaSources.Sources.View}"
+                  b:MouseDoubleClickBehavior.MouseDoubleClick="{Binding Path=ListMouseDoubleClickCommand}"
+                  SelectedItem="{Binding Path=SelectedItem}">
+        -->
+        <ListView HorizontalAlignment="Stretch"  VerticalAlignment="Stretch" ItemsSource="{Binding Path=VisaThreadProcessingTimes.Sources.View}"
+                b:SelectorDoubleClickCommandBehavior.HandleDoubleClick="true"
+                b:SelectorDoubleClickCommandBehavior.TheCommandToRun="{Binding Path=ListMouseDoubleClickCommand}"
+                SelectedItem="{Binding Path=SelectedItem}">
+
+            <ListView.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="Refresh Site" Command="{Binding Path=RefreshSiteCommand}" />
+                </ContextMenu>
+            </ListView.ContextMenu>
+
+            <ListView.View>
+                <GridView>
+                    <!--
+                    <GridViewColumn Width="160" HeaderContainerStyle="{StaticResource LeftHeaderStyle}">
+                    -->
+                    <GridViewColumn Width="190" HeaderContainerStyle="{StaticResource LeftHeaderStyle}">
+                        <GridViewColumnHeader Content="Site Name" 
+                                              Command="{Binding Path=SortCommand}" CommandParameter="VisaSource.DisplayName" />
+                        <GridViewColumn.CellTemplate>
+                            <HierarchicalDataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="{Binding VisaSource.DisplayName}"  />
+                                </StackPanel>
+                            </HierarchicalDataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Width="140" HeaderContainerStyle="{StaticResource LeftHeaderStyle}">
+                        <GridViewColumnHeader Content="Version" 
+                                              Command="{Binding Path=SortCommand}" CommandParameter="VisaHealth.VisaVersion" />
+                        <GridViewColumn.CellTemplate>
+                            <HierarchicalDataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="{Binding VisaHealth.VisaVersion}"  />
+                                </StackPanel>
+                            </HierarchicalDataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Width="300"  HeaderContainerStyle="{StaticResource LeftHeaderStyle}">
+                        <GridViewColumnHeader Content="Thread Name" 
+                                              Command="{Binding Path=SortCommand}" CommandParameter="ThreadName" />
+                        <GridViewColumn.CellTemplate>
+                            <HierarchicalDataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="{Binding ThreadName}"  />
+                                </StackPanel>
+                            </HierarchicalDataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+
+                    <GridViewColumn Width="200" HeaderContainerStyle="{StaticResource LeftHeaderStyle}">
+                        <GridViewColumnHeader Content="Processing Time" 
+                                              Command="{Binding Path=SortCommand}" CommandParameter="ProcessingTime" />
+                        <GridViewColumn.CellTemplate>
+                            <HierarchicalDataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="{Binding ProcessingTime}"/>
+                                </StackPanel>
+                            </HierarchicalDataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                   
+                </GridView>
+            </ListView.View>
+        </ListView>
+    </Grid>
+</UserControl>

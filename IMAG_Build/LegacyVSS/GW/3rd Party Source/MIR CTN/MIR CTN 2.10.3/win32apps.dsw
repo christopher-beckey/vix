@@ -1,0 +1,588 @@
+Microsoft Developer Studio Workspace File, Format Version 6.00
+# WARNING: DO NOT EDIT OR DELETE THIS WORKSPACE FILE!
+
+###############################################################################
+
+Project: "archive_server"=".\archive_server\archive_server.dsp" - Package Owner=<4>
+
+Package=<5>
+{{{
+    begin source code control
+    "$/MIR CTN 2.10.3/archive_server", YGCAAAAA
+    .\archive_server
+    end source code control
+}}}
+
+Package=<4>
+{{{
+}}}
+
+###############################################################################
+
+Project: "dcm_ctnto10"=".\dcm_ctnto10\dcm_ctnto10.dsp" - Package Owner=<4>
+
+Package=<5>
+{{{
+    begin source code control
+    "$/MIR CTN 2.10.3/dcm_ctnto10", WGCAAAAA
+    .\dcm_ctnto10
+    end source code control
+}}}
+
+Package=<4>
+{{{
+}}}
+
+###############################################################################
+
+Project: "dcm_diff"=".\dcm_diff\dcm_diff.dsp" - Package Owner=<4>
+
+Package=<5>
+{{{
+    begin source code control
+    "$/MIR CTN 2.10.3/dcm_diff", AFCAAAAA
+    .\dcm_diff
+    end source code control
+}}}
+
+Package=<4>
+{{{
+}}}
+
+###############################################################################
+
+Project: "dcm_dump_element"=".\dcm_dump_element\dcm_dump_element.dsp" - Package Owner=<4>
+
+Package=<5>
+{{{
+    begin source code control
+    "$/MIR CTN 2.10.3/dcm_dump_element", NFCAAAAA
+    .\dcm_dump_element
+    end source code control
+}}}
+
+Package=<4>
+{{{
+}}}
+
+###############################################################################
+
+Project: "dcm_dump_file"=".\dcm_dump_file\dcm_dump_file.dsp" - Package Owner=<4>
+
+Package=<5>
+{{{
+    begin source code control
+    "$/MIR CTN 2.10.3/dcm_dump_file", NGCAAAAA
+    .\dcm_dump_file
+    end source code control
+}}}
+
+Package=<4>
+{{{
+}}}
+
+###############################################################################
+
+Project: "dcm_make_object"=".\dcm_make_object\dcm_make_object.dsp" - Package Owner=<4>
+
+Package=<5>
+{{{
+    begin source code control
+    "$/MIR CTN 2.10.3/dcm_make_object", QHCAAAAA
+    .\dcm_make_object
+    end source code control
+}}}
+
+Package=<4>
+{{{
+}}}
+
+###############################################################################
+
+Project: "dcm_map_to_8"=".\dcm_map_to_8\dcm_map_to_8.dsp" - Package Owner=<4>
+
+Package=<5>
+{{{
+    begin source code control
+    "$/MIR CTN 2.10.3/dcm_map_to_8", TFCAAAAA
+    .\dcm_map_to_8
+    end source code control
+}}}
+
+Package=<4>
+{{{
+}}}
+
+###############################################################################
+
+Project: "dcm_modify_elements"=".\dcm_modify_elements\dcm_modify_elements.dsp" - Package Owner=<4>
+
+Package=<5>
+{{{
+    begin source code control
+    "$/MIR CTN 2.10.3/dcm_modify_elements", OHCAAAAA
+    .\dcm_modify_elements
+    end source code control
+}}}
+
+Package=<4>
+{{{
+}}}
+
+###############################################################################
+
+Project: "dcm_modify_object"=".\dcm_modify_object\dcm_modify_object.dsp" - Package Owner=<4>
+
+Package=<5>
+{{{
+    begin source code control
+    "$/MIR CTN 2.10.3/dcm_modify_object", CFCAAAAA
+    .\dcm_modify_object
+    end source code control
+}}}
+
+Package=<4>
+{{{
+}}}
+
+###############################################################################
+
+Project: "dcm_print_dictionary"=".\dcm_print_dictionary\dcm_print_dictionary.dsp" - Package Owner=<4>
+
+Package=<5>
+{{{
+    begin source code control
+    "$/MIR CTN 2.10.3/dcm_print_dictionary", LFCAAAAA
+    .\dcm_print_dictionary
+    end source code control
+}}}
+
+Package=<4>
+{{{
+}}}
+
+###############################################################################
+
+Project: "dcm_resize"=".\dcm_resize\dcm_resize.dsp" - Package Owner=<4>
+
+Package=<5>
+{{{
+    begin source code control
+    "$/MIR CTN 2.10.3/dcm_resize", TGCAAAAA
+    .\dcm_resize
+    end source code control
+}}}
+
+Package=<4>
+{{{
+}}}
+
+###############################################################################
+
+Project: "dcm_rm_element"=".\dcm_rm_element\dcm_rm_element.dsp" - Package Owner=<4>
+
+Package=<5>
+{{{
+    begin source code control
+    "$/MIR CTN 2.10.3/dcm_rm_element", JFCAAAAA
+    .\dcm_rm_element
+    end source code control
+}}}
+
+Package=<4>
+{{{
+}}}
+
+###############################################################################
+
+Project: "dcm_rm_group"=".\dcm_rm_group\dcm_rm_group.dsp" - Package Owner=<4>
+
+Package=<5>
+{{{
+    begin source code control
+    "$/MIR CTN 2.10.3/dcm_rm_group", LGCAAAAA
+    .\dcm_rm_group
+    end source code control
+}}}
+
+Package=<4>
+{{{
+}}}
+
+###############################################################################
+
+Project: "dcm_verify"=".\dcm_verify\dcm_verify.dsp" - Package Owner=<4>
+
+Package=<5>
+{{{
+    begin source code control
+    "$/MIR CTN 2.10.3/dcm_verify", XECAAAAA
+    .\dcm_verify
+    end source code control
+}}}
+
+Package=<4>
+{{{
+}}}
+
+###############################################################################
+
+Project: "dcm_w_disp"=".\dcm_w_disp\dcm_w_disp.dsp" - Package Owner=<4>
+
+Package=<5>
+{{{
+    begin source code control
+    "$/MIR CTN 2.10.3/dcm_w_disp", HECAAAAA
+    .\dcm_w_disp
+    end source code control
+}}}
+
+Package=<4>
+{{{
+}}}
+
+###############################################################################
+
+Project: "dicom_echo"=".\dicom_echo\dicom_echo.dsp" - Package Owner=<4>
+
+Package=<5>
+{{{
+    begin source code control
+    "$/MIR CTN 2.10.3/dicom_echo", HHCAAAAA
+    .\dicom_echo
+    end source code control
+}}}
+
+Package=<4>
+{{{
+}}}
+
+###############################################################################
+
+Project: "load_control"=".\load_control\load_control.dsp" - Package Owner=<4>
+
+Package=<5>
+{{{
+    begin source code control
+    "$/MIR CTN 2.10.3/load_control", RFCAAAAA
+    .\load_control
+    end source code control
+}}}
+
+Package=<4>
+{{{
+}}}
+
+###############################################################################
+
+Project: "mwlQuery"=".\mwlQuery\mwlQuery.dsp" - Package Owner=<4>
+
+Package=<5>
+{{{
+    begin source code control
+    "$/MIR CTN 2.10.3/mwlQuery", FHCAAAAA
+    .\mwlquery
+    end source code control
+}}}
+
+Package=<4>
+{{{
+}}}
+
+###############################################################################
+
+Project: "print_server"=".\print_server\print_server.dsp" - Package Owner=<4>
+
+Package=<5>
+{{{
+    begin source code control
+    "$/MIR CTN 2.10.3/print_server", GGCAAAAA
+    .\print_server
+    end source code control
+}}}
+
+Package=<4>
+{{{
+}}}
+
+###############################################################################
+
+Project: "query_client"=".\query_client\query_client.dsp" - Package Owner=<4>
+
+Package=<5>
+{{{
+    begin source code control
+    "$/MIR CTN 2.10.3/query_client", MECAAAAA
+    .\query_client
+    end source code control
+}}}
+
+Package=<4>
+{{{
+}}}
+
+###############################################################################
+
+Project: "send_image"=".\send_image\send_image.dsp" - Package Owner=<4>
+
+Package=<5>
+{{{
+    begin source code control
+    "$/MIR CTN 2.10.3/send_image", GFCAAAAA
+    .\send_image
+    end source code control
+}}}
+
+Package=<4>
+{{{
+}}}
+
+###############################################################################
+
+Project: "simple_storage"=".\simple_storage\simple_storage.dsp" - Package Owner=<4>
+
+Package=<5>
+{{{
+    begin source code control
+    "$/MIR CTN 2.10.3/simple_storage", BGCAAAAA
+    .\simple_storage
+    end source code control
+}}}
+
+Package=<4>
+{{{
+}}}
+
+###############################################################################
+
+Project: "tbltest"=".\tbltest\tbltest.dsp" - Package Owner=<4>
+
+Package=<5>
+{{{
+    begin source code control
+    "$/MIR CTN 2.10.3/tbltest", PFCAAAAA
+    .\tbltest
+    end source code control
+}}}
+
+Package=<4>
+{{{
+    Begin Project Dependency
+    Project_Dep_Name ttinsert
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name ttselect
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name ttupdate
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name ttdelete
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name ttunique
+    End Project Dependency
+}}}
+
+###############################################################################
+
+Project: "ttdelete"=".\ttdelete\ttdelete.dsp" - Package Owner=<4>
+
+Package=<5>
+{{{
+    begin source code control
+    "$/MIR CTN 2.10.3/ttdelete", RGCAAAAA
+    .\ttdelete
+    end source code control
+}}}
+
+Package=<4>
+{{{
+    Begin Project Dependency
+    Project_Dep_Name ttlayout
+    End Project Dependency
+}}}
+
+###############################################################################
+
+Project: "ttinsert"=".\ttinsert\ttinsert.dsp" - Package Owner=<4>
+
+Package=<5>
+{{{
+    begin source code control
+    "$/MIR CTN 2.10.3/ttinsert", LHCAAAAA
+    .\ttinsert
+    end source code control
+}}}
+
+Package=<4>
+{{{
+}}}
+
+###############################################################################
+
+Project: "ttlayout"=".\ttlayout\ttlayout.dsp" - Package Owner=<4>
+
+Package=<5>
+{{{
+    begin source code control
+    "$/MIR CTN 2.10.3/ttlayout", VFCAAAAA
+    .\ttlayout
+    end source code control
+}}}
+
+Package=<4>
+{{{
+}}}
+
+###############################################################################
+
+Project: "ttselect"=".\ttselect\ttselect.dsp" - Package Owner=<4>
+
+Package=<5>
+{{{
+    begin source code control
+    "$/MIR CTN 2.10.3/ttselect", XFCAAAAA
+    .\ttselect
+    end source code control
+}}}
+
+Package=<4>
+{{{
+}}}
+
+###############################################################################
+
+Project: "ttunique"=".\ttunique\ttunique.dsp" - Package Owner=<4>
+
+Package=<5>
+{{{
+    begin source code control
+    "$/MIR CTN 2.10.3/ttunique", ZFCAAAAA
+    .\ttunique
+    end source code control
+}}}
+
+Package=<4>
+{{{
+}}}
+
+###############################################################################
+
+Project: "ttupdate"=".\ttupdate\ttupdate.dsp" - Package Owner=<4>
+
+Package=<5>
+{{{
+    begin source code control
+    "$/MIR CTN 2.10.3/ttupdate", JHCAAAAA
+    .\ttupdate
+    end source code control
+}}}
+
+Package=<4>
+{{{
+}}}
+
+###############################################################################
+
+Project: "win32apps"=".\win32apps.dsp" - Package Owner=<4>
+
+Package=<5>
+{{{
+    begin source code control
+    "$/MIR CTN 2.10.3/win32apps", PGCAAAAA
+    .
+    end source code control
+}}}
+
+Package=<4>
+{{{
+    Begin Project Dependency
+    Project_Dep_Name dcm_dump_element
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name dcm_dump_file
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name tbltest
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name load_control
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name archive_server
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name dcm_make_object
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name dcm_print_dictionary
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name dcm_modify_elements
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name dcm_rm_element
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name dicom_echo
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name dcm_rm_group
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name send_image
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name simple_storage
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name dcm_w_disp
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name query_client
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name dcm_ctnto10
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name dcm_diff
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name dcm_map_to_8
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name dcm_modify_object
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name dcm_resize
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name dcm_verify
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name print_server
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name mwlQuery
+    End Project Dependency
+}}}
+
+###############################################################################
+
+Global:
+
+Package=<5>
+{{{
+    begin source code control
+    "$/MIR CTN 2.10.3/win32apps", PGCAAAAA
+    .
+    end source code control
+}}}
+
+Package=<3>
+{{{
+}}}
+
+###############################################################################
+

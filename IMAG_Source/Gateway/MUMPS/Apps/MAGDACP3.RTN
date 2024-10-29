@@ -1,0 +1,170 @@
+MAGDACP3 ;WOIFO/PMK - DICOM Networking / Upper Layer Service / A-ASSOCIATE ; 23 Jun 2008 6:56 AM
+ ;;3.0;IMAGING;**30,69,54,53**;Mar 19, 2002;Build 1715;Apr 22, 2010
+ ;; Per VHA Directive 2004-038, this routine should not be modified.
+ ;; +---------------------------------------------------------------+
+ ;; | Property of the US Government.                                |
+ ;; | No permission to copy or redistribute this software is given. |
+ ;; | Use of unreleased versions of this software requires the user |
+ ;; | to execute a written test agreement with the VistA Imaging    |
+ ;; | Development Office of the Department of Veterans Affairs,     |
+ ;; | telephone (301) 734-0100.                                     |
+ ;; | The Food and Drug Administration classifies this software as  |
+ ;; | a medical device.  As such, it may not be changed in any way. |
+ ;; | Modifications to this software may result in an adulterated   |
+ ;; | medical device under 21CFR820, the use of which is considered |
+ ;; | to be a violation of US Federal Statutes.                     |
+ ;; +---------------------------------------------------------------+
+ ;;
+ Q
+ ;  Refer to Part 8, Section 9.3.3 of the DICOM Standard
+ ;
+REQUEST(PDUOUT) ; process an A-ASSOCIATE-RQ and generate an A-ASSOCIATE-AC
+ N CALLED ;--- the called application entity, i.e., the "listener"
+ N CALLING ;-- the calling application entity, i.e., the "initiator"
+ N PCONTEXT ;- presentation context id (abstract & transfer syntaxes)
+ N PROVIEN ;-- ien for AE title supported by VistA
+ N ACCEPT,X,Y
+ ;
+ D INIT
+ K ^TMP("MAG",$J,"DICOM","NEGOTIATE","ACCEPT") S ACCEPT=0
+ S CALLED=^TMP("MAG",$J,"DICOM","NEGOTIATE","REQUEST","CALLED AE")
+ S CALLING=^TMP("MAG",$J,"DICOM","NEGOTIATE","REQUEST","CALLING AE")
+ D MESSAGE^MAGDMLOG(2,0,"Sending A-ASSOCIATE-ACCEPT to "_CALLING,"BV1")
+ D HEADER^MAGDACW1(PDUOUT,"02H",CALLED,CALLING)
+ D CONTEXT^MAGDACW1(PDUOUT)
+ ;
+ ; check if the CALLED AE Title is one supported by VistA
+ S X=CALLED X ^%ZOSF("UPPERCASE")
+ S PROVIEN=$O(^MAGDICOM(2006.586,"B",Y,""))
+ I 'PROVIEN D
+ . S X=$O(^MAGDICOM(2006.588,"B",Y,"")) Q:'X
+ . S Y=$P(^MAGDICOM(2006.588,X,0),"^",2)
+ . S PROVIEN=$O(^MAGDICOM(2006.586,"B",Y,""))
+ . Q
+ ;
+ S PCONTEXT=""
+ F  S PCONTEXT=$O(^TMP("MAG",$J,"DICOM","NEGOTIATE","REQUEST",PCONTEXT)) Q:'PCONTEXT  D
+ . N I,IPTR,METAFLAG,PCIEN,SOPCLASS,SOPUID
+ . S SOPUID=^TMP("MAG",$J,"DICOM","NEGOTIATE","REQUEST",PCONTEXT,"SOP CLASS UID")
+ . S IPTR=$O(^MAGDICOM(2006.53,"C",SOPUID,"")) ; is null for unknowns
+ . I IPTR="" D  Q
+ . . ; reject the presentation context
+ . . D REJECT^MAGDACW1(PDUOUT,3) ; SOP class not supported by VistA
+ . . Q
+ . ;
+ . ; Check that there is enough disk space to store incoming images
+ . I $$DISKFREE()<-1,$S($P(^MAGDICOM(2006.53,IPTR,0),"^")["Storage":1,1:0) D  Q
+ . . ; there is not enough space to store images -- reject Storage SOPs
+ . . D REJECT^MAGDACW1(PDUOUT,3)
+ . . Q
+ . ;
+ . ; is this SOP class supported by this application?
+ . I PROVIEN D  Q:'PCIEN  ; known AE Title
+ . . ; look up SOP class in SCP dictionary
+ . . S PCIEN=$O(^MAGDICOM(2006.586,PROVIEN,1,"B",SOPUID,""))
+ . . ; Double-check that there are any transfer syntaxes defined
+ . . I PCIEN S:'$P($G(^MAGDICOM(2006.586,PROVIEN,1,PCIEN,1,0)),"^",3) PCIEN=0
+ . . I PCIEN Q  ; the presentation context is known for the provider
+ . . ; reject the presentation context
+ . . D REJECT^MAGDACW1(PDUOUT,3) ; SOP class not supported by VistA
+ . . Q
+ . E  D  Q:SOPCLASS'="Verification SOP Class"  ; don't know AE Title
+ . . ; allow only Verification SOP Class
+ . . ; look up SOP class in UID dictionary
+ . . S SOPCLASS=$P(^MAGDICOM(2006.53,IPTR,0),"^",1)
+ . . I SOPCLASS="Verification SOP Class" Q
+ . . ; reject the presentation context
+ . . D REJECT^MAGDACW1(PDUOUT,3) ; SOP class not supported by VistA
+ . . Q
+ . ;
+ . ; check the transfer syntax before accepting the presentation context
+ . I '$$TSYNTAX D  Q  ; reject the presentation context
+ . . D REJECT^MAGDACW1(PDUOUT,4) ; transfer syntaxes not supported by VistA
+ . . Q
+ . ;
+ . ; check for Meta SOP Class
+ . S METAFLAG=$P(^MAGDICOM(2006.53,IPTR,0),"^",4)
+ . I 'METAFLAG D  ; regular SOP Class, record its presentation context
+ . . S ^TMP("MAG",$J,"DICOM","NEGOTIATE","SOP CLASS UID",SOPUID)=PCONTEXT
+ . . Q
+ . E  D  ; Meta SOP Class, record the PCONTEXT for all the SOP Classes
+ . . N I,X
+ . . F I=1:1:$P(^MAGDICOM(2006.53,IPTR,1,0),"^",3) D
+ . . . S X=^MAGDICOM(2006.53,IPTR,1,I,0),X=$P(X,"^",2)
+ . . . S ^TMP("MAG",$J,"DICOM","NEGOTIATE","SOP CLASS UID",X)=PCONTEXT
+ . . . Q
+ . . Q
+ . D ACCEPT^MAGDACW1(PDUOUT) S ACCEPT=1
+ . Q
+ ;
+ D USERINFO^MAGDACW1(PDUOUT)
+ ;
+ D CLOSE^MAGDACW1(PDUOUT)
+ ;
+ I 'ACCEPT D
+ . ; reject association if no presentation context is accepted
+ . N REASON,RESULT,SOURCE
+ . S RESULT=2 ; rejected-transient
+ . S SOURCE=3 ; DICOM UL SCP (presentation related function)
+ . S REASON=1 ; temporary-congestion
+ . D REJECTAS^MAGDACW2(PDUOUT,RESULT,SOURCE,REASON)
+ . Q
+ ;
+ Q
+ ;
+TSYNTAX() ; check transfer syntax to see if it is supported
+ N GOODTS,I,XFERUID
+ S (GOODTS,I)=0
+ I PROVIEN D  ; known AE Title... lookup transfer syntax in SCP_LIST.DIC
+ . F I=1:1:$P(^MAGDICOM(2006.586,PROVIEN,1,PCIEN,1,0),"^",3) D  Q:GOODTS
+ . . S XFERUID=$P(^MAGDICOM(2006.586,PROVIEN,1,PCIEN,1,I,0),"^")
+ . . D TSYNTAX1
+ . . Q
+ . Q
+ E  D  ; don't know AE Title... use default transfer syntax
+ . S XFERUID=$$GETUID^MAGDUID1("Implicit VR Little Endian")
+ . D TSYNTAX1
+ . Q
+ Q GOODTS ; return 1 if the transfer syntax is supported, 0 otherwise
+ ;
+TSYNTAX1 ; check one supported transfer syntax against all the proposed ones
+ N J
+ F J=1:1:^TMP("MAG",$J,"DICOM","NEGOTIATE","REQUEST",PCONTEXT,"TRANSFER UID") D  Q:GOODTS
+ . I XFERUID=^TMP("MAG",$J,"DICOM","NEGOTIATE","REQUEST",PCONTEXT,"TRANSFER UID",J) D
+ . . S ^TMP("MAG",$J,"DICOM","NEGOTIATE","ACCEPT",PCONTEXT,"TRANSFER UID")=1
+ . . S ^TMP("MAG",$J,"DICOM","NEGOTIATE","ACCEPT",PCONTEXT,"TRANSFER UID",1)=XFERUID
+ . . S GOODTS=1 ; found a good transfer syntax, quit out of the FOR loops
+ . . Q
+ . Q
+ Q
+ ;
+DISKFREE() ; check available space on disk to store images
+ N DISKFREE,DRIVE,FREE,MIN,PCT,TOTAL
+ S MIN=$G(^MAGDICOM(2006.563,1,"FREE DISK SPACE"),5)
+ S DRIVE=$$DRIVE^MAGDSTAT($G(^MAGDICOM(2006.563,1,"IMAGE INPUT PATH")))
+ D DISK1^MAGDSTAT(DRIVE)
+ S DISKFREE=PCT\1
+ I DISKFREE<MIN Q "-2 ERROR -- NOT ENOUGH DISK SPACE TO STORE IMAGES ON "_DRIVE
+ I DISKFREE<(MIN*2) Q "-1 WARNING -- Only "_DISKFREE_"% Disk Space Left on "_DRIVE
+ Q ""
+ ;
+RELEASE(PDUOUT) ; generate an A-RELEASE-RP
+ D INIT
+ D RELEASRP^MAGDACW2(PDUOUT)
+ Q
+ ;
+ABORT(PDUOUT) ; generate an A-ABORT
+ D INIT
+ D ABORT^MAGDACW2(PDUOUT)
+ Q
+ ;
+INIT ; Initialization of variables
+ N STATUS
+ S STATUS=$$OPEN^MAGOSFIL(PDUOUT,"W")
+ I STATUS<0 D
+ . N M
+ . S M="Could not open file """_PDUOUT_""" for Write."
+ . W:$$USEPRIN^MAGOSFIL(1) !!!,M,!,STATUS
+ . S $EC=",U"_M_","
+ . Q  ; Error trap does not return
+ Q

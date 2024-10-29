@@ -1,0 +1,38 @@
+12-APR-2001 10:54:04.65
+Saved by magvss from VAH,ROU
+MAGDMED2
+MAGDMED2 ;WOIFO/LB - Medicine file lookup utilities ; [ 04/11/2001 16:39 ]
+ ;;2.5T;DICOM42;;1-Nov-2000
+ ;; +---------------------------------------------------------------+
+ ;; | Property of the US Government.                                |
+ ;; | No permission to copy or redistribute this software is given. |
+ ;; | Use of unreleased versions of this software requires the user |
+ ;; | to execute a written test agreement with the VistA Imaging    |
+ ;; | Development Office of the Department of Veterans Affairs,     |
+ ;; | telephone (301) 734-0100.                                     |
+ ;; |                                                               |
+ ;; | The Food and Drug Administration classifies this software as  |
+ ;; | a Class II medical device.  As such, it may not be changed    |
+ ;; | in any way.  Modifications to this software may result in an  |
+ ;; | adulterated medical device under 21CFR820, the use of which   |
+ ;; | is considered to be a violation of US Federal Statutes.       |
+ ;; +---------------------------------------------------------------+
+ ;;
+ Q
+ ;
+UPDATE(MAGFILE,MAGDATE,MAGPRIEN,MAGDFN,MAGE,MAGIEN,RET) ;Update Medicine file.
+ ; MAGDATE= Medicine date&time of procedure
+ ; MAGFILE= Medicine file   >699 or 699.5, etc.
+ ; MAGPRIEN= Medicine Procedure ien >file 697.2
+ ; MAGDFN=    Patient's dfn  >file 2
+ ; MAGE=    Image pointer  >file 2005
+ ; MAGIEN=   Medicine file ien
+ ; RET=      success filing image pointer
+ N MAGOK
+ S MAGOK="",RET=MAGOK
+ Q:'MAGFILE!('MAGIEN)
+ ; Will use Medicine API
+ S MAGE(MAGE)=""  ;image must be in array
+ D UPDATE^MCUIMAG0(MAGDATE,MAGPRIEN,MAGDFN,.MAGE,.MAGIEN,.MAGOK)
+ S RET=MAGOK
+ Q

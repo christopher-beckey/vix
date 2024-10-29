@@ -1,0 +1,197 @@
+﻿<Window x:Class="VixSiteHealthMonitor.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Height="450"
+        Width="400"
+        d:DesignHeight="450"
+        d:DesignWidth="400"
+        Title="VIX Site Health Monitor"
+        DataContext="{Binding Main, Source={StaticResource Locator}}"
+        Cursor="{Binding Path=Cursor}" >
+    
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Skins/MainSkin.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+
+    <StackPanel >
+        <!-- 
+        <Menu IsMainMenu="True">
+            <MenuItem Header="_File"  >
+                <MenuItem Header="Exit" Command="{Binding Path=ExitApplicationCommand}" />
+            </MenuItem>
+            <MenuItem Header="_Help">
+                <MenuItem Header="_About" Click="MenuItem_Click" />
+            </MenuItem>
+        </Menu>
+        -->
+
+        <StackPanel HorizontalAlignment="Stretch" Margin="0,28,0,51" >
+
+            <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,0,2,0">
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="26" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="120" />
+                    <ColumnDefinition Width="100*" />
+                    <ColumnDefinition Width="55" />
+                </Grid.ColumnDefinitions>
+
+                <Label Grid.Row="0" Grid.Column="0" Content="Enter Site Number" HorizontalContentAlignment="Right" />
+                <TextBox Grid.Row="0" Grid.Column="1" Height="26" Margin="2,0,2,0"
+                                 HorizontalAlignment="Stretch" Text="{Binding Path=SiteNumber}" />
+                
+                <Button Grid.Row="0" Grid.Column="2" Content="Test Site" Width="55" HorizontalAlignment="Left"
+                        Command="{Binding Path=TestSiteCommand, Mode=OneWay}" />
+            </Grid>
+            
+            <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" 
+                  Margin="0,10,2,0" Visibility="{Binding Path=DetailsVisibility, Mode=OneWay}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="26" />
+                    <RowDefinition Height="26" />
+                    <RowDefinition Height="26" />
+                    <RowDefinition Height="26" />
+                    <RowDefinition Height="26" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="140" />
+                    <ColumnDefinition Width="100*" />
+                </Grid.ColumnDefinitions>
+                
+                <Label Grid.Column="0" Grid.Row="0" Content="Current VIX Node" HorizontalContentAlignment="Right"/>
+                <TextBox Grid.Column="1" Grid.Row="0" Text="{Binding Path=BaseVixHealth.VisaHealth.Hostname, Mode=OneWay}"
+                         IsReadOnly="True" HorizontalAlignment="Stretch"
+                         ToolTip="The hostname of the node the VIX is currently running on"/>
+
+                <Label Grid.Column="0" Grid.Row="1" Content="VIX Version" HorizontalContentAlignment="Right" />
+
+                <DockPanel Grid.Row="1" Grid.Column="1" LastChildFill="True">
+                    <Image DockPanel.Dock="Right" Source="{Binding Path=FailedIcon}" Visibility="{Binding Path=IncorrectLongRunningThreadsErrorIconVisibility}" 
+                                           Stretch="None" VerticalAlignment="Center" HorizontalAlignment="Center" ToolTip="VIX does not have the currently released version of the VIX, please upgrade the VIX" />
+                    <TextBox Height="23" HorizontalAlignment="Stretch" Margin="2,0,2,0" VerticalAlignment="Top"
+                                     Text="{Binding Path=BaseVixHealth.VisaHealth.VisaVersion, Mode=OneWay}" IsReadOnly="True" />
+                </DockPanel>
+
+
+                <!--
+                <Label Grid.Column="0" Grid.Row="2" Content="Health Load Time" HorizontalContentAlignment="Right" />
+                <TextBox Height="23" HorizontalAlignment="Stretch" Margin="2,0,2,0" 
+                    VerticalAlignment="Top" Text="{Binding Path=BaseVixHealth.VisaHealth.HealthLoadTime, Mode=OneWay}" 
+                         Grid.Column="1" Grid.Row="2" IsReadOnly="True"/>
+                -->
+
+                <Label Grid.Column="0" Grid.Row="2" Content="VIX Start Time" HorizontalContentAlignment="Right" />
+                <TextBox Height="23" HorizontalAlignment="Stretch" Margin="2,0,2,0" 
+                 VerticalAlignment="Top" Text="{Binding Path=BaseVixHealth.VisaHealth.JVMStartupTimeLong, Mode=OneWay}" 
+                     Grid.Column="1" Grid.Row="2" IsReadOnly="True"/>
+                
+                <Label Grid.Column="0" Grid.Row="3" Content="VIX Up Time" HorizontalContentAlignment="Right" />                
+                <TextBox Height="23" HorizontalAlignment="Stretch" Margin="2,0,2,0" 
+                 VerticalAlignment="Top" Text="{Binding Path=BaseVixHealth.VisaHealth.JVMUptimeLong, Mode=OneWay}" 
+                         Grid.Column="1" Grid.Row="3" 
+                     IsReadOnly="True" Grid.ColumnSpan="2"/>
+                
+                
+
+                <Label Grid.Column="0" Grid.Row="4" Content="Long Running Threads" HorizontalContentAlignment="Right" />
+                <DockPanel Grid.Row="4" Grid.Column="1" LastChildFill="True">
+                    <Image DockPanel.Dock="Right" Source="{Binding Path=FailedIcon}" Visibility="{Binding Path=LongRunningThreadsErrorIconVisibility}" 
+                                           Stretch="None" VerticalAlignment="Center" HorizontalAlignment="Center" ToolTip="{Binding Path=LongRunningThreadsErrorMessage}" />
+                    <TextBox Height="23" HorizontalAlignment="Stretch" Margin="2,0,2,0" VerticalAlignment="Top"
+                                     Text="{Binding Path=BaseVixHealth.LongThreads, Mode=OneWay}" Grid.Column="1" Grid.Row="2" IsReadOnly="True" />
+                </DockPanel>
+
+
+            </Grid>
+
+            <Expander Header="Transaction Log" HorizontalAlignment="Stretch" 
+                      Visibility="{Binding Path=DetailsVisibility, Mode=OneWay}" IsExpanded="True">
+                <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,10,2,0" >
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="26" />
+                        <RowDefinition Height="26" />
+                        <RowDefinition Height="26" />
+                        <RowDefinition Height="26" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="140" />
+                        <ColumnDefinition Width="100*" />
+                    </Grid.ColumnDefinitions>
+
+                    <Label Grid.Column="0" Grid.Row="0" Content="Transactions Written" HorizontalContentAlignment="Right" />
+                    <TextBox Height="23" HorizontalAlignment="Stretch" Margin="2,0,2,0" VerticalAlignment="Top"
+                         Text="{Binding Path=BaseVixHealth.TransactionsWrittenFormatted, Mode=OneWay}" 
+                         Grid.Column="1" Grid.Row="0" IsReadOnly="True" />
+
+                    <Label Grid.Column="0" Grid.Row="1" Content="Transactions/minute" HorizontalContentAlignment="Right" />
+                    <TextBox Height="23" HorizontalAlignment="Stretch" Margin="2,0,2,0" VerticalAlignment="Top"
+                         Text="{Binding Path=BaseVixHealth.TransactionsPerMinuteFormatted, Mode=OneWay}" 
+                         Grid.Column="1" Grid.Row="1" IsReadOnly="True" />
+
+                    <Label Grid.Column="0" Grid.Row="2" Content="Transaction Write Errors" HorizontalContentAlignment="Right" />
+                    <TextBox Height="23" HorizontalAlignment="Stretch" Margin="2,0,2,0" VerticalAlignment="Top"
+                         Text="{Binding Path=BaseVixHealth.TransactionLogWriteErrors, Mode=OneWay}" 
+                         Grid.Column="1" Grid.Row="2" IsReadOnly="True" />
+
+                    <Label Grid.Column="0" Grid.Row="3" Content="Transaction Read Errors" HorizontalContentAlignment="Right" />
+                    <TextBox Height="23" HorizontalAlignment="Stretch" Margin="2,0,2,0" VerticalAlignment="Top"
+                         Text="{Binding Path=BaseVixHealth.TransactionLogReadErrors, Mode=OneWay}" 
+                         Grid.Column="1" Grid.Row="3" IsReadOnly="True" />
+
+                </Grid>
+            </Expander>
+
+            <Expander Header="Realm Configuration" HorizontalAlignment="Stretch" 
+                      Visibility="{Binding Path=DetailsVisibility, Mode=OneWay}" IsExpanded="True">
+                <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,10,2,0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="26" />
+                        <RowDefinition Height="26" />
+                        <RowDefinition Height="26" />
+                        <RowDefinition Height="26" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="140" />
+                        <ColumnDefinition Width="100*" />
+                    </Grid.ColumnDefinitions>
+
+                    <Label Grid.Row="0" Grid.Column="0" Content="Realm VistA Server" Height="26" HorizontalContentAlignment="Right" />
+                    <DockPanel Grid.Row="0" Grid.Column="1" LastChildFill="True">
+                        <Image DockPanel.Dock="Right" Source="{Binding Path=FailedIcon}" Visibility="{Binding Path=RealmVistaServerErrorIconVisibility}" 
+                                           Stretch="None" VerticalAlignment="Center" HorizontalAlignment="Center" ToolTip="Realm VistA server does not match Site Service VistA server" />
+                        <TextBox  Height="23" IsReadOnly="True" HorizontalAlignment="Stretch" 
+                        Text="{Binding Path=BaseVixHealth.RealmVistaServer, Mode=OneWay}" />
+                    </DockPanel>
+                    <Label Grid.Row="1" Grid.Column="0" Content="Realm VistA Port" Height="26" HorizontalContentAlignment="Right" />
+                    <DockPanel Grid.Row="1" Grid.Column="1" LastChildFill="True">
+                        <Image DockPanel.Dock="Right" Source="{Binding Path=FailedIcon}" Visibility="{Binding Path=RealmVistaPortErrorIconVisibility}" 
+                                           Stretch="None" VerticalAlignment="Center" HorizontalAlignment="Center" ToolTip="Realm VistA port does not match Site Service VistA port" />
+                        <TextBox Grid.Row="0" Grid.Column="3" Height="23" IsReadOnly="True" 
+                                        HorizontalAlignment="Stretch" Text="{Binding Path=BaseVixHealth.RealmVistaPort, Mode=OneWay}" />
+                    </DockPanel>
+
+
+                </Grid>
+            </Expander>
+
+
+
+        </StackPanel>
+
+
+
+
+    </StackPanel>
+
+
+
+</Window>

@@ -1,0 +1,16 @@
+﻿<UserControl x:Class="VistA.Imaging.Telepathology.CCOW.PatientContextCtrl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:VistA.Imaging.Telepathology.CCOW"
+             mc:Ignorable="d" 
+             d:DesignHeight="41" d:DesignWidth="41" Name="ucParent" Background="{StaticResource {x:Static SystemColors.ControlBrushKey}}" Loaded="UserControl_Loaded">
+    <UserControl.Resources>
+        <local:EnumToImageConverter x:Key="imageConverter" />
+    </UserControl.Resources>
+    <Grid>
+        <Image HorizontalAlignment="Left" Name="imageControl" Stretch="Fill" VerticalAlignment="Top" Width="32" Height="32" Margin="4,4,0,0" 
+               Source="{Binding ElementName=ucParent, Path=ContextState, Converter={StaticResource imageConverter}}"/>
+    </Grid>
+</UserControl>

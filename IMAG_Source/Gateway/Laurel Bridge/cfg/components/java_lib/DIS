@@ -1,0 +1,45 @@
+#==============================================================================
+# static information common to all instances of DIS component
+#==============================================================================
+[ component_info ]
+name = DIS
+type = java_lib
+category = application_support_libs
+description = DICOM Information Services Java class library
+package_prefix = com.lbs
+slnreldir = .\jsrc\com\lbs\DIS
+
+[ required_components ]
+component = java_lib/DCS
+[ debug_controls ]
+debug_flag = df_SHOW_CONSTRUCTORS, 0x0001, show object constructors
+debug_flag = df_SHOW_DESTRUCTORS, 0x0002, show object destructors
+debug_flag = df_SHOW_GENERAL_FLOW, 0x0004, show general flow
+debug_flag = df_SIMULATE_HARDWARE, 0x0008, simulate external devices
+debug_flag = df_SHOW_CFG_INFO, 0x0010, show configuration information
+debug_flag = df_SHOW_EXC_THROW, 0x0020, show exceptions before throwing
+debug_flag = df_SHOW_LISTENER_ERRORS,     0x10000, log error messages when notifications fail
+
+#==============================================================================
+# per-instance information for the DIS component
+#==============================================================================
+[ DIS ]
+debug_flags = 0x00000
+
+[ DIS/MWLSCP ]
+[ DIS/MWLSCP/default_session_cfg ]
+filter_query_responses = yes
+
+[ DIS/MWLSCP/default_session_cfg/supported_sop_classes ]
+#SOPMODALITYWORKLIST_FIND 
+sop_class = 1.2.840.10008.5.1.4.31
+#SOPGPWORKLIST_FIND 
+#sop_class = 1.2.840.10008.5.1.4.32.1
+
+[ DIS/MPPSSCP ]
+[ DIS/MPPSSCP/default_session_cfg ]
+response_timeout_seconds = 30
+
+[ DIS/MPPSSCP/default_session_cfg/supported_sop_classes ]
+#SOPPERFORMEDPROCEDURESTEP 
+sop_class = 1.2.840.10008.3.1.2.3.3

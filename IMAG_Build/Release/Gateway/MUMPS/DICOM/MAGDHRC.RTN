@@ -1,0 +1,229 @@
+MAGDHRC ;WOIFO/PMK/JSL/SAF - Read HL7 and generate DICOM ; 04 Jan 2011 10:21 AM
+ ;;3.0;IMAGING;**11,30,51,49,123**;Mar 19, 2002;Build 60;Jul 16, 2012
+ ;; Per VHA Directive 2004-038, this routine should not be modified.
+ ;; +---------------------------------------------------------------+
+ ;; | Property of the US Government.                                |
+ ;; | No permission to copy or redistribute this software is given. |
+ ;; | Use of unreleased versions of this software requires the user |
+ ;; | to execute a written test agreement with the VistA Imaging    |
+ ;; | Development Office of the Department of Veterans Affairs,     |
+ ;; | telephone (301) 734-0100.                                     |
+ ;; | The Food and Drug Administration classifies this software as  |
+ ;; | a medical device.  As such, it may not be changed in any way. |
+ ;; | Modifications to this software may result in an adulterated   |
+ ;; | medical device under 21CFR820, the use of which is considered |
+ ;; | to be a violation of US Federal Statutes.                     |
+ ;; +---------------------------------------------------------------+
+ ;;
+ ;
+ ; M2M Broker Version
+ ;
+ ; Original Version: ^MAGDHR1
+ ;
+ENTRY ; stub to start ^MAGDHRC processing HL7 messages in background
+ N ENTRY ;---- entry point for ^MAGDSTRT
+ N PROMPT ;--- prompt for ^MAGDSTRT
+ ;
+ L +^MAGDICOM("STATUS","TEXT"):0 E  D  Q
+ . W !,"Text Message Processor is already running..."
+ . Q
+ ;
+ I $G(^MAGDICOM(2006.563,1,"SEND PACS TEXT"))'="YES",$G(^("MODALITY WORKLIST"))'="YES" D BADCONFG Q
+ ;
+ S ENTRY="REENTRY^MAGDHRC",^MAGDICOM("STATUS","TEXT")="Idle"
+ S PROMPT="Ready to process incoming HL7 messages?"
+ G SETUP^MAGDSTRT
+ ;
+BADCONFG ; warning message -- also called by ^MAGDSTAT
+ N M
+ S M(1)="This system is incorrectly configured as a DICOM Text Gateway."
+ S M(2)="It can neither send DICOM text messages to a commercial PACS or Broker,"
+ S M(3)="nor can it function as a Modality Worklist Provider."
+ S M(4)=""
+ S M(5)="Please check the system's configuration."
+ D WARNING^MAGDFCNS(.M)
+ Q
+ ;
+REENTRY ; Re-entry point from ^MAGDSTRT
+ ; Initialize variables and read all of the messages
+ N FBSWITCH ;- foreground / midground / background flag for ^MAGDMLOG
+ N SYSTITLE ;- given name of gateway (e. g., VAMC Image Gateway #2)
+ N TICKER ;--- ticker counter for idle loop
+ ;
+ S (IO,IO(0))="" ; initialize VA Kernel variables
+ S FBSWITCH="FOREGROUND" ; this always runs in the foreground
+ S SYSTITLE=$G(^MAGDICOM(2006.563,1,"SYSTEM TITLE"),"<unknown>")
+ D NEWLOG^MAGDMLOG("PACS Gateway") ; initialize the message log
+ D MESSAGE^MAGDMLOG(3,0,"PACS Gateway Process Started","BTV2")
+ ;
+ ; big do forever loop!
+ F  D  ; loop forever
+ . Q:'$$BKGND
+ . S ^MAGDICOM("STATUS","TEXT")="Idle" D IDLE^MAGDBB(.TICKER,1)
+ . Q
+ Q
+ ;
+BKGND() ; Process each HL7 transaction (and incoming DICOM, maybe, too)
+ ; this code should only handle one transaction at a time
+ N FORWARD ;-- flag identifying a CPRS GMRC forward request in ^MAGHRC6
+ N HL7MSG ;--- pointer to array containing the original HL7 message
+ N HL7MSGNO ;- number of original HL7 message in ^MAGDHL7 (may be 1:n)
+ N MSGNO ;---- number of HL7 actual message being processed
+ N REQSTATE ;- specifies GMRC/SDAM state in ^MAGDHRC5 and ^MAGDWLPB
+ N UFS ;------ universal HL7 field separator delimiter
+ ;
+ ; Check available file space and delete old messages, if necessary
+ D ENTRY^MAGDDEL2
+ ;
+ F  D  Q:@HL7MSG@(1)=""
+ . S HL7MSGNO=+$G(^MAGDICOM(2006.563,1,"HL7_PTR"))+1
+ . S REQUEST(1)=2
+ . S REQUEST(2)=HL7MSGNO_"|0" ; one second delay for no new HL7 message
+ . D TEXTPROC^MAGDM2MB(.HL7MSG,.REQUEST) Q:@HL7MSG@(1)=""
+ . S ^MAGDICOM("STATUS","TEXT")="Processing HL7 message "_HL7MSGNO
+ . I @HL7MSG@(1)="" Q  ; no new HL7 message
+ . E  I @HL7MSG@(1)<0 D
+ . . N MSG
+ . . S MSG(1)="Error: BAD HL7 MESSAGE"
+ . . S MSG(2)=""
+ . . S MSG(3)="Error Message: """_@HL7MSG@(1)_""""
+ . . S MSG(4)=""
+ . . S MSG(5)="Use menu option 8 to manually increment the HL7 pointer by one to skip"
+ . . S MSG(6)="this bad record and resume processing."
+ . . S MSG(7)=""
+ . . D TRAPERR^MAGDSTRT(1,$T(+0),"DICOM TEXT GATEWAY -- HL7 DATA ERROR",.MSG)
+ . . Q  ; Error trap does not return
+ . D ENTRY^MAGDHRC1(.UFS) ; copy the message(s) to the ^TMP global
+ . S MSGNO="" ; loop through the messages
+ . F  S MSGNO=$O(^TMP("MAG",$J,"HL7",MSGNO)) Q:'MSGNO  D HL7MSG
+ . Q
+ ;
+ ; Handle the incoming DICOM transactions
+ Q $$BKGND^MAGDQUE2
+ ;
+HL7MSG ; Parse the MSH record -- get the delimiters first
+ N CHANNEL ;-- number "n" of the "\DICOM\DATAn" message directory
+ N FILEMODE ;- either "FIFO QUEUE" (for PACS) or "DIRECT" (for MWL)
+ N PRIORITY ;- may be either IMMEDIATE, HIGH, MEDIUM, or LOW
+ N DFN ;------ VistA HIS internal patient identifier
+ N HL7PARSE ;- pointer to array containing parsed HL7 message
+ N HL7RAW ;--- pointer to one HL7 message (may be multiple in a print set)
+ N HL7SEGNO ;-- HL7 segment number (1:n) - used by $$GETDATA^MAGDHRC0
+ N IMGSVC ;--- imaging service (RAD or CON)
+ N MSGDATE ;-- message date (yyyymmdd format)
+ N MSGTIME ;-- message time (24-hhmmss format)
+ N MSGTYPE ;-- type of HL7 message (ADT, ORM, ORU, SCH, etc.)
+ N MSGDT ;---- message date and time (scratch variable)
+ N MSGHANDL ;- pointer in DICOM message to HL7 message number
+ N MESSAGE ;-- name of type of message being generated
+ N MULTIMSG ;- multiple message flag (null, "OPEN", or "CLOSE")
+ N SENDAPP ;-- sending application
+ N SENDPACS ;- 0 = did not send pacs text, 1 = did send pacs text
+ N RECVAPP ;-- receiving application - drives rad/cp specific code
+ N SEQNUMB ;-- nesting level of DICOM sequence; set in MSGINIT^MAGDFCNS
+ N SEQUENCE ;- DICOM nesting subscript sequence; set in MSGINIT^MAGDFCNS
+ N SKIP ;----- ignore HL7 record indicator - used in this routine only
+ N STATNUMB ;--the 3-digit station number (e.g. 688 for Wash.)
+ N UID ;------ DICOM Unique IDentifier array
+ N UIDTYPE ;-- type of UID (patient, visit, study, or interp)
+ N VERSION ;-- HL7 Version (2.1, 2.3, 2.3.1, 2.4, etc.)
+ N I,X
+ N %,%H,DISYS ; miscellaneous VA Fileman Kernel variables
+ ;
+ S CHANNEL=1 ; send all output to primary communications channel
+ S FILEMODE="FIFO QUEUE" ; use FIFO queues for PACS interface
+ S PRIORITY="MEDIUM" ; set the default message priority
+ ;
+ S HL7PARSE=$NAME(^TMP("MAG",$J,"HL7","PARSED"))
+ S HL7RAW=$NAME(^TMP("MAG",$J,"HL7","RAW"))
+ K @HL7PARSE,@HL7RAW ; initialize the destination globals
+ D HL7COPY^MAGDHRC1 ; copy HL7 message from ^TMP to HL7RAW global array
+ S X=$$PARSE^MAG7UP(HL7RAW,HL7PARSE) ; build the parsed HL7 array
+ ;
+ S HL7SEGNO=1 ; segment number in HL7 array
+ I $$GETDATA^MAGDHRC0(0)'="MSH" D
+ . N MSG
+ . S MSG(1)="Error: BAD HL7 MESSAGE HEADER"
+ . S MSG(2)=""
+ . S MSG(3)="HL7 message header should start with ""MSH"","
+ . S MSG(4)="starts with """_$$GETDATA^MAGDHRC0(0)_"""."
+ . D TRAPERR^MAGDSTRT(1,$T(+0),"DICOM TEXT GATEWAY -- HL7 DATA ERROR",.MSG)
+ . Q  ; Error trap does not return
+ S STATNUMB=$$STATNUMB^MAGDFCNS() ; station number, exclusive of any modifiers
+ S SENDAPP=$$GETDATA^MAGDHRC0(3)
+ S RECVAPP=$$GETDATA^MAGDHRC0(5) ; receiving application - rad/con logic
+ S VERSION=$$GETDATA^MAGDHRC0(12)
+ S IMGSVC=$G(^MAGDICOM(2006.563,1,"TEXT GATEWAY SERVICE"))
+ S SKIP=0,MSGHANDL="HL7("_MSGNO_")"
+ I IMGSVC'="" D  ; select HL7 messages to process
+ . N SVCABBR,SVCNAME
+ . I (RECVAPP="PACS GATEWAY")!(RECVAPP="MAGD-CLIENT")!(RECVAPP="VISTA DICOM/TEXT GATEWAY") D
+ . . S SVCNAME="RADIOLOGY",SVCABBR="RAD"
+ . . Q
+ . E  I RECVAPP="VI-CONSULT" D
+ . . S SVCNAME="CONSULTS",SVCABBR="CON"
+ . . Q
+ . E  D  Q
+ . . W !!,MSGHANDL," is a unknown message -- RECVAPP=""",RECVAPP,""" - skipped"
+ . . S SKIP=1
+ . . Q
+ . I IMGSVC'[SVCABBR D
+ . . W !,MSGHANDL," - Message processing for ",SVCNAME," is not enabled -- skipped"
+ . . S SKIP=1
+ . . Q
+ . Q
+ I 'SKIP D HL7MSG1
+ S ^MAGDICOM(2006.563,1,"HL7_PTR")=HL7MSGNO
+ Q
+ ;
+HL7MSG1 ; process one HL7 message
+ S MSGDT=$$GETDATA^MAGDHRC0(7) ; message date and time
+ S MSGDATE=$E(MSGDT,1,8),MSGTIME=$E(MSGDT,9,14)
+ S MSGTIME=$P(MSGTIME,"-") ; remove GMT offset
+ S MSGTIME=$E(MSGTIME_"000000",1,6) ; add hh, mm, and ss if not there
+ S MSGTYPE=$$GETDATA^MAGDHRC0(9,1,1) ; throw away the message subtype
+ I $T(@MSGTYPE)="" W !!,"Undefined HL7 Message Type: ",MSGTYPE Q
+ D @MSGTYPE
+ D ^MAGDHRC2 ; Read all of the HL7 data
+ ;
+ S SENDPACS=0 ; this is used in ^MAGDWLPA to allow MWL message
+ I $G(^MAGDICOM(2006.563,1,"SEND PACS TEXT"))="YES" D
+ . ; write the DICOM message to the PACS
+ . I RECVAPP'="VI-CONSULT" D  ; don't send consults request to PACS
+ . . I MSGTYPE'="MFN" D  ; send this text message to the PACS
+ . . . S SENDPACS=1 ; this is used in ^MAGDWLPA to suppress MWL message
+ . . . S MULTIMSG="" D REQUEST^MAGDDW1
+ . . . Q
+ . . Q
+ . Q
+ ;
+ I $G(^MAGDICOM(2006.563,1,"MODALITY WORKLIST"))="YES" D
+ . ; update the modality worklist with the order information
+ . I MSGTYPE="ORM" D ENTRY^MAGDWLPA Q
+ . I MSGTYPE="ADT" D ADT^MAGDWLPA Q
+ . Q
+ ;
+ I $G(^MAGDICOM(2006.563,1,"SEND PACS TEXT"))'="YES" D
+ . D COUNT^MAGDAUD2 ; update audit record
+ . Q
+ Q
+ ;
+ADT ; Admission, Discharge, Transfer
+ S MESSAGE="ADT"
+ Q
+ ;
+SCH ; Patient Appointment and Scheduling Segment
+ S MESSAGE="EXAM PULL REQUEST"
+ Q
+ ;
+MFN ; Master File Notification
+ Q
+ ;
+ORM ; Order Message
+ S MESSAGE="ORDER ENTRY"
+ S PRIORITY="HIGH"
+ Q
+ ;
+ORU ; Observational Result - Unsolicited
+ S MESSAGE="REPORT"
+ Q

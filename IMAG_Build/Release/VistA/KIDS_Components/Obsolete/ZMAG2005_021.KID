@@ -1,0 +1,438 @@
+KIDS Distribution saved on Jan 15, 2007@09:23:38
+Image File Types File.  New entries MHTML, WMV
+**KIDS**:ZMAG*05.021*59^
+
+**INSTALL NAME**
+ZMAG*05.021*59
+"BLD",5614,0)
+ZMAG*05.021*59^^0^3070115^n
+"BLD",5614,1,0)
+^^5^5^3070115^^^^
+"BLD",5614,1,1,0)
+VSS build for individule file modifications.,
+"BLD",5614,1,2,0)
+This is for file 2005.021  IMAGE FILE TYPES
+"BLD",5614,1,3,0)
+It is included in this patch, because of a new entry.
+"BLD",5614,1,4,0)
+MHTML : is a new supported File Type.
+"BLD",5614,1,5,0)
+WMV   : is a new supported File Type.
+"BLD",5614,4,0)
+^9.64PA^2005.021^1
+"BLD",5614,4,2005.021,0)
+2005.021
+"BLD",5614,4,2005.021,222)
+y^y^f^^n^^y^o^n
+"BLD",5614,4,"B",2005.021,2005.021)
+
+"BLD",5614,6.3)
+1
+"BLD",5614,"KRN",0)
+^9.67PA^8989.52^19
+"BLD",5614,"KRN",.4,0)
+.4
+"BLD",5614,"KRN",.4,"NM",0)
+^9.68A^^
+"BLD",5614,"KRN",.401,0)
+.401
+"BLD",5614,"KRN",.402,0)
+.402
+"BLD",5614,"KRN",.403,0)
+.403
+"BLD",5614,"KRN",.5,0)
+.5
+"BLD",5614,"KRN",.84,0)
+.84
+"BLD",5614,"KRN",3.6,0)
+3.6
+"BLD",5614,"KRN",3.8,0)
+3.8
+"BLD",5614,"KRN",9.2,0)
+9.2
+"BLD",5614,"KRN",9.8,0)
+9.8
+"BLD",5614,"KRN",19,0)
+19
+"BLD",5614,"KRN",19.1,0)
+19.1
+"BLD",5614,"KRN",101,0)
+101
+"BLD",5614,"KRN",409.61,0)
+409.61
+"BLD",5614,"KRN",771,0)
+771
+"BLD",5614,"KRN",870,0)
+870
+"BLD",5614,"KRN",8989.51,0)
+8989.51
+"BLD",5614,"KRN",8989.52,0)
+8989.52
+"BLD",5614,"KRN",8994,0)
+8994
+"BLD",5614,"KRN","B",.4,.4)
+
+"BLD",5614,"KRN","B",.401,.401)
+
+"BLD",5614,"KRN","B",.402,.402)
+
+"BLD",5614,"KRN","B",.403,.403)
+
+"BLD",5614,"KRN","B",.5,.5)
+
+"BLD",5614,"KRN","B",.84,.84)
+
+"BLD",5614,"KRN","B",3.6,3.6)
+
+"BLD",5614,"KRN","B",3.8,3.8)
+
+"BLD",5614,"KRN","B",9.2,9.2)
+
+"BLD",5614,"KRN","B",9.8,9.8)
+
+"BLD",5614,"KRN","B",19,19)
+
+"BLD",5614,"KRN","B",19.1,19.1)
+
+"BLD",5614,"KRN","B",101,101)
+
+"BLD",5614,"KRN","B",409.61,409.61)
+
+"BLD",5614,"KRN","B",771,771)
+
+"BLD",5614,"KRN","B",870,870)
+
+"BLD",5614,"KRN","B",8989.51,8989.51)
+
+"BLD",5614,"KRN","B",8989.52,8989.52)
+
+"BLD",5614,"KRN","B",8994,8994)
+
+"BLD",5614,"QUES",0)
+^9.62^^
+"BLD",5614,"REQB",0)
+^9.611^^
+"DATA",2005.021,1,0)
+TGA^Targa Image TGA^1^^1^1
+"DATA",2005.021,2,0)
+TIF^Scanned Document TIF^1^^1^15
+"DATA",2005.021,3,0)
+PAC^Xray image PAC^1^^1^3
+"DATA",2005.021,4,0)
+BIG^Xray big file 2000K BIG^1^^1^3
+"DATA",2005.021,5,0)
+ABS^Abstract file ABS^1^^1^1
+"DATA",2005.021,6,0)
+BW^Black and White BW^1^^1^9
+"DATA",2005.021,7,0)
+756^Historical 756^1^^1^3
+"DATA",2005.021,8,0)
+BMP^Bitmap file BMP^1^^1^1
+"DATA",2005.021,9,0)
+MPG^Motion Video MPG^0^magavi.bmp^0^21
+"DATA",2005.021,10,0)
+ASC^Text file Image extension ASC^1^magtext.bmp^0^103
+"DATA",2005.021,11,0)
+AVI^Motion Video AVI^1^magavi.bmp^0^21
+"DATA",2005.021,12,0)
+DOC^Word Document DOC^0^magdoc.bmp^0^102
+"DATA",2005.021,13,0)
+HTM^Web Document HTM^1^maghtml.bmp^0^101
+"DATA",2005.021,14,0)
+JPG^Full Color JPG^1^^1^1
+"DATA",2005.021,15,0)
+PDF^Adobe PDF^0^magpdf.bmp^0^104
+"DATA",2005.021,16,0)
+RTF^Rich Text format RTF^0^magrtf.bmp^0^105
+"DATA",2005.021,17,0)
+WAV^Audio file WAV^0^magwav.bmp^0^106
+"DATA",2005.021,18,0)
+DCM^Dicom file DCM^1^^1^100
+"DATA",2005.021,19,0)
+TXT^Text file import TXT^1^magtext.bmp^0^103
+"DATA",2005.021,21,0)
+MPEG^Motion Video MPG^0^magavi.bmp^0^21
+"DATA",2005.021,22,0)
+HTML^Web Document HTML^1^maghtml.bmp^0^101
+"DATA",2005.021,23,0)
+MP3^Motion Video MPEG-3^0^magavi.bmp^0^21
+"DATA",2005.021,24,0)
+MP4^Motion Video MPEG-4^0^magavi.bmp^0^21
+"DATA",2005.021,25,0)
+MHT^MIME HTML Document^1^maghtml.bmp^0^101
+"DATA",2005.021,26,0)
+MHTML^MIME HTML Document^1^maghtml.bmp^0^101
+"DATA",2005.021,27,0)
+WMV^Windows Media Video^0^magavi.bmp^0^21
+"FIA",2005.021)
+IMAGE FILE TYPES
+"FIA",2005.021,0)
+^MAG(2005.021,
+"FIA",2005.021,0,0)
+2005.021
+"FIA",2005.021,0,1)
+y^y^f^^n^^y^o^n
+"FIA",2005.021,0,10)
+
+"FIA",2005.021,0,11)
+
+"FIA",2005.021,0,"RLRO")
+
+"FIA",2005.021,2005.021)
+0
+"MBREQ")
+0
+"QUES","XPF1",0)
+Y
+"QUES","XPF1","??")
+^D REP^XPDH
+"QUES","XPF1","A")
+Shall I write over your |FLAG| File
+"QUES","XPF1","B")
+YES
+"QUES","XPF1","M")
+D XPF1^XPDIQ
+"QUES","XPF2",0)
+Y
+"QUES","XPF2","??")
+^D DTA^XPDH
+"QUES","XPF2","A")
+Want my data |FLAG| yours
+"QUES","XPF2","B")
+YES
+"QUES","XPF2","M")
+D XPF2^XPDIQ
+"QUES","XPI1",0)
+YO
+"QUES","XPI1","??")
+^D INHIBIT^XPDH
+"QUES","XPI1","A")
+Want KIDS to INHIBIT LOGONs during the install
+"QUES","XPI1","B")
+YES
+"QUES","XPI1","M")
+D XPI1^XPDIQ
+"QUES","XPM1",0)
+PO^VA(200,:EM
+"QUES","XPM1","??")
+^D MG^XPDH
+"QUES","XPM1","A")
+Enter the Coordinator for Mail Group '|FLAG|'
+"QUES","XPM1","B")
+
+"QUES","XPM1","M")
+D XPM1^XPDIQ
+"QUES","XPO1",0)
+Y
+"QUES","XPO1","??")
+^D MENU^XPDH
+"QUES","XPO1","A")
+Want KIDS to Rebuild Menu Trees Upon Completion of Install
+"QUES","XPO1","B")
+YES
+"QUES","XPO1","M")
+D XPO1^XPDIQ
+"QUES","XPZ1",0)
+Y
+"QUES","XPZ1","??")
+^D OPT^XPDH
+"QUES","XPZ1","A")
+Want to DISABLE Scheduled Options, Menu Options, and Protocols
+"QUES","XPZ1","B")
+YES
+"QUES","XPZ1","M")
+D XPZ1^XPDIQ
+"QUES","XPZ2",0)
+Y
+"QUES","XPZ2","??")
+^D RTN^XPDH
+"QUES","XPZ2","A")
+Want to MOVE routines to other CPUs
+"QUES","XPZ2","B")
+NO
+"QUES","XPZ2","M")
+D XPZ2^XPDIQ
+"SEC","^DIC",2005.021,2005.021,0,"AUDIT")
+@
+"SEC","^DIC",2005.021,2005.021,0,"DD")
+@
+"SEC","^DIC",2005.021,2005.021,0,"DEL")
+@
+"SEC","^DIC",2005.021,2005.021,0,"LAYGO")
+@
+"SEC","^DIC",2005.021,2005.021,0,"RD")
+@
+"SEC","^DIC",2005.021,2005.021,0,"WR")
+@
+"VER")
+8.0^22.0
+"^DD",2005.021,2005.021,0)
+FIELD^^5^6
+"^DD",2005.021,2005.021,0,"DDA")
+N
+"^DD",2005.021,2005.021,0,"DT")
+3030620
+"^DD",2005.021,2005.021,0,"IX","B",2005.021,.01)
+
+"^DD",2005.021,2005.021,0,"IX","C",2005.021,1)
+
+"^DD",2005.021,2005.021,0,"IX","D",2005.021,5)
+
+"^DD",2005.021,2005.021,0,"NM","IMAGE FILE TYPES")
+
+"^DD",2005.021,2005.021,0,"VRPK")
+MAG
+"^DD",2005.021,2005.021,.01,0)
+NAME^RFI^^0;1^K:$L(X)>10!($L(X)<1)!'(X'?1P.E) X
+"^DD",2005.021,2005.021,.01,1,0)
+^.1
+"^DD",2005.021,2005.021,.01,1,1,0)
+2005.021^B
+"^DD",2005.021,2005.021,.01,1,1,1)
+S ^MAG(2005.021,"B",$E(X,1,30),DA)=""
+"^DD",2005.021,2005.021,.01,1,1,2)
+K ^MAG(2005.021,"B",$E(X,1,30),DA)
+"^DD",2005.021,2005.021,.01,3)
+Answer must be 1-10 characters in length.
+"^DD",2005.021,2005.021,.01,21,0)
+^.001^1^1^3020419^^
+"^DD",2005.021,2005.021,.01,21,1,0)
+This field contains the image filename extension, i.e., tga.
+"^DD",2005.021,2005.021,.01,"DT")
+3050923
+"^DD",2005.021,2005.021,.01,"LAYGO",1,0)
+I 0
+"^DD",2005.021,2005.021,1,0)
+DESCRIPTION^RFI^^0;2^K:$L(X)>30!($L(X)<1) X
+"^DD",2005.021,2005.021,1,1,0)
+^.1
+"^DD",2005.021,2005.021,1,1,1,0)
+2005.021^C
+"^DD",2005.021,2005.021,1,1,1,1)
+S ^MAG(2005.021,"C",$E(X,1,30),DA)=""
+"^DD",2005.021,2005.021,1,1,1,2)
+K ^MAG(2005.021,"C",$E(X,1,30),DA)
+"^DD",2005.021,2005.021,1,1,1,"%D",0)
+^^1^1^3011008^
+"^DD",2005.021,2005.021,1,1,1,"%D",1,0)
+The 3 character image file extension.
+"^DD",2005.021,2005.021,1,1,1,"DT")
+3011008
+"^DD",2005.021,2005.021,1,3)
+Answer must be 1-30 characters in length.
+"^DD",2005.021,2005.021,1,21,0)
+^^2^2^3020419^
+"^DD",2005.021,2005.021,1,21,1,0)
+This field contains the description of the filename extension.  For 
+"^DD",2005.021,2005.021,1,21,2,0)
+example a filename extension of 'doc' is for Microsoft Word document.
+"^DD",2005.021,2005.021,1,"DT")
+3050923
+"^DD",2005.021,2005.021,2,0)
+VIEWER^RSI^1:YES;0:NO;^0;3^Q
+"^DD",2005.021,2005.021,2,21,0)
+^^1^1^3011008^
+"^DD",2005.021,2005.021,2,21,1,0)
+Flag, Imaging provides a viewer for files with this extension Y/N
+"^DD",2005.021,2005.021,2,"DT")
+3050923
+"^DD",2005.021,2005.021,3,0)
+Bitmap for Abstract^FI^^0;4^K:$L(X)>30!($L(X)<3) X
+"^DD",2005.021,2005.021,3,3)
+Answer must be 3-30 characters in length.
+"^DD",2005.021,2005.021,3,21,0)
+^^1^1^3011008^
+"^DD",2005.021,2005.021,3,21,1,0)
+If Imaging does not create abstracts for this type, this Bitmap will be used for the Abstract.
+"^DD",2005.021,2005.021,3,"DT")
+3050923
+"^DD",2005.021,2005.021,4,0)
+Abstract Created^RSI^1:YES;0:NO;^0;5^Q
+"^DD",2005.021,2005.021,4,3)
+Enter Yes if Imaging will create an abstract for this file type.
+"^DD",2005.021,2005.021,4,21,0)
+^.001^2^2^3020419^^^
+"^DD",2005.021,2005.021,4,21,1,0)
+The Capture workstation and Background Processor will create abstracts for 
+"^DD",2005.021,2005.021,4,21,2,0)
+image files with this extension only if this field is Yes
+"^DD",2005.021,2005.021,4,"DT")
+3050923
+"^DD",2005.021,2005.021,5,0)
+DEFAULT OBJECT TYPE^P2005.02'I^MAG(2005.02,^0;6^Q
+"^DD",2005.021,2005.021,5,1,0)
+^.1
+"^DD",2005.021,2005.021,5,1,1,0)
+2005.021^D
+"^DD",2005.021,2005.021,5,1,1,1)
+S ^MAG(2005.021,"D",$E(X,1,30),DA)=""
+"^DD",2005.021,2005.021,5,1,1,2)
+K ^MAG(2005.021,"D",$E(X,1,30),DA)
+"^DD",2005.021,2005.021,5,1,1,"%D",0)
+^^1^1^3030122^
+"^DD",2005.021,2005.021,5,1,1,"%D",1,0)
+Gives the ability to query the file, based on an Image's 'Object Type'
+"^DD",2005.021,2005.021,5,1,1,"DT")
+3030122
+"^DD",2005.021,2005.021,5,3)
+Enter the Default Object Type for this file Extension
+"^DD",2005.021,2005.021,5,21,0)
+^^1^1^3011008^
+"^DD",2005.021,2005.021,5,21,1,0)
+Certain Extensions have a default Object Type defined in this field.
+"^DD",2005.021,2005.021,5,"DT")
+3050923
+"^DIC",2005.021,2005.021,0)
+IMAGE FILE TYPES^2005.021
+"^DIC",2005.021,2005.021,0,"GL")
+^MAG(2005.021,
+"^DIC",2005.021,2005.021,"%",0)
+^1.005^^0
+"^DIC",2005.021,2005.021,"%D",0)
+^1.001^21^21^3050923^^^
+"^DIC",2005.021,2005.021,"%D",1,0)
+ +---------------------------------------------------------------+
+"^DIC",2005.021,2005.021,"%D",2,0)
+ |                                                               |
+"^DIC",2005.021,2005.021,"%D",3,0)
+ | Property of the US Government.                                |
+"^DIC",2005.021,2005.021,"%D",4,0)
+ | No permission to copy or redistribute this software is given. |
+"^DIC",2005.021,2005.021,"%D",5,0)
+ | Use of unreleased versions of this software requires the user |
+"^DIC",2005.021,2005.021,"%D",6,0)
+ | to execute a written test agreement with the VistA Imaging    |
+"^DIC",2005.021,2005.021,"%D",7,0)
+ | Development Office of the Department of Veterans Affairs,     |
+"^DIC",2005.021,2005.021,"%D",8,0)
+ | telephone (301) 734-0100.                                     |
+"^DIC",2005.021,2005.021,"%D",9,0)
+ |                                                               |
+"^DIC",2005.021,2005.021,"%D",10,0)
+ | The Food and Drug Administration classifies this software as  |
+"^DIC",2005.021,2005.021,"%D",11,0)
+ | a medical device.  As such, it may not be changed in any way. |
+"^DIC",2005.021,2005.021,"%D",12,0)
+ | Modifications to this software may result in an adulterated   |
+"^DIC",2005.021,2005.021,"%D",13,0)
+ | medical device under 21CFR820, the use of which is considered |
+"^DIC",2005.021,2005.021,"%D",14,0)
+ | to be a violation of US Federal Statutes.                     |
+"^DIC",2005.021,2005.021,"%D",15,0)
+ |                                                               |
+"^DIC",2005.021,2005.021,"%D",16,0)
+ +---------------------------------------------------------------+
+"^DIC",2005.021,2005.021,"%D",17,0)
+ 
+"^DIC",2005.021,2005.021,"%D",18,0)
+This file contains all the image filename extensions supported by 
+"^DIC",2005.021,2005.021,"%D",19,0)
+Imaging and specific characteristics for the filename extensions. 
+"^DIC",2005.021,2005.021,"%D",20,0)
+This is a static file only updated by newer versions of the Imaging 
+"^DIC",2005.021,2005.021,"%D",21,0)
+application. 
+"^DIC",2005.021,"B","IMAGE FILE TYPES",2005.021)
+
+**END**
+**END**

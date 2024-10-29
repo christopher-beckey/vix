@@ -1,0 +1,6 @@
+#Menu Option|AE Title|Port|File Mode (FIFO QUEUE or DIRECT)|CHANNEL
+PACS Interface|VistA PACS I/F|60040|FIFO QUEUE|1
+#MITRA Broker Interface|VistA PACS I/F|60041|FIFO QUEUE|2
+#DeJarnette Medishare Interface|VistA PACS I/F|60042|FIFO QUEUE|2
+#Perry Point CR (a)|PP_CR_A|60043|DIRECT|1
+#Perry Point CR (b)|PP_CR_B|60044|DIRECT|1

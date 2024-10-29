@@ -1,0 +1,720 @@
+KIDS Distribution saved on Jul 25, 2012@16:31:38
+Split from blank VI database - last patch SEQ81_P120
+**KIDS**:MAG*3.0*350_DD*2005.02^
+
+**INSTALL NAME**
+MAG*3.0*350_DD*2005.02
+"BLD",7716,0)
+MAG*3.0*350_DD*2005.02^IMAGING^0^3120725^n
+"BLD",7716,4,0)
+^9.64PA^2005.02^1
+"BLD",7716,4,2005.02,0)
+2005.02
+"BLD",7716,4,2005.02,222)
+y^y^f^^^^y
+"BLD",7716,4,"B",2005.02,2005.02)
+
+"BLD",7716,6.3)
+2
+"BLD",7716,"KRN",0)
+^9.67PA^779.2^20
+"BLD",7716,"KRN",.4,0)
+.4
+"BLD",7716,"KRN",.401,0)
+.401
+"BLD",7716,"KRN",.402,0)
+.402
+"BLD",7716,"KRN",.403,0)
+.403
+"BLD",7716,"KRN",.5,0)
+.5
+"BLD",7716,"KRN",.84,0)
+.84
+"BLD",7716,"KRN",3.6,0)
+3.6
+"BLD",7716,"KRN",3.8,0)
+3.8
+"BLD",7716,"KRN",9.2,0)
+9.2
+"BLD",7716,"KRN",9.8,0)
+9.8
+"BLD",7716,"KRN",19,0)
+19
+"BLD",7716,"KRN",19.1,0)
+19.1
+"BLD",7716,"KRN",101,0)
+101
+"BLD",7716,"KRN",409.61,0)
+409.61
+"BLD",7716,"KRN",771,0)
+771
+"BLD",7716,"KRN",779.2,0)
+779.2
+"BLD",7716,"KRN",870,0)
+870
+"BLD",7716,"KRN",8989.51,0)
+8989.51
+"BLD",7716,"KRN",8989.52,0)
+8989.52
+"BLD",7716,"KRN",8994,0)
+8994
+"BLD",7716,"KRN","B",.4,.4)
+
+"BLD",7716,"KRN","B",.401,.401)
+
+"BLD",7716,"KRN","B",.402,.402)
+
+"BLD",7716,"KRN","B",.403,.403)
+
+"BLD",7716,"KRN","B",.5,.5)
+
+"BLD",7716,"KRN","B",.84,.84)
+
+"BLD",7716,"KRN","B",3.6,3.6)
+
+"BLD",7716,"KRN","B",3.8,3.8)
+
+"BLD",7716,"KRN","B",9.2,9.2)
+
+"BLD",7716,"KRN","B",9.8,9.8)
+
+"BLD",7716,"KRN","B",19,19)
+
+"BLD",7716,"KRN","B",19.1,19.1)
+
+"BLD",7716,"KRN","B",101,101)
+
+"BLD",7716,"KRN","B",409.61,409.61)
+
+"BLD",7716,"KRN","B",771,771)
+
+"BLD",7716,"KRN","B",779.2,779.2)
+
+"BLD",7716,"KRN","B",870,870)
+
+"BLD",7716,"KRN","B",8989.51,8989.51)
+
+"BLD",7716,"KRN","B",8989.52,8989.52)
+
+"BLD",7716,"KRN","B",8994,8994)
+
+"DATA",2005.02,1,0)
+STILL IMAGE^1
+"DATA",2005.02,1,1,0)
+^2005.21^1^3
+"DATA",2005.02,1,1,1,0)
+DISPABST.MAGWABS
+"DATA",2005.02,1,1,2,0)
+DISPLAY.MAGSTI
+"DATA",2005.02,1,1,3,0)
+DISPABST.MAGWABS
+"DATA",2005.02,1,4)
+JPG
+"DATA",2005.02,3,0)
+XRAY^1
+"DATA",2005.02,3,1,0)
+^2005.21^5^2
+"DATA",2005.02,3,1,4,0)
+DISPLAY.MAGRXRY
+"DATA",2005.02,3,1,5,0)
+DISPABST.MAGWABS
+"DATA",2005.02,9,0)
+BWMED^1
+"DATA",2005.02,9,1,0)
+^2005.21^6^2
+"DATA",2005.02,9,1,4,0)
+DISPABST.MAGWABS
+"DATA",2005.02,9,1,6,0)
+DISPLAY.MAGOBW
+"DATA",2005.02,10,0)
+PACS RESIDENT^0
+"DATA",2005.02,10,1,0)
+^2005.21^3^2
+"DATA",2005.02,10,1,1,0)
+DISPLAY.MAGKDIS
+"DATA",2005.02,10,1,3,0)
+DISPABST.MAGKABS
+"DATA",2005.02,11,0)
+XRAY GROUP^0
+"DATA",2005.02,11,1,0)
+^2005.21^3^3
+"DATA",2005.02,11,1,1,0)
+DISPABST.MAGKDGP1
+"DATA",2005.02,11,1,2,0)
+DISPLAY.MAGKDGP
+"DATA",2005.02,11,1,3,0)
+DISPCINE.MAGCIN
+"DATA",2005.02,12,0)
+PACS GROUP^0
+"DATA",2005.02,12,1,0)
+^2005.21^3^2
+"DATA",2005.02,12,1,1,0)
+DISPLAY.MAGKDISP
+"DATA",2005.02,12,1,3,0)
+DISPABST.MAGKABS
+"DATA",2005.02,13,0)
+ECG^0
+"DATA",2005.02,13,1,0)
+^2005.21^5^2
+"DATA",2005.02,13,1,4,0)
+DISPABST.MAGOECGA
+"DATA",2005.02,13,1,5,0)
+DISPLAY.MAGOECGF
+"DATA",2005.02,14,0)
+CINE LOOP^1
+"DATA",2005.02,14,1,0)
+^2005.21^2^2
+"DATA",2005.02,14,1,1,0)
+DISPLAY.MAGCIN
+"DATA",2005.02,14,1,2,0)
+DISPABST.MAGKDGP1
+"DATA",2005.02,15,0)
+DOCUMENT^0
+"DATA",2005.02,15,4)
+TIF
+"DATA",2005.02,16,0)
+STILL IMAGE GROUP^0
+"DATA",2005.02,16,1,0)
+^2005.21^1^1
+"DATA",2005.02,16,1,1,0)
+DISPABST.MAGKDGP1
+"DATA",2005.02,17,0)
+COLORSCAN^0
+"DATA",2005.02,17,1,0)
+^2005.21^2^2
+"DATA",2005.02,17,1,1,0)
+DISPABST.MAGRDOS1
+"DATA",2005.02,17,1,2,0)
+DISPLAY.MAGRDOS1
+"DATA",2005.02,18,0)
+PATIENT PHOTO^0
+"DATA",2005.02,19,0)
+XRAY JPG
+"DATA",2005.02,20,0)
+JPG XRAY^0
+"DATA",2005.02,21,0)
+MOTION VIDEO
+"DATA",2005.02,21,4)
+AVI
+"DATA",2005.02,65,0)
+UNKNOWN
+"DATA",2005.02,66,0)
+DELETED IMAGE^0
+"DATA",2005.02,67,0)
+INVALID IMAGE NUMBER^0
+"DATA",2005.02,100,0)
+DICOM IMAGE
+"DATA",2005.02,101,0)
+HTML
+"DATA",2005.02,101,4)
+HTM
+"DATA",2005.02,102,0)
+WORD
+"DATA",2005.02,102,4)
+DOC
+"DATA",2005.02,103,0)
+TEXT
+"DATA",2005.02,103,4)
+ASC
+"DATA",2005.02,104,0)
+ADOBE
+"DATA",2005.02,104,4)
+PDF
+"DATA",2005.02,105,0)
+RICH TEXT
+"DATA",2005.02,105,4)
+RTF
+"DATA",2005.02,106,0)
+AUDIO
+"DATA",2005.02,106,4)
+WAV
+"DATA",2005.02,501,0)
+NCAT
+"DATA",2005.02,502,0)
+Unsupported Type From Non-VA Origin
+"DATA",2005.02,503,0)
+DoD JPG
+"DATA",2005.02,504,0)
+DoD Word
+"DATA",2005.02,505,0)
+DoD ASCII Text
+"DATA",2005.02,506,0)
+DoD PDF (non-NCAT)
+"DATA",2005.02,507,0)
+DoD RTF
+"FIA",2005.02)
+OBJECT TYPE
+"FIA",2005.02,0)
+^MAG(2005.02,
+"FIA",2005.02,0,0)
+2005.02
+"FIA",2005.02,0,1)
+y^y^f^^^^y
+"FIA",2005.02,0,10)
+
+"FIA",2005.02,0,11)
+
+"FIA",2005.02,0,"RLRO")
+
+"FIA",2005.02,0,"VR")
+3.0^MAG
+"FIA",2005.02,2005.02)
+0
+"FIA",2005.02,2005.21)
+0
+"FIA",2005.02,2005.24)
+0
+"MBREQ")
+0
+"PKG",454,-1)
+1^1
+"PKG",454,0)
+IMAGING^MAG^Imaging-V1 to release 
+"PKG",454,20,0)
+^9.402P^^
+"PKG",454,22,0)
+^9.49I^1^1
+"PKG",454,22,1,0)
+3.0^3020319^3120725^126
+"PKG",454,22,1,"PAH",1,0)
+350_DD^3120725
+"QUES","XPF1",0)
+Y
+"QUES","XPF1","??")
+^D REP^XPDH
+"QUES","XPF1","A")
+Shall I write over your |FLAG| File
+"QUES","XPF1","B")
+YES
+"QUES","XPF1","M")
+D XPF1^XPDIQ
+"QUES","XPF2",0)
+Y
+"QUES","XPF2","??")
+^D DTA^XPDH
+"QUES","XPF2","A")
+Want my data |FLAG| yours
+"QUES","XPF2","B")
+YES
+"QUES","XPF2","M")
+D XPF2^XPDIQ
+"QUES","XPI1",0)
+YO
+"QUES","XPI1","??")
+^D INHIBIT^XPDH
+"QUES","XPI1","A")
+Want KIDS to INHIBIT LOGONs during the install
+"QUES","XPI1","B")
+NO
+"QUES","XPI1","M")
+D XPI1^XPDIQ
+"QUES","XPM1",0)
+PO^VA(200,:EM
+"QUES","XPM1","??")
+^D MG^XPDH
+"QUES","XPM1","A")
+Enter the Coordinator for Mail Group '|FLAG|'
+"QUES","XPM1","B")
+
+"QUES","XPM1","M")
+D XPM1^XPDIQ
+"QUES","XPO1",0)
+Y
+"QUES","XPO1","??")
+^D MENU^XPDH
+"QUES","XPO1","A")
+Want KIDS to Rebuild Menu Trees Upon Completion of Install
+"QUES","XPO1","B")
+NO
+"QUES","XPO1","M")
+D XPO1^XPDIQ
+"QUES","XPZ1",0)
+Y
+"QUES","XPZ1","??")
+^D OPT^XPDH
+"QUES","XPZ1","A")
+Want to DISABLE Scheduled Options, Menu Options, and Protocols
+"QUES","XPZ1","B")
+NO
+"QUES","XPZ1","M")
+D XPZ1^XPDIQ
+"QUES","XPZ2",0)
+Y
+"QUES","XPZ2","??")
+^D RTN^XPDH
+"QUES","XPZ2","A")
+Want to MOVE routines to other CPUs
+"QUES","XPZ2","B")
+NO
+"QUES","XPZ2","M")
+D XPZ2^XPDIQ
+"SEC","^DIC",2005.02,2005.02,0,"AUDIT")
+
+"SEC","^DIC",2005.02,2005.02,0,"DD")
+@
+"SEC","^DIC",2005.02,2005.02,0,"DEL")
+@
+"SEC","^DIC",2005.02,2005.02,0,"LAYGO")
+@
+"SEC","^DIC",2005.02,2005.02,0,"RD")
+@
+"SEC","^DIC",2005.02,2005.02,0,"WR")
+@
+"VER")
+8.0^22.0
+"^DD",2005.02,2005.02,0)
+FIELD^^5^7
+"^DD",2005.02,2005.02,0,"DDA")
+N
+"^DD",2005.02,2005.02,0,"DT")
+2950508
+"^DD",2005.02,2005.02,0,"IX","AC",2005.21,.01)
+
+"^DD",2005.02,2005.02,0,"IX","AD",2005.02,5)
+
+"^DD",2005.02,2005.02,0,"IX","B",2005.02,.01)
+
+"^DD",2005.02,2005.02,0,"NM","OBJECT TYPE")
+
+"^DD",2005.02,2005.02,0,"PT",2005,3)
+
+"^DD",2005.02,2005.02,0,"PT",2005.02,3)
+
+"^DD",2005.02,2005.02,0,"PT",2005.021,5)
+
+"^DD",2005.02,2005.02,0,"PT",2005.1,3)
+
+"^DD",2005.02,2005.02,0,"PT",2005.24,.01)
+
+"^DD",2005.02,2005.02,0,"VRPK")
+MAG
+"^DD",2005.02,2005.02,.01,0)
+NAME^RF^^0;1^K:X[""""!($A(X)=45) X I $D(X) K:$L(X)>30!(X?.N)!($L(X)<3)!'(X'?1P.E) X
+"^DD",2005.02,2005.02,.01,1,0)
+^.1
+"^DD",2005.02,2005.02,.01,1,1,0)
+2005.02^B
+"^DD",2005.02,2005.02,.01,1,1,1)
+S ^MAG(2005.02,"B",$E(X,1,30),DA)=""
+"^DD",2005.02,2005.02,.01,1,1,2)
+K ^MAG(2005.02,"B",$E(X,1,30),DA)
+"^DD",2005.02,2005.02,.01,1,1,"DT")
+2911113
+"^DD",2005.02,2005.02,.01,3)
+NAME MUST BE 3-30 CHARACTERS, NOT NUMERIC OR STARTING WITH PUNCTUATION
+"^DD",2005.02,2005.02,.01,21,0)
+^^4^4^2970721^^^
+"^DD",2005.02,2005.02,.01,21,1,0)
+Each kind of data supported by the Imaging System has an entry in
+"^DD",2005.02,2005.02,.01,21,2,0)
+the Object Type file.  The Object Type file manages the kinds of
+"^DD",2005.02,2005.02,.01,21,3,0)
+actions which that type of object can have and the routines that
+"^DD",2005.02,2005.02,.01,21,4,0)
+are executed for each action.
+"^DD",2005.02,2005.02,.01,"DT")
+2911113
+"^DD",2005.02,2005.02,.02,0)
+ABSTRACT REQUIRED^S^1:YES;0:NO;^0;2^Q
+"^DD",2005.02,2005.02,.02,3)
+DOES OBJECT TYPE REQUIRE AN ABSTRACT
+"^DD",2005.02,2005.02,.02,21,0)
+^^2^2^3001006^
+"^DD",2005.02,2005.02,.02,21,1,0)
+This field is reserved for future use and will indicates whether a
+"^DD",2005.02,2005.02,.02,21,2,0)
+separate abstract file is required for this type of object.
+"^DD",2005.02,2005.02,.02,"DT")
+3001006
+"^DD",2005.02,2005.02,1,0)
+ACTIONS^2005.21^^1;0
+"^DD",2005.02,2005.02,1,21,0)
+^.001^5^5^3020222^^^^
+"^DD",2005.02,2005.02,1,21,1,0)
+This field is reserved for future use will contain the kinds of actions
+"^DD",2005.02,2005.02,1,21,2,0)
+which apply to the object type. Generally, all objects can be displayed as
+"^DD",2005.02,2005.02,1,21,3,0)
+a full image/object and they have an abstract display method.  In
+"^DD",2005.02,2005.02,1,21,4,0)
+addition, groups of objects may have other actions such as cineloop
+"^DD",2005.02,2005.02,1,21,5,0)
+display or tiled display.
+"^DD",2005.02,2005.02,1,"DT")
+3001006
+"^DD",2005.02,2005.02,2,0)
+EDIT TEMPLATE^F^^2;1^K:$L(X)>20!($L(X)<1) X
+"^DD",2005.02,2005.02,2,3)
+Answer must be 1-20 characters in length.
+"^DD",2005.02,2005.02,2,21,0)
+^^2^2^3001006^
+"^DD",2005.02,2005.02,2,21,1,0)
+This field is reserved for future use for the name of the edit
+"^DD",2005.02,2005.02,2,21,2,0)
+template used to enter data pertaining to this type of object.
+"^DD",2005.02,2005.02,2,"DT")
+3001006
+"^DD",2005.02,2005.02,3,0)
+PARENT^P2005.02'^MAG(2005.02,^2;2^Q
+"^DD",2005.02,2005.02,3,21,0)
+^^2^2^2950331^^
+"^DD",2005.02,2005.02,3,21,1,0)
+This field is reserved for future use to allow object types
+"^DD",2005.02,2005.02,3,21,2,0)
+to inherit characteristics from a parent object type.
+"^DD",2005.02,2005.02,3,"DT")
+2910526
+"^DD",2005.02,2005.02,4,0)
+CHILD CLASS^2005.24P^^3;0
+"^DD",2005.02,2005.02,4,21,0)
+^.001^2^2^3001025^^^^
+"^DD",2005.02,2005.02,4,21,1,0)
+This field is reserved for future use to allow object types
+"^DD",2005.02,2005.02,4,21,2,0)
+to inherit characteristics from other object types.
+"^DD",2005.02,2005.02,4,"DT")
+3001006
+"^DD",2005.02,2005.02,5,0)
+DEFAULT EXTENSION^F^^4;1^K:$L(X)>3!($L(X)<3) X
+"^DD",2005.02,2005.02,5,1,0)
+^.1
+"^DD",2005.02,2005.02,5,1,1,0)
+2005.02^AD
+"^DD",2005.02,2005.02,5,1,1,1)
+S ^MAG(2005.02,"AD",$E(X,1,30),DA)=""
+"^DD",2005.02,2005.02,5,1,1,2)
+K ^MAG(2005.02,"AD",$E(X,1,30),DA)
+"^DD",2005.02,2005.02,5,1,1,"%D",0)
+^.101^2^2^3020419^^
+"^DD",2005.02,2005.02,5,1,1,"%D",1,0)
+This cross-reference is searched when the extension of a file is known 
+"^DD",2005.02,2005.02,5,1,1,"%D",2,0)
+but not it's Object Type.
+"^DD",2005.02,2005.02,5,1,1,"DT")
+3010131
+"^DD",2005.02,2005.02,5,3)
+Enter the file extension to associate with this object type.  i.e. JPG, TGA, TXT, PDF, DOC...
+"^DD",2005.02,2005.02,5,21,0)
+3^.001^3^3^3020419^
+"^DD",2005.02,2005.02,5,21,1,0)
+This is the default extension for this type of object.
+"^DD",2005.02,2005.02,5,21,2,0)
+When Object Type is not known, at time of capture, the extension is 
+"^DD",2005.02,2005.02,5,21,3,0)
+used to determine the type.
+"^DD",2005.02,2005.02,5,"DT")
+3010131
+"^DD",2005.02,2005.21,0)
+ACTIONS SUB-FIELD^^.01^2
+"^DD",2005.02,2005.21,0,"DT")
+2950508
+"^DD",2005.02,2005.21,0,"IX","B",2005.21,.01)
+
+"^DD",2005.02,2005.21,0,"NM","ACTIONS")
+
+"^DD",2005.02,2005.21,0,"UP")
+2005.02
+"^DD",2005.02,2005.21,.001,0)
+NUMBER^NJ2,0^^ ^K:+X'=X!(X>20)!(X<1)!(X?.E1"."1N.N) X
+"^DD",2005.02,2005.21,.001,3)
+Type a Number between 1 and 20, 0 Decimal Digits
+"^DD",2005.02,2005.21,.001,21,0)
+^^1^1^3001025^
+"^DD",2005.02,2005.21,.001,21,1,0)
+Internal Entry number of the ACTIONS Multiple field.
+"^DD",2005.02,2005.21,.001,"DT")
+2930909
+"^DD",2005.02,2005.21,.01,0)
+ACTIONS^MF^^0;1^K:X[""""!($A(X)=45) X I $D(X) K:$L(X)>60!($L(X)<1) X
+"^DD",2005.02,2005.21,.01,1,0)
+^.1
+"^DD",2005.02,2005.21,.01,1,1,0)
+2005.21^B
+"^DD",2005.02,2005.21,.01,1,1,1)
+S ^MAG(2005.02,DA(1),1,"B",$E(X,1,30),DA)=""
+"^DD",2005.02,2005.21,.01,1,1,2)
+K ^MAG(2005.02,DA(1),1,"B",$E(X,1,30),DA)
+"^DD",2005.02,2005.21,.01,1,2,0)
+2005.02^AC^MUMPS
+"^DD",2005.02,2005.21,.01,1,2,1)
+D SETACT^MAGUXRF
+"^DD",2005.02,2005.21,.01,1,2,2)
+D KILLACT^MAGUXRF
+"^DD",2005.02,2005.21,.01,1,2,"%D",0)
+^^1^1^2930909^^
+"^DD",2005.02,2005.21,.01,1,2,"%D",1,0)
+Sets Object AC xref for displaying abstracts and objects.
+"^DD",2005.02,2005.21,.01,1,2,"DT")
+2930909
+"^DD",2005.02,2005.21,.01,3)
+Answer must be 1-60 characters in length.
+"^DD",2005.02,2005.21,.01,21,0)
+^^5^5^3001025^
+"^DD",2005.02,2005.21,.01,21,1,0)
+This field is reserved for future use will contain the kinds of actions
+"^DD",2005.02,2005.21,.01,21,2,0)
+which apply to the object type. Generally, all objects can be displayed as
+"^DD",2005.02,2005.21,.01,21,3,0)
+a full image/object and they have an abstract display method.  In
+"^DD",2005.02,2005.21,.01,21,4,0)
+addition, groups of objects may have other actions such as cineloop
+"^DD",2005.02,2005.21,.01,21,5,0)
+display or tiled display.
+"^DD",2005.02,2005.21,.01,"DT")
+2950508
+"^DD",2005.02,2005.24,0)
+CHILD CLASS SUB-FIELD^^.01^1
+"^DD",2005.02,2005.24,0,"IX","B",2005.24,.01)
+
+"^DD",2005.02,2005.24,0,"NM","CHILD CLASS")
+
+"^DD",2005.02,2005.24,0,"UP")
+2005.02
+"^DD",2005.02,2005.24,.01,0)
+CHILD CLASS^MP2005.02'^MAG(2005.02,^0;1^Q
+"^DD",2005.02,2005.24,.01,1,0)
+^.1
+"^DD",2005.02,2005.24,.01,1,1,0)
+2005.24^B
+"^DD",2005.02,2005.24,.01,1,1,1)
+S ^MAG(2005.02,DA(1),3,"B",$E(X,1,30),DA)=""
+"^DD",2005.02,2005.24,.01,1,1,2)
+K ^MAG(2005.02,DA(1),3,"B",$E(X,1,30),DA)
+"^DD",2005.02,2005.24,.01,21,0)
+^^2^2^3001025^
+"^DD",2005.02,2005.24,.01,21,1,0)
+This field is reserved for future use to allow object types
+"^DD",2005.02,2005.24,.01,21,2,0)
+to inherit characteristics from other object types.
+"^DD",2005.02,2005.24,.01,"DT")
+2910526
+"^DIC",2005.02,2005.02,0)
+OBJECT TYPE^2005.02
+"^DIC",2005.02,2005.02,0,"GL")
+^MAG(2005.02,
+"^DIC",2005.02,2005.02,"%",0)
+^1.005^1^1
+"^DIC",2005.02,2005.02,"%",1,0)
+MAG
+"^DIC",2005.02,2005.02,"%","B","MAG",1)
+
+"^DIC",2005.02,2005.02,"%D",0)
+^^57^57^3001006^
+"^DIC",2005.02,2005.02,"%D",1,0)
+ 
+"^DIC",2005.02,2005.02,"%D",2,0)
+ +---------------------------------------------------------------+
+"^DIC",2005.02,2005.02,"%D",3,0)
+ |                                                               |
+"^DIC",2005.02,2005.02,"%D",4,0)
+ | Property of the US Government.                                |
+"^DIC",2005.02,2005.02,"%D",5,0)
+ | No permission to copy or redistribute this software is given. |
+"^DIC",2005.02,2005.02,"%D",6,0)
+ | Use of unreleased versions of this software requires the user |
+"^DIC",2005.02,2005.02,"%D",7,0)
+ | to execute a written test agreement with the VistA Imaging    |
+"^DIC",2005.02,2005.02,"%D",8,0)
+ | Development Office of the Department of Veterans Affairs,     |
+"^DIC",2005.02,2005.02,"%D",9,0)
+ | telephone (301) 734-0100.                                     |
+"^DIC",2005.02,2005.02,"%D",10,0)
+ |                                                               |
+"^DIC",2005.02,2005.02,"%D",11,0)
+ | The Food and Drug Administration classifies this software as  |
+"^DIC",2005.02,2005.02,"%D",12,0)
+ | a Class II medical device.  As such, it may not be changed    |
+"^DIC",2005.02,2005.02,"%D",13,0)
+ | in any way.  Modifications to this software may result in an  |
+"^DIC",2005.02,2005.02,"%D",14,0)
+ | adulterated medical device under 21CFR820, the use of which   |
+"^DIC",2005.02,2005.02,"%D",15,0)
+ | is considered to be a violation of US Federal Statutes.       |
+"^DIC",2005.02,2005.02,"%D",16,0)
+ |                                                               |
+"^DIC",2005.02,2005.02,"%D",17,0)
+ +---------------------------------------------------------------+
+"^DIC",2005.02,2005.02,"%D",18,0)
+ 
+"^DIC",2005.02,2005.02,"%D",19,0)
+This file contains an entry for every type of object handled by the VistA
+"^DIC",2005.02,2005.02,"%D",20,0)
+Imaging System. It is exported with data. All sites must have entries
+"^DIC",2005.02,2005.02,"%D",21,0)
+for the data types distributed in order to display objects sent via
+"^DIC",2005.02,2005.02,"%D",22,0)
+multimedia mail.
+"^DIC",2005.02,2005.02,"%D",23,0)
+ The Object Type file handles objects of various types.  These include: 
+"^DIC",2005.02,2005.02,"%D",24,0)
+  * still images 
+"^DIC",2005.02,2005.02,"%D",25,0)
+  * image groups
+"^DIC",2005.02,2005.02,"%D",26,0)
+  * graphics or waveforms
+"^DIC",2005.02,2005.02,"%D",27,0)
+  * scanned documents
+"^DIC",2005.02,2005.02,"%D",28,0)
+  * audio files  
+"^DIC",2005.02,2005.02,"%D",29,0)
+ 
+"^DIC",2005.02,2005.02,"%D",30,0)
+ Other types are expected in the future (i.e., image overlays,
+"^DIC",2005.02,2005.02,"%D",31,0)
+motion video chips, and office automation files).  An object,
+"^DIC",2005.02,2005.02,"%D",32,0)
+such as an image series, may actually consist of multiple
+"^DIC",2005.02,2005.02,"%D",33,0)
+objects.  In this case, the object type is Group.  The Object
+"^DIC",2005.02,2005.02,"%D",34,0)
+Group multiple field is used to point to a set of objects in the
+"^DIC",2005.02,2005.02,"%D",35,0)
+Image file.  Each object type has associated methods (software
+"^DIC",2005.02,2005.02,"%D",36,0)
+routines) for performing certain actions.  For example, there are
+"^DIC",2005.02,2005.02,"%D",37,0)
+methods for displaying images and image abstracts.  The group
+"^DIC",2005.02,2005.02,"%D",38,0)
+type is used to combine multiple objects of the same or different
+"^DIC",2005.02,2005.02,"%D",39,0)
+types to create complex objects.
+"^DIC",2005.02,2005.02,"%D",40,0)
+ 
+"^DIC",2005.02,2005.02,"%D",41,0)
+ There are different image types, for example: 
+"^DIC",2005.02,2005.02,"%D",42,0)
+  * black and white high-resolution x-rays
+"^DIC",2005.02,2005.02,"%D",43,0)
+  * black and white ultrasound images (lower resolution)
+"^DIC",2005.02,2005.02,"%D",44,0)
+  * pseudo-color nuclear medicine scans
+"^DIC",2005.02,2005.02,"%D",45,0)
+  * medium resolution true color bronchoscopy images
+"^DIC",2005.02,2005.02,"%D",46,0)
+  * pathology images
+"^DIC",2005.02,2005.02,"%D",47,0)
+ 
+"^DIC",2005.02,2005.02,"%D",48,0)
+ Each type of object has a number of specific characteristics,
+"^DIC",2005.02,2005.02,"%D",49,0)
+including the methods  required to display them.  For example,
+"^DIC",2005.02,2005.02,"%D",50,0)
+each object type has a type name and an associated display method
+"^DIC",2005.02,2005.02,"%D",51,0)
+or window.
+"^DIC",2005.02,2005.02,"%D",52,0)
+ 
+"^DIC",2005.02,2005.02,"%D",53,0)
+ All accesses to objects use the file finder routine ^MAGFILE or
+"^DIC",2005.02,2005.02,"%D",54,0)
+^MAGFILEA to find the network location needed.  Different entry
+"^DIC",2005.02,2005.02,"%D",55,0)
+points of this routine will find locations of full files,
+"^DIC",2005.02,2005.02,"%D",56,0)
+abstract files, and jukebox copies of files.  In addition, the
+"^DIC",2005.02,2005.02,"%D",57,0)
+network write location will be returned for image captures.
+"^DIC",2005.02,"B","OBJECT TYPE",2005.02)
+
+**END**
+**END**

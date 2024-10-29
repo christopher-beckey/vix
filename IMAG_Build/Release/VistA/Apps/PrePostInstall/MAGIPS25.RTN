@@ -1,0 +1,58 @@
+MAGIPS25 ;WOIFO/MLH - Pre & Post-Init routines for Patch 25 ; 29 Sep 2003  1:11 PM
+ ;;3.0;IMAGING;**25**;Sep 4, 2003
+ ;; +---------------------------------------------------------------+
+ ;; | Property of the US Government.                                |
+ ;; | No permission to copy or redistribute this software is given. |
+ ;; | Use of unreleased versions of this software requires the user |
+ ;; | to execute a written test agreement with the VistA Imaging    |
+ ;; | Development Office of the Department of Veterans Affairs,     |
+ ;; | telephone (301) 734-0100.                                     |
+ ;; |                                                               |
+ ;; | The Food and Drug Administration classifies this software as  |
+ ;; | a medical device.  As such, it may not be changed in any way. |
+ ;; | Modifications to this software may result in an adulterated   |
+ ;; | medical device under 21CFR820, the use of which is considered |
+ ;; | to be a violation of US Federal Statutes.                     |
+ ;; +---------------------------------------------------------------+
+ ;;
+ Q
+PRE ; Entry point - pre-initialization for Patch 25
+ ; Replace ^MAGTMP with an ^XTMP subtree to expire in one year.
+ ; 
+ K DQ
+ N CURDAT ; ----- current date and time
+ N EXPDAT ; ----- expiration date of our ^XTMP subtree
+ ; replace ^MAGTMP nodes from Patch 17
+ I $D(^MAGTMP("MAGSCNVI")) D
+ . K ^MAGTMP("MAGSCNVI") W !,"Patch 17 nodes cleared from ^MAGTMP..."
+ . Q
+ ; 1-year retention for ^XTMP
+ S CURDAT=$$DT^XLFDT
+ S EXPDAT=$$FMADD^XLFDT(CURDAT,366)
+ S ^XTMP("MAG30P25",0)=EXPDAT_U_CURDAT_U_"IMAGE INDEX CONVERSION"
+ W !!,"^XTMP nodes established, will be auto-purged on ",$$FMTE^XLFDT(EXPDAT)
+EXITPRE ;
+ Q
+ ;
+POST ; Entry point - post-initialization for Patch 25
+ N I ; ---------- loop index
+ N DA,DIE,DR ; -- FileMan work variables (see FileMan doc)
+ N IEN ; -------- file internal entry number
+ ;
+ ; Change OUTSIDE MEDICAL RECORD (OTHER) to MEDICAL RECORD on IMAGE INDEX
+ ; FOR TYPES (File #2005.83).
+ S DA=$O(^MAG(2005.83,"B","OUTSIDE MEDICAL RECORD (OTHER)",0))
+ I DA S DIE="^MAG(2005.83,",DR=".01////MEDICAL RECORD" D ^DIE
+ ;
+ ; If Patch 25 has never been executed to completion (i.e., there are no
+ ; entries on ^MAGIXCVT(2006.96)), purge the IMAGE File index values 
+ ; that were assigned by Patch 17.
+ I '$O(^MAGIXCVT(2006.96,0)) D
+ . S IEN=0
+ . F I=1:1 S IEN=$O(^MAG(2005,IEN)) Q:'IEN  K ^(IEN,40) I I#1000=0 W "."
+ . Q
+ ;
+ ; Notify Imaging that the patch has been installed
+ ;D:$T(POST^MAGQST)]"" POST^MAGQST
+EXITPOST ;
+ Q

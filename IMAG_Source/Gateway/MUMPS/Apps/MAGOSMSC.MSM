@@ -1,0 +1,248 @@
+09:50 AM 08/26/2005 
+DICOM Gateway MUMPS routines Build V3.0p51Build720_T22
+MAGOSMSC
+MAGOSMSC ;WOIFO/PMK/EdM - Host Operating System Utilities ; [ 05/09/2003  09:12 AM ]
+ ;;3.0;IMAGING;**11**;14-April-2004
+ ;; +---------------------------------------------------------------+
+ ;; | Property of the US Government.                                |
+ ;; | No permission to copy or redistribute this software is given. |
+ ;; | Use of unreleased versions of this software requires the user |
+ ;; | to execute a written test agreement with the VistA Imaging    |
+ ;; | Development Office of the Department of Veterans Affairs,     |
+ ;; | telephone (301) 734-0100.                                     |
+ ;; |                                                               |
+ ;; | The Food and Drug Administration classifies this software as  |
+ ;; | a medical device.  As such, it may not be changed in any way. |
+ ;; | Modifications to this software may result in an adulterated   |
+ ;; | medical device under 21CFR820, the use of which is considered |
+ ;; | to be a violation of US Federal Statutes.                     |
+ ;; +---------------------------------------------------------------+
+ ;;
+ ; Callable entries are:
+ ;
+ ; Other host system information
+ ;  Set STATUS=$$DISKFREE^MAGOSMSC(DRIVE)
+ ;  Set STATUS=$$DISKSIZE^MAGOSMSC(DRIVE)
+ ; Miscellaneous other functions
+ ;  Set STATUS=$$HOSTCMD^MAGOSMSC(CMD,.OUT,.ERR,DONTWAIT,DEBUG)
+ ;  Set STATUS=$$ZLOAD^MAGOSMSC(ROUTINE)
+ ;  Set STATUS=$$ZSAVE^MAGOSMSC(ROUTINE)
+ ;  Set HEXA=$$DEC2HEX^MAGOSMSC(DECIMAL,LENGTH,BITS)
+ ;  Set DECIMAL=$$HEX2DEC^MAGOSMSC(HEXA,LENGTH,BITS)
+ ;  Set UP=$$UPPER^MAGOSMSC(TEXT)
+ ;  Set LO=$$LOWER^MAGOSMSC(TEXT)
+ ;  Set STATUS=$$MATCH^MAGOSMSC(WILDCARD,STRUCTUR,FOUND)
+ ;  Set STATUS=$$MATCHD^MAGOSMSC(WILDCARD,STRUCTUR,FOUND)
+ ;  Set MUMPSENV=$$MUMPS^MAGOSMSC()
+ ;  Set UCI=$$CURENV^MAGOSMSC()
+ ;
+CURENV() ;
+ ;  -- Returns name of current environment (UCI)
+ Q $ZUCI("")
+DEC2HEX(DECIMAL,LENGTH,BITS) ;
+ ;  -- Converts a value from decimal representation to
+ I $TR(DECIMAL,"9876543210-")'="" Q "-1 Not a decimal number"
+ N R,S,X
+ S X=DECIMAL,LENGTH=$G(LENGTH),BITS=$G(BITS),S=""
+ I BITS,(BITS<1)!(BITS[".") Q "-2 Not an integer number of bits"
+ I (LENGTH<0)!(LENGTH[".") Q "-3 Invalid length"
+ I X<0 S:BITS X=2**BITS+X S:'BITS X=-X,S="-"
+ S R="" F  S R=$E("0123456789ABCDEF",X#16+1)_R,X=X\16 Q:'X
+ D:LENGTH
+ . F  Q:$L(R)'<LENGTH  S R="0"_R
+ . I S="-",$E(R,1)="0" S R=$E(R,2,$L(R))
+ . Q
+ Q S_R
+DISKFREE(DRIVE) ;
+ ;  -- Finds the amount of free space on the specified drive
+ N X
+ S X=$ZOS(9,DRIVE)
+ I X<0 Q X_" Invalid drive ("_DRIVE_")"
+ Q $P(X,"^",1)*$P(X,"^",2)*$P(X,"^",3)
+DISKSIZE(DRIVE) ;
+ ;  -- Finds the total amount of space on the specified drive
+ N X
+ S X=$ZOS(9,DRIVE)
+ I X<0 Q X_" Invalid drive ("_DRIVE_")"
+ Q $P(X,"^",1)*$P(X,"^",4)*$P(X,"^",3)
+HEX2DEC(HEXA,LENGTH,BITS) ;
+ ;  -- Converts a value from hexadecimal representation to
+ S HEXA=$TR(HEXA,"ABCDEFHX","abcdefhx"),LENGTH=$G(LENGTH),BITS=$G(BITS)
+ I BITS,(BITS<1)!(BITS[".") Q "-2 Not an integer number of bits"
+ I (LENGTH<0)!(LENGTH[".") Q "-3 Invalid length"
+ N B,R,S,X
+ S:$E(HEXA,1,2)="0x" HEXA=$E(HEXA,3,$L(HEXA))
+ S:$E(HEXA,1)="x" HEXA=$E(HEXA,2,$L(HEXA))
+ S:$E(HEXA,$L(HEXA))="h" HEXA=$E(HEXA,1,$L(HEXA)-1)
+ S X=HEXA
+ S S="" S:$E(X,1)="-" S="-",X=$E(X,2,$L(X))
+ I $TR(X,"fedcba9876543210")'="" Q "-1 Not a hexadecimal number"
+ S:BITS X=$E(X,$L(X)-(BITS\4)+1,$L(X))
+ S R=0 F  S R=R*16+$F("0123456789abcdef",$E(X,1))-2,X=$E(X,2,$L(X)) Q:X=""
+ I S="",BITS S B=2**(BITS-1) S:R>B R=$TR(R-B-B,"-"),S="-"
+ D:LENGTH
+ . F  Q:$L(R)'<LENGTH  S R="0"_R
+ . I S="-",$E(R,1)="0" S R=$E(R,2,$L(R))
+ . Q
+ Q S_R
+HOSTCMD(CMD,OUT,ERR,DONTWAIT,DEBUG) N CMDO,DIR,NAM,SERR,SOUT,X
+ S NAM="\d"_$J
+ S DIR=$G(^MAGDICOM(2006.563,1,"SCRATCH"),"c:\temp")
+ S SOUT=DIR_NAM_".out",SERR=DIR_NAM_".err"
+ S X=$$DEL^MAGOSDIR(SOUT) ; del DOS redirect output file
+ S X=$$DEL^MAGOSDIR(SERR) ; del DOS redirect error file
+ S CMDO=CMD_" 1>"_SOUT_" 2>"_SERR
+ K OUT,ERR
+ N MODE
+ S MODE=$S($G(DEBUG):"CONSOLE",1:"HIDE")
+ I $G(DONTWAIT) S X=$$JOB^%HOSTCMD(CMD,MODE)
+ E  D
+ . S X=$$JOBWAIT^%HOSTCMD(CMDO,MODE)
+ . D GETFILE^MAGOSDIR(SOUT,.OUT)
+ . D GETFILE^MAGOSDIR(SERR,.ERR)
+ Q X
+LOWER(TEXT) ;
+ ;  -- Returns the lower case only representation of TEXT
+ ;     LO = same text, with all upper case converted to lower case
+ N A,LO,UP
+ S LO="abcdefghijklmnopqrstuvwyxz"
+ S UP="ABCDEFGHIJKLMNOPQRSTUVWYXZ"
+ F A=192:1:221 S UP=UP_$C(A),LO=LO_$C(A+32)
+ Q $TR(TEXT,UP,LO)
+MATCH(WILDCARD,STRUCTUR,FOUND) N ADD,C,LOOP,L1,L9,SEEK,X,Y
+ ;  -- Scans a structure,
+ ;     reports entries in @STRUCTUR that match WILDCARD;
+ ;     the result is reported in local array @FOUND
+ S ADD=1,WILDCARD=$TR(WILDCARD,"+"),C=0
+ I $E(WILDCARD,1)="-" S ADD=0,WILDCARD=$E(WILDCARD,2,$L(WILDCARD))
+ S X=$TR(WILDCARD,"?*"),L1=$P(X,"-",1),L9=$P(X,"-",2)
+ I WILDCARD["-",L1_"-"_L9'=WILDCARD Q "-1 Improper wildcard "_WILDCARD
+ S:WILDCARD'["-" L1=$P($P(WILDCARD,"?",1),"*",1),L9=L1_"~"
+ I L1=WILDCARD D  Q C
+ . S LOOP=L1
+ . I ADD,$D(@STRUCTUR) S @FOUND="" Q
+ . K @FOUND
+ . Q
+ S:WILDCARD["-" WILDCARD="*"
+ S LOOP=L1 F  D  S LOOP=$O(@STRUCTUR) Q:LOOP=""  Q:LOOP]]L9
+ . Q:LOOP=""  Q:'$D(@STRUCTUR)
+ . Q:'$$MATCH1(LOOP,WILDCARD)
+ . S C=C+1
+ . I ADD S @FOUND="" Q
+ . K @FOUND
+ . Q
+ Q C
+MATCH1(X,Y) N I,M
+ F  Q:X=""  Q:Y=""  D
+ . I $E(X,1)=$E(Y,1) S X=$E(X,2,$L(X)),Y=$E(Y,2,$L(Y)) Q
+ . I $E(Y,1)="?" S X=$E(X,2,$L(X)),Y=$E(Y,2,$L(Y)) Q
+ . I $E(Y,1)="*" D  Q:M
+ . . I Y="*" S (X,Y)="",M=1 Q
+ . . S Y=$E(Y,2,$L(Y)),M=0
+ . . F I=1:1:$L(X) I $$MATCH1($E(X,I,$L(X)),Y) S M=1,X=$E(X,I,$L(X)) Q
+ . . Q
+ . S X="!",Y=""
+ . Q
+ S:$TR(Y,"*")="" Y="" Q:X'="" 0 Q:Y'="" 0
+ Q 1
+MATCHD(WILDCARD,STRUCTUR,FOUND) N C,LOOP,L1,L9,SEEK,X,Y
+ ;  -- Scans a structure,
+ ;     reports entries in @STRUCTUR that match WILDCARD;
+ ;     the result is reported in local array @FOUND
+ S C=0
+ S L1=$P($P(WILDCARD,"?",1),"*",1),L9=L1_"~"
+ I L1=WILDCARD D  Q C
+ . S LOOP=L1
+ . I $D(@STRUCTUR) S @FOUND="" Q
+ . Q
+ S LOOP=L1 F  D  S LOOP=$O(@STRUCTUR) Q:LOOP=""  Q:LOOP]]L9
+ . Q:LOOP=""  Q:'$D(@STRUCTUR)
+ . Q:'$$MATCH1(LOOP,WILDCARD)
+ . S C=C+1
+ . S @FOUND=""
+ . Q
+ Q C
+MUMPS() N M,O,V1,V2
+ ; Returns information about the operating platform
+ S (M,V1,O,V2)="?"
+ S M="MSM",V1=$P($ZV,"ersion ",2),O=$P($P($ZV,"for ",2),",",1),V2=$ZOS(4)
+ Q M_"^"_V1_"^"_O_"^"_V2
+UPPER(TEXT) ;
+ ;  -- Returns the upper case only representation of TEXT
+ ;     UP = same text, with all lower case converted to upper case
+ N A,LO,UP
+ S LO="abcdefghijklmnopqrstuvwyxz"
+ S UP="ABCDEFGHIJKLMNOPQRSTUVWYXZ"
+ F A=192:1:221 S UP=UP_$C(A),LO=LO_$C(A+32)
+ Q $TR(TEXT,LO,UP)
+ZLOAD(ROUTINE) ;
+ ;   -- Returns the code to display the text of the routine
+ ;      whose name is stored in local variable ROUTINE
+ Q "N I,T F I=1:1 S T=$T(+I^@ROUTINE) Q:T=""""  W T,!"
+ZSAVE(ROUTINE) ;
+ ;   -- Returns the code to read a program from the current device
+ ;      and store is as the routine whose name is stored in local
+ ;      variable ROUTINE
+ Q "N C,T S C=$T(+0) ZR  F  R T ZI:T'="""" $TR(T,$C(9),"" "") I T="""" ZS @ROUTINE ZL:C'="""" @C QUIT"
+MSMERROR(X) ; check for error
+ I X'<0 Q X ; no error
+ N T
+ S T=$P($T(@-X),";;",2) S:T="" T="Unknown Error Code"
+ Q X_" ("_T_")" ; error
+ ;
+1 ;;Function number is invalid
+2 ;;File not found
+3 ;;Path not found or invalid
+4 ;;Too many open files
+5 ;;Access denied
+6 ;;Handle is invalid
+7 ;;Memory control blocks destroyed
+8 ;;Insufficient memory
+9 ;;Memory block address invalid
+10 ;;Environment invalid
+11 ;;Format invalid
+12 ;;Access code invalid
+13 ;;Data invalid
+14 ;;Unknown unit
+15 ;;Disk drive invalid
+16 ;;Attempt to remove the current directory
+17 ;;Not same device
+18 ;;No more files
+19 ;;Disk write-protected
+20 ;;Unit unknown
+21 ;;Drive not ready
+22 ;;Unknown command
+23 ;;CRC error
+24 ;;Bad request structure length
+25 ;;Seek error
+26 ;;Unknown media type
+27 ;;Sector not found
+28 ;;Printer out of paper
+29 ;;Write fault
+30 ;;Read fault
+31 ;;General failure
+32 ;;Sharing violation
+33 ;;Lock violation
+34 ;;Disk change invalid
+35 ;;FCB is unavailable
+53 ;;The network path was not found
+80 ;;File already exists
+82 ;;Cannot make directory
+83 ;;Critical error
+112 ;;There is not enough space on the disk
+256 ;;Write-protect error
+257 ;;Unknown unit
+258 ;;Drive not ready
+259 ;;Unknown command
+260 ;;CRC error
+261 ;;Bad request structure length
+262 ;;Seek error
+263 ;;Unknown media type
+264 ;;Sector not found
+265 ;;Printer out of paper
+266 ;;Write fault
+267 ;;Read fault
+268 ;;General failure
+1326 ;;Logon failure: unknown user name or bad password.
+
+

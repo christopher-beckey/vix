@@ -1,0 +1,3586 @@
+KIDS Distribution saved on Aug 02, 2013@13:11:37
+Full DD Extract from GOLD - SEQ89_P118
+**KIDS**:MAG*3.0*999*DD*2005^
+
+**INSTALL NAME**
+MAG*3.0*999*DD*2005
+"BLD",9619,0)
+MAG*3.0*999*DD*2005^IMAGING^0^3130802^y
+"BLD",9619,4,0)
+^9.64PA^2005^1
+"BLD",9619,4,2005,0)
+2005
+"BLD",9619,4,2005,222)
+y^y^f^^^^n
+"BLD",9619,4,"B",2005,2005)
+
+"BLD",9619,6.3)
+1
+"BLD",9619,"KRN",0)
+^9.67PA^779.2^20
+"BLD",9619,"KRN",.4,0)
+.4
+"BLD",9619,"KRN",.401,0)
+.401
+"BLD",9619,"KRN",.402,0)
+.402
+"BLD",9619,"KRN",.403,0)
+.403
+"BLD",9619,"KRN",.5,0)
+.5
+"BLD",9619,"KRN",.84,0)
+.84
+"BLD",9619,"KRN",3.6,0)
+3.6
+"BLD",9619,"KRN",3.8,0)
+3.8
+"BLD",9619,"KRN",9.2,0)
+9.2
+"BLD",9619,"KRN",9.8,0)
+9.8
+"BLD",9619,"KRN",19,0)
+19
+"BLD",9619,"KRN",19.1,0)
+19.1
+"BLD",9619,"KRN",101,0)
+101
+"BLD",9619,"KRN",409.61,0)
+409.61
+"BLD",9619,"KRN",771,0)
+771
+"BLD",9619,"KRN",779.2,0)
+779.2
+"BLD",9619,"KRN",870,0)
+870
+"BLD",9619,"KRN",8989.51,0)
+8989.51
+"BLD",9619,"KRN",8989.52,0)
+8989.52
+"BLD",9619,"KRN",8994,0)
+8994
+"BLD",9619,"KRN","B",.4,.4)
+
+"BLD",9619,"KRN","B",.401,.401)
+
+"BLD",9619,"KRN","B",.402,.402)
+
+"BLD",9619,"KRN","B",.403,.403)
+
+"BLD",9619,"KRN","B",.5,.5)
+
+"BLD",9619,"KRN","B",.84,.84)
+
+"BLD",9619,"KRN","B",3.6,3.6)
+
+"BLD",9619,"KRN","B",3.8,3.8)
+
+"BLD",9619,"KRN","B",9.2,9.2)
+
+"BLD",9619,"KRN","B",9.8,9.8)
+
+"BLD",9619,"KRN","B",19,19)
+
+"BLD",9619,"KRN","B",19.1,19.1)
+
+"BLD",9619,"KRN","B",101,101)
+
+"BLD",9619,"KRN","B",409.61,409.61)
+
+"BLD",9619,"KRN","B",771,771)
+
+"BLD",9619,"KRN","B",779.2,779.2)
+
+"BLD",9619,"KRN","B",870,870)
+
+"BLD",9619,"KRN","B",8989.51,8989.51)
+
+"BLD",9619,"KRN","B",8989.52,8989.52)
+
+"BLD",9619,"KRN","B",8994,8994)
+
+"FIA",2005)
+IMAGE
+"FIA",2005,0)
+^MAG(2005,
+"FIA",2005,0,0)
+2005I
+"FIA",2005,0,1)
+y^y^f^^^^n
+"FIA",2005,0,10)
+
+"FIA",2005,0,11)
+
+"FIA",2005,0,"RLRO")
+
+"FIA",2005,0,"VR")
+3.0^MAG
+"FIA",2005,2005)
+0
+"FIA",2005,2005.01)
+0
+"FIA",2005,2005.0106)
+0
+"FIA",2005,2005.011)
+0
+"FIA",2005,2005.0111)
+0
+"FIA",2005,2005.04)
+0
+"FIA",2005,2005.05)
+0
+"FIA",2005,2005.099)
+0
+"FIA",2005,2005.51)
+0
+"IX",2005,2005,"AD",0)
+2005^AD^Created by Patch 77^R^^F^IR^I^2005^^^^^S
+"IX",2005,2005,"AD",1)
+S ^MAG(2005,"AD",X,DA)=""
+"IX",2005,2005,"AD",2)
+K ^MAG(2005,"AD",X,DA)
+"IX",2005,2005,"AD",2.5)
+K ^MAG(2005,"AD")
+"IX",2005,2005,"AD",11.1,0)
+^.114IA^1^1
+"IX",2005,2005,"AD",11.1,1,0)
+1^F^2005^7^^1^F
+"IX",2005,2005,"AD",11.1,1,2)
+S X=$P(X,".")
+"IX",2005,2005,"AD",11.1,1,3)
+
+"IX",2005,2005,"ADTDUZ",0)
+2005^ADTDUZ^APP-DATE-USER-SITE^R^^R^IR^I^2005^^^^^S
+"IX",2005,2005,"ADTDUZ",.1,0)
+^^5^5^3110615^^^
+"IX",2005,2005,"ADTDUZ",.1,1,0)
+This cross reference optimizes the summation of counts of images captured 
+"IX",2005,2005,"ADTDUZ",.1,2,0)
+by capture application, by date, by user, by site.
+"IX",2005,2005,"ADTDUZ",.1,3,0)
+ 
+"IX",2005,2005,"ADTDUZ",.1,4,0)
+The SET CONDITION and KILL CONDITION ensure that this cross reference is 
+"IX",2005,2005,"ADTDUZ",.1,5,0)
+set only for standalone images and group parents, not for child images.
+"IX",2005,2005,"ADTDUZ",1)
+S ^MAG(2005,"ADTDUZ",$E(X(1),1,15),$E(X(2),1,30),$E(X(3),1,15),$E(X(4),1,15),DA)=""
+"IX",2005,2005,"ADTDUZ",1.4)
+S X=(X(5)="")
+"IX",2005,2005,"ADTDUZ",2)
+K ^MAG(2005,"ADTDUZ",$E(X(1),1,15),$E(X(2),1,30),$E(X(3),1,15),$E(X(4),1,15),DA)
+"IX",2005,2005,"ADTDUZ",2.4)
+S X=(X(5)="")
+"IX",2005,2005,"ADTDUZ",2.5)
+K ^MAG(2005,"ADTDUZ")
+"IX",2005,2005,"ADTDUZ",11.1,0)
+^.114IA^5^5
+"IX",2005,2005,"ADTDUZ",11.1,1,0)
+2^F^2005^7^30^2^F
+"IX",2005,2005,"ADTDUZ",11.1,1,2)
+S X=X\1
+"IX",2005,2005,"ADTDUZ",11.1,2,0)
+3^F^2005^8^15^3^F
+"IX",2005,2005,"ADTDUZ",11.1,3,0)
+4^F^2005^.05^15^4^F
+"IX",2005,2005,"ADTDUZ",11.1,4,0)
+1^F^2005^8.1^15^1^F
+"IX",2005,2005,"ADTDUZ",11.1,5,0)
+5^F^2005^14^^^F
+"IX",2005,2005,"ADTDUZ",11.1,5,3)
+
+"IX",2005,2005,"AGPD",0)
+2005^AGPD^Deleted group members^R^^R^IR^I^2005^^^^^S
+"IX",2005,2005,"AGPD",.1,0)
+^^11^11^3081219^
+"IX",2005,2005,"AGPD",.1,1,0)
+This cross-reference lets the user easily get the
+"IX",2005,2005,"AGPD",.1,2,0)
+list of deleted members of the group. It has the
+"IX",2005,2005,"AGPD",.1,3,0)
+following structure:
+"IX",2005,2005,"AGPD",.1,4,0)
+ 
+"IX",2005,2005,"AGPD",.1,5,0)
+  ^MAG(2005,"AGPD",GroupIEN,DeletedMemberIEN)="" 
+"IX",2005,2005,"AGPD",.1,6,0)
+ 
+"IX",2005,2005,"AGPD",.1,7,0)
+This cross-reference will be used after the IMAGE
+"IX",2005,2005,"AGPD",.1,8,0)
+AUDIT file (#2005.1) is eliminated and deleted
+"IX",2005,2005,"AGPD",.1,9,0)
+image entries are merged into the file #2005.
+"IX",2005,2005,"AGPD",.1,10,0)
+ 
+"IX",2005,2005,"AGPD",.1,11,0)
+Added by the patch MAG*3*93.
+"IX",2005,2005,"AGPD",1)
+S ^MAG(2005,"AGPD",X(1),DA)=""
+"IX",2005,2005,"AGPD",1.4)
+S X=($G(X2(2))=12)
+"IX",2005,2005,"AGPD",2)
+K ^MAG(2005,"AGPD",X(1),DA)
+"IX",2005,2005,"AGPD",2.5)
+K ^MAG(2005,"AGPD")
+"IX",2005,2005,"AGPD",11.1,0)
+^.114IA^2^2
+"IX",2005,2005,"AGPD",11.1,1,0)
+1^F^2005^14^^1^F
+"IX",2005,2005,"AGPD",11.1,2,0)
+2^F^2005^113^^^
+"IX",2005,2005,"APDT",0)
+2005^APDT^Procedure Date/Time^R^^R^IR^I^2005^^^^^S
+"IX",2005,2005,"APDT",.1,0)
+^^6^6^3081006^
+"IX",2005,2005,"APDT",.1,1,0)
+This index sorts independent and parent images by
+"IX",2005,2005,"APDT",.1,2,0)
+their procedure dates. Any record that is a child
+"IX",2005,2005,"APDT",.1,3,0)
+of a parent (i.e. member of a group) is NOT
+"IX",2005,2005,"APDT",.1,4,0)
+included in the index.
+"IX",2005,2005,"APDT",.1,5,0)
+ 
+"IX",2005,2005,"APDT",.1,6,0)
+Added by the patch MAG*3*93.
+"IX",2005,2005,"APDT",1)
+S ^MAG(2005,"APDT",X(2),DA)=""
+"IX",2005,2005,"APDT",1.4)
+S X='$G(X(1))
+"IX",2005,2005,"APDT",2)
+K ^MAG(2005,"APDT",X(2),DA)
+"IX",2005,2005,"APDT",2.5)
+K ^MAG(2005,"APDT")
+"IX",2005,2005,"APDT",11.1,0)
+^.114IA^2^2
+"IX",2005,2005,"APDT",11.1,1,0)
+1^F^2005^14^^^
+"IX",2005,2005,"APDT",11.1,1,3)
+
+"IX",2005,2005,"APDT",11.1,2,0)
+2^F^2005^15^^1^F
+"IX",2005,2005,"APDT",11.1,2,3)
+
+"IX",2005,2005,"AUDIT100",0)
+2005^AUDIT100^Tracks changes of image fields^MU^^R^I^I^2005^^^^^A
+"IX",2005,2005,"AUDIT100",.1,0)
+^^5^5^3080626^
+"IX",2005,2005,"AUDIT100",.1,1,0)
+When values of the referenced fields are updated,
+"IX",2005,2005,"AUDIT100",.1,2,0)
+this "index" saves the old values to the AUDIT
+"IX",2005,2005,"AUDIT100",.1,3,0)
+multiple (99).
+"IX",2005,2005,"AUDIT100",.1,4,0)
+ 
+"IX",2005,2005,"AUDIT100",.1,5,0)
+Added by the patch MAG*3*93.
+"IX",2005,2005,"AUDIT100",1)
+D AUDIT^MAGUXRF(2005,DA_",",";110;112;113;113.3",2005.099,.X1,.X2)
+"IX",2005,2005,"AUDIT100",1.4)
+
+"IX",2005,2005,"AUDIT100",2)
+Q
+"IX",2005,2005,"AUDIT100",11.1,0)
+^.114IA^5^5
+"IX",2005,2005,"AUDIT100",11.1,1,0)
+1^F^2005^.01^^^
+"IX",2005,2005,"AUDIT100",11.1,1,3)
+
+"IX",2005,2005,"AUDIT100",11.1,2,0)
+2^F^2005^110^^^
+"IX",2005,2005,"AUDIT100",11.1,2,3)
+
+"IX",2005,2005,"AUDIT100",11.1,3,0)
+3^F^2005^112^^^
+"IX",2005,2005,"AUDIT100",11.1,3,3)
+
+"IX",2005,2005,"AUDIT100",11.1,4,0)
+4^F^2005^113^^^
+"IX",2005,2005,"AUDIT100",11.1,4,3)
+
+"IX",2005,2005,"AUDIT100",11.1,5,0)
+5^F^2005^113.3^^^
+"IX",2005,2005,"AUDIT100",11.1,5,3)
+
+"IX",2005,2005,"AUDIT2",0)
+2005^AUDIT2^Tracks changes of image fields^MU^^R^I^I^2005^^^^^A
+"IX",2005,2005,"AUDIT2",.1,0)
+^^5^5^3080626^
+"IX",2005,2005,"AUDIT2",.1,1,0)
+When values of the referenced fields are updated,
+"IX",2005,2005,"AUDIT2",.1,2,0)
+this "index" saves the old values to the AUDIT
+"IX",2005,2005,"AUDIT2",.1,3,0)
+multiple (99).
+"IX",2005,2005,"AUDIT2",.1,4,0)
+ 
+"IX",2005,2005,"AUDIT2",.1,5,0)
+Added by the patch MAG*3*93.
+"IX",2005,2005,"AUDIT2",1)
+D AUDIT^MAGUXRF(2005,DA_",",";10;6;15",2005.099,.X1,.X2)
+"IX",2005,2005,"AUDIT2",1.4)
+
+"IX",2005,2005,"AUDIT2",2)
+Q
+"IX",2005,2005,"AUDIT2",11.1,0)
+^.114IA^4^4
+"IX",2005,2005,"AUDIT2",11.1,1,0)
+1^F^2005^.01^^^
+"IX",2005,2005,"AUDIT2",11.1,1,3)
+
+"IX",2005,2005,"AUDIT2",11.1,2,0)
+2^F^2005^10^^^
+"IX",2005,2005,"AUDIT2",11.1,2,3)
+
+"IX",2005,2005,"AUDIT2",11.1,3,0)
+3^F^2005^6^^^
+"IX",2005,2005,"AUDIT2",11.1,3,3)
+
+"IX",2005,2005,"AUDIT2",11.1,4,0)
+4^F^2005^15^^^
+"IX",2005,2005,"AUDIT2",11.1,4,3)
+
+"IX",2005,2005,"AUDIT40",0)
+2005^AUDIT40^Tracks changes of image fields^MU^^R^I^I^2005^^^^^A
+"IX",2005,2005,"AUDIT40",.1,0)
+^^5^5^3080626^
+"IX",2005,2005,"AUDIT40",.1,1,0)
+When values of the referenced fields are updated,
+"IX",2005,2005,"AUDIT40",.1,2,0)
+this "index" saves the old values to the AUDIT
+"IX",2005,2005,"AUDIT40",.1,3,0)
+multiple (99).
+"IX",2005,2005,"AUDIT40",.1,4,0)
+ 
+"IX",2005,2005,"AUDIT40",.1,5,0)
+Added by the patch MAG*3*93.
+"IX",2005,2005,"AUDIT40",1)
+D AUDIT^MAGUXRF(2005,DA_",",";40;42;43;44;45",2005.099,.X1,.X2)
+"IX",2005,2005,"AUDIT40",1.4)
+
+"IX",2005,2005,"AUDIT40",2)
+Q
+"IX",2005,2005,"AUDIT40",11.1,0)
+^.114IA^6^6
+"IX",2005,2005,"AUDIT40",11.1,1,0)
+1^F^2005^.01^^^
+"IX",2005,2005,"AUDIT40",11.1,1,3)
+
+"IX",2005,2005,"AUDIT40",11.1,2,0)
+2^F^2005^40^^^
+"IX",2005,2005,"AUDIT40",11.1,2,3)
+
+"IX",2005,2005,"AUDIT40",11.1,3,0)
+3^F^2005^42^^^
+"IX",2005,2005,"AUDIT40",11.1,3,3)
+
+"IX",2005,2005,"AUDIT40",11.1,4,0)
+4^F^2005^43^^^
+"IX",2005,2005,"AUDIT40",11.1,4,3)
+
+"IX",2005,2005,"AUDIT40",11.1,5,0)
+5^F^2005^44^^^
+"IX",2005,2005,"AUDIT40",11.1,5,3)
+
+"IX",2005,2005,"AUDIT40",11.1,6,0)
+6^F^2005^45^^^
+"IX",2005,2005,"AUDIT40",11.1,6,3)
+
+"IX",2005,2005,"D",0)
+2005^D^INSTUTION(AKA ACQUISITION SITE)^R^^F^IR^I^2005^^^^^LS
+"IX",2005,2005,"D",1)
+S ^MAG(2005,"D",X,DA)=""
+"IX",2005,2005,"D",2)
+K ^MAG(2005,"D",X,DA)
+"IX",2005,2005,"D",2.5)
+K ^MAG(2005,"D")
+"IX",2005,2005,"D",11.1,0)
+^.114IA^1^1
+"IX",2005,2005,"D",11.1,1,0)
+1^F^2005^.05^^1^F
+"IX",2005,2005,"D",11.1,1,3)
+
+"IX",2005,2005,"P",0)
+2005^P^UID for corrected images^MU^^F^IR^I^2005^^^^^LS
+"IX",2005,2005,"P",.1,0)
+^^2^2^3041109^
+"IX",2005,2005,"P",.1,1,0)
+This cross-reference includes SOP Instance UIDs for corrected images
+"IX",2005,2005,"P",.1,2,0)
+in the cross-reference on the original SOP Instance UIDs.
+"IX",2005,2005,"P",1)
+S ^MAG(2005,"P",X,DA)=""
+"IX",2005,2005,"P",2)
+K ^MAG(2005,"P",X,DA)
+"IX",2005,2005,"P",2.5)
+K ^MAG(2005,"P")
+"IX",2005,2005,"P",11.1,0)
+^.114IA^1^1
+"IX",2005,2005,"P",11.1,1,0)
+1^F^2005^252^^1^F
+"IX",2005,2005,"P",11.1,1,3)
+
+"IX",2005,2005,"ROUTE",0)
+2005^ROUTE^Which files were routed to where^R^^R^IR^W^2005.0106^^^^^LS
+"IX",2005,2005,"ROUTE",.1,0)
+^^4^4^3000307^
+"IX",2005,2005,"ROUTE",.1,1,0)
+This cross reference keeps track of which files were routed
+"IX",2005,2005,"ROUTE",.1,2,0)
+to which remote locations.
+"IX",2005,2005,"ROUTE",.1,3,0)
+This cross reference is automatically cleaned up when entries are
+"IX",2005,2005,"ROUTE",.1,4,0)
+removed from this multiple during the daily purge for the remote location.
+"IX",2005,2005,"ROUTE",1)
+S ^MAG(2005,"ROUTE",X(1),X(2),DA(1),DA)=""
+"IX",2005,2005,"ROUTE",2)
+K ^MAG(2005,"ROUTE",X(1),X(2),DA(1),DA)
+"IX",2005,2005,"ROUTE",2.5)
+K ^MAG(2005,"ROUTE")
+"IX",2005,2005,"ROUTE",11.1,0)
+^.114IA^2^2
+"IX",2005,2005,"ROUTE",11.1,1,0)
+1^F^2005.0106^2^^1^F
+"IX",2005,2005,"ROUTE",11.1,1,3)
+
+"IX",2005,2005,"ROUTE",11.1,2,0)
+2^F^2005.0106^.01^^2^F
+"IX",2005,2005,"ROUTE",11.1,2,3)
+
+"IX",2005,2005,"SERIESUID",0)
+2005^SERIESUID^Images sorted by Series UID^R^^F^IR^I^2005^^^^^LS
+"IX",2005,2005,"SERIESUID",.1,0)
+^^2^2^3050803^
+"IX",2005,2005,"SERIESUID",.1,1,0)
+This cross-reference keeps track of which images have
+"IX",2005,2005,"SERIESUID",.1,2,0)
+which Series UID.
+"IX",2005,2005,"SERIESUID",1)
+S ^MAG(2005,"SERIESUID",X,DA)=""
+"IX",2005,2005,"SERIESUID",2)
+K ^MAG(2005,"SERIESUID",X,DA)
+"IX",2005,2005,"SERIESUID",2.5)
+K ^MAG(2005,"SERIESUID")
+"IX",2005,2005,"SERIESUID",11.1,0)
+^.114IA^1^1
+"IX",2005,2005,"SERIESUID",11.1,1,0)
+1^F^2005^253^^1^F
+"IX",2005,2005,"SERIESUID",11.1,1,3)
+
+"IX",2005,2005,"f",0)
+2005^f^FILEREF minus the extention^MU^^F^IR^I^2005^^^^^LS
+"IX",2005,2005,"f",1)
+S ^MAG(2005,"F",$P($E(X,1,60),"."),DA)=""
+"IX",2005,2005,"f",2)
+K ^MAG(2005,"F",$P($E(X,1,60),"."),DA)
+"IX",2005,2005,"f",11.1,0)
+^.114IA^1^1
+"IX",2005,2005,"f",11.1,1,0)
+1^F^2005^1^^1^F
+"IX",2005,2005,"f",11.1,1,3)
+
+"IX",2005,2005.099,"FD",0)
+2005.099^FD^Field Number & Date/Time^R^^R^IR^I^2005.099^^^^^LS
+"IX",2005,2005.099,"FD",.1,0)
+^^5^5^3081217^
+"IX",2005,2005.099,"FD",.1,1,0)
+This cross-reference is used for searching
+"IX",2005,2005.099,"FD",.1,2,0)
+previous values of audited fields. See the 
+"IX",2005,2005.099,"FD",.1,3,0)
+MAGUTL04 routine for more details.
+"IX",2005,2005.099,"FD",.1,4,0)
+ 
+"IX",2005,2005.099,"FD",.1,5,0)
+Added by the patch MAG*3*93.
+"IX",2005,2005.099,"FD",1)
+S ^MAG(2005,DA(1),99,"FD",X(1),X(2),DA)=""
+"IX",2005,2005.099,"FD",2)
+K ^MAG(2005,DA(1),99,"FD",X(1),X(2),DA)
+"IX",2005,2005.099,"FD",2.5)
+K ^MAG(2005,DA(1),99,"FD")
+"IX",2005,2005.099,"FD",11.1,0)
+^.114IA^2^2
+"IX",2005,2005.099,"FD",11.1,1,0)
+1^F^2005.099^.02^^1^F
+"IX",2005,2005.099,"FD",11.1,2,0)
+2^F^2005.099^.01^^2^F
+"MBREQ")
+0
+"PKG",454,-1)
+1^1
+"PKG",454,0)
+IMAGING^MAG^Imaging-V1 to release 
+"PKG",454,20,0)
+^9.402P^^
+"PKG",454,22,0)
+^9.49I^1^1
+"PKG",454,22,1,0)
+3.0^3020319^3020517^126
+"PKG",454,22,1,"PAH",1,0)
+999^3130802
+"QUES","XPF1",0)
+Y
+"QUES","XPF1","??")
+^D REP^XPDH
+"QUES","XPF1","A")
+Shall I write over your |FLAG| File
+"QUES","XPF1","B")
+YES
+"QUES","XPF1","M")
+D XPF1^XPDIQ
+"QUES","XPF2",0)
+Y
+"QUES","XPF2","??")
+^D DTA^XPDH
+"QUES","XPF2","A")
+Want my data |FLAG| yours
+"QUES","XPF2","B")
+YES
+"QUES","XPF2","M")
+D XPF2^XPDIQ
+"QUES","XPI1",0)
+YO
+"QUES","XPI1","??")
+^D INHIBIT^XPDH
+"QUES","XPI1","A")
+Want KIDS to INHIBIT LOGONs during the install
+"QUES","XPI1","B")
+NO
+"QUES","XPI1","M")
+D XPI1^XPDIQ
+"QUES","XPM1",0)
+PO^VA(200,:EM
+"QUES","XPM1","??")
+^D MG^XPDH
+"QUES","XPM1","A")
+Enter the Coordinator for Mail Group '|FLAG|'
+"QUES","XPM1","B")
+
+"QUES","XPM1","M")
+D XPM1^XPDIQ
+"QUES","XPO1",0)
+Y
+"QUES","XPO1","??")
+^D MENU^XPDH
+"QUES","XPO1","A")
+Want KIDS to Rebuild Menu Trees Upon Completion of Install
+"QUES","XPO1","B")
+NO
+"QUES","XPO1","M")
+D XPO1^XPDIQ
+"QUES","XPZ1",0)
+Y
+"QUES","XPZ1","??")
+^D OPT^XPDH
+"QUES","XPZ1","A")
+Want to DISABLE Scheduled Options, Menu Options, and Protocols
+"QUES","XPZ1","B")
+NO
+"QUES","XPZ1","M")
+D XPZ1^XPDIQ
+"QUES","XPZ2",0)
+Y
+"QUES","XPZ2","??")
+^D RTN^XPDH
+"QUES","XPZ2","A")
+Want to MOVE routines to other CPUs
+"QUES","XPZ2","B")
+NO
+"QUES","XPZ2","M")
+D XPZ2^XPDIQ
+"SEC","^DIC",2005,2005,0,"DD")
+@
+"SEC","^DIC",2005,2005,0,"DEL")
+@
+"SEC","^DIC",2005,2005,0,"LAYGO")
+@
+"SEC","^DIC",2005,2005,0,"RD")
+@
+"SEC","^DIC",2005,2005,0,"WR")
+@
+"VER")
+8.0^22.0
+"^DD",2005,2005,0)
+FIELD^^111^73
+"^DD",2005,2005,0,"DDA")
+N
+"^DD",2005,2005,0,"DT")
+3001107
+"^DD",2005,2005,0,"ID",5)
+S %I=Y,Y=$S('$D(^(0)):"",$D(^DPT(+$P(^(0),U,7),0))#2:$P(^(0),U,1),1:""),C=$P(^DD(2,.01,0),U,2) D Y^DIQ:Y]"" W "   ",Y,@("$E("_DIC_"%I,0),0)") S Y=%I K %I
+"^DD",2005,2005,0,"IX","AC",2005,5)
+
+"^DD",2005,2005,0,"IX","AEXPORT",2005,19)
+
+"^DD",2005,2005,0,"IX","AIQ",2005,13)
+
+"^DD",2005,2005,0,"IX","APPXDT",2005,5)
+
+"^DD",2005,2005,0,"IX","APPXDT5",2005,15)
+
+"^DD",2005,2005,0,"IX","APPXDT6",2005,6)
+
+"^DD",2005,2005,0,"IX","ASTRSN",2005,113.3)
+
+"^DD",2005,2005,0,"IX","ATRKID",2005,108)
+
+"^DD",2005,2005,0,"IX","B",2005,.01)
+
+"^DD",2005,2005,0,"IX","P",2005,60)
+
+"^DD",2005,2005,0,"NM","IMAGE")
+
+"^DD",2005,2005,0,"PT",3.92005,.01)
+
+"^DD",2005,2005,0,"PT",4.2995,3)
+
+"^DD",2005,2005,0,"PT",63.22005,.01)
+
+"^DD",2005,2005,0,"PT",63.28,.01)
+
+"^DD",2005,2005,0,"PT",63.45,.01)
+
+"^DD",2005,2005,0,"PT",63.82005,.01)
+
+"^DD",2005,2005,0,"PT",63.92005,.01)
+
+"^DD",2005,2005,0,"PT",74.02005,.01)
+
+"^DD",2005,2005,0,"PT",130.02005,.01)
+
+"^DD",2005,2005,0,"PT",691.02005,.01)
+
+"^DD",2005,2005,0,"PT",691.12005,.01)
+
+"^DD",2005,2005,0,"PT",691.52005,.01)
+
+"^DD",2005,2005,0,"PT",694.02005,.01)
+
+"^DD",2005,2005,0,"PT",699.02005,.01)
+
+"^DD",2005,2005,0,"PT",699.52005,.01)
+
+"^DD",2005,2005,0,"PT",701.02005,.01)
+
+"^DD",2005,2005,0,"PT",2005,14)
+
+"^DD",2005,2005,0,"PT",2005.002,.01)
+
+"^DD",2005,2005,0,"PT",2005.031,.01)
+
+"^DD",2005,2005,0,"PT",2005.04,.01)
+
+"^DD",2005,2005,0,"PT",2006.035,.01)
+
+"^DD",2005,2005,0,"PT",2006.563,47)
+
+"^DD",2005,2005,0,"PT",2006.563,73)
+
+"^DD",2005,2005,0,"PT",2006.563,200)
+
+"^DD",2005,2005,0,"PT",2006.574,2)
+
+"^DD",2005,2005,0,"PT",2006.5744,.01)
+
+"^DD",2005,2005,0,"PT",2006.5839,3)
+
+"^DD",2005,2005,0,"PT",2006.59061,.01)
+
+"^DD",2005,2005,0,"PT",2006.82,6)
+
+"^DD",2005,2005,0,"PT",2006.95,3)
+
+"^DD",2005,2005,0,"PT",2006.9613,1)
+
+"^DD",2005,2005,0,"PT",8925.91,.02)
+
+"^DD",2005,2005,0,"VRPK")
+IMAGING
+"^DD",2005,2005,0,"VRRV")
+93,117
+"^DD",2005,2005,.001,0)
+NUMBER^NJ9,0^^ ^K:+X'=X!(X>999999999)!(X<1)!(X?.E1"."1N.N) X
+"^DD",2005,2005,.001,3)
+Type a Number between 1 and 999999, 0 Decimal Digits
+"^DD",2005,2005,.001,21,0)
+^^7^7^3001025^
+"^DD",2005,2005,.001,21,1,0)
+.001 NUMBER Field is the Internal Entry Number of the Image File Entry.
+"^DD",2005,2005,.001,21,2,0)
+i.e. "DA" of the Image File entry.
+"^DD",2005,2005,.001,21,3,0)
+Imaging routines and RPC's use the Image DA for lookups.
+"^DD",2005,2005,.001,21,4,0)
+The Image Files associated with this entry are stored on a Networked Image
+"^DD",2005,2005,.001,21,5,0)
+A name for the Image Files is generated from the Image DA, the 
+"^DD",2005,2005,.001,21,6,0)
+Extension is appropriate to the Type of Image.
+"^DD",2005,2005,.001,21,7,0)
+i.e. I0014432.JPG
+"^DD",2005,2005,.001,"DT")
+2940616
+"^DD",2005,2005,.01,0)
+OBJECT NAME^RF^^0;1^K:X[""""!($A(X)=45) X I $D(X) K:$L(X)>70!($L(X)<3)!'(X'?1P.E) X
+"^DD",2005,2005,.01,1,0)
+^.1
+"^DD",2005,2005,.01,1,1,0)
+2005^B
+"^DD",2005,2005,.01,1,1,1)
+S ^MAG(2005,"B",$E(X,1,60),DA)=""
+"^DD",2005,2005,.01,1,1,2)
+K ^MAG(2005,"B",$E(X,1,60),DA)
+"^DD",2005,2005,.01,3)
+Answer must be 3-70 characters in length.
+"^DD",2005,2005,.01,21,0)
+^.001^3^3^3001010^^^
+"^DD",2005,2005,.01,21,1,0)
+Each object has a natural language name; this usually consists of the
+"^DD",2005,2005,.01,21,2,0)
+patient name, social security number, and object description.  This field
+"^DD",2005,2005,.01,21,3,0)
+is automatically defined by the Imaging software.
+"^DD",2005,2005,.01,"DT")
+3090407
+"^DD",2005,2005,.05,0)
+ACQUISITION SITE^RP4^DIC(4,^100;3^Q
+"^DD",2005,2005,.05,.1)
+Name of Site where Image was Created
+"^DD",2005,2005,.05,3)
+Enter the name of the site where the image was created.
+"^DD",2005,2005,.05,21,0)
+^^7^7^2981013^^^^
+"^DD",2005,2005,.05,21,1,0)
+The 'origin' location is the location where an image is created.
+"^DD",2005,2005,.05,21,2,0)
+For instance, a site like 'St. Louis' may process images for several
+"^DD",2005,2005,.05,21,3,0)
+other locations, such as Topeka, Wichita and Leavenworth.
+"^DD",2005,2005,.05,21,4,0)
+Any reference to a site identifier will return the name of the
+"^DD",2005,2005,.05,21,5,0)
+primary location. For the purpose of finding the 'origin' of images,
+"^DD",2005,2005,.05,21,6,0)
+the more specific sub-site is needed.
+"^DD",2005,2005,.05,21,7,0)
+This field contains the name of this 'sub-site'.
+"^DD",2005,2005,.05,"DT")
+3110615
+"^DD",2005,2005,.06,0)
+EXPORT LOCATION^2005.01PA^^5;0
+"^DD",2005,2005,.06,21,0)
+^^4^4^3011213^
+"^DD",2005,2005,.06,21,1,0)
+This table contains audit information regarding the export locations
+"^DD",2005,2005,.06,21,2,0)
+of file copies generated by the generic carbon copy (GCC)
+"^DD",2005,2005,.06,21,3,0)
+utility.  This utility is used by the Health Eligibility Center
+"^DD",2005,2005,.06,21,4,0)
+functionality.
+"^DD",2005,2005,1,0)
+FILEREF^F^^0;2^K:X[""""!($A(X)=45) X I $D(X) K:$L(X)>30!($L(X)<1) X
+"^DD",2005,2005,1,1,0)
+^.1^^0
+"^DD",2005,2005,1,3)
+Answer must be 1-30 characters in length.
+"^DD",2005,2005,1,21,0)
+^^8^8^3050412^
+"^DD",2005,2005,1,21,1,0)
+This field contains the unique image filename of the image stored on the 
+"^DD",2005,2005,1,21,2,0)
+Vista Imaging file servers.  It is either 12 or 18 characters long.  It 
+"^DD",2005,2005,1,21,3,0)
+contains three elements: the facility's Imaging Namespace, from the 
+"^DD",2005,2005,1,21,4,0)
+Current Namespace field (#.02) of the IMAGING SITE PARAMETERS file 
+"^DD",2005,2005,1,21,5,0)
+(#2006.1), the Image IEN, and padded with zeros if needed, and the 
+"^DD",2005,2005,1,21,6,0)
+extension that indicates the format of the image. Supported formats are 
+"^DD",2005,2005,1,21,7,0)
+stored in the IMAGE FILE TYPES (#2005.021) file.  This field is 
+"^DD",2005,2005,1,21,8,0)
+automatically set by the Imaging software.
+"^DD",2005,2005,1,"DT")
+3050412
+"^DD",2005,2005,2,0)
+DISK & VOLUME, MAGNETIC^P2005.2'^MAG(2005.2,^0;3^Q
+"^DD",2005,2005,2,1,0)
+^.1^^0
+"^DD",2005,2005,2,3)
+Enter the disk name and volume set name where the image will be stored
+"^DD",2005,2005,2,21,0)
+^^7^7^2970721^
+"^DD",2005,2005,2,21,1,0)
+This field gives the path for the network location of the stored image
+"^DD",2005,2005,2,21,2,0)
+(i.e. on which server it resides). After a specified time period during
+"^DD",2005,2005,2,21,3,0)
+which the image is not viewed, the image is deleted from the magnetic
+"^DD",2005,2005,2,21,4,0)
+server but remains available upon request from the jukebox. It takes
+"^DD",2005,2005,2,21,5,0)
+slightly longer to display from the jukebox, but if requested, it is moved
+"^DD",2005,2005,2,21,6,0)
+back to the server until it is no longer being viewed. This field is set
+"^DD",2005,2005,2,21,7,0)
+automatically by the Imaging software.
+"^DD",2005,2005,2,"DT")
+2981112
+"^DD",2005,2005,2.1,0)
+DISK & VOLUME, ABSTRACT^P2005.2'^MAG(2005.2,^0;4^Q
+"^DD",2005,2005,2.1,21,0)
+^^7^7^2970721^
+"^DD",2005,2005,2.1,21,1,0)
+This field points to the path of the network storage location for the
+"^DD",2005,2005,2.1,21,2,0)
+image abstract.  An abstract is a miniature copy of the captured image. If
+"^DD",2005,2005,2.1,21,3,0)
+the parent image has not been viewed during the specified time period (if
+"^DD",2005,2005,2.1,21,4,0)
+there is a jukebox), this file will be deleted along with the parent image
+"^DD",2005,2005,2.1,21,5,0)
+file. Should the abstract be requested for viewing, it will be copied back
+"^DD",2005,2005,2.1,21,6,0)
+onto the server currently being used to write captured images.  This field
+"^DD",2005,2005,2.1,21,7,0)
+is automatically set by the Imaging software.
+"^DD",2005,2005,2.1,"DT")
+2981112
+"^DD",2005,2005,2.2,0)
+DISK & VOLUME, WORM^P2005.2'^MAG(2005.2,^0;5^Q
+"^DD",2005,2005,2.2,21,0)
+^^3^3^2950315^^^
+"^DD",2005,2005,2.2,21,1,0)
+This field is a pointer to the Network Location file giving the jukebox
+"^DD",2005,2005,2.2,21,2,0)
+platter where the image is stored (provided there is a jukebox in the
+"^DD",2005,2005,2.2,21,3,0)
+Imaging System). If it is a WORM, this file can never be deleted.
+"^DD",2005,2005,2.2,"DT")
+2981112
+"^DD",2005,2005,3,0)
+OBJECT TYPE^P2005.02'^MAG(2005.02,^0;6^Q
+"^DD",2005,2005,3,1,0)
+^.1^^0
+"^DD",2005,2005,3,21,0)
+^^6^6^2950315^^^^
+"^DD",2005,2005,3,21,1,0)
+This field is a pointer to the Object Type file (2005.02) which defines
+"^DD",2005,2005,3,21,2,0)
+the object type of this object, e.g., still image, black & white image,
+"^DD",2005,2005,3,21,3,0)
+x-ray etc. The image type determines how various actions are performed
+"^DD",2005,2005,3,21,4,0)
+i.e., how the full resolution image is displayed, or how and when the image
+"^DD",2005,2005,3,21,5,0)
+abstract is displayed.  This field is automatically set by the Imaging
+"^DD",2005,2005,3,21,6,0)
+software at the time of image capture.
+"^DD",2005,2005,3,"DT")
+2940402
+"^DD",2005,2005,4,0)
+OBJECT GROUP^2005.04P^^1;0
+"^DD",2005,2005,4,21,0)
+^.001^16^16^3081219^^
+"^DD",2005,2005,4,21,1,0)
+The object group is a multiple field pointing back to the Image file
+"^DD",2005,2005,4,21,2,0)
+(2005).  Only objects with an object type of GROUP have the Object Group
+"^DD",2005,2005,4,21,3,0)
+field defined.  These objects can be thought of as the "parent" of a set
+"^DD",2005,2005,4,21,4,0)
+of images.  
+"^DD",2005,2005,4,21,5,0)
+ 
+"^DD",2005,2005,4,21,6,0)
+Generally, instead of having their own abstract, objects of the GROUP type
+"^DD",2005,2005,4,21,7,0)
+use the abstract of the first entry in their object group multiple.  
+"^DD",2005,2005,4,21,8,0)
+Sometimes, text will be used in place of the GROUP abstract for speed.  
+"^DD",2005,2005,4,21,9,0)
+Methods for viewing a GROUP object generally allow viewing of all the
+"^DD",2005,2005,4,21,10,0)
+members of the group, either selectively or altogether.  A good example
+"^DD",2005,2005,4,21,11,0)
+would be a set of thirty CT scan images.  Using the Integrated View menu
+"^DD",2005,2005,4,21,12,0)
+option, the tiled display of image abstracts would contain only one
+"^DD",2005,2005,4,21,13,0)
+abstract for the group.  Selecting the group object for viewing provides
+"^DD",2005,2005,4,21,14,0)
+the user with a tiled display of the abstracts of the individual CT scan
+"^DD",2005,2005,4,21,15,0)
+images.  The user can then identify individual images for full resolution
+"^DD",2005,2005,4,21,16,0)
+viewing.
+"^DD",2005,2005,4,23,0)
+^^4^4^3081219^
+"^DD",2005,2005,4,23,1,0)
+In the future, when the IMAGE AUDIT file (#2005.1) is eliminated and
+"^DD",2005,2005,4,23,2,0)
+deleted image entries are merged into the IMAGE file (#2005), this
+"^DD",2005,2005,4,23,3,0)
+multiple must reference only non-deleted images (as it currently does).
+"^DD",2005,2005,4,23,4,0)
+The "AGPD" index will be used to find images deleted from the group.
+"^DD",2005,2005,5,0)
+PATIENT^P2^DPT(^0;7^Q
+"^DD",2005,2005,5,1,0)
+^.1
+"^DD",2005,2005,5,1,1,0)
+2005^AC
+"^DD",2005,2005,5,1,1,1)
+S ^MAG(2005,"AC",$E(X,1,30),DA)=""
+"^DD",2005,2005,5,1,1,2)
+K ^MAG(2005,"AC",$E(X,1,30),DA)
+"^DD",2005,2005,5,1,1,"%D",0)
+^^1^1^2970630^
+"^DD",2005,2005,5,1,1,"%D",1,0)
+This cross-reference will produce a simple "AC" on the Patient's DFN.
+"^DD",2005,2005,5,1,1,"DT")
+2970630
+"^DD",2005,2005,5,1,2,0)
+2005^APPXDT^MUMPS
+"^DD",2005,2005,5,1,2,1)
+I $P(^MAG(2005,DA,0),U,10)="" D SETPPXD^MAGUXRF
+"^DD",2005,2005,5,1,2,2)
+I $P(^MAG(2005,DA,0),U,10)="" D KILPPXD^MAGUXRF
+"^DD",2005,2005,5,1,2,3)
+PATIENT,DATETIME,PROCEDURE & PATIENT,PROC,DATETIME
+"^DD",2005,2005,5,1,2,"%D",0)
+^^17^17^2940520^
+"^DD",2005,2005,5,1,2,"%D",1,0)
+This Mumps routine will create two cross-references to relate the
+"^DD",2005,2005,5,1,2,"%D",2,0)
+following variables: DFN (patient), Procedure, Date/time of Procedure
+"^DD",2005,2005,5,1,2,"%D",3,0)
+        or secondly: DFN (patient), Date/time of Procedure, Procedure
+"^DD",2005,2005,5,1,2,"%D",4,0)
+NOTE: any record that is a child of a parent, i.e. member of a group is NOT
+"^DD",2005,2005,5,1,2,"%D",5,0)
+included in the cross-references; only independent members or parents.
+"^DD",2005,2005,5,1,2,"%D",6,0)
+ 
+"^DD",2005,2005,5,1,2,"%D",7,0)
+This cross-reference set is the same for the fields #6 (Procedure) and
+"^DD",2005,2005,5,1,2,"%D",8,0)
+#15 (Procdedure date and time). For all three of these fields: #5,#6,#15
+"^DD",2005,2005,5,1,2,"%D",9,0)
+the set and kill of the cross-reference produce the same result. The
+"^DD",2005,2005,5,1,2,"%D",10,0)
+only difference is the 'X' used which is dependant upon which field.
+"^DD",2005,2005,5,1,2,"%D",11,0)
+Each set produces two cross-references, that differ only by the order
+"^DD",2005,2005,5,1,2,"%D",12,0)
+of the variables as described above. Other descriptions will be referred
+"^DD",2005,2005,5,1,2,"%D",13,0)
+to this one to explain the purpose of the cross-reference.
+"^DD",2005,2005,5,1,2,"%D",14,0)
+ 
+"^DD",2005,2005,5,1,2,"%D",15,0)
+The cross-references produced have the following structure:
+"^DD",2005,2005,5,1,2,"%D",16,0)
+|TAB||TAB|^MAG(2005,"APPXDT",DFN,PROC,DT,DA)=""
+"^DD",2005,2005,5,1,2,"%D",17,0)
+|TAB||TAB|^MAG(2005,"APDTPX",DFN,DT,PROC,DA)=""
+"^DD",2005,2005,5,1,2,"DT")
+2931202
+"^DD",2005,2005,5,21,0)
+^^4^4^2970721^^^
+"^DD",2005,2005,5,21,1,0)
+This field is a pointer to the VistA Patient file (#2), and contains the
+"^DD",2005,2005,5,21,2,0)
+DFN of the patient that the image or object belongs to. The image or
+"^DD",2005,2005,5,21,3,0)
+object is part of this patient's medical record. This pointer ties the
+"^DD",2005,2005,5,21,4,0)
+image to the patient and is automatically set by the Imaging software.
+"^DD",2005,2005,5,23,0)
+^^1^1^2970721^^^^
+"^DD",2005,2005,5,23,1,0)
+ 
+"^DD",2005,2005,5,"DT")
+2970630
+"^DD",2005,2005,6,0)
+PROCEDURE^F^^0;8^K:X[""""!($A(X)=45) X I $D(X) K:$L(X)>10!($L(X)<1) X
+"^DD",2005,2005,6,1,0)
+^.1
+"^DD",2005,2005,6,1,1,0)
+2005^APPXDT6^MUMPS
+"^DD",2005,2005,6,1,1,1)
+I $P(^MAG(2005,DA,0),U,10)="" D SETPPXD6^MAGUXRF
+"^DD",2005,2005,6,1,1,2)
+I $P(^MAG(2005,DA,0),U,10)="" D KILPPXD6^MAGUXRF
+"^DD",2005,2005,6,1,1,3)
+PATIENT,DATETIME,PROCEDURE & PATIENT,PROC,DATETIME
+"^DD",2005,2005,6,1,1,"%D",0)
+^^14^14^3001024^^
+"^DD",2005,2005,6,1,1,"%D",1,0)
+This MUMPS routine will create two cross references to relate the follwing
+"^DD",2005,2005,6,1,1,"%D",2,0)
+variables. DFN (patient), Procedure, Date/Time of Procedure or secondly: DFN
+"^DD",2005,2005,6,1,1,"%D",3,0)
+(patient), Date/Time of Procedure.  Procedure Note: any record that is a child
+"^DD",2005,2005,6,1,1,"%D",4,0)
+of a parent, i.e. member of a group is NOT included in the cross-references;
+"^DD",2005,2005,6,1,1,"%D",5,0)
+only independent members or parents.  This cross reference set is the same for
+"^DD",2005,2005,6,1,1,"%D",6,0)
+the fields #15 (Procedure Date\Time) and #5 (Patient).  For all three of these 
+"^DD",2005,2005,6,1,1,"%D",7,0)
+fields, #5, #6 and #15, the set and kill of the cross reference produces the
+"^DD",2005,2005,6,1,1,"%D",8,0)
+same results.  The only difference is the 'X' used which is dependant upon which
+"^DD",2005,2005,6,1,1,"%D",9,0)
+field is being used.
+"^DD",2005,2005,6,1,1,"%D",10,0)
+ 
+"^DD",2005,2005,6,1,1,"%D",11,0)
+The cross references produced have the following structure:
+"^DD",2005,2005,6,1,1,"%D",12,0)
+               ^MAG(2005,"APPXDT",DFN,PROC,RDT,DA)=""
+"^DD",2005,2005,6,1,1,"%D",13,0)
+               ^MAG(2005,"APDTPX",DFN,,RDT,PROC,DA)=""
+"^DD",2005,2005,6,1,1,"%D",14,0)
+
+"^DD",2005,2005,6,1,1,"DT")
+2931202
+"^DD",2005,2005,6,3)
+Answer must be 1-10 characters in length.
+"^DD",2005,2005,6,21,0)
+^^3^3^2970721^
+"^DD",2005,2005,6,21,1,0)
+This field is an abbreviation for the procedure (e.g., COL for colonoscopy,
+"^DD",2005,2005,6,21,2,0)
+SUR for surgery, SP for surgical pathology, X-ray for radiology).  This
+"^DD",2005,2005,6,21,3,0)
+field is automatically set by the Imaging software.
+"^DD",2005,2005,6,"DT")
+2931228
+"^DD",2005,2005,7,0)
+DATE/TIME IMAGE SAVED^D^^2;1^S %DT="ETX" D ^%DT S X=Y K:Y<1 X
+"^DD",2005,2005,7,1,0)
+^.1^^0
+"^DD",2005,2005,7,3)
+This is the date and time of image capture.
+"^DD",2005,2005,7,21,0)
+^.001^4^4^3060619^^^^
+"^DD",2005,2005,7,21,1,0)
+This field is the date and time the image was captured. It is
+"^DD",2005,2005,7,21,2,0)
+automatically stuffed into the file as "NOW". It is not the same as the
+"^DD",2005,2005,7,21,3,0)
+date and time of the procedure or exam.  This field is set automatically
+"^DD",2005,2005,7,21,4,0)
+by the Imaging software.
+"^DD",2005,2005,7,"DT")
+3110615
+"^DD",2005,2005,8,0)
+IMAGE SAVE BY^P200'^VA(200,^2;2^Q
+"^DD",2005,2005,8,1,0)
+^.1^^0
+"^DD",2005,2005,8,21,0)
+^^5^5^2970721^
+"^DD",2005,2005,8,21,1,0)
+This field is a pointer to the New Person file and thus equal to the DUZ
+"^DD",2005,2005,8,21,2,0)
+of the person who logged in to capture the image.  It identifies who
+"^DD",2005,2005,8,21,3,0)
+captured or saved the image and is automatically stuffed into the Image
+"^DD",2005,2005,8,21,4,0)
+file.  An image received via a Multimedia Mail message will not have data
+"^DD",2005,2005,8,21,5,0)
+in this field.
+"^DD",2005,2005,8,"DT")
+3110615
+"^DD",2005,2005,8.1,0)
+CAPTURE APPLICATION^S^C:Capture Workstation;D:DICOM Gateway;I:Import API;^2;12^Q
+"^DD",2005,2005,8.1,1,0)
+^.1^^0
+"^DD",2005,2005,8.1,3)
+Select code of the application that captured the image.
+"^DD",2005,2005,8.1,8.5)
+@
+"^DD",2005,2005,8.1,9)
+^
+"^DD",2005,2005,8.1,20,0)
+^.3LA^1^1
+"^DD",2005,2005,8.1,20,1,0)
+MAG*3*93
+"^DD",2005,2005,8.1,21,0)
+^^6^6^3090407^
+"^DD",2005,2005,8.1,21,1,0)
+Code stored in this field indicates the 
+"^DD",2005,2005,8.1,21,2,0)
+application that captured this image and created 
+"^DD",2005,2005,8.1,21,3,0)
+the image entry.
+"^DD",2005,2005,8.1,21,4,0)
+ 
+"^DD",2005,2005,8.1,21,5,0)
+This field cannot be edited; it is auto-populated
+"^DD",2005,2005,8.1,21,6,0)
+by the "ACA" action index.
+"^DD",2005,2005,8.1,23,0)
+^.001^1^1^3090407^^^^
+"^DD",2005,2005,8.1,23,1,0)
+Added by the patch MAG*3*93.
+"^DD",2005,2005,8.1,"DT")
+3110615
+"^DD",2005,2005,9,0)
+SUMMARY OBJECT^S^1:YES;0:NO;^2;3^Q
+"^DD",2005,2005,9,1,0)
+^.1^^0
+"^DD",2005,2005,9,3)
+Enter 1 for 'Yes' and 0 (or null) for 'No'.
+"^DD",2005,2005,9,21,0)
+^^6^6^2950328^^
+"^DD",2005,2005,9,21,1,0)
+This field is used to indicate whether the image or object is to be used
+"^DD",2005,2005,9,21,2,0)
+as a summary for a group of objects. For example, in a GROUP of images,
+"^DD",2005,2005,9,21,3,0)
+normally the abstract of the first object in the group multiple is used
+"^DD",2005,2005,9,21,4,0)
+for the integrated view display.  This field allows the user to select a
+"^DD",2005,2005,9,21,5,0)
+summary image to be used for this purpose.  This field is currently not in
+"^DD",2005,2005,9,21,6,0)
+use.
+"^DD",2005,2005,9,"DT")
+2940504
+"^DD",2005,2005,10,0)
+SHORT DESCRIPTION^F^^2;4^K:$L(X)>60!($L(X)<1) X
+"^DD",2005,2005,10,3)
+Answer must be 1-60 characters in length.
+"^DD",2005,2005,10,21,0)
+^.001^5^5^3000706^^^^
+"^DD",2005,2005,10,21,1,0)
+This field allows the user to store a brief, one line description with the
+"^DD",2005,2005,10,21,2,0)
+image or object record. For images associated with patients, this data is
+"^DD",2005,2005,10,21,3,0)
+appended to the patient's name and SSN to create the .01 field of the
+"^DD",2005,2005,10,21,4,0)
+Image file.  It is also permanently written on the upper left corner of
+"^DD",2005,2005,10,21,5,0)
+the image to provide visible identification.
+"^DD",2005,2005,10,"DT")
+2900914
+"^DD",2005,2005,11,0)
+LONG DESCRIPTION^2005.011^^3;0
+"^DD",2005,2005,11,21,0)
+^^6^6^2970721^
+"^DD",2005,2005,11,21,1,0)
+This word processing field allows the user to describe the image at
+"^DD",2005,2005,11,21,2,0)
+length.  The user may only choose to append this long description on
+"^DD",2005,2005,11,21,3,0)
+selected images - those which are "classic" or "unusual" cases. It can be
+"^DD",2005,2005,11,21,4,0)
+used to summarize a group of images which have been put together for a
+"^DD",2005,2005,11,21,5,0)
+conference or consult.  It will be used in the future to a greater extent,
+"^DD",2005,2005,11,21,6,0)
+as options for image capture (independent of VistA packages) are provided.
+"^DD",2005,2005,12,0)
+LAST ACCESS DATE^D^^0;9^S %DT="ET" D ^%DT S X=Y K:Y<1 X
+"^DD",2005,2005,12,3)
+Date image last accessed
+"^DD",2005,2005,12,21,0)
+^^7^7^2970721^^
+"^DD",2005,2005,12,21,1,0)
+This is the date and time the image was last viewed or accessed. Each time
+"^DD",2005,2005,12,21,2,0)
+an abstract or image is requested for viewing, this field is automatically
+"^DD",2005,2005,12,21,3,0)
+set with the current date and time.  In conjunction with the appropriate
+"^DD",2005,2005,12,21,4,0)
+site parameter, this field is used for automatic file migration.  That is,
+"^DD",2005,2005,12,21,5,0)
+when an image has not been accessed within the predefined time period, it
+"^DD",2005,2005,12,21,6,0)
+will be deleted from the magnetic server and will only be accessible from
+"^DD",2005,2005,12,21,7,0)
+the optical disk jukebox.
+"^DD",2005,2005,12,"DT")
+2920818
+"^DD",2005,2005,13,0)
+IQ^S^1:YES;^0;11^Q
+"^DD",2005,2005,13,1,0)
+^.1
+"^DD",2005,2005,13,1,1,0)
+2005^AIQ
+"^DD",2005,2005,13,1,1,1)
+S ^MAG(2005,"AIQ",$E(X,1,30),DA)=""
+"^DD",2005,2005,13,1,1,2)
+K ^MAG(2005,"AIQ",$E(X,1,30),DA)
+"^DD",2005,2005,13,1,1,"%D",0)
+^^2^2^3010824^
+"^DD",2005,2005,13,1,1,"%D",1,0)
+This cross reference exists to quickly list all images that have
+"^DD",2005,2005,13,1,1,"%D",2,0)
+questionable integrity.
+"^DD",2005,2005,13,1,1,"DT")
+3010824
+"^DD",2005,2005,13,21,0)
+^.001^1^1^3010824^^^
+"^DD",2005,2005,13,21,1,0)
+This indicates that this image entry has questionable integrity.
+"^DD",2005,2005,13,23,0)
+^.001^2^2^3010824^^
+"^DD",2005,2005,13,23,1,0)
+This field is set by various integrity checkers in the Imaging software.
+"^DD",2005,2005,13,23,2,0)
+This field is set if an entry has questionable integrity.
+"^DD",2005,2005,13,"DT")
+3010824
+"^DD",2005,2005,13.5,0)
+DUPE^S^1:YES;^0;12^Q
+"^DD",2005,2005,13.5,21,0)
+^.001^6^6^3050620^^
+"^DD",2005,2005,13.5,21,1,0)
+This field is to allow screening of images that
+"^DD",2005,2005,13.5,21,2,0)
+have duplicate instances in the archive file
+"^DD",2005,2005,13.5,21,3,0)
+and the image file.  The intent is to prevent
+"^DD",2005,2005,13.5,21,4,0)
+purging of these images on the raid until a
+"^DD",2005,2005,13.5,21,5,0)
+utility to store this file on the Jukebox is 
+"^DD",2005,2005,13.5,21,6,0)
+implemented.
+"^DD",2005,2005,13.5,"DT")
+3050620
+"^DD",2005,2005,14,0)
+GROUP PARENT^P2005'^MAG(2005,^0;10^Q
+"^DD",2005,2005,14,3)
+If this object is a member of a group, enter the parent.
+"^DD",2005,2005,14,21,0)
+^^5^5^2970721^^^^
+"^DD",2005,2005,14,21,1,0)
+This field is used for images that are part of a group, for example a CT
+"^DD",2005,2005,14,21,2,0)
+exam might contain 30 images.  This field contains a pointer back to the
+"^DD",2005,2005,14,21,3,0)
+Image file (2005), to the object whose type is "GROUP" that points to this
+"^DD",2005,2005,14,21,4,0)
+object as a member of its group.  A pointer to this object will be found
+"^DD",2005,2005,14,21,5,0)
+in the Object Group multiple of the parent GROUP object.
+"^DD",2005,2005,14,"DT")
+3081215
+"^DD",2005,2005,15,0)
+PROCEDURE/EXAM DATE/TIME^D^^2;5^S %DT="ESTX" D ^%DT S X=Y K:Y<1 X
+"^DD",2005,2005,15,1,0)
+^.1^^-1
+"^DD",2005,2005,15,1,2,0)
+2005^APPXDT5^MUMPS
+"^DD",2005,2005,15,1,2,1)
+I $P(^MAG(2005,DA,0),U,10)="" D SETPPXD5^MAGUXRF
+"^DD",2005,2005,15,1,2,2)
+I $P(^MAG(2005,DA,0),U,10)="" D KILPPXD5^MAGUXRF
+"^DD",2005,2005,15,1,2,3)
+PATIENT,DATETIME,PROCEDURE & PATIENT,PROC,DATETIME
+"^DD",2005,2005,15,1,2,"%D",0)
+^^15^15^3001025^^
+"^DD",2005,2005,15,1,2,"%D",1,0)
+This MUMPS routine will create two cross references to relate the following
+"^DD",2005,2005,15,1,2,"%D",2,0)
+variables. DFN (patient), Procedure, Date/Time of Procedure or secondly: DFN
+"^DD",2005,2005,15,1,2,"%D",3,0)
+(patient), Date/Time of Procedure.  Procedure Note: any record that is a child
+"^DD",2005,2005,15,1,2,"%D",4,0)
+of a parent, i.e. member of a group is NOT included in the cross-references;
+"^DD",2005,2005,15,1,2,"%D",5,0)
+only independent members or parents.  This cross reference set is the same for
+"^DD",2005,2005,15,1,2,"%D",6,0)
+the fields #6 (Procedure) and #5 (Patient).  For all three of these fields, 
+"^DD",2005,2005,15,1,2,"%D",7,0)
+#5, #6 and #15, the set and kill of the cross reference produces the same
+"^DD",2005,2005,15,1,2,"%D",8,0)
+results.  The only difference is the 'X' used which is dependant upon which
+"^DD",2005,2005,15,1,2,"%D",9,0)
+field is being used.  
+"^DD",2005,2005,15,1,2,"%D",10,0)
+
+"^DD",2005,2005,15,1,2,"%D",11,0)
+The cross references produced have the following structure:
+"^DD",2005,2005,15,1,2,"%D",12,0)
+ 
+"^DD",2005,2005,15,1,2,"%D",13,0)
+              ^MAG(2005,"APPXDT",DFN,PROC,RDT,DA)=""
+"^DD",2005,2005,15,1,2,"%D",14,0)
+              ^MAG(2005,"APDTPX",DFN,RDT,PROC,DA)=""
+"^DD",2005,2005,15,1,2,"%D",15,0)
+
+"^DD",2005,2005,15,1,2,"DT")
+2931202
+"^DD",2005,2005,15,3)
+Enter the DATE-TIME of the Procedure or Exam
+"^DD",2005,2005,15,21,0)
+^.001^10^10^3000807^^
+"^DD",2005,2005,15,21,1,0)
+This is the date/time of the procedure or the exam. It is obtained from
+"^DD",2005,2005,15,21,2,0)
+the Parent Data file (i.e. the date/time of the X-ray exam, the Medical
+"^DD",2005,2005,15,21,3,0)
+Procedure, the time the Laboratory specimen was obtained from the patient,
+"^DD",2005,2005,15,21,4,0)
+or the date/time of the Surgical procedure). This often is not the same as
+"^DD",2005,2005,15,21,5,0)
+the date/time the image was captured. In a long surgical procedure the
+"^DD",2005,2005,15,21,6,0)
+image capture time may be several hours later than the start of the
+"^DD",2005,2005,15,21,7,0)
+operation. When a lab specimen is collected from a patient, it may be
+"^DD",2005,2005,15,21,8,0)
+several days before images are captured from the slide.  If images are
+"^DD",2005,2005,15,21,9,0)
+initially stored on an intermediate media such as x-ray film or video tape,
+"^DD",2005,2005,15,21,10,0)
+the capture time can be long after the procedure time.
+"^DD",2005,2005,15,"DT")
+2940527
+"^DD",2005,2005,16,0)
+PARENT DATA FILE#^P2005.03^MAG(2005.03,^2;6^Q
+"^DD",2005,2005,16,3)
+The Parent Report file (or sub-file) number.
+"^DD",2005,2005,16,21,0)
+^^67^67^3001006^^
+"^DD",2005,2005,16,21,1,0)
+The values of fields 16, 17, 18 and 63 are numbers.
+"^DD",2005,2005,16,21,2,0)
+These numbers are internal entry numbers. Which field
+"^DD",2005,2005,16,21,3,0)
+corresponds to which internal entry number is explained below.
+"^DD",2005,2005,16,21,4,0)
+
+"^DD",2005,2005,16,21,5,0)
+Together, the values of these fields establish a link back
+"^DD",2005,2005,16,21,6,0)
+to the entry in the "parent" file, that holds the information
+"^DD",2005,2005,16,21,7,0)
+that describes why the image was collected.
+"^DD",2005,2005,16,21,8,0)
+
+"^DD",2005,2005,16,21,9,0)
+The link to the "parent" information is brought about by
+"^DD",2005,2005,16,21,10,0)
+the combination of the values of fields 16, 17, and, 18, and
+"^DD",2005,2005,16,21,11,0)
+optionally also field 63.
+"^DD",2005,2005,16,21,12,0)
+
+"^DD",2005,2005,16,21,13,0)
+The value of field 16 is a number that indicates the internal
+"^DD",2005,2005,16,21,14,0)
+entry number of the "parent file" in the VA-FileMan data dictionary.
+"^DD",2005,2005,16,21,15,0)
+Common parent files are:
+"^DD",2005,2005,16,21,16,0)
+
+"^DD",2005,2005,16,21,17,0)
+   File    Name
+"^DD",2005,2005,16,21,18,0)
+   ====    ====
+"^DD",2005,2005,16,21,19,0)
+     3.9:  MAIL MESSAGE
+"^DD",2005,2005,16,21,20,0)
+    63:    AUTOPSY (MICROSCOPIC)
+"^DD",2005,2005,16,21,21,0)
+    63.02: ELECTRON MICROSCOPY
+"^DD",2005,2005,16,21,22,0)
+    63.08: SURGICAL PATHOLOGY
+"^DD",2005,2005,16,21,23,0)
+    63.09: CYTOLOGY
+"^DD",2005,2005,16,21,24,0)
+    63.2:  AUTOPSY (GROSS)
+"^DD",2005,2005,16,21,25,0)
+    74:    RADIOLOGY
+"^DD",2005,2005,16,21,26,0)
+   130:    SURGERY
+"^DD",2005,2005,16,21,27,0)
+   691:    ECHOCARDIOGRAM
+"^DD",2005,2005,16,21,28,0)
+   691.1:  CARDIAC CATHETERIZATION
+"^DD",2005,2005,16,21,29,0)
+   691.5:  ELECTROCARDIOGRAPHY
+"^DD",2005,2005,16,21,30,0)
+   694:    HEMATOLOGY
+"^DD",2005,2005,16,21,31,0)
+   699:    ENDOSCOPY
+"^DD",2005,2005,16,21,32,0)
+   699.5:  GENERIC MEDICINE
+"^DD",2005,2005,16,21,33,0)
+  8925:    TIU
+"^DD",2005,2005,16,21,34,0)
+
+"^DD",2005,2005,16,21,35,0)
+The records in each of these "parent" files contain a multiple that itemizes
+"^DD",2005,2005,16,21,36,0)
+the list of images that belong to that record.
+"^DD",2005,2005,16,21,37,0)
+
+"^DD",2005,2005,16,21,38,0)
+The field numbers and fixed indexes for those multiples
+"^DD",2005,2005,16,21,39,0)
+all have the number 2005. The entries within these multiples
+"^DD",2005,2005,16,21,40,0)
+all have a field that is a pointer back to the image file.
+"^DD",2005,2005,16,21,41,0)
+The entries in these multiples identify the various images
+"^DD",2005,2005,16,21,42,0)
+that belong with the record in question.
+"^DD",2005,2005,16,21,43,0)
+
+"^DD",2005,2005,16,21,44,0)
+The various parent files each have their own structure, for instance
+"^DD",2005,2005,16,21,45,0)
+
+"^DD",2005,2005,16,21,46,0)
+ Type Number     Form of Root
+"^DD",2005,2005,16,21,47,0)
+ ===========     ============
+"^DD",2005,2005,16,21,48,0)
+     1           ^RARPT(D0,2005,D1,0)=image...
+"^DD",2005,2005,16,21,49,0)
+     2           ^MCAR(699,D0,2005,D1,0)=image...
+"^DD",2005,2005,16,21,50,0)
+     3           ^LR(D0,"SP",D1,2005,D2,0)=image...
+"^DD",2005,2005,16,21,51,0)
+
+"^DD",2005,2005,16,21,52,0)
+Depending on the nature of the file structure of the parent file,
+"^DD",2005,2005,16,21,53,0)
+the imaging software will need either just the value of D0 (type
+"^DD",2005,2005,16,21,54,0)
+1 and type 2) to find the correct entry, or the values of D0 as
+"^DD",2005,2005,16,21,55,0)
+well as D1 (type 3).
+"^DD",2005,2005,16,21,56,0)
+
+"^DD",2005,2005,16,21,57,0)
+The values of the fields in the image file correspond to the
+"^DD",2005,2005,16,21,58,0)
+values of the indices in the parent file as follows:
+"^DD",2005,2005,16,21,59,0)
+
+"^DD",2005,2005,16,21,60,0)
+   Type Number   Field Number and FileMan Index
+"^DD",2005,2005,16,21,61,0)
+   ===========   ==============================
+"^DD",2005,2005,16,21,62,0)
+       1         field 17 = D0, field 18 = D1
+"^DD",2005,2005,16,21,63,0)
+       2         field 17 = D0, field 18 = D1
+"^DD",2005,2005,16,21,64,0)
+       3         field 17 = D0, field 63 = D1, field 18 = D2
+"^DD",2005,2005,16,21,65,0)
+
+"^DD",2005,2005,16,21,66,0)
+In the case of type 3, the value of D0 is equal to the
+"^DD",2005,2005,16,21,67,0)
+value of LRDFN.
+"^DD",2005,2005,16,22)
+
+"^DD",2005,2005,16,"DT")
+2951009
+"^DD",2005,2005,17,0)
+PARENT GLOBAL ROOT D0^NJ10,0^^2;7^K:+X'=X!(X>9999999999.9999)!(X<1)!(X?.E1"."1N.N) X
+"^DD",2005,2005,17,3)
+Type a Number between 1 and 9999999999.9999, 0 Decimal Digits
+"^DD",2005,2005,17,21,0)
+^.001^67^67^3050126^^^^
+"^DD",2005,2005,17,21,1,0)
+The values of fields 16, 17, 18 and 63 are numbers.
+"^DD",2005,2005,17,21,2,0)
+These numbers are internal entry numbers. Which field
+"^DD",2005,2005,17,21,3,0)
+corresponds to which internal entry number is explained below.
+"^DD",2005,2005,17,21,4,0)
+
+"^DD",2005,2005,17,21,5,0)
+Together, the values of these fields establish a link back
+"^DD",2005,2005,17,21,6,0)
+to the entry in the "parent" file, that holds the information
+"^DD",2005,2005,17,21,7,0)
+that describes why the image was collected.
+"^DD",2005,2005,17,21,8,0)
+
+"^DD",2005,2005,17,21,9,0)
+The link to the "parent" information is brought about by
+"^DD",2005,2005,17,21,10,0)
+the combination of the values of fields 16, 17, and, 18, and
+"^DD",2005,2005,17,21,11,0)
+optionally also field 63.
+"^DD",2005,2005,17,21,12,0)
+
+"^DD",2005,2005,17,21,13,0)
+The value of field 16 is a number that indicates the internal
+"^DD",2005,2005,17,21,14,0)
+entry number of the "parent file" in the VA-FileMan data dictionary.
+"^DD",2005,2005,17,21,15,0)
+Common parent files are:
+"^DD",2005,2005,17,21,16,0)
+
+"^DD",2005,2005,17,21,17,0)
+   File    Name
+"^DD",2005,2005,17,21,18,0)
+   ====    ====
+"^DD",2005,2005,17,21,19,0)
+     3.9:  MAIL MESSAGE
+"^DD",2005,2005,17,21,20,0)
+    63:    AUTOPSY (MICROSCOPIC)
+"^DD",2005,2005,17,21,21,0)
+    63.02: ELECTRON MICROSCOPY
+"^DD",2005,2005,17,21,22,0)
+    63.08: SURGICAL PATHOLOGY
+"^DD",2005,2005,17,21,23,0)
+    63.09: CYTOLOGY
+"^DD",2005,2005,17,21,24,0)
+    63.2:  AUTOPSY (GROSS)
+"^DD",2005,2005,17,21,25,0)
+    74:    RADIOLOGY
+"^DD",2005,2005,17,21,26,0)
+   130:    SURGERY
+"^DD",2005,2005,17,21,27,0)
+   691:    ECHOCARDIOGRAM
+"^DD",2005,2005,17,21,28,0)
+   691.1:  CARDIAC CATHETERIZATION
+"^DD",2005,2005,17,21,29,0)
+   691.5:  ELECTROCARDIOGRAPHY
+"^DD",2005,2005,17,21,30,0)
+   694:    HEMATOLOGY
+"^DD",2005,2005,17,21,31,0)
+   699:    ENDOSCOPY
+"^DD",2005,2005,17,21,32,0)
+   699.5:  GENERIC MEDICINE
+"^DD",2005,2005,17,21,33,0)
+  8925:    TIU
+"^DD",2005,2005,17,21,34,0)
+
+"^DD",2005,2005,17,21,35,0)
+The records in each of these "parent" files contain a multiple that itemizes
+"^DD",2005,2005,17,21,36,0)
+the list of images that belong to that record.
+"^DD",2005,2005,17,21,37,0)
+
+"^DD",2005,2005,17,21,38,0)
+The field numbers and fixed indexes for those multiples
+"^DD",2005,2005,17,21,39,0)
+all have the number 2005. The entries within these multiples
+"^DD",2005,2005,17,21,40,0)
+all have a field that is a pointer back to the image file.
+"^DD",2005,2005,17,21,41,0)
+The entries in these multiples identify the various images
+"^DD",2005,2005,17,21,42,0)
+that belong with the record in question.
+"^DD",2005,2005,17,21,43,0)
+
+"^DD",2005,2005,17,21,44,0)
+The various parent files each have their own structure, for instance
+"^DD",2005,2005,17,21,45,0)
+
+"^DD",2005,2005,17,21,46,0)
+ Type Number     Form of Root
+"^DD",2005,2005,17,21,47,0)
+ ===========     ============
+"^DD",2005,2005,17,21,48,0)
+     1           ^RARPT(D0,2005,D1,0)=image...
+"^DD",2005,2005,17,21,49,0)
+     2           ^MCAR(699,D0,2005,D1,0)=image...
+"^DD",2005,2005,17,21,50,0)
+     3           ^LR(D0,"SP",D1,2005,D2,0)=image...
+"^DD",2005,2005,17,21,51,0)
+
+"^DD",2005,2005,17,21,52,0)
+Depending on the nature of the file structure of the parent file,
+"^DD",2005,2005,17,21,53,0)
+the imaging software will need either just the value of D0 (type
+"^DD",2005,2005,17,21,54,0)
+1 and type 2) to find the correct entry, or the values of D0 as
+"^DD",2005,2005,17,21,55,0)
+well as D1 (type 3).
+"^DD",2005,2005,17,21,56,0)
+
+"^DD",2005,2005,17,21,57,0)
+The values of the fields in the image file correspond to the
+"^DD",2005,2005,17,21,58,0)
+values of the indices in the parent file as follows:
+"^DD",2005,2005,17,21,59,0)
+
+"^DD",2005,2005,17,21,60,0)
+   Type Number   Field Number and FileMan Index
+"^DD",2005,2005,17,21,61,0)
+   ===========   ==============================
+"^DD",2005,2005,17,21,62,0)
+       1         field 17 = D0, field 18 = D1
+"^DD",2005,2005,17,21,63,0)
+       2         field 17 = D0, field 18 = D1
+"^DD",2005,2005,17,21,64,0)
+       3         field 17 = D0, field 63 = D1, field 18 = D2
+"^DD",2005,2005,17,21,65,0)
+
+"^DD",2005,2005,17,21,66,0)
+In the case of type 3, the value of D0 is equal to the
+"^DD",2005,2005,17,21,67,0)
+value of LRDFN.
+"^DD",2005,2005,17,"DT")
+3011218
+"^DD",2005,2005,18,0)
+PARENT DATA FILE IMAGE POINTER^NJ12,4^^2;8^K:+X'=X!(X>9999999.9999)!(X<1)!(X?.E1"."5N.N) X
+"^DD",2005,2005,18,3)
+Type a Number between 1 and 9999999.9999, 4 Decimal Digits
+"^DD",2005,2005,18,21,0)
+^^67^67^3001004^^
+"^DD",2005,2005,18,21,1,0)
+The values of fields 16, 17, 18 and 63 are numbers.
+"^DD",2005,2005,18,21,2,0)
+These numbers are internal entry numbers. Which field
+"^DD",2005,2005,18,21,3,0)
+corresponds to which internal entry number is explained below.
+"^DD",2005,2005,18,21,4,0)
+
+"^DD",2005,2005,18,21,5,0)
+Together, the values of these fields establish a link back
+"^DD",2005,2005,18,21,6,0)
+to the entry in the "parent" file, that holds the information
+"^DD",2005,2005,18,21,7,0)
+that describes why the image was collected.
+"^DD",2005,2005,18,21,8,0)
+
+"^DD",2005,2005,18,21,9,0)
+The link to the "parent" information is brought about by
+"^DD",2005,2005,18,21,10,0)
+the combination of the values of fields 16, 17, and, 18, and
+"^DD",2005,2005,18,21,11,0)
+optionally also field 63.
+"^DD",2005,2005,18,21,12,0)
+
+"^DD",2005,2005,18,21,13,0)
+The value of field 16 is a number that indicates the internal
+"^DD",2005,2005,18,21,14,0)
+entry number of the "parent file" in the VA-FileMan data dictionary.
+"^DD",2005,2005,18,21,15,0)
+Common parent files are:
+"^DD",2005,2005,18,21,16,0)
+
+"^DD",2005,2005,18,21,17,0)
+   File    Name
+"^DD",2005,2005,18,21,18,0)
+   ====    ====
+"^DD",2005,2005,18,21,19,0)
+     3.9:  MAIL MESSAGE
+"^DD",2005,2005,18,21,20,0)
+    63:    AUTOPSY (MICROSCOPIC)
+"^DD",2005,2005,18,21,21,0)
+    63.02: ELECTRON MICROSCOPY
+"^DD",2005,2005,18,21,22,0)
+    63.08: SURGICAL PATHOLOGY
+"^DD",2005,2005,18,21,23,0)
+    63.09: CYTOLOGY
+"^DD",2005,2005,18,21,24,0)
+    63.2:  AUTOPSY (GROSS)
+"^DD",2005,2005,18,21,25,0)
+    74:    RADIOLOGY
+"^DD",2005,2005,18,21,26,0)
+   130:    SURGERY
+"^DD",2005,2005,18,21,27,0)
+   691:    ECHOCARDIOGRAM
+"^DD",2005,2005,18,21,28,0)
+   691.1:  CARDIAC CATHETERIZATION
+"^DD",2005,2005,18,21,29,0)
+   691.5:  ELECTROCARDIOGRAPHY
+"^DD",2005,2005,18,21,30,0)
+   694:    HEMATOLOGY
+"^DD",2005,2005,18,21,31,0)
+   699:    ENDOSCOPY
+"^DD",2005,2005,18,21,32,0)
+   699.5:  GENERIC MEDICINE
+"^DD",2005,2005,18,21,33,0)
+  8925:    TIU
+"^DD",2005,2005,18,21,34,0)
+
+"^DD",2005,2005,18,21,35,0)
+The records in each of these "parent" files contain a multiple that itemizes
+"^DD",2005,2005,18,21,36,0)
+the list of images that belong to that record.
+"^DD",2005,2005,18,21,37,0)
+
+"^DD",2005,2005,18,21,38,0)
+The field numbers and fixed indexes for those multiples
+"^DD",2005,2005,18,21,39,0)
+all have the number 2005. The entries within these multiples
+"^DD",2005,2005,18,21,40,0)
+all have a field that is a pointer back to the image file.
+"^DD",2005,2005,18,21,41,0)
+The entries in these multiples identify the various images
+"^DD",2005,2005,18,21,42,0)
+that belong with the record in question.
+"^DD",2005,2005,18,21,43,0)
+
+"^DD",2005,2005,18,21,44,0)
+The various parent files each have their own structure, for instance
+"^DD",2005,2005,18,21,45,0)
+
+"^DD",2005,2005,18,21,46,0)
+ Type Number     Form of Root
+"^DD",2005,2005,18,21,47,0)
+ ===========     ============
+"^DD",2005,2005,18,21,48,0)
+     1           ^RARPT(D0,2005,D1,0)=image...
+"^DD",2005,2005,18,21,49,0)
+     2           ^MCAR(699,D0,2005,D1,0)=image...
+"^DD",2005,2005,18,21,50,0)
+     3           ^LR(D0,"SP",D1,2005,D2,0)=image...
+"^DD",2005,2005,18,21,51,0)
+
+"^DD",2005,2005,18,21,52,0)
+Depending on the nature of the file structure of the parent file,
+"^DD",2005,2005,18,21,53,0)
+the imaging software will need either just the value of D0 (type
+"^DD",2005,2005,18,21,54,0)
+1 and type 2) to find the correct entry, or the values of D0 as
+"^DD",2005,2005,18,21,55,0)
+well as D1 (type 3).
+"^DD",2005,2005,18,21,56,0)
+
+"^DD",2005,2005,18,21,57,0)
+The values of the fields in the image file correspond to the
+"^DD",2005,2005,18,21,58,0)
+values of the indices in the parent file as follows:
+"^DD",2005,2005,18,21,59,0)
+
+"^DD",2005,2005,18,21,60,0)
+   Type Number   Field Number and FileMan Index
+"^DD",2005,2005,18,21,61,0)
+   ===========   ==============================
+"^DD",2005,2005,18,21,62,0)
+       1         field 17 = D0, field 18 = D1
+"^DD",2005,2005,18,21,63,0)
+       2         field 17 = D0, field 18 = D1
+"^DD",2005,2005,18,21,64,0)
+       3         field 17 = D0, field 63 = D1, field 18 = D2
+"^DD",2005,2005,18,21,65,0)
+
+"^DD",2005,2005,18,21,66,0)
+In the case of type 3, the value of D0 is equal to the
+"^DD",2005,2005,18,21,67,0)
+value of LRDFN.
+"^DD",2005,2005,18,"DT")
+2940504
+"^DD",2005,2005,19,0)
+EXPORT REQUEST STATUS^S^1:EXPORT REQUESTED;0:EXPORTED;^2;9^Q
+"^DD",2005,2005,19,1,0)
+^.1
+"^DD",2005,2005,19,1,1,0)
+2005^AEXPORT^MUMPS
+"^DD",2005,2005,19,1,1,1)
+I X S ^MAG(2005,"AEXPORT",DA)=""
+"^DD",2005,2005,19,1,1,2)
+K ^MAG(2005,"AEXPORT",DA)
+"^DD",2005,2005,19,1,1,3)
+IMAGE EXPORT REQUEST
+"^DD",2005,2005,19,1,1,"%D",0)
+^^4^4^2940527^
+"^DD",2005,2005,19,1,1,"%D",1,0)
+Used by Multimedia Mail as a signal to request an image to be copied
+"^DD",2005,2005,19,1,1,"%D",2,0)
+from the image directory to the export directory. The cross-reference
+"^DD",2005,2005,19,1,1,"%D",3,0)
+is set when the request is made and killed when the image has been
+"^DD",2005,2005,19,1,1,"%D",4,0)
+copied over for export.
+"^DD",2005,2005,19,1,1,"DT")
+2940102
+"^DD",2005,2005,19,3)
+USED BY MULTIMEDIA MAIL - REQUEST TO COPY IMAGE
+"^DD",2005,2005,19,21,0)
+^^4^4^2970721^^^
+"^DD",2005,2005,19,21,1,0)
+This field is used by Multimedia MailMan when an image needs to be sent to
+"^DD",2005,2005,19,21,2,0)
+another site.  The Imaging software sets the field automatically, after
+"^DD",2005,2005,19,21,3,0)
+checking its status.  After the request is carried out, it will be
+"^DD",2005,2005,19,21,4,0)
+automatically reset.
+"^DD",2005,2005,19,"DT")
+2940102
+"^DD",2005,2005,30,0)
+DELETED BY^P200'^VA(200,^30;1^Q
+"^DD",2005,2005,30,3)
+This is system added field.  The Person who deleted the image.
+"^DD",2005,2005,30,21,0)
+^.001^1^1^3040519^^^^
+"^DD",2005,2005,30,21,1,0)
+This is the person who deleted the image.  It is a pointer to the new person file.  The system uses the DUZ variable to set the field.
+"^DD",2005,2005,30,"DT")
+3040519
+"^DD",2005,2005,30.1,0)
+DELETED DATE^D^^30;2^S %DT="EST" D ^%DT S X=Y K:Y<1 X
+"^DD",2005,2005,30.1,3)
+This is the date the Image was deleted from the Image File.
+"^DD",2005,2005,30.1,21,0)
+^.001^1^1^3070124^^^^
+"^DD",2005,2005,30.1,21,1,0)
+This is the date the Image was deleted from the Image File.
+"^DD",2005,2005,30.1,"DT")
+3070124
+"^DD",2005,2005,30.2,0)
+DELETED REASON^F^^30;3^K:$L(X)>60!($L(X)<10) X
+"^DD",2005,2005,30.2,3)
+The Reason that the Image was deleted from the Patient record.
+"^DD",2005,2005,30.2,21,0)
+^.001^1^1^3040519^^^^
+"^DD",2005,2005,30.2,21,1,0)
+This is the Reason that the Image was deleted.
+"^DD",2005,2005,30.2,"DT")
+3040519
+"^DD",2005,2005,40,0)
+PACKAGE INDEX^S^RAD:RAD;LAB:LAB;MED:MED;NOTE:NOTE;CP:CP;SUR:SUR;PHOTOID:PHOTOID;NONE:NONE;CONS:CONS;^40;1^Q
+"^DD",2005,2005,40,3)
+The Package associated with the Image
+"^DD",2005,2005,40,21,0)
+^.001^1^1^3021113^^^^
+"^DD",2005,2005,40,21,1,0)
+This is an abbreviation of the package that the Image is attached to.
+"^DD",2005,2005,40,"DT")
+3030203
+"^DD",2005,2005,41,0)
+CLASS INDEX^P2005.82'^MAG(2005.82,^40;2^Q
+"^DD",2005,2005,41,3)
+
+"^DD",2005,2005,41,21,0)
+^.001^2^2^3020422^^^
+"^DD",2005,2005,41,21,1,0)
+The Classification of the Image.  
+"^DD",2005,2005,41,21,2,0)
+CLASS is an index field used for sorting and searching.
+"^DD",2005,2005,41,"DT")
+3030203
+"^DD",2005,2005,42,0)
+TYPE INDEX^P2005.83'^MAG(2005.83,^40;3^Q
+"^DD",2005,2005,42,21,0)
+^.001^1^1^3020201^^
+"^DD",2005,2005,42,21,1,0)
+The TYPE of Image.  TYPE is an index field used for sorting and searching.
+"^DD",2005,2005,42,"DT")
+3030203
+"^DD",2005,2005,43,0)
+PROC/EVENT INDEX^P2005.85'^MAG(2005.85,^40;4^Q
+"^DD",2005,2005,43,21,0)
+^.001^1^1^3020201^^
+"^DD",2005,2005,43,21,1,0)
+The PROCEDURE/EVENT of Image.  PROCEDURE/EVENT is an index field used for sorting and searching.
+"^DD",2005,2005,43,"DT")
+3030203
+"^DD",2005,2005,44,0)
+SPEC/SUBSPEC INDEX^P2005.84'^MAG(2005.84,^40;5^Q
+"^DD",2005,2005,44,21,0)
+^.001^2^2^3020201^^
+"^DD",2005,2005,44,21,1,0)
+The SPECIALTY/SUBSPECIALTY of Image.
+"^DD",2005,2005,44,21,2,0)
+  SPECIALTY/SUBSPECIALTY is an index field used for sorting and searching.
+"^DD",2005,2005,44,"DT")
+3030203
+"^DD",2005,2005,45,0)
+ORIGIN INDEX^S^V:VA;N:NON-VA;D:DOD;F:FEE;I:IHS;^40;6^Q
+"^DD",2005,2005,45,3)
+Select Origin Index.
+"^DD",2005,2005,45,21,0)
+^.001^2^2^3111115^^^^
+"^DD",2005,2005,45,21,1,0)
+This field indicates whether this image originated inside or outside of 
+"^DD",2005,2005,45,21,2,0)
+VA.
+"^DD",2005,2005,45,"DT")
+3111115
+"^DD",2005,2005,50,0)
+PATH ACCESSION NUMBER^F^^PATH;1^K:$L(X)>9!($L(X)<5) X
+"^DD",2005,2005,50,3)
+Answer must be 5-9 characters in length.
+"^DD",2005,2005,50,21,0)
+^^2^2^2970721^^^^
+"^DD",2005,2005,50,21,1,0)
+This is the Anatomic Pathology accession number - the identifying number
+"^DD",2005,2005,50,21,2,0)
+for the slide.
+"^DD",2005,2005,50,"DT")
+2930211
+"^DD",2005,2005,51,0)
+SPECIMEN DESCRIPTION^F^^PATH;2^K:$L(X)>30!($L(X)<3) X
+"^DD",2005,2005,51,3)
+Answer must be 3-30 characters in length.
+"^DD",2005,2005,51,21,0)
+^^2^2^2970721^^^^
+"^DD",2005,2005,51,21,1,0)
+This is the description given to the specimen in the Lab Data file - the
+"^DD",2005,2005,51,21,2,0)
+information is carried over and stuffed into the Image file.
+"^DD",2005,2005,51,"DT")
+2930709
+"^DD",2005,2005,52,0)
+SPECIMEN#^NJ2,0^^PATH;3^K:+X'=X!(X>10)!(X<1)!(X?.E1"."1N.N) X
+"^DD",2005,2005,52,3)
+Type a Number between 1 and 10, 0 Decimal Digits
+"^DD",2005,2005,52,21,0)
+^^1^1^2970721^^^^
+"^DD",2005,2005,52,21,1,0)
+This is the specimen number of the slide given in the Lab Data file.
+"^DD",2005,2005,52,"DT")
+2930216
+"^DD",2005,2005,53,0)
+STAIN^F^^PATH;4^K:$L(X)>30!($L(X)<2) X
+"^DD",2005,2005,53,3)
+Answer must be 2-30 characters in length.
+"^DD",2005,2005,53,21,0)
+^^3^3^2970721^
+"^DD",2005,2005,53,21,1,0)
+Free text description of the Histological Stain. It is the stain used in
+"^DD",2005,2005,53,21,2,0)
+the preparation of the specimen and is chosen by the pathologist from the
+"^DD",2005,2005,53,21,3,0)
+Histological Stain file list.
+"^DD",2005,2005,53,"DT")
+2970414
+"^DD",2005,2005,54,0)
+MICROSCOPIC OBJECTIVE^F^^PATH;5^K:$L(X)>10!($L(X)<1) X
+"^DD",2005,2005,54,3)
+Answer must be 1-10 characters in length.
+"^DD",2005,2005,54,21,0)
+^^3^3^2970721^
+"^DD",2005,2005,54,21,1,0)
+Free text description of the Microscopic Objective selected by the
+"^DD",2005,2005,54,21,2,0)
+pathologist. It identifies the power of the microscope objective used
+"^DD",2005,2005,54,21,3,0)
+when capturing the image of the slide.
+"^DD",2005,2005,54,"DT")
+2970414
+"^DD",2005,2005,60,0)
+PACS UID^F^^PACS;1^K:X[""""!($A(X)=45) X I $D(X) K:$L(X)>64!($L(X)<1) X
+"^DD",2005,2005,60,1,0)
+^.1
+"^DD",2005,2005,60,1,1,0)
+2005^P
+"^DD",2005,2005,60,1,1,1)
+S ^MAG(2005,"P",X,DA)=""
+"^DD",2005,2005,60,1,1,2)
+K ^MAG(2005,"P",X,DA)
+"^DD",2005,2005,60,1,1,3)
+PACS UNIVERSAL IDENTIFIER
+"^DD",2005,2005,60,1,1,"%D",0)
+^^5^5^3001024^^
+"^DD",2005,2005,60,1,1,"%D",1,0)
+This cross reference is set by images captured from VistA Imaging DICOM
+"^DD",2005,2005,60,1,1,"%D",2,0)
+Gateways. The cross reference is set to the Study Instance UID (0020,000D) for
+"^DD",2005,2005,60,1,1,"%D",3,0)
+a Group Entry, and the SOP Instance UID (0008,0018), or Image UID, for an Image
+"^DD",2005,2005,60,1,1,"%D",4,0)
+Entry.  (These values are set in ^MAGDIR2A and ^MAGDIR2B, respectively.)
+"^DD",2005,2005,60,1,1,"%D",5,0)
+
+"^DD",2005,2005,60,1,1,"DT")
+2930615
+"^DD",2005,2005,60,3)
+Answer must be 1-64 characters in length.
+"^DD",2005,2005,60,21,0)
+^^2^2^3001107^^
+"^DD",2005,2005,60,21,1,0)
+This field is used by the VISTA-PACS interface and is the unique (up to) 64
+"^DD",2005,2005,60,21,2,0)
+character image identifier of the PACS image.
+"^DD",2005,2005,60,"DT")
+3001107
+"^DD",2005,2005,61,0)
+RADIOLOGY REPORT^P74'^RARPT(^PACS;2^Q
+"^DD",2005,2005,61,21,0)
+^^2^2^2970721^^^
+"^DD",2005,2005,61,21,1,0)
+Pointer to Radiology Report file used by the PACS interface to tie the
+"^DD",2005,2005,61,21,2,0)
+image to the correct radiology report.
+"^DD",2005,2005,61,"DT")
+2930615
+"^DD",2005,2005,62,0)
+PACS PROCEDURE^P71'^RAMIS(71,^PACS;3^Q
+"^DD",2005,2005,62,3)
+RADIOLOGICAL PROCEDURE
+"^DD",2005,2005,62,21,0)
+^^3^3^2981112^^^
+"^DD",2005,2005,62,21,1,0)
+This field is used by the VistA-PACS interface and is a backwards pointer
+"^DD",2005,2005,62,21,2,0)
+to the Radiology Reports file with which this radiological image is
+"^DD",2005,2005,62,21,3,0)
+associated.
+"^DD",2005,2005,62,"DT")
+2930708
+"^DD",2005,2005,63,0)
+PARENT GLOBAL ROOT D1^NJ9,0^^2;10^K:+X'=X!(X>999999999)!(X<0)!(X?.E1"."1N.N) X
+"^DD",2005,2005,63,3)
+Type a Number between 0 and 999999999, 0 Decimal Digits
+"^DD",2005,2005,63,21,0)
+^.001^67^67^3001025^^^
+"^DD",2005,2005,63,21,1,0)
+The values of fields 16, 17, 18 and 63 are numbers.
+"^DD",2005,2005,63,21,2,0)
+These numbers are internal entry numbers. Which field
+"^DD",2005,2005,63,21,3,0)
+corresponds to which internal entry number is explained below.
+"^DD",2005,2005,63,21,4,0)
+
+"^DD",2005,2005,63,21,5,0)
+Together, the values of these fields establish a link back
+"^DD",2005,2005,63,21,6,0)
+to the entry in the "parent" file, that holds the information
+"^DD",2005,2005,63,21,7,0)
+that describes why the image was collected.
+"^DD",2005,2005,63,21,8,0)
+
+"^DD",2005,2005,63,21,9,0)
+The link to the "parent" information is brought about by
+"^DD",2005,2005,63,21,10,0)
+the combination of the values of fields 16, 17, and, 18, and
+"^DD",2005,2005,63,21,11,0)
+optionally also field 63.
+"^DD",2005,2005,63,21,12,0)
+
+"^DD",2005,2005,63,21,13,0)
+The value of field 16 is a number that indicates the internal
+"^DD",2005,2005,63,21,14,0)
+entry number of the "parent file" in the VA-FileMan data dictionary.
+"^DD",2005,2005,63,21,15,0)
+Common parent files are:
+"^DD",2005,2005,63,21,16,0)
+
+"^DD",2005,2005,63,21,17,0)
+   File    Name
+"^DD",2005,2005,63,21,18,0)
+   ====    ====
+"^DD",2005,2005,63,21,19,0)
+     3.9:  MAIL MESSAGE
+"^DD",2005,2005,63,21,20,0)
+    63:    AUTOPSY (MICROSCOPIC)
+"^DD",2005,2005,63,21,21,0)
+    63.02: ELECTRON MICROSCOPY
+"^DD",2005,2005,63,21,22,0)
+    63.08: SURGICAL PATHOLOGY
+"^DD",2005,2005,63,21,23,0)
+    63.09: CYTOLOGY
+"^DD",2005,2005,63,21,24,0)
+    63.2:  AUTOPSY (GROSS)
+"^DD",2005,2005,63,21,25,0)
+    74:    RADIOLOGY
+"^DD",2005,2005,63,21,26,0)
+   130:    SURGERY
+"^DD",2005,2005,63,21,27,0)
+   691:    ECHOCARDIOGRAM
+"^DD",2005,2005,63,21,28,0)
+   691.1:  CARDIAC CATHETERIZATION
+"^DD",2005,2005,63,21,29,0)
+   691.5:  ELECTROCARDIOGRAPHY
+"^DD",2005,2005,63,21,30,0)
+   694:    HEMATOLOGY
+"^DD",2005,2005,63,21,31,0)
+   699:    ENDOSCOPY
+"^DD",2005,2005,63,21,32,0)
+   699.5:  GENERIC MEDICINE
+"^DD",2005,2005,63,21,33,0)
+  8925:    TIU
+"^DD",2005,2005,63,21,34,0)
+
+"^DD",2005,2005,63,21,35,0)
+The records in each of these "parent" files contain a multiple that itemizes
+"^DD",2005,2005,63,21,36,0)
+the list of images that belong to that record.
+"^DD",2005,2005,63,21,37,0)
+
+"^DD",2005,2005,63,21,38,0)
+The field numbers and fixed indexes for those multiples
+"^DD",2005,2005,63,21,39,0)
+all have the number 2005. The entries within these multiples
+"^DD",2005,2005,63,21,40,0)
+all have a field that is a pointer back to the image file.
+"^DD",2005,2005,63,21,41,0)
+The entries in these multiples identify the various images
+"^DD",2005,2005,63,21,42,0)
+that belong with the record in question.
+"^DD",2005,2005,63,21,43,0)
+
+"^DD",2005,2005,63,21,44,0)
+The various parent files each have their own structure, for instance
+"^DD",2005,2005,63,21,45,0)
+
+"^DD",2005,2005,63,21,46,0)
+ Type Number     Form of Root
+"^DD",2005,2005,63,21,47,0)
+ ===========     ============
+"^DD",2005,2005,63,21,48,0)
+     1           ^RARPT(D0,2005,D1,0)=image...
+"^DD",2005,2005,63,21,49,0)
+     2           ^MCAR(699,D0,2005,D1,0)=image...
+"^DD",2005,2005,63,21,50,0)
+     3           ^LR(D0,"SP",D1,2005,D2,0)=image...
+"^DD",2005,2005,63,21,51,0)
+
+"^DD",2005,2005,63,21,52,0)
+Depending on the nature of the file structure of the parent file,
+"^DD",2005,2005,63,21,53,0)
+the imaging software will need either just the value of D0 (type
+"^DD",2005,2005,63,21,54,0)
+1 and type 2) to find the correct entry, or the values of D0 as
+"^DD",2005,2005,63,21,55,0)
+well as D1 (type 3).
+"^DD",2005,2005,63,21,56,0)
+
+"^DD",2005,2005,63,21,57,0)
+The values of the fields in the image file correspond to the
+"^DD",2005,2005,63,21,58,0)
+values of the indices in the parent file as follows:
+"^DD",2005,2005,63,21,59,0)
+
+"^DD",2005,2005,63,21,60,0)
+   Type Number   Field Number and FileMan Index
+"^DD",2005,2005,63,21,61,0)
+   ===========   ==============================
+"^DD",2005,2005,63,21,62,0)
+       1         field 17 = D0, field 18 = D1
+"^DD",2005,2005,63,21,63,0)
+       2         field 17 = D0, field 18 = D1
+"^DD",2005,2005,63,21,64,0)
+       3         field 17 = D0, field 63 = D1, field 18 = D2
+"^DD",2005,2005,63,21,65,0)
+
+"^DD",2005,2005,63,21,66,0)
+In the case of type 3, the value of D0 is equal to the
+"^DD",2005,2005,63,21,67,0)
+value of LRDFN.
+"^DD",2005,2005,63,"DT")
+2950316
+"^DD",2005,2005,64,0)
+PARENT ASSOCIATION DATE^D^^2;11^S %DT="EST" D ^%DT S X=Y K:Y<1 X
+"^DD",2005,2005,64,3)
+(No range limit on date)
+"^DD",2005,2005,64,21,0)
+^.001^2^2^3051222^^^^
+"^DD",2005,2005,64,21,1,0)
+This is the Date that the Document/Image was associated with the 
+"^DD",2005,2005,64,21,2,0)
+Parent Data File. Field # 16
+"^DD",2005,2005,64,"DT")
+3051222
+"^DD",2005,2005,99,0)
+AUDIT^2005.099D^^99;0
+"^DD",2005,2005,99,9)
+@
+"^DD",2005,2005,99,20,0)
+^.3LA^1^1
+"^DD",2005,2005,99,20,1,0)
+MAG*3*93
+"^DD",2005,2005,99,21,0)
+^.001^5^5^3081217^^
+"^DD",2005,2005,99,21,1,0)
+This multiple stores previous values of the 
+"^DD",2005,2005,99,21,2,0)
+record fields (audit trail). 
+"^DD",2005,2005,99,21,3,0)
+ 
+"^DD",2005,2005,99,21,4,0)
+See the "AUDIT2", "AUDIT40", and "AUDIT100"
+"^DD",2005,2005,99,21,5,0)
+cross-references for more details.
+"^DD",2005,2005,99,23,0)
+^.001^1^1^3081217^^^
+"^DD",2005,2005,99,23,1,0)
+Added by the patch MAG*3*93.
+"^DD",2005,2005,99,"DT")
+3080321
+"^DD",2005,2005,100,0)
+DESCRIPTIVE CATEGORY^P2005.81'^MAG(2005.81,^100;1^Q
+"^DD",2005,2005,100,3)
+Enter the Category of the Image.
+"^DD",2005,2005,100,21,0)
+^^2^2^3000314^^
+"^DD",2005,2005,100,21,1,0)
+This is mainly for Document Imaging, it further describes the type of
+"^DD",2005,2005,100,21,2,0)
+document image.
+"^DD",2005,2005,100,"DT")
+2950714
+"^DD",2005,2005,101,0)
+CLINIC^P44'^SC(^100;2^Q
+"^DD",2005,2005,101,3)
+This is a pointer to the hospital location file.
+"^DD",2005,2005,101,21,0)
+^^4^4^3000314^^
+"^DD",2005,2005,101,21,1,0)
+Points to the Hospital location file and will be used mainly for document
+"^DD",2005,2005,101,21,2,0)
+images. If an image is associated with a patient encounter (visit), this
+"^DD",2005,2005,101,21,3,0)
+is the clinic they had (will have) the appointment.  The appointment
+"^DD",2005,2005,101,21,4,0)
+date/time is in field #15, PROCEDURE/EXAM DATE/TIME.
+"^DD",2005,2005,101,"DT")
+2960710
+"^DD",2005,2005,102,0)
+BIG MAGNETIC PATH^P2005.2'^MAG(2005.2,^FBIG;1^Q
+"^DD",2005,2005,102,3)
+This is the BIG file, i.e. the 2k by 2k Radiology image
+"^DD",2005,2005,102,21,0)
+^^2^2^2980504^^^
+"^DD",2005,2005,102,21,1,0)
+Full file path description for Image file of .BIG file types.
+"^DD",2005,2005,102,21,2,0)
+This field will indicate on which magnetic server this file resides.
+"^DD",2005,2005,102,"DT")
+2980505
+"^DD",2005,2005,103,0)
+BIG JUKEBOX PATH^P2005.2'^MAG(2005.2,^FBIG;2^Q
+"^DD",2005,2005,103,3)
+The JukeBox location of the BIG file. (the 2k by 2k Rad image)
+"^DD",2005,2005,103,21,0)
+^.001^2^2^3040628^^
+"^DD",2005,2005,103,21,1,0)
+Full file path on jukebox for images of .BIG file extension.  This field
+"^DD",2005,2005,103,21,2,0)
+will indicate whether this file is located on the Jukebox.
+"^DD",2005,2005,103,"DT")
+2980505
+"^DD",2005,2005,104,0)
+BIG FILE EXTENSION^F^^FBIG;3^K:$L(X)>5!($L(X)<3) X
+"^DD",2005,2005,104,3)
+Enter a 3-5 character file extension.
+"^DD",2005,2005,104,21,0)
+^.001^1^1^3100927^^^^
+"^DD",2005,2005,104,21,1,0)
+This is the Image File Extension (e.g. DCM, BIG).
+"^DD",2005,2005,104,"DT")
+3090513
+"^DD",2005,2005,106,0)
+ROUTING TIMESTAMP^2005.0106DA^^4;0
+"^DD",2005,2005,106,21,0)
+^.001^1^1^3001005^^^^
+"^DD",2005,2005,106,21,1,0)
+This field keeps track of any routing activity.
+"^DD",2005,2005,106,"DT")
+3030220
+"^DD",2005,2005,107,0)
+ACQUISITION DEVICE^P2006.04^MAG(2006.04,^100;4^Q
+"^DD",2005,2005,107,3)
+Enter the device that performed the Image Acquisition.
+"^DD",2005,2005,107,"DT")
+3010114
+"^DD",2005,2005,108,0)
+TRACKING ID^F^^100;5^K:$L(X)>30!($L(X)<3) X
+"^DD",2005,2005,108,1,0)
+^.1
+"^DD",2005,2005,108,1,1,0)
+2005^ATRKID
+"^DD",2005,2005,108,1,1,1)
+S ^MAG(2005,"ATRKID",$E(X,1,30),DA)=""
+"^DD",2005,2005,108,1,1,2)
+K ^MAG(2005,"ATRKID",$E(X,1,30),DA)
+"^DD",2005,2005,108,1,1,"%D",0)
+^^3^3^3010312^
+"^DD",2005,2005,108,1,1,"%D",1,0)
+Cross reference of images imported using the Import API.  TrkID is 
+"^DD",2005,2005,108,1,1,"%D",2,0)
+a unique identifier of the package, or OTS Application that initiated
+"^DD",2005,2005,108,1,1,"%D",3,0)
+the Import using Imagings Import API. ( silent call)
+"^DD",2005,2005,108,1,1,"DT")
+3010312
+"^DD",2005,2005,108,3)
+Package ID that performed the Import ";" Internal package identifier
+"^DD",2005,2005,108,21,0)
+^^4^4^3010114^
+"^DD",2005,2005,108,21,1,0)
+This field tracks the packages that are using the Import API.
+"^DD",2005,2005,108,21,2,0)
+It is an ";" (semicolon) delimited free text field.  
+"^DD",2005,2005,108,21,3,0)
+First piece is the Package ID that performed the Import 
+"^DD",2005,2005,108,21,4,0)
+Second piece is the Internal package identifier
+"^DD",2005,2005,108,"DT")
+3010312
+"^DD",2005,2005,109,0)
+CREATE METHOD^F^^METHOD;1^K:$L(X)>245!($L(X)<3) X
+"^DD",2005,2005,109,3)
+This field holds the command that either has created the image(s), or will dynamically access the Image from the Display GUI.
+"^DD",2005,2005,109,21,0)
+^^5^5^3010130^
+"^DD",2005,2005,109,21,1,0)
+This field holds the command that either
+"^DD",2005,2005,109,21,2,0)
+   has created the image(s)
+"^DD",2005,2005,109,21,3,0)
+   or will dynamically access the Image when called from the Display GUI
+"^DD",2005,2005,109,21,4,0)
+an example is a DLL provided by a COTS product.
+"^DD",2005,2005,109,21,5,0)
+When the DLL is called, it generates the image.
+"^DD",2005,2005,109,"DT")
+3010130
+"^DD",2005,2005,110,0)
+DOCUMENT DATE^D^^100;6^S %DT="EST" D ^%DT S X=Y K:Y<1 X
+"^DD",2005,2005,110,3)
+Enter the date (optionally time too) when this document was created.
+"^DD",2005,2005,110,21,0)
+^.001^1^1^3070118^^
+"^DD",2005,2005,110,21,1,0)
+Document Images can have a separate date, unlike clinical images that are attached to a procedure, and only procedure date is needed.
+"^DD",2005,2005,110,"DT")
+3070118
+"^DD",2005,2005,111,0)
+ROUTING LOG^2005.0111A^^6;0
+"^DD",2005,2005,112,0)
+CONTROLLED IMAGE^S^0:NO;1:YES;^100;7^Q
+"^DD",2005,2005,112,3)
+Select YES, if the image must not be shown until the user explicitly selects it.
+"^DD",2005,2005,112,20,0)
+^.3LA^1^1
+"^DD",2005,2005,112,20,1,0)
+MAG*3*93
+"^DD",2005,2005,112,21,0)
+^.001^13^13^3081217^^
+"^DD",2005,2005,112,21,1,0)
+In the Clinical Display application, the abstract 
+"^DD",2005,2005,112,21,2,0)
+of a controlled image is not shown in the Abstracts
+"^DD",2005,2005,112,21,3,0)
+or Group Abstracts window. A "canned" bitmap is
+"^DD",2005,2005,112,21,4,0)
+shown in place of the image. It has a text that
+"^DD",2005,2005,112,21,5,0)
+states that the image is controlled.
+"^DD",2005,2005,112,21,6,0)
+ 
+"^DD",2005,2005,112,21,7,0)
+Controlled images are not displayed until the user
+"^DD",2005,2005,112,21,8,0)
+explicitly selects the image to be viewed.
+"^DD",2005,2005,112,21,9,0)
+ 
+"^DD",2005,2005,112,21,10,0)
+If the value of this field is 'NO' or the field is
+"^DD",2005,2005,112,21,11,0)
+empty, then the image is handled "as usual": the
+"^DD",2005,2005,112,21,12,0)
+actual abstract of the image is shown in the
+"^DD",2005,2005,112,21,13,0)
+Abstracts and Group Abstracts windows.
+"^DD",2005,2005,112,23,0)
+^.001^1^1^3081217^^^
+"^DD",2005,2005,112,23,1,0)
+Added by the patch MAG*3*93.
+"^DD",2005,2005,112,"DT")
+3080718
+"^DD",2005,2005,112.1,0)
+CONTROLLED DATE^CD^^ ; ^S X=$S($G(D0)>0:$P($$LASTAUDT^MAGUTL04(2005,D0_",",112),"^",2),1:"")
+"^DD",2005,2005,112.1,9)
+^
+"^DD",2005,2005,112.1,9.01)
+
+"^DD",2005,2005,112.1,9.1)
+S X=$S($G(D0)>0:$P($$LASTAUDT^MAGUTL04(2005,DO_",",112),"^",2),1:"")
+"^DD",2005,2005,112.1,20,0)
+^.3LA^1^1
+"^DD",2005,2005,112.1,20,1,0)
+MAG*3*93
+"^DD",2005,2005,112.1,21,0)
+^.001^3^3^3081217^^
+"^DD",2005,2005,112.1,21,1,0)
+This field indicates date/time of the most recent
+"^DD",2005,2005,112.1,21,2,0)
+change of the image controlled status (see the
+"^DD",2005,2005,112.1,21,3,0)
+CONTROLLED IMAGE field (112)).
+"^DD",2005,2005,112.1,23,0)
+^.001^3^3^3081217^^^^
+"^DD",2005,2005,112.1,23,1,0)
+See the $$LASTAUDT^MAGUTL04 function for more details.
+"^DD",2005,2005,112.1,23,2,0)
+ 
+"^DD",2005,2005,112.1,23,3,0)
+Added by the patch MAG*3*93.
+"^DD",2005,2005,112.1,"DT")
+3080717
+"^DD",2005,2005,112.2,0)
+CONTROLLED BY^Cp200^^ ; ^S X=$S($G(D0)>0:$P($$LASTAUDT^MAGUTL04(2005,D0_",",112),"^",3),1:"")
+"^DD",2005,2005,112.2,9)
+^
+"^DD",2005,2005,112.2,9.01)
+
+"^DD",2005,2005,112.2,9.1)
+S X=$S($G(D0)>0:$P($$LASTAUDT^MAGUTL04(2005,D0_",",112),"^",3),1:"")
+"^DD",2005,2005,112.2,20,0)
+^.3LA^1^1
+"^DD",2005,2005,112.2,20,1,0)
+MAG*3*93
+"^DD",2005,2005,112.2,21,0)
+^.001^3^3^3081217^^
+"^DD",2005,2005,112.2,21,1,0)
+This field references the user who made the most
+"^DD",2005,2005,112.2,21,2,0)
+recent change of the image controlled status (see
+"^DD",2005,2005,112.2,21,3,0)
+the CONTROLLED IMAGE field (112)).
+"^DD",2005,2005,112.2,23,0)
+^.001^3^3^3081217^^^^
+"^DD",2005,2005,112.2,23,1,0)
+See the $$LASTAUDT^MAGUTL04 function for more details.
+"^DD",2005,2005,112.2,23,2,0)
+ 
+"^DD",2005,2005,112.2,23,3,0)
+Added by the patch MAG*3*93.
+"^DD",2005,2005,112.2,"DT")
+3080717
+"^DD",2005,2005,113,0)
+STATUS^S^1:Viewable;2:QA Reviewed;10:In Progress;11:Needs Review;12:Deleted;^100;8^Q
+"^DD",2005,2005,113,3)
+Select the current status of the image.
+"^DD",2005,2005,113,20,0)
+^.3LA^1^1
+"^DD",2005,2005,113,20,1,0)
+MAG*3*93
+"^DD",2005,2005,113,21,0)
+^.001^31^31^3081217^^
+"^DD",2005,2005,113,21,1,0)
+Viewable  
+"^DD",2005,2005,113,21,2,0)
+ 
+"^DD",2005,2005,113,21,3,0)
+  By default, all images are viewable, and images
+"^DD",2005,2005,113,21,4,0)
+  with no status are considered viewable.
+"^DD",2005,2005,113,21,5,0)
+ 
+"^DD",2005,2005,113,21,6,0)
+Verified
+"^DD",2005,2005,113,21,7,0)
+ 
+"^DD",2005,2005,113,21,8,0)
+  A user has viewed the image and verified that
+"^DD",2005,2005,113,21,9,0)
+  the patient identifier and values of index 
+"^DD",2005,2005,113,21,10,0)
+  fields are correct for this image.
+"^DD",2005,2005,113,21,11,0)
+ 
+"^DD",2005,2005,113,21,12,0)
+ 
+"^DD",2005,2005,113,21,13,0)
+In Progress
+"^DD",2005,2005,113,21,14,0)
+ 
+"^DD",2005,2005,113,21,15,0)
+  When capturing image groups, this status will
+"^DD",2005,2005,113,21,16,0)
+  indicate that the images are being added to the
+"^DD",2005,2005,113,21,17,0)
+  group of images. When the process is complete,
+"^DD",2005,2005,113,21,18,0)
+  the status will change to Viewable. 
+"^DD",2005,2005,113,21,19,0)
+ 
+"^DD",2005,2005,113,21,20,0)
+Needs Review
+"^DD",2005,2005,113,21,21,0)
+  
+"^DD",2005,2005,113,21,22,0)
+  Indicates that value(s) of the index fields or 
+"^DD",2005,2005,113,21,23,0)
+  patient identifier have been found to be
+"^DD",2005,2005,113,21,24,0)
+  incorrect. VistA Imaging Display application
+"^DD",2005,2005,113,21,25,0)
+  will block images with this status from being
+"^DD",2005,2005,113,21,26,0)
+  viewed. The Image Edit utility can be used to
+"^DD",2005,2005,113,21,27,0)
+  modify the incorrect values of the index fields.
+"^DD",2005,2005,113,21,28,0)
+ 
+"^DD",2005,2005,113,21,29,0)
+Deleted
+"^DD",2005,2005,113,21,30,0)
+ 
+"^DD",2005,2005,113,21,31,0)
+  Marks the image as deleted.
+"^DD",2005,2005,113,23,0)
+^.001^3^3^3081217^^^
+"^DD",2005,2005,113,23,1,0)
+Use only positive canonic numbers for internal values.
+"^DD",2005,2005,113,23,2,0)
+ 
+"^DD",2005,2005,113,23,3,0)
+Added by the patch MAG*3*93.
+"^DD",2005,2005,113,"DT")
+3081215
+"^DD",2005,2005,113.1,0)
+STATUS DATE^CD^^ ; ^S X=$S($G(D0)>0:$P($$LASTAUDT^MAGUTL04(2005,D0_",",113),"^",2),1:"")
+"^DD",2005,2005,113.1,9)
+^
+"^DD",2005,2005,113.1,9.01)
+
+"^DD",2005,2005,113.1,9.1)
+S X=$S($G(D0)>0:$P($$LASTAUDT^MAGUTL04(2005,D0_",",113),"^",2),1:"")
+"^DD",2005,2005,113.1,20,0)
+^.3LA^1^1
+"^DD",2005,2005,113.1,20,1,0)
+MAG*3*93
+"^DD",2005,2005,113.1,21,0)
+^.001^3^3^3081217^^
+"^DD",2005,2005,113.1,21,1,0)
+This field indicates date/time of the most recent
+"^DD",2005,2005,113.1,21,2,0)
+change of the image status (see the STATUS field
+"^DD",2005,2005,113.1,21,3,0)
+(113)).
+"^DD",2005,2005,113.1,23,0)
+^.001^3^3^3081217^^
+"^DD",2005,2005,113.1,23,1,0)
+See the $$LASTAUDT^MAGUTL04 function for more details.
+"^DD",2005,2005,113.1,23,2,0)
+                     
+"^DD",2005,2005,113.1,23,3,0)
+Added by the patch MAG*3*93.
+"^DD",2005,2005,113.1,"DT")
+3080718
+"^DD",2005,2005,113.2,0)
+STATUS BY^Cp200^^ ; ^S X=$S($G(D0)>0:$P($$LASTAUDT^MAGUTL04(2005,D0_",",113),"^",3),1:"")
+"^DD",2005,2005,113.2,9)
+^
+"^DD",2005,2005,113.2,9.01)
+
+"^DD",2005,2005,113.2,9.1)
+S X=$S($G(D0)>0:$P($$LASTAUDT^MAGUTL04(2005,D0_",",113),"^",3),1:"")
+"^DD",2005,2005,113.2,20,0)
+^.3LA^1^1
+"^DD",2005,2005,113.2,20,1,0)
+MAG*3*93
+"^DD",2005,2005,113.2,21,0)
+^.001^3^3^3081217^^
+"^DD",2005,2005,113.2,21,1,0)
+This field references the user who made the most 
+"^DD",2005,2005,113.2,21,2,0)
+recent change of the image status (see the STATUS 
+"^DD",2005,2005,113.2,21,3,0)
+field (113)).
+"^DD",2005,2005,113.2,23,0)
+^.001^3^3^3081217^^
+"^DD",2005,2005,113.2,23,1,0)
+See the $$LASTAUDT^MAGUTL04 function for more details.
+"^DD",2005,2005,113.2,23,2,0)
+ 
+"^DD",2005,2005,113.2,23,3,0)
+Added by the patch MAG*3*93.
+"^DD",2005,2005,113.2,"DT")
+3080718
+"^DD",2005,2005,113.3,0)
+STATUS REASON^*P2005.88'^MAG(2005.88,^100;9^S DIC("S")="I $P($G(^(0)),""^"",2)[""S""" D ^DIC K DIC S DIC=DIE,X=+Y K:Y<0 X
+"^DD",2005,2005,113.3,1,0)
+^.1
+"^DD",2005,2005,113.3,1,1,0)
+2005^ASTRSN^MUMPS
+"^DD",2005,2005,113.3,1,1,1)
+S ^MAG(2005.88,"AREF",X,2005,DA_",",113.3)=""
+"^DD",2005,2005,113.3,1,1,2)
+K ^MAG(2005.88,"AREF",X,2005,DA_",",113.3)
+"^DD",2005,2005,113.3,1,1,"%D",0)
+^.101^27^27^3081006^^
+"^DD",2005,2005,113.3,1,1,"%D",1,0)
+The logic of the ASTRSN cross-reference maintains
+"^DD",2005,2005,113.3,1,1,"%D",2,0)
+a list of references from the STATUS REASON field 
+"^DD",2005,2005,113.3,1,1,"%D",3,0)
+(113.3) of the IMAGE file (#2005) to the MAG
+"^DD",2005,2005,113.3,1,1,"%D",4,0)
+REASON file (#2005.88). 
+"^DD",2005,2005,113.3,1,1,"%D",5,0)
+ 
+"^DD",2005,2005,113.3,1,1,"%D",6,0)
+This list is used by the logic of the "DELETE"
+"^DD",2005,2005,113.3,1,1,"%D",7,0)
+node of the REASON field (.01) of the MAG REASON
+"^DD",2005,2005,113.3,1,1,"%D",8,0)
+file (#2005.88) to prevent deletion of reasons
+"^DD",2005,2005,113.3,1,1,"%D",9,0)
+that are referenced by records of other files.
+"^DD",2005,2005,113.3,1,1,"%D",10,0)
+ 
+"^DD",2005,2005,113.3,1,1,"%D",11,0)
+The list is stored under the "AREF" subscript in
+"^DD",2005,2005,113.3,1,1,"%D",12,0)
+the MAG REASON file (#2005.88) and has the
+"^DD",2005,2005,113.3,1,1,"%D",13,0)
+following structure:
+"^DD",2005,2005,113.3,1,1,"%D",14,0)
+ 
+"^DD",2005,2005,113.3,1,1,"%D",15,0)
+ ^MAG(2005.88,"AREF",<Reason>,2005,<IENS>,113.3) = ""
+"^DD",2005,2005,113.3,1,1,"%D",16,0)
+ 
+"^DD",2005,2005,113.3,1,1,"%D",17,0)
+The <Reason> is the IEN of the reason that is
+"^DD",2005,2005,113.3,1,1,"%D",18,0)
+pointed by the STATUS REASON field (113.3).
+"^DD",2005,2005,113.3,1,1,"%D",19,0)
+ 
+"^DD",2005,2005,113.3,1,1,"%D",20,0)
+The 2005 is the number of the file from where the
+"^DD",2005,2005,113.3,1,1,"%D",21,0)
+reason is referenced (IMAGE).
+"^DD",2005,2005,113.3,1,1,"%D",22,0)
+ 
+"^DD",2005,2005,113.3,1,1,"%D",23,0)
+The <IENS> is the IENS of the record of the IMAGE 
+"^DD",2005,2005,113.3,1,1,"%D",24,0)
+file (#2005) that references the reason.
+"^DD",2005,2005,113.3,1,1,"%D",25,0)
+ 
+"^DD",2005,2005,113.3,1,1,"%D",26,0)
+The 113.3 is the number of the field that points
+"^DD",2005,2005,113.3,1,1,"%D",27,0)
+to the reason (STATUS REASON).
+"^DD",2005,2005,113.3,1,1,"DT")
+3081006
+"^DD",2005,2005,113.3,3)
+Select the reason for the image status change.
+"^DD",2005,2005,113.3,12)
+Only reasons applicable to image status changes can be selected.
+"^DD",2005,2005,113.3,12.1)
+S DIC("S")="I $P($G(^(0)),""^"",2)[""S"""
+"^DD",2005,2005,113.3,20,0)
+^.3LA^1^1
+"^DD",2005,2005,113.3,20,1,0)
+MAG*3*93
+"^DD",2005,2005,113.3,21,0)
+^.001^2^2^3081217^^^^
+"^DD",2005,2005,113.3,21,1,0)
+This field indicates the reason for the latest
+"^DD",2005,2005,113.3,21,2,0)
+image status change (see the STATUS field (113)).
+"^DD",2005,2005,113.3,23,0)
+^.001^1^1^3081217^^^^
+"^DD",2005,2005,113.3,23,1,0)
+Added by the patch MAG*3*93.
+"^DD",2005,2005,113.3,"DT")
+3081006
+"^DD",2005,2005,114,0)
+NUMBER OF PAGES^NJ9,0^^100;10^K:+X'=X!(X>999999999)!(X<1)!(X?.E1"."1N.N) X
+"^DD",2005,2005,114,3)
+Enter number of pages in a multi-page image (between 1 and 999999999).
+"^DD",2005,2005,114,20,0)
+^.3LA^1^1
+"^DD",2005,2005,114,20,1,0)
+MAG*3*93
+"^DD",2005,2005,114,21,0)
+^.001^2^2^3081217^^^
+"^DD",2005,2005,114,21,1,0)
+This field stores number of pages in a multi-page
+"^DD",2005,2005,114,21,2,0)
+document (e.g. multi-page TIFF image).
+"^DD",2005,2005,114,23,0)
+^.001^1^1^3081217^^^^
+"^DD",2005,2005,114,23,1,0)
+Added by the patch MAG*3*93.
+"^DD",2005,2005,114,"DT")
+3081015
+"^DD",2005,2005,115.1,0)
+LINKED IMAGE^P2005.1'^MAG(2005.1,^100;11^Q
+"^DD",2005,2005,115.1,3)
+If this object is linked, enter the original.
+"^DD",2005,2005,115.1,21,0)
+^.001^4^4^3110630^^^
+"^DD",2005,2005,115.1,21,1,0)
+This is a pointer to the rescinded image. For example, when an image is rescinded a new 
+"^DD",2005,2005,115.1,21,2,0)
+image entry is created and the original is deleted. A 
+"^DD",2005,2005,115.1,21,3,0)
+link is established between the new image and the rescinded image. The 
+"^DD",2005,2005,115.1,21,4,0)
+value of the field is the rescinded image.
+"^DD",2005,2005,115.1,23,0)
+^.001^1^1^3110630^^^^
+"^DD",2005,2005,115.1,23,1,0)
+Added in patch MAG*3.0*121.
+"^DD",2005,2005,115.1,"DT")
+3110630
+"^DD",2005,2005,115.2,0)
+LINKED TYPE^S^1:RESCINDED;^100;12^Q
+"^DD",2005,2005,115.2,3)
+Enter the type of the relationship between the linked images.
+"^DD",2005,2005,115.2,21,0)
+^.001^4^4^3110518^^^
+"^DD",2005,2005,115.2,21,1,0)
+This is the type of the image link. For example, when image is 
+"^DD",2005,2005,115.2,21,2,0)
+rescinded a new image entry is created and the original is deleted. A 
+"^DD",2005,2005,115.2,21,3,0)
+link is established between the new image and the rescinded image. The 
+"^DD",2005,2005,115.2,21,4,0)
+value of the LINKED TYPE will be "RESCINDED".
+"^DD",2005,2005,115.2,23,0)
+^.001^1^1^3110518^^
+"^DD",2005,2005,115.2,23,1,0)
+Added in patch MAG*3.0*121.
+"^DD",2005,2005,115.2,"DT")
+3110308
+"^DD",2005,2005,115.3,0)
+LINKED DATE^D^^100;13^S %DT="ETX" D ^%DT S X=Y K:Y<1 X
+"^DD",2005,2005,115.3,3)
+Enter the date and time when the image was linked.
+"^DD",2005,2005,115.3,21,0)
+^.001^2^2^3110519^^^^
+"^DD",2005,2005,115.3,21,1,0)
+This is the date that the Document/Image was associated with the LINKED 
+"^DD",2005,2005,115.3,21,2,0)
+IMAGE.
+"^DD",2005,2005,115.3,23,0)
+^.001^1^1^3110519^^^^
+"^DD",2005,2005,115.3,23,1,0)
+Added in patch MAG*3.0*121.
+"^DD",2005,2005,115.3,"DT")
+3110519
+"^DD",2005,2005,210,0)
+PRESENTATION STATE^2005.05A^^210;0
+"^DD",2005,2005,210,21,0)
+^.001^2^2^3050608^^^^
+"^DD",2005,2005,210,21,1,0)
+Image Presentation state data stored below; this is free-text in XML format.
+"^DD",2005,2005,210,21,2,0)
+Annotations are included in this data.
+"^DD",2005,2005,210,"DT")
+3040707
+"^DD",2005,2005,251,0)
+DICOM SOP CLASS^P2006.532'^MAG(2006.532,^SOP;1^Q
+"^DD",2005,2005,251,3)
+Identify the SOP Class that was used to acquire this image.
+"^DD",2005,2005,251,21,0)
+^^2^2^3050111^
+"^DD",2005,2005,251,21,1,0)
+The value of this field is a pointer. The pointed to record
+"^DD",2005,2005,251,21,2,0)
+identifies the DICOM SOP Class that was used to acquire this image.
+"^DD",2005,2005,251,"DT")
+3050111
+"^DD",2005,2005,252,0)
+NEW SOP INSTANCE UID^F^^SOP;2^K:$L(X)>64!($L(X)<1)!'($TR(X,"1234567890.")="") X
+"^DD",2005,2005,252,3)
+Enter the VA's new SOP instance UID for the corrected image.
+"^DD",2005,2005,252,21,0)
+^^8^8^3041109^
+"^DD",2005,2005,252,21,1,0)
+The value of this field is a string that represents a DICOM UID.
+"^DD",2005,2005,252,21,2,0)
+The DICOM standard defines the format of a UID: a string containing
+"^DD",2005,2005,252,21,3,0)
+only digits and periods that does not exceed a length of 64 characters.
+"^DD",2005,2005,252,21,4,0)
+This field is populated when a corrected version of an image
+"^DD",2005,2005,252,21,5,0)
+is exported, and the corrections are of such a nature that
+"^DD",2005,2005,252,21,6,0)
+the image cannot be exported with its original SOP Instance UID.
+"^DD",2005,2005,252,21,7,0)
+Note that this UID value is assigned by VA software, and thus
+"^DD",2005,2005,252,21,8,0)
+will always start with the characters "1.2.840.113754.".
+"^DD",2005,2005,252,"DT")
+3041109
+"^DD",2005,2005,253,0)
+SERIES UID^F^^SERIESUID;1^K:$L(X)>64!($L(X)<1)!'(X?1.64(1N,1".")) X
+"^DD",2005,2005,253,1,0)
+^.1^^0
+"^DD",2005,2005,253,3)
+Enter the Series UID for the current image.
+"^DD",2005,2005,253,21,0)
+^.001^5^5^3050712^^
+"^DD",2005,2005,253,21,1,0)
+The value of this field is a DICOM unique identifier for
+"^DD",2005,2005,253,21,2,0)
+the series to which an image belongs.
+"^DD",2005,2005,253,21,3,0)
+A DICOM UID looks like a series of digits and periods,
+"^DD",2005,2005,253,21,4,0)
+is not longer than 64 characters, starts and ends with a digit
+"^DD",2005,2005,253,21,5,0)
+and never has two consecutive periods.
+"^DD",2005,2005,253,"DT")
+3050803
+"^DD",2005,2005.01,0)
+EXPORT LOCATION SUB-FIELD^^2^3
+"^DD",2005,2005.01,0,"DT")
+3011129
+"^DD",2005,2005.01,0,"IX","B",2005.01,.01)
+
+"^DD",2005,2005.01,0,"NM","EXPORT LOCATION")
+
+"^DD",2005,2005.01,0,"UP")
+2005
+"^DD",2005,2005.01,.01,0)
+EXPORT LOCATION^P2005.2'^MAG(2005.2,^0;1^Q
+"^DD",2005,2005.01,.01,1,0)
+^.1
+"^DD",2005,2005.01,.01,1,1,0)
+2005.01^B
+"^DD",2005,2005.01,.01,1,1,1)
+S ^MAG(2005,DA(1),5,"B",$E(X,1,30),DA)=""
+"^DD",2005,2005.01,.01,1,1,2)
+K ^MAG(2005,DA(1),5,"B",$E(X,1,30),DA)
+"^DD",2005,2005.01,.01,21,0)
+^^2^2^3011213^
+"^DD",2005,2005.01,.01,21,1,0)
+This is the network location file pointer that successfully received
+"^DD",2005,2005.01,.01,21,2,0)
+a copy of the file.
+"^DD",2005,2005.01,.01,"DT")
+3011128
+"^DD",2005,2005.01,1,0)
+TIMESTAMP^D^^0;2^S %DT="ET" D ^%DT S X=Y K:Y<1 X
+"^DD",2005,2005.01,1,21,0)
+^^2^2^3011213^
+"^DD",2005,2005.01,1,21,1,0)
+This is the date and time that the file was copied to the
+"^DD",2005,2005.01,1,21,2,0)
+network location.
+"^DD",2005,2005.01,1,"DT")
+3011128
+"^DD",2005,2005.01,2,0)
+EXTENSION^F^^0;3^K:$L(X)>3!($L(X)<3) X
+"^DD",2005,2005.01,2,3)
+Answer must be 3 characters in length.
+"^DD",2005,2005.01,2,21,0)
+^^2^2^3011213^
+"^DD",2005,2005.01,2,21,1,0)
+This is the file extension that was successfully copied to the 
+"^DD",2005,2005.01,2,21,2,0)
+network location.
+"^DD",2005,2005.01,2,"DT")
+3011129
+"^DD",2005,2005.0106,0)
+ROUTING TIMESTAMP SUB-FIELD^^7^7
+"^DD",2005,2005.0106,0,"DT")
+2981208
+"^DD",2005,2005.0106,0,"IX","LOC",2005.0106,2)
+
+"^DD",2005,2005.0106,0,"NM","ROUTING TIMESTAMP")
+
+"^DD",2005,2005.0106,0,"UP")
+2005
+"^DD",2005,2005.0106,.01,0)
+ROUTING TIMESTAMP^D^^0;1^S %DT="ESTXR" D ^%DT S X=Y K:Y<1 X
+"^DD",2005,2005.0106,.01,1,0)
+^.1^^0
+"^DD",2005,2005.0106,.01,3)
+Enter the date and time when the image file was 'routed'.
+"^DD",2005,2005.0106,.01,21,0)
+^^6^6^2981208^
+"^DD",2005,2005.0106,.01,21,1,0)
+This field keeps track of any routing activity.
+"^DD",2005,2005.0106,.01,21,2,0)
+For each time that an image file is transmitted in the context
+"^DD",2005,2005.0106,.01,21,3,0)
+of 'routing', an entry will be added to this multiple that
+"^DD",2005,2005.0106,.01,21,4,0)
+records which type of image file was transmitted (FULL, BIG,
+"^DD",2005,2005.0106,.01,21,5,0)
+ABSTRACT, etcetera), and to which destination (pointer to
+"^DD",2005,2005.0106,.01,21,6,0)
+network location) it was transmitted.
+"^DD",2005,2005.0106,.01,"DT")
+3030220
+"^DD",2005,2005.0106,2,0)
+DESTINATION^RP2005.2'^MAG(2005.2,^0;2^Q
+"^DD",2005,2005.0106,2,.1)
+
+"^DD",2005,2005.0106,2,1,0)
+^.1^^-1
+"^DD",2005,2005.0106,2,1,1,0)
+2005.0106^LOC
+"^DD",2005,2005.0106,2,1,1,1)
+S ^MAG(2005,DA(1),4,"LOC",$E(X,1,30),DA)=""
+"^DD",2005,2005.0106,2,1,1,2)
+K ^MAG(2005,DA(1),4,"LOC",$E(X,1,30),DA)
+"^DD",2005,2005.0106,2,1,1,"%D",0)
+^^3^3^2981222^
+"^DD",2005,2005.0106,2,1,1,"%D",1,0)
+This cross-reference keeps track of which destinations
+"^DD",2005,2005.0106,2,1,1,"%D",2,0)
+(network locations) have received image files from the
+"^DD",2005,2005.0106,2,1,1,"%D",3,0)
+current system.
+"^DD",2005,2005.0106,2,1,1,"DT")
+2981222
+"^DD",2005,2005.0106,2,3)
+Enter the destination to which the image file was transmitted.
+"^DD",2005,2005.0106,2,21,0)
+^^3^3^2981221^^^
+"^DD",2005,2005.0106,2,21,1,0)
+The value of this field is a pointer (into the network location file)
+"^DD",2005,2005.0106,2,21,2,0)
+that indicated where an image file was sent in the context of
+"^DD",2005,2005.0106,2,21,3,0)
+automated routing.
+"^DD",2005,2005.0106,2,"DT")
+3030220
+"^DD",2005,2005.0106,3,0)
+TYPE^RS^FULL:Full;ABSTRACT:Abstract;BIG:Big;TEXT:Text;DICOM:DICOM;^0;3^Q
+"^DD",2005,2005.0106,3,3)
+Enter the type of image file that was transmitted.
+"^DD",2005,2005.0106,3,21,0)
+^^2^2^2981221^^
+"^DD",2005,2005.0106,3,21,1,0)
+The value of this field indicates what type of image file
+"^DD",2005,2005.0106,3,21,2,0)
+was transmitted (FULL, BIG, TEXT, DICOM or ABSTRACT).
+"^DD",2005,2005.0106,3,"DT")
+3030220
+"^DD",2005,2005.0106,4,0)
+FILENAME^RF^^0;4^K:$L(X)>100!($L(X)<1) X
+"^DD",2005,2005.0106,4,3)
+Enter the name of the transmitted file (path+name at destination).
+"^DD",2005,2005.0106,4,21,0)
+^^3^3^2981221^^
+"^DD",2005,2005.0106,4,21,1,0)
+The value of this field is the name of the transmitted file as
+"^DD",2005,2005.0106,4,21,2,0)
+it is at the destination location. This file name contains all
+"^DD",2005,2005.0106,4,21,3,0)
+directory prefixes and a 'type' suffix.
+"^DD",2005,2005.0106,4,"DT")
+3030220
+"^DD",2005,2005.0106,5,0)
+START TRANSMIT^D^^0;5^S %DT="ESTXR" D ^%DT S X=Y K:Y<1 X
+"^DD",2005,2005.0106,5,3)
+Enter the time that the transmission started.
+"^DD",2005,2005.0106,5,21,0)
+^^6^6^3031211^
+"^DD",2005,2005.0106,5,21,1,0)
+The value of this field is a timestamp that indicates the
+"^DD",2005,2005.0106,5,21,2,0)
+date and time when the transmission of a file started.
+"^DD",2005,2005.0106,5,21,3,0)
+ 
+"^DD",2005,2005.0106,5,21,4,0)
+Together with the value of the field ROUTING TIMESTAMP,
+"^DD",2005,2005.0106,5,21,5,0)
+which indicates the time when the transmission completed,
+"^DD",2005,2005.0106,5,21,6,0)
+statistics can be calculated on how long it took to transmit image files.
+"^DD",2005,2005.0106,5,"DT")
+3031211
+"^DD",2005,2005.0106,6,0)
+TIMESTAMP QUEUE ENTRY^D^^0;6^S %DT="ESTXR" D ^%DT S X=Y K:Y<1 X
+"^DD",2005,2005.0106,6,3)
+Enter the time when the queue-entry was made.
+"^DD",2005,2005.0106,6,21,0)
+^^6^6^3031211^
+"^DD",2005,2005.0106,6,21,1,0)
+The value of this field is a timestamp that indicates the
+"^DD",2005,2005.0106,6,21,2,0)
+date and time when the entry was made into the routing queue.
+"^DD",2005,2005.0106,6,21,3,0)
+ 
+"^DD",2005,2005.0106,6,21,4,0)
+Together with the value of the field START TRANSMIT,
+"^DD",2005,2005.0106,6,21,5,0)
+which indicates when the transmission started, statistics
+"^DD",2005,2005.0106,6,21,6,0)
+can be calculated related to wait times in the routing queue.
+"^DD",2005,2005.0106,6,"DT")
+3031211
+"^DD",2005,2005.0106,7,0)
+LOG ENTRY^NJ15,0^^0;7^K:+X'=X!(X>999999999999999)!(X<0)!(X?.E1"."1N.N) X
+"^DD",2005,2005.0106,7,3)
+Enter the sequence number of the "permanent" log entry.
+"^DD",2005,2005.0106,7,21,0)
+^^6^6^3031211^
+"^DD",2005,2005.0106,7,21,1,0)
+The value of this field is an integer number that indicates
+"^DD",2005,2005.0106,7,21,2,0)
+the entry in the "permanent" log of all routed copies of the
+"^DD",2005,2005.0106,7,21,3,0)
+current image (as required by HIPAA).
+"^DD",2005,2005.0106,7,21,4,0)
+ 
+"^DD",2005,2005.0106,7,21,5,0)
+This value is used to record when images are purged from their
+"^DD",2005,2005.0106,7,21,6,0)
+routed destination.
+"^DD",2005,2005.0106,7,"DT")
+3031211
+"^DD",2005,2005.011,0)
+LONG DESCRIPTION SUB-FIELD^^.01^1
+"^DD",2005,2005.011,0,"DT")
+2930706
+"^DD",2005,2005.011,0,"NM","LONG DESCRIPTION")
+
+"^DD",2005,2005.011,0,"UP")
+2005
+"^DD",2005,2005.011,.01,0)
+LONG DESCRIPTION^W^^0;1^Q
+"^DD",2005,2005.011,.01,3)
+Enter a complete description of the image.
+"^DD",2005,2005.011,.01,"DT")
+2930706
+"^DD",2005,2005.0111,0)
+ROUTING LOG SUB-FIELD^^7^7
+"^DD",2005,2005.0111,0,"DT")
+3031211
+"^DD",2005,2005.0111,0,"NM","ROUTING LOG")
+
+"^DD",2005,2005.0111,0,"UP")
+2005
+"^DD",2005,2005.0111,.01,0)
+DESTINATION NAME^F^^0;1^K:$L(X)>63!($L(X)<1) X
+"^DD",2005,2005.0111,.01,1,0)
+^.1^^0
+"^DD",2005,2005.0111,.01,3)
+Enter the name of the destination to which the image is routed.
+"^DD",2005,2005.0111,.01,21,0)
+^.001^2^2^3031211^^
+"^DD",2005,2005.0111,.01,21,1,0)
+The value of this field is a string that identifies the location
+"^DD",2005,2005.0111,.01,21,2,0)
+to which the current image has been routed.
+"^DD",2005,2005.0111,.01,"DT")
+3031211
+"^DD",2005,2005.0111,2,0)
+COPY LOCATION^P2005.2'^MAG(2005.2,^0;2^Q
+"^DD",2005,2005.0111,2,3)
+Enter the name of the Network Location to which this image is being routed.
+"^DD",2005,2005.0111,2,21,0)
+^^4^4^3031211^
+"^DD",2005,2005.0111,2,21,1,0)
+The value of this field is a pointer to the Network Location table
+"^DD",2005,2005.0111,2,21,2,0)
+(#2005.2).
+"^DD",2005,2005.0111,2,21,3,0)
+When an image is transmitted using the "copy" method, this field
+"^DD",2005,2005.0111,2,21,4,0)
+is populated.
+"^DD",2005,2005.0111,2,"DT")
+3031211
+"^DD",2005,2005.0111,3,0)
+DICOM SEND LOCATION^P2006.587'^MAG(2006.587,^0;3^Q
+"^DD",2005,2005.0111,3,3)
+Enter the name of the DICOM SCP to which the image is being routed.
+"^DD",2005,2005.0111,3,21,0)
+^^4^4^3031212^^
+"^DD",2005,2005.0111,3,21,1,0)
+The value of this field is a pointer to the DICOM Transmit Destination
+"^DD",2005,2005.0111,3,21,2,0)
+table (#2006.587).
+"^DD",2005,2005.0111,3,21,3,0)
+When an image is transmitted using the DICOM Send method,
+"^DD",2005,2005.0111,3,21,4,0)
+this field is populated.
+"^DD",2005,2005.0111,3,"DT")
+3031211
+"^DD",2005,2005.0111,4,0)
+TIMESTAMP TRANSMIT^D^^0;4^S %DT="ESTXR" D ^%DT S X=Y K:Y<1 X
+"^DD",2005,2005.0111,4,3)
+Enter the time when the transmission finished.
+"^DD",2005,2005.0111,4,21,0)
+^.001^3^3^3031211^^
+"^DD",2005,2005.0111,4,21,1,0)
+The value of this field is a timestamp that indicates the
+"^DD",2005,2005.0111,4,21,2,0)
+date and time when the current image was transmitted to the
+"^DD",2005,2005.0111,4,21,3,0)
+location described in the current record.
+"^DD",2005,2005.0111,4,"DT")
+3031211
+"^DD",2005,2005.0111,5,0)
+TIMESTAMP PURGE^D^^0;5^S %DT="ESTXR" D ^%DT S X=Y K:Y<1 X
+"^DD",2005,2005.0111,5,3)
+Enter the time when the image was purged at this location.
+"^DD",2005,2005.0111,5,21,0)
+^^3^3^3031211^
+"^DD",2005,2005.0111,5,21,1,0)
+The value of this field is a timestamp that indicates the date
+"^DD",2005,2005.0111,5,21,2,0)
+and time when the copy of the current image was purged from
+"^DD",2005,2005.0111,5,21,3,0)
+the location that is described in the current record.
+"^DD",2005,2005.0111,5,"DT")
+3031211
+"^DD",2005,2005.0111,6,0)
+FILE NAME^F^^0;6^K:$L(X)>63!($L(X)<1) X
+"^DD",2005,2005.0111,6,3)
+Enter the name of the file at this destination.
+"^DD",2005,2005.0111,6,21,0)
+^^3^3^3031211^
+"^DD",2005,2005.0111,6,21,1,0)
+The value of this field is a string that represents the name of
+"^DD",2005,2005.0111,6,21,2,0)
+the (host system) file as it appears at the location to which the
+"^DD",2005,2005.0111,6,21,3,0)
+image has been copied.
+"^DD",2005,2005.0111,6,"DT")
+3031211
+"^DD",2005,2005.0111,7,0)
+FILE TYPE^S^TXT:Text;BIG:Large X-Ray;TGA:Targa(TM);ABS:Thumbnail;DCM:DICOM;DICOM:DICOM;^0;7^Q
+"^DD",2005,2005.0111,7,3)
+Enter the code for the file-type.
+"^DD",2005,2005.0111,7,21,0)
+^^2^2^3031211^
+"^DD",2005,2005.0111,7,21,1,0)
+The value of this field is a code for the type of data that
+"^DD",2005,2005.0111,7,21,2,0)
+is stored in the file that is described in the current record.
+"^DD",2005,2005.0111,7,"DT")
+3031211
+"^DD",2005,2005.04,0)
+OBJECT GROUP SUB-FIELD^^2^3
+"^DD",2005,2005.04,0,"DT")
+2981117
+"^DD",2005,2005.04,0,"IX","ADCM",2005.04,1)
+
+"^DD",2005,2005.04,0,"IX","ADCM2",2005.04,2)
+
+"^DD",2005,2005.04,0,"NM","OBJECT GROUP")
+
+"^DD",2005,2005.04,0,"UP")
+2005
+"^DD",2005,2005.04,.01,0)
+OBJECT GROUP^M*P2005'^MAG(2005,^0;1^S DIC("S")="I $P($G(^(100)),""^"",8)'=12" D ^DIC K DIC S DIC=DIE,X=+Y K:Y<0 X
+"^DD",2005,2005.04,.01,1,0)
+^.1^^0
+"^DD",2005,2005.04,.01,3)
+Select the member of this image group.
+"^DD",2005,2005.04,.01,12)
+Only non-deleted images can be selected.
+"^DD",2005,2005.04,.01,12.1)
+S DIC("S")="I $P($G(^(100)),""^"",8)'=12"
+"^DD",2005,2005.04,.01,21,0)
+^^3^3^3081219^
+"^DD",2005,2005.04,.01,21,1,0)
+This field points to an entry of the IMAGE file 
+"^DD",2005,2005.04,.01,21,2,0)
+(#2005) that represents an existing (non-deleted)
+"^DD",2005,2005.04,.01,21,3,0)
+member of this image group.
+"^DD",2005,2005.04,.01,23,0)
+^.001^4^4^3081219^^^
+"^DD",2005,2005.04,.01,23,1,0)
+In the future, when the IMAGE AUDIT file (#2005.1) is eliminated and
+"^DD",2005,2005.04,.01,23,2,0)
+deleted image entries are merged into the IMAGE file (#2005), this
+"^DD",2005,2005.04,.01,23,3,0)
+field must reference only non-deleted images (as it currently does).
+"^DD",2005,2005.04,.01,23,4,0)
+The "AGPD" index will be used to find images deleted from the group.
+"^DD",2005,2005.04,.01,"DT")
+3081219
+"^DD",2005,2005.04,1,0)
+DICOM SERIES NUM^NJ8,0^^0;2^K:+X'=X!(X>99999999)!(X<0)!(X?.E1"."1N.N) X
+"^DD",2005,2005.04,1,1,0)
+^.1
+"^DD",2005,2005.04,1,1,1,0)
+2005.04^ADCM^MUMPS
+"^DD",2005,2005.04,1,1,1,1)
+D SETDCM^MAGUXRF
+"^DD",2005,2005.04,1,1,1,2)
+D KILLDSN^MAGUXRF
+"^DD",2005,2005.04,1,1,1,"%D",0)
+^^8^8^3001023^^
+"^DD",2005,2005.04,1,1,1,"%D",1,0)
+This cross-reference stores the "ADCM" index.
+"^DD",2005,2005.04,1,1,1,"%D",2,0)
+It is stored for the multiple in
+"^DD",2005,2005.04,1,1,1,"%D",3,0)
+
+"^DD",2005,2005.04,1,1,1,"%D",4,0)
+ ^MAG(2005, DA(1), 1 ,"ADCM", DICOM SERIES, DICOM IMAGE, IMAGE IEN, DA)=""
+"^DD",2005,2005.04,1,1,1,"%D",5,0)
+
+"^DD",2005,2005.04,1,1,1,"%D",6,0)
+This cross-reference keeps track of which images belong to
+"^DD",2005,2005.04,1,1,1,"%D",7,0)
+which group, and indicates in which sequence the images
+"^DD",2005,2005.04,1,1,1,"%D",8,0)
+are intended to appear.
+"^DD",2005,2005.04,1,1,1,"DT")
+2981118
+"^DD",2005,2005.04,1,3)
+This is the Dicom 'Series Number'
+"^DD",2005,2005.04,1,"DT")
+2981118
+"^DD",2005,2005.04,2,0)
+DICOM IMAGE NUM^NJ5,0^^0;3^K:+X'=X!(X>99999999)!(X<0)!(X?.E1"."1N.N) X
+"^DD",2005,2005.04,2,1,0)
+^.1
+"^DD",2005,2005.04,2,1,1,0)
+2005.04^ADCM2^MUMPS
+"^DD",2005,2005.04,2,1,1,1)
+D SETDCM^MAGUXRF
+"^DD",2005,2005.04,2,1,1,2)
+D KILLDIN^MAGUXRF
+"^DD",2005,2005.04,2,1,1,"%D",0)
+^^8^8^3001023^^
+"^DD",2005,2005.04,2,1,1,"%D",1,0)
+This cross-reference stores the "ADCM" index.
+"^DD",2005,2005.04,2,1,1,"%D",2,0)
+It is stored for the multiple in
+"^DD",2005,2005.04,2,1,1,"%D",3,0)
+
+"^DD",2005,2005.04,2,1,1,"%D",4,0)
+ ^MAG(2005, DA(1), 1 ,"ADCM", DICOM SERIES, DICOM IMAGE, IMAGE IEN, DA)=""
+"^DD",2005,2005.04,2,1,1,"%D",5,0)
+
+"^DD",2005,2005.04,2,1,1,"%D",6,0)
+This cross-reference keeps track of which images belong to
+"^DD",2005,2005.04,2,1,1,"%D",7,0)
+which group, and indicates in which sequence the images
+"^DD",2005,2005.04,2,1,1,"%D",8,0)
+are intended to appear.
+"^DD",2005,2005.04,2,1,1,"DT")
+2981118
+"^DD",2005,2005.04,2,3)
+This is the Dicom 'Image Number'
+"^DD",2005,2005.04,2,"DT")
+2981118
+"^DD",2005,2005.05,0)
+PRESENTATION STATE SUB-FIELD^^4^5
+"^DD",2005,2005.05,0,"DT")
+3040816
+"^DD",2005,2005.05,0,"IX","B",2005.05,.01)
+
+"^DD",2005,2005.05,0,"NM","PRESENTATION STATE")
+
+"^DD",2005,2005.05,0,"UP")
+2005
+"^DD",2005,2005.05,.01,0)
+PS UID^MF^^0;1^K:$L(X)>120!($L(X)<3) X
+"^DD",2005,2005.05,.01,1,0)
+^.1
+"^DD",2005,2005.05,.01,1,1,0)
+2005.05^B
+"^DD",2005,2005.05,.01,1,1,1)
+S ^MAG(2005,DA(1),210,"B",$E(X,1,30),DA)=""
+"^DD",2005,2005.05,.01,1,1,2)
+K ^MAG(2005,DA(1),210,"B",$E(X,1,30),DA)
+"^DD",2005,2005.05,.01,3)
+Answer must be 3-120 characters in length.
+"^DD",2005,2005.05,.01,21,0)
+^.001^1^1^3050608^^^
+"^DD",2005,2005.05,.01,21,1,0)
+This is the presentation state UID for the image.
+"^DD",2005,2005.05,.01,"DT")
+3050608
+"^DD",2005,2005.05,1,0)
+PS DATA^2005.51^^1;0
+"^DD",2005,2005.05,1,21,0)
+^.001^1^1^3050608^^
+"^DD",2005,2005.05,1,21,1,0)
+Lines of free-text data that describe the presentation state, in XML format.
+"^DD",2005,2005.05,1,"DT")
+3050608
+"^DD",2005,2005.05,2,0)
+PS TYPE^S^I:Interpretation;U:User;K:Key Image;^0;2^Q
+"^DD",2005,2005.05,2,21,0)
+^.001^2^2^3050608^^
+"^DD",2005,2005.05,2,21,1,0)
+Indicates the type of presentation state data stored here:
+"^DD",2005,2005.05,2,21,2,0)
+ Key Image; Interpretation-based; User-specific.
+"^DD",2005,2005.05,2,"DT")
+3050608
+"^DD",2005,2005.05,3,0)
+WHO^P200'^VA(200,^0;3^Q
+"^DD",2005,2005.05,3,21,0)
+^^1^1^3050608^
+"^DD",2005,2005.05,3,21,1,0)
+User who created this presentation state.
+"^DD",2005,2005.05,3,"DT")
+3040707
+"^DD",2005,2005.05,4,0)
+TIMESTAMP^D^^0;4^S %DT="ESTXR" D ^%DT S X=Y K:Y<1 X
+"^DD",2005,2005.05,4,3)
+Enter date/time of Presentation State creation.
+"^DD",2005,2005.05,4,21,0)
+^^1^1^3050608^
+"^DD",2005,2005.05,4,21,1,0)
+Date/Time when this PS was created.
+"^DD",2005,2005.05,4,"DT")
+3040816
+"^DD",2005,2005.099,0)
+AUDIT SUB-FIELD^^2^5
+"^DD",2005,2005.099,0,"DT")
+3080429
+"^DD",2005,2005.099,0,"IX","B",2005.099,.01)
+
+"^DD",2005,2005.099,0,"NM","AUDIT")
+
+"^DD",2005,2005.099,0,"UP")
+2005
+"^DD",2005,2005.099,.01,0)
+DATE/TIME RECORDED^MD^^0;1^S %DT="ESTX" D ^%DT S X=Y K:Y<1 X
+"^DD",2005,2005.099,.01,1,0)
+^.1
+"^DD",2005,2005.099,.01,1,1,0)
+2005.099^B
+"^DD",2005,2005.099,.01,1,1,1)
+S ^MAG(2005,DA(1),99,"B",$E(X,1,30),DA)=""
+"^DD",2005,2005.099,.01,1,1,2)
+K ^MAG(2005,DA(1),99,"B",$E(X,1,30),DA)
+"^DD",2005,2005.099,.01,1,1,3)
+Do not delete!
+"^DD",2005,2005.099,.01,3)
+Enter date and time of the audited change.
+"^DD",2005,2005.099,.01,8.5)
+@
+"^DD",2005,2005.099,.01,9)
+@
+"^DD",2005,2005.099,.01,20,0)
+^.3LA^1^1
+"^DD",2005,2005.099,.01,20,1,0)
+MAG*3*93
+"^DD",2005,2005.099,.01,21,0)
+^.001^2^2^3081217^^^^
+"^DD",2005,2005.099,.01,21,1,0)
+When a value of an audited field changes, date and
+"^DD",2005,2005.099,.01,21,2,0)
+time of the change are stored in this field.
+"^DD",2005,2005.099,.01,23,0)
+^.001^1^1^3081217^^^^
+"^DD",2005,2005.099,.01,23,1,0)
+Added by the patch MAG*3*93.
+"^DD",2005,2005.099,.01,"DT")
+3080321
+"^DD",2005,2005.099,.02,0)
+FIELD NUMBER^RNJ20,9^^0;2^K:+X'=X!(X>9999999999)!(X<0)!(X?.E1"."10N.N) X
+"^DD",2005,2005.099,.02,3)
+Enter the field number (between 0 and 9999999999, 9 Decimal Digits).
+"^DD",2005,2005.099,.02,8.5)
+@
+"^DD",2005,2005.099,.02,9)
+@
+"^DD",2005,2005.099,.02,20,0)
+^.3LA^1^1
+"^DD",2005,2005.099,.02,20,1,0)
+MAG*3*93
+"^DD",2005,2005.099,.02,21,0)
+^.001^2^2^3081217^^^^
+"^DD",2005,2005.099,.02,21,1,0)
+Value of this field identifies the audited field 
+"^DD",2005,2005.099,.02,21,2,0)
+that was updated.
+"^DD",2005,2005.099,.02,23,0)
+^.001^1^1^3081217^^
+"^DD",2005,2005.099,.02,23,1,0)
+Added by the patch MAG*3*93.
+"^DD",2005,2005.099,.02,"DT")
+3080321
+"^DD",2005,2005.099,.03,0)
+USER^P200'^VA(200,^0;3^Q
+"^DD",2005,2005.099,.03,8.5)
+@
+"^DD",2005,2005.099,.03,9)
+@
+"^DD",2005,2005.099,.03,20,0)
+^.3LA^1^1
+"^DD",2005,2005.099,.03,20,1,0)
+MAG*3*93
+"^DD",2005,2005.099,.03,21,0)
+^.001^2^2^3081217^^^
+"^DD",2005,2005.099,.03,21,1,0)
+This field identifies the user who modified value 
+"^DD",2005,2005.099,.03,21,2,0)
+of the audited field.
+"^DD",2005,2005.099,.03,23,0)
+^.001^1^1^3081217^^^^
+"^DD",2005,2005.099,.03,23,1,0)
+Added by the patch MAG*3*93.
+"^DD",2005,2005.099,.03,"DT")
+3080321
+"^DD",2005,2005.099,1,0)
+OLD INTERNAL VALUE^F^^1;E1,250^K:$L(X)>250!($L(X)<1) X
+"^DD",2005,2005.099,1,3)
+Enter the old field value in internal format (1-250 characters in length).
+"^DD",2005,2005.099,1,8.5)
+@
+"^DD",2005,2005.099,1,9)
+@
+"^DD",2005,2005.099,1,20,0)
+^.3LA^1^1
+"^DD",2005,2005.099,1,20,1,0)
+MAG*3*93
+"^DD",2005,2005.099,1,21,0)
+^.001^2^2^3081217^^
+"^DD",2005,2005.099,1,21,1,0)
+This field stores the previous value of the
+"^DD",2005,2005.099,1,21,2,0)
+audited field in internal format.
+"^DD",2005,2005.099,1,23,0)
+^.001^1^1^3081217^^
+"^DD",2005,2005.099,1,23,1,0)
+Added by the patch MAG*3*93.
+"^DD",2005,2005.099,1,"DT")
+3080321
+"^DD",2005,2005.099,2,0)
+OLD EXTERNAL VALUE^F^^2;E1,250^K:$L(X)>250!($L(X)<1) X
+"^DD",2005,2005.099,2,3)
+Enter the old field value in external format (1-250 characters in length).
+"^DD",2005,2005.099,2,8.5)
+@
+"^DD",2005,2005.099,2,9)
+@
+"^DD",2005,2005.099,2,20,0)
+^.3LA^1^1
+"^DD",2005,2005.099,2,20,1,0)
+MAG*3*93
+"^DD",2005,2005.099,2,21,0)
+^.001^4^4^3081217^^
+"^DD",2005,2005.099,2,21,1,0)
+If the previous external value of the audited
+"^DD",2005,2005.099,2,21,2,0)
+field is different from the internal value stored
+"^DD",2005,2005.099,2,21,3,0)
+in the OLD INTERNAL VALUE field (1), then the
+"^DD",2005,2005.099,2,21,4,0)
+external value is stored in this field.
+"^DD",2005,2005.099,2,23,0)
+^.001^4^4^3081217^^
+"^DD",2005,2005.099,2,23,1,0)
+See the AUDIT^MAGUXRF and GETPFV^MAGUTL04 procedures
+"^DD",2005,2005.099,2,23,2,0)
+for more details.
+"^DD",2005,2005.099,2,23,3,0)
+ 
+"^DD",2005,2005.099,2,23,4,0)
+Added by the patch MAG*3*93.
+"^DD",2005,2005.099,2,"DT")
+3080429
+"^DD",2005,2005.51,0)
+PS DATA SUB-FIELD^^.01^1
+"^DD",2005,2005.51,0,"DT")
+3040707
+"^DD",2005,2005.51,0,"NM","PS DATA")
+
+"^DD",2005,2005.51,0,"UP")
+2005.05
+"^DD",2005,2005.51,.01,0)
+PS DATA^WL^^0;1^Q
+"^DD",2005,2005.51,.01,21,0)
+^^1^1^3050608^
+"^DD",2005,2005.51,.01,21,1,0)
+Lines of the PS data stored here.
+"^DD",2005,2005.51,.01,"DT")
+3050608
+"^DIC",2005,2005,0)
+IMAGE^2005I
+"^DIC",2005,2005,0,"GL")
+^MAG(2005,
+"^DIC",2005,2005,"%",0)
+^1.005^1^1
+"^DIC",2005,2005,"%",1,0)
+MAG
+"^DIC",2005,2005,"%","B","MAG",1)
+
+"^DIC",2005,2005,"%D",0)
+^^41^41^3010619^
+"^DIC",2005,2005,"%D",1,0)
+ +---------------------------------------------------------------+
+"^DIC",2005,2005,"%D",2,0)
+ |                                                               |
+"^DIC",2005,2005,"%D",3,0)
+ | Property of the US Government.                                |
+"^DIC",2005,2005,"%D",4,0)
+ | No permission to copy or redistribute this software is given. |
+"^DIC",2005,2005,"%D",5,0)
+ | Use of unreleased versions of this software requires the user |
+"^DIC",2005,2005,"%D",6,0)
+ | to execute a written test agreement with the VistA Imaging    |
+"^DIC",2005,2005,"%D",7,0)
+ | Development Office of the Department of Veterans Affairs,     |
+"^DIC",2005,2005,"%D",8,0)
+ | telephone (301) 734-0100.                                     |
+"^DIC",2005,2005,"%D",9,0)
+ |                                                               |
+"^DIC",2005,2005,"%D",10,0)
+ | The Food and Drug Administration classifies this software as  |
+"^DIC",2005,2005,"%D",11,0)
+ | a medical device.  As such, it may not be changed in any way. |
+"^DIC",2005,2005,"%D",12,0)
+ | Modifications to this software may result in an adulterated   |
+"^DIC",2005,2005,"%D",13,0)
+ | medical device under 21CFR820, the use of which is considered |
+"^DIC",2005,2005,"%D",14,0)
+ | to be a violation of US Federal Statutes.                     |
+"^DIC",2005,2005,"%D",15,0)
+ |                                                               |
+"^DIC",2005,2005,"%D",16,0)
+ +---------------------------------------------------------------+
+"^DIC",2005,2005,"%D",17,0)
+ 
+"^DIC",2005,2005,"%D",18,0)
+This file will contain an entry for every image, image group, waveform,
+"^DIC",2005,2005,"%D",19,0)
+audio file, or waveform generated at your site. It is distributed without
+"^DIC",2005,2005,"%D",20,0)
+data.  Objects handled by the VistA Imaging System currently include single
+"^DIC",2005,2005,"%D",21,0)
+images (various resolutions), series of images, scanned documents, motion
+"^DIC",2005,2005,"%D",22,0)
+video, waveforms, and audio files.  There is a record in file 2005 for
+"^DIC",2005,2005,"%D",23,0)
+each object, containing the attributes of the object. All fields are
+"^DIC",2005,2005,"%D",24,0)
+automatically stuffed by the Imaging software - there is no user input.
+"^DIC",2005,2005,"%D",25,0)
+Objects handled by the VISTA Imaging System currently include: 
+"^DIC",2005,2005,"%D",26,0)
+  * Single images (various resolutions)
+"^DIC",2005,2005,"%D",27,0)
+  * Series of images
+"^DIC",2005,2005,"%D",28,0)
+  * Scanned documents
+"^DIC",2005,2005,"%D",29,0)
+  * Waveforms 
+"^DIC",2005,2005,"%D",30,0)
+  * Motion video
+"^DIC",2005,2005,"%D",31,0)
+  * Audio files
+"^DIC",2005,2005,"%D",32,0)
+ 
+"^DIC",2005,2005,"%D",33,0)
+ 
+"^DIC",2005,2005,"%D",34,0)
+Each object has a natural language Name (.01); this usually
+"^DIC",2005,2005,"%D",35,0)
+consists of the patient's name, ssn, and object description. 
+"^DIC",2005,2005,"%D",36,0)
+Depending on the object type, the object will either have:
+"^DIC",2005,2005,"%D",37,0)
+ 
+"^DIC",2005,2005,"%D",38,0)
+  * A filename and logical location on the network (e.g., single image, graphics).
+"^DIC",2005,2005,"%D",39,0)
+  * A multiple field called Object Group, containing entries, which
+"^DIC",2005,2005,"%D",40,0)
+point back to the Image file (e.g., image series or tiled
+"^DIC",2005,2005,"%D",41,0)
+abstract display).
+"^DIC",2005,"B","IMAGE",2005)
+
+**END**
+**END**

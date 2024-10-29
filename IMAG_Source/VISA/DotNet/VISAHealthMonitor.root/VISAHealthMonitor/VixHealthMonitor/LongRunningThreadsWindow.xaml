@@ -1,0 +1,24 @@
+﻿<Window x:Class="VixHealthMonitor.LongRunningThreadsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        DataContext="{Binding ThreadDetails, Source={StaticResource Locator}}" xmlns:my="clr-namespace:VixHealthMonitor"
+        xmlns:my1="clr-namespace:VISAHealthMonitorCommonControls;assembly=VISAHealthMonitorCommonControls" 
+        d:DesignHeight="380" d:DesignWidth="700" 
+        Height="400"
+        Width="700"
+        Title="{Binding Path=Title}" WindowStartupLocation="CenterOwner" >
+    <Grid>
+        <TabControl HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Name="tcLongRunningThreads" ItemsSource="{Binding Path=GlobalRequestProcessors}">
+            <!-- 
+            <TabControl.ItemTemplate>
+                
+            </TabControl.ItemTemplate>
+
+            -->
+        </TabControl>
+        
+    </Grid>
+</Window>

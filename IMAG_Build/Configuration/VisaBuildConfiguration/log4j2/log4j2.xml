@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 
+If the monitorInterval attribute is specified on the configuration element and is set to a non-zero value then 
+the file will be checked the next time a log event is evaluated and/or logged and the monitorInterval has elapsed 
+since the last check.
+
+Set at 10 seconds below in case file name, method and line number are desired while collecting log.
+The default pattern is without those things for performance reason.
+
+-->
+
+<Configuration status="info" monitorInterval="10">
+
+	<Properties>
+	    <Property name="baseDir">${sys:catalina.home}/logs</Property>
+		<Property name="archivedDirLink">${baseDir}/ImagingArchivedLogsLink</Property>
+    </Properties>
+
+    <Appenders>
+	
+		<RollingFile name="appLogger" fileName="${baseDir}/ImagingExchangeWebApp.log" 
+						filePattern="${archivedDirLink}/ImagingExchangeWebAppLogs/ImagingExchangeWebApp-%d{yyyy-MM-dd}-%02i.log.zip">
+						
+            <PatternLayout>
+				<!-- Uncomment the line below and comment out the current "pattern" to get class, method and line number -->
+                <!-- pattern>[%d{ISO8601}] %5p [%t] [%c{1}.%M():%L] - %m%n</pattern -->
+				<!-- 
+				The log4j manual lists specific warnings about how slow %F and %L are (as well as %C and %l)
+				https://logging.apache.org/log4j/1.2/apidocs/org/apache/log4j/PatternLayout.html
+				In a dev or test environment, replace the pattern below with the pattern above to get the 
+				filename and line number back into the logs, but this should not be enabled in production 
+				and should not be enabled by default
+				-->
+				<pattern>[%d{ISO8601}] %5p [%t] - %m%n</pattern>
+            </PatternLayout>
+            
+			<Policies>
+                <!-- Roll file daily -->
+				<TimeBasedTriggeringPolicy interval="1" modulate="true" />
+				<!-- Within daily rolling, roll when file size meets/exceeds the specified size (e.g. "500 KB", "75 MB") -->
+				<SizeBasedTriggeringPolicy size="250 MB"/>
+            </Policies>
+			
+	      	<!-- Increment with no upper limit -->
+			<DefaultRolloverStrategy fileIndex="nomax" >
+				<!--
+				* only files in the log folder and next sub folder
+				* only delete log files if name matched
+				* only files that are 7 day(s) old or older
+				-->
+				<Delete basePath="${archivedDirLink}/ImagingExchangeWebAppLogs/" maxDepth="2" >
+					<IfFileName glob="*.log.zip" />
+					<IfLastModified age="7d" />
+				</Delete>
+			</DefaultRolloverStrategy>
+
+		</RollingFile>
+
+		<RollingFile name="cacheLogger" fileName="${baseDir}/ImagingCache.log" 
+						filePattern="${archivedDirLink}/ImagingCacheLogs/ImagingCache-%d{yyyy-MM-dd}-%02i.log.zip">	
+						
+            <PatternLayout>
+				<!-- Uncomment the line below and comment out the current "pattern" to get class, method and line number -->
+                <!-- pattern>[%d{ISO8601}] %5p [%t] [%c{1}.%M():%L] - %m%n</pattern -->
+				<!-- 
+				The log4j manual lists specific warnings about how slow %F and %L are (as well as %C and %l)
+				https://logging.apache.org/log4j/1.2/apidocs/org/apache/log4j/PatternLayout.html
+				In a dev or test environment, replace the pattern below with the pattern above to get the 
+				filename and line number back into the logs, but this should not be enabled in production 
+				and should not be enabled by default
+				-->
+				<pattern>[%d{ISO8601}] %5p [%t] - %m%n</pattern>
+            </PatternLayout>
+			
+            <Policies>
+                <!-- Roll file daily -->
+				<TimeBasedTriggeringPolicy interval="1" modulate="true" />
+				<!-- Within daily rolling, roll when file size meets/exceeds the specified size (e.g. "500 KB", "75 MB") -->
+				<SizeBasedTriggeringPolicy size="250 MB"/>
+            </Policies>
+			
+			<DefaultRolloverStrategy fileIndex="nomax" >
+				<!--
+				* only files in the log folder and next sub folder
+				* only delete log files if name matched
+				* only files that are 7 day(s) old or older
+				-->
+				<Delete basePath="${archivedDirLink}/ImagingCacheLogs/" maxDepth="2" >
+					<IfFileName glob="*.log.zip" />
+					<IfLastModified age="7d" />
+				</Delete>
+			</DefaultRolloverStrategy>
+			
+		</RollingFile>
+
+		<RollingFile name="realmLogger" fileName="${baseDir}/VistaRealm.log" 
+						filePattern="${archivedDirLink}/VistaRealmLogs/VistaRealm-%d{yyyy-MM-dd}-%02i.log.zip">
+				
+            <PatternLayout>
+				<!-- Uncomment the line below and comment out the current "pattern" to get class, method and line number -->
+                <!-- pattern>[%d{ISO8601}] %5p [%t] [%c{1}.%M():%L] - %m%n</pattern -->
+				<!-- 
+				The log4j manual lists specific warnings about how slow %F and %L are (as well as %C and %l)
+				https://logging.apache.org/log4j/1.2/apidocs/org/apache/log4j/PatternLayout.html
+				In a dev or test environment, replace the pattern below with the pattern above to get the 
+				filename and line number back into the logs, but this should not be enabled in production 
+				and should not be enabled by default
+				-->
+				<pattern>[%d{ISO8601}] %5p [%t] - %m%n</pattern>
+            </PatternLayout>
+			
+            <Policies>
+                <!-- Roll file daily -->
+				<TimeBasedTriggeringPolicy interval="1" modulate="true" />
+				<!-- Within daily rolling, roll when file size meets/exceeds the specified size (e.g. "500 KB", "75 MB") -->
+				<SizeBasedTriggeringPolicy size="250 MB"/>
+            </Policies>
+			
+			<DefaultRolloverStrategy fileIndex="nomax" >
+				<!--
+				* only files in the log folder and next sub folder
+				* only delete log files if name matched
+				* only files that are 7 day(s) old or older
+				-->
+				<Delete basePath="${archivedDirLink}/VistaRealmLogs/" maxDepth="2" >
+					<IfFileName glob="*.log.zip" />
+					<IfLastModified age="7d" />
+				</Delete>
+			</DefaultRolloverStrategy>
+			
+		</RollingFile>
+
+		<RollingFile name="monLogger" fileName="${baseDir}/Monitor.log" 
+						filePattern="${archivedDirLink}/MonitorLogs/Monitor-%d{yyyy-MM-dd}-%02i.log.zip">
+
+            <PatternLayout>
+				<!-- Uncomment the line below and comment out the current "pattern" to get class, method and line number -->
+                <!-- pattern>[%d{ISO8601}] %5p [%t] [%c{1}.%M():%L] - %m%n</pattern -->
+				<!-- 
+				The log4j manual lists specific warnings about how slow %F and %L are (as well as %C and %l)
+				https://logging.apache.org/log4j/1.2/apidocs/org/apache/log4j/PatternLayout.html
+				In a dev or test environment, replace the pattern below with the pattern above to get the 
+				filename and line number back into the logs, but this should not be enabled in production 
+				and should not be enabled by default
+				-->
+				<pattern>[%d{ISO8601}] %5p [%t] - %m%n</pattern>
+            </PatternLayout>
+			
+            <Policies>
+                <!-- Roll file daily -->
+				<TimeBasedTriggeringPolicy interval="1" modulate="true" />
+				<!-- Within daily rolling, roll when file size meets/exceeds the specified size (e.g. "500 KB", "75 MB") -->
+				<SizeBasedTriggeringPolicy size="250 MB"/>
+            </Policies>
+			
+			<DefaultRolloverStrategy fileIndex="nomax" >
+				<!--
+				* only files in the log folder and next sub folder
+				* only delete log files if name matched
+				* only files that are 7 day(s) old or older
+				-->
+				<Delete basePath="${archivedDirLink}/MonitorLogs/" maxDepth="2" >
+					<IfFileName glob="*.log.zip" />
+					<IfLastModified age="7d" />
+				</Delete>
+			</DefaultRolloverStrategy>
+			
+		</RollingFile>
+ 	
+		<RollingFile name="dcfLogger" fileName="${baseDir}/DCF.log" 
+						filePattern="${archivedDirLink}/DCFLogs/DCF-%d{yyyy-MM-dd}-%02i.log.zip">	
+            <PatternLayout>
+				<!-- Uncomment the line below and comment out the current "pattern" to get class, method and line number -->
+                <!-- pattern>[%d{ISO8601}] %5p [%t] [%c{1}.%M():%L] - %m%n</pattern -->
+				<!-- 
+				The log4j manual lists specific warnings about how slow %F and %L are (as well as %C and %l)
+				https://logging.apache.org/log4j/1.2/apidocs/org/apache/log4j/PatternLayout.html
+				In a dev or test environment, replace the pattern below with the pattern above to get the 
+				filename and line number back into the logs, but this should not be enabled in production 
+				and should not be enabled by default
+				-->
+				<pattern>[%d{ISO8601}] %5p [%t] - %m%n</pattern>
+            </PatternLayout>
+			
+            <Policies>
+                <!-- Roll file daily -->
+				<TimeBasedTriggeringPolicy interval="1" modulate="true" />
+				<!-- Within daily rolling, roll when file size meets/exceeds the specified size (e.g. "500 KB", "75 MB") -->
+				<SizeBasedTriggeringPolicy size="250 MB"/>
+            </Policies>
+			
+			<DefaultRolloverStrategy fileIndex="nomax" >
+				<!--
+				* only files in the log folder and next sub folder
+				* only delete log files if name matched
+				* only files that are 7 day(s) old or older
+				-->
+				<Delete basePath="${archivedDirLink}/DCFLogs/" maxDepth="2" >
+					<IfFileName glob="*.log.zip" />
+					<IfLastModified age="7d" />
+				</Delete>
+			</DefaultRolloverStrategy>
+			
+		</RollingFile>
+ 
+		<Console name="console" target="SYSTEM_OUT">
+			<!-- Uncomment the line below and comment out the current "pattern" to get class, method and line number -->
+            <!-- PatternLayout   pattern="[%d{ISO8601}] %5p [%t] [%c{1}.%M():%L] - %m%n" / -->
+			<!-- 
+			The log4j manual lists specific warnings about how slow %F and %L are (as well as %C and %l)
+			https://logging.apache.org/log4j/1.2/apidocs/org/apache/log4j/PatternLayout.html
+			In a dev or test environment, replace the pattern below with the pattern above to get the 
+			filename and line number back into the logs, but this should not be enabled in production 
+			and should not be enabled by default
+			-->
+			<PatternLayout   pattern="[%d{ISO8601}] %5p [%t] - %m%n" />
+        </Console>
+		
+    </Appenders>
+    
+	<Loggers>
+	
+        <Logger name="gov.va.med" level="info" additivity="false">
+            <appender-ref ref="appLogger" level="info" />
+        </Logger>
+		
+		<!--Added log entry to separate site service calls -->
+		<Logger name="gov.va.med.siteservice" level="info" additivity="false">
+			<appender-ref ref="appLogger" level="info"/>
+		</Logger>
+		
+		<Logger name="gov.va.med.imaging.proxy.ssl" level="info" additivity="false">
+			<appender-ref ref="appLogger" level="info"/>
+		</Logger>
+
+        <Logger name="gov.va.med.imaging.study.lbs" level="info" additivity="false">
+            <appender-ref ref="dcfLogger" level="info" />
+        </Logger>
+        <Logger name="gov.va.med.imaging.study.dicom" level="info" additivity="false">
+            <appender-ref ref="dcfLogger" level="info" />
+        </Logger>
+
+        <Logger name="gov.va.med.imaging.core.router.AbstractCommandImpl" level="info" additivity="false">
+            <appender-ref ref="monLogger" level="info" />
+        </Logger>
+        <Logger name="gov.va.med.imaging.core.router.commands" level="info" additivity="false">
+            <appender-ref ref="monLogger" level="info" />
+        </Logger>
+        <Logger name="gov.va.med.imaging.core.CommandCreatorProvider" level="info" additivity="false">
+            <appender-ref ref="monLogger" level="info" />
+        </Logger>
+        <Logger name="gov.va.med.imaging.transactioncontext.TransactionContextProxyInvocationHandler" level="info" additivity="false">
+            <appender-ref ref="monLogger" level="info" />
+        </Logger>
+        <Logger name="gov.va.med.imaging.exchange.BaseTimedCache" level="info" additivity="false">
+            <appender-ref ref="monLogger" level="info" />
+        </Logger>
+
+        <Logger name="gov.va.med.imaging.storage.cache" level="warn" additivity="false">
+            <appender-ref ref="cacheLogger" level="warn" />
+        </Logger>
+
+        <Logger name="gov.va.med.imaging.tomcat.vistarealm" level="info" additivity="false">
+            <appender-ref ref="realmLogger" level="info" />
+        </Logger>
+		
+		<Root level="off" additivity="false">
+            <appender-ref ref="console" />
+        </Root>
+
+	</Loggers>
+	
+</Configuration>

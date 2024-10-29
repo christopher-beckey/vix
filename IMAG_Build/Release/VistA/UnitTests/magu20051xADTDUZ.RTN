@@ -1,0 +1,64 @@
+magu20051xADTDUZ ;WOIFO/MLH - unit tests for ADTDUZ xref on file #2005.1 (IMAGE AUDIT)
+ Q
+TEST(verblvl) ;
+ S verblvl=$G(verblvl,1)
+ N I
+ W:verblvl "FILE: 2005.1   CROSS REFERENCE: ADTDUZ",!
+ F I=1:1 Q:$T(@I)=""  D @(I_"(verblvl)")
+ Q
+1(verblvl) ; ensure xref gets set for image w/o parent
+ N FDA,SITE,DTTM,SAVEBY,CAPAPP,MLH
+ D DT^DICRW W !,"UNIT TEST 1: "
+ S FDA(2005.1,"+1,",.01)="IMAGE"_$H
+ S (SITE,FDA(2005.1,"+1,",.05))=660
+ D NOW^%DTC S (DTTM,FDA(2005.1,"+1,",7))=%
+ S (SAVEBY,FDA(2005.1,"+1,",8))=127
+ S (CAPAPP,FDA(2005.1,"+1,",8.1))="C"
+ D UPDATE^DIE("","FDA","MLH")
+ S IEN=$G(MLH(1)) I 'IEN W "FAILED",! Q
+ I '$D(^MAG(2005.1,"ADTDUZ",CAPAPP,DTTM\1,SAVEBY,SITE,IEN)) W "FAILED",! Q
+ W "SUCCESS",!
+ Q
+2(verblvl) ; ensure xref doesn't get set for image w/parent
+ N PIEN,FDA,SITE,DTTM,SAVEBY,CAPAPP,MLH
+ D DT^DICRW W !,"UNIT TEST 2: "
+ ; find an image to be the "parent"
+ S PIEN=" "
+ F  S PIEN=$O(^MAG(2005.1,PIEN),-1) Q:'PIEN  Q:$P($G(^MAG(2005.1,PIEN,0)),"^",10)=""
+ I 'PIEN W "COULD NOT PERFORM - NO QUALIFYING IEN" Q
+ S FDA(2005.1,"+1,",.01)="IMAGE"_$H
+ S (SITE,FDA(2005.1,"+1,",.05))=660
+ D NOW^%DTC S (DTTM,FDA(2005.1,"+1,",7))=%
+ S (SAVEBY,FDA(2005.1,"+1,",8))=127
+ S (CAPAPP,FDA(2005.1,"+1,",8.1))="C"
+ S FDA(2005.1,"+1,",14)=PIEN
+ D UPDATE^DIE("","FDA","MLH")
+ S IEN=$G(MLH(1)) I 'IEN W "FAILED",! Q
+ I $D(^MAG(2005.1,"ADTDUZ",CAPAPP,DTTM\1,SAVEBY,SITE,IEN)) W "FAILED",! Q
+ W "SUCCESS",!
+ Q
+3(verblvl) ; ensure xref gets killed appropriately
+ N IEN,X2,FDA,SITE,DTTM,SAVEBY,CAPAPP,HIT,DIK,DA
+ D DT^DICRW W !,"UNIT TEST 3: "
+ S IEN=0,HIT=0
+ F  S IEN=$O(^MAG(2005.1,IEN)) Q:'IEN  D  Q:HIT
+ . I $P($G(^MAG(2005.1,IEN,0)),"^",10) Q  ; won't exist for a child
+ . S X2=$G(^MAG(2005.1,IEN,2)) Q:X2=""
+ . S DTTM=$P(X2,"^",1)\1 Q:'DTTM
+ . S SAVEBY=$P(X2,"^",2) Q:'SAVEBY
+ . S CAPAPP=$P(X2,"^",12) Q:CAPAPP=""
+ . S SITE=$P($G(^MAG(2005.1,IEN,100)),"^",3) Q:'SITE
+ . S HIT=1
+ . Q
+ I 'HIT W "COULD NOT PERFORM - NO QUALIFYING IEN" Q
+ I '$D(^MAG(2005.1,"ADTDUZ",CAPAPP,DTTM,SAVEBY,SITE,IEN)) D  Q
+ . W "COULD NOT PERFORM - XREF NOT PROPERLY SET FOR IEN #"_IEN,!
+ . Q
+ S DIK="^MAG(2005.1,",DA=IEN D ^DIK
+ I $D(^MAG(2005.1,"ADTDUZ",CAPAPP,DTTM,SAVEBY,SITE,IEN)) W "FAILURE",! Q
+ W "SUCCESS",!
+ Q
+ 
+ 
+
+

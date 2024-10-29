@@ -1,0 +1,566 @@
+
+.gridStyle {
+    border: 1px solid rgb(212,212,212);
+    width: 400px;
+    height: 300px;
+}
+
+body { padding-top: 50px; }
+
+.menu-icon {
+    margin-right: 4px;
+    font-size: 18px;
+}
+
+.panel-heading {
+    padding: 4px;
+}
+
+.panel-body {
+    padding: 4px;
+}
+
+.tab-content {
+    border-left: 1px solid #ddd;
+    border-right: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+    border-radius: 0 0 4px 4px;
+    padding: 10px;
+}
+
+.nav-tabs {
+    margin-bottom: -1px;
+}
+
+.btn-file {
+    position: relative;
+    overflow: hidden;
+}
+.btn-file input[type=file] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    min-width: 100%;
+    min-height: 100%;
+    font-size: 999px;
+    text-align: right;
+    filter: alpha(opacity=0);
+    opacity: 0;
+    outline: none;
+    background: white;
+    cursor: inherit;
+    display: block;
+}
+
+.instanceThumbnail {
+    padding: 4px;
+    border: 2px solid white;
+}
+
+.instanceThumbnail:hover {
+    border: 2px solid black;
+    background: lightgoldenrodyellow;
+}
+
+.ngHeaderCell {
+    font-weight: normal;
+}
+
+table.reportTable{
+    width: 98%
+}
+table.reportTable td {
+    padding: 3px;
+}
+
+input.k-textbox {
+    text-indent: .1em;
+}
+/**
+	 *	Basic Layout Theme
+	 * 
+	 *	This theme uses the default layout class-names for all classes
+	 *	Add any 'custom class-names', from options: paneClass, resizerClass, togglerClass
+	 */
+
+	.ui-layout-pane { /* all 'panes' */ 
+		
+		border: 1px solid #BBB; 
+		padding: 10px; 
+		overflow: auto;
+	} 
+
+	.ui-layout-resizer { /* all 'resizer-bars' */ 
+		background: black;
+	} 	
+
+	.ui-layout-toggler { /* all 'toggler-buttons' */ 
+		background: #707070 ; 
+	} 
+
+
+	
+	/**
+	 *	ALL CSS below is only for cosmetic and demo purposes
+	 *	Nothing here affects the appearance of the layout
+	 */
+
+	body {
+	 	background-color: black; 
+		font-family: arial;
+		/*font-size: 80%;*/
+		margin: 0px;
+		padding: 0px;
+		background-repeat: repeat-x;
+		font-family: Arial, sans-serif;
+		font-size: 0.85em;
+		
+	}
+	/**
+	* Displaying the context menu (override the font-size from body)
+	*/
+	#viewport_View{
+			font-size: 1.5em;
+		}
+
+    @media only screen and (max-width: 1400px) , (max-height: 1024px) {
+        .k-split-button-arrow{
+            height: 30px;
+        }
+        .k-image{
+            height: 24px;
+            width: 24px;
+        }
+    }
+    @media only screen and (min-height: 1025px) {
+        #dicomViewer{
+            font-size: 0.9em;
+        }
+        .k-split-button-arrow{
+            height: 32px;
+        }
+        .k-image{
+            height: 26px;
+            width: 26px;
+        }
+    }
+    @media only screen and (min-height: 1201px) {
+        #dicomViewer{
+            font-size: 1.0em;
+        }
+        .k-split-button-arrow{
+            height: 34px;
+        }
+        .k-image{
+            height: 28px;
+            width: 28px;
+        }
+    }
+    @media only screen and (min-height: 1441px) {
+        #dicomViewer{
+            font-size: 1.1em;
+        }
+        .k-split-button-arrow{
+            height: 36px;
+        }
+        .k-image{
+            height: 30px;
+            width: 30px;
+        }
+    }
+    @media only screen and (min-height: 1601px) {
+        #dicomViewer{
+            font-size: 1.2em;
+        }
+        .k-split-button-arrow{
+            height: 38px;
+        }
+        .k-image{
+            height: 32px;
+            width: 32px;
+        }
+    }
+    @media only screen and (min-height: 1851px) {
+        #dicomViewer{
+            font-size: 1.3em;
+        }
+        .k-split-button-arrow{
+            height: 40px;
+        }
+        .k-image{
+            height: 34px;
+            width: 34px;
+        }
+    }
+*/
+/*    $(".k-button ").width(20);*/
+/*    $(".k-button ").height(30);*/
+	#contextMenu{
+  		width: inherit;
+	}
+	#contextMenu input[type=radio]{
+		visibility:hidden;
+	}
+	.toolbar
+	{
+		min-height: 30px;
+		margin-bottom:auto;
+		padding: 0px;
+		background-color: #333;
+		border-radius: 6px;
+	}
+	
+	.toolbar button{
+	background-color: #333;
+	color: rgb(228, 228, 228);
+	}	
+	
+
+.default-view {
+	border: 2px solid gray;
+}
+
+.selected-view {
+	border: 2px solid #CCCC66;
+}
+
+.thumbnails {
+	background-color: white;
+}
+
+.selected-thumbnail-view {
+	border: 2px solid #CCCC66;
+    padding:0px;
+}
+
+.alert-thumbnail-view {
+    border: 2px solid #b03535;
+    padding:0px;
+}
+
+.default-thumbnail-view {
+	border: 1px solid rgba(152, 153, 158, 0.59);
+    padding:1px;
+}
+
+.selected-image-thumbnail-view {
+    border: 2px solid #CCCC66;
+    padding:0px;
+}
+
+.alert-image-thumbnail-view {
+    border: 2px solid #b03535;
+    padding:0px;
+}
+
+.default-image-thumbnail-view {
+    border: 1px solid rgba(152, 153, 158, 0.59);
+    padding:1px;
+}
+
+/*
+ .dropdown-menu-custom{min-width: inherit;}
+.dropdown-submenu{position:relative;}
+.dropdown-submenu>.dropdown-menu{top:0;left:100%;margin-top:-6px;margin-left:-1px;-webkit-border-radius:0 6px 6px 6px;-moz-border-radius:0 6px 6px 6px;border-radius:0 6px 6px 6px;}
+.dropdown-submenu:hover>.dropdown-menu{display:block;}
+.dropdown-submenu>a:after{display:block;content:" ";float:right;width:0;height:0;border-color:transparent;border-style:solid;border-width:5px 0 5px 5px;border-left-color:#cccccc;margin-top:5px;margin-right:-10px;}
+	
+*/
+#imageLevelLayout img{
+	height: 23px;
+}
+	
+#imageLevelLayout a{
+	font-size: large;
+}
+
+#drawMeasurementId img{
+	height: 23px;
+}
+	
+#drawMeasurementId a{
+	font-size: large;
+}
+
+.disableSelection{
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    outline: 0;
+}
+header
+{
+	font-family: 'Lobster', cursive;
+	text-align: center;
+	font-size: 25px;	
+}
+
+#info
+{
+	font-size: 18px;
+	color: #555;
+	text-align: center;
+	margin-bottom: 25px;
+}
+
+#patient_Info {
+    font-size: 18px;
+    color: #555;
+    text-align: center;
+    margin-bottom: 5px;
+}
+
+a{
+	color: #074E8C;
+}
+
+.scrollbar
+{
+	margin-left: 30px;
+	float: left;
+	height: 300px;
+	background: rgb(64,64,64);
+	overflow-y: scroll;
+	margin-bottom: 25px;
+}
+
+.force-overflow
+{
+	min-height: 450px;
+}
+
+#wrapper
+{
+	text-align: center;
+	width: 500px;
+	margin: auto;
+}
+
+#imageThumbnail_View::-webkit-scrollbar-track, #callStackPanel::-webkit-scrollbar-track, #thumbContainer::-webkit-scrollbar-track, #keyimageThumbnail_View::-webkit-scrollbar-track, #imageInfo::-webkit-scrollbar-track, #manage_viewer::-webkit-scrollbar-track, .series_thumb_list::-webkit-scrollbar-track, #northlayout::-webkit-scrollbar-track, .ui-layout-center::-webkit-scrollbar-track
+{
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	background-color: #222 ;
+	border-radius: 10px;
+}
+
+#imageThumbnail_View::-webkit-scrollbar, #callStackPanel::-webkit-scrollbar, #thumbContainer::-webkit-scrollbar, #keyimageThumbnail_View::-webkit-scrollbar, #imageInfo::-webkit-scrollbar, #manage_viewer::-webkit-scrollbar, .series_thumb_list::-webkit-scrollbar, #northlayout::-webkit-scrollbar, .ui-layout-center::-webkit-scrollbar
+{
+	width: 10px;
+	background-color: #222;
+}
+
+#imageThumbnail_View::-webkit-scrollbar-thumb, #callStackPanel::-webkit-scrollbar-thumb, #thumbContainer::-webkit-scrollbar-thumb, #keyimageThumbnail_View::-webkit-scrollbar-thumb, #imageInfo::-webkit-scrollbar-thumb, #manage_viewer::-webkit-scrollbar-thumb, .series_thumb_list::-webkit-scrollbar-thumb, #northlayout::-webkit-scrollbar-thumb, .ui-layout-center::-webkit-scrollbar-thumb
+{
+	background-color: #444;
+	border-radius: 10px;
+        
+}
+
+#imageThumbnail_View, #keyimageThumbnail_View, #callStackPanel, #thumbContainer, #imageInfo, #manage_viewer, series_thumb_list, northlayout, .ui-layout-center
+{
+    -ms-scrollbar-base-color: #222;
+    -ms-scrollbar-track-color: #222;
+    -ms-scrollbar-face-color: #444;
+}
+
+.playerDirection{
+    background: "rgb(134, 134, 150)";
+}
+
+.no-close .ui-dialog-titlebar-close {display: none }
+
+.white-space-pre {
+    white-space: pre-wrap;
+    font-family: "Courier New", Courier, "Lucida Sans Typewriter", "Lucida Typewriter", monospace;
+}
+
+#applyPref:disabled, #resetPref:disabled{
+    pointer-events: none;
+    cursor: not-allowed;
+    filter: alpha(opacity=65);
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    opacity: .50;
+    background-color: #777;
+}
+#splash-window{
+    display: none;
+    position: relative;
+    top: 0%;
+    left: 0%;
+    width: 100%;
+    height: 100%;
+    background-color: transparent;
+    opacity: 1;
+    z-index:1001
+}
+
+#splash-content{ 
+    position: absolute;
+    display: none;
+    width: 300px;
+    height: 70px;
+    padding: 16px;
+    border: 2px solid white;
+    background-color: black;
+    color: white;
+    z-index:1002;
+    font-size: 15px;
+}
+
+.white {
+    color: white
+}
+
+.glyphicon-refresh-animate {
+    animation: spin .7s infinite linear;
+        -webkit-animation: spin2 .7s infinite linear;
+    }
+
+    @-webkit-keyframes spin2 {
+        from { -webkit-transform: rotate(0deg);}
+        to { -webkit-transform: rotate(360deg);}
+    }
+
+    @keyframes spin {
+        from { transform: scale(1) rotate(0deg);}
+        to { transform: scale(1) rotate(360deg);}
+    }
+
+/* Popup container */
+.popup {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+}
+
+/* The actual popup (appears on top) */
+.popup .popuptext {
+    visibility: hidden;
+    width: 160px;
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 8px 0;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    margin-left: -80px;
+}
+
+/* Popup arrow */
+.popup .popuptext::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #555 transparent transparent transparent;
+}
+
+/* Toggle this class when clicking on the popup container (hide and show the popup) */
+.popup .show {
+    visibility: visible;
+    -webkit-animation: fadeIn 1s;
+    animation: fadeIn 1s
+}
+
+/* Add animation (fade in the popup) */
+@-webkit-keyframes fadeIn {
+    from {opacity: 0;}
+    to {opacity: 1;}
+}
+
+@keyframes fadeIn {
+    from {opacity: 0;}
+    to {opacity:1 ;}
+} 
+
+.tracelog {
+    background: rgba(255,255,0,0.3);
+    color: whitesmoke;
+}
+
+.debuglog {
+    background: rgba(0,255,0,0.3);
+    color: whitesmoke;
+}
+
+.infolog {
+    background: #34343491;
+    color: whitesmoke;
+}
+
+.warnlog {
+    background: rgba(255,155,0,0.3);
+    color: whitesmoke;
+}
+
+.errorlog {
+    background: rgba(255,0,0,0.3);
+    color: whitesmoke;
+}
+
+.headerlog {
+    background: #fafafa6e;
+    color: black;
+}
+
+.urllog {
+    background: rgba(8, 160, 226, 0.33);
+    color: whitesmoke;
+}
+
+.urllog:focus {
+    background: rgba(8, 160, 226, 0.33);
+    color: black;
+}
+
+#callStackPanel {
+    background: black;
+    padding: 0px;
+    border: 1px solid black;
+    width:100%; 
+    height:100%; 
+    overflow-y:auto;
+    overflow-x:hidden;
+}
+
+.spinner {
+    background-color: white; 
+}
+
+.ui-widget-content{
+    border: none;
+}
+
+#logViewer{
+    text-align: center;
+    text-decoration: none;
+    padding-right: 10px;
+    color: white;
+}
+
+
+#hydraVersionLink{
+    text-align: center;
+    text-decoration: none;
+    color: white;
+}
+
+.border-color-class {
+    background-color: #343434;
+    border: 2px solid #333;
+}
+
+.border-color-class:hover{
+    background-color: #ea7001;
+    color: #ea7001;
+}

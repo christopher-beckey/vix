@@ -1,0 +1,152 @@
+12/05/2000  12:49
+Saved from DCM,DCE
+MAGDBBM
+MAGDBBM ;WOIFO/EdM - Merge two station records ; [ 12/05/2000  12:49 ]
+ ;;2.5T;DICOM42;;1-Nov-2000
+ ;; +---------------------------------------------------------------+
+ ;; | Property of the US Government.                                |
+ ;; | No permission to copy or redistribute this software is given. |
+ ;; | Use of unreleased versions of this software requires the user |
+ ;; | to execute a written test agreement with the VistA Imaging    |
+ ;; | Development Office of the Department of Veterans Affairs,     |
+ ;; | telephone (301) 734-0100.                                     |
+ ;; |                                                               |
+ ;; | The Food and Drug Administration classifies this software as  |
+ ;; | a Class II medical device.  As such, it may not be changed    |
+ ;; | in any way.  Modifications to this software may result in an  |
+ ;; | adulterated medical device under 21CFR820, the use of which   |
+ ;; | is considered to be a violation of US Federal Statutes.       |
+ ;; +---------------------------------------------------------------+
+ ;;
+ Q
+ ;
+MERGE(SITE1,STA1,SITE2,STA2) N D4,D5,F,F2,F3,T2,T3,X,X1,X2
+ ; Merge record (site1,sta1) into (site2,sta2)
+ ; delete (site1,sta1) after the merge is done.
+ ;
+ ; If there is conflicting information between (1) and (2),
+ ; the information in (2) will not be overwritten.
+ ;
+ ; Primary purpose of this routine: merge two records,
+ ; when a station has received a new IP address.
+ ;
+ Q:'$D(^MAGDBB("DTA",SITE1,1,STA1))
+ ;
+ S ^MAGDBB("DTA",SITE2,1,STA2,0)=$$UPD($G(^MAGDBB("DTA",SITE1,1,STA1,0)),$G(^MAGDBB("DTA",SITE2,1,STA2,0)))
+ ;
+ ;  1 = Error trap
+ ;  9 = Menu Option Usage
+ ; 10 = Text processor statistics
+ ; 11 = Worklist processor statistics
+ ; 12 = Image processor statistics
+ ;
+ F F=1,9,10,11,12 D
+ . S F2=0 F  S F2=$O(^MAGDBB("DTA",SITE1,1,STA1,F,F2)) Q:'F2  D
+ . . S X1=$G(^MAGDBB("DTA",SITE1,1,STA1,F,F2,0))
+ . . S T2=$O(^MAGDBB("DTA",SITE1,1,STA2,F,"B",X1,""))
+ . . I 'T2 D  Q
+ . . . S T2=$O(^MAGDBB("DTA",SITE2,1,STA2,F," "),-1)+1
+ . . . S X2=$G(^MAGDBB("DTA",SITE2,1,STA2,F,0))
+ . . . S $P(X2,"^",4)=$P(X2,"^",4)+1,$P(X2,"^",3)=T2
+ . . . S ^MAGDBB("DTA",SITE2,1,STA2,F,0)=X2
+ . . . M ^MAGDBB("DTA",SITE2,1,STA2,F,T2)=^MAGDBB("DTA",SITE1,1,STA1,F,F2)
+ . . . S ^MAGDBB("DTA",SITE2,1,STA2,F,"B",X1,T2)=""
+ . . . Q
+ . . S F3=0 F  S F3=$O(^MAGDBB("DTA",SITE1,1,STA1,F,F2,1,F3)) Q:'F3  D
+ . . . S X1=$G(^MAGDBB("DTA",SITE1,1,STA1,F,F2,1,F3,0))
+ . . . S X2=$G(^MAGDBB("DTA",SITE2,1,STA2,F,T2,1,F3,0))
+ . . . S X=F3_"^"_($P(X1,"^",2)+$P(X2,"^",2))
+ . . . S:F=11 $P(X,"^",3)=$S($P(X2,"^",3)'="":$P(X2,"^",3),1:$P(X1,"^",3))
+ . . . S:F=12 $P(X,"^",3)=($P(X1,"^",3)+$P(X2,"^",3))
+ . . . S ^MAGDBB("DTA",SITE2,1,STA2,F,T2,1,F3,0)=X
+ . . . Q
+ . . Q
+ . Q
+ ;
+ ;  2 = Routine
+ ;  3 = Route
+ ;  4 = Instrument
+ ;  5 = Modality
+ ;  6 = Portlist
+ ;  7 = Worklist
+ ;  8 = SCU_List
+ ;
+ F F=2,3,4,5,6,7,8 D
+ . S F2=0 F  S F2=$O(^MAGDBB("DTA",SITE1,1,STA1,F,F2)) Q:'F2  D
+ . . S X1=$G(^MAGDBB("DTA",SITE1,1,STA1,F,F2,0))
+ . . S T2=$O(^MAGDBB("DTA",SITE1,1,STA2,F,"B",X1,""))
+ . . I 'T2 D  Q
+ . . . S T2=$O(^MAGDBB("DTA",SITE2,1,STA2,F," "),-1)+1
+ . . . S X2=$G(^MAGDBB("DTA",SITE2,1,STA2,F,0))
+ . . . S $P(X2,"^",4)=$P(X2,"^",4)+1,$P(X2,"^",3)=T2
+ . . . S ^MAGDBB("DTA",SITE2,1,STA2,F,0)=X2
+ . . . M ^MAGDBB("DTA",SITE2,1,STA2,F,T2)=^MAGDBB("DTA",SITE1,1,STA1,F,F2)
+ . . . S ^MAGDBB("DTA",SITE2,1,STA2,F,"B",X1,T2)=""
+ . . . Q
+ . . S F3=0 F  S F3=$O(^MAGDBB("DTA",SITE1,1,STA1,F,F2,1,F3)) Q:'F3  D
+ . . . S X1=$G(^MAGDBB("DTA",SITE1,1,STA1,F,F2,1,F3,0))
+ . . . S X2=$G(^MAGDBB("DTA",SITE2,1,STA2,F,T2,1,F3,0))
+ . . . Q:$TR($P(X2,"^",2,20),"^")'=""
+ . . . S ^MAGDBB("DTA",SITE2,1,STA2,F,T2,1,F3,0)=X1
+ . . . D:F=8
+ . . . . S D4=0 F  S D4=$O(^MAGDBB("DTA",SITE1,1,STA1,F,F2,1,F3,1,D4)) Q:'D4  D
+ . . . . . S X1=$G(^MAGDBB("DTA",SITE1,1,STA1,F,F2,1,F3,1,D4,0))
+ . . . . . S X2=$G(^MAGDBB("DTA",SITE2,1,STA2,F,T2,1,F3,1,D4,0))
+ . . . . . S:X2="" ^MAGDBB("DTA",SITE2,1,STA2,F,T2,1,F3,1,D4,0)=X1
+ . . . . . S D5=0 F  S D5=$O(^MAGDBB("DTA",SITE1,1,STA1,F,F2,1,F3,1,D4,1,D5)) Q:'D5  D
+ . . . . . . S X1=$G(^MAGDBB("DTA",SITE1,1,STA1,F,F2,1,F3,1,D4,1,D5,0))
+ . . . . . . S X2=$G(^MAGDBB("DTA",SITE2,1,STA2,F,T2,1,F3,1,D4,1,D5,0))
+ . . . . . . S:X2="" ^MAGDBB("DTA",SITE2,1,STA2,F,T2,1,F3,1,D4,1,D5,0)=X1
+ . . . . . . Q
+ . . . . . Q
+ . . . . Q
+ . . . Q
+ . . D:F'=8
+ . . . S X="?"
+ . . . S T3=0 F  S T3=$O(^MAGDBB("DTA",SITE2,1,STA2,F,F2,1,T3)) Q:'T3  D
+ . . . . S X2=$G(^MAGDBB("DTA",SITE2,1,STA2,F,F2,1,T3,0))
+ . . . . K:$P(X2,"^",2,20)=X ^MAGDBB("DTA",SITE2,1,STA2,F,F2,1,T3,0)
+ . . . . S X=$P(X2,"^",2,20)
+ . . . . Q
+ . . . Q
+ . . Q
+ . Q
+ ;
+ ;  13 = Alternate IP Addresses
+ ;
+ F F=13 D
+ . N A,N,V
+ . S X=$G(^MAGDBB("DTA",SITE2,1,STA2,13,0)),$P(X,"^",2)=2006.899313
+ . S N=$P(X,"^",4)
+ . S A=^MAGDBB("DTA",SITE1,1,STA1,0),V=$P(A,"^",1),A=V_"^"_$P(A,"^",3)
+ . D:'$D(^MAGDBB("DTA",SITE2,1,STA2,13,"B",V))
+ . . S T2=$O(^MAGDBB("DTA",SITE2,1,STA2,13," "),-1)+1,N=N+1
+ . . S ^MAGDBB("DTA",SITE2,1,STA2,13,T2,0)=A
+ . . S ^MAGDBB("DTA",SITE2,1,STA2,13,"B",V,T2)=""
+ . . Q
+ . S F2=0 F  S F2=$O(^MAGDBB("DTA",SITE1,1,STA1,13,F2)) Q:'F2  D
+ . . S A=$G(^MAGDBB("DTA",SITE1,1,STA1,13,F2,0)),V=$P(A,"^",1)
+ . . Q:V=""  Q:$D(^MAGDBB("DTA",SITE2,1,STA2,13,"B",V))
+ . . S T2=$O(^MAGDBB("DTA",SITE2,1,STA2,13," "),-1)+1,N=N+1
+ . . S ^MAGDBB("DTA",SITE2,1,STA2,13,T2,0)=A
+ . . S ^MAGDBB("DTA",SITE2,1,STA2,13,"B",V,T2)=""
+ . . Q
+ . S $P(X,"^",3,4)=N_"^"_N
+ . S ^MAGDBB("DTA",SITE2,1,STA2,13,0)=X
+ . Q
+ ;
+ ;
+ S X=$P($G(^MAGDBB("DTA",SITE1,1,STA1,0)),"^",1)
+ K ^MAGDBB("DTA",SITE1,1,STA1)
+ K:X'="" ^MAGDBB("DTA",SITE1,1,"B",X,STA1)
+ Q
+ ;
+UPD(X1,X2) N I
+ F I=1:1:$L(X1,"^") D
+ . Q:$P(X1,"^",I)=""  Q:$P(X2,"^",I)'=""
+ . S $P(X2,"^",I)=$P(X1,"^",I)
+ . Q
+ Q X2
+ ;
+
+

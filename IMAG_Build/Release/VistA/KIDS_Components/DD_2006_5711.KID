@@ -1,0 +1,322 @@
+KIDS Distribution saved on Jul 16, 2007@12:54:41
+Package for FILE named 2006.5711
+**KIDS**:MAG*3.0*91^
+
+**INSTALL NAME**
+MAG*3.0*91
+"BLD",5904,0)
+MAG*3.0*91^^0^3070716^y
+"BLD",5904,1,0)
+^^4^4^3070716^
+"BLD",5904,1,1,0)
+This package contains a KIDS component
+"BLD",5904,1,2,0)
+for Running Baseline.
+"BLD",5904,1,3,0)
+ 
+"BLD",5904,1,4,0)
+This package transports the FileMan data dictionary named 2006.5711.
+"BLD",5904,4,0)
+^9.64PA^2006.5711^1
+"BLD",5904,4,2006.5711,0)
+2006.5711
+"BLD",5904,4,2006.5711,222)
+y^y^f^^^^n
+"BLD",5904,4,"B",2006.5711,2006.5711)
+
+"BLD",5904,6.3)
+1
+"BLD",5904,"KRN",0)
+^9.67PA^8989.52^19
+"BLD",5904,"KRN",.4,0)
+.4
+"BLD",5904,"KRN",.401,0)
+.401
+"BLD",5904,"KRN",.402,0)
+.402
+"BLD",5904,"KRN",.403,0)
+.403
+"BLD",5904,"KRN",.5,0)
+.5
+"BLD",5904,"KRN",.84,0)
+.84
+"BLD",5904,"KRN",3.6,0)
+3.6
+"BLD",5904,"KRN",3.8,0)
+3.8
+"BLD",5904,"KRN",9.2,0)
+9.2
+"BLD",5904,"KRN",9.8,0)
+9.8
+"BLD",5904,"KRN",19,0)
+19
+"BLD",5904,"KRN",19.1,0)
+19.1
+"BLD",5904,"KRN",101,0)
+101
+"BLD",5904,"KRN",409.61,0)
+409.61
+"BLD",5904,"KRN",771,0)
+771
+"BLD",5904,"KRN",870,0)
+870
+"BLD",5904,"KRN",8989.51,0)
+8989.51
+"BLD",5904,"KRN",8989.52,0)
+8989.52
+"BLD",5904,"KRN",8994,0)
+8994
+"BLD",5904,"KRN","B",.4,.4)
+
+"BLD",5904,"KRN","B",.401,.401)
+
+"BLD",5904,"KRN","B",.402,.402)
+
+"BLD",5904,"KRN","B",.403,.403)
+
+"BLD",5904,"KRN","B",.5,.5)
+
+"BLD",5904,"KRN","B",.84,.84)
+
+"BLD",5904,"KRN","B",3.6,3.6)
+
+"BLD",5904,"KRN","B",3.8,3.8)
+
+"BLD",5904,"KRN","B",9.2,9.2)
+
+"BLD",5904,"KRN","B",9.8,9.8)
+
+"BLD",5904,"KRN","B",19,19)
+
+"BLD",5904,"KRN","B",19.1,19.1)
+
+"BLD",5904,"KRN","B",101,101)
+
+"BLD",5904,"KRN","B",409.61,409.61)
+
+"BLD",5904,"KRN","B",771,771)
+
+"BLD",5904,"KRN","B",870,870)
+
+"BLD",5904,"KRN","B",8989.51,8989.51)
+
+"BLD",5904,"KRN","B",8989.52,8989.52)
+
+"BLD",5904,"KRN","B",8994,8994)
+
+"FIA",2006.5711)
+DICOM M2MB RPC QUEUE
+"FIA",2006.5711,0)
+^MAGDINPT(2006.5711,
+"FIA",2006.5711,0,0)
+2006.5711
+"FIA",2006.5711,0,1)
+y^y^f^^^^n
+"FIA",2006.5711,0,10)
+
+"FIA",2006.5711,0,11)
+
+"FIA",2006.5711,0,"RLRO")
+
+"FIA",2006.5711,2006.5711)
+0
+"MBREQ")
+0
+"QUES","XPF1",0)
+Y
+"QUES","XPF1","??")
+^D REP^XPDH
+"QUES","XPF1","A")
+Shall I write over your |FLAG| File
+"QUES","XPF1","B")
+YES
+"QUES","XPF1","M")
+D XPF1^XPDIQ
+"QUES","XPF2",0)
+Y
+"QUES","XPF2","??")
+^D DTA^XPDH
+"QUES","XPF2","A")
+Want my data |FLAG| yours
+"QUES","XPF2","B")
+YES
+"QUES","XPF2","M")
+D XPF2^XPDIQ
+"QUES","XPI1",0)
+YO
+"QUES","XPI1","??")
+^D INHIBIT^XPDH
+"QUES","XPI1","A")
+Want KIDS to INHIBIT LOGONs during the install
+"QUES","XPI1","B")
+YES
+"QUES","XPI1","M")
+D XPI1^XPDIQ
+"QUES","XPM1",0)
+PO^VA(200,:EM
+"QUES","XPM1","??")
+^D MG^XPDH
+"QUES","XPM1","A")
+Enter the Coordinator for Mail Group '|FLAG|'
+"QUES","XPM1","B")
+
+"QUES","XPM1","M")
+D XPM1^XPDIQ
+"QUES","XPO1",0)
+Y
+"QUES","XPO1","??")
+^D MENU^XPDH
+"QUES","XPO1","A")
+Want KIDS to Rebuild Menu Trees Upon Completion of Install
+"QUES","XPO1","B")
+YES
+"QUES","XPO1","M")
+D XPO1^XPDIQ
+"QUES","XPZ1",0)
+Y
+"QUES","XPZ1","??")
+^D OPT^XPDH
+"QUES","XPZ1","A")
+Want to DISABLE Scheduled Options, Menu Options, and Protocols
+"QUES","XPZ1","B")
+YES
+"QUES","XPZ1","M")
+D XPZ1^XPDIQ
+"QUES","XPZ2",0)
+Y
+"QUES","XPZ2","??")
+^D RTN^XPDH
+"QUES","XPZ2","A")
+Want to MOVE routines to other CPUs
+"QUES","XPZ2","B")
+NO
+"QUES","XPZ2","M")
+D XPZ2^XPDIQ
+"SEC","^DIC",2006.5711,2006.5711,0,"AUDIT")
+@
+"SEC","^DIC",2006.5711,2006.5711,0,"DD")
+@
+"SEC","^DIC",2006.5711,2006.5711,0,"DEL")
+@
+"SEC","^DIC",2006.5711,2006.5711,0,"LAYGO")
+@
+"SEC","^DIC",2006.5711,2006.5711,0,"RD")
+@
+"SEC","^DIC",2006.5711,2006.5711,0,"WR")
+@
+"VER")
+8.0^22.0
+"^DD",2006.5711,2006.5711,0)
+FIELD^^.01^1
+"^DD",2006.5711,2006.5711,0,"DDA")
+N
+"^DD",2006.5711,2006.5711,0,"DT")
+3021121
+"^DD",2006.5711,2006.5711,0,"NM","DICOM M2MB RPC QUEUE")
+
+"^DD",2006.5711,2006.5711,.01,0)
+DATA RECORD^RFX^^0;E1,240^Q
+"^DD",2006.5711,2006.5711,.01,1,0)
+^.1^^0
+"^DD",2006.5711,2006.5711,.01,3)
+Enter a data record for the RPC to process.
+"^DD",2006.5711,2006.5711,.01,21,0)
+^^5^5^3021121^^
+"^DD",2006.5711,2006.5711,.01,21,1,0)
+The value of this field is a record to be passed on to the remote
+"^DD",2006.5711,2006.5711,.01,21,2,0)
+procedure call.
+"^DD",2006.5711,2006.5711,.01,21,3,0)
+ 
+"^DD",2006.5711,2006.5711,.01,21,4,0)
+One of the parameters of this remote procedure decides how to
+"^DD",2006.5711,2006.5711,.01,21,5,0)
+treat the data record that is stored in this field.
+"^DD",2006.5711,2006.5711,.01,"DT")
+3021121
+"^DIC",2006.5711,2006.5711,0)
+DICOM M2MB RPC QUEUE^2006.5711
+"^DIC",2006.5711,2006.5711,0,"GL")
+^MAGDINPT(2006.5711,
+"^DIC",2006.5711,2006.5711,"%D",0)
+^^38^38^3021122^^
+"^DIC",2006.5711,2006.5711,"%D",1,0)
+ +---------------------------------------------------------------+
+"^DIC",2006.5711,2006.5711,"%D",2,0)
+ |                                                               |
+"^DIC",2006.5711,2006.5711,"%D",3,0)
+ | Property of the US Government.                                |
+"^DIC",2006.5711,2006.5711,"%D",4,0)
+ | No permission to copy or redistribute this software is given. |
+"^DIC",2006.5711,2006.5711,"%D",5,0)
+ | Use of unreleased versions of this software requires the user |
+"^DIC",2006.5711,2006.5711,"%D",6,0)
+ | to execute a written test agreement with the VistA Imaging    |
+"^DIC",2006.5711,2006.5711,"%D",7,0)
+ | Development Office of the Department of Veterans Affairs,     |
+"^DIC",2006.5711,2006.5711,"%D",8,0)
+ | telephone (301) 734-0100.                                     |
+"^DIC",2006.5711,2006.5711,"%D",9,0)
+ |                                                               |
+"^DIC",2006.5711,2006.5711,"%D",10,0)
+ | The Food and Drug Administration classifies this software as  |
+"^DIC",2006.5711,2006.5711,"%D",11,0)
+ | a medical device.  As such, it may not be changed in any way. |
+"^DIC",2006.5711,2006.5711,"%D",12,0)
+ | Modifications to this software may result in an adulterated   |
+"^DIC",2006.5711,2006.5711,"%D",13,0)
+ | medical device under 21CFR820, the use of which is considered |
+"^DIC",2006.5711,2006.5711,"%D",14,0)
+ | to be a violation of US Federal Statutes.                     |
+"^DIC",2006.5711,2006.5711,"%D",15,0)
+ |                                                               |
+"^DIC",2006.5711,2006.5711,"%D",16,0)
+ +---------------------------------------------------------------+
+"^DIC",2006.5711,2006.5711,"%D",17,0)
+ 
+"^DIC",2006.5711,2006.5711,"%D",18,0)
+The entries in this table describe activities that are requested
+"^DIC",2006.5711,2006.5711,"%D",19,0)
+by DICOM Gateways, to be performed by procedures that are
+"^DIC",2006.5711,2006.5711,"%D",20,0)
+executed remotely on a VistA Server.
+"^DIC",2006.5711,2006.5711,"%D",21,0)
+
+"^DIC",2006.5711,2006.5711,"%D",22,0)
+The name of the Remote Procedure that processed these requests
+"^DIC",2006.5711,2006.5711,"%D",23,0)
+is MAG DICOM IMAGE PROCESSING; the code for this procedure
+"^DIC",2006.5711,2006.5711,"%D",24,0)
+starts at ENTRY^MAGDIR8.
+"^DIC",2006.5711,2006.5711,"%D",25,0)
+
+"^DIC",2006.5711,2006.5711,"%D",26,0)
+The data in the various request-records contains a code that
+"^DIC",2006.5711,2006.5711,"%D",27,0)
+speficies the type of operation, and any subsequent data
+"^DIC",2006.5711,2006.5711,"%D",28,0)
+in the request are parameters for that operation.
+"^DIC",2006.5711,2006.5711,"%D",29,0)
+
+"^DIC",2006.5711,2006.5711,"%D",30,0)
+Currently, the following requests are recognized:
+"^DIC",2006.5711,2006.5711,"%D",31,0)
+(upper case values are constants, lower case values
+"^DIC",2006.5711,2006.5711,"%D",32,0)
+indicate variable values):
+"^DIC",2006.5711,2006.5711,"%D",33,0)
+
+"^DIC",2006.5711,2006.5711,"%D",34,0)
+PROCESSED|0|location|instrument|image|1
+"^DIC",2006.5711,2006.5711,"%D",35,0)
+CORRECT|PROCESSED|image|study|deletion|instrument|filename|study_uid|gateway_id
+"^DIC",2006.5711,2006.5711,"%D",36,0)
+
+"^DIC",2006.5711,2006.5711,"%D",37,0)
+The data in this file is extremely volatile.
+"^DIC",2006.5711,2006.5711,"%D",38,0)
+Records will be entered, processed and deleted in rapid progression.
+"^DIC",2006.5711,"B","DICOM M2MB RPC QUEUE",2006.5711)
+
+**END**
+**END**

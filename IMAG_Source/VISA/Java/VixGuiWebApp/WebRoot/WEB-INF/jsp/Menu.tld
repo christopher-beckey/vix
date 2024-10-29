@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!-- a tag library descriptor -->
+<taglib version="2.0" xmlns="http://java.sun.com/xml/ns/j2ee"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-jsptaglibrary_2_0.xsd">
+ <description>A tag handler library for displaying a menu sensitive to user permissions</description>
+ <tlib-version>1.0</tlib-version>
+ <short-name>Menu</short-name>
+ <uri>http://imaging.med.va.gov/vix/menu</uri>
+ <tag>
+  <description>The menu element.</description>
+  <name>Menu</name>
+  <tag-class>gov.va.med.imaging.exchange.business.taglib.menu.MenuTag</tag-class>
+  <body-content>empty</body-content>
+  <attribute>
+   <description>The base name of the properties file to use to build the menu.  Defaults
+			to 'menu'.</description>
+   <name>menuBundleName</name>
+   <rtexprvalue>false</rtexprvalue>
+   <type>java.lang.String</type>
+  </attribute>
+  <attribute>
+   <description>The DOM 'class' attribute value for the menu span element. 
+			Defaults to 'menu'.</description>
+   <name>menuClass</name>
+   <rtexprvalue>false</rtexprvalue>
+   <type>java.lang.String</type>
+  </attribute>
+  <attribute>
+   <description>The DOM 'id' attribute value for the menu span element.
+			Defaults to 'menu-id'.</description>
+   <name>menuId</name>
+   <rtexprvalue>false</rtexprvalue>
+   <type>java.lang.String</type>
+  </attribute>
+  <attribute>
+   <description>The DOM 'class' attribute value for the submenu span elements. 
+			Defaults to 'submenu'.</description>
+   <name>subMenuClass</name>
+   <rtexprvalue>false</rtexprvalue>
+   <type>java.lang.String</type>
+  </attribute>
+  <attribute>
+   <description>The root of the DOM 'id' attribute value for the menu item elements.
+			The value of the 'id' attribute will be the root plus a monotonically increasing integer. 
+			Defaults to 'menuitem-'.</description>
+   <name>menuItemClass</name>
+   <rtexprvalue>false</rtexprvalue>
+   <type>java.lang.String</type>
+  </attribute>
+  <attribute>
+   <description>The DOM 'class' attribute value for the menu DIV element (where the menu will appear). 
+			Defaults to 'menudiv'.</description>
+   <name>menuDivClass</name>
+   <rtexprvalue>false</rtexprvalue>
+   <type>java.lang.String</type>
+  </attribute>
+  <attribute>
+   <description>The DOM 'id' attribute value for the menu DIV element (where the menu will appear).
+			Defaults to 'menudiv-id'.</description>
+   <name>menuDivId</name>
+   <rtexprvalue>false</rtexprvalue>
+   <type>java.lang.String</type>
+  </attribute>
+ </tag>
+ <tag>
+  <name>ClinicalDisplayLink</name>
+  <tag-class>gov.va.med.imaging.exchange.business.taglib.menu.ClinicalDisplayClientLinkTag</tag-class>
+  <body-content>empty</body-content>
+  <attribute>
+   <name>targetSiteNumber</name>
+   <required>true</required>
+   <rtexprvalue>true</rtexprvalue>
+   <type>java.lang.String</type>
+  </attribute>
+  <attribute>
+   <name>siteNumber</name>
+   <required>true</required>
+   <rtexprvalue>true</rtexprvalue>
+   <type>java.lang.String</type>
+  </attribute>
+  <attribute>
+   <name>patientId</name>
+   <rtexprvalue>true</rtexprvalue>
+   <type>java.lang.String</type>
+  </attribute>
+  <attribute>
+   <name>fromDate</name>
+   <rtexprvalue>true</rtexprvalue>
+   <type>java.lang.String</type>
+  </attribute>
+  <attribute>
+   <name>toDate</name>
+   <rtexprvalue>true</rtexprvalue>
+   <type>java.lang.String</type>
+  </attribute>
+  <attribute>
+   <name>studyId</name>
+   <rtexprvalue>true</rtexprvalue>
+   <type>java.lang.String</type>
+  </attribute>
+  <attribute>
+   <name>studyPackage</name>
+   <rtexprvalue>true</rtexprvalue>
+   <type>java.lang.String</type>
+  </attribute>
+  <attribute>
+   <name>studyClass</name>
+   <rtexprvalue>true</rtexprvalue>
+   <type>java.lang.String</type>
+  </attribute>
+  <attribute>
+   <name>studyType</name>
+   <rtexprvalue>true</rtexprvalue>
+   <type>java.lang.String</type>
+  </attribute>
+  <attribute>
+   <name>studyEvent</name>
+   <rtexprvalue>true</rtexprvalue>
+   <type>java.lang.String</type>
+  </attribute>
+  <attribute>
+   <name>studySpecialty</name>
+   <rtexprvalue>true</rtexprvalue>
+   <type>java.lang.String</type>
+  </attribute>
+  <attribute>
+   <name>originId</name>
+   <rtexprvalue>true</rtexprvalue>
+   <type>java.lang.String</type>
+  </attribute>
+ </tag>
+ <tag>
+  <name>ExchangeLink</name>
+  <tag-class>gov.va.med.imaging.exchange.business.taglib.menu.ExchangeClientLinkTag</tag-class>
+  <body-content>empty</body-content>
+  <attribute>
+   <name>targetSiteNumber</name>
+   <required>true</required>
+   <rtexprvalue>true</rtexprvalue>
+   <type>java.lang.String</type>
+  </attribute>
+  <attribute>
+   <name>siteNumber</name>
+   <required>true</required>
+   <rtexprvalue>true</rtexprvalue>
+   <type>java.lang.String</type>
+  </attribute>
+  <attribute>
+   <name>patientId</name>
+   <rtexprvalue>true</rtexprvalue>
+   <type>java.lang.String</type>
+  </attribute>
+ </tag>
+ <tag>
+  <name>FederationLink</name>
+  <tag-class>gov.va.med.imaging.exchange.business.taglib.menu.FederationClientLinkTag</tag-class>
+  <body-content>empty</body-content>
+  <attribute>
+   <name>targetSiteNumber</name>
+   <required>true</required>
+   <rtexprvalue>true</rtexprvalue>
+   <type>java.lang.String</type>
+  </attribute>
+  <attribute>
+   <name>siteNumber</name>
+   <required>true</required>
+   <rtexprvalue>true</rtexprvalue>
+   <type>java.lang.String</type>
+  </attribute>
+  <attribute>
+   <name>patientId</name>
+   <required>true</required>
+   <rtexprvalue>true</rtexprvalue>
+   <type>java.lang.String</type>
+  </attribute>
+ </tag>
+</taglib>

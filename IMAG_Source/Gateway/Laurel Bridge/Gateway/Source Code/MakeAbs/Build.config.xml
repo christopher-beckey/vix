@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<build working-directory="C:\Dev\P72\" base-version="30.26.72" compiler="c:\Program Files\Borland\Delphi7\Bin\Dcc32.exe">
+	<vss base-project="$/VistAImaging/Version 3.0 Patch 072 - Accusoft Toolkit Conversion/">
+		<dependencies>
+                  <project>$/VistAImaging/Version 3.0 Patch 046 - TeleReader/</project>
+		</dependencies>
+		<items>
+			<item>Clin/Capture/</item>
+			<item>Clin/Display/</item>
+			<item working-directory="Clin\Display\Bmp">Clin/bmp/</item>
+			<item>Clin/Forms/</item>
+			<item>Clin/Units/</item>
+			<item working-directory="Clin\Units">Clin/Common/</item>
+			<item>Clin/DCMForms/</item>
+			<item>Clin/MagSetup/</item>
+			<item>Clin/MiniBld/</item>
+			<item>Clin/SysTools/</item>
+			<item>Clin/Diagram Annotation/MagAnnTool/</item>
+			<item>Clin/D5 Components/</item>
+			<item working-directory="C:\Dev\D5 Components">Clin/D5 Components/</item>		
+			<!--	
+			<item>Clin/DCMView/</item> 	
+			-->
+			<item>Clin/TeleReader/</item>
+			<item>Help/TeleReader/</item>
+			<item>Help/Client/</item>
+		</items>
+	</vss>
+	<delphi-projects output-dir="Clin\dcu\">
+		<!--
+		<project id="MAG_DCMView" file="Clin/DCMView/MAG_DCMView.dpr" options='"-N..\dcu" "-U..\dcu;C:\Program Files\Borland\Delphi7\Imports;C:\Program Files\Borland\Delphi7\Demos\Doc\Filmanex;C:\Program Files\Vista\BDK32\D7;C:\Program Files\Vista\BDK32\Source;C:\Program Files\AccuSoft\ImageGear v15\MD\ActiveX\Samples\Delphi7\Package;C:\dev\Indy;C:\Program Files\Borland\Delphi7\Lib" "-IC:\Program Files\Borland\Delphi7\Imports;C:\dev\Indy"'>MAG_DCMView.exe</project>
+		-->
+		<project id="Display" file="Clin/Display/MagDisplay72.dpr" options='-Q "-N..\dcu" "-U..\dcu;C:\Program Files\Borland\Delphi7\Imports;C:\Program Files\Borland\Delphi7\Demos\Doc\Filmanex;C:\Program Files\Vista\BDK32\D7;C:\Program Files\Vista\BDK32\Source;C:\Program Files\AccuSoft\ImageGear v15\MD\ActiveX\Samples\Delphi7\Package;C:\dev\Indy" "-IC:\Program Files\Borland\Delphi7\Imports;C:\dev\Indy"'>MagImageDisplay.exe</project>
+		<project id="Capture" file="Clin/Capture/MagCapture72.dpr" options='-Q "-N..\dcu" "-U..\dcu;C:\Program Files\Borland\Delphi7\Imports;C:\Program Files\Borland\Delphi7\Demos\Doc\Filmanex;C:\Program Files\Borland\Delphi7\Source\ToolsAPI;C:\Program Files\VistA\BDK32\Source" "-IC:\Program Files\Borland\Delphi7\Imports" "-DDEFINE MeteorBoard"'>MagImageCapture.exe</project>
+		<project id="MagSetup" file="Clin/MagSetup/MagSetup.dpr" compiler="C:\Program Files\Borland\Delphi5\Bin\Dcc32.exe" options='-Q -N..\dcu "-IC:\Dev\Indy;" "-U..\dcu;C:\Dev\Indy;C:\Dev\Indy\SOAP;"' compile='true'>MagSetup.exe</project>
+		<project id="MagLauncher" file="Clin/MiniBld/MagLauncher.dpr" compiler="C:\Program Files\Borland\Delphi5\Bin\Dcc32.exe" options='-Q -N..\dcu "-U..\dcu;C:\Program Files\Borland\Delphi5\Demos\Doc\Filmanex"'>MagLauncher.exe</project>
+		<project id="MagMiniBld" file="Clin/MiniBld/MagMiniBld.dpr" compiler="C:\Program Files\Borland\Delphi5\Bin\Dcc32.exe" options='-Q -N..\dcu -U..\dcu'>MagMiniBld.exe</project>
+		<project id="MagASet" file="Clin/SysTools/MagASet.dpr" compiler="C:\Program Files\Borland\Delphi5\Bin\Dcc32.exe" options='-Q -N..\dcu -U..\dcu'>MagASet.exe</project>
+		<project id="MagSys" file="Clin/SysTools/MagSys.dpr" options='-Q -N..\dcu "-U..\dcu;..\Forms;..\Display;..\DCMForms;C:\Dev\D5 Components\;C:\Program Files\Vista\BDK32\D7;C:\Program Files\Vista\BDK32\Source;C:\Program Files\Borland\Delphi7\Demos\Doc\Filmanex;C:\Program Files\Borland\Delphi7\Demos\Doc\Filmanex;C:\dev\Indy"'>MagSys.exe</project>
+		<project id="MagWrks" file="Clin/SysTools/Magwrks.dpr" options='-Q -N..\dcu "-U..\dcu;..\D5 Components\;C:\Program Files\Vista\BDK32\D7;C:\Program Files\Vista\BDK32\Source;C:\Program Files\Borland\Delphi7\Demos\Doc\Filmanex;C:\Program Files\Borland\Delphi7\Demos\Doc\Filmanex;..\DCMForms;..\Display;..\Capture;C:\dev\Indy"'>Magwrks.exe</project>
+		<project id="MagAnnTool" file="Clin/Diagram Annotation/MagAnnTool/MagAnnTool.dpr" compiler="C:\Program Files\Borland\Delphi5\Bin\Dcc32.exe" options='-Q -N..\..\dcu "-U..\..\dcu;C:\Program Files\Borland\Delphi5\Imports;c:\Program Files\Borland\Delphi5\Demos\Doc\Filmanex"'>MagAnnTool.dll</project>
+		<project id="TeleReader" file="Clin/TeleReader/MagTeleReader.dpr" options='-N..\dcu "-U..\dcu;C:\Program Files\Vista\BDK32\D7;C:\Program Files\Vista\BDK32\Source;C:\Program Files\Borland\Delphi7\Demos\Doc\Filmanex;c:\Program Files\Borland\Delphi7\Demos\Doc\Filmanex;"'>TeleReader.exe</project>
+	</delphi-projects>
+	<release
+		project="Clin/MagInstall.ism"
+		source="\\vhaiswclu4\common$\Release\Distrib\Clinical Imaging 3.0 P8\"
+		working-dir="C:\Release\">
+		<copy project-id="Display" destination="MagImageDisplay.exe" />
+		<copy project-id="Capture" destination="MagImageCapture.exe" />
+		<copy project-id="MagLauncher" destination="Utils\" />
+		<copy project-id="MagMiniBld" destination="Utils\" />
+		<copy project-id="MagSys" destination="" />
+		<copy project-id="MagWrks" destination="" />
+		<copy project-id="MagAnnTool" destination="Lib\" />
+		<copy project-id="TeleReader" destination="MagTeleReader.exe" />
+		<copyHelp>Help/TeleReader</copyHelp>
+		<copyHelp>Help\Client</copyHelp>
+	</release>
+</build>

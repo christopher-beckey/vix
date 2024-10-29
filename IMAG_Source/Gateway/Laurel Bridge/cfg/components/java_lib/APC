@@ -1,0 +1,25 @@
+#==============================================================================
+# static information common to all instances of APC component
+#==============================================================================
+[ component_info ]
+name = APC
+type = java_lib
+category = common_service_interface_libs
+package_prefix = com.lbs
+description = Application Control - java interface to startup, shutdown, event handling, and application configuration services
+slnreldir = .\jsrc\com\lbs\APC
+
+[ required_components ]
+[ debug_controls ]
+debug_flag = df_SHOW_CONSTRUCTORS, 0x0001, show object constructors
+debug_flag = df_SHOW_DESTRUCTORS, 0x0002, show object destructors
+debug_flag = df_SHOW_GENERAL_FLOW, 0x0004, show general flow
+debug_flag = df_SIMULATE_HARDWARE, 0x0008, simulate external devices
+debug_flag = df_SHOW_CFG_INFO, 0x0010, show configuration information
+debug_flag = df_SHOW_EXC_THROW, 0x0020, show exceptions before throwing
+
+#==============================================================================
+# per-instance information for the APC component
+#==============================================================================
+[ APC ]
+debug_flags = 0x00000

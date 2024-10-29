@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<build xmlns="http://va.gov/VistA/kids/manifest" name="MAG*3.0*135" patchName="Emergency Patch for MAG 3.0 121" patch="135">
+  <components>
+    <securityKeys />
+    <parameterDefinitions />
+    <printTemplates />
+    <hl7s />
+    <menuOptions />
+    <sorts />
+    <rpcs />
+    <dataDictionaries />
+    <routines />
+    <protocols />
+  </components>
+</build>

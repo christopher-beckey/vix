@@ -1,0 +1,592 @@
+KIDS Distribution saved on Oct 04, 2000@15:14:09
+File export for VSS
+**KIDS**:Z VSS FILE 0.1T^
+
+**INSTALL NAME**
+Z VSS FILE 0.1T
+"BLD",1195,0)
+Z VSS FILE 0.1T^^0^3001004^n
+"BLD",1195,1,0)
+^^1^1^3000906^
+"BLD",1195,1,1,0)
+KIDS file for one single file
+"BLD",1195,4,0)
+^9.64PA^2006.34^1
+"BLD",1195,4,2006.34,0)
+2006.34
+"BLD",1195,4,2006.34,222)
+y^y^f^^^^n
+"BLD",1195,4,"B",2006.34,2006.34)
+
+"BLD",1195,"KRN",0)
+^9.67PA^19^17
+"BLD",1195,"KRN",.4,0)
+.4
+"BLD",1195,"KRN",.401,0)
+.401
+"BLD",1195,"KRN",.402,0)
+.402
+"BLD",1195,"KRN",.403,0)
+.403
+"BLD",1195,"KRN",.5,0)
+.5
+"BLD",1195,"KRN",.84,0)
+.84
+"BLD",1195,"KRN",3.6,0)
+3.6
+"BLD",1195,"KRN",3.8,0)
+3.8
+"BLD",1195,"KRN",9.2,0)
+9.2
+"BLD",1195,"KRN",9.8,0)
+9.8
+"BLD",1195,"KRN",19,0)
+19
+"BLD",1195,"KRN",19.1,0)
+19.1
+"BLD",1195,"KRN",101,0)
+101
+"BLD",1195,"KRN",409.61,0)
+409.61
+"BLD",1195,"KRN",771,0)
+771
+"BLD",1195,"KRN",870,0)
+870
+"BLD",1195,"KRN",8994,0)
+8994
+"BLD",1195,"KRN","B",.4,.4)
+
+"BLD",1195,"KRN","B",.401,.401)
+
+"BLD",1195,"KRN","B",.402,.402)
+
+"BLD",1195,"KRN","B",.403,.403)
+
+"BLD",1195,"KRN","B",.5,.5)
+
+"BLD",1195,"KRN","B",.84,.84)
+
+"BLD",1195,"KRN","B",3.6,3.6)
+
+"BLD",1195,"KRN","B",3.8,3.8)
+
+"BLD",1195,"KRN","B",9.2,9.2)
+
+"BLD",1195,"KRN","B",9.8,9.8)
+
+"BLD",1195,"KRN","B",19,19)
+
+"BLD",1195,"KRN","B",19.1,19.1)
+
+"BLD",1195,"KRN","B",101,101)
+
+"BLD",1195,"KRN","B",409.61,409.61)
+
+"BLD",1195,"KRN","B",771,771)
+
+"BLD",1195,"KRN","B",870,870)
+
+"BLD",1195,"KRN","B",8994,8994)
+
+"FIA",2006.34)
+SCANNED FORM-CLINIC ASSOC
+"FIA",2006.34,0)
+^MAGG(2006.34,
+"FIA",2006.34,0,0)
+2006.34
+"FIA",2006.34,0,1)
+y^y^f^^^^n
+"FIA",2006.34,0,10)
+
+"FIA",2006.34,0,11)
+
+"FIA",2006.34,0,"RLRO")
+
+"FIA",2006.34,2006.34)
+0
+"FIA",2006.34,2006.35)
+0
+"FIA",2006.34,2006.37)
+0
+"MBREQ")
+0
+"QUES","XPF1",0)
+Y
+"QUES","XPF1","??")
+^D REP^XPDH
+"QUES","XPF1","A")
+Shall I write over your |FLAG| File
+"QUES","XPF1","B")
+YES
+"QUES","XPF1","M")
+D XPF1^XPDIQ
+"QUES","XPF2",0)
+Y
+"QUES","XPF2","??")
+^D DTA^XPDH
+"QUES","XPF2","A")
+Want my data |FLAG| yours
+"QUES","XPF2","B")
+YES
+"QUES","XPF2","M")
+D XPF2^XPDIQ
+"QUES","XPI1",0)
+YO
+"QUES","XPI1","??")
+^D INHIBIT^XPDH
+"QUES","XPI1","A")
+Want KIDS to INHIBIT LOGONs during the install
+"QUES","XPI1","B")
+YES
+"QUES","XPI1","M")
+D XPI1^XPDIQ
+"QUES","XPM1",0)
+PO^VA(200,:EM
+"QUES","XPM1","??")
+^D MG^XPDH
+"QUES","XPM1","A")
+Enter the Coordinator for Mail Group '|FLAG|'
+"QUES","XPM1","B")
+
+"QUES","XPM1","M")
+D XPM1^XPDIQ
+"QUES","XPO1",0)
+Y
+"QUES","XPO1","??")
+^D MENU^XPDH
+"QUES","XPO1","A")
+Want KIDS to Rebuild Menu Trees Upon Completion of Install
+"QUES","XPO1","B")
+YES
+"QUES","XPO1","M")
+D XPO1^XPDIQ
+"QUES","XPZ1",0)
+Y
+"QUES","XPZ1","??")
+^D OPT^XPDH
+"QUES","XPZ1","A")
+Want to DISABLE Scheduled Options, Menu Options, and Protocols
+"QUES","XPZ1","B")
+YES
+"QUES","XPZ1","M")
+D XPZ1^XPDIQ
+"QUES","XPZ2",0)
+Y
+"QUES","XPZ2","??")
+^D RTN^XPDH
+"QUES","XPZ2","A")
+Want to MOVE routines to other CPUs
+"QUES","XPZ2","B")
+NO
+"QUES","XPZ2","M")
+D XPZ2^XPDIQ
+"VER")
+8.0^22.0
+"^DD",2006.34,2006.34,0)
+FIELD^^200^11
+"^DD",2006.34,2006.34,0,"DDA")
+N
+"^DD",2006.34,2006.34,0,"DT")
+2950623
+"^DD",2006.34,2006.34,0,"IX","ADAYBF",2006.34,3.1)
+
+"^DD",2006.34,2006.34,0,"IX","ADAYOF",2006.34,3.2)
+
+"^DD",2006.34,2006.34,0,"IX","AMERGE",2006.34,1)
+
+"^DD",2006.34,2006.34,0,"IX","APRTORD",2006.34,3)
+
+"^DD",2006.34,2006.34,0,"IX","ASCAN",2006.34,2)
+
+"^DD",2006.34,2006.34,0,"IX","B",2006.34,.01)
+
+"^DD",2006.34,2006.34,0,"NM","SCANNED FORM-CLINIC ASSOC")
+
+"^DD",2006.34,2006.34,0,"PT",2006.343,8)
+
+"^DD",2006.34,2006.34,.01,0)
+NAME^RF^^0;1^K:$L(X)>30!($L(X)<1) X
+"^DD",2006.34,2006.34,.01,1,0)
+^.1
+"^DD",2006.34,2006.34,.01,1,1,0)
+2006.34^B
+"^DD",2006.34,2006.34,.01,1,1,1)
+S ^MAGG(2006.34,"B",$E(X,1,30),DA)=""
+"^DD",2006.34,2006.34,.01,1,1,2)
+K ^MAGG(2006.34,"B",$E(X,1,30),DA)
+"^DD",2006.34,2006.34,.01,3)
+
+"^DD",2006.34,2006.34,.01,21,0)
+^^2^2^2950228^^^
+"^DD",2006.34,2006.34,.01,21,1,0)
+A Form can have more than 1 Clinic associated with it.  Descriptive
+"^DD",2006.34,2006.34,.01,21,2,0)
+names rather than the name of a Clinic are suggested.
+"^DD",2006.34,2006.34,.01,23,0)
+^^2^2^2950228^^
+"^DD",2006.34,2006.34,.01,23,1,0)
+What you call the form.  Each form can have multiple Clinics associated
+"^DD",2006.34,2006.34,.01,23,2,0)
+with it, by pointers to ^SC(.
+"^DD",2006.34,2006.34,.01,"DT")
+2931128
+"^DD",2006.34,2006.34,1,0)
+MERGE FILE^RF^^0;2^K:X[""""!($A(X)=45) X I $D(X) K:$L(X)>40!($L(X)<3) X
+"^DD",2006.34,2006.34,1,1,0)
+^.1
+"^DD",2006.34,2006.34,1,1,1,0)
+2006.34^AMERGE
+"^DD",2006.34,2006.34,1,1,1,1)
+S ^MAGG(2006.34,"AMERGE",$E(X,1,30),DA)=""
+"^DD",2006.34,2006.34,1,1,1,2)
+K ^MAGG(2006.34,"AMERGE",$E(X,1,30),DA)
+"^DD",2006.34,2006.34,1,1,1,"%D",0)
+^^1^1^2950127^
+"^DD",2006.34,2006.34,1,1,1,"%D",1,0)
+Cross-reference of Merge files.  For auto update status.
+"^DD",2006.34,2006.34,1,1,1,"DT")
+2950127
+"^DD",2006.34,2006.34,1,3)
+Exact name of Merge File defined in Teleform for this form, with extension, e.g. V:\TELEFORM\MRG\file.CSV
+"^DD",2006.34,2006.34,1,21,0)
+^^2^2^2950228^^^^
+"^DD",2006.34,2006.34,1,21,1,0)
+Each form has an associated DOS File which VistA Patient information
+"^DD",2006.34,2006.34,1,21,2,0)
+will be downloaded into, and Teleform will print on the patient's form.
+"^DD",2006.34,2006.34,1,23,0)
+^^5^5^2950228^^^^
+"^DD",2006.34,2006.34,1,23,1,0)
+This is the exact name of the DOS Merge File, with DOS path.
+"^DD",2006.34,2006.34,1,23,2,0)
+i.e. V:\TELEFORM\MRG\filename.CSV
+"^DD",2006.34,2006.34,1,23,3,0)
+all merge files will have the .CSV extension.
+"^DD",2006.34,2006.34,1,23,4,0)
+This has to be the same Merge file name that was entered for the form
+"^DD",2006.34,2006.34,1,23,5,0)
+in the Teleform Designer window.
+"^DD",2006.34,2006.34,1,"DT")
+2950127
+"^DD",2006.34,2006.34,2,0)
+RESULTS FILE^RF^^0;3^K:$L(X)>40!($L(X)<3) X
+"^DD",2006.34,2006.34,2,1,0)
+^.1^^0
+"^DD",2006.34,2006.34,2,1,1,0)
+2006.34^ASCAN
+"^DD",2006.34,2006.34,2,1,1,1)
+S ^MAGG(2006.34,"ASCAN",$E(X,1,30),DA)=""
+"^DD",2006.34,2006.34,2,1,1,2)
+K ^MAGG(2006.34,"ASCAN",$E(X,1,30),DA)
+"^DD",2006.34,2006.34,2,1,1,"DT")
+2931128
+"^DD",2006.34,2006.34,2,3)
+Exact name of Results File defined in Teleform for this form, with extension, e.g. V:\TELEFORM\EXP\file.DEL
+"^DD",2006.34,2006.34,2,21,0)
+^^2^2^2950228^^^^
+"^DD",2006.34,2006.34,2,21,1,0)
+The Teleform RESULTS file. Info will be retrieved from this file
+"^DD",2006.34,2006.34,2,21,2,0)
+into VistA.
+"^DD",2006.34,2006.34,2,23,0)
+^^5^5^2950228^^^^
+"^DD",2006.34,2006.34,2,23,1,0)
+This is the exact name of the DOS Results File, with DOS path.
+"^DD",2006.34,2006.34,2,23,2,0)
+i.e. V:\TELEFORM\EXP\filename.DEL
+"^DD",2006.34,2006.34,2,23,3,0)
+all Results files will have the .DEL extension.
+"^DD",2006.34,2006.34,2,23,4,0)
+This has to be the same Results file name that was entered for the form
+"^DD",2006.34,2006.34,2,23,5,0)
+in the Teleform Designer window.
+"^DD",2006.34,2006.34,2,"DT")
+2940120
+"^DD",2006.34,2006.34,3,0)
+PRINT ORDER^RNJ3,0X^^0;4^S:X="" X=99 K:+X'=X!(X>999)!(X<1)!(X?.E1"."1N.N) X
+"^DD",2006.34,2006.34,3,1,0)
+^.1
+"^DD",2006.34,2006.34,3,1,1,0)
+2006.34^APRTORD
+"^DD",2006.34,2006.34,3,1,1,1)
+S ^MAGG(2006.34,"APRTORD",$E(X,1,30),DA)=""
+"^DD",2006.34,2006.34,3,1,1,2)
+K ^MAGG(2006.34,"APRTORD",$E(X,1,30),DA)
+"^DD",2006.34,2006.34,3,1,1,"%D",0)
+^^1^1^2931128^
+"^DD",2006.34,2006.34,3,1,1,"%D",1,0)
+the order of printing the forms for different clinics
+"^DD",2006.34,2006.34,3,1,1,"DT")
+2931128
+"^DD",2006.34,2006.34,3,3)
+Enter the Print order of this form. (NOT CURRENTLY USED)
+"^DD",2006.34,2006.34,3,21,0)
+^^3^3^2950228^^^
+"^DD",2006.34,2006.34,3,21,1,0)
+We will enable the ability to print forms in a certain order.
+"^DD",2006.34,2006.34,3,21,2,0)
+If print order doesn't matter, all forms could have same entry to this
+"^DD",2006.34,2006.34,3,21,3,0)
+field, i.e. all could be print order 1.
+"^DD",2006.34,2006.34,3,23,0)
+^^4^4^2950228^^^
+"^DD",2006.34,2006.34,3,23,1,0)
+This is simply the order in which forms for clinics will print.
+"^DD",2006.34,2006.34,3,23,2,0)
+You might want to print outlying clinic forms first etc.
+"^DD",2006.34,2006.34,3,23,3,0)
+ All forms can have same print order, in which case they will be
+"^DD",2006.34,2006.34,3,23,4,0)
+printed in internal DA order. Order defaults to 99 if not entered.
+"^DD",2006.34,2006.34,3,"DT")
+2940414
+"^DD",2006.34,2006.34,3.1,0)
+PRINT TIME DAY BEFORE^F^^0;7^K:X[""""!($A(X)=45) X I $D(X) K:$L(X)>8!($L(X)<1)!'(X?1.2N.1":".2N." ".2A) X
+"^DD",2006.34,2006.34,3.1,1,0)
+^.1
+"^DD",2006.34,2006.34,3.1,1,1,0)
+2006.34^ADAYBF^MUMPS
+"^DD",2006.34,2006.34,3.1,1,1,1)
+S TX=X,X="T@"_X,%DT="T" D ^%DT S Z="."_$P(Y,".",2),^MAGG(2006.34,"ADAYBF",Z,DA)=""
+"^DD",2006.34,2006.34,3.1,1,1,2)
+S TX=X,X="T@"_X,%DT="T" D ^%DT S Z="."_$P(Y,".",2) K ^MAGG(2006.34,"ADAYBF",Z,DA)
+"^DD",2006.34,2006.34,3.1,1,1,"%D",0)
+^^2^2^2940725^^^
+"^DD",2006.34,2006.34,3.1,1,1,"%D",1,0)
+This Crref is $O through, by the MAGGENAU routine to automatically print
+"^DD",2006.34,2006.34,3.1,1,1,"%D",2,0)
+forms at a certain time the day before the appointment
+"^DD",2006.34,2006.34,3.1,1,1,"DT")
+2940725
+"^DD",2006.34,2006.34,3.1,3)
+Forms will be automatically printed the day before at this time.  Enter time, i.e. 2:00 pm  1PM   7:30am
+"^DD",2006.34,2006.34,3.1,21,0)
+^^2^2^2950228^
+"^DD",2006.34,2006.34,3.1,21,1,0)
+Forms can automatically be printed for tomorrow's scheduled patients by
+"^DD",2006.34,2006.34,3.1,21,2,0)
+making an entry here.
+"^DD",2006.34,2006.34,3.1,23,0)
+^^3^3^2950228^
+"^DD",2006.34,2006.34,3.1,23,1,0)
+This field is checked by the TFMI Timer, on the MSM PC (MSM Server)
+"^DD",2006.34,2006.34,3.1,23,2,0)
+It will do a one time print of forms for scheduled patients, At this time
+"^DD",2006.34,2006.34,3.1,23,3,0)
+on the day before the scheduled appointments.
+"^DD",2006.34,2006.34,3.1,"DT")
+2940725
+"^DD",2006.34,2006.34,3.2,0)
+PRINT TIME DAY OF^F^^0;8^K:X[""""!($A(X)=45) X I $D(X) K:$L(X)>8!($L(X)<1)!'(X?1.2N.":".2N." ".2A) X
+"^DD",2006.34,2006.34,3.2,1,0)
+^.1
+"^DD",2006.34,2006.34,3.2,1,1,0)
+2006.34^ADAYOF^MUMPS
+"^DD",2006.34,2006.34,3.2,1,1,1)
+S TX=X,X="T@"_X,%DT="T" D ^%DT S Z="."_$P(Y,".",2),^MAGG(2006.34,"ADAYOF",Z,DA)=""
+"^DD",2006.34,2006.34,3.2,1,1,2)
+S TX=X,X="T@"_X,%DT="T" D ^%DT S Z="."_$P(Y,".",2) K ^MAGG(2006.34,"ADAYOF",Z,DA)
+"^DD",2006.34,2006.34,3.2,1,1,"%D",0)
+^^2^2^2940725^
+"^DD",2006.34,2006.34,3.2,1,1,"%D",1,0)
+This Crref is $O through, by the ^MAGGENAU routine to automatically print
+"^DD",2006.34,2006.34,3.2,1,1,"%D",2,0)
+forms at a certain time the day of the appointment
+"^DD",2006.34,2006.34,3.2,1,1,"DT")
+2940725
+"^DD",2006.34,2006.34,3.2,3)
+Forms will be automatically printed the day of appointment, at this time, i.e.   2:30 am     2pm     7:30
+"^DD",2006.34,2006.34,3.2,21,0)
+^^2^2^2950228^
+"^DD",2006.34,2006.34,3.2,21,1,0)
+Forms can automatically be printed for today's scheduled patients by
+"^DD",2006.34,2006.34,3.2,21,2,0)
+making an entry here.
+"^DD",2006.34,2006.34,3.2,23,0)
+^^5^5^2950228^
+"^DD",2006.34,2006.34,3.2,23,1,0)
+This field is checked by the TFMI Timer, on the MSM PC (MSM Server)
+"^DD",2006.34,2006.34,3.2,23,2,0)
+It will start printing forms for scheduled patients, At this time
+"^DD",2006.34,2006.34,3.2,23,3,0)
+on the day of the scheduled appointments, and continue printing
+"^DD",2006.34,2006.34,3.2,23,4,0)
+forms all day for any patient that is Scheduled through the
+"^DD",2006.34,2006.34,3.2,23,5,0)
+Scheduling Package for an appointment today, or as an Unscheduled Patient
+"^DD",2006.34,2006.34,3.2,"DT")
+2940725
+"^DD",2006.34,2006.34,4,0)
+SCANNING ACTIVE^S^1:YES;O:NO;^0;5^Q
+"^DD",2006.34,2006.34,4,3)
+1 (Yes) will activate the form, and allow VistA Patient information to be downloaded.
+"^DD",2006.34,2006.34,4,21,0)
+^^3^3^2950228^^^^
+"^DD",2006.34,2006.34,4,21,1,0)
+If set to NO, then no patient information is downloaded for the Clinics
+"^DD",2006.34,2006.34,4,21,2,0)
+associated with this form, hence no form printed.
+"^DD",2006.34,2006.34,4,21,3,0)
+Not allowing VistA information to be downloaded.
+"^DD",2006.34,2006.34,4,"DT")
+2931211
+"^DD",2006.34,2006.34,5,0)
+NETWORK PRINTER^P2006.344^MAGG(2006.344,^DEV;1^Q
+"^DD",2006.34,2006.34,5,"DT")
+2950306
+"^DD",2006.34,2006.34,7,0)
+PROGRESS NOTE TITLE^P121.2'^GMR(121.2,^PNT;1^Q
+"^DD",2006.34,2006.34,7,3)
+Enter the Default Progress Note title to use for filing
+"^DD",2006.34,2006.34,7,21,0)
+^^5^5^2950623^
+"^DD",2006.34,2006.34,7,21,1,0)
+This title will be used when filing a progress note that has been
+"^DD",2006.34,2006.34,7,21,2,0)
+transcribed and uploaded via the automatic Teleform VistA interface.
+"^DD",2006.34,2006.34,7,21,3,0)
+If this is null, the Scanned Form Site Parameter FM File will
+"^DD",2006.34,2006.34,7,21,4,0)
+be checked, and the default title from that file will be used.
+"^DD",2006.34,2006.34,7,21,5,0)
+IF both are null, the AMBULATORY/OUTPATIENT NOTE title will be used.
+"^DD",2006.34,2006.34,7,"DT")
+2950623
+"^DD",2006.34,2006.34,100,0)
+*OPTIONAL MERGE FIELDS^2006.35P^^1;0
+"^DD",2006.34,2006.34,100,21,0)
+^^1^1^2950228^
+"^DD",2006.34,2006.34,100,21,1,0)
+(Field not used)
+"^DD",2006.34,2006.34,100,"DT")
+2940414
+"^DD",2006.34,2006.34,200,0)
+CLINICS^2006.37P^^CL;0
+"^DD",2006.34,2006.34,200,21,0)
+^^2^2^2950228^
+"^DD",2006.34,2006.34,200,21,1,0)
+Each Form can have multiple clinics associated with it by making entries
+"^DD",2006.34,2006.34,200,21,2,0)
+in this multiple field.
+"^DD",2006.34,2006.34,200,23,0)
+^^3^3^2950228^
+"^DD",2006.34,2006.34,200,23,1,0)
+Multiple Pointer to the HOSPITAL LOCATION File '^SC('. Downloading
+"^DD",2006.34,2006.34,200,23,2,0)
+patient info for this Form, downloads patient info for all scheduled
+"^DD",2006.34,2006.34,200,23,3,0)
+patients for all of these clinics.
+"^DD",2006.34,2006.35,0)
+*OPTIONAL MERGE FIELDS SUB-FIELD^^.01^1
+"^DD",2006.34,2006.35,0,"DT")
+2931211
+"^DD",2006.34,2006.35,0,"IX","B",2006.35,.01)
+
+"^DD",2006.34,2006.35,0,"NM","*OPTIONAL MERGE FIELDS")
+
+"^DD",2006.34,2006.35,0,"UP")
+2006.34
+"^DD",2006.34,2006.35,.01,0)
+*OPTIONAL MERGE FIELDS^MP2006.341'^MAGG(2006.341,^0;1^Q
+"^DD",2006.34,2006.35,.01,1,0)
+^.1
+"^DD",2006.34,2006.35,.01,1,1,0)
+2006.35^B
+"^DD",2006.34,2006.35,.01,1,1,1)
+S ^MAGG(2006.34,DA(1),1,"B",$E(X,1,30),DA)=""
+"^DD",2006.34,2006.35,.01,1,1,2)
+K ^MAGG(2006.34,DA(1),1,"B",$E(X,1,30),DA)
+"^DD",2006.34,2006.35,.01,3)
+Select the fields to be merged on the form. Header information doesn't need to be listed.
+"^DD",2006.34,2006.35,.01,21,0)
+^^5^5^2940121^
+"^DD",2006.34,2006.35,.01,21,1,0)
+If a form has fields that will be filled, (merged, pre-slugged) with
+"^DD",2006.34,2006.35,.01,21,2,0)
+VistA data for the Patient, 1) an entry has to made in the SCANNED FORM-
+"^DD",2006.34,2006.35,.01,21,3,0)
+OPTIONAL MERGE File, and 2) you have to enter it here.
+"^DD",2006.34,2006.35,.01,21,4,0)
+ALSO if a form has FLAG FIELDS, i.e. FLGPRC, FLGPRB they have to be
+"^DD",2006.34,2006.35,.01,21,5,0)
+entered here also.
+"^DD",2006.34,2006.35,.01,"DT")
+2940414
+"^DD",2006.34,2006.37,0)
+CLINICS SUB-FIELD^^.01^1
+"^DD",2006.34,2006.37,0,"DT")
+2940414
+"^DD",2006.34,2006.37,0,"IX","B",2006.37,.01)
+
+"^DD",2006.34,2006.37,0,"NM","CLINICS")
+
+"^DD",2006.34,2006.37,0,"UP")
+2006.34
+"^DD",2006.34,2006.37,.01,0)
+CLINICS^MP44'^SC(^0;1^Q
+"^DD",2006.34,2006.37,.01,1,0)
+^.1
+"^DD",2006.34,2006.37,.01,1,1,0)
+2006.37^B
+"^DD",2006.34,2006.37,.01,1,1,1)
+S ^MAGG(2006.34,DA(1),"CL","B",$E(X,1,30),DA)=""
+"^DD",2006.34,2006.37,.01,1,1,2)
+K ^MAGG(2006.34,DA(1),"CL","B",$E(X,1,30),DA)
+"^DD",2006.34,2006.37,.01,"DT")
+2940414
+"^DIC",2006.34,2006.34,0)
+SCANNED FORM-CLINIC ASSOC^2006.34
+"^DIC",2006.34,2006.34,0,"GL")
+^MAGG(2006.34,
+"^DIC",2006.34,2006.34,"%D",0)
+^^21^21^3000510
+"^DIC",2006.34,2006.34,"%D",1,0)
+ +---------------------------------------------------------------+
+"^DIC",2006.34,2006.34,"%D",2,0)
+ |                                                               |
+"^DIC",2006.34,2006.34,"%D",3,0)
+ | Property of the US Government.                                |
+"^DIC",2006.34,2006.34,"%D",4,0)
+ | No permission to copy or redistribute this software is given. |
+"^DIC",2006.34,2006.34,"%D",5,0)
+ | Use of unreleased versions of this software requires the user |
+"^DIC",2006.34,2006.34,"%D",6,0)
+ | to execute a written test agreement with the VistA Imaging    |
+"^DIC",2006.34,2006.34,"%D",7,0)
+ | Development Office of the Department of Veterans Affairs,     |
+"^DIC",2006.34,2006.34,"%D",8,0)
+ | telephone (301) 734-0100.                                     |
+"^DIC",2006.34,2006.34,"%D",9,0)
+ |                                                               |
+"^DIC",2006.34,2006.34,"%D",10,0)
+ | The Food and Drug Administration classifies this software as  |
+"^DIC",2006.34,2006.34,"%D",11,0)
+ | a Class II medical device.  As such, it may not be changed    |
+"^DIC",2006.34,2006.34,"%D",12,0)
+ | in any way.  Modifications to this software may result in an  |
+"^DIC",2006.34,2006.34,"%D",13,0)
+ | adulterated medical device under 21CFR820, the use of which   |
+"^DIC",2006.34,2006.34,"%D",14,0)
+ | is considered to be a violation of US Federal Statutes.       |
+"^DIC",2006.34,2006.34,"%D",15,0)
+ |                                                               |
+"^DIC",2006.34,2006.34,"%D",16,0)
+ +---------------------------------------------------------------+
+"^DIC",2006.34,2006.34,"%D",17,0)
+ 
+"^DIC",2006.34,2006.34,"%D",18,0)
+This File holds information specific to a Teleform Form.
+"^DIC",2006.34,2006.34,"%D",19,0)
+  The Clinics associated with this form.
+"^DIC",2006.34,2006.34,"%D",20,0)
+  The names of Teleform Files to put and get information.
+"^DIC",2006.34,2006.34,"%D",21,0)
+  The time of day to begin printing.  etc.
+"^DIC",2006.34,"B","SCANNED FORM-CLINIC ASSOC",2006.34)
+
+**END**
+**END**
+
+
+****
+****

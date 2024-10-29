@@ -1,0 +1,4 @@
+<Context> 
+	<Valve className="gov.va.med.server.tomcat.TomcatBasicAuthenticatorValve" />
+  <JarScanner scanManifest="false"/>
+</Context>

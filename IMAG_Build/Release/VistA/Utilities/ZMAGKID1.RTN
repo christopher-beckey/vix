@@ -1,0 +1,556 @@
+Cache for Windows^INT^^~Format=Cache.S~
+%RO on 27 Jul 2012   9:22 AM
+ZMAGKID1^INT^1^62665,33144^0
+ZMAGKID1 ; 19 Jul 2012 9:54 AM
+ Q
+ ;
+ ; Split a build to mini builds
+ ; 
+ ; It creates mini builds with one KIDS component in it.
+ ; User will be prompted to enter a build, that has all components (RPC, DD, routines),
+ ; KIDS comment, and directory where the KIDS files will be exported
+ ; 
+ ; if the export directory is C:\TEMP\P34 then
+ ; RPC and DD will be exported to C:\TEMP\P34\KIDS_Components\
+ ; Routines will be exported to C:\TEMP\P34\MUMPS\Vista\
+ ; 
+ ; if the build selected is MAG*3.0*34 then 
+ ; 
+ ; The mini builds for RPCs will be MAG*3.0*34*RPC*xxx  where xxx is the IEN of the RPC
+ ; The exported file name will be the RPC_yyy.KID   where yyy is the RPC name
+ ; 
+ ; The mini build for DD will be MAG*3.0*34*DD*xxx where xxx is the FileMan file number
+ ; The exported file name will be DD_yyy.KID where yyy id the file number name
+ ; 
+ ; The file names of the routines will yyy.RTN where yyy is the routine name
+ ; 
+ ; IF DELONLY is set to 1 the program only delete the mini builds
+SPLIT(DELONLY) ;
+ S DELONLY=+$G(DELONLY)
+ S:$G(DUZ)="" DUZ=126
+ N MAGDA,MAGNFDA,MAGNIEN,MAGNXE,MAGRESA
+ N NBLDDSC
+ N FILE,IENS
+ N DIC,Y
+ N MDESC,BLDDA,SUFX
+ N I,II,IEN
+ N MAGRY
+ N BLDS,MAGPATH
+ ;
+ S BLDS=0
+ ;
+ S DIC="^XPD(9.6,",DIC(0)="AEMQZ" D ^DIC I Y'>0 W !,"Done. " Q
+ S MDESC=$P(Y,"^",2) ; major build description
+ S BLDDA=+Y ; major build IEN
+ ;
+ ; Split DD
+ S I=""
+ F  S I=$O(^XPD(9.6,BLDDA,4,"B",I)) Q:I=""  D
+ . S SUFX="_DD*"_I
+ . S NBLDDSC=MDESC_SUFX
+ . D FINDBLD(.MAGRY,NBLDDSC,1) ; check for the build and delete if it exists
+ . Q:DELONLY
+ . D AFILEXPD(.MAGRY,BLDDA,I,NBLDDSC)
+ . W:'$$ISOK^ZMAGKID1(MAGRY) !,MAGRY
+ . S BLDS=BLDS+1
+ . S BLDS(BLDS)=$$GETVAL^ZMAGKID1(MAGRY)_U_NBLDDSC_U_U_0
+ . S BLDS("DA",$$GETVAL^ZMAGKID1(MAGRY))=BLDS
+ . Q
+ ;
+ ; .4 - PRINT TEMPLATE
+ ; .401 - SORT TEMPLATE
+ ; .402 - INPUT TEMPLATE
+ ; .403 - FORM
+ ; .5 - FUNCTION
+ ; .84 - DIAGLOG
+ ; 3.6 - BULLETITN
+ ; 3.8 - MAIL GROUP
+ ; 9.2 - HELP FRAME
+ ; 9.8 - ROUTINE --> not here
+ ; 19 - Options
+ ; 19.1 - Security Keys
+ ; 101 - PROTOCOL
+ ; 409.61 - LIST TEMPLATE
+ ; 771 - HL7 APPLICATION PARAMETER
+ ; 870 - HL LOGICAL LINK
+ ; 8989.51 - PARAMETER DEFINITION
+ ; 8989.52 - PARAMETER TEMPLATE
+ ; 8994 - RPCs
+ F FILENM=.4,.401,.402,.403,.5,.84,3.6,3.8,9.2,19,19.1,101,409.61,771,870,8989.51,8989.52,8994 D
+ . S I=""
+ . F  S I=$O(^XPD(9.6,BLDDA,"KRN",FILENM,"NM","B",I)) Q:I=""  D
+ . . S II=$S(FILENM=.4:$P(I,"    ",1),FILENM=.401:$P(I,"    ",1),FILENM=.402:$P(I,"    ",1),1:I)
+ . . S IEN=$$GETIEN(FILENM,II) I 'IEN W !,I,?40," DOES NOT EXIST IN FILE #"_FILENM Q
+ . . S SUFX="_"_$$GETSUFX(FILENM)_IEN
+ . . S NBLDDSC=MDESC_SUFX
+ . . D FINDBLD(.MAGRY,NBLDDSC,1) ; check for the build and delete if it exists
+ . . Q:DELONLY
+ . . D AKRNXPD(.MAGRY,BLDDA,FILENM,I,NBLDDSC)
+ . . W:'$$ISOK^ZMAGKID1(MAGRY) !,MAGRY
+ . . S BLDS=BLDS+1
+ . . S BLDS(BLDS)=$$GETVAL^ZMAGKID1(MAGRY)_U_NBLDDSC_U_U_0
+ . . S BLDS("DA",$$GETVAL^ZMAGKID1(MAGRY))=BLDS
+ . . Q
+ . Q
+ ;
+ Q:DELONLY 
+ ;
+ S MAGPATH=$$GETPATH() ; Get path of the export
+ I MAGPATH="" Q
+ ;
+ D TRANSPORT(.BLDS,MAGPATH_"KIDS_Components\") ; Save to files
+ ;
+ D SAVERTNS(BLDDA,MAGPATH_"\MUMPS\VistA\") ; Save routines
+ Q
+ ;
+ ; The same as SPLIT but it will not recreate the mini builds.
+ ; It exports the information from the current mini builds
+ ; ;
+SAVE ;  Transport mini kids
+ N BLDDA,BLDS,MAGPATH
+ S BLDDA=$$GETBLDS(.BLDS) ; get a list with all mini builds
+ I 'BLDDA Q
+ S MAGPATH=$$GETPATH() ; Get path of the export
+ I MAGPATH="" Q
+ D TRANSPORT(.BLDS,MAGPATH_"\KIDS_Components\") ; Save to files
+ ;
+ D SAVERTNS(BLDDA,MAGPATH_"\MUMPS\VistA\") ; Save routines
+ Q
+ ;
+SAVERTNS(BLDDA,MAGPATH) ; Save routines included in build IEN BLDDA to MAGPATH. If BLDDA is not defined we will get a new build
+ N DIC,Y
+ S BLDDA=+$G(BLDDA)
+ I BLDDA'>0 D
+ . W !,"Build is not defined",!
+ . S DIC="^XPD(9.6,",DIC(0)="AEMQZ" D ^DIC I Y'>0 W !,"Done. " Q
+ . S BLDDA=+Y ; major build IEN
+ . Q
+ ;
+ ; Export routines
+ D $ZF(-1,"mkdir "_MAGPATH)
+ N ROU,RTNS
+ S ROU=""
+ F  S ROU=$O(^XPD(9.6,BLDDA,"KRN",9.8,"NM","B",ROU)) Q:ROU=""  D
+ . ;NAME,EXT,VER
+ . S RTNS(ROU,"INT",1)=""
+ . Q
+ D RO(.RTNS,MAGPATH) ; save the routines
+ Q
+ ;
+EXPBRTNS ; Export build routines
+ S BLDDA=$$GETBLDS(.BLDS) ; get a list with all mini builds
+ I 'BLDDA Q
+ S MAGPATH=$$GETPATH() ; Get path of the export
+ I MAGPATH="" Q
+ D SAVERTNS(BLDDA,MAGPATH_"\MUMPS\VistA\") ; Save routines
+ Q
+ ;
+SAVEVRTNS ; Save version routines included to MAGPATH.
+ N MAGPATH
+ S MAGPATH=$$GETPATH() ; Get path of the export
+ I MAGPATH="" Q
+ ; Export routines
+ D $ZF(-1,"mkdir "_MAGPATH)
+ N ROU,RTNS
+ S ROU=""
+ F ROU="MAGGTU4T","MAGGTU4C","MAGGTU4L","MAGGTU4D" D
+ . ;NAME,EXT,VER
+ . S RTNS(ROU,"INT",1)=""
+ . Q
+ D RO(.RTNS,MAGPATH) ; save the routines
+ Q
+GETPATH() ; Get Export Path
+ N POP,DTOUT,DUOUT,Y,DIR
+ N MAGPATH,XPDH
+ ;
+ ; Get File information
+ S DIR(0)="F^3:245",DIR("A")="Enter a Host File Path",DIR("?")="Enter a path to output package(s).",POP=0
+ D ^DIR I $D(DTOUT)!$D(DUOUT) S POP=1 Q
+ ;if no file, then quit
+ Q:Y=""  S MAGPATH=Y
+ S:$E(MAGPATH,$L(MAGPATH))'="\" MAGPATH=MAGPATH_"\"
+ ;
+ Q MAGPATH
+ ;
+TRANSPORT(BLDS,MAGPATH) ; Transport all builds in BLDS array to file
+ D $ZF(-1,"mkdir "_MAGPATH)
+ N POP,DIRUT,Y,DIR
+ N XPDH
+ ;
+ I MAGPATH="" Q
+ ;
+ S DIR(0)="F^3:80",DIR("A")="Header Comment",DIR("?")="Enter a comment between 3 and 80 charaters."
+ D ^DIR I $D(DIRUT) S POP=1 Q
+ S XPDH=Y
+ ;
+ F BLDS=1:1:BLDS D
+ . K XPDT
+ . S XPDT=1
+ . S XPDT(1)=BLDS(BLDS)
+ . S XPDT("DA",$P(BLDS(BLDS),"^"))=1
+ . D EXPORT(.XPDT,MAGPATH,XPDH)
+ . Q
+ F BLDS=1:1:BLDS L -^XPD(9.6,+BLDS(BLDS))
+ W !,"done"
+ ;
+ Q
+ ;
+ ; Input Parameters
+ ; ================
+ ; BLDA = Master build IEN
+ ; DDFILE = FileMan File that needs to have a new mini build
+ ; NBLDDSC = mini build description
+ ; 
+ ; Return Values
+ ; =============
+ ; if error MAGRY = Failure status ^Error message^"
+ ; if success MAGRY = Success status ^^IEN" - IEN of the new record (mini build)
+ ;  
+AFILEXPD(MAGRY,BLDA,DDFILE,NBLDDSC) ; add a new record in build file 9.6 for DD File
+ K MAGRY
+ N FILE,IENS,MAGNFDA,MAGNIEN,MAGNXE,MINIBLDA
+ N XPDDDIEN
+ S FILE=9.6
+ S IENS="?+1,"
+ ;
+ S MAGNFDA(FILE,IENS,.01)=NBLDDSC ; Build Name
+ S MAGNFDA(FILE,IENS,.02)=$P($$NOW^XLFDT,".") ; DATE DISTRIBUTED
+ S MAGNFDA(FILE,IENS,1)=$$GET1^DIQ(FILE,BLDA,1,"I")  ; PACKAGE FILE LINK
+ S MAGNFDA(FILE,IENS,2)=0 ; 0 - Single package TYPE
+ S MAGNFDA(FILE,IENS,5)=$$GET1^DIQ(FILE,BLDA,5,"I")  ; TRACK PACKAGE NATIONALLY
+ ;
+ D UPDATE^DIE("S","MAGNFDA","MAGNIEN","MAGNXE")
+ ;
+ I $D(MAGNXE("DIERR")) D  Q
+ . D MSG^DIALOG("A",.MAGRESA,245,5,"MAGNXE")
+ . S MAGRY=$$FAILED^ZMAGKID1()_$$RESDEL^ZMAGKID1()_"Error adding to #9.6 "_MAGRESA(1) Q  ; Error getting the values
+ . Q
+ S MINIBLDA=MAGNIEN(1)  ; IEN of the new record (mini build)
+ D NEW^XPDE(MINIBLDA)  ; populate default values for the new mini build
+ ;
+ ; Add the file to the new mini build
+ K MAGNFDA,MAGNIEN,MAGNXE
+ S IENS="+2,"_MINIBLDA_","
+ S XPDDDIEN=DDFILE_","_BLDA
+ S MAGNFDA(9.64,IENS,.01)=DDFILE
+ S MAGNIEN(2)=DDFILE
+ ;
+ D UPDATE^DIE("S","MAGNFDA","MAGNIEN","MAGNXE")
+ ;
+ I $D(MAGNXE("DIERR")) D  Q
+ . N DA,DIK
+ . D MSG^DIALOG("A",.MAGRESA,245,5,"MAGNXE")
+ . S MAGRY=$$FAILED^ZMAGKID1()_$$RESDEL^ZMAGKID1()_"Error adding to #9.6 "_MAGRESA(1) Q  ; Error getting the values
+ . ; clean up data
+ . S DIK=$$GETFILGL^ZMAGKID1(FILE)
+ . S DA=MINIBLDA
+ . D ^DIK
+ . Q
+ ;
+ ; Merge all DD from the major to the mini build
+ M ^XPD(9.6,MINIBLDA,4,"APDD",DDFILE)=^XPD(9.6,BLDA,4,"APDD",DDFILE)
+ M ^XPD(9.6,MINIBLDA,4,DDFILE)=^XPD(9.6,BLDA,4,DDFILE)
+ ; 
+ S MAGRY=$$OK^ZMAGKID1()_$$RESDEL^ZMAGKID1()_$$RESDEL^ZMAGKID1()_MINIBLDA
+ Q
+ ;
+ ; Find the build and delete the build if the flag DELFLG is set
+ ; 
+FINDBLD(MAGRY,BLDDESC,DELFLG) ; Find the build and delete the build if the flag DELFLG is set
+ K MAGRY
+ N X,FILE
+ S FILE=9.6
+ D FIND^DIC(FILE,"","@;IX","PQ",BLDDESC,"1","B","","","X")
+ S MAGRY=$$OK^ZMAGKID1()_$$RESDEL^ZMAGKID1()
+ I $D(X("DILIST","1",0)) D
+ . S MAGRY=$$OK^ZMAGKID1()_$$RESDEL^ZMAGKID1()
+ . I $G(DELFLG) D
+ . . N DA,DIK
+ . . S MAGRY=$$OK^ZMAGKID1()_$$RESDEL^ZMAGKID1()_"Build "_BLDDESC_" exists. Deleting the build."
+ . . ; clean up data
+ . . S DIK=$$GETFILGL^ZMAGKID1(FILE)
+ . . S DA=+X("DILIST","1",0)
+ . . D ^DIK
+ . . Q
+ . Q 
+ Q
+ ;
+GETBLDS(BLDS) ; Get a list of build mini builds and return the select build
+ N MDESC,BLDDA,BLDIEN,I
+ N DIC
+ ;
+ S BLDS=0
+ ;
+ S DIC="^XPD(9.6,",DIC(0)="AEMQZ" D ^DIC I Y'>0 W !,"Done. " Q
+ S MDESC=$P(Y,"^",2) ; major build description
+ S BLDDA=+Y ; major build IEN
+ S I=MDESC
+ F  S I=$O(^XPD(9.6,"B",I)) Q:(I="")!(I'[MDESC)  D
+ . S BLDS=BLDS+1
+ . S BLDIEN=$O(^XPD(9.6,"B",I,""))
+ . S BLDS(BLDS)=BLDIEN_U_I_U_U_0
+ . S BLDS("DA",BLDIEN)=BLDS
+ . Q 
+ Q BLDDA
+ ;
+EXPORT(XPDT,MAGPATH,XPDH) ; Export the mini builds
+ N XPDA,XPDGREF,XPDNM,XPDVER
+ N PRFXIEN,PRFXNM,FILENM,%ZIS,POP,IOP,%
+ N XPDERR,XPDFMSG,XPDGP,XPDHD,XPDSEQ,XPDSIZ,XPDSIZA,XPDTP
+ ;
+ ; The code below is copy from XPDT routine
+ F XPDT=1:1:XPDT S XPDA=XPDT(XPDT),XPDNM=$P(XPDA,U,2) D  G:$D(XPDERR) ABORT^XPDT
+ . S FILENM=$$GETEXPNM(XPDNM)  ; get build file name
+ . S:FILENM="" FILENM=$TR(XPDNM,".","_")_".KID"
+ . D ^%ZISC
+ . S %ZIS="",%ZIS("HFSNAME")=$TR(MAGPATH_FILENM,"*","_"),%ZIS("HFSMODE")="W",IOP="HFS"
+ . S (XPDSIZ,XPDSIZA)=0
+ . S XPDSEQ=1
+ . D ^%ZIS I POP W !!,"**Incorrect Host File name** -> ",%ZIS("HFSNAME"),!,$C(7) Q
+ . ;write date and comment header
+ . S XPDHD="KIDS Distribution saved on "_$$HTE^XLFDT($H)
+ . U IO W $$SUM^XPDT(XPDHD),!,$$SUM^XPDT(XPDH),!
+ . S XPDFMSG=1 ; Do not Send mail to forum of routines in HFS.
+ . ;U IO(0) is to insure I am writing to the terminal
+ . U IO(0)
+ .W !?5,XPDNM,"..." S XPDGREF="^XTMP(""XPDT"","_+XPDA_",""TEMP"")"
+ .;if using current transport global, run pre-transp routine and quit
+ .I $P(XPDA,U,3) S XPDA=+XPDA D PRET^XPDT Q
+ .;if package file link then set XPDVER=version number^package name
+ .S XPDA=+XPDA,XPDVER=$S($P(^XPD(9.6,XPDA,0),U,2):$$VER^XPDUTL(XPDNM)_U_$$PKG^XPDUTL(XPDNM),1:"")
+ .;Inc the Build number
+ .S $P(^XPD(9.6,XPDA,6.3),U)=$G(^XPD(9.6,XPDA,6.3))+1
+ .K ^XTMP("XPDT",XPDA)
+ .;GLOBAL PACKAGE
+ .I $D(XPDGP) D  S XPDT=1 Q
+ ..;can't send global package in packman message
+ ..I $G(XPDTP) S XPDERR=1 Q
+ ..;verify global package
+ ..I '$$GLOPKG^XPDV(XPDA) S XPDERR=1 Q
+ ..;get Environment check and Post Install routines
+ ..F Y="PRE","INIT" I $G(^XPD(9.6,XPDA,Y))]"" S X=^(Y) D
+ ...S ^XTMP("XPDT",XPDA,Y)=X,X=$P(X,U,$L(X,U)),%=$$LOAD^XPDTA(X,"0^")
+ ..D BLD^XPDTC,PRET^XPDT
+ .F X="DD^XPDTC","KRN^XPDTC","QUES^XPDTC","INT^XPDTC","BLD^XPDTC" D @X Q:$D(XPDERR)
+ .D:'$D(XPDERR) PRET^XPDT
+ . D GO^XPDT
+ Q
+ ;
+ ; Output routines a list of routines in RTNS array to MAGPATH
+RO(RTNS,MAGPATH)  ;
+ N DIR,SYS,VER,EXT,EXTS
+ N SRC,X,ERR,ROU
+ N DAT,SYSNAM,DT,LANG,OKCOMP,DESC,II
+ ;
+ S DAT=$ZDT($H,2,4) ; 21 Apr 2010 08:39PM
+ S DAT=$E(DAT,1,11)_" "_$E(DAT,12,17)_" "_$E(DAT,18,19) ; 21 Apr 2010  08:39 PM
+ S SYSNAM=$System.Version.GetProduct()
+ ;
+ S (SYS,DIR)=""
+ S VER=1
+ S EXT="INT"
+ ;
+ S ROU=""
+ F  S ROU=$O(RTNS(ROU)) Q:ROU=""  D
+ . S IO=MAGPATH_ROU_".RTN"
+ . O IO:"WN"
+ . S DESC=""
+ . U IO
+ . W SYSNAM_"^"_EXT_"^"_DESC_"^~Format=Cache.S~" W !
+ . W "%RO on "_DAT W !
+ . S OKCOMP=$$OKCOMP^%RO(ROU,EXT)
+ . S DT=$$DATE^%RO(ROU,EXT)
+ . S LANG=$$LANG^%RO(ROU,EXT)
+ . W ROU_"^"_EXT_"^"_$S(EXT="INT"!(EXT="BAS"):OKCOMP,1:"")_"^"_DT_"^"_LANG W !
+ . K SRC D ROUTINE^%R(ROU_"."_EXT,.SRC,.ERR,"LI")
+ . F II=1:1:SRC(0) S X=$G(SRC(II))  W X,! ; Print a line
+ . W !!!  ; %RO required three blank lines
+ . U 0 ;W !,ROU
+ . C IO
+ . Q
+ Q
+ ;
+OK() Q 0   ; Success status
+ ;
+FAILED() Q -1   ; Failure status
+ ;
+RESDEL() Q "`"  ; Result delimiter
+ ;
+RESDATA() Q 3  ; Returns the piece number where the result data value is stored in MAGRY
+ ;
+ISOK(MAGRY) ; Returns 0 (failed) or 1 (success): Checks if first piece of MAGRY is success
+ Q +MAGRY=$$OK^ZMAGKID1()
+ ;
+ ; Input parameters
+ ; ================
+ ;  FILE  - FileMan file
+GETFILGL(FILE) ; Get Global root of the file
+ Q ^DIC(FILE,0,"GL")
+ ;
+GETVAL(MAGRY) ; Returns data value in MAGRY
+ Q $P(MAGRY,$$RESDEL^ZMAGKID1(),$$RESDATA^ZMAGKID1())
+ ;
+ ;
+ ; Input Parameters
+ ; ================
+ ; BLDA = Master build IEN
+ ; KRNFILE = Kernel component file (e.g. for  RPC - 8994, Options - 19, Security key - 19.1 etc.)
+ ; COMPNAME = Component name that needs to have a new mini build
+ ; NBLDDSC = mini build description
+ ; 
+ ; Return Values
+ ; =============
+ ; if error MAGRY = Failure status ^Error message^"
+ ; if success MAGRY = Success status ^^IEN" - IEN of the new record (mini build)
+ ;
+AKRNXPD(MAGRY,BLDA,KRNFILE,COMPNAME,NBLDDSC) ; add a new record in build file 9.6 for "KRN" components
+ K MAGRY
+ N FILE,IENS,MAGNFDA,MAGNIEN,MAGNXE,MINIBLDA
+ N OPTIEN
+ S FILE=9.6
+ S IENS="+1,"
+ ;
+ S MAGNFDA(FILE,IENS,.01)=NBLDDSC ; Build Name
+ S MAGNFDA(FILE,IENS,.02)=$P($$NOW^XLFDT,".") ; DATE DISTRIBUTED
+ S MAGNFDA(FILE,IENS,1)=$$GET1^DIQ(FILE,BLDA,1,"I")  ; PACKAGE FILE LINK
+ S MAGNFDA(FILE,IENS,2)=0 ; 0 - Single package TYPE
+ S MAGNFDA(FILE,IENS,5)=$$GET1^DIQ(FILE,BLDA,5,"I")  ; TRACK PACKAGE NATIONALLY
+ ;
+ D UPDATE^DIE("S","MAGNFDA","MAGNIEN","MAGNXE")
+ ;
+ I $D(MAGNXE("DIERR")) D  Q MAGRY
+ . D MSG^DIALOG("A",.MAGRESA,245,5,"MAGNXE")
+ . S MAGRY=$$FAILED^ZMAGKID1()_$$RESDEL^ZMAGKID1()_"Error adding to #9.6 "_MAGRESA(1) Q  ; Error getting the values
+ . Q
+ S MINIBLDA=MAGNIEN(1)  ; IEN of the new record  (mini build)
+ D NEW^XPDE(MINIBLDA)
+ ;
+ K MAGNFDA,MAGNIEN,MAGNXE
+ S IENS="+1,"_KRNFILE_","_MINIBLDA_","
+ S MAGNFDA(9.68,IENS,.01)=COMPNAME
+ D UPDATE^DIE("S","MAGNFDA","MAGNIEN","MAGNXE")
+ ;
+ I $D(MAGNXE("DIERR")) D  Q
+ . N DIK,DA
+ . D MSG^DIALOG("A",.MAGRESA,245,5,"MAGNXE")
+ . S MAGRY=$$FAILED^ZMAGKID1()_$$RESDEL^ZMAGKID1()_"Error adding to #9.6 "_MAGRESA(1) Q  ; Error getting the values
+ . ; clean up data
+ . S DIK=$$GETFILGL^ZMAGKID1(FILE)
+ . S DA=MINIBLDA
+ . D ^DIK
+ . Q
+ ;
+ S COMPIEN=$O(^XPD(9.6,BLDA,"KRN",KRNFILE,"NM","B",COMPNAME,""))
+ M ^XPD(9.6,MINIBLDA,"KRN",KRNFILE,"NM",MAGNIEN(1))=^XPD(9.6,BLDA,"KRN",KRNFILE,"NM",COMPIEN)
+ S MAGRY=$$OK^ZMAGKID1()_$$RESDEL^ZMAGKID1()_$$RESDEL^ZMAGKID1()_MINIBLDA
+ Q
+GETSUFX(FILE) ; Return suffix for the mini builds by file number
+ I FILE=19.1 Q "KEY*" ; Security Key
+ I FILE=19 Q "OPT*" ; Option
+ I FILE=.4  Q "TPRNT*" ; Print Template
+ I FILE=.401 Q "TSORT*" ; Sort Template
+ I FILE=.402 Q "TINPT*" ; Input Template
+ I FILE=.403 Q "FRM*"  ; FORM (not implimented)
+ I FILE=.5 Q "FUN*"  ; Function (not implimented)
+ I FILE=.84 Q "DIALOG*" ;Dialogue
+ I FILE=3.6 Q "BLT*" ; BULLETIN (not implimented)
+ I FILE=3.8 Q "MAIL*" ; Mail Group
+ I FILE=9.2 Q "HLP*"  ; HELP FRAME (not implimented)
+ ;I FILE=9.8 - ROUTINE
+ I FILE=101 Q "PROT*" ; PROTOCOL
+ I FILE=409.61 Q "LST*" ; LIST TEMPLATE (not implimented)
+ I FILE=771 Q "HL7APP*" ; HL7 Application parameter
+ I FILE=870 Q "HL7LL*" ; HL Logical Link
+ I FILE=8989.51 Q "PARAMDEF*" ; PARAMETER DEFINITION
+ I FILE=8989.52 Q "PARAMTMP*" ; PARAMETER TEMPLATE
+ I FILE=8994 Q "RPC*" ; RPCs
+ Q ""
+ ;
+GETIEN(FILE,CNAME) ; Return IEN if component by FILE and item name
+ N IEN,ROOT
+ S ROOT=$$ROOT^DILFD(FILE,,1)
+ S IEN=$O(@ROOT@("B",CNAME,""))
+ Q IEN
+ ;
+GETCNAME(FILE,CIEN) ; Return component name by file and IEN
+ N ROOT
+ S ROOT=$$ROOT^DILFD(FILE,,1) 
+ Q $P(@ROOT@(CIEN,0),"^")
+ ;
+GETEXPNM(XPDNM) ; Get export file name by patch name
+ N PRFXIEN,PRFXNM
+ ;
+ I $E($P(XPDNM,"_",2),1,5)="TPRNT" D
+ . S PRFXIEN=$P($P(XPDNM,"_",2),"*",2) ; MAG*3.0*34_TPRNT*2522
+ . S PRFXNM=$P(^DIPT(PRFXIEN,0),"^")
+ . S FILENM="TPRNT_"_PRFXNM
+ . Q
+ I $E($P(XPDNM,"_",2),1,5)="TSORT" D
+ . S PRFXIEN=$P($P(XPDNM,"_",2),"*",2) ; MAG*3.0*34_TSORT*2522
+ . S PRFXNM=$P(^DIBT(PRFXIEN,0),"^")
+ . S FILENM="TSORT_"_PRFXNM
+ . Q
+ I $E($P(XPDNM,"_",2),1,5)="TINPT" D
+ . S PRFXIEN=$P($P(XPDNM,"_",2),"*",2) ; MAG*3.0*34_TINPT*2522
+ . S PRFXNM=$P(^DIE(PRFXIEN,0),"^")
+ . S FILENM="TINPT_"_PRFXNM
+ . Q
+ I $E($P(XPDNM,"_",2),1,6)="DIALOG" D
+ . S PRFXIEN=$P($P(XPDNM,"_",2),"*",2) ; MAG*3.0*34_DIALOG*2522
+ . S PRFXNM=$P(^DI(.84,PRFXIEN,0),"^")
+ . S FILENM="DIALOG_"_PRFXNM
+ . Q
+ I $E($P(XPDNM,"_",2),1,4)="MAIL" D
+ . S PRFXIEN=$P($P(XPDNM,"_",2),"*",2) ; MAG*3.0*34_MAIL*2522
+ . S PRFXNM=$P(^XMB(3.8,PRFXIEN,0),"^")
+ . S FILENM="MAIL_"_PRFXNM
+ . Q
+ I $E($P(XPDNM,"_",2),1,4)="PROT" D
+ . S PRFXIEN=$P($P(XPDNM,"_",2),"*",2) ; MAG*3.0*34_PROT*2522
+ . S PRFXNM=$P(^ORD(101,PRFXIEN,0),"^")
+ . S FILENM="PROT_"_PRFXNM
+ . Q
+ I $E($P(XPDNM,"_",2),1,6)="HL7APP" D
+ . S PRFXIEN=$P($P(XPDNM,"_",2),"*",2) ; MAG*3.0*34_HL7APP*2522
+ . S PRFXNM=$P(^HL(771,PRFXIEN,0),"^")
+ . S FILENM="HL7APP_"_PRFXNM
+ . Q
+  I $E($P(XPDNM,"_",2),1,5)="HL7LL" D
+ . S PRFXIEN=$P($P(XPDNM,"_",2),"*",2) ; MAG*3.0*34_HL7LL*2522
+ . S PRFXNM=$P(^HLCS(870,PRFXIEN,0),"^")
+ . S FILENM="HL7LL_"_PRFXNM
+ . Q
+ I $E($P(XPDNM,"_",2),1,8)="PARAMDEF" D
+ . S PRFXIEN=$P($P(XPDNM,"_",2),"*",2) ; MAG*3.0*34_PARAMDEF*2522
+ . S PRFXNM=$P(^XTV(8989.51,PRFXIEN,0),"^")
+ . S FILENM="PARAMDEF_"_PRFXNM
+ . Q
+ I $E($P(XPDNM,"_",2),1,8)="PARAMTMP" D
+ . S PRFXIEN=$P($P(XPDNM,"_",2),"*",2) ; MAG*3.0*34_PARAMTMP*2522
+ . S PRFXNM=$P(^XTV(8989.52,PRFXIEN,0),"^")
+ . S FILENM="PARAMTMP_"_PRFXNM
+ . Q
+ I $E($P(XPDNM,"_",2),1,3)="OPT" D
+ . S PRFXIEN=$P($P(XPDNM,"_",2),"*",2) ; MAG*3.0*34_OPT*2522
+ . S PRFXNM=$P(^DIC(19,PRFXIEN,0),"^")
+ . S FILENM="OPT_"_PRFXNM
+ . Q
+ I $E($P(XPDNM,"_",2),1,3)="KEY" D
+ . S PRFXIEN=$P($P(XPDNM,"_",2),"*",2) ; MAG*3.0*34_KEY*2522
+ . S PRFXNM=$P(^DIC(19.1,PRFXIEN,0),"^")
+ . S FILENM="KEY_"_PRFXNM
+ . Q
+ I $E($P(XPDNM,"_",2),1,3)="RPC" D
+ . S PRFXIEN=$P($P(XPDNM,"_",2),"*",2) ; MAG*3.0*34_RPC*2522
+ . S PRFXNM=$P(^XWB(8994,PRFXIEN,0),"^")
+ . S FILENM="RPC_"_PRFXNM
+ . Q
+ I $E($P(XPDNM,"_",2),1,2)="DD" D  ; MAG*3.0*34_DD*2006.1
+ . S FILENM=$P(XPDNM,"_",2)
+ . Q
+ Q $TR(FILENM," /.","___")_".KID"
+ W "Unknown type. GETEXPNM entry point needs update!."
+ Q
+
+
+

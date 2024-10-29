@@ -1,0 +1,3 @@
+//ToDo.txt - List of things yet to be finished in this project
+Implement 12 bit Grayscale TGA reading and compressing - waiting for word back from Aware
+Implement reading of RGB data from a colormapped image, once the cmap has already been read

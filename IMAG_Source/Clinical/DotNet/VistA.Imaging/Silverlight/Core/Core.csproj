@@ -1,0 +1,269 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.50727</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{24E9CEE0-42C3-42B6-8812-92FE4BA73B98}</ProjectGuid>
+    <ProjectTypeGuids>{A1591282-1198-4647-A2B1-27E5FF5F6F3B};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>VistA.Imaging</RootNamespace>
+    <AssemblyName>VistA.Imaging.Core</AssemblyName>
+    <TargetFrameworkIdentifier>Silverlight</TargetFrameworkIdentifier>
+    <TargetFrameworkVersion>v5.0</TargetFrameworkVersion>
+    <SilverlightVersion>$(TargetFrameworkVersion)</SilverlightVersion>
+    <SilverlightApplication>false</SilverlightApplication>
+    <ValidateXaml>true</ValidateXaml>
+    <ThrowErrorsInValidation>true</ThrowErrorsInValidation>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+    <TargetFrameworkProfile />
+    <CodeContractsAssemblyMode>1</CodeContractsAssemblyMode>
+  </PropertyGroup>
+  <!-- This property group is only here to support building this project using the 
+       MSBuild 3.5 toolset. In order to work correctly with this older toolset, it needs 
+       to set the TargetFrameworkVersion to v3.5 -->
+  <PropertyGroup Condition="'$(MSBuildToolsVersion)' == '3.5'">
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>Bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;TRACE;SILVERLIGHT</DefineConstants>
+    <NoStdLib>true</NoStdLib>
+    <NoConfig>true</NoConfig>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeContractsEnableRuntimeChecking>True</CodeContractsEnableRuntimeChecking>
+    <CodeContractsRuntimeOnlyPublicSurface>False</CodeContractsRuntimeOnlyPublicSurface>
+    <CodeContractsRuntimeThrowOnFailure>True</CodeContractsRuntimeThrowOnFailure>
+    <CodeContractsRuntimeCallSiteRequires>False</CodeContractsRuntimeCallSiteRequires>
+    <CodeContractsRuntimeSkipQuantifiers>False</CodeContractsRuntimeSkipQuantifiers>
+    <CodeContractsRunCodeAnalysis>False</CodeContractsRunCodeAnalysis>
+    <CodeContractsNonNullObligations>False</CodeContractsNonNullObligations>
+    <CodeContractsBoundsObligations>False</CodeContractsBoundsObligations>
+    <CodeContractsArithmeticObligations>False</CodeContractsArithmeticObligations>
+    <CodeContractsEnumObligations>False</CodeContractsEnumObligations>
+    <CodeContractsRedundantAssumptions>False</CodeContractsRedundantAssumptions>
+    <CodeContractsRunInBackground>True</CodeContractsRunInBackground>
+    <CodeContractsShowSquigglies>False</CodeContractsShowSquigglies>
+    <CodeContractsUseBaseLine>False</CodeContractsUseBaseLine>
+    <CodeContractsEmitXMLDocs>False</CodeContractsEmitXMLDocs>
+    <CodeContractsCustomRewriterAssembly />
+    <CodeContractsCustomRewriterClass />
+    <CodeContractsLibPaths />
+    <CodeContractsExtraRewriteOptions />
+    <CodeContractsExtraAnalysisOptions />
+    <CodeContractsBaseLineFile />
+    <CodeContractsCacheAnalysisResults>False</CodeContractsCacheAnalysisResults>
+    <CodeContractsRuntimeCheckingLevel>Full</CodeContractsRuntimeCheckingLevel>
+    <CodeContractsReferenceAssembly>Build</CodeContractsReferenceAssembly>
+    <CodeContractsAnalysisWarningLevel>0</CodeContractsAnalysisWarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>Bin\Release</OutputPath>
+    <DefineConstants>TRACE;SILVERLIGHT</DefineConstants>
+    <NoStdLib>true</NoStdLib>
+    <NoConfig>true</NoConfig>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="mscorlib" />
+    <Reference Include="NLog">
+      <HintPath>..\..\packages\NLog.2.0.0.2000\lib\sl4\NLog.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.ServiceModel.Web.Extensions, Version=5.0.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Windows" />
+    <Reference Include="system" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Net" />
+    <Reference Include="System.Windows.Browser" />
+    <Reference Include="System.Xml.Linq, Version=5.0.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Xml.Serialization, Version=5.0.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\..\Desktop\Core\Collections\ReadOnlyDictionary.cs">
+      <Link>Collections\ReadOnlyDictionary.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Desktop\Core\ComponentModel\AsyncCompletedEventArgs.cs">
+      <Link>ComponentModel\AsyncCompletedEventArgs.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Desktop\Core\DataSources\CachingDataSource.cs">
+      <Link>DataSources\CachingDataSource.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Desktop\Core\DataSources\ICachingDataSource.cs">
+      <Link>DataSources\ICachingDataSource.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Desktop\Core\DataSources\IServiceGroupInfoDatasource.cs">
+      <Link>DataSources\IServiceGroupInfoDatasource.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Desktop\Core\DataSources\ISiteConnectionInfoDataSource.cs">
+      <Link>DataSources\ISiteConnectionInfoDataSource.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Desktop\Core\DataSources\ServiceGroupInfoDatasource.cs">
+      <Link>DataSources\ServiceGroupInfoDatasource.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Desktop\Core\DataSources\SiteConnectionInfoDataSource.cs">
+      <Link>DataSources\SiteConnectionInfoDataSource.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Desktop\Core\EventHandlerExtensions.cs">
+      <Link>EventHandlerExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Desktop\Core\Facades\IPatientFacade.cs">
+      <Link>Facades\IPatientFacade.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Desktop\Core\Facades\ISiteConnectionInfoFacade.cs">
+      <Link>Facades\ISiteConnectionInfoFacade.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Desktop\Core\Facades\PatientFacade.cs">
+      <Link>Facades\PatientFacade.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Desktop\Core\Facades\SiteConnectionInfoFacade.cs">
+      <Link>Facades\SiteConnectionInfoFacade.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Desktop\Core\Linq\Expressions\PropertyExpressionVisitor.cs">
+      <Link>Linq\Expressions\PropertyExpressionVisitor.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Desktop\Core\Logging\MemoryTargets.cs">
+      <Link>Logging\MemoryTargets.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Desktop\Core\Models\Breadcrumb.cs">
+      <Link>Models\Breadcrumb.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Desktop\Core\Models\Institution.cs">
+      <Link>Models\Institution.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Desktop\Core\Models\Patient.cs">
+      <Link>Models\Patient.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Desktop\Core\Models\ServiceEndpointInfo.cs">
+      <Link>Models\ServiceEndpointInfo.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Desktop\Core\Models\ServiceGroupInfo.cs">
+      <Link>Models\ServiceGroupInfo.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Desktop\Core\Models\ServiceGroupVersionInfo.cs">
+      <Link>Models\ServiceGroupVersionInfo.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Desktop\Core\Models\SiteConnectionInfo.cs">
+      <Link>Models\SiteConnectionInfo.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Desktop\Core\Models\VistAUser.cs">
+      <Link>Models\VistAUser.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Desktop\Core\Net\Web\XxxWebClient.cs">
+      <Link>Net\Web\XxxWebClient.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Desktop\Core\ObservableObject.cs">
+      <Link>ObservableObject.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Desktop\Core\Security\Cryptography\AesBase64.cs">
+      <Link>Security\Cryptography\AesBase64.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Desktop\Core\Security\Cryptography\KeySizesExtensions.cs">
+      <Link>Security\Cryptography\KeySizesExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Desktop\Core\Security\Principal\IVistACredential.cs">
+      <Link>Security\Principal\IVistACredential.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Desktop\Core\Security\Principal\VistAAccessVerifyCredential.cs">
+      <Link>Security\Principal\VistAAccessVerifyCredential.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Desktop\Core\Security\Principal\VistABSECredential.cs">
+      <Link>Security\Principal\VistABSECredential.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Desktop\Core\Security\Principal\VistACapriCredential.cs">
+      <Link>Security\Principal\VistACapriCredential.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Desktop\Core\Security\Principal\VistAIdentity.cs">
+      <Link>Security\Principal\VistAIdentity.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Desktop\Core\Security\Principal\VistAPrincipal.cs">
+      <Link>Security\Principal\VistAPrincipal.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Desktop\Core\StringExtensions.cs">
+      <Link>StringExtensions.cs</Link>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Service References\Services.SiteService.ImagingExchange\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+    <None Include="Service References\Services.SiteService.ImagingExchange\ImagingExchangeSiteService.wsdl" />
+    <None Include="Service References\Services.SiteService.ImagingExchange\VistA.Imaging.Services.SiteService.ImagingExchange.getImagingExchangeSitesResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Services.SiteService.ImagingExchange\VistA.Imaging.Services.SiteService.ImagingExchange.getSiteResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Services.SiteService.ImagingExchange\VistA.Imaging.Services.SiteService.ImagingExchange.getSitesResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Services.SiteService.ImagingExchange\VistA.Imaging.Services.SiteService.ImagingExchange.getVISNResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <Content Include="ServiceReferences.ClientConfig" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Service References\Services.SiteService.ImagingExchange\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\Services.SiteService.ImagingExchange\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\Services.SiteService.ImagingExchange\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\Services.SiteService.ImagingExchange\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Configuration\" />
+    <Folder Include="DataSources\EventArgs\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Silverlight\$(SilverlightVersion)\Microsoft.Silverlight.CSharp.targets" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{A1591282-1198-4647-A2B1-27E5FF5F6F3B}">
+        <SilverlightProjectProperties />
+      </FlavorProperties>
+      <UserProperties ProjectLinkReference="1192a8fc-8c38-4809-a3df-3ce37279b8b2" ProjectLinkerExcludeFilter="\\?desktop(\\.*)?$;\\?silverlight(\\.*)?$;\.desktop;\.silverlight;\.xaml;^service references(\\.*)?$;\.clientconfig;^web references(\\.*)?$" />
+    </VisualStudio>
+  </ProjectExtensions>
+  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  <UsingTask TaskName="NotifyPropertyWeaverMsBuildTask.WeavingTask" AssemblyFile="$(SolutionDir)Tools\NotifyPropertyWeaverMsBuildTask.dll" />
+  <Target Name="AfterCompile">
+    <NotifyPropertyWeaverMsBuildTask.WeavingTask />
+  </Target>
+</Project>

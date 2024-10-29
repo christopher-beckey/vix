@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<xs:schema elementFormDefault="qualified" version="1.0" targetNamespace="http://va.gov/VistA/kidsbundler" xmlns:tns="http://va.gov/VistA/kidsbundler" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+  <xs:element name="bundle" type="tns:kidsBundler"/>
+
+  <xs:complexType name="patch">
+    <xs:sequence/>
+    <xs:attribute name="name" type="xs:string"/>
+    <xs:attribute name="export" type="xs:string"/>
+  </xs:complexType>
+
+
+  <xs:complexType name="kidsBundler">
+    <xs:sequence>
+      <xs:element name="patches" minOccurs="0">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="patch" type="tns:patch" maxOccurs="unbounded"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+    
+    <xs:attribute name="comment" type="xs:string"/>
+ 
+  </xs:complexType>
+</xs:schema>
+

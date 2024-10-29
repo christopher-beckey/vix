@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+    <meta content="utf-8" http-equiv="encoding">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <title>Ingest Test Client</title>
+    <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="js/dataTable/css/dataTables.bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="style/css/dash.css">
+    <link rel="stylesheet" type="text/css" href="style/css/spectrum.min.css">
+    <link rel="stylesheet" type="text/css" href="style/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="style/bootstrap-timepicker.min.css">
+    
+    <script src="config/appConfig.js"></script>
+    <script type="text/javascript" src="js/jquery-3.3.1.js"></script>
+    <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/dataTable/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="js/dataTable/js/dataTables.bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/spectrum.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap-timepicker.min.js"></script>
+    <script type="text/javascript" src="js/dash/dash.js"></script>
+</head>
+
+<body>
+    <nav class="navbar navbarStyle">
+        <div class="container-fluid">
+            <span class="dashboard-header-title">Ingest Test Client</span>
+        </div>
+
+        <div style=" float: right; margin-right: 3px;">
+            <a href="#" style="color: white; font-size: 14px;" id="logout-btn"> Log out </a>
+        </div>
+    </nav>
+
+    <div id="dashboard-search-home">
+        <div class="container containerStyle">
+            <div style="padding: 2px">
+                <ul class="nav nav-tabs">
+                    <li class="active">
+                        <a href="#dashboard-search-study-query" data-toggle="tab">Patient Query</a>
+                    </li>
+                </ul>
+                <div id="myTabContent" class="tab-content" style="padding-top: 5px;">
+                    <div class="tab-pane active in" id="dashboard-search-study-query">
+                        <div class="form-horizontal" id="requestStudyInfo" style="padding-top: 5px;">
+                            <div style="margin-left: 5px; width: 100%">
+                                <div class="input-group col-sm-7" style="float:left; margin-right: 5px;">
+                                    <label for="patient-search-text" class="control-label">Patient Search</label>
+                                    <input id="patient-search-text" type="text" class="form-control" />
+                                </div>
+                                <div class="input-group col-sm-3" style="float:left">
+                                    <label for="site-select" class="control-label">Site</label>
+                                    <select id="site-select" class="form-control">
+                                        <option value="507|54.225.233.212">CAMP BEE - 507 (54.225.233.212)</option>
+                                        <option value="500|54.225.67.16" selected> CAMP MASTER - 500 (54.225.67.16) </option>
+                                        <option value="2001|50.19.115.98">CVIX - 2001 (50.19.115.98)</option>
+                                    </select>
+                                </div>
+                                <div class="input-group col-sm-1">
+                                    <button type="button" class="btn btn-primary" style="margin:22px;" onclick="searchPatients()"
+                                        style="padding: 6px;">Search</button>
+                                </div>
+                                <hr>
+                            </div>
+                            <!-- /input-group -->
+                        </div>
+
+                        <div id="patientInformation" style="display: none;">
+                            <div class="row" id="restultPageHeaderText">
+                                <div class="col-lg-12">
+                                    <h4 class="header_align">Search Results</h4>
+                                </div>
+                            </div>
+
+                            <!-- /.row -->
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="panel">
+                                        <div class="panel-body" style="padding: 0px;">
+                                            <div class="form-inline">
+                                                <div class="form-group">
+                                                    <label class="filter-col" id="patientICN"></label>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="filter-col" id="siteNumber"></label>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="filter-col" id="authSiteNumber"></label>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="filter-col" id="userId"></label>
+                                                </div>
+                                                <div class="form-group" id="dispalySession" style="display: none">
+                                                    <label class="filter-col">Session ID:</label>
+                                                    <input type="text" class="form-control" id="sessionId" readonly>
+                                                </div>
+                                                <textarea class="form-control" rows="10" id="securityToken" style="display: none;"></textarea>
+                                                <input type="text" class="form-control" id="authSiteNumberVal" style="display: none;">
+                                                <div class="form-group" id="statusBtn" style="display: none">
+                                                    <button type="button" class="btn btn-info btn-sm" onclick="loadStatusAction()">Status</button>
+                                                </div>
+                                            </div>
+                                            <table width="100%" class="table table-striped table-bordered table-hover" id="patientInfoTable">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Patient Name</th>
+                                                        <th>Patient Icn</th>
+                                                        <th>Dfn</th>
+                                                        <th>Ssn</th>
+                                                        <th>Dob</th>
+                                                        <th>Sensitive</th>
+                                                        <th>Veteran Status</th>
+                                                        <th>Actions</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="studyInfo">
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <!-- /.panel-body -->
+                                    </div>
+                                    <!-- /.panel -->
+                                </div>
+                                <!-- /.col-lg-12 -->
+                            </div>
+                        </div>
+
+                        <div id="view-patient-details" style="display: none">
+                            <input type="hidden" id="currentPatientId">
+                            <div class="container containerStyle">
+                                <h4>Patient Details</h4>
+                                <div class="container containerStyle patient-detail-div">
+                                    <div class="row">
+                                        <div class="col-xs-6">
+                                            <strong>Patient Name</strong>
+                                        </div>
+                                        <div class="col-xs-6 patient-detail-name"> </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-xs-6">
+                                            <strong>Icn</strong>
+                                        </div>
+                                        <div class="col-xs-6 patient-detail-icn"> </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-xs-6">
+                                            <strong>Dfn</strong>
+                                        </div>
+                                        <div class="col-xs-6 patient-detail-dfn"> </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-xs-6">
+                                            <strong>Ssn</strong>
+                                        </div>
+                                        <div class="col-xs-6 patient-detail-ssn"> </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-xs-6">
+                                            <strong>Dob</strong>
+                                        </div>
+                                        <div class="col-xs-6 patient-detail-dob"> </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-xs-6">
+                                            <strong>Sensitive</strong>
+                                        </div>
+                                        <div class="col-xs-6 patient-detail-sensitive"> </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-xs-6">
+                                            <strong>Veteran Status</strong>
+                                        </div>
+                                        <div class="col-xs-6 patient-detail-veteran-status"> </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-xs-12" style="margin-top:15px">
+                                            <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#create-tiunote-for-pat-div" onclick="clearHiddenFieldsForNoteImageUpload(this)">
+                                                Add TIU Note for Patient </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <hr>
+
+                                <h4>Patient Sensitivity</h4>
+                                <div class="patient-sensitivity-div container containerStyle">
+                                    <div class="patient-sensitivity-err-msg" style="display:none">No Sensitivity details found for the patient.</div>
+                                    <div class="patient-sensitivity">
+                                        <div class="patient-sensitivity-level-div row">
+                                            <label class="col-sm-4 control-label">Sensitivity Level</label>
+                                            <div class="col-sm-8 sensitivity-content"> </div>
+                                        </div>
+                                        <div class="patient-sensitivity-warning-message-div row">
+                                                <label class="col-sm-4 control-label">Warning Message</label>
+                                                <div class="col-sm-8 sensitivity-content"> </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <hr>
+
+                                <h4>Patient Image</h4>
+                                <div class="patient-image-div container">
+                                    <img class="patient-image img-fluid rounded" alt="No patient image found" src="">
+                                </div>
+                                <hr>
+
+                                <h4>Consult</h4>
+                                <div class="patient-consult-div container">
+                                    <div class="consult-err-msg" style="display:none">No Consults found for the patient.</div>
+                                    <div class="consult-div">
+                                            <table width="100%" class="table table-striped table-bordered table-hover" id="consult-table">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Service</th>
+                                                        <th>Consult Id</th>
+                                                        <th>Number of Notes </th>
+                                                        <th>Procedure</th>
+                                                        <th>Status</th>
+                                                        <th>Actions</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="consultInfo">
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                </div>
+                                <hr>
+
+                                <h4>TIU Notes</h4>
+                                <div class="patient-tiu-notes-div container">
+                                    <div class="tiu-notes-err-msg" style="display:none">No TIU Notes found for the patient.</div>
+                                    <div class="tiu-notes-div">
+                                        <table width="100%" class="table table-striped table-bordered table-hover" id="tiu-notes-table">
+                                            <thead>
+                                                <tr>
+                                                    <th>Title</th>
+                                                    <th>Author Name</th>
+                                                    <th>Date</th>
+                                                    <th>hospital Location</th>
+                                                    <th>Number Associated Images</th>
+                                                    <th>TiuNote Urn</th>
+                                                    <th>Signature Status</th>
+                                                    <th>Actions</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="tiuInfo">
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="container">
+                                   <button class="btn btn-primary btn-sm" onclick="backToHomePage()">Back</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="index-term-outer-div" style="display: none">
+                            <div class="index-term-div container">
+                                <h3>Upload Image for <span class="target-section"></span></h3>
+                                <hr>
+                                <form class="form-horizontal image-upload-form-for-indexes" method="POST" enctype="multipart/form-data">
+                                    <input type="hidden" name="patientId" class="patientId sc-layout-flex0" value="">
+                                    <input type="hidden" name="specialtyIndex" class="sc-layout-flex0" value="">
+                                    <input type="hidden" name="createGroup" id="createGroup" class="sc-layout-flex0" value="false">
+                                    <input type="hidden" name="patientTiuNoteId" class="patientTiuNoteId sc-layout-flex0" value="">
+
+                                    <div class="form-group">
+                                            <label for="siteNumber" class="col-sm-2 control-label">Site</label>
+                                            <div class="col-sm-10">
+                                                <select name="siteNumber" id="site-select-for-indexes" class="form-control">
+                                                    <option value="507|54.225.233.212">CAMP BEE - 507 (54.225.233.212)</option>
+                                                    <option value="500|54.225.67.16" selected> CAMP MASTER - 500 (54.225.67.16) </option>
+                                                    <option value="2001|50.19.115.98">CVIX - 2001 (50.19.115.98)</option>
+                                                </select>
+                                            </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="originIndex" class="col-sm-2 control-label">Origin<font style="color:red">*</font></label>
+                                        <div class="col-sm-10">
+                                            <select name="originIndex" class="origin-dropdown form-control">
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="typeIndex" class="col-sm-2 control-label">Document/Image Type<font style="color:red">*</font></label>
+                                        <div class="col-sm-10">
+                                            <select name="typeIndex" class="doc-type-dropdown form-control">
+                                            </select>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="form-group">
+                                        <label for="specialtyIndex" class="col-sm-2 control-label">Specialty</label>
+                                        <div class="col-sm-10">
+                                            <select name="specialty-dropdown" class="specialty-dropdown form-control">
+                                            </select>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="form-group">
+                                        <label for="procedureEventIndex" class="col-sm-2 control-label">Proc/Event</label>
+                                        <div class="col-sm-10">
+                                            <select name="procedureEventIndex" class="proc-dropdown form-control">
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="shortDescription" class="col-sm-2 control-label">Image Description<font style="color:red">*</font></label>
+                                        <div class="col-sm-10">
+                                            <textarea name="shortDescription" class="img-desc form-control"></textarea>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="upload-image" class="col-sm-2 control-label">Upload Image</label>
+                                        <div class="col-sm-10">
+                                            <input type="file" name="upload-image" id="patient-image-file-for-index-term">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <div class="col-sm-offset-2 col-sm-10">
+                                            <button type="submit" class="btn btn-primary btn-sm">Upload</button>
+                                            <button type="button" class="btn btn-primary btn-sm" onclick="backToHomePage()">Back</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+
+    <!-- Modal -->
+    <div class="modal fade" id="create-tiunote-for-pat-div" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span
+                            class="sr-only">Close</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Add TIU Note</h4>
+                </div>
+                <form class="form-horizontal create-tiu-note-form" method="POST">
+                <div class="modal-body">
+                            <input type="hidden" name="source" class="source" value="">
+                            <input type="hidden" name="patientId" class="patientId" value="">
+                            <input type="hidden" name="consultUrn" class="consultUrn" value="">
+                            <input type="hidden" name="date" class="date" value="">
+                            <input type="hidden" name="locationId" class="locationId" value="">
+                            <input type="hidden" name="tiuNoteId" class="tiuNoteId" value="">
+                            
+
+                            <div class="form-group">
+                                    <label for="siteNumber" class="col-sm-2 control-label">Site</label>
+                                    <div class="col-sm-10">
+                                        <select name="siteNumber" class="site-select-for-notes form-control">
+                                            <option value="507|54.225.233.212">CAMP BEE - 507 (54.225.233.212)</option>
+                                            <option value="500|54.225.67.16" selected> CAMP MASTER - 500 (54.225.67.16) </option>
+                                            <option value="2001|50.19.115.98">CVIX - 2001 (50.19.115.98)</option>
+                                        </select>
+                                    </div>
+                            </div>
+
+                            <div class="form-group tiu-dropdown-div">
+                                <label for="tiu-dropdown" class="col-sm-2 control-label">TIU Note Id<font style="color:red">*</font></label>
+                                <div class="col-sm-10">
+                                    <select name="tiu-dropdown" class="tiu-dropdown form-control">
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="location-dropdown" class="col-sm-2 control-label">Location<font style="color:red">*</font></label>
+                                <div class="col-sm-10">
+                                    <select name="location-dropdown" class="location-dropdown form-control">
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="noteText" class="col-sm-2 control-label">Note Text<font style="color:red">*</font></label>
+                                <div class="col-sm-10">
+                                    <textArea name="noteText" class="noteText form-control">
+                                    </textArea>
+                                </div>
+                            </div>
+                            </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Save</button>
+                        </div>
+                    </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="animationload" id="ajax_loader" style="display: none;">
+        <div class="osahanloading"></div>
+    </div>
+</body>
+
+</html>

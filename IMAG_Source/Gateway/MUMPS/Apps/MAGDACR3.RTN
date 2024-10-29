@@ -1,0 +1,174 @@
+MAGDACR3 ;WOIFO/PMK - DICOM Networking / Upper Layer Service / A-ASSOCIATE ; 02 Apr 2009 12:04 PM
+ ;;3.0;IMAGING;**51,54**;MAR 19, 2002;;OCT 28, 2009
+ ;; Per VHA Directive 2004-038, this routine should not be modified.
+ ;; +---------------------------------------------------------------+
+ ;; | Property of the US Government.                                |
+ ;; | No permission to copy or redistribute this software is given. |
+ ;; | Use of unreleased versions of this software requires the user |
+ ;; | to execute a written test agreement with the VistA Imaging    |
+ ;; | Development Office of the Department of Veterans Affairs,     |
+ ;; | telephone (301) 734-0100.                                     |
+ ;; | The Food and Drug Administration classifies this software as  |
+ ;; | a medical device.  As such, it may not be changed in any way. |
+ ;; | Modifications to this software may result in an adulterated   |
+ ;; | medical device under 21CFR820, the use of which is considered |
+ ;; | to be a violation of US Federal Statutes.                     |
+ ;; +---------------------------------------------------------------+
+ ;;
+ ; Refer to Part 8, Section 9.3.2 of the DICOM Standard
+ ;
+ ; Read an Association Control Service Element Protocol Data Unit (PDU)
+ ; Overflow routine for MAGDACR1
+ Q
+ ;
+ITEM10H ; read an Application Context Item
+ N X,UID
+ ; Sections 9.3.2.1 (request) and 9.3.3.1 (accept)
+ S UID=$$GETASCII^MAGDDR0(LENGTH,"","") ; UID (bytes 5-xxx)
+ D LOGUID^MAGDACR1("Application Context",UID)
+ S X=$$GETUID^MAGDUID1("DICOM Application Context Name")
+ I UID'=X D
+ . N MSG
+ . S MSG(1)="Expected UID for ""DICOM Application Context Name"","
+ . S MSG(2)="which is """_X_"""."
+ . S MSG(3)="Found """_UID_"""."
+ . D TRAPERR^MAGDSTRT(1,$T(+0),"DICOM GATEWAY ERROR",.MSG)
+ . Q  ; Error trap does not return
+ Q
+ ;
+ITEM20H ; A-ASSOCIATE-RQ ; Section 9.3.2.2
+ITEM21H ; A-ASSOCIATE-AC ; Section 9.3.3.2
+ ; Presentation Context Item
+ N PCONTEXT ;- presentation context id (abstract & transfer syntaxes)
+ N COUNT,RESULT,X
+ ;
+ S LENGTH=LENGTH+$$GETOFSET^MAGOSFIL(FILE) ; convert to end offset
+ S PCONTEXT=$$GETBYTE^MAGDDR0 ; Presentation context ID (byte 5)
+ D MESSAGE^MAGDMLOG(1,0,"Presentation Context ID: "_PCONTEXT,"V")
+ I '(PCONTEXT#2) D
+ . N MSG
+ . S MSG(1)="Context ID should be an odd number."
+ . S MSG(2)="The number encountered is """_PCONTEXT_"""."
+ . D TRAPERR^MAGDSTRT(1,$T(+0),"DICOM GATEWAY ERROR",.MSG)
+ . Q  ; Error trap does not return
+ S X=$$GETBYTE^MAGDDR0 ; reserved (byte 6)
+ S RESULT=$$GETBYTE^MAGDDR0 ; reserved or Result/Reason field (byte 7)
+ I ITEMTYPE="21H" D  ; accept message only
+ . I 'RESULT S RESULT=RESULT_" (acceptance)"
+ . E  I RESULT=1 S RESULT=RESULT_" (user rejection)"
+ . E  I RESULT=2 S RESULT=RESULT_" (no reason)"
+ . E  I RESULT=3 S RESULT=RESULT_" (abstract syntax not supported)"
+ . E  I RESULT=4 S RESULT=RESULT_" (transfer syntaxes not supported)"
+ . E  S RESULT=RESULT_" (<unknown>)"
+ . Q
+ D MESSAGE^MAGDMLOG(0,35,"Result="_RESULT,"V")
+ I ACSEMODE="RESPONSE" D  ; Result/Reason field (byte 7)
+ . S ^TMP("MAG",$J,"DICOM","NEGOTIATE",ACSEMODE,PCONTEXT,"RESULT")=RESULT
+ . Q
+ S X=$$GETBYTE^MAGDDR0 ; reserved (byte 8)
+ S COUNT=0 ; initialize transfer syntax counter
+ D MESSAGE^MAGDMLOG(1,20,"-- Transfer Syntax(es) --","V")
+ F  Q:$$GETOFSET^MAGOSFIL(FILE)'<LENGTH  D
+ . N LENGTH,LINETAG,SUBTYPE
+ . S SUBTYPE=$$GETBYTE^MAGDDR0 ; Subitem type (byte 1)
+ . S SUBTYPE=$$HEX^MAGDDR0(SUBTYPE,2)_"H"
+ . S X=$$GETBYTE^MAGDDR0 ; reserved (byte 2)
+ . S LENGTH=$$GETUSHOR^MAGDDR0 ; Item length (bytes 3-4)
+ . D LOGITEM^MAGDACR1("SUBITEM",SUBTYPE,LENGTH)
+ . S LINETAG="SUB20"_SUBTYPE I $T(@LINETAG)="" D
+ . . N MSG
+ . . S MSG(1)="No subroutine for opcode """_LINETAG_"""."
+ . . D TRAPERR^MAGDSTRT(1,$T(+0),"DICOM GATEWAY ERROR",.MSG)
+ . . Q  ; Error trap does not return
+ . D @LINETAG
+ . Q
+ D MESSAGE^MAGDMLOG(1,20,"-- End of Transfer Syntax(es) --","V")
+ Q
+ ;
+SUB2030H ; Abstract Syntax Sub-Item (Section 9.3.2.2.1)
+ N UID ;------ DICOM Unique Identifier -- see Part 6 -- Data Dictionary
+ S UID=$$GETASCII^MAGDDR0(LENGTH,"","") ; UID (bytes 5-xxx)
+ D LOGUID^MAGDACR1("Presentation Context",UID)
+ ; enter a presentation context into the negotiation table
+ S ^TMP("MAG",$J,"DICOM","NEGOTIATE",ACSEMODE,PCONTEXT,"SOP CLASS UID")=UID
+ Q
+ ;
+SUB2040H ; Transfer Syntax Sub-Item(s) (Section 9.3.2.2.2)
+ N UID ;------ DICOM Unique Identifier -- see Part 6 -- Data Dictionary
+ S COUNT=COUNT+1 ; increment transfer syntax counter
+ S UID=$$GETASCII^MAGDDR0(LENGTH,"","") ; UID (bytes 5-xxx)
+ D LOGUID^MAGDACR1("Transfer Syntax",UID)
+ ; enter a transfer syntax into the negotiation table
+ S ^TMP("MAG",$J,"DICOM","NEGOTIATE",ACSEMODE,PCONTEXT,"TRANSFER UID")=COUNT
+ S ^TMP("MAG",$J,"DICOM","NEGOTIATE",ACSEMODE,PCONTEXT,"TRANSFER UID",COUNT)=UID
+ Q
+ ;
+ITEM50H ; Input User Information Item (Section 9.3.2.3)
+ ; User Information Parameter (Part 8, Appendix D)
+ N MAXLEN,SUBTYPE,X
+ S SUBTYPE=$$GETBYTE^MAGDDR0 ; Sub-item type (byte 1)
+ S SUBTYPE=$$HEX^MAGDDR0(SUBTYPE,2)_"H"
+ S X=$$GETBYTE^MAGDDR0 ; reserved (byte 2)
+ S LENGTH=$$GETUSHOR^MAGDDR0 ; Item length (bytes 3-4, always 4)
+ D LOGITEM^MAGDACR1("SUBITEM",SUBTYPE,LENGTH)
+ I SUBTYPE'="51H" D
+ . N MSG
+ . S MSG(1)="Expected sub-type 51(hex) is missing."
+ . S MSG(2)="Found """_SUBTYPE_""" instead."
+ . D TRAPERR^MAGDSTRT(1,$T(+0),"DICOM GATEWAY ERROR",.MSG)
+ . Q  ; Error trap does not return
+ S MAXLEN=$$GETULONG^MAGDDR0 ; Maximum length received (bytes 5-8)
+ D MESSAGE^MAGDMLOG(1,0,"Maximum PDU length: "_MAXLEN,"V")
+ S ^TMP("MAG",$J,"DICOM","NEGOTIATE",ACSEMODE,"MAX PDU LENGTH")=MAXLEN
+ Q
+ ;
+ITEM52H ; Implementation Class UID
+ N UID ;------ DICOM Unique Identifier -- see Part 6 -- Data Dictionary
+ S UID=$$GETASCII^MAGDDR0(LENGTH,"","") ; UID (bytes 5-xxx)
+ D LOGUID^MAGDACR1("Implementation Class",UID)
+ S ^TMP("MAG",$J,"DICOM","NEGOTIATE",ACSEMODE,"IMPLEMENTATION UID")=UID
+ Q
+ ;
+ITEM53H ; Asynchronous Operations Window
+ N INVOKE,PERFORM
+ S INVOKE=$$GETUSHOR^MAGDDR0 ; maximum number operations invoked
+ S PERFORM=$$GETUSHOR^MAGDDR0 ; maximum number operations performed
+ D MESSAGE^MAGDMLOG(1,0,"Max # operations invoked="_INVOKE,"V")
+ D MESSAGE^MAGDMLOG(0,40,"Max # operations performed="_PERFORM,"V")
+ S ^TMP("MAG",$J,"DICOM","NEGOTIATE",ACSEMODE,"MAX INVOKED")=INVOKE
+ S ^TMP("MAG",$J,"DICOM","NEGOTIATE",ACSEMODE,"MAX PERFORM")=PERFORM
+ Q
+ ;
+ITEM54H ; SCP/SCU Role Selection
+ N LENGTH,SCPROLE,SCUROLE,UID
+ S LENGTH=$$GETUSHOR^MAGDDR0 ; UID length (bytes 5-6)
+ S UID=$$GETASCII^MAGDDR0(LENGTH,"","") ; SOP Class UID
+ D LOGUID^MAGDACR1("SOP Class",UID)
+ S SCUROLE=$$GETBYTE^MAGDDR0 ; SCU role 0/1
+ S SCPROLE=$$GETBYTE^MAGDDR0 ; SCP role 0/1
+ D MESSAGE^MAGDMLOG(1,0,"SCU role="_SCUROLE,"V")
+ D MESSAGE^MAGDMLOG(0,40,"SCP role="_SCPROLE,"V")
+ S ^TMP("MAG",$J,"DICOM","NEGOTIATE",ACSEMODE,"SOP Class",UID,"SCU ROLE")=SCUROLE
+ S ^TMP("MAG",$J,"DICOM","NEGOTIATE",ACSEMODE,"SOP Class",UID,"SCP ROLE")=SCPROLE
+ Q
+ ;
+ITEM55H ; Implementation Version Name
+ N VERSION
+ S VERSION=$$GETASCII^MAGDDR0(LENGTH,"","") ; version (bytes 5-xxx)
+ D MESSAGE^MAGDMLOG(1,0,"Implementation Version Name: "_VERSION,"V")
+ S ^TMP("MAG",$J,"DICOM","NEGOTIATE",ACSEMODE,"IMPLEMENTATION VERSION")=VERSION
+ Q
+ ;
+ITEM56H ; SOP Class Extended Negotiation Sub-Item
+ N I,SCAINFOL,SOPCUIDL,UID
+ S SOPCUIDL=$$GETUSHOR^MAGDDR0 ; SOP class UID length
+ S UID=$$GETASCII^MAGDDR0(SOPCUIDL,"","") ; UID (bytes 7-xxx)
+ D LOGUID^MAGDACR1("Extended Negotiation",UID)
+ S SCAINFOL=LENGTH-SOPCUIDL-2 ; length of service class application information
+ D ITEM56H^MAGDACR2(SCAINFOL)
+ F I=1:1:SCAINFOL D
+ . S VALUE=^TMP("MAG",$J,"DICOM","NEGOTIATE","REQUEST","EXTENDED",UID,I)
+ . D MESSAGE^MAGDMLOG(1,0,"SOP Class Extended Negotiation Sub-Item("_I_"): "_VALUE,"V")
+ . Q
+ Q
+ ;

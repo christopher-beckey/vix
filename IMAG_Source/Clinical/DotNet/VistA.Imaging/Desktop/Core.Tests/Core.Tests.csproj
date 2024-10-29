@@ -1,0 +1,178 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{BB4582A0-BE0D-4C77-876B-440B78BB31D2}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>VistA.Imaging.Tests</RootNamespace>
+    <AssemblyName>VistA.Imaging.Core.Tests</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <CodeContractsEnableRuntimeChecking>True</CodeContractsEnableRuntimeChecking>
+    <CodeContractsRuntimeCheckingLevel>Full</CodeContractsRuntimeCheckingLevel>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\..\VistA.Imaging\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+    <CodeContractsAssemblyMode>0</CodeContractsAssemblyMode>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeContractsEnableRuntimeChecking>False</CodeContractsEnableRuntimeChecking>
+    <CodeContractsRuntimeOnlyPublicSurface>False</CodeContractsRuntimeOnlyPublicSurface>
+    <CodeContractsRuntimeThrowOnFailure>True</CodeContractsRuntimeThrowOnFailure>
+    <CodeContractsRuntimeCallSiteRequires>False</CodeContractsRuntimeCallSiteRequires>
+    <CodeContractsRuntimeSkipQuantifiers>False</CodeContractsRuntimeSkipQuantifiers>
+    <CodeContractsRunCodeAnalysis>False</CodeContractsRunCodeAnalysis>
+    <CodeContractsNonNullObligations>False</CodeContractsNonNullObligations>
+    <CodeContractsBoundsObligations>False</CodeContractsBoundsObligations>
+    <CodeContractsArithmeticObligations>False</CodeContractsArithmeticObligations>
+    <CodeContractsEnumObligations>False</CodeContractsEnumObligations>
+    <CodeContractsRedundantAssumptions>False</CodeContractsRedundantAssumptions>
+    <CodeContractsInferRequires>False</CodeContractsInferRequires>
+    <CodeContractsInferEnsures>False</CodeContractsInferEnsures>
+    <CodeContractsInferObjectInvariants>False</CodeContractsInferObjectInvariants>
+    <CodeContractsSuggestAssumptions>False</CodeContractsSuggestAssumptions>
+    <CodeContractsSuggestRequires>True</CodeContractsSuggestRequires>
+    <CodeContractsSuggestEnsures>False</CodeContractsSuggestEnsures>
+    <CodeContractsSuggestObjectInvariants>False</CodeContractsSuggestObjectInvariants>
+    <CodeContractsDisjunctiveRequires>False</CodeContractsDisjunctiveRequires>
+    <CodeContractsRunInBackground>True</CodeContractsRunInBackground>
+    <CodeContractsShowSquigglies>False</CodeContractsShowSquigglies>
+    <CodeContractsUseBaseLine>False</CodeContractsUseBaseLine>
+    <CodeContractsEmitXMLDocs>False</CodeContractsEmitXMLDocs>
+    <CodeContractsCustomRewriterAssembly />
+    <CodeContractsCustomRewriterClass />
+    <CodeContractsLibPaths />
+    <CodeContractsExtraRewriteOptions />
+    <CodeContractsExtraAnalysisOptions />
+    <CodeContractsBaseLineFile />
+    <CodeContractsCacheAnalysisResults>False</CodeContractsCacheAnalysisResults>
+    <CodeContractsRuntimeCheckingLevel>Full</CodeContractsRuntimeCheckingLevel>
+    <CodeContractsReferenceAssembly>%28none%29</CodeContractsReferenceAssembly>
+    <CodeContractsAnalysisWarningLevel>0</CodeContractsAnalysisWarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.ExtendedReflection, Version=0.94.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.Moles.Framework, Version=0.94.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.Pex.Framework, Version=0.94.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.Pex.Linq, Version=0.94.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="VistA.Imaging.Core.Moles, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL" />
+  </ItemGroup>
+  <ItemGroup>
+    <CodeAnalysisDependentAssemblyPaths Condition=" '$(VS100COMNTOOLS)' != '' " Include="$(VS100COMNTOOLS)..\IDE\PrivateAssemblies">
+      <Visible>False</Visible>
+    </CodeAnalysisDependentAssemblyPaths>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Core\Core.csproj">
+      <Project>{1192A8FC-8C38-4809-A3DF-3CE37279B8B2}</Project>
+      <Name>Core %28Desktop\Core%29</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Collections\ReadOnlyDictionaryTKeyTValueTest.Add01.g.cs">
+      <DependentUpon>ReadOnlyDictionaryTKeyTValueTest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Collections\ReadOnlyDictionaryTKeyTValueTest.Clear.g.cs">
+      <DependentUpon>ReadOnlyDictionaryTKeyTValueTest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Collections\ReadOnlyDictionaryTKeyTValueTest.Constructor01.g.cs">
+      <DependentUpon>ReadOnlyDictionaryTKeyTValueTest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Collections\ReadOnlyDictionaryTKeyTValueTest.Contains.g.cs">
+      <DependentUpon>ReadOnlyDictionaryTKeyTValueTest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Collections\ReadOnlyDictionaryTKeyTValueTest.ContainsKey.g.cs">
+      <DependentUpon>ReadOnlyDictionaryTKeyTValueTest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Collections\ReadOnlyDictionaryTKeyTValueTest.CopyTo.g.cs">
+      <DependentUpon>ReadOnlyDictionaryTKeyTValueTest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Collections\ReadOnlyDictionaryTKeyTValueTest.CountGet.g.cs">
+      <DependentUpon>ReadOnlyDictionaryTKeyTValueTest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Collections\ReadOnlyDictionaryTKeyTValueTest.cs" />
+    <Compile Include="Collections\ReadOnlyDictionaryTKeyTValueTest.GetEnumerator.g.cs">
+      <DependentUpon>ReadOnlyDictionaryTKeyTValueTest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Collections\ReadOnlyDictionaryTKeyTValueTest.IsReadOnlyGet.g.cs">
+      <DependentUpon>ReadOnlyDictionaryTKeyTValueTest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Collections\ReadOnlyDictionaryTKeyTValueTest.ItemGet.g.cs">
+      <DependentUpon>ReadOnlyDictionaryTKeyTValueTest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Collections\ReadOnlyDictionaryTKeyTValueTest.ItemSet.g.cs">
+      <DependentUpon>ReadOnlyDictionaryTKeyTValueTest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Collections\ReadOnlyDictionaryTKeyTValueTest.KeysGet.g.cs">
+      <DependentUpon>ReadOnlyDictionaryTKeyTValueTest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Collections\ReadOnlyDictionaryTKeyTValueTest.Remove01.g.cs">
+      <DependentUpon>ReadOnlyDictionaryTKeyTValueTest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Collections\ReadOnlyDictionaryTKeyTValueTest.TryGetValue.g.cs">
+      <DependentUpon>ReadOnlyDictionaryTKeyTValueTest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Collections\ReadOnlyDictionaryTKeyTValueTest.ValuesGet.g.cs">
+      <DependentUpon>ReadOnlyDictionaryTKeyTValueTest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\PexAssemblyInfo.cs" />
+    <Compile Include="Security\Cryptography\AesBase64Test.Constructor.g.cs">
+      <DependentUpon>AesBase64Test.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Security\Cryptography\AesBase64Test.Constructor01.g.cs">
+      <DependentUpon>AesBase64Test.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Security\Cryptography\AesBase64Test.cs" />
+    <Compile Include="Security\Cryptography\AesBase64Test.DecryptToString.g.cs">
+      <DependentUpon>AesBase64Test.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Security\Cryptography\AesBase64Test.EncryptString.g.cs">
+      <DependentUpon>AesBase64Test.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Moles Include="VistA.Imaging.Core.moles" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

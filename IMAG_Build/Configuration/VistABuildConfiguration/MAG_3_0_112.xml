@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<build xmlns="http://va.gov/VistA/kids/manifest" name="MAG*3.0*112" patchName="DICOM File Archive Application" patch="112">
+  <components>
+    <securityKeys />
+    <parameterDefinitions />
+    <printTemplates />
+    <sortTemplates />
+    <menuOptions />
+    <rpcs />
+    <dataDictionaries />
+    <hl7s />
+    <routines>
+      <routine export="MAGIP112.RTN" />
+    </routines>
+    <protocols />
+  </components>
+</build>

@@ -1,0 +1,160 @@
+MAGDIR7T ;WOIFO/PMK - Program to read a DICOM file ; 13 Sep 2005  8:00 AM
+ ;;3.0;IMAGING;**11,30,51,50**;MAR 19, 2002;;JUL 13, 2006
+ ;; Per VHA Directive 2004-038, this routine should not be modified.
+ ;; +---------------------------------------------------------------+
+ ;; | Property of the US Government.                                |
+ ;; | No permission to copy or redistribute this software is given. |
+ ;; | Use of unreleased versions of this software requires the user |
+ ;; | to execute a written test agreement with the VistA Imaging    |
+ ;; | Development Office of the Department of Veterans Affairs,     |
+ ;; | telephone (301) 734-0100.                                     |
+ ;; | The Food and Drug Administration classifies this software as  |
+ ;; | a medical device.  As such, it may not be changed in any way. |
+ ;; | Modifications to this software may result in an adulterated   |
+ ;; | medical device under 21CFR820, the use of which is considered |
+ ;; | to be a violation of US Federal Statutes.                     |
+ ;; +---------------------------------------------------------------+
+ ;;
+ENTRY ; entry point from ^MAGDIR7C/D
+ N DATXCODE ;- MUMPS code for copying additional data for the DATA1 block
+ N DATXFILE ;- file listing additional DICOM elements for DATA1 block
+ N FILESIZE ;- size of TXT file
+ N FILETXT ;-- temporary "about image text file"
+ N INODE ;---- node in ^TMP global for DICOM data storage
+ N MODPARMS ;- Parameters for file conversion
+ N SEQUENCE ;- DICOM sequence push down stack
+ N STATUS ;--- status of last file operation
+ N TEXTFILE ;- path to the "about image text file"
+ ;
+ ; get parameters for constructing the DATA1 block of the text file
+ S INODE="IN",SEQUENCE="",X=^MAGDICOM(2006.582,MODIEN,0)
+ S MODPARMS=$P(X,"^",4) ; Parameters for DCMtoTGA
+ S DATXCODE=$TR($P(X,"^",6),".","^") ; Translate fileman entry point to M
+ S DATXFILE=$P(X,"^",7) ; File listing DICOM elements for DATA1 block
+ ;
+ ; create the about image text file
+ ; this is a two-step process (1) create the temp text file (2) copy it
+ ;
+ S FILETXT=$P(FROMPATH,"\",1,$L(FROMPATH,"\")-1)_"\TMP_TEXT.TXT"
+ ;
+ ; delete the previous temporary about image text file first
+ D DELETE^MAGDIR71(FILETXT,"TEMPORARY ABOUT IMAGE TEXT FILE",1)
+ ;
+ ; open the about image text file
+ S STATUS=$$OPEN^MAGOSFIL(FILETXT,"W")
+ I STATUS<0 D
+ . N MSG
+ . S MSG(1)="Could not open about image text file """_FILETXT_""" for Write."
+ . S MSG(2)="STATUS: "_STATUS
+ . D ROLLBACK^MAGDIR75(IMAGEPTR,.MSG) ; delete ^MAG(2005,IMAGEPTR) entry
+ . D TRAPERR^MAGDSTRT(1,$T(+0),"DICOM IMAGE PROCESSING ERROR",.MSG)
+ . Q  ; Error trap does not return
+ ;
+ S STATUS=$$USE^MAGOSFIL(FILETXT)
+ W "$$BEGIN DATA1",! I $$USEPRIN^MAGOSFIL(1)
+ D PATIENT ; output patient demographics (name, id, dob, sex, age)
+ D STUDY ; output study information to the DATA1 block
+ D DCMCOPY ; copy the DICOM elements from the header to the DATA1 block
+ D MISC ; output miscellaneous parameters
+ ;
+ I DATXCODE'="" D @DATXCODE ; copy additional data to the DATA1 block
+ S STATUS=$$USE^MAGOSFIL(FILETXT)
+ W "$$END DATA1",! I $$USEPRIN^MAGOSFIL(1)
+ ;
+ D ^MAGDIR5 ; output all of the DICOM header elements to the DICOM block
+ ;
+ S STATUS=$$CLOSE^MAGOSFIL(FILETXT)
+ I $$USEPRIN^MAGOSFIL(1)
+ ;
+ ; get length of temporary about image text file
+ S FILESIZE=$$FILESIZE^MAGDIR75(FILETXT,"TEXT FILE")
+ ;
+ ; copy the FILETXT file to TEXTFILE on the server
+ S TEXTFILE=$RE($P($RE(IMGFILE),".",2,999))_".TXT"
+ D FILECOPY^MAGDIR75(FILETXT,TEXTFILE,"TEXT FILE")
+ ;
+ ; Check that the abstract image was written properly
+ D FILECHK^MAGDIR75(TEXTFILE,FILESIZE)
+ Q
+ ;
+PATIENT ; output patient demographics to the DATA1 block
+ N STATUS
+ S STATUS=$$USE^MAGOSFIL(FILETXT)
+ W "PATIENTS_NAME=",VADM(1),!
+ W "PATIENTS_ID=",$P(VADM(2),"^",2),!
+ W "PATIENTS_BIRTH_DATE=",$P(VADM(3),"^",2),!
+ W "PATIENTS_AGE=",VADM(4),!
+ W "PATIENTS_SEX=",$P(VADM(5),"^",1),!
+ W "INTEGRATION_CONTROL_NUMBER=",VADM("ICN"),!
+ I $$USEPRIN^MAGOSFIL(1)
+ Q
+STUDY ; output study information to the DATA1 block
+ N STATUS,X
+ S STATUS=$$USE^MAGOSFIL(FILETXT)
+ W "ACCESSION_NUMBER=",ACNUMB,!
+ S X=$$GETDATA^MAGDFCNS(INODE,"0008,0023") ; IMAGE DATA
+ I X?1N.N S X=$E(X,5,6)_"/"_$E(X,7,8)_"/"_$E(X,1,4)
+ W "IMAGE_DATE=",X,!,"CONTENT_DATE=",X,!
+ S X=$$GETDATA^MAGDFCNS(INODE,"0008,0033") ; IMAGE TIME
+ I X?6N.E S X=$E(X,1,2)_":"_$E(X,3,4)_":"_$E(X,5,6)
+ W "IMAGE_TIME=",X,!,"CONTENT_TIME=",X,!
+ I $$USEPRIN^MAGOSFIL(1)
+ Q
+ ;
+MISC ; output miscellaneous information to the DATA1 block
+ N STATUS
+ S STATUS=$$USE^MAGOSFIL(FILETXT)
+ W "DCM_TO_TGA_PARAMETERS=",MODPARMS,!
+ I $$USEPRIN^MAGOSFIL(1)
+ Q
+ ; 
+DCMCOPY ; copy the DICOM element specified in DATXFILE to the DATA1 block
+ N COUNT ;---- number of entries in the DATAXXX.DIC dictionary
+ N DATAIEN ;-- ien for each element in the DATAXXX.DIC dictionary
+ N FILEIEN ;-- ien for each file in the DATAXXX.DIC dictionary
+ N LINECNT ;-- multi-line text line counter
+ N MULTIPLE ;- DICOM multiple value indicator
+ N NAME ;----- name of DICOM element
+ N TAG ;------ group and element tag of DICOM element
+ N VR ;------- value representation of DICOM element
+ N I,J,STATUS
+ ;
+ I DATXFILE="" Q  ; data transfer dictionary is not defined
+ S DATXFILE=$$UPPER^MAGOSMSC(DATXFILE)
+ S FILEIEN=$O(^MAGDICOM(2006.511,"B",DATXFILE,""))
+ I FILEIEN="" D  Q
+ . N MSG
+ . S MSG(1)="Data transfer dictionary <<"_DATXFILE_">> is missing"
+ . D TRAPERR^MAGDSTRT(1,$T(+0),"DICOM GATEWAY ERROR",.MSG)
+ . Q  ; Error trap does not return
+ S X=^MAGDICOM(2006.511,FILEIEN,1,0)
+ S COUNT=$P(X,"^",3)
+ F DATAIEN=1:1:COUNT D
+ . S X=^MAGDICOM(2006.511,FILEIEN,1,DATAIEN,0)
+ . ; copy one DICOM element to the DATA1 block
+ . ; W !," -- ",X
+ . S TAG=$P(X,"^"),NAME=$P(X,"^",2)
+ . S MULTIPLE=$G(^TMP("MAG",$J,"DICOM",INODE,TAG,0,0)) Q:MULTIPLE=""
+ . I MULTIPLE=1 D
+ . . S STATUS=$$USE^MAGOSFIL(FILETXT)
+ . . W NAME,"=",^TMP("MAG",$J,"DICOM",INODE,TAG,1,1),!
+ . . I $$USEPRIN^MAGOSFIL(1)
+ . . Q
+ . E  I MULTIPLE>1 D
+ . . S STATUS=$$USE^MAGOSFIL(FILETXT)
+ . . W NAME,"=",MULTIPLE,!
+ . . F I=1:1:MULTIPLE D  ;
+ . . . W NAME,"(",I,")="
+ . . . S LINECNT=^TMP("MAG",$J,"DICOM",INODE,TAG,I,0)
+ . . . F J=1:1:LINECNT D  ;
+ . . . . W ^TMP("MAG",$J,"DICOM",INODE,TAG,I,J),!
+ . . . . Q
+ . . . Q
+ . . Q
+ . I  S STATUS=$$USEPRIN^MAGOSFIL(1) Q
+ . N MSG
+ . S MSG(1)="Processing """_INODE_""", tag is """_TAG_"""."
+ . S MSG(2)="Multiplicity is """_MULTIPLE_"""."
+ . D TRAPERR^MAGDSTRT(1,$T(+0),"DICOM GATEWAY ERROR",.MSG)
+ . Q  ; Error trap does not return
+ Q

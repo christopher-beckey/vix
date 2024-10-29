@@ -1,0 +1,70 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="BuildVisaProject" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <!-- These defaults are overriden by the build runner (TeamCity) -->
+    <VAPatchNumber Condition="'$(VAPatchNumber)' == ''">119</VAPatchNumber>
+    <BranchBuildNumber Condition="'$(BranchBuildNumber)' == ''">1</BranchBuildNumber>
+    <ProductType Condition="'$(ProductType)' == ''">VIX</ProductType>
+    <VISAProductVersion Condition="'$(VISAProductVersion)' == ''">30.5000.$(BranchBuildNumber).$(VAPatchNumber)</VISAProductVersion>
+    <RootDir Condition="'$(RootDir)' == ''">C:\Temp\Test P119 Build</RootDir>
+    <BranchRootDirectory Condition="'$(BranchRootDirectory)' == ''">$(RootDir)\VistA_Imaging\Dev\Patch119</BranchRootDirectory>
+    <JavaRootDir Condition="'$(JavaRootDir)' == ''">$(RootDir)\Java</JavaRootDir>
+    <VisaBuildConfigurationDir>$(RootDir)\VistA_Imaging\Configuration\VisaBuildConfiguration</VisaBuildConfigurationDir>
+    <BuildManifestFileName Condition="'$(BuildManifestFileName)' == ''">VixBuildManifestPatch119VIX.xml</BuildManifestFileName>
+    <BuildManifestFile Condition="'$(BuildManifestFile)' == ''">$(VisaBuildConfigurationDir)\$(BuildManifestFileName)</BuildManifestFile>
+    <ManifestFileName Condition="'$(ManifestFileName)' == ''">VixManifestPatch119VIX.xml</ManifestFileName>
+    <ManifestFile Condition="'$(ManifestFile)' == ''">$(VisaBuildConfigurationDir)\$(ManifestFileName)</ManifestFile>
+    <VixBuilderConsole Condition="'$(VixBuilderConsole)' == ''">C:\Program Files\Vista\Imaging\VixBuilder\VixBuilderConsole.exe</VixBuilderConsole>
+    <BuildConfigFile Condition="'$(BuildConfigFile)' == ''">$(MSBuildProjectDirectory)\Buildconfig.xml</BuildConfigFile>
+    <MavenRepo Condition="'$(MavenRepo)' == ''">C:\Documents and Settings\vhaiswia\.m2\repository</MavenRepo>
+    <SourceMsiFile>$(MSBuildProjectDirectory)\VixInstallerSetup\Release\VixInstallerSetup.msi</SourceMsiFile>
+    <TargetMsiFile>$(RootDir)\MAG3_0P$(VAPatchNumber)T$(BranchBuildNumber)_$(ProductType)_Setup.msi</TargetMsiFile>
+    <MsiVersion Condition="'$(MsiVersion)' == ''">3.0.0</MsiVersion>
+    <DevEnv>$(VS100COMNTOOLS)..\IDE\devenv.com</DevEnv>
+  </PropertyGroup>
+
+  <Target Name="BuildVisaProject">
+    <CallTarget Targets="UpdateBuildManifestFileVersion" />
+    <CallTarget Targets="UpdateManifestVersion" />
+    <CallTarget Targets="UpdateBuildConfig" />
+    <CallTarget Targets="assembleAndStageMsiPayload" />
+    <CallTarget Targets="updateMsiIdentityAndVersion" />
+    <CallTarget Targets="BuildMSI" />
+    <CallTarget Targets="CopyMSI" />
+  </Target>
+
+  <Target Name="UpdateBuildManifestFileVersion">
+    <Message Text="Updating $(BuildManifestFile) to version $(VISAProductVersion)" />
+    <Exec Command='attrib -r "$(BuildManifestFile)"'/>
+    <XmlPoke XmlInputPath="$(BuildManifestFile)" Query="//Patch/@number" Value="$(VISAProductVersion)"/>
+  </Target>
+  
+  <Target Name="UpdateManifestVersion">
+    <Message Text="Updating $(ManifestFile) to version $(VISAProductVersion)" />
+    <Exec Command='attrib -r "$(ManifestFile)"'/>
+    <XmlPoke XmlInputPath="$(ManifestFile)" Query="//Patch/@number" Value="$(VISAProductVersion)"/>
+  </Target>
+
+  <Target Name="UpdateBuildConfig">
+    <Exec Command='attrib -r "$(BuildConfigFile)"'/>
+    <XmlPoke XmlInputPath="$(BuildConfigFile)" Query="/BuildConfiguration/BuildManifestFilename" Value="$(BuildManifestFileName)"/>
+    <XmlPoke XmlInputPath="$(BuildConfigFile)" Query="/BuildConfiguration/DeploymentManifestFilename" Value="$(ManifestFileName)"/>
+    <XmlPoke XmlInputPath="$(BuildConfigFile)" Query="/BuildConfiguration/InstallationType" Value="$(ProductType)"/>
+  </Target>
+
+  <Target Name="assembleAndStageMsiPayload">
+    <Exec Command='"$(VixBuilderConsole)" "$(BuildConfigFile)" "-TfsWorkspaceWorkingFolder=$(JavaRootDir)" "-TfsRootDirspec=$(RootDir)" "-Maven2RepoDirspec=$(MavenRepo)" "-VixPayloadRootDirspec=$(RootDir)" "-VixInstallerRootDirspec=$(MSBuildProjectDirectory)" "-MsiVersion=$(MsiVersion)"  assembleAndStageMsiPayload' />
+  </Target>
+
+  <Target Name="updateMsiIdentityAndVersion">
+    <Exec Command='"$(VixBuilderConsole)" "$(BuildConfigFile)" "-TfsWorkspaceWorkingFolder=$(JavaRootDir)" "-TfsRootDirspec=$(RootDir)" "-Maven2RepoDirspec=$(MavenRepo)" "-VixPayloadRootDirspec=$(RootDir)" "-VixInstallerRootDirspec=$(MSBuildProjectDirectory)" "-MsiVersion=$(MsiVersion)"  updateMsiIdentityAndVersion' />
+  </Target>
+
+  <Target Name="BuildMSI">
+    <Exec Command='"$(DevEnv)" /Rebuild Release "..\VixInstallerSolution2010.sln" "VixInstallerSetup.vdproj" /Rebuild Release /Out devenvlog.txt' WorkingDirectory="$(MSBuildProjectDirectory)\VixInstallerSetup" />
+  </Target>
+  
+  <Target Name="CopyMSI">
+    <Exec Command='copy "$(SourceMsiFile)" "$(TargetMsiFile)"' />
+  </Target>
+</Project>

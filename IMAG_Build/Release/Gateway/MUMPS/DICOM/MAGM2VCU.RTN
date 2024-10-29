@@ -1,0 +1,299 @@
+MAGM2VCU ;WOIFO/EdM - MUMPS-to-VistA broker client ; 24 Nov 2008 1:21 PM
+ ;;3.0;IMAGING;**11,30,51,50,103**;MAR 19, 2002;;MAR 03, 2009
+ ;; Per VHA Directive 2004-038, this routine should not be modified.
+ ;; +---------------------------------------------------------------+
+ ;; | Property of the US Government.                                |
+ ;; | No permission to copy or redistribute this software is given. |
+ ;; | Use of unreleased versions of this software requires the user |
+ ;; | to execute a written test agreement with the VistA Imaging    |
+ ;; | Development Office of the Department of Veterans Affairs,     |
+ ;; | telephone (301) 734-0100.                                     |
+ ;; | The Food and Drug Administration classifies this software as  |
+ ;; | a medical device.  As such, it may not be changed in any way. |
+ ;; | Modifications to this software may result in an adulterated   |
+ ;; | medical device under 21CFR820, the use of which is considered |
+ ;; | to be a violation of US Federal Statutes.                     |
+ ;; +---------------------------------------------------------------+
+ ;;
+ Q
+ ; ===== Non User-Callable Utility Routines =====
+ ;
+DECRYP(X) ; Work-around for bug in XUSRB1
+ Q:$G(X)="" ""
+ Q $$DECRYP^XUSRB1(X)
+ ;
+ENCRYPT(X) ; Work-around for bug in XUSRB1
+ N R
+ F  S R=$$ENCRYP^XUSRB1(X) Q:R'[$C(31)
+ Q R
+ ;
+EXECUTE(PRM) ; -- Main entry point
+ N I,REQ,ROOT,X
+ ;
+ ; Default location for results
+ S:$G(PRM("RESULTS"))="" PRM("RESULTS")=$NA(^TMP("MAGM2VC",$J,"RESULTS"))
+ S ROOT=PRM("RESULTS") K @ROOT
+ S REQ=PRM("REQUEST")
+ ;
+ D:$G(^MAGDICOM(2006.563,1,"M2M DEBUG"))
+ . N E
+ . S E=$G(^TMP("MAG",$J,"DEBUG"))+1
+ . S ^TMP("MAG",$J,"DEBUG")=E
+ . S ^TMP("MAG",$J,"DEBUG",E)=REQ
+ . S I="" F  S I=$O(@REQ@(I)) Q:I=""  S ^TMP("MAG",$J,"DEBUG",E,I)=@REQ@(I)
+ . Q
+ S STS=$$TCPFLUSH^MAGOSTCP(IP,PORT)
+ S I=0 F  S I=$O(@REQ@(I)) Q:'I  D WRITE(@REQ@(I))
+ ; Send EOT and flush buffer
+ D WRITE($C(4))
+ S STS=$$TCPFLUSH^MAGOSTCP(IP,PORT)
+ ;
+ I $G(^MAGDICOM(2006.563,1,"M2M DEBUG"))<2 D READ(ROOT)
+ E  D
+ . N TMPROOT
+ . S TMPROOT=$NA(^TMP("MAG",$J,"M2MREAD"))
+ . K @TMPROOT
+ . D READ(TMPROOT) M @ROOT=@TMPROOT
+ . K @TMPROOT
+ . Q
+ Q 1
+ ;
+ISCONT(IP,PORT) ; Connection status: non-zero=not connected
+ N X
+ S X=$G(^TMP("MAGM2V",$J,"CONNECTED"),0) Q:'X X
+ S IP=$P(X," ",3),PORT=$P(X," ",1)
+ D:$$TCPLOST^MAGOSTCP(IP,PORT,2)<0
+ . K ^TMP("MAGM2V",$J,"CONNECTED")
+ . K ^TMP("MAGM2V",$J,"CONTEXT")
+ . K MAGOS("TCP"," "_IP_" "_PORT)
+ . S X="0;Lost Connection with Peer"
+ . Q
+ Q X
+ ;
+PARSE(PRM,OKDEST,ERRDEST) ; Parse XML message
+ N B,DEST,DONE,E,ET,I,MSG,N,NM,OK,P,Q,T,TC,TP,X
+ S DEST=OKDEST,ET=0
+ S (T(1),TP)="",(B,DONE,MSG,N,OK,Q)=0,TC=1,NM=PRM("RESULTS")
+ D:$G(^MAGDICOM(2006.563,1,"M2M DEBUG"))
+ . N E
+ . S E=$G(^TMP("MAG",$J,"DEBUG"))+1
+ . S ^TMP("MAG",$J,"DEBUG")=E
+ . S ^TMP("MAG",$J,"DEBUG",E)=NM
+ . S I="" F  S I=$O(@NM@(I)) Q:I=""  S ^TMP("MAG",$J,"DEBUG",E,I)=@NM@(I)
+ . Q
+ S I="" F  S I=$O(@NM@(I)) Q:I=""  D  Q:DONE
+ . S X=@NM@(I)
+ . S:$E(X,$L(X))'=$C(13) X=X_$C(13)
+ . S P="A system error occurred in M: """
+ . I X[P S X=$P(X,P,1)_"MUMPS error: "_$P(X,P,2,$L(X)+2)
+ . I ET=3 S N=N+1,@DEST@(N)=$P(X,"</msg>",1) S:X["</msg>" ET=4
+ . F  Q:X=""  D  Q:DONE
+ . . F P=1:1:$L(X) D  Q:OK
+ . . . S E=$E(X,P)
+ . . . I E="<",B S B=B+1,E="{"
+ . . . I E=">",B>1 S B=B-1,E="}"
+ . . . I E="<",'Q D  Q
+ . . . . K T S TC=1,T(TC)="<",OK=0,B=1
+ . . . . Q
+ . . . I $L(T(TC))<30000 S T(TC)=T(TC)_E
+ . . . E  S TC=TC+1,T(TC)=E
+ . . . I E="""" S Q='Q
+ . . . I E=">",'Q S X=$E(X,P+1,$L(X)),OK=1,B=0
+ . . . Q
+ . . I 'OK S X="" Q
+ . . I T(1)["<vistalink ",T(1)[".Response""" S DEST=OKDEST,T(1)="",TC=1 Q
+ . . I T(1)["<vistalink ",T(1)[".Errors""" S ET=1,DEST=ERRDEST,T(1)="",TC=1,TP="string" Q
+ . . I T(1)["<vistalink ",T(1)[".Error""" S ET=2,DEST=ERRDEST,T(1)="",TC=1,TP="string" Q
+ . . I T(1)["<results " S TP=$P($P(T(1),"type=""",2),"""",1),T(1)="",TC=1,OK=0 Q
+ . . I T(1)="</results>" S DONE=1,T(1)="",TC=1 Q
+ . . I ET=2,T(1)="<msg>" S N=N+1,@DEST@(N)=X,ET=3 Q
+ . . I $E(T(1),1,9)="<![CDATA[" D  Q
+ . . . S T(1)=$E(T(1),10,$L(T(1)))
+ . . . I $L(T(TC))<3 S TC=TC-1,T(TC)=T(TC)_T(TC+1)
+ . . . S T(TC)=$E(T(TC),1,$L(T(TC))-3)
+ . . . D:TP'="array"  ; "string"
+ . . . . S N=N+1,@DEST@(N)=T(TC)
+ . . . . Q
+ . . . D:TP="array"
+ . . . . N I,V
+ . . . . F I=1:1:TC D
+ . . . . . F P=1:1:$L(T(I),$C(13)) D
+ . . . . . . S V=$P(T(I),$C(13),P)
+ . . . . . . I P=1,I>1 S V=@DEST@(N)_V,N=N-1
+ . . . . . . S N=N+1,@DEST@(N)=V
+ . . . . . . Q
+ . . . . . Q
+ . . . . I @DEST@(N)="" K @DEST@(N) S N=N-1
+ . . . . Q
+ . . . K T S TC=1,T(1)="",OK=0
+ . . . Q
+ . . K T S TC=1,T(1)="",OK=0
+ . . Q
+ . Q
+ D:$G(^MAGDICOM(2006.563,1,"M2M DEBUG"))
+ . N E
+ . S E=$G(^TMP("MAG",$J,"DEBUG"))+1
+ . S ^TMP("MAG",$J,"DEBUG")=E
+ . S ^TMP("MAG",$J,"DEBUG",E)=DEST_" <== parse"
+ . S I="" F  S I=$O(@DEST@(I)) Q:I=""  S ^TMP("MAG",$J,"DEBUG",E,I)=@DEST@(I)
+ . Q
+ S I="" F  S I=$O(@DEST@(I)) Q:I=""  D
+ . N E,K,T,Z
+ . S X=@DEST@(I) Q:X'["&"
+ . S Z="" F K=1:1:$L(X) D
+ . . S E=$E(X,K) I E'="&" S Z=Z_E Q
+ . . I $E(X,K,K+3)="&lt;" S Z=Z_"<",K=K+3 Q
+ . . I $E(X,K,K+3)="&gt;" S Z=Z_">",K=K+3 Q
+ . . I $E(X,K,K+4)="&amp;" S Z=Z_"&",K=K+4 Q
+ . . I $E(X,K,K+5)="&quot;" S Z=Z_"""",K=K+5 Q
+ . . I $E(X,K,K+5)="&apos;" S Z=Z_"'",K=K+5 Q
+ . . I $E(X,K,K+1)'="&#" S Z=Z_E Q
+ . . S T=$P($E(X,K+2,$L(X)),";",1)
+ . . I $TR(T,"1234567890")="" S Z=Z_$C(+T),K=K+$L(T)+2 Q
+ . . S Z=Z_E
+ . . Q
+ . S E=$G(^TMP("MAG",$J,"DEBUG"))+1,^TMP("MAG",$J,"DEBUG",E)=Z
+ . S @DEST@(I)=Z
+ . Q
+ I TP="string",N=1 S @DEST=@DEST@(1)
+ Q
+ ;
+READ(DEST) ; Read XML message from socket
+ N ANY,DONE,E,FLAG,LOST,N,Q,T,TIME
+ S (ANY,DONE,LOST,N,Q)=0,TIME=100,T=""
+ F  R E#1:TIME S FLAG=$T D  Q:DONE
+ . I E="" S LOST=LOST+1,TIME=1 S:LOST>100 DONE=1 Q
+ . S LOST=0
+ . I 'FLAG S:'ANY @DEST@(1)="Connection timed out" S DONE=1 Q
+ . I E=$C(4) S DONE=1 Q
+ . S ANY=1,TIME=2
+ . I E="""" S Q='Q
+ . I E="<",'Q,T'="" S N=N+1,@DEST@(N)=T,T=""
+ . I E=$C(10) S N=N+1,@DEST@(N)=T,T="" Q
+ . S T=T_E
+ . Q
+ S:LOST>100 $EC=",U13-Connection with VistA Lost,"
+ S:T'="" N=N+1,@DEST@(N)=T
+ Q
+ ;
+WRITE(X) ; -- Write a data string to socket
+ N STS
+ ;
+ I $X+$L(X)>255 S STS=$$TCPFLUSH^MAGOSTCP(IP,PORT)
+ F  Q:X=""  D
+ . I $L(X)<255 W X S X="" Q
+ . W $E(X,1,255) S STS=$$TCPFLUSH^MAGOSTCP(IP,PORT)
+ . S X=$E(X,256,$L(X))
+ . Q
+ Q
+ ;
+XMLHDR() ; Current XML standard header
+ Q "<?xml version=""1.0"" encoding=""utf-8"" ?>"
+ ;
+XMLIZE(IN) ; Replace special characters with XML entities
+ N E,I,OUT
+ S OUT="" F I=1:1:$L(IN) D
+ . S E=$E(IN,I) Q:E?1C
+ . I E="&" S OUT=OUT_"&amp;" Q
+ . I E="<" S OUT=OUT_"&lt;" Q
+ . I E=">" S OUT=OUT_"&gt;" Q
+ . I E="'" S OUT=OUT_"&apos;" Q
+ . I E="""" S OUT=OUT_"&quot;" Q
+ . S OUT=OUT_E
+ . Q
+ Q OUT
+ ;
+XMLMAKE(PRM) ; Build XML request
+ N N,RQST
+ ;
+ S N=0
+ S PRM("MESSAGE TYPE")="Gov.VA.Med.RPC.Request"
+ S:$G(PRM("REQUEST"))="" PRM("REQUEST")=$NA(PRM("REQUEST","XML"))
+ S RQST=PRM("REQUEST")
+ K @RQST
+ S N=N+1,@RQST@(N)=$$XMLHDR()
+ S N=N+1,@RQST@(N)="<vistalink type="""_$G(PRM("MESSAGE TYPE"))_""" mode="""_$G(PRM("MODE"))_""" >"
+ D:$G(PRM("MODE"))'="RPCBroker"
+ . S N=N+1,@RQST@(N)="<session>"
+ . S N=N+1,@RQST@(N)="<duz value="""_$G(PRM("DUZ"))_""" />"
+ . S N=N+1,@RQST@(N)="<security>"
+ . S N=N+1,@RQST@(N)="<token value="""_$G(PRM("TOKEN"))_""" />"
+ . S N=N+1,@RQST@(N)="</security>"
+ . S N=N+1,@RQST@(N)="</session>"
+ . Q
+ S N=N+1,@RQST@(N)="<rpc uri="""_$G(PRM("URI"))_""" method="""_$G(PRM("METHOD"))_""" >"
+ D:$O(PRM("PARAMS",0))
+ . N I,TYP
+ . S N=N+1,@RQST@(N)="<params>"
+ . S I=0 F  S I=$O(PRM("PARAMS",I)) Q:'I  D
+ . . S TYP=$G(PRM("PARAMS",I,"TYPE"))
+ . . I TYP="STRING" D  Q
+ . . . S N=N+1,@RQST@(N)="<param type=""string"" position="""_I_""" >"_$$XMLIZE($G(PRM("PARAMS",I,"VALUE")))_"</param>"
+ . . . Q
+ . . I TYP="ARRAY" D  Q
+ . . . N NAM
+ . . . S N=N+1,@RQST@(N)="<param type=""array"" position="""_I_""" >"
+ . . . S N=N+1,@RQST@(N)="<indices>"
+ . . . ;
+ . . . S NAM="" F  S NAM=$O(PRM("PARAMS",I,"VALUE",NAM)) Q:NAM=""  D
+ . . . . S N=N+1,@RQST@(N)="<index name="""_NAM_""" >"_$$XMLIZE($G(PRM("PARAMS",I,"VALUE",NAM)))_"</index>"
+ . . . . Q
+ . . . S N=N+1,@RQST@(N)="</indices>"
+ . . . S N=N+1,@RQST@(N)="</param>"
+ . . . Q
+ . . I TYP="REF" D  Q
+ . . . S N=N+1,@RQST@(N)="<param type=""ref"" position="""_I_""" >"_$$XMLIZE($G(PRM("PARAMS",I,"VALUE")))_"</param>"
+ . . . Q
+ . . Q
+ . S N=N+1,@RQST@(N)="</params>"
+ . Q
+ S N=N+1,@RQST@(N)="</rpc>"
+ S N=N+1,@RQST@(N)="</vistalink>"
+ Q
+ ;
+CALLRPC(RPCNAME,OPTION,RESULT,A1,A2,A3,A4,A5,A6,A7,A8,A9,AA,AB,AC,AD,AE,AF) ;
+ N ARGI,D,I,P,ROUTINE,STATUS,X
+ ; OPTION - "C" - Close RPC connection after usage
+ ; OPTION - "M" - Print error message
+ ; OPTION - "T" - Throw an error by setting $EC
+ S ROUTINE=$STACK($STACK-1,"PLACE")
+ S STATUS=0
+ ;
+ I '$$ISCONT() D
+ . S X=$$RECONCT^MAGDMENA()
+ . I 'X D
+ . . S STATUS="-1, Could not connect to M-to-M Broker"
+ . . S STATUS=STATUS_" ("_X_")"
+ . . D CALLRPCE
+ . . I OPTION["T" S $EC=",M13<NORPC> "_$TR(X,",")_","
+ . . Q
+ . Q
+ ;
+ K MAGRPCP("PARAMS")
+ S MAGRPCP("MODE")="RPCBroker"
+ I STATUS=0 D
+ . F I=1:1:15 S ARGI="A"_$E("123456789ABCDEF",I),D=$D(@ARGI) D:D
+ . . S MAGRPCP("PARAMS",I,"TYPE")=$S(D=1:"STRING",1:"ARRAY")
+ . . I D=1 S MAGRPCP("PARAMS",I,"VALUE")=@ARGI
+ . . E  M MAGRPCP("PARAMS",I,"VALUE")=@ARGI
+ . . Q
+ . ;
+ . I $$CALLRPC^MAGM2VC(RPCNAME,"RESULT",1)'=1 D
+ . . S STATUS="-3, M-TO-M Broker RPC failed"
+ . . D CALLRPCE
+ . . Q
+ . Q
+ I OPTION["C" S X=$$CLOSE^MAGM2VC() ; close rpc connection
+ Q STATUS
+ ;
+CALLRPCE ; display the error message
+ I OPTION["M" D
+ . I $$USEPRIN^MAGOSFIL(1)
+ . W !!,"Error in Remote Procedure Call '",RPCNAME,"'"
+ . W !,"Invoked from ",ROUTINE,"."
+ . W !,$P(STATUS,", ",2,999)
+ . S I="" F  S I=$O(RESULT("ERROR",I)) Q:I=""  W !,RESULT("ERROR",I)
+ . W !
+ . Q
+ Q
+ ;

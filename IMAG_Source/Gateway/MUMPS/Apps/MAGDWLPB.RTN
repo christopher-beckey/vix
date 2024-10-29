@@ -1,0 +1,236 @@
+Cache for Windows NT^INT^Saved from DICOM,ROU (ISW-KUZMAKP3-LT)^~Format=Cache.S~
+%RO on 07/25/2013  17:25
+MAGDWLPB^INT^1^63028,62689.86803^0
+MAGDWLPB ;WOIFO/PMK - Update DICOM worklist information ; 25 Jul 2013 5:24 PM
+ ;;3.0;IMAGING;**11,30,51,102,49,110**;Mar 19, 2002;Build 48;Aug 23, 2012
+ ;; Per VHA Directive 2004-038, this routine should not be modified.
+ ;; +---------------------------------------------------------------+
+ ;; | Property of the US Government.                                |
+ ;; | No permission to copy or redistribute this software is given. |
+ ;; | Use of unreleased versions of this software requires the user |
+ ;; | to execute a written test agreement with the VistA Imaging    |
+ ;; | Development Office of the Department of Veterans Affairs,     |
+ ;; | telephone (301) 734-0100.                                     |
+ ;; | The Food and Drug Administration classifies this software as  |
+ ;; | a medical device.  As such, it may not be changed in any way. |
+ ;; | Modifications to this software may result in an adulterated   |
+ ;; | medical device under 21CFR820, the use of which is considered |
+ ;; | to be a violation of US Federal Statutes.                     |
+ ;; +---------------------------------------------------------------+
+ ;;
+ Q
+ ; M2M Broker Version
+ ;
+ ; subroutines for ^MAGDWLPA
+ ;
+CREATE ; a study has either been created or scheduled
+ N ATTDOC ;--- attending physician
+ N CPTCODE ;-- CPT code
+ N CPTNAME ;-- CPT name
+ N HISTORY ;-- reason for the study (a short medical history)
+ N MODALITY ;- DICOM modality(ies) for the study
+ N PROCDESC ;- procedure description (VA's name for procedure)
+ N PROCIEN ;-- procedure code (internal entry number in ^RAMIS(71))
+ N PROCMOD ;-- procedure modifier (left, right, etc.)
+ N REFDOC ;--- referring physician
+ N REQDOC ;--- physician who requested the procedure
+ N REQSVC ;--- service from which the procedure was requested
+ ;
+ ; study scheduled/patient arrived
+ I 'STUDYIEN D  ; create the study entry in ^MAGDWLST
+ . N X
+ . L +^MAGDWLST(2006.56,DIVISION,1):1E9 ; serialize name generation code
+ . S X=$G(^MAGDWLST(2006.56,DIVISION,1,0))
+ . S $P(X,"^",1,2)="2006.562^STUDY"
+ . S STUDYIEN=$O(^MAGDWLST(2006.56,DIVISION,1," "),-1)+1
+ . S $P(X,"^",3)=STUDYIEN,$P(X,"^",4)=$P(X,"^",4)+1
+ . S ^MAGDWLST(2006.56,DIVISION,1,0)=X
+ . S ^MAGDWLST(2006.56,DIVISION,1,STUDYIEN,0)=""
+ . S ^MAGDWLST(2006.56,DIVISION,1,"C",SERVICE,DATECASE,STUDYIEN)=""
+ . S ^MAGDWLST(2006.56,DIVISION,1,"D",SERVICE,STUDYID,STUDYIEN)=""
+ . S ^MAGDWLST(2006.56,DIVISION,1,"E",SERVICE,ITYPCODE,TRANSFDT,STUDYIEN)=""
+ . S ^MAGDWLST(2006.56,DIVISION,1,"H",SERVICE,ACNUMB,STUDYIEN)=""
+ . S ^MAGDWLST(2006.56,"F",UID("STUDY"),DIVISION,STUDYIEN)=""
+ . S ^MAGDWLST(2006.56,DIVISION,1,"S",DFN,STUDYIEN)=""
+ . L -^MAGDWLST(2006.56,DIVISION,1)
+ . S TIUSIGN=$S(REQSTATE?1"SDAM-".E:-1,1:0) ; -1 if created by SDAM
+ . Q
+ E  D  ; update transaction date/time to see if it is more accurate *********
+ . N OLDDAYDM ; old date/time
+ . N OLDITYPCODE ; old image type code (for FORWARD)
+ . N S0 ; zero node for study
+ . S S0=^MAGDWLST(2006.56,DIVISION,1,STUDYIEN,0)
+ . D REINDEX(3,DATECASE,"C")
+ . D REINDEX(13,ACNUMB,"H")
+ . S OLDDAYDM=$P(S0,"^",5),OLDITYPCODE=$P(S0,"^",11)
+ . I (OLDDAYDM'=TRANSFDT)!(OLDITYPCODE'=SERVICE) D
+ . . ; kill old date/time index, and update it
+ . . I OLDDAYDM,OLDITYPCODE'="" D
+ . . . K ^MAGDWLST(2006.56,DIVISION,1,"E",SERVICE,OLDITYPCODE,OLDDAYDM,STUDYIEN)
+ . . . Q
+ . . S:TRANSFDT ^MAGDWLST(2006.56,DIVISION,1,"E",SERVICE,ITYPCODE,TRANSFDT,STUDYIEN)=""
+ . . Q
+ . S TIUSIGN=$P(S0,"^",12)
+ . I TIUSIGN=-1,REQSTATE'?1"SDAM-".E S TIUSIGN=0 ; was SDAM, now GMRC
+ . Q
+ D PIECES^MAGDWLPC ; for robustness, do this every time!
+ Q
+ ;
+REINDEX(PIECE,NEWVALUE,INDEX) ; update index
+ ; this is needed for GMRC-nnnnn to sss-GMR-nnnnn conversion in P110
+ ; it can be deleted later
+ N OLDVALUE
+ S OLDVALUE=$P(S0,"^",PIECE) Q:OLDVALUE=NEWVALUE
+ K ^MAGDWLST(2006.56,DIVISION,1,INDEX,SERVICE,OLDVALUE,STUDYIEN)
+ S ^MAGDWLST(2006.56,DIVISION,1,INDEX,SERVICE,NEWVALUE,STUDYIEN)=""
+ Q
+ ;
+VERIFIED ; study has been verified, remove it from the database
+ I STUDYIEN D
+ . ; delete a study
+ . N ACNUMB,DATECASE,DFN,SCHSDYDT,STUDYUID,TRANSFDT
+ . S X=$G(^MAGDWLST(2006.56,DIVISION,1,STUDYIEN,0)) Q:X=""
+ . S STUDYUID=$G(^MAGDWLST(2006.56,DIVISION,1,STUDYIEN,1))
+ . S SERVICE=$P(X,"^",1),DFN=$P(X,"^",2),DATECASE=$P(X,"^",3)
+ . S STUDYID=$P(X,"^",4),TRANSFDT=$P(X,"^",5),ITYPCODE=$P(X,"^",11)
+ . S ACNUMB=$P(X,"^",13)
+ . I SERVICE'="",DATECASE'="" D
+ . . K ^MAGDWLST(2006.56,DIVISION,1,"C",SERVICE,DATECASE,STUDYIEN)
+ . . Q
+ . I SERVICE'="",STUDYID'="" D
+ . . K ^MAGDWLST(2006.56,DIVISION,1,"D",SERVICE,STUDYID,STUDYIEN)
+ . . Q
+ . I SERVICE'="",ACNUMB'="" D
+ . . K ^MAGDWLST(2006.56,DIVISION,1,"H",SERVICE,ACNUMB,STUDYIEN)
+ . . Q
+ . I SERVICE'="",ITYPCODE'="" D
+ . . N I
+ . . I TRANSFDT'="" D
+ . . . K ^MAGDWLST(2006.56,DIVISION,1,"E",SERVICE,ITYPCODE,TRANSFDT,STUDYIEN)
+ . . . Q
+ . . ; kill all the "G" cross-reference(s) as wel
+ . . S I=0 F  S I=$O(^MAGDWLST(2006.56,DIVISION,1,STUDYIEN,7,I)) Q:'I  D
+ . . . S SCHSDYDT=$P($G(^MAGDWLST(2006.56,DIVISION,1,STUDYIEN,7,I,0)),"^",2)
+ . . . I SCHSDYDT'="" D  ; kill the "G" cross-reference
+ . . . . K ^MAGDWLST(2006.56,DIVISION,1,"G",SERVICE,ITYPCODE,SCHSDYDT,STUDYIEN)
+ . . . . Q
+ . . . Q
+ . . Q
+ . I STUDYUID'="" K ^MAGDWLST(2006.56,"F",STUDYUID,DIVISION,STUDYIEN)
+ . K ^MAGDWLST(2006.56,DIVISION,1,"S",DFN,STUDYIEN)
+ . K ^MAGDWLST(2006.56,DIVISION,1,STUDYIEN) ; remove the entry from the base table
+ . S $P(^(0),"^",4)=$P(^MAGDWLST(2006.56,DIVISION,1,0),"^",4)-1
+ . Q
+ I '$O(^MAGDWLST(2006.56,DIVISION,1,"S",DFN,"")) D
+ . ; delete a patient
+ . N PID,PNAME,STUDYID,X
+ . S X=^MAGDWLST(2006.55,DIVISION,1,DFN,0)
+ . S PNAME=$P(X,"^",2),PID=$P(X,"^",3),STUDYID=$P(X,"^",7)
+ . K ^MAGDWLST(2006.55,DIVISION,1,"C",PNAME,DFN)
+ . K ^MAGDWLST(2006.55,DIVISION,1,"D",PID,DFN)
+ . K:STUDYID'="" ^MAGDWLST(2006.55,DIVISION,1,"E",STUDYID,DFN)
+ . K ^MAGDWLST(2006.55,DIVISION,1,DFN) ; remove the entry from the base table
+ . S $P(^(0),"^",4)=$P(^MAGDWLST(2006.55,DIVISION,1,0),"^",4)-1
+ . Q
+ Q
+ ;
+INSERT(FILE,DIVISION,D1,TAGS) ; insert a field into ^MAGDWLST
+ ; FILE ----- file ("P" for 2006.55 or "S" for 2006.56)
+ ; DIVISION - the 3-digit hospital identifier (e.g. 688 for Wash.)
+ ; D1 ------- either DFN for 2006.55 or STUDYIEN for 2006.56
+ ; TAGS ----- list of DICOM "GROUP,ELEMENT" tags or other
+ N MULTI ; -- DICOM multiplicity indicator
+ N D2,D3,FILENUMB,I,INC,N,NODE,OK,PUSH,SUB1,SUB2,TAG,VALUE,X
+ I FILE="P" S FILENUMB=2006.55,NODE=2,SUB1=2006.553,SUB2=2006.5533
+ E  I FILE="S" S FILENUMB=2006.56,NODE=8,SUB1=2006.5623,SUB2=2006.5624
+ E  D  Q
+ . N MSG
+ . S MSG(1)="Unknown FILE <<"_FILE_">> - Should be ""P"" or ""SS"""
+ . D WARNING^MAGDFCNS(.MSG)
+ . Q
+ ;
+ S PUSH=$P(TAGS,"|",1,$L(TAGS,"|")-1),TAG=$P(TAGS,"|",$L(TAGS,"|"))
+ S INC=$P(TAG,"~",2),TAG=$P(TAG,"~",1)
+ F I=1:1 S X=$P(PUSH,"|",I) Q:X=""  D SEQPUSH^MAGDFCNS(X)
+ F I=1:1:INC D SEQINC^MAGDFCNS
+ S VALUE="",OK=0
+ ;
+ ; determine multiplicity
+ S N=$$GETDATA^MAGDFCNS("OUT",TAG,0,0)
+ I N=1 D
+ . S N=$$GETDATA^MAGDFCNS("OUT",TAG,1,0)
+ . I N=1 D  ; single value
+ . . S MULTI=0
+ . . S VALUE=$$NOCR($$GETDATA^MAGDFCNS("OUT",TAG)),OK=$L(VALUE)
+ . . Q
+ . E  D  ; single multi-line paragraph
+ . . S MULTI=1,OK=N
+ . . Q
+ . Q
+ E  D  ; multiple paragraphs
+ . S MULTI=2,OK=N
+ . Q
+ ;
+ I OK D
+ . S D2=$O(^MAGDWLST(FILENUMB,DIVISION,1,D1,NODE,"B",TAGS,"")) D:'D2
+ . . L +^MAGDWLST(FILENUMB,DIVISION,1,1,D1,0):1E9
+ . . S D2=$O(^MAGDWLST(FILENUMB,DIVISION,1,D1,NODE," "),-1)+1
+ . . S X=$G(^MAGDWLST(FILENUMB,DIVISION,1,D1,NODE,0))
+ . . S $P(X,"^",1,2)="^"_SUB1
+ . . S $P(X,"^",3)=D2
+ . . S $P(X,"^",4)=$P(X,"^",4)+1
+ . . S ^MAGDWLST(FILENUMB,DIVISION,1,D1,NODE,0)=X
+ . . S ^MAGDWLST(FILENUMB,DIVISION,1,D1,NODE,"B",TAGS,D2)=""
+ . . L -^MAGDWLST(FILENUMB,DIVISION,1,1,D1,0)
+ . . Q
+ . S ^MAGDWLST(FILENUMB,DIVISION,1,D1,NODE,D2,0)=TAGS_"^"_VALUE Q:'MULTI
+ . K ^MAGDWLST(FILENUMB,DIVISION,1,D1,NODE,D2,1)
+ . F D3=1:1:N D
+ . . S:MULTI=1 X=$$NOCR($$GETDATA^MAGDFCNS("OUT",TAG,1,D3))
+ . . S:MULTI=2 X=$$NOCR($$GETDATA^MAGDFCNS("OUT",TAG,D3,1))
+ . . S ^MAGDWLST(FILENUMB,DIVISION,1,D1,NODE,D2,1,D3,0)=X
+ . . Q
+ . S ^MAGDWLST(FILENUMB,DIVISION,1,D1,NODE,D2,1,0)="^"_SUB2_"^"_N_"^"_N
+ . Q
+ F I=1:1 S X=$P(PUSH,"|",I) Q:X=""  D SEQPOP^MAGDFCNS
+ Q
+ ;
+NOCR(X) ; Remove trailing CR/LF, if needed
+ S:$E(X,$L(X)-1,$L(X))=$C(13,10) X=$E(X,1,$L(X)-2)
+ Q X
+ ;
+EXTRACT(FILE,DIVISION,D1,TAG) ; save a field from ^MAGDWLST
+ ; FILE ----- file ("P" for 2006.55 or "S" for 2006.56)
+ ; DIVISION - the 3-digit hospital identifier (e.g. 688 for Wash.)
+ ; D1 ------- either DFN for 2006.55 or STUDYIEN for 2006.56
+ ; TAG ------ DICOM "GROUP,ELEMENT" tags or other
+ N D2,FILENUMB,I,NODE,SUBFILE,VALUE,X
+ ;
+ I FILE="P" S FILENUMB=2006.55,NODE=2
+ E  I FILE="S" S FILENUMB=2006.56,NODE=8
+ E  D  Q
+ . N MSG
+ . S MSG(1)="Unknown FILE <<"_FILE_">> - Should be ""P"" or ""SS"""
+ . D WARNING^MAGDFCNS(.MSG)
+ . Q
+ ;
+ S VALUE=""
+ S D2=$O(^MAGDWLST(FILENUMB,DIVISION,1,D1,NODE,"B",TAG,""))
+ I D2 D
+ . S VALUE=$G(^MAGDWLST(FILENUMB,DIVISION,1,D1,NODE,D2,0))
+ . S SUBFILE=$G(^MAGDWLST(FILENUMB,DIVISION,1,D1,NODE,D2,1,0))
+ . I SUBFILE="" D  ; single value node
+ . . D SAVE^MAGDFCNS(TAG,$P(VALUE,"^",2,999))
+ . . Q
+ . E  S I=0 D  ; output multiple lines
+ . . F  S I=$O(^MAGDWLST(FILENUMB,DIVISION,1,D1,NODE,D2,1,I)) Q:'I  D
+ . . . S X=$G(^MAGDWLST(FILENUMB,DIVISION,1,D1,NODE,D2,1,I,0))
+ . . . S X=$TR(X,$C(13,10))_$C(13,10) ; add <CR><LF> to the end of the line
+ . . . D MULTLINE^MAGDHRC6(TAG,X)
+ . . . Q
+ . . Q
+ . Q
+ Q
+
+
+

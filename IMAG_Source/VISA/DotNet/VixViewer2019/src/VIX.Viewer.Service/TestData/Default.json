@@ -1,0 +1,322 @@
+﻿{
+    "headers": [
+        {
+            "name": "default",
+            "items": [
+                {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                },
+                {
+                    "key": "xxx-securityToken",
+                    "value": "1XWBAS1620-423141_3"
+                },
+                {
+                    "key": "xxx-fullname",
+                    "value": "RADTECH,FIFTYTWO"
+                },
+                {
+                    "key": "xxx-duz",
+                    "value": "20095"
+                },
+                {
+                    "key": "xxx-ssn",
+                    "value": "666669999"
+                },
+                {
+                    "key": "xxx-sitename",
+                    "value": "CAMP MASTER"
+                },
+                {
+                    "key": "xxx-sitenumber",
+                    "value": "500"
+                }
+            ]
+        },
+        {
+            "name": "nurse123",
+            "items": [
+                {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                },
+                {
+                    "key": "xxx-securityToken",
+                    "value": "1XWBAS1620-423141_3"
+                },
+                {
+                    "key": "xxx-fullname",
+                    "value": "NURSE,EIGHT"
+                },
+                {
+                    "key": "xxx-duz",
+                    "value": "20171"
+                },
+                {
+                    "key": "xxx-ssn",
+                    "value": "666000689"
+                },
+                {
+                    "key": "xxx-sitename",
+                    "value": "CAMP MASTER"
+                },
+                {
+                    "key": "xxx-sitenumber",
+                    "value": "500"
+                }
+            ]
+        },
+        {
+            "name": "pauling1",
+            "items": [
+                {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                },
+                {
+                    "key": "xxx-securityToken",
+                    "value": "XUSBSE304-155186_33"
+                },
+                {
+                    "key": "xxx-fullname",
+                    "value": "PENTAPATY,PAUL"
+                },
+                {
+                    "key": "xxx-duz",
+                    "value": "10000000355"
+                },
+                {
+                    "key": "xxx-ssn",
+                    "value": "666669998"
+                },
+                {
+                    "key": "xxx-sitename",
+                    "value": "CAMP MASTER"
+                },
+                {
+                    "key": "xxx-sitenumber",
+                    "value": "500"
+                }
+            ]
+        },
+        {
+            "name": "cclerk",
+            "items": [
+                {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                },
+                {
+                    "key": "xxx-securityToken",
+                    "value": "1XWBAS1620-423141_3"
+                },
+                {
+                    "key": "xxx-fullname",
+                    "value": "CLINICCLERK,EIGHT"
+                },
+                {
+                    "key": "xxx-duz",
+                    "value": "11347"
+                },
+                {
+                    "key": "xxx-ssn",
+                    "value": "666000254"
+                },
+                {
+                    "key": "xxx-sitename",
+                    "value": "CAMP MASTER"
+                },
+                {
+                    "key": "xxx-sitenumber",
+                    "value": "500"
+                }
+            ]
+        }
+
+    ],
+    "items": [
+        {
+            "title": "Patient 21 study query (Non-JLV, including DAS/DES/HAIMS)",
+            "type" : "STUDYQUERY",
+            "header": {
+                "name": "default",
+                "items": [ ]
+            },
+            "body": {
+                "imageFilter": "PAT,ENC,MUSE,DODnonDICOM",
+                "patientICN": "10121",
+                "siteNumber": "500"
+            }
+        },{
+            "title": "Patient 21 study query (JLV, excluding DAS/DES/HAIMS)",
+            "type" : "STUDYQUERY",
+            "header": {
+                "name": "default",
+                "items": [ ]
+            },
+            "body": {
+                "imageFilter": "PAT,ENC,MUSE",
+                "patientICN": "10121",
+                "siteNumber": "500"
+            }
+        },{
+            "title": "Patient 8 study query",
+            "type" : "STUDYQUERY",
+            "header": {
+                "name": "default",
+                "items": [ ]
+            },
+            "body": {
+                "patientICN": "10108",
+                "siteNumber": "500"
+            }
+        },
+        {
+            "title": "Patient 8 study query (as PAULING1)",
+            "type" : "STUDYQUERY",
+            "header": {
+                "name": "pauling1",
+                "items": [ ]
+            },
+            "body": {
+                "patientICN": "10108",
+                "siteNumber": "500"
+            }
+        },
+        {
+            "title": "Patient 21 Study Query (as NURSE123)",
+            "type" : "STUDYQUERY",
+            "header": {
+                "name": "nurse123",
+                "items": [ ]
+            },
+            "body": {
+                "patientICN": "10121",
+                "siteNumber": "500"
+            }
+        },
+        {
+            "title": "Patient 21 Study Query (as PAULING1)",
+            "type" : "STUDYQUERY",
+            "header": {
+                "name": "pauling1",
+                "items": [ ]
+            },
+            "body": {
+                "patientICN": "10121",
+                "siteNumber": "500"
+            }
+        },
+        {
+            "title": "Patient 21 Study Query (as CLINICCLERK)",
+            "type" : "STUDYQUERY",
+            "header": {
+                "name": "cclerk",
+                "items": [ ]
+            },
+            "body": {
+                "patientICN": "10121",
+                "siteNumber": "500"
+            }
+        },
+        {
+            "title": "Mammo exam with annotations",
+            "type" : "STUDYQUERY",
+            "header": {
+                "name": "default",
+                "items": [ ]
+            },
+            "body": {
+                "patientICN": "10121",
+                "siteNumber": "500",
+                "studies": [
+                    {
+                        "contextId": "RPT^CPRS^419^RA^6829273.8242-1"
+                    },
+                    {
+                        "contextId": "RPT^CPRS^419^TIU^12530"
+                    }
+                ]
+            }
+        },
+        {
+            "title": "P34 test",
+            "type" : "STUDYQUERY",
+            "header": {
+                "name": "default",
+                "items": [ ]
+            },
+            "body": {
+                "siteNumber": "500",
+                "studies": [
+                    {
+                        "patientICN": "5000002703V636083",
+                        "contextId": "RPT^CPRS^100899^TIU^12550^^^^^^^^1"
+                    },
+                    {
+                        "patientICN": "5000002744V988457",
+                        "contextId": "RPT^CPRS^101038^RA^6829173.8396-1^86"
+                    },
+                    {
+                        "patientICN": "5000002703V636083",
+                        "contextId": "RPT^CPRS^100899^TIU^12550"
+                    },
+                    {
+                        "patientICN": "5000002714V012798",
+                        "contextId": "RPT^CPRS^100915^TIU^12540"
+                    }
+                ]
+            }
+        },
+        {
+            "title": "P34 test 2",
+            "type" : "STUDYQUERY",
+            "header": {
+                "name": "default",
+                "items": [ ]
+            },
+            "body": {
+                "siteNumber": "500",
+                "studies": [
+                    {
+                        "patientICN": "5000002739V315723",
+                        "contextId": "RPT^CPRS^101039^RA^i6828991.787-1^86"
+                    },
+                    {
+                        "patientICN": "5000002730V470645",
+                        "contextId": "RPT^CPRS^100931^RA^6828991.7864-1^89"
+                    },
+                    {
+                        "patientICN": "5000001540V901486",
+                        "contextId": "RPT^CPRS^100888^RA^6828991.786-1^90"
+                    },
+                    {
+                        "patientICN": "5000002744V988457",
+                        "contextId": "RPT^CPRS^101038^RA^6829173.8396-1^86"
+                    }
+                ]
+            }
+        },
+        {
+            "title": "P34 test - Patient search 1",
+            "type": "STUDYQUERY",
+            "header": {
+                "name": "default",
+                "items": [ ]
+            },
+            "body": {
+                "patientICN": "5000002744V988457",
+                "siteNumber": "500"
+            }
+        },
+        {
+            "title": "ROI Status",
+            "type" : "ROI",
+            "header": {
+                "name": "default",
+                "items": [ ]
+            },
+            "body": {}
+        }
+    ]
+}

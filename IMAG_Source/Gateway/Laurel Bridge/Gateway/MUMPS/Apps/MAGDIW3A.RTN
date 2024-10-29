@@ -1,0 +1,274 @@
+Cache for Windows NT^INT^Saved from DICOM,DICOM (ISW-KUZMAKP3-LT)^~Format=Cache.S~
+%RO on 02/26/2013  11:23
+MAGDIW3A^INT^1^62879,40871^0
+MAGDIW3A ;WOIFO/PMK - Correct various problems with DICOM image header data ; 26 Feb 2013 11:21 AM
+ ;;3.0;IMAGING;**50,69**;MAR 19, 2002;;NOV 7, 2007
+ ;; Per VHA Directive 2004-038, this routine should not be modified.
+ ;; +---------------------------------------------------------------+
+ ;; | Property of the US Government.                                |
+ ;; | No permission to copy or redistribute this software is given. |
+ ;; | Use of unreleased versions of this software requires the user |
+ ;; | to execute a written test agreement with the VistA Imaging    |
+ ;; | Development Office of the Department of Veterans Affairs,     |
+ ;; | telephone (301) 734-0100.                                     |
+ ;; | The Food and Drug Administration classifies this software as  |
+ ;; | a medical device.  As such, it may not be changed in any way. |
+ ;; | Modifications to this software may result in an adulterated   |
+ ;; | medical device under 21CFR820, the use of which is considered |
+ ;; | to be a violation of US Federal Statutes.                     |
+ ;; +---------------------------------------------------------------+
+ ;;
+ Q
+ ; VistA stores multiframe DICOM objects as individual TGA images
+ ; Change the SOP Class from multiframe to single frame
+ ;
+ENTRY() ; entry point from ^MAGDIWB2, called after ^MAGDIW3
+ N I,ICFLAG,INODE,MODALITY,NEWSIUID,OLDSIUID,OLDSIZE,RESULT
+ N SOPCLASS,SOPNAME,SS0,TAG,X
+ ;
+ F I=1:1:3 S X(I)=$$GETDATA^MAGDFCNS("OUT","0008,0008",I)
+ S X(1)="DERIVED"
+ D REPLACE^MAGDFCNS("0008,0008",.X)
+ ;
+ ; generate a new SOP Instance UID, if one does not already exist
+ S SOPCLASS=$$GETDATA^MAGDFCNS("OUT","0008,0016")
+ S OLDSIUID=$$GETDATA^MAGDFCNS("OUT","0008,0018")
+ S NEWSIUID=$$NEXTUID^MAGDUID1()
+ ;
+ ; use RPC to get the proper value of the NEWSIUID as there may be one on file
+ S RPCERR=$$CALLRPC^MAGM2VCU("MAG NEW SOP INSTANCE UID","MT",.RESULT,OLDSIUID,NEWSIUID,IMAGE)
+ I RESULT>0 S NEWSIUID=RESULT
+ ; 
+ D REPLACE^MAGDFCNS("0008,0018",NEWSIUID)
+ ;
+ ; check for a GE lossy compressed image
+ S X=$$GETDATA^MAGDFCNS("OUT","0008,2111")
+ I X="Non-reversible compressed image: For reference only [99]" D
+ . D REPLACE^MAGDFCNS("0028,2110","01") ; Lossy Image Compression
+ . Q
+ ;
+ D REPLACE^MAGDFCNS("0008,2111","Reconstituted DICOM Image")
+ ;
+ ; store the old SOP Instance UID
+ D SEQPUSH^MAGDFCNS("0008,2112","Source Image Sequence")
+ F  Q:'$L($$GETDATA^MAGDFCNS("OUT","0008,1150"))  D
+ . ; store this data as the next available item
+ . D SEQINC^MAGDFCNS
+ . Q
+ D SAVE^MAGDFCNS("0008,1150",SOPCLASS)
+ D SAVE^MAGDFCNS("0008,1155",OLDSIUID)
+ D SEQPOP^MAGDFCNS
+ ;
+ ; figure out the modality from the SOP Class
+ S MODALITY=$$GETDATA^MAGDFCNS("OUT","0008,0060")
+ I MODALITY["," D
+ . N HIT,I,T
+ . D MODALITY(.MODALITY,SOPCLASS)
+ . D REPLACE^MAGDFCNS("0008,0060",MODALITY) ; modality
+ . Q
+ ;
+ ; check that the data from the *.TGA file matches the original *.DCM
+ ; 
+ ; all grayscale TGA images are MONOCHROME2, coerce if necessary
+ S X=$$GETDATA^MAGDFCNS("OUT","0028,0004") ; pixel interpretation
+ I X="MONOCHROME1" D REPLACE^MAGDFCNS("0028,0004","MONOCHROME2")
+ ;
+ ; If any of the below are changed, use Secondary Capture SOP Class
+ ; and set Lossy Image Compression to "01"
+ ;
+ S ICFLAG=0 ; image compression flag
+ ;
+ ; check rows
+ S X=$$GETDATA^MAGDFCNS("OUT","0028,0010") ; rows
+ I X'=ROWS D REPLACE^MAGDFCNS("0028,0010",ROWS) S ICFLAG=1
+ ;
+ ; check columns
+ S X=$$GETDATA^MAGDFCNS("OUT","0028,0011") ; columns
+ I X'=COLUMNS D REPLACE^MAGDFCNS("0028,0011",COLUMNS) S ICFLAG=1
+ ;
+ ; check bits allocated
+ S X=$$GETDATA^MAGDFCNS("OUT","0028,0100") ; bits allocated
+ I X'=(BITALLOC) D REPLACE^MAGDFCNS("0028,0100",BITALLOC) S ICFLAG=1
+ ;
+ I '$$GETDATA^MAGDFCNS("OUT","0028,0103") D  ; pixel representation UI
+ . ; check bits stored
+ . S X=$$GETDATA^MAGDFCNS("OUT","0028,0101") ; bits stored
+ . I X'=BITSTORE D REPLACE^MAGDFCNS("0028,0101",BITSTORE) S ICFLAG=1
+ . ;
+ . ; check high bit
+ . S X=$$GETDATA^MAGDFCNS("OUT","0028,0102") ; high bit
+ . I X'=(BITSTORE-1) D REPLACE^MAGDFCNS("0028,0102",BITSTORE-1) S ICFLAG=1
+ . Q
+ E  D  ; do this for 2's complement pixel representation
+ . D REPLACE^MAGDFCNS("0028,0101",BITSTORE)
+ . D REPLACE^MAGDFCNS("0028,0102",BITSTORE-1)
+ . D REPLACE^MAGDFCNS("0028,0103",0) ; Unsigned Integer
+ . D KILLTAGS
+ . Q
+ ;
+ I ICFLAG D  ; image compression occurred
+ . D SCIMAGE ; change SOP class to Secondary Capture
+ . D REPLACE^MAGDFCNS("0028,2110","01") ; Lossy Image Compression
+ . Q
+ ;
+ ; check size of image
+ S TAG="7FE0,0010",X=$$GETDATA^MAGDFCNS("OUT",TAG,1,2)
+ S OLDSIZE=+$P(X,"=",2)
+ I OLDSIZE'=IMAGESIZ D
+ . D KILL^MAGDFCNS(TAG)
+ . S INODE="OUT",SS0=TAG
+ . D INTVALUE^MAGDDR3
+ . D SETVALUE^MAGDDR3("<image>")
+ . D SETVALUE^MAGDDR3("length="_IMAGESIZ_" (0x????)")
+ . D SETVALUE^MAGDDR3("offset=???? (0x????))")
+ . Q
+ ;
+ ; Special processing for certain SOP Classes
+ ; 
+ S SOPNAME=$$GETNAME^MAGDUID2(SOPCLASS)
+ ;
+ I SOPNAME="CT Image Storage",MODALITY="CT" D
+ . D CT
+ . Q
+ E  I SOPNAME="Ultrasound Image Storage (Retired)" D
+ . D US
+ . Q
+ E  I SOPNAME="Ultrasound Image Storage" D
+ . D US
+ . Q
+ E  I SOPNAME="Ultrasound Multi-frame Image Storage (Retired)" D
+ . D US
+ . Q
+ E  I SOPNAME="Ultrasound Multi-frame Image Storage" D
+ . D US
+ . Q
+ E  I SOPNAME="X-Ray Radiofluoroscopic Image Storage" D
+ . D FLUORO
+ . Q
+ E  I SOPNAME="X-Ray Angiographic Image Storage" D
+ . D FLUORO
+ . Q
+ E  I SOPNAME="Nuclear Medicine Image Storage" D
+ . D NUCMED
+ . Q
+ E  I SOPNAME="Nuclear Medicine Image Storage (Retired)" D
+ . D NUCMED
+ . Q
+ ;
+ Q ""
+ ;
+CT ; special processing for CT images
+ N INTERCPT,SHIFT,SLOPE
+ D KILLTAGS
+ ;
+ D REPLACE^MAGDFCNS("0028,2110","01") ; Lossy Image Compression
+ ;
+ ; Hounsfield Units are calculated from the following formula:
+ ; HU = (m * SV) + b,
+ ; where HU = Hounsfield Units,
+ ; m = slope -- Rescale Slope (0028,1053)
+ ; SV = stored value, and
+ ; b = intercept -- Rescale Intercept (0028,1052)
+ ; 
+ ; Recalculate Rescale Intercept taking into account the arithmeric shift
+ ;
+ S SLOPE=$G(^TMP("MAG",$J,"DICOM","DATA1 BLOCK","RESCALE_SLOPE"))
+ S INTERCPT=$G(^TMP("MAG",$J,"DICOM","DATA1 BLOCK","RESCALE_INTERCEPT"))
+ S SHIFT=$$GETSHIFT^MAGDIW3B()
+ I (SLOPE'=1)!(INTERCPT="")!(SHIFT="NO DATA") D
+ . ; force secondary capture with default window/level & no slope/intercept
+ . N WCENTER,WWIDTH
+ . D SCIMAGE ; change SOP class to Secondary Capture
+ . S BITSTORE=$$GETDATA^MAGDFCNS("OUT","0028,0101") ; bits stored
+ . S WWIDTH=2**BITSTORE,WCENTER=WWIDTH/2
+ . D REPLACE^MAGDFCNS("0028,1050",WCENTER) ; Window Center
+ . D REPLACE^MAGDFCNS("0028,1051",WWIDTH) ; Window Width
+ . D KILL^MAGDFCNS("0028,1052") ; Rescale Intercept
+ . D KILL^MAGDFCNS("0028,1053") ; Rescale Slope
+ . Q
+ E  D  ; calculate new interecpt
+ . S INTERCPT=INTERCPT-SHIFT
+ . D REPLACE^MAGDFCNS("0028,1052",INTERCPT) ; Rescale Intercept
+ . Q
+ Q
+ ;
+KILLTAGS ; remove possibly incorrect Type 3 elements
+ D KILL^MAGDFCNS("0028,0104") ; Smallest Valid Pixel Value
+ D KILL^MAGDFCNS("0028,0105") ; Largest Valid Pixel Value
+ D KILL^MAGDFCNS("0028,0106") ; Smallest Image Pixel Value
+ D KILL^MAGDFCNS("0028,0107") ; Largest Image Pixel Value
+ D KILL^MAGDFCNS("0028,0120") ; Pixel Padding Value
+ Q
+ ;
+US ; Ultrasound - coerce the SOP Class & delete multiframe stuff
+ N PHOTOINT
+ D CLEANUP
+ S PHOTOINT=$$GETDATA^MAGDFCNS("OUT","0028,0004") ; photo intrepretation
+ I PHOTOINT="RGB" D  ; make monochrome2
+ . D REPLACE^MAGDFCNS("0028,0002",1) ; samples per pixel
+ . D REPLACE^MAGDFCNS("0028,0004","MONOCHROME2") ; photo intrepretation
+ . D KILL^MAGDFCNS("0028,0006") ; planar configurtion
+ . D REPLACE^MAGDFCNS("0028,0014",0) ; ultrasound color data present
+ . D REPLACE^MAGDFCNS("0028,2110","01") ; Lossy Image Compression
+ . D SCIMAGE ; change SOP class to Secondary Capture
+ . Q
+ Q
+ ;
+FLUORO ; Digital Radio Fluoro -- delete multiframe stuff
+ D CLEANUP ; don't change SOP class to Secondary Capture
+ Q
+ ;
+NUCMED ; Nuclear Medicine -- delete multiframe stuff
+ D CLEANUP
+ D SCIMAGE ; change SOP class to Secondary Capture
+ Q
+ ;
+CLEANUP ; remove cine and multi-frame elements, fix SOP classes
+ N SOPCLASS
+ ; PS 3.3 C.7.6.5 Cine Module
+ D KILL^MAGDFCNS("0018,1244") ; Preferred Playback Sequencing
+ D KILL^MAGDFCNS("0018,1063") ; Frame Time
+ D KILL^MAGDFCNS("0018,1065") ; Frame Time Vector
+ D KILL^MAGDFCNS("0008,2142") ; Start Trim
+ D KILL^MAGDFCNS("0008,2143") ; Stop Trim
+ D KILL^MAGDFCNS("0008,2144") ; Recommended Display Frame Rate
+ D KILL^MAGDFCNS("0018,0040") ; Cine Rate
+ D KILL^MAGDFCNS("0018,1066") ; Frame Delay
+ D KILL^MAGDFCNS("0018,0072") ; Effective Series Duration
+ D KILL^MAGDFCNS("0018,1242") ; Actual Frame Duration
+ ; PS 3.3 C.7.6.6 Multi-Frame Module
+ D KILL^MAGDFCNS("0028,0008") ; Number of Frames
+ D KILL^MAGDFCNS("0028,0009") ; Frame Increment Pointer
+ ; PS 3.3 C.7.6.9 Frame Pointers Module
+ D KILL^MAGDFCNS("0028,6010") ; Representative Frame Number
+ D KILL^MAGDFCNS("0028,6020") ; Frame Number(s) Of Interest (FOI)
+ D KILL^MAGDFCNS("0028,6022") ; Frame Of Interest Description
+ ;
+ Q
+ ;
+SCIMAGE ; change SOP class to Secondary Capture
+ N SOPNAME
+ S SOPNAME="Secondary Capture Image Storage"
+ D REPLACE^MAGDFCNS("0008,0016",$$GETUID^MAGDUID1(SOPNAME))
+ Q
+ ;
+MODALITY(MODALITY,SOPCLASS) ; figure out the modality from the SOP Class
+ N HIT,I,T
+ S SOPNAME=$$GETNAME^MAGDUID2(SOPCLASS)
+ S HIT=0 F I=1:1:3 D  Q:HIT  ; detemine the modality by SOP Class
+ . S T=$T(SOPNAME+I)
+ . I SOPNAME=$P(T,";",3) S MODALITY=$P(T,";",4),HIT=1
+ . Q
+ I 'HIT  D  ; select the first modality in the list
+ . S MODALITY=$P(MODALITY,",",1)
+ . Q
+ Q
+ ;
+SOPNAME ; list of SOP Classes and corresponding modalities
+ ;;Computed Radiography Image Storage;CR
+ ;;Digital X-Ray Image Storage - For Presentation;DX
+ ;;X-Ray Radiofluoroscopic Image Storage;RF
+ ;;
+
+
+

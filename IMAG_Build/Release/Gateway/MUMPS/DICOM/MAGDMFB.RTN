@@ -1,0 +1,188 @@
+MAGDMFB ;WOIFO/PMK - Build all of the DICOM Master Files ; 05 May 2008 12:30 PM
+ ;;3.0;IMAGING;**9,21,11,30,50,69,53**;Mar 19, 2002;Build 1715;Apr 22, 2010
+ ;; Per VHA Directive 2004-038, this routine should not be modified.
+ ;; +---------------------------------------------------------------+
+ ;; | Property of the US Government.                                |
+ ;; | No permission to copy or redistribute this software is given. |
+ ;; | Use of unreleased versions of this software requires the user |
+ ;; | to execute a written test agreement with the VistA Imaging    |
+ ;; | Development Office of the Department of Veterans Affairs,     |
+ ;; | telephone (301) 734-0100.                                     |
+ ;; | The Food and Drug Administration classifies this software as  |
+ ;; | a medical device.  As such, it may not be changed in any way. |
+ ;; | Modifications to this software may result in an adulterated   |
+ ;; | medical device under 21CFR820, the use of which is considered |
+ ;; | to be a violation of US Federal Statutes.                     |
+ ;; +---------------------------------------------------------------+
+ ;;
+ Q
+ ;
+SHIELD ; To be called from InstallShield, run in background
+ N D0,D1,DTIME,FATAL,FBSWITCH,FILE,OK,SHERR,SHLVL,SILENT,STS,VALLOC,X
+ S SILENT=1,FBSWITCH="BACKGROUND",FATAL=0
+ S $ET="D SHERR1^"_$T(+0),SHLVL=$ST+1
+ D  ; Set up credentials to use MUMPS-to-MUMPS Broker
+ . N A,V,X
+ . S A=$G(^MAGDICOM(2006.563,1,"M-to-M BROKER BGND ACCESS"))
+ . S V=$G(^MAGDICOM(2006.563,1,"M-to-M BROKER BGND VERIFY"))
+ . S X=$$DECRYP^MAGM2VCU(A)_";"_$$DECRYP^MAGM2VCU(V)
+ . S ^TMP("MAG",$J,"DICOM RPC USER")="666^1^"_$$ENCRYPT^MAGM2VCU(X)
+ . Q
+ D ALL
+ G SHEXIT
+ ;
+SHERR1 ;
+ S SHERR=$EC_" = "_$ZE
+ S $ET="D SHERR2^"_$T(+0),$EC="",FATAL=$G(FATAL)+1
+ S $EC=",U13-unwind stack,"
+ Q
+ ;
+SHERR2 ;
+ I '$G(SHLVL) S $EC="" G SHEXIT
+ Q:$ST>SHLVL
+ S $EC="",$ET=""
+ G SHEXIT
+ ;
+SHEXIT ; Produce report
+ S FILE=$$ENVIRON^MAGOSDIR("TEMP") S:$E(FILE,$L(FILE))'="\" FILE=FILE_"\"
+ S FILE=FILE_"MAG_Import_Master.log"
+ S STS=$$OPEN^MAGOSFIL(FILE,"W") Q:STS<0
+ S STS=$$USE^MAGOSFIL(FILE) W FATAL_" error" W:FATAL'=1 "s" W !
+ W:$G(SHERR)'="" SHERR,!
+ W !
+ S D0=$O(^MAGDMLOG("B",$J,""))
+ I 'D0 W "... no installation log found...",!
+ E  S D1=0 F  S D1=$O(^MAGDMLOG(D0,1,D1)) Q:'D1  W $G(^MAGDMLOG(D0,1,D1,0)),!
+ W !!
+ S STS=$$CLOSE^MAGOSFIL(FILE)
+ Q
+ ;
+SILENT ; Update All Master Files
+ N DTIME,FATAL,FBSWITCH,OK,SILENT,VALLOC,X ; defined only for this invocation
+ S SILENT=1,FBSWITCH="FOREGROUND",DTIME=100000
+ D ASK Q:"Yy"'[$E(X,1)
+ D ALL
+ I FATAL W !,FATAL," error" W:FATAL'=1 "s" W " encountered while building Master Files.",!! Q
+ W !!,"-- DICOM Master File Build completed successfully --",!!
+ Q
+ ;
+ASK F  D  Q:X'=""
+ . W !!,"Ready to build all of the DICOM Master Files?  YES// "
+ . R X:DTIME E  S X="^"
+ . I X="" S X="yes" W X
+ . I X["?" D  S X="" Q
+ . . W !!,"Enter 'Yes' if you wish to (re)build all the DICOM"
+ . . W !,"Master Files; otherwise enter 'No'."
+ . . Q
+ . Q
+ Q
+ ;
+ALL S FBSWITCH=$G(FBSWITCH,"FOREGROUND"),FATAL=0
+ D NEWLOG^MAGDMLOG("Import All Master Files")
+ D ELEMENTS^MAGDMFB2 ; ^MAGDICOM(2006.51)   - DICOM Elements
+ D TEMPLATE^MAGDMFB3 ; ^MAGDICOM(2006.52)   - Templates
+ D UID^MAGDMFB5 ;      ^MAGDICOM(2006.53)   - UIDs
+ D SOP^MAGDMFB6 ;      ^MAGDICOM(2006.531)  - Extended SOP negotiation
+ D PDU^MAGDMFB6 ;      ^MAGDICOM(2006.54)   - PDU/PDV mnemonics
+ D HL7^MAGDMFB7 ;      ^MAGDICOM(2006.57)   - HL/7 segments and fields
+ D INSTRUMT^MAGDMFBI ; ^MAGDICOM(2006.581)  - Instruments
+ D MODALITY^MAGDMFBM ; ^MAGDICOM(2006.582)  - Modalities
+ D CT^MAGDMFB7 ;       ^MAGDICOM(2006.5821) - CT Conversion History
+ D WORKLIST^MAGDMFBW ; ^MAGDICOM(2006.583)  - WorkList Users
+ D PORTLIST^MAGDMFBP ; ^MAGDICOM(2006.584)  - TCP/IP Ports (Applications)
+ D USERAPPS^MAGDMFBS ; ^MAGDICOM(2006.585)  - User Applications
+ D PROVIDER^MAGDMFB9 ; ^MAGDICOM(2006.586)  - Provider Applications
+ D AETITLE^MAGDMFBT ;  ^MAGDICOM(2006.588)  - Application Entity Title
+ D XFER^MAGDMFBA ;     ^MAGDICOM(2006.511)  - DICOM image data transfer
+ Q
+ ;
+GETPLACE() ; Get internal entry number of current "LOCATION"
+ N INFO,LOCATION,RPCERR
+ S LOCATION=^MAGDICOM(2006.563,1,"LOCATION")
+ S RPCERR=$$CALLRPC^MAGM2VCU("MAG DICOM GET PLACE","M",.INFO,LOCATION)
+ Q $S(RPCERR<0:RPCERR,1:INFO)
+ ;
+LOCATION(PROMPT,HELP,DEFAULT) ; select a location from the site parameter file
+ ; the value returned is the pointer to ^DIC(4)
+ ; return 0 if no entry is selected
+ ; return -1 if there is an error
+ ;
+ ; Expect array VALLOC (valid locations) to be pre-defined
+ ; (most likely) at label ALL in this routine:
+ ;     VALLOC(i) = ien ^ name ^ station
+ ;
+ N I,IEN,LIST,LOCATION,N,RETURN,STATION,X
+ S (I,N)=0 F  S I=$O(VALLOC(I)) Q:'I  D
+ . S X=VALLOC(I) Q:X'["^"
+ . S LOCATION=$P(X,"^",1) Q:LOCATION=""
+ . S N=N+1,LIST(N)=VALLOC(I)
+ . Q
+ ;
+ I N<1 Q "-2,Imaging Site Parameters not set up properly"
+ I N=1 Q +LIST(1) ; only one location
+ ;
+ S:$G(DEFAULT)="" DEFAULT=$G(^MAGDICOM(2006.563,1,"LOCATION"))
+ S RETURN=-1 F  D  Q:RETURN'<0
+ . W !!,PROMPT," "
+ . F I=1:1:N D  Q:RETURN'<0
+ . . W !?10,$J(I,2),": ",$P(LIST(I),"^",1)," (",$P(LIST(I),"^",2),")"
+ . . Q:I#10  Q:I=N
+ . . W !,"Enter a number between 1 and ",I," (",N-I," more to be shown): "
+ . . R X:DTIME E  S X="^"
+ . . I X["?" D HELP Q
+ . . S:X["^" RETURN=0 Q:'X
+ . . I X'>I,$G(LIST(X)) S RETURN=+LIST(X) Q
+ . . D HELP
+ . . Q
+ . Q:RETURN'<0
+ . W !,"Enter a number between 1 and ",N,": " R X:DTIME E  S X="^"
+ . I X["^" S RETURN=0 Q
+ . I X="",$G(DEFAULT)'="" S RETURN=DEFAULT W DEFAULT Q
+ . Q:X=""
+ . I $G(LIST(X)) S RETURN=+LIST(X) Q
+ . D HELP
+ . Q
+ Q RETURN
+ ;
+HELP N I
+ W !
+ I $D(HELP)<10 W !,$G(HELP,"No help message available"),! Q
+ S I="" F  S I=$O(HELP(I)) Q:I=""  W !,HELP(I)
+ W !
+ Q
+ ;
+INIT(FM,NAME,FILNAM) ; Initialize variables for Master File Build
+ N FILE,PATH,STATUS
+ S DTIME=$G(DTIME,100000),FATAL=+$G(FATAL)
+ S FBSWITCH=$G(FBSWITCH,"FOREGROUND"),SILENT=+$G(SILENT)
+ ;
+ D MESSAGE^MAGDMLOG(2,0,"Import Master File with """_NAME_""" definitions.","t")
+ S PATH=$G(^MAGDICOM(2006.563,1,"DICT PATH"))
+ I PATH="" D  Q ""
+ . D MESSAGE^MAGDMLOG(1,0,"Run menu option 4-2-2 to set the dictionary path","t")
+ . S FATAL=FATAL+1
+ . Q
+ S FILE=PATH_"\"_FILNAM S:FILNAM'["." FILE=FILE_".dic"
+ D MESSAGE^MAGDMLOG(1,0,"from file """_FILE_""".","t")
+ ;
+ S STATUS=$$GETDIR^MAGOSDIR(FILE)
+ I STATUS<1 D  Q ""
+ . D MESSAGE^MAGDMLOG(1,0,"Cannot Open File """_FILE_""".","t")
+ . D:+STATUS'=STATUS MESSAGE^MAGDMLOG(1,0,STATUS,"t")
+ . S FATAL=FATAL+1
+ . Q
+ ;
+ I FBSWITCH="FOREGROUND" D  Q:"Yy"'[$E(X,1) ""
+ . I $$USEPRIN^MAGOSFIL(1)
+ . W !!,"Building the "_NAME_" Dictionary -- ^MAGDICOM(",FM,")"
+ . W !,"Ready to read dictionary file """,FILE,"""?  y// " R X:DTIME
+ . S:'$T X="N"
+ . I X="" S X="yes" W X
+ . I X["?" D  S X="" Q
+ . . W !!,"Please answer 'YES' to re-build the table that"
+ . . W !,"contains the ",NAME," Definitions."
+ . . W !,"Answer 'No' to skip from this definitions file."
+ . . Q
+ . Q
+ Q FILE
+ ;

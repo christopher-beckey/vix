@@ -1,0 +1,77 @@
+MAGDIR6A ;WOIFO/PMK - Read a DICOM image file ; 25 Jan 2008 8:07 AM
+ ;;3.0;IMAGING;**11,51,53**;Mar 19, 2002;Build 1715;Apr 22, 2010
+ ;; Per VHA Directive 2004-038, this routine should not be modified.
+ ;; +---------------------------------------------------------------+
+ ;; | Property of the US Government.                                |
+ ;; | No permission to copy or redistribute this software is given. |
+ ;; | Use of unreleased versions of this software requires the user |
+ ;; | to execute a written test agreement with the VistA Imaging    |
+ ;; | Development Office of the Department of Veterans Affairs,     |
+ ;; | telephone (301) 734-0100.                                     |
+ ;; | The Food and Drug Administration classifies this software as  |
+ ;; | a medical device.  As such, it may not be changed in any way. |
+ ;; | Modifications to this software may result in an adulterated   |
+ ;; | medical device under 21CFR820, the use of which is considered |
+ ;; | to be a violation of US Federal Statutes.                     |
+ ;; +---------------------------------------------------------------+
+ ;;
+ ;
+ ; M2MB client
+ ;
+ ; Get the next image to be processed, either a new one or a corrected
+ ; one.  If the later, build the NEW array with the "correct" values.
+ ;
+NEWIMAGE ; check to see if there is a new image, and process it
+ S IMAGMODE="NEW IMAGE" ; used in ^MAGDIR6C and ^MAGDIR71
+ S X=$G(^MAGDINPT(2006.571,NEXTIEN,0))
+ I X="" W !,"Waiting for ^MAGDINPT #",NEXTIEN," to be completed" H 1 Q
+ S FROMPATH=$P(X,"^"),INSTNAME=$P(X,"^",2),COMPLETE=$P(X,"^",3)
+ S ORIGINDX=$P(X,"^",4),MEDIA=$P(X,"^",5),OLDPATH=$P(X,"^",6)
+ S OUTSIDE=$S($P(X,"^",4,6)="^^":0,1:1) ; outside DICOM object flag
+ I 'COMPLETE D  S WAIT=WAIT+1 Q
+ . I 'WAIT W !,"Waiting for file ",FROMPATH," to be completed" H 1 Q
+ . D IDLE^MAGDBB(.TICKER,1)
+ . ; wait time (5 min) might need to be site & modality configurable
+ . I WAIT>300 D  ; allow 5 minutes before checking the next image
+ . . I $D(^MAGDINPT(2006.571,NEXTIEN+1,0)) D  ; next image file exists
+ . . . I $D(^MAGDINPT(2006.571,NEXTIEN,0)) D
+ . . . . D NOTDONE^MAGDIR6E ; save the incomplete study for later
+ . . . . Q
+ . . . ; update the counter, but don't delete the entry
+ . . . S ^MAGDINPT(2006.571,"ACOUNT")=NEXTIEN
+ . . . Q
+ . . Q
+ . Q
+ S WAIT=0
+ D ENTRY^MAGDIR6C
+ I UPCOUNT D UPCOUNT^MAGDIR6(2006.571,NEXTIEN)
+ Q
+ ;
+FIXIMAGE ; get an image from DICOM CORRECT and process it
+ S IMAGMODE="CORRECTED IMAGE" ; used in ^MAGDIR6C and ^MAGDIR71
+ S X=$G(^MAGDINPT(2006.5712,NEXTFIX,0))
+ S NEW("STATUS")=$P(X,"^",1) ; FIXED or DELETE
+ S NEW("IMAGEIEN")=$P(X,"^",2),NEW("STUDYIEN")=$P(X,"^",3)
+ S DELTYPE=$P(X,"^",4),INSTNAME=$P(X,"^",5),FROMPATH=$P(X,"^",6)
+ S STUDYUID=$P(X,"^",7),NEW("NAME")=$P(X,"^",8)
+ S NEW("PID")=$P(X,"^",9),NEW("ACNUMB")=$P(X,"^",10)
+ S (ORIGINDX,MEDIA,OLDPATH,OUTSIDE)="" ; not used for DICOM Correct
+ I DELTYPE="STUDY" D
+ . D CORRECT^MAGDIR71 ; request study deletion from ^MAGD(2006.575)
+ . D UPCOUNT^MAGDIR6(2006.5712,NEXTFIX)
+ . Q
+ E  I NEW("STATUS")="FIXED" D  ; process a real image entry
+ . S COMPLETE=3 ; needed to skip ACQUIRED counting
+ . D ENTRY^MAGDIR6C
+ . I UPCOUNT D UPCOUNT^MAGDIR6(2006.5712,NEXTFIX)
+ . Q
+ E  I NEW("STATUS")="DELETE" D
+ . S IMAGEPTR=-1
+ . D POSTPROC^MAGDIR71
+ . D UPCOUNT^MAGDIR6(2006.5712,NEXTFIX)
+ . Q
+ E  D
+ . W !,"Unknown CORRECT Status: """,NEW("STATUS"),""""
+ . W !,X,!
+ . Q
+ Q

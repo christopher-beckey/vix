@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="CleanUp" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+	<Import Project="C:\Program Files\MSBuild\ExtensionPack\4.0\MSBuild.ExtensionPack.tasks"/> 
+	<Import Project="$(MSBuildExtensionsPath)\MSBuildCommunityTasks\MSBuild.Community.Tasks.Targets"/>
+	<PropertyGroup>
+		<MSBuild>C:\WINDOWS\Microsoft.NET\Framework\v4.0.30319\msbuild.exe</MSBuild>
+		<VSHome>C:\Program Files\Microsoft Visual Studio 8\SDK\v2.0\Bin\</VSHome>
+		<VerisignHome>C:\Program Files\Verisign\</VerisignHome>
+		<AccusoftHome>C:\Program Files\AccuSoft\</AccusoftHome>
+		<PatchName>Version 3.0 Patch 124 - AWIV Independent of VistA Web</PatchName>
+		<TF>"C:\Program Files\Microsoft Visual Studio 10.0\Common7\IDE\tf.exe"</TF>		
+		<DiffUtilDir>C:\Program Files\GnuWin32\bin</DiffUtilDir>			
+		<P72LibHome>C:\dev\P72 Lib</P72LibHome>
+		<CCSnapshotDir>E:\CC1\IMAG_bld</CCSnapshotDir>			
+		<BaseReleaseDir>E:\ReleaseFromClu4</BaseReleaseDir>
+		<PackageCodeInclude>false</PackageCodeInclude>
+		<P106LibAccusoftHome>C:\DevD2007\P106Lib</P106LibAccusoftHome>
+		<BDSCommonDir>C:\Documents and Settings\All Users\Documents\RAD Studio\5.0</BDSCommonDir>
+		<TFSSourceLocation>$/VistA_Imaging/LegacyVSS/Vix/VistAImaging/Version 3.0 Patch 124 - AWIV Independent of VistA Web</TFSSourceLocation>	
+		<TFSWorkspaceDir>C:\TFS\VistA_Imaging\LegacyVSS\Vix\VistAImaging\Version 3.0 Patch 124 - AWIV Independent of VistA Web</TFSWorkspaceDir>			
+		<ConfigurationDir>..\..\..\..\</ConfigurationDir>		
+		<VixVistaImagingDir>..\..\..\..\..\..\LegacyVSS\Vix\VistAImaging\</VixVistaImagingDir>		
+	</PropertyGroup>
+	<Import Project="$(ConfigurationDir)\Builds\build.VistAImaging.targets"/>	
+	<Import Project="$(VixVistaImagingDir)$(PatchName)\build.AWIV.prop"/>
+	<ItemGroup>
+		<ResVerEditorDirectory Include="$(MSBuildProjectDirectory)\..\..\..\..\ResVerEditor" />
+		<ReleaseToCopy Include="$(BaseReleaseDir)\**\*.*" />
+		<P72Lib Include="$(P72LibHome)\**\*.*" />
+		<P106LibAccusoft Include="$(P106LibAccusoftHome)\LIB\Accusoft16.2\**\*.*" />
+	</ItemGroup>
+	
+	<!-- ====== Update TFS source code to use to compare with ClearCase code =======   -->
+	<Target Name="UpdateTFS" >	
+		<Exec Command='$(TF) get "$(TFSSourceLocation)" /recursive /version:T /noprompt /login:harris-hc-lab\$(TFSusername),$(TFSPassword)' WorkingDirectory="$(TFSWorkspaceDir)" Condition="'$(UpdateTFS)'!='false'" />	
+	</Target>		
+	
+	<Target Name="UpdateClearCase" DependsOnTargets="UpdateTFS">
+		<Exec Command='"ClearTool.exe" update -force $(CCSnapshotDir)\Configuration\NonVisaConfig' ContinueOnError="false"/>
+		<Exec Command='"ClearTool.exe" update -force "$(CCSnapshotDir)\LegacyVSS\Vix\VistAImaging\$(PatchName)"' ContinueOnError="false"/>
+	</Target>
+	
+	<!-- =============== Delete previous build (if build folder exists) ================== -->
+	<Target Name="CleanPreviousBuild" DependsOnTargets="UpdateClearCase" >
+		<RemoveDir Directories="$(FullBuildPath)" />
+		<RemoveDir Directories="$(ReleaseDir)" />
+	</Target>
+		
+	<!-- =============== Create build ouput directories ================================== -->
+	<Target Name="CreateDirectories" DependsOnTargets="CleanPreviousBuild" >
+		<MakeDir directories="$(RootDir)" />
+		<MakeDir directories="$(RootDir)$(ProjectName)"  />
+		<MakeDir directories="$(FullBuildPath)$(TempFolder)" />
+		<MakeDir directories="$(FullBuildPath)$(TempFolder)\P$(PatchNumber)\AWIV" />
+		<MakeDir directories="$(FullBuildPath)$(TempFolder)\P$(PatchNumber)\AWIV\dcu" />	
+		<MakeDir directories="$(FullBuildPath)$(TempFolder)\P$(PatchNumber)\Crypto" />	
+		<MakeDir directories="$(FullBuildPath)$(TempFolder)\P$(PatchNumber)\Release" />
+	</Target>
+
+	<!-- ======  Compare TFS and CC code and write to a text file which files differ ===== --> 
+	<Target Name="TFS_CC_Diff" DependsOnTargets="CreateDirectories" >	
+		<Exec Command='"$(DiffUtilDir)\diff.exe" -i -w -r -q "$(TFSWorkspaceDir)" "$(CCSnapshotDir)\LegacyVSS\Vix\VistAImaging\Version 3.0 Patch 124 - AWIV Independent of VistA Web" > "$(FullBuildPath)\MAG3_0P$(PatchNumber)T$(TestNumber)AWIV_Diff_Rpt.txt"' IgnoreExitCode="true" Condition="'$(TFSCCDiff)'!='false'" />
+	</Target>	
+	
+	<!-- ================== Copy files from source control over to build output directory ====================================================== -->
+	<Target Name="CopyFiles"  DependsOnTargets="TFS_CC_Diff" >
+		<Copy SourceFiles="@(ReleaseToCopy)" DestinationFiles="@(ReleaseToCopy->'$(ReleaseDir)\%(RecursiveDir)%(Filename)%(Extension)')" />
+		<Copy SourceFiles="@(Source)" DestinationFiles="@(Source->'$(FullBuildPath)$(TempFolder)\P$(PatchNumber)\%(ParentFolder)\%(RecursiveDir)%(Filename)%(Extension)')" />
+		<Copy SourceFiles="$(ISM)" DestinationFolder="$(FullBuildPath)$(TempFolder)\P$(PatchNumber)" />
+		<Copy SourceFiles="@(P106LibAccusoft)" DestinationFiles="@(P106LibAccusoft->'$(FullBuildPath)$(TempFolder)\P106Lib\LIB\Accusoft16.2\%(RecursiveDir)%(Filename)%(Extension)')" />
+		<Copy SourceFiles="@(P72Lib)" DestinationFiles="@(P72Lib->'$(FullBuildPath)$(TempFolder)\P72 Lib\%(RecursiveDir)%(Filename)%(Extension)')" />
+	</Target>
+	
+	<Target Name="UpdateVersion" DependsOnTargets="CopyFiles" Outputs="%(DelphiFiles.Filename)">
+		<PropertyGroup>	
+			<ResDir>%(ResVerEditorDirectory.FullPath)</ResDir>
+		</PropertyGroup>
+		<message text="Updating File Version number for : %(DelphiFiles.Resource)" Importance="High"/>
+		<message text="path: %(DelphiFiles.Identity)" />
+		<Exec Condition="'%(DelphiFiles.Compiler)'=='MSBuild'" Command='"$(ResDir)\ResVerEditor.exe" -u %(DelphiFiles.Resource) $(BaseVersion).$(TestNumber)' WorkingDirectory="%(DelphiFiles.RelativeDir)" ContinueOnError="false" />
+	</Target>
+	
+	<!-- ================== Compile Delphi projects ================================================== -->
+	<Target Name="Compile" DependsOnTargets="UpdateVersion" >	
+		<message text="DelphiFiles path: %(DelphiFiles.RelativeDir)" Importance="High"/>
+		<MSBuild Projects="%(DelphiFiles.Identity)"
+			Condition="'%(DelphiFiles.Compiler)'=='MSBuild' AND '%(DelphiFiles.ProjectOverride)'=='true'"
+			Targets="%(DelphiFiles.Options)" 
+			Properties="Configuration=%(DelphiFiles.Configuration);
+						DCC_ExeOutput=%(DelphiFiles.DCC_ExeOutput);
+						DCC_DcuOutput=%(DelphiFiles.DCC_DcuOutput);
+						DCC_ObjOutput=%(DelphiFiles.DCC_ObjOutput);
+						DCC_HppOutput=%(DelphiFiles.DCC_HppOutput);
+						DCC_UnitSearchPath=%(DelphiFiles.DCC_UnitSearchPath);
+						DCC_ResourcePath=%(DelphiFiles.DCC_ResourcePath);
+						DCC_ObjPath=%(DelphiFiles.DCC_ObjPath);
+						DCC_IncludePath=%(DelphiFiles.DCC_IncludePath);
+						DCC_Define=%(DelphiFiles.DCC_Define)" /> 
+	</Target>
+	
+	<Target Name="SignCode" DependsOnTargets="Compile" >
+		<message text="Performing code signing of: MagAWIV.ocx" />
+		<Exec Command='"$(VSHome)signtool.exe" sign /f "$(VerisignHome)VI_Verisign.pfx" /p Boating1. MagAWIV.ocx' WorkingDirectory="$(FullBuildPath)$(TempFolder)\p$(PatchNumber)\AWIV" ContinueOnError="false" />
+	</Target>
+	
+	<Target Name="CopyArtifacts"  DependsOnTargets="SignCode" >
+		<ItemGroup>
+			<CompiledSource Include="$(FullBuildPath)$(TempFolder)\P$(PatchNumber)\AWIV\MagAWIV.ocx" />
+		</ItemGroup>
+		<Copy SourceFiles="@(CompiledSource)" DestinationFolder="$(ReleaseDir)" />
+	</Target>	
+
+	<!-- ===============Generate Product and Package code for InstallShield ========================== -->	
+	<Target Name="UpdateISM" DependsOnTargets="CopyArtifacts" >
+		<CallTarget Targets="GenerateProductCode" Condition="'$(ProductCodeInclude)'!='false'" />
+		<CallTarget Targets="GeneratePackageCode" Condition="'$(PackageCodeInclude)'!='false'" />
+	</Target>
+	
+	<Target Name="BuildRelease" DependsOnTargets="UpdateISM" >
+		<CallTarget Targets="CreateInstaller" />
+	</Target>	
+
+	<!-- ================== Copy exe and msi to final build output folder  ====================================================== -->
+	<Target Name="Publish" DependsOnTargets="BuildRelease" >
+		<Copy SourceFiles="$(FullBuildPath)$(TempFolder)\p$(PatchNumber)\$(ProductConfiguration)\MagInstall-exe\DiskImages\DISK1\setup.exe" DestinationFiles="$(FullBuildPath)\VistA Imaging AWIV.exe"  Condition="'$(CreateExe)'!='False'"/>	 
+		<Copy SourceFiles="$(FullBuildPath)$(TempFolder)\p$(PatchNumber)\$(ProductConfiguration)\MagInstall-msi\DiskImages\DISK1\VistA Imaging AWIV.msi" DestinationFiles="$(FullBuildPath)\VistA Imaging AWIV.msi" Condition="'$(CreateMsi)'!='False'"/>	
+	</Target>	
+	
+	<!-- ================== Remove build artifacts  ====================================================== -->
+	<Target Name="CleanUp" DependsOnTargets="Publish" Condition="'$(BuildAWIV)'!='false'">
+		<RemoveDir Directories="$(FullBuildPath)$(TempFolder)" Condition="'$(TempDelete)'=='true'" ContinueOnError="true"/>
+	</Target>
+</Project>
+	
+	

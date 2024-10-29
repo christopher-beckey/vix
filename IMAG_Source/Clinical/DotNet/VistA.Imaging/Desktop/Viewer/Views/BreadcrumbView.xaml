@@ -1,0 +1,27 @@
+﻿<base:BreadcrumbViewBase x:Class="VistA.Imaging.Viewer.Views.BreadcrumbView"
+                         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+                         xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+                         xmlns:base="clr-namespace:VistA.Imaging.Viewer.Views.Bases"
+                         mc:Ignorable="d" 
+                         d:DesignHeight="25" d:DesignWidth="400">
+
+    <Grid x:Name="LayoutRoot" Background="White">
+        <ItemsControl ItemsSource="{Binding Source=Trail}">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <StackPanel Orientation="Horizontal"/>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock x:Name="separatorTextBlock" Text=">"/>
+                        <Button Content="{Binding Source=.}" />
+                    </StackPanel>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+    </Grid>
+</base:BreadcrumbViewBase>

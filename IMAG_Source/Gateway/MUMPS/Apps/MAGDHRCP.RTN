@@ -1,0 +1,183 @@
+Cache for Windows NT^INT^Saved from DICOM (ISW-KUZMAKP3-LT)^~Format=Cache.S~
+%RO on 09/17/2012  11:24
+MAGDHRCP^INT^1^62692,59318^0
+MAGDHRCP ;WOIFO/PMK - Read and print HL7 message ; 31 Oct 2011 11:21 AM
+ ;;3.0;IMAGING;**11,54,49,110**;Mar 19, 2002;Build 48;Aug 23, 2012
+ ;; Per VHA Directive 2004-038, this routine should not be modified.
+ ;; +---------------------------------------------------------------+
+ ;; | Property of the US Government.                                |
+ ;; | No permission to copy or redistribute this software is given. |
+ ;; | Use of unreleased versions of this software requires the user |
+ ;; | to execute a written test agreement with the VistA Imaging    |
+ ;; | Development Office of the Department of Veterans Affairs,     |
+ ;; | telephone (301) 734-0100.                                     |
+ ;; | The Food and Drug Administration classifies this software as  |
+ ;; | a medical device.  As such, it may not be changed in any way. |
+ ;; | Modifications to this software may result in an adulterated   |
+ ;; | medical device under 21CFR820, the use of which is considered |
+ ;; | to be a violation of US Federal Statutes.                     |
+ ;; +---------------------------------------------------------------+
+ ;;
+ Q
+ ;
+DISPLAY ; Entry point to read an HL7 transaction
+ N DATE,FBSWITCH,FORMAT,MSGNO,ODEVICE,ODEVNAME,ODEVTYPE,PTR,STATUS,X
+ ; parse each message segment
+ S FBSWITCH="FOREGROUND" ; this always runs in the foreground
+ D OUTDEV^MAGDFCNS Q:ODEVTYPE=""
+ I ODEVTYPE="FILE" S FORMAT="L"
+ E  D  ; get format
+ . N DEFAULT
+ . K FORMAT S DEFAULT=$G(^TMP("MAG","HL7 DISPLAY","FORMAT"),"S")
+ . F  D  Q:$D(FORMAT)
+ . . W !,"Format (Long or Short)  ",DEFAULT,"// "
+ . . R X:$G(DTIME,300)
+ . . I X="" S X=DEFAULT W X
+ . . S X=$E(X) I "LlSs^"'[X W " ???" Q
+ . . S FORMAT=$TR(X,"ls","LS")
+ . . S ^TMP("MAG","HL7 DISPLAY","FORMAT")=FORMAT
+ . . Q
+ . Q
+ I FORMAT="^" Q
+ ;
+ S PTR=$G(^MAGDICOM(2006.563,1,"HL7_PTR"))
+ S DATE=""
+ I PTR?1.N Q:$$CALLRPC^MAGM2VCU("MAG DICOM HL7 POINTER ACTION","M",.DATE,"GetDate",PTR)<0
+ S:DATE<0 DATE=""
+ W !!,"Current HL7 Pointer Value: ",PTR W:DATE'="" " (",DATE,")"
+ ;
+ F  D  Q:MSGNO["^"
+ . N HL7MSG,OK,REQUEST
+ . W !!,"Enter HL7 subscript: " I PTR W PTR,"// "
+ . R MSGNO:$G(DTIME,300) E  S MSGNO="^"
+ . I MSGNO="",PTR S MSGNO=PTR W MSGNO
+ . S:MSGNO="" MSGNO="^" Q:MSGNO["^"
+ . I +MSGNO'=MSGNO D  Q
+ . . W !!,"Enter a numeric value that corresponds to the"
+ . . W !,"Internal Entry Number of an HL7 Message."
+ . . Q
+ . D  I 'OK S MSGNO="^" Q
+ . . S OK=$$RECONCT^MAGDMENA()
+ . . I $$USEPRIN^MAGOSFIL(1)
+ . . W:'OK !!,"Could not connect to VistA System",!
+ . . Q
+ . S PTR=""
+ . ; Output the HL7 message
+ . S REQUEST(1)=2,REQUEST(2)=MSGNO_"|0" ; zero delay for HL7 message
+ . D TEXTPROC^MAGDM2MB(.HL7MSG,.REQUEST)
+ . I @HL7MSG@(1)="" W " ??? not on file" Q
+ . I ODEVTYPE="FILE" S STATUS=$$USE^MAGDFCNS(ODEVTYPE,ODEVNAME)
+ . I FORMAT="L" W !!,"HL7 Message (Subscript = ",MSGNO,")",!! S $Y=0
+ . S X=@HL7MSG@(4)
+ . I $E(X,1,3)'="MSH" D
+ . . N MSG
+ . . S MSG(1)="HL7 message header should start with ""MSH"","
+ . . S MSG(2)="starts with """_$E(X,1,3)_"""."
+ . . D TRAPERR^MAGDSTRT(1,$T(+0),"BAD HL7 MESSAGE HEADER",.MSG)
+ . . Q  ; Error trap does not return
+ . S $Y=0
+ . I FORMAT="S" D
+ . . D SHORT
+ . . Q
+ . E  D
+ . . D LONG
+ . . Q
+ . I $$USEPRIN^MAGOSFIL(1)
+ . Q
+ I ODEVTYPE="FILE" D
+ . S STATUS=$$USE^MAGDFCNS(ODEVTYPE,ODEVNAME) W #
+ . S STATUS=$$CLOSE^MAGDFCNS(ODEVTYPE,ODEVNAME)
+ Q
+ ;
+SHORT ; output short format
+ N I
+ S I=3 F  S I=$O(@HL7MSG@(I)) Q:'I  S X=@HL7MSG@(I) D
+ . I ODEVTYPE="SCREEN" D
+ . . ; Output the HL7 message in "screen format" (intended for CRT)
+ . . W ! D:$Y>20 WAIT W $E(X,1,80) S X=$E(X,81,9999)
+ . . F  Q:X=""  W ! D:$Y>20 WAIT  W "...",$E(X,1,77) S X=$E(X,78,9999)
+ . . Q
+ . E  W !,X ; output to a file
+ . Q
+ Q
+ ;
+LONG ; output long format
+ N D0,HL7MSGNO,HL7PARSE,HL7RAW,I,J,K,L,M,NL,SEGMENT,UFS,V
+ S HL7PARSE=$NAME(^TMP("MAG",$J,"HL7","PARSED"))
+ S HL7RAW=$NAME(^TMP("MAG",$J,"HL7","RAW"))
+ K @HL7PARSE,@HL7RAW ; initialize the destination globals
+ S HL7MSGNO=MSGNO
+ D ENTRY^MAGDHRC1(.UFS) ; copy the message(s) to the ^TMP global
+ D HL7COPY^MAGDHRC1 ; copy HL7 message from ^TMP to HL7RAW global array
+ S X=$$PARSE^MAG7UP(HL7RAW,HL7PARSE) ; build the HL7 array
+ S I=0 F  S I=$O(@HL7PARSE@(I)) Q:'I  D
+ . S SEGMENT=@HL7PARSE@(I,0)
+ . S X="",D0=+$O(^MAGDICOM(2006.57,"B",SEGMENT,""))
+ . I D0 S X=$P($G(^MAGDICOM(2006.57,D0,0)),"^",2)
+ . S:X="" X="*** Unknown Segment ***"
+ . W !! I ODEVTYPE="SCREEN" D:$Y>20 WAIT
+ . W SEGMENT," -- ",X
+ . S J=0  F  S J=$O(@HL7PARSE@(I,J)) Q:'J  D
+ . . S X=$G(^MAGDICOM(2006.57,D0,1,J,0),"*** Unknown Field ***")
+ . . W ! I ODEVTYPE="SCREEN" D:$Y>20 WAIT
+ . . W $J(J,3),?7,$E($J(X,30),1,30)," = "
+ . . S K=0 F  S K=$O(@HL7PARSE@(I,J,K)) Q:'K  D
+ . . . S V="" ; value string
+ . . . S NL=$O(@HL7PARSE@(I,J,K,""),-1)
+ . . . F L=1:1:NL D
+ . . . . I '$D(@HL7PARSE@(I,J,K,L)) S V=V_"."
+ . . . . S M=0 F  S M=$O(@HL7PARSE@(I,J,K,L,M)) Q:'M  D
+ . . . . . S V=V_$S(V="":"",$E(V,$L(V))=".":"",1:" ")
+ . . . . . S V=V_"["_@HL7PARSE@(I,J,K,L,M)_"]"
+ . . . . . Q
+ . . . . Q
+ . . . W:K>1 !,?40 W V
+ . . . Q
+ . . Q
+ . Q
+ Q
+ ;
+WAIT ; control screen
+ N Z
+ R "Press <Enter> to continue",Z:$G(DTIME,300)
+ F  Q:$X=0  W $C(8,32,8) ; erase the line
+ S $Y=0
+ Q
+ ;
+CHANGE ; entry point to change the HL7 pointer
+ N D0,DATE,%DT,INFO,NEW,OK,P,PTR,PTRFLAG,RPCERR,X,Y,Z
+ S PTR=$G(^MAGDICOM(2006.563,1,"HL7_PTR"))
+ S DATE=""
+ I PTR?1.N Q:$$CALLRPC^MAGM2VCU("MAG DICOM HL7 POINTER ACTION","M",.DATE,"GetDate",PTR)<0
+ S:DATE<0 DATE=""
+ W !!,"Current HL7 Pointer Value: ",PTR W:DATE'="" " (",DATE,")"
+ W !,"Enter new value of HL7 pointer or date: " R X:$G(DTIME,300) E  S X="^"
+ I X["^" W !!,"-- No Change --",! Q
+ S PTRFLAG=X?1.N
+ I X?1(4N,6N,8N) D  I Z["^" W !!,"-- No Change --",! Q
+ . S %DT="PST" D ^%DT I Y'>0 S Z="" Q
+ . S Y=$$FMTE^XLFDT(Y,1)
+ . W !!,"Do you mean the number ",X," or the date ",Y,"  (N or D)  N// "
+ . R Z:$G(DTIME,300) E  S Z="^"
+ . Q:Z["^"
+ . I Z="" S Z="N" W Z
+ . S PTRFLAG=$S("Dd"[$E(Z):0,1:1)
+ . Q
+ I PTRFLAG S NEW=X
+ E  D  I NEW="" W !!,"-- Invalid Date --",! Q
+ . S %DT="PST",NEW="" D ^%DT S X=$S(Y<0:"",1:Y) Q:X=""
+ . Q:$$CALLRPC^MAGM2VCU("MAG DICOM HL7 POINTER ACTION","M",.INFO,"DatePtr",X)<0
+ . S NEW=$G(INFO)
+ . Q
+ ;
+ I (NEW=PTR)!(NEW="") W !!," -- Not Changed --",! Q
+ ;
+ S ^MAGDICOM(2006.563,1,"HL7_PTR")=NEW
+ S DATE=""
+ I NEW Q:$$CALLRPC^MAGM2VCU("MAG DICOM HL7 POINTER ACTION","M",.DATE,"GetDate",NEW)<0
+ S:DATE<0 DATE=""
+ W !!,"New HL7 Pointer Value: ",NEW W:DATE'="" " (",DATE,")"
+ Q
+
+
+

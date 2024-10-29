@@ -1,0 +1,330 @@
+KIDS Distribution saved on Jul 26, 2012@08:58:53
+Split from GOLD - last patch SEQ81_P120
+**KIDS**:MAG*3.0*350_RPC*2378^
+
+**INSTALL NAME**
+MAG*3.0*350_RPC*2378
+"BLD",8260,0)
+MAG*3.0*350_RPC*2378^IMAGING^0^3120726^n
+"BLD",8260,6.3)
+1
+"BLD",8260,"KRN",0)
+^9.67PA^779.2^20
+"BLD",8260,"KRN",.4,0)
+.4
+"BLD",8260,"KRN",.401,0)
+.401
+"BLD",8260,"KRN",.402,0)
+.402
+"BLD",8260,"KRN",.403,0)
+.403
+"BLD",8260,"KRN",.5,0)
+.5
+"BLD",8260,"KRN",.84,0)
+.84
+"BLD",8260,"KRN",3.6,0)
+3.6
+"BLD",8260,"KRN",3.8,0)
+3.8
+"BLD",8260,"KRN",9.2,0)
+9.2
+"BLD",8260,"KRN",9.8,0)
+9.8
+"BLD",8260,"KRN",19,0)
+19
+"BLD",8260,"KRN",19.1,0)
+19.1
+"BLD",8260,"KRN",101,0)
+101
+"BLD",8260,"KRN",409.61,0)
+409.61
+"BLD",8260,"KRN",771,0)
+771
+"BLD",8260,"KRN",779.2,0)
+779.2
+"BLD",8260,"KRN",870,0)
+870
+"BLD",8260,"KRN",8989.51,0)
+8989.51
+"BLD",8260,"KRN",8989.52,0)
+8989.52
+"BLD",8260,"KRN",8994,0)
+8994
+"BLD",8260,"KRN",8994,"NM",0)
+^9.68A^1^1
+"BLD",8260,"KRN",8994,"NM",1,0)
+MAG3 TIU NEW^^0
+"BLD",8260,"KRN",8994,"NM","B","MAG3 TIU NEW",1)
+
+"BLD",8260,"KRN","B",.4,.4)
+
+"BLD",8260,"KRN","B",.401,.401)
+
+"BLD",8260,"KRN","B",.402,.402)
+
+"BLD",8260,"KRN","B",.403,.403)
+
+"BLD",8260,"KRN","B",.5,.5)
+
+"BLD",8260,"KRN","B",.84,.84)
+
+"BLD",8260,"KRN","B",3.6,3.6)
+
+"BLD",8260,"KRN","B",3.8,3.8)
+
+"BLD",8260,"KRN","B",9.2,9.2)
+
+"BLD",8260,"KRN","B",9.8,9.8)
+
+"BLD",8260,"KRN","B",19,19)
+
+"BLD",8260,"KRN","B",19.1,19.1)
+
+"BLD",8260,"KRN","B",101,101)
+
+"BLD",8260,"KRN","B",409.61,409.61)
+
+"BLD",8260,"KRN","B",771,771)
+
+"BLD",8260,"KRN","B",779.2,779.2)
+
+"BLD",8260,"KRN","B",870,870)
+
+"BLD",8260,"KRN","B",8989.51,8989.51)
+
+"BLD",8260,"KRN","B",8989.52,8989.52)
+
+"BLD",8260,"KRN","B",8994,8994)
+
+"KRN",8994,2378,-1)
+0^1
+"KRN",8994,2378,0)
+MAG3 TIU NEW^NEW^MAGGNTI1^1^R
+"KRN",8994,2378,1,0)
+^8994.01^5^5^3070206^^^^
+"KRN",8994,2378,1,1,0)
+RPC Call to create a New Note 
+"KRN",8994,2378,1,2,0)
+  and Optionally :  
+"KRN",8994,2378,1,3,0)
+           Electronically Sign the Note.
+"KRN",8994,2378,1,4,0)
+           Administratively Close the Note.
+"KRN",8994,2378,1,5,0)
+           Add Text to the Note.
+"KRN",8994,2378,2,0)
+^8994.02A^10^10
+"KRN",8994,2378,2,1,0)
+MAGDFN^1^60^1^1
+"KRN",8994,2378,2,1,1,0)
+^8994.021^1^1^3050517^^^
+"KRN",8994,2378,2,1,1,1,0)
+DFN of the Patient.
+"KRN",8994,2378,2,2,0)
+MAGTITLE^1^60^1^2
+"KRN",8994,2378,2,2,1,0)
+^^1^1^3050517^
+"KRN",8994,2378,2,2,1,1,0)
+IEN of TIU DOCUMENT DEFINITION entry in file ^TIU(8925.1
+"KRN",8994,2378,2,3,0)
+MAGADCL^1^10^0^3
+"KRN",8994,2378,2,3,1,0)
+^^2^2^3050517^
+"KRN",8994,2378,2,3,1,1,0)
+  1 = Mark this Note as Administratively Closed
+"KRN",8994,2378,2,3,1,2,0)
+  otherwise it will be Un-Signed
+"KRN",8994,2378,2,4,0)
+MAGMODE^1^30^0^4
+"KRN",8994,2378,2,4,1,0)
+^^3^3^3050517^
+"KRN",8994,2378,2,4,1,1,0)
+Mode of Admin Closure:
+"KRN",8994,2378,2,4,1,2,0)
+ "S" = Scanned Document
+"KRN",8994,2378,2,4,1,3,0)
+ "M" = Manual closure
+"KRN",8994,2378,2,5,0)
+MAGES^1^60^0^5
+"KRN",8994,2378,2,5,1,0)
+^8994.021^1^1^3070206^^^
+"KRN",8994,2378,2,5,1,1,0)
+ The encrypted Electronic Signature
+"KRN",8994,2378,2,6,0)
+MAGESBY^1^90^0^6
+"KRN",8994,2378,2,6,1,0)
+^^1^1^3050517^
+"KRN",8994,2378,2,6,1,1,0)
+ The DUZ of the Signer (Defaults to DUZ)
+"KRN",8994,2378,2,7,0)
+MAGLOC^1^60^0^7
+"KRN",8994,2378,2,7,1,0)
+^^1^1^3050517^
+"KRN",8994,2378,2,7,1,1,0)
+IEN in Hospital Location File #44, Global ^SC(
+"KRN",8994,2378,2,8,0)
+MAGTEXT^2^3200^0^8
+"KRN",8994,2378,2,8,1,0)
+^8994.021^1^1^3050517^^
+"KRN",8994,2378,2,8,1,1,0)
+Array of Text to add to the New Note.
+"KRN",8994,2378,2,9,0)
+MAGDATE^1^40^0^8
+"KRN",8994,2378,2,9,1,0)
+^^1^1^3050727^
+"KRN",8994,2378,2,9,1,1,0)
+Date of the Note. For New Notes.
+"KRN",8994,2378,2,10,0)
+MAGCNSLT^1^30^0^9
+"KRN",8994,2378,2,10,1,0)
+^^1^1^3050727^
+"KRN",8994,2378,2,10,1,1,0)
+DA of Consult to Link this note to.
+"KRN",8994,2378,2,"B","MAGADCL",3)
+
+"KRN",8994,2378,2,"B","MAGCNSLT",10)
+
+"KRN",8994,2378,2,"B","MAGDATE",9)
+
+"KRN",8994,2378,2,"B","MAGDFN",1)
+
+"KRN",8994,2378,2,"B","MAGES",5)
+
+"KRN",8994,2378,2,"B","MAGESBY",6)
+
+"KRN",8994,2378,2,"B","MAGLOC",7)
+
+"KRN",8994,2378,2,"B","MAGMODE",4)
+
+"KRN",8994,2378,2,"B","MAGTEXT",8)
+
+"KRN",8994,2378,2,"B","MAGTITLE",2)
+
+"KRN",8994,2378,2,"PARAMSEQ",1,1)
+
+"KRN",8994,2378,2,"PARAMSEQ",2,2)
+
+"KRN",8994,2378,2,"PARAMSEQ",3,3)
+
+"KRN",8994,2378,2,"PARAMSEQ",4,4)
+
+"KRN",8994,2378,2,"PARAMSEQ",5,5)
+
+"KRN",8994,2378,2,"PARAMSEQ",6,6)
+
+"KRN",8994,2378,2,"PARAMSEQ",7,7)
+
+"KRN",8994,2378,2,"PARAMSEQ",8,8)
+
+"KRN",8994,2378,2,"PARAMSEQ",8,9)
+
+"KRN",8994,2378,2,"PARAMSEQ",9,10)
+
+"KRN",8994,2378,3,0)
+^8994.03^7^7^3070206^^^
+"KRN",8994,2378,3,1,0)
+If success : result = "1^Note was created."
+"KRN",8994,2378,3,2,0)
+If success and Administratively Closed.
+"KRN",8994,2378,3,3,0)
+             result = "1^Note was created. Administrative Closure."
+"KRN",8994,2378,3,4,0)
+If success and Signed
+"KRN",8994,2378,3,5,0)
+             result = "1^Note was created.  Signed."
+"KRN",8994,2378,3,6,0)
+  
+"KRN",8994,2378,3,7,0)
+If error:   result = "0^<error message>" 
+"MBREQ")
+0
+"ORD",16,8994)
+8994;16;1;;;;;;;RPCDEL^XPDIA1
+"ORD",16,8994,0)
+REMOTE PROCEDURE
+"PKG",454,-1)
+1^1
+"PKG",454,0)
+IMAGING^MAG^Imaging-V1 to release 
+"PKG",454,20,0)
+^9.402P^^
+"PKG",454,22,0)
+^9.49I^1^1
+"PKG",454,22,1,0)
+3.0^3020319^3020517^126
+"PKG",454,22,1,"PAH",1,0)
+350_RPC^3120726
+"QUES","XPF1",0)
+Y
+"QUES","XPF1","??")
+^D REP^XPDH
+"QUES","XPF1","A")
+Shall I write over your |FLAG| File
+"QUES","XPF1","B")
+YES
+"QUES","XPF1","M")
+D XPF1^XPDIQ
+"QUES","XPF2",0)
+Y
+"QUES","XPF2","??")
+^D DTA^XPDH
+"QUES","XPF2","A")
+Want my data |FLAG| yours
+"QUES","XPF2","B")
+YES
+"QUES","XPF2","M")
+D XPF2^XPDIQ
+"QUES","XPI1",0)
+YO
+"QUES","XPI1","??")
+^D INHIBIT^XPDH
+"QUES","XPI1","A")
+Want KIDS to INHIBIT LOGONs during the install
+"QUES","XPI1","B")
+NO
+"QUES","XPI1","M")
+D XPI1^XPDIQ
+"QUES","XPM1",0)
+PO^VA(200,:EM
+"QUES","XPM1","??")
+^D MG^XPDH
+"QUES","XPM1","A")
+Enter the Coordinator for Mail Group '|FLAG|'
+"QUES","XPM1","B")
+
+"QUES","XPM1","M")
+D XPM1^XPDIQ
+"QUES","XPO1",0)
+Y
+"QUES","XPO1","??")
+^D MENU^XPDH
+"QUES","XPO1","A")
+Want KIDS to Rebuild Menu Trees Upon Completion of Install
+"QUES","XPO1","B")
+NO
+"QUES","XPO1","M")
+D XPO1^XPDIQ
+"QUES","XPZ1",0)
+Y
+"QUES","XPZ1","??")
+^D OPT^XPDH
+"QUES","XPZ1","A")
+Want to DISABLE Scheduled Options, Menu Options, and Protocols
+"QUES","XPZ1","B")
+NO
+"QUES","XPZ1","M")
+D XPZ1^XPDIQ
+"QUES","XPZ2",0)
+Y
+"QUES","XPZ2","??")
+^D RTN^XPDH
+"QUES","XPZ2","A")
+Want to MOVE routines to other CPUs
+"QUES","XPZ2","B")
+NO
+"QUES","XPZ2","M")
+D XPZ2^XPDIQ
+"VER")
+8.0^22.0
+**END**
+**END**

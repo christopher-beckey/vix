@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<build xmlns="http://va.gov/VistA/kids/manifest" name="MAG*3.0*106" patchName="Teledermatology" patch="106">
+  <components>
+    <securityKeys>
+      <securityKey export="KEY_MAGCAP_TRC.KID" />
+    </securityKeys>
+    <parameterDefinitions>
+      <parameterDefinition export="PAR_MAG_TR_ALLOW_THIN_CLIENT.KID" />
+    </parameterDefinitions>
+    <printTemplates />
+    <sortTemplates />
+    <menuOptions />
+    <rpcs>
+      <rpc export="RPC_MAG3_DICOM_CAPTURE_GE_LIST.KID" />
+      <rpc export="RPC_MAG3_DICOM_CAPTURE_SOP_CLASS.KID" />
+      <rpc export="RPC_MAG3_TELEREADER_CONSULT_LIST.KID" />
+      <rpc export="RPC_MAG3_TELEREADER_DICOM_SER_NUM.KID" />
+      <rpc export="RPC_MAG3_TELEREADER_DICOM_UID.KID" />
+      <rpc export="RPC_MAG3_TELEREADER_READ_UNRD_ADD.KID" />
+      <rpc export="RPC_MAG3_TR_THIN_CLIENT_ALLOWED.KID" />
+    </rpcs>
+    <dataDictionaries>
+      <dataDictionary export="DD_2005_71.KID" />
+      <dataDictionary export="DD_2005_99.KID" />
+      <dataDictionary export="DD_2006_15.KID" />
+    </dataDictionaries>
+    <hl7s />
+    <routines>
+      <routine export="MAGDHWC.RTN" />
+      <routine export="MAGGSIA1.RTN" />
+      <routine export="MAGGTIA.RTN" />
+      <routine export="MAGGTU4C.RTN" />
+      <routine export="MAGGTU4D.RTN" />
+      <routine export="MAGGTU4L.RTN" />
+      <routine export="MAGGTU4T.RTN" />
+      <routine export="MAGIP106.RTN" />
+      <routine export="MAGNDCMC.RTN" />
+      <routine export="MAGNGMR.RTN" />
+      <routine export="MAGNTLR3.RTN" />
+      <routine export="MAGNUID1.RTN" />
+      <routine export="MAGNUID2.RTN" />
+      <routine export="MAGUXRF.RTN" />
+    </routines>
+    <protocols />
+  </components>
+</build>

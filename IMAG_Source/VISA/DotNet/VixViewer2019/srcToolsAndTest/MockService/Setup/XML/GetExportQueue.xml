@@ -1,0 +1,17 @@
+<rOIDicomExportQueueTypes>
+  <roiDicomExportQueueType>
+    <location>994</location>
+    <name>ROI CD WRITER</name>
+    <queueId>urn:dicomexportqueue:994-12</queueId>
+  </roiDicomExportQueueType>
+  <roiDicomExportQueueType>
+    <location>500</location>
+    <name>ROI TEST - CD BURNER</name>
+    <queueId>urn:dicomexportqueue:994-13</queueId>
+  </roiDicomExportQueueType>
+  <roiDicomExportQueueType>
+    <location>994</location>
+    <name>STUART ROI TEST - CD BURNER</name>
+    <queueId>urn:dicomexportqueue:500-11</queueId>
+  </roiDicomExportQueueType>
+</rOIDicomExportQueueTypes>

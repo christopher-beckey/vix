@@ -1,0 +1,96 @@
+﻿<UserControl x:Class="VixHealthMonitor.ViewCountsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="100" d:DesignWidth="1458"
+             DataContext="{Binding VixCounts, Source={StaticResource Locator}}" xmlns:my="clr-namespace:VixHealthMonitor">   
+    <StackPanel Orientation="Vertical">
+        <StackPanel Orientation="Horizontal" Height="26" Margin="0,2,0,2">
+            <!--
+            <Label Content="Total Cached:" HorizontalContentAlignment="Right" />
+            <TextBox IsReadOnly="True" Text="{Binding Path=TotalCached, Mode=OneWay}" Width="70" />
+            -->           
+
+            <Label Content="CD Requests:" HorizontalContentAlignment="Right" />
+            <TextBox IsReadOnly="True" Text="{Binding Path=TotalClinicalDisplayRequests, Mode=OneWay}" Width="80"
+                     ToolTip="Total requests made by Clinical Display clients"/>
+
+            <Label Content="VR Requests:" HorizontalContentAlignment="Right" />
+            <TextBox IsReadOnly="True" Text="{Binding Path=TotalVistaRadRequests, Mode=OneWay}" Width="80"
+                     ToolTip="Total requests made by VistARad clients"/>
+
+            <Label Content="Fed Requests:" HorizontalContentAlignment="Right" />
+            <TextBox IsReadOnly="True" Text="{Binding Path=TotalFederationRequests, Mode=OneWay}" Width="80"
+                     ToolTip="Total requests made through the Federation interface"/>
+
+            <Label Content="AWIV Requests:" HorizontalContentAlignment="Right" />
+            <TextBox IsReadOnly="True" Text="{Binding Path=TotalAwivRequests, Mode=OneWay}" Width="80" />
+
+            <Label Content="XCA Requests:" HorizontalContentAlignment="Right" />
+            <TextBox IsReadOnly="True" Text="{Binding Path=TotalXcaRequests, Mode=OneWay}" Width="60" 
+                     ToolTip="Total requests made by AWIV clients"/>
+
+            <Label Content="Exchange Requests:" HorizontalContentAlignment="Right" />
+            <TextBox IsReadOnly="True" Text="{Binding Path=TotalExchangeRequests, Mode=OneWay}" Width="60"
+                     ToolTip="Total requests made through the Exchange interface"/>
+        </StackPanel>
+
+        <StackPanel Orientation="Horizontal" Height="26" Margin="0,2,0,2">
+            <Label Content="Transactions:" HorizontalContentAlignment="Right" />
+            <TextBox IsReadOnly="True" Text="{Binding Path=TotalTransactions, Mode=OneWay}" Width="70"
+                     ToolTip="Total transactions"/>
+
+            <Label Content="Trans/min:" HorizontalContentAlignment="Right" />
+            <TextBox IsReadOnly="True" Text="{Binding Path=TotalTransactionsPerMinute, Mode=OneWay}" Width="60"
+                     ToolTip="Total transactions per minute"/>
+
+            <Label Content="Trans/day:" HorizontalContentAlignment="Right" />
+            <TextBox IsReadOnly="True" Text="{Binding Path=TotalTransactionsPerDay, Mode=OneWay}" Width="75"
+                     ToolTip="Total transactions per day"/>
+            
+            <Label Content="80 Active:" HorizontalContentAlignment="Right" />
+            <TextBox IsReadOnly="True" Text="{Binding Path=TotalActive80Threads, Mode=OneWay}" Width="50"
+                     ToolTip="Active requests on the port 80 connector"/>
+
+            <Label Content="8080 Active:" HorizontalContentAlignment="Right" />
+            <TextBox IsReadOnly="True" Text="{Binding Path=TotalActive8080Threads, Mode=OneWay}" Width="50"
+                     ToolTip="Active requests on the port 8080 connector"/>
+
+            <Label Content="443 Active:" HorizontalContentAlignment="Right" />
+            <TextBox IsReadOnly="True" Text="{Binding Path=TotalActive443Threads, Mode=OneWay}" Width="50"
+                     ToolTip="Active requests on the port 443 connector"/>
+
+            <Label Content="8443 Active:" HorizontalContentAlignment="Right" />
+            <TextBox IsReadOnly="True" Text="{Binding Path=TotalActive8443Threads, Mode=OneWay}" Width="50"
+                     ToolTip="Active requests on the port 8443 connector (used for Federation)"/>
+        </StackPanel>
+
+        <StackPanel Orientation="Horizontal" Height="26" Margin="0,2,0,2">
+            <Label Content="Cache Operations:" HorizontalContentAlignment="Right" />
+            <TextBox IsReadOnly="True" Text="{Binding Path=TotalCacheOperations, Mode=OneWay}" Width="80"
+                     ToolTip="Total cache operations"/>
+            
+            <Label Content="CVIX Bytes:" HorizontalContentAlignment="Right" />
+            <TextBox IsReadOnly="True" Text="{Binding Path=TotalCvixBytes, Mode=OneWay}" Width="70"
+                     ToolTip="Total bytes processed by the CVIX"/>
+
+            <Label Content="CVIX Bytes/day:" HorizontalContentAlignment="Right" />
+            <TextBox IsReadOnly="True" Text="{Binding Path=TotalCvixBytesPerDay, Mode=OneWay}" Width="70"
+                     ToolTip="Total bytes processed by the CVIX per day"/>
+
+            <Label Content="Requests to DoD:" HorizontalContentAlignment="Right"/>
+            <TextBox IsReadOnly="True" Text="{Binding Path=TotalRequestsToDoD, Mode=OneWay}" Width="50" 
+                     ToolTip="Total VA requests for metadata from VA to DoD" />
+
+            <Label Content="Non-Correlated:" HorizontalContentAlignment="Right"/>
+            <TextBox IsReadOnly="True" Text="{Binding Path=PercentNonCorrelatedRequestsToDoD, Mode=OneWay}" Width="50" 
+                     ToolTip="Percentage of VA requests for Metadata from DoD for non-correlated patients" />
+
+            <Label Content="Site Service Requests:" HorizontalContentAlignment="Right" />
+            <TextBox IsReadOnly="True" Text="{Binding Path=TotalSiteServiceRequests, Mode=OneWay}" Width="75"
+                     ToolTip="Total site service requests made to all CVIX nodes"/>
+        </StackPanel>
+    </StackPanel>
+</UserControl>

@@ -1,0 +1,277 @@
+MAGDHRC3 ;WOIFO/PMK/JSL/SAF - Read HL7 and generate DICOM ; 27 Jul 2010 12:33 PM
+ ;;3.0;IMAGING;**11,30,102,49,123**;Mar 19, 2002;Build 60;Jul 16, 2012
+ ;; Per VHA Directive 2004-038, this routine should not be modified.
+ ;; +---------------------------------------------------------------+
+ ;; | Property of the US Government.                                |
+ ;; | No permission to copy or redistribute this software is given. |
+ ;; | Use of unreleased versions of this software requires the user |
+ ;; | to execute a written test agreement with the VistA Imaging    |
+ ;; | Development Office of the Department of Veterans Affairs,     |
+ ;; | telephone (301) 734-0100.                                     |
+ ;; | The Food and Drug Administration classifies this software as  |
+ ;; | a medical device.  As such, it may not be changed in any way. |
+ ;; | Modifications to this software may result in an adulterated   |
+ ;; | medical device under 21CFR820, the use of which is considered |
+ ;; | to be a violation of US Federal Statutes.                     |
+ ;; +---------------------------------------------------------------+
+ ;;
+ Q
+ ; PACS interface -- Radiology/Consult HL7 data input routine
+ ; This module reads and parses the HL7 PID Segment
+ ;
+PID ; PID Segment
+ N AAUTH,I,ICN,IDTYPE,NTEST,PID,SITEDFN,VAICN,Y
+ ;
+ ; NEW CODE - Allow for multiple PIDs.  ICN is either the number with
+ ; no assigning authority and ID type, or else the one with assigning
+ ; authority "USVHA" and ID type "NI".
+ ;
+ I VERSION'=2.1  D  ; get SITEDFN (and DFN), PID, and ICN from PID-2, PID-3, and PID-4
+ . S Y=$G(^MAGDICOM(2006.563,1,"ISSUER OF PATIENT ID"),$S($$ISIHS^MAGSPID():"USIHS",1:"USVHA"))  ;P123
+ . ; PID-2 is the <SITE>-<DFN>
+ . S AAUTH=$$GETDATA^MAGDHRC0(2,1,4,1),IDTYPE=$$GETDATA^MAGDHRC0(2,1,5)
+ . I AAUTH=Y,IDTYPE="PI" S SITEDFN=$$GETDATA^MAGDHRC0(2,1,1),DFN=$P(SITEDFN,"-",2)
+ . ; PID-3 is the SSN (VA) or MRN (IHS)
+ . F I=1:1 S NTEST=$$GETDATA^MAGDHRC0(3,I,1) Q:NTEST=""  D  Q:$D(PID)
+ . . S AAUTH=$$GETDATA^MAGDHRC0(3,I,4,1),IDTYPE=$$GETDATA^MAGDHRC0(3,I,5)
+ . . I AAUTH=Y,IDTYPE="NI" S PID=NTEST Q
+ . . Q
+ . ; PID-4 is the national ICN
+ . S AAUTH=$$GETDATA^MAGDHRC0(4,1,4,1),IDTYPE=$$GETDATA^MAGDHRC0(4,1,5)
+ . I AAUTH=Y,IDTYPE="NI" S ICN=$$GETDATA^MAGDHRC0(4,1,1)
+ . E  S ICN=""  ; not in HL7 message
+ . Q
+ ;
+ I '$D(DFN) D  ; assume get DFN from PID and then the ICNold message format - get DFN from PID and then the ICN
+ . S DFN=$$GETDATA^MAGDHRC0(3,1,1) ; Get DFN from the HL7 record
+ . S RPCERR=$$CALLRPC^MAGM2VCU("MAG DICOM GET ICN","M",.VAICN,DFN)
+ . K:VAICN<0 VAICN    ;If ICN comes back negative (i.e. -1^message), delete it
+ . S SITEDFN=STATNUMB_"-"_DFN,ICN=$G(VAICN)
+ . I $$ISIHS^MAGSPID() D
+ . . ;the next line is needed to be backwards compatible for IHS sites running FUT70
+ . . I $$GETDATA^MAGDHRC0(3,1,3)="M11" S DFN=$$GETDATA^MAGDHRC0(3,1,1),SITEDFN=STATNUMB_"-"_DFN
+ . . E  S SITEDFN=$$GETDATA^MAGDHRC0(2,1,1),DFN=$P(SITEDFN,"-",2) ;Site-DFN is in PID-2 already for IHS
+ . . Q 
+ . Q
+ ;
+ ; get vitals information from RPC
+ N RESULT,RPCERR,SIZE,VIP,WEIGHT,WORKLIST
+ S RPCERR=$$CALLRPC^MAGM2VCU("MAG DICOM GET PATIENT VITALS","M",.RESULT,DFN)
+ F I=1:1 Q:'$D(RESULT(I))  S X=RESULT(I),WORKLIST($P(X,"^",1))=$P(X,"^",2,999)
+ D SAVE^MAGDFCNS("SITE-DFN",SITEDFN) ; "0010,1000" is for PACS short id
+ D SAVE^MAGDFCNS("ICN",ICN) ; "0010,1000" is for PACS short id
+ ;
+ I $D(WORKLIST("HEIGHT")) D
+ . I $P(WORKLIST("HEIGHT"),"^",2)="m" D
+ . . S SIZE=$P(WORKLIST("HEIGHT"),"^",1)
+ . . Q
+ . E  D
+ . . N MSG
+ . . S MSG(1)="Unknown HEIGHT units <<"_$P(WORKLIST("HEIGHT"),"^",2)_">>"
+ . . D WARNING^MAGDFCNS(.MSG)
+ . . S SIZE=""
+ . . Q
+ . D SAVE^MAGDFCNS("0010,1020",SIZE)
+ . Q
+ ;
+ I $D(WORKLIST("WEIGHT")) D
+ . I $P(WORKLIST("WEIGHT"),"^",2)="kg" D
+ . . S WEIGHT=$P(WORKLIST("WEIGHT"),"^",1)
+ . . Q
+ . E  D
+ . . N MSG
+ . . S MSG(1)="Unknown WEIGHT units <<"_$P(WORKLIST("WEIGHT"),"^",2)_">>"
+ . . D WARNING^MAGDFCNS(.MSG)
+ . . S WEIGHT=""
+ . . Q
+ . D SAVE^MAGDFCNS("0010,1030",WEIGHT)
+ . Q
+ ;
+ I $D(WORKLIST("VIP")) D
+ . S VIP=WORKLIST("VIP")
+ . I VIP["E" D
+ . . I VIP["S" S VIP="Patient is an EMPLOYEE with SENSITIVE data."
+ . . E  S VIP="Patient is an EMPLOYEE."
+ . . Q
+ . E  I VIP["S" S VIP="Patient data is SENSITIVE."
+ . D SAVE^MAGDFCNS("0040,3001",VIP)
+ . Q
+ ;
+ S UID("PATIENT")=$$PATIENT^MAGDUID1(STATNUMB,DFN)
+ S UID("VISIT")=$$VISITO^MAGDUID1(STATNUMB,DFN)
+ D DEMOGRAF
+ ;
+ ; generate a Referenced Patient Sequence
+ D SEQPUSH^MAGDFCNS("0008,1120") ; Referenced Patient Sequence
+ ; save Referenced SOP Class & Instance UIDs
+ S Y=$$GETUID^MAGDUID1("VA Detached Patient Management SOP Class")
+ D SAVE^MAGDFCNS("0008,1150",Y)
+ D SAVE^MAGDFCNS("0008,1155",UID("PATIENT"))
+ D SEQPOP^MAGDFCNS ; end Referenced Patient Sequence
+ ;
+ ; generate a Referenced Visit Sequence
+ D SEQPUSH^MAGDFCNS("0008,1125") ; Referenced Visit Sequence
+ ; save Referenced SOP Class & Instance UIDs
+ S Y=$$GETUID^MAGDUID1("VA Detached Visit Management SOP Class")
+ D SAVE^MAGDFCNS("0008,1150",Y)
+ D SAVE^MAGDFCNS("0008,1155",UID("VISIT"))
+ D SEQPOP^MAGDFCNS ; end Referenced Visit Sequence
+ Q
+ ;
+DEMOGRAF ; Output the rest of the patient demographic variables
+ N L,PHONES,RACE,Y,Z
+ N REPTNO ;------- repetition seq # for repeating fields
+ N SSN ;---------- social security number
+ N DCMDOB ;------- date of birth in DICOM format
+ N PNAMEDCM ;----- patient name in DICOM format
+ N HRNO ; IHS Patient ID
+ ;
+ I $$ISIHS^MAGSPID() D  ; P123 if this an IHS facility, use HRN as the patient ID
+ . S HRNO=$$GETDATA^MAGDHRC0(3,1,1) ; IHS Health Record Number
+ . I $G(PID)'=HRNO S PID=HRNO
+ . Q
+ I $D(PID) S SSN=PID ; this is the value in PID-3
+ E  D  ; Pick up SSN from PID-19 (a deprecated field)
+ . S SSN=$TR($$GETDATA^MAGDHRC0(19,1,1),"-")
+ . Q
+ I SSN'="",$G(^MAGDICOM(2006.563,1,"SSN DASHES FOR PACS"))="YES" D
+ . S SSN=$E(SSN,1,3)_"-"_$E(SSN,4,5)_"-"_$E(SSN,6,999)
+ . Q
+ I $G(PID)="" S PID=$G(SSN)
+ D SAVE^MAGDFCNS("0010,0020",PID) ; Patient ID
+ D SAVE^MAGDFCNS("0010,0021",STATNUMB) ; station number
+ S PNAMEDCM=""
+ S PNAMEDCM=$$GETDATA^MAGDHRC0(5,1,1,1) ; family name
+ S PNAMEDCM=PNAMEDCM_"^"_$$GETDATA^MAGDHRC0(5,1,2,1) ; given name
+ S PNAMEDCM=PNAMEDCM_"^"_$$GETDATA^MAGDHRC0(5,1,3,1) ; middle name
+ S PNAMEDCM=PNAMEDCM_"^"_$$GETDATA^MAGDHRC0(5,1,5,1) ; name prefix (PID-5.5)
+ S PNAMEDCM=PNAMEDCM_"^"_$$GETDATA^MAGDHRC0(5,1,4,1) ; name suffix (PID-5.4)
+ D SAVE^MAGDFCNS("0010,0010",PNAMEDCM) ; Patient Name
+ ; compute and save Quick PID (K1234)
+ S L=$L(SSN) ; use for last four digits of SSN
+ D SAVE^MAGDFCNS("0010,1000",$E(PNAMEDCM)_$E(SSN,L-3,L))
+ ; pick up date of birth, zero-fill to satisfy DICOM DT VR
+ D CVTDT^MAGDHRCU($$GETDATA^MAGDHRC0(7),.DCMDOB)
+ D SAVE^MAGDFCNS("0010,0030",DCMDOB) ; Date of Birth
+ S SEX=$TR($$GETDATA^MAGDHRC0(8),"U","") D SAVE^MAGDFCNS("0010,0040",SEX)
+ S RACE=$$GETDATA^MAGDHRC0(10,1,4) ; pick up race code
+ I RACE="" S RACE=$$GETDATA^MAGDHRC0(22,1,4) ; pick up ethnic group code
+ D ETHNIC^MAGDFND4 ; set race to a 16-character value
+ I RACE'="" D SAVE^MAGDFCNS("0010,2160",RACE) ; Race
+ ;
+ ; Home Address
+ S Y=$$GETDATA^MAGDHRC0(11,1,1)_", "
+ S Z=$$GETDATA^MAGDHRC0(11,1,2) S:$L(Z) Y=Y_Z_", " ; Street
+ S Z=$$GETDATA^MAGDHRC0(11,1,3) S:Z'="" Y=Y_Z_", " ; City
+ S Z=$$GETDATA^MAGDHRC0(11,1,4) S:Z?1.N1"^".E Z=$P(Z,"^",2) S:Z'="" Y=Y_Z ; State
+ S Y=Y_" "_$$GETDATA^MAGDHRC0(11,1,5)_" "_$$GETDATA^MAGDHRC0(11,1,6) ; zip and country
+ S:$TR(Y,", ")="" Y=""
+ D SAVE^MAGDFCNS("0010,1040",Y) ; address
+ ;
+ S PHONES=$$GETDATA^MAGDHRC0(13,1,1)
+ I PHONES'="" D SAVE^MAGDFCNS("0010,2154",PHONES) ; Phone
+ Q
+ ;
+PV1 ; PV1 segment
+ ; code for all patients
+ N ADMITID ;-- admission id or visit id
+ N HL7DTTM ;-- date/time value (HL7 format)
+ N DCMDT ;---- date value (DICOM format)
+ N DCMTM ;---- time value (DICOM format)
+ N PREGSTAT ;- pregnancy status
+ N PTIOSTAT ;--- patient inpatient/outpatient status
+ ;
+ S ADMITID=$$GETDATA^MAGDHRC0(19)
+ D SAVE^MAGDFCNS("0038,0010",ADMITID) ; admission or visit id 
+ I $$GETDATA^MAGDHRC0(2)="I" D  ; inpatient - use different visit UID
+ . S UID("VISIT")=$$VISITI^MAGDUID1(STATNUMB,DFN,ADMITID)
+ . D SAVE^MAGDFCNS("0038,4000","INPATIENT")
+ . Q
+ E  D SAVE^MAGDFCNS("0038,4000","OUTPATIENT")  ; outpatient
+ ;
+ I $$GETEXIST^MAGDHRC0(3) D  ; get patient location
+ . ; current location of inpatient (ward, room, and bed)
+ . N BED,DIVISION,DIVNAME,ROOM,WARD,X,Z
+ . I VERSION=2.1 D
+ . . S WARD=$$GETDATA^MAGDHRC0(3,1,1,2),(ROOM,BED,Z)=""
+ . . Q
+ . E  D  ; for VERSION=2.4 HL7 for Radiology and VERSION 2.3.1 for CONSULTS
+ . . S WARD=$$GETDATA^MAGDHRC0(3,1,1),ROOM=$$GETDATA^MAGDHRC0(3,1,2)
+ . . S BED=$$GETDATA^MAGDHRC0(3,1,3),Z=$$GETDATA^MAGDHRC0(3,1,4)
+ . . Q
+ . S DIVISION=$P(Z,"_",1),DIVNAME=$P(Z,"_",2)
+ . S X=WARD I $L(ROOM) S X=X_" "_ROOM I $L(BED) S X=X_"-"_BED
+ . ; Current patient location (per Part 3)
+ . D SAVE^MAGDFCNS("0038,0300",X) ; Current Pt Location (ward)
+ . ; Current Patient Location Sequence (ward) - legacy private sequence
+ . D SEQPUSH^MAGDFCNS("0039,xx10,VA DHCP")
+ . D SAVE^MAGDFCNS("0008,0100",$$GETDATA^MAGDHRC0(3,1,1,1)) ; code value
+ . D SAVE^MAGDFCNS("0008,0102","99"_$$GETDATA^MAGDHRC0(3,1,1,3)) ; coding scheme
+ . D SAVE^MAGDFCNS("0038,0300",X) ; Current Pt Location
+ . D SEQPOP^MAGDFCNS
+ . ;
+ . D SAVE^MAGDFCNS("0038,0400",X) ; Pt's Institutional Residence (room-bed)
+ . ; Patient's Institutional Residence (room-bed) - legacy private sequence
+ . D SEQPUSH^MAGDFCNS("0039,xx20,VA DHCP")
+ . D SAVE^MAGDFCNS("0008,0100",$$GETDATA^MAGDHRC0(3,1,1,1)) ; code value
+ . D SAVE^MAGDFCNS("0008,0102","99"_$$GETDATA^MAGDHRC0(3,1,1,3)) ; coding scheme
+ . D SAVE^MAGDFCNS("0038,0400",X) ; Current Pt Location - same as above
+ . D SEQPOP^MAGDFCNS
+ . ;
+ . ; save division information
+ . D SAVE^MAGDFCNS("0008,0080",DIVNAME) ; institution name
+ . D SEQPUSH^MAGDFCNS("0008,0082") ; institution code sequence
+ . D SAVE^MAGDFCNS("0008,0100",DIVISION) ; code value
+ . D SAVE^MAGDFCNS("0008,0102","L") ; coding scheme
+ . D SAVE^MAGDFCNS("0008,0104",DIVNAME) ; name of division
+ . D SEQPOP^MAGDFCNS ; end instituion code sequence
+ . Q
+ ;
+ I $$GETEXIST^MAGDHRC0(7) D  ; attending physician (from HL7)
+ . S Z=$$GETNAME^MAGDHRC0(7)
+ . D SAVE^MAGDFCNS("0008,1050",$P(Z,"^",2,999)) ; Performing Physician's Name - per Part 3
+ . ; legacy private sequence - to be deprecated
+ . D SEQPUSH^MAGDFCNS("0009,xx20,VA DHCP")
+ . D SAVE^MAGDFCNS("0008,0100",$P(Z,"^",1)) ; code value
+ . D SAVE^MAGDFCNS("0008,0102","L") ; coding scheme
+ . D SAVE^MAGDFCNS("0008,1050",$P(Z,"^",2,999)) ; Performing Physician's Name
+ . D SEQPOP^MAGDFCNS
+ . Q
+ ;
+ ; primary care provider (old field 8, new field 17)
+ S Z=""
+ I $$GETEXIST^MAGDHRC0(17) S Z=$$GETNAME^MAGDHRC0(17)
+ E  I $$GETEXIST^MAGDHRC0(8) S Z=$$GETNAME^MAGDHRC0(8)
+ I Z'="" D
+ . D SAVE^MAGDFCNS("0008,0090",$P(Z,"^",2,999)) ; Referring Physician's Name - per Part 3
+ . ; legacy private sequence - to be deprecated
+ . D SEQPUSH^MAGDFCNS("0009,xx10,VA DHCP")
+ . D SAVE^MAGDFCNS("0008,0100",$P(Z,"^",1)) ; code value
+ . D SAVE^MAGDFCNS("0008,0102","L") ; coding scheme
+ . D SAVE^MAGDFCNS("0008,0090",$P(Z,"^",2,999)) ; Referring Physician's Name
+ . D SEQPOP^MAGDFCNS
+ . Q
+ ;
+ ; output pregnancy status
+ S PREGSTAT=$S(SEX="M":1,1:4) ; assume pregnancy unknown for females
+ S:$$GETDATA^MAGDHRC0(15)["B6" PREGSTAT=3 ; ambulatory status = pregnant
+ D SAVE^MAGDFCNS("0010,21C0",PREGSTAT) ; Pregnancy Status
+ ;
+ S HL7DTTM=$$GETDATA^MAGDHRC0(44,1,1) D:HL7DTTM'=""
+ . D CVTDT^MAGDHRCU(HL7DTTM,.DCMDT,.DCMTM)
+ . D SAVE^MAGDFCNS("0038,0020",DCMDT) ; admission date
+ . D SAVE^MAGDFCNS("0038,0021",DCMTM) ; admission time
+ . Q
+ ;
+ S HL7DTTM=$$GETDATA^MAGDHRC0(45,1,1) D:HL7DTTM'=""
+ . D CVTDT^MAGDHRCU(HL7DTTM,.DCMDT,.DCMTM)
+ . D SAVE^MAGDFCNS("0038,0030",DCMDT) ; discharge date
+ . D SAVE^MAGDFCNS("0038,0032",DCMTM) ; discharge time
+ . Q
+ Q
+ ;
+DG1 ; DG1 segment
+ I $$GETEXIST^MAGDHRC0(3,1,2) D
+ . D SAVE^MAGDFCNS("0008,1080",$$GETDATA^MAGDHRC0(3,1,2)) ; Admitting DX
+ . Q
+ Q

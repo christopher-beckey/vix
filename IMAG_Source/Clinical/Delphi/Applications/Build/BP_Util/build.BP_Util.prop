@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">	
+	
+	<!-- ******************************************************************************* -->	
+	<!-- build patch and any dependent patches -->
+	<ItemGroup>
+		
+		<PatchDepName Include="$(ClinicalDir)\Delphi\Applications\Background Processor\**\*.*" >
+			<PatchDepNumber>$(PatchNumber)</PatchDepNumber>
+			<Folder>Background Processor</Folder>
+		</PatchDepName>
+
+		<PatchDepName Include="$(ClinicalDir)\Delphi\Applications\Build\BP_Util\InstallShield\**\*.*" >
+			<PatchDepNumber>$(PatchNumber)</PatchDepNumber>
+			<Folder>InstallShield</Folder>
+		</PatchDepName>
+				
+	</ItemGroup>
+
+	<!-- ******************************************************************************* -->
+	<!-- projects to compile -->
+	<ItemGroup>
+	
+		<DelphiFiles Include="$(FullBuildPath)$(TempFolder)\p$(PatchNumber)\Background Processor\Import_OCX\" >
+				<Project>MagImportXControl1.dproj</Project>
+				<Resource>MagImportXControl1.res</Resource>
+				<Options>Rebuild</Options>
+				<Configuration>Release</Configuration> 
+				<Compiler>MSBuild</Compiler>			
+				<ProjectOverride>true</ProjectOverride>
+				<Sign>exe</Sign>
+				<DCC_DcuOutput>..\dcu</DCC_DcuOutput>
+				<DCC_ObjOutput>..\dcu</DCC_ObjOutput>
+				<DCC_HppOutput>..\dcu</DCC_HppOutput>							
+				<DCC_UnitSearchPath>.\IAPIShared;$(AccuSoftPackageDir);$(DelphiFilmanexDir);$(VCLZip_Pro);$(BDK32Dir)\Source</DCC_UnitSearchPath>			
+				<DCC_ResourcePath>.\IAPIShared;$(AccuSoftPackageDir);$(DelphiFilmanexDir);$(VCLZip_Pro)</DCC_ResourcePath>			
+				<DCC_ObjPath>.\IAPIShared;$(AccuSoftPackageDir);$(DelphiFilmanexDir);$(VCLZip_Pro)</DCC_ObjPath>			
+				<DCC_IncludePath>.\IAPIShared;$(AccuSoftPackageDir);$(DelphiFilmanexDir);$(VCLZip_Pro)</DCC_IncludePath>
+				<DCC_Define>DEBUG;ImageGear16;USENEWANNOTS;ARTX;xRUNDICOMUNITTESTS;</DCC_Define>			
+			</DelphiFiles>
+	
+		<DelphiFiles Include="$(FullBuildPath)$(TempFolder)\p$(PatchNumber)\Background Processor\Import_OCX\" >
+			<Project>Mag_MakeAbs.dproj</Project>
+			<Resource>Mag_MakeAbs.res</Resource>
+			<Options>Rebuild</Options>
+			<Configuration>Release</Configuration> 
+			<Compiler>MSBuild</Compiler>			
+			<ProjectOverride>true</ProjectOverride>
+			<Sign>exe</Sign>	
+			<DCC_DcuOutput>..\dcu</DCC_DcuOutput>
+			<DCC_ObjOutput>..\dcu</DCC_ObjOutput>
+			<DCC_HppOutput>..\dcu</DCC_HppOutput>						
+			<DCC_UnitSearchPath>.\IAPIShared;$(AccuSoftPackageDir);$(DelphiFilmanexDir);$(VCLZip_Pro);$(BDK32Dir)\Source</DCC_UnitSearchPath>
+			<DCC_ResourcePath>.\IAPIShared;$(AccuSoftPackageDir);$(DelphiFilmanexDir);$(VCLZip_Pro)</DCC_ResourcePath>
+			<DCC_ObjPath>.\IAPIShared;$(AccuSoftPackageDir);$(DelphiFilmanexDir);$(VCLZip_Pro)</DCC_ObjPath>
+			<DCC_IncludePath>.\IAPIShared;$(AccuSoftPackageDir);$(DelphiFilmanexDir);$(VCLZip_Pro)</DCC_IncludePath>
+			<DCC_Define>DEBUG;ImageGear16;USENEWANNOTS;ARTX;xRUNDICOMUNITTESTS;</DCC_Define>			
+		</DelphiFiles>
+
+		<DelphiFiles Include="$(FullBuildPath)$(TempFolder)\p$(PatchNumber)\Background Processor\Import_OCX\" >
+			<Project>MagThumbnailMaker.dproj</Project>
+			<Resource>MagThumbnailMaker.res</Resource>
+			<Options>Rebuild</Options>
+			<Configuration>Release</Configuration> 
+			<Compiler>MSBuild</Compiler>			
+			<ProjectOverride>true</ProjectOverride>
+			<Sign>exe</Sign>
+			<DCC_DcuOutput>..\dcu</DCC_DcuOutput>
+			<DCC_ObjOutput>..\dcu</DCC_ObjOutput>
+			<DCC_HppOutput>..\dcu</DCC_HppOutput>							
+			<DCC_UnitSearchPath>.\IAPIShared;$(AccuSoftPackageDir);$(DelphiFilmanexDir);$(VCLZip_Pro);$(BDK32Dir)\Source</DCC_UnitSearchPath>
+			<DCC_ResourcePath>.\IAPIShared;$(AccuSoftPackageDir);$(DelphiFilmanexDir);$(VCLZip_Pro)</DCC_ResourcePath>
+			<DCC_ObjPath>.\IAPIShared;$(AccuSoftPackageDir);$(DelphiFilmanexDir);$(VCLZip_Pro)</DCC_ObjPath>
+			<DCC_IncludePath>.\IAPIShared;$(AccuSoftPackageDir);$(DelphiFilmanexDir);$(VCLZip_Pro)</DCC_IncludePath>
+			<DCC_Define>DEBUG;ImageGear16;USENEWANNOTS;ARTX;xRUNDICOMUNITTESTS;</DCC_Define>			
+		</DelphiFiles>
+				
+	</ItemGroup>
+	
+	<!-- ******************************************************************************* -->
+	<!-- InstallShield input -->	
+	<ItemGroup>
+	
+		<InstallShieldReleaseConfiguration Include="SINGLE_EXE_IMAGE" />
+		
+		<InstallShieldPathVariableOverrides Include="$(FullBuildPath)$(TempFolder)\p$(PatchNumber)\Background Processor\Import_OCX">
+			<PathVariable>PATH_TO_IMPORT_OCX_FILES</PathVariable>
+		</InstallShieldPathVariableOverrides>	
+
+		<InstallShieldPathVariableOverrides Include="$(FullBuildPath)$(TempFolder)\P72 Lib">
+			<PathVariable>PATH_TO_P72_LIB_FILES</PathVariable>
+		</InstallShieldPathVariableOverrides>
+		
+		<InstallShieldPathVariableOverrides Include="$(ReleaseClinDir)\Lib">
+			<PathVariable>PATH_TO_LIB_FILES</PathVariable>
+		</InstallShieldPathVariableOverrides>
+		
+		<InstallShieldPathVariableOverrides Include="$(FullBuildPath)$(TempFolder)\P106Lib\System">
+			<PathVariable>PATH_TO_P106_SYSTEM_FILES</PathVariable>
+		</InstallShieldPathVariableOverrides>
+		
+		<InstallShieldPathVariableOverrides Include="$(FullBuildPath)$(TempFolder)\P106Lib\LIB\Accusoft16.2">
+			<PathVariable>PATH_TO_P106_LIB_FILES</PathVariable>
+		</InstallShieldPathVariableOverrides>
+		
+	</ItemGroup>
+		
+</Project>

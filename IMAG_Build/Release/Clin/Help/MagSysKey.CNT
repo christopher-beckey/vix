@@ -1,0 +1,10 @@
+:Base MAGSYSKEY.HLP
+:Title Options for MAG SYSTEM key holders
+1 VistA Imaging Display
+2 System Manager menu option=VistA_Imaging_Display___System_Manager_Options
+2 Prefetch Patient Images menu option=Prefetch_Patient_Images_menu_option
+2 Image Information window=Image_Information_window
+2 message history window=message_history_window
+1 VistA Imaging Capture
+2 System Manager menu option=VistA_Imaging_Capture___System_Manager_Options
+2 message history window=message_history_window

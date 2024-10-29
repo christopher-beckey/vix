@@ -1,0 +1,688 @@
+KIDS Distribution saved on Jul 26, 2012@08:58:41
+Split from GOLD - last patch SEQ81_P120
+**KIDS**:MAG*3.0*350_DD*2006.8^
+
+**INSTALL NAME**
+MAG*3.0*350_DD*2006.8
+"BLD",7819,0)
+MAG*3.0*350_DD*2006.8^IMAGING^0^3120726^n
+"BLD",7819,4,0)
+^9.64PA^2006.8^1
+"BLD",7819,4,2006.8,0)
+2006.8
+"BLD",7819,4,2006.8,222)
+y^y^f^^^^n
+"BLD",7819,4,"B",2006.8,2006.8)
+
+"BLD",7819,6.3)
+1
+"BLD",7819,"KRN",0)
+^9.67PA^779.2^20
+"BLD",7819,"KRN",.4,0)
+.4
+"BLD",7819,"KRN",.401,0)
+.401
+"BLD",7819,"KRN",.402,0)
+.402
+"BLD",7819,"KRN",.403,0)
+.403
+"BLD",7819,"KRN",.5,0)
+.5
+"BLD",7819,"KRN",.84,0)
+.84
+"BLD",7819,"KRN",3.6,0)
+3.6
+"BLD",7819,"KRN",3.8,0)
+3.8
+"BLD",7819,"KRN",9.2,0)
+9.2
+"BLD",7819,"KRN",9.8,0)
+9.8
+"BLD",7819,"KRN",19,0)
+19
+"BLD",7819,"KRN",19.1,0)
+19.1
+"BLD",7819,"KRN",101,0)
+101
+"BLD",7819,"KRN",409.61,0)
+409.61
+"BLD",7819,"KRN",771,0)
+771
+"BLD",7819,"KRN",779.2,0)
+779.2
+"BLD",7819,"KRN",870,0)
+870
+"BLD",7819,"KRN",8989.51,0)
+8989.51
+"BLD",7819,"KRN",8989.52,0)
+8989.52
+"BLD",7819,"KRN",8994,0)
+8994
+"BLD",7819,"KRN","B",.4,.4)
+
+"BLD",7819,"KRN","B",.401,.401)
+
+"BLD",7819,"KRN","B",.402,.402)
+
+"BLD",7819,"KRN","B",.403,.403)
+
+"BLD",7819,"KRN","B",.5,.5)
+
+"BLD",7819,"KRN","B",.84,.84)
+
+"BLD",7819,"KRN","B",3.6,3.6)
+
+"BLD",7819,"KRN","B",3.8,3.8)
+
+"BLD",7819,"KRN","B",9.2,9.2)
+
+"BLD",7819,"KRN","B",9.8,9.8)
+
+"BLD",7819,"KRN","B",19,19)
+
+"BLD",7819,"KRN","B",19.1,19.1)
+
+"BLD",7819,"KRN","B",101,101)
+
+"BLD",7819,"KRN","B",409.61,409.61)
+
+"BLD",7819,"KRN","B",771,771)
+
+"BLD",7819,"KRN","B",779.2,779.2)
+
+"BLD",7819,"KRN","B",870,870)
+
+"BLD",7819,"KRN","B",8989.51,8989.51)
+
+"BLD",7819,"KRN","B",8989.52,8989.52)
+
+"BLD",7819,"KRN","B",8994,8994)
+
+"FIA",2006.8)
+BP SERVERS
+"FIA",2006.8,0)
+^MAG(2006.8,
+"FIA",2006.8,0,0)
+2006.8
+"FIA",2006.8,0,1)
+y^y^f^^^^n
+"FIA",2006.8,0,10)
+
+"FIA",2006.8,0,11)
+
+"FIA",2006.8,0,"RLRO")
+
+"FIA",2006.8,0,"VR")
+3.0^MAG
+"FIA",2006.8,2006.8)
+0
+"IX",2006.8,2006.8,"C",0)
+2006.8^C^Uniqueness Index for Key 'A' of File #2006.8^R^^R^IR^I^2006.8^^^^^LS
+"IX",2006.8,2006.8,"C",1)
+S ^MAG(2006.8,"C",X(1),X(2),DA)=""
+"IX",2006.8,2006.8,"C",2)
+K ^MAG(2006.8,"C",X(1),X(2),DA)
+"IX",2006.8,2006.8,"C",2.5)
+K ^MAG(2006.8,"C")
+"IX",2006.8,2006.8,"C",11.1,0)
+^.114IA^2^2
+"IX",2006.8,2006.8,"C",11.1,1,0)
+1^F^2006.8^.04^^1
+"IX",2006.8,2006.8,"C",11.1,2,0)
+2^F^2006.8^50^^2
+"IX",2006.8,2006.8,"D",0)
+2006.8^D^Uniqueness Index for Key 'B' of File #2006.8^R^^R^IR^I^2006.8^^^^^LS
+"IX",2006.8,2006.8,"D",1)
+S ^MAG(2006.8,"D",X(1),X(2),DA)=""
+"IX",2006.8,2006.8,"D",2)
+K ^MAG(2006.8,"D",X(1),X(2),DA)
+"IX",2006.8,2006.8,"D",2.5)
+K ^MAG(2006.8,"D")
+"IX",2006.8,2006.8,"D",11.1,0)
+^.114IA^2^2
+"IX",2006.8,2006.8,"D",11.1,1,0)
+1^F^2006.8^.04^^1
+"IX",2006.8,2006.8,"D",11.1,2,0)
+2^F^2006.8^.01^^2
+"KEY",2006.8,2006.8,"A",0)
+2006.8^A^P^885
+"KEY",2006.8,2006.8,"A",2,0)
+^.312IA^2^2
+"KEY",2006.8,2006.8,"A",2,1,0)
+.04^2006.8^1
+"KEY",2006.8,2006.8,"A",2,2,0)
+50^2006.8^2
+"KEY",2006.8,2006.8,"B",0)
+2006.8^B^S^886
+"KEY",2006.8,2006.8,"B",2,0)
+^.312IA^2^2
+"KEY",2006.8,2006.8,"B",2,1,0)
+.04^2006.8^1
+"KEY",2006.8,2006.8,"B",2,2,0)
+.01^2006.8^2
+"KEYPTR",2006.8,2006.8,"A")
+2006.8^C
+"KEYPTR",2006.8,2006.8,"B")
+2006.8^D
+"MBREQ")
+0
+"PKG",454,-1)
+1^1
+"PKG",454,0)
+IMAGING^MAG^Imaging-V1 to release 
+"PKG",454,20,0)
+^9.402P^^
+"PKG",454,22,0)
+^9.49I^1^1
+"PKG",454,22,1,0)
+3.0^3020319^3020517^126
+"PKG",454,22,1,"PAH",1,0)
+350_DD^3120726
+"QUES","XPF1",0)
+Y
+"QUES","XPF1","??")
+^D REP^XPDH
+"QUES","XPF1","A")
+Shall I write over your |FLAG| File
+"QUES","XPF1","B")
+YES
+"QUES","XPF1","M")
+D XPF1^XPDIQ
+"QUES","XPF2",0)
+Y
+"QUES","XPF2","??")
+^D DTA^XPDH
+"QUES","XPF2","A")
+Want my data |FLAG| yours
+"QUES","XPF2","B")
+YES
+"QUES","XPF2","M")
+D XPF2^XPDIQ
+"QUES","XPI1",0)
+YO
+"QUES","XPI1","??")
+^D INHIBIT^XPDH
+"QUES","XPI1","A")
+Want KIDS to INHIBIT LOGONs during the install
+"QUES","XPI1","B")
+NO
+"QUES","XPI1","M")
+D XPI1^XPDIQ
+"QUES","XPM1",0)
+PO^VA(200,:EM
+"QUES","XPM1","??")
+^D MG^XPDH
+"QUES","XPM1","A")
+Enter the Coordinator for Mail Group '|FLAG|'
+"QUES","XPM1","B")
+
+"QUES","XPM1","M")
+D XPM1^XPDIQ
+"QUES","XPO1",0)
+Y
+"QUES","XPO1","??")
+^D MENU^XPDH
+"QUES","XPO1","A")
+Want KIDS to Rebuild Menu Trees Upon Completion of Install
+"QUES","XPO1","B")
+NO
+"QUES","XPO1","M")
+D XPO1^XPDIQ
+"QUES","XPZ1",0)
+Y
+"QUES","XPZ1","??")
+^D OPT^XPDH
+"QUES","XPZ1","A")
+Want to DISABLE Scheduled Options, Menu Options, and Protocols
+"QUES","XPZ1","B")
+NO
+"QUES","XPZ1","M")
+D XPZ1^XPDIQ
+"QUES","XPZ2",0)
+Y
+"QUES","XPZ2","??")
+^D RTN^XPDH
+"QUES","XPZ2","A")
+Want to MOVE routines to other CPUs
+"QUES","XPZ2","B")
+NO
+"QUES","XPZ2","M")
+D XPZ2^XPDIQ
+"SEC","^DIC",2006.8,2006.8,0,"AUDIT")
+
+"SEC","^DIC",2006.8,2006.8,0,"DD")
+@
+"SEC","^DIC",2006.8,2006.8,0,"DEL")
+@
+"SEC","^DIC",2006.8,2006.8,0,"LAYGO")
+@
+"SEC","^DIC",2006.8,2006.8,0,"RD")
+@
+"SEC","^DIC",2006.8,2006.8,0,"WR")
+@
+"VER")
+8.0^22.0
+"^DD",2006.8,2006.8,0)
+FIELD^^25^21
+"^DD",2006.8,2006.8,0,"DDA")
+N
+"^DD",2006.8,2006.8,0,"DT")
+3011213
+"^DD",2006.8,2006.8,0,"NM","BP SERVERS")
+
+"^DD",2006.8,2006.8,0,"PT",2006.1,60.4)
+
+"^DD",2006.8,2006.8,0,"PT",2006.1,62.5)
+
+"^DD",2006.8,2006.8,0,"VRPK")
+MAG
+"^DD",2006.8,2006.8,.01,0)
+NAME^RFX^^0;1^K:$L(X)>6!($L(X)<3) X
+"^DD",2006.8,2006.8,.01,1,0)
+^.1^^0
+"^DD",2006.8,2006.8,.01,3)
+This must be a unique name.
+"^DD",2006.8,2006.8,.01,21,0)
+^.001^2^2^3100308^^^^
+"^DD",2006.8,2006.8,.01,21,1,0)
+This is the name that is given to a particular BP Server.
+"^DD",2006.8,2006.8,.01,21,2,0)
+This identifying name remains with the system.
+"^DD",2006.8,2006.8,.01,"DT")
+3100219
+"^DD",2006.8,2006.8,.04,0)
+PLACE^RP2006.1'^MAG(2006.1,^0;2^Q
+"^DD",2006.8,2006.8,.04,1,0)
+^.1^^0
+"^DD",2006.8,2006.8,.04,21,0)
+^.001^7^7^3100904^^^^
+"^DD",2006.8,2006.8,.04,21,1,0)
+This field identifies the Imaging site platform that pertains
+"^DD",2006.8,2006.8,.04,21,2,0)
+to this BP server.  The Site Parameter entry defines all of the
+"^DD",2006.8,2006.8,.04,21,3,0)
+attributes of VistA Imaging local area network and application 
+"^DD",2006.8,2006.8,.04,21,4,0)
+site parameters for DICOM Gateway(s), VistARad, TeleReader, 
+"^DD",2006.8,2006.8,.04,21,5,0)
+Clinical capture and Clinical display applications.
+"^DD",2006.8,2006.8,.04,21,6,0)
+ 
+"^DD",2006.8,2006.8,.04,21,7,0)
+The Imaging site is determined by the end-users default division.
+"^DD",2006.8,2006.8,.04,"DT")
+3080714
+"^DD",2006.8,2006.8,3,0)
+PURGE^SX^0:NO;1:YES;^0;3^Q
+"^DD",2006.8,2006.8,3,3)
+This enables this workstation to perform the auto purge function
+"^DD",2006.8,2006.8,3,21,0)
+^.001^2^2^3100308^^^^
+"^DD",2006.8,2006.8,3,21,1,0)
+This value designates this BP Server for the task of running 
+"^DD",2006.8,2006.8,3,21,2,0)
+the Auto-purge and Scheduled Purge tasks. 
+"^DD",2006.8,2006.8,3,"DT")
+3090407
+"^DD",2006.8,2006.8,4,0)
+SCHEDULED VERIFY^SX^0:NO;1:YES;^0;4^Q
+"^DD",2006.8,2006.8,4,3)
+This enables this workstation to perform the Scheduled VERIFY function.
+"^DD",2006.8,2006.8,4,21,0)
+^.001^2^2^3100308^^^
+"^DD",2006.8,2006.8,4,21,1,0)
+This value designates this workstation for the task of running 
+"^DD",2006.8,2006.8,4,21,2,0)
+the Scheduled-verifier function.
+"^DD",2006.8,2006.8,4,"DT")
+3090318
+"^DD",2006.8,2006.8,11,0)
+BACKGROUND PROCESSOR^SX^0:NO;1:YES;^0;12^Q
+"^DD",2006.8,2006.8,11,3)
+Enter YES if this system is to be used as a BACKGROUND PROCESSOR
+"^DD",2006.8,2006.8,11,21,0)
+^.001^6^6^3100308^^^^
+"^DD",2006.8,2006.8,11,21,1,0)
+This field designates a BACKGROUND PROCESSOR server.
+"^DD",2006.8,2006.8,11,21,2,0)
+Only entries defined as a BACKGROUND PROCESSOR may be 
+"^DD",2006.8,2006.8,11,21,3,0)
+assigned tasks to process.  
+"^DD",2006.8,2006.8,11,21,4,0)
+ 
+"^DD",2006.8,2006.8,11,21,5,0)
+This field is not user editable but maintained by the 
+"^DD",2006.8,2006.8,11,21,6,0)
+BP Queue Processor client software
+"^DD",2006.8,2006.8,11,"DT")
+3080630
+"^DD",2006.8,2006.8,12,0)
+ABSTRACT^*SX^0:NO;1:YES;^0;13^Q
+"^DD",2006.8,2006.8,12,3)
+Enter YES if the BP Server should execute ABSTRACT queues.
+"^DD",2006.8,2006.8,12,21,0)
+^.001^6^6^3100308^^^^
+"^DD",2006.8,2006.8,12,21,1,0)
+This value indicates whether the Background Processor Server 
+"^DD",2006.8,2006.8,12,21,2,0)
+assigned to this entry executes ABSTRACT queues.
+"^DD",2006.8,2006.8,12,21,3,0)
+ 
+"^DD",2006.8,2006.8,12,21,4,0)
+Only one Background Processor Server may be assigned this task
+"^DD",2006.8,2006.8,12,21,5,0)
+at a time.  Retire the Abstract assignment from its current 
+"^DD",2006.8,2006.8,12,21,6,0)
+assignee, and then reassign.
+"^DD",2006.8,2006.8,12,"DT")
+3090407
+"^DD",2006.8,2006.8,13,0)
+JUKEBOX^SX^0:NO;1:YES;^0;14^Q
+"^DD",2006.8,2006.8,13,3)
+Enter YES if the BP Server should execute JUKEBOX queues.
+"^DD",2006.8,2006.8,13,21,0)
+^.001^6^6^3100907^^^^
+"^DD",2006.8,2006.8,13,21,1,0)
+This value indicates whether the Background Processor Server
+"^DD",2006.8,2006.8,13,21,2,0)
+assigned to this entry executes JUKEBOX queues.
+"^DD",2006.8,2006.8,13,21,3,0)
+ 
+"^DD",2006.8,2006.8,13,21,4,0)
+Only one Background Processor Server may be assigned this task
+"^DD",2006.8,2006.8,13,21,5,0)
+at a time.  Retire the JUKEBOX assignment from its current 
+"^DD",2006.8,2006.8,13,21,6,0)
+assignee, and then reassign.
+"^DD",2006.8,2006.8,13,"DT")
+3090407
+"^DD",2006.8,2006.8,14,0)
+JBTOHD^SX^0:NO;1:YES;^0;15^Q
+"^DD",2006.8,2006.8,14,3)
+Enter YES if the BP Server should execute JBTOHD queues.
+"^DD",2006.8,2006.8,14,21,0)
+^.001^6^6^3100907^^^^
+"^DD",2006.8,2006.8,14,21,1,0)
+This value indicates whether the Background Processor Server
+"^DD",2006.8,2006.8,14,21,2,0)
+assigned to this entry executes JBTOHD queues.
+"^DD",2006.8,2006.8,14,21,3,0)
+ 
+"^DD",2006.8,2006.8,14,21,4,0)
+Only one Background Processor Server may be assigned this task
+"^DD",2006.8,2006.8,14,21,5,0)
+at a time.  Retire the JBTOHD assignment from its current 
+"^DD",2006.8,2006.8,14,21,6,0)
+assignee, and then reassign.
+"^DD",2006.8,2006.8,14,"DT")
+3090407
+"^DD",2006.8,2006.8,15,0)
+PREFET^*SX^0:NO;1:YES;^0;16^Q
+"^DD",2006.8,2006.8,15,3)
+Enter YES if the BP Server should execute PREFET queues.
+"^DD",2006.8,2006.8,15,21,0)
+^.001^6^6^3100907^^^^
+"^DD",2006.8,2006.8,15,21,1,0)
+This value indicates whether the Background Processor Server
+"^DD",2006.8,2006.8,15,21,2,0)
+assigned to this entry executes PREFET queues.
+"^DD",2006.8,2006.8,15,21,3,0)
+ 
+"^DD",2006.8,2006.8,15,21,4,0)
+Only one Background Processor Server may be assigned this task
+"^DD",2006.8,2006.8,15,21,5,0)
+at a time.  Retire the PREFET assignment from its current 
+"^DD",2006.8,2006.8,15,21,6,0)
+assignee, and then reassign.
+"^DD",2006.8,2006.8,15,"DT")
+3090407
+"^DD",2006.8,2006.8,16,0)
+IMPORT^SX^0:NO;1:YES;^0;17^Q
+"^DD",2006.8,2006.8,16,3)
+Enter YES if the BP Server should execute IMPORT queues.
+"^DD",2006.8,2006.8,16,21,0)
+^.001^6^6^3100907^^^^
+"^DD",2006.8,2006.8,16,21,1,0)
+This value indicates whether the Background Processor Server
+"^DD",2006.8,2006.8,16,21,2,0)
+assigned to this entry executes IMPORT queues.
+"^DD",2006.8,2006.8,16,21,3,0)
+ 
+"^DD",2006.8,2006.8,16,21,4,0)
+Only one Background Processor Server may be assigned this task
+"^DD",2006.8,2006.8,16,21,5,0)
+at a time.  Retire the IMPORT assignment from its current 
+"^DD",2006.8,2006.8,16,21,6,0)
+assignee, and then reassign.
+"^DD",2006.8,2006.8,16,"DT")
+3090407
+"^DD",2006.8,2006.8,17,0)
+GCC^*SX^0:NO;1:YES;^0;18^Q
+"^DD",2006.8,2006.8,17,3)
+Enter YES if the BP Server should execute GCC queues.
+"^DD",2006.8,2006.8,17,21,0)
+^.001^6^6^3100907^^^^
+"^DD",2006.8,2006.8,17,21,1,0)
+This value indicates whether the Background Processor Server
+"^DD",2006.8,2006.8,17,21,2,0)
+assigned to this entry executes GCC queues.
+"^DD",2006.8,2006.8,17,21,3,0)
+ 
+"^DD",2006.8,2006.8,17,21,4,0)
+Only one Background Processor Server may be assigned this task
+"^DD",2006.8,2006.8,17,21,5,0)
+at a time.  Retire the GCC assignment from its current 
+"^DD",2006.8,2006.8,17,21,6,0)
+assignee, and then reassign.
+"^DD",2006.8,2006.8,17,"DT")
+3090407
+"^DD",2006.8,2006.8,20,0)
+DELETE^*SX^0:NO;1:YES;^0;23^Q
+"^DD",2006.8,2006.8,20,3)
+Enter YES if the BP Server should execute DELETE queues.
+"^DD",2006.8,2006.8,20,21,0)
+^.001^6^6^3100907^^^^
+"^DD",2006.8,2006.8,20,21,1,0)
+This value indicates whether the Background Processor Server
+"^DD",2006.8,2006.8,20,21,2,0)
+assigned to this entry executes DELETE queues.
+"^DD",2006.8,2006.8,20,21,3,0)
+ 
+"^DD",2006.8,2006.8,20,21,4,0)
+Only one Background Processor Server may be assigned this task
+"^DD",2006.8,2006.8,20,21,5,0)
+at a time.  Retire the DELETE assignment from its current 
+"^DD",2006.8,2006.8,20,21,6,0)
+assignee, and then reassign.
+"^DD",2006.8,2006.8,20,"DT")
+3090407
+"^DD",2006.8,2006.8,24,0)
+EVALUATE^S^1:Yes;0:No;^0;24^Q
+"^DD",2006.8,2006.8,24,3)
+Enter 'Yes' when this processor evaluates routing rules.
+"^DD",2006.8,2006.8,24,21,0)
+^^2^2^2990129^^
+"^DD",2006.8,2006.8,24,21,1,0)
+This field indicates whether or not a background processor
+"^DD",2006.8,2006.8,24,21,2,0)
+evaluates routing rules.
+"^DD",2006.8,2006.8,24,"DT")
+2981014
+"^DD",2006.8,2006.8,25,0)
+SEND^S^1:Yes;0:No;^0;25^Q
+"^DD",2006.8,2006.8,25,3)
+Enter 'Yes' when this background processor processes 'SEND' actions.
+"^DD",2006.8,2006.8,25,21,0)
+^^2^2^2981014^
+"^DD",2006.8,2006.8,25,21,1,0)
+This field indicates whether or not a background processor
+"^DD",2006.8,2006.8,25,21,2,0)
+processes 'SEND' actions.
+"^DD",2006.8,2006.8,25,"DT")
+2981014
+"^DD",2006.8,2006.8,49,0)
+NETWORK_LOG_ARCHIVE^F^^2;1^K:$L(X)>160!($L(X)<1) X
+"^DD",2006.8,2006.8,49,3)
+Enter the share path for the archive logs, answer must be 1-160 characters in length.
+"^DD",2006.8,2006.8,49,21,0)
+^.001^4^4^3100308^^^^
+"^DD",2006.8,2006.8,49,21,1,0)
+This is the location where this BP Server stores the activity
+"^DD",2006.8,2006.8,49,21,2,0)
+logs. An example of a share path is: \\iswxxximg1\share1..., 
+"^DD",2006.8,2006.8,49,21,3,0)
+where xxx is the site code.
+"^DD",2006.8,2006.8,49,21,4,0)
+This share should be scheduled for backups.
+"^DD",2006.8,2006.8,49,"DT")
+3060606
+"^DD",2006.8,2006.8,50,0)
+BP SERVER NETWORK NAME^FX^^1;1^S DIC("S")="I '$O(^MAG(2006.8,""C"",$$PLACE^MAGBAPI(+$G(DUZ(2))),X,0))" K:($L(X)>30) X
+"^DD",2006.8,2006.8,50,1,0)
+^.1^^0
+"^DD",2006.8,2006.8,50,3)
+The computer name defined in network properties on this BP Server.
+"^DD",2006.8,2006.8,50,12.1)
+S DIC("S")="I '$O(^MAG(2006.8,""C"",$$PLACE^MAGBAPI(+$G(DUZ(2))),Y,0))"
+"^DD",2006.8,2006.8,50,21,0)
+^.001^2^2^3100308^^^^
+"^DD",2006.8,2006.8,50,21,1,0)
+This is the computer name defined on the BP Server for network
+"^DD",2006.8,2006.8,50,21,2,0)
+operation (i.e. the Network computer name).
+"^DD",2006.8,2006.8,50,"DT")
+3080703
+"^DD",2006.8,2006.8,51,0)
+BP CLIENT VERSION^F^^1;2^K:$L(X)>24!($L(X)<3) X
+"^DD",2006.8,2006.8,51,3)
+Enter the BP software version, answer must be 3-24 characters in length
+"^DD",2006.8,2006.8,51,21,0)
+^.001^3^3^3100308^^^
+"^DD",2006.8,2006.8,51,21,1,0)
+This is the BP software version installed on this BP Server.  
+"^DD",2006.8,2006.8,51,21,2,0)
+This field is maintained by the BP Queue Processor, Verifier, 
+"^DD",2006.8,2006.8,51,21,3,0)
+and Purge applications for this Server.
+"^DD",2006.8,2006.8,51,"DT")
+3000208
+"^DD",2006.8,2006.8,52,0)
+BP CLIENT DISTRIBUTION DATE^D^^1;3^S %DT="EX" D ^%DT S X=Y K:X<1 X
+"^DD",2006.8,2006.8,52,3)
+(No range limit on date)
+"^DD",2006.8,2006.8,52,21,0)
+^.001^1^1^3100308^^
+"^DD",2006.8,2006.8,52,21,1,0)
+This is the Windows date modified for the MAGQBTM executable.
+"^DD",2006.8,2006.8,52,"DT")
+3090427
+"^DD",2006.8,2006.8,53,0)
+BP SERVER OS^F^^1;4^K:$L(X)>60!($L(X)<3) X
+"^DD",2006.8,2006.8,53,3)
+Answer must be 3-60 characters in length.
+"^DD",2006.8,2006.8,53,21,0)
+^^3^3^3100308^
+"^DD",2006.8,2006.8,53,21,1,0)
+This is the operating system for the BP Server.  This field
+"^DD",2006.8,2006.8,53,21,2,0)
+is maintained by the BP Queue Processor, Verifier, and Purge 
+"^DD",2006.8,2006.8,53,21,3,0)
+applications for this Server.
+"^DD",2006.8,2006.8,53,"DT")
+3000329
+"^DD",2006.8,2006.8,54,0)
+LOGSIZE^NJ5,0^^2;2^K:+X'=X!(X>10000)!(X<0)!(X?.E1"."1N.N) X
+"^DD",2006.8,2006.8,54,3)
+Type a number between 0 and 10000 to indicate the maximum size for archived log files to reach.
+"^DD",2006.8,2006.8,54,21,0)
+^.001^3^3^3100907^^^^
+"^DD",2006.8,2006.8,54,21,1,0)
+This value determines the size in megabytes of the archived
+"^DD",2006.8,2006.8,54,21,2,0)
+html log files generated by the BP application that are 
+"^DD",2006.8,2006.8,54,21,3,0)
+executed on the BP server assigned to this entry.
+"^DD",2006.8,2006.8,54,"DT")
+3100222
+"^DD",2006.8,2006.8,55,0)
+LAST EXECUTION DATE^D^^1;5^S %DT="EX" D ^%DT S X=Y K:Y<1 X
+"^DD",2006.8,2006.8,55,3)
+This is the latest date of activity for this Background Processor server.
+"^DD",2006.8,2006.8,55,21,0)
+^.001^3^3^3100308^^^^
+"^DD",2006.8,2006.8,55,21,1,0)
+This field is updated by the Background Processor and
+"^DD",2006.8,2006.8,55,21,2,0)
+identifies the date when the Background Processor was
+"^DD",2006.8,2006.8,55,21,3,0)
+last executed. 
+"^DD",2006.8,2006.8,55,"DT")
+3100222
+"^DIC",2006.8,2006.8,0)
+BP SERVERS^2006.8
+"^DIC",2006.8,2006.8,0,"GL")
+^MAG(2006.8,
+"^DIC",2006.8,2006.8,"%",0)
+^1.005^1^1
+"^DIC",2006.8,2006.8,"%",1,0)
+MAG
+"^DIC",2006.8,2006.8,"%","B","MAG",1)
+
+"^DIC",2006.8,2006.8,"%D",0)
+^^26^26^3010620^
+"^DIC",2006.8,2006.8,"%D",1,0)
+ +---------------------------------------------------------------+
+"^DIC",2006.8,2006.8,"%D",2,0)
+ |                                                               |
+"^DIC",2006.8,2006.8,"%D",3,0)
+ | Property of the US Government.                                |
+"^DIC",2006.8,2006.8,"%D",4,0)
+ | No permission to copy or redistribute this software is given. |
+"^DIC",2006.8,2006.8,"%D",5,0)
+ | Use of unreleased versions of this software requires the user |
+"^DIC",2006.8,2006.8,"%D",6,0)
+ | to execute a written test agreement with the VistA Imaging    |
+"^DIC",2006.8,2006.8,"%D",7,0)
+ | Development Office of the Department of Veterans Affairs,     |
+"^DIC",2006.8,2006.8,"%D",8,0)
+ | telephone (301) 734-0100.                                     |
+"^DIC",2006.8,2006.8,"%D",9,0)
+ |                                                               |
+"^DIC",2006.8,2006.8,"%D",10,0)
+ | The Food and Drug Administration classifies this software as  |
+"^DIC",2006.8,2006.8,"%D",11,0)
+ | a medical device.  As such, it may not be changed in any way. |
+"^DIC",2006.8,2006.8,"%D",12,0)
+ | Modifications to this software may result in an adulterated   |
+"^DIC",2006.8,2006.8,"%D",13,0)
+ | medical device under 21CFR820, the use of which is considered |
+"^DIC",2006.8,2006.8,"%D",14,0)
+ | to be a violation of US Federal Statutes.                     |
+"^DIC",2006.8,2006.8,"%D",15,0)
+ |                                                               |
+"^DIC",2006.8,2006.8,"%D",16,0)
+ +---------------------------------------------------------------+
+"^DIC",2006.8,2006.8,"%D",17,0)
+ 
+"^DIC",2006.8,2006.8,"%D",18,0)
+This file contains all the Background Processor workstations
+"^DIC",2006.8,2006.8,"%D",19,0)
+used in the Imaging System.
+"^DIC",2006.8,2006.8,"%D",20,0)
+It points to the Hospital Location file and has other identifying fields.
+"^DIC",2006.8,2006.8,"%D",21,0)
+ The Imaging Workstations file is designed to track imaging workstation:
+"^DIC",2006.8,2006.8,"%D",22,0)
+  * locations
+"^DIC",2006.8,2006.8,"%D",23,0)
+  * volume set names
+"^DIC",2006.8,2006.8,"%D",24,0)
+  * component serial numbers
+"^DIC",2006.8,2006.8,"%D",25,0)
+  * display modes  
+"^DIC",2006.8,2006.8,"%D",26,0)
+ It points to the Hospital Location file and has other identifying fields.
+"^DIC",2006.8,"B","BP SERVERS",2006.8)
+
+**END**
+**END**

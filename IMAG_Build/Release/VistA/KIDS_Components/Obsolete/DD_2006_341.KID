@@ -1,0 +1,414 @@
+KIDS Distribution saved on Oct 04, 2000@15:14:10
+File export for VSS
+**KIDS**:Z VSS FILE 0.1T^
+
+**INSTALL NAME**
+Z VSS FILE 0.1T
+"BLD",1195,0)
+Z VSS FILE 0.1T^^0^3001004^n
+"BLD",1195,1,0)
+^^1^1^3000906^
+"BLD",1195,1,1,0)
+KIDS file for one single file
+"BLD",1195,4,0)
+^9.64PA^2006.341^1
+"BLD",1195,4,2006.341,0)
+2006.341
+"BLD",1195,4,2006.341,222)
+y^y^f^^^^n
+"BLD",1195,4,"B",2006.341,2006.341)
+
+"BLD",1195,"KRN",0)
+^9.67PA^19^17
+"BLD",1195,"KRN",.4,0)
+.4
+"BLD",1195,"KRN",.401,0)
+.401
+"BLD",1195,"KRN",.402,0)
+.402
+"BLD",1195,"KRN",.403,0)
+.403
+"BLD",1195,"KRN",.5,0)
+.5
+"BLD",1195,"KRN",.84,0)
+.84
+"BLD",1195,"KRN",3.6,0)
+3.6
+"BLD",1195,"KRN",3.8,0)
+3.8
+"BLD",1195,"KRN",9.2,0)
+9.2
+"BLD",1195,"KRN",9.8,0)
+9.8
+"BLD",1195,"KRN",19,0)
+19
+"BLD",1195,"KRN",19.1,0)
+19.1
+"BLD",1195,"KRN",101,0)
+101
+"BLD",1195,"KRN",409.61,0)
+409.61
+"BLD",1195,"KRN",771,0)
+771
+"BLD",1195,"KRN",870,0)
+870
+"BLD",1195,"KRN",8994,0)
+8994
+"BLD",1195,"KRN","B",.4,.4)
+
+"BLD",1195,"KRN","B",.401,.401)
+
+"BLD",1195,"KRN","B",.402,.402)
+
+"BLD",1195,"KRN","B",.403,.403)
+
+"BLD",1195,"KRN","B",.5,.5)
+
+"BLD",1195,"KRN","B",.84,.84)
+
+"BLD",1195,"KRN","B",3.6,3.6)
+
+"BLD",1195,"KRN","B",3.8,3.8)
+
+"BLD",1195,"KRN","B",9.2,9.2)
+
+"BLD",1195,"KRN","B",9.8,9.8)
+
+"BLD",1195,"KRN","B",19,19)
+
+"BLD",1195,"KRN","B",19.1,19.1)
+
+"BLD",1195,"KRN","B",101,101)
+
+"BLD",1195,"KRN","B",409.61,409.61)
+
+"BLD",1195,"KRN","B",771,771)
+
+"BLD",1195,"KRN","B",870,870)
+
+"BLD",1195,"KRN","B",8994,8994)
+
+"FIA",2006.341)
+SCANNED FORM-OPTIONAL MERGE
+"FIA",2006.341,0)
+^MAGG(2006.341,
+"FIA",2006.341,0,0)
+2006.341
+"FIA",2006.341,0,1)
+y^y^f^^^^n
+"FIA",2006.341,0,10)
+
+"FIA",2006.341,0,11)
+
+"FIA",2006.341,0,"RLRO")
+
+"FIA",2006.341,2006.341)
+0
+"MBREQ")
+0
+"QUES","XPF1",0)
+Y
+"QUES","XPF1","??")
+^D REP^XPDH
+"QUES","XPF1","A")
+Shall I write over your |FLAG| File
+"QUES","XPF1","B")
+YES
+"QUES","XPF1","M")
+D XPF1^XPDIQ
+"QUES","XPF2",0)
+Y
+"QUES","XPF2","??")
+^D DTA^XPDH
+"QUES","XPF2","A")
+Want my data |FLAG| yours
+"QUES","XPF2","B")
+YES
+"QUES","XPF2","M")
+D XPF2^XPDIQ
+"QUES","XPI1",0)
+YO
+"QUES","XPI1","??")
+^D INHIBIT^XPDH
+"QUES","XPI1","A")
+Want KIDS to INHIBIT LOGONs during the install
+"QUES","XPI1","B")
+YES
+"QUES","XPI1","M")
+D XPI1^XPDIQ
+"QUES","XPM1",0)
+PO^VA(200,:EM
+"QUES","XPM1","??")
+^D MG^XPDH
+"QUES","XPM1","A")
+Enter the Coordinator for Mail Group '|FLAG|'
+"QUES","XPM1","B")
+
+"QUES","XPM1","M")
+D XPM1^XPDIQ
+"QUES","XPO1",0)
+Y
+"QUES","XPO1","??")
+^D MENU^XPDH
+"QUES","XPO1","A")
+Want KIDS to Rebuild Menu Trees Upon Completion of Install
+"QUES","XPO1","B")
+YES
+"QUES","XPO1","M")
+D XPO1^XPDIQ
+"QUES","XPZ1",0)
+Y
+"QUES","XPZ1","??")
+^D OPT^XPDH
+"QUES","XPZ1","A")
+Want to DISABLE Scheduled Options, Menu Options, and Protocols
+"QUES","XPZ1","B")
+YES
+"QUES","XPZ1","M")
+D XPZ1^XPDIQ
+"QUES","XPZ2",0)
+Y
+"QUES","XPZ2","??")
+^D RTN^XPDH
+"QUES","XPZ2","A")
+Want to MOVE routines to other CPUs
+"QUES","XPZ2","B")
+NO
+"QUES","XPZ2","M")
+D XPZ2^XPDIQ
+"VER")
+8.0^22.0
+"^DD",2006.341,2006.341,0)
+FIELD^^9^11
+"^DD",2006.341,2006.341,0,"DDA")
+N
+"^DD",2006.341,2006.341,0,"DT")
+2960123
+"^DD",2006.341,2006.341,0,"IX","AC",2006.341,6)
+
+"^DD",2006.341,2006.341,0,"IX","B",2006.341,.01)
+
+"^DD",2006.341,2006.341,0,"IX","C",2006.341,4)
+
+"^DD",2006.341,2006.341,0,"NM","SCANNED FORM-OPTIONAL MERGE")
+
+"^DD",2006.341,2006.341,0,"PT",2006.35,.01)
+
+"^DD",2006.341,2006.341,.01,0)
+NAME^RF^^0;1^K:$L(X)>30!($L(X)<3)!'(X'?1P.E) X
+"^DD",2006.341,2006.341,.01,1,0)
+^.1
+"^DD",2006.341,2006.341,.01,1,1,0)
+2006.341^B
+"^DD",2006.341,2006.341,.01,1,1,1)
+S ^MAGG(2006.341,"B",$E(X,1,30),DA)=""
+"^DD",2006.341,2006.341,.01,1,1,2)
+K ^MAGG(2006.341,"B",$E(X,1,30),DA)
+"^DD",2006.341,2006.341,.01,3)
+Answer must be 3-30 characters in length.
+"^DD",2006.341,2006.341,.01,"DT")
+2940121
+"^DD",2006.341,2006.341,.05,0)
+DESC^F^^1;1^K:$L(X)>240!($L(X)<1) X
+"^DD",2006.341,2006.341,.05,3)
+Answer must be 1-240 characters in length.
+"^DD",2006.341,2006.341,.05,"DT")
+2940414
+"^DD",2006.341,2006.341,1,0)
+DOWNLOAD TAG^F^^0;2^K:$L(X)>8!($L(X)<1) X
+"^DD",2006.341,2006.341,1,3)
+If this is an entry to download patient information, This field is required.
+"^DD",2006.341,2006.341,1,"DT")
+2960118
+"^DD",2006.341,2006.341,2,0)
+DOWNLOAD ROUTINE^F^^0;3^K:$L(X)>8!($L(X)<1) X
+"^DD",2006.341,2006.341,2,3)
+If this is an entry to download patient information, then this Field is required.
+"^DD",2006.341,2006.341,2,21,0)
+^^8^8^2960118^^^^
+"^DD",2006.341,2006.341,2,21,1,0)
+To merge patient information into a field on a Teleform Form,
+"^DD",2006.341,2006.341,2,21,2,0)
+an extrinsic function ([TAG]^ROUTINE) will be called for each patient.
+"^DD",2006.341,2006.341,2,21,3,0)
+The function must accept 4 parameters:
+"^DD",2006.341,2006.341,2,21,4,0)
+   result=$$[TAG]^ROUTINE(DFN,Param,Clinic Pointer,Appt Date-Time).
+"^DD",2006.341,2006.341,2,21,5,0)
+ The value for Param will be copied from the field PARAMETERS.
+"^DD",2006.341,2006.341,2,21,6,0)
+
+"^DD",2006.341,2006.341,2,21,7,0)
+The function must Quit with a value equal to whatever information is
+"^DD",2006.341,2006.341,2,21,8,0)
+to be merged into the Teleform Field for this patient.
+"^DD",2006.341,2006.341,2,"DT")
+2960118
+"^DD",2006.341,2006.341,3,0)
+PARAMETERS^F^^0;4^K:$L(X)>20!($L(X)<1) X
+"^DD",2006.341,2006.341,3,3)
+Any parameters the Routine needs.
+"^DD",2006.341,2006.341,3,"DT")
+2931211
+"^DD",2006.341,2006.341,4,0)
+TELEFORM FIELD NAME^F^^0;5^K:X[""""!($A(X)=45) X I $D(X) K:$L(X)>100!($L(X)<1) X
+"^DD",2006.341,2006.341,4,1,0)
+^.1
+"^DD",2006.341,2006.341,4,1,1,0)
+2006.341^C
+"^DD",2006.341,2006.341,4,1,1,1)
+S ^MAGG(2006.341,"C",$E(X,1,30),DA)=""
+"^DD",2006.341,2006.341,4,1,1,2)
+K ^MAGG(2006.341,"C",$E(X,1,30),DA)
+"^DD",2006.341,2006.341,4,1,1,"DT")
+2940120
+"^DD",2006.341,2006.341,4,3)
+Answer must be 1-100 characters in length.
+"^DD",2006.341,2006.341,4,"DT")
+2950206
+"^DD",2006.341,2006.341,5,0)
+LINES:FIELDS^F^^0;6^K:$L(X)>5!($L(X)<3)!'(X?1.2N1":"1.2N) X
+"^DD",2006.341,2006.341,5,3)
+Lines:Fields (in each line) that follow the Flag, e.g. '3:4'
+"^DD",2006.341,2006.341,5,21,0)
+^^8^8^2940121^
+"^DD",2006.341,2006.341,5,21,1,0)
+While merging information into a cell of type 'Flag'
+"^DD",2006.341,2006.341,5,21,2,0)
+the FLAG bubble is usually just pre-filled.
+"^DD",2006.341,2006.341,5,21,3,0)
+The flag type field indicates a series of entry fields that are related,
+"^DD",2006.341,2006.341,5,21,4,0)
+but aren't all codeable (i.e. aren't bubbles).
+"^DD",2006.341,2006.341,5,21,5,0)
+
+"^DD",2006.341,2006.341,5,21,6,0)
+When the form is scanned and data is being uploaded into VistA,
+"^DD",2006.341,2006.341,5,21,7,0)
+we need to know how many lines follow The Flag bubble, and how many
+"^DD",2006.341,2006.341,5,21,8,0)
+fields are in each line.   We specify that here.
+"^DD",2006.341,2006.341,5,"DT")
+2940121
+"^DD",2006.341,2006.341,6,0)
+VALUE FLD^S^1:YES;^2;1^Q
+"^DD",2006.341,2006.341,6,1,0)
+^.1
+"^DD",2006.341,2006.341,6,1,1,0)
+2006.341^AC^MUMPS
+"^DD",2006.341,2006.341,6,1,1,1)
+S ^MAGG(2006.341,"AC",$P(^MAGG(2006.341,DA,0),U),DA)=""
+"^DD",2006.341,2006.341,6,1,1,2)
+K ^MAGG(2006.341,"AC",$P(^MAGG(2006.341,DA,0),U),DA)
+"^DD",2006.341,2006.341,6,1,1,"%D",0)
+^^2^2^2960119^^^^
+"^DD",2006.341,2006.341,6,1,1,"%D",1,0)
+Cross-reference of Teleform Field names that are processed by the
+"^DD",2006.341,2006.341,6,1,1,"%D",2,0)
+Teleform FIELD Name, not because of a prefix or part of a Flag bubble.
+"^DD",2006.341,2006.341,6,1,1,"DT")
+2951120
+"^DD",2006.341,2006.341,6,3)
+This Fields value is sent to VALUE TAG^VALUE RTN to be processed
+"^DD",2006.341,2006.341,6,21,0)
+^^9^9^2951027^
+"^DD",2006.341,2006.341,6,21,1,0)
+This Teleform Field holds data that can't have a prefix. The prefix is how
+"^DD",2006.341,2006.341,6,21,2,0)
+we now determine what type of data it is.
+"^DD",2006.341,2006.341,6,21,3,0)
+We also have Flag Bubble fields that tell us how many pieces of
+"^DD",2006.341,2006.341,6,21,4,0)
+the data record immediately following the Flag piece are to be sent
+"^DD",2006.341,2006.341,6,21,5,0)
+to the tag 'FLG' in routine ^MAGGEN52.
+"^DD",2006.341,2006.341,6,21,6,0)
+This fields data, has no prefix, and isn't part of a Flagged set of data
+"^DD",2006.341,2006.341,6,21,7,0)
+pieces.  It is processed on it's own.
+"^DD",2006.341,2006.341,6,21,8,0)
+Flagging Teleform fields with a Flag Bubble is the old way things were
+"^DD",2006.341,2006.341,6,21,9,0)
+done with Teleform 2.0, it seemed like a good idea at the time.
+"^DD",2006.341,2006.341,6,"DT")
+2951120
+"^DD",2006.341,2006.341,7,0)
+VALUE TAG^F^^2;2^K:$L(X)>8!($L(X)<1)!'(X?1.8U) X
+"^DD",2006.341,2006.341,7,3)
+Answer must be 1-8 characters in length.
+"^DD",2006.341,2006.341,7,"DT")
+2951027
+"^DD",2006.341,2006.341,8,0)
+VALUE RTN^F^^2;3^K:$L(X)>8!($L(X)<1) X
+"^DD",2006.341,2006.341,8,3)
+Answer must be 1-8 characters in length.
+"^DD",2006.341,2006.341,8,21,0)
+^^2^2^2951027^
+"^DD",2006.341,2006.341,8,21,1,0)
+This RTN along with VALUE TAG, is called to process the data in this
+"^DD",2006.341,2006.341,8,21,2,0)
+Teleform Field, if any exists.
+"^DD",2006.341,2006.341,8,"DT")
+2951027
+"^DD",2006.341,2006.341,9,0)
+VALUE PARAMETER^F^^2;4^K:$L(X)>30!($L(X)<1) X
+"^DD",2006.341,2006.341,9,3)
+Any parameters to pass to the TAG^ROUTINE(,PARAM)
+"^DD",2006.341,2006.341,9,21,0)
+^^1^1^2960123^
+"^DD",2006.341,2006.341,9,21,1,0)
+Parameters to pass to TAG^ROUTINE will be in the second parameter.
+"^DD",2006.341,2006.341,9,"DT")
+2960123
+"^DIC",2006.341,2006.341,0)
+SCANNED FORM-OPTIONAL MERGE^2006.341
+"^DIC",2006.341,2006.341,0,"GL")
+^MAGG(2006.341,
+"^DIC",2006.341,2006.341,"%D",0)
+^^19^19^3000510
+"^DIC",2006.341,2006.341,"%D",1,0)
+ +---------------------------------------------------------------+
+"^DIC",2006.341,2006.341,"%D",2,0)
+ |                                                               |
+"^DIC",2006.341,2006.341,"%D",3,0)
+ | Property of the US Government.                                |
+"^DIC",2006.341,2006.341,"%D",4,0)
+ | No permission to copy or redistribute this software is given. |
+"^DIC",2006.341,2006.341,"%D",5,0)
+ | Use of unreleased versions of this software requires the user |
+"^DIC",2006.341,2006.341,"%D",6,0)
+ | to execute a written test agreement with the VistA Imaging    |
+"^DIC",2006.341,2006.341,"%D",7,0)
+ | Development Office of the Department of Veterans Affairs,     |
+"^DIC",2006.341,2006.341,"%D",8,0)
+ | telephone (301) 734-0100.                                     |
+"^DIC",2006.341,2006.341,"%D",9,0)
+ |                                                               |
+"^DIC",2006.341,2006.341,"%D",10,0)
+ | The Food and Drug Administration classifies this software as  |
+"^DIC",2006.341,2006.341,"%D",11,0)
+ | a Class II medical device.  As such, it may not be changed    |
+"^DIC",2006.341,2006.341,"%D",12,0)
+ | in any way.  Modifications to this software may result in an  |
+"^DIC",2006.341,2006.341,"%D",13,0)
+ | adulterated medical device under 21CFR820, the use of which   |
+"^DIC",2006.341,2006.341,"%D",14,0)
+ | is considered to be a violation of US Federal Statutes.       |
+"^DIC",2006.341,2006.341,"%D",15,0)
+ |                                                               |
+"^DIC",2006.341,2006.341,"%D",16,0)
+ +---------------------------------------------------------------+
+"^DIC",2006.341,2006.341,"%D",17,0)
+ 
+"^DIC",2006.341,2006.341,"%D",18,0)
+Has entries for specific patient information that will be downloaded
+"^DIC",2006.341,2006.341,"%D",19,0)
+to a Teleform Form.
+"^DIC",2006.341,"B","SCANNED FORM-OPTIONAL MERGE",2006.341)
+
+**END**
+**END**
+
+
+****
+****

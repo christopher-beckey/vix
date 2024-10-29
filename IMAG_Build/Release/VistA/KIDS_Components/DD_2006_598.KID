@@ -1,0 +1,444 @@
+KIDS Distribution saved on Jul 16, 2007@13:11:14
+Package for FILE named 2006.598
+**KIDS**:MAG*3.0*124^
+
+**INSTALL NAME**
+MAG*3.0*124
+"BLD",5936,0)
+MAG*3.0*124^^0^3070716^y
+"BLD",5936,1,0)
+^^4^4^3070716^
+"BLD",5936,1,1,0)
+This package contains a KIDS component
+"BLD",5936,1,2,0)
+for Running Baseline.
+"BLD",5936,1,3,0)
+ 
+"BLD",5936,1,4,0)
+This package transports the FileMan data dictionary named 2006.598.
+"BLD",5936,4,0)
+^9.64PA^2006.598^1
+"BLD",5936,4,2006.598,0)
+2006.598
+"BLD",5936,4,2006.598,222)
+y^y^f^^^^n
+"BLD",5936,4,"B",2006.598,2006.598)
+
+"BLD",5936,6.3)
+1
+"BLD",5936,"KRN",0)
+^9.67PA^8989.52^19
+"BLD",5936,"KRN",.4,0)
+.4
+"BLD",5936,"KRN",.401,0)
+.401
+"BLD",5936,"KRN",.402,0)
+.402
+"BLD",5936,"KRN",.403,0)
+.403
+"BLD",5936,"KRN",.5,0)
+.5
+"BLD",5936,"KRN",.84,0)
+.84
+"BLD",5936,"KRN",3.6,0)
+3.6
+"BLD",5936,"KRN",3.8,0)
+3.8
+"BLD",5936,"KRN",9.2,0)
+9.2
+"BLD",5936,"KRN",9.8,0)
+9.8
+"BLD",5936,"KRN",19,0)
+19
+"BLD",5936,"KRN",19.1,0)
+19.1
+"BLD",5936,"KRN",101,0)
+101
+"BLD",5936,"KRN",409.61,0)
+409.61
+"BLD",5936,"KRN",771,0)
+771
+"BLD",5936,"KRN",870,0)
+870
+"BLD",5936,"KRN",8989.51,0)
+8989.51
+"BLD",5936,"KRN",8989.52,0)
+8989.52
+"BLD",5936,"KRN",8994,0)
+8994
+"BLD",5936,"KRN","B",.4,.4)
+
+"BLD",5936,"KRN","B",.401,.401)
+
+"BLD",5936,"KRN","B",.402,.402)
+
+"BLD",5936,"KRN","B",.403,.403)
+
+"BLD",5936,"KRN","B",.5,.5)
+
+"BLD",5936,"KRN","B",.84,.84)
+
+"BLD",5936,"KRN","B",3.6,3.6)
+
+"BLD",5936,"KRN","B",3.8,3.8)
+
+"BLD",5936,"KRN","B",9.2,9.2)
+
+"BLD",5936,"KRN","B",9.8,9.8)
+
+"BLD",5936,"KRN","B",19,19)
+
+"BLD",5936,"KRN","B",19.1,19.1)
+
+"BLD",5936,"KRN","B",101,101)
+
+"BLD",5936,"KRN","B",409.61,409.61)
+
+"BLD",5936,"KRN","B",771,771)
+
+"BLD",5936,"KRN","B",870,870)
+
+"BLD",5936,"KRN","B",8989.51,8989.51)
+
+"BLD",5936,"KRN","B",8989.52,8989.52)
+
+"BLD",5936,"KRN","B",8994,8994)
+
+"FIA",2006.598)
+DICOM ERROR MESSAGE QUEUE
+"FIA",2006.598,0)
+^MAGDICOM(2006.598,
+"FIA",2006.598,0,0)
+2006.598
+"FIA",2006.598,0,1)
+y^y^f^^^^n
+"FIA",2006.598,0,10)
+
+"FIA",2006.598,0,11)
+
+"FIA",2006.598,0,"RLRO")
+
+"FIA",2006.598,2006.598)
+0
+"FIA",2006.598,2006.5985)
+0
+"FIA",2006.598,2006.5986)
+0
+"MBREQ")
+0
+"QUES","XPF1",0)
+Y
+"QUES","XPF1","??")
+^D REP^XPDH
+"QUES","XPF1","A")
+Shall I write over your |FLAG| File
+"QUES","XPF1","B")
+YES
+"QUES","XPF1","M")
+D XPF1^XPDIQ
+"QUES","XPF2",0)
+Y
+"QUES","XPF2","??")
+^D DTA^XPDH
+"QUES","XPF2","A")
+Want my data |FLAG| yours
+"QUES","XPF2","B")
+YES
+"QUES","XPF2","M")
+D XPF2^XPDIQ
+"QUES","XPI1",0)
+YO
+"QUES","XPI1","??")
+^D INHIBIT^XPDH
+"QUES","XPI1","A")
+Want KIDS to INHIBIT LOGONs during the install
+"QUES","XPI1","B")
+YES
+"QUES","XPI1","M")
+D XPI1^XPDIQ
+"QUES","XPM1",0)
+PO^VA(200,:EM
+"QUES","XPM1","??")
+^D MG^XPDH
+"QUES","XPM1","A")
+Enter the Coordinator for Mail Group '|FLAG|'
+"QUES","XPM1","B")
+
+"QUES","XPM1","M")
+D XPM1^XPDIQ
+"QUES","XPO1",0)
+Y
+"QUES","XPO1","??")
+^D MENU^XPDH
+"QUES","XPO1","A")
+Want KIDS to Rebuild Menu Trees Upon Completion of Install
+"QUES","XPO1","B")
+YES
+"QUES","XPO1","M")
+D XPO1^XPDIQ
+"QUES","XPZ1",0)
+Y
+"QUES","XPZ1","??")
+^D OPT^XPDH
+"QUES","XPZ1","A")
+Want to DISABLE Scheduled Options, Menu Options, and Protocols
+"QUES","XPZ1","B")
+YES
+"QUES","XPZ1","M")
+D XPZ1^XPDIQ
+"QUES","XPZ2",0)
+Y
+"QUES","XPZ2","??")
+^D RTN^XPDH
+"QUES","XPZ2","A")
+Want to MOVE routines to other CPUs
+"QUES","XPZ2","B")
+NO
+"QUES","XPZ2","M")
+D XPZ2^XPDIQ
+"SEC","^DIC",2006.598,2006.598,0,"AUDIT")
+@
+"SEC","^DIC",2006.598,2006.598,0,"DD")
+@
+"SEC","^DIC",2006.598,2006.598,0,"DEL")
+@
+"SEC","^DIC",2006.598,2006.598,0,"LAYGO")
+@
+"SEC","^DIC",2006.598,2006.598,0,"RD")
+@
+"SEC","^DIC",2006.598,2006.598,0,"WR")
+@
+"VER")
+8.0^22.0
+"^DD",2006.598,2006.598,0)
+FIELD^^6^6
+"^DD",2006.598,2006.598,0,"DT")
+3030716
+"^DD",2006.598,2006.598,0,"IX","B",2006.598,.01)
+
+"^DD",2006.598,2006.598,0,"NM","DICOM ERROR MESSAGE QUEUE")
+
+"^DD",2006.598,2006.598,0,"VRPK")
+MAG
+"^DD",2006.598,2006.598,.01,0)
+HEADER^RF^^0;1^K:$L(X)>80!($L(X)<3)!'(X'?1P.E) X
+"^DD",2006.598,2006.598,.01,1,0)
+^.1
+"^DD",2006.598,2006.598,.01,1,1,0)
+2006.598^B
+"^DD",2006.598,2006.598,.01,1,1,1)
+S ^MAGDICOM(2006.598,"B",$E(X,1,30),DA)=""
+"^DD",2006.598,2006.598,.01,1,1,2)
+K ^MAGDICOM(2006.598,"B",$E(X,1,30),DA)
+"^DD",2006.598,2006.598,.01,3)
+Enter a header for the error message.
+"^DD",2006.598,2006.598,.01,21,0)
+^^2^2^3030716^
+"^DD",2006.598,2006.598,.01,21,1,0)
+The value of this field is a string that is used as the header
+"^DD",2006.598,2006.598,.01,21,2,0)
+for the error message.
+"^DD",2006.598,2006.598,.01,"DT")
+3030716
+"^DD",2006.598,2006.598,2,0)
+ROUTINE^F^^1;1^K:$L(X)>8!($L(X)<1) X
+"^DD",2006.598,2006.598,2,3)
+Enter the name of the routine that invoked the error trap.
+"^DD",2006.598,2006.598,2,21,0)
+^^1^1^3030716^
+"^DD",2006.598,2006.598,2,21,1,0)
+The value of this field is a string that identifies a MUMPS routine.
+"^DD",2006.598,2006.598,2,"DT")
+3030716
+"^DD",2006.598,2006.598,3,0)
+IGNORE^S^0:Create error log;1:Ignore error log;^1;2^Q
+"^DD",2006.598,2006.598,3,3)
+Indicate whether or not to create an error log.
+"^DD",2006.598,2006.598,3,21,0)
+^^4^4^3030716^
+"^DD",2006.598,2006.598,3,21,1,0)
+The value of this field is a flag that indicates whether or
+"^DD",2006.598,2006.598,3,21,2,0)
+not an error log is to be produced. When the value of this
+"^DD",2006.598,2006.598,3,21,3,0)
+field is false, an error log is created, otherwise the creation
+"^DD",2006.598,2006.598,3,21,4,0)
+of the error log is ignored.
+"^DD",2006.598,2006.598,3,"DT")
+3030716
+"^DD",2006.598,2006.598,4,0)
+CRITICAL^S^0:Not critical;1:Critical;^1;3^Q
+"^DD",2006.598,2006.598,4,3)
+Indicate whether or not this is a critical error.
+"^DD",2006.598,2006.598,4,21,0)
+^^4^4^3030716^
+"^DD",2006.598,2006.598,4,21,1,0)
+The value of this field is a flag that indicates whether or not
+"^DD",2006.598,2006.598,4,21,2,0)
+the current error is a "critical" one. When an error is
+"^DD",2006.598,2006.598,4,21,3,0)
+"critical", a e-mail message will be transmitted to the
+"^DD",2006.598,2006.598,4,21,4,0)
+Imaging Team in Silver Spring.
+"^DD",2006.598,2006.598,4,"DT")
+3030716
+"^DD",2006.598,2006.598,5,0)
+MESSAGE TEXT^2006.5985^^2;0
+"^DD",2006.598,2006.598,6,0)
+ERROR REPORT^2006.5986A^^3;0
+"^DD",2006.598,2006.5985,0)
+MESSAGE TEXT SUB-FIELD^^.01^1
+"^DD",2006.598,2006.5985,0,"DT")
+3030716
+"^DD",2006.598,2006.5985,0,"IX","B",2006.5985,.01)
+
+"^DD",2006.598,2006.5985,0,"NM","MESSAGE TEXT")
+
+"^DD",2006.598,2006.5985,0,"UP")
+2006.598
+"^DD",2006.598,2006.5985,.01,0)
+MESSAGE TEXT^MF^^0;1^K:$L(X)>240!($L(X)<1) X
+"^DD",2006.598,2006.5985,.01,1,0)
+^.1
+"^DD",2006.598,2006.5985,.01,1,1,0)
+2006.5985^B
+"^DD",2006.598,2006.5985,.01,1,1,1)
+S ^MAGDICOM(2006.598,DA(1),2,"B",$E(X,1,30),DA)=""
+"^DD",2006.598,2006.5985,.01,1,1,2)
+K ^MAGDICOM(2006.598,DA(1),2,"B",$E(X,1,30),DA)
+"^DD",2006.598,2006.5985,.01,3)
+Enter the error message text.
+"^DD",2006.598,2006.5985,.01,21,0)
+^^2^2^3030716^
+"^DD",2006.598,2006.5985,.01,21,1,0)
+The values in this multiple make up the error message that is
+"^DD",2006.598,2006.5985,.01,21,2,0)
+to be transmitted in an e-mail.
+"^DD",2006.598,2006.5985,.01,"DT")
+3030716
+"^DD",2006.598,2006.5986,0)
+ERROR REPORT SUB-FIELD^^.01^1
+"^DD",2006.598,2006.5986,0,"DT")
+3030716
+"^DD",2006.598,2006.5986,0,"IX","B",2006.5986,.01)
+
+"^DD",2006.598,2006.5986,0,"NM","ERROR REPORT")
+
+"^DD",2006.598,2006.5986,0,"UP")
+2006.598
+"^DD",2006.598,2006.5986,.01,0)
+ERROR REPORT^F^^0;1^K:$L(X)>240!($L(X)<1) X
+"^DD",2006.598,2006.5986,.01,1,0)
+^.1
+"^DD",2006.598,2006.5986,.01,1,1,0)
+2006.5986^B
+"^DD",2006.598,2006.5986,.01,1,1,1)
+S ^MAGDICOM(2006.598,DA(1),3,"B",$E(X,1,30),DA)=""
+"^DD",2006.598,2006.5986,.01,1,1,2)
+K ^MAGDICOM(2006.598,DA(1),3,"B",$E(X,1,30),DA)
+"^DD",2006.598,2006.5986,.01,3)
+Enter the reason why the e-mail could not be sent.
+"^DD",2006.598,2006.5986,.01,21,0)
+^^6^6^3030716^
+"^DD",2006.598,2006.5986,.01,21,1,0)
+The value in this field is a text that indicates a reason why
+"^DD",2006.598,2006.5986,.01,21,2,0)
+an e-mail message could not be transmitted.
+"^DD",2006.598,2006.5986,.01,21,3,0)
+ 
+"^DD",2006.598,2006.5986,.01,21,4,0)
+Typical reasons are
+"^DD",2006.598,2006.5986,.01,21,5,0)
+ - could not connect to "post-office"
+"^DD",2006.598,2006.5986,.01,21,6,0)
+ - unexpected MUMPS error in mail-preparation software
+"^DD",2006.598,2006.5986,.01,"DT")
+3030716
+"^DIC",2006.598,2006.598,0)
+DICOM ERROR MESSAGE QUEUE^2006.598
+"^DIC",2006.598,2006.598,0,"GL")
+^MAGDICOM(2006.598,
+"^DIC",2006.598,2006.598,"%D",0)
+^^39^39^3030904^^
+"^DIC",2006.598,2006.598,"%D",1,0)
+ +---------------------------------------------------------------+
+"^DIC",2006.598,2006.598,"%D",2,0)
+ |                                                               |
+"^DIC",2006.598,2006.598,"%D",3,0)
+ | Property of the US Government.                                |
+"^DIC",2006.598,2006.598,"%D",4,0)
+ | No permission to copy or redistribute this software is given. |
+"^DIC",2006.598,2006.598,"%D",5,0)
+ | Use of unreleased versions of this software requires the user |
+"^DIC",2006.598,2006.598,"%D",6,0)
+ | to execute a written test agreement with the VistA Imaging    |
+"^DIC",2006.598,2006.598,"%D",7,0)
+ | Development Office of the Department of Veterans Affairs,     |
+"^DIC",2006.598,2006.598,"%D",8,0)
+ | telephone (301) 734-0100.                                     |
+"^DIC",2006.598,2006.598,"%D",9,0)
+ |                                                               |
+"^DIC",2006.598,2006.598,"%D",10,0)
+ | The Food and Drug Administration classifies this software as  |
+"^DIC",2006.598,2006.598,"%D",11,0)
+ | a medical device.  As such, it may not be changed in any way. |
+"^DIC",2006.598,2006.598,"%D",12,0)
+ | Modifications to this software may result in an adulterated   |
+"^DIC",2006.598,2006.598,"%D",13,0)
+ | medical device under 21CFR820, the use of which is considered |
+"^DIC",2006.598,2006.598,"%D",14,0)
+ | to be a violation of US Federal Statutes.                     |
+"^DIC",2006.598,2006.598,"%D",15,0)
+ |                                                               |
+"^DIC",2006.598,2006.598,"%D",16,0)
+ +---------------------------------------------------------------+
+"^DIC",2006.598,2006.598,"%D",17,0)
+ 
+"^DIC",2006.598,2006.598,"%D",18,0)
+As a DICOM Gateway performs its various tasks, there are occasions
+"^DIC",2006.598,2006.598,"%D",19,0)
+where error messages need to be transmitted to remote recipients
+"^DIC",2006.598,2006.598,"%D",20,0)
+(FileMan users and/or mailgroups as well as SMTP mail recipients).
+"^DIC",2006.598,2006.598,"%D",21,0)
+ 
+"^DIC",2006.598,2006.598,"%D",22,0)
+When such a message needs to be transmitted, a new entry is made
+"^DIC",2006.598,2006.598,"%D",23,0)
+into this table, which will contain the message text and some
+"^DIC",2006.598,2006.598,"%D",24,0)
+information about the message. Then an attempt is made to transmit
+"^DIC",2006.598,2006.598,"%D",25,0)
+the message.
+"^DIC",2006.598,2006.598,"%D",26,0)
+When the transmission is successful, the entry is removed from
+"^DIC",2006.598,2006.598,"%D",27,0)
+this table.
+"^DIC",2006.598,2006.598,"%D",28,0)
+ 
+"^DIC",2006.598,2006.598,"%D",29,0)
+When the transmission is not successful (which is likely since
+"^DIC",2006.598,2006.598,"%D",30,0)
+many errors that need to be transmitted have to report some
+"^DIC",2006.598,2006.598,"%D",31,0)
+type of "network failure") the text remains in this table while
+"^DIC",2006.598,2006.598,"%D",32,0)
+the software on the DICOM Gateway can enter its further error
+"^DIC",2006.598,2006.598,"%D",33,0)
+processing.
+"^DIC",2006.598,2006.598,"%D",34,0)
+ 
+"^DIC",2006.598,2006.598,"%D",35,0)
+A supervisory task on the DICOM Gateway scans the content of
+"^DIC",2006.598,2006.598,"%D",36,0)
+this table on a regular basis and will transmit any "left over"
+"^DIC",2006.598,2006.598,"%D",37,0)
+messages.
+"^DIC",2006.598,2006.598,"%D",38,0)
+As soon as a message has been transmitted successfully, its
+"^DIC",2006.598,2006.598,"%D",39,0)
+entry in this table will be removed.
+"^DIC",2006.598,"B","DICOM ERROR MESSAGE QUEUE",2006.598)
+
+**END**
+**END**

@@ -1,0 +1,197 @@
+ImageRuntimeVersion: v4.0.30319
+Assembly ClearCanvas.Dicom.Codec.Jpeg, Version=1.0.*, Culture=Invariant Language (Invariant Country): 
+	hash=SHA1, flags=PublicKey
+Assembly mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089: 
+	hash=None, flags=None
+Assembly ClearCanvas.Common, Version=1.0.*, Culture=Invariant Language (Invariant Country): 
+	hash=None, flags=None
+Assembly ClearCanvas.Dicom, Version=1.0.*, Culture=Invariant Language (Invariant Country): 
+	hash=None, flags=None
+Assembly System.Data, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089: 
+	hash=None, flags=None
+Assembly System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089: 
+	hash=None, flags=None
+Assembly System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a: 
+	hash=None, flags=None
+Assembly System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089: 
+	hash=None, flags=None
+Assembly System.Xml, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089: 
+	hash=None, flags=None
+Class ClearCanvas.Dicom.Codec.Jpeg.DicomJpegParameters: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+  :ClearCanvas.Dicom.Codec.DicomCodecParameters
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Properties:
+    Int32 PointTransform 'get set' : 
+    Int32 Predictor 'get set' : 
+    ClearCanvas.Dicom.Codec.Jpeg.JpegSampleFactor SampleFactor 'get set' : 
+    Boolean ConvertYBRtoRGB 'get set' : 
+    Int32 SmoothingFactor 'get set' : 
+    Int32 Quality 'get set' : 
+  Methods:
+    get_Quality(): PrivateScope, Public, HideBySig, SpecialName
+    set_Quality(Int32): PrivateScope, Public, HideBySig, SpecialName
+    get_SmoothingFactor(): PrivateScope, Public, HideBySig, SpecialName
+    set_SmoothingFactor(Int32): PrivateScope, Public, HideBySig, SpecialName
+    get_ConvertYBRtoRGB(): PrivateScope, Public, HideBySig, SpecialName
+    set_ConvertYBRtoRGB(Boolean(HasFieldMarshal)): PrivateScope, Public, HideBySig, SpecialName
+    get_SampleFactor(): PrivateScope, Public, HideBySig, SpecialName
+    set_SampleFactor(JpegSampleFactor): PrivateScope, Public, HideBySig, SpecialName
+    get_Predictor(): PrivateScope, Public, HideBySig, SpecialName
+    set_Predictor(Int32): PrivateScope, Public, HideBySig, SpecialName
+    get_PointTransform(): PrivateScope, Public, HideBySig, SpecialName
+    set_PointTransform(Int32): PrivateScope, Public, HideBySig, SpecialName
+Class ClearCanvas.Dicom.Codec.Jpeg.IJpegCodec: AutoLayout, AnsiClass, Class, Public, Abstract, BeforeFieldInit
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Methods:
+    Encode(DicomUncompressedPixelData, DicomCompressedPixelData, DicomJpegParameters, Int32): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask, Abstract
+    Decode(DicomCompressedPixelData, DicomUncompressedPixelData, DicomJpegParameters, Int32): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask, Abstract
+Class ClearCanvas.Dicom.Codec.Jpeg.Jpeg16Codec: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+  :ClearCanvas.Dicom.Codec.Jpeg.IJpegCodec
+    Void .ctor(ClearCanvas.Dicom.Codec.Jpeg.JpegMode, Int32, Int32): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Methods:
+    Encode(DicomUncompressedPixelData, DicomCompressedPixelData, DicomJpegParameters, Int32): PrivateScope, Public, Virtual, HideBySig
+    Decode(DicomCompressedPixelData, DicomUncompressedPixelData, DicomJpegParameters, Int32): PrivateScope, Public, Virtual, HideBySig
+Class ClearCanvas.Dicom.Codec.Jpeg.Jpeg12Codec: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+  :ClearCanvas.Dicom.Codec.Jpeg.IJpegCodec
+    Void .ctor(ClearCanvas.Dicom.Codec.Jpeg.JpegMode, Int32, Int32): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Methods:
+    Encode(DicomUncompressedPixelData, DicomCompressedPixelData, DicomJpegParameters, Int32): PrivateScope, Public, Virtual, HideBySig
+    Decode(DicomCompressedPixelData, DicomUncompressedPixelData, DicomJpegParameters, Int32): PrivateScope, Public, Virtual, HideBySig
+Class ClearCanvas.Dicom.Codec.Jpeg.Jpeg8Codec: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+  :ClearCanvas.Dicom.Codec.Jpeg.IJpegCodec
+    Void .ctor(ClearCanvas.Dicom.Codec.Jpeg.JpegMode, Int32, Int32): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Methods:
+    Encode(DicomUncompressedPixelData, DicomCompressedPixelData, DicomJpegParameters, Int32): PrivateScope, Public, Virtual, HideBySig
+    Decode(DicomCompressedPixelData, DicomUncompressedPixelData, DicomJpegParameters, Int32): PrivateScope, Public, Virtual, HideBySig
+Class ClearCanvas.Dicom.Codec.Jpeg.DicomJpegCodec: AutoLayout, AnsiClass, Class, Public, Abstract, BeforeFieldInit
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Interfaces:
+    ClearCanvas.Dicom.Codec.IDicomCodec
+  Properties:
+    ClearCanvas.Dicom.TransferSyntax CodecTransferSyntax 'get ' : 
+    System.String Name 'get ' : 
+  Methods:
+    get_Name(): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask, SpecialName
+    get_CodecTransferSyntax(): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask, SpecialName
+    Encode(DicomUncompressedPixelData, DicomCompressedPixelData, DicomCodecParameters): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask
+    Decode(DicomCompressedPixelData, DicomUncompressedPixelData, DicomCodecParameters): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask
+    DecodeFrame(Int32, DicomCompressedPixelData, DicomUncompressedPixelData, DicomCodecParameters): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask
+    GetCodec(Int32, DicomJpegParameters): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask, Abstract
+    GetJpegBitDepth(Byte*, UInt32 IsConst): PrivateScope, Public, HideBySig
+    readUint16(Byte*): PrivateScope, Public, HideBySig
+Class ClearCanvas.Dicom.Codec.Jpeg.DicomJpegProcess1Codec: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+  :ClearCanvas.Dicom.Codec.Jpeg.DicomJpegCodec
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Properties:
+    ClearCanvas.Dicom.TransferSyntax CodecTransferSyntax 'get ' : 
+    System.String Name 'get ' : 
+  Methods:
+    get_Name(): PrivateScope, Public, Virtual, HideBySig, SpecialName
+    get_CodecTransferSyntax(): PrivateScope, Public, Virtual, HideBySig, SpecialName
+    GetCodec(Int32, DicomJpegParameters): PrivateScope, Public, Virtual, HideBySig
+Class ClearCanvas.Dicom.Codec.Jpeg.DicomJpegProcess24Codec: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+  :ClearCanvas.Dicom.Codec.Jpeg.DicomJpegCodec
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Properties:
+    ClearCanvas.Dicom.TransferSyntax CodecTransferSyntax 'get ' : 
+    System.String Name 'get ' : 
+  Methods:
+    get_Name(): PrivateScope, Public, Virtual, HideBySig, SpecialName
+    get_CodecTransferSyntax(): PrivateScope, Public, Virtual, HideBySig, SpecialName
+    GetCodec(Int32, DicomJpegParameters): PrivateScope, Public, Virtual, HideBySig
+Class ClearCanvas.Dicom.Codec.Jpeg.DicomJpegLossless14Codec: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+  :ClearCanvas.Dicom.Codec.Jpeg.DicomJpegCodec
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Properties:
+    ClearCanvas.Dicom.TransferSyntax CodecTransferSyntax 'get ' : 
+    System.String Name 'get ' : 
+  Methods:
+    get_Name(): PrivateScope, Public, Virtual, HideBySig, SpecialName
+    get_CodecTransferSyntax(): PrivateScope, Public, Virtual, HideBySig, SpecialName
+    GetCodec(Int32, DicomJpegParameters): PrivateScope, Public, Virtual, HideBySig
+Class ClearCanvas.Dicom.Codec.Jpeg.DicomJpegLossless14SV1Codec: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+  :ClearCanvas.Dicom.Codec.Jpeg.DicomJpegCodec
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Properties:
+    ClearCanvas.Dicom.TransferSyntax CodecTransferSyntax 'get ' : 
+    System.String Name 'get ' : 
+  Methods:
+    get_Name(): PrivateScope, Public, Virtual, HideBySig, SpecialName
+    get_CodecTransferSyntax(): PrivateScope, Public, Virtual, HideBySig, SpecialName
+    GetCodec(Int32, DicomJpegParameters): PrivateScope, Public, Virtual, HideBySig
+Struct ClearCanvas.Dicom.Codec.Jpeg.JpegSampleFactor: AutoLayout, AnsiClass, Class, Public, Sealed, BeforeFieldInit
+  :System.Enum
+  Fields:
+    Int32 value__ : Public, SpecialName, RTSpecialName
+    ClearCanvas.Dicom.Codec.Jpeg.JpegSampleFactor SF444 = 0 : Public, Static, Literal, HasDefault
+    ClearCanvas.Dicom.Codec.Jpeg.JpegSampleFactor SF422 = 1 : Public, Static, Literal, HasDefault
+    ClearCanvas.Dicom.Codec.Jpeg.JpegSampleFactor Unknown = 2 : Public, Static, Literal, HasDefault
+Struct ClearCanvas.Dicom.Codec.Jpeg.JpegMode: AutoLayout, AnsiClass, Class, Public, Sealed, BeforeFieldInit
+  :System.Enum
+  Fields:
+    Int32 value__ : Public, SpecialName, RTSpecialName
+    ClearCanvas.Dicom.Codec.Jpeg.JpegMode Baseline = 0 : Public, Static, Literal, HasDefault
+    ClearCanvas.Dicom.Codec.Jpeg.JpegMode Sequential = 1 : Public, Static, Literal, HasDefault
+    ClearCanvas.Dicom.Codec.Jpeg.JpegMode SpectralSelection = 2 : Public, Static, Literal, HasDefault
+    ClearCanvas.Dicom.Codec.Jpeg.JpegMode Progressive = 3 : Public, Static, Literal, HasDefault
+    ClearCanvas.Dicom.Codec.Jpeg.JpegMode Lossless = 4 : Public, Static, Literal, HasDefault
+Class ClearCanvas.Dicom.Codec.Jpeg.DicomJpegProcess1CodecFactory: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Interfaces:
+    ClearCanvas.Dicom.Codec.IDicomCodecFactory
+  Properties:
+    ClearCanvas.Dicom.TransferSyntax CodecTransferSyntax 'get ' : 
+    Boolean Enabled 'get ' : 
+    System.String Name 'get ' : 
+  Methods:
+    get_Name(): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask, SpecialName
+    get_Enabled(): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask, SpecialName
+    get_CodecTransferSyntax(): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask, SpecialName
+    GetCodecParameters(XmlDocument): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask
+    GetCodecParameters(DicomAttributeCollection): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask
+    GetDicomCodec(): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask
+Class ClearCanvas.Dicom.Codec.Jpeg.DicomJpegProcess24CodecFactory: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Interfaces:
+    ClearCanvas.Dicom.Codec.IDicomCodecFactory
+  Properties:
+    ClearCanvas.Dicom.TransferSyntax CodecTransferSyntax 'get ' : 
+    Boolean Enabled 'get ' : 
+    System.String Name 'get ' : 
+  Methods:
+    get_Name(): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask, SpecialName
+    get_Enabled(): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask, SpecialName
+    get_CodecTransferSyntax(): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask, SpecialName
+    GetCodecParameters(XmlDocument): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask
+    GetCodecParameters(DicomAttributeCollection): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask
+    GetDicomCodec(): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask
+Class ClearCanvas.Dicom.Codec.Jpeg.DicomJpegLossless14CodecFactory: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Interfaces:
+    ClearCanvas.Dicom.Codec.IDicomCodecFactory
+  Properties:
+    ClearCanvas.Dicom.TransferSyntax CodecTransferSyntax 'get ' : 
+    Boolean Enabled 'get ' : 
+    System.String Name 'get ' : 
+  Methods:
+    get_Name(): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask, SpecialName
+    get_Enabled(): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask, SpecialName
+    get_CodecTransferSyntax(): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask, SpecialName
+    GetCodecParameters(XmlDocument): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask
+    GetCodecParameters(DicomAttributeCollection): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask
+    GetDicomCodec(): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask
+Class ClearCanvas.Dicom.Codec.Jpeg.DicomJpegLossless14SV1CodecFactory: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Interfaces:
+    ClearCanvas.Dicom.Codec.IDicomCodecFactory
+  Properties:
+    ClearCanvas.Dicom.TransferSyntax CodecTransferSyntax 'get ' : 
+    Boolean Enabled 'get ' : 
+    System.String Name 'get ' : 
+  Methods:
+    get_Name(): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask, SpecialName
+    get_Enabled(): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask, SpecialName
+    get_CodecTransferSyntax(): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask, SpecialName
+    GetCodecParameters(XmlDocument): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask
+    GetCodecParameters(DicomAttributeCollection): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask
+    GetDicomCodec(): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask

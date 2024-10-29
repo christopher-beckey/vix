@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">	
+
+	<!-- ******************************************************************************* -->
+	<!-- projects to compile -->			
+	<ItemGroup>	
+		<DelphiSourceFiles Include="$(FullBuildPath)$(TempFolder)\Source\MakeAbs\Source" >
+			<Project>MagMakeAbs2.dpr</Project>
+			<Resource>MagMakeAbs2.res</Resource>
+			<CompiledOutput>MagMakeAbs2.exe</CompiledOutput>
+			<Rename>MAG_MakeAbs.exe</Rename>
+		</DelphiSourceFiles>
+	</ItemGroup>
+	
+	<!-- ******************************************************************************* -->
+	<!-- InstallShield input -->
+	<ItemGroup>	
+		
+		<InstallShieldReleaseConfiguration Include="SINGLE_EXE_IMAGE"/>
+		
+		<InstallShieldPathVariableOverrides Include="$(FullBuildPath)$(TempFolder)\LIB\Accusoft">		
+			<PathVariable>PATH_TO_ACCUSOFT_FILES</PathVariable>
+		</InstallShieldPathVariableOverrides>
+
+		<InstallShieldPathVariableOverrides Include="$(FullBuildPath)$(TempFolder)\Baseline\DICT">
+			<PathVariable>PATH_TO_BASELINE_FILES</PathVariable>
+		</InstallShieldPathVariableOverrides>
+						
+		<InstallShieldPathVariableOverrides Include="$(FullBuildPath)$(TempFolder)\Source\Batch_Files">
+			<PathVariable>PATH_TO_BATCH_FILES</PathVariable>
+		</InstallShieldPathVariableOverrides>
+ 
+		<InstallShieldPathVariableOverrides Include="$(FullBuildPath)$(TempFolder)\INSTALL\Cache">
+			<PathVariable>PATH_TO_INSTALL_CACHE</PathVariable>
+		</InstallShieldPathVariableOverrides>
+
+		<InstallShieldPathVariableOverrides Include="$(FullBuildPath)$(TempFolder)\Source\Compiled">
+			<PathVariable>PATH_TO_SOURCE_COMPILED</PathVariable>
+		</InstallShieldPathVariableOverrides>
+		
+		<InstallShieldPathVariableOverrides Include="$(FullBuildPath)$(TempFolder)\Utilities\Compiled">
+			<PathVariable>PATH_TO_UTILITIES_COMPILED</PathVariable>
+		</InstallShieldPathVariableOverrides>
+	
+		<InstallShieldPathVariableOverrides Include="$(FullBuildPath)$(TempFolder)\LIB\Laurel_Bridge">
+			<PathVariable>PATH_TO_DCF_FILES</PathVariable>
+		</InstallShieldPathVariableOverrides>
+
+		<InstallShieldPathVariableOverrides Include="$(FullBuildPath)$(TempFolder)\Baseline\MUMPS\DICOM">
+			<PathVariable>PATH_TO_DICOM_FILES</PathVariable>
+		</InstallShieldPathVariableOverrides>
+				
+		<InstallShieldPathVariableOverrides Include="$(FullBuildPath)$(TempFolder)\Distrib">
+			<PathVariable>PATH_TO_DISTRIB_FILES</PathVariable>
+		</InstallShieldPathVariableOverrides>
+	
+		<InstallShieldPathVariableOverrides Include="$(FullBuildPath)$(TempFolder)\ICON">
+			<PathVariable>PATH_TO_ICON_FILES</PathVariable>
+		</InstallShieldPathVariableOverrides>
+			
+		<InstallShieldPathVariableOverrides Include="$(FullBuildPath)$(TempFolder)\Images">
+			<PathVariable>PATH_TO_IMAGES_FILES</PathVariable>
+		</InstallShieldPathVariableOverrides>
+						
+		<InstallShieldPathVariableOverrides Include="$(FullBuildPath)$(TempFolder)\Source\MakeAbs">
+			<PathVariable>PATH_TO_MAKEABS_FILES</PathVariable>
+		</InstallShieldPathVariableOverrides>
+		
+		<InstallShieldPathVariableOverrides Include="$(FullBuildPath)$(TempFolder)\Utilities\shared_exes">
+			<PathVariable>PATH_TO_SHARED_EXES_FILES</PathVariable>
+		</InstallShieldPathVariableOverrides>
+									
+		<InstallShieldPathVariableOverrides Include="$(FullBuildPath)$(TempFolder)\Utilities">
+			<PathVariable>PATH_TO_UTILITIES_FILES</PathVariable>
+		</InstallShieldPathVariableOverrides>				
+		
+		<InstallShieldPathVariableOverrides Include="$(FullBuildPath)$(TempFolder)\Web">
+			<PathVariable>PATH_TO_WEB_FILES</PathVariable>
+		</InstallShieldPathVariableOverrides>	
+		
+		<InstallShieldPathVariableOverrides Include="$(Cache2010DistDir)">
+			<PathVariable>PATH_TO_CACHE_DISTRIB</PathVariable>
+		</InstallShieldPathVariableOverrides>
+				
+	</ItemGroup>
+</Project>

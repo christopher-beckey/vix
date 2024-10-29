@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="2.5" xmlns="http://java.sun.com/xml/ns/javaee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
+	http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+  
+  	<context-param>
+        <param-name>contextConfigLocation</param-name>
+    	<param-value>/WEB-INF/applicationContext.xml</param-value>
+    </context-param>
+
+  	<listener>
+		<description>
+			The Spring servlet context listener that loads the
+			application context.
+		</description>
+		<display-name>Spring context loader listener</display-name>
+		<listener-class>
+			org.springframework.web.context.ContextLoaderListener
+		</listener-class>
+	</listener>
+
+	<filter>
+		<description>Sets the security context on the request and clears it on the response.</description>
+		<display-name>Security Context Creation and Destruction</display-name>
+		<filter-name>SecurityFilter</filter-name>
+		<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+		<!-- <filter-class>gov.va.med.imaging.SecurityFilter</filter-class>  -->
+		<init-param>
+			<param-name>targetBeanName</param-name>
+			<param-value>securityFilter</param-value>
+		</init-param>
+	</filter>
+
+	<servlet>
+		<display-name>JAX-RS REST Servlet</display-name>
+		<servlet-name>JAX-RS REST Servlet</servlet-name>
+		<servlet-class>com.sun.jersey.spi.container.servlet.ServletContainer</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>JAX-RS REST Servlet</servlet-name>
+		<url-pattern>/*</url-pattern>
+	</servlet-mapping>
+
+	<filter-mapping>
+		<filter-name>SecurityFilter</filter-name>
+		<servlet-name>JAX-RS REST Servlet</servlet-name>
+	</filter-mapping>
+
+	<welcome-file-list>
+		<welcome-file>index.jsp</welcome-file>
+	</welcome-file-list>
+
+	<security-constraint>
+		<display-name>DicomImporterWebServiceConstraint</display-name>
+		<web-resource-collection>
+			<web-resource-name>DICOM Importer Webservices</web-resource-name>
+			<description>The DICOM Importer web apps are protected with homegrown security</description>
+			<url-pattern>/*</url-pattern>
+		</web-resource-collection>
+		<auth-constraint>
+			<description>A vista user is authenticated against the Vista system</description>
+			<role-name>vista-user</role-name>
+		</auth-constraint>
+		<user-data-constraint>
+			<description>The transport does not have to be guaranteed just the user authenticated</description>
+			<transport-guarantee>NONE</transport-guarantee>
+		</user-data-constraint>
+	</security-constraint>
+
+	<!--Null security constraint-->
+	<security-constraint>
+		<display-name>Null Security Constraint</display-name>
+		<web-resource-collection>
+			<web-resource-name>DICOM Importer Webservices</web-resource-name>
+			<description>Null filter; should affect no calls</description>
+			<url-pattern>/nullfilter/*</url-pattern>
+		</web-resource-collection>
+		<auth-constraint>
+			<role-name>vista-user</role-name>
+		</auth-constraint>
+		<user-data-constraint>
+			<transport-guarantee>NONE</transport-guarantee>
+		</user-data-constraint>
+	</security-constraint>
+
+	<login-config>
+		<auth-method>BASIC</auth-method>
+		<realm-name>VistaRealm</realm-name>
+	</login-config>
+
+
+	<security-role>
+		<description>A VistaImaging user authenticated against VistaImaging</description>
+		<role-name>vista-user</role-name>
+	</security-role>
+
+</web-app>

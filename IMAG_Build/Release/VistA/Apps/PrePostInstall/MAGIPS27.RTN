@@ -1,0 +1,103 @@
+06/16/2003  10:03
+Saved from DCM,DCE
+MAGIPS27
+MAGIPS27 ;Post init routine to queue site activity at install. ; 06/16/2003  10:03
+ ;;3.0;IMAGING;**27**;Apr 29, 2003
+ ;; +---------------------------------------------------------------+
+ ;; | Property of the US Government.                                |
+ ;; | No permission to copy or redistribute this software is given. |
+ ;; | Use of unreleased versions of this software requires the user |
+ ;; | to execute a written test agreement with the VistA Imaging    |
+ ;; | Development Office of the Department of Veterans Affairs,     |
+ ;; | telephone (301) 734-0100.                                     |
+ ;; |                                                               |
+ ;; | The Food and Drug Administration classifies this software as  |
+ ;; | a medical device.  As such, it may not be changed in any way. |
+ ;; | Modifications to this software may result in an adulterated   |
+ ;; | medical device under 21CFR820, the use of which is considered |
+ ;; | to be a violation of US Federal Statutes.                     |
+ ;; +---------------------------------------------------------------+
+ ;;
+ Q
+ ; This routine will be removed automatically after the installation
+ ; of this patch is complete.
+ ;
+POST ;
+ N FIRST,LAST
+ D REMTASK^MAGQE4
+ D STTASK^MAGQE4
+ D INS^MAGQE4(XPDNM,DUZ,$$NOW^XLFDT,XPDA)
+ D
+ . N DA,DIC,NODE1,NODE3,PLACE,TEST,X,Y
+ . D FIELD^DID(2006.19,2,"","SPECIFIER","TEST")
+ . I $G(TEST("SPECIFIER"))["FX" D INI^MAGQE2
+ . S PLACE=$$PLACE^MAGQE5($$MAGDUZ2^MAGQE5())
+ . S DIC="^MAG(2006.1,"_PLACE_",2,",DIC(0)="XL",X="TXT",DLAYGO="2006.112"
+ . S DA(1)=PLACE,DIC("P")="2006.112"
+ . D ^DIC
+ . ; File retention parameters defaults 45 - non abs /120 abs
+ . ; Autowrite location update defaulted to ON
+ . S (DIE,DIC,DLAYGO)=2006.1,DA=PLACE,DIC(0)="XL"
+ . S NODE1=$G(^MAG(2006.1,PLACE,1)),NODE3=$G(^MAG(2006.1,PLACE,3))
+ . S KEYS=$G(^MAG(2006.1,PLACE,"KEYS"))
+ . S DR=""
+ . S:$P(NODE1,"^",2)'?1.N DR=DR_";8///45"
+ . S:$P(NODE1,"^",5)'?1.N DR=DR_";9///45"
+ . S:$P(NODE1,"^",10)'?1.N DR=DR_";20///1"
+ . S:$P(NODE3,"^",1)'?1.N DR=DR_";21///45"
+ . S:$P(NODE3,"^",2)'?1.N DR=DR_";22///45"
+ . S:$P(NODE3,"^",3)'?1.N DR=DR_";23///120"
+ . S:$P(NODE3,"^",4)'?1.N DR=DR_";24///120"
+ . S:$P(NODE3,"^",5)'?1.N DR=DR_";102///10"
+ . S:$P(NODE3,"^",6)'?1.N DR=DR_";103///15"
+ . S:$P(NODE3,"^",7)'?1.N DR=DR_";11.5///6"
+ . S:$P(NODE3,"^",8)="" DR=DR_";11.6///O"
+ . S:$P(NODE3,"^",9)'?1.N DR=DR_";11.7///4"
+ . S:$P(NODE3,"^",10)'?1N.E DR=DR_";11.8///"_$$NOW^XLFDT
+ . S:$P(NODE3,"^",11)'?1N.E DR=DR_";11.9///"_$$NOW^XLFDT
+ . S:$P(KEYS,"^",2)'?1.N DR=DR_";121///60"
+ . S:$P(KEYS,"^",3)'?1.N DR=DR_";122///90"
+ . S DR=$E(DR,2,$L(DR))
+ . D ^DIE
+ . ; Enable the Imaging Health Summary component
+ . I $D(^GMT(142.1,235)) D
+ . . S (DIE,DIC)=142.1,DA=235,DR="5///@;8///@"
+ . . D ^DIE
+ . . Q
+ . K DIE,DIC,DA,Y,X,DLAYGO
+ . ; Establish local mail group
+ . D MMGRP^MAGQAI
+ . D SILENT^MAGDROUT
+ . Q
+ ;
+ ; For non consolidated sites only:
+ ; Index the BP Workstation file,
+ ; and the Windows Workstation files
+ ;
+ D:'$$CONSOLID^MAGQE5()
+ . N D0,J,PLACE
+ . S PLACE=$O(^MAG(2006.1," "),-1) Q:'PLACE
+ . S D0=0 F  S D0=$O(^MAG(2006.8,D0)) Q:'D0  D
+ . . S J=$P($G(^MAG(2006.8,D0,0)),"^",2)
+ . . S:J'?1.N $P(^MAG(2006.8,D0,0),"^",2)=PLACE,J=PLACE
+ . . S ^MAG(2006.8,"D",J,D0)=""
+ . . Q
+ . S D0=0 F  S D0=$O(^MAG(2006.81,D0)) Q:'D0  D
+ . . S J=$P($G(^MAG(2006.81,D0,1)),"^",2)
+ . . S:J'?1.N $P(^MAG(2006.81,D0,1),"^",2)=PLACE,J=PLACE
+ . . S ^MAG(2006.81,"C",J,D0)=""
+ . . Q
+ . Q
+ ;
+ ; Create reports from past months, starting from March 2003
+ ; Assumption: this code won't be run after January 2004...
+ S FIRST=3030301 F  D  Q:FIRST<0
+ . S LAST=FIRST+$P("31 28 31 30 31 30 31 31 30 31 30 31"," ",FIRST\100#100)-1
+ . D AHISU^MAGQE2(FIRST,LAST)
+ . S FIRST=FIRST+100 S:FIRST\100#100>12 FIRST=FIRST+9900
+ . S:$$NOW^XLFDT()<FIRST FIRST=-1
+ . Q
+ Q
+ ;
+
+

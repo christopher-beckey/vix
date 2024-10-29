@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">	
+
+	<!-- ******************************************************************************* -->	
+	<!-- build patch and any dependent patches -->
+	<ItemGroup>
+		<PatchDepName Include="$(ClinicalDir)\Delphi\Applications\**\*.*" >
+			<PatchDepNumber>$(PatchNumber)</PatchDepNumber>
+			<Folder>Clin</Folder>
+		</PatchDepName>
+		
+		<Accusoft Include="$(GWHomeDir)\3rd Party Source\Accusoft\Accusoft16.2\igtwain16a.ocx" />
+		<Accusoft Include="$(GWHomeDir)\3rd Party Source\Accusoft\Accusoft16.2\igtwain16d.dll" />
+	</ItemGroup>
+	
+	<!-- ******************************************************************************* -->
+	<!-- projects to compile -->	
+	<ItemGroup>
+		
+		<CompileFiles Include="$(FullBuildPath)$(TempFolder)\p$(PatchNumber)\Capture\MagCaptureMAIN.dproj" >
+			<Options>Rebuild</Options>
+			<Configuration>Release</Configuration> 
+			<ProjectOverride>true</ProjectOverride>			
+			<Compiler>MSBuild</Compiler>	
+			<Sign>exe</Sign>
+			<DCC_DcuOutput>..\dcu</DCC_DcuOutput>
+			<DCC_ObjOutput>..\dcu</DCC_ObjOutput>
+			<DCC_HppOutput>..\dcu</DCC_HppOutput>
+			
+			<DCC_UnitSearchPath>..\shared;..\Display;..\MagFMDc;$(BDK32Dir)\Source;$(AccuSoftPackageDir);$(DelphiFilmanexDir)</DCC_UnitSearchPath>
+			  <DCC_ResourcePath>..\shared;..\Display;..\MagFMDc;$(BDK32Dir)\Source;$(AccuSoftPackageDir);$(DelphiFilmanexDir)</DCC_ResourcePath>
+			       <DCC_ObjPath>..\shared;..\Display;..\MagFMDc;$(BDK32Dir)\Source;$(AccuSoftPackageDir);$(DelphiFilmanexDir)</DCC_ObjPath>
+			   <DCC_IncludePath>..\shared;..\Display;..\MagFMDc;$(BDK32Dir)\Source;$(AccuSoftPackageDir);$(DelphiFilmanexDir)</DCC_IncludePath>
+			<DCC_Define>DEBUG;ImageGear16;USENEWANNOTS;</DCC_Define>
+		</CompileFiles>
+		
+		<CompileFiles Include="$(FullBuildPath)$(TempFolder)\p$(PatchNumber)\MiniBld\MagMinibld.dproj" >
+			<Options>Rebuild</Options>
+			<Configuration>Release</Configuration> 
+			<ProjectOverride>true</ProjectOverride>			
+			<Compiler>MSBuild</Compiler>	
+			<Sign></Sign>
+			<DCC_DcuOutput>..\dcu</DCC_DcuOutput>
+			<DCC_ObjOutput>..\dcu</DCC_ObjOutput>
+			<DCC_HppOutput>..\dcu</DCC_HppOutput>
+			<DCC_UnitSearchPath>..\shared;..\MagFMDc;$(BDK32Dir)\Source;$(AccuSoftPackageDir);$(DelphiFilmanexDir)</DCC_UnitSearchPath>
+			  <DCC_ResourcePath>..\shared;..\MagFMDc;$(BDK32Dir)\Source;$(AccuSoftPackageDir);$(DelphiFilmanexDir)</DCC_ResourcePath>
+			       <DCC_ObjPath>..\shared;..\MagFMDc;$(BDK32Dir)\Source;$(AccuSoftPackageDir);$(DelphiFilmanexDir)</DCC_ObjPath>
+			   <DCC_IncludePath>..\shared;..\MagFMDc;$(BDK32Dir)\Source;$(AccuSoftPackageDir);$(DelphiFilmanexDir)</DCC_IncludePath>
+		</CompileFiles>
+		
+	</ItemGroup>
+	
+	<!-- ******************************************************************************* -->
+	<!-- InstallShield input -->
+	
+	<ItemGroup Condition="'$(CreateMSI)'!='false'">
+		<InstallShieldReleaseConfiguration Include="MagInstall-msi">
+			<SetupExe>false</SetupExe>
+		</InstallShieldReleaseConfiguration>	
+	</ItemGroup>
+		
+	<ItemGroup Condition="'$(CreateExe)'!='false'">
+		<InstallShieldReleaseConfiguration Include="MagInstall-exe">
+			<SetupExe>true</SetupExe>
+		</InstallShieldReleaseConfiguration>	
+	</ItemGroup>
+	
+	<ItemGroup>		
+		<InstallShieldPathVariableOverrides Include="$(FullBuildPath)$(TempFolder)\P$(PatchNumber)">
+			<PathVariable>PATH_TO_BUILD_PATCH</PathVariable>
+		</InstallShieldPathVariableOverrides>
+		
+		<InstallShieldPathVariableOverrides Include="$(FullBuildPath)$(TempFolder)\P72 Lib">
+			<PathVariable>PATH_TO_ACCUSOFT15_LIB</PathVariable>
+		</InstallShieldPathVariableOverrides>		
+		
+		<InstallShieldPathVariableOverrides Include="$(ReleaseDir)">
+			<PathVariable>PATH_TO_RELEASE</PathVariable>
+		</InstallShieldPathVariableOverrides>
+		
+		<InstallShieldPathVariableOverrides Include="$(FullBuildPath)$(TempFolder)\P106Lib\LIB\Accusoft16.2">
+			<PathVariable>PATH_TO_ACCUSOFT16.2</PathVariable>
+		</InstallShieldPathVariableOverrides>
+	</ItemGroup>
+		
+</Project>

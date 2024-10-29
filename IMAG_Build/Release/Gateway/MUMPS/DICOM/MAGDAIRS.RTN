@@ -1,0 +1,81 @@
+MAGDAIRS ;WOIFO/PMK - Automatic Import Reconciliation Workflow ; 03 Mar 2010 10:35 AM
+ ;;3.0;IMAGING;**53**;Mar 19, 2002;Build 1715;Apr 22, 2010
+ ;; Per VHA Directive 2004-038, this routine should not be modified.
+ ;; +---------------------------------------------------------------+
+ ;; | Property of the US Government.                                |
+ ;; | No permission to copy or redistribute this software is given. |
+ ;; | Use of unreleased versions of this software requires the user |
+ ;; | to execute a written test agreement with the VistA Imaging    |
+ ;; | Development Office of the Department of Veterans Affairs,     |
+ ;; | telephone (301) 734-0100.                                     |
+ ;; | The Food and Drug Administration classifies this software as  |
+ ;; | a medical device.  As such, it may not be changed in any way. |
+ ;; | Modifications to this software may result in an adulterated   |
+ ;; | medical device under 21CFR820, the use of which is considered |
+ ;; | to be a violation of US Federal Statutes.                     |
+ ;; +---------------------------------------------------------------+
+ ;;
+CORRECT ; called from ^MAGDIR71 for a mis-matched DICOM object
+ N CALLING,DATAFILE,DOB,FACILITY,IMAGNUMB,INSTADDR
+ N NFRAMES,REFDOC,SERIEDES,SERINUMB,SEX,STUDYDES,TSYNTAX
+ S DATAFILE="^MAGDICOM(2006.5751)"
+ S TSYNTAX=$$GETDATA^MAGDFCNS(INODE,"0002,0010") ; transfer syntax uid
+ S CALLING=$$GETDATA^MAGDFCNS(INODE,"0002,0016") ; calling ae title
+ S DOB=$$GETDATA^MAGDFCNS(INODE,"0010,0030") ; date of birth
+ S SEX=$$GETDATA^MAGDFCNS(INODE,"0010,0040") ; sex
+ S STUDYDES=$$GETDATA^MAGDFCNS(INODE,"0008,1030") ; study description
+ S FACILITY=$$GETDATA^MAGDFCNS(INODE,"0008,0080") ; institution name
+ S INSTADDR=$$GETDATA^MAGDFCNS(INODE,"0008,0081") ; institution address
+ S REFDOC=$$GETDATA^MAGDFCNS(INODE,"0008,0090") ; referring physician's name
+ S SERIEDES=$$GETDATA^MAGDFCNS(INODE,"0008,1030") ; series description
+ S SERINUMB=$$GETDATA^MAGDFCNS(INODE,"0020,0011") ; series number
+ S IMAGNUMB=$$GETDATA^MAGDFCNS(INODE,"0020,0013") ; instance number
+ S NFRAMES=$$GETDATA^MAGDFCNS(INODE,"0028,0008") ; number of frames
+ D STORE
+ Q
+ ;
+MEDIA ; entry point from MAGDAIRM
+ N CALLING
+ S CALLING=""
+ D STORE
+ Q
+ ;
+STORE ;  store the data
+ N I,IEN,PNAME,V,X,Z
+ ; patient data
+ S PNAME=$TR(PNAMEDCM,"^","|")
+ S REFDOC=$TR(REFDOC,"^","|")
+ ;
+ ; don't allow carets ("^") in any data field
+ S Z="PID^ACNUMB^STUDYDES^MODALITY^FACILITY^INSTADDR^SERIEDES^CALLING"
+ F I=1:1:$L(Z,"^") S V=$P(Z,"^",I),@V=$TR(@V,"^","-")
+ ;
+ S X(0)=PNAME_"^"_PID_"^"_DOB_"^"_SEX
+ ; study data
+ S X(1)=STUDYDAT_"^"_STUDYTIM_"^"_ACNUMB_"^"_REFDOC_"^"_STUDYDES_"^"_STUDYUID
+ ; series data
+ S X(2)=MODALITY_"^"_FACILITY_"^"_INSTADDR_"^"_SERIEDES_"^"_SERIEUID_"^"_SERINUMB
+ ; object data
+ S X(3)=FROMPATH_"^"_SOPCLASS_"^"_TSYNTAX_"^"_IMAGEUID_"^"_IMAGNUMB_"^"_NFRAMES
+ S X(4)=INSTNAME_"^"_CALLING_"^"_$$NOW^XLFDT_"^"_$$PCONTEXT(SOPCLASS,TSYNTAX)
+ ;
+ ; prevent update of DATAFILE while someone is starting Importer
+ L +@DATAFILE:1E9 ; serialize name generation code
+ I '$D(@DATAFILE@(0)) S @DATAFILE@(0)="DICOM Objects to be Imported^^0^0"
+ S IEN=$P(@DATAFILE@(0),"^",3)+1
+ S $P(@DATAFILE@(0),"^",3,4)=IEN_"^"_IEN
+ M @DATAFILE@(IEN)=X
+ L -@DATAFILE
+ Q
+ ;
+PCONTEXT(SOPCLASS,TSYNTAX) ; presentation context check
+ N D0,D1,D2
+ ; see PS-3.8-2007 Table 9-18 for values
+ S D0=$O(^MAGDICOM(2006.586,"B","VISTA_STORAGE","")) Q:'D0 $$BADPC(2) ; no-reason
+ S D1=$O(^MAGDICOM(2006.586,D0,1,"B",SOPCLASS,"")) Q:'D1 $$BADPC(3) ; abstract syntax not supported
+ S D2=$O(^MAGDICOM(2006.586,D0,1,D1,1,"B",TSYNTAX,"")) Q:'D2 $$BADPC(4) ; transfer syntax not supported
+ Q 0
+ ;
+BADPC(ERROR) ; log the error
+ S ^(ERROR)=$G(^TMP("MAG",$J,"IMPORT MEDIA","PCONTEXT ERROR",SOPCLASS,TSYNTAX,ERROR))+1
+ Q ERROR

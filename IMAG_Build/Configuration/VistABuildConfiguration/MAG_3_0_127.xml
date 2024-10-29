@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<build
+
+ name="MAG*3.0*127"
+
+ patch="127"
+
+ patchName="VistA Imaging V3.0 Patch 127 - Telereader Maintenance"
+
+ envCheckRoutine=""
+
+ deleteEnvCheckRoutine=""
+
+ preInstallRoutine="PRE^MAGIP127"
+
+ deletePreInstalltRoutine="Yes"
+
+ postInstallRoutine="POS^MAGIP127"
+
+ deletePostInstallRoutine="Yes"
+
+ packageNumber="454"
+
+ packageName="IMAGING"
+
+ alphaBetaTesting="YES"
+
+ installationMessage="YES"
+
+ addressForUsageReporting="G.IMAGING DEVELOPMENT TEAM@FORUM.VA.GOV"
+
+ xmlns="http://va.gov/VistA/kids/manifest">
+<requiredBuilds>
+<!-- action= 0:Warning only;1:Don't install, remove global;2:Don't install, leave global;
+ -->
+<requiredBuild name="MAG*3.0*123" action="2"/>
+</requiredBuilds>
+<components>
+<dataDictionaries>
+<dataDictionary name="2006.5841" export="DD_2006_5841.KID"/>
+</dataDictionaries>
+<routines>
+<routine name="MAGDTR01" export="MAGDTR01.RTN"/>
+<routine name="MAGDTR03" export="MAGDTR03.RTN"/>
+<routine name="MAGDTR04" export="MAGDTR04.RTN"/>
+<routine name="MAGDTR05" export="MAGDTR05.RTN"/>
+<routine name="MAGGTU4T" export="MAGGTU4T.RTN"/>
+<routine name="MAGIP127" export="MAGIP127.RTN"/>
+<routine name="MAGNTLR2" export="MAGNTLR2.RTN"/>
+<routine name="MAGNTLR4" export="MAGNTLR4.RTN"/>
+<routine name="MAGNTLR5" export="MAGNTLR5.RTN"/>
+<routine name="MAGNTLR6" export="MAGNTLR6.RTN"/>
+<routine name="MAGNTLRS" export="MAGNTLRS.RTN"/>
+</routines>
+<rpcs>
+<rpc name="MAG DICOM CON UNREADLIST GET" export="RPC_MAG_DICOM_CON_UNREADLIST_GET.KID"/>
+<rpc name="MAG DICOM CON UNREADLIST LOCK" export="RPC_MAG_DICOM_CON_UNREADLIST_LOCK.KID"/>
+<rpc name="MAG3 TELEREADER ACQ SRVC SETUP" export="RPC_MAG3_TELEREADER_ACQ_SRVC_SETUP.KID"/>
+<rpc name="MAG3 TELEREADER CLONE READER" export="RPC_MAG3_TELEREADER_CLONE_READER.KID"/>
+<rpc name="MAG3 TELEREADER TIU TITLES LST" export="RPC_MAG3_TELEREADER_TIU_TITLES_LST.KID"/>
+</rpcs>
+<options>
+</options>
+<securityKeys>
+</securityKeys>
+<protocols>
+</protocols>
+<templateLists>
+</templateLists>
+<hl7Applications>
+</hl7Applications>
+<hl7LogicalLinks>
+</hl7LogicalLinks>
+<parameterDefinitions>
+</parameterDefinitions>
+<parameterTemplates>
+</parameterTemplates>
+<printTemplates>
+</printTemplates>
+<sortTemplates>
+</sortTemplates>
+<inputTemplates>
+</inputTemplates>
+<forms>
+</forms>
+<functions>
+</functions>
+<dialogs>
+</dialogs>
+<bulletins>
+</bulletins>
+<mailGroups>
+</mailGroups>
+<helpFrames>
+</helpFrames>
+</components>
+</build>

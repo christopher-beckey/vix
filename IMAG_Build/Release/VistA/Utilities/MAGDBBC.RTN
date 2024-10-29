@@ -1,0 +1,40 @@
+12/05/2000  11:05
+Saved from DCM,DCE
+MAGDBBC
+MAGDBBC ;WOIFO/EdM - Checksums on routines ; [ 12/05/2000  11:05 ]
+ ;;2.5T;DICOM42;;1-Nov-2000
+ ;; Do not export this routine
+ Q
+ ;
+SCAN(DIR) N C,D,F,K,R,V,X,Z
+ S:$E(DIR,$L(DIR))'="\" DIR=DIR_"\"
+ S Z=$ZOS(12,DIR_"*.DCM",63) F  S F=$P(Z,"^",1) Q:F=""  D  S Z=$ZOS(13,Z)
+ . U $P w !,F
+ . O 51:(DIR_F:"R") U 51 R X,X
+ . S V=$P(F,".",1)
+ . S V=$TR(V,"ABCDEFGHIJKLMNOPQRSTUVWXYZ","abcdefghijklmnopqrstuvwxyz")
+ . F  R R Q:R=""  Q:$ZC<0  D
+ . . S C=0
+ . . F K=1:1 R X Q:X=""  Q:$ZC<0  S:K'=2 C=C+$$C^MAGDVRSN(X)
+ . . D ENTER(R,V,C)
+ . . Q
+ . C 51
+ . Q
+ Q
+ ;
+ENTER(R,V,C) N D0,D1
+ S D0=$O(^MAGDBB("CHK","B",R,""))
+ D:'D0
+ . S D0=$O(^MAGDBB("CHK"," "),-1)+1
+ . S ^MAGDBB("CHK",0)="ROUTINE CHECKSUM^2006.898^"_D0_"^"_D0
+ . Q
+ S D1=$O(^MAGDBB("CHK",D0,1," "),-1)+1
+ S ^MAGDBB("CHK",D0,0)=R
+ S ^MAGDBB("CHK","B",R,D0)=""
+ S ^MAGDBB("CHK",D0,1,D1,0)=V_"^"_C
+ S ^MAGDBB("CHK","C",R,C,V,D0,D1)=""
+ S ^MAGDBB("CHK",D0,1,0)="^2006.8982^"_D1_"^"_D1
+ Q
+ ;
+
+

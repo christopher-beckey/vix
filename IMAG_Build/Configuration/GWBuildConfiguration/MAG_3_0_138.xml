@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<build
+ name="MAG*3.0*138"
+ patch="138"
+ patchName="VistA Imaging Version 3.0 Patch 138 - Telepathology Worklist">
+
+  <dictionaries>
+    <dictionary export="ELEMENT.DIC" />
+    <dictionary export="HL7.DIC" />
+    <dictionary export="TEMPLATE.DIC" />
+    <dictionary export="UID.DIC" />
+  </dictionaries>
+
+  <samples>
+    <sample export="Instrument.Sample" />
+    <sample export="Modality.Sample" />
+    <sample export="WorkList.Sample" />
+  </samples>
+  
+  <routines>
+    <routine name="MAGDHRC" export="MAGDHRC.RTN" />
+    <routine name="MAGDHRC2" export="MAGDHRC2.RTN" />
+    <routine name="MAGDHRCA" export="MAGDHRCA.RTN" />
+    <routine name="MAGDHRCB" export="MAGDHRCB.RTN" />
+    <routine name="MAGDHRCC" export="MAGDHRCC.RTN" />
+    <routine name="MAGDFND2" export="MAGDFND2.RTN" />
+    <routine name="MAGDIR6" export="MAGDIR6.RTN" />
+    <routine name="MAGDIW2A" export="MAGDIW2A.RTN" />
+    <routine name="MAGDIWB1" export="MAGDIWB1.RTN" />
+    <routine name="MAGDIWB2" export="MAGDIWB2.RTN" />
+    <routine name="MAGDMFBC" export="MAGDMFBC.RTN" />
+    <routine name="MAGDMFBI" export="MAGDMFBI.RTN" />
+    <routine name="MAGDMFBW" export="MAGDMFBW.RTN" />
+    <routine name="MAGDVRSN" export="MAGDVRSN.RTN" />
+    <routine name="MAGDWLPB" export="MAGDWLPB.RTN" />
+  </routines>
+  
+  <PatchBuildInfo>
+	<BuildInfo BuildNumber="20" BuildDate="Nov 04, 2014"/>
+  </PatchBuildInfo>
+  	  
+</build>
+

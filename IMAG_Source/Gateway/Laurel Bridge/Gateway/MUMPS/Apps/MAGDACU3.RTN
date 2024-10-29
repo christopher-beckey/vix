@@ -1,0 +1,63 @@
+MAGDACU3 ;WOIFO/PMK - DICOM Networking / Upper Layer Service / A-ASSOCIATE ; 12/19/2006 14:14
+ ;;3.0;IMAGING;**30,54**;MAR 19, 2002;;OCT 28, 2009
+ ;; Per VHA Directive 2004-038, this routine should not be modified.
+ ;; +---------------------------------------------------------------+
+ ;; | Property of the US Government.                                |
+ ;; | No permission to copy or redistribute this software is given. |
+ ;; | Use of unreleased versions of this software requires the user |
+ ;; | to execute a written test agreement with the VistA Imaging    |
+ ;; | Development Office of the Department of Veterans Affairs,     |
+ ;; | telephone (301) 734-0100.                                     |
+ ;; | The Food and Drug Administration classifies this software as  |
+ ;; | a medical device.  As such, it may not be changed in any way. |
+ ;; | Modifications to this software may result in an adulterated   |
+ ;; | medical device under 21CFR820, the use of which is considered |
+ ;; | to be a violation of US Federal Statutes.                     |
+ ;; +---------------------------------------------------------------+
+ ;;
+ Q
+ ;  Refer to Part 8, Section 9.3.2 of the DICOM Standard
+ ;
+REJECT(FILE) ; entry point to read an ASSOCIATE-RJ protocol data unit
+ N STATUS
+ ; is the file containing the ASSOCIATE-RJ pdu present?
+ S STATUS=$$OPEN^MAGOSFIL(FILE,"B")
+ I STATUS<0 D
+ . N M
+ . S M="Could not open file """_FILE_""" for Binary Read."
+ . W:$$USEPRIN^MAGOSFIL(1) !!!,M,!,STATUS
+ . S $EC=",U"_M_","
+ . Q  ; Error trap does not return
+ ;
+ ; delete the presentation contexts for negotiation
+ K ^TMP("MAG",$J,"DICOM","NEGOTIATE","RESPONSE")
+ D REJECT^MAGDACR1(FILE) ; decode the PDU
+ Q
+ ;
+RESPONSE(FILE) ; entry point to read an ASSOCIATE-AC protocol data unit
+ N PCONTEXT ;- presentation context id (abstract & transfer syntaxes)
+ N SOPUID ;--- UID of a SOP Class
+ N RESULT,STATUS
+ ; is the file containing the ASSOCIATE-AC pdu present?
+ S STATUS=$$OPEN^MAGOSFIL(FILE,"B")
+ I STATUS<0 D
+ . N M
+ . S M="Could not open file """_FILE_""" for Binary Read."
+ . W:$$USEPRIN^MAGOSFIL(1) !!!,M,!,STATUS
+ . S $EC=",U"_M_","
+ . Q  ; Error trap does not return
+ ;
+ ; initialize the presentation contexts for negotiation
+ K ^TMP("MAG",$J,"DICOM","NEGOTIATE","RESPONSE")
+ D RESPONSE^MAGDACR1(FILE) ; decode the PDU
+ ;
+ S PCONTEXT=""
+ F  S PCONTEXT=$O(^TMP("MAG",$J,"DICOM","NEGOTIATE","RESPONSE",PCONTEXT)) Q:'PCONTEXT  D
+ . S RESULT=^TMP("MAG",$J,"DICOM","NEGOTIATE","RESPONSE",PCONTEXT,"RESULT")
+ . I RESULT?1"0".E D  ; accepted presentation context
+ . . S SOPUID=^TMP("MAG",$J,"DICOM","NEGOTIATE","REQUEST",PCONTEXT,"SOP CLASS UID")
+ . . S ^TMP("MAG",$J,"DICOM","NEGOTIATE","SOP CLASS UID",SOPUID)=PCONTEXT
+ . . Q
+ . Q
+ Q
+ ;

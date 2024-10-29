@@ -1,0 +1,44 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <ProjectGuid>{7c9fe9f4-eed6-4880-b945-6dfd28e6a222}</ProjectGuid>
+  </PropertyGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Projects Include="JAWS\JAWS.dproj" />
+    <Projects Include="VA508Access2006.dproj" />
+  </ItemGroup>
+  <ProjectExtensions>
+    <Borland.Personality>Default.Personality</Borland.Personality>
+    <Borland.ProjectType />
+    <BorlandProject>
+  <BorlandProject xmlns=""> <Default.Personality> </Default.Personality> </BorlandProject></BorlandProject>
+  </ProjectExtensions>
+  <Target Name="VA508Access2006">
+    <MSBuild Projects="VA508Access2006.dproj" Targets="" />
+  </Target>
+  <Target Name="VA508Access2006:Clean">
+    <MSBuild Projects="VA508Access2006.dproj" Targets="Clean" />
+  </Target>
+  <Target Name="VA508Access2006:Make">
+    <MSBuild Projects="VA508Access2006.dproj" Targets="Make" />
+  </Target>
+  <Target Name="JAWS">
+    <MSBuild Projects="JAWS\JAWS.dproj" Targets="" />
+  </Target>
+  <Target Name="JAWS:Clean">
+    <MSBuild Projects="JAWS\JAWS.dproj" Targets="Clean" />
+  </Target>
+  <Target Name="JAWS:Make">
+    <MSBuild Projects="JAWS\JAWS.dproj" Targets="Make" />
+  </Target>
+  <Target Name="Build">
+    <CallTarget Targets="VA508Access2006;JAWS" />
+  </Target>
+  <Target Name="Clean">
+    <CallTarget Targets="VA508Access2006:Clean;JAWS:Clean" />
+  </Target>
+  <Target Name="Make">
+    <CallTarget Targets="VA508Access2006:Make;JAWS:Make" />
+  </Target>
+  <Import Condition="Exists('$(MSBuildBinPath)\Borland.Group.Targets')" Project="$(MSBuildBinPath)\Borland.Group.Targets" />
+</Project>

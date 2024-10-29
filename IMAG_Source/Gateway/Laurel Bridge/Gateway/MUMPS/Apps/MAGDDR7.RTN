@@ -1,0 +1,124 @@
+MAGDDR7 ;WISC/PMK - Program to read a DICOM file [ 12/13/2001  11:39 AM ] ; 06/06/2005  08:15
+ ;;3.0;IMAGING;**10,30,51**;MAR 19, 2002;;JUN 16, 2006
+ ;; Per VHA Directive 2004-038, this routine should not be modified.
+ ;; +---------------------------------------------------------------+
+ ;; | Property of the US Government.                                |
+ ;; | No permission to copy or redistribute this software is given. |
+ ;; | Use of unreleased versions of this software requires the user |
+ ;; | to execute a written test agreement with the VistA Imaging    |
+ ;; | Development Office of the Department of Veterans Affairs,     |
+ ;; | telephone (301) 734-0100.                                     |
+ ;; | The Food and Drug Administration classifies this software as  |
+ ;; | a medical device.  As such, it may not be changed in any way. |
+ ;; | Modifications to this software may result in an adulterated   |
+ ;; | medical device under 21CFR820, the use of which is considered |
+ ;; | to be a violation of US Federal Statutes.                     |
+ ;; +---------------------------------------------------------------+
+ ;;
+ ; PACS Interface -- read DICOM files (routine #7)
+ ;
+ ; This routine is called after ^MAGDDR2 to check validity of the result
+ ;
+ENTRY ; verify a DICOM information object definition -- invoked by ^MAGDDR1
+ N MESSAGE,SERISUID,SOPINST,UIDPAT
+ S SOPCLASS=$$GETDATA^MAGDFCNS(INODE,"0008,0016",1,1)
+ S MESSAGE=$$GETNAME^MAGDUID2(SOPCLASS) ; SOP name is the MESSAGE
+ W !!,"SOP Class Name --- ",MESSAGE
+ S XFERUID=$$GETDATA^MAGDFCNS(INODE,"0002,0010",1,1)
+ W !,"Transfer Syntax -- ",$$GETNAME^MAGDUID2(XFERUID) ; SOP name is the MESSAGE
+ S SOPINST=$$GETDATA^MAGDFCNS(INODE,"0008,0018",1,1)
+ S STUDYUID=$$GETDATA^MAGDFCNS(INODE,"0020,000D",1,1)
+ S SERISUID=$$GETDATA^MAGDFCNS(INODE,"0020,000E",1,1)
+ S UIDPAT="1"""_^MAGDICOM(2006.563,1,"UID ROOT")_""".E"
+ I SOPINST?@UIDPAT D  ; SOP Instance should not use VA root
+ . W !,"SOP Instance using VA Root UID: ",SOPINST
+ . Q
+ I SERISUID?@UIDPAT D  ;  Series UID should not use VA root
+ . W !,"Series UID using VA Root UID: ",SERISUID
+ . Q
+ I STUDYUID'?@UIDPAT D  ; Study UID should must use VA root
+ . W !,"Study UID not using VA Root UID: ",STUDYUID
+ . Q
+ D VERIFY
+ Q
+ ;
+VERIFY ; check the information object definition
+ S TEMPLATE=$O(^MAGDICOM(2006.52,"B",MESSAGE,""))
+ I TEMPLATE="" D  Q
+ . W !,"Undefined Message Template: ",MESSAGE
+ . Q
+ S IPTR=0 F  S IPTR=$O(^MAGDICOM(2006.52,TEMPLATE,1,IPTR)) Q:IPTR=""  D
+ . S X=^(IPTR,0),TAG=$P(X,"^"),NAME=$P(X,"^",2),SCUSCP=$P(X,"^",3)
+ . S DEFAULT=$P(X,"^",4),SEQMARK=$P(X,"^",5)
+ . S Y=$O(^MAGDICOM(2006.51,"B",TAG,""))
+ . I Y="" D  Q
+ . . W !,"Unknown ELEMENT in TEMPLATE dictionary: ",TAG
+ . . Q
+ . S VR=$P(^MAGDICOM(2006.51,Y,0),"^",3)
+ . D ELEMENT
+ . Q
+ Q
+ ;
+ELEMENT ;
+ S TYPE=$P(SCUSCP,"/",2)
+ I TYPE=1 D
+ . D TYPE1
+ . Q
+ E  I TYPE="1C" D
+ . D TYPE1C
+ . Q
+ E  I TYPE="2" D
+ . D TYPE2("TYPE 2")
+ . Q
+ E  I TYPE="2C" D
+ . D TYPE2("TYPE 2C")
+ . Q
+ E  I TYPE="3" Q  ; don't care about Type 3 elements
+ E  W !,"Incorrect value for TYPE: <<",TYPE,">> for Element: ",TAG
+ Q
+ ;
+TYPE1 ; Type 1 elements must exist and have a non-null value
+ I VR="SQ" D  ; sequence element
+ . I '$D(^TMP("MAG",$J,"DICOM",INODE,TAG)) D
+ . . W !,"Missing Type 1 Sequence: (",TAG,") -- ",NAME
+ . . Q
+ . E  D
+ . . N PATTERN
+ . . ; check that the sequence has at least one item
+ . . S PATTERN="1"""_TAG_".0001^"".E" ; pattern match for sequence item
+ . . I $O(^TMP("MAG",$J,"DICOM",INODE,TAG))'?@PATTERN D
+ . . . W !,"Missing Type 1 Sequence Items: (",TAG,") -- ",NAME
+ . . . Q
+ . . Q
+ . Q
+ E  D  ; regular element
+ . I '$D(^TMP("MAG",$J,"DICOM",INODE,TAG,1,1)) D
+ . . W !,"Missing Type 1 Element: (",TAG,") -- ",NAME
+ . . Q
+ . E  D
+ . . S RESULT=^TMP("MAG",$J,"DICOM",INODE,TAG,1,1)
+ . . I "<unknown>"[RESULT D
+ . . . W !,"Null Type 1 Element: (",TAG,") -- ",NAME
+ . . . Q
+ . . Q
+ . Q
+ Q
+ ;
+TYPE1C ;
+ Q
+ ;
+TYPE2(TYPE) ; Type 2 elements must exist, but can be null
+ I VR="SQ" D  ; sequence element
+ . I '$D(^TMP("MAG",$J,"DICOM",INODE,TAG)) D
+ . . W !,"Missing ",TYPE," Sequence: (",TAG,") -- ",NAME
+ . . Q
+ . Q
+ E  D  ; regular element
+ . I '$D(^TMP("MAG",$J,"DICOM",INODE,TAG,1,1)) D
+ . . W !,"Missing ",TYPE," Element: (",TAG,") -- ",NAME
+ . . Q
+ . Q
+ Q
+ ;
+TYPE3 ; Type 3 elements are totally optional
+ Q  ; don't care about Type 3 elements

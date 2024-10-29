@@ -1,0 +1,151 @@
+magpt5 ;WOIFO/MLH - individual PACS tests - report flows ; 20 Jun 2005  4:20 PM
+ ; *** CAUTION:  not for distribution beyond Silver Spring OIFO!
+ q
+ ;
+B101 ; non-exception flow - case and ICN found, no previous report on file
+ ;
+ n result,stat,logent,ids,ssn,i,rannum,fldordd
+ k HLA
+ ;
+ d LOG^magptm($t(B101)_" ; begin")
+ ;
+ ; new order message
+ d ORM^magpt("NW")
+ s stat=$$SEND^magptm("ORM",.result)
+ s logent="B.1.1.1 ; "_result w !,logent,! d LOG^magptm(logent,$na(HLA("HLS")))
+ ;
+ ; make this into a report
+ s rannum=^TMP($j,"RANNUM") ; use same generated random number as order msg
+ f i=2,3,5 k HLA("HLS",i) ; don't need PV1, ORC, ZDS
+ ;
+ ; populate OBR-22-results rpt/status chng - date/time and OBR-25-status
+ s $p(HLA("HLS",4),HLFS,23)=$zd($h,8)_"0600-0500"
+ s $p(HLA("HLS",4),HLFS,26)="F" ; final report
+ ;
+ ; populate OBR-32-principal result interpreter
+ i '$$doc^magptu(33,.fldordd) s $p(HLA("HLS",4),HLFS,33)=$TR(fldordd,HLCS,HLSS)
+ ;
+ ; generate detail segments
+ d OBX^magpto(20,"ORU")
+ s stat=$$SEND^magptm("ORU",.result)
+ s logent="B.1.1.2 ; "_result w !,logent,! d LOG^magptm(logent,$na(HLA("HLS")))
+ ;
+ d LOG^magptm($t(B101)_" ; end")
+ q
+ ;
+B102 ; non-exception flow - case and ICN found, previous report already on file
+ ;
+ n result,stat,logent,ids,ssn,rannum,i,txt
+ k HLA
+ ;
+ d LOG^magptm($t(B102)_" ; begin")
+ ;
+ ; new order message
+ d ORM^magpt("NW")
+ s stat=$$SEND^magptm("ORM",.result)
+ s logent="B.1.2.1 ; "_result w !,logent,! d LOG^magptm(logent,$na(HLA("HLS")))
+ ;
+ ; make this into a report
+ s rannum=^TMP($j,"RANNUM") ; use same generated random number as order msg
+ f i=2,3,5 k HLA("HLS",i) ; don't need PV1, ORC, ZDS
+ ;
+ ; populate OBR-32-principal result interpreter
+ i '$$doc^magptu(33,.fldordd) s $p(HLA("HLS",4),HLFS,33)=$tr(fldordd,HLCS,HLSS)
+ ;
+ ; populate OBR-22-results rpt/status chng - date/time and OBR-25-status
+ s $p(HLA("HLS",4),HLFS,23)=$zd($h,8)_"0600-0500"
+ s $p(HLA("HLS",4),HLFS,26)="F" ; final report
+ ;
+ ; generate detail segments
+ d OBX^magpto(20,"ORU")
+ s stat=$$SEND^magptm("ORU",.result)
+ s logent="B.1.2.2 ; "_result w !,logent,! d LOG^magptm(logent,$na(HLA("HLS")))
+ ;
+ ; generate and send a subsequent report
+ ;
+ ; populate OBR-22-results rpt/status chng - date/time and OBR-25-status
+ s $p(HLA("HLS",4),HLFS,23)=$zd($h,8)_"0605-0500"
+ s $p(HLA("HLS",4),HLFS,26)="C" ; final report
+ ;
+ ; generate detail segments
+ s i=0 f  s i=$o(HLA("HLS",i)) q:'i  i $e(i,1,3)="OBX" k HLA("HLS",i) ; don't need old OBXs
+ d OBX^magpto(20,"ORU","SUBSEQUENT")
+ s stat=$$SEND^magptm("ORU",.result)
+ s logent="B.1.2.3 ; "_result w !,logent,! d LOG^magptm(logent,$na(HLA("HLS")))
+ ;
+ d LOG^magptm($t(B102)_" ; end")
+ q
+ ;
+B103 ; non-exception flow - case and ICN found, subsequent report already on file
+ ;
+ n result,stat,logent,ids,ssn,rannum,i,txt
+ k HLA
+ ;
+ d LOG^magptm($t(B103)_" ; begin")
+ ;
+ ; new order message
+ d ORM^magpt("NW")
+ s stat=$$SEND^magptm("ORM",.result)
+ s logent="B.1.3.1 ; "_result w !,logent,! d LOG^magptm(logent,$na(HLA("HLS")))
+ ;
+ ; make this into a report
+ s rannum=^TMP($j,"RANNUM") ; use same generated random number as order msg
+ f i=2,3,5 k HLA("HLS",i) ; don't need PV1, ORC, ZDS
+ ;
+ ; populate OBR-22-results rpt/status chng - date/time and OBR-25-status
+ s $p(HLA("HLS",4),HLFS,23)=$zd($h,8)_"0600-0500"
+ s $p(HLA("HLS",4),HLFS,26)="F" ; final report
+ ;
+ ; populate OBR-32-principal result interpreter
+ i '$$doc^magptu(33,.fldordd) s $p(HLA("HLS",4),HLFS,33)=$tr(fldordd,HLCS,HLSS)
+ ;
+ ; generate detail segments
+ d OBX^magpto(20,"ORU")
+ s stat=$$SEND^magptm("ORU",.result)
+ s logent="B.1.3.2 ; "_result w !,logent,! d LOG^magptm(logent,$na(HLA("HLS")))
+ ;
+ ; generate and send a subsequent report
+ ;
+ ; populate OBR-22-results rpt/status chng - date/time and OBR-25-status
+ s $p(HLA("HLS",4),HLFS,23)=$zd($h,8)_"0555-0500"
+ s $p(HLA("HLS",4),HLFS,26)="R" ; results stored - not yet verified
+ ;
+ ; generate detail segments
+ s i=0 f  s i=$o(HLA("HLS",i)) q:'i  i $e(i,1,3)="OBX" k HLA("HLS",i) ; don't need old OBXs
+ d OBX^magpto(20,"ORU","PREVIOUS")
+ s stat=$$SEND^magptm("ORU",.result)
+ s logent="B.1.3.3 ; "_result w !,logent,! d LOG^magptm(logent,$na(HLA("HLS")))
+ ;
+ d LOG^magptm($t(B103)_" ; end")
+ q
+ ;
+B104 ; non-exception flow - case and ICN not found
+ ;
+ n result,stat,logent,ids,ssn,rannum,i,txt,flddta,cmpintd
+ k HLA
+ ;
+ d LOG^magptm($t(B104)_" ; begin")
+ ;
+ ; new report message
+ d ORU^magptm("NW")
+ s rannum=^TMP($j,"RANNUM") ; use same generated random number as order msg
+ k HLA("HLS",2) ; don't need PV1
+ ;
+ ; populate OBR-22-results rpt/status chng - date/time and OBR-25-status
+ s $p(HLA("HLS",4),HLFS,23)=$zd($h,8)_"0600-0500"
+ s $p(HLA("HLS",4),HLFS,26)="F" ; final report
+ ;
+ ; populate OBR-32-principal result interpreter
+ i '$$doc^magptu(33,.cmpintd) d
+ . s cmpintd=$tr(cmpintd,HLCS,HLSS)
+ . s $p(flddta,HLCS,1)=cmpintd,$p(HLA("HLS",4),HLFS,33)=flddta
+ . k flddta
+ . q
+ ;
+ ; generate detail segments
+ d OBX^magpto(20,"ORU")
+ s stat=$$SEND^magptm("ORU",.result)
+ s logent="B.1.4.1 ; "_result w !,logent,! d LOG^magptm(logent,$na(HLA("HLS")))
+ ;
+ d LOG^magptm($t(B104)_" ; end")
+ q

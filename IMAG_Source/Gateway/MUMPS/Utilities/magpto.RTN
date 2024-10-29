@@ -1,0 +1,201 @@
+magpto ;WOIFO/MLH - PACS testing subroutines (orders) ; 20 Jun 2005  11:23 AM
+ ; *** CAUTION:  not for distribution beyond Silver Spring OIFO!
+ q
+ ;
+OBR ; SUBROUTINE - build OBR segment   
+ n segdta ; --- segment data
+ n i ; -------- scratch index
+ n stat ; ----- return status of function
+ n flddta ; --- field data
+ n cmpdta ; --- component data
+ n fldordd ; -- ordering doc
+ n imgtyp ; --- imaging type
+ ;     OBR-1-set ID
+ s $p(segdta,HLFS,1)=1
+ ;     OBR-2-placer order number
+ s $p(segdta,HLFS,2)=$p($g(HLA("HLS",3)),HLFS,3)
+ ;     OBR-3-filler order number
+ s $p(segdta,HLFS,3)=$p(segdta,HLFS,2)
+ ;     OBR-4-universal service ID
+ s stat=$$rncmitm^magptu(.flddta,.comien,.orditm) 
+ s $p(segdta,HLFS,4)=flddta k flddta
+ ;     OBR-5-priority
+ s $p(segdta,HLFS,5)=$p($p(HLA("HLS",3),HLFS,7),HLCS,6)
+ ;     OBR-15-specimen source
+ ;     does laterality apply?
+ i comien'=1,comien'=11 ; no
+ e  d  ; yes
+ . s $p(cmpdta,HLSS,2)=$p("LEFT^RIGHT","^",$e(rannum,3)#2+1)
+ . s $p(flddta,HLCS,5)=cmpdta k cmpdta
+ . s $p(segdta,HLFS,15)=flddta k flddta
+ . q
+ ;     OBR-16-ordering provider
+ s $p(segdta,HLFS,16)=$p(HLA("HLS",3),HLFS,13)
+ ;     OBR-17-order callback phone number
+ s $p(segdta,HLFS,17)=$p(HLA("HLS",3),HLFS,15)
+ ;     OBR-18-placer field 1
+ s $p(segdta,HLFS,18)=(1000000-$p(segdta,HLFS,2))_"-"_(rannum#61+1)
+ ;     OBR-19-placer field 2
+ s $p(segdta,HLFS,19)=$p(segdta,HLFS,2)
+ ;     OBR-20-filler field 1
+ s $p(segdta,HLFS,20)="1\S\FILL\S\1\S\FILL"
+ ;     OBR-21-filler field 2
+ s imgtyp=$g(^RA(79.1,$p(orditm,"^",12),0))
+ i imgtyp]"" s $p(segdta,HLFS,21)=$p(imgtyp,"^",3)_HLCS_$p(imgtyp,"^",1)
+ ;     OBR-24-diagnostic service section ID
+ s $p(segdta,HLFS,24)=$p("RA^OT","^",$e(rannum,4)#2)
+ ;     OBR-27-quantity/timing
+ s $p(segdta,HLFS,27)=$p($g(HLA("HLS",3)),HLFS,8)
+ ;     OBR-30-transportation mode
+ s $p(segdta,HLFS,30)=$p("CART^PORT^WALK^WHLC","^",$e(rannum,3,4)#4+1)
+ ;     OBR-31.2-reason for study
+ s flddta="" f i=1:1:5 s $e(flddta,i)=$c($r(26)+65)
+ s $p(segdta,HLFS,31)=HLCS_"REASON FOR STUDY "_flddta
+ ;
+ s segix=$o(HLA("HLS"," "),-1)+1,HLA("HLS",segix)="OBR"_HLFS_segdta k segdta
+ q
+ ;
+OBX(xhlines,xtyp,xrpttyp) ; SUBROUTINE - build OBX segments for order or report
+ ;    INPUT:  xhlines     number of lines of history/report to build
+ ;            xtyp        type of message being built (default ORM)
+ ;            xrpttyp     type of report message
+ ;
+ n setid ; --- OBX set ID
+ n segdta ; -- segment data
+ n segix ; --- segment index
+ n lat ; ----- laterality
+ ;
+ i '$d(xtyp) s xtyp="ORM"
+ ;
+ ;   procedure
+ ;     OBX-1-set ID
+ s (setid,$p(segdta,HLFS,1))=$g(setid)+1
+ ;     OBX-2-value type
+ s $p(segdta,HLFS,2)="CE"
+ ;     OBX-3-observation identifier
+ s $p(segdta,HLFS,3)="P"_HLCS_"PROCEDURE"_HLCS_"L"
+ ;     OBX-5-observation value
+ s $p(segdta,HLFS,5)=$p($p(HLA("HLS",4),HLFS,5),HLCS,4,6)
+ ;     OBX-11-observation result status
+ s $p(segdta,HLFS,11)="O"
+ s segix=$o(HLA("HLS"," "),-1)+1,HLA("HLS",segix)="OBX"_HLFS_segdta k segdta
+ ;
+ i xtyp="ORU" d  ; report fields
+ . ; impression
+ . ;     OBX-1-set ID
+ . s (setid,$p(segdta,HLFS,1))=$g(setid)+1
+ . ;     OBX-2-value type
+ . s $p(segdta,HLFS,2)="TX"
+ . ;     OBX-3-observation identifier
+ . s $p(segdta,HLFS,3)="I"_HLCS_"IMPRESSION"_HLCS_"L"
+ . ;     OBX-5-observation value
+ . s ndiag=$e(rannum,4)#3
+ . s $p(segdta,HLFS,5)="The observed area looks "_$s(ndiag=0:"OK",ndiag=1:"questionable",1:"bad")
+ . ;     OBX-11-observation result status
+ . s $p(segdta,HLFS,11)="F"
+ . s segix=$o(HLA("HLS"," "),-1)+1,HLA("HLS",segix)="OBX"_HLFS_segdta k segdta
+ . ;
+ . ; diagnostic code
+ . ;     OBX-1-set ID
+ . s (setid,$p(segdta,HLFS,1))=$g(setid)+1
+ . ;     OBX-2-value type
+ . s $p(segdta,HLFS,2)="CE"
+ . ;     OBX-3-observation identifier
+ . s $p(segdta,HLFS,3)="D"_HLCS_"DIAGNOSTIC CODE"_HLCS_"L"
+ . ;     OBX-5-observation value
+ . s ndiag=$e(rannum,2)#8+1
+ . s $p(segdta,HLFS,5)=ndiag_HLCS_$p($g(^RA(78.3,ndiag,0)),"^",1)_HLCS_"L"
+ . ;     OBX-11-observation result status
+ . s $p(segdta,HLFS,11)="F"
+ . s segix=$o(HLA("HLS"," "),-1)+1,HLA("HLS",segix)="OBX"_HLFS_segdta k segdta
+ . q
+ ;       modifiers
+ s lat=$p($p($p(HLA("HLS",4),HLFS,16),HLCS,5),HLSS,2)
+ i lat]"" d
+ . ;     OBX-1-set ID
+ . s (setid,$p(segdta,HLFS,1))=$g(setid)+1
+ . ;     OBX-2-value type
+ . s $p(segdta,HLFS,2)="TX"
+ . ;     OBX-3-observation identifier
+ . s $p(segdta,HLFS,3)="M"_HLCS_"MODIFIERS"_HLCS_"L"
+ . ;     OBX-5-observation value
+ . s $p(segdta,HLFS,5)=lat
+ . ;     OBX-11-observation result status
+ . s $p(segdta,HLFS,11)="O"
+ . s segix=$o(HLA("HLS"," "),-1)+1,HLA("HLS",segix)="OBX"_HLFS_segdta k segdta
+ . q
+ ;
+ ;   history or report lines
+ f i=1:1:xhlines d
+ . ;     OBX-1-set ID
+ . s (setid,$p(segdta,HLFS,1))=$g(setid)+1
+ . ;     OBX-2-value type
+ . s $p(segdta,HLFS,2)="TX"
+ . ; order or report?
+ . i $g(xtyp,"ORM")="ORM" d  ; order
+ . . ;     OBX-3-observation identifier
+ . . s $p(segdta,HLFS,3)="H"_HLCS_"HISTORY"_HLCS_"L"
+ . . ;     OBX-5-observation value
+ . . s $p(segdta,HLFS,5)="THIS IS LINE NUMBER "_$e(i+10000,2,5)_" OF THE PATIENT HISTORY DATA GROUP"
+ . . ;     OBX-11-observation result status
+ . . s $p(segdta,HLFS,11)="O"
+ . . q
+ . e  d  ; report
+ . . ;     OBX-3-observation identifier
+ . . s $p(segdta,HLFS,3)="R"_HLCS_"REPORT"_HLCS_"L"
+ . . ;     OBX-5-observation value
+ . . s txt="THIS IS LINE NUMBER "_$e(i+10000,2,5)_" OF THE "
+ . . i $d(xrpttyp) s txt=txt_xrpttyp_" "
+ . . s txt=txt_"REPORT"
+ . . s $p(segdta,HLFS,5)=txt
+ . . ;     OBX-11-observation result status
+ . . s $p(segdta,HLFS,11)="F"
+ . . q
+ . ;
+ . s segix=$o(HLA("HLS"," "),-1)+1,HLA("HLS",segix)="OBX"_HLFS_segdta k segdta
+ . q
+ q
+ ;
+ORC(xordcod) ; SUBROUTINE - build ORC segment (order common)
+ n segdta ; --- segment data
+ n flddta ; --- field data
+ n fldordd ; -- ordering doc
+ n entorg ; --- entering organization
+ ;     ORC-1-order control
+ s $p(segdta,HLFS,1)=xordcod
+ ;     ORC-2-placer order number
+ s $p(segdta,HLFS,2)=$e($zd(+$h,8),3,8)_"-"_$E(rannum*47,2,6)
+ ;     ORC-3-filler order number
+ s $p(segdta,HLFS,3)=$p(segdta,HLFS,2)
+ ;     ORC-5-order status
+ s $p(segdta,HLFS,5)=$s(xordcod="CA":"CA",xordcod="XO":"CM",1:"IP")
+ ;     ORC-7-quantity/timing
+ s $p(flddta,HLCS,4)=$zd($h+1,8)_($tr($zt($r(86400)),":"))_"-0500"
+ s $p(flddta,HLCS,6)=$e("ARS",rannum*59#3+1)
+ s $p(segdta,HLFS,7)=flddta k flddta
+ ;     ORC-10-entered by
+ s $p(flddta,HLCS,1)="CLERK"_($e(rannum,1,2)*67+1)
+ s $p(flddta,HLCS,2)="FIRST"_($e(rannum,3,4)*71+1)
+ s $p(flddta,HLCS,3)="MID"_($e(rannum,5,6)*73+1)
+ s $p(flddta,HLCS,4)=$P("JR^III^SR","^",rannum*79#13+1)
+ s $p(segdta,HLFS,10)=flddta k flddta
+ ;     ORC-12-ordering provider
+ i '$$doc^magptu(16,.fldordd) s $p(segdta,HLFS,12)=fldordd
+ ;     ORC-13-enterer's location
+ s entorg=rannum#18+1
+ s $p(segdta,HLFS,13)=$p($g(^DIC(49,entorg,0)),"^",1)
+ ;     ORC-14-call back phone number
+ i '$$fon^magptu($e(rannum,1,5)*17,.fon) d
+ . s $p(segdta,HLFS,14)=fon_HLCS_"WPN"_HLCS_"PH"
+ . q
+ ;     ORC-17-entering organization
+ s $p(segdta,HLFS,17)=entorg_HLCS_$p(segdta,HLFS,13)_HLCS_"VISTA49"
+ ;
+ s segix=$o(HLA("HLS"," "),-1)+1,HLA("HLS",segix)="ORC"_HLFS_$g(segdta) k segdta
+ q
+ ;
+ZDS ; SUBROUTINE - build ZDS segment (study instance UID)
+ n segix ; --- segment index
+ s segix=$o(HLA("HLS"," "),-1)+1
+ s HLA("HLS",segix)=$$ZDS^MAGDRAHL($R(10000)+1,$R(10000)+1,$R(10000)+1)
+ q

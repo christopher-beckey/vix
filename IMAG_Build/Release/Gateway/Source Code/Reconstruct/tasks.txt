@@ -1,0 +1,138 @@
+y///////////////////////
+
+Tasks
+
+///////////////////////
+
+Completed in Version 1.0
+XX Change all references to group and element to unsigned short.  Cast the
+initial long int to unsigned short located in ReadChgFile method in Reconstruct
+class.
+
+XX Do I need to load RTC? Determine best method to find the VR for each element.
+RESP: Yes.  Configured it to do so.
+
+XX Determine if VM accessibility is thru dicom.lib or iodbase.lib.
+RESP: VM is accessible through iodbase.lib only.
+
+XX Modify ReadChgFile to bypass field description in change file.
+
+XX Add assignment operator to resolve error with TagLine class.
+
+XX Change the prefix notation on class members and methods.
+
+XX Need ability to open file based on full UNC pathnames.
+
+XX Resolve memory leaks.
+
+XX Make sure to delete objects in the class destructor.
+
+XX Determine if/how to restart the DDO back to the initial position.
+This is to make sure you step through all the tag in the messages.
+
+XX Figure out the problem with the struct in the Exception class.
+
+XX Figure out why new dicom file is not created and written to.
+
+XX Ask Dee why "free" command did not work properly.
+
+XX Add additional comments to code.
+
+XX Verify program can handle all SOP Classes used by
+the VA.
+
+XX Check if Sequence before processing Tag. If so, generate error
+and exit.
+
+XX Determine how to decode the stored TypeCode in the VR.  It is
+ stored as integer.  This is done by the Pack method.  Probably
+  generate an UnPack method.
+
+XX Redo how to find, maintain, and change, when desired, 
+the syntax of the Data Set in the Meta file.  Remember, the Meta File
+information (group 2) is always Explicit VR Little Endian.
+
+XX Correct the store Meta File with the Data Set.  Currently,
+it alters the Meta File Information (group 2) and leaves the Data Set
+alone.  It is suppose to do the opposite.  The Meta File information
+should never change.
+
+XX Correct Group2 Length error.  The ucdavis code currently determines
+the length before packing the buffer.  Bytes are added while packing
+the buffer.
+
+XX Add error correction to handle non-standard keyword.
+
+XX Program crashes when processing Private elements.  Determine how
+to correct this.  It might have crashed because the VR TypeCode was
+not known.
+
+XX It appears the program does not handle spaces in the value field 
+in the text file.  It should.  Isolate problem and correct.
+
+XX Make code handle both lowercase and uppercase keywords.  currently,
+it can only handle uppercase.
+
+XX Correct memory leak when reading change file.  To do with 
+m_obTagLine object in ReadChgFile method.
+
+XX Correct problems with building release version of executable.
+
+XX Add code to compare input file against output file.  If same, error
+out.
+
+XX Add the exception code to the output string.
+
+
+Completed in Version 1.3
+
+XX Have Implementation UID/Name of the VA in the outgoing DICOM file.
+
+XX Rename the data dictionary file from MAGD_dd.txt to MAGD_RECON.txt.
+
+XX Corrected some memory leaks.
+
+XX Check Transfer Syntax.
+
+XX Accept and process JPEG Baseline images.
+
+XX Modify CHANGE keyword functionality.  If Tag does not exist, do not error.  Perform an INSERT instead.
+
+XX Tighten up file format checking to make sure only Explicit VR Little Endian files
+are converted.
+
+XX Update User Manual.
+
+Completed in Version 1.4
+
+XX Corrected problem handling DICOM messages with JPEG Baseline compression transfer
+syntax.  The correction was in the DICOM toolkit, not mag_recon.exe.  Mag_recon.exe
+now uses an updated version of the DICOM toolkit.
+
+Completed in Version 1.5
+
+XX Added ability to properly handle all images with all possible JPEG Transfer Syntaxes.  
+Changes occurred in both the toolkit and the mag_recon.exe application.
+
+
+Future Functionality:
+
+__ Expand code to verify existance of file before attempting to
+open same file.
+
+__ Dee suggested creating a function containing a case statement 
+to compare the VR and mulnipulate the data accordingly.
+
+__ Add ability to modify Sequences.
+
+__ Temporarily, skip validation of Type 1 elements.  DICOM toolkit must be
+modified to handle Type 1 validation.  Add it after giving Peter initial exe
+to start testing.
+
+__ Change Tag.  Return error if new value exceeds max. length determined
+by the VR typecode.
+
+__ Generate new SOP Instance UID.  Copy the original SOP Instance UID
+to Reference SOP Instance UID.  Let Peter know this is not DICOM
+compliant, but close.  I cannot help it.
+

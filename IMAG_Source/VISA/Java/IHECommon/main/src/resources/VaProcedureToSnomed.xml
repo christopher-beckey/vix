@@ -1,0 +1,337 @@
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+	<comment>The mapping from SNOMED to VA Procedures and Events</comment>
+	<!-- 1-CARDIAC CATHETERIZATION	41976001 -->
+	<entry key="1">41976001</entry>
+	<!-- 2-ECHOCARDIOGRAM	40701008 -->
+	<entry key="2">40701008</entry>
+	<!-- 3-EKG	46825001 -->
+	<entry key="3">46825001</entry>
+	<!-- 4-HOLTER	252417001,427047002 -->
+	<entry key="4">427047002</entry>
+	<!-- 5-PULMONARY FUNCTION TEST	23426006 -->
+	<entry key="5">23426006</entry>
+	<!-- 6-ENDOSCOPY	423827005 -->
+	<entry key="6">423827005</entry>
+	<!-- 7-ARTHROSCOPY	13714004 -->
+	<entry key="7">13714004</entry>
+	<!-- 8-CYSTOSCOPY	24139008 -->
+	<entry key="8">24139008</entry>
+	<!-- 9-MICROSCOPY	117259009 -->
+	<entry key="9">117259009</entry>
+	
+	<!-- 10-BIOPSY	86273004 -->
+	<entry key="10">86273004</entry>
+	<!-- 11-SURGERY	387713003 -->
+	<entry key="11">387713003</entry>
+	<!-- 12-COLONOSCOPY	73761001 -->
+	<entry key="12">73761001</entry>
+	<!-- 13-EGD	76009000 -->
+	<entry key="13">76009000</entry>
+	<!-- 14-VISIT	308335008 -->
+	<entry key="14">308335008</entry>
+	<!-- 15-LAPAROSCOPY	73632009 -->
+	<entry key="15">73632009</entry>
+	<!-- 16-ANESTHESIA	399097000 -->
+	<entry key="16">399097000</entry>
+	<!-- 17-BRONCHOSCOPY	10847001 -->
+	<entry key="17">10847001</entry>
+	<!-- 18-CONTRAST INJECTION	58981006 -->
+	<entry key="18">58981006</entry>
+	<!-- 19-DENTAL IMAGE PA	22891007 -->
+	<entry key="19">22891007</entry>
+	
+	<!-- 20-STRESS TEST	76746007 -->
+	<entry key="20">76746007</entry>
+	<!-- 21-ACUPUNCTURE	44868003 -->
+	<entry key="21">44868003</entry>
+	<!-- 22-EPID STEROID INJECTION	296778005 -->
+	<entry key="22">296778005</entry>
+	<!-- 23-PARACENTESIS	86088003 -->
+	<entry key="23">86088003</entry>
+	<!-- 24-NASOPHARYNGOSCOPY	82941002 -->
+	<entry key="24">82941002</entry>
+	<!-- 25-SIGMOIDOSCOPY	24420007 -->
+	<entry key="25">24420007</entry>
+	<!-- 26-THALLIUM STRESS TEST	431511008 -->
+	<entry key="26">431511008</entry>
+	<!-- 27-TRIG PT INJ -->	
+	<!-- <entry key="?????">27</entry> -->
+	<!-- 28-BLOOD TRANSFUSION	116859006 -->
+	<entry key="28">116859006</entry>
+	<!-- 29-ASPIRATION/DRAINAGE/BIOPSY -->	
+	<!-- <entry key="?????">29</entry> -->
+	
+	<!-- 30-UPPER ENDOSCOPY	76009000 -->
+	<entry key="30">76009000</entry>
+	<!-- 31-DIALYSIS CATHETER INSERTION	69380006 -->
+	<entry key="32">69380006</entry>
+	<!-- 32-CONSCIOUS SEDATION	314271007 -->
+	<entry key="32">314271007</entry>
+	<!-- 33-EXTENDED CARE	52052004,32074000 -->
+	<entry key="33">52052004</entry>
+	<!-- 34-HIV TESTING	171121004 -->
+	<entry key="34">171121004</entry>
+	<!-- 35-INFLUENZA FLU VACCINE	86198006 -->
+	<entry key="35">86198006</entry>
+	<!-- 36-INTER-FACILITY TRANSFER	19712007 -->
+	<entry key="36">19712007</entry>
+	<!-- 37-PALLIATIVE CARE	103735009 -->
+	<entry key="37">103735009</entry>
+	<!-- 38-PHOTOGRAPHY	169283005 -->
+	<entry key="38">169283005</entry>
+	<!-- 39-PATIENT CONTRACT/CHRONIC NARCOTIC USE -->	
+	<!-- <entry key="?????">39</entry> -->
+	
+	<!-- 40-PORT PLACEMENT	312376000,80402001 -->
+	<entry key="40">80402001</entry>
+	<!-- 41-USE OF RESTRAINT	68894007 -->
+	<entry key="41">68894007</entry>
+	<!-- 42-RESEARCH PROCEDURE	386409003,308364004 -->
+	<entry key="42">386409003</entry>
+	<!-- 43-VASCULAR INTERVENTION	30904006 -->
+	<entry key="43">30904006</entry>
+	<!-- 44-VENOGRAM	4970003 -->
+	<entry key="44">4970003</entry>
+	<!-- 45-WAIVER FOR PATIENT OF CHILD BEARING AGE -->	
+	<!-- <entry key="?????">45</entry> -->
+	<!-- 46-MISCELLANEOUS	49634009 -->
+	<entry key="46">49634009</entry>
+	<!-- 47-REQUEST FOR VOLUNTARY ADMISSION	135848002 -->
+	<entry key="47">135848002</entry>
+	<!-- 48-PATIENT'S TREATMENT PLAN	278448002 -->
+	<entry key="48">278448002</entry>
+	<!--  49-ONE-TO-ONE OBSERVATION REQUIREMENT	225311006 -->
+	<entry key="49">225311006</entry>
+	
+	<!-- 50-RESERVIST PHYSICAL SF 88/93 -->	
+	<!-- <entry key="?????">50</entry> -->
+	<!-- 51-VENTILATION	266700009 -->
+	<entry key="51">266700009</entry>
+	<!-- 52-OCCLUSAL	310215000,83473006 -->
+	<entry key="52">310215000</entry>
+	<!-- 53-EXTRAORAL	129221009 -->
+	<entry key="53">129221009</entry>
+	<!-- 54-BITEWINGS	241046008 -->
+	<entry key="54">241046008</entry>
+	<!-- 55-BONE SURVEY	45732007 -->
+	<entry key="55">45732007</entry>
+	<!-- 56-SIALOGRAPHY	168896008 -->
+	<entry key="56">168896008</entry>
+	<!-- 57-VERTICAL BITEWINGS	241046008 -->
+	<entry key="57">241046008</entry>
+	<!-- 58-TMJ	386207004 -->
+	<entry key="58">386207004</entry>
+	<!-- 59-TOMOGRAPHIC	371575001 -->
+	<entry key="59">371575001</entry>
+	
+	<!-- 60-PANORAMIC	89846007 -->
+	<entry key="60">89846007</entry>
+	<!-- 61-CEPHALOMETRIC	19961003,52792009 -->
+	<entry key="61">19961003</entry>
+	<!-- 62-VISIBLE LIGHT	75184002 -->
+	<entry key="62">75184002</entry>
+	<!-- 64-FLUORESCEIN ANGIOGRAPHY	252822006 -->
+	<entry key="64">252822006</entry>
+	<!-- 65-MANOMETRY	272391002,122869004 -->
+	<entry key="65">122869004</entry>
+	<!-- 66-REFERRAL	3457005 -->
+	<entry key="66">3457005</entry>
+	<!-- 67-HOME VISIT	439708006 -->
+	<entry key="67">439708006</entry>
+	<!-- 68-INTRAORAL	261099005 -->
+	<entry key="68">261099005</entry>
+	<!-- 69-ORAL MAXILLOFACIAL SURGERY	384676001,118690002 -->
+	<entry key="69">384676001</entry>
+	
+	<!-- 70-HEALTH QUESTIONS/QUESTIONNAIRE	273479001 -->
+	<entry key="70">394579002</entry>
+	<!-- 71-OP EMER/REF & TREATMENT	306104004 -->
+	<entry key="71">306104004</entry>
+	<!-- 72-PERIODONTIC EXAM	32150000,39868003 -->
+	<entry key="72">39868003</entry>
+	<!-- 73-RATING DECISION -->	
+	<!-- <entry key="?????">73</entry> -->
+	<!-- 74-CATHETER INSERTION	45211000 -->
+	<entry key="74">45211000</entry>
+	<!-- 75-DAILY CRITICAL CARE	133903000 -->
+	<entry key="75">133903000</entry>
+	<!-- 76-HEPARIN DRIP	310636007 -->
+	<entry key="76">310636007</entry>
+	<!-- 77-NEURO CHECKS	225398001 -->
+	<entry key="77">225398001</entry>
+	<!-- 78-PACU	"398161000,398068008" -->
+	<entry key="78">398068008</entry>
+	<!-- 79-ERCP	386718000 -->
+	<entry key="79">386718000</entry>
+	
+	<!-- 80-ARTERIOGRAM	129118002 -->
+	<entry key="80">129118002</entry>
+	<!-- 81-NUCLEAR MEDICINE SCAN	373205008 -->
+	<entry key="81">373205008</entry>
+	<!-- 82-STERILIZATION -->	
+	<!-- <entry key="?????">82</entry> -->
+	<!-- 83-BLOOD COMPONENT FORM 104088002,104081008,261226001 -->
+	<entry key="83">261226001</entry>
+	<!-- 84-ARMED FORCES INST PATH RPT -->	
+	<!-- <entry key="?????">84</entry> -->
+	<!-- 85-REFERENCE LAB	415259005 -->
+	<entry key="85">415259005</entry>
+	<!-- 86-SERUM PROTEIN ELECTROPHORESIS	4903000 -->
+	<entry key="86">4903000</entry>
+	<!-- 87-SECLUSION/RESTRAINT	225214000 -->
+	<entry key="87">225214000</entry>
+	<!-- 88-DIABETIC RETINOPATHY SCREEN	134395001 -->
+	<entry key="88">134395001</entry>
+	<!-- 89-EYE THRESHOLD TEST -->	
+	<!-- <entry key="?????">89</entry> -->
+
+	<!-- 90-OPT OBSERVATION MAR -->	
+	<!-- <entry key="?????">90</entry> -->
+	<!-- 91-SPIROMETRY	127783003 -->
+	<entry key="91">127783003</entry>
+	<!-- 92-PLETHYSMOGRAPHY	20552003 -->
+	<entry key="92">20552003</entry>
+	<!-- 94-HISTORY & PHYSICAL	63332003 -->
+	<entry key="94">63332003</entry>
+	<!-- 95-OPT PROGRESS NOTE	83324001 -->
+	<entry key="95">83324001</entry>
+	<!-- 96-DIAGNOSTIC TEST	103693007 -->
+	<entry key="96">103693007</entry>
+	<!-- 97-PROCEDURE	71388002 -->
+	<entry key="97">71388002</entry>
+	<!-- 98-ELECTROPHYSIOLOGY STUDY	252425004 -->
+	<entry key="98">252425004</entry>
+	<!-- 99-LUMBAR PUNCTURE	277762005 -->
+	<entry key="99">277762005</entry>
+	
+	<!-- 100-CHEMOTHERAPY	367336001 -->
+	<entry key="100">367336001</entry>
+	<!-- 101-TRICARE/DOD RESERVIST PHYSICAL SF 88/93 -->	
+	<!-- <entry key="394579002">2</entry> -->
+	<!-- 102-CYTOLOGY	168440009 -->
+	<entry key="102">168440009</entry>
+	<!-- 103-AUTOPSY	29240004  -->
+	<entry key="103">29240004</entry>
+	<!-- 104-ELECTRON MICROSCOPY	73512001 -->
+	<entry key="104">73512001</entry>
+	<!-- 105-COMPUTED TOMOGRAPHY	77477000 -->
+	<entry key="105">77477000</entry>
+	<!-- 106-MAGNETIC RESONANCE SCAN	113091000 -->
+	<entry key="106">113091000</entry>
+	<!-- 107-XRAY	363680008 -->
+	<entry key="107">363680008</entry>
+	<!-- 108-ULTRASOUND	16310003 -->
+	<entry key="108">16310003</entry>
+	<!-- 109-ANGIOGRAPHY	77343006 -->
+	<entry key="109">77343006</entry>
+	
+	<!-- 110-ARTERIAL BLOOD GAS	60170009,32564009 -->
+	<entry key="110">60170009</entry>
+	<!-- 111-COMPUTED RADIOGRAPHY -->	
+	<!-- <entry key="394579002">111</entry> -->
+	<!-- 114-DIGITAL RADIOGRAPHY -->
+	<!-- <entry key="?????">114</entry> -->
+	<!-- 116-XRAY ANGIOGRAPHY	418272005 -->
+	<entry key="116">418272005</entry>
+	<!-- 117-VASCULAR ULTRASOUND	241446003 -->
+	<entry key="117">241446003</entry>
+	<!-- 118-BONE MARROW ASPIRATE	391426006 -->
+	<entry key="118">391426006</entry>
+	<!-- 119-WOUND ASSESSMENT	225395003 -->
+	<entry key="119">225395003</entry>
+	
+	<!-- 120-EEG	54550000 -->
+	<entry key="120">54550000</entry>
+	<!-- 121-SURGICAL PATHOLOGY	39228008 -->
+	<entry key="121">39228008</entry>
+	<!-- 122-EYE EXAM	36228007 -->
+	<entry key="122">36228007</entry>
+	<!-- 123-VITAL SIGNS	61746007 -->
+	<entry key="123">61746007</entry>
+	<!-- 124-C&P EXAM -->	
+	<!-- <entry key="394579002">2</entry> -->
+	<!-- 125-ELECTROMYOGRAM	42803009 -->
+	<entry key="125">42803009</entry>
+	<!-- 126-LARYNGOSCOPY	28760000 -->
+	<entry key="126">28760000</entry>
+	<!-- 127-THORACENTESIS	91602002 -->
+	<entry key="127">91602002</entry>
+	<!-- 128-LUNG REDUCTION	429609002 -->
+	<entry key="128">429609002</entry>
+	<!-- 129-DIALYSIS	265764009 -->
+	<entry key="129">265764009</entry>
+	
+	<!-- 130-MAMMOGRAPHY	71651007 -->
+	<entry key="130">71651007</entry>
+	<!-- 131-VISUAL FIELD	86944008 -->
+	<entry key="131">86944008</entry>
+	<!-- 132-EYE PHOTOGRAPHY	16306001 -->
+	<entry key="132">16306001</entry>
+	<!-- 133-IMMUNIZATION	33879002 -->
+	<entry key="133">33879002</entry>
+	<!-- 134-BONE MARROW BIOPSY	234326005  -->
+	<entry key="134">234326005</entry>
+	<!-- 135-PATIENT EDUCATION	311401005 -->
+	<entry key="135">311401005</entry>
+	<!-- 136-INJECTION	59108006 -->
+	<entry key="136">59108006</entry>
+	<!-- 137-TELEPHONE CONTACT	185317003 -->
+	<entry key="137">185317003</entry>
+	<!-- 138-PAIN MANAGEMENT	278414003 -->
+	<entry key="138">278414003</entry>
+	<!-- 139-PERIPHERAL BLOOD SMEAR	14768001 -->
+	<entry key="139">14768001</entry>
+	
+	<!-- 140-PHYSICAL THERAPY	91251008 -->
+	<entry key="140">91251008</entry>
+	<!-- 141-RESPIRATORY THERAPY	53950000 -->
+	<entry key="141">53950000</entry>
+	<!-- 142-OCCUPATIONAL THERAPY	84478008 -->
+	<entry key="142">84478008</entry>
+	<!-- 143-MR ANGIOGRAPHY	241663008 -->
+	<entry key="143">241663008</entry>
+	<!-- 144-POSITRON EMISSION TOMOGRAPHY	82918005 -->
+	<entry key="144">82918005</entry>
+	<!-- 145-ANGIOSCOPY	103723005 -->
+	<entry key="145">103723005</entry>
+	<!-- 146-CULPOSCOPY	392003006 -->
+	<entry key="146">392003006</entry>
+	<!-- 147-RADIOTHERAPY IMAGE -->	
+	<!-- <entry key="?????">147</entry> -->
+	<!-- 148-MR SPECTROSCOPY 241671007 -->	
+	<entry key="148">241671007</entry>
+	<!-- 149-SPECT	260222006 -->
+	<entry key="149">260222006</entry>
+	
+	<!-- 150-DENSITOMETRY -->	
+	<!-- <entry key="?????">150</entry> -->
+	<!-- 151-PACEMAKER PLACEMENT/MONITORING	307280005,38001000 -->
+	<entry key="151">38001000</entry>
+	<!-- 152-BARIUM SWALLOW	168821007 -->
+	<entry key="152">168821007</entry>
+	<!-- 153-SLEEP STUDY	60554003 -->
+	<entry key="153">60554003</entry>
+	<!-- 154-PANENDOSCOPY	423827005 -->
+	<entry key="154">423827005</entry>
+	<!-- 155-TRANSFUSION	5447007 -->
+	<entry key="155">5447007</entry>
+	<!-- 156-TYMPANOGRAM	91573000 -->
+	<entry key="156">91573000</entry>
+	<!-- 157-AUDIOGRAM	32921008 -->
+	<entry key="157">32921008</entry>
+	<!-- 158-WANDERER PHOTO -->	
+	<!-- <entry key="?????">158</entry>  -->
+	<!-- 159-SCREENING -->	
+	<!-- <entry key="?????">159</entry> -->
+	
+	<!-- 160-RADIO FLUOROSCOPY	169014003 -->
+	<entry key="160">169014003</entry>
+	<!-- 161-CRITICAL TIME INTERVENTION	24172008 -->
+	<entry key="161">24172008</entry>
+	<!-- 162-STROBOSCOPY	252572002 -->
+	<entry key="162">252572002</entry>
+	<!-- 163-BONE DENSITY STUDY	312681000,241686001 -->
+	<entry key="163">312681000</entry>
+
+</properties>

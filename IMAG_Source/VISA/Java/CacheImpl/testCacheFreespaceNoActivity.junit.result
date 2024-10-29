@@ -1,0 +1,12 @@
+28 Nov 2019 15:05:25,507  INFO [main] (AbstractCacheTest.java:168) - Starting unit test 'testDeleteWhileReading' =======================================================
+28 Nov 2019 15:05:26,616  INFO [main] (AbstractCacheTest.java:197) - Stopping unit test 'testDeleteWhileReading' =======================================================
+28 Nov 2019 15:05:26,616  INFO [main] (AbstractCacheTest.java:168) - Starting unit test 'testDeleteWhileWriting' =======================================================
+28 Nov 2019 15:05:27,647  INFO [main] (AbstractCacheTest.java:197) - Stopping unit test 'testDeleteWhileWriting' =======================================================
+28 Nov 2019 15:06:00,399  INFO [main] (AbstractCacheTest.java:168) - Starting unit test 'testLotsaRandomSaveRetrieveAndDelete' =======================================================
+28 Nov 2019 15:06:16,087  INFO [main] (AbstractCacheTest.java:197) - Stopping unit test 'testLotsaRandomSaveRetrieveAndDelete' =======================================================
+28 Nov 2019 15:06:16,102  INFO [main] (AbstractCacheTest.java:168) - Starting unit test 'testModerateSaveAndRetrieve' =======================================================
+28 Nov 2019 15:06:16,134  INFO [main] (AbstractCacheTest.java:197) - Stopping unit test 'testModerateSaveAndRetrieve' =======================================================
+28 Nov 2019 15:06:16,134  INFO [main] (AbstractCacheTest.java:168) - Starting unit test 'testDeepSaveAndRetrieve' =======================================================
+28 Nov 2019 15:06:16,181  INFO [main] (AbstractCacheTest.java:197) - Stopping unit test 'testDeepSaveAndRetrieve' =======================================================
+28 Nov 2019 15:06:16,181  INFO [main] (AbstractCacheTest.java:168) - Starting unit test 'testShallowSaveAndRetrieve' =======================================================
+28 Nov 2019 15:06:16,212  INFO [main] (AbstractCacheTest.java:197) - Stopping unit test 'testShallowSaveAndRetrieve' =======================================================

@@ -1,0 +1,188 @@
+BODY {
+   font-family:Verdana, Arial, Helvetica, sans-serif;
+}
+H1 { 
+    font-weight:bold; 
+    font-family:Verdana, sans-serif; 
+    color:#0000ff; 
+    line-height:Normal; 
+    letter-spacing:0.1pt; 
+    font-size:14pt;  }
+LI.kadov-H1 { 
+             font-weight:bold; 
+             font-family:Verdana, sans-serif; 
+             color:#0000ff; 
+             line-height:Normal; 
+             letter-spacing:0.1pt; 
+             font-size:14pt;  }
+H2 { 
+    font-weight:bold; 
+    font-size:11pt; 
+    font-family:Verdana, sans-serif;  }
+LI.kadov-H2 { 
+             font-weight:bold; 
+             font-size:11pt; 
+             font-family:Verdana, sans-serif;  }
+H3 { 
+    font-weight:bold; 
+    font-size:14.0pt; 
+    font-family:Arial;  }
+LI.kadov-H3 { 
+             font-weight:bold; 
+             font-size:14.0pt;  }
+li { 
+   margin-top:1pt; 
+   margin-bottom:1pt; 
+   font-family:Verdana, sans-serif; 
+   letter-spacing:0.5pt; 
+   line-height:150%; 
+   font-size:10pt; 
+   border-left-style:none; 
+   border-right-style:none; 
+   border-top-style:none; 
+   border-bottom-style:none;  }
+
+H4 { 
+    font-weight:bold; 
+    font-style:normal; 
+    font-family:Verdana, sans-serif; 
+    color:#0000ff; 
+    font-variant:small-caps; 
+    font-size:10pt;  }
+LI.kadov-H4 { 
+             font-weight:normal; 
+             font-style:normal; 
+             font-family:Verdana, sans-serif; 
+             color:#0000ff; 
+             font-variant:small-caps; 
+             font-size:10pt;  }
+H5 { 
+    font-weight:bold; 
+    font-size:10.0pt; 
+    font-family:Arial;  }
+LI.kadov-H5 { 
+             font-weight:bold; 
+             font-size:10.0pt;  }
+H6 { 
+    font-weight:bold; 
+    font-size:8.0pt; 
+    font-family:Arial;  }
+LI.kadov-H6 { 
+             font-weight:bold; 
+             font-size:8.0pt;  }
+P {
+   margin-top:1pt;
+   margin-bottom:1pt;
+   font-family:Verdana, sans-serif;
+   letter-spacing:0.5pt;
+   line-height:150%;
+   font-size:12pt;
+   border-left-style:none;
+   border-right-style:none;
+   border-top-style:none;
+   border-bottom-style:none;
+}
+LI.kadov-P { 
+            font-family:Verdana, sans-serif; 
+            letter-spacing:0.5pt; 
+            line-height:150%; 
+            font-size:10pt;  }
+A.expandspot { 
+              color:#008000; 
+              cursor:hand; 
+              font-style:italic; 
+              x-text-underline:off; 
+              x-text-overline:off; 
+              x-text-line-through:off; 
+              text-decoration:none none none none none none none none none none none none;  }
+SPAN.expandtext { 
+                 font-style:italic; 
+                 font-weight:normal; 
+                 color:#ff0000;  }
+A.dropspot { 
+            cursor:hand; 
+            color:#008000; 
+            font-style:italic; 
+            x-text-underline:off; 
+            x-text-overline:off; 
+            x-text-line-through:off; 
+            text-decoration:none none none none none none none none none none none none;  }
+A.glossterm { 
+             color:#800000; 
+             cursor:hand; 
+             font-style:italic; 
+             x-text-underline:off; 
+             x-text-overline:off; 
+             x-text-line-through:off; 
+             text-decoration:none none none none none none none none none none none none;  }
+SPAN.glosstext { 
+                font-style:italic; 
+                font-weight:normal; 
+                color:#0000ff;  }
+OL { 
+    margin-top:0px; 
+    margin-bottom:0px; 
+    font-family:Arial;  }
+UL { 
+    margin-top:0px; 
+    margin-bottom:0px; 
+    font-family:Arial;  }
+P.Style1 {
+   font-size:12pt;
+   font-weight:bold;
+   font-style:normal;
+   font: Verdana;
+}
+LI.kadov-P-CStyle1 { 
+                    font-size:11pt; 
+                    font-weight:bold; 
+                    font-style:normal;  }
+P.Style2 { 
+          font-style:normal; 
+          color:#000000; 
+          list-style:circle; 
+          margin-left:18pt; 
+          font-weight:normal;  }
+LI.kadov-P-CStyle2 { 
+                    font-style:normal; 
+                    color:#000000; 
+                    list-style:circle; 
+                    font-weight:normal;  }
+P.Style3 { 
+          list-style:square; 
+          margin-left:36pt;  }
+LI.kadov-P-CStyle3 { 
+                    list-style:square;  }
+P.Style4 {  }
+LI.kadov-P-CStyle4 {  }
+P.Style5 { 
+          list-style:circle;  }
+LI.kadov-P-CStyle5 { 
+                    list-style:circle;  }
+P.Style3plus1 { 
+               list-style:disc; 
+               margin-left:90px;  }
+LI.kadov-P-CStyle3plus1 { 
+                         list-style:disc;  }
+P.NormalBold { 
+              font-size:11pt; 
+              font-weight:bold; 
+              font-style:normal; 
+              border-left-style:none; 
+              border-right-style:none; 
+              border-top-style:none; 
+              border-bottom-style:none; 
+              list-style:circle;  }
+LI.kadov-P-CNormalBold { 
+                        font-size:11pt; 
+                        font-weight:bold; 
+                        font-style:normal; 
+                        list-style:circle;  }
+ol ol { 
+       margin-top:1px;  }
+ol ul { 
+       margin-top:1px;  }
+ul ul { 
+       margin-top:1px;  }
+ul ol { 
+       margin-top:1px;  }

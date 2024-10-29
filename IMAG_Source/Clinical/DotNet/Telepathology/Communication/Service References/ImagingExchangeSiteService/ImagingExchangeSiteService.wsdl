@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:intf="http://vistaweb.med.va.gov/webservices/ImagingExchangeSiteService" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:impl="http://vistaweb.med.va.gov/webservices/ImagingExchangeSiteService" targetNamespace="http://vistaweb.med.va.gov/webservices/ImagingExchangeSiteService" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema xmlns="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="http://vistaweb.med.va.gov/webservices/ImagingExchangeSiteService">
+      <xsd:element name="getVISN">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="regionID" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getVISNResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="getVISNResult" type="impl:ImagingExchangeRegionTO" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:complexType name="FaultTO">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="1" name="type" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="message" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="stackTrace" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="suggestion" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="ImagingExchangeSiteTO">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="1" name="siteNumber" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="siteName" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="regionID" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="siteAbbr" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="vistaServer" type="xsd:string" />
+          <xsd:element name="vistaPort" type="xsd:int" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="acceleratorServer" type="xsd:string" />
+          <xsd:element name="acceleratorPort" type="xsd:int" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="faultTO" type="impl:FaultTO" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="ArrayOfImagingExchangeSiteTO">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="ImagingExchangeSiteTO" nillable="true" type="impl:ImagingExchangeSiteTO" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="ImagingExchangeRegionTO">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="1" name="name" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="ID" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="sites" type="impl:ArrayOfImagingExchangeSiteTO" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="faultTO" type="impl:FaultTO" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="getSites">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="siteIDs" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getSitesResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="getSitesResult" type="impl:ArrayOfImagingExchangeSiteTO" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getSite">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="siteID" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getSiteResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="getSiteResult" type="impl:ImagingExchangeSiteTO" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getImagingExchangeSites">
+        <xsd:complexType />
+      </xsd:element>
+      <xsd:element name="getImagingExchangeSitesResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="getImagingExchangeSitesResult" type="impl:ArrayOfImagingExchangeSiteTO" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="getSitesResponse">
+    <wsdl:part name="parameters" element="impl:getSitesResponse" />
+  </wsdl:message>
+  <wsdl:message name="getImagingExchangeSitesRequest">
+    <wsdl:part name="parameters" element="impl:getImagingExchangeSites" />
+  </wsdl:message>
+  <wsdl:message name="getSiteRequest">
+    <wsdl:part name="parameters" element="impl:getSite" />
+  </wsdl:message>
+  <wsdl:message name="getSiteResponse">
+    <wsdl:part name="parameters" element="impl:getSiteResponse" />
+  </wsdl:message>
+  <wsdl:message name="getVISNResponse">
+    <wsdl:part name="parameters" element="impl:getVISNResponse" />
+  </wsdl:message>
+  <wsdl:message name="getImagingExchangeSitesResponse">
+    <wsdl:part name="parameters" element="impl:getImagingExchangeSitesResponse" />
+  </wsdl:message>
+  <wsdl:message name="getSitesRequest">
+    <wsdl:part name="parameters" element="impl:getSites" />
+  </wsdl:message>
+  <wsdl:message name="getVISNRequest">
+    <wsdl:part name="parameters" element="impl:getVISN" />
+  </wsdl:message>
+  <wsdl:portType name="ImagingExchangeSiteServiceSoap">
+    <wsdl:operation name="getVISN">
+      <wsdl:input name="getVISNRequest" message="impl:getVISNRequest" />
+      <wsdl:output name="getVISNResponse" message="impl:getVISNResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getSites">
+      <wsdl:input name="getSitesRequest" message="impl:getSitesRequest" />
+      <wsdl:output name="getSitesResponse" message="impl:getSitesResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getSite">
+      <wsdl:input name="getSiteRequest" message="impl:getSiteRequest" />
+      <wsdl:output name="getSiteResponse" message="impl:getSiteResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getImagingExchangeSites">
+      <wsdl:input name="getImagingExchangeSitesRequest" message="impl:getImagingExchangeSitesRequest" />
+      <wsdl:output name="getImagingExchangeSitesResponse" message="impl:getImagingExchangeSitesResponse" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="ImagingExchangeSiteServiceSoapSoapBinding" type="impl:ImagingExchangeSiteServiceSoap">
+    <wsdlsoap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="getVISN">
+      <wsdlsoap:operation soapAction="http://vistaweb.med.va.gov/webservices/ImagingExchangeSiteService/getVISN" />
+      <wsdl:input name="getVISNRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="getVISNResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getSites">
+      <wsdlsoap:operation soapAction="http://vistaweb.med.va.gov/webservices/ImagingExchangeSiteService/getSites" />
+      <wsdl:input name="getSitesRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="getSitesResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getSite">
+      <wsdlsoap:operation soapAction="http://vistaweb.med.va.gov/webservices/ImagingExchangeSiteService/getSite" />
+      <wsdl:input name="getSiteRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="getSiteResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getImagingExchangeSites">
+      <wsdlsoap:operation soapAction="http://vistaweb.med.va.gov/webservices/ImagingExchangeSiteService/getImagingExchangeSites" />
+      <wsdl:input name="getImagingExchangeSitesRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="getImagingExchangeSitesResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="ImagingExchangeSiteService">
+    <wsdl:port name="ImagingExchangeSiteServiceSoap" binding="impl:ImagingExchangeSiteServiceSoapSoapBinding">
+      <wsdlsoap:address location="http://priv-win08-cg:8080/VistaWebSvcs/ImagingExchangeSiteService.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

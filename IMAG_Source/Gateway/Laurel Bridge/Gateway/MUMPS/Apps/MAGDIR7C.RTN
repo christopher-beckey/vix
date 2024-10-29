@@ -1,0 +1,245 @@
+MAGDIR7C ;WOIFO/PMK/RRB - Read a DICOM image file ; 06 Apr 2011 9:20 AM
+ ;;3.0;IMAGING;**11,30,51,54,49,99**;Mar 19, 2002;Build 2179;Jun 28, 2011
+ ;; Per VHA Directive 2004-038, this routine should not be modified.
+ ;; +---------------------------------------------------------------+
+ ;; | Property of the US Government.                                |
+ ;; | No permission to copy or redistribute this software is given. |
+ ;; | Use of unreleased versions of this software requires the user |
+ ;; | to execute a written test agreement with the VistA Imaging    |
+ ;; | Development Office of the Department of Veterans Affairs,     |
+ ;; | telephone (301) 734-0100.                                     |
+ ;; | The Food and Drug Administration classifies this software as  |
+ ;; | a medical device.  As such, it may not be changed in any way. |
+ ;; | Modifications to this software may result in an adulterated   |
+ ;; | medical device under 21CFR820, the use of which is considered |
+ ;; | to be a violation of US Federal Statutes.                     |
+ ;; +---------------------------------------------------------------+
+ ;;
+ Q
+ ; This routine reads a DICOM image file and converts it to TGA format.
+ ; If this is a DICOM Multiframe object, multiple TGA images will be
+ ; created.  In this situation, separate RPC invocations are made for
+ ; each TGA image to be created.  The result of these are handled here.
+ ;
+ENTRY ; entry point from ^MAGDIR71
+ N BITALLOC ;- number of bits allocated to a pixel
+ N BITSTORE ;- number of bits actually stored for a pixel
+ N BITSUSED ;- maximum number of bits actually used for a pixel
+ N COLUMNS ;-- number of columns in image, ie, the X-dimension
+ N FRAMEPTR ;- pointer to DICOM multi-frame image object specifications
+ N FRAMESIZ ;- size of one image frame in a multi-frame image object
+ N FRAMETIM ;- frame time accumulator for a multi-frame image object
+ N IFRAME ;--- frame counter (for IFRAME=1:1:NFRAME)
+ N LARGEST ;-- largest pixel value
+ N LFRAME ;--- last frame processed
+ N NFRAME ;--- number of image frames in a multi-frame image object
+ N PHOTOINT ;- photometric interpretation
+ N PIXBYTES ;- number of bytes in a pixel value
+ N PIXSAMPL ;- samples per pixel (typically 1 for xray, 3 for color)
+ N OFFSET ;--- byte offset to the beginning of the image in the file
+ N ROWS ;----- number of rows in image, ie, the Y-dimension
+ N TIMEINC ;-- time increment for a multi-frame object (optional)
+ ;
+ ; process each frame of a single-frame or a multi-frame image
+ S PIXSAMPL=$$GETDATA^MAGDFCNS(INODE,"0028,0002")
+ S PHOTOINT=$$GETDATA^MAGDFCNS(INODE,"0028,0004")
+ S ROWS=$$GETDATA^MAGDFCNS(INODE,"0028,0010")
+ S COLUMNS=$$GETDATA^MAGDFCNS(INODE,"0028,0011")
+ S BITALLOC=$$GETDATA^MAGDFCNS(INODE,"0028,0100") ; bits allocated
+ S PIXBYTES=BITALLOC+7\8 ; number of bytes in a pixel
+ S BITSTORE=$$GETDATA^MAGDFCNS(INODE,"0028,0101") ; bits stored
+ S LARGEST=+$$GETDATA^MAGDFCNS(INODE,"0028,0107") ; largest pixel value
+ ;
+ I LARGEST D  S BITSTORE=BITSUSED ; compute actual number of pixel bits
+ . S BITSUSED=BITSTORE
+ . S X=128 F I=8:1:16 S X=X*2 I X>LARGEST S BITSUSED=I Q
+ . Q
+ ;
+ ; If BITALLOC is 16 AND BITSTORE is 8, then Set BITSTORE to 9
+ I BITALLOC=16,BITSTORE'>8 S BITSTORE=9
+ ;
+ S OFFSET=+$P($$GETDATA^MAGDFCNS(INODE,"7FE0,0010",1,3),"offset=",2)
+ S FRAMESIZ=ROWS*COLUMNS*PIXBYTES*PIXSAMPL
+ S NFRAME=$$GETDATA^MAGDFCNS(INODE,"0028,0008") ; number of frames
+ I NFRAME="" S NFRAME=1 ; default is one frame per image file
+ ;
+ ; for mult-frame image files, determine the time of each frame
+ S FRAMEPTR=$$GETDATA^MAGDFCNS(INODE,"0028,0009") ; frame increment ptr
+ ;
+ I FRAMEPTR="1065,0018" S FRAMEPTR="0018,1065" ; PATCH FOR GE DRS BUG
+ ;
+ I FRAMEPTR="0018,1063" D  ; frames acquired at regular time intervals
+ . S TIMEINC=$$GETDATA^MAGDFCNS(INODE,"0018,1063") ; frame time delay
+ . S TIMEINC=$$ENUM^MAGDFCNS(TIMEINC) ; convert to decimal value
+ . Q
+ E  I FRAMEPTR="0018,1065" D  ; frames acquired at irregular times
+ . S FRAMETIM="" ; time accumulator for each frame, initialize to null
+ . Q
+ ;
+ ; get number of last frame processed and increment offset accordingly
+ I NFRAME=1 S ^MAGDICOM(2006.563,1,"MULTIFRAME COUNTER")=0
+ S LFRAME=$G(^MAGDICOM(2006.563,1,"MULTIFRAME COUNTER"))
+ S OFFSET=OFFSET+(FRAMESIZ*LFRAME)
+ ;
+ ; output each individual frame's data and image
+ F IFRAME=LFRAME+1:1:NFRAME D
+ . ; compute the time of the frame, if applicable
+ . I FRAMEPTR="0018,1063" D  ; frames acquired at regular time intervals
+ . . S FRAMETIM=TIMEINC*(IFRAME-1) ; FRAMETIM used in ^MAGDIR4A
+ . . Q
+ . E  I FRAMEPTR="0018,1065" D  ; frames acquired at irregular times
+ . . S TIMEINC=$$GETDATA^MAGDFCNS(INODE,"0018,1065",IFRAME)
+ . . S TIMEINC=$$ENUM^MAGDFCNS(TIMEINC) ; convert to decimal value
+ . . S FRAMETIM=FRAMETIM+TIMEINC ; FRAMETIM used in ^MAGDIR4A
+ . . Q
+ . D FRAME
+ . S OFFSET=OFFSET+FRAMESIZ ; increment the offset for the next frame
+ . ; update multiframe counter
+ . S ^MAGDICOM(2006.563,1,"MULTIFRAME COUNTER")=IFRAME
+ . ; clear the image being processed
+ . S ^MAGDICOM(2006.563,1,"CURRENT IMAGE POINTER")=""
+ . Q
+ S ^MAGDICOM(2006.563,1,"MULTIFRAME COUNTER")=0 ; completed
+ Q
+ ;
+FRAME ; Process one frame of a single-frame or a multi-frame image
+ N ABSTRACT ;- path for image abstract file
+ N CMD ;------ command for shell to execute
+ N ERROR ;---- command shell error message
+ N IMAGEABS ;- path to temporary abstract
+ N IMAGETGA ;- path to temporary targa image
+ N SIZEABS ;-- size of TGA and ABS files
+ N VERBOSE
+ ;
+ I IFRAME>(LFRAME+1) D NEXTIMG ; create another ^MAG(2005) file entry
+ ;
+ S IMAGEABS=$P(FROMPATH,"\",1,$L(FROMPATH,"\")-1)_"\TMP_IMAGE.ABS"
+ S IMAGETGA=$P(FROMPATH,"\",1,$L(FROMPATH,"\")-1)_"\TMP_IMAGE.TGA"
+ ;
+ ; convert the image from DICOM to TGA and store it
+ ;
+ ; produce big (2k x 2.5k, 10 bit) image first, if there is to be one
+ ; note: pieces 4,5,6 of RETURN are for the BIG file
+ I MODPARMS["/" D  ; 2nd piece of MODPARMS is for *.big file
+ . I $P(MODPARMS,"/",2)'="<DICOM>" D  Q
+ . . ; store the full size image in TARGA format as a BIG file
+ . . D DCMTOTGA^MAGDIR7G(TOPATH_$P(FILE,".")_".BIG",2)
+ . . Q
+ . ; store the full size image in DICOM format as a DCM file
+ . N DCMFILE
+ . S DCMFILE=TOPATH_$P(FILE,".")_".DCM"
+ . ; copy the DICOM image from the input queue to DCMFILE on the server
+ . ;
+ . D FILECOPY^MAGDIR75(FROMPATH,DCMFILE,"DICOM")
+ . ;
+ . ; Check that the full size image was written properly
+ . D FILECHK^MAGDIR75(DCMFILE,FILESIZE)
+ . Q
+ ;
+ ; produce the reference size image (typically 1k x 1.25k or smaller)
+ S IMGFILE=TOPATH_FILE
+ D DCMTOTGA^MAGDIR7G(IMGFILE,1)
+ N PATH
+ S PATH=$G(^MAGDICOM(2006.563,1,"ABSTRACT PATH"))
+ I PATH="" D
+ . S X=^MAGDICOM(2006.563,1,"DATA PATH",1,0)
+ . S PATH=$P(X,"\",1,$L(X,"\")-1)_"\ABSTRACT"
+ . S ^MAGDICOM(2006.563,1,"ABSTRACT PATH")=PATH
+ . Q
+ ;
+ ; create the About Image Text File from the DICOM header & other data
+ D ^MAGDIR7T ; copy data from DICOM header and elsewhere to text file
+ ;
+ ; create the abstract
+ ; this is a two-step process (1) create the temp abs file (2) copy it
+ ; note: the abstract is created from the last temporary targa file
+ ;
+ ; first delete the previous temporary image abstract
+ D DELETE^MAGDIR71(IMAGEABS,"TEMPORARY IMAGE ABSTRACT",1)
+ ;
+ S CMD="MAG_DCMabstract "_FROMPATH_" "_IMAGEABS
+ ;
+ S (VERBOSE,DEBUG)=1 D DOS^MAGDOS(CMD,.ERROR)
+ ; get length of temporary abstract file
+ S SIZEABS=$$ABSSIZE^MAGDIR75(IMAGEABS,"ABSTRACT")
+ ;
+ I 'SIZEABS D  ; error
+ . S IMAGEABS=PATH_"\canned_image.jpg"
+ . N I,MSG,CRITICAL,IGNORE,ROU,HDR
+ . S MSG(1)="IMAGE ABSTRACT CREATION ERROR"
+ . S MSG(2)="Unexpected error in """_CMD_""""
+ . S MSG(3)="Image Pointer: "_IMAGEPTR
+ . S MSG(4)="Canned abstract used instead"
+ . D WARNING^MAGDFCNS(.MSG)
+ . ; send e-mail
+ . S IGNORE=1,ROU=$T(+0),CRITICAL=0
+ . S HDR="FILE CREATION ERROR"
+ . ;
+ . ; Parameters for the message log below are: 
+ . ; NEWLINE = 1,TAB = 0,TEXT = MSG sent as an array, and
+ . ; OPTION = t (Date stamp at beginning of the text)
+ . ; 
+ . D MESSAGE^MAGDMLOG(1,0,.MSG,"t")
+ . Q
+ ;
+ ; copy the temporary IMAGEABS targa file to ABSTRACT on the server
+ S ABSTRACT=TOPATH_$P(FILE,".")_".ABS"
+ N MSG,HDR
+ D ABSCOPY^MAGDIR75(IMAGEABS,ABSTRACT,"ABSTRACT",.MSG)
+ I $D(MSG) D  ; error
+ . D WARNING^MAGDFCNS(.MSG)
+ . ; send e-mail
+ . S IGNORE=1,ROU=$T(+0),CRITICAL=0
+ . S HDR="CANNOT COPY FILE TO SERVER"
+ . D SEND^MAGDMMSG
+ . Q
+ ;
+ Q
+ ;
+NEXTIMG ; issue an RPC to make another ^MAG(2005) entry and get the next file
+ N EVAL,REQUEST,RESULT,X
+ ;add processed image to request array (don't use file 2006.5711 queue)
+ S EVAL=$G(^MAGDICOM(2006.563,1,"ROUTING RULES"))="YES"
+ S X="0|"_LOCATION_"|"_INSTNAME_"|"_IMAGEPTR
+ S X=X_"|0|"_EVAL_"|"_$$HOSTNAME^MAGOSMSC() ; no count
+ D REQUEST^MAGDIR6("PROCESSED",X)
+ S MULTFRAM=1 ; multiframe switch must be one for additional images
+ D STORE12^MAGDIR6C ; build the STORE1/STORE2 requests
+ D IMAGPROC^MAGDIR6(.RESULT,.REQUEST) ; send the request to the server
+ ;
+ S X=@RESULT@(1)-1 ; don't count the number of elements
+ I X'=2 D  ; fatal error
+ . N I,J,MSG
+ . S MSG(1)="MULTIFRAME IMAGE FILE CREATION ERROR"
+ . S MSG(2)="Unexpected number of array elements returned by RPC: "_X
+ . S I=1 F J=3:1 S I=$O(@RESULT@(I)) Q:'I  D
+ . . S MSG(J)="Element "_I_") "_@RESULT@(I)
+ . . Q
+ . S MSG(J)="Two elements (PROCESSED and STORE) should be returned"
+ . D ROLLBACK^MAGDIR75(IMAGEPTR,.MSG) ; delete ^MAG(2005,IMAGEPTR)
+ . D TRAPERR^MAGDSTRT(1,$T(+0),"DICOM IMAGE PROCESSING ERROR",.MSG)
+ . Q
+ ;
+ S X=@RESULT@(2)
+ I $P(X,"|",1)'="PROCESSED" D  ; fatal error
+ . N MSG
+ . S MSG(1)="MULTIFRAME IMAGE FILE CREATION ERROR"
+ . S MSG(2)="Unexpected return from RPC: """_X_""""
+ . S MSG(3)="Expected ""PROCESSED|location|instname|imageptr|0|eval|machine"""
+ . D ROLLBACK^MAGDIR75(IMAGEPTR,.MSG) ; delete ^MAG(2005,IMAGEPTR)
+ . D TRAPERR^MAGDSTRT(1,$T(+0),"DICOM IMAGE PROCESSING ERROR",.MSG)
+ . Q
+ ;
+ S X=@RESULT@(3),ARGS=$P(X,"|",2,999)
+ I $P(X,"|",1,2)'="STORE|0" D  ; fatal error
+ . N MSG
+ . S MSG(1)="MULTIFRAME IMAGE FILE CREATION ERROR"
+ . S MSG(2)="Unexpected return from RPC: """_X_""""
+ . S MSG(3)="Expected ""STORE|0|imageptr^topath^file"""
+ . D ROLLBACK^MAGDIR75(IMAGEPTR,.MSG) ; delete ^MAG(2005,IMAGEPTR)
+ . D TRAPERR^MAGDSTRT(1,$T(+0),"DICOM IMAGE PROCESSING ERROR",.MSG)
+ . Q  ; Error trap does not return
+ ;
+ D GETPATH^MAGDIR71
+ Q
+ ;

@@ -1,0 +1,93 @@
+[ application_info ]
+name = sdfcgi
+description = Set debug flags WWW CGI-Bin program.
+app_component_name = cpp_app/sdfcgi
+execution_state = STOPPED
+
+[ required_components ]
+component = cpp_lib_src/DCF_cl
+component = cpp_lib_src/DCF
+component = cpp_lib_src/LOG
+component = cpp_lib_src/CDS
+component = cpp_lib_src/APC
+component = cpp_lib/DCFUtil
+component = cpp_lib/APC_a
+component = idl_lib/DAPC
+component = cpp_lib/CDS_a
+component = idl_lib/DCDS
+component = cpp_lib/DCF_gui
+[ cpp_app ]
+
+#==============================================================================
+# per-instance information for the sdfcgi component
+#==============================================================================
+[ cpp_app/sdfcgi ]
+debug_flags = 0x00000
+# sort can be "alpha" or "chrono"
+default_sort_order = chrono
+[ cpp_lib_src ]
+
+
+#==============================================================================
+# per-instance information for the DCF_cl component
+#==============================================================================
+[ cpp_lib_src/DCF_cl ]
+debug_flags = 0x00000
+
+#==============================================================================
+# per-instance information for the DCF component
+#==============================================================================
+[ cpp_lib_src/DCF ]
+debug_flags = 0
+
+#==============================================================================
+# per-instance information for the LOG component
+#==============================================================================
+[ cpp_lib_src/LOG ]
+debug_flags = 0x00000
+
+#==============================================================================
+# per-instance information for the CDS component
+#==============================================================================
+[ cpp_lib_src/CDS ]
+debug_flags = 0x00000
+
+#==============================================================================
+# per-instance information for the APC component
+#==============================================================================
+[ cpp_lib_src/APC ]
+debug_flags = 0x00000
+[ cpp_lib ]
+
+
+#==============================================================================
+# per-instance information for the DCFUtil component
+#==============================================================================
+[ cpp_lib/DCFUtil ]
+debug_flags = 0
+
+#==============================================================================
+# per-instance information for the APC_a component
+#==============================================================================
+[ cpp_lib/APC_a ]
+debug_flags = 0
+save_proc_cfg_in_cds = yes
+save_exit_status_in_proc_cfg = no
+delete_proc_cfg = yes
+
+#==============================================================================
+# per-instance information for the CDS_a component
+#==============================================================================
+[ cpp_lib/CDS_a ]
+debug_flags = 0
+
+#==============================================================================
+# per-instance information for the DCF_gui component
+#==============================================================================
+[ cpp_lib/DCF_gui ]
+debug_flags = 0x00000
+[ idl_lib ]
+
+[ idl_lib/DAPC ]
+
+[ idl_lib/DCDS ]

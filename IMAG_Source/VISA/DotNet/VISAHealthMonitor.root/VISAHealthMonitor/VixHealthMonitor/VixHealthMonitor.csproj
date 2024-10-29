@@ -1,0 +1,312 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{1754685F-866B-493C-90AC-F7F650FE8DB8}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>VixHealthMonitor</RootNamespace>
+    <AssemblyName>VixHealthMonitor</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="GalaSoft.MvvmLight.WPF4">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Program Files\Laurent Bugnion (GalaSoft)\Mvvm Light Toolkit\Binaries\WPF4\GalaSoft.MvvmLight.WPF4.dll</HintPath>
+    </Reference>
+    <Reference Include="GalaSoft.MvvmLight.Extras.WPF4">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Program Files\Laurent Bugnion (GalaSoft)\Mvvm Light Toolkit\Binaries\WPF4\GalaSoft.MvvmLight.Extras.WPF4.dll</HintPath>
+    </Reference>
+    <Reference Include="Hardcodet.Wpf.TaskbarNotification">
+      <HintPath>..\..\..\..\..\..\C# Test Code\wpf-notifyicon\wpf-notifyicon\NotifyIconWpf\bin\Release\Hardcodet.Wpf.TaskbarNotification.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Windows.Interactivity">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Program Files\Laurent Bugnion (GalaSoft)\Mvvm Light Toolkit\Binaries\WPF4\System.Windows.Interactivity.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="WPFToolkit.Extended">
+      <HintPath>..\..\..\..\..\download\ExtendedWPFToolkit_Binaries\WPFToolkit.Extended.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="ConfigurationWindow.xaml.cs">
+      <DependentUpon>ConfigurationWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CvixListView.xaml.cs">
+      <DependentUpon>CvixListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="DailyMonitoredProperties.xaml.cs">
+      <DependentUpon>DailyMonitoredProperties.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ExpanderVisibility.cs" />
+    <Compile Include="LongRunningThreadsView.xaml.cs">
+      <DependentUpon>LongRunningThreadsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="LongRunningThreadsWindow.xaml.cs">
+      <DependentUpon>LongRunningThreadsWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="messages\ChangeWatchedSiteMessage.cs" />
+    <Compile Include="messages\DisplayVisaSourceMessage.cs" />
+    <Compile Include="messages\SaveConfigurationPropertiesMessage.cs" />
+    <Compile Include="Model\WatchedSiteConfiguration.cs" />
+    <Compile Include="ServletRequests.cs" />
+    <Compile Include="SiteUtilitiesView.xaml.cs">
+      <DependentUpon>SiteUtilitiesView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewCountsView.xaml.cs">
+      <DependentUpon>ViewCountsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModel\ConfigurationViewModel.cs" />
+    <Compile Include="ViewModel\CvixListViewModel.cs" />
+    <Compile Include="ViewModel\DailyMonitoredPropertiesViewModel.cs" />
+    <Compile Include="ViewModel\DialogResult.cs" />
+    <Compile Include="ViewModel\LongRunningThreadsViewModel.cs" />
+    <Compile Include="ViewModel\MainViewModel.cs" />
+    <Compile Include="ViewModel\SiteUtilitiesViewModel.cs" />
+    <Compile Include="ViewModel\ViewModelLocator.cs" />
+    <Compile Include="ViewModel\VixCountsViewModel.cs" />
+    <Compile Include="ViewModel\VixDetailsViewModel.cs" />
+    <Compile Include="ViewModel\VixListViewModel.cs" />
+    <Compile Include="ViewModel\VixSitesListViewModel.cs" />
+    <Compile Include="ViewModel\VixTestInformationViewModel.cs" />
+    <Compile Include="ViewModel\VixTreeViewModel.cs" />
+    <Compile Include="ViewModel\WatchSiteContainerViewModel.cs" />
+    <Compile Include="VixCommon.cs" />
+    <Compile Include="VixDetailsView.xaml.cs">
+      <DependentUpon>VixDetailsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="VixHealthProperty.cs" />
+    <Compile Include="VixListView.xaml.cs">
+      <DependentUpon>VixListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="VixSitesListView.xaml.cs">
+      <DependentUpon>VixSitesListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="VixSourceHolder.cs" />
+    <Compile Include="VixTestInformationView.xaml.cs">
+      <DependentUpon>VixTestInformationView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="VixTreeHealthSource.cs" />
+    <Compile Include="VixTreeView.xaml.cs">
+      <DependentUpon>VixTreeView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WatchSiteContainer.xaml.cs">
+      <DependentUpon>WatchSiteContainer.xaml</DependentUpon>
+    </Compile>
+    <Page Include="ConfigurationWindow.xaml">
+      <SubType>Form</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CvixListView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="DailyMonitoredProperties.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="LongRunningThreadsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="LongRunningThreadsWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Page Include="SiteUtilitiesView.xaml">
+      <SubType>Form</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Skins\MainSkin.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ViewCountsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="VixDetailsView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="VixListView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="VixSitesListView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="VixTestInformationView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="VixTreeView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WatchSiteContainer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="app.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <AppDesigner Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\SiteService\SiteService.csproj">
+      <Project>{BE2DDE43-F8B3-426F-9D3F-A6153F29DBDE}</Project>
+      <Name>SiteService</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\VISAChecksums\VISAChecksums.csproj">
+      <Project>{C2D8C1E9-362C-4F93-8370-D58BA3B4D618}</Project>
+      <Name>VISAChecksums</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\VISACommon\VISACommon.csproj">
+      <Project>{81ACD46B-4837-47E0-AAF1-DE7DA2C5DE9A}</Project>
+      <Name>VISACommon</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\VISAHealthMonitorCommonControls\VISAHealthMonitorCommonControls.csproj">
+      <Project>{CD2A5877-1DDA-441C-8F40-0D782FAE53B2}</Project>
+      <Name>VISAHealthMonitorCommonControls</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\VISAHealthMonitorCommon\VISAHealthMonitorCommon.csproj">
+      <Project>{921F1D88-9C34-450D-A0CB-105B30153C2A}</Project>
+      <Name>VISAHealthMonitorCommon</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\VixHealthMonitorCommonControls\VixHealthMonitorCommonControls.csproj">
+      <Project>{AB94E66E-FB4D-4414-A0E0-DA896B3662A4}</Project>
+      <Name>VixHealthMonitorCommonControls</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\VixHealthMonitorCommon\VixHealthMonitorCommon.csproj">
+      <Project>{F179D8C0-9CCC-4A0D-9CA0-5879C5346B1E}</Project>
+      <Name>VixHealthMonitorCommon</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\failed.ico">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\Passed.ico">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\question.ico">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\loading_icon_1.gif">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\gnome-fs-loading-icon.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\ie-icon.gif">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  <Target Name="AfterCompile">
+    <NotifyPropertyWeaverMsBuildTask.WeavingTask />
+  </Target>
+  <UsingTask TaskName="NotifyPropertyWeaverMsBuildTask.WeavingTask" AssemblyFile="$(SolutionDir)Tools\NotifyPropertyWeaverMsBuildTask.dll" />
+</Project>

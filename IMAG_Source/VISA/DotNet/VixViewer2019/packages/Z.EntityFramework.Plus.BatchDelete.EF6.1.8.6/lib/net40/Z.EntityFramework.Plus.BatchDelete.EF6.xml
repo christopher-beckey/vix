@@ -1,0 +1,1187 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Z.EntityFramework.Plus.BatchDelete.EF6</name>
+    </assembly>
+    <members>
+        <member name="M:Z.EntityFramework.Plus.InternalExtensions.GetEntityTransaction(System.Data.Entity.Core.EntityClient.EntityConnection)">
+            <summary>An EntityConnection extension method that gets the entity transaction.</summary>
+            <param name="entityConnection">The entity connection to act on.</param>
+            <returns>The entity transaction from the entity connection.</returns>
+        </member>
+        <member name="M:Z.EntityFramework.Plus.InternalExtensions.GetStoreTransaction(System.Data.Entity.Core.EntityClient.EntityConnection)">
+            <summary>An EntityConnection extension method that gets the store transaction.</summary>
+            <param name="entityConnection">The entity connection to act on.</param>
+            <returns>The store transaction from the entity connection.</returns>
+        </member>
+        <member name="M:Z.EntityFramework.Plus.InternalExtensions.GetObjectQuerySafe(System.Linq.IQueryable)">
+            <summary>An IQueryable&lt;TEntity&gt; extension method that get the ObjectQuery from the query.</summary>
+            <param name="query">The query to get the ObjectQuery from.</param>
+            <returns>The ObjectQuery from the query.</returns>
+        </member>
+        <member name="M:Z.EntityFramework.Plus.InternalExtensions.GetObjectQuery(System.Linq.IQueryable)">
+            <summary>An IQueryable&lt;TEntity&gt; extension method that get the ObjectQuery from the query.</summary>
+            <param name="query">The query to get the ObjectQuery from.</param>
+            <returns>The ObjectQuery from the query.</returns>
+        </member>
+        <member name="M:Z.EntityFramework.Plus.InternalExtensions.SelectByName``1(System.Linq.IQueryable{``0},System.Collections.Generic.List{System.String})">
+            <summary>Select from the query all names.</summary>
+            <typeparam name="T">Generic type parameter.</typeparam>
+            <param name="query">The query to select name from.</param>
+            <param name="names">The name to select.</param>
+            <returns>An IQueryable with the name selected.</returns>
+        </member>
+        <member name="M:Z.EntityFramework.Plus.InternalExtensions.GetObjectQuery``1(System.Linq.IQueryable{``0})">
+            <summary>An IQueryable&lt;TEntity&gt; extension method that get the ObjectQuery from the query.</summary>
+            <typeparam name="T">The type of elements of the query.</typeparam>
+            <param name="query">The query to get the ObjectQuery from.</param>
+            <returns>The ObjectQuery from the query.</returns>
+        </member>
+        <member name="M:Z.EntityFramework.Plus.InternalExtensions.CreateStoreCommand(System.Data.Entity.Core.Objects.ObjectContext)">
+            <summary>An ObjectContext extension method that creates store command .</summary>
+            <param name="context">The context to act on.</param>
+            <returns>The new store command from the context.</returns>
+        </member>
+        <member name="M:Z.EntityFramework.Plus.InternalExtensions.GetInterceptionContext(System.Data.Entity.Core.Objects.ObjectContext)">
+            <summary>An ObjectContext extension method that gets interception context.</summary>
+            <param name="context">The context to act on.</param>
+            <returns>The interception context from the ObjectContext.</returns>
+        </member>
+        <member name="M:Z.EntityFramework.Plus.InternalExtensions.GetField(System.Type,System.String,System.Reflection.BindingFlags,System.Boolean)">
+            <summary>A Type extension method that gets a field.</summary>
+            <exception cref="T:System.Exception">Thrown when an exception error condition occurs.</exception>
+            <param name="type">The type to act on.</param>
+            <param name="name">The name.</param>
+            <param name="bindingAttr">The binding attribute.</param>
+            <param name="recursif">True to recursif.</param>
+            <returns>The field.</returns>
+        </member>
+        <member name="M:Z.EntityFramework.Plus.InternalExtensions.DeserializeXml``1(System.String)">
+            <summary>
+                A string extension method that deserialize XML.
+            </summary>
+            <typeparam name="T">Generic type parameter.</typeparam>
+            <param name="this">The @this to act on.</param>
+            <returns>A T.</returns>
+        </member>
+        <member name="T:Z.EntityFramework.Plus.Internal.Core.Infrastructure.DbModelPlus">
+            <summary>A data Model for the database.</summary>
+        </member>
+        <member name="P:Z.EntityFramework.Plus.Internal.Core.Infrastructure.DbModelPlus.ConceptualModel">
+            <summary>Gets or sets the conceptual model.</summary>
+            <value>The conceptual model.</value>
+        </member>
+        <member name="P:Z.EntityFramework.Plus.Internal.Core.Infrastructure.DbModelPlus.StoreModel">
+            <summary>Gets or sets the store model.</summary>
+            <value>The store model.</value>
+        </member>
+        <member name="P:Z.EntityFramework.Plus.Internal.Core.Infrastructure.DbModelPlus.MappingModel">
+            <summary>Gets or sets the mapping model.</summary>
+            <value>The mapping model.</value>
+        </member>
+        <member name="M:Z.EntityFramework.Plus.Internal.Core.Infrastructure.DbModelPlus.Entity``1">
+            <summary>Gets the entity.</summary>
+            <typeparam name="T">Generic type parameter.</typeparam>
+            <returns>A T.</returns>
+        </member>
+        <member name="T:Z.EntityFramework.Plus.Internal.Core.Mapping.ComplexPropertyMapping">
+            <summary>
+                Please visit the
+                <see href="http://msdn.microsoft.com/en-us/library/vstudio/bb399202(v=vs.100).aspx">
+                    Microsoft documentation
+                </see>
+                for more detail.
+            </summary>
+        </member>
+        <member name="P:Z.EntityFramework.Plus.Internal.Core.Mapping.ComplexPropertyMapping.ComplexEntityType">
+            <summary>Gets or sets the type of the complex entity.</summary>
+            <value>The type of the complex entity.</value>
+        </member>
+        <member name="P:Z.EntityFramework.Plus.Internal.Core.Mapping.ComplexPropertyMapping.Name">
+            <summary>
+                Please visit the
+                <see href="http://msdn.microsoft.com/en-us/library/vstudio/bb399202(v=vs.100).aspx">
+                    Microsoft documentation
+                </see>
+                for more detail.
+            </summary>
+            <value>The name.</value>
+        </member>
+        <member name="P:Z.EntityFramework.Plus.Internal.Core.Mapping.ComplexPropertyMapping.TypeName">
+            <summary>
+                Please visit the
+                <see href="http://msdn.microsoft.com/en-us/library/vstudio/bb399202(v=vs.100).aspx">
+                    Microsoft documentation
+                </see>
+                for more detail.
+            </summary>
+            <value>The name of the type.</value>
+        </member>
+        <member name="P:Z.EntityFramework.Plus.Internal.Core.Mapping.ComplexPropertyMapping.ScalarProperties">
+            <summary>
+                Please visit the
+                <see href="http://msdn.microsoft.com/en-us/library/vstudio/bb399202(v=vs.100).aspx">
+                    Microsoft documentation
+                </see>
+                for more detail.
+            </summary>
+            <value>The scalar properties.</value>
+        </member>
+        <member name="P:Z.EntityFramework.Plus.Internal.Core.Mapping.ComplexPropertyMapping.ComplexProperties">
+            <summary>
+                Please visit the
+                <see href="http://msdn.microsoft.com/en-us/library/vstudio/bb399202(v=vs.100).aspx">
+                    Microsoft documentation
+                </see>
+                for more detail.
+            </summary>
+            <value>The complex properties.</value>
+        </member>
+        <member name="T:Z.EntityFramework.Plus.Internal.Core.Mapping.ConditionPropertyMapping">
+            <summary>A condition property mapping.</summary>
+        </member>
+        <member name="P:Z.EntityFramework.Plus.Internal.Core.Mapping.ConditionPropertyMapping.Value">
+            <summary>
+                Please visit the
+                <see href="http://msdn.microsoft.com/en-us/library/vstudio/bb399202(v=vs.100).aspx">
+                    Microsoft documentation
+                </see>
+                for more detail.
+            </summary>
+            <value>The value.</value>
+        </member>
+        <member name="P:Z.EntityFramework.Plus.Internal.Core.Mapping.ConditionPropertyMapping.ColumnName">
+            <summary>
+                Please visit the
+                <see href="http://msdn.microsoft.com/en-us/library/vstudio/bb399202(v=vs.100).aspx">
+                    Microsoft documentation
+                </see>
+                for more detail.
+            </summary>
+            <value>The name of the column.</value>
+        </member>
+        <member name="T:Z.EntityFramework.Plus.Internal.Core.Mapping.EntityContainerMapping">
+            <summary>An entity container mapping.</summary>
+        </member>
+        <member name="P:Z.EntityFramework.Plus.Internal.Core.Mapping.EntityContainerMapping.EntitySetMappings">
+            <summary>
+                Please visit the
+                <see href="http://msdn.microsoft.com/en-us/library/vstudio/bb399202(v=vs.100).aspx">
+                    Microsoft documentation
+                </see>
+                for more detail.
+            </summary>
+            <value>The entity set mappings.</value>
+        </member>
+        <member name="T:Z.EntityFramework.Plus.Internal.Core.Mapping.EntitySetMapping">
+            <summary>
+                Please visit the
+                <see href="http://msdn.microsoft.com/en-us/library/vstudio/bb399202(v=vs.100).aspx">
+                    Microsoft documentation
+                </see>
+                for more detail.
+            </summary>
+        </member>
+        <member name="P:Z.EntityFramework.Plus.Internal.Core.Mapping.EntitySetMapping.ConceptualSet">
+            <summary>Gets or sets the set the conceptual belongs to.</summary>
+            <value>The conceptual set.</value>
+        </member>
+        <member name="P:Z.EntityFramework.Plus.Internal.Core.Mapping.EntitySetMapping.Name">
+            <summary>
+                Please visit the
+                <see href="http://msdn.microsoft.com/en-us/library/vstudio/bb399202(v=vs.100).aspx">
+                    Microsoft documentation
+                </see>
+                for more detail.
+            </summary>
+            <value>The name.</value>
+        </member>
+        <member name="P:Z.EntityFramework.Plus.Internal.Core.Mapping.EntitySetMapping.EntityTypeMappings">
+            <summary>
+                Please visit the
+                <see href="http://msdn.microsoft.com/en-us/library/vstudio/bb399202(v=vs.100).aspx">
+                    Microsoft documentation
+                </see>
+                for more detail.
+            </summary>
+            <value>The entity type mappings.</value>
+        </member>
+        <member name="T:Z.EntityFramework.Plus.Internal.Core.Mapping.EntityTypeMapping">
+            <summary>
+                Please visit the
+                <see href="http://msdn.microsoft.com/en-us/library/vstudio/bb399202(v=vs.100).aspx">
+                    Microsoft documentation
+                </see>
+                for more detail.
+            </summary>
+        </member>
+        <member name="P:Z.EntityFramework.Plus.Internal.Core.Mapping.EntityTypeMapping.EntityType">
+            <summary>Gets or sets the type of the entity.</summary>
+            <value>The type of the entity.</value>
+        </member>
+        <member name="P:Z.EntityFramework.Plus.Internal.Core.Mapping.EntityTypeMapping.TypeName">
+            <summary>
+                Please visit the
+                <see href="http://msdn.microsoft.com/en-us/library/vstudio/bb399202(v=vs.100).aspx">
+                    Microsoft documentation
+                </see>
+                for more detail.
+            </summary>
+            <value>The name of the type.</value>
+        </member>
+        <member name="P:Z.EntityFramework.Plus.Internal.Core.Mapping.EntityTypeMapping.MappingFragment">
+            <summary>
+                Please visit the
+                <see href="http://msdn.microsoft.com/en-us/library/vstudio/bb399202(v=vs.100).aspx">
+                    Microsoft documentation
+                </see>
+                for more detail.
+            </summary>
+            <value>The mapping fragment.</value>
+        </member>
+        <member name="T:Z.EntityFramework.Plus.Internal.Core.Mapping.MappingFragment">
+            <summary>
+                Please visit the
+                <see href="http://msdn.microsoft.com/en-us/library/vstudio/bb399202(v=vs.100).aspx">
+                    Microsoft documentation
+                </see>
+                for more detail.
+            </summary>
+        </member>
+        <member name="M:Z.EntityFramework.Plus.Internal.Core.Mapping.MappingFragment.#ctor">
+            <summary>Default constructor.</summary>
+        </member>
+        <member name="P:Z.EntityFramework.Plus.Internal.Core.Mapping.MappingFragment.StoreEntitySet">
+            <summary>Gets or sets the set the store entity belongs to.</summary>
+            <value>The store entity set.</value>
+        </member>
+        <member name="P:Z.EntityFramework.Plus.Internal.Core.Mapping.MappingFragment.ScalarAccessors">
+            <summary>Gets or sets the scalar accessors.</summary>
+            <value>The scalar accessors.</value>
+        </member>
+        <member name="P:Z.EntityFramework.Plus.Internal.Core.Mapping.MappingFragment.StoreEntitySetName">
+            <summary>
+                Please visit the
+                <see href="http://msdn.microsoft.com/en-us/library/vstudio/bb399202(v=vs.100).aspx">
+                    Microsoft documentation
+                </see>
+                for more detail.
+            </summary>
+            <value>The name of the store entity set.</value>
+        </member>
+        <member name="P:Z.EntityFramework.Plus.Internal.Core.Mapping.MappingFragment.ScalarProperties">
+            <summary>
+                Please visit the
+                <see href="http://msdn.microsoft.com/en-us/library/vstudio/bb399202(v=vs.100).aspx">
+                    Microsoft documentation
+                </see>
+                for more detail.
+            </summary>
+            <value>The scalar properties.</value>
+        </member>
+        <member name="P:Z.EntityFramework.Plus.Internal.Core.Mapping.MappingFragment.ComplexProperties">
+            <summary>
+                Please visit the
+                <see href="http://msdn.microsoft.com/en-us/library/vstudio/bb399202(v=vs.100).aspx">
+                    Microsoft documentation
+                </see>
+                for more detail.
+            </summary>
+            <value>The complex properties.</value>
+        </member>
+        <member name="P:Z.EntityFramework.Plus.Internal.Core.Mapping.MappingFragment.Conditions">
+            <summary>
+                Please visit the
+                <see href="http://msdn.microsoft.com/en-us/library/vstudio/bb399202(v=vs.100).aspx">
+                    Microsoft documentation
+                </see>
+                for more detail.
+            </summary>
+            <value>The conditions.</value>
+        </member>
+        <member name="T:Z.EntityFramework.Plus.Internal.Core.Mapping.ScalarPropertyMapping">
+            <summary>A scalar property mapping.</summary>
+        </member>
+        <member name="P:Z.EntityFramework.Plus.Internal.Core.Mapping.ScalarPropertyMapping.Name">
+            <summary>
+                Please visit the
+                <see href="http://msdn.microsoft.com/en-us/library/vstudio/bb399202(v=vs.100).aspx">
+                    Microsoft documentation
+                </see>
+                for more detail.
+            </summary>
+            <value>The name.</value>
+        </member>
+        <member name="P:Z.EntityFramework.Plus.Internal.Core.Mapping.ScalarPropertyMapping.ColumnName">
+            <summary>
+                Please visit the
+                <see href="http://msdn.microsoft.com/en-us/library/vstudio/bb399202(v=vs.100).aspx">
+                    Microsoft documentation
+                </see>
+                for more detail.
+            </summary>
+            <value>The name of the column.</value>
+        </member>
+        <member name="T:Z.EntityFramework.Plus.Internal.Core.Mapping.SchemaMapping">
+            <summary>
+                Please visit the
+                <see href="http://msdn.microsoft.com/en-us/library/vstudio/bb399202(v=vs.100).aspx">
+                    Microsoft documentation
+                </see>
+                for more detail.
+            </summary>
+        </member>
+        <member name="P:Z.EntityFramework.Plus.Internal.Core.Mapping.SchemaMapping.EntityContainerMappings">
+            <summary>
+                Please visit the
+                <see href="http://msdn.microsoft.com/en-us/library/vstudio/bb399202(v=vs.100).aspx">
+                    Microsoft documentation
+                </see>
+                for more detail.
+            </summary>
+            <value>The entity container mapping.</value>
+        </member>
+        <member name="T:Z.EntityFramework.Plus.Internal.Core.SchemaObjectModel.EntityContainer">
+            <summary>
+                Please visit the
+                <see href="http://msdn.microsoft.com/en-us/library/vstudio/bb399292(v=vs.100).aspx">
+                    Microsoft documentation
+                </see>
+                for more detail.
+            </summary>
+        </member>
+        <member name="P:Z.EntityFramework.Plus.Internal.Core.SchemaObjectModel.EntityContainer.Index_EntitySets_Name">
+            <summary>Gets or sets the name of the index entity sets.</summary>
+            <value>The name of the index entity sets.</value>
+        </member>
+        <member name="P:Z.EntityFramework.Plus.Internal.Core.SchemaObjectModel.EntityContainer.EntitySets">
+            <summary>
+                Please visit the
+                <see href="http://msdn.microsoft.com/en-us/library/vstudio/bb399292(v=vs.100).aspx">
+                    Microsoft documentation
+                </see>
+                for more detail.
+            </summary>
+            <value>The entity sets.</value>
+        </member>
+        <member name="T:Z.EntityFramework.Plus.Internal.Core.SchemaObjectModel.EntityContainerEntitySet">
+            <summary>
+                Please visit the
+                <see href="http://msdn.microsoft.com/en-us/library/vstudio/bb399292(v=vs.100).aspx">
+                    Microsoft documentation
+                </see>
+                for more detail.
+            </summary>
+        </member>
+        <member name="P:Z.EntityFramework.Plus.Internal.Core.SchemaObjectModel.EntityContainerEntitySet.EntityType">
+            <summary>Gets or sets the type of the entity.</summary>
+            <value>The type of the entity.</value>
+        </member>
+        <member name="P:Z.EntityFramework.Plus.Internal.Core.SchemaObjectModel.EntityContainerEntitySet.IsTPC">
+            <summary>Gets or sets a value indicating whether this object is tpc.</summary>
+            <value>true if this object is tpc, false if not.</value>
+        </member>
+        <member name="P:Z.EntityFramework.Plus.Internal.Core.SchemaObjectModel.EntityContainerEntitySet.IsTPH">
+            <summary>Gets or sets a value indicating whether this object is tph.</summary>
+            <value>true if this object is tph, false if not.</value>
+        </member>
+        <member name="P:Z.EntityFramework.Plus.Internal.Core.SchemaObjectModel.EntityContainerEntitySet.IsTPT">
+            <summary>Gets or sets a value indicating whether this object is tpt.</summary>
+            <value>true if this object is tpt, false if not.</value>
+        </member>
+        <member name="P:Z.EntityFramework.Plus.Internal.Core.SchemaObjectModel.EntityContainerEntitySet.EntitySetMapping">
+            <summary>Gets or sets the entity set mapping.</summary>
+            <value>The entity set mapping.</value>
+        </member>
+        <member name="P:Z.EntityFramework.Plus.Internal.Core.SchemaObjectModel.EntityContainerEntitySet.Name">
+            <summary>
+                Please visit the
+                <see href="http://msdn.microsoft.com/en-us/library/vstudio/bb399292(v=vs.100).aspx">
+                    Microsoft documentation
+                </see>
+                for more detail.
+            </summary>
+            <value>The name.</value>
+        </member>
+        <member name="P:Z.EntityFramework.Plus.Internal.Core.SchemaObjectModel.EntityContainerEntitySet.EntityTypeName">
+            <summary>
+                Please visit the
+                <see href="http://msdn.microsoft.com/en-us/library/vstudio/bb399292(v=vs.100).aspx">
+                    Microsoft documentation
+                </see>
+                for more detail.
+            </summary>
+            <value>The name of the entity type.</value>
+        </member>
+        <member name="P:Z.EntityFramework.Plus.Internal.Core.SchemaObjectModel.EntityContainerEntitySet.Schema">
+            <summary>
+                Please visit the
+                <see href="http://msdn.microsoft.com/en-us/library/vstudio/bb399292(v=vs.100).aspx">
+                    Microsoft documentation
+                </see>
+                for more detail.
+            </summary>
+            <value>The schema.</value>
+        </member>
+        <member name="P:Z.EntityFramework.Plus.Internal.Core.SchemaObjectModel.EntityContainerEntitySet.Table">
+            <summary>
+                Please visit the
+                <see href="http://msdn.microsoft.com/en-us/library/vstudio/bb399292(v=vs.100).aspx">
+                    Microsoft documentation
+                </see>
+                for more detail.
+            </summary>
+            <value>The table.</value>
+        </member>
+        <member name="T:Z.EntityFramework.Plus.Internal.Core.SchemaObjectModel.EntityKeyElement">
+            <summary>
+                Please visit the
+                <see href="http://msdn.microsoft.com/en-us/library/vstudio/bb399292(v=vs.100).aspx">
+                    Microsoft documentation
+                </see>
+                for more detail.
+            </summary>
+        </member>
+        <member name="P:Z.EntityFramework.Plus.Internal.Core.SchemaObjectModel.EntityKeyElement.PropertyRefs">
+            <summary>
+                Please visit the
+                <see href="http://msdn.microsoft.com/en-us/library/vstudio/bb399292(v=vs.100).aspx">
+                    Microsoft documentation
+                </see>
+                for more detail.
+            </summary>
+            <value>The property references.</value>
+        </member>
+        <member name="T:Z.EntityFramework.Plus.Internal.Core.SchemaObjectModel.Property">
+            <summary>
+                Please visit the
+                <see href="http://msdn.microsoft.com/en-us/library/vstudio/bb399292(v=vs.100).aspx">
+                    Microsoft documentation
+                </see>
+                for more detail.
+            </summary>
+        </member>
+        <member name="P:Z.EntityFramework.Plus.Internal.Core.SchemaObjectModel.Property.ParentEntity">
+            <summary>Gets or sets the parent entity.</summary>
+            <value>The parent entity.</value>
+        </member>
+        <member name="P:Z.EntityFramework.Plus.Internal.Core.SchemaObjectModel.Property.IsConcurrency">
+            <summary>Gets or sets the is concurrency.</summary>
+            <value>The is concurrency.</value>
+        </member>
+        <member name="P:Z.EntityFramework.Plus.Internal.Core.SchemaObjectModel.Property.IsComplex">
+            <summary>Gets or sets a value indicating whether this object is complex.</summary>
+            <value>true if this object is complex, false if not.</value>
+        </member>
+        <member name="P:Z.EntityFramework.Plus.Internal.Core.SchemaObjectModel.Property.ComplexType">
+            <summary>Gets or sets the type of the complex.</summary>
+            <value>The type of the complex.</value>
+        </member>
+        <member name="P:Z.EntityFramework.Plus.Internal.Core.SchemaObjectModel.Property.IsEnum">
+            <summary>Gets or sets a value indicating whether this object is enum.</summary>
+            <value>true if this object is enum, false if not.</value>
+        </member>
+        <member name="P:Z.EntityFramework.Plus.Internal.Core.SchemaObjectModel.Property.EnumType">
+            <summary>Gets or sets the type of the enum.</summary>
+            <value>The type of the enum.</value>
+        </member>
+        <member name="P:Z.EntityFramework.Plus.Internal.Core.SchemaObjectModel.Property.Type">
+            <summary>Gets or sets the type.</summary>
+            <value>The type.</value>
+        </member>
+        <member name="P:Z.EntityFramework.Plus.Internal.Core.SchemaObjectModel.Property.IsPrimaryKey">
+            <summary>Gets or sets a value indicating whether this object is primary key.</summary>
+            <value>true if this object is primary key, false if not.</value>
+        </member>
+        <member name="P:Z.EntityFramework.Plus.Internal.Core.SchemaObjectModel.Property.IsComputed">
+            <summary>Gets or sets a value indicating whether this object is computed.</summary>
+            <value>true if this object is computed, false if not.</value>
+        </member>
+        <member name="P:Z.EntityFramework.Plus.Internal.Core.SchemaObjectModel.Property.Name">
+            <summary>
+                Please visit the
+                <see href="http://msdn.microsoft.com/en-us/library/vstudio/bb399292(v=vs.100).aspx">
+                    Microsoft documentation
+                </see>
+                for more detail.
+            </summary>
+            <value>The name.</value>
+        </member>
+        <member name="P:Z.EntityFramework.Plus.Internal.Core.SchemaObjectModel.Property.TypeName">
+            <summary>
+                Please visit the
+                <see href="http://msdn.microsoft.com/en-us/library/vstudio/bb399292(v=vs.100).aspx">
+                    Microsoft documentation
+                </see>
+                for more detail.
+            </summary>
+            <value>The name of the type.</value>
+        </member>
+        <member name="P:Z.EntityFramework.Plus.Internal.Core.SchemaObjectModel.Property.Nullable">
+            <summary>
+                Please visit the
+                <see href="http://msdn.microsoft.com/en-us/library/vstudio/bb399292(v=vs.100).aspx">
+                    Microsoft documentation
+                </see>
+                for more detail.
+            </summary>
+            <value>true if nullable, false if not.</value>
+        </member>
+        <member name="P:Z.EntityFramework.Plus.Internal.Core.SchemaObjectModel.Property.StoreGeneratedPattern">
+            <summary>
+                Please visit the
+                <see href="http://msdn.microsoft.com/en-us/library/vstudio/bb399292(v=vs.100).aspx">
+                    Microsoft documentation
+                </see>
+                for more detail.
+            </summary>
+            <value>The store generated pattern.</value>
+        </member>
+        <member name="P:Z.EntityFramework.Plus.Internal.Core.SchemaObjectModel.Property.Unicode">
+            <summary>
+                Please visit the
+                <see href="http://msdn.microsoft.com/en-us/library/vstudio/bb399292(v=vs.100).aspx">
+                    Microsoft documentation
+                </see>
+                for more detail.
+            </summary>
+            <value>true if unicode, false if not.</value>
+        </member>
+        <member name="P:Z.EntityFramework.Plus.Internal.Core.SchemaObjectModel.Property.FixedLength">
+            <summary>
+                Please visit the
+                <see href="http://msdn.microsoft.com/en-us/library/vstudio/bb399292(v=vs.100).aspx">
+                    Microsoft documentation
+                </see>
+                for more detail.
+            </summary>
+            <value>true if fixed length, false if not.</value>
+        </member>
+        <member name="P:Z.EntityFramework.Plus.Internal.Core.SchemaObjectModel.Property.MaxLength">
+            <summary>
+                Please visit the
+                <see href="http://msdn.microsoft.com/en-us/library/vstudio/bb399292(v=vs.100).aspx">
+                    Microsoft documentation
+                </see>
+                for more detail.
+            </summary>
+            <value>The length of the maximum.</value>
+        </member>
+        <member name="P:Z.EntityFramework.Plus.Internal.Core.SchemaObjectModel.Property.Precision">
+            <summary>
+                Please visit the
+                <see href="http://msdn.microsoft.com/en-us/library/vstudio/bb399292(v=vs.100).aspx">
+                    Microsoft documentation
+                </see>
+                for more detail.
+            </summary>
+            <value>The precision.</value>
+        </member>
+        <member name="P:Z.EntityFramework.Plus.Internal.Core.SchemaObjectModel.Property.Scale">
+            <summary>
+                Please visit the
+                <see href="http://msdn.microsoft.com/en-us/library/vstudio/bb399292(v=vs.100).aspx">
+                    Microsoft documentation
+                </see>
+                for more detail.
+            </summary>
+            <value>The scale.</value>
+        </member>
+        <member name="P:Z.EntityFramework.Plus.Internal.Core.SchemaObjectModel.Property.ConcurrencyMode">
+            <summary>
+                Please visit the
+                <see href="http://msdn.microsoft.com/en-us/library/vstudio/bb399292(v=vs.100).aspx">
+                    Microsoft documentation
+                </see>
+                for more detail.
+            </summary>
+            <value>The concurrency mode.</value>
+        </member>
+        <member name="T:Z.EntityFramework.Plus.Internal.Core.SchemaObjectModel.PropertyRefElement">
+            <summary>
+                Please visit the
+                <see href="http://msdn.microsoft.com/en-us/library/vstudio/bb399292(v=vs.100).aspx">
+                    Microsoft documentation
+                </see>
+                for more detail.
+            </summary>
+        </member>
+        <member name="P:Z.EntityFramework.Plus.Internal.Core.SchemaObjectModel.PropertyRefElement.Property">
+            <summary>Gets or sets the property.</summary>
+            <value>The property.</value>
+        </member>
+        <member name="P:Z.EntityFramework.Plus.Internal.Core.SchemaObjectModel.PropertyRefElement.Name">
+            <summary>
+                Please visit the
+                <see href="http://msdn.microsoft.com/en-us/library/vstudio/bb399292(v=vs.100).aspx">
+                    Microsoft documentation
+                </see>
+                for more detail.
+            </summary>
+            <value>The name.</value>
+        </member>
+        <member name="T:Z.EntityFramework.Plus.Internal.Core.SchemaObjectModel.Schema">
+            <summary>A schema.</summary>
+        </member>
+        <member name="P:Z.EntityFramework.Plus.Internal.Core.SchemaObjectModel.Schema.Index_ComplexTypes_Name">
+            <summary>Gets or sets the name of the index complex types.</summary>
+            <value>The name of the index complex types.</value>
+        </member>
+        <member name="P:Z.EntityFramework.Plus.Internal.Core.SchemaObjectModel.Schema.Index_EntityTypes_Name">
+            <summary>Gets or sets the name of the index entity types.</summary>
+            <value>The name of the index entity types.</value>
+        </member>
+        <member name="P:Z.EntityFramework.Plus.Internal.Core.SchemaObjectModel.Schema.Index_EnumTypes_Name">
+            <summary>Gets or sets the name of the index enum types.</summary>
+            <value>The name of the index enum types.</value>
+        </member>
+        <member name="P:Z.EntityFramework.Plus.Internal.Core.SchemaObjectModel.Schema.Alias">
+            <summary>
+                Please visit the
+                <see href="http://msdn.microsoft.com/en-us/library/vstudio/bb399292(v=vs.100).aspx">
+                    Microsoft documentation
+                </see>
+                for more detail.
+            </summary>
+            <value>The alias.</value>
+        </member>
+        <member name="P:Z.EntityFramework.Plus.Internal.Core.SchemaObjectModel.Schema.EntityTypes">
+            <summary>
+                Please visit the
+                <see href="http://msdn.microsoft.com/en-us/library/vstudio/bb399292(v=vs.100).aspx">
+                    Microsoft documentation
+                </see>
+                for more detail.
+            </summary>
+            <value>A list of types of the entities.</value>
+        </member>
+        <member name="P:Z.EntityFramework.Plus.Internal.Core.SchemaObjectModel.Schema.ComplexTypes">
+            <summary>
+                Please visit the
+                <see href="http://msdn.microsoft.com/en-us/library/vstudio/bb399292(v=vs.100).aspx">
+                    Microsoft documentation
+                </see>
+                for more detail.
+            </summary>
+            <value>A list of types of the complexes.</value>
+        </member>
+        <member name="P:Z.EntityFramework.Plus.Internal.Core.SchemaObjectModel.Schema.EnumTypes">
+            <summary>
+                Please visit the
+                <see href="http://msdn.microsoft.com/en-us/library/vstudio/bb399292(v=vs.100).aspx">
+                    Microsoft documentation
+                </see>
+                for more detail.
+            </summary>
+            <value>A list of types of the enums.</value>
+        </member>
+        <member name="P:Z.EntityFramework.Plus.Internal.Core.SchemaObjectModel.Schema.EntityContainers">
+            <summary>
+                Please visit the
+                <see href="http://msdn.microsoft.com/en-us/library/vstudio/bb399292(v=vs.100).aspx">
+                    Microsoft documentation
+                </see>
+                for more detail.
+            </summary>
+            <value>The entity container.</value>
+        </member>
+        <member name="T:Z.EntityFramework.Plus.Internal.Core.SchemaObjectModel.SchemaEntityType">
+            <summary>
+                Please visit the
+                <see href="http://msdn.microsoft.com/en-us/library/vstudio/bb399292(v=vs.100).aspx">
+                    Microsoft documentation
+                </see>
+                for more detail.
+            </summary>
+        </member>
+        <member name="P:Z.EntityFramework.Plus.Internal.Core.SchemaObjectModel.SchemaEntityType.IsTPC">
+            <summary>Gets or sets a value indicating whether this object is tpc.</summary>
+            <value>true if this object is tpc, false if not.</value>
+        </member>
+        <member name="P:Z.EntityFramework.Plus.Internal.Core.SchemaObjectModel.SchemaEntityType.IsTPT">
+            <summary>Gets or sets a value indicating whether this object is tpt.</summary>
+            <value>true if this object is tpt, false if not.</value>
+        </member>
+        <member name="P:Z.EntityFramework.Plus.Internal.Core.SchemaObjectModel.SchemaEntityType.IsTPH">
+            <summary>Gets or sets a value indicating whether this object is tph.</summary>
+            <value>true if this object is tph, false if not.</value>
+        </member>
+        <member name="P:Z.EntityFramework.Plus.Internal.Core.SchemaObjectModel.SchemaEntityType.Index_Properties_Name">
+            <summary>Gets or sets the name of the index properties.</summary>
+            <value>The name of the index properties.</value>
+        </member>
+        <member name="P:Z.EntityFramework.Plus.Internal.Core.SchemaObjectModel.SchemaEntityType.EntityTypeMapping">
+            <summary>Gets or sets the entity type mapping.</summary>
+            <value>The entity type mapping.</value>
+        </member>
+        <member name="P:Z.EntityFramework.Plus.Internal.Core.SchemaObjectModel.SchemaEntityType.EntitySet">
+            <summary>Gets or sets the set the entity belongs to.</summary>
+            <value>The entity set.</value>
+        </member>
+        <member name="P:Z.EntityFramework.Plus.Internal.Core.SchemaObjectModel.SchemaEntityType.GenericEntitySetMapping">
+            <summary>Gets or sets the generic entity set mapping.</summary>
+            <value>The generic entity set mapping.</value>
+        </member>
+        <member name="P:Z.EntityFramework.Plus.Internal.Core.SchemaObjectModel.SchemaEntityType.Name">
+            <summary>
+                Please visit the
+                <see href="http://msdn.microsoft.com/en-us/library/vstudio/bb399292(v=vs.100).aspx">
+                    Microsoft documentation
+                </see>
+                for more detail.
+            </summary>
+            <value>The name.</value>
+        </member>
+        <member name="P:Z.EntityFramework.Plus.Internal.Core.SchemaObjectModel.SchemaEntityType.BaseType">
+            <summary>Gets or sets the type of the base.</summary>
+            <value>The type of the base.</value>
+        </member>
+        <member name="P:Z.EntityFramework.Plus.Internal.Core.SchemaObjectModel.SchemaEntityType.Key">
+            <summary>
+                Please visit the
+                <see href="http://msdn.microsoft.com/en-us/library/vstudio/bb399292(v=vs.100).aspx">
+                    Microsoft documentation
+                </see>
+                for more detail.
+            </summary>
+            <value>The key.</value>
+        </member>
+        <member name="P:Z.EntityFramework.Plus.Internal.Core.SchemaObjectModel.SchemaEntityType.Properties">
+            <summary>
+                Please visit the
+                <see href="http://msdn.microsoft.com/en-us/library/vstudio/bb399292(v=vs.100).aspx">
+                    Microsoft documentation
+                </see>
+                for more detail.
+            </summary>
+            <value>The properties.</value>
+        </member>
+        <member name="P:Z.EntityFramework.Plus.Internal.Core.SchemaObjectModel.SchemaEntityType.BaseTypeName">
+            <summary>
+                Please visit the
+                <see href="http://msdn.microsoft.com/en-us/library/vstudio/bb399292(v=vs.100).aspx">
+                    Microsoft documentation
+                </see>
+                for more detail.
+            </summary>
+            <value>The name of the base type.</value>
+        </member>
+        <member name="T:Z.EntityFramework.Plus.Internal.Core.SchemaObjectModel.SchemaEntityType`1">
+            <summary>
+                Please visit the
+                <see href="http://msdn.microsoft.com/en-us/library/vstudio/bb399292(v=vs.100).aspx">
+                    Microsoft documentation
+                </see>
+                for more detail.
+            </summary>
+        </member>
+        <member name="P:Z.EntityFramework.Plus.Internal.Core.SchemaObjectModel.SchemaEntityType`1.Info">
+            <summary>Gets or sets the entity.</summary>
+            <value>The entity.</value>
+        </member>
+        <member name="T:Z.EntityFramework.Plus.Internal.Core.SchemaObjectModel.SchemaEnumMember">
+            <summary>
+                Please visit the
+                <see href="http://msdn.microsoft.com/en-us/library/vstudio/bb399292(v=vs.100).aspx">
+                    Microsoft documentation
+                </see>
+                for more detail.
+            </summary>
+        </member>
+        <member name="P:Z.EntityFramework.Plus.Internal.Core.SchemaObjectModel.SchemaEnumMember.Name">
+            <summary>
+                Please visit the
+                <see href="http://msdn.microsoft.com/en-us/library/vstudio/bb399292(v=vs.100).aspx">
+                    Microsoft documentation
+                </see>
+                for more detail.
+            </summary>
+            <value>The name.</value>
+        </member>
+        <member name="P:Z.EntityFramework.Plus.Internal.Core.SchemaObjectModel.SchemaEnumMember.Value">
+            <summary>
+                Please visit the
+                <see href="http://msdn.microsoft.com/en-us/library/vstudio/bb399292(v=vs.100).aspx">
+                    Microsoft documentation
+                </see>
+                for more detail.
+            </summary>
+            <value>The value.</value>
+        </member>
+        <member name="T:Z.EntityFramework.Plus.Internal.Core.SchemaObjectModel.SchemaEnumType">
+            <summary>
+                Please visit the
+                <see href="http://msdn.microsoft.com/en-us/library/vstudio/bb399292(v=vs.100).aspx">
+                    Microsoft documentation
+                </see>
+                for more detail.
+            </summary>
+        </member>
+        <member name="P:Z.EntityFramework.Plus.Internal.Core.SchemaObjectModel.SchemaEnumType.Type">
+            <summary>Gets or sets the type.</summary>
+            <value>The type.</value>
+        </member>
+        <member name="P:Z.EntityFramework.Plus.Internal.Core.SchemaObjectModel.SchemaEnumType.Name">
+            <summary>
+                Please visit the
+                <see href="http://msdn.microsoft.com/en-us/library/vstudio/bb399292(v=vs.100).aspx">
+                    Microsoft documentation
+                </see>
+                for more detail.
+            </summary>
+            <value>The name.</value>
+        </member>
+        <member name="P:Z.EntityFramework.Plus.Internal.Core.SchemaObjectModel.SchemaEnumType.IsFlags">
+            <summary>
+                Please visit the
+                <see href="http://msdn.microsoft.com/en-us/library/vstudio/bb399292(v=vs.100).aspx">
+                    Microsoft documentation
+                </see>
+                for more detail.
+            </summary>
+            <value>true if this object is flags, false if not.</value>
+        </member>
+        <member name="P:Z.EntityFramework.Plus.Internal.Core.SchemaObjectModel.SchemaEnumType.UnderlyingTypeName">
+            <summary>
+                Please visit the
+                <see href="http://msdn.microsoft.com/en-us/library/vstudio/bb399292(v=vs.100).aspx">
+                    Microsoft documentation
+                </see>
+                for more detail.
+            </summary>
+            <value>The name of the underlying type.</value>
+        </member>
+        <member name="P:Z.EntityFramework.Plus.Internal.Core.SchemaObjectModel.SchemaEnumType.Members">
+            <summary>
+                Please visit the
+                <see href="http://msdn.microsoft.com/en-us/library/vstudio/bb399292(v=vs.100).aspx">
+                    Microsoft documentation
+                </see>
+                for more detail.
+            </summary>
+            <value>The members.</value>
+        </member>
+        <member name="M:Z.EntityFramework.Plus.Internal.Core.SchemaObjectModel.Utility.CreateGetFunc(System.Type,System.String)">
+            <summary>
+                Creates get function.
+            </summary>
+            <param name="type">The type.</param>
+            <param name="propertyName">Name of the property.</param>
+            <returns>The new get function.</returns>
+        </member>
+        <member name="M:Z.EntityFramework.Plus.Internal.Model.GetCodeFirstModel(System.Data.Entity.DbContext)">
+            <summary>
+                A DbContext extension method that gets database first model.
+            </summary>
+            <param name="context">The @this to act on.</param>
+            <returns>The database first model.</returns>
+        </member>
+        <member name="M:Z.EntityFramework.Plus.Internal.Model.GetConceptualModelString(System.Data.Entity.DbContext,System.String)">
+            <summary>
+                A DbContext extension method that gets conceptual model string.
+            </summary>
+            <exception cref="T:System.Exception">Thrown when an exception error condition occurs.</exception>
+            <param name="this">The @this to act on.</param>
+            <returns>The conceptual model string.</returns>
+        </member>
+        <member name="M:Z.EntityFramework.Plus.Internal.Model.GetDatabaseFirst(System.Data.Entity.DbContext)">
+            <summary>
+                A DbContext extension method that gets database first model.
+            </summary>
+            <param name="context">The @this to act on.</param>
+            <returns>The database first model.</returns>
+        </member>
+        <member name="M:Z.EntityFramework.Plus.Internal.Model.GetMappingModelString(System.Data.Entity.DbContext,System.String)">
+            <summary>
+                A DbContext extension method that gets mapping model string.
+            </summary>
+            <exception cref="T:System.Exception">Thrown when an exception error condition occurs.</exception>
+            <param name="this">The @this to act on.</param>
+            <returns>The mapping model string.</returns>
+        </member>
+        <member name="M:Z.EntityFramework.Plus.Internal.Model.GetModelName(System.Data.Entity.DbContext)">
+            <summary>
+                A DbContext extension method that gets model name.
+            </summary>
+            <param name="this">The @this to act on.</param>
+            <returns>The model name.</returns>
+        </member>
+        <member name="M:Z.EntityFramework.Plus.Internal.Model.GetModelNames(System.Data.Entity.DbContext)">
+            <summary>
+                A DbContext extension method that gets model name.
+            </summary>
+            <param name="this">The @this to act on.</param>
+            <returns>The model name.</returns>
+        </member>
+        <member name="M:Z.EntityFramework.Plus.Internal.Model.GetModelXDocument(System.Data.Entity.DbContext)">
+            <summary>
+                A DbContext extension method that gets model x coordinate document.
+            </summary>
+            <param name="db">The db to act on.</param>
+            <returns>The model x coordinate document.</returns>
+        </member>
+        <member name="M:Z.EntityFramework.Plus.Internal.Model.GetStorageModelString(System.Data.Entity.DbContext,System.String)">
+            <summary>
+                A DbContext extension method that gets storage model string.
+            </summary>
+            <exception cref="T:System.Exception">Thrown when an exception error condition occurs.</exception>
+            <param name="this">The @this to act on.</param>
+            <returns>The storage model string.</returns>
+        </member>
+        <member name="T:Z.EntityFramework.Plus.BatchDelete">
+            <summary>Class to batch delete.</summary>
+        </member>
+        <member name="F:Z.EntityFramework.Plus.BatchDelete.CommandTextTemplate">
+            <summary>The command text template.</summary>
+        </member>
+        <member name="F:Z.EntityFramework.Plus.BatchDelete.CommandTextPostgreSQLTemplate">
+            <summary>The command text postgre SQL template.</summary>
+        </member>
+        <member name="F:Z.EntityFramework.Plus.BatchDelete.CommandTextTemplate_MySql">
+            <summary>The command text postgre SQL template.</summary>
+        </member>
+        <member name="F:Z.EntityFramework.Plus.BatchDelete.CommandTextWhileTemplate">
+            <summary>The command text template with WHILE loop.</summary>
+        </member>
+        <member name="F:Z.EntityFramework.Plus.BatchDelete.CommandTextWhileDelayTemplate">
+            <summary>The command text template with DELAY and WHILE loop</summary>
+        </member>
+        <member name="M:Z.EntityFramework.Plus.BatchDelete.#ctor">
+            <summary>Default constructor.</summary>
+        </member>
+        <member name="P:Z.EntityFramework.Plus.BatchDelete.BatchSize">
+            <summary>Gets or sets the size of the batch.</summary>
+            <value>The size of the batch.</value>
+        </member>
+        <member name="P:Z.EntityFramework.Plus.BatchDelete.BatchDelayInterval">
+            <summary>Gets or sets the batch delay interval in milliseconds (The wait time between batch).</summary>
+            <value>The batch delay interval in milliseconds (The wait time between batch).</value>
+        </member>
+        <member name="P:Z.EntityFramework.Plus.BatchDelete.UseTableLock">
+            <summary>Gets or sets a value indicating whether the query use table lock.</summary>
+            <value>True if use table lock, false if not.</value>
+        </member>
+        <member name="P:Z.EntityFramework.Plus.BatchDelete.Executing">
+            <summary>Gets or sets the DbCommand before being executed.</summary>
+            <value>The DbCommand before being executed.</value>
+        </member>
+        <member name="M:Z.EntityFramework.Plus.BatchDelete.Execute``1(System.Linq.IQueryable{``0})">
+            <summary>Executes the batch delete operation.</summary>
+            <typeparam name="T">The type of elements of the query.</typeparam>
+            <param name="query">The query used to execute the batch operation.</param>
+            <returns>The number of rows affected.</returns>
+        </member>
+        <member name="M:Z.EntityFramework.Plus.BatchDelete.CreateCommand``1(System.Data.Entity.Core.Objects.ObjectQuery,Z.EntityFramework.Plus.Internal.Core.SchemaObjectModel.SchemaEntityType{``0})">
+            <summary>Creates a command to execute the batch operation.</summary>
+            <exception cref="T:System.Exception">Thrown when an exception error condition occurs.</exception>
+            <typeparam name="T">Generic type parameter.</typeparam>
+            <param name="query">The query.</param>
+            <param name="entity">The schema entity.</param>
+            <param name="visitor">The visitor.</param>
+            <returns>The new command to execute the batch operation.</returns>
+        </member>
+        <member name="T:Z.EntityFramework.Plus.BatchDeleteManager">
+            <summary>Manage EF+ Batch Delete Configuration.</summary>
+        </member>
+        <member name="P:Z.EntityFramework.Plus.BatchDeleteManager.BatchDeleteBuilder">
+            <summary>Gets or sets the batch delete builder to change default configuration.</summary>
+            <value>The batch delete builder to change default configuration.</value>
+        </member>
+        <member name="P:Z.EntityFramework.Plus.BatchDeleteManager.IsInMemoryQuery">
+            <summary>
+            Gets or sets a value indicating whether this object is in memory query.
+            </summary>
+            <value>True if this object is in memory query, false if not.</value>
+        </member>
+        <member name="T:Z.EntityFramework.Plus.BatchDeleteVisitor">
+            <summary>A batch delete visitor.</summary>
+        </member>
+        <member name="P:Z.EntityFramework.Plus.BatchDeleteVisitor.HasOrderBy">
+            <summary>Gets or sets a value indicating whether the expression contains an OrderBy method.</summary>
+            <value>true if the expression contains an OrderBy metho has order by, false if not.</value>
+        </member>
+        <member name="P:Z.EntityFramework.Plus.BatchDeleteVisitor.HasSkip">
+            <summary>Gets or sets a value indicating whether the expression contains an Skip method.</summary>
+            <value>true if the expression contains an Skip metho has order by, false if not.</value>
+        </member>
+        <member name="P:Z.EntityFramework.Plus.BatchDeleteVisitor.HasTake">
+            <summary>Gets or sets a value indicating whether the expression contains an Take method.</summary>
+            <value>true if the expression contains an Take metho has order by, false if not.</value>
+        </member>
+        <member name="M:Z.EntityFramework.Plus.BatchDeleteVisitor.VisitMethodCall(System.Linq.Expressions.MethodCallExpression)">
+            <summary>
+                Visits the children of the <see cref="T:System.Linq.Expressions.MethodCallExpression" />.
+            </summary>
+            <param name="node">The expression to visit.</param>
+            <returns>
+                The modified expression, if it or any subexpression was modified; otherwise, returns the
+                original expression.
+            </returns>
+        </member>
+        <member name="M:Z.EntityFramework.Plus.BatchDeleteExtensions.Delete``1(System.Linq.IQueryable{``0})">
+            <summary>
+                An IQueryable&lt;T&gt; extension method that deletes all rows from the query without
+                retrieving entities.
+            </summary>
+            <typeparam name="T">The type of elements of the query.</typeparam>
+            <param name="query">The query to delete rows from without retrieving entities.</param>
+            <returns>The number of rows affected.</returns>
+        </member>
+        <member name="M:Z.EntityFramework.Plus.BatchDeleteExtensions.Delete``1(System.Linq.IQueryable{``0},System.Action{Z.EntityFramework.Plus.BatchDelete})">
+            <summary>
+                An IQueryable&lt;T&gt; extension method that deletes all rows from the query without
+                retrieving entities.
+            </summary>
+            <typeparam name="T">The type of elements of the query.</typeparam>
+            <param name="query">The query to delete rows from without retrieving entities.</param>
+            <param name="batchDeleteBuilder">The batch builder action to change default configuration.</param>
+            <returns>The number of rows affected.</returns>
+        </member>
+        <member name="T:Z.EntityFramework.Extensions.Core.Mapping.ScalarAccessorMapping">
+            <summary>A scalar accessor mapping.</summary>
+        </member>
+        <member name="F:Z.EntityFramework.Extensions.Core.Mapping.ScalarAccessorMapping.GetValueFastGets">
+            <summary>The get value fast gets.</summary>
+        </member>
+        <member name="P:Z.EntityFramework.Extensions.Core.Mapping.ScalarAccessorMapping.IsFromAssociation">
+            <summary>Gets or sets a value indicating whether this object is from association.</summary>
+            <value>true if this object is from association, false if not.</value>
+        </member>
+        <member name="P:Z.EntityFramework.Extensions.Core.Mapping.ScalarAccessorMapping.IsComputed">
+            <summary>Gets or sets a value indicating whether this object is computed.</summary>
+            <value>true if this object is computed, false if not.</value>
+        </member>
+        <member name="P:Z.EntityFramework.Extensions.Core.Mapping.ScalarAccessorMapping.UseIsNullColumn">
+            <summary>Gets or sets a value indicating whether this object use is null column.</summary>
+            <value>true if use is null column, false if not.</value>
+        </member>
+        <member name="P:Z.EntityFramework.Extensions.Core.Mapping.ScalarAccessorMapping.AccessorPath">
+            <summary>Gets or sets the full pathname of the accessor file.</summary>
+            <value>The full pathname of the accessor file.</value>
+        </member>
+        <member name="P:Z.EntityFramework.Extensions.Core.Mapping.ScalarAccessorMapping.ColumnName">
+            <summary>Gets or sets the name of the column.</summary>
+            <value>The name of the column.</value>
+        </member>
+        <member name="P:Z.EntityFramework.Extensions.Core.Mapping.ScalarAccessorMapping.Type">
+            <summary>Gets or sets the type.</summary>
+            <value>The type.</value>
+        </member>
+        <member name="P:Z.EntityFramework.Extensions.Core.Mapping.ScalarAccessorMapping.IsStorageMapped">
+            <summary>Gets or sets a value indicating whether this object is storage mapped.</summary>
+            <value>true if this object is storage mapped, false if not.</value>
+        </member>
+        <member name="P:Z.EntityFramework.Extensions.Core.Mapping.ScalarAccessorMapping.IsKey">
+            <summary>Gets or sets a value indicating whether this object is key.</summary>
+            <value>true if this object is key, false if not.</value>
+        </member>
+        <member name="P:Z.EntityFramework.Extensions.Core.Mapping.ScalarAccessorMapping.ConstantValue">
+            <summary>Gets or sets the constant value.</summary>
+            <value>The constant value.</value>
+        </member>
+        <member name="M:Z.EntityFramework.Extensions.Core.Mapping.ScalarAccessorMapping.GetValue(System.Object)">
+            <summary>Gets a value.</summary>
+            <param name="obj">The object.</param>
+            <returns>The value.</returns>
+        </member>
+        <member name="M:Z.EntityFramework.Extensions.Core.Mapping.ScalarAccessorMapping.SetValue(System.Object,System.Object)">
+            <summary>Sets a value.</summary>
+            <param name="obj">The object.</param>
+            <param name="valueItem">The value item.</param>
+        </member>
+        <member name="M:Z.EntityFramework.Extensions.Core.Mapping.ScalarAccessorMapping.GetValueFastGet(System.Object)">
+            <summary>Gets value fast get.</summary>
+            <param name="obj">The object.</param>
+            <returns>The value fast get.</returns>
+        </member>
+        <member name="M:Z.EF.Plus.BatchUpdate.Shared.Extensions.DbModelPlusExtentions.To``1(System.Object)">
+            <summary>
+                A System.Object extension method that toes the given this.
+            </summary>
+            <typeparam name="T">Generic type parameter.</typeparam>
+            <param name="this">this.</param>
+            <returns>A T.</returns>
+        </member>
+        <member name="M:Z.EF.Plus.BatchUpdate.Shared.Extensions.DbModelPlusExtentions.To(System.Object,System.Type)">
+            <summary>
+                A System.Object extension method that toes the given this.
+            </summary>
+            <param name="this">this.</param>
+            <param name="type">The type.</param>
+            <returns>An object.</returns>
+            <example>
+                <code>
+            using System;
+            using Microsoft.VisualStudio.TestTools.UnitTesting;
+            
+            
+            namespace ExtensionMethods.Examples
+            {
+            [TestClass]
+            public class System_Object_To
+            {
+            [TestMethod]
+            public void To()
+            {
+            string nullValue = null;
+            string value = &quot;1&quot;;
+            object dbNullValue = DBNull.Value;
+            
+            // Exemples
+            var result1 = value.To&lt;int&gt;(); // return 1;
+            var result2 = value.To&lt;int?&gt;(); // return 1;
+            var result3 = nullValue.To&lt;int?&gt;(); // return null;
+            var result4 = dbNullValue.To&lt;int?&gt;(); // return null;
+            
+            // Unit Test
+            Assert.AreEqual(1, result1);
+            Assert.AreEqual(1, result2.Value);
+            Assert.IsFalse(result3.HasValue);
+            Assert.IsFalse(result4.HasValue);
+            }
+            }
+            }
+            </code>
+            </example>
+            <example>
+                <code>
+            using System;
+            using Microsoft.VisualStudio.TestTools.UnitTesting;
+            
+            
+            namespace ExtensionMethods.Examples
+            {
+            [TestClass]
+            public class System_Object_To
+            {
+            [TestMethod]
+            public void To()
+            {
+            string nullValue = null;
+            string value = &quot;1&quot;;
+            object dbNullValue = DBNull.Value;
+            
+            // Exemples
+            var result1 = value.To&lt;int&gt;(); // return 1;
+            var result2 = value.To&lt;int?&gt;(); // return 1;
+            var result3 = nullValue.To&lt;int?&gt;(); // return null;
+            var result4 = dbNullValue.To&lt;int?&gt;(); // return null;
+            
+            // Unit Test
+            Assert.AreEqual(1, result1);
+            Assert.AreEqual(1, result2.Value);
+            Assert.IsFalse(result3.HasValue);
+            Assert.IsFalse(result4.HasValue);
+            }
+            }
+            }
+            </code>
+            </example>
+        </member>
+        <member name="P:Z.EF.Plus.BatchUpdate.Shared.Model.TableDefinition.Order">
+            <summary>
+            When dealing with inherited types, update the entity with the highest order (no dependencies first)
+            </summary>
+        </member>
+    </members>
+</doc>

@@ -1,0 +1,129 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{921F1D88-9C34-450D-A0CB-105B30153C2A}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>VISAHealthMonitorCommon</RootNamespace>
+    <AssemblyName>VISAHealthMonitorCommon</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="GalaSoft.MvvmLight.WPF4, Version=3.0.0.19994, Culture=neutral, PublicKeyToken=63eb5c012e0b3c1c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\..\..\Program Files (x86)\Laurent Bugnion (GalaSoft)\Mvvm Light Toolkit\Binaries\WPF4\GalaSoft.MvvmLight.WPF4.dll</HintPath>
+    </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xaml" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="certificates\CertificateHelper.cs" />
+    <Compile Include="checksums\VisaChecksumRetriever.cs" />
+    <Compile Include="checksums\WikiChecksumRetriever.cs" />
+    <Compile Include="formattedvalues\BaseFormattedValues.cs" />
+    <Compile Include="formattedvalues\FormattedDate.cs" />
+    <Compile Include="formattedvalues\FormattedDecimal.cs" />
+    <Compile Include="formattedvalues\FormattedBytes.cs" />
+    <Compile Include="formattedvalues\FormattedNumber.cs" />
+    <Compile Include="formattedvalues\FormattedTime.cs" />
+    <Compile Include="IOUtilities.cs" />
+    <Compile Include="jmx\JmxSystemProperties.cs" />
+    <Compile Include="jmx\JmxThreadStackTraceElement.cs" />
+    <Compile Include="jmx\JmxUtility.cs" />
+    <Compile Include="jmx\JmxThread.cs" />
+    <Compile Include="jmx\JmxMemoryInformation.cs" />
+    <Compile Include="jmx\KnownJmxAttribute.cs" />
+    <Compile Include="ListViewSortedCollectionViewSource.cs" />
+    <Compile Include="messages\AllSourcesHealthUpdateMessage.cs" />
+    <Compile Include="messages\AsyncHealthRefreshUpdateMessage.cs" />
+    <Compile Include="messages\BaseVisaHealthMessage.cs" />
+    <Compile Include="messages\CursorChangeMessage.cs" />
+    <Compile Include="messages\DisplayVisaHealthMessage.cs" />
+    <Compile Include="messages\ReloadSourcesMessage.cs" />
+    <Compile Include="messages\StartStopIntervalTestMessage.cs" />
+    <Compile Include="messages\StatusMessage.cs" />
+    <Compile Include="messages\TestAllSourcesMessage.cs" />
+    <Compile Include="messages\UpdateAndDisplayVisaHealthMessage.cs" />
+    <Compile Include="messages\UpdateSourcesMessage.cs" />
+    <Compile Include="messages\VisaHealthUpdatedMessage.cs" />
+    <Compile Include="monitorederror\MonitoredError.cs" />
+    <Compile Include="monitorederror\MonitoredErrorHelper.cs" />
+    <Compile Include="MouseDoubleClickBehavior.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="roi\ROIConfiguration.cs" />
+    <Compile Include="roi\ROIConfigurationHelper.cs" />
+    <Compile Include="VISADetailsViewModel.cs" />
+    <Compile Include="VisaHealth.cs" />
+    <Compile Include="VisaHealthSource.cs" />
+    <Compile Include="VisaHealthManager.cs" />
+    <Compile Include="wiki\VixAdministrator.cs" />
+    <Compile Include="wiki\VixAdministratorsHelper.cs" />
+    <Compile Include="wiki\VixCurrentVersionHelper.cs" />
+    <Compile Include="wiki\WikiConfiguration.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SiteService\SiteService.csproj">
+      <Project>{BE2DDE43-F8B3-426F-9D3F-A6153F29DBDE}</Project>
+      <Name>SiteService</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\VISAChecksums\VISAChecksums.csproj">
+      <Project>{C2D8C1E9-362C-4F93-8370-D58BA3B4D618}</Project>
+      <Name>VISAChecksums</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\VISACommon\VISACommon.csproj">
+      <Project>{81ACD46B-4837-47E0-AAF1-DE7DA2C5DE9A}</Project>
+      <Name>VISACommon</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="events\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  <Target Name="AfterCompile">
+    <NotifyPropertyWeaverMsBuildTask.WeavingTask />
+  </Target>
+  <UsingTask TaskName="NotifyPropertyWeaverMsBuildTask.WeavingTask" AssemblyFile="$(SolutionDir)Tools\NotifyPropertyWeaverMsBuildTask.dll" />
+</Project>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<build
+ name="MAG*3.0*116"
+ patch="116"
+ patchName="Version 3.0 Patch 116 - Query Retrieve Provider II">
+	<routines>
+	</routines>
+</build>
+

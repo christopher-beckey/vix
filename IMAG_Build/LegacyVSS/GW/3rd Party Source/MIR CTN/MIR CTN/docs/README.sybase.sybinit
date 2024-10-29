@@ -1,0 +1,454 @@
+perdita% sybinit
+The log file for this session is '/sw3/sybase/init/logs/log1120.002'.
+ 
+SYBINIT                                                                        
+                                                                               
+1.  Release directory:  /sw3/sybase                                            
+                                                                               
+2.  Edit / View Interfaces File                                                
+                                                                               
+3.  Configure a Server product                                                 
+4.  Configure an Open Client/Server product                                    
+                                                                               
+                                                                               
+                                                                               
+                                                                               
+                                                                               
+                                                                               
+                                                                               
+                                                                               
+                                                                               
+                                                                               
+Ctrl-a Accept and Continue, Ctrl-x Exit Screen, ? Help.
+ 
+Enter the number of your choice and press return: 4
+
+************************************************************
+CONFIGURE CONNECTIVITY PRODUCTS                                                
+                                                                               
+Products:                                                                      
+                                                                               
+    Product                 Date Installed    Date Configured                  
+1.  Open Client Library     Jan 24 94 12:13 
+                                                                               
+                                                                               
+                                                                               
+                                                                               
+                                                                               
+                                                                               
+                                                                               
+                                                                               
+                                                                               
+                                                                               
+                                                                               
+                                                                               
+Ctrl-a Accept and Continue, Ctrl-x Exit Screen, ? Help.
+ 
+Enter the number of your choice and press return: 1
+Running task to initialize Open Client Library. 
+ 
+Successfully initialized 'Open Client Library'. 
+Press <return> to continue. 
+ 
+Configuration completed successfully. 
+Press <return> to continue. 
+
+
+************************************************************
+CONFIGURE CONNECTIVITY PRODUCTS                                                
+                                                                               
+Products:                                                                      
+                                                                               
+    Product                 Date Installed    Date Configured                  
+1.  Open Client Library     Jan 24 94 12:13   Nov 20 95 09:35                  
+                                                                               
+                                                                               
+                                                                               
+                                                                               
+                                                                               
+                                                                               
+                                                                               
+                                                                               
+                                                                               
+                                                                               
+                                                                               
+                                                                               
+Ctrl-a Accept and Continue, Ctrl-x Exit Screen, ? Help.
+ 
+Enter the number of your choice and press return: ^A 
+
+************************************************************
+SYBINIT                                                                        
+                                                                               
+1.  Release directory:  /sw3/sybase                                            
+                                                                               
+2.  Edit / View Interfaces File                                                
+                                                                               
+3.  Configure a Server product                                                 
+4.  Configure an Open Client/Server product                                    
+                                                                               
+                                                                               
+                                                                               
+                                                                               
+                                                                               
+                                                                               
+                                                                               
+                                                                               
+                                                                               
+                                                                               
+Ctrl-a Accept and Continue, Ctrl-x Exit Screen, ? Help.
+ 
+Enter the number of your choice and press return: 3
+
+
+
+************************************************************
+CONFIGURE SERVER PRODUCTS                                                      
+                                                                               
+Products:                                                                      
+                                                                               
+    Product                 Date Installed    Date Configured                  
+1.  SQL Server              Jan 24 94 12:13
+2.  Backup Server           Jan 24 94 12:13                                    
+                                                                               
+                                                                               
+                                                                               
+                                                                               
+                                                                               
+                                                                               
+                                                                               
+                                                                               
+                                                                               
+                                                                               
+                                                                               
+Ctrl-a Accept and Continue, Ctrl-x Exit Screen, ? Help.
+ 
+Enter the number of your choice and press return: 1
+
+************************************************************
+NEW OR EXISTING SQL SERVER                                                     
+                                                                               
+1.  Configure a new SQL Server                                                 
+2.  Configure an existing SQL Server                                           
+3.  Upgrade an existing SQL Server                                             
+                                                                               
+                                                                               
+                                                                               
+                                                                               
+                                                                               
+                                                                               
+                                                                               
+                                                                               
+                                                                               
+                                                                               
+                                                                               
+                                                                               
+                                                                               
+Ctrl-a Accept and Continue, Ctrl-x Exit Screen, ? Help.
+ 
+Enter the number of your choice and press return: 1
+
+
+************************************************************
+ADD NEW SQL SERVER                                                             
+                                                                               
+1.  SQL Server name:  SYBASE                                                   
+                                                                               
+                                                                               
+                                                                               
+                                                                               
+                                                                               
+                                                                               
+                                                                               
+                                                                               
+                                                                               
+                                                                               
+                                                                               
+                                                                               
+                                                                               
+                                                                               
+                                                                               
+Ctrl-a Accept and Continue, Ctrl-x Exit Screen, ? Help.
+ 
+Enter the number of your choice and press return: 1
+
+Enter the name of the new SQL Server (default is 'SYBASE'):
+
+************************************************************
+SERVER INTERFACES FILE ENTRY SCREEN                                            
+                                                                               
+    Server name:  SYBASE                                                        
+                                                                               
+1.  Retry Count:  0                                                            
+2.  Retry Delay:  0                                                            
+                                                                               
+3.  Add a new listener service                                                 
+                                                                               
+                                                                               
+                                                                               
+                                                                               
+                                                                               
+                                                                               
+                                                                               
+                                                                               
+                                                                               
+                                                                               
+Ctrl-a Accept and Continue, Ctrl-x Exit Screen, ? Help.
+ 
+Enter the number of your choice and press return: [1, 2 then 3]
+
+	1. Set the retry count to 2
+	2. Set the retry delay to 2
+
+	3. When 3 is selected you get...
+
+
+
+************************************************************
+EDIT TCP SERVICE                                                               
+                                                                               
+1.  Hostname/Address: perdita                                                  
+2.  Port:                                                                      
+3.  Name Alias:                                                                
+                                                                               
+4.  Delete this service from the interfaces entry                              
+                                                                               
+                                                                               
+                                                                               
+                                                                               
+                                                                               
+                                                                               
+                                                                               
+                                                                               
+                                                                               
+Ctrl-a Accept and Continue, Ctrl-x Exit Screen, ? Help.
+ 
+Enter the number of your choice and press return: 2
+Enter the port number to use for this entry (default is ''): 
+You enter 5000
+
+************************************************************
+EDIT TCP SERVICE                                                               
+                                                                               
+1.  Hostname/Address: perdita                                                  
+2.  Port: 5000                                                                 
+3.  Name Alias:                                                                
+                                                                               
+4.  Delete this service from the interfaces entry                              
+                                                                               
+                                                                               
+                                                                               
+                                                                               
+                                                                               
+                                                                               
+                                                                               
+                                                                               
+                                                                               
+Ctrl-a Accept and Continue, Ctrl-x Exit Screen, ? Help.
+ 
+Enter the number of your choice and press return: ^A
+Is this information correct? y
+
+
+************************************************************
+SERVER INTERFACES FILE ENTRY SCREEN                                            
+                                                                               
+    Server name:  SYBASE                                                        
+                                                                               
+1.  Retry Count:  2                                                            
+2.  Retry Delay:  2                                                            
+                                                                               
+3.  Add a new listener service                                                 
+                                                                               
+Modify or delete a service                                                     
+                                                                               
+Listener services available:                                                   
+                                                                               
+    Protocol  Address          Port          Name Alias                        
+4.  tcp       perdita          5000                                            
+                                                                               
+                                                                               
+                                                                               
+                                                                               
+                                                                               
+Ctrl-a Accept and Continue, Ctrl-x Exit Screen, ? Help.
+ 
+Enter the number of your choice and press return: ^A
+Write the changes to the interfaces file now? y
+
+	1. If things aren't right...go back and change them.
+
+************************************************************
+SQL SERVER CONFIGURATION                                                       
+                                                                               
+1.  CONFIGURE SERVER'S INTERFACES FILE ENTRY                  Complete         
+                                                                               
+2.  MASTER DEVICE CONFIGURATION                             Incomplete         
+3.  SYBSYSTEMPROCS DATABASE CONFIGURATION                   Incomplete         
+4.  SET ERRORLOG LOCATION                                   Incomplete         
+5.  CONFIGURE DEFAULT BACKUP SERVER                         Incomplete         
+                                                                               
+6.  CONFIGURE LANGUAGES                                     Incomplete         
+7.  CONFIGURE CHARACTER SETS                                Incomplete         
+8.  CONFIGURE SORT ORDER                                    Incomplete         
+                                                                               
+9.  ACTIVATE AUDITING                                       Incomplete         
+                                                                               
+                                                                               
+                                                                               
+                                                                               
+Ctrl-a Accept and Continue, Ctrl-x Exit Screen, ? Help.
+ 
+Enter the number of your choice and press return: 2
+
+
+************************************************************
+MASTER DEVICE CONFIGURATION                                                    
+                                                                               
+1.  Master Device:  /sw3/sybase/master.dat                                     
+                                                                               
+2.  Size (Meg):  17                                                            
+                                                                               
+                                                                               
+                                                                               
+                                                                               
+                                                                               
+                                                                               
+                                                                               
+                                                                               
+                                                                               
+                                                                               
+                                                                               
+                                                                               
+                                                                               
+Ctrl-a Accept and Continue, Ctrl-x Exit Screen, ? Help.
+ 
+Enter the number of your choice and press return: [Select 1 then 2, the ^A]
+
+	1. Give the name for the master device. This is just a regular
+	file that will be used to hold the sybase master database device.
+	It will question you about the fact that this is a regular file...
+
+	i.e.
+	WARNING: '/sw3/sybase/master.dat' is a regular file which is not recommended for
+	a Server device. 
+	Press <return> to continue.
+
+	That's just fine.
+
+	2. Set the size to 20 Meg.
+
+	3. Press ^A to continue.
+
+
+************************************************************
+SQL SERVER CONFIGURATION                                                       
+                                                                               
+1.  CONFIGURE SERVER'S INTERFACES FILE ENTRY                  Complete         
+                                                                               
+2.  MASTER DEVICE CONFIGURATION                               Complete         
+3.  SYBSYSTEMPROCS DATABASE CONFIGURATION                   Incomplete         
+4.  SET ERRORLOG LOCATION                                   Incomplete         
+5.  CONFIGURE DEFAULT BACKUP SERVER                         Incomplete         
+                                                                               
+6.  CONFIGURE LANGUAGES                                     Incomplete         
+7.  CONFIGURE CHARACTER SETS                                Incomplete         
+8.  CONFIGURE SORT ORDER                                    Incomplete         
+                                                                               
+9.  ACTIVATE AUDITING                                       Incomplete         
+                                                                               
+                                                                               
+                                                                               
+                                                                               
+Ctrl-a Accept and Continue, Ctrl-x Exit Screen, ? Help.
+ 
+Enter the number of your choice and press return: 3
+
+************************************************************
+SYBSYSTEMPROCS DATABASE CONFIGURATION                                          
+                                                                               
+1.  sybsystemprocs database size (Meg):  12                                    
+                                                                               
+2.  sybsystemprocs logical device name:  sysprocsdev                           
+                                                                               
+3.  create new device for the sybsystemprocs database:  yes                    
+                                                                               
+4.  physical name of new device:  /sw3/sybase/sybprocs.dat                     
+                                                                               
+5.  size of the new device (Meg):  12                                          
+                                                                               
+                                                                               
+                                                                               
+                                                                               
+                                                                               
+                                                                               
+                                                                               
+Ctrl-a Accept and Continue, Ctrl-x Exit Screen, ? Help.
+ 
+Enter the number of your choice and press return: [Type 4 then ^A]
+
+	1. We need a file somewhere to keep the system procedures.
+
+	2. Keep the other defaults once you have put in the correct
+	filename.
+
+	3. Continue with ^A.
+
+
+************************************************************
+SQL SERVER CONFIGURATION                                                       
+                                                                               
+1.  CONFIGURE SERVER'S INTERFACES FILE ENTRY                  Complete         
+                                                                               
+2.  MASTER DEVICE CONFIGURATION                               Complete         
+3.  SYBSYSTEMPROCS DATABASE CONFIGURATION                     Complete         
+4.  SET ERRORLOG LOCATION                                   Incomplete         
+5.  CONFIGURE DEFAULT BACKUP SERVER                         Incomplete         
+                                                                               
+6.  CONFIGURE LANGUAGES                                     Incomplete         
+7.  CONFIGURE CHARACTER SETS                                Incomplete         
+8.  CONFIGURE SORT ORDER                                    Incomplete         
+                                                                               
+9.  ACTIVATE AUDITING                                       Incomplete         
+                                                                               
+                                                                               
+Ctrl-a Accept and Continue, Ctrl-x Exit Screen, ? Help.
+ 
+Enter the number of your choice and press return: [4 thru 9]
+
+	1. Just go into the rest of these screens and take the defaults
+	by typing ^A....then when you finish with 9, you should get the
+	following screen:
+
+************************************************************
+SQL SERVER CONFIGURATION                                                       
+                                                                               
+1.  CONFIGURE SERVER'S INTERFACES FILE ENTRY                  Complete         
+                                                                               
+2.  MASTER DEVICE CONFIGURATION                               Complete         
+3.  SYBSYSTEMPROCS DATABASE CONFIGURATION                     Complete         
+4.  SET ERRORLOG LOCATION                                     Complete         
+5.  CONFIGURE DEFAULT BACKUP SERVER                           Complete         
+                                                                               
+6.  CONFIGURE LANGUAGES                                       Complete         
+7.  CONFIGURE CHARACTER SETS                                  Complete         
+8.  CONFIGURE SORT ORDER                                      Complete         
+                                                                               
+9.  ACTIVATE AUDITING                                         Complete         
+                                                                               
+                                                                               
+Ctrl-a Accept and Continue, Ctrl-x Exit Screen, ? Help.
+ 
+Enter the number of your choice and press return: ^A
+
+Execute the SQL Server Configuration now? n
+
+	1. You should execute the server configuration now by pressing
+	"y" and return (no quotes).  This will build the master device,
+	build the systempprocs device, and start the server...this is
+	a good test to see if it will build and start, or if something
+	has screwed up.
+
+	2. If it doesn't work, the error message you get won't give you
+	the *slightest* idea as to why the server would not start...
+	(but check shared memory and semaphores first)

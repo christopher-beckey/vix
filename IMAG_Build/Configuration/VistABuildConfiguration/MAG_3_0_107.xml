@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<build xmlns="http://va.gov/VistA/kids/manifest" name="MAG*3.0*107" patchName="Clinical Client Refactor" patch="107">
+  <components>
+    <securityKeys />
+    <parameterDefinitions />
+    <printTemplates />
+    <hl7s />
+    <menuOptions />
+    <sorts />
+    <rpcs />
+    <dataDictionaries />
+    <routines />
+    <protocols />
+  </components>
+</build>

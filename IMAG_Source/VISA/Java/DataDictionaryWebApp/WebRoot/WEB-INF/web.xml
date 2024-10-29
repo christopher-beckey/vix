@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="2.5" 
+	xmlns="http://java.sun.com/xml/ns/javaee" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
+	http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+  <display-name></display-name>	
+  <welcome-file-list>
+    <welcome-file>index.jsp</welcome-file>
+  </welcome-file-list>
+  
+  <listener>
+		<description>
+			The Spring servlet context listener that loads the
+			application context.
+		</description>
+		<display-name>Spring context loader listener</display-name>
+		<listener-class>
+			org.springframework.web.context.ContextLoaderListener
+		</listener-class>
+	</listener>
+	
+	<filter>
+		<description>
+			Sets the security context on the request and clears it on
+			the response.
+		</description>
+		<display-name>
+			Security Context Creation and Destruction
+		</display-name>
+		<filter-name>SecurityFilter</filter-name>
+		<filter-class>
+			org.springframework.web.filter.DelegatingFilterProxy
+		</filter-class>
+		<!-- <filter-class>gov.va.med.imaging.SecurityFilter</filter-class>  -->
+		<init-param>
+			<param-name>targetBeanName</param-name>
+			<param-value>securityFilter</param-value>
+		</init-param>
+	</filter>
+  
+  <servlet>
+  	<display-name>JAX-RS REST Servlet</display-name>
+  	<servlet-name>JAX-RS REST Servlet</servlet-name>
+  	<servlet-class>
+  		com.sun.jersey.spi.container.servlet.ServletContainer
+  	</servlet-class>
+  	<load-on-startup>1</load-on-startup>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>JAX-RS REST Servlet</servlet-name>
+  	<url-pattern>/services/*</url-pattern>
+  </servlet-mapping>
+  <filter-mapping>
+		<filter-name>SecurityFilter</filter-name>
+		<servlet-name>JAX-RS REST Servlet</servlet-name>
+	</filter-mapping>
+  
+  <security-constraint>
+		<display-name>VistA Imaging Web Security Constraint</display-name>
+		<web-resource-collection>
+			<web-resource-name>DataDictionaryWebApp</web-resource-name>
+			<description>Everything in the secure directory is secured</description>
+			<url-pattern>/services/*</url-pattern>
+		</web-resource-collection>
+		<auth-constraint>
+			<role-name>administrator</role-name>
+			<role-name>developer</role-name>
+		</auth-constraint>
+		<user-data-constraint>
+			<transport-guarantee>NONE</transport-guarantee>
+		</user-data-constraint>
+	</security-constraint>
+	
+	<!--Null security constraint-->
+	<security-constraint>
+		<display-name>Null Security Constraint</display-name>
+		<web-resource-collection>
+			<web-resource-name>DataDictionaryWebApp</web-resource-name>
+			<description>Null filter; should affect no calls</description>
+			<url-pattern>/nullfilter/*</url-pattern>
+		</web-resource-collection>
+		<auth-constraint>
+			<role-name>administrator</role-name>
+			<role-name>developer</role-name>
+		</auth-constraint>
+		<user-data-constraint>
+			<transport-guarantee>NONE</transport-guarantee>
+		</user-data-constraint>
+	</security-constraint>
+	
+	<login-config>
+		<auth-method>BASIC</auth-method>
+	</login-config>
+	
+	<!-- 
+	<login-config>
+		<auth-method>FORM</auth-method>
+		<form-login-config>
+			<form-login-page>/Login.html</form-login-page>
+			<form-error-page>/LoginError.html</form-error-page>
+		</form-login-config>
+	</login-config>
+	-->
+	<security-role>
+		<role-name>administrator</role-name>
+	</security-role>
+	<security-role>
+		<role-name>developer</role-name>
+	</security-role>
+</web-app>

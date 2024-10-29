@@ -1,0 +1,131 @@
+# Microsoft Developer Studio Generated Dependency File, included by reconstruct.mak
+
+.\EnDICOM.cpp : \
+	".\EnDICOM.h"\
+	".\Exception.h"\
+	".\LineEntry.h"\
+	".\Parser.h"\
+	".\PDUServ.h"\
+	".\reconstruct.h"\
+	".\Reconstructor.h"\
+	".\StdAfx.h"\
+	".\Stdout.h"\
+	".\TagLine.h"\
+	
+
+.\Exception.cpp : \
+	".\EnDICOM.h"\
+	".\Exception.h"\
+	".\LineEntry.h"\
+	".\Parser.h"\
+	".\PDUServ.h"\
+	".\reconstruct.h"\
+	".\Reconstructor.h"\
+	".\StdAfx.h"\
+	".\Stdout.h"\
+	".\TagLine.h"\
+	
+
+.\LineEntry.cpp : \
+	".\EnDICOM.h"\
+	".\Exception.h"\
+	".\LineEntry.h"\
+	".\Parser.h"\
+	".\PDUServ.h"\
+	".\reconstruct.h"\
+	".\Reconstructor.h"\
+	".\StdAfx.h"\
+	".\Stdout.h"\
+	".\TagLine.h"\
+	
+
+.\Parser.cpp : \
+	".\EnDICOM.h"\
+	".\Exception.h"\
+	".\LineEntry.h"\
+	".\Parser.h"\
+	".\PDUServ.h"\
+	".\reconstruct.h"\
+	".\Reconstructor.h"\
+	".\StdAfx.h"\
+	".\Stdout.h"\
+	".\TagLine.h"\
+	
+
+.\PDUServ.cpp : \
+	".\EnDICOM.h"\
+	".\Exception.h"\
+	".\LineEntry.h"\
+	".\Parser.h"\
+	".\PDUServ.h"\
+	".\reconstruct.h"\
+	".\Reconstructor.h"\
+	".\StdAfx.h"\
+	".\Stdout.h"\
+	".\TagLine.h"\
+	
+
+.\reconstruct.cpp : \
+	".\EnDICOM.h"\
+	".\Exception.h"\
+	".\LineEntry.h"\
+	".\Parser.h"\
+	".\PDUServ.h"\
+	".\reconstruct.h"\
+	".\Reconstructor.h"\
+	".\StdAfx.h"\
+	".\Stdout.h"\
+	".\TagLine.h"\
+	
+
+.\Reconstructor.cpp : \
+	".\EnDICOM.h"\
+	".\Exception.h"\
+	".\LineEntry.h"\
+	".\Parser.h"\
+	".\PDUServ.h"\
+	".\reconstruct.h"\
+	".\Reconstructor.h"\
+	".\StdAfx.h"\
+	".\Stdout.h"\
+	".\TagLine.h"\
+	
+
+.\StdAfx.cpp : \
+	".\EnDICOM.h"\
+	".\Exception.h"\
+	".\LineEntry.h"\
+	".\Parser.h"\
+	".\PDUServ.h"\
+	".\reconstruct.h"\
+	".\Reconstructor.h"\
+	".\StdAfx.h"\
+	".\Stdout.h"\
+	".\TagLine.h"\
+	
+
+.\Stdout.cpp : \
+	".\EnDICOM.h"\
+	".\Exception.h"\
+	".\LineEntry.h"\
+	".\Parser.h"\
+	".\PDUServ.h"\
+	".\reconstruct.h"\
+	".\Reconstructor.h"\
+	".\StdAfx.h"\
+	".\Stdout.h"\
+	".\TagLine.h"\
+	
+
+.\TagLine.cpp : \
+	".\EnDICOM.h"\
+	".\Exception.h"\
+	".\LineEntry.h"\
+	".\Parser.h"\
+	".\PDUServ.h"\
+	".\reconstruct.h"\
+	".\Reconstructor.h"\
+	".\StdAfx.h"\
+	".\Stdout.h"\
+	".\TagLine.h"\
+	

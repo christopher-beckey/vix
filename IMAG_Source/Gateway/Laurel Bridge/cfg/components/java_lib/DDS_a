@@ -1,0 +1,83 @@
+#==============================================================================
+# static information common to all instances of DDS_a component
+#==============================================================================
+[ component_info ]
+name = DDS_a
+type = java_lib
+category = common_service_implementation_libs
+description = DICOM Data Service Adapter - Java reference implementation of DDS interface
+package_prefix = com.lbs
+slnreldir = .\jsrc\com\lbs\DDS_a
+
+[ required_components ]
+component = java_lib/DCF
+component = java_lib/DDS
+component = java_lib/DCS
+component = java_lib/DSS
+[ debug_controls ]
+debug_flag = df_SHOW_CONSTRUCTORS, 0x0001, show object constructors
+debug_flag = df_SHOW_DESTRUCTORS, 0x0002, show object destructors
+debug_flag = df_SHOW_GENERAL_FLOW, 0x0004, show general flow
+debug_flag = df_SIMULATE_HARDWARE, 0x0008, simulate external devices
+debug_flag = df_SHOW_CFG_INFO, 0x0010, show configuration information
+debug_flag = df_SHOW_EXC_THROW, 0x0020, show exceptions before throwing
+debug_flag = df_SHOW_PIXEL_DATA,     0x20000, show image pixel data (very verbose!)
+
+#==============================================================================
+# per-instance information for the DDS_a component
+#==============================================================================
+[ DDS_a ]
+debug_flags = 0x00000
+
+image_directory = C:/DCF/DCF-3.3.22c/tmp/scp_images
+image_reference_directory = C:/DCF/DCF-3.3.22c/tmp/job_images
+#
+# if true, storeObject will create a new unique identifier to use as the
+# filename. Currently, this will not change the sop instance uid in the
+# data set. This must be false for the automated store test to work.
+make_new_uids = NO
+save_command_data = NO
+enable_cds_instance_db = no
+db_group_name = /dicom/instance_db
+enable_commit_server = false
+
+# if true, storeObject will always create chapter 10 files.
+create_chapter_10_format = true
+invent_group_2_data = true
+
+# If true, then files are saved in the transfer syntax
+# that was used to send them.
+preserve_transfer_syntax = false
+#
+# un-comment one of the following transfer syntax uids.
+# this will determine the format of files written to disk
+# by the DDS reference implementation adapter DDS_a
+#
+# implicit-little-endian
+#transfer_syntax_uid = 1.2.840.10008.1.2
+# explicit-little-endian
+transfer_syntax_uid = 1.2.840.10008.1.2.1
+# explicit-big-endian
+#transfer_syntax_uid = 1.2.840.10008.1.2.2
+
+# if true, demonstrate the DataSetByteReader class for making
+# a a decoded, and re-encoded network C-Store-Request look like
+# a ReadableByteChannel or InputStream object.
+#
+use_byte_reader = NO
+
+#
+# The attribute "test_cfg_name" can be set to another CFGGroup that contains
+# sample image or other object information. The findObjects method will
+# return all objects listed in this group.
+# The format of this group is as follows:
+# [ object-1 ]
+# persistent_id = filename of dicom object 1
+# persistent_info = transfer syntax uid
+# ...
+# [ object-n ]
+# persistent_id = filename of dicom object n
+# persistent_info = transfer syntax uid
+#
+#test_cfg_name = file:/tmp/sample_images.cfg
+x = 1

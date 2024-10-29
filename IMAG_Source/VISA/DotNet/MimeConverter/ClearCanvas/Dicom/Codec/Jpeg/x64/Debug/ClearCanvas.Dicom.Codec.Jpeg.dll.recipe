@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project>
+  <ProjectOutputs>
+    <ProjectOutput>
+      <FullPath>C:\usr\Hydra4\ClearCanvas\Dicom\Codec\Jpeg\x64\Debug\ClearCanvas.Dicom.Codec.Jpeg.dll</FullPath>
+    </ProjectOutput>
+  </ProjectOutputs>
+  <ContentFiles />
+  <SatelliteDlls />
+  <NonRecipeFileRefs>
+    <NonRecipeFileRef>
+      <FullPath>C:\usr\Hydra4\ClearCanvas\Common\ClearCanvas.Common.csproj</FullPath>
+    </NonRecipeFileRef>
+    <NonRecipeFileRef>
+      <FullPath>C:\usr\Hydra4\ClearCanvas\Dicom\ClearCanvas.Dicom.csproj</FullPath>
+    </NonRecipeFileRef>
+  </NonRecipeFileRefs>
+</Project>

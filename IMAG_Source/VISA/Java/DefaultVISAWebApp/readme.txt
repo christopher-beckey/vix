@@ -1,0 +1,3 @@
+1/25/2013 - JMW
+
+Originally Chris envisioned this web application to be an extremely generic VISA landing page that required absolutely nothing. Unfortunately this is not very useful so we have decided to add the version number to the web page so users can easily determine what the version of the VISA installation is. This requires adding dependencies on other projects thus no longer making this a generic project. Oh well... 

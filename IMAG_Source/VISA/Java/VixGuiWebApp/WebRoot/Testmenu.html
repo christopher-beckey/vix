@@ -1,0 +1,95 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<HTML>
+	<HEAD>
+		<title>Demo 1: Menu bar</title>
+
+		<link rel="stylesheet" href="style/demos.css" media="screen" type="text/css">
+		<script type="text/javascript" src="script/menu-for-applications.js"></script>
+		<script type="text/javascript">
+			var myVar = 1;
+			
+			function saveWork(){
+				alert('Saving work ');
+			}
+			
+			function init() {
+				// create the menu model before accessing the configuration
+				// object because the configuration object does not exist until
+				// the menu model is created
+				var menuModel = new DHTMLSuite.menuModel();
+				
+				DHTMLSuite.configObj.setCssPath('/Vix/style/');
+				DHTMLSuite.configObj.setImagePath('/Vix/images/');
+				
+				menuModel.addItemsFromMarkup('menuModel');
+				menuModel.init();
+				
+				var menuBar = new DHTMLSuite.menuBar();
+				menuBar.addMenuItems(menuModel);
+				menuBar.setTarget('menuDiv');
+				menuBar.init();
+			}
+			
+		</script>
+	</head>
+	<body onload="init();">
+		<!-- This <ul><li> list is the source of a menuModel object -->
+		
+		<ul id="menuModel">
+			<li id="50000"><a href="/Vix/index.jsp">Home</a></li>
+			<li id="50001"><a href="#">Web Client</a>
+				<ul width="150">
+					<li id="50002"><a href="/Vix/secure/FindPatient.jspx">Find Patient</a></li>
+					<li id="50003"><a href="/Vix/secure/FindTreatingFacilityList.jspx">Treating Facilities</a></li> 
+					<li id="50004"><a href="/Vix/secure/FindPatientStudies.jspx">Patient Studies</a></li> 
+				</ul>
+			</li>
+			<li id="50005"><a ref="#">Administration</a>
+				<ul width="150">
+					<li id="50006"><a href="/Vix/secure/TransactionLog.jspx">Transaction Logs</a></li> 
+					<li id="50007"><a href="/Vix/secure/ResolvedSites.jspx">Site List</a></li> 
+					<li id="50008"><a href="/Vix/secure/SystemProperties.jspx">System Properties</a></li> 
+				</ul>
+			</li>
+			<li id="50009"><a ref="#">Test Clients</a>
+				<ul width="150">
+					<li id="50010"><a href="/Vix/secure/ClinicalDisplayTestClient.jspx">Clinical Display</a></li> 
+					<li id="50011"><a href="/Vix/secure/ExchangeTestClient.jspx">Exchange</a></li> 
+					<li id="50012"><a href="/Vix/secure/FederationTestClient.jspx">Federation</a></li> 
+				</ul>
+			</li>
+		</ul>
+				
+		<div id="menuDiv">
+		</div>
+
+		<ul id="menuModel2">
+			<li id="50000" itemIcon="../images/disk.gif"><a href="#" title="Open the file menu">File</a>
+				<ul width="150">
+					<li id="500001" jsFunction="saveWork()" itemIcon="../images/disk.gif"><a href="#" title="Save your work">Save</a></li>
+					<li id="500002"><a href="#">Save As</a></li>
+					<li id="500004" itemType="separator"></li>
+					<li id="500003"><a href="#">Open</a></li>
+				</ul>
+			</li>
+			<li id="50001"><a href="#">View</a>
+				<ul width="130">
+					<li id="500011"><a href="#">Source</a></li>
+					<li id="500012"><a href="#">Debug info</a></li>
+					<li id="500013"><a href="#">Layout</a>
+						<ul width="150">
+							<li id="5000131"><a href="#">CSS</a>	
+							<li id="5000132"><a href="#">HTML</a>	
+							<li id="5000133"><a href="#">Javascript</a>	
+						</ul>
+					</li>
+				
+				</ul>
+			</li>
+			<li id="50003" itemType="separator"></li>
+			<li id="50002"><a href="#">Options</a></li>
+		</ul>
+		
+
+	</body>
+</html>

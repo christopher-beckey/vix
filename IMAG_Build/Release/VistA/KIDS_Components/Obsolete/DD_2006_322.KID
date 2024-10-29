@@ -1,0 +1,382 @@
+KIDS Distribution saved on Oct 04, 2000@15:14:09
+File export for VSS
+**KIDS**:Z VSS FILE 0.1T^
+
+**INSTALL NAME**
+Z VSS FILE 0.1T
+"BLD",1195,0)
+Z VSS FILE 0.1T^^0^3001004^n
+"BLD",1195,1,0)
+^^1^1^3000906^
+"BLD",1195,1,1,0)
+KIDS file for one single file
+"BLD",1195,4,0)
+^9.64PA^2006.322^1
+"BLD",1195,4,2006.322,0)
+2006.322
+"BLD",1195,4,2006.322,222)
+y^y^f^^^^n
+"BLD",1195,4,"B",2006.322,2006.322)
+
+"BLD",1195,"KRN",0)
+^9.67PA^19^17
+"BLD",1195,"KRN",.4,0)
+.4
+"BLD",1195,"KRN",.401,0)
+.401
+"BLD",1195,"KRN",.402,0)
+.402
+"BLD",1195,"KRN",.403,0)
+.403
+"BLD",1195,"KRN",.5,0)
+.5
+"BLD",1195,"KRN",.84,0)
+.84
+"BLD",1195,"KRN",3.6,0)
+3.6
+"BLD",1195,"KRN",3.8,0)
+3.8
+"BLD",1195,"KRN",9.2,0)
+9.2
+"BLD",1195,"KRN",9.8,0)
+9.8
+"BLD",1195,"KRN",19,0)
+19
+"BLD",1195,"KRN",19.1,0)
+19.1
+"BLD",1195,"KRN",101,0)
+101
+"BLD",1195,"KRN",409.61,0)
+409.61
+"BLD",1195,"KRN",771,0)
+771
+"BLD",1195,"KRN",870,0)
+870
+"BLD",1195,"KRN",8994,0)
+8994
+"BLD",1195,"KRN","B",.4,.4)
+
+"BLD",1195,"KRN","B",.401,.401)
+
+"BLD",1195,"KRN","B",.402,.402)
+
+"BLD",1195,"KRN","B",.403,.403)
+
+"BLD",1195,"KRN","B",.5,.5)
+
+"BLD",1195,"KRN","B",.84,.84)
+
+"BLD",1195,"KRN","B",3.6,3.6)
+
+"BLD",1195,"KRN","B",3.8,3.8)
+
+"BLD",1195,"KRN","B",9.2,9.2)
+
+"BLD",1195,"KRN","B",9.8,9.8)
+
+"BLD",1195,"KRN","B",19,19)
+
+"BLD",1195,"KRN","B",19.1,19.1)
+
+"BLD",1195,"KRN","B",101,101)
+
+"BLD",1195,"KRN","B",409.61,409.61)
+
+"BLD",1195,"KRN","B",771,771)
+
+"BLD",1195,"KRN","B",870,870)
+
+"BLD",1195,"KRN","B",8994,8994)
+
+"FIA",2006.322)
+MAGG LOG
+"FIA",2006.322,0)
+^MAGGLOG(
+"FIA",2006.322,0,0)
+2006.322I
+"FIA",2006.322,0,1)
+y^y^f^^^^n
+"FIA",2006.322,0,10)
+
+"FIA",2006.322,0,11)
+
+"FIA",2006.322,0,"RLRO")
+
+"FIA",2006.322,2006.322)
+0
+"FIA",2006.322,2006.3225)
+0
+"FIA",2006.322,2006.3226)
+0
+"MBREQ")
+0
+"QUES","XPF1",0)
+Y
+"QUES","XPF1","??")
+^D REP^XPDH
+"QUES","XPF1","A")
+Shall I write over your |FLAG| File
+"QUES","XPF1","B")
+YES
+"QUES","XPF1","M")
+D XPF1^XPDIQ
+"QUES","XPF2",0)
+Y
+"QUES","XPF2","??")
+^D DTA^XPDH
+"QUES","XPF2","A")
+Want my data |FLAG| yours
+"QUES","XPF2","B")
+YES
+"QUES","XPF2","M")
+D XPF2^XPDIQ
+"QUES","XPI1",0)
+YO
+"QUES","XPI1","??")
+^D INHIBIT^XPDH
+"QUES","XPI1","A")
+Want KIDS to INHIBIT LOGONs during the install
+"QUES","XPI1","B")
+YES
+"QUES","XPI1","M")
+D XPI1^XPDIQ
+"QUES","XPM1",0)
+PO^VA(200,:EM
+"QUES","XPM1","??")
+^D MG^XPDH
+"QUES","XPM1","A")
+Enter the Coordinator for Mail Group '|FLAG|'
+"QUES","XPM1","B")
+
+"QUES","XPM1","M")
+D XPM1^XPDIQ
+"QUES","XPO1",0)
+Y
+"QUES","XPO1","??")
+^D MENU^XPDH
+"QUES","XPO1","A")
+Want KIDS to Rebuild Menu Trees Upon Completion of Install
+"QUES","XPO1","B")
+YES
+"QUES","XPO1","M")
+D XPO1^XPDIQ
+"QUES","XPZ1",0)
+Y
+"QUES","XPZ1","??")
+^D OPT^XPDH
+"QUES","XPZ1","A")
+Want to DISABLE Scheduled Options, Menu Options, and Protocols
+"QUES","XPZ1","B")
+YES
+"QUES","XPZ1","M")
+D XPZ1^XPDIQ
+"QUES","XPZ2",0)
+Y
+"QUES","XPZ2","??")
+^D RTN^XPDH
+"QUES","XPZ2","A")
+Want to MOVE routines to other CPUs
+"QUES","XPZ2","B")
+NO
+"QUES","XPZ2","M")
+D XPZ2^XPDIQ
+"VER")
+8.0^22.0
+"^DD",2006.322,2006.322,0)
+FIELD^^6^10
+"^DD",2006.322,2006.322,0,"DDA")
+N
+"^DD",2006.322,2006.322,0,"DIKOLD")
+XXXX
+"^DD",2006.322,2006.322,0,"DT")
+2970327
+"^DD",2006.322,2006.322,0,"ID",1)
+W "   ",@("$P($P($C(59)_$S($D(^DD(2006.322,1,0)):$P(^(0),U,3),1:0)_$E("_DIC_"Y,0),0),$C(59)_$P(^(0),U,2)_"":"",2),$C(59),1)")
+"^DD",2006.322,2006.322,0,"ID",2)
+W "   ",@("$P($P($C(59)_$S($D(^DD(2006.322,2,0)):$P(^(0),U,3),1:0)_$E("_DIC_"Y,0),0),$C(59)_$P(^(0),U,3)_"":"",2),$C(59),1)")
+"^DD",2006.322,2006.322,0,"IX","B",2006.322,.01)
+
+"^DD",2006.322,2006.322,0,"IX","C",2006.322,1)
+
+"^DD",2006.322,2006.322,0,"IX","D",2006.322,2)
+
+"^DD",2006.322,2006.322,0,"IX","E",2006.322,4)
+
+"^DD",2006.322,2006.322,0,"IX","F",2006.322,4.2)
+
+"^DD",2006.322,2006.322,0,"NM","MAGG LOG")
+
+"^DD",2006.322,2006.322,.01,0)
+SHORT DESC^RF^^0;1^K:$L(X)>60!($L(X)<3)!'(X'?1P.E) X
+"^DD",2006.322,2006.322,.01,1,0)
+^.1^^-1
+"^DD",2006.322,2006.322,.01,1,1,0)
+2006.322^B
+"^DD",2006.322,2006.322,.01,1,1,1)
+S ^MAGGLOG("B",$E(X,1,30),DA)=""
+"^DD",2006.322,2006.322,.01,1,1,2)
+K ^MAGGLOG("B",$E(X,1,30),DA)
+"^DD",2006.322,2006.322,.01,3)
+Answer must be 3-60 characters in length.
+"^DD",2006.322,2006.322,.01,"DT")
+2970327
+"^DD",2006.322,2006.322,1,0)
+PROJECT^RS^IMAGING:IMAGING;DELPHI:DELPHI;TFORM:TFORM;WRKS:WRKS;MISC:MISC;NOTES:NOTES;DICOM:DICOM;BROKER:BROKER;^0;2^Q
+"^DD",2006.322,2006.322,1,1,0)
+^.1
+"^DD",2006.322,2006.322,1,1,1,0)
+2006.322^C
+"^DD",2006.322,2006.322,1,1,1,1)
+S ^MAGGLOG("C",$E(X,1,30),DA)=""
+"^DD",2006.322,2006.322,1,1,1,2)
+K ^MAGGLOG("C",$E(X,1,30),DA)
+"^DD",2006.322,2006.322,1,1,1,"DT")
+2960328
+"^DD",2006.322,2006.322,1,"DT")
+2960821
+"^DD",2006.322,2006.322,2,0)
+TYPE^S^REQUEST:REQUEST;TESTING:TESTING;DEV:DEV;NOTES:NOTES;GENERAL:GENERAL;MAINT:MAINT;SUPPORT:SUPPORT;^0;3^Q
+"^DD",2006.322,2006.322,2,1,0)
+^.1
+"^DD",2006.322,2006.322,2,1,1,0)
+2006.322^D
+"^DD",2006.322,2006.322,2,1,1,1)
+S ^MAGGLOG("D",$E(X,1,30),DA)=""
+"^DD",2006.322,2006.322,2,1,1,2)
+K ^MAGGLOG("D",$E(X,1,30),DA)
+"^DD",2006.322,2006.322,2,1,1,"DT")
+2960328
+"^DD",2006.322,2006.322,2,"DT")
+2970203
+"^DD",2006.322,2006.322,3,0)
+DATE ENTERED^D^^0;4^S %DT="" D ^%DT S X=Y K:Y<1 X
+"^DD",2006.322,2006.322,3,"DT")
+2940928
+"^DD",2006.322,2006.322,4,0)
+STATUS^S^ENTERED:ENTERED;CURRENT:CURRENT;HOLD:HOLD;TESTING:TESTING;QUICK FIX:QUICK FIX;WRAP:WRAP;^0;5^Q
+"^DD",2006.322,2006.322,4,1,0)
+^.1
+"^DD",2006.322,2006.322,4,1,1,0)
+2006.322^E
+"^DD",2006.322,2006.322,4,1,1,1)
+S ^MAGGLOG("E",$E(X,1,30),DA)=""
+"^DD",2006.322,2006.322,4,1,1,2)
+K ^MAGGLOG("E",$E(X,1,30),DA)
+"^DD",2006.322,2006.322,4,1,1,"DT")
+2960819
+"^DD",2006.322,2006.322,4,"DT")
+2960830
+"^DD",2006.322,2006.322,4.1,0)
+STATUS DATE^D^^0;6^S %DT="" D ^%DT S X=Y K:Y<1 X
+"^DD",2006.322,2006.322,4.1,"DT")
+2940928
+"^DD",2006.322,2006.322,4.2,0)
+PERSON^S^GARRETT:GARRETT;PETE:PETE;STU:STU;GREG:GREG;LUCILLE:LUCILLE;RUTH:RUTH;RICHARD:RICHARD;OTH:OTH;AVI:AVI;Z:Z;ELIANE:ELIANE;^0;7^Q
+"^DD",2006.322,2006.322,4.2,1,0)
+^.1
+"^DD",2006.322,2006.322,4.2,1,1,0)
+2006.322^F
+"^DD",2006.322,2006.322,4.2,1,1,1)
+S ^MAGGLOG("F",$E(X,1,30),DA)=""
+"^DD",2006.322,2006.322,4.2,1,1,2)
+K ^MAGGLOG("F",$E(X,1,30),DA)
+"^DD",2006.322,2006.322,4.2,1,1,"DT")
+2960821
+"^DD",2006.322,2006.322,4.2,"DT")
+2960828
+"^DD",2006.322,2006.322,4.3,0)
+PRI^F^^0;8^K:$L(X)>5!($L(X)<1) X
+"^DD",2006.322,2006.322,4.3,3)
+Answer must be 1-5 characters in length.
+"^DD",2006.322,2006.322,4.3,21,0)
+^^1^1^2960809^
+"^DD",2006.322,2006.322,4.3,21,1,0)
+Priority of the problem
+"^DD",2006.322,2006.322,4.3,"DT")
+2970206
+"^DD",2006.322,2006.322,5,0)
+PROBLEM^2006.3225^^1;0
+"^DD",2006.322,2006.322,5,"DT")
+2960326
+"^DD",2006.322,2006.322,6,0)
+SOLUTION^2006.3226^^2;0
+"^DD",2006.322,2006.322,6,"DT")
+2960326
+"^DD",2006.322,2006.3225,0)
+PROBLEM SUB-FIELD^^.01^1
+"^DD",2006.322,2006.3225,0,"DT")
+2940928
+"^DD",2006.322,2006.3225,0,"NM","PROBLEM")
+
+"^DD",2006.322,2006.3225,0,"UP")
+2006.322
+"^DD",2006.322,2006.3225,.01,0)
+DESC^W^^0;1^Q
+"^DD",2006.322,2006.3225,.01,.1)
+PROBLEM
+"^DD",2006.322,2006.3225,.01,"DT")
+2960326
+"^DD",2006.322,2006.3226,0)
+SOLUTION SUB-FIELD^^.01^1
+"^DD",2006.322,2006.3226,0,"DT")
+2960321
+"^DD",2006.322,2006.3226,0,"NM","SOLUTION")
+
+"^DD",2006.322,2006.3226,0,"UP")
+2006.322
+"^DD",2006.322,2006.3226,.01,0)
+DESC^W^^0;1^Q
+"^DD",2006.322,2006.3226,.01,.1)
+SOLUTION
+"^DD",2006.322,2006.3226,.01,"DT")
+2960326
+"^DIC",2006.322,2006.322,0)
+MAGG LOG^2006.322
+"^DIC",2006.322,2006.322,0,"GL")
+^MAGGLOG(
+"^DIC",2006.322,2006.322,"%D",0)
+^^18^18^3000510
+"^DIC",2006.322,2006.322,"%D",1,0)
+ +---------------------------------------------------------------+
+"^DIC",2006.322,2006.322,"%D",2,0)
+ |                                                               |
+"^DIC",2006.322,2006.322,"%D",3,0)
+ | Property of the US Government.                                |
+"^DIC",2006.322,2006.322,"%D",4,0)
+ | No permission to copy or redistribute this software is given. |
+"^DIC",2006.322,2006.322,"%D",5,0)
+ | Use of unreleased versions of this software requires the user |
+"^DIC",2006.322,2006.322,"%D",6,0)
+ | to execute a written test agreement with the VistA Imaging    |
+"^DIC",2006.322,2006.322,"%D",7,0)
+ | Development Office of the Department of Veterans Affairs,     |
+"^DIC",2006.322,2006.322,"%D",8,0)
+ | telephone (301) 734-0100.                                     |
+"^DIC",2006.322,2006.322,"%D",9,0)
+ |                                                               |
+"^DIC",2006.322,2006.322,"%D",10,0)
+ | The Food and Drug Administration classifies this software as  |
+"^DIC",2006.322,2006.322,"%D",11,0)
+ | a Class II medical device.  As such, it may not be changed    |
+"^DIC",2006.322,2006.322,"%D",12,0)
+ | in any way.  Modifications to this software may result in an  |
+"^DIC",2006.322,2006.322,"%D",13,0)
+ | adulterated medical device under 21CFR820, the use of which   |
+"^DIC",2006.322,2006.322,"%D",14,0)
+ | is considered to be a violation of US Federal Statutes.       |
+"^DIC",2006.322,2006.322,"%D",15,0)
+ |                                                               |
+"^DIC",2006.322,2006.322,"%D",16,0)
+ +---------------------------------------------------------------+
+"^DIC",2006.322,2006.322,"%D",17,0)
+ 
+"^DIC",2006.322,2006.322,"%D",18,0)
+Log of projects, tasks, and bugs.
+"^DIC",2006.322,"B","MAGG LOG",2006.322)
+
+**END**
+**END**
+
+
+****
+****

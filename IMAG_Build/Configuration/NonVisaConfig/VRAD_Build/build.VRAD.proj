@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Publish" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+	<PropertyGroup>
+		
+		<!-- Input parameters -->
+		<PatchNumber></PatchNumber>
+		<TestNumber></TestNumber>
+		<SequenceNumber></SequenceNumber>
+		<CodeBaseDir></CodeBaseDir>
+		<StageToSQA></StageToSQA>		
+		
+		<ProjectName>VRAD</ProjectName>
+		<TempFolder>\temp</TempFolder>
+		<Configuration>Release</Configuration>
+		<CreateMsi>false</CreateMsi>
+		<BuildCompressed>true</BuildCompressed>
+		
+		<PaddedPatchNumber>$(PatchNumber)</PaddedPatchNumber>
+		<PaddedPatchNumber Condition="$(PatchNumber) &lt; 100">0$(PatchNumber)</PaddedPatchNumber>
+		<PaddedPatchNumber Condition="$(PatchNumber) &lt; 10">00$(PatchNumber)</PaddedPatchNumber>
+		<!-- PatchFolderName>V3.0p$(PaddedPatchNumber)Sequence$(SequenceNumber)</PatchFolderName -->
+		<PatchFolderName>P$(PatchNumber)-T$(TestNumber)-S$(SequenceNumber)</PatchFolderName>	
+				
+		<BuildDir>$(CodeBaseDir)\Builds</BuildDir>			
+		<OutputDir>$(BuildDir)\$(ProjectName)</OutputDir>	
+		<FullBuildPath>$(OutputDir)\$(PatchFolderName)</FullBuildPath>		
+		
+		<ExeFileName>MAG3_0P$(PatchNumber)T$(TestNumber)_VRAD_setup.exe</ExeFileName>
+		
+		<!-- Specfic defined parameters for Build-4 server -->
+		<NetworkBuildDir Condition="'$(COMPUTERNAME)'=='isw-imgxpvmbld4'">\\W2k8-stvi-sqa\Release\ReadyToTest\Patch$(PatchNumber)</NetworkBuildDir>
+		<MSBuildInstallShieldDir Condition="'$(COMPUTERNAME)'=='isw-imgxpvmbld4'">C:\Program Files\MSBuild\InstallShield\2012Spring</MSBuildInstallShieldDir>
+		<InstallShieldPath Condition="'$(COMPUTERNAME)'=='isw-imgxpvmbld4'">C:\Program Files\InstallShield\2012Spring\System</InstallShieldPath>
+		<!-- ================================================= -->					
+		
+		<!-- Specfic defined parameters for Build-5 server -->
+		<NetworkBuildDir Condition="'$(COMPUTERNAME)'=='VAAUSVIMAPP872'">\\vaausvimapp804.aac.dva.va.gov\CM\ReadyToTest\Patch$(PatchNumber)</NetworkBuildDir>
+		<MSBuildInstallShieldDir Condition="'$(COMPUTERNAME)'=='VAAUSVIMAPP872'">C:\Program Files (x86)\MSBuild\InstallShield\2012Spring</MSBuildInstallShieldDir>
+		<InstallShieldPath Condition="'$(COMPUTERNAME)'=='VAAUSVIMAPP872'">C:\Program Files (x86)\InstallShield\2012Spring\System</InstallShieldPath>
+			
+		<MSBuildExtensionsPath Condition="'$(COMPUTERNAME)'=='VAAUSVIMAPP872'">$(MSBuildExtensionsPath64)</MSBuildExtensionsPath>	
+		<!-- ================================================= -->
+				
+		<ToolsDir>$(CodeBaseDir)\IMAG_Build\Tools</ToolsDir>	
+		<ThirdPartyDir>$(CodeBaseDir)\IMAG_Build\Third_Party</ThirdPartyDir>
+		<VRADSourceDir>$(CodeBaseDir)\IMAG_Source\VistARad</VRADSourceDir>
+		<!-- VRADSourceDir>E:\BuildsNonVisa\SourceCode\Source\Production\VistARad</VRADSourceDir -->
+		<DocsDir>$(CodeBaseDir)\IMAG_Build\LegacyVSS\VistAImagingDocs</DocsDir>
+		<NonVisaCfgDir>$(CodeBaseDir)\IMAG_Build\Configuration\NonVisaConfig</NonVisaCfgDir>
+		
+		<InstallShieldProject>$(FullBuildPath)$(TempFolder)\Production\$(ProjectName)\Client\InstallShield\Setup.ism</InstallShieldProject>
+		<ProductVersion Condition="'$(ProductVersionInclude)'!='false'">3.0.$(PatchNumber).$(TestNumber)</ProductVersion>
+				
+	</PropertyGroup>
+	
+	<!-- ============================================================================  -->
+	<Import Project="$(MSBuildInstallShieldDir)\InstallShield.targets" />	
+	<Import Project="$(MSBuildExtensionsPath)\MSBuildCommunityTasks\MSBuild.Community.Tasks.Targets"/>
+	<Import Project="$(MSBuildExtensionsPath)\ExtensionPack\4.0\MSBuild.ExtensionPack.tasks" /> 
+	<Import Project="$(NonVisaCfgDir)\Common\build.VistAImaging.xml"/>		
+	<Import Project="$(VRADSourceDir)\Build\build.VRAD.prop"/>
+	
+	<!-- ==============================================================================  -->		
+	<ItemGroup>
+		<SetBuildSource Include="$(ToolsDir)\SetBuild\**\*.*"  />
+		<!-- SetBuildSource Include="$(ToolsDir)\**\*.*"  / -->
+		<ThirdPartyDome Include="$(ThirdPartyDir)\Dome\**\*.*"  />
+		<ThirdPartySentillion Include="$(ThirdPartyDir)\Sentillion\**\*.*"  /> 	
+		<SourceFiles Include="$(VRADSourceDir)\**\*.*" Exclude="$(VRADSourceDir)\Release\INSTALLDIR\Help\*.pdf" />
+		<Documents Include="$(DocsDir)\Documents - End User\Version 3.0\VistARad Documents\_User Guides, Current Revision\*.*" />
+		<DependencyFiles Include="$(VRADSourceDir)\FreeImage\FreeImage.dll" />	
+	</ItemGroup>
+		
+	<!-- =============================================================================== -->
+	<!-- =============================================================================== -->	
+	<!-- Delete previous build -->
+	<Target Name="CleanPreviousBuild" >
+		<RemoveDir Directories="$(FullBuildPath)" Condition="Exists('$(FullBuildPath)')"/>
+	</Target>
+
+	<!-- =============================================================================== -->
+	<!-- =============================================================================== -->				
+	<!-- Create build ouput directories -->
+	<Target Name="CreateDirectories" DependsOnTargets="CleanPreviousBuild" >
+		<message text="Executing CreateDirectories ..." Importance="High" />
+		<MakeDir directories="$(FullBuildPath)$(TempFolder)" />
+		<MakeDir directories="$(FullBuildPath)$(TempFolder)\Production\$(ProjectName)\Client" />	
+		<MakeDir directories="$(FullBuildPath)$(TempFolder)\Production\$(ProjectName)\Client\Controls\Bin\Release" />	
+		<MakeDir directories="$(FullBuildPath)$(TempFolder)\Production\$(ProjectName)\Release" />
+	</Target>
+
+
+	<!-- =============================================================================== -->
+	<!-- =============================================================================== -->		
+	<!-- Copy files from source control over to build output directory -->
+	<Target Name="CopyFiles"  DependsOnTargets="CreateDirectories" >
+
+		<Copy SourceFiles="@(SetBuildSource)" DestinationFolder="$(FullBuildPath)$(TempFolder)\Utilities\SetBuild" />
+		<Copy SourceFiles="@(ThirdPartyDome)"   DestinationFiles="@(ThirdPartyDome->'$(FullBuildPath)$(TempFolder)\Third Party\Dome\%(RecursiveDir)%(Filename)%(Extension)')" />
+		<Copy SourceFiles="@(ThirdPartySentillion)" DestinationFiles="@(ThirdPartySentillion->'$(FullBuildPath)$(TempFolder)\Third Party\Sentillion\%(RecursiveDir)%(Filename)%(Extension)')" />
+		<!-- Copy SourceFiles="@(DependencyFiles)" DestinationFolder="C:\Windows\System32" / -->
+		<Copy SourceFiles="@(SourceFiles)" DestinationFiles="@(SourceFiles->'$(FullBuildPath)$(TempFolder)\Production\$(ProjectName)\Client\%(RecursiveDir)%(Filename)%(Extension)')" />
+		<Copy SourceFiles="@(Documents)" DestinationFiles="@(Documents->'$(FullBuildPath)$(TempFolder)\Production\$(ProjectName)\Release\INSTALLDIR\Help\%(RecursiveDir)%(Filename)%(Extension)')" />
+
+	</Target>	
+
+	<!-- =============================================================================== -->
+	<!-- =============================================================================== -->	
+	<!-- Compile C Utility projects -->
+	<Target Name="BuildUtilites" DependsOnTargets="CopyFiles" >
+		<Exec Command='$(NmakeHome)nmake.exe "CFG=SetBuild - Win32 Release" /f SetBuild.mak' WorkingDirectory="$(FullBuildPath)$(TempFolder)\utilities\SetBuild\" /> 
+	</Target>	
+
+	<!-- =============================================================================== -->
+	<!-- =============================================================================== -->	
+	<Target Name="SetBuild" DependsOnTargets="BuildUtilites" >
+		
+		<ItemGroup>
+			<Version Include="$(FullBuildPath)$(TempFolder)\Production\$(ProjectName)\Client\GUI\"  /> 
+		</ItemGroup>
+		
+		<Exec Command='"$(FullBuildPath)$(TempFolder)\Utilities\SetBuild\Release\SetBuild.exe" Vistarad.rc 3 0 $(PatchNumber) $(TestNumber)' WorkingDirectory="%(Version.FullPath)"  />
+		
+		<ItemGroup>	
+			<NewVersionFiles Include="$(FullBuildPath)$(TempFolder)\Production\$(ProjectName)\Client\GUI\Version.new" /> 		
+		</ItemGroup>
+		<Copy SourceFiles="%(NewVersionFiles.FullPath)" DestinationFiles="%(RootDir)%(Directory)Vistarad.rc" />
+		
+	</Target>
+
+	<!-- =============================================================================== -->
+	<!-- =============================================================================== -->	
+	<!-- Compile projects -->
+	<Target Name="Compile" DependsOnTargets="SetBuild" Outputs="%(CompileFiles.Identity)">	
+		<message text="Compiling %(CompileFiles.Filename)%(CompileFiles.Extension) with compiler %(CompileFiles.Compiler)" Importance="High"/>
+		<MSBuild Projects="%(CompileFiles.Identity)"
+			Condition="'%(CompileFiles.Compiler)'=='MSBuild'"
+			Targets="%(CompileFiles.Options)" 
+			Properties="Configuration=%(CompileFiles.Configuration);
+						Platform=%(CompileFiles.Platform);
+						VCBuildUserEnvironment=True" /> 
+	</Target>
+	
+	<!-- =============================================================================== -->
+	<!-- =============================================================================== -->	
+	<!-- Generate Product and Package code for InstallShield -->
+	<Target Name="UpdateISM" DependsOnTargets="Compile" >
+		<CallTarget Targets="GenerateProductCode" />	<!-- from ...\Common\buil.VistAImaging.xml -->
+		<CallTarget Targets="GeneratePackageCode" />	<!-- from ...\Common\buil.VistAImaging.xml -->
+	</Target>	
+
+	<!-- =============================================================================== -->
+	<!-- =============================================================================== -->		
+	<!-- Copy artifacts to release folder -->
+	<Target Name="CopyArtifacts" DependsOnTargets="UpdateISM" >
+		
+		<ItemGroup>
+			<ReleaseFiles Include="$(FullBuildPath)$(TempFolder)\Production\$(ProjectName)\Client\Controls\Bin\Release\*.exe"/>
+			<ReleaseFiles Include="$(FullBuildPath)$(TempFolder)\Production\$(ProjectName)\Client\Controls\Bin\Release\*.dll"/>
+			<ReleaseFiles Include="$(FullBuildPath)$(TempFolder)\Production\$(ProjectName)\Client\Controls\VA_Common\bin\*.dll"/>	
+			<ReleaseFiles Include="$(FullBuildPath)$(TempFolder)\Production\$(ProjectName)\Client\Release\INSTALLDIR\**\*.*" />
+			<ReleaseAppDataFiles Include="$(FullBuildPath)$(TempFolder)\Production\$(ProjectName)\Client\Release\APPDATA\**\*.*"/>	
+		</ItemGroup>
+		
+		<Copy SourceFiles="@(ReleaseFiles)" DestinationFiles="@(ReleaseFiles->'$(FullBuildPath)$(TempFolder)\Production\$(ProjectName)\Release\INSTALLDIR\%(RecursiveDir)%(Filename)%(Extension)')"/>
+		<Copy SourceFiles="@(ReleaseAppDataFiles)" DestinationFiles="@(ReleaseAppDataFiles->'$(FullBuildPath)$(TempFolder)\Production\$(ProjectName)\Release\APPDATA\%(RecursiveDir)%(Filename)%(Extension)')"/>
+	</Target>	
+	
+	<!-- =============================================================================== -->
+	<!-- =============================================================================== -->
+	<!-- Create exe and/or msi file  -->
+	<Target Name="BuildRelease" DependsOnTargets="CopyArtifacts" >
+		<CallTarget Targets="CreateInstaller" />	<!-- from ...\Common\buil.VistAImaging.xml -->
+	</Target>	
+
+	<!-- =============================================================================== -->
+	<!-- =============================================================================== -->	
+	<Target Name="StageToSQA" >	
+		<MakeDir Directories="$(NetworkBuildDir)" Condition="!Exists('$(NetworkBuildDir)')" />
+		<Delete Files="$(NetworkBuildDir)\$(ExeFileName)" Condition="!Exists('$(NetworkBuildDir)\$(ExeFileName)')" />
+		<Copy SourceFiles="$(FullBuildPath)\$(ExeFileName)" Destinationfolder="$(NetworkBuildDir)"/>
+	</Target>
+		
+	<!-- =============================================================================== -->
+	<!-- =============================================================================== -->			
+	<Target Name="Publish" DependsOnTargets="BuildRelease" >
+		
+		<Copy SourceFiles="$(FullBuildPath)$(TempFolder)\Production\$(ProjectName)\Client\InstallShield\Setup\Default Configuration\Release\DiskImages\DISK1\setup.exe" DestinationFiles="$(FullBuildPath)\$(ExeFileName)" Condition="'$(CreateExe)'!='False'" />
+		<ItemGroup>
+			<BuildArtifacts Include="$(FullBuildPath)\*.*" />
+		</ItemGroup>
+		
+		<CallTarget Targets="StageToSQA"  Condition="'$(StageToSQA)'=='True'" />	
+			
+    </Target>
+
+    	<!-- =============================================================================== -->
+	<!-- =============================================================================== -->	
+	<Target Name="Testing" >	
+		<CallTarget Targets="CreateInstaller" />	<!-- from ...\Common\buil.VistAImaging.xml -->	
+	</Target>
+	        
+</Project>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-module
+  type="WEB"
+  name="IndexTermWebApp"
+  id="myeclipse.1390580321677"
+  context-root="/IndexTermWebApp"
+  j2ee-spec="5.0"
+  archive="IndexTermWebApp.war">
+  <attributes>
+    <attribute name="webrootdir" value="WebRoot" />
+  </attributes>
+</project-module>
+

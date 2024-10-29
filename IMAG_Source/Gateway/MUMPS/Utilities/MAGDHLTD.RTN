@@ -1,0 +1,113 @@
+MAGDHLTD ;WOIFO/MLH - IHE-based ADT interface for PACS - trigger events - A08 ; 11/15/2006 08:39
+ ;;3.0;IMAGING;**49**;19-September-2006;;Build 942
+ ;; Per VHA Directive 2004-038, this routine should not be modified.
+ ;; +---------------------------------------------------------------+
+ ;; | Property of the US Government.                                |
+ ;; | No permission to copy or redistribute this software is given. |
+ ;; | Use of unreleased versions of this software requires the user |
+ ;; | to execute a written test agreement with the VistA Imaging    |
+ ;; | Development Office of the Department of Veterans Affairs,     |
+ ;; | telephone (301) 734-0100.                                     |
+ ;; | The Food and Drug Administration classifies this software as  |
+ ;; | a medical device.  As such, it may not be changed in any way. |
+ ;; | Modifications to this software may result in an adulterated   |
+ ;; | medical device under 21CFR820, the use of which is considered |
+ ;; | to be a violation of US Federal Statutes.                     |
+ ;; +---------------------------------------------------------------+
+ ;;
+ Q
+ ;
+A08 ; GOTO entry point from MAGDHLT - patient demographic update
+ ; 
+ ; This will be invoked once during every invocation of MAGDHLI.  Thus,
+ ; demographic updates will only be transmitted after a patient movement
+ ; has been processed.
+ ;
+ N PIVIX  ; ---- index on ADT/HL7 PIVOT File (#391.71)
+ N FSENT ; ----- flag indicating a message was sent
+ N LOGIX ; --- index on MAG HL7 ADT UPDATE LOG File (#2006.4)
+ N LOGDTA ; -- data from LOG File
+ ;
+ L +^MAG7(2006.4,0):0 E  Q  ; if someone else is doing this too, bail out
+ S FSENT=0
+ ; any messages ever sent?
+ S LOGIX=$O(^MAG7(2006.4," "),-1)
+ I LOGIX D  ; yes, we'll loop from the last one
+ . S LOGDTA=$G(^MAG7(2006.4,LOGIX,0))
+ . S PIVIX=$P(LOGDTA,U,2)
+ . F  S PIVIX=$O(^VAT(391.71,PIVIX)) Q:'PIVIX  D PIVEVAL
+ . Q
+ E  D  ; no, send the most recent and terminate
+ . S PIVIX=" "
+ . F  S PIVIX=$O(^VAT(391.71,PIVIX),-1) Q:'PIVIX  D PIVEVAL Q:FSENT
+ . Q
+ ;
+ L -^MAG7(2006.4,0)
+ Q
+ ;
+PIVEVAL ; SUBROUTINE - not to be invoked externally
+ ; Evaluate the pivot event, send if it is a patient update
+ ; 
+ N PIVDTA ; -- PIVOT file data
+ N PIVEVN ; -- PIVOT file event
+ N PIVDFN ; -- ien of patient from PIVOT File
+ N CURDT ; --- current FileMan date
+ N DIC ; ----- FileMan control variable
+ N X ; ------- FileMan data variable     
+ ;
+ S PIVDTA=$G(^VAT(391.71,PIVIX,0))
+ I $P(PIVDTA,U,4)=4 D  ; only process data updates
+ . S PIVEVN=$P(PIVDTA,U,5)
+ . I $P(PIVEVN,";",2)="DPT(" D
+ . . ; send an HL7 ADT^A08 message
+ . . S PIVDFN=$P(PIVEVN,";",1)
+ . . D MSG
+ . . ; file an entry in the LOG file
+ . . D ^XQDATE S CURDT=%
+ . . S DIC="^MAG7(2006.4,",DIC(0)="",X=CURDT,DIC("DR")="1///"_PIVIX
+ . . D FILE^DICN
+ . . S FSENT=1
+ . . Q
+ . Q
+ Q
+ ;
+MSG ; SUBROUTINE - not to be invoked externally
+ ; Send the HL7 ADT^A08 message.
+ N HL ; ------- HL7 initialization function status return
+ N MSGA08A ; -- A11 message array
+ N CURDT ; ---- current FileMan date
+ N HLA ; ------ array of HL7 message segments
+ N MSG ; ------ message status
+ ;
+ D INIT^HLFNC2("MAG CPACS A08",.HL)
+ I $G(HL) Q -1_U_$P(HL,"^",2) ; error
+ S HLCS=$E(HLECH,1),HLRS=$E(HLECH,2),HLSS=$E(HLECH,4)
+ ;
+ ; build a dummy MSH segment for the $$MAKE^MAG7UM function
+ S MSGA08A(1,0)="MSH"
+ S MSGA08A(1,1,1,1,1)=HLFS
+ S MSGA08A(1,2,1,1,1)=HLECH
+ S MSGA08A(1,9,1,1,1)="ADT"
+ S MSGA08A(1,9,1,2,1)="A08"
+ ;
+ ; gather date and pt info and populate segment array elements
+ D ^XQDATE S CURDT=%
+ S MSG=$$EVN^MAGDHLS("A08",CURDT,CURDT,"MSGA08A")
+ S MSG=$$PID^MAGDHLS(PIVDFN,"MSGA08A")
+ S MSG=$$PV1^MAGDHLS(PIVDFN,"A08",CURDT,"MSGA08A")
+ ; ROL (practitioner info) segments for inpatients only
+ I $G(^DPT(PIVDFN,.1))'="" S MSG=$$ROL^MAGDHLS(PIVDFN,"MSGA08A")
+ S MSG=$$OBXADT^MAGDHLS(PIVDFN,"MSGA08A")
+ S MSG=$$AL1^MAGDHLS(PIVDFN,"MSGA08A")
+ S MSG=$$DG1^MAGDHLS(PIVDFN,"MSGA08A")
+ ;
+ ; assemble message into segments
+ S MSG=$$MAKE^MAG7UM("MSGA08A",$NA(HLA("HLS")))
+ K HLA("HLS",1) ; remove dummy MSH segment
+ ;
+ ; send message to receiver and gateway
+ D GENERATE^HLMA("MAG CPACS A08","LM",1,.RESULT) ; generate & send message
+ D LOGGW^MAGDHLL("ADT") ; log message to gateway
+ Q
+
+

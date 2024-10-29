@@ -1,0 +1,1555 @@
+[ application_info ]
+name = DicomScp
+description = Java server app that demonstrates use of QRServer and DicomSCP in DCS lib.
+app_component_name = java_app/DicomScp
+#app_component_name = cfg_app_name
+execution_state = STOPPED
+
+[ required_components ]
+component = java_lib/LOG_a
+component = java_lib/DCF
+component = java_lib/LOG
+component = java_lib/APC
+component = java_lib/CDS
+component = java_lib/APC_a
+component = java_lib/CDS_a
+component = java_lib/DCS
+component = idl_lib/DDCS
+component = java_lib/DSS
+component = java_lib/DDS
+component = java_lib/DDS_a
+[ java_app ]
+
+#==============================================================================
+# per-instance information for the DicomScp component
+#==============================================================================
+[ java_app/DicomScp ]
+debug_flags = 0x000ff
+#debug_flags = 0x00000
+
+#
+# if true, demostrate the DataSetByteReader class for making
+# a a decoded, and re-encoded network C-Store-Request look like
+# a ReadableByteChannel or InputStream object.
+#
+use_byte_reader = YES
+
+image_directory = 
+make_new_uids = FALSE
+#test_cfg_name = dcms.cfg
+#dicom_files_dir = dcms.cfg
+
+
+[ java_lib ]
+
+#==============================================================================
+# per-instance information for the LOG_a component
+#==============================================================================
+[ java_lib/LOG_a ]
+debug_flags = 0x00ff
+
+[ java_lib/LOG_a/outputs ]
+[ java_lib/LOG_a/outputs/server_output_1 ]
+type = LOGSERVER
+use_log_server = FALSE
+
+[ java_lib/LOG_a/outputs/file_output_1 ]
+type = textfile
+message_types = *
+component_names = *
+# Note that changing the format of this name may affect the behavior of the web
+# utilities that manipulate log files (e.g., list_logs.pl, dcfrmlogs.pl).
+#filename = C:/Users/VHAISWJIANGS0/lb/tmp/log/${APPIBNAME}.${CNT}.log
+filename = C:/DCF_RunTime_x64/log/dicomscp.${CNT}.log
+append_to_logfile = TRUE
+# Maximum size (KBytes) of each log file before rotating.
+max_size = 30000
+# Maximum number of log files before old ones are deleted.
+max_files = 5
+# Sync the file output on the disk on every write operation - this could affect performance
+sync_on_write = false
+character_encoding = UTF-8
+# true if a Byte-Order-Marker should be written at the start of the file.
+# Some UTF capable viewers use this to detect that the file is UTF format.
+write_bom = false
+
+[ java_lib/LOG_a/outputs/std_output_1 ]
+type = stdout
+redirect_stdout = FALSE
+redirect_stderr = FALSE
+
+#==============================================================================
+# per-instance information for the DCF component
+#==============================================================================
+[ java_lib/DCF ]
+debug_flags = 0x000ff
+
+#==============================================================================
+# per-instance information for the LOG component
+#==============================================================================
+[ java_lib/LOG ]
+debug_flags = 0x000ff
+
+#==============================================================================
+# per-instance information for the APC component
+#==============================================================================
+[ java_lib/APC ]
+debug_flags = 0x000ff
+
+#==============================================================================
+# per-instance information for the CDS component
+#==============================================================================
+[ java_lib/CDS ]
+debug_flags = 0x000ff
+
+#==============================================================================
+# per-instance information for the APC_a component
+#==============================================================================
+[ java_lib/APC_a ]
+debug_flags = 0x0000f
+#debug_flags = 0x00000
+
+# If true, proc configuration will be saved in CDS CFGDB.
+save_proc_cfg_in_cds = false
+
+# If true, <proc_cfg>/application_info/execution_state attribute
+# will be monitored for a shutdown request 
+# (not supported if CFGDB is in FSys Mode)
+handle_external_shutdown_rq = false
+
+# If true, <proc_cfg> will be observed, and re-loaded if it changes
+# (not supported if CFGDB is in FSys Mode)
+observe_proc_cfg = false
+
+# If true, the value passed to AppControl.shutdown() will be saved in
+# the proc config - usually delete_proc_cfg is set to false with this.
+save_exit_status_in_proc_cfg = false
+
+# If true, the proc config object in CDS is deleted during shutdown
+delete_proc_cfg = true
+
+# Specify the TCP-IP host address that will identify CORBA server
+# objects hosted by this process. The value 0.0.0.0 will result
+# in the default address being used. This controls the value of
+# property com.sun.CORBA.ORBServerHost.
+orb_server_host = 0.0.0.0
+
+#==============================================================================
+# per-instance information for the CDS_a component
+#==============================================================================
+[ java_lib/CDS_a ]
+debug_flags = 0x000ff
+
+#==============================================================================
+# per-instance information for the DCS component
+#==============================================================================
+[ java_lib/DCS ]
+# turn on df_SHOW_WARNINGS by default
+debug_flags = 0x360040
+#debug_flags = 0x360040
+#debug_flags = 0x00000
+
+# default name of extended data dictionary configuration group
+extended_data_dictionary = /dicom/ext_data_dictionary
+# if true, DicomDataDictionary will LOG a warning if private dictionary
+# conflicts with the standard dictionary.
+check_dictionary_overrides = true
+# Reports if an element tries to be added out-of-order
+# 0 - report an error only, throw the element away
+# 1 - report an error but still insert the element (may overwrite existing one)
+# 2 - throw an exception
+# 3 - do not report an error, throw element away
+# 4 - do not report an error, but still insert the element (may overwrite existing one)
+element_out_of_order_option = 0
+# directory to keep temp files for very large element data
+large_element_data_file_dir = C:\USERS\VHAISWJIANGS0\lb\tmp
+# optimize large elements processing from DicomFileInput when on disk
+large_element_file_mode = true
+# set to true for PresentationContext and subclasses to check uids
+validate_pres_ctx_uids = false
+# Configure behavior for odd length streamable data elements (OB,OW,OF,OD,UN).
+# The default value if not configured is to log a warning.
+# 0 = throw DCSException (legacy mode),
+# 1 = log a warning (default),
+# 2 = do not log.
+odd_length_streamable_mode = 1
+
+[ java_app/Listen ]
+authenticate_aetitles = NO
+
+[ java_lib/DCS/AssociationManager ]
+server_host_address = 0.0.0.0
+server_tcp_port = 104
+max_concurrent_associations = 32
+max_total_associations = -1
+#
+# If true, AssociationManager will get notified if this group is
+# changed in its process configuration while it is running.
+# This is useful if you want to change the listen port
+# without stopping and restarting AssociationManager or other settings.
+#
+listen_cfg_group = false
+first_pdu_read_timeout = 15
+default_session_config_name = 
+select_timeout = 1
+receive_buffer_size = 0
+send_buffer_size = 0
+call_app_ready_in_run = true
+set_reuse_addr_on_windows = false
+set_reuse_addr_on_unix = true
+
+[ java_lib/DCS/IOStatisticsManager ]
+enable_statistics = NO
+seconds_between_updates = 0
+save_stats_in_proc_cfg = YES
+statistics_cfg_group_name = 
+
+[ java_lib/DCS/DicomEncapsulatedCodec ]
+
+[ java_lib/DCS/default_session_cfg ]
+debug_flags = 0x000ff
+max_read_pdu_size = 32768
+max_write_pdu_size = 32768
+decode_un_seqs_in_ile = YES
+ignore_max_length_negotiation = NO
+favor_proposed_syntax_order = YES
+pdu_read_timeout_seconds = -1
+pdu_write_timeout_seconds = -1
+send_dimse_timeout_seconds = -1
+receive_dimse_timeout_seconds = -1
+enable_streaming_mode = YES
+stream_mode_buffer_size = 16384
+enable_compression_pass_through_mode = YES
+pdu_write_delay_seconds = 0
+pdu_read_delay_seconds = 0
+association_idle_timeout_seconds = -1
+associate_response_timeout_seconds = 30
+release_response_timeout_seconds = 5
+poll_frequency_per_second = 10
+pre_association_script = 
+post_association_script = 
+disable_multi_pdv_pdus = YES
+input_filter_cfg_name = 
+output_filter_cfg_name = 
+remove_incoming_role_selection_items = NO
+remove_outgoing_role_selection_items = NO
+# if set, private tags in a dataset with VR UN that are in the data dictionary (via the extended
+# data dictionary) with a different VR will be fixed to have the VR from the dictionary.
+# if not set, a warning will be logged if the VRs are not the same
+fix_private_tags_with_vr_UN = NO
+# if set, standard tags in a dataset with VR UN that are in the data dictionary
+# (via the default data dictionary) with a different VR will be fixed to have
+# the VR from the dictionary.  If not set, a warning will be logged if the VRs are not the same
+fix_standard_tags_with_vr_UN = NO
+# if set, explicit transfer syntax codecs will back up and attempt to decode
+# the element header using implicit little endian when the encoded VR is not
+# one of the standard 28.  This may result in being able to read an otherwise
+# broken dataset.  A warning is printed when this occurs.
+fix_implicit_in_explicit = NO
+# This changes the actual VR of an unknown value representation to UN.  The default value is false.
+# Setting this to true may allow older implementations to better process datasets with unknown tags.
+change_unknown_explicit_vr_to_UN = NO
+#change_unknown_explicit_vr_to_UN = YES
+scu_socket_receive_buffer_size = 0
+scu_socket_send_buffer_size = 0
+# size above which OB, OW, OF, UN data will be streamed to/from
+# temp files rather than fully buffered.  If large_element_file_mode
+# is true, the OB, OW, OF and UN non pixel data from file based
+# streams will be read from the original dataset on disk when needed.
+# The value 0 disables special handling for large elements.
+large_element_threshold = 10000000
+# Top-level pixel data is always compressed according to the output transfer syntax.
+# Icon image sequences may be compressed in the output transfer syntax or uncompressed.
+# The following modes apply to the Icon Image Sequence (0088,0200) pixel data elements:
+# 0 = never compress
+# 1 = compress if enable_compression_pass_through_mode is true and output transfer syntax is same (pass through)
+# 2 = compress if pass through or if output transfer syntax is compressed lossless
+# 3 = always pass through or compress to output transfer syntax
+icon_image_sq_compression_mode = 0
+# The following modes apply to sequences besides the Icon Image Sequence that contain pixel data elements:
+# 0 = never compress
+# 1 = compress if enable_compression_pass_through_mode is true and output transfer syntax is same (pass through)
+# 2 = compress if pass through or if output transfer syntax is compressed lossless
+# 3 = always pass through or compress to output transfer syntax
+other_image_sq_compression_mode = 0
+# Pad invalid odd length image fragments and frame offsets if present
+pad_odd_length_fragments = true
+# Check for and replace basic offset tables with an empty table if offset item values are invalid
+check_basic_offset_table = true
+# Fix invalid number of frames (negative or zero) for encapsulated images. Note this does not change the Number of Frames
+# in the dataset.
+fix_invalid_frame_count = true
+
+[ java_lib/DCS/default_session_cfg/input_filters ]
+
+[ java_lib/DCS/default_session_cfg/output_filters ]
+
+[ java_lib/DCS/default_session_cfg/supported_transfer_syntaxes ]
+# explicit-little-endian
+#transfer_syntax = 1.2.840.10008.1.2.1
+# implicit-little-endian
+transfer_syntax = 1.2.840.10008.1.2
+# explicit-big-endian
+#transfer_syntax = 1.2.840.10008.1.2.2
+# RLE Lossless Transfer Syntax
+transfer_syntax = 1.2.840.10008.1.2.5
+# JPEG lossless prediction selector = 1
+transfer_syntax = 1.2.840.10008.1.2.4.70
+# JPEG2000 lossless
+transfer_syntax = 1.2.840.10008.1.2.4.90
+# JPEG2000 lossy
+transfer_syntax = 1.2.840.10008.1.2.4.91
+# JPEG lossless
+transfer_syntax = 1.2.840.10008.1.2.4.57
+# JPEG lossy 8 bit 
+transfer_syntax = 1.2.840.10008.1.2.4.50
+# JPEG lossy 12 bit
+transfer_syntax = 1.2.840.10008.1.2.4.51
+
+[ java_lib/DCS/default_session_cfg/DicomRLECodec ]
+# if false convert RLE segments to Big Endian
+# if true leave RLE segments in machine byte order
+RLE_legacy_mode = false
+
+[ java_lib/DCS/default_session_cfg/DicomTSCWCodec ]
+# If pin_buffers is true, an attempt will be made to
+# avoid buffer copies during JNI calls to compression
+# code. Some JVM's may not support pinning well, or
+# may suspend GC during compression operations which
+# could cause potential problems.
+pin_buffers = true
+[ java_lib/DCS/default_session_cfg/DicomTSCWCodec/jpeg_lossy ]
+# lossy compression quality : 0 to 100
+compression_quality = 75
+# If true, then 12 bit operations will use the 16 bit IJG library
+no_12bit_lib = false
+# If true, derived image elements are added to data sets
+# as they are written. This includes changing Image-Type,
+# and adding Source-Image-Sequence and Derivation-Code-Sequence.
+# A new sop-instance-uid will be created for the output data set.
+add_derived_image_fields = true
+# If true, signed pixel data (pixel-representation = 1 ) will
+# be allowed.
+allow_signed_data = false
+# For codecs that support creating multiple threads for a single
+# compress or decompress operation.
+max_threads = 1
+# If true, the TSCWIJG codec will scan the jpeg header for the
+# encoded bit depth and may override the bit depth defined by DICOM.
+prescan_jpeg_header = true
+# If true, the header prescan will stop once the start of frame
+# tag has been processed.  If false, and df_COMPRESSION is set,
+# all jpeg header items will be logged to the log stream.
+stop_scanning_after_sof = true
+# Sanity check the rows, columns and samples per pixel in the
+# jpeg header, and throw an exception if these values are not
+# consistent with the values defined by the DICOM header.
+check_jpeg_dimensions = true
+
+[ java_lib/DCS/default_session_cfg/DicomTSCWCodec/jpeg_lossless ]
+# If true, then 12 bit operations will use the 16 bit IJG library
+no_12bit_lib = true
+# Set the jpeg predictor selection value for the .57 syntax.
+# If the transfer syntax is 1.2.840.10008.1.2.4.70,
+# this attribute is ignored and predictor selection value
+# is set to 1.
+jpeg_predictor_selection_value = 6
+# If true, then derived image fields are added for monochrome
+# images. (Some implementations add derived fields, create
+# a new sop-instance-uid, etc. even for lossless compressed
+# images.)
+add_derived_image_fields_for_mono = false
+# If true, then derived image fields are added for color 
+# images. (Some implementations add derived fields, create
+# a new sop-instance-uid, etc. even for lossless compressed
+# images.)
+add_derived_image_fields_for_color = false
+# If true, signed pixel data (pixel-representation = 1 ) will
+# be allowed.
+allow_signed_data = false
+# If true, color pixel data will be allowed. Some implementations
+# don't implement lossless jpeg for color, since the RGB to YBR
+# color space conversion may result in some information loss.
+allow_color = true
+# For codecs that support creating multiple threads for a single
+# compress or decompress operation.
+max_threads = 1
+# If true, the TSCWIJG codec will scan the jpeg header for the
+# encoded bit depth and may override the bit depth defined by DICOM.
+prescan_jpeg_header = true
+# If true, the header prescan will stop once the start of frame
+# tag has been processed.  If false, and df_COMPRESSION is set,
+# all jpeg header items will be logged to the log stream.
+stop_scanning_after_sof = true
+# Sanity check the rows, columns and samples per pixel in the
+# jpeg header, and throw an exception if these values are not
+# consistent with the values defined by the DICOM header.
+check_jpeg_dimensions = true
+
+[ java_lib/DCS/default_session_cfg/DicomTSCWCodec/jpeg2000_lossy ]
+# jasper jpeg2000 lossy options appended to defaults for transfer syntax
+# see jasper manual for details, used primarily for testing jasper options
+# use ";" to separate options, eg:
+# prg=rlcp;lazy;resetprob
+# Do not use with Aware plugin
+jpeg2000_codec_options = 
+# Specify the compression ratio
+compression_ratio = 2
+# Specify the number of jpeg2000 compression levels
+compression_levels = 4
+# If true, derived image elements are added to data sets
+# as they are written. This includes changing Image-Type,
+# and adding Source-Image-Sequence and Derivation-Code-Sequence.
+# A new sop-instance-uid will be created for the output data set.
+add_derived_image_fields = true
+#
+# set max tile width: 0 means full frame size
+#
+max_tile_width = 0
+#
+# set max tile height: 0 means full frame size
+max_tile_height = 1024
+# For codecs that support creating multiple threads for a single
+# compress or decompress operation.
+max_threads = 1
+# If true the multi component color transform is skipped.
+# Warning, changing these values will affect all jpeg2000_lossy compressions
+skip_mct_for_rgb = false
+# if true then the lossy compression can be made lossless.
+is_lossless = false
+
+[ java_lib/DCS/default_session_cfg/DicomTSCWCodec/jpeg2000_lossless ]
+# jasper jpeg2000 lossless options appended to defaults for transfer syntax
+# see jasper manual for details, used primarily for testing jasper options
+# use ";" to separate options, eg:
+# prg=rlcp;sop;eph
+# Do not use with Aware plugin
+jpeg2000_codec_options = 
+# If true, then derived image fields are added for monochrome
+# images. (Some implementations add derived fields, create
+# a new sop-instance-uid, etc. even for lossless compressed
+# images.)
+add_derived_image_fields_for_mono = false
+# If true, then derived image fields are added for color 
+# images. (Some implementations add derived fields, create
+# a new sop-instance-uid, etc. even for lossless compressed
+# images.)
+add_derived_image_fields_for_color = false
+#
+# set max tile width: 0 means full frame size
+#
+max_tile_width = 0
+#
+# set max tile height: 0 means full frame size
+max_tile_height = 1024
+# For codecs that support creating multiple threads for a single
+# compress or decompress operation.
+max_threads = 1
+# If true the multi component color transform is skipped.
+# Warning, changing this value will affect all jpeg2000_lossless compressions
+skip_mct_for_rgb = false
+
+[ java_lib/DCS/DicomFileInput ]
+#Always scan for transfer syntax/chapter 10
+#whether a DicomFileInput is constructed with a
+#transfer syntax or not
+force_autodetect = TRUE
+
+
+[ java_lib/DCS/DicomFileOutput ]
+# This attribute is deprecated
+create_chapter_10_format = true
+# This attribute is deprecated
+invent_group_2_data = true
+
+# Uncomment this and set to appropriate value if needed (tag: 0002,0012)
+# implementation_class_uid = 1.2.840.114089.1.1.0.3.3.2
+
+# Uncomment this and set to appropriate value if needed (tag: 0002,0013)
+# implementation_version_name = DCF 3.3.2c
+
+# The default Source AE title to use when writing a file
+default_source_ae_title = DCF
+
+# Use the (incorrect) legacy mode of using existing values from Group 2 in the File
+# Meta Information, instead of updating them to reflect the current implementation
+preserve_fmi_legacy_mode = false
+
+[ java_lib/DCS/DicomDeviceInput ]
+enforce_sq_delim_check = true
+
+[ java_lib/DCS/VerificationSCP ]
+[ java_lib/DCS/VerificationSCP/default_session_cfg ]
+[ java_lib/DCS/VerificationSCP/default_session_cfg/supported_sop_classes ]
+#SOPCLASSVERIFICATION
+sop_class = 1.2.840.10008.1.1
+
+[ java_lib/DCS/DicomTSCWCodec ]
+# TSCWCodec concurrency thresholds for 32 and 64 bit applications.
+# Used to limit number of concurrent encodes and decodes which
+# helps avoid out-of-memory situations, especially in 32bit apps.
+# Empirical testing indicates that optimal threshold for 64 bit apps
+# should be less than or equal to the number of available cores.
+
+# Max number of concurrent TSCW encodes for 32bit, <= 0 is unlimited
+max_tscw_encode_32 = 2
+# Max number of concurrent TSCW decodes for 32bit, <= 0 is unlimited
+max_tscw_decode_32 = 2
+# Max number of concurrent TSCW encodes for 64bit, <= 0 is unlimited
+max_tscw_encode_64 = 8
+# Max number of concurrent TSCW decodes for 64bit, <= 0 is unlimited
+max_tscw_decode_64 = 8
+
+[ java_lib/DCS/DicomTSCWCodec/plugins ]
+[ java_lib/DCS/DicomTSCWCodec/plugins/TSCWJasper ]
+win_dll_base_name = DCF_TSCWJasper12
+unix_dll_base_name = DCF_tscwjasper12
+[ java_lib/DCS/DicomTSCWCodec/plugins/TSCWJasper/plugin_cfg ]
+
+[ java_lib/DCS/DicomTSCWCodec/plugins/TSCWIJG ]
+win_dll_base_name = DCF_TSCWIJG
+unix_dll_base_name = DCF_tscwijg
+[ java_lib/DCS/DicomTSCWCodec/plugins/TSCWIJG/plugin_cfg ]
+
+[ java_lib/DCS/DicomTSCWCodec/plugins/TSCWAware ]
+win_dll_base_name = DCF_TSCWAware
+unix_dll_base_name = DCF_tscwaware
+[ java_lib/DCS/DicomTSCWCodec/plugins/TSCWAware/plugin_cfg ]
+
+
+[ java_lib/DCS/DicomTSCWCodec/plugin_mappings ]
+# use TSCWIJG or TSCWAware for .50
+[ java_lib/DCS/DicomTSCWCodec/plugin_mappings/1.2.840.10008.1.2.4.50 ]
+plugin_name = TSCWIJG
+# use TSCWIJG or TSCWAware for .51
+[ java_lib/DCS/DicomTSCWCodec/plugin_mappings/1.2.840.10008.1.2.4.51 ]
+plugin_name = TSCWIJG
+# use TSCWIJG for .57
+# TSCWAware does not support .57 transfer syntax
+[ java_lib/DCS/DicomTSCWCodec/plugin_mappings/1.2.840.10008.1.2.4.57 ]
+plugin_name = TSCWIJG
+# use TSCWIJG or TSCWAware for .70
+[ java_lib/DCS/DicomTSCWCodec/plugin_mappings/1.2.840.10008.1.2.4.70 ]
+plugin_name = TSCWIJG
+# use TSCWJasper or TSCWAware for .90
+[ java_lib/DCS/DicomTSCWCodec/plugin_mappings/1.2.840.10008.1.2.4.90 ]
+plugin_name = TSCWJasper
+#plugin_name = TSCWAware
+# use TSCWJasper or TSCWAware for .91
+[ java_lib/DCS/DicomTSCWCodec/plugin_mappings/1.2.840.10008.1.2.4.91 ]
+plugin_name = TSCWJasper
+
+#==============================================================================
+# per-instance information for the DSS component
+#==============================================================================
+[ java_lib/DSS ]
+# turn on df_SHOW_WARNINGS by default
+debug_flags = 0x000ff
+#debug_flags = 0x00000
+
+[ java_lib/DSS/StoreClient ]
+include_instances_in_job_status = no
+
+[ java_lib/DSS/StoreSCP ]
+[ java_lib/DSS/StoreSCP/default_session_cfg ]
+#
+#   UID's of the sop classes that will be supported by the SCP, in order of
+#   preference.
+#
+[ java_lib/DSS/StoreSCP/default_session_cfg/supported_sop_classes ]
+#SOPCLASSCOMPUTEDRADIOGRAPHY  
+sop_class = 1.2.840.10008.5.1.4.1.1.1
+#SOPCLASSXRAYPRESENTATION  
+sop_class = 1.2.840.10008.5.1.4.1.1.1.1
+#SOPCLASSXRAYPROCESSING  
+sop_class = 1.2.840.10008.5.1.4.1.1.1.1.1
+#SOPCLASSMAMMOXRAYPRESENTATION  
+sop_class = 1.2.840.10008.5.1.4.1.1.1.2
+#SOPCLASSMAMMOXRAYPROCESSING  
+sop_class = 1.2.840.10008.5.1.4.1.1.1.2.1
+#SOPCLASSINTRAORALXRAYPRESENTATION  
+sop_class = 1.2.840.10008.5.1.4.1.1.1.3
+#SOPCLASSINTRAORALXRAYPROCESSING  
+sop_class = 1.2.840.10008.5.1.4.1.1.1.3.1
+#SOPCLASSCT  
+sop_class = 1.2.840.10008.5.1.4.1.1.2
+#SOPCLASSENHANCEDCT  
+sop_class = 1.2.840.10008.5.1.4.1.1.2.1
+#SOPCLASSUSMULTIFRAMEIMAGE  
+sop_class = 1.2.840.10008.5.1.4.1.1.3.1
+#SOPCLASSMR  
+sop_class = 1.2.840.10008.5.1.4.1.1.4
+#SOPCLASSENHANCEDMR  
+sop_class = 1.2.840.10008.5.1.4.1.1.4.1
+#SOPCLASSMRSPECTROSCOPY 
+sop_class = 1.2.840.10008.5.1.4.1.1.4.2
+#SOPCLASSNM  
+sop_class = 1.2.840.10008.5.1.4.1.1.20
+#SOPCLASSUS  
+sop_class = 1.2.840.10008.5.1.4.1.1.6.1
+#SOPCLASSSECONDARYCAPTURE  
+sop_class = 1.2.840.10008.5.1.4.1.1.7
+#SOPCLASSMULTIFRAMESINGLEBITSECONDARYCAPTURE  
+sop_class = 1.2.840.10008.5.1.4.1.1.7.1
+#SOPCLASSMULTIFRAMEGRAYSCALEBYTESECONDARYCAPTURE  
+sop_class = 1.2.840.10008.5.1.4.1.1.7.2
+#SOPCLASSMULTIFRAMEGRAYSCALEWORDSECONDARYCAPTURE 
+sop_class = 1.2.840.10008.5.1.4.1.1.7.3
+#SOPCLASSMULTIFRAMETRUECOLORSECONDARYCAPTURE 
+sop_class = 1.2.840.10008.5.1.4.1.1.7.4
+#SOPCLASSSTANDALONEOVERLAY  
+sop_class = 1.2.840.10008.5.1.4.1.1.8
+#SOPCLASSSTANDALONECURVE  
+sop_class = 1.2.840.10008.5.1.4.1.1.9
+#SOPCLASSSTANDALONEMODALITYLUT  
+sop_class = 1.2.840.10008.5.1.4.1.1.10
+#SOPCLASSSTANDALONEVOILUT  
+sop_class = 1.2.840.10008.5.1.4.1.1.11
+#SOPCLASSGRAYSCALESOFTCOPYPRESENTATIONSTATE 
+sop_class = 1.2.840.10008.5.1.4.1.1.11.1
+#SOPCLASSCOLORSOFTCOPYPRESENTATIONSTATE	
+sop_class = 1.2.840.10008.5.1.4.1.1.11.2
+#SOPCLASSPSEUDOCOLORSOFTCOPYPRESENTATIONSTATE	
+sop_class = 1.2.840.10008.5.1.4.1.1.11.3
+#SOPCLASSBLENDINGSOFTCOPYPRESENTATIONSTATE	
+sop_class = 1.2.840.10008.5.1.4.1.1.11.4
+#SOPCLASSXRAYANGIO  
+sop_class = 1.2.840.10008.5.1.4.1.1.12.1
+#SOPCLASSXRAYFLUORO  
+sop_class = 1.2.840.10008.5.1.4.1.1.12.2
+#SOPCLASSRAWDATA 
+sop_class = 1.2.840.10008.5.1.4.1.1.66
+#SOPCLASSSPATIALREGISTRATION 
+sop_class = 1.2.840.10008.5.1.4.1.1.66.1
+#SOPCLASSRAWDATASPATIALFIDUCIALS 
+sop_class = 1.2.840.10008.5.1.4.1.1.66.2
+#SOPCLASS12LEADECGWAVEFORM 
+sop_class = 1.2.840.10008.5.1.4.1.1.9.1.1
+#SOPCLASSGENERALECGWAVEFORM 
+sop_class = 1.2.840.10008.5.1.4.1.1.9.1.2
+#SOPCLASSAMBULATORYECGWAVEFORM 
+sop_class = 1.2.840.10008.5.1.4.1.1.9.1.3
+#SOPCLASSHEMODYNAMICWAVEFORM 
+sop_class = 1.2.840.10008.5.1.4.1.1.9.2.1
+#SOPCLASSCARDIACELECTROPHYSIOLOGYWAVEFORM 
+sop_class = 1.2.840.10008.5.1.4.1.1.9.3.1
+#SOPCLASSBASICVOICEAUDIOWAVEFORM 
+sop_class = 1.2.840.10008.5.1.4.1.1.9.4.1
+#SOPCLASSVLENDOSCOPIC 
+sop_class = 1.2.840.10008.5.1.4.1.1.77.1.1
+#SOPCLASSVIDEOENDOSCOPIC 
+sop_class = 1.2.840.10008.5.1.4.1.1.77.1.1.1
+#SOPCLASSVLMICROSCOPIC 
+sop_class = 1.2.840.10008.5.1.4.1.1.77.1.2
+#SOPCLASSVIDEOMICROSCOPIC 
+sop_class = 1.2.840.10008.5.1.4.1.1.77.1.2.1
+#SOPCLASSVLSLIDECOORDINATESMICROSCOPIC 
+sop_class = 1.2.840.10008.5.1.4.1.1.77.1.3
+#SOPCLASSVLPHOTOGRAPHIC 
+sop_class = 1.2.840.10008.5.1.4.1.1.77.1.4
+#SOPCLASSVIDEOPHOTOGRAPHIC 
+sop_class = 1.2.840.10008.5.1.4.1.1.77.1.4.1
+#SOPCLASSOPHTHALMICPHOTOGRAPHY8 
+sop_class = 1.2.840.10008.5.1.4.1.1.77.1.5.1
+#SOPCLASSOPHTHALMICPHOTOGRAPHY16 
+sop_class = 1.2.840.10008.5.1.4.1.1.77.1.5.2
+#SOPCLASSSTEREOMETRICRELATIONSHIP 
+sop_class = 1.2.840.10008.5.1.4.1.1.77.1.5.3
+#SOPCLASSBASICTEXTSR 
+sop_class = 1.2.840.10008.5.1.4.1.1.88.11
+#SOPCLASSENHANCEDSR 
+sop_class = 1.2.840.10008.5.1.4.1.1.88.22
+#SOPCLASSCOMPREHENSIVESR 
+sop_class = 1.2.840.10008.5.1.4.1.1.88.33
+#SOPCLASSPROCEDURELOG 
+sop_class = 1.2.840.10008.5.1.4.1.1.88.40
+#SOPCLASSMAMMOGRAPHYCADSR 
+sop_class = 1.2.840.10008.5.1.4.1.1.88.50
+#SOPCLASSKEYOBJECTSELECTIONDOCUMENT 
+sop_class = 1.2.840.10008.5.1.4.1.1.88.59
+#SOPCLASSCHESTCADSR 
+sop_class = 1.2.840.10008.5.1.4.1.1.88.65
+#SOPCLASSXRAYRADIATIONDOSESR				
+sop_class = 1.2.840.10008.5.1.4.1.1.88.67
+#SOPCLASSPOSITRONEMISSIONTOMOGRAPHY 
+sop_class = 1.2.840.10008.5.1.4.1.1.128
+#SOPCLASSSTANDALONEPETCURVE 
+sop_class = 1.2.840.10008.5.1.4.1.1.129
+#SOPCLASSRTIMAGE 
+sop_class = 1.2.840.10008.5.1.4.1.1.481.1
+#SOPCLASSRTDOSE 
+sop_class = 1.2.840.10008.5.1.4.1.1.481.2
+#SOPCLASSRTSTRUCTURESET 
+sop_class = 1.2.840.10008.5.1.4.1.1.481.3
+#SOPCLASSRTBEAMSTREATMENTRECORD 
+sop_class = 1.2.840.10008.5.1.4.1.1.481.4
+#SOPCLASSRTPLAN 
+sop_class = 1.2.840.10008.5.1.4.1.1.481.5
+#SOPCLASSRTBRACHYTREATMENTRECORD 
+sop_class = 1.2.840.10008.5.1.4.1.1.481.6
+#SOPCLASSRTTREATMENTSUMMARYRECORD 
+sop_class = 1.2.840.10008.5.1.4.1.1.481.7
+#SOPCLASSENHANCEDXA						
+sop_class = 1.2.840.10008.5.1.4.1.1.12.1.1
+#SOPCLASSENHANCEDXRF						
+sop_class = 1.2.840.10008.5.1.4.1.1.12.2.1
+#SOPCLASSENCAPSULATEDPDF				
+sop_class = 1.2.840.10008.5.1.4.1.1.104.1
+#SOPCLASSENHANCEDMRCOLORIMAGE
+sop_class = 1.2.840.10008.5.1.4.1.1.4.3
+#SOPCLASSENHANCEDUSVOLUME
+sop_class = 1.2.840.10008.5.1.4.1.1.6.2
+#SOPCLASSGENERALAUDIOWAVEFORM
+sop_class = 1.2.840.10008.5.1.4.1.1.9.4.2
+#SOPCLASSARTERIALPULSEWAVEFORM
+sop_class = 1.2.840.10008.5.1.4.1.1.9.5.1
+#SOPCLASSRESPIRATORYWAVEFORM
+sop_class = 1.2.840.10008.5.1.4.1.1.9.6.1
+#SOPCLASSXAXRFGRAYSCALESOFTCOPYPRESENTATIONSTATE
+sop_class = 1.2.840.10008.5.1.4.1.1.11.5
+#SOPCLASSBREASTTOMOSYNTHESISIMAGE
+sop_class = 1.2.840.10008.5.1.4.1.1.13.1.3
+#SOPCLASSSURFACESEGMENTATION
+sop_class = 1.2.840.10008.5.1.4.1.1.66.5
+#SOPCLASSLENSOMETRYMEASUREMENTS
+sop_class = 1.2.840.10008.5.1.4.1.1.78.1
+#SOPCLASSAUTOREFRACTIONMEASUREMENTS
+sop_class = 1.2.840.10008.5.1.4.1.1.78.2
+#SOPCLASSKERATOMETRYMEASUREMENTS
+sop_class = 1.2.840.10008.5.1.4.1.1.78.3
+#SOPCLASSSUBJECTIVEREFRACTIONMEASUREMENTS
+sop_class = 1.2.840.10008.5.1.4.1.1.78.4
+#SOPCLASSVISUALACUITYMEASUREMENTS
+sop_class = 1.2.840.10008.5.1.4.1.1.78.5
+#SOPCLASSSPECTACLEPRESCRIPTIONREPORTS
+sop_class = 1.2.840.10008.5.1.4.1.1.78.6
+#SOPCLASSMACULARGRIDTHICKNESSANDVOLUMEREPORT
+sop_class = 1.2.840.10008.5.1.4.1.1.79.1
+#SOPCLASSCOLONCADSR
+sop_class = 1.2.840.10008.5.1.4.1.1.88.69
+#SOPCLASSENHANCEDPETIMAGE
+sop_class = 1.2.840.10008.5.1.4.1.1.130
+#SOPCLASSBASICSTRUCTUREDDISPLAY
+sop_class = 1.2.840.10008.5.1.4.1.1.131
+#SOPCLASSCOLORPALETTE
+sop_class = 1.2.840.10008.5.1.4.39.1
+#SOPCLASSINTRAVASCULAROPTICALCOHERENCETOMOGRAPHYIMAGEPRESENTATION
+sop_class = 1.2.840.10008.5.1.4.1.1.14.1
+#SOPCLASSINTRAVASCULAROPTICALCOHERENCETOMOGRAPHYIMAGEPROCESSING
+sop_class = 1.2.840.10008.5.1.4.1.1.14.2
+#SOPCLASSVLWHOLESLIDEMICROSCOPYIMAGE
+sop_class = 1.2.840.10008.5.1.4.1.1.77.1.6
+#SOPCLASSOPHTHALMICAXIALMEASUREMENTS
+sop_class = 1.2.840.10008.5.1.4.1.1.78.7
+#SOPCLASSINTRAOCULARLENSCALCULATIONS
+sop_class = 1.2.840.10008.5.1.4.1.1.78.8
+#SOPCLASSOPHTHALMICVISUALFIELDSTATICPERIMETRYMEASUREMENTS
+sop_class = 1.2.840.10008.5.1.4.1.1.80.1
+#SOPCLASSIMPLANTATIONPLANSR
+sop_class = 1.2.840.10008.5.1.4.1.1.88.70
+#SOPCLASSDICOSCTIMAGE
+sop_class = 1.2.840.10008.5.1.4.1.1.501.1
+#SOPCLASSDICOSDIGITALXRAYIMAGEPRESENTATION
+sop_class = 1.2.840.10008.5.1.4.1.1.501.2.1
+#SOPCLASSDICOSDIGITALXRAYIMAGEPROCESSING
+sop_class = 1.2.840.10008.5.1.4.1.1.501.2.2
+#SOPCLASSDICOSTHREATDETECTIONREPORT
+sop_class = 1.2.840.10008.5.1.4.1.1.501.3
+#SOPCLASSEDDYCURRENTIMAGE
+sop_class = 1.2.840.10008.5.1.4.1.1.601.1
+#SOPCLASSEDDYCURRENTMULTIFRAMEIMAGE
+sop_class = 1.2.840.10008.5.1.4.1.1.601.2
+#SOPCLASSRTBEAMSDELIVERYINSTRUCTION
+sop_class = 1.2.840.10008.5.1.4.34.7
+#SOPCLASSGENERICIMPLANTTEMPLATE
+sop_class = 1.2.840.10008.5.1.4.43.1
+#SOPCLASSIMPLANTASSEMBLYTEMPLATE
+sop_class = 1.2.840.10008.5.1.4.44.1
+#SOPCLASSIMPLANTTEMPLATEGROUP
+sop_class = 1.2.840.10008.5.1.4.45.1
+
+[ java_lib/DSS/StoreCommitSCUAgentMessageHandler ]
+[ java_lib/DSS/StoreCommitSCUAgentMessageHandler/default_session_cfg ]
+enforce_role_selection = false
+
+#
+#   UID's of the sop classes that will be supported by the SCP, in order of
+#   preference.
+#
+[ java_lib/DSS/StoreCommitSCUAgentMessageHandler/default_session_cfg/supported_sop_classes ]
+#SOPCLASSSTORAGECOMMITMENTPUSHMODEL
+sop_class = 1.2.840.10008.1.20.1
+
+[ java_lib/DSS/StoreCommitSCU ]
+
+[ java_lib/DSS/DicomDir ]
+[ java_lib/DSS/DicomDirectoryRecord ]
+[ java_lib/DSS/DicomDirectoryRecord/PATIENT ]
+match_tag = 0010,0020
+match_tag = 0010,0010
+copy_tag = 0008,0005
+copy_tag = 0010,0010
+copy_tag = 0010,0020
+
+[ java_lib/DSS/DicomDirectoryRecord/STUDY ]
+match_tag = 0008,0020
+match_tag = 0008,0030
+match_tag = 0020,000D
+match_tag = 0020,0010
+copy_tag = 0008,0005
+copy_tag = 0008,0020
+copy_tag = 0008,0030
+copy_tag = 0008,1030
+copy_tag = 0020,000D
+copy_tag = 0020,0010
+copy_tag = 0008,0050
+
+[ java_lib/DSS/DicomDirectoryRecord/SERIES ]
+match_tag = 0008,0060
+match_tag = 0020,000E
+match_tag = 0020,0011
+copy_tag = 0008,0005
+copy_tag = 0008,0021
+copy_tag = 0008,0031
+copy_tag = 0008,0060
+copy_tag = 0008,103E
+copy_tag = 0020,000E
+copy_tag = 0020,0011
+#copy_tag = 0088,0200
+
+[ java_lib/DSS/DicomDirectoryRecord/IMAGE ]
+match_tag = 0008,0016
+match_tag = 0008,0018
+# match_tag = 0020,0013
+copy_tag = 0008,0005
+copy_tag = 0020,0013
+copy_tag = 0008,0016
+copy_tag = 0008,0018
+#copy_tag = 0088,0200
+
+# RT DOSE tags required by Dicom Standard
+[ java_lib/DSS/DicomDirectoryRecord/RT DOSE ]
+match_tag = 0008,0016
+match_tag = 0008,0018
+copy_tag = 0008,0005
+copy_tag = 0008,0016
+copy_tag = 0008,0018
+copy_tag = 0020,0013
+copy_tag = 3004,000A
+copy_tag = 3004,0006
+#copy_tag = 0088,0200
+
+# RT STRUCTURE SET tags required by Dicom Standard
+[ java_lib/DSS/DicomDirectoryRecord/RT STRUCTURE SET ]
+match_tag = 0008,0016
+match_tag = 0008,0018
+copy_tag = 0008,0005
+copy_tag = 0008,0016
+copy_tag = 0008,0018
+copy_tag = 0020,0013
+copy_tag = 3006,0002
+copy_tag = 3006,0008
+copy_tag = 3006,0009
+
+# RT PLAN tags required by Dicom Standard
+[ java_lib/DSS/DicomDirectoryRecord/RT PLAN ]
+match_tag = 0008,0016
+match_tag = 0008,0018
+copy_tag = 0008,0005
+copy_tag = 0008,0016
+copy_tag = 0008,0018
+copy_tag = 0020,0013
+copy_tag = 300A,0002
+copy_tag = 300A,0006
+copy_tag = 300A,0007
+
+# RT TREAT RECORD tags required by Dicom Standard
+[ java_lib/DSS/DicomDirectoryRecord/RT TREAT RECORD ]
+match_tag = 0008,0016
+match_tag = 0008,0018
+copy_tag = 0008,0005
+copy_tag = 0008,0016
+copy_tag = 0008,0018
+copy_tag = 0020,0013
+copy_tag = 3008,0250
+copy_tag = 3008,0251
+
+# PRESENTATION STATE tags required by Dicom Standard
+[ java_lib/DSS/DicomDirectoryRecord/PRESENTATION ]
+match_tag = 0008,0016
+match_tag = 0008,0018
+copy_tag = 0008,0005
+copy_tag = 0008,0016
+copy_tag = 0008,0018
+copy_tag = 0070,0082
+copy_tag = 0070,0083
+copy_tag = 0008,1115
+copy_tag = 0020,0013
+copy_tag = 0070,0080
+copy_tag = 0070,0081
+copy_tag = 0070,0084
+copy_tag = 0070,0086
+
+# WAVEFORM tags required by Dicom Standard
+[ java_lib/DSS/DicomDirectoryRecord/WAVEFORM ]
+match_tag = 0008,0016
+match_tag = 0008,0018
+copy_tag = 0008,0005
+copy_tag = 0008,0016
+copy_tag = 0008,0018
+copy_tag = 0020,0013
+copy_tag = 0008,0023
+copy_tag = 0008,0033
+
+# SR DOCUMENT tags required by Dicom Standard
+[ java_lib/DSS/DicomDirectoryRecord/SR DOCUMENT ]
+match_tag = 0008,0016
+match_tag = 0008,0018
+copy_tag = 0008,0005
+copy_tag = 0008,0016
+copy_tag = 0008,0018
+copy_tag = 0020,0013
+copy_tag = 0040,A491
+copy_tag = 0040,A493
+copy_tag = 0008,0023
+copy_tag = 0008,0033
+copy_tag = 0040,A030
+copy_tag = 0040,A043
+copy_tag = 0040,A730
+
+# KEY OBJECT DOCUMENT tags required by Dicom Standard
+[ java_lib/DSS/DicomDirectoryRecord/KEY OBJECT DOC ]
+match_tag = 0008,0016
+match_tag = 0008,0018
+copy_tag = 0008,0005
+copy_tag = 0008,0016
+copy_tag = 0008,0018
+copy_tag = 0020,0013
+copy_tag = 0008,0023
+copy_tag = 0008,0033
+copy_tag = 0040,A043
+copy_tag = 0040,A730
+
+# SPECTROSCOPY tags required by Dicom Standard
+[ java_lib/DSS/DicomDirectoryRecord/SPECTROSCOPY ]
+match_tag = 0008,0016
+match_tag = 0008,0018
+copy_tag = 0008,0005
+copy_tag = 0008,0016
+copy_tag = 0008,0018
+copy_tag = 0020,0013
+copy_tag = 0008,0008
+copy_tag = 0008,0023
+copy_tag = 0008,0033
+copy_tag = 0008,9092
+copy_tag = 0028,0008
+copy_tag = 0028,0010
+copy_tag = 0028,0011
+copy_tag = 0028,9001
+copy_tag = 0028,9002
+
+# RAW DATA tags required by Dicom Standard
+[ java_lib/DSS/DicomDirectoryRecord/RAW DATA ]
+match_tag = 0008,0016
+match_tag = 0008,0018
+copy_tag = 0008,0005
+copy_tag = 0008,0016
+copy_tag = 0008,0018
+copy_tag = 0020,0013
+copy_tag = 0008,0023
+copy_tag = 0008,0033
+#copy_tag = 0088,0200
+
+# REGISTRATION tags required by Dicom Standard
+[ java_lib/DSS/DicomDirectoryRecord/REGISTRATION ]
+match_tag = 0008,0016
+match_tag = 0008,0018
+copy_tag = 0008,0005
+copy_tag = 0008,0016
+copy_tag = 0008,0018
+copy_tag = 0008,0023
+copy_tag = 0008,0033
+copy_tag = 0020,0013
+copy_tag = 0070,0080
+copy_tag = 0070,0081
+copy_tag = 0070,0084
+copy_tag = 0070,0086
+
+# FIDUCIAL DIRECTORY RECORD tags required by Dicom Standard
+[ java_lib/DSS/DicomDirectoryRecord/FIDUCIAL ]
+match_tag = 0008,0016
+match_tag = 0008,0018
+copy_tag = 0008,0005
+copy_tag = 0008,0016
+copy_tag = 0008,0018
+copy_tag = 0008,0023
+copy_tag = 0008,0033
+copy_tag = 0020,0013
+copy_tag = 0070,0080
+copy_tag = 0070,0081
+copy_tag = 0070,0084
+copy_tag = 0070,0086
+
+# HANGING PROTOCOL tags required by Dicom Standard
+[ java_lib/DSS/DicomDirectoryRecord/HANGING PROTOCOL ]
+match_tag = 0008,0016
+match_tag = 0008,0018
+copy_tag = 0008,0005
+copy_tag = 0008,0016
+copy_tag = 0008,0018
+copy_tag = 0072,0002
+copy_tag = 0072,0004
+copy_tag = 0072,0006
+copy_tag = 0072,0008
+copy_tag = 0072,000A
+copy_tag = 0072,000C
+copy_tag = 0072,0014
+copy_tag = 0072,000E
+
+# ENCAPSULATED DOCUMENT tags required by Dicom Standard
+[ java_lib/DSS/DicomDirectoryRecord/ENCAP DOC ]
+match_tag = 0008,0016
+match_tag = 0008,0018
+copy_tag = 0008,0005
+copy_tag = 0008,0016
+copy_tag = 0008,0018
+copy_tag = 0008,0023
+copy_tag = 0008,0033
+copy_tag = 0020,0013
+copy_tag = 0042,0010
+copy_tag = 0040,E001
+copy_tag = 0040,A043
+copy_tag = 0042,0012
+
+
+# HL7 STRUCTURED DOCUMENT tags required by Dicom Standard
+[ java_lib/DSS/DicomDirectoryRecord/HL7 STRUC DOC ]
+match_tag = 0008,0016
+match_tag = 0008,0018
+copy_tag = 0008,0005
+copy_tag = 0008,0016
+copy_tag = 0008,0018
+copy_tag = 0040,E001
+copy_tag = 0040,E004
+copy_tag = 0040,E006
+copy_tag = 0042,0010
+
+# REAL WORLD VALUE MAPPING tags required by Dicom Standard
+[ java_lib/DSS/DicomDirectoryRecord/VALUE MAP ]
+match_tag = 0008,0016
+match_tag = 0008,0018
+copy_tag = 0008,0005
+copy_tag = 0008,0016
+copy_tag = 0008,0018
+copy_tag = 0008,0023
+copy_tag = 0008,0033
+
+# STEREOMETRIC RELATIONSHIP tags required by Dicom Standard
+[ java_lib/DSS/DicomDirectoryRecord/STEREOMETRIC ]
+match_tag = 0008,0016
+match_tag = 0008,0018
+copy_tag = 0008,0005
+copy_tag = 0008,0016
+copy_tag = 0008,0018
+
+# For record types not specified, use these match/copy tags.
+[ java_lib/DSS/DicomDirectoryRecord/DEFAULT ]
+match_tag = 0008,0016
+match_tag = 0008,0018
+copy_tag = 0008,0016
+copy_tag = 0008,0018
+
+[ java_lib/DSS/default_session_cfg ]
+query_timeout_seconds = 180
+progress_timeout_seconds = -1
+max_returned_results = 100
+
+[ java_lib/DSS/QRSCU ]
+[ java_lib/DSS/QRSCU/default_session_cfg ]
+# implicit-little-endian
+c_get_store_transfer_syntax = 1.2.840.10008.1.2
+
+[ java_lib/DSS/QRSCU/default_session_cfg/c_get_store_sop_classes ]
+#SOPCLASSCOMPUTEDRADIOGRAPHY  
+sop_class = 1.2.840.10008.5.1.4.1.1.1
+#SOPCLASSXRAYPRESENTATION  
+sop_class = 1.2.840.10008.5.1.4.1.1.1.1
+#SOPCLASSXRAYPROCESSING  
+sop_class = 1.2.840.10008.5.1.4.1.1.1.1.1
+#SOPCLASSMAMMOXRAYPRESENTATION  
+sop_class = 1.2.840.10008.5.1.4.1.1.1.2
+#SOPCLASSMAMMOXRAYPROCESSING  
+sop_class = 1.2.840.10008.5.1.4.1.1.1.2.1
+#SOPCLASSINTRAORALXRAYPRESENTATION  
+sop_class = 1.2.840.10008.5.1.4.1.1.1.3
+#SOPCLASSINTRAORALXRAYPROCESSING  
+sop_class = 1.2.840.10008.5.1.4.1.1.1.3.1
+#SOPCLASSCT  
+sop_class = 1.2.840.10008.5.1.4.1.1.2
+#SOPCLASSENHANCEDCT  
+sop_class = 1.2.840.10008.5.1.4.1.1.2.1
+#SOPCLASSUSMULTIFRAMEIMAGE  
+sop_class = 1.2.840.10008.5.1.4.1.1.3.1
+#SOPCLASSMR  
+sop_class = 1.2.840.10008.5.1.4.1.1.4
+#SOPCLASSENHANCEDMR  
+sop_class = 1.2.840.10008.5.1.4.1.1.4.1
+#SOPCLASSMRSPECTROSCOPY 
+sop_class = 1.2.840.10008.5.1.4.1.1.4.2
+#SOPCLASSNM  
+sop_class = 1.2.840.10008.5.1.4.1.1.20
+#SOPCLASSUS  
+sop_class = 1.2.840.10008.5.1.4.1.1.6.1
+#SOPCLASSSECONDARYCAPTURE  
+sop_class = 1.2.840.10008.5.1.4.1.1.7
+#SOPCLASSMULTIFRAMESINGLEBITSECONDARYCAPTURE  
+sop_class = 1.2.840.10008.5.1.4.1.1.7.1
+#SOPCLASSMULTIFRAMEGRAYSCALEBYTESECONDARYCAPTURE  
+sop_class = 1.2.840.10008.5.1.4.1.1.7.2
+#SOPCLASSMULTIFRAMEGRAYSCALEWORDSECONDARYCAPTURE 
+sop_class = 1.2.840.10008.5.1.4.1.1.7.3
+#SOPCLASSMULTIFRAMETRUECOLORSECONDARYCAPTURE 
+sop_class = 1.2.840.10008.5.1.4.1.1.7.4
+#SOPCLASSSTANDALONEOVERLAY  
+sop_class = 1.2.840.10008.5.1.4.1.1.8
+#SOPCLASSSTANDALONECURVE  
+sop_class = 1.2.840.10008.5.1.4.1.1.9
+#SOPCLASSSTANDALONEMODALITYLUT  
+sop_class = 1.2.840.10008.5.1.4.1.1.10
+#SOPCLASSSTANDALONEVOILUT  
+sop_class = 1.2.840.10008.5.1.4.1.1.11
+#SOPCLASSGRAYSCALESOFTCOPYPRESENTATIONSTATE 
+sop_class = 1.2.840.10008.5.1.4.1.1.11.1
+#SOPCLASSCOLORSOFTCOPYPRESENTATIONSTATE	
+sop_class = 1.2.840.10008.5.1.4.1.1.11.2
+#SOPCLASSPSEUDOCOLORSOFTCOPYPRESENTATIONSTATE	
+sop_class = 1.2.840.10008.5.1.4.1.1.11.3
+#SOPCLASSBLENDINGSOFTCOPYPRESENTATIONSTATE	
+sop_class = 1.2.840.10008.5.1.4.1.1.11.4
+#SOPCLASSXRAYANGIO  
+sop_class = 1.2.840.10008.5.1.4.1.1.12.1
+#SOPCLASSXRAYFLUORO  
+sop_class = 1.2.840.10008.5.1.4.1.1.12.2
+#SOPCLASSRAWDATA 
+sop_class = 1.2.840.10008.5.1.4.1.1.66
+#SOPCLASSSPATIALREGISTRATION 
+sop_class = 1.2.840.10008.5.1.4.1.1.66.1
+#SOPCLASSRAWDATASPATIALFIDUCIALS 
+sop_class = 1.2.840.10008.5.1.4.1.1.66.2
+#SOPCLASS12LEADECGWAVEFORM 
+sop_class = 1.2.840.10008.5.1.4.1.1.9.1.1
+#SOPCLASSGENERALECGWAVEFORM 
+sop_class = 1.2.840.10008.5.1.4.1.1.9.1.2
+#SOPCLASSAMBULATORYECGWAVEFORM 
+sop_class = 1.2.840.10008.5.1.4.1.1.9.1.3
+#SOPCLASSHEMODYNAMICWAVEFORM 
+sop_class = 1.2.840.10008.5.1.4.1.1.9.2.1
+#SOPCLASSCARDIACELECTROPHYSIOLOGYWAVEFORM 
+sop_class = 1.2.840.10008.5.1.4.1.1.9.3.1
+#SOPCLASSBASICVOICEAUDIOWAVEFORM 
+sop_class = 1.2.840.10008.5.1.4.1.1.9.4.1
+#SOPCLASSVLENDOSCOPIC 
+sop_class = 1.2.840.10008.5.1.4.1.1.77.1.1
+#SOPCLASSVIDEOENDOSCOPIC 
+sop_class = 1.2.840.10008.5.1.4.1.1.77.1.1.1
+#SOPCLASSVLMICROSCOPIC 
+sop_class = 1.2.840.10008.5.1.4.1.1.77.1.2
+#SOPCLASSVIDEOMICROSCOPIC 
+sop_class = 1.2.840.10008.5.1.4.1.1.77.1.2.1
+#SOPCLASSVLSLIDECOORDINATESMICROSCOPIC 
+sop_class = 1.2.840.10008.5.1.4.1.1.77.1.3
+#SOPCLASSVLPHOTOGRAPHIC 
+sop_class = 1.2.840.10008.5.1.4.1.1.77.1.4
+#SOPCLASSVIDEOPHOTOGRAPHIC 
+sop_class = 1.2.840.10008.5.1.4.1.1.77.1.4.1
+#SOPCLASSOPHTHALMICPHOTOGRAPHY8 
+sop_class = 1.2.840.10008.5.1.4.1.1.77.1.5.1
+#SOPCLASSOPHTHALMICPHOTOGRAPHY16 
+sop_class = 1.2.840.10008.5.1.4.1.1.77.1.5.2
+#SOPCLASSSTEREOMETRICRELATIONSHIP 
+sop_class = 1.2.840.10008.5.1.4.1.1.77.1.5.3
+#SOPCLASSBASICTEXTSR 
+sop_class = 1.2.840.10008.5.1.4.1.1.88.11
+#SOPCLASSENHANCEDSR 
+sop_class = 1.2.840.10008.5.1.4.1.1.88.22
+#SOPCLASSCOMPREHENSIVESR 
+sop_class = 1.2.840.10008.5.1.4.1.1.88.33
+#SOPCLASSPROCEDURELOG 
+sop_class = 1.2.840.10008.5.1.4.1.1.88.40
+#SOPCLASSMAMMOGRAPHYCADSR 
+sop_class = 1.2.840.10008.5.1.4.1.1.88.50
+#SOPCLASSKEYOBJECTSELECTIONDOCUMENT 
+sop_class = 1.2.840.10008.5.1.4.1.1.88.59
+#SOPCLASSCHESTCADSR 
+sop_class = 1.2.840.10008.5.1.4.1.1.88.65
+#SOPCLASSXRAYRADIATIONDOSESR				
+sop_class = 1.2.840.10008.5.1.4.1.1.88.67
+#SOPCLASSPOSITRONEMISSIONTOMOGRAPHY 
+sop_class = 1.2.840.10008.5.1.4.1.1.128
+#SOPCLASSSTANDALONEPETCURVE 
+sop_class = 1.2.840.10008.5.1.4.1.1.129
+#SOPCLASSRTIMAGE 
+sop_class = 1.2.840.10008.5.1.4.1.1.481.1
+#SOPCLASSRTDOSE 
+sop_class = 1.2.840.10008.5.1.4.1.1.481.2
+#SOPCLASSRTSTRUCTURESET 
+sop_class = 1.2.840.10008.5.1.4.1.1.481.3
+#SOPCLASSRTBEAMSTREATMENTRECORD 
+sop_class = 1.2.840.10008.5.1.4.1.1.481.4
+#SOPCLASSRTPLAN 
+sop_class = 1.2.840.10008.5.1.4.1.1.481.5
+#SOPCLASSRTBRACHYTREATMENTRECORD 
+sop_class = 1.2.840.10008.5.1.4.1.1.481.6
+#SOPCLASSRTTREATMENTSUMMARYRECORD 
+sop_class = 1.2.840.10008.5.1.4.1.1.481.7
+#SOPCLASSENHANCEDXA						
+sop_class = 1.2.840.10008.5.1.4.1.1.12.1.1
+#SOPCLASSENHANCEDXRF						
+sop_class = 1.2.840.10008.5.1.4.1.1.12.2.1
+#SOPCLASSENCAPSULATEDPDF				
+sop_class = 1.2.840.10008.5.1.4.1.1.104.1
+#SOPCLASSENHANCEDMRCOLORIMAGE
+sop_class = 1.2.840.10008.5.1.4.1.1.4.3
+#SOPCLASSENHANCEDUSVOLUME
+sop_class = 1.2.840.10008.5.1.4.1.1.6.2
+#SOPCLASSGENERALAUDIOWAVEFORM
+sop_class = 1.2.840.10008.5.1.4.1.1.9.4.2
+#SOPCLASSARTERIALPULSEWAVEFORM
+sop_class = 1.2.840.10008.5.1.4.1.1.9.5.1
+#SOPCLASSRESPIRATORYWAVEFORM
+sop_class = 1.2.840.10008.5.1.4.1.1.9.6.1
+#SOPCLASSXAXRFGRAYSCALESOFTCOPYPRESENTATIONSTATE
+sop_class = 1.2.840.10008.5.1.4.1.1.11.5
+#SOPCLASSBREASTTOMOSYNTHESISIMAGE
+sop_class = 1.2.840.10008.5.1.4.1.1.13.1.3
+#SOPCLASSSURFACESEGMENTATION
+sop_class = 1.2.840.10008.5.1.4.1.1.66.5
+#SOPCLASSLENSOMETRYMEASUREMENTS
+sop_class = 1.2.840.10008.5.1.4.1.1.78.1
+#SOPCLASSAUTOREFRACTIONMEASUREMENTS
+sop_class = 1.2.840.10008.5.1.4.1.1.78.2
+#SOPCLASSKERATOMETRYMEASUREMENTS
+sop_class = 1.2.840.10008.5.1.4.1.1.78.3
+#SOPCLASSSUBJECTIVEREFRACTIONMEASUREMENTS
+sop_class = 1.2.840.10008.5.1.4.1.1.78.4
+#SOPCLASSVISUALACUITYMEASUREMENTS
+sop_class = 1.2.840.10008.5.1.4.1.1.78.5
+#SOPCLASSSPECTACLEPRESCRIPTIONREPORTS
+sop_class = 1.2.840.10008.5.1.4.1.1.78.6
+#SOPCLASSMACULARGRIDTHICKNESSANDVOLUMEREPORT
+sop_class = 1.2.840.10008.5.1.4.1.1.79.1
+#SOPCLASSCOLONCADSR
+sop_class = 1.2.840.10008.5.1.4.1.1.88.69
+#SOPCLASSENHANCEDPETIMAGE
+sop_class = 1.2.840.10008.5.1.4.1.1.130
+#SOPCLASSBASICSTRUCTUREDDISPLAY
+sop_class = 1.2.840.10008.5.1.4.1.1.131
+#SOPCLASSCOLORPALETTE
+sop_class = 1.2.840.10008.5.1.4.39.1
+#SOPCLASSINTRAVASCULAROPTICALCOHERENCETOMOGRAPHYIMAGEPRESENTATION
+sop_class = 1.2.840.10008.5.1.4.1.1.14.1
+#SOPCLASSINTRAVASCULAROPTICALCOHERENCETOMOGRAPHYIMAGEPROCESSING
+sop_class = 1.2.840.10008.5.1.4.1.1.14.2
+#SOPCLASSVLWHOLESLIDEMICROSCOPYIMAGE
+sop_class = 1.2.840.10008.5.1.4.1.1.77.1.6
+#SOPCLASSOPHTHALMICAXIALMEASUREMENTS
+sop_class = 1.2.840.10008.5.1.4.1.1.78.7
+#SOPCLASSINTRAOCULARLENSCALCULATIONS
+sop_class = 1.2.840.10008.5.1.4.1.1.78.8
+#SOPCLASSOPHTHALMICVISUALFIELDSTATICPERIMETRYMEASUREMENTS
+sop_class = 1.2.840.10008.5.1.4.1.1.80.1
+#SOPCLASSIMPLANTATIONPLANSR
+sop_class = 1.2.840.10008.5.1.4.1.1.88.70
+#SOPCLASSDICOSCTIMAGE
+sop_class = 1.2.840.10008.5.1.4.1.1.501.1
+#SOPCLASSDICOSDIGITALXRAYIMAGEPRESENTATION
+sop_class = 1.2.840.10008.5.1.4.1.1.501.2.1
+#SOPCLASSDICOSDIGITALXRAYIMAGEPROCESSING
+sop_class = 1.2.840.10008.5.1.4.1.1.501.2.2
+#SOPCLASSDICOSTHREATDETECTIONREPORT
+sop_class = 1.2.840.10008.5.1.4.1.1.501.3
+#SOPCLASSEDDYCURRENTIMAGE
+sop_class = 1.2.840.10008.5.1.4.1.1.601.1
+#SOPCLASSEDDYCURRENTMULTIFRAMEIMAGE
+sop_class = 1.2.840.10008.5.1.4.1.1.601.2
+#SOPCLASSRTBEAMSDELIVERYINSTRUCTION
+sop_class = 1.2.840.10008.5.1.4.34.7
+#SOPCLASSGENERICIMPLANTTEMPLATE
+sop_class = 1.2.840.10008.5.1.4.43.1
+#SOPCLASSIMPLANTASSEMBLYTEMPLATE
+sop_class = 1.2.840.10008.5.1.4.44.1
+#SOPCLASSIMPLANTTEMPLATEGROUP
+sop_class = 1.2.840.10008.5.1.4.45.1
+
+[ java_lib/DSS/QRSCP ]
+[ java_lib/DSS/QRSCP/default_session_cfg ]
+enable_relational_retrieval = yes
+filter_query_responses = yes
+send_pending_move_get_status = yes
+continue_after_subop_error = yes
+c_store_subop_timeout_seconds = 10
+
+[ java_lib/DSS/QRSCP/default_session_cfg/supported_sop_classes ]
+# UID_SOPPATIENTQUERY_FIND
+#sop_class = 1.2.840.10008.5.1.4.1.2.1.1
+# UID_SOPPATIENTQUERY_MOVE
+sop_class = 1.2.840.10008.5.1.4.1.2.1.2
+# UID_SOPPATIENTQUERY_GET
+sop_class = 1.2.840.10008.5.1.4.1.2.1.3
+# UID_SOPSTUDYQUERY_FIND
+sop_class = 1.2.840.10008.5.1.4.1.2.2.1
+# UID_SOPSTUDYQUERY_MOVE
+sop_class = 1.2.840.10008.5.1.4.1.2.2.2
+# UID_SOPSTUDYQUERY_GET
+sop_class = 1.2.840.10008.5.1.4.1.2.2.3
+# UID_SOPPATIENTSTUDYQUERY_FIND
+sop_class = 1.2.840.10008.5.1.4.1.2.3.1
+# UID_SOPPATIENTSTUDYQUERY_MOVE
+sop_class = 1.2.840.10008.5.1.4.1.2.3.2
+# UID_SOPPATIENTSTUDYQUERY_GET
+
+[ java_lib/DSS/QRSCP/default_session_cfg/supported_store_sop_classes ]
+#SOPCLASSCOMPUTEDRADIOGRAPHY  
+sop_class = 1.2.840.10008.5.1.4.1.1.1
+#SOPCLASSXRAYPRESENTATION  
+sop_class = 1.2.840.10008.5.1.4.1.1.1.1
+#SOPCLASSXRAYPROCESSING  
+sop_class = 1.2.840.10008.5.1.4.1.1.1.1.1
+#SOPCLASSMAMMOXRAYPRESENTATION  
+sop_class = 1.2.840.10008.5.1.4.1.1.1.2
+#SOPCLASSMAMMOXRAYPROCESSING  
+sop_class = 1.2.840.10008.5.1.4.1.1.1.2.1
+#SOPCLASSINTRAORALXRAYPRESENTATION  
+sop_class = 1.2.840.10008.5.1.4.1.1.1.3
+#SOPCLASSINTRAORALXRAYPROCESSING  
+sop_class = 1.2.840.10008.5.1.4.1.1.1.3.1
+#SOPCLASSCT  
+sop_class = 1.2.840.10008.5.1.4.1.1.2
+#SOPCLASSENHANCEDCT  
+sop_class = 1.2.840.10008.5.1.4.1.1.2.1
+#SOPCLASSUSMULTIFRAMEIMAGE  
+sop_class = 1.2.840.10008.5.1.4.1.1.3.1
+#SOPCLASSMR  
+sop_class = 1.2.840.10008.5.1.4.1.1.4
+#SOPCLASSENHANCEDMR  
+sop_class = 1.2.840.10008.5.1.4.1.1.4.1
+#SOPCLASSMRSPECTROSCOPY 
+sop_class = 1.2.840.10008.5.1.4.1.1.4.2
+#SOPCLASSNM  
+sop_class = 1.2.840.10008.5.1.4.1.1.20
+#SOPCLASSUS  
+sop_class = 1.2.840.10008.5.1.4.1.1.6.1
+#SOPCLASSSECONDARYCAPTURE  
+sop_class = 1.2.840.10008.5.1.4.1.1.7
+#SOPCLASSMULTIFRAMESINGLEBITSECONDARYCAPTURE  
+sop_class = 1.2.840.10008.5.1.4.1.1.7.1
+#SOPCLASSMULTIFRAMEGRAYSCALEBYTESECONDARYCAPTURE  
+sop_class = 1.2.840.10008.5.1.4.1.1.7.2
+#SOPCLASSMULTIFRAMEGRAYSCALEWORDSECONDARYCAPTURE 
+sop_class = 1.2.840.10008.5.1.4.1.1.7.3
+#SOPCLASSMULTIFRAMETRUECOLORSECONDARYCAPTURE 
+sop_class = 1.2.840.10008.5.1.4.1.1.7.4
+#SOPCLASSSTANDALONEOVERLAY  
+sop_class = 1.2.840.10008.5.1.4.1.1.8
+#SOPCLASSSTANDALONECURVE  
+sop_class = 1.2.840.10008.5.1.4.1.1.9
+#SOPCLASSSTANDALONEMODALITYLUT  
+sop_class = 1.2.840.10008.5.1.4.1.1.10
+#SOPCLASSSTANDALONEVOILUT  
+sop_class = 1.2.840.10008.5.1.4.1.1.11
+#SOPCLASSGRAYSCALESOFTCOPYPRESENTATIONSTATE 
+sop_class = 1.2.840.10008.5.1.4.1.1.11.1
+#SOPCLASSCOLORSOFTCOPYPRESENTATIONSTATE	
+sop_class = 1.2.840.10008.5.1.4.1.1.11.2
+#SOPCLASSPSEUDOCOLORSOFTCOPYPRESENTATIONSTATE	
+sop_class = 1.2.840.10008.5.1.4.1.1.11.3
+#SOPCLASSBLENDINGSOFTCOPYPRESENTATIONSTATE	
+sop_class = 1.2.840.10008.5.1.4.1.1.11.4
+#SOPCLASSXRAYANGIO  
+sop_class = 1.2.840.10008.5.1.4.1.1.12.1
+#SOPCLASSXRAYFLUORO  
+sop_class = 1.2.840.10008.5.1.4.1.1.12.2
+#SOPCLASSRAWDATA 
+sop_class = 1.2.840.10008.5.1.4.1.1.66
+#SOPCLASSSPATIALREGISTRATION 
+sop_class = 1.2.840.10008.5.1.4.1.1.66.1
+#SOPCLASSRAWDATASPATIALFIDUCIALS 
+sop_class = 1.2.840.10008.5.1.4.1.1.66.2
+#SOPCLASS12LEADECGWAVEFORM 
+sop_class = 1.2.840.10008.5.1.4.1.1.9.1.1
+#SOPCLASSGENERALECGWAVEFORM 
+sop_class = 1.2.840.10008.5.1.4.1.1.9.1.2
+#SOPCLASSAMBULATORYECGWAVEFORM 
+sop_class = 1.2.840.10008.5.1.4.1.1.9.1.3
+#SOPCLASSHEMODYNAMICWAVEFORM 
+sop_class = 1.2.840.10008.5.1.4.1.1.9.2.1
+#SOPCLASSCARDIACELECTROPHYSIOLOGYWAVEFORM 
+sop_class = 1.2.840.10008.5.1.4.1.1.9.3.1
+#SOPCLASSBASICVOICEAUDIOWAVEFORM 
+sop_class = 1.2.840.10008.5.1.4.1.1.9.4.1
+#SOPCLASSVLENDOSCOPIC 
+sop_class = 1.2.840.10008.5.1.4.1.1.77.1.1
+#SOPCLASSVIDEOENDOSCOPIC 
+sop_class = 1.2.840.10008.5.1.4.1.1.77.1.1.1
+#SOPCLASSVLMICROSCOPIC 
+sop_class = 1.2.840.10008.5.1.4.1.1.77.1.2
+#SOPCLASSVIDEOMICROSCOPIC 
+sop_class = 1.2.840.10008.5.1.4.1.1.77.1.2.1
+#SOPCLASSVLSLIDECOORDINATESMICROSCOPIC 
+sop_class = 1.2.840.10008.5.1.4.1.1.77.1.3
+#SOPCLASSVLPHOTOGRAPHIC 
+sop_class = 1.2.840.10008.5.1.4.1.1.77.1.4
+#SOPCLASSVIDEOPHOTOGRAPHIC 
+sop_class = 1.2.840.10008.5.1.4.1.1.77.1.4.1
+#SOPCLASSOPHTHALMICPHOTOGRAPHY8 
+sop_class = 1.2.840.10008.5.1.4.1.1.77.1.5.1
+#SOPCLASSOPHTHALMICPHOTOGRAPHY16 
+sop_class = 1.2.840.10008.5.1.4.1.1.77.1.5.2
+#SOPCLASSSTEREOMETRICRELATIONSHIP 
+sop_class = 1.2.840.10008.5.1.4.1.1.77.1.5.3
+#SOPCLASSBASICTEXTSR 
+sop_class = 1.2.840.10008.5.1.4.1.1.88.11
+#SOPCLASSENHANCEDSR 
+sop_class = 1.2.840.10008.5.1.4.1.1.88.22
+#SOPCLASSCOMPREHENSIVESR 
+sop_class = 1.2.840.10008.5.1.4.1.1.88.33
+#SOPCLASSPROCEDURELOG 
+sop_class = 1.2.840.10008.5.1.4.1.1.88.40
+#SOPCLASSMAMMOGRAPHYCADSR 
+sop_class = 1.2.840.10008.5.1.4.1.1.88.50
+#SOPCLASSKEYOBJECTSELECTIONDOCUMENT 
+sop_class = 1.2.840.10008.5.1.4.1.1.88.59
+#SOPCLASSCHESTCADSR 
+sop_class = 1.2.840.10008.5.1.4.1.1.88.65
+#SOPCLASSXRAYRADIATIONDOSESR				
+sop_class = 1.2.840.10008.5.1.4.1.1.88.67
+#SOPCLASSPOSITRONEMISSIONTOMOGRAPHY 
+sop_class = 1.2.840.10008.5.1.4.1.1.128
+#SOPCLASSSTANDALONEPETCURVE 
+sop_class = 1.2.840.10008.5.1.4.1.1.129
+#SOPCLASSRTIMAGE 
+sop_class = 1.2.840.10008.5.1.4.1.1.481.1
+#SOPCLASSRTDOSE 
+sop_class = 1.2.840.10008.5.1.4.1.1.481.2
+#SOPCLASSRTSTRUCTURESET 
+sop_class = 1.2.840.10008.5.1.4.1.1.481.3
+#SOPCLASSRTBEAMSTREATMENTRECORD 
+sop_class = 1.2.840.10008.5.1.4.1.1.481.4
+#SOPCLASSRTPLAN 
+sop_class = 1.2.840.10008.5.1.4.1.1.481.5
+#SOPCLASSRTBRACHYTREATMENTRECORD 
+sop_class = 1.2.840.10008.5.1.4.1.1.481.6
+#SOPCLASSRTTREATMENTSUMMARYRECORD 
+sop_class = 1.2.840.10008.5.1.4.1.1.481.7
+#SOPCLASSENHANCEDXA						
+sop_class = 1.2.840.10008.5.1.4.1.1.12.1.1
+#SOPCLASSENHANCEDXRF						
+sop_class = 1.2.840.10008.5.1.4.1.1.12.2.1
+#SOPCLASSENCAPSULATEDPDF				
+sop_class = 1.2.840.10008.5.1.4.1.1.104.1
+#SOPCLASSENHANCEDMRCOLORIMAGE
+sop_class = 1.2.840.10008.5.1.4.1.1.4.3
+#SOPCLASSENHANCEDUSVOLUME
+sop_class = 1.2.840.10008.5.1.4.1.1.6.2
+#SOPCLASSGENERALAUDIOWAVEFORM
+sop_class = 1.2.840.10008.5.1.4.1.1.9.4.2
+#SOPCLASSARTERIALPULSEWAVEFORM
+sop_class = 1.2.840.10008.5.1.4.1.1.9.5.1
+#SOPCLASSRESPIRATORYWAVEFORM
+sop_class = 1.2.840.10008.5.1.4.1.1.9.6.1
+#SOPCLASSXAXRFGRAYSCALESOFTCOPYPRESENTATIONSTATE
+sop_class = 1.2.840.10008.5.1.4.1.1.11.5
+#SOPCLASSBREASTTOMOSYNTHESISIMAGE
+sop_class = 1.2.840.10008.5.1.4.1.1.13.1.3
+#SOPCLASSSURFACESEGMENTATION
+sop_class = 1.2.840.10008.5.1.4.1.1.66.5
+#SOPCLASSLENSOMETRYMEASUREMENTS
+sop_class = 1.2.840.10008.5.1.4.1.1.78.1
+#SOPCLASSAUTOREFRACTIONMEASUREMENTS
+sop_class = 1.2.840.10008.5.1.4.1.1.78.2
+#SOPCLASSKERATOMETRYMEASUREMENTS
+sop_class = 1.2.840.10008.5.1.4.1.1.78.3
+#SOPCLASSSUBJECTIVEREFRACTIONMEASUREMENTS
+sop_class = 1.2.840.10008.5.1.4.1.1.78.4
+#SOPCLASSVISUALACUITYMEASUREMENTS
+sop_class = 1.2.840.10008.5.1.4.1.1.78.5
+#SOPCLASSSPECTACLEPRESCRIPTIONREPORTS
+sop_class = 1.2.840.10008.5.1.4.1.1.78.6
+#SOPCLASSMACULARGRIDTHICKNESSANDVOLUMEREPORT
+sop_class = 1.2.840.10008.5.1.4.1.1.79.1
+#SOPCLASSCOLONCADSR
+sop_class = 1.2.840.10008.5.1.4.1.1.88.69
+#SOPCLASSENHANCEDPETIMAGE
+sop_class = 1.2.840.10008.5.1.4.1.1.130
+#SOPCLASSBASICSTRUCTUREDDISPLAY
+sop_class = 1.2.840.10008.5.1.4.1.1.131
+#SOPCLASSCOLORPALETTE
+sop_class = 1.2.840.10008.5.1.4.39.1
+#SOPCLASSINTRAVASCULAROPTICALCOHERENCETOMOGRAPHYIMAGEPRESENTATION
+sop_class = 1.2.840.10008.5.1.4.1.1.14.1
+#SOPCLASSINTRAVASCULAROPTICALCOHERENCETOMOGRAPHYIMAGEPROCESSING
+sop_class = 1.2.840.10008.5.1.4.1.1.14.2
+#SOPCLASSVLWHOLESLIDEMICROSCOPYIMAGE
+sop_class = 1.2.840.10008.5.1.4.1.1.77.1.6
+#SOPCLASSOPHTHALMICAXIALMEASUREMENTS
+sop_class = 1.2.840.10008.5.1.4.1.1.78.7
+#SOPCLASSINTRAOCULARLENSCALCULATIONS
+sop_class = 1.2.840.10008.5.1.4.1.1.78.8
+#SOPCLASSOPHTHALMICVISUALFIELDSTATICPERIMETRYMEASUREMENTS
+sop_class = 1.2.840.10008.5.1.4.1.1.80.1
+#SOPCLASSIMPLANTATIONPLANSR
+sop_class = 1.2.840.10008.5.1.4.1.1.88.70
+#SOPCLASSDICOSCTIMAGE
+sop_class = 1.2.840.10008.5.1.4.1.1.501.1
+#SOPCLASSDICOSDIGITALXRAYIMAGEPRESENTATION
+sop_class = 1.2.840.10008.5.1.4.1.1.501.2.1
+#SOPCLASSDICOSDIGITALXRAYIMAGEPROCESSING
+sop_class = 1.2.840.10008.5.1.4.1.1.501.2.2
+#SOPCLASSDICOSTHREATDETECTIONREPORT
+sop_class = 1.2.840.10008.5.1.4.1.1.501.3
+#SOPCLASSEDDYCURRENTIMAGE
+sop_class = 1.2.840.10008.5.1.4.1.1.601.1
+#SOPCLASSEDDYCURRENTMULTIFRAMEIMAGE
+sop_class = 1.2.840.10008.5.1.4.1.1.601.2
+#SOPCLASSRTBEAMSDELIVERYINSTRUCTION
+sop_class = 1.2.840.10008.5.1.4.34.7
+#SOPCLASSGENERICIMPLANTTEMPLATE
+sop_class = 1.2.840.10008.5.1.4.43.1
+#SOPCLASSIMPLANTASSEMBLYTEMPLATE
+sop_class = 1.2.840.10008.5.1.4.44.1
+#SOPCLASSIMPLANTTEMPLATEGROUP
+sop_class = 1.2.840.10008.5.1.4.45.1
+
+
+[ java_lib/DSS/StoreCommitSCP ]
+[ java_lib/DSS/StoreCommitSCP/default_session_cfg ]
+#
+#   UID's of the sop classes that will be supported by the SCP, in order of
+#   preference.
+#
+[ java_lib/DSS/StoreCommitSCP/default_session_cfg/supported_sop_classes ]
+#UIDSOPCLASSSTORAGECOMMITMENTPUSHMODEL
+sop_class = 1.2.840.10008.1.20.1
+
+#==============================================================================
+# per-instance information for the DDS component
+#==============================================================================
+[ java_lib/DDS ]
+debug_flags = 0x000ff
+
+#==============================================================================
+# per-instance information for the DDS_a component
+#==============================================================================
+[ java_lib/DDS_a ]
+#debug_flags = 0x0000
+debug_flags = 0x00ff
+#test_cfg_name = /test/dcf_qr_scp/sample_objects.cfg
+image_directory =
+make_new_uids = FALSE
+#test_cfg_name = dcms.cfg
+#dicom_files_dir = dcms.cfg
+save_command_data=NO
+
+[ idl_lib ]
+
+[ idl_lib/DDCS ]

@@ -1,0 +1,12 @@
+[ example 1 ]
+filter_type = DICOM_ELEMENT_FILTER
+filter_class_name = com.lbs.DCS.DicomElementFilter
+
+[ example 1/elements_to_replace ]
+0010,0010 = ThisWasAddedAcceptersMessageOnInput
+
+[ example 2 ]
+filter_type = DICOM_ELEMENT_FILTER
+
+[ example 2/elements_to_replace ]
+0020,0020 = ThisWasAlsoAddedToAcceptersMessageOnInput

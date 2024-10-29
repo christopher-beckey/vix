@@ -1,0 +1,245 @@
+MAGDCST1 ;WOIFO/PMK - Backend for C-STORE (part 1) ; 19 Apr 2010 7:46 AM
+ ;;3.0;IMAGING;**10,30,51,54,53**;Mar 19, 2002;Build 1715;Apr 22, 2010
+ ;; Per VHA Directive 2004-038, this routine should not be modified.
+ ;; +---------------------------------------------------------------+
+ ;; | Property of the US Government.                                |
+ ;; | No permission to copy or redistribute this software is given. |
+ ;; | Use of unreleased versions of this software requires the user |
+ ;; | to execute a written test agreement with the VistA Imaging    |
+ ;; | Development Office of the Department of Veterans Affairs,     |
+ ;; | telephone (301) 734-0100.                                     |
+ ;; | The Food and Drug Administration classifies this software as  |
+ ;; | a medical device.  As such, it may not be changed in any way. |
+ ;; | Modifications to this software may result in an adulterated   |
+ ;; | medical device under 21CFR820, the use of which is considered |
+ ;; | to be a violation of US Federal Statutes.                     |
+ ;; +---------------------------------------------------------------+
+ ;;
+ Q
+ ;
+FOREGND ; "Listen" for the connection from the CSTORE.EXE front-end
+ N FBSWITCH,IPADDR,TCPPORT
+ S FBSWITCH="FOREGROUND" ; foreground/background switch
+ S TCPPORT=60001 ; this port number is for foreground testing only
+ D NEWLOG^MAGDMLOG("Storage (manually started in the foreground)")
+ D LISTEN^MAGDTCP1(TCPPORT) ; sets IPADDR
+ G STEP1
+ ;
+BACKERR ; error trap for MSERVER started background jobs
+ N ECODE
+ S ECODE=$EC,$EC="" ; clear $ECODE before calling ^%ET
+ D ^%ET ; Cache's error trap terminates the process
+ Q
+ ;
+BACKGND ; JOB-ed by ^MSERVER when a CSTORE.EXE front-end connects to its port
+ N FBSWITCH,IPADDR,TCPPORT,X
+ ; this process runs entirely in the background, w/o terminal i/o
+ S X=$$TCPGET^MAGOSTCP(.IPADDR)
+ S TCPPORT=$G(^MAGDICOM(2006.563,1,"CSTORE CONTROL PORT"),60000)
+ ;
+ ; When we get here, the socket is inherited from the operating
+ ; environment, and not opened through MAGOSTCP.
+ ; Define the essential variables:
+ ;
+ S X=$$TCPINHRT^MAGOSTCP(TCPPORT)
+ ;
+ S $ET="D BACKERR^"_$T(+0)
+ S FBSWITCH="BACKGROUND" ; foreground/background switch
+ D NEWLOG^MAGDMLOG("Storage through port "_TCPPORT_" with "_IPADDR)
+ G STEP1
+ ;
+STEP1 ;
+ N BYTEORDR,CALLED,CALLING,CHANNEL,CSPDUIN,CSPDUOUT,EXPLICIT,FILEMODE,FILESIZE
+ N I,IMAGEIEN,IMGPATH,INODE,INSTIEN,INSTNAME,INSTPATH,LOCK,MSGHANDL,MESSAGE,MULTIMSG
+ N NETERROR,NOW,ODEVNAME,ODEVTYPE,PATH,PCONTEXT,PDUTYPE,PORT,QUEUEIN,QUEUEOUT
+ N SEQNUMB,SEQUENCE,STATUS,TEMPLATE,THREADNAME,THREADNUMBER,TODAY,X,Y
+ S FILEMODE="FIFO QUEUE",MULTIMSG=""
+ S IMGPATH=^MAGDICOM(2006.563,1,"IMAGE INPUT PATH")
+ S INSTPATH=^MAGDICOM(2006.563,1,"INSTRUMENT PATH")
+ S CHANNEL=1
+ S NETERROR=0
+ ;
+ ; establish communications
+ S MESSAGE(1)="Provider Process (Job #"_$J_") Started"
+ S MESSAGE(2)="Storage with "_IPADDR
+ D MESSAGE^MAGDMLOG(1,0,.MESSAGE,"BTV")
+ ;
+ S NETERROR=$$RECV^MAGDCST2("",TCPPORT,.X)
+ I NETERROR D NETERROR("1a") Q
+ I X'?1"Connection established for ".E  D NETERROR("1b") Q
+ S THREADNAME=$P(X,"Connection established for ",2)
+ S X=THREADNAME X ^%ZOSF("UPPERCASE") S THREADNAME=Y
+ ;
+ I THREADNAME["THREAD" D
+ . S INSTNAME=$P(THREADNAME," THREAD ",1)
+ . S THREADNUMBER=$P(THREADNAME," THREAD ",2)
+ . Q
+ E  S INSTNAME=THREADNAME,THREADNUMBER=0
+ ;
+ D CONBEG^MAGDCST3 ; record beginning of session with MUMPS
+ ;
+ ; lock the instrument node to record that it is running
+ I 'THREADNUMBER D
+ . L +^MAGDINPT("INSTRUMENT",INSTNAME):0 S LOCK=$T
+ . I 'LOCK D  Q
+ . . D SEND^MAGDCST2("",TCPPORT,"-1 The "_INSTNAME_" instrument is already running")
+ . . Q
+ . Q
+ ;
+ ; get the instrument parameters
+ S INSTIEN=$O(^MAGDICOM(2006.581,"B",INSTNAME,""))
+ I INSTIEN="" D  Q
+ . S X="-2 The "_INSTNAME_" instrument is not defined in "
+ . D SEND^MAGDCST2("",TCPPORT,X_^MAGDICOM(2006.563,1,"DICT PATH")_"\INSTRUMENT.DIC")
+ . Q
+ S PORT=$P(^MAGDICOM(2006.581,INSTIEN,0),"^",4)
+ ;
+ ; set instrument parameters
+ I '$$GETDIR^MAGOSDIR(INSTPATH,"D") D  ; create the instrument directory
+ . S STATUS=$$MKDIR^MAGOSDIR(INSTPATH)
+ . Q
+ S INSTPATH=INSTPATH_"\"_INSTNAME ; path for instrument pdu i/o
+ I THREADNUMBER S INSTPATH=INSTPATH_"\"_THREADNUMBER ; path for multi-threaded Storage SCP
+ I '$$GETDIR^MAGOSDIR(INSTPATH,"D") D
+ . ; create the instrument sub-directory
+ . S STATUS=$$MKDIR^MAGOSDIR(INSTPATH)
+ . Q
+ S CSPDUIN=INSTPATH_"\CSTORE.IN"
+ S CSPDUOUT=INSTPATH_"\CSTORE.OUT"
+ ;
+ ; send instrument and available disk space parameters back to frontend
+ D SEND^MAGDCST2("",TCPPORT,PORT_" "_CSPDUIN_" "_CSPDUOUT)
+ D SEND^MAGDCST2("",TCPPORT,$$DISKFREE^MAGDACP3())
+ D UPDTITLE^MAGDMLOG("Storage for "_THREADNAME)
+ D MESSAGE^MAGDMLOG(1,0,"Instrument: "_THREADNAME,"BTV")
+ ;
+ ; copy images for each association
+ F  D  I NETERROR D NETERROR("2") Q
+ . N ASSOC
+ . ; association loop
+ . D MESSAGE^MAGDMLOG(1,0,"","V")
+ . ; wait for incoming SCU
+ . S NETERROR=$$RECV^MAGDCST2("",TCPPORT,.X)
+ . I NETERROR D NETERROR("3a") Q
+ . I X'?1"Storage SOP Class user ".E  D NETERROR("3b") Q
+ . D SEND^MAGDCST2("",TCPPORT,"Ready for transfer")
+ . D SEND^MAGDCST2("",TCPPORT,$$DISKFREE^MAGDACP3())
+ . D ASCBEG^MAGDCST3 ; record the beginning of the association
+ . S ASSOC=1
+ . F  D  Q:'ASSOC  I NETERROR D NETERROR("4") Q
+ . . ; message handling loop
+ . . S NETERROR=$$RECV^MAGDCST2("",TCPPORT,.X)
+ . . I NETERROR D NETERROR("5a") Q
+ . . ; the C-STORE frontend stored the PDU in the CSPDUIN file
+ . . ; starting data transfer
+ . . I X="CONTROL PDU" D  ; CONTROL PDU
+ . . . D CTRLPDU
+ . . . Q
+ . . E  I X?1"DATASET PDU".E D  ; DATA PDU
+ . . . S PCONTEXT=$P(X," ",3)
+ . . . D DATAPDU
+ . . . Q
+ . . E  I (X="CLIENT DISCONNECTED")!(X="ABNORMAL CLIENT DISCONNECTION") D
+ . . . H 1 ; required delay to synchronize TCP/IP circuit disconnections
+ . . . D SEND^MAGDCST2("",TCPPORT,"BYE, BYE")
+ . . . S ASSOC=0
+ . . . Q
+ . . E  D NETERROR("5b") ; unknown message
+ . . Q
+ . D ASCEND^MAGDCST3 ; record the ending of the association
+ . Q
+ S STATUS=$$TCPCLOSE^MAGOSTCP("",TCPPORT)
+ I $$USEPRIN^MAGOSFIL(1)
+ D CONEND^MAGDCST3 ; record ending of session with MUMPS
+ Q
+ ;
+CTRLPDU ; A CONTROL PDU has been received from the User.
+ ; Respond to it appropriately.
+ D REQUEST^MAGDACP2(CSPDUIN,.PDUTYPE) ; first decode the PDU
+ ;
+ I PDUTYPE="01H" D  ; A-ASSOCIATE-RQ
+ . ; Create the A-ASSOCIATE-AC and send it back to the User.
+ . D REQUEST^MAGDACP3(CSPDUOUT) ; create the A-ASSOCIATE-AC PDU
+ . S STATUS=$$OPEN^MAGOSFIL(CSPDUOUT,"B")
+ . I STATUS<0 D
+ . . N M
+ . . S M="Could not open file """_CSPDUOUT_""" for Binary Read."
+ . . W:$$USEPRIN^MAGOSFIL(1) !!!,M,!,STATUS
+ . . S $EC=",U"_M_","
+ . . Q  ; Error trap does not return
+ . D ORESPONS^MAGDACR1(CSPDUOUT)
+ . D SEND^MAGDCST2("",TCPPORT,"ASSOCIATION OK")
+ . Q
+ E  I PDUTYPE="05H" D  ; A-RELEASE-RQ
+ . ; Create the A-RELEASE-RP and send it back to the User.
+ . D RELEASE^MAGDACP3(CSPDUOUT) ; create the A-REQUEST-RP PDU
+ . S STATUS=$$OPEN^MAGOSFIL(CSPDUOUT,"B")
+ . I STATUS<0 D
+ . . N M
+ . . S M="Could not open file """_CSPDUOUT_""" for Binary Read."
+ . . W:$$USEPRIN^MAGOSFIL(1) !!!,M,!,STATUS
+ . . S $EC=",U"_M_","
+ . . Q  ; Error trap does not return
+ . D ORESPONS^MAGDACR1(CSPDUOUT)
+ . D SEND^MAGDCST2("",TCPPORT,"RELEASE OK")
+ . Q
+ E  I PDUTYPE="07H" D  ; A-ABORT
+ . D SEND^MAGDCST2("",TCPPORT,"ASSOCIATION OK")
+ . ; the SCU will terminate the connection and end the association
+ . Q
+ Q
+ ;
+DATAPDU ; A DATA PDU has been received from the User.
+ ; Respond to it appropriately.
+ S X=$$GETDIR^MAGOSDIR(CSPDUIN)
+ S Y=^TMP("MAG",$J,"DIR LIST","CSTORE.IN")
+ S FILESIZE=$P(Y,";",1)
+ ; parse the DICOM dataset
+ S QUEUEIN("FILE")=CSPDUIN
+ S (ODEVNAME,ODEVTYPE)="",INODE="IN" D ENTRY^MAGDDR2
+ I $G(^TMP("MAG",$J,"DICOM",INODE,"0000,0100",1,1))=48 D  Q
+ . ; a C-ECHO Request was received
+ . D SEND^MAGDCST2("",TCPPORT,"NON-IMAGE DATASET")
+ . S NETERROR=$$RECV^MAGDCST2("",TCPPORT,.X)
+ . I NETERROR D NETERROR("6a")
+ . I X'="WHAT'S UP, DOC?" D NETERROR("6b") Q  ; error in exception
+ . D ECHO^MAGDCST2
+ . D SEND^MAGDCST2("",TCPPORT,"C-ECHO RESPONSE")
+ . Q
+ I $G(^TMP("MAG",$J,"DICOM",INODE,"0000,0100",1,1))=1 D  Q
+ . ; a C-SEND Request was received
+ . S X=$$NEXTFILE^MAGDCST2 ; get next file name
+ . D SEND^MAGDCST2("",TCPPORT,X) ; send the file name to the C front-end
+ . S NETERROR=$$RECV^MAGDCST2("",TCPPORT,.X)
+ . I NETERROR D NETERROR("6c")
+ . I X="ABNORMAL CLIENT DISCONNECTION" D  Q
+ . . D ERRORMSG^MAGDCST1(X)
+ . . H 1 ; required delay to synchronize TCP/IP circuit disconnections
+ . . D SEND^MAGDCST2("",TCPPORT,"BYE, BYE")
+ . . S ASSOC=0
+ . . Q
+ . I X'="STORAGE COMPLETE" D  Q
+ . . S X="Error in STORAGE COMPLETE step - Received """_X_""""
+ . . D ERRORMSG^MAGDCST1(X)
+ . . H 1 ; required delay to synchronize TCP/IP circuit disconnections
+ . . D SEND^MAGDCST2("",TCPPORT,"BYE, BYE")
+ . . S ASSOC=0
+ . . Q
+ . D RESPONSE^MAGDCST2
+ . D SEND^MAGDCST2("",TCPPORT,"C-STORE RESPONSE")
+ . S $P(^MAGDINPT(2006.571,IMAGEIEN,0),"^",3)=1 ; file write complete
+ . Q
+ Q
+ ;
+NETERROR(NUMBER) ; output a network error message
+ D ERRORMSG("Network error "_NUMBER)
+ Q
+ ;
+ERRORMSG(TEXT) ; output the error message
+ N MSG
+ S MSG=TEXT_" ("
+ I $G(INSTNAME)'="" S MSG=MSG_INSTNAME_", "
+ S MSG=MSG_"Job #"_$J_")"
+ D MESSAGE^MAGDMLOG(2,0,MSG,"BTV")
+ Q
+ ;

@@ -1,0 +1,105 @@
+MAGDIW3 ;WOIFO/PMK - Reconstruct a DICOM file from a .txt and a .tga file ; 26 Feb 2008 12:06 PM
+ ;;3.0;IMAGING;**10,30,50,69,54**;MAR 19, 2002;;OCT 28, 2009
+ ;; Per VHA Directive 2004-038, this routine should not be modified.
+ ;; +---------------------------------------------------------------+
+ ;; | Property of the US Government.                                |
+ ;; | No permission to copy or redistribute this software is given. |
+ ;; | Use of unreleased versions of this software requires the user |
+ ;; | to execute a written test agreement with the VistA Imaging    |
+ ;; | Development Office of the Department of Veterans Affairs,     |
+ ;; | telephone (301) 734-0100.                                     |
+ ;; | The Food and Drug Administration classifies this software as  |
+ ;; | a medical device.  As such, it may not be changed in any way. |
+ ;; | Modifications to this software may result in an adulterated   |
+ ;; | medical device under 21CFR820, the use of which is considered |
+ ;; | to be a violation of US Federal Statutes.                     |
+ ;; +---------------------------------------------------------------+
+ ;;
+ Q
+ ;
+ENTRY() ; called from ^MAGDIWB2 and ^MAGDIX1
+ N DICOMFLG,ERROR,I,RECORD,STATUS,T,TAG,X
+ ;
+ ; read the about image text file and copy the data into ^TMP
+ ;
+ K ^TMP("MAG",$J,"DICOM","OUT")
+ D SEQINIT^MAGDFCNS
+ ;
+ S STATUS=$$OPEN^MAGOSFIL(FILETXT,"R")
+ I STATUS<0 D  Q X
+ . S X="-1 Could not open file """_FILETXT_""" for Read.  Status="_STATUS
+ . Q
+ S DICOMFLG=0
+ F  D  Q:STATUS'=""
+ . S STATUS=$$READ^MAGOSFIL(FILETXT,.RECORD)
+ . I $$USEPRIN^MAGOSFIL(1)
+ . I STATUS<0 W:+STATUS'=-2 !,STATUS Q
+ . I RECORD="$$BEGIN DICOM DATA" S DICOMFLG=1 Q
+ . I RECORD="$$END DICOM DATA" S STATUS="DONE" Q
+ . I DICOMFLG D DICOM
+ . Q
+ S STATUS=$$CLOSE^MAGOSFIL(FILETXT)
+ ;
+ I 'DICOMFLG D  Q X
+ . S X="-2 DICOM text data not found in file """_FILETXT_""""
+ . Q
+ ;
+ ; check elements to verify that the DICOM object was correctly built 
+ S ERROR=""
+ F I=1:1 S T=$P($T(TAG+I),";;",2) Q:T=""  D  Q:$L(ERROR)
+ . S TAG=$P(T,"^")
+ . I $$GETDATA^MAGDFCNS("OUT",TAG)="" D  Q
+ . . S ERROR="-3 DICOM element "_$P(T,"^",2)_" ("_TAG_")"
+ . . S ERROR=ERROR_" not found in file """_FILETXT_""""
+ . . Q
+ . Q
+ ;
+ K ^TMP("MAG",$J,"DICOM","OUT","0008,0001") ; kill retired length to end
+ Q ERROR
+ ;
+TAG ; mandatory DICOM elements
+ ;;0008,0016^SOP Class UID
+ ;;0008,0018^SOP Instance UID
+ ;;0010,0010^Patient Name
+ ;;0010,0020^Patient ID
+ ;;0020,000D^Study Instance UID
+ ;;0020,000E^Series Instance UID
+ ;;
+ ;
+DICOM ;
+ N GROUP,ELEMENT,ENUMTYPE,I,J,JPTR,K,NAME,NEWSEQ,OLDVR
+ N SUBSCRPT,SS0,TAG,VALUE,VR
+ ;
+ S SS0=$P(RECORD,"|")
+ I SS0'?4AN1","4AN.E Q  ; Ignore invalid records
+ I SS0?1"0002,"4AN Q  ; skip Part 10 header information, if present
+ S SS0=$RE(SS0)
+ S TAG=$RE($P(SS0,"^")),NEWSEQ=$RE($P(SS0,"^",2,999)),SS0=$RE(SS0)
+ I TAG="FFFC,FFFC" Q  ; ignore data set trailing padding
+ I $P(TAG,",",2)="0000" Q  ; ignore group length
+ S JPTR=$O(^MAGDICOM(2006.51,"B",TAG,""))
+ I JPTR="" Q  ; ignore anything element not in the DICOM dictionary
+ I NEWSEQ?.E1",xx".E Q  ; ignore any private element
+ I NEWSEQ?1"0088,0200".E Q  ; ignore Icon Image Sequence
+ S GROUP=$P(TAG,","),ELEMENT=$P(TAG,",",2)
+ I $$HEX2DEC^MAGOSMSC(GROUP)#2,ELEMENT'?1"xx"2E Q  ; ignore owner of group
+ ; get the element's DICOM Dictionary entry for driving the output
+ S X=^MAGDICOM(2006.51,JPTR,0)
+ S VR=$P(X,"^",3),ENUMTYPE=$P(X,"^",5)
+ ;
+ S NAME=$P(RECORD,"|",2),OLDVR=$P(NAME,"^",2)
+ S NAME=$P(NAME,"^") ; remove second piece VR from name
+ S SUBSCRPT=$P(RECORD,"|",3),VALUE=$P(RECORD,"|",4,999)
+ S I=$P(SUBSCRPT,","),J=$P(SUBSCRPT,",",2)
+ I OLDVR'="",VR["/" S VR=OLDVR ; select OW, OB, US, or SS
+ I VR="OW/OB" S VR="OW" ; either works fine 
+ ;
+ S ^TMP("MAG",$J,"DICOM","OUT",SS0)=NAME_"^"_VR_"^^"
+ I VR["SQ" Q  ; start of a sequence - there is no associated value
+ I VALUE="<unknown>" Q  ; do not output any value, since it is unknown
+ S ^TMP("MAG",$J,"DICOM","OUT",SS0,0,0)=I
+ S ^TMP("MAG",$J,"DICOM","OUT",SS0,I,0)=J
+ I "^LT^ST^UT^"[("^"_VR_"^") S VALUE=VALUE_$C(13,10) ; add <cr> <lf>
+ S ^TMP("MAG",$J,"DICOM","OUT",SS0,I,J)=VALUE
+ Q
+ ;

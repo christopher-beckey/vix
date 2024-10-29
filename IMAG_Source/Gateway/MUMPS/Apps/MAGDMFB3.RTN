@@ -1,0 +1,173 @@
+MAGDMFB3 ;WOIFO/PMK - Program to build DICOM Master File ; 10/05/2006 08:27
+ ;;3.0;IMAGING;**30,69**;MAR 19, 2002;;NOV 7, 2007
+ ;; Per VHA Directive 2004-038, this routine should not be modified.
+ ;; +---------------------------------------------------------------+
+ ;; | Property of the US Government.                                |
+ ;; | No permission to copy or redistribute this software is given. |
+ ;; | Use of unreleased versions of this software requires the user |
+ ;; | to execute a written test agreement with the VistA Imaging    |
+ ;; | Development Office of the Department of Veterans Affairs,     |
+ ;; | telephone (301) 734-0100.                                     |
+ ;; | The Food and Drug Administration classifies this software as  |
+ ;; | a medical device.  As such, it may not be changed in any way. |
+ ;; | Modifications to this software may result in an adulterated   |
+ ;; | medical device under 21CFR820, the use of which is considered |
+ ;; | to be a violation of US Federal Statutes.                     |
+ ;; +---------------------------------------------------------------+
+ ;;
+ Q
+ ;
+TEMPLATE ; Import Template Dictionary
+ N DIMSE,ERROR,FILE,IPTR,NAME,NUMBER,RECORD,SCUSCP,SOPCLASS,STATUS,TAG,TITLE,TYPEID
+ ;
+ S FILE=$$INIT^MAGDMFB(2006.52,"DICOM Message Template","Template")
+ Q:FILE=""
+ ;
+ ; macro expand TEMPLATE.DIC to create TEMPLATE.TMP
+ S ERROR=0
+ D ENTRY^MAGDMFB4("TEMPLATE")
+ K ^TMP("MAG",$J,"DICOM","TEMPLATE")
+ K ^MAGDICOM(2006.52)
+ S ^MAGDICOM(2006.52,0)="DICOM MESSAGE TEMPLATE DICTIONARY^2006.52^^"
+ ;
+ S FILE=$P(FILE,".",1,$L(FILE,".")-1)_".TMP"
+ S STATUS=$$OPEN^MAGOSFIL(FILE,"R")
+ I STATUS<0 D  Q
+ . D MESSAGE^MAGDMLOG(1,0,"Open Error: "_STATUS,"t")
+ . S FATAL=FATAL+1
+ . Q
+ D MESSAGE^MAGDMLOG(1,0,"*** PASS 1 STARTED ***","t")
+ D PASS1
+ S STATUS=$$CLOSE^MAGOSFIL(FILE)
+ I ERROR D  Q
+ . D MESSAGE^MAGDMLOG(1,0,ERROR_" error"_$S(ERROR=1:"",1:"s")_" encountered.","t")
+ . D MESSAGE^MAGDMLOG(1,0,FILE_" not further processed.","t")
+ . S FATAL=FATAL+1
+ . Q
+ D MESSAGE^MAGDMLOG(1,0,"*** PASS 2 STARTED ***","t")
+ S NUMBER=IPTR F IPTR=1:1:NUMBER D PASS2
+ D MESSAGE^MAGDMLOG(1,0,NUMBER_" templates added to database.","t")
+ Q
+ ;
+PASS1 ; copy and sort the data from the template dictionary
+ N OWNER,TYPENAME
+ F  D  Q:STATUS'=""
+ . S STATUS=$$READ^MAGOSFIL(FILE,.RECORD)
+ . I $$USEPRIN^MAGOSFIL(1)
+ . I STATUS<0 Q:+STATUS=-2  D  Q
+ . . D MESSAGE^MAGDMLOG(1,0,"Read Error: "_STATUS,"t")
+ . . S FATAL=FATAL+1
+ . . Q
+ . Q:RECORD=""  Q:RECORD=$C(12)
+ . I RECORD?.">"1"#".E D  Q  ; comment
+ . . D:'SILENT MESSAGE^MAGDMLOG("Comment: <<"_$P(RECORD,"#",2,999)_">>","tB")
+ . . Q
+ . ; data
+ . I $P(RECORD,"|")="$TEMPLATE" D  ; template definition
+ . . S TITLE=$P(RECORD,"|",2),DIMSE=$P(RECORD,"|",3)
+ . . S TYPENAME=$P(RECORD,"|",4),TYPEID=$P(RECORD,"|",5)
+ . . D:'SILENT
+ . . . D MESSAGE^MAGDMLOG(1,0,"TEMPLATE: "_TITLE,"t")
+ . . . D MESSAGE^MAGDMLOG(1,0,"DIMSE Service Element: "_DIMSE,"t")
+ . . . D MESSAGE^MAGDMLOG(1,0,"TEMPLATE TYPE: "_TYPENAME_" (#"_TYPEID_")","t")
+ . . . Q
+ . . Q
+ . E  I $P(RECORD,"|")="$SOP" D  ; SOP class
+ . . S SOPCLASS=$P(RECORD,"|",2)
+ . . D:'SILENT MESSAGE^MAGDMLOG(1,0,"SOP Class: "_SOPCLASS,"t")
+ . . Q
+ . E  D  ; element record
+ . . N DICNAME
+ . . I $L(RECORD,"|")'=5 D  Q
+ . . . D MESSAGE^MAGDMLOG(1,0,"*** Format Error ***","t")
+ . . . D MESSAGE^MAGDMLOG(1,0,RECORD,,"t")
+ . . . S FATAL=FATAL+1,ERROR=ERROR+1
+ . . . I FBSWITCH="FOREGROUND" R Z:DTIME
+ . . . Q
+ . . S NAME=$P(RECORD,"|"),TAG=$P(RECORD,"|",2),OWNER=$P(RECORD,"|",3)
+ . . S SCUSCP=$P(RECORD,"|",4),VALUE=$P(RECORD,"|",5)
+ . . S Y=$E($E(NAME_$J("",55),1,55)_$TR(TAG,"()")_$J("",10),1,65)_SCUSCP
+ . . D:'SILENT MESSAGE^MAGDMLOG(1,0,Y,"t")
+ . . S TAG=$E(TAG,2,5)_","_$E(TAG,7,10) I OWNER'="" S TAG=TAG_","_OWNER
+ . . S Y=$O(^MAGDICOM(2006.51,"B",TAG,""))
+ . . I Y="" D  Q
+ . . . D MESSAGE^MAGDMLOG(2,0,"*** Unknown ELEMENT in TEMPLATE dictionary ***","t")
+ . . . D MESSAGE^MAGDMLOG(1,0,"TEMPLATE.DIC="""_NAME_""", tag=("_TAG_")","t")
+ . . . I FBSWITCH="FOREGROUND" R Z:DTIME W !
+ . . . S FATAL=FATAL+1,ERROR=ERROR+1
+ . . . Q
+ . . S Y=^MAGDICOM(2006.51,Y,0)
+ . . S DICNAME=$P(Y,"^",2),VR=$P(Y,"^",3)
+ . . I $TR(NAME,">","")'=DICNAME D
+ . . . S Y="*** Name mismatch between ELEMENT and TEMPLATE dictionaries ***"
+ . . . D MESSAGE^MAGDMLOG(2,0,Y,"t")
+ . . . D MESSAGE^MAGDMLOG(1,0," ELEMENT.DIC="""_DICNAME_"""","t")
+ . . . D MESSAGE^MAGDMLOG(1,0,"TEMPLATE.DIC="""_NAME_"""","t")
+ . . . I FBSWITCH="FOREGROUND" R Z:DTIME W !
+ . . . S FATAL=FATAL+1,ERROR=ERROR+1
+ . . . Q
+ . . D PASS1A
+ . . Q
+ . Q
+ Q
+ ;
+PASS1A ; copy the value into the ^TMP global
+ N SEQTAG
+ Q:'$D(SOPCLASS)
+ S IPTR=$O(^MAGDICOM(2006.52,"B",TITLE,""))
+ I IPTR="" D  ; create the entry in the DICOM Template file
+ . ; output an template
+ . S X=TITLE_"^"_DIMSE_"^"_SOPCLASS_"^"_TYPENAME_"^"_TYPEID
+ . S IPTR=$P(^MAGDICOM(2006.52,0),"^",3)+1
+ . S ^MAGDICOM(2006.52,IPTR,0)=X
+ . S ^MAGDICOM(2006.52,"B",TITLE,IPTR)=""
+ . S $P(^MAGDICOM(2006.52,0),"^",3,4)=IPTR_"^"_IPTR
+ . D SEQINIT^MAGDFCNS
+ . Q
+ ;
+ ; output the element
+ S X=TAG_"^"_NAME_"^"_SCUSCP_"^"_VALUE_"^"
+ I TAG="FFFE,E000" S TAG="****,****" ; start of sequence must come first
+ S SEQTAG=$S(SEQUENCE="":TAG,1:SEQUENCE_"^"_TAG)
+ S ^TMP("MAG",$J,"DICOM","TEMPLATE",IPTR,SEQTAG)=X
+ ;
+ ; perform nesting for sequences in sorted file
+ I VR["SQ" D
+ . I VR="SQ" D  ; SQ (start delimiter)
+ . . D SEQPUSH^MAGDFCNS(TAG)
+ . . Q
+ . E  I VR="SQE" D  ; SQE (end delimiter)
+ . . D SEQPOP^MAGDFCNS
+ . . Q
+ . Q
+ Q
+ ;
+PASS2 ; copy each sorted template from ^TMP to ^MAGDICOM(2006.52)
+ N JPTR,SEQDELIM,SEQMARK,SEQTAG
+ S SEQDELIM=0 ; initialize sequence number
+ S SEQTAG=""
+ F JPTR=1:1 S SEQTAG=$O(^TMP("MAG",$J,"DICOM","TEMPLATE",IPTR,SEQTAG)) Q:SEQTAG=""  D
+ . ; copy one element at a time
+ . S X=^TMP("MAG",$J,"DICOM","TEMPLATE",IPTR,SEQTAG),TAG=$P(X,"^")
+ . S Y=$O(^MAGDICOM(2006.51,"B",TAG,"")),Y=^MAGDICOM(2006.51,Y,0)
+ . S VR=$P(Y,"^",3)
+ . ;
+ . ; mark balanced delimiters for sequences
+ . S SEQMARK=""
+ . I VR["SQ" D
+ . . I "SQIS"[VR D  ; SQ and SQIS (start delimiters)
+ . . . S SEQDELIM=SEQDELIM+1,SEQMARK(SEQDELIM)=JPTR
+ . . . Q
+ . . E  D  ; SQIE and SQE (end delimiters)
+ . . . S SEQMARK=SEQMARK(SEQDELIM),SEQDELIM=SEQDELIM-1
+ . . . S $P(^MAGDICOM(2006.52,IPTR,1,SEQMARK,0),"^",5)=JPTR
+ . . . Q
+ . . Q
+ . ;
+ . S $P(X,"^",5)=SEQMARK
+ . S ^MAGDICOM(2006.52,IPTR,1,JPTR,0)=X
+ . Q
+ S JPTR=JPTR-1 ; back up to last entry
+ S ^MAGDICOM(2006.52,IPTR,1,0)="^2006.524^^"_JPTR_"^"_JPTR
+ Q
+ ;

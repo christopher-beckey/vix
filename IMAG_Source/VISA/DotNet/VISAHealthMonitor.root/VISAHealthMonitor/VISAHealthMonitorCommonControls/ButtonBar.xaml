@@ -1,0 +1,15 @@
+﻿<UserControl x:Class="VISAHealthMonitorCommonControls.ButtonBar"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="52" d:DesignWidth="400"
+             DataContext="{Binding ButtonBar, Source={StaticResource Locator}}" xmlns:my="clr-namespace:VISAHealthMonitorCommonControls">
+    <StackPanel Orientation="Horizontal">
+        <Button Content="Reload VIX Site List" Command="{Binding Path=ReloadVisaSourcesCommand}" Margin="1,0,1,0" />
+        <Button Content="Test All Sites" Command="{Binding Path=TestAllSourcesCommand}" Margin="1,0,1,0" />
+        <Button Content="Test Failed Sites" Command="{Binding Path=TestFailedSourcesCommand}" Margin="1,0,1,0" />
+        <Button Content="{Binding Path=StartStopTestCaption}" Command="{Binding Path=StartStopIntervalTestCommand}" Margin="1,0,1,0" />
+    </StackPanel>
+</UserControl>

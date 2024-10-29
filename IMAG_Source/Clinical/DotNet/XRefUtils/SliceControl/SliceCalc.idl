@@ -1,0 +1,60 @@
+//Per VHA Directive 2004-038, this routine should not be modified.
+// +---------------------------------------------------------------+
+// | Property of the US Government.                                |
+// | No permission to copy or redistribute this software is given. |
+// | Use of unreleased versions of this software requires the user |
+// | to execute a written test agreement with the VistA Imaging    |
+// | Development Office of the Department of Veterans Affairs,     |
+// | telephone (301) 734-0100.                                     |
+// |                                                               |
+// | The Food and Drug Administration classifies this software as  |
+// | a medical device.  As such, it may not be changed in any way. |
+// | Modifications to this software may result in an adulterated   |
+// | medical device under 21CFR820, the use of which is considered |
+// | to be a violation of US Federal Statutes.                     |
+// +---------------------------------------------------------------+
+// 
+// 
+// SliceCalc.idl : IDL source for SliceCalc.dll
+//
+
+// This file will be processed by the MIDL tool to
+// produce the type library (SliceCalc.tlb) and marshalling code.
+
+import "oaidl.idl";
+import "ocidl.idl";
+	[
+		object,
+		uuid(00F31CA3-1D6B-4d9a-9C4E-E7F524156253),
+		dual,
+		helpstring("IslicesX Interface"),
+		pointer_default(unique)
+	]
+	interface IslicesX : IDispatch
+	{
+		[id(1), helpstring("method Axis")] HRESULT Axis(short* TopX, short* TopY, short* RightX, short* RightY, short* BottomX, short* BottomY, short* LeftX, short* LeftY);
+		[id(2), helpstring("method BoundingBox")] HRESULT BoundingBox(short* UlX, short* UlY, short* UrX, short* UrY, short* LrX, short* LrY, short* LlX, short* LlY);
+		[id(3), helpstring("method Project")] HRESULT Project(BSTR* ScoutPos, BSTR* ScoutOrient, BSTR* ScoutPixSpace, short ScoutRows, short ScoutCols, BSTR* ImgPos, BSTR* ImgOrient, BSTR* ImgPixSpace, short ImgRows, short ImgCols);
+		[id(4), helpstring("method ProjectSlice")] HRESULT ProjectSlice([in] VARIANT* scoutPosition, [in] VARIANT* scoutOrientation, [in] VARIANT* scoutPixelSpacing, [in] long scoutRows, [in] long scoutColumns, [in] VARIANT* imagePosition, [in] VARIANT* imageOrientation, [in] VARIANT* imagePixelSpacing, [in] long imageRows, [in] long imageColumns, [out] VARIANT* sliceLine, [out] double * Angle);
+		[id(5), helpstring("method IntersectLine")] HRESULT IntersectLine([out] short * P0X, [out] short* P0Y,  [out] short * P1X,[out] short* P1Y, [out] BOOL * Parallel, [out] BOOL * Intersect);
+	};
+
+[
+	uuid(92CF174F-66E9-4814-8BD5-62E13DDA885F),
+	version(1.0),
+	helpstring("SliceCalc 1.0 Type Library")
+]
+library SLICECALCLib
+{
+	importlib("stdole32.tlb");
+	importlib("stdole2.tlb");
+
+	[
+		uuid(F319F7FA-0F25-43f0-87D1-6BEFABCD0167),
+		helpstring("slicesX Class")
+	]
+	coclass slicesX
+	{
+		[default] interface IslicesX;
+	};
+};

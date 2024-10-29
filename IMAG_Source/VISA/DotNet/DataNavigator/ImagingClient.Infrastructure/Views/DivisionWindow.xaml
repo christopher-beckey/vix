@@ -1,0 +1,36 @@
+﻿<Window x:Class="ImagingClient.Infrastructure.Views.DivisionWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+        Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" Title="Select Division" Height="200" Width="400">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <DataGrid Grid.Row="0" 
+                      ItemsSource="{Binding Path=Divisions}"
+                      SelectedItem="{Binding Path=SelectedDivision}"
+                      SelectionMode="Single">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Division Code" Binding="{Binding Path=DivisionCode}" Width="Auto"/>
+                <DataGridTextColumn Header="Division Name" Binding="{Binding Path=DivisionName}" Width="*"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <StackPanel Grid.Row="1"
+                    Orientation="Horizontal"
+                    HorizontalAlignment="Right">
+            
+            <Button Content="OK" Width="80" 
+                    Command="{Binding OnSelectDivision}" 
+                    HorizontalAlignment="Right" 
+                    IsDefault="True" />
+            
+            <Button Content="Cancel" 
+                    Width="80" 
+                    Command="{Binding OnCancelSelectDivision}" 
+                    HorizontalAlignment="Right"/>
+
+        </StackPanel>
+    </Grid>
+</Window>

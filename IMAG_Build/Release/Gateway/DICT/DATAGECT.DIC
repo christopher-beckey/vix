@@ -1,0 +1,57 @@
+# DataGECT.dic, 24 June 2009
+# 3.0;IMAGING;**54**;03-July-2009;;Build 1424
+# Per VHA Directive 2004-038, this routine should not be modified.
+# +---------------------------------------------------------------+
+# | Property of the US Government.                                |
+# | No permission to copy or redistribute this software is given. |
+# | Use of unreleased versions of this software requires the user |
+# | to execute a written test agreement with the VistA Imaging    |
+# | Development Office of the Department of Veterans Affairs,     |
+# | telephone (301) 734-0100.                                     |
+# | The Food and Drug Administration classifies this software as  |
+# | a medical device.  As such, it may not be changed in any way. |
+# | Modifications to this software may result in an adulterated   |
+# | medical device under 21CFR820, the use of which is considered |
+# | to be a violation of US Federal Statutes.                     |
+# +---------------------------------------------------------------+
+#
+0008,0008|Image Type
+0008,0023|Content Date
+0008,0033|Content Time
+0008,0060|Modality
+0008,0070|Manufacturer
+0008,0080|Institution Name
+0008,1010|Station Name
+0008,1090|Manufacturer's Model Name
+0018,0010|Contrast/Bolus Agent
+0018,0015|Body Part Examined
+0018,0050|Slice Thickness
+0018,0060|KVP
+0018,1100|Reconstruction Diameter
+0018,1120|Gantry/Detector Tilt
+0018,1150|Exposure Time
+0018,1151|X-Ray Tube Current
+0018,1190|Focal Spot(s)
+0018,1210|Convolution Kernel
+0018,5100|Patient Position
+0020,0010|Study ID
+0020,0011|Series Number
+0020,0012|Acquisition Number
+0020,0013|Instance Number
+0020,0032|Image Position (Patient)
+0020,0060|Laterality
+0020,1040|Position Reference Indicator
+0020,1041|Slice Location
+0028,0004|Photometric Interpretation
+0028,0010|Rows
+0028,0011|Columns
+0028,0030|Pixel Spacing
+0028,0101|Bits Stored
+0028,0102|High Bit
+0028,0103|Pixel Representation
+0028,1052|Rescale Intercept
+0028,1053|Rescale Slope
+#
+#
+
+

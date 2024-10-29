@@ -1,0 +1,138 @@
+Cache for Windows NT^INT^Saved from DICOM (ISW-KUZMAKP3-LT)^~Format=Cache.S~
+%RO on 09/17/2012  11:24
+MAGDHRC6^INT^1^62692,59318^0
+MAGDHRC6 ;WOIFO/PMK - Read HL7 and generate DICOM ; 24 Feb 2012 1:41 PM
+ ;;3.0;IMAGING;**11,51,49,110**;Mar 19, 2002;Build 48;Aug 23, 2012
+ ;; Per VHA Directive 2004-038, this routine should not be modified.
+ ;; +---------------------------------------------------------------+
+ ;; | Property of the US Government.                                |
+ ;; | No permission to copy or redistribute this software is given. |
+ ;; | Use of unreleased versions of this software requires the user |
+ ;; | to execute a written test agreement with the VistA Imaging    |
+ ;; | Development Office of the Department of Veterans Affairs,     |
+ ;; | telephone (301) 734-0100.                                     |
+ ;; | The Food and Drug Administration classifies this software as  |
+ ;; | a medical device.  As such, it may not be changed in any way. |
+ ;; | Modifications to this software may result in an adulterated   |
+ ;; | medical device under 21CFR820, the use of which is considered |
+ ;; | to be a violation of US Federal Statutes.                     |
+ ;; +---------------------------------------------------------------+
+ ;;
+ Q
+ ; PACS interface -- Radiology HL7 data input routine #5
+ ; This module reads and parses the HL7 OBX Segment
+ ;
+ ;   XXXXXX      XX    XXXXXX
+ ;    XX  XX    XXXX    XX  XX
+ ;    XX  XX   XX  XX   XX  XX
+ ;    XXXXX    XX  XX   XX  XX
+ ;    XX XX    XXXXXX   XX  XX
+ ;    XX  XX   XX  XX   XX  XX
+ ;   XXX  XX   XX  XX  XXXXXX
+ ;
+OBX ; OBX Segment
+ N ID,IDNAME,MSG,RESULT,TAG,TYPE
+ S TYPE=$$GETDATA^MAGDHRC0(2)
+ S ID=$$GETDATA^MAGDHRC0(3,1,1)
+ S IDNAME=$$GETDATA^MAGDHRC0(3,1,2)
+ S RESULT=$$GETDATA^MAGDHRC0(5) ; needs unparsed data
+ S TAG="" D
+ . I TYPE="TX" D  Q  ; figure out which text observation identifier
+ . . ; VistA codes
+ . . I ID="A" S TAG="0010,2110" Q  ; Allergies
+ . . ; I ID="M" S TAG="0032,1060" Q  ; Modifiers to the order
+ . . I ID="M" S TAG="0032,4000" D  Q  ; Modifiers to the order - (Study Comments)
+ . . . S RESULT="Procedure Modifier: "_RESULT
+ . . . D CRLF
+ . . . Q
+ . . I ID="H" S TAG="0033,xx50,VA DHCP" D CRLF Q  ; History (Reason for Study)
+ . . I ID="I" S TAG="4008,0115" D CRLF Q  ; Impression (Diagnosis)
+ . . I ID="R" S TAG="4008,0115" D CRLF Q  ; Report (lump report with impressions)
+ . . I ID="TCM" S TAG="0032,4000" D CRLF Q  ; Tech comments stored as study cmts
+ . . S MSG(1)="DICOM TEXT GATEWAY -- HL7 DATA WARNING"
+ . . S MSG(2)="Expected ID=""A"", ""H"", ""I"", ""M"", ""R"" or ""TCM""."
+ . . S MSG(3)="Found ID="""_ID_"""."
+ . . S MSG(4)="Routine: "_$T(+0)
+ . . D WARNING^MAGDFCNS(.MSG)
+ . . Q
+ . I TYPE="CE" D  Q  ; figure out which coded entry identifier
+ . . I ID="P" Q  ; VistA Procedure Code (obsolete: see OBR Universal Service ID)
+ . . I ID="C4",IDNAME="CPT MODIFIERS" D  Q
+ . . . I $G(^MAGDICOM(2006.563,1,"SEND CPT MODIFIERS"))="YES" D CPTMOD
+ . . . Q
+ . . I ID="D",IDNAME="DIAGNOSTIC CODE" D DXCODE Q  ; new format for dx code
+ . . S MSG(1)="DICOM TEXT GATEWAY -- HL7 DATA WARNING"
+ . . S MSG(2)="Expected ID=""P"", ""C4"", or ""D""."
+ . . S MSG(3)="Found ID="""_ID_"""."
+ . . S MSG(4)="Routine: "_$T(+0)
+ . . D WARNING^MAGDFCNS(.MSG)
+ . . Q
+ . I TYPE="ST" D  Q  ; string
+ . . I ID="D",IDNAME="DIAGNOSTIC CODE" D DXCODE Q  ; old format for dx code
+ . . ; unknown result type - send exception message to Gateway
+ . . S MSG(1)="DICOM TEXT GATEWAY -- HL7 DATA WARNING"
+ . . S MSG(2)="Expected ID=""D""."
+ . . S MSG(3)="Found ID="""_ID_"""."
+ . . S MSG(4)="Routine: "_$T(+0)
+ . . D WARNING^MAGDFCNS(.MSG)
+ . . Q
+ . ;
+ . S MSG(1)="DICOM TEXT GATEWAY -- HL7 DATA WARNING"
+ . S MSG(2)="Expected TYPE=""TX"", or ""CE"""
+ . S MSG(3)="Found TYPE="""_TYPE_"""."
+ . S MSG(4)="Routine: "_$T(+0)
+ . D WARNING^MAGDFCNS(.MSG)
+ . Q
+ ;
+ I TAG'="" D MULTLINE(TAG,RESULT)
+ Q
+ ;
+DXCODE ; handle the diagnostic code
+ N CODE,MEANING,SCHEME
+ S CODE=$$GETDATA^MAGDHRC0(5,1,1),SCHEME="99VAIDC"
+ S MEANING=$$GETDATA^MAGDHRC0(5,1,2)
+ ; Save VA diagnostic code
+ D SEQPUSH^MAGDFCNS("4008,0117") ; Interpretation Diagnostic Code
+ ; increment the sequence counter if there are more than one DX codes
+ F  Q:'$$GETDATA^MAGDFCNS("OUT","0008,0100")  D SEQINC^MAGDFCNS
+ D SAVE^MAGDFCNS("0008,0100",CODE) ; procedure code
+ D SAVE^MAGDFCNS("0008,0102",SCHEME) ; coding scheme
+ D SAVE^MAGDFCNS("0008,0104",MEANING) ; code meaning
+ D SEQPOP^MAGDFCNS
+ Q
+ ;
+CPTMOD ; handle a CPT modifier
+ N CPTCODE,CPTMABBR,CPTMCODE,CPTMNAME ; CPT modifier vars
+ S CPTMABBR=$$GETDATA^MAGDHRC0(5,1,1)
+ S CPTMNAME=$$GETDATA^MAGDHRC0(5,1,2)
+ S CPTMCODE=$$GETDATA^MAGDHRC0(5,1,4)
+ D SEQPUSH^MAGDFCNS("0032,1064")
+ D SEQINC^MAGDFCNS ; increment the sequence counter to CPT modifier
+ ; concatenate the CPT modifier abbreviation to the original code
+ S CPTCODE=$$GETDATA^MAGDFCNS("OUT","0008,0100") ; original CPT code
+ D KILL^MAGDFCNS("0008,0100") ; delete the original CPT code
+ S CPTCODE=CPTCODE_"-"_CPTMABBR ; CPT code - modifier abbreviation
+ D SAVE^MAGDFCNS("0008,0100",CPTCODE) ; output CPT code with modifier abbreviation
+ ;
+ I CPTMCODE'="" D  ; output an additional CPT modifier code
+ . D SEQINC^MAGDFCNS ; increment the sequence counter to CPT code
+ . D SAVE^MAGDFCNS("0008,0100",CPTMCODE) ; CPT code value
+ . D SAVE^MAGDFCNS("0008,0102","C4") ; CPT coding scheme
+ . D SAVE^MAGDFCNS("0008,0104",CPTMNAME) ; code meaning
+ . Q
+ D SEQPOP^MAGDFCNS
+ Q
+ ;
+MULTLINE(TAG,RESULT) ; File data into a multiline data element
+ N SS1,SS2
+ S (SS1,^TMP("MAG",$J,"DICOM","OUT",TAG,0,0))=1 ; single multiple
+ S (SS2,^(0))=$G(^TMP("MAG",$J,"DICOM","OUT",TAG,SS1,0))+1
+ S ^TMP("MAG",$J,"DICOM","OUT",TAG,SS1,SS2)=RESULT
+ Q
+ ;
+CRLF ; concatenate <cr> <lf>
+ S RESULT=RESULT_$C(13,10)
+ Q 
+
+
+

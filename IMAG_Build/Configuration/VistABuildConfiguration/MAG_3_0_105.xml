@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<build xmlns="http://va.gov/VistA/kids/manifest" name="MAG*3.0*105" patchName="Advanced Web Image Viewer" patch="105">
+  <components>
+    <securityKeys />
+    <parameterDefinitions />
+    <printTemplates />
+    <sortTemplates />
+    <menuOptions />
+    <rpcs />
+    <dataDictionaries />
+    <hl7s />
+    <routines>
+      <routine export="MAGIP105.RTN" />
+    </routines>
+    <protocols />
+  </components>
+</build>

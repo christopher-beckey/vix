@@ -1,0 +1,25 @@
+:Base MAGWRKS.HLP
+:Title MAG.INI Editor
+1 Introduction=Introduction
+1 OverView=OverView
+1 Modifying entries=Modifying_entries
+1 Workstation Configuration Window=Workstation_Configuration_Window
+1 SYS  System Sections.
+2 Overview : System Sections=SYS__System_Sections.
+2 SYS_Autoupdate=SYS_Autoupdate
+2 SYS_Film_Lumisys100=SYS_Film_Lumisys100
+2 SYS_Hotbuttons=SYS_Hotbuttons
+2 SYS LastPositions=SYS_LastPositions
+2 SYS_Meteor=SYS_Meteor
+1 Configuration Sections
+2 Button/Field Options=Button_Field_Options
+2 File Server=File_Server
+2 Image Type=Image_Type
+2 Import Options=Import_Options
+2 Input Type=Input_Type
+2 Input Type Options=Input_Type_Options
+2 Login Options=Login_Options
+2 Medicine Options=Medicine_Options
+2 Save Options=Save_Options
+2 Specialty=Specialty
+2 Workstation Settings=Workstation_Settings

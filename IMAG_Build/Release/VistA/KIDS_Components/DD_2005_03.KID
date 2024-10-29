@@ -1,0 +1,546 @@
+KIDS Distribution saved on Jul 25, 2012@16:31:38
+Split from blank VI database - last patch SEQ81_P120
+**KIDS**:MAG*3.0*350_DD*2005.03^
+
+**INSTALL NAME**
+MAG*3.0*350_DD*2005.03
+"BLD",7718,0)
+MAG*3.0*350_DD*2005.03^IMAGING^0^3120725^n
+"BLD",7718,4,0)
+^9.64PA^2005.03^1
+"BLD",7718,4,2005.03,0)
+2005.03
+"BLD",7718,4,2005.03,222)
+y^y^f^^^^y
+"BLD",7718,4,"B",2005.03,2005.03)
+
+"BLD",7718,6.3)
+2
+"BLD",7718,"KRN",0)
+^9.67PA^779.2^20
+"BLD",7718,"KRN",.4,0)
+.4
+"BLD",7718,"KRN",.401,0)
+.401
+"BLD",7718,"KRN",.402,0)
+.402
+"BLD",7718,"KRN",.403,0)
+.403
+"BLD",7718,"KRN",.5,0)
+.5
+"BLD",7718,"KRN",.84,0)
+.84
+"BLD",7718,"KRN",3.6,0)
+3.6
+"BLD",7718,"KRN",3.8,0)
+3.8
+"BLD",7718,"KRN",9.2,0)
+9.2
+"BLD",7718,"KRN",9.8,0)
+9.8
+"BLD",7718,"KRN",19,0)
+19
+"BLD",7718,"KRN",19.1,0)
+19.1
+"BLD",7718,"KRN",101,0)
+101
+"BLD",7718,"KRN",409.61,0)
+409.61
+"BLD",7718,"KRN",771,0)
+771
+"BLD",7718,"KRN",779.2,0)
+779.2
+"BLD",7718,"KRN",870,0)
+870
+"BLD",7718,"KRN",8989.51,0)
+8989.51
+"BLD",7718,"KRN",8989.52,0)
+8989.52
+"BLD",7718,"KRN",8994,0)
+8994
+"BLD",7718,"KRN","B",.4,.4)
+
+"BLD",7718,"KRN","B",.401,.401)
+
+"BLD",7718,"KRN","B",.402,.402)
+
+"BLD",7718,"KRN","B",.403,.403)
+
+"BLD",7718,"KRN","B",.5,.5)
+
+"BLD",7718,"KRN","B",.84,.84)
+
+"BLD",7718,"KRN","B",3.6,3.6)
+
+"BLD",7718,"KRN","B",3.8,3.8)
+
+"BLD",7718,"KRN","B",9.2,9.2)
+
+"BLD",7718,"KRN","B",9.8,9.8)
+
+"BLD",7718,"KRN","B",19,19)
+
+"BLD",7718,"KRN","B",19.1,19.1)
+
+"BLD",7718,"KRN","B",101,101)
+
+"BLD",7718,"KRN","B",409.61,409.61)
+
+"BLD",7718,"KRN","B",771,771)
+
+"BLD",7718,"KRN","B",779.2,779.2)
+
+"BLD",7718,"KRN","B",870,870)
+
+"BLD",7718,"KRN","B",8989.51,8989.51)
+
+"BLD",7718,"KRN","B",8989.52,8989.52)
+
+"BLD",7718,"KRN","B",8994,8994)
+
+"DATA",2005.03,3.9,0)
+MAIL MESSAGE^MAIL^2^3.9
+"DATA",2005.03,63,0)
+AUTOPSY (MICROSCOPIC)^AUM^3^63
+"DATA",2005.03,63,2)
+LAB^1^^103^50
+"DATA",2005.03,63.02,0)
+ELECTRON MICROSCOPY^EM^3^63
+"DATA",2005.03,63.02,2)
+LAB^1^^104^50
+"DATA",2005.03,63.08,0)
+SURGICAL PATHOLOGY^SP^3^63
+"DATA",2005.03,63.08,2)
+LAB^1^^121^50
+"DATA",2005.03,63.09,0)
+CYTOLOGY^CY^3^63
+"DATA",2005.03,63.09,2)
+LAB^1^^102^50
+"DATA",2005.03,63.2,0)
+AUTOPSY (GROSS)^AUG^3^63
+"DATA",2005.03,63.2,2)
+LAB^1^^103^50
+"DATA",2005.03,74,0)
+RADIOLOGY^RAD^1^74
+"DATA",2005.03,74,2)
+RAD^1^^^29
+"DATA",2005.03,130,0)
+SURGERY^SUR^1^130
+"DATA",2005.03,130,2)
+SUR^1^^^48
+"DATA",2005.03,691,0)
+ECHOCARDIOGRAM^ECHO^2^691
+"DATA",2005.03,691,2)
+MED^1^^2^2
+"DATA",2005.03,691.1,0)
+CARDIAC CATHETERIZATION^CATH^2^691.1
+"DATA",2005.03,691.1,2)
+MED^1^^1^2
+"DATA",2005.03,691.5,0)
+ELECTROCARDIOGRAPHY^ECG^2^691.5
+"DATA",2005.03,691.5,2)
+MED^1^^3^2
+"DATA",2005.03,694,0)
+HEMATOLOGY^HEM^2^694
+"DATA",2005.03,694,2)
+MED^1^^^4
+"DATA",2005.03,699,0)
+ENDOSCOPY^ENDO^2^699
+"DATA",2005.03,699,2)
+MED^1
+"DATA",2005.03,699.5,0)
+GENERIC MEDICINE^GEN^2^699.5
+"DATA",2005.03,699.5,2)
+MED^1
+"DATA",2005.03,2006.5839,0)
+DICOM GMRC TEMP LIST^GMRC^1^2006.5839
+"DATA",2005.03,8925,0)
+TIU^TIU^1^8925
+"DATA",2005.03,8925,2)
+NOTE^1
+"FIA",2005.03)
+PARENT DATA FILE
+"FIA",2005.03,0)
+^MAG(2005.03,
+"FIA",2005.03,0,0)
+2005.03
+"FIA",2005.03,0,1)
+y^y^f^^^^y
+"FIA",2005.03,0,10)
+
+"FIA",2005.03,0,11)
+
+"FIA",2005.03,0,"RLRO")
+
+"FIA",2005.03,0,"VR")
+3.0^MAG
+"FIA",2005.03,2005.03)
+0
+"MBREQ")
+0
+"PKG",454,-1)
+1^1
+"PKG",454,0)
+IMAGING^MAG^Imaging-V1 to release 
+"PKG",454,20,0)
+^9.402P^^
+"PKG",454,22,0)
+^9.49I^1^1
+"PKG",454,22,1,0)
+3.0^3020319^3120725^126
+"PKG",454,22,1,"PAH",1,0)
+350_DD^3120725
+"QUES","XPF1",0)
+Y
+"QUES","XPF1","??")
+^D REP^XPDH
+"QUES","XPF1","A")
+Shall I write over your |FLAG| File
+"QUES","XPF1","B")
+YES
+"QUES","XPF1","M")
+D XPF1^XPDIQ
+"QUES","XPF2",0)
+Y
+"QUES","XPF2","??")
+^D DTA^XPDH
+"QUES","XPF2","A")
+Want my data |FLAG| yours
+"QUES","XPF2","B")
+YES
+"QUES","XPF2","M")
+D XPF2^XPDIQ
+"QUES","XPI1",0)
+YO
+"QUES","XPI1","??")
+^D INHIBIT^XPDH
+"QUES","XPI1","A")
+Want KIDS to INHIBIT LOGONs during the install
+"QUES","XPI1","B")
+NO
+"QUES","XPI1","M")
+D XPI1^XPDIQ
+"QUES","XPM1",0)
+PO^VA(200,:EM
+"QUES","XPM1","??")
+^D MG^XPDH
+"QUES","XPM1","A")
+Enter the Coordinator for Mail Group '|FLAG|'
+"QUES","XPM1","B")
+
+"QUES","XPM1","M")
+D XPM1^XPDIQ
+"QUES","XPO1",0)
+Y
+"QUES","XPO1","??")
+^D MENU^XPDH
+"QUES","XPO1","A")
+Want KIDS to Rebuild Menu Trees Upon Completion of Install
+"QUES","XPO1","B")
+NO
+"QUES","XPO1","M")
+D XPO1^XPDIQ
+"QUES","XPZ1",0)
+Y
+"QUES","XPZ1","??")
+^D OPT^XPDH
+"QUES","XPZ1","A")
+Want to DISABLE Scheduled Options, Menu Options, and Protocols
+"QUES","XPZ1","B")
+NO
+"QUES","XPZ1","M")
+D XPZ1^XPDIQ
+"QUES","XPZ2",0)
+Y
+"QUES","XPZ2","??")
+^D RTN^XPDH
+"QUES","XPZ2","A")
+Want to MOVE routines to other CPUs
+"QUES","XPZ2","B")
+NO
+"QUES","XPZ2","M")
+D XPZ2^XPDIQ
+"SEC","^DIC",2005.03,2005.03,0,"AUDIT")
+
+"SEC","^DIC",2005.03,2005.03,0,"DD")
+@
+"SEC","^DIC",2005.03,2005.03,0,"DEL")
+@
+"SEC","^DIC",2005.03,2005.03,0,"LAYGO")
+@
+"SEC","^DIC",2005.03,2005.03,0,"RD")
+@
+"SEC","^DIC",2005.03,2005.03,0,"WR")
+@
+"VER")
+8.0^22.0
+"^DD",2005.03,2005.03,0)
+FIELD^^45^11
+"^DD",2005.03,2005.03,0,"DDA")
+N
+"^DD",2005.03,2005.03,0,"DT")
+3030814
+"^DD",2005.03,2005.03,0,"IX","B",2005.03,.01)
+
+"^DD",2005.03,2005.03,0,"NM","PARENT DATA FILE")
+
+"^DD",2005.03,2005.03,0,"PT",2005,16)
+
+"^DD",2005.03,2005.03,0,"PT",2005.001,1)
+
+"^DD",2005.03,2005.03,0,"PT",2005.1,16)
+
+"^DD",2005.03,2005.03,0,"VRPK")
+MAG
+"^DD",2005.03,2005.03,.001,0)
+FILE/SUBFILE NUMBER^NJ14,5^^ ^K:+X'=X!(X>99999999)!(X<1)!(X?.E1"."6N.N) X
+"^DD",2005.03,2005.03,.001,3)
+Type a Number between 1 and 99999999, 5 Decimal Digits
+"^DD",2005.03,2005.03,.001,21,0)
+^^5^5^2970721^
+"^DD",2005.03,2005.03,.001,21,1,0)
+This is the actual number of a file or sub-file of a file. Some examples of
+"^DD",2005.03,2005.03,.001,21,2,0)
+the .001 field are: For Radiology Reports file it is 74, for the Message
+"^DD",2005.03,2005.03,.001,21,3,0)
+file (MailMan) it is 3.9, for Endoscopy (Medicine) 655, for Surgery 130,
+"^DD",2005.03,2005.03,.001,21,4,0)
+and for Surgical Pathology it is 63.08 (the sub-file number of Lab Data
+"^DD",2005.03,2005.03,.001,21,5,0)
+file, 63).
+"^DD",2005.03,2005.03,.001,"DT")
+2930705
+"^DD",2005.03,2005.03,.01,0)
+FILE/SUBFILE NAME^RF^^0;1^K:$L(X)>40!($L(X)<3)!'(X?1.E) X
+"^DD",2005.03,2005.03,.01,1,0)
+^.1
+"^DD",2005.03,2005.03,.01,1,1,0)
+2005.03^B
+"^DD",2005.03,2005.03,.01,1,1,1)
+S ^MAG(2005.03,"B",$E(X,1,30),DA)=""
+"^DD",2005.03,2005.03,.01,1,1,2)
+K ^MAG(2005.03,"B",$E(X,1,30),DA)
+"^DD",2005.03,2005.03,.01,3)
+Answer must be 3-40 characters in length.
+"^DD",2005.03,2005.03,.01,21,0)
+^.001^2^2^3001006^^
+"^DD",2005.03,2005.03,.01,21,1,0)
+This is the actual name of the file or sub-file of a file. Some examples
+"^DD",2005.03,2005.03,.01,21,2,0)
+would be Message, Surgery, Surgical Pathology.
+"^DD",2005.03,2005.03,.01,"DT")
+2930909
+"^DD",2005.03,2005.03,.02,0)
+ABBREVIATION^F^^0;2^K:$L(X)>8!($L(X)<2) X
+"^DD",2005.03,2005.03,.02,3)
+Answer must be 2-8 characters in length.
+"^DD",2005.03,2005.03,.02,21,0)
+^.001^2^2^3001006^^^^
+"^DD",2005.03,2005.03,.02,21,1,0)
+This is the commonly used abbreviation for the file or sub-file.
+"^DD",2005.03,2005.03,.02,21,2,0)
+Some examples would be SUR, MAIL, ENDO, SP etc.
+"^DD",2005.03,2005.03,.02,"DT")
+2930712
+"^DD",2005.03,2005.03,.03,0)
+GLOBAL ROOT TYPE^S^1:ROOT1;2:ROOT2;3:ROOT3;^0;3^Q
+"^DD",2005.03,2005.03,.03,3)
+Enter the global root type of the file or sub-file.
+"^DD",2005.03,2005.03,.03,21,0)
+^.001^9^9^3001006^^^^
+"^DD",2005.03,2005.03,.03,21,1,0)
+This is used in the editing and deletion of image pointers in other files.
+"^DD",2005.03,2005.03,.03,21,2,0)
+Since the Image file (2005) is pointed to by a variety of files a system
+"^DD",2005.03,2005.03,.03,21,3,0)
+had to be created to enable backward navigation. The global root data
+"^DD",2005.03,2005.03,.03,21,4,0)
+types or forms have been put into three groups:
+"^DD",2005.03,2005.03,.03,21,5,0)
+ 
+"^DD",2005.03,2005.03,.03,21,6,0)
+ ROOT1 -   like "^RARPT("; "^SRO("; "^LR(";
+"^DD",2005.03,2005.03,.03,21,7,0)
+ ROOT2 -   like "^XMB(3.9,"; "^MCAR(699,"
+"^DD",2005.03,2005.03,.03,21,8,0)
+ ROOT3 -   like "^LR(D0,""SP"","                  SUB-FILE of ^LR(
+"^DD",2005.03,2005.03,.03,21,9,0)
+                   (where D0 = LRDFN)
+"^DD",2005.03,2005.03,.03,"DT")
+2940419
+"^DD",2005.03,2005.03,.04,0)
+FILE POINTER^P1'^DIC(^0;4^Q
+"^DD",2005.03,2005.03,.04,3)
+POINTS TO ^DIC if regular file.
+"^DD",2005.03,2005.03,.04,21,0)
+^^6^6^2970721^^
+"^DD",2005.03,2005.03,.04,21,1,0)
+This is the parent file pointing to ^DIC( - in most cases it will also
+"^DD",2005.03,2005.03,.04,21,2,0)
+be the .001 field since it will be a parent file itself. But in the
+"^DD",2005.03,2005.03,.04,21,3,0)
+case of sub-files, like the laboratory sub-files, it will not be the .001
+"^DD",2005.03,2005.03,.04,21,4,0)
+field, but the number of the parent file. For example the Radiology entry
+"^DD",2005.03,2005.03,.04,21,5,0)
+has 74 for the .001 field and 74 for this field. However the Surgical
+"^DD",2005.03,2005.03,.04,21,6,0)
+Pathology entry has 68.03 for the .001 field, and 63 for the .04 field.
+"^DD",2005.03,2005.03,.04,"DT")
+2930909
+"^DD",2005.03,2005.03,40,0)
+PACKAGE INDEX^S^RAD:RAD;LAB:LAB;MED:MED;NOTE:NOTE;CP:CP;SUR:SUR;CONS:CONS;PHOTOID:PHOTOID;NONE:NONE;^2;1^Q
+"^DD",2005.03,2005.03,40,3)
+The Package associated with the image.
+"^DD",2005.03,2005.03,40,21,0)
+^.001^2^2^3020819^^
+"^DD",2005.03,2005.03,40,21,1,0)
+This is the abbreviation of the application (package) that the image is
+"^DD",2005.03,2005.03,40,21,2,0)
+attached to. 
+"^DD",2005.03,2005.03,40,"DT")
+3030203
+"^DD",2005.03,2005.03,41,0)
+CLASS INDEX^P2005.82'^MAG(2005.82,^2;2^Q
+"^DD",2005.03,2005.03,41,21,0)
+^^2^2^3020819^
+"^DD",2005.03,2005.03,41,21,1,0)
+The classification of the image.  CLASS is an index field used for
+"^DD",2005.03,2005.03,41,21,2,0)
+sorting and searching.
+"^DD",2005.03,2005.03,41,"DT")
+3030203
+"^DD",2005.03,2005.03,42,0)
+TYPE INDEX^P2005.83'^MAG(2005.83,^2;3^Q
+"^DD",2005.03,2005.03,42,21,0)
+^^1^1^3020819^
+"^DD",2005.03,2005.03,42,21,1,0)
+The TYPE of image. TYPE is an index field used for sorting and searching.
+"^DD",2005.03,2005.03,42,"DT")
+3030203
+"^DD",2005.03,2005.03,43,0)
+PROC/EVENT INDEX^P2005.85'^MAG(2005.85,^2;4^Q
+"^DD",2005.03,2005.03,43,21,0)
+^^2^2^3020819^
+"^DD",2005.03,2005.03,43,21,1,0)
+The PROCEDURE/EVENT for the image.  PROCEDURE/EVENT is an index field
+"^DD",2005.03,2005.03,43,21,2,0)
+used for sorting and searching.
+"^DD",2005.03,2005.03,43,"DT")
+3030203
+"^DD",2005.03,2005.03,44,0)
+SPEC/SUBSPEC INDEX^P2005.84'^MAG(2005.84,^2;5^Q
+"^DD",2005.03,2005.03,44,21,0)
+^^2^2^3020819^
+"^DD",2005.03,2005.03,44,21,1,0)
+The SPECIALTY/SUBSPECIALTY of the image.  SPECIALTY/SUBSPECIALTY is an
+"^DD",2005.03,2005.03,44,21,2,0)
+index field used for sorting and searching.
+"^DD",2005.03,2005.03,44,"DT")
+3030203
+"^DD",2005.03,2005.03,45,0)
+ORIGIN INDEX^S^V:VA;N:NON-VA;^2;6^Q
+"^DD",2005.03,2005.03,45,21,0)
+^^2^2^3030814^
+"^DD",2005.03,2005.03,45,21,1,0)
+This field indicates whether an image or document originated inside or 
+"^DD",2005.03,2005.03,45,21,2,0)
+outside of VA.
+"^DD",2005.03,2005.03,45,"DT")
+3030814
+"^DIC",2005.03,2005.03,0)
+PARENT DATA FILE^2005.03
+"^DIC",2005.03,2005.03,0,"GL")
+^MAG(2005.03,
+"^DIC",2005.03,2005.03,"%",0)
+^1.005^1^1
+"^DIC",2005.03,2005.03,"%",1,0)
+MAG
+"^DIC",2005.03,2005.03,"%","B","MAG",1)
+
+"^DIC",2005.03,2005.03,"%D",0)
+^^40^40^3010619^
+"^DIC",2005.03,2005.03,"%D",1,0)
+ +---------------------------------------------------------------+
+"^DIC",2005.03,2005.03,"%D",2,0)
+ |                                                               |
+"^DIC",2005.03,2005.03,"%D",3,0)
+ | Property of the US Government.                                |
+"^DIC",2005.03,2005.03,"%D",4,0)
+ | No permission to copy or redistribute this software is given. |
+"^DIC",2005.03,2005.03,"%D",5,0)
+ | Use of unreleased versions of this software requires the user |
+"^DIC",2005.03,2005.03,"%D",6,0)
+ | to execute a written test agreement with the VistA Imaging    |
+"^DIC",2005.03,2005.03,"%D",7,0)
+ | Development Office of the Department of Veterans Affairs,     |
+"^DIC",2005.03,2005.03,"%D",8,0)
+ | telephone (301) 734-0100.                                     |
+"^DIC",2005.03,2005.03,"%D",9,0)
+ |                                                               |
+"^DIC",2005.03,2005.03,"%D",10,0)
+ | The Food and Drug Administration classifies this software as  |
+"^DIC",2005.03,2005.03,"%D",11,0)
+ | a medical device.  As such, it may not be changed in any way. |
+"^DIC",2005.03,2005.03,"%D",12,0)
+ | Modifications to this software may result in an adulterated   |
+"^DIC",2005.03,2005.03,"%D",13,0)
+ | medical device under 21CFR820, the use of which is considered |
+"^DIC",2005.03,2005.03,"%D",14,0)
+ | to be a violation of US Federal Statutes.                     |
+"^DIC",2005.03,2005.03,"%D",15,0)
+ |                                                               |
+"^DIC",2005.03,2005.03,"%D",16,0)
+ +---------------------------------------------------------------+
+"^DIC",2005.03,2005.03,"%D",17,0)
+ 
+"^DIC",2005.03,2005.03,"%D",18,0)
+The Imaging File (2005) has many "imaging multiples" pointing to it from
+"^DIC",2005.03,2005.03,"%D",19,0)
+other packages such as Radiology, Medicine, Surgery, Mailman and the
+"^DIC",2005.03,2005.03,"%D",20,0)
+various sub-files of Laboratory such as Surgical Pathology etc.  In order
+"^DIC",2005.03,2005.03,"%D",21,0)
+to have a method of tracing back from the Image file to the parent file
+"^DIC",2005.03,2005.03,"%D",22,0)
+multiple, a file was developed to aid in this process, along with some
+"^DIC",2005.03,2005.03,"%D",23,0)
+additional fields in the Image file. Using these fields along with the
+"^DIC",2005.03,2005.03,"%D",24,0)
+PARENT DATA FILE, backward navigation is possible whether it be to a
+"^DIC",2005.03,2005.03,"%D",25,0)
+multiple of a file, or a multiple of a sub-file of a file. Each image that
+"^DIC",2005.03,2005.03,"%D",26,0)
+is captured is associated with a procedure or test report.  Depending on
+"^DIC",2005.03,2005.03,"%D",27,0)
+the service collecting the image, different types of reports will be
+"^DIC",2005.03,2005.03,"%D",28,0)
+associated.  For example:
+"^DIC",2005.03,2005.03,"%D",29,0)
+ 
+"^DIC",2005.03,2005.03,"%D",30,0)
+  * Medical Procedures:  Endoscopy, Dermatology, Hematology, Rheumatology, etc.
+"^DIC",2005.03,2005.03,"%D",31,0)
+  * Anatomic Pathology:  Surgical Pathology, Cytology, Autopsy, Electron Microscopy
+"^DIC",2005.03,2005.03,"%D",32,0)
+  * Radiology:  Xray, CT, MRI, Ultrasound
+"^DIC",2005.03,2005.03,"%D",33,0)
+  * Surgery  Operation reports
+"^DIC",2005.03,2005.03,"%D",34,0)
+  * Text Integration Utility  Progress notes
+"^DIC",2005.03,2005.03,"%D",35,0)
+ 
+"^DIC",2005.03,2005.03,"%D",36,0)
+ In order to be able to display information from the associated
+"^DIC",2005.03,2005.03,"%D",37,0)
+report, references to that report are stored in the Image file. 
+"^DIC",2005.03,2005.03,"%D",38,0)
+One of these references is a pointer to the Parent Report file
+"^DIC",2005.03,2005.03,"%D",39,0)
+(2005.03), which contains an entry for each package's report file
+"^DIC",2005.03,2005.03,"%D",40,0)
+that is currently supported.
+"^DIC",2005.03,"B","PARENT DATA FILE",2005.03)
+
+**END**
+**END**

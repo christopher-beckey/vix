@@ -1,0 +1,96 @@
+package ImagingClinComponentsMAIN;
+
+{$R *.res}
+{$R 'cmagObserverLabel.dcr'}
+{$R 'cMag4VGear.dcr'}
+{$R 'cMag4Viewer.dcr'}
+{$R 'cMagDBBroker.dcr'}
+{$R 'cMagDBSysUtils.dcr'}
+{$R 'cMagImageList.dcr'}
+{$R 'cMagPat.dcr'}
+{$R 'cMagPatPhoto.dcr'}
+{$R 'cMagSecurity.dcr'}
+{$R 'cmagLabelNoClear.dcr'}
+{$R 'cMagMenu.dcr'}
+{$R 'cMagListView.dcr'}
+{$R 'cMagUtilsDB.dcr'}
+{$R 'cMagUtils.dcr'}
+{$R 'cMagVUtils.dcr'}
+{$R 'cMagTreeView.dcr'}
+{$ALIGN 8}
+{$ASSERTIONS ON}
+{$BOOLEVAL OFF}
+{$DEBUGINFO ON}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA ON}
+{$IOCHECKS ON}
+{$LOCALSYMBOLS ON}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION ON}
+{$OVERFLOWCHECKS OFF}
+{$RANGECHECKS OFF}
+{$REFERENCEINFO ON}
+{$SAFEDIVIDE OFF}
+{$STACKFRAMES OFF}
+{$TYPEDADDRESS OFF}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST OFF}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $400000}
+{$DESCRIPTION 'Imaging Clin Components MAIN'}
+{$IMPLICITBUILD ON}
+{$DEFINE ImageGear16}
+{$DEFINE USENEWANNOTS}
+
+requires
+  vclx,
+  vcl,
+  rtl,
+  vclactnband,
+  vclie,
+  vcljpg,
+  xmlrtl,
+  soaprtl,
+  inet,
+  dbrtl,
+  IndyCore,
+  IndySystem,
+  IndyProtocols,
+  VclSmp,
+  XWB_R2007,
+  vclimg,
+  VCLZipD2007_4,
+  ImageGear16D2007;
+
+contains
+  cMagObserverLabel in 'cMagObserverLabel.pas',
+  cMag4Vgear in 'cMag4Vgear.pas' {Mag4VGear: TFrame},
+  cMag4Viewer in 'cMag4Viewer.pas' {Mag4Viewer: TFrame},
+  cMagDBBroker in 'cMagDBBroker.pas',
+  cMagDBDemo in 'cMagDBDemo.pas',
+  cMagDBDemoUtils in 'cMagDBDemoUtils.pas',
+  cMagDBMVista in 'cMagDBMVista.pas',
+  cMagDBSysUtils in 'cMagDBSysUtils.pas',
+  cMagImageList in 'cMagImageList.pas',
+  cMagLVutils in 'cMagLVutils.pas',
+  cMagPat in 'cMagPat.pas',
+  cMagPatPhoto in 'cMagPatPhoto.pas' {MagPatPhoto: TFrame},
+  cMagSecurity in 'cMagSecurity.pas',
+  cmagLabelNoClear in 'cmagLabelNoClear.pas',
+  cMagMenu in 'cMagMenu.pas',
+  cMagListView in 'cMagListView.pas',
+  cMagUtilsDB in 'cMagUtilsDB.pas',
+  cMagUtils in 'cMagUtils.pas',
+  cMagVUtils in 'cMagVUtils.pas',
+  cmag4ViewerImageProxy in 'cmag4ViewerImageProxy.pas',
+  cMag4ViewerEventScrollBox in 'cMag4ViewerEventScrollBox.pas',
+  cMagViewerTB8 in 'cMagViewerTB8.pas' {magViewerTB8: TFrame},
+  cMagTreeView in 'cMagTreeView.pas',
+  cMagPublishSubscribe in 'cMagPublishSubscribe.pas',
+  MagRemoteToolbar in 'MagRemoteToolbar.pas',
+  cMagListViewLite in 'cMagListViewLite.pas',
+  cMagStackViewer in 'cMagStackViewer.pas',
+  cMagViewerRadTB2 in 'cMagViewerRadTB2.pas';
+
+end.

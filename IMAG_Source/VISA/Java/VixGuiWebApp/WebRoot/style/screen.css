@@ -1,0 +1,685 @@
+/* basic elements */
+p { 
+	text-align: justify;
+	}
+h3 { 
+	font: italic normal 1.4em;
+	letter-spacing: 1px; 
+	color: #7D775C;
+	}
+a:link { 
+	font-weight: bold; 
+	text-decoration: none; 
+	color: #B7A5DF;
+	}
+a:visited { 
+	font-weight: bold; 
+	text-decoration: none; 
+	color: #D4CDDC;
+	}
+a:hover, a:active { 
+	text-decoration: underline; 
+	color: #9685BA;
+	}
+
+/* 
+Specific divs and spans, these determine the layout of the pages.
+Currently the pages are organized as follows:
+-------------------------------------------------
+|                Page Header                    |
+-------------------------------------------------
+|                  Menu                         |
+-------------------------------------------------
+|         |                                     |
+| sel-    |    supporting-text                  |
+| ection  |                                     |
+-------------------------------------------------
+|              Page Footer                      |
+------------------------------------------------- 
+*/
+body {
+	position: relative; 
+	font: 75% sans-serif;
+	line-height: 1.88889;
+	color: #555753; 
+	background: #fff; 
+	z-index: 1;
+	}
+	
+#pageHeader {
+	min-height: 64px;
+	background-image: url("/Vix/images/BlueFade32X64.jpg");
+	background-repeat: repeat-x;
+	}
+	
+#mainMenuDiv {
+	display: block;
+	margin: 30px;
+	width: 100%;
+	z-index: 100;
+	}
+	
+#container { 
+	display: table-row;
+	width: 2048px;
+	max-width: 2048px;
+	margin: 10px;
+	}
+#container #selection {
+	width: 375px;
+	height: auto;
+	border: double;
+	padding: 0;
+	border-color: rgb(200, 200, 256);
+	}
+
+.center {
+	position: absolute;
+	top: 150px;
+	left: 240px;
+	padding: 0;
+	}
+	
+#container #supportingText {
+	display: table-cell;
+	min-width: 520px;
+	}
+	
+#pageFooter { 
+	display: block;
+	margin: 10px;
+	text-align: left; 
+	width: 800px;
+	}
+/*
+* DIV and SPAN formatting
+*/
+
+/* 
+* #dropmenudiv is the DIV that is hidden/shown and populated from code and contains the submenues 
+* When the generated menu is working, this can be deleted
+*/
+#dropmenudiv{
+	position:absolute;
+	font:normal 12px Verdana;
+	line-height:18px;
+	z-index:100;
+	color:  #000066;
+	background-color: #3366CC;
+	width:165;
+	border-top: 1px solid black;
+	border-left: 1px solid black;
+	border-right: 1px solid black;
+}
+
+/* #dropmenudiv a are the links in the submenues */
+#dropmenudiv a{
+	width: 100%;
+	display: block;
+	text-indent: 3px;
+	border-bottom: 1px solid black;
+	padding: 1px 0;
+	text-decoration: none;
+}
+
+#dropmenudiv a:hover{ /*hover background color*/
+	color: #FFFFFF;
+	background-color:  #000066;
+}
+
+/* 
+#mainMenu is just the top level static element, the submenues are created dynamically
+see .submenu for menu item formatting
+
+The menu HTML will be generated (using the Menu tag) to look something like the following:
+
+<ul class="menu" id="mainMenu">
+	<li class="menuItem" id="menuItem-1" itemIcon="../images/disk.gif"><a href="#" title="Open the file menu">File</a>
+		<ul class="subMenu" id="subMenu-1" width="150">
+			<li class="subMenuItem" id="menuItem-1"><a href="#">Save As</a></li>
+			<li class="subMenuItem" id="menuItem-2" itemType="separator"></li>
+			<li class="subMenuItem" id="menuItem-3"><a href="#">Open</a></li>
+		</ul>
+	</li>
+	<li class="menuItem" id="menuItem-2" itemIcon="../images/printer.gif"><a href="#" title="Print">Print</a>
+		<ul class="subMenu" id="subMenu-2" width="150">
+			<li class="subMenuItem" id="menuItem-4"><a href="#">Print to PDF</a></li>
+		</ul>
+	</li>
+</ul>
+
+<div id="mainMenuDiv"></div>
+
+Other than specifying that the mainMenu has display style of 'none', the other 
+menu items should not specify either display or visibility style.
+*/
+#mainMenu {
+	}
+.subMenuItem {
+	font:normal 12px Verdana;
+	line-height:18px;
+	z-index:100;
+	color:  #000066;
+	background-color: #3366CC;
+	width:165;
+	border-top: 1px solid black;
+	border-left: 1px solid black;
+	border-right: 1px solid black;
+}
+
+/* #submenu a are the links in the submenues */
+.subMenuItem a{
+	width: 100%;
+	text-indent: 3px;
+	border-bottom: 1px solid black;
+	padding: 1px 0;
+	text-decoration: none;
+}
+
+.subMenuItem a:hover{ /*hover background color*/
+	color: #FFFFFF;
+	background-color:  #000066;
+}
+
+/* Calendar Selector Popup */
+#calendar{
+	opacity:.9;
+	z-index:100;
+	position:absolute;
+	visibility:hidden;
+	border: thick;
+	border-style: solid;
+	border-color: rgb(200, 200, 256);
+	top:10px;
+	left:20px; 
+	width:300px;
+	z-index:9; 
+	}
+#days{
+	border: thin;
+	border-style: solid;
+	border-color: rgb(200, 200, 256);
+	width:90%;
+	}		 
+
+#day-names{
+	border: thin;
+	border-style: solid;
+	border-color: rgb(200, 200, 256);
+	}		 
+	
+.day-name{
+	width:14%;
+	font-size: small;
+	}		 
+	
+/* Page Header formatting */
+#pageHeader h1 { 
+	font-weight: bolder;
+	font-size: x-large;
+	text-align: center;
+	/*background: gray url("/Vix/images/header.png") none top left;*/
+	}
+#pageHeader h1 span {
+	/*display: none;*/
+	}
+	
+/* ======================================================================= */
+/* Select Form Style Definitions */
+#container #selection * {
+	z-index: 1;
+	max-width: 200px;
+	}
+	
+#container #selection h1 {
+	font-size: small;
+	font-weight: bold;
+	}
+	
+#container #selection h2 {
+	font-size: small;
+	font-weight: normal;
+	}
+	
+#container #selection ul {
+	margin: 0;
+	padding: 0;
+	}
+#container #selection li {
+	line-height: 2.5ex; 
+	display: block; 
+	padding-top: 5px; 
+	margin-bottom: 5px;
+	list-style-type: none;
+	}
+#container #selection input {
+ 	max-width: 100px; 
+ 	height: 22px
+ 	}
+
+#container #selection .multiselect {
+	font-size: small;
+	}
+	
+#container #selection input[type=radio] {
+	margin-top: 0px;
+	margin-bottom: 0px;
+}
+	
+#container #selection .button-img {
+ 	width: 22px; 
+ 	height: 22px
+ 	}
+#container #selection li a:link {
+	color: #988F5E;
+	}
+#container #selection li a:visited {
+	color: #B3AE94;
+	}
+
+#pageFooter a:link, #footer a:visited { 
+	margin-right: 20px; 
+	}
+
+#menu .menu-item {
+	position: relative;
+	margin-left: 20px;
+	min-width: 100px;
+	width: 100px;
+	font-size: small;
+	font-weight: bold;
+	}
+	
+#menu .menu-subitem {
+	font-size: small;
+	font-weight: normal;
+	}
+	
+#menu .menu-item a:link {
+	color: #988F5E;
+	}
+#menu .menu-item a:visited {
+	color: #B3AE94;
+	}
+
+/*
+  The supportingText div is where the majority of the dynamic data is displayed
+  The business object elements are encapsulated in span elements with the classes
+  named for the contained business object (patient, study, series, instance).  The
+  hierarchy of business objects should not be relied on e.g. patient may
+  show up within a study, study may show up within patient and all may show up
+  without a parent element.
+  A collection of business elements are encapsulated within a business object 
+  XXX-list span element: patient-list, study-list, series-list and instance-list
+  Directly under each business object span element may be one or more of three 
+  encapsulating span elements: icon, title, properties OR a XXX-list
+  span of child business elements. 
+  	Example selectors: 
+  		.study .series-list .series
+  		.study > .title
+*/
+#container #supportingText h1 {
+	font-size: 1.5em;
+	}
+#container #supportingText h2 {
+	font-size: 1.2em;
+	}
+
+#container #supportingText table {
+	width: inherit;
+	border: thin;
+	border-style: solid;
+	border-color: rgb(200, 200, 256);
+	padding: 0px;
+	margin: 0px;
+	}
+	
+#container #supportingText table th {
+	border: thin;
+	border-style: solid;
+	border-color: rgb(200, 200, 256);
+	text-align: center;
+	}
+
+#container #supportingText table tr.d0 {
+	background-color: #FCFCFF;
+}
+#container #supportingText table tr.d1 {
+	background-color: #F0F0FF;
+}
+
+#container #supportingText table td {
+	border: thin;
+	border-style: solid;
+	border-color: rgb(200, 200, 256);
+	text-align: center;
+	}
+
+.patient {
+	padding-left: 10px;
+	}
+.patient .title {
+	display: block;
+	font-size: large;
+}
+.patient > .title:first-letter {
+	font-size: xx-large;
+}
+.patient .icon {
+	display: inline;
+	}
+.patient .properties {
+	vertical-align: text-top;
+	text-align: left;
+	display: block;
+	}
+
+.study {
+	padding-left: 10px;
+	}
+	
+.study .title {
+	display: block;
+	font-size: large;
+}
+.study > .title:first-letter {
+	font-size: xx-large;
+}
+.study .icon {
+	display: inline;
+	}
+.study .properties {
+	vertical-align: text-top;
+	text-align: left;
+	display: inline;
+	}
+.study .properties .property{
+	vertical-align: text-top;
+	text-align: left;
+	display: inline;
+	}
+.study .properties .property:after{
+	content: "  ";
+	}
+
+/* suppress the big first letter for patient within a study */
+.study .patient > .title:first-letter {
+	font-size: large;
+}
+/* suppress the big first letter for series within a study */
+.study .series > .title:first-letter {
+	font-size: large;
+}
+
+.study .series-list {
+		padding-left: 10px;
+	}
+	
+.series {
+		padding-left: 10px;
+	}
+.series .title {
+	display: block;
+	font-size: large;
+}
+.series .title:first-letter {
+	font-size: xx-large;
+}
+.series .icon {
+	display: inline;
+	}
+.series .properties {
+	vertical-align: text-top;
+	text-align: left;
+	display: block;
+	}
+.series .instance-list {
+		padding-left: 10px;
+	}
+
+.instance {
+		padding-left: 10px;
+	}
+.instance .title {
+	display: block;
+	font-size: large;
+	}
+.instance .icon {
+	display: inline;
+	}
+.instance .properties {
+	vertical-align: text-top;
+	text-align: left;
+	display: block;
+	}
+	
+.image_links {
+	text-align: left;
+	display: block;
+}
+
+/*
+* The calendar class is the container (table element) of the date picker popup window.
+* The ID of the container is the name of the calendar (see the page's code)
+* prepended to '_calendar' (e.g. todatePicker => id=toDatePicker_calendar)
+*/
+*.calendar {
+	position: absolute;
+	font-size: 0.8em;
+	border-collapse: collapse;
+	background-color: white;
+	border: thick;
+	border-style: solid;
+	border-color: rgb(200, 200, 256);
+	background-color: white;
+	width: 200px;
+	text-align: center;
+	/*prevent user from selecting text in Mozilla & Safari - check calendar constructor for IE code)*/
+	-moz-user-select: none;
+	z-index: 99;
+	}
+
+/* The month and year dropdowns in the calendar */
+*.calendar .mainheading {
+}
+*.calendar .mainheading option{
+}
+
+/* The days of the week in the calendar */
+*.calendar .caldayheading {
+}
+
+/* The days in the calendar */
+*.calendar .calcells {
+	border: thin;
+}
+
+*.calcells .wkhead {
+	background-color: white;
+	text-align: center;
+	color: #0054E3;
+}
+
+/* Specific types of days in the calendar */
+*.calendar .calcells .notmnth{
+	color: gray;
+}
+*.calendar .calcells .cell_selected{
+	background: yellow;
+	color: blue;
+}
+*.calendar .calcells .wkday{
+	color: blue;
+}
+*.calendar .calcells .wkend{
+	background: blue;
+	color: white;
+}
+
+/*
+* The dhtmlgoodies_tree class is the container (ul element) of any
+* expandable tree.
+*/
+.dhtmlgoodies_tree{
+	margin:0px;
+	padding:0px;
+}
+.dhtmlgoodies_tree ul{	/* Sub menu groups */
+	margin-left:20px;	/* Left spacing */
+	padding-left:0px;
+	display:none;	/* Initially hide sub nodes */
+}
+.dhtmlgoodies_tree li{	/* Nodes */
+	list-style-type:none;
+	vertical-align:middle;
+	
+}
+.dhtmlgoodies_tree li a{	/* Node links */
+	color:#000;
+	text-decoration:none;
+	font-family:arial;
+	font-size:0.8em;
+	padding-left:2px;
+}				
+
+/*
+ * the contextMenu is the right-click drop-down menu on the thumbnails
+ */
+#contextMenu{	/* The menu container */
+	border:1px solid #202867;	/* Border around the entire menu */
+	background-color:#FFF;	/* White background color of the menu */
+	margin:0px;
+	padding:0px;
+	width:175px;	/* Width of context menu */
+	font-family:arial;
+	font-size:12px;
+	background-image:url('/Vix/images/gradient.gif');
+	background-repeat:repeat-y;
+	
+	/* Never change these two values */
+	display:none;
+	position:absolute;
+
+}
+#contextMenu a{	/* Links in the context menu */
+	color: #000;
+	text-decoration:none;
+	line-height:25px;
+	vertical-align:middle;	
+	height:28px;
+	
+	/* Don't change these 3 values */
+	display:block;	
+	width:100%;
+	clear:both;
+	
+}
+#contextMenu li{	/* Each menu item */
+	list-style-type:none;
+	padding:1px;
+	margin:1px;
+	cursor:pointer;	
+	clear:both;
+}
+#contextMenu li div{	/* Dynamically created divs */
+	cursor:pointer;	
+}
+#contextMenu .contextMenuHighlighted{	/* Highlighted context menu item */
+	border:1px solid #000;
+	padding:0px;
+	background-color:#E2EBED;
+
+}
+#contextMenu img{
+	border:0px;
+}
+#contextMenu .imageBox{	/* Dynamically created divs for images in the menu */
+
+	float:left;
+	padding-left:2px;
+	padding-top:3px;
+	vertical-align:middle;
+	
+	width: 30px;	/* IE 5.x */
+	width/* */:/**/28px;	/* Other browsers */
+	width: /**/28px;
+}
+#contextMenu .itemTxt{
+	float:left;		
+	width: 120px;	/* IE 5.x */
+	width/* */:/**/140px;	/* Other browsers */
+	width: /**/140px;		
+}
+
+#resultsNavigationTop {
+}
+
+#resultsNavigationBottom {
+}
+.resultsPageIndex {
+	font-size: x-large;
+}
+
+.navigation {
+	cursor: pointer;
+}
+
+.navigation :HOVER {
+	border-color: blue;
+	background-color: blue;
+}
+
+.resultsPerPage {
+	display: inline;
+	margin: 5px;
+}
+.resultsPerPage a {
+	font-size: large;
+	cursor: pointer;
+}
+.unselectedPageCount {
+	font-weight: normal;
+}
+.selectedPageCount {
+	font-weight: bold;
+}
+
+#regex-help {
+	position: absolute; 
+	visibility: hidden; 
+	display: block;
+	border: thick;
+	border-style: solid;
+	border-color: rgb(200, 200, 256);
+	background-color: #E3E0F7;
+	width: 300px;
+	z-index: 1000;
+}
+
+.close-button
+{
+	position: absolute; 
+	top: 0px;	
+	left: 284px;
+}
+
+/* tooltip styles */ 
+.dvhdr1 {
+   background:#E3E0F7;
+   font-size:12px;
+   font-weight:bold;
+   border:1px solid #C8BA92;
+   padding:5px;
+   width:150px;
+}
+
+.dvbdy1 {
+   background:#FFFFFF;
+   font-size:12px;
+   border-left:1px solid #C8BA92;
+   border-right:1px solid #C8BA92;
+   border-bottom:1px solid #C8BA92;
+   padding:5px;
+   width:150px;
+}
+	 

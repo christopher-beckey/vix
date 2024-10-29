@@ -1,0 +1,245 @@
+magpt2 ;WOIFO/MLH - individual PACS tests ; 16 Jun 2005  1:51 PM
+ ; *** CAUTION:  not for distribution beyond Silver Spring OIFO!
+ q
+ ;
+A113 ; non-exception flow - ICN change for existing pt
+ ;
+ n result,stat,logent
+ k HLA
+ ;
+ d LOG^magpt($t(A113)_" ; begin")
+ ;
+ ; new order message
+ d ORM^magpt("NW")
+ s stat=$$SEND^magptm("ORM",.result)
+ s logent="A.1.13.1 ; "_result w !,logent,! d LOG^magpt(logent,$na(HLA("HLS")))
+ ;
+ d ADTICN^magpt("NEW") ; new ICN
+ s stat=$$SEND^magptm("A47",.result)
+ s logent="A.1.13.2 ; "_result w !,logent,! d LOG^magpt(logent,$na(HLA("HLS")))
+ ;
+ d LOG^magpt($t(A113)_" ; end")
+ q
+ ;
+A114 ; non-exception flow - ICN merge for existing pt
+ ; do not allow this test to be run previous to another order test!
+ ;
+ n result,stat,logent
+ k HLA
+ ;
+ d LOG^magpt($t(A114)_" ; begin")
+ ;
+ ; new order message
+ d ORM^magpt("NW")
+ s stat=$$SEND^magptm("ORM",.result)
+ s logent="A.1.14.1 ; "_result w !,logent,! d LOG^magpt(logent,$na(HLA("HLS")))
+ ;
+ d ADTICN^magpt("MERGE") ; merge existing ICN
+ s stat=$$SEND^magptm("A40",.result)
+ s logent="A.1.14.2 ; "_result w !,logent,! d LOG^magpt(logent,$na(HLA("HLS")))
+ ;
+ d LOG^magpt($t(A114)_" ; end")
+ q
+ ;
+A115 ; non-exception flow - SSN change for existing pt
+ ;
+ n result,stat,logent
+ k HLA
+ ;
+ d LOG^magpt($t(A115)_" ; begin")
+ ;
+ ; new order message
+ d ORM^magpt("NW")
+ s stat=$$SEND^magptm("ORM",.result)
+ s logent="A.1.15.1 ; "_result w !,logent,! d LOG^magpt(logent,$na(HLA("HLS")))
+ ;
+ d ADTSSN^magpt ; new SSN
+ s stat=$$SEND^magptm("A47",.result)
+ s logent="A.1.15.2 ; "_result w !,logent,! d LOG^magpt(logent,$na(HLA("HLS")))
+ ;
+ d LOG^magpt($t(A115)_" ; end")
+ q
+ ;
+A116 ; non-exception flow - DOB change for existing pt
+ ;
+ n result,stat,logent
+ k HLA
+ ;
+ d LOG^magpt($t(A116)_" ; begin")
+ ;
+ ; new order message
+ d ORM^magpt("NW")
+ s stat=$$SEND^magptm("ORM",.result)
+ s logent="A.1.16.1 ; "_result w !,logent,! d LOG^magpt(logent,$na(HLA("HLS")))
+ ;
+ ; ADT demographic update
+ d ADTUPD^magpt("dob")
+ s stat=$$SEND^magptm("A08",.result)
+ s logent="A.1.16.2 ; "_result w !,logent,! d LOG^magpt(logent,$na(HLA("HLS")))
+ ;
+ d LOG^magpt($t(A116)_" ; end")
+ q
+ ;
+A117 ; non-exception flow - sex value change for existing pt
+ ;
+ n result,stat,logent
+ k HLA
+ ;
+ d LOG^magpt($t(A117)_" ; begin")
+ ;
+ ; new order message
+ d ORM^magpt("NW")
+ s stat=$$SEND^magptm("ORM",.result)
+ s logent="A.1.17.1 ; "_result w !,logent,! d LOG^magpt(logent,$na(HLA("HLS")))
+ ;
+ ; ADT demographic update
+ d ADTUPD^magpt("sex")
+ s stat=$$SEND^magptm("A08",.result)
+ s logent="A.1.17.2 ; "_result w !,logent,! d LOG^magpt(logent,$na(HLA("HLS")))
+ ;
+ d LOG^magpt($t(A117)_" ; end")
+ q
+ ;
+A118 ; non-exception flow - order and ADT transfer/cancel
+ ;
+ n result,stat,logent
+ k HLA
+ ;
+ d LOG^magpt($t(A118)_" ; begin")
+ ;
+ ;
+ ; new order message - force inpt
+ f  d ORM^magpt("NW") q:$p(HLA("HLS",2),"^",3)="I"
+ s stat=$$SEND^magptm("ORM",.result)
+ s logent="A.1.18.1 ; "_result w !,logent,! d LOG^magpt(logent,$na(HLA("HLS")))
+ ;
+ ; ADT transfer
+ d ADTXFR^magpt
+ s stat=$$SEND^magptm("A02",.result)
+ s logent="A.1.18.2 ; "_result w !,logent,! d LOG^magpt(logent,$na(HLA("HLS")))
+ ;
+ ; cancel ADT transfer
+ s $p(HLA("HLS",3),"^",4)=$p(HLA("HLS",3),"^",7),$p(HLA("HLS",3),"^",7)=""
+ s stat=$$SEND^magptm("A12",.result)
+ s logent="A.1.18.3 ; "_result w !,logent,! d LOG^magpt(logent,$na(HLA("HLS")))
+ ;
+ d LOG^magpt($t(A118)_" ; end")
+ q
+ ;
+A119 ; non-exception flow - order and ADT discharge/cancel
+ ;
+ n result,stat,logent
+ k HLA
+ ;
+ d LOG^magpt($t(A119)_" ; begin")
+ ;
+ ;
+ ; new order message - force inpt
+ f  d ORM^magpt("NW") q:$p(HLA("HLS",2),"^",3)="I"
+ s stat=$$SEND^magptm("ORM",.result)
+ s logent="A.1.19.1 ; "_result w !,logent,! d LOG^magpt(logent,$na(HLA("HLS")))
+ ;
+ ; ADT discharge
+ d ADTDIS^magpt
+ s stat=$$SEND^magptm("A03",.result)
+ s logent="A.1.19.2 ; "_result w !,logent,! d LOG^magpt(logent,$na(HLA("HLS")))
+ ;
+ ; cancel ADT discharge
+ ; remove discharge date/time
+ s $p(HLA("HLS",3),HLFS,46)=""
+ s stat=$$SEND^magptm("A13",.result)
+ s logent="A.1.19.3 ; "_result w !,logent,! d LOG^magpt(logent,$na(HLA("HLS")))
+ ;
+ d LOG^magpt($t(A119)_" ; end")
+ q
+ ;
+A201 ; exception flow - message type reject
+ ;
+ n result,stat,logent
+ k HLA
+ ;
+ d LOG^magpt($t(A201)_" ; begin")
+ ;
+ ; new 'order' message
+ d ORM^magpt("NW","ORZ")
+ s stat=$$SEND^magptm("ORZ",.result)
+ s logent="A.2.1.1 ; "_result w !,logent,! d LOG^magpt(logent,$na(HLA("HLS")))
+ ;
+ d LOG^magpt($t(A201)_" ; end")
+ q
+ ;
+A202 ; exception flow - processing code reject
+ ;
+ n result,stat,logent
+ k HLA
+ ;
+ d LOG^magpt($t(A202)_" ; skipped") g A202X
+ d LOG^magpt($t(A202)_" ; begin")
+ ;
+ ; new 'order' message
+ d ORM^magpt("NW","ORX")
+ s stat=$$SEND^magptm("ORX",.result)
+ s logent="A.2.2.1 ; "_result w !,logent,! d LOG^magpt(logent,$na(HLA("HLS")))
+ ;
+ d LOG^magpt($t(A202)_" ; end")
+A202X ;
+ q
+ ;
+A203 ; exception flow - HL7 version reject
+ ;
+ n result,stat,logent
+ k HLA
+ ;
+ d LOG^magpt($t(A203)_" ; begin")
+ ;
+ ; new 'order' message
+ d ORM^magpt("NW","ORY")
+ s stat=$$SEND^magptm("ORY",.result)
+ s logent="A.2.3.1 ; "_result w !,logent,! d LOG^magpt(logent,$na(HLA("HLS")))
+ ;
+ d LOG^magpt($t(A203)_" ; end")
+ q
+ ;
+A204 ; exception flow - 2 values for 1 identifier
+ ;
+ n result,stat,logent,ids,icn
+ k HLA
+ ;
+ d LOG^magpt($t(A204)_" ; begin")
+ ;
+ ; new 'order' message
+ d ORM^magpt("NW")
+ ; bung up the ICN into a 2nd repetition
+ s ids=$p(HLA("HLS",1),"^",4),icn=ids
+ s $p(icn,"~",1)="999V998"_$e(1000000+$r(1000000),2,7)
+ s $p(ids,"|",2)=icn,$p(HLA("HLS",1),"^",4)=ids
+ s stat=$$SEND^magptm("ORM",.result)
+ s logent="A.2.4.1 ; "_result w !,logent,! d LOG^magpt(logent,$na(HLA("HLS")))
+ ;
+ d LOG^magpt($t(A204)_" ; end")
+ q
+ ;
+A205 ; exception flow - same case with different ICN
+ ;
+ n result,stat,logent,ids,icn
+ k HLA
+ ;
+ d LOG^magpt($t(A205)_" ; begin")
+ ;
+ ; new order message
+ d ORM^magpt("NW")
+ s stat=$$SEND^magptm("ORM",.result)
+ s logent="A.2.5.1 ; "_result w !,logent,! d LOG^magpt(logent,$na(HLA("HLS")))
+ ;
+ ; change the order code & status (OK) and diddle the ICN (not OK)
+ s $p(HLA("HLS",3),"^",2)="XO",$p(HLA("HLS",3),"^",6)="CM"
+ s ids=$p(HLA("HLS",1),"^",4)
+ f irep=1:1:10 s icn=$p(ids,"|",irep) q:$p(icn,HLCS,4)="USVHA"
+ q:irep>9
+ s $p(icn,"~",1)="999V998"_$e(1000000+$r(1000000),2,7)
+ s $p(ids,"|",irep)=icn,$p(HLA("HLS",1),"^",4)=ids
+ s stat=$$SEND^magptm("ORM",.result)
+ s logent="A.2.5.2 ; "_result w !,logent,! d LOG^magpt(logent,$na(HLA("HLS")))
+ ;
+ d LOG^magpt($t(A205)_" ; end")
+ q

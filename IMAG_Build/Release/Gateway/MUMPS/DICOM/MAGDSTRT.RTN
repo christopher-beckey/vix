@@ -1,0 +1,209 @@
+MAGDSTRT ;WOIFO/PMK - Program to start a background job ; 20 Feb 2009 11:03 AM
+ ;;3.0;IMAGING;**21,11,30,51,69,54**;MAR 19, 2002;;OCT 28, 2009
+ ;; Per VHA Directive 2004-038, this routine should not be modified.
+ ;; +---------------------------------------------------------------+
+ ;; | Property of the US Government.                                |
+ ;; | No permission to copy or redistribute this software is given. |
+ ;; | Use of unreleased versions of this software requires the user |
+ ;; | to execute a written test agreement with the VistA Imaging    |
+ ;; | Development Office of the Department of Veterans Affairs,     |
+ ;; | telephone (301) 734-0100.                                     |
+ ;; | The Food and Drug Administration classifies this software as  |
+ ;; | a medical device.  As such, it may not be changed in any way. |
+ ;; | Modifications to this software may result in an adulterated   |
+ ;; | medical device under 21CFR820, the use of which is considered |
+ ;; | to be a violation of US Federal Statutes.                     |
+ ;; +---------------------------------------------------------------+
+ ;;
+ Q
+ ; The first variable must be defined, the second is optional:
+ ;  1) ENTRY ---- the entry point of the background job
+ ;  2) PROMPT --- the startup message (may be derived from workstation)
+ ;
+SETUP ; main entry point
+ N $ES,$ET,TEMPDIR,X
+ ;
+ S TEMPDIR=$G(^MAGDICOM(2006.563,1,"SCRATCH"),"c:\temp")
+ I '$$GETDIR^MAGOSDIR(TEMPDIR,"D") D  ; make the directory
+ . S X=$$MKDIR^MAGOSDIR(TEMPDIR)
+ . Q
+ I '$$GETDIR^MAGOSDIR(TEMPDIR,"D") D  Q  ; requires \temp directory
+ . N MSG
+ . D PUSH(.MSG,"Please create the directory")
+ . D PUSH(.MSG,TEMPDIR)
+ . D PUSH(.MSG,"And restart this menu option.")
+ . D WARNING^MAGDFCNS(.MSG)
+ . Q
+ ;
+ S DTIME=$G(DTIME,300)
+ I PROMPT'="" D  Q:X="^"
+ . W !!,PROMPT,"  y// " R X:DTIME E  S X="^"
+ . I X="" S X="Yes" W X
+ . I "Yy"'[$E(X,1) W " -- not started" S X="^"
+ . Q
+ ;
+VATEST ; return control to the background job
+ K (ENTRY,DTIME) S DTIME=$G(DTIME,300)
+ S $EC="",$ET="D ERROR^"_$T(+0),CASCADE=0
+ X ^%ZOSF("BRK") ; allow ^C interrupts
+ G @ENTRY ; start (restart) the background task
+ ;
+ERROR ; error trap for ERRORS, especially MODER and loss of connection with VistA
+ ; Prevent infinite error loop
+ S CASCADE=$G(CASCADE)+1 I CASCADE>50 H 1E9 ; What can we do?
+ ; CASCADE gets cleared when we get back to VATEST
+ ;
+ N ECODE,LASTERR
+ S ECODE=$EC
+ S LASTERR=$$LASTERR^MAGUE()
+ D
+ . N I,OK,P
+ . S OK=1 I '$G(NOHALT("DSCON")) F I=1:1:$L(ECODE,",") D
+ . . S P=$P(ECODE,",",I)
+ . . I P["<DSCON>",P'["^MAGOSTCP" S OK=0
+ . . I P["<DISCON>",P'["^MAGOSTCP" S OK=0
+ . . Q
+ . H:'OK  ; halt on disconnect error
+ . Q
+ I $$USEPRIN^MAGOSFIL(1)  ; Can't do much after principal device is lost
+ W !!,"*** Error: ",$ZERROR," (",ECODE,") ***",!
+ L  ; Free all locks that may be present
+ D INIT^MAGOSFIL ; close all HFS devices and TCP/IP socket
+ D
+ . N ACTION,ERR,MSG
+ . ; If the value of ACTION contains:
+ . ;  1: reconnect to VistA
+ . ;  2: log error
+ . ;  3: record the error in MAGDMLOG
+ . ;  4: restart current menu option
+ . ;
+ . S ACTION=23
+ . ; if an interrupt, quit the error routine
+ . I ECODE["<INRPT>" S $ET="Q:$Q """" Q" Q
+ . I ECODE[",ZINTERRUPT," S $ET="Q:$Q """" Q" Q
+ . D:ECODE["<MODER>"
+ . . ; If we got here because the principal device is currently
+ . . ; not writeable, we'll just get another error on the next line.
+ . . ; Prevent an infinite error-loop by waiting a little while.
+ . . H 10 W !,"Error: ",ECODE," (retry)",!
+ . . Q
+ . I ECODE[",ZREAD," S ACTION=14
+ . I ECODE[",ZWRITE," S ACTION=14
+ . I ECODE["<NORPC>" S ACTION=14
+ . I ECODE["<DSCON>" S ACTION=14
+ . I ECODE["<DISCON>" S ACTION=14
+ . I ECODE[",U13-Connection with VistA Lost," S ACTION=4 ; Just 4, NOT 14!
+ . ; check for a failure to connect to a DICOM SCP, if so, retry in 5 minutes
+ . I ECODE[",U13-TCP Connection Failed," D  S ACTION=234
+ . . W !,"*** An attempt to connect to a TCP listener failed ***"
+ . . W !,"*** This system will wait 5 minutes and try again ***",!
+ . . H 300 ; wait five minutes for the problem to resolve itself
+ . . Q
+ . D:ACTION[1
+ . . N X
+ . . K ^TMP("MAGM2V",$J,"CONNECTED")
+ . . K ^TMP("MAGM2V",$J,"CONTEXT")
+ . . ; Attempt to reconnect
+ . . F  D  Q:X
+ . . . I $$USEPRIN^MAGOSFIL(1)
+ . . . W !,"Attempting to reconnect..."
+ . . . S X=$$RECONCT^MAGDMENA(1) Q:X
+ . . . I $$USEPRIN^MAGOSFIL(1)
+ . . . ; If it doesn't work immediately, wait 5 minutes and try again...
+ . . . S X=$H W !,"*** ",$P("Thu Fri Sat Sun Mon Tue Wed"," ",X#7+1)," "
+ . . . S X=$P(X,",",2) W $TR($J(X\3600,2)_":"_$J(X\60#60,2)," ",0)
+ . . . W " A time-out has occurred on the M2M Broker   ***"
+ . . . W !,"*** (communication with the VistA System).                ***"
+ . . . W !,"*** This system will wait 5 minutes and try to link again ***",!
+ . . . H 300 ; wait five minutes for the problem to resolve itself
+ . . . Q
+ . . Q
+ . S $EC=""
+ . D:ACTION[2 ERRLOG
+ . D:ACTION[3  ; record the error in the application error log
+ . . S MSG="Error: "_$ZERROR
+ . . D MESSAGE^MAGDMLOG(1,0,MSG,"BVt")
+ . . Q
+ . D:ACTION[4  ; generate an error to truncate the stack and restart job
+ . . S $ET="D ERROR1^"_$T(+0)
+ . . S $EC="",$EC=",U13<RESTART>,"
+ . . Q
+ . ;
+ . D PUSH(.MSG,""""_$P(LASTERR,"~")_""" at "_$P($P($P(LASTERR,"~",2)," "),":"))
+ . D PUSH(.MSG,"MUMPS Code: """_$P(LASTERR,"~",3)_"""")
+ . D PUSH(.MSG,"Please check the system error log for details")
+ . D PUSH(.MSG,"")
+ . ;
+ . D TRAPERR(0,$T(+0),"DICOM GATEWAY MUMPS ERROR",.MSG,1)
+ . Q
+ Q
+ ;
+ERROR1 ; restart background job
+ I $ES<2 G VATEST
+ I $$USEPRIN^MAGOSFIL(1)  ; Can't do much after principal device is lost
+ Q
+ ;
+ ; Message looks like:
+ ;
+ ; ***********************************
+ ; *** HEADER FOR ERROR REPORT     ***
+ ; *** First line of error message ***
+ ; *** Next line of error message  ***
+ ; *** Routine: ^MAGxxxxx          ***
+ ; ***********************************
+ ;
+TRAPERR(FATAL,ROU,HDR,MSG,IGNORE,CRITICAL) ;
+ N I,NOMAILGP
+ D
+ . ; This block is indented, so that FBSWITCH will be back
+ . ; to its original value when we exit from here.
+ . N FBSWITCH,N,TXT
+ . S FBSWITCH="BACKGROUND"
+ . S N=0
+ . I $G(HDR)'="" S TXT=HDR
+ . I $G(MSG)'="" S N=N+1,TXT(N)=MSG
+ . S I="" F  S I=$O(MSG(I)) Q:I=""  S N=N+1,TXT(N)=MSG(I)
+ . S N=N+1,TXT(N)=$TR($ST($ST-2,"PLACE"),":")
+ . I $G(ROU)'="" S N=N+1,TXT(N)="Origin: "_ROU
+ . D MESSAGE^MAGDMLOG(1,0,.TXT,"tB")
+ . Q
+ ;
+ D SEND^MAGDMMSG
+ ;
+ I '$$USEPRIN^MAGOSFIL(0),'$G(IGNORE) D ERRLOG
+ I $$USEPRIN^MAGOSFIL(1)
+ D
+ . N $ET
+ . S $ET="H"
+ . D:'$G(IGNORE) ERRLOG
+ . W !,$TR($J("",80)," ","*")
+ . W !,"*** ",HDR,?76," ***"
+ . I $G(MSG)'="" W !,"*** ",MSG,?76," ***"
+ . S I="" F  S I=$O(MSG(I)) Q:I=""  W !,"*** ",MSG(I),?76," ***"
+ . W !,"*** ",$S($G(ROU)'="":ROU,1:$TR($ST($ST-1,"PLACE"),":"))
+ . W ?47,"Please Call Support Personnel ***"
+ . I NOMAILGP D
+ . . W !,"***"
+ . . W ?16,">>> SITE NEEDS TO SETUP THE LOCAL MAIL GROUP <<<"
+ . . W ?76," ***"
+ . . Q
+ . W !,$TR($J("",80)," ","*")
+ . Q
+ I FATAL=-1 Q  ; used to produce error logs for every DO level
+ I FATAL H:$G(FBSWITCH)="BACKGROUND"  H 1E9 ; intentionally stop the process forever
+ R !!,"Press <Enter> to continue: ",X:1E9
+ S $ET="D UNWIND0^"_$T(+0)
+ S $EC="",$EC=",U13<INRPT><INTERRUPT>," ; cause error trap
+ ;
+UNWIND0 ; This one produces no variable dump
+ I $ST<2 S $EC="" Q
+ Q:$Q "" Q
+ ;
+ERRLOG ; invoke system error trap
+ D BACK^%ETN
+ Q
+ ;
+PUSH(ARRAY,TEXT) ; push TEXT onto ARRAY
+ S ARRAY($O(ARRAY(""),-1)+1)=TEXT
+ Q
+ ;

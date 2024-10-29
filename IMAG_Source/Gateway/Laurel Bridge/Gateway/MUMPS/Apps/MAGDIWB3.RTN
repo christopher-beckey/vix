@@ -1,0 +1,155 @@
+Cache for Windows NT^INT^Saved from DICOM,DICOM (ISW-KUZMAKP3-LT)^~Format=Cache.S~
+%RO on 02/27/2013  09:22
+MAGDIWB3^INT^1^62880,31846^0
+MAGDIWB3 ;WOIFO/PMK/RRB - Send images to DICOM storage - Part 2/2 ; 27 Feb 2013 8:50 AM
+ ;;3.0;IMAGING;**11,30,51,50,54,99,110**;Mar 19, 2002;Build 61;Oct 10, 2012
+ ;; Per VHA Directive 2004-038, this routine should not be modified.
+ ;; +---------------------------------------------------------------+
+ ;; | Property of the US Government.                                |
+ ;; | No permission to copy or redistribute this software is given. |
+ ;; | Use of unreleased versions of this software requires the user |
+ ;; | to execute a written test agreement with the VistA Imaging    |
+ ;; | Development Office of the Department of Veterans Affairs,     |
+ ;; | telephone (301) 734-0100.                                     |
+ ;; | The Food and Drug Administration classifies this software as  |
+ ;; | a medical device.  As such, it may not be changed in any way. |
+ ;; | Modifications to this software may result in an adulterated   |
+ ;; | medical device under 21CFR820, the use of which is considered |
+ ;; | to be a violation of US Federal Statutes.                     |
+ ;; +---------------------------------------------------------------+
+ ;;
+ Q
+ ;
+NEXT(D0,D1) ; Get the next DICOM object
+ N DFN ;------ patient pointer
+ N OBJTYPE ;-- image object type
+ N MAGFILE1,MAGFILE2 ; External file names
+ N RETURN ;--- return code from $$DICOM and $$TARGA
+ N VADM ;----- demographics
+ N VAICN ;---- integration control number
+ N VAIN ;----- inpatient information
+ N VAPA ;----- patient's address
+ N SITEDFN,VA,VAINFO
+ ;
+ S SEND(0)=$G(SEND(0))+1,SEND(SEND(0))=D0_"^"_D1
+ ;
+ ; Big or Regular image file path?
+ S MAGFILE1=$G(INFO(9))
+ S MAGFILE2=$G(INFO(10)) ; File path for FULL or BIG2 file
+ ;
+ S OBJTYPE=$G(INFO(8))
+ ;
+ S DFN=INFO(11)
+ Q:$$CALLRPC^MAGM2VCU("MAG DICOM GET PATIENT","MT",.VAINFO,DFN)<0
+ D VADPT^MAGDRPC0(.VAINFO)
+ S VAICN=$S($G(VAICN)>0:VAICN,1:"")
+ ;
+ I OBJTYPE=3 N RETURN D  Q RETURN
+ . I INFO(9)?.E1".DCM" D  Q
+ . . S RETURN=$$DICOM()
+ . . I RETURN'="" W !!,RETURN
+ . . Q
+ . S RETURN=$$TARGA()
+ . I RETURN?1"Can't open TGA image file".E,INFO(9)?.E1".BIG" D
+ . . ; the BIG file couldn't be found, so try the TGA file instead
+ . . S MAGFILE2=$G(INFO(12)) ; File path for FULL & TEXT file
+ . . S RETURN=$$TARGA()
+ . . I RETURN'="" W !!,RETURN
+ . . Q
+ . E  I RETURN'="" W !!,RETURN
+ . Q
+ I OBJTYPE=100 Q $$DICOM()
+ ;
+ ; remove error object from output list
+ K SEND(SEND(0)) S SEND(0)=SEND(0)-1
+ Q "Can't handle this image: "_IMAGE_", type = """_OBJTYPE_"""."
+ ; 
+TARGA() ; Reconstitute a DICOM image from a TGA image and a *.TXT file
+ N BITALLOC ;- number of bits of pixel data allocated
+ N BITSTORE ;- number of bytes of pixel data stored
+ N COLUMNS ;-- number of columns in image, ie, the X-dimension
+ N FILETGA ;-- path to TARGA file to be converted to DICOM
+ N FILETXT ;-- path to TEXT file to be converted to DICOM
+ N IMAGESIZ ;- uncompressed size of image in bytes
+ N NSAMPLES ;- number of samples for each pixel (ie, BW=1 & RGB=3)
+ N PATHOUT ;-- directory root for output files
+ N ROWS ;----- number of rows in image, ie, the Y-dimension
+ N SEQNUMB ;-- nesting level of DICOM sequence; set in MSGINIT^MAGDFCNS
+ N SEQUENCE ;- DICOM nesting subscript sequence; set in MSGINIT^MAGDFCNS
+ N TGA ;------ array of TARGA header information
+ N ERRMSG,STATUS
+ ;
+ S STATUS=$$HEADER^MAGDTGA(MAGFILE2) ; Read the TGA header
+ I STATUS<0 Q "Can't open TGA image file.  Reason: "_STATUS
+ ;
+ S COLUMNS=TGA(5.3,"Image Width")
+ S ROWS=TGA(5.4,"Image Height")
+ I TGA(3,"Image Type")=2 S NSAMPLES=3 ; RGB color image
+ E  I TGA(3,"Image Type")=3 S NSAMPLES=1 ; Gray scale image
+ E  D  Q X
+ . S X="Bad Targa File -- "_MAGFILE2
+ . S X=X_"  Neither RGB color, nor gray scale."
+ . S X=X_"  Image Type is """_TGA(3,"Image Type")_"""."
+ . Q
+ ;
+ S BITSTORE=TGA(5.5,"Image Pixel Depth")/NSAMPLES
+ S BITALLOC=$S(BITSTORE=1:1,BITSTORE<9:8,BITSTORE<17:16,1:24)
+ S IMAGESIZ=ROWS*COLUMNS*(BITALLOC/8)*NSAMPLES ; size in bytes
+ ;
+ ; Build the DICOM header from the *.TXT file & reconstitute the image
+ S PATHOUT=^MAGDICOM(2006.563,1,"IMAGE OUTPUT PATH")
+ S (FILETGA,FILETXT)=MAGFILE2
+ S $P(FILETXT,".",$L(FILETXT,"."))="TXT"
+ S FILEDCM=PATHOUT_"\"_$P(MAGFILE1,".",1)_"_"_$J_".DCM"
+ ;
+ S (DCMCOUNT,^(0))=$G(^TMP("MAG",$J,"DCF_STORE_SCU",0))+1
+ S ^TMP("MAG",$J,"DCF_STORE_SCU",DCMCOUNT,"FILE")=FILEDCM
+ S TEMPFILE(0)=$G(TEMPFILE(0))+1,TEMPFILE(TEMPFILE(0))=FILEDCM
+ ;
+ S ERRMSG=$$ENTRY^MAGDIW3() ; Get the data to build the DICOM header
+ I ERRMSG'="" Q ERRMSG
+ ;
+ ; must do ^MAGDIW3B first since ^MAGDIW3A needs DATA1 block values 
+ S ERRMSG=$$ENTRY^MAGDIW3B() ; Coerce the patient id attributes
+ I ERRMSG'=""  Q ERRMSG
+ ;
+ S ERRMSG=$$ENTRY^MAGDIW3A() ; Modifications for Patch 50
+ I ERRMSG'="" Q ERRMSG
+ ;
+ S ERRMSG=$$ENTRY^MAGDIW3C() ; Create the new template
+ I ERRMSG'=""  Q ERRMSG
+ ;
+ D ENTRY^MAGDIW4 ; Reconstitute the DICOM image file
+ Q ""
+ ;
+DICOM() ; process a DICOM object
+ ; Copy the DICOM image to the output directory
+ N FILETXT ;-- path to TEXT file of DICOM object
+ N INODE ;---- node in ^TMP global for DICOM data storage
+ N OFFSET ;--- offset to the first tag beyond the DICOM meta file info
+ N QUEUEIN ;-- input file array
+ N DATE,TIME,FILESIZE,FIRSTTAG,ODEVNAME,ODEVTYPE,PROCDESC,VERBOSE,X
+ ;
+ ; read DATA1 block of *.TXT file
+ S FILETXT=MAGFILE2
+ S $P(FILETXT,".",$L(FILETXT,"."))="TXT"
+ S ERRMSG=$$GETDATA1^MAGDIW3B
+ I ERRMSG'=""  Q ERRMSG
+ ;
+ S QUEUEIN("FILE")=MAGFILE2,(ODEVNAME,ODEVTYPE)="",INODE="OUT"
+ ;
+ ; Lookup file creation date & time
+ S X=$$HOSTFILE^MAGDDR1(QUEUEIN("FILE"),.FILESIZE,.DATE,.TIME)
+ I X'=2 Q QUEUEIN("FILE")_$S('X:" -- Not on file",1:"  Error: "_X)
+ ;
+ ; Get the DICOM metadata header information
+ D ^MAGDDR2
+ ;
+ S (DCMCOUNT,^(0))=$G(^TMP("MAG",$J,"DCF_STORE_SCU",0))+1
+ S ^TMP("MAG",$J,"DCF_STORE_SCU",DCMCOUNT,"FILE")=MAGFILE2
+ ;
+ D ENTRY^MAGDIW2A ; Check if file needs PID updated
+ Q ""
+
+
+

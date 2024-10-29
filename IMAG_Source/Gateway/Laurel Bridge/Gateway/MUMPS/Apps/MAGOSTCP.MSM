@@ -1,0 +1,118 @@
+09:50 AM 08/26/2005 
+DICOM Gateway MUMPS routines Build V3.0p51Build720_T22
+MAGOSTCP
+MAGOSTCP ;WOIFO/PMK/EdM - Host Operating System Utilities ; 05/01/2003  10:03
+ ;;3.0;IMAGING;**11,30**;5-November-2004
+ ;; +---------------------------------------------------------------+
+ ;; | Property of the US Government.                                |
+ ;; | No permission to copy or redistribute this software is given. |
+ ;; | Use of unreleased versions of this software requires the user |
+ ;; | to execute a written test agreement with the VistA Imaging    |
+ ;; | Development Office of the Department of Veterans Affairs,     |
+ ;; | telephone (301) 734-0100.                                     |
+ ;; |                                                               |
+ ;; | The Food and Drug Administration classifies this software as  |
+ ;; | a medical device.  As such, it may not be changed in any way. |
+ ;; | Modifications to this software may result in an adulterated   |
+ ;; | medical device under 21CFR820, the use of which is considered |
+ ;; | to be a violation of US Federal Statutes.                     |
+ ;; +---------------------------------------------------------------+
+ ;;
+ ; Callable entries are:
+ ;
+ ; TCP/IP communication
+ ;  Set STATUS=$$TCPOPEN^MAGOSTCP(IP,PORT,TERM,TIMEOUT)
+ ;  Set STATUS=$$TCPUSE^MAGOSTCP(IP,PORT
+ ;  Set STATUS=$$TCPCLOSE^MAGOSTCP(IP,PORT)
+ ;  Set STATUS=$$TCPFLUSH^MAGOSTCP(IP,PORT)
+ ;  Set STATUS=$$TCPLOST^MAGOSTCP(IP,PORT,TYPE)
+ ;  Set STATUS=$$TCPGET^MAGOSTCP(.IP,.PORT)
+ ;  Set STATUS=$$TCPINHRT^MAGOSTCP(PORT)
+ ;  Set STRING=$$TCPSTAR^MAGOSTCP(IP,PORT,NUMBER,.TIMEOUT)
+ ;  Set STATUS=$$REINIT^MAGOSTCP()
+ ;
+REINIT() ;
+ ;  -- Close any open sockets
+ C 56
+ Q 0
+TCPCLOSE(IP,PORT) N ID
+ ;  -- Close a TCP/IP socket connection
+ S IP=$G(IP),PORT=$G(PORT),ID=" "_IP_" "_PORT
+ I PORT="" Q "-3, Port not specified"
+ I $TR(ID," ")="" Q "-1, Both IP-address and Port missing"
+ I '$D(MAGOS("TCP",ID)) Q "-2, Socket for "_IP_", port "_PORT_" not opened through $$TCPOPEN^"_$T(+0)
+ C 56:MAGOS("TCP",ID)
+ K MAGOS("TCP",ID)
+ Q 0
+TCPFLUSH(IP,PORT) N ID
+ ;  -- Flush buffers on a TCP/IP socket connection
+ S IP=$G(IP),PORT=$G(PORT),ID=" "_IP_" "_PORT
+ I PORT="" Q "-3, Port not specified"
+ I $TR(ID," ")="" Q "-1, Both IP-address and Port missing"
+ I '$D(MAGOS("TCP",ID)) Q "-2, Socket for "_IP_", port "_PORT_" not opened through $$TCPOPEN^"_$T(+0)
+ U 56:MAGOS("TCP",ID) W #
+ Q 0
+TCPGET(IP,PORT) ;
+ ;  -- Determine the IP address and port of a client
+ S IP=$KEY,PORT=60010
+ Q 0
+TCPINHRT(PORT) ;
+ ;  -- Inherit Socket Information from operating platform
+ U $I S MAGOS("TCP","  "_PORT)=$KEY
+ Q 0
+TCPLOST(IP,PORT,TYPE) N $ET,ID,OK
+ ;  -- Determine whether a socket is still connected
+ S IP=$G(IP),PORT=$G(PORT),ID=" "_IP_" "_PORT
+ I PORT="" Q "-3, Port not specified"
+ I $TR(ID," ")="" Q "-1, Both IP-address and Port missing"
+ I '$D(MAGOS("TCP",ID)) Q "-2, Socket for "_IP_", port "_PORT_" not opened through $$TCPOPEN^"_$T(+0)
+ S $ET="S $EC="""",OK=""-3,Can't use socket"" K MAGOS(""TCP"",ID)",OK=""
+ D
+ . U 56:MAGOS("TCP",ID)
+ . Q
+ Q:OK'="" OK
+ I TYPE=1,$ZC Q 1
+ I TYPE=2,$ZB=-3 Q 1
+ I $ZC Q "-4,Could not use device"
+ Q 0
+TCPOPEN(IP,PORT,TERM,TIMEOUT) N ID,PREV,UID
+ ;  -- Open a TCP/IP socket connection
+ S IP=$G(IP),PORT=$G(PORT),ID=" "_IP_" "_PORT,PREV=$I
+ I PORT="" Q "-3, Port not specified"
+ I $TR(ID," ")="" Q "-1, Both IP-address and Port missing"
+ I $D(MAGOS("TCP",ID)) Q "-2, Socket for "_$S(IP="":"server on",1:IP_",")_" port "_PORT_" already open"
+ S (MAGOS("TCP"),UID)=$G(MAGOS("TCP"))+1
+ N KEY,L
+ O 56 U 56 S MAGOS("TCP",ID)=$KEY
+ S L="" F  S L=$O(MAGOS("TCP",L)) Q:L=""  D
+ . I L'=ID,MAGOS("TCP",L)=MAGOS("TCP",ID) K MAGOS("TCP",L)
+ . Q
+ U 56::"TCP" ; do not automatically flush the buffer after writes
+ W #,/SOCKET(IP,PORT) S KEY=$KEY
+ I $KEY="" D  Q "-4,Could not connect to "_IP_", port "_PORT
+ . C 56:MAGOS("TCP",ID)
+ . K MAGOS("TCP",ID)
+ . Q
+ Q KEY
+TCPSTAR(IP,PORT,NUMBER,TIMEOUT) N ASCII,I,ID,OUT
+ ;  -- Read character (one by one) from a socket
+ S IP=$G(IP),PORT=$G(PORT),ID=" "_IP_" "_PORT
+ I PORT="" Q "-3, Port not specified"
+ I $TR(ID," ")="" Q "-1, Both IP-address and Port missing"
+ I '$D(MAGOS("TCP",ID)) Q "-2, Socket for "_IP_", port "_PORT_" not opened through $$TCPOPEN^"_$T(+0)
+ U 56:MAGOS("TCP",ID)
+ S OUT="" S:$G(NUMBER)<1 NUMBER=1
+ ; Note: timeout may be 0 seconds...
+ I $G(TIMEOUT)="" F I=1:1:NUMBER R *ASCII S OUT=OUT_$C(ASCII)
+ E  F I=1:1:NUMBER R *ASCII:TIMEOUT S:'$T TIMEOUT=-1 Q:'$T  S OUT=OUT_$C(ASCII)
+ Q OUT
+TCPUSE(IP,PORT) N ID
+ ;  -- Use a TCP/IP socket connection
+ S IP=$G(IP),PORT=$G(PORT),ID=" "_IP_" "_PORT
+ I PORT="" Q "-3, Port not specified"
+ I $TR(ID," ")="" Q "-1, Both IP-address and Port missing"
+ I '$D(MAGOS("TCP",ID)) Q "-2, Socket for "_IP_", port "_PORT_" not opened through $$TCPOPEN^"_$T(+0)
+ U 56:MAGOS("TCP",ID)
+ Q 0
+
+

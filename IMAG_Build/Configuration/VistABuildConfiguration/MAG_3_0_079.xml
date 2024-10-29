@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<build name="MAG*3.0*79"
+       patch="079"
+       patchName="VistA Imaging V3.0 Patch 079 - DICOM Storage Commit"
+       envCheckRoutine=""
+       deleteEnvCheckRoutine=""
+       preInstallRoutine=""
+       deletePreInstalltRoutine=""
+       postInstallRoutine="POS^MAGIP079"
+       deletePostInstallRoutine="Yes"
+       packageNumber="454"
+       packageName="IMAGING"
+       alphaBetaTesting="YES"
+       installationMessage="YES"
+       addressForUsageReporting="G.IMAGING DEVELOPMENT TEAM@FORUM.VA.GOV"
+       xmlns="http://va.gov/VistA/kids/manifest">
+<requiredBuilds>
+<!-- action= 0:Warning only;1:Don't install, remove global;2:Don't install, leave global;
+     
+-->
+  <requiredBuild name="MAG*3.0*87" action="2"/>
+</requiredBuilds>
+  <components>
+    <dataDictionaries>
+      <!--
+      dataDictionary name="2006.9192" export="DD_2006_9192.KID"
+      dataDictionary name="2006.926" export="DD_2006_926.KID"
+      dataDictionary name="2006.941" export="DD_2006_941.KID"
+      -->
+    </dataDictionaries>
+    <routines>
+      <routine name="MAGIP079" export="MAGIP079.RTN"/>
+      <!--
+      routine name="MAGVCAE"  export="MAGVCAE.RTN"
+      routine name="MAGVCQRY" export="MAGVCQRY.RTN"
+      routine name="MAGVCWIA" export="MAGVCWIA.RTN"
+      routine name="MAGVIM09" export="MAGVIM09.RTN"
+      routine name="MAGVRS51" export="MAGVRS51.RTN"
+      routine name="MAGVRS52" export="MAGVRS52.RTN"
+      -->
+    </routines>
+    <rpcs>
+      <!--
+      rpc name="MAGVC WI DELETE" export="RPC_MAGVC_WI_DELETE.KID"
+      rpc name="MAGVC WI GET" export="RPC_MAGVC_WI_GET.KID"
+      rpc name="MAGVC WI LIST" export="RPC_MAGVC_WI_LIST.KID"
+      rpc name="MAGVC WI SUBMIT NEW" export="RPC_MAGVC_WI_SUBMIT_NEW.KID"
+      rpc name="MAGVC WI UPDATE STATUS" export="RPC_MAGVC_WI_UPDATE_STATUS.KID"
+      rpc name="MAG DICOM CHECK AE TITLE" export="RPC_MAG_DICOM_CHECK_AE_TITLE.KID"
+      rpc name="MAG DICOM GET AE ENTRY" export="RPC_MAG_DICOM_GET_AE_ENTRY.KID"
+      rpc name="MAG DICOM GET AE ENTRY LOC" export="RPC_MAG_DICOM_GET_AE_ENTRY_LOC.KID"
+      -->
+    </rpcs>
+<options>
+</options>
+<securityKeys>
+</securityKeys>
+<protocols>
+</protocols>
+<templateLists>
+</templateLists>
+<hl7Applications>
+</hl7Applications>
+<hl7LogicalLinks>
+</hl7LogicalLinks>
+<parameterDefinitions>
+</parameterDefinitions>
+<parameterTemplates>
+</parameterTemplates>
+<printTemplates>
+</printTemplates>
+<sortTemplates>
+</sortTemplates>
+<inputTemplates>
+</inputTemplates>
+<forms>
+</forms>
+<functions>
+</functions>
+<dialogs>
+</dialogs>
+<bulletins>
+</bulletins>
+<mailGroups>
+</mailGroups>
+<helpFrames>
+</helpFrames>
+</components>
+</build>

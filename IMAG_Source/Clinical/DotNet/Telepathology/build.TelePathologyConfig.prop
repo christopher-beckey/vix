@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">	
+	<PropertyGroup>
+		<Version>3.0</Version>
+		<RootDir>E:\Builds\</RootDir>
+		<ProjectName>TelePathology Config\</ProjectName>
+		<PatchNumber>138</PatchNumber>
+		<BaseVersion>30.50.$(PatchNumber)</BaseVersion>
+		<TempDelete>false</TempDelete>
+		<TestNumber>0</TestNumber>
+		<PatchFolderName>V$(Version)p$(PatchNumber)Build$(BuildNumber)</PatchFolderName>
+		<FullBuildPath>$(RootDir)$(ProjectName)$(PatchFolderName)</FullBuildPath>
+		<TempFolder>\temp</TempFolder>
+		<Configuration>Release</Configuration>
+		<PatchName>Version 3.0 Patch 138 - Telepathology Worklist</PatchName>
+		<ReleaseName>TelepathologyConfigurator</ReleaseName>		
+		<InstallShieldPath>C:\Program Files\InstallShield\2012Spring\System</InstallShieldPath>
+		<InstallShieldProject>$(FullBuildPath)$(TempFolder)\p$(PatchNumber)\MagTelePathologyConfig.ism</InstallShieldProject>
+		<SolutionDir>$(RootDir)$(ProjectName)$(PatchFolderName)$(TempFolder)\p$(PatchNumber)\</SolutionDir>
+		<BuildCompressed>true</BuildCompressed>
+		<ProductVersion Condition="'$(ProductVersionInclude)'!='False'">$(BaseVersion).$(TestNumber)</ProductVersion>
+	</PropertyGroup>
+	<!-- Itemgroups below are patch dependencies -->
+	<ItemGroup>
+		<PatchDepName Include="$(SourceDir)\**\*.*" >
+			<PatchDepNumber>138</PatchDepNumber>
+		</PatchDepName>
+	</ItemGroup>
+	<!-- Itemgroups below are projects to compile -->
+	<ItemGroup>
+		<CSProjects Include="$(RootDir)$(ProjectName)$(PatchFolderName)$(TempFolder)\p$(PatchNumber)\Treelistview\Aga.Controls\Aga.Controls.csproj" >
+			<ProductName>Aga.Controls</ProductName>
+		</CSProjects>
+		<CSProjects Include="$(RootDir)$(ProjectName)$(PatchFolderName)$(TempFolder)\p$(PatchNumber)\CCOW\CCOW.csproj" >
+			<ProductName>CCOW</ProductName>
+		</CSProjects>
+		<CSProjects Include="$(RootDir)$(ProjectName)$(PatchFolderName)$(TempFolder)\p$(PatchNumber)\Common\Common.csproj" >
+			<ProductName>Common</ProductName>
+		</CSProjects>
+		<CSProjects Include="$(RootDir)$(ProjectName)$(PatchFolderName)$(TempFolder)\p$(PatchNumber)\Communication\Communication.csproj" >
+			<ProductName>Communication</ProductName>
+		</CSProjects>
+		<CSProjects Include="$(RootDir)$(ProjectName)$(PatchFolderName)$(TempFolder)\p$(PatchNumber)\WorklistConfigurator\WorklistConfigurator.csproj" >
+			<ProductName>MagTPConfigurator</ProductName>
+		</CSProjects>
+		<CSProjects Include="$(RootDir)$(ProjectName)$(PatchFolderName)$(TempFolder)\p$(PatchNumber)\WorklistManager\WorklistManager.csproj" >
+			<ProductName>MagTPWorklist</ProductName>
+		</CSProjects>
+		<CSProjects Include="$(RootDir)$(ProjectName)$(PatchFolderName)$(TempFolder)\p$(PatchNumber)\Logging\Logging.csproj" >
+			<ProductName>Logging</ProductName>
+		</CSProjects>
+	</ItemGroup>
+<!-- Itemgroups below are for InstallShield -->
+	<ItemGroup Condition="'$(CreateExe)'!='false'">
+		<InstallShieldReleaseConfiguration Include="SINGLE_EXE_IMAGE">
+			<SetupExe>true</SetupExe>
+		</InstallShieldReleaseConfiguration>	
+	</ItemGroup>
+	<ItemGroup>
+		<InstallShieldPathVariableOverrides Include="$(RootDir)$(ProjectName)$(PatchFolderName)$(TempFolder)\p$(PatchNumber)\Artifacts">
+			<PathVariable>PATH_TO_P138_FILES</PathVariable>
+		</InstallShieldPathVariableOverrides>
+	</ItemGroup>
+</Project>

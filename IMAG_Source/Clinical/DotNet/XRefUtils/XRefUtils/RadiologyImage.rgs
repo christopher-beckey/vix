@@ -1,0 +1,26 @@
+HKCR
+{
+	VI.Display.Rad.RadiologyImage.1 = s 'RadiologyImage Class'
+	{
+		CLSID = s '{A09B8B23-BD28-42D5-8756-E04EFAC128BB}'
+	}
+	VI.Display.Rad.RadiologyImage = s 'RadiologyImage Class'
+	{		
+		CurVer = s 'VI.Display.Rad.RadiologyImage.1'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {A09B8B23-BD28-42D5-8756-E04EFAC128BB} = s 'RadiologyImage Class'
+		{
+			ProgID = s 'VI.Display.Rad.RadiologyImage.1'
+			VersionIndependentProgID = s 'VI.Display.Rad.RadiologyImage'
+			ForceRemove Programmable
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Apartment'
+			}
+			TypeLib = s '{E95A13F4-63AC-4C9F-9393-B00E3ED6D7E4}'
+			Version = s '1.0'
+		}
+	}
+}

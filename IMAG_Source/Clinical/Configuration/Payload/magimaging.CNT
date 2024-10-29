@@ -1,0 +1,152 @@
+:Base MAGIMAGING.HLP
+:Title VISTA Imaging 3.0 On-Line User Help
+1 User Help ==> Click Here=VistA_Imaging_Version_3.0_On_Line_User_Help>main
+1 Features in Version 3.0=What_s_New_in_Version_3.0
+1 Starting VistA Imaging
+2 Table of Contents=VistA_Imaging_Version_3.0_On_Line_User_Help>main
+2 Starting the programs=Starting_and_Connecting_to_Imaging_3.0
+2 Sign-on window=VISTA_Sign_on_Window
+2 Patient Lookup=Patient_Lookup_Window
+2 Time Out=TimeOut
+1 Using VistA & VistA Imaging
+2 Viewing Medical Information Remotely=Veiwing_Medical_Information_Remotely
+2 Imaging-CPRS Link=Imaging____CPRS_Link
+2 Clinical Procedures using CPRS=Display___Clinical_Procedures_using_CPRS
+1 Displaying patient images and documents
+2 Table of Contents=VistA_Imaging_Version_3.0_On_Line_User_Help>main
+2 Outline=Descriptions_of_VistA_Imaging_Display_Windows
+2 Display main window
+3 Display Main Window=VistA_Imaging___Display_Main_Window
+3 Message history and status bar=Message_history_window
+3 Image Viewer settings=Display___Image_Viewer_Settings
+3 button descriptions=VistA_Imaging_Display_button_descriptions
+3 Preferred windows=windows_to_automatically_open
+3 View preferences=VIEW_Preferences_Window
+3 Save settings=Save_Settings_Option
+2 Select patient studies
+3 Image Filters=Display___Image_Filters
+3 Image List=Image_Listing_Window
+3 Abstracts and Group Abstracts=Abstracts_Window
+3 Loading abstracts=Loading_Abstracts_window
+3 Radiology Exam listing=Radiology_Exam_Listing_Window
+3 Progress Notes, Discharge Summaries, Clinical Procedures=Progress_Notes_listing
+2 Full Resolution View
+3 The window=Full_Resolution_View_Window
+3 Multi-image display=Display___Full_Resolution_View_multi_image
+3 Scanned documents=Display___Scanned_Document
+3 Copy an image=Copy_an_Image
+3 Print an image=Print_an_Image
+3 Tips & Tricks
+4 General features=Display___Full_Resolution_View___Tips___Tricks__General_features_
+4 Customizing  layout=Display___Full_Resolution_View___Tips___Tricks__Customizing__layout_
+4 Document viewing=Display___Full_Resolution_View___Tips___Tricks__Document_viewing_
+4 Image proxies=Display___Full_Resolution_View___Tips___Tricks__Image_proxies_
+2 Radiology Viewer
+; next level + 1
+2 The window=Radiology_Viewer_Window
+3 Dual image display: Stack Mode=Display___Radiology_dual_image_display__Stack_Mode
+3 Stack View Options=Display___Radiology_Viewer_Stack_View_Options
+3 Viewing high resolution images=Display___Viewing_High_Resolution_Radiology_Images
+3 Measuring=Measureing_in_the_Radiology_Display_Window
+2 Reports
+3 Image=Image_Report_Window
+3 Health Summary=Health_Summary_Reports_Window
+3 Viewing=Viewing_Reports_in_VistA_imaging
+2 Additional view windows
+3 Video Player=Video_Player_Window
+3 Clinical Procedures=Display___Clinical_Procedures_using_VistA_Imaging_Display_main_window
+3 MUSE EKG Tracings
+4 EKG Display=MUSE_Vista_MUSE_EKG_Display
+1 Capturing images and docuemtns to patient records
+; next level + 1
+1 Outline=Capture_windows___Outline
+2 Capture main window=VISTA_Imaging_Capture_Window
+2 Capture window=Menu_options_Imaging_Capture_window
+2 Verifying Patient Identification=Verifying_Patient_Identification
+2 Patient Photo ID=Capture___Patient_Photo_ID
+2 Configuration
+; next level + 1
+2 Capture configurations list=Capture___Imaging_Workstation__Capture_configurations_list
+3 IRM workstation configuration=IRM_workstation_configuration
+3 Tabbing Sequence window=Tabbing_Sequence_window
+3 Tabbing sequence=Tabbing_sequence
+3 Session Settings=Capture___Session_Settings
+3 Imaging workstation configuration window=Configuration_Window
+3 Configuration Settings displayed=configuration_settings_displayed
+3 Association choices=Specialty_choices
+3 Input Sources=Capture_Input_sources
+3 Select Directory of Images to Import=Select_Directory_of_Images_Window
+2 Select from --- 
+3 Medical-Administrative equipment=Capture___Medical_Administrative_equipment
+3 Anatomic Pathology Lab Selection=Capture___Anatomic_Pathology_Lab_Selection
+3 Medicine Procedure/Subspecialty list window=Medicine_Procedure_Subspecialty_List_Window
+3 Surgery Case List=Surgery_Case_List_Window
+3 Radiology Exam list=Capture___Radiology_Exam_list
+3 Progress Notes list=Progress_Note_selection_Window
+3 Images Associated with Clinical Procedures=Capture___Images_Associated_with_Clinical_Procedures
+3 Clinical Procedures - this procedure will not be receiving=Capture___Clinical_Procedures___this_procedure_will_not_be_receiving
+3 Clinical Procedures - a consent form=Capture___Clinical_Procedures___a_consent_form
+3 Clinical Procedure Requests=Capture___Clinical_Procedure_Requests
+3 Scanner
+4 Administrative Documents=Capture___Administrative_Documents
+4 Scanning Clinical Documents=A_Word_About_Scanning_Clinical_Documents
+4 Scan Document or Color Picture=Scan_Document_or_Color_Picture
+3 Camera
+4 Digital and still video camera input=Still_Video_Camera_Input
+3 Import
+4 Import File from Workstation=Capture_Input_Source_Import
+2 Entering data
+; next level + 1
+2 Required Input Fields=Capturing_required_input_fields
+3 Entering Data for the Image=Capture_Entering_Data_for_the_Image
+3 Hold Value option=Capture___Entering_Data___Hold_Value_option
+2 Completing the capture
+3 Acquiring the Image=Acquiring_the_Image
+3 Validate Image Data=Capture_Vaildate_Image_Data
+3 Display area=Capture___Display_area
+3 Image Manipulation buttons=Capture_Window_Image_Manipulation_buttons
+3 Approving the Image=Approving_the_Image
+3 Image function buttons=Capture_Image_function_buttons
+3 Study Groups=Study_Group
+3 Batch Capture  transfer buttons=Batch_Capture__transfer_buttons
+3 Batch Capture Options window=Batch_Capture_Options_window
+3 Indicating Completion of a Study=Indicating_Completion_of_a_Study
+3 Save Image data to VistA=Save_Image_data_to_VistA
+3 Fails=Capture_Fails
+2 View images from patient record
+3 Patient’s latest images=Capture_Viewing_Patient_Images
+1 Patient Care with VistA Imaging
+; next level + 1
+1 Patient Care Using Imaging=Patient_Care_Using_Imaging
+2 Package Management=Package_Management
+2 Summary Notes for Cardiology Users=Summary_Notes_for_Cardiology_Users_of_Imaging_3.0
+2 Summary Notes for General Medical Procedures Users=Summary_Notes_for_General_Medical_Procedures_Users_of_Imaging_3.0
+2 Summary Notes for GI Users=Summary_Notes_for_GI_Users_of_Imaging_3.0
+2 Summary Notes for Pathology Users=Summary_Notes_for_Anatomic_Pathology_Users_of_Imaging_3.0
+2 Summary Notes for Radiology Users=Summary_Notes_for_Radiology_Users_of_Imaging_3.0
+2 Summary Notes for Surgery Users=Summary_Notes_for_Surgery_Users_of_Imaging_3.0
+2 Patient Care Using Imaging=Patient_Care_Using_Imaging
+2 Patient Alerts window=Patient_Alerts_Window
+2 Following Patient Treatment Progression=Patient_Care_Following_Patient_Treatment_Progression
+2 Compiling data for consult with clinical practitioners=Patient_Care_Compiling_Data_for_Consult_With_Clinical_Practitioners
+2 Clinical Notes=Clinical_Notes
+2 Collecting research data=Patient_Care_Collecting_Research_Data
+2 Indexing images and documents=VistA_Imaging___Indexing_images_and_documents>main
+2 Downloaded images (agreement)=Clinician_Agreement_page_1
+2 Downloaded images (purpose)=Clinician_Agreement_page_2
+2 Preparing for conference presentations=Patient_Care_Preparing_for_Conference_Presentations
+1 Orientation
+2 Introduction=Introduction
+2 Legal requirements / Security measures=Legal_Requirements_Security_Measures
+2 Orientation=Orientation
+2 On-Line Help=VistA_Imaging___On_Line_Help
+2 VA Seal=VA_Seal
+1 Computer information
+2 Connect-Disconnect workstation from the network=How_to_Connect_and_Disconnect_a_Workstation_From_the_Network
+2 Navigation and Commands=Navigation_and_Commands
+2 Rebooting the workstation=Rebooting_the_Workstation
+2 Supplementary functions=Supplementary_Functions
+2 Using a mouse in Windows=Using_a_Mouse_in_the_Microsoft_Windows_Operating_System
+1 Tutorial
+2 QuickStart Guide - Display=QuickStart_Guide___Display___Step_0___Contents
+2 QuickStart Guide - Capture=QuickStart_Guide___Capture___Step_0___Contents

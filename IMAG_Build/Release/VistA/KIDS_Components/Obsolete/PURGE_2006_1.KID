@@ -1,0 +1,334 @@
+KIDS Distribution saved on Dec 05, 2003@15:36
+Autopurge parameters
+**KIDS**:Z VSS FILE 0.1T^
+
+**INSTALL NAME**
+Z VSS FILE 0.1T
+"BLD",1522,0)
+Z VSS FILE 0.1T^^0^3031205^n
+"BLD",1522,1,0)
+^^2^2^3031205^
+"BLD",1522,1,1,0)
+KIDS file for new Background Processor Purge automation fields.
+"BLD",1522,1,2,0)
+These parameters are being added to the Imaging Site Parameter file.
+"BLD",1522,4,0)
+^9.64PA^2006.1^1
+"BLD",1522,4,2006.1,0)
+2006.1
+"BLD",1522,4,2006.1,2,0)
+^9.641^2006.1^1
+"BLD",1522,4,2006.1,2,2006.1,0)
+IMAGING SITE PARAMETERS  (File-top level)
+"BLD",1522,4,2006.1,2,2006.1,1,0)
+^9.6411^65^6
+"BLD",1522,4,2006.1,2,2006.1,1,60,0)
+NEW AUTOPURGE
+"BLD",1522,4,2006.1,2,2006.1,1,61,0)
+CONTINUOUS PURGE
+"BLD",1522,4,2006.1,2,2006.1,1,62,0)
+SCHEDULED PURGE
+"BLD",1522,4,2006.1,2,2006.1,1,63,0)
+SCHEDULED PURGE FREQUENCY
+"BLD",1522,4,2006.1,2,2006.1,1,64,0)
+SCHEDULED PURGE TIME
+"BLD",1522,4,2006.1,2,2006.1,1,65,0)
+DATE OF LAST PURGE
+"BLD",1522,4,2006.1,222)
+y^y^p^^^^n^^n
+"BLD",1522,4,2006.1,224)
+
+"BLD",1522,4,"APDD",2006.1,2006.1)
+
+"BLD",1522,4,"APDD",2006.1,2006.1,60)
+
+"BLD",1522,4,"APDD",2006.1,2006.1,61)
+
+"BLD",1522,4,"APDD",2006.1,2006.1,62)
+
+"BLD",1522,4,"APDD",2006.1,2006.1,63)
+
+"BLD",1522,4,"APDD",2006.1,2006.1,64)
+
+"BLD",1522,4,"APDD",2006.1,2006.1,65)
+
+"BLD",1522,4,"B",2006.1,2006.1)
+
+"BLD",1522,"KRN",0)
+^9.67PA^19^17
+"BLD",1522,"KRN",.4,0)
+.4
+"BLD",1522,"KRN",.401,0)
+.401
+"BLD",1522,"KRN",.402,0)
+.402
+"BLD",1522,"KRN",.403,0)
+.403
+"BLD",1522,"KRN",.5,0)
+.5
+"BLD",1522,"KRN",.84,0)
+.84
+"BLD",1522,"KRN",3.6,0)
+3.6
+"BLD",1522,"KRN",3.8,0)
+3.8
+"BLD",1522,"KRN",9.2,0)
+9.2
+"BLD",1522,"KRN",9.8,0)
+9.8
+"BLD",1522,"KRN",19,0)
+19
+"BLD",1522,"KRN",19,"NM",0)
+^9.68A^^0
+"BLD",1522,"KRN",19.1,0)
+19.1
+"BLD",1522,"KRN",19.1,"NM",0)
+^9.68A^^
+"BLD",1522,"KRN",101,0)
+101
+"BLD",1522,"KRN",101,"NM",0)
+^9.68A^^
+"BLD",1522,"KRN",409.61,0)
+409.61
+"BLD",1522,"KRN",409.61,"NM",0)
+^9.68A^^
+"BLD",1522,"KRN",771,0)
+771
+"BLD",1522,"KRN",870,0)
+870
+"BLD",1522,"KRN",8994,0)
+8994
+"BLD",1522,"KRN",8994,"NM",0)
+^9.68A^^0
+"BLD",1522,"KRN","B",.4,.4)
+
+"BLD",1522,"KRN","B",.401,.401)
+
+"BLD",1522,"KRN","B",.402,.402)
+
+"BLD",1522,"KRN","B",.403,.403)
+
+"BLD",1522,"KRN","B",.5,.5)
+
+"BLD",1522,"KRN","B",.84,.84)
+
+"BLD",1522,"KRN","B",3.6,3.6)
+
+"BLD",1522,"KRN","B",3.8,3.8)
+
+"BLD",1522,"KRN","B",9.2,9.2)
+
+"BLD",1522,"KRN","B",9.8,9.8)
+
+"BLD",1522,"KRN","B",19,19)
+
+"BLD",1522,"KRN","B",19.1,19.1)
+
+"BLD",1522,"KRN","B",101,101)
+
+"BLD",1522,"KRN","B",409.61,409.61)
+
+"BLD",1522,"KRN","B",771,771)
+
+"BLD",1522,"KRN","B",870,870)
+
+"BLD",1522,"KRN","B",8994,8994)
+
+"FIA",2006.1)
+IMAGING SITE PARAMETERS
+"FIA",2006.1,0)
+^MAG(2006.1,
+"FIA",2006.1,0,0)
+2006.1I
+"FIA",2006.1,0,1)
+y^y^p^^^^n^^n
+"FIA",2006.1,0,10)
+
+"FIA",2006.1,0,11)
+
+"FIA",2006.1,0,"RLRO")
+
+"FIA",2006.1,2006.1)
+1
+"FIA",2006.1,2006.1,60)
+
+"FIA",2006.1,2006.1,61)
+
+"FIA",2006.1,2006.1,62)
+
+"FIA",2006.1,2006.1,63)
+
+"FIA",2006.1,2006.1,64)
+
+"FIA",2006.1,2006.1,65)
+
+"MBREQ")
+0
+"QUES","XPF1",0)
+Y
+"QUES","XPF1","??")
+^D REP^XPDH
+"QUES","XPF1","A")
+Shall I write over your |FLAG| File
+"QUES","XPF1","B")
+YES
+"QUES","XPF1","M")
+D XPF1^XPDIQ
+"QUES","XPF2",0)
+Y
+"QUES","XPF2","??")
+^D DTA^XPDH
+"QUES","XPF2","A")
+Want my data |FLAG| yours
+"QUES","XPF2","B")
+YES
+"QUES","XPF2","M")
+D XPF2^XPDIQ
+"QUES","XPI1",0)
+YO
+"QUES","XPI1","??")
+^D INHIBIT^XPDH
+"QUES","XPI1","A")
+Want KIDS to INHIBIT LOGONs during the install
+"QUES","XPI1","B")
+YES
+"QUES","XPI1","M")
+D XPI1^XPDIQ
+"QUES","XPM1",0)
+PO^VA(200,:EM
+"QUES","XPM1","??")
+^D MG^XPDH
+"QUES","XPM1","A")
+Enter the Coordinator for Mail Group '|FLAG|'
+"QUES","XPM1","B")
+
+"QUES","XPM1","M")
+D XPM1^XPDIQ
+"QUES","XPO1",0)
+Y
+"QUES","XPO1","??")
+^D MENU^XPDH
+"QUES","XPO1","A")
+Want KIDS to Rebuild Menu Trees Upon Completion of Install
+"QUES","XPO1","B")
+YES
+"QUES","XPO1","M")
+D XPO1^XPDIQ
+"QUES","XPZ1",0)
+Y
+"QUES","XPZ1","??")
+^D OPT^XPDH
+"QUES","XPZ1","A")
+Want to DISABLE Scheduled Options, Menu Options, and Protocols
+"QUES","XPZ1","B")
+YES
+"QUES","XPZ1","M")
+D XPZ1^XPDIQ
+"QUES","XPZ2",0)
+Y
+"QUES","XPZ2","??")
+^D RTN^XPDH
+"QUES","XPZ2","A")
+Want to MOVE routines to other CPUs
+"QUES","XPZ2","B")
+NO
+"QUES","XPZ2","M")
+D XPZ2^XPDIQ
+"VER")
+8.0^22.0
+"^DD",2006.1,2006.1,60,0)
+NEW AUTOPURGE^S^0:OFF;1:ON;^5;1^Q
+"^DD",2006.1,2006.1,60,3)
+This value is used by the Background processor to determine whether to start a purge process when the Vista Cache low water mark has been reached.
+"^DD",2006.1,2006.1,60,21,0)
+^.001^2^2^3031205^^
+"^DD",2006.1,2006.1,60,21,1,0)
+This boolean value is used by the Background Processor to determine whether
+"^DD",2006.1,2006.1,60,21,2,0)
+to launch the purge when the Vista Cache low water mark has been reached.
+"^DD",2006.1,2006.1,60,"DT")
+3031205
+"^DD",2006.1,2006.1,61,0)
+CONTINUOUS PURGE^SX^0:OFF;1:ON;^5;2^S:X=1 $P(^MAG(2006.1,DA,5),U,3)=0
+"^DD",2006.1,2006.1,61,3)
+This value is used to determine whether the BP Queue processor should maintain a continuous Vista Cache purge process.
+"^DD",2006.1,2006.1,61,21,0)
+^^3^3^3031205^
+"^DD",2006.1,2006.1,61,21,1,0)
+This boolean value is used to determine whether the BP Queue processor should 
+"^DD",2006.1,2006.1,61,21,2,0)
+maintain a continuous purge process.  This process cannot be co-enabled with 
+"^DD",2006.1,2006.1,61,21,3,0)
+the scheduled purge process.
+"^DD",2006.1,2006.1,61,"DT")
+3031205
+"^DD",2006.1,2006.1,62,0)
+SCHEDULED PURGE^SX^0:OFF;1:ON;^5;3^S:X=1 $P(^MAG(2006.1,DA,5),U,2)=0
+"^DD",2006.1,2006.1,62,3)
+This value is used to determine whether the BP Queue Processor will trigger a purge process on a scheduled frequency.
+"^DD",2006.1,2006.1,62,21,0)
+^.001^6^6^3031205^^
+"^DD",2006.1,2006.1,62,21,1,0)
+This boolean value is used to determine whether the BP Queue Processor
+"^DD",2006.1,2006.1,62,21,2,0)
+will trigger a scheduled purge process.  This value cannot be co-enabled 
+"^DD",2006.1,2006.1,62,21,3,0)
+with the continuous purge process.  The frequency will be determined by
+"^DD",2006.1,2006.1,62,21,4,0)
+the frequency days and the date of the last purge. A default value of 28
+"^DD",2006.1,2006.1,62,21,5,0)
+days will be used if the frequency value is null.  A default vault of
+"^DD",2006.1,2006.1,62,21,6,0)
+2400 hour will be used if the Purge Time is not set.
+"^DD",2006.1,2006.1,62,"DT")
+3031205
+"^DD",2006.1,2006.1,63,0)
+SCHEDULED PURGE FREQUENCY^NJ3,0^^5;4^K:+X'=X!(X>365)!(X<1)!(X?.E1"."1N.N) X
+"^DD",2006.1,2006.1,63,3)
+Type a Number between 1 and 365, 0 Decimal Digits
+"^DD",2006.1,2006.1,63,21,0)
+^^5^5^3031205^
+"^DD",2006.1,2006.1,63,21,1,0)
+When Scheduled Purge process is enabled this value will be added
+"^DD",2006.1,2006.1,63,21,2,0)
+to the date of the last purge for the BP Queue processor to
+"^DD",2006.1,2006.1,63,21,3,0)
+evaluate for launching a purge process.  If the Schedule 
+"^DD",2006.1,2006.1,63,21,4,0)
+Purge process is enabled and this value is not set, then the
+"^DD",2006.1,2006.1,63,21,5,0)
+default value of 28 days will be used.
+"^DD",2006.1,2006.1,63,"DT")
+3031205
+"^DD",2006.1,2006.1,64,0)
+SCHEDULED PURGE TIME^NJ4,0X^^5;5^K:+X'=X!(X>2400)!(X<0)!(X?.E1"."1N.N)!($L(X)<4)!($E(X,3,4)>60) X
+"^DD",2006.1,2006.1,64,3)
+Type a Number between 0000 and 2400, 0 Decimal Digits
+"^DD",2006.1,2006.1,64,21,0)
+^^5^5^3031205^
+"^DD",2006.1,2006.1,64,21,1,0)
+This military time value is used to determine what time of day the scheduled
+"^DD",2006.1,2006.1,64,21,2,0)
+purge will be triggered.  A default value of 2400 will be used by the 
+"^DD",2006.1,2006.1,64,21,3,0)
+BP Queue Processor if the Scheduled Purge option is enabled and the 
+"^DD",2006.1,2006.1,64,21,4,0)
+frequency days plus date of last purge threshold has been reached and this
+"^DD",2006.1,2006.1,64,21,5,0)
+value is undefined.
+"^DD",2006.1,2006.1,64,"DT")
+3031205
+"^DD",2006.1,2006.1,65,0)
+DATE OF LAST PURGE^D^^5;6^S %DT="E" D ^%DT S X=Y K:Y<1 X
+"^DD",2006.1,2006.1,65,3)
+This date is automatically set by the purge process when that process has successfully completed.
+"^DD",2006.1,2006.1,65,21,0)
+^^2^2^3031205^
+"^DD",2006.1,2006.1,65,21,1,0)
+This date is set by the BP Purge process.  It is used in conjunction with
+"^DD",2006.1,2006.1,65,21,2,0)
+the Scheduled purge process to automated the purge process execution.
+"^DD",2006.1,2006.1,65,"DT")
+3031205
+**END**
+**END**

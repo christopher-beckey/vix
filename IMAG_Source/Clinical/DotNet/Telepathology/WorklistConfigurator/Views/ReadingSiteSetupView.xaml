@@ -1,0 +1,31 @@
+﻿<UserControl x:Class="VistA.Imaging.Telepathology.Configurator.Views.ReadingSiteSetupView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:converters="clr-namespace:VistA.Imaging.Telepathology.Configurator.Converters"
+             mc:Ignorable="d" Height="320" Width="710">
+    <UserControl.Resources>
+        <converters:BoolToStringConverter x:Key="boolToStringConverter" />
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <ListView Margin="2" ItemsSource="{Binding AcquisitionSites}" SelectedIndex="{Binding SelectedSiteIndex}" AlternationCount="2">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Remote Acquisition Site" Width="Auto" DisplayMemberBinding="{Binding SiteDisplayName}"/>
+                    <GridViewColumn Header="Primary Site" Width="Auto" DisplayMemberBinding="{Binding PrimeSiteDisplayName}" />
+                    <GridViewColumn Header="Active" Width="Auto" DisplayMemberBinding="{Binding Active, Converter={StaticResource boolToStringConverter}}" />
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <StackPanel Orientation="Horizontal" Margin="2" HorizontalAlignment="Right" VerticalAlignment="Bottom" Grid.Row="1">
+            <Button Content="_Add" Width="75" Margin="2" Command="{Binding AddAcquisitionSiteCommand}"/>
+            <Button Content="_Edit" Width="75" Margin="2" Command="{Binding ModifySiteCommand}" />
+            <Button Content="_Remove" Width="75" Margin="2" Command="{Binding RemoveAcquisitionSiteCommand}"/>
+        </StackPanel>
+    </Grid>
+</UserControl>

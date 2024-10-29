@@ -1,0 +1,62 @@
+<?xml version="1.0"?>
+<build xmlns="http://va.gov/VistA/kids/manifest" name="MAG*3.0*117" patchName="Deleted Image Placeholder" patch="117">
+  <components>
+    <securityKeys>
+      <securityKey export="KEY_MAG_QA_REVIEW.KID" />
+      <securityKey export="KEY_MAG_REVIEW_NCAT.KID" />
+    </securityKeys>
+    <parameterDefinitions />
+    <printTemplates />
+    <sortTemplates />
+    <menuOptions>
+      <menuOption export="Z_VSS_P117_OPTS.KID" />
+    </menuOptions>
+    <rpcs>
+      <rpc export="RPC_MAG4_GET_IMAGE_INFO.KID" />
+      <rpc export="RPC_MAG4_IMAGE_LIST.KID" />
+      <rpc export="RPC_MAGG_GROUP_IMAGES.KID" />
+      <rpc export="RPC_MAGG_IMAGE_STATISTICS_BY_USER.KID" />
+      <rpc export="RPC_MAGG_IMAGE_STATISTICS_QUE.KID" />
+      <rpc export="RPC_MAGG_JUKE_BOX_PATH.KID" />
+      <rpc export="RPC_MAGG_MULTI_IMAGE_PRINT.KID" />
+      <rpc export="RPC_MAGG_PAT_INFO.KID" />
+    </rpcs>
+    <dataDictionaries>
+      <dataDictionary export="DD_2005.KID" />
+      <dataDictionary export="DD_2005_1.KID" />
+      <dataDictionary export="DD_2006_18.KID" />
+      <dataDictionary export="DD_2006_961.KID" />
+    </dataDictionaries>
+    <hl7s />
+    <routines>
+      <routine export="MAGGA02.RTN" />
+      <routine export="MAGGA02A.RTN" />
+      <routine export="MAGGA03Q.RTN" />
+      <routine export="MAGGA03U.RTN" />
+      <routine export="MAGGI13.RTN" />
+      <routine export="MAGGROI.RTN" />
+      <routine export="MAGGSIA1.RTN" />
+      <routine export="MAGGTIA.RTN" />
+      <routine export="MAGGTIG.RTN" />
+      <routine export="MAGGTPT1.RTN" />
+      <routine export="MAGGTRA.RTN" />
+      <routine export="MAGGTSY2.RTN" />
+      <routine export="MAGGTSYS.RTN" />
+      <routine export="MAGGTU3.RTN" />
+      <routine export="MAGGTU31.RTN" />
+      <routine export="MAGGTU4C.RTN" />
+      <routine export="MAGGTU4D.RTN" />
+      <routine export="MAGGTU4L.RTN" />
+      <routine export="MAGGTU4T.RTN" />
+      <routine export="MAGGTU6.RTN" />
+      <routine export="MAGGTUP.RTN" />
+      <routine export="MAGGTUX4.RTN" />
+      <routine export="MAGGUJB.RTN" />
+      <routine export="MAGIP117.RTN" />
+      <routine export="MAGSIXG1.RTN" />
+      <routine export="MAGSIXG3.RTN" />
+      <routine export="MAGUXDPS.RTN" />
+    </routines>
+    <protocols />
+  </components>
+</build>

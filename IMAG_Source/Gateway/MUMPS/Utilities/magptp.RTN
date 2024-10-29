@@ -1,0 +1,31 @@
+magptp ;WOIFO/MLH - PACS testing subroutines (patient care) ; 22 Feb 2005  5:07 PM
+ ; *** CAUTION:  not for distribution beyond Silver Spring OIFO!
+ q
+ ;
+ROL ; ROL segment(s)
+ n setid ; set ID index for repeating segment groups
+ s setid=0
+ i $p($g(HLA("HLS",3)),HLFS,3)="I" d rol(1) ; attending
+ d rol(2) ; referring
+ q
+ ;
+rol(xidoc) ; subroutine, do not call directly
+ n segdta ; -- segment data
+ n flddta ; -- field data scalar
+ ;
+ ;   rol-1-role instance ID
+ s setid=setid+1,$p(segdta,HLFS,1)=setid
+ ;   rol-2-action code
+ s $p(segdta,HLFS,2)="UP"
+ ;   rol-3-role
+ s $p(segdta,HLFS,3)=$p("AT^RP","^",xidoc)
+ ;   rol-4-role person (attending/referring
+ s $p(segdta,HLFS,4)=$p($g(HLA("HLS",3)),HLFS,$s(xidoc=1:8,1:9))
+ ;   rol-12-phone
+ i '$$fon^magptu(rannum*xidoc+3,.fon) s flddta=fon_HLCS_"WPN"_HLCS_"PH"
+ i rannum*xidoc+3#2=0,'$$fon^magptu(rannum*xidoc+7*2+3,.fon) s flddta=flddta_HLRS_fon_HLCS_"WPN"_HLCS_"FX"
+ i rannum*xidoc+3#3=0,'$$fon^magptu(rannum*xidoc+7*3+3,.fon) s flddta=flddta_HLRS_fon_HLCS_"PRN"_HLCS_"PH"
+ i rannum*xidoc+3#5=0,'$$fon^magptu(rannum*xidoc+7*5+3,.fon) s flddta=flddta_HLRS_fon_HLCS_"BPN"_HLCS_"BP"
+ s $p(segdta,HLFS,12)=flddta
+ s segix=segix+1,HLA("HLS",segix)="ROL"_HLFS_segdta k segdta
+ q

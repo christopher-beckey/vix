@@ -1,0 +1,47 @@
+12/20/2002  10:42
+Saved from DICOM,DCM
+MAGDMFBX
+MAGDMFBX ; PMK/SSOIFO ; 06 Jun 2003  12:38 PM
+ ;;3.0;IMAGING;**10**;03-September-2002
+ ;; +---------------------------------------------------------------+
+ ;; | Property of the US Government.                                |
+ ;; | No permission to copy or redistribute this software is given. |
+ ;; | Use of unreleased versions of this software requires the user |
+ ;; | to execute a written test agreement with the VistA Imaging    |
+ ;; | Development Office of the Department of Veterans Affairs,     |
+ ;; | telephone (301) 734-0100.                                     |
+ ;; |                                                               |
+ ;; | The Food and Drug Administration classifies this software as  |
+ ;; | a medical device.  As such, it may not be changed in any way. |
+ ;; | Modifications to this software may result in an adulterated   |
+ ;; | medical device under 21CFR820, the use of which is considered |
+ ;; | to be a violation of US Federal Statutes.                     |
+ ;; +---------------------------------------------------------------+
+ ;
+ ; This routine computes the check codes for <DICOM> for modalities.
+ ; These go into ELEMENT.DIC and are used by ^MAGDMFBM.
+ ;
+ENTRY ;
+ S DICTIEN=$O(^MAGDICOM(2006.51,"B","0008,0060",""))
+ I 'DICTIEN W !!,"Please run the menu option to Reinitialize All the DICOM Master Files",! Q
+ ;
+ W !," RAD",?11,"CON",?21,"RAD+CON",?32,"Modality"
+ W !," ---",?11,"---",?21,"-------",?32,"--------"
+ S N=$P(^MAGDICOM(2006.51,DICTIEN,1,0),"^",3)
+ F I=1:1:N D
+ . S X=^MAGDICOM(2006.51,DICTIEN,1,I,0),Z=$P(X,"=",2),HIT=0
+ . S (Y,Y1)=$$C^MAGDVRSN($P(X,"="))+12345
+ . S TAB=0 W ! F J=1:1:3 D
+ . . W ?TAB
+ . . I Z=Y W "<",Y,">" S HIT=1
+ . . E  W " ",Y
+ . . S Y=Y+Y1,TAB=TAB+10
+ . . Q
+ . I Z,'HIT W ?28,"???"
+ . W ?32,X
+ . Q
+ Q
+ 
+ 
+
+

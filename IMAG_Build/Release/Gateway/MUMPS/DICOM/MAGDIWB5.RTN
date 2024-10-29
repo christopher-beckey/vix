@@ -1,0 +1,233 @@
+MAGDIWB5 ;WOIFO/PMK - Send images to DIOCM Storage ; 02 Apr 2009 12:16 PM
+ ;;3.0;IMAGING;**11,30,51,50,54**;MAR 19, 2002;;OCT 28, 2009
+ ;; Per VHA Directive 2004-038, this routine should not be modified.
+ ;; +---------------------------------------------------------------+
+ ;; | Property of the US Government.                                |
+ ;; | No permission to copy or redistribute this software is given. |
+ ;; | Use of unreleased versions of this software requires the user |
+ ;; | to execute a written test agreement with the VistA Imaging    |
+ ;; | Development Office of the Department of Veterans Affairs,     |
+ ;; | telephone (301) 734-0100.                                     |
+ ;; | The Food and Drug Administration classifies this software as  |
+ ;; | a medical device.  As such, it may not be changed in any way. |
+ ;; | Modifications to this software may result in an adulterated   |
+ ;; | medical device under 21CFR820, the use of which is considered |
+ ;; | to be a violation of US Federal Statutes.                     |
+ ;; +---------------------------------------------------------------+
+ ;;
+ ; launch a send_image C process to send the images
+ ; send the entire set of images for a study
+ ;
+ ; mainline DICOM service class provider code
+ N BYTEORDR ;- byte order for message, always little endian
+ N CALLED ;--- the called application entity, i.e., the "listener"
+ N CALLING ;-- the calling application entity, i.e., the "initiator"
+ N CHANNEL ;-- number "n" of the "\DICOM\DATAn" message directory
+ N COMMENT ;-- descriptive text
+ N D1 ;------- working variable for transversing ^TMP global.
+ N DEBUG ;---- debug output control
+ N DIMSE ;---- DICOM Message Service Element
+ N ERRORID ;-- Error ID
+ N EXPLICIT ;- explicit/implicit VR flag
+ N FBSWITCH ;- foreground / midground / background flag for ^MAGDMLOG
+ N FILEMODE ;- either "FIFO QUEUE" (for PACS) or "DIRECT" (for MWL)
+ N IMAGEIEN ;- counter
+ N IMAGECNT ;- Number of images
+ N INODE ;---- node in ^TMP global for DICOM data storage
+ N MSGID ;---- DICOM message id
+ N MXPDUSIZ ;- maximum negotiated PDU size
+ N MULTIMSG ;- multiple message flag (null, "OPEN", or "CLOSE")
+ N NUMBTAGS ;- Number of instances in a multi-valued entity
+ N QUEUEIN ;-- input file array
+ N QUEUEOUT ;- output file array
+ N TEMPLATE ;- message ien in the template file
+ N TYPEID ;--- id of type of event within SOP class
+ N SEQNUMB ;-- nesting level of DICOM sequence; set in MSGINIT^MAGDFCNS
+ N SEQUENCE ;- DICOM nesting subscript sequence; set in MSGINIT^MAGDFCNS
+ N APPIEN,IMAGEIEN,IPADDR,NETERROR,ODEVNAME,ODEVTYPE,OLD,PATH,PORT
+ ;
+ S FBSWITCH="FOREGROUND"
+ ;
+ ; get a port for MAG_VISTA_SEND_IMAGE
+ S PORT=0 F I=65535:-1:65500 L +^MAGDPORT(I):0 I $T S PORT=I Q
+ I 'PORT D
+ . N MSG
+ . S MSG(1)="Could not lock a communications port for MAG_VISTA_SEND_IMAGE."
+ . S MSG(2)="Last tried port was #"_I_"."
+ . D TRAPERR^MAGDSTRT(1,$T(+0),"ERROR IN VISTA SEND IMAGE",.MSG)
+ . Q  ; Error trap does not return
+ D TRANSMIT
+ L -^MAGDPORT(PORT)
+ Q
+ ;
+TRANSMIT ; send the images
+ S I=0,D1="" F  S D1=$O(^TMP("MAG",$J,"DICOMXMIT",LASTD0,D1)) Q:D1=""  D
+ . ; check for TSYNTAX and SOPCLASS
+ . S SOPCLASS=$G(^TMP("MAG",$J,"DICOMXMIT",LASTD0,D1,5))
+ . S TSYNTAX=$G(^TMP("MAG",$J,"DICOMXMIT",LASTD0,D1,4))
+ . I (SOPCLASS="")!(TSYNTAX="") D  Q
+ . . K ^TMP("MAG",$J,"DICOMXMIT",LASTD0,D1)
+ . . Q
+ . E  S I=I+1
+ . Q
+ I 'I Q  ; no images to transmit - don't spawn a transmission process
+ ;
+ S (NETERROR,IMAGEIEN)=0,IMAGECNT=I
+ ;
+ S PATH=^MAGDICOM(2006.563,1,"IMAGE OUTPUT PATH")
+ D RELEASE^MAGDACU2(PATH_"\RELEASE_"_$J_".OUT") ; create A-RELEASE-RQ PDU
+ D SPAWN ; start the C-STORE C user process
+ D CONNECT ; connect to the C-STORE provider process
+ I 'APPIEN D  Q  ; bad user application - terminate connection 
+ . D DISCON^MAGDIW6 ; disconnect from the C-STORE provider process
+ . N I S I=0
+ . K MESSAGE
+ . S I=I+1,MESSAGE(I)="ERROR IN VISTA SEND IMAGE"
+ . S I=I+1,MESSAGE(I)=""
+ . S I=I+1,MESSAGE(I)="Undefined User Application: """_USERAPP_""""
+ . S I=I+1,MESSAGE(I)=""
+ . S I=I+1,MESSAGE(I)="This entry may have come from SCU_LIST.DIC at another site."
+ . S I=I+1,MESSAGE(I)=""
+ . S I=I+1,MESSAGE(I)="Correct the problem either by removing the ordering location when you"
+ . S I=I+1,MESSAGE(I)="start the Transmit option (2-8-2) or by adding the User Application"
+ . S I=I+1,MESSAGE(I)="to SCU_LIST.DIC and loading it using menu option 4-2-8."
+ . S I=I+1,MESSAGE(I)=""
+ . D TRAPERR^MAGDSTRT(1,$T(+0),"DICOM Image Transmission Error",.MESSAGE,1)
+ . Q  ; error trap does not return
+ S OLD("SOP CLASS")="",OLD("TRANSFER SYNTAX")="" ; init for 1st image
+ W !!,"Image count = ",IMAGECNT,!!
+ S D1="" F  S D1=$O(^TMP("MAG",$J,"DICOMXMIT",LASTD0,D1)) Q:D1=""  D  Q:NETERROR
+ . ; send one image
+ . N OFFSET ;--- byte offset to the beginning of the image
+ . N SOPCLASS ;- SOP Class of message being created and sent
+ . N TSYNTAX ;-- DICOM transfer syntax, like "Implicit VR Little Endian"
+ . N RESPONSE ;- file for C-STORE response
+ . N FILE,FILESIZE,X,Y
+ . S IMAGEIEN=IMAGEIEN+1
+ . S SOPCLASS=$G(^TMP("MAG",$J,"DICOMXMIT",LASTD0,D1,5))
+ . S TSYNTAX=$G(^TMP("MAG",$J,"DICOMXMIT",LASTD0,D1,4))
+ . I (SOPCLASS="")!(TSYNTAX="") D  Q
+ . . S ^TMP("MAG",$J,"DICOMXMIT",LASTD0,D1,1)="FAILURE^^No Targa to DICOM copy created"
+ . . Q
+ . I (SOPCLASS'=OLD("SOP CLASS"))!(TSYNTAX'=OLD("TRANSFER SYNTAX")) D  ;
+ . . ; must create a new association
+ . . I OLD("SOP CLASS")'="" D
+ . . . D RELEASE^MAGDIW6 ; close the old association
+ . . . D DISCON^MAGDIW6 ; disconnect the old session
+ . . . D SPAWN ; start the C-STORE C user process
+ . . . D CONNECT ; create a new connection
+ . . . Q
+ . . D ASSOC^MAGDIW6 Q:NETERROR  ; create the new associate
+ . . ;
+ . . ; **** Need to check that the PRESENTATION CONTEXT was accepted ****
+ . . ;
+ . . S OLD("SOP CLASS")=SOPCLASS,OLD("TRANSFER SYNTAX")=TSYNTAX
+ . . Q
+ . Q:NETERROR  ; end sending if an association error was detected
+ . S FILEDCM=^TMP("MAG",$J,"DICOMXMIT",LASTD0,D1,2)
+ . D COMMAND^MAGDIW6
+ . S OFFSET=^TMP("MAG",$J,"DICOMXMIT",LASTD0,D1,3)
+ . S RESPONSE=PATH_"\RESPONSE_"_$J_".DCM" ; C-Store Response
+ . S X="SEND_IMAGE "_PATH_"\COMMAND_"_$J_".DCM "_FILEDCM_" "_MXPDUSIZ
+ . S X=X_" "_OFFSET_" "_RESPONSE
+ . D SEND^MAGDCST2("",PORT,X)
+ . S NETERROR=$$RECV^MAGDCST2("",PORT,.X)
+ . I NETERROR D ERRORMSG^MAGDCST1("Network error 1") Q
+ . I X'="IMAGE SENT" D
+ . . N MSG
+ . . S MSG(1)="Unexpected Response"
+ . . S MSG(2)="Expected ""IMAGE SENT"", Received """_X_"""."
+ . . D TRAPERR^MAGDSTRT(1,$T(+0),"ERROR IN VISTA SEND IMAGE",.MSG)
+ . . Q  ; Error trap does not return
+ . S X=$$GETDIR^MAGOSDIR(RESPONSE)
+ . I 'X W "  (not on file)" Q  ; not on file
+ . I X<0 W " *** FILE ERROR: ",X," ***" Q  ; error
+ . S FILE=$RE($P($RE(RESPONSE),"\"))
+ . S FILESIZE=$P($G(^TMP("MAG",$J,"DIR LIST",FILE)),";")
+ . S QUEUEIN("FILE")=RESPONSE,(ODEVNAME,ODEVTYPE)="",INODE="IN"
+ . D ^MAGDDR2 ; read the C-Store Response DICOM file
+ . S STATUS=$$GETDATA^MAGDFCNS("IN","0000,0900",1,1)
+ . I 'STATUS D CLEANUP Q  ; successful transmission
+ . ;
+ . ; log error detected by the receiver and continue
+ . S NUMBTAGS=$$GETDATA^MAGDFCNS("IN","0000,0901",0,0)
+ . S COMMENT=$$GETDATA^MAGDFCNS("IN","0000,0902",1,1)
+ . S ERRORID=$$GETDATA^MAGDFCNS("IN","0000,0903",1,1)
+ . S STATUS=$$HEX^MAGDDR0(STATUS,4)
+ . K MESSAGE
+ . S MESSAGE(1)="ERROR IN VISTA SEND IMAGE: DESTINATION STORAGE FAILURE"
+ . S MESSAGE(2)="Status="_STATUS_"        Error ID: "_ERRORID
+ . S MESSAGE(3)="Comment: "_COMMENT
+ . F I=1:1:NUMBTAGS D  ; attribute may be a multiple
+ . . S TAG=$$GETDATA^MAGDFCNS("IN","0000,0901",I,1)
+ . . S MESSAGE(3+I)="Offending Element: ("_TAG_")"
+ . . I $D(^MAGDICOM(2006.51,"B",TAG)) D  ; lookup element and get name
+ . . . S X=$O(^MAGDICOM(2006.51,"B",TAG,"")),X=^MAGDICOM(2006.51,X,0)
+ . . . S MESSAGE(3+I)=MESSAGE(3+I)_" "_$P(X,"^",2)
+ . . . Q
+ . . Q
+ . S MESSAGE(4+NUMBTAGS)=""
+ . D TRAPERR^MAGDSTRT(-1,$T(+0),"DICOM Image Transmission Error",.MESSAGE,1)
+ . D CLEANUP ; remove files
+ . Q
+ I NETERROR D  Q  ; end sending if a communication error was detected
+ . N MSG
+ . S MSG(1)="Job terminated due to Network Error #"_NETERROR
+ . D TRAPERR^MAGDSTRT(1,$T(+0),"ERROR IN VISTA SEND IMAGE",.MSG)
+ . Q  ; Error trap does not return
+ D RELEASE^MAGDIW6 ; release the association
+ D DISCON^MAGDIW6 ; disconnect from the C-STORE provider process
+ Q
+ ;
+CLEANUP ; remove the image from the queue, files, and global entries
+ D REMOVE^MAGDIWB2 ; remove the image file from the queue
+ S X=$G(^TMP("MAG",$J,"DICOMXMIT",LASTD0,D1,2))
+ S:X'="" X=$$DEL^MAGOSDIR(X) ; Delete the temporary DICOM file
+ K ^TMP("MAG",$J,"DICOMXMIT",LASTD0,D1)
+ Q
+ ;
+SPAWN ; launch the C-STORE service class user C task
+ N CMD,X
+ S CHANNEL=1,MULTIMSG=""
+ D NEWLOG^MAGDMLOG("Send Images to "_USERAPP)
+ D MESSAGE^MAGDMLOG(1,0,"Send Image (Job #"_$J_") Started","BTV")
+ ;
+ S CMD="MAG_VISTA_SEND_IMAGE LOCALHOST "_PORT
+ I $G(^MAGDICOM(2006.563,1,"EXPORT SHOW CMD WINDOW"),"YES")="YES" D
+ . S CMD="START "_CMD ; run in foreground window
+ . Q
+ D SPAWN^MAGDOS(CMD,1)
+ D LISTEN^MAGDTCP1(PORT)
+ ;
+ S X=$$TCPGET^MAGOSTCP(.IPADDR) ; Client IP address
+ S NETERROR=$$RECV^MAGDCST2("",PORT,.X)
+ I NETERROR D ERRORMSG^MAGDCST1("Network error 1") Q
+ I X'="Connection established to MUMPS" D
+ . N MSG
+ . S MSG(1)="Expected return value ""Connection established to MUMPS""."
+ . S MSG(2)="Received """_X_"""."
+ . D TRAPERR^MAGDSTRT(1,$T(+0),"ERROR IN VISTA SEND IMAGE",.MSG)
+ . Q  ; Error trap does not return
+ Q
+ ;
+CONNECT ; connect to the DICOM Storage SCP
+ N DESTINAT ;- ip address of storage service class provider
+ N TCPPORT ;-- port of storage service class provider
+ N X
+ S APPIEN=$O(^MAGDICOM(2006.585,"B",USERAPP,"")) Q:'APPIEN
+ S X=^MAGDICOM(2006.585,APPIEN,0)
+ S CALLED=$P(X,"^",2),CALLING=$P(X,"^",3)
+ S DESTINAT=$P(X,"^",4),TCPPORT=$P(X,"^",5)
+ ;
+ ; S MODNAME="VISTA to "_USERAPP
+ D SEND^MAGDCST2("",PORT,"CONNECT "_DESTINAT_" "_TCPPORT)
+ S NETERROR=$$RECV^MAGDCST2("",PORT,.X)
+ I NETERROR D ERRORMSG^MAGDCST1("Network error 1") Q
+ I X'="CONNECTION SUCCESSFUL" D
+ . N MSG
+ . S MSG(1)="Expected return value ""CONNECTION SUCCESSFUL""."
+ . S MSG(2)="Received """_X_"""."
+ . D TRAPERR^MAGDSTRT(1,$T(+0),"ERROR IN VISTA SEND IMAGE",.MSG)
+ . Q  ; Error trap does not return
+ Q
+ ;

@@ -1,0 +1,495 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tns="urn:v2.soap.webservices.awiv.imaging.med.va.gov" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:wsdlhttp="http://schemas.xmlsoap.org/wsdl/http/" xmlns:wsdlmime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" name="ImagingClinicalDisplaySOAP" targetNamespace="urn:v2.soap.webservices.awiv.imaging.med.va.gov" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:documentation>
+		This WSDL describes the concrete bindings, abstract interface and types of the Web Service.
+	</wsdl:documentation>
+  <wsdl:types>
+    <xsd:schema xmlns="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="urn:v2.soap.webservices.awiv.imaging.med.va.gov">
+      <xsd:complexType name="AnnotationUserType">
+        <xsd:sequence>
+          <xsd:element name="name" type="xsd:string" />
+          <xsd:element name="duz" type="xsd:string" />
+          <xsd:element name="service" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="AnnotationType">
+        <xsd:sequence>
+          <xsd:element name="user" type="tns:AnnotationUserType" />
+          <xsd:element name="saved-date" type="xsd:string" />
+          <xsd:element name="annotation-id" type="xsd:string" />
+          <xsd:element name="image-id" type="xsd:string" />
+          <xsd:element name="source">
+            <xsd:simpleType>
+              <xsd:restriction base="xsd:string">
+                <xsd:enumeration value="ClinicalDisplay" />
+                <xsd:enumeration value="VistARad" />
+                <xsd:enumeration value="ClinicalCapture" />
+              </xsd:restriction>
+            </xsd:simpleType>
+          </xsd:element>
+          <xsd:element name="saved-after-result" type="xsd:boolean" />
+          <xsd:element name="annotation-version" type="xsd:string" />
+          <xsd:element name="annotation-deleted" type="xsd:boolean" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="AnnotationDetailsType">
+        <xsd:sequence>
+          <xsd:element name="Annotation" type="tns:AnnotationType" />
+          <xsd:element name="details" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="UserType">
+        <xsd:sequence>
+          <xsd:element name="user-id" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="key" type="xsd:string" />
+          <xsd:element name="can-create-annotations" type="xsd:boolean" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:simpleType name="DateType">
+        <xsd:restriction base="xsd:string">
+          <xsd:pattern value="\d{1,2}/\d{1,2}/\d{4}" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="TransactionIdentifierType">
+        <xsd:restriction base="xsd:string">
+          <xsd:maxLength value="128" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="CprsIdentifierType">
+        <xsd:restriction base="xsd:string">
+          <xsd:maxLength value="255" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="PatientIdentifierType">
+        <xsd:restriction base="xsd:string">
+          <xsd:maxLength value="128" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:complexType name="ImageAccessLogEventType">
+        <xsd:sequence>
+          <xsd:element name="id" type="xsd:string" />
+          <xsd:element name="patientIcn" type="tns:PatientIdentifierType" />
+          <xsd:element name="reason" type="xsd:string" />
+          <xsd:element name="credentials" type="tns:UserCredentialsType" />
+          <xsd:element name="eventType">
+            <xsd:simpleType>
+              <xsd:restriction base="xsd:string">
+                <xsd:enumeration value="IMAGE_ACCESS" />
+                <xsd:enumeration value="IMAGE_COPY" />
+                <xsd:enumeration value="IMAGE_PRINT" />
+                <xsd:enumeration value="PATIENT_ID_MISMATCH" />
+                <xsd:enumeration value="LOG_RESTRICTED_ACCESS" />
+              </xsd:restriction>
+            </xsd:simpleType>
+          </xsd:element>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="ImagesType">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="images" type="tns:ImageType" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="ImageType">
+        <xsd:sequence>
+          <xsd:element name="image-urn" nillable="true" type="xsd:string" />
+          <xsd:element name="description" nillable="true" type="xsd:string" />
+          <xsd:element name="procedure-date" nillable="true" type="xsd:string" />
+          <xsd:element name="procedure" nillable="true" type="xsd:string" />
+          <xsd:element name="dicom-sequence-number" nillable="true" type="xsd:string" />
+          <xsd:element name="dicom-image-number" nillable="true" type="xsd:string" />
+          <xsd:element name="patient-icn" nillable="true" type="xsd:string" />
+          <xsd:element name="patient-name" nillable="true" type="xsd:string" />
+          <xsd:element name="site-number" nillable="true" type="xsd:string" />
+          <xsd:element name="site-abbr" nillable="true" type="xsd:string" />
+          <xsd:element name="image-type" nillable="true" type="xsd:integer" />
+          <xsd:element name="abs-location" nillable="true" type="xsd:string" />
+          <xsd:element name="full-location" nillable="true" type="xsd:string" />
+          <xsd:element name="image-class" nillable="true" type="xsd:string" />
+          <xsd:element name="full-image-URI" nillable="true" type="xsd:string" />
+          <xsd:element name="abs-image-URI" nillable="true" type="xsd:string" />
+          <xsd:element name="diag-image-URI" nillable="true" type="xsd:string" />
+          <xsd:element name="image-extension" nillable="true" type="xsd:string" />
+          <xsd:element name="capture-date" nillable="true" type="xsd:string" />
+          <xsd:element name="document-date" nillable="true" type="xsd:string" />
+          <xsd:element name="sensitive" nillable="true" type="xsd:boolean" />
+          <xsd:element name="status" nillable="true" type="xsd:string" />
+          <xsd:element name="view-status" nillable="true" type="xsd:string" />
+          <xsd:element name="image-has-annotations" type="xsd:boolean" />
+          <xsd:element name="image-annotation-status" type="xsd:integer" />
+          <xsd:element name="image-annotation-status-description" type="xsd:string" />
+          <xsd:element name="associated-note-resulted" type="xsd:string" />
+          <xsd:element name="image-package" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="UserCredentialsType">
+        <xsd:sequence>
+          <xsd:element name="fullname" type="xsd:string" />
+          <xsd:element name="duz" nillable="true" type="xsd:string" />
+          <xsd:element name="ssn" nillable="true" type="xsd:string" />
+          <xsd:element name="siteName" type="xsd:string" />
+          <xsd:element name="siteNumber" type="xsd:string" />
+          <xsd:element name="securityToken" nillable="true" type="xsd:string" />
+          <xsd:element name="client-version" nillable="true" type="xsd:string" />
+          <xsd:element name="patient-lookup-site" nillable="true" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="GroupType">
+        <xsd:sequence>
+          <xsd:element name="images" type="tns:ImagesType" />
+          <xsd:element name="study-Urn" nillable="true" type="xsd:string" />
+          <xsd:element name="description" nillable="true" type="xsd:string" />
+          <xsd:element name="procedure-date" nillable="true" type="xsd:string" />
+          <xsd:element name="procedure" nillable="true" type="xsd:string" />
+          <xsd:element name="patient-icn" nillable="true" type="tns:PatientIdentifierType" />
+          <xsd:element name="patient-name" nillable="true" type="xsd:string" />
+          <xsd:element name="site-number" nillable="true" type="xsd:string" />
+          <xsd:element name="site-abbreviation" nillable="true" type="xsd:string" />
+          <xsd:element name="image-count" type="xsd:integer" />
+          <xsd:element name="note-title" nillable="true" type="xsd:string" />
+          <xsd:element name="image-package" nillable="true" type="xsd:string" />
+          <xsd:element name="image-type" nillable="true" type="xsd:string" />
+          <xsd:element name="specialty" nillable="true" type="xsd:string" />
+          <xsd:element name="event" nillable="true" type="xsd:string" />
+          <xsd:element name="origin" nillable="true" type="xsd:string" />
+          <xsd:element name="study-package" nillable="true" type="xsd:string" />
+          <xsd:element name="study-class" nillable="true" type="xsd:string" />
+          <xsd:element name="study-type" nillable="true" type="xsd:string" />
+          <xsd:element name="capture-date" nillable="true" type="tns:DateType" />
+          <xsd:element name="captured-by" nillable="true" type="xsd:string" />
+          <xsd:element name="document-date" nillable="true" type="xsd:string" />
+          <xsd:element name="sensitive" nillable="true" type="xsd:boolean" />
+          <xsd:element name="status" nillable="true" type="xsd:string" />
+          <xsd:element name="view-status" nillable="true" type="xsd:string" />
+          <xsd:element name="study-images-have-annotations" type="xsd:boolean" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="GroupResponseType">
+        <xsd:sequence>
+          <xsd:element minOccurs="1" maxOccurs="1" name="result" type="tns:GroupType" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="ImageAccessEventType">
+        <xsd:sequence>
+          <xsd:element minOccurs="1" maxOccurs="1" name="result" type="xsd:boolean" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="PingServerType">
+        <xsd:sequence>
+          <xsd:element name="pingResponse">
+            <xsd:simpleType>
+              <xsd:restriction base="xsd:string">
+                <xsd:enumeration value="SERVER_READY" />
+                <xsd:enumeration value="SERVER_UNAVAILABLE" />
+                <xsd:enumeration value="VISTA_UNAVAILABLE" />
+              </xsd:restriction>
+            </xsd:simpleType>
+          </xsd:element>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:simpleType name="PatientSensitivityLevelType">
+        <xsd:restriction base="xsd:string">
+          <xsd:enumeration value="RPC_FAILURE" />
+          <xsd:enumeration value="NO_ACTION_REQUIRED" />
+          <xsd:enumeration value="DISPLAY_WARNING" />
+          <xsd:enumeration value="DISPLAY_WARNING_REQUIRE_OK" />
+          <xsd:enumeration value="DISPLAY_WARNING_CANNOT_CONTINUE" />
+          <xsd:enumeration value="ACCESS_DENIED" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:complexType name="StudyReportType">
+        <xsd:sequence>
+          <xsd:element minOccurs="1" maxOccurs="1" name="studyReport" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="getImageAnnotationsResponseType">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="response" type="tns:AnnotationType" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="getAnnotationDetailsResponseType">
+        <xsd:sequence>
+          <xsd:element minOccurs="1" maxOccurs="1" name="response" type="tns:AnnotationDetailsType" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="isAnnotationsSupportedResponseType">
+        <xsd:sequence>
+          <xsd:element minOccurs="1" maxOccurs="1" name="response" type="xsd:boolean" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="getImageList">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="transaction-id" type="tns:TransactionIdentifierType" />
+            <xsd:element name="userCredentials" type="tns:UserCredentialsType" />
+            <xsd:element name="siteNumber" type="xsd:string" />
+            <xsd:element name="patientIcn" type="tns:PatientIdentifierType" />
+            <xsd:element name="cprsIdentifier" type="tns:CprsIdentifierType" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getImageListResponse" type="tns:GroupResponseType" />
+      <xsd:element name="getStudy">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="transaction-id" type="tns:TransactionIdentifierType" />
+            <xsd:element name="userCredentials" type="tns:UserCredentialsType" />
+            <xsd:element name="study-Urn" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getStudyResponse" type="tns:GroupResponseType" />
+      <xsd:element name="getArtifacts">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="transaction-id" type="tns:TransactionIdentifierType" />
+            <xsd:element name="userCredentials" type="tns:UserCredentialsType" />
+            <xsd:element name="patientIcn" type="tns:PatientIdentifierType" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getArtifactsResponse" type="tns:GroupResponseType" />
+      <xsd:element name="getStudyReport">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="transaction-id" type="tns:TransactionIdentifierType" />
+            <xsd:element name="userCredentials" type="tns:UserCredentialsType" />
+            <xsd:element name="study-Urn" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getStudyReportResponse" type="tns:StudyReportType" />
+      <xsd:element name="postImageAccessEvent">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="transaction-id" type="tns:TransactionIdentifierType" />
+            <xsd:element name="log-event" type="tns:ImageAccessLogEventType" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="postImageAccessEventResponse" type="tns:ImageAccessEventType" />
+      <xsd:element name="pingServer">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="transaction-id" type="tns:TransactionIdentifierType" />
+            <xsd:element name="userCredentials" type="tns:UserCredentialsType" />
+            <xsd:element minOccurs="1" maxOccurs="1" name="workstation" type="xsd:string" />
+            <xsd:element minOccurs="1" maxOccurs="1" name="requestSiteNumber" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="postPingServerResponse" type="tns:PingServerType" />
+      <xsd:element name="getImageAnnotations">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="transaction-id" type="tns:TransactionIdentifierType" />
+            <xsd:element name="credentials" type="tns:UserCredentialsType" />
+            <xsd:element minOccurs="1" maxOccurs="1" name="image-id" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getImageAnnotationsResponse" type="tns:getImageAnnotationsResponseType" />
+      <xsd:element name="getAnnotationDetails">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="transaction-id" type="tns:TransactionIdentifierType" />
+            <xsd:element name="credentials" type="tns:UserCredentialsType" />
+            <xsd:element minOccurs="1" maxOccurs="1" name="image-id" type="xsd:string" />
+            <xsd:element minOccurs="1" maxOccurs="1" name="annotation-id" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getAnnotationDetailsResponse" type="tns:getAnnotationDetailsResponseType" />
+      <xsd:element name="isAnnotationsSupported">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="transaction-id" type="tns:TransactionIdentifierType" />
+            <xsd:element name="credentials" type="tns:UserCredentialsType" />
+            <xsd:element name="site-id" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="isAnnotationsSupportedResponse" type="tns:isAnnotationsSupportedResponseType" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="imageListRequest">
+    <wsdl:part name="parameters" element="tns:getImageList" />
+  </wsdl:message>
+  <wsdl:message name="imageListResponse">
+    <wsdl:part name="parameters" element="tns:getImageListResponse" />
+  </wsdl:message>
+  <wsdl:message name="imageAccessEventRequest">
+    <wsdl:part name="parameters" element="tns:postImageAccessEvent" />
+  </wsdl:message>
+  <wsdl:message name="imageAccessEventResponse">
+    <wsdl:part name="parameters" element="tns:postImageAccessEventResponse" />
+  </wsdl:message>
+  <wsdl:message name="pingServerRequest">
+    <wsdl:part name="parameters" element="tns:pingServer" />
+  </wsdl:message>
+  <wsdl:message name="pingServerResponse">
+    <wsdl:part name="parameters" element="tns:postPingServerResponse" />
+  </wsdl:message>
+  <wsdl:message name="getStudyRequest">
+    <wsdl:part name="parameters" element="tns:getStudy" />
+  </wsdl:message>
+  <wsdl:message name="getStudyResponse">
+    <wsdl:part name="parameters" element="tns:getStudyResponse" />
+  </wsdl:message>
+  <wsdl:message name="getStudyReportRequest">
+    <wsdl:part name="parameters" element="tns:getStudyReport" />
+  </wsdl:message>
+  <wsdl:message name="getStudyReportResponse">
+    <wsdl:part name="parameters" element="tns:getStudyReportResponse" />
+  </wsdl:message>
+  <wsdl:message name="getImageAnnotationsRequest">
+    <wsdl:part name="parameters" element="tns:getImageAnnotations" />
+  </wsdl:message>
+  <wsdl:message name="getImageAnnotationsResponse">
+    <wsdl:part name="parameters" element="tns:getImageAnnotationsResponse" />
+  </wsdl:message>
+  <wsdl:message name="getAnnotationDetailsRequest">
+    <wsdl:part name="parameters" element="tns:getAnnotationDetails" />
+  </wsdl:message>
+  <wsdl:message name="getAnnotationDetailsResponse">
+    <wsdl:part name="parameters" element="tns:getAnnotationDetailsResponse" />
+  </wsdl:message>
+  <wsdl:message name="isAnnotationsSupportedRequest">
+    <wsdl:part name="parameters" element="tns:isAnnotationsSupported" />
+  </wsdl:message>
+  <wsdl:message name="isAnnotationsSupportedResponse">
+    <wsdl:part name="parameters" element="tns:isAnnotationsSupportedResponse" />
+  </wsdl:message>
+  <wsdl:message name="getArtifactsRequest">
+    <wsdl:part name="parameters" element="tns:getArtifacts" />
+  </wsdl:message>
+  <wsdl:message name="getArtifactsResponse">
+    <wsdl:part name="parameters" element="tns:getArtifactsResponse" />
+  </wsdl:message>
+  <wsdl:portType name="ImageAWIVMetadata">
+    <wsdl:operation name="getImageList">
+      <wsdl:input name="imageListRequest" message="tns:imageListRequest" />
+      <wsdl:output name="imageListResponse" message="tns:imageListResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="postImageAccessEvent">
+      <wsdl:input name="imageAccessEventRequest" message="tns:imageAccessEventRequest" />
+      <wsdl:output name="imageAccessEventResponse" message="tns:imageAccessEventResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="pingServerEvent">
+      <wsdl:input name="pingServerRequest" message="tns:pingServerRequest" />
+      <wsdl:output name="pingServerResponse" message="tns:pingServerResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getStudy">
+      <wsdl:input name="getStudyRequest" message="tns:getStudyRequest" />
+      <wsdl:output name="getStudyResponse" message="tns:getStudyResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getStudyReport">
+      <wsdl:input name="getStudyReportRequest" message="tns:getStudyReportRequest" />
+      <wsdl:output name="getStudyReportResponse" message="tns:getStudyReportResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getImageAnnotations">
+      <wsdl:input name="getImageAnnotationsRequest" message="tns:getImageAnnotationsRequest" />
+      <wsdl:output name="getImageAnnotationsResponse" message="tns:getImageAnnotationsResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getAnnotationDetails">
+      <wsdl:input name="getAnnotationDetailsRequest" message="tns:getAnnotationDetailsRequest" />
+      <wsdl:output name="getAnnotationDetailsResponse" message="tns:getAnnotationDetailsResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="isAnnotationsSupported">
+      <wsdl:input name="isAnnotationsSupportedRequest" message="tns:isAnnotationsSupportedRequest" />
+      <wsdl:output name="isAnnotationsSupportedResponse" message="tns:isAnnotationsSupportedResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getArtifacts">
+      <wsdl:input name="getArtifactsRequest" message="tns:getArtifactsRequest" />
+      <wsdl:output name="getArtifactsResponse" message="tns:getArtifactsResponse" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="ImageMetadataAWIVSoapBinding" type="tns:ImageAWIVMetadata">
+    <wsdlsoap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="getImageList">
+      <wsdlsoap:operation soapAction="getImageList" />
+      <wsdl:input name="imageListRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="imageListResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="postImageAccessEvent">
+      <wsdlsoap:operation soapAction="postImageAccessEvent" />
+      <wsdl:input name="imageAccessEventRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="imageAccessEventResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="pingServerEvent">
+      <wsdlsoap:operation soapAction="pingServer" />
+      <wsdl:input name="pingServerRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="pingServerResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getStudy">
+      <wsdlsoap:operation soapAction="getStudy" />
+      <wsdl:input name="getStudyRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="getStudyResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getStudyReport">
+      <wsdlsoap:operation soapAction="getStudyReport" />
+      <wsdl:input name="getStudyReportRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="getStudyReportResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getImageAnnotations">
+      <wsdlsoap:operation soapAction="getImageAnnotations" />
+      <wsdl:input name="getImageAnnotationsRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="getImageAnnotationsResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getAnnotationDetails">
+      <wsdlsoap:operation soapAction="getAnnotationDetails" />
+      <wsdl:input name="getAnnotationDetailsRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="getAnnotationDetailsResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="isAnnotationsSupported">
+      <wsdlsoap:operation soapAction="isAnnotationsSupported" />
+      <wsdl:input name="isAnnotationsSupportedRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="isAnnotationsSupportedResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getArtifacts">
+      <wsdlsoap:operation soapAction="getArtifacts" />
+      <wsdl:input name="getArtifactsRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="getArtifactsResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="ImageMetadataAWIVService">
+    <wsdl:port name="ImageMetadataAWIV.V2" binding="tns:ImageMetadataAWIVSoapBinding">
+      <wsdlsoap:address location="http://localhost:8080/ImagingExchangeWebApp/webservices/ImageMetadataAWIV" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

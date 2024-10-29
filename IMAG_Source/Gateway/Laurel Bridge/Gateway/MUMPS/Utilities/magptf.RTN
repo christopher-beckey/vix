@@ -1,0 +1,14 @@
+magptf ;WOIFO/MLH - PACS testing subroutines (financial) ; 22 Feb 2005  4:20 PM
+ ; *** CAUTION:  not for distribution beyond Silver Spring OIFO!
+ q
+ ;
+DG1 ; SUBROUTINE - build DG1 segment
+ n segdta ; -- segment data
+ ;   DG1-1-set id
+ s $p(segdta,HLFS,1)=1
+ ;   DG1-3-diagnosis code
+ s $p(segdta,HLFS,3)=HLCS_"DIAG"_$E(rannum+1*29+10000000,4,7)
+ ;   DG1-6-diagnosis type
+ s $p(segdta,HLFS,6)="A"
+ s segix=$o(HLA("HLS"," "),-1)+1,HLA("HLS",segix)="DG1"_HLFS_segdta k segdta
+ q

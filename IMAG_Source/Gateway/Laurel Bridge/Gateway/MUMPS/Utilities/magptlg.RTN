@@ -1,0 +1,28 @@
+magptlg ;print inbound message log (acks) ; 02 Jul 2008 9:01 AM
+ q
+tail(back,msgs) ; print 'msgs' messages starting 'back' messages back
+ n msg,hdr,msgstart,i,msgix
+ s msg=$na(^HL(772))
+ s hdr=$na(^HLMA)
+ s back=$g(back,1)
+ q:back'=+back "USAGE:  w $$tail^magptlg(num1,[num2])"
+ s msgs=$g(msgs,back)
+ q:msgs'=+msgs "USAGE:  w $$tail^magptlg(num1,[num2])"
+ s msgstart=" "
+ f i=1:1:back s msgstart=$o(@msg@(msgstart),-1) q:'msgstart
+ s:msgstart'="" msgstart=$o(@msg@(msgstart),-1)
+ s msgix=msgstart
+ f i=1:1:msgs s msgix=$o(@msg@(msgix)) q:msgix=""  d
+ . ; find header
+ . s hdrix=$o(@hdr@("B",msgix,""),-1)
+ . d:hdrix
+ . . w $g(@hdr@(hdrix,"MSH",1,0)),!
+ . . s segix=0
+ . . f  s segix=$o(@msg@(msgix,"IN",segix)) q:'segix  d
+ . . . s segdta=$g(@msg@(msgix,"IN",segix,0))
+ . . . w:$l(segdta) segdta,!
+ . . . q
+ . . q
+ . w !
+ . q
+ q ""

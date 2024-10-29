@@ -1,0 +1,9 @@
+# Microsoft Developer Studio Generated Dependency File, included by CSTORE.mak
+
+.\CSTORE.C : \
+	".\dcm_net.h"\
+	
+
+.\DCM_NETF.C : \
+	".\dcm_net.h"\
+	

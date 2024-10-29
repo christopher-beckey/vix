@@ -1,0 +1,98 @@
+﻿<Views:BaseImagingView x:Class="DicomImporter.Views.NonDicomListView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:Views="clr-namespace:ImagingClient.Infrastructure.Views;assembly=ImagingClient.Infrastructure"
+             xmlns:my="clr-namespace:DicomImporter.Views"
+             xmlns:Converters="clr-namespace:ImagingClient.Infrastructure.Converters;assembly=ImagingClient.Infrastructure"
+             mc:Ignorable="d"
+             d:DesignHeight="700" d:DesignWidth="800">
+    <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+        <Converters:BoolToOppositeBoolConverter x:Key="BoolToOppositeBoolConverter" />
+    </UserControl.Resources>
+    <Grid>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <Label Content="Non-DICOM File Reconciliation" 
+               Style="{DynamicResource ResourceKey=SectionTitle}" 
+               Grid.Row="0" />
+
+        <GroupBox Grid.Row="1" 
+                  Header="General Information">
+            
+            <Grid Grid.Row="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+
+                <Label Grid.Row="0" 
+                       Grid.Column="0" 
+                       Content="VA Patient Info:" />
+
+                <TextBox IsReadOnly="True" 
+                     Grid.Row="0" 
+                     Grid.Column="1" 
+                     Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}"
+                     Text="{Binding Path=SelectedPatient.Details, Mode=OneWay}" />
+
+                <Button 
+                    Grid.Row="0" 
+                    Grid.Column="2" 
+                    Content="{Binding PatientSelectionButtonText}" 
+                    Click="ChangePatient_Click" />
+
+                <Label Grid.Row="1" 
+                       Grid.Column="0" 
+                        Visibility="{Binding Path=ShowReconcilerNotes, Converter={StaticResource BooleanToVisibilityConverter}}"
+                       Content="Reconciler Notes:" />
+
+                <TextBox Text="{Binding Path=WorkItemDetails.ReconcilerNotes}"  
+                        Visibility="{Binding Path=ShowReconcilerNotes, Converter={StaticResource BooleanToVisibilityConverter}}"
+                     Grid.Row="1" 
+                     Grid.Column="1"
+                     Grid.ColumnSpan="2"
+                     Height="100" 
+                     IsReadOnly="True"
+                     Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}"
+                     TextWrapping="Wrap" 
+                     AcceptsReturn="True"
+                     VerticalAlignment="Stretch"
+                     HorizontalAlignment="Stretch" 
+                     VerticalScrollBarVisibility="Auto" 
+                     HorizontalScrollBarVisibility="Disabled"/>
+            </Grid>
+
+        </GroupBox>
+
+        <my:NonDicomMediaView 
+            Grid.Row="2" 
+            DataContext="{Binding Path=NonDicomMediaViewModel}"
+            />
+        
+        <StackPanel Orientation="Horizontal" 
+                    HorizontalAlignment="Right"
+                    Grid.Row="5">
+            <Button Content="Next >>" 
+                    Command="{Binding NavigateForward}"/>
+
+            <Button Content="Cancel" 
+                    Command="{Binding CancelReconciliationCommand}" />
+
+        </StackPanel>
+    </Grid>
+</Views:BaseImagingView>

@@ -1,0 +1,200 @@
+MAGDMFBB ;WOIFO/PMK/JSL/SAF - Set some ^MAGDICOM(*) static fields ; 18 Jun 2010 10:45 AM
+ ;;3.0;IMAGING;**9,21,11,51,69,54,53,49,123,118**;Mar 19, 2002;Build 4525;May 01, 2013
+ ;; Per VHA Directive 2004-038, this routine should not be modified.
+ ;; +---------------------------------------------------------------+
+ ;; | Property of the US Government.                                |
+ ;; | No permission to copy or redistribute this software is given. |
+ ;; | Use of unreleased versions of this software requires the user |
+ ;; | to execute a written test agreement with the VistA Imaging    |
+ ;; | Development Office of the Department of Veterans Affairs,     |
+ ;; | telephone (301) 734-0100.                                     |
+ ;; | The Food and Drug Administration classifies this software as  |
+ ;; | a medical device.  As such, it may not be changed in any way. |
+ ;; | Modifications to this software may result in an adulterated   |
+ ;; | medical device under 21CFR820, the use of which is considered |
+ ;; | to be a violation of US Federal Statutes.                     |
+ ;; +---------------------------------------------------------------+
+ ;;
+BEFORE ; Set up variables
+ N D1,T,X
+ ;
+ M X=^MAGDICOM(2006.563,1)
+ S SYSTITLE=$G(X("SYSTEM TITLE"))
+ S LOCATION=$G(X("LOCATION"))
+ S CONSOLID=$G(X("CONSOLIDATED")) S:CONSOLID="" CONSOLID="NO"
+ S T=$G(X("INSTRUMENT PATH")) S:T="" T="C:"
+ S TEXTDIR=$$SHARNAM^MAGOSMSC(T)
+ S T=$G(X("IMAGE INPUT PATH")) S:T="" T="C:"
+ S IMAGEDIR=$$SHARNAM^MAGOSMSC(T)
+ S FREESPAC=+$G(X("FREE DISK SPACE")) S:'FREESPAC FREESPAC=15
+ S T=$G(X("DICT PATH")) S:T="" T="C:"
+ S DICTDIR=$$SHARNAM^MAGOSMSC(T)
+ S MACHID=$G(X("MACHINE ID"))
+ S ROUTER=$G(X("ROUTING PROCESSOR")) S:ROUTER="" ROUTER="NO"
+ S EVALUATE=$G(X("ROUTING RULES")) S:EVALUATE="" EVALUATE="NO"
+ S CHANNEL=$O(X("DATA PATH"," "),-1) S:'CHANNEL CHANNEL=2
+ S IMAGGATE=$G(X("IMAGE GATEWAY")) S:IMAGGATE="" IMAGGATE="NO"
+ S TEXTGATE=$G(X("TEXT GATEWAY")) S:TEXTGATE="" TEXTGATE="NO"
+ S IMGSVC=$G(X("TEXT GATEWAY SERVICE"))
+ S MODCPT=$G(X("SEND CPT MODIFIERS")) S:MODCPT="" MODCPT="NO"
+ S SENDPACS=$G(X("SEND PACS TEXT"))
+ S EXAMCOMP=$G(X("PACS EXAM COMPLETE")) S:EXAMCOMP="" EXAMCOMP="NO"
+ S COMMPACS=$G(X("COMMERCIAL PACS"))
+ S WORKLIST=$G(X("MODALITY WORKLIST"))
+ S DELAYCMV=+$G(X("EMED_C_MOVE_DELAY"))
+ ; Note: PORTCSTO and PORTWLST must be manually edited in ^MAG(2006.563)
+ S PORTCSTO=+$G(X("CSTORE CONTROL PORT")) S:'PORTCSTO PORTCSTO=60000
+ S PORTWLST=+$G(X("WORKLIST PORT")) S:'PORTWLST PORTWLST=60010
+ S SSNDASH=$G(X("SSN DASHES FOR PACS")) S:SSNDASH="" SSNDASH="YES"
+ S HISIPADR=$G(X("M-to-M BROKER ADDR"))
+ S HISPORT=$G(X("M-to-M BROKER PORT"))
+ S BGACC=$G(X("M-to-M BROKER BGND ACCESS"))
+ S BGVER=$G(X("M-to-M BROKER BGND VERIFY"))
+ S BGCHK=BGACC_";"_BGVER
+ S MAILGRP=$G(X("MAILGROUP"))
+ S POSTOFF=$G(X("POST OFFICE"))
+ S POSTPORT=$G(X("POST PORT")) S:'POSTPORT POSTPORT=25
+ S IMPORTER=$G(X("IMPORTER")) S:IMPORTER="" IMPORTER="NO"
+ S CMOVEAET=$G(X("MOVE DESTINATION AE TITLE")) S:CMOVEAET="" CMOVEAET="VISTA_STORAGE"
+ S SHOWPID=$G(X("SHOW PATIENT NAME & ID")) S:SHOWPID="" SHOWPID="NO"
+ S D1=0 F  S D1=$O(X("WORKLIST PORT",1,D1)) Q:D1=""  D
+ . S X=$G(X("WORKLIST PORT",D1,0)) S:X MODWLST(+X)=""
+ . Q
+ S MODWLST=0,D1="" F  S D1=$O(MODWLST(D1)) Q:D1=""  S MODWLST=MODWLST+1
+ S:'MODWLST MODWLST=1,MODWLST(60010)=""
+ S DTIME=$G(DTIME,1E5)
+ S AGENCY=$G(X("AGENCY")) S:AGENCY="" AGENCY="V"
+ S ISSUER=$G(X("ISSUER OF PATIENT ID"))
+ Q
+ ;
+AFTER ; Store new values
+ ;
+ ; initialize site specific parameters
+ N I,L,OLDLOC,OLDNAM,RPCERR,X,Y
+ S OLDNAM=$G(^MAGDICOM(2006.563,1,"SYSTEM TITLE"))
+ S OLDLOC=$G(^MAGDICOM(2006.563,1,"LOCATION"))
+ S M2MOK=+$G(M2MOK)
+ S:DOMAIN'="" X("DOMAIN")=DOMAIN
+ W:DOMAIN="" !,"Could not identify site's domain."
+ S DICTDIR=$$LET2UNC^MAGOSMSC(DICTDIR)
+ S IMAGEDIR=$$LET2UNC^MAGOSMSC(IMAGEDIR)
+ S TEXTDIR=$$LET2UNC^MAGOSMSC(TEXTDIR)
+ S X("SYSTEM TITLE")=SYSTITLE
+ S X("CONSOLIDATED")=$$YN^MAGDMFB1(CONSOLID)
+ S X("LOCATION")=LOCATION
+ S I="" F  S I=$O(VALLOC(I)) Q:I=""  D
+ . S Y=VALLOC(I) Q:Y'["^"  Q:'Y  Q:+Y'=LOCATION
+ . S X("LOCATION NAME")=$P(Y,"^",2)
+ . S Y=$P(Y,"^",3) ; station number
+ . S X("LOCATION STATION NUMBER")=Y
+ . I LOCATION'=Y S X("LOCATION NAME")=X("LOCATION NAME")_" ("_Y_")"
+ . Q
+ F I=1:1:CHANNEL D  ; create the paths for each channel
+ . S X("DATA PATH",I,0)=TEXTDIR_"\DICOM\DATA"_I
+ . Q
+ S X("DATA PATH",0)="^2006.5631^"_CHANNEL_"^"_CHANNEL
+ S X("DICT PATH")=DICTDIR_"\DICOM\DICT" ; dictionary
+ S X("IMAGE INPUT PATH")=IMAGEDIR_"\DICOM\IMAGE_IN"
+ S X("IMAGE OUTPUT PATH")=IMAGEDIR_"\DICOM\IMAGE_OUT"
+ S X("INSTRUMENT PATH")=TEXTDIR_"\DICOM\INSTRUMENT"
+ S X("FREE DISK SPACE")=FREESPAC
+ S X("MACHINE ID")=MACHID
+ S X("ROUTING PROCESSOR")=$$YN^MAGDMFB1(ROUTER)
+ S X("ROUTING RULES")=$$YN^MAGDMFB1(EVALUATE)
+ S X("TEXT GATEWAY")=$$YN^MAGDMFB1(TEXTGATE)
+ S X("TEXT GATEWAY SERVICE")=IMGSVC
+ S X("IMAGE GATEWAY")=$$YN^MAGDMFB1(IMAGGATE)
+ S X("SEND CPT MODIFIERS")=$$YN^MAGDMFB1(MODCPT)
+ S X("SEND PACS TEXT")=$$YN^MAGDMFB1(SENDPACS)
+ S X("PACS EXAM COMPLETE")=$$YN^MAGDMFB1(EXAMCOMP)
+ S X("COMMERCIAL PACS")=COMMPACS
+ S X("MODALITY WORKLIST")=$$YN^MAGDMFB1(WORKLIST)
+ S X("EMED_C_MOVE_DELAY")=DELAYCMV
+ S X("CSTORE CONTROL PORT")=PORTCSTO
+ S X("WORKLIST PORT")=PORTWLST
+ S X("MOVE DESTINATION AE TITLE")=CMOVEAET
+ S X("VERSION")="VA DICOM V3.0"
+ S:UIDROOT'="" X("UID ROOT")=UIDROOT
+ W:UIDROOT="" !,"Could not update DICOM UID root."
+ S X("SSN DASHES FOR PACS")=SSNDASH
+ S X("M-to-M BROKER ADDR")=HISIPADR
+ S X("M-to-M BROKER PORT")=HISPORT
+ S X("M-to-M BROKER BGND ACCESS")=BGACC
+ S X("M-to-M BROKER BGND VERIFY")=BGVER
+ S X("POST OFFICE")=POSTOFF
+ S X("POST PORT")=POSTPORT
+ S X("IMPORTER")=IMPORTER
+ S X("AGENCY")=AGENCY
+ S X("ISSUER OF PATIENT ID")=ISSUER
+ S:MAILGRP'="" X("MAILGROUP")=MAILGRP
+ S X("SHOW PATIENT NAME & ID")=SHOWPID
+ S MODWLST=0,I="" F  S I=$O(MODWLST(I)) Q:I=""  S MODWLST=MODWLST+1
+ S:'MODWLST MODWLST=1,MODWLST(60010)=""
+ S D1=0,I="" F  S I=$O(MODWLST(I)) Q:I=""  S D1=D1+1,X("WORKLIST PORT",D1,0)=I
+ S X("WORKLIST PORT",0)="^2006.5632^"_D1_"^"_D1
+ F I="MESSAGE LOG","ASCII DICOM TEXT" D
+ . S X(I)=$G(^MAGDICOM(2006.563,1,I)) S:X(I)="" X(I)="YES"
+ . Q
+ S I="" F  S I=$O(X(I)) Q:I=""  K ^MAGDICOM(2006.563,1,I)
+ M ^MAGDICOM(2006.563,1)=X
+ S X=$$NOW^XLFDT()
+ S ^MAGDICOM(2006.563,1,"CONFIG DATE/TIME")=X
+ S:BGACC_";"_BGVER'=BGCHK ^MAGDICOM(2006.563,1,"M-to-M BROKER BGND STATUS")="0^"_X
+ ;
+ S ^MAGDICOM(2006.563,0)="DICOM GATEWAY PARAMETER^2006.563^1^1"
+ K:MAILGRP="" ^MAGDICOM(2006.563,1,"MAILGROUP")
+ I M2MOK,(OLDLOC'=LOCATION)!(OLDNAM'=SYSTITLE) D
+ . S RPCERR=$$CALLRPC^MAGM2VCU("MAG DICOM UPDATE GATEWAY NAME","M",.INFO,OLDNAM,SYSTITLE,OLDLOC,LOCATION)
+ . I RPCERR<0 W !,"Name/Location Update on VistA failed.",!,INFO
+ . Q
+ W !
+ ;
+ D QUEUE^MAGDMFCC
+ ;
+ ; Tell VistA that there is a PACS
+ S D0=$$GETPLACE^MAGDMFB()
+ I D0<0 D ERRMSG
+ E  D
+ . N RPCERR
+ . S RPCERR=$$CALLRPC^MAGM2VCU("MAG DICOM SET PACS PARAMS","M",.INFO,D0)
+ . I RPCERR<0 D ERRMSG
+ . Q
+ Q
+ ;
+ERRMSG ; display error message
+ W !,"PACS Parameter Update on VistA failed.",!
+ Q
+ ;
+DISPLAY ; display site parameters
+ N DATATYPE,IND,N,PARAM,SUB,X
+ S IND=30,N=0
+ S PARAM="" F  S PARAM=$O(^MAGDICOM(2006.563,1,PARAM)) Q:PARAM=""  D
+ . I PARAM="PROFILE" Q  ; Don't display VistA logon parameters
+ . S DATATYPE=$D(^MAGDICOM(2006.563,1,PARAM))
+ . I DATATYPE=1 D  ; Scalar value
+ . . S X=^MAGDICOM(2006.563,1,PARAM)
+ . . D DSP(PARAM,X)
+ . . Q
+ . E  I DATATYPE=10 D  ; Array value
+ . . S SUB=0 F  S SUB=$O(^MAGDICOM(2006.563,1,PARAM,SUB)) Q:SUB=""  D
+ . . . D DSP(PARAM_" / "_SUB,^MAGDICOM(2006.563,1,PARAM,SUB,0))
+ . . . Q
+ . . Q
+ . Q
+ Q
+ ;
+DSP(P,X) ; display the value of one site parameter
+ S N=N+1 D:N>15
+ . N T
+ . W !!,"Press <Enter> to continue: " R T:$G(DTIME,300)
+ . S N=1
+ . Q
+ W:N=1 !!?IND-16,"Gateway Configuration Parameters"
+ W:N=1 !?IND-16,"--------------------------------",!
+ W !,$J(P,IND)," = ",X
+ I P="LOCATION" D
+ . W " - ",$G(^MAGDICOM(2006.563,1,"LOCATION NAME"))
+ . S PARAM="LOCATION NAME"
+ . Q
+ Q
+ ;

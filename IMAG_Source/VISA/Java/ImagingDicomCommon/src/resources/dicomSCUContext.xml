@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<!--- ========================= APPLICATION CONTEXT DEFINITIONS =====================-->
+<beans>
+  <bean id="DicomPart10File" class="gov.va.med.imaging.dicom.dcftoolkit.common.impl.DicomPart10FileImpl" singleton="false">
+  </bean>
+
+  <bean id="StoreSCUControl" class="gov.va.med.imaging.dicom.scu.storagescu.impl.StoreSCUControlImpl" singleton="false">
+    <property name="storeSCU">
+      <ref bean="DicomStoreSCU"/>
+    </property>
+  </bean>
+
+  <bean id="DicomStoreSCU" class="gov.va.med.imaging.dicom.dcftoolkit.scu.storagescu.impl.DicomStoreSCUImpl" singleton="false">
+  </bean>
+
+  <!-- ====================== BUSINESS OBJECT DEFINITIONS ========================= -->
+
+</beans>
+

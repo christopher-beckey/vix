@@ -1,0 +1,366 @@
+KIDS Distribution saved on Jul 17, 2007@09:56:07
+Package for RPC named MAG DICOM QUEUE IMAGE
+**KIDS**:MAG*3.0*183^
+
+**INSTALL NAME**
+MAG*3.0*183
+"BLD",5995,0)
+MAG*3.0*183^^0^3070717^y
+"BLD",5995,1,0)
+^^5^5^3070717^
+"BLD",5995,1,1,0)
+This package contains a KIDS component
+"BLD",5995,1,2,0)
+for Running Baseline.
+"BLD",5995,1,3,0)
+ 
+"BLD",5995,1,4,0)
+This package transports the remote procedure call named MAG DICOM QUEUE 
+"BLD",5995,1,5,0)
+IMAGE.
+"BLD",5995,4,0)
+^9.64PA^^
+"BLD",5995,6.3)
+1
+"BLD",5995,"KRN",0)
+^9.67PA^8989.52^19
+"BLD",5995,"KRN",.4,0)
+.4
+"BLD",5995,"KRN",.401,0)
+.401
+"BLD",5995,"KRN",.402,0)
+.402
+"BLD",5995,"KRN",.403,0)
+.403
+"BLD",5995,"KRN",.5,0)
+.5
+"BLD",5995,"KRN",.84,0)
+.84
+"BLD",5995,"KRN",3.6,0)
+3.6
+"BLD",5995,"KRN",3.8,0)
+3.8
+"BLD",5995,"KRN",9.2,0)
+9.2
+"BLD",5995,"KRN",9.8,0)
+9.8
+"BLD",5995,"KRN",19,0)
+19
+"BLD",5995,"KRN",19.1,0)
+19.1
+"BLD",5995,"KRN",101,0)
+101
+"BLD",5995,"KRN",409.61,0)
+409.61
+"BLD",5995,"KRN",771,0)
+771
+"BLD",5995,"KRN",870,0)
+870
+"BLD",5995,"KRN",8989.51,0)
+8989.51
+"BLD",5995,"KRN",8989.52,0)
+8989.52
+"BLD",5995,"KRN",8994,0)
+8994
+"BLD",5995,"KRN",8994,"NM",0)
+^9.68A^1^1
+"BLD",5995,"KRN",8994,"NM",1,0)
+MAG DICOM QUEUE IMAGE^^0
+"BLD",5995,"KRN",8994,"NM","B","MAG DICOM QUEUE IMAGE",1)
+
+"BLD",5995,"KRN","B",.4,.4)
+
+"BLD",5995,"KRN","B",.401,.401)
+
+"BLD",5995,"KRN","B",.402,.402)
+
+"BLD",5995,"KRN","B",.403,.403)
+
+"BLD",5995,"KRN","B",.5,.5)
+
+"BLD",5995,"KRN","B",.84,.84)
+
+"BLD",5995,"KRN","B",3.6,3.6)
+
+"BLD",5995,"KRN","B",3.8,3.8)
+
+"BLD",5995,"KRN","B",9.2,9.2)
+
+"BLD",5995,"KRN","B",9.8,9.8)
+
+"BLD",5995,"KRN","B",19,19)
+
+"BLD",5995,"KRN","B",19.1,19.1)
+
+"BLD",5995,"KRN","B",101,101)
+
+"BLD",5995,"KRN","B",409.61,409.61)
+
+"BLD",5995,"KRN","B",771,771)
+
+"BLD",5995,"KRN","B",870,870)
+
+"BLD",5995,"KRN","B",8989.51,8989.51)
+
+"BLD",5995,"KRN","B",8989.52,8989.52)
+
+"BLD",5995,"KRN","B",8994,8994)
+
+"KRN",8994,1748,-1)
+0^1
+"KRN",8994,1748,0)
+MAG DICOM QUEUE IMAGE^QUEUE^MAGDRPC3^1^R^0^0^1^3^0
+"KRN",8994,1748,1,0)
+^8994.01^22^22^3060214^^^
+"KRN",8994,1748,1,1,0)
+ +---------------------------------------------------------------+
+"KRN",8994,1748,1,2,0)
+ | Property of the US Government.                                |
+"KRN",8994,1748,1,3,0)
+ | No permission to copy or redistribute this software is given. |
+"KRN",8994,1748,1,4,0)
+ | Use of unreleased versions of this software requires the user |
+"KRN",8994,1748,1,5,0)
+ | to execute a written test agreement with the VistA Imaging    |
+"KRN",8994,1748,1,6,0)
+ | Development Office of the Department of Veterans Affairs,     |
+"KRN",8994,1748,1,7,0)
+ | telephone (301) 734-0100.                                     |
+"KRN",8994,1748,1,8,0)
+ |                                                               |
+"KRN",8994,1748,1,9,0)
+ | The Food and Drug Administration classifies this software as  |
+"KRN",8994,1748,1,10,0)
+ | a medical device.  As such, it may not be changed in any way. |
+"KRN",8994,1748,1,11,0)
+ | Modifications to this software may result in an adulterated   |
+"KRN",8994,1748,1,12,0)
+ | medical device under 21CFR820, the use of which is considered |
+"KRN",8994,1748,1,13,0)
+ | to be a violation of US Federal Statutes.                     |
+"KRN",8994,1748,1,14,0)
+ +---------------------------------------------------------------+
+"KRN",8994,1748,1,15,0)
+ 
+"KRN",8994,1748,1,16,0)
+This RPC enters a study into the DICOM Transmission queue.
+"KRN",8994,1748,1,17,0)
+In the simplest case, a study contains only one image.
+"KRN",8994,1748,1,18,0)
+More normally, a study consists of several images.
+"KRN",8994,1748,1,19,0)
+For object types 3 (X-RAY) and 100 (DICOM image), a single image is entered
+"KRN",8994,1748,1,20,0)
+into the transmission queue.
+"KRN",8994,1748,1,21,0)
+For object type 11 (X-RAY group) , all images for the study are
+"KRN",8994,1748,1,22,0)
+entered into the transmission queue.
+"KRN",8994,1748,2,0)
+^8994.02A^8^8
+"KRN",8994,1748,2,1,0)
+IMAGE^1^30^1^1
+"KRN",8994,1748,2,1,1,0)
+^8994.021^2^2
+"KRN",8994,1748,2,1,1,1,0)
+The value of this parameter is a pointer to ^MAG(2005).
+"KRN",8994,1748,2,1,1,2,0)
+This pointer identifies the image that is to be transmitted.
+"KRN",8994,1748,2,2,0)
+DESTINAT^1^20^1^2
+"KRN",8994,1748,2,2,1,0)
+^8994.021^3^3
+"KRN",8994,1748,2,2,1,1,0)
+The value of this field is the name of the DICOM SOP Class Provider
+"KRN",8994,1748,2,2,1,2,0)
+to which the images are to be transmitted. This name must
+"KRN",8994,1748,2,2,1,3,0)
+occur in the User Application List file (#2006.585).
+"KRN",8994,1748,2,3,0)
+LOCATION^1^20^1^3
+"KRN",8994,1748,2,3,1,0)
+^8994.021^2^2
+"KRN",8994,1748,2,3,1,1,0)
+The value of this parameter is a pointer to ^DIC(4).
+"KRN",8994,1748,2,3,1,2,0)
+This pointer identifies the location at which images were acquired.
+"KRN",8994,1748,2,4,0)
+ACCESSIO^1^20^0^4
+"KRN",8994,1748,2,4,1,0)
+^8994.021^2^2
+"KRN",8994,1748,2,4,1,1,0)
+The value of this optional parameter is the accession number
+"KRN",8994,1748,2,4,1,2,0)
+for the study.
+"KRN",8994,1748,2,5,0)
+REASON^1^100^0^5
+"KRN",8994,1748,2,5,1,0)
+^8994.021^3^3^3050602^
+"KRN",8994,1748,2,5,1,1,0)
+The value of this optional parameter is a string that represents
+"KRN",8994,1748,2,5,1,2,0)
+the reason for the transmission of the image.
+"KRN",8994,1748,2,5,1,3,0)
+This reason will be stored in ^MAG(2006.95) (IMAGE ACCESS LOG).
+"KRN",8994,1748,2,6,0)
+EMAIL^1^100^0^6
+"KRN",8994,1748,2,6,1,0)
+^8994.021^3^3^3050602^^
+"KRN",8994,1748,2,6,1,1,0)
+The value of this optional parameter is a string that represents
+"KRN",8994,1748,2,6,1,2,0)
+an e-mail address. This e-mail address is used to transmit a
+"KRN",8994,1748,2,6,1,3,0)
+message when there are images that cannot be enqueued.
+"KRN",8994,1748,2,7,0)
+PRIORITY^1^10^0^7
+"KRN",8994,1748,2,7,1,0)
+^8994.021^4^4^3060214^^
+"KRN",8994,1748,2,7,1,1,0)
+The value of this parameter is a positive integer number.
+"KRN",8994,1748,2,7,1,2,0)
+This value indicates the relative priority of an entry in the
+"KRN",8994,1748,2,7,1,3,0)
+transmission queue. A higher number indicates a higher priority.
+"KRN",8994,1748,2,7,1,4,0)
+The default value of this optional parameter is 500.
+"KRN",8994,1748,2,8,0)
+JBTOHD^1^10^0^8
+"KRN",8994,1748,2,8,1,0)
+^^5^5^3060214^
+"KRN",8994,1748,2,8,1,1,0)
+The value of this parameter is a boolean switch that indicates
+"KRN",8994,1748,2,8,1,2,0)
+whether or not a copy of the image file(s) is to be made on
+"KRN",8994,1748,2,8,1,3,0)
+RAID. A true value indicates that a copy on magnetic storage
+"KRN",8994,1748,2,8,1,4,0)
+is to be made, a false value indicates that no such copy is
+"KRN",8994,1748,2,8,1,5,0)
+to be made.
+"KRN",8994,1748,2,"B","ACCESSIO",4)
+
+"KRN",8994,1748,2,"B","DESTINAT",2)
+
+"KRN",8994,1748,2,"B","EMAIL",6)
+
+"KRN",8994,1748,2,"B","IMAGE",1)
+
+"KRN",8994,1748,2,"B","JBTOHD",8)
+
+"KRN",8994,1748,2,"B","LOCATION",3)
+
+"KRN",8994,1748,2,"B","PRIORITY",7)
+
+"KRN",8994,1748,2,"B","REASON",5)
+
+"KRN",8994,1748,2,"PARAMSEQ",1,1)
+
+"KRN",8994,1748,2,"PARAMSEQ",2,2)
+
+"KRN",8994,1748,2,"PARAMSEQ",3,3)
+
+"KRN",8994,1748,2,"PARAMSEQ",4,4)
+
+"KRN",8994,1748,2,"PARAMSEQ",5,5)
+
+"KRN",8994,1748,2,"PARAMSEQ",6,6)
+
+"KRN",8994,1748,2,"PARAMSEQ",7,7)
+
+"KRN",8994,1748,2,"PARAMSEQ",8,8)
+
+"KRN",8994,1748,3,0)
+^8994.03^6^6^3060214^^^
+"KRN",8994,1748,3,1,0)
+The output value of this RPC indicates whether or not the
+"KRN",8994,1748,3,2,0)
+queuing of the image(s) was successful. If successful, the return
+"KRN",8994,1748,3,3,0)
+value is always equal to 1. Possible error messages:
+"KRN",8994,1748,3,4,0)
+  OUT="-1,No Image specified"
+"KRN",8994,1748,3,5,0)
+  OUT="-2,No Destination specified"
+"KRN",8994,1748,3,6,0)
+  OUT="-3,No Origin specified"
+"MBREQ")
+0
+"ORD",16,8994)
+8994;16;1;;;;;;;RPCDEL^XPDIA1
+"ORD",16,8994,0)
+REMOTE PROCEDURE
+"QUES","XPF1",0)
+Y
+"QUES","XPF1","??")
+^D REP^XPDH
+"QUES","XPF1","A")
+Shall I write over your |FLAG| File
+"QUES","XPF1","B")
+YES
+"QUES","XPF1","M")
+D XPF1^XPDIQ
+"QUES","XPF2",0)
+Y
+"QUES","XPF2","??")
+^D DTA^XPDH
+"QUES","XPF2","A")
+Want my data |FLAG| yours
+"QUES","XPF2","B")
+YES
+"QUES","XPF2","M")
+D XPF2^XPDIQ
+"QUES","XPI1",0)
+YO
+"QUES","XPI1","??")
+^D INHIBIT^XPDH
+"QUES","XPI1","A")
+Want KIDS to INHIBIT LOGONs during the install
+"QUES","XPI1","B")
+YES
+"QUES","XPI1","M")
+D XPI1^XPDIQ
+"QUES","XPM1",0)
+PO^VA(200,:EM
+"QUES","XPM1","??")
+^D MG^XPDH
+"QUES","XPM1","A")
+Enter the Coordinator for Mail Group '|FLAG|'
+"QUES","XPM1","B")
+
+"QUES","XPM1","M")
+D XPM1^XPDIQ
+"QUES","XPO1",0)
+Y
+"QUES","XPO1","??")
+^D MENU^XPDH
+"QUES","XPO1","A")
+Want KIDS to Rebuild Menu Trees Upon Completion of Install
+"QUES","XPO1","B")
+YES
+"QUES","XPO1","M")
+D XPO1^XPDIQ
+"QUES","XPZ1",0)
+Y
+"QUES","XPZ1","??")
+^D OPT^XPDH
+"QUES","XPZ1","A")
+Want to DISABLE Scheduled Options, Menu Options, and Protocols
+"QUES","XPZ1","B")
+YES
+"QUES","XPZ1","M")
+D XPZ1^XPDIQ
+"QUES","XPZ2",0)
+Y
+"QUES","XPZ2","??")
+^D RTN^XPDH
+"QUES","XPZ2","A")
+Want to MOVE routines to other CPUs
+"QUES","XPZ2","B")
+NO
+"QUES","XPZ2","M")
+D XPZ2^XPDIQ
+"VER")
+8.0^22.0
+**END**
+**END**

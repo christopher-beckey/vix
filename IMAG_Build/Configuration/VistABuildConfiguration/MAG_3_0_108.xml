@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<build xmlns="http://va.gov/VistA/kids/manifest" name="MAG*3.0*108" patchName="Import API Patch for Surgery, VIC" patch="108">
+  <components>
+    <securityKeys />
+    <parameterDefinitions />
+    <printTemplates />
+    <sortTemplates />
+    <menuOptions />
+    <rpcs>
+      <rpc export="RPC_1_MAG4 INDEX GET ORIGIN.KID" />
+      <rpc export="RPC_2_MAGN PATIENT HAS PHOTO.KID" />
+      <rpc export="RPC_3_MAG4 INDEX GET EVENT.KID" />
+      <rpc export="RPC_4_MAG4 INDEX GET SPECIALTY.KID" />
+      <rpc export="RPC_5_MAG4 INDEX GET TYPE.KID" />
+    </rpcs>
+    <dataDictionaries />
+    <hl7s />
+    <routines>
+      <routine export="MAGGNTI.RTN" />
+      <routine export="MAGGSIU1.RTN" />
+      <routine export="MAGGSIU2.RTN" />
+      <routine export="MAGGSIUI.RTN" />
+      <routine export="MAGGSIV.RTN" />
+      <routine export="MAGIP108.RTN" />
+      <routine export="MAGNVIC.RTN" />
+      <routine export="MAGSIXGT.RTN" />
+    </routines>
+    <protocols />
+  </components>
+</build>

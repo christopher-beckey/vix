@@ -1,0 +1,30 @@
+[INFO] Scanning for projects...
+[INFO] ------------------------------------------------------------------------
+[INFO] Building MuseDataSourceProvider
+[INFO]    task-segment: [clean, install]
+[INFO] ------------------------------------------------------------------------
+[INFO] [clean:clean {execution: default-clean}]
+[INFO] Deleting directory D:\usr\vitelnet\eclipse197\MuseDataSourceProvider\target
+[INFO] [resources:resources {execution: default-resources}]
+[WARNING] Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+[INFO] Copying 1 resource
+[INFO] [compiler:compile {execution: default-compile}]
+[INFO] Compiling 30 source files to D:\usr\vitelnet\eclipse197\MuseDataSourceProvider\target\classes
+[INFO] [resources:testResources {execution: default-testResources}]
+[WARNING] Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+[INFO] skip non existing resourceDirectory D:\usr\vitelnet\eclipse197\MuseDataSourceProvider\main\test\resources
+[INFO] [compiler:testCompile {execution: default-testCompile}]
+[INFO] No sources to compile
+[INFO] [surefire:test {execution: default-test}]
+[INFO] No tests to run.
+[INFO] [jar:jar {execution: default-jar}]
+[INFO] Building jar: D:\usr\vitelnet\eclipse197\MuseDataSourceProvider\target\MuseDataSourceProvider-0.1.jar
+[INFO] [install:install {execution: default-install}]
+[INFO] Installing D:\usr\vitelnet\eclipse197\MuseDataSourceProvider\target\MuseDataSourceProvider-0.1.jar to C:\Users\Administrator\.m2\repository\Imaging\MuseDataSourceProvider\0.1\MuseDataSourceProvider-0.1.jar
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESSFUL
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time: 7 seconds
+[INFO] Finished at: Mon Jan 08 16:16:23 EST 2018
+[INFO] Final Memory: 43M/339M
+[INFO] ------------------------------------------------------------------------

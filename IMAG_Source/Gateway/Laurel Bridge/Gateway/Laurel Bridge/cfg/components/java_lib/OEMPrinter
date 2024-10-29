@@ -1,0 +1,55 @@
+#==============================================================================
+# static information common to all instances of OEMPrinter component
+#==============================================================================
+[ component_info ]
+name = OEMPrinter
+type = java_lib
+category = application_support_libs
+description = OEM Printer - reference implementation of OEM java printer code
+package_prefix = com.lbs
+slnreldir = .\jsrc\com\lbs\OEMPrinter
+
+[ required_components ]
+component = idl_lib/DDPS
+component = java_lib/DPS
+[ debug_controls ]
+debug_flag = df_SHOW_CONSTRUCTORS, 0x0001, show object constructors
+debug_flag = df_SHOW_DESTRUCTORS, 0x0002, show object destructors
+debug_flag = df_SHOW_GENERAL_FLOW, 0x0004, show general flow
+debug_flag = df_SIMULATE_HARDWARE, 0x0008, simulate external devices
+debug_flag = df_SHOW_CFG_INFO, 0x0010, show configuration information
+debug_flag = df_SHOW_EXC_THROW, 0x0020, show exceptions before throwing
+debug_flag = df_DEBUG_QUEUE,     0x10000, trace queue operations
+debug_flag = df_SAVE_IMAGE_FILES,0x20000, do not delete image files - default is to delete them
+debug_flag = df_DUMP_JOB_DATA,   0x40000, display contents of print jobs
+debug_flag = df_FORCE_PRINTER_FAILURE,   0x80000, set the printer status to FAILURE after each job (for testing)
+debug_flag = df_FORCE_PRINTER_WARNING,   0x100000, set the printer status to WARNING after each job (for testing)
+debug_flag = df_NO_PENDING_NOTIFICATIONS, 0x200000, do not send status updates for QUEUED or PRINTING
+
+
+#==============================================================================
+# per-instance information for the OEMPrinter component
+#==============================================================================
+[ OEMPrinter ]
+debug_flags = 0x00000
+printer_script = 
+printjob_script = 
+printer_name = DCF Test Printer
+manufacturer = Laurel Bridge Software
+manufacturer_model_name = DCF_OEMPrinter_Simulator 
+device_serial_number = 1.2.3.4
+software_version = 3.3.22c
+date_of_last_calibration = 20000101
+time_of_last_calibration = 162841
+# Set device_behavior:
+# Sleep - Device will sleep for job_simulate_sleep_secs and then exit
+# Route - Device will forward jobs to
+#	route_host:route_port:route_called_aetitle
+# Web - Device will Create html/jpeg files that represent printer
+#	output in $DCF_HTTPD_ROOT/html/print_jobs
+#	so going to host://print_jobs will show the pages.
+device_behavior = Sleep
+job_simulate_sleep_secs = 1
+route_host = localhost
+route_port = 4000
+route_called_aetitle = PrintSCP1

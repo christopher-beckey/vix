@@ -1,0 +1,69 @@
+05/08/2000  08:54 AM
+Saved from DCM,DCE (MSM)
+MAGDCMCV
+MAGDCMCV ;WOIFO/EdM - Convert ^DICOM to ^MAGDICOM ; [ 05/08/2000  08:54 AM ]
+ ;;2.5T;DICOM42;;1-Nov-2000
+ ;
+ N D,D0,P,T,X
+ ;
+ K ^MAGDICOM(2006.563)
+ K ^MAGDICOM(2006.564)
+ K ^MAGDICOM(2006.57)
+ ;
+ M ^MAGDICOM(2006.563,1)=^DICOM("SITE PARM")
+ S ^MAGDICOM(2006.563,0)="DICOM GATEWAY PARAMETER^2006.563^1^1"
+ K ^DICOM("SITE PARM")
+ ;
+ ; Renamed parameter
+ S X=$G(^MAGDICOM(2006.563,1,"PACS IMAGES"))
+ S:X'="" ^MAGDICOM(2006.563,1,"PACS EXAM COMPLETE")=X
+ K ^MAGDICOM(2006.563,1,"PACS IMAGES")
+ ;
+ D  ; Normalize Yes/No Parameters
+ . N YN
+ . S YN("ASCII DICOM TEXT")=""
+ . S YN("ROUTING RULES")=""
+ . S YN("TEXT GATEWAY")=""
+ . S YN("SEND PACS TEXT")=""
+ . S YN("PACS EXAM COMPLETE")=""
+ . S YN("MODALITY WORKLIST")=""
+ . S YN("MESSAGE LOG")=""
+ . S YN="" F  S YN=$O(YN(YN)) Q:YN=""  D
+ . . S ^MAGDICOM(2006.563,1,YN)=$$YN^MAGDMFB1($G(^MAGDICOM(2006.563,1,YN)))
+ . . Q
+ . Q
+ ;
+ D  ; Modality Path is renamed to Instrument Path
+ . N X
+ . S X=$G(^DICOM("MODALITY PATH"))
+ . S:X'="" ^MAGDICOM(2006.563,1,"INSTRUMENT PATH")=X
+ . Q
+ ;
+ S ^MAGDICOM(2006.563,1,"HL7_PTR")=^DICOM("AHL7_PTR")
+ K ^DICOM("AHL7_PTR")
+ ;
+ M ^MAGDICOM(2006.57)=^DICOM("HL7")
+ K ^DICOM("HL7")
+ ;
+ ; ^DICOM("LOCATION MAP",... -->  is no longer used ???
+ ; ^DICOM(queueout)          -->  is only used for LOCKing
+ ;
+ K ^DICOM("LOCATION MAP")
+ ;
+ S D0=0
+ F D="INCOMING","OUTGOING" D
+ . F T="REQUEST","RESPONSE" D
+ . . F P="LOW","MEDIUM","HIGH","IMMEDIATE" D
+ . . . S D0=D0+1,X=^DICOM("AQUEUE",D,T,P)
+ . . . S $P(X,"^",4,6)=D_"^"_T_"^"_P
+ . . . S ^MAGDICOM(2006.564,D0,0)=X
+ . . . S ^MAGDICOM(2006.564,"X",D,T,P)=D0
+ . . . Q
+ . . Q
+ . Q
+ K ^DICOM("AQUEUE")
+ ;
+ Q
+ ;
+
+

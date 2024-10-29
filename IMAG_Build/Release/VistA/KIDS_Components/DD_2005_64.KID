@@ -1,0 +1,1224 @@
+KIDS Distribution saved on Aug 02, 2013@12:43:04
+Extract from GOLD
+**KIDS**:MAG*3.0*118*DD*2005.64^
+
+**INSTALL NAME**
+MAG*3.0*118*DD*2005.64
+"BLD",8021,0)
+MAG*3.0*118*DD*2005.64^IMAGING^0^3130802^y
+"BLD",8021,4,0)
+^9.64PA^2005.64^1
+"BLD",8021,4,2005.64,0)
+2005.64
+"BLD",8021,4,2005.64,222)
+y^y^f^^^^n
+"BLD",8021,4,"B",2005.64,2005.64)
+
+"BLD",8021,6.3)
+1
+"BLD",8021,"KRN",0)
+^9.67PA^779.2^20
+"BLD",8021,"KRN",.4,0)
+.4
+"BLD",8021,"KRN",.401,0)
+.401
+"BLD",8021,"KRN",.402,0)
+.402
+"BLD",8021,"KRN",.403,0)
+.403
+"BLD",8021,"KRN",.5,0)
+.5
+"BLD",8021,"KRN",.84,0)
+.84
+"BLD",8021,"KRN",3.6,0)
+3.6
+"BLD",8021,"KRN",3.8,0)
+3.8
+"BLD",8021,"KRN",9.2,0)
+9.2
+"BLD",8021,"KRN",9.8,0)
+9.8
+"BLD",8021,"KRN",19,0)
+19
+"BLD",8021,"KRN",19.1,0)
+19.1
+"BLD",8021,"KRN",101,0)
+101
+"BLD",8021,"KRN",409.61,0)
+409.61
+"BLD",8021,"KRN",771,0)
+771
+"BLD",8021,"KRN",779.2,0)
+779.2
+"BLD",8021,"KRN",870,0)
+870
+"BLD",8021,"KRN",8989.51,0)
+8989.51
+"BLD",8021,"KRN",8989.52,0)
+8989.52
+"BLD",8021,"KRN",8994,0)
+8994
+"BLD",8021,"KRN","B",.4,.4)
+
+"BLD",8021,"KRN","B",.401,.401)
+
+"BLD",8021,"KRN","B",.402,.402)
+
+"BLD",8021,"KRN","B",.403,.403)
+
+"BLD",8021,"KRN","B",.5,.5)
+
+"BLD",8021,"KRN","B",.84,.84)
+
+"BLD",8021,"KRN","B",3.6,3.6)
+
+"BLD",8021,"KRN","B",3.8,3.8)
+
+"BLD",8021,"KRN","B",9.2,9.2)
+
+"BLD",8021,"KRN","B",9.8,9.8)
+
+"BLD",8021,"KRN","B",19,19)
+
+"BLD",8021,"KRN","B",19.1,19.1)
+
+"BLD",8021,"KRN","B",101,101)
+
+"BLD",8021,"KRN","B",409.61,409.61)
+
+"BLD",8021,"KRN","B",771,771)
+
+"BLD",8021,"KRN","B",779.2,779.2)
+
+"BLD",8021,"KRN","B",870,870)
+
+"BLD",8021,"KRN","B",8989.51,8989.51)
+
+"BLD",8021,"KRN","B",8989.52,8989.52)
+
+"BLD",8021,"KRN","B",8994,8994)
+
+"FIA",2005.64)
+IMAGE SOP INSTANCE
+"FIA",2005.64,0)
+^MAGV(2005.64,
+"FIA",2005.64,0,0)
+2005.64
+"FIA",2005.64,0,1)
+y^y^f^^^^n
+"FIA",2005.64,0,10)
+
+"FIA",2005.64,0,11)
+
+"FIA",2005.64,0,"RLRO")
+
+"FIA",2005.64,0,"VR")
+3.0^MAG
+"FIA",2005.64,2005.64)
+0
+"MBREQ")
+0
+"PKG",454,-1)
+1^1
+"PKG",454,0)
+IMAGING^MAG^Imaging-V1 to release 
+"PKG",454,20,0)
+^9.402P^^
+"PKG",454,22,0)
+^9.49I^1^1
+"PKG",454,22,1,0)
+3.0^3020319^3020517^126
+"PKG",454,22,1,"PAH",1,0)
+118^3130802^1214
+"PKG",454,22,1,"PAH",1,1,0)
+^^122^122^3130729
+"PKG",454,22,1,"PAH",1,1,1,0)
+Routines for Patch 118, Test Build 35.
+"PKG",454,22,1,"PAH",1,1,2,0)
+ 
+"PKG",454,22,1,"PAH",1,1,3,0)
+Routines:
+"PKG",454,22,1,"PAH",1,1,4,0)
+MAGDCCS     value = 14748319
+"PKG",454,22,1,"PAH",1,1,5,0)
+MAGDGMRC    value = 9330669
+"PKG",454,22,1,"PAH",1,1,6,0)
+MAGDLB1     value = 12761979
+"PKG",454,22,1,"PAH",1,1,7,0)
+MAGDLB6     value = 3631343
+"PKG",454,22,1,"PAH",1,1,8,0)
+MAGDMEDJ    value = 10380972
+"PKG",454,22,1,"PAH",1,1,9,0)
+MAGDQR00    value = 2610540
+"PKG",454,22,1,"PAH",1,1,10,0)
+MAGDQR01    value = 10215111
+"PKG",454,22,1,"PAH",1,1,11,0)
+MAGDQR02    value = 14623747
+"PKG",454,22,1,"PAH",1,1,12,0)
+MAGDQR03    value = 26241944
+"PKG",454,22,1,"PAH",1,1,13,0)
+MAGDQR04    value = 22474528
+"PKG",454,22,1,"PAH",1,1,14,0)
+MAGDQR05    value = 12458785
+"PKG",454,22,1,"PAH",1,1,15,0)
+MAGDQR06    value = 12808429
+"PKG",454,22,1,"PAH",1,1,16,0)
+MAGDQR07    value = 3462324
+"PKG",454,22,1,"PAH",1,1,17,0)
+MAGDQR08    value = 11135227
+"PKG",454,22,1,"PAH",1,1,18,0)
+MAGDQR09    value = 9701238
+"PKG",454,22,1,"PAH",1,1,19,0)
+MAGDQR10    value = 5838068
+"PKG",454,22,1,"PAH",1,1,20,0)
+MAGDQR11    value = 4093753
+"PKG",454,22,1,"PAH",1,1,21,0)
+MAGDQR12    value = 6766715
+"PKG",454,22,1,"PAH",1,1,22,0)
+MAGDQR13    value = 10738725
+"PKG",454,22,1,"PAH",1,1,23,0)
+MAGDQR22    value = 5932725
+"PKG",454,22,1,"PAH",1,1,24,0)
+MAGDQR23    value = 3787648
+"PKG",454,22,1,"PAH",1,1,25,0)
+MAGDQR31    value = 5530671
+"PKG",454,22,1,"PAH",1,1,26,0)
+MAGDQR32    value = 4894421
+"PKG",454,22,1,"PAH",1,1,27,0)
+MAGDQR71    value = 3683372
+"PKG",454,22,1,"PAH",1,1,28,0)
+MAGDQR72    value = 4232194
+"PKG",454,22,1,"PAH",1,1,29,0)
+MAGDQR73    value = 4336726
+"PKG",454,22,1,"PAH",1,1,30,0)
+MAGDQR74    value = 4916336
+"PKG",454,22,1,"PAH",1,1,31,0)
+MAGDQRUE    value = 3231286
+"PKG",454,22,1,"PAH",1,1,32,0)
+MAGDQRUL    value = 5075915
+"PKG",454,22,1,"PAH",1,1,33,0)
+MAGDRPC8    value = 12088901
+"PKG",454,22,1,"PAH",1,1,34,0)
+MAGDRPC9    value = 15300257
+"PKG",454,22,1,"PAH",1,1,35,0)
+MAGDRPCA    value = 18858560
+"PKG",454,22,1,"PAH",1,1,36,0)
+MAGDRPCB    value = 19610086
+"PKG",454,22,1,"PAH",1,1,37,0)
+MAGFXQRS    value = 3528617
+"PKG",454,22,1,"PAH",1,1,38,0)
+MAGGTID     value = 15318885
+"PKG",454,22,1,"PAH",1,1,39,0)
+MAGIP118    value = 16658406
+"PKG",454,22,1,"PAH",1,1,40,0)
+MAGJUTL6    value = 5235694
+"PKG",454,22,1,"PAH",1,1,41,0)
+MAGKIDS1    value = 8496976
+"PKG",454,22,1,"PAH",1,1,42,0)
+MAGUAUD     value = 3432831
+"PKG",454,22,1,"PAH",1,1,43,0)
+MAGUE001    value = 5265937
+"PKG",454,22,1,"PAH",1,1,44,0)
+MAGUE002    value = 4127699
+"PKG",454,22,1,"PAH",1,1,45,0)
+MAGUE004    value = 2837439
+"PKG",454,22,1,"PAH",1,1,46,0)
+MAGUE005    value = 2768991
+"PKG",454,22,1,"PAH",1,1,47,0)
+MAGUFFLA    value = 4780171
+"PKG",454,22,1,"PAH",1,1,48,0)
+MAGUFFLL    value = 3976859
+"PKG",454,22,1,"PAH",1,1,49,0)
+MAGUPSE     value = 3173130
+"PKG",454,22,1,"PAH",1,1,50,0)
+MAGURQRS    value = 3271458
+"PKG",454,22,1,"PAH",1,1,51,0)
+MAGVAC01    value = 9767703
+"PKG",454,22,1,"PAH",1,1,52,0)
+MAGVAD01    value = 2734865
+"PKG",454,22,1,"PAH",1,1,53,0)
+MAGVAD02    value = 4280272
+"PKG",454,22,1,"PAH",1,1,54,0)
+MAGVAF01    value = 13045577
+"PKG",454,22,1,"PAH",1,1,55,0)
+MAGVAF02    value = 3488127
+"PKG",454,22,1,"PAH",1,1,56,0)
+MAGVAF03    value = 19053073
+"PKG",454,22,1,"PAH",1,1,57,0)
+MAGVAF04    value = 2921702
+"PKG",454,22,1,"PAH",1,1,58,0)
+MAGVAF05    value = 4899077
+"PKG",454,22,1,"PAH",1,1,59,0)
+MAGVAG01    value = 2797051
+"PKG",454,22,1,"PAH",1,1,60,0)
+MAGVAG02    value = 12435913
+"PKG",454,22,1,"PAH",1,1,61,0)
+MAGVAG03    value = 15139645
+"PKG",454,22,1,"PAH",1,1,62,0)
+MAGVAG04    value = 14868843
+"PKG",454,22,1,"PAH",1,1,63,0)
+MAGVAKL1    value = 7388351
+"PKG",454,22,1,"PAH",1,1,64,0)
+MAGVAQ01    value = 16822050
+"PKG",454,22,1,"PAH",1,1,65,0)
+MAGVAQ02    value = 10394360
+"PKG",454,22,1,"PAH",1,1,66,0)
+MAGVAU01    value = 5159205
+"PKG",454,22,1,"PAH",1,1,67,0)
+MAGVD001    value = 7603789
+"PKG",454,22,1,"PAH",1,1,68,0)
+MAGVD002    value = 4124064
+"PKG",454,22,1,"PAH",1,1,69,0)
+MAGVD003    value = 4420661
+"PKG",454,22,1,"PAH",1,1,70,0)
+MAGVD004    value = 4488582
+"PKG",454,22,1,"PAH",1,1,71,0)
+MAGVD005    value = 3174483
+"PKG",454,22,1,"PAH",1,1,72,0)
+MAGVD006    value = 5561142
+"PKG",454,22,1,"PAH",1,1,73,0)
+MAGVD007    value = 3685164
+"PKG",454,22,1,"PAH",1,1,74,0)
+MAGVD008    value = 3954473
+"PKG",454,22,1,"PAH",1,1,75,0)
+MAGVD010    value = 5632336
+"PKG",454,22,1,"PAH",1,1,76,0)
+MAGVDATE    value = 3369336
+"PKG",454,22,1,"PAH",1,1,77,0)
+MAGVDGWP    value = 17603694
+"PKG",454,22,1,"PAH",1,1,78,0)
+MAGVGUID    value = 9565266
+"PKG",454,22,1,"PAH",1,1,79,0)
+MAGVIM01    value = 30059037
+"PKG",454,22,1,"PAH",1,1,80,0)
+MAGVIM02    value = 13662782
+"PKG",454,22,1,"PAH",1,1,81,0)
+MAGVIM03    value = 9162433
+"PKG",454,22,1,"PAH",1,1,82,0)
+MAGVIM04    value = 11718870
+"PKG",454,22,1,"PAH",1,1,83,0)
+MAGVIM05    value = 15242382
+"PKG",454,22,1,"PAH",1,1,84,0)
+MAGVIM06    value = 12862098
+"PKG",454,22,1,"PAH",1,1,85,0)
+MAGVIM07    value = 15335247
+"PKG",454,22,1,"PAH",1,1,86,0)
+MAGVIM08    value = 4973894
+"PKG",454,22,1,"PAH",1,1,87,0)
+MAGVIM09    value = 5293910
+"PKG",454,22,1,"PAH",1,1,88,0)
+MAGVIM10    value = 8365751
+"PKG",454,22,1,"PAH",1,1,89,0)
+MAGVORDR    value = 7090722
+"PKG",454,22,1,"PAH",1,1,90,0)
+MAGVRS01    value = 2771259
+"PKG",454,22,1,"PAH",1,1,91,0)
+MAGVRS04    value = 2988202
+"PKG",454,22,1,"PAH",1,1,92,0)
+MAGVRS05    value = 2843603
+"PKG",454,22,1,"PAH",1,1,93,0)
+MAGVRS06    value = 2963783
+"PKG",454,22,1,"PAH",1,1,94,0)
+MAGVRS07    value = 3017184
+"PKG",454,22,1,"PAH",1,1,95,0)
+MAGVRS08    value = 13251433
+"PKG",454,22,1,"PAH",1,1,96,0)
+MAGVRS09    value = 3304082
+"PKG",454,22,1,"PAH",1,1,97,0)
+MAGVRS11    value = 2822694
+"PKG",454,22,1,"PAH",1,1,98,0)
+MAGVRS14    value = 3873307
+"PKG",454,22,1,"PAH",1,1,99,0)
+MAGVRS15    value = 3427655
+"PKG",454,22,1,"PAH",1,1,100,0)
+MAGVRS21    value = 2823667
+"PKG",454,22,1,"PAH",1,1,101,0)
+MAGVRS24    value = 4410330
+"PKG",454,22,1,"PAH",1,1,102,0)
+MAGVRS31    value = 3079264
+"PKG",454,22,1,"PAH",1,1,103,0)
+MAGVRS41    value = 30228912
+"PKG",454,22,1,"PAH",1,1,104,0)
+MAGVRS42    value = 12201505
+"PKG",454,22,1,"PAH",1,1,105,0)
+MAGVRS43    value = 7578338
+"PKG",454,22,1,"PAH",1,1,106,0)
+MAGVRS44    value = 13926434
+"PKG",454,22,1,"PAH",1,1,107,0)
+MAGVRS45    value = 5247038
+"PKG",454,22,1,"PAH",1,1,108,0)
+MAGVRS46    value = 5857183
+"PKG",454,22,1,"PAH",1,1,109,0)
+MAGVRS51    value = 18061747
+"PKG",454,22,1,"PAH",1,1,110,0)
+MAGVRS52    value = 9106742
+"PKG",454,22,1,"PAH",1,1,111,0)
+MAGVRS61    value = 17820732
+"PKG",454,22,1,"PAH",1,1,112,0)
+MAGVRS71    value = 3184401
+"PKG",454,22,1,"PAH",1,1,113,0)
+MAGVRS81    value = 8694832
+"PKG",454,22,1,"PAH",1,1,114,0)
+MAGVRS82    value = 7085769
+"PKG",454,22,1,"PAH",1,1,115,0)
+MAGVSOPC    value = 4221335
+"PKG",454,22,1,"PAH",1,1,116,0)
+MAGVSOPU    value = 48817298
+"PKG",454,22,1,"PAH",1,1,117,0)
+MAGVSTDY    value = 3494166
+"PKG",454,22,1,"PAH",1,1,118,0)
+MAGVUID     value = 16416361
+"PKG",454,22,1,"PAH",1,1,119,0)
+MAGVUID1    value = 3192862
+"PKG",454,22,1,"PAH",1,1,120,0)
+ 
+"PKG",454,22,1,"PAH",1,1,121,0)
+Please note that routine MAGIP118 is deleted after the KIDS Build is
+"PKG",454,22,1,"PAH",1,1,122,0)
+installed.
+"QUES","XPF1",0)
+Y
+"QUES","XPF1","??")
+^D REP^XPDH
+"QUES","XPF1","A")
+Shall I write over your |FLAG| File
+"QUES","XPF1","B")
+YES
+"QUES","XPF1","M")
+D XPF1^XPDIQ
+"QUES","XPF2",0)
+Y
+"QUES","XPF2","??")
+^D DTA^XPDH
+"QUES","XPF2","A")
+Want my data |FLAG| yours
+"QUES","XPF2","B")
+YES
+"QUES","XPF2","M")
+D XPF2^XPDIQ
+"QUES","XPI1",0)
+YO
+"QUES","XPI1","??")
+^D INHIBIT^XPDH
+"QUES","XPI1","A")
+Want KIDS to INHIBIT LOGONs during the install
+"QUES","XPI1","B")
+NO
+"QUES","XPI1","M")
+D XPI1^XPDIQ
+"QUES","XPM1",0)
+PO^VA(200,:EM
+"QUES","XPM1","??")
+^D MG^XPDH
+"QUES","XPM1","A")
+Enter the Coordinator for Mail Group '|FLAG|'
+"QUES","XPM1","B")
+
+"QUES","XPM1","M")
+D XPM1^XPDIQ
+"QUES","XPO1",0)
+Y
+"QUES","XPO1","??")
+^D MENU^XPDH
+"QUES","XPO1","A")
+Want KIDS to Rebuild Menu Trees Upon Completion of Install
+"QUES","XPO1","B")
+NO
+"QUES","XPO1","M")
+D XPO1^XPDIQ
+"QUES","XPZ1",0)
+Y
+"QUES","XPZ1","??")
+^D OPT^XPDH
+"QUES","XPZ1","A")
+Want to DISABLE Scheduled Options, Menu Options, and Protocols
+"QUES","XPZ1","B")
+NO
+"QUES","XPZ1","M")
+D XPZ1^XPDIQ
+"QUES","XPZ2",0)
+Y
+"QUES","XPZ2","??")
+^D RTN^XPDH
+"QUES","XPZ2","A")
+Want to MOVE routines to other CPUs
+"QUES","XPZ2","B")
+NO
+"QUES","XPZ2","M")
+D XPZ2^XPDIQ
+"SEC","^DIC",2005.64,2005.64,0,"AUDIT")
+@
+"SEC","^DIC",2005.64,2005.64,0,"DD")
+@
+"SEC","^DIC",2005.64,2005.64,0,"DEL")
+@
+"SEC","^DIC",2005.64,2005.64,0,"LAYGO")
+@
+"SEC","^DIC",2005.64,2005.64,0,"RD")
+@
+"SEC","^DIC",2005.64,2005.64,0,"WR")
+@
+"VER")
+8.0^22.0
+"^DD",2005.64,2005.64,0)
+FIELD^^51^47
+"^DD",2005.64,2005.64,0,"DDA")
+N
+"^DD",2005.64,2005.64,0,"DT")
+3120112
+"^DD",2005.64,2005.64,0,"IX","B",2005.64,.01)
+
+"^DD",2005.64,2005.64,0,"IX","C",2005.64,11)
+
+"^DD",2005.64,2005.64,0,"IX","E",2005.64,1)
+
+"^DD",2005.64,2005.64,0,"IX","I",2005.64,16)
+
+"^DD",2005.64,2005.64,0,"NM","IMAGE SOP INSTANCE")
+
+"^DD",2005.64,2005.64,0,"PT",2005.65,11)
+
+"^DD",2005.64,2005.64,0,"VRPK")
+MAG
+"^DD",2005.64,2005.64,.01,0)
+SOP INSTANCE UID^RF^^0;1^K:$L(X)>64!($L(X)<1)!'(X'?1P.E) X
+"^DD",2005.64,2005.64,.01,1,0)
+^.1
+"^DD",2005.64,2005.64,.01,1,1,0)
+2005.64^B
+"^DD",2005.64,2005.64,.01,1,1,1)
+S ^MAGV(2005.64,"B",$E(X,1,64),DA)=""
+"^DD",2005.64,2005.64,.01,1,1,2)
+K ^MAGV(2005.64,"B",$E(X,1,64),DA)
+"^DD",2005.64,2005.64,.01,1,1,"%D",0)
+^.101^1^1^3100421^^
+"^DD",2005.64,2005.64,.01,1,1,"%D",1,0)
+Index based on SOP Instance UID.
+"^DD",2005.64,2005.64,.01,3)
+Answer must be 1-64 characters in length.
+"^DD",2005.64,2005.64,.01,21,0)
+^.001^2^2^3110805^^^^
+"^DD",2005.64,2005.64,.01,21,1,0)
+This is the SOP Record ID - Primary identifier.
+"^DD",2005.64,2005.64,.01,21,2,0)
+DICOM Tag: SOP Instance UID   (0008,0018).
+"^DD",2005.64,2005.64,.01,"DT")
+3090909
+"^DD",2005.64,2005.64,1,0)
+ORIGINAL SOP INSTANCE UID^F^^0;2^K:$L(X)>96!($L(X)<1) X
+"^DD",2005.64,2005.64,1,1,0)
+^.1
+"^DD",2005.64,2005.64,1,1,1,0)
+2005.64^E
+"^DD",2005.64,2005.64,1,1,1,1)
+S ^MAGV(2005.64,"E",$E(X,1,96),DA)=""
+"^DD",2005.64,2005.64,1,1,1,2)
+K ^MAGV(2005.64,"E",$E(X,1,96),DA)
+"^DD",2005.64,2005.64,1,1,1,"%D",0)
+^.101^1^1^3110126^^
+"^DD",2005.64,2005.64,1,1,1,"%D",1,0)
+This is a cross reference on the ORIGINAL SOP INSTANCE UID field (#1).
+"^DD",2005.64,2005.64,1,1,1,"DT")
+3101116
+"^DD",2005.64,2005.64,1,3)
+Answer must be 1-96 characters in length.
+"^DD",2005.64,2005.64,1,21,0)
+^.001^1^1^3110728^^^^
+"^DD",2005.64,2005.64,1,21,1,0)
+This is the old SOP Instance record ID.
+"^DD",2005.64,2005.64,1,"DT")
+3101116
+"^DD",2005.64,2005.64,2,0)
+ACQUISITION DATE/TIME^D^^1;1^S %DT="ET" D ^%DT S X=Y K:X<1 X
+"^DD",2005.64,2005.64,2,3)
+Enter Acquisition date and time.
+"^DD",2005.64,2005.64,2,21,0)
+^.001^2^2^3100922^^^^
+"^DD",2005.64,2005.64,2,21,1,0)
+This is the creation date/time of the original instance.
+"^DD",2005.64,2005.64,2,21,2,0)
+DICOM Tag: Content Date + Content Time (0008,0023) + (0008,0033).
+"^DD",2005.64,2005.64,2,"DT")
+3110829
+"^DD",2005.64,2005.64,3,0)
+ACQUISITION NUMBER^NJ5,0^^1;2^K:+X'=X!(X>99999)!(X<0)!(X?.E1"."1N.N) X
+"^DD",2005.64,2005.64,3,3)
+Type a Number between 0 and 99999, 0 Decimal Digits.
+"^DD",2005.64,2005.64,3,21,0)
+^.001^3^3^3110805^^^^
+"^DD",2005.64,2005.64,3,21,1,0)
+A number identifying the single continuous gathering of data of a period
+"^DD",2005.64,2005.64,3,21,2,0)
+of time that resulted in this image.  It does not have to be unique within the series.
+"^DD",2005.64,2005.64,3,21,3,0)
+DICOM Tag: Acquisition Number  (0020, 0012).
+"^DD",2005.64,2005.64,3,"DT")
+3101115
+"^DD",2005.64,2005.64,4,0)
+INSTANCE NUMBER^NJ5,0^^2;1^K:+X'=X!(X>99999)!(X<0)!(X?.E1"."1N.N) X
+"^DD",2005.64,2005.64,4,1,0)
+^.1^^0
+"^DD",2005.64,2005.64,4,3)
+Type a Number between 0 and 99999, 0 Decimal Digits.
+"^DD",2005.64,2005.64,4,21,0)
+^.001^2^2^3110805^^^^
+"^DD",2005.64,2005.64,4,21,1,0)
+A number that identifies the image.
+"^DD",2005.64,2005.64,4,21,2,0)
+DICOM Tag: Instance Number  (0020,0013).
+"^DD",2005.64,2005.64,4,"DT")
+3110802
+"^DD",2005.64,2005.64,5,0)
+WINDOW CENTER^F^^3;1^K:$L(X)>64!($L(X)<1) X
+"^DD",2005.64,2005.64,5,3)
+Answer must be 1-64 characters in length.
+"^DD",2005.64,2005.64,5,21,0)
+^.001^2^2^3110902^^^^
+"^DD",2005.64,2005.64,5,21,1,0)
+This contains the value that is the center of the window.  Window center is used to specify a linear conversion from stored pixel values to values to be displayed.
+"^DD",2005.64,2005.64,5,21,2,0)
+DICOM Tag: Window Center  (0028,1050).
+"^DD",2005.64,2005.64,5,"DT")
+3110802
+"^DD",2005.64,2005.64,6,0)
+WINDOW WIDTH^F^^3;2^K:$L(X)>64!($L(X)<1) X
+"^DD",2005.64,2005.64,6,3)
+Answer must be 1-64 characters in length.
+"^DD",2005.64,2005.64,6,21,0)
+^.001^4^4^3110902^^^^
+"^DD",2005.64,2005.64,6,21,1,0)
+This contains the value that is the width of the window.  Window center is
+"^DD",2005.64,2005.64,6,21,2,0)
+used with window width to specify a linear conversion from stored pixel 
+"^DD",2005.64,2005.64,6,21,3,0)
+values to values to be displayed.
+"^DD",2005.64,2005.64,6,21,4,0)
+DICOM Tag: Window Width (0028,1051).
+"^DD",2005.64,2005.64,6,"DT")
+3110802
+"^DD",2005.64,2005.64,7,0)
+NUMBER OF FRAMES^NJ5,0^^4;1^K:+X'=X!(X>99999)!(X<1)!(X?.E1"."1N.N) X
+"^DD",2005.64,2005.64,7,1,0)
+^.1^^0
+"^DD",2005.64,2005.64,7,3)
+Type a Number between 1 and 99999, 0 Decimal Digits.
+"^DD",2005.64,2005.64,7,21,0)
+^.001^3^3^3110126^^^^
+"^DD",2005.64,2005.64,7,21,1,0)
+This is the number of frames in a multiframe SOP Instance.
+"^DD",2005.64,2005.64,7,21,2,0)
+ Null or no value means 1 frame.
+"^DD",2005.64,2005.64,7,21,3,0)
+DICOM Tag: Number of Frames (0028,0008).
+"^DD",2005.64,2005.64,7,"DT")
+3110127
+"^DD",2005.64,2005.64,11,0)
+SERIES REFERENCE^P2005.63'^MAGV(2005.63,^6;1^Q
+"^DD",2005.64,2005.64,11,.1)
+SERIES
+"^DD",2005.64,2005.64,11,1,0)
+^.1
+"^DD",2005.64,2005.64,11,1,1,0)
+2005.64^C
+"^DD",2005.64,2005.64,11,1,1,1)
+S ^MAGV(2005.64,"C",$E(X,1,30),DA)=""
+"^DD",2005.64,2005.64,11,1,1,2)
+K ^MAGV(2005.64,"C",$E(X,1,30),DA)
+"^DD",2005.64,2005.64,11,1,1,"DT")
+3091118
+"^DD",2005.64,2005.64,11,3)
+Enter image series.
+"^DD",2005.64,2005.64,11,21,0)
+^.001^1^1^3110823^^^^
+"^DD",2005.64,2005.64,11,21,1,0)
+This is the image series associated with this image SOP instance.
+"^DD",2005.64,2005.64,11,"DT")
+3110823
+"^DD",2005.64,2005.64,12,0)
+ARTIFACT ON FILE^S^0:NOT ON FILE;1:AOF;^6;2^Q
+"^DD",2005.64,2005.64,12,3)
+Enter a code indicating whether or not an artifact is on file for this SOP instance.
+"^DD",2005.64,2005.64,12,21,0)
+^^3^3^3100428^
+"^DD",2005.64,2005.64,12,21,1,0)
+This field is a flag that records whether an artifact is on file or not.
+"^DD",2005.64,2005.64,12,21,2,0)
+Artifact On File (AOF) means that at least one Object is already stored
+"^DD",2005.64,2005.64,12,21,3,0)
+on disk. An Object can be an image, an abstract or a text file.
+"^DD",2005.64,2005.64,12,"DT")
+3100428
+"^DD",2005.64,2005.64,13,0)
+SOP CLASS UID^P2006.532'^MAG(2006.532,^0;3^Q
+"^DD",2005.64,2005.64,13,1,0)
+^.1^^0
+"^DD",2005.64,2005.64,13,3)
+Select the SOP CLASS UID.
+"^DD",2005.64,2005.64,13,21,0)
+^.001^2^2^3111116^^^^
+"^DD",2005.64,2005.64,13,21,1,0)
+This field contains the SOP Class UID for the object stored.
+"^DD",2005.64,2005.64,13,21,2,0)
+DICOM Tag: SOP Class UID (0008,0016).
+"^DD",2005.64,2005.64,13,"DT")
+3111025
+"^DD",2005.64,2005.64,14,0)
+TYPE INDEX^P2005.83^MAG(2005.83,^5;1^Q
+"^DD",2005.64,2005.64,14,1,0)
+^.1^^0
+"^DD",2005.64,2005.64,14,3)
+Select the imaging type.
+"^DD",2005.64,2005.64,14,21,0)
+^.001^1^1^3111019^^^^
+"^DD",2005.64,2005.64,14,21,1,0)
+This field contains the type of image by content or use (ex. image, video).
+"^DD",2005.64,2005.64,14,"DT")
+3111018
+"^DD",2005.64,2005.64,15,0)
+DESCRIPTION^F^^5;2^K:$L(X)>60!($L(X)<1) X
+"^DD",2005.64,2005.64,15,3)
+Answer must be 1-60 characters in length.
+"^DD",2005.64,2005.64,15,21,0)
+^.001^1^1^3111017^^^
+"^DD",2005.64,2005.64,15,21,1,0)
+This field contains a brief description of the image.
+"^DD",2005.64,2005.64,15,"DT")
+3091223
+"^DD",2005.64,2005.64,16,0)
+KEY OBJECT^S^1:YES;0:NO;^7;1^Q
+"^DD",2005.64,2005.64,16,1,0)
+^.1^^-1
+"^DD",2005.64,2005.64,16,1,1,0)
+2005.64^I
+"^DD",2005.64,2005.64,16,1,1,1)
+S ^MAGV(2005.64,"I",$E(X,1,30),DA)=""
+"^DD",2005.64,2005.64,16,1,1,2)
+K ^MAGV(2005.64,"I",$E(X,1,30),DA)
+"^DD",2005.64,2005.64,16,1,1,"%D",0)
+^^1^1^3101116^
+"^DD",2005.64,2005.64,16,1,1,"%D",1,0)
+This is a cross reference on the Key Image field (#16).
+"^DD",2005.64,2005.64,16,1,1,"DT")
+3101116
+"^DD",2005.64,2005.64,16,3)
+Select whether the image is a key image.
+"^DD",2005.64,2005.64,16,21,0)
+^.001^2^2^3111206^^^^
+"^DD",2005.64,2005.64,16,21,1,0)
+This field denotes if an image is identified as a Key Image.
+"^DD",2005.64,2005.64,16,21,2,0)
+ A key image has a value of "YES".
+"^DD",2005.64,2005.64,16,"DT")
+3111206
+"^DD",2005.64,2005.64,17,0)
+QUESTIONABLE IMAGE^S^1:YES;0:NO;^7;2^Q
+"^DD",2005.64,2005.64,17,3)
+Select image questionable status.
+"^DD",2005.64,2005.64,17,21,0)
+^^2^2^3111206^^^
+"^DD",2005.64,2005.64,17,21,1,0)
+This field indicates the image questionable integrity. 
+"^DD",2005.64,2005.64,17,21,2,0)
+'1' means that the image has questionable integrity.
+"^DD",2005.64,2005.64,17,"DT")
+3111206
+"^DD",2005.64,2005.64,18,0)
+CONTRAST OR BOLUS AGENT^F^^7;3^K:$L(X)>64!($L(X)<1) X
+"^DD",2005.64,2005.64,18,3)
+Answer must be 1-64 characters in length.
+"^DD",2005.64,2005.64,18,21,0)
+^.001^2^2^3100922^^^^
+"^DD",2005.64,2005.64,18,21,1,0)
+This field contains the contrast or bolus agent used.
+"^DD",2005.64,2005.64,18,21,2,0)
+DICOM Tag: Contrast/Bolus Agent   (0018,0010).
+"^DD",2005.64,2005.64,18,"DT")
+3091223
+"^DD",2005.64,2005.64,19,0)
+ROWS^NJ5,0^^7;4^K:+X'=X!(X>99999)!(X<0)!(X?.E1"."1.N) X
+"^DD",2005.64,2005.64,19,1,0)
+^.1^^0
+"^DD",2005.64,2005.64,19,3)
+Type a number between 0 and 99999, 0 decimal digits.
+"^DD",2005.64,2005.64,19,21,0)
+^.001^2^2^3100922^^^^
+"^DD",2005.64,2005.64,19,21,1,0)
+This field contains the image pixel matrix's number of rows.
+"^DD",2005.64,2005.64,19,21,2,0)
+DICOM Tag: Rows   (0028,0010) .
+"^DD",2005.64,2005.64,19,"DT")
+3110728
+"^DD",2005.64,2005.64,20,0)
+COLUMNS^NJ5,0^^7;5^K:+X'=X!(X>99999)!(X<0)!(X?.E1"."1.N) X
+"^DD",2005.64,2005.64,20,1,0)
+^.1^^0
+"^DD",2005.64,2005.64,20,3)
+Type a number between 0 and 99999, 0 decimal digits.
+"^DD",2005.64,2005.64,20,21,0)
+^.001^2^2^3100922^^^^
+"^DD",2005.64,2005.64,20,21,1,0)
+This field contains the image pixel matrix's number of columns.
+"^DD",2005.64,2005.64,20,21,2,0)
+DICOM Tag: Columns  (0028,0011).
+"^DD",2005.64,2005.64,20,"DT")
+3110728
+"^DD",2005.64,2005.64,21,0)
+PHOTOMETRIC INTERPRETATION^S^1:MONOCHROME1;2:MONOCHROME2;3:PALETTE COLOR;4:RGB;5:YBR_FULL;6:YBR_FULL_422;7:YBR_PARTIAL_422;8:YBR_RCT;9:YBR_ICT;10:YBR_PARTIAL_420;^7;6^Q
+"^DD",2005.64,2005.64,21,3)
+Select a photometric interpretation.
+"^DD",2005.64,2005.64,21,21,0)
+^.001^2^2^3111214^^^^
+"^DD",2005.64,2005.64,21,21,1,0)
+This field contains the photometric interpretation for a series.
+"^DD",2005.64,2005.64,21,21,2,0)
+DICOM Tag: Photometric Interpretation (0028,0004).
+"^DD",2005.64,2005.64,21,"DT")
+3110831
+"^DD",2005.64,2005.64,22,0)
+PIXEL SPACING^F^^8;1^K:$L(X)>33!($L(X)<1) X
+"^DD",2005.64,2005.64,22,.1)
+
+"^DD",2005.64,2005.64,22,3)
+Answer must be 1-33 characters in length.
+"^DD",2005.64,2005.64,22,21,0)
+^.001^5^5^3100922^^^^
+"^DD",2005.64,2005.64,22,21,1,0)
+This is the pixel spacing for image matrix.
+"^DD",2005.64,2005.64,22,21,2,0)
+According to the DICOM standard, it is formatted as row pixel spacing and
+"^DD",2005.64,2005.64,22,21,3,0)
+column pixel spacing separated by "\".
+"^DD",2005.64,2005.64,22,21,4,0)
+Pixel spacing is in millimetres, using scientific notation.
+"^DD",2005.64,2005.64,22,21,5,0)
+DICOM Tag: Pixel Spacing (0028,0030).
+"^DD",2005.64,2005.64,22,"DT")
+3100520
+"^DD",2005.64,2005.64,23,0)
+SAMPLES PER PIXEL^NJ5,0^^8;2^K:+X'=X!(X>99999)!(X<0)!(X?.E1"."1.N) X
+"^DD",2005.64,2005.64,23,3)
+Type a number between 0 and 99999, 0 decimal digits.
+"^DD",2005.64,2005.64,23,21,0)
+^.001^2^2^3110126^^^^
+"^DD",2005.64,2005.64,23,21,1,0)
+This is the number of separate planes in this image.
+"^DD",2005.64,2005.64,23,21,2,0)
+DICOM Tag: Samples Per Pixel (0028,0002).
+"^DD",2005.64,2005.64,23,"DT")
+3100511
+"^DD",2005.64,2005.64,24,0)
+BITS ALLOCATED^NJ5,0^^8;3^K:+X'=X!(X>99999)!(X<0)!(X?.E1"."1N.N) X
+"^DD",2005.64,2005.64,24,1,0)
+^.1^^0
+"^DD",2005.64,2005.64,24,3)
+Type a Number between 0 and 99999, 0 Decimal Digits.
+"^DD",2005.64,2005.64,24,21,0)
+^.001^2^2^3110126^^^^
+"^DD",2005.64,2005.64,24,21,1,0)
+This is the number of bits allocated for 1 pixel.
+"^DD",2005.64,2005.64,24,21,2,0)
+DICOM Tag: Bits Allocated (0028,0100).
+"^DD",2005.64,2005.64,24,"DT")
+3110728
+"^DD",2005.64,2005.64,25,0)
+BITS STORED^NJ5,0^^8;4^K:+X'=X!(X>99999)!(X<0)!(X?.E1"."1.N) X
+"^DD",2005.64,2005.64,25,3)
+Type a number between 0 and 99999, 0 decimal digits.
+"^DD",2005.64,2005.64,25,21,0)
+^.001^2^2^3100922^^^^
+"^DD",2005.64,2005.64,25,21,1,0)
+This is the number of bits used to store image information.
+"^DD",2005.64,2005.64,25,21,2,0)
+DICOM Tag: Bits Stored (0028,0101).
+"^DD",2005.64,2005.64,25,"DT")
+3100511
+"^DD",2005.64,2005.64,26,0)
+HIGH BIT^NJ5,0^^8;5^K:+X'=X!(X>99999)!(X<0)!(X?.E1"."1.N) X
+"^DD",2005.64,2005.64,26,3)
+Type a number between 0 and 99999, 0 decimal digits.
+"^DD",2005.64,2005.64,26,21,0)
+^.001^2^2^3100922^^^^
+"^DD",2005.64,2005.64,26,21,1,0)
+This is the high bit number.  
+"^DD",2005.64,2005.64,26,21,2,0)
+DICOM Tag: High Bit (0028,0102).
+"^DD",2005.64,2005.64,26,"DT")
+3100511
+"^DD",2005.64,2005.64,27,0)
+PIXEL REPRESENTATION^S^0:Unsigned Integer;1:Signed Integer (2's Complement);^8;6^Q
+"^DD",2005.64,2005.64,27,3)
+Select pixel representation.
+"^DD",2005.64,2005.64,27,21,0)
+^.001^2^2^3130125^^^^
+"^DD",2005.64,2005.64,27,21,1,0)
+This is the DICOM pixel representation.
+"^DD",2005.64,2005.64,27,21,2,0)
+DICOM Tag: Pixel Representation  (0028,0103).
+"^DD",2005.64,2005.64,27,"DT")
+3130125
+"^DD",2005.64,2005.64,28,0)
+RESCALE INTERCEPT^F^^8;7^K:$L(X)>12!($L(X)<1) X
+"^DD",2005.64,2005.64,28,3)
+Answer must be 1-12 characters in length.
+"^DD",2005.64,2005.64,28,21,0)
+^.001^3^3^3110902^^^^
+"^DD",2005.64,2005.64,28,21,1,0)
+This is the rescale intercept.  It is the value b in the equation
+"^DD",2005.64,2005.64,28,21,2,0)
+output units = m*SV + b.
+"^DD",2005.64,2005.64,28,21,3,0)
+DICOM Tag: Rescale Intercept (0028,1052).
+"^DD",2005.64,2005.64,28,"DT")
+3110802
+"^DD",2005.64,2005.64,29,0)
+RESCALE SLOPE^F^^8;8^K:$L(X)>12!($L(X)<1) X
+"^DD",2005.64,2005.64,29,3)
+Answer must be 1-12 characters in length.
+"^DD",2005.64,2005.64,29,21,0)
+^.001^3^3^3110902^^^^
+"^DD",2005.64,2005.64,29,21,1,0)
+This is the rescale slope.  It is the value m in the equation
+"^DD",2005.64,2005.64,29,21,2,0)
+output units = m*SV +b.
+"^DD",2005.64,2005.64,29,21,3,0)
+DICOM Tag: Rescale Slope (0028,1053).
+"^DD",2005.64,2005.64,29,"DT")
+3110802
+"^DD",2005.64,2005.64,30,0)
+PLATE ID^F^^9;1^K:$L(X)>64!($L(X)<1) X
+"^DD",2005.64,2005.64,30,3)
+Answer must be 1-64 characters in length.
+"^DD",2005.64,2005.64,30,21,0)
+^.001^3^3^3100922^^^^
+"^DD",2005.64,2005.64,30,21,1,0)
+This is the ID or serial number of the (CR) sensing plate upon which the
+"^DD",2005.64,2005.64,30,21,2,0)
+image was acquired (if applicable).
+"^DD",2005.64,2005.64,30,21,3,0)
+DICOM Tag: Plate ID (0018,1004).
+"^DD",2005.64,2005.64,30,"DT")
+3091223
+"^DD",2005.64,2005.64,31,0)
+SLICE THICKNESS^F^^9;2^K:$L(X)>12!($L(X)<1) X
+"^DD",2005.64,2005.64,31,3)
+Answer must be 1-12 characters in length.
+"^DD",2005.64,2005.64,31,21,0)
+^^3^3^3130125^
+"^DD",2005.64,2005.64,31,21,1,0)
+This is the Nominal (CT) slice thickness, in millimeters (if applicable).
+"^DD",2005.64,2005.64,31,21,2,0)
+Numbers are in millimeters in scientific notation.
+"^DD",2005.64,2005.64,31,21,3,0)
+DICOM Tag: Slice Thickness  (0018,0050).
+"^DD",2005.64,2005.64,31,"DT")
+3130125
+"^DD",2005.64,2005.64,32,0)
+RECONSTRUCTION DIAMETER^F^^9;3^K:$L(X)>12!($L(X)<1) X
+"^DD",2005.64,2005.64,32,3)
+Answer must be 1-12 characters in length.
+"^DD",2005.64,2005.64,32,21,0)
+^^5^5^3130125^^
+"^DD",2005.64,2005.64,32,21,1,0)
+This is the diameter in millimeters of the region from within which data
+"^DD",2005.64,2005.64,32,21,2,0)
+was used in creating the reconstruction of the image.  Data may exist
+"^DD",2005.64,2005.64,32,21,3,0)
+outside of this region.
+"^DD",2005.64,2005.64,32,21,4,0)
+Numbers are in millimeters in scientific notation.
+"^DD",2005.64,2005.64,32,21,5,0)
+DICOM Tag: Reconstruction Diameter (0018,1100).
+"^DD",2005.64,2005.64,32,"DT")
+3130125
+"^DD",2005.64,2005.64,33,0)
+SCANNING SEQUENCE^F^^12;1^K:$L(X)>250!($L(X)<1) X
+"^DD",2005.64,2005.64,33,3)
+Answer must be 1-250 characters in length.
+"^DD",2005.64,2005.64,33,21,0)
+^.001^2^2^3100922^^^^
+"^DD",2005.64,2005.64,33,21,1,0)
+This is the Magnetic Resonance (MR) scanning sequence.
+"^DD",2005.64,2005.64,33,21,2,0)
+DICOM Tag: Scanning Sequence (0018,0020).
+"^DD",2005.64,2005.64,33,"DT")
+3091223
+"^DD",2005.64,2005.64,34,0)
+SCANNING VARIANT^F^^13;1^K:$L(X)>250!($L(X)<1) X
+"^DD",2005.64,2005.64,34,3)
+Answer must be 1-250 characters in length.
+"^DD",2005.64,2005.64,34,21,0)
+^.001^2^2^3100922^^^^
+"^DD",2005.64,2005.64,34,21,1,0)
+This is the scanning variant of the scanning sequence.
+"^DD",2005.64,2005.64,34,21,2,0)
+DICOM Tag: Scanning Variant (0018,0021).
+"^DD",2005.64,2005.64,34,"DT")
+3091223
+"^DD",2005.64,2005.64,35,0)
+MR ACQUISITION TYPE^F^^10;1^K:$L(X)>16!($L(X)<1) X
+"^DD",2005.64,2005.64,35,3)
+Answer must be 1-16 characters in length.
+"^DD",2005.64,2005.64,35,21,0)
+^.001^2^2^3100922^^^^
+"^DD",2005.64,2005.64,35,21,1,0)
+This is the MR Acquisition data encoding scheme identifier.
+"^DD",2005.64,2005.64,35,21,2,0)
+DICOM Tag: MR Acquisition Type (0018,0023).
+"^DD",2005.64,2005.64,35,"DT")
+3100426
+"^DD",2005.64,2005.64,36,0)
+ACQUISITION CONTEXT DESC^F^^10;2^K:$L(X)>64!($L(X)<1) X
+"^DD",2005.64,2005.64,36,.1)
+ACQUISITION CONTEXT DESCRIPTION
+"^DD",2005.64,2005.64,36,3)
+Answer must be 1-64 characters in length.
+"^DD",2005.64,2005.64,36,21,0)
+2^.001^2^2^3101118^^^
+"^DD",2005.64,2005.64,36,21,1,0)
+This is the Acquisition Context Description.
+"^DD",2005.64,2005.64,36,21,2,0)
+DICOM Tag: Acquisition Context Description  (0040,0556).
+"^DD",2005.64,2005.64,36,"DT")
+3101118
+"^DD",2005.64,2005.64,37,0)
+REPETITION TIME^F^^10;3^K:$L(X)>16!($L(X)<1) X
+"^DD",2005.64,2005.64,37,3)
+Answer must be 1-16 characters in length.
+"^DD",2005.64,2005.64,37,21,0)
+^.001^4^4^3100922^^^^
+"^DD",2005.64,2005.64,37,21,1,0)
+This is the period of time in milliseconds between the beginning of a pulse
+"^DD",2005.64,2005.64,37,21,2,0)
+sequence and the beginning of the succeeding pulse sequence.
+"^DD",2005.64,2005.64,37,21,3,0)
+Numbers are in milliseconds in scientific notation.
+"^DD",2005.64,2005.64,37,21,4,0)
+DICOM Tag: Repetition Time  (0018,0080).
+"^DD",2005.64,2005.64,37,"DT")
+3100520
+"^DD",2005.64,2005.64,38,0)
+ECHO TIME^F^^10;4^K:$L(X)>16!($L(X)<1) X
+"^DD",2005.64,2005.64,38,3)
+Answer must be 1-16 characters in length.
+"^DD",2005.64,2005.64,38,21,0)
+^.001^4^4^3100922^^^^
+"^DD",2005.64,2005.64,38,21,1,0)
+This is the time in milliseconds between the middle of the excitation pulse and the
+"^DD",2005.64,2005.64,38,21,2,0)
+peak of the echo produced.
+"^DD",2005.64,2005.64,38,21,3,0)
+Numbers are in milliseconds in scientific notation.
+"^DD",2005.64,2005.64,38,21,4,0)
+DICOM Tag: Echo Time (0018,0081).
+"^DD",2005.64,2005.64,38,"DT")
+3100520
+"^DD",2005.64,2005.64,39,0)
+MICROSCOPIC OBJECTIVE^F^^10;5^K:$L(X)>10!($L(X)<1) X
+"^DD",2005.64,2005.64,39,3)
+Answer must be 1-10 characters in length.
+"^DD",2005.64,2005.64,39,21,0)
+^.001^3^3^3111123^^^^
+"^DD",2005.64,2005.64,39,21,1,0)
+This is the description of the Microscopic Objective selected by the
+"^DD",2005.64,2005.64,39,21,2,0)
+pathologist.  It identifies the power of the microscope objective
+"^DD",2005.64,2005.64,39,21,3,0)
+used when capturing the image of the slide.
+"^DD",2005.64,2005.64,39,23,0)
+^^2^2^3111123^
+"^DD",2005.64,2005.64,39,23,1,0)
+This field is kept for backward capability with MICROSCOPIC 
+"^DD",2005.64,2005.64,39,23,2,0)
+OBJECTIVE field (#2005,54).
+"^DD",2005.64,2005.64,39,"DT")
+3111123
+"^DD",2005.64,2005.64,40,0)
+STATUS^S^A:ACCESSIBLE;I:INACCESSIBLE;^11;1^Q
+"^DD",2005.64,2005.64,40,1,0)
+^.1^^0
+"^DD",2005.64,2005.64,40,3)
+Select series status.
+"^DD",2005.64,2005.64,40,21,0)
+^.001^6^6^3110909^^^^
+"^DD",2005.64,2005.64,40,21,1,0)
+This field indicates whether the SOP Instance is ACCESSIBLE or INACCESSIBLE.
+"^DD",2005.64,2005.64,40,21,2,0)
+ 
+"^DD",2005.64,2005.64,40,21,3,0)
+ACCESSIBLE means that the SOP Instance can be retrieved by Imaging database 
+"^DD",2005.64,2005.64,40,21,4,0)
+methods.
+"^DD",2005.64,2005.64,40,21,5,0)
+INACCESSIBLE means that the study will not be retrieved by Imaging database 
+"^DD",2005.64,2005.64,40,21,6,0)
+methods and that no Active children exist in the IMAGE INSTANCE file (#2005.65).
+"^DD",2005.64,2005.64,40,"DT")
+3120203
+"^DD",2005.64,2005.64,43,0)
+LAST UPDATE DATE/TIME^D^^15;1^S %DT="ET" D ^%DT S X=Y K:Y<1 X
+"^DD",2005.64,2005.64,43,3)
+Enter last update date and time.
+"^DD",2005.64,2005.64,43,21,0)
+^.001^1^1^3110829^^^^
+"^DD",2005.64,2005.64,43,21,1,0)
+This field indicates the date/time of the last record update.
+"^DD",2005.64,2005.64,43,"DT")
+3110829
+"^DD",2005.64,2005.64,44,0)
+SOURCE OF REFERENCE INSTANCE^F^^15;2^K:$L(X)>19!($L(X)<1) X
+"^DD",2005.64,2005.64,44,3)
+Answer must be 1-19 characters in length.
+"^DD",2005.64,2005.64,44,21,0)
+^.001^2^2^3100922^^^
+"^DD",2005.64,2005.64,44,21,1,0)
+This is the DICOM tag number where the Frame of Reference instance(s)
+"^DD",2005.64,2005.64,44,21,2,0)
+are extracted from.
+"^DD",2005.64,2005.64,44,"DT")
+3120112
+"^DD",2005.64,2005.64,45,0)
+HISTOLOGICAL STAIN^F^^15;3^K:$L(X)>30!($L(X)<1) X
+"^DD",2005.64,2005.64,45,3)
+Answer must be 1-30 characters in length.
+"^DD",2005.64,2005.64,45,21,0)
+^.001^1^1^3111123^^^^
+"^DD",2005.64,2005.64,45,21,1,0)
+This field contains the description of the histological stain.
+"^DD",2005.64,2005.64,45,23,0)
+^^1^1^3111123^
+"^DD",2005.64,2005.64,45,23,1,0)
+This field is kept for backward capability with STAIN field (#2005,53).
+"^DD",2005.64,2005.64,45,"DT")
+3111123
+"^DD",2005.64,2005.64,46,0)
+LAB SLIDE ID^F^^15;4^K:$L(X)>64!($L(X)<1) X
+"^DD",2005.64,2005.64,46,3)
+Answer must be 1-64 characters in length.
+"^DD",2005.64,2005.64,46,21,0)
+^.001^1^1^3111123^^^^
+"^DD",2005.64,2005.64,46,21,1,0)
+This field contains the specimen number for a given slide.
+"^DD",2005.64,2005.64,46,23,0)
+^^2^2^3111123^
+"^DD",2005.64,2005.64,46,23,1,0)
+This field is kept for backward capability with SPECIMEN# field 
+"^DD",2005.64,2005.64,46,23,2,0)
+(#2005,52).
+"^DD",2005.64,2005.64,46,"DT")
+3111123
+"^DD",2005.64,2005.64,47,0)
+REFERENCED SOP INSTANCES^F^^16;1^K:$L(X)>129!($L(X)<1) X
+"^DD",2005.64,2005.64,47,3)
+Answer must be 1-129 characters in length.
+"^DD",2005.64,2005.64,47,21,0)
+^.001^3^3^3111201^^^^
+"^DD",2005.64,2005.64,47,21,1,0)
+This field uniquely identifies the referenced SOP Class and SOP Instance.
+"^DD",2005.64,2005.64,47,21,2,0)
+If not in header this field is Null.
+"^DD",2005.64,2005.64,47,21,3,0)
+DICOM Tag: Referenced SOP Instances (0008,1150)"\"(0008,1155).
+"^DD",2005.64,2005.64,47,"DT")
+3111201
+"^DD",2005.64,2005.64,48,0)
+PATIENT ORIENTATION^F^^15;5^K:$L(X)>7!($L(X)<1) X
+"^DD",2005.64,2005.64,48,3)
+Answer must be 1-7 characters in length.
+"^DD",2005.64,2005.64,48,21,0)
+^.001^2^2^3100922^^^^
+"^DD",2005.64,2005.64,48,21,1,0)
+This is the patient's orientation relative to the image plane.
+"^DD",2005.64,2005.64,48,21,2,0)
+DICOM Tag: Patient Orientation (0020,0020).
+"^DD",2005.64,2005.64,48,"DT")
+3100527
+"^DD",2005.64,2005.64,49,0)
+IMAGE ORIENTATION^F^^17;1^K:$L(X)>101!($L(X)<1) X
+"^DD",2005.64,2005.64,49,3)
+Answer must be 1-101 characters in length.
+"^DD",2005.64,2005.64,49,21,0)
+^.001^3^3^3110902^^^^
+"^DD",2005.64,2005.64,49,21,1,0)
+This is the separated directions cosines of the first row and first column
+"^DD",2005.64,2005.64,49,21,2,0)
+with respect to the patient.
+"^DD",2005.64,2005.64,49,21,3,0)
+DICOM Tag: Image Orientation (0020,0037).
+"^DD",2005.64,2005.64,49,"DT")
+3110823
+"^DD",2005.64,2005.64,50,0)
+IMAGE POSITION^F^^14;1^K:$L(X)>50!($L(X)<1) X
+"^DD",2005.64,2005.64,50,3)
+Answer must be 1-50 characters in length.
+"^DD",2005.64,2005.64,50,21,0)
+^.001^3^3^3110907^^
+"^DD",2005.64,2005.64,50,21,1,0)
+This field indicates the x,y, and z coordinates of the upper left
+"^DD",2005.64,2005.64,50,21,2,0)
+hand corner of the image in millimeters (separated by "/").
+"^DD",2005.64,2005.64,50,21,3,0)
+DICOM Tag: Image Position (0020,0032).
+"^DD",2005.64,2005.64,50,"DT")
+3110823
+"^DD",2005.64,2005.64,51,0)
+IMAGE LATERALITY^S^R:RIGHT;L:LEFT;U:UNPAIRED;B:BOTH;^17;2^Q
+"^DD",2005.64,2005.64,51,3)
+Select image laterality.
+"^DD",2005.64,2005.64,51,21,0)
+^.001^3^3^3111206^^^
+"^DD",2005.64,2005.64,51,21,1,0)
+This is the laterality of the images taken, e.g. Image of the Right Knee.
+"^DD",2005.64,2005.64,51,21,2,0)
+DICOM Tag: Laterality   (0020,0062).
+"^DD",2005.64,2005.64,51,"DT")
+3111206
+"^DIC",2005.64,2005.64,0)
+IMAGE SOP INSTANCE^2005.64
+"^DIC",2005.64,2005.64,0,"GL")
+^MAGV(2005.64,
+"^DIC",2005.64,2005.64,"%",0)
+^1.005^^0
+"^DIC",2005.64,2005.64,"%D",0)
+^1.001^19^19^3121112^^^^
+"^DIC",2005.64,2005.64,"%D",1,0)
+ +---------------------------------------------------------------+
+"^DIC",2005.64,2005.64,"%D",2,0)
+ |                                                               |
+"^DIC",2005.64,2005.64,"%D",3,0)
+ | Property of the US Government.                                |
+"^DIC",2005.64,2005.64,"%D",4,0)
+ | No permission to copy or redistribute this software is given. |
+"^DIC",2005.64,2005.64,"%D",5,0)
+ | Use of unreleased versions of this software requires the user |
+"^DIC",2005.64,2005.64,"%D",6,0)
+ | to execute a written test agreement with the VistA Imaging    |
+"^DIC",2005.64,2005.64,"%D",7,0)
+ | Development Office of the Department of Veterans Affairs,     |
+"^DIC",2005.64,2005.64,"%D",8,0)
+ | telephone (301) 734-0100.                                     |
+"^DIC",2005.64,2005.64,"%D",9,0)
+ |                                                               |
+"^DIC",2005.64,2005.64,"%D",10,0)
+ | The Food and Drug Administration classifies this software as  |
+"^DIC",2005.64,2005.64,"%D",11,0)
+ | a medical device.  As such, it may not be changed in any way. |
+"^DIC",2005.64,2005.64,"%D",12,0)
+ | Modifications to this software may result in an adulterated   |
+"^DIC",2005.64,2005.64,"%D",13,0)
+ | medical device under 21CFR820, the use of which is considered |
+"^DIC",2005.64,2005.64,"%D",14,0)
+ | to be a violation of US Federal Statutes.                     |
+"^DIC",2005.64,2005.64,"%D",15,0)
+ |                                                               |
+"^DIC",2005.64,2005.64,"%D",16,0)
+ +---------------------------------------------------------------+
+"^DIC",2005.64,2005.64,"%D",17,0)
+ 
+"^DIC",2005.64,2005.64,"%D",18,0)
+This file contains information about each SOP instance corresponding to an
+"^DIC",2005.64,2005.64,"%D",19,0)
+entry on the IMAGE SERIES file (#2005.63).
+"^DIC",2005.64,"B","IMAGE SOP INSTANCE",2005.64)
+
+**END**
+**END**

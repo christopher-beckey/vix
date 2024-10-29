@@ -1,0 +1,49 @@
+﻿<Window x:Class="ImagingShell.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+        xmlns:regions="clr-namespace:Microsoft.Practices.Prism.Regions;assembly=Microsoft.Practices.Prism" 
+        xmlns:inf="clr-namespace:ImagingClient.Infrastructure;assembly=ImagingClient.Infrastructure"
+        xmlns:Converters="clr-namespace:ImagingClient.Infrastructure.Converters;assembly=ImagingClient.Infrastructure" 
+        Title="Importer"
+        MinHeight="500"
+        MinWidth="700"
+        Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}"
+        DataContext="MainWindowViewModel"
+        Closing="OnWindowClosing" KeyDown="Window_KeyDown"
+        WindowStartupLocation="CenterScreen" Height="600">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Menu IsMainMenu="True" 
+              Name="mnuMain" 
+              Grid.Row="0">
+            <MenuItem Header="_File" >
+                <MenuItem Header="_Log Out" Command="{Binding OnLogOut}"  />
+                <MenuItem Header="E_xit" Click="ExitItem_Click" />
+            </MenuItem>
+            <MenuItem Header="_Importer">
+                <MenuItem Header="Importer _Home" Command="{Binding NavigateToDicomHome}" />
+                <MenuItem Header="_Media Staging" Command="{Binding NavigateToStaging}"   />
+                <MenuItem Header="_Import List" Command="{Binding NavigateToImportList}"   />
+                <MenuItem Header="_Direct Import" Command="{Binding NavigateToDirectImport}"   />
+                <MenuItem Header="_Reports" Command="{Binding NavigateToReports}"   />
+            </MenuItem>
+            <MenuItem Header="Importer _Admin" Visibility="{Binding Path=ShowAdminMenu,  Converter={StaticResource BooleanToVisibilityConverter}}">
+                <MenuItem Header="Admin _Home" Command="{Binding NavigateToAdminHome}"   />
+                <MenuItem Header="_Revert Import Items" Command="{Binding NavigateToAdminRevert}"   />
+                <MenuItem Header="_In-Process Import Items" Command="{Binding NavigateToAdminInProcessItems}"   />
+                <MenuItem Header="_Failed Import Items" Command="{Binding NavigateToAdminFailedItems}"   />
+                <MenuItem Header="Importer _Log" Command="{Binding NavigateToAdminLog}"   />
+            </MenuItem>
+            <MenuItem Header="_Help">
+                <MenuItem Header="_View User Manual" Click="ViewUserManual_Click" />
+                <MenuItem Header="_About DICOM Importer" Click="ViewAboutWindow_Click" />
+            </MenuItem>
+        </Menu>
+        <ContentControl 
+            regions:RegionManager.RegionName="{x:Static inf:RegionNames.MainRegion}"  
+            Grid.Row="1" />
+    </Grid>
+</Window>

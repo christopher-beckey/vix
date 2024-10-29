@@ -1,0 +1,2069 @@
+# Template.dic, 18 April 2011
+# 3.0;IMAGING;**99**;Mar 19, 2002;Build 2179;Jun 28, 2011
+# Per VHA Directive 2004-038, this routine should not be modified.
+# +---------------------------------------------------------------+
+# | Property of the US Government.                                |
+# | No permission to copy or redistribute this software is given. |
+# | Use of unreleased versions of this software requires the user |
+# | to execute a written test agreement with the VistA Imaging    |
+# | Development Office of the Department of Veterans Affairs,     |
+# | telephone (301) 734-0100.                                     |
+# | The Food and Drug Administration classifies this software as  |
+# | a medical device.  As such, it may not be changed in any way. |
+# | Modifications to this software may result in an adulterated   |
+# | medical device under 21CFR820, the use of which is considered |
+# | to be a violation of US Federal Statutes.                     |
+# +---------------------------------------------------------------+
+#
+#
+# (the above line is intentionally blank)
+#
+# Last edited 18 April 2011, 2:59 PM  -- 2009 DICOM Standard
+#
+#
+# Attribute|Tag|Owner|Requirement Type (SCU/SCP)|Default Value
+#
+#
+# Macro Definitions come first
+#
+# Image SOP Instance Reference Macro - PS 3.3-2004 Table 10-3
+{$define Image SOP Instance Reference Macro}
+Referenced SOP Class UID|(0008,1150)||/1|
+Referenced SOP Instance UID|(0008,1155)||/1|
+Referenced Frame Number|(0008,1160)||/1C|
+{$end Image SOP Instance Reference Macro}
+#
+# Series and Instance Reference Macro - PS 3.3-2004 Table 10-4
+{$define Series and Instance Reference Macro}
+Referenced Series Sequence|(0008,1115)||/1|
+>Series Instance UID|(0020,000E)||/1|
+>Referenced Instance Sequence|(0008,114A)||/1|
+>>Referenced SOP Class UID|(0008,1150)||/1|
+>>Referenced SOP Instance UID|(0008,1155)||/1|
+{$end Series and Instance Reference Macro}
+#
+# The "Code Sequence Macro" is invoked to be part of
+# a larger sequence with other elements, and does not contain
+# the three sequence delimiters (Item Begin/End and Sequence End).
+#
+{$define Code Sequence Macro}
+Code Value|(0008,0100)||/1C|
+Coding Scheme Designator|(0008,0102)||/1C|
+Coding Scheme Version|(0008,0103)||/1C|
+Code Meaning|(0008,0104)||/1C|
+Context Identifier|(0008,010F)||/3|
+Mapping Resource|(0008,0105)||/1C|
+Context Group Version|(0008,0106)||/1C|
+Context Group Extension Flag|(0008,010B)||/3|
+Context Group Local Version|(0008,0107)||/1C|
+Coding Scheme UID|(0008,010C)||/3|
+Context Group Extension Creator UID|(0008,010D)||/3|
+{$end Code Sequence Macro}
+#
+# The "Code Sequence Macro - Delimited" contains the sequence delimiters
+# and is used when it is the only thing in the sequence.
+#
+{$define Code Sequence Macro - Delimited}
+Item Begin|(FFFE,E000)||/1C|
+{Code Sequence Macro}
+Item End|(FFFE,E00D)||/1C|
+Sequence End|(FFFE,E0DD)||/1C|
+{$end Code Sequence Macro - Delimited}
+#
+# Content Item Macro
+{$define Content Item Macro}
+Value Type|(0040,A040)||/1|
+Concept Name Code Sequence|(0040,A043)||/1|
+>{Code Sequence Macro - Delimited}
+DateTime|(0040,A120)||/1C|
+Date|(0040,A121)||/1C|
+Time|(0040,A122)||/1C|
+Person Name|(0040,A123)||/1C|
+UID|(0040,A124)||/1C|
+Text Value|(0040,A160)||/1C|
+Concept Code Sequence|(0040,A168)||/1C|
+>{Code Sequence Macro - Delimited}
+Numeric Value|(0040,A30A)||/1C|
+Measurement Units Code Sequence|(0040,08EA)||/1C|
+>{Code Sequence Macro - Delimited}
+{$end Content Item Macro}
+#
+####################################################
+#
+{$define N-EVENT-REPORT-RQ}
+Affected SOP Class UID|(0000,0002)||1/1|
+Command Field|(0000,0100)||1/1|0100H
+Message ID|(0000,0110)||1/1|
+Priority|(0000,0700)||1/1|
+Data Set Type|(0000,0800)||1/1|0003H
+Affected SOP Instance UID|(0000,1000)||1/1|
+Event Type ID|(0000,1002)||1/1|
+{$end N-EVENT-REPORT-RQ}
+#
+{$define N-EVENT-REPORT-RSP}
+Affected SOP Class UID|(0000,0002)||1/1|
+Command Field|(0000,0100)||1/1|8100H
+Message ID Being Responded To|(0000,0120)||1/1|
+Priority|(0000,0700)||1/1|
+Data Set Type|(0000,0800)||1/1|0003H
+Status|(0000,0900)||1/1|
+Offending Element|(0000,0901)||1/1C|
+Error Comment|(0000,0902)||1/1C|
+Error ID|(0000,0903)||1/1C|
+Affected SOP Instance UID|(0000,1000)||1/1|
+Event Type ID|(0000,1002)||1/1|
+{$end N-EVENT-REPORT-RQ}
+#
+{$define N-CREATE-RQ}
+Affected SOP Class UID|(0000,0002)||1/1|
+Command Field|(0000,0100)||1/1|0140H
+Message ID|(0000,0110)||1/1|
+Priority|(0000,0700)||1/1|
+Data Set Type|(0000,0800)||1/1|0003H
+Affected SOP Instance UID|(0000,1000)||1/1|
+{$end N-CREATE-RQ}
+#
+{$define N-CREATE-RSP-OLD}
+Affected SOP Class UID|(0000,0002)||1/1|
+Command Field|(0000,0100)||1/1|8140H
+Message ID Being Responded To|(0000,0120)||1/1|
+Priority|(0000,0700)||1/1|
+Data Set Type|(0000,0800)||1/1|0003H
+Status|(0000,0900)||1/1|
+Offending Element|(0000,0901)||1/1C|
+Error Comment|(0000,0902)||1/1C|
+Error ID|(0000,0903)||1/1C|
+Affected SOP Instance UID|(0000,1000)||1/1|
+{$end N-CREATE-RSP-OLD}
+#
+{$define N-CREATE-RSP}
+Affected SOP Class UID|(0000,0002)||1/1|
+Command Field|(0000,0100)||1/1|8140H
+Message ID Being Responded To|(0000,0120)||1/1|
+Priority|(0000,0700)||1/1|
+Data Set Type|(0000,0800)||1/1|0101H
+Status|(0000,0900)||1/1|
+Offending Element|(0000,0901)||1/1C|
+Error Comment|(0000,0902)||1/1C|
+Error ID|(0000,0903)||1/1C|
+Affected SOP Instance UID|(0000,1000)||1/1|
+{$end N-CREATE-RSP}
+
+{$define C-STORE-RQ}
+Affected SOP Class UID|(0000,0002)||1/1|
+Command Field|(0000,0100)||1/1|0001H
+Message ID|(0000,0110)||1/1|
+Priority|(0000,0700)||1/1|
+Data Set Type|(0000,0800)||1/1|0000H
+Affected SOP Instance UID|(0000,1000)||1/1|
+Move Originator Application Entity Title|(0000,1030)||1/1|
+Move Originator Message ID|(0000,1031)||1/1|
+{$end C-STORE-RQ}
+#
+{$define C-STORE-RSP-SUCCESS}
+Affected SOP Class UID|(0000,0002)||1/1|
+Command Field|(0000,0100)||1/1|8001H
+Message ID Being Responded To|(0000,0120)||1/1|
+Data Set Type|(0000,0800)||1/1|0101H
+Status|(0000,0900)||1/1|0
+Affected SOP Instance UID|(0000,1000)||1/1|
+{$end C-STORE-RSP-SUCCESS}
+#
+{$define C-STORE-RSP-FAILURE}
+Affected SOP Class UID|(0000,0002)||1/1|
+Command Field|(0000,0100)||1/1|8001H
+Message ID Being Responded To|(0000,0120)||1/1|
+Data Set Type|(0000,0800)||1/1|0101H
+Status|(0000,0900)||1/1|FFFFH
+Affected SOP Instance UID|(0000,1000)||1/1|
+Offending Element|(0000,0901)||1/1C|
+Error Comment|(0000,0902)||1/1C|
+Error ID|(0000,0903)||1/1C|
+{$end C-STORE-RSP-FAILURE}
+#
+{$define C-FIND-RQ}
+Affected SOP Class UID|(0000,0002)||1/1|
+Command Field|(0000,0100)||1/1|0020H
+Message ID|(0000,0110)||1/1|
+Priority|(0000,0700)||1/1|
+Data Set Type|(0000,0800)||1/1|0003H
+{$end C-FIND-RQ}
+#
+{$define C-FIND-RSP-PENDING}
+Affected SOP Class UID|(0000,0002)||1/1|
+Command Field|(0000,0100)||1/1|8020H
+Message ID Being Responded To|(0000,0120)||1/1|
+Data Set Type|(0000,0800)||1/1|0003H
+Status|(0000,0900)||1/1|
+{$end C-FIND-RSP-PENDING}
+#
+{$define C-FIND-RSP-FINAL}
+Affected SOP Class UID|(0000,0002)||1/1|
+Command Field|(0000,0100)||1/1|8020H
+Message ID Being Responded To|(0000,0120)||1/1|
+Data Set Type|(0000,0800)||1/1|0101H
+Status|(0000,0900)||1/1|
+{$end C-FIND-RSP-FINAL}
+#
+{$define C-FIND-RSP-FAILURE}
+Affected SOP Class UID|(0000,0002)||1/1|
+Command Field|(0000,0100)||1/1|8020H
+Message ID Being Responded To|(0000,0120)||1/1|
+Data Set Type|(0000,0800)||1/1|0101H
+Status|(0000,0900)||1/1|
+Offending Element|(0000,0901)||1/1C|
+Error Comment|(0000,0902)||1/1C|
+Error ID|(0000,0903)||1/1C|
+{$end C-FIND-RSP-FAILURE}
+#
+{$define C-CANCEL-FIND-RQ}
+Command Field|(0000,0100)||1/1|0FFFH
+Message ID Being Responded To|(0000,0120)||1/1|
+Data Set Type|(0000,0800)||1/1|0101H
+{$end C-CANCEL-FIND-RQ}
+#
+{$define C-MOVE-RQ}
+Affected SOP Class UID|(0000,0002)||1/1|
+Command Field|(0000,0100)||1/1|0021H
+Message ID|(0000,0110)||1/1|
+Priority|(0000,0700)||1/1|
+Data Set Type|(0000,0800)||1/1|0003H
+Move Destination|(0000,0600)||1/1|
+{$end C-MOVE-RQ}
+#
+{$define C-MOVE-RSP}
+Affected SOP Class UID|(0000,0002)||1/1|
+Command Field|(0000,0100)||1/1|8021H
+Message ID Being Responded To|(0000,0120)||1/1|
+Data Set Type|(0000,0800)||1/1|0003H
+Status|(0000,0900)||1/1|
+Number of Remaining Sub-operations|(0000,1020)||1/1C|
+Number of Complete Sub-operations|(0000,1021)||1/1C|
+Number of Failed Sub-operations|(0000,1022)||1/1C|
+Number of Warning Sub-operations|(0000,1023)||1/1C|
+Offending Element|(0000,0901)||1/1C|
+Error Comment|(0000,0902)||1/1C|
+Error ID|(0000,0903)||1/1C|
+{$end C-MOVE-RSP}
+#
+{$define C-CANCEL-MOVE-RQ}
+Command Field|(0000,0100)||1/1|0FFFH
+Message ID Being Responded To|(0000,0120)||1/1|
+Data Set Type|(0000,0800)||1/1|0101H
+{$end C-CANCEL-MOVE-RQ}
+#
+{$define C-ECHO-RQ}
+Affected SOP Class UID|(0000,0002)||1/1|
+Command Field|(0000,0100)||1/1|0030H
+Message ID|(0000,0110)||1/1|
+Data Set Type|(0000,0800)||1/1|0101H
+{$end C-ECHO-RQ}
+#
+{$define C-ECHO-RSP}
+Affected SOP Class UID|(0000,0002)||1/1|
+Command Field|(0000,0100)||1/1|8030H
+Message ID Being Responded To|(0000,0120)||1/1|
+Data Set Type|(0000,0800)||1/1|0101H
+Status|(0000,0900)||1/1|0
+{$end C-ECHO-RSP}
+
+{$define Referring Physician Sequence}
+Referring Physician Sequence|(0009,xx10)|VA DHCP|-/2|
+>Item Begin|(FFFE,E000)||1/1|
+>Code Value|(0008,0100)||-/2|
+>Coding Scheme Designator|(0008,0102)||-/2|
+>Referring Physician's Name|(0008,0090)||-/2|
+>Referring Physician's Address|(0008,0092)||-/2|
+>Referring Physician's Telephone Numbers|(0008,0094)||-/2|
+>Item End|(FFFE,E00D)||1/1|
+>Sequence End|(FFFE,E0DD)||1/1|
+{$end Referring Physician Sequence}
+#
+{$define Performing Physician Sequence}
+Performing Physician Sequence|(0009,xx20)|VA DHCP|-/2|
+>Item Begin|(FFFE,E000)||1/1|
+>Code Value|(0008,0100)||-/2|
+>Coding Scheme Designator|(0008,0102)||-/2|
+>Performing Physician's Name|(0008,1050)||-/2|
+>Item End|(FFFE,E00D)||1/1|
+>Sequence End|(FFFE,E0DD)||1/1|
+{$end Performing Physician Sequence}
+#
+{$define Requesting Physician Sequence}
+Requesting Physician Sequence|(0033,xx10)|VA DHCP|-/2|
+>Item Begin|(FFFE,E000)||1/1|
+>Code Value|(0008,0100)||-/2|
+>Coding Scheme Designator|(0008,0102)||-/2|
+>Requesting Physician|(0032,1032)||-/2|
+>Item End|(FFFE,E00D)||1/1|
+>Sequence End|(FFFE,E0DD)||1/1|
+{$end Requesting Physician Sequence}
+#
+{$define Interpretation Author Sequence}
+Interpretation Author Sequence|(4009,xx10)|VA DHCP|-/2|
+>Item Begin|(FFFE,E000)||1/1|
+>Code Value|(0008,0100)||-/2|
+>Coding Scheme Designator|(0008,0102)||-/2|
+>Interpretation Author|(4008,010C)||-/2|
+>Item End|(FFFE,E00D)||1/1|
+>Sequence End|(FFFE,E0DD)||1/1|
+{$end Interpretation Author Sequence}
+#
+{$define Physician Approving Interpretation Sequence}
+Physician Approving Interpretation Sequence|(4009,xx20)|VA DHCP|-/2|
+>Item Begin|(FFFE,E000)||1/1|
+>Code Value|(0008,0100)||-/2|
+>Coding Scheme Designator|(0008,0102)||-/2|
+>Physician Approving Interpretation|(4008,0114)||-/2|
+>Item End|(FFFE,E00D)||1/1|
+>Sequence End|(FFFE,E0DD)||1/1|
+{$end Physician Approving Interpretation Sequence}
+#
+{$define Institution Code Sequence}
+Institution Code Sequence|(0008,0082)||-/2|
+>Item Begin|(FFFE,E000)||1/1|
+>Code Value|(0008,0100)||-/2|
+>Coding Scheme Designator|(0008,0102)||-/2|
+>Code Meaning|(0008,0104)||-/2|
+>Item End|(FFFE,E00D)||1/1|
+>Sequence End|(FFFE,E0DD)||1/1|
+{$end Institution Code Sequence}
+#
+{$define Current Patient Location Sequence}
+Current Patient Location Sequence|(0039,xx10)|VA DHCP|-/2|
+>Item Begin|(FFFE,E000)||1/1|
+>Code Value|(0008,0100)||-/2|
+>Coding Scheme Designator|(0008,0102)||-/2|
+>Current Patient Location|(0038,0300)||-/2|
+>Item End|(FFFE,E00D)||1/1|
+>Sequence End|(FFFE,E0DD)||1/1|
+{$end Current Patient Location Sequence}
+#
+{$define Patient's Institutional Residence Sequence}
+Patient's Institutional Residence Sequence|(0039,xx20)|VA DHCP|-/2|
+>Item Begin|(FFFE,E000)||1/1|
+>Code Value|(0008,0100)||-/2|
+>Coding Scheme Designator|(0008,0102)||-/2|
+>Patient's Institution Residence|(0038,0400)||-/2|
+>Item End|(FFFE,E00D)||1/1|
+>Sequence End|(FFFE,E0DD)||1/1|
+{$end Patient's Institutional Residence Sequence}
+#
+{$define Scheduled Study Location Sequence}
+Scheduled Study Location Sequence|(0033,xx20)|VA DHCP|-/2|
+>Item Begin|(FFFE,E000)||1/1|
+>Code Value|(0008,0100)||-/2|
+>Coding Scheme Designator|(0008,0102)||-/2|
+>Scheduled Study Location|(0032,1020)||-/2|
+>Item End|(FFFE,E00D)||1/1|
+>Sequence End|(FFFE,E0DD)||1/1|
+{$end Scheduled Study Location Sequence}
+#
+{$define Requesting Service Sequence}
+Requesting Service Sequence|(0033,xx30)|VA DHCP|-/2|
+>Item Begin|(FFFE,E000)||1/1|
+>Code Value|(0008,0100)||-/2|
+>Coding Scheme Designator|(0008,0102)||-/2|
+>Requesting Service|(0032,1033)||-/2|
+>Item End|(FFFE,E00D)||1/1|
+>Sequence End|(FFFE,E0DD)||1/1|
+{$end Requesting Service Sequence}
+#
+{$define Imaging Type Sequence}
+Imaging Type Sequence|(0033,xx40)|VA DHCP|-/2|
+>Item Begin|(FFFE,E000)||1/1|
+>Code Value|(0008,0100)||-/2|
+>Coding Scheme Designator|(0008,0102)||-/2|
+>Code Meaning|(0008,0104)||-/2|
+>Item End|(FFFE,E00D)||1/1|
+>Sequence End|(FFFE,E0DD)||1/1|
+{$end Imaging Type Sequence}
+#
+{$define Referenced Patient Sequence}
+Referenced Patient Sequence|(0008,1120)||-/1|
+>Item Begin|(FFFE,E000)||1/1|
+>Referenced SOP Class UID|(0008,1150)||-/1|
+>Referenced SOP Instance UID|(0008,1155)||-/1|
+>Item End|(FFFE,E00D)||1/1|
+>Sequence End|(FFFE,E0DD)||1/1|
+{$end Referenced Patient Sequence}
+#
+{$define Referenced Visit Sequence}
+Referenced Visit Sequence|(0008,1125)||-/1|
+>Item Begin|(FFFE,E000)||1/1|
+>Referenced SOP Class UID|(0008,1150)||-/1|
+>Referenced SOP Instance UID|(0008,1155)||-/1|
+>Item End|(FFFE,E00D)||1/1|
+>Sequence End|(FFFE,E0DD)||1/1|
+{$end Referenced Visit Sequence}
+#
+{$define Patient Data}
+Patient's Name|(0010,0010)||-/2|
+Patient ID|(0010,0020)||-/2|
+# VA uses the social security number
+# DoD uses the family member prefix + SSN
+Issuer of Patient ID|(0010,0021)||-/2|
+Patient's Birth Date|(0010,0030)||-/2|
+# imprecise birthdates need to be supported
+Patient's Sex|(0010,0040)||-/2|
+# Patient Social Security Number (999-99-9999 format)|(0010,0042)||-/2|
+Other Patient IDs|(0010,1000)||-/2|
+# last name initial + terminal digits (e.g., "K6789")
+Patient's Address|(0010,1040)||-/2|
+Medical Alerts|(0010,2000)||-/3|
+Patient's Telephone Numbers|(0010,2154)||-/3|
+Ethnic Group|(0010,2160)||-/2|
+Additional Patient History|(0010,21B0)||-/2|
+{Institution Code Sequence}
+{$end Patient Data}
+#
+{$define Study Data}
+Instance Creation Date|(0008,0012)||-/2|
+Instance Creation Time|(0008,0013)||-/2|
+Instance Creator UID|(0008,0014)||-/2|
+Accession Number|(0008,0050)||-/2|
+# Radiology case number, long format: mmddyy-nnnnn
+{Referenced Patient Sequence}
+{Referenced Visit Sequence}
+{Patient Data}
+Study ID|(0020,0010)||-/2|
+# Radiology case number, short format: nnnnn
+Study Status ID|(0032,000A)||-/2|
+Study Priority ID|(0032,000C)||-/2|
+Scheduled Study Start Date|(0032,1000)||-/2|
+Scheduled Study Start Time|(0032,1001)||-/2|
+Reason for Study|(0033,xx50)|VA DHCP|-/2|
+Requested Procedure Description|(0032,1060)||-/2|
+Requested Procedure Code Sequence|(0032,1064)||-/2|
+>Item Begin|(FFFE,E000)||1/1|
+>Code Value|(0008,0100)||-/2|
+>Coding Scheme Designator|(0008,0102)||-/2|
+>Code Meaning|(0008,0104)||-/2|
+>Item End|(FFFE,E00D)||1/1|
+>Sequence End|(FFFE,E0DD)||1/1|
+Study Comments|(0032,4000)||-/2|
+{Imaging Type Sequence}
+{Requesting Physician Sequence}
+{Requesting Service Sequence}
+{$end Study Data}
+#
+{$define Modality Worklist}
+# Modality Worklist
+Specific Character Set|(0008,0005)||R/1|
+# Scheduled Procedure Step
+Scheduled Procedure Step Sequence|(0040,0100)||R/1|
+>Item Begin|(FFFE,E000)||1/1|
+>Scheduled Station AE Title|(0040,0001)||R/1|
+>Scheduled Procedure Step Start Date|(0040,0002)||R/1|
+>Scheduled Procedure Step Start Time|(0040,0003)||R/1|
+>Modality|(0008,0060)||R/1|
+>Scheduled Performing Physician's Name|(0040,0006)||R/2|
+>Scheduled Procedure Step Description|(0040,0007)||O/1|
+>Scheduled Station Name|(0040,0010)||O/2|
+>Scheduled Procedure Step Location|(0040,0011)||O/2|
+>Scheduled Protocol Code Sequence|(0040,0008)||O/1|
+>>Item Begin|(FFFE,E000)||1/1|
+>>Code Value|(0008,0100)||O/1|
+>>Coding Scheme Designator|(0008,0102)||O/1|
+>>Code Meaning|(0008,0104)||O/3|
+>>Item End|(FFFE,E00D)||1/1|
+>>Sequence End|(FFFE,E0DD)||1/1|
+>Scheduled Procedure Step ID|(0040,0009)||O/1|
+>Scheduled Procedure Step Status|(0040,0020)||O/2|
+>Comments on the Scheduled Procedure Step|(0040,0400)||O/3|
+>Requested Contrast Agent|(0032,1070)||O/2C|
+>Pre-Medication|(0040,0012)||O/2C|
+>Item End|(FFFE,E00D)||1/1|
+>Sequence End|(FFFE,E0DD)||1/1|
+# Requested Procedure
+Requested Procedure ID|(0040,1001)||O/1|
+Reason for the Requested Procedure|(0040,1002)||O/2|
+Requested Procedure Comments|(0040,1400)||O/2|
+Requested Procedure Description|(0032,1060)||O/1|
+Requested Procedure Code Sequence|(0032,1064)||O/1|
+>Item Begin|(FFFE,E000)||1/1|
+>Code Value|(0008,0100)||O/1|
+>Coding Scheme Designator|(0008,0102)||O/1|
+>Code Meaning|(0008,0104)||O/3|
+>Item End|(FFFE,E00D)||1/1|
+>Sequence End|(FFFE,E0DD)||1/1|
+Study Comments|(0032,4000)||-/2|
+Study Instance UID|(0020,000D)||O/1|
+Referenced Study Sequence|(0008,1110)||O/2|
+>Item Begin|(FFFE,E000)||1/1|
+>Referenced SOP Class UID|(0008,1150)||O/1|
+>Referenced SOP Instance UID|(0008,1155)||O/1|
+>Item End|(FFFE,E00D)||1/1|
+>Sequence End|(FFFE,E0DD)||1/1|
+Requested Procedure Priority|(0040,1003)||O/2|
+Patient Transport Arrangements|(0040,1004)||O/2|
+Names of Intended Recipients of Results|(0040,1010)||O/2|
+# Imaging Service Request
+Accession Number|(0008,0050)||O/1|
+Institution Name|(0008,0080)||O/2|
+Study Description|(0008,1030)||O/2|
+# Radiology case number, long format: mmddyy-nnnnn
+Requesting Physician|(0032,1032)||O/2|
+Requesting Service|(0032,1033)||O/2|
+Order Callback Phone Number|(0040,2010)||O/2|
+Referring Physician's Name|(0008,0090)||O/2|
+# Visit Identification
+Admission ID|(0038,0010)||O/2|
+# Visit Status
+Current Patient Location|(0038,0300)||O/2|
+Visit Comments|(0038,4000)||O/2|
+# Visit Relationship
+Referenced Patient Sequence|(0008,1120)||O/1|
+>Item Begin|(FFFE,E000)||1/1|
+>Referenced SOP Class UID|(0008,1150)||O/1|
+>Referenced SOP Instance UID|(0008,1155)||O/1|
+>Item End|(FFFE,E00D)||1/1|
+>Sequence End|(FFFE,E0DD)||1/1|
+# Patient Identification
+Patient's Name|(0010,0010)||R/1|
+Patient ID|(0010,0020)||R/1|
+Issuer of Patient ID|(0010,0021)||R/1|
+# Patient Demographic
+Patient's Birth Date|(0010,0030)||O/2|
+Patient's Sex|(0010,0040)||O/2|
+Other Patient IDs|(0010,1000)||O/2|
+Patient's Size|(0010,1020)||O/2|
+Patient's Weight|(0010,1030)||O/2|
+Patient's Address|(0010,1040)||O/2|
+Patient DFN|(0011,xx20)|VA DHCP|R/1|
+Confidentiality Constraint on Patient Data Description|(0040,3001)||O/2|
+# Patient Medical
+Admission ID|(0038,0010)||O/2|
+Patient State|(0038,0500)||O/2|
+Ethnic Group|(0010,2160)||O/2|
+Pregnancy Status|(0010,21C0)||O/2|
+Medical Alerts|(0010,2000)||O/2|
+Reason for Study|(0032,1030)||0/2|
+Additional Patient History|(0010,21B0)||0/2|
+Allergies|(0010,2110)||O/2|
+Special Needs|(0038,0050)||O/2|
+{$end Modality Worklist}
+#
+{$define Message Handle}
+# Message Handle
+Message Handle|(FFFD,xx10)|VA DHCP|1/1|
+{$end Message Handle}
+
+# Common Composite Image IOD Modules
+#
+# SOP Common Module - PS 3.3-1999 C.12.1
+{$define SOP Common Module}
+SOP Class UID|(0008,0016)||/1|
+SOP Instance UID|(0008,0018)||/1|
+Specific Character Set|(0008,0005)||/1C|
+Instance Creation Date|(0008,0012)||/3|
+Instance Creation Time|(0008,0013)||/3|
+Instance Creator UID|(0008,0014)||/3|
+Instance Number|(0020,0013)||/3|
+{$end SOP Common Module}
+#
+# Synchronization Module - PS 3.3-2004 C.7-7
+{$define Synchronization Module}
+Synchronization Frame of Reference UID|(0020,0200)||/1|
+Synchronization Trigger|(0018,106A)||/1|
+Trigger Source or Type|(0018,1061)||/3|
+Synchronization Channel|(0018,106C)||/1C|
+Acquisition Time Synchronized|(0018,1800)||/1|
+Time Source|(0018,1801)||/3|
+Time Distribution Protocol|(0018,1802)||/3|
+NTP Source Address|(0018,1803)||/3|
+{$end Synchronization Module}
+#
+# Patient Module Attributes - PS 3.3-1999 C.7.1.1
+{$define Patient Module}
+# VA requires Patient's Name to be a Type 1 attribute
+Patient's Name|(0010,0010)||/1|
+# VA requires Patient ID to be a Type 1 attribute
+Patient ID|(0010,0020)||/1|
+# VA requires Patient's Birth Date to be a Type 1 attribute (with MWL)
+Patient's Birth Date|(0010,0030)||/1|
+# VA requires Patient's Sex to be a Type 1 attribute (with MWL)
+Patient's Sex|(0010,0040)||/1|
+Referenced Patient Sequence|(0008,1120)||/3|
+>Item Begin|(FFFE,E000)||/1C|
+>Referenced SOP Class UID|(0008,1150)||/1C|
+>Referenced SOP Instance UID|(0008,1155)||/1C|
+>Item End|(FFFE,E00D)||/1C|
+>Sequence End|(FFFE,E0DD)||/1C|
+Patient's Birth Time|(0010,0032)||/3|
+# VA requires Other Patient IDs to be a Type 1 attribute (with MWL)
+Other Patient IDs|(0010,1000)||/1|
+Other Patient Names|(0010,1001||/3|
+Ethnic Group|(0010,2160)||/3|
+Patient Comments|(0010,4000)||/3|
+{$end Patient Module}
+#
+# Specimen Identification Module Attributes - PS 3.3-1999 C.7.1.2
+{$define Specimen Identification Module}
+Specimen Accession Number|(0040,050A)||/1|
+Specimen Sequence|(0040,0550)||/2|
+>Item Begin|(FFFE,E000)||/1C|
+>Specimen Identifier|(0040,0551)||/2C|
+>Specimen Type Code Sequence|(0040,059A)||/2C|
+>{Code Sequence Macro - Delimited}
+>Slide Identifier|(0040,06FA)||/2C|
+>Item End|(FFFE,E00D)||/1C|
+>Sequence End|(FFFE,E0DD)||/1C|
+{$end Specimen Identification Module}
+#
+# General Study Module - PS 3.3-1999 C.7.2.1
+{$define General Study Module}
+Study Instance UID|(0020,000D)||/1|
+Study Date|(0008,0020)||/2|
+Study Time|(0008,0030)||/2|
+# VA requires Referring Physician's Name to be a Type 1 attribute
+Referring Physician's Name|(0008,0090)||/1|
+Study ID|(0020,0010)||/2|
+# VA requires Accession Number to be a Type 1 attribute
+Accession Number|(0008,0050)||/1|
+Study Description|(0008,1030)||/3|
+Physician(s) of Record|(0008,1048)||/3|
+Name of Physician(s) Reading Study|(0008,1060)||/3|
+Referenced Study Sequence|(0008,1110)||/3|
+>Item Begin|(FFFE,E000)||/1C|
+>Referenced SOP Class UID|(0008,1150)||/1C|
+>Referenced SOP Instance UID|(0008,1155)||/1C|
+>Item End|(FFFE,E00D)||/1C|
+>Sequence End|(FFFE,E0DD)||/1C|
+Procedure Code Sequence|(0008,1032)||/3|
+>{Code Sequence Macro - Delimited}
+{$end General Study Module}
+#
+# Patient Study Module - PS 3.3-1999 C.7.2.2
+#
+# General Series Module - PS 3.3-1999 C.7.3.1
+{$define General Series Module}
+Modality|(0008,0060)||/1|
+Series Instance UID|(0020,000E)||/1|
+Series Number|(0020,0011)||/2|
+Laterality|(0020,0060)||/2C|
+Series Date|(0008,0021)||/3|
+Series Time|(0008,0031)||/3|
+Performing Physician's Name|(0008,1050)||/3|
+Protocol Name|(0018,1030)||/3|
+Series Description|(0008,103E)||/3|
+Operators' Name|(0008,1070)||/3|
+Referenced Performed Procedure Step Sequence|(0008,1111)||/3|
+>Referenced SOP Class UID|(0008,1150)||/1C|
+>Referenced SOP Instance UID|(0008,1155)||/1C|
+Body Part Examined|(0018,0015)||/3|
+Patient Position|(0018,5100)||/2C|
+Smallest Pixel Value in Series|(0028,0108)||/3|
+Largest Pixel Value in Series|(0028,0109)||/3|
+Request Attributes Sequence|(0040,0275)||/3|
+>Item Begin|(FFFE,E000)||/1C|
+>Requested Procedure ID|(0040,1001)||/3|
+>Scheduled Procedure Step ID|(0040,0009)||/1C|
+>Scheduled Procedure Step Description|(0040,0007)||/3|
+>Scheduled Protocol Code Sequence|(0040,0008)||/3|
+>>{Code Sequence Macro - Delimited}
+>Item End|(FFFE,E00D)||/1C|
+>Sequence End|(FFFE,E0DD)||/1C|
+Performed Procedure Step ID|(0040,0253)||/3|
+Performed Procedure Step Start Date|(0040,0244)||/3|
+Performed Procedure Step Start Time|(0040,0245)||/3|
+Performed Procedure Step Description|(0040,0254)||/3|
+Performed Protocol Code Sequence|(0040,0260)||/3|
+>{Code Sequence Macro - Delimited}
+{$end General Series Module}
+#
+# General Encapsulated Document - Supplement 104 C.YY
+{$define Encapsulated Document Series Module}
+Modality|(0008,0060)||/1|
+Series Instance UID|(0020,000E)||/1|
+Series Number|(0020,0011)||/1|
+Referenced Performed Procedure Step Sequence|(0008,1111)||/3|
+>Item Begin|(FFFE,E000)||/1C|
+>Referenced SOP Class UID|(0008,1150)||/1C|
+>Referenced SOP Instance UID|(0008,1155)||/1C|
+>Item End|(FFFE,E00D)||/1C|
+>Sequence End|(FFFE,E0DD)||/1C|
+Series Description|(0008,103E)||/3|
+Request Attributes Sequence|(0040,0275)||/3|
+>Item Begin|(FFFE,E000)||/1C|
+>Requested Procedure ID|(0040,1001)||/3|
+>Reason for the Requested Procedure|(0040,1002)||/3|
+>Reason for Requested Procedure Code Sequence|(0040,100A)||/3|
+>>{Code Sequence Macro - Delimited}
+>Scheduled Procedure Step ID|(0040,0009)||/1C|
+>Scheduled Procedure Step Description|(0040,0007)||/3|
+>Scheduled Protocol Code Sequence|(0040,0008)||/3|
+>>Item Begin|(FFFE,E000)||/1C|
+>>{Code Sequence Macro}
+>>Protocol Context Sequence|(0040,0440)||/3|
+>>>Item Begin|(FFFE,E000)||/1C|
+>>>{Content Item Macro}
+>>>Content Item Modifier Sequence|(0040,0441)||/3|
+>>>>Item Begin|(FFFE,E000)||/1C|
+>>>>{Content Item Macro}
+>>>>Item End|(FFFE,E00D)||/1C|
+>>>>Sequence End|(FFFE,E0DD)||/1C|
+>>>Item End|(FFFE,E00D)||/1C|
+>>>Sequence End|(FFFE,E0DD)||/1C|
+>>Item End|(FFFE,E00D)||/1C|
+>>Sequence End|(FFFE,E0DD)||/1C|
+>Item End|(FFFE,E00D)||/1C|
+>Sequence End|(FFFE,E0DD)||/1C|
+Performed Procedure Step ID|(0040,0253)||/3|
+Performed Procedure Step Start Date|(0040,0244)||/3|
+Performed Procedure Step Start Time|(0040,0245)||/3|
+Performed Procedure Step Description|(0040,0254)||/3|
+Performed Protocol Code Sequence|(0040,0260)||/3|
+>Item Begin|(FFFE,E000)||/1C|
+>{Code Sequence Macro}
+>Protocol Context Sequence|(0040,0440)||/3|
+>>Item Begin|(FFFE,E000)||/1C|
+>>{Content Item Macro}
+>>Content Item Modifier Sequence|(0040,0441)||/3|
+>>>Item Begin|(FFFE,E000)||/1C|
+>>>{Content Item Macro}
+>>>Item End|(FFFE,E00D)||/1C|
+>>>Sequence End|(FFFE,E0DD)||/1C|
+>>Item End|(FFFE,E00D)||/1C|
+>>Sequence End|(FFFE,E0DD)||/1C|
+>Item End|(FFFE,E00D)||/1C|
+>Sequence End|(FFFE,E0DD)||/1C|
+Comments on the Performed Procedure Step|(0040,0280)||/3|
+{$end Encapsulated Document Series Module}
+#
+# Frame of Reference Module - PS 3.3-1999 C.7.4.1
+{$define Frame of Reference Module}
+Frame of Reference UID|(0020,0052)||/1|
+Position Reference Indicator|(0020,1040)||/2|
+{$end Frame of Reference Module}
+#
+# General Equipment Module - PS 3.3-1999 C.7.5.1
+{$define General Equipment Module}
+# VA requires Manufacturer to be a Type 1 attribute
+Manufacturer|(0008,0070)||/1|
+# VA requires Institution Name to be a Type 1 attribute
+Institution Name|(0008,0080)||/1|
+Institution Address|(0008,0081||/3|
+# VA requires Station Name to be a Type 1 attribute
+Station Name|(0008,1010)||/1|
+Institutional Department Name|(0008,1040)||/3|
+# VA requires Manufacturer's model Name to be a Type 1 attribute
+Manufacturer's Model Name|(0008,1090)||/1|
+Device Serial Number|(0018,1000)||/3|
+# VA requires Software Version(s) to be a Type 1 attribute
+Software Version(s)|(0018,1020)||/1|
+Spatial Resolution|(0018,1050)||/3|
+Date of Last Calibration|(0018,1200)||/3|
+Time of Last Calibration|(0018,1201)||/3|
+Pixel Padding Value|(0028,0120)||/3|
+{$end General Equipment Module}
+#
+# General Image Module - PS 3.3-1999 C.7.6.1
+{$define General Image Module}
+Instance Number|(0020,0013)||/2|
+Patient Orientation|(0020,0020)||/2C|
+Content Date|(0008,0023)||/2C|
+Content Time|(0008,0033)||/2C|
+Image Type|(0008,0008)||/3|
+Acquisition Number|(0020,0012)||/3|
+Acquisition Date|(0008,0022)||/3|
+Acquisition Time|(0008,0032)||/3|
+Referenced Image Sequence|(0008,1140)||/3|
+>Item Begin|(FFFE,E000)||/1C|
+>Referenced SOP Class UID|(0008,1150)||/1C|
+>Referenced SOP Instance UID|(0008,1155)||/1C|
+>Referenced Frame Number|(0008,1160)||/3|
+>Item End|(FFFE,E00D)||/1C|
+>Sequence End|(FFFE,E0DD)||/1C|
+Derivation Description|(0008,2111)||/3|
+Source Image Sequence|(0008,2112)||/3|
+>Item Begin|(FFFE,E000)||/1C|
+>Referenced SOP Class UID|(0008,1150)||/1C|
+>Referenced SOP Instance UID|(0008,1155)||/1C|
+>Referenced Frame Number|(0008,1160)||/3|
+>Item End|(FFFE,E00D)||/1C|
+>Sequence End|(FFFE,E0DD)||/1C|
+Images in Acquisition|(0020,1002)||/3|
+Image Comments|(0020,4000)||/3|
+Quality Control Image|(0028,0300)||/3|
+Burned In Annotation|(0028,0301)||/3|
+Lossy Image Compression|(0028,2110)||/3|
+Lossy Image Compression Ratio|(0028,2112)||/3|
+{$end General Image Module}
+#
+# Image Plane Module - PS 3.3-1999 C.7.6.2
+{$define Image Plane Module}
+Pixel Spacing|(0028,0030)||/1|
+Image Orientation (Patient)|(0020,0037)||/1|
+Image Position (Patient)|(0020,0032)||/1|
+Slice Thickness|(0018,0050)||/2|
+Slice Location|(0020,1041)||/3|
+{$end Image Plane MOdlue}
+#
+# Image Pixel Module - PS 3.3-1999 C.7.6.3
+{$define Image Pixel Module}
+Samples per Pixel|(0028,0002)||/1|
+Photometric Interpretation|(0028,0004)||/1|
+Rows|(0028,0010)||/1|
+Columns|(0028,0011)||/1|
+Bits Allocated|(0028,0100)||/1|
+Bits Stored|(0028,0101)||/1|
+High Bit|(0028,0102)||/1|
+Pixel Representation|(0028,0103)||/1|
+Pixel Data|(7FE0,0010)||/1|
+Planar Configuration|(0028,0006)||/1C|
+Pixel Aspect Ratio|(0028,0034)||/1C|
+Smallest Image Pixel Value|(0028,0106)||/3|
+Largest Image Pixel Value|(0028,0107)||/3|
+Red Palette Color Lookup Table Descriptor|(0028,1101)||/1C|
+Green Palette Color Lookup Table Descriptor|(0028,1102)||/1C|
+Blue Palette Color Lookup Table Descriptor|(0028,1103)||/1C|
+Red Palette Color Lookup Table Data|(0028,1201)||/1C|
+Green Palette Color Lookup Table Data|(0028,1202)||/1C|
+Blue Palette Color Lookup Table Data|(0028,1203)||/1C|
+{$end Image Pixel Module}
+#
+# Acquisition Context Module - PS 3.3-1999 C.7.6.14
+{$define Acquisition Context Module}
+Acquisition Context Sequence|(0040,0555)||/2|
+>Item Begin|(FFFE,E000)||/1C|
+>Concept Name Code Sequence|(0040,A043)||/1C|
+>{Code Sequence Macro - Delimited}
+>Referenced Frame Numbers|(0040,A136)||/1C|
+>Numeric Value|(0040,A30A)||/1C|
+>Measurement Units Code Sequence|(0040,08EA)||/1C|
+>{Code Sequence Macro - Delimited}
+>Date|(0040,A121)||/1C|
+>Time|(0040,A122)||/1C|
+>Person Name|(0040,A123)||/1C|
+>Text Value|(0040,A160)||/1C|
+>Concept Code Sequence|(0040,A168)||/1C|
+>{Code Sequence Macro - Delimited}
+>Item End|(FFFE,E00D)||/1C|
+>Sequence End|(FFFE,E0DD)||/1C|
+Acquisition Context Description|(0040,0556)||/3|
+{$end Acquisition Context Module}
+#
+# CR Series Module - PS 3.3-1999 C.8.1.2
+{$define CR Series Module}
+Body Part Examined|0018,0015)||/2|
+View Position|(0018,5101)||/2|
+Filter Type|(0018,1160)||/3|
+Collimator/grid Name|(0018,1180)||/3|
+Focal Spot|(0018,1190)||/3|
+Plate Type|(0018,1260)||/3|
+Phosphor Type|(0018,1261)||/3|
+{$end CR Series Module}
+#
+# CR Image Module - PS 3.3-1999 C.8.1.2
+{$define CR Image Module}
+Photometric Interpretation|(0028,0004)||/1|
+KVP|(0018,0060)||/3|
+Plate ID|(0018,1004)||/3|
+Distance Source to Detector|(0018,1110)||/3|
+Distance Source to Patient|(0018,1111)||/3|
+Exposure Time|(0018,1150)||/3|
+X-Ray Tube Current|(0018,1151)||/3|
+Exposure|(0018,1152)||/3|
+Imager Pixel Spacing|(0018,1164)||/3|
+Generator Power|(0018,1170)||/3|
+Acquisition Device Processing Description|(0018,1400)||/3|
+Acquisition Device Processing Code|(0018,1401)||/3|
+Cassette Orientation|(0018,1402)||/3|
+Cassette Size|(0018,1403)||/3|
+Exposures on Plate|(0018,1404)||/3|
+Relative X-Ray Exposure|(0018,1405)||/3|
+Sensitivity|(0018,6000)||/3|
+{$end CR Image Module}
+#
+# CT Image Module - PS 3.3-1999 C.8.2.1
+{$define CT Image Module}
+Image Type|(0008,0008)||/1|
+Samples per Pixel|(0028,0002)||/1|
+Photometric Interpretation|(0028,0004)||/1|
+Bits Allocated|(0028,0100)||/1|
+Bits Stored|(0028,0101)||/1|
+High Bit|(0028,0102)||/1|
+Rescale Intercept|(0028,1052)||/1|
+Rescale Slope|(0028,1053)||/1|
+KVP|(0018,0060)||/2|
+Acquisition Number|(0020,0012)||/2|
+Scan Options|(0018,0022)||/3|
+Data Collection Diameter|(0018,0090)||/3|
+Reconstruction Diameter|(0018,1100)||/3|
+Distance Source to Detector|(0018,1110)||/3|
+Distance Source to Patient|(0018,1111)||/3|
+Gantry/Detector Tilt|(0018,1120)||/3|
+Table Height|(0018,1130)||/3|
+Rotation Direction|(0018,1140)||/3|
+Exposure Time|(0018,1150)||/3|
+X-Ray Tube Current|(0018,1151)||/3|
+Exposure|(0018,1152)||/3|
+Filter Type|(0018,1160)||/3|
+Generator Power|(0018,1170)||/3|
+Focal Spot(s)|(0018,1190)||/3|
+Convolution Kernel|(0018,1210)||/3|
+{$end CT Image Module}
+#
+# MR Image Module - PS 3.3-1999 C.8.3.1
+{$define MR Image Module}
+Image Type|(0008,0008)||/1|
+Samples per Pixel|(0028,0002)||/1|
+Photometric Interpretation|(0028,0004)||/1|
+Bits Allocated|(0028,0100)||/1|
+Scanning Sequence|(0018,0020)||/1|
+Sequence Variant|(0018,0021)||/1|
+Scan Options|(0018,0022)||/2|
+MR Acquisition Type|(0018,0023)||/2|
+Repetition Time|(0018,0080)||/2C|
+Echo Time|(0018,0081)||/2|
+Echo Train Length|(0018,0091)||/2|
+Inversion Time|(0018,0082||/2C|
+Trigger Time|(0018,1060)||/2C|
+Sequence Name|(0018,0024)||/3|
+Angio Flag|(0018,0025)||/3|
+Number of Averages|(0018,0083)||/3|
+Imaging Frequency|(0018,0084)||/3|
+Imaged Nucleus|(0018,0085)||/3|
+Echo Number(s)|(0018,0086)||/3|
+Magnetic Field Strength|(0018,0087)||/3|
+Spacing Between Slices|(0018,0088)||/3|
+Number of Phase Encoding Steps|(0018,0089)||/3|
+Percent Sampling|(0018,0093)||/3|
+Percent Phase Field of View|(0018,0094)||/3|
+Pixel Bandwidth|(0018,0095)||/3|
+Nominal Interval|(0018,1062)||/3|
+Beat Rejection Flag|(0018,1080)||/3|
+Low R-R Value|(0018,1081)||/3|
+High R-R Value|(0018,1082)||/3|
+Intervals Acquired|(0018,1083)||/3|
+Intervals Rejected|(0018,1084)||/3|
+PVC Rejection|(0018,1085)||/3|
+Skip Beats|(0018,1086)||/3|
+Heart Rate|(0018,1088)||/3|
+Cardiac Number of Images|(0018,1090)||/3|
+Trigger Window|(0018,1094)||/3|
+Reconstruction Diameter|(0018,1100)||/3|
+Receive Coil Name|(0018,1250)||/3|
+Transmit Coil Name|(0018,1251)||/3|
+Acquisition Matrix|(0018,1310)||/3|
+In-plane Phase Encoding Direction|(0018,1312)||/3|
+Flip Angle|(0018,1314)||/3|
+SAR|(0018,1316)||/3|
+Variable Flip Angle Flag|(0018,1315)||/3|
+dB/dt|(0018,1318)||/3|
+Temporal Position Identifier|(0020,0100)||/3|
+Number of Temporal Positions|(0020,0105)||/3|
+Temporal Resolution|(0020,0110)||/3|
+{$end MR Image Module}
+#
+# US Image Module - PS 3.3-1999 C.8.5.6
+{$define US Image Module}
+Samples per Pixel|(0028,0002)||/1|
+Photometric Interpretation|(0028,0004)||/1|
+Bits Allocated|(0028,0100)||/1|
+Bits Stored|(0028,0101)||/1|
+High Bit|(0028,0102)||/1|
+Planar Configuration|(0028,0006)||/1C|
+Pixel Representation|(0028,0103)||/1|
+Frame Increment Pointer|(0028,0009)||/1C|
+Image Type|(0008,0008)||/2|
+Lossy Image Compression|(0028,2110)||/1C|
+Number of Stages|(0008,2124)||/2C|
+Number of Views in Stage|(0008,212A)||/2C|
+Ultrasound Color Data Present|(0028,0014)||/3|
+Referenced Overlay Sequence|(0008,1130)||/3|
+>Referenced SOP Class UID|(0008,1150)||/1C|
+>Referenced SOP Instance UID|(0008,1155)||/1C|
+Referenced Curve Sequence|(0008,1145)||/1C|
+>Referenced SOP Class UID|(0008,1150)||/1C|
+>Referenced SOP Instance UID|(0008,1155)||/1C|
+Stage Name|(0008,2120)||/3|
+Stage Number|(0008,2122)||/3|
+View Number|(0008,2128)||/3|
+Number of Event Timers|(0008,2129)||/3|
+Event Elapsed Time(s)|(0008,2130)||/3|
+Event Timer Name(s)|(0008,2132)||/3|
+# Anatomic Region Modifier Sequence
+# more is needed
+{$end US Image Module}
+#
+# Cine Module - PS 3.3-2004 C.7.6.5
+{$define Cine Module}
+Preferred Playback Sequencing|(0018,1244)||/3|
+Frame Time|(0018,1063)||/1C|
+Frame Time Vector|(0018,1065)||/1C|
+Start Trim|(0008,2142)||/3|
+Stop Trim|(0008,2143)||/3|
+Recommended Display Frame Rate|(0008,2144)||/3|
+Cine Rate|(0018,0040)||/3|
+Frame Delay|(0018,1066)||/3|
+Image Trigger Delay|(0018,1067)||/3|
+Effective Duration|(0018,0072)||/3|
+Actual Frame Duration|(0018,1242)||/3|
+Multiplexed Audio Channels Description Code Sequence|(003A,0300)||/1C|
+>Channel Identification Code|(003A,0301)||/1|
+>Channel Mode|(003A,0302)||/1|
+>Channel Source Sequence|(003A,0208)||/1|
+>{Code Sequence Macro - Delimited}
+{$end Cine Module}
+#
+# Multi-Frame Module - PS 3.3-2004 C.7.6.6
+{$define Multi-frame Module}
+Number of Frames|(0028,0008)||/1|
+Frame Increment Pointer|(0028,0009)||/1|
+{$end Multi-frame Module}
+#
+# SC Equipment Module - PS 3.3-1999 C.8.6.1
+{$define SC Equipment Module}
+Conversion Type|(0008,0064)||/1|
+Modality|(0008,0060)||/3|
+Secondary Capture Device ID|(0018,1010)||/3|
+Secondary Capture Device Manufacturer|(0018,1016)||/3|
+Secondary Capture Device Manufacturer's Model Name|(0018,1018)||/3|
+Secondary Capture Device Software Versions|(0018,1019)||/3|
+Video Image Format Acquired|(0018,1022)||/3|
+Digital Image Format Acquired|(0018,1023)||/3|
+{$end SC Equipment Module}
+#
+# SC Image Module - PS 3.3-1999 C.8.6.2
+{$define SC Image Module}
+Date of Secondary Capture|(0018,1012)||/3|
+Time of Secondary Capture|(0018,1014)||/3|
+{$end SC Image Module}
+#
+# SC Multi-frame Image - PS 3.3-2004 C.8.6.3
+{$define SC Multi-frame Image Module}
+Burned In Annotation|(0028,0301)||/1|
+Presentation LUT Shape|(2050,0020)||/1C|
+Illumination|(2010,015E)||/3|
+Reflected Ambient Light|(2010,0160)||/3|
+Rescale Intercept|(0028,1052)||/1C|
+Rescale Slope|(0028,1053)||/1C|
+Rescale Type|(0028,1054)||/1C|
+Frame Increment Pointer|(0028,0009)||/1C|
+Nominal Scanned Pixel Spacing|(0018,2010)||/1C|
+Digitizing Device Transport Direction|(0018,2020)||/3|
+Rotation of Scanned Film|(0018,2030)||/3|
+{$end SC Multi-frame Image Module}
+#
+# SC Multi-frame Vector - PS 3.3-2004 C.8.6.4
+{$define SC Multi-frame Vector Module}
+Frame Time Vector|(0018,1065)||/1C|
+Page Number Vector|(0018,2001)||/1C|
+Frame Label Vector|(0018,2002)||/1C|
+Frame Primary Angle Vector|(0018,2003)||/1C|
+Frame Secondary Angle Vector|(0018,2004)||/1C|
+Slice Location Vector|(0018,2005)||/1C|
+Display Window Label Vector|(0018,2006)||/1C|
+{$end SC Multi-frame Vector Module}
+#
+# X-Ray Image Module - PS 3.3-1999 C.8.7.1
+{$define X-Ray Image Module}
+Frame Increment Pointer|(0028,0009)||/1C|
+Lossy Image Compression|(0028,2110)||/1C|
+Image Type|(0008,0008)||/1|
+Pixel Intensity Relationship|(0028,1040)||/1|
+Samples per Pixel|(0028,0002)||/1|
+Photometric Interpretation|(0028,0004)||/1|
+Bits Allocated|(0028,0100)||/1|
+Bits Stored|(0028,0101)||/1|
+High Bit|(0028,0102)||/1|
+Pixel Representation|(0028,0103)||/1|
+Anatomic Region Sequence|(0008,2218)||/3|
+>Item Begin|(FFFE,E000)||/1C|
+>{Code Sequence Macro}
+>Anatomic Region Modifier Sequence|(0008,2220)||/3|
+>>{Code Sequence Macro - Delimited}
+>Item End|(FFFE,E00D)||/1C|
+>Sequence End|(FFFE,E0DD)||/1C|
+Primary Anatomic Structure Sequence|(0008,2228)||/3|
+>Item Begin|(FFFE,E000)||/1C|
+>{Code Sequence Macro}
+>Primary Anatomic Structure Modifier Sequence|(0008,2230)||/3|
+>>{Code Sequence Macro - Delimited}
+>Item End|(FFFE,E00D)||/1C|
+>Sequence End|(FFFE,E0DD)||/1C|
+#
+# NEED TO FILL IN STUFF FOR PASSING PARAMETERS TO MACROS
+#
+R Wave Pointer|(0028,6040)||/3|
+Referenced Image Sequence|(0008,1140)||/1C|
+>Referenced SOP Class UID|(0008,1150)||/1|
+>Referenced SOP Instance UID|(0008,1155)||/1|
+>Referenced Frame Number|(0008,1160)||/3|
+Derivation Description|(0008,2111)||/3|
+Acquisition Device Processing Description|(0018,1400)||/3|
+Calibration Image|(0050,0004)||/3|
+{$end X-Ray Image Module}
+#
+# X-Ray Acquisition Module - PS 3.3-1999 C.8.7.2
+{$define X-Ray Acquisition Module}
+KVP|(0018,0060)||/1|
+X-Ray Tube Current|(0018,1151)||/2C|
+Exposure Time|(0018,1150)||/2C|
+Exposure|(0018,1152)||/2C|
+Grid|(0018,1166)||/3|
+Average Pulse Width|(0018,1154)||/3|
+Radiation Mode|(0018,115A)||/3|
+Type of Filters|(0018,1161)||/3|
+Intensifier Size|(0018,1162)||/3|
+Field of View Shape|(0018,1147)||/3|
+Field of View Dimension(s)|(0018,1149)||/3|
+Imager Pixel Spacing|(0018,1164)||/3|
+Focal Spot(s)|(0018,1190)||/3|
+Image and Fluoroscopy Area Dose Product|(0018,115E)||/3|
+{$end X-Ray Acquisition Module}
+#
+# XA Positioner Module - PS 3.3-1999 C.8.7.5
+{$define XA Positioner Module}
+Distance Source to Patient|(0018,1111)||/3|
+Distance Source to Detector|(0018,1110)||/3|
+Estimated Radiographic Magnification Factor|(0018,1114)||/3|
+Positioner Motion|(0018,1500)||/2C|
+Positioner Primary Angle|(0018,1510)||/2|
+Positioner Secondary Angle|(0018,1511)||/2|
+Positioner Primary Angle Increment|(0018,1520)||/2C|
+Positioner Secondary Angle Increment|(0018,1521)||/2C|
+Detector Primary Angle|(0018,1530)||/3|
+Detector Secondary Angle|(0018,1531)||/3|
+{$end XA Positioner Module}
+#
+# DX Series Module - PS 3.3-1999 C.8.11.1
+{$define DX Series Module}
+{$end DX Series Module}
+#
+# DX Anatomy Imaged Module - PS 3.3-1999 C.8.11.2
+{$define DX Anatomy Imaged Module}
+{$end DX Anatomy Imaged Module}
+#
+# DX Image Module - PS 3.3-1999 C.8.11.3
+{$define DX Image Module}
+{$end DX Image Module}
+#
+# DX Detector Module - PS 3.3-1999 C.8.11.4
+{$define DX Detector Module}
+{$end DX Detector Module}
+#
+# DX Positioning Module - PS 3.3-1999 C.8.11.5
+{$define DX Positioning Module}
+{$end DX Positioning Module}
+#
+# Intra-oral Series Module - PS 3.3-1999 C.8.11.8
+{$define Intra-oral Series Module}
+Modality|(0008,0060)||/1|
+{$end Intra-oral Series Module}
+#
+# Intra-oral Image Module - PS 3.3-1999 C.8.11.8
+{$define Intra-oral Image Module}
+Positioner Type|(0018,1508)||/1|
+Image Laterality|(0020,0062)||/1|
+Anatomic Region Sequence|(0008,2218)||/1|
+>{Code Sequence Macro - Delimited}
+>Anatomic Region Modifier Sequence|(0008,2220)||/1C|
+>>{Code Sequence Macro - Delimited}
+Primary Anatomic Structure Sequence|(0008,2228)||/1C|
+>{Code Sequence Macro - Delimited}
+{$end Intra-oral Image Module}
+#
+# VL Image Module - PS 3.3-1999 C.8.12.1
+{$define VL Image Module}
+Image Type|(0008,0008)||/1|
+Photometric Interpretation|(0028,0004)||/1|
+Bits Allocated|(0028,0100)||/1|
+Bits Stored|(0028,0101)||/1|
+High Bit|(0028,0102)||/1|
+Pixel Representation|(0028,0103)||/1|
+Samples per Pixel|(0028,0002)||/1|
+Planar Configuration|(0028,0006)||/1C|
+Content Time|(0008,0033)||/1C|
+Lossy Image Compression|(0028,2110)||/2|
+Referenced Image Sequence|(0008,1140)||/1C|
+>Item Begin|(FFFE,E000)||/1C|
+>Referenced SOP Class UID|(0008,1150)||/1C|
+>Referenced SOP Instance UID|(0008,1155)||/1C|
+>Item End|(FFFE,E00D)||/1C|
+>Sequence End|(FFFE,E0DD)||/1C|
+{$end VL Image Module}
+#
+# Slide Coordinates Module - PS 3.3-2004 C.8.12.2
+{$define Slide Coordinates Module}
+Image Center Point Coordinates Sequence|(0040,071A)||/2|
+>X offset in Slide Coordinate System|(0040,072A)||/1C|
+>Y offset in Slide Coordinate System|(0040,073A)||/1C|
+>Z offset in Slide Coordinate System|(0040,074A)||/1C|
+Pixel Spacing Sequence|(0040,08D8)||/3|
+>Coordinate System Axis Code Sequence|(0040,08DA)||/1C|
+>>{Code Sequence Macro - Delimited}
+>Numeric Value|(0040,A30A)||/1C|
+>Measurement Units Code Sequence|(0040,08EA)||/1C|
+>>{Code Sequence Macro - Delimited}
+{$end Slide Coordinates Module}
+#
+# Ophthalmic Photography Series Module - PS 3.3-2004 C.8.17.1
+{$define Ophthalmic Photography Series Module}
+Modality|(0008,0060)||/1|OP
+{$end Ophthalmic Photography Series Module}
+#
+# Ophthalmic Photography Image Module - PS 3.3-2004 C.8.17.2
+{$define Ophthalmic Photography Image Module}
+Image Type|(0008,0008)||/1|
+Instance Number|(0020,0013)||/1|
+Samples per Pixel|(0028,0002)||/1|
+Samples per Pixel Used|(0028,0003)||/1C|
+Photometric Interpretation|(0028,0004)||/1|
+Pixel Representation|(0028,0103)||/1|0
+Planar Configuration|(0028,0006)||/1C|
+Pixel Spacing|(0028,0030)||/1C|
+Content Time|(0008,0033)||/1|
+Content Date|(0008,0023)||/1|
+Acquisition DateTime|(0008,002A)||/1C|
+Source Image Sequence|(0008,2112)||/2C|
+>{Image SOP Instance Reference Macro}
+>Purpose of Reference Code Sequence|(0040,A170)||/1C|
+>>{Code Sequence Macro - Delimited}
+Lossy Image Compression|(0028,2110)||/1|
+Lossy Image Compression Ratio|(0028,2112)||/1C|
+Lossy Image Compression Method|(0028,2114)||/1C|
+Presentation LUT Shape|(2050,0020)||/1C|
+Calibration Image|(0050,0004)||/3|
+Burned In Annotation|(0028,0301)||/1|
+{$end Ophthalmic Photography Image Module}
+#
+# Ophthalmic Photographic Parameters Module - PS 3.3-2004 C.8.17.3
+{$define Ophthalmic Photographic Parameters Module}
+Acquisition Device Type Code Sequence|(0022,0015)||/1|
+>{Code Sequence Macro - Delimited}
+Illumination Type Code Sequence|(0022,0016)||/2|
+>{Code Sequence Macro - Delimited}
+Light Path Filter Type Stack Code Sequence|(0022,0017)||/2|
+>{Code Sequence Macro - Delimited}
+Light Path Filter Pass-Through Wavelength|(0022,0001)||/3|
+Light Path Filter Pass Band|(0022,0002)||/3|
+Image Path Filter Type Stack Code Sequence|(0022,0018)||/2|
+>{Code Sequence Macro - Delimited}
+Image Path Filter Pass-Through Wavelength|(0022,0003)||/3|
+Image Path Filter Pass Band|(0022,0004)||/3|
+Lenses Code Sequence|(0022,0019)||/2|
+>{Code Sequence Macro - Delimited}
+Detector Type|(0018,7004)||/2|
+Channel Description Code Sequence|(0022,001A)||/1C|
+>{Code Sequence Macro - Delimited}
+{$end Ophthalmic Photographic Parameters Module}
+#
+# Ophthalmic Photography Acquisition Parameters Module - PS 3.3-2004 C.8.17.4
+{$define Ophthalmic Photography Acquisition Parameters Module}
+Patient Eye Movement Commanded|(0022,0005)||/2|
+Patient Eye Movement Command Code Sequence|(0022,0006)||/1C|
+>{Code Sequence Macro - Delimited}
+Refractive State Sequence|(0022,001B)||/2|
+>Spherical Lens Power|(0022,0007)||/1|
+>Cylinder Lens Power|(0022,0008)||/1|
+>Cylinder Axis|(0022,0009)||/1|
+Emmetropic Magnification|(0022,000A)||/2|
+Intra Ocular Pressure|(0022,000B)||/2|
+Horizontal Field of View|(0022,000C)||/2|
+Pupil Dilated|(0022,000D)||/2|
+Mydriatic Agent Code Sequence|(0022,001C)||/2C|
+Degree of Dilation|(0022,000E)||/2C|
+>{Code Sequence Macro - Delimited}
+{$end Ophthalmic Photography Acquisition Parameters Module}
+#
+# Ocular Region Imaged Module - PS 3.3-2004 C.8.17.5
+{$define Ocular Region Imaged Module}
+Image Laterality|(0020,0062)||/1|
+Relative Image Position Code Sequence|(0022,001D)||/3|
+>{Code Sequence Macro - Delimited}
+{$end Ocular Region Imaged Module}
+#
+# Stereometric Series Module - PS 3.3-2004 C.8.18.1
+{$define Stereometric Series Module}
+Modality|(0008,0060)||/1|SMR
+{$end Stereometric Series Module}
+#
+# Stereometric Relationship Module - PS 3.3-2004 C.8.18.2
+{$define Stereometric Relationship Module}
+Stereo Pairs Sequence|(0022,0020)||/1|
+>Stereo Baseline Angle|(0022,0010)||/3|
+>Stereo Baseline Displacement|(0022,0011)||/3|
+>Stereo Horizontal Pixel Offset|(0022,0012)||/3|
+>Stereo Vertical Pixel Offset|(0022,0013)||/3|
+>Stereo Rotation|(0022,0014)||/3|
+>Left Image Sequence|(0022,0021)||/1|
+>>{Image SOP Instance Reference Macro}
+>Right Image Sequence|(0022,0022)||/1|
+>>{Image SOP Instance Reference Macro}
+{$end Stereometric Relationship Module}
+#
+# Common Instance Reference Module - PS 3.3-2004 C.12.2
+{$define Common Instance Reference Module}
+{Series and Instance Reference Macro}
+Studies Containing Other Referenced Instances Sequence|(0008,1200)||/1C|
+>Study Instance UID|(0020,000D)||/1|
+>{Series and Instance Reference Macro}
+{$end Common Instance Reference Module}
+#
+# Encapsulated Document Module - Supplement 104 C.YY-2
+{$define Encapsulated Document Module}
+Instance Number|(0020,0013)||/1|
+Content Date|(0008,0023)||/2|
+Content Time|(0008,0033)||/2|
+Acquisition DateTime|(0008,002A)||/2|
+Burned In Annotation|(0028,0301)||/1|
+Source Instance Sequence|(0042,0013)||/1C|
+>Item Begin|(FFFE,E000)||1/1|
+>Referenced SOP Class UID|(0008,1150)||1/1|
+>Referenced SOP Instance UID|(0008,1155)||1/1|
+>Item End|(FFFE,E00D)||1/1|
+>Sequence End|(FFFE,E0DD)||1/1|
+Document Title|(0042,0010)||/1|
+Concept Name Code Sequence|(0040,A043)||/2|
+>{Code Sequence Macro - Delimited}
+MIME Type of Encapsulated Document|(0042,0012)||/1|
+Encapsulated Document|(0042,0011)||/1|
+{$end Encapsulated Document Module}
+#
+# Performed Workitem Code Sequence - dummy
+{$define Performed Workitem Code Sequence}
+{$end Performed Workitem Code Sequence}
+#
+#
+#
+#####################################################
+# End of Macro definitions, now come the expansions #
+#####################################################
+#
+#
+#
+$TEMPLATE|Computed Radiography Image Storage|CR||
+$SOP|Computed Radiography Image Storage
+{Patient Module}
+{General Study Module}
+{General Series Module}
+{General Equipment Module}
+{General Image Module}
+{Image Pixel Module}
+{CR Image Module}
+{SOP Common Module}
+#
+$TEMPLATE|CT Image Storage|CT||
+$SOP|CT Image Storage
+{Patient Module}
+{General Study Module}
+{General Series Module}
+{Frame of Reference Module}
+{General Equipment Module}
+{General Image Module}
+{Image Plane Module}
+{Image Pixel Module}
+{CT Image Module}
+{SOP Common Module}
+#
+$TEMPLATE|MR Image Storage|MR||
+$SOP|MR Image Storage
+{Patient Module}
+{General Study Module}
+{General Series Module}
+{Frame of Reference Module}
+{General Equipment Module}
+{General Image Module}
+{Image Plane Module}
+{Image Pixel Module}
+{MR Image Module}
+{SOP Common Module}
+#
+# NM Image IOD - TBD
+#
+$TEMPLATE|Ultrasound Image Storage|US||
+$SOP|US Image Storage
+{Patient Module}
+{General Study Module}
+{General Series Module}
+# {Frame of Reference Module}
+# <US Frame of Reference Module>
+{General Equipment Module}
+{General Image Module}
+{Image Pixel Module}
+{US Image Module}
+{SOP Common Module}
+#
+$TEMPLATE|Ultrasound Multi-frame Image Storage|US||
+$SOP|US Multi-frame Image Storage
+{Patient Module}
+{General Study Module}
+{General Series Module}
+{General Equipment Module}
+{General Image Module}
+{Image Pixel Module}
+{Cine Module}
+{Multi-frame Module}
+{US Image Module}
+{SOP Common Module}
+#
+$TEMPLATE|Secondary Capture Image Storage|SC||
+$SOP|Secondary Capture Image Storage
+{Patient Module}
+{General Study Module}
+{General Series Module}
+{General Equipment Module}
+{SC Equipment Module}
+{General Image Module}
+{Image Pixel Module}
+{SC Image Module}
+{SOP Common Module}
+#
+$TEMPLATE|Multi-frame Grayscale Byte Secondary Capture Image Storage|SC||
+$SOP|Multi-frame Grayscale Byte Secondary Capture Image Storage
+{Patient Module}
+{General Study Module}
+{General Series Module}
+{General Equipment Module}
+{SC Equipment Module}
+{General Image Module}
+{Image Pixel Module}
+{Multi-frame Module}
+{SC Image Module}
+{SC Multi-frame Image Module}
+{SOP Common Module}
+#
+$TEMPLATE|Multi-frame True Color Secondary Capture Image Storage|SC||
+$SOP|Multi-frame True Color Secondary Capture Image Storage
+{Patient Module}
+{General Study Module}
+{General Series Module}
+{General Equipment Module}
+{SC Equipment Module}
+{General Image Module}
+{Image Pixel Module}
+{Multi-frame Module}
+{SC Image Module}
+{SC Multi-frame Image Module}
+{SOP Common Module}
+#
+$TEMPLATE|Digital X-Ray Image Storage - For Presentation|DX||
+$SOP|Digital X-Ray Image Storage - For Presentation
+{Patient Module}
+{General Study Module}
+{General Series Module}
+{DX Series Module}
+{General Equipment Module}
+{General Image Module}
+{Image Pixel Module}
+{DX Anatomy Imaged Module}
+{DX Image Module}
+{DX Detector Module}
+{Acquisition Context Module}
+{SOP Common Module}
+#
+$TEMPLATE|VL Endoscopic Image Storage|VL||
+$SOP|VL Endoscopic Image Storage
+{General Study Module}
+{General Series Module}
+{General Equipment Module}
+{General Image Module}
+{Image Pixel Module}
+{Acquisition Context Module}
+{VL Image Module}
+{SOP Common Module}
+#
+$TEMPLATE|VL Microscopic Image Storage|VL||
+$SOP|VL Microscopic Image Storage
+{Patient Module}
+{Specimen Identification Module}
+{General Study Module}
+{General Series Module}
+{General Equipment Module}
+{General Image Module}
+{Image Pixel Module}
+{Acquisition Context Module}
+{VL Image Module}
+{SOP Common Module}
+#
+$TEMPLATE|VL Slide-Coordinates Microscopic Image Storage|VL||
+$SOP|VL Slide-Coordinates Microscopic Image Storage
+{Patient Module}
+{Specimen Identification Module}
+{General Study Module}
+{General Series Module}
+{Frame of Reference Module}
+{General Equipment Module}
+{General Image Module}
+{Image Pixel Module}
+{Acquisition Context Module}
+{VL Image Module}
+{Slide Coordinates Module}
+{SOP Common Module}
+#
+$TEMPLATE|VL Photographic Image Storage|VL||
+$SOP|VL Photographic Image Storage
+{Patient Module}
+{General Study Module}
+{General Series Module}
+{General Equipment Module}
+{General Image Module}
+{Image Pixel Module}
+{Acquisition Context Module}
+{VL Image Module}
+{SOP Common Module}
+#
+$TEMPLATE|Ophthalmic Photography 8 Bit Image Storage|OP||
+$SOP|Ophthalmic Photography 8 Bit Image Storage
+{Patient Module}
+{General Study Module}
+{General Series Module}
+{Ophthalmic Photography Series Module}
+{Synchronization Module}
+{General Equipment Module}
+{General Image Module}
+{Image Pixel Module}
+{Multi-frame Module}
+{Ophthalmic Photography Image Module}
+{Ocular Region Imaged Module}
+{Ophthalmic Photography Acquisition Parameters Module}
+{Ophthalmic Photographic Parameters Module}
+{SOP Common Module}
+#
+$TEMPLATE|Ophthalmic Photography 16 Bit Image Storage|OP||
+$SOP|Ophthalmic Photography 16 Bit Image Storage
+{Patient Module}
+{General Study Module}
+{General Series Module}
+{Ophthalmic Photography Series Module}
+{Synchronization Module}
+{General Equipment Module}
+{General Image Module}
+{Image Pixel Module}
+{Multi-frame Module}
+{Ophthalmic Photography Image Module}
+{Ocular Region Imaged Module}
+{Ophthalmic Photography Acquisition Parameters Module}
+{Ophthalmic Photographic Parameters Module}
+{SOP Common Module}
+#
+$TEMPLATE|Stereometric Relationship Storage|SMR||
+$SOP|Stereometric Relationship Storage
+{Patient Module}
+{General Study Module}
+{Stereometric Series Module}
+{General Equipment Module}
+{Stereometric Relationship Module}
+#{Common Instance Reference Module}
+{SOP Common Module}
+#
+$TEMPLATE|Digital Intra-oral X-Ray Image Storage - For Presentation|IO||
+$SOP|Digital Intra-oral X-Ray Image Storage - For Presentation
+{Patient Module}
+{General Study Module}
+{General Series Module}
+{DX Series Module}
+{Intra-oral Series Module}
+{General Equipment Module}
+{General Image Module}
+{Image Pixel Module}
+{DX Anatomy Imaged Module}
+{DX Image Module}
+{DX Detector Module}
+{Intra-oral Image Module}
+{Acquisition Context Module}
+{VL Image Module}
+{SOP Common Module}
+#
+$TEMPLATE|X-Ray Angiographic Image Storage|IO||
+$SOP|X-Ray Angiographic Image Storage
+{Patient Module}
+{General Study Module}
+{General Series Module}
+{General Equipment Module}
+{General Image Module}
+{Image Pixel Module}
+{X-Ray Image Module}
+{X-Ray Acquisition Module}
+{XA Positioner Module}
+{SOP Common Module}
+#
+$TEMPLATE|X-Ray Radiofluoroscopic Image Storage|IO||
+$SOP|X-Ray Radiofluoroscopic Image Storage
+{Patient Module}
+{General Study Module}
+{General Series Module}
+{General Equipment Module}
+{General Image Module}
+{Image Pixel Module}
+{X-Ray Image Module}
+{X-Ray Acquisition Module}
+{XA Positioner Module}
+{SOP Common Module}
+#
+$TEMPLATE|Encapsulated PDF Storage|??||
+$SOP|Encapsulated PDF Storage
+{Patient Module}
+{General Study Module}
+{Encapsulated Document Series Module}
+{General Equipment Module}
+{SC Equipment Module}
+{Encapsulated Document Module}
+{SOP Common Module}
+
+$TEMPLATE|C-STORE REQUEST|C-STORE-RQ||
+$SOP|
+{C-STORE-RQ}
+#
+$TEMPLATE|C-STORE RESPONSE SUCCESS|C-STORE-RSP-SUCCESS||
+$SOP|
+{C-STORE-RSP-SUCCESS}
+#
+$TEMPLATE|C-STORE RESPONSE FAILURE|C-STORE-RSP-FAILURE||
+$SOP|
+{C-STORE-RSP-FAILURE}
+#
+$TEMPLATE|VERIFICATION ECHO REQUEST|C-ECHO-RQ||
+$SOP|Verification SOP Class
+{C-ECHO-RQ}
+#
+$TEMPLATE|VERIFICATION ECHO RESPONSE|C-ECHO-RSP||
+$SOP|Verification SOP Class
+{C-ECHO-RSP}
+
+$TEMPLATE|PATIENT DEMOGRAPHIC CHANGE|N-EVENT-REPORT|Patient Updated|3|
+$SOP|VA Detached Patient Management SOP Class
+{N-EVENT-REPORT-RQ}
+Instance Creation Date|(0008,0012)||-/2|
+Instance Creation Time|(0008,0013)||-/2|
+Instance Creator UID|(0008,0014)||-/2|
+{Patient Data}
+{Message Handle}
+#
+$TEMPLATE|ADT ADMIT|N-EVENT-REPORT|Patient Admitted|3|
+$SOP|VA Detached Visit Management SOP Class
+{N-EVENT-REPORT-RQ}
+Instance Creation Date|(0008,0012)||-/2|
+Instance Creation Time|(0008,0013)||-/2|
+Instance Creator UID|(0008,0014)||-/2|
+Admitting Diagnoses Description|(0008,1080)||-/3|
+{Referenced Patient Sequence}
+{Referring Physician Sequence}
+{Performing Physician Sequence}
+{Patient Data}
+Visit Status ID|(0038,0008)||-/1|
+Admitting Date|(0038,0020)||-/2|
+Admitting Time|(0038,0021)||-/2|
+Discharge Date|(0038,0030)||-/2|
+Discharge Time|(0038,0032)||-/2|
+{Current Patient Location Sequence}
+{Patient's Institutional Residence Sequence}
+{Message Handle}
+
+$TEMPLATE|ADT TRANSFER|N-EVENT-REPORT|Patient Transferred|4|
+$SOP|VA Detached Visit Management SOP Class
+{N-EVENT-REPORT-RQ}
+Instance Creation Date|(0008,0012)||-/2|
+Instance Creation Time|(0008,0013)||-/2|
+Instance Creator UID|(0008,0014)||-/2|
+Admitting Diagnoses Description|(0008,1080)||-/3|
+{Referenced Patient Sequence}
+{Referring Physician Sequence}
+{Performing Physician Sequence}
+{Patient Data}
+Visit Status ID|(0038,0008)||-/1|
+Admitting Date|(0038,0020)||-/2|
+Admitting Time|(0038,0021)||-/2|
+Discharge Date|(0038,0030)||-/2|
+Discharge Time|(0038,0032)||-/2|
+{Current Patient Location Sequence}
+{Patient's Institutional Residence Sequence}
+{Message Handle}
+
+$TEMPLATE|ADT DISCHARGE|N-EVENT-REPORT|Patient Discharged|5|
+$SOP|VA Detached Visit Management SOP Class
+{N-EVENT-REPORT-RQ}
+Instance Creation Date|(0008,0012)||-/2|
+Instance Creation Time|(0008,0013)||-/2|
+Instance Creator UID|(0008,0014)||-/2|
+Admitting Diagnoses Description|(0008,1080)||-/3|
+{Referenced Patient Sequence}
+{Referring Physician Sequence}
+{Performing Physician Sequence}
+{Patient Data}
+Visit Status ID|(0038,0008)||-/1|
+Admitting Date|(0038,0020)||-/2|
+Admitting Time|(0038,0021)||-/2|
+Discharge Date|(0038,0030)||-/2|
+Discharge Time|(0038,0032)||-/2|
+{Current Patient Location Sequence}
+{Patient's Institutional Residence Sequence}
+{Message Handle}
+
+$TEMPLATE|EXAM PULL REQUEST|N-EVENT-REPORT|Visit Scheduled|2|
+$SOP|VA Detached Visit Management SOP Class
+{N-EVENT-REPORT-RQ}
+Instance Creation Date|(0008,0012)||-/2|
+Instance Creation Time|(0008,0013)||-/2|
+Instance Creator UID|(0008,0014)||-/2|
+{Referenced Patient Sequence}
+{Patient Data}
+Visit Status ID|(0038,0008)||-/1|SCHEDULED
+Scheduled Admission Date|(0038,001A)||-/2|
+Scheduled Admission Time|(0038,001B)||-/2|
+{Current Patient Location Sequence}
+# The Current Patient Location field contains the clinic to be visited
+{Patient's Institutional Residence Sequence}
+{Message Handle}
+
+$TEMPLATE|ORDER ENTRY|N-EVENT-REPORT|Study Created|1|
+$SOP|VA Detached Study Management SOP Class
+{N-EVENT-REPORT-RQ}
+{Study Data}
+{Message Handle}
+
+$TEMPLATE|EXAM CHANGE|N-EVENT-REPORT|Study Update|9|
+$SOP|VA Detached Study Management SOP Class
+{N-EVENT-REPORT-RQ}
+{Study Data}
+{Message Handle}
+
+$TEMPLATE|EXAM VERIFICATION|N-EVENT-REPORT|Study Verified|6|
+$SOP|VA Detached Study Management SOP Class
+{N-EVENT-REPORT-RQ}
+{Referenced Patient Sequence}
+{Patient Data}
+{Study Data}
+Study Verified Date|(0032,0032)||-/2|
+Study Verified Time|(0032,0033)||-/2|
+Study Status ID|(0032,000A)||-/2|VERIFIED
+{Message Handle}
+
+$TEMPLATE|EXAM COMPLETE|N-CREATE|||
+$SOP|VA Study Component Management SOP Class
+{N-CREATE-RQ}
+Modality|(0008,0060)||1/1|
+Referenced Study Sequence|(0008,1110)||1/1|
+>Item Begin|(FFFE,E000)||1/1|
+>Referenced SOP Class UID|(0008,1150)||1/1|
+>Referenced SOP Instance UID|(0008,1155)||1/1|
+>Item End|(FFFE,E00D)||1/1|
+>Sequence End|(FFFE,E0DD)||1/1|
+{Referenced Patient Sequence}
+{Patient Data}
+Procedure Code Sequence|(0008,1032)||1/1|
+>Item Begin|(FFFE,E000)||1/1|
+>Code Value|(0008,0100)||1/1|
+>Coding Scheme Designator|(0008,0102)||1/1|
+>Code Meaning|(0008,0104)||1/1|
+>Item End|(FFFE,E00D)||1/1|
+>Sequence End|(FFFE,E0DD)||1/1|
+Study Component Status ID|(0032,1055)||1/1|
+Study Description|(0008,1030)||2/2|
+Accession Number|(0008,0050)||-/2|
+# Radiology case number, long format: mmddyy-nnnnn
+Study ID|(0020,0010)||2/2|
+# Radiology case number, short format: nnnnn
+Referenced Series Sequence|(0008,1115)||2/2|
+>Item Begin|(FFFE,E000)||1/1|
+>Series Date|(0008,0021)||2/2|
+>Series Time|(0008,0031)||2/2|
+>Series Instance UID|(0020,000E)||2/2|
+>Retrieve AE Title|(0008,0054)||2/1|
+>Storage Media File-set ID|(0088,0130)||2/1|
+>Storage Media File-set UID|(0088,0140)||2/1|
+>Referenced Image Sequence|(0008,1140)||2/2|
+>>Item Begin|(FFFE,E000)||1/1|
+>>Referenced SOP Class UID|(0008,1150)||2/2|
+>>Referenced SOP Instance UID|(0008,1155)||2/2|
+>>Item End|(FFFE,E00D)||1/1|
+>>Sequence End|(FFFE,E0DD)||1/1|
+>Item End|(FFFE,E00D)||1/1|
+>Sequence End|(FFFE,E0DD)||1/1|
+{Message Handle}
+#
+#
+#
+$TEMPLATE|EXAM COMPLETE RESPONSE - SUCCESS|N-CREATE|||
+$SOP|VA Study Component Management SOP Class
+{N-CREATE-RSP-OLD}
+{Message Handle}
+#
+#
+#
+$TEMPLATE|EXAM COMPLETE RESPONSE - FAILURE|N-CREATE|||
+$SOP|VA Study Component Management SOP Class
+{N-CREATE-RSP-OLD}
+{Message Handle}
+
+$TEMPLATE|TRANSCRIBED REPORT|N-EVENT-REPORT|Interpretation Updated|6|
+$SOP|VA Detached Interpretation Management SOP Class
+{N-EVENT-REPORT-RQ}
+Instance Creation Date|(0008,0012)||-/1|
+Instance Creation Time|(0008,0013)||-/2|
+Instance Creator UID|(0008,0014)||-/2|
+Referenced Results Sequence|(0008,1100)||-/1|
+>Item Begin|(FFFE,E000)||1/1|
+>Referenced SOP Class UID|(0008,1150)||-/1|
+>Referenced SOP Instance UID|(0008,1155)||-/1|
+>Item End|(FFFE,E00D)||1/1|
+>Sequence End|(FFFE,E0DD)||1/1|
+Referenced Study Sequence|(0008,1110)||-/1|
+>Item Begin|(FFFE,E000)||1/1|
+>Referenced SOP Class UID|(0008,1150)||-/1|
+>Referenced SOP Instance UID|(0008,1155)||-/1|
+>Item End|(FFFE,E00D)||1/1|
+>Sequence End|(FFFE,E0DD)||1/1|
+{Referenced Patient Sequence}
+{Patient Data}
+Interpretation Transcription Date|(4008,0108)||-/1C|
+Interpretation Transcription Time|(4008,0109)||-/1C|
+Interpretation Text|(4008,010B)||-/1|
+# Interpretation Approver Sequence|(4008,0111)||-/1C|
+# >Item Begin|(FFFE,E000)||1/1|
+# >Interpretation Approval Date|(4008,0112)||-/1|
+# >Interpretation Approval Time|(4008,0113)||-/2|
+# >{Physician Approving Interpretation Sequence}
+# >Item End|(FFFE,E00D)||1/1|
+# >Sequence End|(FFFE,E0DD)||1/1|
+Interpretation Diagnosis Description|(4008,0115)||-/2|
+Interpretation Diagnosis Code Sequence|(4008,0117)||-/2|
+>Item Begin|(FFFE,E000)||1/1|
+>Code Value|(0008,0100)||1/1C|
+>Coding Scheme Designator|(0008,0102)||1/1C|
+>Code Meaning|(0008,0104)||1/1C|
+>Item End|(FFFE,E00D)||1/1|
+>Sequence End|(FFFE,E0DD)||1/1|
+Interpretation Type ID|(4008,0210)||-/2|
+Interpretation Status ID|(4008,0212)||-/2|
+{Interpretation Author Sequence}
+{Message Handle}
+
+$TEMPLATE|APPROVED REPORT|N-EVENT-REPORT|Interpretation Updated|6|
+$SOP|VA Detached Interpretation Management SOP Class
+{N-EVENT-REPORT-RQ}
+Instance Creation Date|(0008,0012)||-/1|
+Instance Creation Time|(0008,0013)||-/2|
+Instance Creator UID|(0008,0014)||-/2|
+Referenced Results Sequence|(0008,1100)||-/1|
+>Item Begin|(FFFE,E000)||1/1|
+>Referenced SOP Class UID|(0008,1150)||-/1|
+>Referenced SOP Instance UID|(0008,1155)||-/1|
+>Item End|(FFFE,E00D)||1/1|
+>Sequence End|(FFFE,E0DD)||1/1|
+Referenced Study Sequence|(0008,1110)||-/1|
+>Item Begin|(FFFE,E000)||1/1|
+>Referenced SOP Class UID|(0008,1150)||-/1|
+>Referenced SOP Instance UID|(0008,1155)||-/1|
+>Item End|(FFFE,E00D)||1/1|
+>Sequence End|(FFFE,E0DD)||1/1|
+{Referenced Patient Sequence}
+{Patient Data}
+# Interpretation Transcription Date (transcribed only)|(4008,0108)||-/1C|
+# Interpretation Transcription Time (transcribed only)|(4008,0109)||-/1C|
+Interpretation Text|(4008,010B)||-/1|
+Interpretation Approver Sequence|(4008,0111)||-/1C|
+>Item Begin|(FFFE,E000)||1/1|
+>Interpretation Approval Date|(4008,0112)||-/1|
+>Interpretation Approval Time|(4008,0113)||-/2|
+>{Physician Approving Interpretation Sequence}
+>Item End|(FFFE,E00D)||1/1|
+>Sequence End|(FFFE,E0DD)||1/1|
+Interpretation Diagnosis Description|(4008,0115)||-/2|
+Interpretation Diagnosis Code Sequence|(4008,0117)||-/2|
+>Item Begin|(FFFE,E000)||1/1|
+>Code Value|(0008,0100)||1/1C|
+>Coding Scheme Designator|(0008,0102)||1/1C|
+>Code Meaning|(0008,0104)||1/1C|
+>Item End|(FFFE,E00D)||1/1|
+>Sequence End|(FFFE,E0DD)||1/1|
+Interpretation Type ID|(4008,0210)||-/2|
+Interpretation Status ID|(4008,0212)||-/2|
+{Interpretation Author Sequence}
+{Message Handle}
+
+$TEMPLATE|MODALITY WORKLIST FIND REQUEST|C-FIND|||
+$SOP|Modality Worklist Information Model - FIND
+{C-FIND-RQ}
+{Modality Worklist}
+{Message Handle}
+
+$TEMPLATE|MODALITY WORKLIST FIND RESPONSE - PENDING|C-FIND|||
+$SOP|Modality Worklist Information Model - FIND
+{C-FIND-RSP-PENDING}
+{Modality Worklist}
+#{Message Handle}
+#
+#
+#
+$TEMPLATE|MODALITY WORKLIST FIND RESPONSE - FINAL|C-FIND|||
+$SOP|Modality Worklist Information Model - FIND
+{C-FIND-RSP-FINAL}
+#{Message Handle}
+#
+#
+#
+$TEMPLATE|MODALITY WORKLIST FIND RESPONSE - FAILURE|C-FIND|||
+$SOP|Modality Worklist Information Model - FIND
+{C-FIND-RSP-FAILURE}
+#{Message Handle}
+
+$TEMPLATE|INSTANCE AVAILABILITY NOTIFICATION REQUEST|N-CREATE|||
+$SOP|Instance Availability Notification SOP Class
+{N-CREATE-RQ}
+#{SOP Common Module}
+# Note - all attributes of SOP Common Module are Type 3
+Referenced Performed Procedure Step Sequence|(0008,1111)||3/3|
+# The Referenced Performed Procedure Step Sequence is really a 2/2
+>Item Begin|(FFFE,E000)||1/1|
+>Referenced SOP Class UID|(0008,1150)||1/1|
+>Referenced SOP Instance UID|(0008,1155)||1/1|
+>Performed Workitem Code Sequence|(0040,4019)||2/2|
+>>Item Begin|(FFFE,E000)||1/1|
+>>Code Value|(0008,0100)||1/1|
+>>Coding Scheme Designator|(0008,0102)||1/1|
+>>Code Meaning|(0008,0104)||1/1|
+#{Performed Workitem Code Sequence}
+# All other Attributes from Performed Workitem Code Sequence are Type 3
+>>Item End|(FFFE,E00D)||1/1|
+>>Sequence End|(FFFE,E0DD)||1/1|
+>Item End|(FFFE,E00D)||1/1|
+>Sequence End|(FFFE,E0DD)||1/1|
+Study Instance UID|(0020,000D)||1/1|
+Referenced Series Sequence|(0008,1115)||1/1|
+>Item Begin|(FFFE,E000)||1/1|
+>Series Instance UID|(0020,000E)||1/1|
+>Referenced SOP Sequence|(0008,1199)||1/1|
+>>Item Begin|(FFFE,E000)||1/1|
+>>Referenced SOP Class UID|(0008,1150)||1/1|
+>>Referenced SOP Instance UID|(0008,1155)||1/1|
+>>Instance Availability|(0008,0056)||1/1|
+>>Retrieve AE Title|(0008,0054)||1/1|
+>>Storage Media File-set ID|(0088,0130)||3/3|
+>>Storage Media File-set UID|(0088,0140)||3/3|
+>>Item End|(FFFE,E00D)||1/1|
+>>Sequence End|(FFFE,E0DD)||1/1|
+>Item End|(FFFE,E00D)||1/1|
+>Sequence End|(FFFE,E0DD)||1/1|
+#
+#
+$TEMPLATE|INSTANCE AVAILABILITY NOTIFICATION RESPONSE - SUCCESS|N-CREATE|||
+$SOP|Instance Availability Notification SOP Class
+{N-CREATE-RSP}
+#
+$TEMPLATE|INSTANCE AVAILABILITY NOTIFICATION RESPONSE - FAILURE|N-CREATE|||
+$SOP|Instance Availability Notification SOP Class
+{N-CREATE-RSP}
+
+# Query Retrieve macro definitions for GE Query Retrieve
+{$define GE Q/R Patient Level Keys}
+Patient's Name|(0010,0010)||R/1|
+Patient ID|(0010,0020)||R/1|
+Patient's Birth Date|(0010,0030)||O/2|
+Patient's Sex|(0010,0040)||O/2|
+Other Patient IDs|(0010,1000)||-/2|
+Ethnic Group|(0010,2160)||-/2|
+{$end LM Patient Q/R Level Keys}
+#
+{$define GE Q/R Study Level Keys}
+Study Date|(0008,0020)||-/2|
+Study Time|(0008,0030)||-/2|
+Accession Number|(0008,0050)||-/2|
+# Radiology case number, long format: mmddyy-nnnnn
+Study ID|(0020,0010)||-/2|
+# Radiology case number, short format: nnnnn
+Study Instance UID|(0020,000D)||-/2|
+Referring Physician's Name|(0008,0090)||-/2|
+Study Description|(0008,1030)||3/3|
+Procedure Code Sequence|(0008,1032)||3/3|
+>Item Begin|(FFFE,E000)||1/1|
+>Code Value|(0008,0100)||1/1|
+>Coding Scheme Designator|(0008,0102)||1/1|
+>Code Meaning|(0008,0104)||1/1|
+>Item End|(FFFE,E00D)||1/1|
+>Sequence End|(FFFE,E0DD)||1/1|
+{$end GE Q/R Study Level Keys}
+#
+{$define GE Q/R Series Level Key}
+Modality|(0008,0060)||R/1|
+Series Number|(0020,0011)||R/1|
+Series Instance UID|(0020,000E)||2/2|
+Series Date|(0008,0021)||2/2|
+Series Time|(0008,0031)||2/2|
+Performing Physician's Name|(0008,1050)||2/2|
+Series Description|(0008,103E)||2/2|
+Operators' Name|(0008,1070)||2/2|
+Body Part Examined|(0018,0015)||R/1|
+{$end GE Q/R Series Level Key}
+#
+{$define GE Q/R Image Level Key}
+Image Number|(0020,0013)||R/1|
+SOP Instance UID|(0008,0018)||R/1|
+{$end GE Q/R Image Level Key}
+#
+$TEMPLATE|PATIENT ROOT Q/R FIND REQUEST|C-FIND|||
+$SOP|Patient Root Query/Retrieve Information Model - FIND
+{C-FIND-RQ}
+Query/Retrieve Level|(0008,0052)||-/1|PATIENT
+{GE Q/R Patient Level Keys}
+#{GE Q/R Study Level Keys}
+#{GE Q/R Series Level Key}
+#{GE Q/R Image Level Key}
+{Message Handle}
+#
+$TEMPLATE|STUDY ROOT Q/R FIND REQUEST|C-FIND|||
+$SOP|Study Root Query/Retrieve Information Model - FIND
+{C-FIND-RQ}
+Query/Retrieve Level|(0008,0052)||-/1|STUDY
+{GE Q/R Patient Level Keys}
+{GE Q/R Study Level Keys}
+#{GE Q/R Series Level Key}
+#{GE Q/R Image Level Key}
+{Message Handle}
+#
+$TEMPLATE|PATIENT ROOT Q/R MOVE REQUEST|C-MOVE|||
+$SOP|Patient Root Query/Retrieve Information Model - MOVE
+{C-MOVE-RQ}
+Query/Retrieve Level|(0008,0052)||-/1|PATIENT
+Patient ID|(0010,0020)||2/2|
+Study Instance UID|(0020,000D)||2/2|
+Series Instance UID|(0020,000E)||2/2|
+Failed SOP Instance UID List|(0008,0058)||2/2|
+{Message Handle}
+#
+$TEMPLATE|STUDY ROOT Q/R MOVE REQUEST GE|C-MOVE|||
+$SOP|Study Root Query/Retrieve Information Model - MOVE
+{C-MOVE-RQ}
+Query/Retrieve Level|(0008,0052)||-/1|STUDY
+# Accession Number|(0008,0050)||2/2|
+Patient's Name|(0010,0010)||2/2|
+# Patient ID|(0010,0020)||2/2|
+Study Instance UID|(0020,000D)||2/2|
+# Series Instance UID|(0020,000E)||2/2|
+# Failed SOP Instance UID List|(0008,0058)||2/2|
+{Message Handle}
+#
+$TEMPLATE|STUDY ROOT Q/R MOVE REQUEST KODAK|C-MOVE|||
+$SOP|Study Root Query/Retrieve Information Model - MOVE
+{C-MOVE-RQ}
+Query/Retrieve Level|(0008,0052)||-/1|STUDY
+# Accession Number|(0008,0050)||2/2|
+# Patient's Name|(0010,0010)||2/2|
+Patient ID|(0010,0020)||2/2|
+Study Instance UID|(0020,000D)||2/2|
+# Series Instance UID|(0020,000E)||2/2|
+# Failed SOP Instance UID List|(0008,0058)||2/2|
+{Message Handle}
+#
+$TEMPLATE|PART 10 FILE META INFORMATION||||
+$SOP|
+File Meta Information Version|(0002,0001)||-/1|1
+Media Storage SOP Class UID|(0002,0002)||-/1|
+Media Storage SOP Instance UID|(0002,0003)||-/1|
+Transfer Syntax UID|(0002,0010)||-/1|
+Implementation Class UID|(0002,0012)||-/1|
+Implementation Version Name|(0002,0013)||-/3|
+Source Application Entity Title|(0002,0016)||-/3|
+Private Information Creator UID|(0002,0100)||-/3|
+Private Information|(0002,0102)||-/1C|
+#
+# end of file
+#
+#
+#
+#
+
+

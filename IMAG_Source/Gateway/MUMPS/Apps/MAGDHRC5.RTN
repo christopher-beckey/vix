@@ -1,0 +1,283 @@
+Cache for Windows NT^INT^Saved from DICOM (ISW-KUZMAKP3-LT)^~Format=Cache.S~
+%RO on 09/17/2012  11:24
+MAGDHRC5^INT^1^62692,59318^0
+MAGDHRC5 ;WOIFO/PMK - Read HL7 and generate DICOM ; 24 Jul 2012 12:31 PM
+ ;;3.0;IMAGING;**11,30,51,49,110**;Mar 19, 2002;Build 48;Aug 23, 2012
+ ;; Per VHA Directive 2004-038, this routine should not be modified.
+ ;; +---------------------------------------------------------------+
+ ;; | Property of the US Government.                                |
+ ;; | No permission to copy or redistribute this software is given. |
+ ;; | Use of unreleased versions of this software requires the user |
+ ;; | to execute a written test agreement with the VistA Imaging    |
+ ;; | Development Office of the Department of Veterans Affairs,     |
+ ;; | telephone (301) 734-0100.                                     |
+ ;; | The Food and Drug Administration classifies this software as  |
+ ;; | a medical device.  As such, it may not be changed in any way. |
+ ;; | Modifications to this software may result in an adulterated   |
+ ;; | medical device under 21CFR820, the use of which is considered |
+ ;; | to be a violation of US Federal Statutes.                     |
+ ;; +---------------------------------------------------------------+
+ ;;
+ ; Original Version: ^MAGDHR4A
+ ;
+ ; PACS interface -- Radiology HL7 data input routine #4
+ ; This module reads and parses the HL7 ORC and OBR Segments
+ ;
+ ;     XXXX                                         XXX       X
+ ;    XX  XX                                         XX      XX
+ ;   XX         XXXX    XX XXX  XXXXXXX  XX  XXX     XX     XXXXX
+ ;   XX        XX  XX   XXX XX  XX       XX  XX      XX      XX
+ ;   XX    X   XX  XX   XX  XX  XXXXXXX  XX  XX      XX      XX
+ ;    XX  XX   XX  XX   XX  XX       XX  XX  XX      XX      XX XX
+ ;     XXXX     XXXX    XX  XX  XXXXXXX   XXX XX    XXXX      XXX
+ ;
+ORC ; ORC Segment
+ N ORCONTRL,ORSTATUS,Y,Z
+ N HL7DTTM ;- date/time (HL7 format)
+ N DCMDT ;--- date value (DICOM format)
+ N DCMTM ;--- time value (DICOM format)
+ S ORCONTRL=$$GETDATA^MAGDHRC0(1) ; Order Control
+ S ORSTATUS=$$GETDATA^MAGDHRC0(5) ; Order Status
+ ;
+ S HL7DTTM=$$GETDATA^MAGDHRC0(9) ; Date/Time of Transaction
+ ; The transaction date is needed later in MAGDWLPB
+ D CVTDT^MAGDHRCU(HL7DTTM,.DCMDT,.DCMTM)
+ ; convert to FileMan date/time format
+ S TRANSFDT=(DCMDT_"."_DCMTM)-17000000
+ ;
+ I $$GETEXIST^MAGDHRC0(12) D  ; Requesting Physician Sequence
+ . N NAME
+ . S NAME=$$GETNAME^MAGDHRC0(12)
+ . D SAVE^MAGDFCNS("0032,1032",$P(NAME,"^",2,999)) ; Requesting Physician's Name
+ . Q
+ ;
+ I ORCONTRL="XX",$$GETDATA^MAGDHRC0(16,1,5)="FORWARD" S FORWARD=1
+ E  S FORWARD=0
+ ;
+ ; call back numbers
+ S Z=$$GETDATA^MAGDHRC0(14,1,1)
+ D SAVE^MAGDFCNS("0040,2010",Z) ; order callback phone number
+ Q
+ ;
+OBR ; OBR Segment
+ N ACNUMB,CONSPROC,CPTCODE,CPTNAME,CPTSCHM,FILLER1,FILLER2,GMRCIEN
+ N SPSLOC,STUDYSTS,VACODE,VANAME,VASCHM,Y,Z,ZDSHLSEG
+ ;
+ S Z=$$GETDATA^MAGDHRC0(3,1,1) ; Fillers Order # (C/P Request Tracing #)
+ I VERSION'=2.4 D  ; old format <ien>;GMRC
+ . S GMRCIEN=$P(Z,";",1)
+ . S ACNUMB=$$GMRCACN^MAGDFCNS(GMRCIEN)
+ . Q
+ E  I VERSION=2.4 D  ; new format sss-GMR-<gmrcien>
+ . S ACNUMB=Z
+ . S GMRCIEN=$$GMRCIEN^MAGDFCNS(ACNUMB) ; Study ID = <gmrcien>
+ . Q
+ ;
+ I '$$GMRCIEN^MAGDFCNS(ACNUMB) D  Q
+ . N MSG
+ . S MSG(1)="HL7 consult processing detected a bad ""Fillers Order #"""
+ . S MSG(2)="OBR-3 contained """_Z_"""  It should have been ""SSS-GMR-NNNNNNNN"""
+ . D TRAPERR^MAGDSTRT(1,$T(+0),"DICOM TEXT GATEWAY -- HL7 DATA ERROR",.MSG)
+ . Q  ; Error trap does not return
+ ;
+ D SAVE^MAGDFCNS("0008,0050",ACNUMB) ; Accession Number (SSS-GMR-NNNNNNNN)
+ D SAVE^MAGDFCNS("0020,0010",GMRCIEN) ; Study ID (i.e., NNNNNNNN)
+ ;
+ ; get the Study Instance UID from the ZDS segment, if it is present
+ S ZDSHLSEG=$$GETSEG^MAGDHRC0("ZDS")
+ I ZDSHLSEG D  ; get the Study Instance UID from the ZDS segment
+ . N HL7SEGNO
+ . S HL7SEGNO=ZDSHLSEG
+ . S UID("STUDY")=$$GETDATA^MAGDHRC0(1,1,1)
+ . Q
+ E  D  ; generate the UID on the gateway
+ . S Y="1."_GMRCIEN ; UID sub-root for GMCR is "1."
+ . S UID("STUDY")=$$STUDY^MAGDUID1(STATNUMB,Y)
+ . Q
+ ;
+ ;
+ ; Universal Service Identifier
+ S CPTCODE=$$GETDATA^MAGDHRC0(4,1,1) ; CPT procedure code
+ S CPTNAME=$$GETDATA^MAGDHRC0(4,1,2) ; CPT procedure name
+ S CPTSCHM=$$GETDATA^MAGDHRC0(4,1,3) ; CPT coding scheme
+ S VACODE=$$GETDATA^MAGDHRC0(4,1,4) ; VistA procedure code
+ S VANAME=$$GETDATA^MAGDHRC0(4,1,5) ; VistA procedure name
+ S VASCHM=$$GETDATA^MAGDHRC0(4,1,6) ; VistA coding scheme
+ ;
+ ; Since there are no CPT procedures for Consults, use the VA procedure
+ I CPTCODE="" S CPTCODE=VACODE,CPTNAME=VANAME,CPTSCHM=VASCHM
+ S CPTSCHM=$S(CPTSCHM="CPT4":"C4",1:"L") ; convert to DICOM value
+ ;
+ ; OBR-15 left/right laterality is not supported for the clinical specialities
+ ;
+ S Z=$$GETDATA^MAGDHRC0(5) ; Priority
+ D SAVE^MAGDFCNS("0040,1003",Z) ; Requested Procedure Priority
+ ;
+ S FILLER1=$$GETDATA^MAGDHRC0(20) ; filler field #1
+ ;
+ I VERSION=2.4 D
+ . ;   <request type>
+ . ; ` <place of consult>
+ . ; ` <clinic ien> _ <clinic name>
+ . ; ` <requesting service ien> _ <requesting service name> _ VISTA44 
+ . ;
+ . S X=$P(FILLER1,"`",4)
+ . D SAVE^MAGDFCNS("0032,1033",$P(X,"_",2)) ; Requesting Service
+ . Q
+ ;
+ S FILLER2=$$GETDATA^MAGDHRC0(21) ; filler field #2
+ ;
+ I VERSION=2.4 D
+ .  N DIVISION,DIVNAME,ITYPCODE,ITYPNAME,X
+ . ; get the type of imaging and division location from FILLER2
+ . ;   <itype code> _ <itype name>
+ . ; ` <service ien> _ <service name>
+ . ; ` <division station number> _ <division name>
+ . ; ` <current CPRS GMRC or Appointment Scheduling status>
+ . ;
+ . S X=$P(FILLER2,"`",1) ; <itype code> _ <itype name>
+ . S ITYPCODE=$P(X,"_",1),ITYPNAME=$P(X,"_",2)
+ . D SEQPUSH^MAGDFCNS("0033,xx40,VA DHCP") ; imaging type sequence
+ . D SAVE^MAGDFCNS("0008,0100",ITYPCODE) ; code value
+ . D SAVE^MAGDFCNS("0008,0102","99CON") ; coding scheme
+ . D SAVE^MAGDFCNS("0008,0104",ITYPNAME) ; meaning of code
+ . D SEQPOP^MAGDFCNS ; end imaging type sequence
+ . ;
+ . ; get scheduled procedure location
+ . S X=$P(FILLER2,"`",2) ; <service ien> _ <service name>
+ . S SPSLOC=$P(X,"_",2)
+ . D SAVE^MAGDFCNS("0040,0011",SPSLOC) ; Scheduled Procedure Step Location
+ . ;
+ . ; get the division location for the request from the segment
+ . S X=$P(FILLER2,"`",3) ; <division station number> _ <division name>
+ . S DIVISION=$P(X,"_",1),DIVNAME=$P(X,"_",2)
+ . D REPLACE^MAGDFCNS("0008,0080",DIVNAME) ; institution name
+ . D SEQPUSH^MAGDFCNS("0008,0082") ; institution code sequence
+ . D REPLACE^MAGDFCNS("0008,0100",DIVISION) ; code value
+ . D REPLACE^MAGDFCNS("0008,0102","L") ; coding scheme
+ . D REPLACE^MAGDFCNS("0008,0104",DIVNAME) ; name of division
+ . D SEQPOP^MAGDFCNS ; end institution code sequence
+ . Q
+ ;
+ D SEQPUSH^MAGDFCNS("0032,1064")
+ D SAVE^MAGDFCNS("0008,0100",VACODE) ; procedure code
+ D SAVE^MAGDFCNS("0008,0102",VASCHM) ; coding scheme
+ D SAVE^MAGDFCNS("0008,0104",VANAME) ; code meaning
+ D SEQINC^MAGDFCNS ; increment the sequence counter
+ D SAVE^MAGDFCNS("0008,0100",CPTCODE) ; CPT code value
+ D SAVE^MAGDFCNS("0008,0102",CPTSCHM) ; coding scheme
+ D SAVE^MAGDFCNS("0008,0104",CPTNAME) ; code meaning
+ D SEQPOP^MAGDFCNS
+ ;
+ I VERSION=2.4 S REQSTATE=$P(FILLER2,"`",4) ; current CPRS GMRC or Appointment Scheduling status
+ E  S REQSTATE=$$GETDATA^MAGDHRC0(20,1,1)
+ D REQSTATE ; GMCR/SDAM state
+ I FORWARD S MESSAGE="EXAMINATION CHANGE",STUDYSTS="FORWARDED"
+ ;
+ S Z=$E($$GETDATA^MAGDHRC0(5)) ; Scheduling Priority
+ ; HL7 Priorities are STAT, ASAP, and ROUTINE
+ S Y=$S(Z="S":"HIGH",Z="A":"MED",Z="R":"MED",1:"MED")
+ D SAVE^MAGDFCNS("0032,000C",Y)
+ ;
+ S Z=$$GETNAME^MAGDHRC0(28) ; Names of Intended Recipients of Results
+ D SAVE^MAGDFCNS("0040,1010",$P(Z,"^",2,999)) ; needed for MWL without code
+ ;
+ I VERSION'=2.4,$$GETEXIST^MAGDHRC0(47) D
+ . D SAVE^MAGDFCNS("0032,1033",$$GETDATA^MAGDHRC0(47,1,2)) ; Requesting Service
+ . Q
+ ;
+ D ORDER^MAGDAUD3
+ Q
+ ;
+REQSTATE ; determine the state of the request
+ I REQSTATE="GMRC-PENDING" D
+ . S MESSAGE="ORDER ENTRY",STUDYSTS="PENDING"
+ . Q
+ E  I REQSTATE="GMRC-CANCELLED" D
+ . S MESSAGE="EXAMINATION CHANGE",STUDYSTS="CANCELLED"
+ . Q
+ E  I REQSTATE="SDAM-CANCELLED" D
+ . S MESSAGE="EXAMINATION CHANGE",STUDYSTS=REQSTATE
+ . Q
+ E  I REQSTATE="GMRC-DISCONTINUED" D
+ . S MESSAGE="EXAMINATION CHANGE",STUDYSTS="CANCELLED"
+ . Q
+ E  I REQSTATE="GMRC-ACTIVE" D
+ . S MESSAGE="ORDER ENTRY",STUDYSTS="PENDING"
+ . Q
+ E  I REQSTATE="SDAM-SCHEDULED" D
+ . S MESSAGE="ORDER ENTRY",STUDYSTS="SCHEDULED"
+ . Q
+ E  I REQSTATE="SDAM-FUTURE" D
+ . S MESSAGE="ORDER ENTRY",STUDYSTS="SCHEDULED"
+ . Q
+ E  I REQSTATE="GMRC-SCHEDULED" D
+ . S MESSAGE="ORDER ENTRY",STUDYSTS="SCHEDULED"
+ . Q
+ E  I REQSTATE="SDAM-CHECKIN" D
+ . S MESSAGE="ORDER ENTRY",STUDYSTS="ARRIVED"
+ . Q
+ E  I REQSTATE="GMRC-PARTIAL RESULTS" D
+ . S MESSAGE="TRANSCRIBED REPORT",STUDYSTS="STARTED"
+ . Q
+ E  I REQSTATE="GMRC-NEW UNSIGNED RESULT" D
+ . S MESSAGE="TRANSCRIBED REPORT",STUDYSTS="STARTED"
+ . Q
+ E  I REQSTATE="GMRC-COMPLETE" D
+ . S MESSAGE="APPROVED REPORT",STUDYSTS="COMPLETED"
+ . Q
+ E  I REQSTATE="SDAM-CHECKOUT" D
+ . S MESSAGE="EXAM VERIFICATION",STUDYSTS="DEPARTED"
+ . Q
+ ;
+ I  D  ; if any of the above are true
+ . D SPSLOC
+ . Q
+ ;
+ E  D  ; if none of the above are true
+ . S MSG(1)="Unknown CPRS consult/procedure request state: """_REQSTATE_""""
+ . D WARNING^MAGDFCNS(.MSG)
+ . S STUDYSTS="CREATED" ; worst case scenario - don't ignore the message
+ . Q
+ D SAVE^MAGDFCNS("0032,000A",STUDYSTS) ; Study Status ID
+ Q
+ ;
+SPSLOC ; set the scheduled procedure step location for appointment management
+ I VERSION'=2.4 D  Q:SPSLOC=""
+ . S SPSLOC=$$GETDATA^MAGDHRC0(21,1,2) Q:SPSLOC=""
+ . D SAVE^MAGDFCNS("0040,0011",SPSLOC) ; Scheduled Procedure Step Location
+ . Q
+ ; set the scheduled date and time for the appointment
+ S Z=$$GETDATA^MAGDHRC0(36) Q:'Z  ; Date/Time of the scheduled appointment
+ D SAVE^MAGDFCNS("0032,1000",$E(Z,1,8)) ; scheduled study start date in yyyymmdd
+ S Z=$E($E(Z,9,12)_"000000",1,6) ; add hh, mm, and ss if not there
+ D SAVE^MAGDFCNS("0032,1001",Z) ; scheduled study start time in hhmmss format
+ Q
+ ;
+ZSV ; Consult Service (doesn't exist in Version 2.4)
+ N DIVISION,DIVNAME,ITYPCODE,ITYPNAME,ITYPSCHM
+ ; get the type of imaging and division location from the segment
+ ; (1,2,3,4) imaging type ^ imaging name ^ station number ^ station name
+ S ITYPCODE=$$GETDATA^MAGDHRC0(3,1,1)
+ S ITYPNAME=$$GETDATA^MAGDHRC0(3,1,2)
+ S ITYPSCHM=$$GETDATA^MAGDHRC0(1,1,6)
+ D SEQPUSH^MAGDFCNS("0033,xx40,VA DHCP") ; imaging type sequence
+ D SAVE^MAGDFCNS("0008,0100",ITYPCODE) ; code value
+ D SAVE^MAGDFCNS("0008,0102",ITYPSCHM) ; coding scheme
+ D SAVE^MAGDFCNS("0008,0104",ITYPNAME) ; meaning of code
+ D SEQPOP^MAGDFCNS ; end imaging type sequence
+ ;
+ ; get the division location for the request from the segment
+ S DIVISION=$$GETDATA^MAGDHRC0(3,1,3)
+ S DIVNAME=$$GETDATA^MAGDHRC0(3,1,4)
+ D REPLACE^MAGDFCNS("0008,0080",DIVNAME) ; institution name
+ D SEQPUSH^MAGDFCNS("0008,0082") ; institution code sequence
+ D REPLACE^MAGDFCNS("0008,0100",DIVISION) ; code value
+ D REPLACE^MAGDFCNS("0008,0102","L") ; coding scheme
+ D REPLACE^MAGDFCNS("0008,0104",DIVNAME) ; name of division
+ D SEQPOP^MAGDFCNS ; end institution code sequence
+ Q
+ ;
+
+
+

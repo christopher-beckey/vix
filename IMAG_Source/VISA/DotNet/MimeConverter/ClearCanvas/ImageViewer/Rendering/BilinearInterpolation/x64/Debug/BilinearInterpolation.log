@@ -1,0 +1,6 @@
+﻿cl : command line warning D9035: option 'Gm' has been deprecated and will be removed in a future release
+  stdafx.cpp
+cl : command line warning D9035: option 'Gm' has been deprecated and will be removed in a future release
+  BilinearInterpolation.cpp
+     Creating library x64\Debug\BilinearInterpolation.lib and object x64\Debug\BilinearInterpolation.exp
+  BilinearInterpolation.vcxproj -> C:\usr\Hydra4\ClearCanvas\ImageViewer\Rendering\BilinearInterpolation\x64\Debug\BilinearInterpolation.dll

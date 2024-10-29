@@ -1,0 +1,570 @@
+KIDS Distribution saved on Jul 26, 2012@08:58:39
+Split from GOLD - last patch SEQ81_P120
+**KIDS**:MAG*3.0*350_DD*2006.574^
+
+**INSTALL NAME**
+MAG*3.0*350_DD*2006.574
+"BLD",7774,0)
+MAG*3.0*350_DD*2006.574^IMAGING^0^3120726^n
+"BLD",7774,4,0)
+^9.64PA^2006.574^1
+"BLD",7774,4,2006.574,0)
+2006.574
+"BLD",7774,4,2006.574,222)
+y^y^f^^^^y
+"BLD",7774,4,"B",2006.574,2006.574)
+
+"BLD",7774,6.3)
+1
+"BLD",7774,"KRN",0)
+^9.67PA^779.2^20
+"BLD",7774,"KRN",.4,0)
+.4
+"BLD",7774,"KRN",.401,0)
+.401
+"BLD",7774,"KRN",.402,0)
+.402
+"BLD",7774,"KRN",.403,0)
+.403
+"BLD",7774,"KRN",.5,0)
+.5
+"BLD",7774,"KRN",.84,0)
+.84
+"BLD",7774,"KRN",3.6,0)
+3.6
+"BLD",7774,"KRN",3.8,0)
+3.8
+"BLD",7774,"KRN",9.2,0)
+9.2
+"BLD",7774,"KRN",9.8,0)
+9.8
+"BLD",7774,"KRN",19,0)
+19
+"BLD",7774,"KRN",19.1,0)
+19.1
+"BLD",7774,"KRN",101,0)
+101
+"BLD",7774,"KRN",409.61,0)
+409.61
+"BLD",7774,"KRN",771,0)
+771
+"BLD",7774,"KRN",779.2,0)
+779.2
+"BLD",7774,"KRN",870,0)
+870
+"BLD",7774,"KRN",8989.51,0)
+8989.51
+"BLD",7774,"KRN",8989.52,0)
+8989.52
+"BLD",7774,"KRN",8994,0)
+8994
+"BLD",7774,"KRN","B",.4,.4)
+
+"BLD",7774,"KRN","B",.401,.401)
+
+"BLD",7774,"KRN","B",.402,.402)
+
+"BLD",7774,"KRN","B",.403,.403)
+
+"BLD",7774,"KRN","B",.5,.5)
+
+"BLD",7774,"KRN","B",.84,.84)
+
+"BLD",7774,"KRN","B",3.6,3.6)
+
+"BLD",7774,"KRN","B",3.8,3.8)
+
+"BLD",7774,"KRN","B",9.2,9.2)
+
+"BLD",7774,"KRN","B",9.8,9.8)
+
+"BLD",7774,"KRN","B",19,19)
+
+"BLD",7774,"KRN","B",19.1,19.1)
+
+"BLD",7774,"KRN","B",101,101)
+
+"BLD",7774,"KRN","B",409.61,409.61)
+
+"BLD",7774,"KRN","B",771,771)
+
+"BLD",7774,"KRN","B",779.2,779.2)
+
+"BLD",7774,"KRN","B",870,870)
+
+"BLD",7774,"KRN","B",8989.51,8989.51)
+
+"BLD",7774,"KRN","B",8989.52,8989.52)
+
+"BLD",7774,"KRN","B",8994,8994)
+
+"FIA",2006.574)
+DICOM IMAGE OUTPUT
+"FIA",2006.574,0)
+^MAGDOUTP(2006.574,
+"FIA",2006.574,0,0)
+2006.574
+"FIA",2006.574,0,1)
+y^y^f^^^^y
+"FIA",2006.574,0,10)
+
+"FIA",2006.574,0,11)
+
+"FIA",2006.574,0,"RLRO")
+
+"FIA",2006.574,0,"VR")
+3.0^MAG
+"FIA",2006.574,2006.574)
+0
+"FIA",2006.574,2006.5744)
+0
+"IX",2006.574,2006.574,"STS",0)
+2006.574^STS^Origin and Status^R^^R^IR^W^2006.5744^^^^^LS
+"IX",2006.574,2006.574,"STS",.1,0)
+^^5^5^3041029^
+"IX",2006.574,2006.574,"STS",.1,1,0)
+ 
+"IX",2006.574,2006.574,"STS",.1,2,0)
+ 
+"IX",2006.574,2006.574,"STS",.1,3,0)
+This cross-reference keeps track of ORIGIN and STATUS.
+"IX",2006.574,2006.574,"STS",.1,4,0)
+The main purpose of this cross-reference is to make sure
+"IX",2006.574,2006.574,"STS",.1,5,0)
+that files are issued to only one transmission process.
+"IX",2006.574,2006.574,"STS",1)
+S ^MAGDOUTP(2006.574,"STS",X(1),X(2),X(3),DA(1),DA)=""
+"IX",2006.574,2006.574,"STS",2)
+K ^MAGDOUTP(2006.574,"STS",X(1),X(2),X(3),DA(1),DA)
+"IX",2006.574,2006.574,"STS",2.5)
+K ^MAGDOUTP(2006.574,"STS")
+"IX",2006.574,2006.574,"STS",11.1,0)
+^.114IA^5^3
+"IX",2006.574,2006.574,"STS",11.1,3,0)
+1^C^^^^1^^Origin
+"IX",2006.574,2006.574,"STS",11.1,3,1.5)
+S X=$P(^MAGDOUTP(2006.574,DA(1),0),"^",4)
+"IX",2006.574,2006.574,"STS",11.1,4,0)
+2^C^^^^2
+"IX",2006.574,2006.574,"STS",11.1,4,1.5)
+S X=$P(^MAGDOUTP(2006.574,DA(1),0),"^",5)
+"IX",2006.574,2006.574,"STS",11.1,5,0)
+3^F^2006.5744^2^^3^F
+"IX",2006.574,2006.574,"STS",11.1,5,3)
+
+"MBREQ")
+0
+"PKG",454,-1)
+1^1
+"PKG",454,0)
+IMAGING^MAG^Imaging-V1 to release 
+"PKG",454,20,0)
+^9.402P^^
+"PKG",454,22,0)
+^9.49I^1^1
+"PKG",454,22,1,0)
+3.0^3020319^3020517^126
+"PKG",454,22,1,"PAH",1,0)
+350_DD^3120726
+"QUES","XPF1",0)
+Y
+"QUES","XPF1","??")
+^D REP^XPDH
+"QUES","XPF1","A")
+Shall I write over your |FLAG| File
+"QUES","XPF1","B")
+YES
+"QUES","XPF1","M")
+D XPF1^XPDIQ
+"QUES","XPF2",0)
+Y
+"QUES","XPF2","??")
+^D DTA^XPDH
+"QUES","XPF2","A")
+Want my data |FLAG| yours
+"QUES","XPF2","B")
+YES
+"QUES","XPF2","M")
+D XPF2^XPDIQ
+"QUES","XPI1",0)
+YO
+"QUES","XPI1","??")
+^D INHIBIT^XPDH
+"QUES","XPI1","A")
+Want KIDS to INHIBIT LOGONs during the install
+"QUES","XPI1","B")
+NO
+"QUES","XPI1","M")
+D XPI1^XPDIQ
+"QUES","XPM1",0)
+PO^VA(200,:EM
+"QUES","XPM1","??")
+^D MG^XPDH
+"QUES","XPM1","A")
+Enter the Coordinator for Mail Group '|FLAG|'
+"QUES","XPM1","B")
+
+"QUES","XPM1","M")
+D XPM1^XPDIQ
+"QUES","XPO1",0)
+Y
+"QUES","XPO1","??")
+^D MENU^XPDH
+"QUES","XPO1","A")
+Want KIDS to Rebuild Menu Trees Upon Completion of Install
+"QUES","XPO1","B")
+NO
+"QUES","XPO1","M")
+D XPO1^XPDIQ
+"QUES","XPZ1",0)
+Y
+"QUES","XPZ1","??")
+^D OPT^XPDH
+"QUES","XPZ1","A")
+Want to DISABLE Scheduled Options, Menu Options, and Protocols
+"QUES","XPZ1","B")
+NO
+"QUES","XPZ1","M")
+D XPZ1^XPDIQ
+"QUES","XPZ2",0)
+Y
+"QUES","XPZ2","??")
+^D RTN^XPDH
+"QUES","XPZ2","A")
+Want to MOVE routines to other CPUs
+"QUES","XPZ2","B")
+NO
+"QUES","XPZ2","M")
+D XPZ2^XPDIQ
+"SEC","^DIC",2006.574,2006.574,0,"AUDIT")
+@
+"SEC","^DIC",2006.574,2006.574,0,"DD")
+@
+"SEC","^DIC",2006.574,2006.574,0,"DEL")
+@
+"SEC","^DIC",2006.574,2006.574,0,"LAYGO")
+@
+"SEC","^DIC",2006.574,2006.574,0,"RD")
+@
+"SEC","^DIC",2006.574,2006.574,0,"WR")
+@
+"VER")
+8.0^22.0
+"^DD",2006.574,2006.574,0)
+FIELD^^8^8
+"^DD",2006.574,2006.574,0,"DDA")
+N
+"^DD",2006.574,2006.574,0,"DT")
+3060213
+"^DD",2006.574,2006.574,0,"IX","STUDY",2006.574,7)
+
+"^DD",2006.574,2006.574,0,"NM","DICOM IMAGE OUTPUT")
+
+"^DD",2006.574,2006.574,0,"VRPK")
+IMAGING
+"^DD",2006.574,2006.574,.01,0)
+APPLICATION^RF^^0;1^K:$L(X)>30!($L(X)<3)!'(X'?1P.E) X
+"^DD",2006.574,2006.574,.01,1,0)
+^.1^^0
+"^DD",2006.574,2006.574,.01,3)
+Enter the name of the application that will receive the file(s).
+"^DD",2006.574,2006.574,.01,21,0)
+^^8^8^3000222^^
+"^DD",2006.574,2006.574,.01,21,1,0)
+The value of this field is a string that identifies
+"^DD",2006.574,2006.574,.01,21,2,0)
+the application that will receive the image files
+"^DD",2006.574,2006.574,.01,21,3,0)
+for which this entry describes the parameters.
+"^DD",2006.574,2006.574,.01,21,4,0)
+ 
+"^DD",2006.574,2006.574,.01,21,5,0)
+The name that is entered here corresponds to the
+"^DD",2006.574,2006.574,.01,21,6,0)
+name (.01 field) in file 2006.585 (stored in ^MAGDICOM(2006.585,...)
+"^DD",2006.574,2006.574,.01,21,7,0)
+of the storage provider that will receive the image
+"^DD",2006.574,2006.574,.01,21,8,0)
+files.
+"^DD",2006.574,2006.574,.01,"DT")
+3000222
+"^DD",2006.574,2006.574,2,0)
+GROUP^P2005'^MAG(2005,^0;2^Q
+"^DD",2006.574,2006.574,2,3)
+Identify the group of images that is to be transported.
+"^DD",2006.574,2006.574,2,21,0)
+^^7^7^3000222^^
+"^DD",2006.574,2006.574,2,21,1,0)
+The value of this field is a pointer that identifies
+"^DD",2006.574,2006.574,2,21,2,0)
+the image that is the 'parent' of the group of images
+"^DD",2006.574,2006.574,2,21,3,0)
+for which this entry describes the transmission to
+"^DD",2006.574,2006.574,2,21,4,0)
+another storage provider.
+"^DD",2006.574,2006.574,2,21,5,0)
+ 
+"^DD",2006.574,2006.574,2,21,6,0)
+The value of this field is a pointer to the Image File
+"^DD",2006.574,2006.574,2,21,7,0)
+(2005, stored in ^MAG(2005,...).
+"^DD",2006.574,2006.574,2,"DT")
+3000222
+"^DD",2006.574,2006.574,3,0)
+ACCESSION NUMBER^F^^0;3^K:$L(X)>20!($L(X)<1) X
+"^DD",2006.574,2006.574,3,3)
+Enter the accession number for the (group of) image(s) to be transported.
+"^DD",2006.574,2006.574,3,21,0)
+^^10^10^3000222^^
+"^DD",2006.574,2006.574,3,21,1,0)
+The value of this field is the (short) case number
+"^DD",2006.574,2006.574,3,21,2,0)
+for the study that is referenced in this entry.
+"^DD",2006.574,2006.574,3,21,3,0)
+ 
+"^DD",2006.574,2006.574,3,21,4,0)
+A long case number consists of two groups of digits
+"^DD",2006.574,2006.574,3,21,5,0)
+separated by a dash. The first group is 6 digits,
+"^DD",2006.574,2006.574,3,21,6,0)
+and is derived from the date. The second group is
+"^DD",2006.574,2006.574,3,21,7,0)
+an integer number that uniquely identifies the study
+"^DD",2006.574,2006.574,3,21,8,0)
+for that date.
+"^DD",2006.574,2006.574,3,21,9,0)
+ 
+"^DD",2006.574,2006.574,3,21,10,0)
+For this field, the whole accession number is entered.
+"^DD",2006.574,2006.574,3,"DT")
+3000222
+"^DD",2006.574,2006.574,4,0)
+IMAGE^2006.5744PA^^1;0
+"^DD",2006.574,2006.574,5,0)
+FROM^P4'^DIC(4,^0;4^Q
+"^DD",2006.574,2006.574,5,1,0)
+^.1^^0
+"^DD",2006.574,2006.574,5,3)
+Enter the name of the site from which the image routing request originates.
+"^DD",2006.574,2006.574,5,21,0)
+^^3^3^3010308^
+"^DD",2006.574,2006.574,5,21,1,0)
+The value of this field is a pointer (to the Institution file, #4).
+"^DD",2006.574,2006.574,5,21,2,0)
+This pointer identifies the location from which the image routing request
+"^DD",2006.574,2006.574,5,21,3,0)
+originated.
+"^DD",2006.574,2006.574,5,"DT")
+3041029
+"^DD",2006.574,2006.574,6,0)
+PRIORITY^NJ9,0^^0;5^K:+X'=X!(X>999999999)!(X<1)!(X?.E1"."1N.N) X
+"^DD",2006.574,2006.574,6,3)
+Enter an integer number to represent the priority of this queue entry.
+"^DD",2006.574,2006.574,6,21,0)
+^^6^6^3050602^
+"^DD",2006.574,2006.574,6,21,1,0)
+The value of this field is a positive integer number.
+"^DD",2006.574,2006.574,6,21,2,0)
+This number indicates the relative priority of an entry in the queue.
+"^DD",2006.574,2006.574,6,21,3,0)
+ 
+"^DD",2006.574,2006.574,6,21,4,0)
+A higher number indicates a higher priority, i.e. when two entries
+"^DD",2006.574,2006.574,6,21,5,0)
+have different priorities, the entry with the higher priority
+"^DD",2006.574,2006.574,6,21,6,0)
+will be processed before the one with the lower priority.
+"^DD",2006.574,2006.574,6,"DT")
+3050602
+"^DD",2006.574,2006.574,7,0)
+STUDY UID^F^^2;1^K:$L(X)>64!($L(X)<1)!'(X?1.(1N,1".")) X
+"^DD",2006.574,2006.574,7,1,0)
+^.1
+"^DD",2006.574,2006.574,7,1,1,0)
+2006.574^STUDY
+"^DD",2006.574,2006.574,7,1,1,1)
+S ^MAGDOUTP(2006.574,"STUDY",$E(X,1,30),DA)=""
+"^DD",2006.574,2006.574,7,1,1,2)
+K ^MAGDOUTP(2006.574,"STUDY",$E(X,1,30),DA)
+"^DD",2006.574,2006.574,7,1,1,"%D",0)
+^^2^2^3050818^
+"^DD",2006.574,2006.574,7,1,1,"%D",1,0)
+This cross reference keeps track of which "studies" are currently
+"^DD",2006.574,2006.574,7,1,1,"%D",2,0)
+queued for transmission.
+"^DD",2006.574,2006.574,7,1,1,"DT")
+3050818
+"^DD",2006.574,2006.574,7,3)
+Enter the Study UID for this group of images.
+"^DD",2006.574,2006.574,7,21,0)
+^^9^9^3050818^
+"^DD",2006.574,2006.574,7,21,1,0)
+The value of this field is a string that represents a
+"^DD",2006.574,2006.574,7,21,2,0)
+DICOM Unique Object Identifier. A DICOM UID is a string
+"^DD",2006.574,2006.574,7,21,3,0)
+that consists of up to 64 characters, each character must
+"^DD",2006.574,2006.574,7,21,4,0)
+be either a digit or a period, no two consecutive periods
+"^DD",2006.574,2006.574,7,21,5,0)
+are allowed, none of the series of consecutive digits
+"^DD",2006.574,2006.574,7,21,6,0)
+may start with a zero.
+"^DD",2006.574,2006.574,7,21,7,0)
+ 
+"^DD",2006.574,2006.574,7,21,8,0)
+This UID identifies the study to which the images
+"^DD",2006.574,2006.574,7,21,9,0)
+belong that are included in the current entry.
+"^DD",2006.574,2006.574,7,"DT")
+3050818
+"^DD",2006.574,2006.574,8,0)
+COPY TO RAID^S^0:Do not copy;1:Make a copy;^0;6^Q
+"^DD",2006.574,2006.574,8,3)
+Indicate whether or not a copy of the image is to be made on RAID.
+"^DD",2006.574,2006.574,8,21,0)
+^^4^4^3060213^
+"^DD",2006.574,2006.574,8,21,1,0)
+The value of this field is a code that indicates whether or not
+"^DD",2006.574,2006.574,8,21,2,0)
+a copy of the image file(s) is to be made on RAID.
+"^DD",2006.574,2006.574,8,21,3,0)
+A value of 0 indicates that no copy is to be made on RAID.
+"^DD",2006.574,2006.574,8,21,4,0)
+A value of 1 indicates that a copy should be made.
+"^DD",2006.574,2006.574,8,"DT")
+3060213
+"^DD",2006.574,2006.5744,0)
+IMAGE SUB-FIELD^^3^3
+"^DD",2006.574,2006.5744,0,"DT")
+3041029
+"^DD",2006.574,2006.5744,0,"NM","IMAGE")
+
+"^DD",2006.574,2006.5744,0,"UP")
+2006.574
+"^DD",2006.574,2006.5744,.01,0)
+IMAGE^P2005'^MAG(2005,^0;1^Q
+"^DD",2006.574,2006.5744,.01,1,0)
+^.1^^0
+"^DD",2006.574,2006.5744,.01,3)
+Identify the image(s) in this transmission.
+"^DD",2006.574,2006.5744,.01,21,0)
+^^6^6^3000222^^
+"^DD",2006.574,2006.5744,.01,21,1,0)
+The value of this field is a pointer that identifies
+"^DD",2006.574,2006.5744,.01,21,2,0)
+one of the images that is to be transmitted to
+"^DD",2006.574,2006.5744,.01,21,3,0)
+another storage provider.
+"^DD",2006.574,2006.5744,.01,21,4,0)
+ 
+"^DD",2006.574,2006.5744,.01,21,5,0)
+The value of this field is a pointer to the Image File
+"^DD",2006.574,2006.5744,.01,21,6,0)
+(2005, stored in ^MAG(2005,...).
+"^DD",2006.574,2006.5744,.01,"DT")
+3000222
+"^DD",2006.574,2006.5744,2,0)
+STATUS^S^WAITING:Waiting to be transmitted;XMIT:Transmission in progress;FAIL:Transmission failed;SUCCESS:Transmission successfully completed;^0;2^Q
+"^DD",2006.574,2006.5744,2,3)
+Indicate the current status of this entry.
+"^DD",2006.574,2006.5744,2,21,0)
+^^7^7^3041029^
+"^DD",2006.574,2006.5744,2,21,1,0)
+The value of this field is a code that indicates the current
+"^DD",2006.574,2006.5744,2,21,2,0)
+status of the entry in this table.
+"^DD",2006.574,2006.5744,2,21,3,0)
+Possible values are "waiting to be transmitted", "transmission
+"^DD",2006.574,2006.5744,2,21,4,0)
+in progress" and "successful transmission" or "failed transmission".
+"^DD",2006.574,2006.5744,2,21,5,0)
+ 
+"^DD",2006.574,2006.5744,2,21,6,0)
+A cross-reference on this field is used to prevent issuing the
+"^DD",2006.574,2006.5744,2,21,7,0)
+same file to multiple transmission processes.
+"^DD",2006.574,2006.5744,2,"DT")
+3070625
+"^DD",2006.574,2006.5744,3,0)
+TIMESTAMP^F^^0;3^K:$L(X)>15!($L(X)<3)!'(X?1.N1","1.N) X
+"^DD",2006.574,2006.5744,3,3)
+Indicate the current time ($H format).
+"^DD",2006.574,2006.5744,3,21,0)
+^^10^10^3041029^
+"^DD",2006.574,2006.5744,3,21,1,0)
+The value of this field is a string ($Horolog format) that
+"^DD",2006.574,2006.5744,3,21,2,0)
+indicates the date and time that the current status was established.
+"^DD",2006.574,2006.5744,3,21,3,0)
+ 
+"^DD",2006.574,2006.5744,3,21,4,0)
+This value is used when checking on files that are in a status
+"^DD",2006.574,2006.5744,3,21,5,0)
+of "transmission in progress". When a file is too long in this
+"^DD",2006.574,2006.5744,3,21,6,0)
+status, the current entry will be moved back to a status of
+"^DD",2006.574,2006.5744,3,21,7,0)
+"waiting for transmission".
+"^DD",2006.574,2006.5744,3,21,8,0)
+ 
+"^DD",2006.574,2006.5744,3,21,9,0)
+See the RPC named "MAG DICOM GET NEXT QUEUE ENTRY" for the
+"^DD",2006.574,2006.5744,3,21,10,0)
+actual time-lag that decides on a change-back of the status.
+"^DD",2006.574,2006.5744,3,"DT")
+3041029
+"^DIC",2006.574,2006.574,0)
+DICOM IMAGE OUTPUT^2006.574
+"^DIC",2006.574,2006.574,0,"GL")
+^MAGDOUTP(2006.574,
+"^DIC",2006.574,2006.574,"%",0)
+^1.005^^0
+"^DIC",2006.574,2006.574,"%D",0)
+^^21^21^3010619^
+"^DIC",2006.574,2006.574,"%D",1,0)
+ +---------------------------------------------------------------+
+"^DIC",2006.574,2006.574,"%D",2,0)
+ |                                                               |
+"^DIC",2006.574,2006.574,"%D",3,0)
+ | Property of the US Government.                                |
+"^DIC",2006.574,2006.574,"%D",4,0)
+ | No permission to copy or redistribute this software is given. |
+"^DIC",2006.574,2006.574,"%D",5,0)
+ | Use of unreleased versions of this software requires the user |
+"^DIC",2006.574,2006.574,"%D",6,0)
+ | to execute a written test agreement with the VistA Imaging    |
+"^DIC",2006.574,2006.574,"%D",7,0)
+ | Development Office of the Department of Veterans Affairs,     |
+"^DIC",2006.574,2006.574,"%D",8,0)
+ | telephone (301) 734-0100.                                     |
+"^DIC",2006.574,2006.574,"%D",9,0)
+ |                                                               |
+"^DIC",2006.574,2006.574,"%D",10,0)
+ | The Food and Drug Administration classifies this software as  |
+"^DIC",2006.574,2006.574,"%D",11,0)
+ | a medical device.  As such, it may not be changed in any way. |
+"^DIC",2006.574,2006.574,"%D",12,0)
+ | Modifications to this software may result in an adulterated   |
+"^DIC",2006.574,2006.574,"%D",13,0)
+ | medical device under 21CFR820, the use of which is considered |
+"^DIC",2006.574,2006.574,"%D",14,0)
+ | to be a violation of US Federal Statutes.                     |
+"^DIC",2006.574,2006.574,"%D",15,0)
+ |                                                               |
+"^DIC",2006.574,2006.574,"%D",16,0)
+ +---------------------------------------------------------------+
+"^DIC",2006.574,2006.574,"%D",17,0)
+ 
+"^DIC",2006.574,2006.574,"%D",18,0)
+The entries in this table describe requests to transmit image files
+"^DIC",2006.574,2006.574,"%D",19,0)
+to an alternate storage provider.
+"^DIC",2006.574,2006.574,"%D",20,0)
+The top-level of this table identifies the storage provider, the next
+"^DIC",2006.574,2006.574,"%D",21,0)
+level identifies the images for which files are to be transmitted.
+"^DIC",2006.574,"B","DICOM IMAGE OUTPUT",2006.574)
+
+**END**
+**END**

@@ -1,0 +1,106 @@
+<html
+  xmlns:jsp="http://java.sun.com/JSP/Page" 
+  xmlns:c="http://java.sun.com/jsp/jstl/core" 
+  xmlns:system="http://imaging.med.va.gov/vix/system"
+  xmlns:business="http://imaging.med.va.gov/vix/business"
+  xmlns:menu="http://imaging.med.va.gov/vix/menu" 
+  xmlns:tags="urn:jsptagdir:/WEB-INF/tags" 
+>
+	<jsp:directive.page session="false" contentType="text/html" />
+
+	<head>
+        
+		<meta http-equiv="pragma" content="no-cache"/>
+		<meta http-equiv="cache-control" content="no-cache"/>
+		<meta http-equiv="expires" content="0"/>    
+		<meta http-equiv="keywords" content="VistA VIX Imaging System"/>
+		<meta http-equiv="description" content="VistA Imaging Web Access System"/>
+		
+		<style type="text/css" title="currentStyle">
+			@import url(../style/screen.css);
+		</style>
+		<title>VIX - System Properties</title>
+		<jsp:element name="script">
+			<jsp:attribute name="type">text/javascript</jsp:attribute>
+			<jsp:attribute name="src">../script/menu-for-applications.js</jsp:attribute>
+			<jsp:body>
+			</jsp:body>
+		</jsp:element>
+		<jsp:element name="script">
+			<jsp:attribute name="type">text/javascript</jsp:attribute>
+			<jsp:attribute name="src">../script/vix.js</jsp:attribute>
+			<jsp:body>
+			</jsp:body>
+		</jsp:element>
+	</head>
+	<body onload="load();" id="vix">
+		<div id="pageHeader">
+			<h1><span>VIX - System Properties</span></h1>
+		</div>
+		<menu:Menu 
+			menuId="menuModel" menuClass="menu" 
+			subMenuClass="mainMenuSubMenu" 
+			menuItemClass="mainMenuItem"
+			menuDivId="menuDiv" />
+		<div id="container">
+			<span id="selection">
+				<h1>Explanation</h1>
+				<p> The system properties and the environment properties shown here
+				are those currently in force for this VIX server.  The values can be useful
+				for debugging and may be requested by the support staff.
+				</p>
+			</span>		
+			<span id="supportingText">
+				<h1>System Properties</h1>
+			  	<table>
+				  	<tr><th>System Property</th><th>Value</th></tr>
+					<system:SystemProperties>
+						<tr><td><system:ElementKey/></td><td><system:ElementValue/></td></tr>
+					</system:SystemProperties>
+				</table>
+			  	<h1>Environment Variables</h1>
+			  	<table>
+				  	<tr><th>Environment Variable</th><th>Value</th></tr>
+					<system:EnvironmentVariables>
+						<tr><td><system:ElementKey/></td><td><system:ElementValue/></td></tr>
+					</system:EnvironmentVariables>
+				</table>	
+			  	<h1>Image I/O and Advanced Imaging</h1>
+			  	<table>
+				  	<tr><th>Readable Image Formats</th><th>Writable Image Formats</th></tr>
+				  	<tr>
+				  		<td>
+				  			<ul><system:ImageIOReaderFormats>
+								<li><business:StringArrayListElement/></li>
+				  			</system:ImageIOReaderFormats></ul>
+						</td>
+				  		<td>
+				  			<ul><system:ImageIOWriterFormats>
+								<li><business:StringArrayListElement/></li>
+				  			</system:ImageIOWriterFormats></ul>
+						</td>
+					</tr>
+				</table>
+				<br/>
+			  	<table>
+				  	<tr><th>Readable Image MIME Types</th><th>Writable Image MIME Types</th></tr>
+				  	<tr>
+				  		<td>
+				  			<ul><system:ImageIOReaderMIMETypes>
+								<li><business:StringArrayListElement/></li>
+				  			</system:ImageIOReaderMIMETypes></ul>
+						</td>
+				  		<td>
+				  			<ul><system:ImageIOWriterMIMETypes>
+								<li><business:StringArrayListElement/></li>
+				  			</system:ImageIOWriterMIMETypes></ul>
+						</td>
+					</tr>
+				</table>
+			</span>
+		</div>		
+		<div id="pageFooter">
+			<jsp:include flush="false" page="../footer.html"></jsp:include>
+		</div>
+	</body>
+</html>

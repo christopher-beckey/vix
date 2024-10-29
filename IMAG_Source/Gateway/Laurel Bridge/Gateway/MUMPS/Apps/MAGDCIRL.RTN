@@ -1,0 +1,115 @@
+MAGDCIRL ;WOIFO/EdM - Cache Installation Routine Load ; 03/14/2006 12:59
+ ;;3.0;IMAGING;**69**;MAR 19, 2002;;NOV 7, 2007
+ ;; Per VHA Directive 2004-038, this routine should not be modified.
+ ;; +---------------------------------------------------------------+
+ ;; | Property of the US Government.                                |
+ ;; | No permission to copy or redistribute this software is given. |
+ ;; | Use of unreleased versions of this software requires the user |
+ ;; | to execute a written test agreement with the VistA Imaging    |
+ ;; | Development Office of the Department of Veterans Affairs,     |
+ ;; | telephone (301) 734-0100.                                     |
+ ;; | The Food and Drug Administration classifies this software as  |
+ ;; | a medical device.  As such, it may not be changed in any way. |
+ ;; | Modifications to this software may result in an adulterated   |
+ ;; | medical device under 21CFR820, the use of which is considered |
+ ;; | to be a violation of US Federal Statutes.                     |
+ ;; +---------------------------------------------------------------+
+ ;;
+ Q
+SYSLOAD N NAMESPAC
+ S NAMESPAC="%SYS"
+ G LOAD
+ ;
+DCMLOAD N NAMESPAC
+ S NAMESPAC="DICOM"
+ G LOAD
+ ;
+LOAD ; Load one or more routines into a namespace
+ ;
+ ; The reason for the "goto" structure below
+ ; is that standard error trapping would have
+ ; a problem with "do" structures, because it
+ ; is not possible to return to an address in
+ ; a routine that has been recompiled.
+ ;
+ ; None of the labels below is intended to be
+ ; called from outside of this routine.
+ ;
+ N ANY,BACKROOT,BACKFILE,ENVDICOM,ENVSYS,ERRMSG,ZLOAD,ZPRINT,ZSAVE
+ N FLAGFILE,H,LOADFILE,NAME,OPEN,STS,VER,X
+ S ERRMSG="No Input File Specified."
+ S LOADFILE=$$ENVIRON^MAGOSDIR("LOADFILE") G:LOADFILE="" ERREXIT
+ ;
+ S ERRMSG="No BAckup Directory Specified."
+ S BACKROOT=$$ENVIRON^MAGOSDIR("BACKROOT") G:BACKROOT="" ERREXIT
+ ;
+ S FLAGFILE=$$ENVIRON^MAGOSDIR("FLAGFILE")
+ S VER=$$ENVIRON^MAGOSDIR("VERSION") S:VER="" VER="<unknown>"
+ S ERRMSG=LOADFILE_" does not exist."
+ G:$$GETDIR^MAGOSDIR(LOADFILE)<1 ERREXIT
+ S ZLOAD=$$ENVLOAD^MAGOSMSC()
+ S ZPRINT=$$ENVSHOW^MAGOSMSC()
+ S ENVDICOM=$$ENVSET^MAGOSMSC("DICOM")
+ S ENVSYS=$$ENVSET^MAGOSMSC(NAMESPAC)
+ S ZSAVE=$$ENVSAVE^MAGOSMSC()
+ S:ENVDICOM=ENVSYS (ENVDICOM,ENVSYS)=" "
+ ;
+ D
+ . N D,M,N,S,T,Y
+ . S N=$$NOW^XLFDT()
+ . S D=N\1,T=N-D*1000000
+ . S M=D\100#100,Y=D\10000+1700,D=D#100
+ . S D=D_"-"_$P("January February March April May June July August September October November December"," ",M)_"-"_Y
+ . S S=T#100,M=T\100#100,H=T\10000
+ . S:S<10 S=0_S S:M<10 M=0_M S:H<10 H=0_H
+ . S H=D_", "_H_":"_M_":"_S
+ . Q
+ S BACKFILE=""
+ S:$E(LOADFILE,2)=":" BACKFILE=$E(LOADFILE,3,$L(LOADFILE))
+ S:$E(LOADFILE,1,2)="\\" BACKFILE="\"_$P(LOADFILE,"\",5,$L(LOADFILE)+2)
+ S BACKFILE=BACKROOT_BACKFILE
+ S ANY=0,STS=$$MKDIR^MAGOSDIR($P(BACKFILE,"\",1,$L(BACKFILE,"\")-1))
+ S STS=$$OPEN^MAGOSFIL(BACKFILE,"W")
+ S STS=$$USE^MAGOSFIL(BACKFILE)
+ W H,!,"Backup of active environment before upgrade to version ",VER,!
+ S STS=$$OPEN^MAGOSFIL(LOADFILE,"R")
+ S STS=$$USE^MAGOSFIL(LOADFILE)
+ S STS=$$READ^MAGOSFIL(LOADFILE,.R) ; comment line #1
+ S STS=$$READ^MAGOSFIL(LOADFILE,.R) ; comment line #2
+ S $ET="G ERR^"_$T(+0)
+ S OPEN=1,ERRMSG="OK"
+ ;
+LOOP G:'OPEN EXIT
+ S STS=$$READ^MAGOSFIL(LOADFILE,.NAME) I NAME="" G EXIT
+ S NAME=$P($TR(NAME,",:","^^"),"^",1)
+ ; Now Loading Routine 'NAME'
+ S X=ENVSYS_" S X=$T(+1^"_NAME_") "_ENVDICOM X X D:X'=""
+ . S STS=$$USE^MAGOSFIL(BACKFILE)
+ . W NAME,! X ENVSYS_" "_ZLOAD_" "_NAME_" "_ZPRINT_"  "_ENVDICOM_" "_ZLOAD_" "_$T(+0) S ANY=1
+ . S STS=$$USE^MAGOSFIL(LOADFILE)
+ . Q
+ S X=ZLOAD_"  "_ZLOAD_" "_$T(+0)
+ I $E(NAME,1,4)'="DINI" S X=ZLOAD_"  "_ENVSYS_" "_ZSAVE_" "_NAME_" "_ENVDICOM_" "_ZLOAD_" "_$T(+0)
+ X X
+ G LOOP
+ ;
+ERR ;
+ I ","_$EC_","[",ZEDITED," S $EC="" G LOOP
+ S ERRMSG="Error occurred: "_$EC,$EC=""
+ G EXIT
+ ;
+EXIT S OPEN=0
+ S STS=$$CLOSE^MAGOSFIL(LOADFILE)
+ S STS=$$USE^MAGOSFIL(BACKFILE) W !!!!!
+ S STS=$$CLOSE^MAGOSFIL(BACKFILE)
+ I 'ANY S X=$$DEL^MAGOSDIR(BACKFILE)
+ ; Fall-Through intended
+ ;
+ERREXIT D:FLAGFILE'=""
+ . S STS=$$OPEN^MAGOSFIL(FLAGFILE,"W")
+ . S STS=$$USE^MAGOSFIL(FLAGFILE)
+ . W ERRMSG,!!
+ . S STS=$$CLOSE^MAGOSFIL(FLAGFILE)
+ . Q
+ Q
+ ;

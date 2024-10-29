@@ -1,0 +1,35 @@
+﻿<UserControl x:Class="VistA.Imaging.Telepathology.Common.Controls.LogView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d">
+    <Grid FocusManager.FocusedElement="{Binding ElementName=txtSearch}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Button Content="_User Log" Width="75" Margin="5" Click="ViewUserLog_Click" />
+        <Button Grid.Column="1" Content="_System Log" Width="75" Margin="5" 
+                IsEnabled="{Binding CanViewSystemLog}" Click="ViewSystemLog_Click" />
+        <TextBox Grid.Column="2" Name="txtSearch" Width="200" Margin="5" 
+                 TextChanged="txtSearch_TextChanged" />
+        <Button Grid.Column="3" Content="Fin_d" Margin="5" Width="75" Click="Find_Click" 
+                IsDefault="True" />
+        <Button Grid.Column="4" Content="_Next" Margin="5" Width="75" Name="btnFindNext" 
+                Click="FindNext_Click" IsEnabled="False" HorizontalAlignment="Left" />
+        <ScrollViewer Margin="2" Grid.Row="1" Grid.ColumnSpan="5" 
+                      HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+            <TextBox Name="txtLog" Margin="2" Text="{Binding MessageLog}" IsReadOnly="True" 
+                     TextChanged="txtSearch_TextChanged" />
+        </ScrollViewer>
+    </Grid>
+</UserControl>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <parent>
+    <groupId>Imaging</groupId>
+    <artifactId>ImagingRoot</artifactId>
+    <version>0.1</version>
+    <relativePath>../ImagingRoot/pom.xml</relativePath>
+  </parent>
+  <modelVersion>4.0.0</modelVersion>
+  <artifactId>VISACommon</artifactId>
+  <name>VISACommon</name>
+  <packaging>jar</packaging>
+  <build>
+    <finalName>${artifactId}-${version}</finalName>
+    <directory>${basedir}/target</directory>
+    <outputDirectory>${basedir}/target/classes</outputDirectory>
+    <sourceDirectory>main/src/java</sourceDirectory>
+    <plugins>
+      <plugin>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <configuration>
+          <optimize>false</optimize>
+          <compilerArguments>
+            <source>1.8</source>
+            <target>1.8</target>
+            <g />
+            <deprecation />
+          </compilerArguments>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+  <dependencies>
+	<!-- no dependencies other than root -->
+  </dependencies>
+  <properties>
+    <maven.build.dir>${basedir}/target</maven.build.dir>
+    <maven.final.name>${artifactId}-${version}</maven.final.name>
+  </properties>
+</project>

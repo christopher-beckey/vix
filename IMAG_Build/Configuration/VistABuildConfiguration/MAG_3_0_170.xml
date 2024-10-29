@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<build
+
+ name="MAG*3.0*170"
+
+ patch="170"
+
+ patchName="VistA Imaging V3.0 Patch 170 - eHMP Viewer"
+
+ envCheckRoutine=""
+
+ deleteEnvCheckRoutine=""
+
+ preInstallRoutine="PRE^MAGIP170"
+
+ deletePreInstalltRoutine="Yes"
+
+ postInstallRoutine="POS^MAGIP170"
+
+ deletePostInstallRoutine="Yes"
+
+ packageNumber="454"
+
+ packageName="IMAGING"
+
+ alphaBetaTesting="YES"
+
+ installationMessage="YES"
+
+ addressForUsageReporting="G.IMAGING DEVELOPMENT TEAM@FORUM.VA.GOV"
+
+ xmlns="http://va.gov/VistA/kids/manifest">
+<requiredBuilds>
+<!-- action= 0:Warning only;1:Don't install, remove global;2:Don't install, leave global;
+ --> 
+<requiredBuild name="MAG*3.0*122" action="2"/>
+</requiredBuilds>
+<components>
+<dataDictionaries>
+</dataDictionaries>
+<routines>
+  <routine name="MAGIP170" export="MAGIP170.RTN"/>
+  <routine name="MAGNTRAI" export="MAGNTRAI.RTN"/>
+</routines>
+<rpcs>
+<rpc name="MAGN CPRS IMAGE LIST" export="RPC_MAGN_CPRS_IMAGE_LIST.KID"/>
+</rpcs>
+<options>
+</options>
+<securityKeys>
+</securityKeys>
+<protocols>
+</protocols>
+<templateLists>
+</templateLists>
+<hl7Applications>
+</hl7Applications>
+<hl7LogicalLinks>
+</hl7LogicalLinks>
+<parameterDefinitions>
+</parameterDefinitions>
+<parameterTemplates>
+</parameterTemplates>
+<printTemplates>
+</printTemplates>
+<sortTemplates>
+</sortTemplates>
+<inputTemplates>
+</inputTemplates>
+<forms>
+</forms>
+<functions>
+</functions>
+<dialogs>
+</dialogs>
+<bulletins>
+</bulletins>
+<mailGroups>
+</mailGroups>
+<helpFrames>
+</helpFrames>
+</components>
+</build>

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<build name="MAG*3.0*137"
+       patch="137"
+       patchName="Version 3.0 Patch 137 - Radiation Dose Collection Phase I"
+       envCheckRoutine=""
+       deleteEnvCheckRoutine=""
+       preInstallRoutine=""
+       deletePreInstalltRoutine=""
+       postInstallRoutine="POS^MAGIP137"
+       deletePostInstallRoutine="YES"
+       packageName="IMAGING"
+       packageNumber="454"
+       packageVersion="3.0"
+       packagePrefix="MAG"
+       packageDateDestributed=""
+       alphaBetaTesting="YES"
+       installationMessage=""
+       addressForUsageReporting="G.IMAGING DEVELOPMENT TEAM@FORUM.VA.GOV"
+       xmlns="http://va.gov/VistA/kids/manifest">
+<requiredBuilds>
+<!-- action= 0:Warning only;1:Don't install, remove global;2:Don't install, leave global;
+ -->
+<!-- Add RA*5.0*113 when final, or manage as environment check. -->
+   <requiredBuild name="MAG*3.0*130" action="2"/>
+</requiredBuilds>
+<components>
+<dataDictionaries>
+</dataDictionaries>
+<routines>
+  <routine name="MAGIP137" export="MAGIP137.RTN"/>
+</routines>
+<rpcs>
+</rpcs>
+<options>
+</options>
+<securityKeys>
+</securityKeys>
+<protocols>
+</protocols>
+<templateLists>
+</templateLists>
+<hl7Applications>
+</hl7Applications>
+<hl7LogicalLinks>
+</hl7LogicalLinks>
+<parameterDefinitions>
+</parameterDefinitions>
+<parameterTemplates>
+</parameterTemplates>
+<printTemplates>
+</printTemplates>
+<sortTemplates>
+</sortTemplates>
+<inputTemplates>
+</inputTemplates>
+<forms>
+</forms>
+<functions>
+</functions>
+<dialogs>
+</dialogs>
+<bulletins>
+</bulletins>
+<mailGroups>
+</mailGroups>
+<helpFrames>
+</helpFrames>
+</components>
+</build>

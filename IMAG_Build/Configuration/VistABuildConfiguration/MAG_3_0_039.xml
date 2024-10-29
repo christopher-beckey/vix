@@ -1,0 +1,74 @@
+<?xml version="1.0"?>
+<build xmlns="http://va.gov/VistA/kids/manifest" name="MAG*3.0*039" patchName="Background Processor Enhancements II" patch="039">
+  <components>
+    <securityKeys />
+    <parameterDefinitions />
+    <printTemplates />
+    <sortTemplates />
+    <menuOptions>
+      <menuOption export="P39_OPT_MAGBPMONITOR.KID" />
+    </menuOptions>
+    <rpcs>
+      <rpc export="P39_RPC_MAGQBP_ALL_SHARES.KID" />
+      <rpc export="P39_RPC_MAGQBP_FREF.KID" />
+      <rpc export="P39_RPC_MAGQB_QUEDEL.KID" />
+      <rpc export="P39_RPC_MAGQ_ADD_RAID_GRP.KID" />
+      <rpc export="P39_RPC_MAGQ_ALL_SERVER.KID" />
+      <rpc export="P39_RPC_MAGQ_BP_UAT.KID" />
+      <rpc export="P39_RPC_MAGQ_DEL_NLOC.KID" />
+      <rpc export="P39_RPC_MAGQ_DFNIQ.KID" />
+      <rpc export="P39_RPC_MAGQ_ELOGR.KID" />
+      <rpc export="P39_RPC_MAGQ_FINDC.KID" />
+      <rpc export="P39_RPC_MAGQ_FS_CHNGE.KID" />
+      <rpc export="P39_RPC_MAGQ_FTYPE.KID" />
+      <rpc export="P39_RPC_MAGQ_JBQUE.KID" />
+      <rpc export="P39_RPC_MAGQ_JBSCN.KID" />
+      <rpc export="P39_RPC_MAGQ_QCNT.KID" />
+      <rpc export="P39_RPC_MAGQ_QRNGE.KID" />
+      <rpc export="P39_RPC_MAG_FIELD_VALID.KID" />
+      <rpc export="P39_RPC_MAG_KEY_VALID.KID" />
+    </rpcs>
+    <dataDictionaries>
+      <dataDictionary export="P39_FILE_2005_2.KID" />
+      <dataDictionary export="P39_FILE_2005_86.KID" />
+      <dataDictionary export="P39_FILE_2006_031.KID" />
+      <dataDictionary export="P39_FILE_2006_1.KID" />
+      <dataDictionary export="P39_FILE_2006_8.KID" />
+      <dataDictionary export="P39_FILE_2006_95.KID" />
+    </dataDictionaries>
+    <hl7s />
+    <routines>
+      <routine export="MAGBAPI.RTN" />
+      <routine export="MAGBRTE4.RTN" />
+      <routine export="MAGFILEB.RTN" />
+      <routine export="MAGIP39.RTN" />
+      <routine export="MAGIP39B.RTN" />
+      <routine export="MAGIP39E.RTN" />
+      <routine export="MAGLOG.RTN" />
+      <routine export="MAGQBAB.RTN" />
+      <routine export="MAGQBD.RTN" />
+      <routine export="MAGQBGCC.RTN" />
+      <routine export="MAGQBIM.RTN" />
+      <routine export="MAGQBJB.RTN" />
+      <routine export="MAGQBJH.RTN" />
+      <routine export="MAGQBPG1.RTN" />
+      <routine export="MAGQBPG2.RTN" />
+      <routine export="MAGQBPRG.RTN" />
+      <routine export="MAGQBTM.RTN" />
+      <routine export="MAGQBU6A.RTN" />
+      <routine export="MAGQBUT.RTN" />
+      <routine export="MAGQBUT1.RTN" />
+      <routine export="MAGQBUT2.RTN" />
+      <routine export="MAGQBUT4.RTN" />
+      <routine export="MAGQBUT5.RTN" />
+      <routine export="MAGQBUT6.RTN" />
+      <routine export="MAGQCBP.RTN" />
+      <routine export="MAGQE1.RTN" />
+      <routine export="MAGQE2.RTN" />
+      <routine export="MAGQE5.RTN" />
+      <routine export="MAGQE6.RTN" />
+      <routine export="MAGQE7.RTN" />
+    </routines>
+    <protocols />
+  </components>
+</build>

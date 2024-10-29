@@ -1,0 +1,148 @@
+MAGDIX1 ;WOIFO/PMK - Modify a DICOM image header ; 03/08/2005  08:09
+ ;;3.0;IMAGING;**10,30,51**;MAR 19, 2002;;JUN 16, 2006
+ ;; Per VHA Directive 2004-038, this routine should not be modified.
+ ;; +---------------------------------------------------------------+
+ ;; | Property of the US Government.                                |
+ ;; | No permission to copy or redistribute this software is given. |
+ ;; | Use of unreleased versions of this software requires the user |
+ ;; | to execute a written test agreement with the VistA Imaging    |
+ ;; | Development Office of the Department of Veterans Affairs,     |
+ ;; | telephone (301) 734-0100.                                     |
+ ;; | The Food and Drug Administration classifies this software as  |
+ ;; | a medical device.  As such, it may not be changed in any way. |
+ ;; | Modifications to this software may result in an adulterated   |
+ ;; | medical device under 21CFR820, the use of which is considered |
+ ;; | to be a violation of US Federal Statutes.                     |
+ ;; +---------------------------------------------------------------+
+ ;;
+ ; This routine reads a DICOM image file, and saves the text
+ ; It then edits the text and recreates the image file with the new text
+ ;
+ENTRY ; Multistep process to create a new DICOM image file:
+ ; 1) read the header data from the original DICOM image file
+ ; 2) coerce the image header data, as necessary
+ ; 3) reconstruct a new image header using Implicit VR or Explicit VR
+ ; 4) concatenate the new header with image data from original file
+ ;
+ N IMOFFSET
+ S $EC="",$ET="D ERROR^"_$T(+0)
+ ;
+ K ^TMP("MAG",$J,"DICOM")
+ D INIT^MAGOSFIL
+ D MSGINIT^MAGDFCNS
+ ;
+ S READFILE=$$READFILE
+ I READFILE<1 W !,"Can't find DICOM image file." Q
+ ;
+ ;
+ ; get size and offset of original image
+ S X=$$GETDATA^MAGDFCNS("IN","7FE0,0010",1,2)
+ S IMAGESIZ=+$P(X,"length=",2)
+ S X=$$GETDATA^MAGDFCNS("IN","7FE0,0010",1,3)
+ S IMOFFSET=+$P(X,"offset=",2)
+ I IMAGESIZ=4294967295 S IMAGESIZ=FILESIZE-IMOFFSET ; unknown length
+ ;
+ S X=$$COERCE
+ ;
+ ; reconstitute the DICOM image file
+ ; open the about image text file
+ S STATUS=$$OPEN^MAGOSFIL(FILETXT,"W")
+ I STATUS<0 D
+ . N M
+ . S M="Could not open file """_FILETXT_""" for Write."
+ . W:$$USEPRIN^MAGOSFIL(1) !!!,M,!,STATUS
+ . S $EC=",U"_M_","
+ . Q  ; Error trap does not return
+ D ^MAGDIR5 ; output all of the DICOM header elements to the DICOM block
+ S STATUS=$$CLOSE^MAGOSFIL(FILETXT)
+ I $$USEPRIN^MAGOSFIL(1)
+ ;
+ ; build the DICOM header from the *.TXT file & reconstitute the image
+ S ERRMSG=$$ENTRY^MAGDIW3 ; get the data to build the DICOM header
+ I ERRMSG'="" Q ERRMSG
+ ;
+ S ERRMSG=$$ENTRY^MAGDIW3C ; create the new template
+ I ERRMSG'="" Q ERRMSG
+ ;
+ D WRITEHDR ; output the new image header
+ ;
+ D CONCAT ; concatenate the original image to the new image header
+ Q
+ERROR ;
+ I $$USEPRIN^MAGOSFIL(1)
+ W !,"*** ERROR: ",$EC," ***"
+ Q
+ ;
+READFILE() ; read a DICOM header
+ W !!,FROMPATH
+ S X=$$GETDIR^MAGOSDIR(FROMPATH)
+ I 'X W "  (not on file)" Q 0 ; not on file
+ I X<0 W " *** FILE ERROR: ",X," ***" Q -1 ; error
+ S FILE=$RE($P($RE(FROMPATH),"\"))
+ S FILESIZE=$P($G(^TMP("MAG",$J,"DIR LIST",FILE)),";")
+ S QUEUEIN("FILE")=FROMPATH,(ODEVTYPE,ODEVNAME)="",INODE="IN"
+ D ENTRY^MAGDDR2 ; read the header
+ Q 1
+ ;
+COERCE() ; change the data in the DICOM image header
+ S X=$$GETDIR^MAGOSDIR(FILENEW)
+ I 'X W "  (change file not present)" Q 0 ; not on file
+ I X<0 W " *** FILE ERROR: ",X," ***" Q -1 ; error
+ S STATUS=$$OPEN^MAGOSFIL(FILENEW,"R")
+ I STATUS<0 D
+ . N M
+ . S M="Could not open file """_FILENEW_""" for Read."
+ . W:$$USEPRIN^MAGOSFIL(1) !!!,M,!,STATUS
+ . S $EC=",U"_M_","
+ . Q  ; Error trap does not return
+ S DICOMFLG=0,IPTR=0,OLDTAG="",OLDSEQ=""
+ F  D  Q:STATUS'=""
+ . S STATUS=$$READ^MAGOSFIL(FILENEW,.RECORD)
+ . I $$USEPRIN^MAGOSFIL(1)
+ . I STATUS'="" W:+STATUS'=-2 !,STATUS Q
+ . I RECORD="$$BEGIN DICOM DATA" S DICOMFLG=1 Q
+ . I RECORD="$$END DICOM DATA" S STATUS="DONE" Q
+ . I DICOMFLG D DICOM^MAGDIW3 ; change the data here
+ . Q
+ S STATUS=$$CLOSE^MAGOSFIL(FILENEW)
+ I $$USEPRIN^MAGOSFIL(1)
+ I 'DICOMFLG Q "-1 DICOM text data not found"
+ ;
+ ; replace the old image attributes with the newly created ones
+ S TAG=""
+ F  S TAG=$O(^TMP("MAG",$J,"DICOM","OUT",TAG)) Q:TAG=""  D
+ . S X=$G(^TMP("MAG",$J,"DICOM","IN",TAG))
+ . I X="" S X=$G(^TMP("MAG",$J,"DICOM","OUT",TAG))
+ . K ^TMP("MAG",$J,"DICOM","IN",TAG) ; remove the old attribute
+ . S ^TMP("MAG",$J,"DICOM","IN",TAG)=X
+ . M ^TMP("MAG",$J,"DICOM","IN",TAG)=^TMP("MAG",$J,"DICOM","OUT",TAG)
+ . Q
+ Q 1
+ ;
+WRITEHDR ; output the new image header
+ S FBSWITCH="FOREGROUND",CHANNEL=1,MULTIMSG=""
+ S FILEMODE="IMAGE DATASET" ; used in ^MAGDDW2
+ S EXPLICIT=0 ; implicit VR - used in ^MAGDDW2
+ ; S EXPLICIT=1 ; explicit VR - used in ^MAGDDW2
+ S MESSAGE="C-STORE REQUEST"
+ S MSGHANDL="NO MESSAGE HANDLE YET"
+ K TEMPLATE
+ ;
+ ; create the image dataset (text portion)
+ ;
+ S QUEUEOUT("FILE")=FILEDCM ; create the image dataset
+ D OUTPUT^MAGDDW2
+ ;
+ Q
+ ;
+CONCAT ; concatenate the tga image to the end of the header
+ S CMD="MAG_DCM_COPY "_FROMPATH_" "_FILEDCM_" "_IMOFFSET_" "_IMAGESIZ
+ S VERBOSE=1 D DOS^MAGDOS(CMD,.ERROR)
+ I ERROR(0) D  ; fatal error
+ . N I,MSG
+ . S MSG(1)="DICOM IMAGE MODIFICATION ERROR"
+ . S MSG(2)="Unexpected error in """_CMD_""""
+ . F I=1:1:ERROR(0) S MSG(I+2)=$J(I,3)_") "_ERROR(I)
+ . D TRAPERR^MAGDSTRT(1,$T(+0),"DICOM IMAGE PROCESSING ERROR",.MSG)
+ . Q  ; Error trap does not return
+ Q

@@ -1,0 +1,47 @@
+﻿<UserControl x:Class="VistA.Imaging.Telepathology.Worklist.Views.WorklistFilterView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:extToolkit="http://schemas.xceed.com/wpf/xaml/toolkit"
+             mc:Ignorable="d" 
+             d:DesignHeight="88" d:DesignWidth="779" Background="{StaticResource {x:Static SystemColors.ControlBrushKey}}">
+    <Grid>
+        <Grid.Resources>
+            <XmlDataProvider x:Key="WorklistFilters" XPath="/CBItems/*">
+                <x:XData>
+                    <CBItems xmlns="">
+                        <CBItem Value="" />
+                        <CBItem Value="Today" />
+                        <CBItem Value="Smear Prep/Block" />
+                    </CBItems>
+                </x:XData>
+            </XmlDataProvider>
+        </Grid.Resources>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="5" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0" Orientation="Vertical" Margin="5">
+            <TextBlock Height="40" Text="{Binding FilterDescription}" />
+            <!--<extToolkit:RichTextBox Name="richTextBox" BorderThickness="1" Background="{StaticResource {x:Static SystemColors.ControlBrushKey}}" Height="40" 
+                Text="{Binding FilterDescription, Mode=OneWay}" IsReadOnly="True" FontSize="11" AcceptsReturn="False">
+                <extToolkit:RichTextBox.TextFormatter>
+                    <extToolkit:PlainTextFormatter/>
+                </extToolkit:RichTextBox.TextFormatter>
+            </extToolkit:RichTextBox>-->
+        </StackPanel>
+        <StackPanel Grid.Row="2" Orientation="Horizontal">
+            <StackPanel.Resources>
+                <Style TargetType="{x:Type Button}">
+                    <Setter Property="Margin" Value="10,0,0,0"/>
+                </Style>
+            </StackPanel.Resources>
+            <Label Content="Worklist Filter:"/>
+            <ComboBox Height="23" Width="200" ItemsSource ="{Binding Filters}" DisplayMemberPath="Name" SelectedItem="{Binding CurrentFilter}"/>
+            <Button Content="_Edit" Width="50" Command="{Binding EditFilterCommand}" />
+            <Button Content="_Clear" Width="50" Command="{Binding ClearFilterCommand}" />
+        </StackPanel>
+    </Grid>
+</UserControl>

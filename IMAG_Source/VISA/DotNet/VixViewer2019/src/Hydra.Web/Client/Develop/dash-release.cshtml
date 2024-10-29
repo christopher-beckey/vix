@@ -1,0 +1,1017 @@
+@inherits Nancy.ViewEngines.Razor.NancyRazorViewBase<ViewerModel>
+@using Hydra.Web
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+    <meta content="utf-8" http-equiv="encoding">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+
+    <title>VIX Viewer Dashboard</title>
+    <link type="text/css" rel="stylesheet" href="../bootstrap/css/bootstrap.min.css">
+    <link type="text/css" rel="stylesheet" href="../js/dataTable/css/dataTables.bootstrap.min.css">
+    <link type="text/css" rel="stylesheet" href="../style/jquery.jsonview.css">
+    <link type="text/css" rel="stylesheet" href="../style/css/dash.css">
+    <link type="text/css" rel="stylesheet" href="../style/css/spectrum.min.css">
+    <link type="text/css" rel="stylesheet" href="../style/css/font-awesome.min.css">
+    <link type="text/css" rel="stylesheet" href="../style/bootstrap-timepicker.min.css">
+
+    <script src="../js/jquery-1.11.1.js"></script><!-- TODO: jquery-1.12.4.min.js -->
+    <script src="../js/basic.min.js"></script>
+    <script src="../bootstrap/js/bootstrap.min.js"></script>
+    <script src="../js/dataTable/js/jquery.dataTables.min.js"></script>
+    <script src="../js/dataTable/js/dataTables.bootstrap.min.js"></script>
+    <script src="../js/jquery.jsonview.js"></script>
+    <script src="../js/spectrum.min.js"></script>
+    <script src="../js/bootstrap-timepicker.min.js"></script>
+
+    <script type="text/javascript">
+        //vvvvvvvvvvv TODO VAI-919: Change var to const vvvvvvvvvv
+        var BASE_URL = "@Model.BaseUrl"; //VAI-915
+        var THIS_PAGE_URL = "@Model.BaseViewerUrl"; //VAI-915
+        var TEST_DATA = "@Model.TestData";
+        var SECURITY_TOKEN = "@Model.SecurityToken";
+        var BASE_LOG_URL = THIS_PAGE_URL.replace("dash", "log");
+        //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    </script>
+
+    <script src="../js/dash/dash.min.js"></script>
+</head>
+<body>
+    <nav class="navbar navbarStyle">
+        <div class="container-fluid">
+            <span class="dashboard-header-title">VIX Viewer Dashboard</span>
+            <div> <table  style="width:100%"><tbody><tr>
+                <td style="width:80%">
+                    <div id="header-page">
+                        <div id="header-menu">
+                            <ul class="breadcrumb" id="dashboard-topmenu-login" style="margin-bottom: 10px;">
+                                <li class="active">Home</li>
+                            </ul>
+                            <ul class="breadcrumb" id="dashboard-topmenu-logs-home" style="margin-bottom: 10px;display: none">
+                                <li><a href="#" onclick="showDashboardHome()">Home</a></li>
+                                <li class="active">Logs</li>
+                            </ul>
+                            <ul class="breadcrumb" id="dashboard-topmenu-search-home" style="margin-bottom: 10px;display: none">
+                                <li><a href="#" onclick="showDashboardHome()">Home</a></li>
+                                <li class="active">Search</li>
+                            </ul>
+                            <ul class="breadcrumb" id="dashboard-topmenu-cache-home" style="margin-bottom: 10px;display: none">
+                                <li><a href="#" onclick="showDashboardHome()">Home</a></li>
+                                <li class="active">Cache</li>
+                            </ul>
+                            <ul class="breadcrumb" id="dashboard-topmenu-system-preference-home" style="margin-bottom: 10px;display: none">
+                                <li><a href="#" onclick="showDashboardHome()">Home</a></li>
+                                <li class="active">System Preferences</li>
+                            </ul>
+                            <ul class="breadcrumb" id="dashboard-topmenu-status-home" style="margin-bottom: 10px;display: none">
+                                <li><a href="#" onclick="showDashboardHome()">Home</a></li>
+                                <li class="active">Status</li>
+                            </ul>
+                        </div>
+                    </div>
+                </td>
+                <td style="width:20%,">
+                    <div id="dahsboard-topmenu-home-nav" class="pull-right" style="display: none">
+                        <table><tr><td>
+                            <a href="#" onclick="showDashboardLogs()" title="Logs"> 
+                                <img src='../images/log.png' style="width: 24px;"/>
+                            </a>
+                            </td>
+                            <td> 
+                                <a href="#" onclick="showDashboardSearch()" title="Search"> 
+                                    <img src='../images/search.png' style="width: 24px;"/>
+                                </a>
+                            </td>
+                            <td> 
+                                <a href="#" onclick="showDashboardSystemPreferences()" title="System Preferences"> 
+                                    <img src='../images/systempreference.png' style="width: 30px;"/>
+                                </a>
+                            </td>
+                            <td> 
+                                <a href="#" onclick="showDashboardStatus()" title="Status"> 
+                                    <img src='../images/status.png' style="width: 27px;"/>
+                                </a>
+                            </td>
+                            <!--<li> 
+                                <a href="#" onclick="showDashboardCache()" title="Cache"> 
+                                <img src='../images/cache.png' style="width: 30px;margin-top: -26px;margin-left: 5px;"/>
+                                </a>
+                                </li>
+                                <li> 
+                                <a href="#" onclick="showDashboardSystemPreferences()" title="System Preferences"> 
+                                <img src='../images/systempreference.png' style="width: 30px;margin-top: -31px;margin-left: 34px;"/>
+                                </a>
+                            </li>-->
+                            </tr></table>
+                    </div>
+                </td>
+                </tr></tbody></table>
+            </div>
+        </div>
+    </nav>
+
+<!--<div style="margin-bottom: 90px;"></div>-->
+
+<!-- This includes dashboard home form design -->
+<div id="dashboard-home">
+    <div class="container" style="margin-top: 200px;">
+         <div class="row text-center dashboard-home-icon-center">
+            <div class="col-sm-3">
+                 <a href="#" onclick="showDashboardLogs()" class="thumbnail">
+                  <div class="image-wrapper">
+                    <picture>
+                      <img src="../images/log.png" alt="Dashboard Logs" class="responsive-img">
+                    </picture>
+                  </div>
+                  <div class="caption">
+                    <span class="tag">Logs</span>
+                  </div> 
+                </a>
+             </div>
+            <div class="col-sm-3">
+                 <a href="#" onclick="showDashboardSearch()" class="thumbnail">
+                  <div class="image-wrapper">
+                    <picture>
+                      <img src="../images/search.png" alt="Dashboard Search" class="responsive-img">
+                    </picture>
+                  </div>
+                  <div class="caption">
+                    <span class="tag">Search</span>
+                  </div>
+                </a>
+             </div>
+              <!-- <div class="col-sm-3">
+                 <a href="#" onclick="showDashboardCache()" class="thumbnail">
+                  <div class="image-wrapper">
+                    <picture>
+                      <img src="../images/cache.png" alt="Dashboard Cache" class="responsive-img">
+                    </picture>
+                  </div>
+                  <div class="caption">
+                    <span class="tag">Cache</span>
+                  </div>
+                </a>
+             </div>-->
+            <div class="col-sm-3">
+                  <a href="#" onclick="showDashboardSystemPreferences()" class="thumbnail">
+                  <div class="image-wrapper">
+                    <picture>
+                      <img src="../images/systempreference.png" alt="Dashboard System Preferences" class="responsive-img">
+                    </picture>
+                  </div>
+                  <div class="caption">
+                    <span class="tag">System Preferences</span>
+                  </div>
+                </a>
+             </div>
+             
+             <div class="col-sm-3">
+                 <a href="#" onclick="showDashboardStatus()" class="thumbnail">
+                  <div class="image-wrapper">
+                    <picture>
+                      <img src="../images/status.png" alt="Dashboard Status" class="responsive-img">
+                    </picture>
+                  </div>
+                  <div class="caption">
+                    <span class="tag">Status</span>
+                  </div>
+                </a>
+             </div>
+        </div>
+    </div>
+</div>
+
+<div id="dashboard-log-home" style="display: none">
+    <div class="container containerStyle">
+        <ul class="nav nav-tabs">
+          <li class="active"><a href="#dashboard-viewer-log" data-toggle="tab" onclick="dashboardDisplayViewerLogLevel()">Viewer</a></li>
+          <li><a href="#dashboard-render-log" data-toggle="tab" onclick="dashboardDisplayRenderLogLevel()">Render</a></li>
+        </ul>
+        <div id="myTabContent" class="tab-content" style="padding-top: 5px;">
+            <div class="tab-pane active in" id="dashboard-viewer-log">
+                <div class="dashboard-wrapper">
+                    <div class="sidebar" id="sidebar" style="padding-left: 10px;">
+                        <div class="panel panel-default">
+                             <div class="panel-heading">Log Level</div>
+                                <div class="panel-body">
+                                    <div class="input-group">
+                                        <select class="form-control" id="dashboard-viewer-select-option">
+                                            <option value="Info">Info</option>
+                                            <option value="Warn">Warn</option>
+                                            <option value="Error">Error</option>
+                                            <option value="Trace">Trace</option>
+                                            <option value="Debug">Debug</option>
+                                        </select>
+                                      <span class="input-group-btn" style="padding-left: 10px">
+                                        <button class="btn btn-primary" type="button" id="dashboard-viewer-apply-btn" onclick="doDashboardViewerAndRenderApplyLogLevel('VIEWER')"> Apply</button>
+                                      </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel panel-default" style="margin-top: -15px;">
+                            <div class="panel-heading">Files <span class="pull-right"><a href="#" onclick="dashboardDisplayViewerLogLevel()" title="Refresh Logs" style="color: black"><i class="glyphicon glyphicon-repeat"></i></a>&nbsp;<a href="#" onclick="removeAllLogFiles('VIEWER')" title="Clear Logs" style="color: black"><i class="glyphicon glyphicon-trash"></i></a></span></div>
+                            <div class="panel-body dashboard-viewer-list-file-style">
+                             <table class="table" id="dashboard-viewer-list-files">
+                             </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="dashboard-content" id="dashboard-viewer-log-content" style="width: 100%;">
+                        <div class="panel panel-default">
+                             <div class="panel-heading">
+                                 <div class="container-fluid" style="padding-right: 0px;">
+                                    <div class="navbar-header" style="margin: -18px 0px -9px -29px;">
+                                        <button type="button" id="dashboard-viewer-log-sidebar" class="navbar-btn dashboard-log-sidebarCollapse">
+                                            <img src='../images/chevron-right.png' width="100%" height="70%" id="dashboard-viewer-log-left-panel"/>
+                                             <img src='../images/chevron-left.png' width="100%" height="70%" id="dashboard-viewer-log-right-panel" style="display: none"/>
+                                        </button>
+                                    </div>
+                                    <span id="dashboard-viewer-log-header-text"></span> &nbsp;&nbsp;
+                                     <span>
+                                         <a href="#" onclick="dashboardRefreshLogFile('VIEWER')" title="Refresh Logs" style="color: black">
+                                             <i class="glyphicon glyphicon-repeat"></i>
+                                         </a>&nbsp;
+                                         <a href="#" onclick="clearAllLogs('VIEWER')"  title="Clear Logs" style="color: black">
+                                            <i class="glyphicon glyphicon-trash"></i>
+                                         </a>
+                                    </span>
+                                     <span class="pull-right">
+                                         <button class="btn btn-success btn-sm">Info</button>&nbsp;
+                                         <button class="btn btn-warning btn-sm">Warning</button>&nbsp;
+                                         <button class="btn btn-danger btn-sm">Error</button>&nbsp;
+                                         <button class="btn btn-info btn-sm">Trace</button>&nbsp;
+                                         <button class="btn btn-primary btn-sm">Debug</button>
+                                     </span>
+                                 </div>
+                            </div>
+                            <div class="panel-body table-responsive" style="padding: 10px 10px 4px 10px;">
+                                 <table id="dashboard-viewer-log-table" class="table table-bordered table-hover" style="margin-bottom: 6px;margin-top: -7px;">
+                                      <thead>
+                                      <tr>
+                                         <th>Time Stamp</th>
+                                         <th>Level</th>
+                                         <th>Message</th>
+                                         <th>Parameters</th>
+                                      </tr>
+                                      </thead>
+                                     <tbody id="dashboard-viewer-logs-table-body"></tbody>
+                                </table>
+                                <div class="pull-right" id="dashboard-viewer-logs-table-pagenation"></div>
+                            </div>
+                        </div>
+                        <div class="panel panel-default" style="margin-top: -15px;">
+                            <div class="panel-heading">Parameters </div>
+                            <div class="panel-body param-panel-body">
+                                 <div id="dashboard-viewer-log-json-format" style="width: 70em;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="tab-pane fade" id="dashboard-render-log">
+                <div class="dashboard-wrapper">
+                    <div class="sidebar" id="sidebar1" style="padding-left: 10px;">
+                        <div class="panel panel-default">
+                             <div class="panel-heading">Log Level</div>
+                                <div class="panel-body">
+                                    <div class="input-group">
+                                        <select class="form-control" id="dashboard-render-select-option">
+                                            <option value="Info">Info</option>
+                                            <option value="Warn">Warn</option>
+                                            <option value="Error">Error</option>
+                                            <option value="Trace">Trace</option>
+                                            <option value="Debug">Debug</option>
+                                        </select>
+                                      <span class="input-group-btn" style="padding-left: 10px">
+                                        <button class="btn btn-primary" type="button" id="dashboard-render-apply-btn" onclick="doDashboardViewerAndRenderApplyLogLevel('RENDER')"> Apply</button>
+                                      </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel panel-default" style="margin-top: -15px;">
+                            <div class="panel-heading">
+                                Files <span class="pull-right">
+                                <a href="#" onclick="dashboardDisplayRenderLogLevel()" title="Refresh Logs" style="color: black">
+                                    <i class="glyphicon glyphicon-repeat"></i>
+                                </a>&nbsp;
+                                <a href="#" onclick="removeAllLogFiles('RENDER')" title="Clear Logs" style="color: black">
+                                    <i class="glyphicon glyphicon-trash"></i>
+                                </a></span>
+                            </div>
+                            <div class="panel-body dashboard-viewer-list-file-style">
+                             <table class="table" id="dashboard-render-list-files">
+                             </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="dashboard-content" id="dashboard-render-log-content" style="width: 100%;">
+                        <div class="panel panel-default">
+                             <div class="panel-heading">
+                                 <div class="container-fluid" style="padding-right: 0px;">
+                                    <div class="navbar-header" style="margin: -18px 0px -9px -29px;">
+                                        <button type="button" id="dashboard-render-log-sidebar" class="navbar-btn dashboard-log-sidebarCollapse">
+                                            <img src='../images/chevron-right.png' width="100%" height="70%" id="dashboard-render-log-left-panel"/>
+                                             <img src='../images/chevron-left.png' width="100%" height="70%" id="dashboard-render-log-right-panel" style="display: none"/>
+                                        </button>
+                                    </div>
+                                    <span id="dashboard-render-log-header-text"></span> &nbsp;&nbsp;
+                                     <span>
+                                         <a href="#" onclick="dashboardRefreshLogFile('RENDER')" title="Refresh Logs" style="color: black">
+                                             <i class="glyphicon glyphicon-repeat"></i>
+                                         </a>&nbsp;
+                                         <a href="#" onclick="clearAllLogs('RENDER')"  title="Clear Logs" style="color: black">
+                                            <i class="glyphicon glyphicon-trash"></i>
+                                         </a>
+                                    </span>
+                                     <span class="pull-right">
+                                         <button class="btn btn-success btn-sm">Info</button>&nbsp;
+                                         <button class="btn btn-warning btn-sm">Warning</button>&nbsp;
+                                         <button class="btn btn-danger btn-sm">Error</button>&nbsp;
+                                         <button class="btn btn-info btn-sm">Trace</button>&nbsp;
+                                         <button class="btn btn-primary btn-sm">Debug</button>
+                                     </span>
+                                 </div>
+                            </div>
+                            <div class="panel-body table-responsive" style="padding: 10px 10px 4px 10px;">
+                                 <table id="dashboard-render-log-table" class="table table-bordered table-hover" style="margin-bottom: 6px;margin-top: -7px;">
+                                      <thead>
+                                      <tr>
+                                         <th>Time Stamp</th>
+                                         <th>Level</th>
+                                         <th>Message</th>
+                                         <th>Parameters</th>
+                                      </tr>
+                                      </thead>
+                                     <tbody id="dashboard-render-logs-table-body"></tbody>
+                                </table>
+                                <div class="pull-right" id="dashboard-render-logs-table-pagenation"></div>
+                            </div>
+                        </div>
+                        <div class="panel panel-default" style="margin-top: -15px;">
+                            <div class="panel-heading">Parameters </div>
+                            <div class="panel-body param-panel-body">
+                                 <div id="dashboard-render-log-json-format" style="width: 70em;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>    
+    
+<div id="dashboard-search-home" style="display: none">
+    <div class="container containerStyle">
+   <div style="padding: 2px">
+        <ul class="nav nav-tabs">
+          <li class="active"><a href="#dashboard-search-study-query" data-toggle="tab">Study Query</a></li>
+         <!-- <li><a href="#dashboard-search-roi" data-toggle="tab">ROI</a></li>-->
+        </ul>
+        <div id="myTabContent" class="tab-content" style="padding-top: 5px;">
+          <div class="tab-pane active in" id="dashboard-search-study-query">
+               <div class="form-horizontal" id="requestStudyInfo" style="padding-top: 5px;">
+                <div class="input-group">
+                    <select id="headerSelectBox" class="form-control">
+                     </select>
+                  <span class="input-group-btn" style="font-size: initial;">
+                          <button class="btn btn-primary" type="button" onclick="applyHeaderTitle()" style="padding: 6px;">Apply</button>&nbsp;<button type="button" class="btn btn-warning" onclick="fetchStudyInformation()" style="padding: 6px;">Send</button>
+                  </span>
+                </div><!-- /input-group -->
+                <div class="input-group" style="padding-bottom: 5px;" style="display: none">
+                    <input name="requestUrl" placeholder="Enter request URL" class="form-control" type="text" id="requestUrl" style="display: none"> 
+                    <input name="queryType" placeholder="Query Type" class="form-control" type="text" id="queryType" style="display: none">
+               <!--   <span class="input-group-btn">
+                        <button type="button" class="btn btn-warning" onclick="fetchStudyInformation()" style="padding: 6px;">Send</button>
+                  </span>-->
+                </div><!-- /input-group -->
+                    <ul class="nav nav-pills" style="padding-bottom: 5px;">
+                        <li class="active"><a data-toggle="tab" href="#body">Body</a></li>
+                        <li><a data-toggle="tab" href="#headers">Headers</a></li>
+                    </ul>
+                    <div class="tab-content">
+                        <div id="body" class="tab-pane fade in active">
+                            <textarea class="form-control" placeholder="Body" rows="7" id="bodyText" style="color: blue;"></textarea>
+                        </div>
+                    <div id="headers" class="tab-pane fade">
+                        <textarea class="form-control" placeholder="Headers" rows="7" id="headerText"></textarea>
+                    </div>
+                  </div>
+                </div>
+               <div id="sudyInformation" style="display: none">
+                   <div class="row" id="restultPageHeaderText">
+                    <div class="col-lg-12">
+                        <h4 class="header_align">Search Results</h4>
+                    </div>
+                </div>
+            <!-- /.row -->
+            <div class="row">
+              <div class="col-lg-12">
+                  <div class="panel">
+                      <div class="panel-body" style="padding: 0px;">
+                        <div class="form-inline">
+                            <div class="form-group">
+                                <label class="filter-col" id="patientICN"></label>
+                            </div>
+                            <div class="form-group">
+                                <label class="filter-col" id="siteNumber"></label>
+                            </div>
+                            <div class="form-group">
+                                <label class="filter-col" id="authSiteNumber"></label>
+                            </div>
+                            <div class="form-group">
+                                <label class="filter-col" id="userId"></label>
+                            </div>
+                            <div class="form-group" id="dispalySession" style="display: none">
+                                <label class="filter-col">Session ID:</label>
+                                <input type="text" class="form-control" id="sessionId" readonly>
+                            </div>
+                            <textarea class="form-control" rows="10" id="securityToken" style="display: none;"></textarea>
+                             <input type="text" class="form-control" id="authSiteNumberVal" style="display: none;">
+                            <div class="form-group" id="statusBtn" style="display: none">
+                                <button type="button" class="btn btn-info btn-sm" onclick="loadStatusAction()">Status</button>
+                            </div>
+                        </div>
+                       <table width="100%" class="table table-striped table-bordered table-hover" id="studyInfoTable">
+                           <thead>
+                               <tr>
+                                 <th>GroupIEN</th>
+                                 <th>Image</th>
+                                 <th>StudyID</th>
+                                 <th>Event</th>
+                                 <th>StudyDate</th>
+                                 <th>Procedure</th>
+                                 <th>Specialty</th>
+                                 <th>Actions</th>
+                                </tr>
+                              </thead>
+                              <tbody id="studyInfo">
+                              </tbody>
+                          </table>
+                      </div>
+                      <!-- /.panel-body -->
+                  </div>
+                  <!-- /.panel -->
+              </div>
+              <!-- /.col-lg-12 -->
+          </div>
+          <!-- /.row -->
+          </div>    
+        <div id="patientInformation" style="display: none">
+             <div class="row">
+                 <div class="col-lg-12">
+                     <h4 class="header_align">Search Results</h4>
+                 </div>
+             </div>
+              <!-- /.row -->
+              <div class="row">
+                  <div class="col-lg-12">
+                      <div class="panel">
+                         <div class="panel-body" style="padding: 0px;">
+                          <table width="100%" class="table table-striped table-bordered table-hover" id="patientInfoTable">
+                                  <thead>
+                                      <tr>
+                                          <th>Patient Name</th>
+                                          <th>SSN4</th>
+                                          <th>Patient ID</th>
+                                          <th>Status</th>
+                                          <th>Last Updated</th>
+                                          <th>DICOM Routin</th>
+                                      </tr>
+                                  </thead>
+                                 <tbody id="patientInfo">
+                                  </tbody>
+                              </table>
+                          </div>
+                          <!-- /.panel-body -->
+                      </div>
+                      <!-- /.panel -->
+                  </div>
+                  <!-- /.col-lg-12 -->
+              </div>
+              <!-- /.row -->
+          </div> 
+        </div>
+
+          <div class="tab-pane fade" id="dashboard-search-roi">
+              <h2>ROI Page</h2>
+          </div>
+        </div>
+    </div>
+    </div>
+</div>    
+
+<div id="dashboard-cache-home" style="display: none">
+  <div class="container containerStyle">
+    <div style="padding: 2px">
+        <ul class="nav nav-tabs">
+          <li class="active"><a href="#dashboard-cache-settings" data-toggle="tab">Cache Preferences</a></li>
+          <li><a href="#dashboard-cache" data-toggle="tab">Cache Status</a></li>
+        </ul>
+        <br />
+        <div id="myTabContent" class="tab-content">
+          <div class="tab-pane active in" id="dashboard-cache-settings">
+            <div class="row">
+                <div class="col-sm-3">
+                  <button class="btn btn-primary" type="button" style="width: 100%;"> Purge Cache</button>
+                    <br /><br />
+                  <div class="panel panel-default">
+                    <div class="panel-heading">Purge Schedule </div>
+                    <div class="panel-body" style="padding: 0px;">
+                     <table class="table">
+                       <tr>
+                           <td><input type="checkbox" name="firstrowchkbox" value="checkbox1"/></td>
+                           <td>
+                               <div class="input-group bootstrap-timepicker timepicker">
+                                    <input id="timepicker1" type="text" class="form-control input-small">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-time"></i></span>
+                                </div>
+                           </td>
+                       </tr>
+                       <tr>
+                           <td><input type="checkbox" name="secondrowchkbox"/></td>
+                            <td> 
+                                <div class="input-group bootstrap-timepicker timepicker">
+                                    <input id="timepicker2" type="text" class="form-control input-small">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-time"></i></span>
+                                </div>
+                           </td>
+                       </tr>
+                         <tr></tr>
+                         <tr>
+                             <td></td>
+                             <td> <button class="btn btn-primary" type="button" style="width: 100%;"> Apply</button></td>
+                         </tr>
+                    </table>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-9">
+                <h2>Under Construction</h2>
+            </div>
+        </div>      
+     </div>
+    <div class="tab-pane fade" id="dashboard-cache">
+        <button class="btn btn-primary">Refresh</button>
+          <br /> <br />
+          <table class="table table-bordered" id="dashboard-cache-table">
+              <thead>
+                  <tr style="border-bottom: 3px solid #ddd;">
+                    <th>Context Id</th>
+                    <th>Image Count</th>
+                    <th>Creation Date</th>
+                    <th>Last Accessed Date</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+              </tbody>
+          </table>
+      </div>
+    </div>
+    </div>
+</div>
+</div>  
+    
+<div id="dashboard-status-home" style="display: none">
+  <div class="container containerStyle">
+    <div style="padding: 10px">
+            <div class="row">
+            <div class="col-sm-12">
+                  <div class="panel panel-default">
+                    <div class="panel-heading"><b style="font-size: 16px">Viewer</b></div>
+                    <div class="panel-body" style="padding: 0px;">
+                     <table class="table table-bordered table-hover" id="dashboard-status-viewer-table">
+                          <thead>
+                              <tr>
+                                <th style="width: 44%;">Key</th>
+                                <th>Value</th>
+                              </tr>
+                            </thead>
+                            <tbody id="dashboard-status-viewer-table-body">
+                         </tbody>
+                    </table>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12">
+                  <div class="panel panel-default">
+                    <div class="panel-heading"><b style="font-size: 16px">Render</b></div>
+                    <div class="panel-body" style="padding: 0px;">
+                     <table class="table table-bordered table-hover" id="dashboard-status-render-table">
+                          <thead>
+                              <tr>
+                                <th>Key</th>
+                                <th>Value</th>
+                              </tr>
+                            </thead>
+                            <tbody id="dashboard-status-render-table-body">
+                         </tbody>
+                    </table>
+                    </div>
+                </div>
+            </div>
+        </div>   
+    </div>
+</div>
+</div>      
+    
+   
+<div id="dashboard-system-preference-home" style="display: none">
+  <div class="container containerStyle">
+    <div style="padding: 2px">
+        <ul class="nav nav-tabs">
+          <li class="active"><a href="#dashboard-system-preference" data-toggle="tab">System Preferences</a></li>
+        </ul>
+        <br />
+        <div id="myTabContent" class="tab-content">
+          <div class="tab-pane active in" id="dashboard-system-preference">
+            <div class="dashboard-wrapper">
+            <!-- Sidebar Holder -->
+            <div id="sidebar2" class="sidebar" style="padding-left: 10px;">
+                <div class="panel-group">
+                     <div class="panel panel-default">
+                        <div class="panel-heading sidebar-tab tab-active" id="annotaPrefActive">
+                            <h4 class="panel-title">
+                                <a href="#" onclick="displayPreferences(&quot;annotaPrefActive&quot;)">Annotation</a>
+                            </h4>
+                        </div>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading sidebar-tab" id="cinePrefActive">
+                            <h4 class="panel-title">
+                                <a href="#" onclick="displayPreferences(&quot;cinePrefActive&quot;)">Cine</a>
+                            </h4>
+                        </div>
+                    </div>
+                    <div style="display:none" class="panel panel-default">
+                        <div class="panel-heading sidebar-tab" id="ecgPrefActive">
+                            <h4 class="panel-title">
+                                <a href="#" onclick="displayPreferences(&quot;ecgPrefActive&quot;)">ECG</a>
+                            </h4>
+                        </div>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading sidebar-tab" id="disPrefActive">
+                            <h4 class="panel-title">
+                                <a href="#" onclick="displayPreferences(&quot;disPrefActive&quot;)">Layout</a>
+                            </h4>
+                        </div>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading sidebar-tab" id="copyPrefActive">
+                            <h4 class="panel-title">
+                                <a href="#" onclick="displayPreferences(&quot;copyPrefActive&quot;)">Copy Attributes</a>
+                            </h4>
+                        </div>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading sidebar-tab" id="logPrefActive">
+                            <h4 class="panel-title">
+                                <a href="#" onclick="displayPreferences(&quot;logPrefActive&quot;)">Log</a>
+                            </h4>
+                        </div>
+                    </div>
+                </div>
+         </div>
+
+        <!-- Page Content Holder -->
+        <div id="content2" class="dashboard-content tab-content" style="width: 100%;">
+            <div class="panel panel-default">
+                <div class="panel-heading"> 
+                    <div class="container-fluid" style="padding-right: 0px;">
+                        <div class="navbar-header" style="margin: -16px 0px -18px -30px;">
+                            <button type="button" id="dashboard-annotation-sidebar" class="navbar-btn dashboard-log-sidebarCollapse">
+                                <img src='../images/chevron-right.png' width="100%" height="70%" id="dashboard-annotation-left-panel"/>
+                                <img src='../images/chevron-left.png' width="100%" height="70%" id="dashboard-annotation-right-panel" style="display: none"/>
+                            </button>
+                        </div>
+                        <h4 class="text-center header-text-align" id="preferenceHeaderTitle">Annotation Preferences</h4>
+                    </div>
+                </div>
+                <div class="panel-body" style="padding: 10px 10px 4px 10px;">
+                    <div id="annotationTab">
+                        <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                            <div class="panel panel-default">
+                                <div class="panel-heading test" role="tab" id="headingOne">
+                                    <h4 class="panel-title">
+                                        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                            <i class="more-less glyphicon glyphicon-plus"></i>
+                                            ANNOTATION
+                                        </a>
+                                    </h4>
+                                </div>
+                                <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+                                    <div class="panel-body">
+                                        <div class="panel panel-primary dashboard-preference-panel-top" id="storkeStyleID"></div>
+                                         <div class="panel panel-primary dashboard-preference-panel" id="gaugeLengthID"></div>
+                                        <div class="panel panel-primary dashboard-preference-panel" id="arrowFillID"></div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel panel-default">
+                                <div class="panel-heading test" role="tab" id="headingTwo">
+                                    <h4 class="panel-title">
+                                        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                            <i class="more-less glyphicon glyphicon-plus"></i>
+                                           MEASUREMENT
+                                        </a>
+                                    </h4>
+                                </div>
+                                <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+                                  <div class="panel-body">
+                                        <div class="panel panel-primary dashboard-preference-panel-top" id="measurementLineID"></div>
+                                        <div class="panel panel-primary dashboard-preference-panel" id="measurementGaugeLengthID"></div>
+                                        <div class="panel panel-primary dashboard-preference-panel" id="measurementAngleID"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel panel-default">
+                            <div class="panel-heading test" role="tab" id="headingThree">
+                                <h4 class="panel-title">
+                                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                        <i class="more-less glyphicon glyphicon-plus"></i>
+                                        ELLIPSE & RECTANGLE
+                                    </a>
+                                </h4>
+                            </div>
+                            <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+                                <div class="panel-body">
+                                    <div class="panel panel-primary dashboard-preference-panel-top" id="elipseRectLineID"></div>
+                                    <div class="panel panel-primary dashboard-preference-panel" id="housnfieldID"></div>
+                                </div>
+                            </div>
+                        </div>
+                            <div class="panel panel-default">
+                            <div class="panel-heading test" role="tab" id="headingFour">
+                                <h4 class="panel-title">
+                                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                                        <i class="more-less glyphicon glyphicon-plus"></i>
+                                        LABEL
+                                    </a>
+                                </h4>
+                            </div>
+                            <div id="collapseFour" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFour">
+                                <div class="panel-body"> 
+                                   <!-- Nav pills -->
+                              <ul class="nav nav-pills nav-app dashboard-preference-panel-top">
+                                <li class="active">
+                                  <a data-toggle="pill" href="#annotationPre">Annotation</a>
+                                </li>
+                                <li>
+                                  <a data-toggle="pill" href="#overlayPre">Overlay</a>
+                                </li>
+                                <li>
+                                  <a data-toggle="pill" href="#orientationPre">Orientation</a>
+                                </li>
+                                <li>
+                                  <a data-toggle="pill" href="#scoutPre">Scout & Ruler</a>
+                                </li>
+                              </ul>
+
+                              <!-- Tab panes -->
+                              <div class="tab-content">
+                                <div id="annotationPre" class="tab-pane fade in active"><br>
+                                  <div class="panel panel-primary" id="labelAnnotationID"></div>
+                                </div>
+                                <div id="overlayPre" class="tab-pane fade"><br>
+                                <div class="panel panel-primary" id="labelOverlayID"></div>
+                                </div>
+                                <div id="orientationPre" class="tab-pane fade"><br>
+                                  <div class="panel panel-primary" id="labelOrientationID"></div>
+                                </div>
+                                <div id="scoutPre" class="tab-pane fade"><br>
+                                 <div class="panel panel-primary" id="labelScoutRulerID"></div>
+                                 <div class="panel panel-primary" id="labelRulerID" style="margin-top: 20px !important;"></div>
+                                </div>
+                              </div>
+                                </div>
+                            </div>
+                        </div>
+                            <div class="panel panel-default">
+                            <div class="panel-heading test" role="tab" id="headingFive">
+                                <h4 class="panel-title">
+                                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                                        <i class="more-less glyphicon glyphicon-plus"></i>
+                                        TEXT
+                                    </a>
+                                </h4>
+                            </div>
+                            <div id="collapseFive" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFive">
+                                <div class="panel-body">
+                                    <div class="panel panel-primary dashboard-preference-panel-top" id="fontText"></div>
+                            </div>
+                            </div>  
+                         </div>
+                            <div class="panel panel-default">
+                            <div class="panel-heading test" role="tab" id="headingSix">
+                                <h4 class="panel-title">
+                                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
+                                        <i class="more-less glyphicon glyphicon-plus"></i>
+                                        MITRAL & AORTIC (US)
+                                    </a>
+                                </h4>
+                            </div>
+                            <div id="collapseSix" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingSix">
+                                <div class="panel-body">
+                                   <div class="panel panel-primary dashboard-preference-panel-top" id="mitralAorticID"></div>
+                                    <div class="panel panel-primary dashboard-preference-panel" id="mitralLineID"></div>
+                                    <div class="panel panel-primary dashboard-preference-panel" id="mitralID"></div>
+                                </div>
+                            </div>
+                        </div>
+                            <br />
+                           <div id="dashboard-annotation-loading-icon" style="margin-bottom: -27px;display: none">
+                               <span class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span><span id="dashboard-annotation-loading-status"></span>
+                            </div>
+                            <div class="pull-right"> 
+                                <button class="btn btn-sm btn-primary" id="dashboard-annotationTab-apply-btn" disabled onclick="dicomViewer.systemPreferences.onSubmit('annotation')">Apply</button>
+                                <button class="btn btn-sm btn-default" id="dashboard-annotationTab-reset-btn" disabled onclick="dicomViewer.systemPreferences.onReset('annotation')">Reset</button>
+                            </div>
+                            <div class="pull-left"> 
+                                <div id="AnnotationPreferenceAlert" class="alert alert-danger" style="display: none;font-size: 15px;" role="alert"></div>
+                            </div>
+                        </div>
+                    </div><!-- panel-group -->
+                    <div id="cineTab" style="display: none"></div>
+                    <div id="ecgTab" style="display: none"></div>
+                    <div id="displayTab" style="display: none"></div>
+                    <div id="copyAttrTab" style="display: none"></div>
+                    <div id="logTab" style="display: none"></div>
+                </div>
+            </div>
+            </div>
+          </div>    
+     </div>
+    </div>
+    </div>
+</div>
+</div>        
+    
+<!-- Modal -->
+<div class="modal fade" id="logViewerAndRenderModal" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Remove Log Files</h4>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure you want to remove all the log files ?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+                <button type="button" id="btnViewerLog" class="btn btn-danger" onclick="removeViewerLogFile('VIEWER')" style="display: none">Yes</button>
+                <button type="button" id="btnRenderLog" class="btn btn-danger" onclick="removeViewerLogFile('RENDER')" style="display: none">Yes</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="clearLogViewerAndRenderModal" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">Remove Log File</h4>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure you want to remove the log file ?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+                <button type="button" id="btnClearViewerLog" class="btn btn-danger" onclick="clearViewerLogFile('VIEWER')" style="display: none">Yes</button>
+                <button type="button" id="btnClearRenderLog" class="btn btn-danger" onclick="clearViewerLogFile('RENDER')" style="display: none">Yes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- confirmation dialog for purging study-->
+<div class="modal fade" id="purgeStudyModal" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">Purge Study</h4>
+            </div>
+            <div class="modal-body">
+                <div id="purgeStudyModalPrompt"><p>Are you sure you want to purge this study? <span id="purgeStudyID"></span></p></div>
+                <div id="purgeStudyModalResult" style="display: none"><p><span id="purgeStudyResult"></span></p></div>
+                <input type="text" id="viewerURL" style="display: none">
+                <input type="text" id="studyPurgeID" style="display: none">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default purgeStudyPrompt" data-dismiss="modal">No</button>
+                <button type="button" class="btn btn-danger purgeStudyPrompt" onclick="purgeStudy()">Yes</button>
+                <button type="button" class="btn btn-danger purgeStudyDone" onclick="donePurgeStudy()" style="display: none">OK</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="displayDetailInformation" style="display: none; margin-top: -45px;">
+</div>
+<!--<div id='ajax_loader' style="position: fixed; left: 35%; top: 25%; display: none;">
+    <img src="../images/loader.gif">
+</div>-->
+<div class="animationload" id="ajax_loader" style="display: none;">
+    <div class="osahanloading"></div>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Status Information</h4>
+            </div>
+            <div class="modal-body">
+                <label id="idleTime" style="padding-left: 452px;"></label>
+                <table id="statusTable" class="table table-bordered">
+                 <thead>
+                     <tr>
+                         <th>Context ID</th>
+                         <th>Action</th>
+                     </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary btn-sm" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>    
+
+<!-- confirmation dialog for saving the preference-->
+<div class="modal fade" id="preferenceSaveModal" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Preferences</h4>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure you want to save the changes ? </p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal" onclick="revertChanges()">No</button>
+                <button type="button" class="btn btn-danger" onclick="applyChanges()">Yes</button>
+
+            </div>
+        </div>
+    </div>
+</div>
+<script type="application/javascript">
+    // This method used for setting the preference
+    function toggleIcon(e)
+    {
+        $(e.target).prev('.panel-heading').find(".more-less").toggleClass('glyphicon-plus glyphicon-minus');
+    }
+
+    $(window).on('load', function () {
+        $('#accordion').on('hidden.bs.collapse', toggleIcon);
+        $('#accordion').on('shown.bs.collapse', toggleIcon);
+
+        $("#dashboard-viewer-select-option").change(function() {
+            var selectOptions = $("#dashboard-viewer-select-option option:selected" ).val();
+            if (selectOptions !== lastAppliedLogLevel)
+            {
+                $('#dashboard-viewer-select-option').val(selectOptions);
+                $('#dashboard-viewer-apply-btn').removeClass('disabled');
+            }
+            else
+            {
+                    $('#dashboard-viewer-select-option').val(selectOptions);
+                    $('#dashboard-viewer-apply-btn').addClass('disabled');
+            }
+        });
+
+        $("#dashboard-render-select-option").change(function() {
+            var selectOptions = $("#dashboard-render-select-option option:selected" ).val();
+            if (selectOptions !== lastAppliedRenderLogLevel)
+            {
+                $('#dashboard-render-select-option').val(selectOptions);
+                $('#dashboard-render-apply-btn').removeClass('disabled');
+            }
+            else
+            {
+                $('#dashboard-render-select-option').val(selectOptions);
+                $('#dashboard-render-apply-btn').addClass('disabled');
+            }
+        });
+    });
+</script>
+</body>
+</html>

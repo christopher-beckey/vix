@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2012/03/05 13:39:52.000.709,=C:\Documents and Settings\vhaiswkashtg\My Documents\RAD Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2012/03/05 13:41:30.614,=C:\Documents and Settings\vhaiswkashtg\My Documents\RAD Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2012/03/12 12:29:00.519.dproj,C:\Documents and Settings\vhaiswkashtg\My Documents\RAD Studio\Projects\Project1.dproj=C:\DevD2007\P130\Clin\DLL\P130_DLL_Project.dproj</Transaction>
+    <Transaction>2012/03/19 08:24:10.278.pas,C:\DevD2007\P130\Clin\DLL\Unit1.pas=C:\DevD2007\P130\Clin\DLL\Utilities.pas</Transaction>
+    <Transaction>2012/03/19 12:55:43.308.pas,C:\DevD2007\P130\PDF Sandbox\XPath_Reader\pdfImage.pas=</Transaction>
+    <Transaction>2012/03/19 13:38:01.135.pas,C:\DevD2007\P130\Clin\DLL\Utilities.pas=</Transaction>
+    <Transaction>2012/03/21 09:14:46.874.pas,C:\DevD2007\P130\Clin\DLL\Unit1.pas=C:\DevD2007\P130\Clin\DLL\MagLogger.pas</Transaction>
+    <Transaction>2012/03/26 12:11:58.682.pas,C:\DevD2007\P130\Clin\DLL\Unit1.pas=C:\DevD2007\P130\Clin\DLL\MagUtils.pas</Transaction>
+    <Transaction>2012/05/06 12:06:43.360.pas,C:\DevD2007\Version 3.0 Patch 130 - Clinical Display Release of Information Enhancement\Clin\DLL\MagUtils.pas=C:\DevD2007\Version 3.0 Patch 130 - Clinical Display Release of Information Enhancement\Clin\DLL\MagROIUtils.pas</Transaction>
+    <Transaction>2012/05/06 12:06:48.798.pas,C:\DevD2007\Version 3.0 Patch 130 - Clinical Display Release of Information Enhancement\Clin\DLL\MagLogger.pas=C:\DevD2007\Version 3.0 Patch 130 - Clinical Display Release of Information Enhancement\Clin\DLL\MagROILogger.pas</Transaction>
+    <Transaction>2012/05/06 12:07:03.126.pas,C:\DevD2007\Version 3.0 Patch 130 - Clinical Display Release of Information Enhancement\Clin\DLL\globals.pas=C:\DevD2007\Version 3.0 Patch 130 - Clinical Display Release of Information Enhancement\Clin\DLL\ROIGlobals.pas</Transaction>
+    <Transaction>2012/05/06 12:07:20.970.pas,C:\DevD2007\Version 3.0 Patch 130 - Clinical Display Release of Information Enhancement\Clin\DLL\cMagIGManager.pas=C:\DevD2007\Version 3.0 Patch 130 - Clinical Display Release of Information Enhancement\Clin\DLL\cMag_ROI_IGManager.pas</Transaction>
+    <Transaction>2012/05/06 12:07:28.157.pas,C:\DevD2007\Version 3.0 Patch 130 - Clinical Display Release of Information Enhancement\Clin\DLL\pdfImage.pas=C:\DevD2007\Version 3.0 Patch 130 - Clinical Display Release of Information Enhancement\Clin\DLL\MagROIpdfImage.pas</Transaction>
+    <Transaction>2012/05/06 12:07:35.532.pas,C:\DevD2007\Version 3.0 Patch 130 - Clinical Display Release of Information Enhancement\Clin\DLL\PDFPage.pas=C:\DevD2007\Version 3.0 Patch 130 - Clinical Display Release of Information Enhancement\Clin\DLL\MagROIPDFPage.pas</Transaction>
+    <Transaction>2012/05/06 12:07:40.704.pas,C:\DevD2007\Version 3.0 Patch 130 - Clinical Display Release of Information Enhancement\Clin\DLL\ROIGlobals.pas=C:\DevD2007\Version 3.0 Patch 130 - Clinical Display Release of Information Enhancement\Clin\DLL\MagROIGlobals.pas</Transaction>
+    <Transaction>2012/05/06 18:15:19.652.dproj,C:\DevD2007\Version 3.0 Patch 130 - Clinical Display Release of Information Enhancement\Clin\DLL\P130_DLL_Project.dproj=C:\DevD2007\Version 3.0 Patch 130 - Clinical Display Release of Information Enhancement\Clin\DLL\Mag_ROI_DLL.dproj</Transaction>
+  </Transactions>
+</BorlandProject>

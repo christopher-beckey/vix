@@ -1,0 +1,318 @@
+KIDS Distribution saved on Apr 14, 2009@11:21:02
+This package contains a KIDS component for Patch 98 - REMOTE PROCEDURE CALL
+**KIDS**:ZMAG*3.0*98*RPC3^
+
+**INSTALL NAME**
+ZMAG*3.0*98*RPC3
+"BLD",6468,0)
+ZMAG*3.0*98*RPC3^^0^3090414^n
+"BLD",6468,1,0)
+^^2^2^3090414^
+"BLD",6468,1,1,0)
+MAG *3.0 *98 KID Component
+"BLD",6468,1,2,0)
+VISTA REMOTE PROCEDURE CALL - MAG FIND IMAGE TEXT FILE
+"BLD",6468,4,0)
+^9.64PA^^0
+"BLD",6468,6.3)
+3
+"BLD",6468,"INID")
+n^n^n
+"BLD",6468,"KRN",0)
+^9.67PA^779.2^20
+"BLD",6468,"KRN",.4,0)
+.4
+"BLD",6468,"KRN",.401,0)
+.401
+"BLD",6468,"KRN",.402,0)
+.402
+"BLD",6468,"KRN",.403,0)
+.403
+"BLD",6468,"KRN",.5,0)
+.5
+"BLD",6468,"KRN",.84,0)
+.84
+"BLD",6468,"KRN",3.6,0)
+3.6
+"BLD",6468,"KRN",3.8,0)
+3.8
+"BLD",6468,"KRN",9.2,0)
+9.2
+"BLD",6468,"KRN",9.8,0)
+9.8
+"BLD",6468,"KRN",9.8,"NM",0)
+^9.68A^^0
+"BLD",6468,"KRN",19,0)
+19
+"BLD",6468,"KRN",19,"NM",0)
+^9.68A^^0
+"BLD",6468,"KRN",19.1,0)
+19.1
+"BLD",6468,"KRN",101,0)
+101
+"BLD",6468,"KRN",409.61,0)
+409.61
+"BLD",6468,"KRN",771,0)
+771
+"BLD",6468,"KRN",779.2,0)
+779.2
+"BLD",6468,"KRN",870,0)
+870
+"BLD",6468,"KRN",8989.51,0)
+8989.51
+"BLD",6468,"KRN",8989.52,0)
+8989.52
+"BLD",6468,"KRN",8994,0)
+8994
+"BLD",6468,"KRN",8994,"NM",0)
+^9.68A^1^1
+"BLD",6468,"KRN",8994,"NM",1,0)
+MAG FIND IMAGE TEXT FILE^^0
+"BLD",6468,"KRN",8994,"NM","B","MAG FIND IMAGE TEXT FILE",1)
+
+"BLD",6468,"KRN","B",.4,.4)
+
+"BLD",6468,"KRN","B",.401,.401)
+
+"BLD",6468,"KRN","B",.402,.402)
+
+"BLD",6468,"KRN","B",.403,.403)
+
+"BLD",6468,"KRN","B",.5,.5)
+
+"BLD",6468,"KRN","B",.84,.84)
+
+"BLD",6468,"KRN","B",3.6,3.6)
+
+"BLD",6468,"KRN","B",3.8,3.8)
+
+"BLD",6468,"KRN","B",9.2,9.2)
+
+"BLD",6468,"KRN","B",9.8,9.8)
+
+"BLD",6468,"KRN","B",19,19)
+
+"BLD",6468,"KRN","B",19.1,19.1)
+
+"BLD",6468,"KRN","B",101,101)
+
+"BLD",6468,"KRN","B",409.61,409.61)
+
+"BLD",6468,"KRN","B",771,771)
+
+"BLD",6468,"KRN","B",779.2,779.2)
+
+"BLD",6468,"KRN","B",870,870)
+
+"BLD",6468,"KRN","B",8989.51,8989.51)
+
+"BLD",6468,"KRN","B",8989.52,8989.52)
+
+"BLD",6468,"KRN","B",8994,8994)
+
+"BLD",6468,"QUES",0)
+^9.62^^
+"BLD",6468,"REQB",0)
+^9.611^^
+"KRN",8994,2511,-1)
+0^1
+"KRN",8994,2511,0)
+MAG FIND IMAGE TEXT FILE^FINDFIL^MAGDOD01^1^R^0^^0^.1
+"KRN",8994,2511,1,0)
+^8994.01^18^18^3080429^^
+"KRN",8994,2511,1,1,0)
+  +---------------------------------------------------------------+
+"KRN",8994,2511,1,2,0)
+  | Property of the US Government.                                |
+"KRN",8994,2511,1,3,0)
+  | No permission to copy or redistribute this software is given. |
+"KRN",8994,2511,1,4,0)
+  | Use of unreleased versions of this software requires the user |
+"KRN",8994,2511,1,5,0)
+  | to execute a written test agreement with the VistA Imaging    |
+"KRN",8994,2511,1,6,0)
+  | Development Office of the Department of Veterans Affairs,     |
+"KRN",8994,2511,1,7,0)
+  | telephone (301) 734-0100.                                     |
+"KRN",8994,2511,1,8,0)
+  |                                                               |
+"KRN",8994,2511,1,9,0)
+  | The Food and Drug Administration classifies this software as  |
+"KRN",8994,2511,1,10,0)
+  | a medical device.  As such, it may not be changed in any way. |
+"KRN",8994,2511,1,11,0)
+  | Modifications to this software may result in an adulterated   |
+"KRN",8994,2511,1,12,0)
+  | medical device under 21CFR820, the use of which is considered |
+"KRN",8994,2511,1,13,0)
+  | to be a violation of US Federal Statutes.                     |
+"KRN",8994,2511,1,14,0)
+  +---------------------------------------------------------------+
+"KRN",8994,2511,1,15,0)
+ 
+"KRN",8994,2511,1,16,0)
+This Remote Procedure allows the invoking client to use a filename 
+"KRN",8994,2511,1,17,0)
+(without extension) to find the path and nearest location of an image 
+"KRN",8994,2511,1,18,0)
+file.
+"KRN",8994,2511,2,0)
+^8994.02A^1^1
+"KRN",8994,2511,2,1,0)
+FILENAME^1^199^1^1
+"KRN",8994,2511,2,1,1,0)
+^8994.021^2^2^3080429^^
+"KRN",8994,2511,2,1,1,1,0)
+The value of this parameter is the name of an image file, without path or 
+"KRN",8994,2511,2,1,1,2,0)
+extension.
+"KRN",8994,2511,2,"B","FILENAME",1)
+
+"KRN",8994,2511,2,"PARAMSEQ",1,1)
+
+"KRN",8994,2511,3,0)
+^^32^32^3080429^
+"KRN",8994,2511,3,1,0)
+The return value of this remote procedure is a string.
+"KRN",8994,2511,3,2,0)
+ 
+"KRN",8994,2511,3,3,0)
+If the client is not authorized to call this remote procedure,
+"KRN",8994,2511,3,4,0)
+input parameter value is not valid, or the image file is not found,
+"KRN",8994,2511,3,5,0)
+the appropriate string will be returned from the following list in the 
+"KRN",8994,2511,3,6,0)
+second pipe-separated piece of the return value.
+"KRN",8994,2511,3,7,0)
+ 
+"KRN",8994,2511,3,8,0)
+   -12,No permission to call this Remote Procedure
+"KRN",8994,2511,3,9,0)
+   -13,Image has been deleted
+"KRN",8994,2511,3,10,0)
+   -21,Image file name must be specified
+"KRN",8994,2511,3,11,0)
+   -22,Invalid filename format (no control characters allowed)
+"KRN",8994,2511,3,12,0)
+   -23,Image filename not found on VistA
+"KRN",8994,2511,3,13,0)
+ 
+"KRN",8994,2511,3,14,0)
+Otherwise, the first pipe-separated piece of the return value will be the
+"KRN",8994,2511,3,15,0)
+internal entry number of the image found.
+"KRN",8994,2511,3,16,0)
+The second pipe-separated piece will either be the name of the text file
+"KRN",8994,2511,3,17,0)
+for that image, including full path specification, or a negative number.
+"KRN",8994,2511,3,18,0)
+The third pipe-separated piece will be one of the following values,
+"KRN",8994,2511,3,19,0)
+indicating the proximity of the nearest version of the file:
+"KRN",8994,2511,3,20,0)
+   M:  magnetic
+"KRN",8994,2511,3,21,0)
+   W:  WORM (jukebox)
+"KRN",8994,2511,3,22,0)
+   A:  archive
+"KRN",8994,2511,3,23,0)
+   O:  offline
+"KRN",8994,2511,3,24,0)
+   I:  invalid/undeterminable
+"KRN",8994,2511,3,25,0)
+The fourth pipe-separated piece will contain the value D if and only if 
+"KRN",8994,2511,3,26,0)
+there is a possible duplicate file with the same name.
+"KRN",8994,2511,3,27,0)
+The fifth pipe-separated piece will contain the value IQ if and only if 
+"KRN",8994,2511,3,28,0)
+there is a possible integrity problem with the file.
+"KRN",8994,2511,3,29,0)
+The sixth pipe-separated piece will contain 1 if there are any updatable 
+"KRN",8994,2511,3,30,0)
+fields on this image record, 0 otherwise.  Updatable fields include 
+"KRN",8994,2511,3,31,0)
+Series Instance UID, Image Instance UID, Document Date, DICOM Series, 
+"KRN",8994,2511,3,32,0)
+DICOM image number.
+"MBREQ")
+0
+"ORD",16,8994)
+8994;16;1;;;;;;;RPCDEL^XPDIA1
+"ORD",16,8994,0)
+REMOTE PROCEDURE
+"QUES","XPF1",0)
+Y
+"QUES","XPF1","??")
+^D REP^XPDH
+"QUES","XPF1","A")
+Shall I write over your |FLAG| File
+"QUES","XPF1","B")
+YES
+"QUES","XPF1","M")
+D XPF1^XPDIQ
+"QUES","XPF2",0)
+Y
+"QUES","XPF2","??")
+^D DTA^XPDH
+"QUES","XPF2","A")
+Want my data |FLAG| yours
+"QUES","XPF2","B")
+YES
+"QUES","XPF2","M")
+D XPF2^XPDIQ
+"QUES","XPI1",0)
+YO
+"QUES","XPI1","??")
+^D INHIBIT^XPDH
+"QUES","XPI1","A")
+Want KIDS to INHIBIT LOGONs during the install
+"QUES","XPI1","B")
+NO
+"QUES","XPI1","M")
+D XPI1^XPDIQ
+"QUES","XPM1",0)
+PO^VA(200,:EM
+"QUES","XPM1","??")
+^D MG^XPDH
+"QUES","XPM1","A")
+Enter the Coordinator for Mail Group '|FLAG|'
+"QUES","XPM1","B")
+
+"QUES","XPM1","M")
+D XPM1^XPDIQ
+"QUES","XPO1",0)
+Y
+"QUES","XPO1","??")
+^D MENU^XPDH
+"QUES","XPO1","A")
+Want KIDS to Rebuild Menu Trees Upon Completion of Install
+"QUES","XPO1","B")
+NO
+"QUES","XPO1","M")
+D XPO1^XPDIQ
+"QUES","XPZ1",0)
+Y
+"QUES","XPZ1","??")
+^D OPT^XPDH
+"QUES","XPZ1","A")
+Want to DISABLE Scheduled Options, Menu Options, and Protocols
+"QUES","XPZ1","B")
+NO
+"QUES","XPZ1","M")
+D XPZ1^XPDIQ
+"QUES","XPZ2",0)
+Y
+"QUES","XPZ2","??")
+^D RTN^XPDH
+"QUES","XPZ2","A")
+Want to MOVE routines to other CPUs
+"QUES","XPZ2","B")
+NO
+"QUES","XPZ2","M")
+D XPZ2^XPDIQ
+"VER")
+8.0^22.0
+**END**
+**END**

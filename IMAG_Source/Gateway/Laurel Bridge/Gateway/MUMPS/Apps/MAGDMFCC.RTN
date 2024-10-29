@@ -1,0 +1,136 @@
+Cache for Windows NT^INT^Saved from DICOM,DICOM (ISW-KUZMAKP3-LT)^~Format=Cache.S~
+%RO on 04/01/2013  18:56
+MAGDMFCC^INT^1^62913,68196.415034^0
+MAGDMFCC ;WOIFO/EdM - Copy setings into Windows Registry ; 01 Apr 2013 6:56 PM
+ ;;3.0;IMAGING;**69**;MAR 19, 2002;;NOV 7, 2007
+ ;; Per VHA Directive 2004-038, this routine should not be modified.
+ ;; +---------------------------------------------------------------+
+ ;; | Property of the US Government.                                |
+ ;; | No permission to copy or redistribute this software is given. |
+ ;; | Use of unreleased versions of this software requires the user |
+ ;; | to execute a written test agreement with the VistA Imaging    |
+ ;; | Development Office of the Department of Veterans Affairs,     |
+ ;; | telephone (301) 734-0100.                                     |
+ ;; | The Food and Drug Administration classifies this software as  |
+ ;; | a medical device.  As such, it may not be changed in any way. |
+ ;; | Modifications to this software may result in an adulterated   |
+ ;; | medical device under 21CFR820, the use of which is considered |
+ ;; | to be a violation of US Federal Statutes.                     |
+ ;; +---------------------------------------------------------------+
+ ;;
+ Q
+ ;
+REG N D1,DATA,FILE,N,SHARE,TEMP,X
+ S TEMP=$$TEMPDIR^MAGOSDIR()
+ ;
+ S FILE=TEMP_"DICOM.reg"
+ S STS=$$OPEN^MAGOSFIL(FILE,"W")
+ S STS=$$USE^MAGOSFIL(FILE)
+ W "Windows Registry Editor Version 5.00",!!
+ W "[HKEY_LOCAL_MACHINE\SOFTWARE\VistA\Imaging\DICOM]",!
+ S SHARE=$G(^MAGDICOM(2006.563,1,"DICT PATH"))
+ S:SHARE="" SHARE="C:"
+ S SHARE=$$LET2UNC^MAGOSMSC(SHARE,0)
+ W """DICOM_Dictionary_Drive""="""_$$ESC(SHARE)_"""",!
+ S SHARE=$G(^MAGDICOM(2006.563,1,"DATA PATH",1,0))
+ S:SHARE="" SHARE="C:"
+ S SHARE=$$LET2UNC^MAGOSMSC(SHARE,0)
+ W """DICOM_Text_Drive""="""_$$ESC(SHARE)_"""",!
+ S SHARE=$G(^MAGDICOM(2006.563,1,"IMAGE INPUT PATH"))
+ S:SHARE="" SHARE="C:"
+ S SHARE=$$LET2UNC^MAGOSMSC(SHARE,0)
+ W """DICOM_Image_Drive""="""_$$ESC(SHARE)_"""",!
+ S N=$O(^MAGDICOM(2006.563,1,"DATA PATH"," "),-1) S:N<1 N=2
+ W """DICOM_Data_Dir""=dword:"_$TR($J(N,8)," ",0),!!!
+ S STS=$$CLOSE^MAGOSFIL(FILE)
+ S X=$$HOSTCMD^MAGOSMSC("regedit /i /s """_FILE_"""")
+ Q
+ ;
+ESC(X) N E,I,O
+ S O="" F I=1:1:$L(X) S E=$E(X,I),O=O_E S:E="\" O=O_E
+ Q O
+ ;
+QUEUE ; Overflow from MAGDMFBB
+ N I,J,L
+ ; Each VistA write queue has three additional subpieces:
+ ; Queue ^ Message ID ^ File Number (for Message ID = 0) ^ File Number
+ ;
+ K ^MAGDICOM(2006.564)
+ ;
+ ; Qletter ^ Secondary DATA PATH ^ MSGID
+ ; piece 2 is for the secondary communications channel
+ ;
+ S D0=0
+ ; request initiated by the remote DICOM application entity
+ S D0=D0+1,L(D0)="A^*^^INCOMING^REQUEST^HIGH"
+ S D0=D0+1,L(D0)="B^*^^OUTGOING^RESPONSE^HIGH"
+ S D0=D0+1,L(D0)="C^*^^INCOMING^REQUEST^MEDIUM"
+ S D0=D0+1,L(D0)="D^*^^OUTGOING^RESPONSE^MEDIUM"
+ S D0=D0+1,L(D0)="E^*^^INCOMING^REQUEST^LOW"
+ S D0=D0+1,L(D0)="F^*^^OUTGOING^RESPONSE^LOW"
+ S D0=D0+1,L(D0)="G^*^^INCOMING^REQUEST^IMMEDIATE"
+ S D0=D0+1,L(D0)="H^*^^OUTGOING^RESPONSE^IMMEDIATE"
+ ; request initiated by local DICOM application entity
+ S D0=D0+1,L(D0)="S^*^^OUTGOING^REQUEST^IMMEDIATE"
+ S D0=D0+1,L(D0)="T^*^^INCOMING^RESPONSE^IMMEDIATE"
+ S D0=D0+1,L(D0)="U^1^^OUTGOING^REQUEST^HIGH"
+ S D0=D0+1,L(D0)="V^*^^INCOMING^RESPONSE^HIGH"
+ S D0=D0+1,L(D0)="W^1^^OUTGOING^REQUEST^MEDIUM"
+ S D0=D0+1,L(D0)="X^*^^INCOMING^RESPONSE^MEDIUM"
+ S D0=D0+1,L(D0)="Y^1^^OUTGOING^REQUEST^LOW"
+ S D0=D0+1,L(D0)="Z^*^^INCOMING^RESPONSE^LOW"
+ S D0=0 F  S D0=$O(L(D0)) Q:'D0  D
+ . S X=L(D0),^MAGDICOM(2006.564,D0,0)=X
+ . S ^MAGDICOM(2006.564,"X",$P(X,"^",4),$P(X,"^",5),$P(X,"^",6))=D0
+ . Q
+ S ^MAGDICOM(2006.564,0)="DICOM QUEUE^2006.564^"_D0_"^"_D0
+ ;
+ K ^MAGDICOM(2006.577)
+ S ^MAGDICOM(2006.577,0)="DICOM FIFO QUEUE^2006.577^"_CHANNEL_"^"_CHANNEL
+ F I=1:1:CHANNEL D
+ . S ^MAGDICOM(2006.577,I,0)=I
+ . S ^MAGDICOM(2006.577,I,1,0)="^2006.5771^16^16"
+ . F J=1:1:16 D
+ . . N L
+ . . S L=$E("ABCDEFGHSTUVWXYZ",J)
+ . . S ^MAGDICOM(2006.577,I,1,J,0)=L_"^9999999"
+ . . S ^MAGDICOM(2006.577,I,1,"B",L,J)=""
+ . . Q
+ . Q
+ Q
+ ;
+Q29 I WORKLIST="NO" Q
+ K QUIT S OK=0 F  D  Q:OK  Q:$D(QUIT)
+ . N N,P,X
+ . S X=$S(MODWLST=1:"",1:"s")
+ . W !!,"Currently, there ",$S(MODWLST=1:"is a",1:"are")
+ . W " Modality WorkList processor",X," for"
+ . W !,"the following port",X,":"
+ . S P="" F  S P=$O(MODWLST(P)) Q:P=""  W !?10,P
+ . W !!,"Change? [A/D/N] N// "
+ . R X:DTIME E  S X="^"
+ . I X="^" S QUIT=0 Q
+ . I X="^^" S QUIT=1 Q
+ . I "Nn"[$E(X_"N",1) S OK=1 Q
+ . I "Aa"[$E(X,1) D  Q:X'="?"
+ . . S P=$TR(X,$TR(X,1234567890))
+ . . I (P<1)!(P>65535) S X="?" Q
+ . . I '$D(MODWLST(P)) S MODWLST=MODWLST+1,MODWLST(P)=""
+ . . Q
+ . I "Dd"[$E(X,1) D  Q:X'="?"
+ . . S P=$TR(X,$TR(X,1234567890))
+ . . I (P<1)!(P>65535)!(P=60010) S X="?" Q
+ . . I $D(MODWLST(P)) S MODWLST=MODWLST-1 K MODWLST(P)
+ . . Q
+ . W !,"Enter one of the following:"
+ . W !,"  No                if no (additional) change is to be made"
+ . W !,"  Add <number>      to add a listener for a port"
+ . W !,"  Delete <number>   to remove a listener for a port"
+ . W !,"Note that valid port numbers are integers between 1 and 65535."
+ . W !,"Note that the listener for port 60010 may not be removed."
+ . Q
+ Q
+ ;
+
+
+

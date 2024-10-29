@@ -1,0 +1,341 @@
+[ application_info ]
+name = DicomStoreSCUImpl
+description = Java client app that demonstrates use of StoreClient and DicomSCU in DCS lib.
+app_component_name = java_app/DicomStoreSCUImpl
+execution_state = STOPPED
+
+[ required_components ]
+component = java_lib/LOG_a
+component = java_lib/DCF
+component = java_lib/LOG
+component = java_lib/APC
+component = java_lib/CDS
+component = java_lib/APC_a
+component = java_lib/CDS_a
+component = java_lib/DCS
+component = idl_lib/DDCS
+[ java_app ]
+
+#==============================================================================
+# per-instance information for the ex_jstore_scu component
+#==============================================================================
+[ java_app/DicomStoreSCUImpl ]
+debug_flags = 0x00000
+[ java_lib ]
+
+#==============================================================================
+# per-instance information for the LOG_a component
+#==============================================================================
+[ java_lib/LOG_a ]
+debug_flags = 0
+
+[ java_lib/LOG_a/outputs ]
+[ java_lib/LOG_a/outputs/server_output_1 ]
+type = LOGSERVER
+use_log_server = TRUE
+
+[ java_lib/LOG_a/outputs/file_output_1 ]
+type = textfile
+message_types = *
+component_names = *
+# Note that changing the format of this name may affect the behavior of the web
+# utilities that manipulate log files (e.g., list_logs.pl, dcfrmlogs.pl).
+filename = C:/DCF_DEV/tmp/log/${APPIBNAME}.${CNT}.log
+append_to_logfile = TRUE
+# Maximum size (KBytes) of each log file before rotating.
+max_size = 3000
+# Maximum number of log files before old ones are deleted.
+max_files = 5
+# Sync the file output on the disk on every write operation - this could affect performance
+sync_on_write = false
+character_encoding = UTF-8
+# true if a Byte-Order-Marker should be written at the start of the file.
+# Some UTF capable viewers use this to detect that the file is UTF format.
+write_bom = false
+
+[ java_lib/LOG_a/outputs/std_output_1 ]
+type = stdout
+redirect_stdout = FALSE
+redirect_stderr = FALSE
+
+#==============================================================================
+# per-instance information for the DCF component
+#==============================================================================
+[ java_lib/DCF ]
+debug_flags = 0x00000
+
+#==============================================================================
+# per-instance information for the LOG component
+#==============================================================================
+[ java_lib/LOG ]
+debug_flags = 0x00000
+
+#==============================================================================
+# per-instance information for the APC component
+#==============================================================================
+[ java_lib/APC ]
+debug_flags = 0x00000
+
+#==============================================================================
+# per-instance information for the CDS component
+#==============================================================================
+[ java_lib/CDS ]
+debug_flags = 0x00000
+
+#==============================================================================
+# per-instance information for the APC_a component
+#==============================================================================
+[ java_lib/APC_a ]
+debug_flags = 0x00000
+
+# If true, proc configuration will be saved in CDS CFGDB.
+save_proc_cfg_in_cds = true
+
+# If true, <proc_cfg>/application_info/execution_state attribute
+# will be monitored for a shutdown request 
+# (not supported if CFGDB is in FSys Mode)
+handle_external_shutdown_rq = true
+
+# If true, <proc_cfg> will be observed, and re-loaded if it changes
+# (not supported if CFGDB is in FSys Mode)
+observe_proc_cfg = false
+
+# If true, the value passed to AppControl.shutdown() will be saved in
+# the proc config - usually delete_proc_cfg is set to false with this.
+save_exit_status_in_proc_cfg = false
+
+# If true, the proc config object in CDS is deleted during shutdown
+delete_proc_cfg = true
+
+#==============================================================================
+# per-instance information for the CDS_a component
+#==============================================================================
+[ java_lib/CDS_a ]
+debug_flags = 0x00000
+
+#==============================================================================
+# per-instance information for the DCS component
+#==============================================================================
+[ java_lib/DCS ]
+debug_flags = 0x00000
+# default name of extended data dictionary configuration group
+extended_data_dictionary = /dicom/ext_data_dictionary
+# if true, DicomDataDictionary will LOG a warning if private dictionary
+# conflicts with the standard dictionary.
+check_dictionary_overrides = true
+
+
+[ java_lib/DCS/AssociationManager ]
+server_host_address = 0.0.0.0
+server_tcp_port = 2000
+max_concurrent_associations = 32
+max_total_associations = -1
+#
+# If true, AssociationManager will get notified if this group is
+# changed in its process configuration while it is running.
+# This is useful if you want to change the listen port
+# without stopping and restarting AssociationManager or other settings.
+#
+listen_cfg_group = false;
+first_pdu_read_timeout = 15
+default_session_config_name = 
+select_timeout = 1
+receive_buffer_size = 40000
+call_app_ready_in_run = true
+
+[ java_lib/DCS/IOStatisticsManager ]
+enable_statistics = NO
+seconds_between_updates = 0
+save_stats_in_proc_cfg = YES
+statistics_cfg_group_name = 
+
+
+[ java_lib/DCS/default_session_cfg ]
+debug_flags = 0
+max_read_pdu_size = 32768
+max_write_pdu_size = 32768
+ignore_max_length_negotiation = NO
+favor_proposed_syntax_order = YES
+pdu_write_timeout_seconds = -1
+send_dimse_timeout_seconds = 180
+receive_dimse_timeout_seconds = 180
+enable_streaming_mode = YES
+stream_mode_buffer_size = 16384
+enable_compression_pass_through_mode = NO
+pdu_write_delay_seconds = 0
+pdu_read_delay_seconds = 0
+socket_write_delay_seconds = 0
+max_bytes_per_socket_write = 0
+read_unknown_vr_as_OB_or_SQ = YES
+always_write_undef_length_seqs = YES
+always_write_undef_length_seq_items = YES
+always_write_seq_item_end_delims = NO
+always_write_seq_end_delims = NO
+association_idle_timeout_seconds = 600
+pre_association_script = 
+post_association_script = 
+disable_multi_pdv_pdus = YES
+input_filter_cfg_name = 
+output_filter_cfg_name = 
+remove_incoming_role_selection_items = NO
+remove_outgoing_role_selection_items = NO
+# if set, private tags in a dataset with VR UN that are in the data dictionary (via the extended
+# data dictionary) with a different VR will be fixed to have the VR from the dictionary.
+# if not set, a warning will be logged if the VRs are not the same
+fix_private_tags_with_vr_UN = NO
+
+[ java_lib/DCS/default_session_cfg/input_filters ]
+
+[ java_lib/DCS/default_session_cfg/output_filters ]
+
+[ java_lib/DCS/default_session_cfg/supported_transfer_syntaxes ]
+# explicit-little-endian
+transfer_syntax = 1.2.840.10008.1.2.1
+# implicit-little-endian
+transfer_syntax = 1.2.840.10008.1.2
+# explicit-big-endian
+transfer_syntax = 1.2.840.10008.1.2.2
+# JPEG lossless prediction selector = 1
+transfer_syntax = 1.2.840.10008.1.2.4.70
+# JPEG2000 lossless
+transfer_syntax = 1.2.840.10008.1.2.4.90
+# JPEG2000 lossy
+transfer_syntax = 1.2.840.10008.1.2.4.91
+# JPEG lossless
+transfer_syntax = 1.2.840.10008.1.2.4.57
+# JPEG lossy 8 bit 
+transfer_syntax = 1.2.840.10008.1.2.4.50
+# JPEG lossy 12 bit
+transfer_syntax = 1.2.840.10008.1.2.4.51
+
+[ java_lib/DCS/default_session_cfg/DicomEncapsulatedCodec ]
+# force number_of_frames in bad files with non-zero pixel data length from 0 to 1
+override_n_frames = true
+
+[ java_lib/DCS/default_session_cfg/DicomEncapsulatedCodecJAI ]
+[ java_lib/DCS/default_session_cfg/DicomEncapsulatedCodecJAI/jpeg_lossless ]
+# If true, then the photometric-interpretation attribute
+# for RGB color data is changed as a data set is written.
+# The new value is configurable.
+change_photo_interp_on_encode = true
+# If true, then the photometric-interpretation attribute
+# for color data is changed to RGB as a data set is read.
+change_photo_interp_on_decode = true
+# If true, then derived image fields are added for monochrome
+# images. (Some implementations add derived fields, create
+# a new sop-instance-uid, etc. even for lossless compressed
+# images.)
+add_derived_image_fields_for_mono = false
+# If true, then derived image fields are added for color 
+# images. (Some implementations add derived fields, create
+# a new sop-instance-uid, etc. even for lossless compressed
+# images.)
+add_derived_image_fields_for_color = true
+# If true, signed pixel data (pixel-representation = 1 ) will
+# be allowed.
+allow_signed_data = false
+# If true, color pixel data will be allowed. Some implementations
+# don't implement lossless jpeg for color, since the RGB to YBR
+# color space conversion may result in some information loss.
+allow_color = false
+# Specify the new value for photometric interpretation if
+# original data is RGB and change_photo_interp_on_encode
+# is true.
+change_photo_interp_rgb_to = YBR_FULL
+
+[ java_lib/DCS/default_session_cfg/DicomEncapsulatedCodecJAI/jpeg_lossy ]
+# lossy jpeg quality value rate - float val between 0.0 and 1.0
+compression_quality = 0.75
+# If true, then the photometric-interpretation attribute
+# for RGB color data is changed as a data set is written.
+# The new value is configurable.
+change_photo_interp_on_encode = true
+# If true, then the photometric-interpretation attribute
+# for color data is changed to RGB as a data set is read.
+change_photo_interp_on_decode = true
+# If true, derived image elements are added to data sets
+# as they are written. This includes changing Image-Type,
+# and adding Source-Image-Sequence and Derivation-Code-Sequence.
+# A new sop-instance-uid will be created for the output data set.
+add_derived_image_fields = true
+# If true, signed pixel data (pixel-representation = 1 ) will
+# be allowed.
+allow_signed_data = false
+# Specify the new value for photometric interpretation if
+# original data is RGB and change_photo_interp_on_encode
+# is true.
+change_photo_interp_rgb_to = YBR_FULL_422
+
+[ java_lib/DCS/default_session_cfg/DicomEncapsulatedCodecJAI/jpeg2000_lossless ]
+# Perform the "Multi-Component-Transform" i.e. color space conversion
+# on RGB data.
+perform_mct = true
+# If true, then the photometric-interpretation attribute
+# for RGB color data is changed as a data set is written.
+# The new value is configurable.
+change_photo_interp_on_encode = true
+# If true, then the photometric-interpretation attribute
+# for color data is changed to RGB as a data set is read.
+change_photo_interp_on_decode = true
+# If true, then derived image fields are added for monochrome
+# images. (Some implementations add derived fields, create
+# a new sop-instance-uid, etc. even for lossless compressed
+# images.)
+add_derived_image_fields_for_mono = false
+# If true, then derived image fields are added for color 
+# images. (Some implementations add derived fields, create
+# a new sop-instance-uid, etc. even for lossless compressed
+# images.)
+add_derived_image_fields_for_color = false
+# Specify the new value for photometric interpretation if
+# original data is RGB and change_photo_interp_on_encode
+# is true.
+change_photo_interp_rgb_to = YBR_RCT
+
+[ java_lib/DCS/default_session_cfg/DicomEncapsulatedCodecJAI/jpeg2000_lossy ]
+# multiplier for lossy jpeg2000 encoding rate - float val between 0.0 and 1.0
+encoding_rate_factor = 0.5
+# Perform the "Multi-Component-Transform" i.e. color space conversion
+# on RGB data.
+perform_mct = true
+# If true, then the photometric-interpretation attribute
+# for RGB color data is changed as a data set is written.
+# The new value is configurable.
+change_photo_interp_on_encode = true
+# If true, then the photometric-interpretation attribute
+# for color data is changed to RGB as a data set is read.
+change_photo_interp_on_decode = true
+# If true, derived image elements are added to data sets
+# as they are written. This includes changing Image-Type,
+# and adding Source-Image-Sequence and Derivation-Code-Sequence.
+# A new sop-instance-uid will be created for the output data set.
+add_derived_image_fields = true
+# Specify the new value for photometric interpretation if
+# original data is RGB and change_photo_interp_on_encode
+# is true.
+change_photo_interp_rgb_to = YBR_ICT
+
+[ java_lib/DCS/DicomFileInput ]
+#Always scan for transfer syntax/chapter 10
+#whether a DicomFileInput is constructed with a
+#transfer syntax or not
+force_autodetect = TRUE
+
+
+[ java_lib/DCS/DicomFileOutput ]
+# This attribute is deprecated
+create_chapter_10_format = true
+# This attribute is deprecated
+invent_group_2_data = true
+
+[ java_lib/DCS/DicomDeviceInput ]
+enforce_sq_delim_check = true
+
+[ java_lib/DCS/VerificationSCP ]
+[ java_lib/DCS/VerificationSCP/default_session_cfg ]
+[ java_lib/DCS/VerificationSCP/default_session_cfg/supported_sop_classes ]
+#SOPCLASSVERIFICATION
+sop_class = 1.2.840.10008.1.1
+[ idl_lib ]
+
+[ idl_lib/DDCS ]

@@ -1,0 +1,26 @@
+magtstcl ; WOIFO/EdM ; 10/01/2004  09:37
+ Q
+ ;
+CACHE N F,N0,MAX,X,Z
+ S X=$G(^MAG(2005,0)),MAX=$P(X,"^",3)
+ I MAX<1 W !!,"Invalid Image file, cannot clean up." Q
+ W !,"Highest image number is ",MAX,", ready to clean up? : " R X:300 E  Q
+ I "Yy"'[$E(X_"n",1) Q
+ F N0=1,2 D
+ . S DEV=$P(^MAG(2005.2,N0,0),"^",2)
+ . I $E(DEV,1,2)="\\" W !!,DEV," is not local." Q
+ . W !!,"Scanning network location ",N0," = ",DEV,!
+ . S LOC(DEV)="" F  S DEV=$O(LOC("")) Q:DEV=""  D
+ . . W !,"Subdirectory ",DEV
+ . . S Z=$ZSEARCH(DEV_"*.*") F  S F=$P(Z,"\",$L(Z,"\")) Q:F=""  D  S Z=$ZSEARCH("")
+ . . . Q:$TR(F,".")=""
+ . . . S T=DEV_F I $ZU(140,7,T)\16#2 S LOC(T_"\")="" Q
+ . . . S X=+$TR($P(F,".",1),"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz")
+ . . . I 'X W !,"No image number in ",T," (",X,")" Q
+ . . . Q:X<MAX
+ . . . W !,"Deleting ",T S X=$ZU(140,5,T)
+ . . . Q
+ . . K LOC(DEV)
+ . . Q
+ . Q
+ Q

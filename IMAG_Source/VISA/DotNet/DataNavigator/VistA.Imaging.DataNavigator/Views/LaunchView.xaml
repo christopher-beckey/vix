@@ -1,0 +1,18 @@
+﻿<mvvm:View x:Class="VistA.Imaging.DataNavigator.Views.LaunchView"
+           x:TypeArguments="vm:LaunchViewModel"
+           xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+           xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+           xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+           xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+           xmlns:vm="clr-namespace:VistA.Imaging.DataNavigator.ViewModels"
+           xmlns:mvvm="clr-namespace:ImagingClient.Infrastructure.Prism.Mvvm;assembly=ImagingClient.Infrastructure"
+           xmlns:vb="clr-namespace:ImagingClient.Infrastructure.Views;assembly=ImagingClient.Infrastructure"
+           xmlns:m="clr-namespace:VistA.Imaging.DataNavigator"
+           mc:Ignorable="d" 
+           d:DesignHeight="30" d:DesignWidth="300"
+           d:DataContext="{d:DesignData Source=DesignData/LaunchViewModel.xaml}">
+    <StackPanel Orientation="Horizontal">
+        <Button Content="Data Navigator" Command="{Binding Path=LaunchCommand}" Width="100" />
+        <TextBlock Text="VistA Imaging Data Navigator" />
+    </StackPanel>
+</mvvm:View>

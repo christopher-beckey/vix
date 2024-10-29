@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<build xmlns="http://va.gov/VistA/kids/manifest" name="MAG*3.0*099" patchName="Storing DICOM Objects,Phase III" patch="099">
+  <components>
+    <securityKeys />
+    <parameterDefinitions />
+    <printTemplates />
+    <sortTemplates />
+    <menuOptions />
+    <rpcs />
+    <dataDictionaries>
+      <dataDictionary export="ZVSS_2006_581_FILE.KID" />
+    </dataDictionaries>
+    <hl7s />
+    <routines>
+      <routine export="MAGDIR9A.RTN" />
+      <routine export="MAGDIR9B.RTN" />
+      <routine export="MAGDIR9E.RTN" />
+      <routine export="MAGGTIA.RTN" />
+      <routine export="MAGIPS99.RTN" />
+      <routine export="MAGZTEMP1.RTN" />
+      <routine export="MAGZTEMP2.RTN" />
+    </routines>
+    <protocols />
+  </components>
+</build>

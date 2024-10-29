@@ -1,0 +1,621 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<java version="1.6.0_03" class="java.beans.XMLDecoder"> 
+ <object class="java.util.ArrayList"> 
+  <void method="add"> 
+   <object class="gov.va.med.imaging.versions.ImagingService"> 
+    <void property="applicationPath"> 
+     <string>FederationWebApp</string> 
+    </void> 
+    <void property="applicationType"> 
+     <string>Federation</string> 
+    </void> 
+    <void property="operations"> 
+     <void method="add"> 
+      <object class="gov.va.med.imaging.versions.ImagingOperation"> 
+       <void property="operationPath"> 
+        <string>/webservices/ImageMetadataFederation</string> 
+       </void> 
+       <void property="operationType"> 
+        <string>Metadata</string> 
+       </void> 
+      </object> 
+     </void> 
+     <void method="add"> 
+      <object class="gov.va.med.imaging.versions.ImagingOperation"> 
+       <void property="operationPath"> 
+        <string>/FederationServlet</string> 
+       </void> 
+       <void property="operationType"> 
+        <string>Image</string> 
+       </void> 
+      </object> 
+     </void>
+     <void method="add"> 
+      <object class="gov.va.med.imaging.versions.ImagingOperation"> 
+       <void property="operationPath"> 
+        <string>/PhotoIdServlet</string> 
+       </void> 
+       <void property="operationType"> 
+        <string>Photo</string> 
+       </void> 
+      </object> 
+     </void> 
+    </void> 
+    <void property="version"> 
+     <string>0</string> 
+    </void> 
+   </object>
+  </void>
+  <void method="add">
+   <object class="gov.va.med.imaging.versions.ImagingService"> 
+    <void property="applicationPath"> 
+     <string>FederationWebApp</string> 
+    </void> 
+    <void property="applicationType"> 
+     <string>Federation</string> 
+    </void> 
+    <void property="operations"> 
+     <void method="add"> 
+      <object class="gov.va.med.imaging.versions.ImagingOperation"> 
+       <void property="operationPath"> 
+        <string>/webservices/ImageMetadataFederation.V2</string> 
+       </void> 
+       <void property="operationType"> 
+        <string>Metadata</string> 
+       </void> 
+      </object> 
+     </void> 
+     <void method="add"> 
+      <object class="gov.va.med.imaging.versions.ImagingOperation"> 
+       <void property="operationPath"> 
+        <string>/FederationServlet</string> 
+       </void> 
+       <void property="operationType"> 
+        <string>Image</string> 
+       </void> 
+      </object> 
+     </void>
+     <void method="add"> 
+      <object class="gov.va.med.imaging.versions.ImagingOperation"> 
+       <void property="operationPath"> 
+        <string>/PhotoIdServlet</string> 
+       </void> 
+       <void property="operationType"> 
+        <string>Photo</string> 
+       </void> 
+      </object> 
+     </void> 
+    </void> 
+    <void property="version"> 
+     <string>2</string> 
+    </void> 
+   </object>  
+  </void> 
+  <void method="add">
+   <object class="gov.va.med.imaging.versions.ImagingService"> 
+    <void property="applicationPath"> 
+     <string>FederationWebApp</string> 
+    </void> 
+    <void property="applicationType"> 
+     <string>Federation</string> 
+    </void> 
+    <void property="operations"> 
+     <void method="add"> 
+      <object class="gov.va.med.imaging.versions.ImagingOperation"> 
+       <void property="operationPath"> 
+        <string>/webservices/ImageMetadataFederation.v3</string> 
+       </void> 
+       <void property="operationType"> 
+        <string>Metadata</string> 
+       </void> 
+      </object> 
+     </void> 
+     <void method="add"> 
+      <object class="gov.va.med.imaging.versions.ImagingOperation"> 
+       <void property="operationPath"> 
+        <string>/FederationServlet</string> 
+       </void> 
+       <void property="operationType"> 
+        <string>Image</string> 
+       </void> 
+      </object> 
+     </void>
+     <void method="add"> 
+      <object class="gov.va.med.imaging.versions.ImagingOperation"> 
+       <void property="operationPath"> 
+        <string>/PhotoIdServlet</string> 
+       </void> 
+       <void property="operationType"> 
+        <string>Photo</string> 
+       </void> 
+      </object> 
+     </void>     
+     <void method="add"> 
+      <object class="gov.va.med.imaging.versions.ImagingOperation"> 
+       <void property="operationPath"> 
+        <string>/FederationExamImageServlet</string> 
+       </void> 
+       <void property="operationType"> 
+        <string>ExamImage</string> 
+       </void> 
+      </object> 
+     </void>
+     <void method="add"> 
+      <object class="gov.va.med.imaging.versions.ImagingOperation"> 
+       <void property="operationPath"> 
+        <string>/FederationExamImageTextServlet</string> 
+       </void> 
+       <void property="operationType"> 
+        <string>ExamImageText</string> 
+       </void> 
+      </object> 
+     </void>     
+     <void method="add"> 
+      <object class="gov.va.med.imaging.versions.ImagingOperation"> 
+       <void property="operationPath"> 
+        <string>/webservices/ImageMetadataFederation.v3</string> 
+       </void> 
+       <void property="operationType"> 
+        <string>VistaRadMetadata</string> 
+       </void> 
+      </object> 
+     </void>           
+    </void> 
+    <void property="version"> 
+     <string>3</string> 
+    </void> 
+   </object>  
+  </void>  
+  <void method="add">
+   <object class="gov.va.med.imaging.versions.ImagingService"> 
+    <void property="applicationPath"> 
+     <string>FederationWebApp</string> 
+    </void> 
+    <void property="applicationType"> 
+     <string>Federation</string> 
+    </void> 
+    <void property="operations"> 
+     <void method="add"> 
+      <object class="gov.va.med.imaging.versions.ImagingOperation"> 
+       <void property="operationPath"> 
+        <string>/PhotoIdServlet</string> 
+       </void> 
+       <void property="operationType"> 
+        <string>Photo</string> 
+       </void> 
+      </object> 
+     </void>
+     <void method="add"> 
+      <object class="gov.va.med.imaging.versions.ImagingOperation"> 
+       <void property="operationPath"> 
+        <string>/restservices/V4/</string> 
+       </void> 
+       <void property="operationType"> 
+        <string>VistaRadMetadata</string> 
+       </void> 
+      </object> 
+     </void>
+     <void method="add"> 
+      <object class="gov.va.med.imaging.versions.ImagingOperation"> 
+       <void property="operationPath"> 
+        <string>/FederationImageServletV4</string> 
+       </void> 
+       <void property="operationType"> 
+        <string>Image</string> 
+       </void> 
+      </object> 
+     </void>
+     <void method="add"> 
+      <object class="gov.va.med.imaging.versions.ImagingOperation"> 
+       <void property="operationPath"> 
+        <string>/FederationTextServletV4</string> 
+       </void> 
+       <void property="operationType"> 
+        <string>Text</string> 
+       </void> 
+      </object> 
+     </void>     
+     <void method="add"> 
+      <object class="gov.va.med.imaging.versions.ImagingOperation"> 
+       <void property="operationPath"> 
+        <string>/FederationExamImageServletV4</string> 
+       </void> 
+       <void property="operationType"> 
+        <string>ExamImage</string> 
+       </void> 
+      </object> 
+     </void>     
+     <void method="add"> 
+      <object class="gov.va.med.imaging.versions.ImagingOperation"> 
+       <void property="operationPath"> 
+        <string>/FederationExamImageTextServletV4</string> 
+       </void> 
+       <void property="operationType"> 
+        <string>ExamImageText</string> 
+       </void> 
+      </object> 
+     </void>     
+     <void method="add"> 
+      <object class="gov.va.med.imaging.versions.ImagingOperation"> 
+       <void property="operationPath"> 
+        <string>/restservices/V4/</string> 
+       </void> 
+       <void property="operationType"> 
+        <string>Metadata</string> 
+       </void> 
+      </object> 
+     </void>    
+     <void method="add"> 
+      <object class="gov.va.med.imaging.versions.ImagingOperation"> 
+       <void property="operationPath"> 
+        <string>/FederationDocumentServletV4</string> 
+       </void> 
+       <void property="operationType"> 
+        <string>Document</string> 
+       </void> 
+      </object> 
+     </void>                           
+    </void> 
+    <void property="version"> 
+     <string>4</string> 
+    </void> 
+   </object>  
+  </void>
+  <void method="add">
+   <object class="gov.va.med.imaging.versions.ImagingService"> 
+    <void property="applicationPath"> 
+     <string>FederationWebApp</string> 
+    </void> 
+    <void property="applicationType"> 
+     <string>Federation</string> 
+    </void> 
+    <void property="operations"> 
+     <void method="add"> 
+      <object class="gov.va.med.imaging.versions.ImagingOperation"> 
+       <void property="operationPath"> 
+        <string>/PhotoIdServlet</string> 
+       </void> 
+       <void property="operationType"> 
+        <string>Photo</string> 
+       </void> 
+      </object> 
+     </void>
+     <void method="add"> 
+      <object class="gov.va.med.imaging.versions.ImagingOperation"> 
+       <void property="operationPath"> 
+        <string>/restservices/V5/</string> 
+       </void> 
+       <void property="operationType"> 
+        <string>VistaRadMetadata</string> 
+       </void> 
+      </object> 
+     </void>
+     <void method="add"> 
+      <object class="gov.va.med.imaging.versions.ImagingOperation"> 
+       <void property="operationPath"> 
+        <string>/FederationImageServletV5</string> 
+       </void> 
+       <void property="operationType"> 
+        <string>Image</string> 
+       </void> 
+      </object> 
+     </void>
+     <void method="add"> 
+      <object class="gov.va.med.imaging.versions.ImagingOperation"> 
+       <void property="operationPath"> 
+        <string>/FederationTextServletV5</string> 
+       </void> 
+       <void property="operationType"> 
+        <string>Text</string> 
+       </void> 
+      </object> 
+     </void>     
+     <void method="add"> 
+      <object class="gov.va.med.imaging.versions.ImagingOperation"> 
+       <void property="operationPath"> 
+        <string>/FederationExamImageServletV5</string> 
+       </void> 
+       <void property="operationType"> 
+        <string>ExamImage</string> 
+       </void> 
+      </object> 
+     </void>     
+     <void method="add"> 
+      <object class="gov.va.med.imaging.versions.ImagingOperation"> 
+       <void property="operationPath"> 
+        <string>/FederationExamImageTextServletV5</string> 
+       </void> 
+       <void property="operationType"> 
+        <string>ExamImageText</string> 
+       </void> 
+      </object> 
+     </void>     
+     <void method="add"> 
+      <object class="gov.va.med.imaging.versions.ImagingOperation"> 
+       <void property="operationPath"> 
+        <string>/restservices/V5/</string> 
+       </void> 
+       <void property="operationType"> 
+        <string>Metadata</string> 
+       </void> 
+      </object> 
+     </void>    
+     <void method="add"> 
+      <object class="gov.va.med.imaging.versions.ImagingOperation"> 
+       <void property="operationPath"> 
+        <string>/FederationDocumentServletV5</string> 
+       </void> 
+       <void property="operationType"> 
+        <string>Document</string> 
+       </void> 
+      </object> 
+     </void>                           
+    </void> 
+    <void property="version"> 
+     <string>5</string> 
+    </void> 
+   </object>  
+  </void>  
+  <void method="add">
+   <object class="gov.va.med.imaging.versions.ImagingService"> 
+    <void property="applicationPath"> 
+     <string>FederationWebApp</string> 
+    </void> 
+    <void property="applicationType"> 
+     <string>Federation</string> 
+    </void> 
+    <void property="operations">  
+     <void method="add"> 
+      <object class="gov.va.med.imaging.versions.ImagingOperation"> 
+       <void property="operationPath"> 
+        <string>/restservices/V6/</string> 
+       </void> 
+       <void property="operationType"> 
+        <string>UserDataSourceSpi</string> 
+       </void> 
+      </object> 
+     </void>                          
+    </void>
+    <void property="operations">  
+     <void method="add"> 
+      <object class="gov.va.med.imaging.versions.ImagingOperation"> 
+       <void property="operationPath"> 
+        <string>/restservices/V6/</string> 
+       </void> 
+       <void property="operationType"> 
+        <string>ExternalPackageDataSourceSpi</string> 
+       </void> 
+      </object> 
+     </void>                          
+    </void>   
+    <void property="version"> 
+     <string>6</string> 
+    </void> 
+   </object>  
+  </void>
+  <void method="add">
+   <object class="gov.va.med.imaging.versions.ImagingService"> 
+    <void property="applicationPath"> 
+     <string>FederationWebApp</string> 
+    </void> 
+    <void property="applicationType"> 
+     <string>Federation</string> 
+    </void> 
+    <void property="operations">  
+     <void method="add"> 
+      <object class="gov.va.med.imaging.versions.ImagingOperation"> 
+       <void property="operationPath"> 
+        <string>/restservices/V7/</string> 
+       </void> 
+       <void property="operationType"> 
+        <string>ImageAccessLoggingSpi</string> 
+       </void> 
+      </object> 
+     </void>                          
+     <void method="add"> 
+      <object class="gov.va.med.imaging.versions.ImagingOperation"> 
+       <void property="operationPath"> 
+        <string>/restservices/V6/</string> 
+       </void> 
+       <void property="operationType"> 
+        <string>PatientDataSourceSpi</string> 
+       </void> 
+      </object> 
+     </void>
+    </void> 
+    <void property="version"> 
+     <string>7</string> 
+    </void> 
+   </object>  
+  </void>
+
+  <void method="add">
+    <object class="gov.va.med.imaging.versions.ImagingService">
+      <void property="applicationPath">
+        <string>FederationWebApp</string>
+      </void>
+      <void property="applicationType">
+        <string>Federation</string>
+      </void>
+      <void property="operations">
+        <void method="add">
+          <object class="gov.va.med.imaging.versions.ImagingOperation">
+            <void property="operationPath">
+              <string>/restservices/V8/</string>
+            </void>
+            <void property="operationType">
+              <string>Metadata</string>
+            </void>
+          </object>
+        </void>
+        <void method="add">
+          <object class="gov.va.med.imaging.versions.ImagingOperation">
+            <void property="operationPath">
+              <string>/restservices/V8/</string>
+            </void>
+            <void property="operationType">
+              <string>VistaRadMetadata</string>
+            </void>
+          </object>
+        </void>
+        <void method="add">
+          <object class="gov.va.med.imaging.versions.ImagingOperation">
+            <void property="operationPath">
+              <string>/FederationImageServletV8</string>
+            </void>
+            <void property="operationType">
+              <string>Image</string>
+            </void>
+          </object>
+        </void>
+        <void method="add">
+          <object class="gov.va.med.imaging.versions.ImagingOperation">
+            <void property="operationPath">
+              <string>/FederationTextServletV8</string>
+            </void>
+            <void property="operationType">
+              <string>Text</string>
+            </void>
+          </object>
+        </void>
+        <void method="add">
+          <object class="gov.va.med.imaging.versions.ImagingOperation">
+            <void property="operationPath">
+              <string>/FederationExamImageServletV8</string>
+            </void>
+            <void property="operationType">
+              <string>ExamImage</string>
+            </void>
+          </object>
+        </void>
+        <void method="add">
+          <object class="gov.va.med.imaging.versions.ImagingOperation">
+            <void property="operationPath">
+              <string>/FederationExamImageTextServletV8</string>
+            </void>
+            <void property="operationType">
+              <string>ExamImageText</string>
+            </void>
+          </object>
+        </void>
+        <void method="add">
+          <object class="gov.va.med.imaging.versions.ImagingOperation">
+            <void property="operationPath">
+              <string>/FederationDocumentServletV8</string>
+            </void>
+            <void property="operationType">
+              <string>Document</string>
+            </void>
+          </object>
+        </void>
+        <void method="add">
+          <object class="gov.va.med.imaging.versions.ImagingOperation">
+            <void property="operationPath">
+              <string>/restservices/V8/</string>
+            </void>
+            <void property="operationType">
+              <string>UserDataSourceSpi</string>
+            </void>
+          </object>
+        </void>
+        <void method="add">
+          <object class="gov.va.med.imaging.versions.ImagingOperation">
+            <void property="operationPath">
+              <string>/restservices/V8/</string>
+            </void>
+            <void property="operationType">
+              <string>ExternalPackageDataSourceSpi</string>
+            </void>
+          </object>
+        </void>
+        <void method="add">
+          <object class="gov.va.med.imaging.versions.ImagingOperation">
+            <void property="operationPath">
+              <string>/restservices/V8/</string>
+            </void>
+            <void property="operationType">
+              <string>ImageAccessLoggingSpi</string>
+            </void>
+          </object>
+        </void>
+        <void method="add">
+          <object class="gov.va.med.imaging.versions.ImagingOperation">
+            <void property="operationPath">
+              <string>/restservices/V8/</string>
+            </void>
+            <void property="operationType">
+              <string>PatientDataSourceSpi</string>
+            </void>
+          </object>
+        </void>
+      </void>
+      <void property="version">
+        <string>8</string>
+      </void>
+    </object>
+  </void>
+
+  <void method="add">
+    <object class="gov.va.med.imaging.versions.ImagingService">
+      <void property="applicationPath">
+        <string>FederationWebApp</string>
+      </void>
+      <void property="applicationType">
+        <string>Federation</string>
+      </void>
+      <void property="operations">
+        <void method="add"> 
+          <object class="gov.va.med.imaging.versions.ImagingOperation"> 
+            <void property="operationPath"> 
+              <string>/restservices/V9/</string> 
+            </void> 
+            <void property="operationType"> 
+              <string>ExternalPackageDataSourceSpi</string> 
+            </void> 
+          </object>
+        </void>
+      </void>
+      <void property="version">
+        <string>9</string>
+      </void>
+    </object>
+  </void>
+
+  <void method="add">
+    <object class="gov.va.med.imaging.versions.ImagingService">
+      <void property="applicationPath">
+        <string>FederationWebApp</string>
+      </void>
+      <void property="applicationType">
+        <string>Federation</string>
+      </void>
+      <void property="operations">
+	    <void method="add"> 
+	      <object class="gov.va.med.imaging.versions.ImagingOperation"> 
+	       <void property="operationPath"> 
+	        <string>/PhotoIdServlet</string> 
+	       </void> 
+	       <void property="operationType"> 
+	        <string>Photo</string> 
+	       </void> 
+	      </object> 
+	    </void> 
+        <void method="add">
+          <object class="gov.va.med.imaging.versions.ImagingOperation">
+            <void property="operationPath">
+              <string>/restservices/V10/</string>
+            </void>
+            <void property="operationType">
+              <string>PatientDataSourceSpi</string>
+            </void>
+          </object>
+        </void>
+      </void>
+      <void property="version">
+        <string>10</string>
+      </void>
+    </object>
+  </void>
+
+ </object> 
+</java>

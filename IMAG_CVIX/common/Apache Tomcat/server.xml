@@ -1,0 +1,312 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!-- Note:  A "Server" is not itself a "Container", so you may not
+     define subcomponents such as "Valves" at this level.
+     Documentation at /docs/config/server.html
+ -->
+<Server port="8005" shutdown="SHUTDOWN">
+  <Listener className="org.apache.catalina.startup.VersionLoggerListener" />
+  <!-- Security listener. Documentation at /docs/config/listeners.html-->
+  <Listener className="org.apache.catalina.security.SecurityListener" />
+  <!--APR library loader. Documentation at /docs/apr.html -->
+  <Listener className="org.apache.catalina.core.AprLifecycleListener" SSLEngine="on" />
+  <!--Initialize Jasper prior to webapps are loaded. Documentation at /docs/jasper-howto.html -->
+  <!--<Listener className="org.apache.catalina.core.JasperListener" />-->
+  <!-- Prevent memory leaks due to use of particular java/javax APIs-->
+  <Listener className="org.apache.catalina.core.JreMemoryLeakPreventionListener" />
+  <!-- JMX Support for the Tomcat server. Documentation at /docs/non-existent.html -->
+  <!--<Listener className="org.apache.catalina.mbeans.ServerLifecycleListener" />-->
+  <Listener className="org.apache.catalina.mbeans.GlobalResourcesLifecycleListener" />
+  <Listener className="org.apache.catalina.core.ThreadLocalLeakPreventionListener" />
+  <Listener className="gov.va.med.server.tomcat.TomcatLifecycleAdapter" />
+  <!--<Listener className="gov.va.med.server.tomcat.TomcatClusterAdapter" />-->
+  <!-- Global JNDI resources
+       Documentation at /docs/jndi-resources-howto.html
+  -->
+  <GlobalNamingResources>
+    <!-- Editable user database that can also be used by
+         UserDatabaseRealm to authenticate users
+    -->
+    <Resource 
+			name="UserDatabase" 
+			auth="Container"
+              type="org.apache.catalina.UserDatabase"
+              description="User database that can be updated and saved"
+              factory="org.apache.catalina.users.MemoryUserDatabaseFactory"
+              pathname="conf/tomcat-users.xml" />
+    <Resource
+    	 auth="Container"
+    	 description="Core Vix Application"
+    	 name="CoreRouter"
+    	 type="gov.va.med.imaging.core.interfaces.Router"
+    	 factory="gov.va.med.server.CoreRouterFactory"
+	/>
+    <Resource
+       auth="Container"
+    	 description="Router Command Factory"
+    	 name="CommandFactory"
+    	 type="gov.va.med.imaging.core.interfaces.router.CommandFactory"
+    	 factory="gov.va.med.server.CoreRouterFactory"
+	/>
+    <Resource
+       auth="Container"
+    	 description="Vix Application Configuration"
+    	 name="AppConfiguration"
+    	 type="gov.va.med.imaging.core.interfaces.IAppConfiguration"
+    	 factory="gov.va.med.server.CoreRouterFactory"
+	/>
+    <Resource
+      auth="Container"
+      description="Imaging Cache"
+      name="ImagingCache"
+      type="gov.va.med.imaging.router.cache.ImagingCache"
+      factory="gov.va.med.imaging.router.cache.ImagingCacheFactory"
+	/>
+  </GlobalNamingResources>
+
+  <!-- A "Service" is a collection of one or more "Connectors" that share
+       a single "Container" Note:  A "Service" is not itself a "Container",
+       so you may not define subcomponents such as "Valves" at this level.
+       Documentation at /docs/config/service.html
+   -->
+  <Service name="Catalina">
+
+    <!--The connectors can use a shared executor, you can define one or more named thread pools-->
+    <!--
+    <Executor name="tomcatThreadPool" namePrefix="catalina-exec-"
+        maxThreads="150" minSpareThreads="4"/>
+    -->
+
+
+    <!-- A "Connector" represents an endpoint by which requests are received
+         and responses are returned. Documentation at :
+         Java HTTP Connector: /docs/config/http.html
+         Java AJP  Connector: /docs/config/ajp.html
+         APR (HTTP/AJP) Connector: /docs/apr.html
+         Define a non-SSL/TLS HTTP/1.1 Connector on port 80
+	-->
+    <Connector port="xxx" 
+		protocol="org.apache.coyote.http11.Http11NioProtocol" 
+		socket.rxBufSize="262144" 
+		socket.txBufSize="262144" 
+		socket.directBuffer="true" 
+		maxThreads="300" 	
+		connectionTimeout="5000" 
+		disableUploadTimeout="true" 
+		maxKeepAliveRequests="1" 
+		enableLookups="false" 
+		redirectPort="443" 
+		acceptCount="50" 
+		compression="on" 
+		maxHttpHeaderSize="25600"
+	/>
+
+    <Connector port="8080" relaxedPathChars="[]|" relaxedQueryChars="[]|{}^&#x5c;&#x60;&quot;&lt;&gt;"
+		protocol="org.apache.coyote.http11.Http11NioProtocol" 
+		socket.rxBufSize="262144" 
+		socket.txBufSize="262144" 
+		socket.directBuffer="true" 
+		maxThreads="300" 	
+		connectionTimeout="5000" 
+		disableUploadTimeout="true" 
+		maxKeepAliveRequests="1" 
+		enableLookups="false" 
+		redirectPort="443" 
+		acceptCount="50" 
+		compression="on" 
+		maxHttpHeaderSize="25600"
+	/>
+
+	<!-- Define a SSL Http11Protocol Connector on port 8443 for Federation
+		This connector is used for communication between mixed TC 6 and TC 8
+		When all Vix servers are moved to TC 8, this connector will no longer be used.
+		There is site service switch to switch the port from 8443 to 8442
+    -->
+	<!-- P254 CVIX changed the 8443 to mimic 8442
+    <Connector
+        port="8443"
+        protocol="org.apache.coyote.http11.Http11Protocol"
+      	connectionTimeout="5000"
+        maxThreads="300"
+        clientAuth="true"
+        enableLookups="true"
+        disableUploadTimeout="true"
+        acceptCount="100"
+        secure="true"
+        sslProtocol="TLS"
+		sslEnabledProtocols="TLSv1,TLSv1.1,TLSv1.2,SSLv2Hello"
+        SSLEnabled="true"
+        keystoreFile="ccc"
+        keystorePass="aaa"
+        keyAlias="vixfederation"
+        truststoreFile="ddd"
+        truststorePass="bbb"
+		ciphers="TLS_RSA_WITH_AES_128_CBC_SHA,TLS_RSA_WITH_AES_256_CBC_SHA,TLS_ECDH_ECDSA_WITH_RC4_128_SHA,TLS_ECDH_ECDSA_WITH_AES_128_CBC_SHA,TLS_ECDH_ECDSA_WITH_AES_256_CBC_SHA,TLS_ECDH_RSA_WITH_RC4_128_SHA,TLS_ECDH_RSA_WITH_AES_128_CBC_SHA,TLS_ECDH_RSA_WITH_AES_256_CBC_SHA,TLS_ECDHE_ECDSA_WITH_RC4_128_SHA,TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA,TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA,TLS_ECDHE_RSA_WITH_RC4_128_SHA,TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA,TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA,TLS_ECDH_ECDSA_WITH_3DES_EDE_CBC_SHA,TLS_ECDH_RSA_WITH_3DES_EDE_CBC_SHA,TLS_ECDHE_ECDSA_WITH_3DES_EDE_CBC_SHA,TLS_ECDHE_RSA_WITH_3DES_EDE_CBC_SHA,TLS_ECDH_ECDSA_WITH_NULL_SHA,TLS_ECDH_RSA_WITH_NULL_SHA,TLS_ECDHE_ECDSA_WITH_NULL_SHA,TLS_ECDHE_RSA_WITH_NULL_SHA"
+	/>
+	-->
+	<Connector 
+		port="8443" 
+		protocol="org.apache.coyote.http11.Http11NioProtocol" 
+		connectionTimeout="5000" 
+		maxThreads="300" 
+		clientAuth="true" 
+		enableLookups="true" 
+		disableUploadTimeout="true" 
+		acceptCount="100" 
+		secure="true" 
+		SSLEnabled="true" 
+		sslProtocol="TLS" 
+		keystoreFile="ccc" 
+		keystorePass="aaa" 
+		keyAlias="vixfederation"
+        truststoreFile="ddd"
+		truststorePass="bbb" 
+        compression="on" 
+        compressibleMimeType="text/html,text/xml,text/plain,text/css,text/javascript,application/javascript,application/json,application/xml,application/dicom,application/pdf" 
+		maxHttpHeaderSize="25600"
+	/>
+
+	
+		<!-- Define a SSL Http11NioProtocol Connector on port 8442 for Federation
+		This connector is used for communication only between TC 8.x Vix servers
+		This connector will serve the Federation only when there is no TC 6 Vix servers left, 
+    -->
+    <Connector 
+		port="8442" 
+		protocol="org.apache.coyote.http11.Http11NioProtocol" 
+		connectionTimeout="5000" 
+		maxThreads="300" 
+		clientAuth="true" 
+		enableLookups="true" 
+		disableUploadTimeout="true" 
+		acceptCount="100" 
+		secure="true" 
+		SSLEnabled="true" 
+		sslProtocol="TLS" 
+		keystoreFile="ccc" 
+		keystorePass="aaa" 
+		keyAlias="vixfederation"
+        truststoreFile="ddd"
+		truststorePass="bbb" 
+        compression="on" 
+        compressibleMimeType="text/html,text/xml,text/plain,text/css,text/javascript,application/javascript,application/json,application/xml,application/dicom,application/pdf" 
+		maxHttpHeaderSize="25600"
+	/>
+
+    <!-- Define a SSL HTTP/1.1 Connector on port 443 to view the VIX transaction log
+         This connector uses the JSSE configuration, when using APR, the 
+         connector should be using the OpenSSL style configuration
+         described in the APR documentation -->
+    <Connector
+      port="yyy"
+      protocol="org.apache.coyote.http11.Http11NioProtocol"
+      socket.rxBufSize="256000"
+      socket.txBufSize="256000"
+      socket.directBuffer="true"
+      connectionTimeout="5000"
+      maxThreads="300"
+      clientAuth="false"
+      enableLookups="false"
+      disableUploadTimeout="true"
+      acceptCount="50"
+	  scheme="https" 
+      secure="true"
+      sslProtocol="TLS"
+      SSLEnabled="true"
+      keystoreFile="ccc"
+      keystorePass="aaa"
+      keyAlias="eee"      
+	  ciphers="TLS_RSA_WITH_AES_128_CBC_SHA,TLS_RSA_WITH_AES_256_CBC_SHA,TLS_ECDH_ECDSA_WITH_RC4_128_SHA,TLS_ECDH_ECDSA_WITH_AES_128_CBC_SHA,TLS_ECDH_ECDSA_WITH_AES_256_CBC_SHA,TLS_ECDH_RSA_WITH_RC4_128_SHA,TLS_ECDH_RSA_WITH_AES_128_CBC_SHA,TLS_ECDH_RSA_WITH_AES_256_CBC_SHA,TLS_ECDHE_ECDSA_WITH_RC4_128_SHA,TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA,TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA,TLS_ECDHE_RSA_WITH_RC4_128_SHA,TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA,TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA,TLS_ECDH_ECDSA_WITH_3DES_EDE_CBC_SHA,TLS_ECDH_RSA_WITH_3DES_EDE_CBC_SHA,TLS_ECDHE_ECDSA_WITH_3DES_EDE_CBC_SHA,TLS_ECDHE_RSA_WITH_3DES_EDE_CBC_SHA,TLS_ECDH_ECDSA_WITH_NULL_SHA,TLS_ECDH_RSA_WITH_NULL_SHA,TLS_ECDHE_ECDSA_WITH_NULL_SHA,TLS_ECDHE_RSA_WITH_NULL_SHA"
+      compression="on" 
+      compressibleMimeType="text/html,text/xml,text/plain,text/css,text/javascript,application/javascript,application/json,application/xml,application/dicom,application/pdf"
+	  maxHttpHeaderSize="25600"
+	/>
+	
+
+    <!-- Define an AJP 1.3 Connector on port 8009 -->
+    <!--<Connector port="8009" protocol="AJP/1.3" redirectPort="8443" />-->
+
+
+    <!-- An Engine represents the entry point (within Catalina) that processes
+         every request.  The Engine implementation for Tomcat stand alone
+         analyzes the HTTP headers included with the request, and passes them
+         on to the appropriate Host (virtual host).
+         Documentation at /docs/config/engine.html -->
+
+    <!-- You should set jvmRoute to support load-balancing via AJP ie :
+    <Engine name="Standalone" defaultHost="localhost" jvmRoute="jvm1">         
+    -->
+    <Engine defaultHost="xxx.vix.med.va.gov" name="Catalina" startStopThreads="0">
+
+      <!--For clustering, please take a look at documentation at:
+          /docs/cluster-howto.html  (simple how to)
+          /docs/config/cluster.html (reference documentation) -->
+      <!--
+      <Cluster className="org.apache.catalina.ha.tcp.SimpleTcpCluster"/>
+      -->
+      <!-- The request dumper valve dumps useful debugging information about
+           the request and response data received and sent by Tomcat.
+           Documentation at: /docs/config/valve.html -->
+      <!--
+      <Valve className="org.apache.catalina.valves.RequestDumperValve"/>
+      -->
+
+      <!-- Use the LockOutRealm to prevent attempts to guess user passwords
+           via a brute-force attack -->
+      <Realm className="org.apache.catalina.realm.LockOutRealm">
+        <!-- This Realm uses the UserDatabase configured in the global JNDI
+             resources under the key "UserDatabase".  Any edits
+             that are performed against this UserDatabase are immediately
+             available for use by the Realm.  -->
+        <Realm className="org.apache.catalina.realm.UserDatabaseRealm"
+               resourceName="UserDatabase"/>
+      </Realm>
+
+      <!-- Define the default virtual host
+           Note: XML Schema validation will not work with Xerces 2.2.
+       -->
+      <Host name="xxx.med.va.gov" appBase="webapps" unpackWARs="false" deployOnStartup="true" autoDeploy="false" startStopThreads="0">
+        <Realm
+          className="gov.va.med.imaging.tomcat.vistarealm.VistaAccessVerifyRealm"
+          siteNumber="xxx"
+          siteAbbreviation="yyy"
+          siteName="Metropolis"
+          vistaServer="localhost"
+          vistaPort="zzzz"
+          usingPrincipalCache="true"
+          principalCacheLifespan="60000"
+          refreshPrincipalCacheEntryOnUse="true"
+          vistaConnectDelayKludge="1000" 
+		  setCprsContext="true" 	
+	  	  additionalUserRoles="www" 
+		  bseRealm="200" 
+		  generateBseToken="true" 
+		/>
+		<!--
+		<Context cookies="false" crossContext="false" docBase="XCARespondingGateway" path="/XCARespondingGateway" privileged="false" reloadable="false" useNaming="true" />
+        <Context cookies="false" crossContext="false" docBase="ImagingExchangeWebApp" path="/ImagingExchangeWebApp" privileged="false" reloadable="false" useNaming="true" />
+        -->
+		<Context docBase="siteservicewebapp" path="/VistAWebSvcs" />
+        <Context docBase="siteservicewebapp" path="/VistaWebSvcs" />
+        <Context docBase="siteservicewebapp" path="/vistawebsvcs" />
+        <Alias>localhost</Alias>
+		<Valve className="org.apache.catalina.valves.ErrorReportValve" showReport="false" showServerInfo="false" />
+      </Host>
+    </Engine>
+  </Service>
+</Server>

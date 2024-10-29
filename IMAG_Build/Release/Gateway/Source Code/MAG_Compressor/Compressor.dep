@@ -1,0 +1,30 @@
+# Microsoft Developer Studio Generated Dependency File, included by Compressor.mak
+
+.\Compressor.cpp : \
+	".\aw_j2k_dtypes.h"\
+	".\aw_j2k_errors.h"\
+	".\common.h"\
+	".\Compressor.h"\
+	".\errors.h"\
+	".\ImageIO.h"\
+	".\j2k.h"\
+	
+
+.\driver.cpp : \
+	".\aw_j2k_dtypes.h"\
+	".\aw_j2k_errors.h"\
+	".\common.h"\
+	".\Compressor.h"\
+	".\errors.h"\
+	".\ImageIO.h"\
+	".\j2k.h"\
+	
+
+.\ImageIO.cpp : \
+	".\aw_j2k_dtypes.h"\
+	".\aw_j2k_errors.h"\
+	".\common.h"\
+	".\errors.h"\
+	".\ImageIO.h"\
+	".\j2k.h"\
+	

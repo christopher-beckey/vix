@@ -1,0 +1,157 @@
+MAGDAIRP ;WOIFO/PMK - Automatic Import Reconciliation Workflow ; 20 Aug 2009 12:51 PM
+ ;;3.0;IMAGING;**53**;Mar 19, 2002;Build 1715;Apr 22, 2010
+ ;; Per VHA Directive 2004-038, this routine should not be modified.
+ ;; +---------------------------------------------------------------+
+ ;; | Property of the US Government.                                |
+ ;; | No permission to copy or redistribute this software is given. |
+ ;; | Use of unreleased versions of this software requires the user |
+ ;; | to execute a written test agreement with the VistA Imaging    |
+ ;; | Development Office of the Department of Veterans Affairs,     |
+ ;; | telephone (301) 734-0100.                                     |
+ ;; | The Food and Drug Administration classifies this software as  |
+ ;; | a medical device.  As such, it may not be changed in any way. |
+ ;; | Modifications to this software may result in an adulterated   |
+ ;; | medical device under 21CFR820, the use of which is considered |
+ ;; | to be a violation of US Federal Statutes.                     |
+ ;; +---------------------------------------------------------------+
+ ;;
+ ; Select the patient
+ ; 
+ ; Returns -1 (error), 0 (no patient selected), or DFN
+ ;
+PATIENT(PNAMEDCM,PID,DOB,SEX,VAICN) ; get the patient for the import
+ N COUNT,DFN,FINIS,PNAME,RETURN,RPCERR,S1,S2,S3,S4,VADM,VAIN,VAINFO,VAPA,X,Y
+ ; get PIDCACHE subscripts
+ S S1=DATA("PNAMEDCM"),S2=DATA("PID"),S3=DATA("DOB"),S4=DATA("SEX")
+ I S1="" S S1="unknown NAME"
+ I S2="" S S2="unknown PID"
+ I S3="" S S3="unknown DOB"
+ I S4="" S S4="unknown SEX"
+ S DFN=$G(PIDCACHE("INDEX",S1,S2,S3,S4))
+ I DFN D
+ . W !!,"The VA patient is currently defined as follows: "
+ . S RPCERR=$$CALLRPC^MAGM2VCU("MAG DICOM GET PATIENT","M",.VAINFO,DFN)
+ . I RPCERR<0 S RETURN=-1 Q
+ . D VADPT^MAGDRPC0(.VAINFO)
+ . S VAICN=$G(VAICN)
+ . S PNAME=VADM(1),DOB=$P(VADM(3),"^",1),PID=$P(VADM(2),"^",2)
+ . S SEX=$P(VADM(5),"^",1),DOB=17000000+DOB
+ . D HEADING("S"),LISTDATA(,PID,PNAME,DOB,SEX)
+ . I $$YESNO^MAGDAIR0("Is this the correct patient?","Y",.X)<0 S RETURN=0 Q
+ . I X="YES" S RETURN=DFN Q
+ . S RETURN=$$PATIENT1
+ . Q
+ E  S RETURN=$$PATIENT1
+ I RETURN'>0 S (PNAMEDCM,PID,DOB,SEX,VAICN)=""
+ E  D  ; final patient/study/procedure verification
+ . ; convert patient name into DICOM format: last^first^middle
+ . S PNAMEDCM=$$PNAMEDCM^MAGDAIR0(PNAME)
+ . S PIDCACHE("INDEX",S1,S2,S3,S4)=RETURN
+ . Q
+ Q RETURN
+ ;
+PATIENT1() ; select a patient
+ N COUNT,DFN,I,IN,INFO,OK,NEWINFO,RETURN,RPCERR,X
+ S (DFN,OK)=0 F  D  Q:OK
+ . W !!!,"Enter VA Patient: "
+ . R X:DTIME E  S OK=-1 Q
+ . I X["^" S PATIENT="^",OK=-1
+ . E  I "?"[X D
+ . . W !!,"Enter either the Patient Name (last,first), the Social Security Number,"
+ . . W !,"or the Short PID (initial + last four).  (Same lookup rules as CPRS)"
+ . . Q
+ . E  D
+ . . S IN("VALUE")=X
+ . . S RPCERR=$$CALLRPC^MAGM2VCU("SC PATIENT LOOKUP","MT",.INFO,.IN)
+ . . I '$D(INFO) W " -- NO MATCH" Q
+ . . S COUNT=$O(INFO(""),-1)
+ . . I COUNT=1 D
+ . . . S I=1 S DFN=$$SINGLE
+ . . . Q
+ . . E  D
+ . . . W " -- ",COUNT," MATCHES"
+ . . . S DFN=$$MULTIPLE
+ . . . Q
+ . . Q
+ I DFN,PID="*SENSITIVE*" D  ; need to get PID & DOB in this case
+ . S RPCERR=$$CALLRPC^MAGM2VCU("ORWPT SELECT","MT",.NEWINFO,DFN)
+ . I '$D(NEWINFO) W " -- NO MATCH" Q
+ . S DOB=17000000+$P(NEWINFO,"^",3)
+ . S PID=$P(NEWINFO,"^",4),PID=$E(PID,1,3)_"-"_$E(PID,4,5)_"-"_$E(PID,6,9)
+ . Q
+ Q DFN
+ ;
+SINGLE() ; single match
+ N DFN,RPCERR,RETURN,VAINFO,X,Y
+ S X=INFO(I),DFN=$P(X,"^",1),PNAME=$P(X,"^",2),DOB=$P(X,"^",3),PID=$P(X,"^",4)
+ S DOB=$$DCMDATE(DOB)
+ S RPCERR=$$CALLRPC^MAGM2VCU("MAG DICOM GET PATIENT","M",.VAINFO,DFN)
+ I RPCERR<0 S RETURN=-1 Q
+ D VADPT^MAGDRPC0(.VAINFO)
+ S VAICN=$G(VAICN)
+ S SEX=$P(VADM(5),"^",1)
+ D HEADING("S"),LISTDATA(,PID,PNAME,DOB,SEX)
+ I $$YESNO^MAGDAIR0("Is this the correct patient?","No",.Y)<0 Q 0
+ I Y="YES" D
+ . S RETURN=DFN
+ . S (DONE,FINIS,OK)=1
+ . Q
+ E  S RETURN=0
+ Q RETURN
+ ;
+MULTIPLE() ; display information for multiple patients
+ N DONE,K,RETURN,X
+ S (DONE,RETURN)=0
+ W !!,"There are ",COUNT," matches...  Press <Enter> for list"
+ R X:$G(DTIME,300) E  Q 0
+ I COUNT>20 D  ; more than twenty patients
+ . F K=1:20:COUNT D MULTI Q:DONE
+ . Q
+ E  D  ; twenty or less patients
+ . S K=1 D MULTI Q:DONE
+ Q RETURN
+ ;
+MULTI ; display one set of patients
+ N FINIS,I,K20,X
+ S K20=K+19 I K20>COUNT S K20=COUNT
+ S FINIS=0 F  D  Q:FINIS
+ . D HEADING("L")
+ . F I=K:1:K20 D 
+ . . S X=INFO(I),PNAME=$P(X,"^",2),DOB=$P(X,"^",3),PID=$P(X,"^",4)
+ . . S DOB=$$DCMDATE(DOB)
+ . . D LISTDATA(I,PID,PNAME,DOB)
+ . . Q
+ . W !!,"Enter ",K,"-",K20," to select the patient"
+ . I K20<COUNT W ", or <Enter> to see more patients"
+ . W ": " R I:$G(DTIME,300)
+ . I I="" S FINIS=1 Q
+ . I I["^" S DONE=1,I="",FINIS=-1 Q
+ . I I?1N.N,I'<K,I'>K20 S RETURN=$$SINGLE() Q
+ . I I'["?" W " ???" R X:$G(DTIME,300)
+ . Q
+ Q
+ ;
+HEADING(FORMAT) ;
+ ; FORMAT: L for numbered list, S for single item
+ S FORMAT=$G(FORMAT)
+ I FORMAT'="L",FORMAT'="S" Q "Wrong format: "_FORMAT
+ I FORMAT="L" W @IOF W !," #" ; numbered list
+ I FORMAT="S" W !!
+ W ?7,"Patient ID",?28,"VA Patient Name",?56,"Birth"
+ I FORMAT="S" W ?64,"Sex" ; sex is displayed with a single item
+ W ! I FORMAT="L" W "---" ; numbered list
+ W ?5,"--------------",?21,"------------------------------",?53,"----------"
+ I FORMAT="S" W ?64,"---" ; sex is displayed with a single item
+ Q
+ ;
+LISTDATA(I,PID,PNAME,DOB,SEX) ; output data
+ W ! I $G(I) W $J(I,2),")"
+ W ?5,$J(PID,14),?21,$E(PNAME,1,30),?53
+ W $S(DOB?8N:$$DATE^MAGDAIR0(DOB,"B"),1:DOB)
+ I $G(SEX)'="" W ?65,SEX
+ Q
+ ;
+DCMDATE(DATE) ; dicomize a m/d/yyyy date
+ I DATE?4N S DATE="0/0/"_DATE
+ I DATE'["/" Q DATE
+ Q $P(DATE,"/",3)_$E(100+$P(DATE,"/",1),2,3)_$E(100+$P(DATE,"/",2),2,3)

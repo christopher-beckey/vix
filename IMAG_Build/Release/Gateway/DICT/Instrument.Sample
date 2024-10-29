@@ -1,0 +1,43 @@
+# Last edited 23 Jan 2009 12:15 PM
+#
+# List of Image Acquisition Instruments
+#
+# Mnemonic|Description|Institution ID|Imaging Service|Port|MachineID
+#	Institution ID can be the number (688), name (Washington, DC), our null.
+#	Leave Institution ID to null to default to the local site 
+#	Note: the Machine ID is optional
+#
+# Imaging services are defined as follows
+#    RAD --------- Radiology
+#    CON --------- Consult/Procedure Request Tracking (CPRS)
+#
+# 
+# Examples:
+#
+# Computed Radiography
+# CR1|Fuji AC3 CR, Room 2156|<Your Institution goes here>|RAD|60100|A
+# CR2|Fuji AC3 CR, Room 2160 (Chest)|Washington, DC|RAD|60101|B
+# CR3|Fuji AC3 CR, Cubby, 2145 Hallway|688|RAD|60102|C
+#
+# Computed Tomography
+# CT1|GE High Speed Advantage, Room 2142|RAD|60120
+#
+# Digital Radio Fluoro
+# DRS1|GE Digital Radio Fluoro, Rm 2163||RAD|60140
+# DRS2|GE Digital Radio Fluoro, Rm 2150||RAD|60141
+#
+# Clinical Specialties
+# EYE-2|Eye Examiniation Station||CON|60302
+# DENTAL-3|Dental Intra-Oral Xray unit #3||CON|60403
+#
+# Default DICOM Port
+# Default|Default DICOM Port|<Your Institution goes here>|RAD|104
+#
+#
+# Place your entries below
+
+
+
+
+
+# end of data

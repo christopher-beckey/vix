@@ -1,0 +1,74 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <ProjectGuid>{6fb7706a-864c-46a3-9851-42860ada6648}</ProjectGuid>
+  </PropertyGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Projects Include="..\..\VAShared2006.dproj" />
+    <Projects Include="..\JAWUpdate\JAWSUpdate.dproj" />
+    <Projects Include="..\VA508Access2006.dproj" />
+    <Projects Include="JAWS.dproj" />
+    <Projects Include="VA508JAWSDispatcher.dproj" />
+  </ItemGroup>
+  <ProjectExtensions>
+    <Borland.Personality>Default.Personality</Borland.Personality>
+    <Borland.ProjectType />
+    <BorlandProject>
+  <BorlandProject xmlns=""> <Default.Personality> </Default.Personality> </BorlandProject></BorlandProject>
+  </ProjectExtensions>
+  <Target Name="VA508JAWSDispatcher">
+    <MSBuild Projects="VA508JAWSDispatcher.dproj" Targets="" />
+  </Target>
+  <Target Name="VA508JAWSDispatcher:Clean">
+    <MSBuild Projects="VA508JAWSDispatcher.dproj" Targets="Clean" />
+  </Target>
+  <Target Name="VA508JAWSDispatcher:Make">
+    <MSBuild Projects="VA508JAWSDispatcher.dproj" Targets="Make" />
+  </Target>
+  <Target Name="JAWS">
+    <MSBuild Projects="JAWS.dproj" Targets="" />
+  </Target>
+  <Target Name="JAWS:Clean">
+    <MSBuild Projects="JAWS.dproj" Targets="Clean" />
+  </Target>
+  <Target Name="JAWS:Make">
+    <MSBuild Projects="JAWS.dproj" Targets="Make" />
+  </Target>
+  <Target Name="VA508Access2006">
+    <MSBuild Projects="..\VA508Access2006.dproj" Targets="" />
+  </Target>
+  <Target Name="VA508Access2006:Clean">
+    <MSBuild Projects="..\VA508Access2006.dproj" Targets="Clean" />
+  </Target>
+  <Target Name="VA508Access2006:Make">
+    <MSBuild Projects="..\VA508Access2006.dproj" Targets="Make" />
+  </Target>
+  <Target Name="VAShared2006">
+    <MSBuild Projects="..\..\VAShared2006.dproj" Targets="" />
+  </Target>
+  <Target Name="VAShared2006:Clean">
+    <MSBuild Projects="..\..\VAShared2006.dproj" Targets="Clean" />
+  </Target>
+  <Target Name="VAShared2006:Make">
+    <MSBuild Projects="..\..\VAShared2006.dproj" Targets="Make" />
+  </Target>
+  <Target Name="JAWSUpdate">
+    <MSBuild Projects="..\JAWUpdate\JAWSUpdate.dproj" Targets="" />
+  </Target>
+  <Target Name="JAWSUpdate:Clean">
+    <MSBuild Projects="..\JAWUpdate\JAWSUpdate.dproj" Targets="Clean" />
+  </Target>
+  <Target Name="JAWSUpdate:Make">
+    <MSBuild Projects="..\JAWUpdate\JAWSUpdate.dproj" Targets="Make" />
+  </Target>
+  <Target Name="Build">
+    <CallTarget Targets="VA508JAWSDispatcher;JAWS;VA508Access2006;VAShared2006;JAWSUpdate" />
+  </Target>
+  <Target Name="Clean">
+    <CallTarget Targets="VA508JAWSDispatcher:Clean;JAWS:Clean;VA508Access2006:Clean;VAShared2006:Clean;JAWSUpdate:Clean" />
+  </Target>
+  <Target Name="Make">
+    <CallTarget Targets="VA508JAWSDispatcher:Make;JAWS:Make;VA508Access2006:Make;VAShared2006:Make;JAWSUpdate:Make" />
+  </Target>
+  <Import Condition="Exists('$(MSBuildBinPath)\Borland.Group.Targets')" Project="$(MSBuildBinPath)\Borland.Group.Targets" />
+</Project>

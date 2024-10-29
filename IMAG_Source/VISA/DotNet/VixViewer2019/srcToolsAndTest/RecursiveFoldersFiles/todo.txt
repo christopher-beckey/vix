@@ -1,0 +1,11 @@
+Unhandled Exception: System.IO.IOException: The symbolic link cannot be followed because its type is disabled.
+
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileSystemEnumerableIterator`1.CommonInit()
+   at System.IO.FileSystemEnumerableIterator`1..ctor(String path, String originalUserPath, String searchPattern, SearchOption searchOption, SearchResultHandler`1 resultHandler, Boolean checkHost)
+   at System.IO.DirectoryInfo.InternalGetFiles(String searchPattern, SearchOption searchOption)
+   at System.IO.DirectoryInfo.GetFiles(String searchPattern)
+   at RecursiveFoldersFiles.Program.WalkDirectoryTree(DirectoryInfo root) in S:\Claire\___WIPfromIM6\___p348_134_937afterBill\srcToolsAndTest\RecursiveFoldersFiles\Program.cs:line 56
+   at RecursiveFoldersFiles.Program.WalkDirectoryTree(DirectoryInfo root) in S:\Claire\___WIPfromIM6\___p348_134_937afterBill\srcToolsAndTest\RecursiveFoldersFiles\Program.cs:line 97
+   at RecursiveFoldersFiles.Program.WalkDirectoryTree(DirectoryInfo root) in S:\Claire\___WIPfromIM6\___p348_134_937afterBill\srcToolsAndTest\RecursiveFoldersFiles\Program.cs:line 97
+   at RecursiveFoldersFiles.Program.Main() in S:\Claire\___WIPfromIM6\___p348_134_937afterBill\srcToolsAndTest\RecursiveFoldersFiles\Program.cs:line 20

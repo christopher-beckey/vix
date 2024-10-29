@@ -1,0 +1,12 @@
+07/23/2003  11:46
+Saved from DCM,DCE
+MAGP25X1
+MAGP25X1 ; Ed - Clean up Index Fields before test ; 07/23/2003  11:46
+ Q
+ ;
+CLEAN N D0
+ S D0=0 F  S D0=$O(^MAG(2005,D0)) Q:'D0  K ^MAG(2005,D0,40)
+ Q
+ ;
+
+

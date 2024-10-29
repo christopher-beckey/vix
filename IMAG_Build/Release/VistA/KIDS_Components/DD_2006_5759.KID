@@ -1,0 +1,426 @@
+KIDS Distribution saved on Jul 26, 2012@08:58:40
+Split from GOLD - last patch SEQ81_P120
+**KIDS**:MAG*3.0*350_DD*2006.5759^
+
+**INSTALL NAME**
+MAG*3.0*350_DD*2006.5759
+"BLD",7780,0)
+MAG*3.0*350_DD*2006.5759^IMAGING^0^3120726^n
+"BLD",7780,4,0)
+^9.64PA^2006.5759^1
+"BLD",7780,4,2006.5759,0)
+2006.5759
+"BLD",7780,4,2006.5759,222)
+y^y^f^^^^y
+"BLD",7780,4,"B",2006.5759,2006.5759)
+
+"BLD",7780,6.3)
+1
+"BLD",7780,"KRN",0)
+^9.67PA^779.2^20
+"BLD",7780,"KRN",.4,0)
+.4
+"BLD",7780,"KRN",.401,0)
+.401
+"BLD",7780,"KRN",.402,0)
+.402
+"BLD",7780,"KRN",.403,0)
+.403
+"BLD",7780,"KRN",.5,0)
+.5
+"BLD",7780,"KRN",.84,0)
+.84
+"BLD",7780,"KRN",3.6,0)
+3.6
+"BLD",7780,"KRN",3.8,0)
+3.8
+"BLD",7780,"KRN",9.2,0)
+9.2
+"BLD",7780,"KRN",9.8,0)
+9.8
+"BLD",7780,"KRN",19,0)
+19
+"BLD",7780,"KRN",19.1,0)
+19.1
+"BLD",7780,"KRN",101,0)
+101
+"BLD",7780,"KRN",409.61,0)
+409.61
+"BLD",7780,"KRN",771,0)
+771
+"BLD",7780,"KRN",779.2,0)
+779.2
+"BLD",7780,"KRN",870,0)
+870
+"BLD",7780,"KRN",8989.51,0)
+8989.51
+"BLD",7780,"KRN",8989.52,0)
+8989.52
+"BLD",7780,"KRN",8994,0)
+8994
+"BLD",7780,"KRN","B",.4,.4)
+
+"BLD",7780,"KRN","B",.401,.401)
+
+"BLD",7780,"KRN","B",.402,.402)
+
+"BLD",7780,"KRN","B",.403,.403)
+
+"BLD",7780,"KRN","B",.5,.5)
+
+"BLD",7780,"KRN","B",.84,.84)
+
+"BLD",7780,"KRN","B",3.6,3.6)
+
+"BLD",7780,"KRN","B",3.8,3.8)
+
+"BLD",7780,"KRN","B",9.2,9.2)
+
+"BLD",7780,"KRN","B",9.8,9.8)
+
+"BLD",7780,"KRN","B",19,19)
+
+"BLD",7780,"KRN","B",19.1,19.1)
+
+"BLD",7780,"KRN","B",101,101)
+
+"BLD",7780,"KRN","B",409.61,409.61)
+
+"BLD",7780,"KRN","B",771,771)
+
+"BLD",7780,"KRN","B",779.2,779.2)
+
+"BLD",7780,"KRN","B",870,870)
+
+"BLD",7780,"KRN","B",8989.51,8989.51)
+
+"BLD",7780,"KRN","B",8989.52,8989.52)
+
+"BLD",7780,"KRN","B",8994,8994)
+
+"FIA",2006.5759)
+OUTSIDE IMAGING LOCATION
+"FIA",2006.5759,0)
+^MAGD(2006.5759,
+"FIA",2006.5759,0,0)
+2006.5759P
+"FIA",2006.5759,0,1)
+y^y^f^^^^y
+"FIA",2006.5759,0,10)
+
+"FIA",2006.5759,0,11)
+
+"FIA",2006.5759,0,"RLRO")
+
+"FIA",2006.5759,0,"VR")
+3.0^MAG
+"FIA",2006.5759,2006.5759)
+0
+"IX",2006.5759,2006.5759,"D",0)
+2006.5759^D^Groups entries by INSTITUTION and IMAGING TYPE.^R^^R^IR^I^2006.5759^^^^^LS
+"IX",2006.5759,2006.5759,"D",.1,0)
+^^3^3^3090423^^^^
+"IX",2006.5759,2006.5759,"D",.1,1,0)
+The cross reference is needed by routines MAGDAIRF and MAGDRPCA.  This
+"IX",2006.5759,2006.5759,"D",.1,2,0)
+cross reference will facilitate sorting by institution especially within
+"IX",2006.5759,2006.5759,"D",.1,3,0)
+a consolidated database and each institution has their own DICOM Gateway. 
+"IX",2006.5759,2006.5759,"D",1)
+S ^MAGD(2006.5759,"D",X(1),X(2),DA)=""
+"IX",2006.5759,2006.5759,"D",2)
+K ^MAGD(2006.5759,"D",X(1),X(2),DA)
+"IX",2006.5759,2006.5759,"D",2.5)
+K ^MAGD(2006.5759,"D")
+"IX",2006.5759,2006.5759,"D",11.1,0)
+^.114IA^2^2
+"IX",2006.5759,2006.5759,"D",11.1,1,0)
+1^F^2006.5759^4^^1^F
+"IX",2006.5759,2006.5759,"D",11.1,2,0)
+2^F^2006.5759^2^^2^F
+"MBREQ")
+0
+"PKG",454,-1)
+1^1
+"PKG",454,0)
+IMAGING^MAG^Imaging-V1 to release 
+"PKG",454,20,0)
+^9.402P^^
+"PKG",454,22,0)
+^9.49I^1^1
+"PKG",454,22,1,0)
+3.0^3020319^3020517^126
+"PKG",454,22,1,"PAH",1,0)
+350_DD^3120726
+"QUES","XPF1",0)
+Y
+"QUES","XPF1","??")
+^D REP^XPDH
+"QUES","XPF1","A")
+Shall I write over your |FLAG| File
+"QUES","XPF1","B")
+YES
+"QUES","XPF1","M")
+D XPF1^XPDIQ
+"QUES","XPF2",0)
+Y
+"QUES","XPF2","??")
+^D DTA^XPDH
+"QUES","XPF2","A")
+Want my data |FLAG| yours
+"QUES","XPF2","B")
+YES
+"QUES","XPF2","M")
+D XPF2^XPDIQ
+"QUES","XPI1",0)
+YO
+"QUES","XPI1","??")
+^D INHIBIT^XPDH
+"QUES","XPI1","A")
+Want KIDS to INHIBIT LOGONs during the install
+"QUES","XPI1","B")
+NO
+"QUES","XPI1","M")
+D XPI1^XPDIQ
+"QUES","XPM1",0)
+PO^VA(200,:EM
+"QUES","XPM1","??")
+^D MG^XPDH
+"QUES","XPM1","A")
+Enter the Coordinator for Mail Group '|FLAG|'
+"QUES","XPM1","B")
+
+"QUES","XPM1","M")
+D XPM1^XPDIQ
+"QUES","XPO1",0)
+Y
+"QUES","XPO1","??")
+^D MENU^XPDH
+"QUES","XPO1","A")
+Want KIDS to Rebuild Menu Trees Upon Completion of Install
+"QUES","XPO1","B")
+NO
+"QUES","XPO1","M")
+D XPO1^XPDIQ
+"QUES","XPZ1",0)
+Y
+"QUES","XPZ1","??")
+^D OPT^XPDH
+"QUES","XPZ1","A")
+Want to DISABLE Scheduled Options, Menu Options, and Protocols
+"QUES","XPZ1","B")
+NO
+"QUES","XPZ1","M")
+D XPZ1^XPDIQ
+"QUES","XPZ2",0)
+Y
+"QUES","XPZ2","??")
+^D RTN^XPDH
+"QUES","XPZ2","A")
+Want to MOVE routines to other CPUs
+"QUES","XPZ2","B")
+NO
+"QUES","XPZ2","M")
+D XPZ2^XPDIQ
+"SEC","^DIC",2006.5759,2006.5759,0,"AUDIT")
+@
+"SEC","^DIC",2006.5759,2006.5759,0,"DD")
+@
+"SEC","^DIC",2006.5759,2006.5759,0,"DEL")
+@
+"SEC","^DIC",2006.5759,2006.5759,0,"LAYGO")
+@
+"SEC","^DIC",2006.5759,2006.5759,0,"RD")
+@
+"SEC","^DIC",2006.5759,2006.5759,0,"WR")
+@
+"VER")
+8.0^22.0
+"^DD",2006.5759,2006.5759,0)
+FIELD^^4^4
+"^DD",2006.5759,2006.5759,0,"DDA")
+N
+"^DD",2006.5759,2006.5759,0,"DT")
+3090421
+"^DD",2006.5759,2006.5759,0,"IX","B",2006.5759,.01)
+
+"^DD",2006.5759,2006.5759,0,"IX","C",2006.5759,4)
+
+"^DD",2006.5759,2006.5759,0,"NM","OUTSIDE IMAGING LOCATION")
+
+"^DD",2006.5759,2006.5759,0,"PT",2006.5758,7)
+
+"^DD",2006.5759,2006.5759,.01,0)
+IMAGING LOCATION^R*P79.1'^RA(79.1,^0;1^S DIC("S")="I $P(^(0),U,21)=2" D ^DIC K DIC S DIC=DIE,X=+Y K:Y<0 X
+"^DD",2006.5759,2006.5759,.01,1,0)
+^.1
+"^DD",2006.5759,2006.5759,.01,1,1,0)
+2006.5759^B
+"^DD",2006.5759,2006.5759,.01,1,1,1)
+S ^MAGD(2006.5759,"B",$E(X,1,30),DA)=""
+"^DD",2006.5759,2006.5759,.01,1,1,2)
+K ^MAGD(2006.5759,"B",$E(X,1,30),DA)
+"^DD",2006.5759,2006.5759,.01,1,2,0)
+^^TRIGGER^2006.5759^2
+"^DD",2006.5759,2006.5759,.01,1,2,1)
+K DIV S DIV=X,D0=DA,DIV(0)=D0 S Y(1)=$S($D(^MAGD(2006.5759,D0,0)):^(0),1:"") S X=$P(Y(1),U,2),X=X S DIU=X K Y X ^DD(2006.5759,.01,1,2,1.1) X ^DD(2006.5759,.01,1,2,1.4)
+"^DD",2006.5759,2006.5759,.01,1,2,1.1)
+S X=DIV S I(0,0)=$G(D0),D0=DIV S:'D0!'$D(^RA(79.1,+D0,0)) D0=-1 S Y(102)=$S($D(^RA(79.1,D0,0)):^(0),1:""),Y(101)=$G(X) S X=$P(Y(102),U,6),X=X S X=X S D0=I(0,0)
+"^DD",2006.5759,2006.5759,.01,1,2,1.4)
+S DIH=$G(^MAGD(2006.5759,DIV(0),0)),DIV=X S $P(^(0),U,2)=DIV,DIH=2006.5759,DIG=2 D ^DICR
+"^DD",2006.5759,2006.5759,.01,1,2,2)
+K DIV S DIV=X,D0=DA,DIV(0)=D0 S Y(1)=$S($D(^MAGD(2006.5759,D0,0)):^(0),1:"") S X=$P(Y(1),U,2),X=X S DIU=X K Y S X="" S DIH=$G(^MAGD(2006.5759,DIV(0),0)),DIV=X S $P(^(0),U,2)=DIV,DIH=2006.5759,DIG=2 D ^DICR
+"^DD",2006.5759,2006.5759,.01,1,2,3)
+Field IMAGING TYPE will be populated with the identical value it has in Radiology's file IMAGING LOCATION (#79.1) for the corresponding IMAGING LOCATION entry.
+"^DD",2006.5759,2006.5759,.01,1,2,"CREATE VALUE")
+IMAGING LOCATION:INTERNAL(#6)
+"^DD",2006.5759,2006.5759,.01,1,2,"DELETE VALUE")
+@
+"^DD",2006.5759,2006.5759,.01,1,2,"DT")
+3090119
+"^DD",2006.5759,2006.5759,.01,1,2,"FIELD")
+IMAGING TYPE
+"^DD",2006.5759,2006.5759,.01,1,3,0)
+^^TRIGGER^2006.5759^3
+"^DD",2006.5759,2006.5759,.01,1,3,1)
+K DIV S DIV=X,D0=DA,DIV(0)=D0 S Y(1)=$S($D(^MAGD(2006.5759,D0,0)):^(0),1:"") S X=$P(Y(1),U,3),X=X S DIU=X K Y X ^DD(2006.5759,.01,1,3,1.1) X ^DD(2006.5759,.01,1,3,1.4)
+"^DD",2006.5759,2006.5759,.01,1,3,1.1)
+S X=DIV S I(0,0)=$G(D0),D0=DIV S:'D0!'$D(^RA(79.1,+D0,0)) D0=-1 S Y(102)=$S($D(^RA(79.1,D0,0)):^(0),1:""),Y(101)=$G(X) S X=$P(Y(102),U,1),X=X S X=X S D0=I(0,0)
+"^DD",2006.5759,2006.5759,.01,1,3,1.4)
+S DIH=$G(^MAGD(2006.5759,DIV(0),0)),DIV=X S $P(^(0),U,3)=DIV,DIH=2006.5759,DIG=3 D ^DICR
+"^DD",2006.5759,2006.5759,.01,1,3,2)
+K DIV S DIV=X,D0=DA,DIV(0)=D0 S Y(1)=$S($D(^MAGD(2006.5759,D0,0)):^(0),1:"") S X=$P(Y(1),U,3),X=X S DIU=X K Y S X="" S DIH=$G(^MAGD(2006.5759,DIV(0),0)),DIV=X S $P(^(0),U,3)=DIV,DIH=2006.5759,DIG=3 D ^DICR
+"^DD",2006.5759,2006.5759,.01,1,3,3)
+Field HOSPITAL LOC will be populated with the identical value it has in Radiology's file IMAGING LOCATION (#79.1) for the corresponding IMAGING LOCATION entry.
+"^DD",2006.5759,2006.5759,.01,1,3,"CREATE VALUE")
+IMAGING LOCATION:INTERNAL(LOCATION)
+"^DD",2006.5759,2006.5759,.01,1,3,"DELETE VALUE")
+@
+"^DD",2006.5759,2006.5759,.01,1,3,"DT")
+3090119
+"^DD",2006.5759,2006.5759,.01,1,3,"FIELD")
+HOSPITAL LOC
+"^DD",2006.5759,2006.5759,.01,1,4,0)
+^^TRIGGER^2006.5759^4
+"^DD",2006.5759,2006.5759,.01,1,4,1)
+K DIV S DIV=X,D0=DA,DIV(0)=D0 S Y(1)=$S($D(^MAGD(2006.5759,D0,0)):^(0),1:"") S X=$P(Y(1),U,4),X=X S DIU=X K Y X ^DD(2006.5759,.01,1,4,1.1) X ^DD(2006.5759,.01,1,4,1.4)
+"^DD",2006.5759,2006.5759,.01,1,4,1.1)
+S X=DIV S I(0,0)=$G(D0),D0=DIV S:'D0!'$D(^RA(79.1,+D0,0)) D0=-1 S Y(102)=$S($D(^RA(79.1,D0,"DIV")):^("DIV"),1:""),Y(101)=$G(X) S X=$P(Y(102),U,1),X=X S X=X S D0=I(0,0)
+"^DD",2006.5759,2006.5759,.01,1,4,1.4)
+S DIH=$G(^MAGD(2006.5759,DIV(0),0)),DIV=X S $P(^(0),U,4)=DIV,DIH=2006.5759,DIG=4 D ^DICR
+"^DD",2006.5759,2006.5759,.01,1,4,2)
+K DIV S DIV=X,D0=DA,DIV(0)=D0 S Y(1)=$S($D(^MAGD(2006.5759,D0,0)):^(0),1:"") S X=$P(Y(1),U,4),X=X S DIU=X K Y S X="" S DIH=$G(^MAGD(2006.5759,DIV(0),0)),DIV=X S $P(^(0),U,4)=DIV,DIH=2006.5759,DIG=4 D ^DICR
+"^DD",2006.5759,2006.5759,.01,1,4,3)
+Field INSTITUTION will be populated with the identical value is has in Radiology's file IMAGING LOCATION (#79.1) for the corresponding IMAGING LOCATION entry.
+"^DD",2006.5759,2006.5759,.01,1,4,"CREATE VALUE")
+IMAGING LOCATION:INTERNAL(#25)
+"^DD",2006.5759,2006.5759,.01,1,4,"DELETE VALUE")
+@
+"^DD",2006.5759,2006.5759,.01,1,4,"DT")
+3090119
+"^DD",2006.5759,2006.5759,.01,1,4,"FIELD")
+INSTITUTION
+"^DD",2006.5759,2006.5759,.01,3)
+Enter an IMAGING LOCATION entry defined as 'NO CREDIT'.
+"^DD",2006.5759,2006.5759,.01,12)
+Permits selection to be on locations with a credit method of 'No Credit".
+"^DD",2006.5759,2006.5759,.01,12.1)
+S DIC("S")="I $P(^(0),U,21)=2"
+"^DD",2006.5759,2006.5759,.01,21,0)
+^.001^6^6^3090423^^^^
+"^DD",2006.5759,2006.5759,.01,21,1,0)
+This is the 'No Credit' Radiology location to be used by the DICOM Gateways
+"^DD",2006.5759,2006.5759,.01,21,2,0)
+to collect imported 'outside' images and place or update a Radiology order
+"^DD",2006.5759,2006.5759,.01,21,3,0)
+on VistA.
+"^DD",2006.5759,2006.5759,.01,21,4,0)
+ 
+"^DD",2006.5759,2006.5759,.01,21,5,0)
+The field has a screen to only allow entries that have been defined as
+"^DD",2006.5759,2006.5759,.01,21,6,0)
+'No Credit' in Radiology's IMAGING LOCATION file (#79.1).
+"^DD",2006.5759,2006.5759,.01,"DT")
+3090421
+"^DD",2006.5759,2006.5759,2,0)
+IMAGING TYPE^P79.2'^RA(79.2,^0;2^Q
+"^DD",2006.5759,2006.5759,2,1,0)
+^.1^^0
+"^DD",2006.5759,2006.5759,2,3)
+Select the Imaging type for this location.
+"^DD",2006.5759,2006.5759,2,5,1,0)
+2006.5759^.01^2
+"^DD",2006.5759,2006.5759,2,9)
+^
+"^DD",2006.5759,2006.5759,2,21,0)
+^.001^1^1^3090423^^^^
+"^DD",2006.5759,2006.5759,2,21,1,0)
+The value of this field is the associated imaging type (e.g. VASCULAR LAB) for the outside imaging location. 
+"^DD",2006.5759,2006.5759,2,"DT")
+3080815
+"^DD",2006.5759,2006.5759,3,0)
+HOSPITAL LOCATION^P44'^SC(^0;3^Q
+"^DD",2006.5759,2006.5759,3,3)
+Select the hospital location for this location.
+"^DD",2006.5759,2006.5759,3,5,1,0)
+2006.5759^.01^3
+"^DD",2006.5759,2006.5759,3,9)
+^
+"^DD",2006.5759,2006.5759,3,21,0)
+^.001^2^2^3090423^^^^
+"^DD",2006.5759,2006.5759,3,21,1,0)
+The value for this field is the hospital location (e.g. Radiology clinic) pertaining to the
+"^DD",2006.5759,2006.5759,3,21,2,0)
+outside imaging location.
+"^DD",2006.5759,2006.5759,3,"DT")
+3080115
+"^DD",2006.5759,2006.5759,4,0)
+INSTITUTION^P4'^DIC(4,^0;4^Q
+"^DD",2006.5759,2006.5759,4,1,0)
+^.1
+"^DD",2006.5759,2006.5759,4,1,1,0)
+2006.5759^C
+"^DD",2006.5759,2006.5759,4,1,1,1)
+S ^MAGD(2006.5759,"C",$E(X,1,30),DA)=""
+"^DD",2006.5759,2006.5759,4,1,1,2)
+K ^MAGD(2006.5759,"C",$E(X,1,30),DA)
+"^DD",2006.5759,2006.5759,4,1,1,"DT")
+3080115
+"^DD",2006.5759,2006.5759,4,3)
+Select the institution pertaining to this location.
+"^DD",2006.5759,2006.5759,4,5,1,0)
+2006.5759^.01^4
+"^DD",2006.5759,2006.5759,4,9)
+^
+"^DD",2006.5759,2006.5759,4,21,0)
+^.001^2^2^3090423^^^^
+"^DD",2006.5759,2006.5759,4,21,1,0)
+The value of this field is the institution related to the outside imaging
+"^DD",2006.5759,2006.5759,4,21,2,0)
+location. Within a consolidated database, an institution could be an Outpatient clinic.
+"^DD",2006.5759,2006.5759,4,"DT")
+3080815
+"^DIC",2006.5759,2006.5759,0)
+OUTSIDE IMAGING LOCATION^2006.5759
+"^DIC",2006.5759,2006.5759,0,"GL")
+^MAGD(2006.5759,
+"^DIC",2006.5759,2006.5759,"%",0)
+^1.005^^0
+"^DIC",2006.5759,2006.5759,"%D",0)
+^1.001^6^6^3090506^^^
+"^DIC",2006.5759,2006.5759,"%D",1,0)
+Entries in this file are locations identified in Radiology's IMAGING LOCATION file (#79.1) for 
+"^DIC",2006.5759,2006.5759,"%D",2,0)
+entities that are non-credit locations.  These entries will be used by the DICOM Gateways during the 
+"^DIC",2006.5759,2006.5759,"%D",3,0)
+ordering process to assign a location to an 'unordered' Radiology study.  The DICOM Gateways 
+"^DIC",2006.5759,2006.5759,"%D",4,0)
+periodically download this file.
+"^DIC",2006.5759,2006.5759,"%D",5,0)
+ 
+"^DIC",2006.5759,2006.5759,"%D",6,0)
+Use menu option 'Build Outside Imaging Location File' [MAG BUILD OUT LOC] to populate this file.
+"^DIC",2006.5759,"B","OUTSIDE IMAGING LOCATION",2006.5759)
+
+**END**
+**END**

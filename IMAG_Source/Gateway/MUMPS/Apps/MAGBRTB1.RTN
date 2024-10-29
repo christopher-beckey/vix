@@ -1,0 +1,114 @@
+MAGBRTB1 ;WOIFO/PMK - Re-build routing rule table ; 08/26/2005  07:46
+ ;;3.0;IMAGING;**9,30,51**;MAR 19, 2002;;JUN 16, 2006
+ ;; Per VHA Directive 2004-038, this routine should not be modified.
+ ;; +---------------------------------------------------------------+
+ ;; | Property of the US Government.                                |
+ ;; | No permission to copy or redistribute this software is given. |
+ ;; | Use of unreleased versions of this software requires the user |
+ ;; | to execute a written test agreement with the VistA Imaging    |
+ ;; | Development Office of the Department of Veterans Affairs,     |
+ ;; | telephone (301) 734-0100.                                     |
+ ;; | The Food and Drug Administration classifies this software as  |
+ ;; | a medical device.  As such, it may not be changed in any way. |
+ ;; | Modifications to this software may result in an adulterated   |
+ ;; | medical device under 21CFR820, the use of which is considered |
+ ;; | to be a violation of US Federal Statutes.                     |
+ ;; +---------------------------------------------------------------+
+ ;;
+ENTRY ; Entry point from programmer mode
+ N CMT,D0,D1,D2,DTIME,FILE,KEYWORD,PATH,STATUS,WEB,X
+ S DTIME=$G(DTIME,300),WEB=0
+ S PATH=$G(^MAGDICOM(2006.563,1,"DICT PATH"))
+ I PATH="" W !!,"Please Use menu option 4-2-2 to set the dictionary path",! Q
+ S FILE=PATH_"\ROUTE.DIC"
+ ;
+ F  D  Q:"YyNn^"[$E(X_" ",1)
+ . W !!,"Import Routing Rules from """,FILE,"""."
+ . W !,"Ready to build the Routing Table?  YES// " R X:DTIME E  S X="^"
+ . I X="" S X="Y" Q
+ . I X["?" D  S X="" Q
+ . . W !!,"Please answer 'YES' to re-build the table that"
+ . . W !,"contains the Routing Rules."
+ . . W !,"Answer 'No' to quit from this program."
+ . . Q
+ . Q
+ Q:"Yy"'[$E(X,1)
+ D KEYWORD^MAGBRTK
+ S STATUS=$$OPEN^MAGOSFIL(FILE,"R") I STATUS<0 W !,STATUS Q
+ I $$USEPRIN^MAGOSFIL(1)
+ ;
+ K ^MAGDICOM(2006.59)
+ S ^MAGDICOM(2006.59,0)="ROUTING RULE^2006.59^^",D0=0
+ ;
+ W !!,"Reminder: should the need arise to transmit patient information"
+ W !,"to destinations outside of the VA's intranet, please remember"
+ W !,"that both US Federal regulations and VA's internal policies"
+ W !,"prohibit unencrypted transmission of such information.",!!
+ ;
+ F  D  Q:STATUS'=""
+ . N LASTCHAR,QUOTE
+ . S STATUS=$$READ^MAGOSFIL(FILE,.RECORD)
+ . I $$USEPRIN^MAGOSFIL(1)
+ . I +STATUS=-2 Q
+ . I STATUS'="" W !,STATUS Q
+ . ; Translate tabs to spaces, ignore form-feeds and line-feeds
+ . S RECORD=$TR(RECORD,$C(145,146,147,148,9,10,12),$C(39,39,34,34,32))
+ . Q:$TR(RECORD," ")=""
+ . I $E(RECORD,1)="#" S CMT=1 Q  ; comment
+ . S:$E(RECORD,1)'=" " CMT=0 Q:CMT  ; also Quit on continuation lines
+ . ; data
+ . ; copy the record in ROUTE.DIC to the routing table
+ . ; parse the input into separate rules, and translate tabs
+ . I $E(RECORD)'=" " D  ; A new rule begins in column 1
+ . . S D0=D0+1
+ . . S $P(^MAGDICOM(2006.59,0),"^",3,4)=D0_"^"_D0
+ . . S ^MAGDICOM(2006.59,D0,0)=D0
+ . . S ^MAGDICOM(2006.59,D0,1,0)="^2006.5901^^"
+ . . Q
+ . ; remove redundant spaces (leading&trailing, before&after (), {})
+ . F  Q:$E(RECORD)'=" "  S $E(RECORD)="" ; leading
+ . F  S I=$L(RECORD) Q:$E(RECORD,I)'=" "  S $E(RECORD,I)="" ; trailing
+ . F  S I=$F(RECORD,"  ") Q:'I  S $E(RECORD,I-1)="" ; remove double spaces
+ . F  S I=$F(RECORD,"( ") Q:'I  S $E(RECORD,I-1)="" ; after opening (
+ . F  S I=$F(RECORD," )") Q:'I  S $E(RECORD,I-2)="" ; before closing )
+ . F  S I=$F(RECORD,"{ ") Q:'I  S $E(RECORD,I-1)="" ; after opening {
+ . F  S I=$F(RECORD," }") Q:'I  S $E(RECORD,I-2)="" ; before closing }
+ . ; remove redundant spaces around commas, outside of quoted literals
+ . S QUOTE=0,LASTCHAR=""
+ . F I=1:1 Q:I>$L(RECORD)  D
+ . . N CHAR
+ . . S CHAR=$E(RECORD,I)
+ . . I QUOTE D  ; within a quoted literal string
+ . . . I CHAR="""" S QUOTE=0 ; end of quoted literal string
+ . . . Q
+ . . E  D  ; outside of a literal quoted string
+ . . . I CHAR="""" S QUOTE=1 ; beginning of quoted literal string
+ . . . I CHAR=" ",LASTCHAR="," S $E(RECORD,I)="",I=I-1 ; after comma
+ . . . I CHAR=",",LASTCHAR=" " S $E(RECORD,I-1)="",I=I-1 ; before comma
+ . . . Q
+ . . S LASTCHAR=CHAR
+ . . Q
+ . I RECORD="" Q  ; ignore blank records
+ . S D1=$P(^MAGDICOM(2006.59,D0,1,0),"^",3)+1
+ . S $P(^MAGDICOM(2006.59,D0,1,0),"^",3,4)=D1_"^"_D1
+ . S ^MAGDICOM(2006.59,D0,1,D1,0)=RECORD
+ . Q
+ S STATUS=$$CLOSE^MAGOSFIL(FILE)
+ I $$USEPRIN^MAGOSFIL(1)
+ D PASS2^MAGBRTB2
+ D PASS3^MAGBRTB4
+ S D0=$$PASS4^MAGBRTB4()
+ W !,D0," rule" W:D0'=1 "s" W " stored into database.",!
+ ;
+ ; Reset counters for Load-Balancing:
+ ; (but leave the study-sensitive cross-reference)
+ S D0=0 F  S D0=$O(^MAGDICOM(2006.5906,D0)) Q:'D0  K ^MAGDICOM(2006.5906,D0)
+ Q
+ ;
+VARNAME(F) ;
+ S F=$TR(F," !""#$%&'()*+,-./:;<=>?@[\]^_`{|}~","_________________________________")
+ F  Q:F'["__"  S F=$P(F,"__",1)_"_"_$P(F,"__",2,$L(F)+2)
+ F  Q:$E(F,1)'="_"  S F=$E(F,2,$L(F))
+ F  Q:$E(F,$L(F))'="_"  S F=$E(F,1,$L(F)-1)
+ S F=$TR(F,"abcdefghijklmnopqrstuvwxyz","ABCDEFGHIJKLMNOPQRSTUVWXYZ")
+ Q F

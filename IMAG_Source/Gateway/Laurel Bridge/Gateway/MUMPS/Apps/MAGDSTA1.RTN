@@ -1,0 +1,50 @@
+MAGDSTA1 ;WOIFO/EdM - Statistics, Imaging Usage ; 05/04/2007 10:46
+ ;;3.0;IMAGING;**11,54**;MAR 19, 2002;;OCT 28, 2009
+ ;; Per VHA Directive 2004-038, this routine should not be modified.
+ ;; +---------------------------------------------------------------+
+ ;; | Property of the US Government.                                |
+ ;; | No permission to copy or redistribute this software is given. |
+ ;; | Use of unreleased versions of this software requires the user |
+ ;; | to execute a written test agreement with the VistA Imaging    |
+ ;; | Development Office of the Department of Veterans Affairs,     |
+ ;; | telephone (301) 734-0100.                                     |
+ ;; | The Food and Drug Administration classifies this software as  |
+ ;; | a medical device.  As such, it may not be changed in any way. |
+ ;; | Modifications to this software may result in an adulterated   |
+ ;; | medical device under 21CFR820, the use of which is considered |
+ ;; | to be a violation of US Federal Statutes.                     |
+ ;; +---------------------------------------------------------------+
+ ;;
+ Q
+ ;
+USAGE N DONE,ENTRY,TITLE,TOT,USE,X
+ S DONE=0
+ S ENTRY="" F  S ENTRY=$O(^MAGDICOM("MENU",ENTRY)) Q:ENTRY=""  D  Q:DONE<0
+ . Q:ENTRY["PUSH^MAGDMENU"
+ . Q:ENTRY["QUITMENU^MAGDMENU"
+ . S TOT=0
+ . S TITLE="" F I=1:1 S X=$T(0+I^MAGDMENO) Q:X=""  D  Q:TITLE'=""
+ . . S:$P(X,";",4)=ENTRY TITLE=$P(X,";",3)
+ . . Q
+ . S:TITLE="" TITLE=ENTRY
+ . D LF Q:DONE<0  W TITLE
+ . ;
+ . S DATE="" F  S DATE=$O(^MAGDICOM("MENU",ENTRY,DATE)) Q:DATE=""  D  Q:DONE<0
+ . . N D,M,Y
+ . . S USE=$G(^MAGDICOM("MENU",ENTRY,DATE)) Q:'USE
+ . . S X=$$HTFM^XLFDT(DATE,1)
+ . . S D=X#100,M=X\100#100,Y=X\10000+1700
+ . . D LF Q:DONE<0
+ . . W $J(D,4)," ",$P("Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec"," ",M)
+ . . W " ",Y,": ",$J(USE,4)," invocation" W:USE>1 "s"
+ . . S TOT=TOT+USE
+ . . Q
+ . D LF Q:DONE<0  W "  Total:",$J(TOT,11)
+ . Q
+ Q
+ ;
+LF W ! S DONE=DONE+1 Q:DONE<18
+ W "Press <Enter> to continue: " R X:$G(DTIME,300) W !
+ S DONE=1 S:X["^" DONE=1
+ Q
+ ;

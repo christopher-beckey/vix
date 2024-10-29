@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project>
+	<extend>../ImagingRoot/project.xml</extend>
+	<pomVersion>1</pomVersion>
+	<artifactId>VixServerHealthWebApp</artifactId>
+	<name>VixServerHealthWebApp</name>
+	<package>gov.va.med.imaging.vixserverhealth</package>
+	<shortDescription>
+		Web application for providing health details of the VIX and
+		its current status.
+	</shortDescription>
+	<build>
+		<sourceDirectory>main/src/java</sourceDirectory>
+		<unitTestSourceDirectory>
+			main/test/java
+		</unitTestSourceDirectory>
+		<unitTest>
+			<includes>
+				<include>**/*Test*.java</include>
+			</includes>
+			<excludes>
+				<exclude>**/ClinicalDisplayWebAppTestBase.java</exclude>
+			</excludes>
+			<resources>
+				<resource>
+					<directory>main/test/resources</directory>
+					<includes>
+						<include>**/*</include>
+					</includes>
+					<filtering>false</filtering>
+				</resource>
+			</resources>
+		</unitTest>
+		<resources>
+			<resource>
+				<directory>main/src/resources</directory>
+				<includes>
+					<include>**/*</include>
+				</includes>
+				<filtering>false</filtering>
+			</resource>
+		</resources>
+	</build>
+	<dependencies>
+		<dependency>
+			<groupId>${pom.groupId}</groupId>
+			<artifactId>ImagingCommon</artifactId>
+			<version>${pom.currentVersion}</version>
+			<type>jar</type>
+		</dependency>
+		<dependency>
+			<groupId>${pom.groupId}</groupId>
+			<artifactId>CoreValueObjects</artifactId>
+			<version>${pom.currentVersion}</version>
+			<type>jar</type>
+		</dependency>
+		<dependency>
+			<groupId>${pom.groupId}</groupId>
+			<artifactId>TransactionContext</artifactId>
+			<version>${pom.currentVersion}</version>
+			<type>jar</type>
+		</dependency>
+		<dependency>
+			<groupId>${pom.groupId}</groupId>
+			<artifactId>BaseWebFacade</artifactId>
+			<version>${pom.currentVersion}</version>
+			<type>jar</type>
+		</dependency>
+		<dependency>
+			<groupId>${pom.groupId}</groupId>
+			<artifactId>ImagingTestResources</artifactId>
+			<version>${pom.currentVersion}</version>
+			<type>jar</type>
+		</dependency>
+
+		<!--
+		 The following dependecies, CoreRouterSemantics, CoreRouterAnotationProcessor and
+		 freemarker, are needed for facade projects that define a Router Facade rather than make
+		 direct command factory and router calls.
+		-->
+		<dependency>
+			<groupId>${pom.groupId}</groupId>
+			<artifactId>CoreRouterSemantics</artifactId>
+			<version>${pom.currentVersion}</version>
+			<type>jar</type>
+		</dependency>
+		
+		<!-- 
+			The following dependencies are required to compile this project but they are NOT required to
+			run it.  They are annotations that are not retained in class files, 
+			annotation processors (and supporting libraries). 
+		-->
+		<dependency>
+			<groupId>${pom.groupId}</groupId>
+			<artifactId>CoreRouterAnnotation</artifactId>
+			<version>${pom.currentVersion}</version>
+			<type>jar</type>
+		</dependency>
+		<dependency>
+			<groupId>${pom.groupId}</groupId>
+			<artifactId>CoreRouterAnnotationProcessor</artifactId>
+			<version>${pom.currentVersion}</version>
+			<type>jar</type>
+		</dependency>
+		<dependency>
+			<groupId>freemarker</groupId>
+			<artifactId>freemarker</artifactId>
+			<version>2.3.14</version>
+			<type>jar</type>
+			<properties>
+				<jar.manifest.classpath>true</jar.manifest.classpath>
+			</properties>
+		</dependency>
+
+		<!-- Non Imaging dependencies -->
+		<dependency>
+			<groupId>j2ee</groupId>
+			<artifactId>servlet-api</artifactId>
+			<version>2.4</version>
+			<type>jar</type>
+			<properties>
+				<war.manifest.classpath>true</war.manifest.classpath>
+				<war.bundle>false</war.bundle>
+			</properties>
+		</dependency>
+		<dependency>
+			<groupId>j2ee</groupId>
+			<artifactId>jsp-api</artifactId>
+			<version>2.0</version>
+			<type>jar</type>
+			<properties>
+				<war.manifest.classpath>true</war.manifest.classpath>
+				<war.bundle>false</war.bundle>
+			</properties>
+		</dependency>
+	</dependencies>
+</project>
+

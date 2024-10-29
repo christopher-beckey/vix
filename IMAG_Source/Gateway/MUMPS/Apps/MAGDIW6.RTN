@@ -1,0 +1,146 @@
+MAGDIW6 ;WOIFO/PMK - Send images to DICOM Storage ; 11/01/2004  14:01
+ ;;3.0;IMAGING;**30,51**;MAR 19, 2002;;JUN 16, 2006
+ ;; Per VHA Directive 2004-038, this routine should not be modified.
+ ;; +---------------------------------------------------------------+
+ ;; | Property of the US Government.                                |
+ ;; | No permission to copy or redistribute this software is given. |
+ ;; | Use of unreleased versions of this software requires the user |
+ ;; | to execute a written test agreement with the VistA Imaging    |
+ ;; | Development Office of the Department of Veterans Affairs,     |
+ ;; | telephone (301) 734-0100.                                     |
+ ;; | The Food and Drug Administration classifies this software as  |
+ ;; | a medical device.  As such, it may not be changed in any way. |
+ ;; | Modifications to this software may result in an adulterated   |
+ ;; | medical device under 21CFR820, the use of which is considered |
+ ;; | to be a violation of US Federal Statutes.                     |
+ ;; +---------------------------------------------------------------+
+ ;;
+ ; Overflow from MAGDIW5
+ ;
+ASSOC ; create the association
+ N PDUTYPE ;-- the PDU type 01H-07H -- see ^MAGDMFB6
+ N PATHIN,PATHOUT,RESULT
+ S PATHIN=PATH_"\ASSOCIATION_"_$J_".IN"
+ S PATHOUT=PATH_"\ASSOCIATION_"_$J_".OUT"
+ D REQUEST1^MAGDACU2(PATHOUT) ; create A-ASSOCIATE-RQ PDU
+ ; read the message being sent for the log
+ S STATUS=$$OPEN^MAGOSFIL(PATHOUT,"B")
+ I STATUS<0 D
+ . N M
+ . S M="Could not open file """_PATHOUT_""" for Binary Read."
+ . W:$$USEPRIN^MAGOSFIL(1) !!!,M,!,STATUS
+ . S $EC=",U"_M_","
+ . Q  ; Error trap does not return
+ D OREQUEST^MAGDACR1(PATHOUT)
+ ;
+ D SEND^MAGDCST2("",PORT,"NEW_ASSOCIATION "_PATHOUT_" "_PATHIN)
+ S NETERROR=$$RECV^MAGDCST2("",PORT,.X)
+ I NETERROR D ERRORMSG^MAGDCST1("Network error 1") Q
+ I X'="ASSOCIATION ACKNOWLEDGE" D
+ . N MSG
+ . S MSG(1)="Expected return value ""ASSOCIATION ACKNOWLEDGE""."
+ . S MSG(2)="Received """_X_"""."
+ . D TRAPERR^MAGDSTRT(1,$T(+0),"ERROR IN VISTA SEND IMAGE",.MSG)
+ . Q  ; Error trap does not return
+ S STATUS=$$OPEN^MAGOSFIL(PATHIN,"B")
+ I STATUS<0 D
+ . N M
+ . S M="Could not open file """_PATHIN_""" for Binary Read."
+ . W:$$USEPRIN^MAGOSFIL(1) !!!,M,!,STATUS
+ . S $EC=",U"_M_","
+ . Q  ; Error trap does not return
+ ;
+ ; check for the association acceptance PDU
+ D RESPONSE^MAGDACR1(PATHIN,.PDUTYPE) ; decode the reply PDU
+ I PDUTYPE'="02H" D  ; not an A-ASSOCIATE-AC
+ . I PDUTYPE="03H" D  ; association rejected
+ . . D RELEASE  ; gracefully close the rejected association
+ . . Q
+ . E  D  ; unknown PDU type
+ . . D MESSAGE^MAGDMLOG(2,0,"Unknown PDU type: "_PDUTYPE,"BTV")
+ . . Q
+ . D DISCON ; disconnect the old session
+ . S NETERROR=2
+ . Q
+ E  D  ; association accepted, check for SOP Class acceptance
+ . S RESULT=^TMP("MAG",$J,"DICOM","NEGOTIATE","RESPONSE",1,"RESULT")
+ . I 'RESULT D  Q  ; the requested SOP Class was accepted
+ . . S MXPDUSIZ=^TMP("MAG",$J,"DICOM","NEGOTIATE","RESPONSE","MAX PDU LENGTH")
+ . . I MXPDUSIZ>32768 S MXPDUSIZ=32768 ; maximum size for VistA
+ . . I MXPDUSIZ=0 S MXPDUSIZ=32768 ; can't handle unlimited size PDU
+ . . Q
+ . S X="ASSOCIATION ABORTED, Reason="_RESULT
+ . D MESSAGE^MAGDMLOG(1,0,X,"BV")
+ . D RELEASE  ; close the old association
+ . D DISCON ; disconnect the old session
+ . S NETERROR=3
+ . Q
+ Q
+ ;
+COMMAND ; read the DICOM file and get the SOP Class / Instance UIDs
+ N MESSAGE ;-- name of type of message being generated
+ N MSGHANDL ;- pointer in DICOM message to HL7 message number
+ N FILE,FILESIZE,ICUID,X,Y
+ ;
+ ; read a DICOM header
+ S X="Image "_IMAGEIEN_"/"_IMAGECNT_": "_FILEDCM
+ D MESSAGE^MAGDMLOG(2,0,X,"TV")
+ S X=$$GETDIR^MAGOSDIR(FILEDCM)
+ I 'X W "  (not on file)" Q  ; not on file
+ I X<0 W " *** FILE ERROR: ",X," ***" Q  ; error
+ S FILE=$RE($P($RE(FILEDCM),"\"))
+ S FILESIZE=$P($G(^TMP("MAG",$J,"DIR LIST",FILE)),";")
+ S QUEUEIN("FILE")=FILEDCM,(ODEVNAME,ODEVTYPE)="",INODE="IN"
+ D ^MAGDDR2 ; read the control group 0 dicom file
+ ;
+ ; create the COMMAND message, with the SOP Class / Instance UIDs
+ D MSGINIT^MAGDFCNS ; Initialize the ^TMP global for this message
+ ;
+ ; copy Affected SOP Class UID
+ S Y=$$GETDATA^MAGDFCNS(INODE,"0008,0016",1,1)
+ D SAVE^MAGDFCNS("0000,0002",Y)
+ S ICUID=Y ; Implementation Class UID (needed for association)
+ ;
+ D SAVE^MAGDFCNS("0000,0110",1) ; Message ID
+ D SAVE^MAGDFCNS("0000,0700",0) ; Priority
+ ;
+ ; copy Affected SOP Instance UID
+ S Y=$$GETDATA^MAGDFCNS(INODE,"0008,0018",1,1)
+ D SAVE^MAGDFCNS("0000,1000",Y)
+ ;
+ ; Move Originator Application Entity Title
+ D SAVE^MAGDFCNS("0000,1030","VISTA_STORAGE")
+ ;
+ D SAVE^MAGDFCNS("0000,1031",1) ; Move Originator Msg ID
+ ;
+ S MESSAGE="C-STORE REQUEST",MSGHANDL="NO MESSAGE HANDLE YET"
+ S TEMPLATE=$O(^MAGDICOM(2006.52,"B",MESSAGE,""))
+ I TEMPLATE="" D  Q
+ . D MESSAGE^MAGDMLOG(1,0,"Undefined Message Template: "_MESSAGE,"VB")
+ . Q
+ ;
+ ; create the COMMAND message
+ ;
+ S FBSWITCH="FOREGROUND",CHANNEL=1,MULTIMSG=""
+ S FILEMODE="IMAGE COMMAND" ; used in ^MAGDDW2 to skip "length to end"
+ S QUEUEOUT("FILE")=PATH_"\COMMAND_"_$J_".DCM" ; create the COMMAND message
+ S EXPLICIT=0 D OUTPUT^MAGDDW2
+ Q
+ ;
+RELEASE ; release the association
+ S X="END_ASSOCIATION "_PATH_"\RELEASE_"_$J_".OUT "_PATH_"\RELEASE_"_$J_".IN"
+ D SEND^MAGDCST2("",PORT,X)
+ S NETERROR=$$RECV^MAGDCST2("",PORT,.X)
+ I NETERROR D ERRORMSG^MAGDCST1("Network error 1") Q
+ Q:X="ASSOCIATION ENDED"
+ N MSG
+ S MSG(1)="Unexpected Response"
+ S MSG(2)="Expected ""ASSOCIATION ENDED"", Received """_X_"""."
+ D TRAPERR^MAGDSTRT(1,$T(+0),"ERROR IN VISTA SEND IMAGE",.MSG)
+ Q  ; Error trap does not return
+ ;
+DISCON ; disconnect from the DICOM SCP
+ D SEND^MAGDCST2("",PORT,"END_SESSION") ; terminate the session
+ S STATUS=$$TCPCLOSE^MAGOSTCP("",PORT)
+ I $$USEPRIN^MAGOSFIL(1)
+ Q

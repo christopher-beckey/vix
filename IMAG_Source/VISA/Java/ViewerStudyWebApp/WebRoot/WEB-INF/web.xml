@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
+  <display-name></display-name>
+  <welcome-file-list>
+    <welcome-file>index.jsp</welcome-file>
+  </welcome-file-list>
+  
+	<context-param>
+	    <param-name>contextConfigLocation</param-name>
+	 	<param-value>/WEB-INF/applicationContext.xml</param-value>
+	 </context-param>
+
+  <listener>
+    <description>
+			The Spring servlet context listener that loads the
+			application context.
+	</description>
+    <display-name>Spring context loader listener</display-name>
+    <listener-class>
+			org.springframework.web.context.ContextLoaderListener
+	</listener-class>
+  </listener>
+  
+  <filter>
+    <description>
+			Sets the security context on the request and clears it on
+			the response.
+	</description>
+    <display-name>Security Context Creation and Destruction</display-name>
+    <filter-name>SecurityFilter</filter-name>
+    <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+    <init-param>
+      <param-name>targetBeanName</param-name>
+      <param-value>securityFilter</param-value>
+    </init-param>
+  </filter>
+  
+  <filter>
+    <filter-name>TokenFilter</filter-name>
+    <filter-class>gov.va.med.imaging.tomcat.vistarealm.encryption.TokenFilter</filter-class>
+  </filter>
+
+  <filter>
+    <filter-name>StsFilter</filter-name>
+    <filter-class>gov.va.med.imaging.StsFilter</filter-class>
+  </filter>
+  
+  <servlet>
+    <display-name>JAX-RS REST Servlet</display-name>
+    <servlet-name>JAX-RS REST Servlet</servlet-name>
+    <servlet-class>
+	  		com.sun.jersey.spi.container.servlet.ServletContainer
+	</servlet-class>
+    <init-param>
+      <param-name>com.sun.jersey.config.property.packages</param-name>
+      <param-value>gov.va.med.imaging.web.rest.exceptions;gov.va.med.imaging.study.web.rest</param-value>
+    </init-param>
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+  
+  <servlet>
+    <servlet-name>ImageServlet</servlet-name>
+    <servlet-class>gov.va.med.imaging.study.web.images.ImageServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>TextServlet</servlet-name>
+    <servlet-class>gov.va.med.imaging.study.web.images.TextServlet</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+    <servlet-name>JAX-RS REST Servlet</servlet-name>
+    <url-pattern>/restservices/*</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>JAX-RS REST Servlet</servlet-name>
+    <url-pattern>/token/restservices/*</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>JAX-RS REST Servlet</servlet-name>
+    <url-pattern>/sts/restservices/*</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>ImageServlet</servlet-name>
+    <url-pattern>/image</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>ImageServlet</servlet-name>
+    <url-pattern>/token/image</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>ImageServlet</servlet-name>
+    <url-pattern>/sts/image</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>TextServlet</servlet-name>
+    <url-pattern>/text</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>TextServlet</servlet-name>
+    <url-pattern>/token/text</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>TextServlet</servlet-name>
+    <url-pattern>/sts/text</url-pattern>
+  </servlet-mapping>
+  
+  <filter-mapping>
+    <filter-name>TokenFilter</filter-name>
+    <url-pattern>/token/*</url-pattern>
+  </filter-mapping>
+  <filter-mapping>
+    <filter-name>StsFilter</filter-name>
+    <url-pattern>/sts/*</url-pattern>
+  </filter-mapping>
+  <filter-mapping>
+    <filter-name>SecurityFilter</filter-name>
+    <servlet-name>JAX-RS REST Servlet</servlet-name>
+  </filter-mapping>
+  <filter-mapping>
+    <filter-name>SecurityFilter</filter-name>
+    <servlet-name>ImageServlet</servlet-name>
+  </filter-mapping>
+  <filter-mapping>
+    <filter-name>SecurityFilter</filter-name>
+    <servlet-name>TextServlet</servlet-name>
+  </filter-mapping>
+  
+  <security-constraint>
+    <display-name>StudyConstraint</display-name>
+    <web-resource-collection>
+      <web-resource-name>ViewerStudyService</web-resource-name>
+      <description>Access to methods is restricted to known user roles</description>
+      <url-pattern>/restservices/*</url-pattern>
+      <url-pattern>/image</url-pattern>
+      <url-pattern>/text</url-pattern>
+    </web-resource-collection>
+    <auth-constraint>
+      <role-name>clinical-display-user</role-name>
+      <role-name>vista-user</role-name>
+	  <role-name>administrator</role-name>
+    </auth-constraint>
+    <user-data-constraint>
+      <description>
+				The transport does not have to be guaranteed just the
+				user authenticated
+	  </description>
+      <transport-guarantee>NONE</transport-guarantee>
+    </user-data-constraint>
+  </security-constraint>
+
+  <!--Null security constraint-->
+  <security-constraint>
+    <display-name>Null Security Constraint</display-name>
+    <web-resource-collection>
+      <web-resource-name>Viewer Study Service</web-resource-name>
+      <description>Null filter; should affect no calls</description>
+      <url-pattern>/nullfilter/*</url-pattern>
+    </web-resource-collection>
+    <auth-constraint>
+      <role-name>clinical-display-user</role-name>
+      <role-name>vista-user</role-name>
+      <role-name>administrator</role-name>
+    </auth-constraint>
+    <user-data-constraint>
+      <transport-guarantee>NONE</transport-guarantee>
+    </user-data-constraint>
+  </security-constraint>
+  
+  <login-config>
+    <auth-method>BASIC</auth-method>
+  </login-config>
+  
+  <security-role>
+    <description>
+			A user of the clinical display application
+		</description>
+    <role-name>clinical-display-user</role-name>
+  </security-role>
+  <security-role>
+    <description>
+			A VistaImaging user authenticated against VistaImaging
+		</description>
+    <role-name>vista-user</role-name>
+  </security-role>
+  <security-role>
+    <description>Administrator / log viewing</description>
+    <role-name>administrator</role-name>
+  </security-role>
+</web-app>

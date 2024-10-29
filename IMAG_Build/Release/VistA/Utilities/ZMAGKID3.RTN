@@ -1,0 +1,48 @@
+Cache for Windows^INT^^~Format=Cache.S~
+%RO on 10 Sep 2012   1:39 PM
+ZMAGKID3^INT^1^62705,35712^0
+ZMAGKID3 ;WOIFO/BT,NST -  Load and Install KIDS
+ ;
+ Q 
+ ; It loads KIDS files listed in file FIL
+LOADINST(FILENAME)
+ K ^TMP("ZMAGKID3",$J)
+ S ^TMP("ZMAGKID3",$J)=FILENAME
+ N PATH S PATH=$P(FILENAME,"\",1,$L(FILENAME,"\")-1)
+ ;
+ N LSTZT S LSTZT=$ZT
+ S $ZT="ENDFIL^ZMAGKID3"
+ N KIDFILE
+ ;
+ O FILENAME:"R"
+ ;
+ N CNT S CNT=0
+ F  U FILENAME R KIDFILE D
+ . S CNT=CNT+1
+ . S ^TMP("ZMAGKID3",$J,CNT)=PATH_"\"_KIDFILE
+ . Q
+ Q	
+ENDFIL
+ S $ZT=LSTZT
+ C FILENAME
+ K ^XTMP("XPDI")
+ F  D  Q:$G(XPDQUIT)  
+ . D DUZ^XUP(126)
+ . D EN1^ZMAGXPDIL  ; Load the KID
+ . I $G(XPDQUIT) Q
+ . D EN^XPDI        ; Install the patch
+ . Q
+ K ^TMP("ZMAGKID3",$J)
+ Q
+ ;
+ ; NST
+GETNEXT() ; Get next patch to install
+	N NEXT
+	S NEXT=$O(^TMP("ZMAGKID3",$J,$P(^TMP("ZMAGKID3",$J),"^",3)))
+	I NEXT="" Q "^"
+	S $P(^TMP("ZMAGKID3",$J),"^",3)=NEXT
+	U IO(0) W !,"File name: ",^TMP("ZMAGKID3",$J,NEXT)
+	Q ^TMP("ZMAGKID3",$J,NEXT)
+
+
+

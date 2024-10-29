@@ -1,0 +1,2 @@
+This is is URL Connection Handler for the AWIV protocol.
+The sole function of the AWIV protocol is to allow testing of the AWIC web service server implementation, it is not expected to be a deployed component.

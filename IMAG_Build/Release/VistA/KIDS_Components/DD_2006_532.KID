@@ -1,0 +1,522 @@
+KIDS Distribution saved on Jul 26, 2012@08:58:38
+Split from GOLD - last patch SEQ81_P120
+**KIDS**:MAG*3.0*350_DD*2006.532^
+
+**INSTALL NAME**
+MAG*3.0*350_DD*2006.532
+"BLD",7753,0)
+MAG*3.0*350_DD*2006.532^IMAGING^0^3120726^n
+"BLD",7753,4,0)
+^9.64PA^2006.532^1
+"BLD",7753,4,2006.532,0)
+2006.532
+"BLD",7753,4,2006.532,222)
+y^y^f^^^^y
+"BLD",7753,4,"B",2006.532,2006.532)
+
+"BLD",7753,6.3)
+1
+"BLD",7753,"KRN",0)
+^9.67PA^779.2^20
+"BLD",7753,"KRN",.4,0)
+.4
+"BLD",7753,"KRN",.401,0)
+.401
+"BLD",7753,"KRN",.402,0)
+.402
+"BLD",7753,"KRN",.403,0)
+.403
+"BLD",7753,"KRN",.5,0)
+.5
+"BLD",7753,"KRN",.84,0)
+.84
+"BLD",7753,"KRN",3.6,0)
+3.6
+"BLD",7753,"KRN",3.8,0)
+3.8
+"BLD",7753,"KRN",9.2,0)
+9.2
+"BLD",7753,"KRN",9.8,0)
+9.8
+"BLD",7753,"KRN",19,0)
+19
+"BLD",7753,"KRN",19.1,0)
+19.1
+"BLD",7753,"KRN",101,0)
+101
+"BLD",7753,"KRN",409.61,0)
+409.61
+"BLD",7753,"KRN",771,0)
+771
+"BLD",7753,"KRN",779.2,0)
+779.2
+"BLD",7753,"KRN",870,0)
+870
+"BLD",7753,"KRN",8989.51,0)
+8989.51
+"BLD",7753,"KRN",8989.52,0)
+8989.52
+"BLD",7753,"KRN",8994,0)
+8994
+"BLD",7753,"KRN","B",.4,.4)
+
+"BLD",7753,"KRN","B",.401,.401)
+
+"BLD",7753,"KRN","B",.402,.402)
+
+"BLD",7753,"KRN","B",.403,.403)
+
+"BLD",7753,"KRN","B",.5,.5)
+
+"BLD",7753,"KRN","B",.84,.84)
+
+"BLD",7753,"KRN","B",3.6,3.6)
+
+"BLD",7753,"KRN","B",3.8,3.8)
+
+"BLD",7753,"KRN","B",9.2,9.2)
+
+"BLD",7753,"KRN","B",9.8,9.8)
+
+"BLD",7753,"KRN","B",19,19)
+
+"BLD",7753,"KRN","B",19.1,19.1)
+
+"BLD",7753,"KRN","B",101,101)
+
+"BLD",7753,"KRN","B",409.61,409.61)
+
+"BLD",7753,"KRN","B",771,771)
+
+"BLD",7753,"KRN","B",779.2,779.2)
+
+"BLD",7753,"KRN","B",870,870)
+
+"BLD",7753,"KRN","B",8989.51,8989.51)
+
+"BLD",7753,"KRN","B",8989.52,8989.52)
+
+"BLD",7753,"KRN","B",8994,8994)
+
+"DATA",2006.532,1,0)
+1.2.840.10008.5.1.4.1.1.1^Computed Radiography Image Storage^^A
+"DATA",2006.532,2,0)
+1.2.840.10008.5.1.4.1.1.1.1^Digital X-Ray Image Storage - For Presentation^1^A
+"DATA",2006.532,3,0)
+1.2.840.10008.5.1.4.1.1.1.1.1^Digital X-Ray Image Storage - For Processing^^A
+"DATA",2006.532,4,0)
+1.2.840.10008.5.1.4.1.1.1.2^Digital Mammography X-Ray Image Storage - For Presentation^^A
+"DATA",2006.532,5,0)
+1.2.840.10008.5.1.4.1.1.1.2.1^Digital Mammography X-Ray Image Storage - For Processing^^A
+"DATA",2006.532,6,0)
+1.2.840.10008.5.1.4.1.1.1.3^Digital Intra-oral X-Ray Image Storage - For Presentation^^A
+"DATA",2006.532,7,0)
+1.2.840.10008.5.1.4.1.1.1.3.1^Digital Intra-oral X-Ray Image Storage - For Processing^^A
+"DATA",2006.532,8,0)
+1.2.840.10008.5.1.4.1.1.2^CT Image Storage^^A
+"DATA",2006.532,9,0)
+1.2.840.10008.5.1.4.1.1.3^Ultrasound Multi-frame Image Storage (Retired)^^A
+"DATA",2006.532,10,0)
+1.2.840.10008.5.1.4.1.1.3.1^Ultrasound Multi-frame Image Storage^^A
+"DATA",2006.532,11,0)
+1.2.840.10008.5.1.4.1.1.4^MR Image Storage^^A
+"DATA",2006.532,12,0)
+1.2.840.10008.5.1.4.1.1.5^Nuclear Medicine Image Storage (Retired)^^A
+"DATA",2006.532,13,0)
+1.2.840.10008.5.1.4.1.1.6^Ultrasound Image Storage (Retired)^^A
+"DATA",2006.532,14,0)
+1.2.840.10008.5.1.4.1.1.6.1^Ultrasound Image Storage^^A
+"DATA",2006.532,15,0)
+1.2.840.10008.5.1.4.1.1.7^Secondary Capture Image Storage^^A
+"DATA",2006.532,16,0)
+1.2.840.10008.5.1.4.1.1.7.1^Multi-frame Single Bit Secondary Capture Image Storage^15^A
+"DATA",2006.532,17,0)
+1.2.840.10008.5.1.4.1.1.7.2^Multi-frame Grayscale Byte Secondary Capture Image Storage^15^A
+"DATA",2006.532,18,0)
+1.2.840.10008.5.1.4.1.1.7.3^Multi-frame Grayscale Word Secondary Capture Image Storage^15^A
+"DATA",2006.532,19,0)
+1.2.840.10008.5.1.4.1.1.7.4^Multi-frame True Color Secondary Capture Image Storage^15^A
+"DATA",2006.532,20,0)
+1.2.840.10008.5.1.4.1.1.8^Standalone Overlay Storage^^A
+"DATA",2006.532,21,0)
+1.2.840.10008.5.1.4.1.1.9^Standalone Curve Storage^^A
+"DATA",2006.532,22,0)
+1.2.840.10008.5.1.4.1.1.9.1.1^12-lead ECG Waveform Storage^^A
+"DATA",2006.532,23,0)
+1.2.840.10008.5.1.4.1.1.9.1.2^General ECG Waveform Storage^^A
+"DATA",2006.532,24,0)
+1.2.840.10008.5.1.4.1.1.9.1.3^Ambulatory ECG Waveform Storage^^A
+"DATA",2006.532,25,0)
+1.2.840.10008.5.1.4.1.1.9.2.1^Hemodynamic Waveform Storage^^A
+"DATA",2006.532,26,0)
+1.2.840.10008.5.1.4.1.1.9.3.1^Cardiac Electrophysiology Waveform Storage^^A
+"DATA",2006.532,27,0)
+1.2.840.10008.5.1.4.1.1.9.4.1^Basic Voice Audio Waveform Storage^^A
+"DATA",2006.532,28,0)
+1.2.840.10008.5.1.4.1.1.10^Standalone Modality LUT Storage^^A
+"DATA",2006.532,29,0)
+1.2.840.10008.5.1.4.1.1.11^Standalone VOI LUT Storage^^A
+"DATA",2006.532,30,0)
+1.2.840.10008.5.1.4.1.1.11.1^Grayscale Softcopy Presentation State Storage SOP Class^^A
+"DATA",2006.532,31,0)
+1.2.840.10008.5.1.4.1.1.12.1^X-Ray Angiographic Image Storage^^A
+"DATA",2006.532,32,0)
+1.2.840.10008.5.1.4.1.1.12.2^X-Ray Radiofluoroscopic Image Storage^^A
+"DATA",2006.532,33,0)
+1.2.840.10008.5.1.4.1.1.12.3^X-Ray Angiographic Bi-Plane Image Storage (Retired)^^A
+"DATA",2006.532,34,0)
+1.2.840.10008.5.1.4.1.1.20^Nuclear Medicine Image Storage^^A
+"DATA",2006.532,35,0)
+1.2.840.10008.5.1.4.1.1.66^Raw Data Storage^^A
+"DATA",2006.532,36,0)
+1.2.840.10008.5.1.4.1.1.66.1^Spatial Registration Storage^^A
+"DATA",2006.532,37,0)
+1.2.840.10008.5.1.4.1.1.66.2^Spatial Fiducials Storage^^A
+"DATA",2006.532,38,0)
+1.2.840.10008.5.1.4.1.1.77.1^VL Image Storage (Retired)^^A
+"DATA",2006.532,39,0)
+1.2.840.10008.5.1.4.1.1.77.2^VL Multi-frame Image Storage (Retired)^^A
+"DATA",2006.532,40,0)
+1.2.840.10008.5.1.4.1.1.77.1.1^VL Endoscopic Image Storage^^A
+"DATA",2006.532,41,0)
+1.2.840.10008.5.1.4.1.1.77.1.1.1^Video Endoscopic Image Storage^^A
+"DATA",2006.532,42,0)
+1.2.840.10008.5.1.4.1.1.77.1.2^VL Microscopic Image Storage^^A
+"DATA",2006.532,43,0)
+1.2.840.10008.5.1.4.1.1.77.1.2.1^Video Microscopic Image Storage^^A
+"DATA",2006.532,44,0)
+1.2.840.10008.5.1.4.1.1.77.1.3^VL Slide-Coordinates Microscopic Image Storage^^A
+"DATA",2006.532,45,0)
+1.2.840.10008.5.1.4.1.1.77.1.4^VL Photographic Image Storage^^A
+"DATA",2006.532,46,0)
+1.2.840.10008.5.1.4.1.1.77.1.4.1^Video Photographic Image Storage^^A
+"DATA",2006.532,47,0)
+1.2.840.10008.5.1.4.1.1.77.1.5.1^Ophthalmic Photography 8 Bit Image Storage^^A
+"DATA",2006.532,48,0)
+1.2.840.10008.5.1.4.1.1.77.1.5.2^Ophthalmic Photography 16 Bit Image Storage^47^A
+"DATA",2006.532,49,0)
+1.2.840.10008.5.1.4.1.1.77.1.5.3^Stereometric Relationship Storage^^A
+"DATA",2006.532,50,0)
+1.2.840.10008.5.1.4.1.1.88.40^Procedure Log Storage^^A
+"DATA",2006.532,51,0)
+1.2.840.10008.5.1.4.1.1.128^Positron Emission Tomography Image Storage^^A
+"DATA",2006.532,52,0)
+1.2.840.10008.5.1.4.1.1.129^Standalone PET Curve Storage^^A
+"DATA",2006.532,53,0)
+1.2.840.10008.5.1.4.1.1.481.1^RT Image Storage^^A
+"DATA",2006.532,54,0)
+1.2.840.10008.5.1.4.1.1.481.2^RT Dose Storage^^A
+"DATA",2006.532,55,0)
+1.2.840.10008.5.1.4.1.1.481.3^RT Structure Set Storage^^A
+"DATA",2006.532,56,0)
+1.2.840.10008.5.1.4.1.1.481.4^RT Beams Treatment Record Storage^^A
+"DATA",2006.532,57,0)
+1.2.840.10008.5.1.4.1.1.481.5^RT Plan Storage^^A
+"DATA",2006.532,58,0)
+1.2.840.10008.5.1.4.1.1.481.6^RT Brachy Treatment Record Storage^^A
+"DATA",2006.532,59,0)
+1.2.840.10008.5.1.4.1.1.481.7^RT Treatment Summary Record Storage^^A
+"FIA",2006.532)
+DICOM SOP CLASS
+"FIA",2006.532,0)
+^MAG(2006.532,
+"FIA",2006.532,0,0)
+2006.532
+"FIA",2006.532,0,1)
+y^y^f^^^^y
+"FIA",2006.532,0,10)
+
+"FIA",2006.532,0,11)
+
+"FIA",2006.532,0,"RLRO")
+
+"FIA",2006.532,0,"VR")
+3.0^MAG
+"FIA",2006.532,2006.532)
+0
+"IX",2006.532,2006.532,"B",0)
+2006.532^B^Non-truncated B cross-reference^R^^F^IR^I^2006.532^^^^^LS
+"IX",2006.532,2006.532,"B",.1,0)
+^^3^3^3050111^
+"IX",2006.532,2006.532,"B",.1,1,0)
+The standard cross-reference truncates the value to 30 characters.
+"IX",2006.532,2006.532,"B",.1,2,0)
+This version of the cross-reference uses all (up to 64) characters of the
+"IX",2006.532,2006.532,"B",.1,3,0)
+value.
+"IX",2006.532,2006.532,"B",1)
+S ^MAG(2006.532,"B",X,DA)=""
+"IX",2006.532,2006.532,"B",2)
+K ^MAG(2006.532,"B",X,DA)
+"IX",2006.532,2006.532,"B",2.5)
+K ^MAG(2006.532,"B")
+"IX",2006.532,2006.532,"B",11.1,0)
+^.114IA^1^1
+"IX",2006.532,2006.532,"B",11.1,1,0)
+1^F^2006.532^.01^^1^F
+"IX",2006.532,2006.532,"B",11.1,1,3)
+
+"IX",2006.532,2006.532,"C",0)
+2006.532^C^Cross Reference by SOP Class Name^R^^F^IR^I^2006.532^^^^^LS
+"IX",2006.532,2006.532,"C",.1,0)
+^^2^2^3050114^
+"IX",2006.532,2006.532,"C",.1,1,0)
+ 
+"IX",2006.532,2006.532,"C",.1,2,0)
+Trace SOP Class by name.
+"IX",2006.532,2006.532,"C",1)
+S ^MAG(2006.532,"C",X,DA)=""
+"IX",2006.532,2006.532,"C",2)
+K ^MAG(2006.532,"C",X,DA)
+"IX",2006.532,2006.532,"C",2.5)
+K ^MAG(2006.532,"C")
+"IX",2006.532,2006.532,"C",11.1,0)
+^.114IA^1^1
+"IX",2006.532,2006.532,"C",11.1,1,0)
+1^F^2006.532^2^^1^F
+"IX",2006.532,2006.532,"C",11.1,1,3)
+
+"MBREQ")
+0
+"PKG",454,-1)
+1^1
+"PKG",454,0)
+IMAGING^MAG^Imaging-V1 to release 
+"PKG",454,20,0)
+^9.402P^^
+"PKG",454,22,0)
+^9.49I^1^1
+"PKG",454,22,1,0)
+3.0^3020319^3020517^126
+"PKG",454,22,1,"PAH",1,0)
+350_DD^3120726
+"QUES","XPF1",0)
+Y
+"QUES","XPF1","??")
+^D REP^XPDH
+"QUES","XPF1","A")
+Shall I write over your |FLAG| File
+"QUES","XPF1","B")
+YES
+"QUES","XPF1","M")
+D XPF1^XPDIQ
+"QUES","XPF2",0)
+Y
+"QUES","XPF2","??")
+^D DTA^XPDH
+"QUES","XPF2","A")
+Want my data |FLAG| yours
+"QUES","XPF2","B")
+YES
+"QUES","XPF2","M")
+D XPF2^XPDIQ
+"QUES","XPI1",0)
+YO
+"QUES","XPI1","??")
+^D INHIBIT^XPDH
+"QUES","XPI1","A")
+Want KIDS to INHIBIT LOGONs during the install
+"QUES","XPI1","B")
+NO
+"QUES","XPI1","M")
+D XPI1^XPDIQ
+"QUES","XPM1",0)
+PO^VA(200,:EM
+"QUES","XPM1","??")
+^D MG^XPDH
+"QUES","XPM1","A")
+Enter the Coordinator for Mail Group '|FLAG|'
+"QUES","XPM1","B")
+
+"QUES","XPM1","M")
+D XPM1^XPDIQ
+"QUES","XPO1",0)
+Y
+"QUES","XPO1","??")
+^D MENU^XPDH
+"QUES","XPO1","A")
+Want KIDS to Rebuild Menu Trees Upon Completion of Install
+"QUES","XPO1","B")
+NO
+"QUES","XPO1","M")
+D XPO1^XPDIQ
+"QUES","XPZ1",0)
+Y
+"QUES","XPZ1","??")
+^D OPT^XPDH
+"QUES","XPZ1","A")
+Want to DISABLE Scheduled Options, Menu Options, and Protocols
+"QUES","XPZ1","B")
+NO
+"QUES","XPZ1","M")
+D XPZ1^XPDIQ
+"QUES","XPZ2",0)
+Y
+"QUES","XPZ2","??")
+^D RTN^XPDH
+"QUES","XPZ2","A")
+Want to MOVE routines to other CPUs
+"QUES","XPZ2","B")
+NO
+"QUES","XPZ2","M")
+D XPZ2^XPDIQ
+"SEC","^DIC",2006.532,2006.532,0,"AUDIT")
+@
+"SEC","^DIC",2006.532,2006.532,0,"DD")
+@
+"SEC","^DIC",2006.532,2006.532,0,"DEL")
+@
+"SEC","^DIC",2006.532,2006.532,0,"LAYGO")
+@
+"SEC","^DIC",2006.532,2006.532,0,"RD")
+@
+"SEC","^DIC",2006.532,2006.532,0,"WR")
+@
+"VER")
+8.0^22.0
+"^DD",2006.532,2006.532,0)
+FIELD^^4^4
+"^DD",2006.532,2006.532,0,"DT")
+3050114
+"^DD",2006.532,2006.532,0,"NM","DICOM SOP CLASS")
+
+"^DD",2006.532,2006.532,0,"PT",2005,251)
+
+"^DD",2006.532,2006.532,0,"PT",2005.1,251)
+
+"^DD",2006.532,2006.532,0,"PT",2006.532,3)
+
+"^DD",2006.532,2006.532,.01,0)
+SOP CLASS UID^RF^^0;1^K:$L(X)>64!($L(X)<1)!'($TR(X,"1234567890.")="") X
+"^DD",2006.532,2006.532,.01,1,0)
+^.1^^0
+"^DD",2006.532,2006.532,.01,3)
+Enter the SOP Class that was used to acquire an image.
+"^DD",2006.532,2006.532,.01,21,0)
+^^6^6^3050111^
+"^DD",2006.532,2006.532,.01,21,1,0)
+The value of this field is a DICOM UID.
+"^DD",2006.532,2006.532,.01,21,2,0)
+A unique identifier (UID) in DICOM is a string of up to 64 characters
+"^DD",2006.532,2006.532,.01,21,3,0)
+long that consists of only digits and periods.
+"^DD",2006.532,2006.532,.01,21,4,0)
+ 
+"^DD",2006.532,2006.532,.01,21,5,0)
+The UIDs that are stored in this file identify the SOP Classes
+"^DD",2006.532,2006.532,.01,21,6,0)
+that are being used for Image Acquisition.
+"^DD",2006.532,2006.532,.01,"DT")
+3050111
+"^DD",2006.532,2006.532,2,0)
+SOP CLASS NAME^RF^^0;2^K:$L(X)>100!($L(X)<1) X
+"^DD",2006.532,2006.532,2,3)
+Enter the name of this SOP Class.
+"^DD",2006.532,2006.532,2,21,0)
+^^4^4^3050114^
+"^DD",2006.532,2006.532,2,21,1,0)
+The value of this field is a string. This string identifies
+"^DD",2006.532,2006.532,2,21,2,0)
+a DICOM SOP Class.
+"^DD",2006.532,2006.532,2,21,3,0)
+ 
+"^DD",2006.532,2006.532,2,21,4,0)
+Valid names for SOP Classes are defined in the DICOM Standard.
+"^DD",2006.532,2006.532,2,"DT")
+3050114
+"^DD",2006.532,2006.532,3,0)
+EQUIVALENCE CLASS^P2006.532'^MAG(2006.532,^0;3^Q
+"^DD",2006.532,2006.532,3,3)
+If there is an equivalent SOP Class, enter its identification.
+"^DD",2006.532,2006.532,3,21,0)
+^^6^6^3050114^
+"^DD",2006.532,2006.532,3,21,1,0)
+The value of this field is a pointer to another entry in this same table.
+"^DD",2006.532,2006.532,3,21,2,0)
+If the SOP Class that is described in the current record is
+"^DD",2006.532,2006.532,3,21,3,0)
+equivalent to another one, the value of this field identifies
+"^DD",2006.532,2006.532,3,21,4,0)
+this other SOP Class.
+"^DD",2006.532,2006.532,3,21,5,0)
+ 
+"^DD",2006.532,2006.532,3,21,6,0)
+If there is no equivalent SOP Class, this field is empty.
+"^DD",2006.532,2006.532,3,"DT")
+3050114
+"^DD",2006.532,2006.532,4,0)
+ACTIVE^RS^A:Active;R:Retired;^0;4^Q
+"^DD",2006.532,2006.532,4,3)
+Indicate whether the current entry is Active or Retired.
+"^DD",2006.532,2006.532,4,21,0)
+^^6^6^3050114^
+"^DD",2006.532,2006.532,4,21,1,0)
+The value of this field is a code that indicates whether the
+"^DD",2006.532,2006.532,4,21,2,0)
+SOP Class that is described in the current entry is active or
+"^DD",2006.532,2006.532,4,21,3,0)
+retired.
+"^DD",2006.532,2006.532,4,21,4,0)
+ 
+"^DD",2006.532,2006.532,4,21,5,0)
+Retired entries cannot be removed from this table (because
+"^DD",2006.532,2006.532,4,21,6,0)
+they may still be "pointed to").
+"^DD",2006.532,2006.532,4,"DT")
+3050114
+"^DIC",2006.532,2006.532,0)
+DICOM SOP CLASS^2006.532
+"^DIC",2006.532,2006.532,0,"GL")
+^MAG(2006.532,
+"^DIC",2006.532,2006.532,"%D",0)
+^^23^23^3050111^^
+"^DIC",2006.532,2006.532,"%D",1,0)
+ +---------------------------------------------------------------+
+"^DIC",2006.532,2006.532,"%D",2,0)
+ |                                                               |
+"^DIC",2006.532,2006.532,"%D",3,0)
+ | Property of the US Government.                                |
+"^DIC",2006.532,2006.532,"%D",4,0)
+ | No permission to copy or redistribute this software is given. |
+"^DIC",2006.532,2006.532,"%D",5,0)
+ | Use of unreleased versions of this software requires the user |
+"^DIC",2006.532,2006.532,"%D",6,0)
+ | to execute a written test agreement with the VistA Imaging    |
+"^DIC",2006.532,2006.532,"%D",7,0)
+ | Development Office of the Department of Veterans Affairs,     |
+"^DIC",2006.532,2006.532,"%D",8,0)
+ | telephone (301) 734-0100.                                     |
+"^DIC",2006.532,2006.532,"%D",9,0)
+ |                                                               |
+"^DIC",2006.532,2006.532,"%D",10,0)
+ | The Food and Drug Administration classifies this software as  |
+"^DIC",2006.532,2006.532,"%D",11,0)
+ | a medical device.  As such, it may not be changed in any way. |
+"^DIC",2006.532,2006.532,"%D",12,0)
+ | Modifications to this software may result in an adulterated   |
+"^DIC",2006.532,2006.532,"%D",13,0)
+ | medical device under 21CFR820, the use of which is considered |
+"^DIC",2006.532,2006.532,"%D",14,0)
+ | to be a violation of US Federal Statutes.                     |
+"^DIC",2006.532,2006.532,"%D",15,0)
+ |                                                               |
+"^DIC",2006.532,2006.532,"%D",16,0)
+ +---------------------------------------------------------------+
+"^DIC",2006.532,2006.532,"%D",17,0)
+ 
+"^DIC",2006.532,2006.532,"%D",18,0)
+This file will contain a list of unique identifiers for
+"^DIC",2006.532,2006.532,"%D",19,0)
+DICOM SOP Classes.
+"^DIC",2006.532,2006.532,"%D",20,0)
+ 
+"^DIC",2006.532,2006.532,"%D",21,0)
+Each of these UIDs (Unique IDentifiers) corresponds to a
+"^DIC",2006.532,2006.532,"%D",22,0)
+DICOM Service Class that is used for the acquisition of
+"^DIC",2006.532,2006.532,"%D",23,0)
+images.
+"^DIC",2006.532,"B","DICOM SOP CLASS",2006.532)
+
+**END**
+**END**

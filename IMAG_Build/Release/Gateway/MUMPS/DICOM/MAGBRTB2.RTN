@@ -1,0 +1,206 @@
+MAGBRTB2 ;WOIFO/PMK - Program #2 to build image routine master file ; 03/07/2007 09:22
+ ;;3.0;IMAGING;**9,30,51,54**;MAR 19, 2002;;OCT 28, 2009
+ ;; Per VHA Directive 2004-038, this routine should not be modified.
+ ;; +---------------------------------------------------------------+
+ ;; | Property of the US Government.                                |
+ ;; | No permission to copy or redistribute this software is given. |
+ ;; | Use of unreleased versions of this software requires the user |
+ ;; | to execute a written test agreement with the VistA Imaging    |
+ ;; | Development Office of the Department of Veterans Affairs,     |
+ ;; | telephone (301) 734-0100.                                     |
+ ;; | The Food and Drug Administration classifies this software as  |
+ ;; | a medical device.  As such, it may not be changed in any way. |
+ ;; | Modifications to this software may result in an adulterated   |
+ ;; | medical device under 21CFR820, the use of which is considered |
+ ;; | to be a violation of US Federal Statutes.                     |
+ ;; +---------------------------------------------------------------+
+ ;;
+ Q
+ ;
+PASS2 ; parse each rule and convert it into tokens
+ N FATAL
+ S D0=0 F  S D0=$O(^MAGDICOM(2006.59,D0)) Q:'D0  D TWO(D0)  D:FATAL REMOVE(D0)
+ Q
+ ;
+TWO(D0) ;
+ N BRACE,CHAR,DATATYPE,FRAG,FRAGMENT,IFRAG,PAREN,QUOTE,TOKEN
+ ; parse each rule into code fragments
+ S FRAG="",FATAL=0
+ S BRACE=0 ; date/time braces can span lines
+ S D1=0 F  S D1=$O(^MAGDICOM(2006.59,D0,1,D1)) Q:'D1  D  Q:FATAL
+ . S LINE=^MAGDICOM(2006.59,D0,1,D1,0)
+ . S QUOTE=0,PAREN=0 ; "quoted strings" and (lists) must be on one line
+ . F I=1:1:$L(LINE) D  Q:FATAL
+ . . S CHAR=$E(LINE,I),FRAG=FRAG_CHAR
+ . . I QUOTE D  ; within a quoted string, look for ending quote
+ . . . I CHAR="""" S QUOTE=0 ; ending quote
+ . . . E  ; do nothing, just skip over the character literal
+ . . . Q
+ . . E  D  Q:FATAL  ; not within a quoted string
+ . . . I CHAR="""" S QUOTE=1 ; beginning quote
+ . . . E  D  Q:FATAL  ; process non-literal character string text
+ . . . . I CHAR="(" D  ; beginning of action argument list
+ . . . . . S PAREN=PAREN+1
+ . . . . . I PAREN'=1 D ERR^MAGBRTB4(D0,"Unbalanced Parentheses") S FATAL=1 Q
+ . . . . . Q
+ . . . . E  I CHAR=")" D  ; end of action argument list
+ . . . . . S PAREN=PAREN-1
+ . . . . . I PAREN D ERR^MAGBRTB4(D0,"Unbalanced Parentheses") S FATAL=1 Q
+ . . . . . Q
+ . . . . E  I CHAR="{" D  ; beginning of date/time list
+ . . . . . S BRACE=BRACE+1
+ . . . . . I BRACE'=1 D ERR^MAGBRTB4(D0,"Unbalanced DATE/TIME braces") S FATAL=1 Q
+ . . . . . Q
+ . . . . E  I CHAR="}" D  ; end of date/time list
+ . . . . . S BRACE=BRACE-1
+ . . . . . I BRACE D ERR^MAGBRTB4(D0,"Unbalanced DATE/TIME braces") S FATAL=1 Q
+ . . . . . Q
+ . . . . E  I CHAR="," D  ; condition delimiter
+ . . . . . I PAREN Q  ; ignore comma delimiters in action arguments
+ . . . . . S $E(FRAG,$L(FRAG))=""
+ . . . . . D PUTFRAG S FRAG=""
+ . . . . . Q
+ . . . . E  I CHAR=" " D  ; "when" or "if" delimiter
+ . . . . . I BRACE Q  ; ignore space delimiter in date/time ranges
+ . . . . . S $E(FRAG,$L(FRAG))=""
+ . . . . . D PUTFRAG S FRAG=""
+ . . . . . Q
+ . . . Q
+ . . Q
+ . I 'BRACE,FRAG'="" D PUTFRAG S FRAG=""
+ . Q
+ Q:FATAL
+ ; convert each code fragment into tokens
+ K D1,D2
+ S STATE="ACTION"
+ F I="ACTION","CONDITION","PRIORITY","PRIORSTUDY" S D1(I)=0
+ I '$D(FRAGMENT(0))  D  Q
+ . W !,"Cannot process routing rule:"
+ . W:$G(FRAG)'="" !,FRAG,!
+ . S FATAL=1
+ . Q
+ F IFRAG=1:1:FRAGMENT(0) S FRAG=FRAGMENT(IFRAG) D  Q:FATAL
+ . N FIELD
+ . S FIELD="" F I=1:1:$L(FRAG) S CHAR=$E(FRAG,I) Q:CHAR'?1(1AN,1"_")
+ . I I=$L(FRAG) S FIELD=FRAG,FRAG=""
+ . E  S FIELD=$E(FRAG,1,I-1),$E(FRAG,1,I-1)=""
+ . S FIELD=$$UP(FIELD)
+ . I FIELD="WHEN" S STATE="CONDITION" Q
+ . I FIELD="IF" S STATE="CONDITION" Q
+ . I FIELD="PRIORITY" S STATE="PRIORITY" Q
+ . I FIELD="PRIORSTUDY" S STATE="PRIORSTUDY" Q
+ . S I=0 S:FIELD'="" I=$D(KEYWORD(STATE,FIELD))
+ . I 'I D ERR^MAGBRTB4(D0,"Undefined "_STATE_" Keyword: <<"_FIELD_">>") S FATAL=1 Q
+ . I I=1 S I=KEYWORD(STATE,FIELD)
+ . E  S I=$O(KEYWORD(STATE,FIELD,"")),I=KEYWORD(STATE,FIELD,I)
+ . S DATATYPE=$P(I,"^",1)
+ . ;
+ . ; generate the tokens for each code fragment
+ . S D1(STATE)=D1(STATE)+1,D2(STATE,D1(STATE))=0
+ . S TOKEN(STATE,D1(STATE),0)=FIELD
+ . ;
+ . I STATE="ACTION" D  Q:FATAL
+ . . ; parse an action fragment and get the attributes
+ . . I FRAG="" Q  ; no attributes
+ . . S QUOTE=0,VALUE=""
+ . . I $E(FRAG)'="(" D ERR^MAGBRTB4(D0,"Missing left parenthesis") S FATAL=1 Q
+ . . I $E(FRAG,$L(FRAG))'=")" D ERR^MAGBRTB4(D0,"Missing right parenthesis") S FATAL=1 Q
+ . . S FRAG=$E(FRAG,2,$L(FRAG)-1) ; remove parenthesis
+ . . F J=1:1:$L(FRAG) S CHAR=$E(FRAG,J),VALUE=VALUE_CHAR D
+ . . . I QUOTE D  ; within a quoted string
+ . . . . I CHAR="""" S QUOTE=0 ; ending quote
+ . . . . Q
+ . . . E  D  ; not within a quoted string
+ . . . . I CHAR="""" S QUOTE=1 ; beginning quote
+ . . . . E  I CHAR="," D  ; argument delimiter
+ . . . . . S VALUE=$E(VALUE,1,$L(VALUE)-1) ; strip off trailing comma
+ . . . . . D SAVEARG
+ . . . . . Q
+ . . . . Q
+ . . . Q
+ . . D SAVEARG
+ . . Q
+ . I STATE="PRIORITY" D  Q:FATAL
+ . . N P1,P2
+ . . Q:D1(STATE)<2
+ . . S P1=TOKEN(STATE,1,0),P2=TOKEN(STATE,2,0)
+ . . I P2=P1 K TOKEN(STATE,2,0) S D1(STATE)=1 Q
+ . . D ERR^MAGBRTB4(D0,"Multiple priorities: "_P1_" and "_P2_".") S FATAL=1
+ . . Q
+ . I STATE="PRIORSTUDY" D  Q:FATAL
+ . . N P1,P2
+ . . Q:D1(STATE)<2
+ . . S P1=TOKEN(STATE,1,0),P2=TOKEN(STATE,2,0)
+ . . I P2=P1 K TOKEN(STATE,2,0) S D1(STATE)=1 Q
+ . . D ERR^MAGBRTB4(D0,"Multiple settings for fetching prior studies: "_P1_" and "_P2_".") S FATAL=1
+ . . Q
+ . I STATE="CONDITION" D  Q:FATAL
+ . . N CONDTION
+ . . ; parse a condition fragment
+ . . S TOKEN(STATE,D1(STATE),"DATATYPE")=DATATYPE
+ . . I "<=>"[$E(FRAG) S CONDTION=$E(FRAG),$E(FRAG)="" ; 1 char conditional
+ . . E  I "^<=^>=^!=^"[("^"_$E(FRAG,1,2)_"^") D  ; 2 char conditional
+ . . . S CONDTION=$E(FRAG,1,2)
+ . . . S $E(FRAG,1,2)=""
+ . . . Q
+ . . E  D ERR^MAGBRTB4(D0,"Invalid condition fragment: "_FRAG) S FATAL=1 Q
+ . . S TOKEN(STATE,D1(STATE),"OPERATOR")=CONDTION
+ . . S X=" "_DATATYPE_" "
+ . . I " S CS DS IS LO LT OB OW PN SH ST "[X D  ; string datatype
+ . . . S VALUE=$TR(FRAG,"""")
+ . . . S TOKEN(STATE,D1(STATE),"VALUE")=VALUE
+ . . . Q
+ . . E  I " DT DA TM "[X D  Q:FATAL  ; date or time datatype
+ . . . N DATETIME,MASK,VALUE1,VALUE2
+ . . . I $E(FRAG)'="{" S VALUE=FRAG
+ . . . E  S VALUE=$E(FRAG,2,$L(FRAG)-1)
+ . . . S D2(STATE,D1(STATE))=$L(VALUE,";")
+ . . . F D2=1:1:D2(STATE,D1(STATE)) D  ; check date/time value
+ . . . . S DATETIME=$$UP($P(VALUE,";",D2))
+ . . . . S RETURN=$$PARSE^MAGBRTB3(DATETIME,.VALUE1,.VALUE2,.MASK)
+ . . . . I RETURN<0 D ERR^MAGBRTB4(D0,RETURN) S FATAL=1 Q
+ . . . . S TOKEN(STATE,D1(STATE),1,D2,"BEGIN")=VALUE1
+ . . . . S TOKEN(STATE,D1(STATE),1,D2,"END")=VALUE2
+ . . . . S TOKEN(STATE,D1(STATE),1,D2,"MASK")=MASK
+ . . . . Q
+ . . . Q
+ . . E  D ERR^MAGBRTB4(D0,"Invalid datatype: "_DATATYPE) S FATAL=1 Q
+ . . Q
+ . Q
+ Q:FATAL
+ ;
+ S X="ACTION" S:D1(X) TOKEN(X,0)="^2006.5902^"_D1(X)_"^"_D1(X)
+ S D1="" F  S D1=$O(D2(X,D1)) Q:D1=""  S:D2(X,D1) TOKEN(X,D1,1,0)="^2006.5903^"_D2(X,D1)_"^"_D2(X,D1)
+ ;
+ S X="CONDITION" S:D1(X) TOKEN(X,0)="^2006.5904^"_D1(X)_"^"_D1(X)
+ S D1="" F  S D1=$O(D2(X,D1)) Q:D1=""  S:D2(X,D1) TOKEN(X,D1,1,0)="^2006.5905^"_D2(X,D1)_"^"_D2(X,D1)
+ ;
+ F X="PRIORITY","PRIORSTUDY" D
+ . I D1(X) S VALUE=TOKEN(X,1,0) K TOKEN(X) S TOKEN(X)=VALUE
+ . Q
+ ;
+ M ^MAGDICOM(2006.59,D0)=TOKEN
+ Q
+ ;
+REMOVE(D0) ;
+ Q:'$D(^MAGDICOM(2006.59,D0))
+ K ^MAGDICOM(2006.59,D0)
+ S $P(^MAGDICOM(2006.59,0),"^",4)=$P(^MAGDICOM(2006.59,0),"^",4)-1
+ Q
+ ;
+PUTFRAG ; put each code fragment into the list
+ S FRAGMENT(0)=$G(FRAGMENT(0))+1
+ S FRAGMENT(FRAGMENT(0))=FRAG
+ S $E(LINE,1,I)="" ; remove the code fragment from the line
+ S I=0 ; re-initialize I to start loop looking for next code fragment
+ Q
+ ;
+SAVEARG ; save each argument
+ ; can do datatype checking here
+ S VALUE=$TR(VALUE,"""") ; strip off quotes
+ S D2(STATE,D1(STATE))=D2(STATE,D1(STATE))+1
+ S TOKEN(STATE,D1(STATE),1,D2(STATE,D1(STATE)),0)=VALUE,VALUE=""
+ Q
+ ;
+UP(X) Q $TR(X,"abcdefghijklmnopqrstuvwxyz","ABCDEFGHIJKLMNOPQRSTUVWXYZ")
+ ;

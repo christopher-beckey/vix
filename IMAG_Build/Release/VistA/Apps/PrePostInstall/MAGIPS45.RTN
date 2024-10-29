@@ -1,0 +1,135 @@
+09:50 AM 08/26/2005 
+DICOM Gateway MUMPS routines Build V3.0p51Build720_T22
+MAGIPS45
+MAGIPS45 ;Post init routine to queue site activity at install ; 6 May 2005  12:57 PM
+ ;;3.0;IMAGING;**8,48,63,45**;Jun 02, 2005
+ ;; +---------------------------------------------------------------+
+ ;; | Property of the US Government.                                |
+ ;; | No permission to copy or redistribute this software is given. |
+ ;; | Use of unreleased versions of this software requires the user |
+ ;; | to execute a written test agreement with the VistA Imaging    |
+ ;; | Development Office of the Department of Veterans Affairs,     |
+ ;; | telephone (301) 734-0100.                                     |
+ ;; |                                                               |
+ ;; | The Food and Drug Administration classifies this software as  |
+ ;; | a medical device.  As such, it may not be changed in any way. |
+ ;; | Modifications to this software may result in an adulterated   |
+ ;; | medical device under 21CFR820, the use of which is considered |
+ ;; | to be a violation of US Federal Statutes.                     |
+ ;; +---------------------------------------------------------------+
+ ;;
+ Q
+POST ;
+ N PLC
+ ; create and send the site installation message
+ D REMTASK^MAGQE4
+ D STTASK^MAGQE4
+ D INS(XPDNM,DUZ,$$NOW^XLFDT,XPDA)
+ D NEWRPC
+ D SITECODE
+ D ADDSERV
+ Q
+SITECODE ; If the field SITE CODE in 2006.1 is null, we default it
+ ; to the value of the NameSpace field, for all entries in 2006.1
+ N I
+ S I=0 F  S I=$O(^MAG(2006.1,I)) Q:'I  D
+ . Q:$P(^MAG(2006.1,I,0),"^",9)]""  ; Quit If Site Code Exists
+ . ; Site code is "", so set it equal to CURRENT NAMESPACE
+ . S $P(^MAG(2006.1,I,0),"^",9)=$P(^MAG(2006.1,I,0),"^",2)
+ . Q
+ Q
+ADDSERV ; This adds an entry to the NETWORK LOCATION file for Vista Site Service
+ N SITESRV,I
+ S SITESRV=""
+ I $D(^MAG(2005.2,"B","VISTASITESERVICE")) S SITESRV=$O(^MAG(2005.2,"B","VISTASITESERVICE",""))
+ E  D
+ . N MAGGFDA,MAGXERR,MAGXIEN,PLC
+ . S PLC=$$PLACE^MAGBAPI(DUZ(2)) ; Site Param IEN
+ . I 'PLC D MES^XPDUTL("Site Parameter File needs entry for "_DUZ(2)) Q
+ . S MAGGFDA(2005.2,"+1,",.01)="VISTASITESERVICE"
+ . S MAGGFDA(2005.2,"+1,",1)="http://vhaann26607.v11.med.va.gov/VistaWebSvcs/SiteService.asmx"
+ . S MAGGFDA(2005.2,"+1,",5)="1" ; On-line
+ . S MAGGFDA(2005.2,"+1,",6)="URL" ; Storage Type
+ . ; Add value for Place, if it is in the DataBase 
+ . I $D(^DD(2005.2,".04")) S MAGGFDA(2005.2,"+1,",.04)=PLC
+ . ;
+ . D UPDATE^DIE("","MAGGFDA","MAGXIEN","MAGXERR")
+ . I $D(DIERR) D ADDERR Q
+ . S SITESRV=+MAGXIEN(1)
+ . Q
+ ; Now point the new field in 2006.1 : Vista Site Service
+ ;  (Defined in Patch 45 KIDS)  to the new entry in the Network Location file
+ ;  for all entries in the Site Parameter File.
+ S I=0 F  S I=$O(^MAG(2006.1,I)) Q:'I  D
+ . I $P($G(^MAG(2006.1,I,"NET")),"^",5)="" S $P(^MAG(2006.1,I,"NET"),"^",5)=SITESRV
+ . Q
+ Q
+ADDERR ; Error adding new entry
+ D MES^XPDUTL("Error Adding new entry into NETWORK LOCATION File")
+ D MES^XPDUTL(MAGXERR("DIERR",1,"TEXT",1))
+ Q
+NEWRPC ; Add new RPC's to MAG WINDOWS Option.
+ D ADDRPC("VAFCTFU CONVERT DFN TO ICN","MAG WINDOWS")
+ D ADDRPC("VAFCTFU CONVERT ICN TO DFN","MAG WINDOWS")
+ D ADDRPC("VAFCTFU GET TREATING LIST","MAG WINDOWS")
+ D ADDRPC("VAFCTFU LOCAL ICN","MAG WINDOWS")
+ D ADDRPC("XWB GET BROKER INFO","MAG WINDOWS")
+ D ADDRPC("XWB GET VARIABLE VALUE","MAG WINDOWS")
+ Q 
+ ; We add RPC to MAG WINDOWS Option this way instead of sending Option : MAG WINDOWS
+ ; If we send MAG WINDOWS Option, the last one installed will overwrite others.
+ ; ADDRPC copied from Patch 51, added the call "D MES^XPDUTL(" instead of "W !"
+ADDRPC(RPCNAME,OPTNAME) ;
+ N DA,DIC
+ S DIC="^DIC(19,",DIC(0)="",X=OPTNAME D ^DIC
+ I Y<0 D  Q
+ . D MES^XPDUTL("Cannot add RPC: """_RPCNAME_""" to Option: """_OPTNAME_""".")
+ . D MES^XPDUTL("Cannot find Option: """_OPTNAME_""".")
+ . Q
+ I '$D(^XWB(8994,"B",RPCNAME)) D  Q
+ . D MES^XPDUTL("Cannot add RPC: """_RPCNAME_""" to Option: """_OPTNAME_""".")
+ . D MES^XPDUTL("Cannot find RPC: """_RPCNAME_""".")
+ . Q
+ S DA(1)=+Y
+ S DIC=DIC_DA(1)_",""RPC"","
+ S DIC(0)="L" ; LAYGO should be allowed here
+ S X=RPCNAME
+ D ^DIC
+ I Y<0 D  Q
+ . D MES^XPDUTL("Cannot add RPC: """_RPCNAME_""" to Option: """_OPTNAME_""".")
+ . D MES^XPDUTL("Cannot find RPC: """_RPCNAME_""".")
+ . Q
+ Q
+ ;
+INS(XP,DUZ,DATE,IDA) ;
+ N CT,CNT,COM,D,D0,D1,D2,DDATE,DG,DIC,DICR,DIW,MAGMSG,ST,XMID,XMY
+ D GETENV^%ZOSV
+ S CNT=0
+ S CNT=CNT+1,MAGMSG(CNT)="PACKAGE INSTALL"
+ S CNT=CNT+1,MAGMSG(CNT)="SITE: "_$$KSP^XUPARAM("WHERE")
+ S CNT=CNT+1,MAGMSG(CNT)="PACKAGE: "_XP
+ S CNT=CNT+1,MAGMSG(CNT)="Version: "_$$VER^XPDUTL(XP)
+ S ST=$$GET1^DIQ(9.7,IDA,11,"I")
+ S CNT=CNT+1,MAGMSG(CNT)="Start time: "_$$FMTE^XLFDT(ST)
+ S CT=$$GET1^DIQ(9.7,IDA,17,"I") S:+CT'=CT CT=$$NOW^XLFDT
+ S CNT=CNT+1,MAGMSG(CNT)="Completion time: "_$$FMTE^XLFDT(CT)
+ S CNT=CNT+1,MAGMSG(CNT)="Run time: "_$$FMDIFF^XLFDT(CT,ST,3)
+ S CNT=CNT+1,MAGMSG(CNT)="Environment: "_Y
+ S COM=$$GET1^DIQ(9.7,IDA,6,"I")
+ S CNT=CNT+1,MAGMSG(CNT)="FILE COMMENT: "_COM
+ S CNT=CNT+1,MAGMSG(CNT)="DATE: "_DATE
+ S CNT=CNT+1,MAGMSG(CNT)="Installed by: "_$$GET1^DIQ(9.7,IDA,9,"E")
+ S CNT=CNT+1,MAGMSG(CNT)="Install Name: "_$$GET1^DIQ(9.7,IDA,.01,"E")
+ S DDATE=$$GET1^DIQ(9.7,IDA,51,"I")
+ S CNT=CNT+1,MAGMSG(CNT)="Distribution Date: "_$$FMTE^XLFDT(DDATE)
+ S XMSUB=XP_" INSTALLATION"
+ S XMID=$G(DUZ) S:'XMID XMID=.5
+ S XMY(XMID)=""
+ S XMY("G.MAG SERVER")=""
+ S:$G(MAGDUZ) XMY(MAGDUZ)=""
+ S XMSUB=$E(XMSUB,1,63)
+ D SENDMSG^XMXAPI(XMID,XMSUB,"MAGMSG",.XMY,,.XMZ,)
+ I $G(XMERR) M XMERR=^TMP("XMERR",$J) S $EC=",U13-Cannot send MailMan message,"
+ Q
+
+

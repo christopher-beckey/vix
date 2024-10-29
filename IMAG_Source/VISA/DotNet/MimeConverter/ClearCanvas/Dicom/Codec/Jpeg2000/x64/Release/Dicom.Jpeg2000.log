@@ -1,0 +1,11 @@
+﻿C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\Current\Bin\Microsoft.Common.CurrentVersion.targets(2084,5): warning MSB3245: Could not resolve this reference. Could not locate the assembly "nunit.framework, Version=2.6.3.13283, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77". Check to make sure the assembly exists on disk. If this reference is required by your code, you may get compilation errors.
+  AssemblyInfo.cpp
+  DicomJpeg2000Codec.cpp
+  DicomJpeg2000CodecFactory.cpp
+  .NETFramework,Version=v4.5.AssemblyAttributes.cpp
+  Generating Code...
+  Generating code
+  Previous IPDB not found, fall back to full compilation.
+  All 279 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  Finished generating code
+  Dicom.Jpeg2000.vcxproj -> C:\git3\p269-485\IMAG_Source\VISA\DotNet\VixViewer\MimeConverter\ClearCanvas\Dicom\Codec\Jpeg2000\x64\Release\ClearCanvas.Dicom.Codec.Jpeg2000.dll

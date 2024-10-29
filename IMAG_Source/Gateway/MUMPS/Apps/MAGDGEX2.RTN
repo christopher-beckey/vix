@@ -1,0 +1,130 @@
+MAGDGEX2 ;WOIFO/EdM - Conversion of images on GE PACS ; 06/03/2005  08:35
+ ;;3.0;IMAGING;**11,51**;MAR 19, 2002;;JUN 16, 2006
+ ;; Per VHA Directive 2004-038, this routine should not be modified.
+ ;; +---------------------------------------------------------------+
+ ;; | Property of the US Government.                                |
+ ;; | No permission to copy or redistribute this software is given. |
+ ;; | Use of unreleased versions of this software requires the user |
+ ;; | to execute a written test agreement with the VistA Imaging    |
+ ;; | Development Office of the Department of Veterans Affairs,     |
+ ;; | telephone (301) 734-0100.                                     |
+ ;; | The Food and Drug Administration classifies this software as  |
+ ;; | a medical device.  As such, it may not be changed in any way. |
+ ;; | Modifications to this software may result in an adulterated   |
+ ;; | medical device under 21CFR820, the use of which is considered |
+ ;; | to be a violation of US Federal Statutes.                     |
+ ;; +---------------------------------------------------------------+
+ ;;
+ Q
+ ;
+PRMS(T) N DIR,E11,E12,E21,E22,E31,E32,HI,HRS,IMGSTU,LO,OK,SSNDASH,X
+ S LO=$G(^MAGDICOM(2006.563,1,"GE CONV LO"))
+ S HI=$G(^MAGDICOM(2006.563,1,"GE CONV HI"))
+ D:'LO
+ . Q:$$CALLRPC^MAGM2VCU("MAG DICOM GET RAD RPT INFO","MT",.X,"O1",0,1)<0
+ . S LO=X
+ . Q
+ D:'HI
+ . Q:$$CALLRPC^MAGM2VCU("MAG DICOM GET RAD RPT INFO","MT",.X,"O1"," ",-1)<0
+ . S HI=X
+ . Q
+ S HRS=$E($G(^MAGDICOM(2006.563,1,"GE CONV HRS"))_$TR($J("",24)," ","Y"),1,24)
+ S DIR=$G(^MAGDICOM(2006.563,1,"GE CONV DIR"))
+ S DIR=$S($E(DIR,1)="D":"DESCENDING",1:"ASCENDING")
+ S X=$G(^MAGDICOM(2006.563,1,"GE CONV ERA1"))
+ S E11=$P(X,"^",1),E12=$P(X,"^",2)
+ S X=$G(^MAGDICOM(2006.563,1,"GE CONV ERA2"))
+ S E21=$P(X,"^",1),E22=$P(X,"^",2)
+ S X=$G(^MAGDICOM(2006.563,1,"GE CONV ERA3"))
+ S E31=$P(X,"^",1),E32=$P(X,"^",2)
+ S X=$G(^MAGDICOM(2006.563,1,"GE CONV ERA4"))
+ S E41=$P(X,"^",1),E42=$P(X,"^",2)
+ S X=$G(^MAGDICOM(2006.563,1,"GE CONV IMGSTU"))
+ S X=X\1 S:(X<1)!(X>3) X=1 S IMGSTU=X
+ S X=$G(^MAGDICOM(2006.563,1,"GE CONV SSNDASH"))
+ S SSNDASH=$S("Yy"[$E(X_"Y",1):"Yes",1:"No")
+ ;
+ W !,"Current conversion window is from report #",LO," to #",HI,"."
+ ;
+ S OK=0 F  D  Q:OK
+ . W !!,"Scanning order is ",DIR," // " R X:$G(DTIME,300) E  S OK=13 Q
+ . I X["^" S OK=13 Q
+ . I X="" S X=DIR W X
+ . I "Aa"[$E(X,1) S DIR="ASCENDING",OK=1 Q
+ . I "Dd"[$E(X,1) S DIR="DESCENDING",OK=1 Q
+ . W !!,"Enter either Ascending or Descending.",!
+ . Q
+ Q:OK=13
+ ;
+ S OK=0 F  D  Q:OK
+ . W !,"Issue queries:"
+ . W !," 1. for all studies"
+ . W !," 2. only for studies that don't currently have images"
+ . W !," 3. only for studies that already have images"
+ . W !,"Make selection: ",IMGSTU," // " R X:$G(DTIME,300) E  S OK=13 Q
+ . I X["^" S OK=13 Q
+ . I X="" S X=IMGSTU W X
+ . I X\1=X,X>0,X<4 S IMGSTU=X,OK=1 Q
+ . W !!,"Enter one of 1, 2 or 3.",!
+ . Q
+ Q:OK=13
+ ;
+ S OK=0 F  D  Q:OK
+ . W !?18,"M12345678901N12345678901 (M=midnight, N=noon)"
+ . W !,"Active hours are: ",HRS
+ . W !?15,"// " R X:$G(DTIME,300) E  S OK=13 Q
+ . I X["^" S OK=13 Q
+ . I X="" S X=HRS W X
+ . S X=$TR(X,"yn","YN")
+ . I $TR(X,"YN")="" S HRS=$E(X_$TR($J("",24)," ","Y"),1,24),OK=1 Q
+ . W !!,"Enter a sequence of (up to) 24 Ys and Ns."
+ . W !,"Every 'Y' represents an hour when the converter will be active."
+ . W !,"Every 'N' represents an hour when the converter will not be active."
+ . Q
+ Q:OK=13
+ ;
+ D:'$G(T)
+ . S OK=0 F  D  Q:OK
+ . . W !!,"Include dashes in SSN? ",SSNDASH," // " R X:$G(DTIME,300) E  S OK=13 Q
+ . . I X["^" S OK=13 Q
+ . . I X="" S X=SSNDASH W X
+ . . I "Yy"[$E(X,1) S SSNDASH="YES",OK=1 Q
+ . . I "Nn"[$E(X,1) S SSNDASH="NO",OK=1 Q
+ . . W !!,"Enter either Yes or No.",!
+ . . Q
+ . Q:OK=13
+ . ;
+ . D GETDATE("start","ACR-NEMA",.E11) Q:OK=13
+ . D GETDATE("end","ACR-NEMA",.E12) Q:OK=13
+ . D GETDATE("start","Pre-12.1",.E21) Q:OK=13
+ . D GETDATE("end","Pre-12.1",.E22) Q:OK=13
+ . D GETDATE("start","Post-12.1",.E31) Q:OK=13
+ . D GETDATE("end","Post-12.1",.E32) Q:OK=13
+ . D GETDATE("start","Fuji",.E41) Q:OK=13
+ . D GETDATE("end","Fuji",.E42) Q:OK=13
+ . Q
+ Q:OK=13
+ ;
+ S ^MAGDICOM(2006.563,1,"GE CONV HRS")=HRS
+ S ^MAGDICOM(2006.563,1,"GE CONV DIR")=DIR
+ S ^MAGDICOM(2006.563,1,"GE CONV ERA1")=E11_"^"_E12
+ S ^MAGDICOM(2006.563,1,"GE CONV ERA2")=E21_"^"_E22
+ S ^MAGDICOM(2006.563,1,"GE CONV ERA3")=E31_"^"_E32
+ S ^MAGDICOM(2006.563,1,"GE CONV ERA4")=E41_"^"_E42
+ Q
+ ;
+D(X) N D,M,Y
+ I 'X Q "<no date>"
+ S D=X#100,M=X\100#100,Y=X\10000+1700
+ Q D_" "_$P("January February March April May June July August September October November December"," ",M)_" "_Y
+ ;
+GETDATE(L,E,D) N %DT,X,Y
+ S OK=0 F  D  Q:OK
+ . W !,"Enter the ",L,"-date for the ",E," era. ",!?20,$$D(D),"// "
+ . R X:$G(DTIME,300) E  S OK=13 Q
+ . I X["^" S OK=13 Q
+ . I X="" S X=$$D(D) W X
+ . D ^%DT I Y>0 S D=Y,OK=1 W " ... ",$$D(D)
+ . Q
+ Q
+ ;

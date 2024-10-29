@@ -1,0 +1,220 @@
+MAGM2VC ;WOIFO/EdM - MUMPS-to-VistA broker client ; 06 Feb 2009 7:39 AM
+ ;;3.0;IMAGING;**11,30,51,69,103,54**;MAR 19, 2002;;OCT 28, 2009
+ ;; Per VHA Directive 2004-038, this routine should not be modified.
+ ;; +---------------------------------------------------------------+
+ ;; | Property of the US Government.                                |
+ ;; | No permission to copy or redistribute this software is given. |
+ ;; | Use of unreleased versions of this software requires the user |
+ ;; | to execute a written test agreement with the VistA Imaging    |
+ ;; | Development Office of the Department of Veterans Affairs,     |
+ ;; | telephone (301) 734-0100.                                     |
+ ;; | The Food and Drug Administration classifies this software as  |
+ ;; | a medical device.  As such, it may not be changed in any way. |
+ ;; | Modifications to this software may result in an adulterated   |
+ ;; | medical device under 21CFR820, the use of which is considered |
+ ;; | to be a violation of US Federal Statutes.                     |
+ ;; +---------------------------------------------------------------+
+ ;;
+ Q
+ ; ===== User-Callable API Routines =====
+ ;
+ ; All API routines return a value that can be used as
+ ; a logical value: TRUE = successful, FALSE = failure
+ ;
+ ; Local array MAGRPCP is where all the internal information is
+ ; stored. Between the "first" call to PARAM() of any sequence and
+ ; the corresponding call to CALLRPC(), this array must not be
+ ; touched or killed by any other software...
+ ;
+CALLRPC(RPC,RES,CLR) ; Call to Remote procedure
+ ; RPC - name of RPC to run
+ ; RES - location where to place results. (Default in ^TMP)
+ ; CLR - Clear parameters after RPC is run; 0=don't, default is 1
+ N IP,MAGM2VE,OK,PORT,RAW,STS
+ ;
+ D:$G(^MAGDICOM(2006.563,1,"M2M DEBUG"))
+ . N E
+ . S E=$G(^TMP("MAG",$J,"DEBUG"))+1
+ . S ^TMP("MAG",$J,"DEBUG")=E
+ . S ^TMP("MAG",$J,"DEBUG",E)=RPC_" called from "_$ST($ST-2,"PLACE")
+ . Q
+ S:$G(RES)="" RES=$NA(^TMP("MAGM2V",$J,"RESULTS"))
+ K @RES ; Clear before RPC is run
+ ;
+ I '$$ISCONT^MAGM2VCU(.IP,.PORT) Q "0,CALLRPC - There is no connection"
+ S STS=$$TCPUSE^MAGOSTCP(IP,PORT) Q:STS<0 "0,CALLRPC - Connect error ("_STS_")"
+ ;
+ S MAGRPCP("MODE")="RPCBroker"
+ S MAGRPCP("URI")=RPC
+ S MAGRPCP("RESULTS")="RAW"
+ D XMLMAKE^MAGM2VCU(.MAGRPCP)
+ S OK=$$EXECUTE^MAGM2VCU(.MAGRPCP)
+ I $$USEPRIN^MAGOSFIL(1)
+ I 'OK Q "0,CALLRPC - RPC could not be processed"
+ D PARSE^MAGM2VCU(.MAGRPCP,RES,"MAGM2VE")
+ K:$G(CLR,1) MAGRPCP("PARAMS")
+ I $D(MAGM2VE) M @RES@("ERROR")=MAGM2VE D ERRLOG^MAGDBB(.MAGM2VE) Q -1
+ Q 1
+ ;
+CLOSE() ; Close connection
+ N IP,LEVEL,OK,PORT,R,STS,X
+ N $ET
+ S $ET="G CLOSERR^"_$T(+0),LEVEL=$ST
+ S R="1,Not connected"
+ S OK=$$ISCONT^MAGM2VCU(.IP,.PORT)
+ D:OK
+ . S X=$$XMLHDR^MAGM2VCU()
+ . S X=X_"<vistalink type='Gov.VA.Med.Foundations.CloseSocketRequest' ></vistalink>"
+ . D WRITE^MAGM2VCU(X)
+ . D WRITE^MAGM2VCU($C(4))
+ . S STS=$$TCPFLUSH^MAGOSTCP(IP,PORT)
+ . D READ^MAGM2VCU("X") ; expect Gov.VA.Med.Foundations.CloseSocketResponse
+ . S STS=$$TCPCLOSE^MAGOSTCP(IP,PORT)
+ . S R=1 S:STS<0 R="0,CLOSE - Close error ("_STS_")"
+ . Q
+ I $$USEPRIN^MAGOSFIL(1)
+ K ^TMP("MAGM2V",$J,"CONNECTED")
+ K ^TMP("MAGM2V",$J,"CONTEXT")
+ Q R
+ ;
+CLOSERR Q:$ST>LEVEL
+ K ^TMP("MAGM2V",$J,"CONNECTED")
+ K ^TMP("MAGM2V",$J,"CONTEXT")
+ I $$USEPRIN^MAGOSFIL(1)
+ S R="0,Could not gracefully close socket: "_$ZE,$EC=""
+ S STS=$$TCPCLOSE^MAGOSTCP(IP,PORT)
+ S:STS<0 R="0,CLOSE - Close error ("_STS_")"
+ Q R
+ ;
+CONNECT(PORT,IP,AV) ; Establish connection to server
+ ; PORT - PORT number where listener is running.
+ ; IP   - IP address where the listener is running.
+ ; AV   - Access and verify codes to sign on into VistA.
+ ;
+ N ACCESS,DIV,LOC,MAGM2VE,PRM,RAW,RET,STS,USER
+ K:$$TCPLOST^MAGOSTCP(IP,PORT,2) ^TMP("MAGM2V",$J,"CONNECTED")
+ S STS=$G(^TMP("MAGM2V",$J,"CONNECTED"))
+ Q:STS "0,CONNECT - Already connected to "_STS
+ ;
+ S STS=$$TCPOPEN^MAGOSTCP(IP,PORT,,10)
+ I STS<0 Q "0,CONNECT -  - Could not open connection to "_IP_", port "_PORT
+ S X=$$TCPUSE^MAGOSTCP(IP,PORT) R X:1 D:$T  Q:X'="" X
+ . I X'[421 S X="" Q
+ . S X=$$TCPCLOSE^MAGOSTCP(IP,PORT)
+ . I $$USEPRIN^MAGOSFIL(1)
+ . S X="0,CONNECT -  - Logins Disabled on VistA System"
+ . Q
+ ;
+ S PRM("MODE")="RPCBroker"
+ S PRM("URI")="XUS SIGNON SETUP"
+ D XMLMAKE^MAGM2VCU(.PRM)
+ ; Run RPC and place raw XML results in local array RAW
+ S PRM("RESULTS")="RAW"
+ I '$$EXECUTE^MAGM2VCU(.PRM) D  Q "0,SIGNON -  - XUS SIGNON SETUP RPC failed"
+ . S STS=$$TCPCLOSE^MAGOSTCP(IP,PORT)
+ . I $$USEPRIN^MAGOSFIL(1)
+ . Q
+ ;
+ ; Check Access
+ K PRM
+ S PRM("MODE")="RPCBroker"
+ S PRM("PARAMS",1,"TYPE")="STRING"
+ S PRM("PARAMS",1,"VALUE")=$$ENCRYPT^MAGM2VCU(AV) ;Encrypt access/verify codes
+ S PRM("URI")="XUS AV CODE"
+ D XMLMAKE^MAGM2VCU(.PRM)
+ ; Run RPC and place raw XML results in local array RAW
+ S PRM("RESULTS")="RAW" K RAW
+ I '$$EXECUTE^MAGM2VCU(.PRM) D  Q "0,SIGNON -  - XUS AV CODE RPC failed"
+ . S STS=$$TCPCLOSE^MAGOSTCP(IP,PORT)
+ . I $$USEPRIN^MAGOSFIL(1)
+ . Q
+ ; Parse out raw XML and place results in local array ACCESS
+ D PARSE^MAGM2VCU(.PRM,"ACCESS","MAGM2VE")
+ I $O(MAGM2VE("")) D  Q X
+ . N I
+ . S STS=$$TCPCLOSE^MAGOSTCP(IP,PORT)
+ . S X="0,SIGNON -  - Error On VistA:"
+ . S I="" F  S I=$O(MAGM2VE(I)) Q:I=""  S X=X_" "_$TR(MAGM2VE(I),$C(10,13))
+ . I $$USEPRIN^MAGOSFIL(1)
+ . Q
+ S USER=ACCESS(1) I USER'>0 D  Q X
+ . S STS=$$TCPCLOSE^MAGOSTCP(IP,PORT)
+ . I $G(ACCESS(4))'="" S X="0,SIGNON -  -  - "_ACCESS(4) Q
+ . S X="0,SIGNON -  - Invalid user, no user number returned"
+ . I $$USEPRIN^MAGOSFIL(1)
+ . Q
+ ;
+ S LOC=+$G(^MAGDICOM(2006.563,1,"LOCATION")),RET="" D:LOC  Q:RET'="" RET
+ . K PRM
+ . S PRM("MODE")="RPCBroker"
+ . S PRM("PARAMS",1,"TYPE")="STRING"
+ . S PRM("PARAMS",1,"VALUE")=$$ENCRYPT^MAGM2VCU(USER)
+ . S PRM("URI")="XUS DIVISION GET"
+ . D XMLMAKE^MAGM2VCU(.PRM)
+ . ; Run RPC and place raw XML results in local array RAW
+ . S PRM("RESULTS")="RAW" K RAW
+ . I '$$EXECUTE^MAGM2VCU(.PRM) D  Q
+ . . S STS=$$TCPCLOSE^MAGOSTCP(IP,PORT)
+ . . S RET="0,SIGNON -  - Could not get divisions"
+ . . I $$USEPRIN^MAGOSFIL(1)
+ . . Q
+ . ; Parse out raw XML and place results in local array ACCESS
+ . D PARSE^MAGM2VCU(.PRM,"DIV","MAGM2VE")
+ . I DIV(1)>0 D  QUIT:RET'=""
+ . . S X=0,I=1 F  S I=$O(DIV(I)) Q:I=""  I $P(DIV(I),"^",1)=LOC S X=1 Q
+ . . I 'X D  Q
+ . . . S STS=$$TCPCLOSE^MAGOSTCP(IP,PORT)
+ . . . S RET="0,SIGNON -  - User does not have access to Gateway's Division"
+ . . . I $$USEPRIN^MAGOSFIL(1)
+ . . . Q
+ . . Q
+ . ;
+ . S X=$P($G(^MAGDICOM(2006.563,1,"LOCATION NAME")),"^",1) Q:X=""
+ . K PRM
+ . S PRM("MODE")="RPCBroker"
+ . S PRM("PARAMS",1,"TYPE")="STRING"
+ . S PRM("PARAMS",1,"VALUE")="`"_LOC
+ . S PRM("URI")="XUS DIVISION SET"
+ . D XMLMAKE^MAGM2VCU(.PRM)
+ . ; Run RPC and place raw XML results in local array RAW
+ . S PRM("RESULTS")="RAW" K RAW,DIV
+ . I '$$EXECUTE^MAGM2VCU(.PRM) D  Q
+ . . S STS=$$TCPCLOSE^MAGOSTCP(IP,PORT)
+ . . S RET="0,SIGNON -  - Set Division Failed"
+ . . I $$USEPRIN^MAGOSFIL(1)
+ . . Q
+ . ; Parse out raw XML and place results in local array ACCESS
+ . D PARSE^MAGM2VCU(.PRM,"DIV","MAGM2VE")
+ . I DIV(1)'>0 D  Q
+ . . S STS=$$TCPCLOSE^MAGOSTCP(IP,PORT)
+ . . S RET="0,SIGNON -  - No Permission to Set Division to Gateway's Division"
+ . . I $$USEPRIN^MAGOSFIL(1)
+ . . Q
+ . Q
+ ;
+ I $$USEPRIN^MAGOSFIL(1)
+ S ^TMP("MAGM2V",$J,"CONNECTED")=PORT_" on "_IP
+ Q USER
+ ;
+GETCONTX(C) ; Return current Context
+ S C=$G(^TMP("MAGM2V",$J,"CONTEXT"))
+ Q ''$L(C)
+ ;
+PARAM(N,ROOT) ; Build parameter data structure
+ Q:'$G(N) 0
+ Q:$G(ROOT)="" 0
+ ;
+ S MAGRPCP("MODE")="RPCBroker"
+ M MAGRPCP("PARAMS",N)=@ROOT
+ Q 1
+ ;
+SETCONTX(C) ; Set context
+ N MAGRPCP,REQ,X
+ K ^TMP("MAGM2V",$J,"CONTEXT")
+ S MAGRPCP("MODE")="RPCBroker"
+ S MAGRPCP("PARAMS",1,"TYPE")="STRING"
+ S MAGRPCP("PARAMS",1,"VALUE")=$$ENCRYPT^MAGM2VCU(C)
+ S X=$$CALLRPC("XWB CREATE CONTEXT","REQ",1) Q:'X X
+ I $G(REQ(1))=1 S ^TMP("MAGM2V",$J,"CONTEXT")=C Q 1
+ Q "0,SETCONTX - Could not set context ("_$G(REQ(1))_")"
+ ;

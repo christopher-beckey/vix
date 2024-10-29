@@ -1,0 +1,80 @@
+10/13/2000  13:27
+Saved from DCM,DCE
+MAGDSOCK
+MAGDSOCK ;WOIFO/EdM - Version Number of VistA DICOM Gateway ; [ 10/13/2000  13:27 ]
+ ;;2.5T;DICOM42;;1-Nov-2000
+ ;; +---------------------------------------------------------------+
+ ;; | Property of the US Government.                                |
+ ;; | No permission to copy or redistribute this software is given. |
+ ;; | Use of unreleased versions of this software requires the user |
+ ;; | to execute a written test agreement with the VistA Imaging    |
+ ;; | Development Office of the Department of Veterans Affairs,     |
+ ;; | telephone (301) 734-0100.                                     |
+ ;; |                                                               |
+ ;; | The Food and Drug Administration classifies this software as  |
+ ;; | a Class II medical device.  As such, it may not be changed    |
+ ;; | in any way.  Modifications to this software may result in an  |
+ ;; | adulterated medical device under 21CFR820, the use of which   |
+ ;; | is considered to be a violation of US Federal Statutes.       |
+ ;; +---------------------------------------------------------------+
+ ;;
+ Q
+ ;
+SOCKET ; Called automatically a user connects to the socket
+ N EXE ;------ Name of executable
+ N I
+ N IPADDR ;--- SCU application's IP address and name
+ N OK
+ N PORT ;----- TCP/IP port number on which the SCP will listen
+ N STATUS ;--- Success indicator
+ N MUMPS ;---- Type of MUMPS implementation
+ N VER ;------ Version of executable
+ ;
+ S $ET="D SOCKERR^"_$T(+0)
+ ;
+ S STATUS=$$TCPGET^MAGOSTCP(.IPADDR,.PORT),PORT=59999
+ ;
+ ; When we get here, the socket is inherited from the operating
+ ; environment, and not opened through MAGOSTCP.
+ ; Define the essential variables:
+ ;
+ ; Do not modify the lines below that contain the curly
+ ; braces. These lines are used by the distribution process
+ ; to mark the start and end of the table of recognized
+ ; executables.
+ ; {}{} -- Start
+ S OK("ABSTRTGA","v42")=1
+ S OK("CSTORE","v42")=1
+ S OK("DCMTOTGA","v42")=1
+ S OK("DCM_COPY","v42")=1
+ S OK("DELTREE","v42")=1
+ S OK("DICOM_ECHO","v42")=1
+ S OK("SEND_IMAGE","v42")=1
+ S OK("TESTMSM","v42")=1
+ S OK("TGATODCM","v42")=1
+ S OK("VISTA_SEND_IMAGE","v42")=1
+ ; {}{} -- End
+ ;
+ S STATUS=$$TCPINHRT^MAGOSTCP(PORT)
+ S OK=1 Q:$$READ()'=42  Q:'OK
+ ;
+ F  D  Q:'OK
+ . S EXE=$$UPPER^MAGOSMSC($$READ()) Q:'OK
+ . S VER=$$UPPER^MAGOSMSC($$READ()) Q:'OK
+ . S:EXE="" EXE="?" S:VER="" VER="?"
+ . W $D(OK(EXE,VER))
+ . Q
+ S STATUS=$$TCPCLOSE^MAGOSTCP(IPADDR,PORT)
+ Q
+ ;
+READ() N R,X
+ ; The next line needs to be brought in line with SAC standards...
+ S R="" F  Q:'OK  R *X Q:X=13  S:$ZC<0 OK=0  S:X>31 R=R_$C(X)
+ Q R
+ ;
+SOCKERR ;
+ D INT^%ET
+ S $ET="H"
+ Q
+
+

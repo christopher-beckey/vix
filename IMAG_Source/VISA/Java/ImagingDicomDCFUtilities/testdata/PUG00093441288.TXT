@@ -1,0 +1,253 @@
+$$BEGIN DATA1
+PATIENTS_NAME=PATIENT,ONE
+PATIENTS_ID=000-00-0001
+PATIENTS_BIRTH_DATE=FEB 10,1957
+PATIENTS_AGE=60
+PATIENTS_SEX=M
+INTEGRATION_CONTROL_NUMBER=10101224V553432
+ACCESSION_NUMBER=071417-2525
+IMAGE_DATE=07/14/2017
+CONTENT_DATE=07/14/2017
+IMAGE_TIME=10:23:20
+CONTENT_TIME=10:23:20
+IMAGE_TYPE=3
+IMAGE_TYPE(1)=ORIGINAL
+IMAGE_TYPE(2)=PRIMARY
+IMAGE_TYPE(3)=AXIAL
+CONTENT_DATE=20170714
+CONTENT_TIME=102320.367
+MODALITY=CT
+MANUFACTURER=Philips
+INSTITUTION_NAME=SOME VA Hospital
+STATION_NAME=HOST
+MANUFACTURERS_MODEL_NAME=Ingenuity CT
+BODY_PART_EXAMINED=CHEST
+PATIENT_POSITION=FFS
+STUDY_ID=2686
+SERIES_NUMBER=206
+ACQUISITION_NUMBER=2
+INSTANCE_NUMBER=564
+IMAGE_POSITION_PATIENT=3
+IMAGE_POSITION_PATIENT(1)=-161.968
+IMAGE_POSITION_PATIENT(2)=-52.988
+IMAGE_POSITION_PATIENT(3)=-198.67
+PHOTOMETRIC_INTERPRETATION=MONOCHROME2
+ROWS=512
+COLUMNS=512
+PIXEL_SPACING=2
+PIXEL_SPACING(1)=0.74609375
+PIXEL_SPACING(2)=0.74609375
+BITS_STORED=12
+HIGH_BIT=11
+PIXEL_REPRESENTATION=0
+RESCALE_INTERCEPT=-1024
+RESCALE_SLOPE=1
+DCM_TO_TGA_PARAMETERS=<DICOM>
+$$END DATA1
+$$BEGIN DICOM DATA
+0002,0000|Group Length^UL|1,1|220
+0002,0001|File Meta Information Version^OB|1,1|0
+0002,0001|File Meta Information Version^OB|2,1|1
+0002,0002|Media Storage SOP Class UID^UI|1,1|1.2.840.10008.5.1.4.1.1.2
+0002,0003|Media Storage SOP Instance UID^UI|1,1|1.3.46.670589.33.1.63635624799630702000001.5734009823280515543
+0002,0010|Transfer Syntax UID^UI|1,1|1.2.840.10008.1.2.4.70
+0002,0012|Implementation Class UID^UI|1,1|1.2.840.113754.2.1.3.0
+0002,0013|Implementation Version Name^SH|1,1|VA DICOM V3.0
+0002,0016|Source Application Entity Title^AE|1,1|VHAWASIMMA15
+0008,0005|Specific Character Set^CS|1,1|ISO_IR 100
+0008,0008|Image Type^CS|1,1|ORIGINAL
+0008,0008|Image Type^CS|2,1|PRIMARY
+0008,0008|Image Type^CS|3,1|AXIAL
+0008,0012|Instance Creation Date^DA|1,1|20170714
+0008,0013|Instance Creation Time^TM|1,1|102639.637
+0008,0016|SOP Class UID^UI|1,1|1.2.840.10008.5.1.4.1.1.2
+0008,0018|SOP Instance UID^UI|1,1|1.3.46.670589.33.1.63635624799630702000001.5734009823280515543
+0008,0020|Study Date^DA|1,1|20170714
+0008,0021|Series Date^DA|1,1|20170714
+0008,0022|Acquisition Date^DA|1,1|20170714
+0008,0023|Content Date^DA|1,1|20170714
+0008,002A|Acquisition DateTime^DT|1,1|20170714102317.070
+0008,0030|Study Time^TM|1,1|100813.987000
+0008,0031|Series Time^TM|1,1|102340.395
+0008,0032|Acquisition Time^TM|1,1|102317
+0008,0033|Content Time^TM|1,1|102320.367
+0008,0050|Accession Number^SH|1,1|071417-2525
+0008,0060|Modality^CS|1,1|CT
+0008,0070|Manufacturer^LO|1,1|Philips
+0008,0080|Institution Name^LO|1,1|SOME VA Hospital
+0008,0081|Institution Address^ST|1,1|1 SOUTH MAIN ST
+0008,0090|Referring Physician's Name^PN|1,1|IMAG^PHYSICIAN
+0008,1010|Station Name^SH|1,1|HOST
+0008,1030|Study Description^LO|1,1|CT CHEST WITHOUT CONTRAST
+0008,103E|Series Description^LO|1,1|CHEST THINS, iDose (3)
+0008,1040|Institutional Department Name^LO|1,1|CT
+0008,1070|Operators' Name^PN|1,1|JLK
+0008,1080|Admitting Diagnoses Description^LO|1,1|<unknown>
+0008,1090|Manufacturer's Model Name^LO|1,1|Ingenuity CT
+0008,1111|Referenced Performed Procedure Step Sequence^SQ||
+0008,1111.0001^0008,1150|Referenced SOP Class UID^UI|1,1|1.2.840.10008.3.1.2.3.3
+0008,1111.0001^0008,1155|Referenced SOP Instance UID^UI|1,1|1.3.46.670589.33.1.63635623689171187300001.4661902606580651277
+0008,1120|Referenced Patient Sequence^SQ||
+0008,1120.0001^0008,1150|Referenced SOP Class UID^UI|1,1|1.2.840.10008.3.1.2.1.1
+0008,1120.0001^0008,1155|Referenced SOP Instance UID^UI|1,1|1.2.124.113532.38.21810.30398.20100707.232654.141708965
+0008,1140|Referenced Image Sequence^SQ||
+0008,1140.0001^0008,1150|Referenced SOP Class UID^UI|1,1|1.2.840.10008.5.1.4.1.1.2
+0008,1140.0001^0008,1155|Referenced SOP Instance UID^UI|1,1|1.3.46.670589.33.1.63635624527961163400001.4919974586722031072
+0008,3010|Irradiation Event UID^UI|1,1|1.3.46.670589.33.1.63635624565744324400007.4906914302433915783
+0010,0010|Patient's Name^PN|1,1|PATIENT^ONE
+0010,0020|Patient ID^LO|1,1|000-00-0001
+0010,0030|Patient's Birth Date^DA|1,1|19570210
+0010,0040|Patient's Sex^CS|1,1|M
+0010,1000|Other Patient IDs^LO|1,1|000001
+0010,1010|Patient's Age^AS|1,1|060Y
+0010,21B0|Additional Patient History^LT|1,1|Reason for Study: pre-op right lower lobectomy for NSCLC last CT outdated for surg
+0010,21B0|Additional Patient History^LT|1,2|
+0010,21B0|Additional Patient History^LT|1,3|60 yo male with right lower lobe lung cancer scheduled for right open lower
+0010,21B0|Additional Patient History^LT|1,4|lobectomy needs updated s can for surgery
+0018,0015|Body Part Examined^CS|1,1|CHEST
+0018,0022|Scan Options^CS|1,1|HELIX
+0018,0050|Slice Thickness^DS|1,1|0.67
+0018,0060|KVP^DS|1,1|120
+0018,0088|Spacing Between Slices^DS|1,1|0.335
+0018,0090|Data Collection Diameter^DS|1,1|500
+0018,1000|Device Serial Number^LO|1,1|310205
+0018,1020|Software Version(s)^LO|1,1|4.1
+0018,1030|Protocol Name^LO|1,1|CHEST W/O /Thorax
+0018,1100|Reconstruction Diameter^DS|1,1|382
+0018,1110|Distance Source to Detector^DS|1,1|1040
+0018,1111|Distance Source to Patient^DS|1,1|570
+0018,1120|Gantry/Detector Tilt^DS|1,1|0
+0018,1130|Table Height^DS|1,1|84.9
+0018,1150|Exposure Time^IS|1,1|604
+0018,1151|X-Ray Tube Current^IS|1,1|240
+0018,1152|Exposure^IS|1,1|145
+0018,1160|Filter Type^SH|1,1|B
+0018,1210|Convolution Kernel^SH|1,1|B
+0018,5100|Patient Position^CS|1,1|FFS
+0018,9302|Acquisition Type^CS|1,1|SPIRAL
+0018,9305|Revolution Time^FD|1,1|5.000000E-001
+0018,9306|Single Collimation Width^FD|1,1|6.250000E-001
+0018,9307|Total Collimation Width^FD|1,1|4.000000E+001
+0018,9309|Table Speed^FD|1,1|6.630000E+001
+0018,9310|Table Feed per Rotation^FD|1,1|5.305600E+001
+0018,9311|Spiral Pitch Factor^FD|1,1|8.290000E-001
+0018,9323|Exposure Modulation Type^CS|1,1|3D MODULATION
+0018,9324|Estimated Dose Saving^FD|1,1|2.000000E+001
+0018,9345|CTDIvol^FD|1,1|9.505556E+000
+0020,000D|Study Instance UID^UI|1,1|1.2.124.113532.32961.28197.45250.20170714.101306.156006182
+0020,000E|Series Instance UID^UI|1,1|1.3.46.670589.33.1.63635624617614291200009.4713170203472618206
+0020,0010|Study ID^SH|1,1|2686
+0020,0011|Series Number^IS|1,1|206
+0020,0012|Acquisition Number^IS|1,1|2
+0020,0013|Instance Number^IS|1,1|564
+0020,0032|Image Position (Patient)^DS|1,1|-161.968
+0020,0032|Image Position (Patient)^DS|2,1|-52.988
+0020,0032|Image Position (Patient)^DS|3,1|-198.67
+0020,0037|Image Orientation (Patient)^DS|1,1|1
+0020,0037|Image Orientation (Patient)^DS|2,1|0
+0020,0037|Image Orientation (Patient)^DS|3,1|0
+0020,0037|Image Orientation (Patient)^DS|4,1|0
+0020,0037|Image Orientation (Patient)^DS|5,1|1
+0020,0037|Image Orientation (Patient)^DS|6,1|0
+0020,0052|Frame of Reference UID^UI|1,1|1.3.46.670589.33.1.63635624490784036900002.5031841000944993256
+0020,1040|Position Reference Indicator^LO|1,1|<unknown>
+0020,1041|Slice Location^DS|1,1|198.67
+0020,4000|Image Comments^LT|1,1|CHEST THINS
+0028,0002|Samples per Pixel^US|1,1|1
+0028,0004|Photometric Interpretation^CS|1,1|MONOCHROME2
+0028,0010|Rows^US|1,1|512
+0028,0011|Columns^US|1,1|512
+0028,0030|Pixel Spacing^DS|1,1|0.74609375
+0028,0030|Pixel Spacing^DS|2,1|0.74609375
+0028,0100|Bits Allocated^US|1,1|16
+0028,0101|Bits Stored^US|1,1|12
+0028,0102|High Bit^US|1,1|11
+0028,0103|Pixel Representation^US|1,1|0
+0028,1050|Window Center^DS|1,1|40
+0028,1050|Window Center^DS|2,1|40
+0028,1051|Window Width^DS|1,1|400
+0028,1051|Window Width^DS|2,1|400
+0028,1052|Rescale Intercept^DS|1,1|-1024
+0028,1053|Rescale Slope^DS|1,1|1
+0029,0010|Name of Private Group^LO|1,1|MITRA PRESENTATION 1.0
+0029,xx10,1|Private element^CS|1,1|-2
+0029,xx11,1|Private element^CS|1,1|-2
+0029,xx12,1|Private element^CS|1,1|-2
+0029,xx13,1|Private element^CS|1,1|-2
+0031,0010|Name of Private Group^LO|1,1|MITRA LINKED ATTRIBUTES 1.0
+0031,0011|Name of Private Group^LO|1,1|AGFA PACS Archive Mirroring 1.0
+0031,xx00,3|Private element^CS|1,1|N
+0031,xx01,3|Private element^UL|1,1|0
+0031,xx20,2|Private element^LO|1,1|216560246
+0032,000A|Study Status ID^CS|1,1|COMPLETED
+0032,000C|Study Priority ID^CS|1,1|MED
+0032,1030|Reason for Study^LO|1,1|Reason for Study: pre-op right lower lobectomy for NSCLC last CT outdated for surg
+0032,1030|Reason for Study^LO|1,2|
+0032,1030|Reason for Study^LO|1,3|60 yo male with right lower lobe lung cancer scheduled for right open lower
+0032,1030|Reason for Study^LO|1,4|lobectomy needs updated s can for surgery
+0032,1032|Requesting Physician^PN|1,1|IMAG^PHYSICIAN
+0032,1033|Requesting Service^LO|1,1|663
+0032,4000|Study Comments^LT|1,1|<unknown>
+0033,0010|Owner of Group^LO|1,1|MITRA OBJECT UTF8 ATTRIBUTES 1.0
+0033,xx04,4|Private element^CS|1,1|CT CHEST WITHOUT CONTRAST
+0033,xx0C,4|Private element^LO|1,1|Reason for Study: pre-op right lower lobectomy for NSCLC last CT outdated for surg
+0033,xx0C,4|Private element^LO|1,2|
+0033,xx0C,4|Private element^LO|1,3|60 yo male with right lower lobe lung cancer scheduled for right open lower
+0033,xx0C,4|Private element^LO|1,4|lobectomy needs updated s can for surgery
+0033,xx0E,4|Private element^LT|1,1|<unknown>
+0033,xx13,4|Private element^PN|1,1|PATIENT^ONE
+0033,xx16,4|Private element^PN|1,1|IMAG^PHYSICIAN
+0033,xx19,4|Private element^PN|1,1|IMAG^PHYSICIAN
+0038,0300|Current Patient Location^LO|1,1|PUG SRG THORACIC SURG
+0040,0244|Performed Procedure Step Start Date^DA|1,1|20170714
+0040,0245|Performed Procedure Step Start Time^TM|1,1|100813.987000
+0040,0275|Request Attributes Sequence^SQ||
+0040,0275.0001^0040,0009|Scheduled Procedure Step ID^SH|1,1|399071417-2521
+0040,0275.0001^0040,1001|Requested Procedure ID^SH|1,1|399071417-2521
+0040,1001|Requested Procedure ID^SH|1,1|399071417-2521
+00E1,0010|Name of Private Group^LO|1,1|ELSCINT1
+00E1,xx02,5|Private element^SH|1,1|Adult
+00E1,xx36,5|Private element^CS|1,1|YES
+00E1,xx40,5|Private element^SH|1,1|CHEST THINS
+00E1,xx46,5|Private element^OB|1,1|<unknown>
+00E1,xx50,5|Private element^DS|1,1|5.803
+00E1,xx63,5|Private element^SH|1,1|ENGLISH
+00E1,xxC4,5|Private element^DS|1,1|501.673004150391
+01F1,0010|Name of Private Group^LO|1,1|ELSCINT1
+01F1,xx01,5|Private element^CS|1,1|SPIRAL
+01F1,xx02,5|Private element^CS|1,1|STANDARD
+01F1,xx04,5|Private element^CS|1,1|NORMAL
+01F1,xx08,5|Private element^DS|1,1|316.5
+01F1,xx0C,5|Private element^DS|1,1|0.084\0.076
+01F1,xx0E,5|Private element^FL|1,1|0.000000E+000
+01F1,xx0F,5|Private element^CS|1,1|OUT
+01F1,xx26,5|Private element^DS|1,1|0.829
+01F1,xx27,5|Private element^DS|1,1|0.5
+01F1,xx32,5|Private element^CS|1,1|RIGHT_ON_LEFT
+01F1,xx44,5|Private element^OW|1,1|<unknown>
+01F1,xx46,5|Private element^FL|1,1|6.250000E-001
+01F1,xx47,5|Private element^SH|1,1|3D
+01F1,xx49,5|Private element^DS|1,1|<unknown>
+01F1,xx4A,5|Private element^SH|1,1|DOM
+01F1,xx4B,5|Private element^SH|1,1|64x0.625
+01F1,xx4D,5|Private element^SH|1,1|YES
+01F1,xx4E,5|Private element^SH|1,1|Chest
+01F1,xx54,5|Private element^IS|1,1|18
+01F1,xx56,5|Private element^LO|1,1|32.1827554865979
+01F7,0010|Name of Private Group^LO|1,1|ELSCINT1
+01F7,xx14,5|Private element^OW|1,1|<unknown>
+01F7,xx19,5|Private element^OW|1,1|<unknown>
+01F7,xx22,5|Private element^UI|1,1|1.3.46.670589.33.1.63635624565744324400007.4906914302433915783
+01F7,xx29,5|Private element^OW|1,1|<unknown>
+01F7,xx31,5|Private element^OW|1,1|<unknown>
+01F7,xx92,5|Private element^OW|1,1|<unknown>
+01F7,xx95,5|Private element^OW|1,1|<unknown>
+01F7,xx97,5|Private element^OW|1,1|<unknown>
+01F7,xx99,5|Private element^OW|1,1|<unknown>
+01F7,xx9A,5|Private element^OW|1,1|<unknown>
+01F7,xx9B,5|Private element^IS|1,1|3
+07A1,0010|Name of Private Group^LO|1,1|ELSCINT1
+7FE0,0010|Pixel Data^OB|1,1|<image>
+7FE0,0010|Pixel Data^OB|1,2|length=4294967295 (0xFFFFFFFF)
+7FE0,0010|Pixel Data^OB|1,3|offset=9806 (0x264E)
+$$END DICOM DATA

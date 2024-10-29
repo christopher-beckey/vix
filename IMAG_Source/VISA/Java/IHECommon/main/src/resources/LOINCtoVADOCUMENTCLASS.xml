@@ -1,0 +1,29 @@
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+	<comment>
+	The mapping of LOINC codes to VA artifact types
+	This may be a one to many mapping.  The LOINC codes (target values) are comma delimited
+	strings.  Note that a comma in a target value will require a code change.
+	</comment>
+	
+	<!-- 11-PATIENT RIGHTS AND RESPONSBILITIES  -->
+	<entry key="51851-4">PATIENT RIGHTS AND RESPONSBILITIES</entry>
+	
+	<!-- 50-CORRESPONDENCE  -->
+	<entry key="47049-2">CORRESPONDENCE</entry>
+	
+	<!-- 73-VISIT RECORD  -->
+	<entry key="34109-9">VISIT RECORD</entry>
+	
+	<!-- 74-PROCEDURE RECORD  -->
+	<entry key="28570-0">PROCEDURE RECORD</entry>
+	
+	<!-- 78-DISCHARGE SUMMARY  -->
+	<entry key="18842-5">DISCHARGE SUMMARY</entry>
+	
+	<!-- 85-PROGRESS NOTE  -->
+	<entry key="11542-8">PROGRESS NOTE</entry>
+	
+	<entry key="34121-4">PROCEDURE RECORD</entry>
+	
+</properties>

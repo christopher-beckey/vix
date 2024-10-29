@@ -1,0 +1,129 @@
+MAGVSS ; JSR/EdM ; Move files to and from VSS working directory ; [ 10/23/2001 09:30 AM ]
+ ; program loaded at 10/23/2001 09:30 AM
+ q
+in(r,dir,stamp) d IN($g(r),$g(dir),$g(stamp)) q
+out(r,dir,preamble) d OUT($g(r),$g(dir),$g(preamble)) q
+ ;
+IN(r,dir,stamp) n d,EXT,mac,rou,seen,x
+ s mac=0,EXT="RTN"
+ s d=$g(dir) s:d="" d=$g(^VSS("DIR"))
+ s:$e(d,$l(d))'="\" d=d_"\"
+ i d="" w !!,"No directory specified...",!! q
+ i r="" w !!,"No routine name specified...",!! q
+ s mac=1
+ ;s x=$zsearch(d_r_".MAC") f  s r=$p(x,"\",$l(x,"\")) q:r=""  d  s x=$zsearch("")
+ . s seen(r)=""
+ . d get(d,r)
+ . q
+ s mac=0
+ s x=$zsearch(d_r_".RTN") f  s r=$p(x,"\",$l(x,"\")) q:r=""  d  s x=$zsearch("")
+ . q:$d(seen(r))
+ . d get(d,r)
+ . q
+ q
+ ;
+get(d,r) n a,c,e,f,k,l,s,t,x
+ i r[".",$tr(r,"rtn","RTN")'[".RTN",$tr(r,"mac","MAC")'[".MAC" q
+ s r=$p(r,".",1),f=d_r_$s(mac:".MAC",1:".RTN")
+ k ^VSS("R",$j),^VSS("Ro",$j)
+ o f:"R":0 e  u $p w !,"No such file: "_f,!! q
+ s x=$zutil(68,40,1)
+ f k=1:1 u f r x q:$zeof<0  d
+ . s ^VSS("Ro",$j,k)=x
+ . i x'="",$e(x,1)'=";" s ^VSS("R",$j,k)=$tr(x,$c(9)," ")
+ . q
+ c f u $p
+ s x=$g(^VSS("R",$j,3)) i x'="",x'[" " f k=1,2,3 k ^VSS("R",$j,k)
+ w !,"Loading ",r
+ d
+ . n EXT,i,n,out
+ . s out(0)=0,n=0,EXT="RTN"
+ . k ^VSS("c",$j)
+ . i $g(mac) W " --- Created .MACro entry..." q
+ . s i="" f  s i=$o(^VSS("R",$j,i)) q:i=""  s n=n+1,^VSS("c",$j,n)=^VSS("R",$j,i)
+ . s ^VSS("c",$j,0)=n
+ . d CHECK^%RCHECK("^VSS(""c"",$j)",.out,0)
+ . k ^VSS("c",$j)
+ . s (i,n)=0 f  s i=$o(out(i)) q:i=""  w !,out(i) s n=1
+ . w:n !,"Loading ",r
+ . q
+ s s=2,a=0,k="" f  s k=$o(^VSS("R",$j,k)) q:k=""  d
+ . s x=^VSS("R",$j,k),l=$p(x," ",1)_" ",t=$p(x," ",2,$l(x)+2)
+ . f  q:" ."'[$e(t_"!",1)  s l=l_$e(t,1),t=$e(t,2,$l(t))
+ . s:t="" x=x_" ;" s s=s+2+$l(x)
+ . i t="" s ^VSS("R",$j,k)=x q
+ . q
+ d:$g(stamp)
+ . n from,h,time
+ . s k=$o(^VSS("R",$j,"")),x=^VSS("R",$j,k) ;;;q:x'["[ "
+ . s h=$h
+ . s h=$zdatetime(h,1,2,,,4),time=h
+ . s from=$zutil(67,6,$j) ;_" (Cach‚) by "_$zutil(67,11,$j)
+ . s ^VSS("R",$j,k)=$p(x,";",1,2)_"; "_time
+ . o f:"WN" u f
+ . s i="" f  s i=$o(^VSS("Ro",$j,i),-1) q:i=""  d  q:i=""
+ . . i $tr($g(^VSS("Ro",$j,i)),$c(9,32))'="" s i="" q
+ . . k ^VSS("Ro",$j,i)
+ . . q
+ . w time,!,"Saved from ",from,!,r,!,^VSS("R",$j,k),!
+ . f  s k=$o(^VSS("Ro",$j,k)) q:k=""  w ^VSS("Ro",$j,k),!
+ . w !!
+ . c f
+ . q
+ s x="zr  s k="""" f  s k=$o(^VSS(""R"",$j,k)) zi:k'="""" ^VSS(""R"",$j,k) i k="""" zs "_r
+ s x="s mode=$zutil(55,0) "_x_" s mode=$zutil(55,mode)"
+ i '$g(mac) s x=x_" zl "_$t(+0)_" q"
+ i $g(mac) d
+ . n i,sav
+ . i $d(^rMAC(r)) s sav=$o(^rMACSAVE(r,""),-1)+1 m ^rMACSAVE(r,sav)=^rMAC(r,0)
+ . k ^rMAC(r)
+ . s ^rMAC(r,0)=$h
+ . s k="",i=0 f  s k=$o(^VSS("R",$j,k)) q:k=""  s i=i+1,^rMAC(r,0,i)=^VSS("R",$j,k)
+ . s ^rMAC(r,0,0)=i
+ . s ^rMAC(r,0,"LANG")=0
+ . ; Here we should call the Cache-compiler
+ . q
+ e  d
+ . x x
+ . q
+ w " ... ",s," bytes"
+ k ^VSS("R",$j),^VSS("Ro",$j)
+ q
+ ;
+OUT(r,dir,preamble) n d,k,x
+ s d=$g(dir) s:d="" d=$g(^VSS("DIR"))
+ s:$e(d,$l(d))'="\" d=d_"\"
+ i d="" w !!,"No directory specified...",!! q
+ i r="" w !!,"No routine name specified...",!! q
+ i r'["*" d put(d,r,1) q
+ s (l,r)=$p(r,"*",1) f  d put(d,l,0) s l=$o(^$r(l)) q:$e(l,1,$l(r))'=r
+ q
+ ;
+put(d,r,f) n k,l,mac,t
+ i '$d(^$r(r)) w:$g(f) !,"No such routine: "_r,!! q
+ s mac=0
+ i $d(^rMAC(r)) s mac=1
+ u $p w !,"Writing routine "_d_r_"."_$s(mac:"MAC",1:"RTN")
+ i $g(mac) d  q
+ . s t=d_r_".MAC"
+ . o t:"WN" u t s k=0 f  s k=$o(^rMAC(r,0,k)) q:'k  w ^rMAC(r,0,k),!
+ . c t
+ . q
+ k ^VSS("R",$j)
+ f k=1:1 s x=$t(+k^@r) q:x=""  d
+ . s l=$p(x," ",1)_" ",t=$p(x," ",2,$l(x)+2)
+ . f  q:" ."'[$e(t_"!",1)  s:$e(t,1)="." l=l_". " s t=$e(t,2,$l(t))
+ . s ^VSS("R",$j,k)=l_t
+ . q
+ d:$g(preamble)
+ . n h
+ . s h=$h
+ . s ^VSS("R",$j,-19)=$zdatetime(h,1,2,,,4),time=h
+ . s ^VSS("R",$j,-18)="Saved by magvss from "_$zutil(67,6,$j) ;_" (Cach‚) by "_$zutil(67,11,$j)
+ . s ^VSS("R",$j,-17)=r
+ . q
+ s t=d_r_".RTN"
+ o t:"WN" u t s k="" f  s k=$o(^VSS("R",$j,k)) q:k=""  w ^VSS("R",$j,k),!
+ c t
+ k ^VSS("R",$j)
+ q

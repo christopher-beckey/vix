@@ -1,0 +1,128 @@
+MAGDMFB7 ;WOIFO/PMK - Program to build ^MAGDICOM(2006.57) HL7 dictionary ; 12/12/2006 09:07
+ ;;3.0;IMAGING;**10,30,50,69**;MAR 19, 2002;;NOV 7, 2007
+ ;; Per VHA Directive 2004-038, this routine should not be modified.
+ ;; +---------------------------------------------------------------+
+ ;; | Property of the US Government.                                |
+ ;; | No permission to copy or redistribute this software is given. |
+ ;; | Use of unreleased versions of this software requires the user |
+ ;; | to execute a written test agreement with the VistA Imaging    |
+ ;; | Development Office of the Department of Veterans Affairs,     |
+ ;; | telephone (301) 734-0100.                                     |
+ ;; | The Food and Drug Administration classifies this software as  |
+ ;; | a medical device.  As such, it may not be changed in any way. |
+ ;; | Modifications to this software may result in an adulterated   |
+ ;; | medical device under 21CFR820, the use of which is considered |
+ ;; | to be a violation of US Federal Statutes.                     |
+ ;; +---------------------------------------------------------------+
+ ;;
+ Q
+ ;
+HL7 ; HL7 dictionary for formatted printout of HL7 messages
+ N D0,FILE,N3,N4,STATUS
+ ;
+ S FILE=$$INIT^MAGDMFB(2006.57,"HL7 Segment","HL7")
+ Q:FILE=""
+ ;
+ K ^MAGDICOM(2006.57) S (D0,N3,N4)=0
+ ;
+ S STATUS=$$OPEN^MAGOSFIL(FILE,"R")
+ I STATUS<0 D  Q
+ . D MESSAGE^MAGDMLOG(1,0,"Open Error: "_STATUS,"t")
+ . S FATAL=FATAL+1
+ . Q
+ F  D  Q:STATUS'=""
+ . N FIELD
+ . S STATUS=$$READ^MAGOSFIL(FILE,.X)
+ . I STATUS<0 Q:+STATUS=-2  D  Q
+ . . D MESSAGE^MAGDMLOG(1,0,"Read Error: "_STATUS,"t")
+ . . S FATAL=FATAL+1
+ . . Q
+ . D:'SILENT MESSAGE^MAGDMLOG(1,0,"<input>  "_X,"t")
+ . I "#;"[$E(X) Q  ; comment
+ . S FIELD=$P(X,"|",1),VALUE=$P(X,"|",2,999)
+ . I $E(FIELD)?1A D  Q
+ . . I N3 S ^MAGDICOM(2006.57,D0,1,0)="^2006.5701^"_N3_"^"_N4
+ . . S D0=D0+1,(N3,N4)=0,^MAGDICOM(2006.57,D0,0)=FIELD_"^"_VALUE
+ . . S ^MAGDICOM(2006.57,"B",FIELD,D0)=""
+ . . Q
+ . S ^MAGDICOM(2006.57,D0,1,FIELD,0)=VALUE,N4=N4+1,N3=FIELD
+ . Q
+ S ^MAGDICOM(2006.57,0)="DICOM HL7 SEGMENT^2006.57^"_D0_"^"_D0
+ S STATUS=$$CLOSE^MAGOSFIL(FILE)
+ S X=D0_" HL7 message segment"_$S(D0>1:"s",1:"")_" added to the database."
+ D MESSAGE^MAGDMLOG(1,0,X,"t")
+ Q
+ ;
+CT ; Read and process CT History file
+ N D0,DATE,DAY,FILE,I,LOCATION,M0,MFGR,MODALITY,MODEL,MODPARMS,MONTH,STATUS,RECORD,YEAR
+ ;
+ S FILE=$$INIT^MAGDMFB(2006.5821,"CT Conversion History","CT_Param")
+ Q:FILE=""
+ ;
+ K ^MAGDICOM(2006.5821) S D0=0
+ ;
+ S STATUS=$$OPEN^MAGOSFIL(FILE,"R")
+ I STATUS<0 D  Q
+ . D MESSAGE^MAGDMLOG(1,0,"Open Error: "_STATUS,"t")
+ . S FATAL=FATAL+1
+ . Q
+ ;
+ F  D  Q:STATUS'=""
+ . S STATUS=$$READ^MAGOSFIL(FILE,.RECORD)
+ . I STATUS<0 Q:+STATUS=-2  D  Q
+ . . D MESSAGE^MAGDMLOG(1,0,"Read Error: "_STATUS,"t")
+ . . S FATAL=FATAL+1
+ . . Q
+ . Q:"#;"[$E(RECORD,1)  ; comment
+ . S RECORD=$$UP^MAGDFCNS(RECORD)
+ . F I=1:1:5 S @($P("LOCATION,MFGR,MODEL,DATE,MODPARMS",",",I))=$P(RECORD,"~",I)
+ . D CTSTORE(LOCATION,MFGR,MODEL,DATE,MODPARMS,.D0)
+ . Q
+ S STATUS=$$CLOSE^MAGOSFIL(FILE)
+ I $$USEPRIN^MAGOSFIL(1)
+ ;
+ ; now get the data from MODALITY.DIC
+ S FILE=^MAGDICOM(2006.563,1,"DICT PATH")_"\MODALITY.DIC"
+ S STATUS=$$GETDIR^MAGOSDIR(FILE)
+ I STATUS<1 D  Q
+ . D MESSAGE^MAGDMLOG(1,0,"Cannot Open File """_FILE_""".","t")
+ . D:+STATUS'=STATUS MESSAGE^MAGDMLOG(1,0,STATUS,"t")
+ . S FATAL=FATAL+1
+ . Q
+ S X=^TMP("MAG",$J,"DIR LIST","MODALITY.DIC")
+ S DATE=$P(X,";",2),LOCATION=$G(^MAGDICOM(2006.563,1,"LOCATION"))
+ I 'LOCATION D  Q
+ . D MESSAGE^MAGDMLOG(1,0,"LOCATION of Gateway not defined.","t")
+ . S FATAL=FATAL+1
+ . Q
+ S M0=0 F  S M0=$O(^MAGDICOM(2006.582,M0)) Q:'M0  D
+ . S X=$G(^MAGDICOM(2006.582,M0,0))
+ . F I=1:1:4 S @($P("MFGR,MODEL,MODALITY,MODPARMS",",",I))=$P(X,"^",I)
+ . I MODALITY="CT" D CTSTORE(LOCATION,MFGR,MODEL,DATE,MODPARMS,.D0)
+ . Q
+ ;
+ S ^MAGDICOM(2006.5821,0)="CT CONVERSION PARAMETERS^2006.5821^"_D0_"^"_D0
+ S X=D0_" CT Conversion History record"_$S(D0>1:"s",1:"")_" added to the database."
+ D MESSAGE^MAGDMLOG(1,0,X,"t")
+ Q
+ ;
+CTSTORE(LOCATION,MFGR,MODEL,DATE,MODPARMS,D0) ;
+ N DAY,MONTH,YEAR
+ S DAY=$P(DATE,"-",1),MONTH=$P(DATE,"-",2),YEAR=$P(DATE,"-",3)
+ S MONTH=$F("JAN FEB MAR APR MAY JUN JUL AUG SEP OCT NOV DEC",MONTH)/4
+ I DAY<10 S DAY="0"_DAY
+ I MONTH<10 S MONTH="0"_MONTH
+ S DATE=(YEAR-1700)_MONTH_DAY
+ S D0=D0+1
+ S:'LOCATION LOCATION=^MAGDICOM(2006.563,1,"LOCATION")
+ S ^MAGDICOM(2006.5821,D0,0)=LOCATION_"^"_MFGR_"^"_MODEL_"^"_DATE_"^"_MODPARMS
+ S ^MAGDICOM(2006.5821,"B",LOCATION,D0)=""
+ S ^MAGDICOM(2006.5821,"C",LOCATION,MFGR,MODEL,DATE,D0)=""
+ Q
+ ;
+LOOKUP(LOCATION,MFGR,MODEL,DATE) N BEGDATE,D0
+ S BEGDATE=$O(^MAGDICOM(2006.5821,"C",LOCATION,MFGR,MODEL,DATE+1),-1)
+ I 'BEGDATE Q "<unknown>"
+ S D0=+$O(^MAGDICOM(2006.5821,"C",LOCATION,MFGR,MODEL,BEGDATE,""))
+ Q $P($G(^MAGDICOM(2006.5821,D0,0)),"^",5)_"^"_BEGDATE
+ ;

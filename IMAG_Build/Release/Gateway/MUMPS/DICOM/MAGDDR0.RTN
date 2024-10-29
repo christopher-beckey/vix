@@ -1,0 +1,253 @@
+MAGDDR0 ;WOIFO/PMK - Extrinsic functions to read DICOM File Datatypes ; 12/20/2006 07:01
+ ;;3.0;IMAGING;**1,10,51,54**;MAR 19, 2002;;OCT 28, 2009
+ ;; Per VHA Directive 2004-038, this routine should not be modified.
+ ;; +---------------------------------------------------------------+
+ ;; | Property of the US Government.                                |
+ ;; | No permission to copy or redistribute this software is given. |
+ ;; | Use of unreleased versions of this software requires the user |
+ ;; | to execute a written test agreement with the VistA Imaging    |
+ ;; | Development Office of the Department of Veterans Affairs,     |
+ ;; | telephone (301) 734-0100.                                     |
+ ;; | The Food and Drug Administration classifies this software as  |
+ ;; | a medical device.  As such, it may not be changed in any way. |
+ ;; | Modifications to this software may result in an adulterated   |
+ ;; | medical device under 21CFR820, the use of which is considered |
+ ;; | to be a violation of US Federal Statutes.                     |
+ ;; +---------------------------------------------------------------+
+ ;;
+ Q
+ ; This routine gets one value for an element.  It is invoked both by
+ ; ^MAGDDR1 (which handles multiple values) and by ^MAGDDR2
+ ;
+ ; Set "BYTEORDR" to "L" for Little Endian and "B" for Big Endian
+ ;
+AE(N,DELIMIT) ; Application Entity
+ Q $$GETASCII(.N,.DELIMIT,"LT")
+ ;
+AS(N,DELIMIT) ; Age String
+ Q $$GETASCII(.N,.DELIMIT,"")
+ ;
+AT(GROUP,ELEMENT) ; Attribute Tag
+ S GROUP=$$HEX($$GETUSHOR(),4),ELEMENT=$$HEX($$GETUSHOR(),4) Q
+ ;
+CS(N,DELIMIT) ; Code String
+ Q $$GETASCII(.N,.DELIMIT,"LT")
+ ;
+DA(N,DELIMIT) ; Date
+ Q $$GETASCII(.N,.DELIMIT,"T")
+ ;
+DS(N,DELIMIT) ; Decimal String
+ Q $$GETASCII(.N,.DELIMIT,"LT")
+ ;
+DT(N,DELIMIT) ; Date Time
+ Q $$GETASCII(.N,.DELIMIT,"T")
+ ;
+FL() ; Floating Point Single (4 bytes long)
+ N T1,T2,T3,T4
+ I BYTEORDR="B" R *T1,*T2,*T3,*T4
+ E  R *T4,*T3,*T2,*T1
+ Q $C(T1,T2,T3,T4)
+ ;
+FD() ; Floating Point Double (8 bytes long)
+ N T1,T2,T3,T4,T5,T6,T7,T8
+ ;
+ I BYTEORDR="B" R *T1,*T2,*T3,*T4,*T5,*T6,*T7,*T8
+ E  R *T8,*T7,*T6,*T5,*T4,*T3,*T2,*T1
+ Q $C(T1,T2,T3,T4,T5,T6,T7,T8)
+ ;
+FMTFL(FORMAT,DIGITS,VALUE) ; Floating Point Single (4 bytes long)
+ ; FORMAT: 0 = scientific (integer part is always 0)
+ ;         1 = C-like (integer part is always 1 digit)
+ ;         3 = metric like (integer part is always between 1 and 999)
+ ; DIGITS: 0 = no rounding, just take the value that is calculated
+ ;        >0  round the value at "so many" digits
+ ; VALUE:  IEEE value of the floating point number (4 byte string)
+ ;
+ N E,K,M,S,T1,T2,T3,T4
+ ;
+ ; IEEE floating point single precision format
+ ;
+ ; single: 4 bytes
+ ; 1 bit: sign
+ ; 8 bits: biased exponent +127
+ ; 23 bits: mantissa, normalized: highest bit is always 1 (not stored)
+ ;
+ S T1=$A(VALUE,1),T2=$A(VALUE,2),T3=$A(VALUE,3),T4=$A(VALUE,4)
+ S FORMAT=$G(FORMAT),DIGITS=$G(DIGITS)
+ ;
+ S S=T1\128,E=T1#128*2+(T2\128)
+ S M=(T2#128)*256+T3*256+T4
+ I E=255,M=0 Q $S(S:"-",1:"+")_"infinity"
+ I E=255 Q $S(S:"-",1:"+")_"Not A Number "_M
+ I E=0,M=0 Q $S(S:"-",1:"")_"0."_$TR($J("",DIGITS)," ",0)_"E+000"
+ S M=128*256*256+M,E=E-127-23
+ Q $$FMTFLFD()
+ ;
+FMTFD(FORMAT,DIGITS,VALUE) ; Floating Point Double (8 bytes long)
+ ; FORMAT: 0 = scientific (integer part is always 0)
+ ;         1 = C-like (integer part is always 1 digit)
+ ;         3 = metric like (integer part is always between 1 and 999)
+ ; DIGITS: 0 = no rounding, just take the value that is calculated
+ ;        >0  round the value at "so many" digits
+ ; VALUE:  IEEE value of the floating point number (8 byte string)
+ ;
+ N E,K,S,M,T1,T2,T3,T4,T5,T6,T7,T8
+ ;
+ ; IEEE floating point double precision format
+ ;
+ ; double: 8 bytes
+ ; 1 bit: sign  1 = negative
+ ; 11 bits: biased exponent +1023
+ ; 52 bits: mantissa, normalized: highest bit is always 1 (not stored)
+ ;
+ S T1=$A(VALUE,1),T2=$A(VALUE,2),T3=$A(VALUE,3),T4=$A(VALUE,4)
+ S T5=$A(VALUE,5),T6=$A(VALUE,6),T7=$A(VALUE,7),T8=$A(VALUE,8)
+ S FORMAT=$G(FORMAT),DIGITS=$G(DIGITS)
+ ;
+ S S=T1\128,E=T1#128*16+(T2\16)
+ S M=(T2#16)*256+T3*256+T4*256+T5*256+T6*256+T7*256+T8
+ I E=2047,M=0 Q $S(S:"-",1:"+")_"infinity"
+ I E=2047 Q $S(S:"-",1:"+")_"Not A Number "_M
+ I E=0,M=0 Q $S(S:"-",1:"")_"0."_$TR($J("",DIGITS)," ",0)_"E+000"
+ S M=16*256*256*256*256*256*256+M,E=E-1023-52
+ Q $$FMTFLFD()
+ ;
+FMTFLFD() ; common pathway for formatting both FLOAT and DOUBLE
+ I E>0 D
+ . N $ET
+ . S $ET="S M=""Overflow"",$EC="""" Q"
+ . F K=1:1:E S M=M*2
+ . Q
+ I E<0 F K=1:1:-E S M=M/2
+ D:FORMAT_DIGITS'=""&M
+ . N MUL,POW,TEN
+ . S TEN=0,MUL=10,POW=1 S:+FORMAT=3 MUL=1000,POW=3
+ . F  Q:M'<1  S M=M*MUL,TEN=TEN-POW
+ . F  Q:M<MUL  S M=M/MUL,TEN=TEN+POW
+ . S:'FORMAT M=M/10,TEN=TEN+1
+ . D:DIGITS
+ . . N HALF,I,N
+ . . S N=DIGITS I POW=3 S N=N+1-$L($P(M,".",1))
+ . . S HALF="0." F I=1:1:N S HALF=HALF_0
+ . . S HALF=HALF_5
+ . . S M=M+HALF S:M'["." M=M_"."
+ . . S:M'<MUL M=M/MUL,TEN=TEN+POW
+ . . S M=$E(M_$TR(HALF,".5"),1,$F(M,".")+N-1)
+ . . Q
+ . S:$E(M,1)="." M=0_M
+ . S M=M_"E"
+ . I TEN<0 S M=M_"-"_$TR($J(-TEN,3)," ",0) ; exponent negative
+ . E  S M=M_"+"_$TR($J(TEN,3)," ",0) ; exponent positive
+ . Q
+ S:S M="-"_M
+ Q M
+ ;
+IS(N,DELIMIT) ; Integer String
+ Q $$GETASCII(.N,.DELIMIT,"LT")
+ ;
+LO(N,DELIMIT) ; Long String
+ Q $$GETASCII(.N,.DELIMIT,"LT")
+ ;
+LT(N,DELIMIT) ; Long Text
+ Q $$GETASCII(.N,"","T") ; Note: may contain "\" in text
+ ;
+OB(N) ; Other Byte String
+ Q $$GETBYTE()
+ ;
+OW(N,DELIMIT) ; Other Word String
+ Q $$GETUSHOR()
+ ;
+PN(N,DELIMIT) ; Person Name
+ Q $$GETASCII(.N,.DELIMIT,"T")
+ ;
+SH(N,DELIMIT) ; Short String
+ Q $$GETASCII(.N,.DELIMIT,"LT")
+ ;
+SL(N,DELIMIT) ; Signed Long
+ Q $$GETLONG()
+ ;
+SQ(N,DELIMIT) ; Sequence of Items
+ Q 0
+ ;
+SS(N,DELIMIT) ; Signed Short
+ Q $$GETSHORT()
+ ;
+ST(N,DELIMIT) ; Short Text
+ Q $$GETASCII(.N,"","T") ; Note: may contain "\" in text
+ ;
+TM(N,DELIMIT) ; Time
+ Q $$GETASCII(.N,.DELIMIT,"T")
+ ;
+UI(N,DELIMIT) ; Unique Identifier (UID)
+ Q $$GETASCII(.N,.DELIMIT,"N")
+ ;
+UL(N,DELIMIT) ; Unsigned Long
+ Q $$GETULONG()
+ ;
+US(N,DELIMIT) ; Unsigned Short
+ Q $$GETUSHOR()
+ ;
+UT(N,DELIMIT) ; Unlimited Text
+ Q $$GETASCII(.N,"","T") ; Note: may contain "\" in text
+ ;
+HEX(X,LENGTH) ; convert a decimal value to hexadecimal
+ Q $$DEC2HEX^MAGOSMSC(X,LENGTH,32)
+ ;
+GETBYTE() ; Read an 8-bit byte
+ N BYTE
+ R *BYTE
+ Q BYTE
+ ;
+GETSHORT() ; Read a 16-bit short integer
+ N X
+ S X=$$GETUSHOR()
+ I X>32767 Q X-65536
+ Q X
+ ;
+GETUSHOR() ; Read a 16-bit unsigned short integer
+ N BYTE0,BYTE1
+ I $E(BYTEORDR)="B" R *BYTE1,*BYTE0 ; Big Endian
+ E  R *BYTE0,*BYTE1 ; Little Endian
+ Q BYTE1*256+BYTE0
+ ;
+GETLONG() ; Read a 32-bit long integer
+ N X
+ S X=$$GETULONG()
+ I X>2147483647 Q X-4294967296
+ Q X
+ ;
+GETULONG() ; Read a 32-bit unsigned long integer
+ N BYTE0,BYTE1,BYTE2,BYTE3
+ I $E(BYTEORDR)="B" R *BYTE3,*BYTE2,*BYTE1,*BYTE0 ; Big Endian
+ E  R *BYTE0,*BYTE1,*BYTE2,*BYTE3 ; Little Endian
+ Q BYTE3*256+BYTE2*256+BYTE1*256+BYTE0
+ ;
+GETASCII(N,TERMINAT,STRIP) ; Read a fixed-length n-character ASCII string
+ N DONE,I,J,X,Y
+ S DONE=0,Y=""
+ I N>0 D  ; N will be 0 if the field is null
+ . F I=1:1:N D  Q:DONE  ; read each character, one byte at a time
+ . . R *X
+ . . I X=10 S TERMINAT="",DONE=1 Q  ; <lf> == EOL, <cr> assumed
+ . . I $C(X)=TERMINAT S DONE=1 Q  ; multiple delimiter found
+ . . I X>31,X<127 S Y=Y_$C(X) ; Only concatenate if not a control-character
+ . . I $L(Y)>252 S TERMINAT="*",DONE=1 Q  ; line is too long
+ . . Q
+ . S N=N-I ; decrement the character count by number bytes read
+ . Q
+ I N=0 S TERMINAT="" ; input terminated by reading n-characters
+ S I=1,J=$L(Y) ; strip leading (numeric) or trailing (string) pads
+ I STRIP["L" F I=1:1:J Q:$A($E(Y,I))'=32  ;strip leading pads
+ I STRIP["T" F J=J:-1:0 Q:$A($E(Y,J))'=32  ;strip trailing pads
+ I STRIP["N" F J=J:-1:0 Q:$A($E(Y,J))'=0  ;strip trailing NULLS
+ Q $E(Y,I,J)
+ ;
+GETUNKWN(FILE,N) ; Read an unknown fixed-length n-character ASCII string
+ N X,Y,OFFSET,STATUS
+ S Y=$$GETOFSET^MAGOSFIL(FILE)
+ S OFFSET=Y+N
+ I N=0 Q ""
+ S STATUS=$$READ^MAGOSFIL(FILE,.X,,$S(N>255:255,1:N))
+ S OFFSET=$$SEEK^MAGOSFIL(FILE,OFFSET) ; reposition to end of field
+ Q X
+ ;

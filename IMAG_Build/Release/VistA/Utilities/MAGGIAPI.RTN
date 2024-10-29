@@ -1,0 +1,117 @@
+MAGGIAPI ;WOIFO/GEK - Test the Import API
+ ;;2.5;IMAGING;**7**;Feb 7, 2002
+ ;; +---------------------------------------------------------------+
+ ;; | Property of the US Government.                                |
+ ;; | No permission to copy or redistribute this software is given. |
+ ;; | Use of unreleased versions of this software requires the user |
+ ;; | to execute a written test agreement with the VistA Imaging    |
+ ;; | Development Office of the Department of Veterans Affairs,     |
+ ;; | telephone (301) 734-0100.                                     |
+ ;; |                                                               |
+ ;; | The Food and Drug Administration classifies this software as  |
+ ;; | a medical device.  As such, it may not be changed in any way. |
+ ;; | Modifications to this software may result in an adulterated   |
+ ;; | medical device under 21CFR820, the use of which is considered |
+ ;; | to be a violation of US Federal Statutes.                     |
+ ;; +---------------------------------------------------------------+
+ ;;
+ Q
+ ;
+ ;
+ ;IMPORT(MAGRY,IMAGES,IDFN,PXPKG,PXIEN,PXDT,TRKID,ACQD,ACQS,STSCB,
+ ;                        ITYPE,CMTH,CDUZ,USERPASS,GDESC,DFLG,TRTYPE)
+ ;
+ALL(CT) ;;Use all entries in the TMP("IAPI" global as test data CT times
+ S CT=$G(CT,1)
+ N ENTS
+ S ENTS=""
+ S I="" F  S I=$O(^MAGTMP("IAPI",I)) Q:'I  S ENTS=ENTS_I_","
+ S ENTS=$E(ENTS,1,$L(ENTS)-1)
+ D MULT(ENTS,CT,"Z")
+ Q
+MULT(TQ,COUNT,LTR) ; IMPORT the same data NUM Times
+ ; TQ is the IEN of the Temp (testing) file MAGTMP("IAPI",TQ
+ ; of TQ could be in the form 2,3,5
+ ;      which means use 2,3,5 COUNT times each
+ I '$L($G(LTR)) S LTR="A"
+ N TTRK,IDT,TQQ,TQA
+ N IC
+ S IC=0
+ F TQQ=1:1:$L(TQ,",") S TQA=$P(TQ,",",TQQ) D
+ . H 1
+ . S IC=0
+ . S IDT=$E($$NOW^XLFDT,4,14)
+ . S TTRK="GEK;"_IDT_LTR
+ . F  S IC=IC+1 Q:(IC>COUNT)  D
+ . . S ^MAGTMP("IAPI",TQA,"GDESC")="GDESC "_IDT
+ . . S ^MAGTMP("IAPI",TQA,"TRKID")=TTRK_IC
+ . . D ONE(TQA)
+ Q
+ONE(I) ;Use one of the nodes in the ^MAGTMP("IAPI" global as test data.
+ I '$D(^MAGTMP("IAPI",I)) Q
+ N MAGRY
+ K IMAGES,MAGARR
+ ;
+ ; "IDFN","PXPKG","PXIEN","PXDT","TRKID","ACQD","ACQS","ACQL","STSCB",
+ ; "ITYPE","CMTH","CDUZ","USERNAME","PASSWORD","GDESC","DFLG",
+ ; "TRTYPE","DOCCTG1","DOCCTG2","DOCCTG3","DOCDT"
+ ;
+ M IMAGES=^MAGTMP("IAPI",I,"IMAGE")
+ M MAGARR=^MAGTMP("IAPI",I)
+ K MAGARR("IMAGE")
+ ;
+ D IMPORT^MAGGSIUI(.MAGRY,.IMAGES,.MAGARR)
+ ;
+ W !,"- - - - - - - - - "
+ W !,"Return Array from MAGGSIUI:",! ZW MAGRY
+ ZW MAGARR
+ ZW IMAGES
+ Q
+RPCONE(I) ;Use one of the nodes in the TMP("IAPI" global as test data.
+ I '$D(^MAGTMP("IAPI",I)) Q
+ N MAGARR,MAGRY,MAGDATA,MAGTMP,CT
+ ;
+ ; "IDFN","PXPKG","PXIEN","PXDT","TRKID","ACQD","ACQS","ACQL","STSCB",
+ ; "ITYPE","CMTH","CDUZ","USERNAME","PASSWORD","GDESC","DFLG",
+ ; "TRTYPE","DOCCTG1","DOCCTG2","DOCCTG3","DOCDT"
+ ;
+ M MAGTMP=^MAGTMP("IAPI",I)
+ M MAGDATA=MAGTMP("IMAGE")
+ S I="" F  S I=$O(MAGDATA(I)) Q:'I  S MAGDATA(I)="IMAGE^"_MAGDATA(I)
+ S CT=$O(MAGDATA(""),-1)
+ K MAGTMP("IMAGE")
+ S I="" F  S I=$O(MAGTMP(I)) Q:I=""  D
+ . S CT=CT+1,MAGDATA(CT)=I_"^"_MAGTMP(I)
+ ;
+ D REMOTE^MAGGSIUI(.MAGRY,.MAGDATA)
+ ;
+ W !,"Return Array from REMOTE^MAGGSIUI:",! ZW MAGRY
+ Q
+CLEARALL ; This clears the results from all TMP("IAPI" NODES.
+ S I=0 F  S I=$O(^MAGTMP("IAPI",I)) Q:'I  D
+ . K ^MAGTMP("IAPI",I,"R")
+ . K ^MAGTMP("IAPI",I,"Z")
+ . K ^MAGTMP("IAPI",I,"Q")
+ . ;K ^MAGTMP("IAPI",I,"RESULTS")
+ K ^MAGTMP("IAPI","Q")
+ Q
+CLEARONE(I) ;
+ K ^MAGTMP("IAPI",I,"Z")
+ Q
+DELPAT(MAGDFN) ;FOR TESTING ONLY, DELETE ALL IMAGES FOR A PATIENT
+ W "DELETE ALL IMAGES FOR THIS PATIENT "
+ W !,"Patient : "_$G(^DPT(MAGDFN,0))
+ R "Y/N   //N   ",X:8
+ I '(X="Y") W !,"NOTHING DELETED" Q
+ W !
+ R "ARE YOU SURE !!!!!!  Y/N   //N   ",X:8
+ I '(X="Y") W !,"NOTHING DELETED" Q
+ W !,"DELETING.... hit any key to stop after deleting current image "
+ N MAGDELI,XX S XX=""
+ S MAGDELI=0 F  S MAGDELI=$O(^MAG(2005,"AC",MAGDFN,MAGDELI)) Q:'MAGDELI  D  Q:MAGSTOP
+ . K XX D IMAGEDEL^MAGGTID(.XX,MAGDELI)
+ . W !,MAGDELI ZW XX
+ . S MAGSTOP=""
+ . R MAGSTOP#1:0
+ . I '(MAGSTOP="") S MAGSTOP=1 W !,MAGSTOP
+ Q

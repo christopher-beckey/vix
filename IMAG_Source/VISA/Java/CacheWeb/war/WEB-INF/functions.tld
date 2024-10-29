@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<taglib version="1.2" xmlns="http://java.sun.com/xml/ns/javaee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee web-jsptaglibrary_1_2.xsd">
+	<tlib-version>1.0</tlib-version>
+	<short-name>func</short-name>
+	<uri>http://imaging.med.va.gov/cache/functions</uri>
+
+	<function>
+		<name>buildQueryString</name>
+		<function-class>gov.va.med.cache.CacheManagementService</function-class>
+		<function-signature>String buildQueryString(gov.va.med.cache.gui.shared.CacheItemPath)</function-signature>
+	</function>
+	
+	<function>
+		<name>getGroupSemanticType</name>
+		<function-class>gov.va.med.cache.gui.server.CacheSemantics</function-class>
+		<function-signature>String getGroupSemanticType(java.lang.String, java.lang.String, int)</function-signature>
+	</function>
+	
+	<function>
+		<name>getInstanceSemanticType</name>
+		<function-class>gov.va.med.cache.gui.server.CacheSemantics</function-class>
+		<function-signature>String getInstanceSemanticType(java.lang.String, java.lang.String)</function-signature>
+	</function>
+	
+	<function>
+		<name>createPathInfo</name>
+		<function-class>gov.va.med.cache.rest.IdentifierUtility</function-class>
+		<function-signature>String createPathInfo(gov.va.med.cache.gui.shared.CacheItemPath)</function-signature>
+	</function>
+	
+</taglib>

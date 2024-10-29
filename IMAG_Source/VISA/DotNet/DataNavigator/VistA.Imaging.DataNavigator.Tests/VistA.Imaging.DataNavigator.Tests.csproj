@@ -1,0 +1,247 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{CEC5F075-2F16-48E5-BE2C-95CBD1BAA486}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>VistA.Imaging.DataNavigator.Tests</RootNamespace>
+    <AssemblyName>VistA.Imaging.DataNavigator.Tests</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <CodeContractsEnableRuntimeChecking>True</CodeContractsEnableRuntimeChecking>
+    <CodeContractsRuntimeCheckingLevel>Full</CodeContractsRuntimeCheckingLevel>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.ExtendedReflection, Version=0.94.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.Moles.Framework, Version=0.94.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.Pex.Framework, Version=0.94.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.Pex.Linq, Version=0.94.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.Practices.Prism">
+      <HintPath>..\packages\Prism.4.0.0.0\lib\NET40\Microsoft.Practices.Prism.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Prism.Interactivity">
+      <HintPath>..\packages\Prism.4.0.0.0\lib\NET40\Microsoft.Practices.Prism.Interactivity.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\CommonServiceLocator.1.0\lib\NET35\Microsoft.Practices.ServiceLocation.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity">
+      <HintPath>..\VistA.Imaging.DataNavigator\bin\Debug\Microsoft.Practices.Unity.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="Moq">
+      <HintPath>..\packages\Moq.4.0.10827\lib\NET40\Moq.dll</HintPath>
+    </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Xaml" />
+    <Reference Include="System.Xml" />
+    <Reference Include="VistA.Imaging.DataNavigator.Moles, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL" />
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <CodeAnalysisDependentAssemblyPaths Condition=" '$(VS100COMNTOOLS)' != '' " Include="$(VS100COMNTOOLS)..\IDE\PrivateAssemblies">
+      <Visible>False</Visible>
+    </CodeAnalysisDependentAssemblyPaths>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ImagingClient.Infrastructure\ImagingClient.Infrastructure.csproj">
+      <Project>{0C709BAB-8C69-4624-BE2D-2F3554CE8173}</Project>
+      <Name>ImagingClient.Infrastructure</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\VistA.Imaging.DataNavigator\VistA.Imaging.DataNavigator.csproj">
+      <Project>{ADB560F1-D5BD-4E22-95B0-7999508B054B}</Project>
+      <Name>VistA.Imaging.DataNavigator</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="DataNavigatorModuleTest.Constructor.g.cs">
+      <DependentUpon>DataNavigatorModuleTest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DataNavigatorModuleTest.cs" />
+    <Compile Include="Factories\DataNavigatorModuleFactory.cs" />
+    <Compile Include="Factories\FilemanFilePointerFactory.cs" />
+    <Compile Include="Factories\FilemanFileViewModelFactory.cs" />
+    <Compile Include="Factories\HierarchicalEntryLoadViewModelFactoryFactory.cs" />
+    <Compile Include="Factories\RegionManagerFactory.cs" />
+    <Compile Include="Factories\UnityContainerFactory.cs" />
+    <Compile Include="Model\FilemanEntrySearchResultTest.cs" />
+    <Compile Include="Model\FilemanEntryTest.Constructor.g.cs">
+      <DependentUpon>FilemanEntryTest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Model\FilemanEntryTest.cs" />
+    <Compile Include="Model\FilemanEntryTest.ItemGet.g.cs">
+      <DependentUpon>FilemanEntryTest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Model\FilemanEntryTest.ToString01.g.cs">
+      <DependentUpon>FilemanEntryTest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Model\FilemanFieldPointerTest.Constructor.g.cs">
+      <DependentUpon>FilemanFieldPointerTest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Model\FilemanFieldPointerTest.cs" />
+    <Compile Include="Model\FilemanFieldPointerTest.TargetFieldGet.g.cs">
+      <DependentUpon>FilemanFieldPointerTest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Model\FilemanFieldTest.Constructor.g.cs">
+      <DependentUpon>FilemanFieldTest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Model\FilemanFieldTest.cs" />
+    <Compile Include="Model\FilemanFieldTest.ToString01.g.cs">
+      <DependentUpon>FilemanFieldTest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Model\FilemanFieldValueComparerTest.Compare.g.cs">
+      <DependentUpon>FilemanFieldValueComparerTest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Model\FilemanFieldValueComparerTest.Compare01.g.cs">
+      <DependentUpon>FilemanFieldValueComparerTest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Model\FilemanFieldValueComparerTest.Constructor.g.cs">
+      <DependentUpon>FilemanFieldValueComparerTest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Model\FilemanFieldValueComparerTest.cs" />
+    <Compile Include="Model\FilemanFieldValueTest.cs" />
+    <Compile Include="Model\FilemanFieldValueTest.ToString01.g.cs">
+      <DependentUpon>FilemanFieldValueTest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Model\FilemanFilePointerTest.Constructor.g.cs">
+      <DependentUpon>FilemanFilePointerTest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Model\FilemanFilePointerTest.cs" />
+    <Compile Include="Model\FilemanFilePointerTest.TargetFileGet.g.cs">
+      <DependentUpon>FilemanFilePointerTest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Model\FilemanFileTest.Constructor.g.cs">
+      <DependentUpon>FilemanFileTest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Model\FilemanFileTest.cs" />
+    <Compile Include="Model\FilemanFileTest.ItemGet.g.cs">
+      <DependentUpon>FilemanFileTest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Model\FilemanFileTest.ToString01.g.cs">
+      <DependentUpon>FilemanFileTest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Model\SearchTypeTest.cs" />
+    <Compile Include="Model\SearchTypeTest.ToString01.g.cs">
+      <DependentUpon>SearchTypeTest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\PexAssemblyInfo.cs" />
+    <Compile Include="ViewModels\DataNavigationViewModelTest.Constructor.g.cs">
+      <DependentUpon>DataNavigationViewModelTest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\DataNavigationViewModelTest.Constructor01.g.cs">
+      <DependentUpon>DataNavigationViewModelTest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\DataNavigationViewModelTest.cs" />
+    <Compile Include="ViewModels\Factories\HierarchicalEntryLoadViewModelFactoryTest.Constructor.g.cs">
+      <DependentUpon>HierarchicalEntryLoadViewModelFactoryTest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\Factories\HierarchicalEntryLoadViewModelFactoryTest.CreateHierarchicalEntryLoadViewModel.g.cs">
+      <DependentUpon>HierarchicalEntryLoadViewModelFactoryTest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\Factories\HierarchicalEntryLoadViewModelFactoryTest.cs" />
+    <Compile Include="ViewModels\Factories\HierarchicalEntryViewModelFactoryTest.Constructor.g.cs">
+      <DependentUpon>HierarchicalEntryViewModelFactoryTest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\Factories\HierarchicalEntryViewModelFactoryTest.CreateHierarchicalEntryViewModel.g.cs">
+      <DependentUpon>HierarchicalEntryViewModelFactoryTest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\Factories\HierarchicalEntryViewModelFactoryTest.cs" />
+    <Compile Include="ViewModels\FilemanFieldViewModelTest.Constructor.g.cs">
+      <DependentUpon>FilemanFieldViewModelTest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\FilemanFieldViewModelTest.cs" />
+    <Compile Include="ViewModels\FilemanFieldViewModelTest.ToString01.g.cs">
+      <DependentUpon>FilemanFieldViewModelTest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\FilemanFileViewModelTest.Constructor.g.cs">
+      <DependentUpon>FilemanFileViewModelTest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\FilemanFileViewModelTest.cs" />
+    <Compile Include="ViewModels\FilemanFileViewModelTest.IndexedFieldViewModelsGet.g.cs">
+      <DependentUpon>FilemanFileViewModelTest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\FilemanFileViewModelTest.ToString01.g.cs">
+      <DependentUpon>FilemanFileViewModelTest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\HierarchicalEntryLoadViewModelTest.Constructor.g.cs">
+      <DependentUpon>HierarchicalEntryLoadViewModelTest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\HierarchicalEntryLoadViewModelTest.cs" />
+    <Compile Include="ViewModels\HierarchicalEntryViewModelTest.Constructor.g.cs">
+      <DependentUpon>HierarchicalEntryViewModelTest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\HierarchicalEntryViewModelTest.cs" />
+    <Compile Include="ViewModels\HierarchicalEntryViewModelTest.IsExpandedGet.g.cs">
+      <DependentUpon>HierarchicalEntryViewModelTest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\HierarchicalEntryViewModelTest.IsExpandedSet.g.cs">
+      <DependentUpon>HierarchicalEntryViewModelTest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\HierarchicalEntryViewModelTest.ParentGet.g.cs">
+      <DependentUpon>HierarchicalEntryViewModelTest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\HierarchicalEntryViewModelTest.ParentSet.g.cs">
+      <DependentUpon>HierarchicalEntryViewModelTest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\HierarchicalEntryViewModelTest.ToString01.g.cs">
+      <DependentUpon>HierarchicalEntryViewModelTest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\LaunchViewModelTest.Constructor.g.cs">
+      <DependentUpon>LaunchViewModelTest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\LaunchViewModelTest.cs" />
+    <Compile Include="ViewModels\TreeNodeViewModelTest.Constructor.g.cs">
+      <DependentUpon>TreeNodeViewModelTest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\TreeNodeViewModelTest.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Moles Include="VistA.Imaging.DataNavigator.moles" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

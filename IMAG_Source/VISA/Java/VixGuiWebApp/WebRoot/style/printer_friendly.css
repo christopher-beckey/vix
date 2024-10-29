@@ -1,0 +1,44 @@
+/* printer-friendly set up for FireFox 3.x, invoked from TransactionLog.jsp. 
+
+
+Specific divs and spans, these determine the layout of the pages.
+Currently the pages are organized as follows:
+
+-------------------------------------------------
+|                Page Header                    |
+-------------------------------------------------
+|                  Menu                         |
+-------------------------------------------------
+|         |                                     |
+| sel-    |    supporting-text                  |
+| ection  |                                     |
+-------------------------------------------------
+|              Page Footer                      |
+------------------------------------------------- 
+
+
+*/
+
+
+#container
+   {
+    position: relative;
+   }
+
+
+html {
+	  margin: 0;
+	  padding: 0;
+	  display: inline;
+	 }
+
+
+#pageHeader, .DHTMLSuite_menuBar_top, #resultsNavigationTop, #resultsNavigationBottom, #container #selection, #center
+    {
+	 display: none;
+	}
+
+#supportingText #dateRange
+    {
+	 margin-left: 0;
+	}

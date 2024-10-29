@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<build xmlns="http://va.gov/VistA/kids/manifest" name="MAG*3.0*113" patchName="LSRP Support" patch="113">
+  <components>
+    <securityKeys />
+    <parameterDefinitions />
+    <printTemplates />
+    <sortTemplates />
+    <menuOptions>
+      <menuOption export="OPT_MAG_AP_GCC.KID" />
+    </menuOptions>
+    <rpcs>
+      <rpc export="RPC_MAGGLAB_DFN.KID" />
+    </rpcs>
+    <dataDictionaries>
+      <dataDictionary export="DD_2005_867.KID" />
+    </dataDictionaries>
+    <hl7s />
+    <routines>
+      <routine export="MAGGTID.RTN" />
+      <routine export="MAGGTLB.RTN" />
+      <routine export="MAGGTLB1.RTN" />
+      <routine export="MAGGTU4C.RTN" />
+      <routine export="MAGGTU4D.RTN" />
+      <routine export="MAGGTU4L.RTN" />
+      <routine export="MAGGTU4T.RTN" />
+      <routine export="MAGIP113.RTN" />
+      <routine export="MAGQBGCC.RTN" />
+    </routines>
+    <protocols />
+  </components>
+</build>

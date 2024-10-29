@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <InstallShieldProject>$(FullBuildPath)$(TempFolder)\Install\InstallShield\$(InstallShield).ism</InstallShieldProject>
+    <InstallShieldPath>C:\Program Files\InstallShield\2011\System</InstallShieldPath>
+    <BuildCompressed>True</BuildCompressed>
+  </PropertyGroup>
+  <ItemGroup>
+    <InstallShieldReleaseConfiguration Include="SINGLE_EXE_IMAGE"/>
+    <InstallShieldPathVariableOverrides Include="$(FullBuildPath)$(TempFolder)\LIB\Accusoft">
+      <PathVariable>PATH_TO_ACCUSOFT_FILES</PathVariable>
+    </InstallShieldPathVariableOverrides>
+    <InstallShieldPathVariableOverrides Include="$(FullBuildPath)$(TempFolder)\Baseline\DICT">
+      <PathVariable>PATH_TO_BASELINE_FILES</PathVariable>
+    </InstallShieldPathVariableOverrides>
+    <InstallShieldPathVariableOverrides Include="$(FullBuildPath)$(TempFolder)\Source\Batch_Files">
+      <PathVariable>PATH_TO_BATCH_FILES_FILES</PathVariable>
+    </InstallShieldPathVariableOverrides>
+    <InstallShieldPathVariableOverrides Include="$(FullBuildPath)$(TempFolder)\INSTALL\Cache">
+      <PathVariable>PATH_TO_CACHE_FILES1</PathVariable>
+    </InstallShieldPathVariableOverrides>
+    <InstallShieldPathVariableOverrides Include="$(FullBuildPath)$(TempFolder)\Source\Compiled">
+      <PathVariable>PATH_TO_COMPILED_FILES</PathVariable>
+    </InstallShieldPathVariableOverrides>
+    <InstallShieldPathVariableOverrides Include="$(FullBuildPath)$(TempFolder)\Utilities\Compiled">
+      <PathVariable>PATH_TO_COMPILED_FILES1</PathVariable>
+    </InstallShieldPathVariableOverrides>
+    <InstallShieldPathVariableOverrides Include="$(FullBuildPath)$(TempFolder)\LIB\Laurel_Bridge">
+      <PathVariable>PATH_TO_DCF_FILES</PathVariable>
+    </InstallShieldPathVariableOverrides>
+    <InstallShieldPathVariableOverrides Include="$(FullBuildPath)$(TempFolder)\Distrib">
+      <PathVariable>PATH_TO_DCMVIEW_FILES</PathVariable>
+    </InstallShieldPathVariableOverrides>
+    <InstallShieldPathVariableOverrides Include="$(FullBuildPath)$(TempFolder)\">
+      <PathVariable>PATH_TO_DICOM_FILES</PathVariable>
+    </InstallShieldPathVariableOverrides>
+    <InstallShieldPathVariableOverrides Include="$(FullBuildPath)$(TempFolder)\Baseline\MUMPS\DICOM">
+      <PathVariable>PATH_TO_DICOM_FILES1</PathVariable>
+    </InstallShieldPathVariableOverrides>
+    <InstallShieldPathVariableOverrides Include="$(FullBuildPath)$(TempFolder)\Baseline\DICT">
+      <PathVariable>PATH_TO_DICT_FILES</PathVariable>
+    </InstallShieldPathVariableOverrides>
+    <InstallShieldPathVariableOverrides Include="$(FullBuildPath)$(TempFolder)\Documentation">
+      <PathVariable>PATH_TO_DOCUMENTATION_FILES</PathVariable>
+    </InstallShieldPathVariableOverrides>
+    <InstallShieldPathVariableOverrides Include="$(FullBuildPath)$(TempFolder)\Distrib">
+      <PathVariable>PATH_TO_DISTRIB_FILES</PathVariable>
+    </InstallShieldPathVariableOverrides>
+    <InstallShieldPathVariableOverrides Include="$(FullBuildPath)$(TempFolder)\JAVA">
+      <PathVariable>PATH_TO_ENGINE_FILES</PathVariable>
+    </InstallShieldPathVariableOverrides>
+    <InstallShieldPathVariableOverrides Include="$(FullBuildPath)$(TempFolder)\ICON">
+      <PathVariable>PATH_TO_ICON_FILES</PathVariable>
+    </InstallShieldPathVariableOverrides>
+    <InstallShieldPathVariableOverrides Include="$(FullBuildPath)$(TempFolder)\Images">
+      <PathVariable>PATH_TO_IMAGES_FILES</PathVariable>
+    </InstallShieldPathVariableOverrides>
+    <InstallShieldPathVariableOverrides Include="$(FullBuildPath)$(TempFolder)\Lib\Laurel_Bridge\">
+      <PathVariable>PATH_TO_LAUREL_BRIDGE_FILES</PathVariable>
+    </InstallShieldPathVariableOverrides>
+    <InstallShieldPathVariableOverrides Include="$(FullBuildPath)$(TempFolder)\Source\MakeAbs">
+      <PathVariable>PATH_TO_MAKEABS_FILES</PathVariable>
+    </InstallShieldPathVariableOverrides>
+    <InstallShieldPathVariableOverrides Include="$(FullBuildPath)$(TempFolder)\Source\MakeAbs">
+      <PathVariable>PATH_TO_MAKEABS_FILES1</PathVariable>
+    </InstallShieldPathVariableOverrides>
+    <InstallShieldPathVariableOverrides Include="$(FullBuildPath)$(TempFolder)\Java">
+      <PathVariable>PATH_TO_JAVA_FILES</PathVariable>
+    </InstallShieldPathVariableOverrides>
+    <InstallShieldPathVariableOverrides Include="$(FullBuildPath)$(TempFolder)\Java">
+      <PathVariable>PATH_TO_JAVA_FILES1</PathVariable>
+    </InstallShieldPathVariableOverrides>
+    <InstallShieldPathVariableOverrides Include="$(FullBuildPath)$(TempFolder)\JAVA">
+      <PathVariable>PATH_TO_JAVA_FILES2</PathVariable>
+    </InstallShieldPathVariableOverrides>
+    <InstallShieldPathVariableOverrides Include="$(FullBuildPath)$(TempFolder)\Utilities\shared_exes">
+      <PathVariable>PATH_TO_SHARED_EXES_FILES</PathVariable>
+    </InstallShieldPathVariableOverrides>
+    <InstallShieldPathVariableOverrides Include="$(FullBuildPath)$(TempFolder)\Utilities">
+      <PathVariable>PATH_TO_UTILITIES_FILES</PathVariable>
+    </InstallShieldPathVariableOverrides>
+    <InstallShieldPathVariableOverrides Include="$(FullBuildPath)$(TempFolder)\Web">
+      <PathVariable>PATH_TO_WEB_FILES</PathVariable>
+    </InstallShieldPathVariableOverrides>
+    <InstallShieldPathVariableOverrides Include="$(FullBuildPath)$(TempFolder)\Web">
+      <PathVariable>PATH_TO_WEB_FILES1</PathVariable>
+    </InstallShieldPathVariableOverrides>
+    <InstallShieldPathVariableOverrides Include="$(FullBuildPath)$(TempFolder)\ICON">
+      <PathVariable>NewShortcut13</PathVariable>
+    </InstallShieldPathVariableOverrides>
+    <InstallShieldPathVariableOverrides Include="C:\Cache Distributions\C_DIST">
+      <PathVariable>PATH_TO_CACHE_DIST_FILES</PathVariable>
+    </InstallShieldPathVariableOverrides>
+    <InstallShieldPathVariableOverrides Include="C:\dicom\Cache">
+      <PathVariable>PATH_TO_CACHE_FILES</PathVariable>
+    </InstallShieldPathVariableOverrides>
+    <InstallShieldPathVariableOverrides Include="C:\Cache Distributions\Cache2010">
+      <PathVariable>PATH_TO_CACHE_FILES2</PathVariable>
+    </InstallShieldPathVariableOverrides>
+    <InstallShieldPathVariableOverrides Include="C:\testrel\DICOM\Data1">
+      <PathVariable>PATH_TO_DATA1_FILES</PathVariable>
+    </InstallShieldPathVariableOverrides>
+    <InstallShieldPathVariableOverrides Include="C:\edm\vss\InstallCache\MAG_Replace\Debug">
+      <PathVariable>PATH_TO_DEBUG_FILES</PathVariable>
+    </InstallShieldPathVariableOverrides>
+    <InstallShieldPathVariableOverrides Include="C:\edm\vss\p69">
+      <PathVariable>PATH_TO_P69_FILES</PathVariable>
+    </InstallShieldPathVariableOverrides>
+    <InstallShieldPathVariableOverrides Include="C:\relgw\Patches\Util">
+      <PathVariable>PATH_TO_UTIL_FILES</PathVariable>
+    </InstallShieldPathVariableOverrides>
+  </ItemGroup>
+
+</Project>

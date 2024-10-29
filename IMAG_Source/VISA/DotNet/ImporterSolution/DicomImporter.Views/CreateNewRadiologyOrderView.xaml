@@ -1,0 +1,347 @@
+﻿<Views:BaseImagingView x:Class="DicomImporter.Views.CreateNewRadiologyOrderView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:Converters="clr-namespace:ImagingClient.Infrastructure.Converters;assembly=ImagingClient.Infrastructure" xmlns:Views="clr-namespace:ImagingClient.Infrastructure.Views;assembly=ImagingClient.Infrastructure" mc:Ignorable="d" 
+             xmlns:ImporterViews="clr-namespace:DicomImporter.Views"
+             d:DesignHeight="645" d:DesignWidth="835">
+    <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+        <Converters:BoolToOppositeBoolConverter x:Key="BoolToOppositeBoolConverter" />
+    </UserControl.Resources>
+
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <Label Content="Create New Radiology Order" 
+                   Style="{DynamicResource ResourceKey=SectionTitle}"
+                   Grid.Row="0" />
+
+        <StackPanel Grid.Row="1">
+            <ImporterViews:ImporterMessagesView x:Name="ImporterMessages" 
+                                  DataContext="{Binding ImporterMessagesViewModel}" />
+        </StackPanel>
+
+        <GroupBox Header="VA Patient Information"
+                  Grid.Row="2">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <Label Grid.Row="0" 
+                           Grid.Column="0" 
+                           Content="Name:" />
+
+                <TextBox IsReadOnly="True" 
+                             Grid.Row="0" 
+                             Grid.Column="1" 
+                             Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}"
+                             Text="{Binding Path=CurrentReconciliation.Patient.PatientName}" />
+
+                <Label Grid.Row="0" 
+                           Grid.Column="2" 
+                           Content="DOB:" />
+
+                <TextBox IsReadOnly="True" 
+                             Grid.Row="0" 
+                             Grid.Column="3" 
+                             Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}"
+                             Text="{Binding Path=CurrentReconciliation.Patient.FormattedBirthDate, Mode=OneWay}" />
+
+                <Label Grid.Row="1" 
+                           Grid.Column="0" 
+                           Content="ID:" />
+
+                <TextBox IsReadOnly="True" 
+                             Grid.Row="1" 
+                             Grid.Column="1"
+                            Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}"
+                             Text="{Binding Path=CurrentReconciliation.Patient.Ssn}" />
+
+                <Label Grid.Row="1"
+                           Grid.Column="2" 
+                           Content="Sex:" />
+
+                <TextBox IsReadOnly="True"
+                             Grid.Column="3" 
+                             Grid.Row="1" 
+                             Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}"
+                             Text="{Binding Path=CurrentReconciliation.Patient.PatientSex}" />
+
+            </Grid>
+        </GroupBox>
+
+
+        <GroupBox Header="Original Study Information" 
+                  Grid.Row="3"
+                  Visibility="{Binding ShowOriginalStudyInfo, Converter={StaticResource BooleanToVisibilityConverter}}">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <Label Grid.Row="0" 
+                           Grid.Column="0" 
+                           Content="Study Date:"  />
+
+                <TextBox IsReadOnly="True" 
+                             Grid.Row="0" 
+                             Grid.Column="1" 
+                             Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}"
+                             Text="{Binding Path=CurrentStudy.FormattedStudyDate, Mode=OneWay}"  />
+
+                <Label Grid.Row="0" 
+                           Grid.Column="2" 
+                           Content="Modalities:"  />
+
+                <TextBox IsReadOnly="True" 
+                             Grid.Row="0" 
+                             Grid.Column="3" 
+                             Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}"
+                             Text="{Binding Path=CurrentStudy.ModalityCodes, Mode=OneWay}" Margin="3,3,2.4,2.6" />
+
+                <Label Grid.Row="1" 
+                           Grid.Column="0" 
+                           Content="Study Description:"  />
+
+                <TextBox IsReadOnly="True" 
+                             Grid.Row="1" 
+                             Grid.Column="1" 
+                             Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}"
+                             Text="{Binding Path=CurrentStudy.Description}" />
+
+                <Label Grid.Row="1" 
+                           Grid.Column="2" 
+                           Content="Procedure:" />
+
+                <TextBox IsReadOnly="True" 
+                             Grid.Row="1" 
+                             Grid.Column="3" 
+                             Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}"
+                             Text="{Binding Path=CurrentStudy.Procedure, Mode=OneWay}" Margin="3,3,2.4,2.6" />
+            </Grid>
+        </GroupBox>
+
+        <GroupBox Header="VA Order Details" 
+                      Grid.Row="4"
+                      VerticalAlignment="Top">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <Grid Grid.Row="0" Grid.ColumnSpan="6">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                </Grid>
+                <Label Content="Ordering Provider:" 
+                       Grid.Row="1"
+                       Grid.Column="0" />
+
+                <TextBox IsReadOnly="True" 
+                             Grid.Row="1" 
+                             Grid.Column="1" 
+                             Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}"
+                             Text="{Binding Path=SelectedOrderingProvider.Name}" />
+
+                <Button Name="btnChangeProvider" 
+                            Grid.Row="1" 
+                            Grid.Column="2"
+                            Width="50"
+                            HorizontalAlignment="Right"
+                            Content="Search" 
+                            Click="ChangeProvider_Click" Height="22" Margin="0,3,3,0" VerticalAlignment="Top" />
+
+                <Label Content="Ordering Location:" 
+                       Grid.Row="1"
+                       Grid.Column="3"
+                       Padding="10,5,2,5"/>
+
+                <TextBox IsReadOnly="True" 
+                             Grid.Row="1" 
+                             Grid.Column="4" 
+                             Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}"
+                             Text="{Binding Path=SelectedOrderingLocation.Name}" />
+
+
+                <Button Name="btnChangeLocation" 
+                            Grid.Row="1" 
+                            Grid.Column="5"
+                            Width="50"
+                            HorizontalAlignment="Right"
+                            Content="Search" 
+                            Click="ChangeLocation_Click" />
+
+                <Label Content="Procedure:" 
+                       Grid.Row="2"
+                       Grid.Column="0" />
+                <TextBox IsReadOnly="True" 
+                             Grid.Row="2" 
+                             Grid.Column="1" 
+                             Height="22"
+                             VerticalAlignment="Top"
+                             Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}"
+                             Text="{Binding Path=SelectedProcedure.Name}" />
+
+                <Button Name="btnChangeProcedure" 
+                            Grid.Row="2" 
+                            Grid.Column="2"
+                            Height="22"
+                            Width="50"
+                            VerticalAlignment="Top"
+                            HorizontalAlignment="Right"
+                            Content="Search" 
+                            Click="ChangeProcedure_Click" />
+
+
+                <Label Content="Procedure Modifiers:" 
+                       Grid.Row="2"
+                       Grid.Column="3"
+                       Padding="10,5,4,5"/>
+
+                <ListBox  IsEnabled="{Binding AnyProcedureModifiersAvailable}"
+                          IsTextSearchEnabled="True"
+                          DisplayMemberPath="Name"
+                       Grid.Row="2"
+                       Grid.Column="4"
+                              Grid.ColumnSpan="2"
+                          SelectionMode="Multiple"
+                              Height="200"
+                          Name="procedureModifiersList"
+                          Margin="3,3,3,3"
+                          SelectionChanged="ProcedureModifiers_SelectionChanged">
+
+                    <ListBox.Resources>
+                        <Style TargetType="ListBoxItem">
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="ListBoxItem">
+                                        <Border Name="Border" Padding="2" SnapsToDevicePixels="true">
+                                            <ContentPresenter />
+                                        </Border>
+                                        <ControlTemplate.Triggers>
+                                            <Trigger Property="IsSelected" Value="true">
+                                                <Setter TargetName="Border" Property="Background" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
+                                                <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.HighlightTextBrushKey}}" />
+
+                                            </Trigger>
+                                        </ControlTemplate.Triggers>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </ListBox.Resources>
+                </ListBox>
+            </Grid>
+        </GroupBox>
+
+        <GroupBox Header="Status Change Details" Grid.Row="5" >
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <Label Grid.Row="0" 
+                           Grid.Column="0" 
+                           Content="Exam Status After Importing:" />
+
+                <TextBox IsReadOnly="True" 
+                             Grid.Row="0" 
+                             Grid.Column="1" 
+                             Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}"
+                             Text="{Binding Path=CurrentReconciliation.Order.StatusChangeDetails.RequestedStatus}" />
+
+                <Label Grid.Row="0" 
+                           Grid.Column="2" 
+                           Content="Primary Diagnostic Code:" />
+
+                <TextBox IsReadOnly="True" 
+                             Grid.Row="0" 
+                             Grid.Column="3"
+                             Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}"
+                             Text="{Binding Path=CurrentReconciliation.Order.StatusChangeDetails.PrimaryDiagnosticCode.DisplayName, Mode=OneWay}" />
+
+                <Label Grid.Row="1" 
+                           Grid.Column="0" 
+                           Content="Standard Report:" />
+
+                <TextBox IsReadOnly="True" 
+                             Grid.Row="1" 
+                             Grid.Column="1" 
+                             Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}"
+                             Text="{Binding Path=CurrentReconciliation.Order.StatusChangeDetails.StandardReportName}" />
+
+                <Label Grid.Row="1"
+                           Grid.Column="2" 
+                           Content="# of Secondary Diagnostic Codes:" />
+
+                <TextBox IsReadOnly="True"
+                             Grid.Column="3" 
+                             Grid.Row="1" 
+                             Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}"
+                             Text="{Binding Path=CurrentReconciliation.Order.StatusChangeDetails.SecondaryDiagnosticCodeCount}" />
+
+                <Button Grid.Row="2" Grid.ColumnSpan="4"  Name="buttonChangeStatus" Content="Change Details" Height="23"
+                        Command="{Binding ChangeDetailsCommand}" HorizontalAlignment="Right" Margin="5,5,5,5" 
+                        VerticalAlignment="Top" Click="ShowStatusChangeDetailsWindow" />
+            </Grid>
+        </GroupBox>
+
+        <StackPanel Orientation="Horizontal" 
+                    HorizontalAlignment="Right"
+                    Grid.Row="6">
+
+            <Button Content="&lt; Back" Command="{Binding NavigateBack}"/>
+            <Button Content="Next &gt;" Command="{Binding NavigateForward}" Name="btnNext"/>
+            <Button Content="Cancel" Command="{Binding CancelReconciliationCommand}" />
+        </StackPanel>
+    </Grid>
+</Views:BaseImagingView>

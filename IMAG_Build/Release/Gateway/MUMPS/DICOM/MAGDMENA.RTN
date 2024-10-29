@@ -1,0 +1,186 @@
+MAGDMENA ;WOIFO/PMK - VistA DICOM Gateway Menu Tasks ; 12/22/2006 07:20
+ ;;3.0;IMAGING;**9,21,10,11,30,69,54**;MAR 19, 2002;;OCT 28, 2009
+ ;; Per VHA Directive 2004-038, this routine should not be modified.
+ ;; +---------------------------------------------------------------+
+ ;; | Property of the US Government.                                |
+ ;; | No permission to copy or redistribute this software is given. |
+ ;; | Use of unreleased versions of this software requires the user |
+ ;; | to execute a written test agreement with the VistA Imaging    |
+ ;; | Development Office of the Department of Veterans Affairs,     |
+ ;; | telephone (301) 734-0100.                                     |
+ ;; | The Food and Drug Administration classifies this software as  |
+ ;; | a medical device.  As such, it may not be changed in any way. |
+ ;; | Modifications to this software may result in an adulterated   |
+ ;; | medical device under 21CFR820, the use of which is considered |
+ ;; | to be a violation of US Federal Statutes.                     |
+ ;; +---------------------------------------------------------------+
+ ;;
+ Q
+ ;
+IMGPTR ; modify the image processing pointer value
+ N ACOUNT,X
+ S X=$G(^MAGDINPT(2006.571,0)),ACOUNT=$G(^("ACOUNT"))
+ W !!,"The last image in the """
+ W $G(^MAGDICOM(2006.563,1,"IMAGE INPUT PATH")),""""
+ W " directory is number ",$P(X,"^",3),"."
+ S X=+$P(X,"^",4)
+ W !!,"There ",$S(X>1:"are "_X,X=1:"is only one",1:"are no")
+ W " image",$S(X'=1:"s",1:"")," waiting to be processed."
+ I ACOUNT="" S ACOUNT="<undefined>"
+ W !!,"The current image processing pointer value is ",ACOUNT,"." Q:$T
+ F  D  Q:X'=""
+ . W !!,"Do you wish to increment the image processing pointer?  NO// "
+ . R X:$G(DTIME,300) E  S X="^"
+ . I X="" S X="no" W X
+ . I X["?" D  Q
+ . . W !!,"Enter 'Yes' if you want to increment the value of the"
+ . . W !,"image pointer; otherwise answer 'No'."
+ . . S X=""
+ . . Q
+ . Q
+ Q:X["^"
+ I "Yy"'[$E(X) W " -- Not incremented" Q
+ D UPCOUNT^MAGDIR6(2006.571,ACOUNT+1)
+ W " -- Incremented"
+ Q
+ ;
+LICEXP ; Display license expiration date
+ D LICENSE^MAGOSMSC()
+ Q
+ ;
+MODALITY ;
+ D MODALITY^MAGDMFBM
+ D XFER^MAGDMFBA
+ Q
+ ;
+NOTRA S ^MAGDICOM(2006.563,1,"ROUTE AQ EXIT")=1
+ W !,"The Transmission Processor for Automatic Routing will stop soon.",!
+ Q
+ ;
+SUPPORT ;
+ W !!,"National VistA Support Help Desk"
+ W !,"(888) 596-HELP"
+ W !!,"DVA Washington CIO Field Office -- Imaging Project"
+ W !,"(301) 734-0100 voice  (301) 734-0111 fax"
+ Q
+ ;
+M2MSTS ; Display Broker Status
+ N AV,IP,LEV,PORT,X
+ S X=$G(^TMP("MAG",$J,"DICOM RPC USER")) Q:'X
+ I 'X W !!,"Not logged in using M-to-M Broker",! Q
+ ;
+ S LEV=$P(X,"^",2),AV=$$DECRYP^MAGM2VCU($P(X,"^",3))
+ I AV="" W !!,"Not logged in using M-to-M Broker",! Q
+ ;
+ S IP=$G(^MAGDICOM(2006.563,1,"M-to-M BROKER ADDR"))
+ S PORT=$G(^MAGDICOM(2006.563,1,"M-to-M BROKER PORT"))
+ I (IP="")!(PORT="") W !!,"Not configured to use M-to-M Broker",! Q
+ W !!,"Configured to connect using M-to-M Broker to "
+ W "address """_IP_""", port "_PORT,!
+ Q
+ ;
+AV() ; Create AV value
+ N A,V
+ S A=$G(^MAGDICOM(2006.563,1,"M-to-M BROKER BGND ACCESS"))
+ S V=$G(^MAGDICOM(2006.563,1,"M-to-M BROKER BGND VERIFY"))
+ Q $$ENCRYPT^MAGM2VCU($$DECRYP^MAGM2VCU(A)_";"_$$DECRYP^MAGM2VCU(V))
+ ;
+BGVALI ; Validate Background Task Credentials
+ N CURCRE,X
+ S CURCRE=$G(^TMP("MAG",$J,"DICOM RPC USER"))
+ S ^TMP("MAG",$J,"DICOM RPC USER")="666^1^"_$$AV()
+ S X=$$RECONCT()
+ W !!,"Access and Verify codes are " W:'X "NOT "
+ W "valid for background task usage.",!
+ S ^MAGDICOM(2006.563,1,"M-to-M BROKER BGND STATUS")=$S(X:1,1:-1)_"^"_$$NOW^XLFDT()
+ K ^TMP("MAG",$J,"DICOM RPC USER")
+ S:CURCRE'="" ^TMP("MAG",$J,"DICOM RPC USER")=CURCRE
+ Q
+ ;
+RECONCT(SVC) ; re-connect to the VistA M2MB server
+ N AV,IP,LEV,PORT,X
+ S X=$G(^TMP("MAG",$J,"DICOM RPC USER")) Q:'X "Not logged in using M-to-M Broker"
+ S LEV=$P(X,"^",2),AV=$$DECRYP^MAGM2VCU($P(X,"^",3))
+ I AV="" Q "Not logged in using M-to-M Broker"
+ S X="Not configured to use M-to-M Broker"
+ S IP=$G(^MAGDICOM(2006.563,1,"M-to-M BROKER ADDR")) Q:IP="" X
+ S PORT=$G(^MAGDICOM(2006.563,1,"M-to-M BROKER PORT")) Q:PORT="" X
+ D
+ . N $ET,$ES
+ . S $ET="Q:($ES>1)&$Q """" Q:($ES>1)  G VISTERR^"_$T(+0)
+ . S X=$$CONNECT^MAGM2VC(PORT,IP,AV)
+ . I 'X,X["Already connected" S X=1_X Q
+ . K:X ^TMP("MAG",$J,"SERVICE REMINDER TIME")
+ . I 'X D  Q:'$G(SVC)
+ . . I X'["Not a valid ACCESS CODE/VERIFY CODE pair" D  Q
+ . . . W !!,"Cannot re-connect to VistA at this time.",!,X,!
+ . . . S SVC=0
+ . . . Q
+ . . D:AV=$$DECRYP^MAGM2VCU($$AV())
+ . . . S ^MAGDICOM(2006.563,1,"M-to-M BROKER BGND STATUS")="-1^"_$$NOW^XLFDT()
+ . . . Q
+ . . Q:'$G(SVC)
+ . . ; Stored access/verify no longer valid, try service account
+ . . S H=$H,H=H*86400+$P(H,",",2)
+ . . S X=$G(^TMP("MAG",$J,"SERVICE REMINDER TIME"))
+ . . I X,H>X D REMIND
+ . . D:'X  ; choose one of the first three options (or other?)
+ . . . N CRITICAL,FATAL,HDR,IGNORE,LMT,MSG,ROU,X,Y
+ . . . S ^TMP("MAG",$J,"SERVICE REMINDER TIME")=H+86400 ; 24 hours later
+ . . . S FATAL=0,ROU="Reconnect in "_$T(+0),HDR="CANNOT RECONNECT TO VISTA"
+ . . . S IGNORE=1,CRITICAL=0
+ . . . S MSG(1)="No longer able to re-connect to VistA system."
+ . . . S MSG(2)="DICOM Gateway "_$$HOSTNAME^MAGOSMSC()_" ("_^MAGDICOM(2006.563,1,"SYSTEM TITLE")_")"
+ . . . S MSG(3)="Re-connect attempt was on "_$$NOW()
+ . . . S MSG(4)="Attempting to login using the service account."
+ . . . D SEND^MAGDMMSG
+ . . . Q
+ . . S X=$G(^TMP("MAG",$J,"DICOM RPC SERVICE"))
+ . . I X'="" S X=$$CONNECT^MAGM2VC(PORT,IP,$$DECRYP^MAGM2VCU(X))
+ . . I 'X D  H  ; Cannot connect to VistA, cannot continue
+ . . . W !!,"No valid credentials available to connect to VistA."
+ . . . W !,"Terminating all activity...",!
+ . . . Q
+ . . W !!,"Now logged in using the Service Account...",!!
+ . . Q
+ . S X=$$SETCONTX^MAGM2VC("MAG DICOM GATEWAY "_$S(LEV=1:"FULL",1:"VIEW"))
+ . Q:X
+ . S X=$$CLOSE^MAGM2VC(),X=0
+ . Q
+ K:'X MAGOS("TCP"," "_IP_" "_PORT)
+ Q X
+ ;
+VISTERR ; Error trap for re-connect to VistA M2MB
+ W:$$USEPRIN^MAGOSFIL(1) !!,"Error while connecting to port ",PORT," on ",IP
+ I $EC'["DSCON"  W !,"Error message is ",$EC
+ E  W !,"VistA is temporarily not available..." S $EC=""
+ Q:$Q 0 Q
+ ;
+REMIND N CRITICAL,FATAL,HDR,IGNORE,LMT,MSG,ROU,X,Y
+ S ^TMP("MAG",$J,"SERVICE REMINDER TIME")=H+86400 ; 24 hours later
+ S FATAL=0,ROU="Reconnect^"_$T(+0),HDR="REMINDER: STILL CANNOT RECONNECT TO VISTA"
+ S IGNORE=1,CRITICAL=0
+ S MSG(1)="Still not able to re-connect to VistA system using regular credentials."
+ S MSG(2)="DICOM Gateway "_$$HOSTNAME^MAGOSMSC()_" ("_^MAGDICOM(2006.563,1,"SYSTEM TITLE")_")"
+ S MSG(3)="Reminder issued on "_$$NOW()
+ D SEND^MAGDMMSG
+ Q
+ ;
+STOPREQ(APP) ;
+ S ^MAGDICOM(2006.563,1,APP)="STOP"
+ Q
+ ;
+NOW() N H,M,S,X
+ S H=$H,X=$P("Mon Tue Wed Thu Fri Sat Sun"," ",H+3#7+1)
+ S H=$P($H,",",2),S=H#60,M=H\60#60,H=H\3600
+ S:S<10 S=0_S S:M<10 M=0_M S:H<10 H=0_H
+ Q X_" "_H_":"_M_":"_S
+ ;
+WAIT(TIME) N BACK,BAR,DELTA
+ S BACK=75\TIME,DELTA=TIME\75 S:DELTA<1 DELTA=1 S:BACK<1 BACK=1
+ S BACK=$J("",BACK),BACK=$TR(BACK," ",$C(8))_BACK_$TR(BACK," ",$C(8))
+ S BAR=$TR($J("",75)," ","*")
+ W !,BAR F  Q:TIME<1  H DELTA W BACK S TIME=TIME-DELTA
+ W $C(13),$J("",75),!!
+ Q
+ ;

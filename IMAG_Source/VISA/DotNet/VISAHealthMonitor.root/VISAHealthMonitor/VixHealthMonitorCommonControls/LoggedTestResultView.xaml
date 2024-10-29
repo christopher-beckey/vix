@@ -1,0 +1,78 @@
+﻿<Window x:Class="VixHealthMonitorCommonControls.LoggedTestResultView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:b="clr-namespace:VISAHealthMonitorCommonControls;assembly=VISAHealthMonitorCommonControls"
+        mc:Ignorable="d"
+        DataContext="{Binding LoggedTestResults, Source={StaticResource Locator}}"
+        d:DesignHeight="300" d:DesignWidth="700" 
+        Height="300"
+        Width="700"
+        Title="{Binding Path=Title}" WindowStartupLocation="CenterOwner"
+        Cursor="{Binding Path=Cursor}">
+
+    <DockPanel  HorizontalAlignment="Stretch" VerticalAlignment="Stretch" LastChildFill="True">
+        <DockPanel.Resources>
+            <Style x:Key="LeftHeaderStyle" TargetType="{x:Type GridViewColumnHeader}">
+                <Setter Property="HorizontalContentAlignment" Value="Left"/>
+            </Style>
+        </DockPanel.Resources>
+        
+        <StatusBar DockPanel.Dock="Bottom" Height="23" HorizontalAlignment="Stretch">
+            <StatusBarItem HorizontalAlignment="Stretch">
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="../VISAHealthMonitorCommonControls/images/failed.ico" Visibility="{Binding Path=ErrorIconVisibility}" Stretch="None" Margin="0,0,2,0"/>
+                    <TextBlock Text="{Binding Path=StatusMessage}" />
+                </StackPanel>
+            </StatusBarItem>
+        </StatusBar>
+        
+        <StackPanel Orientation="Horizontal" DockPanel.Dock="Bottom" HorizontalAlignment="Center">
+            <Button  Content="Refresh" Command="{Binding Path=RefreshCommand}" Margin="2,1,2,1" />
+            <Button  Content="Close" Command="{Binding Path=CloseCommand}" Margin="2,1,2,1" />
+        </StackPanel>
+        <ListView  HorizontalAlignment="Stretch" 
+                       MinHeight="50" Margin="2,2,2,0"                       
+                      ItemsSource="{Binding Path=TestResultsList.Sources.View}"
+                   b:SelectorDoubleClickCommandBehavior.HandleDoubleClick="true">
+            <ListView.View>
+                <GridView >
+                    <GridViewColumn Width="150" HeaderContainerStyle="{StaticResource LeftHeaderStyle}" >
+                        <GridViewColumnHeader Content="Test Date" 
+                            Command="{Binding Path=SortTestResultsCommand}" CommandParameter="TestDate"/>
+                        <GridViewColumn.CellTemplate>
+                            <HierarchicalDataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="{Binding TestDate}"  />
+                                </StackPanel>
+                            </HierarchicalDataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Width="65" HeaderContainerStyle="{StaticResource LeftHeaderStyle}" >
+                        <GridViewColumnHeader Content="Test Failed"
+                                              Command="{Binding Path=SortTestResultsCommand}" CommandParameter="TestFailed"/>
+                        <GridViewColumn.CellTemplate>
+                            <HierarchicalDataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="{Binding TestFailed}"  />
+                                </StackPanel>
+                            </HierarchicalDataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Width="400" HeaderContainerStyle="{StaticResource LeftHeaderStyle}" >
+                        <GridViewColumnHeader Content="Failure Reason" 
+                                              Command="{Binding Path=SortTestResultsCommand}" CommandParameter="TestFailureReason"/>
+                        <GridViewColumn.CellTemplate>
+                            <HierarchicalDataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="{Binding TestFailureReason}"  />
+                                </StackPanel>
+                            </HierarchicalDataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>                   
+                </GridView>
+            </ListView.View>
+        </ListView>
+    </DockPanel>
+</Window>

@@ -1,0 +1,111 @@
+﻿<Window x:Class="VISAHealthMonitorCommonControls.Threads"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:b="clr-namespace:VISAHealthMonitorCommonControls"
+        mc:Ignorable="d"
+        DataContext="{Binding Threads, Source={StaticResource Locator}}"
+        d:DesignHeight="280" d:DesignWidth="700" 
+        Height="300"
+        Width="700"
+        Title="{Binding Path=Title}" WindowStartupLocation="CenterOwner" Icon="/VISAHealthMonitorCommonControls;component/images/threads.png"
+        Cursor="{Binding Path=Cursor}">
+
+    <DockPanel  HorizontalAlignment="Stretch" VerticalAlignment="Stretch" LastChildFill="True">
+        <DockPanel.Resources>
+            <Style x:Key="LeftHeaderStyle" TargetType="{x:Type GridViewColumnHeader}">
+                <Setter Property="HorizontalContentAlignment" Value="Left"/>
+            </Style>
+        </DockPanel.Resources>
+        <StatusBar DockPanel.Dock="Bottom" Height="23" HorizontalAlignment="Stretch">
+            <StatusBarItem HorizontalAlignment="Stretch">
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="images/failed.ico" Visibility="{Binding Path=ErrorIconVisibility}" Stretch="None" Margin="0,0,2,0"/>
+                    <TextBlock Text="{Binding Path=StatusMessage}" />
+                </StackPanel>
+            </StatusBarItem>
+        </StatusBar>
+        <StackPanel Orientation="Horizontal" DockPanel.Dock="Bottom" HorizontalAlignment="Center">
+            <Button  Content="Refresh" Command="{Binding Path=RefreshCommand}" Margin="2,1,2,1" />
+            <Button  Content="Close" Command="{Binding Path=CloseCommand}" Margin="2,1,2,1" />            
+        </StackPanel>
+        <ListView  HorizontalAlignment="Stretch" 
+                       MinHeight="130" Margin="2,2,2,0"                       
+                      ItemsSource="{Binding Path=ThreadList.Sources.View}"
+                   b:SelectorDoubleClickCommandBehavior.HandleDoubleClick="true"
+                                      b:SelectorDoubleClickCommandBehavior.TheCommandToRun="{Binding Path=ThreadMouseDoubleClickCommand}"
+                                      SelectedItem="{Binding Path=ThreadSelectedItem}">
+            <ListView.View>
+                <GridView >
+                    <GridViewColumn Width="220" HeaderContainerStyle="{StaticResource LeftHeaderStyle}" >
+                        <GridViewColumnHeader Content="Thread Name" 
+                            Command="{Binding Path=SortThreadsCommand}" CommandParameter="ThreadName"/>
+                        <GridViewColumn.CellTemplate>
+                            <HierarchicalDataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="{Binding ThreadName}"  />
+                                </StackPanel>
+                            </HierarchicalDataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Width="58" HeaderContainerStyle="{StaticResource LeftHeaderStyle}" >
+                        <GridViewColumnHeader Content="Thread ID"
+                                              Command="{Binding Path=SortThreadsCommand}" CommandParameter="ThreadId"/>
+                        <GridViewColumn.CellTemplate>
+                            <HierarchicalDataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="{Binding ThreadId}"  />
+                                </StackPanel>
+                            </HierarchicalDataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Width="105" HeaderContainerStyle="{StaticResource LeftHeaderStyle}" >
+                        <GridViewColumnHeader Content="State" 
+                                              Command="{Binding Path=SortThreadsCommand}" CommandParameter="ThreadState"/>
+                        <GridViewColumn.CellTemplate>
+                            <HierarchicalDataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="{Binding ThreadState}"  />
+                                </StackPanel>
+                            </HierarchicalDataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Width="105" HeaderContainerStyle="{StaticResource LeftHeaderStyle}" >
+                        <GridViewColumnHeader Content="Lock Name" 
+                                              Command="{Binding Path=SortThreadsCommand}" CommandParameter="LockName"/>
+                        <GridViewColumn.CellTemplate>
+                            <HierarchicalDataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="{Binding LockName}"  />
+                                </StackPanel>
+                            </HierarchicalDataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Width="97" HeaderContainerStyle="{StaticResource LeftHeaderStyle}" >
+                        <GridViewColumnHeader Content="Lock Owner Name" 
+                                              Command="{Binding Path=SortThreadsCommand}" CommandParameter="LockOwnerName"/>
+                        <GridViewColumn.CellTemplate>
+                            <HierarchicalDataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="{Binding LockOwnerName}"  />
+                                </StackPanel>
+                            </HierarchicalDataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Width="80" HeaderContainerStyle="{StaticResource LeftHeaderStyle}" >
+                        <GridViewColumnHeader Content="Lock Owner ID"
+                                              Command="{Binding Path=SortThreadsCommand}" CommandParameter="LockOwnerId" />
+                        <GridViewColumn.CellTemplate>
+                            <HierarchicalDataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="{Binding LockOwnerId}"  />
+                                </StackPanel>
+                            </HierarchicalDataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                </GridView>
+            </ListView.View>
+        </ListView>
+    </DockPanel>
+</Window>

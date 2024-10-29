@@ -1,0 +1,38 @@
+MAGDFND9 ;WOIFO/PMK - DICOM C-FIND Final Response Handler ; 12/20/2006 07:34
+ ;;3.0;IMAGING;**54**;MAR 19, 2002;;OCT 28, 2009
+ ;; Per VHA Directive 2004-038, this routine should not be modified.
+ ;; +---------------------------------------------------------------+
+ ;; | Property of the US Government.                                |
+ ;; | No permission to copy or redistribute this software is given. |
+ ;; | Use of unreleased versions of this software requires the user |
+ ;; | to execute a written test agreement with the VistA Imaging    |
+ ;; | Development Office of the Department of Veterans Affairs,     |
+ ;; | telephone (301) 734-0100.                                     |
+ ;; | The Food and Drug Administration classifies this software as  |
+ ;; | a medical device.  As such, it may not be changed in any way. |
+ ;; | Modifications to this software may result in an adulterated   |
+ ;; | medical device under 21CFR820, the use of which is considered |
+ ;; | to be a violation of US Federal Statutes.                     |
+ ;; +---------------------------------------------------------------+
+ ;;
+ Q
+ ;
+FAILURE ; entry point to generate an C-FIND response with an error
+ ; it is assumed that (0000,0900-0902) are filled in already
+ S MESSAGE="MODALITY WORKLIST FIND RESPONSE - FAILURE",MSGHANDL=""
+ ; D SAVE^MAGDFCNS("0000,0800",$$HEX2DEC^MAGOSMSC("0101")) ; null data set
+ S MULTIMSG=""
+ G RESPONSE
+ Q
+ ;
+SUCCESS ; entry point to generate a C-FIND success response
+ D MSGINIT^MAGDFCNS ; Initialize the ^TMP global for this message
+ D SAVE^MAGDFCNS("0000,0900",0) ; SUCCESS response status value
+ S MESSAGE="MODALITY WORKLIST FIND RESPONSE - FINAL",MSGHANDL=""
+ G RESPONSE
+ ;
+RESPONSE ; set last attributes and issue the response
+ D SAVE^MAGDFCNS("0000,0120",OLDMSGID) ; message id of original request
+ D RESPONSE^MAGDDW1
+ Q
+ ;

@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<build xmlns="http://va.gov/VistA/kids/manifest" name="MAG*3.0*067" patchName="Image Index Term Mappings IV" patch="067">
+  <components>
+    <securityKeys />
+    <parameterDefinitions />
+    <printTemplates />
+    <sortTemplates />
+    <menuOptions />
+    <rpcs />
+    <dataDictionaries />
+    <hl7s />
+    <routines>
+      <routine export="MAGDIR9A.RTN" />
+      <routine export="MAGXCVI1.RTN" />
+      <routine export="MAGXMA.RTN" />
+    </routines>
+    <protocols />
+  </components>
+</build>

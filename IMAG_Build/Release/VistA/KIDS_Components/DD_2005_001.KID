@@ -1,0 +1,400 @@
+KIDS Distribution saved on Jul 16, 2007@12:31:25
+Package for FILE named 2005.001
+**KIDS**:MAG*3.0*13^
+
+**INSTALL NAME**
+MAG*3.0*13
+"BLD",5859,0)
+MAG*3.0*13^^0^3070716^y
+"BLD",5859,1,0)
+^^4^4^3070716^
+"BLD",5859,1,1,0)
+This package contains a KIDS component
+"BLD",5859,1,2,0)
+for Running Baseline.
+"BLD",5859,1,3,0)
+ 
+"BLD",5859,1,4,0)
+This package transports the FileMan data dictionary named 2005.001.
+"BLD",5859,4,0)
+^9.64PA^2005.001^1
+"BLD",5859,4,2005.001,0)
+2005.001
+"BLD",5859,4,2005.001,222)
+y^y^f^^^^n
+"BLD",5859,4,"B",2005.001,2005.001)
+
+"BLD",5859,6.3)
+1
+"BLD",5859,"KRN",0)
+^9.67PA^8989.52^19
+"BLD",5859,"KRN",.4,0)
+.4
+"BLD",5859,"KRN",.401,0)
+.401
+"BLD",5859,"KRN",.402,0)
+.402
+"BLD",5859,"KRN",.403,0)
+.403
+"BLD",5859,"KRN",.5,0)
+.5
+"BLD",5859,"KRN",.84,0)
+.84
+"BLD",5859,"KRN",3.6,0)
+3.6
+"BLD",5859,"KRN",3.8,0)
+3.8
+"BLD",5859,"KRN",9.2,0)
+9.2
+"BLD",5859,"KRN",9.8,0)
+9.8
+"BLD",5859,"KRN",19,0)
+19
+"BLD",5859,"KRN",19.1,0)
+19.1
+"BLD",5859,"KRN",101,0)
+101
+"BLD",5859,"KRN",409.61,0)
+409.61
+"BLD",5859,"KRN",771,0)
+771
+"BLD",5859,"KRN",870,0)
+870
+"BLD",5859,"KRN",8989.51,0)
+8989.51
+"BLD",5859,"KRN",8989.52,0)
+8989.52
+"BLD",5859,"KRN",8994,0)
+8994
+"BLD",5859,"KRN","B",.4,.4)
+
+"BLD",5859,"KRN","B",.401,.401)
+
+"BLD",5859,"KRN","B",.402,.402)
+
+"BLD",5859,"KRN","B",.403,.403)
+
+"BLD",5859,"KRN","B",.5,.5)
+
+"BLD",5859,"KRN","B",.84,.84)
+
+"BLD",5859,"KRN","B",3.6,3.6)
+
+"BLD",5859,"KRN","B",3.8,3.8)
+
+"BLD",5859,"KRN","B",9.2,9.2)
+
+"BLD",5859,"KRN","B",9.8,9.8)
+
+"BLD",5859,"KRN","B",19,19)
+
+"BLD",5859,"KRN","B",19.1,19.1)
+
+"BLD",5859,"KRN","B",101,101)
+
+"BLD",5859,"KRN","B",409.61,409.61)
+
+"BLD",5859,"KRN","B",771,771)
+
+"BLD",5859,"KRN","B",870,870)
+
+"BLD",5859,"KRN","B",8989.51,8989.51)
+
+"BLD",5859,"KRN","B",8989.52,8989.52)
+
+"BLD",5859,"KRN","B",8994,8994)
+
+"FIA",2005.001)
+IMAGING STUDY
+"FIA",2005.001,0)
+^MAG(2005.001,
+"FIA",2005.001,0,0)
+2005.001
+"FIA",2005.001,0,1)
+y^y^f^^^^n
+"FIA",2005.001,0,10)
+
+"FIA",2005.001,0,11)
+
+"FIA",2005.001,0,"RLRO")
+
+"FIA",2005.001,2005.001)
+0
+"FIA",2005.001,2005.031)
+0
+"FIA",2005.001,2005.311)
+0
+"IX",2005.001,2005.001,"ASTUDY",0)
+2005.001^ASTUDY^Index by Parent File and Parent Global Root^R^^R^IR^I^2005.001^^^^^S
+"IX",2005.001,2005.001,"ASTUDY",1)
+S ^MAG(2005.001,"ASTUDY",$E(X(1),1,9),$E(X(2),1,15),DA)=""
+"IX",2005.001,2005.001,"ASTUDY",2)
+K ^MAG(2005.001,"ASTUDY",$E(X(1),1,9),$E(X(2),1,15),DA)
+"IX",2005.001,2005.001,"ASTUDY",2.5)
+K ^MAG(2005.001,"ASTUDY")
+"IX",2005.001,2005.001,"ASTUDY",11.1,0)
+^.114IA^2^2
+"IX",2005.001,2005.001,"ASTUDY",11.1,1,0)
+1^F^2005.001^1^9^1^F
+"IX",2005.001,2005.001,"ASTUDY",11.1,2,0)
+2^F^2005.001^.01^15^2^F
+"MBREQ")
+0
+"QUES","XPF1",0)
+Y
+"QUES","XPF1","??")
+^D REP^XPDH
+"QUES","XPF1","A")
+Shall I write over your |FLAG| File
+"QUES","XPF1","B")
+YES
+"QUES","XPF1","M")
+D XPF1^XPDIQ
+"QUES","XPF2",0)
+Y
+"QUES","XPF2","??")
+^D DTA^XPDH
+"QUES","XPF2","A")
+Want my data |FLAG| yours
+"QUES","XPF2","B")
+YES
+"QUES","XPF2","M")
+D XPF2^XPDIQ
+"QUES","XPI1",0)
+YO
+"QUES","XPI1","??")
+^D INHIBIT^XPDH
+"QUES","XPI1","A")
+Want KIDS to INHIBIT LOGONs during the install
+"QUES","XPI1","B")
+YES
+"QUES","XPI1","M")
+D XPI1^XPDIQ
+"QUES","XPM1",0)
+PO^VA(200,:EM
+"QUES","XPM1","??")
+^D MG^XPDH
+"QUES","XPM1","A")
+Enter the Coordinator for Mail Group '|FLAG|'
+"QUES","XPM1","B")
+
+"QUES","XPM1","M")
+D XPM1^XPDIQ
+"QUES","XPO1",0)
+Y
+"QUES","XPO1","??")
+^D MENU^XPDH
+"QUES","XPO1","A")
+Want KIDS to Rebuild Menu Trees Upon Completion of Install
+"QUES","XPO1","B")
+YES
+"QUES","XPO1","M")
+D XPO1^XPDIQ
+"QUES","XPZ1",0)
+Y
+"QUES","XPZ1","??")
+^D OPT^XPDH
+"QUES","XPZ1","A")
+Want to DISABLE Scheduled Options, Menu Options, and Protocols
+"QUES","XPZ1","B")
+YES
+"QUES","XPZ1","M")
+D XPZ1^XPDIQ
+"QUES","XPZ2",0)
+Y
+"QUES","XPZ2","??")
+^D RTN^XPDH
+"QUES","XPZ2","A")
+Want to MOVE routines to other CPUs
+"QUES","XPZ2","B")
+NO
+"QUES","XPZ2","M")
+D XPZ2^XPDIQ
+"SEC","^DIC",2005.001,2005.001,0,"AUDIT")
+@
+"SEC","^DIC",2005.001,2005.001,0,"DD")
+@
+"SEC","^DIC",2005.001,2005.001,0,"DEL")
+@
+"SEC","^DIC",2005.001,2005.001,0,"LAYGO")
+@
+"SEC","^DIC",2005.001,2005.001,0,"RD")
+@
+"SEC","^DIC",2005.001,2005.001,0,"WR")
+@
+"VER")
+8.0^22.0
+"^DD",2005.001,2005.001,0)
+FIELD^^2^4
+"^DD",2005.001,2005.001,0,"DDA")
+N
+"^DD",2005.001,2005.001,0,"DT")
+3050930
+"^DD",2005.001,2005.001,0,"IX","B",2005.001,.01)
+
+"^DD",2005.001,2005.001,0,"NM","IMAGING STUDY")
+
+"^DD",2005.001,2005.001,0,"VRPK")
+MAG
+"^DD",2005.001,2005.001,.01,0)
+PARENT GLOBAL ROOT D0^RNJ10,0^^0;1^K:+X'=X!(X>9999999999.9999)!(X<1)!(X?.E1"."1N.N) X
+"^DD",2005.001,2005.001,.01,1,0)
+^.1
+"^DD",2005.001,2005.001,.01,1,1,0)
+2005.001^B
+"^DD",2005.001,2005.001,.01,1,1,1)
+S ^MAG(2005.001,"B",$E(X,1,30),DA)=""
+"^DD",2005.001,2005.001,.01,1,1,2)
+K ^MAG(2005.001,"B",$E(X,1,30),DA)
+"^DD",2005.001,2005.001,.01,3)
+Type a Number between 1 and 9999999999.9999, 0 Decimal Digits
+"^DD",2005.001,2005.001,.01,21,0)
+^.001^2^2^3050926^^^^
+"^DD",2005.001,2005.001,.01,21,1,0)
+This node is where Study level data can be stored, e.g. Key
+"^DD",2005.001,2005.001,.01,21,2,0)
+Images.
+"^DD",2005.001,2005.001,.01,"DT")
+3051011
+"^DD",2005.001,2005.001,1,0)
+PARENT DATA FILE#^RP2005.03'^MAG(2005.03,^0;2^Q
+"^DD",2005.001,2005.001,1,1,0)
+^.1^^0
+"^DD",2005.001,2005.001,1,3)
+Enter the Parent Report file (or sub-file) number.
+"^DD",2005.001,2005.001,1,21,0)
+^.001^1^1^3050926^^^^
+"^DD",2005.001,2005.001,1,21,1,0)
+The Parent Report file (or sub-file) number.
+"^DD",2005.001,2005.001,1,"DT")
+3051011
+"^DD",2005.001,2005.001,2,0)
+PARENT GLOBAL ROOT D1^NJ9,0^^0;3^K:+X'=X!(X>999999999)!(X<0)!(X?.E1"."1N.N) X
+"^DD",2005.001,2005.001,2,3)
+Type a Number between 0 and 999999999, 0 Decimal Digits
+"^DD",2005.001,2005.001,2,"DT")
+3050926
+"^DD",2005.001,2005.001,5,0)
+INTERPRETATION IMAGES^2005.031P^^1;0
+"^DD",2005.001,2005.001,5,21,0)
+^.001^3^3^3050930^^^^
+"^DD",2005.001,2005.001,5,21,1,0)
+This node contains a list of images that were referenced during
+"^DD",2005.001,2005.001,5,21,2,0)
+the Exam Interpretation either by annotations, or by designation
+"^DD",2005.001,2005.001,5,21,3,0)
+as KEY images.
+"^DD",2005.001,2005.001,5,"DT")
+3050920
+"^DD",2005.001,2005.031,0)
+INTERPRETATION IMAGES SUB-FIELD^^1^2
+"^DD",2005.001,2005.031,0,"DT")
+3050930
+"^DD",2005.001,2005.031,0,"IX","B",2005.031,.01)
+
+"^DD",2005.001,2005.031,0,"NM","INTERPRETATION IMAGES")
+
+"^DD",2005.001,2005.031,0,"UP")
+2005.001
+"^DD",2005.001,2005.031,.01,0)
+INTERPRETATION IMAGE^MP2005'^MAG(2005,^0;1^Q
+"^DD",2005.001,2005.031,.01,1,0)
+^.1
+"^DD",2005.001,2005.031,.01,1,1,0)
+2005.031^B
+"^DD",2005.001,2005.031,.01,1,1,1)
+S ^MAG(2005.001,DA(1),1,"B",$E(X,1,30),DA)=""
+"^DD",2005.001,2005.031,.01,1,1,2)
+K ^MAG(2005.001,DA(1),1,"B",$E(X,1,30),DA)
+"^DD",2005.001,2005.031,.01,3)
+Enter the image IEN for any image that is KEY or has been annotated.
+"^DD",2005.001,2005.031,.01,21,0)
+^.001^4^4^3050926^^^^
+"^DD",2005.001,2005.031,.01,21,1,0)
+If an image is designated as KEY, or is annotated during
+"^DD",2005.001,2005.031,.01,21,2,0)
+the exam interpretation, it's reference IEN is saved here,
+"^DD",2005.001,2005.031,.01,21,3,0)
+together with any Presentation State references that were
+"^DD",2005.001,2005.031,.01,21,4,0)
+created during the interpretation.
+"^DD",2005.001,2005.031,.01,"DT")
+3050920
+"^DD",2005.001,2005.031,1,0)
+PRESENTATION STATE UID^2005.311^^1;0
+"^DD",2005.001,2005.031,1,21,0)
+^.001^2^2^3050930^^^^
+"^DD",2005.001,2005.031,1,21,1,0)
+This node contains a list of Presentation State UIDs associated
+"^DD",2005.001,2005.031,1,21,2,0)
+with this Image during the Interpretation.
+"^DD",2005.001,2005.311,0)
+PRESENTATION STATE UID SUB-FIELD^^2^3
+"^DD",2005.001,2005.311,0,"DT")
+3050930
+"^DD",2005.001,2005.311,0,"IX","B",2005.311,.01)
+
+"^DD",2005.001,2005.311,0,"NM","PRESENTATION STATE UID")
+
+"^DD",2005.001,2005.311,0,"UP")
+2005.031
+"^DD",2005.001,2005.311,.01,0)
+PRESENTATION STATE UID^MF^^0;1^K:$L(X)>99!($L(X)<3) X
+"^DD",2005.001,2005.311,.01,1,0)
+^.1
+"^DD",2005.001,2005.311,.01,1,1,0)
+2005.311^B
+"^DD",2005.001,2005.311,.01,1,1,1)
+S ^MAG(2005.001,DA(2),1,DA(1),1,"B",$E(X,1,30),DA)=""
+"^DD",2005.001,2005.311,.01,1,1,2)
+K ^MAG(2005.001,DA(2),1,DA(1),1,"B",$E(X,1,30),DA)
+"^DD",2005.001,2005.311,.01,3)
+Answer must be 3-99 characters in length.
+"^DD",2005.001,2005.311,.01,21,0)
+^.001^2^2^3050926^^^
+"^DD",2005.001,2005.311,.01,21,1,0)
+This UID links to the presentation state associated
+"^DD",2005.001,2005.311,.01,21,2,0)
+with the image record.
+"^DD",2005.001,2005.311,.01,"DT")
+3050906
+"^DD",2005.001,2005.311,1,0)
+PS TYPE^S^K:KEY;I:INTERPRETATION;^0;2^Q
+"^DD",2005.001,2005.311,1,3)
+Enter the type of data this presentation state is for.
+"^DD",2005.001,2005.311,1,21,0)
+^.001^1^1^3050926^^^^
+"^DD",2005.001,2005.311,1,21,1,0)
+Indicates the type of presentation state data stored.
+"^DD",2005.001,2005.311,1,"DT")
+3050920
+"^DD",2005.001,2005.311,2,0)
+SEQUENCE^NJ4,0^^0;3^K:+X'=X!(X>9999)!(X<1)!(X?.E1"."1N.N) X
+"^DD",2005.001,2005.311,2,3)
+Type a Number between 1 and 9999, 0 Decimal Digits
+"^DD",2005.001,2005.311,2,21,0)
+^^4^4^3050930^
+"^DD",2005.001,2005.311,2,21,1,0)
+The sequence value preserves the order in which the
+"^DD",2005.001,2005.311,2,21,2,0)
+image/presentation states are sent from the client.  For
+"^DD",2005.001,2005.311,2,21,3,0)
+Key images, this allows that same ordering to be replicated
+"^DD",2005.001,2005.311,2,21,4,0)
+when the images are retrieved for display.
+"^DD",2005.001,2005.311,2,"DT")
+3050930
+"^DIC",2005.001,2005.001,0)
+IMAGING STUDY^2005.001
+"^DIC",2005.001,2005.001,0,"GL")
+^MAG(2005.001,
+"^DIC",2005.001,2005.001,"%D",0)
+^^2^2^3051205^
+"^DIC",2005.001,2005.001,"%D",1,0)
+This file is where Study level data associated with stored
+"^DIC",2005.001,2005.001,"%D",2,0)
+images can be managed, e.g., Key Images.
+"^DIC",2005.001,"B","IMAGING STUDY",2005.001)
+
+**END**
+**END**

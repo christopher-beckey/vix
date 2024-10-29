@@ -1,0 +1,95 @@
+MAGDCIGL ;WOIFO/EdM - Cache Installation Global Variable Load ; 12/07/2006 14:55
+ ;;3.0;IMAGING;**69**;MAR 19, 2002;;NOV 7, 2007
+ ;; Per VHA Directive 2004-038, this routine should not be modified.
+ ;; +---------------------------------------------------------------+
+ ;; | Property of the US Government.                                |
+ ;; | No permission to copy or redistribute this software is given. |
+ ;; | Use of unreleased versions of this software requires the user |
+ ;; | to execute a written test agreement with the VistA Imaging    |
+ ;; | Development Office of the Department of Veterans Affairs,     |
+ ;; | telephone (301) 734-0100.                                     |
+ ;; | The Food and Drug Administration classifies this software as  |
+ ;; | a medical device.  As such, it may not be changed in any way. |
+ ;; | Modifications to this software may result in an adulterated   |
+ ;; | medical device under 21CFR820, the use of which is considered |
+ ;; | to be a violation of US Federal Statutes.                     |
+ ;; +---------------------------------------------------------------+
+ ;;
+ Q
+ ;
+LOAD N ANY,BACKROOT,BACKFILE,FILE,FLAGFILE,H,N,R,RR,STS,V,VER,X
+ S FILE=$$ENVIRON^MAGOSDIR("LOADFILE") Q:FILE=""
+ S BACKROOT=$$ENVIRON^MAGOSDIR("BACKROOT") Q:BACKROOT=""
+ S FLAGFILE=$$ENVIRON^MAGOSDIR("FLAGFILE")
+ S VER=$$ENVIRON^MAGOSDIR("VERSION") S:VER="" VER="<unknown>"
+ Q:$$GETDIR^MAGOSDIR(FILE)<1
+ D
+ . N D,M,N,S,T,Y
+ . S N=$$NOW^XLFDT()
+ . S D=N\1,T=N-D*1000000
+ . S M=D\100#100,Y=D\10000+1700,D=D#100
+ . S D=D_"-"_$P("January February March April May June July August September October November December"," ",M)_"-"_Y
+ . S S=T#100,M=T\100#100,H=T\10000
+ . S:S<10 S=0_S S:M<10 M=0_M S:H<10 H=0_H
+ . S H=D_", "_H_":"_M_":"_S
+ . Q
+ S BACKFILE=""
+ S:$E(FILE,2)=":" BACKFILE=$E(FILE,3,$L(FILE))
+ S:$E(FILE,1,2)="\\" BACKFILE="\"_$P(FILE,"\",5,$L(FILE)+2)
+ S BACKFILE=BACKROOT_BACKFILE
+ S ANY=0,STS=$$MKDIR^MAGOSDIR($P(BACKFILE,"\",1,$L(BACKFILE,"\")-1))
+ S STS=$$OPEN^MAGOSFIL(BACKFILE,"W")
+ S STS=$$USE^MAGOSFIL(BACKFILE)
+ W "Backup of active environment before upgrade to version ",VER,!,H,!
+ S STS=$$OPEN^MAGOSFIL(FILE,"R")
+ S STS=$$USE^MAGOSFIL(FILE)
+ S STS=$$READ^MAGOSFIL(FILE,.R)
+ I R'="Update Settings" D  Q
+ . S STS=$$USEPRIN^MAGOSFIL(1)
+ . W !!,"Attempting to read file """,FILE,"""."
+ . W !,"First line does not indicate that this file contains"
+ . W !,"setting updates for this installation.",!
+ . Q
+ S N="dummy" F  D  Q:N=""
+ . N E,I,Q
+ . S STS=$$READ^MAGOSFIL(FILE,.V)
+ . I V="Init 0" D KILL(0) Q
+ . I V="Init 1" D KILL(1) Q
+ . S N="",Q=0 F I=1:1:$L(V) D  Q:'I
+ . . S E=$E(V,I) I E="""" S Q='Q
+ . . I 'Q,E="=" S I=0 Q
+ . . S N=$E(V,1,I)
+ . . Q
+ . Q:N=""
+ . I $E(N,1)="^",$D(@N)#2 D
+ . . N E,I,X
+ . . S STS=$$USE^MAGOSFIL(BACKFILE),ANY=1
+ . . W N,"="""
+ . . S X=@N F I=1:1:$L(X) S E=$E(X,I) W E W:E="""" E
+ . . W """",!
+ . . Q
+ . S @V
+ . Q
+ S STS=$$USE^MAGOSFIL(BACKFILE) W !!!!!
+ S STS=$$CLOSE^MAGOSFIL(FILE)
+ S STS=$$CLOSE^MAGOSFIL(BACKFILE)
+ I 'ANY S X=$$DEL^MAGOSDIR(BACKFILE)
+ D:FLAGFILE'=""
+ . S STS=$$OPEN^MAGOSFIL(FLAGFILE,"W")
+ . S STS=$$USE^MAGOSFIL(FLAGFILE)
+ . W "Done.",!!
+ . S STS=$$CLOSE^MAGOSFIL(FLAGFILE)
+ . Q
+ Q
+ ;
+KILL(INIT) ; Kill global variables
+ N X
+ S X="" F  S X=$O(^TMP(X)) Q:X=""  K ^TMP(X)
+ S X="" F  S X=$O(^UTILITY(X)) Q:X=""  K ^UTILITY(X)
+ Q:'INIT
+ S X="" F  S X=$O(^MAGDICOM(X)) Q:X=""  K ^MAGDICOM(X)
+ S ^MAGDICOM(2006.563,0)="DICOM GATEWAY PARAMETER^2006.563^1^1"
+ S ^MAGDICOM(2006.563,1,"WORKLIST PORT",0)="^2006.5632^1^1"
+ S ^MAGDICOM(2006.563,1,"WORKLIST PORT",1,0)=60010
+ Q
+ ;

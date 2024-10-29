@@ -1,0 +1,542 @@
+KIDS Distribution saved on Oct 04, 2000@15:14:39
+File export for VSS
+**KIDS**:Z VSS FILE 0.1T^
+
+**INSTALL NAME**
+Z VSS FILE 0.1T
+"BLD",1195,0)
+Z VSS FILE 0.1T^^0^3001004^n
+"BLD",1195,1,0)
+^^1^1^3000906^
+"BLD",1195,1,1,0)
+KIDS file for one single file
+"BLD",1195,4,0)
+^9.64PA^2006.98^1
+"BLD",1195,4,2006.98,0)
+2006.98
+"BLD",1195,4,2006.98,222)
+y^y^f^^^^n
+"BLD",1195,4,"B",2006.98,2006.98)
+
+"BLD",1195,"KRN",0)
+^9.67PA^19^17
+"BLD",1195,"KRN",.4,0)
+.4
+"BLD",1195,"KRN",.401,0)
+.401
+"BLD",1195,"KRN",.402,0)
+.402
+"BLD",1195,"KRN",.403,0)
+.403
+"BLD",1195,"KRN",.5,0)
+.5
+"BLD",1195,"KRN",.84,0)
+.84
+"BLD",1195,"KRN",3.6,0)
+3.6
+"BLD",1195,"KRN",3.8,0)
+3.8
+"BLD",1195,"KRN",9.2,0)
+9.2
+"BLD",1195,"KRN",9.8,0)
+9.8
+"BLD",1195,"KRN",19,0)
+19
+"BLD",1195,"KRN",19.1,0)
+19.1
+"BLD",1195,"KRN",101,0)
+101
+"BLD",1195,"KRN",409.61,0)
+409.61
+"BLD",1195,"KRN",771,0)
+771
+"BLD",1195,"KRN",870,0)
+870
+"BLD",1195,"KRN",8994,0)
+8994
+"BLD",1195,"KRN","B",.4,.4)
+
+"BLD",1195,"KRN","B",.401,.401)
+
+"BLD",1195,"KRN","B",.402,.402)
+
+"BLD",1195,"KRN","B",.403,.403)
+
+"BLD",1195,"KRN","B",.5,.5)
+
+"BLD",1195,"KRN","B",.84,.84)
+
+"BLD",1195,"KRN","B",3.6,3.6)
+
+"BLD",1195,"KRN","B",3.8,3.8)
+
+"BLD",1195,"KRN","B",9.2,9.2)
+
+"BLD",1195,"KRN","B",9.8,9.8)
+
+"BLD",1195,"KRN","B",19,19)
+
+"BLD",1195,"KRN","B",19.1,19.1)
+
+"BLD",1195,"KRN","B",101,101)
+
+"BLD",1195,"KRN","B",409.61,409.61)
+
+"BLD",1195,"KRN","B",771,771)
+
+"BLD",1195,"KRN","B",870,870)
+
+"BLD",1195,"KRN","B",8994,8994)
+
+"FIA",2006.98)
+IMAGE SITE ACTIVITY
+"FIA",2006.98,0)
+^MAG(2006.98,
+"FIA",2006.98,0,0)
+2006.98P
+"FIA",2006.98,0,1)
+y^y^f^^^^n
+"FIA",2006.98,0,10)
+
+"FIA",2006.98,0,11)
+
+"FIA",2006.98,0,"RLRO")
+
+"FIA",2006.98,2006.98)
+0
+"FIA",2006.98,2006.9801)
+0
+"FIA",2006.98,2006.9802)
+0
+"FIA",2006.98,2006.9803)
+0
+"FIA",2006.98,2006.9804)
+0
+"MBREQ")
+0
+"QUES","XPF1",0)
+Y
+"QUES","XPF1","??")
+^D REP^XPDH
+"QUES","XPF1","A")
+Shall I write over your |FLAG| File
+"QUES","XPF1","B")
+YES
+"QUES","XPF1","M")
+D XPF1^XPDIQ
+"QUES","XPF2",0)
+Y
+"QUES","XPF2","??")
+^D DTA^XPDH
+"QUES","XPF2","A")
+Want my data |FLAG| yours
+"QUES","XPF2","B")
+YES
+"QUES","XPF2","M")
+D XPF2^XPDIQ
+"QUES","XPI1",0)
+YO
+"QUES","XPI1","??")
+^D INHIBIT^XPDH
+"QUES","XPI1","A")
+Want KIDS to INHIBIT LOGONs during the install
+"QUES","XPI1","B")
+YES
+"QUES","XPI1","M")
+D XPI1^XPDIQ
+"QUES","XPM1",0)
+PO^VA(200,:EM
+"QUES","XPM1","??")
+^D MG^XPDH
+"QUES","XPM1","A")
+Enter the Coordinator for Mail Group '|FLAG|'
+"QUES","XPM1","B")
+
+"QUES","XPM1","M")
+D XPM1^XPDIQ
+"QUES","XPO1",0)
+Y
+"QUES","XPO1","??")
+^D MENU^XPDH
+"QUES","XPO1","A")
+Want KIDS to Rebuild Menu Trees Upon Completion of Install
+"QUES","XPO1","B")
+YES
+"QUES","XPO1","M")
+D XPO1^XPDIQ
+"QUES","XPZ1",0)
+Y
+"QUES","XPZ1","??")
+^D OPT^XPDH
+"QUES","XPZ1","A")
+Want to DISABLE Scheduled Options, Menu Options, and Protocols
+"QUES","XPZ1","B")
+YES
+"QUES","XPZ1","M")
+D XPZ1^XPDIQ
+"QUES","XPZ2",0)
+Y
+"QUES","XPZ2","??")
+^D RTN^XPDH
+"QUES","XPZ2","A")
+Want to MOVE routines to other CPUs
+"QUES","XPZ2","B")
+NO
+"QUES","XPZ2","M")
+D XPZ2^XPDIQ
+"SEC","^DIC",2006.98,2006.98,0,"AUDIT")
+@
+"SEC","^DIC",2006.98,2006.98,0,"DD")
+@
+"SEC","^DIC",2006.98,2006.98,0,"DEL")
+@
+"SEC","^DIC",2006.98,2006.98,0,"LAYGO")
+@
+"SEC","^DIC",2006.98,2006.98,0,"RD")
+@
+"SEC","^DIC",2006.98,2006.98,0,"WR")
+@
+"VER")
+8.0^22.0
+"^DD",2006.98,2006.98,0)
+FIELD^^13.4^23
+"^DD",2006.98,2006.98,0,"DT")
+3000608
+"^DD",2006.98,2006.98,0,"IX","B",2006.98,.01)
+
+"^DD",2006.98,2006.98,0,"NM","IMAGE SITE ACTIVITY")
+
+"^DD",2006.98,2006.98,.01,0)
+DOMAIN^RP2006.19'^MAG(2006.19,^0;1^Q
+"^DD",2006.98,2006.98,.01,1,0)
+^.1
+"^DD",2006.98,2006.98,.01,1,1,0)
+2006.98^B
+"^DD",2006.98,2006.98,.01,1,1,1)
+S ^MAG(2006.98,"B",$E(X,1,30),DA)=""
+"^DD",2006.98,2006.98,.01,1,1,2)
+K ^MAG(2006.98,"B",$E(X,1,30),DA)
+"^DD",2006.98,2006.98,.01,3)
+
+"^DD",2006.98,2006.98,.01,"DT")
+2971208
+"^DD",2006.98,2006.98,1,0)
+Date of Message^F^^0;2^K:$L(X)>30!($L(X)<6) X
+"^DD",2006.98,2006.98,1,3)
+Answer must be 6-30 characters in length.
+"^DD",2006.98,2006.98,1,"DT")
+2991110
+"^DD",2006.98,2006.98,2,0)
+IMAGES^NJ9,0^^0;3^K:+X'=X!(X>999999999)!(X<0)!(X?.E1"."1N.N) X
+"^DD",2006.98,2006.98,2,3)
+Type a Number between 0 and 999999999, 0 Decimal Digits
+"^DD",2006.98,2006.98,2,"DT")
+2971208
+"^DD",2006.98,2006.98,3,0)
+WSTATIONS^NJ6,0^^0;4^K:+X'=X!(X>999999)!(X<0)!(X?.E1"."1N.N) X
+"^DD",2006.98,2006.98,3,3)
+Type a Number between 0 and 999999, 0 Decimal Digits
+"^DD",2006.98,2006.98,3,"DT")
+2971208
+"^DD",2006.98,2006.98,3.5,0)
+WS CAPTURE VERSIONS^2006.9801A^^2;0
+"^DD",2006.98,2006.98,3.5,21,0)
+^^3^3^2991124^
+"^DD",2006.98,2006.98,3.5,21,1,0)
+This is the release number assigned to the software which was last
+"^DD",2006.98,2006.98,3.5,21,2,0)
+activated by the software usage on the individual Imaging Clinical
+"^DD",2006.98,2006.98,3.5,21,3,0)
+Workstations.
+"^DD",2006.98,2006.98,3.5,"DT")
+2990616
+"^DD",2006.98,2006.98,3.6,0)
+WS DISPLAY VERSIONS^2006.9802A^^3;0
+"^DD",2006.98,2006.98,3.7,0)
+BP Workstation Vers^2006.9803A^^5;0
+"^DD",2006.98,2006.98,3.8,0)
+DICOM Gateway Version^2006.9804A^^6;0
+"^DD",2006.98,2006.98,4,0)
+INSTALL NAME^F^^1;1^K:$L(X)>24!($L(X)<2) X
+"^DD",2006.98,2006.98,4,3)
+Answer must be 2-24 characters in length.
+"^DD",2006.98,2006.98,4,21,0)
+^^1^1^2971211^
+"^DD",2006.98,2006.98,4,21,1,0)
+The name of the install.
+"^DD",2006.98,2006.98,4,"DT")
+2971211
+"^DD",2006.98,2006.98,5,0)
+INSTALLER NAME^F^^1;2^K:$L(X)>24!($L(X)<4) X
+"^DD",2006.98,2006.98,5,3)
+Answer must be 4-24 characters in length.
+"^DD",2006.98,2006.98,5,21,0)
+^^1^1^2971211^
+"^DD",2006.98,2006.98,5,21,1,0)
+Name of person who installed the Imaging install at the site.
+"^DD",2006.98,2006.98,5,"DT")
+2971211
+"^DD",2006.98,2006.98,6,0)
+INSTALL DATE^FO^^1;3^K:$L(X)>99!($L(X)<7) X
+"^DD",2006.98,2006.98,6,2)
+S Y(0)=Y S Y=$$FMTE^XLFDT(Y)
+"^DD",2006.98,2006.98,6,2.1)
+S Y=$$FMTE^XLFDT(Y)
+"^DD",2006.98,2006.98,6,3)
+Answer must be 7-99 characters in length.
+"^DD",2006.98,2006.98,6,"DT")
+3000124
+"^DD",2006.98,2006.98,7,0)
+DICOM VERSION^F^^4;1^K:$L(X)>24!($L(X)<2) X
+"^DD",2006.98,2006.98,7,3)
+Answer must be 2-24 characters in length
+"^DD",2006.98,2006.98,7,"DT")
+2991103
+"^DD",2006.98,2006.98,8,0)
+VISTARAD VERSION^F^^4;2^K:$L(X)>24!($L(X)<2) X
+"^DD",2006.98,2006.98,8,3)
+Answer must be 2-24 characters in length
+"^DD",2006.98,2006.98,8,"DT")
+2991103
+"^DD",2006.98,2006.98,8.5,0)
+VRAD INSTALL DATE^D^^4;4^S %DT="EST" D ^%DT S X=Y K:Y<1 X
+"^DD",2006.98,2006.98,8.5,"DT")
+3000427
+"^DD",2006.98,2006.98,9,0)
+DICOM Error Log^NJ7,0^^0;5^K:+X'=X!(X>9999999)!(X<0)!(X?.E1"."1N.N) X
+"^DD",2006.98,2006.98,9,3)
+Type a Number between 0 and 9999999, 0 Decimal Digits
+"^DD",2006.98,2006.98,9,"DT")
+2991110
+"^DD",2006.98,2006.98,9.5,0)
+DICOM FAILED IMAGES^NJ6,0^^0;10^K:+X'=X!(X>999999)!(X<0)!(X?.E1"."1N.N) X
+"^DD",2006.98,2006.98,9.5,3)
+Type a Number between 0 and 999999, 0 Decimal Digits
+"^DD",2006.98,2006.98,9.5,"DT")
+3000517
+"^DD",2006.98,2006.98,10,0)
+Queue File count^NJ7,0^^0;6^K:+X'=X!(X>9999999)!(X<0)!(X?.E1"."1N.N) X
+"^DD",2006.98,2006.98,10,3)
+Type a Number between 0 and 9999999, 0 Decimal Digits
+"^DD",2006.98,2006.98,10,"DT")
+2991110
+"^DD",2006.98,2006.98,11,0)
+Unprocessed Queues^NJ7,0^^0;7^K:+X'=X!(X>9999999)!(X<0)!(X?.E1"."1N.N) X
+"^DD",2006.98,2006.98,11,3)
+Type a Number between 0 and 9999999, 0 Decimal Digits
+"^DD",2006.98,2006.98,11,"DT")
+2991110
+"^DD",2006.98,2006.98,12,0)
+30 DAY Workstation Sessions^NJ7,0^^0;8^K:+X'=X!(X>9999999)!(X<0)!(X?.E1"."1N.N) X
+"^DD",2006.98,2006.98,12,3)
+Type a Number between 0 and 9999999, 0 Decimal Digits
+"^DD",2006.98,2006.98,12,"DT")
+2991110
+"^DD",2006.98,2006.98,13,0)
+30 DAY Workstation Patients^NJ7,0^^4;3^K:+X'=X!(X>9999999)!(X<0)!(X?.E1"."1N.N) X
+"^DD",2006.98,2006.98,13,3)
+Type a Number between 0 and 9999999, 0 Decimal Digits
+"^DD",2006.98,2006.98,13,"DT")
+2991110
+"^DD",2006.98,2006.98,13.2,0)
+30 DAY Workstation Images^NJ7,0^^4;5^K:+X'=X!(X>9999999)!(X<0)!(X?.E1"."1N.N) X
+"^DD",2006.98,2006.98,13.2,3)
+Type a Number between 0 and 9999999, 0 Decimal Digits
+"^DD",2006.98,2006.98,13.2,"DT")
+3000608
+"^DD",2006.98,2006.98,13.4,0)
+30 DAY Workstation Captures^NJ7,0^^4;6^K:+X'=X!(X>9999999)!(X<0)!(X?.E1"."1N.N) X
+"^DD",2006.98,2006.98,13.4,3)
+Type a Number between 0 and 9999999, 0 Decimal Digits
+"^DD",2006.98,2006.98,13.4,"DT")
+3000608
+"^DD",2006.98,2006.98,14,0)
+Routed Studies^NJ15,5^^0;9^K:+X'=X!(X>999999999)!(X<0)!(X?.E1"."6N.N) X
+"^DD",2006.98,2006.98,14,3)
+Enter the average number of studies per day that is routed from this site.
+"^DD",2006.98,2006.98,14,"DT")
+2991119
+"^DD",2006.98,2006.9801,0)
+WS CAPTURE VERSIONS SUB-FIELD^^1^2
+"^DD",2006.98,2006.9801,0,"DT")
+2990616
+"^DD",2006.98,2006.9801,0,"IX","B",2006.9801,.01)
+
+"^DD",2006.98,2006.9801,0,"NM","WS CAPTURE VERSIONS")
+
+"^DD",2006.98,2006.9801,0,"UP")
+2006.98
+"^DD",2006.98,2006.9801,.01,0)
+WS CAPTURE VERSIONS^MF^^0;1^K:$L(X)>30!($L(X)<1) X
+"^DD",2006.98,2006.9801,.01,1,0)
+^.1
+"^DD",2006.98,2006.9801,.01,1,1,0)
+2006.9801^B
+"^DD",2006.98,2006.9801,.01,1,1,1)
+S ^MAG(2006.98,DA(1),2,"B",$E(X,1,30),DA)=""
+"^DD",2006.98,2006.9801,.01,1,1,2)
+K ^MAG(2006.98,DA(1),2,"B",$E(X,1,30),DA)
+"^DD",2006.98,2006.9801,.01,3)
+Answer must be 1-30 characters in length.
+"^DD",2006.98,2006.9801,.01,"DT")
+2991110
+"^DD",2006.98,2006.9801,1,0)
+COUNT^NJ4,0^^0;2^K:+X'=X!(X>9999)!(X<0)!(X?.E1"."1N.N) X
+"^DD",2006.98,2006.9801,1,3)
+Type a Number between 0 and 9999, 0 Decimal Digits
+"^DD",2006.98,2006.9801,1,"DT")
+2990616
+"^DD",2006.98,2006.9802,0)
+WS DISPLAY VERSIONS SUB-FIELD^^1^2
+"^DD",2006.98,2006.9802,0,"DT")
+2990616
+"^DD",2006.98,2006.9802,0,"IX","B",2006.9802,.01)
+
+"^DD",2006.98,2006.9802,0,"NM","WS DISPLAY VERSIONS")
+
+"^DD",2006.98,2006.9802,0,"UP")
+2006.98
+"^DD",2006.98,2006.9802,.01,0)
+WS DISPLAY VERSIONS^MF^^0;1^K:$L(X)>30!($L(X)<1) X
+"^DD",2006.98,2006.9802,.01,1,0)
+^.1
+"^DD",2006.98,2006.9802,.01,1,1,0)
+2006.9802^B
+"^DD",2006.98,2006.9802,.01,1,1,1)
+S ^MAG(2006.98,DA(1),3,"B",$E(X,1,30),DA)=""
+"^DD",2006.98,2006.9802,.01,1,1,2)
+K ^MAG(2006.98,DA(1),3,"B",$E(X,1,30),DA)
+"^DD",2006.98,2006.9802,.01,3)
+Answer must be 1-30 characters in length.
+"^DD",2006.98,2006.9802,.01,"DT")
+2990616
+"^DD",2006.98,2006.9802,1,0)
+COUNT^NJ4,0^^0;2^K:+X'=X!(X>9999)!(X<0)!(X?.E1"."1N.N) X
+"^DD",2006.98,2006.9802,1,3)
+Type a Number between 0 and 9999, 0 Decimal Digits
+"^DD",2006.98,2006.9802,1,"DT")
+2990616
+"^DD",2006.98,2006.9803,0)
+BP Workstation Vers SUB-FIELD^^2^4
+"^DD",2006.98,2006.9803,0,"DT")
+3000330
+"^DD",2006.98,2006.9803,0,"IX","B",2006.9803,.01)
+
+"^DD",2006.98,2006.9803,0,"NM","BP Workstation Vers")
+
+"^DD",2006.98,2006.9803,0,"UP")
+2006.98
+"^DD",2006.98,2006.9803,.01,0)
+BP Workstation Vers^MF^^0;1^K:$L(X)>24!($L(X)<1) X
+"^DD",2006.98,2006.9803,.01,1,0)
+^.1
+"^DD",2006.98,2006.9803,.01,1,1,0)
+2006.9803^B
+"^DD",2006.98,2006.9803,.01,1,1,1)
+S ^MAG(2006.98,DA(1),5,"B",$E(X,1,30),DA)=""
+"^DD",2006.98,2006.9803,.01,1,1,2)
+K ^MAG(2006.98,DA(1),5,"B",$E(X,1,30),DA)
+"^DD",2006.98,2006.9803,.01,3)
+Answer must be 1-24 characters in length.
+"^DD",2006.98,2006.9803,.01,"DT")
+3000207
+"^DD",2006.98,2006.9803,.02,0)
+Windows OS^F^^0;2^K:$L(X)>64!($L(X)<3) X
+"^DD",2006.98,2006.9803,.02,3)
+Answer must be 3-64 characters in length.
+"^DD",2006.98,2006.9803,.02,"DT")
+3000330
+"^DD",2006.98,2006.9803,1,0)
+NUMBER^NJ5,0^^0;3^K:+X'=X!(X>99999)!(X<0)!(X?.E1"."1N.N) X
+"^DD",2006.98,2006.9803,1,3)
+Type a Number between 0 and 99999, 0 Decimal Digits
+"^DD",2006.98,2006.9803,1,"DT")
+3000330
+"^DD",2006.98,2006.9803,2,0)
+Distribution Date^D^^0;4^S %DT="E" D ^%DT S X=Y K:Y<1 X
+"^DD",2006.98,2006.9803,2,"DT")
+3000330
+"^DD",2006.98,2006.9804,0)
+DICOM Gateway Version SUB-FIELD^^2^3
+"^DD",2006.98,2006.9804,0,"DT")
+3000323
+"^DD",2006.98,2006.9804,0,"IX","B",2006.9804,.01)
+
+"^DD",2006.98,2006.9804,0,"NM","DICOM Gateway Version")
+
+"^DD",2006.98,2006.9804,0,"UP")
+2006.98
+"^DD",2006.98,2006.9804,.01,0)
+DICOM Gateway Version^MF^^0;1^K:$L(X)>60!($L(X)<3) X
+"^DD",2006.98,2006.9804,.01,1,0)
+^.1
+"^DD",2006.98,2006.9804,.01,1,1,0)
+2006.9804^B
+"^DD",2006.98,2006.9804,.01,1,1,1)
+S ^MAG(2006.98,DA(1),6,"B",$E(X,1,30),DA)=""
+"^DD",2006.98,2006.9804,.01,1,1,2)
+K ^MAG(2006.98,DA(1),6,"B",$E(X,1,30),DA)
+"^DD",2006.98,2006.9804,.01,3)
+Answer must be 3-60 characters in length.
+"^DD",2006.98,2006.9804,.01,"DT")
+3000323
+"^DD",2006.98,2006.9804,1,0)
+NUMBER^NJ2,0^^0;2^K:+X'=X!(X>60)!(X<1)!(X?.E1"."1N.N) X
+"^DD",2006.98,2006.9804,1,3)
+Type a Number between 1 and 60, 0 Decimal Digits
+"^DD",2006.98,2006.9804,1,"DT")
+3000323
+"^DD",2006.98,2006.9804,2,0)
+Distribution Date^F^^0;3^K:$L(X)>60!($L(X)<6) X
+"^DD",2006.98,2006.9804,2,3)
+Answer must be 6-60 characters in length.
+"^DD",2006.98,2006.9804,2,"DT")
+3000323
+"^DIC",2006.98,2006.98,0)
+IMAGE SITE ACTIVITY^2006.98
+"^DIC",2006.98,2006.98,0,"GL")
+^MAG(2006.98,
+"^DIC",2006.98,2006.98,"%D",0)
+^^17^17^3000510
+"^DIC",2006.98,2006.98,"%D",1,0)
+ +---------------------------------------------------------------+
+"^DIC",2006.98,2006.98,"%D",2,0)
+ |                                                               |
+"^DIC",2006.98,2006.98,"%D",3,0)
+ | Property of the US Government.                                |
+"^DIC",2006.98,2006.98,"%D",4,0)
+ | No permission to copy or redistribute this software is given. |
+"^DIC",2006.98,2006.98,"%D",5,0)
+ | Use of unreleased versions of this software requires the user |
+"^DIC",2006.98,2006.98,"%D",6,0)
+ | to execute a written test agreement with the VistA Imaging    |
+"^DIC",2006.98,2006.98,"%D",7,0)
+ | Development Office of the Department of Veterans Affairs,     |
+"^DIC",2006.98,2006.98,"%D",8,0)
+ | telephone (301) 734-0100.                                     |
+"^DIC",2006.98,2006.98,"%D",9,0)
+ |                                                               |
+"^DIC",2006.98,2006.98,"%D",10,0)
+ | The Food and Drug Administration classifies this software as  |
+"^DIC",2006.98,2006.98,"%D",11,0)
+ | a Class II medical device.  As such, it may not be changed    |
+"^DIC",2006.98,2006.98,"%D",12,0)
+ | in any way.  Modifications to this software may result in an  |
+"^DIC",2006.98,2006.98,"%D",13,0)
+ | adulterated medical device under 21CFR820, the use of which   |
+"^DIC",2006.98,2006.98,"%D",14,0)
+ | is considered to be a violation of US Federal Statutes.       |
+"^DIC",2006.98,2006.98,"%D",15,0)
+ |                                                               |
+"^DIC",2006.98,2006.98,"%D",16,0)
+ +---------------------------------------------------------------+
+"^DIC",2006.98,2006.98,"%D",17,0)
+ 
+"^DIC",2006.98,"B","IMAGE SITE ACTIVITY",2006.98)
+
+**END**
+**END**
+
+
+****
+****

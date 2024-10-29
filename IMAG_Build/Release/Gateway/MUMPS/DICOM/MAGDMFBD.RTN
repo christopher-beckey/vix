@@ -1,0 +1,143 @@
+MAGDMFBD ;WOIFO/EdM - Questions for MAGDMFB1 ; 04/06/2006 06:41
+ ;;3.0;IMAGING;**9,21,11,51,69**;MAR 19, 2002;;NOV 7, 2007
+ ;; Per VHA Directive 2004-038, this routine should not be modified.
+ ;; +---------------------------------------------------------------+
+ ;; | Property of the US Government.                                |
+ ;; | No permission to copy or redistribute this software is given. |
+ ;; | Use of unreleased versions of this software requires the user |
+ ;; | to execute a written test agreement with the VistA Imaging    |
+ ;; | Development Office of the Department of Veterans Affairs,     |
+ ;; | telephone (301) 734-0100.                                     |
+ ;; | The Food and Drug Administration classifies this software as  |
+ ;; | a medical device.  As such, it may not be changed in any way. |
+ ;; | Modifications to this software may result in an adulterated   |
+ ;; | medical device under 21CFR820, the use of which is considered |
+ ;; | to be a violation of US Federal Statutes.                     |
+ ;; +---------------------------------------------------------------+
+ ;;
+ Q
+ ;
+Q16 K QUIT S OK=0 F  D  Q:OK  Q:$D(QUIT)
+ . W !!,"Is a PACS going to send Exam Complete messages to VistA? ",EXAMCOMP,"// "
+ . R X:DTIME E  S X="^"
+ . I X="^" S QUIT=0 Q
+ . I X="^^" S QUIT=1 Q
+ . I X="" S X=EXAMCOMP W X
+ . S X=$$YN^MAGDMFB1(X) I X'="" S EXAMCOMP=X,OK=1 Q
+ . W !!,"Answering ""Yes"" to this question will have the effect that"
+ . W !,"settings will be enabled that allow this system to receive"
+ . W !,"Exam Complete messages from a PACS to trigger image transfer."
+ . W !,"Answering ""No"" means that this system will not be prepared to"
+ . W !,"receive such messages."
+ . Q
+ Q
+ ;
+Q17 I EXAMCOMP="NO" S COMMPACS="N/A" Q
+ I COMMPACS="N/A" S COMMPACS="" ; remove N/A
+ N TYPE
+ S TYPE(1)="GE-DICOM;GE Medical Systems PACS with Mitra PACS Broker"
+ S TYPE(2)="GE-ACR/NEMA;GE Medical Systems PACS with ACR-NEMA Text Gateway"
+ S TYPE(3)="EMED;eMed Technology Corporation PACS "
+ S TYPE(4)="OTHER;Other commercial PACS"
+ K QUIT S OK=0 F  D  Q:OK  Q:$D(QUIT)
+ . N DSC,I,NAME,OLD,SQ
+ . W !!,"Select the kind of commercial PACS at this site"
+ . W !,"-----------------------------------------------"
+ . S (I,OLD)="" F  S I=$O(TYPE(I)) Q:I=""  D
+ . . S X=TYPE(I),NAME=$P(X,";",1),DSC=$P(X,";",2),I(NAME)=NAME,I(I)=NAME
+ . . W !,$J(I,5)," - ",DSC S DSC(NAME)=DSC
+ . . S:NAME=COMMPACS OLD=I
+ . . Q
+ . W !!,"What kind of a PACS?" W:OLD'="" "  ",OLD,"// "
+ . R X:DTIME E  S X="^"
+ . I X="^" S QUIT=0 Q
+ . I X="^^" S QUIT=1 Q
+ . I X="",OLD'="" S X=OLD W X
+ . S X=$$UPPER^MAGOSMSC(X)
+ . I X'="",$D(I(X)) S COMMPACS=I(X),OK=1 W "  ",DSC(COMMPACS) Q
+ . W !!,"Select the kind of commercial PACS that is installed at the site"
+ . W !,"If the PACS is from GE Medical Systems, make sure to specify"
+ . W !,"whether it uses the (new) Mitra Broker, or the (old) ACR-NEMA"
+ . W !,"protocol version of the Text Gateway."
+ . Q
+ Q
+ ;
+Q18 I EXAMCOMP="NO" S CMOVEAET="" Q
+ K QUIT S OK=0 F  D  Q:OK  Q:$D(QUIT)
+ . W !!,"Enter the PACS-to-VistA C-Move destination AE Title: "
+ . W:CMOVEAET'="" CMOVEAET,"// "
+ . R X:DTIME E  S X="^"
+ . I X="^" S QUIT=0 Q
+ . I X="^^" S QUIT=1 Q
+ . I X="" S X=CMOVEAET W X
+ . I X'["?",$L(X)'>16 S CMOVEAET=X,OK=1 Q
+ . W !!,"Some PACSs find the VistA system using its Application Entity Title,"
+ . W !,"so that they can move images from PACS to VistA."
+ . W !,"An AE-title can have up to 16 characters."
+ . W !,"While the DICOM standard allows spaces in AE-titles, these names"
+ . W !,"are often also used as ""hostnames"" in TCP/IP addresses. Hence, it is"
+ . W !,"strongly recommended to refrain from using names with spaces in them."
+ . Q
+ Q
+ ;
+Q19 I TEXTGATE="NO" S WORKLIST="NO" Q
+ K QUIT S OK=0 F  D  Q:OK  Q:$D(QUIT)
+ . W !!,"Will this system be a Modality Worklist Provider? ",WORKLIST,"// "
+ . R X:DTIME E  S X="^"
+ . I X="^" S QUIT=0 Q
+ . I X="^^" S QUIT=1 Q
+ . I X="" S X=WORKLIST W X
+ . S X=$$YN^MAGDMFB1(X) I X'="" S WORKLIST=X,OK=1 Q
+ . W !!,"Answering ""Yes"" to this question will have the effect that"
+ . W !,"settings will be enabled that allow this system to operate as"
+ . W !,"a Modality Worklist Provider."
+ . W !,"Answering ""No"" means that this system will not be able to"
+ . W !,"respond to Modality Worklist requests."
+ . Q
+ Q
+ ;
+Q20 K QUIT S OK=0 F  D  Q:OK  Q:$D(QUIT)
+ . W !!,"Send CPT Modifiers? ",MODCPT,"// "
+ . R X:DTIME E  S X="^"
+ . I X="^" S QUIT=0 Q
+ . I X="^^" S QUIT=1 Q
+ . I X="" S X=MODCPT W X
+ . S X=$$YN^MAGDMFB1(X) I X'="" S MODCPT=X,OK=1 Q
+ . W !!,"Answering ""Yes"" to this question will have the effect that"
+ . W !,"when CPT codes are transmitted, modifiers will be included."
+ . W !,"Answering ""No"" means that such modifiers will be omitted."
+ . Q
+ Q
+ ;
+Q21 I EXAMCOMP="NO" S DELAYCMV="N/A" Q
+ I COMMPACS'="EMED" S DELAYCMV="N/A" Q
+ K QUIT S OK=0 F  D  Q:OK  Q:$D(QUIT)
+ . N DFT,MIN,SEC,T
+ . S DFT=DELAYCMV,MIN=DFT\60,SEC=DFT#60
+ . S:MIN DFT=MIN_"m" S:SEC DFT=DFT_$S(DFT'="":" ",1:"")_SEC_"s"
+ . W !!,"Delay for C-Move request after Exam Complete [min]: ",DFT,"// "
+ . R X:DTIME E  S X="^"
+ . I X="^" S QUIT=0 Q
+ . I X="^^" S QUIT=1 Q
+ . I X="" S X=DELAYCMV W X
+ . D:$TR(X,"MINSECminsec0123456789 ")=""  Q:OK
+ . . S X=$TR(X,"MS INECinec","ms"),(MIN,SEC)=0
+ . . I $L(X,"m")>2 S X="?" Q
+ . . I $L(X,"s")>2 S X="?" Q
+ . . S T=X
+ . . S:T["m" MIN=+T,T=$P(T,"m",2)
+ . . S:T["s" SEC=+T,T=$P(T,"s",2)
+ . . S:T'="" MIN=+T
+ . . S T="" S:MIN T=MIN_"m" S:SEC T=T_SEC_"s"
+ . . S:X=T OK=1
+ . . I 'SEC,X_"m"=T S OK=1
+ . . I 'SEC,T_"0s"=X S OK=1
+ . . I 'MIN,"0m"_T=X S OK=1
+ . . S:OK DELAYCMV=MIN*60+SEC
+ . . Q
+ . W !!,"Enter a time-delay value (like 5m 30s for 5 minutes, 30 seconds)"
+ . W !,"for the period that should elapse between the moment an"
+ . W !,"""Exam Complete"" message arrives, and the moment a C-MOVE request"
+ . W !,"can be initiated."
+ . Q
+ Q

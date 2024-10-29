@@ -1,0 +1,131 @@
+Cache for Windows NT^INT^Saved from DICOM,DICOM (ISW-KUZMAKP3-LT)^~Format=Cache.S~
+%RO on 03/22/2013  11:46
+MAGDMENO^INT^1^62903,42354.13353^0
+MAGDMENO ;WOIFO/EdM/PMK/DAC - VistA DICOM Gateway Menu ; 22 Mar 2013 11:45 AM
+ ;;3.0;IMAGING;**11,30,51,50,69,54,53,118,110**;Mar 19, 2002;Build 54;Sep 17, 2012
+ ;; Per VHA Directive 2004-038, this routine should not be modified.
+ ;; +---------------------------------------------------------------+
+ ;; | Property of the US Government.                                |
+ ;; | No permission to copy or redistribute this software is given. |
+ ;; | Use of unreleased versions of this software requires the user |
+ ;; | to execute a written test agreement with the VistA Imaging    |
+ ;; | Development Office of the Department of Veterans Affairs,     |
+ ;; | telephone (301) 734-0100.                                     |
+ ;; | The Food and Drug Administration classifies this software as  |
+ ;; | a medical device.  As such, it may not be changed in any way. |
+ ;; | Modifications to this software may result in an adulterated   |
+ ;; | medical device under 21CFR820, the use of which is considered |
+ ;; | to be a violation of US Federal Statutes.                     |
+ ;; +---------------------------------------------------------------+
+ ;;
+ Q
+ ;
+ ; 1=Name, 2=Entry, 3=Configuration, 4=Flags
+ ;Flags:
+ ; "C": Console only
+ ; "E": Can only be called when e-mail configured
+ ; "L": Can only be called when "Location" is configured
+ ; "S": Single copy
+ ; "V": Forbidden for "View only" user
+ ;
+0 ;; VistA DICOM Gateway Menu
+ ;;Text Gateway;PUSH^MAGDMENU(1);TEXT
+ ;;Image Gateway;PUSH^MAGDMENU(2);IMAGE
+ ;;Routing Gateway;PUSH^MAGDMENU(3);ROUTE;V
+ ;;System Maintenance;PUSH^MAGDMENU(4)
+ ;;Quit;QUITMENU^MAGDMENU
+ ;
+1 ;; VistA DICOM Text Gateway
+ ;;Start Processing Text Messages from HIS;^MAGDHRC;;VSEL
+ ;;Send DICOM Text Messages to Commercial PACS or Broker;^MAGDTCP;SENDPACS;VL
+ ;;Display Text Gateway Statistics;^MAGDSTAT;;L
+ ;;Display Modality Worklist Statistics;STATS^MAGDWLP2;WORKLIST;L
+ ;;Modality Worklist Query;ENTRY^MAGDWLU
+ ;;Display a HL7 Message;DISPLAY^MAGDHRCP
+ ;;Display a DICOM Message;READ^MAGDDR1("W")
+ ;;Modify the HL7 Message Pointer;CHANGE^MAGDHRCP;;V
+ ;;Generate a Daily Summary Report;^MAGDAUD1;;L
+ ;;Purge Old Modality Worklist Entries;ENTRY^MAGDDEL1;;VS
+ ;;Purge Old DICOM Message Files;DICOM^MAGDDEL2;;VS
+ ;;Purge Old HL7 Transaction Global Nodes;HL7^MAGDDEL3;;VS
+ ;;Purge Old Audit Records;PURGE^MAGDAUD1;;VSL
+ ;
+2 ;; VistA DICOM Image Gateway
+ ;;Receive PACS Exam Complete Messages;ENTRY^MAGDTCP;PACS;VL
+ ;;Send PACS Request Image Transfer Messages;ENTRY^MAGDEXC2;PACS;VL
+ ;;Process DICOM Images;ENTRY^MAGDIR6;;VSEL
+ ;;Increment DICOM Image Input Pointer;IMGPTR^MAGDMENA;;VS
+ ;;Display Real-Time Storage Server Statistics;^MAGDCST4;;L
+ ;;Display Cumulative Storage Server Statistics;^MAGDCST5;;L
+ ;;Display Daily Image Processing Statistics;^MAGDCST6;;L
+ ;;Send DICOM Images to Another Storage Server;PUSH^MAGDMENU(28)
+ ;;Display a DICOM Image Header;READ^MAGDDR1("I")
+ ;;Re-Transmit Images from PACS;PUSH^MAGDMENU(210);;V
+ ;;Purge Incomplete Image Information;CLEANUP^MAGDIR6E;;VS
+ ;;Validate Failed Image Table;VALIDATE^MAGDIR7G;;V
+ ;
+28 ;; VistA DICOM Export Image
+ ;;Select DICOM Images for Transmission;SELECT^MAGDIWB1
+ ;;Transmit DICOM Images to a Storage SCP;XMIT^MAGDIWB2
+ ;;Stop Image Transmission Queue Processor;STOP^MAGDIWB0
+ ;;(Re)Initialize Image Transmission Queue;INIT^MAGDIWB0
+ ;;Batch Export VistA Radiology Images;ENTRY^MAGDIWBA;;VS
+ ;;Display Batch Export Statistics;STATS^MAGDIWBC
+ ;;Display Export Transmission Statistics;SENDLIST^MAGDIWDG
+ ;
+210 ;; Re-Transmit from PACS
+ ;;Start Querying the PACS;START^MAGDGEX1;;V
+ ;;Stop Querying the PACS;STOP^MAGDGEX1;;V
+ ;;Maintain Set-Up Parameters;PRMS^MAGDGEX2(0);;V
+ ;
+3 ;; VistA Routing Processor
+ ;;Start the Transmission Processor;SELECT^MAGBRTA4;;L
+ ;;Stop the Transmission Processor;NOTRA^MAGDMENA;;L
+ ;;Start the Evaluation Processor;STARTE^MAGBRTP1;;L
+ ;;Stop the Evaluation Processor;STOPE^MAGBRTP1;;L
+ ;;Import Routing Rules;^MAGBRTB1
+ ;;Purge all Completed Entries in the Transmission Queue;PURGEALL^MAGBRTP1;;L
+ ;;Purge Completed and Expired Entries in the Transmission Queue;PURGEEXP^MAGBRTP1;;L
+ ;;Re-Queue all Failed Entries in the Transmission Queue;FAILREQ^MAGBRTP1;;L
+ ;;Remove Obsolete Entries from Transmission Queue;PURGEOBS^MAGBRTP1;;L
+ ;;Display Routing Rules;SHOW^MAGBRTLR
+ ;
+4 ;; VistA DICOM System Maintenance
+ ;;System Operation;PUSH^MAGDMENU(41)
+ ;;Gateway Configuration and DICOM Master Files;PUSH^MAGDMENU(42);;V
+ ;;MUMPS Utilities;PUSH^MAGDMENU(43);;V
+ ;;Enter Programmer Mode;PGMRMODE^MAGDLOGN;;V
+ ;
+41 ;; System Operation
+ ;;Display MUMPS-to-MUMPS Broker Status;M2MSTS^MAGDMENA
+ ;;Display DICOM Message Log;^MAGDMLGV
+ ;;Issue a DICOM Echo Request;USER^MAGDECHO
+ ;;Display the Version of the Software;^MAGDVRSN
+ ;;Display Gateway Application Usage Statistics;USAGE^MAGDSTA1
+ ;;Support Telephone Numbers;SUPPORT^MAGDMENA
+ ;;Test E-Mail Transmission;TEST^MAGDMSGT
+ ;
+42 ;; Gateway Configuration and DICOM Master Files
+ ;;Display Gateway Configuration Parameters;DISPLAY^MAGDMFBB
+ ;;Update Gateway Configuration Parameters;^MAGDMFB1;;S
+ ;;Update AETITLE.DIC;AETITLE^MAGDMFBT;;S
+ ;;Update INSTRUMENT.DIC;INSTRUMT^MAGDMFBI;;S
+ ;;Update MODALITY.DIC;MODALITY^MAGDMENA;;S
+ ;;Update PORTLIST.DIC;PORTLIST^MAGDMFBP;;S
+ ;;Update SCU_LIST.DIC;USERAPPS^MAGDMFBS;;S
+ ;;Update WORKLIST.DIC;WORKLIST^MAGDMFBW;;S
+ ;;Reinitialize All the DICOM Master Files;SILENT^MAGDMFB;;S
+ ;;Create Shortcuts for Instruments;^MAGDMFIC;;S
+ ;;Validate Access/Verify Codes for Modality Worklist;BGVALI^MAGDMENA
+ ;;Display Versions and/or Time Stamps of Components;SHOWVER^MAGDQR15
+ ;
+43 ;; MUMPS Utilities
+ ;;Access MUMPS Error Log;^%ER
+ ;;Global Variable Lister;CLIENT^MAGDGLC
+ ;;Display MUMPS System Status;^%SS
+ ;;Check Available Disk Space;DISK^MAGDSTAT
+ ;;Display License Expiration Date;LICEXP^MAGDMENA
+ ;
+
+
+

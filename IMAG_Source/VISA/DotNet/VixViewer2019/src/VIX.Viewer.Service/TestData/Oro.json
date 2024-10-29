@@ -1,0 +1,80 @@
+﻿{
+    "headers" : [
+        {
+            "name" : "default",
+            "items" : [
+                {
+                    "key" : "Content-Type", "value" : "application/json"
+                },
+                {
+                    "key" : "xxx-securityToken", "value" : "1XWBAS1620-423141_3"
+                },
+                {
+                    "key" : "xxx-fullname", "value" : " TWOTHREEFIVEEIGHT,USER"
+                },
+                {
+                    "key" : "xxx-duz", "value" : "2358"
+                },
+                {
+                    "key" : "xxx-ssn", "value" : "666772062"
+                },
+                {
+                    "key" : "xxx-sitename", "value" : "COMMUNITY HEALTH and HOSPITALS"
+                },
+                {
+                    "key" : "xxx-sitenumber", "value" : "195966"
+                }
+            ]
+        }
+    ],
+    "items" : [
+        {
+            "title" : "Patient 4658 (HAYES) study query",
+            "header" : 
+            {
+                "name" : "default",
+                "items" : []
+            },
+            "body" : {
+                "patientDFN": "4658",
+                "siteNumber": "195966"
+            }
+        },
+        {
+            "title" : "Patient 54802 (LEF) study query",
+            "header" : 
+            {
+                "name" : "default",
+                "items" : []
+            },
+            "body" : {
+                "patientDFN": "54802",
+                "siteNumber": "195966"
+            }
+        },
+       {
+            "title" : "Patient 94796 (FRANK) study query",
+            "header" : 
+            {
+                "name" : "default",
+                "items" : []
+            },
+            "body" : {
+                "patientDFN": "94796",
+                "siteNumber": "195966"
+            }
+        },
+       {
+            "title" : "Patient 194829 (PHIL) study query",
+            "header" : 
+            {
+                "name" : "default",
+                "items" : []
+            },
+            "body" : {
+                "patientDFN": "194829",
+                "siteNumber": "195966"
+            }
+        }
+    ]
+}

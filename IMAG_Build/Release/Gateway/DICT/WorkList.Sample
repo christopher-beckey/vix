@@ -1,0 +1,33 @@
+# Last edited 23 Jan 2009 12:16 PM
+#
+# List of Modality Worklist service users
+#
+# Station AE Title|Institution ID|Imaging Service|Imaging Type|Short or Long Accession Number|Description
+#	Institution ID can be the number (688), name (Washington, DC), or null.
+#	Leave Institution ID to null to default to the local site 
+#	Note: Imaging Types are abbreviations of IMAGE INDEX FOR SPECIALTY/SUBSPECIALTY - ^MAG(2005.84)
+#
+# Imaging services are defined as follows
+#    RAD --------- Radiology
+#    CON --------- Consult/Procedure Request Tracking (CPRS)
+#
+# Examples:
+#
+# Radiology
+# PCU_QWL_SCU|<Your Institution goes here>|RAD|RAD|LONG|Building E, Rm 225
+# CT_SCAN_1|688|RAD|CT|LONG|Philips CT, Radiology East, Rm B-129
+#
+# Healthcre Providers
+# IRIS-1||CON|OPHTH|LONG|Canon Retinal Camera, Eye Clinic, Rm, E-170
+# DENIX-2||CON|DENTAL|LONG|Intra-Oral Xray Unit, Rm, D-153
+# GI_LAB_SCU|<Your Institution goes here>|CON|GI|LONG|North Clinic
+#
+# The "TEST" AE title is for exercising the local VistA MWL provider
+# The Institution ID is omitted, selecting the default local system
+TEST||RAD|RAD|LONG|Local Vista Modality Worklist provider
+#
+# Place your entries below
+
+
+
+# end of file

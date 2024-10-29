@@ -1,0 +1,130 @@
+MAGDTCP3 ;WOIFO/PMK - DICOM Networking / Upper Layer Service ; 05/11/2007 10:28
+ ;;3.0;IMAGING;**30,51,54**;MAR 19, 2002;;OCT 28, 2009
+ ;; Per VHA Directive 2004-038, this routine should not be modified.
+ ;; +---------------------------------------------------------------+
+ ;; | Property of the US Government.                                |
+ ;; | No permission to copy or redistribute this software is given. |
+ ;; | Use of unreleased versions of this software requires the user |
+ ;; | to execute a written test agreement with the VistA Imaging    |
+ ;; | Development Office of the Department of Veterans Affairs,     |
+ ;; | telephone (301) 734-0100.                                     |
+ ;; | The Food and Drug Administration classifies this software as  |
+ ;; | a medical device.  As such, it may not be changed in any way. |
+ ;; | Modifications to this software may result in an adulterated   |
+ ;; | medical device under 21CFR820, the use of which is considered |
+ ;; | to be a violation of US Federal Statutes.                     |
+ ;; +---------------------------------------------------------------+
+ ;;
+ Q  ; Never call this routine directly
+ ;
+ ; Receive a message from TCP and stuff it into a file
+ ;
+RECEIVE(FILE,PDUTYPE,PDULEN,IP,PORT) ; get a PDU from the destination via TCP
+ N BYTE0,BYTE1,BYTE2,BYTE3,ERR,I,MSG,PAD,STATUS,TYPE,X
+ ; copy the PDU from the network to the file
+ S X=$$RECVPDU(.PDUTYPE,.PDULEN,IP,PORT) Q:'X 0 Q:X<0 -1
+ S MSG="Recving PDU Type: "_PDUTYPE_" ("
+ S I=$O(^MAGDICOM(2006.54,"B",PDUTYPE,""))
+ I I S X=^MAGDICOM(2006.54,I,0) S MSG=MSG_$P(X,"^",2)
+ S MSG=MSG_")" S $E(MSG,39)=" PDU len="_PDULEN
+ D MESSAGE^MAGDMLOG(1,0,MSG,"V")
+ I PDUTYPE="04H" Q 2  ; handle data transfer requests below
+ ;
+ ; receiving an ACSE command PDU -- copy it to the file
+ D MESSAGE^MAGDMLOG(1,0,FILE,"V")
+ S STATUS=$$OPEN^MAGOSFIL(FILE,"W")
+ I STATUS<0 D
+ . N M
+ . S M="Could not open file """_FILE_""" for Write."
+ . W:$$USEPRIN^MAGOSFIL(1) !!!,M,!,STATUS
+ . S $EC=",U"_M_","
+ . Q  ; Error trap does not return
+ S STATUS=$$USE^MAGOSFIL(FILE)
+ W *TYPE,*PAD,*BYTE3,*BYTE2,*BYTE1,*BYTE0
+ S ERR=0 F I=1:1:PDULEN D  Q:ERR
+ . S STATUS=$$TCPUSE^MAGOSTCP(IP,PORT) R *X
+ . I $$TCPLOST^MAGOSTCP(IP,PORT,1) S ERR=1 Q
+ . S STATUS=$$USE^MAGOSFIL(FILE) W *X
+ . Q
+ ; close the file and exit
+ S STATUS=$$CLOSE^MAGOSFIL(FILE)
+ I $$USEPRIN^MAGOSFIL(1)
+ Q 1
+ ;
+RECVPDU(PDUTYPE,PDULEN,IP,PORT) ; read the PDU header from the network
+ N RETURN,STATUS
+ S STATUS=$$TCPUSE^MAGOSTCP(IP,PORT) R *TYPE:0
+ I $T D  ; data available
+ . R *PAD,*BYTE3,*BYTE2,*BYTE1,*BYTE0
+ . S PDUTYPE=$$HEX^MAGDDR0(TYPE,2)_"H" ; returned to calling program
+ . S PDULEN=$$ULONG(BYTE0,BYTE1,BYTE2,BYTE3)
+ . S RETURN=1
+ . Q
+ E  D  I $D(RETURN)
+ . ; Distinguish between timeout and lost connection
+ . S:'$$TCPLOST^MAGOSTCP(IP,PORT,2) RETURN=0
+ . Q
+ E  S PDUTYPE="<TCP connection closed>",RETURN=-1 ; terminate session
+ I $$USEPRIN^MAGOSFIL(1)
+ Q RETURN
+ ;
+RECVCMD(FILE,PDULEN,IP,PORT) ; read a Message Command Presentation Data Value
+ N BYTES,PDATAHDR
+ ; Note: PDULEN=1 to read Command (1st) PDV
+ D RECVPDV(FILE,1,"W",.BYTES,IP,PORT)
+ S PDULEN=PDULEN-BYTES ; decrement PDULEN by number of bytes read
+ S FILESIZE=BYTES-6 ; size of the Message Command PDV
+ Q
+ ;
+RECVDATA(FILE,PDULEN,IP,PORT) ; read a Message Data Set Presentation Data Value
+ N BYTE0,BYTE1,BYTE2,BYTE3,I,PAD,PDATAHDR,TYPE,X
+ S PDATAHDR=-1 ; initialize variable to prevent "undefined" error below
+ ; if the current PDU has a message data set PDV, copy the data
+ I PDULEN>0 D RECVPDV(FILE,PDULEN,"A",,IP,PORT) Q:PDATAHDR=2
+ ; get the message data set from additional PDUs
+ F I=0:1 D  Q:PDATAHDR=2
+ . S X=$$RECVPDU(.PDUTYPE,.PDULEN,IP,PORT) Q:'X
+ . I PDUTYPE'="04H" D
+ . . N MSG
+ . . S MSG(1)="Expected PDU type 04(hex),"
+ . . S MSG(2)="found """_PDUTYPE_"""."
+ . . D TRAPERR^MAGDSTRT(1,$T(+0),"DICOM GATEWAY ERROR",.MSG)
+ . . Q  ; Error trap does not return
+ . D:I MESSAGE^MAGDMLOG(0,0,"","tV") ; output the message time stamp
+ . D MESSAGE^MAGDMLOG(0,39,"PDU len="_PDULEN,"V")
+ . D RECVPDV(FILE,PDULEN,"A",,IP,PORT)
+ . Q
+ Q
+ ;
+RECVPDV(FILE,PDULEN,MODE,BYTES,IP,PORT) ; copy Presentation Data Values to file
+ N PCONTEXT ;- presentation context id (abstract & transfer syntaxes)
+ N BYTE0,BYTE1,BYTE2,BYTE3,ERR,I,PDVLEN,STATUS,X
+ S STATUS=$$OPEN^MAGOSFIL(FILE,MODE) ; Mode is either "W" or "A"-append
+ I STATUS<0 D
+ . N M
+ . S M="Could not open file """_FILE_""" for "_$S(MODE="W":"Write.",MODE="A":"Append.",1:"Unknown mode: "_MODE_".")
+ . W:$$USEPRIN^MAGOSFIL(1) !!!,M,!,STATUS
+ . S $EC=",U"_M_","
+ . Q  ; Error trap does not return
+ S BYTES=0 F  Q:'(PDULEN>BYTES)  D  ; loop
+ . ; copy a Presentation Data Value to the file
+ . S STATUS=$$TCPUSE^MAGOSTCP(IP,PORT)
+ . R *BYTE3,*BYTE2,*BYTE1,*BYTE0,*PCONTEXT,*PDATAHDR
+ . S PDVLEN=$$ULONG(BYTE0,BYTE1,BYTE2,BYTE3)-2 ; PDV length
+ . S BYTES=BYTES+PDVLEN+6 ; increment number of bytes read
+ . D MESSAGE^MAGDMLOG(0,52," PDV hdr="_PDATAHDR_", pc="_PCONTEXT_", len="_PDVLEN,"V1")
+ . S ERR=0 F I=1:1:PDVLEN D  Q:ERR
+ . . S STATUS=$$TCPUSE^MAGOSTCP(IP,PORT) R *X
+ . . I $$TCPLOST^MAGOSTCP(IP,PORT,1) S ERR=1 Q
+ . . S STATUS=$$USE^MAGOSFIL(FILE) W *X
+ . . Q
+ . Q
+ ; close the file and exit
+ S STATUS=$$CLOSE^MAGOSFIL(FILE)
+ I $$USEPRIN^MAGOSFIL(1)
+ Q
+ ;
+ULONG(BYTE0,BYTE1,BYTE2,BYTE3) ;
+ ; return an unsigned long value
+ Q BYTE3*256+BYTE2*256+BYTE1*256+BYTE0
+ ;

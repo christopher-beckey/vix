@@ -1,0 +1,350 @@
+KIDS Distribution saved on Jul 26, 2012@08:58:39
+Split from GOLD - last patch SEQ81_P120
+**KIDS**:MAG*3.0*350_DD*2006.5641^
+
+**INSTALL NAME**
+MAG*3.0*350_DD*2006.5641
+"BLD",7760,0)
+MAG*3.0*350_DD*2006.5641^IMAGING^0^3120726^n
+"BLD",7760,4,0)
+^9.64PA^2006.5641^1
+"BLD",7760,4,2006.5641,0)
+2006.5641
+"BLD",7760,4,2006.5641,222)
+y^y^f^^^^n
+"BLD",7760,4,"B",2006.5641,2006.5641)
+
+"BLD",7760,6.3)
+1
+"BLD",7760,"KRN",0)
+^9.67PA^779.2^20
+"BLD",7760,"KRN",.4,0)
+.4
+"BLD",7760,"KRN",.401,0)
+.401
+"BLD",7760,"KRN",.402,0)
+.402
+"BLD",7760,"KRN",.403,0)
+.403
+"BLD",7760,"KRN",.5,0)
+.5
+"BLD",7760,"KRN",.84,0)
+.84
+"BLD",7760,"KRN",3.6,0)
+3.6
+"BLD",7760,"KRN",3.8,0)
+3.8
+"BLD",7760,"KRN",9.2,0)
+9.2
+"BLD",7760,"KRN",9.8,0)
+9.8
+"BLD",7760,"KRN",19,0)
+19
+"BLD",7760,"KRN",19.1,0)
+19.1
+"BLD",7760,"KRN",101,0)
+101
+"BLD",7760,"KRN",409.61,0)
+409.61
+"BLD",7760,"KRN",771,0)
+771
+"BLD",7760,"KRN",779.2,0)
+779.2
+"BLD",7760,"KRN",870,0)
+870
+"BLD",7760,"KRN",8989.51,0)
+8989.51
+"BLD",7760,"KRN",8989.52,0)
+8989.52
+"BLD",7760,"KRN",8994,0)
+8994
+"BLD",7760,"KRN","B",.4,.4)
+
+"BLD",7760,"KRN","B",.401,.401)
+
+"BLD",7760,"KRN","B",.402,.402)
+
+"BLD",7760,"KRN","B",.403,.403)
+
+"BLD",7760,"KRN","B",.5,.5)
+
+"BLD",7760,"KRN","B",.84,.84)
+
+"BLD",7760,"KRN","B",3.6,3.6)
+
+"BLD",7760,"KRN","B",3.8,3.8)
+
+"BLD",7760,"KRN","B",9.2,9.2)
+
+"BLD",7760,"KRN","B",9.8,9.8)
+
+"BLD",7760,"KRN","B",19,19)
+
+"BLD",7760,"KRN","B",19.1,19.1)
+
+"BLD",7760,"KRN","B",101,101)
+
+"BLD",7760,"KRN","B",409.61,409.61)
+
+"BLD",7760,"KRN","B",771,771)
+
+"BLD",7760,"KRN","B",779.2,779.2)
+
+"BLD",7760,"KRN","B",870,870)
+
+"BLD",7760,"KRN","B",8989.51,8989.51)
+
+"BLD",7760,"KRN","B",8989.52,8989.52)
+
+"BLD",7760,"KRN","B",8994,8994)
+
+"FIA",2006.5641)
+DICOM GATEWAY MACHINE ID
+"FIA",2006.5641,0)
+^MAGDICOM(2006.5641,
+"FIA",2006.5641,0,0)
+2006.5641
+"FIA",2006.5641,0,1)
+y^y^f^^^^n
+"FIA",2006.5641,0,10)
+
+"FIA",2006.5641,0,11)
+
+"FIA",2006.5641,0,"RLRO")
+
+"FIA",2006.5641,0,"VR")
+3.0^MAG
+"FIA",2006.5641,2006.5641)
+0
+"MBREQ")
+0
+"PKG",454,-1)
+1^1
+"PKG",454,0)
+IMAGING^MAG^Imaging-V1 to release 
+"PKG",454,20,0)
+^9.402P^^
+"PKG",454,22,0)
+^9.49I^1^1
+"PKG",454,22,1,0)
+3.0^3020319^3020517^126
+"PKG",454,22,1,"PAH",1,0)
+350_DD^3120726
+"QUES","XPF1",0)
+Y
+"QUES","XPF1","??")
+^D REP^XPDH
+"QUES","XPF1","A")
+Shall I write over your |FLAG| File
+"QUES","XPF1","B")
+YES
+"QUES","XPF1","M")
+D XPF1^XPDIQ
+"QUES","XPF2",0)
+Y
+"QUES","XPF2","??")
+^D DTA^XPDH
+"QUES","XPF2","A")
+Want my data |FLAG| yours
+"QUES","XPF2","B")
+YES
+"QUES","XPF2","M")
+D XPF2^XPDIQ
+"QUES","XPI1",0)
+YO
+"QUES","XPI1","??")
+^D INHIBIT^XPDH
+"QUES","XPI1","A")
+Want KIDS to INHIBIT LOGONs during the install
+"QUES","XPI1","B")
+NO
+"QUES","XPI1","M")
+D XPI1^XPDIQ
+"QUES","XPM1",0)
+PO^VA(200,:EM
+"QUES","XPM1","??")
+^D MG^XPDH
+"QUES","XPM1","A")
+Enter the Coordinator for Mail Group '|FLAG|'
+"QUES","XPM1","B")
+
+"QUES","XPM1","M")
+D XPM1^XPDIQ
+"QUES","XPO1",0)
+Y
+"QUES","XPO1","??")
+^D MENU^XPDH
+"QUES","XPO1","A")
+Want KIDS to Rebuild Menu Trees Upon Completion of Install
+"QUES","XPO1","B")
+NO
+"QUES","XPO1","M")
+D XPO1^XPDIQ
+"QUES","XPZ1",0)
+Y
+"QUES","XPZ1","??")
+^D OPT^XPDH
+"QUES","XPZ1","A")
+Want to DISABLE Scheduled Options, Menu Options, and Protocols
+"QUES","XPZ1","B")
+NO
+"QUES","XPZ1","M")
+D XPZ1^XPDIQ
+"QUES","XPZ2",0)
+Y
+"QUES","XPZ2","??")
+^D RTN^XPDH
+"QUES","XPZ2","A")
+Want to MOVE routines to other CPUs
+"QUES","XPZ2","B")
+NO
+"QUES","XPZ2","M")
+D XPZ2^XPDIQ
+"SEC","^DIC",2006.5641,2006.5641,0,"AUDIT")
+@
+"SEC","^DIC",2006.5641,2006.5641,0,"DD")
+@
+"SEC","^DIC",2006.5641,2006.5641,0,"DEL")
+@
+"SEC","^DIC",2006.5641,2006.5641,0,"LAYGO")
+@
+"SEC","^DIC",2006.5641,2006.5641,0,"RD")
+@
+"SEC","^DIC",2006.5641,2006.5641,0,"WR")
+@
+"VER")
+8.0^22.0
+"^DD",2006.5641,2006.5641,0)
+FIELD^^3^3
+"^DD",2006.5641,2006.5641,0,"DT")
+3041210
+"^DD",2006.5641,2006.5641,0,"IX","B",2006.5641,.01)
+
+"^DD",2006.5641,2006.5641,0,"IX","C",2006.5641,2)
+
+"^DD",2006.5641,2006.5641,0,"NM","DICOM GATEWAY MACHINE ID")
+
+"^DD",2006.5641,2006.5641,.01,0)
+MACHINE ID^RNJ5,0^^0;1^K:+X'=X!(X>99999)!(X<0)!(X?.E1"."1N.N) X
+"^DD",2006.5641,2006.5641,.01,1,0)
+^.1
+"^DD",2006.5641,2006.5641,.01,1,1,0)
+2006.5641^B
+"^DD",2006.5641,2006.5641,.01,1,1,1)
+S ^MAGDICOM(2006.5641,"B",$E(X,1,30),DA)=""
+"^DD",2006.5641,2006.5641,.01,1,1,2)
+K ^MAGDICOM(2006.5641,"B",$E(X,1,30),DA)
+"^DD",2006.5641,2006.5641,.01,3)
+Enter the unique identifier for this computer.
+"^DD",2006.5641,2006.5641,.01,21,0)
+^.001^1^1^3060711^^^
+"^DD",2006.5641,2006.5641,.01,21,1,0)
+The value of this field is the same as the internal entry number.
+"^DD",2006.5641,2006.5641,.01,"DT")
+3060711
+"^DD",2006.5641,2006.5641,2,0)
+HOSTNAME^RF^^0;2^K:$L(X)>30!($L(X)<1) X
+"^DD",2006.5641,2006.5641,2,1,0)
+^.1
+"^DD",2006.5641,2006.5641,2,1,1,0)
+2006.5641^C
+"^DD",2006.5641,2006.5641,2,1,1,1)
+S ^MAGDICOM(2006.5641,"C",$E(X,1,30),DA)=""
+"^DD",2006.5641,2006.5641,2,1,1,2)
+K ^MAGDICOM(2006.5641,"C",$E(X,1,30),DA)
+"^DD",2006.5641,2006.5641,2,1,1,"%D",0)
+^^1^1^3041210^
+"^DD",2006.5641,2006.5641,2,1,1,"%D",1,0)
+This cross reference keeps track of which hostnames are registered.
+"^DD",2006.5641,2006.5641,2,1,1,"DT")
+3041210
+"^DD",2006.5641,2006.5641,2,3)
+Enter the hostname of the computer that is used for this DICOM Gateway.
+"^DD",2006.5641,2006.5641,2,21,0)
+^^9^9^3041210^
+"^DD",2006.5641,2006.5641,2,21,1,0)
+The value of this field is a string. This string represents the
+"^DD",2006.5641,2006.5641,2,21,2,0)
+'hostname' of the computer that is used for the DICOM Gateway that
+"^DD",2006.5641,2006.5641,2,21,3,0)
+is described in the current record.
+"^DD",2006.5641,2006.5641,2,21,4,0)
+ 
+"^DD",2006.5641,2006.5641,2,21,5,0)
+The format of the 'hostname' is subject to VA policy.
+"^DD",2006.5641,2006.5641,2,21,6,0)
+Policies regarding the format of these names are subject to change, hence no
+"^DD",2006.5641,2006.5641,2,21,7,0)
+additional formatting restrictions are imposed in this data
+"^DD",2006.5641,2006.5641,2,21,8,0)
+definition.
+"^DD",2006.5641,2006.5641,2,21,9,0)
+ 
+"^DD",2006.5641,2006.5641,2,"DT")
+3041210
+"^DD",2006.5641,2006.5641,3,0)
+TIMESTAMP^F^^0;3^K:$L(X)>10!($L(X)<1)!'(X?1.N1","1.N) X
+"^DD",2006.5641,2006.5641,3,3)
+Enter the current date and time ($Horolog format)
+"^DD",2006.5641,2006.5641,3,21,0)
+^.001^3^3^3041210^^
+"^DD",2006.5641,2006.5641,3,21,1,0)
+The value of this field is a date/time value ($Horolog format).
+"^DD",2006.5641,2006.5641,3,21,2,0)
+This value represents the date and time when the content of this
+"^DD",2006.5641,2006.5641,3,21,3,0)
+record was most recently confirmed.
+"^DD",2006.5641,2006.5641,3,"DT")
+3041210
+"^DIC",2006.5641,2006.5641,0)
+DICOM GATEWAY MACHINE ID^2006.5641
+"^DIC",2006.5641,2006.5641,0,"GL")
+^MAGDICOM(2006.5641,
+"^DIC",2006.5641,2006.5641,"%D",0)
+^^21^21^3041210^^
+"^DIC",2006.5641,2006.5641,"%D",1,0)
+ +---------------------------------------------------------------+
+"^DIC",2006.5641,2006.5641,"%D",2,0)
+ |                                                               |
+"^DIC",2006.5641,2006.5641,"%D",3,0)
+ | Property of the US Government.                                |
+"^DIC",2006.5641,2006.5641,"%D",4,0)
+ | No permission to copy or redistribute this software is given. |
+"^DIC",2006.5641,2006.5641,"%D",5,0)
+ | Use of unreleased versions of this software requires the user |
+"^DIC",2006.5641,2006.5641,"%D",6,0)
+ | to execute a written test agreement with the VistA Imaging    |
+"^DIC",2006.5641,2006.5641,"%D",7,0)
+ | Development Office of the Department of Veterans Affairs,     |
+"^DIC",2006.5641,2006.5641,"%D",8,0)
+ | telephone (301) 734-0100.                                     |
+"^DIC",2006.5641,2006.5641,"%D",9,0)
+ |                                                               |
+"^DIC",2006.5641,2006.5641,"%D",10,0)
+ | The Food and Drug Administration classifies this software as  |
+"^DIC",2006.5641,2006.5641,"%D",11,0)
+ | a medical device.  As such, it may not be changed in any way. |
+"^DIC",2006.5641,2006.5641,"%D",12,0)
+ | Modifications to this software may result in an adulterated   |
+"^DIC",2006.5641,2006.5641,"%D",13,0)
+ | medical device under 21CFR820, the use of which is considered |
+"^DIC",2006.5641,2006.5641,"%D",14,0)
+ | to be a violation of US Federal Statutes.                     |
+"^DIC",2006.5641,2006.5641,"%D",15,0)
+ |                                                               |
+"^DIC",2006.5641,2006.5641,"%D",16,0)
+ +---------------------------------------------------------------+
+"^DIC",2006.5641,2006.5641,"%D",17,0)
+ 
+"^DIC",2006.5641,2006.5641,"%D",18,0)
+This table is used to keep track of the various Machine IDs on
+"^DIC",2006.5641,2006.5641,"%D",19,0)
+the DICOM Gateways. Since each ID has to be a unique one, the
+"^DIC",2006.5641,2006.5641,"%D",20,0)
+software that maintains this table uses the data in this table
+"^DIC",2006.5641,2006.5641,"%D",21,0)
+to ensure that the same ID is not issued multiple times.
+"^DIC",2006.5641,"B","DICOM GATEWAY MACHINE ID",2006.5641)
+
+**END**
+**END**

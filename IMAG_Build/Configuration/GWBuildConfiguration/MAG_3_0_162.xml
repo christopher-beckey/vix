@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<build
+ name="MAG*3.0*162"
+ patch="162"
+ patchName="VistA Imaging Version 3.0 Patch 160 - LDGW Query Retrieve">
+
+  <routines>
+    <routine name="MAGDIR7C" export="MAGDIR7C.RTN" />
+  </routines>
+  
+   <PatchBuildInfo>
+	<BuildInfo BuildNumber="6020" BuildDate="Dec 03, 2015"/>
+  </PatchBuildInfo>
+  
+</build>
+

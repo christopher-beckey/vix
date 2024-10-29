@@ -1,0 +1,30 @@
+﻿<Window x:Class="ImagingClient.Infrastructure.Views.LogoutWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+        xmlns:Controls="clr-namespace:ImagingClient.Infrastructure.Controls" 
+        Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" 
+        Title="Importer Logout" 
+        Height="428" 
+        Width="674"
+        WindowStartupLocation="CenterOwner">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+        <TextBlock Name="txtLogoutMessage" Grid.Row="0" Grid.Column="1" Grid.RowSpan="1" Text="You have been logged out of Importer.  Click the Login button to return to the application or Exit button to close all windows." VerticalAlignment="Center" HorizontalAlignment="Center" TextWrapping="Wrap" FontWeight="Bold" />
+        <Button Name="btnLogin" Grid.Row="2" Grid.Column="4" Content="Login" Width="80" Command="{Binding OnLogin}" HorizontalAlignment="Right" IsDefault="True" TabIndex="4" />
+        <Button Name="btnCancel" IsCancel="True" Grid.Row="3" Grid.Column="4" Content="Exit" Width="80" Command="{Binding OnCancelLogin}" HorizontalAlignment="Right"/>
+        <Image Margin="7,0,0,0" Grid.Row="1" Grid.RowSpan="3"  Name="image1" Stretch="None" HorizontalAlignment="Left" Source="/ImagingClient.Infrastructure;component/Images/VAlogo.jpg" />
+    </Grid>
+</Window>

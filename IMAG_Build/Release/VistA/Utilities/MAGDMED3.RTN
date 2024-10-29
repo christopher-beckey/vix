@@ -1,0 +1,79 @@
+27-OCT-2000 08:46:46.19
+Saved by magvss from VAH,ROU
+MAGDMED3
+MAGDMED3 ;WOIFO/LB - Image group pointer in Medicine file ; [ 09/21/2000  10:47 AM ]
+ ;;2.5T;DICOM42;;1-Nov-2000
+ ;; +---------------------------------------------------------------+
+ ;; | Property of the US Government.                                |
+ ;; | No permission to copy or redistribute this software is given. |
+ ;; | Use of unreleased versions of this software requires the user |
+ ;; | to execute a written test agreement with the VistA Imaging    |
+ ;; | Development Office of the Department of Veterans Affairs,     |
+ ;; | telephone (301) 734-0100.                                     |
+ ;; |                                                               |
+ ;; | The Food and Drug Administration classifies this software as  |
+ ;; | a Class II medical device.  As such, it may not be changed    |
+ ;; | in any way.  Modifications to this software may result in an  |
+ ;; | adulterated medical device under 21CFR820, the use of which   |
+ ;; | is considered to be a violation of US Federal Statutes.       |
+ ;; +---------------------------------------------------------------+
+ ;;
+SET ; Variables should have been set by MAGDIR1A
+ ; MEDATA("MED PROC IEN") = Medicine procedure ien
+ ; MEDATA("IMAGE PTR") = Image pointer
+ ; MEDATA("PARENT FILE") = Medicine file number
+ ; MEDATA("PARENT IEN") = Medicine file ien
+ ; MEDATA("MODALITY") = Modality
+ ;
+ Q:'$D(MEDATA)      ;Nothing set from MAGDIR1A
+ ;
+ N MEDFILE,MEDIEN,MAGGROUP,OK
+ S MEDFILE=MEDATA("PARENT FILE")
+ S MEDIEN=MEDATA("PARENT IEN")
+ S MAGGP=MEDATA("IMAGE PTR")
+ S MEDPRIEN=MEDATA("MED PROC IEN")
+ S FILEDATA("MODALITY")=MEDATA("MODALITY")
+ S FILEDATA("PARENT FILE")=MEDATA("PARENT FILE")
+ S FILEDATA("OBJECT TYPE")=MEDATA("OBJECT TYPE")
+ S FILEDATA("PARENT IEN")=MEDATA("PARENT IEN")
+ K MEDATA           ;Do not need to carry extra variables
+ I 'MAGGP D CREATE
+ Q
+CREATE ;
+ ; If the 2005 node does not exist in the Medicine file,
+ ; create the imaging group
+ Q:MAGGP
+ K GROUP
+ S GROUP(1)=".01^"_PNAMEVAH_" "_SSN_" "_PROCDESC
+ S GROUP(2)="3^11"  ;Object type
+ S GROUP(3)="5^"_DFN
+ S GROUP(4)="6^"_FILEDATA("MODALITY")
+ S GROUP(5)="2005.04^0"
+ S GROUP(6)="10^"_PROCDESC
+ S GROUP(7)="15^"_DATETIME
+ S GROUP(8)="16^"_FILEDATA("PARENT FILE")
+ S GROUP(9)="17^"_FILEDATA("PARENT IEN")
+ S GROUP(10)="60^"_STUDYUID
+ D ADD^MAGGTIA(.VALUE,.GROUP)
+ S MAGGP=+VALUE
+ I 'MAGGP D
+ . N MSG
+ . S MSG(1)="IMAGE GROUP CREATION ERROR:"
+ . S MSG(2)=$P(RETURN,"^",2,999)
+ . D TRAPERR^MAGDSTRT(1,$T(+0),"DICOM IMAGE PROCESSING ERROR",.MSG)
+ . Q  ; Error trap does not return
+ ;
+ I MAGGP<$G(^MAGDICOM(2006.563,1,"LAST IMAGE POINTER")) D  ; fatal error
+ . D GROUPPTR^MAGDIRER($T(+0),MAGGP)
+ . Q  ; Error trap does not return
+ ;
+ ; Update the Medicine file with the Imaging group pointer
+ S OK=""
+ I MAGGP D  Q:OK
+ . D UPDATE^MAGDMED2(MEDFILE,DATETIME,MEDPRIEN,DFN,MAGGP,MEDIEN,.OK)
+ . Q
+ N MSG
+ S MSG(1)="IMAGE GROUP LOOKUP ERROR:"
+ S MSG(2)="updating 2005 x-reference in ^MCAR("_MEDFILE_","_MEDIEN_")"
+ D TRAPERR^MAGDSTRT(1,$T(+0),"DICOM IMAGE PROCESSING ERROR",.MSG)
+ Q  ; Error trap does not return

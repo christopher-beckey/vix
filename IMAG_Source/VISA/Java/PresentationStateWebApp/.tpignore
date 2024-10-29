@@ -1,0 +1,3 @@
+\Q/target/\E.*
+\Q/main/generated/java/com/isigp/presentation/state/\E.*
+\Q/WebRoot/WEB-INF/lib/\E.*

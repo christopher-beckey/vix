@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<qaReviewReports>
+  <qaReviewReport>
+    <fromDate>3230515</fromDate>
+    <reportCompletedDateTime>3230515.162324</reportCompletedDateTime>
+    <reportFlags>CEU</reportFlags>
+    <reportStartDateTime>3230515.162324</reportStartDateTime>
+    <throughDate>3230515</throughDate>
+  </qaReviewReport>
+  <qaReviewReport>
+    <fromDate>01/16/2021 01:01:33</fromDate>
+    <throughDate>02/16/2021 02:02:33</throughDate>
+    <reportStartDateTime>03/16/2021 03:03:33</reportStartDateTime>
+    <reportCompletedDateTime>04/16/2021 04:04:33</reportCompletedDateTime>
+  </qaReviewReport>
+  <qaReviewReport>
+    <fromDate>05/16/2021 01:01:33</fromDate>
+    <throughDate>06/16/2021 02:02:33</throughDate>
+    <reportStartDateTime>07/16/2021 03:03:33</reportStartDateTime>
+    <reportCompletedDateTime>08/16/2021 04:04:33</reportCompletedDateTime>
+  </qaReviewReport>";
+  <qaReviewReport>
+    <fromDate>09/16/2021 13:52:33</fromDate>
+    <throughDate>10/16/2021 13:52:33</throughDate>
+    <reportStartDateTime>11/16/2021 13:52:33</reportStartDateTime>
+    <reportCompletedDateTime>12/16/2021 13:52:33</reportCompletedDateTime>
+  </qaReviewReport>
+  <reportFlags>DE</reportFlags>
+</qaReviewReports>

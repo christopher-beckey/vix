@@ -1,0 +1,287 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<build
+
+  name="MAG*3.0*138"
+  patch="138"
+  patchName="VistA Imaging V3.0 Patch 138 - Telepathology Worklist"
+  envCheckRoutine=""
+  deleteEnvCheckRoutine=""
+  preInstallRoutine="PRE^MAGIP138"
+  deletePreInstalltRoutine="Yes"
+  postInstallRoutine="POS^MAGIP138"
+  deletePostInstallRoutine="Yes"
+  packageName="IMAGING"
+  packageNumber="454"
+  packageVersion="3.0"
+  packagePrefix="MAG"
+  packageDateDestributed="3020319"
+  alphaBetaTesting="YES"
+  installationMessage="YES"
+  addressForUsageReporting="G.IMAGING DEVELOPMENT TEAM@FORUM.VA.GOV"
+
+  xmlns="http://va.gov/VistA/kids/manifest">
+  <requiredBuilds>
+    <!-- action= 0:Warning only;1:Don't install, remove global;2:Don't install, leave global;
+ -->
+ 
+    <requiredBuild name="MAG*3.0*136" action="2"/>
+ 
+  </requiredBuilds>
+  <components>
+    <dataDictionaries>
+      <!--   patch 130  -->
+      <dataDictionary name="2005" export="DD_2005.KID"/>
+      <dataDictionary name="2005.1" export="DD_2005_1.KID"/>
+
+      <!--   patch 110  -->
+      <dataDictionary name="2006.563" export="DD_2006_563.KID"/>
+      <dataDictionary name="2006.574" export="DD_2006_574.KID"/>
+      <dataDictionary name="2006.5831" export="DD_2006_5831.KID"/>
+
+      <!--   patch 79  -->
+      <dataDictionary name="2006.9192" export="DD_2006_9192.KID"/>
+      <dataDictionary name="2006.941" export="DD_2006_941.KID"/>
+
+      <!--   patch 136 and patch 138 -->
+      <dataDictionary name="2006.1" export="DD_2006_1.KID"/>
+
+      <!--   patch 137  -->
+      <dataDictionary name="2005.632" export="DD_2005_632.KID"/>
+      <dataDictionary name="2005.633" export="DD_2005_633.KID"/>
+      <dataDictionary name="2005.6361" export="DD_2005_6361.KID"/>
+      <dataDictionary name="2005.6362" export="DD_2005_6362.KID"/>
+      <dataDictionary name="2005.6366" export="DD_2005_6366.KID"/>
+
+      <!--   patch 138 -->
+      <dataDictionary name="2005.42" export="DD_2005_42.KID"/>
+      <dataDictionary name="2005.43" export="DD_2005_43.KID"/>
+      <dataDictionary name="2006.13" export="DD_2006_13.KID"/>
+      <dataDictionary name="2006.5838" export="DD_2006_5838.KID"/>
+     
+    </dataDictionaries>
+    <routines>
+      <!--   patch 110  -->
+      <routine name="MAG7RS" export="MAG7RS.RTN"/>
+      <routine name="MAGDCCS2" export="MAGDCCS2.RTN"/>
+      <routine name="MAGDFCNV" export="MAGDFCNV.RTN"/>
+      <routine name="MAGDGMRC" export="MAGDGMRC.RTN"/>
+      <routine name="MAGDHLL" export="MAGDHLL.RTN"/>
+      <routine name="MAGDHLS" export="MAGDHLS.RTN"/>
+      <routine name="MAGDHLSV" export="MAGDHLSV.RTN"/>
+      <routine name="MAGDHOW0" export="MAGDHOW0.RTN"/>
+      <routine name="MAGDHOW1" export="MAGDHOW1.RTN"/>
+      <routine name="MAGDHOW2" export="MAGDHOW2.RTN"/>
+      <routine name="MAGDHOW3" export="MAGDHOW3.RTN"/>
+      <routine name="MAGDHOW4" export="MAGDHOW4.RTN"/>
+      <routine name="MAGDHOW5" export="MAGDHOW5.RTN"/>
+      <routine name="MAGDHOWA" export="MAGDHOWA.RTN"/>
+      <routine name="MAGDHOWC" export="MAGDHOWC.RTN"/>
+      <routine name="MAGDHOWE" export="MAGDHOWE.RTN"/>
+      <routine name="MAGDHOWS" export="MAGDHOWS.RTN"/>
+      <routine name="MAGDIR8" export="MAGDIR8.RTN"/>
+<!--  <routine name="MAGDIR81" export="MAGDIR81.RTN"/>  -->
+<!--  <routine name="MAGDIR8A" export="MAGDIR8A.RTN"/>  -->
+<!--  <routine name="MAGDIR9A" export="MAGDIR9A.RTN"/>  -->
+      <routine name="MAGDIR9E" export="MAGDIR9E.RTN"/>
+      <routine name="MAGDIWDV" export="MAGDIWDV.RTN"/>
+      <routine name="MAGDIWDX" export="MAGDIWDX.RTN"/>
+      <routine name="MAGDQR03" export="MAGDQR03.RTN"/>
+      <routine name="MAGDQR05" export="MAGDQR05.RTN"/>
+      <routine name="MAGDQR06" export="MAGDQR06.RTN"/>
+      <routine name="MAGDQR07" export="MAGDQR07.RTN"/>
+      <routine name="MAGDQR08" export="MAGDQR08.RTN"/>
+      <routine name="MAGDQR73" export="MAGDQR73.RTN"/>
+      <routine name="MAGDRAHL" export="MAGDRAHL.RTN"/>
+      <routine name="MAGDRCU1" export="MAGDRCU1.RTN"/>
+      <routine name="MAGDRCU2" export="MAGDRCU2.RTN"/>
+      <routine name="MAGDRPC1" export="MAGDRPC1.RTN"/>
+<!--  <routine name="MAGDRPC3" export="MAGDRPC3.RTN"/>  -->
+      <routine name="MAGDRPC4" export="MAGDRPC4.RTN"/>
+      <routine name="MAGDRPC8" export="MAGDRPC8.RTN"/>
+      <routine name="MAGDRPC9" export="MAGDRPC9.RTN"/>
+      <routine name="MAGDRPCA" export="MAGDRPCA.RTN"/>
+      <routine name="MAGDRPCB" export="MAGDRPCB.RTN"/>
+      <routine name="MAGDRPCC" export="MAGDRPCC.RTN"/>
+      <routine name="MAGDTRDX" export="MAGDTRDX.RTN"/>
+      <routine name="MAGGSQI" export="MAGGSQI.RTN"/>
+<!--      <routine name="MAGIP110" export="MAGIP110.RTN"/> -->
+      <routine name="MAGNTLR2" export="MAGNTLR2.RTN"/>
+      <routine name="MAGNTLR7" export="MAGNTLR7.RTN"/>
+<!--  <routine name="MAGNTLRS" export="MAGNTLRS.RTN"/>  -->
+      <routine name="MAGVD001" export="MAGVD001.RTN"/>
+      <routine name="MAGVD003" export="MAGVD003.RTN"/>
+      <routine name="MAGVGUID" export="MAGVGUID.RTN"/>
+<!--  <routine name="MAGVIM02" export="MAGVIM02.RTN"/>  -->
+      <routine name="MAGVIM06" export="MAGVIM06.RTN"/>
+<!--  <routine name="MAGVORDR" export="MAGVORDR.RTN"/>  -->
+      <routine name="MAGVRS43" export="MAGVRS43.RTN"/>
+
+      <!--   patch 79  -->
+      <routine name="MAGVCAE"  export="MAGVCAE.RTN"/>
+      <routine name="MAGVCQRY" export="MAGVCQRY.RTN"/>
+      <routine name="MAGVCWIA" export="MAGVCWIA.RTN"/>
+      <routine name="MAGVIM09" export="MAGVIM09.RTN"/>
+      <routine name="MAGVRS51" export="MAGVRS51.RTN"/>
+      <routine name="MAGVRS52" export="MAGVRS52.RTN"/>
+
+      <!--   patch 136 -->
+<!--  <routine name="MAGGTU6" export="MAGGTU6.RTN"/>    -->
+      <routine name="MAGVIM01" export="MAGVIM01.RTN"/>
+<!--  <routine name="MAGVIM02" export="MAGVIM02.RTN"/>  -->
+      <routine name="MAGVIM05" export="MAGVIM05.RTN"/>
+      <routine name="MAGVIM10" export="MAGVIM10.RTN"/>
+      <routine name="MAGVIMRA" export="MAGVIMRA.RTN"/>
+      <routine name="MAGVUID" export="MAGVUID.RTN"/>
+      <routine name="MAGVUID2" export="MAGVUID2.RTN"/>
+
+      <!--   patch 137  -->
+      <routine name="MAGVRD01" export="MAGVRD01.RTN"/>
+      <routine name="MAGVRD02" export="MAGVRD02.RTN"/>
+      <routine name="MAGVRD03" export="MAGVRD03.RTN"/>
+
+      <!--   patch 130  -->
+      <routine name="MAGGTU4D" export="MAGGTU4D.RTN"/>
+      <routine name="MAGROI01" export="MAGROI01.RTN"/>
+      <routine name="MAGGI12" export="MAGGI12.RTN"/>
+      <routine name="MAGGTAU" export="MAGGTAU.RTN"/>
+      <routine name="MAGGTID" export="MAGGTID.RTN"/>
+      <routine name="MAGGTPT1" export="MAGGTPT1.RTN"/>
+      <routine name="MAGLOG" export="MAGLOG.RTN"/>
+      <routine name="MAGSIXG3" export="MAGSIXG3.RTN"/>
+
+      <!--   patch 138  -->
+      <routine name="MAG7UNM" export="MAG7UNM.RTN"/>
+      <routine name="MAGIP138" export="MAGIP138.RTN"/>
+      <routine name="MAGI138O" export="MAGI138O.RTN"/>
+      <routine name="MAGDIR81" export="MAGDIR81.RTN"/>
+      <routine name="MAGDIR8A" export="MAGDIR8A.RTN"/>
+      <routine name="MAGDIR9A" export="MAGDIR9A.RTN"/>
+      <routine name="MAGDIR9F" export="MAGDIR9F.RTN"/>
+      <routine name="MAGDRPC3" export="MAGDRPC3.RTN"/>
+      <routine name="MAGGTIA2" export="MAGGTIA2.RTN"/>
+      <routine name="MAGGTU6" export="MAGGTU6.RTN"/>
+      <routine name="MAGNTLRS" export="MAGNTLRS.RTN"/>
+      <routine name="MAGT7MA" export="MAGT7MA.RTN"/>
+      <routine name="MAGT7S" export="MAGT7S.RTN"/>
+      <routine name="MAGT7SB" export="MAGT7SB.RTN"/>
+      <routine name="MAGT7SI" export="MAGT7SI.RTN"/>
+      <routine name="MAGT7SN" export="MAGT7SN.RTN"/>
+      <routine name="MAGT7SO" export="MAGT7SO.RTN"/>
+      <routine name="MAGT7SP" export="MAGT7SP.RTN"/>
+      <routine name="MAGT7SS" export="MAGT7SS.RTN"/>
+      <routine name="MAGT7SSA" export="MAGT7SSA.RTN"/>
+      <routine name="MAGT7ST" export="MAGT7ST.RTN"/>
+      <routine name="MAGT7SV" export="MAGT7SV.RTN"/>
+      <routine name="MAGT7SX" export="MAGT7SX.RTN"/>
+      <routine name="MAGTP003" export="MAGTP003.RTN"/>
+      <routine name="MAGTP004" export="MAGTP004.RTN"/>
+      <routine name="MAGTP005" export="MAGTP005.RTN"/>
+      <routine name="MAGTP006" export="MAGTP006.RTN"/>
+      <routine name="MAGTP007" export="MAGTP007.RTN"/>
+      <routine name="MAGTP008" export="MAGTP008.RTN"/>
+      <routine name="MAGTP009" export="MAGTP009.RTN"/>
+      <routine name="MAGTP011" export="MAGTP011.RTN"/>
+      <routine name="MAGTP013" export="MAGTP013.RTN"/>
+      <routine name="MAGTP014" export="MAGTP014.RTN"/>
+      <routine name="MAGUE006" export="MAGUE006.RTN"/>
+      <routine name="MAGUE007" export="MAGUE007.RTN"/>
+      <routine name="MAGUTERR" export="MAGUTERR.RTN"/>
+      <routine name="MAGVIM02" export="MAGVIM02.RTN"/>
+      <routine name="MAGVORDR" export="MAGVORDR.RTN"/>
+      
+    </routines>
+    <rpcs>
+      <!--   patch 110  -->
+      <rpc name="MAG DICOM GET EXPORT IMAGE STS" export="RPC_MAG_DICOM_GET_EXPORT_IMAGE_STS.KID"/>
+      <rpc name="MAG DICOM GET PROCESS ID" export="RPC_MAG_DICOM_GET_PROCESS_ID.KID"/>
+      <rpc name="MAG3 TELEREADER CPT CODELOOKUP" export="RPC_MAG3_TELEREADER_CPT_CODELOOKUP.KID"/>
+      <rpc name="MAG3 TELEREADER DHPS LIST" export="RPC_MAG3_TELEREADER_DHPS_LIST.KID"/>
+
+      <!--   patch 79  -->
+      <rpc name="MAGVC WI DELETE" export="RPC_MAGVC_WI_DELETE.KID"/>
+      <rpc name="MAGVC WI GET" export="RPC_MAGVC_WI_GET.KID"/>
+      <rpc name="MAGVC WI LIST" export="RPC_MAGVC_WI_LIST.KID"/>
+      <rpc name="MAGVC WI SUBMIT NEW" export="RPC_MAGVC_WI_SUBMIT_NEW.KID"/>
+      <rpc name="MAGVC WI UPDATE STATUS" export="RPC_MAGVC_WI_UPDATE_STATUS.KID"/>
+      <rpc name="MAG DICOM CHECK AE TITLE" export="RPC_MAG_DICOM_CHECK_AE_TITLE.KID"/>
+      <rpc name="MAG DICOM GET AE ENTRY" export="RPC_MAG_DICOM_GET_AE_ENTRY.KID"/>
+      <rpc name="MAG DICOM GET AE ENTRY LOC" export="RPC_MAG_DICOM_GET_AE_ENTRY_LOC.KID"/>
+
+      <!--   patch 130  -->
+      <rpc name="MAG GET DICOM QUEUE LIST" export="RPC_MAG_GET_DICOM_QUEUE_LIST.KID"/>
+      <rpc name="MAG SEND IMAGE" export="RPC_MAG_SEND_IMAGE.KID"/>
+
+      <!--   patch 136  -->
+      <rpc name="MAGG GET TIMEOUT" export="RPC_MAGG_GET_TIMEOUT.KID"/>
+      <rpc name="MAGV GENERATE DICOM UID" export="RPC_MAGV_GENERATE_DICOM_UID.KID"/>
+      <rpc name="MAGV GET PAT ORDERS" export="RPC_MAGV_GET_PAT_ORDERS.KID"/>
+      <rpc name="MAGV GET RAD DX CODES" export="RPC_MAGV_GET_RAD_DX_CODES.KID"/>
+      <rpc name="MAGV GET RAD IMAGING LOCATIONS" export="RPC_MAGV_GET_RAD_IMAGING_LOCATIONS.KID"/>
+      <rpc name="MAGV GET RAD STD RPTS" export="RPC_MAGV_GET_RAD_STD_RPTS.KID"/>
+      <rpc name="MAGV GET RADIOLOGY PROCEDURES" export="RPC_MAGV_GET_RADIOLOGY_PROCEDURES.KID"/>
+      <rpc name="MAGV RAD STAT COMPLETE" export="RPC_MAGV_RAD_STAT_COMPLETE.KID"/>
+
+      <!--   patch 137  -->
+      <rpc name="RPC_MAGV_ATTACH_IRRADIATION_DOSE" export="RPC_MAGV_ATTACH_IRRADIATION_DOSE.KID"/>
+      <rpc name="RPC_MAGV_GET_IRRADIATION_DOSE" export="RPC_MAGV_GET_IRRADIATION_DOSE.KID"/>
+
+      <!--   patch 138  -->
+      <rpc name="MAGTP GET ACTIVE" export="RPC_MAGTP_GET_ACTIVE.KID"/>
+      <rpc name="MAGTP GET CASES" export="RPC_MAGTP_GET_CASES.KID"/>
+      <rpc name="MAGTP GET CPRS REPORT" export="RPC_MAGTP_GET_CPRS_REPORT.KID"/>
+      <rpc name="MAGTP GET NOTE" export="RPC_MAGTP_GET_NOTE.KID"/>
+      <rpc name="MAGTP GET PREFERENCES" export="RPC_MAGTP_GET_PREFERENCES.KID"/>
+      <rpc name="MAGTP GET RETENTION DAYS" export="RPC_MAGTP_GET_RETENTION_DAYS.KID"/>
+      <rpc name="MAGTP GET SLIDES" export="RPC_MAGTP_GET_SLIDES.KID"/>
+      <rpc name="MAGTP GET USER" export="RPC_MAGTP_GET_USER.KID"/>
+      <rpc name="MAGTP PUT NOTE" export="RPC_MAGTP_PUT_NOTE.KID"/>
+      <rpc name="MAGTP PUT PREFERENCES" export="RPC_MAGTP_PUT_PREFERENCES.KID"/>
+      <rpc name="MAGTP RESERVE CASE" export="RPC_MAGTP_RESERVE_CASE.KID"/>
+      <rpc name="MAGTP SET RETENTION DAYS" export="RPC_MAGTP_SET_RETENTION_DAYS.KID"/>
+      <rpc name="MAGTP USER" export="RPC_MAGTP_USER.KID"/>
+
+    </rpcs>
+    <options>
+      <!--   patch 110  -->
+      <option name="MAGD EDIT CLIN SPEC DICOM/HL7" export="OPT_MAGD_EDIT_CLIN_SPEC_DICOM_HL7.KID"/>
+      <option name="MAGD PRINT DICOM OBJECT EXPORT" export="OPT_MAGD_PRINT_DICOM_OBJECT_EXPORT.KID"/>
+
+      <!--   patch 138  -->
+      <option name="MAGTP WORKLIST MGR" export="OPT_MAGTP_WORKLIST_MGR.KID"/>
+      
+    </options>
+    <securityKeys>
+    </securityKeys>
+    <protocols>
+    </protocols>
+    <templateLists>
+    </templateLists>
+    <hl7Applications>
+    </hl7Applications>
+    <hl7LogicalLinks>
+    </hl7LogicalLinks>
+    <parameterDefinitions>
+    </parameterDefinitions>
+    <parameterTemplates>
+    </parameterTemplates>
+    <printTemplates>
+    </printTemplates>
+    <sortTemplates>
+    </sortTemplates>
+    <inputTemplates>
+    </inputTemplates>
+    <forms>
+    </forms>
+    <functions>
+    </functions>
+    <dialogs>
+    </dialogs>
+    <bulletins>
+    </bulletins>
+    <mailGroups>
+    </mailGroups>
+    <helpFrames>
+    </helpFrames>
+  </components>
+</build>

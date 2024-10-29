@@ -1,0 +1,271 @@
+MAGDAIR3 ;WOIFO/PMK - Automatic Import Reconciliation Workflow ; 28 Jul 2010 5:53 PM
+ ;;3.0;IMAGING;**53,49**;Mar 19, 2002;Build 2201;Jun 29, 2011
+ ;; Per VHA Directive 2004-038, this routine should not be modified.
+ ;; +---------------------------------------------------------------+
+ ;; | Property of the US Government.                                |
+ ;; | No permission to copy or redistribute this software is given. |
+ ;; | Use of unreleased versions of this software requires the user |
+ ;; | to execute a written test agreement with the VistA Imaging    |
+ ;; | Development Office of the Department of Veterans Affairs,     |
+ ;; | telephone (301) 734-0100.                                     |
+ ;; | The Food and Drug Administration classifies this software as  |
+ ;; | a medical device.  As such, it may not be changed in any way. |
+ ;; | Modifications to this software may result in an adulterated   |
+ ;; | medical device under 21CFR820, the use of which is considered |
+ ;; | to be a violation of US Federal Statutes.                     |
+ ;; +---------------------------------------------------------------+
+ ;;
+ ; Get studies and display them
+ ;
+GETSTUDY(NOIMPORT) ; get the list of studies to import
+ N COUNT ;---- count of studies in DATAFILE
+ N IEN ;------ internal entry number in DATAFILE
+ N MODALITY ;- DICOM modality, for counting how many images
+ N SERIEUID ;- DICOM series instance uid
+ N STUDYN ;--- number of study (1:COUNT) to import
+ N STUDYUID ;- DICOM study instance uid
+ N X
+ ;
+ K ^TMP("MAG",$J,"IMPORT","LIST")
+ S (COUNT,NOIMPORT)=0
+ ; prevent update of DATAFILE while someone is starting Importer
+ L +@DATAFILE:5 E  Q "-1,Could not obtain lock on "_DATAFILE
+ S IEN=0 F  S IEN=$O(@DATAFILE@(IEN)) Q:'IEN  D
+ . S X=$$GETDATA^MAGDAIRD(IEN,"IEN",.DATA)
+ . S MODALITY=DATA("MODALITY")
+ . S STUDYUID=DATA("STUDYUID")
+ . S SERIEUID=DATA("SERIEUID")
+ . S STUDYN=$G(STUDYUID(STUDYUID))
+ . I STUDYN="" S (STUDYN,COUNT)=COUNT+1,STUDYUID(STUDYUID)=COUNT
+ . S ^TMP("MAG",$J,"IMPORT","LIST",STUDYN,"IEN",SERIEUID,IEN)=""
+ . S ^(MODALITY)=$G(^TMP("MAG",$J,"IMPORT","LIST",STUDYN,"MOD",MODALITY))+1
+ . I DATA("PCONTEXT") D
+ . . S NOIMPORT=NOIMPORT+1 ; non-imported DICOM objects
+ . . S ^("PCONTEXT")=$G(^TMP("MAG",$J,"IMPORT","LIST",STUDYN,"PCONTEXT"))+1
+ . . Q
+ . Q
+ L -@DATAFILE
+ Q COUNT
+ ;
+ ;
+ ;
+SELSTUDY(COUNT,DFN) ; select a study
+ N CALLING ;-- Calling AE Title
+ N ONFILE ;--- value of "ALREADY ON FILE" node
+ N NSERIES ;-- number of series (1, 2, 3, ..., n)
+ N PATIENT ;-- DFN of patient to whom the study is assigned
+ N PNAMEDCM ;- patient name in DICOM format
+ N RADPROC ;-- radiology procedure code (file 71 ien)
+ N REFDOC ;--- referring physician's name
+ N STUDYDES ;- study description
+ N STUDYN ;--- number of study (1:COUNT) to import
+ N DONE,OK,N,X,Y
+ ;
+ S OK=0 F  D  Q:OK
+ . ; check if portable medium has changed
+ . I MEDIA="D" D  Q:OK
+ . . S X=$$MEDIACHK^MAGDAIRM(.MEDIA)
+ . . I X<0 S OK=-2
+ . . Q
+ . ;
+ . S X=$$DSPSTUDY()
+ . I X="" D  Q:OK=-1
+ . . W !!,"Please enter the next study to import or enter ""C"" to continue: "
+ . . R X:DTIME E  S OK=-1 Q
+ . . Q
+ . I $TR($E(X),"c","C")="C" S OK=-1 Q
+ . I "^"=X S OK=-1 Q
+ . I (X'?1N.N)!(X<1)!(X>COUNT) D  Q
+ . . W:X'["?" " ???" W !,"Please enter a number between 1 and ",COUNT," or enter ""C"" to continue."
+ . . D CONTINUE^MAGDAIR0
+ . . Q
+ . S STUDYN=X
+ . ;
+ . ; check if the DICOM objects for the study are already on file
+ . S ONFILE=$G(^TMP("MAG",$J,"IMPORT","LIST",STUDYN,"ALREADY ON FILE"))
+ . I ONFILE'="" D  Q
+ . . D ONFILE^MAGDAIRU(STUDYN)
+ . . S STUDYN=0,OK=1 ; cause refresh of study list
+ . . Q
+ . ;
+ . ; check if study is already assigned to a patient
+ . S PATIENT=$G(^TMP("MAG",$J,"IMPORT","LIST",STUDYN,"PATIENT"))
+ . I PATIENT D  Q
+ . . D NEWFILE^MAGDAIRU(STUDYN)
+ . . S STUDYN=0,OK=1 ; cause refresh of study list
+ . . Q
+ . . 
+ . ; check if study is to be deleted
+ . I $G(^TMP("MAG",$J,"IMPORT","LIST",STUDYN,"DELETE")) D  Q
+ . . D UNDELETE^MAGDAIRD(STUDYN)
+ . . S STUDYN=0,OK=1 ; cause refresh of study list
+ . . Q
+ . ;
+ . S X=$$GETDATA^MAGDAIRD(STUDYN,"LIST",.DATA)
+ . ; patient level
+ . W !!,"Patient Name: "
+ . W $$HIGHLITE^MAGDAIR0("YELLOW",$$NAME^MAGDAIR0(DATA("PNAMEDCM")))
+ . W "     ","Patient ID: ",$$HIGHLITE^MAGDAIR0("YELLOW",DATA("PID"))
+ . W "     ","Birth Date: ",$$HIGHLITE^MAGDAIR0("YELLOW",$$DATE^MAGDAIR0(DATA("DOB"),"L"))
+ . W "     ","Sex: ",$$HIGHLITE^MAGDAIR0("YELLOW",DATA("SEX"))
+ . ; study level
+ . W !,"Accession #: ",$$HIGHLITE^MAGDAIR0("YELLOW",DATA("ACNUMB"))
+ . W "     ","Study Date: ",$$HIGHLITE^MAGDAIR0("YELLOW",$$DATE^MAGDAIR0(DATA("STUDYDAT"),"S"))
+ . W "     ","Study Time: ",$$HIGHLITE^MAGDAIR0("YELLOW",$$TIME^MAGDAIR0(DATA("STUDYTIM")))
+ . S STUDYDES=DATA("STUDYDES")
+ . I STUDYDES'="",STUDYDES'="<unknown>" D
+ . . W !,"Study Description: ",$$HIGHLITE^MAGDAIR0("YELLOW",STUDYDES)
+ . . Q
+ . S REFDOC=DATA("REFDOC")
+ . I REFDOC'="" D
+ . . W "    ","Referring Physician: "
+ . . W $$HIGHLITE^MAGDAIR0("YELLOW",$$NAME^MAGDAIR0(REFDOC))
+ . . Q
+ . W !,"Study Instance UID: ",$$HIGHLITE^MAGDAIR0("YELLOW",DATA("STUDYUID"))
+ . I $L(DATA("CALLING")) D
+ . . S Y="",X=$$UPPER^MAGOSMSC(DATA("CALLING"))
+ . . S X=$O(^MAGDICOM(2006.588,"B",X,""))
+ . . I X S Y=$P(^MAGDICOM(2006.588,X,0),"^",3)
+ . . I Y'="" W !,"Sending facility: ",$$HIGHLITE^MAGDAIR0("YELLOW",Y)
+ . . E  W !,"Sent by Calling AE Title: ",$$HIGHLITE^MAGDAIR0("YELLOW",DATA("CALLING"))
+ . . Q
+ . ;
+ . S NSERIES=$$BLDSERIE(STUDYN) ; build SERIES array
+ . ;
+ . S DONE=0 F  D  Q:DONE
+ . . W !!,"Is this the correct study/view images"
+ . . I MEDIA="T" W " (or delete the study)? [enter Y, N, V (or DEL)]: "
+ . . E  W "? [enter Y, N, V]: "
+ . . R X:DTIME E  S (DONE,OK)=-1 Q
+ . . I X="" Q
+ . . I "^"[$E(X) S DONE=-1 Q
+ . . S X=$$UPPER^MAGOSMSC(X)
+ . . I "Y"[$E(X) S (DONE,OK)=1 Q
+ . . I "N"[$E(X) S DONE=-1 Q
+ . . I "V"[$E(X) D ENTRY^MAGDAIR4(NSERIES) Q  ; display the images
+ . . I MEDIA="T",X?1"DEL".E D  Q
+ . . . I $$YESNO^MAGDAIR0("Are you sure that you want to delete this study and not import it into VistA?","n",.X)<0 S (DONE,OK)=-1 Q
+ . . . I X="YES" D
+ . . . . S (DONE,^TMP("MAG",$J,"IMPORT","LIST",STUDYN,"DELETE"))=1
+ . . . . Q
+ . . . Q
+ . . W:X'["?" " ???"
+ . . W !!,"Please enter one of the following options:"
+ . . W !,"      ",$$HIGHLITE^MAGDAIR0("YELLOW","Y")
+ . . W "es -- when you are ready to assign this study to a patient"
+ . . W !,"       ",$$HIGHLITE^MAGDAIR0("YELLOW","N")
+ . . W "o -- if you want to skip this study and select a different one"
+ . . W !,"     ",$$HIGHLITE^MAGDAIR0("YELLOW","V")
+ . . W "iew -- when you want to display the DICOM objects for this study"
+ . . I MEDIA="T" D
+ . . . W !,"   ",$$HIGHLITE^MAGDAIR0("YELLOW","DEL")
+ . . . W "ete -- should you want to delete this study (you must use ""DEL"")"
+ . . Q
+ . Q
+ ;
+ I OK'=1 Q OK
+ Q STUDYN
+ ;
+ ;
+ ;
+BLDSERIE(STUDYN) ; build SERIES array
+ N DATA ;----- information about image
+ N IEN ;------ internal entry number in DATAFILE
+ N FACILITY ;- original image acquisition site
+ N IMAGNUMB ;- instance number
+ N INSTADDR ;- institution address
+ N MODALITY ;- DICOM modality
+ N NSERIES ;-- number of series (1, 2, 3, ..., n)
+ N SERINUMB ;- series number
+ N SERIEUID ;- DICOM series instance uid
+ N I,N,X
+ ;
+ K ^TMP("MAG",$J,"IMPORT","SERIES")
+ S SERIEUID="",NSERIES=0
+ F  S SERIEUID=$O(^TMP("MAG",$J,"IMPORT","LIST",STUDYN,"IEN",SERIEUID)) Q:'SERIEUID  D
+ . S IEN="",N=0,NSERIES=NSERIES+1
+ . F  S IEN=$O(^TMP("MAG",$J,"IMPORT","LIST",STUDYN,"IEN",SERIEUID,IEN)) Q:'IEN  D
+ . . S X=$$GETDATA^MAGDAIRD(IEN,"IEN",.DATA)
+ . . S IMAGNUMB=DATA("IMAGNUMB")
+ . . I IMAGNUMB="" S IMAGNUMB=1 ; no instance number
+ . . S ^TMP("MAG",$J,"IMPORT","SERIES","IEN",SERIEUID,"LIST",IMAGNUMB,IEN)=""
+ . . S N=N+1,^TMP("MAG",$J,"IMPORT","SERIES","IEN",SERIEUID,"NIMAGES")=N
+ . . I N=1 D
+ . . . S X=""
+ . . . F I="MODALITY","FACILITY","INSTADDR","SERIEDES","SERIEUID","SERINUMB" D
+ . . . . S X=X_DATA(I)_"^"
+ . . . . Q
+ . . . S ^TMP("MAG",$J,"IMPORT","SERIES","IEN",SERIEUID,"DATA")=X
+ . . . S ^TMP("MAG",$J,"IMPORT","SERIES","IEN",SERIEUID,"NUMBER")=NSERIES
+ . . . S ^TMP("MAG",$J,"IMPORT","SERIES","INDEX",NSERIES,SERIEUID)=""
+ . . . Q
+ . . Q
+ . Q
+ Q NSERIES
+ ;
+ ;
+ ;
+DSPSTUDY() ; Display a study
+ N CODE ;----- code for study
+ N COLOR ;---- color of CODE
+ N DUPUID ; -- duplicate Study Instance UID
+ N IEN ;------ internal entry number in DATAFILE
+ N MODALITY ;- DICOM modality, for counting how many images
+ N PATIENT ;-- DFN of patient to whom the study is assigned
+ N PNAMEDCM ;- patient name in DICOM format
+ N RETURN ;--- return from selection
+ N SERIEUID ;- DICOM series instance uid
+ N STUDYN ;--- number of study (1:COUNT) to import
+ N J,K,X,Z
+ ;
+ S RETURN=""
+ D HEADING
+ S STUDYN=0
+ F  S STUDYN=$O(^TMP("MAG",$J,"IMPORT","LIST",STUDYN)) Q:'STUDYN  D  Q:RETURN'=""
+ . I '$$GETDATA^MAGDAIRD(STUDYN,"LIST",.DATA) Q
+ . I $Y>43 D  Q:RETURN'=""
+ . . W !!,"Please enter the next study to import, enter ""C"" to continue, or press <Enter> for more studies: "
+ . . R X:$G(DTIME,1E5)
+ . . I X'="" S RETURN=X Q
+ . . D HEADING
+ . . Q
+ . S DUPUID=$D(^TMP("MAG",$J,"IMPORT","LIST",STUDYN,"DUP UID"))
+ . W !,$J(STUDYN,2),")"
+ . S PATIENT=$G(^TMP("MAG",$J,"IMPORT","LIST",STUDYN,"PATIENT"))
+ . I PATIENT D
+ . . S Z=$G(^TMP("MAG",$J,"IMPORT","LIST",STUDYN,"ALREADY ON FILE"))
+ . . I Z="" S COLOR="GREEN",CODE="i"
+ . . E  I $P(Z,"^",1)=$P(Z,"^",2) S COLOR="RED",CODE="c" ; completely stored on VistA
+ . . E  S COLOR="YELLOW",CODE="p" ; only partially stored on VistA
+ . . W $$HIGHLITE^MAGDAIR0(COLOR,CODE) ; assigned to a patient
+ . . Q
+ . I $G(^TMP("MAG",$J,"IMPORT","LIST",STUDYN,"DELETE")) D
+ . . W $$HIGHLITE^MAGDAIR0("GREEN","d")
+ . . Q
+ . I $G(^TMP("MAG",$J,"IMPORT","LIST",STUDYN,"PCONTEXT")) D
+ . . W ?4,$$HIGHLITE^MAGDAIR0("YELLOW","?")
+ . . Q
+ . I DUPUID W $$HIGHLITE^MAGDAIR0("YELLOW"),?4,"*"
+ . W ?5,$J(DATA("PID"),14) ; DoD pid is 14 characters: FP/123-45-6789
+ . W ?21,$E($$NAME^MAGDAIR0(DATA("PNAMEDCM")),1,30)
+ . W ?53,$$DATE^MAGDAIR0(DATA("DOB"),"B"),?65,DATA("SEX")
+ . W ?69,DATA("ACNUMB"),?87,$$DATE^MAGDAIR0(DATA("STUDYDAT"),"S")
+ . W ?97,$E(DATA("STUDYDES"),1,19),?116
+ . S MODALITY=""
+ . F  S MODALITY=$O(^TMP("MAG",$J,"IMPORT","LIST",STUDYN,"MOD",MODALITY)) Q:MODALITY=""  D
+ . . W " ",MODALITY,"=",^TMP("MAG",$J,"IMPORT","LIST",STUDYN,"MOD",MODALITY)
+ . . Q
+ . I DUPUID W $$HIGHLITE^MAGDAIR0()
+ . Q
+ Q RETURN
+ ;
+ ;
+ ;
+HEADING ; output the heading
+ W @IOF,?20,HEADING
+ W !?20,$TR($J("",$L(HEADING))," ","-")
+ W !!," #",?7,"Patient ID",?30,"Patient Name",?56,"Birth"
+ W ?64,"Sex",?69,"Accession Number",?89,"Date",?97,"Description",?117,"Images"
+ W !,"---",?5,"--------------",?21,"------------------------------",?53,"----------"
+ W ?64,"---",?69,"----------------",?87,"--------",?97,"------------",?117,"------"
+ Q

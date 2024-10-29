@@ -1,0 +1,34 @@
+#
+# map between an Application Entity Title and a full address
+# i.e. host:port:called-ae-title
+#
+[ MY_STORE_SCP ]
+host = tittonc-lt
+port = 4000
+ae_title = StoreSCP1
+
+[ StoreSCP1 ]
+host = tittonc-lt
+port = 2000
+ae_title = StoreSCP1
+
+[ PrintSCP1 ]
+host = tittonc-lt
+port = 2000
+ae_title = PrintSCP1
+
+[ PrintSCP2 ]
+host = tittonc-lt
+port = 2000
+ae_title = PrintSCP2
+
+
+[ TestSCP ]
+host = tittonc-lt
+port = 2000
+ae_title = TestSCP
+
+[ CommitSCU ]
+host = tittonc-lt
+port = 4000
+ae_title = CommitSCU

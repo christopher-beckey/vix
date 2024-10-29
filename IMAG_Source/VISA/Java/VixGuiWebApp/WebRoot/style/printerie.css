@@ -1,0 +1,46 @@
+/* custom cascading style sheet for print preview with IE 7-8,
+   invoked from TransactionLog.jsp.
+
+Specific divs and spans, these determine the layout of the pages.
+Currently the pages are organized as follows:
+
+-------------------------------------------------
+|                Page Header                    |
+-------------------------------------------------
+|                  Menu                         |
+-------------------------------------------------
+|         |                                     |
+| sel-    |    supporting-text                  |
+| ection  |                                     |
+-------------------------------------------------
+|              Page Footer                      |
+------------------------------------------------- 
+
+
+*/
+
+
+html
+    {
+     padding: 0;
+	 text-align: center;
+	 display: inline;
+	}
+
+#container, #dateRange, .innerwrap
+    {
+     clear: left;
+     margin: 0 0 auto;
+     width: 100%;
+     height: auto; 
+    } 
+
+  	
+#pageFooter
+    {
+     clear: left;
+     display: block;
+     float: left;
+     margin-left: 0;
+     margin-bottom: auto;
+    }

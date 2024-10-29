@@ -1,0 +1,102 @@
+:Base fmdc.hlp>main
+:Title FileMan Delphi Components V. 1.0
+
+;Link section
+;================
+:Link delphi3.hlp
+:Link delphi.hlp
+:Link vcl.hlp
+:Link cwg.hlp
+:Link broker.hlp
+
+;Delphi include section
+;=================
+:Include DELHPI3.CFG
+
+;CNT section
+;=================
+1 FileMan Delphi Components            
+2 Introduction=Introduction
+2 Quick Start Guide=guide_quickstart
+2 Getting Started
+3 FMDC Architecture=guide_architecture
+3 How the Components Work Together=guide_components_together
+3 FMDC Component Hierarchy=hierarchy
+3 What's New in the FileMan Delphi Components=guide_changes
+3 Converting from Earlier Preview Versions=convert
+3 FMDC Web Site=web_site
+3 FMDC Printed Manuals=getting_started_guide
+3 How to Read Component Entries=orientation
+2 FMDC Components
+3 Components=Components
+3 Objects=Objects
+3 Routines=Routines
+3 Units=Units
+3 How to Read Component Entries=orientation
+3 FMDC Component Hierarchy=hierarchy
+2 How To: By Field Type
+3 Field Types and Compatible Controls=guide_field_types
+3 Data Control Settings for All Field Types=guide_field_all
+3 Free Text, Date, Numeric and MUMPS=guide_free_text
+3 Word Processing=guide_wp
+3 Computed=guide_computed
+3 Variable Pointer=guide_vp
+3 Pointer
+4 Pointer Fields=guide_pointer
+4 Editing with TFMListBox or TFMComboBox=guide_pointer_tfmlistbox
+4 Editing with TFMComboBoxLookUp=guide_pointer_tfmcomboboxlookup
+4 Editing with TFMLookUp=guide_pointer_tfmlookup
+3 Set of Codes
+4 Set of Codes Fields=guide_set
+4 Editing with a TFMRadioGroup=guide_set_tfmradiogroup
+4 Editing with a Set of TFMRadioButtons=guide_set_tfmradiobutton
+4 Editing with a TFMCheckBox=guide_set_tfmcheckbox
+2 How To: By Task
+3 Quick Start Guide=guide_quickstart
+3 Adding a Record
+4 Overview=guide_add
+4 Add a Record with FileMan Data Controls=guide_add_controls
+4 Add a Record with AddFDA=guide_add_addfda
+4 Add a Record with TFMLookUp=guide_add_tfmlookup
+3 Selecting a Record
+4 Overview=guide_select
+4 Select a Record with TFMLookUp=guide_select_tfmlookup
+4 Select a Record with TFMListBox or TFMComboBox=guide_select_tfmlistbox
+4 Select a Record with TFMComboBoxLookUp=guide_select_tfmcomboboxlookup
+4 Select a Record with TFMFindOne=guide_select_tfmfindone
+3 Retrieving a Record
+4 Overview=guide_retrieve
+4 Retrieve a Record w/TFMGets and Populate Data Controls=guide_retrieve_controls
+4 Retrieve a Record w/TFMGets without Populating Data Controls=guide_retrieve_standalone
+4 Retrieve a List of Records with TFMLister=guide_retrieve_tfmlister
+4 Retrieve a List of Records with TFMFinder=guide_retrieve_tfmfinder
+3 Providing Help for Fields
+4 Overview=guide_help
+4 F1 Help in a Pop-Up Window=guide_help_f1
+4 F1 Help in a Pop-Up Window for TFMRadioGroup=guide_help_f1_tfmradiogroup
+4 OnFocus Display Panel Help=guide_help_panel
+4 Standalone Field Help=guide_help_tfmhelp
+3 Validating Values
+4 Automated OnExit Processing for Data Controls=guide_update
+4 Manual OnExit Processing for Data Controls=guide_validate
+4 Validating Standalone Values=guide_validate_standalone
+2 Filing Changes to a Record=guide_filing
+2 Deleting a Record=guide_delete
+2 Editing Records from Several Files Simultaneously=guide_several_records
+3 Working with Multiples
+4 Overview=guide_multiples
+4 List/Select Records in a Multiple=guide_multiples_list
+4 File Changes to a Record in a Multiple=guide_multiples_update
+4 Add a Record to a Multiple=guide_multiples_add
+4 Delete a Record from a Multiple=guide_multiples_delete
+2 Security
+3 FileMan Security & the FileMan Components=guide_security_fmdc
+3 Security & Registering the FMDC RPCs=guide_security
+2 Advanced Topics
+3 Creating Components On-the-fly=guide_on_fly
+3 Setting Properties On-the-fly=guide_on_fly_properties
+3 Using Third Party Components=guide_gadgets
+2 DBS Reference
+3 DBS Reference=dbs_topics
+3 VA FileMan Online Manuals=manuals
+

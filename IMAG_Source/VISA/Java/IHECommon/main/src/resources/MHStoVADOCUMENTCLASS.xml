@@ -1,0 +1,66 @@
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+	<comment>
+	The mapping of MHS codes to VA artifact types
+	This may be a one to many mapping.  The VA codes (target values) are comma delimited
+	strings.  Note that a comma in a target value will require a code change.
+	</comment>
+	
+	<!-- 51-DD214 ENLISTED RECORD & RPT OF SEP  -->
+	<entry key="mhs-2">DD214 ENLISTED RECORD &amp; RPT OF SEP</entry>
+	
+	<!-- 80-CONSULT  -->
+	<entry key="mhs-7">CONSULT</entry>
+	
+	<!-- 59-HEALTH INSURANCE CARDS  -->
+	<entry key="mhs-10">HEALTH INSURANCE CARDS</entry>
+	
+	<!-- 6-INSURANCE FORM  -->
+	<entry key="mhs-11">INSURANCE FORM</entry>
+	
+	<!-- 56-FINANCIAL WORKSHEET -->
+	<!-- 57-INVENTORY OF FUNDS AND EFFECTS  -->
+	<!-- 97-BILLS  -->
+	<entry key="mhs-12">FINANCIAL WORKSHEET,BILLS,INVENTORY OF FUNDS AND EFFECTS</entry>
+	
+	<!-- 75-IMAGE -->
+	<!-- 76-DIAGRAM -->
+	<!-- 84-PHOTO ID -->
+	<!-- 90-VIDEO -->
+	<entry key="mhs-15">IMAGE,DIAGRAM,PHOTO ID,VIDEO</entry>
+	
+	<!-- 67-ADVANCE DIRECTIVE  -->
+	<entry key="mhs-16">ADVANCE DIRECTIVE</entry>
+	
+	<!-- 66-CONSENT  -->
+	<entry key="mhs-17">CONSENT</entry>
+	
+	<!-- 52-DEATH CERTIFICATE  -->
+	<entry key="mhs-20">DEATH CERTIFICATE</entry>
+	
+	<!-- 61-POWER OF ATTORNEY  -->
+	<entry key="mhs-21">POWER OF ATTORNEY</entry>
+	
+	<!-- 94-LEGAL DOCUMENTS  -->
+	<!-- 49-APPT OF VSO AS CLAIMANT'S REP  -->
+	<!-- 60-PLENARY GUARDIANSHIP  -->
+	<!-- 65-DESIGNATION OF HEALTHCARE SURROGATE  -->
+	<!-- 81-COMMITMENT  -->
+	<!-- 83-RELEASE OF INFORMATION  -->
+	<!-- 96-ORGAN DONATION  -->
+	<!-- 104-FINANCIAL STATUS/1837/5655/1100  -->
+	<entry key="mhs-22">LEGAL DOCUMENTS,APPT OF VSO AS CLAIMANT'S REP,PLENARY GUARDIANSHIP,DESIGNATION OF HEALTHCARE SURROGATE,COMMITMENT,RELEASE OF INFORMATION,ORGAN DONATION,FINANCIAL STATUS/1837/5655/1100</entry>
+
+	<!-- 93-REFERRAL  -->
+	<!-- 82-REQUEST FOR AUTOPSY  -->
+	<!-- 98-MTF REFERRAL FORM  -->
+	<!-- 100-ORDER  -->
+	<entry key="mhs-25">REFERRAL,REQUEST FOR AUTOPSY,MTF REFERRAL FORM,ORDER</entry>
+	
+	<!-- 72-FLOWSHEET  -->
+	<entry key="mhs-31">FLOWSHEET</entry>
+	
+	<!-- 71-MEDICATION RECORD  -->
+	<entry key="mhs-32">MEDICATION RECORD</entry>
+	
+</properties>

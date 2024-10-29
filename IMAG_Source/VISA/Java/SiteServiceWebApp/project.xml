@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project>
+	<extend>../ImagingRoot/project.xml</extend>
+    <pomVersion>1</pomVersion>
+    <artifactId>SiteServiceWebApp</artifactId>
+	<packaging>war</packaging>
+    <name>SiteServiceWebApp</name>
+	<package>gov.va.med.imaging</package>
+	<shortDescription>The web application for the site service and exchange site service server</shortDescription>  
+	<build>
+		<sourceDirectory>main/src/java</sourceDirectory>
+		<unitTestSourceDirectory>main/test/java</unitTestSourceDirectory>
+		<unitTest>
+			<includes>
+				<include>**/Test*.java</include>
+			</includes>
+			<resources>
+				<resource>
+					<directory>main/test/resources</directory>
+					<includes>
+						<include>**/*</include>
+					</includes>
+					<filtering>false</filtering>
+				</resource>
+			</resources>
+		</unitTest>
+		<resources>
+			<resource>
+				<directory>main/src/resources</directory>
+				<includes>
+					<include>**/*</include>
+				</includes>
+				<filtering>false</filtering>
+			</resource>
+		</resources>			
+	</build>
+  <dependencies>
+    <dependency>
+      <groupId>${pom.groupId}</groupId>
+      <artifactId>ExchangeSiteServiceSOAPServer</artifactId>
+      <version>${pom.currentVersion}</version>
+      <type>jar</type>
+    </dependency>    
+    <dependency>
+      <groupId>${pom.groupId}</groupId>
+      <artifactId>SiteServiceSOAPServer</artifactId>
+      <version>${pom.currentVersion}</version>
+      <type>jar</type>
+    </dependency>    
+    <!-- Non-Imaging dependencies are defined in ImagingRoot -->
+  </dependencies>
+</project>
+

@@ -1,0 +1,112 @@
+MAGDAIRD ;WOIFO/PMK - Automatic Import Reconciliation Workflow ; 20 Jun 2008 9:51 AM
+ ;;3.0;IMAGING;**53**;Mar 19, 2002;Build 1715;Apr 22, 2010
+ ;; Per VHA Directive 2004-038, this routine should not be modified.
+ ;; +---------------------------------------------------------------+
+ ;; | Property of the US Government.                                |
+ ;; | No permission to copy or redistribute this software is given. |
+ ;; | Use of unreleased versions of this software requires the user |
+ ;; | to execute a written test agreement with the VistA Imaging    |
+ ;; | Development Office of the Department of Veterans Affairs,     |
+ ;; | telephone (301) 734-0100.                                     |
+ ;; | The Food and Drug Administration classifies this software as  |
+ ;; | a medical device.  As such, it may not be changed in any way. |
+ ;; | Modifications to this software may result in an adulterated   |
+ ;; | medical device under 21CFR820, the use of which is considered |
+ ;; | to be a violation of US Federal Statutes.                     |
+ ;; +---------------------------------------------------------------+
+ ;;
+ ; Check for studies that are to be deleted
+ ;
+UNDELETE(STUDYN) ; entry point from ^MAGDAIR3 for a selected new study that is to be imported
+ D DISPLAY(STUDYN)
+ I $$YESNO^MAGDAIR0("Are you sure that you want to delete this study and not import it into VistA?","y",.X)<0 Q
+ I X="NO" D  ; don't delete the study
+ . K ^TMP("MAG",$J,"IMPORT","LIST",STUDYN,"DELETE")
+ . W !!,$$HIGHLITE^MAGDAIR0("YELLOW","Study will not be deleted - you may import it into VistA.")
+ . Q
+ E  D  ; right patient/study
+ . W "   (No action taken.)"
+ . Q
+ D CONTINUE^MAGDAIR0
+ Q
+ ;
+ ;
+ ;
+DISPLAY(STUDYN) ; display the data for the study to be deleted
+ N DATA,X
+ S X=$$GETDATA^MAGDAIRD(STUDYN,"LIST",.DATA)
+ W $C(27)_"[0;1;7m"
+ W !!?20,$J("Imported File",40),?63
+ W !?20,$J("-------------",40),?63
+ W !,"Patient Name:",?20,$J($E($$NAME^MAGDAIR0(DATA("PNAMEDCM")),1,40),40)
+ W ?63
+ W !,"Patient ID:",?20,$J(DATA("PID"),40),?63
+ W !,"Date of Birth:",?20,$J($$DATE^MAGDAIR0(DATA("DOB"),"B"),40)
+ W ?63
+ W !,"Patient Sex:",?20,$J(DATA("SEX"),40),?63
+ W !,"Accession Number:",?20,$J(DATA("ACNUMB"),40),?63
+ W !,"Study Date:",?20
+ W $J($$DATE^MAGDAIR0(DATA("STUDYDAT"),"S"),40)
+ W ?63
+ W !,"Procedure:",?20,$J(DATA("STUDYDES"),40),?63
+ W $C(27)_"[0;1;m"
+ Q
+ ;
+ ;
+ ;
+DELETE(STUDYN,MODE) ; delete the study
+ N IEN ;------ ien of DICOM object in ^TMP
+ N SERIEUID ;- series instance uid
+ N X
+ ;
+ ; delete each image in the study
+ W !,"Deleting #",STUDYN," "
+ S SERIEUID=""
+ F  S SERIEUID=$O(^TMP("MAG",$J,"IMPORT","LIST",STUDYN,"IEN",SERIEUID)) Q:'SERIEUID  D
+ . S IEN=""
+ . F  S IEN=$O(^TMP("MAG",$J,"IMPORT","LIST",STUDYN,"IEN",SERIEUID,IEN)) Q:'IEN  S X=^(IEN) D
+ . . I MODE'="ALL",X="" Q  ; don't delete the ones already on file
+ . . W "." D DELETE1(IEN)
+ . . Q
+ . Q
+ Q
+ ;
+DELETE1(IEN) ; delete one image
+ N MACHID ;--- machine id (hostname)
+ N DATA,RPCERR,RESULT,X
+ ;
+ S MACHID=$$HOSTNAME^MAGOSMSC()
+ ;
+ S X=$$GETDATA^MAGDAIRD(IEN,"IEN",.DATA)
+ S RPCERR=$$CALLRPC^MAGM2VCU("MAG DICOM IMPORTER DELETE","M",.RESULT,DATA("IMAGEUID"),MACHID,DATA("FROMPATH"))
+ I RPCERR<0 S RETURN=-1 Q
+ ; delete the DICOM file and remove it from the queue
+ D REMOVE^MAGDAIR6(DATAFILE,MEDIA,IEN,DATA("FROMPATH"))
+ Q
+ ;
+ ;
+ ;
+GETDATA(I,MODE,DATA) ; get the data from the I-th entry in the DATAFILE
+ ; if MODE="LIST", then I is the index into the LIST
+ ; if MODE="IEN", then I is the actual internal entry number
+ N IEN,J,K,SERIEUID,VARS,X
+ K DATA Q:'$G(I) 0  Q:'$D(MODE) 0
+ I MODE="LIST" D
+ . S SERIEUID=$O(^TMP("MAG",$J,"IMPORT","LIST",I,"IEN",""))
+ . S IEN=$O(^TMP("MAG",$J,"IMPORT","LIST",I,"IEN",SERIEUID,""))
+ . Q
+ E  I MODE="IEN" S IEN=I
+ E  Q 0
+ M X=@DATAFILE@(IEN)
+ F J=0:1:3 F K=1:1:$L(X(J),"^") I $P(X(J),"^",K)="<unknown>" S $P(X(J),"^",K)=""
+ S VARS(0)="PNAME^PID^DOB^SEX" ; 0 = patient level
+ S VARS(1)="STUDYDAT^STUDYTIM^ACNUMB^REFDOC^STUDYDES^STUDYUID" ; 1 = study level
+ S VARS(2)="MODALITY^FACILITY^INSTADDR^SERIEDES^SERIEUID^SERINUMB" ; 2 = series level
+ S VARS(3)="FROMPATH^TSYNTAX^SOPCLASS^IMAGEUID^IMAGNUMB^NFRAMES" ; 3 = instance level
+ S VARS(4)="INSTNAME^CALLING^RECVDATE^PCONTEXT" ; 4 = administrative level
+ F J=0:1:4 D  ; iterate through the levels
+ . F K=1:1:$L(VARS(J),"^") S DATA($P(VARS(J),"^",K))=$P(X(J),"^",K)
+ . Q
+ S DATA("PNAMEDCM")=$TR(DATA("PNAME"),"|","^") K DATA("PNAME")
+ S DATA("REFDOC")=$TR(DATA("REFDOC"),"|","^")
+ Q 1

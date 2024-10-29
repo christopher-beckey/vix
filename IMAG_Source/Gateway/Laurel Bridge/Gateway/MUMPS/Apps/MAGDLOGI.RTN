@@ -1,0 +1,75 @@
+MAGDLOGI ;WOIFO/PMK - Interface Login Security Program ; 06/03/2005  12:17
+ ;;3.0;IMAGING;**11,51**;MAR 19, 2002;;JUN 16, 2006
+ ;; Per VHA Directive 2004-038, this routine should not be modified.
+ ;; +---------------------------------------------------------------+
+ ;; | Property of the US Government.                                |
+ ;; | No permission to copy or redistribute this software is given. |
+ ;; | Use of unreleased versions of this software requires the user |
+ ;; | to execute a written test agreement with the VistA Imaging    |
+ ;; | Development Office of the Department of Veterans Affairs,     |
+ ;; | telephone (301) 734-0100.                                     |
+ ;; | The Food and Drug Administration classifies this software as  |
+ ;; | a medical device.  As such, it may not be changed in any way. |
+ ;; | Modifications to this software may result in an adulterated   |
+ ;; | medical device under 21CFR820, the use of which is considered |
+ ;; | to be a violation of US Federal Statutes.                     |
+ ;; +---------------------------------------------------------------+
+ ;;
+ENTRY ; are the M2MB server parameters are set? if not, initialize them
+ ; are the ip address and port number for the M2MB server set?
+ I $G(^MAGDICOM(2006.563,1,"M-to-M BROKER PORT")),$G(^("M-to-M BROKER ADDR"))'="" Q
+ ;
+ N DTIME,HISIPADR,HISPORT,MSG,OK,QUIT,X
+ S MSG(1)="Before you can use the M-to-M Broker version of the DICOM Gateway, you"
+ S MSG(2)="must first specify the IP Address of the main hospital VistA system and"
+ S MSG(3)="the Port number of the M-to-M Broker server.  The port number for the"
+ S MSG(4)="M-to-M Broker is something like 4800."
+ S MSG(5)=""
+ S MSG(6)="Please note that this is different than the port used for the CPRS RPC"
+ S MSG(7)="server, which is typically set to 9x00."
+ S MSG(8)=""
+ S MSG(9)="You will be able to change these values later using the regular ""Gateway"
+ S MSG(10)="Configuration and DICOM Master Files"" menu option."
+ S MSG(11)=""
+ S MSG(12)="The M-to-M Broker server must be running on VistA before you can login."
+ W ! D WARNING^MAGDFCNS(.MSG)
+ S DTIME=300
+ R !!!,"Do you want to set these configuration values now?  y // ",X:DTIME
+ I X="" S X="yes" W X
+ I "Yy"'[$E(X) W " -- not set" Q
+ S HISIPADR="" D HISIPADR^MAGDMFBE I $D(QUIT) Q
+ S HISPORT="" D HISPORT^MAGDMFBE I $D(QUIT) Q
+ S ^MAGDICOM(2006.563,1,"M-to-M BROKER ADDR")=HISIPADR
+ S ^MAGDICOM(2006.563,1,"M-to-M BROKER PORT")=HISPORT
+ K MSG
+ S MSG(1)=""
+ S MSG(2)="You may now login the gateway using your VistA Access and Verify codes."
+ S MSG(3)=""
+ W !! D WARNING^MAGDFCNS(.MSG)
+ R !!,"Please press <Enter> to proceed with the login process...",X:DTIME
+ Q
+ ;
+WELCOME N H,T,X
+ S X=$TR($J("",79)," ","*") W X,!
+ S H="VistA DICOM Interface",T=$G(^MAGDICOM(2006.563,1,"SYSTEM TITLE"))
+ S T=$E(T,1,71) S:$L(H_T)<66 H=H_$J(T,71-$L(H)),T=""
+ D L(H) D:T'="" L(T)
+ D L("")
+ D L("The Food and Drug Administration classifies this software as a medical")
+ D L("device.  Modification of this software may result in an adulterated")
+ D L("medical device, the use of which is considered to be a violation of")
+ D L("US Federal Statutes.  Federal law restricts this device to use by or")
+ D L("on the order of either a licensed practitioner or persons lawfully")
+ D L("engaged in the manufacture, support, or distribution of the product.")
+ D L("")
+ D L("The information in this system is further protected by the Privacy Act")
+ D L("of 1974 (PL93-579).  Unauthorized access to or use of this system is a")
+ D L("serious violation of Federal Law.  Violators will be prosecuted.")
+ D L("")
+ D L("                Use of this software is monitored.")
+ W X,!
+ Q
+ ;
+L(X) W "**  ",X,?77,"**",!
+ Q
+ ;

@@ -1,0 +1,35 @@
+maguMAGDQR21zSET ; test SET entry point of MAGDQR21
+ Q
+test(verblvl) ;
+ N I,L
+ S verblvl=+$G(verblvl) ; verbosity level
+ F I=1:1 Q:'$T(@I)  S L="I(verblvl)" D @L
+ Q
+ ;
+1(verblvl) ; modify an entry, test setting of C and D xrefs
+ N FIL,RIX,HIT,DTA,OLD,NEW,I
+ S verblvl=+$G(verblvl,1) W:verblvl !,"UNIT TEST SERIES 1:",!
+ S FIL=$NA(^MAG(2006.587))
+ S RIX=0,HIT=0
+ F  D  Q:HIT
+ . S RIX=$O(@FIL@(0)) I 'RIX W:verblvl "  COULD NOT PERFORM - NO RECORDS ON FILE",! S HIT=-1 Q
+ . S DTA=$G(@FIL@(RIX,0)) I DTA="" W:verblvl "  COULD NOT PERFORM - NO DATA FOR RECORD #"_RIX,! Q
+ . F I=1:1:7 S DTA(I)=$P(DTA,"^",I)
+ . I DTA(1)'="",DTA(5)'="",DTA(7)'="" S HIT=1 Q
+ . Q
+ I HIT<0 Q
+ S NEWP7=$H*86400+$P($H,",",2)
+ S NEW(1)="6^"_NEWP7
+ S DEST=DTA(1),GATEWAY=DTA(5)
+ D SET^MAGDQR21(.RETURN,.NEW,DEST,GATEWAY)
+ W "  TEST 1A: "
+ W $S('$D(@FIL@("C",DTA(1),DTA(7),DTA(5),RIX)):"SUCCESS",1:"FAILURE"),!
+ W "  TEST 1B: "
+ W $S('$D(@FIL@("D",DTA(5),DTA(7),RIX)):"SUCCESS",1:"FAILURE"),!
+ W "  TEST 1C: "
+ W $S($D(@FIL@("C",DTA(1),NEWP7,DTA(5),RIX)):"SUCCESS",1:"FAILURE"),!
+ W "  TEST 1D: "
+ W $S($D(@FIL@("D",DTA(5),NEWP7,RIX)):"SUCCESS",1:"FAILURE"),!
+ Q
+
+

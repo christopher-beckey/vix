@@ -1,0 +1,292 @@
+KIDS Distribution saved on Aug 01, 2012@17:40:52
+RPC FOR P122
+**KIDS**:ZMAG*3.0*122*RPC2^
+
+**INSTALL NAME**
+ZMAG*3.0*122*RPC2
+"BLD",7643,0)
+ZMAG*3.0*122*RPC2^^0^3120801^n
+"BLD",7643,1,0)
+^^2^2^3110714^
+"BLD",7643,1,1,0)
+MAG *3.0 *122 KID COMPONMENT KID Component
+"BLD",7643,1,2,0)
+VISTA REMOTE PROCEDURE CALL
+"BLD",7643,4,0)
+^9.64PA^^0
+"BLD",7643,6.3)
+7
+"BLD",7643,"INID")
+n^n^n
+"BLD",7643,"KRN",0)
+^9.67PA^779.2^20
+"BLD",7643,"KRN",.4,0)
+.4
+"BLD",7643,"KRN",.401,0)
+.401
+"BLD",7643,"KRN",.402,0)
+.402
+"BLD",7643,"KRN",.403,0)
+.403
+"BLD",7643,"KRN",.5,0)
+.5
+"BLD",7643,"KRN",.84,0)
+.84
+"BLD",7643,"KRN",3.6,0)
+3.6
+"BLD",7643,"KRN",3.8,0)
+3.8
+"BLD",7643,"KRN",9.2,0)
+9.2
+"BLD",7643,"KRN",9.8,0)
+9.8
+"BLD",7643,"KRN",9.8,"NM",0)
+^9.68A^^0
+"BLD",7643,"KRN",19,0)
+19
+"BLD",7643,"KRN",19,"NM",0)
+^9.68A^^0
+"BLD",7643,"KRN",19.1,0)
+19.1
+"BLD",7643,"KRN",101,0)
+101
+"BLD",7643,"KRN",409.61,0)
+409.61
+"BLD",7643,"KRN",771,0)
+771
+"BLD",7643,"KRN",779.2,0)
+779.2
+"BLD",7643,"KRN",870,0)
+870
+"BLD",7643,"KRN",8989.51,0)
+8989.51
+"BLD",7643,"KRN",8989.52,0)
+8989.52
+"BLD",7643,"KRN",8994,0)
+8994
+"BLD",7643,"KRN",8994,"NM",0)
+^9.68A^1^1
+"BLD",7643,"KRN",8994,"NM",1,0)
+MAG ANNOT GET IMAGE DETAIL^^0
+"BLD",7643,"KRN",8994,"NM","B","MAG ANNOT GET IMAGE DETAIL",1)
+
+"BLD",7643,"KRN","B",.4,.4)
+
+"BLD",7643,"KRN","B",.401,.401)
+
+"BLD",7643,"KRN","B",.402,.402)
+
+"BLD",7643,"KRN","B",.403,.403)
+
+"BLD",7643,"KRN","B",.5,.5)
+
+"BLD",7643,"KRN","B",.84,.84)
+
+"BLD",7643,"KRN","B",3.6,3.6)
+
+"BLD",7643,"KRN","B",3.8,3.8)
+
+"BLD",7643,"KRN","B",9.2,9.2)
+
+"BLD",7643,"KRN","B",9.8,9.8)
+
+"BLD",7643,"KRN","B",19,19)
+
+"BLD",7643,"KRN","B",19.1,19.1)
+
+"BLD",7643,"KRN","B",101,101)
+
+"BLD",7643,"KRN","B",409.61,409.61)
+
+"BLD",7643,"KRN","B",771,771)
+
+"BLD",7643,"KRN","B",779.2,779.2)
+
+"BLD",7643,"KRN","B",870,870)
+
+"BLD",7643,"KRN","B",8989.51,8989.51)
+
+"BLD",7643,"KRN","B",8989.52,8989.52)
+
+"BLD",7643,"KRN","B",8994,8994)
+
+"BLD",7643,"QUES",0)
+^9.62^^
+"BLD",7643,"REQB",0)
+^9.611^^
+"KRN",8994,3114,-1)
+0^1
+"KRN",8994,3114,0)
+MAG ANNOT GET IMAGE DETAIL^GETD^MAGSANNO^2^R
+"KRN",8994,3114,1,0)
+^8994.01^27^27^3120801^^^^
+"KRN",8994,3114,1,1,0)
+ Per VHA Directive 2004-038, this should not be modified.
+"KRN",8994,3114,1,2,0)
++---------------------------------------------------------------+
+"KRN",8994,3114,1,3,0)
+| Property of the US Government.                                |
+"KRN",8994,3114,1,4,0)
+| No permission to copy or redistribute this software is given. |
+"KRN",8994,3114,1,5,0)
+| Use of unreleased versions of this software requires the user |
+"KRN",8994,3114,1,6,0)
+| to execute a written test agreement with the VistA Imaging    |
+"KRN",8994,3114,1,7,0)
+| Development Office of the Department of Veterans Affairs,     |
+"KRN",8994,3114,1,8,0)
+| telephone (301) 734-0100.                                     |
+"KRN",8994,3114,1,9,0)
+| The Food and Drug Administration classifies this software as  |
+"KRN",8994,3114,1,10,0)
+| a medical device.  As such, it may not be changed in any way. |
+"KRN",8994,3114,1,11,0)
+| Modifications to this software may result in an adulterated   |
+"KRN",8994,3114,1,12,0)
+| medical device under 21CFR820, the use of which is considered |
+"KRN",8994,3114,1,13,0)
+| to be a violation of US Federal Statutes.                     |
+"KRN",8994,3114,1,14,0)
++---------------------------------------------------------------+
+"KRN",8994,3114,1,15,0)
+RETURNS THE DETAIL OF IMAGE ANNOTATIONS
+"KRN",8994,3114,1,16,0)
+GETD(MAGOUT,MAGIEN,LAYIEN)
+"KRN",8994,3114,1,17,0)
+ ; .MAGOUT       Reference to a local variable where the results are returned to.
+"KRN",8994,3114,1,18,0)
+ ; .MAGIEN       Internal entry number of IMAGE file been annotated
+"KRN",8994,3114,1,19,0)
+ ; .LAYIEN       Internal entry number of ANNOTATION IMAGE LAYER in #2005.002
+"KRN",8994,3114,1,20,0)
+Return Values
+"KRN",8994,3114,1,21,0)
+=============    
+"KRN",8994,3114,1,22,0)
+If MAGOUT(0) is defined and its 1st '^'-piece is 0, then an error
+"KRN",8994,3114,1,23,0)
+occurred during execution of the procedure. 0 ^ 0 ^ error message
+"KRN",8994,3114,1,24,0)
+MAGOUT(0) = 1 ^ total count  lines counter of the returned array
+"KRN",8994,3114,1,25,0)
+MAGOUT(1) = LAYER ID ^ ANNOTATOR ^ SAVED DATE/TIME ^ ANNOTATION VERSION ^ SOURCE ^ DELETION ^ TIU COMPLETION
+"KRN",8994,3114,1,26,0)
+            ^ SERVICE/SECTION  ^ SITE# ^ DUZ
+"KRN",8994,3114,1,27,0)
+MAGOUT(n+1) = XML data line(s)
+"KRN",8994,3114,2,0)
+^8994.02A^2^2
+"KRN",8994,3114,2,1,0)
+MAGIEN^1^30^1^1
+"KRN",8994,3114,2,1,1,0)
+^^1^1^3110705^
+"KRN",8994,3114,2,1,1,1,0)
+Internal entry number of IMAGE file been annotated (#2005)
+"KRN",8994,3114,2,2,0)
+LAYIEN^1^10^^2
+"KRN",8994,3114,2,2,1,0)
+^8994.021^1^1^3111017^^^
+"KRN",8994,3114,2,2,1,1,0)
+Internal entry number of ANNOTATION IMAGE LAYER in #2005.002 saved layer(s)
+"KRN",8994,3114,2,"B","LAYIEN",2)
+
+"KRN",8994,3114,2,"B","MAGIEN",1)
+
+"KRN",8994,3114,2,"PARAMSEQ",1,1)
+
+"KRN",8994,3114,2,"PARAMSEQ",2,2)
+
+"KRN",8994,3114,3,0)
+^8994.03^6^6^3111017^^^
+"KRN",8994,3114,3,1,0)
+If returned MAGOUT(0) is defined and its 1st '^'-piece is 0, then an error
+"KRN",8994,3114,3,2,0)
+has occurred during execution of the procedure.
+"KRN",8994,3114,3,3,0)
+MAGOUT(0) = 1 ^ CNT   ; lines counter of the returned array
+"KRN",8994,3114,3,4,0)
+            0 ^ ERROR ; error message
+"KRN",8994,3114,3,5,0)
+MAGOUT(1) = LAYER ID ^ ANNOTATOR ^ SAVED DATE/TIME ^ ANNOTATION VERSION ^ SOURCE ^ DELETION ^ TIU RESULTED ^ ANNOATOR SERVICE ^ SITE id# ^ DUZ
+"KRN",8994,3114,3,6,0)
+MAGOUT(n+1) = XML data line(s)
+"MBREQ")
+0
+"ORD",16,8994)
+8994;16;1;;;;;;;RPCDEL^XPDIA1
+"ORD",16,8994,0)
+REMOTE PROCEDURE
+"QUES","XPF1",0)
+Y
+"QUES","XPF1","??")
+^D REP^XPDH
+"QUES","XPF1","A")
+Shall I write over your |FLAG| File
+"QUES","XPF1","B")
+YES
+"QUES","XPF1","M")
+D XPF1^XPDIQ
+"QUES","XPF2",0)
+Y
+"QUES","XPF2","??")
+^D DTA^XPDH
+"QUES","XPF2","A")
+Want my data |FLAG| yours
+"QUES","XPF2","B")
+YES
+"QUES","XPF2","M")
+D XPF2^XPDIQ
+"QUES","XPI1",0)
+YO
+"QUES","XPI1","??")
+^D INHIBIT^XPDH
+"QUES","XPI1","A")
+Want KIDS to INHIBIT LOGONs during the install
+"QUES","XPI1","B")
+NO
+"QUES","XPI1","M")
+D XPI1^XPDIQ
+"QUES","XPM1",0)
+PO^VA(200,:EM
+"QUES","XPM1","??")
+^D MG^XPDH
+"QUES","XPM1","A")
+Enter the Coordinator for Mail Group '|FLAG|'
+"QUES","XPM1","B")
+
+"QUES","XPM1","M")
+D XPM1^XPDIQ
+"QUES","XPO1",0)
+Y
+"QUES","XPO1","??")
+^D MENU^XPDH
+"QUES","XPO1","A")
+Want KIDS to Rebuild Menu Trees Upon Completion of Install
+"QUES","XPO1","B")
+NO
+"QUES","XPO1","M")
+D XPO1^XPDIQ
+"QUES","XPZ1",0)
+Y
+"QUES","XPZ1","??")
+^D OPT^XPDH
+"QUES","XPZ1","A")
+Want to DISABLE Scheduled Options, Menu Options, and Protocols
+"QUES","XPZ1","B")
+NO
+"QUES","XPZ1","M")
+D XPZ1^XPDIQ
+"QUES","XPZ2",0)
+Y
+"QUES","XPZ2","??")
+^D RTN^XPDH
+"QUES","XPZ2","A")
+Want to MOVE routines to other CPUs
+"QUES","XPZ2","B")
+NO
+"QUES","XPZ2","M")
+D XPZ2^XPDIQ
+"VER")
+8.0^22.0
+**END**
+**END**

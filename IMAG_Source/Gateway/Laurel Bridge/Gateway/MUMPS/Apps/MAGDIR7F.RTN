@@ -1,0 +1,124 @@
+MAGDIR7F ;WOIFO/PMK - Translate SNOMED Tooth Designation to Number ; 06/06/2005  08:30
+ ;;3.0;IMAGING;**11,51**;MAR 19, 2002;;JUN 16, 2006
+ ;; Per VHA Directive 2004-038, this routine should not be modified.
+ ;; +---------------------------------------------------------------+
+ ;; | Property of the US Government.                                |
+ ;; | No permission to copy or redistribute this software is given. |
+ ;; | Use of unreleased versions of this software requires the user |
+ ;; | to execute a written test agreement with the VistA Imaging    |
+ ;; | Development Office of the Department of Veterans Affairs,     |
+ ;; | telephone (301) 734-0100.                                     |
+ ;; | The Food and Drug Administration classifies this software as  |
+ ;; | a medical device.  As such, it may not be changed in any way. |
+ ;; | Modifications to this software may result in an adulterated   |
+ ;; | medical device under 21CFR820, the use of which is considered |
+ ;; | to be a violation of US Federal Statutes.                     |
+ ;; +---------------------------------------------------------------+
+ ;;
+ ;
+ENTRY() ; entry point from ^MAGDIR6C to create the image name from the
+ ; intra-oral tooth data.
+ N CODE,DONE,ERR,I,IMAGNAME,LIST,MEANING,N,SCHEME,SEQNUMB,SEQUENCE,X
+ S ERR=0
+ D SEQINIT^MAGDFCNS
+ D SEQPUSH^MAGDFCNS("0008,2218") ; Anatomic Region Sequence
+ S CODE=$$GETDATA^MAGDFCNS("IN","0008,0100") ; code value
+ S SCHEME=$$GETDATA^MAGDFCNS("IN","0008,0102") ; coding scheme
+ S MEANING=$$GETDATA^MAGDFCNS("IN","0008,0104") ; code meaning
+ D SEQPOP^MAGDFCNS ; end Anatomic Region Sequence
+ ;
+ D SEQPUSH^MAGDFCNS("0008,2228") ; Primary Anatomical Structure Sequence
+ S DONE=0 F I=1:1 D  Q:DONE
+ . S CODE=$$GETDATA^MAGDFCNS("IN","0008,0100") ; code value
+ . I CODE="" S DONE=1 Q
+ . S SCHEME=$$GETDATA^MAGDFCNS("IN","0008,0102") ; coding scheme
+ . S MEANING=$$GETDATA^MAGDFCNS("IN","0008,0104") ; code meaning
+ . S X=$$TOOTH(CODE)
+ . I X'="" S LIST(I)="1^"_X
+ . E  S LIST(I)="0^"_MEANING
+ . D SEQINC^MAGDFCNS
+ . Q
+ D SEQPOP^MAGDFCNS ; end Primary Anatomical Structure Sequence
+ S N=I-1
+ ;
+ I N=1 D
+ . I LIST(1) S IMAGNAME="TOOTH #"_$P(LIST(1),";",2)
+ . E  S IMAGNAME=LIST(1) ; not know code
+ . Q
+ E  D
+ . F I=1:1:N D
+ . . I LIST(I) D  ; known code
+ . . . S IMAGNAME=$S(I=1:"TEETH ",1:IMAGNAME_", ")
+ . . . S IMAGNAME=IMAGNAME_"#"_$P(LIST(I),";",2)
+ . . . Q
+ . . E  D  ; unknown code
+ . . . S IMAGNAME=$S(I=1:LIST(I),1:IMAGNAME_", "_LIST(I))
+ . . . Q
+ . . Q
+ . Q
+ I 'ERR,$D(IMAGNAME) Q IMAGNAME
+ Q ""
+ ;
+TOOTH(SNOMED) ; translate SNOMED to ADA tooth number/letter
+ N X
+ S SNOMED=$TR(SNOMED,"-","")
+ I SNOMED'?1"T54".3N S ERR=ERR+1 Q "" ; illegal SNOMED code
+ S X=$T(@SNOMED)
+ Q $P(X,";;",2)
+ ;
+ ; Permanent Teeth
+T54210 ;;Maxillary right third molar;1
+T54220 ;;Maxillary right second molar;2
+T54230 ;;Maxillary right first molar;3
+T54240 ;;Maxillary right second premolar;4
+T54250 ;;Maxillary right first premolar;5
+T54260 ;;Maxillary right canine;6
+T54270 ;;Maxillary right lateral incisor;7
+T54280 ;;Maxillary right central incisor;8
+T54290 ;;Maxillary left central incisor;9
+T54300 ;;Maxillary left lateral incisor;10
+T54310 ;;Maxillary left canine;11
+T54320 ;;Maxillary left first premolar;12
+T54330 ;;Maxillary left second premolar;13
+T54340 ;;Maxillary left first molar;14
+T54350 ;;Maxillary left second molar;15
+T54360 ;;Maxillary left third molar;16
+T54370 ;;Mandibular left third molar;17
+T54380 ;;Mandibular left second molar;18
+T54390 ;;Mandibular left first molar;19
+T54400 ;;Mandibular left second premolar;20
+T54410 ;;Mandibular left first premolar;21
+T54420 ;;Mandibular left canine;22
+T54430 ;;Mandibular left lateral;23
+T54440 ;;Mandibular left central incisor;24
+T54450 ;;Mandibular right central incisor;25
+T54460 ;;Mandibular right lateral incisor;26
+T54470 ;;Mandibular right canine;27
+T54480 ;;Mandibular right first premolar;28
+T54490 ;;Mandibular right second premolar;29
+T54500 ;;Mandibular right first molar;30
+T54510 ;;Mandibular right second molar;31
+T54520 ;;Mandibular right third molar;32
+ ;
+ ; Primary (baby) Teeth
+T54650 ;;Maxillary right second primary molar;A
+T54640 ;;Maxillary right first primary molar;B
+T54630 ;;Maxillary right primary cuspid;C
+T54620 ;;Maxillary right primary lateral incisor;D
+T54610 ;;Maxillary right primary central incisor;E
+T54660 ;;Maxillary left primary central incisor;F
+T54670 ;;Maxillary left primary lateral incisor;G
+T54680 ;;Maxillary left primary cuspid;H
+T54690 ;;Maxillary left primary first molar;I
+T54700 ;;Maxillary left primary second molar;J
+T54800 ;;Mandibular left primary second molar;K
+T54790 ;;Mandibular left primary first molar;L
+T54780 ;;Mandibular left primary cuspid;M
+T54770 ;;Mandibular left primary lateral incisor;N
+T54760 ;;Mandibular left primary central incisor;O
+T54710 ;;Mandibular right primary central incisor;P
+T54720 ;;Mandibular right primary lateral incisor;Q
+T54730 ;;Mandibular right primary cuspid;R
+T54740 ;;Mandibular right primary first molar;S
+T54750 ;;Mandibular right primary second molar;T
+ ;

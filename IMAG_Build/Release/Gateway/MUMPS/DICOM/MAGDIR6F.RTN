@@ -1,0 +1,92 @@
+MAGDIR6F ;WOIFO/PMK - Read a DICOM image file ; 05/04/2007 09:44
+ ;;3.0;IMAGING;**11,30,51,54**;MAR 19, 2002;;OCT 28, 2009
+ ;; Per VHA Directive 2004-038, this routine should not be modified.
+ ;; +---------------------------------------------------------------+
+ ;; | Property of the US Government.                                |
+ ;; | No permission to copy or redistribute this software is given. |
+ ;; | Use of unreleased versions of this software requires the user |
+ ;; | to execute a written test agreement with the VistA Imaging    |
+ ;; | Development Office of the Department of Veterans Affairs,     |
+ ;; | telephone (301) 734-0100.                                     |
+ ;; | The Food and Drug Administration classifies this software as  |
+ ;; | a medical device.  As such, it may not be changed in any way. |
+ ;; | Modifications to this software may result in an adulterated   |
+ ;; | medical device under 21CFR820, the use of which is considered |
+ ;; | to be a violation of US Federal Statutes.                     |
+ ;; +---------------------------------------------------------------+
+ ;;
+ Q
+ ;  This routine is invoked by ^MAGDIR
+SIZECHK() ; compute the size of the file and check it for completeness
+ N BITALLOC ;- number of bits allocated to a pixel
+ N BITSUSED ;- maximum number of bits actually used for a pixel
+ N COLUMNS ;-- number of columns in image, ie, the X-dimension
+ N FRAMESIZ ;- size of one image frame in a multi-frame image object
+ N LENGTH ;--- length of image object
+ N NFRAME ;--- number of image frames in a multi-frame image object
+ N PIXBYTES ;- number of bytes in a pixel value
+ N PIXDATAL ;- pixel data length
+ N PIXSAMPL ;- samples per pixel (typically 1 for xray, 3 for color)
+ N OFFSET ;--- byte offset to the beginning of the image in the file
+ N RETURN ;--- return value (0 = failure, 1 = success)
+ N ROWS ;----- number of rows in image, ie, the Y-dimension
+ ;
+ S RETURN=1 ; success
+ S LENGTH=+$P($$GETDATA^MAGDFCNS(INODE,"7FE0,0010",1,2),"length=",2)
+ I LENGTH,LENGTH'=4294967295 D  ; skip check, no image or compressed one
+ . N FULLSIZE ;- Size of complete file
+ . S PIXSAMPL=$$GETDATA^MAGDFCNS(INODE,"0028,0002")
+ . S ROWS=$$GETDATA^MAGDFCNS(INODE,"0028,0010")
+ . S COLUMNS=$$GETDATA^MAGDFCNS(INODE,"0028,0011")
+ . S BITALLOC=$$GETDATA^MAGDFCNS(INODE,"0028,0100") ; bits allocated
+ . S PIXBYTES=BITALLOC+7\8 ; number of bytes in a pixel
+ . S OFFSET=+$P($$GETDATA^MAGDFCNS(INODE,"7FE0,0010",1,3),"offset=",2)
+ . S FRAMESIZ=ROWS*COLUMNS*PIXBYTES*PIXSAMPL
+ . S NFRAME=$$GETDATA^MAGDFCNS(INODE,"0028,0008") ; number of frames
+ . I NFRAME="" S NFRAME=1 ; default is one frame per image file
+ . S PIXDATAL=FRAMESIZ*NFRAME
+ . I PIXDATAL#2 S PIXDATAL=PIXDATAL+1 ; add one for odd # pixel images
+ . S FULLSIZE=OFFSET+PIXDATAL
+ . I LENGTH<PIXDATAL D
+ . . N MSG
+ . . S MSG(2)="Calculated length of pixel data was "_PIXDATAL_" bytes."
+ . . S MSG(3)="Actual length of pixel data was "_LENGTH_" bytes."
+ . . D SIZECHK1
+ . . Q
+ . E  I FILESIZE<FULLSIZE D
+ . . N MSG
+ . . S MSG(2)="Calculated length of image file was "_FULLSIZE_" bytes."
+ . . S MSG(3)="Actual length of image file was "_FILESIZE_" bytes."
+ . . D SIZECHK1
+ . . Q
+ . Q
+ Q RETURN ; success
+ ;
+SIZECHK1 ; format error message
+ N FILE
+ S FILE=FROMPATH_"_problem image"
+ S MSG(1)="Processing of Image """_FROMPATH_""" failed."
+ S MSG(4)="File has been renamed """_FILE_"""."
+ D TRAPERR^MAGDSTRT(-1,$T(+0),"DICOM Image Processing Error",.MSG,1)
+ I $$RENAME^MAGOSDIR(FROMPATH,FILE)<0 D
+ . N MSG
+ . S MSG(1)="Renaming """_FROMPATH_""" to """_FILE_" failed."
+ . D WARNING^MAGDFCNS(.MSG)
+ . Q
+ D LOG^MAGDIR6F("Problem Image File")    ; log the problem image
+ S RETURN=0 ; length of image pixel data or file is incorrect
+ Q
+ ;
+LOG(REASON) ; Error log file.
+ N D0,NOW,X
+ L +^MAGDINPT(2006.5719,0):1E9
+ S X=$G(^MAGDINPT(2006.5719,0))
+ S $P(X,"^",1,2)="DICOM ERROR LOG^2006.5719"
+ S $P(X,"^",3)=$P(X,"^",3)+1,D0=$P(X,"^",3)
+ S $P(X,"^",4)=$P(X,"^",4)+1
+ S ^MAGDINPT(2006.5719,0)=X
+ S NOW=$$NOW^XLFDT()
+ S ^MAGDINPT(2006.5719,D0,0)=NOW_"^"_$G(REASON)_"^"_FROMPATH_"^"_INSTNAME
+ S ^MAGDINPT(2006.5719,"B",NOW,D0)=""
+ L -^MAGDINPT(2006.5719,0)
+ Q

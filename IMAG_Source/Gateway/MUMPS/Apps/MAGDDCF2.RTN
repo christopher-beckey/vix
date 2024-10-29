@@ -1,0 +1,183 @@
+Cache for Windows NT^INT^Saved from DICOM,DICOM (ISW-KUZMAKP3-LT)^~Format=Cache.S~
+%RO on 12/19/2012  12:40
+MAGDDCF2^INT^1^62810,45592^0
+MAGDDCF2 ;WOIFO/PMK - Program to invoke Laurel Bridge DCF routine via System Call ; 19 Dec 2012 12:39 PM
+ ;;3.0;IMAGING;**110**;Mar 19, 2002;Build 61;Oct 10, 2012
+ ;; Per VHA Directive 2004-038, this routine should not be modified.
+ ;; +---------------------------------------------------------------+
+ ;; | Property of the US Government.                                |
+ ;; | No permission to copy or redistribute this software is given. |
+ ;; | Use of unreleased versions of this software requires the user |
+ ;; | to execute a written test agreement with the VistA Imaging    |
+ ;; | Development Office of the Department of Veterans Affairs,     |
+ ;; | telephone (301) 734-0100.                                     |
+ ;; | The Food and Drug Administration classifies this software as  |
+ ;; | a medical device.  As such, it may not be changed in any way. |
+ ;; | Modifications to this software may result in an adulterated   |
+ ;; | medical device under 21CFR820, the use of which is considered |
+ ;; | to be a violation of US Federal Statutes.                     |
+ ;; +---------------------------------------------------------------+
+ ;;
+ Q
+ ;
+INITCFG(CFGFILE,APPIEN,TSYNTAX,OBJECTCOUNT) ; initialize configuration file
+ N CALLED ;------ called application entity title, i.e., the "listener"
+ N CALLING ;----- calling application entity title, i.e., the "initiator"
+ N DESTINATION ;- network address of Storage SCP 
+ N PORT ;-------- TCP/IP port number on which the SCP will listen
+ N STATUS,X
+ ;
+ S X=^MAGDICOM(2006.585,APPIEN,0)
+ S CALLED=$P(X,"^",2),CALLING=$P(X,"^",3)
+ S DESTINATION=$P(X,"^",4),PORT=$P(X,"^",5)
+ ;
+ S STATUS=$$OPEN^MAGOSFIL(CFGFILE,"W")
+ S STATUS=$$USE^MAGOSFIL(CFGFILE)
+ W:COMMENTS "# Store Job Description Configuration File",!
+ W:COMMENTS !
+ W "[ store_job_description ]",!
+ W:COMMENTS "#",!
+ W:COMMENTS "# Address of server - either a name that can be looked up in",!
+ W:COMMENTS "# $DCF_CFG/dicom/network/ae_title_mappings to find host/port/called-title",!
+ W:COMMENTS "# or a string containing <host>:<port>:<called_ae_title>",!
+ W:COMMENTS "#",!
+ W "server_address = ",DESTINATION,":",PORT,":",CALLED,!
+ W:COMMENTS !
+ W:COMMENTS "#",!
+ W:COMMENTS "# maps to calling-ae-title",!
+ W:COMMENTS "#",!
+ W "client_address = ",CALLING,!
+ W:COMMENTS !
+ W:COMMENTS "#",!
+ W:COMMENTS "# transfer syntax to request. If this is missing, default is UID_TRANSFERLITTLEENDIAN",!
+ W:COMMENTS "#",!
+ W "association_ts_uid = ",TSYNTAX,!
+ W:COMMENTS !
+ W:COMMENTS "#",!
+ W:COMMENTS "# seconds to wait between queueing a C-Store-Request message for sending, and",!
+ W:COMMENTS "# receiving a C-Store-Response. Note that for large images, much of this",!
+ W:COMMENTS "# time is spent sending the request.",!
+ W:COMMENTS "#",!
+ W "response_timeout_seconds = 180",!
+ W:COMMENTS !
+ W:COMMENTS "# This attribute is currently required but is not used. Set to 0.",!
+ W "request_commit = 0",!
+ W:COMMENTS !
+ W:COMMENTS "# This attribute is currently required but is not used. Set to 0.",!
+ W "continue_on_error = 0",!
+ W:COMMENTS !
+ W:COMMENTS "# set this to true (or 1 or yes) if you want the dcf_store_scu to strip",!
+ W:COMMENTS "# all group 0002 elements from data sets before they are",!
+ W:COMMENTS "# sent as part of C-Store-Request DIMSE messages",!
+ W "remove_group_2_elements = 1",!
+ W:COMMENTS "#",!
+ W:COMMENTS "# The number of SOP instances that are to be sent to the SCP.",!
+ W:COMMENTS "# Each SOP instance <n> will be specified in a sub-group named ""object_info_<n>""",!
+ W:COMMENTS "#",!
+ W "object_count = ",OBJECTCOUNT,!
+ I $$USEPRIN^MAGOSFIL(1) ; switch to the principal device
+ Q
+ ;
+BUILDCFG(CFGFILE,TSYNTAX,I,OBJECTNUMBER) ; build configuration file
+ N FILTERNUMBER,J,STATUS
+ S STATUS=$$USE^MAGOSFIL(CFGFILE)
+ W:COMMENTS !
+ W "################################### Object ",OBJECTNUMBER," ###################################",!
+ W:COMMENTS !
+ W "[ store_job_description/object_info_",OBJECTNUMBER," ]",!
+ W:COMMENTS "#",!
+ W:COMMENTS "# filename of object (unless a custom DDS adapter redefines the meaning of this)",!
+ W:COMMENTS "#",!
+ W "persistent_id = ",$G(^TMP("MAG",$J,"DCF_STORE_SCU",I,"FILE")),!
+ W:COMMENTS !
+ W:COMMENTS "#",!
+ W:COMMENTS "# encoding (transfer syntax uid) of object",!
+ W:COMMENTS "# (unless a custom DDS adapter redefines the meaning of this).",!
+ W:COMMENTS "# Leave this field blank (i.e. no text after ""="")  for auto-detect,",!
+ W:COMMENTS "# or chapter-10 files.",!
+ W:COMMENTS "#",!
+ W "persistent_info =",!
+ ;
+ S FILTERNUMBER=0
+ I $G(^TMP("MAG",$J,"DCF_STORE_SCU",I,"REPLACE",0)) D
+ . S FILTERNUMBER=FILTERNUMBER+1
+ . W:COMMENTS "#",!
+ . W:COMMENTS "# optional group defining filters to be applied to this object as it is",!
+ . W:COMMENTS "# read from mass storage, prior to sending.",!
+ . W:COMMENTS "#",!
+ . W "[ store_job_description/object_info_",OBJECTNUMBER,"/filter_config ]",!
+ . W:COMMENTS !
+ . W "[ store_job_description/object_info_",OBJECTNUMBER,"/filter_config/",FILTERNUMBER," ]",!
+ . W "filter_type = DICOM_ELEMENT_FILTER",!
+ . W:COMMENTS !
+ . W "[ store_job_description/object_info_",OBJECTNUMBER,"/filter_config/",FILTERNUMBER,"/elements_to_replace ]",!
+ . F J=1:1:^TMP("MAG",$J,"DCF_STORE_SCU",I,"REPLACE",0) W ^(J),!
+ . W:COMMENTS "# end of modifications",!
+ . Q
+ ;
+ I $G(^TMP("MAG",$J,"DCF_STORE_SCU",I,"REMOVE",0)) D
+ . S FILTERNUMBER=FILTERNUMBER+1
+ . W:COMMENTS "#",!
+ . W:COMMENTS "# optional group defining filters to be applied to this object as it is",!
+ . W:COMMENTS "# read from mass storage, prior to sending.",!
+ . W:COMMENTS "#",!
+ . W:FILTERNUMBER=1 "[ store_job_description/object_info_",OBJECTNUMBER,"/filter_config ]",!
+ . W:COMMENTS !
+ . W "[ store_job_description/object_info_",OBJECTNUMBER,"/filter_config/",FILTERNUMBER," ]",!
+ . W "filter_type = DICOM_ELEMENT_FILTER",!
+ . W:COMMENTS !
+ . W "[ store_job_description/object_info_",OBJECTNUMBER,"/filter_config/",FILTERNUMBER,"/elements_to_remove ]",!
+ . F J=1:1:^TMP("MAG",$J,"DCF_STORE_SCU",I,"REMOVE",0) W ^(J),!
+ . W:COMMENTS "# end of modifications",!
+ . Q
+ ;
+ W:COMMENTS !
+ I $$USEPRIN^MAGOSFIL(1) ; switch to the principal device
+ Q
+ ;
+CLOSECFG(CFGFILE) ; close configuration file
+ N STATUS
+ S STATUS=$$USE^MAGOSFIL(CFGFILE)
+ W "################################## End of File ##################################",!!
+ S STATUS=$$CLOSE^MAGOSFIL(CFGFILE)
+ I $$USEPRIN^MAGOSFIL(1) ; switch to the principal device
+ Q
+ ;
+PCONTEXT() ; sort the DICOM objects by presentation context
+ N ERROR ;---- error status
+ N FILE ;----- name of the DICOM file to be transmitted
+ N FILEDCM ;-- path to DICOM object
+ N FILESIZE ;- size of the DICOM file to be transmitted (in bytes)
+ N INODE ;---- input node for DICOM header information stored in ^TMP
+ N QUEUEIN ;-- input file array
+ N SOPCLASS ;- SOP Class of the DICOM file (from Part-10 header)
+ N TSYNTAX ;-- transfer syntax of the DICOM file (from Part-10 header)
+ N I,ODEVNAME,ODEVTYPE,X
+ ;
+ S ERROR=""
+ F I=1:1:$G(^TMP("MAG",$J,"DCF_STORE_SCU",0)) D  Q:ERROR'=""
+ . S FILEDCM=$G(^TMP("MAG",$J,"DCF_STORE_SCU",I,"FILE"))
+ . S FILE=$RE($P($RE(FILEDCM),"\"))
+ . S X=$$GETDIR^MAGOSDIR(FILEDCM)
+ . I 'X S ERROR="-11, "_FILEDCM_" is not on file" Q
+ . I X<0 S ERROR="-12, "_FILEDCM_" directory file error: "_X Q
+ . S FILESIZE=$P($G(^TMP("MAG",$J,"DIR LIST",FILE)),";")
+ . I 'FILESIZE S ERROR="-13, "_FILEDCM_ " is a zero-length_file" Q
+ . ;
+ . ; FBSWITCH - foreground / midground / background flag for ^MAGDMLOG
+ . I '$D(FBSWITCH) N FBSWITCH S FBSWITCH="FOREGROUND"
+ . ;
+ . S QUEUEIN("FILE")=FILEDCM,(ODEVNAME,ODEVTYPE)="",INODE="IN"
+ . D PART10^MAGDDR2 ; read just the part-10 of the header
+ . S SOPCLASS=$$GETDATA^MAGDFCNS("IN","0002,0002")
+ . S TSYNTAX=$$GETDATA^MAGDFCNS("IN","0002,0010")
+ . ;
+ . ; if there was no part-10 header, then get them elsewhere
+ . I SOPCLASS="" S SOPCLASS="UNKNOWN"
+ . I TSYNTAX="" S TSYNTAX=$$GETUID^MAGDUID1("Implicit VR Little Endian")
+ . S ^TMP("MAG",$J,"DCF_STORE_SCU","PRESENTATION CONTEXT",SOPCLASS,TSYNTAX,I)=""
+ . Q
+ Q ERROR
+
+
+

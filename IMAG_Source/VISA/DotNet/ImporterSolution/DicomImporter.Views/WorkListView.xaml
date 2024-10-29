@@ -1,0 +1,222 @@
+﻿<Views:BaseImagingView x:Class="DicomImporter.Views.WorkListView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:Views="clr-namespace:ImagingClient.Infrastructure.Views;assembly=ImagingClient.Infrastructure" 
+             xmlns:Converters="clr-namespace:ImagingClient.Infrastructure.Converters;assembly=ImagingClient.Infrastructure" mc:Ignorable="d" 
+             xmlns:ImporterViews="clr-namespace:DicomImporter.Views"
+             Loaded="ScrollSelectedItemIntoView"
+             d:DesignHeight="382" d:DesignWidth="1000">
+
+    <UserControl.Resources>
+        <Converters:BoolToOppositeBoolConverter x:Key="BoolToOppositeBoolConverter" />
+        <Converters:StringToVisibilityConverter x:Key="StringToVisibilityConverter" />
+    </UserControl.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <Label Content="DICOM Import List"
+            Grid.Row="0"
+            Style="{DynamicResource ResourceKey=SectionTitle}" />
+
+        <StackPanel Grid.Row="1">
+            <ImporterViews:ImporterMessagesView x:Name="ImporterMessages" 
+                                  DataContext="{Binding ImporterMessagesViewModel}" />
+        </StackPanel>
+
+        <GroupBox Header="Filters" 
+                  Name="groupBox1" 
+                  VerticalAlignment="Top" 
+                  Grid.Row="2">
+
+            <StackPanel Orientation="Vertical">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+
+                    <Grid Grid.Column="0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <Label Grid.Row ="0" Grid.Column="0" Content="Item Type:" HorizontalAlignment="Left" />
+                        <ComboBox Grid.Row ="0" Grid.Column="1" 
+                                  VerticalAlignment="Top" 
+                                  Name="cboWorkItemTypes" 
+                                  SelectedIndex="0"
+                                  ItemsSource="{Binding Path=WorkItemSubtypes}" 
+                                  DisplayMemberPath="Value" 
+                                  SelectedItem="{Binding Path=WorkItemSubtypeFilter, Mode=TwoWay}" 
+                                  SelectedValuePath="Code" />
+
+                        <Label Grid.Row ="0" Grid.Column="2" Content="Source:" />
+                        <ComboBox Grid.Row ="0" Grid.Column="3" 
+                                  VerticalAlignment="Top" 
+                                  Name="cboSources" 
+                                  SelectedIndex="0" 
+                                  ItemsSource="{Binding Path=Sources}" 
+                                  SelectedItem="{Binding Path=SourceFilter, Mode=TwoWay}" />
+
+                        <Label Grid.Row ="0" Grid.Column="4" Content="Patient Name:" />
+                        <TextBox Grid.Row ="0" Grid.Column="5"  
+                                 VerticalAlignment="Top" 
+                                 Name="txtPatientName" 
+                                 Text="{Binding PatientNameFilter}" />
+
+                        <Label Grid.Row ="1" Grid.Column="0" Content="Service:" HorizontalAlignment="Left" />
+                        <ComboBox Grid.Row ="1" Grid.Column="1" 
+                                  VerticalAlignment="Top" 
+                                  Name="cboWorkItemServices" 
+                                  SelectedIndex="0"
+                                  ItemsSource="{Binding Path=Services}" 
+                                  SelectedItem="{Binding Path=ServiceFilter, Mode=TwoWay}" />
+
+                        <Label Grid.Row ="1" Grid.Column="2" Content="Modality:" HorizontalAlignment="Left" />
+                        <ComboBox Grid.Row ="1" Grid.Column="3" 
+                                  VerticalAlignment="Top" 
+                                  Name="cboWorkItemModality" 
+                                  SelectedIndex="0"
+                                  ItemsSource="{Binding Path=Modalities}" 
+                                  SelectedItem="{Binding Path=ModalityFilter, Mode=TwoWay}" />
+
+                        <Label Grid.Row ="1" Grid.Column="4" Content="Procedure:" HorizontalAlignment="Left" />
+                        <ComboBox Grid.Row ="1" Grid.Column="5" 
+                                  VerticalAlignment="Top" 
+                                  Name="cboWorkItemProcedure" 
+                                  SelectedIndex="0"
+                                  ItemsSource="{Binding Path=Procedures}" 
+                                  SelectedItem="{Binding Path=ProcedureFilter, Mode=TwoWay}" />
+                    </Grid>
+
+                    <Grid Grid.Column="1">
+                        <StackPanel Orientation="Vertical" Margin="5">
+                            <RadioButton Content="Show New Work Items" 
+                                            IsChecked="{Binding Path=ShowNewWorkItems}" />
+                            <RadioButton Content="Show Processed Work Items &#x0a; with Remaining Studies" 
+                                            />
+                        </StackPanel>
+                    </Grid>
+
+                </Grid>
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1.7*" />
+                        <ColumnDefinition Width="3.5*" />
+                        <ColumnDefinition Width="1*" />
+                        <ColumnDefinition Width="1.7*" />
+                    </Grid.ColumnDefinitions>
+
+                    <StackPanel Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Left">
+                        <RadioButton Content="Newer to Older" 
+                                            IsChecked="{Binding Path=NewerToOlder}" />
+                        <RadioButton Content="Older to Newer" 
+                                            IsChecked="{Binding Path=OlderToNewer}" />
+                    </StackPanel>
+
+                    <Views:DateRangeUserControl Grid.Column="1" 
+                           FromDate="{Binding FromDateFilter, Mode=TwoWay}"
+                           ToDate="{Binding ToDateFilter, Mode=TwoWay}"
+                           SelectedDateDropDown="{Binding DateTypeFilter, Mode=TwoWay}" 
+                           Height="28" Margin="5.6,0,6.4,0" 
+                           VerticalAlignment="Bottom" />
+
+                    <StackPanel Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Left">
+                        <Label Content="Rows:" HorizontalAlignment="Left" />
+                        <ComboBox Name="cboMaxRows" 
+                                  SelectedIndex="0"
+                                  ItemsSource="{Binding Path=MaxRows}" 
+                                  SelectedItem="{Binding Path=MaxRowSelected, Mode=TwoWay}" Margin="3,3,3,2.8" Width="58" />
+                    </StackPanel>
+
+                    <StackPanel Grid.Column="3" Orientation="Horizontal" HorizontalAlignment="Right">
+                        <Button Content="Apply Filter" 
+								    Name="button1" 
+								    HorizontalAlignment="Right" 
+								    Command="{Binding ApplyFilterCommand}"/>
+                        <Button Content="Reset Filter" 
+								    Name="btnResetFilter" 
+								    HorizontalAlignment="Right" 
+								    Command="{Binding ResetFilterCommand}"/>
+                        <Button Content="Save Filter" 
+								    Name="btnSaveFilter" 
+								    HorizontalAlignment="Right" 
+								    Command="{Binding SaveFilterCommand}"/>
+                    </StackPanel>
+                </Grid>
+            </StackPanel>
+        </GroupBox>
+
+        <DataGrid Grid.Row="3" 
+                    ItemsSource="{Binding Path=WorkItems}"
+                    SelectedItem="{Binding Path=SelectedWorkItem, Mode=TwoWay}"
+                    Name="dgWorkItems"
+                    EnableRowVirtualization="True" 
+                    EnableColumnVirtualization="True"
+                    SelectionMode="Single"
+                    VirtualizingStackPanel.IsVirtualizing="True"
+                    VirtualizingStackPanel.VirtualizationMode="Recycling">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="ID" Binding="{Binding Path=Id}"/>
+                <DataGridTextColumn Header="Type" Binding="{Binding Path=Subtype}" Width="*"/>
+                <DataGridTextColumn Header="Origin" Binding="{Binding Path=OriginIndexDescription, Mode=OneWay}" Width="*"/>
+                <DataGridTextColumn Header="Source" Binding="{Binding Path=Source}" Width="*"/>
+                <DataGridTextColumn Header="Service" Binding="{Binding Path=Service}" Width="*"/>
+                <DataGridTextColumn Header="Modality" Binding="{Binding Path=Modality}" Width="*"/>
+                <DataGridTextColumn Header="Procedure" Binding="{Binding Path=Procedure}" Width="*"/>
+                <DataGridTextColumn Header="Patient Name" Binding="{Binding Path=PatientName}" Width="*"/>
+                <DataGridTextColumn Header="Status" Binding="{Binding Path=Status}" Width="*"/>
+                <DataGridTextColumn Header="Created Date" Binding="{Binding Path=CreatedDate}" Width="*"/>
+                <DataGridTextColumn Header="Created By" Binding="{Binding Path=CreatedBy}" Width="*"/>
+                <DataGridTextColumn Header="Media Type" Binding="{Binding Path=MediaCategory.Category}" Width="*"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Grid Grid.Row="4">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Grid.Row="0">
+                <Button Name="btnUpdateService" Content="Update Service" 
+                    HorizontalAlignment="Right" 
+                    Command="{Binding UpdateServiceCommand}"  />
+                <Label Content="{Binding TotalRows}" Margin="200,0,250,0"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Row="1">
+                <Button Name="btnReturnHome" 
+                    Content="Return to Importer Home" 
+                    HorizontalAlignment="Right" 
+                    Command="{Binding NavigateToImporterHomeViewCommand}" />
+
+                <Button Name="btnDeleteImportItem" Content="Delete Import Item" 
+                    HorizontalAlignment="Right" 
+                    Command="{Binding DeleteImportItemCommand}"  />
+
+                <Button Content="{Binding ProcessOrViewWorkItem, Mode=TwoWay}" 
+                        Width="130"
+                        HorizontalAlignment="Right" 
+                        Command="{Binding NavigateToListViewCommand}" />
+            </StackPanel>
+        </Grid>
+    </Grid>
+</Views:BaseImagingView>

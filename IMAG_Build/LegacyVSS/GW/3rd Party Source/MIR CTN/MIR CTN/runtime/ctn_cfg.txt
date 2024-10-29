@@ -1,0 +1,18 @@
+# General proposed Transfer Syntax list
+PROPOSE/XFER/STORAGE 1.2.840.10008.1.2.1;1.2.840.10008.1.2
+
+# Proposed Transfer Syntax for CT storage
+PROPOSE/XFER/STORAGE/1.2.840.10008.5.1.4.1.1.2  1.2.840.10008.1.2
+
+# Set this flag to 1 to gang all xfer syntaxes into a single
+# presentation context.  If 0 or missing, multiple presentation
+# contexts will be proposed, each with 1 xfer syntax.
+PROPOSE/SINGLE_PRESENTATION 1
+
+# The Transfer Syntaxes that we accept
+ACCEPT/XFER/STORAGE 1.2.840.10008.1.2.1;1.2.840.10008.1.2
+
+# Set the flag to 1 to always store as Part 10 when we
+# receive storage SOP instances.
+# Set the flag to 0 to store CTN format for IVRLE.
+STORAGE/PART10FLAG 0

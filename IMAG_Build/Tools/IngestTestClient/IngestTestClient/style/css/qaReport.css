@@ -1,0 +1,90 @@
+body{
+    background: #343434;
+    font-family: 'Segoe UI';
+    font-size: 11px;
+}  
+.text-color{
+    color: #fff;    
+}    
+.panel-text-align {
+    color: #fff;
+    padding: 3px 5px;
+    margin-top: -32px;
+}    
+.panel-header-top{
+    margin-top: -8px;
+}  
+.panel-body{
+    padding: 15px 10px 1px 9px;
+}    
+    
+.lbl-align{
+    text-align: left;
+}   
+.form-top-align{
+    margin-top: -10px;
+}    
+.btn-apply{
+    width: 116%;
+    margin-left: -15px;
+} 
+.tbl-content{
+    margin-left: -26px;
+    color: #fff;
+}  
+.checkbox-top-marigin{
+    margin-top: -25px;
+}
+.delete-img-align{
+    margin-top: 12px;
+    margin-left: -100px;
+}
+.exclude-img-align{
+    margin-top: -6px;
+    margin-left: -100px;
+}  
+.checkbox-width{
+    width: 22px;
+    outline: none;
+    box-shadow: none !important;
+    border: 1px solid #ccc !important;
+}  
+.radio-top-marigin{
+    margin-top: -15px;
+} 
+.radio-left-marigin{
+    margin-left: -16px;
+}    
+.radio-btn-width{
+    width: 18%;
+    outline: none;
+    box-shadow: none !important;
+    border: 1px solid #ccc !important;
+}  
+.radio-grouped-status{
+    margin-left: -215px;
+}     
+.radio-grouped-userlbl{
+    margin-left: -162px;
+}  
+
+/* Table scroll bar*/
+table.scroll tbody, table.scroll thead { 
+    display: block; 
+}
+thead tr th { 
+    height: 30px;
+    line-height: 30px;
+}
+table.scroll tbody {
+    height: 308px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+tbody td, thead th {
+    width: 20%; /* Optional */
+    border-right: 1px solid black;
+}
+tbody td:last-child, thead th:last-child {
+    border-right: none;
+}    

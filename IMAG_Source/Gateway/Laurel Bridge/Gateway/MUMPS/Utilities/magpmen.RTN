@@ -1,0 +1,16 @@
+magpmen ; HL7 PACS testing menu
+ q
+menu ; main entry point - vendor set menu
+ n ixvset,dset,vcods
+ s ixvset=0,vcods=""
+ f  s ixvset=$o(^imlh("test",ixvset)) q:'ixvset  s dset=$g(^(ixvset,0)) d
+ . i '$p(dset,"^",2) d
+ . . s vcods=vcods_$s(vcods]"":";",1:"")_":"_$p(dset,"^",1)
+ . . q
+ . q
+ s DIR(0)="S^"_vcods
+ f  d ^DIR q:$d(DTOUT)  q:$d(DUOUT)  i Y>0 d tmenu(Y)
+ q
+tmenu ; select one test for a vendor
+ n itcods
+ f  

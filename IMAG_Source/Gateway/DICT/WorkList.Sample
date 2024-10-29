@@ -1,0 +1,77 @@
+# Last edited 22 July 2013 9:51 am
+#
+# List of Modality Worklist service users
+#
+# Modality AE Title|Institution Name|Imaging Service|Imaging Type|Format Options|Description
+#
+# Institution Name can be the station number (like 688), name (like Washington, DC), or null.
+#   Leave the Institution Name to null to default to the local site.
+#
+# Imaging Services are defined as follows
+#   RAD -- Radiology
+#   CON -- Consult/Procedure Request Tracking (CPRS)
+#   LAB -- Anatomic Pathology (Imaging Types: EM, CY, and SP)
+#
+# Imaging Type may have any of the following six formats
+#   1) For radiology, the abbreviation of the imaging type of the procedure, from the IMAGING TYPE file (#79.2)
+#      (that is, RAD, NM, US, MRI, CT, ANI, CARD, VAS, or MAM)
+#   2) For consults or procedures, the abbreviation from IMAGE INDEX FOR SPECIALTY/SUBSPECIALTY file (#2005.84)
+#   3) For consults or procedures, the abbreviation from IMAGE INDEX FOR SPECIALTY/SUBSPECIALTY file (#2005.84)
+#      followed by "/" and the abbreviation from IMAGE INDEX FOR PROCEDURE/EVENT file (#2005.85)
+#   4) For consults or procedures, the abbreviation from IMAGE INDEX FOR SPECIALTY/SUBSPECIALTY file (#2005.84)
+#      followed by "/*" -- this includes all of the worklists for the specialty
+#   5) For anatomic pathology, it may be EM, CY, or SP
+#   6) A comma delimited list of any of the above
+#      Note: a prefix of "RAD:", "CON:", or "LAB:" can be used to specify an Imaging Type for a different Imaging Service.
+#
+# Format Options: Accession Number / SSN / Weight / Allergies / Reason
+#   Accession Number: Long or Short (case number) - Default = LONG
+#   SSN: Dash or NoDash - Default DASH
+#   Weight: Weight or NoWeight - Default WEIGHT
+#   Allergies: Output in Allergies (0010,2110) or Medical Alerts (0010,2000) - default both
+#   Reason: Output reason for request in Requested Procedure Comments (0040,1400)
+#           or Additional Patient History (0010,21B0) (send both is the default)
+#
+#
+# Examples:
+#
+# Radiology
+# PCU_QWL_SCU|<Your Institution goes here>|RAD|RAD|LONG|Building E, Rm 225
+# CT_SCAN_1|688|RAD|CT|LONG|Philips CT, Radiology East, Rm B-129
+#
+# Consults
+# IRIS-1||CON|OPHTH|LONG|Canon Retinal Camera, Eye Clinic, Rm, E-170
+# DENIX-2||CON|DENTAL|LONG|Intra-Oral Xray Unit, Rm, D-153
+# GI_LAB_SCU|<Your Institution goes here>|CON|GI|LONG|North Clinic
+#
+# Anatomic Pathology
+# PATH||LAB|SP,CY|L|AP Surgical Pathology and Cytopathology, but not Electron Microscopy
+#
+# Different Image Types
+# C1||CON|CARDIO|L|testing CARDIO alone
+# C2||CON|CARDIO/ECHO|L|testing CARDIO ECHO alone
+# C3||CON|CARDIO/CATH|L|testing CARDIO CATH alone
+# C4||CON|CARDIO/EKG|L|testing CARDIO EKG alone
+# C5||CON|CARDIO,CARDIO/CATH,CARDIO/ECHO|L|testing all CARDIO together, but not EKG
+# C6||CON|CARDIO/*|L|testing all CARDIO together including EKG
+# RC||RAD|RAD,CON:CARDIO,CON:OPHTH|L|testing RAD, CARDIO, and OPHTH
+# CR||CON|RAD:RAD,CARDIO/*,OPHTH|L|testing RAD, CARDIO/*, and OPHTH
+#
+# Allergy and Weight preferences
+# A1||RAD|RAD|L////|testing RAD with defaults for allergies, reason, and weight
+# A2||RAD|RAD|L///a/|testing RAD with allergies returned in Allergies (0010,2110)
+# A3||RAD|RAD|L///M/|testing RAD with allergies returned in Medical Alerts (0010,2000)
+# R1||RAD|RAD|L////c|testing RAD with reason returned in Requested Procedure Comments (0040,1400)
+# R2||RAD|RAD|L////h|testing RAD with reason returned in Additional Patient History (0010,21B0)
+# W1||RAD|RAD|L//W//|testing RAD with weight returned
+# W2||RAD|RAD|L//N//|testing RAD with weight set to null (NoWeight)
+#
+# The "TEST" AE title is for exercising the local VistA MWL provider
+# The Institution ID is omitted, selecting the default local system
+TEST||RAD|RAD|LONG|Local Vista Modality Worklist provider
+#
+# Place your entries below
+
+
+
+# end of file

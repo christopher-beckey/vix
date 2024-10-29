@@ -1,0 +1,182 @@
+﻿<Views:BaseImagingView x:Class="DicomImporter.Views.PatientSelectionView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:Views="clr-namespace:ImagingClient.Infrastructure.Views;assembly=ImagingClient.Infrastructure" mc:Ignorable="d"
+             xmlns:ImporterViews="clr-namespace:DicomImporter.Views"
+             d:DesignHeight="355" d:DesignWidth="624">
+
+    <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+    </UserControl.Resources>
+
+    <Grid>
+        <StackPanel>
+            <Label Content="Patient Selection" Style="{DynamicResource ResourceKey=SectionTitle}" />
+
+            <ImporterViews:ImporterMessagesView x:Name="ImporterMessages" 
+                                  DataContext="{Binding ImporterMessagesViewModel}" />
+
+            <GroupBox Header="DICOM Patient Information">
+                <Grid Grid.Row="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+
+                    <Label Grid.Row="0" 
+                           Grid.Column="0" 
+                           Content="Name:" />
+
+                    <TextBox IsReadOnly="True" 
+                             Grid.Row="0" 
+                             Grid.Column="1" 
+                             Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}"
+                             Text="{Binding Path=CurrentStudy.Patient.PatientName}" />
+
+                    <Label Grid.Row="0" 
+                           Grid.Column="2" 
+                           Content="Patient Id:" />
+
+                    <TextBox IsReadOnly="True" 
+                             Grid.Row="0" 
+                             Grid.Column="3" 
+                             Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}"
+                             Text="{Binding Path=CurrentStudy.Patient.Ssn}" />
+
+                    <Label Grid.Row="1" 
+                           Grid.Column="0" 
+                           Content="DOB:" />
+
+                    <TextBox IsReadOnly="True" 
+                             Grid.Row="1" 
+                             Grid.Column="1"
+                             Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}"
+                             Text="{Binding Path=CurrentStudy.Patient.FormattedBirthDate, Mode=OneWay}" />
+
+                    <Label Grid.Row="1"
+                           Grid.Column="2" 
+                           Content="Sex:" />
+
+                    <TextBox IsReadOnly="True" 
+                             Grid.Column="3" 
+                             Grid.Row="1"
+                             Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}"
+                             Text="{Binding Path=CurrentStudy.Patient.PatientSex}" />
+
+                </Grid>
+            </GroupBox>
+
+
+
+
+
+            <GroupBox Header="VA Patient Information">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+
+                    <Label Grid.Row="0" 
+                           Grid.Column="0" 
+                           Grid.ColumnSpan="4" 
+                           Foreground="Red"
+                           Content="{Binding Path=WarningMessage}" 
+                           Visibility="{Binding Path=DisplayWarning, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+                    
+                    <Label Grid.Row="1" 
+                           Grid.Column="0" 
+                           Content="Name:" />
+
+                    <TextBox IsReadOnly="True" 
+                             Grid.Row="1" 
+                             Grid.Column="1"
+                             Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}"
+                             Text="{Binding Path=SelectedPatient.PatientName}" />
+
+
+                    <Label Grid.Row="1"
+                           Grid.Column="2" 
+                           Content="Patient Id:" />
+
+                    <TextBox IsReadOnly="True"
+                             Grid.Row="1" 
+                             Grid.Column="3" 
+                             Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}"
+                             Text="{Binding Path=SelectedPatient.Ssn}" />
+
+
+                    <Label Grid.Row="2" 
+                           Grid.Column="0" 
+                           Content="DOB:" />
+
+                    <TextBox IsReadOnly="True" 
+                             Grid.Row="2" 
+                             Grid.Column="1" 
+                             Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}"
+                             Text="{Binding Path=SelectedPatient.FormattedBirthDate, Mode=OneWay}" />
+
+                    
+                    <Label Grid.Row="2" 
+                           Grid.Column="2" 
+                           Content="Sex:" />
+
+                    <TextBox IsReadOnly="True" 
+                             Grid.Row="2" 
+                             Grid.Column="3" 
+                             Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}"
+                             Text="{Binding Path=SelectedPatient.PatientSex}" />
+
+
+                    <Button Name="btnChangePatient" 
+                            Grid.Row="4" 
+                            Grid.Column="3"
+                            HorizontalAlignment="Right"
+                            Content="{Binding PatientSelectionButtonText}" 
+                            Click="ChangePatient_Click" />
+                </Grid>
+            </GroupBox>
+
+            <!--GroupBox Header="VA Patient Information">
+                <Grid Grid.Row="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+
+                    <Label Grid.Column="0" 
+                           Content="Patient Name:" />
+                    
+                    <TextBox IsReadOnly="True" 
+                             Grid.Column="1" 
+                             Text="{Binding Path=SelectedPatient.PatientName}" />
+                    
+                </Grid>
+            </GroupBox!-->
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <Button Content="&lt; Back" Command="{Binding NavigateBack}"/>
+                <Button Content="Next &gt;" Command="{Binding NavigateForward}"/>
+                <Button Content="Cancel" Command="{Binding CancelReconciliationCommand}" />
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</Views:BaseImagingView>

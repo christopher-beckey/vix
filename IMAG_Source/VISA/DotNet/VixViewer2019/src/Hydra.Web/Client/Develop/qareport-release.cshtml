@@ -1,0 +1,224 @@
+@inherits Nancy.ViewEngines.Razor.NancyRazorViewBase<ViewerModel>
+    @using Hydra.Web
+    <!DOCTYPE html>
+    <html lang="en">
+
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+        <meta content="utf-8" http-equiv="encoding">
+        <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+
+        <title>QA Review Report</title>
+        @Html.HydraCss("../bootstrap/css/bootstrap.min.css")
+        @Html.HydraCss("../style/css/font-awesome.min.css")
+        @Html.HydraCss("../style/datepicker.min.css")
+        @Html.HydraCss("../style/css/common.css")
+        @Html.HydraCss("../style/css/qaReport.css")
+
+        <!-- TODO @Html.HydraScript("../js/jquery-1.12.4.min.js") -->
+        @Html.HydraScript("../js/jquery-1.11.1.js")
+        @Html.HydraScript("../bootstrap/js/bootstrap.min.js")
+        @Html.HydraScript("../js/datepicker.min.js")
+        @Html.HydraScript("../js/qa/qaReport.min.js")
+    </head>
+
+    <body>
+        <div class="container-fluid container-top">
+            <div class="header-text">
+                <h4>QA Statistics Reports</h4>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="panel-group" style="margin-top: 0px;margin-bottom:5px">
+                        <div class="panel panel-default panel-content-color">
+                            <div class="panel-heading" style="background-color:darkgray;padding:5px 15px">
+                                <h4 class="panel-title">
+                                    <a data-toggle="collapse" href="#qaNewReportParameters" onclick="setTimeout(function(){resizeFrames()}, 200);" style="color:white">New Report Parameters</a>
+                                </h4>
+                            </div>
+                            <div id="qaNewReportParameters" class="panel-collapse collapse in">
+                                <div class="panel-body">
+                                    <div class="col-xs-12">
+                                        <div class="form-horizontal">
+                                            <fieldset style="border-color:white;border:2px solid white;padding:25px">
+                                                <legend style="color:white;font-weight:bold;font-size:15px;border:none;width:auto">Date Range</legend>
+                                                <div class="form-group">
+                                                    <label class="col-xs-4 lbl-align">From :</label>
+                                                    <div class="col-xs-8 input-group date form-top-align">
+                                                        <input type="text" class="form-control" id="fromDate" placeholder="From Date"><span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-xs-4 lbl-align">To :</label>
+                                                    <div class="col-xs-8 input-group date form-top-align">
+                                                        <input type="text" class="form-control" id="toDate" placeholder="To Date"><span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-xs-8 lbl-align" id="applyDateRange" style="margin:0px;font-size:12px;font-weight:bold"></label>
+                                                </div>
+                                            </fieldset>
+                                        </div>
+                                        <div class="form-horizontal text-color" style="margin-top:15px">
+                                            <fieldset style="border-color:white;border:2px solid white;padding:25px">
+                                                <legend style="color:white;font-weight:bold;font-size:15px;border:none;width:auto"></legend>
+                                                <div class="form-group radio-top-margin">
+                                                    <div class="col-xs-5">
+                                                        <input type="checkbox" class="form-control radio-btn-width" id="deleteImages" name="deleteImage" style="height:16px">
+                                                    </div>
+                                                    <label class="col-xs-8 control-label radio-grouped-status" style="margin-top: -3px;text-align:left"> Include Deleted Images</label>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="col-xs-5">
+                                                        <input type="checkbox" checked class="form-control radio-btn-width" id="existingImages" name="existingImage" style="margin-top: -5px;height:16px">
+                                                    </div>
+                                                    <label class="col-xs-8 control-label radio-grouped-status" style="margin-top: -12px;text-align:left">Include Existing Images</label>
+                                                </div>
+                                            </fieldset>
+                                        </div>
+                                        <div class="form-horizontal" style="margin-top:10px">
+                                            <fieldset style="border-color:white;border:2px solid white;padding:25px">
+                                                <legend style="color:white;font-weight:bold;font-size:15px;border:none;width:auto">Return Image Counts By</legend>
+                                                <div class="form-group radio-top-margin">
+                                                    <div class="col-xs-5">
+                                                        <input type="radio" class="form-control radio-btn-width" id="groupedByStatus" name="groupby" style="height:16px">
+                                                    </div>
+                                                    <label class="col-xs-8 control-label radio-grouped-status" style="margin-top: -3px;text-align:left"> Grouped by Status </label>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="col-xs-5">
+                                                        <input type="radio" checked class="form-control radio-btn-width" id="groupedByUser" style="margin-top: -5px;height:16px" name="groupby">
+                                                    </div>
+                                                    <label class="col-xs-8 control-label radio-grouped-userlbl" style="margin-top: -12px;text-align:left">Grouped by Users and Status</label>
+                                                </div>
+                                            </fieldset>
+                                        </div>
+                                        <div class="form-horizontal">
+                                            <button type="button" class="btn btn-hydra-viewer btn-block" id="runReport" onclick="runQAReport()" style="margin-top:25px;margin-bottom:15px">Run Report</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-8" id="reportUserTable">
+                    <div class="panel-group" id="accordion1" style="margin-bottom:5px">
+                        <div class="panel panel-primary panel-content-color">
+                            <div class="panel-heading" style="background-color:darkgray;padding:5px 15px">
+                                <h4 class="panel-title">
+                                    <a id="user-info" data-toggle="collapse" data-parent="#accordion1" href="#reportRequests" onclick="setTimeout(function(){resizeFrames()}, 200);">Report requests for user : </a>
+                                </h4>
+                            </div>
+                            <div id="reportRequests" class="panel-collapse collapse in">
+                                <div class="panel-body">
+                                    <div>
+                                        <div id="reportRequestTable" style="overflow:auto">
+                                            <table class="table table-bordered scroll qaReportHiglight" style="margin-bottom: 4px;">
+                                                <thead>
+                                                    <tr style="display:table;width:100%">
+                                                        <th width="14%">Report Type</th>
+                                                        <th width="14%">Status</th>
+                                                        <th width="14%">From</th>
+                                                        <th width="14%">To</th>
+                                                        <th width="17%">Started At</th>
+                                                        <th width="17%">Ended At</th>
+                                                    </tr>
+                                                </thead>
+                                            </table>
+                                            <div style="overflow: auto;margin-top:-5px;">
+                                                <table class="table table-striped table-hover table-bordered custom-table-design" id="user-report-table">
+                                                    <tbody id="qaImageReporttblBody">
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div style="overflow: auto;" id="selectedReportInfo">
+                                            <button id="qaViewReport" type="button" class="btn btn-hydra-viewer pull-right" accesskey="v" onclick="displayImageReportStatistics()" disabled>View Report</button>
+                                            <button id="qaRefreshList" type="button" class="btn btn-hydra-viewer pull-right" accesskey="r" style="margin-right: 10px;margin-bottom: 4px;" onclick="runQAReport()">Refresh List</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-group" id="accordion2" style="margin-top: 12px;margin-bottom:5px">
+                        <div class="row" id="qaUserReport" style="display: none;overflow: auto;">
+                            <div class="col-md-12">
+                                <div class="panel panel-primary panel-content-color">
+                                    <div class="panel-heading" style="background-color:darkgray;padding:5px 15px">
+                                        <h4 class="panel-title">
+                                            <a data-toggle="collapse" data-parent="#accordion2" href="#reportStatistic" onclick="setTimeout(function(){resizeFrames()}, 200);">Image Report Statistic</a>
+                                        </h4>
+                                    </div>
+                                    <div id="reportStatistic" class="panel-collapse collapse in">
+                                        <div class="panel-body" id="qaUserReportPanelBody">
+                                            <div class="panel-header-top">
+                                                <div class="col-md-12">
+                                                    <div class="col-md-4">
+                                                        <label id="imageReportStartedAt">This Report Was Started At : 05/09/2011 15:12:57 </label>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <label id="imageReportDateRange">For Date Range : 03/02/2001 thru 05/19/2011 </label>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <label id="imageReportRange">Range : 2 months, 13 days </label>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <div class="col-md-6">
+                                                            <div class="form-horizontal">
+                                                                <div class="form-group">
+                                                                    <label class="col-xs-4 control-label" style="text-align:left">Report Flags : </label>
+                                                                    <div class="col-xs-7" style="margin-top: 7px;margin-left:-45px" id="imageReportFlags">
+                                                                        <label>Include deleted images</label><br />
+                                                                        <label>Include existing images</label><br />
+                                                                        <label>Return image counts grouped by users and status </label>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <button type="button" class="btn btn-hydra-viewer pull-right" onclick="exportReportToCSV()" accesskey="s" style="margin-bottom:15px">Export</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div id="qaImageReportTable" style="overflow:auto">
+                                                    <table class="table table-bordered scroll" style="margin-bottom: 4px;">
+                                                        <thead>
+                                                            <tr style="display:table;width:100%" id="qaImageReportStatisticsTH">
+                                                                <th width="20%">User</th>
+                                                                <th width="20%">Status</th>
+                                                                <th width="20%">Entities</th>
+                                                                <th width="20%">Pages</th>
+                                                                <th width="20%">QA%</th>
+                                                            </tr>
+                                                        </thead>
+                                                    </table>
+                                                    <div style="overflow: auto;margin-top:-5px;">
+                                                        <table class="table table-striped table-hover table-bordered custom-table-design" id="exportReportTable">
+                                                            <tbody id="qaImageReportStatistics" style="width:100%">
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script>
+            $(window).on('load', function () { });
+        </script>
+    </body>
+
+    </html>

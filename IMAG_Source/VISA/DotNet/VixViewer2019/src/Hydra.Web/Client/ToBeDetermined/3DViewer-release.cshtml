@@ -1,0 +1,762 @@
+@inherits Nancy.ViewEngines.Razor.NancyRazorViewBase<ViewerModel>
+@using Hydra.Web
+<!DOCTYPE html>
+<html >
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+    <meta content="utf-8" http-equiv="encoding">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+
+    <title>VIX Viewer (3D)</title>
+    <!-- CSS files -->
+    @Html.HydraCss("../js/jquery-ui-1.8.23.custom/css/custom-theme/jquery-ui-1.8.23.custom.css")
+    @Html.HydraCss("../bootstrap/css/bootstrap.css")
+    @Html.HydraCss("../style/css/style.css")
+    @Html.HydraCss("../style/kendo/kendo.common.min.css")
+    @Html.HydraCss("../style/kendo/kendo.rtl.min.css")
+    @Html.HydraCss("../style/kendo/kendo.default.min.css")
+    @Html.HydraCss("../style/kendo/kendo.dataviz.min.css")
+    @Html.HydraCss("../style/kendo/kendo.dataviz.default.min.css")
+    @Html.HydraCss("../style/kendo/kendo.mobile.all.min.css")
+    @Html.HydraCss("../style/css/buttonDesigns.css")
+    @Html.HydraCss("../style/css/playerToolbar.css")
+    @Html.HydraCss("../style/css/viewportView.css")
+    @Html.HydraCss("../style/css/toolbarRegion.css")
+    @Html.HydraCss("../style/css/imageThumbnailView.css")
+    @Html.HydraCss("../style/css/versionHistory.css")
+
+    <script>
+        //vvvvvvvvvvv TODO VAI-919: Change var to const vvvvvvvvvv
+        var rootURL = "@Model.BaseUrl"; //VAI-915
+        var baseURL = "@Model.BaseApiUrl";
+        var baseViewerURL = "@Model.BaseViewerUrl";
+        var baseSignalrURL = "@Model.BaseSignalrUrl";
+        //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    </script>
+
+    <!-- Javascript files -->
+    @Html.HydraScript("../js/basic.min.js")
+    @Html.HydraScript("../js/layouts/jquery-latest.js")
+    @Html.HydraScript("../js/layouts/jquery-ui-latest.js")
+    @Html.HydraScript("../js/layouts/jquery.layout-latest.js")
+
+    @Html.HydraScript("../js/sessionscript/json2.min.js")
+    @Html.HydraScript("../js/sessionscript/jquery.signalR-2.2.0.min.js")
+    @Html.HydraScript("../js/dnd/DragDropTouch.js")
+    <script type="text/javascript" src="~/signalr/hubs"></script>
+
+    @Html.HydraScript("../js/kendo/kendo.all.min.js")
+    @Html.HydraScript("../js/viewer/tools/tools.min.js")
+    @Html.HydraScript("../js/cache/cache.min.js")
+    @Html.HydraScript("../js/urlConfig.min.js")
+    @Html.HydraScript("../js/common/worker.min.js")
+    @Html.HydraScript("../js/session.js")
+    @Html.HydraScript("../js/imageProgressManager.js")
+    @Html.HydraScript("../js/spin.js")
+    @Html.HydraScript("../js/imageProgressManager.js")
+
+    @Html.HydraScript("../js/3DViewer/3DViewer.render.min.js")
+    @Html.HydraScript("../js/3DViewer/3DViewer.toolbar.min.js")
+
+</head>
+<body id="dicomViewer" oncontextmenu="return false;">
+    <div class="ui-layout-north" id="LayoutRegion">
+        <!-- Toolbar -->
+        <div id="toolbarheader" class="k-header">
+            <div id="pName"></div>
+            <div id="dob"></div>
+        </div>
+        <div id="toolbar"></div>
+    </div>
+
+    <!-- Image Thumbnail View -->
+    <div id="img" class="ui-layout-west">
+        <div id="imageThumbnail_View" class="disableSelection"></div>
+    </div>
+
+    <!-- Viewport View -->
+    <div id="viewer" class="ui-layout-center">
+        <div id="viewport_View"></div>
+    </div>
+
+    <!-- Hydra version -->
+    <div class="ui-layout-south" id="playerLayout">
+        <div class="col-xs-6" id="hydraVersionDiv" align="right" style="padding-top: 10px;">
+            <button id="logViewer" class="border-color-class" height="15px" onclick="dicomViewer.logUtility.togglePanel();" style="display:none">Log Viewer</button>
+            <button id="hydraVersionLink" class="border-color-class" height="15px" onclick="openHydraVersionInfo();"></button>
+        </div>
+    </div>
+
+    <!-- contextMenu-->
+    <ul id="contextMenu" oncontextmenu="return false;" style="background: #363636;">
+        <li><a href="#" id="context-pan" onclick="dicomViewer.tools.doPan()">Pan</a></li>
+        <li><a href="#" id="context-windowlevel" onclick="dicomViewer.tools.applyWindowLevel()">WW/WC</a></li>
+        <li class="">
+            <a href="#" id="context-ww_wc" onclick="">WW/WC</a>
+            <ul id="ww_wcSubMenu">
+                <li id="1_ww_wcContextMenu"><a href="#" onclick="dicomViewer.tools.doWindowLevel(1)">Default</a></li>
+                <li id="2_ww_wcContextMenu"><a href="#" onclick="dicomViewer.tools.doWindowLevel(2)">Abdomen</a></li>
+                <li id="5_ww_wcContextMenu"><a href="#" onclick="dicomViewer.tools.doWindowLevel(5)">Bone</a></li>
+                <li id="4_ww_wcContextMenu"><a href="#" onclick="dicomViewer.tools.doWindowLevel(4)">Brain</a></li>
+                <li id="6_ww_wcContextMenu"><a href="#" onclick="dicomViewer.tools.doWindowLevel(6)">Head/Neck</a></li>
+                <li id="3_ww_wcContextMenu"><a href="#" onclick="dicomViewer.tools.doWindowLevel(3)">Lung</a></li>
+                <li id="7_ww_wcContextMenu"><a href="#" onclick="dicomViewer.tools.doWindowLevel(7)">Custom</a></li>
+            </ul>
+        </li>
+
+        <li class="">
+            <a href="#" id="context-zoom" onclick="">Zoom</a>
+            <ul id="zoomSubMenu">
+                <li id="0_zoomContextMenu"><a href="#" onclick="dicomViewer.tools.setZoomLevel(0)">100%</a></li>
+                <li id="1_zoomContextMenu"><a href="#" onclick="dicomViewer.tools.setZoomLevel(1)">Fit-to-window</a></li>
+                <li id="2_zoomContextMenu"><a href="#" onclick="dicomViewer.tools.setZoomLevel(2)">Fit-width-to-window</a></li>
+                <li id="3_zoomContextMenu"><a href="#" onclick="dicomViewer.tools.setZoomLevel(3)">Fit-height-to-window</a></li>
+                <li id="6_zoomContextMenu"><a href="#" onclick="dicomViewer.tools.doZoom('6_zoom')">Custom</a></li>
+            </ul>
+        </li>
+
+        <li class="">
+            <a href="#" id="context-RGBTool" onclick="">RGB Channel</a>
+            <ul id="RGBTool-SubMenu">
+                <li id="0_rgbAllContextMenu"><a href="#" onclick="dicomViewer.tools.rgbColor(0)">Reset</a></li>
+                <li id="1_rgbRedContextMenu"><a href="#" onclick="dicomViewer.tools.rgbColor(1)">Red</a></li>
+                <li id="2_rgbGreenContextMenu"><a href="#" onclick="dicomViewer.tools.rgbColor(2)">Green</a></li>
+                <li id="3_rgbBlueContextMenu"><a href="#" onclick="dicomViewer.tools.rgbColor(3)">Blue</a></li>
+            </ul>
+        </li>
+
+        <!--<li id="ecgMenu" class="dropdown-submenu"><a href="#" onclick="">ECG</a>
+            <ul class="dropdown-menu dropdown-menu-custom" style="background-color: #999;">-->
+        <li id="gridtype">
+            <a href="#" onclick="">Grid Type</a>
+            <ul id="gridSubMenu">
+                <li onclick=" dicomViewer.gridType(0, 'none')">
+                    <input id="none" style="visibility:hidden;" type="radio" onclick="dicomViewer.gridType(0, 'none')" name="gridtype" value="1">
+                    None
+                </li>
+
+                <li onclick="dicomViewer.gridType(1, 'onemm')">
+                    <input id="onemm" style="visibility:hidden;" type="radio" onclick="dicomViewer.gridType(1, 'onemm')" name="gridtype" value="2" checked="">
+                    1 mm
+                </li>
+
+                <li onclick="dicomViewer.gridType(2, 'fivemm')">
+                    <input id="fivemm" style="visibility:hidden;" type="radio" onclick="dicomViewer.gridType(2, 'fivemm')" name="gridtype" value="3">
+                    5 mm
+                </li>
+            </ul>
+        </li>
+
+        <li id="gridcolor">
+            <a href="#" onclick="">Grid Color</a>
+            <ul id="gridColor">
+
+                <li onclick="dicomViewer.gridColor(0, 'redGrid')">
+                    <input id="redGrid" type="radio" name="gridcolor" value="1" checked="">
+                    Red
+                </li>
+
+                <li onclick="dicomViewer.gridColor(1, 'greenGrid')" )>
+                    <input id="greenGrid" type="radio" name="gridcolor" value="2">
+                    Green
+                </li>
+
+                <li onclick="dicomViewer.gridColor(2, 'blueGrid')">
+                    <input id="blueGrid" type="radio" name="gridcolor" value="3">
+                    Blue
+                </li>
+
+                <li onclick="dicomViewer.gridColor(3, 'blackGrid')">
+                    <input id="blackGrid" type="radio" name="gridcolor" value="4">
+                    Black
+                </li>
+
+                <li onclick="dicomViewer.gridColor(4, 'greyGrid')">
+                    <input id="greyGrid" type="radio" name="gridcolor" value="5">
+                    Grey
+                </li>
+
+            </ul>
+        </li>
+
+        <li id="leadformat">
+            <a href="#" onclick="">Lead Format</a>
+            <ul id="leadFormatSubmenu">
+                <li onclick="dicomViewer.leadFormat(2, 'threebyfour')">
+                    <input id="threebyfour" type="radio" name="leadformat" value="1">
+                    3X4
+                </li>
+
+                <li onclick="dicomViewer.leadFormat(4, 'threebyfourplusone')">
+                    <input id="threebyfourplusone" type="radio" name="leadformat" value="2">
+                    3X4+1
+                </li>
+
+                <li onclick="dicomViewer.leadFormat(8, 'threebyfourplusthree')">
+                    <input id="threebyfourplusthree" type="radio" name="leadformat" value="3">
+                    3X4+3
+                </li>
+
+                <li onclick="dicomViewer.leadFormat(16, 'sixbytwo')">
+                    <input id="sixbytwo" type="radio" name="leadformat" value="4">
+                    6X2
+                </li>
+
+                <li onclick="dicomViewer.leadFormat(1, 'twelvebyone')">
+                    <input id="twelvebyone" type="radio" name="leadformat" value="5">
+                    12X1
+                </li>
+
+                <li id="lf_averagecomplex" onclick="dicomViewer.leadFormat(32, 'Average Complex')">
+                    <input id="averagecomplex" type="radio" name="leadformat" value="6">
+                    Average Complex
+                </li>
+            </ul>
+        </li>
+
+        <li id="gain">
+            <a href="#" onclick="">Gain</a>
+            <ul id="gainSubmenu">
+                <li onclick="dicomViewer.gain(0, 'fivemmgain')">
+                    <input id="fivemmgain" type="radio" name="gain" value="1">
+                    5 mm/mV
+                </li>
+
+                <li onclick="dicomViewer.gain(1, 'tenmmgain')">
+                    <input id="tenmmgain" type="radio" name="gain" value="2" checked="">
+                    10 mm/mV
+                </li>
+
+                <li onclick="dicomViewer.gain(2, 'twentymmgain')">
+                    <input id="twentymmgain" type="radio" name="gain" value="3">
+                    20 mm/mV
+                </li>
+
+                <li onclick="dicomViewer.gain(3, 'fourtymmgain')">
+                    <input id="fourtymmgain" type="radio" name="gain" value="4">
+                    40 mm/mV
+                </li>
+            </ul>
+        </li>
+
+        <li id="signalthickness">
+            <a href="#" onclick="">Signal Thickness</a>
+            <ul id="signalthicknesSubmenu">
+                <li onclick="dicomViewer.thickness(1, 'onethickness')">
+                    <input id="onethickness" type="radio" name="thickness" value="1" checked="">
+                    One
+                </li>
+
+                <li onclick="dicomViewer.thickness(2, 'twothickness')">
+                    <input id="twothickness" type="radio" onclick="dicomViewer.thickness(2, 'twothickness')" name="thickness" value="2">
+                    Two
+                </li>
+
+                <li onclick="dicomViewer.thickness(3, 'threethickness')">
+                    <input id="threethickness" type="radio" onclick="dicomViewer.thickness(3, 'threethickness')" name="thickness" value="3">
+                    Three
+                </li>
+            </ul>
+        </li>
+
+        <li id="drawcaliper" class=""><a href="#" onclick="dicomViewer.drawCaliper()">Draw Caliper</a></li>
+        <li id="context-hideCaliper" class=""><a href="#" onclick="dicomViewer.hideCaliper()">Hide Caliper</a></li>
+        <li id="context-showCaliper" class=""><a href="#" onclick="dicomViewer.displayCaliper()">Show Caliper</a></li>
+        <li class="">
+            <a href="#" id="context-measurement" onclick="">Measurement</a>
+            <ul id="measurementSubMenu">
+                <li>
+                    <a href="#" id="context-length" onclick="dicomViewer.tools.do2DMeasurement(0, null, null)">2D Length</a>
+                </li>
+                <li id="context-2dPoint">
+                    <a href="#" onclick="dicomViewer.tools.do2DMeasurement(1, null, null)">2D Point</a>
+                </li>
+                <li>
+                    <a href="#" id="context-length-calibration" onclick="dicomViewer.tools.do2DMeasurement(6, null, null)">2D Length Calibration</a>
+                </li>
+                <li id="context-angle">
+                    <a href="#" onclick="dicomViewer.tools.do2DMeasurement('angle', null, null)">Angle</a>
+                </li>
+                <li class="">
+                    <a href="#" id="context-hounsfield" onclick="">Hounsfield</a>
+                    <ul id="hounsfieldSubMenu">
+                        <li>
+                            <a href="#" id="context-hounsfield-ellipse" onclick="dicomViewer.tools.do2DMeasurement('7', null, null)">Ellipse</a>
+                        </li>
+                        <li>
+                            <a href="#" id="context-hounsfield-rectangle" onclick="dicomViewer.tools.do2DMeasurement('14', null, null)">Rectanlge</a>
+                        </li>
+                    </ul>
+                </li>
+                <li id="context-trace">
+                    <a href="#" onclick="dicomViewer.tools.do2DMeasurement(2, null, 'mmHg')">Trace</a>
+                </li>
+            </ul>
+        </li>
+        <li class="">
+            <a href="#" id="context-annotation" onclick="">Annotation</a>
+            <ul id="annotationSubMenu">
+                <li>
+                    <a href="#" id="context-text" onclick="dicomViewer.tools.do2DMeasurement(8, null, null)">Text</a>
+                </li>
+                <li id="context-line">
+                    <a href="#" onclick="dicomViewer.tools.do2DMeasurement(9, null, null)">Line</a>
+                </li>
+                <li>
+                    <a href="#" id="context-arrow" onclick="dicomViewer.tools.do2DMeasurement(10, null, null)">Arrow</a>
+                </li>
+                <li id="context-ellipse">
+                    <a href="#" onclick="dicomViewer.tools.do2DMeasurement(11, null, null)">Ellipse</a>
+                </li>
+                <li id="context-rectangle">
+                    <a href="#" onclick="dicomViewer.tools.do2DMeasurement(12, null, null)">Rectangle</a>
+                </li>
+                <li id="context-freehand">
+                    <a href="#" onclick="dicomViewer.tools.do2DMeasurement(13, null, 'mmHg')">Free Hand</a>
+                </li>
+            </ul>
+        </li>
+        <li id="context-volume">
+            <a href="#" onclick="dicomViewer.tools.do2DMeasurement(3, null, null)">Volume Measure</a>
+        </li>
+        <li>
+            <a href="#" id="context-delete" onclick="dicomViewer.measurement.deleteSelectedMeasurment()">Delete</a>
+        </li>
+        <li>
+            <a href="#" id="context-edit" onclick="dicomViewer.measurement.setDataToEdit('edit')">Edit</a>
+        </li>
+        <li>
+            <a href="#" id="context-deleteAll" onclick="dicomViewer.tools.do2DMeasurement(4, null, null)">Delete All</a>
+        </li>
+        <li class="">
+            <a href="#" id="context-MitralValve" onclick="">Mitral Valve</a>
+            <ul id="100" role="menu">
+                <li onclick="dicomViewer.tools.do2DMeasurement(0,'mitralValveAnteriorLeafletThickness','mm')"><input type="radio" style="visibility:hidden;" id="measurement101" name="measurement" value="101">Mitral Valve Anterior Leaflet Thickness</li>
+                <li onclick="dicomViewer.tools.do2DMeasurement(0,'mitralRegurgitationLength','cm')"><input type="radio" style="visibility:hidden;" id="measurement102" name="measurement" value="102">Mitral Regurgitation Length</li>
+                <li onclick="dicomViewer.tools.do2DMeasurement(1,'mitralRegurgitationPeakVelocity','m/s')"><input type="radio" style="visibility:hidden;" id="measurement103" name="measurement" value="103">Mitral Regurgitation Peak Velocity</li>
+                <li onclick="dicomViewer.tools.do2DMeasurement(5,'mitralStenosisMeanGradient','mmHg')"><input type="radio" style="visibility:hidden;" id="measurement104" name="measurement" value="104">Mitral Stenosis Mean Gradient</li>
+            </ul>
+        </li>
+        <li class="">
+            <a href="#" id="context-AorticValve" onclick="">Aortic Valve</a>
+            <ul id="105" role="menu">
+                <li onclick="dicomViewer.tools.do2DMeasurement(0,'aorticRegurgitationLength','cm')"><input type="radio" style="visibility:hidden;" id="measurement106" name="measurement" value="106">Aortic Regurgitation Length</li>
+                <li onclick="dicomViewer.tools.do2DMeasurement(1,'aorticRegurgitationPeakVelocity','m/s')"><input type="radio" style="visibility:hidden;" id="measurement107" name="measurement" value="107">Aortic Regurgitation Peak Velocity</li>
+                <li onclick="dicomViewer.tools.do2DMeasurement(1,'aorticStenosisPeakVelocity','m/s')"><input type="radio" style="visibility:hidden;" id="measurement108" name="measurement" value="108">Aortic Stenosis Peak Velocity</li>
+            </ul>
+        </li>
+        <li id="zoomInSR" onclick="dicomViewer.zoomSR(true)">Zoom In</li>
+        <li id="zoomOutSR" onclick="dicomViewer.zoomSR(false)">Zoom Out</li>
+        <li class="">
+            <a href="#" id="context-print" onclick="">Print</a>
+            <ul id="context-print-submenu">
+                <li id="context-print-active" onclick="dicomViewer.tools.doPrint(1)">At Current Zoom</li>
+                <li id="context-print-original" onclick="dicomViewer.tools.doPrint(2)">At 100% Zoom</li>
+            </ul>
+        </li>
+        <li class="">
+            <a href="#" id="context-link-menu" onclick="">Link</a>
+            <ul id="context-link-submenu">
+                <li class=""><a href="#" class="linkSeries" id="context-link" onclick="dicomViewer.tools.linkSeries()">Link Viewport</a></li>
+                <li id="context-link-crossRefLineSelector" onclick="dicomViewer.tools.doXRefLineSelection()">Cross Ref Line Selector</li>
+            </ul>
+        </li>
+        <li><a href="#" id="context-copyAttributes" onclick="dicomViewer.tools.doCopyAttributes()">Copy Attributes</a></li>
+    </ul>
+
+    <!-- Custom Layout -->
+    <div id="dialog-form" title="Custom Layout">
+        <div id="alert" class="alert alert-info" role="alert" style="padding: 5px;">Fill all fields</div>
+        Row: <input type="number" id="row" class="form-control" placeholder="Row" />
+        Column : <input type="number" id="column" class="form-control" placeholder="Column" />
+    </div>
+
+    <!-- Custom Window level -->
+    <div id="customWindowLevel" title="Custom Window Level">
+        <div id="alert-WL" class="alert alert-info" role="alert" style="padding: 5px;"></div>
+        WindowCenter: <input type="number" id="center" class="form-control" placeholder="center" />
+        WindowWidth : <input type="number" id="width" class="form-control" placeholder="Width" />
+    </div>
+
+    <!--Custom zoom -->
+    <div id="zoom-form" title="Custom Zoom">
+        <div id="alert-zoom" class="alert alert-info" role="alert" style="padding: 5px;"></div>
+        Zoom: <input type="number" id="zoomValue" class="form-control" placeholder="zoom%" />
+    </div>
+
+    <!-- Dicom Attribute Dialog -->
+    <div id="dicomHeaderAttributes" title="Dicom Header">
+        <table id="dicomHeader" class="table">
+        </table>
+    </div>
+
+    <!-- Imaging Data Dialog -->
+    <div id="imagingData" title="Imaging Data">
+        <div id="imageMetadata" class="white-space-pre">
+            Fetching Data...
+        </div>
+    </div>
+
+    <!-- 2D Length Calibration Dialog -->
+    <div id="lengthCalibrationModal" title="2D Length Calibration">
+        <div id="lengthCalibrationAlert" class="alert alert-info" role="alert" style="padding: 5px;"></div>
+        <div>
+            <table id="lengthCalibrationTable" class="table">
+                <tr>
+                    <td>Length of drawn Line:</td>
+                    <td><input type="number" id="calibrateLength" class="ktb-var-base" name="calibrateLength" style="width:55px;"></td>
+                </tr>
+                <tr>
+                    <td>Unit</td>
+                    <td>
+                        <select id="unit" class="ktb-var-base">
+                            <option value="UNITS_MM">Millimetre</option>
+                            <option value="UNITS_CM">Centimetre</option>
+                            <option value="UNITS_INCHES">Inches</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td><input id="applyToAllImages" type="checkbox" name="applyToAllImages" />Apply To Image Set</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <!-- Measurement prefence -->
+    <div id="MeasurementPreferenceModal" title="Annotation Preference">
+        <div>
+            <table id="MeasurementPreferenceTable" class="table" border="0">
+                <th colspan="5">Please select a color for the measurement. </th>
+                <br>
+                <tr id="colorSelection">
+                    <form id="measurementColor">
+                <tr>
+                    <td><input id="white" type="radio" name="color" value="white" />White<br></td>
+                    <td><input id="aqua" type="radio" name="color" value="aqua" /> Aqua<br></td>
+                </tr>
+                <tr>
+                    <td><input id="yellow" type="radio" name="color" value="yellow" /> Yellow<br></td>
+                    <td><input id="blue" type="radio" name="color" value="blue" /> Blue<br></td>
+                </tr>
+                <tr>
+                    <td><input id="orange" type="radio" name="color" value="orange" /> Orange<br></td>
+                    <td><input id="red" type="radio" name="color" value="red" /> Red<br></td>
+                </tr>
+                <tr>
+                    <td><input id="brown" type="radio" name="color" value="brown" /> Brown<br></td>
+                    <td><input id="Black" type="radio" name="color" value="Black" /> Black <br></td>
+                </tr>
+                <tr>
+                    <td><input id="green" type="radio" name="color" value="green" /> Green<br></td>
+                    <td><input id="Grey" type="radio" name="color" value="Grey" /> Grey <br></td>
+                </tr>
+                </form>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <!-- ECG preference Dialog -->
+    <div id="EcgPreference" title="ECG Preference">
+        <div>
+            <table id="EcgPreferenceTable" class="table">
+                <tr>
+                    <td>Lead Type</td>
+                    <td>
+                        <select id="ledselection" onchange="dicomViewer.changeECGLedType(this.value)" class="ktb-var-base">
+                            <option value="3x4+1">3x4+1</option>
+                            <option value="3x4+3">3x4+3</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="panel panel-default">
+                            <div class="panel-heading">3x4+1</div>
+                            <div id="3x41" class="panel-body">
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="panel panel-default ">
+                            <div class="panel-heading ">3x4+3</div>
+                            <div class="panel-body ">
+                                <table>
+                                    <tr>
+                                        <td>First Signal:</td>
+                                        <td>
+                                            <div id="3x43_1"></div>
+                                        </td>
+                                    </tr>
+                                    <tr><td>&nbsp;</td></tr>
+                                    <tr>
+                                        <td>Second Signal:</td>
+                                        <td>
+                                            <div id="3x43_2"></div>
+                                        </td>
+                                    </tr>
+                                    <tr><td>&nbsp;</td></tr>
+                                    <tr>
+                                        <td>Third Signal:</td>
+                                        <td>
+                                            <div id="3x43_3"></div>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    !-- Hydra Viewer Version Info -->
+    <div id="viewerVersionInfoModal" title="Viewer Information">
+        <div id="historyTabs">
+            <ul>
+                <li><a href="#versionHistory" style="color: white;">Version History</a></li>
+                <li><a href="#messageHistory" onclick="openMessageInfo();" style="color: white;">Message History</a></li>
+            </ul>
+            <div id="versionHistory"></div>
+            <div id="messageHistory"></div>
+        </div>
+    </div>
+
+    !-- Cine preference Dialog -->
+    <div id="cinePreferenceModal" title="Cine Preference">
+        <div id="cinePreferenceAlert" class="alert alert-info" role="alert" style="padding: 5px;"></div>
+        <div>
+            <table id="cinePreferenceTable" class="table">
+                <tr>
+                    <td>Cine mode</td>
+                    <td>
+                        <select id="palyselection" class="ktb-var-base">
+                            <option value="Stack">Stack</option>
+                            <option value="Study">Study</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        Repeat cine run <input type="number" id="timesToRepeat" name="timesToRepeat" min="1" max="500" style="width:55px;" class="ktb-var-base"> times,
+                        when the number of frames in a cine loop are less than or equal to <input type="number" id="framesToRepeat" name="framesToRepeat" min="1" max="500" style="width:55px;" class="ktb-var-base">
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">When looping through a study, pause single frame images for <input type="number" id="idleTime" name="idleTime" min="1" max="500" style="width:55px;" class="ktb-var-base"> seconds.</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    !-- Display Preference Dialog -->
+    <div id="hpModal" title="Display Preference">
+        <div></div>
+        <div id="hpList">
+            <table id="hpTableList" class="table">
+            </table>
+        </div>
+    </div>
+
+    !-- Copy Attributes Preference Dialog -->
+    <div id="copyAttributesPreference" title="Copy Attributes Preference">
+        <div></div>
+        <div id="copyAttributesPreferenceList">
+            <table id="copyAttributesPreferenceTableList" class="table">
+                <tr id="copyAttributes_tr_WL"><td><input type="checkbox" id="copyAttributes_WindowLevel" value="Window Level" checked>Window Level</td></tr>
+                <tr id="copyAttributes_tr_Scale"><td><input type="checkbox" id="copyAttributes_Scale" value="Scale" checked>Scale</td></tr>
+                <tr id="copyAttributes_tr_Invert"><td><input type="checkbox" id="copyAttributes_Invert" value="Invert" checked>Invert</td></tr>
+                <tr id="copyAttributes_tr_Orientation"><td><input type="checkbox" id="copyAttributes_Orientation" value="Orientation" checked>Orientation</td></tr>
+                <tr id="copyAttributes_tr_Pan" style="display:none"><td><input type="checkbox" id="copyAttributes_Pan" value="Pan" checked>Pan</td></tr>
+            </table>
+        </div>
+    </div>
+
+    !-- Edit Display Preference Dialog -->
+    <div id="addMoreHPModal" title="Display Preference Editor">
+        <div>
+            <table id="editHPTable" class="table">
+                <tr id="modalityRow">
+                    <td>Modality</td>
+                    <td>
+                        <select id="modalityList" class="ktb-var-base">
+                            <option value="US">US</option>
+                            <option value="MR">MR</option>
+                            <option value="CR">CR</option>
+                            <option value="XA">XA</option>
+                            <option value="CT">CT</option>
+                            <option value="ECG">ECG</option>
+                            <option value="NM">NM</option>
+                            <option value="SR">SR</option>
+                            <option value="MG">MG</option>
+                            <option value="DOC">DOC</option>
+                            <option value="DX">DX</option>
+                            <option value="OT">OT</option>
+                            <option value="SC">SC</option>
+                            <option value="PT">PT</option>
+                            <option value="RF">RF</option>
+                            <option value="ES">ES</option>
+                            <option value="XC">XC</option>
+                            <option value="General">General</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Rows</td>
+                    <td>
+                        <select id="layoutRows" class="ktb-var-base">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Columns</td>
+                    <td>
+                        <select id="layoutColumns" class="ktb-var-base">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Initial Zoom</td>
+                    <td>
+                        <select id="zoomModeValues" class="ktb-var-base">
+                            <option value="100%" id="0_zoom">100%</option>
+                            <option value="Fit-to-window" id="1_zoom">Fit-to-window</option>
+                            <option value="Fit-width-to-window" id="2_zoom">Fit-width-to-window</option>
+                            <option value="Fit-height-to-window" id="3_zoom">Fit-height-to-window</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr id="useEmbedPDFViewer_Row">
+                    <td>Use Browser PDF Plugin</td>
+                    <td>
+                        <select id="useEmbedPDFViewer" class="ktb-var-base">
+                            <option value="true" id="useEmbedPDFViewer_true">true</option>
+                            <option value="false" id="useEmbedPDFViewer_false">false</option>
+                        </select>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <style>
+        fieldset {
+            border: 1px solid #f7f8fb;
+            padding-left: 20px;
+        }
+
+            fieldset legend {
+                color: #fff;
+                width: 161px;
+                font-size: 11px;
+                border-bottom: 0px;
+            }
+    </style>
+
+    <!--Edit - P - State -->
+    <div id="edit-PState" title="Edit Presentation State" height=auto>
+        <div id="alert-edit-PState" width=100% class="alert alert-info" role="alert" style="padding: 5px; display:none"></div>
+        <div id="editPSTableDiv" width=100%>
+            <table id="editPStable" class="table" border="0" width=100%>
+                <tr width=100%>
+                    Name
+                    <td width=100%><input type="text" id="presentationName" style="color :black; width:100%" value="" readonly></td>
+                </tr>
+                <tr id="editPStateOptions" width=100% style="display:none">
+                    <td><input id="isEditable" type="radio" name="color" checked /> IsEditable<br></td>
+                    <td><input id="isPrivate" type="radio" name="color" /> IsPrivate</td>
+                </tr>
+            </table>
+        </div>
+        <div id="editPStateTextAreaDiv">
+            <table id="textAreaTable" class="table" border="0">
+                <tr>
+                    Description
+                    <td width=100%>
+                        <textarea id="editPStateDescription" rows="3" maxlength="200" style="height: 60px;width: 100%;color :black;resize:none"></textarea>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <!--splash - window - for annotation state -->
+    <div id="splash-window" class="absoluteCenter">
+        <div id="splash-content">
+        </div>
+    </div>
+
+    <!-- Toolbar measurement and annotation -->
+    <ul id="toolbar_measurementAnnotation" oncontextmenu="return false;" style="background: #363636;">
+        <li class="">
+            <a href="#" id="tool_measurements" onclick="">Measurement</a>
+            <ul id="tool_measurement_submenu">
+                <li>
+                    <a href="#" id="0_measurement" onclick="dicomViewer.tools.do2DMeasurement(0, null, null)">2D Length</a>
+                </li>
+                <li id="1_measurement">
+                    <a href="#" onclick="dicomViewer.tools.do2DMeasurement(1, null, null)">2D Point</a>
+                </li>
+                <li>
+                    <a href="#" id="6_measurement" onclick="dicomViewer.tools.do2DMeasurement(6, null, null)">2D Length Calibration</a>
+                </li>
+                <li id="angle_measurement">
+                    <a href="#" onclick="dicomViewer.tools.do2DMeasurement('angle', null, null)">Angle</a>
+                </li>
+                <li id="2_measurement">
+                    <a href="#" onclick="dicomViewer.tools.do2DMeasurement(2, null, 'mmHg')">Trace</a>
+                </li>
+                <li class="">
+                    <a href="#" id="tool_hounsfield" onclick="">Hounsfield</a>
+                    <ul id="tool_hounsfield_submenu">
+                        <li>
+                            <a href="#" id="7_measurement" onclick="dicomViewer.tools.do2DMeasurement('7', null, null)">Ellipse</a>
+                        </li>
+                        <li>
+                            <a href="#" id="14_measurement" onclick="dicomViewer.tools.do2DMeasurement('14', null, null)">Rectanlge</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+        <li class="">
+            <a href="#" id="tool_annotations" onclick="">Annotation</a>
+            <ul id="tool_annotation_submenu">
+                <li>
+                    <a href="#" id="8_text" onclick="dicomViewer.tools.do2DMeasurement(8, null, null)">Text</a>
+                </li>
+                <li id="9_line">
+                    <a href="#" onclick="dicomViewer.tools.do2DMeasurement(9, null, null)">Line</a>
+                </li>
+                <li>
+                    <a href="#" id="10_arrow" onclick="dicomViewer.tools.do2DMeasurement(10, null, null)">Arrow</a>
+                </li>
+                <li id="11_ellipse">
+                    <a href="#" onclick="dicomViewer.tools.do2DMeasurement(11, null, null)">Ellipse</a>
+                </li>
+                <li id="12_rectangle">
+                    <a href="#" onclick="dicomViewer.tools.do2DMeasurement(12, null, null)">Rectangle</a>
+                </li>
+                <li id="13_freehand">
+                    <a href="#" onclick="dicomViewer.tools.do2DMeasurement(13, null, 'mmHg')">Free Hand</a>
+                </li>
+            </ul>
+        </li>
+        <li>
+            <a href="#" id="4_measurement" onclick="dicomViewer.tools.do2DMeasurement(4, null, null)">Delete All</a>
+        </li>
+    </ul>
+    <script>
+        $(window).on('load', function () { });
+    </script>
+</body>
+</html>

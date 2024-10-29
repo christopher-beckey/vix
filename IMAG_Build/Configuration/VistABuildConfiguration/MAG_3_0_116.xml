@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<build xmlns="http://va.gov/VistA/kids/manifest" name="MAG*3.0*116" patchName="VistA Imaging V3.0 Patch 116 - Query Retrieve Provider II" patch="116">
+  <components>
+    <securityKeys />
+    <parameterDefinitions />
+    <printTemplates />
+    <sortTemplates />
+    <menuOptions />
+    <rpcs />
+    <dataDictionaries />
+    <hl7s />
+    <routines>
+      <routine export="MAGIP116.RTN" />
+    </routines>
+    <protocols />
+  </components>
+</build>

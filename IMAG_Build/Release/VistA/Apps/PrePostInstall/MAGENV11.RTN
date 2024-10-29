@@ -1,0 +1,46 @@
+MAGENV11 ;WOIFO/MLH - Environment check routine to abort if DICOM Correct not done ; 02 Apr 2004  1:46 PM
+ ;;3.0;IMAGING;**11**;01-March-2004
+ ;; +---------------------------------------------------------------+
+ ;; | Property of the US Government.                                |
+ ;; | No permission to copy or redistribute this software is given. |
+ ;; | Use of unreleased versions of this software requires the user |
+ ;; | to execute a written test agreement with the VistA Imaging    |
+ ;; | Development Office of the Department of Veterans Affairs,     |
+ ;; | telephone (301) 734-0100.                                     |
+ ;; |                                                               |
+ ;; | The Food and Drug Administration classifies this software as  |
+ ;; | a medical device.  As such, it may not be changed in any way. |
+ ;; | Modifications to this software may result in an adulterated   |
+ ;; | medical device under 21CFR820, the use of which is considered |
+ ;; | to be a violation of US Federal Statutes.                     |
+ ;; +---------------------------------------------------------------+
+ ;;
+ENV ; environment check - don't let them install if they have any
+ ; entries in the DICOM Correct queue in the pre-Patch-11 format
+ ; Abort ONLY during installation, not during load
+ ; 
+ ; Expects:  XPDENV   Kernel variable set 0 if this is load phase
+ ;                                        1 if this is install phase
+ ;                                        
+ K XPDABORT ; -- variable checked by Kernel, aborts install if defined
+ ;
+ ; if Patch 11 has never been installed here, then if we are in the
+ ; installation phase, and there is an entry on file --> abort!
+ ;
+ ; Patch 11 has been installed if File 2006.1 (IMAGING SITE PARAMETERS)
+ ; contains Field 125 (DICOM GATEWAY VERIFY CODE).
+ ; 
+ I '$$VFIELD^DILFD(2006.1,125),$O(^MAGD(2006.575," "),-1) D
+ . W !,"**********   A T T E N T I O N   **********"
+ . W !,"You must use the appropriate options in the"
+ . W !,"MAGD DICOM MENU to correct ALL existing"
+ . W !,"entries in the DICOM FAILED IMAGE File"
+ . W !,"before installing this package."
+ . I $G(XPDENV)=1 D  ; abort during Install Package(s)
+ . . W !!,"Aborting...",! S XPDABORT=2 ; don't kill transport global
+ . . Q
+ . E  D  ; don't abort during Load a Distribution
+ . . W !!,"Continuing...",!
+ . . Q
+ . Q
+ Q

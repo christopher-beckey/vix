@@ -1,0 +1,290 @@
+Cache for Windows NT^INT^Saved from DICOM,DICOM (ISW-KUZMAKP3-LT)^~Format=Cache.S~
+%RO on 04/01/2013  19:23
+MAGDWLU3^INT^1^62913,69817.542696^0
+MAGDWLU3 ;WOIFO/PMK - Worklist information user ; 01 Apr 2013 7:23 PM
+ ;;3.0;IMAGING;**21,10,11,30,53,49,123,110**;Mar 19, 2002;Build 61;Oct 10, 2012
+ ;; Per VHA Directive 2004-038, this routine should not be modified.
+ ;; +---------------------------------------------------------------+
+ ;; | Property of the US Government.                                |
+ ;; | No permission to copy or redistribute this software is given. |
+ ;; | Use of unreleased versions of this software requires the user |
+ ;; | to execute a written test agreement with the VistA Imaging    |
+ ;; | Development Office of the Department of Veterans Affairs,     |
+ ;; | telephone (301) 734-0100.                                     |
+ ;; | The Food and Drug Administration classifies this software as  |
+ ;; | a medical device.  As such, it may not be changed in any way. |
+ ;; | Modifications to this software may result in an adulterated   |
+ ;; | medical device under 21CFR820, the use of which is considered |
+ ;; | to be a violation of US Federal Statutes.                     |
+ ;; +---------------------------------------------------------------+
+ ;;
+ENTRY ; Called from ^MAGDWLU1 to read responses
+ N ACNUMB,CALLBACK,CASENUMB,CPTCODE,CPTNAME,DOB,INSTNAME,J,MODALITY
+ N PID,PNAME,PREGSTAT,PRIORITY,PROCDESC,PROCIEN,PTIOSTAT,RACE
+ N REASON,REFDOC,REPEAT,REQSVC,SEX,SPSLOC,STATUS,STUDYCMT,VALUE,WARD,X,Y
+ ;
+ F  D  Q:'REPEAT
+ . N RESPNUMB
+ . S REPEAT=0
+ . D SEQINIT^MAGDFCNS
+ . S RESPNUMB=$G(^TMP("MAG",$J,"DICOM","MOD WORK LIST"))
+ . I RESPNUMB="" D  Q  ; error
+ . . N MSG
+ . . S MSG(1)="An unknown error has occurred in processing the Modality Worklist query."
+ . . S MSG(2)="Check provider system's DICOM Message Log for error messages, and check"
+ . . S MSG(3)="that system's error trap to see if the process aborted."
+ . . S MSG(4)=""
+ . . S MSG(5)="This may have been caused with an incorrect dictionary configuration"
+ . . S MSG(6)="on this system.  Please check SCU_LIST.DIC to see how it has changed"
+ . . S MSG(7)="from SCU_LIST.SAMPLE, specifically the Modality Worklist entry."
+ . . D WARNING^MAGDFCNS(.MSG)
+ . . Q
+ . I RESPNUMB=1 D  Q  ; no matches
+ . . D NOMATCH^MAGDWLU4 K GNODE
+ . . Q
+ . E  I RESPNUMB=2 D  ; single match
+ . . S I=1 D SINGLE
+ . . Q
+ . E  D  ; multiple matches
+ . . D MULTIPLE
+ . . Q
+ . I I="" W !!,"No patient was selected" K GNODE Q
+ . W !!,"Is this the correct Patient and Study?"
+ . R "  n// ",X:$G(DTIME,300)
+ . I X="" S X="n" W X
+ . I "Yy"[$E(X) Q
+ . I RESPNUMB=2 W " - No patient/study was selected" K GNODE Q
+ . S REPEAT=1 ; select a different patient/study
+ . Q
+ Q
+ ;
+SINGLE ; display detailed information for one patient/study
+ N ADDRESS,ADMITID,HEIGHT,IDISSUER,PIDOTHER,RECIPENT
+ N REQDOC,SCHSDATE,SCHSTIME,SSN,VIP,WEIGHT
+ D GETDATA1(I)
+ W # S J=20
+ D OUTPUT("NL","Patient Name",$$NAME(PNAME),"R",J)
+ D OUTPUT("+3","Race",RACE)
+ D OUTPUT("NL","Patient Sex",SEX,"R",J)
+ D OUTPUT(6,"Status",PTIOSTAT,"R",10)
+ D OUTPUT(40,"Pregnancy Status",PREGSTAT,"R",J)
+ D OUTPUT("NL","Patient Identifier",SSN,"R",J)
+ D OUTPUT("+3","Other PID",PIDOTHER)
+ D OUTPUT("NL","Admission ID",ADMITID,"R",J)
+ D OUTPUT(40,"Issuer of Patient ID",IDISSUER,"R",J)
+ D OUTPUT("NL","Patient Height",HEIGHT,"R",J)
+ D OUTPUT(40,"Patient Weight",WEIGHT,"R",J)
+ D OUTPUT("NL","Date of Birth",$$DATE(DOB),"R",J)
+ D OUTPUT(40,"Location",WARD,"R",J)
+ D OUTPUT("NL","Address",ADDRESS)
+ D OUTPUT("NL","Confidentiality",VIP)
+ D OUTPUT(40,"Institution",INSTNAME)
+ ;
+ D TEXTOUT("0010,2000","M e d i c a l   A l e r t s","*") ; allergies
+ D TEXTOUT("0010,2110","A l l e r g i e s","*") ; allergies
+ ;
+ W !
+ D OUTPUT("NL","Accession Number",ACNUMB,"R",J)
+ D OUTPUT(40,"Requested Proc ID",CASENUMB,"R",J)
+ D OUTPUT("NL","VA Procedure Code",PROCIEN,"R",J)
+ D OUTPUT("+3","Name",PROCDESC)
+ D OUTPUT("NL","CPT Code",CPTCODE,"R",J)
+ D OUTPUT("+3","Name",CPTNAME)
+ W !,"Scheduled: ",$$DATE(SCHSDATE)," at ",$$TIME(SCHSTIME)
+ I $G(SPSLOC)'="" W " in ",SPSLOC
+ D OUTPUT(50,"Status",STATUS,"R",10)
+ D OUTPUT("NL","Requesting Physician",REQDOC,"R",J)
+ D OUTPUT(50,"Priority",PRIORITY,"R",10)
+ D OUTPUT("NL","Call Back Number",CALLBACK,"R",J)
+ D OUTPUT("NL","Requesting Service",REQSVC,"R",J)
+ D OUTPUT(40,"Attention",RECIPENT)
+ D OUTPUT("NL","Referring Physician",REFDOC,"R",J)
+ D OUTPUT("NL","Study UID",STUDYUID,"R",J)
+ D OUTPUT("NL","Reason for Study",REASON,"R",J)
+ ;
+ D TEXTOUT("0010,21B0","Additional Patient History","-")
+ D TEXTOUT("0040,1400","Requested Procedure Comments","-")
+ D TEXTOUT("0032,4000","Study Comment","-")
+ Q
+ ;
+TEXTOUT(TAG,TITLE,BANNER) ; output multiline text
+ N I,LENGTH,N,VR,X
+ ;
+ S X=$$GETDICT^MAGDFCNS(GNODE,TAG),VR=$P(X,"^",2)
+ ;
+ I VR="LO",$$GETDATA^MAGDFCNS(GNODE,TAG,1,1)="<unknown>" Q
+ ;
+ I VR["T" S LENGTH=80,I=1 ; VR = Short or Long Text
+ E  S LENGTH=64,I=0 ; VR = Long String (multiple 64 character lines)
+ S N=$$GETDATA^MAGDFCNS(GNODE,TAG,I,0)
+ ;
+ I 'N Q  ; no text to display
+ I N=1,$$GETDATA^MAGDFCNS(GNODE,TAG,1,1)="<unknown>" Q
+ ;
+ W !!,$TR($J("",(LENGTH-4-$L(TITLE))/2)," ",BANNER)
+ W "  ",TITLE,"  " F I=1:1 Q:$X'<LENGTH  W BANNER
+ F I=1:1:N D
+ . W ! I $Y>22 D
+ . . W "Press <Enter> for more..." R X:DTIME S $Y=0
+ . . F J=1:1:$X W $C(8,32,8)
+ . . Q
+ . I VR["T" W $$GETDATA^MAGDFCNS(GNODE,TAG,1,I) ; text
+ . E  W $$GETDATA^MAGDFCNS(GNODE,TAG,I,1) ; multiple long strings
+ . Q
+ W !,$TR($J("",LENGTH)," ",BANNER)
+ Q
+ ;
+OUTPUT(TAB,TITLE,VALUE,FORMAT,WIDTH) ; output one data field
+ N I,N
+ I TAB="NL" W ! ; new line
+ E  I TAB?1"+".N S N=+TAB F I=1:1:N W " " ; relative tab
+ E  W ?TAB ; absolute tab
+ I '$D(FORMAT) W TITLE,": ",VALUE
+ E  I FORMAT="R" D  ; right justify
+ . W $J(TITLE,WIDTH),": ",VALUE
+ . Q
+ Q
+ ;
+MULTIPLE ; display information for multiple patients and studies
+ N DONE,K
+ S DONE=0
+ S N=RESPNUMB-1 ; number of patient/studies in response
+ W !!,"There are ",N," matches... Press <Enter> for list" R X:$G(DTIME,300)
+ I N>20 D  ; more than twenty patient studies
+ . F K=1:20:N D MULTI Q:DONE
+ . Q
+ E  D  ; twenty or less patient studies
+ . S K=1 D MULTI Q:DONE
+ Q
+ ;
+MULTI ; display one set of multiple patient and study information
+ N K20
+ S K20=K+19 I K20>N S K20=N
+ W #?4,"Social Sec#",?17,"Patient's Name",?40,"Case#"
+ W ?49,"Procedure Description"
+ W !?4,"-----------",?17,"--------------",?40,"-----"
+ W ?49,"---------------------"
+ F I=K:1:K20 D MULTIONE
+ W !!,"Enter ",K,"-",K20," to see study details"
+ I K20<N W ", <Enter> to see more patients"
+ R ": ",I:DTIME I I="" Q
+ I I["^" S DONE=1,I="" Q
+ I I?1N.N,I'<K,I'>K20 D SINGLE S DONE=1 Q
+ R " ???",X:DTIME G MULTI
+ Q
+ ;
+MULTIONE ; display one line of data for each of several patients and studies
+ D GETDATA2(I)
+ W !,$J(I,2),")"
+ W ?4,SSN,?17,$E($$NAME(PNAME),1,20),?40,$J(CASENUMB,5)
+ I MODALITY'="<unknown>" W ?46,$E(MODALITY,1,2)
+ W ?49,$E(PROCDESC,1,31)
+ Q
+ ;
+GETDATA1(I) ; get all the data for one match
+ D GETDATA2(I)
+ S ACNUMB=$$GETDATA^MAGDFCNS(GNODE,"0008,0050")
+ S INSTNAME=$$GETDATA^MAGDFCNS(GNODE,"0008,0080")
+ S REFDOC=$$GETDATA^MAGDFCNS(GNODE,"0008,0090")
+ S REFDOC=$$NAME(REFDOC)
+ S IDISSUER=$$GETDATA^MAGDFCNS(GNODE,"0010,0021")
+ S DOB=$$GETDATA^MAGDFCNS(GNODE,"0010,0030")
+ S SEX=$$GETDATA^MAGDFCNS(GNODE,"0010,0040")
+ S PIDOTHER=$$GETDATA^MAGDFCNS(GNODE,"0010,1000",1) ; SITE-DFN
+ S X=$$GETDATA^MAGDFCNS(GNODE,"0010,1000",2) ; ICN
+ S X=$S($G(X)>0:X,1:"") I X'="" S PIDOTHER=PIDOTHER_"\"_X ; P123
+ S HEIGHT=$$GETDATA^MAGDFCNS(GNODE,"0010,1020")
+ I HEIGHT'="<unknown>" S HEIGHT=HEIGHT_" meters"
+ S WEIGHT=$$GETDATA^MAGDFCNS(GNODE,"0010,1030")
+ I WEIGHT'="<unknown>" S WEIGHT=WEIGHT_" kilograms"
+ S ADDRESS=$$GETDATA^MAGDFCNS(GNODE,"0010,1040")
+ S RACE=$$GETDATA^MAGDFCNS(GNODE,"0010,2160")
+ S PREGSTAT=$$GETDATA^MAGDFCNS(GNODE,"0010,21C0")
+ S STUDYID=$$GETDATA^MAGDFCNS(GNODE,"0020,0010")
+ S STUDYUID=$$GETDATA^MAGDFCNS(GNODE,"0020,000D")
+ S REASON=$$GETDATA^MAGDFCNS(GNODE,"0032,1030")
+ S REQDOC=$$GETDATA^MAGDFCNS(GNODE,"0032,1032")
+ S REQDOC=$$NAME(REQDOC)
+ S REQSVC=$$GETDATA^MAGDFCNS(GNODE,"0032,1033")
+ S STUDYCMT=$$GETDATA^MAGDFCNS(GNODE,"0032,4000")
+ S CALLBACK=$$GETDATA^MAGDFCNS(GNODE,"0040,2010")
+ S ADMITID=$$GETDATA^MAGDFCNS(GNODE,"0038,0010")
+ S WARD=$$GETDATA^MAGDFCNS(GNODE,"0038,0300")
+ S PTIOSTAT=$$GETDATA^MAGDFCNS(GNODE,"0038,4000")
+ S PRIORITY=$$GETDATA^MAGDFCNS(GNODE,"0040,1003")
+ S RECIPENT=$$NAME($$GETDATA^MAGDFCNS(GNODE,"0040,1010"))
+ ;
+ ; scheduled procedure step sequence
+ D SEQPUSH^MAGDFCNS("0040,0100")
+ S AETITLE=$$GETDATA^MAGDFCNS(GNODE,"0040,0001")
+ S SCHSDATE=$$GETDATA^MAGDFCNS(GNODE,"0040,0002")
+ S SCHSTIME=$$GETDATA^MAGDFCNS(GNODE,"0040,0003")
+ S SPSLOC=$$GETDATA^MAGDFCNS(GNODE,"0040,0011")
+ ;
+ ; requested procedure code description (CPT values)
+ D SEQPUSH^MAGDFCNS("0040,0008")
+ S PROCIEN=$$GETDATA^MAGDFCNS(GNODE,"0008,0100")
+ D SEQPOP^MAGDFCNS
+ S STATUS=$$GETDATA^MAGDFCNS(GNODE,"0040,0020")
+ ;
+ D SEQPOP^MAGDFCNS
+ ;
+ ; requested procedure code description (CPT values)
+ D SEQPUSH^MAGDFCNS("0032,1064")
+ S CPTCODE=$$GETDATA^MAGDFCNS(GNODE,"0008,0100")
+ S CPTNAME=$$GETDATA^MAGDFCNS(GNODE,"0008,0104")
+ D SEQPOP^MAGDFCNS
+ ;
+ D  ; decode pregnancy status
+ . I PREGSTAT=1 S PREGSTAT="Not Pregnant" Q
+ . I PREGSTAT=2 S PREGSTAT="Possibly Pregnant" Q
+ . I PREGSTAT=3 S PREGSTAT="Definitely Pregnant" Q
+ . I (PREGSTAT=4)!(PREGSTAT["unknown") S PREGSTAT="Unknown" Q
+ . S PREGSTAT="*** Illegal Value: "_PREGSTAT_" ***"
+ . Q
+ ;
+ S VIP=$$GETDATA^MAGDFCNS(GNODE,"0040,3001")
+ Q
+ ;
+GETDATA2(I) ; get the minimum data for one match
+ S GNODE="MOD WORK LIST "_I
+ S PNAME=$$GETDATA^MAGDFCNS(GNODE,"0010,0010")
+ S SSN=$$GETDATA^MAGDFCNS(GNODE,"0010,0020")
+ S CASENUMB=$$GETDATA^MAGDFCNS(GNODE,"0040,1001")
+ ;
+ ; scheduled procedure step sequence
+ D SEQPUSH^MAGDFCNS("0040,0100")
+ S MODALITY=$$GETDATA^MAGDFCNS(GNODE,"0008,0060")
+ S PROCDESC=$$GETDATA^MAGDFCNS(GNODE,"0040,0007")
+ D SEQPOP^MAGDFCNS
+ Q
+ ;
+NAME(DCMNAME) ; convert a DICOM person name to a readable format
+ N FIRST,LAST,MIDDLE,NAME,PREFIX,SUFFIX
+ I DCMNAME="<unknown>" Q DCMNAME
+ S LAST=$P(DCMNAME,"^",1),FIRST=$P(DCMNAME,"^",2)
+ S MIDDLE=$P(DCMNAME,"^",3)
+ S PREFIX=$P(DCMNAME,"^",4),SUFFIX=$P(DCMNAME,"^",5)
+ S NAME=LAST I (FIRST'="")!(MIDDLE'="") S NAME=NAME_","
+ I FIRST'="" S NAME=NAME_FIRST
+ E  S NAME=NAME_" <no first name>"
+ I MIDDLE'="" S NAME=NAME_" "_MIDDLE
+ I PREFIX'="" S NAME="("_PREFIX_") "_NAME
+ I SUFFIX'="" S NAME=NAME_" ("_SUFFIX_")"
+ Q NAME
+ ;
+DATE(DCMDATE) ; convert a DICOM date to a readable date
+ N DATE,DAY,MONTH,YEAR
+ S YEAR=$E(DCMDATE,1,4),MONTH=+$E(DCMDATE,5,6),DAY=+$E(DCMDATE,7,8)
+ S MONTH=$P("January,February,March,April,May,June,July,August,September,October,November,December",",",MONTH)
+ S DATE=DAY_" "_MONTH_" "_YEAR
+ Q DATE
+ ;
+TIME(DCMTIME) ; convert a DICOM time to a readable time
+ N HOUR,MINUTE,SECOND,TIME
+ S HOUR=$E(DCMTIME,1,2),MINUTE=$E(DCMTIME,3,4),SECOND=$E(DCMTIME,5,6)
+ S TIME=HOUR_":"_MINUTE_":"_SECOND
+ Q TIME
+
+
+

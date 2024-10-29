@@ -1,0 +1,247 @@
+MAGDIWB2 ;WOIFO/PMK/RRB - Send images to DICOM storage ; 16 Apr 2010 12:20 PM
+ ;;3.0;IMAGING;**11,30,51,50,54,99**;Mar 19, 2002;Build 2179;Jun 28, 2011
+ ;; Per VHA Directive 2004-038, this routine should not be modified.
+ ;; +---------------------------------------------------------------+
+ ;; | Property of the US Government.                                |
+ ;; | No permission to copy or redistribute this software is given. |
+ ;; | Use of unreleased versions of this software requires the user |
+ ;; | to execute a written test agreement with the VistA Imaging    |
+ ;; | Development Office of the Department of Veterans Affairs,     |
+ ;; | telephone (301) 734-0100.                                     |
+ ;; | The Food and Drug Administration classifies this software as  |
+ ;; | a medical device.  As such, it may not be changed in any way. |
+ ;; | Modifications to this software may result in an adulterated   |
+ ;; | medical device under 21CFR820, the use of which is considered |
+ ;; | to be a violation of US Federal Statutes.                     |
+ ;; +---------------------------------------------------------------+
+ ;;
+ Q
+ ;
+XMIT ; Called from ^MAGDMENU to start sending DICOM images
+ N CHOICE,DEFAULT,ENTRY,PROMPT
+ S ENTRY="REENTRY^"_$T(+0)
+ S PROMPT="Ready to send DICOM Images from VistA?"
+ Q:$$YESNO^MAGDIWBB(PROMPT,"y",.CHOICE)<0  Q:CHOICE="NO"
+ S DEFAULT=$G(^MAGDICOM(2006.563,1,"EXPORT SHOW CMD WINDOW"),"YES")
+ S PROMPT="Display the MAG_VISTA_SEND_IMAGE window?"
+ Q:$$YESNO^MAGDIWBB(PROMPT,DEFAULT,.CHOICE)<0
+ S ^MAGDICOM(2006.563,1,"EXPORT SHOW CMD WINDOW")=CHOICE
+ S PROMPT="" W !! ; need to bypass prompt in SETUP^MAGDSTRT
+ G SETUP^MAGDSTRT
+ ;
+REENTRY ; Re-entry point from ^MAGDSTRT
+ N ACCNUMB ;-- Accession Number
+ N D0,D1 ;---- Pointers to last image returned
+ N DCMCOUNT ;- Count of DICOM objects in the study
+ N ERROR ;---- Error encounted in image processing
+ N FBSWITCH ;- foreground / midground / background flag for ^MAGDMLOG
+ N FILEDCM ;-- File Name
+ N FROMLOC ;-- Array of locations being served
+ N I ;-------- Scratch
+ N IMAGE ;---- Pointer to Image
+ N INFO ;----- Return info from RPC
+ N LASTD0 ;--- Study for previous iteration
+ N LOCATION ;- Location of Gateway
+ N SENT ;----- List of successfully transmitted files
+ N USERAPPN ;- Next value of USERAPP
+ N USERAPP ;-- Current SCU User Application
+ N TICKER ;--- Ticker counter for idle loop
+ ;
+ S FBSWITCH="FOREGROUND" ; foreground/background switch
+ K ^TMP("MAG",$J,"DICOMXMIT"),^TMP("MAG",$J,"DICOM ERROR")
+ S ^MAGDICOM(2006.563,1,"DICOM XMIT")="RUN"
+ S LOCATION=$G(^MAGDICOM(2006.563,1,"LOCATION"))
+ D FROMLOC^MAGDIWBD(.FROMLOC)
+ S (SENT,USERAPP,USERAPPN)=""
+ S (TICKER,LASTD0,DCMCOUNT)=0 F  D  Q:TICKER<0
+ . I $G(^MAGDICOM(2006.563,1,"DICOM XMIT"))'="RUN" S TICKER=-1 Q
+ . S RPCERR=$$CALLRPC^MAGM2VCU("MAG DICOM GET NEXT QUEUE ENTRY","MT",.INFO,.FROMLOC,.SENT,0)
+ . K SENT ; Initialize the SENT array of completed images
+ . Q:$O(INFO(""))=""
+ . ;
+ . ; Two pass process:
+ . ;  1) Reconstitute the DICOM images
+ . ;  2) Send images
+ . ;
+ . S D0=+$G(INFO(2))
+ . S D1=+$G(INFO(3))
+ . S ACCNUMB=$G(INFO(6))
+ . S IMAGE=+$G(INFO(7))
+ . S USERAPP=USERAPPN,USERAPPN=$G(INFO(4))
+ . S DCMCOUNT=DCMCOUNT+1 ; increment DICOM object counter to output batches of 25
+ . I (LASTD0'=D0)!(DCMCOUNT>25) D  ; Transmit accumulated images from current study
+ . . D:USERAPP'="" ^MAGDIWB5
+ . . S LASTD0=D0
+ . . S DCMCOUNT=1
+ . . Q
+ . ;
+ . I IMAGE D
+ . . S ERROR=$$NEXT()
+ . . I ERROR'="" D
+ . . . I (+ERROR)<-100 D  ; serious errors
+ . . . . I $G(^TMP("MAG",$J,"DICOM ERROR"))'=(ACCNUMB_"^"_ERROR) D
+ . . . . . ; only output one error message per study
+ . . . . . N MSG
+ . . . . . S MSG(1)="Problem with Image #"_IMAGE_"  Accession Number: "_ACCNUMB
+ . . . . . S MSG(2)=ERROR
+ . . . . . S MSG(3)="File Path: "_INFO(10)
+ . . . . . D TRAPERR^MAGDSTRT(-1,$T(+0),"DICOM Image Export Error",.MSG,1)
+ . . . . . S ^TMP("MAG",$J,"DICOM ERROR")=ACCNUMB_"^"_ERROR
+ . . . . . Q
+ . . . . Q
+ . . . E  D  ; warnings
+ . . . . D MESSAGE^MAGDMLOG(1,0,ERROR,"BtV")
+ . . . . Q
+ . . . D REMOVE ; remove the offensive image from the queue
+ . . . K ^TMP("MAG",$J,"DICOMXMIT",D0,D1) ; delete image from list
+ . . . Q 
+ . . Q
+ . E  D IDLE^MAGDBB(.TICKER,1)
+ . Q
+ K ^TMP("MAG",$J,"DICOMXMIT"),^TMP("MAG",$J,"DICOM ERROR")
+ Q
+ ;
+NEXT() ; Get the next DICOM object
+ N DFN ;------ patient pointer
+ N OBJTYPE ;-- image object type
+ N MAGFILE1,MAGFILE2 ; External file names
+ N VADM ;----- demographics
+ N VAICN ;---- integration control number
+ N VAPA ;----- patient's address
+ N VAINFO
+ ;
+ S ^TMP("MAG",$J,"DICOMXMIT",D0,D1,0)=IMAGE
+ S ^TMP("MAG",$J,"DICOMXMIT",D0,D1,1)="WAITING"
+ ;
+ ; Big or Regular image file path?
+ S MAGFILE1=$G(INFO(9))
+ S MAGFILE2=$G(INFO(10)) ; File path for FULL or BIG2 file
+ ;
+ S OBJTYPE=$G(INFO(8))
+ ;
+ S DFN=INFO(11)
+ Q:$$CALLRPC^MAGM2VCU("MAG DICOM GET PATIENT","MT",.VAINFO,DFN)<0
+ D VADPT^MAGDRPC0(.VAINFO)
+ S VAICN=$S($G(VAICN)>0:VAICN,1:"")
+ ;
+ I OBJTYPE=3 N RETURN D  Q RETURN
+ . I INFO(9)?.E1".DCM" D  Q
+ . . S RETURN=$$DICOM()
+ . . Q
+ . S RETURN=$$TARGA()
+ . I RETURN?1"Can't open TGA image file".E,INFO(9)?.E1".BIG" D
+ . . ; the BIG file couldn't be found, so try the TGA file instead
+ . . S MAGFILE2=$G(INFO(12)) ; File path for FULL & TEXT file
+ . . S RETURN=$$TARGA()
+ . . Q
+ . Q
+ I OBJTYPE=100 Q $$DICOM()
+ Q "Can't handle this image: "_IMAGE_", type = """_OBJTYPE_"""."
+ ; 
+TARGA() ; Reconstitute a DICOM image from a TGA image and a *.TXT file
+ N BITALLOC ;- number of bits of pixel data allocated
+ N BITSTORE ;- number of bytes of pixel data stored
+ N COLUMNS ;-- number of columns in image, ie, the X-dimension
+ N FILETGA ;-- path to TARGA file to be converted to DICOM
+ N FILETXT ;-- path to TEXT file to be converted to DICOM
+ N IMAGESIZ ;- uncompressed size of image in bytes
+ N NSAMPLES ;- number of samples for each pixel (ie, BW=1 & RGB=3)
+ N PATHOUT ;-- directory root for output files
+ N ROWS ;----- number of rows in image, ie, the Y-dimension
+ N SEQNUMB ;-- nesting level of DICOM sequence; set in MSGINIT^MAGDFCNS
+ N SEQUENCE ;- DICOM nesting subscript sequence; set in MSGINIT^MAGDFCNS
+ N TGA ;------ array of TARGA header information
+ N ERRMSG,STATUS
+ ;
+ S STATUS=$$HEADER^MAGDTGA(MAGFILE2) ; Read the TGA header
+ I STATUS<0 Q "Can't open TGA image file.  Reason: "_STATUS
+ ;
+ S COLUMNS=TGA(5.3,"Image Width")
+ S ROWS=TGA(5.4,"Image Height")
+ I TGA(3,"Image Type")=2 S NSAMPLES=3 ; RGB color image
+ E  I TGA(3,"Image Type")=3 S NSAMPLES=1 ; Gray scale image
+ E  D  Q X
+ . S X="Bad Targa File -- "_MAGFILE2
+ . S X=X_"  Neither RGB color, nor gray scale."
+ . S X=X_"  Image Type is """_TGA(3,"Image Type")_"""."
+ . Q
+ ;
+ S BITSTORE=TGA(5.5,"Image Pixel Depth")/NSAMPLES
+ S BITALLOC=$S(BITSTORE=1:1,BITSTORE<9:8,BITSTORE<17:16,1:24)
+ S IMAGESIZ=ROWS*COLUMNS*(BITALLOC/8)*NSAMPLES ; size in bytes
+ ;
+ ; Build the DICOM header from the *.TXT file & reconstitute the image
+ S PATHOUT=^MAGDICOM(2006.563,1,"IMAGE OUTPUT PATH")
+ S (FILETGA,FILETXT)=MAGFILE2
+ S $P(FILETXT,".",$L(FILETXT,"."))="TXT"
+ S FILEDCM=PATHOUT_"\"_$P(MAGFILE1,".",1)_"_"_$J_".DCM"
+ S ERRMSG=$$ENTRY^MAGDIW3() ; Get the data to build the DICOM header
+ I ERRMSG'="" Q ERRMSG
+ ;
+ ; must do ^MAGDIW3B first since ^MAGDIW3A needs DATA1 block values 
+ S ERRMSG=$$ENTRY^MAGDIW3B() ; Coerce the patient id attributes
+ I ERRMSG'=""  Q ERRMSG
+ ;
+ S ERRMSG=$$ENTRY^MAGDIW3A() ; Modifications for Patch 50
+ I ERRMSG'="" Q ERRMSG
+ ;
+ D SAVESOP(0) ; Offset for a reconstituted image is zero
+ ;
+ S ERRMSG=$$ENTRY^MAGDIW3C() ; Create the new template
+ I ERRMSG'=""  Q ERRMSG
+ ;
+ D ENTRY^MAGDIW4 ; Reconstitute the DICOM image file
+ Q ""
+ ;
+DICOM() ; process a DICOM object
+ ; Copy the DICOM image to the output directory
+ N FILETXT ;-- path to TEXT file of DICOM object
+ N INODE ;---- node in ^TMP global for DICOM data storage
+ N OFFSET ;--- offset to the first tag beyond the DICOM meta file info
+ N PATHOUT ;-- directory root for output files
+ N QUEUEIN ;-- input file array
+ N DATE,TIME,FILESIZE,FIRSTTAG,ODEVNAME,ODEVTYPE,VERBOSE,X
+ ;
+ ; SSN patient safety check
+ S FILETXT=MAGFILE2
+ S $P(FILETXT,".",$L(FILETXT,"."))="TXT"
+ S ERRMSG=$$GETDATA1^MAGDIW3B ; read DATA1 block of *.TXT file
+ I ERRMSG'=""  Q ERRMSG
+ S ERRMSG=$$SSNCHECK^MAGDIW3B ; check SSN
+ I ERRMSG'=""  Q ERRMSG
+ ;
+ S QUEUEIN("FILE")=MAGFILE2,(ODEVNAME,ODEVTYPE)="",INODE="OUT"
+ ;
+ ; Lookup file creation date & time
+ S X=$$HOSTFILE^MAGDDR1(QUEUEIN("FILE"),.FILESIZE,.DATE,.TIME)
+ I X'=2 Q QUEUEIN("FILE")_$S('X:" -- Not on file",1:"  Error: "_X)
+ ;
+ S PATHOUT=^MAGDICOM(2006.563,1,"IMAGE OUTPUT PATH")
+ S FILEDCM=PATHOUT_"\"_$P(MAGFILE1,".",1)_"_"_$J_".DCM"
+ ; Get the offset to first tag beyond the DICOM meta file information
+ D ^MAGDDR2 ; Read the control group 0 dicom file
+ D FILECOPY^MAGDIW2A(MAGFILE2,FILEDCM,"DICOM EXPORT")
+ D ENTRY^MAGDIW2A ; Check if file needs PID updated
+ ;
+ S FIRSTTAG=$O(^TMP("MAG",$J,"DICOM",INODE,"0008,")),X=^(FIRSTTAG)
+ S OFFSET=$P(X,"^",3) ; Offset to first tag beyond the meta file info
+ D SAVESOP(OFFSET) ; Skip over meta file info when sending image file
+ Q ""
+ ;
+SAVESOP(OFFSET) ; Save SOP class, transfer syntax, and file name
+ N X
+ S X=$$GETDATA^MAGDFCNS("OUT","0008,0016",1,1)
+ S X=$$GETNAME^MAGDUID2(X)
+ S ^TMP("MAG",$J,"DICOMXMIT",D0,D1,5)=X ; SOP Class
+ S X=$$GETDATA^MAGDFCNS("OUT","0002,0010",1,1)
+ S X=$S(X="":"Implicit VR Little Endian",1:$$GETNAME^MAGDUID2(X))
+ S ^TMP("MAG",$J,"DICOMXMIT",D0,D1,4)=X ; Transfer Syntax
+ S ^TMP("MAG",$J,"DICOMXMIT",D0,D1,2)=FILEDCM
+ S ^TMP("MAG",$J,"DICOMXMIT",D0,D1,3)=OFFSET
+ Q
+ ;
+REMOVE ; remove the image file from the queue
+ ; Set the image file as being sent to remove it from the queue
+ N X
+ S X=$O(SENT(" "),-1)+1,SENT(X)=LASTD0_"^"_D1
+ Q

@@ -1,0 +1,151 @@
+MAGDACR1 ;WOIFO/PMK - DICOM Networking / Upper Layer Service / A-ASSOCIATE ; 29 May 2009 8:42 AM
+ ;;3.0;IMAGING;**30,54**;MAR 19, 2002;;OCT 28, 2009
+ ;; Per VHA Directive 2004-038, this routine should not be modified.
+ ;; +---------------------------------------------------------------+
+ ;; | Property of the US Government.                                |
+ ;; | No permission to copy or redistribute this software is given. |
+ ;; | Use of unreleased versions of this software requires the user |
+ ;; | to execute a written test agreement with the VistA Imaging    |
+ ;; | Development Office of the Department of Veterans Affairs,     |
+ ;; | telephone (301) 734-0100.                                     |
+ ;; | The Food and Drug Administration classifies this software as  |
+ ;; | a medical device.  As such, it may not be changed in any way. |
+ ;; | Modifications to this software may result in an adulterated   |
+ ;; | medical device under 21CFR820, the use of which is considered |
+ ;; | to be a violation of US Federal Statutes.                     |
+ ;; +---------------------------------------------------------------+
+ ;;
+ Q
+ ; Refer to Part 8, Section 9.3.2 of the DICOM Standard
+ ;
+ ; Read an Association Control Service Element Protocol Data Unit (PDU)
+ ;
+REQUEST(FILE,PDUTYPE) ; entry point to read an ASSOCIATE-RQ protocol data unit
+ N ACSEMODE ;- association message type; subscript in negotiation global
+ D MESSAGE^MAGDMLOG(2,0,"Receiving A-ASSOCIATE-REQUEST","BTV1")
+ S ACSEMODE="REQUEST"
+ D INPUT(FILE,.PDUTYPE)
+ Q
+ ;
+RESPONSE(FILE,PDUTYPE) ; entry point to read an ASSOCIATE-AC protocol data unit
+ N ACSEMODE ;- association message type; subscript in negotiation global
+ D MESSAGE^MAGDMLOG(2,0,"Receiving A-ASSOCIATE-RESPONSE","BTV1")
+ S ACSEMODE="RESPONSE"
+ D INPUT(FILE,.PDUTYPE)
+ Q
+ ;
+OREQUEST(FILE,PDUTYPE) ; entry point from ^MAGDACU1 and ^MAGDIW5
+ N ACSEMODE ;- association message type; subscript in negotiation global
+ S ACSEMODE="OUTPUT REQUEST" D INPUT(FILE,.PDUTYPE)
+ Q
+ ;
+ORESPONS(FILE,PDUTYPE) ; entry point from ^MAGDACP1, ^MAGDACR1, ^MAGDCST1
+ N ACSEMODE ;- association message type; subscript in negotiation global
+ S ACSEMODE="OUTPUT RESPONSE" D INPUT(FILE,.PDUTYPE)
+ Q
+ ;
+REJECT(FILE,PDUTYPE) ; entry point to read an ASSOCIATE-RJ protocol data unit
+ N ACSEMODE ;- association message type; subscript in negotiation global
+ S ACSEMODE="REJECT"
+ D INPUT(FILE,.PDUTYPE)
+ Q
+ ;
+INPUT(FILE,PDUTYPE) ; parse the incoming PDU
+ ; read the PDU header
+ N BYTEORDR ;- little/big endian byte order for low-level reads & writes
+ N FILESIZE,LENGTH,STATUS,X
+ ;
+ S BYTEORDR="B" ; Big Endian byte ordering is used for PDU encoding
+ S STATUS=$$USE^MAGOSFIL(FILE)
+ S PDUTYPE=$$GETBYTE^MAGDDR0 ; PDU type (byte 1)
+ S PDUTYPE=$$HEX^MAGDDR0(PDUTYPE,2)_"H"
+ S X=$$GETBYTE^MAGDDR0 ; reserved (byte 2)
+ S LENGTH=$$GETULONG^MAGDDR0 ; PDU length (bytes 3-6)
+ S FILESIZE=LENGTH+$$GETOFSET^MAGOSFIL(FILE) ; convert to length of file
+ I $$USEPRIN^MAGOSFIL(1)
+ D LOGITEM("PDU",PDUTYPE,LENGTH)
+ ;
+ I "01H^02H"[PDUTYPE D  ; association request/acceptance
+ . D ASSOCIAT
+ . Q
+ E  I PDUTYPE="03H" D  ; association rejection
+ . D REJECT^MAGDACR2 ; -- missing label will cause error
+ . Q
+ E  I PDUTYPE="04H" D  ; data -- error, wrong place in sequence
+ . N MSG
+ . S MSG(1)="PDU is out of sequence."
+ . S MSG(2)="PDU Type is 04, data."
+ . D TRAPERR^MAGDSTRT(1,$T(+0),"DICOM GATEWAY ERROR",.MSG)
+ . Q  ; Error trap does not return
+ E  I "05H^06H"[PDUTYPE D  ; release association request/response
+ . D RELEASE
+ . Q
+ E  I PDUTYPE="07H" D  ; abort association
+ . D MESSAGE^MAGDMLOG(2,0,"PDU Type is 07, abort association.","BTV")
+ . D RELEASE
+ . Q
+ E  D MESSAGE^MAGDMLOG(2,0,"Illegal PDU Type: "_PDUTYPE,"BTV")
+ ;
+ S STATUS=$$CLOSE^MAGOSFIL(FILE)
+ I $$USEPRIN^MAGOSFIL(1)
+ Q
+ ;
+RELEASE ; release the association
+ Q
+ ;
+ASSOCIAT ; get the data from the A-ASSOCIATE-RQ/AC PDU
+ N ITEMTYPE,STATUS,X
+ S STATUS=$$USE^MAGOSFIL(FILE)
+ S X=$$GETUSHOR^MAGDDR0 ; protocol version (bytes 7-8)
+ D MESSAGE^MAGDMLOG(1,0,"Version="_X,"V")
+ I X'=1 D
+ . N MSG
+ . S MSG(1)="Expected protocol version 1."
+ . S MSG(2)="Found """_X_"""."
+ . D TRAPERR^MAGDSTRT(1,$T(+0),"DICOM GATEWAY ERROR",.MSG)
+ . Q  ; Error trap does not return
+ S X=$$GETUSHOR^MAGDDR0 ; reserved (byte 9-10)
+ ;
+ ; Called Application title
+ S CALLED=$$GETASCII^MAGDDR0(16,"","T") ; (bytes 11-26)
+ D MESSAGE^MAGDMLOG(0,12,"Called AE: """_CALLED_"""","V")
+ S ^TMP("MAG",$J,"DICOM","NEGOTIATE",ACSEMODE,"CALLED AE")=CALLED
+ ;
+ ; Calling Application title
+ S CALLING=$$GETASCII^MAGDDR0(16,"","T") ; (bytes 27-42)
+ D MESSAGE^MAGDMLOG(0,45,"Calling AE: """_CALLING_"""","V")
+ S ^TMP("MAG",$J,"DICOM","NEGOTIATE",ACSEMODE,"CALLING AE")=CALLING
+ ;
+ S X=$$GETASCII^MAGDDR0(32,"","") ; reserved field (bytes 43-74)
+ ;
+ ; Variable items follow in bytes 75-xxx of the message
+ ;
+ F  Q:$$GETOFSET^MAGOSFIL(FILE)'<FILESIZE  D
+ . N LINETAG
+ . S ITEMTYPE=$$GETBYTE^MAGDDR0 ; Item type (byte 1)
+ . S ITEMTYPE=$$HEX^MAGDDR0(ITEMTYPE,2)_"H"
+ . S X=$$GETBYTE^MAGDDR0 ; reserved (byte 2)
+ . S LENGTH=$$GETUSHOR^MAGDDR0 ; Item length (bytes 3-4)
+ . D LOGITEM("ITEM",ITEMTYPE,LENGTH)
+ . S LINETAG="ITEM"_ITEMTYPE I $T(@LINETAG^MAGDACR3)="" D
+ . . N MSG
+ . . S MSG(1)="No subroutine for opcode: """_LINETAG_"""."
+ . . D TRAPERR^MAGDSTRT(1,$T(+0),"DICOM GATEWAY ERROR",.MSG)
+ . . Q  ; Error trap does not return
+ . D @LINETAG^MAGDACR3
+ . Q
+ Q
+ ;
+LOGITEM(TITLE,ITEM,LENGTH) ;
+ N I,MSG,X
+ S MSG=TITLE_" Type: "_ITEM_" ("
+ S I=$O(^MAGDICOM(2006.54,"B",ITEM,""))
+ I I S X=^MAGDICOM(2006.54,I,0) S MSG=MSG_$P(X,"^",2)
+ S MSG=MSG_")" S $E(MSG,65)=" Length="_LENGTH
+ D MESSAGE^MAGDMLOG(1,0,MSG,"V")
+ Q
+ ;
+LOGUID(TITLE,UID) ; output a title, a UID, and its corresponding Name
+ D MESSAGE^MAGDMLOG(1,0,TITLE_": "_UID_"  ("_$$GETNAME^MAGDUID2(UID)_")","V")
+ Q
+ ;
