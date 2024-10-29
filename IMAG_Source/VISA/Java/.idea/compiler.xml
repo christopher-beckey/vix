@@ -193,6 +193,7 @@
       <module name="DataDictionaryVistaImagingDataSourceProvider" options="-source 1.8 -target 1.8 -g -deprecation" />
       <module name="DataDictionaryWebApp" options="-source 1.8 -target 1.8 -g -deprecation -s C:\Users\OITCOBECKEC\Documents\GitHub\imag-code-p357-vix\IMAG_Source\VISA\Java\DataDictionaryWebApp/main/generated/java" />
       <module name="DataSourceServiceProvider" options="-source 1.8 -target 1.8 -g -deprecation" />
+      <module name="DefaultVISAWebApp" options="-source 1.8 -target 1.8 -g -deprecation -s C:\Users\OITCOBECKEC\Documents\GitHub\imag-code-p357-vix\IMAG_Source\VISA\Java\DefaultVISAWebApp/main/generated/java" />
       <module name="DicomImporterWebApp" options="-source 1.8 -target 1.8 -g -deprecation -s C:\Users\OITCOBECKEC\Documents\GitHub\imag-code-p357-vix\IMAG_Source\VISA\Java\DicomImporterWebApp/main/generated/java" />
       <module name="DicomServicesCommon" options="-source 1.8 -target 1.8 -g -deprecation" />
       <module name="DicomServicesConnection" options="-source 1.8 -target 1.8 -g -deprecation" />
@@ -208,6 +209,7 @@
       <module name="ExchangeDataSource" options="-source 1.8 -target 1.8 -g -deprecation" />
       <module name="ExchangeSiteServiceSOAPServer" options="-source 1.8 -target 1.8 -g -deprecation -s C:\Users\OITCOBECKEC\Documents\GitHub\imag-code-p357-vix\IMAG_Source\VISA\Java\ExchangeSiteServiceSOAPServer/main/generated/java" />
       <module name="ExchangeWebApp" options="-source 1.8 -target 1.8 -g -deprecation -s C:\Users\OITCOBECKEC\Documents\GitHub\imag-code-p357-vix\IMAG_Source\VISA\Java\ExchangeWebApp/main/generated/java" />
+      <module name="FederationCommon" options="-source 1.8 -target 1.8 -g -deprecation" />
       <module name="FederationConnection" options="-source 1.8 -target 1.8 -g -deprecation" />
       <module name="FederationDataSourceProvider" options="-source 1.8 -target 1.8 -g -deprecation" />
       <module name="FederationDataSourceProviderCodeGenerator" options="-source 1.8 -target 1.8 -g -deprecation" />
