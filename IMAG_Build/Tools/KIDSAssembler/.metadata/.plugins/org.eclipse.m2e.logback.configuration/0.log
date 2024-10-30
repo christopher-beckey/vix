@@ -1,3 +1,0 @@
-2017-08-29 15:37:47,024 [main] INFO  c.g.e.m.h.c.ui.Html5AppCoreUIPlugin - Pluging started
-2017-08-29 15:37:51,158 [Worker-0] INFO  o.e.m.c.i.i.nexus.NexusIndexManager - Updating index for repository: central|http://repo.maven.apache.org/maven2
-2017-08-29 15:37:51,220 [Worker-0] INFO  c.n.h.c.p.n.NettyAsyncHttpProvider - Number of application's worked threads is 8
