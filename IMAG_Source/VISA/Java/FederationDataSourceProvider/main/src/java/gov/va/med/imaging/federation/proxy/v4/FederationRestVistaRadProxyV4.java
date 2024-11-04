@@ -206,7 +206,7 @@ extends AbstractFederationRestProxy
 		return result;
 	}
 	
-	public Exam getExam(StudyURN studyUrn)
+	public Exam getExam(StudyURN studyUrn, final String patListColumnsIndicator)
 	throws MethodException, ConnectionException
 	{
 		String transactionId = TransactionContextFactory.get().getTransactionId();

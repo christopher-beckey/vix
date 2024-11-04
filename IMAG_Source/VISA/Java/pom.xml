@@ -187,7 +187,7 @@
     <dependency>
       <groupId>dcf</groupId>
       <artifactId>LaurelBridge</artifactId>
-      <version>3.3.40c</version>
+      <version>3.3.68c</version>
       <scope>provided</scope>
     </dependency>
     <dependency>
@@ -490,12 +490,6 @@
       <version>1.10</version>
       <scope>provided</scope>
     </dependency>
-    <dependency>
-      <groupId>commons-lang</groupId>
-      <artifactId>commons-lang</artifactId>
-      <version>2.5</version>
-      <scope>provided</scope>
-    </dependency>
     <!-- Dependencies needed for Jersey 1.19.4 -->
     <dependency>
       <groupId>com.sun.jersey</groupId>
@@ -533,18 +527,18 @@
       <version>1.19.4</version>
       <scope>provided</scope>
     </dependency>
-	<dependency>
-	  <groupId>org.codehaus.jackson</groupId>
-	  <artifactId>com.springsource.org.codehaus.jackson</artifactId>
-	  <version>1.4.2</version>
-      <scope>provided</scope>
-	</dependency>
-    <dependency>
-	  <groupId>org.codehaus.jackson</groupId>
-	  <artifactId>com.springsource.org.codehaus.jackson.mapper</artifactId>
-	  <version>1.4.2</version>
-      <scope>provided</scope>
-    </dependency>
+<!--	<dependency>-->
+<!--	  <groupId>org.codehaus.jackson</groupId>-->
+<!--	  <artifactId>com.springsource.org.codehaus.jackson</artifactId>-->
+<!--	  <version>1.4.2</version>-->
+<!--      <scope>provided</scope>-->
+<!--	</dependency>-->
+<!--    <dependency>-->
+<!--	  <groupId>org.codehaus.jackson</groupId>-->
+<!--	  <artifactId>com.springsource.org.codehaus.jackson.mapper</artifactId>-->
+<!--	  <version>1.4.2</version>-->
+<!--      <scope>provided</scope>-->
+<!--    </dependency>-->
     <dependency>
       <groupId>javax.ws.rs</groupId>
       <artifactId>jsr311-api</artifactId>

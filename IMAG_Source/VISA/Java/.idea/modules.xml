@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/AxWebApp/AxWebApp.iml" filepath="$PROJECT_DIR$/AxWebApp/AxWebApp.iml" />
+      <module fileurl="file://$PROJECT_DIR$/BaseWebFacade/BaseWebFacade.iml" filepath="$PROJECT_DIR$/BaseWebFacade/BaseWebFacade.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ClinicalDisplayWebApp/ClinicalDisplayWebApp.iml" filepath="$PROJECT_DIR$/ClinicalDisplayWebApp/ClinicalDisplayWebApp.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ConsultFederationWebAppComponents/ConsultFederationWebAppComponents.iml" filepath="$PROJECT_DIR$/ConsultFederationWebAppComponents/ConsultFederationWebAppComponents.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ConsultWebApp/ConsultWebApp.iml" filepath="$PROJECT_DIR$/ConsultWebApp/ConsultWebApp.iml" />
+      <module fileurl="file://$PROJECT_DIR$/CoreRouter/CoreRouter.iml" filepath="$PROJECT_DIR$/CoreRouter/CoreRouter.iml" />
+      <module fileurl="file://$PROJECT_DIR$/DataDictionaryWebApp/DataDictionaryWebApp.iml" filepath="$PROJECT_DIR$/DataDictionaryWebApp/DataDictionaryWebApp.iml" />
+      <module fileurl="file://$PROJECT_DIR$/DefaultVISAWebApp/DefaultVISAWebApp.iml" filepath="$PROJECT_DIR$/DefaultVISAWebApp/DefaultVISAWebApp.iml" />
+      <module fileurl="file://$PROJECT_DIR$/DicomImporterWebApp/DicomImporterWebApp.iml" filepath="$PROJECT_DIR$/DicomImporterWebApp/DicomImporterWebApp.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ExchangeSiteServiceSOAPServer/ExchangeSiteServiceSOAPServer.iml" filepath="$PROJECT_DIR$/ExchangeSiteServiceSOAPServer/ExchangeSiteServiceSOAPServer.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ExchangeWebApp/ExchangeWebApp.iml" filepath="$PROJECT_DIR$/ExchangeWebApp/ExchangeWebApp.iml" />
+      <module fileurl="file://$PROJECT_DIR$/FederationWebApp/FederationWebApp.iml" filepath="$PROJECT_DIR$/FederationWebApp/FederationWebApp.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ImageWebApp/ImageWebApp.iml" filepath="$PROJECT_DIR$/ImageWebApp/ImageWebApp.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ImagingBaseWebFacade/ImagingBaseWebFacade.iml" filepath="$PROJECT_DIR$/ImagingBaseWebFacade/ImagingBaseWebFacade.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ImagingDataWebApp/ImagingDataWebApp.iml" filepath="$PROJECT_DIR$/ImagingDataWebApp/ImagingDataWebApp.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ImagingDicomRouter/ImagingDicomRouter.iml" filepath="$PROJECT_DIR$/ImagingDicomRouter/ImagingDicomRouter.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ImagingRouter/ImagingRouter.iml" filepath="$PROJECT_DIR$/ImagingRouter/ImagingRouter.iml" />
+      <module fileurl="file://$PROJECT_DIR$/IndexTermFederationWebAppComponents/IndexTermFederationWebAppComponents.iml" filepath="$PROJECT_DIR$/IndexTermFederationWebAppComponents/IndexTermFederationWebAppComponents.iml" />
+      <module fileurl="file://$PROJECT_DIR$/IndexTermWebApp/IndexTermWebApp.iml" filepath="$PROJECT_DIR$/IndexTermWebApp/IndexTermWebApp.iml" />
+      <module fileurl="file://$PROJECT_DIR$/IngestBaseWeb/IngestBaseWeb.iml" filepath="$PROJECT_DIR$/IngestBaseWeb/IngestBaseWeb.iml" />
+      <module fileurl="file://$PROJECT_DIR$/IngestRouter/IngestRouter.iml" filepath="$PROJECT_DIR$/IngestRouter/IngestRouter.iml" />
+      <module fileurl="file://$PROJECT_DIR$/IngestWebApp/IngestWebApp.iml" filepath="$PROJECT_DIR$/IngestWebApp/IngestWebApp.iml" />
+      <module fileurl="file://$PROJECT_DIR$/MIXWebApp/MixWebApp.iml" filepath="$PROJECT_DIR$/MIXWebApp/MixWebApp.iml" />
+      <module fileurl="file://$PROJECT_DIR$/PathologyCommands/PathologyCommands.iml" filepath="$PROJECT_DIR$/PathologyCommands/PathologyCommands.iml" />
+      <module fileurl="file://$PROJECT_DIR$/PathologyFederationDataSourceProvider/PathologyFederationDataSourceProvider.iml" filepath="$PROJECT_DIR$/PathologyFederationDataSourceProvider/PathologyFederationDataSourceProvider.iml" />
+      <module fileurl="file://$PROJECT_DIR$/PathologyFederationWebAppComponents/PathologyFederationWebAppComponents.iml" filepath="$PROJECT_DIR$/PathologyFederationWebAppComponents/PathologyFederationWebAppComponents.iml" />
+      <module fileurl="file://$PROJECT_DIR$/PathologyVistaImagingDataSourceProvider/PathologyVistaImagingDataSourceProvider.iml" filepath="$PROJECT_DIR$/PathologyVistaImagingDataSourceProvider/PathologyVistaImagingDataSourceProvider.iml" />
+      <module fileurl="file://$PROJECT_DIR$/PathologyWebApp/PathologyWebApp.iml" filepath="$PROJECT_DIR$/PathologyWebApp/PathologyWebApp.iml" />
+      <module fileurl="file://$PROJECT_DIR$/PatientWebApp/PatientWebApp.iml" filepath="$PROJECT_DIR$/PatientWebApp/PatientWebApp.iml" />
+      <module fileurl="file://$PROJECT_DIR$/PresentationStateCommon/PresentationStateCommon.iml" filepath="$PROJECT_DIR$/PresentationStateCommon/PresentationStateCommon.iml" />
+      <module fileurl="file://$PROJECT_DIR$/PresentationStateRouter/PresentationStateRouter.iml" filepath="$PROJECT_DIR$/PresentationStateRouter/PresentationStateRouter.iml" />
+      <module fileurl="file://$PROJECT_DIR$/PresentationStateVistaImagingDataSourceProvider/PresentationStateVistaImagingDataSourceProvider.iml" filepath="$PROJECT_DIR$/PresentationStateVistaImagingDataSourceProvider/PresentationStateVistaImagingDataSourceProvider.iml" />
+      <module fileurl="file://$PROJECT_DIR$/PresentationStateWebApp/PresentationStateWebApp.iml" filepath="$PROJECT_DIR$/PresentationStateWebApp/PresentationStateWebApp.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ROICommands/ROICommands.iml" filepath="$PROJECT_DIR$/ROICommands/ROICommands.iml" />
+      <module fileurl="file://$PROJECT_DIR$/SiteServiceSOAPServer/SiteServiceSOAPServer.iml" filepath="$PROJECT_DIR$/SiteServiceSOAPServer/SiteServiceSOAPServer.iml" />
+      <module fileurl="file://$PROJECT_DIR$/SiteServiceWebApp/SiteServiceWebApp.iml" filepath="$PROJECT_DIR$/SiteServiceWebApp/SiteServiceWebApp.iml" />
+      <module fileurl="file://$PROJECT_DIR$/StorageWebApp/StorageWebApp.iml" filepath="$PROJECT_DIR$/StorageWebApp/StorageWebApp.iml" />
+      <module fileurl="file://$PROJECT_DIR$/StudyWebApp/StudyWebApp.iml" filepath="$PROJECT_DIR$/StudyWebApp/StudyWebApp.iml" />
+      <module fileurl="file://$PROJECT_DIR$/TIURouter/TIURouter.iml" filepath="$PROJECT_DIR$/TIURouter/TIURouter.iml" />
+      <module fileurl="file://$PROJECT_DIR$/TIUWebApp/TIUWebApp.iml" filepath="$PROJECT_DIR$/TIUWebApp/TIUWebApp.iml" />
+      <module fileurl="file://$PROJECT_DIR$/UserWebApp/UserWebApp.iml" filepath="$PROJECT_DIR$/UserWebApp/UserWebApp.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ViewerImagingRouter/ViewerImagingRouter.iml" filepath="$PROJECT_DIR$/ViewerImagingRouter/ViewerImagingRouter.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ViewerImagingWebApp/ViewerImagingWebApp.iml" filepath="$PROJECT_DIR$/ViewerImagingWebApp/ViewerImagingWebApp.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ViewerStudyWebApp/ViewerStudyWebApp.iml" filepath="$PROJECT_DIR$/ViewerStudyWebApp/ViewerStudyWebApp.iml" />
+      <module fileurl="file://$PROJECT_DIR$/VistaRadWebApp/VistaRadWebApp.iml" filepath="$PROJECT_DIR$/VistaRadWebApp/VistaRadWebApp.iml" />
+      <module fileurl="file://$PROJECT_DIR$/VistaUserPreferenceCommon/VistaUserPreferenceCommon.iml" filepath="$PROJECT_DIR$/VistaUserPreferenceCommon/VistaUserPreferenceCommon.iml" />
+      <module fileurl="file://$PROJECT_DIR$/VistaUserPreferenceDataSourceProvider/VistaUserPreferenceDataSourceProvider.iml" filepath="$PROJECT_DIR$/VistaUserPreferenceDataSourceProvider/VistaUserPreferenceDataSourceProvider.iml" />
+      <module fileurl="file://$PROJECT_DIR$/VistaUserPreferenceRouter/VistaUserPreferenceRouter.iml" filepath="$PROJECT_DIR$/VistaUserPreferenceRouter/VistaUserPreferenceRouter.iml" />
+      <module fileurl="file://$PROJECT_DIR$/VistaUserPreferenceWebApp/VistaUserPreferenceWebApp.iml" filepath="$PROJECT_DIR$/VistaUserPreferenceWebApp/VistaUserPreferenceWebApp.iml" />
+      <module fileurl="file://$PROJECT_DIR$/VixCacheWebApp/VixCacheWebApp.iml" filepath="$PROJECT_DIR$/VixCacheWebApp/VixCacheWebApp.iml" />
+      <module fileurl="file://$PROJECT_DIR$/VixGuiWebApp/VixGuiWebApp.iml" filepath="$PROJECT_DIR$/VixGuiWebApp/VixGuiWebApp.iml" />
+      <module fileurl="file://$PROJECT_DIR$/VixServerHealthWebApp/VixServerHealthWebApp.iml" filepath="$PROJECT_DIR$/VixServerHealthWebApp/VixServerHealthWebApp.iml" />
+    </modules>
+  </component>
+</project>

@@ -27,6 +27,8 @@ package gov.va.med.imaging.vistaimagingdatasource;
 
 import java.io.IOException;
 
+import gov.va.med.imaging.StudyURN;
+import gov.va.med.imaging.exchange.business.vistarad.Exam;
 import gov.va.med.logging.Logger;
 
 import gov.va.med.imaging.artifactsource.ResolvedArtifactSource;
@@ -111,8 +113,8 @@ extends AbstractVersionableDataSource
     /* (non-Javadoc)
      * @see gov.va.med.imaging.datasource.VistaRadDataSource#getExam(gov.va.med.imaging.StudyURN)
      */
-    public abstract Exam getExam(StudyURN studyUrn, String... patListColumnsIndicator)
-    throws MethodException, ConnectionException;
+//    public abstract Exam getExam(StudyURN studyUrn, final String patListColumnsIndicator)
+//    throws MethodException, ConnectionException;
 
     protected abstract VistaQuery getExamImagesQuery(String examId, boolean useTgaImages,
                                                      boolean forceImagesFromJb);

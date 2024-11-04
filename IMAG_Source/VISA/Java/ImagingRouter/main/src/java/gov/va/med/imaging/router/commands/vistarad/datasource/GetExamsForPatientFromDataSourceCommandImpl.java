@@ -49,15 +49,17 @@ extends AbstractDataSourceCommandImpl<ExamListResult, VistaRadDataSourceSpi>
 	private final boolean fullyLoadExams;
 	private final boolean forceRefresh;
 	private final boolean forceImagesFromJb;
+	private final String patListColumnsIndicator;
 	
 	public GetExamsForPatientFromDataSourceCommandImpl(RoutingToken routingToken, String patientIcn, 
-			boolean fullyLoadExams, boolean forceRefresh, boolean forceImagesFromJb)
+			boolean fullyLoadExams, boolean forceRefresh, boolean forceImagesFromJb, final String patListColumnsIndicator)
 	{
 		this.routingToken = routingToken;
 		this.patientIcn = patientIcn;
 		this.fullyLoadExams = fullyLoadExams;
 		this.forceRefresh = forceRefresh;
 		this.forceImagesFromJb = forceImagesFromJb;
+		this.patListColumnsIndicator = patListColumnsIndicator;
 	}
 
 	/**
@@ -90,6 +92,10 @@ extends AbstractDataSourceCommandImpl<ExamListResult, VistaRadDataSourceSpi>
 		return forceImagesFromJb;
 	}
 
+	public String getPatListColumnsIndicator() {
+		return patListColumnsIndicator;
+	}
+
 	@Override
 	protected Object[] getSpiMethodParameters()
 	{
@@ -111,7 +117,7 @@ extends AbstractDataSourceCommandImpl<ExamListResult, VistaRadDataSourceSpi>
 	throws ConnectionException, MethodException 
 	{
 		return spi.getExamsForPatient(getRoutingToken(), getPatientIcn(), isFullyLoadExams(), 
-				isForceRefresh(), isForceImagesFromJb());
+				isForceRefresh(), isForceImagesFromJb(), getPatListColumnsIndicator());
 	}
 
 	/* (non-Javadoc)

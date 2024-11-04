@@ -28,6 +28,7 @@ import org.apache.logging.log4j.core.config.Configuration;
 import org.apache.logging.log4j.core.config.Configurator;
 import org.apache.logging.log4j.core.config.LoggerConfig;
 import org.apache.logging.log4j.core.layout.PatternLayout;
+import org.apache.logging.log4j.LogManager;
 
 import junit.framework.TestCase;
 
@@ -76,8 +77,6 @@ extends TestCase
         config.addLogger("TestVistaSession", loggerConfig);
         context.updateLoggers(config);
 
-        Logger logger=LogManager.getContext().getLogger("TestVistaSession");
-	    
 	    ProtocolHandlerUtility.initialize(true);
 		
 		List<String> roles = new ArrayList<String>();

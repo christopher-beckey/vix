@@ -36,7 +36,7 @@ public class DCFConstants {
     public static final String PATIENTSTUDYONLYROOT_FIND = UID.SOPPATIENTQUERY_FIND;
     public static final String PATIENTROOT_MOVE = UID.SOPPATIENTQUERY_MOVE;
     public static final String STUDYROOT_MOVE = UID.SOPSTUDYQUERY_MOVE;
-    public static final String PATIENTSTUDYONLYROOT_MOVE = UID.SOPPATIENTSTUDYQUERY_MOVE;
+    public static final String PATIENTSTUDYONLYROOT_MOVE = UID.SOPPATIENTSTUDYQUERY_MOVE_RET;
     
     public static final int DIMSE_STATUS_CANCEL = QRDimseStatus.CANCEL;
     public static final int DIMSE_STATUS_PENDING = QRDimseStatus.PENDING;

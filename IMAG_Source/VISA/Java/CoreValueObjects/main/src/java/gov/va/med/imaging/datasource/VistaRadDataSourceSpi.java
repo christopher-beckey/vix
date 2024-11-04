@@ -76,7 +76,7 @@ extends VersionableDataSourceSpi
 	 * @throws ConnectionException
 	 */
 	public abstract ExamListResult getExamsForPatient(RoutingToken globalRoutingToken, String patientICN, 
-			boolean fullyLoadExams, boolean forceRefresh, boolean forceImagesFromJb)
+			boolean fullyLoadExams, boolean forceRefresh, boolean forceImagesFromJb, final String patListColumnsIndicator)
     throws MethodException, ConnectionException;
 
 	/**
@@ -136,7 +136,7 @@ extends VersionableDataSourceSpi
 	 * @throws MethodException
 	 * @throws ConnectionException
 	 */
-	public abstract Exam getExam(StudyURN studyUrn)
+	public abstract Exam getExam(StudyURN studyUrn, final String patListColumnsIndicator)
 	throws MethodException, ConnectionException;
 	
 	/**

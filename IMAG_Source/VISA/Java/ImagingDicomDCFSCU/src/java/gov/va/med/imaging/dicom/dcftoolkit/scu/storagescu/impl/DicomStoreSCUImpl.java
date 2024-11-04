@@ -156,7 +156,7 @@ public class DicomStoreSCUImpl implements IDicomStoreSCU {
             scu = new SpecializedStoreSCU(ainfo, session);
             //Request Association with SCP.
             scu.requestAssociation();
-            scu.setConnected(true); // connected(true);
+//            scu.setConnected(true); // connected(true);
             
             //FUTURE Determined the method below is not used.  The original purpose was to
             //  create a Presentation Context Map based on the SOP Class UID String.  Upon
@@ -199,7 +199,7 @@ public class DicomStoreSCUImpl implements IDicomStoreSCU {
             scu = new SpecializedStoreSCU(ainfo, session);
             //Request Association with SCP.
             scu.requestAssociation();
-            scu.setConnected(true); // connected(true);
+            //scu.setConnected(true); // connected(true);
             
             //FUTURE Determined the method below is not used.  The original purpose was to
             //  create a Presentation Context Map based on the SOP Class UID String.  Upon
@@ -312,37 +312,37 @@ public class DicomStoreSCUImpl implements IDicomStoreSCU {
         catch(NoDataException ndX){
             logger.error(ndX.getMessage());
             logger.error("{}: Exception thrown while sending an Object.\nNon-Data PDU was received.  Likely Association was released or aborted.", this.getClass().getName());
-            this.scu.setConnected(false);
+            // this.scu.setConnected(false);
             throw new DicomAssociationAbortException("Non-Data PDU was received.", ndX);
         }
         catch(IOReadException iorX){
             logger.error(iorX.getMessage());
             logger.error("{}: Exception thrown while sending an Object.\nNon-Data PDU was received.  Likely Association was released or aborted.", this.getClass().getName());
-            this.scu.setConnected(false);
+            // this.scu.setConnected(false);
             throw new DicomAssociationAbortException("Non-Data PDU was received.", iorX);
         }
         catch(IOWriteException iowX){
             logger.error(iowX.getMessage());
             logger.error("{}: Exception thrown while sending an Object.\nNon-Data PDU was received.  Likely Association was released or aborted.", this.getClass().getName());
-            this.scu.setConnected(false);
+            // this.scu.setConnected(false);
             throw new DicomAssociationAbortException("Non-Data PDU was received.", iowX);
         }
         catch(IOTimeoutException iotoX){
             logger.error(iotoX.getMessage());
             logger.error("{}: Exception thrown while sending an Object.\nIO Timeout occurred.", this.getClass().getName());
-            this.scu.setConnected(false);
+            // this.scu.setConnected(false);
             throw new DicomAssociationAbortException("Timeout occurred.", iotoX);
         }
         catch(IOException ioX){
             logger.error(ioX.getMessage());
             logger.error("{}: Exception thrown while sending an Object.\nNon-Data PDU was received.  Likely Association was released or aborted.", this.getClass().getName());
-            this.scu.setConnected(false);
+            // this.scu.setConnected(false);
             throw new DicomAssociationAbortException("Non-Data PDU was received.", ioX);
         }
         catch(DCSException dcs){
             logger.error(dcs.getMessage());
             logger.error("{}: Exception thrown while sending an Object.", this.getClass().getName());
-            this.scu.setConnected(false);
+            // this.scu.setConnected(false);
             throw new DicomAssociationAbortException("Association is no longer established.", dcs);
         }
     }
@@ -360,7 +360,7 @@ public class DicomStoreSCUImpl implements IDicomStoreSCU {
         	if(scu.getConnected()){
         		//Terminate the Association.
         		scu.releaseAssociation();
-        		this.scu.setConnected(false);
+        		// this.scu.setConnected(false);
         	}    
         }
         catch(DCSException dcs){

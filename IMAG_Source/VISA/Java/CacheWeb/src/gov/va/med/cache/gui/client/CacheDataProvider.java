@@ -420,14 +420,14 @@ public class CacheDataProvider
 			HierarchicalAsyncDataProvider<?, ?> childDp = iter.next();
 			result = findCachedDataProvider(childDp, path, nextDepth);
 		}
-		
-		logger.info("EXITING findCachedDataProvider( "
-			+ (dp == null ? "null" : dp.toString()) + ", " 
-			+ (path == null ? "null" : path.toString()) + ", " 
-			+ (currentDepth == null ? "null" : currentDepth.toString()) 
-			+ ") result = "
-			+ (result == null) ? "null" : result.toString()
-		);
+
+//		logger.info("EXITING findCachedDataProvider( "
+//			+ (dp == null ? "null" : dp.toString()) + ", "
+//			+ (path == null ? "null" : path.toString()) + ", "
+//			+ (currentDepth == null ? "null" : currentDepth.toString())
+//			+ ") result = "
+//			+ (result == null) ? "null" : result.toString()
+//		);
 		return result;
 	}
 	
@@ -716,7 +716,7 @@ public class CacheDataProvider
 		@Override
 		public void onSuccess(CacheVO result)
 		{
-			String strTemp = (result == null) ? "NULL" : result;
+			String strTemp = (result == null) ? "NULL" : result.toString();
 			/*
 				Gary Pham (oitlonphamg)
 				P314
@@ -976,7 +976,7 @@ public class CacheDataProvider
 		@Override
 		public void onSuccess(CacheItemPath result)
 		{
-			String strTemp = (result == null) ? "NULL" : result;
+			String strTemp = (result == null) ? "NULL" : result.toString();
 			/*
 				Gary Pham (oitlonphamg)
 				P314
@@ -1019,7 +1019,7 @@ public class CacheDataProvider
 		@Override
 		public void onSuccess(CacheItemPath result)
 		{
-			String strTemp = (result == null) ? "NULL" : result;
+			String strTemp = (result == null) ? "NULL" : result.toString();
 			/*
 				Gary Pham (oitlonphamg)
 				P314
@@ -1062,7 +1062,7 @@ public class CacheDataProvider
 		@Override
 		public void onSuccess(CacheItemPath result)
 		{
-			String strTemp = (result == null) ? "NULL" : result;
+			String strTemp = (result == null) ? "NULL" : result.toString();
 			/*
 				Gary Pham (oitlonphamg)
 				P314

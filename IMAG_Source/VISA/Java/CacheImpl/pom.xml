@@ -234,13 +234,19 @@
       <version>${project.version}</version>
       <scope>compile</scope>
     </dependency>
+      <dependency>
+          <groupId>Imaging</groupId>
+          <artifactId>MockDataGenerationImpl</artifactId>
+          <version>0.1</version>
+          <scope>test</scope>
+      </dependency>
 
-   <!-- <dependency>
-      <groupId>${project.groupId}</groupId>
-      <artifactId>MockDataGenerationImpl</artifactId>
-      <version>${project.version}</version>
-      <scope>test</scope>
-    </dependency> -->
+      <!-- <dependency>
+         <groupId>${project.groupId}</groupId>
+         <artifactId>MockDataGenerationImpl</artifactId>
+         <version>${project.version}</version>
+         <scope>test</scope>
+       </dependency> -->
 
 
 

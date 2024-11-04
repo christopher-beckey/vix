@@ -492,20 +492,20 @@ implements VistaRadDataSourceSpi
 		}
 	}
 	
-	private List<Exam> getShallowExamsForPatientInternal(final VistaSession vistaSession, final String patientICN, final String ... genericParameters)
+	private List<Exam> getShallowExamsForPatientInternal(final VistaSession vistaSession, final String patientICN, final String patListColumnsIndicator)
 	throws MethodException, VistaMethodException, IOException, ConnectionException, InvalidVistaCredentialsException
 	{
         getLogger().info("Getting shallow exams for patient '{}' from site '{}'.", patientICN, getSite().getSiteNumber());
 		String patientDfn = VistaImagingVistaRadCommonUtilities.getPatientDFN(vistaSession, patientICN);
         getLogger().info("translated patient ICN '{}' into DFN '{}', about to make call to get patient exams.", patientICN, patientDfn);
-		VistaQuery patientExamsQuery = VistaImagingVistaRadQueryFactory.createMagJGetPatientExamsQuery(patientDfn, genericParameters);
+		VistaQuery patientExamsQuery = VistaImagingVistaRadQueryFactory.createMagJGetPatientExamsQuery(patientDfn, patListColumnsIndicator);
 		String result = vistaSession.call(patientExamsQuery);
 		List<Exam> exams = VistaImagingVistaRadTranslator.translateExamsResponse(result, getSite(), patientICN);
 		return exams;
 	}
 
 	public ExamListResult getExamsForPatient(RoutingToken globalRoutingToken, String patientICN, 
-			boolean fullyLoadExams, boolean forceRefresh, boolean forceImagesFromJb, final String ... patListColumnsIndicator)
+			boolean fullyLoadExams, boolean forceRefresh, boolean forceImagesFromJb, final String patListColumnsIndicator)
     throws MethodException, ConnectionException
     {
 		VistaCommonUtilities.setDataSourceMethodAndVersion("getExamsForPatient", getDataSourceVersion());
@@ -624,7 +624,7 @@ implements VistaRadDataSourceSpi
 	 * @see gov.va.med.imaging.datasource.VistaRadDataSource#getExam(gov.va.med.imaging.StudyURN)
 	 */
 	@Override
-	public Exam getExam(final StudyURN studyUrn, final String ... genericParameters)
+	public Exam getExam(final StudyURN studyUrn, final String patListColumnsIndicator)
 	throws MethodException, ConnectionException 
 	{
 		VistaCommonUtilities.setDataSourceMethodAndVersion("getExam", getDataSourceVersion());
@@ -634,7 +634,7 @@ implements VistaRadDataSourceSpi
 		{
 			vistaSession = getVistaSession();
 			
-			List<Exam> exams = getShallowExamsForPatientInternal(vistaSession, studyUrn.getPatientId(), genericParameters);
+			List<Exam> exams = getShallowExamsForPatientInternal(vistaSession, studyUrn.getPatientId(), patListColumnsIndicator);
 			Exam exam = null;
 			for(Exam ex : exams)
 			{

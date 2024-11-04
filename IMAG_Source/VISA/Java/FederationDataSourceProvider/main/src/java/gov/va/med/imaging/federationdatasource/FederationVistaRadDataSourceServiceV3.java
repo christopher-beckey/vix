@@ -168,7 +168,7 @@ extends AbstractFederationVistaRadDataSourceService
 	 */
 	@Override
 	public ExamListResult getExamsForPatient(RoutingToken globalRoutingToken, String patientICN,
-			boolean fullyLoadExams, boolean forceRefresh, boolean forceImagesFromJb) 
+			boolean fullyLoadExams, boolean forceRefresh, boolean forceImagesFromJb, final String patListColumnsIndicator)
 	throws MethodException, ConnectionException 
 	{
         getLogger().info("FederationVistaRadDataSourceServiceV3.getExamsForPatient() --> For patient ICN [{}], fullyLoaded [{}], Ttransaction identity [{}]", patientICN, fullyLoadExams, TransactionContextFactory.get().getDisplayIdentity());
@@ -239,7 +239,7 @@ extends AbstractFederationVistaRadDataSourceService
 	 * @see gov.va.med.imaging.datasource.VistaRadDataSource#getExam(gov.va.med.imaging.StudyURN)
 	 */
 	@Override
-	public Exam getExam(StudyURN studyUrn) 
+	public Exam getExam(StudyURN studyUrn, final String patListColumnsIndicator)
 	throws MethodException, ConnectionException 
 	{
         getLogger().info("FederationVistaRadDataSourceServiceV3.getExam() --> For Study URN [{}], transaction identity [{}]", studyUrn.toString(), TransactionContextFactory.get().getDisplayIdentity());
@@ -253,7 +253,7 @@ extends AbstractFederationVistaRadDataSourceService
 			getLogger().error(msg);
 			throw new FederationConnectionException(msg, ioX);
 		}
-		Exam result = getProxy().getExam(studyUrn);
+		Exam result = getProxy().getExam(studyUrn, patListColumnsIndicator);
         getLogger().info("FederationVistaRadDataSourceServiceV3.getExam() --> Got [{}] exam for StudyURN [{}]", result == null ? "null" : "not null", studyUrn.toString());
 		return result;	
 	}

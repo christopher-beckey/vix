@@ -6,19 +6,14 @@ package gov.va.med.imaging.storage.cache.impl.filesystem;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.nio.ByteBuffer;
 
 import junit.framework.TestCase;
 
 import org.junit.Test;
 
-import gov.va.med.DataGenerationConfiguration;
 import gov.va.med.imaging.storage.cache.AbstractAccessDirectCacheTest;
 import gov.va.med.imaging.storage.cache.AbstractCacheTest;
 import gov.va.med.imaging.storage.cache.CacheItemPath;
-import gov.va.med.imaging.storage.cache.Instance;
-import gov.va.med.imaging.storage.cache.InstanceReadableByteChannel;
-import gov.va.med.imaging.storage.cache.InstanceWritableByteChannel;
 import gov.va.med.imaging.storage.cache.exceptions.CacheException;
 
 /**

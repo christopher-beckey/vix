@@ -69,17 +69,17 @@ public class VistaImagingVistaRadQueryFactory
 	 * @param patListColumnsIndicator an optional parameter
 	 * @return
 	 */
-	public static VistaQuery createMagJGetPatientExamsQuery(final String patientDfn, final String ... patListColumnsIndicator)
+	public static VistaQuery createMagJGetPatientExamsQuery(final String patientDfn, final String patListColumnsIndicator)
 	{
 		VistaQuery query = new VistaQuery(RPC_MAGJ_PT_ALL_EXAMS);
 
 		StringBuilder queryParams = new StringBuilder();
+		query.addParameter(VistaQuery.LITERAL, patientDfn + "^^99999");
+
 		queryParams.append(patientDfn);
-		queryParams.append("^^");
-		queryParams.append("99999");
-		if (patListColumnsIndicator != null && patListColumnsIndicator.length > 0) {
-			queryParams.append("^");
-			queryParams.append(patListColumnsIndicator[0]);
+		queryParams.append("^^99999^");
+		if (patListColumnsIndicator != null && !patListColumnsIndicator.isEmpty()) {
+			queryParams.append(patListColumnsIndicator);
 		}
 
 		query.addParameter(VistaQuery.LITERAL, queryParams.toString());		// pass additional parameter

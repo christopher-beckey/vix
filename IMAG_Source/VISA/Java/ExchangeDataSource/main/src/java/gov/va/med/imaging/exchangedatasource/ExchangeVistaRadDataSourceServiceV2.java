@@ -113,7 +113,7 @@ implements VistaRadDataSourceSpi
 	 * @see gov.va.med.imaging.datasource.VistaRadDataSourceSpi#getExam(gov.va.med.imaging.StudyURN)
 	 */
 	@Override
-	public Exam getExam(StudyURN studyUrn) 
+	public Exam getExam(StudyURN studyUrn, final String patListColumnsIndicator)
 	throws MethodException, ConnectionException 
 	{
         logger.info("getExam({}, {}) started", studyUrn.toString(), TransactionContextFactory.get().getDisplayIdentity());
@@ -149,7 +149,7 @@ implements VistaRadDataSourceSpi
 	 */
 	@Override
 	public ExamListResult getExamsForPatient(RoutingToken globalRoutingToken, String patientICN,
-		boolean fullyLoadExams, boolean forceRefresh, boolean forceImagesFromJb, final String ... genericParameters)
+		boolean fullyLoadExams, boolean forceRefresh, boolean forceImagesFromJb, final String patListColumnsIndicator)
 	throws MethodException, ConnectionException 
 	{
         logger.info("getExamsForPatient({}, {}) started", patientICN, TransactionContextFactory.get().getDisplayIdentity());

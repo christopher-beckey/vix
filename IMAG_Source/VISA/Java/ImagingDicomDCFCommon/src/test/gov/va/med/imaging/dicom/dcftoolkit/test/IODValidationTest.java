@@ -34,11 +34,11 @@ public class IODValidationTest extends DicomDCFCommonBase {
         //DicomInstanceValidator.logger.addAppender(appender);
         //DicomInstanceValidator.logger.setLevel(Level.DEBUG);
 
-        LoggerContext context= (LoggerContext) LogManager.getContext();
-        Configuration config= context.getConfiguration();
-        config.addAppender(appender);
+        //LoggerContext context= (LoggerContext) LogManager.getContext();
+        //Configuration config= context.getConfiguration();
+        //config.addAppender(appender);
         
-        Configurator.setLevel(DicomInstanceValidator.logger.getName(), Level.DEBUG);
+        //Configurator.setLevel(DicomInstanceValidator.logger.getName(), Level.DEBUG);
 
     	
     }

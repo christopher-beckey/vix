@@ -39,7 +39,7 @@
     <dependency>
       <groupId>dcf</groupId>
       <artifactId>LaurelBridge</artifactId>
-      <version>3.3.22c</version>
+      <version>3.3.68c</version>
       <type>jar</type>
     </dependency>    
   </dependencies>  

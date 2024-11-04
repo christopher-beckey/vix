@@ -184,6 +184,7 @@
     </plugins>
   </build>
   <dependencies>
+
 	<!-- all non project dependencies should be defined in the ImagingRoot project -->
     <dependency>
       <groupId>${groupId}</groupId>

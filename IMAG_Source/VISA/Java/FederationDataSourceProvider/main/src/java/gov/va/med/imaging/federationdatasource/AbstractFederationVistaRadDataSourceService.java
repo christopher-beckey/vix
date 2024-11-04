@@ -149,7 +149,7 @@ implements VistaRadDataSourceSpi
 	 * @see gov.va.med.imaging.datasource.VistaRadDataSourceSpi#getExam(gov.va.med.imaging.StudyURN)
 	 */
 	@Override
-	public Exam getExam(StudyURN studyUrn) throws MethodException, ConnectionException
+	public Exam getExam(StudyURN studyUrn, final String patListColumnsIndicator) throws MethodException, ConnectionException
 	{
 		throw new UnsupportedServiceMethodException(VistaRadDataSourceSpi.class, "getExam");
 	}
@@ -186,7 +186,7 @@ implements VistaRadDataSourceSpi
 	 */
 	@Override
 	public ExamListResult getExamsForPatient(RoutingToken globalRoutingToken, String patientICN,
-		boolean fullyLoadExams, boolean forceRefresh, boolean forceImagesFromJb) 
+		boolean fullyLoadExams, boolean forceRefresh, boolean forceImagesFromJb, final String patListColumnsIndicator)
 	throws MethodException, ConnectionException
 	{
 		throw new UnsupportedServiceMethodException(VistaRadDataSourceSpi.class, "getExamsForPatient");

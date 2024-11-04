@@ -44,12 +44,14 @@ extends AbstractDataSourceCommandImpl<Exam, VistaRadDataSourceSpi>
 	private static final long serialVersionUID = -6725991699319206848L;
 
 	private final StudyURN studyUrn;
+	private final String patListColumnsIndicator;
 	
 	private static final String SPI_METHOD_NAME = "getExam";
 	
-	public GetExamFromDataSourceCommandImpl(StudyURN studyUrn)
+	public GetExamFromDataSourceCommandImpl(StudyURN studyUrn, final String patListColumnsIndicator)
 	{
 		this.studyUrn = studyUrn;
+		this.patListColumnsIndicator = patListColumnsIndicator;
 	}
 
 	@Override
@@ -78,6 +80,10 @@ extends AbstractDataSourceCommandImpl<Exam, VistaRadDataSourceSpi>
 		return studyUrn;
 	}
 
+	public String getPatListColumnsIndicator() {
+		return patListColumnsIndicator;
+	}
+
 	/* (non-Javadoc)
 	 * @see gov.va.med.imaging.core.router.AbstractDataSourceCommandImpl#getCommandResult(gov.va.med.imaging.datasource.VersionableDataSourceSpi)
 	 */
@@ -85,7 +91,7 @@ extends AbstractDataSourceCommandImpl<Exam, VistaRadDataSourceSpi>
 	protected Exam getCommandResult(VistaRadDataSourceSpi spi)
 	throws ConnectionException, MethodException 
 	{
-		return spi.getExam(getStudyUrn());
+		return spi.getExam(getStudyUrn(), getPatListColumnsIndicator());
 	}
 
 	/* (non-Javadoc)

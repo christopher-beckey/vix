@@ -184,7 +184,7 @@ public class DicomStoreCommitSCUImpl extends AssociationRequester implements IDi
             scScu = new StoreCommitSCU(this.ainfo, this.session);
             //Request Association with SCP.
             scScu.requestAssociation();
-            scScu.setConnected(true); // connected(true);
+            //scScu.setConnected(true); // connected(true);
             //Build acceptedAssociationContext list.
             this.buildAcceptedPresentationContextList();
             logger.info("... successfully established Association for Store Commit Responder to {} on TCP/Port: {}/{}", scuAETitle, remoteAE.getHostName(), remoteAE.getPort());

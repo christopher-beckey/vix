@@ -31,7 +31,7 @@ extends AbstractBaseVistaImagingVistaRadService
 {
 	/*
 	 * =====================================================================
-	 * Instance fields and methods
+	 * Instance fields and methodsø
 	 * =====================================================================
 	 */
 	// The required version of VistA Imaging needed to execute the RPC calls for

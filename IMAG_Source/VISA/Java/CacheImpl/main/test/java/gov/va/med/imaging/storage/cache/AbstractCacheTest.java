@@ -4,25 +4,14 @@ import gov.va.med.GenericDataGenerator;
 import gov.va.med.imaging.storage.cache.impl.CacheManagerImpl;
 import gov.va.med.server.ServerLifecycleEvent;
 
-import java.io.IOException;
 import java.net.InetAddress;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.nio.charset.Charset;
 
 import junit.framework.TestCase;
 
 import org.apache.logging.log4j.Level;
 import gov.va.med.logging.Logger;
-import org.apache.logging.log4j.core.Appender;
-import org.apache.logging.log4j.core.LoggerContext;
-import org.apache.logging.log4j.core.appender.ConsoleAppender;
-import org.apache.logging.log4j.core.appender.FileAppender;
-import org.apache.logging.log4j.core.config.AppenderRef;
-import org.apache.logging.log4j.core.config.Configuration;
-import org.apache.logging.log4j.core.config.Configurator;
-import org.apache.logging.log4j.core.config.LoggerConfig;
-import org.apache.logging.log4j.core.layout.PatternLayout;
 
 public abstract class AbstractCacheTest 
 extends TestCase

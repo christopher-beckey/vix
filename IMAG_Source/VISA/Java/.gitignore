@@ -1,0 +1,10 @@
+.DS_Store
+IMAG_Source/.DS_Store
+IMAG_Source/VISA/.DS_Store
+**/.DS_Store
+**/target
+**/generated
+**/c:
+.idea
+.idea/**
+**/.idea
