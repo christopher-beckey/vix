@@ -134,21 +134,23 @@ extends AbstractImagingCommandImpl<R>
 	}
 	
 	/**
-	 * 
-	 * @param siteNumber
+	 * @param routingToken
 	 * @param patientIcn
 	 * @param fullyLoadExams
 	 * @param forceRefresh Indicates the data should not come from the cache
+	 * @param forceImagesFromJb
+	 * @param patListColumnsIndicator - may be null
 	 * @return
 	 * @throws MethodException
 	 * @throws ConnectionException 
 	 */
 	protected ExamSite getExamSite(
-		RoutingToken routingToken, 
-		String patientIcn, 
-		boolean fullyLoadExams, 
-		boolean forceRefresh,
-		boolean forceImagesFromJb)
+			final RoutingToken routingToken,
+		final String patientIcn,
+		final boolean fullyLoadExams,
+		final boolean forceRefresh,
+		final boolean forceImagesFromJb,
+		final String patListColumnsIndicator)
 	throws MethodException, ConnectionException
 	{
         getLogger().info("Finding exam site for site '{}', patient '{}, fullyLoaded={}, forceRefresh={}.", routingToken, patientIcn, fullyLoadExams, forceRefresh);
@@ -168,7 +170,7 @@ extends AbstractImagingCommandImpl<R>
             getLogger().info("Did not find examSite for site '{}' and patient '{}' in cache (or cached instance was not usable).", routingToken, patientIcn);
 			transactionContext.setItemCached(false);
 			examSite = getExamSiteFromDataSource(routingToken, patientIcn, fullyLoadExams, 
-					forceRefresh, forceImagesFromJb);
+					forceRefresh, forceImagesFromJb, patListColumnsIndicator);
 			// determine if we should async to get fully loaded data
 			// JMW 2/18/2010 - doesn't matter what the request was for, if the examSite we got is not fully loaded, get fully data (if appropriate)
 			// if requesting from DoD, always getting fully loaded data from data source so don't need to async reload
@@ -271,11 +273,12 @@ extends AbstractImagingCommandImpl<R>
 	
 	// why is ExamSite an input parameter for this method?
 	private ExamSite getExamSiteFromDataSource(
-		RoutingToken routingToken, 
-		String patientIcn, 
-		boolean fullyLoadExams,
-		boolean forceRefresh,
-		boolean forceImagesFromJb) 
+		final RoutingToken routingToken,
+		final String patientIcn,
+		final boolean fullyLoadExams,
+		final boolean forceRefresh,
+		final boolean forceImagesFromJb,
+		final String patListColumnsIndicator)
 	throws MethodException, MethodConnectionException
 	{
 		List<Exam> exams = null;
@@ -321,7 +324,7 @@ extends AbstractImagingCommandImpl<R>
 		{
             getLogger().info("Requesting exams for site '{}' for patient '{}' from data source, fully loaded={}", routingToken.toString(), patientIcn, fullyLoadExams);
 			examList = ImagingContext.getRouter().getExamsForPatientFromDataSource(routingToken, 
-				patientIcn, fullyLoadExams, forceRefresh, forceImagesFromJb);
+				patientIcn, fullyLoadExams, forceRefresh, forceImagesFromJb, patListColumnsIndicator);
 			// JMW 9/24/2010 - for now, we are 
 			exams = examList.getArtifacts();
 		}

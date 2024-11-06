@@ -64,16 +64,18 @@ import gov.va.med.logging.Logger;
 public class VistaRadWebServices
 implements gov.va.med.imaging.vistarad.webservices.soap.v1.ImageVistaRadMetadata
 {
-	private final static Logger logger = Logger.getLogger(VistaRadWebServices.class);	
-			
+	private final static Logger logger = Logger.getLogger(VistaRadWebServices.class);
+
 	/* (non-Javadoc)
 	 * @see gov.va.med.imaging.vistarad.webservices.soap.v1.ImageVistaRadMetadata#getSiteExamList(java.lang.String, gov.va.med.imaging.vistarad.webservices.soap.v1.UserCredentials, java.lang.String, java.lang.String, boolean)
 	 */
 	@Override
 	public gov.va.med.imaging.vistarad.webservices.soap.v1.ExamSite 
-		getSiteExamList(String transactionId, 
-			gov.va.med.imaging.vistarad.webservices.soap.v1.UserCredentials credentials,
-			String patientIcn, String siteId, boolean forceRefresh)
+		getSiteExamList(
+				final String transactionId,
+				final gov.va.med.imaging.vistarad.webservices.soap.v1.UserCredentials credentials,
+				final String patientIcn, final String siteId, final boolean forceRefresh,
+				final String patListColumnsIndicator)
 	throws RemoteException, gov.va.med.imaging.vistarad.webservices.soap.v1.SecurityCredentialsExpiredExceptionFaultType
 	{
 		setTransactionContext(credentials, transactionId);
@@ -94,7 +96,7 @@ implements gov.va.med.imaging.vistarad.webservices.soap.v1.ImageVistaRadMetadata
 					RoutingTokenHelper.createSiteAppropriateRoutingToken(siteId), 
 				patientIcn, 
 				forceRefresh,
-				true);								
+				true, patListColumnsIndicator);
 			gov.va.med.imaging.vistarad.webservices.soap.v1.ExamSite result = 
 				VistaRadTranslator.transformExamSite(examSite);						
 			transactionContext.setEntriesReturned(result == null ? 0 : (result.getExam() == null ? 0 : result.getExam().length));

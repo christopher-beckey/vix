@@ -149,7 +149,7 @@ extends AbstractExamCommandImpl<ExamSite>
 		transactionContext.setServicedSource(this.getRoutingToken().toRoutingTokenString());
 		
 		ExamSite examSite = this.getExamSite(this.getRoutingToken(), this.getPatientIcn(), 
-				true, this.isForceRefresh(), isForceImagesFromJb());
+				true, this.isForceRefresh(), isForceImagesFromJb(), null);
 		return examSite;
 	}
 

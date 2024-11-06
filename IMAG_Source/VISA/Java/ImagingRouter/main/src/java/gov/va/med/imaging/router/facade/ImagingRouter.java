@@ -201,7 +201,7 @@ extends FacadeRouter
 		
 	@FacadeRouterMethod(asynchronous=false, isChildCommand=true, commandClassName="GetExamsForPatientFromDataSourceCommand")
 	public abstract ExamListResult getExamsForPatientFromDataSource(RoutingToken routingToken, String patientIcn, boolean fullyLoadExams, 
-			boolean forceRefresh, boolean forceImagesFromJb)
+			boolean forceRefresh, boolean forceImagesFromJb, String patListColumnsIndicator)
 	throws MethodException, ConnectionException;
 		
 	@FacadeRouterMethod(asynchronous=false, isChildCommand=true, commandClassName="GetExamImagesForExamFromDataSourceCommand")

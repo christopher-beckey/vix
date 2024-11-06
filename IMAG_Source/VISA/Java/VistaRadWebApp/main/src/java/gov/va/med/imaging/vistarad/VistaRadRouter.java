@@ -98,7 +98,7 @@ extends FacadeRouter
 		
 	@FacadeRouterMethod(asynchronous=false, commandClassName="GetExamSiteBySiteNumberCommand")
 	public abstract ExamSite getExamSiteBySiteNumber(RoutingToken routingToken, String patientId, 
-			Boolean forceRefresh, Boolean forceImagesFromJb)
+			Boolean forceRefresh, Boolean forceImagesFromJb, String patListColumnsIndicator)
 	throws MethodException, ConnectionException;
 	
 	@FacadeRouterMethod(asynchronous=false, commandClassName="GetVistaRadSiteConnectivityStatusCommand")

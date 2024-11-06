@@ -650,7 +650,7 @@ public class ImageMetadataVistaRadSoapBindingStub extends org.apache.axis.client
 }
     }
 
-    public gov.va.med.imaging.vistarad.webservices.soap.v1.ExamSite getSiteExamList(java.lang.String transactionId, gov.va.med.imaging.vistarad.webservices.soap.v1.UserCredentials credentials, java.lang.String patientIcn, java.lang.String siteId, boolean forceRefresh) throws java.rmi.RemoteException, gov.va.med.imaging.vistarad.webservices.soap.v1.SecurityCredentialsExpiredExceptionFaultType {
+    public gov.va.med.imaging.vistarad.webservices.soap.v1.ExamSite getSiteExamList(java.lang.String transactionId, gov.va.med.imaging.vistarad.webservices.soap.v1.UserCredentials credentials, java.lang.String patientIcn, java.lang.String siteId, boolean forceRefresh, String patListColumnsIndicator) throws java.rmi.RemoteException, gov.va.med.imaging.vistarad.webservices.soap.v1.SecurityCredentialsExpiredExceptionFaultType {
         if (super.cachedEndpoint == null) {
             throw new org.apache.axis.NoEndPointException();
         }
@@ -666,8 +666,8 @@ public class ImageMetadataVistaRadSoapBindingStub extends org.apache.axis.client
 
         setRequestHeaders(_call);
         setAttachments(_call);
- try {        java.lang.Object _resp = _call.invoke(new java.lang.Object[] {transactionId, credentials, patientIcn, siteId, new java.lang.Boolean(forceRefresh)});
-
+         try {
+             java.lang.Object _resp = _call.invoke(new java.lang.Object[] {transactionId, credentials, patientIcn, siteId, new java.lang.Boolean(forceRefresh), patListColumnsIndicator});
         if (_resp instanceof java.rmi.RemoteException) {
             throw (java.rmi.RemoteException)_resp;
         }

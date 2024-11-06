@@ -55,6 +55,7 @@ extends AbstractExamCommandImpl<ExamSite>
 	private final String patientIcn; 
 	private final Boolean forceRefresh;
 	private final Boolean forceImagesFromJb;
+	private final String patListColumnsIndicator;
 	
 	/**
 	 * 
@@ -64,13 +65,14 @@ extends AbstractExamCommandImpl<ExamSite>
 	 * @param forceRefresh True to force the data to come from the datasource and not the cache. False to allow the data to come from the cache 
 	 */
 	public GetExamSiteBySiteNumberCommandImpl(RoutingToken routingToken, String patientIcn, 
-			Boolean forceRefresh, Boolean forceImagesFromJb)
+			Boolean forceRefresh, Boolean forceImagesFromJb, final String patListColumnsIndicator)
 	{
 		super();
 		this.routingToken = routingToken;
 		this.patientIcn = patientIcn;
 		this.forceRefresh = forceRefresh;
 		this.forceImagesFromJb = forceImagesFromJb;
+		this.patListColumnsIndicator = patListColumnsIndicator;
 	}
 
 	public RoutingToken getRoutingToken()
@@ -88,6 +90,10 @@ extends AbstractExamCommandImpl<ExamSite>
 	 */
 	public Boolean isForceRefresh() {
 		return forceRefresh;
+	}
+
+	public String getPatListColumnsIndicator() {
+		return patListColumnsIndicator;
 	}
 
 //	public Site getSite()
@@ -132,7 +138,7 @@ extends AbstractExamCommandImpl<ExamSite>
 		transactionContext.setServicedSource(this.getRoutingToken().toRoutingTokenString());
 		
 		ExamSite examSite = this.getExamSite(this.getRoutingToken(), this.getPatientIcn(), 
-				false, this.isForceRefresh(), isForceImagesFromJb());
+				false, this.isForceRefresh(), isForceImagesFromJb(), getPatListColumnsIndicator());
 		return examSite;
 	}
 

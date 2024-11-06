@@ -274,9 +274,9 @@ public class ImageMetadataVistaRadSoapBindingSkeleton implements gov.va.med.imag
         return ret;
     }
 
-    public gov.va.med.imaging.vistarad.webservices.soap.v1.ExamSite getSiteExamList(java.lang.String transactionId, gov.va.med.imaging.vistarad.webservices.soap.v1.UserCredentials credentials, java.lang.String patientIcn, java.lang.String siteId, boolean forceRefresh) throws java.rmi.RemoteException, gov.va.med.imaging.vistarad.webservices.soap.v1.SecurityCredentialsExpiredExceptionFaultType
+    public gov.va.med.imaging.vistarad.webservices.soap.v1.ExamSite getSiteExamList(java.lang.String transactionId, gov.va.med.imaging.vistarad.webservices.soap.v1.UserCredentials credentials, java.lang.String patientIcn, java.lang.String siteId, boolean forceRefresh, String patListColumnsIndicator) throws java.rmi.RemoteException, gov.va.med.imaging.vistarad.webservices.soap.v1.SecurityCredentialsExpiredExceptionFaultType
     {
-        gov.va.med.imaging.vistarad.webservices.soap.v1.ExamSite ret = impl.getSiteExamList(transactionId, credentials, patientIcn, siteId, forceRefresh);
+        gov.va.med.imaging.vistarad.webservices.soap.v1.ExamSite ret = impl.getSiteExamList(transactionId, credentials, patientIcn, siteId, forceRefresh, patListColumnsIndicator);
         return ret;
     }
 

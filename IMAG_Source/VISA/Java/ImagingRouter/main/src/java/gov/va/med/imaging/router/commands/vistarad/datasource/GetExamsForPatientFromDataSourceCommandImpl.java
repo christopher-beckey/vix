@@ -100,7 +100,7 @@ extends AbstractDataSourceCommandImpl<ExamListResult, VistaRadDataSourceSpi>
 	protected Object[] getSpiMethodParameters()
 	{
 		return new Object[]{getRoutingToken(), getPatientIcn(), isFullyLoadExams(), 
-				isForceRefresh(), isForceImagesFromJb()};
+				isForceRefresh(), isForceImagesFromJb(), getPatListColumnsIndicator()};
 	}
 
 	@Override
